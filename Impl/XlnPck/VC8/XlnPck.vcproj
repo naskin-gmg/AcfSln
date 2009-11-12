@@ -40,7 +40,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib ixln.lib xerces-c_2.lib Xalan-C_1.lib"
+				AdditionalDependencies="AcfStd.lib xerces-c_2.lib Xalan-C_1.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(XERCESDIR)/lib&quot;;&quot;$(XALANDIR)/lib&quot;"
 				GenerateDebugInformation="false"
@@ -118,7 +118,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -141,7 +141,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib ixln.lib xerces-c_2D.lib Xalan-C_1D.lib"
+				AdditionalDependencies="AcfStd.lib xerces-c_2D.lib Xalan-C_1D.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(XERCESDIR)/lib&quot;;&quot;$(XALANDIR)/lib&quot;"
 				GenerateDebugInformation="true"

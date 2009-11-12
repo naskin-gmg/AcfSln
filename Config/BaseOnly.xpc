@@ -6,17 +6,14 @@
   </AcfHeader>
   <ConfigFiles count ="1">
     <FilePath>
-      $(ACFDIR)/Config/Core.xpc
+      $(ACFDIR)/Config/BaseOnly.xpc
     </FilePath>
   </ConfigFiles>
-  <PackageDirs count="2">
-    <Dir>
-      ../Bin/$(ConfigurationName)
-    </Dir>
-    <Dir>
-      ../Partitura
-    </Dir>
+  <PackageDirs count="0">
   </PackageDirs>
-  <PackageFiles count="0">
+  <PackageFiles count="1">
+    <FilePath>
+      ../Partitura/AcfSlnVoce.arp
+    </FilePath>
   </PackageFiles>
 </Acf>
