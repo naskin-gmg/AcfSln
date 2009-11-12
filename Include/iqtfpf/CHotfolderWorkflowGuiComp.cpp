@@ -9,7 +9,7 @@ namespace iqtfpf
 	
 // reimplemented (imod::IModelEditor)
 
-void CHotfolderWorkflowGuiComp::UpdateEditor(int updateFlags)
+void CHotfolderWorkflowGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 }
 
