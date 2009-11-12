@@ -30,6 +30,7 @@ class CHotfolderWorkflowGuiComp:
 									iqt2d::CSceneProviderGuiComp, 
 									imod::TSingleModelObserverBase<ifpf::IHotfolderWorkflow> > >
 {
+	Q_OBJECT
 public:
 	typedef ibase::TLoggerCompWrap<
 				iqtgui::TGuiObserverWrap<
@@ -53,4 +54,5 @@ private:
 
 
 #endif // !iqtfpf_CHotfolderWorkflowGuiComp_included
+
 
