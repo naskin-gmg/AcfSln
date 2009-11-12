@@ -1,0 +1,74 @@
+#include "ifpf/CFileProcessingComp.h"
+
+
+namespace ifpf
+{
+
+
+// public methods
+
+CFileProcessingComp::CFileProcessingComp()
+	:m_progressSessionId(0)
+{
+}
+
+
+// reimplemented (ibase::IFileConvertCopy)
+
+bool CFileProcessingComp::CopyFile(
+			const istd::CString& inputFilePath,
+			const istd::CString& outputFilePath,
+			const iprm::IParamsSet* paramsSetPtr) const
+{
+	if (!m_inputFileLoaderCompPtr.IsValid()){
+		SendErrorMessage(0, "No file loader defined", "File processing component");
+
+		return false;
+	}
+
+	if (!m_inputDataCompPtr.IsValid()){
+		SendErrorMessage(0, "Input data definition was not set", "File processing component");
+
+		return false;
+	}
+
+	if (!m_outputDataCompPtr.IsValid()){
+		SendErrorMessage(0, "Output data definition was not set", "File processing component");
+
+		return false;
+	}
+
+	if (!m_inputFileLoaderCompPtr->IsOperationSupported(m_inputDataCompPtr.GetPtr(), &inputFilePath, iser::IFileLoader::QF_NO_SAVING)){
+		SendErrorMessage(0, "File could not be loaded", "File processing component");
+		
+		return false;
+	}
+
+	if (m_inputFileLoaderCompPtr->LoadFromFile(*m_inputDataCompPtr.GetPtr(), inputFilePath) != iser::IFileLoader::StateOk){
+		SendErrorMessage(0, "File could not be loaded", "File processing component");
+		
+		return false;
+	}
+
+	int processingResult = m_processorCompPtr->DoProcessing(
+				paramsSetPtr,
+				m_inputDataCompPtr.GetPtr(),
+				m_outputDataCompPtr.GetPtr());
+	if (processingResult != iproc::IProcessor::TS_OK){
+		return false;
+	}
+
+	iser::IFileLoader* outputFileLoader = m_inputFileLoaderCompPtr.GetPtr();
+	if (m_outputFileLoaderCompPtr.IsValid()){
+		outputFileLoader = m_outputFileLoaderCompPtr.GetPtr(); 
+	}
+
+	I_ASSERT(outputFileLoader != NULL);
+
+	return (outputFileLoader->SaveToFile(*m_outputDataCompPtr.GetPtr(), outputFilePath) == iser::IFileLoader::StateOk);
+}
+
+
+} // namespace ifpf
+
+
