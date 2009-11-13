@@ -15,6 +15,9 @@
 		<ToolFile
 			RelativePath="..\..\..\Config\VC8\Acf.rules"
 		/>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -28,7 +31,10 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="FileConvertCopy"
@@ -37,12 +43,18 @@
 				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="DeployCopy"
 				OutputDir=""
 				InputDir="..\..\..\Bin\info"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="Arxc"
@@ -83,7 +95,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
+				AdditionalDependencies="icmpstr.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
@@ -126,7 +138,10 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
 			/>
 			<Tool
 				Name="FileConvertCopy"
@@ -135,12 +150,18 @@
 				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="DeployCopy"
 				OutputDir=""
 				InputDir="..\..\..\Bin\info"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="Arxc"
@@ -181,7 +202,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
+				AdditionalDependencies="icmpstr.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
