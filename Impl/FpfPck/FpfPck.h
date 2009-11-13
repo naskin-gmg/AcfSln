@@ -19,7 +19,7 @@ namespace FpfPck
 typedef ifpf::CFileProcessingComp FileProcessing;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
-						ifpf::CDirectoryMonitorParams, iser::ISerializable> > DirectoryMonitorParams;
+						ifpf::CDirectoryMonitorParams, iser::ISerializable, ifpf::IDirectoryMonitorParams> > DirectoryMonitorParams;
 
 } // namespace FpfPck
 

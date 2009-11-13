@@ -15,7 +15,137 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="5">
+    <Element>
+      <Id>
+        ComposedParamsSet
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Parameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  DirectoryPath
+                </Value>
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParametersId
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  DirectoryPath
+                </Value>
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DirectoryMonitorParams
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        DirectoryMonitorParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DirectoryPath
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileNameParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              PathType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         FilePersistence
@@ -68,7 +198,7 @@
                 true
               </IsEnabled>
               <Value>
-                FolderMonitorBackup
+                FolderMonitorParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -87,7 +217,7 @@
                 true
               </IsEnabled>
               <Value>
-                FolderMonitor
+                ComposedParamsSet
               </Value>
             </Data>
           </AttributeInfo>
@@ -134,75 +264,6 @@
     </Element>
     <Element>
       <Id>
-        FolderMonitor
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              DirectoryMonitorParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              DirectorMonitorParams
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DirectoryPathParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              DirectoryPath
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         XmlFileSerializer
       </Id>
       <PackageId>
@@ -242,26 +303,26 @@
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        ifpf::IDirectoryMonitor
-      </InterfaceId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ifpf::IDirectoryMonitorParams
-      </InterfaceId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        FolderMonitor
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
       </ComponentId>
     </Interface>
     <Interface>
@@ -269,11 +330,27 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        FolderMonitor
+        ComposedParamsSet
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        DirectoryMonitorParams
+      </ExportedId>
+      <ComponentId>
+        DirectoryMonitorParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        DirectoryPath
+      </ExportedId>
+      <ComponentId>
+        DirectoryPath
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     

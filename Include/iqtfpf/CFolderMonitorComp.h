@@ -11,7 +11,7 @@
 
 
 // ACF includes
-#include "imod/CSingleModelObserverBase.h"
+#include "imod/CMultiModelObserverBase.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -22,7 +22,7 @@
 
 // AcfSln includes
 #include "ifpf/IDirectoryMonitor.h"
-#include "ifpf/CDirectoryMonitorParams.h"
+#include "ifpf/IDirectoryMonitorParams.h"
 
 
 namespace iqtfpf
@@ -35,19 +35,23 @@ namespace iqtfpf
 class CFolderMonitorComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
-			public ifpf::CDirectoryMonitorParams,
-			virtual public ifpf::IDirectoryMonitor
+			virtual public ifpf::IDirectoryMonitor,
+			virtual public iser::ISerializable,
+			virtual protected imod::CMultiModelObserverBase
 {
 	Q_OBJECT
 
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
-	typedef ifpf::CDirectoryMonitorParams BaseClass3;
 
 	I_BEGIN_COMPONENT(CFolderMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
-		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitorParams);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPath");
+		I_ASSIGN(m_directoryPathModelCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPathParams");
+		I_ASSIGN(m_directoryMonitorParamsCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
+		I_ASSIGN(m_directoryMonitorParamsModelCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
 	I_END_COMPONENT;
 
 	CFolderMonitorComp();
@@ -65,8 +69,8 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	// reimplemented (istd::IChangeable)
-	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+	// reimplemented (imod::IObserver)
+	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
 	// reimplemented (QThread)
@@ -115,6 +119,13 @@ private:
 	QStringList m_fileFilterExpressions;
 	int m_observingItemTypes;
 	int m_observingChanges;
+
+	// Attributes
+	I_REF(iprm::IFileNameParam, m_directoryPathCompPtr);
+	I_REF(imod::IModel, m_directoryPathModelCompPtr);
+	I_REF(ifpf::IDirectoryMonitorParams, m_directoryMonitorParamsCompPtr);
+	I_REF(imod::IModel, m_directoryMonitorParamsModelCompPtr);
+
 };
 
 

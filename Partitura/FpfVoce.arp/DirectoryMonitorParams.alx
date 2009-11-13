@@ -15,7 +15,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="14">
+  <PositionMap count="17">
+    <Element>
+      <ComponentName>
+        ComposedParamsSet
+      </ComponentName>
+      <X>
+        252
+      </X>
+      <X>
+        -127
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         DirectoryMonitorBinder
@@ -32,10 +43,10 @@
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        178.013
+        130
       </X>
       <X>
-        -14.78
+        65
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         DirectoryMonitorParamsBinder
       </ComponentName>
       <X>
-        178.013
+        190.013
       </X>
       <X>
-        -14.78
+        -156.78
       </X>
     </Element>
     <Element>
@@ -54,10 +65,32 @@
         DirectoryMonitorParamsGui
       </ComponentName>
       <X>
-        467
+        380
       </X>
       <X>
-        -18
+        241
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        DirectoryPath
+      </ComponentName>
+      <X>
+        353
+      </X>
+      <X>
+        68
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileNameParam
+      </ComponentName>
+      <X>
+        243
+      </X>
+      <X>
+        82
       </X>
     </Element>
     <Element>
@@ -76,10 +109,10 @@
         FileParamsBinder
       </ComponentName>
       <X>
-        -240.5
+        -243.5
       </X>
       <X>
-        -127.5
+        -130.5
       </X>
     </Element>
     <Element>
@@ -87,10 +120,10 @@
         FilePersistence
       </ComponentName>
       <X>
-        -149.391
+        274.609
       </X>
       <X>
-        -15.4645
+        -259.464
       </X>
     </Element>
     <Element>
@@ -98,10 +131,10 @@
         FolderMonitor
       </ComponentName>
       <X>
-        -348
+        -82
       </X>
       <X>
-        -12
+        183
       </X>
     </Element>
     <Element>
@@ -164,10 +197,10 @@
         XmlFileSerializer
       </ComponentName>
       <X>
-        69
+        493
       </X>
       <X>
-        -15
+        -253
       </X>
     </Element>
   </PositionMap>

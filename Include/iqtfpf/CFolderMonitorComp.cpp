@@ -26,8 +26,8 @@ namespace iqtfpf
 CFolderMonitorComp::CFolderMonitorComp()
 	:m_finishThread(false),
 	m_poolingFrequency(5.0),
-	m_observingItemTypes(OI_ALL),
-	m_observingChanges(OC_ALL)
+	m_observingItemTypes(ifpf::IDirectoryMonitorParams::OI_ALL),
+	m_observingChanges(ifpf::IDirectoryMonitorParams::OC_ALL)
 {
 }
 
@@ -77,24 +77,29 @@ istd::CStringList CFolderMonitorComp::GetFileList() const
 }
 
 
-// reimplemented (istd::IChangeable)
+// reimplemented (imod::IObserver)
 
-void CFolderMonitorComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+void CFolderMonitorComp::OnUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	QString currentPath = iqt::GetQString(GetPath());
+	I_ASSERT(m_directoryPathCompPtr.IsValid());
+	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
 
-	if (m_currentDirectory != QDir(currentPath)){
-		SetFolderPath(currentPath);
+	if (modelPtr == m_directoryPathModelCompPtr.GetPtr()){
+		QString currentPath = iqt::GetQString(m_directoryPathCompPtr->GetPath());
+
+		if (m_currentDirectory != QDir(currentPath)){
+			SetFolderPath(currentPath);
+		}
 	}
 
-	isys::CSectionBlocker block(&m_lock);
+	if (modelPtr == m_directoryMonitorParamsModelCompPtr.GetPtr()){
+		isys::CSectionBlocker block(&m_lock);
 
-	m_poolingFrequency = GetPoolingIntervall();
-	m_observingItemTypes = GetObservedItemTypes();
-	m_observingChanges = GetObservedChanges();
-	m_fileFilterExpressions = iqt::GetQStringList(GetFileFilters());
-	
-	BaseClass3::OnEndChanges(changeFlags, changeParamsPtr);
+		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
+		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
+		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+	}
 }
 
 
@@ -105,6 +110,15 @@ void CFolderMonitorComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
+
+	// connect models to the bridge, to ge notification about model changes:
+	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
+	I_ASSERT(m_directoryMonitorParamsModelCompPtr.IsValid());
+
+	if (m_directoryPathModelCompPtr.IsValid() && m_directoryMonitorParamsModelCompPtr.IsValid()){
+		m_directoryPathModelCompPtr->AttachObserver(this);
+		m_directoryMonitorParamsModelCompPtr->AttachObserver(this);
+	}
 }
 
 
@@ -126,8 +140,21 @@ bool CFolderMonitorComp::Serialize(iser::IArchive& archive)
 		ResetFiles();
 	}
 
-	bool retVal = BaseClass3::Serialize(archive);
+	istd::CString currenDirectoryPath;
+	
+	if (archive.IsStoring()){
+		currenDirectoryPath = iqt::GetCString(m_currentDirectory.absolutePath());
+	}
 
+	static iser::CArchiveTag currenDirectoryPathTag("CurrentDirectoryPath", "Path of the currently monitored directory");
+	bool retVal = archive.BeginTag(currenDirectoryPathTag);
+	retVal = retVal && archive.Process(currenDirectoryPath);
+	retVal = retVal && archive.EndTag(currenDirectoryPathTag);
+
+	if (!archive.IsStoring()){
+		m_currentDirectory = QDir(iqt::GetQString(currenDirectoryPath));
+	}
+	
 	static iser::CArchiveTag directorySnapShotTag("DirectorySnapshot", "List of already monitored files");
 	static iser::CArchiveTag processedFileTag("MonitoredFile", "Already monitored file");
 
@@ -155,8 +182,6 @@ bool CFolderMonitorComp::Serialize(iser::IArchive& archive)
 	}
 
 	retVal = retVal && archive.EndTag(directorySnapShotTag);
-
-	m_currentDirectory = QDir(iqt::GetQString(GetPath()));
 
 	StartObserverThread();
 	
@@ -305,9 +330,12 @@ void CFolderMonitorComp::StartObserverThread()
 {
 	m_finishThread = false;
 
-	SendInfoMessage(0, istd::CString("Start observing of: ") + GetPath(), "FolderMonitor");
+	QFileInfo fileInfo(m_currentDirectory.absolutePath());
+	if (fileInfo.exists()){
+		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "FolderMonitor");
 
-	BaseClass2::start();
+		BaseClass2::start();
+	}
 }
 
 

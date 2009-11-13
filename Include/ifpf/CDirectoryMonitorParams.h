@@ -11,7 +11,7 @@ namespace ifpf
 
 
 /**
-	Imlementation of the IDirectoryMonitorParams interface.
+	Implementation of the IDirectoryMonitorParams interface.
 */
 class CDirectoryMonitorParams: virtual public ifpf::IDirectoryMonitorParams
 {

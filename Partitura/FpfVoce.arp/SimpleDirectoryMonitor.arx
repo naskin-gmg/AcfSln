@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
-        FilePersistence
+        DirectoryMonitor
       </Id>
       <PackageId>
-        BasePck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        FilePersistence
+        DirectoryMonitor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,153 +33,43 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              FileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                XmlFileSerializer
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FilePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FolderMonitorBackup
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Object
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FolderMonitor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RestoreonBegin
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StoreOnEnd
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FolderMonitor
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              DirectoryMonitorParams
+              DirectorMonitorParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              DirectorMonitorParams
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                DirectoryMonitorParams/DirectoryMonitorParams
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DirectoryPathParams
+              DirectoryPath
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              DirectoryPath
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                DirectoryMonitorParams/DirectoryPath
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -203,13 +93,13 @@
     </Element>
     <Element>
       <Id>
-        XmlFileSerializer
+        DirectoryMonitorParams
       </Id>
       <PackageId>
-        BasePck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        XmlFileSerializer
+        DirectoryMonitorParams
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -238,38 +128,96 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        DirectoryMonitorParamsGui
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        DirectoryMonitorParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ModelBinder
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ModelBinder
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryMonitorParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Observers
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParamsGui
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        ifpf::IDirectoryMonitor
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        FolderMonitor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ifpf::IDirectoryMonitorParams
-      </InterfaceId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        FolderMonitor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        FolderMonitor
+        DirectoryMonitorParamsGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
