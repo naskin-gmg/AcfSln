@@ -34,6 +34,8 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 			observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_DRIVES;
 		}
 
+		objectPtr->SetObservedItemTypes(observedItems);
+
 		int observedChanges = 0;
 		if (ModifiedCheck->isChecked()){
 			observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_MODIFIED;
