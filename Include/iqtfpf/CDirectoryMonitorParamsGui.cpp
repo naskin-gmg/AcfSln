@@ -1,10 +1,16 @@
 #include "iqtfpf/CDirectoryMonitorParamsGui.h"
 
 
+// Qt includes
+#include <QHeaderView>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "iqt/CSignalBlocker.h"
+
+#include "iqtgui/CItemDelegate.h"
 
 
 namespace iqtfpf
@@ -54,6 +60,16 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 		}
 
 		objectPtr->SetObservedChanges(observedChanges);
+	
+		QTreeWidgetItemIterator iter(FileFiltersList);
+		istd::CStringList fileFilters;
+		while (*iter){
+			fileFilters.push_back(iqt::GetCString((*iter)->text(0)));
+
+			++iter;
+		}
+
+		objectPtr->SetFileFilters(fileFilters);
 	}
 }
 
@@ -62,6 +78,10 @@ void CDirectoryMonitorParamsGui::UpdateEditor(int /*updateFlags*/)
 {
 	ifpf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		iqt::CSignalBlocker block(this, true);
+
+		ResetEditor();
+
 		PoolingIntervallSpin->setValue(objectPtr->GetPoolingIntervall());
 
 		int observedItems = objectPtr->GetObservedItemTypes();
@@ -74,7 +94,25 @@ void CDirectoryMonitorParamsGui::UpdateEditor(int /*updateFlags*/)
 		AddedCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_ADD) != 0);
 		RemovedCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0);
 		AttributesCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0);
+
+		istd::CStringList fileFilters = objectPtr->GetFileFilters();
+
+		for (int fileFilterIndex = 0; fileFilterIndex < int(fileFilters.size()); fileFilterIndex++){
+			AddFilter(iqt::GetQString(fileFilters[fileFilterIndex]));
+		}
 	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CDirectoryMonitorParamsGui::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	FileFiltersList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
+
+	FileFiltersList->setItemDelegate(new iqtgui::CItemDelegate(20, FileFiltersList));
 }
 
 
@@ -125,6 +163,64 @@ void CDirectoryMonitorParamsGui::on_AttributesCheck_toggled(bool/* isChecked*/)
 void CDirectoryMonitorParamsGui::on_PoolingIntervallSpin_valueChanged(double/* isChecked*/)
 {
 	UpdateModel();
+}
+
+
+void CDirectoryMonitorParamsGui::on_AddFilterButton_clicked()
+{
+	AddFilter("<Filter>");
+
+	UpdateModel();
+}
+
+
+void CDirectoryMonitorParamsGui::on_RemoveFilterButton_clicked()
+{
+	QList<QTreeWidgetItem*> selectedItems = FileFiltersList->selectedItems();
+
+	for (QList<QTreeWidgetItem*>::iterator index = selectedItems.begin(); index != selectedItems.end(); index++){
+		QTreeWidgetItem* itemPtr = FileFiltersList->takeTopLevelItem(FileFiltersList->indexOfTopLevelItem(*index));
+
+		if (itemPtr != NULL){
+			delete itemPtr;
+		}
+	}
+}
+
+
+void CDirectoryMonitorParamsGui::on_FileFiltersList_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selectedItems = FileFiltersList->selectedItems();
+
+	RemoveFilterButton->setEnabled(!selectedItems.empty());
+}
+
+
+void CDirectoryMonitorParamsGui::on_FileFiltersList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
+{
+	UpdateModel();
+}
+
+
+// private methods
+
+void CDirectoryMonitorParamsGui::AddFilter(const QString& filter)
+{
+	iqt::CSignalBlocker block(FileFiltersList);
+
+	QTreeWidgetItem* newFilterItem = new QTreeWidgetItem(FileFiltersList);
+	newFilterItem->setText(0, filter);
+	newFilterItem->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+	FileFiltersList->addTopLevelItem(newFilterItem);
+}
+
+
+void CDirectoryMonitorParamsGui::ResetEditor()
+{
+	while (FileFiltersList->topLevelItemCount() > 0){
+		delete FileFiltersList->takeTopLevelItem(0);
+	}	
 }
 
 

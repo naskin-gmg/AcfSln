@@ -116,9 +116,7 @@ void CDirectoryMonitorParams::SetPath(const istd::CString& path)
 // reimplemented (iser::ISerializable)
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
-{	
-	istd::CStringList m_fileFilters;
-	
+{		
 	static iser::CArchiveTag pathTag("Path", "Observing directory path");
 	bool retVal = archive.BeginTag(pathTag);
 	retVal = retVal && archive.Process(m_directoryPath);

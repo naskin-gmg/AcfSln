@@ -34,6 +34,9 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
 protected slots:
 	void on_FilesCheck_toggled(bool isChecked);
 	void on_DirsCheck_toggled(bool isChecked);
@@ -43,6 +46,14 @@ protected slots:
 	void on_RemovedCheck_toggled(bool isChecked);
 	void on_AttributesCheck_toggled(bool isChecked);
 	void on_PoolingIntervallSpin_valueChanged(double value);
+	void on_AddFilterButton_clicked();
+	void on_RemoveFilterButton_clicked();
+	void on_FileFiltersList_itemSelectionChanged();
+	void on_FileFiltersList_itemChanged(QTreeWidgetItem* item, int column);
+
+private:
+	void AddFilter(const QString& filter);
+	void ResetEditor();
 };
 
 
