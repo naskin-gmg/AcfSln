@@ -12,6 +12,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -27,7 +30,23 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="SubVersionTransform"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -106,7 +125,23 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="SubVersionTransform"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -245,6 +280,30 @@
 			<File
 				RelativePath="..\IMonitoringSessionManager.h"
 				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Other"
+			>
+			<File
+				RelativePath="..\VersionInfo.arx.xtrsvn"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>

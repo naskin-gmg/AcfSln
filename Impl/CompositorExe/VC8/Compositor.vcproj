@@ -58,7 +58,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
+				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -165,7 +165,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
+				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"

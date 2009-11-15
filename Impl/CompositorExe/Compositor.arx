@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1181
+          1196
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="12">
     <Element>
       <Id>
         Application
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="14">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -52,8 +52,9 @@
                 ACF Registry Editor
 
 (C) Copyright 2009 ImagingTools
-
 All rights reserved
+This tool is part of ACF Solutions project
+Please read attached License.txt file for license informations
               </Value>
             </Data>
           </AttributeInfo>
@@ -73,6 +74,25 @@ All rights reserved
               </IsEnabled>
               <Value>
                 ACF Compositor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -111,7 +131,7 @@ All rights reserved
               </IsEnabled>
               <Value>
                 Copyright 2009 ImagingTools
-This tool is a part of ACF project
+This tool is a part of ACF Solutions project
               </Value>
             </Data>
           </AttributeInfo>
@@ -871,6 +891,46 @@ This tool is a part of ACF project
               </IsEnabled>
               <Value>
                 Application
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfSlnVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF Compositor
               </Value>
             </Data>
           </AttributeInfo>
