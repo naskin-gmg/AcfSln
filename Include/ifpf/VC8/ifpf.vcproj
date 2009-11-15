@@ -202,6 +202,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="del /Q ..\svnflag"
 			/>
 		</Configuration>
 	</Configurations>
