@@ -189,6 +189,10 @@
 				RelativePath="..\CHotfolderInfo.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CMonitoringSession.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -204,6 +208,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMonitoringSession.h"
 				>
 			</File>
 			<File
@@ -228,6 +236,14 @@
 			</File>
 			<File
 				RelativePath="..\IHotfolderWorkflow.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMonitoringSession.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMonitoringSessionManager.h"
 				>
 			</File>
 		</Filter>

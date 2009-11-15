@@ -23,6 +23,7 @@
 // AcfSln includes
 #include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IDirectoryMonitorParams.h"
+#include "ifpf/IMonitoringSessionManager.h"
 
 
 namespace iqtfpf
@@ -36,7 +37,6 @@ class CFolderMonitorComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
 			virtual public ifpf::IDirectoryMonitor,
-			virtual public iser::ISerializable,
 			virtual protected imod::CMultiModelObserverBase
 {
 	Q_OBJECT
@@ -47,11 +47,11 @@ public:
 
 	I_BEGIN_COMPONENT(CFolderMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
-		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPath");
 		I_ASSIGN(m_directoryPathModelCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPathParams");
 		I_ASSIGN(m_directoryMonitorParamsCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
 		I_ASSIGN(m_directoryMonitorParamsModelCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
+		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
 	I_END_COMPONENT;
 
 	CFolderMonitorComp();
@@ -66,11 +66,8 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
 	// reimplemented (imod::IObserver)
-	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
 	// reimplemented (QThread)
@@ -125,6 +122,7 @@ private:
 	I_REF(imod::IModel, m_directoryPathModelCompPtr);
 	I_REF(ifpf::IDirectoryMonitorParams, m_directoryMonitorParamsCompPtr);
 	I_REF(imod::IModel, m_directoryMonitorParamsModelCompPtr);
+	I_REF(ifpf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
 
 };
 

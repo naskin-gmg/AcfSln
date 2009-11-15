@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1181
+          1189
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Editors
@@ -82,6 +82,27 @@
               </Values>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Names
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  Monitoring Directory
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -123,7 +144,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               PathLabel
@@ -139,7 +160,26 @@
                 true
               </IsEnabled>
               <Value>
-                Monitoring Directory
+                
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StartHint
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                &lt;Enter the path of the directory&gt;
               </Value>
             </Data>
           </AttributeInfo>
