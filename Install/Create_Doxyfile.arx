@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1080
+          1198
         </Number>
         <Description>
           ACF
@@ -257,7 +257,7 @@
         VersionInfo
       </Id>
       <PackageId>
-        AcfVoce
+        AcfSlnVoce
       </PackageId>
       <ComponentId>
         VersionInfo
@@ -269,7 +269,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF-Solutions
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
