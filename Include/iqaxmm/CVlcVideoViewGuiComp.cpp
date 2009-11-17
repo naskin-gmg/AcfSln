@@ -223,12 +223,6 @@ bool CVlcVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 }
 
 
-bool CVlcVideoViewGuiComp::GrabFrame(iimg::IBitmap& /*result*/, int /*frameIndex*/) const
-{
-	return false;
-}
-
-
 } // namespace iqaxmm
 
 

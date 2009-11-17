@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="ilibav"
-	ProjectGUID="{775F1C1F-C0B6-413D-BA1E-023614EBE409}"
-	RootNamespace="ilibav"
+	Name="FfMpegPck"
+	ProjectGUID="{D853FC62-AC4E-462B-BB37-1A6D308CC8E6}"
+	RootNamespace="FfMpegPck"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -13,47 +13,20 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
-		/>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Acf.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC8"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -66,15 +39,17 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
-				StringPooling="true"
+				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
+				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -87,10 +62,18 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib"
+				OutputFile="$(OutDir)\$(ProjectName).arp"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
+				GenerateDebugInformation="false"
+				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -102,42 +85,27 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC8"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -151,9 +119,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
-				StringPooling="true"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -161,6 +128,7 @@
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
+				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -173,10 +141,18 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib"
+				OutputFile="$(OutDir)\$(ProjectName).arp"
+				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -186,6 +162,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -201,11 +183,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CLibAvConverter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLibAvVideoDecoderComp.cpp"
+				RelativePath="..\FfMpegPck.cpp"
 				>
 			</File>
 		</Filter>
@@ -215,17 +193,16 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CLibAvConverter.h"
+				RelativePath="..\FfMpegPck.h"
 				>
 			</File>
-			<File
-				RelativePath="..\CLibAvVideoDecoderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ilibav.h"
-				>
-			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="qrc;*"
+			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
+			ParseFiles="false"
+			>
 		</Filter>
 	</Files>
 	<Globals>

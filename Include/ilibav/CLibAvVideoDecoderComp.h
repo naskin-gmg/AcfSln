@@ -1,5 +1,5 @@
-#ifndef ilibav_CLibAvVideoDecoder_included
-#define ilibav_CLibAvVideoDecoder_included
+#ifndef ilibav_CLibAvVideoDecoderComp_included
+#define ilibav_CLibAvVideoDecoderComp_included
 
 
 // LIBAV includes
@@ -7,7 +7,10 @@ extern "C"{
 #include "libavformat/avformat.h"
 }
 
+// ACF includes
 #include "icomp/CComponentBase.h"
+#include "iproc/IBitmapAcquisition.h"
+#include "iproc/TSyncProcessorCompBase.h"
 
 #include "imm/IVideoController.h"
 
@@ -16,25 +19,43 @@ namespace ilibav
 {
 
 
-class CLibAvVideoDecoder:
-			public icomp::CComponentBase,
+/**
+	Implementation of imm::IVideoController and iproc::IBitmapAcquisition interfaces using LibAv library.
+*/
+class CLibAvVideoDecoderComp:
+			public iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition>,
 			virtual public imm::IVideoController
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition> BaseClass;
 
-	I_BEGIN_COMPONENT(CLibAvVideoDecoder);
+	enum MessageId
+	{
+		MI_CANNOT_OPEN = 0x56a20,
+		MI_FORMAT_PROBLEM
+	};
+
+	I_BEGIN_COMPONENT(CLibAvVideoDecoderComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);
 	I_END_COMPONENT();
 
-	CLibAvVideoDecoder();
+	CLibAvVideoDecoderComp();
 
 	// reimplemented (icomp::IComponent)
 	void OnComponentCreated();
 	void OnComponentDestroyed();
+
+	// reimplemented (iproc::IBitmapAcquisition)
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+
+	// reimplemented (iproc::IProcessor)
+	virtual int DoProcessing(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr);
 
 	// reimplemented (imm::IMediaController)
 	virtual istd::CString GetOpenedMediumUrl() const;
@@ -56,13 +77,17 @@ public:
 	// reimplemented (imm::IVideoController)
 	virtual int GetCurrentFrame() const;
 	virtual bool SetCurrentFrame(int frameIndex);
-	virtual bool GrabFrame(iimg::IBitmap& result, int frameIndex = -1) const;
 
 protected:
 	bool ReadNextFrame();
+	/**
+		Read parameters and open media file if needed.
+		\return true if no errors occured.
+	*/
+	bool ProcessParams(const iprm::IParamsSet* paramsPtr);
 
 private:
-	int m_streamId;
+	int m_videoStreamId;
 	AVFormatContext* m_formatContextPtr;
 	AVCodecContext* m_codecContextPtr;
 	AVCodec* m_codecPtr;
@@ -83,5 +108,5 @@ private:
 } // namespace ilibav
 
 
-#endif // !ilibav_CLibAvVideoDecoder_included
+#endif // !ilibav_CLibAvVideoDecoderComp_included
 
