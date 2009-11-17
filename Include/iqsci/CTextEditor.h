@@ -43,6 +43,7 @@ public slots:
 	void SetFoldingEnabled(bool useFoldingEnabled);
 	void SetLineNumberEnabled(bool useFoldingEnabled);
 	void SetLanguage(const QString& language);
+	void SetReadOnly(bool readOnly = true);
 
 protected slots:
 	virtual void OnSelectionChanged();

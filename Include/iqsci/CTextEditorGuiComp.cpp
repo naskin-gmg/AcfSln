@@ -54,16 +54,7 @@ const idoc::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
 }
 
 
-
-// protected slots
-
-void CTextEditorGuiComp::OnTextChanged()
-{
-	iqt::CSignalBlocker block(this);
-
-	UpdateModel();
-}
-
+// protected methods
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
@@ -84,6 +75,10 @@ void CTextEditorGuiComp::OnGuiCreated()
 			textEditorPtr->SetLanguage(iqt::GetQString(*m_languageAttrPtr));
 		}
 
+		if (m_readOnlyAttrPtr.IsValid() && *m_readOnlyAttrPtr){
+			textEditorPtr->SetReadOnly();
+		}
+
 		OnRetranslate();
 	}
 }
@@ -97,6 +92,16 @@ void CTextEditorGuiComp::OnRetranslate()
 	
 		textEditPtr->OnRetranslate();
 	}
+}
+
+
+// protected slots
+
+void CTextEditorGuiComp::OnTextChanged()
+{
+	iqt::CSignalBlocker block(this);
+
+	UpdateModel();
 }
 
 

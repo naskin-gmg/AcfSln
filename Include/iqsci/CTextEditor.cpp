@@ -143,6 +143,15 @@ void CTextEditor::SetLanguage(const QString& language)
 }
 
 
+void CTextEditor::SetReadOnly(bool readOnly)
+{
+	I_ASSERT(m_scintilla != NULL);
+
+	m_scintilla->setReadOnly(readOnly);
+}
+
+
+
 // protected slots
 
 void CTextEditor::OnSelectionChanged()

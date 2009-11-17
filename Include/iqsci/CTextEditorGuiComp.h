@@ -34,7 +34,8 @@ public:
 		I_REGISTER_INTERFACE(imod::IObserver)
 		I_ASSIGN(m_languageAttrPtr, "Language", "Use syntax highlighting for defined language", false, "Language");
 		I_ASSIGN(m_useFoldingAttrPtr, "UseFolding", "Use folding in the text document", false, true);
-	I_END_COMPONENT
+		I_ASSIGN(m_readOnlyAttrPtr, "ReadOnly", "Document view is read only", false, false);
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -43,16 +44,18 @@ public:
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
-protected slots:
-	virtual void OnTextChanged();
-
+protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();
 
+protected slots:
+	virtual void OnTextChanged();
+
 private:
 	I_ATTR(bool, m_useFoldingAttrPtr);
 	I_ATTR(istd::CString, m_languageAttrPtr);
+	I_ATTR(bool, m_readOnlyAttrPtr);
 };
 
 
