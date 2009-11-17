@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1199
+          1201
         </Number>
         <Description>
           ACF
@@ -15,13 +15,13 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="15">
     <Element>
       <ComponentName>
         AcquisitionFramework
       </ComponentName>
       <X>
-        28
+        -77
       </X>
       <X>
         -63
@@ -51,6 +51,17 @@
     </Element>
     <Element>
       <ComponentName>
+        ComposedGui
+      </ComponentName>
+      <X>
+        -32
+      </X>
+      <X>
+        -240
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         ComposedParamsSet
       </ComponentName>
       <X>
@@ -65,10 +76,32 @@
         ComposedParamsSetGui
       </ComponentName>
       <X>
-        186
+        -25
       </X>
       <X>
-        -291
+        -196
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        EmptyParamsSet
+      </ComponentName>
+      <X>
+        -278
+      </X>
+      <X>
+        -200
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileDialogLoader
+      </ComponentName>
+      <X>
+        411
+      </X>
+      <X>
+        104
       </X>
     </Element>
     <Element>
@@ -95,6 +128,39 @@
     </Element>
     <Element>
       <ComponentName>
+        FilePersistence
+      </ComponentName>
+      <X>
+        242
+      </X>
+      <X>
+        -267
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePersistenceGui
+      </ComponentName>
+      <X>
+        565
+      </X>
+      <X>
+        -63
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        MediaLoader
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        112
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         SnapFramework
       </ComponentName>
       <X>
@@ -109,10 +175,10 @@
         VideoGrabber
       </ComponentName>
       <X>
-        302
+        251
       </X>
       <X>
-        -71
+        -62
       </X>
     </Element>
   </PositionMap>

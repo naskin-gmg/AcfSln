@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1199
+          1201
         </Number>
         <Description>
           ACF
@@ -115,7 +115,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Log
@@ -132,27 +132,11 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              FileNameParamId
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
         imm::IMediaController
@@ -199,6 +183,14 @@
       </InterfaceId>
       <ComponentId>
         ControllerGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        VideoDecoder
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

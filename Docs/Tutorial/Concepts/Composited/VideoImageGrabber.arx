@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1199
+          1201
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="7">
     <Element>
       <Id>
         AcquisitionFramework
@@ -68,7 +68,7 @@
                 true
               </IsEnabled>
               <Value>
-                ComposedParamsSet
+                EmptyParamsSet
               </Value>
             </Data>
           </AttributeInfo>
@@ -96,69 +96,6 @@
     </Element>
     <Element>
       <Id>
-        ComposedParamsSet
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSet
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Parameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileNameParam
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParametersId
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileName
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ComposedParamsSetGui
       </Id>
       <PackageId>
@@ -174,7 +111,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Editors
@@ -191,10 +128,10 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  FileNameParamGui
+                  VideoGrabber
                 </Value>
                 <Value>
-                  VideoGrabber
+                  FilePersistenceGui
                 </Value>
               </Values>
             </Data>
@@ -213,34 +150,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  FileName
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Names
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  File Name
-                </Value>
-                <Value>
-                  Position
-                </Value>
+              <Values count="0">
               </Values>
             </Data>
           </AttributeInfo>
@@ -249,13 +159,34 @@
     </Element>
     <Element>
       <Id>
-        FileNameParam
+        EmptyParamsSet
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        FileNameParam
+        ComposedParamsSet
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileDialogLoader
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FileDialogLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -267,10 +198,52 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              PathType
+              Loaders
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  MediaLoader
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FilePersistenceGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FilePersistenceGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              FileLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -280,7 +253,45 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                FileDialogLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Object
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VideoGrabber
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowSave
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -289,13 +300,13 @@
     </Element>
     <Element>
       <Id>
-        FileNameParamGui
+        MediaLoader
       </Id>
       <PackageId>
-        QtGuiPck
+        QtMmPck
       </PackageId>
       <ComponentId>
-        FileNameParamGui
+        MediaLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -304,13 +315,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              StartHint
+              AutoPlay
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -320,7 +331,26 @@
                 true
               </IsEnabled>
               <Value>
-                &lt;Enter video file path&gt;
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                AcquisitionFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -344,26 +374,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              FileNameParamId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileName
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Log
