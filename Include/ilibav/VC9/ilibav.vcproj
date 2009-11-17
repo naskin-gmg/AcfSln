@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqaxmm"
-	ProjectGUID="{19BF49D4-532F-4B58-A9B5-F215495527EC}"
-	RootNamespace="iqaxmm"
+	Name="ilibav"
+	ProjectGUID="{775F1C1F-C0B6-413D-BA1E-023614EBE409}"
+	RootNamespace="ilibav"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -151,7 +151,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -201,7 +201,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.cpp"
+				RelativePath="..\CLibAvVideoDecoder.cpp"
 				>
 			</File>
 		</Filter>
@@ -211,40 +211,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.h"
+				RelativePath="..\CLibAvVideoDecoder.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqaxmm.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-		</Filter>
-		<Filter
-			Name="Wrapped Files"
-			>
-			<File
-				RelativePath="..\Wrapped\axvlc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Wrapped\axvlc.h"
+				RelativePath="..\ilibav.h"
 				>
 			</File>
 		</Filter>

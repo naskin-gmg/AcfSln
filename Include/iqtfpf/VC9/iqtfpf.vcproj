@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqaxmm"
-	ProjectGUID="{19BF49D4-532F-4B58-A9B5-F215495527EC}"
-	RootNamespace="iqaxmm"
+	Name="iqtfpf"
+	ProjectGUID="{720BB09B-0988-4D31-B8DE-C3C27C277F4B}"
+	RootNamespace="iqtfpf"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -16,14 +16,11 @@
 		<ToolFile
 			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
 		/>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC9\Acf.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -41,18 +38,6 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -66,8 +51,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -107,7 +94,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -125,18 +112,6 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -151,8 +126,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -201,7 +176,35 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.cpp"
+				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDirectoryMonitorParamsGui.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFolderMonitorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CFolderMonitorComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -211,11 +214,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.h"
+				RelativePath="..\CDirectoryMonitorParamsGui.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqaxmm.h"
+				RelativePath="..\CFolderMonitorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iqtfpf.h"
 				>
 			</File>
 		</Filter>
@@ -231,20 +246,32 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\generated\moc_CDirectoryMonitorParamsGui.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CFolderMonitorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CHotfolderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CHotfolderWorkflowGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
-		</Filter>
-		<Filter
-			Name="Wrapped Files"
-			>
 			<File
-				RelativePath="..\Wrapped\axvlc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Wrapped\axvlc.h"
+				RelativePath="..\CDirectoryMonitorParamsGui.ui"
 				>
 			</File>
 		</Filter>

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iwin"
-	ProjectGUID="{633B67F7-B154-4A80-A651-1111D5EDF583}"
-	RootNamespace="iwin"
+	Name="ifpf"
+	ProjectGUID="{FFA16C6D-C2BF-40C6-BC0E-E44E22E73663}"
+	RootNamespace="ifpf"
 	>
 	<Platforms>
 		<Platform
@@ -12,11 +12,14 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -27,7 +30,24 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -47,7 +67,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../../;$(ACFDIR)/include"
+				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -56,7 +78,7 @@
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="4"
+				WarningLevel="3"
 				SuppressStartupBanner="true"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
@@ -89,11 +111,12 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="del /Q ..\svnflag"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
+			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -104,7 +127,24 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir="..\Generated"
+				SubVersionPath="..\..\.."
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -124,18 +164,16 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;$(ACFDIR)/include"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
-				StringPooling="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				BrowseInformation="1"
-				WarningLevel="4"
+				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
@@ -167,6 +205,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="del /Q ..\svnflag"
 			/>
 		</Configuration>
 	</Configurations>
@@ -178,31 +217,19 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CApplicationEnvironment.cpp"
+				RelativePath="..\CDirectoryMonitorParams.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CCriticalSection.cpp"
+				RelativePath="..\CFileProcessingComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CDefaultServicesProvider.cpp"
+				RelativePath="..\CHotfolderInfo.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CDllFunctionsProvider.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSystemEnvironment.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSystemInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CTimer.cpp"
+				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
 		</Filter>
@@ -211,40 +238,76 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CApplicationEnvironment.h"
+				RelativePath="..\CDirectoryMonitorParams.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CCriticalSection.h"
+				RelativePath="..\CFileProcessingComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDefaultServicesProvider.h"
+				RelativePath="..\CHotfolderInfo.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDllFunctionsProvider.h"
+				RelativePath="..\CMonitoringSession.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSystemEnvironment.h"
+				RelativePath="..\IDirectoryMonitor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSystemInfo.h"
+				RelativePath="..\IDirectoryMonitorParams.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CTimer.h"
+				RelativePath="..\IFileNamingStrategy.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iwin.h"
+				RelativePath="..\ifpf.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TComPtr.h"
+				RelativePath="..\IHotfolderInfo.h"
 				>
+			</File>
+			<File
+				RelativePath="..\IHotfolderWorkflow.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMonitoringSession.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMonitoringSessionManager.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Other"
+			>
+			<File
+				RelativePath="..\VersionInfo.arx.xtrsvn"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>
