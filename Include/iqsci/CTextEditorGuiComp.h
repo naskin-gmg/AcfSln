@@ -49,7 +49,7 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();
 
-protected slots:
+protected Q_SLOTS:
 	virtual void OnTextChanged();
 
 private:

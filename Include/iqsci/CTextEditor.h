@@ -39,19 +39,19 @@ public:
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
-public slots:
+public Q_SLOTS:
 	void SetFoldingEnabled(bool useFoldingEnabled);
 	void SetLineNumberEnabled(bool useFoldingEnabled);
 	void SetLanguage(const QString& language);
 	void SetReadOnly(bool readOnly = true);
 
-protected slots:
+protected Q_SLOTS:
 	virtual void OnSelectionChanged();
 	virtual void OnTextChanged();
 	virtual void OnToLowercase();
 	virtual void OnToUppercase();
 
-signals:
+Q_SIGNALS:
 	void DataChanged();
 
 private:

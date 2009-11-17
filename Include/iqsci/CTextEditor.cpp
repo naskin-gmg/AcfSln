@@ -151,7 +151,6 @@ void CTextEditor::SetReadOnly(bool readOnly)
 }
 
 
-
 // protected slots
 
 void CTextEditor::OnSelectionChanged()
