@@ -80,24 +80,9 @@ istd::CStringList CFolderMonitorComp::GetFileList() const
 
 void CFolderMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	I_ASSERT(m_directoryPathCompPtr.IsValid());
-	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
-
-	if (modelPtr == m_directoryPathModelCompPtr.GetPtr()){
-		QString currentPath = iqt::GetQString(m_directoryPathCompPtr->GetPath());
-
-		if (m_currentDirectory != QDir(currentPath)){
-			SetFolderPath(currentPath);
-		}
-	}
-
-	if (modelPtr == m_directoryMonitorParamsModelCompPtr.GetPtr()){
-		isys::CSectionBlocker block(&m_lock);
-
-		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
-		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
-		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+	I_ASSERT(modelPtr != NULL);
+	if (modelPtr != NULL){
+		SynchronizeWithModel(*modelPtr);
 	}
 }
 
@@ -241,9 +226,18 @@ void CFolderMonitorComp::run()
 
 void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 {
+	// notify observers:
 	istd::CChangeNotifier changePtr(this, changeFlags);
 
 	changePtr.Reset();
+
+	// update current session:
+	if (m_monitoringSessionManagerCompPtr.IsValid()){
+		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
+		if (sessionPtr != NULL){
+			sessionPtr->SetFileList(GetFileList());
+		}
+	}
 }
 
 
@@ -328,6 +322,30 @@ void CFolderMonitorComp::ResetFiles()
 	m_folderChanges.attributeChangedFiles.clear();
 	m_folderChanges.modifiedFiles.clear();
 	m_folderChanges.removedFiles.clear();
+}
+
+
+void CFolderMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel)
+{
+	I_ASSERT(m_directoryPathCompPtr.IsValid());
+	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
+
+	if (&paramsModel == m_directoryPathModelCompPtr.GetPtr()){
+		QString currentPath = iqt::GetQString(m_directoryPathCompPtr->GetPath());
+
+		if (m_currentDirectory != QDir(currentPath)){
+			SetFolderPath(currentPath);
+		}
+	}
+
+	if (&paramsModel == m_directoryMonitorParamsModelCompPtr.GetPtr()){
+		isys::CSectionBlocker block(&m_lock);
+
+		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
+		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
+		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+	}
 }
 
 

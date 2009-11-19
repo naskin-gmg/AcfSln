@@ -20,6 +20,8 @@
 // AcfSln includes
 #include "ifpf/IFileNamingStrategy.h"
 #include "ifpf/IHotfolderParams.h"
+#include "ifpf/IMonitoringSessionManager.h"
+#include "ifpf/CMonitoringSession.h"
 
 
 namespace iqtfpf
@@ -32,7 +34,8 @@ namespace iqtfpf
 class CHotfolderComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
-			virtual public ifpf::IFileNamingStrategy
+			virtual public ifpf::IFileNamingStrategy,
+			virtual public ifpf::IMonitoringSessionManager
 {
 	Q_OBJECT
 public:
@@ -52,6 +55,9 @@ public:
 
 	// reimplemented (ifpf::IFileNamingStrategy)
 	virtual istd::CString GetFileName(const istd::CString& inputFileName) const;
+
+	// reimplemented (ifpf::IMonitoringSessionManager)
+	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
 
 protected:
 	virtual bool OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
@@ -80,6 +86,11 @@ private:
 	I_ATTR(istd::CString, m_hotfolderPathIdAttrPtr);
 	I_ATTR(istd::CString, m_outputDirectoryIdAttrPtr);
 
+	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
+	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
+
+	DirectoryMonitorsMap m_directoryMonitorsMap;
+	MonitoringSessionsMap m_monitoringSessionsMap;
 };
 
 

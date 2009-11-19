@@ -90,6 +90,7 @@ private:
 	void StartObserverThread();
 	void StopObserverThread();
 	void ResetFiles();
+	void SynchronizeWithModel(const imod::IModel& paramsModel);
 
 private:
 	struct FileSystemChanges

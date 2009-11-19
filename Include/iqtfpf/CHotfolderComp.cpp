@@ -38,6 +38,29 @@ istd::CString CHotfolderComp::GetFileName(const istd::CString& inputFileName) co
 }
 
 
+// reimplemented (ifpf::IMonitoringSessionManager)
+
+ifpf::IMonitoringSession* CHotfolderComp::GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const
+{
+	DirectoryMonitorsMap::const_iterator foundIter = m_directoryMonitorsMap.find(directoryPath);
+	if (foundIter == m_directoryMonitorsMap.end()){
+		return NULL;
+	}
+
+	if (foundIter->second.GetPtr() != &directoryMonitor){
+		return NULL;
+	}
+
+	MonitoringSessionsMap::const_iterator sessionIter = m_monitoringSessionsMap.find(directoryPath);
+	if (sessionIter == m_monitoringSessionsMap.end()){
+		return NULL;
+	}
+
+	return sessionIter->second.GetPtr();
+}
+
+
+
 // protected methods
 
 bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
