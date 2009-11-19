@@ -76,13 +76,13 @@
     </Element>
     <Element>
       <Id>
-        FolderMonitor
+        DirectoryMonitor
       </Id>
       <PackageId>
         QtFpfPck
       </PackageId>
       <ComponentId>
-        FolderMonitor
+        DirectoryMonitor
       </ComponentId>
       <Data>
         <IsEnabled>

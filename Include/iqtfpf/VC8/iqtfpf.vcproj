@@ -176,19 +176,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CDirectoryMonitorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDirectoryMonitorComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFolderMonitorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFolderMonitorComp.moc"
 				>
 			</File>
 			<File
@@ -214,11 +214,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.h"
+				RelativePath="..\CDirectoryMonitorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CFolderMonitorComp.h"
+				RelativePath="..\CDirectoryMonitorParamsGui.h"
 				>
 			</File>
 			<File
@@ -247,11 +247,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDirectoryMonitorParamsGui.cpp"
+				RelativePath="..\generated\moc_CDirectoryMonitorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CFolderMonitorComp.cpp"
+				RelativePath="..\generated\moc_CDirectoryMonitorParamsGui.cpp"
 				>
 			</File>
 			<File

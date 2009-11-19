@@ -5,7 +5,7 @@
 #include "icomp/TModelCompWrap.h"
 
 #include "iqtfpf/CHotfolderComp.h"
-#include "iqtfpf/CFolderMonitorComp.h"
+#include "iqtfpf/CDirectoryMonitorComp.h"
 #include "iqtfpf/CDirectoryMonitorParamsGui.h"
 
 
@@ -17,7 +17,7 @@ namespace QtFpfPck
 
 
 typedef iqtfpf::CHotfolderComp Hotfolder;
-typedef icomp::TModelCompWrap<iqtfpf::CFolderMonitorComp> FolderMonitor;
+typedef icomp::TModelCompWrap<iqtfpf::CDirectoryMonitorComp> DirectoryMonitor;
 typedef iqtfpf::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
 
 

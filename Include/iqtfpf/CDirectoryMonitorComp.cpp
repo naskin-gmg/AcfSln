@@ -1,4 +1,4 @@
-#include "iqtfpf/CFolderMonitorComp.h"
+#include "iqtfpf/CDirectoryMonitorComp.h"
 
 
 // Qt includes
@@ -20,7 +20,7 @@ namespace iqtfpf
 {
 
 
-CFolderMonitorComp::CFolderMonitorComp()
+CDirectoryMonitorComp::CDirectoryMonitorComp()
 	:m_finishThread(false),
 	m_poolingFrequency(5.0),
 	m_observingItemTypes(ifpf::IDirectoryMonitorParams::OI_ALL),
@@ -31,7 +31,7 @@ CFolderMonitorComp::CFolderMonitorComp()
 
 // reimplemented (ifpf::IDirectoryMonitor)
 
-istd::CStringList CFolderMonitorComp::GetChangedFileItems(int changeFlags) const
+istd::CStringList CDirectoryMonitorComp::GetChangedFileItems(int changeFlags) const
 {
 	isys::CSectionBlocker block(&m_lock);
 	
@@ -62,7 +62,7 @@ istd::CStringList CFolderMonitorComp::GetChangedFileItems(int changeFlags) const
 
 // reimplemented (ibase::IFileListProvider)
 
-istd::CStringList CFolderMonitorComp::GetFileList() const
+istd::CStringList CDirectoryMonitorComp::GetFileList() const
 {
 	istd::CStringList fileList;
 
@@ -78,7 +78,7 @@ istd::CStringList CFolderMonitorComp::GetFileList() const
 
 // reimplemented (imod::IObserver)
 
-void CFolderMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	I_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
@@ -89,7 +89,7 @@ void CFolderMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/
 
 // reimplemented (icomp::IComponent)
 
-void CFolderMonitorComp::OnComponentCreated()
+void CDirectoryMonitorComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -109,7 +109,7 @@ void CFolderMonitorComp::OnComponentCreated()
 }
 
 
-void CFolderMonitorComp::OnComponentDestroyed()
+void CDirectoryMonitorComp::OnComponentDestroyed()
 {
 	StopObserverThread();
 
@@ -121,7 +121,7 @@ void CFolderMonitorComp::OnComponentDestroyed()
 
 // reimplemented (QThread)
 
-void CFolderMonitorComp::run()
+void CDirectoryMonitorComp::run()
 {
 	iqt::CTimer updateTimer;
 	
@@ -224,7 +224,7 @@ void CFolderMonitorComp::run()
 
 // private slots
 
-void CFolderMonitorComp::OnFolderChanged(int changeFlags)
+void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 {
 	// notify observers:
 	istd::CChangeNotifier changePtr(this, changeFlags);
@@ -243,7 +243,7 @@ void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 
 // private methods
 
-void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
+void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 {	
 	if (m_currentDirectory == QDir(folderPath)){
 		return;
@@ -281,25 +281,25 @@ void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 		StartObserverThread();
 	}
 	else{
-		SendWarningMessage(0, istd::CString("Directory: ") + iqt::GetCString(folderPath) + istd::CString(" not exists. Observing aborted"), "FolderMonitor");
+		SendWarningMessage(0, istd::CString("Directory: ") + iqt::GetCString(folderPath) + istd::CString(" not exists. Observing aborted"), "DirectoryMonitor");
 	}
 }
 
 
-void CFolderMonitorComp::StartObserverThread()
+void CDirectoryMonitorComp::StartObserverThread()
 {
 	m_finishThread = false;
 
 	QFileInfo fileInfo(m_currentDirectory.absolutePath());
 	if (fileInfo.exists()){
-		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "FolderMonitor");
+		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "DirectoryMonitor");
 
 		BaseClass2::start();
 	}
 }
 
 
-void CFolderMonitorComp::StopObserverThread()
+void CDirectoryMonitorComp::StopObserverThread()
 {
 	m_finishThread = true;
 
@@ -315,7 +315,7 @@ void CFolderMonitorComp::StopObserverThread()
 }
 
 
-void CFolderMonitorComp::ResetFiles()
+void CDirectoryMonitorComp::ResetFiles()
 {
 	m_directoryFiles.clear();
 	m_folderChanges.addedFiles.clear();
@@ -325,7 +325,7 @@ void CFolderMonitorComp::ResetFiles()
 }
 
 
-void CFolderMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel)
+void CDirectoryMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel)
 {
 	I_ASSERT(m_directoryPathCompPtr.IsValid());
 	I_ASSERT(m_directoryPathModelCompPtr.IsValid());

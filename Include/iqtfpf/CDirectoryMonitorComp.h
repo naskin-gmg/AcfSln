@@ -1,5 +1,5 @@
-#ifndef iqtfpf_CFolderMonitorComp_included
-#define iqtfpf_CFolderMonitorComp_included
+#ifndef iqtfpf_CDirectoryMonitorComp_included
+#define iqtfpf_CDirectoryMonitorComp_included
 
 
 // Qt includes
@@ -33,7 +33,7 @@ namespace iqtfpf
 /**
 	Component for monitoring of the file folder.
 */
-class CFolderMonitorComp:
+class CDirectoryMonitorComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
 			virtual public ifpf::IDirectoryMonitor,
@@ -45,7 +45,7 @@ public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
 
-	I_BEGIN_COMPONENT(CFolderMonitorComp);
+	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
 		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPath");
 		I_ASSIGN(m_directoryPathModelCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPathParams");
@@ -54,7 +54,7 @@ public:
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
 	I_END_COMPONENT;
 
-	CFolderMonitorComp();
+	CDirectoryMonitorComp();
 
 	// reimplemented (ifpf::IDirectoryMonitor)
 	virtual istd::CStringList GetChangedFileItems(int changeFlags) const;
@@ -131,6 +131,6 @@ private:
 } // namespace iqtfpf
 
 
-#endif // !iqtfpf_CFolderMonitorComp_included
+#endif // !iqtfpf_CDirectoryMonitorComp_included
 
 
