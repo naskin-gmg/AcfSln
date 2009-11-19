@@ -6,7 +6,7 @@
 #include "istd/INamed.h"
 
 // AcfSln includes
-#include "ifpf/IHotfolderInfo.h"
+#include "ifpf/IHotfolderParams.h"
 
 
 namespace ifpf
@@ -14,18 +14,18 @@ namespace ifpf
 
 
 /**
-	Common interface for a hotfolder workflow.
+	Common interface for a hotfolder workflow static model.
 */
 class IHotfolderWorkflow: virtual public istd::INamed
 {
 public:
-	typedef std::vector<ifpf::IHotfolderInfo*> Hotfolders;
+	typedef std::vector<ifpf::IHotfolderParams*> Hotfolders;
 
 	/**	
 		Add a hotfolder to the workflow.
 		The name of the hotfolder must be unique, otherwise no folder will be added an the function returns \cn null.
 	*/
-	virtual ifpf::IHotfolderInfo* AddHotfolder(const istd::CString& hotfolderName) = 0;
+	virtual ifpf::IHotfolderParams* AddHotfolder(const istd::CString& hotfolderName) = 0;
 
 	/**	
 		Remove a hotfolder with the name \hotfolderName from the workflow.
@@ -35,7 +35,7 @@ public:
 	/**
 		Get the specified hotfolder instance.
 	*/
-	virtual ifpf::IHotfolderInfo* GetHotfolder(const istd::CString& hotfolderName) const = 0;
+	virtual ifpf::IHotfolderParams* GetHotfolder(const istd::CString& hotfolderName) const = 0;
 
 	/**
 		Get workflow hotfolder list.

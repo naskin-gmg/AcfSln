@@ -38,47 +38,66 @@ istd::CString CHotfolderComp::GetFileName(const istd::CString& inputFileName) co
 }
 
 
-// reimplemented (imod::IObserver)
-	
-void CHotfolderComp::AfterUpdate(imod::IModel* /* modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+// protected methods
+
+bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
 {
 	if (!m_fileConvertCompPtr.IsValid()){
 		SendErrorMessage(0, "File conversion component was not set", "Hotfolder");
 
-		return;
+		return false;
 	}
 
 	if (!m_fileNamingStrategyCompPtr.IsValid()){
 		SendErrorMessage(0, "File naming component was not set", "Hotfolder");
 
-		return;
+		return false;
 	}
 
-	ifpf::IDirectoryMonitor* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED){
-		istd::CStringList files = objectPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED);
+	istd::CStringList files = directoryMonitor.GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED);
 
-		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
-			const istd::CString& inputFilePath = files[fileIndex];
+	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+		const istd::CString& inputFilePath = files[fileIndex];
 
-			isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
-			if (fileSystemPtr != NULL){
-				if (!fileSystemPtr->IsPresent(inputFilePath)){
-					continue;
-				}
-			}
-
-			istd::CString outputFilePath = m_fileNamingStrategyCompPtr->GetFileName(inputFilePath);
-
-			istd::CString message = istd::CString("Process file: ") + outputFilePath;
-			SendInfoMessage(0, message, "Hotfolder");
-
-			if (!m_fileConvertCompPtr->CopyFile(inputFilePath, outputFilePath, m_paramsSetCompPtr.GetPtr())){
-				istd::CString message = istd::CString("Processing of ") + outputFilePath + "failed";
-		
-				SendErrorMessage(0, message, "Hotfolder");
+		isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
+		if (fileSystemPtr != NULL){
+			if (!fileSystemPtr->IsPresent(inputFilePath)){
+				continue;
 			}
 		}
+
+		istd::CString outputFilePath = m_fileNamingStrategyCompPtr->GetFileName(inputFilePath);
+
+		istd::CString message = istd::CString("Process file: ") + outputFilePath;
+		SendInfoMessage(0, message, "Hotfolder");
+
+		if (!m_fileConvertCompPtr->CopyFile(inputFilePath, outputFilePath, m_paramsSetCompPtr.GetPtr())){
+			istd::CString message = istd::CString("Processing of ") + outputFilePath + "failed";
+
+			SendErrorMessage(0, message, "Hotfolder");
+		}
+	}
+
+	return true;
+}
+
+
+// public methods of embedded class DirectoryMonitorObserver
+
+CHotfolderComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+	
+void CHotfolderComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
+	
+	if (monitorPtr != NULL && updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED){
+		m_parent.OnIncommingInputFileEvent(*monitorPtr);
 	}
 }
 

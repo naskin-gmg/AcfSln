@@ -1,13 +1,13 @@
-#ifndef ifpf_CHotfolderInfo_included
-#define ifpf_CHotfolderInfo_included
+#ifndef ifpf_CHotfolder_included
+#define ifpf_CHotfolder_included
 
 
 // ACF includes
-#include "ibase/TNamedWrap.h"
+#include "iser/ISerializable.h"
 
 
 // AcfSln includes
-#include "ifpf/IHotfolderInfo.h"
+#include "ifpf/IHotfolder.h"
 
 
 namespace ifpf
@@ -15,14 +15,12 @@ namespace ifpf
 
 
 /**
-	Implementation of the hotfolder info
+	Implementation of the dynamic data model of the hotfolder.
 */
-class CHotfolderInfo: public ibase::TNamedWrap<ifpf::IHotfolderInfo>
+class CHotfolder: public ifpf::IHotfolder, virtual public iser::ISerializable
 {
 public:
-	typedef ibase::TNamedWrap<ifpf::IHotfolderInfo> BaseClass;
-
-	// reimplemented (ifpf::IHotfolderInfo)
+	// reimplemented (ifpf::IHotfolder)
 	virtual int GetFileState(const istd::CString& fileName) const;
 
 	// reimplemented (ibase::IFileListProvider)
@@ -38,12 +36,11 @@ private:
 	istd::CStringList m_processedFiles;
 	istd::CStringList m_abortedFiles;
 	istd::CStringList m_waitingFiles;
-
 };
 
 
 } // namespace ifpf
 
 
-#endif // !ifpf_CHotfolderInfo_included
+#endif // !ifpf_CHotfolder_included
 

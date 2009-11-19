@@ -73,7 +73,7 @@ protected:
 	// reimplemented (QThread)
 	virtual void run();
 
-private slots:
+private Q_SLOTS:
 	/**
 		Delegate folder change event via istd::CChangeNotifier from main thread.
 	*/

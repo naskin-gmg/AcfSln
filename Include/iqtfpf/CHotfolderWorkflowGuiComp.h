@@ -46,7 +46,7 @@ public:
 	virtual void UpdateModel() const;
 
 private:
-	I_FACT(ifpf::IHotfolderInfo, m_hotfolderFactCompPtr);
+	I_FACT(ifpf::IHotfolderParams, m_hotfolderFactCompPtr);
 };
 
 

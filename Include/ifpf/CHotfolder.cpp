@@ -1,4 +1,4 @@
-#include "ifpf/CHotfolderInfo.h"
+#include "ifpf/CHotfolder.h"
 
 
 namespace ifpf
@@ -9,7 +9,7 @@ namespace ifpf
 
 // reimplemented (ifpf::IHotfolderInfo)
 
-int CHotfolderInfo::GetFileState(const istd::CString& fileName) const
+int CHotfolder::GetFileState(const istd::CString& fileName) const
 {
 	return 0;
 }
@@ -17,7 +17,7 @@ int CHotfolderInfo::GetFileState(const istd::CString& fileName) const
 
 // reimplemented (ibase::IFileListProvider)
 
-istd::CStringList CHotfolderInfo::GetFileList() const
+istd::CStringList CHotfolder::GetFileList() const
 {
 	istd::CStringList files;
 
@@ -27,13 +27,13 @@ istd::CStringList CHotfolderInfo::GetFileList() const
 
 // reimplemented (iser::ISerializable)
 
-bool CHotfolderInfo::Serialize(iser::IArchive& archive)
+bool CHotfolder::Serialize(iser::IArchive& archive)
 {
 	return true;
 }
 
 
-istd::CStringList CHotfolderInfo::GetFilesForState(int state) const
+istd::CStringList CHotfolder::GetFilesForState(int state) const
 {
 	istd::CStringList files;
 

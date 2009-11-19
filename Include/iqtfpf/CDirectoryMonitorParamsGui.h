@@ -37,7 +37,7 @@ public:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
-protected slots:
+protected Q_SLOTS:
 	void on_FilesCheck_toggled(bool isChecked);
 	void on_DirsCheck_toggled(bool isChecked);
 	void on_DrivesCheck_toggled(bool isChecked);

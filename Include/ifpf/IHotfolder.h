@@ -1,5 +1,5 @@
-#ifndef ifpf_IHotfolderInfo_included
-#define ifpf_IHotfolderInfo_included
+#ifndef ifpf_IHotfolder_included
+#define ifpf_IHotfolder_included
 
 
 // ACF includes
@@ -15,7 +15,7 @@ namespace ifpf
 /**
 	Interface for a hotfolder.
 */
-class IHotfolderInfo: virtual public istd::INamed, virtual ibase::IFileListProvider
+class IHotfolder: virtual ibase::IFileListProvider
 {
 public:
 	enum FileState
@@ -37,6 +37,6 @@ public:
 } // namespace ifpf
 
 
-#endif // !ifpf_IHotfolderInfo_included
+#endif // !ifpf_IHotfolder_included
 
 

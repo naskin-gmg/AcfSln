@@ -10,6 +10,9 @@ namespace ifpf
 {
 
 
+/**
+	Implementation of the ifpf::IMonitoringSession interface.
+*/
 class CMonitoringSession: virtual public ifpf::IMonitoringSession
 {
 public:

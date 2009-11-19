@@ -17,10 +17,15 @@ namespace ifpf
 {
 
 
+/**
+	Common interface for a monitoring session for a directory.
+	Each directory monitor can persist its monitoring state in a monitoring session, which is provided by IMonitoringSessionManager.
+	\sa IDirectoryMonitor, IMonitoringSessionManager
+*/
 class IMonitoringSession:
+			virtual public iprm::IFileNameParam,
 			virtual public ibase::IFileListProvider,
-			virtual public iser::ISerializable,
-			virtual public iprm::IFileNameParam
+			virtual public iser::ISerializable
 {
 public:
 	/**

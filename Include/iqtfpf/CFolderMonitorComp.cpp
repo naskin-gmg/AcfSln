@@ -273,6 +273,13 @@ void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 		}
 	}
 
+	if (m_directoryMonitorParamsCompPtr.IsValid()){
+		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
+		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
+		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+	}
+
 	QFileInfo fileInfo(folderPath);
 	if (fileInfo.exists()){
 		m_currentDirectory = QDir(folderPath);

@@ -14,6 +14,10 @@ namespace ifpf
 {
 
 
+/**
+	Common interface for a monitoring session's manager.
+	Over this interface a directory monitor can get its monitoring session object for a given directory path.
+*/
 class IMonitoringSessionManager: virtual public istd::IPolymorphic
 {
 public:
