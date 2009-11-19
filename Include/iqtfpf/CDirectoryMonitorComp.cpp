@@ -152,7 +152,9 @@ void CDirectoryMonitorComp::run()
 		// check for changes:
 		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0){
 			for (int fileIndex = 0; fileIndex < int(m_directoryFiles.count()); fileIndex++){
-				QFileInfo fileInfo = m_directoryFiles[fileIndex];
+				QFileInfo fileInfo = m_directoryFiles[fileIndex];				
+				fileInfo.refresh();
+
 				if (!fileInfo.exists()){
 					removedFiles.push_back(fileInfo.absoluteFilePath());
 					SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was removed"));
