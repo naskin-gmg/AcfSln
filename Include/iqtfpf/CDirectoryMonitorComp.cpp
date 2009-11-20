@@ -24,7 +24,11 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	:m_finishThread(false),
 	m_poolingFrequency(5.0),
 	m_observingItemTypes(ifpf::IDirectoryMonitorParams::OI_ALL),
-	m_observingChanges(ifpf::IDirectoryMonitorParams::OC_ALL)
+	m_observingChanges(ifpf::IDirectoryMonitorParams::OC_ALL),
+	m_directoryPathModelPtr(NULL),
+	m_directoryMonitorParamsModelPtr(NULL),
+	m_directoryPathPtr(NULL),
+	m_directoryMonitorParamsPtr(NULL)
 {
 }
 
@@ -91,20 +95,27 @@ void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlag
 
 void CDirectoryMonitorComp::OnComponentCreated()
 {
+	I_ASSERT(m_directoryPathIdAttrPtr.IsValid());
+	I_ASSERT(m_directoryMonitorParamsIdAttrPtr.IsValid());
+	I_ASSERT(m_paramsSetCompPtr.IsValid())
+	I_ASSERT(m_paramsSetModelCompPtr.IsValid())
+
 	BaseClass::OnComponentCreated();
 
 	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
 
-	// connect models to the bridge, to ge notification about model changes:
-	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
-	I_ASSERT(m_directoryMonitorParamsModelCompPtr.IsValid());
+	m_directoryPathModelPtr = dynamic_cast<const imod::IModel*>(m_paramsSetCompPtr->GetParameter((*m_directoryPathIdAttrPtr).ToString()));
+	m_directoryMonitorParamsModelPtr = dynamic_cast<const imod::IModel*>(m_paramsSetCompPtr->GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString()));
+	m_directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(m_directoryPathModelPtr);
+	m_directoryMonitorParamsPtr = dynamic_cast<const ifpf::IDirectoryMonitorParams*>(m_directoryMonitorParamsModelPtr);
 
-	bool retVal = true;
+	I_ASSERT(m_directoryPathModelPtr != NULL);
+	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
 
-	if (m_directoryPathModelCompPtr.IsValid() && m_directoryMonitorParamsModelCompPtr.IsValid()){
-		retVal = m_directoryPathModelCompPtr->AttachObserver(this);
-		
-		retVal = retVal && m_directoryMonitorParamsModelCompPtr->AttachObserver(this);
+	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
+		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(this);
+
+		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(this);
 	}
 }
 
@@ -271,11 +282,11 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 		}
 	}
 
-	if (m_directoryMonitorParamsCompPtr.IsValid()){
-		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
-		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
-		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+	if (m_directoryMonitorParamsPtr != NULL){
+		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
+		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
+		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
 	}
 
 	QFileInfo fileInfo(folderPath);
@@ -331,24 +342,26 @@ void CDirectoryMonitorComp::ResetFiles()
 
 void CDirectoryMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel)
 {
-	I_ASSERT(m_directoryPathCompPtr.IsValid());
-	I_ASSERT(m_directoryPathModelCompPtr.IsValid());
+	I_ASSERT(m_directoryPathPtr != NULL);
+	I_ASSERT(m_directoryPathModelPtr != NULL);
+	I_ASSERT(m_directoryMonitorParamsPtr != NULL);
+	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
 
-	if (&paramsModel == m_directoryPathModelCompPtr.GetPtr()){
-		QString currentPath = iqt::GetQString(m_directoryPathCompPtr->GetPath());
+	if (&paramsModel == m_directoryPathModelPtr){
+		QString currentPath = iqt::GetQString(m_directoryPathPtr->GetPath());
 
 		if (m_currentDirectory != QDir(currentPath)){
 			SetFolderPath(currentPath);
 		}
 	}
 
-	if (&paramsModel == m_directoryMonitorParamsModelCompPtr.GetPtr()){
+	if (&paramsModel == m_directoryMonitorParamsModelPtr){
 		isys::CSectionBlocker block(&m_lock);
 
-		m_poolingFrequency = m_directoryMonitorParamsCompPtr->GetPoolingIntervall();
-		m_observingItemTypes = m_directoryMonitorParamsCompPtr->GetObservedItemTypes();
-		m_observingChanges = m_directoryMonitorParamsCompPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsCompPtr->GetFileFilters());
+		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
+		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
+		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
 	}
 }
 

@@ -43,7 +43,6 @@ public:
 	typedef QThread BaseClass3;
 
 	I_BEGIN_COMPONENT(CHotfolderComp);
-		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(ifpf::IFileNamingStrategy);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
 		I_ASSIGN(m_fileNamingStrategyCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");

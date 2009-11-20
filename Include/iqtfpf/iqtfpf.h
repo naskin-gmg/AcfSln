@@ -6,7 +6,7 @@
 
 
 /**
-	This package contains Qt based implementations of image processing components.
+	This package contains Qt based implementations of File Processing Framework components.
 */
 
 

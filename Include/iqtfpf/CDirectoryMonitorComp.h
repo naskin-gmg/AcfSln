@@ -19,6 +19,8 @@
 
 #include "iqt/CCriticalSection.h"
 
+#include "iprm/IParamsSet.h"
+
 
 // AcfSln includes
 #include "ifpf/IDirectoryMonitor.h"
@@ -47,11 +49,11 @@ public:
 
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
-		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPath");
-		I_ASSIGN(m_directoryPathModelCompPtr, "DirectoryPathParams", "Parameter of the path to be observed", true, "DirectoryPathParams");
-		I_ASSIGN(m_directoryMonitorParamsCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
-		I_ASSIGN(m_directoryMonitorParamsModelCompPtr, "DirectoryMonitorParams", "Observing parameters", true, "DirectoryMonitorParams");
+		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the directory monitoring", true, "ParamsSet");
+		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameter set for the directory monitoring", true, "ParamsSet");
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
+		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathParamsId", "Parameter ID of the path to be observed in the parameter set", true, "DirectoryPathParamsId");
+		I_ASSIGN(m_directoryMonitorParamsIdAttrPtr, "DirectoryMonitorParamsId", "ID of the directory observing parameters in the parameter set", true, "DirectoryMonitorParamsId");
 	I_END_COMPONENT;
 
 	CDirectoryMonitorComp();
@@ -118,12 +120,19 @@ private:
 	int m_observingItemTypes;
 	int m_observingChanges;
 
-	// Attributes
-	I_REF(iprm::IFileNameParam, m_directoryPathCompPtr);
-	I_REF(imod::IModel, m_directoryPathModelCompPtr);
-	I_REF(ifpf::IDirectoryMonitorParams, m_directoryMonitorParamsCompPtr);
-	I_REF(imod::IModel, m_directoryMonitorParamsModelCompPtr);
+	// Directory monitoring parameter model
+	const imod::IModel* m_directoryPathModelPtr;
+	const imod::IModel* m_directoryMonitorParamsModelPtr;
+	const iprm::IFileNameParam* m_directoryPathPtr;
+	const ifpf::IDirectoryMonitorParams* m_directoryMonitorParamsPtr;
+
+	// Component attributes
+	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
+	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(ifpf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
+	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
+	I_ATTR(istd::CString, m_directoryMonitorParamsIdAttrPtr);
+
 
 };
 
