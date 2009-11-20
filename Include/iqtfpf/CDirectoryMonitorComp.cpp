@@ -174,6 +174,8 @@ void CDirectoryMonitorComp::run()
 					}
 				}
 				else{
+					(*foundFileIter).refresh();
+
 					if (foundFileIter->lastModified() != currentFileInfo.lastModified()){
 						if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
 							modifiedFiles.push_back(currentFileInfo.absoluteFilePath());

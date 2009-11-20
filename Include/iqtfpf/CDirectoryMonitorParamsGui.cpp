@@ -178,12 +178,16 @@ void CDirectoryMonitorParamsGui::on_RemoveFilterButton_clicked()
 {
 	QList<QTreeWidgetItem*> selectedItems = FileFiltersList->selectedItems();
 
-	for (QList<QTreeWidgetItem*>::iterator index = selectedItems.begin(); index != selectedItems.end(); index++){
-		QTreeWidgetItem* itemPtr = FileFiltersList->takeTopLevelItem(FileFiltersList->indexOfTopLevelItem(*index));
+	if (!selectedItems.empty()){
+		for (QList<QTreeWidgetItem*>::iterator index = selectedItems.begin(); index != selectedItems.end(); index++){
+			QTreeWidgetItem* itemPtr = FileFiltersList->takeTopLevelItem(FileFiltersList->indexOfTopLevelItem(*index));
 
-		if (itemPtr != NULL){
-			delete itemPtr;
+			if (itemPtr != NULL){
+				delete itemPtr;
+			}
 		}
+
+		UpdateModel();
 	}
 }
 
