@@ -44,7 +44,12 @@ void CGeneralSamplesSequence::ResetSequence()
 
 int CGeneralSamplesSequence::GetSamplesCount() const
 {
-	return int(m_samples.size() / m_channelsCount);
+	if (m_channelsCount > 0){
+		return int(m_samples.size() / m_channelsCount);
+	}
+	else{
+		return 0;
+	}
 }
 
 

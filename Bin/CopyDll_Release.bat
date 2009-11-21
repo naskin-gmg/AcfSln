@@ -8,4 +8,4 @@ copy /Y %ACFDIR%\Bin\ReleaseVC8\Acf.exe ReleaseVC8
 copy /Y %AVTDIR%\FireGrab\*.dll ReleaseVC8
 copy /Y %MILDIR%\Dll\*.dll ReleaseVC8
 copy /Y %OPENCVDIR%\Bin\*.dll ReleaseVC8
-copy /Y %FFMPEGDIR%\lib\*.dll ReleaseVC8
+copy /Y %FFMPEGDIR%\lib\ReleaseVC8\*.dll ReleaseVC8

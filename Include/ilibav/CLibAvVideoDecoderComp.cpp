@@ -22,18 +22,29 @@ namespace ilibav
 
 CLibAvVideoDecoderComp::CLibAvVideoDecoderComp()
 :	m_videoStreamId(-1),
+	m_audioStreamId(-1),
 	m_formatContextPtr(NULL),
-	m_codecContextPtr(NULL),
-	m_codecPtr(NULL),
+	m_videoCodecContextPtr(NULL),
+	m_audioCodecContextPtr(NULL),
+	m_videoCodecPtr(NULL),
+	m_audioCodecPtr(NULL),
 	m_framePtr(NULL),
 	m_frameRgbPtr(NULL),
 	m_bytesRemaining(0),
-	m_rawDataPtr(NULL)
-
+	m_rawDataPtr(NULL),
+	m_currentFrame(0)
 {
 	av_register_all();
 
 	m_packet.data = NULL;
+
+	m_audioBuffer = (int16_t*)av_malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
+}
+
+
+CLibAvVideoDecoderComp::~CLibAvVideoDecoderComp()
+{
+	av_free(m_audioBuffer);
 }
 
 
@@ -89,9 +100,16 @@ int CLibAvVideoDecoderComp::DoProcessing(
 
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (		(bitmapPtr != NULL) &&
-				m_imageBufferPtr.IsValid() &&
-				ReadNextFrame()){
-		if (CLibAvConverter::ConvertBitmap(*m_frameRgbPtr, GetFrameSize(), *bitmapPtr)){
+				m_bitmapObjectCompPtr.IsValid()){
+		if (bitmapPtr->CopyImageFrom(*m_bitmapObjectCompPtr)){
+			return TS_OK;
+		}
+	}
+
+	imeas::ISamplesSequence* audioSequencePtr = dynamic_cast<imeas::ISamplesSequence*>(outputPtr);
+	if (		(audioSequencePtr != NULL) &&
+				m_audioSequenceCompPtr.IsValid()){
+		if (audioSequencePtr->CopySequenceFrom(*m_audioSequenceCompPtr)){
 			return TS_OK;
 		}
 	}
@@ -132,15 +150,19 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 	// Find the first video stream
 	for (unsigned int i = 0; i < m_formatContextPtr->nb_streams; i++){
 		AVCodecContext* codecContextPtr = m_formatContextPtr->streams[i]->codec;
-		if ((codecContextPtr != NULL) && (codecContextPtr->codec_type == CODEC_TYPE_VIDEO)){
+		if (codecContextPtr == NULL){
+			continue;
+		}
+
+		if (m_bitmapObjectCompPtr.IsValid() && (m_videoCodecPtr == NULL) && (codecContextPtr->codec_type == CODEC_TYPE_VIDEO)){
 			m_videoStreamId = i;
-			m_codecContextPtr = codecContextPtr;
+			m_videoCodecContextPtr = codecContextPtr;
 
 			// Determine required buffer size and allocate buffer
 			int numBytes = avpicture_get_size(
 						PIX_FMT_RGB32,
-						m_codecContextPtr->width,
-						m_codecContextPtr->height);
+						m_videoCodecContextPtr->width,
+						m_videoCodecContextPtr->height);
 			m_imageBufferPtr.SetPtr(new I_BYTE[numBytes]);
 
 			// Assign appropriate parts of buffer to image planes in pFrameRGB
@@ -148,37 +170,64 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 						(AVPicture*)m_frameRgbPtr,
 						m_imageBufferPtr.GetPtr(),
 						PIX_FMT_RGB32,
-						m_codecContextPtr->width,
-						m_codecContextPtr->height);
+						m_videoCodecContextPtr->width,
+						m_videoCodecContextPtr->height);
 
 			// Find the decoder for the video stream
-			m_codecPtr = avcodec_find_decoder(m_codecContextPtr->codec_id);
-			if (m_codecPtr==NULL){
-				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No decoder found for file ") + url);
-
-				return false;
+			m_videoCodecPtr = avcodec_find_decoder(m_videoCodecContextPtr->codec_id);
+			if (m_videoCodecPtr == NULL){
+				continue;
 			}
 
 			// Inform the codec that we can handle truncated bitstreams -- i.e.,
 			// bitstreams where frame boundaries can fall in the middle of packets
-			if (m_codecPtr->capabilities & CODEC_CAP_TRUNCATED){
-				m_codecContextPtr->flags |= CODEC_FLAG_TRUNCATED;
+			if (m_videoCodecPtr->capabilities & CODEC_CAP_TRUNCATED){
+				m_videoCodecContextPtr->flags |= CODEC_FLAG_TRUNCATED;
 			}
 
 			// Open codec
-			if (avcodec_open(m_codecContextPtr, m_codecPtr) < 0){
+			if (avcodec_open(m_videoCodecContextPtr, m_videoCodecPtr) < 0){
 				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("Cannot open codec for file ") + url);
 
-				return false;
+				m_videoCodecPtr = NULL;
+			}
+		}
+		else if (m_audioSequenceCompPtr.IsValid() && (m_audioCodecPtr == NULL) && (codecContextPtr->codec_type == CODEC_TYPE_AUDIO)){
+			m_audioStreamId = i;
+			m_audioCodecContextPtr = codecContextPtr;
+
+			// Find the decoder for the video stream
+			m_audioCodecPtr = avcodec_find_decoder(m_audioCodecContextPtr->codec_id);
+			if (m_audioCodecPtr == NULL){
+				continue;
 			}
 
-			return true;
+			// Inform the codec that we can handle truncated bitstreams -- i.e.,
+			// bitstreams where frame boundaries can fall in the middle of packets
+			if (m_audioCodecPtr->capabilities & CODEC_CAP_TRUNCATED){
+				m_audioCodecContextPtr->flags |= CODEC_FLAG_TRUNCATED;
+			}
+
+			// Open codec
+			if (avcodec_open(m_audioCodecContextPtr, m_audioCodecPtr) < 0){
+				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("Cannot open codec for file ") + url);
+
+				m_audioCodecPtr = NULL;
+			}
 		}
 	}
 
-	SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No video decoder found for file ") + url);
+	if (m_bitmapObjectCompPtr.IsValid() && (m_videoCodecPtr == NULL)){
+		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No video decoder found for file ") + url);
+	}
 
-	return false;
+	if (m_audioSequenceCompPtr.IsValid() && (m_audioCodecPtr == NULL)){
+		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No video decoder found for file ") + url);
+	}
+
+	ReadNextFrame();
+
+	return true;
 }
 
 
@@ -192,11 +241,16 @@ void CLibAvVideoDecoderComp::CloseMedium()
 		m_formatContextPtr = NULL;
 	}
 
-	m_codecContextPtr = NULL;
+	m_videoCodecContextPtr = NULL;
+	m_audioCodecContextPtr = NULL;
+	m_videoCodecPtr = NULL;
+	m_audioCodecPtr = NULL;
 
 	m_packet.data = NULL;
 	m_bytesRemaining = 0;
 	m_rawDataPtr = NULL;
+
+	m_currentFrame = 0;
 
 	m_imageBufferPtr.Reset();
 }
@@ -232,7 +286,7 @@ double CLibAvVideoDecoderComp::GetCurrentPosition() const
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
 		AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
 		if (videoStreamPtr != NULL){
-			return double(videoStreamPtr->cur_dts * videoStreamPtr->time_base.num) / videoStreamPtr->time_base.den;
+			return double(GetCurrentFrame() * videoStreamPtr->time_base.num) / videoStreamPtr->time_base.den;
 		}
 	}
 
@@ -245,11 +299,7 @@ bool CLibAvVideoDecoderComp::SetCurrentPosition(double position)
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
 		AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
 		if (videoStreamPtr != NULL){
-			return av_seek_frame(
-						m_formatContextPtr,
-						m_videoStreamId,
-						int64_t(position * videoStreamPtr->time_base.den / videoStreamPtr->time_base.num),
-						0) >= 0;
+			return SetCurrentFrame(int(position * videoStreamPtr->time_base.den / videoStreamPtr->time_base.num));
 		}
 	}
 
@@ -293,8 +343,8 @@ double CLibAvVideoDecoderComp::GetFrameIntervall() const
 
 istd::CIndex2d CLibAvVideoDecoderComp::GetFrameSize() const
 {
-	if (m_codecContextPtr != NULL){
-		return istd::CIndex2d(m_codecContextPtr->width, m_codecContextPtr->height);
+	if (m_videoCodecContextPtr != NULL){
+		return istd::CIndex2d(m_videoCodecContextPtr->width, m_videoCodecContextPtr->height);
 	}
 
 	return istd::CIndex2d::GetInvalid();
@@ -303,8 +353,8 @@ istd::CIndex2d CLibAvVideoDecoderComp::GetFrameSize() const
 
 double CLibAvVideoDecoderComp::GetPixelAspectRatio() const
 {
-	if ((m_codecContextPtr != NULL) && (m_codecContextPtr->sample_aspect_ratio.num != 0)){
-		AVRational ratio = m_codecContextPtr->sample_aspect_ratio;
+	if ((m_videoCodecContextPtr != NULL) && (m_videoCodecContextPtr->sample_aspect_ratio.num != 0)){
+		AVRational ratio = m_videoCodecContextPtr->sample_aspect_ratio;
 		if (ratio.den != 0){
 			return double(ratio.num) / ratio.den;
 		}
@@ -318,25 +368,28 @@ double CLibAvVideoDecoderComp::GetPixelAspectRatio() const
 
 int CLibAvVideoDecoderComp::GetCurrentFrame() const
 {
-	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
-		AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
-		if (videoStreamPtr != NULL){
-			return int(videoStreamPtr->cur_dts);
-		}
-	}
-
-	return 0;
+	return m_currentFrame;
 }
 
 
 bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 {
+	if (frameIndex == m_currentFrame){
+		return true;
+	}
+
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
-		return av_seek_frame(
+		if (av_seek_frame(
 					m_formatContextPtr,
 					m_videoStreamId,
 					frameIndex,
-					0) >= 0;
+					0) >= 0){
+			ReadNextFrame();
+
+			m_currentFrame = frameIndex;
+
+			return true;
+		}
 	}
 
 	return false;
@@ -348,60 +401,120 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 bool CLibAvVideoDecoderComp::ReadNextFrame()
 {
 	if (		(m_formatContextPtr == NULL) ||
-				(m_codecContextPtr == NULL) ||
+				(m_videoCodecContextPtr == NULL) ||
 				(m_framePtr == NULL) ||
 				(m_frameRgbPtr == NULL)){
 		return false;
 	}
 
+	bool retVal = true;
+
+	bool needVideoFrame = (m_videoStreamId >= 0);
+	bool needAudioFrame = (m_audioStreamId >= 0);
+
+	int audioBufferOffset = 0;
+
 	// Decode packets until we have decoded a complete frame
-	while (true){
-		// Work on the current packet until we have decoded all of it
-		while (m_bytesRemaining > 0){
-			// Decode the next chunk of data
-			int frameFinished = 0;
-			int bytesDecoded = avcodec_decode_video(m_codecContextPtr, m_framePtr, &frameFinished, m_rawDataPtr, m_bytesRemaining);
+	while (retVal && (needVideoFrame || needAudioFrame)){
+		while ((m_packet.data != NULL) && (m_bytesRemaining > 0)){
+			if (needVideoFrame && (m_packet.stream_index == m_videoStreamId)){
+				// Decode the next chunk of data
+				int frameFinished = 0;
+				int bytesDecoded = avcodec_decode_video(
+							m_videoCodecContextPtr,
+							m_framePtr,
+							&frameFinished,
+							m_rawDataPtr,
+							m_bytesRemaining);
 
-			// Was there an error?
-			if (bytesDecoded < 0){
-				return false;
+				// Was there an error?
+				if (bytesDecoded > 0){
+					m_bytesRemaining -= bytesDecoded;
+					m_rawDataPtr += bytesDecoded;
+
+					// Did we finish the current frame? Then we can return
+					if (frameFinished != 0){
+						img_convert((AVPicture*)m_frameRgbPtr,
+									PIX_FMT_RGB32,
+									(AVPicture*)m_framePtr,
+									m_videoCodecContextPtr->pix_fmt,
+									m_videoCodecContextPtr->width,
+									m_videoCodecContextPtr->height);
+
+						I_ASSERT(m_bitmapObjectCompPtr.IsValid());
+						if (CLibAvConverter::ConvertBitmap(*m_frameRgbPtr, GetFrameSize(), *m_bitmapObjectCompPtr)){
+							needVideoFrame = false;
+						}
+					}
+
+					continue;
+				}
+				else{
+					retVal = false;
+				}
+			}
+			else if (needAudioFrame && (m_packet.stream_index == m_audioStreamId)){
+				uint8_t* inputBuffer = (uint8_t*)av_malloc(m_bytesRemaining + FF_INPUT_BUFFER_PADDING_SIZE);
+				memcpy(inputBuffer, m_rawDataPtr, m_bytesRemaining);
+				memset(inputBuffer + m_bytesRemaining, 0, FF_INPUT_BUFFER_PADDING_SIZE);
+				// Decode the next chunk of data
+				int audioBufferSize = AVCODEC_MAX_AUDIO_FRAME_SIZE - audioBufferOffset;
+				int bytesDecoded = avcodec_decode_audio2(
+							m_audioCodecContextPtr,
+							m_audioBuffer + audioBufferOffset,
+							&audioBufferSize,
+							inputBuffer,
+							m_bytesRemaining);
+				av_free(inputBuffer);
+
+				// Was there an error?
+				if (bytesDecoded > 0){
+					audioBufferOffset += audioBufferSize;
+
+					m_bytesRemaining -= bytesDecoded;
+					m_rawDataPtr += bytesDecoded;
+
+					if (audioBufferOffset >= AVCODEC_MAX_AUDIO_FRAME_SIZE){
+						I_ASSERT(audioBufferOffset == AVCODEC_MAX_AUDIO_FRAME_SIZE);
+
+						I_ASSERT(m_audioSequenceCompPtr.IsValid());
+
+						istd::CChangeNotifier notifier(m_audioSequenceCompPtr.GetPtr());
+
+						if (m_audioSequenceCompPtr->CreateSequence(audioBufferSize)){
+							for (int i = 0; i < AVCODEC_MAX_AUDIO_FRAME_SIZE; ++i){
+								m_audioSequenceCompPtr->SetSample(i, 0, m_audioBuffer[i] / double(0x8000));
+							}
+
+							if (m_audioCodecContextPtr->sample_rate > 0){
+								m_audioSequenceCompPtr->SetSamplingPeriod(1.0 / m_audioCodecContextPtr->sample_rate);
+							}
+						}
+
+						needAudioFrame = false;
+					}
+
+					continue;
+				}
+				else{
+					retVal = false;
+				}
 			}
 
-			m_bytesRemaining -= bytesDecoded;
-			m_rawDataPtr += bytesDecoded;
-
-			// Did we finish the current frame? Then we can return
-			if (frameFinished != 0){
-				img_convert((AVPicture*)m_frameRgbPtr,
-							PIX_FMT_RGB32,
-							(AVPicture*)m_framePtr,
-							m_codecContextPtr->pix_fmt,
-							m_codecContextPtr->width,
-							m_codecContextPtr->height);
-
-				istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
-
-				return true;
-			}
+			av_free_packet(&m_packet);
+			m_packet.data = NULL;
 		}
 
-		// Read the next packet, skipping all packets that aren't for this
-		// stream
-		do{
-			// Free old packet
-			if (m_packet.data != NULL){
-				av_free_packet(&m_packet);
-			}
-
-			// Read new packet
-			if (av_read_frame(m_formatContextPtr, &m_packet) < 0){
-				return false;
-			}
-		} while (m_packet.stream_index != m_videoStreamId);
+		// Read new packet
+		if (av_read_frame(m_formatContextPtr, &m_packet) < 0){
+			return false;
+		}
 
 		m_bytesRemaining = m_packet.size;
 		m_rawDataPtr = m_packet.data;
 	}
+
+	return retVal;
 }
 
 

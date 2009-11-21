@@ -185,6 +185,10 @@
 				RelativePath="..\CMeasurementRange.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CWavSamplesLoaderComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -196,6 +200,10 @@
 			</File>
 			<File
 				RelativePath="..\CMeasurementRange.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CWavSamplesLoaderComp.h"
 				>
 			</File>
 			<File

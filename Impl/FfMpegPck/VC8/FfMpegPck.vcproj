@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib"
+				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib avutil.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 				GenerateDebugInformation="false"
@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib"
+				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib avutil.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 				GenerateDebugInformation="true"

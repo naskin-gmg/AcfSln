@@ -11,8 +11,9 @@ extern "C"{
 #include "icomp/CComponentBase.h"
 #include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorCompBase.h"
-
 #include "imm/IVideoController.h"
+
+#include "imeas/ISamplesSequence.h"
 
 
 namespace ilibav
@@ -40,9 +41,12 @@ public:
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);
+		I_ASSIGN(m_bitmapObjectCompPtr, "Bitmap", "Bitmap object where current bitmap is stored", false, "Bitmap");
+		I_ASSIGN(m_audioSequenceCompPtr, "AudioSequence", "Sample sequence object where current audio sample is stored", false, "AudioSequence");
 	I_END_COMPONENT();
 
 	CLibAvVideoDecoderComp();
+	virtual ~CLibAvVideoDecoderComp();
 
 	// reimplemented (icomp::IComponent)
 	void OnComponentCreated();
@@ -80,20 +84,20 @@ public:
 
 protected:
 	bool ReadNextFrame();
-	/**
-		Read parameters and open media file if needed.
-		\return true if no errors occured.
-	*/
-	bool ProcessParams(const iprm::IParamsSet* paramsPtr);
 
 private:
 	int m_videoStreamId;
+	int m_audioStreamId;
 	AVFormatContext* m_formatContextPtr;
-	AVCodecContext* m_codecContextPtr;
-	AVCodec* m_codecPtr;
+	AVCodecContext* m_videoCodecContextPtr;
+	AVCodecContext* m_audioCodecContextPtr;
+	AVCodec* m_videoCodecPtr;
+	AVCodec* m_audioCodecPtr;
 
 	AVFrame* m_framePtr;
 	AVFrame* m_frameRgbPtr;
+
+	int16_t* m_audioBuffer;
 
 	istd::TDelPtr<I_BYTE, true> m_imageBufferPtr;
 
@@ -102,6 +106,11 @@ private:
 	uint8_t* m_rawDataPtr;
 
 	istd::CString m_currentUrl;
+
+	I_REF(iimg::IBitmap, m_bitmapObjectCompPtr);
+	I_REF(imeas::ISamplesSequence, m_audioSequenceCompPtr);
+
+	int m_currentFrame;
 };
 
 
