@@ -37,7 +37,7 @@ public:
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
-	virtual int GetSamplesCount() const;
+	virtual int GetTimeSamplesCount() const;
 	virtual int GetChannelsCount() const;
 	virtual double GetSamplingPeriod() const;
 	virtual void SetSamplingPeriod(double value);
@@ -168,7 +168,7 @@ void TDiscrSamplesSequence<Element>::ResetSequence()
 
 
 template <typename Element>
-int TDiscrSamplesSequence<Element>::GetSamplesCount() const
+int TDiscrSamplesSequence<Element>::GetTimeSamplesCount() const
 {
 	return m_samplesCount;
 }
@@ -218,7 +218,7 @@ void TDiscrSamplesSequence<Element>::SetSample(int index, int channel, double va
 template <typename Element>
 bool TDiscrSamplesSequence<Element>::CopySequenceFrom(const ISamplesSequence& sequence)
 {
-	int samplesCount = sequence.GetSamplesCount();
+	int samplesCount = sequence.GetTimeSamplesCount();
 	int channelsCount = sequence.GetChannelsCount();
 	if (!CreateSequence(samplesCount, channelsCount)){
 		return false;
@@ -249,7 +249,7 @@ bool TDiscrSamplesSequence<Element>::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(channelsCount);
 	retVal = retVal && archive.EndTag(channelsCountTag);
 
-	int samplesCount = GetSamplesCount();
+	int samplesCount = GetTimeSamplesCount();
 
 	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values");
 	static iser::CArchiveTag channelsTag("Channels", "List of sample values");

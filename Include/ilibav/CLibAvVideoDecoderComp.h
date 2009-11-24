@@ -43,6 +43,7 @@ public:
 		I_REGISTER_INTERFACE(imm::IVideoController);
 		I_ASSIGN(m_bitmapObjectCompPtr, "Bitmap", "Bitmap object where current bitmap is stored", false, "Bitmap");
 		I_ASSIGN(m_audioSequenceCompPtr, "AudioSequence", "Sample sequence object where current audio sample is stored", false, "AudioSequence");
+		I_ASSIGN(m_autoAudioGrabLengthAttrPtr, "AutoAudioGrabLength", "If enabled, audio will be automatically grabbed", false, 1.0);
 	I_END_COMPONENT();
 
 	CLibAvVideoDecoderComp();
@@ -97,7 +98,9 @@ private:
 	AVFrame* m_framePtr;
 	AVFrame* m_frameRgbPtr;
 
-	int16_t* m_audioBuffer;
+	uint8_t* m_audioInputBuffer;
+	int16_t* m_audioOutputBuffer;
+	int m_audioBufferOffset;
 
 	istd::TDelPtr<I_BYTE, true> m_imageBufferPtr;
 
@@ -109,6 +112,7 @@ private:
 
 	I_REF(iimg::IBitmap, m_bitmapObjectCompPtr);
 	I_REF(imeas::ISamplesSequence, m_audioSequenceCompPtr);
+	I_ATTR(double, m_autoAudioGrabLengthAttrPtr);
 
 	int m_currentFrame;
 };

@@ -40,7 +40,7 @@ public:
 	/**
 		Get size of this raster sequence.
 	*/
-	virtual int GetSamplesCount() const = 0;
+	virtual int GetTimeSamplesCount() const = 0;
 
 	/**
 		Get number of color components.

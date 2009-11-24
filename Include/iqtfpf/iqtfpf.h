@@ -1,5 +1,5 @@
-#ifndef iqtipr_included
-#define iqtipr_included
+#ifndef iqtfpf_included
+#define iqtfpf_included
 
 
 #include "iqt/iqt.h"
@@ -8,14 +8,12 @@
 /**
 	This package contains Qt based implementations of File Processing Framework components.
 */
-
-
-namespace iqtipr
+namespace iqtfpf
 {
 
-} // namespace iqtipr
+} // namespace iqtfpf
 
 
-#endif // !iqtipr_included
+#endif // !iqtfpf_included
 
 

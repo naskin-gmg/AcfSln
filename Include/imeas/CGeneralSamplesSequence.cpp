@@ -42,7 +42,7 @@ void CGeneralSamplesSequence::ResetSequence()
 }
 
 
-int CGeneralSamplesSequence::GetSamplesCount() const
+int CGeneralSamplesSequence::GetTimeSamplesCount() const
 {
 	if (m_channelsCount > 0){
 		return int(m_samples.size() / m_channelsCount);
@@ -91,7 +91,7 @@ void CGeneralSamplesSequence::SetSample(int index, int channel, double value)
 
 bool CGeneralSamplesSequence::CopySequenceFrom(const ISamplesSequence& sequence)
 {
-	int samplesCount = sequence.GetSamplesCount();
+	int samplesCount = sequence.GetTimeSamplesCount();
 	int channelsCount = sequence.GetChannelsCount();
 	if (!CreateSequence(samplesCount, channelsCount)){
 		return false;
@@ -109,6 +109,99 @@ bool CGeneralSamplesSequence::CopySequenceFrom(const ISamplesSequence& sequence)
 }
 
 
+// reimplemented (imath::ISampledFunction2d)
+
+bool CGeneralSamplesSequence::CreateFunction(double* dataPtr, const ArgumentType& sizes)
+{
+	if (!sizes.IsSizeEmpty()){
+		int elementsCount = sizes.GetProductVolume();
+
+		m_samples.resize(elementsCount);
+
+		memcpy(&m_samples[0], dataPtr, elementsCount * sizeof(double));
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+int CGeneralSamplesSequence::GetSamplesCount() const
+{
+	return GetTimeSamplesCount() * GetChannelsCount();
+}
+
+
+int CGeneralSamplesSequence::GetGridSize(int dimensionIndex) const
+{
+	if (dimensionIndex == 0){
+		return GetTimeSamplesCount();
+	}
+	else if (dimensionIndex == 1){
+		return GetChannelsCount();
+	}
+	else{
+		return 0;
+	}
+}
+
+
+istd::CRange CGeneralSamplesSequence::GetLogicalRange(int dimensionIndex) const
+{
+	if (dimensionIndex == 0){
+		return istd::CRange(0, GetSamplingPeriod() * GetTimeSamplesCount());
+	}
+	else if (dimensionIndex == 1){
+		return istd::CRange(0, 1);
+	}
+	else{
+		return istd::CRange::GetInvalid();
+	}
+}
+
+
+istd::CRange CGeneralSamplesSequence::GetResultValueRange(int /*dimensionIndex*/, int /*resultDimension*/) const
+{
+	return istd::CRange(-1, 1);
+}
+
+
+// reimplemented (imath::TIMathFunction)
+
+bool CGeneralSamplesSequence::GetValueAt(const ArgumentType& argument, ResultType& result) const
+{
+	int sampleIndex = argument[0];
+	int channelIndex = argument[1];
+	if ((sampleIndex >= 0) && (sampleIndex < GetTimeSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
+		result[0] = GetSample(sampleIndex, channelIndex);
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+CGeneralSamplesSequence::ResultType CGeneralSamplesSequence::GetValueAt(const ArgumentType& argument) const
+{
+	CGeneralSamplesSequence::ResultType retVal;
+
+	int sampleIndex = argument[0];
+	int channelIndex = argument[1];
+	if ((sampleIndex >= 0) && (sampleIndex < GetTimeSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
+		retVal[0] = GetSample(sampleIndex, channelIndex);
+	}
+	else{
+		retVal[0] = 0;
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CGeneralSamplesSequence::Serialize(iser::IArchive& archive)
@@ -121,7 +214,7 @@ bool CGeneralSamplesSequence::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(channelsCount);
 	retVal = retVal && archive.EndTag(channelsCountTag);
 
-	int samplesCount = GetSamplesCount();
+	int samplesCount = GetTimeSamplesCount();
 
 	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values");
 	static iser::CArchiveTag channelsTag("Channels", "List of sample values");

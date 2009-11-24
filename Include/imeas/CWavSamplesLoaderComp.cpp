@@ -4,6 +4,9 @@
 // STL includes
 #include <fstream>
 
+// ACF includes
+#include "istd/CRange.h"
+
 #include "imeas/ISamplesSequence.h"
 
 
@@ -88,7 +91,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 	I_ASSERT(sequencePtr != NULL);
 
 	if (sequencePtr != NULL){
-		int samplesCount = sequencePtr->GetSamplesCount();
+		int samplesCount = sequencePtr->GetTimeSamplesCount();
 		int channelsCount = sequencePtr->GetChannelsCount();
 		double samplingPeriod = sequencePtr->GetSamplingPeriod();
 
@@ -117,12 +120,23 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 
 		fileStream.write((const char*)&dataPrefix, sizeof(dataPrefix));
 
-		I_DWORD maxValue = (1 << (BITS_PER_SAMPLE - 1)) - 1;
+		istd::CRange range = istd::CRange::GetInvalid();
 		for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-				I_SDWORD sample = I_SDWORD(sequencePtr->GetSample(sampleIndex, channelIndex) * maxValue);
+				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
 
-				fileStream.write((const char*)&sample, BYTES_PER_SAMPLE);
+				range.Unite(sample);
+			}
+		}
+
+		double amplitude = pow(2.0, BITS_PER_SAMPLE) - I_BIG_EPSILON;
+		for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
+			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+
+				I_SDWORD rawSample = I_SDWORD(range.GetAlphaFromValue(sample) * amplitude);
+
+				fileStream.write((const char*)&rawSample, BYTES_PER_SAMPLE);
 			}
 		}
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1216
+          1218
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="34">
+  <PositionMap count="37">
     <Element>
       <ComponentName>
         AcquisitionFramework
@@ -43,10 +43,10 @@
         Audio
       </ComponentName>
       <X>
-        849.942
+        853.942
       </X>
       <X>
-        -253.144
+        -383.144
       </X>
     </Element>
     <Element>
@@ -62,21 +62,10 @@
     </Element>
     <Element>
       <ComponentName>
-        AudioDock
-      </ComponentName>
-      <X>
-        -69
-      </X>
-      <X>
-        -124
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         AudioPersistenceGui
       </ComponentName>
       <X>
-        594.321
+        593.321
       </X>
       <X>
         -251.314
@@ -142,10 +131,10 @@
         ComposedGui
       </ComponentName>
       <X>
-        339.507
+        374
       </X>
       <X>
-        -232.343
+        -249
       </X>
     </Element>
     <Element>
@@ -168,6 +157,17 @@
       </X>
       <X>
         -196
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        DockWidgetGui
+      </ComponentName>
+      <X>
+        139.098
+      </X>
+      <X>
+        -254.902
       </X>
     </Element>
     <Element>
@@ -318,10 +318,10 @@
         PersistenceDock
       </ComponentName>
       <X>
-        210.723
+        111.723
       </X>
       <X>
-        -120.09
+        -188.09
       </X>
     </Element>
     <Element>
@@ -329,10 +329,21 @@
         PersistenceGui
       </ComponentName>
       <X>
-        375.507
+        339.507
       </X>
       <X>
-        -218.343
+        -232.343
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SamplesSequenceView
+      </ComponentName>
+      <X>
+        152
+      </X>
+      <X>
+        -387
       </X>
     </Element>
     <Element>
@@ -359,6 +370,17 @@
     </Element>
     <Element>
       <ComponentName>
+        SurfaceView
+      </ComponentName>
+      <X>
+        482
+      </X>
+      <X>
+        -384
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         VersionInfo
       </ComponentName>
       <X>
@@ -377,6 +399,17 @@
       </X>
       <X>
         -703.526
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ViewBinder
+      </ComponentName>
+      <X>
+        594
+      </X>
+      <X>
+        -494
       </X>
     </Element>
     <Element>

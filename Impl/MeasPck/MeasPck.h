@@ -29,6 +29,7 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CGeneralSamplesSequence,
 			imeas::ISamplesSequence,
+			imath::ISampledFunction2d,
 			iser::ISerializable,
 			istd::IChangeable> > GeneralSamplesSequence;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<

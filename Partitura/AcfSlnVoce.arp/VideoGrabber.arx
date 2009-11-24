@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1211
+          1216
         </Number>
         <Description>
           ACF
@@ -115,7 +115,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               AudioSequence
@@ -125,6 +125,22 @@
             </Type>
             <ExportId>
               CurrentAudio
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AutoAudioGrabLength
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              AutoAudioGrabLength
             </ExportId>
             <Data>
               <IsEnabled>
