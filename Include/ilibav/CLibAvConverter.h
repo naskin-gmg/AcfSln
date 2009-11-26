@@ -22,7 +22,15 @@ namespace ilibav
 class CLibAvConverter
 {
 public:
-	static bool ConvertBitmap(const AVFrame& avFrame, const istd::CIndex2d& size, iimg::IBitmap& result);
+	static bool ConvertBitmap(const AVFrame& avFrame, const istd::CIndex2d& size, PixelFormat frameFormat, iimg::IBitmap& result);
+
+protected:
+	struct Rgba{
+		I_BYTE r;
+		I_BYTE g;
+		I_BYTE b;
+		I_BYTE a;
+	};
 };
 
 

@@ -129,12 +129,13 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 			}
 		}
 
-		double amplitude = pow(2.0, BITS_PER_SAMPLE) - I_BIG_EPSILON;
+		double offset = pow(2.0, BITS_PER_SAMPLE - 1);
+		double amplitude = pow(2.0, BITS_PER_SAMPLE - 1) - I_BIG_EPSILON;
 		for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
 
-				I_SDWORD rawSample = I_SDWORD(range.GetAlphaFromValue(sample) * amplitude);
+				I_SDWORD rawSample = I_SDWORD(range.GetAlphaFromValue(sample) * amplitude + offset);
 
 				fileStream.write((const char*)&rawSample, BYTES_PER_SAMPLE);
 			}

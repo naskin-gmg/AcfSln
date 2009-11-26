@@ -4,11 +4,6 @@
 #include "ilibav/CLibAvConverter.h"
 
 
-// LIBAV includes
-extern "C"{
-#include "libavcodec/imgconvert.h"
-}
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iprm/IFileNameParam.h"
@@ -40,6 +35,8 @@ CLibAvVideoDecoderComp::CLibAvVideoDecoderComp()
 
 	m_audioInputBuffer = (uint8_t*)av_malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE + FF_INPUT_BUFFER_PADDING_SIZE);
 	m_audioOutputBuffer = (int16_t*)av_malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
+
+	m_ignoreFirstAudioFrame = false;
 }
 
 
@@ -180,13 +177,13 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 			if (m_videoCodecPtr == NULL){
 				continue;
 			}
-/*
+
 			// Inform the codec that we can handle truncated bitstreams -- i.e.,
 			// bitstreams where frame boundaries can fall in the middle of packets
 			if (m_videoCodecPtr->capabilities & CODEC_CAP_TRUNCATED){
 				m_videoCodecContextPtr->flags |= CODEC_FLAG_TRUNCATED;
 			}
-*/
+
 			// Open codec
 			if (avcodec_open(m_videoCodecContextPtr, m_videoCodecPtr) < 0){
 				SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("Cannot open codec for file ") + url);
@@ -203,15 +200,16 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 				continue;
 			}
 
-/*			// Inform the codec that we can handle truncated bitstreams -- i.e.,
+			// Inform the codec that we can handle truncated bitstreams -- i.e.,
 			// bitstreams where frame boundaries can fall in the middle of packets
 			if (m_audioCodecPtr->capabilities & CODEC_CAP_TRUNCATED){
 				codecContextPtr->flags |= CODEC_FLAG_TRUNCATED;
 			}
-*/
+
 			// Open codec
 			if (avcodec_open(codecContextPtr, m_audioCodecPtr) >= 0){
 				m_audioCodecContextPtr = codecContextPtr;
+				m_ignoreFirstAudioFrame = false;
 
 				if (m_audioSequenceCompPtr.IsValid() && m_autoAudioGrabLengthAttrPtr.IsValid()){
 					if (m_audioCodecContextPtr->sample_rate > 0){
@@ -400,6 +398,7 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 			ReadNextFrame();
 
 			m_currentFrame = frameIndex;
+			m_ignoreFirstAudioFrame = true;
 
 			return true;
 		}
@@ -426,6 +425,7 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 	bool needAudioFrame = (m_audioStreamId >= 0) && (m_audioCodecContextPtr != NULL);
 
 	int samplesOffset = 0;
+	double lastShift = 0;
 
 	istd::CChangeNotifier notifier(m_audioSequenceCompPtr.GetPtr());
 
@@ -455,15 +455,12 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 
 					// Did we finish the current frame? Then we can return
 					if (frameFinished != 0){
-						img_convert((AVPicture*)m_frameRgbPtr,
-									PIX_FMT_RGB32,
-									(AVPicture*)m_framePtr,
-									m_videoCodecContextPtr->pix_fmt,
-									m_videoCodecContextPtr->width,
-									m_videoCodecContextPtr->height);
-
 						I_ASSERT(m_bitmapObjectCompPtr.IsValid());
-						if (CLibAvConverter::ConvertBitmap(*m_frameRgbPtr, GetFrameSize(), *m_bitmapObjectCompPtr)){
+						if (CLibAvConverter::ConvertBitmap(
+									*m_framePtr,
+									GetFrameSize(),
+									m_videoCodecContextPtr->pix_fmt,
+									*m_bitmapObjectCompPtr)){
 							needVideoFrame = false;
 						}
 					}
@@ -522,69 +519,80 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 					m_bytesRemaining -= bytesDecoded;
 					m_rawDataPtr += bytesDecoded;
 
-					int channelsCount = m_audioCodecContextPtr->channels;
+					if (!m_ignoreFirstAudioFrame){
+						int channelsCount = m_audioCodecContextPtr->channels;
 
-					int remainSamples = m_audioSequenceCompPtr->GetTimeSamplesCount() - samplesOffset;
+						int remainSamples = m_audioSequenceCompPtr->GetTimeSamplesCount() - samplesOffset;
 
-					switch (m_audioCodecContextPtr->sample_fmt){
-					case SAMPLE_FMT_U8:
-						{
-							I_BYTE* samplesPtr = (I_BYTE*)m_audioOutputBuffer;
-							int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(channelsCount * sizeof(I_BYTE)));
-							for (int i = 0; i < samplesToCopy; ++i){
-								m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 127.5 - 1);
+						switch (m_audioCodecContextPtr->sample_fmt){
+						case SAMPLE_FMT_U8:
+							{
+								I_BYTE* samplesPtr = (I_BYTE*)m_audioOutputBuffer;
+								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_BYTE)));
+								for (int i = 0; i < samplesToCopy; ++i){
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 127.5 - 1 + lastShift);
+								}
+								lastShift += samplesPtr[samplesToCopy - 1] / 127.5 - 1;
+								samplesOffset += samplesToCopy / channelsCount;
 							}
-							samplesOffset += samplesToCopy / channelsCount;
-						}
-						break;
+							break;
 
-					case SAMPLE_FMT_S16:
-						{
-							I_SWORD* samplesPtr = (I_SWORD*)m_audioOutputBuffer;
-							int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(channelsCount * sizeof(I_SWORD)));
-							for (int i = 0; i < samplesToCopy; ++i){
-								m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 32768.0);
+						case SAMPLE_FMT_S16:
+							{
+								I_SWORD* samplesPtr = (I_SWORD*)m_audioOutputBuffer;
+								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_SWORD)));
+								for (int i = 0; i < samplesToCopy; ++i){
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 32768.0 + lastShift);
+									lastShift *= 0.999;
+								}
+								lastShift += samplesPtr[samplesToCopy - 1] / 32768.0;
+								samplesOffset += samplesToCopy / channelsCount;
 							}
-							samplesOffset += samplesToCopy / channelsCount;
-						}
-						break;
+							break;
 
-					case SAMPLE_FMT_S32:
-						{
-							I_SDWORD* samplesPtr = (I_SDWORD*)m_audioOutputBuffer;
-							int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(channelsCount * sizeof(I_SDWORD)));
-							for (int i = 0; i < samplesToCopy; ++i){
-								m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, double(samplesPtr[i]) / 0x80000000);
+						case SAMPLE_FMT_S32:
+							{
+								I_SDWORD* samplesPtr = (I_SDWORD*)m_audioOutputBuffer;
+								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_SDWORD)));
+								for (int i = 0; i < samplesToCopy; ++i){
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, double(samplesPtr[i]) / 0x80000000 + lastShift);
+								}
+								lastShift += double(samplesPtr[samplesToCopy - 1]) / 0x80000000;
+								samplesOffset += samplesToCopy / channelsCount;
 							}
-							samplesOffset += samplesToCopy / channelsCount;
-						}
-						break;
+							break;
 
-					case SAMPLE_FMT_FLT:
-						{
-							float* samplesPtr = (float*)m_audioOutputBuffer;
-							int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(channelsCount * sizeof(float)));
-							for (int i = 0; i < samplesToCopy; ++i){
-								m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i]);
+						case SAMPLE_FMT_FLT:
+							{
+								float* samplesPtr = (float*)m_audioOutputBuffer;
+								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(float)));
+								for (int i = 0; i < samplesToCopy; ++i){
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] + lastShift);
+								}
+								lastShift += samplesPtr[samplesToCopy - 1];
+								samplesOffset += samplesToCopy / channelsCount;
 							}
-							samplesOffset += samplesToCopy / channelsCount;
-						}
-						break;
+							break;
 
-					case SAMPLE_FMT_DBL:
-						{
-							double* samplesPtr = (double*)m_audioOutputBuffer;
-							int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(channelsCount * sizeof(double)));
-							for (int i = 0; i < samplesToCopy; ++i){
-								m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i]);
+						case SAMPLE_FMT_DBL:
+							{
+								double* samplesPtr = (double*)m_audioOutputBuffer;
+								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(double)));
+								for (int i = 0; i < samplesToCopy; ++i){
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] + lastShift);
+								}
+								lastShift += samplesPtr[samplesToCopy - 1];
+								samplesOffset += samplesToCopy / channelsCount;
 							}
-							samplesOffset += samplesToCopy / channelsCount;
+							break;
 						}
-						break;
+
+						if (samplesOffset >= m_audioSequenceCompPtr->GetTimeSamplesCount()){
+							needAudioFrame = false;
+						}
 					}
-
-					if (samplesOffset >= m_audioSequenceCompPtr->GetTimeSamplesCount()){
-						needAudioFrame = false;
+					else{
+						m_ignoreFirstAudioFrame = false;
 					}
 
 					continue;

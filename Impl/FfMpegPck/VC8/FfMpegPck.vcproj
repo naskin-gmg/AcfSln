@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib avutil.lib"
+				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 				GenerateDebugInformation="false"
@@ -119,7 +119,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib avcodec.lib avdevice.lib avformat.lib avutil.lib"
+				AdditionalDependencies="AcfStd.lib swscale-0.lib avdevice-52.lib avformat-52.lib avcodec-52.lib avutil-49.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC8&quot;;&quot;$(FFMPEGDIR)/lib&quot;"
 				GenerateDebugInformation="true"

@@ -4,7 +4,9 @@
 
 // LIBAV includes
 extern "C"{
+#define inline _inline
 #include "libavformat/avformat.h"
+#undef inline
 }
 
 // ACF includes
@@ -100,7 +102,7 @@ private:
 
 	uint8_t* m_audioInputBuffer;
 	int16_t* m_audioOutputBuffer;
-	int m_audioBufferOffset;
+	bool m_ignoreFirstAudioFrame;
 
 	istd::TDelPtr<I_BYTE, true> m_imageBufferPtr;
 

@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -151,7 +151,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(FFMPEGDIR)/include&quot;;&quot;$(FFMPEGDIR)/msinttypes&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
