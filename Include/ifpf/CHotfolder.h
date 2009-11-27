@@ -22,6 +22,7 @@ class CHotfolder: public ifpf::IHotfolder, virtual public iser::ISerializable
 public:
 	// reimplemented (ifpf::IHotfolder)
 	virtual int GetFileState(const istd::CString& fileName) const;
+	virtual int GetHotfolderState() const;
 
 	// reimplemented (ibase::IFileListProvider)
 	virtual istd::CStringList GetFileList() const;
@@ -32,10 +33,12 @@ public:
 protected:
 	virtual istd::CStringList GetFilesForState(int state) const;
 
-private:
+protected:
 	istd::CStringList m_processedFiles;
 	istd::CStringList m_abortedFiles;
 	istd::CStringList m_waitingFiles;
+
+	int m_hotfolderState;
 };
 
 

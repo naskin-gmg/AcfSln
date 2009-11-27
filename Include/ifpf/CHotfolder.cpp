@@ -15,6 +15,12 @@ int CHotfolder::GetFileState(const istd::CString& fileName) const
 }
 
 
+int CHotfolder::GetHotfolderState() const
+{
+	return m_hotfolderState;
+}
+
+
 // reimplemented (ibase::IFileListProvider)
 
 istd::CStringList CHotfolder::GetFileList() const

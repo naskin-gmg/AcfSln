@@ -115,9 +115,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+    Parameter for dynamic directory list
   </Description>
   <Keywords>
-    
+    Directory Parameter Hotfolder File
   </Keywords>
 </Acf>

@@ -1,12 +1,19 @@
 #include "iqtfpf/CHotfolderComp.h"
 
 
+// Qt includes
+#include <QApplication>
+
+
 // ACF includes
 #include "istd/CStaticServicesProvider.h"
 
 #include "isys/IFileSystem.h"
+#include "isys/CSectionBlocker.h"
 
 #include "iprm/IFileNameParam.h"
+
+#include "iqt/CTimer.h"
 
 
 namespace iqtfpf
@@ -20,8 +27,8 @@ namespace iqtfpf
 istd::CString CHotfolderComp::GetFileName(const istd::CString& inputFileName) const
 {
 	std::string paramId;
-	if (m_outputDirectoryIdAttrPtr.IsValid()){
-		paramId = (*m_outputDirectoryIdAttrPtr).ToString();
+	if (m_outputDirectoryParamsIdAttrPtr.IsValid()){
+		paramId = (*m_outputDirectoryParamsIdAttrPtr).ToString();
 	}
 
 	const iprm::IFileNameParam* outputDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(m_paramsSetCompPtr->GetParameter(paramId));
@@ -60,6 +67,24 @@ ifpf::IMonitoringSession* CHotfolderComp::GetSession(const ifpf::IDirectoryMonit
 }
 
 
+// reimplemeneted (icomp::IComponent)
+
+void CHotfolderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	SynchronizeWithModel();
+}
+
+
+void CHotfolderComp::OnComponentDestroyed()
+{
+	BaseClass::OnComponentDestroyed();
+
+	StopHotfolder();
+}
+
+
 
 // protected methods
 
@@ -88,20 +113,79 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 				continue;
 			}
 		}
-
 		istd::CString outputFilePath = m_fileNamingStrategyCompPtr->GetFileName(inputFilePath);
 
-		istd::CString message = istd::CString("Process file: ") + outputFilePath;
-		SendInfoMessage(0, message, "Hotfolder");
+		QueueItem newProcessingItem;
+		newProcessingItem.inputFile = inputFilePath;
+		newProcessingItem.outputFile = outputFilePath;
 
-		if (!m_fileConvertCompPtr->CopyFile(inputFilePath, outputFilePath, m_paramsSetCompPtr.GetPtr())){
-			istd::CString message = istd::CString("Processing of ") + outputFilePath + "failed";
+		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
+		
+		m_processingQueue.push_front(newProcessingItem);
+	}
+
+	return true;
+}
+
+
+// reimplemented (QThread)
+
+void CHotfolderComp::run()
+{
+	while (!m_finishThread){
+		m_processingQueueLock.Enter();
+		if (m_processingQueue.empty()){
+			m_processingQueueLock.Leave();
+
+			msleep(50);
+			continue;
+		}
+
+		QueueItem processingItem = m_processingQueue.back();
+		m_processingQueue.pop_back();
+			
+		m_processingQueueLock.Leave();
+		
+		isys::CSectionBlocker parameterLock(&m_parameterLock);
+
+		if (!m_fileConvertCompPtr->CopyFile(processingItem.inputFile, processingItem.outputFile, m_runParameterPtr.GetPtr())){
+			istd::CString message = istd::CString("Processing of ") + processingItem.outputFile + "failed";
 
 			SendErrorMessage(0, message, "Hotfolder");
 		}
 	}
+}
 
-	return true;
+
+// private methods
+
+void CHotfolderComp::StartHotfolder()
+{
+	m_finishThread = false;
+
+	BaseClass3::start();
+}
+
+
+void CHotfolderComp::StopHotfolder()
+{
+	m_finishThread = false;
+
+	// wait for 30 seconds for finishing of thread: 
+	iqt::CTimer timer;
+	while (timer.GetElapsed() < 30 && BaseClass3::isRunning()){
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	}
+
+	if (BaseClass3::isRunning()){
+		BaseClass3::terminate();
+	}
+}
+
+
+void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
+{
+	
 }
 
 

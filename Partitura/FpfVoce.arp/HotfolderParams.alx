@@ -153,7 +153,7 @@
         InputDirectories
       </ComponentName>
       <X>
-        -8
+        -9
       </X>
       <X>
         -197
@@ -167,7 +167,7 @@
         -258
       </X>
       <X>
-        -82
+        -83
       </X>
     </Element>
     <Element>
@@ -208,7 +208,7 @@
         OutputDirectories
       </ComponentName>
       <X>
-        203
+        204
       </X>
       <X>
         -89
