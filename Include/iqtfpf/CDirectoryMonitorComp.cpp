@@ -124,6 +124,12 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 {
 	StopObserverThread();
 
+	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
+		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+
+		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+	}
+
 	BaseClass::OnComponentDestroyed();
 }
 

@@ -19,7 +19,6 @@
 
 // AcfSln includes
 #include "ifpf/IFileNamingStrategy.h"
-#include "ifpf/IHotfolderParams.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CMonitoringSession.h"
 

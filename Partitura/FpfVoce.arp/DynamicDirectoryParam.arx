@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1225
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <ElementsList count="2">
+    <Element>
+      <Id>
+        DirectoryParam
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        DirectoryParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DirectoryParamsManager
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ParamsManager
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ParamsSetFactory
+            </Id>
+            <Type>
+              icomp::CFactoryAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryParam
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+  </ElementsList>
+  <ExportedInterfaces count="4">
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        DirectoryParamsManager
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsManager
+      </InterfaceId>
+      <ComponentId>
+        DirectoryParamsManager
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        DirectoryParamsManager
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        DirectoryParamsManager
+      </ComponentId>
+    </Interface>
+  </ExportedInterfaces>
+  <ExportedComponents count="0">
+  </ExportedComponents>
+  <Description>
+    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+  </Description>
+  <Keywords>
+    
+  </Keywords>
+</Acf>

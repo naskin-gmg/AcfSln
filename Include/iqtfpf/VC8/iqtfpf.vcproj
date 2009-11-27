@@ -200,6 +200,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderWorkflowGuiComp.cpp"
 				>
 			</File>
@@ -223,6 +231,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderGuiComp.h"
 				>
 			</File>
 			<File
@@ -259,11 +271,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CHotfolderWorkflowGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CHotfolderGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CHotfolderParamsGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -272,6 +296,10 @@
 			>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderGuiComp.ui"
 				>
 			</File>
 		</Filter>
