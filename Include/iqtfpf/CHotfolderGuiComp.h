@@ -3,7 +3,13 @@
 
 
 // ACF includes
+#include "iproc/IProgressManager.h"
+
+#include "idoc/ICommandsProvider.h"
+
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/CHierarchicalCommand.h"
+#include "iqtgui/CGuiComponentDialog.h"
 
 
 // AcfSln includes
@@ -16,9 +22,9 @@ namespace iqtfpf
 {
 
 
-class CHotfolderGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CHotfolderGuiComp,
-			ifpf::IHotfolder>
+class CHotfolderGuiComp:
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolder>,
+			virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -28,16 +34,38 @@ public:
 				ifpf::IHotfolder> BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
+		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
+		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
+		I_ASSIGN(m_settingsGuiCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
+		I_ASSIGN(m_settingsObserverCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
 	I_END_COMPONENT;
+
+	// reimplemented (idoc::ICommandsProvider)
+	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
+	// reimplemented TGuiObserverWrap
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 
 protected Q_SLOTS:
+	void OnSettings();
+
+private:
+	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
+	I_REF(imod::IObserver, m_settingsObserverCompPtr);
+
+	iqtgui::CHierarchicalCommand m_hotfolderCommands;
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
 };
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1225
+          1228
         </Number>
         <Description>
           ACF
@@ -39,28 +39,7 @@
     </Element>
     <Element>
       <Id>
-        InputDirectories
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        DynamicDirectoryParam
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InputParams
+        HotfolderParams
       </Id>
       <PackageId>
         BasePck
@@ -135,6 +114,27 @@
     </Element>
     <Element>
       <Id>
+        InputDirectories
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        DynamicDirectoryParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         OutputDirectories
       </Id>
       <PackageId>
@@ -155,13 +155,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        InputParams
+        HotfolderParams
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        HotfolderParams
       </ComponentId>
     </Interface>
     <Interface>
@@ -169,7 +177,7 @@
         iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        InputParams
+        HotfolderParams
       </ComponentId>
     </Interface>
     <Interface>
@@ -177,7 +185,7 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        InputParams
+        HotfolderParams
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

@@ -23,7 +23,6 @@
 #include "ifpf/IFileNamingStrategy.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CHotfolder.h"
-#include "ifpf/CMonitoringSession.h"
 
 
 namespace iqtfpf
@@ -34,7 +33,7 @@ namespace iqtfpf
 	Hotfolder representation.
 */
 class CHotfolderComp:
-			public QThread,
+			protected QThread,
 			public ibase::CLoggerComponentBase,
 			virtual public ifpf::IFileNamingStrategy,
 			virtual public ifpf::IMonitoringSessionManager,
@@ -62,9 +61,12 @@ public:
 	// reimplemented (ifpf::IMonitoringSessionManager)
 	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
 
-	// reimplemeneted (icomp::IComponent)
+	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
+
+	// reimplemented (istd::IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 protected:
 	virtual bool OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
@@ -107,16 +109,14 @@ private:
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
 	I_REF(ifpf::IFileNamingStrategy, m_fileNamingStrategyCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
-	I_FACT(	ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
+	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
 
 	I_ATTR(istd::CString, m_inputPathParamsManagerIdAttrPtr);
 	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
 
 	DirectoryMonitorsMap m_directoryMonitorsMap;
-	MonitoringSessionsMap m_monitoringSessionsMap;
 
 	iqt::CCriticalSection m_parameterLock;
 	iqt::CCriticalSection m_processingQueueLock;
@@ -125,6 +125,7 @@ private:
 	{
 		istd::CString inputFile;
 		istd::CString outputFile;
+		int processingState;
 	};
 
 	typedef std::list<QueueItem> ItemQueue;

@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderLoaderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
@@ -247,6 +251,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderLoaderComp.h"
 				>
 			</File>
 			<File

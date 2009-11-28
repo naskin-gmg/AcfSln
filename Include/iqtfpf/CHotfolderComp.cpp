@@ -12,6 +12,7 @@
 #include "isys/CSectionBlocker.h"
 
 #include "iprm/IFileNameParam.h"
+#include "iprm/IParamsManager.h"
 
 #include "iqt/CTimer.h"
 
@@ -73,7 +74,7 @@ void CHotfolderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	SynchronizeWithModel();
+	BaseClass2::SetParams(m_paramsSetCompPtr.GetPtr());
 }
 
 
@@ -82,6 +83,14 @@ void CHotfolderComp::OnComponentDestroyed()
 	BaseClass::OnComponentDestroyed();
 
 	StopHotfolder();
+}
+
+
+// reimplemented (istd::IChangeable)
+
+void CHotfolderComp::OnEndChanges(int /*changeFlags*/, istd::IPolymorphic* /*changeParamsPtr*/)
+{
+	SynchronizeWithModel();
 }
 
 
@@ -153,6 +162,8 @@ void CHotfolderComp::run()
 
 			SendErrorMessage(0, message, "Hotfolder");
 		}
+
+		msleep(10);
 	}
 }
 
@@ -185,7 +196,38 @@ void CHotfolderComp::StopHotfolder()
 
 void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 {
-	
+	I_ASSERT(m_inputPathParamsManagerIdAttrPtr.IsValid());
+	I_ASSERT(m_paramsSetCompPtr.IsValid());
+
+	// Initialize the directory monitoring:
+	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		const iprm::IParamsManager* directoryParamsManagerPtr = 
+					dynamic_cast<const iprm::IParamsManager*>(m_paramsSetCompPtr->GetParameter((*m_inputPathParamsManagerIdAttrPtr).ToString()));
+		if (directoryParamsManagerPtr != NULL){			
+			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
+			for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
+				iprm::IParamsSet* inputDirectoryParamPtr = directoryParamsManagerPtr->GetParamsSet(inputIndex);
+				I_ASSERT(inputDirectoryParamPtr != NULL);
+
+				const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
+				I_ASSERT(monitoringDirectoryPtr != NULL);
+				I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
+
+				istd::CString monitoringDirectoryPath = monitoringDirectoryPtr->GetPath();
+
+				// create monitor:
+				istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
+				if (monitorCompPtr.IsValid()){
+					ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
+					if (directoryMonitorPtr != NULL){
+						m_directoryMonitorsMap[monitoringDirectoryPath] = directoryMonitorPtr;
+					
+						monitorCompPtr.PopPtr();
+					}
+				}
+			}
+		}
+	}
 }
 
 

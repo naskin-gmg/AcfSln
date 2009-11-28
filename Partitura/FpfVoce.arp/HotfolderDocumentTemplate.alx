@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1220
+          1228
         </Number>
         <Description>
           ACF
@@ -15,16 +15,49 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="6">
+    <Element>
+      <ComponentName>
+        Hotfolder
+      </ComponentName>
+      <X>
+        34
+      </X>
+      <X>
+        241
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         HotfolderDocumentTemplate
       </ComponentName>
       <X>
-        9
+        5
       </X>
       <X>
         87
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGui
+      </ComponentName>
+      <X>
+        280
+      </X>
+      <X>
+        236
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderLoader
+      </ComponentName>
+      <X>
+        -202
+      </X>
+      <X>
+        239
       </X>
     </Element>
     <Element>
@@ -47,17 +80,6 @@
       </X>
       <X>
         249
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderLoader
-      </ComponentName>
-      <X>
-        -252
-      </X>
-      <X>
-        253
       </X>
     </Element>
   </PositionMap>

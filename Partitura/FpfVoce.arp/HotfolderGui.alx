@@ -15,38 +15,49 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        DirectoryMonitor
-      </ComponentName>
-      <X>
-        168.586
-      </X>
-      <X>
-        127
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileProcessing
-      </ComponentName>
-      <X>
-        -264.74
-      </X>
-      <X>
-        3.89949
-      </X>
-    </Element>
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         Hotfolder
       </ComponentName>
       <X>
-        -36.0624
+        58
       </X>
       <X>
-        1.41421
+        244
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderDocumentTemplate
+      </ComponentName>
+      <X>
+        0
+      </X>
+      <X>
+        94
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGui
+      </ComponentName>
+      <X>
+        -187
+      </X>
+      <X>
+        98
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderLoader
+      </ComponentName>
+      <X>
+        -250
+      </X>
+      <X>
+        237
       </X>
     </Element>
     <Element>
@@ -54,10 +65,32 @@
         HotfolderParams
       </ComponentName>
       <X>
-        164.586
+        3
       </X>
       <X>
-        -102.414
+        240
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderParamsGui
+      </ComponentName>
+      <X>
+        -187
+      </X>
+      <X>
+        -47
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProgressManager
+      </ComponentName>
+      <X>
+        43
+      </X>
+      <X>
+        94
       </X>
     </Element>
   </PositionMap>

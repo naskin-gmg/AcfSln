@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
     <Element>
       <Id>
-        DirectoryParamsSet
+        HotfolderGui
       </Id>
       <PackageId>
-        BasePck
+        QtFpfPck
       </PackageId>
       <ComponentId>
-        ComposedParamsSet
+        HotfolderGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -36,10 +36,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Parameters
+              HotfolderParametersEditor
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -48,19 +48,17 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  DirectoryPath
-                </Value>
-              </Values>
+              <Value>
+                HotfolderParamsGui
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ParametersId
+              ProgressManager
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -69,11 +67,9 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  DirectoryPath
-                </Value>
-              </Values>
+              <Value>
+                ProgressManager
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -81,13 +77,34 @@
     </Element>
     <Element>
       <Id>
-        DirectoryPath
+        HotfolderParamsGui
       </Id>
       <PackageId>
-        BasePck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        FileNameParam
+        HotfolderParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProgressManager
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ProgressManagerGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -99,10 +116,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              PathType
+              Description
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -112,7 +129,7 @@
                 true
               </IsEnabled>
               <Value>
-                2
+                Overall Progress
               </Value>
             </Data>
           </AttributeInfo>
@@ -120,46 +137,38 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        imod::IModel
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsSet
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IParamsSet
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsSet
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iser::ISerializable
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsSet
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        DirectoryParamsSet
+        HotfolderGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Directory path
+    
   </Description>
   <Keywords>
-    Directory Parameter Path File
+    
   </Keywords>
 </Acf>

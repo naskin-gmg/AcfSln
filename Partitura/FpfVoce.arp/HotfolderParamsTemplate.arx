@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1228
+          1220
         </Number>
         <Description>
           ACF
@@ -16,43 +16,6 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="4">
-    <Element>
-      <Id>
-        Hotfolder
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        Hotfolder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
     <Element>
       <Id>
         HotfolderDocumentTemplate
@@ -86,7 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder
+                HotfolderParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -181,7 +144,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderGui
+                HotfolderParamsGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -190,13 +153,34 @@
     </Element>
     <Element>
       <Id>
-        HotfolderGui
+        HotfolderParams
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderGui
+        HotfolderParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderParamsGui
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -214,7 +198,7 @@
         HotfolderLoader
       </Id>
       <PackageId>
-        FpfPck
+        FpfVoce
       </PackageId>
       <ComponentId>
         HotfolderLoader
