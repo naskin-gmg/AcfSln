@@ -46,6 +46,7 @@ class CDirectoryMonitorComp:
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
+	typedef imod::CMultiModelObserverBase BaseClass3;
 
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
@@ -72,6 +73,7 @@ public:
 	virtual void OnComponentDestroyed();
 
 	// reimplemented (imod::IObserver)
+	virtual bool OnDetached(imod::IModel* modelPtr);
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:

@@ -114,6 +114,20 @@ istd::CStringList CDirectoryMonitorComp::GetFileList() const
 
 // reimplemented (imod::IObserver)
 
+bool CDirectoryMonitorComp::OnDetached(imod::IModel* modelPtr)
+{
+	if (modelPtr == m_directoryPathModelPtr){
+		m_directoryPathModelPtr = NULL;
+	}
+
+	if (modelPtr == m_directoryMonitorParamsModelPtr){
+		m_directoryMonitorParamsModelPtr = NULL;
+	}
+
+	return BaseClass3::OnDetached(modelPtr);
+}
+
+
 void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	I_ASSERT(modelPtr != NULL);
