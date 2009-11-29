@@ -435,13 +435,14 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 
 void CDirectoryMonitorComp::DisconnectFromParameterModel()
 {
-	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
+	if (m_directoryPathModelPtr != NULL){
 		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+	}
 
+	if (m_directoryMonitorParamsModelPtr != NULL){
 		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
 	}
 }
-
 
 
 } // namespace iqtfpf
