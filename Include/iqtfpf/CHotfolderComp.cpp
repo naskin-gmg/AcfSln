@@ -6,6 +6,7 @@
 
 
 // ACF includes
+#include "istd/TChangeDelegator.h"
 #include "istd/CStaticServicesProvider.h"
 
 #include "isys/IFileSystem.h"
@@ -13,6 +14,8 @@
 
 #include "iprm/IFileNameParam.h"
 #include "iprm/IParamsManager.h"
+
+#include "iproc/IProcessor.h"
 
 #include "iqt/CTimer.h"
 
@@ -22,6 +25,13 @@ namespace iqtfpf
 
 
 // public methods
+
+CHotfolderComp::CHotfolderComp()
+	:m_directoryMonitorObserver(*this),
+	m_parametersObserver(*this)
+{
+}
+
 
 // reimplemented (ifpf::IFileNamingStrategy)
 
@@ -75,6 +85,11 @@ void CHotfolderComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	BaseClass2::SetParams(m_paramsSetCompPtr.GetPtr());
+
+	I_ASSERT(m_paramsSetModelCompPtr.IsValid());
+	if (m_paramsSetModelCompPtr.IsValid()){
+		m_paramsSetModelCompPtr->AttachObserver(&m_parametersObserver);
+	}
 }
 
 
@@ -83,16 +98,12 @@ void CHotfolderComp::OnComponentDestroyed()
 	BaseClass::OnComponentDestroyed();
 
 	StopHotfolder();
+
+	I_ASSERT(m_paramsSetModelCompPtr.IsValid());
+	if (m_paramsSetModelCompPtr.IsValid()){
+		m_paramsSetModelCompPtr->DetachObserver(&m_parametersObserver);
+	}
 }
-
-
-// reimplemented (istd::IChangeable)
-
-void CHotfolderComp::OnEndChanges(int /*changeFlags*/, istd::IPolymorphic* /*changeParamsPtr*/)
-{
-	SynchronizeWithModel();
-}
-
 
 
 // protected methods
@@ -127,6 +138,10 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 		QueueItem newProcessingItem;
 		newProcessingItem.inputFile = inputFilePath;
 		newProcessingItem.outputFile = outputFilePath;
+		newProcessingItem.processingState = iproc::IProcessor::TS_NONE;
+
+		// add file to hotfolder model:
+		AddFile(inputFilePath, iproc::IProcessor::TS_NONE);
 
 		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 		
@@ -180,13 +195,11 @@ void CHotfolderComp::StartHotfolder()
 
 void CHotfolderComp::StopHotfolder()
 {
-	m_finishThread = false;
+	m_finishThread = true;
 
 	// wait for 30 seconds for finishing of thread: 
 	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass3::isRunning()){
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	}
+	while (timer.GetElapsed() < 30 && BaseClass3::isRunning());
 
 	if (BaseClass3::isRunning()){
 		BaseClass3::terminate();
@@ -199,6 +212,8 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 	I_ASSERT(m_inputPathParamsManagerIdAttrPtr.IsValid());
 	I_ASSERT(m_monitoringParamsIdAttrPtr.IsValid());
 	I_ASSERT(m_paramsSetCompPtr.IsValid());
+
+	StopHotfolder();
 
 	// Initialize the directory monitoring:
 	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
@@ -229,12 +244,19 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 					
 						monitorCompPtr.PopPtr();
 
+						imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
+						I_ASSERT(directoryMonitorModelPtr != NULL);
+
+						directoryMonitorModelPtr->AttachObserver(&m_directoryMonitorObserver);
+
 						directoryMonitorPtr->StartObserving(inputDirectoryParamPtr);
 					}
 				}
 			}
 		}
 	}
+
+	StartHotfolder();
 }
 
 
@@ -254,6 +276,24 @@ void CHotfolderComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPt
 	
 	if (monitorPtr != NULL && updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED){
 		m_parent.OnIncommingInputFileEvent(*monitorPtr);
+	}
+}
+
+
+// public methods of embedded class ParametersObserver
+
+CHotfolderComp::ParametersObserver::ParametersObserver(CHotfolderComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+	
+void CHotfolderComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
+		m_parent.SynchronizeWithModel();
 	}
 }
 

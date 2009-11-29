@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QHeaderView>
+#include <QProgressBar>
 
 
 // ACF includes
@@ -37,11 +38,17 @@ void CHotfolderGuiComp::UpdateModel() const
 }
 
 
-void CHotfolderGuiComp::UpdateEditor(int /*updateFlags*/)
+void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 {
 	ifpf::IHotfolder* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(this, true);
+
+		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+			istd::CString lastFile = objectPtr->GetFileList().back();
+
+			AddFileItem(lastFile, objectPtr->GetFileState(lastFile));
+		}
 	}
 }
 
@@ -99,6 +106,17 @@ void CHotfolderGuiComp::OnGuiCreated()
 	if (m_settingsGuiCompPtr.IsValid()){
 		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, GetWidget())); 
 	}
+
+	// some visual details:
+	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
+	FileList->header()->setStretchLastSection(true);
+
+	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(20, this);
+	FileList->setItemDelegate(itemDelegate);
+
+	FileList->header()->setResizeMode(0, QHeaderView::Fixed);
+	FileList->header()->resizeSection(0, itemDelegate->GetItemHeight());
+
 }
 
 
@@ -110,7 +128,36 @@ void CHotfolderGuiComp::OnGuiDestroyed()
 }
 
 
-// protected slots
+// private methods
+
+void CHotfolderGuiComp::AddFileItem(const istd::CString& fileItem, int fileState)
+{
+	QTreeWidgetItem* fileItemPtr = new QTreeWidgetItem(FileList);
+	fileItemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
+	QIcon stateIcon = GetIconForState(fileState);
+
+	fileItemPtr->setIcon(0, stateIcon);
+	fileItemPtr->setText(1, iqt::GetQString(fileItem));
+	FileList->setItemWidget(fileItemPtr, 2, new QProgressBar());
+
+	FileList->addTopLevelItem(fileItemPtr);
+}
+
+
+QIcon CHotfolderGuiComp::GetIconForState(int fileState) const
+{
+	if (m_stateIconsProviderCompPtr.IsValid()){
+		if (m_stateIconsProviderCompPtr->GetIconCount() > fileState){
+			return m_stateIconsProviderCompPtr->GetIcon(fileState);
+		}
+	}
+
+	return QIcon();
+}
+
+
+// private slots
 
 void CHotfolderGuiComp::OnSettings()
 {
@@ -118,6 +165,7 @@ void CHotfolderGuiComp::OnSettings()
 		m_settingsDialogPtr->exec();
 	}
 }
+
 
 } // namespace iqtfpf
 

@@ -363,10 +363,7 @@ void CDirectoryMonitorComp::StopObserverThread()
 
 	// wait for 30 seconds for finishing of thread: 
 	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass2::isRunning()){
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	}
-
+	while (timer.GetElapsed() < 30 && BaseClass2::isRunning());
 	if (BaseClass2::isRunning()){
 		BaseClass2::terminate();
 	}

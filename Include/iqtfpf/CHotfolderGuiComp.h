@@ -7,6 +7,8 @@
 
 #include "idoc/ICommandsProvider.h"
 
+
+#include "iqtgui/IIconProvider.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 #include "iqtgui/CGuiComponentDialog.h"
@@ -38,6 +40,7 @@ public:
 		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_settingsGuiCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
 		I_ASSIGN(m_settingsObserverCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
+		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::ICommandsProvider)
@@ -55,7 +58,11 @@ public:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
-protected Q_SLOTS:
+private:
+	void AddFileItem(const istd::CString& fileItem, int fileState);
+	QIcon GetIconForState(int fileState) const;
+
+private Q_SLOTS:
 	void OnSettings();
 
 private:
@@ -63,6 +70,7 @@ private:
 	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
 	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
 	I_REF(imod::IObserver, m_settingsObserverCompPtr);
+	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;

@@ -17,14 +17,14 @@ namespace ifpf
 /**
 	Interface for a hotfolder's dynamic model.
 */
-class IHotfolder: virtual ibase::IFileListProvider
+class IHotfolder: virtual public ibase::IFileListProvider
 {
 public:
 	enum ChangeFlags
 	{
 		CF_FILE_ADDED = 0x100000,
 		CF_FILE_REMOVED = 0x200000,
-		CF_FILE_STATE_CHANGED = 0x200000
+		CF_FILE_STATE_CHANGED = 0x400000
 	};
 	
 	/**
