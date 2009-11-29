@@ -64,6 +64,38 @@ istd::CStringList CDirectoryMonitorComp::GetChangedFileItems(int changeFlags) co
 }
 
 
+bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
+{
+	if ((paramsSetPtr == NULL) && (!m_paramsSetCompPtr.IsValid() || !m_paramsSetModelCompPtr.IsValid())){
+		return false;
+	}
+	// ensure thread is stopped:
+	StopObserverThread();
+
+	// Of using of external parameter model, connect to it, otherwise use the default parameter set:
+	const iprm::IParamsSet* parameterModelPtr = paramsSetPtr == NULL ? m_paramsSetCompPtr.GetPtr() : paramsSetPtr;
+	I_ASSERT(parameterModelPtr != NULL);
+
+	// connect to own parameter model:
+	if (ConnectToParameterModel(*parameterModelPtr)){
+		SynchronizeWithModel(*m_directoryPathModelPtr);
+		SynchronizeWithModel(*m_directoryMonitorParamsModelPtr);
+
+		StartObserverThread();
+
+		return true;
+	}
+
+	return false;
+}
+
+
+void CDirectoryMonitorComp::StopObserving()
+{
+	StopObserverThread();
+}
+
+
 // reimplemented (ibase::IFileListProvider)
 
 istd::CStringList CDirectoryMonitorComp::GetFileList() const
@@ -97,38 +129,23 @@ void CDirectoryMonitorComp::OnComponentCreated()
 {
 	I_ASSERT(m_directoryPathIdAttrPtr.IsValid());
 	I_ASSERT(m_directoryMonitorParamsIdAttrPtr.IsValid());
-	I_ASSERT(m_paramsSetCompPtr.IsValid())
-	I_ASSERT(m_paramsSetModelCompPtr.IsValid())
+
 
 	BaseClass::OnComponentCreated();
 
 	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
 
-	m_directoryPathModelPtr = dynamic_cast<const imod::IModel*>(m_paramsSetCompPtr->GetParameter((*m_directoryPathIdAttrPtr).ToString()));
-	m_directoryMonitorParamsModelPtr = dynamic_cast<const imod::IModel*>(m_paramsSetCompPtr->GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString()));
-	m_directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(m_directoryPathModelPtr);
-	m_directoryMonitorParamsPtr = dynamic_cast<const ifpf::IDirectoryMonitorParams*>(m_directoryMonitorParamsModelPtr);
-
-	I_ASSERT(m_directoryPathModelPtr != NULL);
-	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
-
-	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
-		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(this);
-
-		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(this);
+	if (m_autoStartAttrPtr.IsValid() && *m_autoStartAttrPtr){
+		StartObserving();
 	}
 }
 
 
 void CDirectoryMonitorComp::OnComponentDestroyed()
 {
-	StopObserverThread();
+	StopObserving();
 
-	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
-		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
-
-		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
-	}
+	DisconnectFromParameterModel();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -274,7 +291,10 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 		return;
 	}
 
-	StopObserverThread();
+	bool wasRunning = BaseClass2::isRunning(); 
+	if (wasRunning){
+		StopObserverThread();
+	}
 
 	ResetFiles();
 
@@ -299,7 +319,10 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 	if (fileInfo.exists()){
 		m_currentDirectory = QDir(folderPath);
 
-		StartObserverThread();
+		// if observing thread was running -> restart:
+		if (wasRunning){
+			StartObserverThread();
+		}
 	}
 	else{
 		SendWarningMessage(0, istd::CString("Directory: ") + iqt::GetCString(folderPath) + istd::CString(" not exists. Observing aborted"), "DirectoryMonitor");
@@ -370,6 +393,41 @@ void CDirectoryMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel
 		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
 	}
 }
+
+
+bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& paramsSet)
+{
+	DisconnectFromParameterModel();
+
+	m_directoryPathModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).ToString()));
+	m_directoryMonitorParamsModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString()));
+	m_directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(m_directoryPathModelPtr);
+	m_directoryMonitorParamsPtr = dynamic_cast<const ifpf::IDirectoryMonitorParams*>(m_directoryMonitorParamsModelPtr);
+
+	I_ASSERT(m_directoryPathModelPtr != NULL);
+	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
+
+	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
+		bool retVal = (const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(this);
+
+		retVal = retVal && (const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(this);
+
+		return retVal;
+	}
+
+	return false;
+}
+
+
+void CDirectoryMonitorComp::DisconnectFromParameterModel()
+{
+	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
+		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+
+		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+	}
+}
+
 
 
 } // namespace iqtfpf

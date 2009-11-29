@@ -18,13 +18,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        DirectoryParam
+        ComposedParamsSetGui
       </Id>
       <PackageId>
-        FpfVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        DirectoryParam
+        ComposedParamsSetGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,50 +33,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              SlaveSets
+              Editors
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              SlaveSets
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DirectoryParamsManager
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ParamsManager
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ParamsSetFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
             </Type>
             <ExportId>
               
@@ -85,55 +48,91 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                DirectoryParam
-              </Value>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParamsGui
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Ids
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        DirectoryMonitorParamsGui
+      </Id>
+      <PackageId>
+        QtFpfPck
+      </PackageId>
+      <ComponentId>
+        DirectoryMonitorParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        imod::IModel
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        ComposedParamsSetGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IParamsManager
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        ComposedParamsSetGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iser::ISerializable
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        DirectoryParamsManager
+        ComposedParamsSetGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Parameter for dynamic directory list
+    
   </Description>
   <Keywords>
-    Directory Parameter Hotfolder File
+    
   </Keywords>
 </Acf>

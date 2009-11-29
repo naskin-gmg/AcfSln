@@ -197,13 +197,18 @@ void CHotfolderComp::StopHotfolder()
 void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 {
 	I_ASSERT(m_inputPathParamsManagerIdAttrPtr.IsValid());
+	I_ASSERT(m_monitoringParamsIdAttrPtr.IsValid());
 	I_ASSERT(m_paramsSetCompPtr.IsValid());
 
 	// Initialize the directory monitoring:
 	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		const iprm::IParamsManager* directoryParamsManagerPtr = 
 					dynamic_cast<const iprm::IParamsManager*>(m_paramsSetCompPtr->GetParameter((*m_inputPathParamsManagerIdAttrPtr).ToString()));
-		if (directoryParamsManagerPtr != NULL){			
+
+		const iprm::IParamsSet* directoryMonitoringParamsPtr = 
+					dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter((*m_monitoringParamsIdAttrPtr).ToString()));
+
+		if (directoryParamsManagerPtr != NULL && directoryMonitoringParamsPtr != NULL){			
 			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
 			for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
 				iprm::IParamsSet* inputDirectoryParamPtr = directoryParamsManagerPtr->GetParamsSet(inputIndex);
@@ -223,6 +228,8 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 						m_directoryMonitorsMap[monitoringDirectoryPath] = directoryMonitorPtr;
 					
 						monitorCompPtr.PopPtr();
+
+						directoryMonitorPtr->StartObserving(inputDirectoryParamPtr);
 					}
 				}
 			}

@@ -21,10 +21,10 @@
         ComposedParamsSet
       </ComponentName>
       <X>
-        331
+        0
       </X>
       <X>
-        -156
+        0
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         DirectoryMonitorParam
       </ComponentName>
       <X>
-        -49
+        -35
       </X>
       <X>
-        9
+        2
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        -8
+        268
       </X>
       <X>
-        44
+        -3
       </X>
     </Element>
     <Element>
@@ -164,7 +164,7 @@
         HotfolderParams
       </ComponentName>
       <X>
-        -260
+        -258
       </X>
       <X>
         -83
@@ -175,10 +175,10 @@
         InputDirectories
       </ComponentName>
       <X>
-        -7
+        -9
       </X>
       <X>
-        -216
+        -197
       </X>
     </Element>
     <Element>
@@ -230,10 +230,10 @@
         OutputDirectories
       </ComponentName>
       <X>
-        199
+        204
       </X>
       <X>
-        -87
+        -92
       </X>
     </Element>
     <Element>

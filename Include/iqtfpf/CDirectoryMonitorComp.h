@@ -49,17 +49,20 @@ public:
 
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
-		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the directory monitoring", true, "ParamsSet");
-		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameter set for the directory monitoring", true, "ParamsSet");
+		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Default parameter set for the directory monitoring", false, "ParamsSet");
+		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Default parameter set for the directory monitoring", false, "ParamsSet");
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathParamsId", "Parameter ID of the path to be observed in the parameter set", true, "DirectoryPathParamsId");
 		I_ASSIGN(m_directoryMonitorParamsIdAttrPtr, "DirectoryMonitorParamsId", "ID of the directory observing parameters in the parameter set", true, "DirectoryMonitorParamsId");
+		I_ASSIGN(m_autoStartAttrPtr, "AutoStart", "If enabled, start the directory monitoring after initialization", false, false);
 	I_END_COMPONENT;
 
 	CDirectoryMonitorComp();
 
 	// reimplemented (ifpf::IDirectoryMonitor)
 	virtual istd::CStringList GetChangedFileItems(int changeFlags) const;
+	virtual bool StartObserving(const iprm::IParamsSet* paramsSetPtr = NULL);
+	virtual void StopObserving();
 
 	// reimplemented (ibase::IFileListProvider)
 	virtual istd::CStringList GetFileList() const;
@@ -93,6 +96,8 @@ private:
 	void StopObserverThread();
 	void ResetFiles();
 	void SynchronizeWithModel(const imod::IModel& paramsModel);
+	bool ConnectToParameterModel(const iprm::IParamsSet& paramsSet);
+	void DisconnectFromParameterModel();
 
 private:
 	struct FileSystemChanges
@@ -132,8 +137,7 @@ private:
 	I_REF(ifpf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
 	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
 	I_ATTR(istd::CString, m_directoryMonitorParamsIdAttrPtr);
-
-
+	I_ATTR(bool, m_autoStartAttrPtr);
 };
 
 

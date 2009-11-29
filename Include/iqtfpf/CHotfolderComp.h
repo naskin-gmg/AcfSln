@@ -47,12 +47,14 @@ public:
 
 	I_BEGIN_COMPONENT(CHotfolderComp);
 		I_REGISTER_INTERFACE(ifpf::IFileNamingStrategy);
+		I_REGISTER_INTERFACE(ifpf::IMonitoringSessionManager);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
 		I_ASSIGN(m_fileNamingStrategyCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
 		I_ASSIGN(m_monitorFactCompPtr, "DirectoryMontorFactory", "Factory for creation of a directory monitor", true, "DirectoryMontorFactory");
 		I_ASSIGN(m_inputPathParamsManagerIdAttrPtr, "InputPathParamsManagerId", "Parameter set ID for the hotfolder's input directories", true, "");
 		I_ASSIGN(m_outputDirectoryParamsIdAttrPtr, "OutputDirectoryParamsId", "Parameter set ID for the output directory", true, "");
+		I_ASSIGN(m_monitoringParamsIdAttrPtr, "MonitoringParamsId", "Parameter set ID for the directory monitoring parameters", true, "");
 	I_END_COMPONENT();
 
 	// reimplemented (ifpf::IFileNamingStrategy)
@@ -112,6 +114,7 @@ private:
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
 
 	I_ATTR(istd::CString, m_inputPathParamsManagerIdAttrPtr);
+	I_ATTR(istd::CString, m_monitoringParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;

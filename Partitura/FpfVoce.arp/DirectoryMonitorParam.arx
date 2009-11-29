@@ -18,50 +18,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        DirectoryParam
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        DirectoryParam
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              SlaveSets
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              SlaveSets
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DirectoryParamsManager
+        DirectoryMonitorParam
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        ParamsManager
+        ComposedParamsSet
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -70,13 +33,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              ParamsSetFactory
+              Parameters
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -85,11 +48,55 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                DirectoryParam
-              </Value>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParametersId
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        DirectoryMonitorParams
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        DirectoryMonitorParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -100,15 +107,15 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        DirectoryMonitorParam
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IParamsManager
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        DirectoryMonitorParam
       </ComponentId>
     </Interface>
     <Interface>
@@ -116,7 +123,7 @@
         iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        DirectoryMonitorParam
       </ComponentId>
     </Interface>
     <Interface>
@@ -124,16 +131,16 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        DirectoryParamsManager
+        DirectoryMonitorParam
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Parameter for dynamic directory list
+    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
   </Description>
   <Keywords>
-    Directory Parameter Hotfolder File
+    
   </Keywords>
 </Acf>

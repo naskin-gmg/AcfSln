@@ -21,10 +21,10 @@
         DirectoryMonitorParams
       </Id>
       <PackageId>
-        FpfPck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        DirectoryMonitorParams
+        DirectoryMonitorParam
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -129,7 +129,28 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              SlaveSets
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  DirectoryMonitorParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

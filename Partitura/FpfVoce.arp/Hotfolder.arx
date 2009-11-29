@@ -74,21 +74,18 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ParamsSet
+              Log
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                HotfolderParams
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -106,7 +103,7 @@
                 true
               </IsEnabled>
               <Value>
-                SessionManager
+                Hotfolder
               </Value>
             </Data>
           </AttributeInfo>
@@ -263,7 +260,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               DirectoryMontorFactory
@@ -354,6 +351,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MonitoringParamsId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryMonitorParams
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1225
+          1228
         </Number>
         <Description>
           ACF
@@ -18,7 +18,28 @@
   <ElementsList count="4">
     <Element>
       <Id>
-        ComposedParamsSetGui
+        DirectoryMonitorParams
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        DirectoryMonitorParamGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderParamsGui
       </Id>
       <PackageId>
         QtGuiPck
@@ -75,7 +96,7 @@
                   OutputDirectories
                 </Value>
                 <Value>
-                  DirectoryMonitorParamsGui
+                  DirectoryMonitorParams
                 </Value>
               </Values>
             </Data>
@@ -139,27 +160,6 @@
     </Element>
     <Element>
       <Id>
-        DirectoryMonitorParamsGui
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        DirectoryMonitorParamsGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         InputDirectories
       </Id>
       <PackageId>
@@ -207,7 +207,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        ComposedParamsSetGui
+        HotfolderParamsGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -215,7 +215,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        ComposedParamsSetGui
+        HotfolderParamsGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -223,7 +223,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        ComposedParamsSetGui
+        HotfolderParamsGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
