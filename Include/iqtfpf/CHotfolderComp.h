@@ -124,9 +124,6 @@ private:
 		CHotfolderComp& m_parent;
 	};
 
-	friend class ParametersObserver;
-
-
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
 	I_REF(ifpf::IFileNamingStrategy, m_fileNamingStrategyCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
