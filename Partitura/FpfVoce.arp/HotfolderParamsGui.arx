@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1228
+          1232
         </Number>
         <Description>
           ACF
@@ -70,7 +70,7 @@
                 true
               </IsEnabled>
               <Value>
-                2
+                0
               </Value>
             </Data>
           </AttributeInfo>
@@ -93,7 +93,7 @@
                   InputDirectories
                 </Value>
                 <Value>
-                  OutputDirectories
+                  OutputDirectory
                 </Value>
                 <Value>
                   DirectoryMonitorParams
@@ -120,7 +120,7 @@
                   InputDirectories
                 </Value>
                 <Value>
-                  OutputDirectories
+                  OutputDirectory
                 </Value>
                 <Value>
                   DirectoryMonitorParams
@@ -166,7 +166,7 @@
         FpfVoce
       </PackageId>
       <ComponentId>
-        DynamicDirectoryGui
+        DynamicDirectoryParamGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -181,13 +181,13 @@
     </Element>
     <Element>
       <Id>
-        OutputDirectories
+        OutputDirectory
       </Id>
       <PackageId>
-        FpfVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        DynamicDirectoryGui
+        FileNameParamGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -196,7 +196,45 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              PathLabel
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StartHint
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                &lt;Enter the path of the hotfolder's output directory&gt;
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

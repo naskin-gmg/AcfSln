@@ -23,7 +23,7 @@ CHotfolder::CHotfolder()
 }
 
 
-void CHotfolder::RemoveFile(ifpf::IHotfolderProcessingItem* fileItemPtr)
+void CHotfolder::RemoveFile(ifpf::CHotfolderProcessingItem* fileItemPtr)
 {
 	if (m_fileItems.Remove(fileItemPtr)){
 		istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
@@ -31,7 +31,7 @@ void CHotfolder::RemoveFile(ifpf::IHotfolderProcessingItem* fileItemPtr)
 }
 
 
-void CHotfolder::AddFile(ifpf::IHotfolderProcessingItem* fileItemPtr, bool releaseFlag)
+void CHotfolder::AddFile(ifpf::CHotfolderProcessingItem* fileItemPtr, bool releaseFlag)
 {
 	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
 
@@ -62,6 +62,21 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 	}
 
 	return NULL;
+}
+
+
+void CHotfolder::UpdateProcessingState(const ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState)
+{
+	int itemsCount = m_fileItems.GetCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::CHotfolderProcessingItem* itemPtr = m_fileItems.GetAt(itemIndex);
+
+		if (itemPtr == processingItemPtr){
+			itemPtr->SetProcessingState(processingState);
+
+			break;
+		}
+	}
 }
 
 

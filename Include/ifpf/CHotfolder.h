@@ -15,7 +15,7 @@
 
 // AcfSln includes
 #include "ifpf/IHotfolder.h"
-#include "ifpf/IHotfolderProcessingItem.h"
+#include "ifpf/CHotfolderProcessingItem.h"
 #include "ifpf/CMonitoringSession.h"
 
 
@@ -31,10 +31,11 @@ class CHotfolder: public ifpf::IHotfolder, virtual public iser::ISerializable
 public:
 	CHotfolder();
 
-	virtual void RemoveFile(ifpf::IHotfolderProcessingItem* fileItemPtr);
-	virtual void AddFile(ifpf::IHotfolderProcessingItem* fileItemPtr, bool releaseFlag = true);
+	virtual void RemoveFile(ifpf::CHotfolderProcessingItem* fileItemPtr);
+	virtual void AddFile(ifpf::CHotfolderProcessingItem* fileItemPtr, bool releaseFlag = true);
 	virtual void SetParams(iprm::IParamsSet* paramsSet);
 	virtual const ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
+	virtual void UpdateProcessingState(const ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState);
 
 	// reimplemented (ifpf::IHotfolder)
 	virtual int GetProcessingItemsCount() const;
@@ -47,7 +48,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef istd::TOptPointerVector<ifpf::IHotfolderProcessingItem> FileItems;
+	typedef istd::TOptPointerVector<ifpf::CHotfolderProcessingItem> FileItems;
 
 	FileItems m_fileItems;
 

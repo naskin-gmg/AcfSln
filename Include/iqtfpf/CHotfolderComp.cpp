@@ -176,12 +176,21 @@ void CHotfolderComp::run()
 
 			if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
 				istd::CString message = istd::CString("Processing of ") + outputFile + "failed";
-
 				SendErrorMessage(0, message, "Hotfolder");
+
+				isys::CSectionBlocker queueLock(&m_processingQueueLock);
+
+				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_INVALID);
+			}
+			else{
+				isys::CSectionBlocker queueLock(&m_processingQueueLock);
+
+				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_INVALID);
 			}
 		}
-
-		m_processingQueueLock.Leave();
+		else{
+			m_processingQueueLock.Leave();
+		}
 
 		msleep(10);
 	}

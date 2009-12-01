@@ -18,7 +18,7 @@ class CHotfolderProcessingItem: virtual public ifpf::IHotfolderProcessingItem
 public:
 	CHotfolderProcessingItem();
 
-	virtual void SetProcessingState(int state);
+	virtual void SetProcessingState(int processingState);
 	virtual void SetProgress(double progress);
 	virtual void SetInputFile(const istd::CString& inputFile);
 	virtual void SetOutputFile(const istd::CString& outputFile);

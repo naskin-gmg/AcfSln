@@ -114,7 +114,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
 	FileList->header()->setStretchLastSection(true);
 
-	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(20, this);
+	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(30, this);
 	FileList->setItemDelegate(itemDelegate);
 
 	FileList->header()->setResizeMode(0, QHeaderView::Fixed);

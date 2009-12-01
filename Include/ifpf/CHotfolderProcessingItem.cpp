@@ -13,8 +13,13 @@ CHotfolderProcessingItem::CHotfolderProcessingItem()
 }
 
 
-void CHotfolderProcessingItem::SetProcessingState(int state)
+void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
+	if (m_processingState != processingState){
+		istd::CChangeNotifier changePtr(this);
+
+		m_processingState = processingState;
+	}
 }
 
 
