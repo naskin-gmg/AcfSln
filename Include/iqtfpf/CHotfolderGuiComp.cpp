@@ -45,9 +45,12 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 		iqt::CSignalBlocker block(this, true);
 
 		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
-			istd::CString lastFile = objectPtr->GetFileList().back();
+			int itemsCount = objectPtr->GetProcessingItemsCount();
+			if (itemsCount > 0){
+				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemsCount - 1);
 
-			AddFileItem(lastFile, objectPtr->GetFileState(lastFile));
+				AddFileItem(*pocessingItem);
+			}
 		}
 	}
 }
@@ -130,16 +133,17 @@ void CHotfolderGuiComp::OnGuiDestroyed()
 
 // private methods
 
-void CHotfolderGuiComp::AddFileItem(const istd::CString& fileItem, int fileState)
+void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
 	QTreeWidgetItem* fileItemPtr = new QTreeWidgetItem(FileList);
 	fileItemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-	QIcon stateIcon = GetIconForState(fileState);
+	QIcon stateIcon = GetIconForState(fileItem.GetProcessingState());
 
 	fileItemPtr->setIcon(0, stateIcon);
-	fileItemPtr->setText(1, iqt::GetQString(fileItem));
-	FileList->setItemWidget(fileItemPtr, 2, new QProgressBar());
+	fileItemPtr->setText(1, iqt::GetQString(fileItem.GetInputFile()));
+	fileItemPtr->setText(2, iqt::GetQString(fileItem.GetOutputFile()));
+	// FileList->setItemWidget(fileItemPtr, 3, new QProgressBar());
 
 	FileList->addTopLevelItem(fileItemPtr);
 }

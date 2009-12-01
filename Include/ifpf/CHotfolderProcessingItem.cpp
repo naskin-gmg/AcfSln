@@ -1,0 +1,75 @@
+#include "ifpf/CHotfolderProcessingItem.h"
+
+
+#include "istd/TChangeNotifier.h"
+
+
+namespace ifpf
+{
+
+
+CHotfolderProcessingItem::CHotfolderProcessingItem()
+{
+}
+
+
+void CHotfolderProcessingItem::SetProcessingState(int state)
+{
+}
+
+
+void CHotfolderProcessingItem::SetProgress(double progress)
+{
+}
+
+
+void CHotfolderProcessingItem::SetInputFile(const istd::CString& inputFile)
+{
+	if (m_inputFile != inputFile){
+		istd::CChangeNotifier changePtr(this);
+
+		m_inputFile = inputFile;
+	}
+
+}
+
+
+void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
+{
+	if (m_outputFile != outputFile){
+		istd::CChangeNotifier changePtr(this);
+
+		m_outputFile = outputFile;
+	}
+}
+
+
+// reimplemented ()ifpf::CHotfolderProcessingItem
+
+int CHotfolderProcessingItem::GetProcessingState() const
+{
+	return m_processingState;
+}
+
+
+double CHotfolderProcessingItem::GetProgress() const
+{
+	return m_progress;
+}
+
+
+istd::CString CHotfolderProcessingItem::GetInputFile() const
+{
+	return m_inputFile;
+}
+
+
+istd::CString CHotfolderProcessingItem::GetOutputFile() const
+{
+	return m_outputFile;
+}
+
+
+} // namespace ifpf
+
+

@@ -16,6 +16,7 @@
 
 // AcfSln includes
 #include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingItem.h"
 
 #include "iqtfpf/Generated/ui_CHotfolderGuiComp.h"
 
@@ -59,7 +60,7 @@ public:
 	virtual void OnGuiDestroyed();
 
 private:
-	void AddFileItem(const istd::CString& fileItem, int fileState);
+	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 	QIcon GetIconForState(int fileState) const;
 
 private Q_SLOTS:

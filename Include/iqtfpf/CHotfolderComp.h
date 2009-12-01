@@ -9,7 +9,7 @@
 // ACF includes
 #include "ifpf/IDirectoryMonitor.h"
 
-#include "imod/IModel.h"
+#include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
 
@@ -25,6 +25,7 @@
 #include "ifpf/IFileNamingStrategy.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CHotfolder.h"
+#include "ifpf/CHotfolderProcessingItem.h"
 
 
 namespace iqtfpf
@@ -95,6 +96,9 @@ private:
 	*/
 	void SynchronizeWithModel(bool applyToPendingTasks = false);
 
+private:
+	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
+
 	/**
 		Internal observer of the changes in the input directories.
 	*/
@@ -143,20 +147,9 @@ private:
 	iqt::CCriticalSection m_parameterLock;
 	iqt::CCriticalSection m_processingQueueLock;
 
-	struct QueueItem
-	{
-		istd::CString inputFile;
-		istd::CString outputFile;
-		int processingState;
-	};
-
-	typedef std::list<QueueItem> ItemQueue;
-
 	bool m_finishThread;
 
 	istd::TDelPtr<iprm::IParamsSet> m_runParameterPtr;
-
-	ItemQueue m_processingQueue;
 };
 
 

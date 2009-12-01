@@ -22,43 +22,20 @@ CHotfolder::CHotfolder()
 {
 }
 
-void CHotfolder::SetFileState(const istd::CString& fileName, int state)
+
+void CHotfolder::RemoveFile(ifpf::IHotfolderProcessingItem* fileItemPtr)
 {
-	for (FileItems::iterator index = m_fileItems.begin(); index != m_fileItems.end(); index++){
-		if ((*index).filePath == fileName){
-			if ((*index).fileState != state){
-				istd::CChangeNotifier changePtr(this, CF_FILE_STATE_CHANGED);
-				
-				(*index).fileState = state;
-			}
-		}
+	if (m_fileItems.Remove(fileItemPtr)){
+		istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
 	}
 }
 
 
-void CHotfolder::RemoveFile(const istd::CString& fileName)
+void CHotfolder::AddFile(ifpf::IHotfolderProcessingItem* fileItemPtr, bool releaseFlag)
 {
-	for (FileItems::iterator index = m_fileItems.begin(); index != m_fileItems.end(); index++){
-		if ((*index).filePath == fileName){
-			istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
-
-			m_fileItems.erase(index);
-			
-			break;
-		}
-	}
-}
-
-
-void CHotfolder::AddFile(const istd::CString& fileName, int state)
-{
-	FileItem newFileItem;
-	newFileItem.filePath = fileName;
-	newFileItem.fileState = state;
-
 	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
 
-	m_fileItems.push_back(newFileItem);
+	m_fileItems.PushBack(fileItemPtr, releaseFlag);
 }
 
 
@@ -73,21 +50,36 @@ void CHotfolder::SetParams(iprm::IParamsSet* paramsSet)
 }
 
 
-// reimplemented (ifpf::IHotfolderInfo)
-
-int CHotfolder::GetFileState(const istd::CString& fileName) const
+const ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 {
-	for (FileItems::const_iterator index = m_fileItems.begin(); index != m_fileItems.end(); index++){
-		if ((*index).filePath == fileName){
-			return (*index).fileState; 
+	int itemsCount = m_fileItems.GetCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = m_fileItems.GetAt(itemIndex);
+
+		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
+			return processingItemPtr;
 		}
 	}
 
-	return iproc::IProcessor::TS_NONE;
+	return NULL;
 }
 
 
-bool CHotfolder::GetWorking() const
+// reimplemented (ifpf::IHotfolder)
+
+int CHotfolder::GetProcessingItemsCount() const
+{
+	return m_fileItems.GetCount();
+}
+
+
+IHotfolderProcessingItem* CHotfolder::GetProcessingItem(int processingItemIndex) const
+{
+	return m_fileItems.GetAt(processingItemIndex);
+}
+
+
+bool CHotfolder::IsWorking() const
 {
 	return m_isWorking;
 }
@@ -108,39 +100,11 @@ iprm::IParamsSet* CHotfolder::GetHotfolderParams() const
 }
 
 
-// reimplemented (ibase::IFileListProvider)
-
-istd::CStringList CHotfolder::GetFileList() const
-{
-	istd::CStringList files;
-
-	for (FileItems::const_iterator index = m_fileItems.begin(); index != m_fileItems.end(); index++){
-		files.push_back((*index).filePath);
-	}
-
-	return files;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CHotfolder::Serialize(iser::IArchive& archive)
 {
 	return true;
-}
-
-
-istd::CStringList CHotfolder::GetFilesForState(int state) const
-{
-	istd::CStringList files;
-
-	for (FileItems::const_iterator index = m_fileItems.begin(); index != m_fileItems.end(); index++){
-		if ((*index).fileState == state){
-			files.push_back((*index).filePath); 
-		}
-	}
-
-	return files;
 }
 
 

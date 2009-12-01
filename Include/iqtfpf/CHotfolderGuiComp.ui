@@ -31,15 +31,15 @@
      <property name="styleSheet">
       <string/>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>
@@ -50,7 +50,12 @@
      </column>
      <column>
       <property name="text">
-       <string>File</string>
+       <string>Input File</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Output File</string>
       </property>
      </column>
      <column>

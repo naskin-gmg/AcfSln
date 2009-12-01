@@ -1,0 +1,45 @@
+#ifndef ifpf_CHotfolderProcessingItem_included
+#define ifpf_CHotfolderProcessingItem_included
+
+
+// AcfSln includes
+#include "ifpf/IHotfolderProcessingItem.h"
+
+
+namespace ifpf
+{
+
+
+/**
+	Interface for a single processing item in the hotfolder.
+*/
+class CHotfolderProcessingItem: virtual public ifpf::IHotfolderProcessingItem
+{
+public:
+	CHotfolderProcessingItem();
+
+	virtual void SetProcessingState(int state);
+	virtual void SetProgress(double progress);
+	virtual void SetInputFile(const istd::CString& inputFile);
+	virtual void SetOutputFile(const istd::CString& outputFile);
+
+	// reimplemented ()ifpf::CHotfolderProcessingItem
+	virtual int GetProcessingState() const;
+	virtual double GetProgress() const;
+	virtual istd::CString GetInputFile() const;
+	virtual istd::CString GetOutputFile() const;
+
+private:
+	istd::CString m_inputFile;
+	istd::CString m_outputFile;
+	int m_processingState;
+	double m_progress;
+};
+
+
+} // namespace ifpf
+
+
+#endif // !ifpf_CHotfolderProcessingItem_included
+
+

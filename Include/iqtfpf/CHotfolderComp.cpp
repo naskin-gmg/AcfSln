@@ -135,17 +135,16 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 		}
 		istd::CString outputFilePath = m_fileNamingStrategyCompPtr->GetFileName(inputFilePath);
 
-		QueueItem newProcessingItem;
-		newProcessingItem.inputFile = inputFilePath;
-		newProcessingItem.outputFile = outputFilePath;
-		newProcessingItem.processingState = iproc::IProcessor::TS_NONE;
+		ProcessingItem* processingItemPtr = new ProcessingItem;
 
-		// add file to hotfolder model:
-		AddFile(inputFilePath, iproc::IProcessor::TS_NONE);
+		processingItemPtr->SetInputFile(inputFilePath);
+		processingItemPtr->SetOutputFile(outputFilePath);
+		processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 
 		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
-		
-		m_processingQueue.push_front(newProcessingItem);
+
+		// add file to hotfolder model:
+		AddFile(processingItemPtr);
 	}
 
 	return true;
@@ -158,25 +157,31 @@ void CHotfolderComp::run()
 {
 	while (!m_finishThread){
 		m_processingQueueLock.Enter();
-		if (m_processingQueue.empty()){
+		if (GetProcessingItemsCount() == 0){
 			m_processingQueueLock.Leave();
 
 			msleep(50);
 			continue;
 		}
 
-		QueueItem processingItem = m_processingQueue.back();
-		m_processingQueue.pop_back();
+		// get available file to process:
+		const ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
+		if (processingItemPtr != NULL){
+			istd::CString inputFile = processingItemPtr->GetInputFile();
+			istd::CString outputFile = processingItemPtr->GetOutputFile();
 			
-		m_processingQueueLock.Leave();
+			m_processingQueueLock.Leave();
 		
-		isys::CSectionBlocker parameterLock(&m_parameterLock);
+			isys::CSectionBlocker parameterLock(&m_parameterLock);
 
-		if (!m_fileConvertCompPtr->CopyFile(processingItem.inputFile, processingItem.outputFile, m_runParameterPtr.GetPtr())){
-			istd::CString message = istd::CString("Processing of ") + processingItem.outputFile + "failed";
+			if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
+				istd::CString message = istd::CString("Processing of ") + outputFile + "failed";
 
-			SendErrorMessage(0, message, "Hotfolder");
+				SendErrorMessage(0, message, "Hotfolder");
+			}
 		}
+
+		m_processingQueueLock.Leave();
 
 		msleep(10);
 	}

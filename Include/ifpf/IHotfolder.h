@@ -3,11 +3,10 @@
 
 
 // ACF includes
-#include "istd/INamed.h"
-
-#include "ibase/IFileListProvider.h"
-
 #include "iprm/IParamsSet.h"
+
+// AcfSln includes
+#include "ifpf/IHotfolderProcessingItem.h"
 
 
 namespace ifpf
@@ -17,26 +16,29 @@ namespace ifpf
 /**
 	Interface for a hotfolder's dynamic model.
 */
-class IHotfolder: virtual public ibase::IFileListProvider
+class IHotfolder: virtual public istd::IChangeable
 {
 public:
 	enum ChangeFlags
 	{
 		CF_FILE_ADDED = 0x100000,
-		CF_FILE_REMOVED = 0x200000,
-		CF_FILE_STATE_CHANGED = 0x400000
+		CF_FILE_REMOVED = 0x200000
 	};
 	
 	/**
-		Get state of a file in the hotfolder.
-		\sa iproc::IProcessor::TaskState
+		Get the count of processing items in the hotfolder.
 	*/
-	virtual int GetFileState(const istd::CString& fileName) const = 0;
+	virtual int GetProcessingItemsCount() const = 0;
+
+	/**
+		Get the processing item with the index \c processingItemIndex.
+	*/
+	virtual ifpf::IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const = 0;
 
 	/**
 		Get the working state of the hotfolder.
 	*/
-	virtual bool GetWorking() const = 0;
+	virtual bool IsWorking() const = 0;
 
 	/**
 		If \c working is \c true, the hotfolder processing will be started or stopped otherwise.
