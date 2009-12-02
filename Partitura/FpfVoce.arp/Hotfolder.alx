@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         DirectoryMonitor
@@ -58,6 +58,17 @@
       </X>
       <X>
         -102.414
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputFileRenaming
+      </ComponentName>
+      <X>
+        -50
+      </X>
+      <X>
+        -101
       </X>
     </Element>
   </PositionMap>

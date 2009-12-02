@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         DirectoryMonitor
@@ -314,7 +314,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder
+                OutputFileRenaming
               </Value>
             </Data>
           </AttributeInfo>
@@ -431,6 +431,43 @@
           0
         </Flags>
         <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        OutputFileRenaming
+      </Id>
+      <PackageId>
+        QtFpfPck
+      </PackageId>
+      <ComponentId>
+        FileNaming
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

@@ -8,6 +8,7 @@
 #include "iqtfpf/CDirectoryMonitorComp.h"
 #include "iqtfpf/CDirectoryMonitorParamsGui.h"
 #include "iqtfpf/CHotfolderGuiComp.h"
+#include "iqtfpf/CFileNamingComp.h"
 
 
 /**
@@ -21,6 +22,7 @@ typedef icomp::TModelCompWrap<iqtfpf::CHotfolderComp> Hotfolder;
 typedef icomp::TModelCompWrap<iqtfpf::CDirectoryMonitorComp> DirectoryMonitor;
 typedef iqtfpf::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
 typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
+typedef iqtfpf::CFileNamingComp FileNaming;
 
 
 } // namespace QtFpfPck

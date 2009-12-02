@@ -249,7 +249,7 @@ void CDirectoryMonitorComp::run()
 		m_folderChanges.modifiedFiles = modifiedFiles;
 		m_folderChanges.attributeChangedFiles = attributeChangedFiles;
 
-		int changeFlags = CF_MODEL;
+		int changeFlags = 0;
 
 		if (!addedFiles.isEmpty()){
 			changeFlags |= CF_FILES_ADDED;
@@ -278,16 +278,18 @@ void CDirectoryMonitorComp::run()
 
 void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 {
-	// notify observers:
-	istd::CChangeNotifier changePtr(this, changeFlags);
+	if ((changeFlags & CF_ALL) != 0){
+		// notify observers:
+		istd::CChangeNotifier changePtr(this, changeFlags);
 
-	changePtr.Reset();
+		changePtr.Reset();
 
-	// update current session:
-	if (m_monitoringSessionManagerCompPtr.IsValid()){
-		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
-		if (sessionPtr != NULL){
-			sessionPtr->SetFileList(GetFileList());
+		// update current session:
+		if (m_monitoringSessionManagerCompPtr.IsValid()){
+			ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
+			if (sessionPtr != NULL){
+				sessionPtr->SetFileList(GetFileList());
+			}
 		}
 	}
 }

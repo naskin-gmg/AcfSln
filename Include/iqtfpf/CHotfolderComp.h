@@ -22,7 +22,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IFileNamingStrategy.h"
+#include "ifpf/IFileNaming.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CHotfolder.h"
 #include "ifpf/CHotfolderProcessingItem.h"
@@ -38,7 +38,6 @@ namespace iqtfpf
 class CHotfolderComp:
 			protected QThread,
 			public ibase::CLoggerComponentBase,
-			virtual public ifpf::IFileNamingStrategy,
 			virtual public ifpf::IMonitoringSessionManager,
 			virtual public ifpf::CHotfolder
 {
@@ -49,10 +48,9 @@ public:
 	typedef QThread BaseClass3;
 
 	I_BEGIN_COMPONENT(CHotfolderComp);
-		I_REGISTER_INTERFACE(ifpf::IFileNamingStrategy);
 		I_REGISTER_INTERFACE(ifpf::IMonitoringSessionManager);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
-		I_ASSIGN(m_fileNamingStrategyCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
+		I_ASSIGN(m_fileNamingCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
 		I_ASSIGN(m_monitorFactCompPtr, "DirectoryMontorFactory", "Factory for creation of a directory monitor", true, "DirectoryMontorFactory");
@@ -62,9 +60,6 @@ public:
 	I_END_COMPONENT();
 
 	CHotfolderComp();
-
-	// reimplemented (ifpf::IFileNamingStrategy)
-	virtual istd::CString GetFileName(const istd::CString& inputFileName) const;
 
 	// reimplemented (ifpf::IMonitoringSessionManager)
 	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
@@ -95,6 +90,16 @@ private:
 		If \c applyToPendingTasks is enabled, the 
 	*/
 	void SynchronizeWithModel(bool applyToPendingTasks = false);
+
+	/**
+		Serialize monitoring sessions
+	*/
+	bool SerializeMonitoringSession(iser::IArchive& archive);
+
+	/**
+		Get the output directory of this hotfolder
+	*/
+	istd::CString GetOutputDirectory() const;
 
 private:
 	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
@@ -129,7 +134,7 @@ private:
 	};
 
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
-	I_REF(ifpf::IFileNamingStrategy, m_fileNamingStrategyCompPtr);
+	I_REF(ifpf::IFileNaming, m_fileNamingCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
@@ -143,6 +148,9 @@ private:
 	DirectoryMonitorsMap m_directoryMonitorsMap;
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
+
+	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
+	MonitoringSessionsMap m_monitoringSessionsMap;
 
 	iqt::CCriticalSection m_parameterLock;
 	iqt::CCriticalSection m_processingQueueLock;

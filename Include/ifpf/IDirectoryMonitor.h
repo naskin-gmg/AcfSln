@@ -45,7 +45,12 @@ public:
 		/**
 			File's attributes were changed.
 		*/
-		CF_FILES_ATTRIBUTE_CHANGED = 0x8000
+		CF_FILES_ATTRIBUTE_CHANGED = 0x8000,
+
+		/**
+			All possible changes
+		*/
+		CF_ALL = CF_FILES_ADDED | CF_FILES_REMOVED | CF_FILES_MODIFIED | CF_FILES_ATTRIBUTE_CHANGED
 	};
 
 	/**

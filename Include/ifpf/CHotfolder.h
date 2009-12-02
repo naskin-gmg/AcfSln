@@ -54,9 +54,6 @@ protected:
 
 	bool m_isWorking;
 
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
-	MonitoringSessionsMap m_monitoringSessionsMap;
-
 	iprm::IParamsSet* m_paramsSetPtr;
 };
 

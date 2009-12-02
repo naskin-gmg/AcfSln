@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileNamingComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderComp.cpp"
 				>
 			</File>
@@ -227,6 +231,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNamingComp.h"
 				>
 			</File>
 			<File

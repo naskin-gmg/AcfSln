@@ -17,6 +17,7 @@ I_EXPORT_COMPONENT(Hotfolder, "Implementation of the hot folder", "File Processi
 I_EXPORT_COMPONENT(DirectoryMonitor, "This component observes changes in a given file folder", "Qt File Dir Filter Observer");
 I_EXPORT_COMPONENT(DirectoryMonitorParamsGui, "Editor for directory monitor parameters", "Qt File Dir Filter Observer Editor GUI Monitor");
 I_EXPORT_COMPONENT(HotfolderGui, "Hotfolder view", "Qt File Observer Editor View GUI Hotfolder");
+I_EXPORT_COMPONENT(FileNaming, "Component for file (re)nameing", "Qt File Hotfolder Renaming Directory");
 
 
 } // namespace QtFpfPck

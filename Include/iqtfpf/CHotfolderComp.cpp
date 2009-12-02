@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QApplication>
+#include <QDir>
 
 
 // ACF includes
@@ -30,29 +31,6 @@ CHotfolderComp::CHotfolderComp()
 	:m_directoryMonitorObserver(*this),
 	m_parametersObserver(*this)
 {
-}
-
-
-// reimplemented (ifpf::IFileNamingStrategy)
-
-istd::CString CHotfolderComp::GetFileName(const istd::CString& inputFileName) const
-{
-	std::string paramId;
-	if (m_outputDirectoryParamsIdAttrPtr.IsValid()){
-		paramId = (*m_outputDirectoryParamsIdAttrPtr).ToString();
-	}
-
-	const iprm::IFileNameParam* outputDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(m_paramsSetCompPtr->GetParameter(paramId));
-	if (outputDirectoryPtr != NULL && outputDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY){
-		isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
-		if (fileSystemPtr != NULL){
-			istd::CString fileName = fileSystemPtr->GetFileName(inputFileName);
-
-			return outputDirectoryPtr->GetPath() + "/" + fileName;
-		}
-	}
-
-	return istd::CString();
 }
 
 
@@ -116,7 +94,7 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 		return false;
 	}
 
-	if (!m_fileNamingStrategyCompPtr.IsValid()){
+	if (!m_fileNamingCompPtr.IsValid()){
 		SendErrorMessage(0, "File naming component was not set", "Hotfolder");
 
 		return false;
@@ -127,13 +105,12 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
 		const istd::CString& inputFilePath = files[fileIndex];
 
-		isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
-		if (fileSystemPtr != NULL){
-			if (!fileSystemPtr->IsPresent(inputFilePath)){
-				continue;
-			}
+		QFileInfo fileInfo(iqt::GetQString(inputFilePath));
+		if (!fileInfo.exists()){
+			continue;
 		}
-		istd::CString outputFilePath = m_fileNamingStrategyCompPtr->GetFileName(inputFilePath);
+
+		istd::CString outputFilePath = m_fileNamingCompPtr->GetFileName(inputFilePath, GetOutputDirectory());
 
 		ProcessingItem* processingItemPtr = new ProcessingItem;
 
@@ -175,7 +152,7 @@ void CHotfolderComp::run()
 			isys::CSectionBlocker parameterLock(&m_parameterLock);
 
 			if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
-				istd::CString message = istd::CString("Processing of ") + outputFile + "failed";
+				istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
 				SendErrorMessage(0, message, "Hotfolder");
 
 				isys::CSectionBlocker queueLock(&m_processingQueueLock);
@@ -255,6 +232,7 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 					ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
 					if (directoryMonitorPtr != NULL){
 						m_directoryMonitorsMap[monitoringDirectoryPath] = directoryMonitorPtr;
+						m_monitoringSessionsMap[monitoringDirectoryPath] = new ifpf::CMonitoringSession();
 					
 						monitorCompPtr.PopPtr();
 
@@ -271,6 +249,28 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 	}
 
 	StartHotfolder();
+}
+
+
+bool CHotfolderComp::SerializeMonitoringSession(iser::IArchive& archive)
+{
+	return true;
+}
+
+
+istd::CString CHotfolderComp::GetOutputDirectory() const
+{
+	std::string paramId;
+	if (m_outputDirectoryParamsIdAttrPtr.IsValid()){
+		paramId = (*m_outputDirectoryParamsIdAttrPtr).ToString();
+	}
+
+	const iprm::IFileNameParam* outputDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(m_paramsSetCompPtr->GetParameter(paramId));
+	if (outputDirectoryPtr != NULL && outputDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY){
+		return outputDirectoryPtr->GetPath();
+	}
+
+	return istd::CString();
 }
 
 
