@@ -144,7 +144,7 @@ This tutorial demo is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/AcfSplashScreen.png
+                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
               </Value>
             </Data>
           </AttributeInfo>
