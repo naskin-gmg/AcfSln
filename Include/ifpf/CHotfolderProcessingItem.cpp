@@ -1,7 +1,10 @@
 #include "ifpf/CHotfolderProcessingItem.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
+
+#include "iproc/IProcessor.h"
 
 
 namespace ifpf
@@ -9,6 +12,8 @@ namespace ifpf
 
 
 CHotfolderProcessingItem::CHotfolderProcessingItem()
+	:m_processingState(iproc::IProcessor::TS_NONE),
+	m_progress(0.0)
 {
 }
 

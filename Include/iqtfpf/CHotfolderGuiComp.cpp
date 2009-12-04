@@ -114,7 +114,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
 	FileList->header()->setStretchLastSection(true);
 
-	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(30, this);
+	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(25, this);
 	FileList->setItemDelegate(itemDelegate);
 
 	FileList->header()->setResizeMode(0, QHeaderView::Fixed);
@@ -135,29 +135,19 @@ void CHotfolderGuiComp::OnGuiDestroyed()
 
 void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
-	QTreeWidgetItem* fileItemPtr = new QTreeWidgetItem(FileList);
+	ProcessingItem* fileItemPtr = new ProcessingItem(m_stateIconsProviderCompPtr.GetPtr());
 	fileItemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-	QIcon stateIcon = GetIconForState(fileItem.GetProcessingState());
-
-	fileItemPtr->setIcon(0, stateIcon);
 	fileItemPtr->setText(1, iqt::GetQString(fileItem.GetInputFile()));
 	fileItemPtr->setText(2, iqt::GetQString(fileItem.GetOutputFile()));
 	// FileList->setItemWidget(fileItemPtr, 3, new QProgressBar());
 
-	FileList->addTopLevelItem(fileItemPtr);
-}
-
-
-QIcon CHotfolderGuiComp::GetIconForState(int fileState) const
-{
-	if (m_stateIconsProviderCompPtr.IsValid()){
-		if (m_stateIconsProviderCompPtr->GetIconCount() > fileState){
-			return m_stateIconsProviderCompPtr->GetIcon(fileState);
-		}
+	imod::IModel* itemModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(&fileItem));
+	if (itemModelPtr != NULL){
+		itemModelPtr->AttachObserver(fileItemPtr);
 	}
 
-	return QIcon();
+	FileList->addTopLevelItem(fileItemPtr);
 }
 
 
@@ -167,6 +157,29 @@ void CHotfolderGuiComp::OnSettings()
 {
 	if (m_settingsDialogPtr.IsValid()){
 		m_settingsDialogPtr->exec();
+	}
+}
+
+
+// public methods of the embedded class 
+
+CHotfolderGuiComp::ProcessingItem::ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr)
+	:m_iconsProviderPtr(iconsProviderPtr)
+{
+}
+
+// protected methods of the embedded class 
+		
+// reimplemented (imod::TSingleModelObserverBase)
+
+void CHotfolderGuiComp::ProcessingItem::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL && m_iconsProviderPtr != NULL){
+		int fileState = objectPtr->GetProcessingState();
+		if (m_iconsProviderPtr->GetIconCount() > fileState){
+			setIcon(0, m_iconsProviderPtr->GetIcon(fileState));
+		}
 	}
 }
 

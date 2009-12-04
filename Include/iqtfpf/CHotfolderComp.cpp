@@ -161,7 +161,7 @@ void CHotfolderComp::run()
 			else{
 				isys::CSectionBlocker queueLock(&m_processingQueueLock);
 
-				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_INVALID);
+				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_OK);
 			}
 		}
 		else{

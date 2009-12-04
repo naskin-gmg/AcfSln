@@ -61,12 +61,23 @@ public:
 
 private:
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
-	QIcon GetIconForState(int fileState) const;
 
 private Q_SLOTS:
 	void OnSettings();
 
 private:
+	class ProcessingItem: public QTreeWidgetItem, public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem>
+	{
+	public:
+		ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr);
+
+	protected:
+		// reimplemented (imod::TSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	private:
+		iqtgui::IIconProvider* m_iconsProviderPtr;
+	};
+
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
 	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
