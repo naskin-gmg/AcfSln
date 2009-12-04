@@ -1,0 +1,26 @@
+#ifndef QwtPck_included
+#define QwtPck_included
+
+
+#include "icomp/TModelCompWrap.h"
+#include "icomp/TMakeComponentWrap.h"
+
+#include "iqwt3d/CSurfaceViewComp.h"
+
+
+/**
+	Qwt components package.
+*/
+namespace QwtPck
+{
+
+
+typedef iqwt3d::CSurfaceViewComp SurfaceView;
+
+
+} // namespace QwtPck
+
+
+#endif // !QwtPck_included
+
+
