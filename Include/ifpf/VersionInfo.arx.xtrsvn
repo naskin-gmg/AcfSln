@@ -64,10 +64,13 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="1">
-								<Value>
-									0.1.0
-								</Value>
+							<Values count="2">
+                <Value>
+                  0.1.0
+                </Value>
+                <Value>
+                  0.1.1
+                </Value>
               </Values>
 						</Data>
 					</AttributeInfo>
@@ -85,10 +88,13 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="1">
-								<Value>
-									15
-								</Value>
+							<Values count="2">
+                <Value>
+                  15
+                </Value>
+                <Value>
+                  49
+                </Value>
               </Values>
 						</Data>
 					</AttributeInfo>
