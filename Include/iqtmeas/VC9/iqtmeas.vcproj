@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtfpf"
-	ProjectGUID="{720BB09B-0988-4D31-B8DE-C3C27C277F4B}"
-	RootNamespace="iqtfpf"
+	Name="iqtmeas"
+	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
+	RootNamespace="iqtmeas"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -176,47 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNamingComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.moc"
+				RelativePath="..\CSamplesSequenceViewComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -226,31 +186,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorComp.h"
+				RelativePath="..\CSamplesSequenceViewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.h"
+				RelativePath="..\CSamplesSequenceViewComp.moc"
 				>
 			</File>
 			<File
-				RelativePath="..\CFileNamingComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\iqtfpf.h"
+				RelativePath="..\iqtmeas.h"
 				>
 			</File>
 		</Filter>
@@ -267,35 +211,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDirectoryMonitorComp.cpp"
+				RelativePath="..\generated\moc_CSamplesSequenceViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CDirectoryMonitorParamsGui.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderWorkflowGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CHotfolderParamsGuiComp.h"
+				RelativePath="..\generated\ui_CSamplesSequenceViewComp.h"
 				>
 			</File>
 		</Filter>
@@ -303,11 +223,7 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.ui"
+				RelativePath="..\CSamplesSequenceViewComp.ui"
 				>
 			</File>
 		</Filter>

@@ -4,7 +4,10 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ConfigFiles count ="1">
+  <ConfigFiles count ="2">
+    <FilePath>
+      $(ACFDIR)/Config/Full.xpc
+    </FilePath>
     <FilePath>
       ./Core.xpc
     </FilePath>

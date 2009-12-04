@@ -225,7 +225,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderInfo.cpp"
+				RelativePath="..\CHotfolder.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingItem.cpp"
 				>
 			</File>
 			<File
@@ -246,7 +254,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderInfo.h"
+				RelativePath="..\CHotfolder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingItem.h"
 				>
 			</File>
 			<File
@@ -270,7 +286,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IHotfolderInfo.h"
+				RelativePath="..\IHotfolder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IHotfolderParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IHotfolderProcessingItem.h"
 				>
 			</File>
 			<File

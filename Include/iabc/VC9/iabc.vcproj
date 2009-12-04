@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtfpf"
-	ProjectGUID="{720BB09B-0988-4D31-B8DE-C3C27C277F4B}"
-	RootNamespace="iqtfpf"
+	Name="iabc"
+	ProjectGUID="{618CA7D2-C8A2-4331-8D87-F2ABB2E1BAC2}"
+	RootNamespace="iabc"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -20,7 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -51,10 +51,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -94,7 +92,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -126,8 +124,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -176,47 +174,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNamingComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.moc"
+				RelativePath="..\CServiceApplicationComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -226,40 +184,17 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CDirectoryMonitorComp.h"
+				RelativePath="..\CServiceApplicationComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.h"
+				RelativePath="..\CServiceApplicationComp.moc"
 				>
 			</File>
 			<File
-				RelativePath="..\CFileNamingComp.h"
+				RelativePath="..\iabc.h"
 				>
 			</File>
-			<File
-				RelativePath="..\CHotfolderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\iqtfpf.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -267,47 +202,7 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDirectoryMonitorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CDirectoryMonitorParamsGui.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderWorkflowGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CHotfolderParamsGuiComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.ui"
+				RelativePath="..\generated\moc_CServiceApplicationComp.cpp"
 				>
 			</File>
 		</Filter>
