@@ -44,6 +44,15 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(this, true);
 
+		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0){
+			int itemsCount = objectPtr->GetProcessingItemsCount();
+			for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemIndex);
+
+				AddFileItem(*pocessingItem);
+			}
+		}
+
 		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
 			int itemsCount = objectPtr->GetProcessingItemsCount();
 			if (itemsCount > 0){
@@ -51,6 +60,10 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 
 				AddFileItem(*pocessingItem);
 			}
+		}
+
+		if ((updateFlags & ifpf::IHotfolder::CF_WORKING_STATE_CHANGED) != 0){
+			UpdateProcessingCommands();
 		}
 	}
 }
@@ -99,8 +112,25 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	iqtgui::CHierarchicalCommand* hotfolderMenuPtr = new iqtgui::CHierarchicalCommand("&Hotfolder");
 
-	iqtgui::CHierarchicalCommand* settingsCommandPtr = new iqtgui::CHierarchicalCommand("&Settings...");
-	settingsCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
+	m_runCommand.SetGroupId(1);
+	m_runCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	m_runCommand.SetVisuals(tr("&Run"), "Run", tr("Start/Continue the execution of the hotfolder"), QIcon(":/Icons/PlayerPlay"));
+	connect(&m_runCommand, SIGNAL(activated()), this, SLOT(OnRun()));
+	hotfolderMenuPtr->InsertChild(&m_runCommand, false);
+
+	m_holdCommand.SetGroupId(1);
+	m_holdCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	m_holdCommand.SetVisuals(tr("&Hold"), "Hold", tr("Hold the execution of the hotfolder"), QIcon(":/Icons/PlayerPause"));
+	m_holdCommand.setDisabled(true);
+	connect(&m_holdCommand, SIGNAL(activated()), this, SLOT(OnHold()));
+	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
+
+	UpdateProcessingCommands();
+
+	iqtgui::CHierarchicalCommand* settingsCommandPtr = new iqtgui::CHierarchicalCommand();
+	settingsCommandPtr->SetGroupId(2);
+	settingsCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	settingsCommandPtr->SetVisuals(tr("&S&ettings..."), "Settings...", "Edit setting of the hotfolder", QIcon(":/Icons/Settings.svg"));
 	connect(settingsCommandPtr, SIGNAL(activated()), this, SLOT(OnSettings()));
 	hotfolderMenuPtr->InsertChild(settingsCommandPtr, true);
 
@@ -151,6 +181,20 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 }
 
 
+void CHotfolderGuiComp::UpdateProcessingCommands()
+{
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		bool isWorking = objectPtr->IsWorking();
+
+		iqt::CSignalBlocker block´(&m_runCommand);
+		iqt::CSignalBlocker block2(&m_holdCommand);
+		m_runCommand.setEnabled(!isWorking);
+		m_holdCommand.setEnabled(isWorking);
+	}
+}
+
+
 // private slots
 
 void CHotfolderGuiComp::OnSettings()
@@ -159,6 +203,25 @@ void CHotfolderGuiComp::OnSettings()
 		m_settingsDialogPtr->exec();
 	}
 }
+
+
+void CHotfolderGuiComp::OnRun()
+{
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		objectPtr->SetWorking(true);
+	}
+}
+
+
+void CHotfolderGuiComp::OnHold()
+{
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		objectPtr->SetWorking(false);
+	}
+}
+
 
 
 // public methods of the embedded class 

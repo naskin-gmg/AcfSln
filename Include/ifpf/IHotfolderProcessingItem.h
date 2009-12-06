@@ -3,8 +3,9 @@
 
 
 // ACF includes
-#include "istd/IChangeable.h"
 #include "istd/CString.h"
+
+#include "iser/ISerializable.h"
 
 
 namespace ifpf
@@ -14,7 +15,7 @@ namespace ifpf
 /**
 	Interface for a single processing item in the hotfolder.
 */
-class IHotfolderProcessingItem: virtual public istd::IChangeable
+class IHotfolderProcessingItem: virtual public iser::ISerializable
 {
 public:	
 	virtual int GetProcessingState() const = 0;

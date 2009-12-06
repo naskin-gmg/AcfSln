@@ -4,6 +4,9 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "iser/IArchive.h"
+#include "iser/CArchiveTag.h"
+
 #include "iproc/IProcessor.h"
 
 
@@ -30,6 +33,11 @@ void CHotfolderProcessingItem::SetProcessingState(int processingState)
 
 void CHotfolderProcessingItem::SetProgress(double progress)
 {
+	if (m_progress != progress){
+		istd::CChangeNotifier changePtr(this);
+
+		m_progress = progress;
+	}
 }
 
 
@@ -77,6 +85,36 @@ istd::CString CHotfolderProcessingItem::GetInputFile() const
 istd::CString CHotfolderProcessingItem::GetOutputFile() const
 {
 	return m_outputFile;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
+{
+	bool retVal = true;
+
+	static iser::CArchiveTag processingStateTag("ProcessingState", "Current processing state");
+	retVal = retVal && archive.BeginTag(processingStateTag);
+	retVal = retVal && archive.Process(m_processingState);
+	retVal = retVal && archive.EndTag(processingStateTag);
+
+	static iser::CArchiveTag progressTag("Progress", "Current processing progress");
+	retVal = retVal && archive.BeginTag(progressTag);
+	retVal = retVal && archive.Process(m_progress);
+	retVal = retVal && archive.EndTag(progressTag);
+
+	static iser::CArchiveTag inputFileTag("InputFilePath", "Input file path");
+	retVal = retVal && archive.BeginTag(inputFileTag);
+	retVal = retVal && archive.Process(m_inputFile);
+	retVal = retVal && archive.EndTag(inputFileTag);
+
+	static iser::CArchiveTag outputFileTag("OutputFilePath", "Output file path");
+	retVal = retVal && archive.BeginTag(outputFileTag);
+	retVal = retVal && archive.Process(m_outputFile);
+	retVal = retVal && archive.EndTag(outputFileTag);
+
+	return retVal;
 }
 
 

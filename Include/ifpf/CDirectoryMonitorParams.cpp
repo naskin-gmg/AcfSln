@@ -88,7 +88,6 @@ void CDirectoryMonitorParams::SetFileFilters(const istd::CStringList& fileFilter
 }
 
 
-
 // reimplemented (iprm::IFileNameParam)
 
 int CDirectoryMonitorParams::GetPathType() const

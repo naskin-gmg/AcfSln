@@ -196,19 +196,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CHotfolderGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingComp.moc"
 				>
 			</File>
 			<File
@@ -238,11 +238,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderComp.h"
+				RelativePath="..\CHotfolderGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderGuiComp.h"
+				RelativePath="..\CHotfolderProcessingComp.h"
 				>
 			</File>
 			<File
@@ -275,11 +275,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CHotfolderComp.cpp"
+				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
+				RelativePath="..\generated\moc_CHotfolderProcessingComp.cpp"
 				>
 			</File>
 			<File

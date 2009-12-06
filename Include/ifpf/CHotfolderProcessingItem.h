@@ -29,6 +29,9 @@ public:
 	virtual istd::CString GetInputFile() const;
 	virtual istd::CString GetOutputFile() const;
 
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
 private:
 	istd::CString m_inputFile;
 	istd::CString m_outputFile;

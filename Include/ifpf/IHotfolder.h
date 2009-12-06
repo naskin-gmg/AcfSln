@@ -3,7 +3,10 @@
 
 
 // ACF includes
+#include "iser/ISerializable.h"
+
 #include "iprm/IParamsSet.h"
+
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
@@ -16,13 +19,15 @@ namespace ifpf
 /**
 	Interface for a hotfolder's dynamic model.
 */
-class IHotfolder: virtual public istd::IChangeable
+class IHotfolder: virtual public iser::ISerializable
 {
 public:
 	enum ChangeFlags
 	{
 		CF_FILE_ADDED = 0x100000,
-		CF_FILE_REMOVED = 0x200000
+		CF_FILE_REMOVED = 0x200000,
+		CF_WORKING_STATE_CHANGED = 0x400000,
+		CF_CREATE = 0x800000
 	};
 	
 	/**

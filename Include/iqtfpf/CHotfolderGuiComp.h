@@ -61,9 +61,12 @@ public:
 
 private:
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
+	void UpdateProcessingCommands();
 
 private Q_SLOTS:
 	void OnSettings();
+	void OnRun();
+	void OnHold();
 
 private:
 	class ProcessingItem: public QTreeWidgetItem, public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem>
@@ -85,6 +88,9 @@ private:
 	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
+	iqtgui::CHierarchicalCommand m_runCommand;
+	iqtgui::CHierarchicalCommand m_holdCommand;
+
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
 };
 

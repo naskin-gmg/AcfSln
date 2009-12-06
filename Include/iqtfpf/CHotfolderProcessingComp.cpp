@@ -1,4 +1,4 @@
-#include "iqtfpf/CHotfolderComp.h"
+#include "iqtfpf/CHotfolderProcessingComp.h"
 
 
 // Qt includes
@@ -26,7 +26,7 @@ namespace iqtfpf
 
 // public methods
 
-CHotfolderComp::CHotfolderComp()
+CHotfolderProcessingComp::CHotfolderProcessingComp()
 	:m_directoryMonitorObserver(*this),
 	m_parametersObserver(*this)
 {
@@ -35,7 +35,7 @@ CHotfolderComp::CHotfolderComp()
 
 // reimplemented (ifpf::IMonitoringSessionManager)
 
-ifpf::IMonitoringSession* CHotfolderComp::GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const
+ifpf::IMonitoringSession* CHotfolderProcessingComp::GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const
 {
 	DirectoryMonitorsMap::const_iterator foundIter = m_directoryMonitorsMap.find(directoryPath);
 	if (foundIter == m_directoryMonitorsMap.end()){
@@ -57,7 +57,7 @@ ifpf::IMonitoringSession* CHotfolderComp::GetSession(const ifpf::IDirectoryMonit
 
 // reimplemeneted (icomp::IComponent)
 
-void CHotfolderComp::OnComponentCreated()
+void CHotfolderProcessingComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -70,7 +70,7 @@ void CHotfolderComp::OnComponentCreated()
 }
 
 
-void CHotfolderComp::OnComponentDestroyed()
+void CHotfolderProcessingComp::OnComponentDestroyed()
 {
 	BaseClass::OnComponentDestroyed();
 
@@ -85,7 +85,7 @@ void CHotfolderComp::OnComponentDestroyed()
 
 // protected methods
 
-bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
+bool CHotfolderProcessingComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
 {
 	if (!m_fileConvertCompPtr.IsValid()){
 		SendErrorMessage(0, "File conversion component was not set", "Hotfolder");
@@ -120,7 +120,7 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 
 		// add file to hotfolder model:
-		AddFile(processingItemPtr);
+		AddProcessingItem(processingItemPtr);
 	}
 
 	return true;
@@ -129,53 +129,51 @@ bool CHotfolderComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& di
 
 // reimplemented (QThread)
 
-void CHotfolderComp::run()
+void CHotfolderProcessingComp::run()
 {
 	while (!m_finishThread){
-		m_processingQueueLock.Enter();
-		if (GetProcessingItemsCount() == 0){
-			m_processingQueueLock.Leave();
-
-			msleep(50);
-			continue;
+		if (!IsWorking()){
+			msleep(200);
+			continue;					
 		}
 
+		isys::CSectionBlocker processingQueueLock(&m_processingQueueLock);
+		
 		// get available file to process:
 		const ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
 		if (processingItemPtr != NULL){
 			istd::CString inputFile = processingItemPtr->GetInputFile();
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
 			
-			m_processingQueueLock.Leave();
+			processingQueueLock.Reset();
 		
 			isys::CSectionBlocker parameterLock(&m_parameterLock);
+
+			int processingState = iproc::IProcessor::TS_NONE;
 
 			if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
 				istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
 				SendErrorMessage(0, message, "Hotfolder");
 
-				isys::CSectionBlocker queueLock(&m_processingQueueLock);
-
-				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_INVALID);
+				processingState = iproc::IProcessor::TS_INVALID;
 			}
 			else{
-				isys::CSectionBlocker queueLock(&m_processingQueueLock);
-
-				UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_OK);
+				processingState = iproc::IProcessor::TS_OK;
 			}
-		}
-		else{
-			m_processingQueueLock.Leave();
+				
+			isys::CSectionBlocker queueLock(&m_processingQueueLock);
+
+			UpdateProcessingState(processingItemPtr, processingState);
 		}
 
-		msleep(10);
+		msleep(200);
 	}
 }
 
 
 // private methods
 
-void CHotfolderComp::StartHotfolder()
+void CHotfolderProcessingComp::StartHotfolder()
 {
 	m_finishThread = false;
 
@@ -183,7 +181,7 @@ void CHotfolderComp::StartHotfolder()
 }
 
 
-void CHotfolderComp::StopHotfolder()
+void CHotfolderProcessingComp::StopHotfolder()
 {
 	m_finishThread = true;
 
@@ -194,10 +192,15 @@ void CHotfolderComp::StopHotfolder()
 	if (BaseClass3::isRunning()){
 		BaseClass3::terminate();
 	}
+
+	// stop all monitors:
+	for( DirectoryMonitorsMap::iterator index = m_directoryMonitorsMap.begin(); index != m_directoryMonitorsMap.end(); index++){
+		index->second->StopObserving();
+	}
 }
 
 
-void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
+void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 {
 	I_ASSERT(m_inputPathParamsManagerIdAttrPtr.IsValid());
 	I_ASSERT(m_monitoringParamsIdAttrPtr.IsValid());
@@ -251,13 +254,13 @@ void CHotfolderComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 }
 
 
-bool CHotfolderComp::SerializeMonitoringSession(iser::IArchive& archive)
+bool CHotfolderProcessingComp::SerializeMonitoringSession(iser::IArchive& archive)
 {
 	return true;
 }
 
 
-istd::CString CHotfolderComp::GetOutputDirectory() const
+istd::CString CHotfolderProcessingComp::GetOutputDirectory() const
 {
 	std::string paramId;
 	if (m_outputDirectoryParamsIdAttrPtr.IsValid()){
@@ -275,7 +278,7 @@ istd::CString CHotfolderComp::GetOutputDirectory() const
 
 // public methods of embedded class DirectoryMonitorObserver
 
-CHotfolderComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderComp& parent)
+CHotfolderProcessingComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderProcessingComp& parent)
 	:m_parent(parent)
 {
 }
@@ -283,7 +286,7 @@ CHotfolderComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderCom
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderProcessingComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
 	
@@ -295,7 +298,7 @@ void CHotfolderComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPt
 
 // public methods of embedded class ParametersObserver
 
-CHotfolderComp::ParametersObserver::ParametersObserver(CHotfolderComp& parent)
+CHotfolderProcessingComp::ParametersObserver::ParametersObserver(CHotfolderProcessingComp& parent)
 	:m_parent(parent)
 {
 }
@@ -303,7 +306,7 @@ CHotfolderComp::ParametersObserver::ParametersObserver(CHotfolderComp& parent)
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
 		m_parent.SynchronizeWithModel();

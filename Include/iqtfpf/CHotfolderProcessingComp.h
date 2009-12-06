@@ -1,5 +1,5 @@
-#ifndef iqtfpf_CHotfolderComp_included
-#define iqtfpf_CHotfolderComp_included
+#ifndef iqtfpf_CHotfolderProcessingComp_included
+#define iqtfpf_CHotfolderProcessingComp_included
 
 
 // Qt includes
@@ -35,7 +35,7 @@ namespace iqtfpf
 /**
 	Hotfolder representation.
 */
-class CHotfolderComp:
+class CHotfolderProcessingComp:
 			protected QThread,
 			public ibase::CLoggerComponentBase,
 			virtual public ifpf::IMonitoringSessionManager,
@@ -47,7 +47,7 @@ public:
 	typedef ifpf::CHotfolder BaseClass2;
 	typedef QThread BaseClass3;
 
-	I_BEGIN_COMPONENT(CHotfolderComp);
+	I_BEGIN_COMPONENT(CHotfolderProcessingComp);
 		I_REGISTER_INTERFACE(ifpf::IMonitoringSessionManager);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
 		I_ASSIGN(m_fileNamingCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
@@ -59,7 +59,7 @@ public:
 		I_ASSIGN(m_monitoringParamsIdAttrPtr, "MonitoringParamsId", "Parameter set ID for the directory monitoring parameters", true, "");
 	I_END_COMPONENT();
 
-	CHotfolderComp();
+	CHotfolderProcessingComp();
 
 	// reimplemented (ifpf::IMonitoringSessionManager)
 	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
@@ -102,21 +102,19 @@ private:
 	istd::CString GetOutputDirectory() const;
 
 private:
-	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
-
 	/**
 		Internal observer of the changes in the input directories.
 	*/
 	class DirectoryMonitorObserver: public imod::CMultiModelObserverBase
 	{
 	public:
-		DirectoryMonitorObserver(CHotfolderComp& parent);
+		DirectoryMonitorObserver(CHotfolderProcessingComp& parent);
 
 		// reimplemented (imod::IObserver)
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
-		CHotfolderComp& m_parent;
+		CHotfolderProcessingComp& m_parent;
 	};
 
 	/**
@@ -125,12 +123,12 @@ private:
 	class ParametersObserver: public imod::CSingleModelObserverBase
 	{
 	public:
-		ParametersObserver(CHotfolderComp& parent);
+		ParametersObserver(CHotfolderProcessingComp& parent);
 		
 		// reimplemented (imod::IObserver)
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
-		CHotfolderComp& m_parent;
+		CHotfolderProcessingComp& m_parent;
 	};
 
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
@@ -164,5 +162,5 @@ private:
 } // namespace iqtfpf
 
 
-#endif // !iqtfpf_CHotfolderComp_included
+#endif // !iqtfpf_CHotfolderProcessingComp_included
 
