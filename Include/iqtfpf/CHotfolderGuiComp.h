@@ -55,6 +55,7 @@ public:
 private:
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 	void UpdateProcessingCommands();
+	void RebuildItemList();
 
 private Q_SLOTS:
 	void OnRun();

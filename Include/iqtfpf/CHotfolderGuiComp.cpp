@@ -18,7 +18,6 @@ namespace iqtfpf
 {
 
 
-
 // reimplemented (idoc::ICommandsProvider)
 
 const idoc::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
@@ -45,12 +44,7 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 		iqt::CSignalBlocker block(this, true);
 
 		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0){
-			int itemsCount = objectPtr->GetProcessingItemsCount();
-			for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemIndex);
-
-				AddFileItem(*pocessingItem);
-			}
+			RebuildItemList();
 		}
 
 		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
@@ -145,6 +139,26 @@ void CHotfolderGuiComp::UpdateProcessingCommands()
 }
 
 
+void CHotfolderGuiComp::RebuildItemList()
+{
+	while (FileList->topLevelItemCount() > 0){
+		QTreeWidgetItem* itemPtr = FileList->takeTopLevelItem(0);
+
+		delete itemPtr;
+	}
+	
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		int itemsCount = objectPtr->GetProcessingItemsCount();
+		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+			ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemIndex);
+
+			AddFileItem(*pocessingItem);
+		}
+	}
+}
+
+
 // private slots
 
 void CHotfolderGuiComp::OnRun()
@@ -165,7 +179,6 @@ void CHotfolderGuiComp::OnHold()
 }
 
 
-
 // public methods of the embedded class 
 
 CHotfolderGuiComp::ProcessingItem::ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr)
@@ -177,7 +190,7 @@ CHotfolderGuiComp::ProcessingItem::ProcessingItem(iqtgui::IIconProvider* iconsPr
 		
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderGuiComp::ProcessingItem::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL && m_iconsProviderPtr != NULL){

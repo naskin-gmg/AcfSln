@@ -83,7 +83,7 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 // protected methods
 
-bool CHotfolderProcessingComp::OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
+bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
 {
 	if (!m_fileConvertCompPtr.IsValid()){
 		SendErrorMessage(0, "File conversion component was not set", "Hotfolder");
@@ -287,7 +287,7 @@ void CHotfolderProcessingComp::DirectoryMonitorObserver::AfterUpdate(imod::IMode
 	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
 	
 	if (monitorPtr != NULL && updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED){
-		m_parent.OnIncommingInputFileEvent(*monitorPtr);
+		m_parent.OnInputFileEvent(*monitorPtr);
 	}
 }
 

@@ -68,7 +68,7 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected:
-	virtual bool OnIncommingInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
+	virtual bool OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
 
 	// reimplemented (QThread)
 	virtual void run();

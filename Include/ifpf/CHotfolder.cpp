@@ -31,7 +31,7 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 	istd::CChangeNotifier itemChangePtr(itemPtr);
 
 	itemPtr->SetInputFile(inputFilePath);
-	itemPtr->SetOutputFile(inputFilePath);
+	itemPtr->SetOutputFile(outputFilePath);
 	itemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 
 	m_processingItems.PushBack(itemPtr, true);
