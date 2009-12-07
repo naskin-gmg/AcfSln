@@ -17,7 +17,7 @@ namespace iqtfpf
 
 // reimplemented (ifpf::IFileNamingStrategy)
 
-istd::CString CFileNamingComp::GetFileName(const istd::CString& fileName, const istd::CString& directoryPath) const
+istd::CString CFileNamingComp::GetFilePath(const istd::CString& fileName, const istd::CString& directoryPath) const
 {
 	if (!directoryPath.IsEmpty()){
 		QDir outputDirectory(iqt::GetQString(directoryPath));

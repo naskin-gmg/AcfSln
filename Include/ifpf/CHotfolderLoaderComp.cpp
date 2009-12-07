@@ -30,7 +30,7 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 	}
 
 	int retVal = BaseClass::LoadFromFile(data, filePath);
-	if (retVal != StateFailed){
+/*	if (retVal != StateFailed){
 		iprm::IParamsSet* hotfolderParametersPtr = hotfolderPtr->GetHotfolderParams();
 		if (hotfolderParametersPtr != NULL){
 			ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
@@ -40,7 +40,7 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 			}
 		}
 	}
-
+*/
 	return retVal;
 }
 
@@ -55,7 +55,7 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 	if (hotfolderPtr != NULL){
 		int retVal = BaseClass::SaveToFile(data, filePath);
 
-		if (retVal != StateFailed){
+/*		if (retVal != StateFailed){
 			iprm::IParamsSet* hotfolderParametersPtr = hotfolderPtr->GetHotfolderParams();
 			if (hotfolderParametersPtr != NULL){
 				WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
@@ -65,6 +65,7 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 				}
 			}
 		}
+		*/
 	}
 
 	return StateFailed;

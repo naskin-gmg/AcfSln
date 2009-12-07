@@ -21,6 +21,14 @@ CHotfolderProcessingItem::CHotfolderProcessingItem()
 }
 
 
+// reimplemented ()ifpf::CHotfolderProcessingItem
+
+int CHotfolderProcessingItem::GetProcessingState() const
+{
+	return m_processingState;
+}
+
+
 void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
 	if (m_processingState != processingState){
@@ -28,6 +36,12 @@ void CHotfolderProcessingItem::SetProcessingState(int processingState)
 
 		m_processingState = processingState;
 	}
+}
+
+
+double CHotfolderProcessingItem::GetProgress() const
+{
+	return m_progress;
 }
 
 
@@ -41,6 +55,12 @@ void CHotfolderProcessingItem::SetProgress(double progress)
 }
 
 
+istd::CString CHotfolderProcessingItem::GetInputFile() const
+{
+	return m_inputFile;
+}
+
+
 void CHotfolderProcessingItem::SetInputFile(const istd::CString& inputFile)
 {
 	if (m_inputFile != inputFile){
@@ -48,7 +68,12 @@ void CHotfolderProcessingItem::SetInputFile(const istd::CString& inputFile)
 
 		m_inputFile = inputFile;
 	}
+}
 
+
+istd::CString CHotfolderProcessingItem::GetOutputFile() const
+{
+	return m_outputFile;
 }
 
 
@@ -59,32 +84,6 @@ void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
 
 		m_outputFile = outputFile;
 	}
-}
-
-
-// reimplemented ()ifpf::CHotfolderProcessingItem
-
-int CHotfolderProcessingItem::GetProcessingState() const
-{
-	return m_processingState;
-}
-
-
-double CHotfolderProcessingItem::GetProgress() const
-{
-	return m_progress;
-}
-
-
-istd::CString CHotfolderProcessingItem::GetInputFile() const
-{
-	return m_inputFile;
-}
-
-
-istd::CString CHotfolderProcessingItem::GetOutputFile() const
-{
-	return m_outputFile;
 }
 
 

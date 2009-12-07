@@ -28,28 +28,23 @@ namespace ifpf
 class CHotfolder: public ifpf::IHotfolder
 {
 public:
-	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
-
 	CHotfolder();
 
-	virtual void RemoveProcessingItem(ProcessingItem* fileItemPtr);
-	virtual void AddProcessingItem(ProcessingItem* fileItemPtr, bool releaseFlag = true);
-	virtual void SetParams(iprm::IParamsSet* paramsSet);
-	virtual const ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
-	virtual void UpdateProcessingState(const ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState);
-
 	// reimplemented (ifpf::IHotfolder)
+	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath);
+	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr);
+	virtual ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
 	virtual int GetProcessingItemsCount() const;
-	virtual IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const;
+	virtual ifpf::IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const;
 	virtual bool IsWorking() const;
 	virtual void SetWorking(bool working = true);
-	virtual iprm::IParamsSet* GetHotfolderParams() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef istd::TOptPointerVector<ProcessingItem> FileItems;
+	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
+	typedef istd::TOptPointerVector<ifpf::IHotfolderProcessingItem> FileItems;
 
 	FileItems m_processingItems;
 

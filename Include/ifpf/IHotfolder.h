@@ -17,7 +17,7 @@ namespace ifpf
 
 
 /**
-	Interface for a hotfolder's dynamic model.
+	Interface for a hotfolder's state model.
 */
 class IHotfolder: virtual public iser::ISerializable
 {
@@ -29,6 +29,21 @@ public:
 		CF_WORKING_STATE_CHANGED = 0x400000,
 		CF_CREATE = 0x800000
 	};
+
+	/**
+		Add new processing item to hotfolder's state model.
+	*/
+	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath) = 0;
+	
+	/**
+		Remove existing processing item from the hotfolder's state model.
+	*/
+	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr) = 0;
+	
+	/**
+		// TODO: think about moving to another interface
+	*/
+	virtual ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const = 0;
 	
 	/**
 		Get the count of processing items in the hotfolder.
@@ -49,11 +64,6 @@ public:
 		If \c working is \c true, the hotfolder processing will be started or stopped otherwise.
 	*/
 	virtual void SetWorking(bool working = true) = 0;
-
-	/**
-		Get the hotfolder's parameters
-	*/
-	virtual iprm::IParamsSet* GetHotfolderParams() const = 0;
 };
 
 

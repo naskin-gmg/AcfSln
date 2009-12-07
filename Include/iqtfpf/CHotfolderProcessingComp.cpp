@@ -61,8 +61,6 @@ void CHotfolderProcessingComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	BaseClass2::SetParams(m_paramsSetCompPtr.GetPtr());
-
 	I_ASSERT(m_paramsSetModelCompPtr.IsValid());
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_parametersObserver);
@@ -109,18 +107,14 @@ bool CHotfolderProcessingComp::OnIncommingInputFileEvent(const ifpf::IDirectoryM
 			continue;
 		}
 
-		istd::CString outputFilePath = m_fileNamingCompPtr->GetFileName(inputFilePath, GetOutputDirectory());
-
-		ProcessingItem* processingItemPtr = new ProcessingItem;
-
-		processingItemPtr->SetInputFile(inputFilePath);
-		processingItemPtr->SetOutputFile(outputFilePath);
-		processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
+		istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath, GetOutputDirectory());
 
 		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 
-		// add file to hotfolder model:
-		AddProcessingItem(processingItemPtr);
+		I_ASSERT(m_hotfolderCompPtr.IsValid());
+
+		// add file to hotfolder's model:
+		m_hotfolderCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
 	}
 
 	return true;
@@ -131,8 +125,10 @@ bool CHotfolderProcessingComp::OnIncommingInputFileEvent(const ifpf::IDirectoryM
 
 void CHotfolderProcessingComp::run()
 {
+	I_ASSERT(m_hotfolderCompPtr.IsValid());
+
 	while (!m_finishThread){
-		if (!IsWorking()){
+		if (!m_hotfolderCompPtr->IsWorking()){
 			msleep(200);
 			continue;					
 		}
@@ -140,7 +136,7 @@ void CHotfolderProcessingComp::run()
 		isys::CSectionBlocker processingQueueLock(&m_processingQueueLock);
 		
 		// get available file to process:
-		const ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
+		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderCompPtr->GetNextProcessingFile();
 		if (processingItemPtr != NULL){
 			istd::CString inputFile = processingItemPtr->GetInputFile();
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
@@ -163,7 +159,7 @@ void CHotfolderProcessingComp::run()
 				
 			isys::CSectionBlocker queueLock(&m_processingQueueLock);
 
-			UpdateProcessingState(processingItemPtr, processingState);
+			processingItemPtr->SetProcessingState(processingState);
 		}
 
 		msleep(200);
@@ -177,7 +173,7 @@ void CHotfolderProcessingComp::StartHotfolder()
 {
 	m_finishThread = false;
 
-	BaseClass3::start();
+	BaseClass2::start();
 }
 
 
@@ -187,10 +183,10 @@ void CHotfolderProcessingComp::StopHotfolder()
 
 	// wait for 30 seconds for finishing of thread: 
 	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass3::isRunning());
+	while (timer.GetElapsed() < 30 && BaseClass2::isRunning());
 
-	if (BaseClass3::isRunning()){
-		BaseClass3::terminate();
+	if (BaseClass2::isRunning()){
+		BaseClass2::terminate();
 	}
 
 	// stop all monitors:

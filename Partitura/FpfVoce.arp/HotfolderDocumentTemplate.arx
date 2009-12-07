@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1245
         </Number>
         <Description>
           ACF
@@ -105,7 +105,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderLoader
+                XmlFileSerializer
               </Value>
             </Data>
           </AttributeInfo>
@@ -211,13 +211,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderLoader
+        XmlFileSerializer
       </Id>
       <PackageId>
-        FpfPck
+        BasePck
       </PackageId>
       <ComponentId>
-        HotfolderLoader
+        XmlFileSerializer
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -226,7 +226,28 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              FileExtensions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  htf
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Log

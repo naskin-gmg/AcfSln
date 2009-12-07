@@ -19,9 +19,16 @@ class IHotfolderProcessingItem: virtual public iser::ISerializable
 {
 public:	
 	virtual int GetProcessingState() const = 0;
+	virtual void SetProcessingState(int processingState) = 0;
+
 	virtual double GetProgress() const = 0;
+	virtual void SetProgress(double progress) = 0;
+	
 	virtual istd::CString GetInputFile() const = 0;
+	virtual void SetInputFile(const istd::CString& inputFile) = 0;
+	
 	virtual istd::CString GetOutputFile() const = 0;
+	virtual void SetOutputFile(const istd::CString& outputFile) = 0;
 };
 
 

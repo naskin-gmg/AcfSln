@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1245
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         Hotfolder
@@ -80,6 +80,17 @@
       </X>
       <X>
         249
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        XmlFileSerializer
+      </ComponentName>
+      <X>
+        -185
+      </X>
+      <X>
+        241
       </X>
     </Element>
   </PositionMap>

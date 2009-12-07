@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1239
+          1245
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
-        HotfolderGui
+        ComposedHotfolderGui
       </Id>
       <PackageId>
         QtFpfPck
       </PackageId>
       <ComponentId>
-        HotfolderGui
+        ComposedHotfolderGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,7 +33,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              HotfolderGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderGui
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               HotfolderParametersEditor
@@ -53,6 +72,65 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              HotfolderParamsId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StateModelParamsId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderStateModel
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderGui
+      </Id>
+      <PackageId>
+        QtFpfPck
+      </PackageId>
+      <ComponentId>
+        HotfolderGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ProgressManager
@@ -235,7 +313,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        HotfolderGui
+        ComposedHotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -243,7 +321,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        HotfolderGui
+        ComposedHotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -251,7 +329,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        HotfolderGui
+        ComposedHotfolderGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

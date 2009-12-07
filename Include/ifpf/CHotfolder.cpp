@@ -23,7 +23,24 @@ CHotfolder::CHotfolder()
 }
 
 
-void CHotfolder::RemoveProcessingItem(ProcessingItem* fileItemPtr)
+const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath)
+{
+	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
+
+	ProcessingItem* itemPtr = new ProcessingItem;
+	istd::CChangeNotifier itemChangePtr(itemPtr);
+
+	itemPtr->SetInputFile(inputFilePath);
+	itemPtr->SetOutputFile(inputFilePath);
+	itemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
+
+	m_processingItems.PushBack(itemPtr, true);
+
+	return itemPtr;
+}
+
+
+void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr)
 {
 	if (m_processingItems.Remove(fileItemPtr)){
 		istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
@@ -31,26 +48,7 @@ void CHotfolder::RemoveProcessingItem(ProcessingItem* fileItemPtr)
 }
 
 
-void CHotfolder::AddProcessingItem(ProcessingItem* fileItemPtr, bool releaseFlag)
-{
-	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
-
-	m_processingItems.PushBack(fileItemPtr, releaseFlag);
-}
-
-
-void CHotfolder::SetParams(iprm::IParamsSet* paramsSet)
-{
-	// Set params set only by initialization:
-	I_ASSERT(m_paramsSetPtr == NULL);
-	// Parameter validation:
-	I_ASSERT(paramsSet != NULL);
-
-	m_paramsSetPtr = paramsSet;
-}
-
-
-const ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
+ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 {
 	int itemsCount = m_processingItems.GetCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
@@ -62,21 +60,6 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 	}
 
 	return NULL;
-}
-
-
-void CHotfolder::UpdateProcessingState(const ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState)
-{
-	int itemsCount = m_processingItems.GetCount();
-	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-		ifpf::CHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
-
-		if (itemPtr == processingItemPtr){
-			itemPtr->SetProcessingState(processingState);
-
-			break;
-		}
-	}
 }
 
 
@@ -110,12 +93,6 @@ void CHotfolder::SetWorking(bool working)
 }
 
 
-iprm::IParamsSet* CHotfolder::GetHotfolderParams() const
-{
-	return m_paramsSetPtr;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CHotfolder::Serialize(iser::IArchive& archive)
@@ -141,7 +118,7 @@ bool CHotfolder::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginMultiTag(processingItemsTag, processingItemTag, processingItemsCount);
 	if (archive.IsStoring()){
 		for (int itemIndex = 0; itemIndex < processingItemsCount; itemIndex++){
-			ifpf::CHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
+			ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
 
 			retVal = retVal && archive.BeginTag(processingItemTag);
 			retVal = retVal && itemPtr->Serialize(archive);

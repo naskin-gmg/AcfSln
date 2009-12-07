@@ -17,9 +17,9 @@ class IFileNaming: virtual public istd::IChangeable
 {
 public:
 	/**
-		Get the file name (not file path) for the given file name and directory.
+		Get the file path for the given file name and directory.
 	*/
-	virtual istd::CString GetFileName(const istd::CString& fileName, const istd::CString& directoryPath) const = 0;
+	virtual istd::CString GetFilePath(const istd::CString& fileName, const istd::CString& directoryPath) const = 0;
 };
 
 

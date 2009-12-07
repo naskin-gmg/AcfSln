@@ -39,8 +39,6 @@ public:
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
-		I_ASSIGN(m_settingsGuiCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
-		I_ASSIGN(m_settingsObserverCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 	I_END_COMPONENT;
 
@@ -51,20 +49,14 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
-	// reimplemented TGuiObserverWrap
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 private:
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 	void UpdateProcessingCommands();
 
 private Q_SLOTS:
-	void OnSettings();
 	void OnRun();
 	void OnHold();
 
@@ -83,15 +75,11 @@ private:
 
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
-	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
-	I_REF(imod::IObserver, m_settingsObserverCompPtr);
 	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;
 	iqtgui::CHierarchicalCommand m_holdCommand;
-
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
 };
 
 

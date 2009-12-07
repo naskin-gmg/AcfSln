@@ -29,7 +29,7 @@ public:
 	I_END_COMPONENT();
 
 	// reimplemented (ifpf::IFileNaming)
-	virtual istd::CString GetFileName(const istd::CString& fileName, const istd::CString& directoryPath) const;
+	virtual istd::CString GetFilePath(const istd::CString& fileName, const istd::CString& directoryPath) const;
 };
 
 

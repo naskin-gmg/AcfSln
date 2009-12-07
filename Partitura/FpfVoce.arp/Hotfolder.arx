@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1245
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="7">
     <Element>
       <Id>
         DirectoryMonitor
@@ -260,7 +260,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               DirectoryMontorFactory
@@ -315,6 +315,25 @@
               </IsEnabled>
               <Value>
                 OutputFileRenaming
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              HotfolderStateModel
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderStateModel
               </Value>
             </Data>
           </AttributeInfo>
@@ -415,6 +434,75 @@
     </Element>
     <Element>
       <Id>
+        HotfolderModel
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Parameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  HotfolderStateModel
+                </Value>
+                <Value>
+                  HotfolderParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParametersId
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  HotfolderStateModel
+                </Value>
+                <Value>
+                  HotfolderParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         HotfolderParams
       </Id>
       <PackageId>
@@ -422,6 +510,27 @@
       </PackageId>
       <ComponentId>
         HotfolderParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderStateModel
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        HotfolderStateModel
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -472,13 +581,29 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderModel
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        HotfolderModel
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        HotfolderModel
       </ComponentId>
     </Interface>
     <Interface>
@@ -486,7 +611,7 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderModel
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

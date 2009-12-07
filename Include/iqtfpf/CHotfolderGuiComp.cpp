@@ -69,37 +69,6 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 }
 
 
-// reimplemented TGuiObserverWrap
-
-void CHotfolderGuiComp::OnGuiModelAttached()
-{
-	if (m_settingsObserverCompPtr.IsValid()){
-		ifpf::IHotfolder* objectPtr = GetObjectPtr();
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetHotfolderParams());
-		if (paramsModelPtr != NULL){
-			paramsModelPtr->AttachObserver(m_settingsObserverCompPtr.GetPtr());
-		}
-	}
-	
-	BaseClass::OnGuiModelAttached();
-}
-
-
-void CHotfolderGuiComp::OnGuiModelDetached()
-{
-	if (m_settingsObserverCompPtr.IsValid()){
-		ifpf::IHotfolder* objectPtr = GetObjectPtr();
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetHotfolderParams());
-		if (paramsModelPtr != NULL){
-			paramsModelPtr->DetachObserver(m_settingsObserverCompPtr.GetPtr());
-		}
-	}
-
-	BaseClass::OnGuiModelDetached();
-
-}
-
-
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CHotfolderGuiComp::OnGuiCreated()
@@ -125,20 +94,9 @@ void CHotfolderGuiComp::OnGuiCreated()
 	connect(&m_holdCommand, SIGNAL(activated()), this, SLOT(OnHold()));
 	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
 
-	UpdateProcessingCommands();
-
-	iqtgui::CHierarchicalCommand* settingsCommandPtr = new iqtgui::CHierarchicalCommand();
-	settingsCommandPtr->SetGroupId(2);
-	settingsCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	settingsCommandPtr->SetVisuals(tr("&S&ettings..."), "Settings...", "Edit setting of the hotfolder", QIcon(":/Icons/Settings.svg"));
-	connect(settingsCommandPtr, SIGNAL(activated()), this, SLOT(OnSettings()));
-	hotfolderMenuPtr->InsertChild(settingsCommandPtr, true);
-
 	m_hotfolderCommands.InsertChild(hotfolderMenuPtr, true);
 
-	if (m_settingsGuiCompPtr.IsValid()){
-		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, GetWidget())); 
-	}
+	UpdateProcessingCommands();
 
 	// some visual details:
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
@@ -150,14 +108,6 @@ void CHotfolderGuiComp::OnGuiCreated()
 	FileList->header()->setResizeMode(0, QHeaderView::Fixed);
 	FileList->header()->resizeSection(0, itemDelegate->GetItemHeight());
 
-}
-
-
-void CHotfolderGuiComp::OnGuiDestroyed()
-{
-	m_settingsDialogPtr.Reset();
-
-	BaseClass::OnGuiDestroyed();
 }
 
 
@@ -196,14 +146,6 @@ void CHotfolderGuiComp::UpdateProcessingCommands()
 
 
 // private slots
-
-void CHotfolderGuiComp::OnSettings()
-{
-	if (m_settingsDialogPtr.IsValid()){
-		m_settingsDialogPtr->exec();
-	}
-}
-
 
 void CHotfolderGuiComp::OnRun()
 {

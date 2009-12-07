@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1245
         </Number>
         <Description>
           ACF
@@ -15,7 +15,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="8">
+    <Element>
+      <ComponentName>
+        ComposedParamsSet
+      </ComponentName>
+      <X>
+        -356
+      </X>
+      <X>
+        -278
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         DirectoryMonitor
@@ -32,10 +43,10 @@
         FileProcessing
       </ComponentName>
       <X>
-        -264.74
+        259.26
       </X>
       <X>
-        3.89949
+        -12.1005
       </X>
     </Element>
     <Element>
@@ -43,7 +54,7 @@
         Hotfolder
       </ComponentName>
       <X>
-        -36.0624
+        -35.0624
       </X>
       <X>
         1.41421
@@ -51,13 +62,35 @@
     </Element>
     <Element>
       <ComponentName>
+        HotfolderModel
+      </ComponentName>
+      <X>
+        -55
+      </X>
+      <X>
+        -285
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         HotfolderParams
       </ComponentName>
       <X>
-        164.586
+        46.586
       </X>
       <X>
-        -102.414
+        -150.414
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderStateModel
+      </ComponentName>
+      <X>
+        -155
+      </X>
+      <X>
+        -149
       </X>
     </Element>
     <Element>
@@ -65,10 +98,10 @@
         OutputFileRenaming
       </ComponentName>
       <X>
-        -50
+        -256
       </X>
       <X>
-        -101
+        1
       </X>
     </Element>
   </PositionMap>

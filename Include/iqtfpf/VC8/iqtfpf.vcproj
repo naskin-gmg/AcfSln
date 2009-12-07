@@ -176,6 +176,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CComposedHotfolderGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CComposedHotfolderGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirectoryMonitorComp.cpp"
 				>
 			</File>
@@ -226,6 +234,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\CComposedHotfolderGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirectoryMonitorComp.h"
 				>
 			</File>
@@ -266,6 +278,10 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\generated\moc_CComposedHotfolderGuiComp.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\generated\moc_CDirectoryMonitorComp.cpp"
 				>

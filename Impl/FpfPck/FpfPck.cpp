@@ -14,6 +14,7 @@ I_EXPORT_PACKAGE("Fpf", "ImagingTools File2File Processing Framework package", "
 I_EXPORT_COMPONENT(FileProcessing, "Sequence processing using slave processors", "File Processing Hotfolder");
 I_EXPORT_COMPONENT(DirectoryMonitorParams, "Parameter for the directory monitoring", "File Processing Parameter Directory Monitoring");
 I_EXPORT_COMPONENT(HotfolderLoader, "Hotfolder loader", "File Processing Parameter Directory Hotfolder");
+I_EXPORT_COMPONENT(HotfolderStateModel, "Hotfolder's state", "File Processing Hotfolder");
 
 
 } // namespace FpfPck

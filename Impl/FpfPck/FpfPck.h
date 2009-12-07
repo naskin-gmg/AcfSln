@@ -7,6 +7,7 @@
 
 #include "ifpf/CFileProcessingComp.h"
 #include "ifpf/CDirectoryMonitorParams.h"
+#include "ifpf/CHotfolder.h"
 #include "ifpf/CHotfolderLoaderComp.h"
 
 
@@ -21,7 +22,11 @@ typedef ifpf::CFileProcessingComp FileProcessing;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						ifpf::CDirectoryMonitorParams, iser::ISerializable, ifpf::IDirectoryMonitorParams> > DirectoryMonitorParams;
+typedef icomp::TModelCompWrap<
+			icomp::TMakeComponentWrap<
+						ifpf::CHotfolder, iser::ISerializable, ifpf::IHotfolder> > HotfolderStateModel;
 typedef ifpf::CHotfolderLoaderComp HotfolderLoader;
+
 
 } // namespace FpfPck
 

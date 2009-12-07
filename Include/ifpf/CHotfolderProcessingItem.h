@@ -18,16 +18,15 @@ class CHotfolderProcessingItem: virtual public ifpf::IHotfolderProcessingItem
 public:
 	CHotfolderProcessingItem();
 
-	virtual void SetProcessingState(int processingState);
-	virtual void SetProgress(double progress);
-	virtual void SetInputFile(const istd::CString& inputFile);
-	virtual void SetOutputFile(const istd::CString& outputFile);
-
 	// reimplemented ()ifpf::CHotfolderProcessingItem
 	virtual int GetProcessingState() const;
+	virtual void SetProcessingState(int processingState);
 	virtual double GetProgress() const;
+	virtual void SetProgress(double progress);
 	virtual istd::CString GetInputFile() const;
+	virtual void SetInputFile(const istd::CString& inputFile);
 	virtual istd::CString GetOutputFile() const;
+	virtual void SetOutputFile(const istd::CString& outputFile);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
