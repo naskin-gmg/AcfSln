@@ -42,17 +42,17 @@ bool CXmlReadArchiveBase::BeginTag(const iser::CArchiveTag& tag)
          currentElement = (xercesc::DOMElement*) m_nodePtr;
 	}
 
-    if(currentElement != NULL){
+    if (currentElement != NULL){
         xercesc::DOMNodeList* nodeList = currentElement->getElementsByTagName(tagName);
         foundNode = nodeList->item(0);
     }
     else{
         foundNode = m_nodePtr->getFirstChild();
-		if(foundNode != NULL && strTagName != foundNode->getNodeName()){
+		if (foundNode != NULL && strTagName != foundNode->getNodeName()){
 			foundNode = NULL;
 		}
     }
-	if(foundNode){
+	if (foundNode){
         m_nodePtr = foundNode;
 	}
 

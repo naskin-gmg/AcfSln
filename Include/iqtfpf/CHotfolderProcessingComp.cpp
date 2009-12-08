@@ -1,6 +1,10 @@
 #include "iqtfpf/CHotfolderProcessingComp.h"
 
 
+// STL includes
+#include <algorithm>
+
+
 // Qt includes
 #include <QDir>
 
@@ -190,7 +194,7 @@ void CHotfolderProcessingComp::StopHotfolder()
 	}
 
 	// stop all monitors:
-	for( DirectoryMonitorsMap::iterator index = m_directoryMonitorsMap.begin(); index != m_directoryMonitorsMap.end(); index++){
+	for (DirectoryMonitorsMap::iterator index = m_directoryMonitorsMap.begin(); index != m_directoryMonitorsMap.end(); index++){
 		index->second->StopObserving();
 	}
 }
@@ -204,53 +208,25 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 
 	StopHotfolder();
 
-	// Initialize the directory monitoring:
-	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		const iprm::IParamsManager* directoryParamsManagerPtr = 
-					dynamic_cast<const iprm::IParamsManager*>(m_paramsSetCompPtr->GetParameter((*m_inputPathParamsManagerIdAttrPtr).ToString()));
-
-		const iprm::IParamsSet* directoryMonitoringParamsPtr = 
-					dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter((*m_monitoringParamsIdAttrPtr).ToString()));
-
-		if (directoryParamsManagerPtr != NULL && directoryMonitoringParamsPtr != NULL){			
-			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
-			for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
-				iprm::IParamsSet* inputDirectoryParamPtr = directoryParamsManagerPtr->GetParamsSet(inputIndex);
-				I_ASSERT(inputDirectoryParamPtr != NULL);
-
-				const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
-				I_ASSERT(monitoringDirectoryPtr != NULL);
-				I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
-
-				istd::CString monitoringDirectoryPath = monitoringDirectoryPtr->GetPath();
-
-				// create monitor:
-				istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
-				if (monitorCompPtr.IsValid()){
-					ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
-					if (directoryMonitorPtr != NULL){
-						m_directoryMonitorsMap[monitoringDirectoryPath] = directoryMonitorPtr;
-						m_monitoringSessionsMap[monitoringDirectoryPath] = new ifpf::CMonitoringSession();
-					
-						monitorCompPtr.PopPtr();
-
-						imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
-						I_ASSERT(directoryMonitorModelPtr != NULL);
-
-						directoryMonitorModelPtr->AttachObserver(&m_directoryMonitorObserver);
-
-						directoryMonitorPtr->StartObserving(inputDirectoryParamPtr);
-					}
-				}
-			}
+	// setup directory monitoring:
+	istd::CStringList addedDirectories = GetAddedInputDirectories();
+	for (int pathIndex = 0; pathIndex < int(addedDirectories.size()); pathIndex++){
+		const iprm::IParamsSet* monitoringParamsPtr = GetMonitoringParamsSet(pathIndex);
+		if (monitoringParamsPtr != NULL){
+			AddDirectoryMonitor(addedDirectories[pathIndex], monitoringParamsPtr);
 		}
+	}
+	
+	istd::CStringList removedDirectories = GetRemovedInputDirectories();
+	for (int pathIndex = 0; pathIndex < int(removedDirectories.size()); pathIndex++){
+		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
 	}
 
 	StartHotfolder();
 }
 
 
-bool CHotfolderProcessingComp::SerializeMonitoringSession(iser::IArchive& archive)
+bool CHotfolderProcessingComp::SerializeMonitoringSession(iser::IArchive& /*archive*/)
 {
 	return true;
 }
@@ -269,6 +245,128 @@ istd::CString CHotfolderProcessingComp::GetOutputDirectory() const
 	}
 
 	return istd::CString();
+}
+
+
+istd::CStringList CHotfolderProcessingComp::GetInputDirectories() const
+{
+	istd::CStringList inputDirectories;
+
+	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		const iprm::IParamsManager* directoryParamsManagerPtr = 
+					dynamic_cast<const iprm::IParamsManager*>(m_paramsSetCompPtr->GetParameter((*m_inputPathParamsManagerIdAttrPtr).ToString()));
+
+		const iprm::IParamsSet* directoryMonitoringParamsPtr = 
+					dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter((*m_monitoringParamsIdAttrPtr).ToString()));
+
+		if (directoryParamsManagerPtr != NULL && directoryMonitoringParamsPtr != NULL){			
+			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
+			for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
+				iprm::IParamsSet* inputDirectoryParamPtr = directoryParamsManagerPtr->GetParamsSet(inputIndex);
+				I_ASSERT(inputDirectoryParamPtr != NULL);
+
+				const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
+				I_ASSERT(monitoringDirectoryPtr != NULL);
+				I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
+
+				inputDirectories.push_back(monitoringDirectoryPtr->GetPath());
+			}
+		}
+	}
+
+	return inputDirectories;
+}
+
+
+const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(int index) const
+{
+	if (m_inputPathParamsManagerIdAttrPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
+		const iprm::IParamsManager* directoryParamsManagerPtr = 
+					dynamic_cast<const iprm::IParamsManager*>(m_paramsSetCompPtr->GetParameter((*m_inputPathParamsManagerIdAttrPtr).ToString()));
+
+		const iprm::IParamsSet* directoryMonitoringParamsPtr = 
+					dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter((*m_monitoringParamsIdAttrPtr).ToString()));
+
+		if (directoryParamsManagerPtr != NULL && directoryMonitoringParamsPtr != NULL){			
+			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
+			I_ASSERT(index < inputDirectoriesCount);
+			I_ASSERT(index >= 0);
+
+			return directoryParamsManagerPtr->GetParamsSet(index);
+		}
+	}
+
+	return NULL;
+}
+
+
+istd::CStringList CHotfolderProcessingComp::GetAddedInputDirectories() const
+{
+	istd::CStringList inputDirectories = GetInputDirectories();
+	istd::CStringList addedDirectories;
+
+	for (int index = 0; index < int(inputDirectories.size()); index++){
+		if (m_directoryMonitorsMap.find(inputDirectories[index]) == m_directoryMonitorsMap.end()){
+			addedDirectories.push_back(inputDirectories[index]);
+		}
+	}
+
+	return addedDirectories;
+}
+
+
+istd::CStringList CHotfolderProcessingComp::GetRemovedInputDirectories() const
+{
+	istd::CStringList inputDirectories = GetInputDirectories();
+	istd::CStringList removedDirectories;
+
+	for (		DirectoryMonitorsMap::const_iterator index = m_directoryMonitorsMap.begin();
+				index != m_directoryMonitorsMap.end();
+				index++){
+		istd::CStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index->first);
+		if (foundIter == inputDirectories.end()){
+			removedDirectories.push_back(index->first);
+		}
+	}
+
+	return removedDirectories;
+}
+
+	
+ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr)
+{
+	istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
+	if (monitorCompPtr.IsValid()){
+		ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
+		if (directoryMonitorPtr != NULL){
+			m_directoryMonitorsMap[directoryPath] = directoryMonitorPtr;
+			m_monitoringSessionsMap[directoryPath] = new ifpf::CMonitoringSession();
+
+			monitorCompPtr.PopPtr();
+
+			imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
+			I_ASSERT(directoryMonitorModelPtr != NULL);
+
+			directoryMonitorModelPtr->AttachObserver(&m_directoryMonitorObserver);
+
+			directoryMonitorPtr->StartObserving(monitoringParamsPtr);
+		}
+
+		return directoryMonitorPtr;
+	}
+
+	return NULL;
+}
+
+	
+void CHotfolderProcessingComp::RemoveDirectoryMonitor(const istd::CString& directoryPath)
+{
+	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
+	if (monitorIter != m_directoryMonitorsMap.end()){
+		monitorIter->second->StopObserving();
+
+		m_directoryMonitorsMap.erase(monitorIter);
+	}
 }
 
 

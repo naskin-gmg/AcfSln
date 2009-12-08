@@ -55,7 +55,7 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
-	// reimplemented TGuiObserverWrap
+	// reimplemented (TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 

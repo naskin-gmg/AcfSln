@@ -49,6 +49,9 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
+	// reimplemented (TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 

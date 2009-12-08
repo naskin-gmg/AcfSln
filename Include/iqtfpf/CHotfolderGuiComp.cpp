@@ -63,6 +63,16 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 }
 
 
+// reimplemented (TGuiObserverWrap)
+
+void CHotfolderGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	UpdateEditor(ifpf::IHotfolder::CF_CREATE);
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CHotfolderGuiComp::OnGuiCreated()

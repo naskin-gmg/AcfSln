@@ -100,6 +100,13 @@ private:
 	*/
 	istd::CString GetOutputDirectory() const;
 
+	istd::CStringList GetInputDirectories() const;
+	const iprm::IParamsSet* GetMonitoringParamsSet(int index) const;
+	istd::CStringList GetAddedInputDirectories() const;
+	istd::CStringList GetRemovedInputDirectories() const;
+	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
+	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
+
 private:
 	/**
 		Internal observer of the changes in the input directories.

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1245
+          1246
         </Number>
         <Description>
           ACF
@@ -267,19 +267,19 @@
               </IsEnabled>
               <Values count="5">
                 <Value>
-                  StateUnknown
+                  StateUnknown.svg
                 </Value>
                 <Value>
-                  StateUnknown
+                  StateUnknown.svg
                 </Value>
                 <Value>
-                  StateOk
+                  StateOk.svg
                 </Value>
                 <Value>
                   Cancel
                 </Value>
                 <Value>
-                  StateInvalid
+                  StateInvalid.svg
                 </Value>
               </Values>
             </Data>
