@@ -100,7 +100,7 @@ int CLibAvVideoDecoderComp::DoProcessing(
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (		(bitmapPtr != NULL) &&
 				m_bitmapObjectCompPtr.IsValid()){
-		if (bitmapPtr->CopyImageFrom(*m_bitmapObjectCompPtr)){
+		if (bitmapPtr->CopyFrom(*m_bitmapObjectCompPtr)){
 			return TS_OK;
 		}
 	}
@@ -320,7 +320,7 @@ bool CLibAvVideoDecoderComp::SetCurrentPosition(double position)
 
 int	CLibAvVideoDecoderComp::GetSupportedFeatures() const
 {
-	return SF_SEEK | SF_GRAB_CURRENT;
+	return SF_OPEN_MEDIA | SF_SEEK;
 }
 
 

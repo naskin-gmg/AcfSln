@@ -179,7 +179,7 @@ bool CVlcVideoViewGuiComp::SetCurrentPosition(double position)
 
 int	CVlcVideoViewGuiComp::GetSupportedFeatures() const
 {
-	return SF_PLAY | SF_AUTO_PLAY | SF_SEEK;
+	return SF_OPEN_MEDIA | SF_PLAY | SF_AUTO_PLAY | SF_SEEK;
 }
 
 
