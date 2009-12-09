@@ -140,6 +140,8 @@ private:
 	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
 	I_ATTR(istd::CString, m_directoryMonitorParamsIdAttrPtr);
 	I_ATTR(bool, m_autoStartAttrPtr);
+
+	bool m_isWorking;
 };
 
 

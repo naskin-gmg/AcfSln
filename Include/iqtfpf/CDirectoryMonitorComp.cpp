@@ -66,11 +66,16 @@ istd::CStringList CDirectoryMonitorComp::GetChangedFileItems(int changeFlags) co
 
 bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 {
+	bool wasRunning = BaseClass2::isRunning() | m_isWorking; 
+	if (wasRunning){
+		StopObserverThread();
+	}
+
+	m_isWorking = true;
+
 	if ((paramsSetPtr == NULL) && (!m_paramsSetCompPtr.IsValid() || !m_paramsSetModelCompPtr.IsValid())){
 		return false;
 	}
-	// ensure thread is stopped:
-	StopObserverThread();
 
 	// Of using of external parameter model, connect to it, otherwise use the default parameter set:
 	const iprm::IParamsSet* parameterModelPtr = paramsSetPtr == NULL ? m_paramsSetCompPtr.GetPtr() : paramsSetPtr;
@@ -81,7 +86,10 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 		SynchronizeWithModel(*m_directoryPathModelPtr);
 		SynchronizeWithModel(*m_directoryMonitorParamsModelPtr);
 
-		StartObserverThread();
+		// if observing thread was running -> restart:
+		if (wasRunning){
+			StartObserverThread();
+		}
 
 		return true;
 	}
@@ -92,6 +100,8 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 
 void CDirectoryMonitorComp::StopObserving()
 {
+	m_isWorking = false;
+
 	StopObserverThread();
 }
 
@@ -132,7 +142,20 @@ void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlag
 {
 	I_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
+		bool needRestart = false; 
+		if (modelPtr == m_directoryPathModelPtr){
+			needRestart = BaseClass2::isRunning() | m_isWorking;
+			if (needRestart){
+				StopObserverThread();
+			}
+		}
+
 		SynchronizeWithModel(*modelPtr);
+
+		// if observing thread was running -> restart:
+		if (needRestart){
+			StartObserverThread();
+		}
 	}
 }
 
@@ -176,6 +199,13 @@ void CDirectoryMonitorComp::run()
 	while (!m_finishThread){
 		bool needStateUpdate = (updateTimer.GetElapsed() >= m_poolingFrequency);
 		if (!needStateUpdate){
+			msleep(100);
+
+			continue;
+		}
+
+		QFileInfo fileInfo(m_currentDirectory.absolutePath());
+		if (!fileInfo.exists()){
 			msleep(100);
 
 			continue;
@@ -278,7 +308,7 @@ void CDirectoryMonitorComp::run()
 
 void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 {
-	if ((changeFlags & CF_ALL) != 0){
+	if ((changeFlags & CF_SOME_CHANGES) != 0){
 		// notify observers:
 		istd::CChangeNotifier changePtr(this, changeFlags);
 
@@ -299,17 +329,16 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 
 void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 {	
+	I_ASSERT(!BaseClass2::isRunning());
+
+	SendInfoMessage(0, iqt::GetCString(m_currentDirectory.absolutePath()));
+
 	if (m_currentDirectory == QDir(folderPath)){
 		return;
 	}
 
 	if (folderPath.isEmpty()){
 		return;
-	}
-
-	bool wasRunning = BaseClass2::isRunning(); 
-	if (wasRunning){
-		StopObserverThread();
 	}
 
 	ResetFiles();
@@ -331,18 +360,7 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
 	}
 
-	QFileInfo fileInfo(folderPath);
-	if (fileInfo.exists()){
-		m_currentDirectory = QDir(folderPath);
-
-		// if observing thread was running -> restart:
-		if (wasRunning){
-			StartObserverThread();
-		}
-	}
-	else{
-		SendWarningMessage(0, istd::CString("Directory: ") + iqt::GetCString(folderPath) + istd::CString(" not exists. Observing aborted"), "DirectoryMonitor");
-	}
+	m_currentDirectory = QDir(folderPath);
 }
 
 

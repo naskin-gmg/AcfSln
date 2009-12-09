@@ -46,16 +46,13 @@ ifpf::IMonitoringSession* CHotfolderProcessingComp::GetSession(const ifpf::IDire
 		return NULL;
 	}
 
-	if (foundIter->second.GetPtr() != &directoryMonitor){
+	if (foundIter->second.monitorPtr.GetPtr() != &directoryMonitor){
 		return NULL;
 	}
 
-	MonitoringSessionsMap::const_iterator sessionIter = m_monitoringSessionsMap.find(directoryPath);
-	if (sessionIter == m_monitoringSessionsMap.end()){
-		return NULL;
-	}
+	const ifpf::IMonitoringSession* sessionPtr = foundIter->second.sessionPtr.GetPtr();
 
-	return sessionIter->second.GetPtr();
+	return const_cast<ifpf::IMonitoringSession*>(sessionPtr);
 }
 
 
@@ -191,11 +188,6 @@ void CHotfolderProcessingComp::StopHotfolder()
 
 	if (BaseClass2::isRunning()){
 		BaseClass2::terminate();
-	}
-
-	// stop all monitors:
-	for (DirectoryMonitorsMap::iterator index = m_directoryMonitorsMap.begin(); index != m_directoryMonitorsMap.end(); index++){
-		index->second->StopObserving();
 	}
 }
 
@@ -339,9 +331,8 @@ ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const ist
 	if (monitorCompPtr.IsValid()){
 		ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
 		if (directoryMonitorPtr != NULL){
-			m_directoryMonitorsMap[directoryPath] = directoryMonitorPtr;
-			m_monitoringSessionsMap[directoryPath] = new ifpf::CMonitoringSession();
-
+			m_directoryMonitorsMap[directoryPath] = DirectoryMonitorInfo(directoryMonitorPtr, new ifpf::CMonitoringSession());
+	
 			monitorCompPtr.PopPtr();
 
 			imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
@@ -363,7 +354,7 @@ void CHotfolderProcessingComp::RemoveDirectoryMonitor(const istd::CString& direc
 {
 	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
 	if (monitorIter != m_directoryMonitorsMap.end()){
-		monitorIter->second->StopObserving();
+		monitorIter->second.monitorPtr->StopObserving();
 
 		m_directoryMonitorsMap.erase(monitorIter);
 	}

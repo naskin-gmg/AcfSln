@@ -7,8 +7,7 @@
 
 
 // ACF includes
-#include "ifpf/IDirectoryMonitor.h"
-
+#include "istd/TSmartPtr.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
@@ -24,6 +23,7 @@
 // AcfSln includes
 #include "ifpf/IFileNaming.h"
 #include "ifpf/IHotfolder.h"
+#include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CMonitoringSession.h"
 
@@ -173,14 +173,28 @@ private:
 	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_hotfolderStateModelIdAttrPtr);
 
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
+
+	struct DirectoryMonitorInfo
+	{
+		DirectoryMonitorInfo()
+		{
+		}
+
+		DirectoryMonitorInfo(ifpf::IDirectoryMonitor* monitorPtr, ifpf::CMonitoringSession* sessionPtr)
+		{
+			this->monitorPtr.SetPtr(monitorPtr);
+			this->sessionPtr.SetPtr(sessionPtr);
+		}
+
+		istd::TSmartPtr<ifpf::IDirectoryMonitor> monitorPtr;
+		istd::TSmartPtr<ifpf::CMonitoringSession> sessionPtr;
+	};
+
+	typedef std::map<istd::CString, DirectoryMonitorInfo> DirectoryMonitorsMap;
 
 	DirectoryMonitorsMap m_directoryMonitorsMap;
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
-
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
-	MonitoringSessionsMap m_monitoringSessionsMap;
 
 	iqt::CCriticalSection m_parameterLock;
 	iqt::CCriticalSection m_processingQueueLock;

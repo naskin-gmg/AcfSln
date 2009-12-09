@@ -29,7 +29,30 @@
    <item>
     <widget class="QTreeWidget" name="FileList">
      <property name="styleSheet">
-      <string/>
+      <string>QTreeView {
+     show-decoration-selected: 1;
+ }
+
+ QTreeView::item {
+      border: 0px solid #d9d9d9;
+     border-top-color: transparent;
+     border-bottom-color: transparent;
+ }
+
+ QTreeView::item:hover {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+ }
+
+ QTreeView::item:selected {
+ }
+
+ QTreeView::item:selected:active{
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
+ }
+
+ QTreeView::item:selected:!active {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+ }</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
