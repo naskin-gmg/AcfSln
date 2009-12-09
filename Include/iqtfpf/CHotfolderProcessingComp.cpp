@@ -226,7 +226,7 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 }
 
 
-bool CHotfolderProcessingComp::SerializeMonitoringSession(iser::IArchive& /*archive*/)
+bool CHotfolderProcessingComp::SerializeMonitoringSessions(iser::IArchive& /*archive*/)
 {
 	return true;
 }

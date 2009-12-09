@@ -86,25 +86,49 @@ private:
 	
 	/**
 		Synchronize the hotfolder with its static parameters.
-		If \c applyToPendingTasks is enabled, the 
+		If \c applyToPendingTasks is enabled, 
+		the changes are applied to the processing item, which are already in processing pipeline.
 	*/
 	void SynchronizeWithModel(bool applyToPendingTasks = false);
 
 	/**
-		Serialize monitoring sessions
+		Serialize monitoring sessions.
 	*/
-	bool SerializeMonitoringSession(iser::IArchive& archive);
+	bool SerializeMonitoringSessions(iser::IArchive& archive);
 
 	/**
-		Get the output directory of this hotfolder
+		Get the output directory of this hotfolder.
 	*/
 	istd::CString GetOutputDirectory() const;
 
+	/**
+		Get the list of output directories for the hotfolder.
+	*/
 	istd::CStringList GetInputDirectories() const;
+
+	/**
+		Get parameter set for each input directory.
+	*/
 	const iprm::IParamsSet* GetMonitoringParamsSet(int index) const;
+
+	/**
+		Get list of newly added input directories.
+	*/
 	istd::CStringList GetAddedInputDirectories() const;
+
+	/**
+		Get list of newly removed input directories.
+	*/
 	istd::CStringList GetRemovedInputDirectories() const;
+
+	/**
+		Create and add a directory monitor for the given path with given monitoring parameters.
+	*/
 	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
+
+	/**
+		Remove a directory monitor for the given path.
+	*/
 	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
 
 private:

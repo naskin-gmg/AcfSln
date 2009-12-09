@@ -23,8 +23,40 @@ CHotfolder::CHotfolder()
 }
 
 
+bool CHotfolder::ItemExists(const istd::CString& inputFilePath, const istd::CString& outputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
+{
+	for(int itemIndex = 0; itemIndex < m_processingItems.GetCount(); itemIndex++){
+		ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
+		I_ASSERT(itemPtr != NULL);
+
+		if (itemPtr->GetInputFile() == inputFilePath && itemPtr->GetOutputFile() == outputFilePath){
+			if (foundItemPtr != NULL){
+				*foundItemPtr = itemPtr;
+			}
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CHotfolder::ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const
+{
+	return ItemExists(processingItem.GetInputFile(), processingItem.GetOutputFile());
+}
+
+
+// reimplemented (ifpf::IHotfolder)
+
 const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath)
 {
+	ifpf::IHotfolderProcessingItem* foundItemPtr = NULL;
+	if (ItemExists(inputFilePath, outputFilePath, &foundItemPtr)){
+		return foundItemPtr;
+	}
+
 	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
 
 	ProcessingItem* itemPtr = new ProcessingItem;
@@ -62,8 +94,6 @@ ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 	return NULL;
 }
 
-
-// reimplemented (ifpf::IHotfolder)
 
 int CHotfolder::GetProcessingItemsCount() const
 {
