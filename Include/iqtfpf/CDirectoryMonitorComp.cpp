@@ -343,8 +343,10 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 
 	ResetFiles();
 
+	m_currentDirectory = QDir(folderPath);
+
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
-		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(folderPath));
+		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
 		if (sessionPtr != NULL){
 			istd::CStringList sessionFiles = sessionPtr->GetFileList();
 			for (int fileIndex = 0; fileIndex < int(sessionFiles.size()); fileIndex++){
@@ -359,8 +361,6 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
 		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
 	}
-
-	m_currentDirectory = QDir(folderPath);
 }
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1249
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="27">
+  <PositionMap count="28">
     <Element>
       <ComponentName>
         ComposedParamsSet
@@ -146,6 +146,17 @@
       </X>
       <X>
         -77
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderId
+      </ComponentName>
+      <X>
+        -217
+      </X>
+      <X>
+        47
       </X>
     </Element>
     <Element>

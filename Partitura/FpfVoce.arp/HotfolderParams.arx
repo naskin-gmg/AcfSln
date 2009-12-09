@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1232
+          1249
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -25,6 +25,27 @@
       </PackageId>
       <ComponentId>
         DirectoryMonitorParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderId
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderId
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -69,7 +90,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   InputDirectories
                 </Value>
@@ -78,6 +99,9 @@
                 </Value>
                 <Value>
                   DirectoryMonitorParams
+                </Value>
+                <Value>
+                  HotfolderId
                 </Value>
               </Values>
             </Data>
@@ -96,7 +120,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   InputDirectories
                 </Value>
@@ -105,6 +129,9 @@
                 </Value>
                 <Value>
                   DirectoryMonitorParams
+                </Value>
+                <Value>
+                  HotfolderId
                 </Value>
               </Values>
             </Data>

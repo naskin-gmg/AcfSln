@@ -9,6 +9,7 @@
 #include "ifpf/CDirectoryMonitorParams.h"
 #include "ifpf/CHotfolder.h"
 #include "ifpf/CHotfolderLoaderComp.h"
+#include "ifpf/CMonitoringSessionsMap.h"
 
 
 /**
@@ -25,6 +26,9 @@ typedef icomp::TModelCompWrap<
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						ifpf::CHotfolder, iser::ISerializable, ifpf::IHotfolder> > HotfolderStateModel;
+typedef icomp::TModelCompWrap<
+			icomp::TMakeComponentWrap<
+						ifpf::CMonitoringSessionsMap, iser::ISerializable, ifpf::IMonitoringSessionManager> > MonitoringSessions;
 typedef ifpf::CHotfolderLoaderComp HotfolderLoader;
 
 

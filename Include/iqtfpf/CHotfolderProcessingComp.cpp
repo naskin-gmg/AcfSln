@@ -10,11 +10,14 @@
 
 
 // ACF includes
+#include "istd/INamed.h"
 #include "istd/TChangeDelegator.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "isys/IFileSystem.h"
+#include "isys/IApplicationEnvironment.h"
 #include "isys/CSectionBlocker.h"
+
+#include "iser/CXmlFileWriteArchive.h"
 
 #include "iprm/IFileNameParam.h"
 #include "iprm/IParamsManager.h"
@@ -34,25 +37,6 @@ CHotfolderProcessingComp::CHotfolderProcessingComp()
 	:m_directoryMonitorObserver(*this),
 	m_parametersObserver(*this)
 {
-}
-
-
-// reimplemented (ifpf::IMonitoringSessionManager)
-
-ifpf::IMonitoringSession* CHotfolderProcessingComp::GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const
-{
-	DirectoryMonitorsMap::const_iterator foundIter = m_directoryMonitorsMap.find(directoryPath);
-	if (foundIter == m_directoryMonitorsMap.end()){
-		return NULL;
-	}
-
-	if (foundIter->second.monitorPtr.GetPtr() != &directoryMonitor){
-		return NULL;
-	}
-
-	const ifpf::IMonitoringSession* sessionPtr = foundIter->second.sessionPtr.GetPtr();
-
-	return const_cast<ifpf::IMonitoringSession*>(sessionPtr);
 }
 
 
@@ -218,12 +202,6 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 }
 
 
-bool CHotfolderProcessingComp::SerializeMonitoringSessions(iser::IArchive& /*archive*/)
-{
-	return true;
-}
-
-
 istd::CString CHotfolderProcessingComp::GetOutputDirectory() const
 {
 	std::string paramId;
@@ -331,7 +309,7 @@ ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const ist
 	if (monitorCompPtr.IsValid()){
 		ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
 		if (directoryMonitorPtr != NULL){
-			m_directoryMonitorsMap[directoryPath] = DirectoryMonitorInfo(directoryMonitorPtr, new ifpf::CMonitoringSession());
+			m_directoryMonitorsMap[directoryPath] = directoryMonitorPtr;
 	
 			monitorCompPtr.PopPtr();
 
@@ -354,11 +332,28 @@ void CHotfolderProcessingComp::RemoveDirectoryMonitor(const istd::CString& direc
 {
 	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
 	if (monitorIter != m_directoryMonitorsMap.end()){
-		monitorIter->second.monitorPtr->StopObserving();
+		monitorIter->second->StopObserving();
 
 		m_directoryMonitorsMap.erase(monitorIter);
 	}
 }
+
+
+istd::CString CHotfolderProcessingComp::GetHotfolderId() const
+{
+	if (m_paramsSetCompPtr.IsValid()){
+		const iprm::IParamsSet* uuidParamsSet = dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter("HotfolderId"));
+		if (uuidParamsSet != NULL){
+			const istd::INamed* uuidPtr = dynamic_cast<const istd::INamed*>(uuidParamsSet->GetParameter("HotfolderId"));
+			if (uuidPtr != NULL){
+				return uuidPtr->GetName();
+			}
+		}
+	}
+
+	return istd::CString();
+}
+
 
 
 // public methods of embedded class DirectoryMonitorObserver

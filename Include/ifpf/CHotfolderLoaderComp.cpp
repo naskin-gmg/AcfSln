@@ -23,25 +23,19 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 	}
 
 	istd::CChangeNotifier notifier(&data);
-
-	ifpf::IHotfolder* hotfolderPtr = dynamic_cast<ifpf::IHotfolder*>(&data);
-	if (hotfolderPtr == NULL){
+	iprm::IParamsSet* hotfolderParamsSet = dynamic_cast<iprm::IParamsSet*>(&data);
+	if (hotfolderParamsSet == NULL){
 		return StateFailed;
 	}
 
-	int retVal = BaseClass::LoadFromFile(data, filePath);
-/*	if (retVal != StateFailed){
-		iprm::IParamsSet* hotfolderParametersPtr = hotfolderPtr->GetHotfolderParams();
-		if (hotfolderParametersPtr != NULL){
-			ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
+	const iser::ISerializable* monitoringSessionsPtr = hotfolderParamsSet->GetParameter("MonitoringSessions");
+	if (monitoringSessionsPtr != NULL){
+		ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
 
-			if (hotfolderParametersPtr->Serialize(staticParamsArchive)){
-				return retVal;
-			}
-		}
+		(const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive);
 	}
-*/
-	return retVal;
+
+	return BaseClass::LoadFromFile(data, filePath);
 }
 
 
@@ -51,24 +45,24 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 		return StateFailed;
 	}
 
-	const ifpf::IHotfolder* hotfolderPtr = dynamic_cast<const ifpf::IHotfolder*>(&data);
-	if (hotfolderPtr != NULL){
-		int retVal = BaseClass::SaveToFile(data, filePath);
-
-/*		if (retVal != StateFailed){
-			iprm::IParamsSet* hotfolderParametersPtr = hotfolderPtr->GetHotfolderParams();
-			if (hotfolderParametersPtr != NULL){
-				WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
-
-				if (hotfolderParametersPtr->Serialize(staticParamsArchive)){
-					return retVal;
-				}
-			}
-		}
-		*/
+	const iprm::IParamsSet* hotfolderParamsSet = dynamic_cast<const iprm::IParamsSet*>(&data);
+	if (hotfolderParamsSet == NULL){
+		return StateFailed;
 	}
 
-	return StateFailed;
+	int retVal = BaseClass::SaveToFile(data, filePath);
+	if (retVal != StateFailed){
+		const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter("MonitoringSessions"));
+		if (monitoringSessionsPtr != NULL){
+			WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
+
+			if ((const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive)){
+				return retVal;
+			}
+		}
+	}
+
+	return retVal;
 }
 
 
@@ -79,7 +73,7 @@ bool CHotfolderLoaderComp::GetFileExtensions(istd::CStringList& result, int flag
 			result.clear();
 		}
 
-		result.push_back("hdf");
+		result.push_back("hot");
 	}
 
 	return true;
@@ -88,7 +82,7 @@ bool CHotfolderLoaderComp::GetFileExtensions(istd::CStringList& result, int flag
 
 istd::CString CHotfolderLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
 {
-	if ((extensionPtr == NULL) || extensionPtr->IsEqualNoCase("hdf")){
+	if ((extensionPtr == NULL) || extensionPtr->IsEqualNoCase("hot")){
 		return istd::CString("Hotfolder Data File");
 	}
 
@@ -102,10 +96,7 @@ istd::CString CHotfolderLoaderComp::GetStaticParamsPath(const istd::CString& obj
 {
 	ibase::CFileSystem fileSystem;
 
-	istd::CString test1 = fileSystem.GetDirPath(objectPath);
-	istd::CString test2 = fileSystem.GetBaseFileName(objectPath);
-
-	return (fileSystem.GetDirPath(objectPath) + "/" + fileSystem.GetBaseFileName(objectPath) + ".hfp");
+	return (fileSystem.GetDirPath(objectPath) + "/" + fileSystem.GetBaseFileName(objectPath) + ".dms");
 }
 
 

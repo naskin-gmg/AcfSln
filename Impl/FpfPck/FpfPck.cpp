@@ -15,6 +15,7 @@ I_EXPORT_COMPONENT(FileProcessing, "Sequence processing using slave processors",
 I_EXPORT_COMPONENT(DirectoryMonitorParams, "Parameter for the directory monitoring", "File Processing Parameter Directory Monitoring");
 I_EXPORT_COMPONENT(HotfolderLoader, "Hotfolder loader", "File Processing Parameter Directory Hotfolder");
 I_EXPORT_COMPONENT(HotfolderStateModel, "Hotfolder's state", "File Processing Hotfolder");
+I_EXPORT_COMPONENT(MonitoringSessions, "Monitoring sessions", "File Processing Hotfolder Session");
 
 
 } // namespace FpfPck

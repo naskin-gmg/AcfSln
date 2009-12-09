@@ -37,8 +37,7 @@ namespace iqtfpf
 */
 class CHotfolderProcessingComp:
 			protected QThread,
-			public ibase::CLoggerComponentBase,
-			virtual public ifpf::IMonitoringSessionManager
+			public ibase::CLoggerComponentBase
 {
 	Q_OBJECT
 public:
@@ -46,7 +45,6 @@ public:
 	typedef QThread BaseClass2;
 
 	I_BEGIN_COMPONENT(CHotfolderProcessingComp);
-		I_REGISTER_INTERFACE(ifpf::IMonitoringSessionManager);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
 		I_ASSIGN(m_fileNamingCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
@@ -59,9 +57,6 @@ public:
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
-
-	// reimplemented (ifpf::IMonitoringSessionManager)
-	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -90,11 +85,6 @@ private:
 		the changes are applied to the processing item, which are already in processing pipeline.
 	*/
 	void SynchronizeWithModel(bool applyToPendingTasks = false);
-
-	/**
-		Serialize monitoring sessions.
-	*/
-	bool SerializeMonitoringSessions(iser::IArchive& archive);
 
 	/**
 		Get the output directory of this hotfolder.
@@ -130,6 +120,11 @@ private:
 		Remove a directory monitor for the given path.
 	*/
 	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
+
+	/**
+		Get the unique ID of the hotfolder.
+	*/
+	istd::CString GetHotfolderId() const;
 
 private:
 	/**
@@ -173,26 +168,9 @@ private:
 	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_hotfolderStateModelIdAttrPtr);
 
-
-	struct DirectoryMonitorInfo
-	{
-		DirectoryMonitorInfo()
-		{
-		}
-
-		DirectoryMonitorInfo(ifpf::IDirectoryMonitor* monitorPtr, ifpf::CMonitoringSession* sessionPtr)
-		{
-			this->monitorPtr.SetPtr(monitorPtr);
-			this->sessionPtr.SetPtr(sessionPtr);
-		}
-
-		istd::TSmartPtr<ifpf::IDirectoryMonitor> monitorPtr;
-		istd::TSmartPtr<ifpf::CMonitoringSession> sessionPtr;
-	};
-
-	typedef std::map<istd::CString, DirectoryMonitorInfo> DirectoryMonitorsMap;
-
+	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;
+
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
 
