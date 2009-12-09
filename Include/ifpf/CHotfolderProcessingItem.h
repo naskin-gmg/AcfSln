@@ -18,7 +18,7 @@ class CHotfolderProcessingItem: virtual public ifpf::IHotfolderProcessingItem
 public:
 	CHotfolderProcessingItem();
 
-	// reimplemented ()ifpf::CHotfolderProcessingItem
+	// reimplemented (ifpf::IHotfolderProcessingItem)
 	virtual int GetProcessingState() const;
 	virtual void SetProcessingState(int processingState);
 	virtual double GetProgress() const;
@@ -27,6 +27,10 @@ public:
 	virtual void SetInputFile(const istd::CString& inputFile);
 	virtual istd::CString GetOutputFile() const;
 	virtual void SetOutputFile(const istd::CString& outputFile);
+	virtual const iimg::IBitmap& GetInputPreview() const;
+	virtual void SetInputPreview(const iimg::IBitmap& inputPreview);
+	virtual const iimg::IBitmap& GetOutputPreview() const;
+	virtual void SetOutputPreview(const iimg::IBitmap& outputPreview);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -36,6 +40,9 @@ private:
 	istd::CString m_outputFile;
 	int m_processingState;
 	double m_progress;
+
+	iimg::CGeneralBitmap m_inputPreview;
+	iimg::CGeneralBitmap m_outputPreview;
 };
 
 

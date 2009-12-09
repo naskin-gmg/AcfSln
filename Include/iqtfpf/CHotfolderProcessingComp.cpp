@@ -112,9 +112,11 @@ void CHotfolderProcessingComp::run()
 {
 	I_ASSERT(m_hotfolderCompPtr.IsValid());
 
+	int workingIntervall = 500; // ms
+
 	while (!m_finishThread){
 		if (!m_hotfolderCompPtr->IsWorking()){
-			msleep(200);
+			msleep(workingIntervall);
 			continue;					
 		}
 
@@ -147,7 +149,7 @@ void CHotfolderProcessingComp::run()
 			processingItemPtr->SetProcessingState(processingState);
 		}
 
-		msleep(200);
+		msleep(workingIntervall);
 	}
 }
 

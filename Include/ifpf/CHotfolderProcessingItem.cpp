@@ -87,6 +87,34 @@ void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
 }
 
 
+const iimg::IBitmap& CHotfolderProcessingItem::GetInputPreview() const
+{
+	return m_inputPreview;
+}
+
+
+void CHotfolderProcessingItem::SetInputPreview(const iimg::IBitmap& inputPreview)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_inputPreview.CopyFrom(inputPreview);
+}
+
+
+const iimg::IBitmap& CHotfolderProcessingItem::GetOutputPreview() const
+{
+	return m_outputPreview;
+}
+
+
+void CHotfolderProcessingItem::SetOutputPreview(const iimg::IBitmap& outputPreview)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_outputPreview.CopyFrom(outputPreview);
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)

@@ -69,6 +69,8 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
+	UpdateProcessingCommands();
+
 	UpdateEditor(ifpf::IHotfolder::CF_CREATE);
 }
 
@@ -106,8 +108,6 @@ void CHotfolderGuiComp::OnGuiCreated()
 	hotfolderMenuPtr->InsertChild(resetCommandPtr, true);
 
 	m_hotfolderCommands.InsertChild(hotfolderMenuPtr, true);
-
-	UpdateProcessingCommands();
 
 	// some visual details:
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);

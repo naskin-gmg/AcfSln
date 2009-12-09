@@ -7,6 +7,9 @@
 
 #include "iser/ISerializable.h"
 
+#include "iimg/CGeneralBitmap.h"
+
+
 
 namespace ifpf
 {
@@ -29,6 +32,12 @@ public:
 	
 	virtual istd::CString GetOutputFile() const = 0;
 	virtual void SetOutputFile(const istd::CString& outputFile) = 0;
+
+	virtual const iimg::IBitmap& GetInputPreview() const = 0;
+	virtual void SetInputPreview(const iimg::IBitmap& inputPreview) = 0;
+
+	virtual const iimg::IBitmap& GetOutputPreview() const = 0;
+	virtual void SetOutputPreview(const iimg::IBitmap& outputPreview) = 0;
 };
 
 
