@@ -11,7 +11,9 @@ namespace iwin
 
 /**
 	Default services provider for Windows plattform
- */
+
+	\ingroup System
+*/
 class CDefaultServicesProvider
 {
 public:
