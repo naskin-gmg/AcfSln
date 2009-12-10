@@ -227,6 +227,14 @@
 				RelativePath="..\CHotfolderWorkflowGuiComp.moc"
 				>
 			</File>
+			<File
+				RelativePath="..\CProcessingItemGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemGuiComp.moc"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -259,6 +267,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderWorkflowGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemGuiComp.h"
 				>
 			</File>
 			<File
@@ -303,6 +315,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CProcessingItemGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
 				>
 			</File>
@@ -312,6 +328,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CHotfolderParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CProcessingItemGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -324,6 +344,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemGuiComp.ui"
 				>
 			</File>
 		</Filter>

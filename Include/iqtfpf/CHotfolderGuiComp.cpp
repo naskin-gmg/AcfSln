@@ -4,6 +4,7 @@
 // Qt includes
 #include <QHeaderView>
 #include <QProgressBar>
+#include <QLabel>
 
 
 // ACF includes
@@ -16,6 +17,14 @@
 
 namespace iqtfpf
 {
+
+
+// public methods
+
+CHotfolderGuiComp::CHotfolderGuiComp()
+	:m_lastItemModelPtr(NULL)
+{
+}
 
 
 // reimplemented (idoc::ICommandsProvider)
@@ -85,6 +94,10 @@ void CHotfolderGuiComp::OnGuiCreated()
 		m_progressManagerGuiCompPtr->CreateGui(OverallProgressFrame);
 	}
 
+	if (m_itemGuiCompPtr.IsValid() && m_itemObserverCompPtr.IsValid()){
+		m_itemGuiCompPtr->CreateGui(ItemFrame);
+	}
+
 	iqtgui::CHierarchicalCommand* hotfolderMenuPtr = new iqtgui::CHierarchicalCommand("&Hotfolder");
 
 	m_runCommand.SetGroupId(1);
@@ -113,32 +126,78 @@ void CHotfolderGuiComp::OnGuiCreated()
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
 	FileList->header()->setStretchLastSection(true);
 
-	iqtgui::CItemDelegate* itemDelegate = new iqtgui::CItemDelegate(25, this);
-	FileList->setItemDelegate(itemDelegate);
+	FileList->setItemDelegate(new iqtgui::CItemDelegate(25, this));
 
 	FileList->header()->setResizeMode(0, QHeaderView::Fixed);
-	FileList->header()->resizeSection(0, itemDelegate->GetItemHeight());
-
 }
+
+
+void CHotfolderGuiComp::OnGuiDestroyed()
+{
+	if (m_progressManagerGuiCompPtr.IsValid()){
+		m_progressManagerGuiCompPtr->DestroyGui();
+	}
+
+	if (m_itemGuiCompPtr.IsValid()){
+		m_itemGuiCompPtr->DestroyGui();
+	}
+	BaseClass::OnGuiDestroyed();
+}
+
 
 
 // private methods
 
 void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
-	ProcessingItem* fileItemPtr = new ProcessingItem(m_stateIconsProviderCompPtr.GetPtr());
-	fileItemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+	QString inputFilePath = iqt::GetQString(fileItem.GetInputFile());
+	QFileInfo fileInfo(inputFilePath);
+	QDir fileDirectory = fileInfo.dir();
 
-	fileItemPtr->setText(1, iqt::GetQString(fileItem.GetInputFile()));
-	fileItemPtr->setText(2, iqt::GetQString(fileItem.GetOutputFile()));
-	// FileList->setItemWidget(fileItemPtr, 3, new QProgressBar());
+	DirectoryItem* parentItemPtr = NULL;
+
+	bool groupByDir = true;
+
+	if (groupByDir){
+		int itemsCount = FileList->topLevelItemCount();
+		for (int index = 0; index < itemsCount;index++){
+			DirectoryItem* itemPtr = dynamic_cast<DirectoryItem*>(FileList->topLevelItem(index));
+			I_ASSERT(itemPtr != NULL);
+
+			if (itemPtr->GetDirectory() == fileDirectory){
+				parentItemPtr = itemPtr;
+			}
+		}
+
+		if (parentItemPtr == NULL){
+			parentItemPtr = new DirectoryItem(fileDirectory, FileList);
+
+			parentItemPtr->setExpanded(true);
+		}
+	}
+	
+	ProcessingItem* fileItemPtr = new ProcessingItem(m_stateIconsProviderCompPtr.GetPtr());
+	fileItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+	fileItemPtr->setBackgroundColor(0, Qt::transparent);
+	
+	if (groupByDir){
+		fileItemPtr->setText(0, fileInfo.fileName());
+	}
+	else{
+		fileItemPtr->setText(0, inputFilePath);
+	}
+
+	if (parentItemPtr != NULL){
+		parentItemPtr->addChild(fileItemPtr);
+	}
+	else{
+		FileList->addTopLevelItem(fileItemPtr);
+	}
 
 	imod::IModel* itemModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(&fileItem));
 	if (itemModelPtr != NULL){
 		itemModelPtr->AttachObserver(fileItemPtr);
 	}
-
-	FileList->addTopLevelItem(fileItemPtr);
 }
 
 
@@ -196,15 +255,47 @@ void CHotfolderGuiComp::OnHold()
 }
 
 
+void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
+	if (selectedItems.isEmpty()){
+		return;
+	}
+
+	imod::IModel* currentItemModelPtr = NULL;
+	ProcessingItem* fileItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(0));
+	if (fileItemPtr != NULL){
+		currentItemModelPtr = fileItemPtr->GetModelPtr();
+	}
+
+	if (m_itemObserverCompPtr.IsValid()){
+		if (m_lastItemModelPtr != NULL){
+			m_lastItemModelPtr->DetachObserver(m_itemObserverCompPtr.GetPtr());
+
+			m_lastItemModelPtr = NULL;
+		}
+
+		if (currentItemModelPtr != NULL){
+			if (currentItemModelPtr->AttachObserver(m_itemObserverCompPtr.GetPtr())){
+				m_lastItemModelPtr = currentItemModelPtr;
+			}
+		}
+	}
+}
+
+
+
 // public methods of the embedded class 
 
-CHotfolderGuiComp::ProcessingItem::ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr)
-	:m_iconsProviderPtr(iconsProviderPtr)
+CHotfolderGuiComp::ProcessingItem::ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr, QTreeWidget* parent)
+	:BaseClass(parent),
+	m_iconsProviderPtr(iconsProviderPtr)
 {
 }
 
+
 // protected methods of the embedded class 
-		
+		 
 // reimplemented (imod::TSingleModelObserverBase)
 
 void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
@@ -213,7 +304,9 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 	if (objectPtr != NULL && m_iconsProviderPtr != NULL){
 		int fileState = objectPtr->GetProcessingState();
 		if (m_iconsProviderPtr->GetIconCount() > fileState){
-			setIcon(0, m_iconsProviderPtr->GetIcon(fileState));
+			QPixmap pixmap = m_iconsProviderPtr->GetIcon(fileState).pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
+
+			setIcon(0, pixmap);
 		}
 	}
 }
