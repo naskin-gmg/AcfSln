@@ -179,6 +179,10 @@
 				RelativePath="..\CSamplesSequenceViewComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSamplesSequenceViewComp.moc"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -187,10 +191,6 @@
 			>
 			<File
 				RelativePath="..\CSamplesSequenceViewComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSamplesSequenceViewComp.moc"
 				>
 			</File>
 			<File

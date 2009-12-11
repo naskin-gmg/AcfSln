@@ -119,13 +119,13 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_runCommand.SetGroupId(1);
 	m_runCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_runCommand.SetVisuals(tr("&Run"), "Run", tr("Start/Continue the execution of the hotfolder"), QIcon(":/Icons/Play"));
+	m_runCommand.SetVisuals(tr("&Run"), "Run", tr("Start/Continue the execution of the hotfolder"), QIcon(":/Icons/Play.svg"));
 	connect(&m_runCommand, SIGNAL(activated()), this, SLOT(OnRun()));
 	hotfolderMenuPtr->InsertChild(&m_runCommand, false);
 
 	m_holdCommand.SetGroupId(1);
 	m_holdCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_holdCommand.SetVisuals(tr("&Hold"), "Hold", tr("Hold the execution of the hotfolder"), QIcon(":/Icons/Pause"));
+	m_holdCommand.SetVisuals(tr("&Hold"), "Hold", tr("Hold the execution of the hotfolder"), QIcon(":/Icons/Pause.svg"));
 	m_holdCommand.setDisabled(true);
 	connect(&m_holdCommand, SIGNAL(activated()), this, SLOT(OnHold()));
 	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
