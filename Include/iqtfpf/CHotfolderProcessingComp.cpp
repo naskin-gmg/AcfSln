@@ -11,6 +11,7 @@
 
 // ACF includes
 #include "istd/INamed.h"
+#include "istd/TChangeNotifier.h"
 #include "istd/TChangeDelegator.h"
 #include "istd/CStaticServicesProvider.h"
 
@@ -25,6 +26,7 @@
 #include "iproc/IProcessor.h"
 
 #include "iqt/CTimer.h"
+#include "iqt/CSafeNotifier.h"
 
 
 namespace iqtfpf
@@ -145,6 +147,8 @@ void CHotfolderProcessingComp::run()
 			}
 				
 			isys::CSectionBlocker queueLock(&m_processingQueueLock);
+
+			iqt::CSafeNotifier changePtr(processingItemPtr);
 
 			processingItemPtr->SetProcessingState(processingState);
 		}
