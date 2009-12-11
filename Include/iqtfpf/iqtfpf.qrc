@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/Icons" >
+    <file alias="Hotfolder.svg" >Resources/Icons/Hotfolder.svg</file>
+  </qresource>
+</RCC>

@@ -11,6 +11,8 @@
 #include "iqtfpf/CFileNamingComp.h"
 #include "iqtfpf/CComposedHotfolderGuiComp.h"
 #include "iqtfpf/CProcessingItemGuiComp.h"
+#include "iqtfpf/CDirectoryItemGuiComp.h"
+
 
 /**
 	Qt based package for Flie Processing Framework.
@@ -26,6 +28,7 @@ typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
 typedef iqtfpf::CFileNamingComp FileNaming;
 typedef iqtfpf::CComposedHotfolderGuiComp ComposedHotfolderGui;
 typedef iqtfpf::CProcessingItemGuiComp ProcessingItemGui;
+typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
 
 
 } // namespace QtFpfPck

@@ -9,6 +9,16 @@ namespace QtFpfPck
 {
 
 
+static struct StaticInit
+{
+	StaticInit()
+	{
+		Q_INIT_RESOURCE(iqtfpf);
+	}
+
+} instance;
+
+
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 I_EXPORT_PACKAGE("QtFpf", "Qt based package for File Processsing Framework", "Qt File Processing");
@@ -20,7 +30,7 @@ I_EXPORT_COMPONENT(HotfolderGui, "Hotfolder view", "Qt File Observer Editor View
 I_EXPORT_COMPONENT(FileNaming, "Component for file (re)nameing", "Qt File Hotfolder Renaming Directory");
 I_EXPORT_COMPONENT(ComposedHotfolderGui, "UI for hotfolder visualization and setting editor", "File Processing Hotfolder Editor View GUI");
 I_EXPORT_COMPONENT(ProcessingItemGui, "UI for a hotfolder processing item", "File Processing Hotfolder Editor View GUI Item");
-
+I_EXPORT_COMPONENT(DirectoryItemGui, "View sub-component for a hotfolder directory item", "File Processing Hotfolder Editor View GUI Item");
 
 } // namespace QtFpfPck
 

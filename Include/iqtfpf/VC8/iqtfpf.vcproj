@@ -184,6 +184,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDirectoryItemGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDirectoryItemGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirectoryMonitorComp.cpp"
 				>
 			</File>
@@ -246,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDirectoryItemGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirectoryMonitorComp.h"
 				>
 			</File>
@@ -284,6 +296,30 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
+			<File
+				RelativePath="..\iqtfpf.qrc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Forms"
+			>
+			<File
+				RelativePath="..\CDirectoryItemGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CDirectoryMonitorParamsGui.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemGuiComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -292,6 +328,10 @@
 			>
 			<File
 				RelativePath="..\generated\moc_CComposedHotfolderGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CDirectoryItemGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -319,6 +359,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\qrc_iqtfpf.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CDirectoryItemGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
 				>
 			</File>
@@ -332,22 +380,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CProcessingItemGuiComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CDirectoryMonitorParamsGui.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemGuiComp.ui"
 				>
 			</File>
 		</Filter>

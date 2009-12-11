@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1256
+          1257
         </Number>
         <Description>
           ACF
@@ -115,6 +115,27 @@
     </Element>
     <Element>
       <Id>
+        DirectoryItemGui
+      </Id>
+      <PackageId>
+        QtFpfPck
+      </PackageId>
+      <ComponentId>
+        DirectoryItemGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         HotfolderGui
       </Id>
       <PackageId>
@@ -130,7 +151,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              DirectoryItemGui
+            </Id>
+            <Type>
+              icomp::CFactoryAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryItemGui
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               HotfolderStatistics
@@ -221,27 +261,6 @@
       </PackageId>
       <ComponentId>
         HotfolderStatistics
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProcessingItemGui
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        ProcessingItemGui
       </ComponentId>
       <Data>
         <IsEnabled>

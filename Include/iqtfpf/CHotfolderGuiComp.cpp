@@ -13,6 +13,9 @@
 #include "iqt/CSignalBlocker.h"
 
 
+#include "iqtfpf/CDirectoryItemGuiComp.h"
+
+
 namespace iqtfpf
 {
 
@@ -174,17 +177,47 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 
 	if (parentItemPtr == NULL){
 		parentItemPtr = new DirectoryItem(fileDirectory, FileList);
-
+		FileList->addTopLevelItem(parentItemPtr);
 		parentItemPtr->setExpanded(true);
+
+		// if special directory item UI controller is set,
+		// place it into the item:
+		if (m_directoryItemGuiFactCompPtr.IsValid() && m_directoryItemObserverFactCompPtr.IsValid()){
+			istd::TDelPtr<icomp::IComponent> directoryItemCompPtr(m_directoryItemGuiFactCompPtr.CreateComponent());
+			if (directoryItemCompPtr.IsValid()){
+				iqtgui::IGuiObject* directoryItemGuiPtr = m_directoryItemGuiFactCompPtr.ExtractInterface(directoryItemCompPtr.GetPtr());
+				imod::IObserver* directoryItemObserverPtr = m_directoryItemObserverFactCompPtr.ExtractInterface(directoryItemCompPtr.GetPtr());
+				I_ASSERT(directoryItemGuiPtr != NULL);
+				I_ASSERT(directoryItemObserverPtr != NULL);
+
+				iqtfpf::CDirectoryItemGuiComp* dirItemGuiCompPtr = dynamic_cast<iqtfpf::CDirectoryItemGuiComp*>(directoryItemGuiPtr);
+				if (dirItemGuiCompPtr != NULL){
+					dirItemGuiCompPtr->SetDirectoryPath(fileDirectory.absolutePath());
+				}
+
+				istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
+				QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
+				layout->setMargin(4);
+			
+				if (directoryItemGuiPtr->CreateGui(widgetWrapperPtr.GetPtr())){
+					FileList->setItemWidget(parentItemPtr, 0, widgetWrapperPtr.PopPtr());
+
+					if (m_statisticsModelCompPtr.IsValid()){
+						if (!m_statisticsModelCompPtr->IsAttached(directoryItemObserverPtr)){
+							m_statisticsModelCompPtr->AttachObserver(directoryItemObserverPtr);
+						}
+					}
+				}
+			}
+
+			directoryItemCompPtr.PopPtr();
+		}
+		else{
+			parentItemPtr->setText(0, fileDirectory.absolutePath());
+		}
 	}
 	
 	parentItemPtr->AddFileItem(fileItem, m_stateIconsProviderCompPtr.GetPtr());
-
-	if (m_statisticsModelCompPtr.IsValid()){
-		if (!m_statisticsModelCompPtr->IsAttached(parentItemPtr)){
-			m_statisticsModelCompPtr->AttachObserver(parentItemPtr);
-		}
-	}
 }
 
 
@@ -287,43 +320,8 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 
 CHotfolderGuiComp::DirectoryItem::DirectoryItem(const QDir& directory, QTreeWidget* parentPtr)
 	:BaseClass(parentPtr),
-	m_directory(directory),
-	m_statisticsLabel(NULL)
+	m_directory(directory)
 {
-	QFont font;
-	font.setBold(true);
-
-	QWidget* itemWidget = new QWidget();
-	QHBoxLayout* mainLayout = new QHBoxLayout(itemWidget);
-	itemWidget->setObjectName("Frame");
-	//	itemWidget->setStyleSheet("QWidget#Frame{background: qlineargradient(x1: 0, y1: 0, x2: 0.3, y2: 0, stop: 0 #abf1ab, stop: 1 #fdfdfd);}");
-	//	itemWidget->setStyleSheet("QWidget#Frame{background-color: rgba(223,223,223,255);}");
-	QVBoxLayout* layout = new QVBoxLayout();
-	QLabel* label = new QLabel(itemWidget);
-	label->setMargin(2);
-	label->setText(directory.absolutePath());
-	label->setFont(font);
-	layout->addWidget(label);
-	layout->setSpacing(0);
-	layout->setMargin(0);
-
-	mainLayout->setSpacing(4);
-	mainLayout->setMargin(0);
-
-	font.setBold(false);
-	font.setPointSize(7); 
-	m_statisticsLabel = new QLabel(itemWidget);
-	m_statisticsLabel->setMargin(2);
-	layout->addWidget(m_statisticsLabel);
-
-	QLabel* iconLabel = new QLabel(itemWidget);
-	iconLabel->setPixmap(QIcon("C:\\Work\\Develop\\AcfSln\\Docs\\Images\\Hotfolder.svg").pixmap(QSize(32,32), QIcon::Normal, QIcon::On));
-	mainLayout->addWidget(iconLabel);
-	mainLayout->addLayout(layout);
-	mainLayout->addSpacerItem(new QSpacerItem(20,10,QSizePolicy::Expanding));
-
-	parentPtr->addTopLevelItem(this);
-	parentPtr->setItemWidget(this, 0, itemWidget);
 }
 
 
@@ -350,35 +348,6 @@ void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcess
 		itemModelPtr->AttachObserver(fileItemPtr);
 	}
 }
-
-
-// protected methods
-
-void CHotfolderGuiComp::DirectoryItem::UpdateStatistics(const ifpf::IHotfolderStatistics& statistics)
-{
-	I_ASSERT(m_statisticsLabel != NULL);
-
-	double itemsCount = statistics.GetAbortedCount() + statistics.GetWaitingCount() + statistics.GetProcessedCount();
-
-	m_statisticsLabel->setText(
-				QString("%1 (%2%) items waiting, %3 (%4%) items are ready")
-						.arg(statistics.GetWaitingCount())
-						.arg(itemsCount == 0 ? 0 : int(100 * statistics.GetWaitingCount() / itemsCount))
-						.arg(statistics.GetProcessedCount())
-						.arg(itemsCount == 0 ? 0 : int(100 * statistics.GetProcessedCount() / itemsCount)));
-}
-
-
-// reimplemented (imod::CMultiModelObserverBase)
-
-void CHotfolderGuiComp::DirectoryItem::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	ifpf::IHotfolderStatistics* objectPtr = GetObjectPtr();;
-	if (objectPtr != NULL){
-		UpdateStatistics(*objectPtr);
-	}
-}
-
 
 
 } // namespace iqtfpf

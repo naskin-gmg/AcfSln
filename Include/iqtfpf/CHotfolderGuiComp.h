@@ -51,6 +51,8 @@ public:
 		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_statisticsHotfolderObserverCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_statisticsModelCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
+		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
+		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 	I_END_COMPONENT;
 
 	CHotfolderGuiComp();
@@ -96,7 +98,7 @@ private:
 		const iqtgui::IIconProvider* m_iconsProviderPtr;
 	};
 
-	class DirectoryItem: public QTreeWidgetItem, public imod::TSingleModelObserverBase<ifpf::IHotfolderStatistics>
+	class DirectoryItem: public QTreeWidgetItem
 	{
 	public:
 		typedef QTreeWidgetItem BaseClass;
@@ -105,15 +107,8 @@ private:
 		const QDir& GetDirectory() const;
 		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem, const iqtgui::IIconProvider* iconsProviderPtr);
 
-	protected:
-		void UpdateStatistics(const ifpf::IHotfolderStatistics& statistics);
-		
-		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
 	private:
 		QDir m_directory;
-		QLabel* m_statisticsLabel;
 	};
 
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
@@ -122,6 +117,8 @@ private:
 	I_REF(ifpf::IHotfolderStatistics, m_statisticsCompPtr);
 	I_REF(imod::IObserver, m_statisticsHotfolderObserverCompPtr);
 	I_REF(imod::IModel, m_statisticsModelCompPtr);
+	I_FACT(iqtgui::IGuiObject, m_directoryItemGuiFactCompPtr);
+	I_FACT(imod::IObserver, m_directoryItemObserverFactCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;
