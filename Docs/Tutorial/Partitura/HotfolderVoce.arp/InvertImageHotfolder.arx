@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1249
+          1241
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
-        Hotfolder
+        BitmapLoader
       </Id>
       <PackageId>
-        HotfolderVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        InvertImageHotfolder
+        BitmapLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -55,13 +55,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderDocumentTemplate
+        Hotfolder
       </Id>
       <PackageId>
-        BasePck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        SingleDocumentTemplate
+        Hotfolder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -73,26 +73,7 @@
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              DocumentFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Hotfolder
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocumentLoader
+              InputData
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -105,16 +86,16 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderLoader
+                InputData
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DocumentTypeId
+              InputFileLoader
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -124,16 +105,32 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              IsEditSupported
+              Log
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputData
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -143,16 +140,16 @@
                 true
               </IsEnabled>
               <Value>
-                true
+                OutputData
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              IsNewSupported
+              OutputFileLoader
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -162,16 +159,16 @@
                 true
               </IsEnabled>
               <Value>
-                true
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ViewFactory
+              Processir
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -181,7 +178,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderGui
+                InvertOperator
               </Value>
             </Data>
           </AttributeInfo>
@@ -190,13 +187,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderGui
+        InputData
       </Id>
       <PackageId>
-        FpfVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        HotfolderGui
+        Bitmap
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -211,13 +208,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderLoader
+        InvertOperator
       </Id>
       <PackageId>
-        FpfPck
+        IprPck
       </PackageId>
       <ComponentId>
-        HotfolderLoader
+        InvertOperator
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -226,7 +223,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Log
@@ -236,22 +233,6 @@
             </Type>
             <ExportId>
               Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -262,14 +243,51 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        OutputData
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        Bitmap
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        idoc::IDocumentTemplate
+        imod::IModel
       </InterfaceId>
       <ComponentId>
-        HotfolderDocumentTemplate
+        Hotfolder
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        Hotfolder
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        Hotfolder
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
