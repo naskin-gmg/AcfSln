@@ -108,7 +108,7 @@ int CLibAvVideoDecoderComp::DoProcessing(
 	imeas::ISamplesSequence* audioSequencePtr = dynamic_cast<imeas::ISamplesSequence*>(outputPtr);
 	if (		(audioSequencePtr != NULL) &&
 				m_audioSequenceCompPtr.IsValid()){
-		if (audioSequencePtr->CopySequenceFrom(*m_audioSequenceCompPtr)){
+		if (audioSequencePtr->CopyFrom(*m_audioSequenceCompPtr)){
 			return TS_OK;
 		}
 	}

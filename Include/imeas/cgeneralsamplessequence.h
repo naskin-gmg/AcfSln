@@ -23,7 +23,7 @@ public:
 	CGeneralSamplesSequence();
 
 	// reimplemented (imeas::ISamplesSequence)
-	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetTimeSamplesCount() const;
@@ -32,7 +32,6 @@ public:
 	virtual void SetSamplingPeriod(double value);
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
-	virtual bool CopySequenceFrom(const ISamplesSequence& sequence);
 
 	// reimplemented (imath::ISampledFunction2d)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes);
@@ -47,6 +46,9 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object);
 
 private:
 	typedef std::vector<double> Samples;

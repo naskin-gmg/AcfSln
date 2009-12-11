@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1219
+          1259
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="34">
+  <PositionMap count="35">
     <Element>
       <ComponentName>
         AcquisitionFramework
@@ -65,10 +65,10 @@
         AudioDock
       </ComponentName>
       <X>
-        -69
+        -61
       </X>
       <X>
-        -124
+        -479
       </X>
     </Element>
     <Element>
@@ -98,10 +98,21 @@
         BitmapDialogLoader
       </ComponentName>
       <X>
-        646.51
+        595
       </X>
       <X>
-        -506.794
+        -494
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        BitmapDialogLoader2
+      </ComponentName>
+      <X>
+        595
+      </X>
+      <X>
+        -486
       </X>
     </Element>
     <Element>
@@ -109,10 +120,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        813.173
+        852.173
       </X>
       <X>
-        -605.283
+        -587.283
       </X>
     </Element>
     <Element>
@@ -120,10 +131,10 @@
         BitmapPersistenceGui
       </ComponentName>
       <X>
-        350.551
+        366.107
       </X>
       <X>
-        -380.586
+        -799.193
       </X>
     </Element>
     <Element>
@@ -252,10 +263,10 @@
         ImageGui
       </ComponentName>
       <X>
-        148.492
+        60.492
       </X>
       <X>
-        -357.796
+        -560.796
       </X>
     </Element>
     <Element>
@@ -274,10 +285,10 @@
         LogDock
       </ComponentName>
       <X>
-        748.119
+        787.119
       </X>
       <X>
-        -349.311
+        -350.311
       </X>
     </Element>
     <Element>
@@ -307,10 +318,10 @@
         MediaPersistenceGui
       </ComponentName>
       <X>
-        -181.38
+        -286.38
       </X>
       <X>
-        -403.193
+        -493.193
       </X>
     </Element>
     <Element>
@@ -318,10 +329,10 @@
         PersistenceDock
       </ComponentName>
       <X>
-        210.723
+        219.208
       </X>
       <X>
-        -120.09
+        -930.434
       </X>
     </Element>
     <Element>
@@ -329,10 +340,10 @@
         PersistenceGui
       </ComponentName>
       <X>
-        375.507
+        -488.056
       </X>
       <X>
-        -218.343
+        -788.827
       </X>
     </Element>
     <Element>
@@ -351,10 +362,10 @@
         StandaloneApp
       </ComponentName>
       <X>
-        -391.737
+        67.263
       </X>
       <X>
-        -241.831
+        -306.831
       </X>
     </Element>
     <Element>
@@ -362,10 +373,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -370.524
+        -208.524
       </X>
       <X>
-        -151.321
+        -292.321
       </X>
     </Element>
     <Element>
@@ -373,10 +384,10 @@
         VideoGrabber
       </ComponentName>
       <X>
-        -13.2619
+        -248.262
       </X>
       <X>
-        -703.526
+        -691.526
       </X>
     </Element>
     <Element>

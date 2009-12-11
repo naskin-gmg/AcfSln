@@ -21,10 +21,10 @@ CGeneralSamplesSequence::CGeneralSamplesSequence()
 
 // reimplemented (imeas::ISamplesSequence)
 
-bool CGeneralSamplesSequence::CreateSequence(int samplesCount, int channelsCount)
+bool CGeneralSamplesSequence::CreateSequence(int timeSamplesCount, int channelsCount)
 {
 	m_channelsCount = channelsCount;
-	m_samples.resize(samplesCount * m_channelsCount, 0.0);
+	m_samples.resize(timeSamplesCount * m_channelsCount, 0.0);
 
 	return true;
 }
@@ -86,26 +86,6 @@ void CGeneralSamplesSequence::SetSample(int index, int channel, double value)
 	I_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
 
 	m_samples[index * m_channelsCount + channel] = value;
-}
-
-
-bool CGeneralSamplesSequence::CopySequenceFrom(const ISamplesSequence& sequence)
-{
-	int samplesCount = sequence.GetTimeSamplesCount();
-	int channelsCount = sequence.GetChannelsCount();
-	if (!CreateSequence(samplesCount, channelsCount)){
-		return false;
-	}
-
-	for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
-		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-			double sample = sequence.GetSample(sampleIndex, channelIndex);
-
-			SetSample(sampleIndex, channelIndex, sample);
-		}
-	}
-
-	return true;
 }
 
 
@@ -246,6 +226,44 @@ bool CGeneralSamplesSequence::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(samplesListTag);
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CGeneralSamplesSequence::CopyFrom(const istd::IChangeable& object)
+{
+	const ISamplesSequence* sequencePtr = dynamic_cast<const ISamplesSequence*>(&object);
+	if (sequencePtr != NULL){
+		const CGeneralSamplesSequence* nativeSequencePtr = dynamic_cast<const CGeneralSamplesSequence*>(sequencePtr);
+		if (nativeSequencePtr != NULL){
+			m_samples = nativeSequencePtr->m_samples;
+			m_channelsCount = nativeSequencePtr->m_channelsCount;
+			m_samplingPeriod = nativeSequencePtr->m_samplingPeriod;
+
+			return true;
+		}
+		else{
+			int samplesCount = sequencePtr->GetTimeSamplesCount();
+			int channelsCount = sequencePtr->GetChannelsCount();
+
+			if (CreateSequence(samplesCount, channelsCount)){
+				for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
+					for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+						double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+
+						SetSample(sampleIndex, channelIndex, sample);
+					}
+				}
+
+				SetSamplingPeriod(sequencePtr->GetSamplingPeriod());
+
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 

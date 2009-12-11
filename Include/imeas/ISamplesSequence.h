@@ -24,7 +24,7 @@ public:
 		\param	channelsCount	number of channels.
 		\return					true if sample sequence was created correctly.
 	*/
-	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) = 0;
+	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1) = 0;
 
 	/**
 		Return true if this sequence has no sample.
@@ -70,12 +70,6 @@ public:
 		Set sample value at specified index.
 	*/
 	virtual void SetSample(int index, int channel, double value) = 0;
-
-	/**
-		Copy sequence from another one.
-		\return	true if copy was done.
-	*/
-	virtual bool CopySequenceFrom(const ISamplesSequence& sequence) = 0;
 };
 
 

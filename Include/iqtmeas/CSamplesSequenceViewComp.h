@@ -30,6 +30,9 @@ public:
 				Ui::CSamplesSequenceViewComp,
 				imeas::ISamplesSequence> BaseClass;
 
+	I_BEGIN_COMPONENT(CSamplesSequenceViewComp);
+	I_END_COMPONENT;
+
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
