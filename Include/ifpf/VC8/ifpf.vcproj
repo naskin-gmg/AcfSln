@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderStatistics.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
@@ -267,6 +271,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderProcessingItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderStatistics.h"
 				>
 			</File>
 			<File
@@ -306,6 +314,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IHotfolderStatistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IHotfolderWorkflow.h"
 				>
 			</File>
@@ -315,6 +327,10 @@
 			</File>
 			<File
 				RelativePath="..\IMonitoringSessionManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IObjectSnap.h"
 				>
 			</File>
 		</Filter>

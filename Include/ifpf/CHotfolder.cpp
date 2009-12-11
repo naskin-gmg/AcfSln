@@ -65,6 +65,7 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 	itemPtr->SetInputFile(inputFilePath);
 	itemPtr->SetOutputFile(outputFilePath);
 	itemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
+	itemPtr->SetSlavePtr(this);
 
 	m_processingItems.PushBack(itemPtr, true);
 
@@ -165,6 +166,8 @@ bool CHotfolder::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(processingItemTag);
 
 			if (retVal){
+				itemPtr->SetSlavePtr(this);
+
 				m_processingItems.PushBack(itemPtr.PopPtr());
 			}
 		}	

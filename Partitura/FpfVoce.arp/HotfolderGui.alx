@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1255
+          1256
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
+  <PositionMap count="13">
     <Element>
       <ComponentName>
         ComposedHotfolderGui
@@ -102,6 +102,17 @@
       </X>
       <X>
         97
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderStatistics
+      </ComponentName>
+      <X>
+        -370
+      </X>
+      <X>
+        240
       </X>
     </Element>
     <Element>

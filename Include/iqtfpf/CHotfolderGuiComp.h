@@ -4,9 +4,12 @@
 
 // Qt includes
 #include <QDir>
+#include <QLabel>
 
 
 // ACF includes
+#include "imod/CMultiModelObserverBase.h"
+
 #include "iproc/IProgressManager.h"
 
 #include "idoc/ICommandsProvider.h"
@@ -21,6 +24,7 @@
 // AcfSln includes
 #include "ifpf/IHotfolder.h"
 #include "ifpf/IHotfolderProcessingItem.h"
+#include "ifpf/IHotfolderStatistics.h"
 
 #include "iqtfpf/Generated/ui_CHotfolderGuiComp.h"
 
@@ -44,9 +48,9 @@ public:
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
-		I_ASSIGN(m_itemObserverCompPtr, "ProcessingItemView", "View of the processing item", true, "ProcessingItemView");
-		I_ASSIGN(m_itemGuiCompPtr, "ProcessingItemView", "View of the processing item", true, "ProcessingItemView");
-
+		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
+		I_ASSIGN(m_statisticsHotfolderObserverCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
+		I_ASSIGN(m_statisticsModelCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 	I_END_COMPONENT;
 
 	CHotfolderGuiComp();
@@ -60,6 +64,7 @@ public:
 
 	// reimplemented (TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -82,52 +87,45 @@ private:
 		typedef QTreeWidgetItem BaseClass;
 		typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem> BaseClass2;
 
-		ProcessingItem(iqtgui::IIconProvider* iconsProviderPtr, QTreeWidget* parentPtr = NULL);
+		ProcessingItem(const iqtgui::IIconProvider* iconsProviderPtr, QTreeWidget* parentPtr = NULL);
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
 		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
-		iqtgui::IIconProvider* m_iconsProviderPtr;
+		const iqtgui::IIconProvider* m_iconsProviderPtr;
 	};
 
-	class DirectoryItem: public QTreeWidgetItem
+	class DirectoryItem: public QTreeWidgetItem, public imod::TSingleModelObserverBase<ifpf::IHotfolderStatistics>
 	{
 	public:
 		typedef QTreeWidgetItem BaseClass;
 
-		DirectoryItem(const QDir& directory, QTreeWidget* parentPtr)
-			:BaseClass(parentPtr),
-			m_directory(directory)
-		{
-			QFont font;
-			font.setBold(true);
+		DirectoryItem(const QDir& directory, QTreeWidget* parentPtr);
+		const QDir& GetDirectory() const;
+		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem, const iqtgui::IIconProvider* iconsProviderPtr);
 
-			setText(0, directory.absolutePath());
-			setFont(0, font);
+	protected:
+		void UpdateStatistics(const ifpf::IHotfolderStatistics& statistics);
+		
+		// reimplemented (imod::TSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
-			parentPtr->addTopLevelItem(this);
-		}
-
-		QDir GetDirectory() const
-		{
-			return m_directory;
-		}
 	private:
 		QDir m_directory;
+		QLabel* m_statisticsLabel;
 	};
 
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
 	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);
-	I_REF(imod::IObserver, m_itemObserverCompPtr);
-	I_REF(iqtgui::IGuiObject, m_itemGuiCompPtr);
+	I_REF(ifpf::IHotfolderStatistics, m_statisticsCompPtr);
+	I_REF(imod::IObserver, m_statisticsHotfolderObserverCompPtr);
+	I_REF(imod::IModel, m_statisticsModelCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;
 	iqtgui::CHierarchicalCommand m_holdCommand;
-
-	imod::IModel* m_lastItemModelPtr;
 };
 
 

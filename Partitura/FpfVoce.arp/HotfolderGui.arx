@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1255
+          1256
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="7">
     <Element>
       <Id>
         ComposedHotfolderGui
@@ -133,7 +133,7 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              ProcessingItemView
+              HotfolderStatistics
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -146,7 +146,7 @@
                 true
               </IsEnabled>
               <Value>
-                ProcessingItemGui
+                HotfolderStatistics
               </Value>
             </Data>
           </AttributeInfo>
@@ -200,6 +200,27 @@
       </PackageId>
       <ComponentId>
         HotfolderParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderStatistics
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        HotfolderStatistics
       </ComponentId>
       <Data>
         <IsEnabled>

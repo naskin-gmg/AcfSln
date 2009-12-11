@@ -9,6 +9,8 @@
 // ACF includes
 #include "istd/TOptPointerVector.h"
 #include "istd/TDelPtr.h"
+#include "istd/TChangeDelegator.h"
+
 #include "imod/TModelWrap.h"
 
 
@@ -50,7 +52,9 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef imod::TModelWrap<ifpf::CHotfolderProcessingItem> ProcessingItem;
+	typedef imod::TModelWrap<
+				istd::TChangeDelegator<
+						ifpf::CHotfolderProcessingItem> > ProcessingItem;
 	typedef istd::TOptPointerVector<ifpf::IHotfolderProcessingItem> FileItems;
 
 	FileItems m_processingItems;
