@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1260
+          1263
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         Application
@@ -49,7 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor
+                Demonstration of hotfolder function
 
 (C) Copyright 2009 ImagingTools
 
@@ -72,7 +72,7 @@ All rights reserved
                 true
               </IsEnabled>
               <Value>
-                Hotfolder Document Tutorial
+                Hotfolder Demo
               </Value>
             </Data>
           </AttributeInfo>
@@ -91,7 +91,7 @@ All rights reserved
                 true
               </IsEnabled>
               <Value>
-                Application
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -130,7 +130,7 @@ All rights reserved
               </IsEnabled>
               <Value>
                 Copyright 2009 ImagingTools
-This tool is a part of ACF project
+This tool is a part of ACF-Solutions project
               </Value>
             </Data>
           </AttributeInfo>
@@ -270,7 +270,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                ACF Product
+                Hotfolder Demo
               </Value>
             </Data>
           </AttributeInfo>
@@ -289,7 +289,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                Server
+                Tutorial
               </Value>
             </Data>
           </AttributeInfo>
@@ -308,7 +308,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/CompositorSplashScreen.png
+                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
               </Value>
             </Data>
           </AttributeInfo>
@@ -332,7 +332,7 @@ This tool is a part of ACF project
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -349,6 +349,25 @@ This tool is a part of ACF project
               </IsEnabled>
               <Value>
                 LogDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -448,6 +467,46 @@ This tool is a part of ACF project
               </IsEnabled>
               <Value>
                 Preivew
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfSlnVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder Demo
               </Value>
             </Data>
           </AttributeInfo>
