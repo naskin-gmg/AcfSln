@@ -10,6 +10,8 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "iproc/IProcessor.h"
+
 #include "iqt/CSignalBlocker.h"
 
 
@@ -56,7 +58,7 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 			RebuildItemList();
 		}
 
-		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0 || (updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
 			int itemsCount = objectPtr->GetProcessingItemsCount();
 			if (itemsCount > 0){
 				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemsCount - 1);
@@ -136,6 +138,20 @@ void CHotfolderGuiComp::OnGuiCreated()
 	resetCommandPtr->SetVisuals(tr("&Reset"), "Reset", tr("Reset the hotfolder"), QIcon(":/Icons/Reset"));
 	connect(resetCommandPtr, SIGNAL(activated()), this, SLOT(OnReset()));
 	hotfolderMenuPtr->InsertChild(resetCommandPtr, true);
+
+	m_removeItemCommand.SetGroupId(2);
+	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	m_removeItemCommand.SetVisuals(tr("&Remove"), "Remove", tr("Remove processing item from the view"), QIcon(":/Icons/Delete"));
+	m_removeItemCommand.setDisabled(true);
+	connect(&m_removeItemCommand, SIGNAL(activated()), this, SLOT(OnItemRemove()));
+	hotfolderMenuPtr->InsertChild(&m_removeItemCommand, false);
+
+	m_cancelItemCommand.SetGroupId(2);
+	m_cancelItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	m_cancelItemCommand.SetVisuals(tr("&Remove"), "Remove", tr("Cancel processing item from the view"), QIcon(":/Icons/Cancel"));
+	m_cancelItemCommand.setDisabled(true);
+	connect(&m_cancelItemCommand, SIGNAL(activated()), this, SLOT(OnItemCancel()));
+	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
 
 	m_hotfolderCommands.InsertChild(hotfolderMenuPtr, true);
 
@@ -255,6 +271,22 @@ void CHotfolderGuiComp::RebuildItemList()
 }
 
 
+ifpf::IHotfolderProcessingItem* CHotfolderGuiComp::GetSelectedProcessingItem() const
+{
+	QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
+	if (selectedItems.isEmpty()){
+		return NULL;
+	}
+
+	ProcessingItem* processingItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(0));
+	if (processingItemPtr != NULL){
+		return processingItemPtr->GetObjectPtr();
+	}
+
+	return NULL;
+}
+
+
 // private slots
 
 void CHotfolderGuiComp::OnRun()
@@ -275,18 +307,38 @@ void CHotfolderGuiComp::OnHold()
 }
 
 
+void CHotfolderGuiComp::OnItemRemove()
+{
+	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
+	if (processingItemPtr != NULL){
+		ifpf::IHotfolder* objectPtr = GetObjectPtr();
+		if (objectPtr != NULL){
+			objectPtr->RemoveProcessingItem(processingItemPtr);
+		}
+	}
+}
+
+
+void CHotfolderGuiComp::OnItemCancel()
+{
+	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
+	if (processingItemPtr != NULL){
+		ifpf::IHotfolder* objectPtr = GetObjectPtr();
+		if (objectPtr != NULL){
+			objectPtr->RemoveProcessingItem(processingItemPtr);
+		}
+	}
+}
+
+
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
-	QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
-	if (selectedItems.isEmpty()){
-		return;
-	}
+	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
 
-	imod::IModel* currentItemModelPtr = NULL;
-	ProcessingItem* fileItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(0));
-	if (fileItemPtr != NULL){
-		currentItemModelPtr = fileItemPtr->GetModelPtr();
-	}
+	bool enableMenu = (processingItemPtr != NULL);
+	
+	m_removeItemCommand.setEnabled(enableMenu);
+	m_cancelItemCommand.setEnabled(enableMenu && processingItemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED);
 }
 
 

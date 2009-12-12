@@ -76,10 +76,13 @@ private:
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 	void UpdateProcessingCommands();
 	void RebuildItemList();
+	ifpf::IHotfolderProcessingItem* GetSelectedProcessingItem() const;
 
 private Q_SLOTS:
 	void OnRun();
 	void OnHold();
+	void OnItemRemove();
+	void OnItemCancel();
 	void on_FileList_itemSelectionChanged();
 
 private:
@@ -123,6 +126,9 @@ private:
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;
 	iqtgui::CHierarchicalCommand m_holdCommand;
+	iqtgui::CHierarchicalCommand m_removeItemCommand;
+	iqtgui::CHierarchicalCommand m_cancelItemCommand;
+
 };
 
 

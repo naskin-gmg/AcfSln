@@ -9,7 +9,10 @@
 // ACF includes
 #include "istd/TOptPointerVector.h"
 #include "istd/TDelPtr.h"
+#include "istd/TSmartPtr.h"
 #include "istd/TChangeDelegator.h"
+
+#include "isys/ICriticalSection.h"
 
 #include "imod/TModelWrap.h"
 
@@ -62,6 +65,8 @@ protected:
 	bool m_isWorking;
 
 	iprm::IParamsSet* m_paramsSetPtr;
+
+	istd::TSmartPtr<isys::ICriticalSection> m_lockPtr;
 };
 
 

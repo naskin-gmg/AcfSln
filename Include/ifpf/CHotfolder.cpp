@@ -3,6 +3,9 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/CStaticServicesProvider.h"
+
+#include "isys/CSectionBlocker.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchivetag.h"
@@ -20,11 +23,16 @@ CHotfolder::CHotfolder()
 	:m_isWorking(false),
 	m_paramsSetPtr(NULL)
 {
+	m_lockPtr = istd::CreateService<isys::ICriticalSection>();
+
+	I_ASSERT(m_lockPtr.IsValid());
 }
 
 
 bool CHotfolder::ItemExists(const istd::CString& inputFilePath, const istd::CString& outputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	for(int itemIndex = 0; itemIndex < m_processingItems.GetCount(); itemIndex++){
 		ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
 		I_ASSERT(itemPtr != NULL);
@@ -67,6 +75,8 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 	itemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 	itemPtr->SetSlavePtr(this);
 
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	m_processingItems.PushBack(itemPtr, true);
 
 	return itemPtr;
@@ -75,7 +85,11 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 
 void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr)
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	if (m_processingItems.Remove(fileItemPtr)){
+		lock.Reset();
+
 		istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
 	}
 }
@@ -83,6 +97,8 @@ void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPt
 
 ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	int itemsCount = m_processingItems.GetCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		ifpf::IHotfolderProcessingItem* processingItemPtr = m_processingItems.GetAt(itemIndex);
@@ -98,12 +114,16 @@ ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 
 int CHotfolder::GetProcessingItemsCount() const
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	return m_processingItems.GetCount();
 }
 
 
 IHotfolderProcessingItem* CHotfolder::GetProcessingItem(int processingItemIndex) const
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	return m_processingItems.GetAt(processingItemIndex);
 }
 
@@ -128,6 +148,8 @@ void CHotfolder::SetWorking(bool working)
 
 bool CHotfolder::Serialize(iser::IArchive& archive)
 {
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
 	bool retVal = true;
 
 	// before restoring stop the hotfolder:
@@ -176,6 +198,8 @@ bool CHotfolder::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(processingItemsTag);
 
 	if (retVal && !archive.IsStoring()){
+		lock.Reset();
+
 		changePtr.SetPtr(this);
 	}
 

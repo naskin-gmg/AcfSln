@@ -2,6 +2,10 @@
 #define ifpf_CHotfolderStatistics_included
 
 
+// STL includes
+#include <map>
+
+
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
@@ -29,7 +33,7 @@ public:
 	CHotfolderStatistics();
 
 	// reimplemented (ifpf::IHotfolderStatistics)
-	virtual int GetWaitingCount(const istd::CString& directoryPath = istd::CString()) const;
+	virtual int GetItemsCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetProcessedCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetErrorsCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetAbortedCount(const istd::CString& directoryPath = istd::CString()) const;
@@ -41,12 +45,15 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	virtual void ResetStatistics();
+	void ResetStatistics();
+	static istd::CString GetDirectoryPath(const ifpf::IHotfolderProcessingItem& item);
+
 private:
-	int m_waitingCount;
-	int m_processedCount;
-	int m_errorsCount;
-	int m_abortedCount;
+	typedef std::map<istd::CString, int> CounterMap;
+	CounterMap m_itemsCount;
+	CounterMap m_processedCount;
+	CounterMap m_errorsCount;
+	CounterMap m_abortedCount;
 };
 
 

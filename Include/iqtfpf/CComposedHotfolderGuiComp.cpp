@@ -106,7 +106,7 @@ void CComposedHotfolderGuiComp::OnGuiCreated()
 {
 	iqtgui::CHierarchicalCommand* hotfolderMenuPtr = new iqtgui::CHierarchicalCommand("&Hotfolder");
 	iqtgui::CHierarchicalCommand* settingsCommandPtr = new iqtgui::CHierarchicalCommand();
-	settingsCommandPtr->SetGroupId(2);
+	settingsCommandPtr->SetGroupId(20);
 	settingsCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
 	settingsCommandPtr->SetVisuals(tr("&Settings..."), "Settings...", "Edit setting of the hotfolder", QIcon(":/Icons/Settings.svg"));
 	connect(settingsCommandPtr, SIGNAL(activated()), this, SLOT(OnSettings()));

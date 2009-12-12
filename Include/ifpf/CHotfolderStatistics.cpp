@@ -3,6 +3,9 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/CStaticServicesProvider.h"
+
+#include "isys/IFileSystem.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchivetag.h"
@@ -17,38 +20,53 @@ namespace ifpf
 // public methods
 	
 CHotfolderStatistics::CHotfolderStatistics()
-	:m_waitingCount(0),
-	m_errorsCount(0),
-	m_abortedCount(0),
-	m_processedCount(0)
 {
 }
 
 
 // reimplemented (ifpf::IHotfolderStatistics)
 
-int CHotfolderStatistics::GetWaitingCount(const istd::CString& directoryPath) const
+int CHotfolderStatistics::GetItemsCount(const istd::CString& directoryPath) const
 {
-	return m_waitingCount;
+	CounterMap::const_iterator iter = m_itemsCount.find(directoryPath);
+	if (iter != m_itemsCount.end()){
+		return iter->second;
+	}
+
+	return 0;
 }
 
 
 int CHotfolderStatistics::GetProcessedCount(const istd::CString& directoryPath) const
 {
-	return m_processedCount;
+	CounterMap::const_iterator iter = m_processedCount.find(directoryPath);
+	if (iter != m_processedCount.end()){
+		return iter->second;
+	}
 
+	return 0;
 }
 
 
 int CHotfolderStatistics::GetErrorsCount(const istd::CString& directoryPath) const
 {
-	return m_errorsCount;
+	CounterMap::const_iterator iter = m_errorsCount.find(directoryPath);
+	if (iter != m_errorsCount.end()){
+		return iter->second;
+	}
+
+	return 0;
 }
 
 
 int CHotfolderStatistics::GetAbortedCount(const istd::CString& directoryPath) const
 {
-	return m_abortedCount;
+	CounterMap::const_iterator iter = m_abortedCount.find(directoryPath);
+	if (iter != m_abortedCount.end()){
+		return iter->second;
+	}
+
+	return 0;
 }
 
 
@@ -63,21 +81,25 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updat
 		istd::CChangeNotifier changePtr(this);
 		for (int itemIndex = 0; itemIndex < objectPtr->GetProcessingItemsCount(); itemIndex++){
 			ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
+			I_ASSERT(itemPtr != NULL);
+			
+			istd::CString directoryPath = GetDirectoryPath(*itemPtr);
+
+			++m_itemsCount[directoryPath];
+			
 			switch (itemPtr->GetProcessingState()){
-				case iproc::IProcessor::TS_NONE:
-					++m_waitingCount;
+				case iproc::IProcessor::TS_OK:
+					++m_processedCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_INVALID:
-					++m_errorsCount;
+					++m_errorsCount[directoryPath];
+					++m_processedCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_CANCELED:
-					++m_abortedCount;
+					++m_abortedCount[directoryPath];
 					break;
-
 			}
 		}
-
-		m_processedCount = objectPtr->GetProcessingItemsCount() - m_abortedCount - m_waitingCount;
 	}
 }
 
@@ -96,10 +118,25 @@ bool CHotfolderStatistics::Serialize(iser::IArchive& archive)
 
 void CHotfolderStatistics::ResetStatistics()
 {
-	m_waitingCount = 0;
-	m_processedCount = 0;
-	m_errorsCount = 0;
-	m_abortedCount = 0;
+	m_itemsCount.clear();
+	m_processedCount.clear();
+	m_errorsCount.clear();
+	m_abortedCount.clear();
+}
+
+
+// protected static methods
+
+istd::CString CHotfolderStatistics::GetDirectoryPath(const ifpf::IHotfolderProcessingItem& item)
+{
+	istd::CString filePath = item.GetInputFile();
+
+	isys::IFileSystem* systemPtr = istd::GetService<isys::IFileSystem>();
+	if (systemPtr != NULL){
+		return systemPtr->GetDirPath(filePath);
+	}
+
+	return istd::CString();
 }
 
 

@@ -27,9 +27,7 @@ void CDirectoryItemGuiComp::UpdateEditor(int /*updateFlags*/)
 		DirectoryLabel->setVisible(!m_directoryPath.isEmpty());
 		DirectoryLabel->setText(m_directoryPath);
 
-		int itemsCount = objectPtr->GetAbortedCount(iqt::GetCString(m_directoryPath)) + 
-						objectPtr->GetWaitingCount(iqt::GetCString(m_directoryPath)) + 
-						objectPtr->GetProcessedCount(iqt::GetCString(m_directoryPath));
+		int itemsCount = objectPtr->GetItemsCount(iqt::GetCString(m_directoryPath));
 		
 		int abortedCount = objectPtr->GetAbortedCount(iqt::GetCString(m_directoryPath));
 		int abortedCountPercent = itemsCount == 0 ? 0: 100 * abortedCount / double(itemsCount);
@@ -39,6 +37,9 @@ void CDirectoryItemGuiComp::UpdateEditor(int /*updateFlags*/)
 
 		int processedCount = objectPtr->GetProcessedCount(iqt::GetCString(m_directoryPath));
 		int processedCountPercent = itemsCount == 0 ? 0: 100 * processedCount / double(itemsCount);
+
+		ErrorsProgressBar->setVisible(false);
+		AbortedProgressBar->setVisible(false);
 
 		ProcessedProgressBar->setValue(processedCountPercent);
 		ProcessedProgressBar->setVisible(processedCountPercent != 0);

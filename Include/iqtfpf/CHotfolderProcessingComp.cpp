@@ -129,28 +129,13 @@ void CHotfolderProcessingComp::run()
 		if (processingItemPtr != NULL){
 			istd::CString inputFile = processingItemPtr->GetInputFile();
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
-			
 			processingQueueLock.Reset();
+
+			UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_WAIT);
+			
+			int processingState = ProcessFile(inputFile, outputFile);
 		
-			isys::CSectionBlocker parameterLock(&m_parameterLock);
-
-			int processingState = iproc::IProcessor::TS_NONE;
-
-			if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
-				istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
-				SendErrorMessage(0, message, "Hotfolder");
-
-				processingState = iproc::IProcessor::TS_INVALID;
-			}
-			else{
-				processingState = iproc::IProcessor::TS_OK;
-			}
-				
-			isys::CSectionBlocker queueLock(&m_processingQueueLock);
-
-			iqt::CSafeNotifier changePtr(processingItemPtr);
-
-			processingItemPtr->SetProcessingState(processingState);
+			UpdateProcessingState(processingItemPtr, processingState);
 		}
 
 		msleep(workingIntervall);
@@ -360,6 +345,37 @@ istd::CString CHotfolderProcessingComp::GetHotfolderId() const
 	return istd::CString();
 }
 
+
+int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile)
+{
+	I_ASSERT(m_fileConvertCompPtr.IsValid());
+	if (!m_fileConvertCompPtr.IsValid()){
+		return iproc::IProcessor::TS_NONE;
+	}
+
+	isys::CSectionBlocker parameterLock(&m_parameterLock);
+
+	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
+		istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
+		SendErrorMessage(0, message, "Hotfolder");
+
+		return iproc::IProcessor::TS_INVALID;
+	}
+
+	return iproc::IProcessor::TS_OK;
+}
+
+
+void CHotfolderProcessingComp::UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const
+{
+	if (processingItemPtr != NULL){
+		isys::CSectionBlocker queueLock(&m_processingQueueLock);
+
+		iqt::CSafeNotifier changePtr(processingItemPtr);
+
+		processingItemPtr->SetProcessingState(processingState);
+	}
+}
 
 
 // public methods of embedded class DirectoryMonitorObserver

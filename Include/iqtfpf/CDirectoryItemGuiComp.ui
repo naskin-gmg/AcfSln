@@ -25,7 +25,7 @@
 max-height: 6px;
 border: 1px solid;
 border-radius:3px;
-border-color:rgb(224,224,224);
+border-color:rgb(232,232,232);
 background: solid palette(base);
 }</string>
   </property>
@@ -84,7 +84,7 @@ background: solid palette(base);
        <item>
         <widget class="QProgressBar" name="ProcessedProgressBar">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -92,7 +92,8 @@ background: solid palette(base);
          <property name="styleSheet">
           <string>QProgressBar::chunk {
      background-color: darkblue;
-    /* width: 10px;*/
+     width: 4px;
+     margin: 0.5px;
  }</string>
          </property>
          <property name="value">
@@ -111,7 +112,7 @@ background: solid palette(base);
          <item>
           <widget class="QProgressBar" name="ErrorsProgressBar">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -119,6 +120,8 @@ background: solid palette(base);
            <property name="styleSheet">
             <string>QProgressBar::chunk {
      background-color: red;
+     width: 4px;
+     margin: 0.5px;
 }</string>
            </property>
            <property name="value">
@@ -132,7 +135,7 @@ background: solid palette(base);
          <item>
           <widget class="QProgressBar" name="AbortedProgressBar">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -140,7 +143,9 @@ background: solid palette(base);
            <property name="styleSheet">
             <string>QProgressBar::chunk {
      background-color: darkgray;
- }</string>
+      width: 4px;
+     margin: 0.5px;
+}</string>
            </property>
            <property name="value">
             <number>45</number>

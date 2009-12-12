@@ -126,6 +126,16 @@ private:
 	*/
 	istd::CString GetHotfolderId() const;
 
+	/**
+		Process a single file.
+	*/
+	int ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile);
+
+	/**
+		Change state of the processing item and notify all observers.
+	*/
+	void UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const;
+
 private:
 	/**
 		Internal observer of the changes in the input directories.
@@ -174,8 +184,8 @@ private:
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
 
-	iqt::CCriticalSection m_parameterLock;
-	iqt::CCriticalSection m_processingQueueLock;
+	mutable iqt::CCriticalSection m_parameterLock;
+	mutable iqt::CCriticalSection m_processingQueueLock;
 
 	bool m_finishThread;
 
