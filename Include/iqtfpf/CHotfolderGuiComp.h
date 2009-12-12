@@ -73,10 +73,13 @@ public:
 	virtual void OnGuiDestroyed();
 
 private:
+	typedef std::vector<ifpf::IHotfolderProcessingItem*> ProcessingItems;
+
 	void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 	void UpdateProcessingCommands();
+	void UpdateItemCommands();
 	void RebuildItemList();
-	ifpf::IHotfolderProcessingItem* GetSelectedProcessingItem() const;
+	ProcessingItems GetSelectedProcessingItems() const;
 
 private Q_SLOTS:
 	void OnRun();
@@ -128,7 +131,6 @@ private:
 	iqtgui::CHierarchicalCommand m_holdCommand;
 	iqtgui::CHierarchicalCommand m_removeItemCommand;
 	iqtgui::CHierarchicalCommand m_cancelItemCommand;
-
 };
 
 

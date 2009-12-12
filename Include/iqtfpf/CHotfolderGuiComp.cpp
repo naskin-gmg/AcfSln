@@ -56,6 +56,8 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 
 		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
 			RebuildItemList();
+
+			UpdateItemCommands();
 		}
 
 		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
@@ -251,6 +253,24 @@ void CHotfolderGuiComp::UpdateProcessingCommands()
 }
 
 
+void CHotfolderGuiComp::UpdateItemCommands()
+{
+	ProcessingItems selectedItems = GetSelectedProcessingItems();
+
+	bool enableRemoveAction = (!selectedItems.empty());
+	bool enableCancelAction = enableRemoveAction;
+
+	for (int itemIndex = 0; itemIndex < int(selectedItems.size()); itemIndex++){
+		enableRemoveAction = enableRemoveAction && (selectedItems[itemIndex]->GetProcessingState() != iproc::IProcessor::TS_WAIT);
+		enableCancelAction = enableCancelAction && (selectedItems[itemIndex]->GetProcessingState() != iproc::IProcessor::TS_CANCELED);
+	}
+	
+	m_removeItemCommand.setEnabled(enableRemoveAction);
+	m_cancelItemCommand.setEnabled(enableCancelAction);
+}
+
+
+
 void CHotfolderGuiComp::RebuildItemList()
 {
 	while (FileList->topLevelItemCount() > 0){
@@ -270,20 +290,20 @@ void CHotfolderGuiComp::RebuildItemList()
 	}
 }
 
-
-ifpf::IHotfolderProcessingItem* CHotfolderGuiComp::GetSelectedProcessingItem() const
+CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems() const
 {
+	ProcessingItems items;
+
 	QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
-	if (selectedItems.isEmpty()){
-		return NULL;
+
+	for (int itemIndex = 0; itemIndex < selectedItems.count(); itemIndex++){
+		ProcessingItem* processingItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(itemIndex));
+		if (processingItemPtr != NULL){
+			items.push_back(processingItemPtr->GetObjectPtr());
+		}
 	}
 
-	ProcessingItem* processingItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(0));
-	if (processingItemPtr != NULL){
-		return processingItemPtr->GetObjectPtr();
-	}
-
-	return NULL;
+	return items;
 }
 
 
@@ -309,11 +329,12 @@ void CHotfolderGuiComp::OnHold()
 
 void CHotfolderGuiComp::OnItemRemove()
 {
-	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
-	if (processingItemPtr != NULL){
-		ifpf::IHotfolder* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			objectPtr->RemoveProcessingItem(processingItemPtr);
+	ProcessingItems processingItems = GetSelectedProcessingItems();
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		istd::CChangeNotifier changePtr(objectPtr, ifpf::IHotfolder::CF_FILE_REMOVED);
+		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
+			objectPtr->RemoveProcessingItem(processingItems[itemIndex]);
 		}
 	}
 }
@@ -321,21 +342,16 @@ void CHotfolderGuiComp::OnItemRemove()
 
 void CHotfolderGuiComp::OnItemCancel()
 {
-	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
-	if (processingItemPtr != NULL){
-		processingItemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+	ProcessingItems processingItems = GetSelectedProcessingItems();
+	for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
+		processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 	}
 }
 
 
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
-	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
-
-	bool enableMenu = (processingItemPtr != NULL);
-	
-	m_removeItemCommand.setEnabled(enableMenu && processingItemPtr->GetProcessingState() != iproc::IProcessor::TS_WAIT);
-	m_cancelItemCommand.setEnabled(enableMenu && processingItemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED);
+	UpdateItemCommands();
 }
 
 
