@@ -331,8 +331,6 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 {	
 	I_ASSERT(!BaseClass2::isRunning());
 
-	SendInfoMessage(0, iqt::GetCString(m_currentDirectory.absolutePath()));
-
 	if (m_currentDirectory == QDir(folderPath)){
 		return;
 	}
