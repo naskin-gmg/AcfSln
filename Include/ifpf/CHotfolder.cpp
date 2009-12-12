@@ -87,6 +87,11 @@ void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPt
 {
 	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
 
+	// if file is in processing, abort
+	if (fileItemPtr->GetProcessingState() == iproc::IProcessor::TS_WAIT){
+		return;
+	}
+
 	if (m_processingItems.Remove(fileItemPtr)){
 		lock.Reset();
 

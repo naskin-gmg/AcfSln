@@ -54,11 +54,11 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(this, true);
 
-		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0){
+		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
 			RebuildItemList();
 		}
 
-		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0 || (updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
+		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
 			int itemsCount = objectPtr->GetProcessingItemsCount();
 			if (itemsCount > 0){
 				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemsCount - 1);
@@ -141,14 +141,14 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_removeItemCommand.SetGroupId(2);
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_removeItemCommand.SetVisuals(tr("&Remove"), "Remove", tr("Remove processing item from the view"), QIcon(":/Icons/Delete"));
+	m_removeItemCommand.SetVisuals(tr("&Remove Processing Item"), "Remove Processing Item", tr("Remove processing item from the view"), QIcon(":/Icons/Delete"));
 	m_removeItemCommand.setDisabled(true);
 	connect(&m_removeItemCommand, SIGNAL(activated()), this, SLOT(OnItemRemove()));
 	hotfolderMenuPtr->InsertChild(&m_removeItemCommand, false);
 
 	m_cancelItemCommand.SetGroupId(2);
 	m_cancelItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_cancelItemCommand.SetVisuals(tr("&Remove"), "Remove", tr("Cancel processing item from the view"), QIcon(":/Icons/Cancel"));
+	m_cancelItemCommand.SetVisuals(tr("&Cancel Processing"), "Cancel Processing", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel"));
 	m_cancelItemCommand.setDisabled(true);
 	connect(&m_cancelItemCommand, SIGNAL(activated()), this, SLOT(OnItemCancel()));
 	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
@@ -323,10 +323,7 @@ void CHotfolderGuiComp::OnItemCancel()
 {
 	ifpf::IHotfolderProcessingItem* processingItemPtr = GetSelectedProcessingItem();
 	if (processingItemPtr != NULL){
-		ifpf::IHotfolder* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			objectPtr->RemoveProcessingItem(processingItemPtr);
-		}
+		processingItemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 	}
 }
 
@@ -337,7 +334,7 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 
 	bool enableMenu = (processingItemPtr != NULL);
 	
-	m_removeItemCommand.setEnabled(enableMenu);
+	m_removeItemCommand.setEnabled(enableMenu && processingItemPtr->GetProcessingState() != iproc::IProcessor::TS_WAIT);
 	m_cancelItemCommand.setEnabled(enableMenu && processingItemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED);
 }
 
