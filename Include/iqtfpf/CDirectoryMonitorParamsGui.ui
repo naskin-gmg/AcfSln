@@ -202,7 +202,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-              <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
+              <normaloff>:/Icons/Delete.svg</normaloff>:/Icons/Delete.svg</iconset>
             </property>
             <property name="autoRepeat">
              <bool>true</bool>
@@ -289,7 +289,7 @@
             </property>
             <property name="icon">
              <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-              <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
+              <normaloff>:/Icons/Delete.svg</normaloff>:/Icons/Delete.svg</iconset>
             </property>
             <property name="autoRepeat">
              <bool>true</bool>

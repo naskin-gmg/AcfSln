@@ -143,14 +143,14 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_removeItemCommand.SetGroupId(2);
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_removeItemCommand.SetVisuals(tr("&Remove Processing Item"), "Remove Processing Item", tr("Remove processing item from the view"), QIcon(":/Icons/Delete"));
+	m_removeItemCommand.SetVisuals(tr("&Remove Processing Item"), "Remove Processing Item", tr("Remove processing item from the view"), QIcon(":/Icons/Delete.svg"));
 	m_removeItemCommand.setDisabled(true);
 	connect(&m_removeItemCommand, SIGNAL(activated()), this, SLOT(OnItemRemove()));
 	hotfolderMenuPtr->InsertChild(&m_removeItemCommand, false);
 
 	m_cancelItemCommand.SetGroupId(2);
 	m_cancelItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_cancelItemCommand.SetVisuals(tr("&Cancel Processing"), "Cancel Processing", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel"));
+	m_cancelItemCommand.SetVisuals(tr("&Cancel Processing"), "Cancel Processing", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel.svg"));
 	m_cancelItemCommand.setDisabled(true);
 	connect(&m_cancelItemCommand, SIGNAL(activated()), this, SLOT(OnItemCancel()));
 	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
