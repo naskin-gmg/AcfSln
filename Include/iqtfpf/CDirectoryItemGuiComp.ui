@@ -141,7 +141,7 @@ background: transparent;
        </property>
        <property name="styleSheet">
         <string>QProgressBar::chunk {
-     background-color: darkgray;
+     background-color: orange;
       width: 4px;
      margin: 0.5px;
 }</string>

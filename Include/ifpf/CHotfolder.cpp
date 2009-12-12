@@ -119,16 +119,12 @@ ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
 
 int CHotfolder::GetProcessingItemsCount() const
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
-
 	return m_processingItems.GetCount();
 }
 
 
 IHotfolderProcessingItem* CHotfolder::GetProcessingItem(int processingItemIndex) const
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
-
 	return m_processingItems.GetAt(processingItemIndex);
 }
 
