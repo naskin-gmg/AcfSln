@@ -1,0 +1,147 @@
+#include "iqtex/CTcpTerminalGuiComp.h"
+
+
+// QT includes
+#include <QUrl>
+
+
+namespace iqtex
+{
+
+
+CTcpTerminalGuiComp::CTcpTerminalGuiComp()
+:	m_connectedIcon(":/Icons/StateOk.svg"),
+	m_disconnectedIcon(":/Icons/StateInvalid.svg")
+{
+	QObject::connect(&m_connectTimer, SIGNAL(timeout()), this, SLOT(OnConectTimer()));
+	QObject::connect(
+				&m_socket,
+				SIGNAL(stateChanged(QAbstractSocket::SocketState)),
+				this,
+				SLOT(OnStateChanged(QAbstractSocket::SocketState)));
+}
+
+
+// protected methods
+
+void CTcpTerminalGuiComp::UpdateStateIcon()
+{
+	if (IsGuiCreated()){
+		SendButton->setIcon(m_socket.state() == QAbstractSocket::ConnectedState? m_connectedIcon: m_disconnectedIcon);
+	}
+}
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CTcpTerminalGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	int presetsCount = m_presetTextsAttrPtr.GetCount();
+	for (int i = 0; i < presetsCount; ++i){
+		CommandCB->addItem(iqt::GetQString(m_presetTextsAttrPtr[i]));
+	}
+
+	UpdateStateIcon();
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CTcpTerminalGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_urlParamModelCompPtr.IsValid()){
+		m_urlParamModelCompPtr->AttachObserver(this);
+	}
+	else{
+		OnUpdate(0, NULL);
+	}
+}
+
+
+void CTcpTerminalGuiComp::OnComponentDestroyed()
+{
+	m_socket.disconnectFromHost();
+	BaseClass::OnComponentDestroyed();
+
+	if (m_urlParamModelCompPtr.IsValid() && m_urlParamModelCompPtr->IsAttached(this)){
+		m_urlParamModelCompPtr->DetachObserver(this);
+	}
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CTcpTerminalGuiComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_socket.disconnectFromHost();
+	m_socket.waitForDisconnected();
+
+	OnConectTimer();
+
+	m_connectTimer.start(1000);
+}
+
+
+// protected slots
+
+void CTcpTerminalGuiComp::on_SendButton_clicked()
+{
+	QString command = CommandCB->currentText();
+
+	m_socket.write((command + "\n").toAscii());
+
+	QTreeWidgetItem* lineItemPtr = new QTreeWidgetItem(SentList);
+	lineItemPtr->setText(0, command);
+}
+
+
+void CTcpTerminalGuiComp::on_ClearSentListButton_clicked()
+{
+	SentList->clear();
+}
+
+
+void CTcpTerminalGuiComp::on_ClearReceivedListButton_clicked()
+{
+	ReceivedList->clear();
+}
+
+
+void CTcpTerminalGuiComp::OnReadyRead()
+{
+	while (m_socket.canReadLine()){
+		QString line = m_socket.readLine(1024);
+
+		QTreeWidgetItem* lineItemPtr = new QTreeWidgetItem(ReceivedList);
+		lineItemPtr->setText(0, line);
+	}
+}
+
+
+void CTcpTerminalGuiComp::OnConectTimer()
+{
+	if (m_urlParamCompPtr.IsValid()){
+		istd::CString urlString = m_urlParamCompPtr->GetPath();
+		QUrl url(iqt::GetQString(urlString));
+
+		m_socket.connectToHost(url.host(), url.port());
+	}
+}
+
+
+void CTcpTerminalGuiComp::OnStateChanged(QAbstractSocket::SocketState socketState)
+{
+	if (socketState == QAbstractSocket::ConnectedState){
+		m_connectTimer.stop();
+	}
+
+	UpdateStateIcon();
+}
+
+
+} // namespace iqtex
+
+

@@ -22,6 +22,10 @@ class CGeneralSamplesSequence:
 public:
 	CGeneralSamplesSequence();
 
+	const double* GetSamplesBuffer() const;
+	double* GetSamplesBuffer();
+	int GetSamplesBufferSize() const;
+
 	// reimplemented (imeas::ISamplesSequence)
 	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1);
 	virtual bool IsEmpty() const;
@@ -58,6 +62,26 @@ private:
 
 	double m_samplingPeriod;
 };
+
+
+// inline methods
+
+inline const double* CGeneralSamplesSequence::GetSamplesBuffer() const
+{
+	return &m_samples[0];
+}
+
+
+inline double* CGeneralSamplesSequence::GetSamplesBuffer()
+{
+	return &m_samples[0];
+}
+
+
+inline int CGeneralSamplesSequence::GetSamplesBufferSize() const
+{
+	return int(m_samples.size());
+}
 
 
 } // namespace imeas
