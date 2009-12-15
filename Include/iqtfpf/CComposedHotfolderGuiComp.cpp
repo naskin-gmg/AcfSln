@@ -10,12 +10,12 @@ namespace iqtfpf
 {
 
 
-// reimplemented (idoc::ICommandsProvider)
+// reimplemented (ibase::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CComposedHotfolderGuiComp::GetCommands() const
+const ibase::IHierarchicalCommand* CComposedHotfolderGuiComp::GetCommands() const
 {
 	if (m_hotfolderGuiCompPtr.IsValid()){
-		idoc::ICommandsProvider* commandsProviderPtr = dynamic_cast<idoc::ICommandsProvider*>(m_hotfolderGuiCompPtr.GetPtr());
+		ibase::ICommandsProvider* commandsProviderPtr = dynamic_cast<ibase::ICommandsProvider*>(m_hotfolderGuiCompPtr.GetPtr());
 		if (commandsProviderPtr != NULL){
 			const iqtgui::CHierarchicalCommand* rootCommands = dynamic_cast<const iqtgui::CHierarchicalCommand*>(commandsProviderPtr->GetCommands());
 			if (rootCommands != NULL){

@@ -7,7 +7,7 @@
 
 #include "iser/ISerializable.h"
 
-#include "iimg/CGeneralBitmap.h"
+#include "iimg/IBitmap.h"
 
 
 

@@ -95,7 +95,7 @@ background: transparent;
        </property>
        <property name="styleSheet">
         <string>QProgressBar::chunk {
-     background-color: darkblue;
+     image: url(:/Icons/StateOk.svg);
      width: 4px;
      margin: 0.5px;
  }</string>
@@ -118,7 +118,7 @@ background: transparent;
        </property>
        <property name="styleSheet">
         <string>QProgressBar::chunk {
-     background-color: red;
+     image: url(:/Icons/StateInvalid.svg);
      width: 4px;
      margin: 0.5px;
 }</string>
@@ -141,7 +141,7 @@ background: transparent;
        </property>
        <property name="styleSheet">
         <string>QProgressBar::chunk {
-     background-color: orange;
+     image: url(:/Icons/Cancel.svg);
       width: 4px;
      margin: 0.5px;
 }</string>

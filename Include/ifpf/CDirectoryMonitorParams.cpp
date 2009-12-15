@@ -72,42 +72,35 @@ void CDirectoryMonitorParams::SetObservedChanges(int ovservedChanges)
 }
 
 
-istd::CStringList CDirectoryMonitorParams::GetFileFilters() const
+istd::CStringList CDirectoryMonitorParams::GetAcceptPatterns() const
 {
-	return m_fileFilters;
+	return m_acceptPatterns;
 }
 
 
-void CDirectoryMonitorParams::SetFileFilters(const istd::CStringList& fileFilters)
+void CDirectoryMonitorParams::SetAcceptPatterns(const istd::CStringList& acceptPatterns)
 {
-	if (fileFilters != m_fileFilters){
+	if (acceptPatterns != m_acceptPatterns){
 		istd::CChangeNotifier changePtr(this);
 
-		m_fileFilters = fileFilters;
+		m_acceptPatterns = acceptPatterns;
 	}
 }
 
 
-// reimplemented (iprm::IFileNameParam)
 
-int CDirectoryMonitorParams::GetPathType() const
+istd::CStringList CDirectoryMonitorParams::GetIgnorePatterns() const
 {
-	return iprm::IFileNameParam::PT_DIRECTORY;
+	return m_ignorePatterns;
 }
 
 
-const istd::CString& CDirectoryMonitorParams::GetPath() const
+void CDirectoryMonitorParams::SetIgnorePatterns(const istd::CStringList& ignorePatterns)
 {
-	return m_directoryPath;
-}
+	if (ignorePatterns != m_acceptPatterns){
+		istd::CChangeNotifier changePtr(this);
 
-
-void CDirectoryMonitorParams::SetPath(const istd::CString& path)
-{
-	if (path != m_directoryPath){
-		istd::CChangeNotifier notifier(this);
-
-		m_directoryPath = path;
+		m_ignorePatterns = ignorePatterns;
 	}
 }
 
@@ -116,10 +109,7 @@ void CDirectoryMonitorParams::SetPath(const istd::CString& path)
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {		
-	static iser::CArchiveTag pathTag("Path", "Observing directory path");
-	bool retVal = archive.BeginTag(pathTag);
-	retVal = retVal && archive.Process(m_directoryPath);
-	retVal = retVal && archive.EndTag(pathTag);
+	bool retVal = true;
 
 	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos");
 	retVal = retVal && archive.BeginTag(poolingIntervallTag);
@@ -136,32 +126,60 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_observedChanges);
 	retVal = retVal && archive.EndTag(observedChangesTag);
 
-	static iser::CArchiveTag fileFiltersTag("FileFilters", "List file filters");
-	static iser::CArchiveTag fileFilterTag("FileFilter", "Single file filter");
+	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns");
+	static iser::CArchiveTag acceptPatternTag("AcceptPattern", "Single accepted file name pattern");
 
-	int fileFiltersCount = m_fileFilters.size();
-	retVal = retVal && archive.BeginMultiTag(fileFiltersTag, fileFilterTag, fileFiltersCount);
+	int acceptPatternsCount = m_acceptPatterns.size();
+	retVal = retVal && archive.BeginMultiTag(acceptPatternsTag, acceptPatternTag, acceptPatternsCount);
 	if (archive.IsStoring()){
-		for (int fileFilterIndex = 0; fileFilterIndex < fileFiltersCount; fileFilterIndex++){
-			retVal = retVal && archive.BeginTag(fileFilterTag);
-			retVal = retVal && archive.Process(m_fileFilters[fileFilterIndex]);
-			retVal = retVal && archive.EndTag(fileFilterTag);		
+		for (int acceptPatternIndex = 0; acceptPatternIndex < acceptPatternsCount; acceptPatternIndex++){
+			retVal = retVal && archive.BeginTag(acceptPatternTag);
+			retVal = retVal && archive.Process(m_acceptPatterns[acceptPatternIndex]);
+			retVal = retVal && archive.EndTag(acceptPatternTag);		
 		}
 	}
 	else{
-		for (int fileFilterIndex = 0; fileFilterIndex < fileFiltersCount; fileFilterIndex++){
-			istd::CString fileFilter;
-			retVal = retVal && archive.BeginTag(fileFilterTag);
-			retVal = retVal && archive.Process(fileFilter);
-			retVal = retVal && archive.EndTag(fileFilterTag);
+		for (int acceptPatternIndex = 0; acceptPatternIndex < acceptPatternsCount; acceptPatternIndex++){
+			istd::CString acceptPattern;
+			retVal = retVal && archive.BeginTag(acceptPatternTag);
+			retVal = retVal && archive.Process(acceptPattern);
+			retVal = retVal && archive.EndTag(acceptPatternTag);
 
 			if (retVal){
-				m_fileFilters.push_back(fileFilter);
+				m_acceptPatterns.push_back(acceptPattern);
 			}
 		}	
 	}
 
-	retVal = retVal && archive.EndTag(fileFiltersTag);
+	retVal = retVal && archive.EndTag(acceptPatternsTag);
+
+	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns");
+	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern");
+
+	int ignorePatternsCount = m_ignorePatterns.size();
+	retVal = retVal && archive.BeginMultiTag(ignorePatternsTag, ignorePatternTag, ignorePatternsCount);
+	if (archive.IsStoring()){
+		for (int ignorePatternIndex = 0; ignorePatternIndex < ignorePatternsCount; ignorePatternIndex++){
+			retVal = retVal && archive.BeginTag(ignorePatternTag);
+			retVal = retVal && archive.Process(m_ignorePatterns[ignorePatternIndex]);
+			retVal = retVal && archive.EndTag(ignorePatternTag);		
+		}
+	}
+	else{
+		for (int ignorePatternIndex = 0; ignorePatternIndex < ignorePatternsCount; ignorePatternIndex++){
+			istd::CString ignorePattern;
+			retVal = retVal && archive.BeginTag(ignorePatternTag);
+			retVal = retVal && archive.Process(ignorePattern);
+			retVal = retVal && archive.EndTag(ignorePatternTag);
+
+			if (retVal){
+				m_ignorePatterns.push_back(ignorePattern);
+			}
+		}	
+	}
+
+	retVal = retVal && archive.EndTag(ignorePatternsTag);
+
 
 	return retVal;
 }

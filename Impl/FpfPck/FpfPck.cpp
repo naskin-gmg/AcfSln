@@ -17,6 +17,7 @@ I_EXPORT_COMPONENT(HotfolderLoader, "Hotfolder loader", "File Processing Paramet
 I_EXPORT_COMPONENT(HotfolderStateModel, "Hotfolder's state", "File Processing Hotfolder");
 I_EXPORT_COMPONENT(MonitoringSessions, "Monitoring sessions", "File Processing Hotfolder Session");
 I_EXPORT_COMPONENT(HotfolderStatistics, "Simple hotfolder statistics", "File Processing Hotfolder Statistics");
+I_EXPORT_COMPONENT(AttributedDirectoryMonitorParams, "Default parameter for directory monitoring", "File Processing Hotfolder Directory Monitoring");
 
 
 } // namespace FpfPck

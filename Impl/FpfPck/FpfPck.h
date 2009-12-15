@@ -11,6 +11,7 @@
 #include "ifpf/CMonitoringSessionsMap.h"
 #include "ifpf/CHotfolderStatistics.h"
 #include "ifpf/CHotfolderLoaderComp.h"
+#include "ifpf/CDirectoryMonitorParamsComp.h"
 
 
 /**
@@ -34,6 +35,8 @@ typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						ifpf::CHotfolderStatistics, iser::ISerializable, imod::IObserver, ifpf::IHotfolderStatistics> > HotfolderStatistics;
 typedef ifpf::CHotfolderLoaderComp HotfolderLoader;
+
+typedef icomp::TModelCompWrap<ifpf::CDirectoryMonitorParamsComp> AttributedDirectoryMonitorParams;
 
 
 } // namespace FpfPck

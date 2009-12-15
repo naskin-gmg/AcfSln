@@ -25,25 +25,21 @@ public:
 	virtual void SetObservedItemTypes(int observedItemTypes);
 	virtual int GetObservedChanges() const;
 	virtual void SetObservedChanges(int ovservedChanges);
-	virtual istd::CStringList GetFileFilters() const;
-	virtual void SetFileFilters(const istd::CStringList& fileFilters);
-
-	// reimplemented (iprm::IFileNameParam)
-	virtual int GetPathType() const;
-	virtual const istd::CString& GetPath() const;
-	virtual void SetPath(const istd::CString& path);
+	virtual istd::CStringList GetAcceptPatterns() const;
+	virtual void SetAcceptPatterns(const istd::CStringList& acceptPatterns);
+	virtual istd::CStringList GetIgnorePatterns() const;
+	virtual void SetIgnorePatterns(const istd::CStringList& acceptPatterns);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	istd::CString m_directoryPath;
-
 	double m_poolingIntervall;
 	int m_observedItemTypes;
 	int m_observedChanges;
 
-	istd::CStringList m_fileFilters;
+	istd::CStringList m_acceptPatterns;
+	istd::CStringList m_ignorePatterns;
 };
 
 

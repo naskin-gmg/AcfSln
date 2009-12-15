@@ -2,6 +2,10 @@
 #define ifpf_CHotfolderProcessingItem_included
 
 
+// ACF includes
+#include "iimg/CGeneralBitmap.h"
+
+
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
 

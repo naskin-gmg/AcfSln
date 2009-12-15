@@ -29,9 +29,9 @@ CHotfolderGuiComp::CHotfolderGuiComp()
 }
 
 
-// reimplemented (idoc::ICommandsProvider)
+// reimplemented (ibase::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
+const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 {
 	return &m_hotfolderCommands;
 }
@@ -160,6 +160,17 @@ void CHotfolderGuiComp::OnGuiCreated()
 	// some visual details:
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
 	FileList->header()->setStretchLastSection(true);
+
+	// initialize state icons map:
+
+	if (m_stateIconsProviderCompPtr.IsValid()){
+		for (int fileState = 0; fileState < m_stateIconsProviderCompPtr->GetIconCount(); fileState++){
+			QPixmap pixmap = m_stateIconsProviderCompPtr->GetIcon(fileState).pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
+
+			m_stateIconsMap[fileState] = QIcon(pixmap);
+		}
+	}
+
 }
 
 
@@ -194,7 +205,7 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 	}
 
 	if (parentItemPtr == NULL){
-		parentItemPtr = new DirectoryItem(fileDirectory, FileList);
+		parentItemPtr = new DirectoryItem(*this, fileDirectory, FileList);
 		FileList->addTopLevelItem(parentItemPtr);
 		parentItemPtr->setExpanded(true);
 
@@ -235,7 +246,7 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 		}
 	}
 	
-	parentItemPtr->AddFileItem(fileItem, m_stateIconsProviderCompPtr.GetPtr());
+	parentItemPtr->AddFileItem(fileItem);
 }
 
 
@@ -257,12 +268,16 @@ void CHotfolderGuiComp::UpdateItemCommands()
 {
 	ProcessingItems selectedItems = GetSelectedProcessingItems();
 
-	bool enableRemoveAction = (!selectedItems.empty());
-	bool enableCancelAction = enableRemoveAction;
+	bool enableRemoveAction = false;
+	bool enableCancelAction = false;
 
 	for (int itemIndex = 0; itemIndex < int(selectedItems.size()); itemIndex++){
-		enableRemoveAction = enableRemoveAction && (selectedItems[itemIndex]->GetProcessingState() != iproc::IProcessor::TS_WAIT);
-		enableCancelAction = enableCancelAction && (selectedItems[itemIndex]->GetProcessingState() != iproc::IProcessor::TS_CANCELED);
+		I_ASSERT(selectedItems[itemIndex] != NULL);
+
+		int itemState = selectedItems[itemIndex]->GetProcessingState();
+
+		enableRemoveAction = enableRemoveAction || (itemState != iproc::IProcessor::TS_WAIT);
+		enableCancelAction = enableCancelAction || ((itemState == iproc::IProcessor::TS_NONE) && itemState == iproc::IProcessor::TS_WAIT);
 	}
 	
 	m_removeItemCommand.setEnabled(enableRemoveAction);
@@ -307,6 +322,19 @@ CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems
 }
 
 
+QIcon CHotfolderGuiComp::GetStateIcon(int fileState) const
+{
+	static QIcon emptyIcon;
+
+	StateIconsMap::const_iterator foundIconIter = m_stateIconsMap.find(fileState);
+	if (foundIconIter != m_stateIconsMap.end()){
+		return foundIconIter->second;
+	}
+
+	return emptyIcon;
+}
+
+
 // private slots
 
 void CHotfolderGuiComp::OnRun()
@@ -344,7 +372,10 @@ void CHotfolderGuiComp::OnItemCancel()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-		processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+		int itemState = processingItems[itemIndex]->GetProcessingState();
+		if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
+			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+		}
 	}
 }
 
@@ -358,9 +389,9 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 
 // public methods of the embedded class 
 
-CHotfolderGuiComp::ProcessingItem::ProcessingItem(const iqtgui::IIconProvider* iconsProviderPtr, QTreeWidget* parent)
-	:BaseClass(parent),
-	m_iconsProviderPtr(iconsProviderPtr)
+CHotfolderGuiComp::ProcessingItem::ProcessingItem(const CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr)
+	:BaseClass(treeWidgetPtr),
+	m_parent(parent)
 {
 }
 
@@ -372,19 +403,22 @@ CHotfolderGuiComp::ProcessingItem::ProcessingItem(const iqtgui::IIconProvider* i
 void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && m_iconsProviderPtr != NULL){
+	if (objectPtr != NULL){
 		int fileState = objectPtr->GetProcessingState();
-		if (m_iconsProviderPtr->GetIconCount() > fileState){
-			QPixmap pixmap = m_iconsProviderPtr->GetIcon(fileState).pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
 
-			setIcon(0, pixmap);
-		}
+		QIcon stateIcon = m_parent.GetStateIcon(fileState);
+
+		setIcon(0, stateIcon);
 	}
 }
 
 
-CHotfolderGuiComp::DirectoryItem::DirectoryItem(const QDir& directory, QTreeWidget* parentPtr)
-	:BaseClass(parentPtr),
+CHotfolderGuiComp::DirectoryItem::DirectoryItem(
+			const CHotfolderGuiComp& parent,
+			const QDir& directory,
+			QTreeWidget* treeWidgetPtr)
+	:BaseClass(treeWidgetPtr),
+	m_parent(parent),
 	m_directory(directory)
 {
 }
@@ -396,12 +430,12 @@ const QDir& CHotfolderGuiComp::DirectoryItem::GetDirectory() const
 }
 
 
-void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem, const iqtgui::IIconProvider* iconsProviderPtr)
+void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
 	QString inputFilePath = iqt::GetQString(fileItem.GetInputFile());
 	QFileInfo fileInfo(inputFilePath);
 
-	ProcessingItem* fileItemPtr = new ProcessingItem(iconsProviderPtr);
+	ProcessingItem* fileItemPtr = new ProcessingItem(m_parent);
 	fileItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	fileItemPtr->setBackgroundColor(0, Qt::transparent);
 	fileItemPtr->setText(0, fileInfo.fileName());

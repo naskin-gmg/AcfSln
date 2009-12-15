@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 
-#include "idoc/ICommandsProvider.h"
+#include "ibase/ICommandsProvider.h"
 
 #include "iqtgui/CHierarchicalCommand.h"
 
@@ -22,7 +22,7 @@ namespace iqsci
 {
 
 
-class CTextEditor: public QWidget, public Ui::CTextEditor, virtual public idoc::ICommandsProvider
+class CTextEditor: public QWidget, public Ui::CTextEditor, virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -36,8 +36,8 @@ public:
 
 	virtual void OnRetranslate();
 
-	// reimplemented (idoc::ICommandsProvider)
-	virtual const idoc::IHierarchicalCommand* GetCommands() const;
+	// reimplemented (ibase::ICommandsProvider)
+	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 public Q_SLOTS:
 	void SetFoldingEnabled(bool useFoldingEnabled);

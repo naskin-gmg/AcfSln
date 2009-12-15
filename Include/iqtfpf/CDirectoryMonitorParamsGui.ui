@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>627</width>
-    <height>322</height>
+    <height>324</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -134,7 +134,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QTreeWidget" name="FileFiltersList">
+         <widget class="QTreeWidget" name="AcceptPatternsList">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -182,7 +182,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="AddFilterButton">
+           <widget class="QToolButton" name="AddAcceptPatternButton">
             <property name="text">
              <string>...</string>
             </property>
@@ -193,7 +193,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="RemoveFilterButton">
+           <widget class="QToolButton" name="RemoveAcceptPatternButton">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -221,7 +221,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTreeWidget" name="FileIgnoreFiltersList">
+         <widget class="QTreeWidget" name="IgnorePatternsList">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -269,7 +269,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="AddIgnoreFilterButton">
+           <widget class="QToolButton" name="AddIgnorePatternButton">
             <property name="text">
              <string>...</string>
             </property>
@@ -280,7 +280,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="RemoveIgnoreFilterButton">
+           <widget class="QToolButton" name="RemoveIgnorePatternButton">
             <property name="enabled">
              <bool>false</bool>
             </property>

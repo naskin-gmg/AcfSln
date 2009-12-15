@@ -12,7 +12,7 @@
 
 #include "iproc/IProgressManager.h"
 
-#include "idoc/ICommandsProvider.h"
+#include "ibase/ICommandsProvider.h"
 
 
 #include "iqtgui/IIconProvider.h"
@@ -35,7 +35,7 @@ namespace iqtfpf
 
 class CHotfolderGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolder>,
-			virtual public idoc::ICommandsProvider
+			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -57,8 +57,8 @@ public:
 
 	CHotfolderGuiComp();
 
-	// reimplemented (idoc::ICommandsProvider)
-	virtual const idoc::IHierarchicalCommand* GetCommands() const;
+	// reimplemented (ibase::ICommandsProvider)
+	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -80,6 +80,7 @@ private:
 	void UpdateItemCommands();
 	void RebuildItemList();
 	ProcessingItems GetSelectedProcessingItems() const;
+	QIcon GetStateIcon(int fileState) const;
 
 private Q_SLOTS:
 	void OnRun();
@@ -95,13 +96,14 @@ private:
 		typedef QTreeWidgetItem BaseClass;
 		typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem> BaseClass2;
 
-		ProcessingItem(const iqtgui::IIconProvider* iconsProviderPtr, QTreeWidget* parentPtr = NULL);
+		ProcessingItem(const CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr = NULL);
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
 		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
 	private:
-		const iqtgui::IIconProvider* m_iconsProviderPtr;
+		const CHotfolderGuiComp& m_parent;
 	};
 
 	class DirectoryItem: public QTreeWidgetItem
@@ -109,12 +111,13 @@ private:
 	public:
 		typedef QTreeWidgetItem BaseClass;
 
-		DirectoryItem(const QDir& directory, QTreeWidget* parentPtr);
+		DirectoryItem(const CHotfolderGuiComp& parent, const QDir& directory, QTreeWidget* treeWidgetPtr);
 		const QDir& GetDirectory() const;
-		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem, const iqtgui::IIconProvider* iconsProviderPtr);
+		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 
 	private:
 		QDir m_directory;
+		const CHotfolderGuiComp& m_parent;
 	};
 
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
@@ -131,6 +134,10 @@ private:
 	iqtgui::CHierarchicalCommand m_holdCommand;
 	iqtgui::CHierarchicalCommand m_removeItemCommand;
 	iqtgui::CHierarchicalCommand m_cancelItemCommand;
+
+	typedef std::map<int, QIcon> StateIconsMap;
+
+	StateIconsMap m_stateIconsMap;
 };
 
 

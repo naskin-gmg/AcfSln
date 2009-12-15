@@ -215,12 +215,12 @@ void CDirectoryMonitorComp::run()
 		m_lock.Enter();
 
 		int observingChanges = m_observingChanges;
-		QStringList fileFilters = m_fileFilterExpressions;
+		QStringList acceptPatterns = m_fileFilterExpressions;
 		int observingItemTypes = m_observingItemTypes;
 
 		m_lock.Leave();
 
-		QFileInfoList currentFiles = m_currentDirectory.entryInfoList(fileFilters, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
+		QFileInfoList currentFiles = m_currentDirectory.entryInfoList(acceptPatterns, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
 
 		QStringList addedFiles;
 		QStringList removedFiles;
@@ -357,7 +357,7 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
 		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
 		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetAcceptPatterns());
 	}
 }
 
@@ -419,7 +419,7 @@ void CDirectoryMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel
 		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
 		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
 		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetFileFilters());
+		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetAcceptPatterns());
 	}
 }
 

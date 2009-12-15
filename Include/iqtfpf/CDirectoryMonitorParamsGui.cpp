@@ -61,15 +61,25 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 
 		objectPtr->SetObservedChanges(observedChanges);
 	
-		QTreeWidgetItemIterator iter(FileFiltersList);
-		istd::CStringList fileFilters;
-		while (*iter){
-			fileFilters.push_back(iqt::GetCString((*iter)->text(0)));
+		QTreeWidgetItemIterator acceptIter(AcceptPatternsList);
+		istd::CStringList acceptPatterns;
+		while (*acceptIter){
+			acceptPatterns.push_back(iqt::GetCString((*acceptIter)->text(0)));
 
-			++iter;
+			++acceptIter;
 		}
 
-		objectPtr->SetFileFilters(fileFilters);
+		objectPtr->SetAcceptPatterns(acceptPatterns);
+
+		QTreeWidgetItemIterator ignoreIter(IgnorePatternsList);
+		istd::CStringList ignorePatterns;
+		while (*ignoreIter){
+			ignorePatterns.push_back(iqt::GetCString((*ignoreIter)->text(0)));
+
+			++ignoreIter;
+		}
+
+		objectPtr->SetIgnorePatterns(ignorePatterns);
 	}
 }
 
@@ -95,10 +105,14 @@ void CDirectoryMonitorParamsGui::UpdateEditor(int /*updateFlags*/)
 		RemovedCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0);
 		AttributesCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0);
 
-		istd::CStringList fileFilters = objectPtr->GetFileFilters();
+		istd::CStringList acceptPatterns = objectPtr->GetAcceptPatterns();
+		for (int patternIndex = 0; patternIndex < int(acceptPatterns.size()); patternIndex++){
+			AddPattern(iqt::GetQString(acceptPatterns[patternIndex]), AcceptPatternsList);
+		}
 
-		for (int fileFilterIndex = 0; fileFilterIndex < int(fileFilters.size()); fileFilterIndex++){
-			AddFilter(iqt::GetQString(fileFilters[fileFilterIndex]));
+		istd::CStringList ignorePatterns = objectPtr->GetIgnorePatterns();
+		for (int patternIndex = 0; patternIndex < int(ignorePatterns.size()); patternIndex++){
+			AddPattern(iqt::GetQString(ignorePatterns[patternIndex]), IgnorePatternsList);
 		}
 	}
 }
@@ -110,9 +124,13 @@ void CDirectoryMonitorParamsGui::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	FileFiltersList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
+	AcceptPatternsList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
 
-	FileFiltersList->setItemDelegate(new iqtgui::CItemDelegate(20, FileFiltersList));
+	AcceptPatternsList->setItemDelegate(new iqtgui::CItemDelegate(20, AcceptPatternsList));
+
+	IgnorePatternsList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
+
+	IgnorePatternsList->setItemDelegate(new iqtgui::CItemDelegate(20, AcceptPatternsList));
 }
 
 
@@ -166,21 +184,83 @@ void CDirectoryMonitorParamsGui::on_PoolingIntervallSpin_valueChanged(double/* i
 }
 
 
-void CDirectoryMonitorParamsGui::on_AddFilterButton_clicked()
+void CDirectoryMonitorParamsGui::on_AddAcceptPatternButton_clicked()
 {
-	AddFilter("<Filter>");
+	AddPattern("<Filter>", AcceptPatternsList);
 
 	UpdateModel();
 }
 
 
-void CDirectoryMonitorParamsGui::on_RemoveFilterButton_clicked()
+void CDirectoryMonitorParamsGui::on_RemoveAcceptPatternButton_clicked()
 {
-	QList<QTreeWidgetItem*> selectedItems = FileFiltersList->selectedItems();
+	RemoveSelectedPatterns(AcceptPatternsList);
+}
+
+
+void CDirectoryMonitorParamsGui::on_AcceptPatternsList_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selectedItems = AcceptPatternsList->selectedItems();
+
+	RemoveAcceptPatternButton->setEnabled(!selectedItems.empty());
+}
+
+
+void CDirectoryMonitorParamsGui::on_AcceptPatternsList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
+{
+	UpdateModel();
+}
+
+
+void CDirectoryMonitorParamsGui::on_AddIgnorePatternButton_clicked()
+{
+	AddPattern("<Filter>", IgnorePatternsList);
+
+	UpdateModel();
+}
+
+
+void CDirectoryMonitorParamsGui::on_RemoveIgnorePatternButton_clicked()
+{
+	RemoveSelectedPatterns(IgnorePatternsList);
+}
+
+
+void CDirectoryMonitorParamsGui::on_IgnorePatternsList_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selectedItems = IgnorePatternsList->selectedItems();
+
+	RemoveIgnorePatternButton->setEnabled(!selectedItems.empty());
+}
+
+
+void CDirectoryMonitorParamsGui::on_IgnorePatternsList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
+{
+	UpdateModel();
+}
+
+
+// private methods
+
+void CDirectoryMonitorParamsGui::AddPattern(const QString& filter, QTreeWidget* treeView)
+{
+	iqt::CSignalBlocker block(treeView);
+
+	QTreeWidgetItem* newFilterItem = new QTreeWidgetItem(treeView);
+	newFilterItem->setText(0, filter);
+	newFilterItem->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+	treeView->addTopLevelItem(newFilterItem);
+}
+
+
+void CDirectoryMonitorParamsGui::RemoveSelectedPatterns(QTreeWidget* treeView)
+{
+	QList<QTreeWidgetItem*> selectedItems = treeView->selectedItems();
 
 	if (!selectedItems.empty()){
 		for (QList<QTreeWidgetItem*>::iterator index = selectedItems.begin(); index != selectedItems.end(); index++){
-			QTreeWidgetItem* itemPtr = FileFiltersList->takeTopLevelItem(FileFiltersList->indexOfTopLevelItem(*index));
+			QTreeWidgetItem* itemPtr = treeView->takeTopLevelItem(AcceptPatternsList->indexOfTopLevelItem(*index));
 
 			if (itemPtr != NULL){
 				delete itemPtr;
@@ -192,38 +272,14 @@ void CDirectoryMonitorParamsGui::on_RemoveFilterButton_clicked()
 }
 
 
-void CDirectoryMonitorParamsGui::on_FileFiltersList_itemSelectionChanged()
-{
-	QList<QTreeWidgetItem*> selectedItems = FileFiltersList->selectedItems();
-
-	RemoveFilterButton->setEnabled(!selectedItems.empty());
-}
-
-
-void CDirectoryMonitorParamsGui::on_FileFiltersList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
-{
-	UpdateModel();
-}
-
-
-// private methods
-
-void CDirectoryMonitorParamsGui::AddFilter(const QString& filter)
-{
-	iqt::CSignalBlocker block(FileFiltersList);
-
-	QTreeWidgetItem* newFilterItem = new QTreeWidgetItem(FileFiltersList);
-	newFilterItem->setText(0, filter);
-	newFilterItem->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-
-	FileFiltersList->addTopLevelItem(newFilterItem);
-}
-
-
 void CDirectoryMonitorParamsGui::ResetEditor()
 {
-	while (FileFiltersList->topLevelItemCount() > 0){
-		delete FileFiltersList->takeTopLevelItem(0);
+	while (AcceptPatternsList->topLevelItemCount() > 0){
+		delete AcceptPatternsList->takeTopLevelItem(0);
+	}	
+
+	while (IgnorePatternsList->topLevelItemCount() > 0){
+		delete IgnorePatternsList->takeTopLevelItem(0);
 	}	
 }
 

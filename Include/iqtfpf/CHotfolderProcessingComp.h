@@ -4,6 +4,7 @@
 
 // Qt includes
 #include<QThread>
+#include <QTimer>
 
 
 // ACF includes
@@ -67,6 +68,13 @@ protected:
 
 	// reimplemented (QThread)
 	virtual void run();
+
+Q_SIGNALS:
+	void EmitItemState(ifpf::IHotfolderProcessingItem*, int itemState);
+
+protected Q_SLOTS:
+	void OnItemState(ifpf::IHotfolderProcessingItem* itemPtr, int itemState);
+	void OnUpdateQueueTimer();
 
 private:
 	/**
@@ -190,6 +198,12 @@ private:
 	bool m_finishThread;
 
 	istd::TDelPtr<iprm::IParamsSet> m_runParameterPtr;
+
+	typedef std::list<istd::CString> FilesQueue;
+
+	FilesQueue m_filesQueue;
+
+	QTimer m_filesQueueTimer;
 };
 
 

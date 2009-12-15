@@ -50,6 +50,12 @@ bool CFileProcessingComp::CopyFile(
 		return false;
 	}
 
+	if (!m_processorCompPtr.IsValid()){
+		SendErrorMessage(0, "File processor not set", "File processing component");
+
+		return false;
+	}
+
 	int processingResult = m_processorCompPtr->DoProcessing(
 				paramsSetPtr,
 				m_inputDataCompPtr.GetPtr(),

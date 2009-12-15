@@ -20,8 +20,7 @@ namespace ifpf
 // public methods
 
 CHotfolder::CHotfolder()
-	:m_isWorking(false),
-	m_paramsSetPtr(NULL)
+	:m_isWorking(false)
 {
 	m_lockPtr = istd::CreateService<isys::ICriticalSection>();
 
@@ -68,7 +67,6 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
 
 	ProcessingItem* itemPtr = new ProcessingItem;
-	istd::CChangeNotifier itemChangePtr(itemPtr);
 
 	itemPtr->SetInputFile(inputFilePath);
 	itemPtr->SetOutputFile(outputFilePath);

@@ -64,8 +64,6 @@ protected:
 
 	bool m_isWorking;
 
-	iprm::IParamsSet* m_paramsSetPtr;
-
 	istd::TSmartPtr<isys::ICriticalSection> m_lockPtr;
 };
 

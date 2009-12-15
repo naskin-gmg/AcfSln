@@ -15,214 +15,225 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
+  <PositionMap count="37">
     <Element>
       <ComponentName>
-        ComposedParamsSet
+        App
       </ComponentName>
       <X>
-        331
+        466
       </X>
       <X>
-        -156
+        -38
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DefaulDocumentFlattener
+        Application
       </ComponentName>
       <X>
-        426
+        568
       </X>
       <X>
-        -55
+        -225
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryMonitorParam
+        AttributeDock
       </ComponentName>
       <X>
-        -49
+        144
       </X>
       <X>
-        9
+        4
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryMonitorParams
+        AttributeEditor
       </ComponentName>
       <X>
-        -8
+        179
       </X>
       <X>
-        44
+        199
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryParam
+        AttributeEditorDock
       </ComponentName>
       <X>
-        129
+        108
       </X>
       <X>
-        -88
+        70
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryParamsManager
+        CompositorTemplate
       </ComponentName>
       <X>
-        -8
+        412
       </X>
       <X>
-        -172
+        226
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryParamsSet
+        DockWidgetGui
       </ComponentName>
       <X>
-        286
+        898
       </X>
       <X>
-        -177
+        -183
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DirectoryPath
+        DocumentManagerListener
       </ComponentName>
       <X>
-        499
+        249
       </X>
       <X>
-        -174
+        -335.414
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DynamicDirectoryMonitorParams
+        DocumentMangerModelBinder
       </ComponentName>
       <X>
-        -156
+        230
       </X>
       <X>
-        238
+        -183
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DynamicDirectoryParam
+        DocumentTemplate
       </ComponentName>
       <X>
-        186
+        -222
       </X>
       <X>
-        -92
+        -107
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DynamicParams
+        DoxygenHelpFileProvider
       </ComponentName>
       <X>
-        -108
+        218
       </X>
       <X>
-        -29
+        221
       </X>
     </Element>
     <Element>
       <ComponentName>
-        FileNameParam
+        ElementInfoBinder
       </ComponentName>
       <X>
-        124
+        -204
       </X>
       <X>
-        -77
+        -181
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderId
+        GuiApplication
       </ComponentName>
       <X>
-        -217
+        350
       </X>
       <X>
-        47
+        -22
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderInputParamsGui
+        HotfolderDocumentTemplate
       </ComponentName>
       <X>
-        228
+        431
       </X>
       <X>
-        42
+        115
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderParams
+        HotfolderGui
       </ComponentName>
       <X>
-        -260
+        724
       </X>
       <X>
-        -83
+        -152
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InputDirectories
+        Instantiator
       </ComponentName>
       <X>
-        -7
+        251
       </X>
       <X>
-        -216
+        -120
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InputParams
+        InvertImageHotfolder
       </ComponentName>
       <X>
-        -258
+        297
       </X>
       <X>
-        -83
+        -279
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InputParams2
+        Log
       </ComponentName>
       <X>
-        -116
+        771
       </X>
       <X>
-        -91
+        19
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InputPathManager
+        LogDock
       </ComponentName>
       <X>
-        -116
+        796
       </X>
       <X>
-        80
+        102
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        MainWindowGui
+      </ComponentName>
+      <X>
+        337
+      </X>
+      <X>
+        -165
       </X>
     </Element>
     <Element>
@@ -230,98 +241,186 @@
         ModelBinder
       </ComponentName>
       <X>
-        512
+        561
       </X>
       <X>
-        138
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirector&lt;
-      </ComponentName>
-      <X>
-        129
-      </X>
-      <X>
-        -88
+        -283
       </X>
     </Element>
     <Element>
       <ComponentName>
-        OutputDirectories
+        PackageOverview
       </ComponentName>
       <X>
-        129
+        -38
       </X>
       <X>
-        -88
+        324
       </X>
     </Element>
     <Element>
       <ComponentName>
-        OutputDirectory
+        PackageOverviewDock
       </ComponentName>
       <X>
-        131
+        -92.4142
       </X>
       <X>
-        -81
+        226
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ParamsManager
+        PackagesLoader
       </ComponentName>
       <X>
-        53
+        -475
       </X>
       <X>
-        -148
+        299
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SelectableParamsSet
+        Preview
       </ComponentName>
       <X>
-        -353
+        -332
       </X>
       <X>
-        98
+        32
       </X>
     </Element>
     <Element>
       <ComponentName>
-        StaticDirectoryMonitorParams
+        PreviewDock
       </ComponentName>
       <X>
-        197
+        830
       </X>
       <X>
-        236
+        -163
       </X>
     </Element>
     <Element>
       <ComponentName>
-        StaticParams
+        QuickHelpDoc
       </ComponentName>
       <X>
-        202
+        228
       </X>
       <X>
-        106
+        112
       </X>
     </Element>
     <Element>
       <ComponentName>
-        WarningDirectories
+        QuickHelpDock
       </ComponentName>
       <X>
-        179
+        375
       </X>
       <X>
-        -28
+        66
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        QuickHelpViewer
+      </ComponentName>
+      <X>
+        239
+      </X>
+      <X>
+        118
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Registry
+      </ComponentName>
+      <X>
+        -14
+      </X>
+      <X>
+        -264
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistryEditor
+      </ComponentName>
+      <X>
+        -121
+      </X>
+      <X>
+        57
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistryLoader
+      </ComponentName>
+      <X>
+        -680
+      </X>
+      <X>
+        -218
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SelectedElementInfo
+      </ComponentName>
+      <X>
+        -221
+      </X>
+      <X>
+        -343
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SimpleMainGui
+      </ComponentName>
+      <X>
+        563
+      </X>
+      <X>
+        -24
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SingleDocWorkspaceGui
+      </ComponentName>
+      <X>
+        354
+      </X>
+      <X>
+        -172
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        StandaloneApp
+      </ComponentName>
+      <X>
+        494
+      </X>
+      <X>
+        -62
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        -21
       </X>
     </Element>
   </PositionMap>

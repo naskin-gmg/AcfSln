@@ -16,22 +16,6 @@ namespace ifpf
 
 // reimplemented (ifpf::IMonitoringSession)
 
-istd::CString CMonitoringSession::GetSessionId() const
-{
-	return m_sessionId;
-}
-
-
-void CMonitoringSession::SetSessionId(const istd::CString& sessionId)
-{
-	if (sessionId != m_sessionId){
-		istd::CChangeNotifier changePtr(this);
-
-		m_sessionId = sessionId;
-	}
-}
-
-
 void CMonitoringSession::SetFileList(const istd::CStringList& fileList)
 {
 	if (m_sessionFiles != fileList){
@@ -50,44 +34,12 @@ istd::CStringList CMonitoringSession::GetFileList() const
 }
 
 
-// reimplemented (iprm::IFileNameParam)
-
-int CMonitoringSession::GetPathType() const
-{
-	return PT_DIRECTORY;
-}
-
-
-const istd::CString& CMonitoringSession::GetPath() const
-{
-	return m_monitoredDirectoryPath;
-}
-
-
-void CMonitoringSession::SetPath(const istd::CString& path)
-{
-	if (m_monitoredDirectoryPath != path){
-		istd::CChangeNotifier changePtr(this);
-
-		m_monitoredDirectoryPath = path;
-	}
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CMonitoringSession::Serialize(iser::IArchive& archive)
 {	
-	static iser::CArchiveTag monitoredDirectoryPathTag("MonitoredDirectoryPath", "Path of the currently monitored directory");
-	bool retVal = archive.BeginTag(monitoredDirectoryPathTag);
-	retVal = retVal && archive.Process(m_monitoredDirectoryPath);
-	retVal = retVal && archive.EndTag(monitoredDirectoryPathTag);
+	bool retVal = true;
 
-	static iser::CArchiveTag sessionIdTag("SessionId", "Session ID");
-	retVal = retVal && archive.BeginTag(sessionIdTag);
-	retVal = retVal && archive.Process(m_sessionId);
-	retVal = retVal && archive.EndTag(sessionIdTag);
-	
 	static iser::CArchiveTag directorySnapShotTag("DirectorySnapshot", "List of already monitored files");
 	static iser::CArchiveTag processedFileTag("MonitoredFile", "Already monitored file");
 

@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
-        DirectoryMonitorParams
+        GuiApplication
       </Id>
       <PackageId>
-        FpfVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        DirectoryMonitorParam
+        GuiApplication
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -36,34 +36,40 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              AcceptPatterns
+              ApplicationInfo
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              AcceptPatterns
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              IgnorePatterns
+              MainGui
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              IgnorePatterns
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                SimpleMainGui
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -71,13 +77,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderId
+        HotfolderGui
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderId
+        HotfolderGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -92,13 +98,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderParams
+        InvertImageHotfolder
       </Id>
       <PackageId>
-        BasePck
+        HotfolderVoce
       </PackageId>
       <ComponentId>
-        ComposedParamsSet
+        InvertImageHotfolder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -107,91 +113,50 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Parameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  InputDirectories
-                </Value>
-                <Value>
-                  OutputDirectory
-                </Value>
-                <Value>
-                  DirectoryMonitorParams
-                </Value>
-                <Value>
-                  HotfolderId
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParametersId
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  InputDirectories
-                </Value>
-                <Value>
-                  OutputDirectory
-                </Value>
-                <Value>
-                  DirectoryMonitorParams
-                </Value>
-                <Value>
-                  HotfolderId
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        InputDirectories
+        ModelBinder
       </Id>
       <PackageId>
-        FpfVoce
+        BasePck
       </PackageId>
       <ComponentId>
-        DynamicDirectoryParam
+        ModelBinder
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              SlaveSets
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InvertImageHotfolder
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Observers
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -205,7 +170,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  DirectoryMonitorParams
+                  HotfolderGui
                 </Value>
               </Values>
             </Data>
@@ -215,13 +180,13 @@
     </Element>
     <Element>
       <Id>
-        OutputDirectory
+        SimpleMainGui
       </Id>
       <PackageId>
-        BasePck
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        FileNameParam
+        SimpleMainGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -230,10 +195,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              PathType
+              IconSize
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -246,7 +211,66 @@
                 true
               </IsEnabled>
               <Value>
-                2
+                32
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Workspace
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfSlnVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Simple Hotfolder Demo
               </Value>
             </Data>
           </AttributeInfo>
@@ -254,46 +278,22 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        imod::IModel
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        HotfolderParams
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iprm::IParamsSet
-      </InterfaceId>
-      <ComponentId>
-        HotfolderParams
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        HotfolderParams
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        HotfolderParams
+        GuiApplication
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+    Compositor application used to graphical edit ACF registry files
   </Description>
   <Keywords>
-    
+    ACF Compositor Editor ARX
   </Keywords>
 </Acf>

@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iprm/IFileNameParam.h"
+#include "iser/ISerializable.h"
 
 
 namespace ifpf
@@ -13,7 +13,7 @@ namespace ifpf
 /**
 	Interface for a folder monitor parameters.
 */
-class IDirectoryMonitorParams: virtual public iprm::IFileNameParam
+class IDirectoryMonitorParams: virtual public iser::ISerializable
 {
 public:
 	enum ObserveItems
@@ -64,14 +64,24 @@ public:
 	virtual void SetObservedChanges(int ovservedChanges) = 0;
 
 	/**
-		Get file filters, given as the list of regular expressions.
+		Get accept file filters, given as the list of regular expressions.
 	*/
-	virtual istd::CStringList GetFileFilters() const = 0;
+	virtual istd::CStringList GetAcceptPatterns() const = 0;
 
 	/**
-		Set the file filters. Only file system items, that match the specified filters will be observed.
+		Set the accept file filters. Only file system items, that match the specified filters will be observed.
 	*/
-	virtual void SetFileFilters(const istd::CStringList& fileFilters) = 0;
+	virtual void SetAcceptPatterns(const istd::CStringList& acceptPatterns) = 0;
+
+	/**
+		Get ignore file filters, given as the list of regular expressions.
+	*/
+	virtual istd::CStringList GetIgnorePatterns() const = 0;
+
+	/**
+		Set the ignore file filters. The file system items, that match the specified filters will be ignored.
+	*/
+	virtual void SetIgnorePatterns(const istd::CStringList& acceptPatterns) = 0;
 };
 
 

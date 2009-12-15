@@ -52,6 +52,15 @@ void CHotfolderProcessingComp::OnComponentCreated()
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_parametersObserver);
 	}
+
+	connect(this,
+				SIGNAL(EmitItemState(ifpf::IHotfolderProcessingItem*, int)),
+				this,
+				SLOT(OnItemState(ifpf::IHotfolderProcessingItem*, int)), Qt::QueuedConnection);
+
+	connect(&m_filesQueueTimer, SIGNAL(timeout()), this, SLOT(OnUpdateQueueTimer()));
+
+	m_filesQueueTimer.start(100);
 }
 
 
@@ -65,6 +74,8 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->DetachObserver(&m_parametersObserver);
 	}
+
+	m_filesQueueTimer.stop();
 }
 
 
@@ -86,23 +97,7 @@ bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& d
 
 	istd::CStringList files = directoryMonitor.GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED);
 
-	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
-		const istd::CString& inputFilePath = files[fileIndex];
-
-		QFileInfo fileInfo(iqt::GetQString(inputFilePath));
-		if (!fileInfo.exists()){
-			continue;
-		}
-
-		istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath, GetOutputDirectory());
-
-		isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
-
-		I_ASSERT(m_hotfolderCompPtr.IsValid());
-
-		// add file to hotfolder's model:
-		m_hotfolderCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
-	}
+	m_filesQueue.insert(m_filesQueue.begin(), files.begin(), files.end());
 
 	return true;
 }
@@ -131,15 +126,48 @@ void CHotfolderProcessingComp::run()
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
 			processingQueueLock.Reset();
 
-			UpdateProcessingState(processingItemPtr, iproc::IProcessor::TS_WAIT);
+//			Q_EMIT EmitItemState(processingItemPtr, iproc::IProcessor::TS_WAIT);
 			
 			int processingState = ProcessFile(inputFile, outputFile);
 		
-			UpdateProcessingState(processingItemPtr, processingState);
+//			Q_EMIT EmitItemState(processingItemPtr, processingState);
 		}
 
 		msleep(workingIntervall);
 	}
+}
+
+
+// protected slots
+
+void CHotfolderProcessingComp::OnItemState(ifpf::IHotfolderProcessingItem* itemPtr, int itemState)
+{
+	UpdateProcessingState(itemPtr, itemState);
+}
+
+
+void CHotfolderProcessingComp::OnUpdateQueueTimer()
+{
+	if (m_filesQueue.empty()){
+		return;
+	}
+
+	const istd::CString& inputFilePath = m_filesQueue.back();
+	QFileInfo fileInfo(iqt::GetQString(inputFilePath));
+	if (!fileInfo.exists()){
+		return;
+	}
+
+	istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath, GetOutputDirectory());
+
+	isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
+
+	I_ASSERT(m_hotfolderCompPtr.IsValid());
+
+	// add file to hotfolder's model:
+	m_hotfolderCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
+
+	m_filesQueue.pop_back();
 }
 
 
@@ -369,9 +397,7 @@ int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const 
 void CHotfolderProcessingComp::UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const
 {
 	if (processingItemPtr != NULL){
-		isys::CSectionBlocker queueLock(&m_processingQueueLock);
-
-		iqt::CSafeNotifier changePtr(processingItemPtr);
+		istd::CChangeNotifier changePtr(processingItemPtr);
 
 		processingItemPtr->SetProcessingState(processingState);
 	}

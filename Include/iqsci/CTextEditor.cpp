@@ -22,12 +22,12 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 :	QWidget(parentWidget),
 	m_editorCommand("&Edit"),
 	m_viewCommand("&View"),
-	m_languageCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
-	m_lowercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR, MF_EDIT),
-	m_uppercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR, MF_EDIT),
-	m_useIdentGuideCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW),
-	m_useFoldingCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW),
-	m_showLineNumberCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW)
+	m_languageCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
+	m_lowercaseCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
+	m_uppercaseCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
+	m_useIdentGuideCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
+	m_useFoldingCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
+	m_showLineNumberCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW)
 {
 	Ui_CTextEditor::setupUi(this);
 
@@ -101,9 +101,9 @@ void CTextEditor::OnRetranslate()
 }
 
 
-// reimplemented (idoc::ICommandsProvider)
+// reimplemented (ibase::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CTextEditor::GetCommands() const
+const ibase::IHierarchicalCommand* CTextEditor::GetCommands() const
 {
 	return &m_rootCommand;
 }

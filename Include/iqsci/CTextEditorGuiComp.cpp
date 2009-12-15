@@ -39,9 +39,9 @@ void CTextEditorGuiComp::UpdateEditor(int /*updateFlags*/)
 }
 
 
-// reimplemented (idoc::ICommandsProvider)
+// reimplemented (ibase::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
+const ibase::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
 {
 	if (IsGuiCreated()){
 		CTextEditor* textEditPtr = GetQtWidget();

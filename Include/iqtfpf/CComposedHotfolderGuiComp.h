@@ -5,7 +5,7 @@
 // ACF includes
 #include "iproc/IProgressManager.h"
 
-#include "idoc/ICommandsProvider.h"
+#include "ibase/ICommandsProvider.h"
 
 
 #include "iqtgui/IIconProvider.h"
@@ -27,7 +27,7 @@ class CComposedHotfolderGuiComp:
 			public iqtgui::TGuiObserverWrap<
 						iqtgui::TGuiComponentBase<QWidget>,
 						imod::TSingleModelObserverBase<iprm::IParamsSet> >,
-			virtual public idoc::ICommandsProvider
+			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -39,7 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CComposedHotfolderGuiComp)
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
-		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
+		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_hotfolderGuiCompPtr, "HotfolderGui", "Hotfolder UI", true, "HotfolderGui");
 		I_ASSIGN(m_hotfolderObserverCompPtr, "HotfolderGui", "Hotfolder UI", true, "HotfolderGui");
 		I_ASSIGN(m_settingsGuiCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
@@ -48,8 +48,8 @@ public:
 		I_ASSIGN(m_hotfolderParamsIdAttrPtr, "HotfolderParamsId", "Parameter set ID for the hotfolder settings", true, "");
 	I_END_COMPONENT;
 
-	// reimplemented (idoc::ICommandsProvider)
-	virtual const idoc::IHierarchicalCommand* GetCommands() const;
+	// reimplemented (ibase::ICommandsProvider)
+	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;

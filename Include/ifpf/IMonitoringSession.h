@@ -23,21 +23,10 @@ namespace ifpf
 	\sa IDirectoryMonitor, IMonitoringSessionManager
 */
 class IMonitoringSession:
-			virtual public iprm::IFileNameParam,
 			virtual public ibase::IFileListProvider,
 			virtual public iser::ISerializable
 {
 public:
-	/**
-		Get id of the session.
-	*/
-	virtual istd::CString GetSessionId() const = 0;
-
-	/**
-		Set session id.
-	*/
-	virtual void SetSessionId(const istd::CString& sessionId) = 0;
-
 	/**
 		Set the file list.
 	*/

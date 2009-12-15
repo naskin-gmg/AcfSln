@@ -4,6 +4,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
+#include "istd/CChangeDelegator.h"
 
 #include "isys/IFileSystem.h"
 
@@ -74,19 +75,23 @@ int CHotfolderStatistics::GetAbortedCount(const istd::CString& directoryPath) co
 
 void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	ResetStatistics();
-
 	ifpf::IHotfolder* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
+	if (objectPtr == NULL){
+		return;
+	}
+/*
+	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
+		ResetStatistics();
+
 		istd::CChangeNotifier changePtr(this);
 		for (int itemIndex = 0; itemIndex < objectPtr->GetProcessingItemsCount(); itemIndex++){
 			ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
 			I_ASSERT(itemPtr != NULL);
-			
+
 			istd::CString directoryPath = GetDirectoryPath(*itemPtr);
 
 			++m_itemsCount[directoryPath];
-			
+
 			switch (itemPtr->GetProcessingState()){
 				case iproc::IProcessor::TS_OK:
 					++m_processedCount[directoryPath];
@@ -101,6 +106,32 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updat
 			}
 		}
 	}
+
+	if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+		int lastItemIndex = objectPtr->GetProcessingItemsCount() - 1;
+		I_ASSERT(lastItemIndex >= 0);
+
+		ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(lastItemIndex);
+			I_ASSERT(itemPtr != NULL);
+				
+			istd::CString directoryPath = GetDirectoryPath(*itemPtr);
+
+			++m_itemsCount[directoryPath];
+
+			switch (itemPtr->GetProcessingState()){
+				case iproc::IProcessor::TS_OK:
+					++m_processedCount[directoryPath];
+					break;
+				case iproc::IProcessor::TS_INVALID:
+					++m_errorsCount[directoryPath];
+					++m_processedCount[directoryPath];
+					break;
+				case iproc::IProcessor::TS_CANCELED:
+					++m_abortedCount[directoryPath];
+					break;
+			}
+	}
+	*/
 }
 
 
