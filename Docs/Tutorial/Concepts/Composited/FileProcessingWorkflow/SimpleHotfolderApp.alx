@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="37">
+  <PositionMap count="40">
     <Element>
       <ComponentName>
         App
@@ -150,13 +150,24 @@
     </Element>
     <Element>
       <ComponentName>
+        FilePersistenceGui
+      </ComponentName>
+      <X>
+        128.976
+      </X>
+      <X>
+        201.457
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         GuiApplication
       </ComponentName>
       <X>
-        350
+        117
       </X>
       <X>
-        -22
+        -231
       </X>
     </Element>
     <Element>
@@ -175,10 +186,21 @@
         HotfolderGui
       </ComponentName>
       <X>
-        724
+        -133
       </X>
       <X>
-        -152
+        -23
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderLoader
+      </ComponentName>
+      <X>
+        -155.385
+      </X>
+      <X>
+        209.329
       </X>
     </Element>
     <Element>
@@ -197,10 +219,10 @@
         InvertImageHotfolder
       </ComponentName>
       <X>
-        297
+        114.055
       </X>
       <X>
-        -279
+        102.08
       </X>
     </Element>
     <Element>
@@ -208,10 +230,10 @@
         Log
       </ComponentName>
       <X>
-        771
+        406.397
       </X>
       <X>
-        19
+        1.31371
       </X>
     </Element>
     <Element>
@@ -241,10 +263,10 @@
         ModelBinder
       </ComponentName>
       <X>
-        561
+        -136.252
       </X>
       <X>
-        -283
+        108.473
       </X>
     </Element>
     <Element>
@@ -384,10 +406,10 @@
         SimpleMainGui
       </ComponentName>
       <X>
-        563
+        106.603
       </X>
       <X>
-        -24
+        -110.728
       </X>
     </Element>
     <Element>
@@ -414,13 +436,24 @@
     </Element>
     <Element>
       <ComponentName>
+        TabContainer
+      </ComponentName>
+      <X>
+        98
+      </X>
+      <X>
+        -5
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         VersionInfo
       </ComponentName>
       <X>
-        150
+        118.466
       </X>
       <X>
-        -21
+        -333.402
       </X>
     </Element>
   </PositionMap>

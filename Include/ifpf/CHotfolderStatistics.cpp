@@ -79,7 +79,7 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updat
 	if (objectPtr == NULL){
 		return;
 	}
-/*
+
 	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
 		ResetStatistics();
 
@@ -131,7 +131,6 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updat
 					break;
 			}
 	}
-	*/
 }
 
 

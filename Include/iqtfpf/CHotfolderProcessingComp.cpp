@@ -126,11 +126,11 @@ void CHotfolderProcessingComp::run()
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
 			processingQueueLock.Reset();
 
-//			Q_EMIT EmitItemState(processingItemPtr, iproc::IProcessor::TS_WAIT);
+			Q_EMIT EmitItemState(processingItemPtr, iproc::IProcessor::TS_WAIT);
 			
 			int processingState = ProcessFile(inputFile, outputFile);
 		
-//			Q_EMIT EmitItemState(processingItemPtr, processingState);
+			Q_EMIT EmitItemState(processingItemPtr, processingState);
 		}
 
 		msleep(workingIntervall);
