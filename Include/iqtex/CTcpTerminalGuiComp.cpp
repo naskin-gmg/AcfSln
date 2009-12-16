@@ -14,6 +14,7 @@ CTcpTerminalGuiComp::CTcpTerminalGuiComp()
 	m_disconnectedIcon(":/Icons/StateInvalid.svg")
 {
 	QObject::connect(&m_connectTimer, SIGNAL(timeout()), this, SLOT(OnConectTimer()));
+	QObject::connect(&m_socket, SIGNAL(readyRead()), this, SLOT(OnReadyRead()));
 	QObject::connect(
 				&m_socket,
 				SIGNAL(stateChanged(QAbstractSocket::SocketState)),
@@ -136,6 +137,10 @@ void CTcpTerminalGuiComp::OnStateChanged(QAbstractSocket::SocketState socketStat
 {
 	if (socketState == QAbstractSocket::ConnectedState){
 		m_connectTimer.stop();
+	}
+
+	if (socketState == QAbstractSocket::UnconnectedState){
+		m_connectTimer.start(2000);
 	}
 
 	UpdateStateIcon();

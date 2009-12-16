@@ -84,6 +84,8 @@ void CGeneralSamplesSequence::SetSample(int index, int channel, double value)
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+	I_ASSERT(channel >= 0);
+	I_ASSERT(channel < m_channelsCount);
 
 	m_samples[index * m_channelsCount + channel] = value;
 }
@@ -235,6 +237,8 @@ bool CGeneralSamplesSequence::CopyFrom(const istd::IChangeable& object)
 {
 	const ISamplesSequence* sequencePtr = dynamic_cast<const ISamplesSequence*>(&object);
 	if (sequencePtr != NULL){
+		istd::CChangeNotifier notifier(this);
+
 		const CGeneralSamplesSequence* nativeSequencePtr = dynamic_cast<const CGeneralSamplesSequence*>(sequencePtr);
 		if (nativeSequencePtr != NULL){
 			m_samples = nativeSequencePtr->m_samples;
