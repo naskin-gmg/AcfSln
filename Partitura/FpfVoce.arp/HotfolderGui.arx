@@ -390,7 +390,7 @@
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        idoc::ICommandsProvider
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         ComposedHotfolderGui

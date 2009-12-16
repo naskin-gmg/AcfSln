@@ -429,7 +429,7 @@ This tutorial demo is a part of ACF project
     </Interface>
     <Interface>
       <InterfaceId>
-        idoc::ICommandsProvider
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         App
