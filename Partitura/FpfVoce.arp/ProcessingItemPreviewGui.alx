@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         ImageView
@@ -32,10 +32,10 @@
         InputImageView
       </ComponentName>
       <X>
-        113
+        117
       </X>
       <X>
-        126
+        125
       </X>
     </Element>
     <Element>
@@ -43,15 +43,26 @@
         OutputImageView
       </ComponentName>
       <X>
-        292
+        341
       </X>
       <X>
-        124
+        128
       </X>
     </Element>
     <Element>
       <ComponentName>
         ProcessingItemGui
+      </ComponentName>
+      <X>
+        207
+      </X>
+      <X>
+        -1
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProcessingItemPreviewGui
       </ComponentName>
       <X>
         207

@@ -9,6 +9,7 @@
 
 // ACF includes
 #include "imod/CMultiModelObserverBase.h"
+#include "imod/CModelProxy.h"
 
 #include "iproc/IProgressManager.h"
 
@@ -35,6 +36,7 @@ namespace iqtfpf
 
 class CHotfolderGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolder>,
+			public imod::CModelProxy,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
@@ -43,8 +45,10 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CHotfolderGuiComp,
 				ifpf::IHotfolder> BaseClass;
+	typedef imod::CModelProxy BaseClass2;
 
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
+		I_REGISTER_INTERFACE(imod::IModel);
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");

@@ -387,13 +387,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         ComposedHotfolderGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>

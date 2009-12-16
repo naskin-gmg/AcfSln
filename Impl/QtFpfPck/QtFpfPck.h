@@ -10,7 +10,8 @@
 #include "iqtfpf/CHotfolderGuiComp.h"
 #include "iqtfpf/CFileNamingComp.h"
 #include "iqtfpf/CComposedHotfolderGuiComp.h"
-#include "iqtfpf/CProcessingItemGuiComp.h"
+#include "iqtfpf/CProcessingItemInfoGuiComp.h"
+#include "iqtfpf/CProcessingItemPreviewGuiComp.h"
 #include "iqtfpf/CDirectoryItemGuiComp.h"
 
 
@@ -27,7 +28,8 @@ typedef iqtfpf::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
 typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
 typedef iqtfpf::CFileNamingComp FileNaming;
 typedef iqtfpf::CComposedHotfolderGuiComp ComposedHotfolderGui;
-typedef iqtfpf::CProcessingItemGuiComp ProcessingItemGui;
+typedef iqtfpf::CProcessingItemInfoGuiComp ProcessingItemInfoGui;
+typedef iqtfpf::CProcessingItemPreviewGuiComp ProcessingItemPreviewGui;
 typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
 
 

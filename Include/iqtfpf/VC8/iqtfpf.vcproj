@@ -236,11 +236,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemGuiComp.cpp"
+				RelativePath="..\CProcessingItemInfoGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemGuiComp.moc"
+				RelativePath="..\CProcessingItemInfoGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemPreviewGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemPreviewGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -282,7 +290,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemGuiComp.h"
+				RelativePath="..\CProcessingItemInfoGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemPreviewGuiComp.h"
 				>
 			</File>
 			<File
@@ -317,7 +329,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemGuiComp.ui"
+				RelativePath="..\CProcessingItemInfoGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingItemPreviewGuiComp.ui"
 				>
 			</File>
 		</Filter>
@@ -359,6 +375,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CProcessingItemInfoGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CProcessingItemPreviewGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\qrc_iqtfpf.cpp"
 				>
 			</File>
@@ -375,11 +399,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CHotfolderParamsGuiComp.h"
+				RelativePath="..\generated\ui_CProcessingItemGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CProcessingItemGuiComp.h"
+				RelativePath="..\generated\ui_CProcessingItemInfoGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CProcessingItemPreviewGuiComp.h"
 				>
 			</File>
 		</Filter>

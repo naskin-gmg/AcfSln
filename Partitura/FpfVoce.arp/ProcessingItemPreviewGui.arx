@@ -212,13 +212,13 @@
     </Element>
     <Element>
       <Id>
-        ProcessingItemGui
+        ProcessingItemPreviewGui
       </Id>
       <PackageId>
         QtFpfPck
       </PackageId>
       <ComponentId>
-        ProcessingItemGui
+        ProcessingItemPreviewGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -276,7 +276,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        ProcessingItemGui
+        ProcessingItemPreviewGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -284,7 +284,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        ProcessingItemGui
+        ProcessingItemPreviewGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -292,7 +292,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        ProcessingItemGui
+        ProcessingItemPreviewGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

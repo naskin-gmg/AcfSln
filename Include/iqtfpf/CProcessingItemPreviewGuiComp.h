@@ -1,5 +1,5 @@
-#ifndef iqtfpf_CProcessingItemGuiComp_included
-#define iqtfpf_CProcessingItemGuiComp_included
+#ifndef iqtfpf_CProcessingItemPreviewGuiComp_included
+#define iqtfpf_CProcessingItemPreviewGuiComp_included
 
 
 // ACF includes
@@ -10,25 +10,25 @@
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
 
-#include "iqtfpf/Generated/ui_CProcessingItemGuiComp.h"
+#include "iqtfpf/Generated/ui_CProcessingItemPreviewGuiComp.h"
 
 
 namespace iqtfpf
 {
 
 
-class CProcessingItemGuiComp:
+class CProcessingItemPreviewGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CProcessingItemGuiComp,
+						Ui::CProcessingItemPreviewGuiComp,
 						ifpf::IHotfolderProcessingItem>
 {
 	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CProcessingItemGuiComp,
+				Ui::CProcessingItemPreviewGuiComp,
 				ifpf::IHotfolderProcessingItem> BaseClass;
 
-	I_BEGIN_COMPONENT(CProcessingItemGuiComp)
+	I_BEGIN_COMPONENT(CProcessingItemPreviewGuiComp)
 		I_ASSIGN(m_inputPreviewObserverCompPtr, "InputPreview", "View of the input file", true, "InputPreview");
 		I_ASSIGN(m_inputPreviewGuiCompPtr, "InputPreview", "View of the input file", true, "InputPreview");
 		I_ASSIGN(m_outputPreviewObserverCompPtr, "OutputPreview", "View of the input file", true, "OutputPreview");
@@ -38,6 +38,10 @@ public:
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
+
+	// reimplemented (TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -54,6 +58,6 @@ private:
 } // namespace iqtfpf
 
 
-#endif // !iqtfpf_CProcessingItemGuiComp_included
+#endif // !iqtfpf_CProcessingItemPreviewGuiComp_included
 
 

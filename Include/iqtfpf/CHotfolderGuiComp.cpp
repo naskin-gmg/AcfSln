@@ -380,6 +380,17 @@ void CHotfolderGuiComp::OnItemCancel()
 
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
+	ProcessingItems processingItems = GetSelectedProcessingItems();
+	if (!processingItems.empty()){
+		imod::IModel* itemModelPtr = dynamic_cast<imod::IModel*>(processingItems[0]);
+		if (itemModelPtr != NULL){
+			BaseClass2::SetModelPtr(itemModelPtr);
+		}
+	}
+	else{
+		BaseClass2::SetModelPtr(NULL);
+	}
+
 	UpdateItemCommands();
 }
 
