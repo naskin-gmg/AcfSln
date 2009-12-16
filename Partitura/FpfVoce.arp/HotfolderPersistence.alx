@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="54">
+  <PositionMap count="52">
     <Element>
       <ComponentName>
         App
       </ComponentName>
       <X>
-        67
+        31
       </X>
       <X>
-        -243
+        -196
       </X>
     </Element>
     <Element>
@@ -36,17 +36,6 @@
       </X>
       <X>
         -225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationSettingsProvider
-      </ComponentName>
-      <X>
-        -462
-      </X>
-      <X>
-        -239
       </X>
     </Element>
     <Element>
@@ -175,10 +164,10 @@
         FilePersistence
       </ComponentName>
       <X>
-        359
+        95
       </X>
       <X>
-        233
+        152
       </X>
     </Element>
     <Element>
@@ -197,10 +186,10 @@
         GuiApplication
       </ComponentName>
       <X>
-        0
+        117
       </X>
       <X>
-        0
+        -231
       </X>
     </Element>
     <Element>
@@ -230,10 +219,10 @@
         HotfolderLoader
       </ComponentName>
       <X>
-        -293.385
+        -112.385
       </X>
       <X>
-        300.329
+        286.329
       </X>
     </Element>
     <Element>
@@ -252,10 +241,10 @@
         InfoDock
       </ComponentName>
       <X>
-        506.877
+        340
       </X>
       <X>
-        84.0265
+        -237
       </X>
     </Element>
     <Element>
@@ -274,10 +263,10 @@
         InvertImageHotfolder
       </ComponentName>
       <X>
-        114.055
+        190.055
       </X>
       <X>
-        102.08
+        104.08
       </X>
     </Element>
     <Element>
@@ -296,10 +285,10 @@
         LogDock
       </ComponentName>
       <X>
-        54
+        87
       </X>
       <X>
-        -11
+        -99
       </X>
     </Element>
     <Element>
@@ -359,17 +348,6 @@
     </Element>
     <Element>
       <ComponentName>
-        PersistentInvertImageHotfolder
-      </ComponentName>
-      <X>
-        -447.118
-      </X>
-      <X>
-        -12.9949
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         Preview
       </ComponentName>
       <X>
@@ -384,10 +362,10 @@
         PreviewDock
       </ComponentName>
       <X>
-        334
+        298
       </X>
       <X>
-        -190
+        -112
       </X>
     </Element>
     <Element>
@@ -417,10 +395,10 @@
         ProcessingItemInfoBinder
       </ComponentName>
       <X>
-        127.095
+        38
       </X>
       <X>
-        302.325
+        -327
       </X>
     </Element>
     <Element>
@@ -450,10 +428,10 @@
         ProcessingItemPreviewBinder
       </ComponentName>
       <X>
-        -28.2691
+        20
       </X>
       <X>
-        153.321
+        -7
       </X>
     </Element>
     <Element>
@@ -560,10 +538,10 @@
         SimpleMainGui
       </ComponentName>
       <X>
-        70
+        108.603
       </X>
       <X>
-        -147
+        -128.728
       </X>
     </Element>
     <Element>
@@ -604,10 +582,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -165.534
+        -303.534
       </X>
       <X>
-        -241.402
+        -209.402
       </X>
     </Element>
   </PositionMap>

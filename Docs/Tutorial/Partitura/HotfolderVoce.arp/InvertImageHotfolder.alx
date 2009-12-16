@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1268
+          1276
         </Number>
         <Description>
           ACF
@@ -54,10 +54,10 @@
         Hotfolder
       </ComponentName>
       <X>
-        84
+        75
       </X>
       <X>
-        -7
+        -11
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         InvertOperator
       </ComponentName>
       <X>
-        224
+        76
       </X>
       <X>
-        -146
+        112
       </X>
     </Element>
     <Element>

@@ -110,7 +110,7 @@ void CHotfolderProcessingComp::run()
 	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
 	I_ASSERT(hotfolderStateModelPtr != NULL);
 
-	int workingIntervall = 1000; // ms
+	int workingIntervall = 100; // ms
 
 	while (!m_finishThread){
 		if (!hotfolderStateModelPtr->IsWorking()){

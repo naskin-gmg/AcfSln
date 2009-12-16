@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="54">
+  <PositionMap count="50">
     <Element>
       <ComponentName>
         App
       </ComponentName>
       <X>
-        67
+        30
       </X>
       <X>
-        -243
+        -196
       </X>
     </Element>
     <Element>
@@ -36,17 +36,6 @@
       </X>
       <X>
         -225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationSettingsProvider
-      </ComponentName>
-      <X>
-        -462
-      </X>
-      <X>
-        -239
       </X>
     </Element>
     <Element>
@@ -197,10 +186,10 @@
         GuiApplication
       </ComponentName>
       <X>
-        0
+        117
       </X>
       <X>
-        0
+        -231
       </X>
     </Element>
     <Element>
@@ -219,7 +208,7 @@
         HotfolderGui
       </ComponentName>
       <X>
-        -168
+        -169
       </X>
       <X>
         -107
@@ -252,10 +241,10 @@
         InfoDock
       </ComponentName>
       <X>
-        506.877
+        300
       </X>
       <X>
-        84.0265
+        -230
       </X>
     </Element>
     <Element>
@@ -296,10 +285,10 @@
         LogDock
       </ComponentName>
       <X>
-        54
+        87
       </X>
       <X>
-        -11
+        -99
       </X>
     </Element>
     <Element>
@@ -359,17 +348,6 @@
     </Element>
     <Element>
       <ComponentName>
-        PersistentInvertImageHotfolder
-      </ComponentName>
-      <X>
-        -447.118
-      </X>
-      <X>
-        -12.9949
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         Preview
       </ComponentName>
       <X>
@@ -384,10 +362,10 @@
         PreviewDock
       </ComponentName>
       <X>
-        334
+        304
       </X>
       <X>
-        -190
+        -126
       </X>
     </Element>
     <Element>
@@ -417,21 +395,10 @@
         ProcessingItemInfoBinder
       </ComponentName>
       <X>
-        127.095
+        180
       </X>
       <X>
-        302.325
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemInfoDock
-      </ComponentName>
-      <X>
-        335
-      </X>
-      <X>
-        -233
+        -348
       </X>
     </Element>
     <Element>
@@ -439,7 +406,7 @@
         ProcessingItemInfoGui
       </ComponentName>
       <X>
-        496
+        497
       </X>
       <X>
         -232
@@ -450,21 +417,10 @@
         ProcessingItemPreviewBinder
       </ComponentName>
       <X>
-        -28.2691
+        200
       </X>
       <X>
-        153.321
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemPreviewDock
-      </ComponentName>
-      <X>
-        279
-      </X>
-      <X>
-        -107
+        -9
       </X>
     </Element>
     <Element>
@@ -560,10 +516,10 @@
         SimpleMainGui
       </ComponentName>
       <X>
-        70
+        108.603
       </X>
       <X>
-        -147
+        -128.728
       </X>
     </Element>
     <Element>
@@ -604,10 +560,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -165.534
+        -304.534
       </X>
       <X>
-        -241.402
+        -209.402
       </X>
     </Element>
   </PositionMap>
