@@ -32,7 +32,7 @@ int CHotfolderProcessingItem::GetProcessingState() const
 void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
 	if (m_processingState != processingState){
-		istd::CChangeNotifier changePtr(this);
+		istd::CChangeNotifier changePtr(this, CF_STATE_CHANGED, this);
 
 		m_processingState = processingState;
 	}
@@ -48,7 +48,7 @@ double CHotfolderProcessingItem::GetProgress() const
 void CHotfolderProcessingItem::SetProgress(double progress)
 {
 	if (m_progress != progress){
-		istd::CChangeNotifier changePtr(this);
+		istd::CChangeNotifier changePtr(this, CF_PROGRESS_CHANGED);
 
 		m_progress = progress;
 	}
@@ -95,7 +95,7 @@ const iimg::IBitmap& CHotfolderProcessingItem::GetInputPreview() const
 
 void CHotfolderProcessingItem::SetInputPreview(const iimg::IBitmap& inputPreview)
 {
-	istd::CChangeNotifier changePtr(this);
+	istd::CChangeNotifier changePtr(this, CF_INPUT_PREVIEW_CHANGED);
 
 	m_inputPreview.CopyFrom(inputPreview);
 }
@@ -109,7 +109,7 @@ const iimg::IBitmap& CHotfolderProcessingItem::GetOutputPreview() const
 
 void CHotfolderProcessingItem::SetOutputPreview(const iimg::IBitmap& outputPreview)
 {
-	istd::CChangeNotifier changePtr(this);
+	istd::CChangeNotifier changePtr(this, CF_OUTPUT_PREVIEW_CHANGED);
 
 	m_outputPreview.CopyFrom(outputPreview);
 }

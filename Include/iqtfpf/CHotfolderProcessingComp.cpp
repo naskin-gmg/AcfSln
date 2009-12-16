@@ -7,6 +7,7 @@
 
 // Qt includes
 #include <QDir>
+#include <QApplication>
 
 
 // ACF includes
@@ -177,6 +178,8 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 
 void CHotfolderProcessingComp::StartHotfolder()
 {
+	I_ASSERT(!BaseClass2::isRunning());
+
 	m_finishThread = false;
 
 	BaseClass2::start();
@@ -450,8 +453,6 @@ int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const 
 void CHotfolderProcessingComp::UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const
 {
 	if (processingItemPtr != NULL){
-		istd::CChangeNotifier changePtr(processingItemPtr);
-
 		processingItemPtr->SetProcessingState(processingState);
 	}
 }

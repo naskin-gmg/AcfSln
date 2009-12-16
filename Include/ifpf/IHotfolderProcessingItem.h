@@ -20,7 +20,16 @@ namespace ifpf
 */
 class IHotfolderProcessingItem: virtual public iser::ISerializable
 {
-public:	
+public:
+
+	enum ChangeFlags
+	{
+		CF_STATE_CHANGED = 0x1000000,
+		CF_PROGRESS_CHANGED = 0x2000000,
+		CF_INPUT_PREVIEW_CHANGED = 0x4000000,
+		CF_OUTPUT_PREVIEW_CHANGED = 0x8000000
+	};
+
 	virtual int GetProcessingState() const = 0;
 	virtual void SetProcessingState(int processingState) = 0;
 

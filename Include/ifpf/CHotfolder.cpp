@@ -90,10 +90,10 @@ void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPt
 		return;
 	}
 
-	if (m_processingItems.Remove(fileItemPtr)){
-		lock.Reset();
+	istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED, fileItemPtr);
 
-		istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED);
+	if (!m_processingItems.Remove(fileItemPtr)){
+		changePtr.Abort();
 	}
 }
 

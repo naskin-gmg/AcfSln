@@ -73,65 +73,84 @@ int CHotfolderStatistics::GetAbortedCount(const istd::CString& directoryPath) co
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderStatistics::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	// save previous state of the current changing item:
+	ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
+	if (itemPtr != NULL && (updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
+		m_previousItemState = std::make_pair(itemPtr, itemPtr->GetProcessingState());
+	}
+}
+
+
+void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	ifpf::IHotfolder* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
 
-	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
-		ResetStatistics();
-
-		istd::CChangeNotifier changePtr(this);
-		int itemsCount = objectPtr->GetProcessingItemsCount();
-		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-			ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
-			I_ASSERT(itemPtr != NULL);
-
-			istd::CString directoryPath = GetDirectoryPath(*itemPtr);
-
-			++m_itemsCount[directoryPath];
-
-			switch (itemPtr->GetProcessingState()){
-				case iproc::IProcessor::TS_OK:
-					++m_processedCount[directoryPath];
-					break;
-				case iproc::IProcessor::TS_INVALID:
-					++m_errorsCount[directoryPath];
-					++m_processedCount[directoryPath];
-					break;
-				case iproc::IProcessor::TS_CANCELED:
-					++m_abortedCount[directoryPath];
-					break;
-			}
-		}
+	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolder::CF_CREATE) != 0){
+		RebuildStatistics();
 	}
 
 	if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+		istd::CChangeNotifier changePtr(this);
+
 		int lastItemIndex = objectPtr->GetProcessingItemsCount() - 1;
 		I_ASSERT(lastItemIndex >= 0);
 
 		ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(lastItemIndex);
-			I_ASSERT(itemPtr != NULL);
+		I_ASSERT(itemPtr != NULL);
 				
-			istd::CString directoryPath = GetDirectoryPath(*itemPtr);
+		int itemState = itemPtr->GetProcessingState();
+		istd::CString directoryPath = GetDirectoryPath(*itemPtr);
 
-			++m_itemsCount[directoryPath];
+		++m_itemsCount[directoryPath];
+		UpdateStateMaps(itemState, directoryPath);
+	}
 
-			switch (itemPtr->GetProcessingState()){
+	// increment new item state and decrement the old one:
+	ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
+	if (itemPtr != NULL && (updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
+		istd::CChangeNotifier changePtr(this);
+
+		int itemState = itemPtr->GetProcessingState();
+		istd::CString directoryPath = GetDirectoryPath(*itemPtr);
+
+		UpdateStateMaps(itemState, directoryPath);
+
+		if (m_previousItemState.first == itemPtr){
+			switch (m_previousItemState.second){
 				case iproc::IProcessor::TS_OK:
-					++m_processedCount[directoryPath];
+					--m_processedCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_INVALID:
-					++m_errorsCount[directoryPath];
-					++m_processedCount[directoryPath];
+					--m_errorsCount[directoryPath];
+					--m_processedCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_CANCELED:
-					++m_abortedCount[directoryPath];
+					--m_abortedCount[directoryPath];
 					break;
 			}
+		}
+
+		m_previousItemState = std::make_pair((ifpf::IHotfolderProcessingItem*)NULL, -1);
 	}
+}
+
+
+// reimplemented (imod::IObserver)
+
+bool CHotfolderStatistics::OnAttached(imod::IModel* modelPtr)
+{
+	if (BaseClass::OnAttached(modelPtr)){
+		RebuildStatistics();
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -154,6 +173,48 @@ void CHotfolderStatistics::ResetStatistics()
 	m_errorsCount.clear();
 	m_abortedCount.clear();
 }
+
+
+void CHotfolderStatistics::RebuildStatistics()
+{
+	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	if (objectPtr == NULL){
+		return;
+	}
+
+	ResetStatistics();
+
+	istd::CChangeNotifier changePtr(this);
+	int itemsCount = objectPtr->GetProcessingItemsCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
+		I_ASSERT(itemPtr != NULL);
+
+		int itemState = itemPtr->GetProcessingState();
+		istd::CString directoryPath = GetDirectoryPath(*itemPtr);
+
+		++m_itemsCount[directoryPath];
+		UpdateStateMaps(itemState, directoryPath);
+	}
+}
+
+
+void CHotfolderStatistics::UpdateStateMaps(int itemState, const istd::CString& directoryPath)
+{
+	switch (itemState){
+		case iproc::IProcessor::TS_OK:
+			++m_processedCount[directoryPath];
+			break;
+		case iproc::IProcessor::TS_INVALID:
+			++m_errorsCount[directoryPath];
+			++m_processedCount[directoryPath];
+			break;
+		case iproc::IProcessor::TS_CANCELED:
+			++m_abortedCount[directoryPath];
+			break;
+	}
+}
+
 
 
 // protected static methods

@@ -371,10 +371,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CProcessingItemGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CProcessingItemInfoGuiComp.cpp"
 				>
 			</File>
@@ -396,10 +392,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CProcessingItemGuiComp.h"
 				>
 			</File>
 			<File
