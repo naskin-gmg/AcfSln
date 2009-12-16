@@ -160,7 +160,7 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 		return;
 	}
 
-	istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath, GetOutputDirectory());
+	istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath, m_paramsSetCompPtr.GetPtr());
 
 	isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 

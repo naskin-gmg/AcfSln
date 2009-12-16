@@ -5,21 +5,25 @@
 // ACF includes
 #include "istd/IChangeable.h"
 
+#include "iprm/IParamsSet.h"
+
 
 namespace ifpf
 {
 
 
 /**
-	Interface for calculation of the new file name for an existing file.
+	Interface for calculation of the new file path for an existing file.
 */
 class IFileNaming: virtual public istd::IChangeable
 {
 public:
 	/**
-		Get the file path for the given file name and directory.
+		Get the new file path for a given input according to the parameters \c paramsSetPtr.
+		\c paramsSetPtr can be \c NULL. It means, that some default parameters will be used to calculate the output.
+		\sa isys::IFileSystem
 	*/
-	virtual istd::CString GetFilePath(const istd::CString& fileName, const istd::CString& directoryPath) const = 0;
+	virtual istd::CString GetFilePath(const istd::CString& inputFileName, const iprm::IParamsSet* paramsSetPtr) const = 0;
 };
 
 

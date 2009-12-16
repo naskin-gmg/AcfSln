@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1271
+          1276
         </Number>
         <Description>
           ACF
@@ -735,7 +735,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -750,6 +750,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputDirectoryId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                OutputDirectory
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

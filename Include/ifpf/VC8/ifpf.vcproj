@@ -302,6 +302,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileNaming.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileNamingStrategy.h"
 				>
 			</File>
