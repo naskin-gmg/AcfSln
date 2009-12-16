@@ -139,6 +139,8 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
+		m_acceptPatterns.clear();
+
 		for (int acceptPatternIndex = 0; acceptPatternIndex < acceptPatternsCount; acceptPatternIndex++){
 			istd::CString acceptPattern;
 			retVal = retVal && archive.BeginTag(acceptPatternTag);
@@ -166,6 +168,8 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
+		m_ignorePatterns.clear();
+
 		for (int ignorePatternIndex = 0; ignorePatternIndex < ignorePatternsCount; ignorePatternIndex++){
 			istd::CString ignorePattern;
 			retVal = retVal && archive.BeginTag(ignorePatternTag);

@@ -32,14 +32,6 @@ void CProcessingItemGuiComp::UpdateEditor(int /*updateFlags*/)
 }
 
 
-// reimplemented (TGuiObserverWrap)
-
-void CProcessingItemGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-}
-
-
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CProcessingItemGuiComp::OnGuiCreated()

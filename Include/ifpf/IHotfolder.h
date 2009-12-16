@@ -39,12 +39,7 @@ public:
 		Remove existing processing item from the hotfolder's state model.
 	*/
 	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr) = 0;
-	
-	/**
-		// TODO: think about moving to another interface
-	*/
-	virtual ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const = 0;
-	
+		
 	/**
 		Get the count of processing items in the hotfolder.
 	*/

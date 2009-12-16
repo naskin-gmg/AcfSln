@@ -84,7 +84,8 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* /*updat
 		ResetStatistics();
 
 		istd::CChangeNotifier changePtr(this);
-		for (int itemIndex = 0; itemIndex < objectPtr->GetProcessingItemsCount(); itemIndex++){
+		int itemsCount = objectPtr->GetProcessingItemsCount();
+		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 			ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
 			I_ASSERT(itemPtr != NULL);
 

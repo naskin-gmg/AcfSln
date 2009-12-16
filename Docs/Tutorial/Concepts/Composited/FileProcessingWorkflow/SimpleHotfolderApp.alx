@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1268
+          1271
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="40">
+  <PositionMap count="43">
     <Element>
       <ComponentName>
         App
@@ -150,6 +150,28 @@
     </Element>
     <Element>
       <ComponentName>
+        FileDialogLoader
+      </ComponentName>
+      <X>
+        105
+      </X>
+      <X>
+        290
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePersistence
+      </ComponentName>
+      <X>
+        359
+      </X>
+      <X>
+        233
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         FilePersistenceGui
       </ComponentName>
       <X>
@@ -197,10 +219,10 @@
         HotfolderLoader
       </ComponentName>
       <X>
-        -155.385
+        -293.385
       </X>
       <X>
-        209.329
+        300.329
       </X>
     </Element>
     <Element>
@@ -318,10 +340,21 @@
         PreviewDock
       </ComponentName>
       <X>
-        830
+        309
       </X>
       <X>
-        -163
+        -107
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProcessingItemGui
+      </ComponentName>
+      <X>
+        505
+      </X>
+      <X>
+        -107
       </X>
     </Element>
     <Element>
@@ -450,10 +483,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        118.466
+        -304.534
       </X>
       <X>
-        -333.402
+        -209.402
       </X>
     </Element>
   </PositionMap>

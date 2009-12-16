@@ -60,7 +60,7 @@ void CHotfolderProcessingComp::OnComponentCreated()
 
 	connect(&m_filesQueueTimer, SIGNAL(timeout()), this, SLOT(OnUpdateQueueTimer()));
 
-	m_filesQueueTimer.start(100);
+	m_filesQueueTimer.start(250);
 }
 
 
@@ -107,12 +107,13 @@ bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& d
 
 void CHotfolderProcessingComp::run()
 {
-	I_ASSERT(m_hotfolderCompPtr.IsValid());
+	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	I_ASSERT(hotfolderStateModelPtr != NULL);
 
-	int workingIntervall = 500; // ms
+	int workingIntervall = 1000; // ms
 
 	while (!m_finishThread){
-		if (!m_hotfolderCompPtr->IsWorking()){
+		if (!hotfolderStateModelPtr->IsWorking()){
 			msleep(workingIntervall);
 			continue;					
 		}
@@ -120,7 +121,7 @@ void CHotfolderProcessingComp::run()
 		isys::CSectionBlocker processingQueueLock(&m_processingQueueLock);
 		
 		// get available file to process:
-		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderCompPtr->GetNextProcessingFile();
+		ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
 		if (processingItemPtr != NULL){
 			istd::CString inputFile = processingItemPtr->GetInputFile();
 			istd::CString outputFile = processingItemPtr->GetOutputFile();
@@ -162,10 +163,11 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 
 	isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 
-	I_ASSERT(m_hotfolderCompPtr.IsValid());
+	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	I_ASSERT(hotfolderStateModelPtr != NULL);
 
 	// add file to hotfolder's model:
-	m_hotfolderCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
+	hotfolderStateModelPtr->AddProcessingItem(inputFilePath, outputFilePath);
 
 	m_filesQueue.pop_back();
 }
@@ -321,7 +323,37 @@ istd::CStringList CHotfolderProcessingComp::GetRemovedInputDirectories() const
 	return removedDirectories;
 }
 
-	
+
+ifpf::IHotfolder* CHotfolderProcessingComp::GetHotfolderStateModel() const
+{
+	I_ASSERT(m_hotfolderStateCompPtr.IsValid());
+	I_ASSERT(m_hotfolderStateModelIdAttrPtr.IsValid());
+
+	if (m_hotfolderStateCompPtr.IsValid() && m_hotfolderStateModelIdAttrPtr.IsValid()){
+		ifpf::IHotfolder* stateModelPtr = dynamic_cast<ifpf::IHotfolder*>(m_hotfolderStateCompPtr->GetEditableParameter((*m_hotfolderStateModelIdAttrPtr).ToString()));
+
+		return stateModelPtr;
+	}
+
+	return NULL;
+}
+
+
+ifpf::IHotfolderStatistics* CHotfolderProcessingComp::GetHotfolderStatistics() const
+{
+	I_ASSERT(m_hotfolderStateCompPtr.IsValid());
+	I_ASSERT(m_hotfolderStatisticsIdAttrPtr.IsValid());
+
+	if (m_hotfolderStateCompPtr.IsValid() && m_hotfolderStatisticsIdAttrPtr.IsValid()){
+		ifpf::IHotfolderStatistics* statisticsPtr = dynamic_cast<ifpf::IHotfolderStatistics*>(m_hotfolderStateCompPtr->GetEditableParameter((*m_hotfolderStatisticsIdAttrPtr).ToString()));
+
+		return statisticsPtr;
+	}
+
+	return NULL;
+}
+
+
 ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr)
 {
 	istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
@@ -371,6 +403,27 @@ istd::CString CHotfolderProcessingComp::GetHotfolderId() const
 	}
 
 	return istd::CString();
+}
+
+
+ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile() const
+{
+	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	I_ASSERT(hotfolderStateModelPtr != NULL);
+	if (hotfolderStateModelPtr == NULL){
+		return NULL;
+	}
+		
+	int itemsCount = hotfolderStateModelPtr->GetProcessingItemsCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = hotfolderStateModelPtr->GetProcessingItem(itemIndex);
+
+		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
+			return processingItemPtr;
+		}
+	}
+
+	return NULL;
 }
 
 

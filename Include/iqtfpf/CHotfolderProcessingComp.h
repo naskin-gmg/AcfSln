@@ -24,6 +24,7 @@
 // AcfSln includes
 #include "ifpf/IFileNaming.h"
 #include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderStatistics.h"
 #include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IMonitoringSessionManager.h"
 #include "ifpf/CMonitoringSession.h"
@@ -54,7 +55,9 @@ public:
 		I_ASSIGN(m_inputPathParamsManagerIdAttrPtr, "InputPathParamsManagerId", "Parameter set ID for the hotfolder's input directories", true, "");
 		I_ASSIGN(m_outputDirectoryParamsIdAttrPtr, "OutputDirectoryParamsId", "Parameter set ID for the output directory", true, "");
 		I_ASSIGN(m_monitoringParamsIdAttrPtr, "MonitoringParamsId", "Parameter set ID for the directory monitoring parameters", true, "");
-		I_ASSIGN(m_hotfolderCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
+		I_ASSIGN(m_hotfolderStateCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
+		I_ASSIGN(m_hotfolderStateModelIdAttrPtr, "HotfolderStateModelId", "Parameter set ID for the hotfolder's state model", true, "");
+		I_ASSIGN(m_hotfolderStatisticsIdAttrPtr, "HotfolderStatisticsId", "Parameter set ID for the hotfolder's statistics", true, "");
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
@@ -120,6 +123,16 @@ private:
 	istd::CStringList GetRemovedInputDirectories() const;
 
 	/**
+		Get hotfolder's state model.
+	*/
+	ifpf::IHotfolder* GetHotfolderStateModel() const;
+
+	/**
+		Get hotfolder statistics model
+	*/
+	ifpf::IHotfolderStatistics* GetHotfolderStatistics() const;
+
+	/**
 		Create and add a directory monitor for the given path with given monitoring parameters.
 	*/
 	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
@@ -133,6 +146,11 @@ private:
 		Get the unique ID of the hotfolder.
 	*/
 	istd::CString GetHotfolderId() const;
+
+	/**
+		Get next item to be processed.
+	*/
+	ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
 
 	/**
 		Process a single file.
@@ -178,13 +196,14 @@ private:
 	I_REF(ifpf::IFileNaming, m_fileNamingCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(ifpf::IHotfolder, m_hotfolderCompPtr);
+	I_REF(iprm::IParamsSet, m_hotfolderStateCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
 
 	I_ATTR(istd::CString, m_inputPathParamsManagerIdAttrPtr);
 	I_ATTR(istd::CString, m_monitoringParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
 	I_ATTR(istd::CString, m_hotfolderStateModelIdAttrPtr);
+	I_ATTR(istd::CString, m_hotfolderStatisticsIdAttrPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;

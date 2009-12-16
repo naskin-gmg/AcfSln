@@ -98,23 +98,6 @@ void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPt
 }
 
 
-ifpf::IHotfolderProcessingItem* CHotfolder::GetNextProcessingFile() const
-{
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
-
-	int itemsCount = m_processingItems.GetCount();
-	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = m_processingItems.GetAt(itemIndex);
-
-		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
-			return processingItemPtr;
-		}
-	}
-
-	return NULL;
-}
-
-
 int CHotfolder::GetProcessingItemsCount() const
 {
 	return m_processingItems.GetCount();

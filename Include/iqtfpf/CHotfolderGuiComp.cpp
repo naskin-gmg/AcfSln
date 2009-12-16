@@ -143,14 +143,14 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_removeItemCommand.SetGroupId(2);
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_removeItemCommand.SetVisuals(tr("&Remove Processing Item"), "Remove Processing Item", tr("Remove processing item from the view"), QIcon(":/Icons/Delete.svg"));
+	m_removeItemCommand.SetVisuals(tr("&Remove Job"), "Remove Job", tr("Remove processing item"), QIcon(":/Icons/Delete.svg"));
 	m_removeItemCommand.setDisabled(true);
 	connect(&m_removeItemCommand, SIGNAL(activated()), this, SLOT(OnItemRemove()));
 	hotfolderMenuPtr->InsertChild(&m_removeItemCommand, false);
 
 	m_cancelItemCommand.SetGroupId(2);
 	m_cancelItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_cancelItemCommand.SetVisuals(tr("&Cancel Processing"), "Cancel Processing", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel.svg"));
+	m_cancelItemCommand.SetVisuals(tr("&Cancel Job"), "Cancel Job", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel.svg"));
 	m_cancelItemCommand.setDisabled(true);
 	connect(&m_cancelItemCommand, SIGNAL(activated()), this, SLOT(OnItemCancel()));
 	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
@@ -162,7 +162,6 @@ void CHotfolderGuiComp::OnGuiCreated()
 	FileList->header()->setStretchLastSection(true);
 
 	// initialize state icons map:
-
 	if (m_stateIconsProviderCompPtr.IsValid()){
 		for (int fileState = 0; fileState < m_stateIconsProviderCompPtr->GetIconCount(); fileState++){
 			QPixmap pixmap = m_stateIconsProviderCompPtr->GetIcon(fileState).pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
@@ -170,7 +169,6 @@ void CHotfolderGuiComp::OnGuiCreated()
 			m_stateIconsMap[fileState] = QIcon(pixmap);
 		}
 	}
-
 }
 
 
@@ -182,7 +180,6 @@ void CHotfolderGuiComp::OnGuiDestroyed()
 
 	BaseClass::OnGuiDestroyed();
 }
-
 
 
 // private methods
@@ -219,6 +216,7 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 				I_ASSERT(directoryItemGuiPtr != NULL);
 				I_ASSERT(directoryItemObserverPtr != NULL);
 
+				// TODO: clean this solution!
 				iqtfpf::CDirectoryItemGuiComp* dirItemGuiCompPtr = dynamic_cast<iqtfpf::CDirectoryItemGuiComp*>(directoryItemGuiPtr);
 				if (dirItemGuiCompPtr != NULL){
 					dirItemGuiCompPtr->SetDirectoryPath(fileDirectory.absolutePath());
@@ -277,7 +275,7 @@ void CHotfolderGuiComp::UpdateItemCommands()
 		int itemState = selectedItems[itemIndex]->GetProcessingState();
 
 		enableRemoveAction = enableRemoveAction || (itemState != iproc::IProcessor::TS_WAIT);
-		enableCancelAction = enableCancelAction || ((itemState == iproc::IProcessor::TS_NONE) && itemState == iproc::IProcessor::TS_WAIT);
+		enableCancelAction = enableCancelAction || ((itemState == iproc::IProcessor::TS_NONE) || itemState == iproc::IProcessor::TS_WAIT);
 	}
 	
 	m_removeItemCommand.setEnabled(enableRemoveAction);
@@ -384,7 +382,6 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
 	UpdateItemCommands();
 }
-
 
 
 // public methods of the embedded class 

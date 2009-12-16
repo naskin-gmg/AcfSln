@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1268
+          1271
         </Number>
         <Description>
           ACF
@@ -15,16 +15,58 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="11">
     <Element>
       <Id>
-        FilePersistenceGui
+        FileDialogLoader
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        FilePersistenceGui
+        FileDialogLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Loaders
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  HotfolderLoader
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FilePersistence
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FilePersistence
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -49,7 +91,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderLoader
+                FileDialogLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -74,7 +116,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowLoad
+              RestoreonBegin
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
@@ -93,7 +135,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowSave
+              StoreOnEnd
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
@@ -210,7 +252,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -227,6 +269,25 @@
               </IsEnabled>
               <Value>
                 Log
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -336,6 +397,105 @@
     </Element>
     <Element>
       <Id>
+        PreviewDock
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        DockWidgetGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              DockArea
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                3
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DockTitle
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Preview
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ProcessingItemGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProcessingItemGui
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        ProcessingItemGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         SimpleMainGui
       </Id>
       <PackageId>
@@ -351,7 +511,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               IconSize
@@ -369,6 +529,27 @@
               <Value>
                 32
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  PreviewDock
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

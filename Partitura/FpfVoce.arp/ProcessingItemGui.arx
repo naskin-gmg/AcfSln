@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="3">
     <Element>
       <Id>
-        ComposedHotfolderGui
+        InputImageView
       </Id>
       <PackageId>
-        QtFpfPck
+        QtViewPck
       </PackageId>
       <ComponentId>
-        ComposedHotfolderGui
+        ImageView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -36,10 +36,10 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              HotfolderGui
+              BackgroundMode
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -49,16 +49,16 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderGui
+                2
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParametersEditor
+              FitMode
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -68,16 +68,16 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParamsGui
+                1
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParamsId
+              ImagePositionMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -87,16 +87,16 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParams
+                1
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              StateModelParamsId
+              IsImageFrameVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -106,7 +106,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderStateModel/HotfolderStateModel
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -115,34 +115,13 @@
     </Element>
     <Element>
       <Id>
-        DirectoryItemGui
+        OutputImageView
       </Id>
       <PackageId>
-        QtFpfPck
+        QtViewPck
       </PackageId>
       <ComponentId>
-        DirectoryItemGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        HotfolderGui
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        HotfolderGui
+        ImageView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -154,10 +133,10 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              DirectoryItemGui
+              BackgroundMode
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -167,16 +146,16 @@
                 true
               </IsEnabled>
               <Value>
-                DirectoryItemGui
+                2
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderStatistics
+              FitMode
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -186,16 +165,16 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderStatistics
+                1
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProgressManager
+              ImagePositionMode
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -205,16 +184,16 @@
                 true
               </IsEnabled>
               <Value>
-                ProgressManager
+                1
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              StateIcons
+              IsImageFrameVisible
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -224,7 +203,7 @@
                 true
               </IsEnabled>
               <Value>
-                StateIcons
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -233,95 +212,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderParamsGui
+        ProcessingItemGui
       </Id>
       <PackageId>
-        FpfVoce
+        QtFpfPck
       </PackageId>
       <ComponentId>
-        HotfolderParamsGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        HotfolderStatistics
-      </Id>
-      <PackageId>
-        FpfPck
-      </PackageId>
-      <ComponentId>
-        HotfolderStatistics
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProgressManager
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ProgressManagerGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Description
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Overall Progress
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        StateIcons
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        IconProvider
+        ProcessingItemGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -333,43 +230,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              IconFiles
+              InputPreview
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="5">
-                <Value>
-                  StateUnknown.svg
-                </Value>
-                <Value>
-                  Play.svg
-                </Value>
-                <Value>
-                  StateOk.svg
-                </Value>
-                <Value>
-                  Cancel.svg
-                </Value>
-                <Value>
-                  StateInvalid.svg
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IconsPath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -379,7 +243,26 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons
+                InputImageView
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputPreview
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                OutputImageView
               </Value>
             </Data>
           </AttributeInfo>
@@ -387,21 +270,13 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
-    <Interface>
-      <InterfaceId>
-        idoc::ICommandsProvider
-      </InterfaceId>
-      <ComponentId>
-        ComposedHotfolderGui
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        ProcessingItemGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -409,7 +284,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        ProcessingItemGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -417,7 +292,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        ProcessingItemGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

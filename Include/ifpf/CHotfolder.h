@@ -45,7 +45,6 @@ public:
 	// reimplemented (ifpf::IHotfolder)
 	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath);
 	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr);
-	virtual ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
 	virtual int GetProcessingItemsCount() const;
 	virtual ifpf::IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const;
 	virtual bool IsWorking() const;
