@@ -204,7 +204,6 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 	if (parentItemPtr == NULL){
 		parentItemPtr = new DirectoryItem(*this, fileDirectory, FileList);
 		FileList->addTopLevelItem(parentItemPtr);
-		parentItemPtr->setExpanded(true);
 
 		// if special directory item UI controller is set,
 		// place it into the item:
