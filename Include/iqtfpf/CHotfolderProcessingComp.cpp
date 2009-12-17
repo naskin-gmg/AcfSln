@@ -38,7 +38,8 @@ namespace iqtfpf
 
 CHotfolderProcessingComp::CHotfolderProcessingComp()
 	:m_directoryMonitorObserver(*this),
-	m_parametersObserver(*this)
+	m_parametersObserver(*this),
+	m_stateObserver(*this)
 {
 }
 
@@ -52,6 +53,12 @@ void CHotfolderProcessingComp::OnComponentCreated()
 	I_ASSERT(m_paramsSetModelCompPtr.IsValid());
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_parametersObserver);
+	}
+
+	imod::IModel* hotfolderModelPtr = dynamic_cast<imod::IModel*>(GetHotfolderStateModel());
+	I_ASSERT(hotfolderModelPtr != NULL);
+	if (hotfolderModelPtr != NULL){
+		hotfolderModelPtr->AttachObserver(&m_stateObserver);
 	}
 
 	connect(this,
@@ -492,6 +499,32 @@ void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*m
 {
 	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
 		m_parent.SynchronizeWithModel();
+	}
+}
+
+
+// public methods of embedded class ParametersObserver
+
+CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
+		m_parent.m_processingQueueLock.Enter();
+	}
+}
+
+
+void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & istd::IChangeable::CF_ABORTED) != 0){
+		m_parent.m_processingQueueLock.Leave();
 	}
 }
 

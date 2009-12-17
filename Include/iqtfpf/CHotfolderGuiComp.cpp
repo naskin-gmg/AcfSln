@@ -286,6 +286,8 @@ void CHotfolderGuiComp::UpdateItemCommands()
 
 void CHotfolderGuiComp::RebuildItemList()
 {
+	FileList->clearSelection();
+
 	while (FileList->topLevelItemCount() > 0){
 		QTreeWidgetItem* itemPtr = FileList->takeTopLevelItem(0);
 

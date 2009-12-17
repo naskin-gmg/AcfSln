@@ -108,7 +108,7 @@ void CComposedHotfolderGuiComp::OnGuiCreated()
 	iqtgui::CHierarchicalCommand* settingsCommandPtr = new iqtgui::CHierarchicalCommand();
 	settingsCommandPtr->SetGroupId(20);
 	settingsCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	settingsCommandPtr->SetVisuals(tr("&Settings..."), "Settings...", "Edit setting of the hotfolder", QIcon(":/Icons/HotfolderSettings.svg"));
+	settingsCommandPtr->SetVisuals(tr("&Properties..."), "Properties...", "Edit parameters of the hotfolder", QIcon(":/Icons/HotfolderSettings.svg"));
 	connect(settingsCommandPtr, SIGNAL(activated()), this, SLOT(OnSettings()));
 	
 	hotfolderMenuPtr->InsertChild(settingsCommandPtr, true);
@@ -117,7 +117,7 @@ void CComposedHotfolderGuiComp::OnGuiCreated()
 
 	if (m_settingsGuiCompPtr.IsValid()){
 		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, GetWidget()));
-		m_settingsDialogPtr->setWindowTitle(tr("Hotfolder Settings"));
+		m_settingsDialogPtr->setWindowTitle(tr("Hotfolder Properties"));
 		m_settingsDialogPtr->setWindowIcon(QIcon(":/Icons/HotfolderSettings.svg"));
 	}
 

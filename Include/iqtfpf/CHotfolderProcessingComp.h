@@ -178,6 +178,7 @@ private:
 		CHotfolderProcessingComp& m_parent;
 	};
 
+
 	/**
 		Class for observation of the changes in the hotfolder parameter model
 	*/
@@ -187,6 +188,22 @@ private:
 		ParametersObserver(CHotfolderProcessingComp& parent);
 		
 		// reimplemented (imod::IObserver)
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	private:
+		CHotfolderProcessingComp& m_parent;
+	};
+
+
+	/**
+		Class for observation of the changes in the hotfolder state model
+	*/
+	class StateObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		StateObserver(CHotfolderProcessingComp& parent);
+		
+		// reimplemented (imod::IObserver)
+		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
 		CHotfolderProcessingComp& m_parent;
@@ -210,6 +227,7 @@ private:
 
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
+	StateObserver m_stateObserver;
 
 	mutable iqt::CCriticalSection m_parameterLock;
 	mutable iqt::CCriticalSection m_processingQueueLock;

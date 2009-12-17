@@ -191,3 +191,4 @@ bool CHotfolder::Serialize(iser::IArchive& archive)
 
 } // namespace ifpf
 
+
