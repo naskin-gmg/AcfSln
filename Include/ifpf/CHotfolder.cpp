@@ -64,9 +64,9 @@ const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::
 		return foundItemPtr;
 	}
 
-	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED);
-
 	ProcessingItem* itemPtr = new ProcessingItem;
+
+	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED, itemPtr);
 
 	itemPtr->SetInputFile(inputFilePath);
 	itemPtr->SetOutputFile(outputFilePath);
@@ -157,7 +157,7 @@ bool CHotfolder::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && archive.BeginTag(processingItemTag);
 			retVal = retVal && itemPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(processingItemTag);		
+			retVal = retVal && archive.EndTag(processingItemTag);
 		}
 	}
 	else{

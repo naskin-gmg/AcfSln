@@ -341,10 +341,6 @@
 				RelativePath="..\IMonitoringSessionManager.h"
 				>
 			</File>
-			<File
-				RelativePath="..\IObjectSnap.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Other"

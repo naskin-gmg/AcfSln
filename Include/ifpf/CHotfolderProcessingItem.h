@@ -3,6 +3,8 @@
 
 
 // ACF includes
+#include "imod/TModelWrap.h"
+
 #include "iimg/CGeneralBitmap.h"
 
 
@@ -45,8 +47,8 @@ private:
 	int m_processingState;
 	double m_progress;
 
-	iimg::CGeneralBitmap m_inputPreview;
-	iimg::CGeneralBitmap m_outputPreview;
+	imod::TModelWrap<iimg::CGeneralBitmap> m_inputPreview;
+	imod::TModelWrap<iimg::CGeneralBitmap> m_outputPreview;
 };
 
 
