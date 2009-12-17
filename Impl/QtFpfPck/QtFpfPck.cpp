@@ -33,6 +33,9 @@ I_EXPORT_COMPONENT(ComposedHotfolderGui, "UI for hotfolder visualization and set
 I_EXPORT_COMPONENT(ProcessingItemInfoGui, "GUI for the info a hotfolder processing item", "File Processing Hotfolder Editor View GUI Item");
 I_EXPORT_COMPONENT(ProcessingItemPreviewGui, "GUI for the graphical preview of a hotfolder processing item", "File Processing Hotfolder Editor View GUI Item");
 I_EXPORT_COMPONENT(DirectoryItemGui, "View sub-component for a hotfolder directory item", "File Processing Hotfolder Editor View GUI Item");
+I_EXPORT_COMPONENT(ProcessingItemPreviewGenerator, "Preview generator for a processing item", "File Processing Hotfolder Preview Generator");
+I_EXPORT_COMPONENT(FilePreviewGenerator, "Preview generator for a file", "File Preview Generator");
+
 
 } // namespace QtFpfPck
 

@@ -13,6 +13,8 @@
 #include "iqtfpf/CProcessingItemInfoGuiComp.h"
 #include "iqtfpf/CProcessingItemPreviewGuiComp.h"
 #include "iqtfpf/CDirectoryItemGuiComp.h"
+#include "iqtfpf/CProcessingItemPreviewGeneratorComp.h"
+#include "iqtfpf/CFilePreviewGeneratorComp.h"
 
 
 /**
@@ -31,6 +33,8 @@ typedef iqtfpf::CComposedHotfolderGuiComp ComposedHotfolderGui;
 typedef iqtfpf::CProcessingItemInfoGuiComp ProcessingItemInfoGui;
 typedef iqtfpf::CProcessingItemPreviewGuiComp ProcessingItemPreviewGui;
 typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
+typedef iqtfpf::CProcessingItemPreviewGeneratorComp ProcessingItemPreviewGenerator;
+typedef iqtfpf::CFilePreviewGeneratorComp FilePreviewGenerator;
 
 
 } // namespace QtFpfPck

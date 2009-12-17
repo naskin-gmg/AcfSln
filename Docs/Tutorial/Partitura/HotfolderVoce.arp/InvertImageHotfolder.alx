@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         Bitmap
@@ -36,6 +36,17 @@
       </X>
       <X>
         -7
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        BitmapPreviewGenerator
+      </ComponentName>
+      <X>
+        -554
+      </X>
+      <X>
+        124
       </X>
     </Element>
     <Element>
@@ -76,10 +87,10 @@
         InvertOperator
       </ComponentName>
       <X>
-        76
+        50
       </X>
       <X>
-        112
+        168
       </X>
     </Element>
     <Element>
@@ -91,6 +102,17 @@
       </X>
       <X>
         -136
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        PreviewBinder
+      </ComponentName>
+      <X>
+        -242
+      </X>
+      <X>
+        120
       </X>
     </Element>
   </PositionMap>
