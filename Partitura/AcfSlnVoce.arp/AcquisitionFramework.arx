@@ -403,7 +403,7 @@
         QtGuiPck
       </PackageId>
       <ComponentId>
-        Log
+        LogGui
       </ComponentId>
       <Data>
         <IsEnabled>
