@@ -22,9 +22,6 @@ void CProcessingItemPreviewGuiComp::UpdateModel() const
 
 void CProcessingItemPreviewGuiComp::UpdateEditor(int /*updateFlags*/)
 {
-	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-	}
 }
 
 

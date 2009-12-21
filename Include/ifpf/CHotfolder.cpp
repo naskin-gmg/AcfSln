@@ -100,13 +100,21 @@ void CHotfolder::RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPt
 
 int CHotfolder::GetProcessingItemsCount() const
 {
-	return m_processingItems.GetCount();
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
+	int count = m_processingItems.GetCount();
+
+	return count;
 }
 
 
-IHotfolderProcessingItem* CHotfolder::GetProcessingItem(int processingItemIndex) const
+ifpf::IHotfolderProcessingItem* CHotfolder::GetProcessingItem(int processingItemIndex) const
 {
-	return m_processingItems.GetAt(processingItemIndex);
+	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+
+	ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(processingItemIndex);
+
+	return itemPtr;
 }
 
 

@@ -141,6 +141,17 @@ bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_outputFile);
 	retVal = retVal && archive.EndTag(outputFileTag);
 
+	static iser::CArchiveTag inputFilePreviewTag("InputFilePreview", "Preview of the input file");
+	retVal = retVal && archive.BeginTag(inputFilePreviewTag);
+	retVal = retVal && m_inputPreview.Serialize(archive);
+	retVal = retVal && archive.EndTag(inputFilePreviewTag);
+	
+	static iser::CArchiveTag outputFilePreviewTag("OutputFilePreview", "Preview of the output file");
+	retVal = retVal && archive.BeginTag(outputFilePreviewTag);
+	retVal = retVal && m_outputPreview.Serialize(archive);
+	retVal = retVal && archive.EndTag(outputFilePreviewTag);
+
+
 	return retVal;
 }
 

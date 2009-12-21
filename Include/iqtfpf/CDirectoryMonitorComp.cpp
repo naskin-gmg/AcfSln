@@ -370,7 +370,7 @@ void CDirectoryMonitorComp::StartObserverThread()
 	if (fileInfo.exists()){
 		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "DirectoryMonitor");
 
-		BaseClass2::start();
+		BaseClass2::start(QThread::LowPriority);
 	}
 }
 
