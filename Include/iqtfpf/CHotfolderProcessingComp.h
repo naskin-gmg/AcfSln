@@ -8,7 +8,6 @@
 
 
 // ACF includes
-#include "istd/TSmartPtr.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
