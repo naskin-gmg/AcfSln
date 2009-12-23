@@ -12,6 +12,14 @@ namespace iqtmeas
 {
 
 
+CSamplesSequenceViewComp::CSamplesSequenceViewComp()
+:	m_lastChannelsCount(0),
+	m_channelsSelectorModel(1, 1)
+{
+	m_channelsSelectorModel.setItem(0, 0, new QStandardItem(tr("All channels")));
+}
+
+
 // reimplemented (imod::IModelEditor)
 
 void CSamplesSequenceViewComp::UpdateModel() const
@@ -21,7 +29,24 @@ void CSamplesSequenceViewComp::UpdateModel() const
 
 void CSamplesSequenceViewComp::UpdateEditor(int /*updateFlags*/)
 {
+	int channelsCount = 0;
+
+	imeas::ISamplesSequence* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		channelsCount = objectPtr->GetChannelsCount();
+		if (channelsCount != m_lastChannelsCount){
+			m_channelsSelectorModel.setRowCount(channelsCount + 1);
+			for (int i = m_lastChannelsCount; i < channelsCount; ++i){
+				m_channelsSelectorModel.setItem(i + 1, 0, new QStandardItem(tr("Channel %1").arg(i + 1)));
+			}
+
+			m_lastChannelsCount = channelsCount;
+		}
+	}
+
 	if (IsGuiCreated()){
+		ChannelsFrame->setVisible(channelsCount > 1);
+
 		emit MainFrame->repaint();
 	}
 }
@@ -40,6 +65,16 @@ void CSamplesSequenceViewComp::OnGuiCreated()
 	if (layoutPtr != NULL){
 		layoutPtr->addWidget(newDiagramPtr);
 	}
+
+	ScaleFrame->setVisible(*m_showScalePanelAttrPtr);
+	ScaleControlFrame->setVisible(*m_showScalePanelAttrPtr);
+	TimeSpanFrame->setVisible(*m_showTimeSpanPanelAttrPtr);
+	TimeSpanCB->setVisible(*m_showTimeSpanPanelAttrPtr);
+	ValueMinSB->setValue(*m_defaultMinValueAttrPtr);
+	ValueMaxSB->setValue(*m_defaultMaxValueAttrPtr);
+	ScaleCB->setChecked(!*m_defaultScaledValueAttrPtr);
+
+	ChannelSelectorCB->setModel(&m_channelsSelectorModel);
 }
 
 
@@ -192,6 +227,8 @@ CSamplesSequenceViewComp::DiagramWidget::DiagramWidget(QWidget* parentWidgetPtr,
 
 void CSamplesSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 {
+	I_ASSERT(m_parent.IsGuiCreated());
+
 	const imeas::ISamplesSequence* samplesPtr = m_parent.GetObjectPtr();
 	if (samplesPtr != NULL){
 		int samplesCount = samplesPtr->GetTimeSamplesCount();
@@ -206,6 +243,14 @@ void CSamplesSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 
 		int firstChannel = 0;
 		int lastChannel = samplesPtr->GetChannelsCount() - 1;
+
+		int selectedChannel = m_parent.ChannelSelectorCB->currentIndex() - 1;
+		if (selectedChannel >= 0){
+			I_ASSERT(selectedChannel < samplesPtr->GetChannelsCount());
+
+			firstChannel = selectedChannel;
+			lastChannel = selectedChannel;
+		}
 
 		istd::CRange valueRange;
 		if (m_parent.ScaleCB->isChecked()){

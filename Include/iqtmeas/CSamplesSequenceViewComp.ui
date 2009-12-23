@@ -5,89 +5,181 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
-    <height>389</height>
+    <width>789</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_3" >
    <property name="margin" >
     <number>0</number>
    </property>
-   <item row="0" column="1" >
-    <widget class="QWidget" native="1" name="widget_2" >
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <property name="margin" >
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QDoubleSpinBox" name="ValueMaxSB" >
-        <property name="decimals" >
-         <number>3</number>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5" >
+     <item>
+      <widget class="QFrame" name="MainFrame" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="palette" >
+        <palette>
+         <active>
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="autoFillBackground" >
+        <bool>true</bool>
+       </property>
+       <property name="frameShape" >
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow" >
+        <enum>QFrame::Sunken</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2" >
+        <property name="margin" >
+         <number>0</number>
         </property>
-        <property name="minimum" >
-         <double>-100.000000000000000</double>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" native="1" name="ScaleFrame" >
+       <layout class="QVBoxLayout" name="verticalLayout" >
+        <property name="margin" >
+         <number>0</number>
         </property>
-        <property name="maximum" >
-         <double>100.000000000000000</double>
-        </property>
-        <property name="singleStep" >
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value" >
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_5" >
-        <property name="text" >
-         <string>Max</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer" >
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>20</width>
-          <height>253</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4" >
-        <property name="text" >
-         <string>Min</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="ValueMinSB" >
-        <property name="decimals" >
-         <number>3</number>
-        </property>
-        <property name="minimum" >
-         <double>-100.000000000000000</double>
-        </property>
-        <property name="maximum" >
-         <double>100.000000000000000</double>
-        </property>
-        <property name="singleStep" >
-         <double>0.100000000000000</double>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+        <item>
+         <widget class="QDoubleSpinBox" name="ValueMaxSB" >
+          <property name="decimals" >
+           <number>3</number>
+          </property>
+          <property name="minimum" >
+           <double>-100.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100.000000000000000</double>
+          </property>
+          <property name="singleStep" >
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value" >
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5" >
+          <property name="text" >
+           <string>Max</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>20</width>
+            <height>253</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4" >
+          <property name="text" >
+           <string>Min</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="ValueMinSB" >
+          <property name="decimals" >
+           <number>3</number>
+          </property>
+          <property name="minimum" >
+           <double>-100.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100.000000000000000</double>
+          </property>
+          <property name="singleStep" >
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="1" column="0" colspan="2" >
+   <item>
     <widget class="QWidget" native="1" name="widget" >
      <layout class="QHBoxLayout" name="horizontalLayout_2" >
       <property name="margin" >
@@ -109,6 +201,26 @@
          <property name="margin" >
           <number>0</number>
          </property>
+         <item>
+          <widget class="QToolButton" name="PrevButton" >
+           <property name="toolTip" >
+            <string>Move time span left</string>
+           </property>
+           <property name="text" >
+            <string>&lt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="NextButton" >
+           <property name="toolTip" >
+            <string>Move time span right</string>
+           </property>
+           <property name="text" >
+            <string>></string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QLabel" name="label" >
            <property name="text" >
@@ -171,23 +283,39 @@
            </property>
           </widget>
          </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" native="1" name="ChannelsFrame" >
+        <layout class="QHBoxLayout" name="horizontalLayout_4" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QToolButton" name="PrevButton" >
-           <property name="toolTip" >
-            <string>Move time span left</string>
+          <spacer name="horizontalSpacer_2" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3" >
            <property name="text" >
-            <string>&lt;</string>
+            <string>Show</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="NextButton" >
-           <property name="toolTip" >
-            <string>Move time span right</string>
-           </property>
-           <property name="text" >
-            <string>></string>
+          <widget class="QComboBox" name="ChannelSelectorCB" >
+           <property name="sizeAdjustPolicy" >
+            <enum>QComboBox::AdjustToContents</enum>
            </property>
           </widget>
          </item>
@@ -195,148 +323,37 @@
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_2" >
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3" >
-        <property name="text" >
-         <string>Show</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="ChannelSelectorCB" >
-        <property name="sizeAdjustPolicy" >
-         <enum>QComboBox::AdjustToContents</enum>
-        </property>
-        <item>
-         <property name="text" >
-          <string>All Channels</string>
+       <widget class="QWidget" native="1" name="ScaleControlFrame" >
+        <layout class="QHBoxLayout" name="horizontalLayout_3" >
+         <property name="margin" >
+          <number>0</number>
          </property>
-        </item>
+         <item>
+          <spacer name="horizontalSpacer" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>111</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="ScaleCB" >
+           <property name="text" >
+            <string>Scale</string>
+           </property>
+           <property name="checked" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
-      <item>
-       <spacer name="horizontalSpacer" >
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ScaleCB" >
-        <property name="text" >
-         <string>Scale</string>
-        </property>
-        <property name="checked" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <widget class="QFrame" name="MainFrame" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="palette" >
-      <palette>
-       <active>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="autoFillBackground" >
-      <bool>true</bool>
-     </property>
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" >
-      <property name="margin" >
-       <number>0</number>
-      </property>
      </layout>
     </widget>
    </item>
@@ -363,7 +380,7 @@
   <connection>
    <sender>ScaleCB</sender>
    <signal>toggled(bool)</signal>
-   <receiver>widget_2</receiver>
+   <receiver>ScaleFrame</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel" >

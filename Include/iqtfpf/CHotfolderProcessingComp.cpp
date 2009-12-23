@@ -289,8 +289,7 @@ const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(int ind
 					dynamic_cast<const iprm::IParamsSet*>(m_paramsSetCompPtr->GetParameter((*m_monitoringParamsIdAttrPtr).ToString()));
 
 		if (directoryParamsManagerPtr != NULL && directoryMonitoringParamsPtr != NULL){			
-			int inputDirectoriesCount = directoryParamsManagerPtr->GetSetsCount();
-			I_ASSERT(index < inputDirectoriesCount);
+			I_ASSERT(index < directoryParamsManagerPtr->GetSetsCount());
 			I_ASSERT(index >= 0);
 
 			return directoryParamsManagerPtr->GetParamsSet(index);
