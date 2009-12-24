@@ -43,9 +43,9 @@ public:
 	virtual istd::CStringList GetHotfoldersList() const = 0;
 
 	/**
-		Get processing state of the hotfolder \c hotfolderName.
+		Get working state of the hotfolder \c hotfolderName.
 	*/
-	virtual int GetProcessingState(const istd::CString& hotfolderName) const = 0;
+	virtual int GetWorkingState(const istd::CString& hotfolderName) const = 0;
 };
 
 

@@ -2,7 +2,6 @@
 
 
 // Qt includes
-#include <QProgressBar>
 #include <QVBoxLayout>
 
 
