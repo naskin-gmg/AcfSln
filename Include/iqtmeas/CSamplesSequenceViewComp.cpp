@@ -68,11 +68,15 @@ void CSamplesSequenceViewComp::OnGuiCreated()
 
 	ScaleFrame->setVisible(*m_showScalePanelAttrPtr);
 	ScaleControlFrame->setVisible(*m_showScalePanelAttrPtr);
+	ChannelsFrame->setVisible(*m_showChannelPanelAttrPtr);
 	TimeSpanFrame->setVisible(*m_showTimeSpanPanelAttrPtr);
-	TimeSpanCB->setVisible(*m_showTimeSpanPanelAttrPtr);
-	ValueMinSB->setValue(*m_defaultMinValueAttrPtr);
-	ValueMaxSB->setValue(*m_defaultMaxValueAttrPtr);
-	ScaleCB->setChecked(!*m_defaultScaledValueAttrPtr);
+	BottomFrame->setVisible(*m_showScalePanelAttrPtr || *m_showChannelPanelAttrPtr || *m_showTimeSpanPanelAttrPtr);
+	ValueMinSB->setValue(*m_minValueAttrPtr);
+	ValueMaxSB->setValue(*m_maxValueAttrPtr);
+	ScaleCB->setChecked(!*m_isScaledValueAttrPtr);
+	TimeBeginSB->setValue(*m_minTimeSpanAttrPtr);
+	TimeEndSB->setValue(*m_maxTimeSpanAttrPtr);
+	TimeSpanCB->setChecked(!*m_isScaledTimeSpanAttrPtr);
 
 	ChannelSelectorCB->setModel(&m_channelsSelectorModel);
 }
@@ -294,7 +298,7 @@ void CSamplesSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 				istd::CRange sampleRange = istd::CRange::GetInvalid();
 
 				for (int sampleIndex = lastSampleEnd; sampleIndex <= sampleEndIndex; ++sampleIndex){
-					double sample = samplesPtr->GetSample(sampleIndex);
+					double sample = samplesPtr->GetSample(sampleIndex, channelIndex);
 					sampleRange.Unite(sample);
 				}
 

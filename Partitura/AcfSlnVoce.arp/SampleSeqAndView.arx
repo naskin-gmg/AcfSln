@@ -115,10 +115,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              DefaultIsScaled
+              IsChannelPanelVisible
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
@@ -132,44 +132,6 @@
               </IsEnabled>
               <Value>
                 false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DefaultMaxValue
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DefaultMinValue
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                -1
               </Value>
             </Data>
           </AttributeInfo>
@@ -189,6 +151,82 @@
               </IsEnabled>
               <Value>
                 false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsScaledValue
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsTimeSpanPanelVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MaxValue
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MinValue
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                -1
               </Value>
             </Data>
           </AttributeInfo>
