@@ -40,6 +40,8 @@ protected:
 	void Init(xercesc::InputSource& inputSource);
     void Reset();
 
+	bool CheckRootNode() const;
+
 private:
 	bool m_isValid;
 

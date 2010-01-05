@@ -202,7 +202,8 @@ void CXmlReadArchiveBase::Init(xercesc::InputSource& inputSource)
 
 	if (m_documentPtr != NULL){
 		m_nodePtr = m_documentPtr->getFirstChild();
-		if (m_nodePtr == NULL || xercesc::XMLString::compareIString(m_nodePtr->getNodeName(), (const XMLCh*)istd::CString(m_rootTag.GetId()).c_str()) != 0){
+
+		if (!CheckRootNode()){
 			m_documentPtr->release();
 			m_documentPtr = NULL;
 			m_nodePtr = NULL;
@@ -217,6 +218,12 @@ void CXmlReadArchiveBase::Reset()
         m_builder->release();
 		m_builder = NULL;
 	}
+}
+
+
+bool CXmlReadArchiveBase::CheckRootNode() const
+{
+	return ((m_nodePtr != NULL) && (xercesc::XMLString::compareIString(m_nodePtr->getNodeName(), (const XMLCh*)istd::CString(m_rootTag.GetId()).c_str()) == 0));
 }
 
 

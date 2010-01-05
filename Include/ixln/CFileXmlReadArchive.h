@@ -10,8 +10,8 @@ namespace ixln
 
 
 /**
-	XERCES-based implementation of archive for writing in XML format.
-	Please note that it doesn't create \c counter attribute needed by \c iser::CXmlFileReadArchive.
+	XERCES-based implementation of archive for reading XML format.
+	Please note that it doesn't need \c counter attribute needed by \c iser::CXmlFileReadArchive.
 
 	\ingroup Persistence
 */

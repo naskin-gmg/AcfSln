@@ -177,6 +177,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CFileTransfXmlReadArchive.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileXmlReadArchive.cpp"
 				>
 			</File>
@@ -201,6 +205,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CFileTransfXmlReadArchive.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CFileXmlReadArchive.h"
 				>

@@ -17,6 +17,14 @@ CXercesBase::CXercesBase()
 
 CXercesBase::~CXercesBase()
 {
+	if (m_nodePtr != NULL){
+		m_nodePtr->release();
+	}
+
+	if (m_documentPtr != NULL){
+		m_documentPtr->release();
+	}
+
 	RemXercescRef();
 }
 
