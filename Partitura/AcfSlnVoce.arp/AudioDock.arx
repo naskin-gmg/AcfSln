@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1218
+          1290
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="8">
     <Element>
       <Id>
         Audio
@@ -190,7 +190,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Guis
@@ -211,27 +211,6 @@
                 </Value>
                 <Value>
                   SamplesSequenceView
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Names
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Sample
                 </Value>
               </Values>
             </Data>
@@ -363,28 +342,102 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SurfaceView
-      </Id>
-      <PackageId>
-        QwtPck
-      </PackageId>
-      <ComponentId>
-        SurfaceView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              IsChannelPanelVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsScalePanelVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsScaledValue
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsTimeSpanPanelVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MinValue
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                -1
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

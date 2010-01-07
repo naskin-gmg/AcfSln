@@ -425,7 +425,6 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 	bool needAudioFrame = (m_audioStreamId >= 0) && (m_audioCodecContextPtr != NULL);
 
 	int samplesOffset = 0;
-	double lastShift = 0;
 
 	istd::CChangeNotifier notifier(m_audioSequenceCompPtr.GetPtr());
 
@@ -523,16 +522,15 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 						int channelsCount = m_audioCodecContextPtr->channels;
 
 						int remainSamples = m_audioSequenceCompPtr->GetTimeSamplesCount() - samplesOffset;
+						int samplesToCopy = istd::Min(remainSamples, audioBufferSize / sampleRawSize);
 
 						switch (m_audioCodecContextPtr->sample_fmt){
 						case SAMPLE_FMT_U8:
 							{
 								I_BYTE* samplesPtr = (I_BYTE*)m_audioOutputBuffer;
-								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_BYTE)));
 								for (int i = 0; i < samplesToCopy; ++i){
-									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 127.5 - 1 + lastShift);
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 127.5 - 1);
 								}
-								lastShift += samplesPtr[samplesToCopy - 1] / 127.5 - 1;
 								samplesOffset += samplesToCopy / channelsCount;
 							}
 							break;
@@ -540,12 +538,9 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 						case SAMPLE_FMT_S16:
 							{
 								I_SWORD* samplesPtr = (I_SWORD*)m_audioOutputBuffer;
-								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_SWORD)));
 								for (int i = 0; i < samplesToCopy; ++i){
-									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 32768.0 + lastShift);
-									lastShift *= 0.999;
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] / 32768.0);
 								}
-								lastShift += samplesPtr[samplesToCopy - 1] / 32768.0;
 								samplesOffset += samplesToCopy / channelsCount;
 							}
 							break;
@@ -553,11 +548,9 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 						case SAMPLE_FMT_S32:
 							{
 								I_SDWORD* samplesPtr = (I_SDWORD*)m_audioOutputBuffer;
-								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(I_SDWORD)));
 								for (int i = 0; i < samplesToCopy; ++i){
-									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, double(samplesPtr[i]) / 0x80000000 + lastShift);
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, double(samplesPtr[i]) / 0x80000000);
 								}
-								lastShift += double(samplesPtr[samplesToCopy - 1]) / 0x80000000;
 								samplesOffset += samplesToCopy / channelsCount;
 							}
 							break;
@@ -565,11 +558,9 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 						case SAMPLE_FMT_FLT:
 							{
 								float* samplesPtr = (float*)m_audioOutputBuffer;
-								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(float)));
 								for (int i = 0; i < samplesToCopy; ++i){
-									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] + lastShift);
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i]);
 								}
-								lastShift += samplesPtr[samplesToCopy - 1];
 								samplesOffset += samplesToCopy / channelsCount;
 							}
 							break;
@@ -577,11 +568,9 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 						case SAMPLE_FMT_DBL:
 							{
 								double* samplesPtr = (double*)m_audioOutputBuffer;
-								int samplesToCopy = istd::Min(remainSamples, audioBufferSize / int(sizeof(double)));
 								for (int i = 0; i < samplesToCopy; ++i){
-									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i] + lastShift);
+									m_audioSequenceCompPtr->SetSample(samplesOffset + i / channelsCount, i % channelsCount, samplesPtr[i]);
 								}
-								lastShift += samplesPtr[samplesToCopy - 1];
 								samplesOffset += samplesToCopy / channelsCount;
 							}
 							break;
