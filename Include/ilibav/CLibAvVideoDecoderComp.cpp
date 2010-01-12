@@ -127,7 +127,7 @@ istd::CString CLibAvVideoDecoderComp::GetOpenedMediumUrl() const
 
 bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*autoPlay*/)
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
 	CloseMedium();
 

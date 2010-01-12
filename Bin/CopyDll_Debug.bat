@@ -8,4 +8,4 @@ copy /Y %ACFDIR%\Bin\DebugVC8\Acf.exe DebugVC8
 copy /Y %AVTDIR%\FireGrab\*.dll DebugVC8
 copy /Y %MILDIR%\Dll\*.dll DebugVC8
 copy /Y %OPENCVDIR%\Bin\*.dll DebugVC8
-copy /Y %FFMPEGDIR%\lib\DebugVC8\*.dll DebugVC8
+copy /Y %FFMPEGDIR%\bin\*.dll DebugVC8
