@@ -233,7 +233,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 	}
 
 	if (m_audioSequenceCompPtr.IsValid() && (m_audioCodecPtr == NULL)){
-		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No video decoder found for file ") + url);
+		SendInfoMessage(MI_FORMAT_PROBLEM, istd::CString("No audio decoder found for file ") + url);
 	}
 
 	ReadNextFrame();
