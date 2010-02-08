@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1333
         </Number>
         <Description>
           ACF
@@ -54,10 +54,10 @@
         AttributeEditorDock
       </ComponentName>
       <X>
-        108
+        220
       </X>
       <X>
-        70
+        177
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         CompositorTemplate
       </ComponentName>
       <X>
-        412
+        398
       </X>
       <X>
-        227
+        277
       </X>
     </Element>
     <Element>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1333
         </Number>
         <Description>
           ACF
@@ -339,7 +339,7 @@ This tool is a part of ACF Solutions project
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               AttributeSelectionObserver
@@ -356,6 +356,25 @@ This tool is a part of ACF Solutions project
               </IsEnabled>
               <Value>
                 PackageOverviewDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                CompositorTemplate
               </Value>
             </Data>
           </AttributeInfo>
@@ -757,8 +776,8 @@ This tool is a part of ACF Solutions project
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-							EnvironmentManager
-						</Id>
+              EnvironmentManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
