@@ -430,7 +430,7 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 
 	// Decode packets until we have decoded a complete frame
 	while (retVal && (needVideoFrame || needAudioFrame)){
-		while ((m_packet.data != NULL) && (m_bytesRemaining > 0)){
+		while ((m_rawDataPtr != NULL) && (m_bytesRemaining > 0)){
 			if (needVideoFrame && (m_packet.stream_index == m_videoStreamId)){
 				I_ASSERT(m_videoCodecContextPtr != NULL);
 
@@ -603,7 +603,7 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 		}
 
 		// Read new packet
-		if (av_read_frame(m_formatContextPtr, &m_packet) < 0){
+		if ((av_read_frame(m_formatContextPtr, &m_packet) < 0) || (m_packet.data == NULL)){
 			return false;
 		}
 
