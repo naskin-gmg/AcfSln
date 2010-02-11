@@ -9,7 +9,7 @@
 **	accordance with the ACF Commercial License Agreement provided with the
 **	Software and appearing in the file License.txt or,
 **	alternatively, in accordance with the terms contained in
-**	a written agreement between you and ImagingTools Gantzke & Lepskiy GbR.
+**	a written agreement between you and Witold Gantzke and Kirill Lepskiy.
 **
 **	If you are unsure which license is appropriate for your use, please
 **	contact us at info@imagingtools.de.

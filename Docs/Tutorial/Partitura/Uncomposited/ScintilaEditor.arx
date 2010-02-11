@@ -84,9 +84,11 @@
                 true
               </IsEnabled>
               <Value>
-                Copyright 2009 ImagingTools
-This tutorial demo is a part of ACF project
-              </Value>
+(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
+All rights reserved
+This tool is part of ACF Solutions project
+Please read attached License.txt file for license informations
+							</Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

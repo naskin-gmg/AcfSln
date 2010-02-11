@@ -49,11 +49,12 @@
                 true
               </IsEnabled>
               <Value>
-                Demonstration of hotfolder function
+Demonstration of hotfolder function
 
-(C) Copyright 2009 ImagingTools
-
+(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
+This tool is part of ACF Solutions project
+Please read attached License.txt file for license informations
               </Value>
             </Data>
           </AttributeInfo>
@@ -129,9 +130,11 @@ All rights reserved
                 true
               </IsEnabled>
               <Value>
-                Copyright 2009 ImagingTools
-This tool is a part of ACF-Solutions project
-              </Value>
+(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
+All rights reserved
+This tool is part of ACF Solutions project
+Please read attached License.txt file for license informations
+							</Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

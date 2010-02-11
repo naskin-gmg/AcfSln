@@ -9,7 +9,7 @@ namespace FpfPck
 
 I_EXPORT_DEFAULT_SERVICES
 
-I_EXPORT_PACKAGE("Fpf", "ImagingTools File-To-File Processing Framework package", "ImagingTools File Processing Hotfolder Workflow");
+I_EXPORT_PACKAGE("Fpf", "Acf-Solutions File-To-File Processing Framework package", "ACF-Solutions File Processing Hotfolder Workflow");
 
 I_EXPORT_COMPONENT(FileProcessing, "Sequence processing using slave processors", "File Processing Hotfolder");
 I_EXPORT_COMPONENT(DirectoryMonitorParams, "Parameter for the directory monitoring", "File Processing Parameter Directory Monitoring");
