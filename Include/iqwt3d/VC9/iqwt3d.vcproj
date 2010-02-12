@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtmeas"
-	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
-	RootNamespace="iqtmeas"
+	Name="iqwt3d"
+	ProjectGUID="{5EC7340B-67FC-41BF-88B2-55694D5494D8}"
+	RootNamespace="iqwt3d"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -20,7 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -51,9 +51,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QWT3DDIR)\Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -94,7 +92,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
@@ -126,7 +124,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QWT3DDIR)\Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -176,11 +174,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSamplesSequenceViewComp.moc"
+				RelativePath="..\CSurfaceViewComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -190,11 +184,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.h"
+				RelativePath="..\CSurfaceViewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtmeas.h"
+				RelativePath="..\iqwt3d.h"
 				>
 			</File>
 		</Filter>
@@ -211,19 +205,20 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CSamplesSequenceViewComp.cpp"
+				RelativePath="..\CSurfaceViewComp.moc"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSamplesSequenceViewComp.h"
+				RelativePath="..\generated\moc_CSurfaceViewComp.cpp"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
+			Filter="ui"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.ui"
+				RelativePath="..\CSurfaceViewComp.ui"
 				>
 			</File>
 		</Filter>

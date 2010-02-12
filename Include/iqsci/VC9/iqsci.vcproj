@@ -178,7 +178,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTextEditor.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CTextEditorGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextEditorGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -192,15 +200,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTextEditor.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CTextEditorGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTextEditorGuiComp.moc"
 				>
 			</File>
 			<File

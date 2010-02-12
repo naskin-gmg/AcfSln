@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDirectoryMonitorParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileProcessingComp.cpp"
 				>
 			</File>
@@ -237,7 +241,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderStatistics.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CMonitoringSessionsMap.cpp"
 				>
 			</File>
 		</Filter>
@@ -247,6 +259,10 @@
 			>
 			<File
 				RelativePath="..\CDirectoryMonitorParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDirectoryMonitorParamsComp.h"
 				>
 			</File>
 			<File
@@ -266,7 +282,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderStatistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMonitoringSessionsMap.h"
 				>
 			</File>
 			<File
@@ -275,6 +299,10 @@
 			</File>
 			<File
 				RelativePath="..\IDirectoryMonitorParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IFileNaming.h"
 				>
 			</File>
 			<File
@@ -295,6 +323,10 @@
 			</File>
 			<File
 				RelativePath="..\IHotfolderProcessingItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IHotfolderStatistics.h"
 				>
 			</File>
 			<File

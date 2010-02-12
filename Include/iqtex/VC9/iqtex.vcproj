@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtmeas"
-	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
-	RootNamespace="iqtmeas"
+	Name="iqtex"
+	ProjectGUID="{5EFA2A09-8CE0-4649-9B99-3373B620DE6D}"
+	RootNamespace="iqtex"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -53,7 +53,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -126,7 +126,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -176,11 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSamplesSequenceViewComp.moc"
+				RelativePath="..\CTcpTerminalGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -190,11 +186,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.h"
+				RelativePath="..\CTcpTerminalGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtmeas.h"
+				RelativePath="..\CTcpTerminalGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\iqtex.h"
 				>
 			</File>
 		</Filter>
@@ -206,24 +206,24 @@
 			>
 		</Filter>
 		<Filter
+			Name="Forms"
+			>
+			<File
+				RelativePath="..\CTcpTerminalGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CSamplesSequenceViewComp.cpp"
+				RelativePath="..\generated\moc_CTcpTerminalGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSamplesSequenceViewComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CSamplesSequenceViewComp.ui"
+				RelativePath="..\generated\ui_CTcpTerminalGuiComp.h"
 				>
 			</File>
 		</Filter>
