@@ -9,9 +9,9 @@
 
 
 #include "iqtgui/IIconProvider.h"
+#include "iqtgui/IDialog.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
-#include "iqtgui/CGuiComponentDialog.h"
 
 
 // AcfSln includes
@@ -42,10 +42,8 @@ public:
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_hotfolderGuiCompPtr, "HotfolderGui", "Hotfolder UI", true, "HotfolderGui");
 		I_ASSIGN(m_hotfolderObserverCompPtr, "HotfolderGui", "Hotfolder UI", true, "HotfolderGui");
-		I_ASSIGN(m_settingsGuiCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
-		I_ASSIGN(m_settingsObserverCompPtr, "HotfolderParametersEditor", "Hotfolder parameters editor", true, "HotfolderParametersEditor");
+		I_ASSIGN(m_settingsDialogCompPtr, "SettingsDialog", "Hotfolder parameters editor", true, "SettingsDialog");
 		I_ASSIGN(m_stateModelIdAttrPtr, "StateModelParamsId", "Parameter set ID for the hotfolder's state parameters", true, "");
-		I_ASSIGN(m_hotfolderParamsIdAttrPtr, "HotfolderParamsId", "Parameter set ID for the hotfolder settings", true, "");
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::ICommandsProvider)
@@ -69,12 +67,9 @@ private Q_SLOTS:
 private:
 	I_REF(iqtgui::IGuiObject, m_hotfolderGuiCompPtr);
 	I_REF(imod::IObserver, m_hotfolderObserverCompPtr);
-	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
-	I_REF(imod::IObserver, m_settingsObserverCompPtr);
+	I_REF(iqtgui::IDialog, m_settingsDialogCompPtr);
 	I_ATTR(istd::CString, m_stateModelIdAttrPtr);
 	I_ATTR(istd::CString, m_hotfolderParamsIdAttrPtr);
-
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
 
 	mutable iqtgui::CHierarchicalCommand m_commands;
 };

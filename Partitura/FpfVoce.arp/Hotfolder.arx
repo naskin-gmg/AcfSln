@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1276
+          1288
         </Number>
         <Description>
           ACF
@@ -809,7 +809,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        HotfolderParams
+      </ExportedId>
+      <ComponentId>
+        HotfolderParams
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         HotfolderStateModel

@@ -45,17 +45,6 @@ void CComposedHotfolderGuiComp::UpdateEditor(int /*updateFlags*/)
 
 void CComposedHotfolderGuiComp::OnGuiModelAttached()
 {
-	if (m_settingsObserverCompPtr.IsValid() && m_hotfolderParamsIdAttrPtr.IsValid()){
-		iprm::IParamsSet* objectPtr = GetObjectPtr();
-		I_ASSERT(objectPtr != NULL);
-		if (objectPtr != NULL){
-			imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetEditableParameter((*m_hotfolderParamsIdAttrPtr).ToString()));
-			if (paramsModelPtr != NULL){
-				paramsModelPtr->AttachObserver(m_settingsObserverCompPtr.GetPtr());
-			}
-		}
-	}
-
 	if (m_hotfolderObserverCompPtr.IsValid() && m_stateModelIdAttrPtr.IsValid()){
 		iprm::IParamsSet* objectPtr = GetObjectPtr();
 		I_ASSERT(objectPtr != NULL);
@@ -79,14 +68,6 @@ void CComposedHotfolderGuiComp::OnGuiModelAttached()
 
 void CComposedHotfolderGuiComp::OnGuiModelDetached()
 {
-	if (m_settingsObserverCompPtr.IsValid()){
-		iprm::IParamsSet* objectPtr = GetObjectPtr();
-		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetEditableParameter((*m_hotfolderParamsIdAttrPtr).ToString()));
-		if (paramsModelPtr != NULL && paramsModelPtr->IsAttached(m_settingsObserverCompPtr.GetPtr())){
-			paramsModelPtr->DetachObserver(m_settingsObserverCompPtr.GetPtr());
-		}
-	}
-
 	if (m_hotfolderObserverCompPtr.IsValid()){
 		iprm::IParamsSet* objectPtr = GetObjectPtr();
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetEditableParameter((*m_stateModelIdAttrPtr).ToString()));
@@ -114,24 +95,19 @@ void CComposedHotfolderGuiComp::OnGuiCreated()
 
 	m_commands.InsertChild(hotfolderMenuPtr, true);
 
+	/*
 	if (m_settingsGuiCompPtr.IsValid()){
 		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, GetWidget()));
 		m_settingsDialogPtr->setWindowTitle(tr("Hotfolder Properties"));
 		m_settingsDialogPtr->setWindowIcon(QIcon(":/Icons/HotfolderSettings.svg"));
 	}
-
+*/
 	BaseClass::OnGuiCreated();
 }
 
 
 void CComposedHotfolderGuiComp::OnGuiDestroyed()
 {
-	m_settingsDialogPtr.Reset();
-
-	if (m_hotfolderGuiCompPtr.IsValid()){
-		m_hotfolderGuiCompPtr->DestroyGui();
-	}
-
 	BaseClass::OnGuiDestroyed();
 }
 
@@ -142,8 +118,8 @@ void CComposedHotfolderGuiComp::OnGuiDestroyed()
 
 void CComposedHotfolderGuiComp::OnSettings()
 {
-	if (m_settingsDialogPtr.IsValid()){
-		m_settingsDialogPtr->exec();
+	if (m_settingsDialogCompPtr.IsValid()){
+		m_settingsDialogCompPtr->Execute();
 	}
 }
 
