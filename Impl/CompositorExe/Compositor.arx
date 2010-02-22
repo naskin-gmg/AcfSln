@@ -820,8 +820,8 @@ See attached file 'License.txt' for license information
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              PackagesLoader
-            </Id>
+							MetaInfoManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
