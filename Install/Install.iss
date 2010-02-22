@@ -4,6 +4,7 @@
 #define CBIOSDIR GetEnv("CBIOSDIR")
 #define FFMPEGDIR GetEnv("FFMPEGDIR")
 #define EXTLIBDIR GetEnv("EXTLIBDIR")
+#define QTDIR GetEnv("QTDIR")
 
 [Setup]
 AppVerName=$AcfProductName$ $AcfVersion:1$
@@ -34,6 +35,10 @@ Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recur
 Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#EXTLIBDIR}\Microsoft\Redist\Debug$CompilerName$\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#EXTLIBDIR}\Microsoft\Redist\Release$CompilerName$\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
+Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: acfSlnComp
+Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: acfSlnComp
+Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: acfSlnComp
+Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: acfSlnComp
 
 Source: {#XERCESDIR}\Lib\*.dll; DestDir: {app}\ExtLib\Bin; Components: xercesComp
 Source: {#XERCESDIR}\*; DestDir: {app}\ExtLib\Xerces; Flags: recursesubdirs; Excludes: *.dll; Components: xercesComp
@@ -91,6 +96,7 @@ Name: xalanComp; Description: Xalan; Types: fullType customType
 Name: zlibComp; Description: ZLib; Types: fullType customType
 Name: cbiosComp; Description: CBios; Types: fullType customType
 Name: ffmpegComp; Description: FFmpeg; Types: fullType customType
+Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
 
 [Icons]
 Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfSlnComp

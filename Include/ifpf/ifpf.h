@@ -6,7 +6,7 @@
 
 
 /**
-	Contains the classes for File-2-File Processing Framework
+	Contains the classes for File-To-File Processing Framework
 	\li	istd
 	\li	iser
 	\li iproc
