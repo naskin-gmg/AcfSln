@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1333
+          1360
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="14">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -49,31 +49,12 @@
                 true
               </IsEnabled>
               <Value>
-ACF Registry Editor
+                ACF Registry Editor
 
-(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
+Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
-This tool is part of ACF Solutions project
-Please read attached License.txt file for license informations
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              AppName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF Compositor
+This tool is a part of ACF Solutions project
+See attached file 'License.txt' for license informations
               </Value>
             </Data>
           </AttributeInfo>
@@ -98,25 +79,6 @@ Please read attached License.txt file for license informations
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Company
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               CopyrightText
             </Id>
             <Type>
@@ -130,12 +92,12 @@ Please read attached License.txt file for license informations
                 true
               </IsEnabled>
               <Value>
-ACF Registry Editor
+                ACF Registry Editor
 
-Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
+(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
-This tool is a part of ACF Solutions project
-See attached file 'License.txt' for license information
+This tool is part of ACF Solutions project
+See attached file 'license.txt' for license informations
               </Value>
             </Data>
           </AttributeInfo>
@@ -591,7 +553,7 @@ See attached file 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                true
+                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -600,7 +562,7 @@ See attached file 'License.txt' for license information
     </Element>
     <Element>
       <Id>
-        DocumentMangerModelBinder
+        DocumentManagerModelBinder
       </Id>
       <PackageId>
         BasePck
@@ -777,7 +739,26 @@ See attached file 'License.txt' for license information
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                CompositorTemplate
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               EnvironmentManager
@@ -820,8 +801,8 @@ See attached file 'License.txt' for license information
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-							MetaInfoManager
-						</Id>
+              MetaInfoManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
@@ -956,7 +937,7 @@ See attached file 'License.txt' for license information
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -973,6 +954,44 @@ See attached file 'License.txt' for license information
               </IsEnabled>
               <Value>
                 ACF Compositor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Company
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
