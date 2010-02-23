@@ -53,8 +53,9 @@
 
 Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
+
 This tool is a part of ACF Solutions project
-See attached file 'License.txt' for license informations
+See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -96,8 +97,9 @@ See attached file 'License.txt' for license informations
 
 (C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
+
 This tool is part of ACF Solutions project
-See attached file 'license.txt' for license informations
+See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -281,7 +283,7 @@ See attached file 'license.txt' for license informations
                 true
               </IsEnabled>
               <Value>
-                :/Icons/CompositorSplashScreen
+                :/Images/CompositorSplashScreen
               </Value>
             </Data>
           </AttributeInfo>

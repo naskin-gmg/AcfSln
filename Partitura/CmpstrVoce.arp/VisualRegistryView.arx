@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1018
+          1346
         </Number>
         <Description>
           ACF
@@ -15,28 +15,31 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="2">
     <Element>
       <Id>
-        App
+        SceneProvider
       </Id>
       <PackageId>
-        AcfGuiVoce
+        QtViewPck
       </PackageId>
       <ComponentId>
-        MultiDocApp
+        SceneProvider
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              AppName
+              BackgroundMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -46,54 +49,13 @@
                 true
               </IsEnabled>
               <Value>
-                ScintilaEditor
+                2
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Company
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CopyrightText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
-All rights reserved
-This tool is part of ACF Solutions project
-See 'License.txt' for license information
-							</Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocumentTemplates
+              DropConsumers
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -107,17 +69,17 @@ See 'License.txt' for license information
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  DocumentTemplate
+                  VisualRegistryScenographer
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProductType
+              GridSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               
@@ -127,16 +89,16 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                Tutorial (Dynamic)
+                25
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashScreenImage
+              IsAlignmentEnabled
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -146,7 +108,45 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneHeight
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                841
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneWidth
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1189
               </Value>
             </Data>
           </AttributeInfo>
@@ -155,138 +155,121 @@ See 'License.txt' for license information
     </Element>
     <Element>
       <Id>
-        DocumentFactory
+        VisualRegistryScenographer
       </Id>
       <PackageId>
-        BasePck
+        CmpstrPck
       </PackageId>
       <ComponentId>
-        TextDocument
+        VisualRegistryScenographer
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
-              DefaultText
+              ConsistencyInfo
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              ConsistencyInfo
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                void main(){}
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentLoader
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        TextFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  txt
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              TypeDescriptions
+              MainWindow
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              MainWindow
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Text file
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentTemplate
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        SingleDocumentTemplate
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              DocumentFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DocumentFactory
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DocumentLoader
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              QuickHelpViewer
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              QuickHelpViewer
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryCodeSaver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              RegistryCodeSaver
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryPreview
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              RegistryPreview
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneProvider
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -299,120 +282,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                DocumentLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsEditSupported
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsNewSupported
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ViewFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ViewFactory
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ViewFactory
-      </Id>
-      <PackageId>
-        QsciPck
-      </PackageId>
-      <ComponentId>
-        ScintillaTextEditor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Language
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                C++
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseFolding
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
+                SceneProvider
               </Value>
             </Data>
           </AttributeInfo>
@@ -420,13 +290,13 @@ See 'License.txt' for license information
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        i2d::ISceneController
       </InterfaceId>
       <ComponentId>
-        App
+        SceneProvider
       </ComponentId>
     </Interface>
     <Interface>
@@ -434,15 +304,7 @@ See 'License.txt' for license information
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        App
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        idoc::IDocumentManager
-      </InterfaceId>
-      <ComponentId>
-        App
+        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>
@@ -450,7 +312,31 @@ See 'License.txt' for license information
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        App
+        VisualRegistryScenographer
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IObserver
+      </InterfaceId>
+      <ComponentId>
+        VisualRegistryScenographer
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqt2d::ISceneProvider
+      </InterfaceId>
+      <ComponentId>
+        SceneProvider
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtdoc::IPrintable
+      </InterfaceId>
+      <ComponentId>
+        SceneProvider
       </ComponentId>
     </Interface>
     <Interface>
@@ -458,15 +344,7 @@ See 'License.txt' for license information
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        App
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        App
+        SceneProvider
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

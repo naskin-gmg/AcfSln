@@ -273,6 +273,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Compositor.qrc"
+				>
+			</File>
+			<File
 				RelativePath="..\VC\Compositor.rc.xtracf"
 				>
 				<FileConfiguration
@@ -310,6 +314,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\Compositor.rc"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\qrc_Compositor.cpp"
 				>
 			</File>
 		</Filter>

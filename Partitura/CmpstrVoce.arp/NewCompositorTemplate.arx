@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1018
+          1346
         </Number>
         <Description>
           ACF
@@ -15,255 +15,24 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
-    <Element>
-      <Id>
-        App
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        MultiDocApp
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="6">
-          <AttributeInfo>
-            <Id>
-              AppName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ScintilaEditor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Company
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CopyrightText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
-All rights reserved
-This tool is part of ACF Solutions project
-See 'License.txt' for license information
-							</Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocumentTemplates
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  DocumentTemplate
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial (Dynamic)
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SplashScreenImage
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentFactory
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        TextDocument
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              DefaultText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                void main(){}
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentLoader
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        TextFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TypeDescriptions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Text file
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="8">
     <Element>
       <Id>
         DocumentTemplate
       </Id>
       <PackageId>
-        BasePck
+        QtPck
       </PackageId>
       <ComponentId>
-        SingleDocumentTemplate
+        ExtendedDocumentTemplate
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
@@ -280,7 +49,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                DocumentFactory
+                VisualRegistry
               </Value>
             </Data>
           </AttributeInfo>
@@ -299,7 +68,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                DocumentLoader
+                RegistryLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -356,7 +125,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                ViewFactory
+                VisualRegistryView
               </Value>
             </Data>
           </AttributeInfo>
@@ -365,25 +134,60 @@ See 'License.txt' for license information
     </Element>
     <Element>
       <Id>
-        ViewFactory
+        PackagesLoader
       </Id>
       <PackageId>
-        QsciPck
+        QtPck
       </PackageId>
       <ComponentId>
-        ScintillaTextEditor
+        PackagesLoader
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              Language
+              ConfigFilePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ConfigFilePath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -393,16 +197,109 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                C++
+                RegistryLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Preview
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        RegistryPreview
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              CommandFileName
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              PreviewCommandFile
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnvironmentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseFolding
+              VersionInfo
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RegistryCodeSaver
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        RegistryCodeSaver
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              RegistriesManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -412,7 +309,285 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RegistryConsistInfo
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        RegistryConsistInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              EnvironmentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
                 true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RegistryLoader
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        RegistryLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VisualRegistry
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        VisualRegistry
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VisualRegistryView
+      </Id>
+      <PackageId>
+        CmpstrVoce
+      </PackageId>
+      <ComponentId>
+        VisualRegistryView
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryConsistInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindow
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              MainWindow
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              QuickHelpViewer
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              QuickHelpViewer
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryCodeSaver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryCodeSaver
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryPreview
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Preview
               </Value>
             </Data>
           </AttributeInfo>
@@ -420,53 +595,69 @@ See 'License.txt' for license information
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
-    <Interface>
-      <InterfaceId>
-        ibase::IApplication
-      </InterfaceId>
-      <ComponentId>
-        App
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        App
+        DocumentTemplate
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        idoc::IDocumentManager
+        icmpstr::IRegistryConsistInfo
       </InterfaceId>
       <ComponentId>
-        App
+        RegistryConsistInfo
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IModel
+        icomp::IComponentEnvironmentManager
       </InterfaceId>
       <ComponentId>
-        App
+        PackagesLoader
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iqtgui::IGuiObject
+        icomp::IComponentStaticInfo
       </InterfaceId>
       <ComponentId>
-        App
+        PackagesLoader
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        istd::IChangeable
+        icomp::IMetaInfoManager
       </InterfaceId>
       <ComponentId>
-        App
+        PackagesLoader
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        icomp::IRegistriesManager
+      </InterfaceId>
+      <ComponentId>
+        PackagesLoader
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        icomp::IRegistryLoader
+      </InterfaceId>
+      <ComponentId>
+        PackagesLoader
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        idoc::IDocumentTemplate
+      </InterfaceId>
+      <ComponentId>
+        DocumentTemplate
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
