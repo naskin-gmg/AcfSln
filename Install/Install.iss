@@ -31,8 +31,6 @@ VersionInfoVersion=$AcfVersion:1$
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfSlnComp
-Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
-Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#EXTLIBDIR}\Microsoft\Redist\Debug$CompilerName$\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#EXTLIBDIR}\Microsoft\Redist\Release$CompilerName$\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: acfSlnComp
