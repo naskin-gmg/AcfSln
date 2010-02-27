@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1276
+          1380
         </Number>
         <Description>
           ACF
@@ -15,82 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
-    <Element>
-      <ComponentName>
-        ComposedParamsSet
-      </ComponentName>
-      <X>
-        -231
-      </X>
-      <X>
-        25
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitor
-      </ComponentName>
-      <X>
-        169.586
-      </X>
-      <X>
-        127
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileProcessing
-      </ComponentName>
-      <X>
-        259.26
-      </X>
-      <X>
-        -0.1005
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Hotfolder
-      </ComponentName>
-      <X>
-        -34.0624
-      </X>
-      <X>
-        1.41421
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderModel
-      </ComponentName>
-      <X>
-        -55
-      </X>
-      <X>
-        -285
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderParams
-      </ComponentName>
-      <X>
-        113.586
-      </X>
-      <X>
-        -156.414
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         HotfolderStateModel
       </ComponentName>
       <X>
-        17
+        950
       </X>
       <X>
-        -68
+        300
       </X>
     </Element>
     <Element>
@@ -98,43 +32,10 @@
         HotfolderStatistics
       </ComponentName>
       <X>
-        17
+        375
       </X>
       <X>
-        108
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MonitoringSessions
-      </ComponentName>
-      <X>
-        171
-      </X>
-      <X>
-        252
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MonitoringSessionsSet
-      </ComponentName>
-      <X>
-        -414
-      </X>
-      <X>
-        257
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputFileRenaming
-      </ComponentName>
-      <X>
-        -250
-      </X>
-      <X>
-        129
+        300
       </X>
     </Element>
     <Element>
@@ -142,10 +43,10 @@
         StateModel
       </ComponentName>
       <X>
-        -231
+        650
       </X>
       <X>
-        26
+        300
       </X>
     </Element>
   </PositionMap>

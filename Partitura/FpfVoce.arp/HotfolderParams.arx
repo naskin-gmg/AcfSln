@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1268
+          1378
         </Number>
         <Description>
           ACF
@@ -291,7 +291,7 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+    Parameter for the hotfolder. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
   </Description>
   <Keywords>
     

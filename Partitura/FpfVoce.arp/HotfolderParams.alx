@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1268
+          1378
         </Number>
         <Description>
           ACF
@@ -15,137 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
-    <Element>
-      <ComponentName>
-        ComposedParamsSet
-      </ComponentName>
-      <X>
-        331
-      </X>
-      <X>
-        -156
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DefaulDocumentFlattener
-      </ComponentName>
-      <X>
-        426
-      </X>
-      <X>
-        -55
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParam
-      </ComponentName>
-      <X>
-        -49
-      </X>
-      <X>
-        9
-      </X>
-    </Element>
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        -8
+        700
       </X>
       <X>
-        44
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryParam
-      </ComponentName>
-      <X>
-        129
-      </X>
-      <X>
-        -88
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryParamsManager
-      </ComponentName>
-      <X>
-        -8
-      </X>
-      <X>
-        -172
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryParamsSet
-      </ComponentName>
-      <X>
-        286
-      </X>
-      <X>
-        -177
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryPath
-      </ComponentName>
-      <X>
-        499
-      </X>
-      <X>
-        -174
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicDirectoryMonitorParams
-      </ComponentName>
-      <X>
-        -156
-      </X>
-      <X>
-        238
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicDirectoryParam
-      </ComponentName>
-      <X>
-        186
-      </X>
-      <X>
-        -92
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicParams
-      </ComponentName>
-      <X>
-        -108
-      </X>
-      <X>
-        -29
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParam
-      </ComponentName>
-      <X>
-        124
-      </X>
-      <X>
-        -77
+        125
       </X>
     </Element>
     <Element>
@@ -153,21 +32,10 @@
         HotfolderId
       </ComponentName>
       <X>
-        -217
+        350
       </X>
       <X>
-        47
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderInputParamsGui
-      </ComponentName>
-      <X>
-        228
-      </X>
-      <X>
-        42
+        425
       </X>
     </Element>
     <Element>
@@ -175,10 +43,10 @@
         HotfolderParams
       </ComponentName>
       <X>
-        -260
+        350
       </X>
       <X>
-        -83
+        250
       </X>
     </Element>
     <Element>
@@ -186,76 +54,10 @@
         InputDirectories
       </ComponentName>
       <X>
-        -7
+        325
       </X>
       <X>
-        -216
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputParams
-      </ComponentName>
-      <X>
-        -258
-      </X>
-      <X>
-        -83
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputParams2
-      </ComponentName>
-      <X>
-        -116
-      </X>
-      <X>
-        -91
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputPathManager
-      </ComponentName>
-      <X>
-        -116
-      </X>
-      <X>
-        80
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        512
-      </X>
-      <X>
-        138
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirector&lt;
-      </ComponentName>
-      <X>
-        129
-      </X>
-      <X>
-        -88
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirectories
-      </ComponentName>
-      <X>
-        129
-      </X>
-      <X>
-        -88
+        25
       </X>
     </Element>
     <Element>
@@ -263,65 +65,10 @@
         OutputDirectory
       </ComponentName>
       <X>
-        131
+        75
       </X>
       <X>
-        -81
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsManager
-      </ComponentName>
-      <X>
-        53
-      </X>
-      <X>
-        -148
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectableParamsSet
-      </ComponentName>
-      <X>
-        -353
-      </X>
-      <X>
-        98
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StaticDirectoryMonitorParams
-      </ComponentName>
-      <X>
-        197
-      </X>
-      <X>
-        236
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StaticParams
-      </ComponentName>
-      <X>
-        202
-      </X>
-      <X>
-        106
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        WarningDirectories
-      </ComponentName>
-      <X>
-        179
-      </X>
-      <X>
-        -28
+        25
       </X>
     </Element>
   </PositionMap>

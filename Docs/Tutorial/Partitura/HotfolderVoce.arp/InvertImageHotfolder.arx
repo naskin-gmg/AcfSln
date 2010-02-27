@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1288
+          1371
         </Number>
         <Description>
           ACF
@@ -15,53 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="2">
     <Element>
       <Id>
-        BitmapLoader
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        BitmapLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        BitmapPreviewGenerator
+        ImageProcessingHotfolder
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        BitmapPreviewGenerator
+        ImageProcessingHotfolder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -70,96 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Hotfolder
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        Hotfolder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="7">
-          <AttributeInfo>
-            <Id>
-              AcceptPatterns
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.jpeg
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InputData
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputFileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -178,45 +52,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputData
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputFileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Processir
+              Processor
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -233,27 +69,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -289,88 +104,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        OutputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        PreviewBinder
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ModelBinder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Model
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Hotfolder/HotfolderStateModel
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Observers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  BitmapPreviewGenerator
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
