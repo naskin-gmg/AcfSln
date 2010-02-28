@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1378
+          1381
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        700
+        925
       </X>
       <X>
-        125
+        325
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         HotfolderId
       </ComponentName>
       <X>
-        350
+        575
       </X>
       <X>
-        425
+        625
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         HotfolderParams
       </ComponentName>
       <X>
-        350
+        575
       </X>
       <X>
-        250
+        450
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         InputDirectories
       </ComponentName>
       <X>
-        325
+        550
       </X>
       <X>
-        25
+        225
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         OutputDirectory
       </ComponentName>
       <X>
-        75
+        300
       </X>
       <X>
-        25
+        225
       </X>
     </Element>
   </PositionMap>
