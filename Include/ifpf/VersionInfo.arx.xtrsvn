@@ -64,14 +64,17 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									0.2.0
 								</Value>
-								<Value>
-									0.3.0
-								</Value>
-							</Values>
+                <Value>
+                  0.3.0
+                </Value>
+                <Value>
+                  0.3.1
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -88,14 +91,17 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									127
 								</Value>
-								<Value>
-									144
-								</Value>
-							</Values>
+                <Value>
+                  144
+                </Value>
+                <Value>
+                  148
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
