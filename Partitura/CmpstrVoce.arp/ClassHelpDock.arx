@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1253
+          1383
         </Number>
         <Description>
           ACF
@@ -89,7 +89,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ClassHelpProvider
@@ -111,14 +111,30 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-							MetaInfoManager
-						</Id>
+              MetaInfoManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-							MetaInfoManager
-						</ExportId>
+              MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PackagesLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              PackagesLoader
+            </ExportId>
             <Data>
               <IsEnabled>
                 false

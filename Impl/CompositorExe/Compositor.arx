@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1363
+          1383
         </Number>
         <Description>
           ACF
@@ -800,10 +800,29 @@ See 'License.txt' for license information
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                CompositorTemplate
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PackagesLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
