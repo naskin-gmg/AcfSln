@@ -65,7 +65,7 @@
         DocumentManagerModelBinder
       </ComponentName>
       <X>
-        950
+        600
       </X>
       <X>
         50
@@ -76,10 +76,10 @@
         ElementInfoBinder
       </ComponentName>
       <X>
-        198
+        200
       </X>
       <X>
-        245
+        250
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         SelectedElementInfo
       </ComponentName>
       <X>
-        198
+        200
       </X>
       <X>
-        145
+        150
       </X>
     </Element>
     <Element>
@@ -142,7 +142,7 @@
         VersionInfo
       </ComponentName>
       <X>
-        1075
+        1050
       </X>
       <X>
         150
