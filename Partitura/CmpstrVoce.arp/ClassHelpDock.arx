@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1253
+          1389
         </Number>
         <Description>
           ACF
@@ -111,14 +111,14 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-							MetaInfoManager
-						</Id>
+              MetaInfoManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-							MetaInfoManager
-						</ExportId>
+              MetaInfoManager
+            </ExportId>
             <Data>
               <IsEnabled>
                 false

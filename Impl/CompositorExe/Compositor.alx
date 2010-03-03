@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1363
+          1389
         </Number>
         <Description>
           ACF
@@ -54,7 +54,7 @@
         DocumentManagerListener
       </ComponentName>
       <X>
-        175
+        200
       </X>
       <X>
         50
@@ -76,10 +76,10 @@
         ElementInfoBinder
       </ComponentName>
       <X>
-        175
+        198
       </X>
       <X>
-        250
+        245
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         SelectedElementInfo
       </ComponentName>
       <X>
-        175
+        198
       </X>
       <X>
-        150
+        145
       </X>
     </Element>
     <Element>
