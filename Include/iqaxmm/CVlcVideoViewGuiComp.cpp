@@ -82,7 +82,7 @@ bool CVlcVideoViewGuiComp::OpenMediumUrl(const istd::CString& url, bool autoPlay
 			layoutPtr->addWidget(m_vlcWidgetPtr);
 		}
 
-		istd::CChangeNotifier notifier(this, CF_STATUS);
+		istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
 		m_vlcInputPtr = m_vlcWidgetPtr->input();
 
@@ -168,6 +168,8 @@ double CVlcVideoViewGuiComp::GetCurrentPosition() const
 bool CVlcVideoViewGuiComp::SetCurrentPosition(double position)
 {
 	if (m_vlcInputPtr != NULL){
+		istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
+
 		m_vlcInputPtr->SetTime(int(position * 1000));
 
 		return true;

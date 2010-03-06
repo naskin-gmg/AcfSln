@@ -390,6 +390,8 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 	}
 
 	if ((m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
+		istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
+
 		if (av_seek_frame(
 					m_formatContextPtr,
 					m_videoStreamId,

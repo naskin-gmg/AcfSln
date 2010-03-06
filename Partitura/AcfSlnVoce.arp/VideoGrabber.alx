@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1216
+          1393
         </Number>
         <Description>
           ACF
@@ -15,27 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        679
-      </X>
-      <X>
-        -32
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         ControllerBinder
       </ComponentName>
       <X>
-        27
+        425
       </X>
       <X>
-        22
+        375
       </X>
     </Element>
     <Element>
@@ -43,10 +32,10 @@
         ControllerGui
       </ComponentName>
       <X>
-        362
+        775
       </X>
       <X>
-        72
+        375
       </X>
     </Element>
     <Element>
@@ -54,10 +43,10 @@
         VideoDecoder
       </ComponentName>
       <X>
-        363
+        425
       </X>
       <X>
-        -34
+        225
       </X>
     </Element>
   </PositionMap>

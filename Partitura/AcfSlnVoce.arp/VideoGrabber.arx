@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1216
+          1393
         </Number>
         <Description>
           ACF
@@ -184,7 +184,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="7">
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         imm::IMediaController
@@ -204,6 +204,14 @@
     <Interface>
       <InterfaceId>
         imm::IVideoInfo
+      </InterfaceId>
+      <ComponentId>
+        VideoDecoder
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         VideoDecoder
