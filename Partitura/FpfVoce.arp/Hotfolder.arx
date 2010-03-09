@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1380
+          1398
         </Number>
         <Description>
           ACF
@@ -828,7 +828,7 @@
     </Component>
   </ExportedComponents>
   <Description>
-    Basic registry for describing a hotfolder
+    Basic definition of a hotfolder
   </Description>
   <Keywords>
     Hotfolder File Processing Directory Monitoring

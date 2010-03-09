@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1389
+          1398
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="12">
+        <AttributeInfoMap count="13">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -49,13 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor
-
-Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
-All rights reserved
-
-This tool is a part of ACF Solutions project
-See 'License.txt' for license information
+                ACF Registry Editor&#10;&#10;Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -93,13 +87,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor
-
-&#169; 2010 Witold Gantzke &amp; Kirill Lepskiy
-All rights reserved
-
-This tool is part of ACF Solutions project
-See 'License.txt' for license information
+                ACF Registry Editor&#10;&#10;&#169; 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is part of ACF Solutions project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -146,6 +134,25 @@ See 'License.txt' for license information
           <AttributeInfo>
             <Id>
               IsCopyPathVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsOpenContainingFolderVisible
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
