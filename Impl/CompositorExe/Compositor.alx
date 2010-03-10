@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1398
+          1399
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         Application
@@ -32,10 +32,21 @@
         AttributeEditorDock
       </ComponentName>
       <X>
-        375
+        350
       </X>
       <X>
         450
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComponentSelection
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        200
       </X>
     </Element>
     <Element>
@@ -47,39 +58,6 @@
       </X>
       <X>
         775
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentManagerListener
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        50
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentManagerModelBinder
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        50
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ElementInfoBinder
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        250
       </X>
     </Element>
     <Element>
@@ -113,17 +91,6 @@
       </X>
       <X>
         400
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectedElementInfo
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        150
       </X>
     </Element>
     <Element>
