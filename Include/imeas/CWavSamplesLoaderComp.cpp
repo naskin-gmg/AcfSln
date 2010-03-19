@@ -16,7 +16,7 @@ namespace imeas
 
 #pragma pack(push, 1)
 
-	
+
 struct PrefixHeader
 {
 	char code[4];
