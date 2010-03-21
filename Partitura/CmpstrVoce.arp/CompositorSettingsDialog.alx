@@ -15,82 +15,27 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
-        Application
+        ConfigFileGui
       </ComponentName>
       <X>
         675
       </X>
       <X>
-        275
+        200
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AttributeEditorDock
+        PreviewCommandFileGui
       </ComponentName>
       <X>
-        250
+        950
       </X>
       <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComponentSelection
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        150
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositorTemplate
-      </ComponentName>
-      <X>
-        450
-      </X>
-      <X>
-        775
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        1125
-      </X>
-      <X>
-        775
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackageOverviewDock
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        775
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        QuickHelpDock
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <X>
-        475
+        325
       </X>
     </Element>
     <Element>
@@ -98,21 +43,43 @@
         Settings
       </ComponentName>
       <X>
-        800
+        675
       </X>
       <X>
-        625
+        525
       </X>
     </Element>
     <Element>
       <ComponentName>
-        VersionInfo
+        SettingsDialog
       </ComponentName>
       <X>
-        925
+        375
       </X>
       <X>
-        475
+        425
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SettingsGui
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        325
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SettingsPersistence
+      </ComponentName>
+      <X>
+        950
+      </X>
+      <X>
+        525
       </X>
     </Element>
   </PositionMap>

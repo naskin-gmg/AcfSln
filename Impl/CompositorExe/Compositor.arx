@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1399
+          1415
         </Number>
         <Description>
           ACF
@@ -737,7 +737,7 @@
         CmpstrVoce
       </PackageId>
       <ComponentId>
-        CompositorSettings
+        CompositorSettingsDialog
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -749,7 +749,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Log
+              ApplicationInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -762,7 +762,7 @@
                 true
               </IsEnabled>
               <Value>
-                LogDock
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
