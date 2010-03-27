@@ -19,7 +19,7 @@ namespace ifpf
 /**
 	Interface for a hotfolder's state model.
 */
-class IHotfolder: virtual public iser::ISerializable
+class IHotfolderProcessingInfo: virtual public iser::ISerializable
 {
 public:
 	enum ChangeFlags

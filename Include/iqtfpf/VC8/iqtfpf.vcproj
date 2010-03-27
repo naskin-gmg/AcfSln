@@ -216,6 +216,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderContainerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderContainerGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderGuiComp.cpp"
 				>
 			</File>
@@ -232,11 +240,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.cpp"
+				RelativePath="..\CHotfolderShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.moc"
+				RelativePath="..\CHotfolderShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowScenographerComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowScenographerComp.moc"
 				>
 			</File>
 			<File
@@ -290,6 +306,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderContainerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderGuiComp.h"
 				>
 			</File>
@@ -298,7 +318,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderWorkflowGuiComp.h"
+				RelativePath="..\CHotfolderShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowScenographerComp.h"
 				>
 			</File>
 			<File
@@ -341,6 +365,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderContainerGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderGuiComp.ui"
 				>
 			</File>
@@ -375,6 +403,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CHotfolderContainerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CHotfolderGuiComp.cpp"
 				>
 			</File>
@@ -383,7 +415,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CHotfolderWorkflowGuiComp.cpp"
+				RelativePath="..\generated\moc_CHotfolderShape.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CHotfolderWorkflowScenographerComp.cpp"
 				>
 			</File>
 			<File
@@ -404,6 +440,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CDirectoryMonitorParamsGui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CHotfolderContainerGuiComp.h"
 				>
 			</File>
 			<File

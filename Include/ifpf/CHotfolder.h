@@ -18,7 +18,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/CHotfolderProcessingItem.h"
 #include "ifpf/CMonitoringSession.h"
 
@@ -30,7 +30,7 @@ namespace ifpf
 /**
 	Implementation of the dynamic data model of the hotfolder.
 */
-class CHotfolder: public ifpf::IHotfolder
+class CHotfolder: virtual public ifpf::IHotfolderProcessingInfo
 {
 public:
 	CHotfolder();
@@ -42,7 +42,7 @@ public:
 	virtual bool ItemExists(const istd::CString& inputFilePath, const istd::CString& outputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr = NULL) const;
 	virtual bool ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const;
 
-	// reimplemented (ifpf::IHotfolder)
+	// reimplemented (ifpf::IHotfolderProcessingInfo)
 	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath);
 	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr);
 	virtual int GetProcessingItemsCount() const;

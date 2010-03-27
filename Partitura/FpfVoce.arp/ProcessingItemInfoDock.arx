@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1276
+          1415
         </Number>
         <Description>
           ACF
@@ -153,9 +153,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Compositor application used to graphical edit ACF registry files
+    Dock widget for processing item info UI
   </Description>
   <Keywords>
-    ACF Compositor Editor ARX
+    Hotfolder UI Processing Info Dock
   </Keywords>
 </Acf>

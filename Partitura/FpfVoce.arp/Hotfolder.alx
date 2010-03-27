@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1398
+          1415
         </Number>
         <Description>
           ACF
@@ -40,24 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Hotfolder
-      </ComponentName>
-      <X>
-        625
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         HotfolderModel
       </ComponentName>
       <X>
-        600
+        575
       </X>
       <X>
-        100
+        150
       </X>
     </Element>
     <Element>
@@ -73,10 +62,21 @@
     </Element>
     <Element>
       <ComponentName>
+        HotfolderProcessor
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        425
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         HotfolderStateModel
       </ComponentName>
       <X>
-        400
+        375
       </X>
       <X>
         275
@@ -98,7 +98,7 @@
         MonitoringSessionsSet
       </ComponentName>
       <X>
-        250
+        225
       </X>
       <X>
         675
@@ -109,7 +109,7 @@
         OutputFileRenaming
       </ComponentName>
       <X>
-        425
+        375
       </X>
       <X>
         550

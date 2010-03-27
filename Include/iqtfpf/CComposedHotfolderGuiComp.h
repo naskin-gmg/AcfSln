@@ -15,7 +15,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IHotfolderProcessingItem.h"
 
 

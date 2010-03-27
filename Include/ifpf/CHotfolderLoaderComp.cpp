@@ -7,7 +7,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 
 
 namespace ifpf

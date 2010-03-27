@@ -12,7 +12,7 @@
 
 // AcfSln includes
 #include "ifpf/IHotfolderStatistics.h"
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 
 
 namespace ifpf
@@ -25,10 +25,10 @@ namespace ifpf
 */
 class CHotfolderStatistics: 
 			virtual public ifpf::IHotfolderStatistics,
-			public imod::TSingleModelObserverBase<ifpf::IHotfolder>
+			public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo>
 {
 public:
-	typedef imod::TSingleModelObserverBase<ifpf::IHotfolder> BaseClass;
+	typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo> BaseClass;
 
 	CHotfolderStatistics();
 

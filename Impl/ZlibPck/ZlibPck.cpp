@@ -11,7 +11,11 @@ I_EXPORT_DEFAULT_SERVICES;
 
 I_EXPORT_PACKAGE("Zlib", "Package based on compression library ZLIB", "ZLIB Compression File Archive Load Save");
 
-I_EXPORT_COMPONENT(GzXmlFileSerializer, "Compressed XML file serializer", "Compression Compressed Serializer File Archive Load Save GZ ZLIB ZIP");
+I_EXPORT_COMPONENT(
+			GzXmlFileSerializer,
+			"Compressed XML file serializer",
+			"Compression Compressed Serializer File Archive Load Save GZ ZLIB ZIP",
+			icomp::IComponentStaticInfo::CCT_PERSISTENCY);
 
 
 } // namespace ZlibPck

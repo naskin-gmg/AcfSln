@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1276
+          1415
         </Number>
         <Description>
           ACF
@@ -15,27 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="54">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         App
       </ComponentName>
       <X>
-        67
+        450
       </X>
       <X>
-        -243
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        568
-      </X>
-      <X>
-        -225
+        225
       </X>
     </Element>
     <Element>
@@ -43,208 +32,10 @@
         ApplicationSettingsProvider
       </ComponentName>
       <X>
-        -462
+        125
       </X>
       <X>
-        -239
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeDock
-      </ComponentName>
-      <X>
-        144
-      </X>
-      <X>
-        4
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeEditor
-      </ComponentName>
-      <X>
-        179
-      </X>
-      <X>
-        199
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeEditorDock
-      </ComponentName>
-      <X>
-        108
-      </X>
-      <X>
-        70
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositorTemplate
-      </ComponentName>
-      <X>
-        412
-      </X>
-      <X>
-        226
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DockWidgetGui
-      </ComponentName>
-      <X>
-        898
-      </X>
-      <X>
-        -183
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentManagerListener
-      </ComponentName>
-      <X>
-        249
-      </X>
-      <X>
-        -335.414
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentMangerModelBinder
-      </ComponentName>
-      <X>
-        230
-      </X>
-      <X>
-        -183
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentTemplate
-      </ComponentName>
-      <X>
-        -222
-      </X>
-      <X>
-        -107
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DoxygenHelpFileProvider
-      </ComponentName>
-      <X>
-        218
-      </X>
-      <X>
-        221
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ElementInfoBinder
-      </ComponentName>
-      <X>
-        -204
-      </X>
-      <X>
-        -181
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        105
-      </X>
-      <X>
-        290
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistence
-      </ComponentName>
-      <X>
-        359
-      </X>
-      <X>
-        233
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistenceGui
-      </ComponentName>
-      <X>
-        128.976
-      </X>
-      <X>
-        201.457
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderDocumentTemplate
-      </ComponentName>
-      <X>
-        431
-      </X>
-      <X>
-        115
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderGui
-      </ComponentName>
-      <X>
-        -168
-      </X>
-      <X>
-        -107
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderLoader
-      </ComponentName>
-      <X>
-        -293.385
-      </X>
-      <X>
-        300.329
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderModelBinder
-      </ComponentName>
-      <X>
-        -136.252
-      </X>
-      <X>
-        108.473
+        25
       </X>
     </Element>
     <Element>
@@ -252,43 +43,10 @@
         InfoDock
       </ComponentName>
       <X>
-        506.877
+        1075
       </X>
       <X>
-        84.0265
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Instantiator
-      </ComponentName>
-      <X>
-        251
-      </X>
-      <X>
-        -120
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InvertImageHotfolder
-      </ComponentName>
-      <X>
-        114.055
-      </X>
-      <X>
-        102.08
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        406.397
-      </X>
-      <X>
-        1.31371
+        25
       </X>
     </Element>
     <Element>
@@ -296,65 +54,10 @@
         LogDock
       </ComponentName>
       <X>
-        54
+        625
       </X>
       <X>
-        -11
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MainWindowGui
-      </ComponentName>
-      <X>
-        337
-      </X>
-      <X>
-        -165
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        -136.252
-      </X>
-      <X>
-        108.473
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackageOverview
-      </ComponentName>
-      <X>
-        -38
-      </X>
-      <X>
-        324
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackageOverviewDock
-      </ComponentName>
-      <X>
-        -92.4142
-      </X>
-      <X>
-        226
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackagesLoader
-      </ComponentName>
-      <X>
-        -475
-      </X>
-      <X>
-        299
+        350
       </X>
     </Element>
     <Element>
@@ -362,21 +65,10 @@
         PersistentInvertImageHotfolder
       </ComponentName>
       <X>
-        -447.118
+        200
       </X>
       <X>
-        -12.9949
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Preview
-      </ComponentName>
-      <X>
-        -332
-      </X>
-      <X>
-        32
+        375
       </X>
     </Element>
     <Element>
@@ -384,32 +76,10 @@
         PreviewDock
       </ComponentName>
       <X>
-        334
+        925
       </X>
       <X>
-        -190
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemBinder
-      </ComponentName>
-      <X>
-        263
-      </X>
-      <X>
-        -8
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemGui
-      </ComponentName>
-      <X>
-        505
-      </X>
-      <X>
-        -107
+        350
       </X>
     </Element>
     <Element>
@@ -417,32 +87,10 @@
         ProcessingItemInfoBinder
       </ComponentName>
       <X>
-        127.095
+        1000
       </X>
       <X>
-        302.325
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemInfoDock
-      </ComponentName>
-      <X>
-        335
-      </X>
-      <X>
-        -233
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemInfoGui
-      </ComponentName>
-      <X>
-        496
-      </X>
-      <X>
-        -232
+        700
       </X>
     </Element>
     <Element>
@@ -450,109 +98,10 @@
         ProcessingItemPreviewBinder
       </ComponentName>
       <X>
-        -28.2691
+        550
       </X>
       <X>
-        153.321
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemPreviewDock
-      </ComponentName>
-      <X>
-        279
-      </X>
-      <X>
-        -107
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemPreviewGui
-      </ComponentName>
-      <X>
-        523
-      </X>
-      <X>
-        -124
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        QuickHelpDoc
-      </ComponentName>
-      <X>
-        228
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        QuickHelpDock
-      </ComponentName>
-      <X>
-        375
-      </X>
-      <X>
-        66
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        QuickHelpViewer
-      </ComponentName>
-      <X>
-        239
-      </X>
-      <X>
-        118
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Registry
-      </ComponentName>
-      <X>
-        -14
-      </X>
-      <X>
-        -264
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryEditor
-      </ComponentName>
-      <X>
-        -121
-      </X>
-      <X>
-        57
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryLoader
-      </ComponentName>
-      <X>
-        -680
-      </X>
-      <X>
-        -218
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectedElementInfo
-      </ComponentName>
-      <X>
-        -221
-      </X>
-      <X>
-        -343
+        575
       </X>
     </Element>
     <Element>
@@ -560,43 +109,10 @@
         SimpleMainGui
       </ComponentName>
       <X>
-        70
+        550
       </X>
       <X>
-        -147
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SingleDocWorkspaceGui
-      </ComponentName>
-      <X>
-        354
-      </X>
-      <X>
-        -172
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StandaloneApp
-      </ComponentName>
-      <X>
-        656
-      </X>
-      <X>
-        292
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TabContainer
-      </ComponentName>
-      <X>
-        98
-      </X>
-      <X>
-        -5
+        50
       </X>
     </Element>
     <Element>
@@ -604,10 +120,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -165.534
+        100
       </X>
       <X>
-        -241.402
+        225
       </X>
     </Element>
   </PositionMap>

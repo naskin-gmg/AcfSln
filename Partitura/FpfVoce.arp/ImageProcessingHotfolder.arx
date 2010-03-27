@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1380
+          1415
         </Number>
         <Description>
           ACF
@@ -324,7 +324,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder/HotfolderStateModel
+                Hotfolder
               </Value>
             </Data>
           </AttributeInfo>
@@ -353,10 +353,18 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        Hotfolder
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
         Hotfolder
@@ -379,21 +387,13 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="1">
     <Component>
       <ExportedId>
         HotfolderParams
       </ExportedId>
       <ComponentId>
         Hotfolder/HotfolderParams
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HotfolderStateModel
-      </ExportedId>
-      <ComponentId>
-        Hotfolder/HotfolderStateModel
       </ComponentId>
     </Component>
   </ExportedComponents>

@@ -3,10 +3,11 @@
 
 
 // ACF includes
-#include "istd/INamed.h"
+#include "iser/ISerializable.h"
+
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 
 
 namespace ifpf
@@ -16,16 +17,22 @@ namespace ifpf
 /**
 	Common interface for a hotfolder workflow static model.
 */
-class IHotfolderWorkflow: virtual public istd::INamed
+class IHotfolderWorkflow: virtual public iser::ISerializable
 {
 public:
-	typedef std::vector<ifpf::IHotfolder*> Hotfolders;
+	typedef std::vector<ifpf::IHotfolderProcessingInfo*> Hotfolders;
+
+	enum ChangeFlags
+	{
+		CF_HOTFOLDER_ADDED = 0x100000,
+		CF_HOTFOLDER_REMOVED = 0x200000
+	};
 
 	/**	
 		Add a hotfolder to the workflow.
-		The name of the hotfolder must be unique, otherwise no folder will be added an the function returns \cn null.
+		The name of the hotfolder must be unique, otherwise no folder will be added an the function returns \c null.
 	*/
-	virtual ifpf::IHotfolder* AddHotfolder(const istd::CString& hotfolderName) = 0;
+	virtual iprm::IParamsSet* AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId = istd::CString()) = 0;
 
 	/**	
 		Remove a hotfolder with the name \hotfolderName from the workflow.
@@ -35,17 +42,22 @@ public:
 	/**
 		Get the specified hotfolder instance.
 	*/
-	virtual ifpf::IHotfolder* GetHotfolder(const istd::CString& hotfolderName) const = 0;
+	virtual ifpf::IHotfolderProcessingInfo* GetHotfolderProcessingInfo(const istd::CString& hotfolderName) const = 0;
 
 	/**
 		Get workflow hotfolder list.
 	*/
-	virtual istd::CStringList GetHotfoldersList() const = 0;
+	virtual istd::CStringList GetHotfolderList() const = 0;
 
 	/**
 		Get working state of the hotfolder \c hotfolderName.
 	*/
 	virtual int GetWorkingState(const istd::CString& hotfolderName) const = 0;
+
+	/**
+		Get the list of possible hotfolder IDs.
+	*/
+	virtual istd::CStringList GetHotfolderIds() const = 0;
 };
 
 

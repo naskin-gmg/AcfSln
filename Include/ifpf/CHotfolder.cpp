@@ -55,7 +55,7 @@ bool CHotfolder::ItemExists(const ifpf::IHotfolderProcessingItem& processingItem
 }
 
 
-// reimplemented (ifpf::IHotfolder)
+// reimplemented (ifpf::IHotfolderProcessingInfo)
 
 const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath)
 {

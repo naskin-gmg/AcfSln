@@ -41,7 +41,7 @@ const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 
 void CHotfolderGuiComp::UpdateModel() const
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL && !IsUpdateBlocked()){
 		UpdateBlocker blocker(const_cast<CHotfolderGuiComp*>(this));
 	}
@@ -50,17 +50,17 @@ void CHotfolderGuiComp::UpdateModel() const
 
 void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(this, true);
 
-		if ((updateFlags & ifpf::IHotfolder::CF_CREATE) != 0 || (updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
+		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0 || (updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
 			RebuildItemList();
 
 			UpdateItemCommands();
 		}
 
-		if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0){
 			int itemsCount = objectPtr->GetProcessingItemsCount();
 			if (itemsCount > 0){
 				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemsCount - 1);
@@ -69,7 +69,7 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 			}
 		}
 
-		if ((updateFlags & ifpf::IHotfolder::CF_WORKING_STATE_CHANGED) != 0){
+		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED) != 0){
 			UpdateProcessingCommands();
 		}
 	}
@@ -84,7 +84,7 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 
 	UpdateProcessingCommands();
 
-	UpdateEditor(ifpf::IHotfolder::CF_CREATE);
+	UpdateEditor(ifpf::IHotfolderProcessingInfo::CF_CREATE);
 
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){
 		imod::IModel* hotfolderModelPtr = GetModelPtr();
@@ -249,7 +249,7 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 
 void CHotfolderGuiComp::UpdateProcessingCommands()
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		bool isWorking = objectPtr->IsWorking();
 
@@ -293,7 +293,7 @@ void CHotfolderGuiComp::RebuildItemList()
 		delete itemPtr;
 	}
 	
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int itemsCount = objectPtr->GetProcessingItemsCount();
 		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
@@ -338,7 +338,7 @@ QIcon CHotfolderGuiComp::GetStateIcon(int fileState) const
 
 void CHotfolderGuiComp::OnRun()
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		objectPtr->SetWorking(true);
 	}
@@ -347,7 +347,7 @@ void CHotfolderGuiComp::OnRun()
 
 void CHotfolderGuiComp::OnHold()
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		objectPtr->SetWorking(false);
 	}
@@ -357,9 +357,9 @@ void CHotfolderGuiComp::OnHold()
 void CHotfolderGuiComp::OnItemRemove()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		istd::CChangeNotifier changePtr(objectPtr, ifpf::IHotfolder::CF_FILE_REMOVED);
+		istd::CChangeNotifier changePtr(objectPtr, ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
 			objectPtr->RemoveProcessingItem(processingItems[itemIndex]);
 		}

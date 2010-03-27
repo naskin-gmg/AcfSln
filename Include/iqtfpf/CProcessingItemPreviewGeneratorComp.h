@@ -13,7 +13,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IHotfolderProcessingItem.h"
 
 
@@ -21,11 +21,11 @@ namespace iqtfpf
 {
 
 
-class CProcessingItemPreviewGeneratorComp: public icomp::CComponentBase, public imod::TSingleModelObserverBase<ifpf::IHotfolder>
+class CProcessingItemPreviewGeneratorComp: public icomp::CComponentBase, public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-	typedef imod::TSingleModelObserverBase<ifpf::IHotfolder> BaseClass2;
+	typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo> BaseClass2;
 
 	I_BEGIN_COMPONENT(CProcessingItemPreviewGeneratorComp)
 		I_REGISTER_INTERFACE(imod::IObserver);

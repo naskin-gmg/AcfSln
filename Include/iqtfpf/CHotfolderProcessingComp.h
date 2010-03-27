@@ -22,7 +22,7 @@
 
 // AcfSln includes
 #include "ifpf/IFileNaming.h"
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IHotfolderStatistics.h"
 #include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IMonitoringSessionManager.h"
@@ -124,7 +124,7 @@ private:
 	/**
 		Get hotfolder's state model.
 	*/
-	ifpf::IHotfolder* GetHotfolderStateModel() const;
+	ifpf::IHotfolderProcessingInfo* GetHotfolderStateModel() const;
 
 	/**
 		Get hotfolder statistics model

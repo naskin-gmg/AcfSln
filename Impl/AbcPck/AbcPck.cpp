@@ -23,7 +23,11 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 I_EXPORT_PACKAGE("Abc", "Application Business Components", "Qt Application Business Enterprise");
 
-I_EXPORT_COMPONENT(ServiceApplication, "An application as service/daemon", "Qt Application Service Daemon");
+I_EXPORT_COMPONENT(
+			ServiceApplication,
+			"An application as service/daemon",
+			"Qt Application Service Daemon",
+			icomp::IComponentStaticInfo::CCT_APPLICATION);
 
 
 } // namespace AbcPck

@@ -12,6 +12,7 @@
 #include "ifpf/CHotfolderStatistics.h"
 #include "ifpf/CHotfolderLoaderComp.h"
 #include "ifpf/CDirectoryMonitorParamsComp.h"
+#include "ifpf/CHotfolderWorkflowComp.h"
 
 
 /**
@@ -27,7 +28,7 @@ typedef icomp::TModelCompWrap<
 						ifpf::CDirectoryMonitorParams, iser::ISerializable, ifpf::IDirectoryMonitorParams> > DirectoryMonitorParams;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
-						ifpf::CHotfolder, iser::ISerializable, ifpf::IHotfolder> > HotfolderStateModel;
+						ifpf::CHotfolder, iser::ISerializable, ifpf::IHotfolderProcessingInfo> > HotfolderStateModel;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						ifpf::CMonitoringSessionsMap, iser::ISerializable, ifpf::IMonitoringSessionManager> > MonitoringSessions;
@@ -37,6 +38,8 @@ typedef icomp::TModelCompWrap<
 typedef ifpf::CHotfolderLoaderComp HotfolderLoader;
 
 typedef icomp::TModelCompWrap<ifpf::CDirectoryMonitorParamsComp> AttributedDirectoryMonitorParams;
+
+typedef icomp::TModelCompWrap<ifpf::CHotfolderWorkflowComp> HotfolderWorkflow;
 
 
 } // namespace FpfPck

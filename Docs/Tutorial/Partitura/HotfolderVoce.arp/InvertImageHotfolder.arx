@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1371
+          1409
         </Number>
         <Description>
           ACF
@@ -110,13 +110,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        ImageProcessingHotfolder
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        ImageProcessingHotfolder
       </ComponentId>
     </Interface>
     <Interface>
@@ -124,7 +132,7 @@
         iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        ImageProcessingHotfolder
       </ComponentId>
     </Interface>
     <Interface>
@@ -132,27 +140,11 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        ImageProcessingHotfolder
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
-    <Component>
-      <ExportedId>
-        HotfolderParams
-      </ExportedId>
-      <ComponentId>
-        Hotfolder/HotfolderParams
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HotfolderStateModel
-      </ExportedId>
-      <ComponentId>
-        Hotfolder/HotfolderStateModel
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     

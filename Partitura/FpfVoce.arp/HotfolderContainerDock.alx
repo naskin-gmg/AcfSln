@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1401
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        DockWidgetGui
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        250
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderContainerGui
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        400
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>

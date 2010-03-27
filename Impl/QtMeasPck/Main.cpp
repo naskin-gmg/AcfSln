@@ -24,7 +24,11 @@ I_EXPORT_DEFAULT_SERVICES;
 
 I_EXPORT_PACKAGE("AcfSln/Measure/GUI", "Qt dependent package for sampling, measurement acquisition and related thema", "Sampling Measurement Acquisition Qt GUI");
 
-I_EXPORT_COMPONENT(SamplesSequenceView, "Display sample sequence", "Diagram Polyline Samples Sequence Measurement GUI");
+I_EXPORT_COMPONENT(
+			SamplesSequenceView,
+			"Display sample sequence",
+			"Diagram Polyline Samples Sequence Measurement GUI",
+			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
 
 
 } // namespace QtMeasPck

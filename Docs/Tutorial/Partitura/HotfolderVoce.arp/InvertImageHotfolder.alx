@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1371
+          1409
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         ImageProcessingHotfolder
       </ComponentName>
       <X>
-        725
+        650
       </X>
       <X>
-        375
+        250
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         InvertOperator
       </ComponentName>
       <X>
-        450
+        375
       </X>
       <X>
-        375
+        250
       </X>
     </Element>
   </PositionMap>

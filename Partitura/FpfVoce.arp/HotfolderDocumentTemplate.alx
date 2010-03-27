@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1267
+          1398
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         Hotfolder
       </ComponentName>
       <X>
-        21
+        600
       </X>
       <X>
-        241
+        275
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         HotfolderDocumentTemplate
       </ComponentName>
       <X>
-        5
+        600
       </X>
       <X>
-        87
+        125
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         HotfolderGui
       </ComponentName>
       <X>
-        280
+        875
       </X>
       <X>
-        236
+        275
       </X>
     </Element>
     <Element>
@@ -54,43 +54,10 @@
         HotfolderLoader
       </ComponentName>
       <X>
-        -184
+        325
       </X>
       <X>
-        241
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderParams
-      </ComponentName>
-      <X>
-        -8
-      </X>
-      <X>
-        255
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderParamsGui
-      </ComponentName>
-      <X>
-        273
-      </X>
-      <X>
-        249
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlFileSerializer
-      </ComponentName>
-      <X>
-        -185
-      </X>
-      <X>
-        241
+        275
       </X>
     </Element>
   </PositionMap>

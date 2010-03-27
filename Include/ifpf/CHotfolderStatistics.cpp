@@ -85,16 +85,16 @@ void CHotfolderStatistics::BeforeUpdate(imod::IModel* modelPtr, int updateFlags,
 
 void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
 
-	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolder::CF_CREATE) != 0){
+	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0){
 		RebuildStatistics();
 	}
 
-	if ((updateFlags & ifpf::IHotfolder::CF_FILE_ADDED) != 0){
+	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0){
 		istd::CChangeNotifier changePtr(this);
 
 		int lastItemIndex = objectPtr->GetProcessingItemsCount() - 1;
@@ -177,7 +177,7 @@ void CHotfolderStatistics::ResetStatistics()
 
 void CHotfolderStatistics::RebuildStatistics()
 {
-	ifpf::IHotfolder* objectPtr = GetObjectPtr();
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}

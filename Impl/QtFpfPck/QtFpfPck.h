@@ -15,6 +15,8 @@
 #include "iqtfpf/CDirectoryItemGuiComp.h"
 #include "iqtfpf/CProcessingItemPreviewGeneratorComp.h"
 #include "iqtfpf/CFilePreviewGeneratorComp.h"
+#include "iqtfpf/CHotfolderWorkflowScenographerComp.h"
+#include "iqtfpf/CHotfolderContainerGuiComp.h"
 
 
 /**
@@ -24,7 +26,7 @@ namespace QtFpfPck
 {
 
 
-typedef iqtfpf::CHotfolderProcessingComp Hotfolder;
+typedef iqtfpf::CHotfolderProcessingComp HotfolderProcessor;
 typedef icomp::TModelCompWrap<iqtfpf::CDirectoryMonitorComp> DirectoryMonitor;
 typedef iqtfpf::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
 typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
@@ -35,6 +37,8 @@ typedef iqtfpf::CProcessingItemPreviewGuiComp ProcessingItemPreviewGui;
 typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
 typedef iqtfpf::CProcessingItemPreviewGeneratorComp ProcessingItemPreviewGenerator;
 typedef iqtfpf::CFilePreviewGeneratorComp FilePreviewGenerator;
+typedef iqtfpf::CHotfolderWorkflowScenographerComp HotfolderWorkflowScenographer;
+typedef iqtfpf::CHotfolderContainerGuiComp HotfolderContainerGui;
 
 
 } // namespace QtFpfPck

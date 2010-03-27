@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1371
+          1415
         </Number>
         <Description>
           ACF
@@ -49,7 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                InvertImageHotfolder/HotfolderParams
+                InvertImageHotfolder
               </Value>
             </Data>
           </AttributeInfo>
@@ -68,7 +68,7 @@
                 true
               </IsEnabled>
               <Value>
-                InvertImageHotfolder/HotfolderParams
+                InvertImageHotfolder
               </Value>
             </Data>
           </AttributeInfo>

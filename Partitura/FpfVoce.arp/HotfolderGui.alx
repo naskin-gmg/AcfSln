@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1288
+          1415
         </Number>
         <Description>
           ACF
@@ -15,27 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="16">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         ComposedHotfolderGui
       </ComponentName>
       <X>
-        -229
+        750
       </X>
       <X>
-        -45
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSetGui
-      </ComponentName>
-      <X>
-        -318
-      </X>
-      <X>
-        -44
+        150
       </X>
     </Element>
     <Element>
@@ -43,32 +32,10 @@
         DirectoryItemGui
       </ComponentName>
       <X>
-        24
+        775
       </X>
       <X>
-        245
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Hotfolder
-      </ComponentName>
-      <X>
-        58
-      </X>
-      <X>
-        244
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderDocumentTemplate
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        94
+        450
       </X>
     </Element>
     <Element>
@@ -76,32 +43,10 @@
         HotfolderGui
       </ComponentName>
       <X>
-        -187
+        744.678
       </X>
       <X>
-        98
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderLoader
-      </ComponentName>
-      <X>
-        -250
-      </X>
-      <X>
-        237
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderParams
-      </ComponentName>
-      <X>
-        3
-      </X>
-      <X>
-        240
+        299.265
       </X>
     </Element>
     <Element>
@@ -109,10 +54,10 @@
         HotfolderParamsGui
       </ComponentName>
       <X>
-        -440
+        375
       </X>
       <X>
-        97
+        300
       </X>
     </Element>
     <Element>
@@ -120,32 +65,10 @@
         HotfolderStatistics
       </ComponentName>
       <X>
-        -392
+        550
       </X>
       <X>
-        244
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        IconProvider
-      </ComponentName>
-      <X>
-        -183
-      </X>
-      <X>
-        232
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemGui
-      </ComponentName>
-      <X>
-        26
-      </X>
-      <X>
-        286
+        450
       </X>
     </Element>
     <Element>
@@ -153,10 +76,10 @@
         ProgressManager
       </ComponentName>
       <X>
-        51
+        1025
       </X>
       <X>
-        61
+        225
       </X>
     </Element>
     <Element>
@@ -164,10 +87,10 @@
         SettingsDialog
       </ComponentName>
       <X>
-        -479
+        500
       </X>
       <X>
-        -58
+        150
       </X>
     </Element>
     <Element>
@@ -175,10 +98,10 @@
         StateIcons
       </ComponentName>
       <X>
-        -180
+        1000
       </X>
       <X>
-        242
+        450
       </X>
     </Element>
     <Element>
@@ -186,10 +109,10 @@
         WorkingHotfolderParams
       </ComponentName>
       <X>
-        -748
+        205.678
       </X>
       <X>
-        -62
+        159.265
       </X>
     </Element>
   </PositionMap>

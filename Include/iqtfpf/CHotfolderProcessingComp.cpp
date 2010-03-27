@@ -115,7 +115,7 @@ bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& d
 
 void CHotfolderProcessingComp::run()
 {
-	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	ifpf::IHotfolderProcessingInfo* hotfolderStateModelPtr = GetHotfolderStateModel();
 	I_ASSERT(hotfolderStateModelPtr != NULL);
 
 	int workingIntervall = 100; // ms
@@ -171,7 +171,7 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 
 	isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
 
-	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	ifpf::IHotfolderProcessingInfo* hotfolderStateModelPtr = GetHotfolderStateModel();
 	I_ASSERT(hotfolderStateModelPtr != NULL);
 
 	// add file to hotfolder's model:
@@ -333,13 +333,13 @@ istd::CStringList CHotfolderProcessingComp::GetRemovedInputDirectories() const
 }
 
 
-ifpf::IHotfolder* CHotfolderProcessingComp::GetHotfolderStateModel() const
+ifpf::IHotfolderProcessingInfo* CHotfolderProcessingComp::GetHotfolderStateModel() const
 {
 	I_ASSERT(m_hotfolderStateCompPtr.IsValid());
 	I_ASSERT(m_hotfolderStateModelIdAttrPtr.IsValid());
 
 	if (m_hotfolderStateCompPtr.IsValid() && m_hotfolderStateModelIdAttrPtr.IsValid()){
-		ifpf::IHotfolder* stateModelPtr = dynamic_cast<ifpf::IHotfolder*>(m_hotfolderStateCompPtr->GetEditableParameter((*m_hotfolderStateModelIdAttrPtr).ToString()));
+		ifpf::IHotfolderProcessingInfo* stateModelPtr = dynamic_cast<ifpf::IHotfolderProcessingInfo*>(m_hotfolderStateCompPtr->GetEditableParameter((*m_hotfolderStateModelIdAttrPtr).ToString()));
 
 		return stateModelPtr;
 	}
@@ -417,7 +417,7 @@ istd::CString CHotfolderProcessingComp::GetHotfolderId() const
 
 ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile() const
 {
-	ifpf::IHotfolder* hotfolderStateModelPtr = GetHotfolderStateModel();
+	ifpf::IHotfolderProcessingInfo* hotfolderStateModelPtr = GetHotfolderStateModel();
 	I_ASSERT(hotfolderStateModelPtr != NULL);
 	if (hotfolderStateModelPtr == NULL){
 		return NULL;
@@ -514,7 +514,7 @@ CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp&
 
 void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0){
+	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
 		m_parent.m_processingQueueLock.Enter();
 	}
 }
@@ -522,7 +522,7 @@ void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* /*model
 
 void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if ((updateFlags & ifpf::IHotfolder::CF_FILE_REMOVED) != 0 || (updateFlags & istd::IChangeable::CF_ABORTED) != 0){
+	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0 || (updateFlags & istd::IChangeable::CF_ABORTED) != 0){
 		m_parent.m_processingQueueLock.Leave();
 	}
 }

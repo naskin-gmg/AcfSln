@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1288
+          1415
         </Number>
         <Description>
           ACF
@@ -311,7 +311,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               Model
@@ -345,6 +345,22 @@
               <Value>
                 HotfolderParamsGui
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WorkingDataFactory
+            </Id>
+            <Type>
+              icomp::CFactoryAttribute
+            </Type>
+            <ExportId>
+              HotfolderParamsFactory
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

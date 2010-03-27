@@ -23,7 +23,7 @@
 
 
 // AcfSln includes
-#include "ifpf/IHotfolder.h"
+#include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IHotfolderProcessingItem.h"
 #include "ifpf/IHotfolderStatistics.h"
 
@@ -35,7 +35,7 @@ namespace iqtfpf
 
 
 class CHotfolderGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolder>,
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolderProcessingInfo>,
 			public imod::CModelProxy,
 			virtual public ibase::ICommandsProvider
 {
@@ -44,7 +44,7 @@ class CHotfolderGuiComp:
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CHotfolderGuiComp,
-				ifpf::IHotfolder> BaseClass;
+				ifpf::IHotfolderProcessingInfo> BaseClass;
 	typedef imod::CModelProxy BaseClass2;
 
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
