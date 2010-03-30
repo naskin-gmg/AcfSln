@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1415
+          1422
         </Number>
         <Description>
           ACF
@@ -311,7 +311,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              Gui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ComposedHotfolderGui
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Model
@@ -344,6 +363,25 @@
               </IsEnabled>
               <Value>
                 HotfolderParamsGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ModelObserver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ComposedHotfolderGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -530,4 +568,7 @@
   <Keywords>
     
   </Keywords>
+  <Category>
+    0
+  </Category>
 </Acf>
