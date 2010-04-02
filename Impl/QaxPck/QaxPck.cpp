@@ -16,8 +16,7 @@ I_EXPORT_PACKAGE("Qax", "QActiveX based package", "Qt ActiveX QActiveX COM OLE W
 I_EXPORT_COMPONENT(
 			VlcVideoViewGui,
 			"Video widget based on VLC ActiveX",
-			"VLC Qt Widget GUI Video Media Multimedia Play",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_MULTIMEDIA);
+			"VLC Qt Widget GUI Video Media Multimedia Play");
 
 
 } // namespace QaxPck

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1324
+          1426
         </Number>
         <Description>
           ACF
@@ -15,148 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="37">
-    <Element>
-      <ComponentName>
-        AcquisitionFramework
-      </ComponentName>
-      <X>
-        -77
-      </X>
-      <X>
-        -63
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AcquisitionProcessorGui
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        -82
-      </X>
-    </Element>
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         Audio
       </ComponentName>
       <X>
-        853.942
+        925
       </X>
       <X>
-        -383.144
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AudioDialogLoader
-      </ComponentName>
-      <X>
-        599.846
-      </X>
-      <X>
-        -100.892
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AudioPersistenceGui
-      </ComponentName>
-      <X>
-        593.321
-      </X>
-      <X>
-        -251.314
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        405
-      </X>
-      <X>
-        -82
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapDialogLoader
-      </ComponentName>
-      <X>
-        646.51
-      </X>
-      <X>
-        -506.794
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapLoader
-      </ComponentName>
-      <X>
-        813.173
-      </X>
-      <X>
-        -605.283
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapPersistenceGui
-      </ComponentName>
-      <X>
-        350.551
-      </X>
-      <X>
-        -380.586
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapView
-      </ComponentName>
-      <X>
-        310.784
-      </X>
-      <X>
-        -558.74
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedGui
-      </ComponentName>
-      <X>
-        374
-      </X>
-      <X>
-        -249
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSet
-      </ComponentName>
-      <X>
-        -95
-      </X>
-      <X>
-        -291
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSetGui
-      </ComponentName>
-      <X>
-        -25
-      </X>
-      <X>
-        -196
+        325
       </X>
     </Element>
     <Element>
@@ -164,175 +32,10 @@
         DockWidgetGui
       </ComponentName>
       <X>
-        182.098
+        250
       </X>
       <X>
-        -220.902
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        EmptyParamsSet
-      </ComponentName>
-      <X>
-        -278
-      </X>
-      <X>
-        -200
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        -70
-      </X>
-      <X>
-        125
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParam
-      </ComponentName>
-      <X>
-        -65
-      </X>
-      <X>
-        -454
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParamGui
-      </ComponentName>
-      <X>
-        194
-      </X>
-      <X>
-        -451
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistence
-      </ComponentName>
-      <X>
-        242
-      </X>
-      <X>
-        -267
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistenceGui
-      </ComponentName>
-      <X>
-        -64
-      </X>
-      <X>
-        14
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        -364.113
-      </X>
-      <X>
-        -235.414
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageGui
-      </ComponentName>
-      <X>
-        148.492
-      </X>
-      <X>
-        -357.796
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        -250.316
-      </X>
-      <X>
-        -9.89949
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        748.119
-      </X>
-      <X>
-        -349.311
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MediaDialogLoader
-      </ComponentName>
-      <X>
-        -543.762
-      </X>
-      <X>
-        -401.087
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MediaLoader
-      </ComponentName>
-      <X>
-        -485.264
-      </X>
-      <X>
-        -36.7422
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MediaPersistenceGui
-      </ComponentName>
-      <X>
-        -181.38
-      </X>
-      <X>
-        -403.193
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PersistenceDock
-      </ComponentName>
-      <X>
-        111.723
-      </X>
-      <X>
-        -188.09
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PersistenceGui
-      </ComponentName>
-      <X>
-        339.507
-      </X>
-      <X>
-        -232.343
+        500
       </X>
     </Element>
     <Element>
@@ -340,65 +43,10 @@
         SamplesSequenceView
       </ComponentName>
       <X>
-        152
+        225
       </X>
       <X>
-        -387
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapFramework
-      </ComponentName>
-      <X>
-        547
-      </X>
-      <X>
-        -156
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StandaloneApp
-      </ComponentName>
-      <X>
-        -391.737
-      </X>
-      <X>
-        -241.831
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SurfaceView
-      </ComponentName>
-      <X>
-        482
-      </X>
-      <X>
-        -384
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VersionInfo
-      </ComponentName>
-      <X>
-        -370.524
-      </X>
-      <X>
-        -151.321
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VideoGrabber
-      </ComponentName>
-      <X>
-        -13.2619
-      </X>
-      <X>
-        -703.526
+        325
       </X>
     </Element>
     <Element>
@@ -406,21 +54,10 @@
         ViewBinder
       </ComponentName>
       <X>
-        594
+        625
       </X>
       <X>
-        -494
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        WavSamplesLoader
-      </ComponentName>
-      <X>
-        872.57
-      </X>
-      <X>
-        -100.409
+        175
       </X>
     </Element>
   </PositionMap>

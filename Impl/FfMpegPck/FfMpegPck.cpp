@@ -14,8 +14,7 @@ I_EXPORT_PACKAGE("Acf/Sln/FfMpeg", "Package based on FFMPEG library", "ImagingTo
 I_EXPORT_COMPONENT(
 			LibAvVideoDecoder,
 			"Video decoder based on libAv library",
-			"Video Decoder Controller LibAv Bitmap Frame Grab AVI MPEG",
-			icomp::IComponentStaticInfo::CCT_MULTIMEDIA);
+			"Video Decoder Controller LibAv Bitmap Frame Grab AVI MPEG");
 
 
 } // namespace FfMpegPck

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1199
+          1426
         </Number>
         <Description>
           ACF
@@ -598,9 +598,12 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Framework for basic image acquisition
   </Description>
   <Keywords>
-    
+    Image Processing Data Acquisition
   </Keywords>
+  <Category>
+    65
+  </Category>
 </Acf>

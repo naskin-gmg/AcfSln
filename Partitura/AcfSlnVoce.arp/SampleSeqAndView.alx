@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1284
+          1426
         </Number>
         <Description>
           ACF
@@ -15,27 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        BitmapView
-      </ComponentName>
-      <X>
-        -318
-      </X>
-      <X>
-        -44
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         GeneralSamplesSequence
       </ComponentName>
       <X>
-        217
+        825
       </X>
       <X>
-        -44
+        450
       </X>
     </Element>
     <Element>
@@ -43,10 +32,10 @@
         ModelBinder
       </ComponentName>
       <X>
-        117
+        600
       </X>
       <X>
-        -167
+        300
       </X>
     </Element>
     <Element>
@@ -54,10 +43,10 @@
         SamplesSequenceView
       </ComponentName>
       <X>
-        -68
+        375
       </X>
       <X>
-        -44
+        450
       </X>
     </Element>
   </PositionMap>

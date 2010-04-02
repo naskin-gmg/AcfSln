@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1324
+          1426
         </Number>
         <Description>
           ACF
@@ -383,9 +383,12 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Dock window with audio samples view
   </Description>
   <Keywords>
-    
+    Audio Sample View
   </Keywords>
+  <Category>
+    48
+  </Category>
 </Acf>

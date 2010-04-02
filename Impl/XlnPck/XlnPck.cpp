@@ -14,8 +14,7 @@ I_EXPORT_PACKAGE("Xln", "Xml processing package based on XERCES and XALAN", "XML
 I_EXPORT_COMPONENT(
 			XmlFileSerializer,
 			"XERCES based file loader serializing objects using XML format",
-			"File XERCES Loader Load Save Serializer Archive XML Format",
-			icomp::IComponentStaticInfo::CCT_PERSISTENCY);
+			"File XERCES Loader Load Save Serializer Archive XML Format");
 
 
 } // namespace XlnPck

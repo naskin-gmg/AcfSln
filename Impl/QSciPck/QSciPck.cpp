@@ -18,8 +18,7 @@ I_EXPORT_PACKAGE("Qsci", "QScintilla package", "QScintilla Qt Text");
 I_EXPORT_COMPONENT(
 			ScintillaTextEditor,
 			"Scintilla based text editor",
-			"Qt Text Editor GUI Scintilla",
-			icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Qt Text Editor GUI Scintilla");
 
 
 } // namespace QsciPck

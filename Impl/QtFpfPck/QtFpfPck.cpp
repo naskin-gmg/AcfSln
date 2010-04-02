@@ -27,79 +27,67 @@ I_EXPORT_PACKAGE("QtFpf", "Qt based package for File Processsing Framework", "Qt
 I_EXPORT_COMPONENT(
 			HotfolderProcessor,
 			"Implementation of the hotfolder processor",
-			"File Processing Hotfolder",
-			icomp::IComponentStaticInfo::CCT_DATA_PROCESSING);
+			"File Processing Hotfolder");
+
 I_EXPORT_COMPONENT(
 			DirectoryMonitor,
 			"This component observes changes in a given file folder",
-			"Qt File Dir Filter Observer",
-			icomp::IComponentStaticInfo::CCT_SERVICE);
+			"Qt File Dir Filter Observer");
 
 I_EXPORT_COMPONENT(
 			DirectoryMonitorParamsGui,
 			"Editor for directory monitor parameters",
-			"Qt File Dir Filter Observer Editor GUI Monitor",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Qt File Dir Filter Observer Editor GUI Monitor");
 
 I_EXPORT_COMPONENT(
 			HotfolderGui,
 			"Hotfolder view",
-			"Qt File Observer Editor View GUI Hotfolder",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Qt File Observer Editor View GUI Hotfolder");
 
 I_EXPORT_COMPONENT(
 			FileNaming,
 			"Component for file (re)nameing",
-			"Qt File Hotfolder Renaming Directory",
-			icomp::IComponentStaticInfo::CCT_SERVICE);
+			"Qt File Hotfolder Renaming Directory");
 
 I_EXPORT_COMPONENT(
 			ComposedHotfolderGui,
 			"UI for hotfolder visualization and setting editor",
-			"File Processing Hotfolder Editor View GUI",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"File Processing Hotfolder Editor View GUI");
 
 I_EXPORT_COMPONENT(
 			ProcessingItemInfoGui,
 			"GUI for the info a hotfolder processing item",
-			"File Processing Hotfolder Editor View GUI Item",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"File Processing Hotfolder Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
 			ProcessingItemPreviewGui,
 			"GUI for the graphical preview of a hotfolder processing item",
-			"File Processing Hotfolder Editor View GUI Item",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"File Processing Hotfolder Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
 			DirectoryItemGui,
 			"View sub-component for a hotfolder directory item",
-			"File Processing Hotfolder Editor View GUI Item",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"File Processing Hotfolder Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
 			ProcessingItemPreviewGenerator,
 			"Preview generator for a processing item",
-			"File Processing Hotfolder Preview Generator",
-			icomp::IComponentStaticInfo::CCT_SERVICE);
+			"File Processing Hotfolder Preview Generator");
 
 I_EXPORT_COMPONENT(
 			FilePreviewGenerator,
 			"Preview generator for a file",
-			"File Preview Generator",
-			icomp::IComponentStaticInfo::CCT_SERVICE);
+			"File Preview Generator");
 
 I_EXPORT_COMPONENT(
 			HotfolderWorkflowScenographer,
 			"Hotfolder workflow visualization",
-			"Hotfolder File Procesing Observer",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Hotfolder File Procesing Observer");
 
 I_EXPORT_COMPONENT(
 			HotfolderContainerGui,
 			"Hotfolder container UI",
-			"Hotfolder File Procesing Observer",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Hotfolder File Procesing Observer");
 
 
 } // namespace QtFpfPck

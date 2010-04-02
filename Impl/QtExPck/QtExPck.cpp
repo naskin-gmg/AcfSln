@@ -24,8 +24,7 @@ I_EXPORT_PACKAGE("QtExPck", "Acf-Solutions extended package based on Qt", "Acf-S
 I_EXPORT_COMPONENT(
 			TcpTerminalGui,
 			"Tcp client terminal",
-			"TCP Client Terminal Input Output Test",
-			icomp::IComponentStaticInfo::CCT_SERVICE);
+			"TCP Client Terminal Input Output Test");
 
 
 } // namespace QtExPck

@@ -26,8 +26,7 @@ I_EXPORT_PACKAGE("QwtPck", "Qwt package", "Qwt Qt 3D View");
 I_EXPORT_COMPONENT(
 			SurfaceView,
 			"3D-View component",
-			"Model Observer Parameter GUI Qt 3D Surface",
-			icomp::IComponentStaticInfo::CCT_GUI | icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION);
+			"Model Observer Parameter GUI Qt 3D Surface");
 
 
 } // namespace QwtPck

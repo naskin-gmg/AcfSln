@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1199
+          1426
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="36">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         AcquisitionProcessorGui
       </ComponentName>
       <X>
-        37
+        650
       </X>
       <X>
-        102
+        600
       </X>
     </Element>
     <Element>
@@ -32,32 +32,10 @@
         Application
       </ComponentName>
       <X>
-        -417
+        175
       </X>
       <X>
-        -229
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        -425
-      </X>
-      <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        -276
-      </X>
-      <X>
-        107
+        250
       </X>
     </Element>
     <Element>
@@ -65,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        494
+        1100
       </X>
       <X>
-        -224
+        275
       </X>
     </Element>
     <Element>
@@ -76,98 +54,10 @@
         BitmapView
       </ComponentName>
       <X>
-        -423
+        175
       </X>
       <X>
-        2
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ControlledBitmapView
-      </ComponentName>
-      <X>
-        -577
-      </X>
-      <X>
-        -87
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileCamera
-      </ComponentName>
-      <X>
-        -325
-      </X>
-      <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapColor
-      </ComponentName>
-      <X>
-        -500
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapGray
-      </ComponentName>
-      <X>
-        -250
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapGui
-      </ComponentName>
-      <X>
-        12
-      </X>
-      <X>
-        312
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParam
-      </ComponentName>
-      <X>
-        -225
-      </X>
-      <X>
-        362
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParamGui
-      </ComponentName>
-      <X>
-        -512
-      </X>
-      <X>
-        62
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParamGui2
-      </ComponentName>
-      <X>
-        -775
-      </X>
-      <X>
-        37
+        500
       </X>
     </Element>
     <Element>
@@ -175,10 +65,10 @@
         ImageDialogLoader
       </ComponentName>
       <X>
-        459
+        1050
       </X>
       <X>
-        -16
+        475
       </X>
     </Element>
     <Element>
@@ -186,21 +76,10 @@
         Info
       </ComponentName>
       <X>
-        -747.24
+        175
       </X>
       <X>
-        -226.451
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        -150
-      </X>
-      <X>
-        -112
+        125
       </X>
     </Element>
     <Element>
@@ -208,164 +87,10 @@
         LogTab
       </ComponentName>
       <X>
-        186
+        800
       </X>
       <X>
-        -230
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsColor
-      </ComponentName>
-      <X>
-        -475
-      </X>
-      <X>
-        62
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsGray
-      </ComponentName>
-      <X>
-        -475
-      </X>
-      <X>
-        137
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsMAnagerGui
-      </ComponentName>
-      <X>
-        25
-      </X>
-      <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsManager
-      </ComponentName>
-      <X>
-        -312
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsManagerGui
-      </ComponentName>
-      <X>
-        25
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Scene
-      </ComponentName>
-      <X>
-        -150
-      </X>
-      <X>
-        -12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SceneGui
-      </ComponentName>
-      <X>
-        -423
-      </X>
-      <X>
-        2
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectableParamGui
-      </ComponentName>
-      <X>
-        37
-      </X>
-      <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectableParameter
-      </ComponentName>
-      <X>
-        -337
-      </X>
-      <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapGui
-      </ComponentName>
-      <X>
-        106
-      </X>
-      <X>
-        15
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParams
-      </ComponentName>
-      <X>
-        -212
-      </X>
-      <X>
-        262
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParamsColor
-      </ComponentName>
-      <X>
-        -600
-      </X>
-      <X>
-        212
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParamsGray
-      </ComponentName>
-      <X>
-        -350
-      </X>
-      <X>
-        212
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParamsGui
-      </ComponentName>
-      <X>
-        12
-      </X>
-      <X>
-        212
+        250
       </X>
     </Element>
     <Element>
@@ -373,10 +98,10 @@
         SnapTab
       </ComponentName>
       <X>
-        -42
+        550
       </X>
       <X>
-        -104
+        375
       </X>
     </Element>
     <Element>
@@ -384,32 +109,10 @@
         Tabs
       </ComponentName>
       <X>
-        -142
+        450
       </X>
       <X>
-        -229
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        e
-      </ComponentName>
-      <X>
-        12
-      </X>
-      <X>
-        12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        s
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        12
+        250
       </X>
     </Element>
   </PositionMap>
