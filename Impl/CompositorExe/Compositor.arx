@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1415
+          1431
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="14">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -128,6 +128,25 @@
               </IsEnabled>
               <Value>
                 :/Icons/CompositorIcon.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconSize
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                32
               </Value>
             </Data>
           </AttributeInfo>

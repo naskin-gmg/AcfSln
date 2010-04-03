@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1346
+          1432
         </Number>
         <Description>
           ACF
@@ -15,7 +15,52 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
+    <Element>
+      <Id>
+        CommandsBinder
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        CommandsBinder
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              CommandProviders
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  VisualRegistryScenographer
+                </Value>
+                <Value>
+                  SceneProvider
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         SceneProvider
@@ -304,7 +349,7 @@
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        VisualRegistryScenographer
+        CommandsBinder
       </ComponentId>
     </Interface>
     <Interface>

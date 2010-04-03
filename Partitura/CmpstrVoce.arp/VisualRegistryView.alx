@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1346
+          1432
         </Number>
         <Description>
           ACF
@@ -15,16 +15,27 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="3">
+    <Element>
+      <ComponentName>
+        CommandsBinder
+      </ComponentName>
+      <X>
+        225
+      </X>
+      <X>
+        650
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         SceneProvider
       </ComponentName>
       <X>
-        300
+        375
       </X>
       <X>
-        200
+        225
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         VisualRegistryScenographer
       </ComponentName>
       <X>
-        875
+        925
       </X>
       <X>
-        574
+        475
       </X>
     </Element>
   </PositionMap>
