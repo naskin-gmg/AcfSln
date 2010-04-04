@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
@@ -13,18 +13,29 @@
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          165
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="3">
     <Element>
       <Id>
-        ConfigFileGui
+        Application
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        FileNameParamGui
+        MultiDocApp
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,28 +44,267 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        PreviewCommandFileGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        FileNameParamGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="14">
+          <AttributeInfo>
+            <Id>
+              AboutDescriptionText
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF Registry Editor&#10;&#10;Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CopyrightText
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF Registry Editor&#10;&#10;&#169; 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is part of ACF Solutions project&#10;See 'License.txt' for license information
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DocumentTemplates
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              CompositorTemplate
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Icons/CompositorIcon.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconSize
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                32
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsCopyPathVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsOpenContainingFolderVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LogoPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Icons/CompositorLogo.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              MainWindowsComponents
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SettingsGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Settings
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashScreenImage
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Images/CompositorSplashScreen
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -66,7 +316,7 @@
         CmpstrVoce
       </PackageId>
       <ComponentId>
-        CompositorSettings
+        CompositorSettingsDialog
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -75,69 +325,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SettingsDialog
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ModelDialogGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              DialogIconPath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                :/Icons/Settings.svg
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DialogTitle
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Settings
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Gui
+              ApplicationInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -150,13 +341,13 @@
                 true
               </IsEnabled>
               <Value>
-                SettingsGui
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Model
+              VersionInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -169,64 +360,7 @@
                 true
               </IsEnabled>
               <Value>
-                Settings
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelEditor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SettingsGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelObserver
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SettingsGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WorkingDataFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Settings
+                Application
               </Value>
             </Data>
           </AttributeInfo>
@@ -235,13 +369,13 @@
     </Element>
     <Element>
       <Id>
-        SettingsGui
+        VersionInfo
       </Id>
       <PackageId>
-        QtGuiPck
+        AcfSlnVoce
       </PackageId>
       <ComponentId>
-        ComposedParamsSetGui
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -253,151 +387,7 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              Editors
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  ConfigFileGui
-                </Value>
-                <Value>
-                  PreviewCommandFileGui
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Ids
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  ConfigFile
-                </Value>
-                <Value>
-                  PreviewCommandFile
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Names
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Configuration File
-                </Value>
-                <Value>
-                  ACF Command Path
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SettingsPersistence
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        SettingsPersistence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Object
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Settings
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RootKey
+              ApplicationName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -410,7 +400,45 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationSettings
+                ACF Compositor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Company
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
@@ -418,21 +446,37 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        iqtgui::IDialog
+        ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        SettingsDialog
+        Application
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iqtgui::IGuiObject
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        SettingsGui
+        VersionInfo
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        idoc::IMainWindowCommands
+      </InterfaceId>
+      <ComponentId>
+        Application
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::IVersionInfo
+      </InterfaceId>
+      <ComponentId>
+        VersionInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
@@ -447,25 +491,25 @@
     </Component>
     <Component>
       <ExportedId>
+        DocumentManager
+      </ExportedId>
+      <ComponentId>
+        Application/Workspace
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
         PreviewCommandFile
       </ExportedId>
       <ComponentId>
         Settings/PreviewCommandFile
       </ComponentId>
     </Component>
-    <Component>
-      <ExportedId>
-        SettingsGui
-      </ExportedId>
-      <ComponentId>
-        SettingsGui
-      </ComponentId>
-    </Component>
   </ExportedComponents>
   <Description>
-    
+    Compositor application component
   </Description>
   <Keywords>
-    
+    ACF Compositor Editor ARX
   </Keywords>
 </Acf>
