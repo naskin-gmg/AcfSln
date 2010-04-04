@@ -48,7 +48,7 @@ QRectF CHotfolderShape::boundingRect() const
 }
 
 
-void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* /*stylePtr*/, QWidget* /*widgetPtr*/)
+void CHotfolderShape::paint(QPainter* /*painterPtr*/, const QStyleOptionGraphicsItem* /*stylePtr*/, QWidget* /*widgetPtr*/)
 {
 
 }
@@ -85,7 +85,7 @@ bool CHotfolderShape::OnAttached(imod::IModel* modelPtr)
 
 // reimplemented (iqt2d::TObjectShapeBase)
 
-void CHotfolderShape::UpdateGraphicsItem(const iprm::IParamsSet& element)
+void CHotfolderShape::UpdateGraphicsItem(const iprm::IParamsSet& /*element*/)
 {
 	
 }
