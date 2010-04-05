@@ -21,12 +21,15 @@ namespace QwtPck
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("QwtPck", "Qwt package", "Qwt Qt 3D View");
+I_EXPORT_PACKAGE(
+			"QwtPck",
+			"Qwt package",
+			"Qwt Qt 3D View" IM_TAG("Qt 3D") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SurfaceView,
 			"3D-View component",
-			"Model Observer Parameter GUI Qt 3D Surface");
+			"Model Observer Parameter GUI Qt 3D Surface" IM_TAG("Image"));
 
 
 } // namespace QwtPck

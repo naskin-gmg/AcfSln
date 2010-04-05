@@ -22,57 +22,60 @@ static struct StaticInit
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("QtFpf", "Qt based package for File Processsing Framework", "Qt File Processing");
+I_EXPORT_PACKAGE(
+			"QtFpf",
+			"Qt based package for File Processsing Framework",
+			"File Processing" IM_TAG("Qt Hotfolder") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			HotfolderProcessor,
 			"Implementation of the hotfolder processor",
-			"File Processing Hotfolder");
+			"File" IM_TAG("Processing"));
 
 I_EXPORT_COMPONENT(
 			DirectoryMonitor,
 			"This component observes changes in a given file folder",
-			"Qt File Dir Filter Observer");
+			"File Dir Filter Observer");
 
 I_EXPORT_COMPONENT(
 			DirectoryMonitorParamsGui,
 			"Editor for directory monitor parameters",
-			"Qt File Dir Filter Observer Editor GUI Monitor");
+			"File Dir Filter Observer Editor Monitor" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			HotfolderGui,
 			"Hotfolder view",
-			"Qt File Observer Editor View GUI Hotfolder");
+			"File Observer Editor View" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			FileNaming,
 			"Component for file (re)nameing",
-			"Qt File Hotfolder Renaming Directory");
+			"File Renaming Directory");
 
 I_EXPORT_COMPONENT(
 			ComposedHotfolderGui,
 			"UI for hotfolder visualization and setting editor",
-			"File Processing Hotfolder Editor View GUI");
+			"File Processing Editor View" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			ProcessingItemInfoGui,
 			"GUI for the info a hotfolder processing item",
-			"File Processing Hotfolder Editor View GUI Item");
+			"File Processing Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
 			ProcessingItemPreviewGui,
 			"GUI for the graphical preview of a hotfolder processing item",
-			"File Processing Hotfolder Editor View GUI Item");
+			"File Processing Editor View Item" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			DirectoryItemGui,
 			"View sub-component for a hotfolder directory item",
-			"File Processing Hotfolder Editor View GUI Item");
+			"File Processing Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
 			ProcessingItemPreviewGenerator,
 			"Preview generator for a processing item",
-			"File Processing Hotfolder Preview Generator");
+			"File Processing Preview Generator");
 
 I_EXPORT_COMPONENT(
 			FilePreviewGenerator,
@@ -87,7 +90,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			HotfolderContainerGui,
 			"Hotfolder container UI",
-			"Hotfolder File Procesing Observer");
+			"Hotfolder File Procesing Observer" IM_TAG("GUI"));
 
 
 } // namespace QtFpfPck

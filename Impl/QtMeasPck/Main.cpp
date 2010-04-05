@@ -25,12 +25,12 @@ I_EXPORT_DEFAULT_SERVICES;
 I_EXPORT_PACKAGE(
 			"AcfSln/Measure/GUI",
 			"Qt dependent package for sampling, measurement acquisition and related thema",
-			"Sampling Measurement Acquisition Qt GUI");
+			"Measurement Acquisition GUI" IM_TAG("Qt Sampling") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SamplesSequenceView,
 			"Display sample sequence",
-			"Diagram Polyline Samples Sequence Measurement GUI");
+			"Diagram Polyline Samples Sequence Measurement GUI" IM_TAG("2D GUI"));
 
 
 } // namespace QtMeasPck

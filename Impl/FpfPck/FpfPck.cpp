@@ -9,27 +9,30 @@ namespace FpfPck
 
 I_EXPORT_DEFAULT_SERVICES
 
-I_EXPORT_PACKAGE("Fpf", "Acf-Solutions File-To-File Processing Framework package", "ACF-Solutions File Processing Hotfolder Workflow");
+I_EXPORT_PACKAGE(
+			"Fpf",
+			"Acf-Solutions File-To-File Processing Framework package",
+			"File Processing Hotfolder Workflow" IM_TAG("Hotfolder") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			FileProcessing,
 			"Sequence processing using slave processors",
-			"File Processing Hotfolder");
+			"Hotfolder" IM_TAG("File Processing"));
 
 I_EXPORT_COMPONENT(
 			DirectoryMonitorParams,
 			"Parameter for the directory monitoring",
-			"File Processing Parameter Directory Monitoring");
+			"Processing Parameter Directory Monitoring" IM_TAG("File Model"));
 
 I_EXPORT_COMPONENT(
 			HotfolderLoader,
 			"Hotfolder loader",
-			"File Processing Parameter Directory Hotfolder");
+			"File Processing Parameter Directory Hotfolder" IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
 			HotfolderStateModel,
 			"Hotfolder's state",
-			"File Processing Hotfolder");
+			"File Processing Hotfolder" IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
 			MonitoringSessions,

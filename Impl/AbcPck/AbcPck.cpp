@@ -21,12 +21,15 @@ namespace AbcPck
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("Abc", "Application Business Components", "Qt Application Business Enterprise");
+I_EXPORT_PACKAGE(
+			"Abc",
+			"Application Business Components",
+			"Application Business Enterprise" IM_PROJECT("ACF-Solutions") IM_TAG("Qt") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			ServiceApplication,
 			"An application as service/daemon",
-			"Qt Application Service Daemon");
+			"Service Daemon" IM_TAG("Application"));
 
 
 } // namespace AbcPck
