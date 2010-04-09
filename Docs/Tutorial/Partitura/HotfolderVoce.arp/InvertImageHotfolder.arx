@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1409
+          1441
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          169
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -144,7 +155,23 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        HotfolderParams
+      </ExportedId>
+      <ComponentId>
+        ImageProcessingHotfolder/HotfolderParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HotfolderState
+      </ExportedId>
+      <ComponentId>
+        ImageProcessingHotfolder/HotfolderState
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     

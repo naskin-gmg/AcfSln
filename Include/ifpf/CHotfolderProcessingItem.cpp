@@ -151,7 +151,6 @@ bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 	retVal = retVal && m_outputPreview.Serialize(archive);
 	retVal = retVal && archive.EndTag(outputFilePreviewTag);
 
-
 	return retVal;
 }
 

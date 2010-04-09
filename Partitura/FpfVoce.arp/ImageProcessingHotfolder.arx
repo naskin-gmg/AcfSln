@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1415
+          1441
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          169
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -70,7 +81,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -324,7 +351,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder
+                Hotfolder/HotfolderState
               </Value>
             </Data>
           </AttributeInfo>
@@ -387,13 +414,21 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="2">
     <Component>
       <ExportedId>
         HotfolderParams
       </ExportedId>
       <ComponentId>
         Hotfolder/HotfolderParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HotfolderState
+      </ExportedId>
+      <ComponentId>
+        Hotfolder/HotfolderState
       </ComponentId>
     </Component>
   </ExportedComponents>

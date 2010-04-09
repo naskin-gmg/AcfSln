@@ -1,30 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1422
+          1441
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          169
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         ComposedHotfolderGui
       </ComponentName>
       <X>
-        750
+        500
       </X>
       <X>
-        150
+        175
       </X>
     </Element>
     <Element>
@@ -32,7 +43,7 @@
         DirectoryItemGui
       </ComponentName>
       <X>
-        775
+        525
       </X>
       <X>
         450
@@ -43,18 +54,7 @@
         HotfolderGui
       </ComponentName>
       <X>
-        744.678
-      </X>
-      <X>
-        299.265
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderParamsGui
-      </ComponentName>
-      <X>
-        375
+        525
       </X>
       <X>
         300
@@ -62,10 +62,21 @@
     </Element>
     <Element>
       <ComponentName>
+        HotfolderSettingsDialog
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <X>
+        175
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         HotfolderStatistics
       </ComponentName>
       <X>
-        550
+        250
       </X>
       <X>
         450
@@ -76,21 +87,10 @@
         ProgressManager
       </ComponentName>
       <X>
-        1025
+        825
       </X>
       <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SettingsDialog
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        150
+        175
       </X>
     </Element>
     <Element>
@@ -98,21 +98,10 @@
         StateIcons
       </ComponentName>
       <X>
-        1000
+        825
       </X>
       <X>
-        450
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        WorkingHotfolderParams
-      </ComponentName>
-      <X>
-        205.678
-      </X>
-      <X>
-        159.265
+        475
       </X>
     </Element>
   </PositionMap>

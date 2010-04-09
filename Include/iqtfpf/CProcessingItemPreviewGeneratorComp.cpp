@@ -17,6 +17,9 @@ namespace iqtfpf
 	
 void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
+	I_ASSERT(m_inputFilePreviewGeneratorCompPtr.IsValid());
+	I_ASSERT(m_outputFilePreviewGeneratorCompPtr.IsValid());
+
 	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0 && m_inputFilePreviewGeneratorCompPtr.IsValid()){
 		ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
 		if (itemPtr != NULL && m_fileNameCompPtr.IsValid()){

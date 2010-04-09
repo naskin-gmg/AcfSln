@@ -1,21 +1,32 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1422
+          1441
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          169
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="7">
     <Element>
       <Id>
         ComposedHotfolderGui
@@ -68,7 +79,7 @@
                 true
               </IsEnabled>
               <Value>
-                SettingsDialog
+                HotfolderSettingsDialog
               </Value>
             </Data>
           </AttributeInfo>
@@ -214,13 +225,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderParamsGui
+        HotfolderSettingsDialog
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderParamsGui
+        HotfolderSettingsDialog
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -229,7 +240,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              HotfolderParams
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              HotfolderParams
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -288,135 +315,6 @@
               </IsEnabled>
               <Value>
                 Overall Progress
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SettingsDialog
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ModelDialogGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="6">
-          <AttributeInfo>
-            <Id>
-              Gui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ComposedHotfolderGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Model
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              HotfolderParams
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelEditor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderParamsGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelObserver
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ComposedHotfolderGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WorkingDataFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              HotfolderParamsFactory
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WorkingModel
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                WorkingHotfolderParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -496,27 +394,6 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        WorkingHotfolderParams
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        HotfolderParams
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <ExportedInterfaces count="5">
     <Interface>
@@ -568,7 +445,4 @@
   <Keywords>
     
   </Keywords>
-  <Category>
-    0
-  </Category>
 </Acf>

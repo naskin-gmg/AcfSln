@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
-        HotfolderGui
+        HotfolderParamsGui
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderGui
+        HotfolderParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,10 +44,69 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SettingsDialog
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ModelDialogGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
-              HotfolderParams
+              DialogIconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Icons/HotfolderSettings.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DialogTitle
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Settings
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Gui
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -60,13 +119,67 @@
                 true
               </IsEnabled>
               <Value>
-                InvertImageHotfolder/HotfolderParams
+                HotfolderParamsGui
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParamsFactory
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              HotfolderParams
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ModelEditor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderParamsGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ModelObserver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ComposedHotfolderGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WorkingDataFactory
             </Id>
             <Type>
               icomp::CFactoryAttribute
@@ -79,34 +192,13 @@
                 true
               </IsEnabled>
               <Value>
-                InvertImageHotfolder/HotfolderParams
+                WorkingHotfolderParams
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        HotfolderModelBinder
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ModelBinder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Model
+              WorkingModel
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -119,29 +211,8 @@
                 true
               </IsEnabled>
               <Value>
-                InvertImageHotfolder
+                WorkingHotfolderParams
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Observers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  HotfolderGui
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -149,85 +220,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderPersistence
+        WorkingHotfolderParams
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderPersistence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              Hotfolder
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InvertImageHotfolder
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InvertImageHotfolder
-      </Id>
-      <PackageId>
-        HotfolderVoce
-      </PackageId>
-      <ComponentId>
-        InvertImageHotfolder
+        HotfolderParams
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -236,59 +235,27 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="0">
+  <ExportedInterfaces count="1">
+    <Interface>
+      <InterfaceId>
+        iqtgui::IDialog
+      </InterfaceId>
+      <ComponentId>
+        SettingsDialog
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
-    <Component>
-      <ExportedId>
-        HotfolderGui
-      </ExportedId>
-      <ComponentId>
-        HotfolderGui
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HotfolderParams
-      </ExportedId>
-      <ComponentId>
-        InvertImageHotfolder/HotfolderParams
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HotfolderState
-      </ExportedId>
-      <ComponentId>
-        InvertImageHotfolder/HotfolderState
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Persistent hotfolder for image inversion
+    Hotfolder settings dialog
   </Description>
   <Keywords>
-    Hotfolder Image Processing
+    Hotfolder Settings
   </Keywords>
 </Acf>

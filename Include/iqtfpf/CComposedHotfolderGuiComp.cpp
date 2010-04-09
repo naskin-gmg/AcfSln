@@ -95,13 +95,6 @@ void CComposedHotfolderGuiComp::OnGuiCreated()
 
 	m_commands.InsertChild(hotfolderMenuPtr, true);
 
-	/*
-	if (m_settingsGuiCompPtr.IsValid()){
-		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, GetWidget()));
-		m_settingsDialogPtr->setWindowTitle(tr("Hotfolder Properties"));
-		m_settingsDialogPtr->setWindowIcon(QIcon(":/Icons/HotfolderSettings.svg"));
-	}
-*/
 	BaseClass::OnGuiCreated();
 }
 

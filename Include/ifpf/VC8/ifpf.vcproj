@@ -322,10 +322,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IHotfolderParams.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IHotfolderProcessingInfo.h"
 				>
 			</File>

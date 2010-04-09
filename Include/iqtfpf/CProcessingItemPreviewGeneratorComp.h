@@ -21,7 +21,9 @@ namespace iqtfpf
 {
 
 
-class CProcessingItemPreviewGeneratorComp: public icomp::CComponentBase, public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo>
+class CProcessingItemPreviewGeneratorComp:
+			public icomp::CComponentBase,
+			public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

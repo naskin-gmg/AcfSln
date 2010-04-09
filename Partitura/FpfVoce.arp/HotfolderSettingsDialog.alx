@@ -29,35 +29,35 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        InputImageView
+        HotfolderParamsGui
       </ComponentName>
       <X>
-        300
+        825
       </X>
       <X>
-        475
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        OutputImageView
+        SettingsDialog
       </ComponentName>
       <X>
-        900
+        550
       </X>
       <X>
-        475
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ProcessingItemPreviewGui
+        WorkingHotfolderParams
       </ComponentName>
-      <X>
-        600
-      </X>
       <X>
         275
+      </X>
+      <X>
+        425
       </X>
     </Element>
   </PositionMap>
