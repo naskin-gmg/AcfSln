@@ -4,7 +4,7 @@
 
 #include "iser/ISerializable.h"
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
 
 
 namespace imeas
@@ -15,7 +15,7 @@ namespace imeas
 	General definition of sequence contains discrete sample values in regular time grid.
 	All samples has the same number of channels components.
 */
-class IDiscrSamplesSequence: virtual public ISamplesSequence
+class IDiscrSamplesSequence: virtual public IDataSequence
 {
 public:
 	/**

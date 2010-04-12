@@ -7,7 +7,8 @@
 // ACF includes
 #include "istd/CRange.h"
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
+#include "imeas/CSamplingChannelsInfo.h"
 
 
 namespace imeas
@@ -58,7 +59,7 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 		return false;
 	}
 
-	return		((dataObjectPtr == NULL) || (dynamic_cast<const ISamplesSequence*>(dataObjectPtr) != NULL)) &&
+	return		((dataObjectPtr == NULL) || (dynamic_cast<const IDataSequence*>(dataObjectPtr) != NULL)) &&
 				((flags & QF_ANONYMOUS_ONLY) == 0) &&
 				((flags & QF_NO_SAVING) == 0);
 }
@@ -87,13 +88,15 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 
 	int retVal = StateFailed;
 
-	const ISamplesSequence* sequencePtr = dynamic_cast<const ISamplesSequence*>(&data);
+	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&data);
 	I_ASSERT(sequencePtr != NULL);
 
 	if (sequencePtr != NULL){
-		int samplesCount = sequencePtr->GetTimeSamplesCount();
+		int samplesCount = sequencePtr->GetSamplesCount();
 		int channelsCount = sequencePtr->GetChannelsCount();
-		double samplingPeriod = sequencePtr->GetSamplingPeriod();
+
+		const CSamplingChannelsInfo* infoPtr = dynamic_cast<const CSamplingChannelsInfo*>(sequencePtr->GetChannelsInfo());
+		double samplingPeriod = (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 44000;
 
 		WavHeader header;
 		memcpy(header.code, "RIFF", 4);

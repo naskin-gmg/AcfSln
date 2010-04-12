@@ -8,6 +8,7 @@
 #include "iser/CArchiveTag.h"
 
 #include "imeas/IDiscrSamplesSequence.h"
+#include "imeas/CSamplingChannelsInfo.h"
 
 
 namespace imeas
@@ -20,9 +21,11 @@ class TDiscrSamplesSequence: virtual public IDiscrSamplesSequence
 public:
 	TDiscrSamplesSequence();
 
+	bool CreateSequence(int samplesCount, int channelsCount);
+
 	// reimplemented (imeas::IDiscrSamplesSequence)
 	virtual bool CreateDiscrSequence(
-				int timeSamplesCount,
+				int samplesCount,
 				void* dataPtr,
 				bool releaseFlag,
 				int sampleDiff,
@@ -33,14 +36,13 @@ public:
 	virtual I_DWORD GetDiscrSample(int position, int channel = 0) const;
 	virtual bool SetDiscrSample(int position, int channel, I_DWORD sample);
 
-	// reimplemented (imeas::ISamplesSequence)
-	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1);
+	// reimplemented (imeas::IDataSequence)
+	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false);
+	virtual const IChannelsInfo* GetChannelsInfo() const;
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
-	virtual int GetTimeSamplesCount() const;
+	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
-	virtual double GetSamplingPeriod() const;
-	virtual void SetSamplingPeriod(double value);
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
 
@@ -59,7 +61,7 @@ private:
 	int m_sampleDiff;
 	int m_channelDiff;
 
-	double m_samplingPeriod;
+	istd::TOptDelPtr<const IChannelsInfo> m_channelsInfoPtr;
 };
 
 
@@ -71,9 +73,36 @@ TDiscrSamplesSequence<Element>::TDiscrSamplesSequence()
 	m_samplesCount(0),
 	m_channelsCount(0),
 	m_sampleDiff(0),
-	m_channelDiff(0),
-	m_samplingPeriod(0)
+	m_channelDiff(0)
 {
+}
+
+
+template <typename Element>
+bool TDiscrSamplesSequence<Element>::CreateSequence(int samplesCount, int channelsCount)
+{
+	int elementsCount = samplesCount * channelsCount;
+	if (		(elementsCount > m_allocatedElementsCount) ||
+				(elementsCount * 2 < m_allocatedElementsCount)){
+		m_sampleBuffer.SetPtr(new Element[elementsCount], true);
+		m_allocatedElementsCount = elementsCount;
+	}
+
+	m_samplesCount = samplesCount;
+	m_channelsCount = channelsCount;
+	m_sampleDiff = channelsCount * sizeof(Element);
+	m_channelDiff = sizeof(Element);
+
+	m_channelsInfoPtr.Reset();
+
+	return true;
+}
+
+
+template <typename Element>
+const IChannelsInfo* TDiscrSamplesSequence<Element>::GetChannelsInfo() const
+{
+	return m_channelsInfoPtr.GetPtr();
 }
 
 
@@ -81,7 +110,7 @@ TDiscrSamplesSequence<Element>::TDiscrSamplesSequence()
 
 template <typename Element>
 bool TDiscrSamplesSequence<Element>::CreateDiscrSequence(
-			int timeSamplesCount,
+			int samplesCount,
 			void* dataPtr,
 			bool releaseFlag,
 			int sampleDiff,
@@ -96,10 +125,12 @@ bool TDiscrSamplesSequence<Element>::CreateDiscrSequence(
 	m_sampleBuffer.SetPtr((Element*)dataPtr, releaseFlag);
 
 	m_allocatedElementsCount = 0;
-	m_samplesCount = timeSamplesCount;
+	m_samplesCount = samplesCount;
 	m_channelsCount = channelsCount;
 	m_sampleDiff = (sampleDiff != 0)? sampleDiff: channelsCount * sizeof(Element);
 	m_channelDiff = (channelDiff != 0)? channelDiff: sizeof(Element);
+
+	m_channelsInfoPtr.Reset();
 
 	return true;
 }
@@ -132,24 +163,19 @@ bool TDiscrSamplesSequence<Element>::SetDiscrSample(int position, int channel, I
 }
 
 
-// reimplemented (imeas::ISamplesSequence)
+// reimplemented (imeas::IDataSequence)
 
 template <typename Element>
-bool TDiscrSamplesSequence<Element>::CreateSequence(int timeSamplesCount, int channelsCount)
+bool TDiscrSamplesSequence<Element>::CreateSequence(int samplesCount, const IChannelsInfo* infoPtr, bool releaseInfoFlag)
 {
-	int elementsCount = timeSamplesCount * channelsCount;
-	if (		(elementsCount > m_allocatedElementsCount) ||
-				(elementsCount * 2 < m_allocatedElementsCount)){
-		m_sampleBuffer.SetPtr(new Element[elementsCount], true);
-		m_allocatedElementsCount = elementsCount;
+	m_channelsInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
+
+	if (infoPtr != NULL){
+		return CreateSequence(samplesCount, infoPtr->GetChannelsCount());
 	}
-
-	m_samplesCount = timeSamplesCount;
-	m_channelsCount = channelsCount;
-	m_sampleDiff = channelsCount * sizeof(Element);
-	m_channelDiff = sizeof(Element);
-
-	return true;
+	else{
+		return CreateSequence(samplesCount, 1);
+	}
 }
 
 
@@ -170,7 +196,7 @@ void TDiscrSamplesSequence<Element>::ResetSequence()
 
 
 template <typename Element>
-int TDiscrSamplesSequence<Element>::GetTimeSamplesCount() const
+int TDiscrSamplesSequence<Element>::GetSamplesCount() const
 {
 	return m_samplesCount;
 }
@@ -180,22 +206,6 @@ template <typename Element>
 int TDiscrSamplesSequence<Element>::GetChannelsCount() const
 {
 	return m_channelsCount;
-}
-
-
-template <typename Element>
-double TDiscrSamplesSequence<Element>::GetSamplingPeriod() const
-{
-	return m_samplingPeriod;
-}
-
-
-template <typename Element>
-void TDiscrSamplesSequence<Element>::SetSamplingPeriod(double value)
-{
-	istd::CChangeNotifier notifier(this);
-
-	m_samplingPeriod = value;
 }
 
 
@@ -230,11 +240,11 @@ bool TDiscrSamplesSequence<Element>::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(channelsCount);
 	retVal = retVal && archive.EndTag(channelsCountTag);
 
-	int timeSamplesCount = GetTimeSamplesCount();
+	int samplesCount = GetSamplesCount();
 
 	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values");
 	static iser::CArchiveTag channelsTag("Channels", "List of sample values");
-	retVal = retVal && archive.BeginMultiTag(samplesListTag, channelsTag, timeSamplesCount);
+	retVal = retVal && archive.BeginMultiTag(samplesListTag, channelsTag, samplesCount);
 
 	if (!retVal){
 		return false;
@@ -245,7 +255,7 @@ bool TDiscrSamplesSequence<Element>::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(NULL);
 
 	if (isStoring){
-		for (int i = 0; i < timeSamplesCount; ++i){
+		for (int i = 0; i < samplesCount; ++i){
 			retVal = retVal && archive.BeginTag(channelsTag);
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				Element sample = Element(GetDiscrSample(i, channelIndex));
@@ -257,11 +267,11 @@ bool TDiscrSamplesSequence<Element>::Serialize(iser::IArchive& archive)
 	}
 	else{
 		notifier.SetPtr(this);
-		if (!CreateSequence(timeSamplesCount, channelsCount)){
+		if (!CreateSequence(samplesCount, channelsCount)){
 			return false;
 		}
 
-		for (int i = 0; i < timeSamplesCount; ++i){
+		for (int i = 0; i < samplesCount; ++i){
 			retVal = retVal && archive.BeginTag(channelsTag);
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				Element sample = 0;
@@ -285,7 +295,7 @@ bool TDiscrSamplesSequence<Element>::Serialize(iser::IArchive& archive)
 template <typename Element>
 bool TDiscrSamplesSequence<Element>::CopyFrom(const istd::IChangeable& object)
 {
-	const ISamplesSequence* sequencePtr = dynamic_cast<const ISamplesSequence*>(&object);
+	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&object);
 	if (sequencePtr != NULL){
 		const TDiscrSamplesSequence<Element>* nativeSequencePtr = dynamic_cast<const TDiscrSamplesSequence<Element>*>(sequencePtr);
 		if (		(nativeSequencePtr != NULL) &&
@@ -295,7 +305,6 @@ bool TDiscrSamplesSequence<Element>::CopyFrom(const istd::IChangeable& object)
 			m_channelsCount = nativeSequencePtr->m_channelsCount;
 			m_sampleDiff = sizeof(Element) * m_channelsCount;
 			m_channelDiff = sizeof(Element);
-			m_samplingPeriod = nativeSequencePtr->m_samplingPeriod;
 
 			m_allocatedElementsCount = 0;
 			m_allocatedElementsCount = m_samplesCount * m_channelsCount;
@@ -316,27 +325,33 @@ bool TDiscrSamplesSequence<Element>::CopyFrom(const istd::IChangeable& object)
 				m_sampleBuffer.Reset();
 			}
 
-
-			return true;
 		}
 		else{
-			int samplesCount = sequencePtr->GetTimeSamplesCount();
+			int samplesCount = sequencePtr->GetSamplesCount();
 			int channelsCount = sequencePtr->GetChannelsCount();
 
-			if (CreateSequence(samplesCount, channelsCount)){
-				for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
-					for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-						double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+			if (!CreateSequence(samplesCount, channelsCount)){
+				return false;
+			}
 
-						SetSample(sampleIndex, channelIndex, sample);
-					}
+			for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
+				for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+					double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+
+					SetSample(sampleIndex, channelIndex, sample);
 				}
-
-				SetSamplingPeriod(sequencePtr->GetSamplingPeriod());
-
-				return true;
 			}
 		}
+
+		const CSamplingChannelsInfo* infoPtr = dynamic_cast<const CSamplingChannelsInfo*>(sequencePtr->GetChannelsInfo());
+		if (infoPtr != NULL){
+			m_channelsInfoPtr.SetPtr(new CSamplingChannelsInfo(m_channelsCount, infoPtr->GetSamplingPeriod()), true);
+		}
+		else{
+			m_channelsInfoPtr.Reset();
+		}
+
+		return true;
 	}
 
 	return false;

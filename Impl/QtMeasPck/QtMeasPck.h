@@ -8,7 +8,7 @@
 #include "iimg/CGeneralBitmap.h"
 
 // ACF-Solutions includes
-#include "iqtmeas/CSamplesSequenceViewComp.h"
+#include "iqtmeas/CDataSequenceViewComp.h"
 
 
 /**
@@ -18,7 +18,7 @@ namespace QtMeasPck
 {
 
 
-typedef iqtmeas::CSamplesSequenceViewComp SamplesSequenceView;
+typedef iqtmeas::CDataSequenceViewComp DataSequenceView;
 
 
 } // namespace QtMeasPck

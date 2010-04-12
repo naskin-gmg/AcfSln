@@ -3,9 +3,11 @@
 
 #include "istd/TChangeNotifier.h"
 
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+
+#include "imeas/IChannelsInfo.h"
+#include "imeas/CSamplingChannelsInfo.h"
 
 
 namespace imeas
@@ -13,20 +15,42 @@ namespace imeas
 
 
 CGeneralSamplesSequence::CGeneralSamplesSequence()
-:	m_channelsCount(0),
-	m_samplingPeriod(-1)
+:	m_channelsCount(0)
 {
 }
 
 
-// reimplemented (imeas::ISamplesSequence)
-
-bool CGeneralSamplesSequence::CreateSequence(int timeSamplesCount, int channelsCount)
+bool CGeneralSamplesSequence::CreateSequence(int samplesCount, int channelsCount)
 {
+	I_ASSERT(samplesCount >= 0);
+	I_ASSERT(channelsCount >= 0);
+
 	m_channelsCount = channelsCount;
-	m_samples.resize(timeSamplesCount * m_channelsCount, 0.0);
+
+	m_samples.resize(samplesCount * m_channelsCount, 0.0);
 
 	return true;
+}
+
+
+// reimplemented (imeas::IDataSequence)
+
+bool CGeneralSamplesSequence::CreateSequence(int samplesCount, const IChannelsInfo* infoPtr, bool releaseInfoFlag)
+{
+	m_channelsInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
+
+	if (infoPtr != NULL){
+		return CreateSequence(samplesCount, infoPtr->GetChannelsCount());
+	}
+	else{
+		return CreateSequence(samplesCount, 1);
+	}
+}
+
+
+const IChannelsInfo* CGeneralSamplesSequence::GetChannelsInfo() const
+{
+	return m_channelsInfoPtr.GetPtr();
 }
 
 
@@ -39,10 +63,11 @@ bool CGeneralSamplesSequence::IsEmpty() const
 void CGeneralSamplesSequence::ResetSequence()
 {
 	m_samples.clear();
+	m_channelsInfoPtr.Reset();
 }
 
 
-int CGeneralSamplesSequence::GetTimeSamplesCount() const
+int CGeneralSamplesSequence::GetSamplesCount() const
 {
 	if (m_channelsCount > 0){
 		return int(m_samples.size() / m_channelsCount);
@@ -56,18 +81,6 @@ int CGeneralSamplesSequence::GetTimeSamplesCount() const
 int CGeneralSamplesSequence::GetChannelsCount() const
 {
 	return m_channelsCount;
-}
-
-
-double CGeneralSamplesSequence::GetSamplingPeriod() const
-{
-	return m_samplingPeriod;
-}
-
-
-void CGeneralSamplesSequence::SetSamplingPeriod(double value)
-{
-	m_samplingPeriod = value;
 }
 
 
@@ -110,16 +123,16 @@ bool CGeneralSamplesSequence::CreateFunction(double* dataPtr, const ArgumentType
 }
 
 
-int CGeneralSamplesSequence::GetSamplesCount() const
+int CGeneralSamplesSequence::GetTotalSamplesCount() const
 {
-	return GetTimeSamplesCount() * GetChannelsCount();
+	return GetSamplesCount() * GetChannelsCount();
 }
 
 
 int CGeneralSamplesSequence::GetGridSize(int dimensionIndex) const
 {
 	if (dimensionIndex == 0){
-		return GetTimeSamplesCount();
+		return GetSamplesCount();
 	}
 	else if (dimensionIndex == 1){
 		return GetChannelsCount();
@@ -133,7 +146,8 @@ int CGeneralSamplesSequence::GetGridSize(int dimensionIndex) const
 istd::CRange CGeneralSamplesSequence::GetLogicalRange(int dimensionIndex) const
 {
 	if (dimensionIndex == 0){
-		return istd::CRange(0, GetSamplingPeriod() * GetTimeSamplesCount());
+		const CSamplingChannelsInfo* infoPtr = dynamic_cast<const CSamplingChannelsInfo*>(m_channelsInfoPtr.GetPtr());
+		return istd::CRange(0, GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1);
 	}
 	else if (dimensionIndex == 1){
 		return istd::CRange(0, 1);
@@ -144,8 +158,12 @@ istd::CRange CGeneralSamplesSequence::GetLogicalRange(int dimensionIndex) const
 }
 
 
-istd::CRange CGeneralSamplesSequence::GetResultValueRange(int /*dimensionIndex*/, int /*resultDimension*/) const
+istd::CRange CGeneralSamplesSequence::GetResultValueRange(int dimensionIndex, int /*resultDimension*/) const
 {
+	if ((dimensionIndex == 0) && m_channelsInfoPtr.IsValid()){
+		return m_channelsInfoPtr->GetValueRange(-1);
+	}
+
 	return istd::CRange(-1, 1);
 }
 
@@ -156,7 +174,7 @@ bool CGeneralSamplesSequence::GetValueAt(const ArgumentType& argument, ResultTyp
 {
 	int sampleIndex = argument[0];
 	int channelIndex = argument[1];
-	if ((sampleIndex >= 0) && (sampleIndex < GetTimeSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
+	if ((sampleIndex >= 0) && (sampleIndex < GetSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
 		result[0] = GetSample(sampleIndex, channelIndex);
 
 		return true;
@@ -173,7 +191,7 @@ CGeneralSamplesSequence::ResultType CGeneralSamplesSequence::GetValueAt(const Ar
 
 	int sampleIndex = argument[0];
 	int channelIndex = argument[1];
-	if ((sampleIndex >= 0) && (sampleIndex < GetTimeSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
+	if ((sampleIndex >= 0) && (sampleIndex < GetSamplesCount()) && (channelIndex >= 0) && (channelIndex < 2)){
 		retVal[0] = GetSample(sampleIndex, channelIndex);
 	}
 	else{
@@ -196,7 +214,7 @@ bool CGeneralSamplesSequence::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(channelsCount);
 	retVal = retVal && archive.EndTag(channelsCountTag);
 
-	int samplesCount = GetTimeSamplesCount();
+	int samplesCount = GetSamplesCount();
 
 	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values");
 	static iser::CArchiveTag channelsTag("Channels", "List of sample values");
@@ -235,7 +253,7 @@ bool CGeneralSamplesSequence::Serialize(iser::IArchive& archive)
 
 bool CGeneralSamplesSequence::CopyFrom(const istd::IChangeable& object)
 {
-	const ISamplesSequence* sequencePtr = dynamic_cast<const ISamplesSequence*>(&object);
+	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&object);
 	if (sequencePtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
@@ -243,28 +261,33 @@ bool CGeneralSamplesSequence::CopyFrom(const istd::IChangeable& object)
 		if (nativeSequencePtr != NULL){
 			m_samples = nativeSequencePtr->m_samples;
 			m_channelsCount = nativeSequencePtr->m_channelsCount;
-			m_samplingPeriod = nativeSequencePtr->m_samplingPeriod;
-
-			return true;
 		}
 		else{
-			int samplesCount = sequencePtr->GetTimeSamplesCount();
+			int samplesCount = sequencePtr->GetSamplesCount();
 			int channelsCount = sequencePtr->GetChannelsCount();
 
-			if (CreateSequence(samplesCount, channelsCount)){
-				for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
-					for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-						double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+			if (!CreateSequence(samplesCount, channelsCount)){
+				return false;
+			}
 
-						SetSample(sampleIndex, channelIndex, sample);
-					}
+			for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
+				for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+					double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
+
+					SetSample(sampleIndex, channelIndex, sample);
 				}
-
-				SetSamplingPeriod(sequencePtr->GetSamplingPeriod());
-
-				return true;
 			}
 		}
+
+		const CSamplingChannelsInfo* infoPtr = dynamic_cast<const CSamplingChannelsInfo*>(sequencePtr->GetChannelsInfo());
+		if (infoPtr != NULL){
+			m_channelsInfoPtr.SetPtr(new CSamplingChannelsInfo(m_channelsCount, infoPtr->GetSamplingPeriod()), true);
+		}
+		else{
+			m_channelsInfoPtr.Reset();
+		}
+
+		return true;
 	}
 
 	return false;

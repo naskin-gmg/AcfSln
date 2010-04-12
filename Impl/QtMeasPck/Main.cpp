@@ -28,7 +28,7 @@ I_EXPORT_PACKAGE(
 			"Measurement Acquisition GUI" IM_TAG("Qt Sampling") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			SamplesSequenceView,
+			DataSequenceView,
 			"Display sample sequence",
 			"Diagram Polyline Samples Sequence Measurement GUI" IM_TAG("2D GUI"));
 

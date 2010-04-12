@@ -90,7 +90,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  SamplesSequenceView
+                  DataSequenceView
                 </Value>
               </Values>
             </Data>
@@ -100,13 +100,13 @@
     </Element>
     <Element>
       <Id>
-        SamplesSequenceView
+        DataSequenceView
       </Id>
       <PackageId>
         QtMeasPck
       </PackageId>
       <ComponentId>
-        SamplesSequenceView
+        DataSequenceView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -245,7 +245,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        imeas::ISamplesSequence
+        imeas::IDataSequence
       </InterfaceId>
       <ComponentId>
         GeneralSamplesSequence
@@ -264,7 +264,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        SamplesSequenceView
+        DataSequenceView
       </ComponentId>
     </Interface>
     <Interface>

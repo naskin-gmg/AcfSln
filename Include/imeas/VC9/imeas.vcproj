@@ -215,7 +215,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ISamplesSequence.h"
+				RelativePath="..\IDataSequence.h"
 				>
 			</File>
 			<File

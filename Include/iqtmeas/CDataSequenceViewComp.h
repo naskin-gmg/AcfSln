@@ -11,7 +11,7 @@
 #include "imod/TSingleModelObserverBase.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
 
 #include "iqtmeas/Generated/ui_CSamplesSequenceViewComp.h"
 
@@ -20,18 +20,18 @@ namespace iqtmeas
 {
 
 
-class CSamplesSequenceViewComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CSamplesSequenceViewComp,
-			imeas::ISamplesSequence>
+class CDataSequenceViewComp: public iqtgui::TDesignerGuiObserverCompBase<
+			Ui::CDataSequenceViewComp,
+			imeas::IDataSequence>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CSamplesSequenceViewComp,
-				imeas::ISamplesSequence> BaseClass;
+				Ui::CDataSequenceViewComp,
+				imeas::IDataSequence> BaseClass;
 
-	I_BEGIN_COMPONENT(CSamplesSequenceViewComp);
+	I_BEGIN_COMPONENT(CDataSequenceViewComp);
 		I_ASSIGN(m_showScalePanelAttrPtr, "IsScalePanelVisible", "Show or hide scale value panel", true, true);
 		I_ASSIGN(m_showTimeSpanPanelAttrPtr, "IsTimeSpanPanelVisible", "Show or hide time span panel", true, true);
 		I_ASSIGN(m_showChannelPanelAttrPtr, "IsChannelPanelVisible", "Show or hide channel selector panel", true, true);
@@ -43,7 +43,7 @@ public:
 		I_ASSIGN(m_isScaledTimeSpanAttrPtr, "IsScaledTimeSpan", "Default value of automatic time span scaling flag", true, true);
 	I_END_COMPONENT;
 
-	CSamplesSequenceViewComp();
+	CDataSequenceViewComp();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -53,14 +53,14 @@ protected:
 	class DiagramWidget: public QWidget
 	{
 	public:
-		DiagramWidget(QWidget* parentWidgetPtr, CSamplesSequenceViewComp* parentPtr);
+		DiagramWidget(QWidget* parentWidgetPtr, CDataSequenceViewComp* parentPtr);
 
 	protected:
 		// reimplemented (QWidget)
 		virtual void paintEvent(QPaintEvent* event);
 
 	private:
-		CSamplesSequenceViewComp& m_parent;
+		CDataSequenceViewComp& m_parent;
 	};
 
 	// reimplemented (iqtgui::CGuiComponentBase)

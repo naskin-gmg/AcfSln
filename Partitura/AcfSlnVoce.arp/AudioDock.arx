@@ -137,7 +137,7 @@
                 true
               </IsEnabled>
               <Value>
-                SamplesSequenceView
+                DataSequenceView
               </Value>
             </Data>
           </AttributeInfo>
@@ -146,13 +146,13 @@
     </Element>
     <Element>
       <Id>
-        SamplesSequenceView
+        DataSequenceView
       </Id>
       <PackageId>
         QtMeasPck
       </PackageId>
       <ComponentId>
-        SamplesSequenceView
+        DataSequenceView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -313,7 +313,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  SamplesSequenceView
+                  DataSequenceView
                 </Value>
               </Values>
             </Data>
@@ -333,7 +333,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        imeas::ISamplesSequence
+        imeas::IDataSequence
       </InterfaceId>
       <ComponentId>
         Audio
@@ -352,7 +352,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        SamplesSequenceView
+        DataSequenceView
       </ComponentId>
     </Interface>
     <Interface>

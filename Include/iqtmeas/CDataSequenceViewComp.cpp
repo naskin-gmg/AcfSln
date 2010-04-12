@@ -1,10 +1,11 @@
-#include "iqtmeas/CSamplesSequenceViewComp.h"
+#include "iqtmeas/CDataSequenceViewComp.h"
 
 
 // Qt includes
 #include <QPainter>
 
 // ACF includes
+#include "imeas/CSamplingChannelsInfo.h"
 #include "iqt/CSignalBlocker.h"
 
 
@@ -12,7 +13,7 @@ namespace iqtmeas
 {
 
 
-CSamplesSequenceViewComp::CSamplesSequenceViewComp()
+CDataSequenceViewComp::CDataSequenceViewComp()
 :	m_lastChannelsCount(0),
 	m_channelsSelectorModel(1, 1)
 {
@@ -22,16 +23,16 @@ CSamplesSequenceViewComp::CSamplesSequenceViewComp()
 
 // reimplemented (imod::IModelEditor)
 
-void CSamplesSequenceViewComp::UpdateModel() const
+void CDataSequenceViewComp::UpdateModel() const
 {
 }
 
 
-void CSamplesSequenceViewComp::UpdateEditor(int /*updateFlags*/)
+void CDataSequenceViewComp::UpdateEditor(int /*updateFlags*/)
 {
 	int channelsCount = 0;
 
-	imeas::ISamplesSequence* objectPtr = GetObjectPtr();
+	imeas::IDataSequence* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		channelsCount = objectPtr->GetChannelsCount();
 		if (channelsCount != m_lastChannelsCount){
@@ -56,7 +57,7 @@ void CSamplesSequenceViewComp::UpdateEditor(int /*updateFlags*/)
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-void CSamplesSequenceViewComp::OnGuiCreated()
+void CDataSequenceViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
@@ -84,51 +85,51 @@ void CSamplesSequenceViewComp::OnGuiCreated()
 
 // protected signals
 
-void CSamplesSequenceViewComp::on_TimeSpanCB_toggled(bool /*state*/)
+void CDataSequenceViewComp::on_TimeSpanCB_toggled(bool /*state*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_ScaleCB_toggled(bool /*state*/)
+void CDataSequenceViewComp::on_ScaleCB_toggled(bool /*state*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_TimeBeginSB_valueChanged(double /*value*/)
+void CDataSequenceViewComp::on_TimeBeginSB_valueChanged(double /*value*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_TimeEndSB_valueChanged(double /*value*/)
+void CDataSequenceViewComp::on_TimeEndSB_valueChanged(double /*value*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_ValueMinSB_valueChanged(double /*value*/)
+void CDataSequenceViewComp::on_ValueMinSB_valueChanged(double /*value*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_ValueMaxSB_valueChanged(double /*value*/)
+void CDataSequenceViewComp::on_ValueMaxSB_valueChanged(double /*value*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_ChannelSelectorCB_currentIndexChanged(int /*index*/)
+void CDataSequenceViewComp::on_ChannelSelectorCB_currentIndexChanged(int /*index*/)
 {
 	UpdateEditor();
 }
 
 
-void CSamplesSequenceViewComp::on_ZoomInButton_clicked()
+void CDataSequenceViewComp::on_ZoomInButton_clicked()
 {
-	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr == NULL){
 		return;
 	}
@@ -144,14 +145,15 @@ void CSamplesSequenceViewComp::on_ZoomInButton_clicked()
 }
 
 
-void CSamplesSequenceViewComp::on_ZoomOutButton_clicked()
+void CDataSequenceViewComp::on_ZoomOutButton_clicked()
 {
-	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr == NULL){
 		return;
 	}
 
-	double maxTimeSpan = samplesPtr->GetTimeSamplesCount() * samplesPtr->GetSamplingPeriod();
+	const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -164,9 +166,9 @@ void CSamplesSequenceViewComp::on_ZoomOutButton_clicked()
 }
 
 
-void CSamplesSequenceViewComp::on_PrevButton_clicked()
+void CDataSequenceViewComp::on_PrevButton_clicked()
 {
-	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr == NULL){
 		return;
 	}
@@ -189,14 +191,15 @@ void CSamplesSequenceViewComp::on_PrevButton_clicked()
 }
 
 
-void CSamplesSequenceViewComp::on_NextButton_clicked()
+void CDataSequenceViewComp::on_NextButton_clicked()
 {
-	const imeas::ISamplesSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
 	if (samplesPtr == NULL){
 		return;
 	}
 
-	double maxTimeSpan = samplesPtr->GetTimeSamplesCount() * samplesPtr->GetSamplingPeriod();
+	const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -218,7 +221,7 @@ void CSamplesSequenceViewComp::on_NextButton_clicked()
 
 // public methods of embedded class DiagramWidget
 
-CSamplesSequenceViewComp::DiagramWidget::DiagramWidget(QWidget* parentWidgetPtr, CSamplesSequenceViewComp* parentPtr)
+CDataSequenceViewComp::DiagramWidget::DiagramWidget(QWidget* parentWidgetPtr, CDataSequenceViewComp* parentPtr)
 :	QWidget(parentWidgetPtr), m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
@@ -229,14 +232,16 @@ CSamplesSequenceViewComp::DiagramWidget::DiagramWidget(QWidget* parentWidgetPtr,
 
 // reimplemented (QWidget)
 
-void CSamplesSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
+void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 {
 	I_ASSERT(m_parent.IsGuiCreated());
 
-	const imeas::ISamplesSequence* samplesPtr = m_parent.GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = m_parent.GetObjectPtr();
 	if (samplesPtr != NULL){
-		int samplesCount = samplesPtr->GetTimeSamplesCount();
-		double samplingPeriod = samplesPtr->GetSamplingPeriod();
+		int samplesCount = samplesPtr->GetSamplesCount();
+		const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+		double samplingPeriod = (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
+
 		if ((samplesCount <= 0) || (samplingPeriod < I_BIG_EPSILON)){
 			return;
 		}

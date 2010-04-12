@@ -1,5 +1,5 @@
-#ifndef imeas_ISamplesSequence_included
-#define imeas_ISamplesSequence_included
+#ifndef imeas_IDataSequence_included
+#define imeas_IDataSequence_included
 
 
 #include "iser/ISerializable.h"
@@ -11,20 +11,31 @@ namespace imeas
 {
 
 
+class IChannelsInfo;
+
+
 /**
 	General definition of sequence contains samples in regular time grid.
 	All samples has the same number of channels components.
 */
-class ISamplesSequence: virtual public iser::ISerializable
+class IDataSequence: virtual public iser::ISerializable
 {
 public:
 	/**
 		Create container for sample sequence with specified number of samples, channels and sample depth.
 		\param	samplesCount	number of samples.
-		\param	channelsCount	number of channels.
+		\param	infoPtr			optional object storing information like channels number.
+		\param	releaseInfoFlag	if true, information object will be removed during destruction.
 		\return					true if sample sequence was created correctly.
 	*/
-	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1) = 0;
+	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false) = 0;
+
+	/**
+		Get channel info.
+		\return	channel info object or NULL, if no info is available.
+				Please note, that returned channel info object must not be the same as given calling \c CreateSequence.
+	*/
+	virtual const IChannelsInfo* GetChannelsInfo() const = 0;
 
 	/**
 		Return true if this sequence has no sample.
@@ -40,26 +51,12 @@ public:
 	/**
 		Get size of this raster sequence.
 	*/
-	virtual int GetTimeSamplesCount() const = 0;
+	virtual int GetSamplesCount() const = 0;
 
 	/**
-		Get number of color components.
+		Get number of channels.
 	*/
 	virtual int GetChannelsCount() const = 0;
-
-	/**
-		Get sampling period of this sequence.
-		Sampling period is time difference between samples.
-		If returned value is not positive, no period is known.
-	*/
-	virtual double GetSamplingPeriod() const = 0;
-
-	/**
-		Set sampling period of this sequence.
-		Sampling period is time difference between samples.
-		If value is not positive, it means no period is known.
-	*/
-	virtual void SetSamplingPeriod(double value) = 0;
 
 	/**
 		Get sample value at specified index.
@@ -76,6 +73,6 @@ public:
 } // namespace imeas
 
 
-#endif // !imeas_ISamplesSequence_included
+#endif // !imeas_IDataSequence_included
 
 

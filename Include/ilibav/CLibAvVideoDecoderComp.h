@@ -15,7 +15,7 @@ extern "C"{
 #include "iproc/TSyncProcessorCompBase.h"
 #include "imm/IVideoController.h"
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
 
 
 namespace ilibav
@@ -113,7 +113,7 @@ private:
 	istd::CString m_currentUrl;
 
 	I_REF(iimg::IBitmap, m_bitmapObjectCompPtr);
-	I_REF(imeas::ISamplesSequence, m_audioSequenceCompPtr);
+	I_REF(imeas::IDataSequence, m_audioSequenceCompPtr);
 	I_ATTR(double, m_autoAudioGrabLengthAttrPtr);
 
 	int m_currentFrame;

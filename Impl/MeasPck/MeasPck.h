@@ -28,26 +28,26 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			istd::IChangeable> > GeneralBitmap;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CGeneralSamplesSequence,
-			imeas::ISamplesSequence,
+			imeas::IDataSequence,
 			imath::ISampledFunction2d,
 			iser::ISerializable,
 			istd::IChangeable> > GeneralSamplesSequence;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence8,
 			imeas::IDiscrSamplesSequence,
-			imeas::ISamplesSequence,
+			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence8;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence16,
 			imeas::IDiscrSamplesSequence,
-			imeas::ISamplesSequence,
+			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence16;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence32,
 			imeas::IDiscrSamplesSequence,
-			imeas::ISamplesSequence,
+			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence32;
 typedef imeas::CWavSamplesLoaderComp WavSamplesLoader;

@@ -3,9 +3,10 @@
 
 
 // ACF includes
+#include "istd/TOptDelPtr.h"
 #include "imath/TISampledFunction.h"
 
-#include "imeas/ISamplesSequence.h"
+#include "imeas/IDataSequence.h"
 
 
 namespace imeas
@@ -13,10 +14,10 @@ namespace imeas
 
 
 /**
-	General implementation of sample sequence interface ISamplesSequence.
+	General implementation of sample sequence interface IDataSequence.
 */
 class CGeneralSamplesSequence:
-			virtual public ISamplesSequence,
+			virtual public IDataSequence,
 			virtual public imath::ISampledFunction2d
 {
 public:
@@ -26,20 +27,21 @@ public:
 	double* GetSamplesBuffer();
 	int GetSamplesBufferSize() const;
 
-	// reimplemented (imeas::ISamplesSequence)
-	virtual bool CreateSequence(int timeSamplesCount, int channelsCount = 1);
+	bool CreateSequence(int samplesCount, int channelsCount);
+
+	// reimplemented (imeas::IDataSequence)
+	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false);
+	virtual const IChannelsInfo* GetChannelsInfo() const;
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
-	virtual int GetTimeSamplesCount() const;
+	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
-	virtual double GetSamplingPeriod() const;
-	virtual void SetSamplingPeriod(double value);
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
 
 	// reimplemented (imath::ISampledFunction2d)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes);
-	virtual int GetSamplesCount() const;
+	virtual int GetTotalSamplesCount() const;
 	virtual int GetGridSize(int dimensionIndex) const;
 	virtual istd::CRange GetLogicalRange(int dimensionIndex) const;
 	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const;
@@ -60,7 +62,7 @@ private:
 
 	int m_channelsCount;
 
-	double m_samplingPeriod;
+	istd::TOptDelPtr<const IChannelsInfo> m_channelsInfoPtr;
 };
 
 

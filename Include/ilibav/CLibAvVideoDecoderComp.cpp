@@ -7,6 +7,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iprm/IFileNameParam.h"
+#include "imeas/CSamplingChannelsInfo.h"
 
 
 namespace ilibav
@@ -105,7 +106,7 @@ int CLibAvVideoDecoderComp::DoProcessing(
 		}
 	}
 
-	imeas::ISamplesSequence* audioSequencePtr = dynamic_cast<imeas::ISamplesSequence*>(outputPtr);
+	imeas::IDataSequence* audioSequencePtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 	if (		(audioSequencePtr != NULL) &&
 				m_audioSequenceCompPtr.IsValid()){
 		if (audioSequencePtr->CopyFrom(*m_audioSequenceCompPtr)){
@@ -214,9 +215,10 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 				if (m_audioSequenceCompPtr.IsValid() && m_autoAudioGrabLengthAttrPtr.IsValid()){
 					if (m_audioCodecContextPtr->sample_rate > 0){
 						int samplesCount = int(*m_autoAudioGrabLengthAttrPtr * m_audioCodecContextPtr->sample_rate);
-						if (m_audioSequenceCompPtr->CreateSequence(samplesCount, m_audioCodecContextPtr->channels)){
-							m_audioSequenceCompPtr->SetSamplingPeriod(1.0 / m_audioCodecContextPtr->sample_rate);
-						}
+						m_audioSequenceCompPtr->CreateSequence(
+									samplesCount,
+									new imeas::CSamplingChannelsInfo(m_audioCodecContextPtr->channels, 1.0 / m_audioCodecContextPtr->sample_rate),
+									true);
 					}
 				}
 			}
@@ -523,7 +525,7 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 					if (!m_ignoreFirstAudioFrame){
 						int channelsCount = m_audioCodecContextPtr->channels;
 
-						int remainSamples = m_audioSequenceCompPtr->GetTimeSamplesCount() - samplesOffset;
+						int remainSamples = m_audioSequenceCompPtr->GetSamplesCount() - samplesOffset;
 						int samplesToCopy = istd::Min(remainSamples, audioBufferSize / sampleRawSize);
 
 						switch (m_audioCodecContextPtr->sample_fmt){
@@ -578,7 +580,7 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 							break;
 						}
 
-						if (samplesOffset >= m_audioSequenceCompPtr->GetTimeSamplesCount()){
+						if (samplesOffset >= m_audioSequenceCompPtr->GetSamplesCount()){
 							needAudioFrame = false;
 						}
 					}

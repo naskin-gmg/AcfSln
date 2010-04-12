@@ -176,11 +176,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.cpp"
+				RelativePath="..\CDataSequenceViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.moc"
+				RelativePath="..\CDataSequenceViewComp.moc"
 				>
 			</File>
 		</Filter>
@@ -190,7 +190,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.h"
+				RelativePath="..\CDataSequenceViewComp.h"
 				>
 			</File>
 			<File
@@ -223,7 +223,7 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CSamplesSequenceViewComp.ui"
+				RelativePath="..\CDataSequenceViewComp.ui"
 				>
 			</File>
 		</Filter>

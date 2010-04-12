@@ -186,6 +186,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplingChannelsInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.cpp"
 				>
 			</File>
@@ -203,7 +207,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplingChannelsInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IChannelsInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataSequence.h"
 				>
 			</File>
 			<File
@@ -212,10 +228,6 @@
 			</File>
 			<File
 				RelativePath="..\imeas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISamplesSequence.h"
 				>
 			</File>
 			<File
