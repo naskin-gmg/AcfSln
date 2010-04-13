@@ -211,11 +211,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CSamplesSequenceViewComp.cpp"
+				RelativePath="..\generated\moc_CDataSequenceViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSamplesSequenceViewComp.h"
+				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
 				>
 			</File>
 		</Filter>

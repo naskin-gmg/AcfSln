@@ -13,7 +13,7 @@
 
 #include "imeas/IDataSequence.h"
 
-#include "iqtmeas/Generated/ui_CSamplesSequenceViewComp.h"
+#include "iqtmeas/Generated/ui_CDataSequenceViewComp.h"
 
 
 namespace iqtmeas
