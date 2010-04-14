@@ -18,13 +18,13 @@
   <ElementsList count="3">
     <Element>
       <Id>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </Id>
       <PackageId>
         MeasPck
       </PackageId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -70,7 +70,7 @@
                 true
               </IsEnabled>
               <Value>
-                GeneralSamplesSequence
+                GeneralDataSequence
               </Value>
             </Data>
           </AttributeInfo>
@@ -240,7 +240,7 @@
         imath::TISampledFunction&lt;2,1&gt;
       </InterfaceId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
     </Interface>
     <Interface>
@@ -248,7 +248,7 @@
         imeas::IDataSequence
       </InterfaceId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
     </Interface>
     <Interface>
@@ -256,7 +256,7 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
     </Interface>
     <Interface>
@@ -272,7 +272,7 @@
         iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
     </Interface>
     <Interface>
@@ -280,7 +280,7 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        GeneralSamplesSequence
+        GeneralDataSequence
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

@@ -27,6 +27,11 @@ public:
 	virtual bool HasChannelType(int channelType) const;
 	virtual int GetChannelType(int channelIndex) const;
 
+	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const;
+	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual istd::IChangeable* CloneMe() const;
+
 private:
 	int m_channelsCount;
 	double m_samplingPeriod;

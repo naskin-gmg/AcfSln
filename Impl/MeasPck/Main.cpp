@@ -20,7 +20,7 @@ I_EXPORT_COMPONENT(
 			"Bitmap Picture Acquisition Simple General" IM_TAG("Image"));
 
 I_EXPORT_COMPONENT(
-			GeneralSamplesSequence,
+			GeneralDataSequence,
 			"General, system undependent sample sequence implementation",
 			"Samples Sequence Acquisition" IM_TAG("Sampling"));
 

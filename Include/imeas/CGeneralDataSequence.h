@@ -1,5 +1,5 @@
-#ifndef imeas_CGeneralSamplesSequence_included
-#define imeas_CGeneralSamplesSequence_included
+#ifndef imeas_CGeneralDataSequence_included
+#define imeas_CGeneralDataSequence_included
 
 
 // ACF includes
@@ -7,6 +7,7 @@
 #include "imath/TISampledFunction.h"
 
 #include "imeas/IDataSequence.h"
+#include "imeas/IChannelsInfo.h"
 
 
 namespace imeas
@@ -16,12 +17,12 @@ namespace imeas
 /**
 	General implementation of sample sequence interface IDataSequence.
 */
-class CGeneralSamplesSequence:
+class CGeneralDataSequence:
 			virtual public IDataSequence,
 			virtual public imath::ISampledFunction2d
 {
 public:
-	CGeneralSamplesSequence();
+	CGeneralDataSequence();
 
 	const double* GetSamplesBuffer() const;
 	double* GetSamplesBuffer();
@@ -54,7 +55,9 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const;
 	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual istd::IChangeable* CloneMe() const;
 
 private:
 	typedef std::vector<double> Samples;
@@ -68,19 +71,19 @@ private:
 
 // inline methods
 
-inline const double* CGeneralSamplesSequence::GetSamplesBuffer() const
+inline const double* CGeneralDataSequence::GetSamplesBuffer() const
 {
 	return &m_samples[0];
 }
 
 
-inline double* CGeneralSamplesSequence::GetSamplesBuffer()
+inline double* CGeneralDataSequence::GetSamplesBuffer()
 {
 	return &m_samples[0];
 }
 
 
-inline int CGeneralSamplesSequence::GetSamplesBufferSize() const
+inline int CGeneralDataSequence::GetSamplesBufferSize() const
 {
 	return int(m_samples.size());
 }
@@ -89,6 +92,6 @@ inline int CGeneralSamplesSequence::GetSamplesBufferSize() const
 } // namespace imeas
 
 
-#endif // !imeas_CGeneralSamplesSequence_included
+#endif // !imeas_CGeneralDataSequence_included
 
 

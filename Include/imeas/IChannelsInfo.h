@@ -2,7 +2,7 @@
 #define imeas_IChannelsInfo_included
 
 
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 #include "istd/CRange.h"
 
 #include "imeas/imeas.h"
@@ -12,7 +12,7 @@ namespace imeas
 {
 
 
-class IChannelsInfo: virtual public istd::IPolymorphic
+class IChannelsInfo: virtual public istd::IChangeable
 {
 public:
 	enum ChannelType
