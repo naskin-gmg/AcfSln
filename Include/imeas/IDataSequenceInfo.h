@@ -1,5 +1,5 @@
-#ifndef imeas_IChannelsInfo_included
-#define imeas_IChannelsInfo_included
+#ifndef imeas_IDataSequenceInfo_included
+#define imeas_IDataSequenceInfo_included
 
 
 #include "istd/IChangeable.h"
@@ -12,7 +12,7 @@ namespace imeas
 {
 
 
-class IChannelsInfo: virtual public istd::IChangeable
+class IDataSequenceInfo: virtual public istd::IChangeable
 {
 public:
 	enum ChannelType
@@ -59,6 +59,6 @@ public:
 } // namespace imeas
 
 
-#endif // !imeas_IChannelsInfo_included
+#endif // !imeas_IDataSequenceInfo_included
 
 

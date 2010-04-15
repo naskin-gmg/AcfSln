@@ -5,7 +5,7 @@
 #include <QPainter>
 
 // ACF includes
-#include "imeas/CSamplingChannelsInfo.h"
+#include "imeas/CSamplingSequenceInfo.h"
 #include "iqt/CSignalBlocker.h"
 
 
@@ -152,7 +152,7 @@ void CDataSequenceViewComp::on_ZoomOutButton_clicked()
 		return;
 	}
 
-	const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+	const imeas::CSamplingSequenceInfo* infoPtr = dynamic_cast<const imeas::CSamplingSequenceInfo*>(samplesPtr->GetSequenceInfo());
 	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
@@ -198,7 +198,7 @@ void CDataSequenceViewComp::on_NextButton_clicked()
 		return;
 	}
 
-	const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+	const imeas::CSamplingSequenceInfo* infoPtr = dynamic_cast<const imeas::CSamplingSequenceInfo*>(samplesPtr->GetSequenceInfo());
 	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
@@ -239,7 +239,7 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 	const imeas::IDataSequence* samplesPtr = m_parent.GetObjectPtr();
 	if (samplesPtr != NULL){
 		int samplesCount = samplesPtr->GetSamplesCount();
-		const imeas::CSamplingChannelsInfo* infoPtr = dynamic_cast<const imeas::CSamplingChannelsInfo*>(samplesPtr->GetChannelsInfo());
+		const imeas::CSamplingSequenceInfo* infoPtr = dynamic_cast<const imeas::CSamplingSequenceInfo*>(samplesPtr->GetSequenceInfo());
 		double samplingPeriod = (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
 		if ((samplesCount <= 0) || (samplingPeriod < I_BIG_EPSILON)){

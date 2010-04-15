@@ -1,18 +1,18 @@
-#ifndef imeas_CSamplingChannelsInfo_included
-#define imeas_CSamplingChannelsInfo_included
+#ifndef imeas_CSamplingSequenceInfo_included
+#define imeas_CSamplingSequenceInfo_included
 
 
-#include "imeas/IChannelsInfo.h"
+#include "imeas/IDataSequenceInfo.h"
 
 
 namespace imeas
 {
 
 
-class CSamplingChannelsInfo: virtual public IChannelsInfo
+class CSamplingSequenceInfo: virtual public IDataSequenceInfo
 {
 public:
-	CSamplingChannelsInfo(int channelsCount, double samplingPeriod);
+	CSamplingSequenceInfo(int channelsCount, double samplingPeriod);
 
 	/**
 		Get sampling period of this sequence.
@@ -21,7 +21,7 @@ public:
 	*/
 	virtual double GetSamplingPeriod() const;
 
-	// reimplemented (imeas::IChannelsInfo)
+	// reimplemented (imeas::IDataSequenceInfo)
 	virtual int GetChannelsCount() const;
 	virtual istd::CRange GetValueRange(int channelIndex = -1) const;
 	virtual bool HasChannelType(int channelType) const;
@@ -41,6 +41,6 @@ private:
 } // namespace imeas
 
 
-#endif // !imeas_CSamplingChannelsInfo_included
+#endif // !imeas_CSamplingSequenceInfo_included
 
 

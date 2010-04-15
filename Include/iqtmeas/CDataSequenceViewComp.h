@@ -1,5 +1,5 @@
-#ifndef iqtmeas_CSamplesSequenceViewComp_included
-#define iqtmeas_CSamplesSequenceViewComp_included
+#ifndef iqtmeas_CDataSequenceViewComp_included
+#define iqtmeas_CDataSequenceViewComp_included
 
 
 // Qt includes
@@ -98,6 +98,6 @@ private:
 } // namespace iqtmeas
 
 
-#endif // !iqtmeas_CSamplesSequenceViewComp_included
+#endif // !iqtmeas_CDataSequenceViewComp_included
 
 

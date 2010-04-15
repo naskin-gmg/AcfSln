@@ -11,7 +11,7 @@ namespace imeas
 {
 
 
-class IChannelsInfo;
+class IDataSequenceInfo;
 
 
 /**
@@ -24,18 +24,25 @@ public:
 	/**
 		Create container for sample sequence with specified number of samples, channels and sample depth.
 		\param	samplesCount	number of samples.
-		\param	infoPtr			optional object storing information like channels number.
-		\param	releaseInfoFlag	if true, information object will be removed during destruction.
 		\return					true if sample sequence was created correctly.
 	*/
-	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false) = 0;
+	virtual bool CreateSequence(int samplesCount) = 0;
 
 	/**
 		Get channel info.
 		\return	channel info object or NULL, if no info is available.
-				Please note, that returned channel info object must not be the same as given calling \c CreateSequence.
 	*/
-	virtual const IChannelsInfo* GetChannelsInfo() const = 0;
+	virtual const IDataSequenceInfo* GetSequenceInfo() const = 0;
+
+	/**
+		Set channel information object.
+		Please note, that this operation sequence can be changed.
+
+		\param	infoPtr			object storing information like channels number, it can be also NULL.
+		\param	releaseInfoFlag	if true, information object will be removed during destruction.
+		\return					true if the value of \c infoPtr was accepted.
+	*/
+	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag = false) = 0;
 
 	/**
 		Return true if this sequence has no sample.

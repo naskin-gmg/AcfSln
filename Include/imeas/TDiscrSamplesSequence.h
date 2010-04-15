@@ -8,7 +8,7 @@
 #include "iser/CArchiveTag.h"
 
 #include "imeas/IDiscrSamplesSequence.h"
-#include "imeas/CSamplingChannelsInfo.h"
+#include "imeas/CSamplingSequenceInfo.h"
 
 
 namespace imeas
@@ -37,8 +37,9 @@ public:
 	virtual bool SetDiscrSample(int position, int channel, I_DWORD sample);
 
 	// reimplemented (imeas::IDataSequence)
-	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false);
-	virtual const IChannelsInfo* GetChannelsInfo() const;
+	virtual bool CreateSequence(int samplesCount);
+	virtual const IDataSequenceInfo* GetSequenceInfo() const;
+	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
@@ -61,7 +62,7 @@ private:
 	int m_sampleDiff;
 	int m_channelDiff;
 
-	istd::TOptDelPtr<const IChannelsInfo> m_channelsInfoPtr;
+	istd::TOptDelPtr<const IDataSequenceInfo> m_sequnceInfoPtr;
 };
 
 
@@ -93,16 +94,9 @@ bool TDiscrSamplesSequence<Element>::CreateSequence(int samplesCount, int channe
 	m_sampleDiff = channelsCount * sizeof(Element);
 	m_channelDiff = sizeof(Element);
 
-	m_channelsInfoPtr.Reset();
+	m_sequnceInfoPtr.Reset();
 
 	return true;
-}
-
-
-template <typename Element>
-const IChannelsInfo* TDiscrSamplesSequence<Element>::GetChannelsInfo() const
-{
-	return m_channelsInfoPtr.GetPtr();
 }
 
 
@@ -130,7 +124,7 @@ bool TDiscrSamplesSequence<Element>::CreateDiscrSequence(
 	m_sampleDiff = (sampleDiff != 0)? sampleDiff: channelsCount * sizeof(Element);
 	m_channelDiff = (channelDiff != 0)? channelDiff: sizeof(Element);
 
-	m_channelsInfoPtr.Reset();
+	m_sequnceInfoPtr.Reset();
 
 	return true;
 }
@@ -166,16 +160,30 @@ bool TDiscrSamplesSequence<Element>::SetDiscrSample(int position, int channel, I
 // reimplemented (imeas::IDataSequence)
 
 template <typename Element>
-bool TDiscrSamplesSequence<Element>::CreateSequence(int samplesCount, const IChannelsInfo* infoPtr, bool releaseInfoFlag)
+bool TDiscrSamplesSequence<Element>::CreateSequence(int samplesCount)
 {
-	m_channelsInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
-
-	if (infoPtr != NULL){
-		return CreateSequence(samplesCount, infoPtr->GetChannelsCount());
+	if (m_sequnceInfoPtr.IsValid()){
+		return CreateSequence(samplesCount, m_sequnceInfoPtr->GetChannelsCount());
 	}
 	else{
 		return CreateSequence(samplesCount, 1);
 	}
+}
+
+
+template <typename Element>
+bool TDiscrSamplesSequence<Element>::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag)
+{
+	m_sequnceInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
+
+	return true;
+}
+
+
+template <typename Element>
+const IDataSequenceInfo* TDiscrSamplesSequence<Element>::GetSequenceInfo() const
+{
+	return m_sequnceInfoPtr.GetPtr();
 }
 
 
@@ -343,12 +351,12 @@ bool TDiscrSamplesSequence<Element>::CopyFrom(const istd::IChangeable& object)
 			}
 		}
 
-		const CSamplingChannelsInfo* infoPtr = dynamic_cast<const CSamplingChannelsInfo*>(sequencePtr->GetChannelsInfo());
+		const CSamplingSequenceInfo* infoPtr = dynamic_cast<const CSamplingSequenceInfo*>(sequencePtr->GetSequenceInfo());
 		if (infoPtr != NULL){
-			m_channelsInfoPtr.SetPtr(new CSamplingChannelsInfo(m_channelsCount, infoPtr->GetSamplingPeriod()), true);
+			m_sequnceInfoPtr.SetPtr(new CSamplingSequenceInfo(m_channelsCount, infoPtr->GetSamplingPeriod()), true);
 		}
 		else{
-			m_channelsInfoPtr.Reset();
+			m_sequnceInfoPtr.Reset();
 		}
 
 		return true;

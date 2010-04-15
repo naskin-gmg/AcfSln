@@ -7,7 +7,7 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "imeas/IChannelsInfo.h"
+#include "imeas/IDataSequenceInfo.h"
 
 
 namespace imeas
@@ -35,12 +35,10 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 
 // reimplemented (imeas::IDataSequence)
 
-bool CGeneralDataSequence::CreateSequence(int samplesCount, const IChannelsInfo* infoPtr, bool releaseInfoFlag)
+bool CGeneralDataSequence::CreateSequence(int samplesCount)
 {
-	m_channelsInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
-
-	if (infoPtr != NULL){
-		return CreateSequence(samplesCount, infoPtr->GetChannelsCount());
+	if (m_sequnceInfoPtr.IsValid()){
+		return CreateSequence(samplesCount, m_sequnceInfoPtr->GetChannelsCount());
 	}
 	else{
 		return CreateSequence(samplesCount, 1);
@@ -48,9 +46,17 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, const IChannelsInfo*
 }
 
 
-const IChannelsInfo* CGeneralDataSequence::GetChannelsInfo() const
+const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
 {
-	return m_channelsInfoPtr.GetPtr();
+	return m_sequnceInfoPtr.GetPtr();
+}
+
+
+bool CGeneralDataSequence::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag)
+{
+	m_sequnceInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
+
+	return true;
 }
 
 
@@ -63,7 +69,7 @@ bool CGeneralDataSequence::IsEmpty() const
 void CGeneralDataSequence::ResetSequence()
 {
 	m_samples.clear();
-	m_channelsInfoPtr.Reset();
+	m_sequnceInfoPtr.Reset();
 }
 
 
@@ -159,8 +165,8 @@ istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 
 istd::CRange CGeneralDataSequence::GetResultValueRange(int dimensionIndex, int /*resultDimension*/) const
 {
-	if ((dimensionIndex == 0) && m_channelsInfoPtr.IsValid()){
-		return m_channelsInfoPtr->GetValueRange(-1);
+	if ((dimensionIndex == 0) && m_sequnceInfoPtr.IsValid()){
+		return m_sequnceInfoPtr->GetValueRange(-1);
 	}
 
 	return istd::CRange(-1, 1);
@@ -264,14 +270,14 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object)
 
 		const CGeneralDataSequence* nativeSequencePtr = dynamic_cast<const CGeneralDataSequence*>(sequencePtr);
 		if (nativeSequencePtr != NULL){
-			if (nativeSequencePtr->m_channelsInfoPtr.IsValid() && nativeSequencePtr->m_channelsInfoPtr.IsToRelase()){
-				m_channelsInfoPtr.SetCastedOrRemove(nativeSequencePtr->m_channelsInfoPtr->CloneMe());
-				if (!m_channelsInfoPtr.IsValid()){
+			if (nativeSequencePtr->m_sequnceInfoPtr.IsValid() && nativeSequencePtr->m_sequnceInfoPtr.IsToRelase()){
+				m_sequnceInfoPtr.SetCastedOrRemove(nativeSequencePtr->m_sequnceInfoPtr->CloneMe());
+				if (!m_sequnceInfoPtr.IsValid()){
 					return false;
 				}
 			}
 			else{
-				m_channelsInfoPtr.SetPtr(nativeSequencePtr->m_channelsInfoPtr.GetPtr(), false);
+				m_sequnceInfoPtr.SetPtr(nativeSequencePtr->m_sequnceInfoPtr.GetPtr(), false);
 			}
 
 			m_samples = nativeSequencePtr->m_samples;

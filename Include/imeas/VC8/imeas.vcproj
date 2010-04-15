@@ -186,7 +186,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSamplingChannelsInfo.cpp"
+				RelativePath="..\CSamplingSequenceInfo.cpp"
 				>
 			</File>
 			<File
@@ -207,7 +207,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSamplingChannelsInfo.h"
+				RelativePath="..\CSamplingSequenceInfo.h"
 				>
 			</File>
 			<File
@@ -215,7 +215,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IChannelsInfo.h"
+				RelativePath="..\IDataSequenceInfo.h"
 				>
 			</File>
 			<File

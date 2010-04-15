@@ -7,7 +7,7 @@
 #include "imath/TISampledFunction.h"
 
 #include "imeas/IDataSequence.h"
-#include "imeas/IChannelsInfo.h"
+#include "imeas/IDataSequenceInfo.h"
 
 
 namespace imeas
@@ -31,8 +31,9 @@ public:
 	bool CreateSequence(int samplesCount, int channelsCount);
 
 	// reimplemented (imeas::IDataSequence)
-	virtual bool CreateSequence(int samplesCount, const IChannelsInfo* infoPtr = NULL, bool releaseInfoFlag = false);
-	virtual const IChannelsInfo* GetChannelsInfo() const;
+	virtual bool CreateSequence(int samplesCount);
+	virtual const IDataSequenceInfo* GetSequenceInfo() const;
+	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
@@ -65,7 +66,7 @@ private:
 
 	int m_channelsCount;
 
-	istd::TOptDelPtr<const IChannelsInfo> m_channelsInfoPtr;
+	istd::TOptDelPtr<const IDataSequenceInfo> m_sequnceInfoPtr;
 };
 
 
