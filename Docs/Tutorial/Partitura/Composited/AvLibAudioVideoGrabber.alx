@@ -1,96 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1259
+          1443
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          170
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="35">
-    <Element>
-      <ComponentName>
-        AcquisitionFramework
-      </ComponentName>
-      <X>
-        -77
-      </X>
-      <X>
-        -63
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AcquisitionProcessorGui
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        -82
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Audio
-      </ComponentName>
-      <X>
-        849.942
-      </X>
-      <X>
-        -253.144
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AudioDialogLoader
-      </ComponentName>
-      <X>
-        599.846
-      </X>
-      <X>
-        -100.892
-      </X>
-    </Element>
+  <PositionMap count="14">
     <Element>
       <ComponentName>
         AudioDock
       </ComponentName>
       <X>
-        -61
+        375
       </X>
       <X>
-        -479
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AudioPersistenceGui
-      </ComponentName>
-      <X>
-        594.321
-      </X>
-      <X>
-        -251.314
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        405
-      </X>
-      <X>
-        -82
+        475
       </X>
     </Element>
     <Element>
@@ -98,32 +43,10 @@
         BitmapDialogLoader
       </ComponentName>
       <X>
-        595
+        1050
       </X>
       <X>
-        -494
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapDialogLoader2
-      </ComponentName>
-      <X>
-        595
-      </X>
-      <X>
-        -486
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapLoader
-      </ComponentName>
-      <X>
-        852.173
-      </X>
-      <X>
-        -587.283
+        325
       </X>
     </Element>
     <Element>
@@ -131,10 +54,10 @@
         BitmapPersistenceGui
       </ComponentName>
       <X>
-        366.107
+        700
       </X>
       <X>
-        -799.193
+        150
       </X>
     </Element>
     <Element>
@@ -142,120 +65,10 @@
         BitmapView
       </ComponentName>
       <X>
-        310.784
+        525
       </X>
       <X>
-        -558.74
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedGui
-      </ComponentName>
-      <X>
-        339.507
-      </X>
-      <X>
-        -232.343
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSet
-      </ComponentName>
-      <X>
-        -95
-      </X>
-      <X>
-        -291
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSetGui
-      </ComponentName>
-      <X>
-        -25
-      </X>
-      <X>
-        -196
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        EmptyParamsSet
-      </ComponentName>
-      <X>
-        -278
-      </X>
-      <X>
-        -200
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        -70
-      </X>
-      <X>
-        125
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParam
-      </ComponentName>
-      <X>
-        -65
-      </X>
-      <X>
-        -454
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParamGui
-      </ComponentName>
-      <X>
-        194
-      </X>
-      <X>
-        -451
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistence
-      </ComponentName>
-      <X>
-        242
-      </X>
-      <X>
-        -267
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistenceGui
-      </ComponentName>
-      <X>
-        -64
-      </X>
-      <X>
-        14
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        -364.113
-      </X>
-      <X>
-        -235.414
+        250
       </X>
     </Element>
     <Element>
@@ -263,21 +76,10 @@
         ImageGui
       </ComponentName>
       <X>
-        60.492
+        675
       </X>
       <X>
-        -560.796
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        -250.316
-      </X>
-      <X>
-        -9.89949
+        500
       </X>
     </Element>
     <Element>
@@ -285,10 +87,10 @@
         LogDock
       </ComponentName>
       <X>
-        787.119
+        1050
       </X>
       <X>
-        -350.311
+        650
       </X>
     </Element>
     <Element>
@@ -296,10 +98,10 @@
         MediaDialogLoader
       </ComponentName>
       <X>
-        -543.762
+        125
       </X>
       <X>
-        -401.087
+        550
       </X>
     </Element>
     <Element>
@@ -307,10 +109,10 @@
         MediaLoader
       </ComponentName>
       <X>
-        -485.264
+        125
       </X>
       <X>
-        -36.7422
+        775
       </X>
     </Element>
     <Element>
@@ -318,10 +120,10 @@
         MediaPersistenceGui
       </ComponentName>
       <X>
-        -286.38
+        150
       </X>
       <X>
-        -493.193
+        375
       </X>
     </Element>
     <Element>
@@ -329,10 +131,10 @@
         PersistenceDock
       </ComponentName>
       <X>
-        219.208
+        900
       </X>
       <X>
-        -930.434
+        50
       </X>
     </Element>
     <Element>
@@ -340,21 +142,10 @@
         PersistenceGui
       </ComponentName>
       <X>
-        -488.056
+        275
       </X>
       <X>
-        -788.827
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapFramework
-      </ComponentName>
-      <X>
-        547
-      </X>
-      <X>
-        -156
+        125
       </X>
     </Element>
     <Element>
@@ -362,10 +153,10 @@
         StandaloneApp
       </ComponentName>
       <X>
-        67.263
+        650
       </X>
       <X>
-        -306.831
+        650
       </X>
     </Element>
     <Element>
@@ -373,10 +164,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -208.524
+        357.524
       </X>
       <X>
-        -292.321
+        694.321
       </X>
     </Element>
     <Element>
@@ -384,21 +175,10 @@
         VideoGrabber
       </ComponentName>
       <X>
-        -248.262
+        475
       </X>
       <X>
-        -691.526
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        WavSamplesLoader
-      </ComponentName>
-      <X>
-        872.57
-      </X>
-      <X>
-        -100.409
+        375
       </X>
     </Element>
   </PositionMap>
