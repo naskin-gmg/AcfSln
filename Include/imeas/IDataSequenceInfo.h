@@ -33,7 +33,14 @@ public:
 	};
 
 	/**
+		Get number of samples.
+		If number of samples is undefined, it returns negative value.
+	*/
+	virtual int GetSamplesCount() const = 0;
+
+	/**
 		Get number of channels.
+		If number of channels is undefined, it returns negative value.
 	*/
 	virtual int GetChannelsCount() const = 0;
 

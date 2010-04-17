@@ -22,6 +22,12 @@ double CSamplingSequenceInfo::GetSamplingPeriod() const
 
 // reimplemented (imeas::IDataSequenceInfo)
 
+int CSamplingSequenceInfo::GetSamplesCount() const
+{
+	return -1;
+}
+
+
 int CSamplingSequenceInfo::GetChannelsCount() const
 {
 	return m_channelsCount;

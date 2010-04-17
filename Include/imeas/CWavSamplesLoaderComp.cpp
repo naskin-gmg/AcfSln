@@ -95,7 +95,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 		int samplesCount = sequencePtr->GetSamplesCount();
 		int channelsCount = sequencePtr->GetChannelsCount();
 
-		const CSamplingSequenceInfo* infoPtr = dynamic_cast<const CSamplingSequenceInfo*>(sequencePtr->GetSequenceInfo());
+		const CSamplingSequenceInfo* infoPtr = sequencePtr->GetSequenceInfo().Cast<const CSamplingSequenceInfo*>();
 		double samplingPeriod = (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 44000;
 
 		WavHeader header;

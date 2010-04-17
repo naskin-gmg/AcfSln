@@ -8,7 +8,7 @@
 #include "iimg/CGeneralBitmap.h"
 
 // ACF-Solutions includes
-#include "imeas/TDiscrSamplesSequence.h"
+#include "imeas/TDiscrDataSequence.h"
 #include "imeas/CGeneralDataSequence.h"
 #include "imeas/CWavSamplesLoaderComp.h"
 
@@ -34,19 +34,19 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			istd::IChangeable> > GeneralDataSequence;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence8,
-			imeas::IDiscrSamplesSequence,
+			imeas::IDiscrDataSequence,
 			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence8;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence16,
-			imeas::IDiscrSamplesSequence,
+			imeas::IDiscrDataSequence,
 			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence16;
 typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::CSimpleSamplesSequence32,
-			imeas::IDiscrSamplesSequence,
+			imeas::IDiscrDataSequence,
 			imeas::IDataSequence,
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence32;

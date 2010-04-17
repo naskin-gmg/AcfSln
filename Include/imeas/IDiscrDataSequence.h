@@ -1,8 +1,6 @@
-#ifndef imeas_IDiscrSamplesSequence_included
-#define imeas_IDiscrSamplesSequence_included
+#ifndef imeas_IDiscrDataSequence_included
+#define imeas_IDiscrDataSequence_included
 
-
-#include "iser/ISerializable.h"
 
 #include "imeas/IDataSequence.h"
 
@@ -15,7 +13,7 @@ namespace imeas
 	General definition of sequence contains discrete sample values in regular time grid.
 	All samples has the same number of channels components.
 */
-class IDiscrSamplesSequence: virtual public IDataSequence
+class IDiscrDataSequence: virtual public IDataSequence
 {
 public:
 	/**
@@ -62,6 +60,6 @@ public:
 } // namespace imeas
 
 
-#endif // !imeas_IDiscrSamplesSequence_included
+#endif // !imeas_IDiscrDataSequence_included
 
 

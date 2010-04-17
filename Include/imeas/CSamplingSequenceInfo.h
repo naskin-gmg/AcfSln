@@ -22,6 +22,7 @@ public:
 	virtual double GetSamplingPeriod() const;
 
 	// reimplemented (imeas::IDataSequenceInfo)
+	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
 	virtual istd::CRange GetValueRange(int channelIndex = -1) const;
 	virtual bool HasChannelType(int channelType) const;

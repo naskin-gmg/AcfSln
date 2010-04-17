@@ -20,10 +20,22 @@ CGeneralDataSequence::CGeneralDataSequence()
 }
 
 
+// reimplemented (imeas::IDataSequence)
+
 bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 {
-	I_ASSERT(samplesCount >= 0);
-	I_ASSERT(channelsCount >= 0);
+	if (m_sequnceInfoPtr.IsValid()){
+		if (samplesCount < 0){
+			samplesCount = m_sequnceInfoPtr->GetSamplesCount();
+		}
+		if (channelsCount < 0){
+			channelsCount = m_sequnceInfoPtr->GetChannelsCount();
+		}
+	}
+
+	if ((samplesCount < 0) || (channelsCount < 0)){
+		return false;
+	}
 
 	m_channelsCount = channelsCount;
 
@@ -33,28 +45,15 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 }
 
 
-// reimplemented (imeas::IDataSequence)
-
-bool CGeneralDataSequence::CreateSequence(int samplesCount)
+const istd::TRetSmartPtr<IDataSequenceInfo>& CGeneralDataSequence::GetSequenceInfo() const
 {
-	if (m_sequnceInfoPtr.IsValid()){
-		return CreateSequence(samplesCount, m_sequnceInfoPtr->GetChannelsCount());
-	}
-	else{
-		return CreateSequence(samplesCount, 1);
-	}
+	return m_sequnceInfoPtr;
 }
 
 
-const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
+bool CGeneralDataSequence::SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr)
 {
-	return m_sequnceInfoPtr.GetPtr();
-}
-
-
-bool CGeneralDataSequence::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag)
-{
-	m_sequnceInfoPtr.SetPtr(infoPtr, releaseInfoFlag);
+	m_sequnceInfoPtr = infoPtr;
 
 	return true;
 }
@@ -235,7 +234,8 @@ bool CGeneralDataSequence::Serialize(iser::IArchive& archive)
 
 	if (!isStoring){
 		notifier.SetPtr(this);
-		if (!CreateSequence(samplesCount, channelsCount)){
+
+		if ((samplesCount < 0) || (channelsCount < 0) || !CreateSequence(samplesCount, channelsCount)){
 			return false;
 		}
 	}
@@ -270,22 +270,15 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object)
 
 		const CGeneralDataSequence* nativeSequencePtr = dynamic_cast<const CGeneralDataSequence*>(sequencePtr);
 		if (nativeSequencePtr != NULL){
-			if (nativeSequencePtr->m_sequnceInfoPtr.IsValid() && nativeSequencePtr->m_sequnceInfoPtr.IsToRelase()){
-				m_sequnceInfoPtr.SetCastedOrRemove(nativeSequencePtr->m_sequnceInfoPtr->CloneMe());
-				if (!m_sequnceInfoPtr.IsValid()){
-					return false;
-				}
-			}
-			else{
-				m_sequnceInfoPtr.SetPtr(nativeSequencePtr->m_sequnceInfoPtr.GetPtr(), false);
-			}
-
 			m_samples = nativeSequencePtr->m_samples;
 			m_channelsCount = nativeSequencePtr->m_channelsCount;
 		}
 		else{
 			int samplesCount = sequencePtr->GetSamplesCount();
 			int channelsCount = sequencePtr->GetChannelsCount();
+
+			I_ASSERT(samplesCount >= 0);
+			I_ASSERT(channelsCount >= 0);
 
 			if (!CreateSequence(samplesCount, channelsCount)){
 				return false;
@@ -299,6 +292,8 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object)
 				}
 			}
 		}
+
+		m_sequnceInfoPtr = sequencePtr->GetSequenceInfo();
 
 		return true;
 	}

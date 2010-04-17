@@ -215,9 +215,8 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 				if (m_audioSequenceCompPtr.IsValid() && m_autoAudioGrabLengthAttrPtr.IsValid()){
 					if (m_audioCodecContextPtr->sample_rate > 0){
 						int samplesCount = int(*m_autoAudioGrabLengthAttrPtr * m_audioCodecContextPtr->sample_rate);
-						m_audioSequenceCompPtr->SetSequenceInfo(
-									new imeas::CSamplingSequenceInfo(m_audioCodecContextPtr->channels, 1.0 / m_audioCodecContextPtr->sample_rate),
-									true);
+						istd::TSmartPtr<imeas::IDataSequenceInfo> infoPtr(new imeas::CSamplingSequenceInfo(m_audioCodecContextPtr->channels, 1.0 / m_audioCodecContextPtr->sample_rate));
+						m_audioSequenceCompPtr->SetSequenceInfo(infoPtr);
 						m_audioSequenceCompPtr->CreateSequence(samplesCount);
 					}
 				}

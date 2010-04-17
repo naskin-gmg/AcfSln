@@ -2,6 +2,8 @@
 #define imeas_IDataSequence_included
 
 
+// ACF includes
+#include "istd/TRetSmartPtr.h"
 #include "iser/ISerializable.h"
 
 #include "imeas/imeas.h"
@@ -26,13 +28,13 @@ public:
 		\param	samplesCount	number of samples.
 		\return					true if sample sequence was created correctly.
 	*/
-	virtual bool CreateSequence(int samplesCount) = 0;
+	virtual bool CreateSequence(int samplesCount = -1, int channelsCount = -1) = 0;
 
 	/**
 		Get channel info.
 		\return	channel info object or NULL, if no info is available.
 	*/
-	virtual const IDataSequenceInfo* GetSequenceInfo() const = 0;
+	virtual const istd::TRetSmartPtr<IDataSequenceInfo>& GetSequenceInfo() const = 0;
 
 	/**
 		Set channel information object.
@@ -42,7 +44,7 @@ public:
 		\param	releaseInfoFlag	if true, information object will be removed during destruction.
 		\return					true if the value of \c infoPtr was accepted.
 	*/
-	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseInfoFlag = false) = 0;
+	virtual bool SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr) = 0;
 
 	/**
 		Return true if this sequence has no sample.
