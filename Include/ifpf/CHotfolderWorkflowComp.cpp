@@ -24,22 +24,25 @@ CHotfolderWorkflowComp::CHotfolderWorkflowComp()
 }
 
 
+// reimplemented (ifpf::IHotfolderInfoManager)
+
+ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const istd::CString& hotfolderName) const
+{
+	return NULL;
+}
+
+
 // reimplemented (ifpf::IHotfolderWorkflow)
 
-iprm::IParamsSet* CHotfolderWorkflowComp::AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId)
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId)
 {
-	iprm::IParamsSet* hotfolderInfoPtr = CreateHotfolder(hotfolderName, hotfolderId);
-	if (hotfolderInfoPtr != NULL){
+	HotfolderItem* newHotfolderInfoPtr = CreateHotfolder(hotfolderName, hotfolderId);
+	if (newHotfolderInfoPtr != NULL){
 		istd::CChangeNotifier changePtr(this, CF_HOTFOLDER_ADDED);
 
-		HotfolderInfo newHotfolder;
+		m_hotfolders.PushBack(newHotfolderInfoPtr);
 
-		newHotfolder.hotfolderId = hotfolderId;
-		newHotfolder.hotfolderPtr.SetPtr(hotfolderInfoPtr);
-
-		m_hotfolders.push_back(newHotfolder);
-
-		return hotfolderInfoPtr;
+		return newHotfolderInfoPtr->elementPtr.GetPtr();
 	}
 
 	return NULL;
@@ -49,24 +52,6 @@ iprm::IParamsSet* CHotfolderWorkflowComp::AddHotfolder(const istd::CString& hotf
 bool CHotfolderWorkflowComp::RemoveHotfolder(const istd::CString& hotfolderName)
 {
 	return true;
-}
-
-
-ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetHotfolderProcessingInfo(const istd::CString& hotfolderName) const
-{
-	return NULL;
-}
-
-
-istd::CStringList CHotfolderWorkflowComp::GetHotfolderList() const
-{
-	return istd::CStringList();
-}
-
-
-int CHotfolderWorkflowComp::GetWorkingState(const istd::CString& hotfolderName) const
-{
-	return 0;
 }
 
 
@@ -84,6 +69,34 @@ istd::CStringList CHotfolderWorkflowComp::GetHotfolderIds() const
 }
 
 
+istd::CStringList CHotfolderWorkflowComp::GetHotfolderList() const
+{
+	istd::CStringList hotfolderList;
+
+	for (int index = 0; index < m_hotfolders.GetCount(); index++){
+		hotfolderList.push_back(m_hotfolders.GetAt(index)->elementPtr->GetName());
+	}
+
+	return hotfolderList;
+}
+
+
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::GetHotfolder(const istd::CString& hotfolderName) const
+{
+	for (int index = 0; index < m_hotfolders.GetCount(); index++){
+		HotfolderItem* infoPtr = m_hotfolders.GetAt(index);
+		I_ASSERT(infoPtr != NULL);
+		I_ASSERT(infoPtr->elementPtr != NULL);
+
+		if (infoPtr->elementPtr->GetName() == hotfolderName){
+			return infoPtr->elementPtr.GetPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
@@ -96,7 +109,7 @@ bool CHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 	
-iprm::IParamsSet* CHotfolderWorkflowComp::CreateHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId) const
+CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId) const
 {
 	if (!m_hotoflderFactoriesCompPtr.IsValid()){
 		return NULL;
@@ -106,15 +119,36 @@ iprm::IParamsSet* CHotfolderWorkflowComp::CreateHotfolder(const istd::CString& h
 		return NULL;
 	}
 
+	HotfolderItem* newHotfolderItemPtr = new HotfolderItem();
+
 	for (int factoryIndex = 0; factoryIndex < m_hotoflderFactoryIdsAttrPtr.GetCount(); factoryIndex++){
 		if (hotfolderId == m_hotoflderFactoryIdsAttrPtr[factoryIndex]){
 			if (factoryIndex < m_hotoflderFactoriesCompPtr.GetCount()){
-				return m_hotoflderFactoriesCompPtr.CreateInstance(factoryIndex);
+				iprm::IParamsSet* hotfolderParamsPtr = m_hotoflderFactoriesCompPtr.CreateInstance(factoryIndex);
+				if (hotfolderParamsPtr != NULL){
+					newHotfolderItemPtr->hotfolderParamsPtr.SetPtr(hotfolderParamsPtr);
+
+					newHotfolderItemPtr->elementPtr.SetPtr(CreateWorkflowItem(hotfolderId));
+
+					newHotfolderItemPtr->elementPtr->SetName(hotfolderName);
+
+					return newHotfolderItemPtr;
+				}
 			}
 		}
 	}
 
 	return NULL;
+}
+
+
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::CreateWorkflowItem(const istd::CString& hotfolderId) const
+{
+	ifpf::CHotfolderWorkflowItem* itemPtr = new ifpf::CHotfolderWorkflowItem();
+
+	itemPtr->Initialize(hotfolderId, this);
+
+	return itemPtr;
 }
 
 

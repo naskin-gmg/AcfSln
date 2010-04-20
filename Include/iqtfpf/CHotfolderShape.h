@@ -1,31 +1,31 @@
-#ifndef icmpstr_CHotfolderShape_included
-#define icmpstr_CHotfolderShape_included
+#ifndef iqtfpf_CHotfolderShape_included
+#define iqtfpf_CHotfolderShape_included
 
 
 // Qt includes
-#include <QGraphicsItem>
+#include <QGraphicsRectItem>
 
 
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
-#include "ifpf/CHotfolderVisualisation.h"
+#include "ifpf/CVisualHotfolderWorkflowItem.h"
 
 #include "iqt2d/TObjectShapeBase.h"
 
 
 
-namespace icmpstr
+namespace iqtfpf
 {
 
 
-class CHotfolderShape: public iqt2d::TObjectShapeBase<QGraphicsRectItem, ifpf::CHotfolderVisualisation>
+class CHotfolderShape: public iqt2d::TObjectShapeBase<QGraphicsRectItem, ifpf::CVisualHotfolderWorkflowItem>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TObjectShapeBase<QGraphicsRectItem, ifpf::CHotfolderVisualisation> BaseClass;
+	typedef iqt2d::TObjectShapeBase<QGraphicsRectItem, ifpf::CVisualHotfolderWorkflowItem> BaseClass;
 
 	CHotfolderShape(const iqt2d::ISceneProvider* providerPtr = NULL);
 
@@ -34,14 +34,11 @@ public:
 	// reimplemented (QGraphicsItem)
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* stylePtr, QWidget* widgetPtr);
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr);
-	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr);
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
 
-signals:
-	void RectChanged(QRectF rect);
+Q_SIGNALS:
 	void SelectionChanged(bool state);
 
 protected:
@@ -52,24 +49,16 @@ protected:
 	};
 
 	// reimplemented (iqt2d::TObjectShapeBase)
-	void UpdateGraphicsItem(const iprm::IParamsSet& element);
+	virtual void UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowItem& element);
 
 	// reimplemented (TShapeBase)
 	virtual void OnSelectionChanged(bool isSelected);
-
-private:
-	QStringList m_exportedInterfacesList;
-
-	// shadows
-	QString m_addressString;
-	QIcon m_icon;
-	bool m_isConsistent;
 };
 
 
-} // namespace icmpstr
+} // namespace iqtfpf
 
 
-#endif // !icmpstr_CHotfolderShape_included
+#endif // !iqtfpf_CHotfolderShape_included
 
 

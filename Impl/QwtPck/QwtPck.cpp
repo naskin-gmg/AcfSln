@@ -10,6 +10,7 @@ static struct StaticInit
 	StaticInit()
 	{
 		Q_INIT_RESOURCE(iqtgui);
+		Q_INIT_RESOURCE(Qwt3d);
 	}
 
 } instance;

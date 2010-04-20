@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1444
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          171
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         BitmapLoader
@@ -43,7 +43,7 @@
         BitmapPreviewGenerator
       </ComponentName>
       <X>
-        350
+        650
       </X>
       <X>
         425
@@ -80,17 +80,6 @@
       </X>
       <X>
         175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PreviewBinder
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <X>
-        425
       </X>
     </Element>
   </PositionMap>

@@ -1,45 +1,41 @@
-#ifndef icmpstr_CVisualHotfolderWorkflowComp_included
-#define icmpstr_CVisualHotfolderWorkflowComp_included
+#ifndef ifpf_CVisualHotfolderWorkflowComp_included
+#define ifpf_CVisualHotfolderWorkflowComp_included
 
+
+// ACF includes
+#include "istd/TChangeDelegator.h"
 
 #include "iser/IObject.h"
 
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CRegistry.h"
-#include "icomp/CPackageStaticInfo.h"
-#include "icomp/CComponentBase.h"
+#include "imod/TModelWrap.h"
 
 #include "ibase/TLoggerCompWrap.h"
-#include "ibase/TFactorisableContainer.h"
-
-#include "icmpstr/IElementSelectionInfo.h"
-#include "icmpstr/CVisualRegistryElement.h"
 
 
-namespace icmpstr
+// AcfSln includes
+#include "ifpf/CHotfolderWorkflowComp.h"
+#include "ifpf/CVisualHotfolderWorkflowItem.h"
+
+
+namespace ifpf
 {
 
 
+/**
+	
+*/
 class CVisualHotfolderWorkflowComp:
-			public ibase::TLoggerCompWrap<ifpf::CHotfolderWorkflowComp>,
-			public ibase::TFactorisableContainer<iser::IObject>,
-			public icmpstr::IElementSelectionInfo
+			public ibase::TLoggerCompWrap<ifpf::CHotfolderWorkflowComp>
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
-	typedef icomp::CRegistry BaseClass2;
+	typedef ibase::TLoggerCompWrap<ifpf::CHotfolderWorkflowComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CVisualHotfolderWorkflowComp);
-		I_REGISTER_INTERFACE(istd::IChangeable);
-		I_REGISTER_INTERFACE(icomp::IRegistry);
-		I_REGISTER_INTERFACE(icmpstr::IElementSelectionInfo);
-		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 	I_END_COMPONENT;
 
 	enum ChangeFlags
 	{
-		CF_NOTE = 0x40000,
-		CF_SELECTION = 0x80000
+		CF_SELECTION = 0x8000000
 	};
 
 	enum MessageId
@@ -47,47 +43,24 @@ public:
 		MI_CANNOT_CREATE_ELEMENT = 650
 	};
 
-	virtual bool SerializeComponentsLayout(iser::IArchive& archive);
-	virtual bool SerializeRegistry(iser::IArchive& archive);
-	virtual void SetSelectedElement(CVisualRegistryElement* selectedElementPtr);
-
-	// reimplemented (icmpstr::IElementSelectionInfo)
-	virtual icomp::IRegistry* GetSelectedRegistry() const;
-	virtual iser::ISerializable* GetSelectedElement() const;
-	virtual const std::string& GetSelectedElementName() const;
-	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
-
-	// reimplemented (icomp::IRegistry)
-	virtual ElementInfo* InsertElementInfo(
-				const std::string& elementId,
-				const icomp::CComponentAddress& address,
-				bool ensureElementCreated = true);
-	virtual bool RemoveElementInfo(const std::string& elementId);
+	virtual bool SerializeLayout(iser::IArchive& archive);
+	virtual bool SerializeWorkflow(iser::IArchive& archive);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualRegistryElement> > Element;
-	typedef istd::TDelPtr<QIcon> IconPtr;
-	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
+	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualHotfolderWorkflowItem> > Element;
 
-	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
+	bool SerializeItemPosition(iser::IArchive& archive, istd::CString& hotfolderName, i2d::CVector2d& position);
 
-	// reimplemented (icomp::CRegistry)
-	virtual icomp::IRegistryElement* CreateRegistryElement(
-				const std::string& elementId,
-				const icomp::CComponentAddress& address) const;
-
-private:
-	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
-
-	std::string m_selectedElementId;
+	// reimplemented (ifpf::CHotfolderWorkflowComp)
+	virtual ifpf::IHotfolderWorkflowItem* CreateWorkflowItem(const istd::CString& hotfolderId) const;
 };
 
 
-} // namespace icmpstr
+} // namespace ifpf
 
 
-#endif // !icmpstr_CVisualHotfolderWorkflowComp_included
+#endif // !ifpf_CVisualHotfolderWorkflowComp_included
 

@@ -1,4 +1,4 @@
-#include "ifpf/CHotfolderWorkflowComp.h"
+#include "ifpf/CVisualHotfolderWorkflowComp.h"
 
 
 // ACF includes
@@ -19,46 +19,9 @@ namespace ifpf
 
 // public methods
 
-CHotfolderWorkflowComp::CHotfolderWorkflowComp()
-{
-}
-
-
-// reimplemented (ifpf::IHotfolderWorkflow)
-
-ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId)
-{
-	return NULL;
-}
-
-
-bool CHotfolderWorkflowComp::RemoveHotfolder(const istd::CString& hotfolderName)
-{
-	return true;
-}
-
-
-ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetHotfolder(const istd::CString& hotfolderName) const
-{
-	return NULL;
-}
-
-
-istd::CStringList CHotfolderWorkflowComp::GetHotfoldersList() const
-{
-	return istd::CStringList();
-}
-
-
-int CHotfolderWorkflowComp::GetWorkingState(const istd::CString& hotfolderName) const
-{
-	return 0;
-}
-
-
 // reimplemented (iser::ISerializable)
 
-bool CHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
+bool CVisualHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 

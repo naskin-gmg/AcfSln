@@ -12,16 +12,14 @@
 
 
 // ACF includes
-#include "iqtfpf/CHotfolderWorkflowScenographerComp.h"
 #include "iqtfpf/CHotfolderShape.h"
 
 
-namespace icmpstr
+namespace iqtfpf
 {
 
 
-CHotfolderShape::CHotfolderShape(
-			const iqt2d::ISceneProvider* providerPtr)
+CHotfolderShape::CHotfolderShape(const iqt2d::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr)
 {
 }
@@ -48,23 +46,57 @@ QRectF CHotfolderShape::boundingRect() const
 }
 
 
-void CHotfolderShape::paint(QPainter* /*painterPtr*/, const QStyleOptionGraphicsItem* /*stylePtr*/, QWidget* /*widgetPtr*/)
+void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* /*stylePtr*/, QWidget* /*widgetPtr*/)
 {
+	const ifpf::CVisualHotfolderWorkflowItem* objectPtr = GetObjectPtr();
+	if (objectPtr == NULL){
+		return;
+	}
 
-}
+	painterPtr->setRenderHints(QPainter::Antialiasing, true);
 
+	QRectF mainRect = rect();
 
-void CHotfolderShape::mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr)
-{
-	BaseClass::mouseMoveEvent(eventPtr);
+	QRectF shadowRect = mainRect;
+	shadowRect.adjust(SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET);
 
-	Q_EMIT RectChanged(GetViewRect());
-}
+	if (isSelected()){
+		painterPtr->setBrush(QColor(10, 242, 126, 50));
+		painterPtr->drawRoundedRect(shadowRect, 5, 5);
 
+		painterPtr->setBrush( QColor(10, 242, 126, 255));
+		painterPtr->drawRoundedRect(mainRect, 5, 5);
+	}
+	else{
+		painterPtr->setBrush(QColor(0, 0, 0, 30));
+		painterPtr->drawRoundedRect(shadowRect, 5, 5);
 
-void CHotfolderShape::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr)
-{
-	BaseClass::mouseDoubleClickEvent(eventPtr);
+		painterPtr->setBrush(Qt::white);
+		painterPtr->drawRoundedRect(mainRect, 5, 5);
+	}
+
+	painterPtr->setPen(Qt::black);
+	painterPtr->setBrush(Qt::NoBrush);
+
+	painterPtr->drawRect(mainRect);
+
+	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+
+	QString hotfolderName = iqt::GetQString(objectPtr->GetName());
+
+	// draw component name:
+	QFont nameFont;
+	nameFont.setPointSize(10);
+	painterPtr->setFont(nameFont);
+	painterPtr->drawText(mainRect, hotfolderName, Qt::AlignTop | Qt::AlignLeft);
+
+	QString hotfolderId = iqt::GetQString(objectPtr->GetHotfolderId());
+	QFont detailFont = QApplication::font();
+	painterPtr->setFont(detailFont);
+	painterPtr->drawText(
+				mainRect,
+				hotfolderId,
+				Qt::AlignBottom | Qt::AlignLeft);
 }
 
 
@@ -72,7 +104,7 @@ void CHotfolderShape::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr)
 
 bool CHotfolderShape::OnAttached(imod::IModel* modelPtr)
 {
-	const iprm::IParamsSet* objectPtr = dynamic_cast<const iprm::IParamsSet*>(modelPtr);
+	const ifpf::CVisualHotfolderWorkflowItem* objectPtr = dynamic_cast<const ifpf::CVisualHotfolderWorkflowItem*>(modelPtr);
 	if (objectPtr == NULL){
 		return false;
 	}
@@ -85,9 +117,37 @@ bool CHotfolderShape::OnAttached(imod::IModel* modelPtr)
 
 // reimplemented (iqt2d::TObjectShapeBase)
 
-void CHotfolderShape::UpdateGraphicsItem(const iprm::IParamsSet& /*element*/)
+void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowItem& element)
 {
-	
+	setPos(iqt::GetQPointF(element.GetCenter()));
+
+	QFont nameFont;
+	nameFont.setPointSize(10);
+	QFont detailFont = QApplication::font();
+	QFontMetrics nameFontInfo(nameFont);
+	QFontMetrics detailFontInfo(detailFont);
+
+	QStringList inputDirectories = iqt::GetQStringList(element.GetInputDirectories());
+	QString outputDirectory = iqt::GetQString(element.GetOutputDirectory());
+
+	QString hotfolderName = iqt::GetQString(element.GetName());
+
+	int titleWidth = nameFontInfo.width(hotfolderName);
+	int height = nameFontInfo.height() + detailFontInfo.height();
+
+	int width = istd::Max(titleWidth, detailFontInfo.width(iqt::GetQString(element.GetHotfolderId()))) + SIDE_OFFSET * 2;
+
+	width += SIDE_OFFSET * 2;
+	height += SIDE_OFFSET * 2;
+
+	double gridSize;
+	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
+	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
+		width = ::ceil(width / gridSize) * gridSize;
+		height = ::ceil(height / gridSize) * gridSize;
+	}
+
+	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));
 }
 
 
@@ -101,6 +161,6 @@ void CHotfolderShape::OnSelectionChanged(bool isSelected)
 }
 
 
-} // namespace icmpstr
+} // namespace iqtfpf
 
 

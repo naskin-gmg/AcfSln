@@ -40,6 +40,7 @@ public:
 
 protected:
 	bool TryCreateHotfolder(const istd::CString& hofolderId, const i2d::CVector2d& position);
+	QGraphicsItem* CHotfolderWorkflowScenographerComp::AddShapeToScene(istd::IPolymorphic* elementPtr) const;
 
 	// reimplemented (iqt2d::TScenographerCompBase)
 	virtual bool OnDropObject(const QMimeData& mimeData, QGraphicsSceneDragDropEvent* eventPtr);

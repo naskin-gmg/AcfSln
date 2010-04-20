@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1444
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          171
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         DirectoryMonitor
@@ -65,7 +65,7 @@
         HotfolderParams
       </ComponentName>
       <X>
-        800
+        825
       </X>
       <X>
         275
@@ -87,7 +87,7 @@
         HotfolderStateModel
       </ComponentName>
       <X>
-        375
+        325
       </X>
       <X>
         275
@@ -109,7 +109,7 @@
         MonitoringSessionsSet
       </ComponentName>
       <X>
-        225
+        150
       </X>
       <X>
         675
@@ -124,6 +124,17 @@
       </X>
       <X>
         550
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        StateModelObserver
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        275
       </X>
     </Element>
   </PositionMap>

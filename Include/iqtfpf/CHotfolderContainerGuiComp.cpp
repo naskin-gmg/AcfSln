@@ -85,7 +85,7 @@ bool CHotfolderContainerGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPt
 				if (selectedItemPtr != NULL){
 					QMimeData* mimeData = new QMimeData;
 
-					istd::CString hotfolderId;
+					istd::CString hotfolderId = iqt::GetCString(selectedItemPtr->text());
 					iser::CMemoryWriteArchive archive;
 					if (archive.Process(hotfolderId)){
 						QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());

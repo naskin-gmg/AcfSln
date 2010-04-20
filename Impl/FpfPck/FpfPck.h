@@ -13,6 +13,7 @@
 #include "ifpf/CHotfolderLoaderComp.h"
 #include "ifpf/CDirectoryMonitorParamsComp.h"
 #include "ifpf/CHotfolderWorkflowComp.h"
+#include "ifpf/CVisualHotfolderWorkflowComp.h"
 
 
 /**
@@ -40,6 +41,8 @@ typedef ifpf::CHotfolderLoaderComp HotfolderLoader;
 typedef icomp::TModelCompWrap<ifpf::CDirectoryMonitorParamsComp> AttributedDirectoryMonitorParams;
 
 typedef icomp::TModelCompWrap<ifpf::CHotfolderWorkflowComp> HotfolderWorkflow;
+
+typedef icomp::TModelCompWrap<ifpf::CVisualHotfolderWorkflowComp> VisualHotfolderWorkflow;
 
 
 } // namespace FpfPck

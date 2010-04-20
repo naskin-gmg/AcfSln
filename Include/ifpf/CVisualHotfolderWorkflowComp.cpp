@@ -1,32 +1,25 @@
-#include "icmpstr/CVisualRegistryComp.h"
-
-
-// Qt includes
-#include <QDir>
+#include "ifpf/CVisualHotfolderWorkflowComp.h"
 
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "istd/CClassInfo.h"
-
-#include "icomp/CInterfaceManipBase.h"
 
 
 // public methods
 
 
-namespace icmpstr
+namespace ifpf
 {
 
 
-bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
+bool CVisualHotfolderWorkflowComp::SerializeLayout(iser::IArchive& archive)
 {
 	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
 	static iser::CArchiveTag elementTag("Element", "Map element");
 
 	bool retVal = true;
 
-	Ids ids = GetElementIds();
+	istd::CStringList ids = this->GetHotfolderIds();
 	int positionsCount = ids.size();
 
 	retVal = retVal && archive.BeginMultiTag(positionMapTag, elementTag, positionsCount);
@@ -36,21 +29,18 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 	}
 
 	if (archive.IsStoring()){
-		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
-			std::string elementId = *iter;
+		for (istd::CStringList::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
+			istd::CString elementId = *iter;
 
 			i2d::CVector2d position(0, 0);
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					position = elementPtr->GetCenter();
-				}
+			const CVisualHotfolderWorkflowItem* elementPtr = dynamic_cast<const CVisualHotfolderWorkflowItem*>(GetHotfolder(elementId));
+			if (elementPtr != NULL){
+				position = elementPtr->GetCenter();
 			}
 
 			retVal = retVal && archive.BeginTag(elementTag);
 
-			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+			retVal = retVal && SerializeItemPosition(archive, elementId, position);
 				
 			retVal = retVal && archive.EndTag(elementTag);
 		}
@@ -61,20 +51,17 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 		for (int i = 0; i < positionsCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 			
-			std::string elementId;
+			istd::CString elementId;
 			i2d::CVector2d position;
 
-			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+			retVal = retVal && SerializeItemPosition(archive, elementId, position);
 			if (!retVal){
 				return false;
 			}
 
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					elementPtr->MoveTo(position);
-				}
+			CVisualHotfolderWorkflowItem* elementPtr = dynamic_cast<CVisualHotfolderWorkflowItem*>(GetHotfolder(elementId));
+			if (elementPtr != NULL){
+				elementPtr->MoveTo(position);
 			}
 
 			retVal = retVal && archive.EndTag(elementTag);
@@ -88,132 +75,30 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 }
 
 
-bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
+bool CVisualHotfolderWorkflowComp::SerializeWorkflow(iser::IArchive& archive)
 {
-	return BaseClass2::Serialize(archive);
-}
-
-
-void CVisualRegistryComp::SetSelectedElement(CVisualRegistryElement* selectedElementPtr)
-{
-	std::string elementId;
-	if (selectedElementPtr != NULL){
-		elementId = selectedElementPtr->GetName();
-	}
-
-	if (m_selectedElementId != elementId){
-		istd::CChangeNotifier changePtr(this, CF_SELECTION);
-
-		m_selectedElementId = elementId;
-	}
-}
-
-
-// reimplemented (icmpstr::IElementSelectionInfo)
-
-icomp::IRegistry* CVisualRegistryComp::GetSelectedRegistry() const
-{
-	return const_cast<CVisualRegistryComp*>(this);
-}
-
-
-iser::ISerializable* CVisualRegistryComp::GetSelectedElement() const
-{
-	const ElementInfo* elementInfoPtr = GetElementInfo(m_selectedElementId);
-	if (elementInfoPtr != NULL){
-		return elementInfoPtr->elementPtr.GetPtr();
-	}
-
-	return NULL;
-}
-
-
-const std::string& CVisualRegistryComp::GetSelectedElementName() const
-{
-	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
-	if (elementPtr == NULL){
-		static std::string empty;
-
-		return empty;
-	}
-
-	return elementPtr->GetName();
-}
-
-
-const icomp::CComponentAddress* CVisualRegistryComp::GetSelectedElementAddress() const
-{
-	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
-	if (elementPtr == NULL){
-		return NULL;
-	}
-
-	return &elementPtr->GetAddress();
-}
-
-
-// reimplemented (icomp::IRegistry)
-
-CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
-			const std::string& elementId,
-			const icomp::CComponentAddress& address,
-			bool ensureElementCreated)
-{
-	ElementInfo* infoPtr = BaseClass2::InsertElementInfo(elementId, address, ensureElementCreated);
-
-	if (infoPtr != NULL){
-		CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-		if (elementPtr != NULL){
-			elementPtr->SetName(elementId);
-		}
-	}
-	else{
-		SendErrorMessage(
-					MI_CANNOT_CREATE_ELEMENT,
-					iqt::GetCString(QObject::tr("Cannot create %1 (%2: %3)").
-								arg(elementId.c_str()).
-								arg(address.GetPackageId().c_str()).
-								arg(address.GetComponentId().c_str())));
-	}
-
-	return infoPtr;
-}
-
-
-bool CVisualRegistryComp::RemoveElementInfo(const std::string& elementId)
-{
-	bool resetSelection = (elementId == m_selectedElementId);
-
-	if (BaseClass2::RemoveElementInfo(elementId)){
-		if (resetSelection){
-			m_selectedElementId.clear();
-		}
-
-		return true;
-	}
-
-	return false;
+	return BaseClass::Serialize(archive);
 }
 
 
 // reimplemented (iser::ISerializable)
 
-bool CVisualRegistryComp::Serialize(iser::IArchive& archive)
+bool CVisualHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
 {
-	return BaseClass2::Serialize(archive) && SerializeComponentsLayout(archive);
+	return SerializeWorkflow(archive) && SerializeLayout(archive);
 }
 
 
 // protected methods
 
-bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
+bool CVisualHotfolderWorkflowComp::SerializeItemPosition(iser::IArchive& archive, istd::CString& hotfolderName, i2d::CVector2d& position)
 {
-	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
+	static iser::CArchiveTag nameTag("HotfolderName", "Name of the hotfolder");
 	static iser::CArchiveTag positionXTag("X", "X position of component");
 	static iser::CArchiveTag positionYTag("Y", "Y position of component");
 	
 	bool retVal = archive.BeginTag(nameTag);
-	retVal = retVal && archive.Process(componentRole);
+	retVal = retVal && archive.Process(hotfolderName);
 	retVal = retVal && archive.EndTag(nameTag);
 
 	retVal = retVal && archive.BeginTag(positionXTag);
@@ -228,26 +113,18 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 }
 
 
-// reimplemented (icomp::CRegistry)
+// reimplemented (ifpf::CHotfolderWorkflowComp)
 
-icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
-			const std::string& elementId,
-			const icomp::CComponentAddress& address) const
+ifpf::IHotfolderWorkflowItem* CVisualHotfolderWorkflowComp::CreateWorkflowItem(const istd::CString& hotfolderId) const
 {
-	Element* registryElementPtr = new Element;
-	if (registryElementPtr != NULL){
-		registryElementPtr->Initialize(this, address);
-		registryElementPtr->SetName(elementId);
-		
-		registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
+	Element* elementPtr = new Element();
 
-		return registryElementPtr;
-	}
+	elementPtr->Initialize(hotfolderId, this);
 
-	return NULL;
+	return elementPtr;
 }
 
-
-} // namespace icmpstr
+	
+} // namespace ifpf
 
 

@@ -149,8 +149,6 @@ void CSurfaceViewComp::SetupLighting()
 
 void CSurfaceViewComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
 	m_surfacePlotPtr = new Qwt3D::SurfacePlot(SurfacePlotFrame);
 	QLayout* layoutPtr = SurfacePlotFrame->layout();
 	if (layoutPtr == NULL){
@@ -235,6 +233,8 @@ void CSurfaceViewComp::OnGuiCreated()
 	connect(&m_enableShaderCommand, SIGNAL(toggled(bool)), this, SLOT(OnToggleShader(bool)));
 	connect(&m_enableLightingCommand, SIGNAL(toggled(bool) ), m_surfacePlotPtr, SLOT(enableLighting(bool)));
 	connect(&m_enableMeshCommand, SIGNAL(toggled(bool) ), this, SLOT(OnMeshEnabled(bool)));
+
+	BaseClass::OnGuiCreated();
 }
 
 
