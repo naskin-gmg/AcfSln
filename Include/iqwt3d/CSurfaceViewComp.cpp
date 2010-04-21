@@ -17,10 +17,10 @@ namespace iqwt3d
 
 CSurfaceViewComp::CSurfaceViewComp()
 	:m_plotCommands("", 100, ibase::ICommand::CF_GLOBAL_MENU, GI_QWT3D),
-	m_enableLightingCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D),
+	m_enableLightingCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF  | ibase::ICommand::CF_TOOLBAR, GI_QWT3D),
 	m_enableOrthoCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D),
 	m_enableAutoScaleCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D),
-	m_enableMeshCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D),
+	m_enableMeshCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF | ibase::ICommand::CF_TOOLBAR, GI_QWT3D),
 	m_enableShaderCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D),
 	m_enableLegendCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, GI_QWT3D)
 {

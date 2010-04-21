@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1075</width>
-    <height>1038</height>
+    <width>780</width>
+    <height>539</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,11 @@
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
      </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </layout>
     </widget>
    </item>
   </layout>
