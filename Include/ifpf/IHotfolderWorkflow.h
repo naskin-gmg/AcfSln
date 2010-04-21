@@ -28,8 +28,7 @@ public:
 		CF_HOTFOLDER_REMOVED = 0x200000
 	};
 
-
-	/**	
+	/**
 		Add a hotfolder to the workflow.
 		The name of the hotfolder must be unique, otherwise no folder will be added an the function returns \c null.
 	*/
