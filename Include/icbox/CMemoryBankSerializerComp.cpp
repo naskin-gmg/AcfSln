@@ -140,6 +140,8 @@ int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const i
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CMemoryBankSerializerComp::GetFileExtensions(istd::CStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;

@@ -66,6 +66,8 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CHotfolderLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!BaseClass::GetFileExtensions(result, flags, doAppend)){
