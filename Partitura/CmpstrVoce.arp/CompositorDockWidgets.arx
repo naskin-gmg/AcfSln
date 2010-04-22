@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1436
+          1461
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          165
+          183
         </Number>
         <Description>
           ACF-Solutions
@@ -172,7 +172,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -203,6 +203,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              QuickHelpViewer
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                QuickHelpDock
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
