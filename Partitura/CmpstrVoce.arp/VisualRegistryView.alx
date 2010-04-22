@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1432
+          1456
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         CommandsBinder
@@ -36,6 +36,17 @@
       </X>
       <X>
         225
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SelectedDocModelBinder
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        200
       </X>
     </Element>
     <Element>

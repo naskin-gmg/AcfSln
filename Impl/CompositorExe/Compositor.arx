@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1436
+          1456
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          165
+          178
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
         Application
@@ -101,67 +101,6 @@
     </Element>
     <Element>
       <Id>
-        ComponentSelection
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        CurrentDocument
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DocumentManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application/DocumentManager
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocumentObservers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MainWindowComponents/AttributeEditorDock
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         CompositorTemplate
       </Id>
       <PackageId>
@@ -177,7 +116,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ConfigFilePath
@@ -194,6 +133,25 @@
               </IsEnabled>
               <Value>
                 Application/ConfigFile
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DocumentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/DocumentManager
               </Value>
             </Data>
           </AttributeInfo>
@@ -275,6 +233,27 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              RegistrySelectionObservers
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  MainWindowComponents/AttributeEditorDock
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               VersionInfo
             </Id>
             <Type>
@@ -350,7 +329,7 @@
                 Model
               </Value>
             </Data>
-          </AttributeInfo> 
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               EnvironmentManager
