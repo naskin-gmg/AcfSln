@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1018
+          1458
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          180
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -30,6 +41,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
@@ -84,11 +98,8 @@
                 true
               </IsEnabled>
               <Value>
-&#169; 2010 Witold Gantzke &amp; Kirill Lepskiy
-All rights reserved
-This tool is part of ACF Solutions project
-See 'License.txt' for license information
-							</Value>
+                &#169; 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;This tool is part of ACF Solutions project&#10;See 'License.txt' for license information
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -167,6 +178,9 @@ See 'License.txt' for license information
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
@@ -204,6 +218,9 @@ See 'License.txt' for license information
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -221,7 +238,7 @@ See 'License.txt' for license information
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  txt
+                  arx
                 </Value>
               </Values>
             </Data>
@@ -242,7 +259,7 @@ See 'License.txt' for license information
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  Text file
+                  ARX registry
                 </Value>
               </Values>
             </Data>
@@ -264,6 +281,9 @@ See 'License.txt' for license information
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
@@ -377,6 +397,9 @@ See 'License.txt' for license information
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -393,7 +416,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                C++
+                XML
               </Value>
             </Data>
           </AttributeInfo>
@@ -412,7 +435,7 @@ See 'License.txt' for license information
                 true
               </IsEnabled>
               <Value>
-                true
+                false
               </Value>
             </Data>
           </AttributeInfo>

@@ -1,41 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1018
+          1458
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          180
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         App
       </ComponentName>
       <X>
-        -86
+        200
       </X>
       <X>
-        72
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        -6
-      </X>
-      <X>
-        27
+        375
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         DocumentFactory
       </ComponentName>
       <X>
-        457
+        900
       </X>
       <X>
-        -30
+        175
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         DocumentLoader
       </ComponentName>
       <X>
-        483
+        900
       </X>
       <X>
-        94
+        550
       </X>
     </Element>
     <Element>
@@ -65,43 +65,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        221
+        475
       </X>
       <X>
-        70
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        34
-      </X>
-      <X>
-        136
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MainWindow
-      </ComponentName>
-      <X>
-        -209
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Splash
-      </ComponentName>
-      <X>
-        -164
-      </X>
-      <X>
-        117
+        375
       </X>
     </Element>
     <Element>
@@ -109,21 +76,10 @@
         ViewFactory
       </ComponentName>
       <X>
-        254
+        475
       </X>
       <X>
-        -41
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Workspace
-      </ComponentName>
-      <X>
-        -198
-      </X>
-      <X>
-        -95
+        175
       </X>
     </Element>
   </PositionMap>
