@@ -64,7 +64,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="3">
+							<Values count="4">
 								<Value>
 									0.2.0
 								</Value>
@@ -74,7 +74,10 @@
                 <Value>
                   0.3.1
                 </Value>
-              </Values>
+								<Value>
+									0.3.2
+								</Value>
+							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -91,17 +94,20 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="3">
+							<Values count="4">
 								<Value>
 									127
 								</Value>
                 <Value>
                   144
                 </Value>
-                <Value>
-                  148
-                </Value>
-              </Values>
+								<Value>
+									148
+								</Value>
+								<Value>
+									183
+								</Value>
+							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -389,6 +395,6 @@
 		Application and version information with generated IACF and ACF version number
 	</Description>
 	<Keywords>
-		IACF Application Version Info
+		Project=ACF-Solutions Application Tag=Version Company=ImagingTools Info
 	</Keywords>
 </Acf>
