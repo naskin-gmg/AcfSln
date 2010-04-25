@@ -53,6 +53,10 @@ protected:
 
 	// reimplemented (TShapeBase)
 	virtual void OnSelectionChanged(bool isSelected);
+
+private:
+	QGraphicsTextItem* m_hotfolderName;
+
 };
 
 

@@ -9,6 +9,9 @@
 #include <QGraphicsScene>
 #include <QApplication>
 #include <QDir>
+#include <QGraphicsProxyWidget>
+#include <QLabel>
+#include <QGraphicsTextItem>
 
 
 // ACF includes
@@ -22,6 +25,9 @@ namespace iqtfpf
 CHotfolderShape::CHotfolderShape(const iqt2d::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr)
 {
+	m_hotfolderName = new QGraphicsTextItem(this);
+
+	m_hotfolderName->setPlainText("SUPER TEXT");
 }
 
 
@@ -62,6 +68,7 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 
 	if (isSelected()){
 		painterPtr->setBrush(QColor(10, 242, 126, 50));
+		painterPtr->setPen(Qt::NoPen);
 		painterPtr->drawRoundedRect(shadowRect, 5, 5);
 
 		painterPtr->setBrush( QColor(10, 242, 126, 255));
@@ -69,6 +76,7 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 	}
 	else{
 		painterPtr->setBrush(QColor(0, 0, 0, 30));
+		painterPtr->setPen(Qt::NoPen);
 		painterPtr->drawRoundedRect(shadowRect, 5, 5);
 
 		painterPtr->setBrush(Qt::white);
@@ -78,7 +86,7 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 	painterPtr->setPen(Qt::black);
 	painterPtr->setBrush(Qt::NoBrush);
 
-	painterPtr->drawRect(mainRect);
+	painterPtr->drawRoundedRect(mainRect, 5, 5);
 
 	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 
@@ -86,7 +94,8 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 
 	// draw component name:
 	QFont nameFont;
-	nameFont.setPointSize(10);
+	nameFont.setPointSize(12);
+	nameFont.setBold(true);
 	painterPtr->setFont(nameFont);
 	painterPtr->drawText(mainRect, hotfolderName, Qt::AlignTop | Qt::AlignLeft);
 
@@ -122,7 +131,8 @@ void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowIte
 	setPos(iqt::GetQPointF(element.GetCenter()));
 
 	QFont nameFont;
-	nameFont.setPointSize(10);
+	nameFont.setPointSize(12);
+	nameFont.setBold(true);
 	QFont detailFont = QApplication::font();
 	QFontMetrics nameFontInfo(nameFont);
 	QFontMetrics detailFontInfo(detailFont);
@@ -136,18 +146,21 @@ void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowIte
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
 	int width = istd::Max(titleWidth, detailFontInfo.width(iqt::GetQString(element.GetHotfolderId()))) + SIDE_OFFSET * 2;
-
+ 
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;
 
 	double gridSize;
 	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
 	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
+		gridSize *= 2;
 		width = ::ceil(width / gridSize) * gridSize;
 		height = ::ceil(height / gridSize) * gridSize;
 	}
 
 	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));
+
+	m_hotfolderName->setPos(QPointF(-width * 0.5, -height * 0.5));	
 }
 
 

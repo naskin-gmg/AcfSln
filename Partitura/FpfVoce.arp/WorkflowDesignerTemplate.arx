@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1444
+          1458
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          171
+          180
         </Number>
         <Description>
           ACF-Solutions
@@ -311,7 +311,23 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        HotfolderParams
+      </ExportedId>
+      <ComponentId>
+        HotfolderWorkflow/HotfolderParams
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HotfolderState
+      </ExportedId>
+      <ComponentId>
+        HotfolderWorkflow/HotfolderState
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Document template for the hotfolder workflow designer
