@@ -1,30 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1211
+          1481
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          187
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         DirectoryMonitor
       </ComponentName>
       <X>
-        -6.662
+        675
       </X>
       <X>
-        -23.92
+        550
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        208
+        950
       </X>
       <X>
-        -150
+        325
       </X>
     </Element>
     <Element>
@@ -43,21 +54,10 @@
         DirectoryMonitorParamsGui
       </ComponentName>
       <X>
-        -265.828
+        350
       </X>
       <X>
-        -143.421
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FolderMonitor
-      </ComponentName>
-      <X>
-        14
-      </X>
-      <X>
-        -143
+        375
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         ModelBinder
       </ComponentName>
       <X>
-        15.359
+        625
       </X>
       <X>
-        -312.605
+        175
       </X>
     </Element>
   </PositionMap>
