@@ -16,6 +16,7 @@
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/IParamsSet.h"
+#include "iprm/IParamsManager.h"
 
 #include "iqt/CCriticalSection.h"
 
@@ -48,15 +49,11 @@ public:
 	I_BEGIN_COMPONENT(CHotfolderProcessingComp);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
 		I_ASSIGN(m_fileNamingCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
-		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
-		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameter set for the hotfolder", true, "ParamsSet");
 		I_ASSIGN(m_monitorFactCompPtr, "DirectoryMontorFactory", "Factory for creation of a directory monitor", true, "DirectoryMontorFactory");
-		I_ASSIGN(m_inputPathParamsManagerIdAttrPtr, "InputPathParamsManagerId", "Parameter set ID for the hotfolder's input directories", true, "");
-		I_ASSIGN(m_outputDirectoryParamsIdAttrPtr, "OutputDirectoryParamsId", "Parameter set ID for the output directory", true, "");
-		I_ASSIGN(m_monitoringParamsIdAttrPtr, "MonitoringParamsId", "Parameter set ID for the directory monitoring parameters", true, "");
-		I_ASSIGN(m_hotfolderStateCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
-		I_ASSIGN(m_hotfolderStateModelIdAttrPtr, "HotfolderStateModelId", "Parameter set ID for the hotfolder's state model", true, "");
-		I_ASSIGN(m_hotfolderStatisticsIdAttrPtr, "HotfolderStatisticsId", "Parameter set ID for the hotfolder's statistics", true, "");
+		I_ASSIGN(m_hotfolderProcessingInfoCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
+		I_ASSIGN(m_hotfolderProcessingModelCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
+		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
+		I_ASSIGN(m_hotfolderParamsModelCompPtr, "HotfolderParamsModel", "Hotfolder parameters", true, "HotfolderParamsModel");
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
@@ -97,11 +94,6 @@ private:
 	void SynchronizeWithModel(bool applyToPendingTasks = false);
 
 	/**
-		Get the output directory of this hotfolder.
-	*/
-	istd::CString GetOutputDirectory() const;
-
-	/**
 		Get the list of output directories for the hotfolder.
 	*/
 	istd::CStringList GetInputDirectories() const;
@@ -122,16 +114,6 @@ private:
 	istd::CStringList GetRemovedInputDirectories() const;
 
 	/**
-		Get hotfolder's state model.
-	*/
-	ifpf::IHotfolderProcessingInfo* GetHotfolderStateModel() const;
-
-	/**
-		Get hotfolder statistics model
-	*/
-	ifpf::IHotfolderStatistics* GetHotfolderStatistics() const;
-
-	/**
 		Create and add a directory monitor for the given path with given monitoring parameters.
 	*/
 	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
@@ -140,11 +122,6 @@ private:
 		Remove a directory monitor for the given path.
 	*/
 	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
-
-	/**
-		Get the unique ID of the hotfolder.
-	*/
-	istd::CString GetHotfolderId() const;
 
 	/**
 		Get next item to be processed.
@@ -210,16 +187,11 @@ private:
 
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
 	I_REF(ifpf::IFileNaming, m_fileNamingCompPtr);
-	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
-	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(iprm::IParamsSet, m_hotfolderStateCompPtr);
+	I_REF(ifpf::IHotfolderProcessingInfo, m_hotfolderProcessingInfoCompPtr);
+	I_REF(imod::IModel, m_hotfolderProcessingModelCompPtr);
+	I_REF(iprm::IParamsManager, m_inputDirectoriesManagerCompPtr);
+	I_REF(imod::IModel, m_hotfolderParamsModelCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
-
-	I_ATTR(istd::CString, m_inputPathParamsManagerIdAttrPtr);
-	I_ATTR(istd::CString, m_monitoringParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_outputDirectoryParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_hotfolderStateModelIdAttrPtr);
-	I_ATTR(istd::CString, m_hotfolderStatisticsIdAttrPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;

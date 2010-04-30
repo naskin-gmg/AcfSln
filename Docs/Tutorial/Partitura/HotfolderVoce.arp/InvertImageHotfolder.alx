@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1483
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          188
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         ImageProcessingHotfolder
       </ComponentName>
       <X>
-        650
+        675
       </X>
       <X>
-        250
+        350
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         InvertOperator
       </ComponentName>
       <X>
-        375
+        300
       </X>
       <X>
-        250
+        350
       </X>
     </Element>
   </PositionMap>

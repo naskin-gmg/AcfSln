@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1461
+          1466
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          183
+          185
         </Number>
         <Description>
           ACF-Solutions
@@ -29,46 +29,46 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        HotfolderGui
+        BitmapFileProcessing
       </ComponentName>
       <X>
-        700
+        550
       </X>
       <X>
-        575
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderModelBinder
+        BitmapLoader
       </ComponentName>
       <X>
-        700
+        300
       </X>
       <X>
-        350
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderPersistence
+        InputData
       </ComponentName>
       <X>
-        275
+        800
+      </X>
+      <X>
+        425
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputData
+      </ComponentName>
+      <X>
+        550
       </X>
       <X>
         250
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InvertImageHotfolder
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        350
       </X>
     </Element>
   </PositionMap>

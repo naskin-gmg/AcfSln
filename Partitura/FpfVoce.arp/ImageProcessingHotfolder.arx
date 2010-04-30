@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1444
+          1466
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          171
+          185
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="3">
     <Element>
       <Id>
-        BitmapLoader
+        BitmapFileConverter
       </Id>
       <PackageId>
-        QtPck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        BitmapLoader
+        BitmapFileProcessing
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ImageProcessor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ImageProcessor
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Log
@@ -118,7 +134,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               AcceptPatterns
@@ -147,6 +163,25 @@
                   *.jpg
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileConverter
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapFileConverter
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -294,48 +329,6 @@
               </Values>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        OutputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

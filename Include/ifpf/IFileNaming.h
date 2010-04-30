@@ -19,11 +19,10 @@ class IFileNaming: virtual public istd::IChangeable
 {
 public:
 	/**
-		Get the new file path for a given input according to the parameters \c paramsSetPtr.
-		\c paramsSetPtr can be \c NULL. It means, that some default parameters will be used to calculate the output.
+		Get the new file path for a given input file name.
 		\sa isys::IFileSystem
 	*/
-	virtual istd::CString GetFilePath(const istd::CString& inputFileName, const iprm::IParamsSet* paramsSetPtr) const = 0;
+	virtual istd::CString GetFilePath(const istd::CString& inputFileName) const = 0;
 };
 
 

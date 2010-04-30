@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1444
+          1483
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          171
+          188
         </Number>
         <Description>
           ACF-Solutions
@@ -26,27 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
         DirectoryMonitor
       </ComponentName>
       <X>
-        825
+        600
       </X>
       <X>
         550
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileProcessing
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        425
       </X>
     </Element>
     <Element>
@@ -120,21 +109,10 @@
         OutputFileRenaming
       </ComponentName>
       <X>
-        375
+        1025
       </X>
       <X>
-        550
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StateModelObserver
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        275
+        450
       </X>
     </Element>
   </PositionMap>

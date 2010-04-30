@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1483
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          188
         </Number>
         <Description>
           ACF-Solutions
@@ -44,7 +44,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              ImageProcessor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InvertOperator
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Log

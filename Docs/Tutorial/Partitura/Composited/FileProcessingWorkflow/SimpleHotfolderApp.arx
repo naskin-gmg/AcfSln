@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1483
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          188
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +26,10 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="10">
+  <ElementsList count="5">
     <Element>
       <Id>
-        App
+        DemoApp
       </Id>
       <PackageId>
         QtGuiPck
@@ -60,7 +60,7 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                HorfolderDemoFramework/VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -98,7 +98,7 @@
                 true
               </IsEnabled>
               <Value>
-                SimpleMainGui
+                HorfolderDemoFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -145,13 +145,13 @@
     </Element>
     <Element>
       <Id>
-        ApplicationSettingsProvider
+        HorfolderDemoFramework
       </Id>
       <PackageId>
-        QtPck
+        HotfolderVoce
       </PackageId>
       <ComponentId>
-        ApplicationSettingsProvider
+        HorfolderDemoFramework
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -160,10 +160,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              Hotfolder
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -176,58 +176,16 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                Hotfolder
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InfoDock
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        ProcessingItemInfoDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LogDock
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        LogDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              DockArea
+              HotfolderParams
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -237,7 +195,7 @@
                 true
               </IsEnabled>
               <Value>
-                3
+                Hotfolder/HotfolderParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -246,22 +204,22 @@
     </Element>
     <Element>
       <Id>
-        PersistentInvertImageHotfolder
+        Hotfolder
       </Id>
       <PackageId>
         HotfolderVoce
       </PackageId>
       <ComponentId>
-        PersistentInvertImageHotfolder
+        InvertImageHotfolder
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Log
@@ -277,7 +235,66 @@
                 true
               </IsEnabled>
               <Value>
-                LogDock
+                HorfolderDemoFramework
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderPersistence
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderPersistence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Hotfolder
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HorfolderDemoFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -296,7 +313,7 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                HorfolderDemoFramework/VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -305,28 +322,7 @@
     </Element>
     <Element>
       <Id>
-        PreviewDock
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        ProcessingItemPreviewDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProcessingItemInfoBinder
+        ModelBinder
       </Id>
       <PackageId>
         BasePck
@@ -357,7 +353,7 @@
                 true
               </IsEnabled>
               <Value>
-                PersistentInvertImageHotfolder/HotfolderGui
+                Hotfolder
               </Value>
             </Data>
           </AttributeInfo>
@@ -377,234 +373,9 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  InfoDock
+                  HorfolderDemoFramework/HofolderGui
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProcessingItemPreviewBinder
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ModelBinder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Model
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                PersistentInvertImageHotfolder/HotfolderGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Observers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  PreviewDock
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SimpleMainGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        SimpleMainGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              IconSize
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                32
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainWindowComponents
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  PreviewDock
-                </Value>
-                <Value>
-                  InfoDock
-                </Value>
-                <Value>
-                  LogDock
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SettingsProvider
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ApplicationSettingsProvider
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseIconText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Workspace
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                PersistentInvertImageHotfolder/HotfolderGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        VersionInfo
-      </Id>
-      <PackageId>
-        AcfSlnVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Simple Hotfolder Demo
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -617,7 +388,7 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        App
+        DemoApp
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

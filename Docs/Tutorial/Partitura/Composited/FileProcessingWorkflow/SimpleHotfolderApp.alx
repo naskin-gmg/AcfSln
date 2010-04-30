@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1483
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          188
         </Number>
         <Description>
           ACF-Solutions
@@ -26,115 +26,60 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        App
+        DemoApp
       </ComponentName>
       <X>
-        450
+        1025
       </X>
       <X>
-        225
+        325
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ApplicationSettingsProvider
+        HorfolderDemoFramework
       </ComponentName>
       <X>
-        175
+        650
       </X>
       <X>
-        25
+        325
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InfoDock
+        Hotfolder
       </ComponentName>
       <X>
-        1075
+        250
       </X>
-      <X>
-        25
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        625
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PersistentInvertImageHotfolder
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        375
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PreviewDock
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemInfoBinder
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        700
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingItemPreviewBinder
-      </ComponentName>
       <X>
         575
       </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderPersistence
+      </ComponentName>
       <X>
-        550
+        750
+      </X>
+      <X>
+        675
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SimpleMainGui
+        ModelBinder
       </ComponentName>
       <X>
-        550
+        150
       </X>
       <X>
-        50
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VersionInfo
-      </ComponentName>
-      <X>
-        100
-      </X>
-      <X>
-        225
+        175
       </X>
     </Element>
   </PositionMap>

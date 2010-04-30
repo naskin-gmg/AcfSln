@@ -7,9 +7,12 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
+#include "iprm/IFileNameParam.h"
+
 
 // AcfSln includes
 #include "ifpf/IFileNaming.h"
+#include "ifpf/IFileNamingStrategy.h"
 
 
 namespace iqtfpf
@@ -29,18 +32,18 @@ public:
 
 	I_BEGIN_COMPONENT(CFileNamingComp);
 		I_REGISTER_INTERFACE(ifpf::IFileNaming);
-		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader, which will used the result file name", false, "FileLoader");
-		I_ASSIGN(m_outputDirectoryIdAttrPtr, "OutputDirectoryId", "Parameter set ID for the output directory parameter", true, ""); 
-		I_ASSIGN(m_fileNameStrategyIdAttrPtr, "FileNameStrategyId", "Parameter set ID for the file renaming strategy parameter", true, ""); 
+		I_ASSIGN(m_fileTypeInfoCompPtr, "FileLoader", "File loader, which will used the result file name", false, "FileLoader");
+		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPath", "Output directory", true, "DirectoryPath"); 
+		I_ASSIGN(m_fileNamingStrategyCompPtr, "FileNamingStrategy", "Rules for the file naming", false, "FileNamingStrategy"); 
 	I_END_COMPONENT();
 
 	// reimplemented (ifpf::IFileNaming)
-	virtual istd::CString GetFilePath(const istd::CString& inputFileName, const iprm::IParamsSet* paramsSetPtr) const;
+	virtual istd::CString GetFilePath(const istd::CString& inputFileName) const;
 
 private:
-	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
-	I_ATTR(istd::CString, m_outputDirectoryIdAttrPtr);
-	I_ATTR(istd::CString, m_fileNameStrategyIdAttrPtr);
+	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);
+	I_REF(iprm::IFileNameParam, m_directoryPathCompPtr);
+	I_REF(ifpf::IFileNamingStrategy, m_fileNamingStrategyCompPtr);
 };
 
 

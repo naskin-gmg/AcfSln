@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1401
+          1483
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          188
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -291,7 +302,23 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        InputDirectories
+      </ExportedId>
+      <ComponentId>
+        InputDirectories
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        OutputDirectory
+      </ExportedId>
+      <ComponentId>
+        OutputDirectory
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Parameter for the hotfolder. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
