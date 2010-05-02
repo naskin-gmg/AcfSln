@@ -221,6 +221,10 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
 	}
 
+	if (m_processingParamsSetCompPtr.IsValid()){
+		m_runParameterPtr.SetCastedOrRemove(m_processingParamsSetCompPtr->CloneMe());
+	}
+
 	StartHotfolder();
 }
 
@@ -358,7 +362,7 @@ int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const 
 
 	isys::CSectionBlocker parameterLock(&m_parameterLock);
 
-	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
+	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_processingParamsSetCompPtr.GetPtr())){
 		istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
 		SendErrorMessage(0, message, "Hotfolder");
 

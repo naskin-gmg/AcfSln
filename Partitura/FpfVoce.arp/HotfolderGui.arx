@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1484
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,85 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
-    <Element>
-      <Id>
-        ComposedHotfolderGui
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        ComposedHotfolderGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              HotfolderGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SettingsDialog
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderSettingsDialog
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StateModelParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderStateModel/HotfolderStateModel
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="5">
     <Element>
       <Id>
         DirectoryItemGui
@@ -218,43 +140,6 @@
               <Value>
                 StateIcons
               </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        HotfolderSettingsDialog
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        HotfolderSettingsDialog
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              HotfolderParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              HotfolderParams
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -401,7 +286,7 @@
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -417,7 +302,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -425,7 +310,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -433,7 +318,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        ComposedHotfolderGui
+        HotfolderGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1466
+          1486
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          185
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,38 +26,60 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        BitmapFileConverter
+        ApplicationInfo
       </ComponentName>
       <X>
-        300
+        200
       </X>
       <X>
-        425
+        75
       </X>
     </Element>
     <Element>
       <ComponentName>
-        BitmapPreviewGenerator
+        ApplicationSettingsProvider
       </ComponentName>
       <X>
-        825
+        225
       </X>
       <X>
-        425
+        175
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Hotfolder
+        HotfolderDemoGui
       </ComponentName>
       <X>
-        550
+        575
       </X>
       <X>
-        425
+        375
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        LogDock
+      </ComponentName>
+      <X>
+        900
+      </X>
+      <X>
+        175
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SimpleMainGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        175
       </X>
     </Element>
   </PositionMap>

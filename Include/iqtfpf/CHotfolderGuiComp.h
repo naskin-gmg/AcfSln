@@ -49,6 +49,7 @@ public:
 
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
 		I_REGISTER_INTERFACE(imod::IModel);
+		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
@@ -58,8 +59,6 @@ public:
 		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 	I_END_COMPONENT;
-
-	CHotfolderGuiComp();
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;

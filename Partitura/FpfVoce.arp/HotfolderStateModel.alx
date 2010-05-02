@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1412
+          1484
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          189
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -24,7 +35,7 @@
         950
       </X>
       <X>
-        300
+        450
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         HotfolderStatistics
       </ComponentName>
       <X>
-        375
+        200
       </X>
       <X>
-        300
+        425
       </X>
     </Element>
     <Element>
@@ -43,7 +54,7 @@
         StateModel
       </ComponentName>
       <X>
-        650
+        575
       </X>
       <X>
         300

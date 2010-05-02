@@ -1,162 +1,41 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1248
+          1484
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          189
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="25">
-    <Element>
-      <ComponentName>
-        ComposedGui
-      </ComponentName>
-      <X>
-        25
-      </X>
-      <X>
-        19
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ComposedParamsSetGui
-      </ComponentName>
-      <X>
-        -130
-      </X>
-      <X>
-        103
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParamGui
-      </ComponentName>
-      <X>
-        4
-      </X>
-      <X>
-        283
-      </X>
-    </Element>
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         DirectoryMonitorParams
       </ComponentName>
       <X>
-        116
+        975
       </X>
       <X>
-        255
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParamsGui
-      </ComponentName>
-      <X>
-        116
-      </X>
-      <X>
-        255
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitoringGui
-      </ComponentName>
-      <X>
-        280
-      </X>
-      <X>
-        80
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryParamGui
-      </ComponentName>
-      <X>
-        223
-      </X>
-      <X>
-        107
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicDirectoryGui
-      </ComponentName>
-      <X>
-        144
-      </X>
-      <X>
-        -13
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicDirectoryMonitorParams
-      </ComponentName>
-      <X>
-        -126
-      </X>
-      <X>
-        238
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicDirectoryParamGui
-      </ComponentName>
-      <X>
-        379
-      </X>
-      <X>
-        -15
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicGui
-      </ComponentName>
-      <X>
-        1
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DynamicParamsGui
-      </ComponentName>
-      <X>
-        247
-      </X>
-      <X>
-        -91
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParamGui
-      </ComponentName>
-      <X>
-        244
-      </X>
-      <X>
-        105
+        400
       </X>
     </Element>
     <Element>
@@ -164,10 +43,10 @@
         HotfolderParamsGui
       </ComponentName>
       <X>
-        -131
+        575
       </X>
       <X>
-        103
+        400
       </X>
     </Element>
     <Element>
@@ -175,54 +54,10 @@
         InputDirectories
       </ComponentName>
       <X>
-        107
+        200
       </X>
       <X>
-        -53
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputPathGui
-      </ComponentName>
-      <X>
-        315
-      </X>
-      <X>
-        -150
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputPathManager
-      </ComponentName>
-      <X>
-        -121
-      </X>
-      <X>
-        77
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        432
-      </X>
-      <X>
-        222
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirectories
-      </ComponentName>
-      <X>
-        286
-      </X>
-      <X>
-        100
+        400
       </X>
     </Element>
     <Element>
@@ -230,65 +65,21 @@
         OutputDirectory
       </ComponentName>
       <X>
-        244
+        575
       </X>
       <X>
-        105
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirectoryGui
-      </ComponentName>
-      <X>
-        286
-      </X>
-      <X>
-        100
+        200
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ParamsManagerGui
+        ProcessingParams
       </ComponentName>
       <X>
-        299
+        575
       </X>
       <X>
-        -34
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StaticDirectoryMonitorParams
-      </ComponentName>
-      <X>
-        212
-      </X>
-      <X>
-        236
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StaticModelConnector
-      </ComponentName>
-      <X>
-        371
-      </X>
-      <X>
-        302
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        StaticParamsGui
-      </ComponentName>
-      <X>
-        143
-      </X>
-      <X>
-        216
+        600
       </X>
     </Element>
   </PositionMap>

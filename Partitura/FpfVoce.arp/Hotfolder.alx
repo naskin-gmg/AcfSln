@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1483
+          1486
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          188
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,29 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="8">
-    <Element>
-      <ComponentName>
-        DirectoryMonitor
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        550
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderModel
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        150
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         HotfolderParams
@@ -62,13 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        HotfolderProcessor
+        HotfolderProcessing
       </ComponentName>
       <X>
-        600
+        550
       </X>
       <X>
-        425
+        500
       </X>
     </Element>
     <Element>
@@ -80,39 +58,6 @@
       </X>
       <X>
         275
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MonitoringSessions
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        675
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MonitoringSessionsSet
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        675
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputFileRenaming
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        450
       </X>
     </Element>
   </PositionMap>

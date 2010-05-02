@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1466
+          1486
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          185
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="5">
     <Element>
       <Id>
-        BitmapFileConverter
+        Hotfolder
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        BitmapFileProcessing
+        Hotfolder
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,16 +44,48 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              ImageProcessor
+              AcceptPatterns
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              AcceptPatterns
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileConverter
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ImageProcessor
+              FileConverter
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IgnorePatterns
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              IgnorePatterns
             </ExportId>
             <Data>
               <IsEnabled>
@@ -70,6 +102,38 @@
             </Type>
             <ExportId>
               Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParameterIds
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProcessingParameterIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParameters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -82,13 +146,13 @@
     </Element>
     <Element>
       <Id>
-        BitmapPreviewGenerator
+        HotfolderGui
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        BitmapPreviewGenerator
+        HotfolderGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -100,13 +164,13 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Log
+              HotfolderParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Log
+              HotfolderParams
             </ExportId>
             <Data>
               <IsEnabled>
@@ -119,55 +183,25 @@
     </Element>
     <Element>
       <Id>
-        Hotfolder
+        HotfolderGuiBinder
       </Id>
       <PackageId>
-        FpfVoce
+        BasePck
       </PackageId>
       <ComponentId>
-        Hotfolder
+        ModelBinder
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              AcceptPatterns
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.jpeg
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileConverter
+              Model
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -180,137 +214,13 @@
                 true
               </IsEnabled>
               <Value>
-                BitmapFileConverter
+                Hotfolder/HotfolderState
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InputData
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputFileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputData
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputFileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Processir
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Processor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Processor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Processor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StateModelObservers
+              Observers
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -324,7 +234,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  BitmapPreviewGenerator
+                  HotfolderGui
                 </Value>
               </Values>
             </Data>
@@ -332,63 +242,215 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        HotfolderPersistence
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderPersistence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Hotfolder
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder/HotfolderParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderSettingsDialog
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderSettingsDialog
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              HotfolderParams
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder/HotfolderParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingEditors
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingEditors
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParameters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="5">
+    <Interface>
+      <InterfaceId>
+        ibase::ICommandsProvider
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IParamsSet
+        imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iser::ISerializable
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        istd::IChangeable
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        Hotfolder
+        HotfolderGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderParams
+        HofolderGui
       </ExportedId>
       <ComponentId>
-        Hotfolder/HotfolderParams
+        HotfolderGui
       </ComponentId>
     </Component>
     <Component>
       <ExportedId>
-        HotfolderState
+        HotfolderSettingsDialog
       </ExportedId>
       <ComponentId>
-        Hotfolder/HotfolderState
+        HotfolderSettingsDialog
       </ComponentId>
     </Component>
   </ExportedComponents>
   <Description>
-    Standard image processing hotfolder
+    Simple demonstration of hotfolder processing
   </Description>
   <Keywords>
-    Hotfolder Image Processing File Directory Monitoring
+    Hotfoder Demo Tutorial Processing
   </Keywords>
 </Acf>

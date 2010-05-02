@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1483
+          1484
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          188
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -133,7 +133,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   InputDirectories
                 </Value>
@@ -145,6 +145,9 @@
                 </Value>
                 <Value>
                   HotfolderId
+                </Value>
+                <Value>
+                  ProcessingParams
                 </Value>
               </Values>
             </Data>
@@ -163,7 +166,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   InputDirectories
                 </Value>
@@ -175,6 +178,9 @@
                 </Value>
                 <Value>
                   HotfolderId
+                </Value>
+                <Value>
+                  ProcessingParams
                 </Value>
                 <Value>
                   
@@ -267,6 +273,59 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        ProcessingParams
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Parameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParameters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParametersId
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProcessingParameterIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <ExportedInterfaces count="4">
     <Interface>
@@ -302,7 +361,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="3">
     <Component>
       <ExportedId>
         InputDirectories
@@ -317,13 +376,21 @@
       </ExportedId>
       <ComponentId>
         OutputDirectory
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        ProcessingParams
+      </ExportedId>
+      <ComponentId>
+        ProcessingParams
       </ComponentId>
     </Component>
   </ExportedComponents>
   <Description>
-    Parameter for the hotfolder. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+    Hotfolder's processing parameters
   </Description>
   <Keywords>
-    
+    Hotfolder Parameter
   </Keywords>
 </Acf>

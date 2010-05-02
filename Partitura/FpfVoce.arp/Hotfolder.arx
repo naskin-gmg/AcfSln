@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1483
+          1486
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          188
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,194 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
-    <Element>
-      <Id>
-        DirectoryMonitor
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        DirectoryMonitor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              DirectoryMonitorParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DirectoryMonitorParams
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DirectoryPathParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DirectoryPath
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SessionManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                MonitoringSessions
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        HotfolderModel
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSet
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              Parameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  HotfolderStateModel
-                </Value>
-                <Value>
-                  HotfolderParams
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParametersId
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  HotfolderStateModel
-                </Value>
-                <Value>
-                  HotfolderParams
-                </Value>
-                <Value>
-                  
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveSets
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MonitoringSessionsSet
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="3">
     <Element>
       <Id>
         HotfolderParams
@@ -231,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               AcceptPatterns
@@ -257,6 +70,38 @@
             </Type>
             <ExportId>
               IgnorePatterns
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParameterIds
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProcessingParameterIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParameters
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParameters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -269,13 +114,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderProcessor
+        HotfolderProcessing
       </Id>
       <PackageId>
-        QtFpfPck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderProcessor
+        HotfolderProcessing
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -284,26 +129,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="13">
-          <AttributeInfo>
-            <Id>
-              DirectoryMontorFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DirectoryMonitor
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               FileConverter
@@ -322,7 +148,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FileNamingStrategy
+              HotfolderOutputDirectory
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -335,13 +161,13 @@
                 true
               </IsEnabled>
               <Value>
-                OutputFileRenaming
+                HotfolderParams/OutputDirectory
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParamsModel
+              HotfolderParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -379,44 +205,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderStateModelId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderStateModel
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              HotfolderStatisticsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderStatistics
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               InputDirectoriesManager
             </Id>
             <Type>
@@ -431,25 +219,6 @@
               </IsEnabled>
               <Value>
                 HotfolderParams/InputDirectories
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputPathParamsManagerId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InputDirectories
               </Value>
             </Data>
           </AttributeInfo>
@@ -471,45 +240,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MonitoringParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DirectoryMonitorParams
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDirectoryParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputDirectory
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
+              ProcessingParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -522,7 +253,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParams
+                HotfolderParams/ProcessingParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -550,199 +281,8 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        MonitoringSessions
-      </Id>
-      <PackageId>
-        FpfPck
-      </PackageId>
-      <ComponentId>
-        MonitoringSessions
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        MonitoringSessionsSet
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSet
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Parameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MonitoringSessions
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParametersId
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MonitoringSessions
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        OutputFileRenaming
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        FileNaming
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              DirectoryPath
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderParams/OutputDirectory
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDirectoryId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputDirectory
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        HotfolderModel
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iprm::IParamsSet
-      </InterfaceId>
-      <ComponentId>
-        HotfolderModel
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        HotfolderModel
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        HotfolderModel
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="2">
     <Component>

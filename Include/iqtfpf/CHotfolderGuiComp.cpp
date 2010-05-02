@@ -24,11 +24,6 @@ namespace iqtfpf
 
 // public methods
 
-CHotfolderGuiComp::CHotfolderGuiComp()
-{
-}
-
-
 // reimplemented (ibase::ICommandsProvider)
 
 const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const

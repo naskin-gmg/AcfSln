@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1441
+          1484
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          169
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         HotfolderParamsGui
       </ComponentName>
       <X>
-        825
+        900
       </X>
       <X>
-        425
+        450
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         SettingsDialog
       </ComponentName>
       <X>
-        550
+        575
       </X>
       <X>
-        425
+        225
       </X>
     </Element>
     <Element>
@@ -54,7 +54,7 @@
         WorkingHotfolderParams
       </ComponentName>
       <X>
-        275
+        250
       </X>
       <X>
         425

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1483
+          1486
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          188
+          189
         </Number>
         <Description>
           ACF-Solutions
@@ -26,27 +26,60 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="2">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        ImageProcessingHotfolder
+        DirectoryMonitor
       </ComponentName>
       <X>
-        675
+        550
       </X>
       <X>
-        350
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InvertOperator
+        HotfolderProcessor
       </ComponentName>
+      <X>
+        550
+      </X>
       <X>
         300
       </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        MonitoringSessions
+      </ComponentName>
       <X>
-        350
+        550
+      </X>
+      <X>
+        550
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        MonitoringSessionsSet
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        675
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputFileRenaming
+      </ComponentName>
+      <X>
+        900
+      </X>
+      <X>
+        300
       </X>
     </Element>
   </PositionMap>

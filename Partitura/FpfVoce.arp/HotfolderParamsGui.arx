@@ -1,21 +1,32 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1248
+          1484
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          189
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -88,7 +99,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   InputDirectories
                 </Value>
@@ -97,6 +108,9 @@
                 </Value>
                 <Value>
                   DirectoryMonitorParams
+                </Value>
+                <Value>
+                  ProcessingParams
                 </Value>
               </Values>
             </Data>
@@ -115,7 +129,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   InputDirectories
                 </Value>
@@ -124,6 +138,9 @@
                 </Value>
                 <Value>
                   DirectoryMonitorParams
+                </Value>
+                <Value>
+                  ProcessingParams
                 </Value>
               </Values>
             </Data>
@@ -142,7 +159,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   Input
                 </Value>
@@ -151,6 +168,9 @@
                 </Value>
                 <Value>
                   Monitoring Parameters
+                </Value>
+                <Value>
+                  Processing Parameters
                 </Value>
               </Values>
             </Data>
@@ -238,6 +258,91 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        ProcessingParams
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSetGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              DesignType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              ProcessingParamsUiType
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Editors
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingEditors
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Ids
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProcessingParamIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Names
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProcessingParamNames
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <ExportedInterfaces count="3">
     <Interface>
@@ -276,9 +381,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component
+    Hotfolder parmeter UI
   </Description>
   <Keywords>
-    
+    Hotfolder GUI
   </Keywords>
 </Acf>
