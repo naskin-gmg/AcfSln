@@ -102,6 +102,9 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 				else{
 					SendInfoMessage(0, iqt::GetCString(installMessage));
 				}
+
+				// start the installed service:
+				controller.start();
 			}
 
 			return retVal;
