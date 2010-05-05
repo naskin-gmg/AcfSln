@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1490
+          1493
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          192
+          193
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="1">
+  <PositionMap count="4">
+    <Element>
+      <ComponentName>
+        DirectoryItemGui
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        450
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         HotfolderGui
@@ -36,6 +47,28 @@
       </X>
       <X>
         300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderStatistics
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <X>
+        450
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        StateIcons
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        450
       </X>
     </Element>
   </PositionMap>

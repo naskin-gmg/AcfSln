@@ -66,18 +66,18 @@ istd::CStringList CDirectoryMonitorComp::GetChangedFileItems(int changeFlags) co
 
 bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 {
-	bool wasRunning = BaseClass2::isRunning() | m_isWorking; 
+	bool wasRunning = BaseClass2::isRunning(); 
 	if (wasRunning){
 		StopObserverThread();
 	}
 
-	m_isWorking = true;
-
 	if ((paramsSetPtr == NULL) && (!m_paramsSetCompPtr.IsValid() || !m_paramsSetModelCompPtr.IsValid())){
+		SendInfoMessage(0, "Directory monitoring parameters are invalid or not set");
+	
 		return false;
 	}
 
-	// Of using of external parameter model, connect to it, otherwise use the default parameter set:
+	// if external parameter model is used, connect to it, otherwise use the default parameter set:
 	const iprm::IParamsSet* parameterModelPtr = paramsSetPtr == NULL ? m_paramsSetCompPtr.GetPtr() : paramsSetPtr;
 	I_ASSERT(parameterModelPtr != NULL);
 
@@ -86,13 +86,12 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 		SynchronizeWithModel(*m_directoryPathModelPtr);
 		SynchronizeWithModel(*m_directoryMonitorParamsModelPtr);
 
-		// if observing thread was running -> restart:
-		if (wasRunning){
-			StartObserverThread();
-		}
+		StartObserverThread();
 
 		return true;
 	}
+
+	SendInfoMessage(0, "Directory monitoring parameters could not be set");
 
 	return false;
 }
@@ -100,8 +99,6 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 
 void CDirectoryMonitorComp::StopObserving()
 {
-	m_isWorking = false;
-
 	StopObserverThread();
 }
 
@@ -144,7 +141,7 @@ void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlag
 	if (modelPtr != NULL){
 		bool needRestart = false; 
 		if (modelPtr == m_directoryPathModelPtr){
-			needRestart = BaseClass2::isRunning() | m_isWorking;
+			needRestart = BaseClass2::isRunning();
 			if (needRestart){
 				StopObserverThread();
 			}
