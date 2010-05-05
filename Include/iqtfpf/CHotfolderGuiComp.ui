@@ -45,6 +45,11 @@ QTreeView::item{
 	margin: 2px;
  }
 
+QTreeView::item:!has-children{
+	border: 0px solid #adbaf1;
+	border-bottom: 1px solid #adbaf1;
+ }
+
 
  QTreeView::item:hover {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #dededf);

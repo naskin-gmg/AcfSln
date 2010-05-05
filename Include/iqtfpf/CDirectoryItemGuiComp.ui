@@ -20,9 +20,9 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QProgressBar
+   <string>QProgressBar
 {
-max-height: 4px;
+max-height: 6px;
 border: 0px solid;
 border-radius:3px;
 border-color:transparent;
@@ -94,10 +94,10 @@ background: transparent;
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">QProgressBar::chunk {
-     width: 8px;
+        <string>QProgressBar::chunk {
+     image: url(:/Icons/StateOk.svg);
+     width: 4px;
      margin: 0.5px;
-	background-color:green;
  }</string>
        </property>
        <property name="value">
@@ -117,10 +117,10 @@ background: transparent;
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">QProgressBar::chunk {
-     width: 8px;
+        <string>QProgressBar::chunk {
+     image: url(:/Icons/StateInvalid.svg);
+     width: 4px;
      margin: 0.5px;
-	background-color: red;	
 }</string>
        </property>
        <property name="value">
@@ -140,10 +140,10 @@ background: transparent;
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">QProgressBar::chunk {
-	width: 8px;
-	margin: 0.5px;
-	background-color: gray;
+        <string>QProgressBar::chunk {
+     image: url(:/Icons/Cancel.svg);
+      width: 4px;
+     margin: 0.5px;
 }</string>
        </property>
        <property name="value">
