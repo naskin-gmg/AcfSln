@@ -23,6 +23,7 @@ public:
 	typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderLoaderComp);
+		I_ASSIGN(m_monitorSessionsParamIdAttrPtr, "MonitorSessionsParamId", "Parameter ID for monitoring sessions", false, "MonitoringSessions");
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -51,6 +52,9 @@ protected:
 				const iser::CXmlFileReadArchive& archive,
 				const istd::IChangeable& data,
 				const istd::CString& filePath) const;
+
+private:
+	I_ATTR(istd::CString, m_monitorSessionsParamIdAttrPtr);
 };
 
 

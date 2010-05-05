@@ -30,6 +30,11 @@ public:
 		CF_OUTPUT_PREVIEW_CHANGED = 0x8000000
 	};
 
+	/**
+		Get the processing state for the item.
+
+		\sa iproc::IProcessor::TaskState
+	*/
 	virtual int GetProcessingState() const = 0;
 	virtual void SetProcessingState(int processingState) = 0;
 

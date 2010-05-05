@@ -50,8 +50,6 @@ public:
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
 		I_REGISTER_INTERFACE(imod::IModel);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
-		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
-		I_ASSIGN(m_progressManagerGuiCompPtr, "ProgressManager", "Progress manager for the hotfolder", true, "ProgressManager");
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_statisticsHotfolderObserverCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
@@ -123,8 +121,6 @@ private:
 		const CHotfolderGuiComp& m_parent;
 	};
 
-	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
-	I_REF(iqtgui::IGuiObject, m_progressManagerGuiCompPtr);
 	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);
 	I_REF(ifpf::IHotfolderStatistics, m_statisticsCompPtr);
 	I_REF(imod::IObserver, m_statisticsHotfolderObserverCompPtr);

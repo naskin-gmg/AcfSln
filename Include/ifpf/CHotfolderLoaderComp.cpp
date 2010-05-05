@@ -28,13 +28,15 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 		return StateFailed;
 	}
 
-	const iser::ISerializable* monitoringSessionsPtr = hotfolderParamsSet->GetParameter("MonitoringSessions");
-	if (monitoringSessionsPtr != NULL){
-		ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
+	if (m_monitorSessionsParamIdAttrPtr.IsValid()){
+		const iser::ISerializable* monitoringSessionsPtr = hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).ToString());
+		if (monitoringSessionsPtr != NULL){
+			ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
 
-		(const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive);
+			(const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive);
+		}
 	}
-
+	
 	return BaseClass::LoadFromFile(data, filePath);
 }
 
@@ -52,12 +54,14 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 
 	int retVal = BaseClass::SaveToFile(data, filePath);
 	if (retVal != StateFailed){
-		const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter("MonitoringSessions"));
-		if (monitoringSessionsPtr != NULL){
-			WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
+		if (m_monitorSessionsParamIdAttrPtr.IsValid()){
+			const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).ToString()));
+			if (monitoringSessionsPtr != NULL){
+				WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
 
-			if ((const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive)){
-				return retVal;
+				if ((const_cast<iser::ISerializable*>(monitoringSessionsPtr))->Serialize(staticParamsArchive)){
+					return retVal;
+				}
 			}
 		}
 	}

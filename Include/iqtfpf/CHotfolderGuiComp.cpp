@@ -109,11 +109,6 @@ void CHotfolderGuiComp::OnGuiModelDetached()
 
 void CHotfolderGuiComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
-	if (m_progressManagerGuiCompPtr.IsValid() && m_progressManagerCompPtr.IsValid()){
-		m_progressManagerGuiCompPtr->CreateGui(OverallProgressFrame);
-	}
 	iqtgui::CHierarchicalCommand* hotfolderMenuPtr = new iqtgui::CHierarchicalCommand("&Hotfolder");
 
 	m_runCommand.SetGroupId(1);
@@ -164,15 +159,13 @@ void CHotfolderGuiComp::OnGuiCreated()
 			m_stateIconsMap[fileState] = QIcon(pixmap);
 		}
 	}
+
+	BaseClass::OnGuiCreated();
 }
 
 
 void CHotfolderGuiComp::OnGuiDestroyed()
 {
-	if (m_progressManagerGuiCompPtr.IsValid()){
-		m_progressManagerGuiCompPtr->DestroyGui();
-	}
-
 	BaseClass::OnGuiDestroyed();
 }
 

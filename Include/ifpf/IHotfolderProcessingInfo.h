@@ -17,7 +17,7 @@ namespace ifpf
 
 
 /**
-	Interface for a hotfolder's state model.
+	Interface for a hotfolder's processing data model.
 */
 class IHotfolderProcessingInfo: virtual public iser::ISerializable
 {

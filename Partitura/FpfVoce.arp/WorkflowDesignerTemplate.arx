@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1458
+          1490
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          180
+          192
         </Number>
         <Description>
           ACF-Solutions
@@ -239,10 +239,10 @@
         HotfolderWorkflow
       </Id>
       <PackageId>
-        HotfolderVoce
+        FpfPck
       </PackageId>
       <ComponentId>
-        InvertImageHotfolderWorkflow
+        HotfolderWorkflow
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -251,16 +251,32 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Log
+              HotfolderFactories
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiFactoryAttribute
             </Type>
             <ExportId>
-              Log
+              Hotfolders
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              HotfolderFactoryIds
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              HotfolderIds
             </ExportId>
             <Data>
               <IsEnabled>

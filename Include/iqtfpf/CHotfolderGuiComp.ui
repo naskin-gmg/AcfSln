@@ -19,9 +19,6 @@
   <property name="windowTitle">
    <string>Hotfolder View</string>
   </property>
-  <property name="styleSheet">
-   <string/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
@@ -35,44 +32,43 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string>QTreeView {
-     show-decoration-selected: 1;
+      <string notr="true">QTreeView
+{
+selection-color: palette(base); 
+selection-background-color: palette(base); 
+}
+
+QTreeView::item{
+	min-height: 25px;
+	border-radius: 4px;
+	border: 1px solid #adbaf1;
+	margin: 2px;
  }
 
- QTreeView::item {
-	min-height: 25px;
-     border: 1px outset #adbaf1;
-     border-top-color: #adbaf1;
-     border-bottom-color: #adbaf1;
-     border-left-color: transparent;
-     border-right-color: transparent;
- }
 
  QTreeView::item:hover {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #dededf);
  }
 
 QTreeView::item:selected {
 	background:#6ea1f1
  }
+
+QTreeView::branch{
+	background: palette(base);
+}
 </string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
      <property name="selectionMode">
       <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
      <property name="indentation">
-      <number>20</number>
+      <number>0</number>
      </property>
      <property name="rootIsDecorated">
-      <bool>false</bool>
-     </property>
-     <property name="animated">
       <bool>false</bool>
      </property>
      <property name="columnCount">
@@ -89,24 +85,6 @@ QTreeView::item:selected {
        <string>File</string>
       </property>
      </column>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="OverallProgressFrame">
-     <property name="styleSheet">
-      <string/>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="margin">
-       <number>0</number>
-      </property>
-     </layout>
     </widget>
    </item>
   </layout>

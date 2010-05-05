@@ -28,7 +28,7 @@ namespace ifpf
 
 
 /**
-	Implementation of the dynamic data model of the hotfolder.
+	Implementation of the processing data model of the hotfolder.
 */
 class CHotfolder: virtual public ifpf::IHotfolderProcessingInfo
 {
