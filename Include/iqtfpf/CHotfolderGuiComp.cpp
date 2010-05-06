@@ -124,12 +124,11 @@ void CHotfolderGuiComp::OnGuiCreated()
 	connect(&m_holdCommand, SIGNAL(activated()), this, SLOT(OnHold()));
 	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
 
-	iqtgui::CHierarchicalCommand* resetCommandPtr = new iqtgui::CHierarchicalCommand;
-	resetCommandPtr->SetGroupId(1);
-	resetCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	resetCommandPtr->SetVisuals(tr("&Reset"), "Reset", tr("Reset the hotfolder"), QIcon(":/Icons/Reset"));
-	connect(resetCommandPtr, SIGNAL(activated()), this, SLOT(OnReset()));
-	hotfolderMenuPtr->InsertChild(resetCommandPtr, true);
+	m_restartItemCommand.SetGroupId(1);
+	m_restartItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart", tr("Restart selected job(s)"), QIcon(":/Icons/Reset"));
+	connect(&m_restartItemCommand, SIGNAL(activated()), this, SLOT(OnRestart()));
+	hotfolderMenuPtr->InsertChild(&m_restartItemCommand, false);
 
 	m_removeItemCommand.SetGroupId(2);
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
@@ -255,6 +254,7 @@ void CHotfolderGuiComp::UpdateItemCommands()
 
 	bool enableRemoveAction = false;
 	bool enableCancelAction = false;
+	bool enableRestartAction = false;
 
 	for (int itemIndex = 0; itemIndex < int(selectedItems.size()); itemIndex++){
 		I_ASSERT(selectedItems[itemIndex] != NULL);
@@ -263,10 +263,12 @@ void CHotfolderGuiComp::UpdateItemCommands()
 
 		enableRemoveAction = enableRemoveAction || (itemState != iproc::IProcessor::TS_WAIT);
 		enableCancelAction = enableCancelAction || ((itemState == iproc::IProcessor::TS_NONE) || itemState == iproc::IProcessor::TS_WAIT);
+		enableRestartAction = enableRestartAction || (itemState != iproc::IProcessor::TS_WAIT);
 	}
 	
 	m_removeItemCommand.setEnabled(enableRemoveAction);
 	m_cancelItemCommand.setEnabled(enableCancelAction);
+	m_restartItemCommand.setEnabled(enableRestartAction);
 }
 
 
@@ -367,6 +369,18 @@ void CHotfolderGuiComp::OnItemCancel()
 }
 
 
+void CHotfolderGuiComp::OnRestart()
+{
+	ProcessingItems processingItems = GetSelectedProcessingItems();
+	for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
+		int itemState = processingItems[itemIndex]->GetProcessingState();
+		if (itemState != iproc::IProcessor::TS_WAIT){
+			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
+		}
+	}
+}
+
+
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
@@ -418,6 +432,7 @@ CHotfolderGuiComp::DirectoryItem::DirectoryItem(
 	m_parent(parent),
 	m_directory(directory)
 {
+	setFlags(Qt::ItemIsEnabled);
 }
 
 

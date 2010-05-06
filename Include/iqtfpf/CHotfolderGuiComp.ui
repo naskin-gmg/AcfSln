@@ -34,35 +34,52 @@
      <property name="styleSheet">
       <string notr="true">QTreeView
 {
-selection-color: palette(base); 
-selection-background-color: palette(base); 
+	selection-color: palette(base); 
+	selection-background-color: palette(base); 
 }
 
-QTreeView::item{
-	min-height: 25px;
+QTreeView::item
+{
+	min-height: 22px;
 	border-radius: 4px;
-	border: 1px solid #adbaf1;
-	margin: 2px;
+	border: 1px solid rgb(173,186,241);
+	margin-left: 4px;
+	margin-right: 4px;
  }
 
-QTreeView::item:!has-children{
-	border: 0px solid #adbaf1;
-	border-bottom: 1px solid #adbaf1;
+QTreeView::item:!has-children
+{
+	border: 0px;
+	border-bottom: 1px solid rgb(173,186,241);
  }
 
-
- QTreeView::item:hover {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #dededf);
+QTreeView::item:has-children
+{
+	margin-top: 4px;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(173,186,241,25), stop: 1 rgba(173,186,241,50));
  }
 
-QTreeView::item:selected {
-	background:#6ea1f1
+ QTreeView::item:hover:!has-children
+{
+	margin-top:1px;
+	margin-bottom:1px;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(173,186,241,20), stop: 1 rgba(173,186,241,40));
  }
 
-QTreeView::branch{
+QTreeView::item:selected:!has-children
+{
+	background:#6ea1f1;
+ }
+
+QTreeView::item:selected:has-children
+{
+	color: black;
+ }
+
+QTreeView::branch
+{
 	background: palette(base);
-}
-</string>
+}</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>

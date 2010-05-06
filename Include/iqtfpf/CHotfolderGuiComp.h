@@ -88,6 +88,7 @@ private Q_SLOTS:
 	void OnHold();
 	void OnItemRemove();
 	void OnItemCancel();
+	void OnRestart();
 	void on_FileList_itemSelectionChanged();
 
 private:
@@ -133,6 +134,7 @@ private:
 	iqtgui::CHierarchicalCommand m_holdCommand;
 	iqtgui::CHierarchicalCommand m_removeItemCommand;
 	iqtgui::CHierarchicalCommand m_cancelItemCommand;
+	iqtgui::CHierarchicalCommand m_restartItemCommand;
 
 	typedef std::map<int, QIcon> StateIconsMap;
 
