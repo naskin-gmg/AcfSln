@@ -89,6 +89,7 @@ private Q_SLOTS:
 	void OnItemRemove();
 	void OnItemCancel();
 	void OnRestart();
+	void OnContextMenuRequested(const QPoint& menuPoint);
 	void on_FileList_itemSelectionChanged();
 
 private:

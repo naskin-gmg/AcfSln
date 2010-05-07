@@ -5,6 +5,7 @@
 #include <QHeaderView>
 #include <QProgressBar>
 #include <QLabel>
+#include <QMenu>
 
 
 // ACF includes
@@ -158,6 +159,13 @@ void CHotfolderGuiComp::OnGuiCreated()
 			m_stateIconsMap[fileState] = QIcon(pixmap);
 		}
 	}
+
+	FileList->setContextMenuPolicy( Qt::CustomContextMenu);
+
+	connect(FileList, 
+				SIGNAL(customContextMenuRequested(const QPoint&)),
+				this, 
+				SLOT(OnContextMenuRequested(const QPoint&)));
 
 	BaseClass::OnGuiCreated();
 }
@@ -378,6 +386,20 @@ void CHotfolderGuiComp::OnRestart()
 			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
 		}
 	}
+}
+
+
+void CHotfolderGuiComp::OnContextMenuRequested(const QPoint& menuPoint)
+{
+	I_ASSERT(IsGuiCreated());
+
+	QPoint localPoint;
+	localPoint = FileList->viewport()->mapToGlobal(menuPoint);
+
+	QList<QAction*> actionList;
+	actionList << &m_removeItemCommand << &m_cancelItemCommand << &m_restartItemCommand;
+
+	QMenu::exec(actionList, localPoint);
 }
 
 
