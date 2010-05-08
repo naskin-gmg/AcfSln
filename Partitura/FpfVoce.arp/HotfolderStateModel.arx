@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1484
+          1498
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          189
+          200
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
         HotfolderStateModel
@@ -57,6 +57,27 @@
       </PackageId>
       <ComponentId>
         HotfolderStatistics
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        MonitoringSessions
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        MonitoringSessions
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -101,12 +122,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   HotfolderStateModel
                 </Value>
                 <Value>
                   HotfolderStatistics
+                </Value>
+                <Value>
+                  MonitoringSessions
                 </Value>
               </Values>
             </Data>
@@ -125,12 +149,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   HotfolderStateModel
                 </Value>
                 <Value>
                   HotfolderStatistics
+                </Value>
+                <Value>
+                  MonitoringSessions
                 </Value>
               </Values>
             </Data>
@@ -173,13 +200,21 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="2">
     <Component>
       <ExportedId>
         HotfolderState
       </ExportedId>
       <ComponentId>
         HotfolderStateModel
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        MonitoringSessions
+      </ExportedId>
+      <ComponentId>
+        MonitoringSessions
       </ComponentId>
     </Component>
   </ExportedComponents>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1490
+          1498
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          192
+          200
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
         DirectoryMonitor
@@ -107,15 +107,12 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              SessionManager
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                MonitoringSessions
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -387,27 +384,6 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        MonitoringSessions
-      </Id>
-      <PackageId>
-        FpfPck
-      </PackageId>
-      <ComponentId>
-        MonitoringSessions
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

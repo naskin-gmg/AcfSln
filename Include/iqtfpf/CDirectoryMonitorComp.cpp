@@ -448,11 +448,15 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 void CDirectoryMonitorComp::DisconnectFromParameterModel()
 {
 	if (m_directoryPathModelPtr != NULL){
-		(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+		if (m_directoryPathModelPtr->IsAttached(this)){
+			(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+		}
 	}
 
 	if (m_directoryMonitorParamsModelPtr != NULL){
-		(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+		if (m_directoryMonitorParamsModelPtr->IsAttached(this)){
+			(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+		}
 	}
 }
 
