@@ -214,6 +214,8 @@ private:
 	FilesQueue m_filesQueue;
 
 	QTimer m_filesQueueTimer;
+
+	bool m_isInitialized;
 };
 
 

@@ -38,7 +38,8 @@ namespace iqtfpf
 CHotfolderProcessingComp::CHotfolderProcessingComp()
 	:m_directoryMonitorObserver(*this),
 	m_parametersObserver(*this),
-	m_stateObserver(*this)
+	m_stateObserver(*this),
+	m_isInitialized(false)
 {
 }
 
@@ -67,6 +68,8 @@ void CHotfolderProcessingComp::OnComponentCreated()
 	m_filesQueueTimer.start(250);
 
 	BaseClass::OnComponentCreated();
+
+	m_isInitialized = true;
 }
 
 
@@ -205,6 +208,10 @@ void CHotfolderProcessingComp::StopHotfolder()
 
 void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
 {
+	if (!m_isInitialized){
+		return;
+	}
+
 	StopHotfolder();
 
 	// setup directory monitoring:
@@ -415,13 +422,11 @@ CHotfolderProcessingComp::ParametersObserver::ParametersObserver(CHotfolderProce
 	
 void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
-		m_parent.SynchronizeWithModel();
-	}
+	m_parent.SynchronizeWithModel();
 }
 
 
-// public methods of embedded class ParametersObserver
+// public methods of embedded class StateObserver
 
 CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp& parent)
 	:m_parent(parent)
