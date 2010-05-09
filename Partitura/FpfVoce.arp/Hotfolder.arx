@@ -61,10 +61,10 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  HotfolderParams
+                  HotfolderStateModel
                 </Value>
                 <Value>
-                  HotfolderStateModel
+                  HotfolderParams
                 </Value>
               </Values>
             </Data>
@@ -83,12 +83,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
+                <Value>
+                  HotfolderStateModel
+                </Value>
                 <Value>
                   HotfolderParams
                 </Value>
                 <Value>
-                  HotfolderStateModel
+                  
                 </Value>
               </Values>
             </Data>
