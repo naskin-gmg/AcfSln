@@ -212,12 +212,10 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 		return;
 	}
 
-	StopHotfolder();
-
 	// setup directory monitoring:
 	istd::CStringList addedDirectories = GetAddedInputDirectories();
 	for (int pathIndex = 0; pathIndex < int(addedDirectories.size()); pathIndex++){
-		const iprm::IParamsSet* monitoringParamsPtr = GetMonitoringParamsSet(pathIndex);
+		const iprm::IParamsSet* monitoringParamsPtr = GetMonitoringParamsSet(addedDirectories[pathIndex]);
 		if (monitoringParamsPtr != NULL){
 			AddDirectoryMonitor(addedDirectories[pathIndex], monitoringParamsPtr);
 		}
@@ -228,13 +226,14 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
 	}
 
+	isys::CSectionBlocker parameterLock(&m_parameterLock);
 	if (m_processingParamsSetCompPtr.IsValid()){
-		isys::CSectionBlocker parameterLock(&m_parameterLock);
-	
 		m_runParameterPtr.SetCastedOrRemove(m_processingParamsSetCompPtr->CloneMe());
 	}
 
-	StartHotfolder();
+	if (!BaseClass2::isRunning()){
+		StartHotfolder();
+	}
 }
 
 
@@ -260,13 +259,22 @@ istd::CStringList CHotfolderProcessingComp::GetInputDirectories() const
 }
 
 
-const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(int index) const
+const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(const istd::CString& directoryPath) const
 {
-	if (m_inputDirectoriesManagerCompPtr.IsValid()){
-		I_ASSERT(index < m_inputDirectoriesManagerCompPtr->GetSetsCount());
-		I_ASSERT(index >= 0);
+	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
+		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetSetsCount();
+		for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
+			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
+			I_ASSERT(inputDirectoryParamPtr != NULL);
 
-		return m_inputDirectoriesManagerCompPtr->GetParamsSet(index);
+			const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
+			I_ASSERT(monitoringDirectoryPtr != NULL);
+			I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
+
+			if (monitoringDirectoryPtr->GetPath() == directoryPath){
+				return inputDirectoryParamPtr;
+			}
+		}
 	}
 
 	return NULL;
@@ -369,9 +377,15 @@ int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const 
 		return iproc::IProcessor::TS_NONE;
 	}
 
-	isys::CSectionBlocker parameterLock(&m_parameterLock);
+	istd::TDelPtr<iprm::IParamsSet> processingParameterPtr;
 
-	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, m_runParameterPtr.GetPtr())){
+	m_parameterLock.Enter();
+	if (m_runParameterPtr.IsValid()){
+		processingParameterPtr.SetCastedOrRemove(m_runParameterPtr->CloneMe());
+	}
+	m_parameterLock.Leave();
+
+	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, processingParameterPtr.GetPtr())){
 		istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
 		SendErrorMessage(0, message, "Hotfolder");
 
@@ -420,7 +434,7 @@ CHotfolderProcessingComp::ParametersObserver::ParametersObserver(CHotfolderProce
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.SynchronizeWithModel();
 }

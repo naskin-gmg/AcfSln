@@ -100,9 +100,9 @@ private:
 	istd::CStringList GetInputDirectories() const;
 
 	/**
-		Get parameter set for each input directory.
+		Get parameter set for the given directory path.
 	*/
-	const iprm::IParamsSet* GetMonitoringParamsSet(int index) const;
+	const iprm::IParamsSet* GetMonitoringParamsSet(const istd::CString& directoryPath) const;
 
 	/**
 		Get list of newly added input directories.

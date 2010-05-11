@@ -374,6 +374,8 @@ void CHotfolderGuiComp::OnItemCancel()
 			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 		}
 	}
+
+	UpdateItemCommands();
 }
 
 
@@ -386,6 +388,8 @@ void CHotfolderGuiComp::OnRestart()
 			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
 		}
 	}
+
+	UpdateItemCommands();
 }
 
 
