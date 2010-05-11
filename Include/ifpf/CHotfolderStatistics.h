@@ -34,7 +34,7 @@ public:
 
 	// reimplemented (ifpf::IHotfolderStatistics)
 	virtual int GetItemsCount(const istd::CString& directoryPath = istd::CString()) const;
-	virtual int GetProcessedCount(const istd::CString& directoryPath = istd::CString()) const;
+	virtual int GetSuccessCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetErrorsCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetAbortedCount(const istd::CString& directoryPath = istd::CString()) const;
 
@@ -57,7 +57,7 @@ protected:
 private:
 	typedef std::map<istd::CString, int> CounterMap;
 	CounterMap m_itemsCount;
-	CounterMap m_processedCount;
+	CounterMap m_successCount;
 	CounterMap m_errorsCount;
 	CounterMap m_abortedCount;
 

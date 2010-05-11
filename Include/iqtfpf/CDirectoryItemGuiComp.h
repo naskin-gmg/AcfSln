@@ -36,6 +36,11 @@ public:
 	virtual void UpdateEditor(int updateFlags = 0);
 
 private:
+	void UpdateProgressBar(const ifpf::IHotfolderStatistics& statistics);
+
+	QString GenerateStyleSheet(double successed, double errors, double aborted) const;
+
+private:
 	QString m_directoryPath;
 };
 

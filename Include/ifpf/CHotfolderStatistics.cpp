@@ -38,10 +38,10 @@ int CHotfolderStatistics::GetItemsCount(const istd::CString& directoryPath) cons
 }
 
 
-int CHotfolderStatistics::GetProcessedCount(const istd::CString& directoryPath) const
+int CHotfolderStatistics::GetSuccessCount(const istd::CString& directoryPath) const
 {
-	CounterMap::const_iterator iter = m_processedCount.find(directoryPath);
-	if (iter != m_processedCount.end()){
+	CounterMap::const_iterator iter = m_successCount.find(directoryPath);
+	if (iter != m_successCount.end()){
 		return iter->second;
 	}
 
@@ -123,11 +123,10 @@ void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* updateP
 		if (m_previousItemState.first == itemPtr){
 			switch (m_previousItemState.second){
 				case iproc::IProcessor::TS_OK:
-					--m_processedCount[directoryPath];
+					--m_successCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_INVALID:
 					--m_errorsCount[directoryPath];
-					--m_processedCount[directoryPath];
 					break;
 				case iproc::IProcessor::TS_CANCELED:
 					--m_abortedCount[directoryPath];
@@ -169,7 +168,7 @@ bool CHotfolderStatistics::Serialize(iser::IArchive& archive)
 void CHotfolderStatistics::ResetStatistics()
 {
 	m_itemsCount.clear();
-	m_processedCount.clear();
+	m_successCount.clear();
 	m_errorsCount.clear();
 	m_abortedCount.clear();
 }
@@ -201,13 +200,13 @@ void CHotfolderStatistics::RebuildStatistics()
 
 void CHotfolderStatistics::UpdateStateMaps(int itemState, const istd::CString& directoryPath)
 {
+
 	switch (itemState){
 		case iproc::IProcessor::TS_OK:
-			++m_processedCount[directoryPath];
+			++m_successCount[directoryPath];
 			break;
 		case iproc::IProcessor::TS_INVALID:
 			++m_errorsCount[directoryPath];
-			++m_processedCount[directoryPath];
 			break;
 		case iproc::IProcessor::TS_CANCELED:
 			++m_abortedCount[directoryPath];
