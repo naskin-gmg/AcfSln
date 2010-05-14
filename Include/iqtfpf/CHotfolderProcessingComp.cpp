@@ -84,6 +84,8 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 	m_filesQueueTimer.stop();
 
+	m_directoryMonitorsMap.clear();
+
 	BaseClass::OnComponentDestroyed();
 }
 

@@ -100,6 +100,7 @@ private:
 	void SynchronizeWithModel(const imod::IModel& paramsModel);
 	bool ConnectToParameterModel(const iprm::IParamsSet& paramsSet);
 	void DisconnectFromParameterModel();
+	void UpdateMonitoringSession() const;
 
 private:
 	struct FileSystemChanges

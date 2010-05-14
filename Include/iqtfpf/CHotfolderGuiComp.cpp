@@ -125,9 +125,9 @@ void CHotfolderGuiComp::OnGuiCreated()
 	connect(&m_holdCommand, SIGNAL(activated()), this, SLOT(OnHold()));
 	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
 
-	m_restartItemCommand.SetGroupId(1);
+	m_restartItemCommand.SetGroupId(2);
 	m_restartItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart", tr("Restart selected job(s)"), QIcon(":/Icons/Reset"));
+	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart Job", tr("Restart selected job(s)"), QIcon(":/Icons/Reset"));
 	connect(&m_restartItemCommand, SIGNAL(activated()), this, SLOT(OnRestart()));
 	hotfolderMenuPtr->InsertChild(&m_restartItemCommand, false);
 

@@ -181,6 +181,8 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 
 	DisconnectFromParameterModel();
 
+	UpdateMonitoringSession();
+
 	BaseClass::OnComponentDestroyed();
 }
 
@@ -311,13 +313,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 
 		changePtr.Reset();
 
-		// update current session:
-		if (m_monitoringSessionManagerCompPtr.IsValid()){
-			ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
-			if (sessionPtr != NULL){
-				sessionPtr->SetFileList(GetFileList());
-			}
-		}
+		UpdateMonitoringSession();
 	}
 }
 
@@ -456,6 +452,18 @@ void CDirectoryMonitorComp::DisconnectFromParameterModel()
 	if (m_directoryMonitorParamsModelPtr != NULL){
 		if (m_directoryMonitorParamsModelPtr->IsAttached(this)){
 			(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+		}
+	}
+}
+
+
+void CDirectoryMonitorComp::UpdateMonitoringSession() const
+{
+	// update current session:
+	if (m_monitoringSessionManagerCompPtr.IsValid()){
+		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
+		if (sessionPtr != NULL){
+			sessionPtr->SetFileList(GetFileList());
 		}
 	}
 }
