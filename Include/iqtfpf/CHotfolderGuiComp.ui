@@ -59,14 +59,11 @@ QTreeView::item:has-children
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(250,250,250,192), stop: 1 rgba(231,231,231,192));
  }
 
-/*
- QTreeView::item:hover:!has-children
+ QTreeView::item:!has-children:!has-siblings
 {
-	margin-top:1px;
-	margin-bottom:1px;
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(173,186,241,20), stop: 1 rgba(173,186,241,40));
+	border-bottom: 0px;
  }
-*/
+
 
 QTreeView::item:selected:!has-children
 {
