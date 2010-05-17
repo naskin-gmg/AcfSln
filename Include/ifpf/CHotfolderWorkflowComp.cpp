@@ -119,7 +119,7 @@ CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(c
 		return NULL;
 	}
 
-	HotfolderItem* newHotfolderItemPtr = new HotfolderItem();
+	istd::TDelPtr<HotfolderItem> newHotfolderItemPtr(new HotfolderItem());
 
 	for (int factoryIndex = 0; factoryIndex < m_hotoflderFactoryIdsAttrPtr.GetCount(); factoryIndex++){
 		if (hotfolderId == m_hotoflderFactoryIdsAttrPtr[factoryIndex]){
@@ -132,7 +132,7 @@ CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(c
 
 					newHotfolderItemPtr->elementPtr->SetName(hotfolderName);
 
-					return newHotfolderItemPtr;
+					return newHotfolderItemPtr.PopPtr();
 				}
 			}
 		}
