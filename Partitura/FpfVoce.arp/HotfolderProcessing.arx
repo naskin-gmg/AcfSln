@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1501
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          206
         </Number>
         <Description>
           ACF-Solutions
@@ -404,7 +404,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DirectoryPath
@@ -414,6 +414,22 @@
             </Type>
             <ExportId>
               HotfolderOutputDirectory
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileNamingParams
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              FileNamingParams
             </ExportId>
             <Data>
               <IsEnabled>
@@ -454,6 +470,22 @@
               <Value>
                 OutputDirectory
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputFileInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              OutputFileInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

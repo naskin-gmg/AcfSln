@@ -1,9 +1,9 @@
-#ifndef ifpf_IFileNamingStrategy_included
-#define ifpf_IFileNamingStrategy_included
+#ifndef ifpf_IFileNamingParams_included
+#define ifpf_IFileNamingParams_included
 
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include "iser/ISerializable.h"
 
 
 namespace ifpf
@@ -14,7 +14,7 @@ namespace ifpf
 	Interface for calculation parameters of the new file name for any file item.
 	\sa IFileNaming
 */
-class IFileNamingStrategy: virtual public istd::IChangeable
+class IFileNamingParams: virtual public iser::ISerializable
 {
 public:
 
@@ -71,6 +71,6 @@ public:
 } // namespace ifpf
 
 
-#endif // !ifpf_IFileNamingStrategy_included
+#endif // !ifpf_IFileNamingParams_included
 
 

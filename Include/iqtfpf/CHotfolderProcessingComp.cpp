@@ -139,6 +139,10 @@ void CHotfolderProcessingComp::run()
 
 			Q_EMIT EmitItemState(processingItemPtr, iproc::IProcessor::TS_WAIT);
 			
+			if (m_fileNamingCompPtr.IsValid()){
+				outputFile = m_fileNamingCompPtr->GetFilePath(inputFile);
+			}
+
 			int processingState = ProcessFile(inputFile, outputFile);
 		
 			Q_EMIT EmitItemState(processingItemPtr, processingState);

@@ -14,6 +14,7 @@
 #include "ifpf/CDirectoryMonitorParamsComp.h"
 #include "ifpf/CHotfolderWorkflowComp.h"
 #include "ifpf/CVisualHotfolderWorkflowComp.h"
+#include "ifpf/CFileNamingParamsComp.h"
 
 
 /**
@@ -43,6 +44,8 @@ typedef icomp::TModelCompWrap<ifpf::CDirectoryMonitorParamsComp> AttributedDirec
 typedef icomp::TModelCompWrap<ifpf::CHotfolderWorkflowComp> HotfolderWorkflow;
 
 typedef icomp::TModelCompWrap<ifpf::CVisualHotfolderWorkflowComp> VisualHotfolderWorkflow;
+
+typedef icomp::TModelCompWrap<ifpf::CFileNamingParamsComp> FileNamingParams;
 
 
 } // namespace FpfPck

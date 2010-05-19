@@ -3,9 +3,7 @@
 
 
 // ACF includes
-#include "istd/IChangeable.h"
-
-#include "iprm/IParamsSet.h"
+#include "istd/IPolymorphic.h"
 
 
 namespace ifpf
@@ -15,7 +13,7 @@ namespace ifpf
 /**
 	Interface for calculation of the new file path for an existing file.
 */
-class IFileNaming: virtual public istd::IChangeable
+class IFileNaming: virtual public istd::IPolymorphic
 {
 public:
 	/**

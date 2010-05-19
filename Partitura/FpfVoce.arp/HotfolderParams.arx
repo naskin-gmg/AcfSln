@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1501
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          206
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="7">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -77,6 +77,27 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileNamingParams
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        FileNamingParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -133,7 +154,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   InputDirectories
                 </Value>
@@ -148,6 +169,9 @@
                 </Value>
                 <Value>
                   ProcessingParams
+                </Value>
+                <Value>
+                  FileNamingParams
                 </Value>
               </Values>
             </Data>
@@ -183,7 +207,7 @@
                   ProcessingParams
                 </Value>
                 <Value>
-                  
+                  FileNamingParams
                 </Value>
               </Values>
             </Data>
@@ -361,7 +385,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="4">
+    <Component>
+      <ExportedId>
+        FileNamingParams
+      </ExportedId>
+      <ComponentId>
+        FileNamingParams
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         InputDirectories

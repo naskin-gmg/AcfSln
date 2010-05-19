@@ -26,15 +26,14 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 		return istd::CString::GetEmpty();
 	}
 
-
 	QFileInfo inputFileInfo(iqt::GetQString(inputFilePath));
 	QString baseFileName = inputFileInfo.baseName();
 	istd::CString outputExtension = iqt::GetCString(inputFileInfo.suffix());
 
 	// calculate the base file name:
-	if (m_fileNamingStrategyCompPtr.IsValid()){
-		baseFileName = iqt::GetQString(m_fileNamingStrategyCompPtr->GetPrefix()) + baseFileName;
-		baseFileName += iqt::GetQString(m_fileNamingStrategyCompPtr->GetSuffix());
+	if (m_fileNamingParamsCompPtr.IsValid()){
+		baseFileName = iqt::GetQString(m_fileNamingParamsCompPtr->GetPrefix()) + baseFileName;
+		baseFileName += iqt::GetQString(m_fileNamingParamsCompPtr->GetSuffix());
 	}
 
 	// calculate the new extension:
@@ -62,8 +61,8 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 
 		QString outputFilePath = outputDirectory.absoluteFilePath(newFileName);
 
-		if (m_fileNamingStrategyCompPtr.IsValid()){
-			if (m_fileNamingStrategyCompPtr->GetRenamingMode() == ifpf::IFileNamingStrategy::RM_OVERWRITE){
+		if (m_fileNamingParamsCompPtr.IsValid()){
+			if (m_fileNamingParamsCompPtr->GetRenamingMode() == ifpf::IFileNamingParams::RM_OVERWRITE){
 				return iqt::GetCString(outputFilePath);
 			}
 			else{
@@ -71,7 +70,7 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 				while (true){
 					QFileInfo outputFileInfo(outputFilePath);
 					if (outputFileInfo.exists()){
-						newFileName = QString("%1_%2").arg(++counter, 3, 10, QChar('0')).arg(newFileName);
+						newFileName = QString("%1_%2").arg(baseFileName).arg(++counter, 3, 10, QChar('0')) + "." + iqt::GetQString(outputExtension);
 						
 						outputFilePath = outputDirectory.absoluteFilePath(newFileName);
 					}

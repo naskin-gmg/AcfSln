@@ -225,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileNamingParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileProcessingComp.cpp"
 				>
 			</File>
@@ -279,6 +283,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNamingParamsComp.h"
 				>
 			</File>
 			<File
@@ -338,7 +346,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFileNamingStrategy.h"
+				RelativePath="..\IFileNamingParams.h"
 				>
 			</File>
 			<File

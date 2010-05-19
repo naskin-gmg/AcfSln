@@ -59,6 +59,11 @@ I_EXPORT_COMPONENT(
 			"Visualization model of a hotfolder workflow",
 			"File Processing Hotfolder Workflow");
 
+I_EXPORT_COMPONENT(
+			FileNamingParams,
+			"Parmeter for file (re)naming",
+			"File Processing Hotfolder Parameter");
+
 
 } // namespace FpfPck
 
