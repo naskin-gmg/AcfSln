@@ -45,7 +45,6 @@ void CDirectoryItemGuiComp::UpdateProgressBar(const ifpf::IHotfolderStatistics& 
 	int processedCountPercent = (successed + errors + aborted) * 100;
 
 	ProcessedProgressBar->setValue(processedCountPercent);
-	ProcessedProgressBar->setVisible(processedCountPercent != 0);
 
 	QString styleSheet = GenerateStyleSheet(successed, errors, aborted);
 
