@@ -7,15 +7,14 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "imeas/IDataSequenceInfo.h"
-
 
 namespace imeas
 {
 
 
 CGeneralDataSequence::CGeneralDataSequence()
-:	m_channelsCount(0)
+:	m_channelsCount(0),
+	m_logicalSamplesRange(istd::CRange::GetInvalid())
 {
 }
 
@@ -24,15 +23,6 @@ CGeneralDataSequence::CGeneralDataSequence()
 
 bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 {
-	if (m_sequnceInfoPtr.IsValid()){
-		if (samplesCount < 0){
-			samplesCount = m_sequnceInfoPtr->GetSamplesCount();
-		}
-		if (channelsCount < 0){
-			channelsCount = m_sequnceInfoPtr->GetChannelsCount();
-		}
-	}
-
 	if ((samplesCount < 0) || (channelsCount < 0)){
 		return false;
 	}
@@ -40,20 +30,6 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 	m_channelsCount = channelsCount;
 
 	m_samples.resize(samplesCount * m_channelsCount, 0.0);
-
-	return true;
-}
-
-
-const istd::TRetSmartPtr<IDataSequenceInfo>& CGeneralDataSequence::GetSequenceInfo() const
-{
-	return m_sequnceInfoPtr;
-}
-
-
-bool CGeneralDataSequence::SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr)
-{
-	m_sequnceInfoPtr = infoPtr;
 
 	return true;
 }
@@ -68,7 +44,6 @@ bool CGeneralDataSequence::IsEmpty() const
 void CGeneralDataSequence::ResetSequence()
 {
 	m_samples.clear();
-	m_sequnceInfoPtr.Reset();
 }
 
 
@@ -106,6 +81,18 @@ void CGeneralDataSequence::SetSample(int index, int channel, double value)
 	I_ASSERT(channel < m_channelsCount);
 
 	m_samples[index * m_channelsCount + channel] = value;
+}
+
+
+const istd::CRange& CGeneralDataSequence::GetLogicalSamplesRange() const
+{
+	return m_logicalSamplesRange;
+}
+
+
+void CGeneralDataSequence::SetLogicalSamplesRange(const istd::CRange& range)
+{
+	m_logicalSamplesRange = range;
 }
 
 
@@ -151,7 +138,7 @@ int CGeneralDataSequence::GetGridSize(int dimensionIndex) const
 istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 {
 	if (dimensionIndex == 0){
-		return istd::CRange(0, GetSamplesCount());
+		return m_logicalSamplesRange;
 	}
 	else if (dimensionIndex == 1){
 		return istd::CRange(0, 1);
@@ -162,13 +149,9 @@ istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 }
 
 
-istd::CRange CGeneralDataSequence::GetResultValueRange(int dimensionIndex, int /*resultDimension*/) const
+istd::CRange CGeneralDataSequence::GetResultValueRange(int /*dimensionIndex*/, int /*resultDimension*/) const
 {
-	if ((dimensionIndex == 0) && m_sequnceInfoPtr.IsValid()){
-		return m_sequnceInfoPtr->GetValueRange(-1);
-	}
-
-	return istd::CRange(-1, 1);
+	return istd::CRange::GetInvalid();
 }
 
 
@@ -292,8 +275,6 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object)
 				}
 			}
 		}
-
-		m_sequnceInfoPtr = sequencePtr->GetSequenceInfo();
 
 		return true;
 	}

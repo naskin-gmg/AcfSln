@@ -5,7 +5,6 @@
 #include <QPainter>
 
 // ACF includes
-#include "imeas/CSamplingSequenceInfo.h"
 #include "iqt/CSignalBlocker.h"
 
 
@@ -152,8 +151,10 @@ void CDataSequenceViewComp::on_ZoomOutButton_clicked()
 		return;
 	}
 
-	const imeas::CSamplingSequenceInfo* infoPtr = samplesPtr->GetSequenceInfo().Cast<const imeas::CSamplingSequenceInfo*>();
-	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
+	const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
+	double maxTimeSpan = (logicalRange.IsValid())?
+				logicalRange.GetLength():
+				samplesPtr->GetSamplesCount();
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -198,8 +199,10 @@ void CDataSequenceViewComp::on_NextButton_clicked()
 		return;
 	}
 
-	const imeas::CSamplingSequenceInfo* infoPtr = samplesPtr->GetSequenceInfo().Cast<const imeas::CSamplingSequenceInfo*>();
-	double maxTimeSpan = samplesPtr->GetSamplesCount() * (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
+	const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
+	double maxTimeSpan = (logicalRange.IsValid())?
+				logicalRange.GetLength():
+				samplesPtr->GetSamplesCount();
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -239,16 +242,19 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 	const imeas::IDataSequence* samplesPtr = m_parent.GetObjectPtr();
 	if (samplesPtr != NULL){
 		int samplesCount = samplesPtr->GetSamplesCount();
-		const imeas::CSamplingSequenceInfo* infoPtr = samplesPtr->GetSequenceInfo().Cast<const imeas::CSamplingSequenceInfo*>();
-		double samplingPeriod = (infoPtr != NULL)? infoPtr->GetSamplingPeriod(): 1;
 
-		if ((samplesCount <= 0) || (samplingPeriod < I_BIG_EPSILON)){
+		const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
+		double maxTimeSpan = (logicalRange.IsValid())?
+					logicalRange.GetLength():
+					samplesPtr->GetSamplesCount();
+
+		if ((samplesCount <= 0) || (maxTimeSpan < I_BIG_EPSILON)){
 			return;
 		}
 
 		istd::CRange timeRange = m_parent.TimeSpanCB->isChecked()?
 					istd::CRange(m_parent.TimeBeginSB->value(), m_parent.TimeEndSB->value()):
-					istd::CRange(0, samplingPeriod * samplesCount);
+					istd::CRange(0, maxTimeSpan);
 
 		int firstChannel = 0;
 		int lastChannel = samplesPtr->GetChannelsCount() - 1;
@@ -266,8 +272,8 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			valueRange = istd::CRange(m_parent.ValueMinSB->value(), m_parent.ValueMaxSB->value());
 		}
 		else{
-			int firstSample = istd::Max(0, int(floor(timeRange.GetMinValue() / samplingPeriod)));
-			int lastSample = istd::Min(int(ceil(timeRange.GetMaxValue() / samplingPeriod)), samplesCount - 1);
+			int firstSample = istd::Max(0, int(floor(timeRange.GetMinValue() * samplesCount / maxTimeSpan)));
+			int lastSample = istd::Min(int(ceil(timeRange.GetMaxValue() * samplesCount / maxTimeSpan)), samplesCount - 1);
 			for (int channelIndex = firstChannel; channelIndex <= lastChannel; ++channelIndex){
 				for (int i = firstSample; i <= lastSample; ++i){
 					double sample = samplesPtr->GetSample(i, channelIndex);
@@ -298,7 +304,7 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			int lastSampleEnd = 0;
 			for (int x = 0; x < rectWidth; ++x){
 				double time = timeRange.GetValueFromAlpha(double(x) / rectWidth);
-				int sampleEndIndex = istd::Min(int(floor(time / samplingPeriod)), samplesCount - 1);
+				int sampleEndIndex = istd::Min(int(floor(time * samplesCount / maxTimeSpan)), samplesCount - 1);
 
 				istd::CRange sampleRange = istd::CRange::GetInvalid();
 

@@ -4,6 +4,7 @@
 
 // ACF includes
 #include "istd/TRetSmartPtr.h"
+#include "istd/CRange.h"
 #include "iser/ISerializable.h"
 
 #include "imeas/imeas.h"
@@ -11,9 +12,6 @@
 
 namespace imeas
 {
-
-
-class IDataSequenceInfo;
 
 
 /**
@@ -28,23 +26,7 @@ public:
 		\param	samplesCount	number of samples.
 		\return					true if sample sequence was created correctly.
 	*/
-	virtual bool CreateSequence(int samplesCount = -1, int channelsCount = -1) = 0;
-
-	/**
-		Get channel info.
-		\return	channel info object or NULL, if no info is available.
-	*/
-	virtual const istd::TRetSmartPtr<IDataSequenceInfo>& GetSequenceInfo() const = 0;
-
-	/**
-		Set channel information object.
-		Please note, that this operation sequence can be changed.
-
-		\param	infoPtr			object storing information like channels number, it can be also NULL.
-		\param	releaseInfoFlag	if true, information object will be removed during destruction.
-		\return					true if the value of \c infoPtr was accepted.
-	*/
-	virtual bool SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr) = 0;
+	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) = 0;
 
 	/**
 		Return true if this sequence has no sample.
@@ -76,6 +58,18 @@ public:
 		Set sample value at specified index.
 	*/
 	virtual void SetSample(int index, int channel, double value) = 0;
+
+	/**
+		Get logical position range (time axis) of this data sequence.
+		For example, if you sample sound from second 1 to 5 it will be represented as range [1.0, 5.0].
+		If this range is invalid, no logical range is provided.
+	*/
+	virtual const istd::CRange& GetLogicalSamplesRange() const = 0;
+	/**
+		Set logical position range (time axis) of this data sequence.
+		\sa GetLogicalRange
+	*/
+	virtual void SetLogicalSamplesRange(const istd::CRange& range) = 0;
 };
 
 

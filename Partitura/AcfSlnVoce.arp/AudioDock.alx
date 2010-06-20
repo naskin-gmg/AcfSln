@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1426
+          1505
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          210
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -29,24 +40,24 @@
     </Element>
     <Element>
       <ComponentName>
-        DockWidgetGui
+        DataSequenceView
       </ComponentName>
       <X>
-        250
+        375
       </X>
       <X>
-        500
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SamplesSequenceView
+        DockWidgetGui
       </ComponentName>
       <X>
-        225
+        375
       </X>
       <X>
-        325
+        475
       </X>
     </Element>
     <Element>

@@ -7,7 +7,6 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iprm/IFileNameParam.h"
-#include "imeas/CSamplingSequenceInfo.h"
 
 
 namespace ilibav
@@ -215,9 +214,9 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 				if (m_audioSequenceCompPtr.IsValid() && m_autoAudioGrabLengthAttrPtr.IsValid()){
 					if (m_audioCodecContextPtr->sample_rate > 0){
 						int samplesCount = int(*m_autoAudioGrabLengthAttrPtr * m_audioCodecContextPtr->sample_rate);
-						istd::TSmartPtr<imeas::IDataSequenceInfo> infoPtr(new imeas::CSamplingSequenceInfo(m_audioCodecContextPtr->channels, 1.0 / m_audioCodecContextPtr->sample_rate));
-						m_audioSequenceCompPtr->SetSequenceInfo(infoPtr);
-						m_audioSequenceCompPtr->CreateSequence(samplesCount);
+						int channelsCount = m_audioCodecContextPtr->channels;
+						m_audioSequenceCompPtr->CreateSequence(samplesCount, channelsCount);
+						m_audioSequenceCompPtr->SetLogicalSamplesRange(istd::CRange(0, double(samplesCount) / m_audioCodecContextPtr->sample_rate));
 					}
 				}
 			}

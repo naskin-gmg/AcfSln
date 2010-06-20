@@ -186,10 +186,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSamplingSequenceInfo.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CWavSamplesLoaderComp.cpp"
 				>
 			</File>
@@ -207,15 +203,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSamplingSequenceInfo.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CWavSamplesLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDataSequenceInfo.h"
 				>
 			</File>
 			<File

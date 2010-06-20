@@ -35,15 +35,15 @@ public:
 	virtual bool SetDiscrSample(int position, int channel, I_DWORD sample);
 
 	// reimplemented (imeas::IDataSequence)
-	virtual bool CreateSequence(int samplesCount = -1, int channelsCount = -1);
-	virtual const istd::TRetSmartPtr<IDataSequenceInfo>& GetSequenceInfo() const;
-	virtual bool SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr);
+	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
+	const istd::CRange& GetLogicalSamplesRange() const;
+	void SetLogicalSamplesRange(const istd::CRange& range);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -60,7 +60,7 @@ private:
 	int m_sampleDiff;
 	int m_channelDiff;
 
-	istd::TSmartPtr<IDataSequenceInfo> m_sequnceInfoPtr;
+	istd::CRange m_logicalSamplesRange;
 };
 
 
@@ -72,7 +72,8 @@ TDiscrDataSequence<Element>::TDiscrDataSequence()
 	m_samplesCount(0),
 	m_channelsCount(0),
 	m_sampleDiff(0),
-	m_channelDiff(0)
+	m_channelDiff(0),
+	m_logicalSamplesRange(istd::CRange::GetInvalid())
 {
 }
 
@@ -100,8 +101,6 @@ bool TDiscrDataSequence<Element>::CreateDiscrSequence(
 	m_channelsCount = channelsCount;
 	m_sampleDiff = (sampleDiff != 0)? sampleDiff: channelsCount * sizeof(Element);
 	m_channelDiff = (channelDiff != 0)? channelDiff: sizeof(Element);
-
-	m_sequnceInfoPtr.Reset();
 
 	return true;
 }
@@ -139,15 +138,6 @@ bool TDiscrDataSequence<Element>::SetDiscrSample(int position, int channel, I_DW
 template <typename Element>
 bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsCount)
 {
-	if (m_sequnceInfoPtr.IsValid()){
-		if (samplesCount < 0){
-			samplesCount = m_sequnceInfoPtr->GetSamplesCount();
-		}
-		if (channelsCount < 0){
-			channelsCount = m_sequnceInfoPtr->GetChannelsCount();
-		}
-	}
-
 	if ((samplesCount < 0) || (channelsCount < 0)){
 		return false;
 	}
@@ -163,24 +153,6 @@ bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsC
 	m_channelsCount = channelsCount;
 	m_sampleDiff = channelsCount * sizeof(Element);
 	m_channelDiff = sizeof(Element);
-
-	m_sequnceInfoPtr.Reset();
-
-	return true;
-}
-
-
-template <typename Element>
-const istd::TRetSmartPtr<IDataSequenceInfo>& TDiscrDataSequence<Element>::GetSequenceInfo() const
-{
-	return m_sequnceInfoPtr;
-}
-
-
-template <typename Element>
-bool TDiscrDataSequence<Element>::SetSequenceInfo(const istd::TRetSmartPtr<IDataSequenceInfo>& infoPtr)
-{
-	m_sequnceInfoPtr = infoPtr;
 
 	return true;
 }
@@ -231,6 +203,20 @@ void TDiscrDataSequence<Element>::SetSample(int index, int channel, double value
 	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
 	element = Element(value * ::pow(2.0, double(sizeof(element) * 8)) - I_BIG_EPSILON);
+}
+
+
+template <typename Element>
+const istd::CRange& TDiscrDataSequence<Element>::GetLogicalSamplesRange() const
+{
+	return m_logicalSamplesRange;
+}
+
+
+template <typename Element>
+void TDiscrDataSequence<Element>::SetLogicalSamplesRange(const istd::CRange& range)
+{
+	m_logicalSamplesRange = range;
 }
 
 
@@ -352,8 +338,6 @@ bool TDiscrDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 				}
 			}
 		}
-
-		m_sequnceInfoPtr = sequencePtr->GetSequenceInfo();
 
 		return true;
 	}
