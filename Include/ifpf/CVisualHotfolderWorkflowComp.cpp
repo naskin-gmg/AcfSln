@@ -61,7 +61,7 @@ bool CVisualHotfolderWorkflowComp::SerializeLayout(iser::IArchive& archive)
 
 			CVisualHotfolderWorkflowItem* elementPtr = dynamic_cast<CVisualHotfolderWorkflowItem*>(GetHotfolder(elementId));
 			if (elementPtr != NULL){
-				elementPtr->MoveTo(position);
+				elementPtr->MoveCenterTo(position);
 			}
 
 			retVal = retVal && archive.EndTag(elementTag);

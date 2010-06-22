@@ -52,7 +52,7 @@ bool CHotfolderWorkflowScenographerComp::TryCreateHotfolder(const istd::CString&
 
 			ifpf::CVisualHotfolderWorkflowItem* visualItemPtr = dynamic_cast<ifpf::CVisualHotfolderWorkflowItem*>(workflowItemPtr);
 			if (visualItemPtr != NULL){
-				visualItemPtr->MoveTo(position);
+				visualItemPtr->MoveCenterTo(position);
 			}
 		}
 
