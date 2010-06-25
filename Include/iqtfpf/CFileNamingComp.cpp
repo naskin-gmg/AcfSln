@@ -27,7 +27,7 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 	}
 
 	QFileInfo inputFileInfo(iqt::GetQString(inputFilePath));
-	QString baseFileName = inputFileInfo.baseName();
+	QString baseFileName = inputFileInfo.completeBaseName();
 	istd::CString outputExtension = iqt::GetCString(inputFileInfo.suffix());
 
 	// calculate the base file name:

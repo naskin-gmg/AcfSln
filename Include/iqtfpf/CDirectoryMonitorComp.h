@@ -8,10 +8,11 @@
 #include <QTimer>
 #include <QThread>
 #include <QDir>
+#include <QDateTime>
 
 
 // ACF includes
-#include "imod/CMultiModelObserverBase.h"
+#include "imod/TSingleModelObserverBase.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -38,15 +39,13 @@ namespace iqtfpf
 class CDirectoryMonitorComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
-			virtual public ifpf::IDirectoryMonitor,
-			virtual protected imod::CMultiModelObserverBase
+			virtual public ifpf::IDirectoryMonitor
 {
 	Q_OBJECT
 
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
-	typedef imod::CMultiModelObserverBase BaseClass3;
 
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ifpf::IDirectoryMonitor);
@@ -72,10 +71,6 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	// reimplemented (imod::IObserver)
-	virtual bool OnDetached(imod::IModel* modelPtr);
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
 protected:
 	// reimplemented (QThread)
 	virtual void run();
@@ -85,6 +80,11 @@ private Q_SLOTS:
 		Delegate folder change event via istd::CChangeNotifier from main thread.
 	*/
 	void OnFolderChanged(int changeFlags);
+
+	/**
+		Notification about changes in a given directory.
+	*/
+	void OnDirectoryChangeNotification(const QString& directory);
 
 Q_SIGNALS:
 	/**
@@ -97,7 +97,6 @@ private:
 	void StartObserverThread();
 	void StopObserverThread();
 	void ResetFiles();
-	void SynchronizeWithModel(const imod::IModel& paramsModel);
 	bool ConnectToParameterModel(const iprm::IParamsSet& paramsSet);
 	void DisconnectFromParameterModel();
 	void UpdateMonitoringSession() const;
@@ -111,16 +110,63 @@ private:
 		QStringList attributeChangedFiles;
 	};
 
-	QFileInfoList m_directoryFiles;
+	class MonitoringParamsObserver: public imod::TSingleModelObserverBase<ifpf::IDirectoryMonitorParams>
+	{
+	public:
+		typedef imod::TSingleModelObserverBase<ifpf::IDirectoryMonitorParams> BaseClass;
+
+		MonitoringParamsObserver(CDirectoryMonitorComp& parent);
+
+		// reimplemented (imod::IObserver)
+		virtual bool OnDetached(imod::IModel* modelPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CDirectoryMonitorComp& m_parent;
+	};
+
+	class DirectoryParamsObserver: public imod::TSingleModelObserverBase<iprm::IFileNameParam>
+	{
+	public:
+		typedef imod::TSingleModelObserverBase<iprm::IFileNameParam> BaseClass;
+
+		DirectoryParamsObserver(CDirectoryMonitorComp& parent);
+
+		// reimplemented (imod::IObserver)
+		virtual bool OnDetached(imod::IModel* modelPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CDirectoryMonitorComp& m_parent;
+	};
+
+	struct FileItem
+	{
+		QString filePath;
+		QDateTime modifiedTime;
+		QFile::Permissions permissions;
+
+		bool operator== (const FileItem& fileItem) const
+		{
+			return (filePath == fileItem.filePath);
+		}
+	};
+
+	typedef std::vector<FileItem> FileItems;
+
+	FileItems m_directoryFiles;
 
 	mutable iqt::CCriticalSection m_lock;
 
 	bool m_finishThread;
-	bool m_directoryChangesConfirmed;
 
 	FileSystemChanges m_folderChanges;
 
 	QDir m_currentDirectory;
+
+	int m_directoryPendingChangesCounter;
+
+	QFileSystemWatcher m_directoryWatcher;
 
 	// Model shadows:
 	double m_poolingFrequency;
@@ -131,8 +177,9 @@ private:
 	// Directory monitoring parameter model
 	const imod::IModel* m_directoryPathModelPtr;
 	const imod::IModel* m_directoryMonitorParamsModelPtr;
-	const iprm::IFileNameParam* m_directoryPathPtr;
-	const ifpf::IDirectoryMonitorParams* m_directoryMonitorParamsPtr;
+
+	MonitoringParamsObserver m_monitoringParamsObserver;
+	DirectoryParamsObserver m_directoryParamsObserver;
 
 	// Component attributes
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);

@@ -150,7 +150,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 			if (retVal){
 				m_acceptPatterns.push_back(acceptPattern);
 			}
-		}	
+		}
 	}
 
 	retVal = retVal && archive.EndTag(acceptPatternsTag);
@@ -184,6 +184,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && archive.EndTag(ignorePatternsTag);
 
+	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
 
 	return retVal;
 }

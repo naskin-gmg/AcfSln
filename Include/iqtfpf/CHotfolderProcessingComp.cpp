@@ -33,6 +33,7 @@ namespace iqtfpf
 {
 
 
+
 // public methods
 
 CHotfolderProcessingComp::CHotfolderProcessingComp()
@@ -58,15 +59,12 @@ void CHotfolderProcessingComp::OnComponentCreated()
 		m_hotfolderProcessingModelCompPtr->AttachObserver(&m_stateObserver);
 	}
 
-	connect(this,
-				SIGNAL(EmitItemState(ifpf::IHotfolderProcessingItem*, int)),
-				this,
-				SLOT(OnItemState(ifpf::IHotfolderProcessingItem*, int)), Qt::QueuedConnection);
-
 	connect(&m_filesQueueTimer, SIGNAL(timeout()), this, SLOT(OnUpdateQueueTimer()));
+	connect(&m_processingTimer, SIGNAL(timeout()), this, SLOT(OnProcessingTimer()));
 
-	m_filesQueueTimer.start(250);
-
+	m_filesQueueTimer.start(100);
+	m_processingTimer.start(500);
+	
 	BaseClass::OnComponentCreated();
 
 	m_isInitialized = true;
@@ -75,8 +73,6 @@ void CHotfolderProcessingComp::OnComponentCreated()
 
 void CHotfolderProcessingComp::OnComponentDestroyed()
 {
-	StopHotfolder();
-
 	I_ASSERT(m_hotfolderParamsModelCompPtr.IsValid());
 	if (m_hotfolderParamsModelCompPtr.IsValid()){
 		m_hotfolderParamsModelCompPtr->DetachObserver(&m_parametersObserver);
@@ -114,52 +110,7 @@ bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& d
 }
 
 
-// reimplemented (QThread)
-
-void CHotfolderProcessingComp::run()
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-
-	int workingIntervall = 100; // ms
-
-	while (!m_finishThread){
-		if (!m_hotfolderProcessingInfoCompPtr->IsWorking()){
-			msleep(workingIntervall);
-			continue;					
-		}
-
-		isys::CSectionBlocker processingQueueLock(&m_processingQueueLock);
-		
-		// get available file to process:
-		ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
-		if (processingItemPtr != NULL){
-			istd::CString inputFile = processingItemPtr->GetInputFile();
-			istd::CString outputFile = processingItemPtr->GetOutputFile();
-			processingQueueLock.Reset();
-
-			Q_EMIT EmitItemState(processingItemPtr, iproc::IProcessor::TS_WAIT);
-			
-			if (m_fileNamingCompPtr.IsValid()){
-				outputFile = m_fileNamingCompPtr->GetFilePath(inputFile);
-			}
-
-			int processingState = ProcessFile(inputFile, outputFile);
-		
-			Q_EMIT EmitItemState(processingItemPtr, processingState);
-		}
-
-		msleep(workingIntervall);
-	}
-}
-
-
 // protected slots
-
-void CHotfolderProcessingComp::OnItemState(ifpf::IHotfolderProcessingItem* itemPtr, int itemState)
-{
-	UpdateProcessingState(itemPtr, itemState);
-}
-
 
 void CHotfolderProcessingComp::OnUpdateQueueTimer()
 {
@@ -175,10 +126,6 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 
 	istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath);
 
-	isys::CSectionBlocker queueBlocker(&m_processingQueueLock);
-
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-
 	// add file to hotfolder's model:
 	m_hotfolderProcessingInfoCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
 
@@ -186,28 +133,51 @@ void CHotfolderProcessingComp::OnUpdateQueueTimer()
 }
 
 
-// private methods
-
-void CHotfolderProcessingComp::StartHotfolder()
+void CHotfolderProcessingComp::OnProcessingTimer()
 {
-	I_ASSERT(!BaseClass2::isRunning());
+	if (!m_hotfolderProcessingInfoCompPtr->IsWorking()){
+		return;
+	}
 
-	m_finishThread = false;
+	// get available file to process:
+	ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
+	if (processingItemPtr != NULL){
+		istd::CString inputFile = processingItemPtr->GetInputFile();
+		istd::CString outputFile = processingItemPtr->GetOutputFile();
 
-	BaseClass2::start();
+		int runningThreadCount = 0;
+
+		for (int processingFutureIndex = 0; processingFutureIndex < int(m_processingFutures.size()); processingFutureIndex++){
+			if (!m_futureWatchers.GetAt(processingFutureIndex)->isFinished()){
+				runningThreadCount++;
+			}
+		}
+
+		if (runningThreadCount < 1){
+			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_WAIT);
+			if (m_fileNamingCompPtr.IsValid()){
+				outputFile = m_fileNamingCompPtr->GetFilePath(inputFile);
+			}
+
+			ProcessingFuture future = QtConcurrent::run(this, &CHotfolderProcessingComp::ProcessFile, inputFile, outputFile, processingItemPtr);
+
+			ProcessingFutureWatcher* futureWatcherPtr = new ProcessingFutureWatcher;
+			futureWatcherPtr->setFuture(future);
+			connect(futureWatcherPtr, SIGNAL(finished()), this, SLOT(OnFutureFinished()));
+			m_processingFutures.push_back(future);
+			m_futureWatchers.PushBack(futureWatcherPtr);		
+		}
+	}
 }
 
 
-void CHotfolderProcessingComp::StopHotfolder()
+void CHotfolderProcessingComp::OnFutureFinished()
 {
-	m_finishThread = true;
+	ProcessingFutureWatcher* watcherPtr = dynamic_cast<ProcessingFutureWatcher*>(sender());
+	if (watcherPtr != NULL){
+		ProcessingFuture future = watcherPtr->future();
 
-	// wait for 30 seconds for finishing of thread: 
-	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass2::isRunning());
-
-	if (BaseClass2::isRunning()){
-		BaseClass2::terminate();
+		future.result().processingItemPtr->SetProcessingState(future.result().processingState);
 	}
 }
 
@@ -235,10 +205,6 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 	isys::CSectionBlocker parameterLock(&m_parameterLock);
 	if (m_processingParamsSetCompPtr.IsValid()){
 		m_runParameterPtr.SetCastedOrRemove(m_processingParamsSetCompPtr->CloneMe());
-	}
-
-	if (!BaseClass2::isRunning()){
-		StartHotfolder();
 	}
 }
 
@@ -376,11 +342,18 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile(
 }
 
 
-int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile)
+CHotfolderProcessingComp::ProcessingResult CHotfolderProcessingComp::ProcessFile(
+			const istd::CString& inputFile,
+			const istd::CString& outputFile,
+			ifpf::IHotfolderProcessingItem* processingItemPtr)
 {
+	ProcessingResult retVal;
+	retVal.processingState = iproc::IProcessor::TS_NONE;
+	retVal.processingItemPtr = processingItemPtr;
+
 	I_ASSERT(m_fileConvertCompPtr.IsValid());
 	if (!m_fileConvertCompPtr.IsValid()){
-		return iproc::IProcessor::TS_NONE;
+		return retVal;
 	}
 
 	istd::TDelPtr<iprm::IParamsSet> processingParameterPtr;
@@ -395,19 +368,20 @@ int CHotfolderProcessingComp::ProcessFile(const istd::CString& inputFile, const 
 		istd::CString message = istd::CString("Processing of ") + inputFile + " failed";
 		SendErrorMessage(0, message, "Hotfolder");
 
-		return iproc::IProcessor::TS_INVALID;
+		retVal.processingState = iproc::IProcessor::TS_INVALID;
+		return retVal;
 	}
 
-	return iproc::IProcessor::TS_OK;
+	retVal.processingState = iproc::IProcessor::TS_OK;
+	
+	return retVal;
 }
 
 
-void CHotfolderProcessingComp::UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const
+void CHotfolderProcessingComp::RemoveProcessingItemFromQueue(const ifpf::IHotfolderProcessingItem* /*processingItemPtr*/)
 {
-	if (processingItemPtr != NULL){
-		processingItemPtr->SetProcessingState(processingState);
-	}
 }
+
 
 
 // public methods of embedded class DirectoryMonitorObserver
@@ -424,7 +398,7 @@ void CHotfolderProcessingComp::DirectoryMonitorObserver::AfterUpdate(imod::IMode
 {
 	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
 	
-	if (monitorPtr != NULL && updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED){
+	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED) != 0){
 		m_parent.OnInputFileEvent(*monitorPtr);
 	}
 }
@@ -456,19 +430,16 @@ CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp&
 
 // reimplemented (imod::IObserver)
 
-void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
-		m_parent.m_processingQueueLock.Enter();
+		ifpf::IHotfolderProcessingItem* processingItemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
+		if (processingItemPtr != NULL){
+			m_parent.RemoveProcessingItemFromQueue(processingItemPtr);
+		}
 	}
-}
 
-
-void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0 || (updateFlags & istd::IChangeable::CF_ABORTED) != 0){
-		m_parent.m_processingQueueLock.Leave();
-	}
+	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 

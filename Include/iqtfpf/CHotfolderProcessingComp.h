@@ -3,11 +3,16 @@
 
 
 // Qt includes
-#include<QThread>
+#include <QThread>
 #include <QTimer>
+#include <QtConcurrentRun>
+#include <QFutureWatcher>
+#include <QList>
 
 
 // ACF includes
+#include "istd/TPointerVector.h"
+
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
@@ -37,14 +42,11 @@ namespace iqtfpf
 /**
 	Hotfolder representation.
 */
-class CHotfolderProcessingComp:
-			protected QThread,
-			public ibase::CLoggerComponentBase
+class CHotfolderProcessingComp: public QObject, public ibase::CLoggerComponentBase
 {
 	Q_OBJECT
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
-	typedef QThread BaseClass2;
 
 	I_BEGIN_COMPONENT(CHotfolderProcessingComp);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");
@@ -66,27 +68,19 @@ public:
 protected:
 	virtual bool OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
 
-	// reimplemented (QThread)
-	virtual void run();
-
-Q_SIGNALS:
-	void EmitItemState(ifpf::IHotfolderProcessingItem*, int itemState);
-
 protected Q_SLOTS:
-	void OnItemState(ifpf::IHotfolderProcessingItem* itemPtr, int itemState);
 	void OnUpdateQueueTimer();
+	void OnProcessingTimer();
+	void OnFutureFinished();
 
 private:
-	/**
-		Start hotfolder processing.
-	*/
-	void StartHotfolder();
 
-	/**
-		Stop hotfolder processing.
-	*/
-	void StopHotfolder();
-	
+	struct ProcessingResult
+	{
+		int processingState;
+		ifpf::IHotfolderProcessingItem* processingItemPtr;
+	};
+
 	/**
 		Synchronize the hotfolder with its static parameters.
 		If \c applyToPendingTasks is enabled, 
@@ -132,12 +126,12 @@ private:
 	/**
 		Process a single file.
 	*/
-	int ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile);
+	ProcessingResult ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile, ifpf::IHotfolderProcessingItem* processingItemPtr);
 
 	/**
-		Change state of the processing item and notify all observers.
+		Remove processing item from the queue.
 	*/
-	void UpdateProcessingState(ifpf::IHotfolderProcessingItem* processingItemPtr, int processingState) const;
+	void RemoveProcessingItemFromQueue(const ifpf::IHotfolderProcessingItem* processingItemPtr);
 
 private:
 	/**
@@ -177,11 +171,12 @@ private:
 	class StateObserver: public imod::CSingleModelObserverBase
 	{
 	public:
+		typedef imod::CSingleModelObserverBase BaseClass;
+
 		StateObserver(CHotfolderProcessingComp& parent);
 		
 		// reimplemented (imod::IObserver)
 		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
 		CHotfolderProcessingComp& m_parent;
 	};
@@ -203,7 +198,6 @@ private:
 	StateObserver m_stateObserver;
 
 	mutable iqt::CCriticalSection m_parameterLock;
-	mutable iqt::CCriticalSection m_processingQueueLock;
 
 	bool m_finishThread;
 
@@ -214,6 +208,15 @@ private:
 	FilesQueue m_filesQueue;
 
 	QTimer m_filesQueueTimer;
+	QTimer m_processingTimer;
+
+	typedef QFuture<ProcessingResult> ProcessingFuture;
+	typedef std::vector<ProcessingFuture> ProcessingFutures;
+	typedef QFutureWatcher<ProcessingResult> ProcessingFutureWatcher;
+	typedef istd::TPointerVector<ProcessingFutureWatcher> ProcessingFutureWatchers;
+
+	ProcessingFutureWatchers m_futureWatchers;
+	ProcessingFutures m_processingFutures;
 
 	bool m_isInitialized;
 };

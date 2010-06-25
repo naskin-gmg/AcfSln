@@ -1,9 +1,13 @@
 #include "iqtfpf/CDirectoryMonitorComp.h"
 
 
+#include <io.h>
+
+
 // Qt includes
 #include <QDir>
 #include <QApplication>
+#include <QUuid>
 
 
 // ACF includes
@@ -27,9 +31,11 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_observingChanges(ifpf::IDirectoryMonitorParams::OC_ALL),
 	m_directoryPathModelPtr(NULL),
 	m_directoryMonitorParamsModelPtr(NULL),
-	m_directoryPathPtr(NULL),
-	m_directoryMonitorParamsPtr(NULL)
+	m_monitoringParamsObserver(*this),
+	m_directoryParamsObserver(*this),
+	m_directoryPendingChangesCounter(1)
 {
+	connect(&m_directoryWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChangeNotification(const QString&)));
 }
 
 
@@ -83,9 +89,6 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 
 	// connect to own parameter model:
 	if (ConnectToParameterModel(*parameterModelPtr)){
-		SynchronizeWithModel(*m_directoryPathModelPtr);
-		SynchronizeWithModel(*m_directoryMonitorParamsModelPtr);
-
 		StartObserverThread();
 
 		return true;
@@ -111,49 +114,11 @@ istd::CStringList CDirectoryMonitorComp::GetFileList() const
 
 	isys::CSectionBlocker block(&m_lock);
 
-	for (int fileIndex = 0; fileIndex < m_directoryFiles.count(); fileIndex++){
-		fileList.push_back(iqt::GetCString(m_directoryFiles[fileIndex].absoluteFilePath()));
+	for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
+		fileList.push_back(iqt::GetCString(m_directoryFiles[fileIndex].filePath));
 	}
 
 	return fileList;
-}
-
-
-// reimplemented (imod::IObserver)
-
-bool CDirectoryMonitorComp::OnDetached(imod::IModel* modelPtr)
-{
-	if (modelPtr == m_directoryPathModelPtr){
-		m_directoryPathModelPtr = NULL;
-	}
-
-	if (modelPtr == m_directoryMonitorParamsModelPtr){
-		m_directoryMonitorParamsModelPtr = NULL;
-	}
-
-	return BaseClass3::OnDetached(modelPtr);
-}
-
-
-void CDirectoryMonitorComp::AfterUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	I_ASSERT(modelPtr != NULL);
-	if (modelPtr != NULL){
-		bool needRestart = false; 
-		if (modelPtr == m_directoryPathModelPtr){
-			needRestart = BaseClass2::isRunning();
-			if (needRestart){
-				StopObserverThread();
-			}
-		}
-
-		SynchronizeWithModel(*modelPtr);
-
-		// if observing thread was running -> restart:
-		if (needRestart){
-			StartObserverThread();
-		}
-	}
 }
 
 
@@ -163,7 +128,6 @@ void CDirectoryMonitorComp::OnComponentCreated()
 {
 	I_ASSERT(m_directoryPathIdAttrPtr.IsValid());
 	I_ASSERT(m_directoryMonitorParamsIdAttrPtr.IsValid());
-
 
 	BaseClass::OnComponentCreated();
 
@@ -194,6 +158,8 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 void CDirectoryMonitorComp::run()
 {
 	iqt::CTimer updateTimer;
+
+	iqt::CTimer measurementTimer;
 	
 	while (!m_finishThread){
 		bool needStateUpdate = (updateTimer.GetElapsed() >= m_poolingFrequency);
@@ -203,8 +169,10 @@ void CDirectoryMonitorComp::run()
 			continue;
 		}
 
-		QFileInfo fileInfo(m_currentDirectory.absolutePath());
-		if (!fileInfo.exists()){
+		measurementTimer.Start();
+
+		QFileInfo currentDirectoryInfo(m_currentDirectory.absolutePath());
+		if (!currentDirectoryInfo.exists()){
 			msleep(100);
 
 			continue;
@@ -216,10 +184,10 @@ void CDirectoryMonitorComp::run()
 		int observingChanges = m_observingChanges;
 		QStringList acceptPatterns = m_fileFilterExpressions;
 		int observingItemTypes = m_observingItemTypes;
+		int pendingChangesCounter = m_directoryPendingChangesCounter;
+		m_directoryPendingChangesCounter = 0;
 
 		m_lock.Leave();
-
-		QFileInfoList currentFiles = m_currentDirectory.entryInfoList(acceptPatterns, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
 
 		QStringList addedFiles;
 		QStringList removedFiles;
@@ -228,50 +196,104 @@ void CDirectoryMonitorComp::run()
 
 		// check for changes:
 		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0){
-			for (int fileIndex = 0; fileIndex < int(m_directoryFiles.count()); fileIndex++){
-				QFileInfo fileInfo = m_directoryFiles[fileIndex];				
-				fileInfo.refresh();
+			if (pendingChangesCounter > 0){
+				FileItems newFileItems;
+				for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
+					const FileItem& fileItem = m_directoryFiles[fileIndex];
 
-				if (!fileInfo.exists()){
-					removedFiles.push_back(fileInfo.absoluteFilePath());
-					SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was removed"));
+					QFileInfo fileInfo(fileItem.filePath);				
+					if (!fileInfo.exists()){
+						removedFiles.push_back(fileInfo.absoluteFilePath());
+						
+						SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was removed"));
+					}
+					else{
+						newFileItems.push_back(fileItem);
+					}
+				}
+
+				m_directoryFiles = newFileItems;
+			}
+		}
+
+		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ADD) != 0 && pendingChangesCounter > 0){
+			QStringList currentFiles = m_currentDirectory.entryList(acceptPatterns, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
+
+			FileItems currentFileItems;
+			for (int fileIndex = 0; fileIndex < int(currentFiles.size()); fileIndex++){
+				FileItem fileItem;
+
+				QString currentFilePath = m_currentDirectory.absolutePath() + QString("/") + currentFiles[fileIndex];
+
+				QFileInfo fileInfo(currentFilePath);
+
+				fileItem.filePath = fileInfo.absoluteFilePath();
+				fileItem.modifiedTime = fileInfo.lastModified();
+				fileItem.permissions = fileInfo.permissions();
+
+				currentFileItems.push_back(fileItem);
+			}
+
+
+			for (int currentFileIndex = 0; currentFileIndex < int(currentFileItems.size()); currentFileIndex++){
+				// abort processing, if the thread must be finished:
+				if (m_finishThread){
+					return;
+				}
+
+				FileItem& currentFileItem = currentFileItems[currentFileIndex];
+				FileItems::iterator foundFileIter = qFind(m_directoryFiles.begin(), m_directoryFiles.end(), currentFileItem);
+					
+				if (foundFileIter == m_directoryFiles.end()){
+					int accessMode = _waccess_s((const wchar_t*)currentFileItem.filePath.utf16(), 6);
+					bool hasAccess = (accessMode == 0);
+					if (hasAccess){
+						addedFiles.push_back(currentFileItem.filePath);
+
+						m_directoryFiles.push_back(currentFileItem);
+
+						SendInfoMessage(0, iqt::GetCString(currentFileItem.filePath + " was added"));
+					}
 				}
 			}
 		}
 
-		if (observingChanges != ifpf::IDirectoryMonitorParams::OC_REMOVE){
-			for (int currentFileIndex = 0; currentFileIndex < int(currentFiles.count()); currentFileIndex++){
-				const QFileInfo& currentFileInfo = currentFiles[currentFileIndex];
+		if (		(observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0 || 
+					(observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED)){
+			for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
+				FileItem& fileItem = m_directoryFiles[fileIndex];
+				QFileInfo fileInfo(m_directoryFiles[fileIndex].filePath);
+				if (!fileInfo.exists()){
+					continue;
+				}
 
-				QFileInfoList::iterator foundFileIter = qFind(m_directoryFiles.begin(), m_directoryFiles.end(), currentFileInfo);
-				if (foundFileIter == m_directoryFiles.end()){
-					if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ADD) != 0){
-						addedFiles.push_back(currentFileInfo.absoluteFilePath());
-						SendInfoMessage(0, iqt::GetCString(currentFileInfo.absoluteFilePath() + " was added"));
+				if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
+					QDateTime currentModifiedTime = fileInfo.lastModified();
+					QDateTime previousModifiedTime = fileItem.modifiedTime;
+					if (previousModifiedTime != currentModifiedTime){
+						modifiedFiles.push_back(fileInfo.absoluteFilePath());
+
+						fileItem.modifiedTime = currentModifiedTime;
+						
+						SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was modified"));
 					}
 				}
-				else{
-					(*foundFileIter).refresh();
 
-					if (foundFileIter->lastModified() != currentFileInfo.lastModified()){
-						if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
-							modifiedFiles.push_back(currentFileInfo.absoluteFilePath());
-							SendInfoMessage(0, iqt::GetCString(currentFileInfo.absoluteFilePath() + " was modified"));
-						}
-					}
-					if (foundFileIter->permissions() != currentFileInfo.permissions()){
-						if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0){
-							attributeChangedFiles.push_back(currentFileInfo.absoluteFilePath());
-							SendInfoMessage(0, istd::CString("Attributes of") + iqt::GetCString(currentFileInfo.absoluteFilePath() + " have been changed"));
-						}
+				if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0){
+					QFile::Permissions currentPermissions = fileInfo.permissions();
+					QFile::Permissions previousPermissions = fileItem.permissions;
+					if (currentPermissions != previousPermissions){
+						attributeChangedFiles.push_back(fileInfo.absoluteFilePath());
+
+						fileItem.permissions = currentPermissions;
+						
+						SendInfoMessage(0, istd::CString("Attributes of") + iqt::GetCString(fileInfo.absoluteFilePath() + " have been changed"));
 					}
 				}
 			}
 		}
 
 		isys::CSectionBlocker block(&m_lock);
-
-		m_directoryFiles = currentFiles;
 
 		m_folderChanges.addedFiles = addedFiles;
 		m_folderChanges.removedFiles = removedFiles;
@@ -299,6 +321,16 @@ void CDirectoryMonitorComp::run()
 		Q_EMIT FolderChanged(changeFlags);
 		
 		updateTimer.Start();
+
+		I_IF_DEBUG(
+			double processingTime = measurementTimer.GetElapsed();
+
+			SendInfoMessage(0, 
+				istd::CString("Folder monitoring of ") + 
+				iqt::GetCString(m_currentDirectory.absolutePath()) + 
+				istd::CString(": ") + 
+				istd::CString().FromNumber(processingTime) + " seconds");
+		)
 	}
 }
 
@@ -316,6 +348,15 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 		UpdateMonitoringSession();
 	}
 }
+
+
+void CDirectoryMonitorComp::OnDirectoryChangeNotification(const QString& /*directory*/)
+{
+	isys::CSectionBlocker block(&m_lock);
+
+	++m_directoryPendingChangesCounter;
+}
+
 
 
 // private methods
@@ -336,21 +377,21 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 
 	m_currentDirectory = QDir(folderPath);
 
+	m_directoryWatcher.removePaths(m_directoryWatcher.directories());
+	m_directoryWatcher.addPath(folderPath);
+
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
 		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(*this, iqt::GetCString(m_currentDirectory.absolutePath()));
 		if (sessionPtr != NULL){
 			istd::CStringList sessionFiles = sessionPtr->GetFileList();
 			for (int fileIndex = 0; fileIndex < int(sessionFiles.size()); fileIndex++){
-				m_directoryFiles.push_back(QFileInfo(iqt::GetQString(sessionFiles[fileIndex])));
+				FileItem fileItem;
+
+				fileItem.filePath = iqt::GetQString(sessionFiles[fileIndex]);
+
+				m_directoryFiles.push_back(fileItem);
 			}
 		}
-	}
-
-	if (m_directoryMonitorParamsPtr != NULL){
-		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
-		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
-		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetAcceptPatterns());
 	}
 }
 
@@ -391,48 +432,20 @@ void CDirectoryMonitorComp::ResetFiles()
 }
 
 
-void CDirectoryMonitorComp::SynchronizeWithModel(const imod::IModel& paramsModel)
-{
-	I_ASSERT(m_directoryPathPtr != NULL);
-	I_ASSERT(m_directoryPathModelPtr != NULL);
-	I_ASSERT(m_directoryMonitorParamsPtr != NULL);
-	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
-
-	if (&paramsModel == m_directoryPathModelPtr){
-		QString currentPath = iqt::GetQString(m_directoryPathPtr->GetPath());
-
-		if (m_currentDirectory != QDir(currentPath)){
-			SetFolderPath(currentPath);
-		}
-	}
-
-	if (&paramsModel == m_directoryMonitorParamsModelPtr){
-		isys::CSectionBlocker block(&m_lock);
-
-		m_poolingFrequency = m_directoryMonitorParamsPtr->GetPoolingIntervall();
-		m_observingItemTypes = m_directoryMonitorParamsPtr->GetObservedItemTypes();
-		m_observingChanges = m_directoryMonitorParamsPtr->GetObservedChanges();
-		m_fileFilterExpressions = iqt::GetQStringList(m_directoryMonitorParamsPtr->GetAcceptPatterns());
-	}
-}
-
-
 bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& paramsSet)
 {
 	DisconnectFromParameterModel();
 
 	m_directoryPathModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).ToString()));
 	m_directoryMonitorParamsModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString()));
-	m_directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(m_directoryPathModelPtr);
-	m_directoryMonitorParamsPtr = dynamic_cast<const ifpf::IDirectoryMonitorParams*>(m_directoryMonitorParamsModelPtr);
 
 	I_ASSERT(m_directoryPathModelPtr != NULL);
 	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
 
 	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
-		bool retVal = (const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(this);
+		bool retVal = (const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(&m_directoryParamsObserver);
 
-		retVal = retVal && (const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(this);
+		retVal = retVal && (const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(&m_monitoringParamsObserver);
 
 		return retVal;
 	}
@@ -444,14 +457,14 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 void CDirectoryMonitorComp::DisconnectFromParameterModel()
 {
 	if (m_directoryPathModelPtr != NULL){
-		if (m_directoryPathModelPtr->IsAttached(this)){
-			(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(this);
+		if (m_directoryPathModelPtr->IsAttached(&m_directoryParamsObserver)){
+			(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(&m_directoryParamsObserver);
 		}
 	}
 
 	if (m_directoryMonitorParamsModelPtr != NULL){
-		if (m_directoryMonitorParamsModelPtr->IsAttached(this)){
-			(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(this);
+		if (m_directoryMonitorParamsModelPtr->IsAttached(&m_monitoringParamsObserver)){
+			(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(&m_monitoringParamsObserver);
 		}
 	}
 }
@@ -466,6 +479,90 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 			sessionPtr->SetFileList(GetFileList());
 		}
 	}
+}
+
+
+// public methods of the embedded class MonitoringParamsObserver
+
+CDirectoryMonitorComp::MonitoringParamsObserver::MonitoringParamsObserver(CDirectoryMonitorComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+bool CDirectoryMonitorComp::MonitoringParamsObserver::OnDetached(imod::IModel* modelPtr)
+{
+	m_parent.m_directoryMonitorParamsModelPtr = NULL;
+	
+	return BaseClass::OnDetached(modelPtr);
+}
+
+
+void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	I_ASSERT(modelPtr != NULL);
+	if (modelPtr != NULL){
+		isys::CSectionBlocker block(&m_parent.m_lock);
+
+		const ifpf::IDirectoryMonitorParams* directoryMonitorParamsPtr = dynamic_cast<const ifpf::IDirectoryMonitorParams*>(modelPtr);
+		I_ASSERT(directoryMonitorParamsPtr != NULL);
+		if (directoryMonitorParamsPtr != NULL){
+			m_parent.m_poolingFrequency = directoryMonitorParamsPtr->GetPoolingIntervall();
+			m_parent.m_observingItemTypes = directoryMonitorParamsPtr->GetObservedItemTypes();
+			m_parent.m_observingChanges = directoryMonitorParamsPtr->GetObservedChanges();
+			m_parent.m_fileFilterExpressions = iqt::GetQStringList(directoryMonitorParamsPtr->GetAcceptPatterns());
+		}
+	}
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+}
+
+
+// public methods of the embedded class DirectoryParamsObserver
+
+CDirectoryMonitorComp::DirectoryParamsObserver::DirectoryParamsObserver(CDirectoryMonitorComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+bool CDirectoryMonitorComp::DirectoryParamsObserver::OnDetached(imod::IModel* modelPtr)
+{
+	m_parent.m_directoryPathModelPtr = NULL;
+
+	return BaseClass::OnDetached(modelPtr);
+}
+
+
+void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	I_ASSERT(modelPtr != NULL);
+	if (modelPtr != NULL){
+		const iprm::IFileNameParam* directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(modelPtr);
+		I_ASSERT(directoryPathPtr != NULL);
+		if (directoryPathPtr != NULL){
+			bool needRestart = m_parent.isRunning();
+			if (needRestart){
+				m_parent.StopObserverThread();
+			}
+
+			QString currentPath = iqt::GetQString(directoryPathPtr->GetPath());
+			if (m_parent.m_currentDirectory != QDir(currentPath)){
+				m_parent.SetFolderPath(currentPath);
+			}
+
+			// if observing thread was running -> restart:
+			if (needRestart){
+				m_parent.StartObserverThread();
+			}
+		}
+	}
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
