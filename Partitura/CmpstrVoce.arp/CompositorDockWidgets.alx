@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1461
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          183
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         AttributeEditorDock
       </ComponentName>
       <X>
-        500
+        1000
       </X>
       <X>
-        450
+        125
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         LogDock
       </ComponentName>
       <X>
-        975
+        600
       </X>
       <X>
-        450
+        675
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        225
+        200
       </X>
       <X>
-        450
+        400
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         QuickHelpDock
       </ComponentName>
       <X>
-        750
+        1000
       </X>
       <X>
-        450
+        400
       </X>
     </Element>
   </PositionMap>

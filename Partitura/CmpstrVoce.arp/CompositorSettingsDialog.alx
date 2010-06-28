@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1459
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          182
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="8">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         ConfigFileGui
       </ComponentName>
       <X>
-        450
+        500
       </X>
       <X>
-        200
+        275
       </X>
     </Element>
     <Element>
@@ -43,10 +43,32 @@
         ConfigFileInfo
       </ComponentName>
       <X>
-        450
+        500
       </X>
       <X>
-        100
+        175
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HtmlBrowserFileGui
+      </ComponentName>
+      <X>
+        500
+      </X>
+      <X>
+        500
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HtmlEditorFileGui
+      </ComponentName>
+      <X>
+        800
+      </X>
+      <X>
+        500
       </X>
     </Element>
     <Element>
@@ -54,10 +76,10 @@
         PreviewCommandFileGui
       </ComponentName>
       <X>
-        950
+        800
       </X>
       <X>
-        200
+        275
       </X>
     </Element>
     <Element>
@@ -65,10 +87,10 @@
         PreviewCommandFileInfo
       </ComponentName>
       <X>
-        950
+        800
       </X>
       <X>
-        100
+        175
       </X>
     </Element>
     <Element>
@@ -79,7 +101,7 @@
         675
       </X>
       <X>
-        525
+        775
       </X>
     </Element>
     <Element>
@@ -87,10 +109,10 @@
         SettingsDialog
       </ComponentName>
       <X>
-        375
+        200
       </X>
       <X>
-        425
+        675
       </X>
     </Element>
     <Element>
@@ -98,10 +120,10 @@
         SettingsGui
       </ComponentName>
       <X>
-        675
+        200
       </X>
       <X>
-        325
+        400
       </X>
     </Element>
     <Element>
@@ -109,10 +131,10 @@
         SettingsPersistence
       </ComponentName>
       <X>
-        950
+        1025
       </X>
       <X>
-        525
+        775
       </X>
     </Element>
   </PositionMap>

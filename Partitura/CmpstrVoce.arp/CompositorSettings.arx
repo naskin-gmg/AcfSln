@@ -1,21 +1,32 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1436
+          1514
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          214
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="5">
     <Element>
       <Id>
         ConfigFile
@@ -53,6 +64,86 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PathType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HtmlBrowserFile
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileNameParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              PathType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HtmlEditorFile
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileNameParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               PathType
@@ -166,12 +257,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   ConfigFile
                 </Value>
                 <Value>
                   PreviewCommandFile
+                </Value>
+                <Value>
+                  HtmlBrowserFile
+                </Value>
+                <Value>
+                  HtmlEditorFile
                 </Value>
               </Values>
             </Data>
@@ -190,12 +287,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   ConfigFile
                 </Value>
                 <Value>
                   PreviewCommandFile
+                </Value>
+                <Value>
+                  HtmlBrowserFile
+                </Value>
+                <Value>
+                  HtmlEditorFile
                 </Value>
               </Values>
             </Data>
@@ -238,13 +341,29 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="4">
     <Component>
       <ExportedId>
         ConfigFile
       </ExportedId>
       <ComponentId>
         ConfigFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlBrowserFile
+      </ExportedId>
+      <ComponentId>
+        HtmlBrowserFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlEditorFile
+      </ExportedId>
+      <ComponentId>
+        HtmlEditorFile
       </ComponentId>
     </Component>
     <Component>

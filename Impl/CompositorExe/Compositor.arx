@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1456
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          178
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -291,7 +291,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -332,6 +332,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              DocuEditorFileParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/HtmlEditorFile
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               EnvironmentManager
             </Id>
             <Type>
@@ -365,6 +384,25 @@
               </IsEnabled>
               <Value>
                 CompositorTemplate
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TechDocuViewerFileParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/HtmlBrowserFile
               </Value>
             </Data>
           </AttributeInfo>

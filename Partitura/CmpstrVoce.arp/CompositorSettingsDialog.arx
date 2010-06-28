@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1459
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          182
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="10">
     <Element>
       <Id>
         ConfigFileGui
@@ -127,6 +127,48 @@
               </Values>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HtmlBrowserFileGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FileNameParamGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HtmlEditorFileGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FileNameParamGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -446,12 +488,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   ConfigFileGui
                 </Value>
                 <Value>
                   PreviewCommandFileGui
+                </Value>
+                <Value>
+                  HtmlBrowserFileGui
+                </Value>
+                <Value>
+                  HtmlEditorFileGui
                 </Value>
               </Values>
             </Data>
@@ -470,12 +518,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   ConfigFile
                 </Value>
                 <Value>
                   PreviewCommandFile
+                </Value>
+                <Value>
+                  HtmlBrowserFile
+                </Value>
+                <Value>
+                  HtmlEditorFile
                 </Value>
               </Values>
             </Data>
@@ -494,12 +548,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="4">
                 <Value>
                   Configuration File
                 </Value>
                 <Value>
                   ACF Command Path
+                </Value>
+                <Value>
+                  HTML Browser
+                </Value>
+                <Value>
+                  HTML Editor
                 </Value>
               </Values>
             </Data>
@@ -617,13 +677,29 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="5">
     <Component>
       <ExportedId>
         ConfigFile
       </ExportedId>
       <ComponentId>
         Settings/ConfigFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlBrowserFile
+      </ExportedId>
+      <ComponentId>
+        Settings/HtmlBrowserFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlEditorFile
+      </ExportedId>
+      <ComponentId>
+        Settings/HtmlEditorFile
       </ComponentId>
     </Component>
     <Component>

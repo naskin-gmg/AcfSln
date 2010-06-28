@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1461
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          183
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -244,7 +244,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              DocuEditorFileParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              DocuEditorFileParam
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               MetaInfoManager
@@ -254,6 +270,22 @@
             </Type>
             <ExportId>
               MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TechDocuViewerFileParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              TechDocuViewerFileParam
             </ExportId>
             <Data>
               <IsEnabled>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1481
+          1514
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          187
+          214
         </Number>
         <Description>
           ACF-Solutions
@@ -480,7 +480,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="5">
     <Component>
       <ExportedId>
         ConfigFile
@@ -495,6 +495,22 @@
       </ExportedId>
       <ComponentId>
         Application/Workspace
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlBrowserFile
+      </ExportedId>
+      <ComponentId>
+        Settings/HtmlBrowserFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HtmlEditorFile
+      </ExportedId>
+      <ComponentId>
+        Settings/HtmlEditorFile
       </ComponentId>
     </Component>
     <Component>

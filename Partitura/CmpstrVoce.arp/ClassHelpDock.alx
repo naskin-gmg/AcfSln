@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1389
+          1514
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          214
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -21,10 +32,10 @@
         AcfHelpFileProvider
       </ComponentName>
       <X>
-        600
+        875
       </X>
       <X>
-        525
+        425
       </X>
     </Element>
     <Element>
@@ -32,7 +43,7 @@
         ComponentHelpFileProvider
       </ComponentName>
       <X>
-        600
+        300
       </X>
       <X>
         325
@@ -43,10 +54,10 @@
         DoxygenHelpFileProvider
       </ComponentName>
       <X>
-        600
+        875
       </X>
       <X>
-        425
+        325
       </X>
     </Element>
     <Element>
