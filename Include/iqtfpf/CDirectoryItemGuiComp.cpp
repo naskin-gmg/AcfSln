@@ -37,10 +37,13 @@ void CDirectoryItemGuiComp::UpdateEditor(int /*updateFlags*/)
 void CDirectoryItemGuiComp::UpdateProgressBar(const ifpf::IHotfolderStatistics& statistics)
 {
 	int itemsCount = statistics.GetItemsCount(iqt::GetCString(m_directoryPath));
+	int successCount = statistics.GetSuccessCount(iqt::GetCString(m_directoryPath));
+	int errorCount = statistics.GetErrorsCount(iqt::GetCString(m_directoryPath));
+	int abortedCount = statistics.GetAbortedCount(iqt::GetCString(m_directoryPath));
 
-	double successed = itemsCount == 0 ? 0 : statistics.GetSuccessCount(iqt::GetCString(m_directoryPath)) / double(itemsCount);
-	double errors = itemsCount == 0 ? 0 : statistics.GetErrorsCount(iqt::GetCString(m_directoryPath)) / double(itemsCount);
-	double aborted = itemsCount == 0 ? 0 : statistics.GetAbortedCount(iqt::GetCString(m_directoryPath)) / double(itemsCount);
+	double successed = itemsCount == 0 ? 0 : successCount / double(itemsCount);
+	double errors = itemsCount == 0 ? 0 : errorCount / double(itemsCount);
+	double aborted = itemsCount == 0 ? 0 : abortedCount / double(itemsCount);
 
 	int processedCountPercent = (successed + errors + aborted) * 100;
 
@@ -49,6 +52,10 @@ void CDirectoryItemGuiComp::UpdateProgressBar(const ifpf::IHotfolderStatistics& 
 	QString styleSheet = GenerateStyleSheet(successed, errors, aborted);
 
 	ProcessedProgressBar->setStyleSheet(styleSheet);
+
+	FilesCountLabel->setText(QString("%1").arg(itemsCount));
+	ProcessedFileCountLabel->setText(QString("%1 (%2%)").arg(successCount + errorCount + abortedCount).arg(processedCountPercent));
+	ErrorsCountLabel->setText(QString("%1 (%2%)").arg(errorCount).arg(errors * 100, 1, 'f', 1));
 }
 
 

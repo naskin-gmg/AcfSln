@@ -20,6 +20,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 #include "iqtgui/CGuiComponentDialog.h"
+#include "iqtgui/CExtLineEdit.h"
 
 
 // AcfSln includes
@@ -58,6 +59,8 @@ public:
 		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 	I_END_COMPONENT;
 
+	CHotfolderGuiComp();
+
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
@@ -82,6 +85,7 @@ private:
 	void RebuildItemList();
 	ProcessingItems GetSelectedProcessingItems() const;
 	QIcon GetStateIcon(int fileState) const;
+	void UpdateItemsVisibility(const QString& textFilter, bool showOnlyErrors);
 
 private Q_SLOTS:
 	void OnRun();
@@ -91,6 +95,9 @@ private Q_SLOTS:
 	void OnRestart();
 	void OnContextMenuRequested(const QPoint& menuPoint);
 	void on_FileList_itemSelectionChanged();
+	void on_AllRadio_toggled(bool isChecked);
+	void on_ErrorsRadio_toggled(bool isChecked);
+	void OnTextFilterChanged(const QString& filterText);
 
 private:
 	class ProcessingItem: public QTreeWidgetItem, public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem>
@@ -139,6 +146,7 @@ private:
 
 	typedef std::map<int, QIcon> StateIconsMap;
 
+	iqtgui::CExtLineEdit* m_filterEditor;
 	StateIconsMap m_stateIconsMap;
 };
 

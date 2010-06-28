@@ -31,8 +31,6 @@
 #include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IHotfolderStatistics.h"
 #include "ifpf/IDirectoryMonitor.h"
-#include "ifpf/IMonitoringSessionManager.h"
-#include "ifpf/CMonitoringSession.h"
 
 
 namespace iqtfpf
@@ -126,7 +124,7 @@ private:
 	/**
 		Process a single file.
 	*/
-	ProcessingResult ProcessFile(const istd::CString& inputFile, const istd::CString& outputFile, ifpf::IHotfolderProcessingItem* processingItemPtr);
+	ProcessingResult ProcessFile(ifpf::IHotfolderProcessingItem* processingItemPtr);
 
 	/**
 		Remove processing item from the queue.
@@ -199,8 +197,6 @@ private:
 
 	mutable iqt::CCriticalSection m_parameterLock;
 
-	bool m_finishThread;
-
 	istd::TDelPtr<iprm::IParamsSet> m_runParameterPtr;
 
 	typedef std::list<istd::CString> FilesQueue;
@@ -219,6 +215,8 @@ private:
 	ProcessingFutures m_processingFutures;
 
 	bool m_isInitialized;
+
+	int m_simultaneousProcessingCount;
 };
 
 

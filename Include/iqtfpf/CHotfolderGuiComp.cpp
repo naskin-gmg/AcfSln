@@ -16,6 +16,7 @@
 #include "iqt/CSignalBlocker.h"
 
 
+// ACF-Solutions includes
 #include "iqtfpf/CDirectoryItemGuiComp.h"
 
 
@@ -24,6 +25,12 @@ namespace iqtfpf
 
 
 // public methods
+
+CHotfolderGuiComp::CHotfolderGuiComp()
+	:m_filterEditor(NULL)
+{
+}
+
 
 // reimplemented (ibase::ICommandsProvider)
 
@@ -68,6 +75,10 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED) != 0){
 			UpdateProcessingCommands();
 		}
+
+		I_ASSERT(m_filterEditor != NULL);
+
+		UpdateItemsVisibility(m_filterEditor->GetText(), ErrorsRadio->isChecked());
 	}
 }
 
@@ -128,6 +139,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 	m_restartItemCommand.SetGroupId(2);
 	m_restartItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
 	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart Job", tr("Restart selected job(s)"), QIcon(":/Icons/Reset"));
+	m_restartItemCommand.setShortcut(Qt::CTRL + Qt::Key_R);
 	connect(&m_restartItemCommand, SIGNAL(activated()), this, SLOT(OnRestart()));
 	hotfolderMenuPtr->InsertChild(&m_restartItemCommand, false);
 
@@ -135,6 +147,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
 	m_removeItemCommand.SetVisuals(tr("&Remove Job"), "Remove Job", tr("Remove processing item"), QIcon(":/Icons/Delete.svg"));
 	m_removeItemCommand.setDisabled(true);
+	m_removeItemCommand.setShortcut(Qt::Key_Delete);
 	connect(&m_removeItemCommand, SIGNAL(activated()), this, SLOT(OnItemRemove()));
 	hotfolderMenuPtr->InsertChild(&m_removeItemCommand, false);
 
@@ -166,6 +179,16 @@ void CHotfolderGuiComp::OnGuiCreated()
 				SIGNAL(customContextMenuRequested(const QPoint&)),
 				this, 
 				SLOT(OnContextMenuRequested(const QPoint&)));
+
+	// create item filter:
+
+	m_filterEditor = new iqtgui::CExtLineEdit("<Filter>", 2, TextFilterFrame);
+	QLayout* layoutPtr = TextFilterFrame->layout();
+	if (layoutPtr != NULL){
+		layoutPtr->addWidget(m_filterEditor);
+	}
+
+	connect(m_filterEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnTextFilterChanged(const QString&)));
 
 	BaseClass::OnGuiCreated();
 }
@@ -332,6 +355,30 @@ QIcon CHotfolderGuiComp::GetStateIcon(int fileState) const
 }
 
 
+void CHotfolderGuiComp::UpdateItemsVisibility(const QString& textFilter, bool showOnlyErrors)
+{
+	QTreeWidgetItemIterator treeIterator(FileList);
+     while (*treeIterator){
+		 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
+		 if (itemPtr != NULL){
+			 ifpf::IHotfolderProcessingItem* processingItemPtr = itemPtr->GetObjectPtr();
+			 if (processingItemPtr != NULL){
+				 QString fileName = iqt::GetQString(processingItemPtr->GetInputFile());
+				 QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
+				 bool isError = (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_INVALID);
+				 bool isMatched = fileName.contains(regExp);
+				 bool isVisible = ((showOnlyErrors && isError) && isMatched) || (!showOnlyErrors && isMatched);
+				 
+				 itemPtr->setHidden(!isVisible);
+			 }
+		 }
+
+		 ++treeIterator;
+     }
+}
+
+
+
 // private slots
 
 void CHotfolderGuiComp::OnRun()
@@ -421,6 +468,32 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 	}
 
 	UpdateItemCommands();
+}
+
+
+void CHotfolderGuiComp::on_AllRadio_toggled(bool isChecked)
+{
+	if (isChecked){
+		I_ASSERT(m_filterEditor != NULL);
+
+		UpdateItemsVisibility(m_filterEditor->GetText(), false);
+	}
+}
+
+
+void CHotfolderGuiComp::on_ErrorsRadio_toggled(bool isChecked)
+{
+	if (isChecked){
+		I_ASSERT(m_filterEditor != NULL);
+
+		UpdateItemsVisibility(m_filterEditor->GetText(), true);
+	}
+}
+
+
+void CHotfolderGuiComp::OnTextFilterChanged(const QString& filterText)
+{
+	UpdateItemsVisibility(filterText, ErrorsRadio->isChecked());
 }
 
 

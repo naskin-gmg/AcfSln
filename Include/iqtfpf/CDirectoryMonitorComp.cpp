@@ -216,6 +216,32 @@ void CDirectoryMonitorComp::run()
 			}
 		}
 
+		// check previously not accessed files:
+		for (FilesSet::iterator fileIter = m_nonAccessedFiles.begin(); fileIter != m_nonAccessedFiles.end(); fileIter++){
+			QFile file(*fileIter);
+					
+			bool hasAccess = file.open(QIODevice::ReadOnly);
+			if (hasAccess){
+				QFileInfo fileInfo(*fileIter);
+
+				FileItem fileItem;
+
+				fileItem.filePath = fileInfo.absoluteFilePath();
+				fileItem.modifiedTime = fileInfo.lastModified();
+				fileItem.permissions = fileInfo.permissions();
+
+				m_directoryFiles.push_back(fileItem);
+
+				addedFiles.push_back(*fileIter);
+
+				m_nonAccessedFiles.erase(fileIter);
+
+				break;
+			}
+
+			file.close();
+		}
+
 		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ADD) != 0 && pendingChangesCounter > 0){
 			QStringList currentFiles = m_currentDirectory.entryList(acceptPatterns, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
 
@@ -245,14 +271,19 @@ void CDirectoryMonitorComp::run()
 				FileItems::iterator foundFileIter = qFind(m_directoryFiles.begin(), m_directoryFiles.end(), currentFileItem);
 					
 				if (foundFileIter == m_directoryFiles.end()){
-					int accessMode = _waccess_s((const wchar_t*)currentFileItem.filePath.utf16(), 6);
-					bool hasAccess = (accessMode == 0);
+					QFile file(currentFileItem.filePath);
+					bool hasAccess = file.open(QIODevice::ReadOnly);
 					if (hasAccess){
 						addedFiles.push_back(currentFileItem.filePath);
 
 						m_directoryFiles.push_back(currentFileItem);
 
 						SendInfoMessage(0, iqt::GetCString(currentFileItem.filePath + " was added"));
+
+						file.close();
+					}
+					else{
+						m_nonAccessedFiles.insert(currentFileItem.filePath);
 					}
 				}
 			}

@@ -153,8 +153,10 @@ private:
 	};
 
 	typedef std::vector<FileItem> FileItems;
+	typedef std::set<QString> FilesSet;
 
 	FileItems m_directoryFiles;
+	FilesSet m_nonAccessedFiles;
 
 	mutable iqt::CCriticalSection m_lock;
 

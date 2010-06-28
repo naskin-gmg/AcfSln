@@ -11,8 +11,6 @@
 
 
 // ACF includes
-#include "istd/INamed.h"
-#include "istd/TChangeNotifier.h"
 #include "istd/TChangeDelegator.h"
 #include "istd/CStaticServicesProvider.h"
 
@@ -33,14 +31,14 @@ namespace iqtfpf
 {
 
 
-
 // public methods
 
 CHotfolderProcessingComp::CHotfolderProcessingComp()
 	:m_directoryMonitorObserver(*this),
 	m_parametersObserver(*this),
 	m_stateObserver(*this),
-	m_isInitialized(false)
+	m_isInitialized(false),
+	m_simultaneousProcessingCount(1)
 {
 }
 
@@ -78,9 +76,27 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 		m_hotfolderParamsModelCompPtr->DetachObserver(&m_parametersObserver);
 	}
 
+	m_directoryMonitorsMap.clear();
+
 	m_filesQueueTimer.stop();
 
-	m_directoryMonitorsMap.clear();
+	m_processingTimer.stop();
+
+	for (int processingFutureIndex = 0; processingFutureIndex < int(m_processingFutures.size()); processingFutureIndex++){
+		ProcessingFutureWatcher* watcherPtr = m_futureWatchers.GetAt(processingFutureIndex);
+		if (watcherPtr->isRunning()){
+			ProcessingFuture future = watcherPtr->future();
+			ifpf::IHotfolderProcessingItem* processingItemPtr = future.result().processingItemPtr;
+			I_ASSERT(processingItemPtr != NULL);
+			if (processingItemPtr != NULL){
+				watcherPtr->cancel();
+
+				watcherPtr->waitForFinished();
+
+				future.result().processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
+			}
+		}
+	}
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -142,9 +158,6 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 	// get available file to process:
 	ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
 	if (processingItemPtr != NULL){
-		istd::CString inputFile = processingItemPtr->GetInputFile();
-		istd::CString outputFile = processingItemPtr->GetOutputFile();
-
 		int runningThreadCount = 0;
 
 		for (int processingFutureIndex = 0; processingFutureIndex < int(m_processingFutures.size()); processingFutureIndex++){
@@ -153,13 +166,19 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 			}
 		}
 
-		if (runningThreadCount < 1){
+		if (runningThreadCount < m_simultaneousProcessingCount){
+			istd::CChangeNotifier changePtr(processingItemPtr);
+
 			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_WAIT);
 			if (m_fileNamingCompPtr.IsValid()){
-				outputFile = m_fileNamingCompPtr->GetFilePath(inputFile);
+				istd::CString outputFile = m_fileNamingCompPtr->GetFilePath(processingItemPtr->GetInputFile());
+
+				processingItemPtr->SetOutputFile(outputFile);
 			}
 
-			ProcessingFuture future = QtConcurrent::run(this, &CHotfolderProcessingComp::ProcessFile, inputFile, outputFile, processingItemPtr);
+			changePtr.Reset();
+
+			ProcessingFuture future = QtConcurrent::run(this, &CHotfolderProcessingComp::ProcessFile, processingItemPtr);
 
 			ProcessingFutureWatcher* futureWatcherPtr = new ProcessingFutureWatcher;
 			futureWatcherPtr->setFuture(future);
@@ -178,6 +197,16 @@ void CHotfolderProcessingComp::OnFutureFinished()
 		ProcessingFuture future = watcherPtr->future();
 
 		future.result().processingItemPtr->SetProcessingState(future.result().processingState);
+
+		for (int processingFutureIndex = 0; processingFutureIndex < m_futureWatchers.GetCount(); processingFutureIndex++){
+			if (m_futureWatchers.GetAt(processingFutureIndex) == watcherPtr){
+				m_futureWatchers.PopAt(processingFutureIndex);
+
+				m_processingFutures.erase(m_processingFutures.begin() + processingFutureIndex);
+
+				watcherPtr->deleteLater();
+			}
+		}
 	}
 }
 
@@ -342,10 +371,7 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile(
 }
 
 
-CHotfolderProcessingComp::ProcessingResult CHotfolderProcessingComp::ProcessFile(
-			const istd::CString& inputFile,
-			const istd::CString& outputFile,
-			ifpf::IHotfolderProcessingItem* processingItemPtr)
+CHotfolderProcessingComp::ProcessingResult CHotfolderProcessingComp::ProcessFile(ifpf::IHotfolderProcessingItem* processingItemPtr)
 {
 	ProcessingResult retVal;
 	retVal.processingState = iproc::IProcessor::TS_NONE;
@@ -356,12 +382,17 @@ CHotfolderProcessingComp::ProcessingResult CHotfolderProcessingComp::ProcessFile
 		return retVal;
 	}
 
+	istd::CString inputFile = processingItemPtr->GetInputFile();
+	istd::CString outputFile = processingItemPtr->GetOutputFile();
+
 	istd::TDelPtr<iprm::IParamsSet> processingParameterPtr;
 
 	m_parameterLock.Enter();
+
 	if (m_runParameterPtr.IsValid()){
 		processingParameterPtr.SetCastedOrRemove(m_runParameterPtr->CloneMe());
 	}
+
 	m_parameterLock.Leave();
 
 	if (!m_fileConvertCompPtr->CopyFile(inputFile, outputFile, processingParameterPtr.GetPtr())){
