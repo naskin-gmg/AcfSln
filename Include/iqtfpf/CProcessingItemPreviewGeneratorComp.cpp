@@ -4,7 +4,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iimg/CGeneralBitmap.h"
+#include "iqt/CBitmap.h"
 
 
 namespace iqtfpf
@@ -23,7 +23,7 @@ void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolym
 	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0 && m_inputFilePreviewGeneratorCompPtr.IsValid()){
 		ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
 		if (itemPtr != NULL && m_fileNameCompPtr.IsValid()){
-			iimg::CGeneralBitmap previewBitmap;
+			iqt::CBitmap previewBitmap;
 
 			m_fileNameCompPtr->SetPath(itemPtr->GetInputFile());
 
@@ -37,7 +37,7 @@ void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolym
 	if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0 && m_outputFilePreviewGeneratorCompPtr.IsValid()){
 		ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
 		if (itemPtr != NULL && m_fileNameCompPtr.IsValid() && itemPtr->GetProcessingState() == iproc::IProcessor::TS_OK){
-			iimg::CGeneralBitmap previewBitmap;
+			iqt::CBitmap previewBitmap;
 
 			m_fileNameCompPtr->SetPath(itemPtr->GetOutputFile());
 
