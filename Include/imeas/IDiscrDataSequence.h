@@ -23,6 +23,7 @@ public:
 		\param	releaseFlag		if its true, external buffer will be managed (removed) by this object.
 		\param	sampleDiff		address difference between next and previos sample. If it equals 0, the value will be taken from number of samples, number of channels and \c channelDiff.
 		\param	channelDiff		address difference between next and previos sample. If it equals 0, the value will be calculated from number of bits per single sample.
+		\param	sampleDepth		number of bits used for representation of a single sample.
 		\param	channelsCount	number of channels.
 		\return					true if sample sequence was created correctly.
 	*/
