@@ -3,6 +3,9 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/CStaticServicesProvider.h"
+
+#include "isys/ISystemEnvironment.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -15,13 +18,27 @@ namespace ifpf
 
 
 CHotfolderProcessingItem::CHotfolderProcessingItem()
-	:m_processingState(iproc::IProcessor::TS_NONE),
-	m_progress(0.0)
+	:m_processingState(iproc::IProcessor::TS_NONE)
 {
+	GetItemUuid();
 }
 
 
 // reimplemented ()ifpf::CHotfolderProcessingItem
+
+std::string CHotfolderProcessingItem::GetItemUuid() const
+{
+	if (m_itemId.empty()){
+		isys::ISystemEnvironment* systemEnvironmentPtr = istd::GetService<isys::ISystemEnvironment>();
+		I_ASSERT(systemEnvironmentPtr != NULL);
+		if (systemEnvironmentPtr != NULL){
+			m_itemId = systemEnvironmentPtr->GetUniqueIdentifier().ToString();
+		}
+	}
+
+	return m_itemId;
+}
+
 
 int CHotfolderProcessingItem::GetProcessingState() const
 {
@@ -35,22 +52,6 @@ void CHotfolderProcessingItem::SetProcessingState(int processingState)
 		istd::CChangeNotifier changePtr(this, CF_STATE_CHANGED, this);
 
 		m_processingState = processingState;
-	}
-}
-
-
-double CHotfolderProcessingItem::GetProgress() const
-{
-	return m_progress;
-}
-
-
-void CHotfolderProcessingItem::SetProgress(double progress)
-{
-	if (m_progress != progress){
-		istd::CChangeNotifier changePtr(this, CF_PROGRESS_CHANGED);
-
-		m_progress = progress;
 	}
 }
 
@@ -87,49 +88,21 @@ void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
 }
 
 
-const iimg::IBitmap& CHotfolderProcessingItem::GetInputPreview() const
-{
-	return m_inputPreview;
-}
-
-
-void CHotfolderProcessingItem::SetInputPreview(const iimg::IBitmap& inputPreview)
-{
-	istd::CChangeNotifier changePtr(this, CF_INPUT_PREVIEW_CHANGED);
-
-	m_inputPreview.CopyFrom(inputPreview);
-}
-
-
-const iimg::IBitmap& CHotfolderProcessingItem::GetOutputPreview() const
-{
-	return m_outputPreview;
-}
-
-
-void CHotfolderProcessingItem::SetOutputPreview(const iimg::IBitmap& outputPreview)
-{
-	istd::CChangeNotifier changePtr(this, CF_OUTPUT_PREVIEW_CHANGED);
-
-	m_outputPreview.CopyFrom(outputPreview);
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
+	static iser::CArchiveTag itemIdTag("Uuid", "Processing item identifier");
+	retVal = retVal && archive.BeginTag(itemIdTag);
+	retVal = retVal && archive.Process(m_itemId);
+	retVal = retVal && archive.EndTag(itemIdTag);
+
 	static iser::CArchiveTag processingStateTag("ProcessingState", "Current processing state");
 	retVal = retVal && archive.BeginTag(processingStateTag);
 	retVal = retVal && archive.Process(m_processingState);
 	retVal = retVal && archive.EndTag(processingStateTag);
-
-	static iser::CArchiveTag progressTag("Progress", "Current processing progress");
-	retVal = retVal && archive.BeginTag(progressTag);
-	retVal = retVal && archive.Process(m_progress);
-	retVal = retVal && archive.EndTag(progressTag);
 
 	static iser::CArchiveTag inputFileTag("InputFilePath", "Input file path");
 	retVal = retVal && archive.BeginTag(inputFileTag);
@@ -140,16 +113,6 @@ bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(outputFileTag);
 	retVal = retVal && archive.Process(m_outputFile);
 	retVal = retVal && archive.EndTag(outputFileTag);
-
-	static iser::CArchiveTag inputFilePreviewTag("InputFilePreview", "Preview of the input file");
-	retVal = retVal && archive.BeginTag(inputFilePreviewTag);
-	retVal = retVal && m_inputPreview.Serialize(archive);
-	retVal = retVal && archive.EndTag(inputFilePreviewTag);
-	
-	static iser::CArchiveTag outputFilePreviewTag("OutputFilePreview", "Preview of the output file");
-	retVal = retVal && archive.BeginTag(outputFilePreviewTag);
-	retVal = retVal && m_outputPreview.Serialize(archive);
-	retVal = retVal && archive.EndTag(outputFilePreviewTag);
 
 	return retVal;
 }

@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          217
+          218
         </Number>
         <Description>
           ACF-Solutions
@@ -60,7 +60,7 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                5
               </Value>
             </Data>
           </AttributeInfo>
@@ -157,7 +157,7 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                5
               </Value>
             </Data>
           </AttributeInfo>
@@ -238,7 +238,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               InputPreview
@@ -275,6 +275,22 @@
               <Value>
                 OutputImageView
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PreviewProvider
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              PreviewProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

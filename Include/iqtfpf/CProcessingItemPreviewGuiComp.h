@@ -9,6 +9,7 @@
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
+#include "ifpf/IProcessingItemPreviewProvider.h"
 
 #include "iqtfpf/Generated/ui_CProcessingItemPreviewGuiComp.h"
 
@@ -33,6 +34,7 @@ public:
 		I_ASSIGN(m_inputPreviewGuiCompPtr, "InputPreview", "View of the input file", true, "InputPreview");
 		I_ASSIGN(m_outputPreviewObserverCompPtr, "OutputPreview", "View of the input file", true, "OutputPreview");
 		I_ASSIGN(m_outputPreviewGuiCompPtr, "OutputPreview", "View of the output file", true, "OutputPreview");
+		I_ASSIGN(m_processingItemPreviewProviderCompPtr, "PreviewProvider", "Preview provider for the processing item", true, "PreviewProvider");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -52,6 +54,7 @@ private:
 	I_REF(iqtgui::IGuiObject, m_inputPreviewGuiCompPtr);
 	I_REF(imod::IObserver, m_outputPreviewObserverCompPtr);
 	I_REF(iqtgui::IGuiObject, m_outputPreviewGuiCompPtr);
+	I_REF(ifpf::IProcessingItemPreviewProvider, m_processingItemPreviewProviderCompPtr);
 };
 
 

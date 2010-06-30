@@ -216,10 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemInfoGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CProcessingItemPreviewGeneratorComp.cpp"
 				>
 			</File>
@@ -321,10 +317,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemInfoGuiComp.ui"
-				>
-			</File>
-			<File
 				RelativePath="..\CProcessingItemPreviewGuiComp.ui"
 				>
 			</File>
@@ -367,10 +359,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CProcessingItemInfoGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CProcessingItemPreviewGuiComp.cpp"
 				>
 			</File>
@@ -392,10 +380,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CProcessingItemInfoGuiComp.h"
 				>
 			</File>
 			<File
@@ -436,10 +420,6 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderWorkflowScenographerComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemInfoGuiComp.moc"
 				>
 			</File>
 			<File

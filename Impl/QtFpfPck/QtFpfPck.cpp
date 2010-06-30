@@ -53,11 +53,6 @@ I_EXPORT_COMPONENT(
 			"File Renaming Directory");
 
 I_EXPORT_COMPONENT(
-			ProcessingItemInfoGui,
-			"GUI for the info a hotfolder processing item",
-			"File Processing Editor View GUI Item");
-
-I_EXPORT_COMPONENT(
 			ProcessingItemPreviewGui,
 			"GUI for the graphical preview of a hotfolder processing item",
 			"File Processing Editor View Item" IM_TAG("GUI"));

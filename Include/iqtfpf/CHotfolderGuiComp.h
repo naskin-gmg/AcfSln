@@ -57,6 +57,7 @@ public:
 		I_ASSIGN(m_statisticsModelCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
+		I_ASSIGN(m_processingItemPreviewCompPtr, "ProcessingItemPreview", "GUI for the processing item's preview", false, "ProcessingItemPreview");
 	I_END_COMPONENT;
 
 	CHotfolderGuiComp();
@@ -136,6 +137,7 @@ private:
 	I_REF(imod::IModel, m_statisticsModelCompPtr);
 	I_FACT(iqtgui::IGuiObject, m_directoryItemGuiFactCompPtr);
 	I_FACT(imod::IObserver, m_directoryItemObserverFactCompPtr);
+	I_REF(iqtgui::IGuiObject, m_processingItemPreviewCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;

@@ -241,7 +241,7 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 
 				istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
 				QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
-				layout->setMargin(4);
+				layout->setContentsMargins(4, 4, 4, 4);
 			
 				if (directoryItemGuiPtr->CreateGui(widgetWrapperPtr.GetPtr())){
 					FileList->setItemWidget(parentItemPtr, 0, widgetWrapperPtr.PopPtr());
@@ -456,11 +456,57 @@ void CHotfolderGuiComp::OnContextMenuRequested(const QPoint& menuPoint)
 
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
+	if (m_processingItemPreviewCompPtr.IsValid()){
+		m_processingItemPreviewCompPtr->DestroyGui();
+	}
+
+	QTreeWidgetItemIterator treeIterator(FileList);
+     while (*treeIterator){
+		 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
+		 if (itemPtr != NULL){
+			 FileList->setItemWidget(itemPtr, 0, NULL);
+
+			ifpf::IHotfolderProcessingItem* objectPtr = itemPtr->GetObjectPtr();
+			if (objectPtr != NULL){
+				int fileState = objectPtr->GetProcessingState();
+
+				QIcon stateIcon = GetStateIcon(fileState);
+
+				itemPtr->setTextColor(0, Qt::black);
+				itemPtr->setIcon(0, stateIcon);
+			}
+		 }
+
+		 ++treeIterator;
+     }
+
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	if (!processingItems.empty()){
 		imod::IModel* itemModelPtr = dynamic_cast<imod::IModel*>(processingItems[0]);
 		if (itemModelPtr != NULL){
 			BaseClass2::SetModelPtr(itemModelPtr);
+		}
+
+		QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
+
+		if (m_processingItemPreviewCompPtr.IsValid() && selectedItems.count() == 1){
+			QTreeWidgetItem* processingItemPtr = selectedItems.at(0);
+
+			I_ASSERT(FileList->itemWidget(processingItemPtr, 0) == NULL);
+
+			istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
+			QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
+			layout->setContentsMargins(8, 8, 8, 8);
+			
+			I_ASSERT(!m_processingItemPreviewCompPtr->IsGuiCreated());
+			if (!m_processingItemPreviewCompPtr->IsGuiCreated()){
+				m_processingItemPreviewCompPtr->CreateGui(widgetWrapperPtr.GetPtr());
+			}
+
+			processingItemPtr->setTextColor(0, Qt::transparent);
+			processingItemPtr->setIcon(0, QIcon());
+
+			FileList->setItemWidget(processingItemPtr, 0, widgetWrapperPtr.PopPtr());
 		}
 	}
 	else{
@@ -517,8 +563,6 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 		int fileState = objectPtr->GetProcessingState();
 
 		QIcon stateIcon = m_parent.GetStateIcon(fileState);
-
-		setIcon(0, stateIcon);
 	}
 }
 

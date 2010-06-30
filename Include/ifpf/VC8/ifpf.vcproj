@@ -385,6 +385,10 @@
 				RelativePath="..\IMonitoringSessionManager.h"
 				>
 			</File>
+			<File
+				RelativePath="..\IProcessingItemPreviewProvider.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Other"

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1017</width>
-    <height>1032</height>
+    <width>734</width>
+    <height>424</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -47,34 +47,57 @@ QTreeView::item
 	margin-right: 4px;
  }
 
+/**
+	Processing item has only bottom border
+*/
 QTreeView::item:!has-children
 {
 	border: 0px;
 	border-bottom: 1px solid  palette(mid);
  }
 
+
+/**
+	Directory item has top margin and gradient fill
+*/
 QTreeView::item:has-children
 {
 	margin-top: 4px;
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(250,250,250,192), stop: 1 rgba(231,231,231,192));
  }
 
+/**
+	Last processing item has no border
+*/
  QTreeView::item:!has-children:!has-siblings
 {
 	border-bottom: 0px;
  }
 
-
+/*
+	Selected processing item
+*/
 QTreeView::item:selected:!has-children
 {
-	background: palette(highlight);
+	margin-top: 4px;
+	margin-bottom: 4px;
+   	background: rgba(165, 201, 239, 255);
+   	border: 1px solid black;
+ 	color: transparent;
  }
 
+/**
+	Selected root item must have black pen for text drawing
+*/
 QTreeView::item:selected:has-children
 {
 	color: black;
  }
 
+
+/**
+	hide branch
+*/
 QTreeView::branch
 {
 	background: palette(base);
