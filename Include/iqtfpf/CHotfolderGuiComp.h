@@ -107,14 +107,14 @@ private:
 		typedef QTreeWidgetItem BaseClass;
 		typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem> BaseClass2;
 
-		ProcessingItem(const CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr = NULL);
+		ProcessingItem(CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr = NULL);
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
 		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
-		const CHotfolderGuiComp& m_parent;
+		CHotfolderGuiComp& m_parent;
 	};
 
 	class DirectoryItem: public QTreeWidgetItem
@@ -122,13 +122,13 @@ private:
 	public:
 		typedef QTreeWidgetItem BaseClass;
 
-		DirectoryItem(const CHotfolderGuiComp& parent, const QDir& directory, QTreeWidget* treeWidgetPtr);
+		DirectoryItem(CHotfolderGuiComp& parent, const QDir& directory, QTreeWidget* treeWidgetPtr);
 		const QDir& GetDirectory() const;
 		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 
 	private:
 		QDir m_directory;
-		const CHotfolderGuiComp& m_parent;
+		CHotfolderGuiComp& m_parent;
 	};
 
 	I_REF(iqtgui::IIconProvider, m_stateIconsProviderCompPtr);

@@ -545,7 +545,7 @@ void CHotfolderGuiComp::OnTextFilterChanged(const QString& filterText)
 
 // public methods of the embedded class 
 
-CHotfolderGuiComp::ProcessingItem::ProcessingItem(const CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr)
+CHotfolderGuiComp::ProcessingItem::ProcessingItem(CHotfolderGuiComp& parent, QTreeWidget* treeWidgetPtr)
 	:BaseClass(treeWidgetPtr),
 	m_parent(parent)
 {
@@ -563,12 +563,14 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 		int fileState = objectPtr->GetProcessingState();
 
 		QIcon stateIcon = m_parent.GetStateIcon(fileState);
+
+		m_parent.UpdateItemCommands();
 	}
 }
 
 
 CHotfolderGuiComp::DirectoryItem::DirectoryItem(
-			const CHotfolderGuiComp& parent,
+			CHotfolderGuiComp& parent,
 			const QDir& directory,
 			QTreeWidget* treeWidgetPtr)
 	:BaseClass(treeWidgetPtr),
