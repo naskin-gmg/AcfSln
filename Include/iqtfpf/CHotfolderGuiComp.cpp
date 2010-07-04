@@ -458,27 +458,27 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
 	if (m_processingItemPreviewCompPtr.IsValid()){
 		m_processingItemPreviewCompPtr->DestroyGui();
-	}
 
-	QTreeWidgetItemIterator treeIterator(FileList);
-     while (*treeIterator){
-		 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
-		 if (itemPtr != NULL){
-			 FileList->setItemWidget(itemPtr, 0, NULL);
+		QTreeWidgetItemIterator treeIterator(FileList);
+		 while (*treeIterator){
+			 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
+			 if (itemPtr != NULL){
+				FileList->setItemWidget(itemPtr, 0, NULL);
 
-			ifpf::IHotfolderProcessingItem* objectPtr = itemPtr->GetObjectPtr();
-			if (objectPtr != NULL){
-				int fileState = objectPtr->GetProcessingState();
+				ifpf::IHotfolderProcessingItem* objectPtr = itemPtr->GetObjectPtr();
+				if (objectPtr != NULL){
+					int fileState = objectPtr->GetProcessingState();
 
-				QIcon stateIcon = GetStateIcon(fileState);
+					QIcon stateIcon = GetStateIcon(fileState);
 
-				itemPtr->setTextColor(0, Qt::black);
-				itemPtr->setIcon(0, stateIcon);
-			}
+					itemPtr->setTextColor(0, Qt::black);
+					itemPtr->setIcon(0, stateIcon);
+				}
+			 }
+
+			 ++treeIterator;
 		 }
-
-		 ++treeIterator;
-     }
+	}
 
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	if (!processingItems.empty()){
@@ -563,6 +563,8 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 		int fileState = objectPtr->GetProcessingState();
 
 		QIcon stateIcon = m_parent.GetStateIcon(fileState);
+
+		setIcon(0, stateIcon);
 
 		m_parent.UpdateItemCommands();
 	}
