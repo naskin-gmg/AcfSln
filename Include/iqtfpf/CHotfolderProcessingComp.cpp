@@ -12,19 +12,17 @@
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
+#include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
 
 #include "isys/IApplicationEnvironment.h"
 #include "isys/CSectionBlocker.h"
-
-#include "iser/CXmlFileWriteArchive.h"
 
 #include "iprm/IFileNameParam.h"
 
 #include "iproc/IProcessor.h"
 
 #include "iqt/CTimer.h"
-#include "iqt/CSafeNotifier.h"
 
 
 namespace iqtfpf
@@ -196,7 +194,9 @@ void CHotfolderProcessingComp::OnFutureFinished()
 	if (watcherPtr != NULL){
 		ProcessingFuture future = watcherPtr->future();
 
-		future.result().processingItemPtr->SetProcessingState(future.result().processingState);
+		ProcessingResult processingResult = future.result();
+
+		processingResult.processingItemPtr->SetProcessingState(processingResult.processingState);
 
 		for (int processingFutureIndex = 0; processingFutureIndex < m_futureWatchers.GetCount(); processingFutureIndex++){
 			if (m_futureWatchers.GetAt(processingFutureIndex) == watcherPtr){

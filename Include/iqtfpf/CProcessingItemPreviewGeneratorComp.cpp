@@ -61,15 +61,15 @@ bool CProcessingItemPreviewGeneratorComp::Serialize(iser::IArchive& /*archive*/)
 
 // reimplemented (imod::CSingleModelObserverBase)
 	
-void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	I_ASSERT(m_inputFilePreviewGeneratorCompPtr.IsValid());
 	I_ASSERT(m_outputFilePreviewGeneratorCompPtr.IsValid());
 
-	if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0 && m_outputFilePreviewGeneratorCompPtr.IsValid()){
-		ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
-		if (itemPtr != NULL){
-			GetOutputFilePreview(*itemPtr, true);
+	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
+	if (m_outputFilePreviewGeneratorCompPtr.IsValid() && objectPtr != NULL){
+		if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
+			GetOutputFilePreview(*objectPtr, true);
 		}
 	}
 }

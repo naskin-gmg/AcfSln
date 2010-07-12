@@ -415,10 +415,22 @@ void CHotfolderGuiComp::OnItemRemove()
 void CHotfolderGuiComp::OnItemCancel()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
-	for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-		int itemState = processingItems[itemIndex]->GetProcessingState();
-		if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
-			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		istd::CChangeNotifier changePtr(objectPtr);
+		bool fireChangeEvent = false;
+	
+		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
+			int itemState = processingItems[itemIndex]->GetProcessingState();
+			if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
+				processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+
+				fireChangeEvent = true;
+			}
+		}
+
+		if (!fireChangeEvent){
+			changePtr.Abort();
 		}
 	}
 
@@ -429,10 +441,23 @@ void CHotfolderGuiComp::OnItemCancel()
 void CHotfolderGuiComp::OnRestart()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
-	for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-		int itemState = processingItems[itemIndex]->GetProcessingState();
-		if (itemState != iproc::IProcessor::TS_WAIT){
-			processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
+	
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		istd::CChangeNotifier changePtr(objectPtr);
+		bool fireChangeEvent = false;
+
+		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
+			int itemState = processingItems[itemIndex]->GetProcessingState();
+			if (itemState != iproc::IProcessor::TS_WAIT){
+				processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
+				
+				fireChangeEvent = true;
+			}
+		}
+
+		if (!fireChangeEvent){
+			changePtr.Abort();
 		}
 	}
 
@@ -471,7 +496,6 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 
 					QIcon stateIcon = GetStateIcon(fileState);
 
-					itemPtr->setTextColor(0, Qt::black);
 					itemPtr->setIcon(0, stateIcon);
 				}
 			 }
@@ -496,17 +520,16 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 
 			istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
 			QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
-			layout->setContentsMargins(8, 8, 8, 8);
+			layout->setContentsMargins(4, 4, 4, 4);
 			
 			I_ASSERT(!m_processingItemPreviewCompPtr->IsGuiCreated());
 			if (!m_processingItemPreviewCompPtr->IsGuiCreated()){
 				m_processingItemPreviewCompPtr->CreateGui(widgetWrapperPtr.GetPtr());
 			}
 
-			processingItemPtr->setTextColor(0, Qt::transparent);
-			processingItemPtr->setIcon(0, QIcon());
-
 			FileList->setItemWidget(processingItemPtr, 0, widgetWrapperPtr.PopPtr());
+
+			processingItemPtr->setExpanded(true);
 		}
 	}
 	else{
@@ -596,7 +619,6 @@ void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcess
 
 	ProcessingItem* fileItemPtr = new ProcessingItem(m_parent);
 	fileItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-	fileItemPtr->setBackgroundColor(0, Qt::transparent);
 	fileItemPtr->setText(0, fileInfo.fileName());
 
 	BaseClass::addChild(fileItemPtr);

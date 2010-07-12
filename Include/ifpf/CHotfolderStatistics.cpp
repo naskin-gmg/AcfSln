@@ -73,69 +73,9 @@ int CHotfolderStatistics::GetAbortedCount(const istd::CString& directoryPath) co
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderStatistics::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CHotfolderStatistics::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	// save previous state of the current changing item:
-	ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
-	if (itemPtr != NULL && (updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
-		m_previousItemState = std::make_pair(itemPtr, itemPtr->GetProcessingState());
-	}
-}
-
-
-void CHotfolderStatistics::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
-	if (objectPtr == NULL){
-		return;
-	}
-
-	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0 || (updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0){
-		RebuildStatistics();
-	}
-
-	if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0){
-		istd::CChangeNotifier changePtr(this);
-
-		int lastItemIndex = objectPtr->GetProcessingItemsCount() - 1;
-		I_ASSERT(lastItemIndex >= 0);
-
-		ifpf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(lastItemIndex);
-		I_ASSERT(itemPtr != NULL);
-				
-		int itemState = itemPtr->GetProcessingState();
-		istd::CString directoryPath = GetDirectoryPath(*itemPtr);
-
-		++m_itemsCount[directoryPath];
-		UpdateStateMaps(itemState, directoryPath);
-	}
-
-	// increment new item state and decrement the old one:
-	ifpf::IHotfolderProcessingItem* itemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
-	if (itemPtr != NULL && (updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
-		istd::CChangeNotifier changePtr(this);
-
-		int itemState = itemPtr->GetProcessingState();
-		istd::CString directoryPath = GetDirectoryPath(*itemPtr);
-
-		UpdateStateMaps(itemState, directoryPath);
-
-		if (m_previousItemState.first == itemPtr){
-			switch (m_previousItemState.second){
-				case iproc::IProcessor::TS_OK:
-					--m_successCount[directoryPath];
-					break;
-				case iproc::IProcessor::TS_INVALID:
-					--m_errorsCount[directoryPath];
-					break;
-				case iproc::IProcessor::TS_CANCELED:
-					--m_abortedCount[directoryPath];
-					break;
-			}
-		}
-
-		m_previousItemState = std::make_pair((ifpf::IHotfolderProcessingItem*)NULL, -1);
-	}
+	RebuildStatistics();
 }
 
 
@@ -200,7 +140,6 @@ void CHotfolderStatistics::RebuildStatistics()
 
 void CHotfolderStatistics::UpdateStateMaps(int itemState, const istd::CString& directoryPath)
 {
-
 	switch (itemState){
 		case iproc::IProcessor::TS_OK:
 			++m_successCount[directoryPath];

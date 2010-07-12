@@ -65,8 +65,13 @@ void CProcessingItemPreviewGuiComp::UpdateEditor(int /*updateFlags*/)
 			outputFileSize = outputFileInfo.size() / double(1 << 10);
 		}
 		
-		InputFileNameLabel->setText(inputFile);
-		OutputFileNameLabel->setText(outputFile);
+		QString inputFileNameLink = inputFileInfo.exists() ? QString("<a href=\"%1\">%2</a>").arg(inputFile).arg(inputFileInfo.completeBaseName()) : inputFileInfo.completeBaseName();
+		InputFileNameLabel->setText(inputFileNameLink);
+		InputFileNameLabel->setToolTip(inputFile);
+
+		QString outputFileNameLink = outputFileInfo.exists() ? QString("<a href=\"%1\">%2</a>").arg(outputFile).arg(outputFileInfo.completeBaseName()) : outputFileInfo.completeBaseName();
+		OutputFileNameLabel->setText(outputFileNameLink);
+		OutputFileNameLabel->setToolTip(outputFile);
 
 		InputFileSizeLabel->setText(QString("%1 KBytes").arg(inputFileSize, 1, 'f', 1));
 		OutputFileSizeLabel->setText(QString("%1 KBytes").arg(outputFileSize, 1, 'f', 1));

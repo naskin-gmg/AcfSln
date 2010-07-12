@@ -32,13 +32,7 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTreeView
-{
-	selection-color: palette(base); 
-	selection-background-color: palette(base); 
-}
-
-QTreeView::item
+      <string notr="true">QTreeView::item
 {
 	min-height: 22px;
 	border-radius: 4px;
@@ -79,24 +73,22 @@ QTreeView::item:has-children
 */
 QTreeView::item:selected:!has-children
 {
-	margin-top: 4px;
-	margin-bottom: 4px;
-   	background: rgba(165, 201, 239, 255);
-   	border: 1px solid black;
- 	color: transparent;
+   	background: rgb(230, 240, 255);
+   	border: 1px solid palette(mid);
+	margin-top: 2px;
+ 	color: black;
  }
 
-/**
-	Selected root item must have black pen for text drawing
+/*
+	Selected directory item
 */
 QTreeView::item:selected:has-children
 {
-	color: black;
+ 	color: black;
  }
 
-
 /**
-	hide branch
+	Hide branch
 */
 QTreeView::branch
 {

@@ -39,7 +39,6 @@ public:
 	virtual int GetAbortedCount(const istd::CString& directoryPath = istd::CString()) const;
 
 	// reimplemented (imod::TSingleModelObserverBase)
-	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// reimplemented (imod::IObserver)
@@ -60,10 +59,6 @@ private:
 	CounterMap m_successCount;
 	CounterMap m_errorsCount;
 	CounterMap m_abortedCount;
-
-	typedef std::pair<ifpf::IHotfolderProcessingItem*, int> ProcessingItemState;
-
-	ProcessingItemState m_previousItemState;
 };
 
 

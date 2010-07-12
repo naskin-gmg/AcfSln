@@ -41,6 +41,8 @@ void CDirectoryItemGuiComp::UpdateProgressBar(const ifpf::IHotfolderStatistics& 
 	int errorCount = statistics.GetErrorsCount(iqt::GetCString(m_directoryPath));
 	int abortedCount = statistics.GetAbortedCount(iqt::GetCString(m_directoryPath));
 
+	I_ASSERT(itemsCount >= (successCount + errorCount + abortedCount));
+
 	double successed = itemsCount == 0 ? 0 : successCount / double(itemsCount);
 	double errors = itemsCount == 0 ? 0 : errorCount / double(itemsCount);
 	double aborted = itemsCount == 0 ? 0 : abortedCount / double(itemsCount);

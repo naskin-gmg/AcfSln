@@ -29,13 +29,13 @@ namespace iqtfpf
 
 class CProcessingItemPreviewGeneratorComp:
 			public icomp::CComponentBase,
-			public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo>,
+			public imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem>,
 			virtual public ifpf::IProcessingItemPreviewProvider,
 			virtual public iser::ISerializable
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-	typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingInfo> BaseClass2;
+	typedef imod::TSingleModelObserverBase<ifpf::IHotfolderProcessingItem> BaseClass2;
 
 	I_BEGIN_COMPONENT(CProcessingItemPreviewGeneratorComp)
 		I_REGISTER_INTERFACE(imod::IObserver);
