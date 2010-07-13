@@ -3,7 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "ibase/CFileSystem.h"
+#include "istd/CStaticServicesProvider.h"
 
 
 // AcfSln includes
@@ -100,9 +100,14 @@ istd::CString CHotfolderLoaderComp::GetTypeDescription(const istd::CString* exte
 
 istd::CString CHotfolderLoaderComp::GetStaticParamsPath(const istd::CString& objectPath) const
 {
-	ibase::CFileSystem fileSystem;
+	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
+	I_ASSERT(fileSystemPtr != NULL);
 
-	return (fileSystem.GetDirPath(objectPath) + "/" + fileSystem.GetBaseFileName(objectPath) + ".dms");
+	if (fileSystemPtr == NULL){
+		return istd::CString();
+	}
+
+	return (fileSystemPtr->GetDirPath(objectPath) + "/" + fileSystemPtr->GetBaseFileName(objectPath) + ".dms");
 }
 
 

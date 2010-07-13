@@ -4,8 +4,7 @@
 #include "istd/TSingleFactory.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "ibase/CFileSystem.h"
-
+#include "iwin/CFileSystem.h"
 #include "iwin/CTimer.h"
 #include "iwin/CApplicationEnvironment.h"
 #include "iwin/CCriticalSection.h"
@@ -25,7 +24,7 @@ void CDefaultServicesProvider::RegisterServices()
 	static iwin::CCriticalSection criticalSection;
 	istd::CStaticServicesProvider::RegisterService<isys::ICriticalSection>(&criticalSection);
 
-	static ibase::CFileSystem fileSystem;
+	static iwin::CFileSystem fileSystem;
 	istd::CStaticServicesProvider::RegisterService<isys::IFileSystem>(&fileSystem);
 
 	static iwin::CSystemEnvironment systemEnvironment;

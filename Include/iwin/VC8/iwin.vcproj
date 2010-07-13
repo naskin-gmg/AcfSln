@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileSystem.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSystemEnvironment.cpp"
 				>
 			</File>
@@ -224,6 +228,10 @@
 			</File>
 			<File
 				RelativePath="..\CDllFunctionsProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileSystem.h"
 				>
 			</File>
 			<File
