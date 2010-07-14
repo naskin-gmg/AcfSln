@@ -21,7 +21,7 @@ namespace iwin
 	
 bool CFileSystem::IsPresent(const istd::CString& filePath) const
 {
-	return (_waccess(filePath.c_str(), 0) != 0);
+	return (_waccess(filePath.c_str(), 0) == 0);
 }
 
 
