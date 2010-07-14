@@ -2,6 +2,10 @@
 #define iqtfpf_CProcessingItemPreviewGeneratorComp_included
 
 
+// Qt includes
+#include <QDateTime>
+
+
 // ACF includes
 #include "istd/TSmartPtr.h"
 
@@ -56,18 +60,34 @@ public:
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
 private:
 	typedef imod::TModelWrap<iqt::CBitmap> BitmapImpl;
 	typedef istd::TSmartPtr<BitmapImpl> BitmapPtr;
-	typedef std::map<std::string, BitmapPtr> PreviewMap;
 
+	struct PreviewInfo
+	{
+		/**
+			Generated preview bitmap.
+		*/
+		BitmapPtr bitmapPtr;
+
+		/**
+			File time stamp at the moment of the preview generation.
+		*/
+		QDateTime fileTimeStamp;
+	};
+
+	typedef std::map<std::string, PreviewInfo> PreviewMap;
+
+private:
 	const iimg::IBitmap* GetFilePreview(
 				const std::string& processingItemUuid,
 				const istd::CString& filePath,
 				iproc::IProcessor& bitmapAcquisition,
 				PreviewMap& previewMap,
 				bool ensureCreated = false) const;
+
+	void ResetOutputPreview(const ifpf::IHotfolderProcessingItem& processingItem);
 
 private:
 	I_REF(iproc::IBitmapAcquisition, m_inputFilePreviewGeneratorCompPtr);

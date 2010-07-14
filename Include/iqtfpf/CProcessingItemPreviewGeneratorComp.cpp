@@ -1,8 +1,13 @@
 #include "iqtfpf/CProcessingItemPreviewGeneratorComp.h"
 
 
+// Qt includes
+#include <QFileInfo>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/CCrcCalculator.h"
 
 
 namespace iqtfpf
@@ -69,7 +74,17 @@ void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolym
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (m_outputFilePreviewGeneratorCompPtr.IsValid() && objectPtr != NULL){
 		if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
-			GetOutputFilePreview(*objectPtr, true);
+
+			switch (objectPtr->GetProcessingState()){
+				case iproc::IProcessor::TS_OK:
+					GetOutputFilePreview(*objectPtr, true);
+					break;
+
+				case iproc::IProcessor::TS_NONE:
+				case iproc::IProcessor::TS_INVALID:
+					ResetOutputPreview(*objectPtr);
+					break;
+			}
 		}
 	}
 }
@@ -87,24 +102,46 @@ const iimg::IBitmap* CProcessingItemPreviewGeneratorComp::GetFilePreview(
 		return NULL;
 	}
 
-	BitmapPtr bitmapPtr(new BitmapImpl);
 	PreviewMap::iterator findIter = previewMap.find(processingItemUuid);
-	if (findIter == previewMap.end()){
+
+	QFileInfo fileInfo(iqt::GetQString(filePath));
+
+	QDateTime fileTimeStamp = fileInfo.lastModified();
+
+	bool foundInCache = (findIter != previewMap.end());
+	if (foundInCache){
+		foundInCache = (findIter->second.fileTimeStamp == fileTimeStamp);
+	}
+
+	if (!foundInCache && !ensureCreated){
+		BitmapPtr bitmapPtr(new BitmapImpl);
 		m_fileNameCompPtr->SetPath(filePath);
 
 		bitmapAcquisition.DoProcessing(NULL, m_fileNameCompPtr.GetPtr(), bitmapPtr.GetPtr());
 
-		previewMap[processingItemUuid] = bitmapPtr;
+		previewMap[processingItemUuid].bitmapPtr = bitmapPtr;
+		previewMap[processingItemUuid].fileTimeStamp = fileTimeStamp;
 
-		return bitmapPtr.GetPtr();
+		return previewMap[processingItemUuid].bitmapPtr.GetPtr();
 	}
 	else if (ensureCreated){
 		m_fileNameCompPtr->SetPath(filePath);
 
-		bitmapAcquisition.DoProcessing(NULL, m_fileNameCompPtr.GetPtr(), findIter->second.GetPtr());
+		bitmapAcquisition.DoProcessing(NULL, m_fileNameCompPtr.GetPtr(), findIter->second.bitmapPtr.GetPtr());
+	
+		findIter->second.fileTimeStamp = fileTimeStamp;
 	}
 
-	return findIter->second.GetPtr();
+	return findIter->second.bitmapPtr.GetPtr();
+}
+
+
+void CProcessingItemPreviewGeneratorComp::ResetOutputPreview(const ifpf::IHotfolderProcessingItem& processingItem)
+{
+	PreviewMap::iterator findIter = m_outputFilePreviewMap.find(processingItem.GetItemUuid());
+	if (findIter != m_outputFilePreviewMap.end()){
+		findIter->second.bitmapPtr->ResetImage();
+	}
 }
 
 

@@ -28,7 +28,7 @@ CHotfolder::CHotfolder()
 }
 
 
-bool CHotfolder::ItemExists(const istd::CString& inputFilePath, const istd::CString& outputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
+bool CHotfolder::ItemExists(const istd::CString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
 {
 	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
 
@@ -36,7 +36,7 @@ bool CHotfolder::ItemExists(const istd::CString& inputFilePath, const istd::CStr
 		ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
 		I_ASSERT(itemPtr != NULL);
 
-		if (itemPtr->GetInputFile() == inputFilePath && itemPtr->GetOutputFile() == outputFilePath){
+		if (itemPtr->GetInputFile() == inputFilePath){
 			if (foundItemPtr != NULL){
 				*foundItemPtr = itemPtr;
 			}
@@ -51,7 +51,7 @@ bool CHotfolder::ItemExists(const istd::CString& inputFilePath, const istd::CStr
 
 bool CHotfolder::ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const
 {
-	return ItemExists(processingItem.GetInputFile(), processingItem.GetOutputFile());
+	return ItemExists(processingItem.GetInputFile());
 }
 
 
@@ -60,7 +60,7 @@ bool CHotfolder::ItemExists(const ifpf::IHotfolderProcessingItem& processingItem
 const ifpf::IHotfolderProcessingItem* CHotfolder::AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath)
 {
 	ifpf::IHotfolderProcessingItem* foundItemPtr = NULL;
-	if (ItemExists(inputFilePath, outputFilePath, &foundItemPtr)){
+	if (ItemExists(inputFilePath, &foundItemPtr)){
 		return foundItemPtr;
 	}
 

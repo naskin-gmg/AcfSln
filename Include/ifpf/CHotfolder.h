@@ -39,7 +39,7 @@ public:
 		Return \c true if the item for the given input and output path already exists.
 		If foundItemPtr not equals \c NULL and an item was found, \c foundItemPtr will be set to the found item.
 	*/
-	virtual bool ItemExists(const istd::CString& inputFilePath, const istd::CString& outputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr = NULL) const;
+	virtual bool ItemExists(const istd::CString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr = NULL) const;
 	virtual bool ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const;
 
 	// reimplemented (ifpf::IHotfolderProcessingInfo)

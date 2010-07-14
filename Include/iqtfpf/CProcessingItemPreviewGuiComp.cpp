@@ -136,8 +136,6 @@ void CProcessingItemPreviewGuiComp::OnGuiModelDetached()
 
 void CProcessingItemPreviewGuiComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
 	if (m_inputPreviewObserverCompPtr.IsValid() && m_inputPreviewGuiCompPtr.IsValid()){
 		m_inputPreviewGuiCompPtr->CreateGui(InputPreviewFrame);
 	}
@@ -145,6 +143,8 @@ void CProcessingItemPreviewGuiComp::OnGuiCreated()
 	if (m_outputPreviewObserverCompPtr.IsValid() && m_outputPreviewGuiCompPtr.IsValid()){
 		m_outputPreviewGuiCompPtr->CreateGui(OutputPreviewFrame);
 	}
+
+	BaseClass::OnGuiCreated();
 }
 
 
