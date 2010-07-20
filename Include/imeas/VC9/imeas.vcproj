@@ -207,15 +207,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDataSequence.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IDiscrDataSequence.h"
 				>
 			</File>
 			<File
 				RelativePath="..\imeas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDataSequence.h"
 				>
 			</File>
 			<File

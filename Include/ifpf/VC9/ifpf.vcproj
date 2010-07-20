@@ -225,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileNamingParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileProcessingComp.cpp"
 				>
 			</File>
@@ -245,11 +249,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderWorkflowComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CMonitoringSessionsMap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualHotfolderWorkflowComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualHotfolderWorkflowItem.cpp"
 				>
 			</File>
 		</Filter>
@@ -263,6 +283,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNamingParamsComp.h"
 				>
 			</File>
 			<File
@@ -286,11 +310,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderWorkflowComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderWorkflowItem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CMonitoringSession.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CMonitoringSessionsMap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualHotfolderWorkflowComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualHotfolderWorkflowItem.h"
 				>
 			</File>
 			<File
@@ -306,7 +346,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFileNamingStrategy.h"
+				RelativePath="..\IFileNamingParams.h"
 				>
 			</File>
 			<File
@@ -314,11 +354,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IHotfolder.h"
+				RelativePath="..\IHotfolderInfoManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IHotfolderParams.h"
+				RelativePath="..\IHotfolderProcessingInfo.h"
 				>
 			</File>
 			<File
@@ -334,11 +374,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IHotfolderWorkflowItem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IMonitoringSession.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IMonitoringSessionManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IProcessingItemPreviewProvider.h"
 				>
 			</File>
 		</Filter>
