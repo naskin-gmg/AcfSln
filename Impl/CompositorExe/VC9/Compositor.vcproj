@@ -25,7 +25,7 @@
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -132,7 +132,7 @@
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
