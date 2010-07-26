@@ -5,6 +5,7 @@
 	Name="iwin"
 	ProjectGUID="{633B67F7-B154-4A80-A651-1111D5EDF583}"
 	RootNamespace="iwin"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -194,6 +195,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileSystem.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSystemEnvironment.cpp"
 				>
 			</File>
@@ -227,6 +232,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileSystem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSystemEnvironment.h"
 				>
 			</File>
@@ -251,4 +260,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
