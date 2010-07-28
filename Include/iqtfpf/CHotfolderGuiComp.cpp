@@ -180,8 +180,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 				this, 
 				SLOT(OnContextMenuRequested(const QPoint&)));
 
-	// create item filter:
-
+	// Create item filter:
 	m_filterEditor = new iqtgui::CExtLineEdit("<Filter>", 2, TextFilterFrame);
 	QLayout* layoutPtr = TextFilterFrame->layout();
 	if (layoutPtr != NULL){
@@ -190,12 +189,23 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	connect(m_filterEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnTextFilterChanged(const QString&)));
 
+	// Create preview GUI:
+	if (m_processingItemPreviewCompPtr.IsValid()){
+		I_ASSERT(!m_processingItemPreviewCompPtr->IsGuiCreated());
+
+		m_processingItemPreviewCompPtr->CreateGui(PreviewFrame);
+	}
+
 	BaseClass::OnGuiCreated();
 }
 
 
 void CHotfolderGuiComp::OnGuiDestroyed()
 {
+	if (m_processingItemPreviewCompPtr.IsValid()){
+		m_processingItemPreviewCompPtr->DestroyGui();
+	}
+
 	BaseClass::OnGuiDestroyed();
 }
 
@@ -481,55 +491,11 @@ void CHotfolderGuiComp::OnContextMenuRequested(const QPoint& menuPoint)
 
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
-	if (m_processingItemPreviewCompPtr.IsValid()){
-		m_processingItemPreviewCompPtr->DestroyGui();
-
-		QTreeWidgetItemIterator treeIterator(FileList);
-		 while (*treeIterator){
-			 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
-			 if (itemPtr != NULL){
-				FileList->setItemWidget(itemPtr, 0, NULL);
-
-				ifpf::IHotfolderProcessingItem* objectPtr = itemPtr->GetObjectPtr();
-				if (objectPtr != NULL){
-					int fileState = objectPtr->GetProcessingState();
-
-					QIcon stateIcon = GetStateIcon(fileState);
-
-					itemPtr->setIcon(0, stateIcon);
-				}
-			 }
-
-			 ++treeIterator;
-		 }
-	}
-
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	if (!processingItems.empty()){
 		imod::IModel* itemModelPtr = dynamic_cast<imod::IModel*>(processingItems[0]);
 		if (itemModelPtr != NULL){
 			BaseClass2::SetModelPtr(itemModelPtr);
-		}
-
-		QList<QTreeWidgetItem*> selectedItems = FileList->selectedItems();
-
-		if (m_processingItemPreviewCompPtr.IsValid() && selectedItems.count() == 1){
-			QTreeWidgetItem* processingItemPtr = selectedItems.at(0);
-
-			I_ASSERT(FileList->itemWidget(processingItemPtr, 0) == NULL);
-
-			istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
-			QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
-			layout->setContentsMargins(4, 4, 4, 4);
-			
-			I_ASSERT(!m_processingItemPreviewCompPtr->IsGuiCreated());
-			if (!m_processingItemPreviewCompPtr->IsGuiCreated()){
-				m_processingItemPreviewCompPtr->CreateGui(widgetWrapperPtr.GetPtr());
-			}
-
-			FileList->setItemWidget(processingItemPtr, 0, widgetWrapperPtr.PopPtr());
-
-			processingItemPtr->setExpanded(true);
 		}
 	}
 	else{
