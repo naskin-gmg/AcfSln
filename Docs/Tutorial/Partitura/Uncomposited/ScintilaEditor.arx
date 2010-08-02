@@ -212,7 +212,7 @@
         BasePck
       </PackageId>
       <ComponentId>
-        TextFileSerializer
+        TextFileLoader
       </ComponentId>
       <Data>
         <IsEnabled>
