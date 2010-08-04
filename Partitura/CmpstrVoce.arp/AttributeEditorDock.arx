@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1363
+          1536
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          232
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -249,9 +260,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Compositor attributes editor as docking window
   </Description>
   <Keywords>
-    
+    Compositor Attributes Editor Dock Main Window
   </Keywords>
 </Acf>
