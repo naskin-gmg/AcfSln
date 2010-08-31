@@ -5,6 +5,7 @@
 	Name="imeas"
 	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
 	SccLocalPath="..\iwin"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -186,6 +187,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplesInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.cpp"
 				>
 			</File>
@@ -203,11 +208,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplesInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IDataSequence.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataSequenceInfo.h"
 				>
 			</File>
 			<File
@@ -227,4 +240,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

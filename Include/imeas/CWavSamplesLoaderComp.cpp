@@ -8,6 +8,7 @@
 #include "istd/CRange.h"
 
 #include "imeas/IDataSequence.h"
+#include "imeas/CSamplesInfo.h"
 
 
 namespace imeas
@@ -94,10 +95,15 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 		int samplesCount = sequencePtr->GetSamplesCount();
 		int channelsCount = sequencePtr->GetChannelsCount();
 
-		const istd::CRange& timeRange = sequencePtr->GetLogicalSamplesRange();
-		double samplingPeriod = (timeRange.IsValid())?
-					samplesCount / timeRange.GetLength():
-					44000;
+		double samplingPeriod = 44000;
+
+		const CSamplesInfo* infoPtr = dynamic_cast<const CSamplesInfo*>(sequencePtr->GetSequenceInfo());
+		if (infoPtr != NULL){
+			const istd::CRange& timeRange = infoPtr->GetLogicalSamplesRange();
+			if (timeRange.IsValid()){
+				samplingPeriod = samplesCount / timeRange.GetLength();
+			}
+		}
 
 		WavHeader header;
 		memcpy(header.code, "RIFF", 4);

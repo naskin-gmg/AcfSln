@@ -8,6 +8,8 @@
 #include "istd/TChangeNotifier.h"
 #include "iprm/IFileNameParam.h"
 
+#include "imeas/CSamplesInfo.h"
+
 
 namespace ilibav
 {
@@ -216,7 +218,9 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 						int samplesCount = int(*m_autoAudioGrabLengthAttrPtr * m_audioCodecContextPtr->sample_rate);
 						int channelsCount = m_audioCodecContextPtr->channels;
 						m_audioSequenceCompPtr->CreateSequence(samplesCount, channelsCount);
-						m_audioSequenceCompPtr->SetLogicalSamplesRange(istd::CRange(0, double(samplesCount) / m_audioCodecContextPtr->sample_rate));
+
+						istd::CRange resultProportionRange(0, double(samplesCount) / m_audioCodecContextPtr->sample_rate);
+						m_audioSequenceCompPtr->SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
 					}
 				}
 			}

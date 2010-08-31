@@ -1,0 +1,73 @@
+#include "imeas/CSamplesInfo.h"
+
+
+// ACF includes
+#include "iser/IArchive.h"
+#include "iser/CArchiveTag.h"
+
+
+namespace imeas
+{
+
+
+CSamplesInfo::CSamplesInfo(const istd::CRange& logicalSamplesRange)
+:	m_logicalSamplesRange(logicalSamplesRange)
+{
+}
+
+
+const istd::CRange& CSamplesInfo::GetLogicalSamplesRange() const
+{
+	return m_logicalSamplesRange;
+}
+
+
+void CSamplesInfo::SetLogicalSamplesRange(const istd::CRange& range)
+{
+	m_logicalSamplesRange = range;
+}
+
+
+// reimplemented (imeas::IDataSequenceInfo)
+
+int CSamplesInfo::GetWeightMode() const
+{
+	return WM_NONE;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CSamplesInfo::Serialize(iser::IArchive& archive)
+{
+	bool retVal = true;
+
+	static iser::CArchiveTag logicalRangeTag("LogicalSamplesRange", "Logical range of samples axis, e.g. sampled time span");
+	retVal = retVal && archive.BeginTag(logicalRangeTag);
+	if (archive.IsStoring()){
+		double minValue = m_logicalSamplesRange.GetMinValue();
+		double maxValue = m_logicalSamplesRange.GetMaxValue();
+		retVal = retVal && archive.Process(minValue);
+		retVal = retVal && archive.Process(maxValue);
+	}
+	else{
+		double minValue = 0;
+		double maxValue = 0;
+		retVal = retVal && archive.Process(minValue);
+		retVal = retVal && archive.Process(maxValue);
+		if (!retVal){
+			return false;
+		}
+
+		m_logicalSamplesRange.SetMinValue(minValue);
+		m_logicalSamplesRange.SetMaxValue(maxValue);
+	}
+	retVal = retVal && archive.EndTag(logicalRangeTag);
+
+	return retVal;
+}
+
+
+} // namespace imeas
+
+

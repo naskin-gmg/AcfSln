@@ -2,9 +2,9 @@
 #define imeas_TDiscrDataSequence_included
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TOptDelPtr.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -36,14 +36,14 @@ public:
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual const IDataSequenceInfo* GetSequenceInfo() const;
+	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
-	const istd::CRange& GetLogicalSamplesRange() const;
-	void SetLogicalSamplesRange(const istd::CRange& range);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -60,7 +60,7 @@ private:
 	int m_sampleDiff;
 	int m_channelDiff;
 
-	istd::CRange m_logicalSamplesRange;
+	istd::TOptDelPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
 };
 
 
@@ -72,8 +72,7 @@ TDiscrDataSequence<Element>::TDiscrDataSequence()
 	m_samplesCount(0),
 	m_channelsCount(0),
 	m_sampleDiff(0),
-	m_channelDiff(0),
-	m_logicalSamplesRange(istd::CRange::GetInvalid())
+	m_channelDiff(0)
 {
 }
 
@@ -159,6 +158,22 @@ bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsC
 
 
 template <typename Element>
+const IDataSequenceInfo* TDiscrDataSequence<Element>::GetSequenceInfo() const
+{
+	return m_sequenceInfoPtr.GetPtr();
+}
+
+
+template <typename Element>
+bool TDiscrDataSequence<Element>::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag)
+{
+	m_sequenceInfoPtr.SetPtr(infoPtr, releaseFlag);
+
+	return true;
+}
+
+
+template <typename Element>
 bool TDiscrDataSequence<Element>::IsEmpty() const
 {
 	return m_samplesCount <= 0;
@@ -203,20 +218,6 @@ void TDiscrDataSequence<Element>::SetSample(int index, int channel, double value
 	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
 	element = Element(value * ::pow(2.0, double(sizeof(element) * 8)) - I_BIG_EPSILON);
-}
-
-
-template <typename Element>
-const istd::CRange& TDiscrDataSequence<Element>::GetLogicalSamplesRange() const
-{
-	return m_logicalSamplesRange;
-}
-
-
-template <typename Element>
-void TDiscrDataSequence<Element>::SetLogicalSamplesRange(const istd::CRange& range)
-{
-	m_logicalSamplesRange = range;
 }
 
 

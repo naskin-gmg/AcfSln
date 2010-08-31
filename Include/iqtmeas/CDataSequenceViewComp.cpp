@@ -7,6 +7,8 @@
 // ACF includes
 #include "iqt/CSignalBlocker.h"
 
+#include "imeas/CSamplesInfo.h"
+
 
 namespace iqtmeas
 {
@@ -151,10 +153,14 @@ void CDataSequenceViewComp::on_ZoomOutButton_clicked()
 		return;
 	}
 
-	const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
-	double maxTimeSpan = (logicalRange.IsValid())?
-				logicalRange.GetLength():
-				samplesPtr->GetSamplesCount();
+	double maxTimeSpan = samplesPtr->GetSamplesCount();
+	const imeas::CSamplesInfo* infoPtr = dynamic_cast<const imeas::CSamplesInfo*>(samplesPtr->GetSequenceInfo());
+	if (infoPtr != NULL){
+		const istd::CRange& logicalRange = infoPtr->GetLogicalSamplesRange();
+		if (logicalRange.IsValid()){
+			maxTimeSpan = logicalRange.GetLength();
+		}
+	}
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -199,10 +205,14 @@ void CDataSequenceViewComp::on_NextButton_clicked()
 		return;
 	}
 
-	const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
-	double maxTimeSpan = (logicalRange.IsValid())?
-				logicalRange.GetLength():
-				samplesPtr->GetSamplesCount();
+	double maxTimeSpan = samplesPtr->GetSamplesCount();
+	const imeas::CSamplesInfo* infoPtr = dynamic_cast<const imeas::CSamplesInfo*>(samplesPtr->GetSequenceInfo());
+	if (infoPtr != NULL){
+		const istd::CRange& logicalRange = infoPtr->GetLogicalSamplesRange();
+		if (logicalRange.IsValid()){
+			maxTimeSpan = logicalRange.GetLength();
+		}
+	}
 
 	iqt::CSignalBlocker blocker1(TimeBeginSB);
 	iqt::CSignalBlocker blocker2(TimeEndSB);
@@ -243,10 +253,14 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 	if (samplesPtr != NULL){
 		int samplesCount = samplesPtr->GetSamplesCount();
 
-		const istd::CRange& logicalRange = samplesPtr->GetLogicalSamplesRange();
-		double maxTimeSpan = (logicalRange.IsValid())?
-					logicalRange.GetLength():
-					samplesPtr->GetSamplesCount();
+		double maxTimeSpan = samplesPtr->GetSamplesCount();
+		const imeas::CSamplesInfo* infoPtr = dynamic_cast<const imeas::CSamplesInfo*>(samplesPtr->GetSequenceInfo());
+		if (infoPtr != NULL){
+			const istd::CRange& logicalRange = infoPtr->GetLogicalSamplesRange();
+			if (logicalRange.IsValid()){
+				maxTimeSpan = logicalRange.GetLength();
+			}
+		}
 
 		if ((samplesCount <= 0) || (maxTimeSpan < I_BIG_EPSILON)){
 			return;

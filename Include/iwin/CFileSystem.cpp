@@ -27,7 +27,7 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 
 bool CFileSystem::CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
 {
-	return ::CopyFileW(inputFile.c_str(), outputFile.c_str(), !overwriteExisting);
+	return ::CopyFileW(inputFile.c_str(), outputFile.c_str(), overwriteExisting? FALSE: TRUE) == TRUE;
 }
 
 

@@ -4,6 +4,7 @@
 
 // ACF includes
 #include "istd/TSmartPtr.h"
+#include "istd/TOptDelPtr.h"
 #include "imath/TISampledFunction.h"
 
 #include "imeas/IDataSequence.h"
@@ -29,14 +30,14 @@ public:
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual const IDataSequenceInfo* GetSequenceInfo() const;
+	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
 	virtual int GetChannelsCount() const;
 	virtual double GetSample(int index, int channel = 0) const;
 	virtual void SetSample(int index, int channel, double value);
-	const istd::CRange& GetLogicalSamplesRange() const;
-	void SetLogicalSamplesRange(const istd::CRange& range);
 
 	// reimplemented (imath::ISampledFunction2d)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes);
@@ -63,7 +64,7 @@ private:
 
 	int m_channelsCount;
 
-	istd::CRange m_logicalSamplesRange;
+	istd::TOptDelPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
 };
 
 

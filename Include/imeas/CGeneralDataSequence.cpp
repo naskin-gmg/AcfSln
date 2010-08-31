@@ -1,11 +1,13 @@
 #include "imeas/CGeneralDataSequence.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TDelPtr.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+
+#include "imeas/CSamplesInfo.h"
 
 
 namespace imeas
@@ -13,8 +15,7 @@ namespace imeas
 
 
 CGeneralDataSequence::CGeneralDataSequence()
-:	m_channelsCount(0),
-	m_logicalSamplesRange(istd::CRange::GetInvalid())
+:	m_channelsCount(0)
 {
 }
 
@@ -30,6 +31,20 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 	m_channelsCount = channelsCount;
 
 	m_samples.resize(samplesCount * m_channelsCount, 0.0);
+
+	return true;
+}
+
+
+const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
+{
+	return m_sequenceInfoPtr.GetPtr();
+}
+
+
+bool CGeneralDataSequence::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag)
+{
+	m_sequenceInfoPtr.SetPtr(infoPtr, releaseFlag);
 
 	return true;
 }
@@ -84,18 +99,6 @@ void CGeneralDataSequence::SetSample(int index, int channel, double value)
 }
 
 
-const istd::CRange& CGeneralDataSequence::GetLogicalSamplesRange() const
-{
-	return m_logicalSamplesRange;
-}
-
-
-void CGeneralDataSequence::SetLogicalSamplesRange(const istd::CRange& range)
-{
-	m_logicalSamplesRange = range;
-}
-
-
 // reimplemented (imath::ISampledFunction2d)
 
 bool CGeneralDataSequence::CreateFunction(double* dataPtr, const ArgumentType& sizes)
@@ -138,7 +141,13 @@ int CGeneralDataSequence::GetGridSize(int dimensionIndex) const
 istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 {
 	if (dimensionIndex == 0){
-		return m_logicalSamplesRange;
+		const CSamplesInfo* infoPtr = m_sequenceInfoPtr.Cast<const CSamplesInfo*>();
+		if (infoPtr != NULL){
+			return infoPtr->GetLogicalSamplesRange();
+		}
+		else{
+			return istd::CRange(0, GetSamplesCount());
+		}
 	}
 	else if (dimensionIndex == 1){
 		return istd::CRange(0, 1);
