@@ -186,6 +186,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplesInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.cpp"
 				>
 			</File>
@@ -203,11 +207,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSamplesInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IDataSequence.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataSequenceInfo.h"
 				>
 			</File>
 			<File
@@ -227,5 +239,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
