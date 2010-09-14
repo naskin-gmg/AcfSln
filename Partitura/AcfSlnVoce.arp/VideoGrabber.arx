@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1398
+          1543
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          237
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -304,6 +315,6 @@
     Allow to grab single image from video
   </Description>
   <Keywords>
-    Video CAmera Grabber Bitmap Acquisition MPEG AVI
+    Video Camera Grabber Bitmap Acquisition MPEG AVI
   </Keywords>
 </Acf>
