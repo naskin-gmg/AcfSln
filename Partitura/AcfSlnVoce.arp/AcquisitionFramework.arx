@@ -18,13 +18,13 @@
   <ElementsList count="9">
     <Element>
       <Id>
-        AcquisitionProcessorGui
+        ProcessorControlGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        AcquisitionProcessorGui
+        ProcessorControlGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -100,7 +100,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessingData
+              OutputData
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -119,7 +119,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessingDataAcquisition
+              Processor
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -135,7 +135,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessingDataLoader
+              OutputDataLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -449,7 +449,7 @@
                 true
               </IsEnabled>
               <Value>
-                AcquisitionProcessorGui
+                ProcessorControlGui
               </Value>
             </Data>
           </AttributeInfo>
