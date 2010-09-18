@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1490
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          192
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,24 +26,13 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        700
-      </X>
-      <X>
-        475
-      </X>
-    </Element>
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         FilePersistence
       </ComponentName>
       <X>
-        700
+        600
       </X>
       <X>
         300
@@ -51,13 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        HotfolderLoader
+        XmlFileSerializer
       </ComponentName>
       <X>
-        350
+        600
       </X>
       <X>
-        475
+        425
       </X>
     </Element>
   </PositionMap>

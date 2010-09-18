@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1484
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          189
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -99,7 +99,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="3">
                 <Value>
                   InputDirectories
                 </Value>
@@ -108,9 +108,6 @@
                 </Value>
                 <Value>
                   DirectoryMonitorParams
-                </Value>
-                <Value>
-                  ProcessingParams
                 </Value>
               </Values>
             </Data>
@@ -253,91 +250,6 @@
               <Value>
                 &lt;Enter the path of the hotfolder's output directory&gt;
               </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ProcessingParams
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSetGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              DesignType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              ProcessingParamsUiType
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Editors
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              ProcessingEditors
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Ids
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ProcessingParamIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Names
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ProcessingParamNames
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

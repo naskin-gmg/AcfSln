@@ -3,10 +3,12 @@
 
 
 // ACF includes
-#include "ibase/IFileConvertCopy.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "isys/ICriticalSection.h"
 
 #include "iser/IFileLoader.h"
+
+#include "ibase/IFileConvertCopy.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iproc/IProgressManager.h"
 #include "iproc/IProcessor.h"
@@ -51,6 +53,8 @@ private:
 	I_REF(istd::IChangeable, m_inputDataCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+
+	istd::TSmartPtr<isys::ICriticalSection> m_lock;
 
 	int m_progressSessionId;
 };

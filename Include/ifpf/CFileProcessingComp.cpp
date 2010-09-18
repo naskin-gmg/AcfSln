@@ -1,5 +1,9 @@
 #include "ifpf/CFileProcessingComp.h"
 
+#include "istd/CStaticServicesProvider.h"
+
+#include "isys/CSectionBlocker.h"
+
 
 namespace ifpf
 {
@@ -10,6 +14,7 @@ namespace ifpf
 CFileProcessingComp::CFileProcessingComp()
 	:m_progressSessionId(0)
 {
+	m_lock = istd::CreateService<isys::ICriticalSection>();
 }
 
 
@@ -20,6 +25,8 @@ bool CFileProcessingComp::CopyFile(
 			const istd::CString& outputFilePath,
 			const iprm::IParamsSet* paramsSetPtr) const
 {
+	isys::CSectionBlocker blocker(m_lock.GetPtr());
+
 	if (!m_inputFileLoaderCompPtr.IsValid()){
 		SendErrorMessage(0, "No file loader defined", "File processing component");
 

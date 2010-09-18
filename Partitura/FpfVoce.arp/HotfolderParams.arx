@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1501
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          206
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="6">
     <Element>
       <Id>
         DirectoryMonitorParams
@@ -154,7 +154,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="6">
+              <Values count="5">
                 <Value>
                   InputDirectories
                 </Value>
@@ -166,9 +166,6 @@
                 </Value>
                 <Value>
                   HotfolderId
-                </Value>
-                <Value>
-                  ProcessingParams
                 </Value>
                 <Value>
                   FileNamingParams
@@ -204,10 +201,10 @@
                   HotfolderId
                 </Value>
                 <Value>
-                  ProcessingParams
+                  FileNamingParams
                 </Value>
                 <Value>
-                  FileNamingParams
+                  
                 </Value>
               </Values>
             </Data>
@@ -297,59 +294,6 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        ProcessingParams
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ComposedParamsSet
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Parameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              ProcessingParameters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParametersId
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ProcessingParameterIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <ExportedInterfaces count="4">
     <Interface>
@@ -385,7 +329,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="3">
     <Component>
       <ExportedId>
         FileNamingParams
@@ -408,14 +352,6 @@
       </ExportedId>
       <ComponentId>
         OutputDirectory
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        ProcessingParams
-      </ExportedId>
-      <ComponentId>
-        ProcessingParams
       </ComponentId>
     </Component>
   </ExportedComponents>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1501
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          206
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         DirectoryMonitorParams
@@ -54,7 +54,7 @@
         HotfolderId
       </ComponentName>
       <X>
-        575
+        925
       </X>
       <X>
         625
@@ -91,17 +91,6 @@
       </X>
       <X>
         425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ProcessingParams
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        625
       </X>
     </Element>
   </PositionMap>

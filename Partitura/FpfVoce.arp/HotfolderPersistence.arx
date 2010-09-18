@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1490
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          192
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,49 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
-    <Element>
-      <Id>
-        FileDialogLoader
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        FileDialogLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Loaders
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  HotfolderLoader
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="2">
     <Element>
       <Id>
         FilePersistence
@@ -86,7 +44,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               FileLoader
@@ -102,7 +60,26 @@
                 true
               </IsEnabled>
               <Value>
-                FileDialogLoader
+                XmlFileSerializer
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FilePath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder.xml
               </Value>
             </Data>
           </AttributeInfo>
@@ -165,13 +142,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderLoader
+        XmlFileSerializer
       </Id>
       <PackageId>
-        FpfPck
+        BasePck
       </PackageId>
       <ComponentId>
-        HotfolderLoader
+        XmlFileSerializer
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -180,39 +157,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

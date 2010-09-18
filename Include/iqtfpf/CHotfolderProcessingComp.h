@@ -5,8 +5,6 @@
 // Qt includes
 #include <QThread>
 #include <QTimer>
-#include <QtConcurrentRun>
-#include <QFutureWatcher>
 #include <QList>
 
 
@@ -54,7 +52,7 @@ public:
 		I_ASSIGN(m_hotfolderProcessingModelCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
 		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
 		I_ASSIGN(m_hotfolderParamsModelCompPtr, "HotfolderParamsModel", "Hotfolder parameters", true, "HotfolderParamsModel");
-		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", true, "ProcessingParams");
+		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
@@ -69,16 +67,9 @@ protected:
 protected Q_SLOTS:
 	void OnUpdateQueueTimer();
 	void OnProcessingTimer();
-	void OnFutureFinished();
+	void OnProcessingItemFinished(const std::string& processingItemUuid, int processingState);
 
 private:
-
-	struct ProcessingResult
-	{
-		int processingState;
-		ifpf::IHotfolderProcessingItem* processingItemPtr;
-	};
-
 	/**
 		Synchronize the hotfolder with its static parameters.
 		If \c applyToPendingTasks is enabled, 
@@ -122,14 +113,15 @@ private:
 	ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
 
 	/**
-		Process a single file.
-	*/
-	ProcessingResult ProcessFile(ifpf::IHotfolderProcessingItem* processingItemPtr);
-
-	/**
 		Remove processing item from the queue.
 	*/
 	void RemoveProcessingItemFromQueue(const ifpf::IHotfolderProcessingItem* processingItemPtr);
+
+	bool OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr);
+
+	void CancelAllProcessingItems();
+
+	ifpf::IHotfolderProcessingItem* GetItemFromId(const std::string& itemUuid) const;
 
 private:
 	/**
@@ -179,6 +171,34 @@ private:
 		CHotfolderProcessingComp& m_parent;
 	};
 
+	/**
+		Implementation of processing thread.
+	*/
+	class ItemProcessor: public QThread
+	{
+	public:
+		ItemProcessor(
+					CHotfolderProcessingComp& parent,
+					const istd::CString& inputFilePath,
+					const istd::CString& outputFilePath,
+					const std::string& itemUuid);
+
+		int GetProcessingState() const;
+		std::string GetItemUuid() const;
+
+	protected:
+		// reimplemented (QThread)
+		virtual void run();
+
+	private:
+		CHotfolderProcessingComp& m_parent;
+		istd::CString m_inputFilePath;
+		istd::CString m_outputFilePath;
+		std::string m_itemUuid;
+		int m_processingState;
+	};
+
+private:
 	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
 	I_REF(ifpf::IFileNaming, m_fileNamingCompPtr);
 	I_REF(ifpf::IHotfolderProcessingInfo, m_hotfolderProcessingInfoCompPtr);
@@ -200,23 +220,15 @@ private:
 	istd::TDelPtr<iprm::IParamsSet> m_runParameterPtr;
 
 	typedef std::list<istd::CString> FilesQueue;
-
 	FilesQueue m_filesQueue;
 
 	QTimer m_filesQueueTimer;
 	QTimer m_processingTimer;
 
-	typedef QFuture<ProcessingResult> ProcessingFuture;
-	typedef std::vector<ProcessingFuture> ProcessingFutures;
-	typedef QFutureWatcher<ProcessingResult> ProcessingFutureWatcher;
-	typedef istd::TPointerVector<ProcessingFutureWatcher> ProcessingFutureWatchers;
-
-	ProcessingFutureWatchers m_futureWatchers;
-	ProcessingFutures m_processingFutures;
+	typedef istd::TPointerVector<ItemProcessor> PendingProcessors;
+	PendingProcessors m_pendingProcessors;
 
 	bool m_isInitialized;
-
-	int m_simultaneousProcessingCount;
 };
 
 
