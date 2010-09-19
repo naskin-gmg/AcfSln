@@ -73,7 +73,6 @@ void CProcessingItemPreviewGeneratorComp::OnUpdate(int updateFlags, istd::IPolym
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (m_outputFilePreviewGeneratorCompPtr.IsValid() && objectPtr != NULL){
 		if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
-
 			switch (objectPtr->GetProcessingState()){
 				case iproc::IProcessor::TS_OK:
 					GetOutputFilePreview(*objectPtr, true);

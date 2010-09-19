@@ -158,6 +158,14 @@ void CHotfolderGuiComp::OnGuiCreated()
 	connect(&m_cancelItemCommand, SIGNAL(activated()), this, SLOT(OnItemCancel()));
 	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
 
+	if (m_processingParamsDialogCompPtr.IsValid()){
+		m_showProcessingDialogCommand.SetGroupId(3);
+		m_showProcessingDialogCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
+		m_showProcessingDialogCommand.SetVisuals(tr("&Processing Parameters..."), "Processing Parameters", tr("Define parameters for the hotfolder processing"), QIcon(":/Icons/HotfolderSettings.svg"));
+		connect(&m_showProcessingDialogCommand, SIGNAL(activated()), this, SLOT(OnShowProcessingParamsDialog()));
+		hotfolderMenuPtr->InsertChild(&m_showProcessingDialogCommand, false);
+	}
+
 	m_hotfolderCommands.InsertChild(hotfolderMenuPtr, true);
 
 	// some visual details:
@@ -472,6 +480,14 @@ void CHotfolderGuiComp::OnRestart()
 	}
 
 	UpdateItemCommands();
+}
+
+
+void CHotfolderGuiComp::OnShowProcessingParamsDialog()
+{
+	if (m_processingParamsDialogCompPtr.IsValid()){
+		m_processingParamsDialogCompPtr->Execute();
+	}
 }
 
 

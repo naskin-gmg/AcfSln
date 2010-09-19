@@ -26,60 +26,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        ApplicationInfo
+        FilePreviewBinder
       </ComponentName>
       <X>
-        200
+        350
       </X>
-      <X>
-        150
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationSettingsProvider
-      </ComponentName>
       <X>
         225
       </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGui
+      </ComponentName>
       <X>
-        275
+        350
+      </X>
+      <X>
+        475
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderDemoGui
+        ProcessingItemPreviewGui
       </ComponentName>
       <X>
-        575
+        750
       </X>
       <X>
-        500
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        275
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SimpleMainGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        275
+        350
       </X>
     </Element>
   </PositionMap>

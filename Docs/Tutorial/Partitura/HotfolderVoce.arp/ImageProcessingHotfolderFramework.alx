@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,60 +26,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        Hotfolder
+        BitmapPreviewGenerator
       </ComponentName>
       <X>
-        550
+        350
       </X>
       <X>
-        375
+        500
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderGui
+        HotfolderDemoFramework
       </ComponentName>
       <X>
-        250
+        725
       </X>
       <X>
-        525
+        500
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderGuiBinder
+        ItemPreviewBinder
       </ComponentName>
       <X>
-        550
+        325
       </X>
       <X>
-        525
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderPersistence
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettingsDialog
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        375
+        350
       </X>
     </Element>
   </PositionMap>

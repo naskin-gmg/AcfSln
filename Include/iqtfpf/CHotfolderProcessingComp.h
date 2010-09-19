@@ -52,7 +52,6 @@ public:
 		I_ASSIGN(m_hotfolderProcessingModelCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
 		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
 		I_ASSIGN(m_hotfolderParamsModelCompPtr, "HotfolderParamsModel", "Hotfolder parameters", true, "HotfolderParamsModel");
-		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
@@ -111,11 +110,6 @@ private:
 		Get next item to be processed.
 	*/
 	ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
-
-	/**
-		Remove processing item from the queue.
-	*/
-	void RemoveProcessingItemFromQueue(const ifpf::IHotfolderProcessingItem* processingItemPtr);
 
 	bool OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr);
 
@@ -206,7 +200,6 @@ private:
 	I_REF(iprm::IParamsManager, m_inputDirectoriesManagerCompPtr);
 	I_REF(imod::IModel, m_hotfolderParamsModelCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
-	I_REF(iprm::IParamsSet, m_processingParamsSetCompPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;
@@ -214,10 +207,6 @@ private:
 	DirectoryMonitorObserver m_directoryMonitorObserver;
 	ParametersObserver m_parametersObserver;
 	StateObserver m_stateObserver;
-
-	mutable iqt::CCriticalSection m_parameterLock;
-
-	istd::TDelPtr<iprm::IParamsSet> m_runParameterPtr;
 
 	typedef std::list<istd::CString> FilesQueue;
 	FilesQueue m_filesQueue;

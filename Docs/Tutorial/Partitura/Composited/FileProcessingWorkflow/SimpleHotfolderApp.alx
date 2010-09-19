@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1495
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          197
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,49 +26,60 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        BitmapFileProcessing
+        App
       </ComponentName>
       <X>
-        275
+        550
       </X>
       <X>
-        425
+        75
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DemoApp
+        Bitmap
       </ComponentName>
       <X>
-        700
+        300
       </X>
       <X>
-        150
+        475
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HorfolderDemoFramework
+        BitmapLoader
       </ComponentName>
       <X>
-        700
+        800
       </X>
       <X>
-        425
+        475
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InvertOperator
+        ImageCopy
       </ComponentName>
       <X>
-        275
+        550
       </X>
       <X>
-        625
+        325
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageProcessingHotfolderFramework
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        200
       </X>
     </Element>
   </PositionMap>

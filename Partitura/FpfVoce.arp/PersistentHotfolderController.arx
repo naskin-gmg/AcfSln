@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -152,7 +152,7 @@
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderGui
+        HotfolderGuiWithPreview
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -161,16 +161,48 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              HotfolderParams
+              FilePreviewGenerator
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              FilePreviewGenerator
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PreviewGenerator
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderParams
+              PreviewGenerator
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParamsDialog
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParamsDialog
             </ExportId>
             <Data>
               <IsEnabled>
@@ -259,7 +291,26 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              FilePath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Hotfolder.xml
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Hotfolder
@@ -387,34 +438,10 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
-      </InterfaceId>
-      <ComponentId>
-        HotfolderGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        HotfolderGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModelEditor
-      </InterfaceId>
-      <ComponentId>
-        HotfolderGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IObserver
       </InterfaceId>
       <ComponentId>
         HotfolderGui
@@ -432,10 +459,10 @@
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HofolderGui
+        HotfolderGui
       </ExportedId>
       <ComponentId>
-        HotfolderGui
+        HotfolderGui/HofolderGui
       </ComponentId>
     </Component>
     <Component>

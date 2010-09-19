@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1501
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          206
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -135,7 +135,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="14">
+        <AttributeInfoMap count="13">
           <AttributeInfo>
             <Id>
               DirectoryMontorFactory
@@ -366,22 +366,6 @@
               <Value>
                 HotfolderParams
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ProcessingParams
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

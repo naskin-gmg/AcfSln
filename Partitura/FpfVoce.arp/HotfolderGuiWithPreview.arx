@@ -26,16 +26,77 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
-        BitmapFileProcessing
+        FilePreviewBinder
       </Id>
       <PackageId>
-        FpfPck
+        BasePck
       </PackageId>
       <ComponentId>
-        FileProcessing
+        ModelBinder
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Model
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Observers
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ProcessingItemPreviewGui
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderGui
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,16 +105,16 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              DataProcessor
+              HotfolderParams
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ImageProcessor
+              HotfolderParams
             </ExportId>
             <Data>
               <IsEnabled>
@@ -63,7 +124,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputData
+              ProcessingItemPreview
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -76,92 +137,19 @@
                 true
               </IsEnabled>
               <Value>
-                InputData
+                ProcessingItemPreviewGui
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputFileLoader
+              ProcessingParamsDialog
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputData
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputFileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParams
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ProcessingParams
+              ProcessingParamsDialog
             </ExportId>
             <Data>
               <IsEnabled>
@@ -174,13 +162,13 @@
     </Element>
     <Element>
       <Id>
-        BitmapLoader
+        ProcessingItemPreviewGui
       </Id>
       <PackageId>
-        QtPck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        BitmapLoader
+        ProcessingItemPreviewGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -192,13 +180,13 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Log
+              PreviewProvider
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Log
+              PreviewGenerator
             </ExportId>
             <Data>
               <IsEnabled>
@@ -209,71 +197,61 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        InputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        OutputData
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
-        ibase::IFileConvertCopy
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        BitmapFileProcessing
+        HotfolderGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModelEditor
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IObserver
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        HotfolderGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderParams
+        HofolderGui
       </ExportedId>
       <ComponentId>
-        Hotfolder/HotfolderParams
+        HotfolderGui
       </ComponentId>
     </Component>
     <Component>
       <ExportedId>
-        HotfolderState
+        HotdolderState
       </ExportedId>
       <ComponentId>
         Hotfolder/HotfolderState
@@ -281,9 +259,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    Bitmap file processor
+    Hotfolder UI with input/output preview
   </Description>
   <Keywords>
-    Hotfolder Image Processing File Directory Monitoring
+    Hotfoder GUI
   </Keywords>
 </Acf>

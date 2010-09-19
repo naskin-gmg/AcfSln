@@ -38,6 +38,7 @@ public:
 		I_ASSIGN(m_inputDataCompPtr, "InputData", "Input data definition", true, "InputData");
 		I_ASSIGN(m_outputDataCompPtr, "OutputData", "Output data definition", true, "OutputData");
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Processing progress observer", false, "ProgressManager");
+		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
 	I_END_COMPONENT();
 
 	// reimplemented (ibase::IFileConvertCopy)
@@ -53,6 +54,7 @@ private:
 	I_REF(istd::IChangeable, m_inputDataCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+	I_REF(iprm::IParamsSet, m_processingParamsSetCompPtr);
 
 	istd::TSmartPtr<isys::ICriticalSection> m_lock;
 

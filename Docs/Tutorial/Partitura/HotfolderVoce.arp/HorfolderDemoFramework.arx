@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1486
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          189
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -131,10 +131,10 @@
         HotfolderDemoGui
       </Id>
       <PackageId>
-        HotfolderVoce
+        FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderDemoGui
+        PersistentHotfolderController
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -152,7 +152,7 @@
               icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              AcceptPatterns
+              AcceptFilePatterns
             </ExportId>
             <Data>
               <IsEnabled>
@@ -178,13 +178,29 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              FilePreviewGenerator
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              FilePreviewGenerator
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               IgnorePatterns
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              IgnorePatterns
+              IgnoreFilePatterns
             </ExportId>
             <Data>
               <IsEnabled>
@@ -213,13 +229,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessingEditors
+              PreviewGenerator
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ProcessingEditors
+              PreviewGenerator
             </ExportId>
             <Data>
               <IsEnabled>
@@ -229,29 +245,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessingParameterIds
+              ProcessingParamsDialog
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ProcessingParameterIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameters
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              ProcessingParameters
+              ProcessingParamsDialog
             </ExportId>
             <Data>
               <IsEnabled>
@@ -520,7 +520,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        HotfolderGui
+      </ExportedId>
+      <ComponentId>
+        HotfolderDemoGui/HotfolderGui
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Simple demonstration of hotfolder processing

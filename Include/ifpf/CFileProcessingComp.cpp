@@ -23,7 +23,7 @@ CFileProcessingComp::CFileProcessingComp()
 bool CFileProcessingComp::CopyFile(
 			const istd::CString& inputFilePath,
 			const istd::CString& outputFilePath,
-			const iprm::IParamsSet* paramsSetPtr) const
+			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	isys::CSectionBlocker blocker(m_lock.GetPtr());
 
@@ -64,7 +64,7 @@ bool CFileProcessingComp::CopyFile(
 	}
 
 	int processingResult = m_processorCompPtr->DoProcessing(
-				paramsSetPtr,
+				m_processingParamsSetCompPtr.GetPtr(),
 				m_inputDataCompPtr.GetPtr(),
 				m_outputDataCompPtr.GetPtr());
 	if (processingResult != iproc::IProcessor::TS_OK){

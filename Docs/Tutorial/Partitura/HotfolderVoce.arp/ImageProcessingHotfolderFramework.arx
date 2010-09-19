@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="3">
     <Element>
       <Id>
-        Bitmap
+        BitmapPreviewGenerator
       </Id>
       <PackageId>
-        QtPck
+        FpfVoce
       </PackageId>
       <ComponentId>
-        Bitmap
+        BitmapPreviewGenerator
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -50,74 +50,13 @@
     </Element>
     <Element>
       <Id>
-        BitmapLoader
+        HotfolderDemoFramework
       </Id>
       <PackageId>
-        QtPck
+        HotfolderVoce
       </PackageId>
       <ComponentId>
-        BitmapLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FilePath
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        FileNameParam
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              PathType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FilePreviewGenerator
-      </Id>
-      <PackageId>
-        QtFpfPck
-      </PackageId>
-      <ComponentId>
-        FilePreviewGenerator
+        HorfolderDemoFramework
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -129,48 +68,10 @@
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              BitmapHeight
+              AcceptFilePatterns
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              BitmapHeight
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                256
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              BitmapWidth
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              BitmmapWidth
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                256
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -179,17 +80,25 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
+              <Values count="3">
+                <Value>
+                  *.bmp
+                </Value>
+                <Value>
+                  *.png
+                </Value>
+                <Value>
+                  *.jpg
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FileLoader
+              AcceptPatterns
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -198,20 +107,31 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                BitmapLoader
-              </Value>
+              <Values count="4">
+                <Value>
+                  *.bmp
+                </Value>
+                <Value>
+                  *.png
+                </Value>
+                <Value>
+                  *.jpg
+                </Value>
+                <Value>
+                  *.jpeg
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              FileConverter
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Log
+              ImageConverter
             </ExportId>
             <Data>
               <IsEnabled>
@@ -221,7 +141,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ObjectSnap
+              Hotfolder
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -234,8 +154,43 @@
                 true
               </IsEnabled>
               <Value>
-                Bitmap
+                Hotfolder
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PreviewGenerator
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapPreviewGenerator
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParamsDialog
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParamsDialog
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -243,25 +198,25 @@
     </Element>
     <Element>
       <Id>
-        ProcessingItemPreviewGenerator
+        ItemPreviewBinder
       </Id>
       <PackageId>
-        QtFpfPck
+        BasePck
       </PackageId>
       <ComponentId>
-        ProcessingItemPreviewGenerator
+        ModelBinder
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              FilePath
+              Model
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -274,16 +229,16 @@
                 true
               </IsEnabled>
               <Value>
-                FilePath
+                HotfolderDemoFramework/HotfolderGui
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputFilePreviewGenerator
+              Observers
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -292,58 +247,57 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                FilePreviewGenerator
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputFilePreviewGenerator
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FilePreviewGenerator
-              </Value>
+              <Values count="1">
+                <Value>
+                  BitmapPreviewGenerator
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        ifpf::IProcessingItemPreviewProvider
+        ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ProcessingItemPreviewGenerator
+        HotfolderDemoFramework
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IObserver
+        ibase::IMessageConsumer
       </InterfaceId>
       <ComponentId>
-        ProcessingItemPreviewGenerator
+        HotfolderDemoFramework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ibase::IMessageContainer
+      </InterfaceId>
+      <ComponentId>
+        HotfolderDemoFramework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        HotfolderDemoFramework
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Bitmap preview generator
+    Simple demonstration of hotfolder processing.Image files will be copied from the observed input location to the output folder.
   </Description>
   <Keywords>
-    Bitmap Preview
+    Hotfoder Demo Tutorial Processing
   </Keywords>
 </Acf>

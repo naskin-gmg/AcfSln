@@ -29,57 +29,57 @@
   <PositionMap count="5">
     <Element>
       <ComponentName>
-        ApplicationInfo
+        Hotfolder
       </ComponentName>
       <X>
-        200
+        825
       </X>
       <X>
-        150
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ApplicationSettingsProvider
+        HotfolderGui
       </ComponentName>
       <X>
         225
       </X>
       <X>
-        275
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        HotfolderDemoGui
+        HotfolderGuiBinder
       </ComponentName>
       <X>
-        575
+        550
       </X>
       <X>
-        500
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LogDock
+        HotfolderPersistence
       </ComponentName>
       <X>
-        925
+        825
       </X>
       <X>
-        275
+        200
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SimpleMainGui
+        HotfolderSettingsDialog
       </ComponentName>
       <X>
-        575
+        825
       </X>
       <X>
-        275
+        650
       </X>
     </Element>
   </PositionMap>

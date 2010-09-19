@@ -72,15 +72,12 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              FilePath
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Hotfolder.xml
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

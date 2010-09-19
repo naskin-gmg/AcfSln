@@ -17,6 +17,7 @@
 
 
 #include "iqtgui/IIconProvider.h"
+#include "iqtgui/IDialog.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 #include "iqtgui/CGuiComponentDialog.h"
@@ -58,6 +59,7 @@ public:
 		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 		I_ASSIGN(m_processingItemPreviewCompPtr, "ProcessingItemPreview", "GUI for the processing item's preview", false, "ProcessingItemPreview");
+		I_ASSIGN(m_processingParamsDialogCompPtr, "ProcessingParamsDialog", "Dialog for the processing parameters", false, "ProcessingParamsDialog");
 	I_END_COMPONENT;
 
 	CHotfolderGuiComp();
@@ -94,6 +96,7 @@ private Q_SLOTS:
 	void OnItemRemove();
 	void OnItemCancel();
 	void OnRestart();
+	void OnShowProcessingParamsDialog();
 	void OnContextMenuRequested(const QPoint& menuPoint);
 	void on_FileList_itemSelectionChanged();
 	void on_AllRadio_toggled(bool isChecked);
@@ -138,6 +141,7 @@ private:
 	I_FACT(iqtgui::IGuiObject, m_directoryItemGuiFactCompPtr);
 	I_FACT(imod::IObserver, m_directoryItemObserverFactCompPtr);
 	I_REF(iqtgui::IGuiObject, m_processingItemPreviewCompPtr);
+	I_REF(iqtgui::IDialog, m_processingParamsDialogCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;
@@ -145,6 +149,7 @@ private:
 	iqtgui::CHierarchicalCommand m_removeItemCommand;
 	iqtgui::CHierarchicalCommand m_cancelItemCommand;
 	iqtgui::CHierarchicalCommand m_restartItemCommand;
+	iqtgui::CHierarchicalCommand m_showProcessingDialogCommand;
 
 	typedef std::map<int, QIcon> StateIconsMap;
 

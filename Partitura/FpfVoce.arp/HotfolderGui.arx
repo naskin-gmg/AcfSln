@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1518
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          217
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -65,7 +65,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DirectoryItemGui
@@ -113,6 +113,22 @@
             </Type>
             <ExportId>
               ProcessingItemPreview
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProcessingParamsDialog
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ProcessingParamsDialog
             </ExportId>
             <Data>
               <IsEnabled>

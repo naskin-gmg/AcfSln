@@ -132,6 +132,7 @@ void CProcessingItemPreviewGuiComp::OnGuiModelDetached()
 	BaseClass::OnGuiModelDetached();
 }
 
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CProcessingItemPreviewGuiComp::OnGuiCreated()

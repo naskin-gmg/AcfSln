@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1495
+          1561
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          197
+          242
         </Number>
         <Description>
           ACF-Solutions
@@ -26,69 +26,10 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
-        BitmapFileProcessing
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        BitmapFileProcessing
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ImageProcessor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InvertOperator
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HorfolderDemoFramework
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DemoApp
+        App
       </Id>
       <PackageId>
         QtGuiPck
@@ -119,7 +60,7 @@
                 true
               </IsEnabled>
               <Value>
-                HorfolderDemoFramework
+                ImageProcessingHotfolderFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -157,7 +98,7 @@
                 true
               </IsEnabled>
               <Value>
-                HorfolderDemoFramework
+                ImageProcessingHotfolderFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -204,13 +145,55 @@
     </Element>
     <Element>
       <Id>
-        HorfolderDemoFramework
+        Bitmap
       </Id>
       <PackageId>
-        HotfolderVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        HorfolderDemoFramework
+        Bitmap
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        BitmapLoader
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ImageCopy
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileCopyOverLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -222,37 +205,7 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              AcceptPatterns
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-                <Value>
-                  *.jpeg
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileConverter
+              InputLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -265,13 +218,13 @@
                 true
               </IsEnabled>
               <Value>
-                BitmapFileProcessing
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Hotfolder
+              Object
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -284,7 +237,26 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder
+                Bitmap
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -293,13 +265,13 @@
     </Element>
     <Element>
       <Id>
-        InvertOperator
+        ImageProcessingHotfolderFramework
       </Id>
       <PackageId>
-        IprPck
+        HotfolderVoce
       </PackageId>
       <ComponentId>
-        InvertOperator
+        ImageProcessingHotfolderFramework
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -311,7 +283,7 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Log
+              ImageConverter
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -324,7 +296,7 @@
                 true
               </IsEnabled>
               <Value>
-                HorfolderDemoFramework
+                ImageCopy
               </Value>
             </Data>
           </AttributeInfo>
@@ -338,14 +310,14 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        DemoApp
+        App
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Simple demonstration of hotfolder processing
+    Simple demonstration of hotfolder processing.\n Image files will be copied from the observed input location to the output folder.
   </Description>
   <Keywords>
     Hotfoder Demo Tutorial Processing
