@@ -51,7 +51,7 @@
     </Element>
     <Element>
       <ComponentName>
-        MonitoringSessions
+        MonitoringSessionsManager
       </ComponentName>
       <X>
         575

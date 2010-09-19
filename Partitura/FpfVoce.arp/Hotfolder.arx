@@ -291,7 +291,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderStateModel/MonitoringSessions
+                HotfolderStateModel/MonitoringSessionsManager
               </Value>
             </Data>
           </AttributeInfo>

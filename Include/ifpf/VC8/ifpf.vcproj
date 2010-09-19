@@ -261,7 +261,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMonitoringSessionsMap.cpp"
+				RelativePath="..\CMonitoringSessionsManager.cpp"
 				>
 			</File>
 			<File
@@ -322,7 +322,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMonitoringSessionsMap.h"
+				RelativePath="..\CMonitoringSessionsManager.h"
 				>
 			</File>
 			<File
@@ -418,5 +418,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-

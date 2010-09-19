@@ -71,13 +71,13 @@
     </Element>
     <Element>
       <Id>
-        MonitoringSessions
+        MonitoringSessionsManager
       </Id>
       <PackageId>
         FpfPck
       </PackageId>
       <ComponentId>
-        MonitoringSessions
+        MonitoringSessionsManager
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -130,7 +130,7 @@
                   HotfolderStatistics
                 </Value>
                 <Value>
-                  MonitoringSessions
+                  MonitoringSessionsManager
                 </Value>
               </Values>
             </Data>
@@ -157,7 +157,7 @@
                   HotfolderStatistics
                 </Value>
                 <Value>
-                  MonitoringSessions
+                  MonitoringSessionsManager
                 </Value>
               </Values>
             </Data>
@@ -211,10 +211,10 @@
     </Component>
     <Component>
       <ExportedId>
-        MonitoringSessions
+        MonitoringSessionsManager
       </ExportedId>
       <ComponentId>
-        MonitoringSessions
+        MonitoringSessionsManager
       </ComponentId>
     </Component>
   </ExportedComponents>

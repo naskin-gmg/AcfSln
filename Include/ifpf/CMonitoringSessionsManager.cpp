@@ -1,4 +1,4 @@
-#include "ifpf/CMonitoringSessionsMap.h"
+#include "ifpf/CMonitoringSessionsManager.h"
 
 
 // ACF includes
@@ -16,7 +16,13 @@ namespace ifpf
 
 // reimplemented (ifpf::IMonitoringSessionManager)
 
-ifpf::IMonitoringSession* CMonitoringSessionsMap::GetSession(const ifpf::IDirectoryMonitor& /*directoryMonitor*/, const istd::CString& directoryPath) const
+void CMonitoringSessionsManager::ResetSessions()
+{
+	m_monitorSessionsMap.clear();
+}
+
+
+ifpf::IMonitoringSession* CMonitoringSessionsManager::GetSession(const ifpf::IDirectoryMonitor& /*directoryMonitor*/, const istd::CString& directoryPath) const
 {
 	MonitoringSessionsMap::const_iterator sessionIter = m_monitorSessionsMap.find(directoryPath);
 	if (sessionIter != m_monitorSessionsMap.end()){
@@ -33,11 +39,11 @@ ifpf::IMonitoringSession* CMonitoringSessionsMap::GetSession(const ifpf::IDirect
 
 // reimplemented (iser::ISerializable)
 
-bool CMonitoringSessionsMap::Serialize(iser::IArchive& archive)
+bool CMonitoringSessionsManager::Serialize(iser::IArchive& archive)
 {	
 	bool retVal = true;
 
-	static iser::CArchiveTag monitoringSessionsTag("MonitoringSessions", "Session list");
+	static iser::CArchiveTag monitoringSessionsTag("MonitoringSessionsManager", "Session list");
 	static iser::CArchiveTag monitoringSessionTag("MonitoringSession", "Single session");
 	static iser::CArchiveTag directoryPathTag("MonitoringDirectory", "Monitoring directory path");
 

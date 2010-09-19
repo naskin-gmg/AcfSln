@@ -21,6 +21,12 @@ namespace ifpf
 class IMonitoringSessionManager: virtual public istd::IPolymorphic
 {
 public:
+
+	/**
+		Clear all session data.
+	*/
+	virtual void ResetSessions() = 0;
+
 	/**
 		Get monitoring session for the given monitor and directory path.
 	*/

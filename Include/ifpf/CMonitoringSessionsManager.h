@@ -1,5 +1,5 @@
-#ifndef ifpf_CMonitoringSessionsMap_included
-#define ifpf_CMonitoringSessionsMap_included
+ #ifndef ifpf_CMonitoringSessionsManager_included
+#define ifpf_CMonitoringSessionsManager_included
 
 
 // STL includes
@@ -19,12 +19,13 @@ namespace ifpf
 {
 
 
-class CMonitoringSessionsMap:
+class CMonitoringSessionsManager:
 			virtual public iser::ISerializable,
 			virtual public ifpf::IMonitoringSessionManager
 {
 public:
 	// reimplemented (ifpf::IMonitoringSessionManager)
+	virtual void ResetSessions();
 	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
 
 	// reimplemented (iser::ISerializable)
@@ -39,6 +40,6 @@ private:
 } // namespace ifpf
 
 
-#endif // !ifpf_CMonitoringSessionsMap_included
+#endif // !ifpf_CMonitoringSessionsManager_included
 
 

@@ -35,7 +35,7 @@ I_EXPORT_COMPONENT(
 			"File Processing Hotfolder" IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
-			MonitoringSessions,
+			MonitoringSessionsManager,
 			"Monitoring sessions",
 			"File Processing Hotfolder Session");
 
