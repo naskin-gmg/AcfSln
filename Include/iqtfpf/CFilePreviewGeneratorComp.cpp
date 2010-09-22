@@ -24,7 +24,8 @@ istd::CIndex2d CFilePreviewGeneratorComp::GetBitmapSize(const iprm::IParamsSet* 
 int CFilePreviewGeneratorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr)
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (!m_fileLoaderCompPtr.IsValid()){
 		return TS_INVALID;

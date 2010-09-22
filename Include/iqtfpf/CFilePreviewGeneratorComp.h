@@ -37,7 +37,8 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr);
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr);
 private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 	I_REF(istd::IChangeable, m_fileDataCompPtr);
