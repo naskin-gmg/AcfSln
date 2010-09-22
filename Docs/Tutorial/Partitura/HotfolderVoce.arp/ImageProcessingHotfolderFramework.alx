@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         BitmapPreviewGenerator
@@ -58,6 +58,17 @@
       </X>
       <X>
         350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputFileInfo
+      </ComponentName>
+      <X>
+        700
+      </X>
+      <X>
+        650
       </X>
     </Element>
   </PositionMap>
