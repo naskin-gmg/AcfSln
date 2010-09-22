@@ -50,7 +50,7 @@
     </Element>
     <Element>
       <Id>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </Id>
       <PackageId>
         QtGuiPck
@@ -262,7 +262,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -270,7 +270,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -278,7 +278,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

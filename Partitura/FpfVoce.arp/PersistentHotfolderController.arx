@@ -310,7 +310,7 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              HotfolderParams
+              HotfolderSettings
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -323,7 +323,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder/HotfolderParams
+                Hotfolder/HotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>
@@ -414,7 +414,7 @@
                 true
               </IsEnabled>
               <Value>
-                Hotfolder/HotfolderParams
+                Hotfolder/HotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>

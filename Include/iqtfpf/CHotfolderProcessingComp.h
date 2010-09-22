@@ -51,7 +51,7 @@ public:
 		I_ASSIGN(m_hotfolderProcessingInfoCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
 		I_ASSIGN(m_hotfolderProcessingModelCompPtr, "HotfolderStateModel", "State data model of the hotfolder", true, "HotfolderStateModel");
 		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
-		I_ASSIGN(m_hotfolderParamsModelCompPtr, "HotfolderParamsModel", "Hotfolder parameters", true, "HotfolderParamsModel");
+		I_ASSIGN(m_hotfolderSettingsModelCompPtr, "HotfolderSettingsModel", "Hotfolder settings", true, "HotfolderSettingsModel");
 	I_END_COMPONENT();
 
 	CHotfolderProcessingComp();
@@ -198,7 +198,7 @@ private:
 	I_REF(ifpf::IHotfolderProcessingInfo, m_hotfolderProcessingInfoCompPtr);
 	I_REF(imod::IModel, m_hotfolderProcessingModelCompPtr);
 	I_REF(iprm::IParamsManager, m_inputDirectoriesManagerCompPtr);
-	I_REF(imod::IModel, m_hotfolderParamsModelCompPtr);
+	I_REF(imod::IModel, m_hotfolderSettingsModelCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;

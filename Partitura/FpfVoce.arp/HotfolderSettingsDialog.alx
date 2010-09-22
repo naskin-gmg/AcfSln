@@ -29,7 +29,7 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </ComponentName>
       <X>
         900
@@ -51,7 +51,7 @@
     </Element>
     <Element>
       <ComponentName>
-        WorkingHotfolderParams
+        WorkingHotfolderSettings
       </ComponentName>
       <X>
         250

@@ -53,7 +53,7 @@
                   HotfolderStateModel
                 </Value>
                 <Value>
-                  HotfolderParams
+                  HotfolderSettings
                 </Value>
               </Values>
             </Data>
@@ -77,7 +77,7 @@
                   HotfolderStateModel
                 </Value>
                 <Value>
-                  HotfolderParams
+                  HotfolderSettings
                 </Value>
               </Values>
             </Data>
@@ -103,13 +103,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderParams
+        HotfolderSettings
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderParams
+        HotfolderSettings
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -213,10 +213,10 @@
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderParams
+        HotfolderSettings
       </ExportedId>
       <ComponentId>
-        HotfolderParams
+        HotfolderSettings
       </ComponentId>
     </Component>
     <Component>

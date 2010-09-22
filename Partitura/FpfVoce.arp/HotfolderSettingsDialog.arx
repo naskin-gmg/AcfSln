@@ -29,13 +29,13 @@
   <ElementsList count="3">
     <Element>
       <Id>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderParamsGui
+        HotfolderSettingsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -151,7 +151,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParamsGui
+                HotfolderSettingsGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -163,7 +163,7 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderParams
+              HotfolderSettings
             </ExportId>
             <Data>
               <IsEnabled>
@@ -186,7 +186,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParamsGui
+                HotfolderSettingsGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -224,7 +224,7 @@
                 true
               </IsEnabled>
               <Value>
-                WorkingHotfolderParams
+                WorkingHotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>
@@ -243,7 +243,7 @@
                 true
               </IsEnabled>
               <Value>
-                WorkingHotfolderParams
+                WorkingHotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>
@@ -252,13 +252,13 @@
     </Element>
     <Element>
       <Id>
-        WorkingHotfolderParams
+        WorkingHotfolderSettings
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderParams
+        HotfolderSettings
       </ComponentId>
       <Data>
         <IsEnabled>

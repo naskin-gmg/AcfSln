@@ -108,13 +108,13 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              HotfolderParams
+              HotfolderSettings
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderParams
+              HotfolderSettings
             </ExportId>
             <Data>
               <IsEnabled>

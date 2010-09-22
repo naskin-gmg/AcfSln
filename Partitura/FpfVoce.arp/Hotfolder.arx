@@ -101,7 +101,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParams
+              HotfolderSettings
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -234,7 +234,7 @@
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderParams
+        HotfolderSettings
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -338,7 +338,7 @@
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderParams
+        HotfolderSettings
       </ExportedId>
       <ComponentId>
         HotfolderSettings

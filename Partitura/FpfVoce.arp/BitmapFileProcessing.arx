@@ -265,10 +265,10 @@
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderParams
+        HotfolderSettings
       </ExportedId>
       <ComponentId>
-        Hotfolder/HotfolderParams
+        Hotfolder/HotfolderSettings
       </ComponentId>
     </Component>
     <Component>

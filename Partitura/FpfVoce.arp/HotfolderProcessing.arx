@@ -192,13 +192,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderParamsModel
+              HotfolderSettingsModel
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderParams
+              HotfolderSettings
             </ExportId>
             <Data>
               <IsEnabled>
@@ -364,7 +364,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderParams
+                HotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>

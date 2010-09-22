@@ -44,9 +44,9 @@ CHotfolderProcessingComp::CHotfolderProcessingComp()
 
 void CHotfolderProcessingComp::OnComponentCreated()
 {
-	I_ASSERT(m_hotfolderParamsModelCompPtr.IsValid());
-	if (m_hotfolderParamsModelCompPtr.IsValid()){
-		m_hotfolderParamsModelCompPtr->AttachObserver(&m_parametersObserver);
+	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
+	if (m_hotfolderSettingsModelCompPtr.IsValid()){
+		m_hotfolderSettingsModelCompPtr->AttachObserver(&m_parametersObserver);
 	}
 
 	I_ASSERT(m_hotfolderProcessingModelCompPtr.IsValid());
@@ -71,9 +71,9 @@ void CHotfolderProcessingComp::OnComponentCreated()
 
 void CHotfolderProcessingComp::OnComponentDestroyed()
 {
-	I_ASSERT(m_hotfolderParamsModelCompPtr.IsValid());
-	if (m_hotfolderParamsModelCompPtr.IsValid()){
-		m_hotfolderParamsModelCompPtr->DetachObserver(&m_parametersObserver);
+	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
+	if (m_hotfolderSettingsModelCompPtr.IsValid()){
+		m_hotfolderSettingsModelCompPtr->DetachObserver(&m_parametersObserver);
 	}
 
 	m_directoryMonitorsMap.clear();
