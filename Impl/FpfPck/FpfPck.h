@@ -5,7 +5,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "ifpf/CFileProcessingComp.h"
 #include "ifpf/CDirectoryMonitorParams.h"
 #include "ifpf/CHotfolder.h"
 #include "ifpf/CMonitoringSessionsManager.h"
@@ -23,8 +22,6 @@
 namespace FpfPck
 {
 
-
-typedef ifpf::CFileProcessingComp FileProcessing;
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -26,18 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        Hotfolder
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         HotfolderProcessing

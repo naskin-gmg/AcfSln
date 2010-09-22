@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +29,10 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        BitmapFileProcessing
+        BitmapLoader
       </ComponentName>
       <X>
-        550
+        300
       </X>
       <X>
         425
@@ -40,10 +40,10 @@
     </Element>
     <Element>
       <ComponentName>
-        BitmapLoader
+        FileConvertOverProcessor
       </ComponentName>
       <X>
-        300
+        550
       </X>
       <X>
         425

@@ -15,11 +15,6 @@ I_EXPORT_PACKAGE(
 			"File Processing Hotfolder Workflow" IM_TAG("Hotfolder") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			FileProcessing,
-			"Sequence processing using slave processors",
-			"Hotfolder" IM_TAG("File Processing"));
-
-I_EXPORT_COMPONENT(
 			DirectoryMonitorParams,
 			"Parameter for the directory monitoring",
 			"Processing Parameter Directory Monitoring" IM_TAG("File Model"));

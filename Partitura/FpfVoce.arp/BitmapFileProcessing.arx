@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1561
+          1563
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          242
+          245
         </Number>
         <Description>
           ACF-Solutions
@@ -29,13 +29,50 @@
   <ElementsList count="4">
     <Element>
       <Id>
-        BitmapFileProcessing
+        BitmapLoader
       </Id>
       <PackageId>
-        FpfPck
+        QtPck
       </PackageId>
       <ComponentId>
-        FileProcessing
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileConvertOverProcessor
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileConvertOverProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -174,43 +211,6 @@
     </Element>
     <Element>
       <Id>
-        BitmapLoader
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        BitmapLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         InputData
       </Id>
       <PackageId>
@@ -258,7 +258,7 @@
         ibase::IFileConvertCopy
       </InterfaceId>
       <ComponentId>
-        BitmapFileProcessing
+        FileConvertOverProcessor
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
@@ -281,9 +281,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    Bitmap file processor
+    Image-To-Image file converter
   </Description>
   <Keywords>
-    Hotfolder Image Processing File Directory Monitoring
+    Image Processing File Converter
   </Keywords>
 </Acf>
