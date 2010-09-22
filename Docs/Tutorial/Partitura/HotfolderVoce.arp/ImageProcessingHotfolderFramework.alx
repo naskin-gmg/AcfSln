@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1563
+          1564
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          245
+          246
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         BitmapPreviewGenerator
       </ComponentName>
       <X>
-        350
+        300
       </X>
       <X>
-        500
+        375
       </X>
     </Element>
     <Element>
@@ -43,21 +43,10 @@
         HotfolderDemoFramework
       </ComponentName>
       <X>
-        725
+        650
       </X>
       <X>
-        500
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ItemPreviewBinder
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        350
+        375
       </X>
     </Element>
     <Element>
@@ -65,10 +54,10 @@
         OutputFileInfo
       </ComponentName>
       <X>
-        700
+        650
       </X>
       <X>
-        650
+        500
       </X>
     </Element>
   </PositionMap>

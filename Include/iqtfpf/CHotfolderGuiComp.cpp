@@ -99,6 +99,10 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 
 		hotfolderModelPtr->AttachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
 	}
+
+	if (m_processingItemPreviewCompPtr.IsValid()){
+		m_itemModelProxy.AttachObserver(m_processingItemPreviewCompPtr.GetPtr());
+	}
 }
 
 
@@ -111,6 +115,10 @@ void CHotfolderGuiComp::OnGuiModelDetached()
 		if (hotfolderModelPtr->IsAttached(m_statisticsHotfolderObserverCompPtr.GetPtr())){
 			hotfolderModelPtr->DetachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
 		}
+	}
+
+	if (m_processingItemPreviewCompPtr.IsValid()){
+		m_itemModelProxy.DetachObserver(m_processingItemPreviewCompPtr.GetPtr());
 	}
 
 	BaseClass::OnGuiModelDetached();
@@ -198,10 +206,10 @@ void CHotfolderGuiComp::OnGuiCreated()
 	connect(m_filterEditor, SIGNAL(textChanged(const QString&)), this, SLOT(OnTextFilterChanged(const QString&)));
 
 	// Create preview GUI:
-	if (m_processingItemPreviewCompPtr.IsValid()){
-		I_ASSERT(!m_processingItemPreviewCompPtr->IsGuiCreated());
+	if (m_processingItemPreviewGuiCompPtr.IsValid()){
+		I_ASSERT(!m_processingItemPreviewGuiCompPtr->IsGuiCreated());
 
-		m_processingItemPreviewCompPtr->CreateGui(PreviewFrame);
+		m_processingItemPreviewGuiCompPtr->CreateGui(PreviewFrame);
 	}
 
 	BaseClass::OnGuiCreated();
@@ -210,8 +218,8 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 void CHotfolderGuiComp::OnGuiDestroyed()
 {
-	if (m_processingItemPreviewCompPtr.IsValid()){
-		m_processingItemPreviewCompPtr->DestroyGui();
+	if (m_processingItemPreviewGuiCompPtr.IsValid()){
+		m_processingItemPreviewGuiCompPtr->DestroyGui();
 	}
 
 	BaseClass::OnGuiDestroyed();
@@ -321,7 +329,6 @@ void CHotfolderGuiComp::UpdateItemCommands()
 }
 
 
-
 void CHotfolderGuiComp::RebuildItemList()
 {
 	FileList->clearSelection();
@@ -342,6 +349,7 @@ void CHotfolderGuiComp::RebuildItemList()
 		}
 	}
 }
+
 
 CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems() const
 {
@@ -394,7 +402,6 @@ void CHotfolderGuiComp::UpdateItemsVisibility(const QString& textFilter, bool sh
 		 ++treeIterator;
      }
 }
-
 
 
 // private slots
@@ -511,11 +518,11 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 	if (!processingItems.empty()){
 		imod::IModel* itemModelPtr = dynamic_cast<imod::IModel*>(processingItems[0]);
 		if (itemModelPtr != NULL){
-			BaseClass2::SetModelPtr(itemModelPtr);
+			m_itemModelProxy.SetModelPtr(itemModelPtr);
 		}
 	}
 	else{
-		BaseClass2::SetModelPtr(NULL);
+		m_itemModelProxy.SetModelPtr(NULL);
 	}
 
 	UpdateItemCommands();

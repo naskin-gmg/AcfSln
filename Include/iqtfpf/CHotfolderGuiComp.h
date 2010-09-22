@@ -11,8 +11,6 @@
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CModelProxy.h"
 
-#include "iproc/IProgressManager.h"
-
 #include "ibase/ICommandsProvider.h"
 
 
@@ -38,11 +36,9 @@ namespace iqtfpf
 
 class CHotfolderGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CHotfolderGuiComp, ifpf::IHotfolderProcessingInfo>,
-			public imod::CModelProxy,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
-
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CHotfolderGuiComp,
@@ -50,7 +46,6 @@ public:
 	typedef imod::CModelProxy BaseClass2;
 
 	I_BEGIN_COMPONENT(CHotfolderGuiComp)
-		I_REGISTER_INTERFACE(imod::IModel);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
@@ -58,7 +53,8 @@ public:
 		I_ASSIGN(m_statisticsModelCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
 		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
-		I_ASSIGN(m_processingItemPreviewCompPtr, "ProcessingItemPreview", "GUI for the processing item's preview", false, "ProcessingItemPreview");
+		I_ASSIGN(m_processingItemPreviewGuiCompPtr, "ProcessingItemPreview", "GUI for the processing item's preview", false, "ProcessingItemPreview");
+		I_ASSIGN(m_processingItemPreviewCompPtr, "ProcessingItemPreview", "Observer for the processing item's preview", false, "ProcessingItemPreview");
 		I_ASSIGN(m_processingParamsDialogCompPtr, "ProcessingParamsDialog", "Dialog for the processing parameters", false, "ProcessingParamsDialog");
 	I_END_COMPONENT;
 
@@ -140,7 +136,8 @@ private:
 	I_REF(imod::IModel, m_statisticsModelCompPtr);
 	I_FACT(iqtgui::IGuiObject, m_directoryItemGuiFactCompPtr);
 	I_FACT(imod::IObserver, m_directoryItemObserverFactCompPtr);
-	I_REF(iqtgui::IGuiObject, m_processingItemPreviewCompPtr);
+	I_REF(iqtgui::IGuiObject, m_processingItemPreviewGuiCompPtr);
+	I_REF(imod::IObserver, m_processingItemPreviewCompPtr);
 	I_REF(iqtgui::IDialog, m_processingParamsDialogCompPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
@@ -155,6 +152,8 @@ private:
 
 	iqtgui::CExtLineEdit* m_filterEditor;
 	StateIconsMap m_stateIconsMap;
+
+	imod::CModelProxy m_itemModelProxy;
 };
 
 
