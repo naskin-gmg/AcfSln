@@ -233,11 +233,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolder.cpp"
+				RelativePath="..\CHotfolderLoaderComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderLoaderComp.cpp"
+				RelativePath="..\CHotfolderProcessingInfo.cpp"
 				>
 			</File>
 			<File
@@ -294,11 +294,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolder.h"
+				RelativePath="..\CHotfolderLoaderComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderLoaderComp.h"
+				RelativePath="..\CHotfolderProcessingInfo.h"
 				>
 			</File>
 			<File

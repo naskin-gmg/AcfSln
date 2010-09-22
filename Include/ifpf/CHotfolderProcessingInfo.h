@@ -1,5 +1,5 @@
-#ifndef ifpf_CHotfolder_included
-#define ifpf_CHotfolder_included
+#ifndef ifpf_CHotfolderProcessingInfo_included
+#define ifpf_CHotfolderProcessingInfo_included
 
 
 // STL includes
@@ -20,7 +20,6 @@
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/CHotfolderProcessingItem.h"
-#include "ifpf/CMonitoringSession.h"
 
 
 namespace ifpf
@@ -30,10 +29,10 @@ namespace ifpf
 /**
 	Implementation of the processing data model of the hotfolder.
 */
-class CHotfolder: virtual public ifpf::IHotfolderProcessingInfo
+class CHotfolderProcessingInfo: virtual public ifpf::IHotfolderProcessingInfo
 {
 public:
-	CHotfolder();
+	CHotfolderProcessingInfo();
 
 	/**
 		Return \c true if the item for the given input and output path already exists.
@@ -70,5 +69,5 @@ protected:
 } // namespace ifpf
 
 
-#endif // !ifpf_CHotfolder_included
+#endif // !ifpf_CHotfolderProcessingInfo_included
 

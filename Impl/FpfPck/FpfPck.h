@@ -6,7 +6,7 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "ifpf/CDirectoryMonitorParams.h"
-#include "ifpf/CHotfolder.h"
+#include "ifpf/CHotfolderProcessingInfo.h"
 #include "ifpf/CMonitoringSessionsManager.h"
 #include "ifpf/CHotfolderStatistics.h"
 #include "ifpf/CHotfolderLoaderComp.h"
@@ -29,7 +29,7 @@ typedef icomp::TModelCompWrap<
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
-						ifpf::CHotfolder, iser::ISerializable, ifpf::IHotfolderProcessingInfo> > HotfolderStateModel;
+						ifpf::CHotfolderProcessingInfo, iser::ISerializable, ifpf::IHotfolderProcessingInfo> > HotfolderStateModel;
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
