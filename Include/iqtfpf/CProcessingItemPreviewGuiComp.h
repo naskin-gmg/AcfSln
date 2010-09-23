@@ -56,6 +56,9 @@ public:
 	virtual void OnGuiDestroyed();
 
 private:
+	void ResetEditor();
+
+private:
 	I_REF(imod::IObserver, m_inputPreviewObserverCompPtr);
 	I_REF(iqtgui::IGuiObject, m_inputPreviewGuiCompPtr);
 	I_REF(imod::IObserver, m_outputPreviewObserverCompPtr);

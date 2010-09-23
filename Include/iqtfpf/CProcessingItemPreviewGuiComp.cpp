@@ -78,6 +78,8 @@ void CProcessingItemPreviewGuiComp::UpdateEditor(int updateFlags)
 
 		if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0 && m_outputFileNameParamCompPtr.IsValid()){
 			if (objectPtr->GetProcessingState() == iproc::IProcessor::TS_OK){
+				istd::CChangeNotifier changePtr(m_outputFileNameParamCompPtr.GetPtr());
+
 				m_outputFileNameParamCompPtr->SetPath(objectPtr->GetOutputFile());
 			}
 		}
@@ -132,6 +134,8 @@ void CProcessingItemPreviewGuiComp::OnGuiModelDetached()
 		m_outputFileNameParamModelCompPtr->DetachObserver(m_outputPreviewObserverCompPtr.GetPtr());
 	}
 
+	ResetEditor();
+
 	BaseClass::OnGuiModelDetached();
 }
 
@@ -164,6 +168,20 @@ void CProcessingItemPreviewGuiComp::OnGuiDestroyed()
 
 	BaseClass::OnGuiDestroyed();
 }
+
+
+// private methods
+
+void CProcessingItemPreviewGuiComp::ResetEditor()
+{
+	I_ASSERT(IsGuiCreated());
+
+	InputFileNameLabel->clear();
+	OutputFileNameLabel->clear();
+	InputFileSizeLabel->clear();
+	OutputFileSizeLabel->clear();
+}
+
 
 
 } // namespace iqtfpf
