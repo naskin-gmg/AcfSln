@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1565
+          1567
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          251
+          252
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="8">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         HotfolderDemoFramework
@@ -40,57 +40,13 @@
     </Element>
     <Element>
       <ComponentName>
-        InputBitmap
+        InputPreview
       </ComponentName>
       <X>
-        200
+        325
       </X>
       <X>
         375
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputBitmapLoader
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        525
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputImageView
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputBitmap
-      </ComponentName>
-      <X>
-        1075
-      </X>
-      <X>
-        375
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputBitmapLoader
-      </ComponentName>
-      <X>
-        950
-      </X>
-      <X>
-        525
       </X>
     </Element>
     <Element>
@@ -106,13 +62,13 @@
     </Element>
     <Element>
       <ComponentName>
-        OutputImageView
+        OutputPreview
       </ComponentName>
       <X>
-        950
+        925
       </X>
       <X>
-        175
+        375
       </X>
     </Element>
   </PositionMap>
