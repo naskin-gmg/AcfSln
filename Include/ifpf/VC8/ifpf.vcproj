@@ -229,10 +229,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileProcessingComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderLoaderComp.cpp"
 				>
 			</File>
@@ -287,10 +283,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileNamingParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileProcessingComp.h"
 				>
 			</File>
 			<File

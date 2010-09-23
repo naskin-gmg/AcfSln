@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1518
+          1564
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          218
+          249
         </Number>
         <Description>
           ACF-Solutions
@@ -29,13 +29,13 @@
   <ElementsList count="3">
     <Element>
       <Id>
-        InputImageView
+        InputFileName
       </Id>
       <PackageId>
-        QtViewPck
+        BasePck
       </PackageId>
       <ComponentId>
-        ImageView
+        FileNameParam
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,48 +44,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              BackgroundMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                5
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ImagePositionMode
+              PathType
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -99,25 +61,6 @@
               </IsEnabled>
               <Value>
                 1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsImageFrameVisible
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -126,13 +69,13 @@
     </Element>
     <Element>
       <Id>
-        OutputImageView
+        OutputFileName
       </Id>
       <PackageId>
-        QtViewPck
+        BasePck
       </PackageId>
       <ComponentId>
-        ImageView
+        FileNameParam
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -141,48 +84,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              BackgroundMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                5
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ImagePositionMode
+              PathType
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -196,25 +101,6 @@
               </IsEnabled>
               <Value>
                 1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsImageFrameVisible
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -238,10 +124,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              InputPreview
+              InputFileName
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -254,7 +140,42 @@
                 true
               </IsEnabled>
               <Value>
-                InputImageView
+                InputFileName
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputPreview
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              InputFilePreview
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputFileName
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                OutputFileName
               </Value>
             </Data>
           </AttributeInfo>
@@ -266,15 +187,12 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              OutputFilePreview
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                OutputImageView
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -326,9 +244,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Processing item preview GUI component
   </Description>
   <Keywords>
-    
+    Hotfolder GUI Processing
   </Keywords>
 </Acf>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1518
+          1564
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          218
+          249
         </Number>
         <Description>
           ACF-Solutions
@@ -29,24 +29,24 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        InputImageView
+        InputFileName
       </ComponentName>
       <X>
-        300
+        275
       </X>
       <X>
-        475
+        375
       </X>
     </Element>
     <Element>
       <ComponentName>
-        OutputImageView
+        OutputFileName
       </ComponentName>
       <X>
-        900
+        875
       </X>
       <X>
-        475
+        375
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         ProcessingItemPreviewGui
       </ComponentName>
       <X>
-        600
+        575
       </X>
       <X>
-        275
+        375
       </X>
     </Element>
   </PositionMap>

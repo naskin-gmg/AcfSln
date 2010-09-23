@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1563
+          1564
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          245
+          249
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         ApplicationInfo
@@ -62,6 +62,17 @@
     </Element>
     <Element>
       <ComponentName>
+        InputPreview
+      </ComponentName>
+      <X>
+        300
+      </X>
+      <X>
+        650
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         LogDock
       </ComponentName>
       <X>
@@ -69,6 +80,17 @@
       </X>
       <X>
         275
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputPreview
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        650
       </X>
     </Element>
     <Element>

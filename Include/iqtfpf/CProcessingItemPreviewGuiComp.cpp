@@ -26,7 +26,7 @@ void CProcessingItemPreviewGuiComp::UpdateModel() const
 }
 
 
-void CProcessingItemPreviewGuiComp::UpdateEditor(int /*updateFlags*/)
+void CProcessingItemPreviewGuiComp::UpdateEditor(int updateFlags)
 {
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -75,6 +75,12 @@ void CProcessingItemPreviewGuiComp::UpdateEditor(int /*updateFlags*/)
 
 		InputFileSizeLabel->setText(QString("%1 KBytes").arg(inputFileSize, 1, 'f', 1));
 		OutputFileSizeLabel->setText(QString("%1 KBytes").arg(outputFileSize, 1, 'f', 1));
+
+		if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0 && m_outputFileNameParamCompPtr.IsValid()){
+			if (objectPtr->GetProcessingState() == iproc::IProcessor::TS_OK){
+				m_outputFileNameParamCompPtr->SetPath(objectPtr->GetOutputFile());
+			}
+		}
 	}
 }
 
@@ -85,23 +91,32 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	if (m_inputPreviewObserverCompPtr.IsValid() && m_processingItemPreviewProviderCompPtr.IsValid()){
+	I_ASSERT(m_inputFileNameParamCompPtr.IsValid());
+	I_ASSERT(m_inputFileNameParamModelCompPtr.IsValid());
+	I_ASSERT(m_outputFileNameParamCompPtr.IsValid());
+	I_ASSERT(m_outputFileNameParamModelCompPtr.IsValid());
+
+	if (m_inputPreviewObserverCompPtr.IsValid() && m_inputFileNameParamModelCompPtr.IsValid()){
 		ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(m_processingItemPreviewProviderCompPtr->GetInputFilePreview(*objectPtr));
-			if (modelPtr != NULL){
-				(const_cast<imod::IModel*>(modelPtr))->AttachObserver(m_inputPreviewObserverCompPtr.GetPtr());
-			}
+		if (objectPtr != NULL && m_inputFileNameParamCompPtr.IsValid()){
+			m_inputFileNameParamCompPtr->SetPath(objectPtr->GetInputFile());
+		
+			m_inputFileNameParamModelCompPtr->AttachObserver(m_inputPreviewObserverCompPtr.GetPtr());
 		}
 	}
 
-	if (m_outputPreviewObserverCompPtr.IsValid() && m_processingItemPreviewProviderCompPtr.IsValid()){
+	if (m_outputPreviewObserverCompPtr.IsValid() && m_outputFileNameParamModelCompPtr.IsValid()){
 		ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(m_processingItemPreviewProviderCompPtr->GetOutputFilePreview(*objectPtr));
-			if (modelPtr != NULL){
-				(const_cast<imod::IModel*>(modelPtr))->AttachObserver(m_outputPreviewObserverCompPtr.GetPtr());
+		if (objectPtr != NULL && m_outputFileNameParamCompPtr.IsValid()){
+
+			if (QFile::exists(iqt::GetQString(objectPtr->GetOutputFile()))){
+				m_outputFileNameParamCompPtr->SetPath(objectPtr->GetOutputFile());
 			}
+			else{
+				m_outputFileNameParamCompPtr->SetPath(istd::CString());
+			}
+		
+			m_outputFileNameParamModelCompPtr->AttachObserver(m_outputPreviewObserverCompPtr.GetPtr());
 		}
 	}
 }
@@ -109,24 +124,12 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 
 void CProcessingItemPreviewGuiComp::OnGuiModelDetached()
 {
-	if (m_inputPreviewObserverCompPtr.IsValid() && m_processingItemPreviewProviderCompPtr.IsValid()){
-		ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(m_processingItemPreviewProviderCompPtr->GetInputFilePreview(*objectPtr));
-			if (modelPtr != NULL && modelPtr->IsAttached(m_inputPreviewObserverCompPtr.GetPtr())){
-				(const_cast<imod::IModel*>(modelPtr))->DetachObserver(m_inputPreviewObserverCompPtr.GetPtr());
-			}
-		}
+	if (m_inputPreviewObserverCompPtr.IsValid() && m_inputFileNameParamModelCompPtr.IsValid()){
+		m_inputFileNameParamModelCompPtr->DetachObserver(m_inputPreviewObserverCompPtr.GetPtr());
 	}
 
-	if (m_outputPreviewObserverCompPtr.IsValid() && m_processingItemPreviewProviderCompPtr.IsValid()){
-		ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
-			const imod::IModel* modelPtr = dynamic_cast<const imod::IModel*>(m_processingItemPreviewProviderCompPtr->GetOutputFilePreview(*objectPtr));
-			if (modelPtr != NULL && modelPtr->IsAttached(m_outputPreviewObserverCompPtr.GetPtr())){
-				(const_cast<imod::IModel*>(modelPtr))->DetachObserver(m_outputPreviewObserverCompPtr.GetPtr());
-			}
-		}
+	if (m_outputPreviewObserverCompPtr.IsValid() && m_outputFileNameParamModelCompPtr.IsValid()){
+		m_outputFileNameParamModelCompPtr->DetachObserver(m_outputPreviewObserverCompPtr.GetPtr());
 	}
 
 	BaseClass::OnGuiModelDetached();
