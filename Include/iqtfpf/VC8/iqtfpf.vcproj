@@ -192,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFilePreviewGeneratorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderContainerGuiComp.cpp"
 				>
 			</File>
@@ -239,10 +235,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileNamingComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePreviewGeneratorComp.h"
 				>
 			</File>
 			<File

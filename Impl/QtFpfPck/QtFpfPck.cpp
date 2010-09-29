@@ -63,11 +63,6 @@ I_EXPORT_COMPONENT(
 			"File Processing Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
-			FilePreviewGenerator,
-			"Preview generator for a file",
-			"File Preview Generator");
-
-I_EXPORT_COMPONENT(
 			HotfolderWorkflowScenographer,
 			"Hotfolder workflow visualization",
 			"Hotfolder File Procesing Observer");
