@@ -12,7 +12,6 @@
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
-#include "ifpf/IProcessingItemPreviewProvider.h"
 
 #include "iqtfpf/Generated/ui_CProcessingItemPreviewGuiComp.h"
 
