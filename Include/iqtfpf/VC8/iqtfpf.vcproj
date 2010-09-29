@@ -216,10 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessingItemPreviewGeneratorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CProcessingItemPreviewGuiComp.cpp"
 				>
 			</File>
@@ -271,10 +267,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessingItemInfoGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGeneratorComp.h"
 				>
 			</File>
 			<File
@@ -443,5 +435,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-
