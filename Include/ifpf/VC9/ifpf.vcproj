@@ -229,15 +229,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileProcessingComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolder.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingInfo.cpp"
 				>
 			</File>
 			<File
@@ -290,15 +286,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileProcessingComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolder.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderProcessingInfo.h"
 				>
 			</File>
 			<File
@@ -383,10 +375,6 @@
 			</File>
 			<File
 				RelativePath="..\IMonitoringSessionManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IProcessingItemPreviewProvider.h"
 				>
 			</File>
 		</Filter>

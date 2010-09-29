@@ -192,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFilePreviewGeneratorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderContainerGuiComp.cpp"
 				>
 			</File>
@@ -213,10 +209,6 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderWorkflowScenographerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGeneratorComp.cpp"
 				>
 			</File>
 			<File
@@ -246,10 +238,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFilePreviewGeneratorComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderContainerGuiComp.h"
 				>
 			</File>
@@ -271,10 +259,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessingItemInfoGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGeneratorComp.h"
 				>
 			</File>
 			<File
@@ -443,6 +427,4 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-
 
