@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1536
+          1571
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          232
+          256
         </Number>
         <Description>
           ACF-Solutions
@@ -26,38 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
-    <Element>
-      <ComponentName>
-        AcfHelpFileProvider
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         ComponentHelpFileProvider
       </ComponentName>
       <X>
-        300
+        600
       </X>
       <X>
-        325
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DoxygenHelpFileProvider
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        325
+        400
       </X>
     </Element>
     <Element>
@@ -79,7 +57,7 @@
         600
       </X>
       <X>
-        225
+        275
       </X>
     </Element>
   </PositionMap>

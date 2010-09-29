@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1456
+          1571
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          256
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -134,13 +145,13 @@
     </Element>
     <Element>
       <Id>
-        PackagesLoader
+        PackagesLoaderExt
       </Id>
       <PackageId>
-        QtPck
+        CmpstrPck
       </PackageId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -253,7 +264,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackagesLoader
+                PackagesLoaderExt
               </Value>
             </Data>
           </AttributeInfo>
@@ -309,7 +320,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackagesLoader
+                PackagesLoaderExt
               </Value>
             </Data>
           </AttributeInfo>
@@ -349,7 +360,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackagesLoader
+                PackagesLoaderExt
               </Value>
             </Data>
           </AttributeInfo>
@@ -458,7 +469,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackagesLoader
+                PackagesLoaderExt
               </Value>
             </Data>
           </AttributeInfo>
@@ -549,7 +560,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackagesLoader
+                PackagesLoaderExt
               </Value>
             </Data>
           </AttributeInfo>
@@ -627,13 +638,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="8">
+  <ExportedInterfaces count="9">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         DocumentTemplate
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        icmpstr::IExternalMetaInfoManager
+      </InterfaceId>
+      <ComponentId>
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -649,7 +668,7 @@
         icomp::IComponentEnvironmentManager
       </InterfaceId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -657,7 +676,7 @@
         icomp::IComponentStaticInfo
       </InterfaceId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -665,7 +684,7 @@
         icomp::IMetaInfoManager
       </InterfaceId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -673,7 +692,7 @@
         icomp::IRegistriesManager
       </InterfaceId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -681,7 +700,7 @@
         icomp::IRegistryLoader
       </InterfaceId>
       <ComponentId>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>

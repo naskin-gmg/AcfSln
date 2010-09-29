@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1456
+          1571
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          256
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -21,21 +32,21 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        475
+        825
       </X>
       <X>
-        75
+        125
       </X>
     </Element>
     <Element>
       <ComponentName>
-        PackagesLoader
+        PackagesLoaderExt
       </ComponentName>
       <X>
         150
       </X>
       <X>
-        500
+        50
       </X>
     </Element>
     <Element>
@@ -76,10 +87,10 @@
         RegistryLoader
       </ComponentName>
       <X>
-        150
+        550
       </X>
       <X>
-        100
+        50
       </X>
     </Element>
     <Element>
