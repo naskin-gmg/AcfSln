@@ -47,18 +47,6 @@ public:
 		\sa	WeightMode
 	*/
 	virtual int GetWeightMode() const = 0;
-
-	/**
-		Get logical position range (time axis) of this data sequence.
-		For example, if you sample sound from second 1 to 5 it will be represented as range [1.0, 5.0].
-		If this range is invalid, no logical range is provided.
-	*/
-	virtual const istd::CRange& GetLogicalSamplesRange() const = 0;
-	/**
-		Set logical position range (time axis) of this data sequence.
-		\sa GetLogicalRange
-	*/
-	virtual void SetLogicalSamplesRange(const istd::CRange& range) = 0;
 };
 
 
