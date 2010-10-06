@@ -5,6 +5,7 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
+#include "iqwt/CProgressHistoryGuiComp.h"
 #include "iqwt3d/CSurfaceViewComp.h"
 
 
@@ -15,6 +16,7 @@ namespace QwtPck
 {
 
 
+typedef iqwt::CProgressHistoryGuiComp ProgressHistoryGui;
 typedef iqwt3d::CSurfaceViewComp SurfaceView;
 
 

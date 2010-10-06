@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="QwtPck"
-	ProjectGUID="{39CA72AF-0B0B-42DF-81D2-D71DA3C647F1}"
-	RootNamespace="QwtPck"
+	Name="iqwt"
+	ProjectGUID="{417FFDCB-12EE-46F6-A112-C15E152B63C8}"
+	RootNamespace="iqwt"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
 	>
@@ -14,20 +14,32 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -40,17 +52,15 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\Include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
-				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -63,18 +73,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
-				GenerateDebugInformation="false"
-				SubSystem="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -86,24 +88,30 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
+			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC9"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -117,8 +125,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\Include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				StringPooling="true"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -126,7 +135,6 @@
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
-				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -139,18 +147,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWTDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;"
-				GenerateDebugInformation="true"
-				SubSystem="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -160,9 +160,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -178,7 +175,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\QwtPck.cpp"
+				RelativePath="..\CProgressHistoryGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -188,7 +185,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\QwtPck.h"
+				RelativePath="..\CProgressHistoryGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iqwt.h"
 				>
 			</File>
 		</Filter>
@@ -198,6 +199,21 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp"
+			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
+			>
+		</Filter>
+		<Filter
+			Name="Forms"
+			Filter="ui"
+			>
+			<File
+				RelativePath="..\CProgressHistoryGuiComp.ui"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
