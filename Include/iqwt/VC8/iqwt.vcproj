@@ -2,10 +2,11 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iqaxmm"
-	ProjectGUID="{19BF49D4-532F-4B58-A9B5-F215495527EC}"
-	RootNamespace="iqaxmm"
+	Name="iqwt"
+	ProjectGUID="{417FFDCB-12EE-46F6-A112-C15E152B63C8}"
+	RootNamespace="iqwt"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -15,9 +16,6 @@
 	<ToolFiles>
 		<ToolFile
 			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
-		/>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Acf.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
@@ -41,18 +39,6 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -66,8 +52,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\Include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -125,18 +111,6 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -151,8 +125,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\Include&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -201,7 +175,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.cpp"
+				RelativePath="..\CProgressHistoryGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -211,11 +185,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CVlcVideoViewGuiComp.h"
+				RelativePath="..\CProgressHistoryGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqaxmm.h"
+				RelativePath="..\iqwt.h"
 				>
 			</File>
 		</Filter>
@@ -234,17 +208,10 @@
 		</Filter>
 		<Filter
 			Name="Forms"
-			>
-		</Filter>
-		<Filter
-			Name="Wrapped Files"
+			Filter="ui"
 			>
 			<File
-				RelativePath="..\Wrapped\axvlc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Wrapped\axvlc.h"
+				RelativePath="..\CProgressHistoryGuiComp.ui"
 				>
 			</File>
 		</Filter>
@@ -264,7 +231,4 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-
-
 

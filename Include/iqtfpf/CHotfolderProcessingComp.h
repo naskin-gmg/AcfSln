@@ -6,6 +6,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QList>
+#include <QDateTime>
 
 
 // ACF includes
@@ -61,12 +62,43 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected:
+	/**
+		Implementation of processing thread.
+	*/
+	class ItemProcessor: public QThread
+	{
+	public:
+		ItemProcessor(
+					CHotfolderProcessingComp& parent,
+					const istd::CString& inputFilePath,
+					const istd::CString& outputFilePath,
+					const std::string& itemUuid);
+
+		int GetProcessingState() const;
+		std::string GetItemUuid() const;
+		QDateTime GetStartTime() const;
+		double GetProcessingTime() const;
+
+	protected:
+		// reimplemented (QThread)
+		virtual void run();
+
+	private:
+		CHotfolderProcessingComp& m_parent;
+		istd::CString m_inputFilePath;
+		istd::CString m_outputFilePath;
+		std::string m_itemUuid;
+		int m_processingState;
+		double m_processingTime;
+		QDateTime m_startTime; 
+	};
+
 	virtual bool OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
 
 protected Q_SLOTS:
 	void OnUpdateQueueTimer();
 	void OnProcessingTimer();
-	void OnProcessingItemFinished(const std::string& processingItemUuid, int processingState);
+	void OnProcessingItemFinished(const ItemProcessor& processor);
 
 private:
 	/**
@@ -163,33 +195,6 @@ private:
 		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
 		CHotfolderProcessingComp& m_parent;
-	};
-
-	/**
-		Implementation of processing thread.
-	*/
-	class ItemProcessor: public QThread
-	{
-	public:
-		ItemProcessor(
-					CHotfolderProcessingComp& parent,
-					const istd::CString& inputFilePath,
-					const istd::CString& outputFilePath,
-					const std::string& itemUuid);
-
-		int GetProcessingState() const;
-		std::string GetItemUuid() const;
-
-	protected:
-		// reimplemented (QThread)
-		virtual void run();
-
-	private:
-		CHotfolderProcessingComp& m_parent;
-		istd::CString m_inputFilePath;
-		istd::CString m_outputFilePath;
-		std::string m_itemUuid;
-		int m_processingState;
 	};
 
 private:

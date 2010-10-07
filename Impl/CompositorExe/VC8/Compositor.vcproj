@@ -5,6 +5,7 @@
 	Name="Compositor"
 	ProjectGUID="{00BD2AB5-993C-4B0D-B117-D98F7307E947}"
 	RootNamespace="Compositor"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -121,9 +122,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -228,9 +226,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -325,3 +320,4 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
+

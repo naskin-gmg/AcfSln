@@ -5,6 +5,8 @@
 // ACF includes
 #include "istd/CString.h"
 
+#include "isys/IDateTime.h"
+
 #include "iser/ISerializable.h"
 
 
@@ -62,6 +64,26 @@ public:
 		Set file path of the processing output.
 	*/
 	virtual void SetOutputFile(const istd::CString& outputFile) = 0;
+
+	/**
+		Get processing time.
+	*/
+	virtual double GetProcessingTime() const = 0;
+
+	/**
+		Set processing time.
+	*/
+	virtual void SetProcessingTime(double processingTime) = 0;
+
+	/**
+		Get start time of the job.
+	*/
+	virtual const isys::IDateTime& GetStartTime() const = 0;
+
+	/**
+		Set start time of the job.
+	*/
+	virtual void SetStartTime(const isys::IDateTime& startTime) = 0;
 };
 
 

@@ -18,7 +18,8 @@ namespace ifpf
 
 
 CHotfolderProcessingItem::CHotfolderProcessingItem()
-	:m_processingState(iproc::IProcessor::TS_NONE)
+	:m_processingState(iproc::IProcessor::TS_NONE),
+	m_processingTime(0.0)
 {
 	GetItemUuid();
 }
@@ -88,6 +89,38 @@ void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
 }
 
 
+double CHotfolderProcessingItem::GetProcessingTime() const
+{
+	return m_processingTime;
+}
+
+
+void CHotfolderProcessingItem::SetProcessingTime(double processingTime)
+{
+	if (m_processingTime != processingTime){
+		istd::CChangeNotifier changePtr(this);
+
+		m_processingTime = processingTime;
+	}
+}
+
+
+const isys::IDateTime& CHotfolderProcessingItem::GetStartTime() const
+{
+	return m_startTime;
+}
+
+
+void CHotfolderProcessingItem::SetStartTime(const isys::IDateTime& startTime)
+{
+	if (startTime.ToCTime() != m_startTime.ToCTime()){
+		istd::CChangeNotifier changePtr(this);
+
+		m_startTime.FromCTime(startTime.ToCTime());
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
@@ -113,6 +146,16 @@ bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(outputFileTag);
 	retVal = retVal && archive.Process(m_outputFile);
 	retVal = retVal && archive.EndTag(outputFileTag);
+
+	static iser::CArchiveTag processingTimeTag("ProcessingTime", "Processing time");
+	retVal = retVal && archive.BeginTag(processingTimeTag);
+	retVal = retVal && archive.Process(m_processingTime);
+	retVal = retVal && archive.EndTag(processingTimeTag);
+
+	static iser::CArchiveTag startTimeTag("StartTime", "Start time of the processing");
+	retVal = retVal && archive.BeginTag(startTimeTag);
+	retVal = retVal && m_startTime.Serialize(archive);
+	retVal = retVal && archive.EndTag(startTimeTag);
 
 	return retVal;
 }

@@ -147,7 +147,7 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 		for (int processingFutureIndex = 0; processingFutureIndex < m_pendingProcessors.GetCount(); processingFutureIndex++){
 			ItemProcessor* processorPtr = m_pendingProcessors.GetAt(processingFutureIndex);
 			if (processorPtr->isFinished()){
-				OnProcessingItemFinished(processorPtr->GetItemUuid(), processorPtr->GetProcessingState());
+				OnProcessingItemFinished(*processorPtr);
 
 				m_pendingProcessors.RemoveAt(processingFutureIndex);
 				updateProcessedItemsDone = false;
@@ -189,11 +189,19 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 }
 
 
-void CHotfolderProcessingComp::OnProcessingItemFinished(const std::string& processingItemUuid, int processingState)
+void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& processor)
 {
-	ifpf::IHotfolderProcessingItem* itemPtr = GetItemFromId(processingItemUuid);
+	ifpf::IHotfolderProcessingItem* itemPtr = GetItemFromId(processor.GetItemUuid());
 	if (itemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED){
-		itemPtr->SetProcessingState(processingState);
+		istd::CChangeNotifier changePtr(itemPtr);
+
+		itemPtr->SetProcessingState(processor.GetProcessingState());
+
+		isys::CSimpleDateTime startTime;
+		startTime.FromCTime(processor.GetStartTime().toTime_t());
+		itemPtr->SetStartTime(startTime);
+
+		itemPtr->SetProcessingTime(processor.GetProcessingTime());
 	}
 }
 
@@ -491,17 +499,32 @@ std::string CHotfolderProcessingComp::ItemProcessor::GetItemUuid() const
 }
 
 
+QDateTime CHotfolderProcessingComp::ItemProcessor::GetStartTime() const
+{
+	return m_startTime;
+}
+
+double CHotfolderProcessingComp::ItemProcessor::GetProcessingTime() const
+{
+	return m_processingTime;
+}
+
+
 // protected methods
 
 // reimplemented (QThread)
 
 void CHotfolderProcessingComp::ItemProcessor::run()
 {
+	m_startTime = QDateTime::currentDateTime(); 
+	
 	I_ASSERT(m_parent.m_fileConvertCompPtr.IsValid());
 	if (!m_parent.m_fileConvertCompPtr.IsValid()){
 		return;
 	}
 
+	iqt::CTimer m_timer;
+	
 	if (!m_parent.m_fileConvertCompPtr->CopyFile(m_inputFilePath, m_outputFilePath)){
 		istd::CString message = istd::CString("Processing of ") + m_inputFilePath + " failed";
 		m_parent.SendErrorMessage(0, message, "Hotfolder");
@@ -511,6 +534,8 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 	else{
 		m_processingState = iproc::IProcessor::TS_OK;
 	}
+
+	m_processingTime = m_timer.GetElapsed();
 }
 
 

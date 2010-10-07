@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QFileInfo>
+#include <QDateTime>
 
 
 // ACF includes
@@ -83,6 +84,14 @@ void CProcessingItemPreviewGuiComp::UpdateEditor(int updateFlags)
 				m_outputFileNameParamCompPtr->SetPath(objectPtr->GetOutputFile());
 			}
 		}
+
+		QDateTime startedDateTime;
+
+		startedDateTime.fromTime_t(objectPtr->GetStartTime().ToCTime());
+
+		StartedAtLabel->setText(startedDateTime.toString(Qt::SystemLocaleLongDate));
+
+		ProcessingTimeLabel->setText(QString("%1 sec").arg(objectPtr->GetProcessingTime()));
 	}
 }
 

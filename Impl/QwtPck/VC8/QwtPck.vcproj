@@ -6,6 +6,7 @@
 	ProjectGUID="{39CA72AF-0B0B-42DF-81D2-D71DA3C647F1}"
 	RootNamespace="QwtPck"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -41,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -63,9 +64,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
+				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWTDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -86,9 +87,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -119,7 +117,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QWTDIR)\include&quot;;&quot;$(QWT3DDIR)\include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -142,9 +140,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
+				AdditionalDependencies="qwt3dlib.lib Qwt.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWTDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
@@ -165,9 +163,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -220,5 +215,4 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
 

@@ -6,7 +6,7 @@
 #include <objbase.h>
 
 // ACF includes
-#include "istd/TPointer.h"
+#include "istd/TPointerBase.h"
 
 
 namespace iwin
@@ -17,10 +17,10 @@ namespace iwin
 	Pointer wrapper providing access to Windows COM objects.
 */
 template <class Type>
-class TComPtr: public istd::TPointer<Type>
+class TComPtr: public istd::TPointerBase<Type>
 {
 public:
-	typedef istd::TPointer<Type> BaseClass;
+	typedef istd::TPointerBase<Type> BaseClass;
 
 	/**
 		Set new value of internal pointer.
