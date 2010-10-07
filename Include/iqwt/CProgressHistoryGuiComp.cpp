@@ -3,7 +3,6 @@
 
 // Qt includes
 #include <QCoreApplication>
-#include <QVBoxLayout>
 
 // Qwt includes
 #include "qwt_plot_layout.h"
@@ -25,7 +24,7 @@ CProgressHistoryGuiComp::CProgressHistoryGuiComp()
 }
 
 
-// reimplemented (sprw::IActivityConsumer)
+// reimplemented (iproc::IProgressManager)
 
 int CProgressHistoryGuiComp::BeginProgressSession(
 			const std::string& /*progressId*/,
@@ -132,7 +131,7 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	// setup current plot curve:
     m_currentCurve.setPen(QPen(m_inactiveCurveColor, 1));
 	m_currentCurve.setRenderHint(QwtPlotItem::RenderAntialiased);
-	m_currentCurve.setTitle(tr("Neuron activities"));
+	m_currentCurve.setTitle(tr("Progress"));
 	m_currentCurve.attach(m_plotPtr);
 
 	// add plot view to frame layout
