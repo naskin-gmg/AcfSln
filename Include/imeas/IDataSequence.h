@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/TTransPtr.h"
 #include "iser/ISerializable.h"
 
 #include "imeas/IDataSequenceInfo.h"
@@ -27,14 +28,18 @@ public:
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) = 0;
 
 	/**
-		Set additional information about this sequence.
+		Create sequence and set the info object.
+		\param	infoPtr	sequence info object.
 	*/
-	virtual const IDataSequenceInfo* GetSequenceInfo() const = 0;
+	virtual bool CreateSequenceWithInfo(
+				istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+				int samplesCount = -1,
+				int channelsCount = -1) = 0;
 
 	/**
 		Set additional information about this sequence.
 	*/
-	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag = false) = 0;
+	virtual const IDataSequenceInfo* GetSequenceInfo() const = 0;
 
 	/**
 		Return true if this sequence has no sample.

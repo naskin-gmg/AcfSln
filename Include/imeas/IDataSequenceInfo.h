@@ -19,6 +19,18 @@ namespace imeas
 class IDataSequenceInfo: virtual public iser::ISerializable
 {
 public:
+	enum SequenceInfoFlags
+	{
+		/**
+			Number of samples is fixed by this info object.
+		*/
+		SIF_SAMPLES_COUNT_FIXED = 1 << 1,
+		/**
+			Number of channels is fixed by this info object.
+		*/
+		SIF_CHANNELS_COUNT_FIXED = 1 << 2
+	};
+
 	/**
 		Describe mode of weight information.
 	*/
@@ -41,6 +53,20 @@ public:
 		*/
 		WM_UNKNOWN
 	};
+
+	/**
+		Get flags for this data sequence.
+	*/
+	virtual int GetSequenceInfoFlags() const = 0;
+
+	/**
+		Get number of samples if there are fixed.
+	*/
+	virtual int GetFixedSamplesCount() const = 0;
+	/**
+		Get number of channels if there are fixed.
+	*/
+	virtual int GetFixedChannelsCount() const = 0;
 
 	/**
 		Get weight mode for this sequence.

@@ -30,8 +30,11 @@ public:
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual bool CreateSequenceWithInfo(
+				istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+				int samplesCount = -1,
+				int channelsCount = -1);
 	virtual const IDataSequenceInfo* GetSequenceInfo() const;
-	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
@@ -64,7 +67,7 @@ private:
 
 	int m_channelsCount;
 
-	istd::TOptDelPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
+	istd::TSmartPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
 };
 
 

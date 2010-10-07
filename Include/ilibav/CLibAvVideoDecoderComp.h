@@ -2,6 +2,9 @@
 #define ilibav_CLibAvVideoDecoderComp_included
 
 
+// STL includes
+#include <vector>
+
 // LIBAV includes
 extern "C"{
 #define inline _inline
@@ -105,7 +108,7 @@ private:
 	int16_t* m_audioOutputBuffer;
 	bool m_ignoreFirstAudioFrame;
 
-	istd::TDelPtr<I_BYTE, true> m_imageBufferPtr;
+	std::vector<I_BYTE> m_imageBuffer;
 
 	AVPacket m_packet;
 	int m_bytesRemaining;

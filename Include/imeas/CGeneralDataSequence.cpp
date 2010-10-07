@@ -30,23 +30,39 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 
 	m_channelsCount = channelsCount;
 
+	if (m_sequenceInfoPtr.IsValid()){
+		if (samplesCount < 0){
+			samplesCount = m_sequenceInfoPtr->GetFixedSamplesCount();
+		}
+		if (channelsCount < 0){
+			channelsCount = m_sequenceInfoPtr->GetFixedChannelsCount();
+		}
+	}
+
+	if ((samplesCount <= 0) || (channelsCount <= 0)){
+		return false;
+	}
+
 	m_samples.resize(samplesCount * m_channelsCount, 0.0);
 
 	return true;
 }
 
 
-const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
+bool CGeneralDataSequence::CreateSequenceWithInfo(
+			istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+			int samplesCount,
+			int channelsCount)
 {
-	return m_sequenceInfoPtr.GetPtr();
+	m_sequenceInfoPtr = infoPtr;
+
+	return CreateSequence(samplesCount, channelsCount);
 }
 
 
-bool CGeneralDataSequence::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag)
+const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
 {
-	m_sequenceInfoPtr.SetPtr(infoPtr, releaseFlag);
-
-	return true;
+	return m_sequenceInfoPtr.GetPtr();
 }
 
 

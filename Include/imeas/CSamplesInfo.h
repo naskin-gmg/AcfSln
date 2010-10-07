@@ -30,6 +30,9 @@ public:
 	void SetLogicalSamplesRange(const istd::CRange& range);
 
 	// reimplemented (imeas::IDataSequenceInfo)
+	virtual int GetSequenceInfoFlags() const;
+	virtual int GetFixedSamplesCount() const;
+	virtual int GetFixedChannelsCount() const;
 	virtual int GetWeightMode() const;
 
 	// reimplemented (iser::ISerializable)

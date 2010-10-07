@@ -7,15 +7,8 @@
 
 
 // ACF includes
-#include "istd/TOptPointerVector.h"
 #include "istd/TDelPtr.h"
-#include "istd/TSmartPtr.h"
-#include "istd/TChangeDelegator.h"
-
-#include "isys/ICriticalSection.h"
-
 #include "icomp/CComponentBase.h"
-
 
 // AcfSln includes
 #include "ifpf/IHotfolderWorkflow.h"

@@ -6,6 +6,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/TSmartPtr.h"
 #include "iprm/IFileNameParam.h"
 
 #include "imeas/CSamplesInfo.h"
@@ -165,12 +166,12 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 						PIX_FMT_RGB32,
 						m_videoCodecContextPtr->width,
 						m_videoCodecContextPtr->height);
-			m_imageBufferPtr.SetPtr(new I_BYTE[numBytes]);
+			m_imageBuffer.resize(numBytes);
 
 			// Assign appropriate parts of buffer to image planes in pFrameRGB
 			avpicture_fill(
 						(AVPicture*)m_frameRgbPtr,
-						m_imageBufferPtr.GetPtr(),
+						&m_imageBuffer[0],
 						PIX_FMT_RGB32,
 						m_videoCodecContextPtr->width,
 						m_videoCodecContextPtr->height);
@@ -218,10 +219,11 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 					if (m_audioCodecContextPtr->sample_rate > 0){
 						int samplesCount = int(*m_autoAudioGrabLengthAttrPtr * m_audioCodecContextPtr->sample_rate);
 						int channelsCount = m_audioCodecContextPtr->channels;
-						m_audioSequenceCompPtr->CreateSequence(samplesCount, channelsCount);
-
 						istd::CRange resultProportionRange(0, double(samplesCount) / m_audioCodecContextPtr->sample_rate);
-						m_audioSequenceCompPtr->SetSequenceInfo(new imeas::CSamplesInfo(resultProportionRange), true);
+						m_audioSequenceCompPtr->CreateSequenceWithInfo(
+									istd::TSmartPtr<const imeas::IDataSequenceInfo>(new imeas::CSamplesInfo(resultProportionRange)),
+									samplesCount,
+									channelsCount);
 					}
 				}
 			}
@@ -268,7 +270,7 @@ void CLibAvVideoDecoderComp::CloseMedium()
 
 	m_currentFrame = 0;
 
-	m_imageBufferPtr.Reset();
+	m_imageBuffer.clear();
 }
 
 

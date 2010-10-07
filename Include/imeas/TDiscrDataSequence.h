@@ -5,6 +5,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TOptDelPtr.h"
+#include "istd/TSmartPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -36,8 +37,11 @@ public:
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual bool CreateSequenceWithInfo(
+				istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+				int samplesCount = -1,
+				int channelsCount = -1);
 	virtual const IDataSequenceInfo* GetSequenceInfo() const;
-	virtual bool SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag = false);
 	virtual bool IsEmpty() const;
 	virtual void ResetSequence();
 	virtual int GetSamplesCount() const;
@@ -60,7 +64,7 @@ private:
 	int m_sampleDiff;
 	int m_channelDiff;
 
-	istd::TOptDelPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
+	istd::TSmartPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
 };
 
 
@@ -158,18 +162,21 @@ bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsC
 
 
 template <typename Element>
-const IDataSequenceInfo* TDiscrDataSequence<Element>::GetSequenceInfo() const
+bool TDiscrDataSequence<Element>::CreateSequenceWithInfo(
+			istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+			int samplesCount,
+			int channelsCount)
 {
-	return m_sequenceInfoPtr.GetPtr();
+	m_sequenceInfoPtr = infoPtr;
+
+	return CreateSequence(samplesCount, channelsCount);
 }
 
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::SetSequenceInfo(const IDataSequenceInfo* infoPtr, bool releaseFlag)
+const IDataSequenceInfo* TDiscrDataSequence<Element>::GetSequenceInfo() const
 {
-	m_sequenceInfoPtr.SetPtr(infoPtr, releaseFlag);
-
-	return true;
+	return m_sequenceInfoPtr.GetPtr();
 }
 
 
