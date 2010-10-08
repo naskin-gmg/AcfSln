@@ -93,14 +93,16 @@ protected:
 		QDateTime m_startTime; 
 	};
 
-	virtual bool OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor);
-
 protected Q_SLOTS:
 	void OnUpdateQueueTimer();
 	void OnProcessingTimer();
 	void OnProcessingItemFinished(const ItemProcessor& processor);
 
 private:
+	void OnFilesAddedEvent(const istd::CStringList& addedFiles);
+	void OnFilesRemovedEvent(const istd::CStringList& removedFiles);
+	void OnFilesModifiedEvent(const istd::CStringList& modifiedFiles);
+
 	/**
 		Synchronize the hotfolder with its static parameters.
 		If \c applyToPendingTasks is enabled, 
@@ -142,6 +144,11 @@ private:
 		Get next item to be processed.
 	*/
 	ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
+
+	/**
+		Find a processing item for the given file name.
+	*/
+	ifpf::IHotfolderProcessingItem* FindProcessingItem(const istd::CString& fileName) const;
 
 	bool OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr);
 

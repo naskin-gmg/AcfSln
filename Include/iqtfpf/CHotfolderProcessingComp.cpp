@@ -90,25 +90,68 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 // protected methods
 
-bool CHotfolderProcessingComp::OnInputFileEvent(const ifpf::IDirectoryMonitor& directoryMonitor)
+void CHotfolderProcessingComp::OnFilesAddedEvent(const istd::CStringList& addedFiles)
 {
-	if (!m_fileConvertCompPtr.IsValid()){
-		SendErrorMessage(0, "File conversion component was not set", "Hotfolder");
+	m_filesQueue.insert(m_filesQueue.begin(), addedFiles.begin(), addedFiles.end());
+}
 
-		return false;
+
+void CHotfolderProcessingComp::OnFilesRemovedEvent(const istd::CStringList& removedFiles)
+{
+	bool workDone = false;
+
+	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
+		return;
 	}
 
-	if (!m_fileNamingCompPtr.IsValid()){
-		SendErrorMessage(0, "File naming component was not set", "Hotfolder");
+	istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
 
-		return false;
+	bool processingItemsRemoved = false;
+
+	for (int fileIndex = 0; fileIndex < int(removedFiles.size()); fileIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(removedFiles[fileIndex]);
+		if (processingItemPtr != NULL){
+			m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
+
+			processingItemsRemoved = true;
+		}
 	}
 
-	istd::CStringList files = directoryMonitor.GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED);
+	// abort update operation:
+	if (!processingItemsRemoved){
+		changePtr.Abort();
+	}
 
-	m_filesQueue.insert(m_filesQueue.begin(), files.begin(), files.end());
+	while (!workDone){
+		workDone = true;
+		for (int fileIndex = 0; fileIndex < int(removedFiles.size()); fileIndex++){
+			FilesQueue::iterator fileIter = std::find(m_filesQueue.begin(), m_filesQueue.end(), removedFiles[fileIndex]);
+			if (fileIter != m_filesQueue.end()){
+				m_filesQueue.erase(fileIter);
 
-	return true;
+				workDone = false;
+
+				break;
+			}
+		}
+	}
+}
+
+
+void CHotfolderProcessingComp::OnFilesModifiedEvent(const istd::CStringList& modifiedFiles)
+{
+	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
+		return;
+	}
+
+	for (int fileIndex = 0; fileIndex < int(modifiedFiles.size()); fileIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(modifiedFiles[fileIndex]);
+		if (processingItemPtr != NULL){
+			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
+		}
+	}
 }
 
 
@@ -361,14 +404,29 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile(
 }
 
 
-bool CHotfolderProcessingComp::OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr)
+ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::FindProcessingItem(const istd::CString& fileName) const
 {
-	if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
-		return true;
+	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
+		return NULL;
+	}
+		
+	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
+
+		if (processingItemPtr->GetInputFile() == fileName){
+			return processingItemPtr;
+		}
 	}
 
-	if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_WAIT){	
-	}
+	return NULL;
+}
+
+
+bool CHotfolderProcessingComp::OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* /*processingItemPtr*/)
+{
+	// TODO: implement this functionality
 
 	return false;
 }
@@ -427,7 +485,15 @@ void CHotfolderProcessingComp::DirectoryMonitorObserver::AfterUpdate(imod::IMode
 	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
 	
 	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED) != 0){
-		m_parent.OnInputFileEvent(*monitorPtr);
+		m_parent.OnFilesAddedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED));
+	}
+
+	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_REMOVED) != 0){
+		m_parent.OnFilesRemovedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_REMOVED));
+	}
+
+	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_MODIFIED) != 0){
+		m_parent.OnFilesModifiedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_MODIFIED));
 	}
 }
 

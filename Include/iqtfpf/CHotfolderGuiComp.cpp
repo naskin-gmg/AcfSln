@@ -390,7 +390,7 @@ void CHotfolderGuiComp::UpdateItemsVisibility(const QString& textFilter, bool sh
 			 ifpf::IHotfolderProcessingItem* processingItemPtr = itemPtr->GetObjectPtr();
 			 if (processingItemPtr != NULL){
 				 QString fileName = iqt::GetQString(processingItemPtr->GetInputFile());
-				 QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
+				 QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::RegExp);
 				 bool isError = (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_INVALID);
 				 bool isMatched = fileName.contains(regExp);
 				 bool isVisible = ((showOnlyErrors && isError) && isMatched) || (!showOnlyErrors && isMatched);
