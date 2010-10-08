@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1564
+          1585
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          246
+          265
         </Number>
         <Description>
           ACF-Solutions
@@ -44,7 +44,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               FileConverter
@@ -202,25 +202,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SessionManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderStateModel/MonitoringSessionsManager
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

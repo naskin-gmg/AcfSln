@@ -267,6 +267,8 @@ void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/
 	istd::CStringList removedDirectories = GetRemovedInputDirectories();
 	for (int pathIndex = 0; pathIndex < int(removedDirectories.size()); pathIndex++){
 		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
+
+		RemoveDirectoryItems(removedDirectories[pathIndex]);
 	}
 }
 
@@ -384,6 +386,46 @@ void CHotfolderProcessingComp::RemoveDirectoryMonitor(const istd::CString& direc
 }
 
 
+void CHotfolderProcessingComp::RemoveDirectoryItems(const istd::CString& directoryPath)
+{
+	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
+		return;
+	}
+
+	istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+	bool processingItemsRemoved = false;
+	
+	bool workDone = false;
+	while (!workDone){
+		workDone = true;
+
+		int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
+		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+			ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
+			I_ASSERT(processingItemPtr != NULL);
+
+			QString filePath = iqt::GetQString(processingItemPtr->GetInputFile());
+
+			QFileInfo fileInfo(filePath);
+			if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
+				m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
+
+				processingItemsRemoved = true;
+
+				workDone = false;
+
+				break;
+			}
+		}
+	}
+
+	if (!processingItemsRemoved){
+		changePtr.Abort();
+	}
+}
+
+
 ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile() const
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
@@ -394,6 +436,7 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile(
 	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
+		I_ASSERT(processingItemPtr != NULL);
 
 		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
 			return processingItemPtr;
@@ -414,6 +457,7 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::FindProcessingItem(con
 	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
+		I_ASSERT(processingItemPtr != NULL);
 
 		if (processingItemPtr->GetInputFile() == fileName){
 			return processingItemPtr;

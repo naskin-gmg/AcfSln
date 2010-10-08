@@ -141,6 +141,11 @@ private:
 	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
 
 	/**
+		Remove all processing items of the given directory.
+	*/
+	void RemoveDirectoryItems(const istd::CString& directoryPath);
+
+	/**
 		Get next item to be processed.
 	*/
 	ifpf::IHotfolderProcessingItem* GetNextProcessingFile() const;
