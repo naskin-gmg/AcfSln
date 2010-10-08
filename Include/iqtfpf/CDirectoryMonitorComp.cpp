@@ -94,7 +94,7 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 		return true;
 	}
 
-	SendInfoMessage(0, "Directory monitoring parameters could not be set");
+	SendErrorMessage(0, "Directory monitoring parameters could not be set");
 
 	return false;
 }
@@ -278,7 +278,7 @@ void CDirectoryMonitorComp::run()
 
 						m_directoryFiles.push_back(currentFileItem);
 
-						SendInfoMessage(0, iqt::GetCString(currentFileItem.filePath + " was added"));
+						I_IF_DEBUG(SendInfoMessage(0, iqt::GetCString(currentFileItem.filePath + " was added")));
 
 						file.close();
 					}
@@ -306,7 +306,7 @@ void CDirectoryMonitorComp::run()
 
 						fileItem.modifiedTime = currentModifiedTime;
 						
-						SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was modified"));
+						I_IF_DEBUG(SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was modified")));
 					}
 				}
 
@@ -318,7 +318,7 @@ void CDirectoryMonitorComp::run()
 
 						fileItem.permissions = currentPermissions;
 						
-						SendInfoMessage(0, istd::CString("Attributes of") + iqt::GetCString(fileInfo.absoluteFilePath() + " have been changed"));
+						I_IF_DEBUG(SendInfoMessage(0, istd::CString("Attributes of") + iqt::GetCString(fileInfo.absoluteFilePath() + " have been changed")));
 					}
 				}
 			}

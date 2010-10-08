@@ -393,36 +393,29 @@ void CHotfolderProcessingComp::RemoveDirectoryItems(const istd::CString& directo
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
-	bool processingItemsRemoved = false;
-	
-	bool workDone = false;
-	while (!workDone){
-		workDone = true;
+	istd::CStringList removedFiles;
+	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
+	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
+		I_ASSERT(processingItemPtr != NULL);
 
-		int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
-		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-			ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
-			I_ASSERT(processingItemPtr != NULL);
-
-			QString filePath = iqt::GetQString(processingItemPtr->GetInputFile());
-
-			QFileInfo fileInfo(filePath);
-			if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
-				m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
-
-				processingItemsRemoved = true;
-
-				workDone = false;
-
-				break;
-			}
+		QString filePath = iqt::GetQString(processingItemPtr->GetInputFile());
+		QFileInfo fileInfo(filePath);
+		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
+			removedFiles.push_back(processingItemPtr->GetInputFile());
 		}
 	}
 
-	if (!processingItemsRemoved){
-		changePtr.Abort();
+
+	for (FilesQueue::const_iterator index = m_filesQueue.begin(); index != m_filesQueue.end(); index++){
+		QString filePath = iqt::GetQString(*index);
+		QFileInfo fileInfo(filePath);
+		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
+			removedFiles.push_back(*index);
+		}
 	}
+
+	OnFilesRemovedEvent(removedFiles);
 }
 
 
