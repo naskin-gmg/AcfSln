@@ -29,7 +29,7 @@ typedef icomp::TModelCompWrap<
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
-						ifpf::CHotfolderProcessingInfo, iser::ISerializable, ifpf::IHotfolderProcessingInfo> > HotfolderStateModel;
+						ifpf::CHotfolderProcessingInfo, iser::ISerializable, ifpf::IHotfolderProcessingInfo> > HotfolderProcessingInfo;
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<

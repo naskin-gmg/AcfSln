@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1567
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          252
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,27 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="10">
+    <Element>
+      <ComponentName>
+        DirectoryMonitorCache
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        500
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         Hotfolder
       </ComponentName>
       <X>
-        775
+        675
       </X>
       <X>
-        425
+        350
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         HotfolderGui
       </ComponentName>
       <X>
-        275
+        400
       </X>
       <X>
-        425
+        450
       </X>
     </Element>
     <Element>
@@ -54,10 +65,10 @@
         HotfolderGuiBinder
       </ComponentName>
       <X>
-        550
+        400
       </X>
       <X>
-        425
+        350
       </X>
     </Element>
     <Element>
@@ -65,7 +76,7 @@
         HotfolderSettingsDialog
       </ComponentName>
       <X>
-        800
+        625
       </X>
       <X>
         625
@@ -76,10 +87,10 @@
         HotfolderSettingsPersistence
       </ComponentName>
       <X>
-        500
+        675
       </X>
       <X>
-        275
+        150
       </X>
     </Element>
     <Element>
@@ -90,7 +101,29 @@
         1025
       </X>
       <X>
-        275
+        350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Instantiator
+      </ComponentName>
+      <X>
+        225
+      </X>
+      <X>
+        50
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        MonitoringCachePersistence
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        750
       </X>
     </Element>
     <Element>
@@ -98,10 +131,10 @@
         ProcessingItemPreview
       </ComponentName>
       <X>
-        275
+        425
       </X>
       <X>
-        650
+        550
       </X>
     </Element>
   </PositionMap>

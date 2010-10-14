@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </Id>
       <PackageId>
         FpfPck
       </PackageId>
       <ComponentId>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -57,27 +57,6 @@
       </PackageId>
       <ComponentId>
         HotfolderStatistics
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        MonitoringSessionsManager
-      </Id>
-      <PackageId>
-        FpfPck
-      </PackageId>
-      <ComponentId>
-        MonitoringSessionsManager
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -122,15 +101,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="2">
                 <Value>
-                  HotfolderStateModel
+                  HotfolderProcessingInfo
                 </Value>
                 <Value>
                   HotfolderStatistics
-                </Value>
-                <Value>
-                  MonitoringSessionsManager
                 </Value>
               </Values>
             </Data>
@@ -151,13 +127,13 @@
               </IsEnabled>
               <Values count="3">
                 <Value>
-                  HotfolderStateModel
+                  HotfolderProcessingInfo
                 </Value>
                 <Value>
                   HotfolderStatistics
                 </Value>
                 <Value>
-                  MonitoringSessionsManager
+                  
                 </Value>
               </Values>
             </Data>
@@ -200,21 +176,13 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="1">
     <Component>
       <ExportedId>
         HotfolderState
       </ExportedId>
       <ComponentId>
-        HotfolderStateModel
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        MonitoringSessionsManager
-      </ExportedId>
-      <ComponentId>
-        MonitoringSessionsManager
+        HotfolderProcessingInfo
       </ComponentId>
     </Component>
   </ExportedComponents>

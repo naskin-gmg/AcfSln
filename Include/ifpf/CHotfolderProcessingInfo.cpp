@@ -73,9 +73,11 @@ const ifpf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingIte
 	itemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 	itemPtr->SetSlavePtr(this);
 
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	m_lockPtr->Enter();
 
 	m_processingItems.PushBack(itemPtr, true);
+
+	m_lockPtr->Leave();
 
 	return itemPtr;
 }
@@ -95,6 +97,8 @@ void CHotfolderProcessingInfo::RemoveProcessingItem(ifpf::IHotfolderProcessingIt
 	if (!m_processingItems.Remove(fileItemPtr)){
 		changePtr.Abort();
 	}
+
+	lock.Reset();
 }
 
 

@@ -50,7 +50,7 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  HotfolderStateModel
+                  HotfolderProcessingInfo
                 </Value>
                 <Value>
                   HotfolderSettings
@@ -74,7 +74,7 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  HotfolderStateModel
+                  HotfolderProcessingInfo
                 </Value>
                 <Value>
                   HotfolderSettings
@@ -156,13 +156,13 @@
     </Element>
     <Element>
       <Id>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </Id>
       <PackageId>
         FpfVoce
       </PackageId>
       <ComponentId>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -221,10 +221,10 @@
     </Component>
     <Component>
       <ExportedId>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </ExportedId>
       <ComponentId>
-        HotfolderStateModel/HotfolderStateModel
+        HotfolderProcessingInfo/HotfolderProcessingInfo
       </ComponentId>
     </Component>
   </ExportedComponents>

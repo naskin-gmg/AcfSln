@@ -25,7 +25,7 @@ I_EXPORT_COMPONENT(
 			"File Processing Parameter Directory Hotfolder" IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
-			HotfolderStateModel,
+			HotfolderProcessingInfo,
 			"Hotfolder's state",
 			"File Processing Hotfolder" IM_TAG("Model"));
 

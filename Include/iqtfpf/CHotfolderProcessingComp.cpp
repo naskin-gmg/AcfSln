@@ -481,7 +481,7 @@ void CHotfolderProcessingComp::CancelAllProcessingItems()
 		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
 
 		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_WAIT){
-			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 		}
 	}
 }

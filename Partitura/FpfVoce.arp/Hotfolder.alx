@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1585
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          265
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -40,10 +40,10 @@
     </Element>
     <Element>
       <ComponentName>
-        HotfolderSettings
+        HotfolderProcessingInfo
       </ComponentName>
       <X>
-        900
+        250
       </X>
       <X>
         350
@@ -51,10 +51,10 @@
     </Element>
     <Element>
       <ComponentName>
-        HotfolderStateModel
+        HotfolderSettings
       </ComponentName>
       <X>
-        250
+        900
       </X>
       <X>
         350

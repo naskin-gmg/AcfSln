@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1564
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          246
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -107,7 +107,7 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              SessionManager
+              MonitoringSessionManager
             </ExportId>
             <Data>
               <IsEnabled>
@@ -192,13 +192,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderSettingsModel
+              HotfolderProcessingInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderSettings
+              HotfolderProcessingInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -208,13 +208,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              HotfolderStateModel
+              HotfolderSettingsModel
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HotfolderStateModel
+              HotfolderSettings
             </ExportId>
             <Data>
               <IsEnabled>
@@ -237,7 +237,7 @@
                 true
               </IsEnabled>
               <Value>
-                HotfolderStateModel
+                HotfolderProcessingInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -484,7 +484,7 @@
         HotfolderState
       </ExportedId>
       <ComponentId>
-        HotfolderStateModel/HotfolderState
+        HotfolderProcessingInfo/HotfolderState
       </ComponentId>
     </Component>
   </ExportedComponents>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1585
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          265
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -44,7 +44,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               FileConverter
@@ -101,6 +101,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              HotfolderProcessingInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderProcessingInfo/HotfolderState
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               HotfolderSettings
             </Id>
             <Type>
@@ -115,25 +134,6 @@
               </IsEnabled>
               <Value>
                 HotfolderSettings
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              HotfolderStateModel
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderStateModel/HotfolderState
               </Value>
             </Data>
           </AttributeInfo>
@@ -174,6 +174,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              MonitoringSessionManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              MonitoringSessionManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               OutputFileInfo
             </Id>
             <Type>
@@ -204,6 +220,46 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SessionManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HotfolderProcessingInfo/MonitoringSessionsManager
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HotfolderProcessingInfo
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderProcessingInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -292,45 +348,32 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        HotfolderStateModel
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        HotfolderStateModel
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="3">
     <Component>
       <ExportedId>
-        HotfolderSettings
+        HotfolderItems
       </ExportedId>
       <ComponentId>
-        HotfolderSettings
+        HotfolderProcessingInfo/HotfolderState
       </ComponentId>
     </Component>
     <Component>
       <ExportedId>
-        HotfolderState
+        HotfolderProcessingInfo
       </ExportedId>
       <ComponentId>
-        HotfolderStateModel/HotfolderState
+        HotfolderProcessingInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HotfolderSettings
+      </ExportedId>
+      <ComponentId>
+        HotfolderSettings
       </ComponentId>
     </Component>
   </ExportedComponents>

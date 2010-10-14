@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1498
+          1587
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          200
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +26,10 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        HotfolderStateModel
+        HotfolderProcessingInfo
       </ComponentName>
       <X>
         950
@@ -44,17 +44,6 @@
       </ComponentName>
       <X>
         200
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MonitoringSessionsManager
-      </ComponentName>
-      <X>
-        575
       </X>
       <X>
         425
