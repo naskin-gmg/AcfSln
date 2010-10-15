@@ -14,12 +14,8 @@ namespace iqwt
 
 
 CProgressHistoryGuiComp::CProgressHistoryGuiComp()
-:	m_plotPtr(NULL),
-	m_nowMarker(NULL),
-	m_activeCurveColor(Qt::blue),
-	m_inactiveCurveColor(Qt::gray),
-	m_currentCurve(*new QwtPlotCurve),
-	m_isTrainActive(false)
+:	m_currentId(0),
+	m_cancelsCount(0)
 {
 }
 
@@ -31,59 +27,78 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 			const istd::CString& description,
 			bool isCancelable)
 {
-	if (m_isTrainActive){
-		return -1;
+	if (m_idToSessionMap.empty()){
+		m_currentId = 0;
 	}
 
-	m_isTrainActive = true;
+	int sessionId = m_currentId++;
 
-	m_axisYData.clear();
-	m_currentCurve.setData(&m_axisXData[0], &m_axisXData[0], 0);
-    m_currentCurve.setPen(QPen(m_activeCurveColor, 2));
+	Session& session = m_idToSessionMap[sessionId];
 
-	if (IsGuiCreated()){
-		CancelButton->setVisible(isCancelable);
-		CancelButton->setChecked(false);
-		CancelButton->setEnabled(true);
+	// setup current plot curve:
+	session.axisY.clear();
+	session.curve.setRenderHint(QwtPlotItem::RenderAntialiased);
+	session.curve.setTitle(iqt::GetQString(description));
+	session.curve.attach(m_plotPtr.GetPtr());
+	session.curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
+    session.curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 2));
+	session.isCancelable = isCancelable;
+	session.description = description;
 
-		if (!description.IsEmpty()){
-			DescriptionLabel->setText(iqt::GetQString(description));
-			DescriptionLabel->setVisible(true);
-			DescriptionLabel->setEnabled(true);
-		}
-		else{
-			DescriptionLabel->setVisible(false);
-		}
+	if (session.isCancelable){
+		++m_cancelsCount;
 	}
 
-	return 0;
+	UpdateState();
+
+	return sessionId;
 }
 
 
-void CProgressHistoryGuiComp::EndProgressSession(int /*sessionId*/)
+void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
 {
-    m_currentCurve.setPen(QPen(m_inactiveCurveColor, 1));
+	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(sessionId);
+	if (foundIter == m_idToSessionMap.end()){
+		return;
+	}
 
-	CancelButton->setEnabled(false);
-	CancelButton->setChecked(false);
-	DescriptionLabel->setEnabled(false);
+	Session& session = foundIter->second;
 
-	m_isTrainActive = false;
+	session.curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 0.5));
+
+	if (session.isCancelable){
+		--m_cancelsCount;
+		I_ASSERT(m_cancelsCount >= 0);	// number of all cancelable sessions cannot be negative
+	}
+
+	session.curve.detach();
+
+	m_idToSessionMap.erase(foundIter);
+
+	UpdateState();
 }
 
 
-void CProgressHistoryGuiComp::OnProgress(int /*sessionId*/, double currentProgress)
+void CProgressHistoryGuiComp::OnProgress(int sessionId, double currentProgress)
 {
-	m_axisYData.insert(m_axisYData.begin(), currentProgress * 100);
-	while (m_axisYData.size() > m_axisXData.size()){
-		m_axisYData.pop_back();
+	IdToSessionMap::iterator foundIter = m_idToSessionMap.find(sessionId);
+	if (foundIter == m_idToSessionMap.end()){
+		return;
 	}
 
-	I_ASSERT(m_axisYData.size() <= m_axisXData.size());
-	m_currentCurve.setData(&m_axisXData[0], &m_axisYData[0], int(m_axisYData.size()));
+	Session& session = foundIter->second;
 
-	if (m_plotPtr != NULL){
+	session.axisY.insert(session.axisY.begin(), currentProgress * 100);
+	while (session.axisY.size() > m_axisXData.size()){
+		session.axisY.pop_back();
+	}
+
+	I_ASSERT(session.axisY.size() <= m_axisXData.size());
+	session.curve.setData(&m_axisXData[0], &session.axisY[0], int(session.axisY.size()));
+
+	if (m_plotPtr.IsValid()){
 		emit m_plotPtr->update();
+
 		QCoreApplication::processEvents();
 	}
 }
@@ -97,6 +112,34 @@ bool CProgressHistoryGuiComp::IsCanceled(int /*sessionId*/) const
 
 // protected methods
 
+void CProgressHistoryGuiComp::UpdateState()
+{
+	if (!IsGuiCreated()){
+		return;
+	}
+
+	if (m_cancelsCount > 0){
+		CancelButton->setEnabled(true);
+	}
+	else{
+		CancelButton->setEnabled(false);
+		CancelButton->setChecked(false);
+	}
+
+
+	int sessionsCount = int(m_idToSessionMap.size());
+	if (sessionsCount == 0){
+		DescriptionLabel->setText(tr("Finished"));
+	}
+	else if (sessionsCount == 1){
+		DescriptionLabel->setText(iqt::GetQString(m_idToSessionMap.begin()->second.description));
+	}
+	else{
+		DescriptionLabel->setText(tr("%1 Sessions").arg(sessionsCount));
+	}
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CProgressHistoryGuiComp::OnGuiCreated()
@@ -107,7 +150,7 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	if (widgetPtr == NULL){
 		return;
 	}
-	m_plotPtr = new QwtPlot(DiagramFrame);
+	m_plotPtr.SetPtr(new QwtPlot(DiagramFrame));
 	m_plotPtr->setCanvasLineWidth(1);
 	m_plotPtr->setAxisScale(QwtPlot::yLeft, 0, 100);
 	m_plotPtr->setAxisScale(QwtPlot::xBottom, *m_historyStepsCountAttrPtr, 0);
@@ -119,34 +162,31 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 	QwtPlotGrid* gridPtr = new QwtPlotGrid();
 	QPen gridPen(QBrush(Qt::gray), 0, Qt::DashLine);
 	gridPtr->setMajPen(gridPen);
-	gridPtr->attach(m_plotPtr);
+	gridPtr->attach(m_plotPtr.GetPtr());
 
-	m_nowMarker = new QwtPlotMarker();
+	m_nowMarker.SetPtr(new QwtPlotMarker());
 	m_nowMarker->setValue(0.0, 0.0);
 	m_nowMarker->setLineStyle(QwtPlotMarker::VLine);
 	m_nowMarker->setLabelAlignment(Qt::AlignRight | Qt::AlignBottom);
 	m_nowMarker->setLinePen(QPen(Qt::darkMagenta, 2, Qt::DotLine));
-	m_nowMarker->attach(m_plotPtr);
-
-	// setup current plot curve:
-    m_currentCurve.setPen(QPen(m_inactiveCurveColor, 1));
-	m_currentCurve.setRenderHint(QwtPlotItem::RenderAntialiased);
-	m_currentCurve.setTitle(tr("Progress"));
-	m_currentCurve.attach(m_plotPtr);
+	m_nowMarker->attach(m_plotPtr.GetPtr());
 
 	// add plot view to frame layout
 	QLayout* layoutPtr = DiagramFrame->layout();
 	if (layoutPtr != NULL){
-		layoutPtr->addWidget(m_plotPtr);
+		layoutPtr->addWidget(m_plotPtr.GetPtr());
 	}
 
-	CancelButton->setEnabled(false);
+	UpdateState();
 }
 
 
 void CProgressHistoryGuiComp::OnGuiDestroyed()
 {
-	m_nowMarker = NULL;
+	m_nowMarker->detach();
+	m_nowMarker.Reset();
+
+	m_plotPtr.Reset();
 
 	BaseClass::OnGuiDestroyed();
 }

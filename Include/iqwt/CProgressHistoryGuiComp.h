@@ -46,10 +46,9 @@ public:
 	virtual void OnProgress(int sessionId, double currentProgress);
 	virtual bool IsCanceled(int sessionId) const;
 
-	// reimplemented (iqtgui::IGuiObject)
-//	virtual bool DestroyGui(){return true;} // work-around for Qwt bug, TODO: fix it correct!
-
 protected:
+	void UpdateState();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
@@ -60,18 +59,29 @@ protected:
 private:
 	I_ATTR(int, m_historyStepsCountAttrPtr);
 
-	QwtPlot* m_plotPtr;
-	QwtPlotMarker* m_nowMarker;
-	QwtPlotCurve& m_currentCurve;
-
-	QColor m_activeCurveColor;
-	QColor m_inactiveCurveColor;
+	istd::TDelPtr<QwtPlot> m_plotPtr;
+	istd::TDelPtr<QwtPlotMarker> m_nowMarker;
 
 	typedef std::vector<double> SingleData;
-	SingleData m_axisXData;
-	SingleData m_axisYData;
 
-	bool m_isTrainActive;
+	struct Session
+	{
+		Session(): curve(*new QwtPlotCurve){}
+		~Session(){delete &curve;}
+
+		SingleData axisY;
+		QwtPlotCurve& curve;
+		bool isCancelable;
+		istd::CString description;
+	};
+
+	typedef std::map<int, Session> IdToSessionMap;
+	IdToSessionMap m_idToSessionMap;
+
+	SingleData m_axisXData;
+
+	int m_currentId;
+	int m_cancelsCount;
 };
 
 
