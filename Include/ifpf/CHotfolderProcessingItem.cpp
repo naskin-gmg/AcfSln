@@ -113,10 +113,10 @@ const isys::IDateTime& CHotfolderProcessingItem::GetStartTime() const
 
 void CHotfolderProcessingItem::SetStartTime(const isys::IDateTime& startTime)
 {
-	if (startTime.ToCTime() != m_startTime.ToCTime()){
+	if (m_startTime != startTime){
 		istd::CChangeNotifier changePtr(this);
 
-		m_startTime.FromCTime(startTime.ToCTime());
+		m_startTime = startTime;
 	}
 }
 

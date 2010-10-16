@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1587
+          1596
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          268
+          270
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         DirectoryMonitor
       </ComponentName>
       <X>
-        300
+        275
       </X>
       <X>
-        425
+        475
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         HotfolderProcessor
       </ComponentName>
       <X>
-        575
+        600
       </X>
       <X>
-        425
+        350
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         OutputFileRenaming
       </ComponentName>
       <X>
-        875
+        925
       </X>
       <X>
-        425
+        475
       </X>
     </Element>
   </PositionMap>

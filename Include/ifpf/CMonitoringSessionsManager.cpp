@@ -22,7 +22,7 @@ void CMonitoringSessionsManager::ResetSessions()
 }
 
 
-ifpf::IMonitoringSession* CMonitoringSessionsManager::GetSession(const ifpf::IDirectoryMonitor& /*directoryMonitor*/, const istd::CString& directoryPath) const
+ifpf::IMonitoringSession* CMonitoringSessionsManager::GetSession(const istd::CString& directoryPath) const
 {
 	MonitoringSessionsMap::const_iterator sessionIter = m_monitorSessionsMap.find(directoryPath);
 	if (sessionIter != m_monitorSessionsMap.end()){

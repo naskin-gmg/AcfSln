@@ -75,7 +75,7 @@ const ifpf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingIte
 
 	m_lockPtr->Enter();
 
-	m_processingItems.PushBack(itemPtr, true);
+	m_processingItems.PushBack(itemPtr);
 
 	m_lockPtr->Leave();
 

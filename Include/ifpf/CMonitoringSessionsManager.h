@@ -26,7 +26,7 @@ class CMonitoringSessionsManager:
 public:
 	// reimplemented (ifpf::IMonitoringSessionManager)
 	virtual void ResetSessions();
-	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const;
+	virtual ifpf::IMonitoringSession* GetSession(const istd::CString& directoryPath) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

@@ -56,7 +56,7 @@ protected:
 	typedef imod::TModelWrap<
 				istd::TChangeDelegator<
 						ifpf::CHotfolderProcessingItem> > ProcessingItem;
-	typedef istd::TOptPointerVector<ifpf::IHotfolderProcessingItem> FileItems;
+	typedef istd::TPointerVector<ifpf::IHotfolderProcessingItem> FileItems;
 
 	FileItems m_processingItems;
 

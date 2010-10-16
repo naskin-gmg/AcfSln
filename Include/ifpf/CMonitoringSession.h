@@ -17,16 +17,14 @@ class CMonitoringSession: virtual public ifpf::IMonitoringSession
 {
 public:
 	// reimplemented (ifpf::IMonitoringSession)
-	virtual void SetFileList(const istd::CStringList& fileList);
-
-	// reimplemented (ibase::IFileListProvider)
-	virtual istd::CStringList GetFileList() const;
+	virtual const FileItems& GetFileInfoList() const;
+	virtual void SetFileInfoList(const FileItems& fileList);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	istd::CStringList m_sessionFiles;
+	FileItems m_sessionFiles;
 };
 
 

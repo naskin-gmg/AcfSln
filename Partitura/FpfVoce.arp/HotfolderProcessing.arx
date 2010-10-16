@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1587
+          1596
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          268
+          270
         </Number>
         <Description>
           ACF-Solutions
@@ -135,7 +135,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="14">
           <AttributeInfo>
             <Id>
               DirectoryMontorFactory
@@ -309,6 +309,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MonitorPersistence
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PersistenceBinder
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

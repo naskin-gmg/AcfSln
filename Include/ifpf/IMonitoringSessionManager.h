@@ -6,7 +6,8 @@
 #include "istd/IPolymorphic.h"
 #include "istd/CString.h"
 
-#include "ifpf/IDirectoryMonitor.h"
+
+// ACF-Solutions includes
 #include "ifpf/IMonitoringSession.h"
 
 
@@ -30,7 +31,7 @@ public:
 	/**
 		Get monitoring session for the given monitor and directory path.
 	*/
-	virtual ifpf::IMonitoringSession* GetSession(const ifpf::IDirectoryMonitor& directoryMonitor, const istd::CString& directoryPath) const = 0;
+	virtual ifpf::IMonitoringSession* GetSession(const istd::CString& directoryPath) const = 0;
 };
 
 

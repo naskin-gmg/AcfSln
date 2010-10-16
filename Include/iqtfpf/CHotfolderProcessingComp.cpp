@@ -240,8 +240,7 @@ void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& pro
 
 		itemPtr->SetProcessingState(processor.GetProcessingState());
 
-		isys::CSimpleDateTime startTime;
-		startTime.FromCTime(processor.GetStartTime().toTime_t());
+		isys::CSimpleDateTime startTime = iqt::GetCSimpleDateTime(processor.GetStartTime());
 		itemPtr->SetStartTime(startTime);
 
 		itemPtr->SetProcessingTime(processor.GetProcessingTime());
@@ -357,7 +356,7 @@ ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const ist
 		ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
 		if (directoryMonitorPtr != NULL){
 			m_directoryMonitorsMap[directoryPath] = directoryMonitorPtr;
-	
+
 			monitorCompPtr.PopPtr();
 
 			imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
@@ -405,7 +404,6 @@ void CHotfolderProcessingComp::RemoveDirectoryItems(const istd::CString& directo
 			removedFiles.push_back(processingItemPtr->GetInputFile());
 		}
 	}
-
 
 	for (FilesQueue::const_iterator index = m_filesQueue.begin(); index != m_filesQueue.end(); index++){
 		QString filePath = iqt::GetQString(*index);
@@ -461,16 +459,31 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::FindProcessingItem(con
 }
 
 
-bool CHotfolderProcessingComp::OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* /*processingItemPtr*/)
+void CHotfolderProcessingComp::OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr)
 {
-	// TODO: implement this functionality
+	for (int pendingProcessorIndex = 0; pendingProcessorIndex < m_pendingProcessors.GetCount(); pendingProcessorIndex++){
+		ItemProcessor* processorPtr = m_pendingProcessors.GetAt(pendingProcessorIndex);
+		I_ASSERT(processorPtr != NULL);
 
-	return false;
+		if (processorPtr->GetItemUuid() == processingItemPtr->GetItemUuid()){
+			processorPtr->Cancel();
+
+			m_pendingProcessors.RemoveAt(pendingProcessorIndex);
+
+			break;
+		}
+	}
 }
 
 
 void CHotfolderProcessingComp::CancelAllProcessingItems()
 {
+	for (int pendingProcessorIndex = 0; pendingProcessorIndex < m_pendingProcessors.GetCount(); pendingProcessorIndex++){
+		m_pendingProcessors.GetAt(pendingProcessorIndex)->Cancel();		
+	}
+
+	m_pendingProcessors.Reset();
+
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
@@ -561,19 +574,20 @@ CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp&
 
 // reimplemented (imod::IObserver)
 
-void CHotfolderProcessingComp::StateObserver::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	if ((updateFlags & ifpf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
 		ifpf::IHotfolderProcessingItem* processingItemPtr = dynamic_cast<ifpf::IHotfolderProcessingItem*>(updateParamsPtr);
-		if (processingItemPtr != NULL){
-			if (m_parent.OnCancelProcessingItem(processingItemPtr)){
-			}
+		if (processingItemPtr != NULL && processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_CANCELED){
+			m_parent.OnCancelProcessingItem(processingItemPtr);
 		}
 	}
 
-	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
+
+// public methods of embedded class ItemProcessor
 
 CHotfolderProcessingComp::ItemProcessor::ItemProcessor(
 			CHotfolderProcessingComp& parent,
@@ -610,6 +624,25 @@ QDateTime CHotfolderProcessingComp::ItemProcessor::GetStartTime() const
 double CHotfolderProcessingComp::ItemProcessor::GetProcessingTime() const
 {
 	return m_processingTime;
+}
+
+
+void CHotfolderProcessingComp::ItemProcessor::Cancel()
+{
+	if (BaseClass::isFinished()){
+		return;
+	}
+
+	iqt::CTimer timer;
+	while (isRunning() && timer.GetElapsed() < 5000){
+		qApp->processEvents();
+	}
+
+	if (isRunning()){
+		BaseClass::terminate();
+
+		BaseClass::wait();
+	}
 }
 
 

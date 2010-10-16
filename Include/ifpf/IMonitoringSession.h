@@ -6,11 +6,9 @@
 #include "istd/IChangeable.h"
 #include "istd/CString.h"
 
+#include "isys/CFileInfo.h"
+
 #include "iser/ISerializable.h"
-
-#include "ibase/IFileListProvider.h"
-
-#include "iprm/IFileNameParam.h"
 
 
 namespace ifpf
@@ -20,17 +18,22 @@ namespace ifpf
 /**
 	Common interface for a monitoring session for a directory.
 	Each directory monitor can persist its monitoring state in a monitoring session, which is provided by IMonitoringSessionManager.
-	\sa IDirectoryMonitor, IMonitoringSessionManager
+	\sa IMonitoringSessionManager
 */
-class IMonitoringSession:
-			virtual public ibase::IFileListProvider,
-			virtual public iser::ISerializable
+class IMonitoringSession: virtual public iser::ISerializable
 {
 public:
+	typedef std::vector<isys::CFileInfo> FileItems;
+
+	/**
+		Get the list of file items.
+	*/
+	virtual const FileItems& GetFileInfoList() const = 0;
+
 	/**
 		Set the file list.
 	*/
-	virtual void SetFileList(const istd::CStringList& fileList) = 0;
+	virtual void SetFileInfoList(const FileItems& fileList) = 0;
 };
 
 

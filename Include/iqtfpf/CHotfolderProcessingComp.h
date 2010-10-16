@@ -68,6 +68,8 @@ protected:
 	class ItemProcessor: public QThread
 	{
 	public:
+		typedef QThread BaseClass;
+
 		ItemProcessor(
 					CHotfolderProcessingComp& parent,
 					const istd::CString& inputFilePath,
@@ -78,6 +80,7 @@ protected:
 		std::string GetItemUuid() const;
 		QDateTime GetStartTime() const;
 		double GetProcessingTime() const;
+		void Cancel();
 
 	protected:
 		// reimplemented (QThread)
@@ -155,10 +158,19 @@ private:
 	*/
 	ifpf::IHotfolderProcessingItem* FindProcessingItem(const istd::CString& fileName) const;
 
-	bool OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr);
+	/**
+		Cancel processing item
+	*/
+	void OnCancelProcessingItem(const ifpf::IHotfolderProcessingItem* processingItemPtr);
 
+	/**
+		Cancel all items.
+	*/
 	void CancelAllProcessingItems();
 
+	/**
+		Get procesing item from its UUID.
+	*/
 	ifpf::IHotfolderProcessingItem* GetItemFromId(const std::string& itemUuid) const;
 
 private:
@@ -204,7 +216,7 @@ private:
 		StateObserver(CHotfolderProcessingComp& parent);
 		
 		// reimplemented (imod::IObserver)
-		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:
 		CHotfolderProcessingComp& m_parent;
 	};

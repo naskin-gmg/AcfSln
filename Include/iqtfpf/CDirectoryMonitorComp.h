@@ -21,6 +21,7 @@
 #include "iqt/CCriticalSection.h"
 
 #include "iprm/IParamsSet.h"
+#include "iprm/IFileNameParam.h"
 
 
 // AcfSln includes
@@ -140,19 +141,8 @@ private:
 		CDirectoryMonitorComp& m_parent;
 	};
 
-	struct FileItem
-	{
-		QString filePath;
-		QDateTime modifiedTime;
-		QFile::Permissions permissions;
 
-		bool operator== (const FileItem& fileItem) const
-		{
-			return (filePath == fileItem.filePath);
-		}
-	};
-
-	typedef std::vector<FileItem> FileItems;
+	typedef std::vector<isys::CFileInfo> FileItems;
 	typedef std::set<QString> FilesSet;
 
 	FileItems m_directoryFiles;
