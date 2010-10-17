@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1514
+          1595
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          214
+          269
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         Application
       </ComponentName>
       <X>
-        975
+        600
       </X>
       <X>
-        200
+        400
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         MainWindowComponents
       </ComponentName>
       <X>
-        625
+        950
       </X>
       <X>
-        425
+        175
       </X>
     </Element>
   </PositionMap>

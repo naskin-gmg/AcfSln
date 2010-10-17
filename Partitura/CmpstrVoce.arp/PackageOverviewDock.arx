@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1461
+          1595
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          183
+          269
         </Number>
         <Description>
           ACF-Solutions
@@ -156,10 +156,26 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="4">
+    <Interface>
+      <InterfaceId>
+        ibase::ICommandsProvider
+      </InterfaceId>
+      <ComponentId>
+        PackageOverview
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         icmpstr::IAttributeSelectionObserver
+      </InterfaceId>
+      <ComponentId>
+        PackageOverview
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         PackageOverview
