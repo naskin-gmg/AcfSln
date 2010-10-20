@@ -446,7 +446,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -461,14 +461,6 @@
       </InterfaceId>
       <ComponentId>
         VersionInfo
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        idoc::IMainWindowCommands
-      </InterfaceId>
-      <ComponentId>
-        Application
       </ComponentId>
     </Interface>
     <Interface>
