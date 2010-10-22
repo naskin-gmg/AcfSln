@@ -31,21 +31,28 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 		m_currentId = 0;
 	}
 
-	int sessionId = m_currentId++;
+	int sessionId = m_currentId;
 
-	Session& session = m_idToSessionMap[sessionId];
+	SessionPtr sessionPtr = m_idToSessionMap[sessionId];
+	if (sessionPtr.IsValid()){
+		return -1;	// we cannot create new session, ID is used yet
+	}
+
+	m_currentId = (m_currentId + 1) & 0x7fffffff;
+
+	sessionPtr.SetPtr(new Session);
 
 	// setup current plot curve:
-	session.axisY.clear();
-	session.curve.setRenderHint(QwtPlotItem::RenderAntialiased);
-	session.curve.setTitle(iqt::GetQString(description));
-	session.curve.attach(m_plotPtr.GetPtr());
-	session.curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
-    session.curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 2));
-	session.isCancelable = isCancelable;
-	session.description = description;
+	sessionPtr->axisY.clear();
+	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
+	sessionPtr->curve.setTitle(iqt::GetQString(description));
+	sessionPtr->curve.attach(m_plotPtr.GetPtr());
+	sessionPtr->curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
+    sessionPtr->curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 2));
+	sessionPtr->isCancelable = isCancelable;
+	sessionPtr->description = description;
 
-	if (session.isCancelable){
+	if (sessionPtr->isCancelable){
 		++m_cancelsCount;
 	}
 
@@ -62,16 +69,17 @@ void CProgressHistoryGuiComp::EndProgressSession(int sessionId)
 		return;
 	}
 
-	Session& session = foundIter->second;
+	SessionPtr& sessionPtr = foundIter->second;
+	I_ASSERT(sessionPtr.IsValid());
 
-	session.curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 0.5));
+	sessionPtr->curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 0.5));
 
-	if (session.isCancelable){
+	if (sessionPtr->isCancelable){
 		--m_cancelsCount;
 		I_ASSERT(m_cancelsCount >= 0);	// number of all cancelable sessions cannot be negative
 	}
 
-	session.curve.detach();
+	sessionPtr->curve.detach();
 
 	m_idToSessionMap.erase(foundIter);
 
@@ -86,15 +94,15 @@ void CProgressHistoryGuiComp::OnProgress(int sessionId, double currentProgress)
 		return;
 	}
 
-	Session& session = foundIter->second;
+	SessionPtr& sessionPtr = foundIter->second;
 
-	session.axisY.insert(session.axisY.begin(), currentProgress * 100);
-	while (session.axisY.size() > m_axisXData.size()){
-		session.axisY.pop_back();
+	sessionPtr->axisY.insert(sessionPtr->axisY.begin(), currentProgress * 100);
+	while (sessionPtr->axisY.size() > m_axisXData.size()){
+		sessionPtr->axisY.pop_back();
 	}
 
-	I_ASSERT(session.axisY.size() <= m_axisXData.size());
-	session.curve.setData(&m_axisXData[0], &session.axisY[0], int(session.axisY.size()));
+	I_ASSERT(sessionPtr->axisY.size() <= m_axisXData.size());
+	sessionPtr->curve.setData(&m_axisXData[0], &sessionPtr->axisY[0], int(sessionPtr->axisY.size()));
 
 	if (m_plotPtr.IsValid()){
 		emit m_plotPtr->update();
@@ -132,7 +140,10 @@ void CProgressHistoryGuiComp::UpdateState()
 		DescriptionLabel->setText(tr("Finished"));
 	}
 	else if (sessionsCount == 1){
-		DescriptionLabel->setText(iqt::GetQString(m_idToSessionMap.begin()->second.description));
+		SessionPtr& sessionPtr = m_idToSessionMap.begin()->second;
+		I_ASSERT(sessionPtr.IsValid());
+
+		DescriptionLabel->setText(iqt::GetQString(sessionPtr->description));
 	}
 	else{
 		DescriptionLabel->setText(tr("%1 Sessions").arg(sessionsCount));

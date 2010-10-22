@@ -66,16 +66,15 @@ private:
 
 	struct Session
 	{
-		Session(): curve(*new QwtPlotCurve){}
-		~Session(){delete &curve;}
-
 		SingleData axisY;
-		QwtPlotCurve& curve;
+		QwtPlotCurve curve;
 		bool isCancelable;
 		istd::CString description;
 	};
 
-	typedef std::map<int, Session> IdToSessionMap;
+	typedef istd::TDelPtr<Session> SessionPtr;
+
+	typedef std::map<int, SessionPtr> IdToSessionMap;
 	IdToSessionMap m_idToSessionMap;
 
 	SingleData m_axisXData;
