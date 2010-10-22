@@ -214,8 +214,21 @@ void CXmlReadArchiveBase::Init(xercesc::InputSource& inputSource)
 
 void CXmlReadArchiveBase::Reset()
 {
+	if (m_nodePtr != NULL){
+		m_nodePtr->release();
+
+		m_nodePtr = NULL;
+	}
+
+	if (m_documentPtr != NULL){
+		m_documentPtr->release();
+
+		m_documentPtr = NULL;
+	}
+
 	if (m_builder != NULL){
         m_builder->release();
+
 		m_builder = NULL;
 	}
 }
