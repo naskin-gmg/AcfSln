@@ -41,6 +41,9 @@ public:
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
+	// reimplemenented (TGuiObserverWrap)
+	virtual void OnGuiModelDetached();
+
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 

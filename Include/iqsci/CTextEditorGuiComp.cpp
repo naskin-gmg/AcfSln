@@ -39,6 +39,19 @@ void CTextEditorGuiComp::UpdateEditor(int /*updateFlags*/)
 }
 
 
+// reimplemenented (TGuiObserverWrap)
+
+void CTextEditorGuiComp::OnGuiModelDetached()
+{
+	CTextEditor* textEditPtr = GetQtWidget();
+	I_ASSERT(textEditPtr != NULL);
+
+	textEditPtr->SetText(QString());
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
 // reimplemented (ibase::ICommandsProvider)
 
 const ibase::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
