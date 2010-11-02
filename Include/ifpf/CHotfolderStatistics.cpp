@@ -71,6 +71,26 @@ int CHotfolderStatistics::GetAbortedCount(const istd::CString& directoryPath) co
 }
 
 
+double CHotfolderStatistics::GetProcessingTime(const istd::CString& directoryPath) const
+{
+	if (directoryPath.IsEmpty()){
+		double processingTime = 0;
+		for (ProcessingTimeMap::const_iterator index = m_processingTimeMap.begin(); index != m_processingTimeMap.end(); index++){
+			processingTime += index->second;
+		}
+		
+		return processingTime;
+	}
+
+	ProcessingTimeMap::const_iterator foundIter = m_processingTimeMap.find(directoryPath);
+	if (foundIter != m_processingTimeMap.end()){
+		return foundIter->second;
+	}
+
+	return 0.0;
+}
+
+
 // reimplemented (imod::TSingleModelObserverBase)
 
 void CHotfolderStatistics::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
@@ -107,6 +127,7 @@ bool CHotfolderStatistics::Serialize(iser::IArchive& archive)
 
 void CHotfolderStatistics::ResetStatistics()
 {
+	m_processingTimeMap.clear();
 	m_itemsCount.clear();
 	m_successCount.clear();
 	m_errorsCount.clear();
@@ -134,6 +155,8 @@ void CHotfolderStatistics::RebuildStatistics()
 
 		++m_itemsCount[directoryPath];
 		UpdateStateMaps(itemState, directoryPath);
+
+		m_processingTimeMap[directoryPath] += itemPtr->GetProcessingTime();
 	}
 }
 

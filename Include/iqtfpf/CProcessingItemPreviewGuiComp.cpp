@@ -65,12 +65,14 @@ void CProcessingItemPreviewGuiComp::UpdateEditor(int updateFlags)
 		if (outputFileInfo.exists()){
 			outputFileSize = outputFileInfo.size() / double(1 << 10);
 		}
-		
-		QString inputFileNameLink = inputFileInfo.exists() ? QString("<a href=\"%1\">%2</a>").arg(inputFile).arg(inputFileInfo.completeBaseName()) : inputFileInfo.completeBaseName();
+
+		QString inputFileBaseName = inputFileInfo.completeBaseName();	
+		QString inputFileNameLink = inputFileInfo.exists() ? QString("<a href=\"file:///%1\">%2</a>").arg(inputFile).arg(inputFileBaseName) : inputFileBaseName;
 		InputFileNameLabel->setText(inputFileNameLink);
 		InputFileNameLabel->setToolTip(inputFile);
 
-		QString outputFileNameLink = outputFileInfo.exists() ? QString("<a href=\"%1\">%2</a>").arg(outputFile).arg(outputFileInfo.completeBaseName()) : outputFileInfo.completeBaseName();
+		QString outputFileBaseName = outputFileInfo.completeBaseName();	
+		QString outputFileNameLink = outputFileInfo.exists() ? QString("<a href=\"file:///%1\">%2</a>").arg(outputFile).arg(outputFileBaseName) : outputFileBaseName;
 		OutputFileNameLabel->setText(outputFileNameLink);
 		OutputFileNameLabel->setToolTip(outputFile);
 
@@ -188,7 +190,6 @@ void CProcessingItemPreviewGuiComp::ResetEditor()
 	InputFileSizeLabel->clear();
 	OutputFileSizeLabel->clear();
 }
-
 
 
 } // namespace iqtfpf

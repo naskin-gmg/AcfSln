@@ -37,6 +37,7 @@ public:
 	virtual int GetSuccessCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetErrorsCount(const istd::CString& directoryPath = istd::CString()) const;
 	virtual int GetAbortedCount(const istd::CString& directoryPath = istd::CString()) const;
+	virtual double GetProcessingTime(const istd::CString& directoryPath = istd::CString()) const;
 
 	// reimplemented (imod::TSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -59,6 +60,9 @@ private:
 	CounterMap m_successCount;
 	CounterMap m_errorsCount;
 	CounterMap m_abortedCount;
+
+	typedef std::map<istd::CString, double> ProcessingTimeMap;
+	ProcessingTimeMap m_processingTimeMap;
 };
 
 

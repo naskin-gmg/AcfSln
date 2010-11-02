@@ -1,8 +1,17 @@
 #include "iqtfpf/CDirectoryItemGuiComp.h"
 
 
+#include "iprm/IParamsSet.h"
+
+
 namespace iqtfpf
 {
+
+
+CDirectoryItemGuiComp::CDirectoryItemGuiComp()
+	:m_setIndex(-1)
+{
+}
 
 
 // public methods
@@ -10,6 +19,59 @@ namespace iqtfpf
 void CDirectoryItemGuiComp::SetDirectoryPath(const QString& directoryPath)
 {
 	m_directoryPath = directoryPath;
+}
+
+
+// reimplemented (iprm::ISelectionParam)
+
+const iprm::ISelectionConstraints* CDirectoryItemGuiComp::GetConstraints() const
+{
+	return NULL;
+}
+
+
+int CDirectoryItemGuiComp::GetSelectedOptionIndex() const
+{
+	return m_setIndex;
+}
+
+
+bool CDirectoryItemGuiComp::SetSelectedOptionIndex(int index)
+{
+	m_setIndex = index;
+
+	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
+		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetSetsCount();
+		if (m_setIndex < setsCount && m_setIndex >= 0){
+			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetSetName(m_setIndex);
+
+			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(m_setIndex);
+
+			std::string fileNameParamId = "DirectoryPath"; 
+
+			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(fileNameParamId));
+
+			if (fileNameParamPtr != NULL){
+				SetDirectoryPath(iqt::GetQString(fileNameParamPtr->GetPath()));
+			}
+		}
+	}
+
+	return true;
+}
+
+
+iprm::ISelectionParam* CDirectoryItemGuiComp::GetActiveSubselection() const
+{
+	return NULL;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CDirectoryItemGuiComp::Serialize(iser::IArchive& /*archive*/)
+{
+	return true;
 }
 
 

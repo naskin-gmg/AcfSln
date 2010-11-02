@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1596
+          1609
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          270
+          277
         </Number>
         <Description>
           ACF-Solutions
@@ -76,7 +76,7 @@
         HotfolderSettingsDialog
       </ComponentName>
       <X>
-        625
+        675
       </X>
       <X>
         625
@@ -131,7 +131,7 @@
         ProcessingItemPreview
       </ComponentName>
       <X>
-        425
+        375
       </X>
       <X>
         550

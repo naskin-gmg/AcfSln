@@ -11,6 +11,8 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "iprm/ISelectionConstraints.h"
+
 #include "iproc/IProcessor.h"
 
 #include "iqt/CSignalBlocker.h"
@@ -27,7 +29,8 @@ namespace iqtfpf
 // public methods
 
 CHotfolderGuiComp::CHotfolderGuiComp()
-	:m_filterEditor(NULL)
+	:m_filterEditor(NULL),
+	m_inputDirectoriesObserver(*this)
 {
 }
 
@@ -57,19 +60,18 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 	if (objectPtr != NULL){
 		iqt::CSignalBlocker block(this, true);
 
-		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0 || (updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
+		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0){
 			RebuildItemList();
 
 			UpdateItemCommands();
 		}
 
 		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0){
-			int itemsCount = objectPtr->GetProcessingItemsCount();
-			if (itemsCount > 0){
-				ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemsCount - 1);
+			UpdateAddedItemList();
+		}
 
-				AddFileItem(*pocessingItem);
-			}
+		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
+			UpdateRemovedItemList();
 		}
 
 		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED) != 0){
@@ -100,6 +102,10 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 		hotfolderModelPtr->AttachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
 	}
 
+	if (m_inputDirectoriesParamsManagerModelCompPtr.IsValid()){
+		m_inputDirectoriesParamsManagerModelCompPtr->AttachObserver(&m_inputDirectoriesObserver);
+	}
+
 	if (m_processingItemPreviewCompPtr.IsValid()){
 		m_itemModelProxy.AttachObserver(m_processingItemPreviewCompPtr.GetPtr());
 	}
@@ -115,6 +121,10 @@ void CHotfolderGuiComp::OnGuiModelDetached()
 		if (hotfolderModelPtr->IsAttached(m_statisticsHotfolderObserverCompPtr.GetPtr())){
 			hotfolderModelPtr->DetachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
 		}
+	}
+
+	if (m_inputDirectoriesParamsManagerModelCompPtr.IsValid()){
+		m_inputDirectoriesParamsManagerModelCompPtr->DetachObserver(&m_inputDirectoriesObserver);
 	}
 
 	if (m_processingItemPreviewCompPtr.IsValid()){
@@ -245,49 +255,11 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 		}
 	}
 
-	if (parentItemPtr == NULL){
-		parentItemPtr = new DirectoryItem(*this, fileDirectory, FileList);
-		FileList->addTopLevelItem(parentItemPtr);
-
-		// if special directory item UI controller is set,
-		// place it into the item:
-		if (m_directoryItemGuiFactCompPtr.IsValid() && m_directoryItemObserverFactCompPtr.IsValid()){
-			istd::TDelPtr<icomp::IComponent> directoryItemCompPtr(m_directoryItemGuiFactCompPtr.CreateComponent());
-			if (directoryItemCompPtr.IsValid()){
-				iqtgui::IGuiObject* directoryItemGuiPtr = m_directoryItemGuiFactCompPtr.ExtractInterface(directoryItemCompPtr.GetPtr());
-				imod::IObserver* directoryItemObserverPtr = m_directoryItemObserverFactCompPtr.ExtractInterface(directoryItemCompPtr.GetPtr());
-				I_ASSERT(directoryItemGuiPtr != NULL);
-				I_ASSERT(directoryItemObserverPtr != NULL);
-
-				// TODO: clean this solution!
-				iqtfpf::CDirectoryItemGuiComp* dirItemGuiCompPtr = dynamic_cast<iqtfpf::CDirectoryItemGuiComp*>(directoryItemGuiPtr);
-				if (dirItemGuiCompPtr != NULL){
-					dirItemGuiCompPtr->SetDirectoryPath(fileDirectory.absolutePath());
-				}
-
-				istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(FileList));
-				QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
-				layout->setContentsMargins(4, 4, 4, 4);
-			
-				if (directoryItemGuiPtr->CreateGui(widgetWrapperPtr.GetPtr())){
-					FileList->setItemWidget(parentItemPtr, 0, widgetWrapperPtr.PopPtr());
-
-					if (m_statisticsModelCompPtr.IsValid()){
-						if (!m_statisticsModelCompPtr->IsAttached(directoryItemObserverPtr)){
-							m_statisticsModelCompPtr->AttachObserver(directoryItemObserverPtr);
-						}
-					}
-				}
-			}
-
-			directoryItemCompPtr.PopPtr();
-		}
-		else{
-			parentItemPtr->setText(0, fileDirectory.absolutePath());
-		}
+	if (parentItemPtr != NULL){
+		parentItemPtr->AddFileItem(fileItem);
 	}
-	
-	parentItemPtr->AddFileItem(fileItem);
+	else{
+	}
 }
 
 
@@ -316,7 +288,7 @@ void CHotfolderGuiComp::UpdateItemCommands()
 	for (int itemIndex = 0; itemIndex < int(selectedItems.size()); itemIndex++){
 		I_ASSERT(selectedItems[itemIndex] != NULL);
 
-		int itemState = selectedItems[itemIndex]->GetProcessingState();
+		int itemState = selectedItems[itemIndex]->GetObjectPtr()->GetProcessingState();
 
 		enableRemoveAction = enableRemoveAction || (itemState != iproc::IProcessor::TS_WAIT);
 		enableCancelAction = enableCancelAction || ((itemState == iproc::IProcessor::TS_NONE) || itemState == iproc::IProcessor::TS_WAIT);
@@ -338,17 +310,91 @@ void CHotfolderGuiComp::RebuildItemList()
 
 		delete itemPtr;
 	}
-	
+
+	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
+		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetSetsCount(); 
+		for (int setIndex = 0; setIndex < setsCount; setIndex++){
+			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetSetName(setIndex);
+
+			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(setIndex);
+
+			std::string fileNameParamId = "DirectoryPath";
+			if (m_directoryPathIdAttrPtr.IsValid()){
+				fileNameParamId  = (*m_directoryPathIdAttrPtr).ToString();
+			}
+
+			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(fileNameParamId));
+			if (fileNameParamPtr != NULL){
+				QString directoryPath = iqt::GetQString(fileNameParamPtr->GetPath());
+				DirectoryItem* directoryItemPtr = new DirectoryItem(*this, setIndex, QDir(directoryPath), FileList);
+
+				FileList->addTopLevelItem(directoryItemPtr);
+			}
+		}
+	}
+
 	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int itemsCount = objectPtr->GetProcessingItemsCount();
 		for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-			ifpf::IHotfolderProcessingItem* pocessingItem = objectPtr->GetProcessingItem(itemIndex);
+			ifpf::IHotfolderProcessingItem* processingItemPtr = objectPtr->GetProcessingItem(itemIndex);
 
-			AddFileItem(*pocessingItem);
+			AddFileItem(*processingItemPtr);
 		}
 	}
 }
+
+
+void CHotfolderGuiComp::UpdateAddedItemList()
+{
+	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		int itemsCount = objectPtr->GetProcessingItemsCount();
+
+		int currentItemsCount = 0;
+		
+		for (int itemIndex = 0; itemIndex < FileList->topLevelItemCount(); itemIndex++){
+			currentItemsCount += FileList->topLevelItem(itemIndex)->childCount();
+		}
+
+		I_ASSERT(currentItemsCount < itemsCount);
+
+		for (int itemIndex = currentItemsCount; itemIndex < itemsCount; itemIndex++){
+			ifpf::IHotfolderProcessingItem* processingItemPtr = objectPtr->GetProcessingItem(itemIndex);
+
+			AddFileItem(*processingItemPtr);
+		}
+	}
+}
+
+
+void CHotfolderGuiComp::UpdateRemovedItemList()
+{
+	QTreeWidgetItemIterator itemsIter(FileList);
+
+	bool workDone = false;
+	while (!workDone){
+		workDone = true;
+		while ((*itemsIter) != NULL){
+			ProcessingItem* processingItemPtr = dynamic_cast<ProcessingItem*>(*itemsIter);
+
+			if (processingItemPtr != NULL && processingItemPtr->GetObjectPtr() == NULL){
+				QTreeWidgetItem* parentItemPtr = processingItemPtr->parent();
+				parentItemPtr->removeChild(processingItemPtr);
+
+				if (parentItemPtr->childCount() == 0){
+					delete FileList->takeTopLevelItem(FileList->indexOfTopLevelItem(parentItemPtr));
+				}
+
+				workDone = false;
+				break;
+			}
+			
+			itemsIter++;
+		}
+	}
+}
+
 
 
 CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems() const
@@ -360,7 +406,7 @@ CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems
 	for (int itemIndex = 0; itemIndex < selectedItems.count(); itemIndex++){
 		ProcessingItem* processingItemPtr = dynamic_cast<ProcessingItem*>(selectedItems.at(itemIndex));
 		if (processingItemPtr != NULL){
-			items.push_back(processingItemPtr->GetObjectPtr());
+			items.push_back(processingItemPtr);
 		}
 	}
 
@@ -426,12 +472,25 @@ void CHotfolderGuiComp::OnHold()
 
 void CHotfolderGuiComp::OnItemRemove()
 {
+	UpdateBlocker updateBlock(this);
+
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		istd::CChangeNotifier changePtr(objectPtr, ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-			objectPtr->RemoveProcessingItem(processingItems[itemIndex]);
+			ProcessingItem* processingItemPtr = processingItems[itemIndex];
+			
+			QTreeWidgetItem* parentItem = processingItemPtr->parent();
+			I_ASSERT(parentItem != NULL);
+
+			parentItem->removeChild(processingItemPtr);
+
+			if (parentItem->childCount() == 0){
+				delete FileList->takeTopLevelItem(FileList->indexOfTopLevelItem(parentItem));
+			}
+
+			objectPtr->RemoveProcessingItem(processingItemPtr->GetObjectPtr());
 		}
 	}
 }
@@ -446,9 +505,9 @@ void CHotfolderGuiComp::OnItemCancel()
 		bool fireChangeEvent = false;
 	
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-			int itemState = processingItems[itemIndex]->GetProcessingState();
+			int itemState = processingItems[itemIndex]->GetObjectPtr()->GetProcessingState();
 			if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
-				processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+				processingItems[itemIndex]->GetObjectPtr()->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 
 				fireChangeEvent = true;
 			}
@@ -473,9 +532,9 @@ void CHotfolderGuiComp::OnRestart()
 		bool fireChangeEvent = false;
 
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-			int itemState = processingItems[itemIndex]->GetProcessingState();
+			int itemState = processingItems[itemIndex]->GetObjectPtr()->GetProcessingState();
 			if (itemState != iproc::IProcessor::TS_WAIT){
-				processingItems[itemIndex]->SetProcessingState(iproc::IProcessor::TS_NONE);
+				processingItems[itemIndex]->GetObjectPtr()->SetProcessingState(iproc::IProcessor::TS_NONE);
 				
 				fireChangeEvent = true;
 			}
@@ -516,7 +575,7 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	if (!processingItems.empty()){
-		imod::IModel* itemModelPtr = dynamic_cast<imod::IModel*>(processingItems[0]);
+		imod::IModel* itemModelPtr = processingItems[0]->GetModelPtr();
 		if (itemModelPtr != NULL){
 			m_itemModelProxy.SetModelPtr(itemModelPtr);
 		}
@@ -585,6 +644,7 @@ void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPol
 
 CHotfolderGuiComp::DirectoryItem::DirectoryItem(
 			CHotfolderGuiComp& parent,
+			int setIndex,
 			const QDir& directory,
 			QTreeWidget* treeWidgetPtr)
 	:BaseClass(treeWidgetPtr),
@@ -592,6 +652,37 @@ CHotfolderGuiComp::DirectoryItem::DirectoryItem(
 	m_directory(directory)
 {
 	setFlags(Qt::ItemIsEnabled);
+
+	// if special directory item UI controller is set, place it into the item:
+	if (m_parent.m_directoryItemGuiFactCompPtr.IsValid()){
+		m_directoryItemCompPtr.SetPtr(m_parent.m_directoryItemGuiFactCompPtr.CreateComponent());
+		if (m_directoryItemCompPtr.IsValid()){
+			if (m_parent.m_directoryItemSelectionFactCompPtr.IsValid()){
+				iprm::ISelectionParam* directoryItemSelectionPtr = m_parent.m_directoryItemSelectionFactCompPtr.ExtractInterface(m_directoryItemCompPtr.GetPtr());
+				if (directoryItemSelectionPtr != NULL){
+					directoryItemSelectionPtr->SetSelectedOptionIndex(setIndex);
+				}
+			}
+
+			istd::TDelPtr<QWidget> widgetWrapperPtr(new QWidget(m_parent.FileList));
+			QVBoxLayout* layout = new QVBoxLayout(widgetWrapperPtr.GetPtr());
+			layout->setContentsMargins(4, 4, 4, 4);
+
+			if (m_directoryItemCompPtr.IsValid() && m_parent.m_directoryItemGuiFactCompPtr.IsValid() && m_parent.m_directoryItemObserverFactCompPtr.IsValid()){
+				iqtgui::IGuiObject* directoryItemGuiPtr = m_parent.m_directoryItemGuiFactCompPtr.ExtractInterface(m_directoryItemCompPtr.GetPtr());
+				if (directoryItemGuiPtr->CreateGui(widgetWrapperPtr.GetPtr())){
+					m_parent.FileList->setItemWidget(this, 0, widgetWrapperPtr.PopPtr());
+
+					imod::IObserver* directoryItemObserverPtr = m_parent.m_directoryItemObserverFactCompPtr.ExtractInterface(m_directoryItemCompPtr.GetPtr());
+					if (directoryItemObserverPtr != NULL && m_parent.m_statisticsModelCompPtr.IsValid()){
+						if (!m_parent.m_statisticsModelCompPtr->IsAttached(directoryItemObserverPtr)){
+							m_parent.m_statisticsModelCompPtr->AttachObserver(directoryItemObserverPtr);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 
@@ -615,6 +706,25 @@ void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcess
 	imod::IModel* itemModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(&fileItem));
 	if (itemModelPtr != NULL){
 		itemModelPtr->AttachObserver(fileItemPtr);
+	}
+}
+
+
+CHotfolderGuiComp::InputDirectoriesObserver::InputDirectoriesObserver(CHotfolderGuiComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// protected methods
+
+// reimplemented (imod::TSingleModelObserverBase)
+
+void CHotfolderGuiComp::InputDirectoriesObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	iprm::IParamsManager* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		m_parent.RebuildItemList();
 	}
 }
 

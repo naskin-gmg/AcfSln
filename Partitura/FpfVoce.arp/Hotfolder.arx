@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1587
+          1606
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          268
+          275
         </Number>
         <Description>
           ACF-Solutions
@@ -351,7 +351,7 @@
   </ElementsList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="4">
     <Component>
       <ExportedId>
         HotfolderItems
@@ -374,6 +374,14 @@
       </ExportedId>
       <ComponentId>
         HotfolderSettings
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        InputDirectories
+      </ExportedId>
+      <ComponentId>
+        HotfolderSettings/InputDirectories
       </ComponentId>
     </Component>
   </ExportedComponents>

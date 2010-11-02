@@ -54,13 +54,10 @@ void CHotfolderProcessingComp::OnComponentCreated()
 		m_hotfolderProcessingModelCompPtr->AttachObserver(&m_stateObserver);
 	}
 
-	connect(&m_filesQueueTimer, SIGNAL(timeout()), this, SLOT(OnUpdateQueueTimer()));
 	connect(&m_processingTimer, SIGNAL(timeout()), this, SLOT(OnProcessingTimer()));
 
-	m_filesQueueTimer.start(100);
 	m_processingTimer.start(500);
 
-	I_ASSERT(m_filesQueueTimer.isActive());
 	I_ASSERT(m_processingTimer.isActive());
 	
 	BaseClass::OnComponentCreated();
@@ -78,8 +75,6 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 	m_directoryMonitorsMap.clear();
 
-	m_filesQueueTimer.stop();
-
 	m_processingTimer.stop();
 
 	CancelAllProcessingItems();
@@ -92,14 +87,23 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 void CHotfolderProcessingComp::OnFilesAddedEvent(const istd::CStringList& addedFiles)
 {
-	m_filesQueue.insert(m_filesQueue.begin(), addedFiles.begin(), addedFiles.end());
+	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+
+	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
+
+		istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED);
+
+		for (int fileIndex = 0; fileIndex < int(addedFiles.size()); fileIndex++){
+			istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(addedFiles[fileIndex]);
+
+			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(addedFiles[fileIndex], outputFilePath);
+		}
+	}
 }
 
 
 void CHotfolderProcessingComp::OnFilesRemovedEvent(const istd::CStringList& removedFiles)
 {
-	bool workDone = false;
-
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
@@ -122,20 +126,6 @@ void CHotfolderProcessingComp::OnFilesRemovedEvent(const istd::CStringList& remo
 	if (!processingItemsRemoved){
 		changePtr.Abort();
 	}
-
-	while (!workDone){
-		workDone = true;
-		for (int fileIndex = 0; fileIndex < int(removedFiles.size()); fileIndex++){
-			FilesQueue::iterator fileIter = std::find(m_filesQueue.begin(), m_filesQueue.end(), removedFiles[fileIndex]);
-			if (fileIter != m_filesQueue.end()){
-				m_filesQueue.erase(fileIter);
-
-				workDone = false;
-
-				break;
-			}
-		}
-	}
 }
 
 
@@ -156,27 +146,6 @@ void CHotfolderProcessingComp::OnFilesModifiedEvent(const istd::CStringList& mod
 
 
 // protected slots
-
-void CHotfolderProcessingComp::OnUpdateQueueTimer()
-{
-	if (m_filesQueue.empty()){
-		return;
-	}
-
-	const istd::CString& inputFilePath = m_filesQueue.back();
-	QFileInfo fileInfo(iqt::GetQString(inputFilePath));
-	if (!fileInfo.exists()){
-		return;
-	}
-
-	istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(inputFilePath);
-
-	// add file to hotfolder's model:
-	m_hotfolderProcessingInfoCompPtr->AddProcessingItem(inputFilePath, outputFilePath);
-
-	m_filesQueue.pop_back();
-}
-
 
 void CHotfolderProcessingComp::OnProcessingTimer()
 {
@@ -235,7 +204,9 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& processor)
 {
 	ifpf::IHotfolderProcessingItem* itemPtr = GetItemFromId(processor.GetItemUuid());
-	if (itemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED){
+	I_ASSERT(itemPtr != NULL);
+	
+	if (itemPtr != NULL && itemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED){
 		istd::CChangeNotifier changePtr(itemPtr);
 
 		itemPtr->SetProcessingState(processor.GetProcessingState());
@@ -402,14 +373,6 @@ void CHotfolderProcessingComp::RemoveDirectoryItems(const istd::CString& directo
 		QFileInfo fileInfo(filePath);
 		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
 			removedFiles.push_back(processingItemPtr->GetInputFile());
-		}
-	}
-
-	for (FilesQueue::const_iterator index = m_filesQueue.begin(); index != m_filesQueue.end(); index++){
-		QString filePath = iqt::GetQString(*index);
-		QFileInfo fileInfo(filePath);
-		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
-			removedFiles.push_back(*index);
 		}
 	}
 
@@ -600,7 +563,7 @@ CHotfolderProcessingComp::ItemProcessor::ItemProcessor(
 	m_itemUuid(itemUuid),
 	m_processingState(iproc::IProcessor::TS_INVALID)
 {
-	start();
+	start(QThread::LowPriority);
 }
 
 

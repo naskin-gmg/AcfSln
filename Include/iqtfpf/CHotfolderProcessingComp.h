@@ -97,7 +97,6 @@ protected:
 	};
 
 protected Q_SLOTS:
-	void OnUpdateQueueTimer();
 	void OnProcessingTimer();
 	void OnProcessingItemFinished(const ItemProcessor& processor);
 
@@ -237,10 +236,6 @@ private:
 	ParametersObserver m_parametersObserver;
 	StateObserver m_stateObserver;
 
-	typedef std::list<istd::CString> FilesQueue;
-	FilesQueue m_filesQueue;
-
-	QTimer m_filesQueueTimer;
 	QTimer m_processingTimer;
 
 	typedef istd::TPointerVector<ItemProcessor> PendingProcessors;
