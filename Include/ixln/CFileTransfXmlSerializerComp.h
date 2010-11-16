@@ -37,7 +37,7 @@ public:
 		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
-		I_ASSIGN(m_transformFileNameParamCompPtr, "TransformFile", "Parameter storing file name of XSL transformation", true, "TransformFile");
+		I_ASSIGN(m_transformFileNameParamCompPtr, "LoadTransformFile", "Parameter storing file name of XSL transformation", true, "LoadTransformFile");
 	I_END_COMPONENT;
 
 	// reimplemented (iser::IFileLoader)
