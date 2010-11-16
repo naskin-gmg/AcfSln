@@ -33,7 +33,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 
 	int sessionId = m_currentId;
 
-	SessionPtr sessionPtr = m_idToSessionMap[sessionId];
+	SessionPtr& sessionPtr = m_idToSessionMap[sessionId];
 	if (sessionPtr.IsValid()){
 		return -1;	// we cannot create new session, ID is used yet
 	}
