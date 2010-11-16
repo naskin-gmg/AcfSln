@@ -19,6 +19,11 @@ I_EXPORT_COMPONENT(
 			"XERCES based file loader serializing objects using XML format",
 			"XERCES Load Save Serializer Archive Format" IM_TAG("File Loader"));
 
+I_EXPORT_COMPONENT(
+			FileTransfXmlSerializer,
+			"XALAN based file loader serializing objects using XML format and XSL transformation",
+			"XALAN XERCES Load Save Serializer Archive Format XSLT Transformation Template" IM_TAG("File Loader"));
+
 
 } // namespace XlnPck
 

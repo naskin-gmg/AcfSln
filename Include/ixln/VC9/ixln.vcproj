@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="ixln"
 	ProjectGUID="{D5379D78-3D01-491F-B477-EC8F2A35ED2E}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -181,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileTransfXmlSerializerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileXmlReadArchive.cpp"
 				>
 			</File>
@@ -207,6 +212,10 @@
 			>
 			<File
 				RelativePath="..\CFileTransfXmlReadArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileTransfXmlSerializerComp.h"
 				>
 			</File>
 			<File
@@ -238,6 +247,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
-
