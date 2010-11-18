@@ -2,6 +2,9 @@
 #define ixln_CFileXmlWriteArchive_included
 
 
+// ACF includes
+#include "iser/CFileArchiveInfo.h"
+
 #include "ixln/CXmlWriteArchiveBase.h"
 
 
@@ -15,10 +18,13 @@ namespace ixln
 
 	\ingroup Persistence
 */
-class CFileXmlWriteArchive: public CXmlWriteArchiveBase
+class CFileXmlWriteArchive:
+			public CXmlWriteArchiveBase,
+			public iser::CFileArchiveInfo
 {
 public:
 	typedef CXmlWriteArchiveBase BaseClass;
+	typedef iser::CFileArchiveInfo BaseClass2;
 
 	explicit CFileXmlWriteArchive(
 				const istd::CString& filePath,

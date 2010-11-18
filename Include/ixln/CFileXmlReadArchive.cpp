@@ -10,7 +10,8 @@ namespace ixln
 
 
 CFileXmlReadArchive::CFileXmlReadArchive(const istd::CString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
-:	BaseClass(rootTag)
+:	BaseClass(rootTag),
+	BaseClass2(filePath)
 {
 	XMLCh* tmpData = xercesc::XMLString::transcode(filePath.ToString().c_str());
 	xercesc::LocalFileInputSource inputSource(tmpData);

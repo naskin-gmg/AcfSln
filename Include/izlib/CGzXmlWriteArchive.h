@@ -11,6 +11,7 @@
 // ACF includes
 #include "istd/CString.h"
 #include "iser/CXmlWriteArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace izlib
@@ -25,10 +26,13 @@ namespace izlib
 
 	\ingroup Persistence
 */
-class CGzXmlWriteArchive: public iser::CXmlWriteArchiveBase 
+class CGzXmlWriteArchive:
+			public iser::CXmlWriteArchiveBase,
+			public iser::CFileArchiveInfo
 {
 public:
 	typedef iser::CXmlWriteArchiveBase BaseClass;
+	typedef iser::CFileArchiveInfo BaseClass2;
 
 	CGzXmlWriteArchive(
 				const istd::CString& filePath,

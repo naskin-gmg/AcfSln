@@ -10,7 +10,8 @@ CGzXmlWriteArchive::CGzXmlWriteArchive(
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
-:	BaseClass(versionInfoPtr, rootTag)
+:	BaseClass(versionInfoPtr, rootTag),
+	BaseClass2(filePath)
 {
 	m_file = gzopen(filePath.ToString().c_str(), "wb");
 

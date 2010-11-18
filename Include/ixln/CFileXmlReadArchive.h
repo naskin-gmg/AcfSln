@@ -2,6 +2,8 @@
 #define ixln_CFileXmlReadArchive_included
 
 
+#include "iser/CFileArchiveInfo.h"
+
 #include "ixln/CXmlReadArchiveBase.h"
 
 
@@ -15,10 +17,13 @@ namespace ixln
 
 	\ingroup Persistence
 */
-class CFileXmlReadArchive: public CXmlReadArchiveBase
+class CFileXmlReadArchive:
+			public CXmlReadArchiveBase,
+			public iser::CFileArchiveInfo
 {
 public:
 	typedef CXmlReadArchiveBase BaseClass;
+	typedef iser::CFileArchiveInfo BaseClass2;
 
 	/**	Construct archive for specified file.
 	 */

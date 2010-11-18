@@ -7,6 +7,7 @@ namespace izlib
 
 CGzXmlReadArchive::CGzXmlReadArchive(const istd::CString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
 :	BaseClass(rootTag),
+	BaseClass2(filePath),
 	m_useLastReadChar(false)
 {
 	m_file = gzopen(filePath.ToString().c_str(), "rb");

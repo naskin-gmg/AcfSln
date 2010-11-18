@@ -13,7 +13,8 @@ CFileXmlWriteArchive::CFileXmlWriteArchive(
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
-:	BaseClass(versionInfoPtr, rootTag)
+:	BaseClass(versionInfoPtr, rootTag),
+	BaseClass2(filePath)
 {
 	XMLCh* tmpData = xercesc::XMLString::transcode(filePath.ToString().c_str());
 	Init(new xercesc::LocalFileFormatTarget(tmpData));

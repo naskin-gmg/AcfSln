@@ -8,6 +8,7 @@
 // ACF includes
 #include "istd/CString.h"
 #include "iser/CXmlReadArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace izlib
@@ -23,10 +24,13 @@ namespace izlib
 
 	\ingroup Persistence
 */
-class CGzXmlReadArchive: public iser::CXmlReadArchiveBase 
+class CGzXmlReadArchive:
+			public iser::CXmlReadArchiveBase,
+			public iser::CFileArchiveInfo
 {
 public:
 	typedef iser::CXmlReadArchiveBase BaseClass;
+	typedef iser::CFileArchiveInfo BaseClass2;
 
 	CGzXmlReadArchive(const istd::CString& filePath, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
 	virtual ~CGzXmlReadArchive();
