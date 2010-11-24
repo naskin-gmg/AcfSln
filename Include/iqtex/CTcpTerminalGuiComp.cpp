@@ -47,7 +47,20 @@ void CTcpTerminalGuiComp::OnGuiCreated()
 }
 
 
-// reimplemented (icomp::IComponent)
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CTcpTerminalGuiComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_socket.disconnectFromHost();
+	m_socket.waitForDisconnected();
+
+	OnConectTimer();
+
+	m_connectTimer.start(1000);
+}
+
+
+// reimplemented (icomp::CComponentBase)
 
 void CTcpTerminalGuiComp::OnComponentCreated()
 {
@@ -70,19 +83,6 @@ void CTcpTerminalGuiComp::OnComponentDestroyed()
 	if (m_urlParamModelCompPtr.IsValid() && m_urlParamModelCompPtr->IsAttached(this)){
 		m_urlParamModelCompPtr->DetachObserver(this);
 	}
-}
-
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CTcpTerminalGuiComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	m_socket.disconnectFromHost();
-	m_socket.waitForDisconnected();
-
-	OnConectTimer();
-
-	m_connectTimer.start(1000);
 }
 
 

@@ -68,11 +68,11 @@ public:
 	// reimplemented (ibase::IFileListProvider)
 	virtual istd::CStringList GetFileList() const;
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-protected:
 	// reimplemented (QThread)
 	virtual void run();
 

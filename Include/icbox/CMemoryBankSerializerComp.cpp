@@ -23,26 +23,6 @@ CMemoryBankSerializerComp::CMemoryBankSerializerComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CMemoryBankSerializerComp::OnComponentCreated()
-{
-	m_isInitialized = (::CBIOS_StartupDLL() != CBIOS_ERR_NOT_INITIALIZED);
-}
-
-
-void CMemoryBankSerializerComp::OnComponentDestroyed()
-{
-	EnsurePartitionClosed();
-
-	if (m_isInitialized){
-		::CBIOS_FinishDLL();
-
-		m_isInitialized = false;
-	}
-}
-
-
 // reimplemented (iser::IFileLoader)
 
 bool CMemoryBankSerializerComp::IsOperationSupported(
@@ -269,6 +249,26 @@ bool CMemoryBankSerializerComp::WriteToMem(int offset, const void* bufferPtr, in
 	}
 
 	return false;
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CMemoryBankSerializerComp::OnComponentCreated()
+{
+	m_isInitialized = (::CBIOS_StartupDLL() != CBIOS_ERR_NOT_INITIALIZED);
+}
+
+
+void CMemoryBankSerializerComp::OnComponentDestroyed()
+{
+	EnsurePartitionClosed();
+
+	if (m_isInitialized){
+		::CBIOS_FinishDLL();
+
+		m_isInitialized = false;
+	}
 }
 
 

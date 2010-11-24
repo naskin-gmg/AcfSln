@@ -38,10 +38,6 @@ public:
 
 	CMemoryBankSerializerComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
@@ -61,6 +57,10 @@ protected:
 	bool EnsurePartitionClosed() const;
 	bool ReadFromMem(int offset, void* bufferPtr, int size) const;
 	bool WriteToMem(int offset, const void* bufferPtr, int size) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

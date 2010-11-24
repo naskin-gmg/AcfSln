@@ -5,9 +5,9 @@ namespace ifpf
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CDirectoryMonitorParamsComp::OnComponentCreated()
 {

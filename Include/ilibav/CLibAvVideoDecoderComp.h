@@ -54,10 +54,6 @@ public:
 	CLibAvVideoDecoderComp();
 	virtual ~CLibAvVideoDecoderComp();
 
-	// reimplemented (icomp::IComponent)
-	void OnComponentCreated();
-	void OnComponentDestroyed();
-
 	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
@@ -91,6 +87,10 @@ public:
 
 protected:
 	bool ReadNextFrame();
+
+	// reimplemented (icomp::CComponentBase)
+	void OnComponentCreated();
+	void OnComponentDestroyed();
 
 private:
 	int m_videoStreamId;

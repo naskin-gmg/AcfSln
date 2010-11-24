@@ -50,37 +50,6 @@ CLibAvVideoDecoderComp::~CLibAvVideoDecoderComp()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CLibAvVideoDecoderComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	m_framePtr = avcodec_alloc_frame();
-	m_frameRgbPtr = avcodec_alloc_frame();
-}
-
-
-void CLibAvVideoDecoderComp::OnComponentDestroyed()
-{
-	CloseMedium();
-
-	if (m_framePtr != NULL){
-		av_free(m_framePtr);
-
-		m_framePtr = NULL;
-	}
-
-	if (m_frameRgbPtr != NULL){
-		av_free(m_frameRgbPtr);
-
-		m_frameRgbPtr = NULL;
-	}
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // reimplemented (iproc::IBitmapAcquisition)
 
 istd::CIndex2d CLibAvVideoDecoderComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
@@ -621,6 +590,37 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CLibAvVideoDecoderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_framePtr = avcodec_alloc_frame();
+	m_frameRgbPtr = avcodec_alloc_frame();
+}
+
+
+void CLibAvVideoDecoderComp::OnComponentDestroyed()
+{
+	CloseMedium();
+
+	if (m_framePtr != NULL){
+		av_free(m_framePtr);
+
+		m_framePtr = NULL;
+	}
+
+	if (m_frameRgbPtr != NULL){
+		av_free(m_frameRgbPtr);
+
+		m_frameRgbPtr = NULL;
+	}
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

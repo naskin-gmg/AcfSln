@@ -45,12 +45,12 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 protected slots:
 	void on_SendButton_clicked();

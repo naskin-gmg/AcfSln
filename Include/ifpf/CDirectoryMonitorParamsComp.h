@@ -34,7 +34,8 @@ public:
 		I_ASSIGN_MULTI_0(m_ignorePatternsAttrPtr, "IgnorePatterns", "File name patterns for ignoring of the file items", false);
 	I_END_COMPONENT();
 
-	// reimplemented (icomp::IComponent)
+protected:
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:

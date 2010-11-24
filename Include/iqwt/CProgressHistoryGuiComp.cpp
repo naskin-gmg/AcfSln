@@ -203,7 +203,7 @@ void CProgressHistoryGuiComp::OnGuiDestroyed()
 }
 
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CProgressHistoryGuiComp::OnComponentCreated()
 {

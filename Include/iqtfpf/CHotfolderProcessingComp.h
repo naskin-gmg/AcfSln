@@ -57,10 +57,6 @@ public:
 
 	CHotfolderProcessingComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 protected:
 	/**
 		Implementation of processing thread.
@@ -95,6 +91,10 @@ protected:
 		double m_processingTime;
 		QDateTime m_startTime; 
 	};
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 protected Q_SLOTS:
 	void OnProcessingTimer();

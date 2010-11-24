@@ -40,49 +40,6 @@ CHotfolderProcessingComp::CHotfolderProcessingComp()
 }
 
 
-// reimplemeneted (icomp::IComponent)
-
-void CHotfolderProcessingComp::OnComponentCreated()
-{
-	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
-	if (m_hotfolderSettingsModelCompPtr.IsValid()){
-		m_hotfolderSettingsModelCompPtr->AttachObserver(&m_parametersObserver);
-	}
-
-	I_ASSERT(m_hotfolderProcessingModelCompPtr.IsValid());
-	if (m_hotfolderProcessingModelCompPtr.IsValid()){
-		m_hotfolderProcessingModelCompPtr->AttachObserver(&m_stateObserver);
-	}
-
-	connect(&m_processingTimer, SIGNAL(timeout()), this, SLOT(OnProcessingTimer()));
-
-	m_processingTimer.start(500);
-
-	I_ASSERT(m_processingTimer.isActive());
-	
-	BaseClass::OnComponentCreated();
-
-	m_isInitialized = true;
-}
-
-
-void CHotfolderProcessingComp::OnComponentDestroyed()
-{
-	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
-	if (m_hotfolderSettingsModelCompPtr.IsValid()){
-		m_hotfolderSettingsModelCompPtr->DetachObserver(&m_parametersObserver);
-	}
-
-	m_directoryMonitorsMap.clear();
-
-	m_processingTimer.stop();
-
-	CancelAllProcessingItems();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // protected methods
 
 void CHotfolderProcessingComp::OnFilesAddedEvent(const istd::CStringList& addedFiles)
@@ -142,6 +99,49 @@ void CHotfolderProcessingComp::OnFilesModifiedEvent(const istd::CStringList& mod
 			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 		}
 	}
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CHotfolderProcessingComp::OnComponentCreated()
+{
+	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
+	if (m_hotfolderSettingsModelCompPtr.IsValid()){
+		m_hotfolderSettingsModelCompPtr->AttachObserver(&m_parametersObserver);
+	}
+
+	I_ASSERT(m_hotfolderProcessingModelCompPtr.IsValid());
+	if (m_hotfolderProcessingModelCompPtr.IsValid()){
+		m_hotfolderProcessingModelCompPtr->AttachObserver(&m_stateObserver);
+	}
+
+	connect(&m_processingTimer, SIGNAL(timeout()), this, SLOT(OnProcessingTimer()));
+
+	m_processingTimer.start(500);
+
+	I_ASSERT(m_processingTimer.isActive());
+	
+	BaseClass::OnComponentCreated();
+
+	m_isInitialized = true;
+}
+
+
+void CHotfolderProcessingComp::OnComponentDestroyed()
+{
+	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
+	if (m_hotfolderSettingsModelCompPtr.IsValid()){
+		m_hotfolderSettingsModelCompPtr->DetachObserver(&m_parametersObserver);
+	}
+
+	m_directoryMonitorsMap.clear();
+
+	m_processingTimer.stop();
+
+	CancelAllProcessingItems();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

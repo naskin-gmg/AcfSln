@@ -113,7 +113,9 @@ istd::CStringList CDirectoryMonitorComp::GetFileList() const
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
 
 void CDirectoryMonitorComp::OnComponentCreated()
 {
@@ -141,8 +143,6 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 	BaseClass::OnComponentDestroyed();
 }
 
-
-// protected methods
 
 // reimplemented (QThread)
 
