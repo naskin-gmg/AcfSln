@@ -24,6 +24,24 @@ CGeneralDataSequence::CGeneralDataSequence()
 
 bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 {
+	if (m_sequenceInfoPtr.IsValid()){
+		int flags = m_sequenceInfoPtr->GetSequenceInfoFlags();
+
+		if (samplesCount < 0){
+			samplesCount = m_sequenceInfoPtr->GetDefaultSamplesCount();
+		}
+		else if (((flags & IDataSequenceInfo::SIF_SAMPLES_COUNT_FIXED) != 0) && (samplesCount != m_sequenceInfoPtr->GetDefaultSamplesCount())){
+			return false;
+		}
+
+		if (channelsCount < 0){
+			channelsCount = m_sequenceInfoPtr->GetDefaultChannelsCount();
+		}
+		else if (((flags & IDataSequenceInfo::SIF_CHANNELS_COUNT_FIXED) != 0) && (channelsCount != m_sequenceInfoPtr->GetDefaultChannelsCount())){
+			return false;
+		}
+	}
+
 	if ((samplesCount < 0) || (channelsCount < 0)){
 		return false;
 	}
@@ -32,10 +50,10 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 
 	if (m_sequenceInfoPtr.IsValid()){
 		if (samplesCount < 0){
-			samplesCount = m_sequenceInfoPtr->GetFixedSamplesCount();
+			samplesCount = m_sequenceInfoPtr->GetDefaultSamplesCount();
 		}
 		if (channelsCount < 0){
-			channelsCount = m_sequenceInfoPtr->GetFixedChannelsCount();
+			channelsCount = m_sequenceInfoPtr->GetDefaultChannelsCount();
 		}
 	}
 

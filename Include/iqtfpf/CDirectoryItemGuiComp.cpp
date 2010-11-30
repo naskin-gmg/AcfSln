@@ -41,9 +41,9 @@ bool CDirectoryItemGuiComp::SetSelectedOptionIndex(int index)
 	m_setIndex = index;
 
 	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
-		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetSetsCount();
+		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetsCount();
 		if (m_setIndex < setsCount && m_setIndex >= 0){
-			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetSetName(m_setIndex);
+			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(m_setIndex);
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(m_setIndex);
 

@@ -141,6 +141,24 @@ bool TDiscrDataSequence<Element>::SetDiscrSample(int position, int channel, I_DW
 template <typename Element>
 bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsCount)
 {
+	if (m_sequenceInfoPtr.IsValid()){
+		int flags = m_sequenceInfoPtr->GetSequenceInfoFlags();
+
+		if (samplesCount < 0){
+			samplesCount = m_sequenceInfoPtr->GetDefaultSamplesCount();
+		}
+		else if (((flags & IDataSequenceInfo::SIF_SAMPLES_COUNT_FIXED) != 0) && (samplesCount != m_sequenceInfoPtr->GetDefaultSamplesCount())){
+			return false;
+		}
+
+		if (channelsCount < 0){
+			channelsCount = m_sequenceInfoPtr->GetDefaultChannelsCount();
+		}
+		else if (((flags & IDataSequenceInfo::SIF_CHANNELS_COUNT_FIXED) != 0) && (channelsCount != m_sequenceInfoPtr->GetDefaultChannelsCount())){
+			return false;
+		}
+	}
+
 	if ((samplesCount < 0) || (channelsCount < 0)){
 		return false;
 	}

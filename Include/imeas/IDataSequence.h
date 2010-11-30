@@ -23,6 +23,7 @@ public:
 	/**
 		Create container for sample sequence with specified number of samples, channels and sample depth.
 		\param	samplesCount	number of samples.
+		\param	channelsCount	number of channels.
 		\return					true if sample sequence was created correctly.
 	*/
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) = 0;
@@ -30,6 +31,8 @@ public:
 	/**
 		Create sequence and set the info object.
 		\param	infoPtr	sequence info object.
+		\param	samplesCount	number of samples. If it is negative, default value will be taken.
+		\param	channelsCount	number of channels. If it is negative, default value will be taken.
 	*/
 	virtual bool CreateSequenceWithInfo(
 				istd::TTransPtr<const IDataSequenceInfo> infoPtr,

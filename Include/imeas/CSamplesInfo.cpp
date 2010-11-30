@@ -36,15 +36,15 @@ int CSamplesInfo::GetSequenceInfoFlags() const
 }
 
 
-int CSamplesInfo::GetFixedSamplesCount() const
+int CSamplesInfo::GetDefaultSamplesCount() const
 {
 	return -1;
 }
 
 
-int CSamplesInfo::GetFixedChannelsCount() const
+int CSamplesInfo::GetDefaultChannelsCount() const
 {
-	return -1;
+	return 1;
 }
 
 

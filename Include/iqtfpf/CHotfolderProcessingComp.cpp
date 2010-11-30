@@ -248,7 +248,7 @@ istd::CStringList CHotfolderProcessingComp::GetInputDirectories() const
 	istd::CStringList inputDirectories;
 
 	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
-		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetSetsCount();
+		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
 		for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
 			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
 			I_ASSERT(inputDirectoryParamPtr != NULL);
@@ -268,7 +268,7 @@ istd::CStringList CHotfolderProcessingComp::GetInputDirectories() const
 const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(const istd::CString& directoryPath) const
 {
 	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
-		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetSetsCount();
+		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
 		for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
 			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
 			I_ASSERT(inputDirectoryParamPtr != NULL);

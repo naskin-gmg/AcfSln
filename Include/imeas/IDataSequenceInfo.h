@@ -23,10 +23,14 @@ public:
 	{
 		/**
 			Number of samples is fixed by this info object.
+			If this flag is on, default number of samples will be used.
+			If you try to create sequence with other number of samples, error will be returned.
 		*/
 		SIF_SAMPLES_COUNT_FIXED = 1 << 1,
 		/**
 			Number of channels is fixed by this info object.
+			If this flag is on, default number of channels will be used.
+			If you try to create sequence with other number of channels, error will be returned.
 		*/
 		SIF_CHANNELS_COUNT_FIXED = 1 << 2
 	};
@@ -60,13 +64,13 @@ public:
 	virtual int GetSequenceInfoFlags() const = 0;
 
 	/**
-		Get number of samples if there are fixed.
+		Get default number of samples.
 	*/
-	virtual int GetFixedSamplesCount() const = 0;
+	virtual int GetDefaultSamplesCount() const = 0;
 	/**
-		Get number of channels if there are fixed.
+		Get default number of channels.
 	*/
-	virtual int GetFixedChannelsCount() const = 0;
+	virtual int GetDefaultChannelsCount() const = 0;
 
 	/**
 		Get weight mode for this sequence.

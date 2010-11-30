@@ -312,9 +312,9 @@ void CHotfolderGuiComp::RebuildItemList()
 	}
 
 	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
-		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetSetsCount(); 
+		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetsCount(); 
 		for (int setIndex = 0; setIndex < setsCount; setIndex++){
-			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetSetName(setIndex);
+			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(setIndex);
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(setIndex);
 
