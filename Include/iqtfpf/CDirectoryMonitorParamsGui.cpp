@@ -21,75 +21,75 @@ namespace iqtfpf
 
 void CDirectoryMonitorParamsGui::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
 	ifpf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && !IsUpdateBlocked()){
-		UpdateBlocker blocker(const_cast<CDirectoryMonitorParamsGui*>(this));
+	I_ASSERT(objectPtr != NULL);
 
-		objectPtr->SetPoolingIntervall(PoolingIntervallSpin->value());
+	objectPtr->SetPoolingIntervall(PoolingIntervallSpin->value());
 
-		int observedItems = 0;
-		if (FilesCheck->isChecked()){
-			observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_FILES;
-		}
-
-		if (DirsCheck->isChecked()){
-			observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_DIR;
-		}
-
-		if (DrivesCheck->isChecked()){
-			observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_DRIVES;
-		}
-
-		objectPtr->SetObservedItemTypes(observedItems);
-
-		int observedChanges = 0;
-		if (ModifiedCheck->isChecked()){
-			observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_MODIFIED;
-		}
-
-		if (AddedCheck->isChecked()){
-			observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_ADD;
-		}
-
-		if (RemovedCheck->isChecked()){
-			observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_REMOVE;
-		}
-
-		if (AttributesCheck->isChecked()){
-			observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED;
-		}
-
-		objectPtr->SetObservedChanges(observedChanges);
-	
-		QTreeWidgetItemIterator acceptIter(AcceptPatternsList);
-		istd::CStringList acceptPatterns;
-		while (*acceptIter){
-			acceptPatterns.push_back(iqt::GetCString((*acceptIter)->text(0)));
-
-			++acceptIter;
-		}
-
-		objectPtr->SetAcceptPatterns(acceptPatterns);
-
-		QTreeWidgetItemIterator ignoreIter(IgnorePatternsList);
-		istd::CStringList ignorePatterns;
-		while (*ignoreIter){
-			ignorePatterns.push_back(iqt::GetCString((*ignoreIter)->text(0)));
-
-			++ignoreIter;
-		}
-
-		objectPtr->SetIgnorePatterns(ignorePatterns);
+	int observedItems = 0;
+	if (FilesCheck->isChecked()){
+		observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_FILES;
 	}
+
+	if (DirsCheck->isChecked()){
+		observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_DIR;
+	}
+
+	if (DrivesCheck->isChecked()){
+		observedItems = observedItems | ifpf::IDirectoryMonitorParams::OI_DRIVES;
+	}
+
+	objectPtr->SetObservedItemTypes(observedItems);
+
+	int observedChanges = 0;
+	if (ModifiedCheck->isChecked()){
+		observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_MODIFIED;
+	}
+
+	if (AddedCheck->isChecked()){
+		observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_ADD;
+	}
+
+	if (RemovedCheck->isChecked()){
+		observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_REMOVE;
+	}
+
+	if (AttributesCheck->isChecked()){
+		observedChanges = observedChanges | ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED;
+	}
+
+	objectPtr->SetObservedChanges(observedChanges);
+
+	QTreeWidgetItemIterator acceptIter(AcceptPatternsList);
+	istd::CStringList acceptPatterns;
+	while (*acceptIter){
+		acceptPatterns.push_back(iqt::GetCString((*acceptIter)->text(0)));
+
+		++acceptIter;
+	}
+
+	objectPtr->SetAcceptPatterns(acceptPatterns);
+
+	QTreeWidgetItemIterator ignoreIter(IgnorePatternsList);
+	istd::CStringList ignorePatterns;
+	while (*ignoreIter){
+		ignorePatterns.push_back(iqt::GetCString((*ignoreIter)->text(0)));
+
+		++ignoreIter;
+	}
+
+	objectPtr->SetIgnorePatterns(ignorePatterns);
 }
 
 
 void CDirectoryMonitorParamsGui::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	ifpf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		iqt::CSignalBlocker block(this, true);
-
 		ResetEditor();
 
 		PoolingIntervallSpin->setValue(objectPtr->GetPoolingIntervall());

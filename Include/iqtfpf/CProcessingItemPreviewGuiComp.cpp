@@ -24,11 +24,14 @@ namespace iqtfpf
 
 void CProcessingItemPreviewGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CProcessingItemPreviewGuiComp::UpdateEditor(int updateFlags)
 {
+	I_ASSERT(IsGuiCreated());
+
 	ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int processingState = objectPtr->GetProcessingState();

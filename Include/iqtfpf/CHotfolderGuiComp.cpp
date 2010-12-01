@@ -47,19 +47,16 @@ const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 
 void CHotfolderGuiComp::UpdateModel() const
 {
-	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && !IsUpdateBlocked()){
-		UpdateBlocker blocker(const_cast<CHotfolderGuiComp*>(this));
-	}
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 {
+	I_ASSERT(IsGuiCreated());
+
 	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		iqt::CSignalBlocker block(this, true);
-
 		if ((updateFlags & ifpf::IHotfolderProcessingInfo::CF_CREATE) != 0){
 			RebuildItemList();
 

@@ -13,21 +13,22 @@ namespace iqsci
 
 void CTextEditorGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
+	ibase::ITextDocument* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
+
 	CTextEditor* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
-	iqt::CSignalBlocker block(textEditPtr);
-
-	ibase::ITextDocument* objectPtr = GetObjectPtr();
-
-	if (objectPtr != NULL ){
-		objectPtr->SetText(iqt::GetCString(textEditPtr->GetText()));
-	}
+	objectPtr->SetText(iqt::GetCString(textEditPtr->GetText()));
 }
 
 
 void CTextEditorGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	CTextEditor* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 

@@ -48,13 +48,16 @@ CSurfaceViewComp::CSurfaceViewComp()
 
 void CSurfaceViewComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CSurfaceViewComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	imath::ISampledFunction2d* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && IsGuiCreated()){
+	if (objectPtr != NULL){
 		I_ASSERT(objectPtr->GetArgumentDimensionality() == 2);
 		I_ASSERT(objectPtr->GetResultDimensionality() == 1);
 

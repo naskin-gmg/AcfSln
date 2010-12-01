@@ -26,11 +26,14 @@ CDataSequenceViewComp::CDataSequenceViewComp()
 
 void CDataSequenceViewComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CDataSequenceViewComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	int channelsCount = 0;
 
 	imeas::IDataSequence* objectPtr = GetObjectPtr();

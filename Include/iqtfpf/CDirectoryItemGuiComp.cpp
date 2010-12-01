@@ -79,11 +79,14 @@ bool CDirectoryItemGuiComp::Serialize(iser::IArchive& /*archive*/)
 
 void CDirectoryItemGuiComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 }
 
 
 void CDirectoryItemGuiComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	ifpf::IHotfolderStatistics* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		DirectoryLabel->setVisible(!m_directoryPath.isEmpty());
