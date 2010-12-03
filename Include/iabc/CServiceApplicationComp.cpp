@@ -164,7 +164,7 @@ bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 }
 
 
-// protected slots:
+// protected slots
 
 void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
@@ -237,6 +237,7 @@ void CServiceApplicationComp::CService::start()
 
 void CServiceApplicationComp::CService::stop()
 {
+	qApp->exit();
 }
 
 
