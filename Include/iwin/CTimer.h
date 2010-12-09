@@ -2,9 +2,9 @@
 #define iwin_CTimer_included
 
 
-#include "isys/ITimer.h"
+#include "istd/istd.h"
 
-#include "iwin/iwin.h"
+#include "isys/ITimer.h"
 
 
 namespace iwin
