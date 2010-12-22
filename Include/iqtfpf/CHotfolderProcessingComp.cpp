@@ -32,9 +32,7 @@ namespace iqtfpf
 // public methods
 
 CHotfolderProcessingComp::CHotfolderProcessingComp()
-	:m_directoryMonitorObserver(*this),
-	m_parametersObserver(*this),
-	m_stateObserver(*this),
+	:m_stateObserver(*this),
 	m_isInitialized(false)
 {
 }
@@ -42,80 +40,10 @@ CHotfolderProcessingComp::CHotfolderProcessingComp()
 
 // protected methods
 
-void CHotfolderProcessingComp::OnFilesAddedEvent(const istd::CStringList& addedFiles)
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-
-	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
-
-		istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED);
-
-		for (int fileIndex = 0; fileIndex < int(addedFiles.size()); fileIndex++){
-			istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(addedFiles[fileIndex]);
-
-			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(addedFiles[fileIndex], outputFilePath);
-		}
-	}
-}
-
-
-void CHotfolderProcessingComp::OnFilesRemovedEvent(const istd::CStringList& removedFiles)
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
-		return;
-	}
-
-	istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
-
-	bool processingItemsRemoved = false;
-
-	for (int fileIndex = 0; fileIndex < int(removedFiles.size()); fileIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(removedFiles[fileIndex]);
-		if (processingItemPtr != NULL){
-			m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
-
-			processingItemsRemoved = true;
-		}
-	}
-
-	// abort update operation:
-	if (!processingItemsRemoved){
-		changePtr.Abort();
-	}
-}
-
-
-void CHotfolderProcessingComp::OnFilesModifiedEvent(const istd::CStringList& modifiedFiles)
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
-		return;
-	}
-
-	for (int fileIndex = 0; fileIndex < int(modifiedFiles.size()); fileIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(modifiedFiles[fileIndex]);
-		if (processingItemPtr != NULL){
-			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
-		}
-	}
-}
-
-
 // reimplemented (icomp::CComponentBase)
 
 void CHotfolderProcessingComp::OnComponentCreated()
 {
-	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
-	if (m_hotfolderSettingsModelCompPtr.IsValid()){
-		m_hotfolderSettingsModelCompPtr->AttachObserver(&m_parametersObserver);
-	}
-
-	I_ASSERT(m_hotfolderProcessingModelCompPtr.IsValid());
-	if (m_hotfolderProcessingModelCompPtr.IsValid()){
-		m_hotfolderProcessingModelCompPtr->AttachObserver(&m_stateObserver);
-	}
-
 	connect(&m_processingTimer, SIGNAL(timeout()), this, SLOT(OnProcessingTimer()));
 
 	m_processingTimer.start(500);
@@ -130,13 +58,6 @@ void CHotfolderProcessingComp::OnComponentCreated()
 
 void CHotfolderProcessingComp::OnComponentDestroyed()
 {
-	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
-	if (m_hotfolderSettingsModelCompPtr.IsValid()){
-		m_hotfolderSettingsModelCompPtr->DetachObserver(&m_parametersObserver);
-	}
-
-	m_directoryMonitorsMap.clear();
-
 	m_processingTimer.stop();
 
 	CancelAllProcessingItems();
@@ -149,10 +70,6 @@ void CHotfolderProcessingComp::OnComponentDestroyed()
 
 void CHotfolderProcessingComp::OnProcessingTimer()
 {
-	if (!m_hotfolderProcessingInfoCompPtr->IsWorking()){
-		return;
-	}
-
 	bool updateProcessedItemsDone = false;
 	while (!updateProcessedItemsDone){
 		updateProcessedItemsDone = true;
@@ -168,34 +85,36 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 		}
 	}
 
+	if (!m_hotfolderProcessingInfoCompPtr->IsWorking()){
+		return;
+	}
+
 	// get available file to process:
-	ifpf::IHotfolderProcessingItem* processingItemPtr = GetNextProcessingFile();
-	if (processingItemPtr != NULL){
-		int runningThreadCount = 0;
+	if (m_taskManagerCompPtr.IsValid()){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = m_taskManagerCompPtr->GetNextProcessingTask();
+		if (processingItemPtr != NULL){
+			int runningThreadCount = 0;
 
-		for (int processingFutureIndex = 0; processingFutureIndex < m_pendingProcessors.GetCount(); processingFutureIndex++){
-			if (m_pendingProcessors.GetAt(processingFutureIndex)->isRunning()){
-				runningThreadCount++;
-			}
-		}
-
-		if (runningThreadCount < QThread::idealThreadCount()){
-			istd::CChangeNotifier changePtr(processingItemPtr);
-
-			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_WAIT);
-			if (m_fileNamingCompPtr.IsValid()){
-				istd::CString outputFile = m_fileNamingCompPtr->GetFilePath(processingItemPtr->GetInputFile());
-
-				processingItemPtr->SetOutputFile(outputFile);
+			for (int processingFutureIndex = 0; processingFutureIndex < m_pendingProcessors.GetCount(); processingFutureIndex++){
+				if (m_pendingProcessors.GetAt(processingFutureIndex)->isRunning()){
+					runningThreadCount++;
+				}
 			}
 
-			changePtr.Reset();
+			if (runningThreadCount < QThread::idealThreadCount()){
+				istd::CChangeNotifier changePtr(processingItemPtr);
 
-			istd::CString inputFilePath = processingItemPtr->GetInputFile();
-			istd::CString outputFilePath = processingItemPtr->GetOutputFile();
-			std::string itemUuid = processingItemPtr->GetItemUuid();
+				processingItemPtr->SetProcessingState(iproc::IProcessor::TS_WAIT);
+			
 
-			m_pendingProcessors.PushBack(new ItemProcessor(*this, inputFilePath, outputFilePath, itemUuid));
+				changePtr.Reset();
+
+				istd::CString inputFilePath = processingItemPtr->GetInputFile();
+				istd::CString outputFilePath = processingItemPtr->GetOutputFile();
+				std::string itemUuid = processingItemPtr->GetItemUuid();
+
+				m_pendingProcessors.PushBack(new ItemProcessor(*this, inputFilePath, outputFilePath, itemUuid));
+			}
 		}
 	}
 }
@@ -216,209 +135,6 @@ void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& pro
 
 		itemPtr->SetProcessingTime(processor.GetProcessingTime());
 	}
-}
-
-
-void CHotfolderProcessingComp::SynchronizeWithModel(bool /*applyToPendingTasks*/)
-{
-	if (!m_isInitialized){
-		return;
-	}
-
-	// setup directory monitoring:
-	istd::CStringList addedDirectories = GetAddedInputDirectories();
-	for (int pathIndex = 0; pathIndex < int(addedDirectories.size()); pathIndex++){
-		const iprm::IParamsSet* monitoringParamsPtr = GetMonitoringParamsSet(addedDirectories[pathIndex]);
-		if (monitoringParamsPtr != NULL){
-			AddDirectoryMonitor(addedDirectories[pathIndex], monitoringParamsPtr);
-		}
-	}
-	
-	istd::CStringList removedDirectories = GetRemovedInputDirectories();
-	for (int pathIndex = 0; pathIndex < int(removedDirectories.size()); pathIndex++){
-		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
-
-		RemoveDirectoryItems(removedDirectories[pathIndex]);
-	}
-}
-
-
-istd::CStringList CHotfolderProcessingComp::GetInputDirectories() const
-{
-	istd::CStringList inputDirectories;
-
-	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
-		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
-		for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
-			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
-			I_ASSERT(inputDirectoryParamPtr != NULL);
-
-			const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
-			I_ASSERT(monitoringDirectoryPtr != NULL);
-			I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
-
-			inputDirectories.push_back(monitoringDirectoryPtr->GetPath());
-		}
-	}
-
-	return inputDirectories;
-}
-
-
-const iprm::IParamsSet* CHotfolderProcessingComp::GetMonitoringParamsSet(const istd::CString& directoryPath) const
-{
-	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
-		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
-		for (int inputIndex = 0; inputIndex < inputDirectoriesCount; inputIndex++){
-			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
-			I_ASSERT(inputDirectoryParamPtr != NULL);
-
-			const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
-			I_ASSERT(monitoringDirectoryPtr != NULL);
-			I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
-
-			if (monitoringDirectoryPtr->GetPath() == directoryPath){
-				return inputDirectoryParamPtr;
-			}
-		}
-	}
-
-	return NULL;
-}
-
-
-istd::CStringList CHotfolderProcessingComp::GetAddedInputDirectories() const
-{
-	istd::CStringList inputDirectories = GetInputDirectories();
-	istd::CStringList addedDirectories;
-
-	for (int index = 0; index < int(inputDirectories.size()); index++){
-		if (m_directoryMonitorsMap.find(inputDirectories[index]) == m_directoryMonitorsMap.end()){
-			addedDirectories.push_back(inputDirectories[index]);
-		}
-	}
-
-	return addedDirectories;
-}
-
-
-istd::CStringList CHotfolderProcessingComp::GetRemovedInputDirectories() const
-{
-	istd::CStringList inputDirectories = GetInputDirectories();
-	istd::CStringList removedDirectories;
-
-	for (		DirectoryMonitorsMap::const_iterator index = m_directoryMonitorsMap.begin();
-				index != m_directoryMonitorsMap.end();
-				index++){
-		istd::CStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index->first);
-		if (foundIter == inputDirectories.end()){
-			removedDirectories.push_back(index->first);
-		}
-	}
-
-	return removedDirectories;
-}
-
-
-ifpf::IDirectoryMonitor* CHotfolderProcessingComp::AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr)
-{
-	istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
-	if (monitorCompPtr.IsValid()){
-		ifpf::IDirectoryMonitor* directoryMonitorPtr = m_monitorFactCompPtr.ExtractInterface(monitorCompPtr.GetPtr());
-		if (directoryMonitorPtr != NULL){
-			m_directoryMonitorsMap[directoryPath] = directoryMonitorPtr;
-
-			monitorCompPtr.PopPtr();
-
-			imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
-			I_ASSERT(directoryMonitorModelPtr != NULL);
-
-			directoryMonitorModelPtr->AttachObserver(&m_directoryMonitorObserver);
-
-			directoryMonitorPtr->StartObserving(monitoringParamsPtr);
-		}
-
-		return directoryMonitorPtr;
-	}
-
-	return NULL;
-}
-
-	
-void CHotfolderProcessingComp::RemoveDirectoryMonitor(const istd::CString& directoryPath)
-{
-	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
-	if (monitorIter != m_directoryMonitorsMap.end()){
-		monitorIter->second->StopObserving();
-
-		m_directoryMonitorsMap.erase(monitorIter);
-	}
-}
-
-
-void CHotfolderProcessingComp::RemoveDirectoryItems(const istd::CString& directoryPath)
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
-		return;
-	}
-
-	istd::CStringList removedFiles;
-	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
-	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
-		I_ASSERT(processingItemPtr != NULL);
-
-		QString filePath = iqt::GetQString(processingItemPtr->GetInputFile());
-		QFileInfo fileInfo(filePath);
-		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
-			removedFiles.push_back(processingItemPtr->GetInputFile());
-		}
-	}
-
-	OnFilesRemovedEvent(removedFiles);
-}
-
-
-ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetNextProcessingFile() const
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
-		return NULL;
-	}
-		
-	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
-	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
-		I_ASSERT(processingItemPtr != NULL);
-
-		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
-			return processingItemPtr;
-		}
-	}
-
-	return NULL;
-}
-
-
-ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::FindProcessingItem(const istd::CString& fileName) const
-{
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
-		return NULL;
-	}
-		
-	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
-	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
-		I_ASSERT(processingItemPtr != NULL);
-
-		if (processingItemPtr->GetInputFile() == fileName){
-			return processingItemPtr;
-		}
-	}
-
-	return NULL;
 }
 
 
@@ -483,50 +199,6 @@ ifpf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetItemFromId(const st
 }
 
 
-// public methods of embedded class DirectoryMonitorObserver
-
-CHotfolderProcessingComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderProcessingComp& parent)
-	:m_parent(parent)
-{
-}
-
-
-// reimplemented (imod::IObserver)
-	
-void CHotfolderProcessingComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
-	
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED) != 0){
-		m_parent.OnFilesAddedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED));
-	}
-
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_REMOVED) != 0){
-		m_parent.OnFilesRemovedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_REMOVED));
-	}
-
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_MODIFIED) != 0){
-		m_parent.OnFilesModifiedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_MODIFIED));
-	}
-}
-
-
-// public methods of embedded class ParametersObserver
-
-CHotfolderProcessingComp::ParametersObserver::ParametersObserver(CHotfolderProcessingComp& parent)
-	:m_parent(parent)
-{
-}
-
-
-// reimplemented (imod::IObserver)
-	
-void CHotfolderProcessingComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	m_parent.SynchronizeWithModel();
-}
-
-
 // public methods of embedded class StateObserver
 
 CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp& parent)
@@ -534,8 +206,6 @@ CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp&
 {
 }
 
-
-// reimplemented (imod::IObserver)
 
 void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {

@@ -138,49 +138,49 @@ void CDirectoryMonitorParamsGui::OnGuiCreated()
 
 void CDirectoryMonitorParamsGui::on_FilesCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_DirsCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_DrivesCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_ModifiedCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_AddedCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_RemovedCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_AttributesCheck_toggled(bool/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
 void CDirectoryMonitorParamsGui::on_PoolingIntervallSpin_valueChanged(double/* isChecked*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
@@ -188,7 +188,7 @@ void CDirectoryMonitorParamsGui::on_AddAcceptPatternButton_clicked()
 {
 	AddPattern("<Filter>", AcceptPatternsList);
 
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
@@ -208,7 +208,7 @@ void CDirectoryMonitorParamsGui::on_AcceptPatternsList_itemSelectionChanged()
 
 void CDirectoryMonitorParamsGui::on_AcceptPatternsList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
@@ -216,7 +216,7 @@ void CDirectoryMonitorParamsGui::on_AddIgnorePatternButton_clicked()
 {
 	AddPattern("<Filter>", IgnorePatternsList);
 
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
@@ -236,7 +236,7 @@ void CDirectoryMonitorParamsGui::on_IgnorePatternsList_itemSelectionChanged()
 
 void CDirectoryMonitorParamsGui::on_IgnorePatternsList_itemChanged(QTreeWidgetItem* /*item*/, int /*column*/)
 {
-	UpdateModel();
+	OnModelUpdate();
 }
 
 
@@ -267,7 +267,7 @@ void CDirectoryMonitorParamsGui::RemoveSelectedPatterns(QTreeWidget* treeView)
 			}
 		}
 
-		UpdateModel();
+		OnModelUpdate();
 	}
 }
 
@@ -281,6 +281,16 @@ void CDirectoryMonitorParamsGui::ResetEditor()
 	while (IgnorePatternsList->topLevelItemCount() > 0){
 		delete IgnorePatternsList->takeTopLevelItem(0);
 	}	
+}
+
+
+void CDirectoryMonitorParamsGui::OnModelUpdate()
+{
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateModel();
+	}
 }
 
 

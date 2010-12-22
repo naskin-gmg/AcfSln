@@ -206,6 +206,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHotfolderTaskManagerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderWorkflowScenographerComp.cpp"
 				>
 			</File>
@@ -249,6 +253,10 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHotfolderTaskManagerComp.h"
 				>
 			</File>
 			<File
@@ -425,4 +433,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-

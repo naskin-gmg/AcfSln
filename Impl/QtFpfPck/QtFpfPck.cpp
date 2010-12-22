@@ -72,6 +72,11 @@ I_EXPORT_COMPONENT(
 			"Hotfolder container UI",
 			"Hotfolder File Procesing Observer" IM_TAG("GUI"));
 
+I_EXPORT_COMPONENT(
+			HotfolderTaskManager,
+			"Hotfolder task manager",
+			"File Procesing" IM_TAG("Hotfolder"));
+
 
 } // namespace QtFpfPck
 

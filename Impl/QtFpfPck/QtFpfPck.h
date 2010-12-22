@@ -13,6 +13,7 @@
 #include "iqtfpf/CDirectoryItemGuiComp.h"
 #include "iqtfpf/CHotfolderWorkflowScenographerComp.h"
 #include "iqtfpf/CHotfolderContainerGuiComp.h"
+#include "iqtfpf/CHotfolderTaskManagerComp.h"
 
 
 /**
@@ -31,6 +32,7 @@ typedef iqtfpf::CProcessingItemPreviewGuiComp ProcessingItemPreviewGui;
 typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
 typedef iqtfpf::CHotfolderWorkflowScenographerComp HotfolderWorkflowScenographer;
 typedef iqtfpf::CHotfolderContainerGuiComp HotfolderContainerGui;
+typedef iqtfpf::CHotfolderTaskManagerComp HotfolderTaskManager;
 
 
 } // namespace QtFpfPck

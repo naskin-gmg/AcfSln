@@ -59,6 +59,7 @@ private:
 	void AddPattern(const QString& filter, QTreeWidget* treeView);
 	void RemoveSelectedPatterns(QTreeWidget* treeView);
 	void ResetEditor();
+	void OnModelUpdate();
 };
 
 

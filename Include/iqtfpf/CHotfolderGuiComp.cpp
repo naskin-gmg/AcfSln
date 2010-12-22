@@ -393,7 +393,6 @@ void CHotfolderGuiComp::UpdateRemovedItemList()
 }
 
 
-
 CHotfolderGuiComp::ProcessingItems CHotfolderGuiComp::GetSelectedProcessingItems() const
 {
 	ProcessingItems items;
@@ -472,12 +471,19 @@ void CHotfolderGuiComp::OnItemRemove()
 	UpdateBlocker updateBlock(this);
 
 	ProcessingItems processingItems = GetSelectedProcessingItems();
-	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		istd::CChangeNotifier changePtr(objectPtr, ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+	istd::TChangeNotifier<ifpf::IHotfolderProcessingInfo> changePtr(GetObjectPtr());
+	if (changePtr.IsValid()){
+		FileList->clearSelection();
+	
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
 			ProcessingItem* processingItemPtr = processingItems[itemIndex];
-			
+
+			ifpf::IHotfolderProcessingItem* itemPtr = processingItemPtr->GetObjectPtr();
+			I_ASSERT(itemPtr != NULL);
+			if (itemPtr != NULL && itemPtr->GetProcessingState() == iproc::IProcessor::TS_WAIT){		
+				itemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
+			}
+
 			QTreeWidgetItem* parentItem = processingItemPtr->parent();
 			I_ASSERT(parentItem != NULL);
 
@@ -487,7 +493,7 @@ void CHotfolderGuiComp::OnItemRemove()
 				delete FileList->takeTopLevelItem(FileList->indexOfTopLevelItem(parentItem));
 			}
 
-			objectPtr->RemoveProcessingItem(processingItemPtr->GetObjectPtr());
+			changePtr->RemoveProcessingItem(itemPtr);
 		}
 	}
 }
@@ -498,20 +504,14 @@ void CHotfolderGuiComp::OnItemCancel()
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	ifpf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		istd::CChangeNotifier changePtr(objectPtr);
-		bool fireChangeEvent = false;
-	
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
-			int itemState = processingItems[itemIndex]->GetObjectPtr()->GetProcessingState();
+			ifpf::IHotfolderProcessingItem* processingItemPtr = processingItems[itemIndex]->GetObjectPtr();
+			I_ASSERT(processingItemPtr != NULL);
+
+			int itemState = processingItemPtr->GetProcessingState();
 			if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
-				processingItems[itemIndex]->GetObjectPtr()->SetProcessingState(iproc::IProcessor::TS_CANCELED);
-
-				fireChangeEvent = true;
+				processingItemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 			}
-		}
-
-		if (!fireChangeEvent){
-			changePtr.Abort();
 		}
 	}
 

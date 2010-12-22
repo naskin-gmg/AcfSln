@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1609
+          1656
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          277
+          295
         </Number>
         <Description>
           ACF-Solutions
@@ -434,7 +434,7 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              HotfolderSettingsFilePath
             </ExportId>
             <Data>
               <IsEnabled>
@@ -509,7 +509,7 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              HotfolderStateFilePath
             </ExportId>
             <Data>
               <IsEnabled>
@@ -738,6 +738,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
@@ -775,7 +777,7 @@
     </Component>
   </ExportedComponents>
   <Description>
-    GUI and data component for hotfolder processing
+    GUI and data component for hotfolder processing with settings and state persistence
   </Description>
   <Keywords>
     Hotfolder Processing

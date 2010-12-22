@@ -363,6 +363,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IHotfolderTaskManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IHotfolderWorkflow.h"
 				>
 			</File>
@@ -407,4 +411,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
