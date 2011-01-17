@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1597
+          1661
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          271
+          296
         </Number>
         <Description>
           ACF-Solutions
@@ -35,7 +35,7 @@
         InstallVoce
       </PackageId>
       <ComponentId>
-        CreateInstallationOpenSource
+        CreateInstallationLGPL
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -78,33 +78,17 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   *Xcd
                 </Value>
                 <Value>
                   *QMake
                 </Value>
+                <Value>
+                  *VC9
+                </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VersionInfo
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -170,6 +154,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
