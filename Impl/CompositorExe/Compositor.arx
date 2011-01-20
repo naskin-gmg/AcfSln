@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1606
+          1664
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          275
+          298
         </Number>
         <Description>
           ACF-Solutions
@@ -245,9 +245,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
+                </Value>
+                <Value>
+                  MainWindowComponents/PackageOverviewDock
                 </Value>
               </Values>
             </Data>
@@ -448,6 +451,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>

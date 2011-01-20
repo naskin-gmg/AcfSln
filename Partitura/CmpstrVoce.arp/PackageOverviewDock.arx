@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1606
+          1664
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          275
+          298
         </Number>
         <Description>
           ACF-Solutions
@@ -172,7 +172,9 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="4">
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
@@ -184,6 +186,22 @@
     <Interface>
       <InterfaceId>
         icmpstr::IAttributeSelectionObserver
+      </InterfaceId>
+      <ComponentId>
+        PackageOverview
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModelEditor
+      </InterfaceId>
+      <ComponentId>
+        PackageOverview
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
         PackageOverview
