@@ -266,10 +266,11 @@ bool CGeneralDataSequence::Serialize(iser::IArchive& archive)
 		}
 	}
 
-	for (int i = 0; i < samplesCount; ++i){
+	int index = 0;
+	for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
 		retVal = retVal && archive.BeginTag(channelsTag);
 		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-			retVal = retVal && archive.Process(m_samples[i]);
+			retVal = retVal && archive.Process(m_samples[index++]);
 		}
 		retVal = retVal && archive.EndTag(channelsTag);
 	}

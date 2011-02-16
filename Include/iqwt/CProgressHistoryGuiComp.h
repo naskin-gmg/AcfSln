@@ -33,6 +33,8 @@ public:
 	I_BEGIN_COMPONENT(CProgressHistoryGuiComp);
 		I_REGISTER_INTERFACE(iproc::IProgressManager);
 		I_ASSIGN(m_historyStepsCountAttrPtr, "HistoryStepsCount", "Number of steps shown in this history", true, 100);
+		I_ASSIGN(m_showTaskDescriptionAttrPtr, "ShowTaskDescription", "If true, description of current task will be shown", true, true);
+		I_ASSIGN(m_showCancelAttrPtr, "ShowCancel", "If true, cancel button will be shown", true, true);
 	I_END_COMPONENT;
 
 	CProgressHistoryGuiComp();
@@ -58,6 +60,8 @@ protected:
 
 private:
 	I_ATTR(int, m_historyStepsCountAttrPtr);
+	I_ATTR(bool, m_showTaskDescriptionAttrPtr);
+	I_ATTR(bool, m_showCancelAttrPtr);
 
 	istd::TDelPtr<QwtPlot> m_plotPtr;
 	istd::TDelPtr<QwtPlotMarker> m_nowMarker;

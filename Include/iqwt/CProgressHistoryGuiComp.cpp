@@ -188,6 +188,10 @@ void CProgressHistoryGuiComp::OnGuiCreated()
 		layoutPtr->addWidget(m_plotPtr.GetPtr());
 	}
 
+	DescriptionLabel->setVisible(*m_showTaskDescriptionAttrPtr);
+	CancelButton->setVisible(*m_showCancelAttrPtr);
+	StatusFrame->setVisible(*m_showTaskDescriptionAttrPtr || *m_showCancelAttrPtr);
+
 	UpdateState();
 }
 
