@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1458
+          1681
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          180
+          302
         </Number>
         <Description>
           ACF-Solutions
@@ -400,7 +400,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Language
@@ -422,7 +422,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseFolding
+              ReadOnly
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
@@ -439,10 +439,31 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseFolding
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>

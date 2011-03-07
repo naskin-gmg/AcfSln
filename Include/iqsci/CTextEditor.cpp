@@ -22,12 +22,11 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 :	QWidget(parentWidget),
 	m_editorCommand("&Edit"),
 	m_viewCommand("&View"),
-	m_languageCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
-	m_lowercaseCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
-	m_uppercaseCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
-	m_useIdentGuideCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
-	m_useFoldingCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
-	m_showLineNumberCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW)
+	m_lowercaseCommand("To Lowercase", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
+	m_uppercaseCommand("To Uppercase", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, MF_EDIT),
+	m_useIdentGuideCommand("Show Indentation Guides", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
+	m_useFoldingCommand("Use Folding", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW),
+	m_showLineNumberCommand("Show Line Number", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF, MF_VIEW)
 {
 	Ui_CTextEditor::setupUi(this);
 
@@ -230,6 +229,12 @@ void CTextEditor::RegisterLexers()
 
 	QsciLexerPostScript* psLexerPtr = new QsciLexerPostScript(this);
 	m_languages[QString(psLexerPtr->language()).toUpper()] = psLexerPtr;
+
+	QsciLexerXML* xmlLexerPtr = new QsciLexerXML(this);
+	m_languages[QString(xmlLexerPtr->language()).toUpper()] = xmlLexerPtr;
+
+	QsciLexerHTML* htmlLexerPtr = new QsciLexerHTML(this);
+	m_languages[QString(htmlLexerPtr->language()).toUpper()] = htmlLexerPtr;
 }
 
 
