@@ -5,6 +5,7 @@
 #include <Qsci/qsciscintilla.h>
 #include <Qsci/qscilexercpp.h>
 #include <Qsci/qscilexerpostscript.h>
+#include <Qsci/qscilexerxml.h>
 
 
 // Qt includes
