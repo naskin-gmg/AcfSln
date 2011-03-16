@@ -1,6 +1,9 @@
 #include "iqwt/CProgressHistoryGuiComp.h"
 
 
+// STL includes
+#include <functional>
+
 // Qt includes
 #include <QCoreApplication>
 
@@ -23,7 +26,7 @@ CProgressHistoryGuiComp::CProgressHistoryGuiComp()
 // reimplemented (iproc::IProgressManager)
 
 int CProgressHistoryGuiComp::BeginProgressSession(
-			const std::string& /*progressId*/,
+			const std::string& progressId,
 			const istd::CString& description,
 			bool isCancelable)
 {
@@ -48,7 +51,18 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	sessionPtr->curve.setTitle(iqt::GetQString(description));
 	sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	sessionPtr->curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
-    sessionPtr->curve.setPen(QPen(Qt::GlobalColor(Qt::cyan + sessionId), 2));
+
+	static std::tr1::hash<std::string> hashFunction;
+	QColor lineColor = Qt::GlobalColor(Qt::cyan + Qt::red + int(hashFunction(progressId)) % (Qt::transparent - Qt::red));
+
+	int colorsCount = istd::Min(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
+	for (int i = 0; i < colorsCount; ++i){
+		if (m_progressIdsAttrPtr[i].ToString() == progressId){
+			lineColor = QColor(iqt::GetQString(m_progressColorsAttrPtr[i]));
+		}
+	}
+
+	sessionPtr->curve.setPen(QPen(lineColor, 2));
 	sessionPtr->isCancelable = isCancelable;
 	sessionPtr->description = description;
 
