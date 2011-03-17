@@ -32,7 +32,9 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="DeployCopy"
+				OutputDir=""
+				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -44,22 +46,17 @@
 				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
-				Name="SubVersionTransform"
+				Name="Arxc"
+				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
-				Name="DeployCopy"
-				OutputDir=""
-				InputDir="..\..\..\Bin\info"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -135,7 +132,9 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="DeployCopy"
+				OutputDir=""
+				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -147,22 +146,17 @@
 				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
-				Name="SubVersionTransform"
+				Name="Arxc"
+				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
-				Name="DeployCopy"
-				OutputDir=""
-				InputDir="..\..\..\Bin\info"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -277,7 +271,7 @@
 					>
 					<Tool
 						Name="FileConvertCopy"
-						RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+						RegistryFile="..\..\..\Partitura\AcfSlnVoce.arp\FileSubstitCopyApp.arx"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -285,7 +279,7 @@
 					>
 					<Tool
 						Name="FileConvertCopy"
-						RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+						RegistryFile="..\..\..\Partitura\AcfSlnVoce.arp\FileSubstitCopyApp.arx"
 					/>
 				</FileConfiguration>
 			</File>

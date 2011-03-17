@@ -27,8 +27,8 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION $AcfRcVersion:0$
- PRODUCTVERSION $AcfRcVersion:0$
+ FILEVERSION $AcfRcVersion:1$
+ PRODUCTVERSION $AcfRcVersion:1$
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -43,15 +43,15 @@ BEGIN
     BEGIN
         BLOCK "040704b0"
         BEGIN
-            VALUE "Comments", "Internal build version ($AcfRawVersion:0$), build on $AcfTimestamp$ ($CompilerName$)"
-            VALUE "CompanyName", "ImagingTools GbR"
+            VALUE "Comments", "Internal build version ($AcfRawVersion:1$), base on ACF version $AcfVersion:0$ ($AcfRawVersion:0$), build on $AcfTimestamp$ ($CompilerName$)"
+            VALUE "CompanyName", "Witold Gantzke and Kirill Lepskiy"
             VALUE "FileDescription", "ACF Compositor"
-            VALUE "FileVersion", "$AcfRcVersion:0$"
+            VALUE "FileVersion", "$AcfVersion:1$"
             VALUE "InternalName", "Compositor"
-            VALUE "LegalCopyright", "Copyright (C) 2009 ImagingTools GbR"
+            VALUE "LegalCopyright", "Copyright (C) 2009-2011 Witold Gantzke and Kirill Lepskiy"
             VALUE "OriginalFilename", "Compositor.exe"
             VALUE "ProductName", "ACF Compositor"
-            VALUE "ProductVersion", "$AcfRcVersion:0$"
+            VALUE "ProductVersion", "$AcfVersion:1$"
         END
     END
     BLOCK "VarFileInfo"
