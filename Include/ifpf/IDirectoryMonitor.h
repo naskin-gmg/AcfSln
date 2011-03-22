@@ -30,22 +30,22 @@ public:
 		/**
 			File(s) were added.
 		*/
-		CF_FILES_ADDED = 0x1000,
+		CF_FILES_ADDED = 0x1000000,
 
 		/**
 			File(s) were removed.
 		*/
-		CF_FILES_REMOVED = 0x2000,
+		CF_FILES_REMOVED = 0x2000000,
 
 		/**
 			File(s) were modified.
 		*/
-		CF_FILES_MODIFIED = 0x4000,
+		CF_FILES_MODIFIED = 0x4000000,
 
 		/**
 			File's attributes were changed.
 		*/
-		CF_FILES_ATTRIBUTE_CHANGED = 0x8000,
+		CF_FILES_ATTRIBUTE_CHANGED = 0x8000000,
 
 		/**
 			All possible changes

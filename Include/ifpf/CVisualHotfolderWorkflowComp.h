@@ -35,7 +35,7 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_SELECTION = 0x8000000
+		CF_SELECTION = 0x10000000
 	};
 
 	enum MessageId
