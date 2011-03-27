@@ -3,6 +3,7 @@
 
 // STL includes
 #include <fstream>
+#include <cstring>
 
 // ACF includes
 #include "istd/CRange.h"
@@ -106,14 +107,14 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 		}
 
 		WavHeader header;
-		memcpy(header.code, "RIFF", 4);
-		memcpy(header.wave, "WAVE", 4);
+		std::memcpy(header.code, "RIFF", 4);
+		std::memcpy(header.wave, "WAVE", 4);
 		header.size = I_DWORD(sizeof(WavHeader) + sizeof(PcmFmtHeader) + sizeof(PrefixHeader) + BYTES_PER_SAMPLE * samplesCount * channelsCount) - 8;
 
 		fileStream.write((const char*)&header, sizeof(header));
 
 		PcmFmtHeader pcmFormat;
-		memcpy(pcmFormat.code, "fmt ", 4);
+		std::memcpy(pcmFormat.code, "fmt ", 4);
 		pcmFormat.size = sizeof(pcmFormat) - 8;
 		pcmFormat.formatTag = WAVE_FORMAT_PCM;
 		pcmFormat.channelsCount = I_WORD(channelsCount);
@@ -125,7 +126,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 		fileStream.write((const char*)&pcmFormat, sizeof(pcmFormat));
 
 		PrefixHeader dataPrefix;
-		memcpy(dataPrefix.code, "data", 4);
+		std::memcpy(dataPrefix.code, "data", 4);
 		dataPrefix.size = I_DWORD(BYTES_PER_SAMPLE * samplesCount * channelsCount);
 
 		fileStream.write((const char*)&dataPrefix, sizeof(dataPrefix));

@@ -1,6 +1,9 @@
 #include "imeas/CGeneralDataSequence.h"
 
 
+// STL includes
+#include <cstring>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TDelPtr.h"
@@ -142,7 +145,7 @@ bool CGeneralDataSequence::CreateFunction(double* dataPtr, const ArgumentType& s
 
 		m_samples.resize(elementsCount);
 
-		memcpy(&m_samples[0], dataPtr, elementsCount * sizeof(double));
+		std::memcpy(&m_samples[0], dataPtr, elementsCount * sizeof(double));
 
 		return true;
 	}

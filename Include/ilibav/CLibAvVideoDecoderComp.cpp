@@ -1,8 +1,8 @@
 #include "ilibav/CLibAvVideoDecoderComp.h"
 
 
-#include "ilibav/CLibAvConverter.h"
-
+// STL includes
+#include <cstring>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -10,6 +10,8 @@
 #include "iprm/IFileNameParam.h"
 
 #include "imeas/CSamplesInfo.h"
+
+#include "ilibav/CLibAvConverter.h"
 
 
 namespace ilibav
@@ -413,8 +415,8 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 				I_ASSERT(m_videoCodecContextPtr != NULL);
 
 				int bytesToCopy = istd::Min(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
-				memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
-				memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
+				std::memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
+				std::memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
 
 				// Decode the next chunk of data
 				int frameFinished = 0;
@@ -478,8 +480,8 @@ bool CLibAvVideoDecoderComp::ReadNextFrame()
 				}
 
 				int bytesToCopy = istd::Min(m_bytesRemaining, AVCODEC_MAX_AUDIO_FRAME_SIZE);
-				memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
-				memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
+				std::memset(m_audioInputBuffer + bytesToCopy, 0, FF_INPUT_BUFFER_PADDING_SIZE);
+				std::memcpy(m_audioInputBuffer, m_rawDataPtr, bytesToCopy);
 
 				// Decode the next chunk of data
 				int audioBufferSize = AVCODEC_MAX_AUDIO_FRAME_SIZE;

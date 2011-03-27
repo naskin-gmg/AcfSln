@@ -2,6 +2,9 @@
 #define imeas_TDiscrDataSequence_included
 
 
+// STL includes
+#include <cstring>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TOptDelPtr.h"
@@ -330,7 +333,7 @@ bool TDiscrDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 			if (m_allocatedElementsCount > 0){
 				m_sampleBuffer.SetPtr(new Element[m_allocatedElementsCount], true);
 				if (m_sampleBuffer.IsValid()){
-					memcpy(		m_sampleBuffer.GetPtr(),
+					std::memcpy(		m_sampleBuffer.GetPtr(),
 								nativeSequencePtr->m_sampleBuffer.GetPtr(),
 								m_allocatedElementsCount * sizeof(Element));
 				}

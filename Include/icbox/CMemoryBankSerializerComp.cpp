@@ -1,6 +1,9 @@
 #include "icbox/CMemoryBankSerializerComp.h"
 
 
+// STL includes
+#include <cstring>
+
 // Windows API
 #include <windows.h>
 
@@ -177,7 +180,7 @@ bool CMemoryBankSerializerComp::EnsurePartitionOpened() const
 	if (*m_memoryBankIdAttrPtr != 3){
 		I_BYTE password[16] = {0};
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
-		::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (CheckError((*m_isAdminKeyAttrPtr)? ::CBIOS_APWLogin(password): ::CBIOS_UPWLogin(password))){
 			return false;
@@ -216,7 +219,7 @@ bool CMemoryBankSerializerComp::ReadFromMem(int offset, void* bufferPtr, int siz
 	}
 	else{
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
-		::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){
 			return !CheckError(::CBIOS_ReadRAM1(offset, size, bufferPtr, password));
@@ -238,7 +241,7 @@ bool CMemoryBankSerializerComp::WriteToMem(int offset, const void* bufferPtr, in
 	}
 	else{
 		const std::string& passwordStr = (*m_accessKeyAttrPtr).ToString();
-		::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
+		std::memcpy(password, passwordStr.data(), istd::Min(sizeof(password), passwordStr.size()));
 
 		if (*m_memoryBankIdAttrPtr == 1){
 			return !CheckError(::CBIOS_WriteRAM1(offset, size, (PVOID)bufferPtr, password));
