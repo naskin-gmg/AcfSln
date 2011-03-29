@@ -30,26 +30,7 @@
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count="8">
-					<AttributeInfo>
-						<Id>
-							CompanyName
-						</Id>
-						<Type>
-							icomp::TAttribute&lt;istd::CString&gt;
-						</Type>
-						<ExportId>
-
-						</ExportId>
-						<Data>
-							<IsEnabled>
-								true
-							</IsEnabled>
-							<Value>
-								ImagingTools
-							</Value>
-						</Data>
-					</AttributeInfo>
+				<AttributeInfoMap count="7">
 					<AttributeInfo>
 						<Id>
 							KnownVersionNames
@@ -64,16 +45,16 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="7">
+							<Values count="8">
 								<Value>
 									0.2.0
 								</Value>
-                <Value>
-                  0.3.0
-                </Value>
-                <Value>
-                  0.3.1
-                </Value>
+								<Value>
+									0.3.0
+								</Value>
+								<Value>
+									0.3.1
+								</Value>
 								<Value>
 									0.3.2
 								</Value>
@@ -86,7 +67,10 @@
 								<Value>
 									0.4.2
 								</Value>
-							</Values>
+                <Value>
+                  0.4.3
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -103,13 +87,13 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="7">
+							<Values count="8">
 								<Value>
 									127
 								</Value>
-                <Value>
-                  144
-                </Value>
+								<Value>
+									144
+								</Value>
 								<Value>
 									148
 								</Value>
@@ -125,7 +109,10 @@
 								<Value>
 									307
 								</Value>
-							</Values>
+                <Value>
+                  313
+                </Value>
+              </Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -237,23 +224,87 @@
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count="9">
-					<AttributeInfo>
-						<Id>
-							ApplicationName
-						</Id>
-						<Type>
-							icomp::TAttribute&lt;istd::CString&gt;
-						</Type>
-						<ExportId>
-							ApplicationName
-						</ExportId>
-						<Data>
-							<IsEnabled>
-								false
-							</IsEnabled>
-						</Data>
-					</AttributeInfo>
+				<AttributeInfoMap count="13">
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ProductName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationSubname
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationSubname
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationType
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              ApplicationType
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LegalCopyright
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              LegalCopyright
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
 					<AttributeInfo>
 						<Id>
 							CompanyName
@@ -361,8 +412,8 @@
 							icomp::TAttribute&lt;istd::CString&gt;
 						</Type>
 						<ExportId>
-              VersionIdDesc
-            </ExportId>
+							VersionIdDesc
+						</ExportId>
 						<Data>
 							<IsEnabled>
 								false
@@ -413,6 +464,6 @@
 		Application and version information with generated IACF and ACF version number
 	</Description>
 	<Keywords>
-		Project=ACF-Solutions Application Tag=Version Company=ImagingTools Info
+		Application Tag=Version Info
 	</Keywords>
 </Acf>

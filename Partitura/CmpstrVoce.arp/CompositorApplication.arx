@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1514
+          1705
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          214
+          313
         </Number>
         <Description>
           ACF-Solutions
@@ -44,10 +44,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="14">
+        <AttributeInfoMap count="19">
           <AttributeInfo>
             <Id>
-              AboutDescriptionText
+              AppName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -60,7 +60,7 @@
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor&#10;&#10;Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
+                Compositor
               </Value>
             </Data>
           </AttributeInfo>
@@ -85,7 +85,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CopyrightText
+              ApplicationSubname
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -98,7 +98,26 @@
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor&#10;&#10;&#169; 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is part of ACF Solutions project&#10;See 'License.txt' for license information
+                ACF Registry Editor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Company
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
@@ -196,6 +215,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              LegalCopyright
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               LogoPath
             </Id>
             <Type>
@@ -237,14 +275,14 @@
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              ProductName
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                
+                ACF-Solutions
               </Value>
             </Data>
           </AttributeInfo>
@@ -283,6 +321,63 @@
               </IsEnabled>
               <Value>
                 Settings
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowSplashApplicationName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowSplashProductName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -341,7 +436,7 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                Application
               </Value>
             </Data>
           </AttributeInfo>
@@ -384,48 +479,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF Compositor
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               Company
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -446,6 +503,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
@@ -460,7 +519,7 @@
         ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        VersionInfo
+        Application
       </ComponentId>
     </Interface>
     <Interface>
@@ -468,7 +527,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        VersionInfo
+        Application
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
