@@ -5,6 +5,7 @@
 	Name="imeas"
 	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
 	SccLocalPath="..\iwin"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -229,6 +230,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IUnitInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TDiscrDataSequence.h"
 				>
 			</File>
@@ -237,4 +242,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

@@ -52,8 +52,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	sessionPtr->curve.attach(m_plotPtr.GetPtr());
 	sessionPtr->curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
 
-	static std::tr1::hash<std::string> hashFunction;
-	QColor lineColor = Qt::GlobalColor(Qt::cyan + Qt::red + int(hashFunction(progressId)) % (Qt::transparent - Qt::red));
+	QColor lineColor = Qt::GlobalColor(Qt::cyan + Qt::red + int(qHash(progressId.c_str())) % (Qt::transparent - Qt::red));
 
 	int colorsCount = istd::Min(m_progressIdsAttrPtr.GetCount(), m_progressColorsAttrPtr.GetCount());
 	for (int i = 0; i < colorsCount; ++i){
