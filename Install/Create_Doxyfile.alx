@@ -1,41 +1,30 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1690
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          309
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        300
+        375
       </X>
       <X>
-        275
+        100
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        375
+      </X>
+      <X>
+        350
       </X>
     </Element>
     <Element>
@@ -43,10 +32,10 @@
         DoxyfileCopy
       </ComponentName>
       <X>
-        750
+        800
       </X>
       <X>
-        425
+        350
       </X>
     </Element>
     <Element>
@@ -54,10 +43,10 @@
         Log
       </ComponentName>
       <X>
-        750
+        800
       </X>
       <X>
-        625
+        550
       </X>
     </Element>
     <Element>
@@ -65,10 +54,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        325
+        375
       </X>
       <X>
-        425
+        225
       </X>
     </Element>
   </PositionMap>

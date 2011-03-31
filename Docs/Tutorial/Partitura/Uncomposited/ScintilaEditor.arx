@@ -44,10 +44,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              AppName
+              ApplicationName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -66,7 +66,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Company
+              CompanyName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -80,25 +80,6 @@
               </IsEnabled>
               <Value>
                 ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CopyrightText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                &#169; 2010 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;This tool is part of ACF Solutions project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>

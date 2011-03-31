@@ -67,10 +67,10 @@
 								<Value>
 									0.4.2
 								</Value>
-                <Value>
-                  0.4.3
-                </Value>
-              </Values>
+								<Value>
+									0.4.3
+								</Value>
+							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -109,21 +109,21 @@
 								<Value>
 									307
 								</Value>
-                <Value>
-                  313
-                </Value>
-              </Values>
+								<Value>
+									313
+								</Value>
+							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
 						<Id>
-							SlaveApplicationInfo
+							SlaveVersionInfo
 						</Id>
 						<Type>
 							icomp::CReferenceAttribute
 						</Type>
 						<ExportId>
-							SlaveApplicationInfo
+							SlaveVersionInfo
 						</ExportId>
 						<Data>
 							<IsEnabled>
@@ -197,7 +197,7 @@
 						</Type>
 						<ExportId>
 
-            </ExportId>
+						</ExportId>
 						<Data>
 							<IsEnabled>
 								true
@@ -212,115 +212,19 @@
 		</Element>
 		<Element>
 			<Id>
-				ApplicationInfo
+				VersionInfo
 			</Id>
 			<PackageId>
 				BasePck
 			</PackageId>
 			<ComponentId>
-				ApplicationInfo
+				VersionInfo
 			</ComponentId>
 			<Data>
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count="13">
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ProductName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ApplicationName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationSubname
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ApplicationSubname
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ApplicationType
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LegalCopyright
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              LegalCopyright
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-					<AttributeInfo>
-						<Id>
-							CompanyName
-						</Id>
-						<Type>
-							icomp::TAttribute&lt;istd::CString&gt;
-						</Type>
-						<ExportId>
-							CompanyName
-						</ExportId>
-						<Data>
-							<IsEnabled>
-								false
-							</IsEnabled>
-						</Data>
-					</AttributeInfo>
+				<AttributeInfoMap count="7">
 					<AttributeInfo>
 						<Id>
 							IsExtensionUsed
@@ -371,7 +275,7 @@
 					</AttributeInfo>
 					<AttributeInfo>
 						<Id>
-							SlaveApplicationInfo
+							SlaveVersionInfo
 						</Id>
 						<Type>
 							icomp::CReferenceAttribute
@@ -440,30 +344,22 @@
 			</Data>
 		</Element>
 	</ElementsList>
-	<ExportedInterfaces count="2">
-		<Interface>
-			<InterfaceId>
-				ibase::IApplicationInfo
-			</InterfaceId>
-			<ComponentId>
-				ApplicationInfo
-			</ComponentId>
-		</Interface>
+	<ExportedInterfaces count="1">
 		<Interface>
 			<InterfaceId>
 				iser::IVersionInfo
 			</InterfaceId>
 			<ComponentId>
-				ApplicationInfo
+				VersionInfo
 			</ComponentId>
 		</Interface>
 	</ExportedInterfaces>
 	<ExportedComponents count="0">
 	</ExportedComponents>
 	<Description>
-		Application and version information with generated IACF and ACF version number
+		Version information for modules based directly on ACF-Solutions
 	</Description>
 	<Keywords>
-		Application Tag=Version Info
+		Application Tag=Version Info Author="'Witold Gantzke'"
 	</Keywords>
 </Acf>

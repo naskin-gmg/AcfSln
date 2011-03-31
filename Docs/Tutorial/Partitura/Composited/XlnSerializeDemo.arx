@@ -608,7 +608,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -630,25 +630,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CopyrightText
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                See 'licence.txt' for copyright informations
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               ImagePath
             </Id>
             <Type>
@@ -663,25 +644,6 @@
               </IsEnabled>
               <Value>
                 $(ACFDIR)/Docs/Images/AcfSplashScreen.png
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial (Dynamic)
               </Value>
             </Data>
           </AttributeInfo>

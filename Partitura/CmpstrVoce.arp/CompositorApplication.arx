@@ -44,10 +44,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="18">
+        <AttributeInfoMap count="19">
           <AttributeInfo>
             <Id>
-              AppName
+              ApplicationName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -85,7 +85,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Company
+              CompanyName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -345,7 +345,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SlaveApplicationInfo
+              SlaveVersionInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -378,6 +378,25 @@
               </IsEnabled>
               <Value>
                 :/Images/CompositorSplashScreen
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -463,7 +482,7 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Company
+              CompanyName
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;

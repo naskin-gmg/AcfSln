@@ -9,10 +9,10 @@
 [Setup]
 AppVerName=$AcfProductName$ $AcfVersion:1$
 AppVersion=$AcfVersion:1$
-AppPublisher=$AcfCompanyName$
+AppPublisher=Witold Gantzke & Kirill Lepskiy
 AppPublisherURL=http://www.imagingtools.de/
 AppName=ACF-Solutions
-OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:1$_$CompilerName$
+OutputBaseFilename=Setup_$AcfProductName$_$AcfApplicationType$_v$AcfVersion:1$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:1$
 WizardImageFile=..\WizardImageFile.bmp
