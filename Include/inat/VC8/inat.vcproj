@@ -15,8 +15,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
@@ -90,8 +88,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
@@ -201,6 +197,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
-

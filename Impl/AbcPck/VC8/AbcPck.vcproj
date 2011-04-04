@@ -17,8 +17,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			>
@@ -39,17 +37,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
-				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
-				WarningLevel="4"
 				DebugInformationFormat="0"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -63,10 +54,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtService.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTSERVICEDIR)\Lib\$(ConfigurationName)VC8&quot;"
-				GenerateDebugInformation="false"
-				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -120,14 +108,9 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"
-				WarningLevel="4"
-				DebugInformationFormat="3"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -141,10 +124,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtService.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTSERVICEDIR)\Lib\$(ConfigurationName)VC8&quot;"
-				GenerateDebugInformation="true"
-				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -218,6 +198,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-
-
