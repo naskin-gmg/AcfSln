@@ -5,6 +5,7 @@
 	Name="ifpf"
 	ProjectGUID="{FFA16C6D-C2BF-40C6-BC0E-E44E22E73663}"
 	RootNamespace="ifpf"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -22,8 +23,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -33,15 +32,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -118,8 +117,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC9"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
@@ -129,15 +126,15 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
