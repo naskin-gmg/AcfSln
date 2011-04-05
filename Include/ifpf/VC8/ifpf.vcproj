@@ -159,6 +159,7 @@
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"
 				SuppressStartupBanner="true"

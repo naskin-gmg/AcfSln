@@ -116,6 +116,7 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"
 				SuppressStartupBanner="true"
