@@ -1,25 +1,8 @@
+include($(ACFDIR)/Config/QMake/Include.config)
+
 TARGET = iqaxmm
-TEMPLATE = lib
-CONFIG += staticlib
+QT += phonon
 
-CONFIG(debug, debug|release) {
-	DESTDIR = ..\..\..\Lib\DebugQMake
-}
-CONFIG(release, debug|release) {
-	DESTDIR = ..\..\..\Lib\ReleaseQMake
-}
+HEADERS += ../Wrapped/*.h
+SOURCES += ../Wrapped/*.cpp
 
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += 
-
-
-INCLUDEPATH += ../../ "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/phonon" "$(QTDIR)/include/ActiveQt" 
-
-HEADERS += ../CVlcVideoViewGuiComp.h
-HEADERS += ../iqaxmm.h
-HEADERS += ../Wrapped\axvlc.h
-SOURCES += ../CVlcVideoViewGuiComp.cpp
-SOURCES += ../Wrapped\axvlc.cpp

@@ -3,16 +3,5 @@ include(../../../Config/QMake/QtBase.config)
 include(../../AcfStd/QMake/AcfStd.pri)
 include(../../AcfQt/QMake/AcfQt.pri)
 
-TARGET = QaxPck
-
-QT += phonon
-
-LIBS += -liqaxmm
-
-CONFIG(debug, debug|release){
-	LIBS += QAxContainerd
-}
-CONFIG(release, debug|release){
-	LIBS += QAxContainer
-}
+TARGET = MeasPck
 

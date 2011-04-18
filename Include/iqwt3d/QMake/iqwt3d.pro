@@ -1,9 +1,7 @@
 include($(ACFDIR)/Config/QMake/Include.config)
 include($(ACFDIR)/Config/QMake/QtGuiBase.config)
 
-TARGET = iqsci
+TARGET = iqwt3d
 
-QT += xml
-
-INCLUDEPATH += "$(QScintilla)/include" 
+INCLUDEPATH += "$(QWT3DDIR)\Include"
 

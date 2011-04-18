@@ -1,29 +1,21 @@
+include(../../../Config/QMake/Component.config)
+include(../../../Config/QMake/QtBase.config)
+include(../../AcfStd/QMake/AcfStd.pri)
+include(../../AcfQt/QMake/AcfQt.pri)
+
 TARGET = QsciPck
-TEMPLATE = lib
 
-CONFIG += dll
+QT += xml
 
-TARGET_EXT = arp
+LIBS += -L"$(QScintilla)/Lib/$$COMPILER_DIR
+LIBS += -lQScintilla
 
-CONFIG(debug, debug|release) {
-	DESTDIR = ..\..\..\Bin\DebugQMake
-	LIBS += -L"$(ACFDIR)/Lib/DebugQMake -L"$(QScintilla)/Lib/DebugQMake 
-	LIBS += AcfStd AcfQt QScintilla 
+CONFIG(debug, debug|release){
+	LIBS += QAxContainerd
 }
-CONFIG(release, debug|release) {
-	DESTDIR = ..\..\..\Bin\ReleaseQMake
-	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake -L"$(QScintilla)/Lib/ReleaseQMake 
-	LIBS += AcfStd AcfQt QScintilla 
+CONFIG(release, debug|release){
+	LIBS += QAxContainer
 }
 
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
+INCLUDEPATH += "$(QScintilla)/include" 
 
-QT += main core gui xml sql network script 
-
-
-INCLUDEPATH += ../../../Include "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtScript" "$(QScintilla)/include" 
-
-HEADERS += ../QsciPck.h
-SOURCES += ../QsciPck.cpp

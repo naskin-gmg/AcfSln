@@ -1,24 +1,15 @@
+include($(ACFDIR)/Config/QMake/Application.config)
+include($(ACFDIR)/Config/QMake/QtBase.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Impl/AcfQt/QMake/AcfQt.pri)
+
 TARGET = Compositor
-TEMPLATE = app
 
-CONFIG(debug, debug|release) {
-	DESTDIR = ..\..\..\Bin\DebugQMake
-	LIBS += -L"$(ACFDIR)/Lib/DebugQMake -L"$(QScintilla)/Lib/DebugQMake 
-	LIBS += 
-}
-CONFIG(release, debug|release) {
-	DESTDIR = ..\..\..\Bin\ReleaseQMake
-	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake -L"$(QScintilla)/Lib/ReleaseQMake 
-	LIBS += 
-}
+LIBS += -licmpstr
 
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
+QT += xml 
 
-QT += main core gui 
-
-
-INCLUDEPATH += "$(ACFDIR)/Include" "$(ACFDIR)/Impl" "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtScript" 
-
-SOURCES += ../main.cpp
+SOURCES += ../*.cpp
+ARXC_CONFIG = ../../../Full.xpc
+ARXC_FILES += ../*.arx
+RESOURCES += ../*.qrc

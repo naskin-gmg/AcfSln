@@ -1,23 +1,5 @@
+include($(ACFDIR)/Config/QMake/Include.config)
+
+INCLUDEPATH += "$(CBIOSDIR)/include"
+
 TARGET = icbox
-TEMPLATE = lib
-CONFIG += staticlib
-
-CONFIG(debug, debug|release) {
-	DESTDIR = ..\..\..\Lib\DebugQMake
-}
-CONFIG(release, debug|release) {
-	DESTDIR = ..\..\..\Lib\ReleaseQMake
-}
-
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += 
-
-
-INCLUDEPATH += ../../ "$(CBIOSDIR)/include" 
-
-HEADERS += ../CMemoryBankSerializerComp.h
-HEADERS += ../icbox.h
-SOURCES += ../CMemoryBankSerializerComp.cpp

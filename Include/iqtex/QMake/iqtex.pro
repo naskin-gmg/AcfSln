@@ -1,9 +1,7 @@
 include($(ACFDIR)/Config/QMake/Include.config)
 include($(ACFDIR)/Config/QMake/QtGuiBase.config)
 
-TARGET = iqsci
+TARGET = iqtex
 
-QT += xml
-
-INCLUDEPATH += "$(QScintilla)/include" 
+QT += network
 

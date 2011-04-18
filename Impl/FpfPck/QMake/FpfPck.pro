@@ -1,5 +1,5 @@
 include(../../../Config/QMake/Component.config)
 include(../../AcfStd/QMake/AcfStd.pri)
 
-TARGET = ZlibPck
+TARGET = FpfPck
 
