@@ -3,5 +3,6 @@ include($(ACFDIR)/Config/QMake/QtGuiBase.config)
 
 TARGET = iqwt
 
-INCLUDEPATH += "$(QWTDIR)\Include"
+INCLUDEPATH += ../..
+INCLUDEPATH += "$(QWTDIR)/Include"
 

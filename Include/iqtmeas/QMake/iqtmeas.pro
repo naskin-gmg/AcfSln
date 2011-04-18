@@ -3,3 +3,5 @@ include($(ACFDIR)/Config/QMake/QtGuiBase.config)
 
 TARGET = iqtmeas
 
+INCLUDEPATH += ../..
+

@@ -1,9 +1,11 @@
-include(../../../Config/QMake/Component.config)
-include(../../AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 
 TARGET = XlnPck
 
+INCLUDEPATH += ../../../Include
 INCLUDEPATH += "$(XERCESDIR)/src" "$(XALANDIR)/src" 
 
-LIBS += -lixln
-
+LIBS += -L../../../Lib/$$COMPILER_DIR -lixln
+LIBS += -L$(XERCESDIR)/lib -lxerces-c_2
+LIBS += -L$(XALANDIR)/lib -lXalan-C_1

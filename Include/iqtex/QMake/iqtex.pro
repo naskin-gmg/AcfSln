@@ -5,3 +5,5 @@ TARGET = iqtex
 
 QT += network
 
+INCLUDEPATH += ../..
+

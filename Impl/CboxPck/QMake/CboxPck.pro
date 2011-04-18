@@ -1,12 +1,15 @@
-include(../../../Config/QMake/Component.config)
-include(../../AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 
 TARGET = CboxPck
 
 QT -= gui core
 
+LIBS += -L../../../Lib/$$COMPILER_DIR
+LIBS += -licbox
 LIBS += -L"$(CBIOSDIR)/lib/$$COMPILER_NAME" -lcbios -lwsock32
 
+INCLUDEPATH += ../../../Include
 INCLUDEPATH += "$(CBIOSDIR)/include" 
 
 

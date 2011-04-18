@@ -1,5 +1,9 @@
-include(../../../Config/QMake/Component.config)
-include(../../AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 
 TARGET = ZlibPck
+
+INCLUDEPATH += ../../../Include
+
+LIBS += -L../../../Lib/$$COMPILER_DIR -lizlib
 

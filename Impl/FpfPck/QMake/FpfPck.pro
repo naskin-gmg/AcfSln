@@ -1,5 +1,9 @@
-include(../../../Config/QMake/Component.config)
-include(../../AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 
 TARGET = FpfPck
+
+INCLUDEPATH += ../../../Include
+
+LIBS += -L../../../Lib/$$COMPILER_DIR -lifpf
 

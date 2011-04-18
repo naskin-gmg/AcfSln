@@ -1,14 +1,17 @@
-include(../../../Config/QMake/Component.config)
-include(../../../Config/QMake/QtBase.config)
-include(../../AcfStd/QMake/AcfStd.pri)
-include(../../AcfQt/QMake/AcfQt.pri)
+include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Config/QMake/QtBase.config)
+include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Impl/AcfQt/QMake/AcfQt.pri)
 
 TARGET = QsciPck
 
 QT += xml
 
-LIBS += -L"$(QScintilla)/Lib/$$COMPILER_DIR
-LIBS += -lQScintilla
+INCLUDEPATH += ../../../Include
+INCLUDEPATH += "$(QScintilla)/include" 
+
+LIBS += -L../../../Lib/$$COMPILER_DIR -liqsci
+LIBS += -L"$(QScintilla)/Lib/$$COMPILER_DIR -lQScintilla
 
 CONFIG(debug, debug|release){
 	LIBS += QAxContainerd
@@ -16,6 +19,4 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
 	LIBS += QAxContainer
 }
-
-INCLUDEPATH += "$(QScintilla)/include" 
 

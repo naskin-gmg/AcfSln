@@ -3,7 +3,7 @@ CONFIG += ordered
 
 win32*:SUBDIRS += ../../Include/iwin/QMake/iwin.pro
 SUBDIRS += ../../Include/ixln/QMake/ixln.pro
-SUBDIRS += ../../Include/inat/QMake/inat.pro
+#SUBDIRS += ../../Include/inat/QMake/inat.pro
 SUBDIRS += ../../Include/izlib/QMake/izlib.pro
 SUBDIRS += ../../Include/iqsci/QMake/iqsci.pro
 SUBDIRS += ../../Include/icbox/QMake/icbox.pro
