@@ -1,4 +1,4 @@
-include($(ACFDIR)/Config/QMake/Include.config)
+include($(ACFDIR)/Config/QMake/IncludeConfig.pri)
 
 TARGET = iabc
 

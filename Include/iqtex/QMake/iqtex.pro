@@ -1,5 +1,5 @@
-include($(ACFDIR)/Config/QMake/Include.config)
-include($(ACFDIR)/Config/QMake/QtGuiBase.config)
+include($(ACFDIR)/Config/QMake/IncludeConfig.pri)
+include($(ACFDIR)/Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = iqtex
 

@@ -1,4 +1,4 @@
-include($(ACFDIR)/Config/QMake/Component.config)
+include($(ACFDIR)/Config/QMake/ComponentConfig.pri)
 include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 
 TARGET = CboxPck

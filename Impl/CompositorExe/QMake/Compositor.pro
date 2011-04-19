@@ -1,5 +1,5 @@
-include($(ACFDIR)/Config/QMake/Application.config)
-include($(ACFDIR)/Config/QMake/QtBase.config)
+include($(ACFDIR)/Config/QMake/ApplicationConfig.pri)
+include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
 include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
 include($(ACFDIR)/Impl/AcfQt/QMake/AcfQt.pri)
 
@@ -7,9 +7,13 @@ TARGET = Compositor
 
 LIBS += -licmpstr
 
-QT += xml 
+QT += xml
 
 SOURCES += ../*.cpp
+RESOURCES += ../*.qrc
+
 ARXC_CONFIG = ../../../Full.xpc
 ARXC_FILES += ../*.arx
-RESOURCES += ../*.qrc
+
+include($(ACFDIR)/Config/QMake/CustomBuild.pri)
+
