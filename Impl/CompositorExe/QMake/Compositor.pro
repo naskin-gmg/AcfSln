@@ -12,7 +12,7 @@ QT += xml
 SOURCES += ../*.cpp
 RESOURCES += ../*.qrc
 
-ARXC_CONFIG = ../../../Full.xpc
+ARXC_CONFIG = ../../../Config/Core.xpc
 ARXC_FILES += ../*.arx
 
 include($(ACFDIR)/Config/QMake/CustomBuild.pri)
