@@ -5,6 +5,7 @@
 // STL includes
 #include <cstring>
 
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TOptDelPtr.h"
@@ -66,6 +67,7 @@ private:
 	int m_channelsCount;
 	int m_sampleDiff;
 	int m_channelDiff;
+	double m_normFactor;
 
 	istd::TSmartPtr<const IDataSequenceInfo> m_sequenceInfoPtr;
 };
@@ -81,6 +83,7 @@ TDiscrDataSequence<Element>::TDiscrDataSequence()
 	m_sampleDiff(0),
 	m_channelDiff(0)
 {
+	m_normFactor = ::pow(2.0, double(sizeof(Element) * 8));
 }
 
 
@@ -236,7 +239,7 @@ double TDiscrDataSequence<Element>::GetSample(int index, int channel) const
 {
 	const Element& element = *(const Element*)((const I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
-	return double(element) / ::pow(2.0, double(sizeof(element) * 8));
+	return double(element) / m_normFactor;
 }
 
 
@@ -245,7 +248,7 @@ void TDiscrDataSequence<Element>::SetSample(int index, int channel, double value
 {
 	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
-	element = Element(value * ::pow(2.0, double(sizeof(element) * 8)) - I_BIG_EPSILON);
+	element = Element(value * m_normFactor - I_BIG_EPSILON);
 }
 
 

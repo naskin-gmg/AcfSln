@@ -40,7 +40,7 @@ public:
 				int channelsCount = -1) = 0;
 
 	/**
-		Set additional information about this sequence.
+		Get additional information about this sequence.
 	*/
 	virtual const IDataSequenceInfo* GetSequenceInfo() const = 0;
 
