@@ -33,6 +33,11 @@ I_EXPORT_COMPONENT(
 			"Progress History Diagram Activity Curve Line Statistics" IM_TAG("2D"));
 
 I_EXPORT_COMPONENT(
+			HistogramView,
+			"Histogram view",
+			"Histogram Statistics" IM_TAG("GUI"));
+
+I_EXPORT_COMPONENT(
 			SurfaceView,
 			"3D-View component",
 			"Model Observer Parameter GUI Qt 3D Surface" IM_TAG("Image 3D"));
