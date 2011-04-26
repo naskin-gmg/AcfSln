@@ -5,9 +5,7 @@
 // Qwt includes
 #include "qwt_plot.h"
 #include "qwt_plot_curve.h"
-#include "qwt_plot_grid.h"
-#include "qwt_scale_draw.h"
-#include "qwt_picker.h"
+#include "qwt_plot_picker.h"
 
 
 // ACF includes
@@ -52,6 +50,21 @@ private Q_SLOTS:
 
 private:
 	void ClearPlot();
+
+private:
+	class HistogramPlotPicker: public QwtPlotPicker
+	{
+	public:
+		typedef QwtPlotPicker BaseClass;
+
+		HistogramPlotPicker(CHistogramViewComp& parent, int xAxis, int yAxis, QwtPlotCanvas* canvasPtr);
+
+		// reimplemented (QwtPlotPicker)
+	    virtual QwtText trackerText(const QPoint& position) const;
+
+	private:
+		CHistogramViewComp& m_parent;
+	};
 
 private:
 	istd::TDelPtr<QwtPlot> m_plotPtr;

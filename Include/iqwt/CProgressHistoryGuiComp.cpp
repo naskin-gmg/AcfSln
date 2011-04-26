@@ -50,7 +50,7 @@ int CProgressHistoryGuiComp::BeginProgressSession(
 	sessionPtr->curve.setRenderHint(QwtPlotItem::RenderAntialiased);
 	sessionPtr->curve.setTitle(iqt::GetQString(description));
 	sessionPtr->curve.attach(m_plotPtr.GetPtr());
-	sessionPtr->curve.setData(&m_axisXData[0], &m_axisXData[0], 0);
+	sessionPtr->curve.setSamples(&m_axisXData[0], &m_axisXData[0], 0);
 
 	QColor lineColor = Qt::GlobalColor(Qt::red + int(qHash(progressId.c_str())) % (Qt::transparent - Qt::red));
 
@@ -115,7 +115,7 @@ void CProgressHistoryGuiComp::OnProgress(int sessionId, double currentProgress)
 	}
 
 	I_ASSERT(sessionPtr->axisY.size() <= m_axisXData.size());
-	sessionPtr->curve.setData(&m_axisXData[0], &sessionPtr->axisY[0], int(sessionPtr->axisY.size()));
+	sessionPtr->curve.setSamples(&m_axisXData[0], &sessionPtr->axisY[0], int(sessionPtr->axisY.size()));
 
 	if (m_plotPtr.IsValid()){
 		emit m_plotPtr->update();

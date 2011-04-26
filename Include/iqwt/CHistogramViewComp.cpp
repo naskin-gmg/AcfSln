@@ -1,6 +1,11 @@
 #include "iqwt/CHistogramViewComp.h"
 
 
+// Qwt includes
+#include "qwt_plot_grid.h"
+#include "qwt_scale_draw.h"
+
+
 namespace iqwt
 {
 
@@ -47,23 +52,37 @@ void CHistogramViewComp::UpdateEditor(int /*updateFlags*/)
 			}
 		}
 		
+		double maxValue = 0.0;
+
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 			int samplesCount = objectPtr->GetSamplesCount() / channelsCount;
-
+	
 			QVector<double> xData(samplesCount);
 			QVector<double> yData(samplesCount);
 
 			for (int sampleIndex = 0; sampleIndex < samplesCount; sampleIndex++){
+				double sample = objectPtr->GetSample(sampleIndex, channelIndex);
+
 				xData[sampleIndex] = sampleIndex;
-				yData[sampleIndex] = objectPtr->GetSample(sampleIndex, channelIndex);
+				yData[sampleIndex] = sample;
+
+				if (sample > maxValue){
+					maxValue = sample;
+				}
 			}
 
 			QwtPlotCurve* curvePtr = m_channelCurves.GetAt(channelIndex);
 			I_ASSERT(curvePtr != NULL);
 
-			curvePtr->setData(xData, yData);
-			m_plotPtr->setAxisScale(QwtPlot::xBottom, 0, samplesCount, samplesCount / 5); 
-		    m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, samplesCount / 10);
+			maxValue = ::ceil(maxValue * 100) / 100.0;
+
+			curvePtr->setSamples(xData, yData);
+
+			m_plotPtr->setAxisScale(QwtPlot::xBottom, 0.0, samplesCount, 16); 
+		    m_plotPtr->setAxisMaxMinor(QwtPlot::xBottom, 4);
+
+			m_plotPtr->setAxisScale(QwtPlot::yLeft, 0.0, maxValue, maxValue / 10); 
+		    m_plotPtr->setAxisMaxMinor(QwtPlot::yLeft, 5);
 
 			if (channelIndex != ChannelCombo->currentIndex()){
 				curvePtr->setVisible(false);
@@ -93,6 +112,10 @@ void CHistogramViewComp::OnGuiCreated()
 	m_plotPtr->setAxisFont(QwtPlot::xBottom, qApp->font());
 	m_plotPtr->setAxisFont(QwtPlot::yLeft, qApp->font());
 	m_plotPtr->setAutoReplot(true);
+
+	QwtPlotPicker* plotPickerPtr = new HistogramPlotPicker(*this, QwtPlot::xBottom, QwtPlot::yLeft, m_plotPtr->canvas());
+	plotPickerPtr->setTrackerMode(QwtPicker::AlwaysOn);
+	plotPickerPtr->setEnabled(true);
 
 	QwtPlotGrid* plotGridPtr = new QwtPlotGrid;
 	plotGridPtr->enableXMin(true);
@@ -143,8 +166,47 @@ void CHistogramViewComp::ClearPlot()
 		}
 		
 		m_channelCurves.Reset();
-		m_plotPtr->clear();
 	}
+}
+
+
+// public methods of the embedded class HistogramPlotPicker
+
+CHistogramViewComp::HistogramPlotPicker::HistogramPlotPicker(CHistogramViewComp& parent, int xAxis, int yAxis, QwtPlotCanvas* canvasPtr)
+	:BaseClass(xAxis, yAxis, canvasPtr),
+	m_parent(parent)
+{
+}
+
+
+// reimplemented (QwtPlotPicker)
+
+QwtText CHistogramViewComp::HistogramPlotPicker::trackerText(const QPoint& position) const
+{
+	imeas::IDataSequence* objectPtr = m_parent.GetObjectPtr();
+	if (objectPtr == NULL){
+		return QwtText();
+	}
+
+	if (objectPtr->IsEmpty()){
+		return QwtText();
+	}
+
+	I_ASSERT(m_parent.IsGuiCreated());
+
+	int sampleIndex = int(invTransform(position).x() + 0.5);
+
+	if (sampleIndex >= objectPtr->GetSamplesCount() / objectPtr->GetChannelsCount()){
+		return QwtText();
+	}
+
+	int currentCurveIndex = m_parent.ChannelCombo->currentIndex();
+
+	double sample = objectPtr->GetSample(sampleIndex, currentCurveIndex);
+
+	QString text = QString("Index %1: %2 %").arg(sampleIndex).arg(sample * 100, 3, 'f', 2);
+
+	return text;
 }
 
 
