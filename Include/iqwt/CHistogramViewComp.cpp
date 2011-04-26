@@ -92,6 +92,7 @@ void CHistogramViewComp::OnGuiCreated()
 	m_plotPtr->setCanvasLineWidth(0);
 	m_plotPtr->setAxisFont(QwtPlot::xBottom, qApp->font());
 	m_plotPtr->setAxisFont(QwtPlot::yLeft, qApp->font());
+	m_plotPtr->setAutoReplot(true);
 
 	QwtPlotGrid* plotGridPtr = new QwtPlotGrid;
 	plotGridPtr->enableXMin(true);
@@ -129,8 +130,6 @@ void CHistogramViewComp::on_ChannelCombo_currentIndexChanged(int index)
 	for (int channelIndex = 0; channelIndex < m_channelCurves.GetCount(); channelIndex++){
 		m_channelCurves.GetAt(channelIndex)->setVisible(channelIndex == index);
 	}
-
-	m_plotPtr->replot();
 }
 
 
