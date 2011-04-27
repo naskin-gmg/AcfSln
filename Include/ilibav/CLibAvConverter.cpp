@@ -26,7 +26,7 @@ bool CLibAvConverter::ConvertBitmap(
 {
 	istd::CChangeNotifier notifier(&result);
 
-	if (result.CreateBitmap(size, 32, 4)){
+	if (result.CreateBitmap(iimg::IBitmap::PF_RGB, size)){
 		SwsContext* scaleContextPtr = sws_getContext(
 					size.GetX(),
 					size.GetY(),
