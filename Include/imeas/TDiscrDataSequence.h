@@ -83,7 +83,7 @@ TDiscrDataSequence<Element>::TDiscrDataSequence()
 	m_sampleDiff(0),
 	m_channelDiff(0)
 {
-	m_normFactor = ::pow(2.0, double(sizeof(Element) * 8));
+	m_normFactor = ::pow(2.0, double(sizeof(Element) * 8)) - 1;
 }
 
 

@@ -43,9 +43,10 @@ void CHistogramViewComp::UpdateEditor(int /*updateFlags*/)
 				brushGradient.setCoordinateMode(QGradient::StretchToDeviceMode);
 
 				curvePtr->setBrush(brushGradient);
+				
+				curvePtr->setStyle(QwtPlotCurve::Steps);
 			
 				curvePtr->attach(m_plotPtr.GetPtr());
-				curvePtr->setRenderHint(QwtPlotItem::RenderAntialiased);
 				m_channelCurves.PushBack(curvePtr);
 
 				ChannelCombo->addItem(QString("Channel %1").arg(channelIndex + 1));
