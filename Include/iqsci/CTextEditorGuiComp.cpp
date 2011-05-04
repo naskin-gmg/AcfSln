@@ -92,14 +92,14 @@ void CTextEditorGuiComp::OnGuiCreated()
 		if (m_readOnlyAttrPtr.IsValid() && *m_readOnlyAttrPtr){
 			textEditorPtr->SetReadOnly();
 		}
-
-		OnRetranslate();
 	}
 }
 
 
-void CTextEditorGuiComp::OnRetranslate()
+void CTextEditorGuiComp::OnGuiRetranslate()
 {
+	BaseClass::OnGuiRetranslate();
+
 	if (IsGuiCreated()){
 		CTextEditor* textEditPtr = GetQtWidget();
 		I_ASSERT(textEditPtr != NULL);
