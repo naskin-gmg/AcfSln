@@ -29,18 +29,19 @@ class CHotfolderWorkflowScenographerComp:
 						imod::TSingleModelObserverBase<ifpf::IHotfolderWorkflow> >
 {
 	Q_OBJECT
+
 public:
 	typedef iqt2d::TScenographerCompBase<
 				imod::TSingleModelObserverBase<ifpf::IHotfolderWorkflow> > BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderWorkflowScenographerComp);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CHotfolderWorkflowScenographerComp();
 
 protected:
 	bool TryCreateHotfolder(const istd::CString& hofolderId, const i2d::CVector2d& position);
-	QGraphicsItem* CHotfolderWorkflowScenographerComp::AddShapeToScene(istd::IPolymorphic* elementPtr) const;
+	QGraphicsItem* AddShapeToScene(istd::IPolymorphic* elementPtr) const;
 
 	// reimplemented (iqt2d::TScenographerCompBase)
 	virtual bool OnDropObject(const QMimeData& mimeData, QGraphicsSceneDragDropEvent* eventPtr);
