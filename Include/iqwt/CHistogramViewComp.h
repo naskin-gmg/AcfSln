@@ -22,6 +22,9 @@ namespace iqwt
 {
 
 
+/**
+	Component for visualization iof histogram data.
+*/
 class CHistogramViewComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CHistogramViewComp,
 			imeas::IDataSequence>
