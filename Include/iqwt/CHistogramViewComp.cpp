@@ -6,9 +6,15 @@
 #include "qwt_scale_draw.h"
 
 
+// ACF-Solutions includes
+#include "imeas/IDataStatistics.h"
+
+
 namespace iqwt
 {
 
+
+// public methods
 
 // reimplemented (imod::IModelEditor)
 
@@ -133,6 +139,15 @@ void CHistogramViewComp::OnGuiCreated()
 
 	layoutPtr->addWidget(m_plotPtr.GetPtr());
 
+	if( m_dataStatisticsGuiCompPtr.IsValid() && m_dataStatisticsObserverCompPtr.IsValid()){
+		m_dataStatisticsGuiCompPtr->CreateGui(StatisticsFrame);
+
+		m_curentChannelStatisticsModel.AttachObserver(m_dataStatisticsObserverCompPtr.GetPtr());
+	}
+	else{
+		StatisticsFrame->setVisible(false);
+	}
+
 	BaseClass::OnGuiCreated();
 }
 
@@ -142,6 +157,12 @@ void CHistogramViewComp::OnGuiDestroyed()
 	ClearPlot();
 
 	m_plotPtr.Reset();
+
+	m_curentChannelStatisticsModel.DetachAllObservers();
+
+	if( m_dataStatisticsGuiCompPtr.IsValid()){
+		m_dataStatisticsGuiCompPtr->DestroyGui();
+	}
 
 	BaseClass::OnGuiDestroyed();
 }
@@ -153,6 +174,16 @@ void CHistogramViewComp::on_ChannelCombo_currentIndexChanged(int index)
 {
 	for (int channelIndex = 0; channelIndex < m_channelCurves.GetCount(); channelIndex++){
 		m_channelCurves.GetAt(channelIndex)->setVisible(channelIndex == index);
+	}
+
+	if (m_dataSequenceStatisticsCompPtr.IsValid() && m_dataStatisticsObserverCompPtr.IsValid()){
+		int statisticsChannelCount = m_dataSequenceStatisticsCompPtr->GetChannelsCount();
+		if (index >= 0 && index < statisticsChannelCount){
+			const imod::IModel* channelStatisticsPtr = dynamic_cast<const imod::IModel*>(m_dataSequenceStatisticsCompPtr->GetChannelStatistics(index));
+			if (channelStatisticsPtr != NULL){
+				m_curentChannelStatisticsModel.SetModelPtr(const_cast<imod::IModel*>(channelStatisticsPtr));
+			}
+		}
 	}
 }
 

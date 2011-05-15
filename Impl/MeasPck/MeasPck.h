@@ -11,6 +11,9 @@
 #include "imeas/TDiscrDataSequence.h"
 #include "imeas/CGeneralDataSequence.h"
 #include "imeas/CWavSamplesLoaderComp.h"
+#include "imeas/CDataStatistics.h"
+#include "imeas/CDataSequenceStatistics.h"
+#include "imeas/CHistogramStatisticsProcessorComp.h"
 
 
 /**
@@ -51,6 +54,15 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			iser::ISerializable,
 			istd::IChangeable> > SimpleSamplesSequence32;
 typedef imeas::CWavSamplesLoaderComp WavSamplesLoader;
+typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
+			imeas::CDataStatistics,
+			imeas::IDataStatistics,
+			iser::ISerializable> > DataStatistics;
+typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
+			imeas::CDataSequenceStatistics,
+			imeas::IDataSequenceStatistics,
+			iser::ISerializable> > DataSequenceStatistics;
+typedef imeas::CHistogramStatisticsProcessorComp HistogramStatisticsProcessor;
 
 
 } // namespace MeasPck

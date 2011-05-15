@@ -44,6 +44,21 @@ I_EXPORT_COMPONENT(
 			"Loader for loading and saving sample sequence as Audio WAV file",
 			"Audio WAV Loder Serializer Persistence Samples Sequence Measurement" IM_TAG("Loader"));
 
+I_EXPORT_COMPONENT(
+			DataStatistics,
+			"Basic statistics of a numerical data",
+			"Data" IM_TAG("Statistics"));
+
+I_EXPORT_COMPONENT(
+			DataSequenceStatistics,
+			"Data sequence statistics",
+			"Sequence Data" IM_TAG("Statistics"));
+
+I_EXPORT_COMPONENT(
+			HistogramStatisticsProcessor,
+			"Processor for calculation of statistics",
+			"Histogram Statistics" IM_TAG("Processing"));
+
 
 } // namespace MeasPck
 

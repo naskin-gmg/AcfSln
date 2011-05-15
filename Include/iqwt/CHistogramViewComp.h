@@ -11,9 +11,12 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 
+#include "imod/CModelProxy.h"
+
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "imeas/IDataSequence.h"
+#include "imeas/IDataSequenceStatistics.h"
 
 #include "iqwt/Generated/ui_CHistogramViewComp.h"
 
@@ -37,6 +40,9 @@ public:
 				imeas::IDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CHistogramViewComp);
+		I_ASSIGN(m_dataStatisticsGuiCompPtr, "StatisticsGui", "GUI for the data statistics", false, "StatisticsGui");
+		I_ASSIGN(m_dataStatisticsObserverCompPtr, "StatisticsGui", "GUI for the data statistics", false, "StatisticsGui");
+		I_ASSIGN(m_dataSequenceStatisticsCompPtr, "DataSequenceStatistics", "Data sequence statistics", false, "DataSequenceStatistics");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -72,6 +78,12 @@ private:
 private:
 	istd::TDelPtr<QwtPlot> m_plotPtr;
 	istd::TPointerVector<QwtPlotCurve> m_channelCurves;
+	
+	imod::CModelProxy m_curentChannelStatisticsModel;
+
+	I_REF(iqtgui::IGuiObject, m_dataStatisticsGuiCompPtr);
+	I_REF(imod::IObserver, m_dataStatisticsObserverCompPtr);
+	I_REF(imeas::IDataSequenceStatistics, m_dataSequenceStatisticsCompPtr);
 };
 
 

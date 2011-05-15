@@ -173,7 +173,19 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CDataSequenceStatistics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDataStatistics.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CGeneralDataSequence.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHistogramStatisticsProcessorComp.cpp"
 				>
 			</File>
 			<File
@@ -194,7 +206,19 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CDataSequenceStatistics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDataStatistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CGeneralDataSequence.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHistogramStatisticsProcessorComp.h"
 				>
 			</File>
 			<File
@@ -215,6 +239,14 @@
 			</File>
 			<File
 				RelativePath="..\IDataSequenceInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataSequenceStatistics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataStatistics.h"
 				>
 			</File>
 			<File

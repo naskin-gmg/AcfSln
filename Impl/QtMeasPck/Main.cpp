@@ -32,6 +32,11 @@ I_EXPORT_COMPONENT(
 			"Display sample sequence",
 			"Diagram Polyline Samples Sequence Measurement GUI" IM_TAG("2D GUI"));
 
+I_EXPORT_COMPONENT(
+			DataStatisticsGui,
+			"Data statistics GUI",
+			"Statistics Histogram Data" IM_TAG("GUI"));
+
 
 } // namespace QtMeasPck
 

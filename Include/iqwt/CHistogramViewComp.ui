@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>332</height>
+    <width>527</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="margin">
     <number>0</number>
    </property>
@@ -73,6 +73,14 @@
        <number>0</number>
       </property>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="StatisticsFrame">
+     <property name="title">
+      <string>Statistics</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
     </widget>
    </item>
   </layout>
