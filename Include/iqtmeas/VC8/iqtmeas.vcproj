@@ -167,7 +167,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDataSequenceViewComp.moc"
+				RelativePath="..\CDataStatisticsGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -178,6 +178,10 @@
 			>
 			<File
 				RelativePath="..\CDataSequenceViewComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDataStatisticsGuiComp.h"
 				>
 			</File>
 			<File
@@ -202,7 +206,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CDataStatisticsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CDataStatisticsGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -211,6 +223,22 @@
 			>
 			<File
 				RelativePath="..\CDataSequenceViewComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CDataStatisticsGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="MOC"
+			>
+			<File
+				RelativePath="..\CDataSequenceViewComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CDataStatisticsGuiComp.moc"
 				>
 			</File>
 		</Filter>
