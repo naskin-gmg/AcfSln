@@ -41,7 +41,7 @@ public:
 
 	I_BEGIN_COMPONENT(CHistogramViewComp);
 		I_ASSIGN(m_dataStatisticsGuiCompPtr, "StatisticsGui", "GUI for the data statistics", false, "StatisticsGui");
-		I_ASSIGN(m_dataStatisticsObserverCompPtr, "StatisticsGui", "GUI for the data statistics", false, "StatisticsGui");
+		I_ASSIGN_TO(m_dataStatisticsObserverCompPtr, m_dataStatisticsGuiCompPtr, false);
 		I_ASSIGN(m_dataSequenceStatisticsCompPtr, "DataSequenceStatistics", "Data sequence statistics", false, "DataSequenceStatistics");
 	I_END_COMPONENT;
 

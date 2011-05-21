@@ -33,7 +33,7 @@ public:
 
 	I_BEGIN_COMPONENT(CTcpTerminalGuiComp);
 		I_ASSIGN(m_urlParamCompPtr, "UrlParam", "URL parameter used to find out address and socket for TCP connection", true, "UrlParam");
-		I_ASSIGN(m_urlParamModelCompPtr, "UrlParam", "URL parameter used to find out address and socket for TCP connection", false, "UrlParam");
+		I_ASSIGN_TO(m_urlParamModelCompPtr, m_urlParamCompPtr, false);
 		I_ASSIGN_MULTI_0(m_presetTextsAttrPtr, "PresetTexts", "Set of preset texts", false);
 	I_END_COMPONENT;
 

@@ -51,16 +51,16 @@ public:
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
-		I_ASSIGN(m_statisticsHotfolderObserverCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
+		I_ASSIGN_TO(m_statisticsHotfolderObserverCompPtr, m_statisticsCompPtr, true);
 		I_ASSIGN(m_statisticsModelCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");
 		I_ASSIGN(m_directoryItemGuiFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
-		I_ASSIGN(m_directoryItemObserverFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
-		I_ASSIGN(m_directoryItemSelectionFactCompPtr, "DirectoryItemGui", "GUI for the directory tree item", false, "DirectoryItemGui");
+		I_ASSIGN_TO(m_directoryItemObserverFactCompPtr, m_directoryItemGuiFactCompPtr, false);
+		I_ASSIGN_TO(m_directoryItemSelectionFactCompPtr, m_directoryItemGuiFactCompPtr, false);
 		I_ASSIGN(m_processingItemPreviewGuiCompPtr, "ProcessingItemPreview", "GUI for the processing item's preview", false, "ProcessingItemPreview");
-		I_ASSIGN(m_processingItemPreviewCompPtr, "ProcessingItemPreview", "Observer for the processing item's preview", false, "ProcessingItemPreview");
+		I_ASSIGN_TO(m_processingItemPreviewCompPtr, m_processingItemPreviewGuiCompPtr, false);
 		I_ASSIGN(m_processingParamsDialogCompPtr, "ProcessingParamsDialog", "Dialog for the processing parameters", false, "ProcessingParamsDialog");
 		I_ASSIGN(m_inputDirectoriesParamsManagerCompPtr, "InputDirectoriesManager", "Parameter manager for the input directories", true, "InputDirectoriesManager");
-		I_ASSIGN(m_inputDirectoriesParamsManagerModelCompPtr, "InputDirectoriesManager", "Parameter manager for the input directories", true, "InputDirectoriesManager");
+		I_ASSIGN_TO(m_inputDirectoriesParamsManagerModelCompPtr, m_inputDirectoriesParamsManagerCompPtr, true);
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathId", "ID of the directory path in the input directory parameter set", true, "DirectoryPath");
 	I_END_COMPONENT;
 
