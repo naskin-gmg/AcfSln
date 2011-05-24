@@ -61,8 +61,7 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 	}
 
 	return		((dataObjectPtr == NULL) || (dynamic_cast<const IDataSequence*>(dataObjectPtr) != NULL)) &&
-				((flags & QF_ANONYMOUS_ONLY) == 0) &&
-				((flags & QF_NO_SAVING) == 0);
+				((flags & (QF_ANONYMOUS_ONLY | QF_DIRECTORY_ONLY | QF_NO_SAVING)) == 0);
 }
 
 

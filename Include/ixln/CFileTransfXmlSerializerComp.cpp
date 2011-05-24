@@ -39,7 +39,7 @@ bool CFileTransfXmlSerializerComp::IsOperationSupported(
 		return false;
 	}
 
-	if ((flags & QF_ANONYMOUS_ONLY) != 0){
+	if ((flags & (QF_ANONYMOUS_ONLY | QF_DIRECTORY_ONLY)) != 0){
 		return false;
 	}
 
