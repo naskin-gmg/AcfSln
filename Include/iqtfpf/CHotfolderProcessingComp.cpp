@@ -15,7 +15,7 @@
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "isys/IApplicationEnvironment.h"
+#include "isys/IProcessEnvironment.h"
 #include "isys/CSectionBlocker.h"
 
 #include "iprm/IFileNameParam.h"

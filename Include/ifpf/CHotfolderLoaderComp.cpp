@@ -114,9 +114,9 @@ istd::CString CHotfolderLoaderComp::GetStaticParamsPath(const istd::CString& obj
 // reimplemented (ibase::TFileSerializerComp)
 
 void CHotfolderLoaderComp::OnReadError(
-			const iser::CXmlFileReadArchive& archive,
+			const iser::CXmlFileReadArchive& /*archive*/,
 			const istd::IChangeable& /*data*/,
-			const istd::CString& filePath) const
+			const istd::CString& /*filePath*/) const
 {
 }
 

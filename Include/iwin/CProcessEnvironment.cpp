@@ -1,5 +1,7 @@
-#include "iwin/CApplicationEnvironment.h"
+#include "iwin/CProcessEnvironment.h"
 
+
+// Windows includes
 #include <windows.h>
 
 
@@ -12,9 +14,21 @@ namespace iwin
 
 // public methods
 	
-// reimplemented (isys::IApplicationEnvironment)
+// reimplemented (isys::IProcessEnvironment)
 
-istd::CString CApplicationEnvironment::GetTempDirPath() const
+int CProcessEnvironment::GetMainThreadId() const
+{
+	return ::GetCurrentThreadId();
+}
+
+
+void CProcessEnvironment::Sleep(double seconds)
+{
+	::Sleep(DWORD(seconds * 1000));
+}
+
+
+istd::CString CProcessEnvironment::GetTempDirPath() const
 {
 	wchar_t tempPath[MAX_PATH] = {0};
 	::GetTempPathW(MAX_PATH, tempPath);
@@ -29,7 +43,7 @@ istd::CString CApplicationEnvironment::GetTempDirPath() const
 }
 
 
-istd::CString CApplicationEnvironment::GetWorkingDirectory() const
+istd::CString CProcessEnvironment::GetWorkingDirectory() const
 {
 	wchar_t workingDirectory[MAX_PATH] = {0};
 
@@ -41,7 +55,7 @@ istd::CString CApplicationEnvironment::GetWorkingDirectory() const
 }
 
 
-istd::CStringList CApplicationEnvironment::GetApplicationArguments() const
+istd::CStringList CProcessEnvironment::GetApplicationArguments() const
 {
 	istd::CStringList applicationArguments;
 
@@ -60,7 +74,7 @@ istd::CStringList CApplicationEnvironment::GetApplicationArguments() const
 }
 
 
-istd::CString CApplicationEnvironment::GetModulePath(bool useApplicationModule /*= false*/, bool onlyDirectory /*= false*/) const
+istd::CString CProcessEnvironment::GetModulePath(bool useApplicationModule /*= false*/, bool onlyDirectory /*= false*/) const
 {
 	WCHAR moduleFileName[MAX_PATH] = {0};
 
@@ -81,7 +95,7 @@ istd::CString CApplicationEnvironment::GetModulePath(bool useApplicationModule /
 }
 
 
-CApplicationEnvironment::EnvironmentVariables CApplicationEnvironment::GetEnvironmentVariables() const
+CProcessEnvironment::EnvironmentVariables CProcessEnvironment::GetEnvironmentVariables() const
 {
 	EnvironmentVariables environmentVariables;
 
@@ -108,7 +122,7 @@ CApplicationEnvironment::EnvironmentVariables CApplicationEnvironment::GetEnviro
 }
 
 
-void CApplicationEnvironment::SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value)
+void CProcessEnvironment::SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value)
 {
 	::SetEnvironmentVariable(variableName.ToString().c_str(), value.ToString().c_str());
 }

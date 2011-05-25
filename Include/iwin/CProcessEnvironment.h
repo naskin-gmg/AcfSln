@@ -1,8 +1,8 @@
-#ifndef iwin_CApplicationEnvironment_included
-#define iwin_CApplicationEnvironment_included
+#ifndef iwin_CProcessEnvironment_included
+#define iwin_CProcessEnvironment_included
 
 
-#include "isys/IApplicationEnvironment.h"
+#include "isys/IProcessEnvironment.h"
 
 
 namespace iwin
@@ -10,14 +10,16 @@ namespace iwin
 
 
 /**
-	Windows based implementation of interface \c isys::IApplicationEnvironment.
+	Windows based implementation of interface \c isys::IProcessEnvironment.
 
 	\ingroup Windows
 */
-class CApplicationEnvironment: virtual public isys::IApplicationEnvironment
+class CProcessEnvironment: virtual public isys::IProcessEnvironment
 {
 public:
-	// reimplemented (isys::IApplicationEnvironment)
+	// reimplemented (isys::IProcessEnvironment)
+	virtual int GetMainThreadId() const;
+	virtual void Sleep(double seconds);
 	virtual istd::CString GetTempDirPath() const;
 	virtual istd::CString GetWorkingDirectory() const;
 	virtual istd::CStringList GetApplicationArguments() const;
@@ -30,4 +32,4 @@ public:
 } // namespace iwin
 
 
-#endif // !iwin_CApplicationEnvironment_included
+#endif // !iwin_CProcessEnvironment_included

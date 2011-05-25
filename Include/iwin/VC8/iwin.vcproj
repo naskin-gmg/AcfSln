@@ -162,10 +162,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CApplicationEnvironment.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CCriticalSection.cpp"
 				>
 			</File>
@@ -179,6 +175,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessEnvironment.cpp"
 				>
 			</File>
 			<File
@@ -199,10 +199,6 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CApplicationEnvironment.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CCriticalSection.h"
 				>
 			</File>
@@ -216,6 +212,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileSystem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessEnvironment.h"
 				>
 			</File>
 			<File
