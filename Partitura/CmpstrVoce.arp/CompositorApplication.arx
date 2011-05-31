@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1708
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          315
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
         Application
@@ -44,7 +22,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="19">
+        <AttributeInfoMap count="20">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -383,6 +361,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              TranslationManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                TranslationManager
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               VersionInfo
             </Id>
             <Type>
@@ -459,6 +456,27 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        TranslationManager
+      </Id>
+      <PackageId>
+        CmpstrVoce
+      </PackageId>
+      <ComponentId>
+        CompositorTranslationManager
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
