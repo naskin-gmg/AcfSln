@@ -294,7 +294,7 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 
 	iqt::CTimer m_timer;
 	
-	if (!m_parent.m_fileConvertCompPtr->CopyFile(m_inputFilePath, m_outputFilePath)){
+	if (!m_parent.m_fileConvertCompPtr->ConvertFile(m_inputFilePath, m_outputFilePath)){
 		istd::CString message = istd::CString("Processing of ") + m_inputFilePath + " failed";
 		m_parent.SendErrorMessage(0, message, "Hotfolder");
 
