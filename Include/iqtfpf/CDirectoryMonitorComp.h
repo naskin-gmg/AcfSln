@@ -54,7 +54,7 @@ public:
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathParamsId", "Parameter ID of the path to be observed in the parameter set", true, "DirectoryPathParamsId");
-		I_ASSIGN_TO(m_directoryMonitorParamsIdAttrPtr, m_directoryPathIdAttrPtr, true);
+		I_ASSIGN(m_directoryMonitorParamsIdAttrPtr, "DirectoryMonitorParamsId", "ID of the directory observing parameters in the parameter set", true, "DirectoryMonitorParamsId");
 		I_ASSIGN(m_autoStartAttrPtr, "AutoStart", "If enabled, start the directory monitoring after initialization", false, false);
 	I_END_COMPONENT;
 
