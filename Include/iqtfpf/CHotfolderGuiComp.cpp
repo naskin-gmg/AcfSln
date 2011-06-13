@@ -375,6 +375,11 @@ void CHotfolderGuiComp::UpdateRemovedItemList()
 
 			if (processingItemPtr != NULL && processingItemPtr->GetObjectPtr() == NULL){
 				QTreeWidgetItem* parentItemPtr = processingItemPtr->parent();
+
+				if (processingItemPtr->isSelected()){
+					FileList->clearSelection();
+				}
+
 				parentItemPtr->removeChild(processingItemPtr);
 
 				workDone = false;
