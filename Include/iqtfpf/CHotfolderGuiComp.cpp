@@ -255,8 +255,6 @@ void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileIt
 	if (parentItemPtr != NULL){
 		parentItemPtr->AddFileItem(fileItem);
 	}
-	else{
-	}
 }
 
 
@@ -378,10 +376,6 @@ void CHotfolderGuiComp::UpdateRemovedItemList()
 			if (processingItemPtr != NULL && processingItemPtr->GetObjectPtr() == NULL){
 				QTreeWidgetItem* parentItemPtr = processingItemPtr->parent();
 				parentItemPtr->removeChild(processingItemPtr);
-
-				if (parentItemPtr->childCount() == 0){
-					delete FileList->takeTopLevelItem(FileList->indexOfTopLevelItem(parentItemPtr));
-				}
 
 				workDone = false;
 				break;
