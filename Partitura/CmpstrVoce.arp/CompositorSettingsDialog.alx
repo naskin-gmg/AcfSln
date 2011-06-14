@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1536
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          232
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="11">
     <Element>
       <ComponentName>
         ConfigFileGui
@@ -65,7 +43,7 @@
         HtmlEditorFileGui
       </ComponentName>
       <X>
-        800
+        775
       </X>
       <X>
         500
@@ -73,10 +51,21 @@
     </Element>
     <Element>
       <ComponentName>
+        LanguageSelectionGui
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        275
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         PreviewCommandFileGui
       </ComponentName>
       <X>
-        800
+        775
       </X>
       <X>
         275
@@ -87,7 +76,7 @@
         PreviewCommandFileInfo
       </ComponentName>
       <X>
-        800
+        725
       </X>
       <X>
         175
@@ -98,10 +87,10 @@
         Settings
       </ComponentName>
       <X>
-        675
+        500
       </X>
       <X>
-        775
+        675
       </X>
     </Element>
     <Element>
@@ -131,10 +120,10 @@
         SettingsPersistence
       </ComponentName>
       <X>
-        1025
+        800
       </X>
       <X>
-        775
+        675
       </X>
     </Element>
   </PositionMap>

@@ -45,9 +45,8 @@ public:
 		I_ASSIGN(m_dataSequenceStatisticsCompPtr, "DataSequenceStatistics", "Data sequence statistics", false, "DataSequenceStatistics");
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
+	// reimplemenented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)

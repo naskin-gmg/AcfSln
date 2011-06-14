@@ -30,9 +30,8 @@ public:
 	I_BEGIN_COMPONENT(CDataStatisticsGuiComp);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
+	// reimplemenented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
 };
 
 

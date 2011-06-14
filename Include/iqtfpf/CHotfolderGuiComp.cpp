@@ -43,15 +43,9 @@ const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 }
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
-void CHotfolderGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CHotfolderGuiComp::UpdateEditor(int updateFlags)
+void CHotfolderGuiComp::UpdateGui(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -82,15 +76,13 @@ void CHotfolderGuiComp::UpdateEditor(int updateFlags)
 }
 
 
-// reimplemented (TGuiObserverWrap)
-
 void CHotfolderGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
 	UpdateProcessingCommands();
 
-	UpdateEditor(ifpf::IHotfolderProcessingInfo::CF_CREATE);
+	UpdateGui(ifpf::IHotfolderProcessingInfo::CF_CREATE);
 
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){
 		imod::IModel* hotfolderModelPtr = GetModelPtr();
@@ -467,7 +459,7 @@ void CHotfolderGuiComp::OnHold()
 
 void CHotfolderGuiComp::OnItemRemove()
 {
-	UpdateBlocker updateBlock(this);
+	UpdateBlocker updateBlocker(this);
 
 	ProcessingItems processingItems = GetSelectedProcessingItems();
 	istd::TChangeNotifier<ifpf::IHotfolderProcessingInfo> changePtr(GetObjectPtr());

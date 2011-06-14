@@ -39,9 +39,9 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
 
-	// reimplemenented (TGuiObserverWrap)
+	// reimplemenented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
 	virtual void OnGuiModelDetached();
 
 	// reimplemented (ibase::ICommandsProvider)

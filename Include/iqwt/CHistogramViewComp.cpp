@@ -16,15 +16,9 @@ namespace iqwt
 
 // public methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CHistogramViewComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CHistogramViewComp::UpdateEditor(int /*updateFlags*/)
+void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 

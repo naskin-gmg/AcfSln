@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1536
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          232
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         ConfigFile
@@ -168,6 +146,43 @@
     </Element>
     <Element>
       <Id>
+        LanguageSelection
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        SelectionParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Constraints
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              LanguageSelectionConstraints
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         PreviewCommandFile
       </Id>
       <PackageId>
@@ -257,7 +272,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ConfigFile
                 </Value>
@@ -269,6 +284,9 @@
                 </Value>
                 <Value>
                   HtmlEditorFile
+                </Value>
+                <Value>
+                  LanguageSelection
                 </Value>
               </Values>
             </Data>
@@ -287,7 +305,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ConfigFile
                 </Value>
@@ -300,6 +318,9 @@
                 <Value>
                   HtmlEditorFile
                 </Value>
+                <Value>
+                  LanguageSelection
+                </Value>
               </Values>
             </Data>
           </AttributeInfo>
@@ -307,6 +328,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
@@ -341,7 +364,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="5">
     <Component>
       <ExportedId>
         ConfigFile
@@ -364,6 +387,14 @@
       </ExportedId>
       <ComponentId>
         HtmlEditorFile
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        LanguageSelection
+      </ExportedId>
+      <ComponentId>
+        LanguageSelection
       </ComponentId>
     </Component>
     <Component>

@@ -25,7 +25,9 @@ void CTextEditorGuiComp::UpdateModel() const
 }
 
 
-void CTextEditorGuiComp::UpdateEditor(int /*updateFlags*/)
+// reimplemenented (iqtgui::TGuiObserverWrap)
+
+void CTextEditorGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -39,8 +41,6 @@ void CTextEditorGuiComp::UpdateEditor(int /*updateFlags*/)
 	}
 }
 
-
-// reimplemenented (TGuiObserverWrap)
 
 void CTextEditorGuiComp::OnGuiModelDetached()
 {

@@ -42,11 +42,8 @@ public:
 		I_ASSIGN_TO(m_outputFileNameParamModelCompPtr, m_outputFileNameParamCompPtr, true);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
-
-	// reimplemented (TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 

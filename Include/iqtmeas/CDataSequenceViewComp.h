@@ -45,9 +45,8 @@ public:
 
 	CDataSequenceViewComp();
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
+	// reimplemenented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
 
 protected:
 	class DiagramWidget: public QWidget

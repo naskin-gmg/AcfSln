@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1536
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          232
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         ConfigFile
@@ -54,7 +32,7 @@
         HtmlEditorFile
       </ComponentName>
       <X>
-        775
+        725
       </X>
       <X>
         500
@@ -62,10 +40,21 @@
     </Element>
     <Element>
       <ComponentName>
+        LanguageSelection
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         PreviewCommandFile
       </ComponentName>
       <X>
-        775
+        725
       </X>
       <X>
         300

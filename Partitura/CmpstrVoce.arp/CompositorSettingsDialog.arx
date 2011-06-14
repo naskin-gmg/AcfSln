@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1536
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          232
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="10">
+  <ElementsList count="11">
     <Element>
       <Id>
         ConfigFileGui
@@ -174,6 +152,27 @@
     </Element>
     <Element>
       <Id>
+        LanguageSelectionGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        SelectionParamGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         PreviewCommandFileGui
       </Id>
       <PackageId>
@@ -298,7 +297,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              LanguageSelectionConstraints
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              LanguageSelectionConstraints
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -488,7 +503,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ConfigFileGui
                 </Value>
@@ -500,6 +515,9 @@
                 </Value>
                 <Value>
                   HtmlEditorFileGui
+                </Value>
+                <Value>
+                  LanguageSelectionGui
                 </Value>
               </Values>
             </Data>
@@ -518,7 +536,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ConfigFile
                 </Value>
@@ -530,6 +548,9 @@
                 </Value>
                 <Value>
                   HtmlEditorFile
+                </Value>
+                <Value>
+                  LanguageSelection
                 </Value>
               </Values>
             </Data>
@@ -548,7 +569,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   Configuration File
                 </Value>
@@ -560,6 +581,9 @@
                 </Value>
                 <Value>
                   HTML Editor
+                </Value>
+                <Value>
+                  Language
                 </Value>
               </Values>
             </Data>
@@ -659,6 +683,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
@@ -677,7 +703,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="5">
+  <ExportedComponents count="7">
     <Component>
       <ExportedId>
         ConfigFile
@@ -704,6 +730,14 @@
     </Component>
     <Component>
       <ExportedId>
+        LanguageSelection
+      </ExportedId>
+      <ComponentId>
+        Settings/LanguageSelection
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
         PreviewCommandFile
       </ExportedId>
       <ComponentId>
@@ -716,6 +750,14 @@
       </ExportedId>
       <ComponentId>
         SettingsGui
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        TranslationManager
+      </ExportedId>
+      <ComponentId>
+        Settings/TranslationManager
       </ComponentId>
     </Component>
   </ExportedComponents>

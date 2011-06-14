@@ -44,15 +44,9 @@ CSurfaceViewComp::CSurfaceViewComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CSurfaceViewComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CSurfaceViewComp::UpdateEditor(int /*updateFlags*/)
+void CSurfaceViewComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -246,7 +240,7 @@ void CSurfaceViewComp::OnGuiCreated()
 void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 {
 	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
+		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
 	}

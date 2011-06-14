@@ -73,15 +73,9 @@ bool CDirectoryItemGuiComp::Serialize(iser::IArchive& /*archive*/)
 }
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CDirectoryItemGuiComp::UpdateModel() const
-{
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-}
-
-
-void CDirectoryItemGuiComp::UpdateEditor(int /*updateFlags*/)
+void CDirectoryItemGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 

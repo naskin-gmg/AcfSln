@@ -22,14 +22,38 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              LanguageSelection
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              LanguageSelection
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        iprm::ISelectionConstraints
+      </InterfaceId>
+      <ComponentId>
+        CompositorTranslationManager
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iqt::ITranslationManager
