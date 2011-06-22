@@ -174,10 +174,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              AudioSequence
+              AudioSampleObject
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -193,23 +193,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              AutoAudioGrabLength
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              AutoAudioGrabLength
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Bitmap
+              BitmapObject
             </Id>
             <Type>
               icomp::CReferenceAttribute

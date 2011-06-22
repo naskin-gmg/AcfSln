@@ -8,6 +8,7 @@
 // LIBAV includes
 extern "C"{
 #define inline _inline
+#define __STDC_CONSTANT_MACROS
 #include "libavformat/avformat.h"
 #undef inline
 }
@@ -46,9 +47,11 @@ public:
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);
-		I_ASSIGN(m_bitmapObjectCompPtr, "Bitmap", "Bitmap object where current bitmap is stored", false, "Bitmap");
-		I_ASSIGN(m_audioSequenceCompPtr, "AudioSequence", "Sample sequence object where current audio sample is stored", false, "AudioSequence");
-		I_ASSIGN(m_autoAudioGrabLengthAttrPtr, "AutoAudioGrabLength", "If enabled, audio will be automatically grabbed", false, 1.0);
+		I_ASSIGN(m_bitmapObjectCompPtr, "BitmapObject", "Bitmap object where current bitmap is stored", false, "Bitmap");
+		I_ASSIGN(m_audioSampleObjectCompPtr, "AudioSampleObject", "Sample sequence object where current audio sample is stored", false, "AudioSequence");
+		I_ASSIGN(m_tracePositionAttrPtr, "TracePosition", "If enabled, all position changes will be updated in preview objects", true, true);
+		I_ASSIGN(m_grabProgressiveAttrPtr, "GrabProgressive", "If enabled the next frame will be returned by image and sample grab, if false only current frame will be returned", true, false);
+		I_ASSIGN(m_minimalImageDistanceAttrPtr, "MinimalImageDistance", "Minimal distance between two grabbed images if progressive grabbing enabled", false, 0.1);
 	I_END_COMPONENT();
 
 	CLibAvVideoDecoderComp();
@@ -86,7 +89,23 @@ public:
 	virtual bool SetCurrentFrame(int frameIndex);
 
 protected:
-	bool ReadNextFrame();
+	enum FrameType
+	{
+		FT_ERROR = -1,
+		FT_END,
+		FT_AUDIO_SAMPLE,
+		FT_IMAGE,
+		FT_SKIPED_AUDIO_SAMPLE,
+		FT_SKIPPED_IMAGE
+	};
+
+	FrameType ReadNextFrame(
+				iimg::IBitmap* bitmapPtr,
+				imeas::IDataSequence* audioSequencePtr,
+				double minimalImagePos = -1,
+				double minimalAudioPos = -1);
+
+	bool TryTracePosition();
 
 	// reimplemented (icomp::CComponentBase)
 	void OnComponentCreated();
@@ -117,10 +136,15 @@ private:
 	istd::CString m_currentUrl;
 
 	I_REF(iimg::IBitmap, m_bitmapObjectCompPtr);
-	I_REF(imeas::IDataSequence, m_audioSequenceCompPtr);
-	I_ATTR(double, m_autoAudioGrabLengthAttrPtr);
+	I_REF(imeas::IDataSequence, m_audioSampleObjectCompPtr);
+	I_ATTR(bool, m_tracePositionAttrPtr);
+	I_ATTR(bool, m_grabProgressiveAttrPtr);
+	I_ATTR(double, m_minimalImageDistanceAttrPtr);
 
 	int m_currentFrame;
+
+	bool m_isCurrentImageValid;
+	bool m_isCurrentSampleValid;
 };
 
 
