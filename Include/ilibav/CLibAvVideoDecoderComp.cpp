@@ -264,7 +264,7 @@ bool CLibAvVideoDecoderComp::OpenMediumUrl(const istd::CString& url, bool /*auto
 
 void CLibAvVideoDecoderComp::CloseMedium()
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
 	if (m_formatContextPtr != NULL){
 		av_close_input_file(m_formatContextPtr);
@@ -493,7 +493,14 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 						AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
 						I_ASSERT(videoStreamPtr != NULL);
 
-						double packetPos = double(m_packet.dts * videoStreamPtr->time_base.num) / videoStreamPtr->time_base.den;
+						int processedFrame = m_packet.dts;
+						if (processedFrame != m_currentFrame){
+							istd::CChangeNotifier posNotifier(this, CF_MEDIA_POSITION);
+
+							m_currentFrame = processedFrame;
+						}
+
+						double packetPos = double(m_currentFrame * videoStreamPtr->time_base.num) / videoStreamPtr->time_base.den;
 
 						if (packetPos < minimalImagePos){
 							return FT_SKIPPED_IMAGE;
