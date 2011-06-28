@@ -47,6 +47,7 @@ public:
 	I_BEGIN_COMPONENT(CLibAvVideoDecoderComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(imeas::ISampleAcquisition);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
@@ -120,15 +121,15 @@ protected:
 		FT_END,
 		FT_AUDIO_SAMPLE,
 		FT_IMAGE,
-		FT_SKIPED_AUDIO_SAMPLE,
+		FT_SKIPPED_AUDIO_SAMPLE,
 		FT_SKIPPED_IMAGE
 	};
 
 	FrameType ReadNextFrame(
 				iimg::IBitmap* bitmapPtr,
 				imeas::IDataSequence* audioSequencePtr,
-				double minimalImagePos = -1,
-				double minimalAudioPos = -1);
+				int minimalImageFrame = -1,
+				int minimalAudioFrame = -1);
 
 	/**
 		Fininsh single task and return its ID.
@@ -188,6 +189,7 @@ private:
 	I_ATTR(double, m_minimalImageDistanceAttrPtr);
 
 	int m_currentFrame;
+	int m_lastReadFrame;
 
 	bool m_isCurrentImageValid;
 	bool m_isCurrentSampleValid;
