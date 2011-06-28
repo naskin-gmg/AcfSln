@@ -258,6 +258,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ISampleAcquisition.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IUnitInfo.h"
 				>
 			</File>

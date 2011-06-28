@@ -34,7 +34,8 @@ CLibAvVideoDecoderComp::CLibAvVideoDecoderComp()
 	m_rawDataPtr(NULL),
 	m_currentFrame(0),
 	m_isCurrentImageValid(false),
-	m_isCurrentSampleValid(false)
+	m_isCurrentSampleValid(false),
+	m_nextTaskId(0)
 {
 	av_register_all();
 
@@ -62,85 +63,200 @@ istd::CIndex2d CLibAvVideoDecoderComp::GetBitmapSize(const iprm::IParamsSet* /*p
 }
 
 
+// reimplemented (imeas::ISampleAcquisition)
+
+double CLibAvVideoDecoderComp::GetSamplingRate(const iprm::IParamsSet* paramsPtr) const
+{
+	if (m_audioCodecContextPtr != NULL){
+		return m_audioCodecContextPtr->sample_rate;
+	}
+
+	return 0;
+}
+
+
 // reimplemented (iproc::IProcessor)
 
-int CLibAvVideoDecoderComp::DoProcessing(
+int CLibAvVideoDecoderComp::GetProcessorState(const iprm::IParamsSet* /*paramsPtr*/) const
+{
+	if ((m_videoCodecContextPtr != NULL) || (m_audioCodecContextPtr != NULL)){
+		return PS_READY;
+	}
+
+	return PS_UNKNOWN;
+}
+
+
+bool CLibAvVideoDecoderComp::AreParamsAccepted(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
+			const istd::IChangeable* outputPtr) const
+{
+	if (outputPtr != NULL){
+		const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(outputPtr);
+		if (bitmapPtr != NULL){
+			return true;
+		}
+
+		const imeas::IDataSequence* audioSequencePtr = dynamic_cast<const imeas::IDataSequence*>(outputPtr);
+		if (audioSequencePtr != NULL){
+			return true;
+		}
+
+		return false;
+	}
+
+	return true;
+}
+
+
+int CLibAvVideoDecoderComp::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* /*progressManagerPtr*/)
+			iproc::IProgressManager* progressManagerPtr)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
 	}
 
+	int taskId = BeginTask(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
+	if (taskId >= 0){
+		return WaitTaskFinished(taskId);
+	}
+
+	return TS_INVALID;
+}
+
+
+int CLibAvVideoDecoderComp::BeginTask(
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const istd::IPolymorphic* /*inputPtr*/,
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
+{
+	m_nextTaskId = (m_nextTaskId + 1) & 0x7fff;
+
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (		(bitmapPtr != NULL) &&
 				m_bitmapObjectCompPtr.IsValid()){
-		if (m_isCurrentImageValid){
-			m_isCurrentImageValid = !*m_grabProgressiveAttrPtr;
-
-			if (bitmapPtr->CopyFrom(*m_bitmapObjectCompPtr)){
-				return TS_OK;
-			}
-		}
-		else{
-			double nextFramePos = -1;
-			if (m_minimalImageDistanceAttrPtr.IsValid()){
-				nextFramePos = GetCurrentPosition() + *m_minimalImageDistanceAttrPtr;
-			}
-
-			FrameType readFrameType;
-			do{
-				readFrameType = ReadNextFrame(
-							m_bitmapObjectCompPtr.GetPtr(),
-							NULL,
-							nextFramePos);
-
-				if (readFrameType == FT_ERROR){
-					return TS_INVALID;
-				}
-			} while (readFrameType == FT_IMAGE);
-
-			m_isCurrentImageValid = !*m_grabProgressiveAttrPtr;
-
-			if (bitmapPtr->CopyFrom(*m_bitmapObjectCompPtr)){
-				return TS_OK;
-			}
-		}
+		ImageTask& task = m_imageTasks[m_nextTaskId];
+		task.state = TS_WAIT;
+		task.outputPtr = bitmapPtr;
 	}
 
 	imeas::IDataSequence* audioSequencePtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 	if (		(audioSequencePtr != NULL) &&
 				m_audioSampleObjectCompPtr.IsValid()){
-		if (m_isCurrentSampleValid){
-			m_isCurrentSampleValid = !*m_grabProgressiveAttrPtr;
+		AudioTask& task = m_audioTasks[m_nextTaskId];
+		task.state = TS_WAIT;
+		task.outputPtr = audioSequencePtr;
+	}
 
-			if (audioSequencePtr->CopyFrom(*m_audioSampleObjectCompPtr)){
-				return TS_OK;
-			}
+	return -1;
+}
+
+
+int CLibAvVideoDecoderComp::WaitTaskFinished(
+				int taskId,
+				double /*timeoutTime*/,
+				bool /*killOnTimeout*/)
+{
+	if (taskId >= 0){
+		I_ASSERT(GetTaskState(taskId) != TS_NONE);	// task exists
+
+		int taskState = TS_NONE;
+		while ((taskState = GetTaskState(taskId)) == TS_WAIT){
+			FinishNextTask();
 		}
-		else{
-			FrameType readFrameType;
-			do{
-				readFrameType = ReadNextFrame(
-							NULL,
-							m_audioSampleObjectCompPtr.GetPtr());
 
-				if (readFrameType == FT_ERROR){
-					return TS_INVALID;
-				}
-			} while (readFrameType == FT_AUDIO_SAMPLE);
+		return taskState;
+	}
+	else{
+		while (FinishNextTask() >= 0);
 
-			m_isCurrentSampleValid = !*m_grabProgressiveAttrPtr;
+		int globalState = TS_NONE;
+		for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
+					iter != m_imageTasks.end();
+					++iter){
+			globalState = istd::Max(globalState, iter->first);
+		}
+		for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
+					iter != m_audioTasks.end();
+					++iter){
+			globalState = istd::Max(globalState, iter->first);
+		}
 
-			if (audioSequencePtr->CopyFrom(*m_audioSampleObjectCompPtr)){
-				return TS_OK;
-			}
+		return globalState;
+	}
+}
+
+
+void CLibAvVideoDecoderComp::CancelTask(int taskId)
+{
+	if (taskId >= 0){
+		m_imageTasks.erase(taskId);
+		m_audioTasks.erase(taskId);
+
+		if (m_imageTasks.empty() && m_audioTasks.empty()){
+			m_nextTaskId = 0;
+		}
+	}
+	else{
+		m_imageTasks.clear();
+		m_audioTasks.clear();
+
+		m_nextTaskId = 0;
+	}
+}
+
+
+int CLibAvVideoDecoderComp::GetReadyTask()
+{
+	for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
+				iter != m_imageTasks.end();
+				++iter){
+		const ImageTask& task = iter->second;
+		if (task.state != TS_WAIT){
+			return iter->first;
 		}
 	}
 
-	return TS_INVALID;
+	for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
+				iter != m_audioTasks.end();
+				++iter){
+		const AudioTask& task = iter->second;
+		if (task.state != TS_WAIT){
+			return iter->first;
+		}
+	}
+
+	return FinishNextTask();
+}
+
+
+int CLibAvVideoDecoderComp::GetTaskState(int taskId) const
+{
+	ImageTaskMap::const_iterator imageIter = m_imageTasks.find(taskId);
+	if (imageIter != m_imageTasks.end()){
+		const ImageTask& task = imageIter->second;
+
+		return task.state;
+	}
+
+	AudioTaskMap::const_iterator audioIter = m_audioTasks.find(taskId);
+	if (audioIter != m_audioTasks.end()){
+		const AudioTask& task = audioIter->second;
+
+		return task.state;
+	}
+
+	return TS_NONE;
+}
+
+
+void CLibAvVideoDecoderComp::InitProcessor(const iprm::IParamsSet* /*paramsPtr*/)
+{
 }
 
 
@@ -493,7 +609,7 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 						AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
 						I_ASSERT(videoStreamPtr != NULL);
 
-						int processedFrame = m_packet.dts;
+						int processedFrame = int(m_packet.dts);
 						if (processedFrame != m_currentFrame){
 							istd::CChangeNotifier posNotifier(this, CF_MEDIA_POSITION);
 
@@ -689,6 +805,110 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 }
 
 
+int CLibAvVideoDecoderComp::FinishNextTask()
+{
+	int openTasksCount = 0;
+
+	if (m_bitmapObjectCompPtr.IsValid() && (m_videoCodecContextPtr != NULL)){
+		for (		ImageTaskMap::const_iterator iter = m_imageTasks.begin();
+					iter != m_imageTasks.end();
+					++iter){
+			const ImageTask& task = iter->second;
+			if (task.state == TS_WAIT){
+				++openTasksCount;
+			}
+		}
+	}
+
+	if (m_audioSampleObjectCompPtr.IsValid() && (m_audioCodecContextPtr != NULL)){
+		for (		AudioTaskMap::const_iterator iter = m_audioTasks.begin();
+					iter != m_audioTasks.end();
+					++iter){
+			const AudioTask& task = iter->second;
+			if (task.state == TS_WAIT){
+				++openTasksCount;
+			}
+		}
+	}
+
+	while (openTasksCount > 0){
+		if (m_isCurrentImageValid){
+			I_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+
+			for (		ImageTaskMap::iterator iter = m_imageTasks.begin();
+						iter != m_imageTasks.end();
+						++iter){
+				ImageTask& task = iter->second;
+				I_ASSERT(task.outputPtr != NULL);
+
+				if (task.state == TS_WAIT){
+					if (task.outputPtr->CopyFrom(*m_bitmapObjectCompPtr)){
+						task.state = TS_OK;
+					}
+					else{
+						task.state = TS_INVALID;
+					}
+
+					m_isCurrentImageValid = false;
+
+					return iter->first;
+				}
+			}
+		}
+
+		if (m_isCurrentSampleValid){
+			I_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+
+			for (		AudioTaskMap::iterator iter = m_audioTasks.begin();
+						iter != m_audioTasks.end();
+						++iter){
+				AudioTask& task = iter->second;
+				I_ASSERT(task.outputPtr != NULL);
+
+				if (task.state == TS_WAIT){
+					if (task.outputPtr->CopyFrom(*m_audioSampleObjectCompPtr)){
+						task.state = TS_OK;
+					}
+					else{
+						task.state = TS_INVALID;
+					}
+
+					m_isCurrentSampleValid = false;
+
+					return iter->first;
+				}
+			}
+		}
+
+		double nextFramePos = -1;
+		if (m_minimalImageDistanceAttrPtr.IsValid()){
+			nextFramePos = GetCurrentPosition() + *m_minimalImageDistanceAttrPtr;
+		}
+
+		FrameType readFrameType = ReadNextFrame(
+					m_bitmapObjectCompPtr.GetPtr(),
+					m_audioSampleObjectCompPtr.GetPtr(),
+					nextFramePos);
+
+		if (readFrameType == FT_IMAGE){
+			I_ASSERT(m_bitmapObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+
+			m_isCurrentImageValid = true;
+		}
+		else if (readFrameType == FT_AUDIO_SAMPLE){
+			I_ASSERT(m_audioSampleObjectCompPtr.IsValid());	// contains is valid, pointer must be also valid
+
+			m_isCurrentSampleValid = true;
+		}
+		else{
+			break;
+		}
+	}
+
+	return -1;
+}
+
+
 bool CLibAvVideoDecoderComp::TryTracePosition()
 {
 	if (*m_tracePositionAttrPtr){
@@ -735,8 +955,10 @@ void CLibAvVideoDecoderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	m_framePtr = avcodec_alloc_frame();
-	m_frameRgbPtr = avcodec_alloc_frame();
+	if (m_bitmapObjectCompPtr.IsValid()){
+		m_framePtr = avcodec_alloc_frame();
+		m_frameRgbPtr = avcodec_alloc_frame();
+	}
 }
 
 

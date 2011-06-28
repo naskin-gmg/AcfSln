@@ -14,12 +14,12 @@ extern "C"{
 }
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include "ibase/TLoggerCompWrap.h"
 #include "iproc/IBitmapAcquisition.h"
-#include "iproc/TSyncProcessorCompBase.h"
 #include "imm/IVideoController.h"
 
 #include "imeas/IDataSequence.h"
+#include "imeas/ISampleAcquisition.h"
 
 
 namespace ilibav
@@ -30,11 +30,13 @@ namespace ilibav
 	Implementation of imm::IVideoController and iproc::IBitmapAcquisition interfaces using LibAv library.
 */
 class CLibAvVideoDecoderComp:
-			public iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition>,
+			public ibase::CLoggerComponentBase,
+			virtual public iproc::IBitmapAcquisition,
+			virtual public imeas::ISampleAcquisition,
 			virtual public imm::IVideoController
 {
 public:
-	typedef iproc::TSyncProcessorCompBase<iproc::IBitmapAcquisition> BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 
 	enum MessageId
 	{
@@ -43,6 +45,8 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CLibAvVideoDecoderComp);
+		I_REGISTER_INTERFACE(iproc::IProcessor);
+		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
@@ -60,12 +64,33 @@ public:
 	// reimplemented (iproc::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
+	// reimplemented (imeas::ISampleAcquisition)
+	virtual double GetSamplingRate(const iprm::IParamsSet* paramsPtr) const;
+
 	// reimplemented (iproc::IProcessor)
+	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual bool AreParamsAccepted(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				const istd::IChangeable* outputPtr) const;
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				iproc::IProgressManager* progressManagerPtr = NULL);
+	virtual int BeginTask(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr = NULL);
+	virtual int WaitTaskFinished(
+					int taskId = -1,
+					double timeoutTime = -1,
+					bool killOnTimeout = true);
+	virtual void CancelTask(int taskId = -1);
+	virtual int GetReadyTask();
+	virtual int GetTaskState(int taskId = -1) const;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 	// reimplemented (imm::IMediaController)
 	virtual istd::CString GetOpenedMediumUrl() const;
@@ -105,6 +130,11 @@ protected:
 				double minimalImagePos = -1,
 				double minimalAudioPos = -1);
 
+	/**
+		Fininsh single task and return its ID.
+	*/
+	int FinishNextTask();
+
 	bool TryTracePosition();
 
 	// reimplemented (icomp::CComponentBase)
@@ -112,6 +142,22 @@ protected:
 	void OnComponentDestroyed();
 
 private:
+	struct ImageTask
+	{
+		int state;
+		iimg::IBitmap* outputPtr;
+	};
+	typedef std::map<int, ImageTask> ImageTaskMap;
+	ImageTaskMap m_imageTasks;
+
+	struct AudioTask
+	{
+		int state;
+		imeas::IDataSequence* outputPtr;
+	};
+	typedef std::map<int, AudioTask> AudioTaskMap;
+	AudioTaskMap m_audioTasks;
+
 	int m_videoStreamId;
 	int m_audioStreamId;
 	AVFormatContext* m_formatContextPtr;
@@ -145,6 +191,7 @@ private:
 
 	bool m_isCurrentImageValid;
 	bool m_isCurrentSampleValid;
+	int m_nextTaskId;
 };
 
 
