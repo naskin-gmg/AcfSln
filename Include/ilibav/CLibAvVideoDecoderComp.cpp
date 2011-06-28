@@ -65,7 +65,7 @@ istd::CIndex2d CLibAvVideoDecoderComp::GetBitmapSize(const iprm::IParamsSet* /*p
 
 // reimplemented (imeas::ISampleAcquisition)
 
-double CLibAvVideoDecoderComp::GetSamplingRate(const iprm::IParamsSet* paramsPtr) const
+double CLibAvVideoDecoderComp::GetSamplingRate(const iprm::IParamsSet* /*paramsPtr*/) const
 {
 	if (m_audioCodecContextPtr != NULL){
 		return m_audioCodecContextPtr->sample_rate;
@@ -138,7 +138,8 @@ int CLibAvVideoDecoderComp::BeginTask(
 	m_nextTaskId = (m_nextTaskId + 1) & 0x7fff;
 
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
-	if (		(bitmapPtr != NULL) &&
+	if (		(m_videoCodecContextPtr != NULL) &&
+				(bitmapPtr != NULL) &&
 				m_bitmapObjectCompPtr.IsValid()){
 		ImageTask& task = m_imageTasks[m_nextTaskId];
 		task.state = TS_WAIT;
@@ -146,7 +147,8 @@ int CLibAvVideoDecoderComp::BeginTask(
 	}
 
 	imeas::IDataSequence* audioSequencePtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
-	if (		(audioSequencePtr != NULL) &&
+	if (		(m_audioCodecContextPtr != NULL) &&
+				(audioSequencePtr != NULL) &&
 				m_audioSampleObjectCompPtr.IsValid()){
 		AudioTask& task = m_audioTasks[m_nextTaskId];
 		task.state = TS_WAIT;
