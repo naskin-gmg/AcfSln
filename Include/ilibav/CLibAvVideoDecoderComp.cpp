@@ -178,14 +178,14 @@ int CLibAvVideoDecoderComp::WaitTaskFinished(
 
 		int taskState = TS_NONE;
 
-		ImageTaskMap::const_iterator imageIter = m_imageTasks.find(taskId);
+		ImageTaskMap::iterator imageIter = m_imageTasks.find(taskId);
 		if (imageIter != m_imageTasks.end()){
 			taskState = imageIter->second.state;
 
 			m_imageTasks.erase(imageIter);
 		}
 		else{
-			AudioTaskMap::const_iterator audioIter = m_audioTasks.find(taskId);
+			AudioTaskMap::iterator audioIter = m_audioTasks.find(taskId);
 			if (audioIter != m_audioTasks.end()){
 				taskState = audioIter->second.state;
 
