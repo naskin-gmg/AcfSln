@@ -5,12 +5,6 @@
 #include <windows.h>
 
 
-// Undef the microsoft macros, to avoid name conflicts
-#ifdef CopyFile
-	#undef CopyFile
-#endif
-
-
 namespace iwin
 {
 
@@ -25,9 +19,55 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 }
 
 
-bool CFileSystem::CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
+bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
 {
-	return ::CopyFileW(inputFile.c_str(), outputFile.c_str(), overwriteExisting? FALSE: TRUE) == TRUE;
+	return (::CopyFileW(inputFile.c_str(), outputFile.c_str(), overwriteExisting? FALSE: TRUE) == TRUE);
+}
+
+
+bool CFileSystem::RemoveFile(const istd::CString& filePath) const
+{
+	return (::DeleteFileW(filePath.c_str()) == TRUE);
+}
+
+
+bool CFileSystem::RemoveFolder(const istd::CString& directoryPath, bool ignoreNonEmpty) const
+{
+	if (ignoreNonEmpty){
+		WIN32_FIND_DATAW fileFindData;
+
+		istd::CString searchString = directoryPath + "\\*";
+
+		HANDLE fileHandle = FindFirstFileW(searchString.c_str(), &fileFindData);
+
+		do{
+			istd::CString foundFileName = fileFindData.cFileName;
+
+			if (foundFileName != "." && foundFileName != ".."){
+				if ((fileFindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0){
+					RemoveFolder(foundFileName.c_str(), true);
+				}
+				else{
+					DeleteFileW(foundFileName.c_str());
+				}
+			}
+		}
+		while (FindNextFileW(fileHandle, &fileFindData));
+		
+		FindClose(fileHandle);
+	}
+
+	return (::RemoveDirectoryW(directoryPath.c_str()) == TRUE);
+}
+
+
+bool CFileSystem::CreateFolder(const istd::CString& directoryPath) const
+{
+	if (IsPresent(directoryPath)){
+		return true;
+	}
+
+	return (::CreateDirectoryW(directoryPath.c_str(), NULL) == TRUE);
 }
 
 
