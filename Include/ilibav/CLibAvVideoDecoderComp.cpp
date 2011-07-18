@@ -562,10 +562,11 @@ bool CLibAvVideoDecoderComp::SetCurrentFrame(int frameIndex)
 					m_formatContextPtr,
 					m_videoStreamId,
 					frameIndex,
-					0) >= 0){
-			m_currentFrame = frameIndex;
+					AVSEEK_FLAG_BACKWARD) >= 0){
 			m_lastReadFrame = -1;
 			m_ignoreFirstAudioFrame = true;
+
+			ReadNextPacket();
 
 			TryTracePosition();
 
@@ -632,13 +633,6 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 					if (minimalImageFrame >= 0){
 						if (m_packet.dts == AV_NOPTS_VALUE){
 							return FT_SKIPPED_IMAGE;
-						}
-
-						int processedFrame = int(m_packet.dts);
-						if (processedFrame != m_currentFrame){
-							istd::CChangeNotifier posNotifier(this, CF_MEDIA_POSITION);
-
-							m_currentFrame = processedFrame;
 						}
 
 						if (m_currentFrame < minimalImageFrame){
@@ -804,22 +798,41 @@ CLibAvVideoDecoderComp::FrameType CLibAvVideoDecoderComp::ReadNextFrame(
 			}
 		}
 
-		if (m_packet.data != NULL){
-			av_free_packet(&m_packet);
-			m_packet.data = NULL;
-			m_rawDataPtr = NULL;
-		}
-
-		// Read new packet
-		if ((av_read_frame(m_formatContextPtr, &m_packet) < 0) || (m_packet.data == NULL)){
+		if (!ReadNextPacket()){
 			return FT_ERROR;
 		}
-
-		m_bytesRemaining = m_packet.size;
-		m_rawDataPtr = m_packet.data;
 	}
 
 	return FT_ERROR;
+}
+
+
+
+bool CLibAvVideoDecoderComp::ReadNextPacket()
+{
+	if (m_packet.data != NULL){
+		av_free_packet(&m_packet);
+		m_packet.data = NULL;
+		m_rawDataPtr = NULL;
+	}
+
+	// Read new packet
+	if ((av_read_frame(m_formatContextPtr, &m_packet) >= 0) && (m_packet.data != NULL)){
+		int processedFrame = int(m_packet.dts);
+		if (processedFrame != m_currentFrame){
+			istd::CChangeNotifier posNotifier(this, CF_MEDIA_POSITION);
+
+			m_currentFrame = processedFrame;
+		}
+	}
+	else{
+		return false;
+	}
+
+	m_bytesRemaining = m_packet.size;
+	m_rawDataPtr = m_packet.data;
+
+	return true;
 }
 
 
@@ -902,14 +915,14 @@ int CLibAvVideoDecoderComp::FinishNextTask()
 
 		if (m_lastReadFrame >= 0){
 			nextImageFrame = m_lastReadFrame + 1;
-		}
 
-		if (m_minimalImageDistanceAttrPtr.IsValid() && (m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
-			AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
-			if (videoStreamPtr != NULL){
-				nextImageFrame = istd::Max(
-							m_lastReadFrame + int(*m_minimalImageDistanceAttrPtr * videoStreamPtr->time_base.den / videoStreamPtr->time_base.num),
-							nextImageFrame);
+			if (m_minimalImageDistanceAttrPtr.IsValid() && (m_formatContextPtr != 0) && (m_videoStreamId >= 0)){
+				AVStream* videoStreamPtr = m_formatContextPtr->streams[m_videoStreamId];
+				if (videoStreamPtr != NULL){
+					nextImageFrame = istd::Max(
+								m_lastReadFrame + int(*m_minimalImageDistanceAttrPtr * videoStreamPtr->time_base.den / videoStreamPtr->time_base.num),
+								nextImageFrame);
+				}
 			}
 		}
 
