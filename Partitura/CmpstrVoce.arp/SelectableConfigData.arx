@@ -7,13 +7,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        PackageOverview
+        ComposedParamsSet
       </Id>
       <PackageId>
-        CmpstrPck
+        BasePck
       </PackageId>
       <ComponentId>
-        PackageOverview
+        ComposedParamsSet
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -22,80 +22,58 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              ConfigFilePath
+              Parameters
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              ConfigFilePath
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ConfigFile
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ConsistencyInfo
+              ParametersId
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              ConsistencyInfo
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ConfigFile
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DocumentManager
+              SlaveSets
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              DocumentManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              EnvironmentManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              EnvironmentManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              QuickHelpViewer
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              QuickHelpViewer
+              SlaveSets
             </ExportId>
             <Data>
               <IsEnabled>
@@ -108,13 +86,13 @@
     </Element>
     <Element>
       <Id>
-        PackageOverviewDock
+        ConfigFile
       </Id>
       <PackageId>
-        QtGuiPck
+        BasePck
       </PackageId>
       <ComponentId>
-        DockWidgetGui
+        FileNameParam
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -126,29 +104,26 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              DockTitle
+              DefaultPath
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              DefaultPath
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Packages
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SlaveGui
+              PathType
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -158,7 +133,7 @@
                 true
               </IsEnabled>
               <Value>
-                PackageOverview
+                1
               </Value>
             </Data>
           </AttributeInfo>
@@ -168,62 +143,54 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
-        ibase::ICommandsProvider
+        imod::IModel
       </InterfaceId>
       <ComponentId>
-        PackageOverview
+        ComposedParamsSet
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        icmpstr::IAttributeSelectionObserver
+        iprm::IParamsSet
       </InterfaceId>
       <ComponentId>
-        PackageOverview
+        ComposedParamsSet
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IModelEditor
+        iser::ISerializable
       </InterfaceId>
       <ComponentId>
-        PackageOverview
+        ComposedParamsSet
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IObserver
+        istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        PackageOverview
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
-      </InterfaceId>
-      <ComponentId>
-        PackageOverview
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IMainWindowComponent
-      </InterfaceId>
-      <ComponentId>
-        PackageOverviewDock
+        ComposedParamsSet
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        ConfigFile
+      </ExportedId>
+      <ComponentId>
+        ConfigFile
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
-    
+    Compositor settings
   </Description>
   <Keywords>
-    
+    Compositor Settings Parameter Selection Switch Author='"Witold Gantzke"' Tag='Model'
   </Keywords>
 </Acf>

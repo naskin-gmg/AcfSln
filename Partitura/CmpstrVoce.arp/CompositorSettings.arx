@@ -4,16 +4,16 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="9">
     <Element>
       <Id>
-        ConfigFile
+        ConfigDataShadow
       </Id>
       <PackageId>
-        BasePck
+        CmpstrVoce
       </PackageId>
       <ComponentId>
-        FileNameParam
+        SelectableConfigData
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -22,7 +22,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               DefaultPath
@@ -42,12 +42,33 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ConfigFileShadower
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ManagerParamsSetShadower
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              PathType
+              ParamsManager
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -57,7 +78,85 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                ConfigsManager
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SelectionParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ConfigsManager
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShadowParamsSet
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ConfigDataShadow
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ConfigsManager
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ParamsManager
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ParamsSetFactory
+            </Id>
+            <Type>
+              icomp::CFactoryAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SelectableConfigData
               </Value>
             </Data>
           </AttributeInfo>
@@ -242,6 +341,27 @@
     </Element>
     <Element>
       <Id>
+        SelectableConfigData
+      </Id>
+      <PackageId>
+        CmpstrVoce
+      </PackageId>
+      <ComponentId>
+        SelectableConfigData
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         Settings
       </Id>
       <PackageId>
@@ -274,7 +394,7 @@
               </IsEnabled>
               <Values count="5">
                 <Value>
-                  ConfigFile
+                  ConfigsManager
                 </Value>
                 <Value>
                   PreviewCommandFile
@@ -370,7 +490,7 @@
         ConfigFile
       </ExportedId>
       <ComponentId>
-        ConfigFile
+        ConfigDataShadow/ConfigFile
       </ComponentId>
     </Component>
     <Component>

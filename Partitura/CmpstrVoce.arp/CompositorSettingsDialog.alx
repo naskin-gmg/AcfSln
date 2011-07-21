@@ -4,27 +4,16 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="11">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
-        ConfigFileGui
+        ConfigEditor
       </ComponentName>
       <X>
-        500
+        450
       </X>
       <X>
         275
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ConfigFileInfo
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        175
       </X>
     </Element>
     <Element>
@@ -109,7 +98,7 @@
         SettingsGui
       </ComponentName>
       <X>
-        200
+        175
       </X>
       <X>
         400

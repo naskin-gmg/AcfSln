@@ -4,38 +4,27 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
-        Application
+        ComposedParamsSet
       </ComponentName>
       <X>
-        600
+        500
       </X>
       <X>
-        400
+        425
       </X>
     </Element>
     <Element>
       <ComponentName>
-        CompositorTemplate
+        ConfigFile
       </ComponentName>
       <X>
-        234
+        500
       </X>
       <X>
-        639
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MainWindowComponents
-      </ComponentName>
-      <X>
-        950
-      </X>
-      <X>
-        175
+        300
       </X>
     </Element>
   </PositionMap>
