@@ -8,7 +8,7 @@
 #include "isys/CSectionBlocker.h"
 
 #include "iser/IArchive.h"
-#include "iser/CArchivetag.h"
+#include "iser/CArchiveTag.h"
 
 #include "iproc/IProcessor.h"
 

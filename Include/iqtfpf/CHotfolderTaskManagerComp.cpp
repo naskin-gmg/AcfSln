@@ -29,7 +29,7 @@ namespace iqtfpf
 // public methods
 
 CHotfolderTaskManagerComp::CHotfolderTaskManagerComp()
-	:m_directoryMonitorObserver(*this),
+	:m_fileSystemChangeStorageObserver(*this),
 	m_parametersObserver(*this),
 	m_isInitialized(false)
 {
@@ -67,59 +67,90 @@ ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetNextProcessingTask
 
 // protected methods
 
-void CHotfolderTaskManagerComp::OnFilesAddedEvent(const istd::CStringList& addedFiles)
+istd::CStringList CHotfolderTaskManagerComp::GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const
+{
+	int filesCount = storage.GetStorageItemsCount();
+
+	istd::CStringList files;
+	for (int index = 0; index < filesCount; index++){
+		int itemState = storage.GetItemState(index);
+
+		if ((itemState & fileState) != 0){
+			files.push_back(storage.GetItemPath(index));
+		}
+	}
+
+	return files;
+}
+
+
+void CHotfolderTaskManagerComp::OnFilesAddedEvent(const ifpf::IFileSystemChangeStorage& storage)
+{
+	AddFilesToProcessingQueue(GetFilesFromStorage(storage, ifpf::IFileSystemChangeStorage::CF_NEW));
+}
+
+
+void CHotfolderTaskManagerComp::OnFilesRemovedEvent(const ifpf::IFileSystemChangeStorage& storage)
+{
+	RemoveFilesFromProcessingQueue(GetFilesFromStorage(storage, ifpf::IFileSystemChangeStorage::CF_REMOVED));
+}
+
+
+void CHotfolderTaskManagerComp::OnFilesModifiedEvent(const ifpf::IFileSystemChangeStorage& storage)
+{
+	RestartProcessingQueueFiles(GetFilesFromStorage(storage, ifpf::IFileSystemChangeStorage::CF_MODIFIED));
+}
+
+
+void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const istd::CStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	I_ASSERT(!files.empty());
 
 	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
 
 		istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_ADDED);
 
-		for (int fileIndex = 0; fileIndex < int(addedFiles.size()); fileIndex++){
-			istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(addedFiles[fileIndex]);
-
-			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(addedFiles[fileIndex], outputFilePath);
+		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(files[fileIndex]);
 		}
 	}
 }
 
 
-void CHotfolderTaskManagerComp::OnFilesRemovedEvent(const istd::CStringList& removedFiles)
+void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const istd::CStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	I_ASSERT(!files.empty());
+
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+	istd::CChangeNotifier changePtr(NULL, ifpf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
 
-	bool processingItemsRemoved = false;
-
-	for (int fileIndex = 0; fileIndex < int(removedFiles.size()); fileIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(removedFiles[fileIndex]);
+	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(files[fileIndex]);
 		if (processingItemPtr != NULL){
+			changePtr.SetPtr(m_hotfolderProcessingInfoCompPtr.GetPtr());
+
 			m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
-
-			processingItemsRemoved = true;
 		}
-	}
-
-	// abort update operation:
-	if (!processingItemsRemoved){
-		changePtr.Abort();
 	}
 }
 
 
-void CHotfolderTaskManagerComp::OnFilesModifiedEvent(const istd::CStringList& modifiedFiles)
+void CHotfolderTaskManagerComp::RestartProcessingQueueFiles(const istd::CStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	I_ASSERT(!files.empty());
+
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
 	}
 
-	for (int fileIndex = 0; fileIndex < int(modifiedFiles.size()); fileIndex++){
-		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(modifiedFiles[fileIndex]);
+	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+		ifpf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(files[fileIndex]);
 		if (processingItemPtr != NULL){
 			processingItemPtr->SetProcessingState(iproc::IProcessor::TS_NONE);
 		}
@@ -136,6 +167,11 @@ void CHotfolderTaskManagerComp::OnComponentCreated()
 		m_hotfolderSettingsModelCompPtr->AttachObserver(&m_parametersObserver);
 	}
 
+	I_ASSERT(m_fileSystemChangeStorageModelCompPtr.IsValid());
+	if (m_fileSystemChangeStorageModelCompPtr.IsValid()){
+		m_fileSystemChangeStorageModelCompPtr->AttachObserver(&m_fileSystemChangeStorageObserver);
+	}
+
 	BaseClass::OnComponentCreated();
 
 	m_isInitialized = true;
@@ -147,6 +183,11 @@ void CHotfolderTaskManagerComp::OnComponentDestroyed()
 	I_ASSERT(m_hotfolderSettingsModelCompPtr.IsValid());
 	if (m_hotfolderSettingsModelCompPtr.IsValid() && m_hotfolderSettingsModelCompPtr->IsAttached(&m_parametersObserver)){
 		m_hotfolderSettingsModelCompPtr->DetachObserver(&m_parametersObserver);
+	}
+
+	I_ASSERT(m_fileSystemChangeStorageModelCompPtr.IsValid());
+	if (m_fileSystemChangeStorageModelCompPtr.IsValid() && m_fileSystemChangeStorageModelCompPtr->IsAttached(&m_fileSystemChangeStorageObserver)){
+		m_fileSystemChangeStorageModelCompPtr->DetachObserver(&m_fileSystemChangeStorageObserver);
 	}
 
 	m_directoryMonitorsMap.clear();
@@ -268,11 +309,6 @@ ifpf::IDirectoryMonitor* CHotfolderTaskManagerComp::AddDirectoryMonitor(const is
 
 			monitorCompPtr.PopPtr();
 
-			imod::IModel* directoryMonitorModelPtr = dynamic_cast<imod::IModel*>(directoryMonitorPtr);
-			I_ASSERT(directoryMonitorModelPtr != NULL);
-
-			directoryMonitorModelPtr->AttachObserver(&m_directoryMonitorObserver);
-
 			directoryMonitorPtr->StartObserving(monitoringParamsPtr);
 		}
 
@@ -314,7 +350,7 @@ void CHotfolderTaskManagerComp::RemoveDirectoryItems(const istd::CString& direct
 		}
 	}
 
-	OnFilesRemovedEvent(removedFiles);
+	RemoveFilesFromProcessingQueue(removedFiles);
 }
 
 
@@ -359,9 +395,9 @@ ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetItemFromId(const s
 }
 
 
-// public methods of embedded class DirectoryMonitorObserver
+// public methods of embedded class FileSystemChangeStorageObserver
 
-CHotfolderTaskManagerComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CHotfolderTaskManagerComp& parent)
+CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::FileSystemChangeStorageObserver(CHotfolderTaskManagerComp& parent)
 	:m_parent(parent)
 {
 }
@@ -369,20 +405,26 @@ CHotfolderTaskManagerComp::DirectoryMonitorObserver::DirectoryMonitorObserver(CH
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderTaskManagerComp::DirectoryMonitorObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	ifpf::IDirectoryMonitor* monitorPtr = dynamic_cast<ifpf::IDirectoryMonitor*>(modelPtr);
-	
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_ADDED) != 0){
-		m_parent.OnFilesAddedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_ADDED));
+	ifpf::IFileSystemChangeStorage* storagePtr = dynamic_cast<ifpf::IFileSystemChangeStorage*>(modelPtr);
+	I_ASSERT(storagePtr != NULL);
+	if (storagePtr == NULL){
+		m_parent.SendCriticalMessage(0, "File system changes storage is invalid", "Hotfolder manager");
+
+		return;
 	}
 
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_REMOVED) != 0){
-		m_parent.OnFilesRemovedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_REMOVED));
+	if ((updateFlags & ifpf::IFileSystemChangeStorage::CF_NEW) != 0){
+		m_parent.OnFilesAddedEvent(*storagePtr);
 	}
 
-	if (monitorPtr != NULL && (updateFlags & ifpf::IDirectoryMonitor::CF_FILES_MODIFIED) != 0){
-		m_parent.OnFilesModifiedEvent(monitorPtr->GetChangedFileItems(ifpf::IDirectoryMonitor::CF_FILES_MODIFIED));
+	if ((updateFlags & ifpf::IFileSystemChangeStorage::CF_REMOVED) != 0){
+		m_parent.OnFilesRemovedEvent(*storagePtr);
+	}
+
+	if ((updateFlags & ifpf::IFileSystemChangeStorage::CF_MODIFIED) != 0){
+		m_parent.OnFilesModifiedEvent(*storagePtr);
 	}
 }
 

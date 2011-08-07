@@ -24,7 +24,7 @@ namespace QtFpfPck
 
 
 typedef iqtfpf::CHotfolderProcessingComp HotfolderProcessor;
-typedef icomp::TModelCompWrap<iqtfpf::CDirectoryMonitorComp> DirectoryMonitor;
+typedef iqtfpf::CDirectoryMonitorComp DirectoryMonitor;
 typedef iqtfpf::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
 typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
 typedef iqtfpf::CFileNamingComp FileNaming;

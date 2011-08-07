@@ -59,6 +59,10 @@ I_EXPORT_COMPONENT(
 			"Parmeter for file (re)naming",
 			"File Processing Hotfolder Parameter");
 
+I_EXPORT_COMPONENT(
+			FileSystemChangeStorage,
+			"File storage component",
+			"File Processing Hotfolder Parameter");
 
 } // namespace FpfPck
 

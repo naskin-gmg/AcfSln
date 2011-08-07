@@ -24,6 +24,7 @@
 
 // AcfSln includes
 #include "ifpf/IFileNaming.h"
+#include "ifpf/IFileSystemChangeStorage.h"
 #include "ifpf/IHotfolderProcessingInfo.h"
 #include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IHotfolderTaskManager.h"
@@ -54,7 +55,9 @@ public:
 		I_ASSIGN_TO(m_hotfolderProcessingModelCompPtr, m_hotfolderProcessingInfoCompPtr, true);
 		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
 		I_ASSIGN(m_hotfolderSettingsModelCompPtr, "HotfolderSettingsModel", "Hotfolder settings", true, "HotfolderSettingsModel");
-	I_END_COMPONENT();
+		I_ASSIGN(m_fileSystemChangeStorageCompPtr, "FileSystemChangeStorage", "File storage used by directory monitor", true, "FileSystemChangeStorage");
+		I_ASSIGN_TO(m_fileSystemChangeStorageModelCompPtr, m_fileSystemChangeStorageCompPtr, true);
+		I_END_COMPONENT();
 
 	CHotfolderTaskManagerComp();
 
@@ -67,9 +70,15 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	void OnFilesAddedEvent(const istd::CStringList& addedFiles);
-	void OnFilesRemovedEvent(const istd::CStringList& removedFiles);
-	void OnFilesModifiedEvent(const istd::CStringList& modifiedFiles);
+	istd::CStringList GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const;
+
+	void OnFilesAddedEvent(const ifpf::IFileSystemChangeStorage& storage);
+	void OnFilesRemovedEvent(const ifpf::IFileSystemChangeStorage& storage);
+	void OnFilesModifiedEvent(const ifpf::IFileSystemChangeStorage& storage);
+
+	void AddFilesToProcessingQueue(const istd::CStringList& files);
+	void RemoveFilesFromProcessingQueue(const istd::CStringList& files);
+	void RestartProcessingQueueFiles(const istd::CStringList& files);
 
 	/**
 		Synchronize the hotfolder with its static parameters.
@@ -127,10 +136,10 @@ private:
 	/**
 		Internal observer of the changes in the input directories.
 	*/
-	class DirectoryMonitorObserver: public imod::CMultiModelObserverBase
+	class FileSystemChangeStorageObserver: public imod::CMultiModelObserverBase
 	{
 	public:
-		DirectoryMonitorObserver(CHotfolderTaskManagerComp& parent);
+		FileSystemChangeStorageObserver(CHotfolderTaskManagerComp& parent);
 
 		// reimplemented (imod::IObserver)
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -161,11 +170,13 @@ private:
 	I_REF(iprm::IParamsManager, m_inputDirectoriesManagerCompPtr);
 	I_REF(imod::IModel, m_hotfolderSettingsModelCompPtr);
 	I_FACT(ifpf::IDirectoryMonitor, m_monitorFactCompPtr);
+	I_REF(ifpf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
+	I_REF(imod::IModel, m_fileSystemChangeStorageModelCompPtr);
 
 	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;
 
-	DirectoryMonitorObserver m_directoryMonitorObserver;
+	FileSystemChangeStorageObserver m_fileSystemChangeStorageObserver;
 	ParametersObserver m_parametersObserver;
 
 	bool m_isInitialized;

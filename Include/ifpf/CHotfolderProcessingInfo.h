@@ -42,7 +42,9 @@ public:
 	virtual bool ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const;
 
 	// reimplemented (ifpf::IHotfolderProcessingInfo)
-	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath);
+	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(
+				const istd::CString& inputFilePath,
+				const istd::CString& outputFilePath = istd::CString());
 	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr);
 	virtual int GetProcessingItemsCount() const;
 	virtual ifpf::IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const;

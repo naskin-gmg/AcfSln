@@ -227,6 +227,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileSystemChangeStorage.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderLoaderComp.cpp"
 				>
 			</File>
@@ -284,6 +288,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileSystemChangeStorage.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CHotfolderLoaderComp.h"
 				>
 			</File>
@@ -337,6 +345,10 @@
 			</File>
 			<File
 				RelativePath="..\IFileNamingParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IFileSystemChangeStorage.h"
 				>
 			</File>
 			<File

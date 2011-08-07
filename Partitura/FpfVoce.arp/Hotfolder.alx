@@ -1,29 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1606
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          275
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="3">
@@ -32,10 +10,10 @@
         HotfolderProcessing
       </ComponentName>
       <X>
-        575
+        600
       </X>
       <X>
-        350
+        225
       </X>
     </Element>
     <Element>
@@ -54,7 +32,7 @@
         HotfolderSettings
       </ComponentName>
       <X>
-        900
+        950
       </X>
       <X>
         350

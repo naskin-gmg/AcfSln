@@ -24,42 +24,14 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_directoryMonitorParamsModelPtr(NULL),
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
-	m_directoryPendingChangesCounter(1)
+	m_directoryPendingChangesCounter(1),
+	m_lockChanges(false)
 {
 	connect(&m_directoryWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChangeNotification(const QString&)));
 }
 
 
 // reimplemented (ifpf::IDirectoryMonitor)
-
-istd::CStringList CDirectoryMonitorComp::GetChangedFileItems(int changeFlags) const
-{
-	isys::CSectionBlocker block(&m_lock);
-	
-	istd::CStringList changedFilesList;
-	if ((changeFlags & CF_FILES_ADDED) != 0){
-		istd::CStringList addedFiles = iqt::GetCStringList(m_folderChanges.addedFiles);
-		changedFilesList.insert(changedFilesList.end(), addedFiles.begin(), addedFiles.end()); 
-	}
-
-	if ((changeFlags & CF_FILES_REMOVED) != 0){
-		istd::CStringList removedFiles = iqt::GetCStringList(m_folderChanges.removedFiles);
-		changedFilesList.insert(changedFilesList.end(), removedFiles.begin(), removedFiles.end()); 
-	}
-
-	if ((changeFlags & CF_FILES_MODIFIED) != 0){
-		istd::CStringList modifiedFiles = iqt::GetCStringList(m_folderChanges.modifiedFiles);
-		changedFilesList.insert(changedFilesList.end(), modifiedFiles.begin(), modifiedFiles.end()); 
-	}
-
-	if ((changeFlags & CF_FILES_ATTRIBUTE_CHANGED) != 0){
-		istd::CStringList attributeChangedFiles = iqt::GetCStringList(m_folderChanges.attributeChangedFiles);
-		changedFilesList.insert(changedFilesList.end(), attributeChangedFiles.begin(), attributeChangedFiles.end()); 
-	}
-
-	return changedFilesList;
-}
-
 
 bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 {
@@ -94,22 +66,6 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 void CDirectoryMonitorComp::StopObserving()
 {
 	StopObserverThread();
-}
-
-
-// reimplemented (ibase::IFileListProvider)
-
-istd::CStringList CDirectoryMonitorComp::GetFileList() const
-{
-	istd::CStringList fileList;
-
-	isys::CSectionBlocker block(&m_lock);
-
-	for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
-		fileList.push_back(m_directoryFiles[fileIndex].GetFilePath());
-	}
-
-	return fileList;
 }
 
 
@@ -154,7 +110,7 @@ void CDirectoryMonitorComp::run()
 	
 	while (!m_finishThread){
 		bool needStateUpdate = (updateTimer.GetElapsed() >= m_poolingFrequency);
-		if (!needStateUpdate){
+		if (!needStateUpdate || m_lockChanges){
 			msleep(100);
 
 			continue;
@@ -177,6 +133,7 @@ void CDirectoryMonitorComp::run()
 		int observingItemTypes = m_observingItemTypes;
 		int pendingChangesCounter = m_directoryPendingChangesCounter;
 		m_directoryPendingChangesCounter = 0;
+		m_lockChanges = true;
 
 		m_lock.Leave();
 
@@ -313,23 +270,22 @@ void CDirectoryMonitorComp::run()
 		int changeFlags = 0;
 
 		if (!addedFiles.isEmpty()){
-			changeFlags |= CF_FILES_ADDED;
+			changeFlags |= ifpf::IFileSystemChangeStorage::CF_NEW;
 		}
 
 		if (!removedFiles.isEmpty()){
-			changeFlags |= CF_FILES_REMOVED;
+			changeFlags |= ifpf::IFileSystemChangeStorage::CF_REMOVED;
 		}
 
 		if (!modifiedFiles.isEmpty()){
-			changeFlags |= CF_FILES_MODIFIED;
+			changeFlags |= ifpf::IFileSystemChangeStorage::CF_MODIFIED;
 		}
 
 		if (!attributeChangedFiles.isEmpty()){
-			changeFlags |= CF_FILES_ATTRIBUTE_CHANGED;
+			changeFlags |= ifpf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED;
 		}
 
 		Q_EMIT FolderChanged(changeFlags);
-		
 		updateTimer.Start();
 
 		I_IF_DEBUG(
@@ -349,14 +305,48 @@ void CDirectoryMonitorComp::run()
 
 void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 {
-	if ((changeFlags & CF_SOME_CHANGES) != 0){
-		// notify observers:
-		istd::CChangeNotifier changePtr(this, changeFlags);
+	isys::CSectionBlocker block(&m_lock);
 
-		changePtr.Reset();
+	I_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
+	if (m_fileSystemChangeStorageCompPtr.IsValid()){
+		if ((changeFlags & ifpf::IFileSystemChangeStorage::CF_NEW) != 0){
+			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_NEW);
 
+			for (int fileIndex = 0; fileIndex < m_folderChanges.addedFiles.size(); fileIndex++){
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.addedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_NEW);
+			}
+		}
+
+		if ((changeFlags & ifpf::IFileSystemChangeStorage::CF_REMOVED) != 0){
+			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_REMOVED);
+
+			for (int fileIndex = 0; fileIndex < m_folderChanges.removedFiles.size(); fileIndex++){
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.removedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_REMOVED);
+			}
+		}
+
+		if ((changeFlags & ifpf::IFileSystemChangeStorage::CF_MODIFIED) != 0){
+			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
+
+			for (int fileIndex = 0; fileIndex < m_folderChanges.modifiedFiles.size(); fileIndex++){
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.modifiedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
+			}
+		}
+
+		if ((changeFlags & ifpf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED) != 0){
+			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
+
+			for (int fileIndex = 0; fileIndex < m_folderChanges.attributeChangedFiles.size(); fileIndex++){
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.attributeChangedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
+			}
+		}
+	}
+
+	if ((changeFlags & ifpf::IFileSystemChangeStorage::CF_SOME_CHANGES) != 0){
 		UpdateMonitoringSession();
 	}
+
+	m_lockChanges = false;
 }
 
 
@@ -403,6 +393,12 @@ void CDirectoryMonitorComp::StartObserverThread()
 {
 	m_finishThread = false;
 
+	if (!m_fileSystemChangeStorageCompPtr.IsValid()){
+		SendWarningMessage(0, "Directory observation can not be started, because the file storage component coud not be initialized");
+
+		return;
+	}
+
 	QFileInfo fileInfo(m_currentDirectory.absolutePath());
 	if (fileInfo.exists()){
 		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "DirectoryMonitor");
@@ -427,11 +423,18 @@ void CDirectoryMonitorComp::StopObserverThread()
 
 void CDirectoryMonitorComp::ResetFiles()
 {
+	isys::CSectionBlocker block(&m_lock);
+
 	m_directoryFiles.clear();
+
 	m_folderChanges.addedFiles.clear();
 	m_folderChanges.attributeChangedFiles.clear();
 	m_folderChanges.modifiedFiles.clear();
 	m_folderChanges.removedFiles.clear();
+
+	if (m_fileSystemChangeStorageCompPtr.IsValid()){
+		m_fileSystemChangeStorageCompPtr->ResetStorage();
+	}
 }
 
 

@@ -1,41 +1,30 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1678
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          301
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         DirectoryMonitor
       </ComponentName>
       <X>
-        275
+        175
       </X>
       <X>
-        475
+        350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileSystemChangeStorage
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        350
       </X>
     </Element>
     <Element>
@@ -46,7 +35,7 @@
         600
       </X>
       <X>
-        300
+        600
       </X>
     </Element>
     <Element>

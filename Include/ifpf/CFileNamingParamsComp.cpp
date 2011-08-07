@@ -6,7 +6,7 @@
 #include "istd/TChangeNotifier.h"
 
 #include "iser/IArchive.h"
-#include "iser/CArchivetag.h"
+#include "iser/CArchiveTag.h"
 
 
 namespace ifpf

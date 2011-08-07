@@ -1,32 +1,10 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1678
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          301
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         DirectoryMonitor
@@ -44,7 +22,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DirectoryMonitorParamsId
@@ -85,6 +63,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              FileSystemChangeStorage
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileSystemChangeStorage
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Log
             </Id>
             <Type>
@@ -115,6 +112,27 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileSystemChangeStorage
+      </Id>
+      <PackageId>
+        FpfPck
+      </PackageId>
+      <ComponentId>
+        FileSystemChangeStorage
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -223,7 +241,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               DirectoryMontorFactory
@@ -259,6 +277,25 @@
               </IsEnabled>
               <Value>
                 OutputFileRenaming
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileSystemChangeStorage
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileSystemChangeStorage
               </Value>
             </Data>
           </AttributeInfo>

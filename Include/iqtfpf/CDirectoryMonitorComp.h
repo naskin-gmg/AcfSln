@@ -25,6 +25,7 @@
 
 
 // AcfSln includes
+#include "ifpf/IFileSystemChangeStorage.h"
 #include "ifpf/IDirectoryMonitor.h"
 #include "ifpf/IDirectoryMonitorParams.h"
 #include "ifpf/IMonitoringSessionManager.h"
@@ -53,6 +54,7 @@ public:
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Default parameter set for the directory monitoring", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
+		I_ASSIGN(m_fileSystemChangeStorageCompPtr, "FileSystemChangeStorage", "File storage", true, "FileSystemChangeStorage");
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathParamsId", "Parameter ID of the path to be observed in the parameter set", true, "DirectoryPathParamsId");
 		I_ASSIGN(m_directoryMonitorParamsIdAttrPtr, "DirectoryMonitorParamsId", "ID of the directory observing parameters in the parameter set", true, "DirectoryMonitorParamsId");
 		I_ASSIGN(m_autoStartAttrPtr, "AutoStart", "If enabled, start the directory monitoring after initialization", false, false);
@@ -61,12 +63,8 @@ public:
 	CDirectoryMonitorComp();
 
 	// reimplemented (ifpf::IDirectoryMonitor)
-	virtual istd::CStringList GetChangedFileItems(int changeFlags) const;
 	virtual bool StartObserving(const iprm::IParamsSet* paramsSetPtr = NULL);
 	virtual void StopObserving();
-
-	// reimplemented (ibase::IFileListProvider)
-	virtual istd::CStringList GetFileList() const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -177,9 +175,12 @@ private:
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(ifpf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
+	I_REF(ifpf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
 	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
 	I_ATTR(istd::CString, m_directoryMonitorParamsIdAttrPtr);
 	I_ATTR(bool, m_autoStartAttrPtr);
+
+	bool m_lockChanges;
 };
 
 

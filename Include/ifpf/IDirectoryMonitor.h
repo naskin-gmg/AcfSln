@@ -3,11 +3,10 @@
 
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include "istd/IPolymorphic.h"
 #include "istd/CString.h"
-#include "iprm/IParamsSet.h"
 
-#include "ibase/IFileListProvider.h"
+#include "iprm/IParamsSet.h"
 
 
 namespace ifpf
@@ -19,46 +18,9 @@ namespace ifpf
 	Observers of this interface are notified about all changes made in the monitored directory, 
 	such as removing or adding files, changes in file contents or file attributes.
 */
-class IDirectoryMonitor: virtual public ibase::IFileListProvider
+class IDirectoryMonitor: virtual public istd::IPolymorphic
 {
 public:
-	/**
-		File system change flags.
-	*/
-	enum ChangeFlags
-	{
-		/**
-			File(s) were added.
-		*/
-		CF_FILES_ADDED = 0x1000000,
-
-		/**
-			File(s) were removed.
-		*/
-		CF_FILES_REMOVED = 0x2000000,
-
-		/**
-			File(s) were modified.
-		*/
-		CF_FILES_MODIFIED = 0x4000000,
-
-		/**
-			File's attributes were changed.
-		*/
-		CF_FILES_ATTRIBUTE_CHANGED = 0x8000000,
-
-		/**
-			All possible changes
-		*/
-		CF_SOME_CHANGES = CF_FILES_ADDED | CF_FILES_REMOVED | CF_FILES_MODIFIED | CF_FILES_ATTRIBUTE_CHANGED
-	};
-
-	/**
-		Get the list of changed files according to the given flags
-		\sa ChangeFlags
-	*/
-	virtual istd::CStringList GetChangedFileItems(int changeFlags) const = 0;
-
 	/**
 		Start observing process.
 		If the \c paramsSetPtr is not equal NULL, the observing parameter are get from this params set,
