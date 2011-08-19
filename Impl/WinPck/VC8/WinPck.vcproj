@@ -17,6 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
+			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			UseOfMFC="0"
@@ -190,3 +192,6 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
+
+
+

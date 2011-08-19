@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="inat"
 	ProjectGUID="{91007D75-2F2B-4B26-A1BB-260181E8DAF3}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
