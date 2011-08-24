@@ -43,8 +43,8 @@ public:
 
 	// reimplemented (imeas::INumericParams)
 	virtual const INumericConstraints* GetConstraints() const;
-	virtual imath::CVarVector GetFilterLengths() const;
-	virtual bool SetFilterLengths(const imath::CVarVector& lengths);
+	virtual imath::CVarVector GetValues() const;
+	virtual bool SetValues(const imath::CVarVector& lengths);
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetFilterDimensionsCount() const;

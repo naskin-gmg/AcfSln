@@ -25,13 +25,13 @@ const INumericConstraints* CNumericParamsComp::GetConstraints() const
 }
 
 
-imath::CVarVector CNumericParamsComp::GetFilterLengths() const
+imath::CVarVector CNumericParamsComp::GetValues() const
 {
 	return m_filterLengts;
 }
 
 
-bool CNumericParamsComp::SetFilterLengths(const imath::CVarVector& lengths)
+bool CNumericParamsComp::SetValues(const imath::CVarVector& lengths)
 {
 	if (m_filterLengts != lengths){
 		const INumericConstraints* constraintsPtr = GetConstraints();

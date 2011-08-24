@@ -32,7 +32,7 @@ void CNumericParamsGuiComp::UpdateModel() const
 	imeas::INumericParams* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
 
-	imath::CVarVector filterLengths = objectPtr->GetFilterLengths();
+	imath::CVarVector filterLengths = objectPtr->GetValues();
 
 	if (filterLengths.GetElementsCount() >= 1){
 		filterLengths[0] = FilterWidthSlider->value() / m_widthScaleFactor;
@@ -42,10 +42,10 @@ void CNumericParamsGuiComp::UpdateModel() const
 		filterLengths[1] = FilterHeightSlider->value() / m_heightScaleFactor;
 	}
 
-	if (filterLengths != objectPtr->GetFilterLengths()){
+	if (filterLengths != objectPtr->GetValues()){
 		istd::CChangeNotifier notifier(objectPtr);
 
-		objectPtr->SetFilterLengths(filterLengths);
+		objectPtr->SetValues(filterLengths);
 	}
 }
 
@@ -74,7 +74,7 @@ void CNumericParamsGuiComp::OnGuiModelAttached()
 			filterDimensionsCount = constraintsPtr->GetFilterDimensionsCount();
 		}
 		else{
-			const imath::CVarVector& filterLengths = objectPtr->GetFilterLengths();
+			const imath::CVarVector& filterLengths = objectPtr->GetValues();
 			filterDimensionsCount = filterLengths.GetElementsCount();
 		}
 
@@ -157,7 +157,7 @@ void CNumericParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 	imeas::INumericParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		const imath::CVarVector& filterLengths = objectPtr->GetFilterLengths();
+		const imath::CVarVector& filterLengths = objectPtr->GetValues();
 
 		int filterDimensionsCount = filterLengths.GetElementsCount();
 

@@ -25,12 +25,12 @@ public:
 	/**
 		Get filter length for each dimension.
 	*/
-	virtual imath::CVarVector GetFilterLengths() const = 0;
+	virtual imath::CVarVector GetValues() const = 0;
 
 	/**
 		Set filter length for each dimension.
 	*/
-	virtual bool SetFilterLengths(const imath::CVarVector& lengths) = 0;
+	virtual bool SetValues(const imath::CVarVector& lengths) = 0;
 };
 
 
