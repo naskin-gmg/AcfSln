@@ -185,11 +185,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralUnitInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHistogramStatisticsProcessorComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CMeasurementRange.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericParamsComp.cpp"
 				>
 			</File>
 			<File
@@ -218,11 +226,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralUnitInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CHistogramStatisticsProcessorComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CMeasurementRange.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericParamsComp.h"
 				>
 			</File>
 			<File
@@ -255,6 +271,14 @@
 			</File>
 			<File
 				RelativePath="..\imeas.h"
+				>
+			</File>
+			<File
+				RelativePath="..\INumericConstraints.h"
+				>
+			</File>
+			<File
+				RelativePath="..\INumericParams.h"
 				>
 			</File>
 			<File

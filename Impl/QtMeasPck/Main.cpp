@@ -37,6 +37,11 @@ I_EXPORT_COMPONENT(
 			"Data statistics GUI",
 			"Statistics Histogram Data" IM_TAG("GUI"));
 
+I_EXPORT_COMPONENT(
+			NumericParamsGui,
+			"Editor for numeric parameters",
+			"Numeric Values Filter Ranges Parameter Editor");
+
 
 } // namespace QtMeasPck
 

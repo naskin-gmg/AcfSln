@@ -59,6 +59,11 @@ I_EXPORT_COMPONENT(
 			"Processor for calculation of statistics",
 			"Histogram Statistics" IM_TAG("Processing"));
 
+I_EXPORT_COMPONENT(
+			NumericParams,
+			"Rectangular filter parameter",
+			"Filter Image Processing Parameter");
+
 
 } // namespace MeasPck
 

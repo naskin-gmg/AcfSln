@@ -14,6 +14,7 @@
 #include "imeas/CDataStatistics.h"
 #include "imeas/CDataSequenceStatistics.h"
 #include "imeas/CHistogramStatisticsProcessorComp.h"
+#include "imeas/CNumericParamsComp.h"
 
 
 /**
@@ -63,6 +64,7 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 			imeas::IDataSequenceStatistics,
 			iser::ISerializable> > DataSequenceStatistics;
 typedef imeas::CHistogramStatisticsProcessorComp HistogramStatisticsProcessor;
+typedef icomp::TModelCompWrap<imeas::CNumericParamsComp> NumericParams;
 
 
 } // namespace MeasPck

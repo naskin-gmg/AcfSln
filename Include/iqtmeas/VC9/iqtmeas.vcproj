@@ -178,6 +178,10 @@
 				RelativePath="..\CDataStatisticsGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CNumericParamsGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -190,6 +194,10 @@
 			</File>
 			<File
 				RelativePath="..\CDataStatisticsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -218,11 +226,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CNumericParamsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\generated\ui_CDataStatisticsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CNumericParamsGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -237,6 +253,10 @@
 				RelativePath="..\CDataStatisticsGuiComp.ui"
 				>
 			</File>
+			<File
+				RelativePath="..\CNumericParamsGuiComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="MOC"
@@ -247,6 +267,10 @@
 			</File>
 			<File
 				RelativePath="..\CDataStatisticsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericParamsGuiComp.moc"
 				>
 			</File>
 		</Filter>

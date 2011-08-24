@@ -10,6 +10,7 @@
 // ACF-Solutions includes
 #include "iqtmeas/CDataSequenceViewComp.h"
 #include "iqtmeas/CDataStatisticsGuiComp.h"
+#include "iqtmeas/CNumericParamsGuiComp.h"
 
 
 /**
@@ -21,6 +22,7 @@ namespace QtMeasPck
 
 typedef iqtmeas::CDataSequenceViewComp DataSequenceView;
 typedef iqtmeas::CDataStatisticsGuiComp DataStatisticsGui;
+typedef iqtmeas::CNumericParamsGuiComp NumericParamsGui;
 
 
 } // namespace QtMeasPck
