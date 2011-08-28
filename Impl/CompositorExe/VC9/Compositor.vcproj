@@ -147,6 +147,7 @@
 			/>
 			<Tool
 				Name="Arxc"
+				AdditionalOptions="-v"
 				ConfigFile="../../../Config/Core.xpc"
 			/>
 			<Tool
@@ -258,6 +259,14 @@
 			<File
 				RelativePath="..\Compositor.arx"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="Arxc"
+						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Compositor.qrc"
