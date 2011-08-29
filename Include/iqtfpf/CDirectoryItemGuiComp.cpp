@@ -11,14 +11,14 @@ namespace iqtfpf
 // public methods
 
 CDirectoryItemGuiComp::CDirectoryItemGuiComp()
-	:m_setIndex(-1)
+:	m_setIndex(-1)
 {
 }
 
 
 // reimplemented (iprm::ISelectionParam)
 
-const iprm::ISelectionConstraints* CDirectoryItemGuiComp::GetConstraints() const
+const iprm::ISelectionConstraints* CDirectoryItemGuiComp::GetSelectionConstraints() const
 {
 	return NULL;
 }

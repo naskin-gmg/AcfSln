@@ -67,11 +67,11 @@ void CNumericParamsGuiComp::OnGuiModelAttached()
 	if (objectPtr != NULL){
 		UpdateBlocker updateBlocker(this);
 
-		const imeas::INumericConstraints* constraintsPtr = objectPtr->GetConstraints();
+		const imeas::INumericConstraints* constraintsPtr = objectPtr->GetNumericConstraints();
 
 		int filterDimensionsCount = 0;
 		if (constraintsPtr != NULL){
-			filterDimensionsCount = constraintsPtr->GetFilterDimensionsCount();
+			filterDimensionsCount = constraintsPtr->GetNumericValuesCount();
 		}
 		else{
 			const imath::CVarVector& filterLengths = objectPtr->GetValues();
@@ -81,9 +81,9 @@ void CNumericParamsGuiComp::OnGuiModelAttached()
 		if (filterDimensionsCount >= 1){
 			QString unitName;
 			if (constraintsPtr != NULL){
-				FilterWidthLabel->setText(iqt::GetQString(constraintsPtr->GetFilterDescription(0)));
+				FilterWidthLabel->setText(iqt::GetQString(constraintsPtr->GetNumericValueDescription(0)));
 
-				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetFilterUnitInfo(0);
+				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(0);
 				unitName = iqt::GetQString(unitInfo.GetUnitName());
 
 				m_widthScaleFactor = unitInfo.GetDisplayMultiplicationFactor();
@@ -115,9 +115,9 @@ void CNumericParamsGuiComp::OnGuiModelAttached()
 		if (filterDimensionsCount >= 2){
 			QString unitName;
 			if (constraintsPtr != NULL){
-				FilterHeightLabel->setText(iqt::GetQString(constraintsPtr->GetFilterDescription(1)));
+				FilterHeightLabel->setText(iqt::GetQString(constraintsPtr->GetNumericValueDescription(1)));
 
-				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetFilterUnitInfo(1);
+				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(1);
 				unitName = iqt::GetQString(unitInfo.GetUnitName());
 
 				m_heightScaleFactor = unitInfo.GetDisplayMultiplicationFactor();

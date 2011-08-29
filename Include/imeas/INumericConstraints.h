@@ -19,19 +19,19 @@ class INumericConstraints: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Get number of dimensions will be filtered.
+		Get number of expected numeric values.
 	*/
-	virtual int GetFilterDimensionsCount() const = 0;
+	virtual int GetNumericValuesCount() const = 0;
 
 	/**
 		Get description of some filter element.
 	*/
-	virtual istd::CString GetFilterDescription(int dimension) const = 0;
+	virtual istd::CString GetNumericValueDescription(int index) const = 0;
 
 	/**
 		Get range of possible filter value for specified dimension.
 	*/
-	virtual const imeas::IUnitInfo& GetFilterUnitInfo(int dimension) const = 0;
+	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const = 0;
 };
 
 

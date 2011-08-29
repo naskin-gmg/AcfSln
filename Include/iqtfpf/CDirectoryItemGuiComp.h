@@ -40,7 +40,7 @@ public:
 	CDirectoryItemGuiComp();
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const iprm::ISelectionConstraints* GetConstraints() const;
+	virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
 	virtual iprm::ISelectionParam* GetActiveSubselection() const;

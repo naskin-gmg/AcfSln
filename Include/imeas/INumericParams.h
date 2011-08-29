@@ -20,7 +20,7 @@ public:
 	/**
 		Get parameter constraints describing possible parameter values.
 	*/
-	virtual const INumericConstraints* GetConstraints() const = 0;
+	virtual const INumericConstraints* GetNumericConstraints() const = 0;
 
 	/**
 		Get filter length for each dimension.
