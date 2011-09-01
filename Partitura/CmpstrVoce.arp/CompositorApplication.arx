@@ -1,7 +1,29 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          369
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="4">
@@ -22,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="21">
+        <AttributeInfoMap count="20">
           <AttributeInfo>
             <Id>
               AllowViewRepeating
@@ -247,6 +269,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              MaxRecentFiles
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                20
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               ProductName
             </Id>
             <Type>
@@ -261,25 +302,6 @@
               </IsEnabled>
               <Value>
                 ACF-Solutions
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                
               </Value>
             </Data>
           </AttributeInfo>
@@ -337,25 +359,6 @@
               </IsEnabled>
               <Value>
                 false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveVersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -436,7 +439,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -472,25 +475,6 @@
               </IsEnabled>
               <Value>
                 TranslationManager
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application
               </Value>
             </Data>
           </AttributeInfo>
@@ -554,26 +538,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -602,7 +567,7 @@
         iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        Application
+        VersionInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
