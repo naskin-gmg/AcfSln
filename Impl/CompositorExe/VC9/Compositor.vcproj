@@ -147,8 +147,9 @@
 			/>
 			<Tool
 				Name="Arxc"
-				AdditionalOptions="-v"
+				AdditionalOptions=""
 				ConfigFile="../../../Config/Core.xpc"
+				Verbose="true"
 			/>
 			<Tool
 				Name="QT Designer Form"
