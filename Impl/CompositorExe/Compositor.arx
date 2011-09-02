@@ -1,7 +1,29 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          369
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="3">
@@ -94,7 +116,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DocumentManager
@@ -130,25 +152,6 @@
               </IsEnabled>
               <Value>
                 MainWindowComponents/LogDock
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainWindow
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application
               </Value>
             </Data>
           </AttributeInfo>
@@ -253,7 +256,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -308,25 +311,6 @@
               </IsEnabled>
               <Value>
                 CompositorTemplate
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Model
               </Value>
             </Data>
           </AttributeInfo>
@@ -463,9 +447,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Compositor application used to graphical edit ACF registry files
+    Compositor tool - graphical editor for ACF registry files
   </Description>
   <Keywords>
-    ACF Compositor Editor ARX
+    ACF Editor ARX Company='ImagingTools' Project='ACF-Solutions' Author='"Witold Gantzke" "Kirill Lepskiy"' Category='Tool' Tag='Compositor'
   </Keywords>
 </Acf>
