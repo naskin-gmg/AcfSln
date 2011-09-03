@@ -392,30 +392,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
-					/>
-				</FileConfiguration>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
