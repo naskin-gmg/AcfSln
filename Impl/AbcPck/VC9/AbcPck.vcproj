@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -38,7 +38,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
@@ -64,8 +63,6 @@
 				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtService.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTSERVICEDIR)\Lib\$(ConfigurationName)VC9&quot;"
-				GenerateDebugInformation="false"
-				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -92,7 +89,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -111,7 +108,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTSERVICEDIR)\Src&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
@@ -135,10 +131,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qwt3dlib.lib AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtService.lib"
-				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QWT3DDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTSERVICEDIR)\Lib\$(ConfigurationName)VC9&quot;"
-				GenerateDebugInformation="true"
-				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

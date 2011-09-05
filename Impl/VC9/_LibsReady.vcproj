@@ -5,6 +5,7 @@
 	Name="_LibsReady"
 	ProjectGUID="{A3BB8D04-552D-4FD4-B799-18187FB17C2C}"
 	Keyword="MakeFileProj"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -19,7 +20,7 @@
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="10"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,7 +41,7 @@
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="10"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -64,6 +65,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
-
