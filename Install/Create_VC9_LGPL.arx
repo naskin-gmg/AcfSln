@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1708
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          315
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -44,26 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VersionInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationType
@@ -131,6 +112,39 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              OtherExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="5">
+                <Value>
+                  Generated
+                </Value>
+                <Value>
+                  generated
+                </Value>
+                <Value>
+                  Xcd
+                </Value>
+                <Value>
+                  QMake
+                </Value>
+                <Value>
+                  VC8
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               ProductName
             </Id>
             <Type>
@@ -146,6 +160,39 @@
               <Value>
                 ACF-Solutions
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SourceExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="5">
+                <Value>
+                  Generated
+                </Value>
+                <Value>
+                  generated
+                </Value>
+                <Value>
+                  Xcd
+                </Value>
+                <Value>
+                  QMake
+                </Value>
+                <Value>
+                  VC8
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -187,26 +234,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF-Solutions_LGPL
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               IsExtensionUsed
