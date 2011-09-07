@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-**	Copyright (c) 2007-2010 Witold Gantzke & Kirill Lepskiy
+**	Copyright (c) 2007-2011 Witold Gantzke & Kirill Lepskiy
 **
 **	This file is part of the ACF-Solutions Toolkit.
 **
@@ -15,7 +15,7 @@
 **	contact us at info@imagingtools.de.
 **
 ** 	See http://www.imagingtools.de, write info@imagingtools.de or contact
-**  by Skype to ACF_infoline for further information about the ACF-Solutions.
+**	by Skype to ACF_infoline for further information about the ACF-Solutions.
 **
 ********************************************************************************/
 
