@@ -1,4 +1,4 @@
-include($(ACFDIR)/Config/QMake/IncludeConfig.pri)
+include($(ACFDIR)/Config/QMake/StaticConfig.pri)
 
 TARGET = ilibav
 
