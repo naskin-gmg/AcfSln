@@ -24,7 +24,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -68,8 +68,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
@@ -112,13 +110,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -162,7 +160,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="0"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
@@ -203,7 +200,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -390,30 +387,6 @@
 			<File
 				RelativePath="..\IMonitoringSessionManager.h"
 				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfSlnVoce.arp"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>
