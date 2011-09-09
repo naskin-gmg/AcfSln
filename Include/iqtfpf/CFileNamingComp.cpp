@@ -39,7 +39,7 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 	// calculate the new extension:
 	if (m_fileTypeInfoCompPtr.IsValid()){
 		istd::CStringList supportedExtensions;
-		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_NO_LOADING);
+		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_SAVE);
 
 		istd::CStringList::const_iterator inputFoundIter = std::find(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
 		if (inputFoundIter == supportedExtensions.end()){

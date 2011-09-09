@@ -18,7 +18,7 @@ namespace ifpf
 
 int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
 {
-	if (!IsOperationSupported(&data, &filePath, QF_NO_SAVING, false)){
+	if (!IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		return StateFailed;
 	}
 
@@ -43,7 +43,7 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 
 int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	if (!IsOperationSupported(&data, &filePath, QF_NO_LOADING, false)){
+	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
 	}
 

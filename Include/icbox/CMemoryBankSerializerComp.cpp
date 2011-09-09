@@ -42,7 +42,7 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 		return false;
 	}
 
-	if ((flags & (QF_FILE_ONLY | QF_DIRECTORY_ONLY)) != 0){
+	if ((flags & QF_ANONYMOUS) == 0){
 		return false;
 	}
 
@@ -55,7 +55,7 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 		return false;
 	}
 
-	if (		((flags & QF_NO_LOADING) != 0) &&
+	if (		((flags & QF_SAVE) != 0) &&
 				(*m_memoryBankIdAttrPtr == 2) &&
 				(!m_accessKeyAttrPtr.IsValid() || !*m_isAdminKeyAttrPtr)){
 		if (!beQuiet){
@@ -71,7 +71,7 @@ bool CMemoryBankSerializerComp::IsOperationSupported(
 
 int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CString& /*filePath*/) const
 {
-	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_NO_SAVING | QF_ANONYMOUS_ONLY, false)){
+	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
 		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
@@ -100,7 +100,7 @@ int CMemoryBankSerializerComp::LoadFromFile(istd::IChangeable& data, const istd:
 
 int CMemoryBankSerializerComp::SaveToFile(const istd::IChangeable& data, const istd::CString& /*filePath*/) const
 {
-	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_NO_LOADING | QF_ANONYMOUS_ONLY, false)){
+	if (EnsurePartitionOpened() && IsOperationSupported(&data, NULL, QF_SAVE | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<istd::IChangeable*>(&data));
 		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 

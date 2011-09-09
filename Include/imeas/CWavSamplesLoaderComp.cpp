@@ -61,23 +61,20 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 	}
 
 	return		((dataObjectPtr == NULL) || (dynamic_cast<const IDataSequence*>(dataObjectPtr) != NULL)) &&
-				((flags & (QF_ANONYMOUS_ONLY | QF_DIRECTORY_ONLY | QF_NO_SAVING)) == 0);
+				((flags & QF_SAVE) != 0) &&
+				((flags & QF_FILE) != 0);
 }
 
 
 int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
 {
-	if (!IsOperationSupported(&data, &filePath, QF_NO_SAVING, false)){
-		return StateFailed;
-	}
-
 	return StateFailed;
 }
 
 
 int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	if (!IsOperationSupported(&data, &filePath, QF_NO_LOADING, false)){
+	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
 	}
 
@@ -162,13 +159,15 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CWavSamplesLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
+bool CWavSamplesLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
 	}
 
-	result.push_back("wav");
+	if ((flags & QF_SAVE) != 0){
+		result.push_back("wav");
+	}
 
 	return true;
 }
