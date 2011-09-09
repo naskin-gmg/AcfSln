@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1571
+          1899
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          256
+          384
         </Number>
         <Description>
           ACF-Solutions
@@ -97,7 +97,7 @@
                 true
               </IsEnabled>
               <Value>
-                3
+                1
               </Value>
             </Data>
           </AttributeInfo>
@@ -250,6 +250,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>

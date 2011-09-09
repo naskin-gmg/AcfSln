@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1481
+          1899
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          187
+          384
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
+    <Element>
+      <ComponentName>
+        AutoPersistence
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <X>
+        250
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         ComposedParamsSet
@@ -62,13 +73,13 @@
     </Element>
     <Element>
       <ComponentName>
-        FilePersistence
+        File
       </ComponentName>
       <X>
         475
       </X>
       <X>
-        225
+        150
       </X>
     </Element>
     <Element>
@@ -79,7 +90,7 @@
         775
       </X>
       <X>
-        225
+        250
       </X>
     </Element>
   </PositionMap>
