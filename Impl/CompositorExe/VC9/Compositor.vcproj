@@ -95,6 +95,7 @@
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC9&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
+				SubSystem="2"
 			/>
 			<Tool
 				Name="VCALinkTool"
