@@ -117,7 +117,6 @@ private:
 		MonitoringParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual bool OnDetached(imod::IModel* modelPtr);
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
@@ -132,7 +131,6 @@ private:
 		DirectoryParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual bool OnDetached(imod::IModel* modelPtr);
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
@@ -163,10 +161,6 @@ private:
 	QStringList m_fileFilterExpressions;
 	int m_observingItemTypes;
 	int m_observingChanges;
-
-	// Directory monitoring parameter model
-	const imod::IModel* m_directoryPathModelPtr;
-	const imod::IModel* m_directoryMonitorParamsModelPtr;
 
 	MonitoringParamsObserver m_monitoringParamsObserver;
 	DirectoryParamsObserver m_directoryParamsObserver;

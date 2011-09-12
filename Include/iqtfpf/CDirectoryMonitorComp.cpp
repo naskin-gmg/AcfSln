@@ -16,12 +16,10 @@ namespace iqtfpf
 
 
 CDirectoryMonitorComp::CDirectoryMonitorComp()
-	:m_finishThread(false),
+:	m_finishThread(false),
 	m_poolingFrequency(5.0),
 	m_observingItemTypes(ifpf::IDirectoryMonitorParams::OI_ALL),
 	m_observingChanges(ifpf::IDirectoryMonitorParams::OC_ALL),
-	m_directoryPathModelPtr(NULL),
-	m_directoryMonitorParamsModelPtr(NULL),
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
 	m_directoryPendingChangesCounter(1),
@@ -442,37 +440,23 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 {
 	DisconnectFromParameterModel();
 
-	m_directoryPathModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).ToString()));
-	m_directoryMonitorParamsModelPtr = dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString()));
+	imod::IModel* pathModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).ToString())));
+	imod::IModel* monitorParamsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString())));
 
-	I_ASSERT(m_directoryPathModelPtr != NULL);
-	I_ASSERT(m_directoryMonitorParamsModelPtr != NULL);
-
-	if (m_directoryPathModelPtr != NULL && m_directoryMonitorParamsModelPtr != NULL){
-		bool retVal = (const_cast<imod::IModel*>(m_directoryPathModelPtr))->AttachObserver(&m_directoryParamsObserver);
-
-		retVal = retVal && (const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->AttachObserver(&m_monitoringParamsObserver);
-
-		return retVal;
+	if ((pathModelPtr != NULL) && (monitorParamsModelPtr != NULL)){
+		return		pathModelPtr->AttachObserver(&m_directoryParamsObserver) &&
+					monitorParamsModelPtr->AttachObserver(&m_monitoringParamsObserver);
 	}
-
-	return false;
+	else{
+		return false;
+	}
 }
 
 
 void CDirectoryMonitorComp::DisconnectFromParameterModel()
 {
-	if (m_directoryPathModelPtr != NULL){
-		if (m_directoryPathModelPtr->IsAttached(&m_directoryParamsObserver)){
-			(const_cast<imod::IModel*>(m_directoryPathModelPtr))->DetachObserver(&m_directoryParamsObserver);
-		}
-	}
-
-	if (m_directoryMonitorParamsModelPtr != NULL){
-		if (m_directoryMonitorParamsModelPtr->IsAttached(&m_monitoringParamsObserver)){
-			(const_cast<imod::IModel*>(m_directoryMonitorParamsModelPtr))->DetachObserver(&m_monitoringParamsObserver);
-		}
-	}
+	m_directoryParamsObserver.EnsureModelDetached();
+	m_monitoringParamsObserver.EnsureModelDetached();
 }
 
 
@@ -491,20 +475,12 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 // public methods of the embedded class MonitoringParamsObserver
 
 CDirectoryMonitorComp::MonitoringParamsObserver::MonitoringParamsObserver(CDirectoryMonitorComp& parent)
-	:m_parent(parent)
+:	m_parent(parent)
 {
 }
 
 
 // reimplemented (imod::IObserver)
-
-bool CDirectoryMonitorComp::MonitoringParamsObserver::OnDetached(imod::IModel* modelPtr)
-{
-	m_parent.m_directoryMonitorParamsModelPtr = NULL;
-	
-	return BaseClass::OnDetached(modelPtr);
-}
-
 
 void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
@@ -529,20 +505,12 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 // public methods of the embedded class DirectoryParamsObserver
 
 CDirectoryMonitorComp::DirectoryParamsObserver::DirectoryParamsObserver(CDirectoryMonitorComp& parent)
-	:m_parent(parent)
+:	m_parent(parent)
 {
 }
 
 
 // reimplemented (imod::IObserver)
-
-bool CDirectoryMonitorComp::DirectoryParamsObserver::OnDetached(imod::IModel* modelPtr)
-{
-	m_parent.m_directoryPathModelPtr = NULL;
-
-	return BaseClass::OnDetached(modelPtr);
-}
-
 
 void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {

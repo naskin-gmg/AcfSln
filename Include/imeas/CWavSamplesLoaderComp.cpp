@@ -66,7 +66,7 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 }
 
 
-int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& /*data*/, const istd::CString& /*filePath*/) const
 {
 	return StateFailed;
 }
