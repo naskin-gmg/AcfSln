@@ -4,8 +4,9 @@
 
 // Qt includes
 #include <QSystemTrayIcon>
-#include "QtService.h"
 
+// Qt Solutions
+#include "QtService.h"
 
 // ACF includes
 #include "iabc/iabc.h"
@@ -72,7 +73,7 @@ protected:
 		virtual void start();
 		virtual void stop();
 		virtual void pause();
-   		virtual void resume();
+		virtual void resume();
 		virtual void createApplication(int &argc, char **argv);
 		virtual int executeApplication();
 

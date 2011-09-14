@@ -4,6 +4,7 @@
 // STL includes
 #include <fstream>
 #include <cstring>
+#include <cmath>
 
 // ACF includes
 #include "istd/CRange.h"
@@ -136,8 +137,8 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 			}
 		}
 
-		double offset = pow(2.0, BITS_PER_SAMPLE - 1);
-		double amplitude = pow(2.0, BITS_PER_SAMPLE - 1) - I_BIG_EPSILON;
+		double offset = std::pow(2.0, BITS_PER_SAMPLE - 1);
+		double amplitude = std::pow(2.0, BITS_PER_SAMPLE - 1) - I_BIG_EPSILON;
 		for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);

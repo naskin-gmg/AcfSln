@@ -123,8 +123,9 @@ private:
 		void AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem);
 
 	private:
-		QDir m_directory;
 		CHotfolderGuiComp& m_parent;
+
+		QDir m_directory;
 
 		istd::TDelPtr<icomp::IComponent> m_directoryItemCompPtr;
 	};
