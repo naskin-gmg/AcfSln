@@ -256,7 +256,7 @@ void CHotfolderGuiComp::UpdateProcessingCommands()
 	if (objectPtr != NULL){
 		bool isWorking = objectPtr->IsWorking();
 
-		iqt::CSignalBlocker block´(&m_runCommand);
+		iqt::CSignalBlocker block(&m_runCommand);
 		iqt::CSignalBlocker block2(&m_holdCommand);
 		m_runCommand.setEnabled(!isWorking);
 		m_holdCommand.setEnabled(isWorking);
