@@ -50,7 +50,7 @@ public:
 		I_ASSIGN(m_enableMeshAttrPtr, "EnableMesh", "Enable mesh view for the scene", false, true);
 		I_ASSIGN(m_enableShaderAttrPtr, "EnableShader", "Enable shader", false, true);
 		I_ASSIGN(m_enableLegendAttrPtr, "EnableLegend", "Enable and show the color legend", false, true);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	CSurfaceViewComp();
 	// reimplemenented (iqtgui::TGuiObserverWrap)

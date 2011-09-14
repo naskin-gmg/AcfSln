@@ -35,7 +35,7 @@ public:
 		I_ASSIGN(m_fileTypeInfoCompPtr, "OutputFileInfo", "Output file info, which will be used for file name calculation", false, "OutputFileInfo");
 		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPath", "Output directory", true, "DirectoryPath"); 
 		I_ASSIGN(m_fileNamingParamsCompPtr, "FileNamingParams", "Rules for the file naming", false, "FileNamingParams"); 
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	// reimplemented (ifpf::IFileNaming)
 	virtual istd::CString GetFilePath(const istd::CString& inputFileName) const;

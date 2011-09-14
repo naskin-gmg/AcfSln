@@ -27,7 +27,7 @@ public:
 				Ui::CDirectoryMonitorParamsGui,
 				ifpf::IDirectoryMonitorParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CDirectoryMonitorParamsGui)
+	I_BEGIN_COMPONENT(CDirectoryMonitorParamsGui);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)

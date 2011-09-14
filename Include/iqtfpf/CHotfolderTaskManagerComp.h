@@ -57,7 +57,7 @@ public:
 		I_ASSIGN(m_hotfolderSettingsModelCompPtr, "HotfolderSettingsModel", "Hotfolder settings", true, "HotfolderSettingsModel");
 		I_ASSIGN(m_fileSystemChangeStorageCompPtr, "FileSystemChangeStorage", "File storage used by directory monitor", true, "FileSystemChangeStorage");
 		I_ASSIGN_TO(m_fileSystemChangeStorageModelCompPtr, m_fileSystemChangeStorageCompPtr, true);
-		I_END_COMPONENT();
+		I_END_COMPONENT;
 
 	CHotfolderTaskManagerComp();
 

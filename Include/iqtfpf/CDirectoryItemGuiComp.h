@@ -31,7 +31,7 @@ public:
 				Ui::CDirectoryItemGuiComp,
 				ifpf::IHotfolderStatistics> BaseClass;
 
-	I_BEGIN_COMPONENT(CDirectoryItemGuiComp)
+	I_BEGIN_COMPONENT(CDirectoryItemGuiComp);
 		I_REGISTER_INTERFACE(iprm::ISelectionParam);
 		I_ASSIGN(m_inputDirectoriesParamsManagerCompPtr, "InputDirectoriesManager", "Parameter manager for the input directories", true, "InputDirectoriesManager");
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathId", "Parameter ID of the directory path", true, "DirectoryPath");

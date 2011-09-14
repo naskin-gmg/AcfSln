@@ -31,7 +31,7 @@ public:
 	I_BEGIN_COMPONENT(CHotfolderWorkflowComp);
 		I_REGISTER_INTERFACE(ifpf::IHotfolderWorkflow);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CHotfolderWorkflowComp();
 

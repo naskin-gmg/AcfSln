@@ -34,13 +34,13 @@ class CServiceApplicationComp:
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CServiceApplicationComp)
-		I_REGISTER_INTERFACE(ibase::IApplication)
+	I_BEGIN_COMPONENT(CServiceApplicationComp);
+		I_REGISTER_INTERFACE(ibase::IApplication);
 		I_ASSIGN(m_applicationCompPtr, "ApplicationInstance", "Service application object", true, "Application");
 		I_ASSIGN(m_serviceDescriptionAttrPtr, "SeriviceDescription", "Service description", true, "This services provides...");
 		I_ASSIGN(m_serviceNameAttrPtr, "ServiceName", "The name of the service", true, "MyService");
 		I_ASSIGN(m_manualStartupAttrPtr, "ManualStartup", "If enabled, the service is registered with manual start up", false, false);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	QStringList GetApplicationArguments(int argc, char** argv) const;
 

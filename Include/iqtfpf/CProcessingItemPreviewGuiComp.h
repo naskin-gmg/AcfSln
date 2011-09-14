@@ -31,7 +31,7 @@ public:
 				Ui::CProcessingItemPreviewGuiComp,
 				ifpf::IHotfolderProcessingItem> BaseClass;
 
-	I_BEGIN_COMPONENT(CProcessingItemPreviewGuiComp)
+	I_BEGIN_COMPONENT(CProcessingItemPreviewGuiComp);
 		I_ASSIGN(m_inputPreviewObserverCompPtr, "InputPreview", "View of the input file", true, "InputPreview");
 		I_ASSIGN_TO(m_inputPreviewGuiCompPtr, m_inputPreviewObserverCompPtr, true);
 		I_ASSIGN(m_outputPreviewObserverCompPtr, "OutputPreview", "View of the input file", true, "OutputPreview");

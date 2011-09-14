@@ -24,7 +24,7 @@ public:
 	I_BEGIN_COMPONENT(ifpf::CFileNamingParamsComp);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(ifpf::IFileNamingParams);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	// reimplemented (ifpf::IFileNamingParams)
 	virtual int GetRenamingMode() const;

@@ -45,7 +45,7 @@ public:
 
 		I_ASSIGN_MULTI_0(m_hotoflderFactoriesCompPtr, "HotfolderFactories", "List of factories for hotfolder creation", true);
 		I_ASSIGN_MULTI_0(m_hotoflderFactoryIdsAttrPtr, "HotfolderFactoryIds", "List of factory IDs for hotfolder creation", true);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CHotfolderWorkflowComp();
 

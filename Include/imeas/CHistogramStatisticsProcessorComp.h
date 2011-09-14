@@ -24,7 +24,7 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CHistogramStatisticsProcessorComp);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(

@@ -26,8 +26,8 @@ public:
 				Ui::CNumericParamsGuiComp,
 				imeas::INumericParams> BaseClass;
 
-	I_BEGIN_COMPONENT(CNumericParamsGuiComp)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CNumericParamsGuiComp);
+	I_END_COMPONENT;
 
 	CNumericParamsGuiComp();
 

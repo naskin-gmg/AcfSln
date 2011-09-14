@@ -57,7 +57,7 @@ public:
 		I_ASSIGN(m_tracePositionAttrPtr, "TracePosition", "If enabled, all position changes will be updated in preview objects", true, true);
 		I_ASSIGN(m_grabProgressiveAttrPtr, "GrabProgressive", "If enabled the next frame will be returned by image and sample grab, if false only current frame will be returned", true, false);
 		I_ASSIGN(m_minimalImageDistanceAttrPtr, "MinimalImageDistance", "Minimal distance between two grabbed images if progressive grabbing enabled", false, 0.1);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CLibAvVideoDecoderComp();
 	virtual ~CLibAvVideoDecoderComp();

@@ -48,7 +48,7 @@ public:
 		I_ASSIGN(m_hotfolderProcessingInfoCompPtr, "HotfolderProcessingInfo", "State data model of the hotfolder", true, "HotfolderProcessingInfo");
 		I_ASSIGN_TO(m_hotfolderProcessingModelCompPtr, m_hotfolderProcessingInfoCompPtr, true);
 		I_ASSIGN(m_taskManagerCompPtr, "TaskManager", "Hotfolder task manager", true, "TaskManager");
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CHotfolderProcessingComp();
 

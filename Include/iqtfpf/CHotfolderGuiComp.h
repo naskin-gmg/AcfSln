@@ -47,7 +47,7 @@ public:
 				ifpf::IHotfolderProcessingInfo> BaseClass;
 	typedef imod::CModelProxy BaseClass2;
 
-	I_BEGIN_COMPONENT(CHotfolderGuiComp)
+	I_BEGIN_COMPONENT(CHotfolderGuiComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_stateIconsProviderCompPtr, "StateIcons", "Icons for the file state", true, "StateIcons");
 		I_ASSIGN(m_statisticsCompPtr, "HotfolderStatistics", "Simple statistics of the hotfolder", true, "HotfolderStatistics");

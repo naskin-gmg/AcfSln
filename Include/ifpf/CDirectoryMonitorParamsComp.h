@@ -32,7 +32,7 @@ public:
 		I_ASSIGN(m_observedChangesAttrPtr, "ObservedChanges", "Item changes to be observed.\n1 - Add\n2 - Remove\n4 - Modified\n8 - Attributes changed", false, OC_ADD);
 		I_ASSIGN_MULTI_0(m_acceptPatternsAttrPtr, "AcceptPatterns", "File name patterns for accepting of the file items", false);
 		I_ASSIGN_MULTI_0(m_ignorePatternsAttrPtr, "IgnorePatterns", "File name patterns for ignoring of the file items", false);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
