@@ -4,6 +4,8 @@
 #include "istd/TSingleFactory.h"
 #include "istd/CStaticServicesProvider.h"
 
+#include "isys/CSimpleDateTime.h"
+
 #include "iwin/CFileSystem.h"
 #include "iwin/CTimer.h"
 #include "iwin/CProcessEnvironment.h"
@@ -32,6 +34,9 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static istd::TSingleFactory<isys::ITimer, iwin::CTimer> timerFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&timerFactory);
+
+	static istd::TSingleFactory<isys::IDateTime, isys::CSimpleDateTime> dateTimeFactory("");
+	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
 
 	static istd::TSingleFactory<isys::ISystemInfo, iwin::CSystemInfo> systemInfoFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&systemInfoFactory);
