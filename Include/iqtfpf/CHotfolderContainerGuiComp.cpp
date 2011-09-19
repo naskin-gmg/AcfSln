@@ -37,7 +37,7 @@ QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const istd::CStrin
 	font.setBold(true);
 	font.setPointSize(12);
 	componentLabel.setFont(font);
-	componentLabel.setText(iqt::GetQString(address.GetPackageId()) + "/" + iqt::GetQString(address.GetComponentId()));
+	componentLabel.setText(iqt::GetQString(address.ToString()));
 	if (m_consistInfoCompPtr.IsValid()){
 		componentLabel.setIconSize(QSize(64, 64));
 		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));
