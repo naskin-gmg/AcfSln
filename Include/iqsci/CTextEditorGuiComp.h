@@ -17,9 +17,10 @@ namespace iqsci
 {
 
 
-class CTextEditorGuiComp: public iqtgui::TGuiObserverWrap<
-			iqtgui::TGuiComponentBase<CTextEditor>, 
-			imod::TSingleModelObserverBase<ibase::ITextDocument> >,
+class CTextEditorGuiComp:
+			public iqtgui::TGuiObserverWrap<
+					iqtgui::TGuiComponentBase<CTextEditor>,
+					imod::TSingleModelObserverBase<ibase::ITextDocument> >,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
@@ -40,7 +41,7 @@ public:
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 
-	// reimplemenented (iqtgui::TGuiObserverWrap)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int updateFlags = 0);
 	virtual void OnGuiModelDetached();
 
