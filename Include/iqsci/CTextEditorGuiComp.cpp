@@ -75,7 +75,7 @@ void CTextEditorGuiComp::OnGuiCreated()
 		connect(textEditorPtr, SIGNAL(DataChanged()), this, SLOT(OnTextChanged()));
 
 		if (m_useFoldingAttrPtr.IsValid()){
-			textEditorPtr->SetFoldingEnabled(*m_useFoldingAttrPtr); 
+			textEditorPtr->SetFoldingEnabled(*m_useFoldingAttrPtr);
 		}
 
 		if (m_languageAttrPtr.IsValid()){
