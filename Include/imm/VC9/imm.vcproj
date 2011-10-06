@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtmeas"
-	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
-	RootNamespace="iqtmeas"
+	Name="imm"
+	ProjectGUID="{27FB7E8A-2337-4A30-AA09-3D5A74D059B1}"
+	RootNamespace="imm"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
 	>
@@ -16,6 +16,9 @@
 	<ToolFiles>
 		<ToolFile
 			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
+		/>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\Acf.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
@@ -37,6 +40,18 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -50,11 +65,15 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableEnhancedInstructionSet="2"
+				RuntimeTypeInfo="true"
 				WarningLevel="4"
 				DebugInformationFormat="0"
+				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -102,6 +121,18 @@
 				Name="QT Designer Form"
 			/>
 			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="QT Moc Metafile"
 			/>
 			<Tool
@@ -115,12 +146,17 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="0"
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -159,18 +195,6 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath="..\CDataSequenceViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataStatisticsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CNumericParamsGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -178,88 +202,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CDataSequenceViewComp.h"
+				RelativePath="..\IMediaController.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDataStatisticsGuiComp.h"
+				RelativePath="..\imm.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsGuiComp.h"
+				RelativePath="..\IVideoController.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtmeas.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-			<File
-				RelativePath="..\generated\moc_CDataSequenceViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CDataStatisticsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CNumericParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CDataStatisticsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CNumericParamsGuiComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CDataSequenceViewComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataStatisticsGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CNumericParamsGuiComp.ui"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="MOC"
-			>
-			<File
-				RelativePath="..\CDataSequenceViewComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataStatisticsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CNumericParamsGuiComp.moc"
+				RelativePath="..\IVideoInfo.h"
 				>
 			</File>
 		</Filter>

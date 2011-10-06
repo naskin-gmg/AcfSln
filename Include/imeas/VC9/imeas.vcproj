@@ -19,8 +19,6 @@
 			Name="Release|Win32"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -87,8 +85,6 @@
 			Name="Debug|Win32"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqtmeas"
-	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
-	RootNamespace="iqtmeas"
+	Name="iqtmm"
+	ProjectGUID="{FBA91AC7-8419-4318-8BD7-ADFB8D4400FF}"
+	RootNamespace="iqtmm"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
 	>
@@ -17,6 +17,9 @@
 		<ToolFile
 			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
 		/>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -28,16 +31,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -50,9 +62,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableEnhancedInstructionSet="2"
+				PrecompiledHeaderFile=""
 				WarningLevel="4"
 				DebugInformationFormat="0"
 			/>
@@ -93,16 +108,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -115,9 +139,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;&quot;$(QTDIR)\include\phonon&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=""
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -160,15 +187,39 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CDataSequenceViewComp.cpp"
+				RelativePath="..\CFrameSeqVideoControllerComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CDataStatisticsGuiComp.cpp"
+				RelativePath="..\CFrameSeqVideoControllerComp.moc"
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsGuiComp.cpp"
+				RelativePath="..\CMediaLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CPhononVideoViewGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CPhononVideoViewGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSvgBitmapLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -178,19 +229,31 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CDataSequenceViewComp.h"
+				RelativePath="..\CFrameSeqVideoControllerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDataStatisticsGuiComp.h"
+				RelativePath="..\CMediaLoaderComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsGuiComp.h"
+				RelativePath="..\CPhononVideoViewGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtmeas.h"
+				RelativePath="..\CPlaybackControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSvgBitmapLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iqtmm.h"
 				>
 			</File>
 		</Filter>
@@ -207,27 +270,23 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDataSequenceViewComp.cpp"
+				RelativePath="..\generated\moc_CFrameSeqVideoControllerComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CDataStatisticsGuiComp.cpp"
+				RelativePath="..\generated\moc_CPhononVideoViewGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CNumericParamsGuiComp.cpp"
+				RelativePath="..\generated\moc_CPlaybackControllerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
+				RelativePath="..\generated\ui_CPlaybackControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CDataStatisticsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CNumericParamsGuiComp.h"
+				RelativePath="..\generated\ui_CVideoPlayerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -235,31 +294,11 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CDataSequenceViewComp.ui"
+				RelativePath="..\CPlaybackControllerGuiComp.ui"
 				>
 			</File>
 			<File
-				RelativePath="..\CDataStatisticsGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CNumericParamsGuiComp.ui"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="MOC"
-			>
-			<File
-				RelativePath="..\CDataSequenceViewComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataStatisticsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CNumericParamsGuiComp.moc"
+				RelativePath="..\CVideoPlayerGuiComp.ui"
 				>
 			</File>
 		</Filter>
