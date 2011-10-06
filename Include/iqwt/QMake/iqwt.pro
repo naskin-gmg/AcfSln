@@ -5,4 +5,3 @@ TARGET = iqwt
 
 INCLUDEPATH += ../..
 INCLUDEPATH += "$(QWTDIR)/Include"
-

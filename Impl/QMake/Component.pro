@@ -15,3 +15,4 @@ SUBDIRS += ../AbcPck/QMake/AbcPck.pro
 SUBDIRS += ../QtMeasPck/QMake/QtMeasPck.pro
 SUBDIRS += ../QwtPck/QMake/QwtPck.pro
 SUBDIRS += ../QtExPck/QMake/QtExPck.pro
+SUBDIRS += ../QtMmPck/QMake/QtMmPck.pro
