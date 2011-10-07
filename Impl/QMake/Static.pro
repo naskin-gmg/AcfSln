@@ -18,3 +18,4 @@ SUBDIRS += ../../Include/iqtmeas/QMake/iqtmeas.pro
 SUBDIRS += ../../Include/iqwt/QMake/iqwt.pro
 #SUBDIRS += ../../Include/imm/QMake/imm.pro
 SUBDIRS += ../../Include/iqtmm/QMake/iqtmm.pro
+SUBDIRS += ../../Include/iprop/QMake/iprop.pro
