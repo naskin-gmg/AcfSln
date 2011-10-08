@@ -11,30 +11,30 @@ namespace iprop
 // public methods
 
 CPropertyBase::CPropertyBase()
-	:m_attributeOwnerPtr(NULL),
+	:m_propertyOwnerPtr(NULL),
 	m_changeFlags(0)
 {
 }
 
 
 CPropertyBase::CPropertyBase(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags)
-	:m_attributeOwnerPtr(attributeOwnerPtr),
+	:m_propertyOwnerPtr(propertyOwnerPtr),
 	m_changeFlags(changeFlags)
 {
-	if (attributeOwnerPtr != NULL){
-		attributeOwnerPtr->InsertAttribute(this, attributeId, attributeDescription, attributeFlags, false);
+	if (propertyOwnerPtr != NULL){
+		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags, false);
 	}
 }
 
 
 // reimplemented (iprop::IProperty)
 
-const iser::IObject* CPropertyBase::GetDefaultAttributeValue() const
+const iser::IObject* CPropertyBase::GetDefaultPropertyValue() const
 {
 	return NULL;
 }

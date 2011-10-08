@@ -15,24 +15,24 @@ class IPropertiesManager;
 
 
 /**
-	Basic implementation of an attribute.
+	Basic implementation of an property.
 */
 class CPropertyBase: public iser::TCopySerializedWrap<iprop::IProperty>
 {
 public:
 	CPropertyBase();
 	CPropertyBase(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags = 0);
 
 	// reimplemented (iprop::IProperty)
-	virtual const iser::IObject* GetDefaultAttributeValue() const;
+	virtual const iser::IObject* GetDefaultPropertyValue() const;
 
 protected:
-	iprop::IPropertiesManager* m_attributeOwnerPtr;
+	iprop::IPropertiesManager* m_propertyOwnerPtr;
 	int m_changeFlags;
 };
 

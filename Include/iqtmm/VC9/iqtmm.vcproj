@@ -6,7 +6,6 @@
 	ProjectGUID="{FBA91AC7-8419-4318-8BD7-ADFB8D4400FF}"
 	RootNamespace="iqtmm"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -291,7 +290,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CPlaybackControllerGuiComp.ui"

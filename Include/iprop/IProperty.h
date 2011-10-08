@@ -12,23 +12,23 @@ namespace iprop
 
 
 /**
-	Common interface for an attribute.
+	Common interface for an abstract property.
 */
 class IProperty: virtual public iser::IObject
 {
 public:
-	enum AttributeFlags
+	enum PropertyFlags
 	{
 		/**
-			Attribute is persistent.
+			Property is persistent.
 		*/
-		AF_PERSISTENT = 0x1
+		PF_PERSISTENT = 0x1
 	};
 
 	/**
-		Get default value for the attribute.
+		Get default value for the property.
 	*/
-	virtual const iser::IObject* GetDefaultAttributeValue() const = 0;
+	virtual const iser::IObject* GetDefaultPropertyValue() const = 0;
 };
 
 

@@ -4,7 +4,6 @@
 	Version="9,00"
 	Name="iprop"
 	ProjectGUID="{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -12,6 +11,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -25,7 +27,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -45,7 +56,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../../;$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../;$(ACFDIR)/Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -98,7 +109,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -117,7 +137,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../;$(ACFDIR)/Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				PrecompiledHeaderFile=""
 				DebugInformationFormat="4"
@@ -161,6 +181,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CPropertiesEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPropertiesManager.cpp"
 				>
 			</File>
@@ -173,6 +197,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CPropertiesEditorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CPropertiesManager.h"
 				>
@@ -199,6 +227,34 @@
 			</File>
 			<File
 				RelativePath="..\TProperty.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Designer Files"
+			>
+			<File
+				RelativePath="..\CPropertiesEditorComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CPropertiesEditorComp.moc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			>
+			<File
+				RelativePath="..\generated\moc_CPropertiesEditorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CPropertiesEditorComp.h"
 				>
 			</File>
 		</Filter>

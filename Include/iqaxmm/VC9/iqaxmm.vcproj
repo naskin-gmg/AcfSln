@@ -6,7 +6,6 @@
 	ProjectGUID="{19BF49D4-532F-4B58-A9B5-F215495527EC}"
 	RootNamespace="iqaxmm"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -212,7 +211,7 @@
 			>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 		</Filter>
 		<Filter

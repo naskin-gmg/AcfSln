@@ -4,6 +4,7 @@
 
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
+#include "istd/TDelPtr.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -17,23 +18,23 @@ namespace iprop
 
 
 /**
-	Template implementation of an atomic attribute.
+	Template implementation of an atomic property.
 */
 template <typename Value>
 class TProperty: public iprop::CPropertyBase
 {
 public:
 	typedef Value ValueType;
-	typedef TProperty<Value> AttributeType;
+	typedef TProperty<Value> PropertyType;
 	typedef iprop::CPropertyBase BaseClass;
 
 	TProperty();
 
 	TProperty(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeName,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyName,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags = 0,
 				const ValueType& defaultValue = ValueType());
 
@@ -56,7 +57,7 @@ public:
 protected:
 	Value m_value;
 
-	mutable istd::TDelPtr<AttributeType> m_defaultAttributeValuePtr;
+	mutable istd::TDelPtr<PropertyType> m_defaultPropertyValuePtr;
 
 private:
 	static const std::string s_typeName;
@@ -74,19 +75,19 @@ TProperty<Value>::TProperty()
 
 template <typename Value>
 TProperty<Value>::TProperty(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeName,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyName,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags,
 				const ValueType& defaultValue)
-	:BaseClass(attributeOwnerPtr, attributeName, attributeDescription, attributeFlags, changeFlags),
+	:BaseClass(propertyOwnerPtr, propertyName, propertyDescription, propertyFlags, changeFlags),
 	m_value(defaultValue)
 {
-	if (!m_defaultAttributeValuePtr.IsValid()){
-		m_defaultAttributeValuePtr.SetPtr(new AttributeType());
+	if (!m_defaultPropertyValuePtr.IsValid()){
+		m_defaultPropertyValuePtr.SetPtr(new PropertyType());
 
-		m_defaultAttributeValuePtr->SetValue(defaultValue);
+		m_defaultPropertyValuePtr->SetValue(defaultValue);
 	}
 }
 
@@ -102,7 +103,7 @@ template <typename Value>
 void TProperty<Value>::SetValue(const Value& value)
 {
 	if (m_value != value){
-		istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
+		istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 
 		m_value = value;
 	}
@@ -112,8 +113,8 @@ void TProperty<Value>::SetValue(const Value& value)
 template <typename Value>
 void  TProperty<Value>::ResetValue()
 {
-	if (m_defaultAttributeValuePtr.IsValid()){
-		SetValue(m_defaultAttributeValuePtr->GetValue());
+	if (m_defaultPropertyValuePtr.IsValid()){
+		SetValue(m_defaultPropertyValuePtr->GetValue());
 	}
 }
 
@@ -123,7 +124,7 @@ void  TProperty<Value>::ResetValue()
 template <typename Value>
 const iser::IObject* TProperty<Value>::GetDefaultAttributePtr() const
 {
-	return m_defaultAttributeValuePtr.GetPtr();
+	return m_defaultPropertyValuePtr.GetPtr();
 }
 
 
@@ -143,7 +144,7 @@ bool TProperty<Value>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag valueTag("Value", "Attribute value");
+	static iser::CArchiveTag valueTag("Value", "Property value");
 	retVal = retVal && archive.BeginTag(valueTag);
 
 	retVal = retVal && archive.Process(m_value);

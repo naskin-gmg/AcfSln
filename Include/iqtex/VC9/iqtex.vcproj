@@ -6,7 +6,6 @@
 	ProjectGUID="{5EFA2A09-8CE0-4649-9B99-3373B620DE6D}"
 	RootNamespace="iqtex"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -190,7 +189,7 @@
 			>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CTcpTerminalGuiComp.ui"

@@ -15,46 +15,46 @@ class IProperty;
 
 
 /**
-	Interface for an attribute container
+	Common interface for a container of properties.
 */
 class IPropertiesManager: virtual public iser::ISerializable
 {
 public:
 	/**
-		Get number of attributes.
+		Get number of properties.
 	*/
-	virtual int GetAttributesCount() const = 0;
+	virtual int GetPropertiesCount() const = 0;
 
 	/**
-		Get attribute with the given index.
+		Get property with the given index.
 	*/
-	virtual iser::IObject* GetAttribute(int attributeIndex) const = 0;
+	virtual iser::IObject* GetProperty(int propertyIndex) const = 0;
 
 	/**
-		Get the ID of the attribute with the given index \c attributeIndex.
-		Attribute ID must be unique in the attribute set.
+		Get the ID of the property with the given index \c propertyIndex.
+		Property ID must be unique in the property set.
 	*/
-	virtual std::string GetAttributeId(int attributeIndex) const = 0;
+	virtual std::string GetPropertyId(int propertyIndex) const = 0;
 
 	/**
-		Get the description of the attribute with the given index \c attributeIndex
+		Get the description of the property with the given index \c propertyIndex
 	*/
-	virtual istd::CString GetAttributeDescription(int attributeIndex) const = 0;
+	virtual istd::CString GetPropertyDescription(int propertyIndex) const = 0;
 
 	/**
-		Insert an attribute into the object.
-		\param objectPtr	Attribute data object.
-		\param attributeId	Unique ID of the attribute in the attributes repository.
-		\param attributeDescription	Human readable description of the attribute.
-		\param attributeFlags	Attribute flags. \sa IProperty::AttributeFlags.
-		\param releaseFlag	Indicate who control the attribute's memory.
+		Insert an property into the object.
+		\param objectPtr	Property data object.
+		\param propertyId	Unique ID of the property in the attributes repository.
+		\param propertyDescription	Human readable description of the property.
+		\param propertyFlags	Property flags. \sa IProperty::PropertyFlags.
+		\param releaseFlag	Indicate who control the property's memory.
 		If \c releaseFlag is \c true, the control over the \c objectPtr will be overtaken by this object.
 	*/
-	virtual void InsertAttribute(
+	virtual void InsertProperty(
 				iser::IObject* objectPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				bool releaseFlag) = 0;
 };
 

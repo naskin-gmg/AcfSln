@@ -2,10 +2,11 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="iqwt3d"
-	ProjectGUID="{5EC7340B-67FC-41BF-88B2-55694D5494D8}"
-	RootNamespace="iqwt3d"
+	Name="PropPck"
+	ProjectGUID="{A55A0DD6-DC07-4217-8621-25D46230B538}"
+	RootNamespace="PropPck"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -13,30 +14,18 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -49,10 +38,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QWT3DDIR)\Include&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				WarningLevel="4"
-				DebugInformationFormat="0"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -64,10 +51,15 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -77,6 +69,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -84,23 +79,14 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -113,12 +99,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)\Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QWT3DDIR)\Include&quot;"
-				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				StringPooling="true"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\phonon&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				BrowseInformation="1"
-				WarningLevel="4"
-				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -130,10 +113,15 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -143,6 +131,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -158,7 +149,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CSurfaceViewComp.cpp"
+				RelativePath="..\PropPck.cpp"
 				>
 			</File>
 		</Filter>
@@ -168,11 +159,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CSurfaceViewComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\iqwt3d.h"
+				RelativePath="..\PropPck.h"
 				>
 			</File>
 		</Filter>
@@ -182,29 +169,6 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-			<File
-				RelativePath="..\CSurfaceViewComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSurfaceViewComp.cpp"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Qt Designer Files"
-			Filter="ui"
-			>
-			<File
-				RelativePath="..\CSurfaceViewComp.ui"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

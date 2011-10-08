@@ -17,16 +17,16 @@ CPropertiesManager::CPropertiesManager()
 }
 
 
-CPropertiesManager::AttributeInfo* CPropertiesManager::GetAttributeInfo(const std::string& attributeId) const
+CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const std::string& propertyId) const
 {
-	int attributesCount = m_attributesList.GetCount();
+	int propertiesCount = m_propertiesList.GetCount();
 
-	for (int attributeIndex = 0; attributeIndex < attributesCount; attributeIndex++){
-		CPropertiesManager::AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
-		I_ASSERT(attributeInfoPtr != NULL);
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
+		CPropertiesManager::PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
+		I_ASSERT(propertyInfoPtr != NULL);
 
-		if (attributeInfoPtr->attributeId == attributeId){
-			return attributeInfoPtr;
+		if (propertyInfoPtr->propertyId == propertyId){
+			return propertyInfoPtr;
 		}
 	}
 
@@ -36,57 +36,57 @@ CPropertiesManager::AttributeInfo* CPropertiesManager::GetAttributeInfo(const st
 
 // reimplemented (iprop::IPropertiesManager)
 
-int CPropertiesManager::GetAttributesCount() const
+int CPropertiesManager::GetPropertiesCount() const
 {
-	return m_attributesList.GetCount();
+	return m_propertiesList.GetCount();
 }
 
 
-iser::IObject* CPropertiesManager::GetAttribute(int attributeIndex) const
+iser::IObject* CPropertiesManager::GetProperty(int propertyIndex) const
 {
-	I_ASSERT(attributeIndex >= 0);
-	I_ASSERT(attributeIndex < m_attributesList.GetCount());
+	I_ASSERT(propertyIndex >= 0);
+	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
-	return m_attributesList.GetAt(attributeIndex)->objectPtr.GetPtr();
+	return m_propertiesList.GetAt(propertyIndex)->objectPtr.GetPtr();
 }
 
 
-std::string CPropertiesManager::GetAttributeId(int attributeIndex) const
+std::string CPropertiesManager::GetPropertyId(int propertyIndex) const
 {
-	I_ASSERT(attributeIndex >= 0);
-	I_ASSERT(attributeIndex < m_attributesList.GetCount());
+	I_ASSERT(propertyIndex >= 0);
+	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
-	return m_attributesList.GetAt(attributeIndex)->attributeId;
+	return m_propertiesList.GetAt(propertyIndex)->propertyId;
 }
 
 
-istd::CString CPropertiesManager::GetAttributeDescription(int attributeIndex) const
+istd::CString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
 {
-	I_ASSERT(attributeIndex >= 0);
-	I_ASSERT(attributeIndex < m_attributesList.GetCount());
+	I_ASSERT(propertyIndex >= 0);
+	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
-	return m_attributesList.GetAt(attributeIndex)->attributeDescription;
+	return m_propertiesList.GetAt(propertyIndex)->propertyDescription;
 }
 
 
-void CPropertiesManager::InsertAttribute(
+void CPropertiesManager::InsertProperty(
 			iser::IObject* objectPtr,
-			const std::string& attributeId,
-			const std::string& attributeDescription,
-			int attributeFlags,
+			const std::string& propertyId,
+			const std::string& propertyDescription,
+			int propertyFlags,
 			bool releaseFlag)
 {
-	AttributeInfo* existingInfoPtr = GetAttributeInfo(attributeId);
+	PropertyInfo* existingInfoPtr = GetPropertyInfo(propertyId);
 	I_ASSERT(existingInfoPtr == NULL);
 	if (objectPtr != NULL && existingInfoPtr == NULL){
-		AttributeInfo* attributeInfoPtr = new AttributeInfo;
+		PropertyInfo* propertyInfoPtr = new PropertyInfo;
 
-		attributeInfoPtr->objectPtr.SetPtr(objectPtr, releaseFlag);
-		attributeInfoPtr->attributeId = attributeId;
-		attributeInfoPtr->attributeDescription = attributeDescription;
-		attributeInfoPtr->attributeFlags = attributeFlags;
+		propertyInfoPtr->objectPtr.SetPtr(objectPtr, releaseFlag);
+		propertyInfoPtr->propertyId = propertyId;
+		propertyInfoPtr->propertyDescription = propertyDescription;
+		propertyInfoPtr->propertyFlags = propertyFlags;
 
-		m_attributesList.PushBack(attributeInfoPtr);
+		m_propertiesList.PushBack(propertyInfoPtr);
 	}
 }
 
@@ -95,121 +95,121 @@ void CPropertiesManager::InsertAttribute(
 
 bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {
-	iser::CArchiveTag attributesTag("Attributes", "Liste of object attributes");
-	iser::CArchiveTag attributeTag("Attribute", "Object attribute");
+	iser::CArchiveTag propertiesTag("Properties", "Liste of object properties");
+	iser::CArchiveTag propertyTag("Property", "Object property");
 
 	if (archive.IsStoring()){
-		return WriteAttributes(archive, attributesTag, attributeTag);
+		return WriteProperties(archive, propertiesTag, propertyTag);
 	}
 
-	return ReadAttributes(archive, attributesTag, attributeTag);
+	return ReadProperties(archive, propertiesTag, propertyTag);
 }
 
 
-bool CPropertiesManager::ReadAttributes(
+bool CPropertiesManager::ReadProperties(
 			iser::IArchive& archive,
-			const iser::CArchiveTag& attributesTag,
-			const iser::CArchiveTag& attributeTag)
+			const iser::CArchiveTag& propertiesTag,
+			const iser::CArchiveTag& propertyTag)
 {
 	bool retVal = true;
 
-	int attributesCount = m_attributesList.GetCount();
+	int propertiesCount = m_propertiesList.GetCount();
 
-	retVal = retVal && archive.BeginMultiTag(attributesTag, attributeTag, attributesCount);
+	retVal = retVal && archive.BeginMultiTag(propertiesTag, propertyTag, propertiesCount);
 
-	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
-		retVal = retVal && archive.BeginTag(attributeTag);
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
+		retVal = retVal && archive.BeginTag(propertyTag);
 
-		std::string attributeId;
-		std::string attributeTypeId;
+		std::string propertyId;
+		std::string propertyTypeId;
 
-		iser::CArchiveTag attributeTypeIdTag("AttributeTypeId", "ID of the attribute object");
-		retVal = retVal && archive.BeginTag(attributeTypeIdTag);
-		retVal = retVal && archive.Process(attributeTypeId);
-		retVal = retVal && archive.EndTag(attributeTypeIdTag);
+		iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
+		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
+		retVal = retVal && archive.Process(propertyTypeId);
+		retVal = retVal && archive.EndTag(propertyTypeIdTag);
 
-		iser::CArchiveTag attributeIdTag("AttributeId", "Name of the attribute object");
-		retVal = retVal && archive.BeginTag(attributeIdTag);
-		retVal = retVal && archive.Process(attributeId);
-		retVal = retVal && archive.EndTag(attributeIdTag);
+		iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
+		retVal = retVal && archive.BeginTag(propertyIdTag);
+		retVal = retVal && archive.Process(propertyId);
+		retVal = retVal && archive.EndTag(propertyIdTag);
 
 		if (retVal){
-			AttributeInfo* existingAttrPtr = GetAttributeInfo(attributeId);
+			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
 
-			if (		existingAttrPtr != NULL &&
-						existingAttrPtr->objectPtr->GetFactoryId() == attributeTypeId &&
-						((existingAttrPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0)){
-				retVal = retVal && existingAttrPtr->objectPtr->Serialize(archive);
+			if (		existingPropertyPtr != NULL &&
+						existingPropertyPtr->objectPtr->GetFactoryId() == propertyTypeId &&
+						((existingPropertyPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0)){
+				retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
 			}
 			else{
-				// try to serialize deprecated attribute:
-				istd::TDelPtr<iser::IObject> objectPtr(s_attributesFactory.CreateInstance(attributeTypeId));
+				// try to serialize deprecated property:
+				istd::TDelPtr<iser::IObject> objectPtr(s_propertyFactory.CreateInstance(propertyTypeId));
 				if (objectPtr.IsValid()){
 					retVal = retVal && objectPtr->Serialize(archive);
 				}
 			}
 		}
 
-		retVal = retVal && archive.EndTag(attributeTag);
+		retVal = retVal && archive.EndTag(propertyTag);
 	}
 
-	retVal = retVal && archive.EndTag(attributesTag);
+	retVal = retVal && archive.EndTag(propertiesTag);
 
 	return retVal;
 }
 
 
-bool CPropertiesManager::WriteAttributes(
+bool CPropertiesManager::WriteProperties(
 			iser::IArchive& archive,
-			const iser::CArchiveTag& attributesTag,
-			const iser::CArchiveTag& attributeTag) const
+			const iser::CArchiveTag& propertiesTag,
+			const iser::CArchiveTag& propertyTag) const
 {
 
 	bool retVal = true;
-	int attributesCount = m_attributesList.GetCount();
-	int persistentAttributesCount = 0;
+	int propertiesCount = m_propertiesList.GetCount();
+	int persistentPropertiesCount = 0;
 
-	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
-		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
+		PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
 
-		bool isPersistent = ((attributeInfoPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0);
+		bool isPersistent = ((propertyInfoPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0);
 		if (isPersistent){
-			++persistentAttributesCount;
+			++persistentPropertiesCount;
 		}
 	}
 
-	retVal = retVal && archive.BeginMultiTag(attributesTag, attributeTag, persistentAttributesCount);
+	retVal = retVal && archive.BeginMultiTag(propertiesTag, propertyTag, persistentPropertiesCount);
 
-	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
-		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
+		PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
 
-		bool isPersistent = ((attributeInfoPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0);
+		bool isPersistent = ((propertyInfoPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0);
 		if (!isPersistent){
 			continue;
 		}
 
-		iser::IObject* objectPtr = attributeInfoPtr->objectPtr.GetPtr();
-		std::string attributeId = attributeInfoPtr->attributeId;
-		std::string attributeTypeId = objectPtr->GetFactoryId();
+		iser::IObject* objectPtr = propertyInfoPtr->objectPtr.GetPtr();
+		std::string propertyId = propertyInfoPtr->propertyId;
+		std::string propertyTypeId = objectPtr->GetFactoryId();
 
-		retVal = retVal && archive.BeginTag(attributeTag);
+		retVal = retVal && archive.BeginTag(propertyTag);
 
-		iser::CArchiveTag attributeTypeIdTag("AttributeTypeId", "ID of the attribute object");
-		retVal = retVal && archive.BeginTag(attributeTypeIdTag);
-		retVal = retVal && archive.Process(attributeTypeId);
-		retVal = retVal && archive.EndTag(attributeTypeIdTag);
+		iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
+		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
+		retVal = retVal && archive.Process(propertyTypeId);
+		retVal = retVal && archive.EndTag(propertyTypeIdTag);
 
-		iser::CArchiveTag attributeIdTag("AttributeId", "Name of the attribute object");
-		retVal = retVal && archive.BeginTag(attributeIdTag);
-		retVal = retVal && archive.Process(attributeId);
-		retVal = retVal && archive.EndTag(attributeIdTag);
+		iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
+		retVal = retVal && archive.BeginTag(propertyIdTag);
+		retVal = retVal && archive.Process(propertyId);
+		retVal = retVal && archive.EndTag(propertyIdTag);
 
 		retVal = retVal && objectPtr->Serialize(archive);
 
-		retVal = retVal && archive.EndTag(attributeTag);
+		retVal = retVal && archive.EndTag(propertyTag);
 	}
 
-	retVal = retVal && archive.EndTag(attributesTag);
+	retVal = retVal && archive.EndTag(propertiesTag);
 
 	return retVal;
 }
@@ -217,20 +217,20 @@ bool CPropertiesManager::WriteAttributes(
 
 // private static members
 
-CPropertiesManager::AttributesFactory CPropertiesManager::s_attributesFactory;
+CPropertiesManager::PropertyFactory CPropertiesManager::s_propertyFactory;
 
 static struct DefaultAttributeTypesRegistrator
 {
 	DefaultAttributeTypesRegistrator()
 	{
-		CPropertiesManager::RegisterAttributeType<iprop::CIntAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CBoolAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CDoubleAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CStringAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CMultiIntAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CMultiBoolAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CMultiDoubleAttribute>();
-		CPropertiesManager::RegisterAttributeType<iprop::CMultiStringAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CIntAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CBoolAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CDoubleAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CStringAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CMultiIntAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CMultiBoolAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CMultiDoubleAttribute>();
+		CPropertiesManager::RegisterPropertyType<iprop::CMultiStringAttribute>();
 	}
 
 } s_defaultAttributeTypesRegistrator;

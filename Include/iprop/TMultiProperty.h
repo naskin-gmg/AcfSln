@@ -21,7 +21,7 @@ namespace iprop
 
 
 /**
-	Template implementation of multiple attribute.
+	Template implementation of multiple property.
 	\internal
 */
 template <typename Value>
@@ -41,18 +41,18 @@ public:
 
 	/**
 		Constructor.
-		\param	attributeOwnerPtr	Owner of the attrbiute.
-		\param	attributeId		Unique ID of the attrbiute.
-		\param	attributeId		Attribute description.
+		\param	propertyOwnerPtr	Owner of the attrbiute.
+		\param	propertyId		Unique ID of the attrbiute.
+		\param	propertyId		Property description.
 		\param	changeFlags		Change flags for model update notification.
 		\param	elementsCount	Number of elements stored at \c valuesPtr.
 		\param	valuesPtr		Pointer to array of elements.
 	*/
 	TMultiProperty(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags = 0,
 				int elementsCount = 0,
 				Value* valuesPtr = NULL);
@@ -60,7 +60,7 @@ public:
 	void SetValues(const ValueList& valueList);
 
 	/**
-		Set value list to the attribute.
+		Set value list to the property.
 	*/
 	template <class ContainerImpl>
 	void SetValues(typename ContainerImpl::const_iterator begin, typename ContainerImpl::const_iterator end);
@@ -71,7 +71,7 @@ public:
 	const ValueList& GetValues() const;
 
 	/**
-		Get number of values in the multi attribute.
+		Get number of values in the multi property.
 	*/
 	virtual int GetValuesCount() const;
 
@@ -128,14 +128,14 @@ TMultiProperty<Value>::TMultiProperty()
 
 template <typename Value>
 TMultiProperty<Value>::TMultiProperty(
-				iprop::IPropertiesManager* attributeOwnerPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				iprop::IPropertiesManager* propertyOwnerPtr,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				int changeFlags,
 				int elementsCount,
 				Value* valuesPtr)
-	:BaseClass(attributeOwnerPtr, attributeId, attributeDescription, attributeFlags, changeFlags)
+	:BaseClass(propertyOwnerPtr, propertyId, propertyDescription, propertyFlags, changeFlags)
 {
 	for (int i = 0; i < elementsCount; ++i){
 		m_values.push_back(valuesPtr[i]);
@@ -154,7 +154,7 @@ template <typename Value>
 template <class ContainerImpl>
 void TMultiProperty<Value>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
 {
-	istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
+	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 
 	ResetValues();
 
@@ -197,7 +197,7 @@ void TMultiProperty<Value>::SetValueAt(int index, const Value& value)
 	I_ASSERT(index < GetValuesCount());
 
 	if (m_values[index] != value){
-		istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
+		istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 
 		m_values[index] = value;
 	}
@@ -214,7 +214,7 @@ void TMultiProperty<Value>::InsertValue(const Value& value)
 template <typename Value>
 void TMultiProperty<Value>::ResetValues()
 {
-	istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
+	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 	
 	m_values.clear();
 }
@@ -268,7 +268,7 @@ bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
-	static iser::CArchiveTag valuesTag("Values", "List of attribute values");
+	static iser::CArchiveTag valuesTag("Values", "List of property values");
 	static iser::CArchiveTag valueTag("Value", "Single Value");
 
 	int valuesCount = 0;

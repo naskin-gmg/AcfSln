@@ -6,7 +6,6 @@
 	ProjectGUID="{8F703AE4-CAA4-47AF-AEEE-77CE84E26177}"
 	RootNamespace="iqtmeas"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -232,7 +231,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CDataSequenceViewComp.ui"

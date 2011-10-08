@@ -20,21 +20,19 @@ namespace iprop
 
 
 /**
-	Basic implementation of an attribute container.
+	Basic implementation of an property container.
 */
 class CPropertiesManager: virtual public iprop::IPropertiesManager
 {
 public:
-	typedef istd::TComposedFactory<iser::IObject> BaseClass;
-
 	/*
-		Internal attribute info item.
+		Internal property info item.
 	*/
-	struct AttributeInfo
+	struct PropertyInfo
 	{
-		std::string attributeId;
-		std::string attributeDescription;
-		int attributeFlags;
+		std::string propertyId;
+		std::string propertyDescription;
+		int propertyFlags;
 
 		istd::TOptDelPtr<iser::IObject> objectPtr; 
 	};
@@ -42,57 +40,57 @@ public:
 	CPropertiesManager();
 
 	/**
-		Get attribute info object for a given attribute ID.
+		Get property info object for a given property ID.
 	*/
-	AttributeInfo* GetAttributeInfo(const std::string& attributeId) const;
+	PropertyInfo* GetPropertyInfo(const std::string& propertyId) const;
 
 	/**
-		Register a new attribute type.
+		Register a new property type.
 	*/
-	template <typename AttributeType>
-	static bool RegisterAttributeType();
+	template <typename PropertyType>
+	static bool RegisterPropertyType();
 
 	// reimplemented (iprop::IPropertiesManager)
-	virtual int GetAttributesCount() const;
-	virtual iser::IObject* GetAttribute(int attributeIndex) const;
-	virtual std::string GetAttributeId(int attributeIndex) const;
-	virtual istd::CString GetAttributeDescription(int attributeIndex) const;
-	virtual void InsertAttribute(
+	virtual int GetPropertiesCount() const;
+	virtual iser::IObject* GetProperty(int propertyIndex) const;
+	virtual std::string GetPropertyId(int propertyIndex) const;
+	virtual istd::CString GetPropertyDescription(int propertyIndex) const;
+	virtual void InsertProperty(
 				iser::IObject* objectPtr,
-				const std::string& attributeId,
-				const std::string& attributeDescription,
-				int attributeFlags,
+				const std::string& propertyId,
+				const std::string& propertyDescription,
+				int propertyFlags,
 				bool releaseFlag);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	bool ReadAttributes(
+	bool ReadProperties(
 				iser::IArchive& archive,
 				const iser::CArchiveTag& attributesTag,
 				const iser::CArchiveTag& attributeTag);
 
-	bool WriteAttributes(
+	bool WriteProperties(
 				iser::IArchive& archive,
 				const iser::CArchiveTag& attributesTag,
 				const iser::CArchiveTag& attributeTag) const;
 
 private:
-	typedef istd::TComposedFactory<iser::IObject> AttributesFactory;
+	typedef istd::TComposedFactory<iser::IObject> PropertyFactory;
 
-	istd::TPointerVector<AttributeInfo> m_attributesList;
+	istd::TPointerVector<PropertyInfo> m_propertiesList;
 
-	static AttributesFactory s_attributesFactory;
+	static PropertyFactory s_propertyFactory;
 };
 
 
 // public static methods
 
 template <typename AttributeImpl>
-bool CPropertiesManager::RegisterAttributeType()
+bool CPropertiesManager::RegisterPropertyType()
 {
-	return s_attributesFactory.RegisterFactory(new istd::TSingleFactory<iser::IObject, AttributeImpl>(AttributeImpl::GetTypeName()), true);
+	return s_propertyFactory.RegisterFactory(new istd::TSingleFactory<iser::IObject, AttributeImpl>(AttributeImpl::GetTypeName()), true);
 }
 
 

@@ -6,7 +6,6 @@
 	ProjectGUID="{720BB09B-0988-4D31-B8DE-C3C27C277F4B}"
 	RootNamespace="iqtfpf"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -274,7 +273,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CDirectoryItemGuiComp.ui"

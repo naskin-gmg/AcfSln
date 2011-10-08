@@ -6,7 +6,6 @@
 	ProjectGUID="{417FFDCB-12EE-46F6-A112-C15E152B63C8}"
 	RootNamespace="iqwt"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -211,7 +210,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			Filter="ui"
 			>
 			<File
@@ -224,7 +223,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="MOC"
+			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CHistogramViewComp.moc"
