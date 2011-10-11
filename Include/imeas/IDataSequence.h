@@ -35,7 +35,7 @@ public:
 		\param	channelsCount	number of channels. If it is negative, default value will be taken.
 	*/
 	virtual bool CreateSequenceWithInfo(
-				istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+				const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 				int samplesCount = -1,
 				int channelsCount = -1) = 0;
 

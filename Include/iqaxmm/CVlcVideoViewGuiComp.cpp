@@ -225,6 +225,29 @@ bool CVlcVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
+bool CVlcVideoViewGuiComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+{
+	if (!doAppend){
+		result.clear();
+	}
+
+	if ((flags & QF_SAVE) != 0){
+		result.push_back("mpg");
+		result.push_back("avi");
+	}
+
+	return true;
+}
+
+
+istd::CString CVlcVideoViewGuiComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+{
+	return "Video files";
+}
+
+
 } // namespace iqaxmm
 
 

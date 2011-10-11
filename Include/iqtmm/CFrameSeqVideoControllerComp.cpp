@@ -193,6 +193,28 @@ bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
+bool CFrameSeqVideoControllerComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+{
+	if (!doAppend){
+		result.clear();
+	}
+
+	if ((flags & QF_LOAD) != 0){
+		result.push_back("");
+	}
+
+	return true;
+}
+
+
+istd::CString CFrameSeqVideoControllerComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+{
+	return "Video files";
+}
+
+
 // protected methods
 
 bool CFrameSeqVideoControllerComp::LoadCurrentFrame()

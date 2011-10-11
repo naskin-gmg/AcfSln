@@ -71,7 +71,7 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 
 
 bool CGeneralDataSequence::CreateSequenceWithInfo(
-			istd::TTransPtr<const IDataSequenceInfo> infoPtr,
+			const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 			int samplesCount,
 			int channelsCount)
 {

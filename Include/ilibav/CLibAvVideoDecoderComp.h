@@ -114,6 +114,10 @@ public:
 	virtual int GetCurrentFrame() const;
 	virtual bool SetCurrentFrame(int frameIndex);
 
+	// reimplemented (iser::IFileTypeInfo)
+	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+
 protected:
 	enum FrameType
 	{

@@ -2,8 +2,10 @@
 #define imm_IMediaController_included
 
 
+// ACF includes
 #include "istd/IChangeable.h"
 #include "istd/CString.h"
+#include "iser/IFileTypeInfo.h"
 
 #include "imm/imm.h"
 
@@ -12,7 +14,9 @@ namespace imm
 {
 
 
-class IMediaController: virtual public istd::IChangeable
+class IMediaController:
+			virtual public istd::IChangeable,
+			virtual public iser::IFileTypeInfo
 {
 public:
 	enum ChangeFlags

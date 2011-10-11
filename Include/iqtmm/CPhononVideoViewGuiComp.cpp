@@ -170,6 +170,34 @@ bool CPhononVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
+bool CPhononVideoViewGuiComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+{
+	if (!doAppend){
+		result.clear();
+	}
+
+	if ((flags & QF_LOAD) != 0){
+		result.push_back("mpg");
+		result.push_back("mpeg");
+		result.push_back("mov");
+		result.push_back("wmv");
+		result.push_back("avi");
+		result.push_back("m2p");
+		result.push_back("mp4");
+	}
+
+	return true;
+}
+
+
+istd::CString CPhononVideoViewGuiComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+{
+	return "Video files";
+}
+
+
 // protected methods
 
 void CPhononVideoViewGuiComp::EnsureSync() const
