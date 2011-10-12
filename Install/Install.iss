@@ -99,7 +99,6 @@ Name: ffmpegComp; Description: FFmpeg; Types: fullType customType
 Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
 
 [Icons]
-Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfSlnComp
 Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfSlnComp
 
 [Tasks]
@@ -115,5 +114,3 @@ Root: HKCU; Subkey: "Environment"; ValueName: XALANDIR; ValueData: {app}\ExtLib\
 Root: HKCU; Subkey: "Environment"; ValueName: ZLIBDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: zlibComp
 Root: HKCU; Subkey: "Environment"; ValueName: CBIOSDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: cbiosComp
 Root: HKCU; Subkey: "Environment"; ValueName: FFMPEGDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: ffmpegComp
-
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\Open\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfSlnComp
