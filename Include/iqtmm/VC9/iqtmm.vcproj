@@ -6,6 +6,7 @@
 	ProjectGUID="{FBA91AC7-8419-4318-8BD7-ADFB8D4400FF}"
 	RootNamespace="iqtmm"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -144,7 +145,6 @@
 				StringPooling="true"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
