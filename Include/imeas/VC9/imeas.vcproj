@@ -157,6 +157,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CDataSequenceInfoBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDataSequenceStatistics.cpp"
 				>
 			</File>
@@ -197,6 +201,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CDataSequenceInfoBase.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CDataSequenceStatistics.h"
 				>

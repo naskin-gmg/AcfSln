@@ -381,6 +381,7 @@ bool TDiscrDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 typedef TDiscrDataSequence<I_BYTE> CSimpleSamplesSequence8;
 typedef TDiscrDataSequence<I_WORD> CSimpleSamplesSequence16;
 typedef TDiscrDataSequence<I_DWORD> CSimpleSamplesSequence32;
+typedef TDiscrDataSequence<I_QWORD> CSimpleSamplesSequence64;
 
 
 } // namespace imeas

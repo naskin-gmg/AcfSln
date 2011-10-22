@@ -56,7 +56,7 @@ void CHistogramViewComp::UpdateGui(int /*updateFlags*/)
 		double maxValue = 0.0;
 
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
-			int samplesCount = objectPtr->GetSamplesCount() / channelsCount;
+			int samplesCount = objectPtr->GetSamplesCount();
 	
 			QVector<double> xData(samplesCount);
 			QVector<double> yData(samplesCount);
