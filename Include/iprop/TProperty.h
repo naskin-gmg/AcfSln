@@ -46,7 +46,7 @@ public:
 	virtual const iser::IObject* GetDefaultAttributePtr() const;
 
 	// reimplemented (iser::IObject)
-	virtual const std::string& GetFactoryId() const;
+	virtual std::string GetFactoryId() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -131,7 +131,7 @@ const iser::IObject* TProperty<Value>::GetDefaultAttributePtr() const
 // reimplemented (iser::IObject)
 
 template <typename Value>
-const std::string& TProperty<Value>::GetFactoryId() const
+std::string TProperty<Value>::GetFactoryId() const
 {
 	return s_typeName;
 }
