@@ -224,6 +224,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IGeneralResultProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IIdProvider.h"
 				>
 			</File>
