@@ -1,5 +1,5 @@
-#ifndef IacfBasePck_included
-#define IacfBasePck_included
+#ifndef InspectionPck_included
+#define InspectionPck_included
 
 
 // ACF includes
@@ -24,6 +24,6 @@ typedef icomp::TModelCompWrap<iinsp::CInspectionComp> Inspection;
 } // namespace InspectionPck
 
 
-#endif // !IacfBasePck_included
+#endif // !InspectionPck_included
 
 
