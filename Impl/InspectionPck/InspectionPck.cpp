@@ -1,6 +1,7 @@
-#include "icomp/export.h"
-
 #include "InspectionPck.h"
+
+
+#include "icomp/export.h"
 
 
 namespace InspectionPck
@@ -10,7 +11,7 @@ namespace InspectionPck
 I_EXPORT_DEFAULT_SERVICES
 
 I_EXPORT_PACKAGE(
-			"IacfBase",
+			"InsopectionPck",
 			"General, system-independent image processing package",
 			"Standard Base Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

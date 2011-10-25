@@ -1,5 +1,5 @@
-#ifndef ACF_included
-#define ACF_included
+#ifndef AcfSln_included
+#define AcfSln_included
 
 
 /**
@@ -19,4 +19,4 @@ See \c Docs/Tutorial for tutorials.
 */
 
 
-#endif // !ACF_included
+#endif // !AcfSln_included

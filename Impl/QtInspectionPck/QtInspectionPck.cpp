@@ -1,10 +1,14 @@
+#include "QtInspectionPck.h"
+
+
+// Qt includes
 #include <QDir>
 
+
+// ACF includes
 #include "icomp/export.h"
 
 #include "iqt/CDefaultServicesProvider.h"
-
-#include "QtInspectionPck.h"
 
 
 static struct StaticInit
@@ -25,9 +29,9 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 
 I_EXPORT_PACKAGE(
-			"QtInsp",
-			"Imaging tools Qt-based general package",
-			"Imaging Tools Qt Standard" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"QtInspectionPck",
+			"General Qt-based image processing package",
+			"Qt Processing Image" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			InspectionTaskGui,

@@ -1,10 +1,14 @@
+#include "QtSignalPck.h"
+
+
+// Qt includes
 #include <QDir>
 
+
+// ACF includes
 #include "icomp/export.h"
 
 #include "iqt/CDefaultServicesProvider.h"
-
-#include "QtSignalPck.h"
 
 
 static struct StaticInit
