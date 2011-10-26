@@ -21,7 +21,7 @@ public:
 		Get current processing the time stamp.
 		\return	timer representing time stamp or NULL if it is impossible to retrive it.
 	*/
-	virtual isys::ITimer* GetCurrentTimeStamp() const = 0;
+	virtual const isys::ITimer* GetCurrentTimeStamp() const = 0;
 };
 
 
