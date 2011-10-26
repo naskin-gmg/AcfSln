@@ -295,7 +295,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iprop", "..\..\Include\ipro
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PropPck", "..\PropPck\VC8\PropPck.vcproj", "{CC5A15B7-FEC6-4741-B147-875CB22C04D2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PropPck", "..\PropPck\VC8\PropPck.vcproj", "{A55A0DD6-DC07-4217-8621-25D46230B538}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.Debug = "False"
@@ -442,10 +442,10 @@ Global
 		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.Build.0 = Debug|Win32
 		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.ActiveCfg = Release|Win32
 		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.Build.0 = Release|Win32
-		{CC5A15B7-FEC6-4741-B147-875CB22C04D2}.Debug|Win32.ActiveCfg = Debug|Win32
-		{CC5A15B7-FEC6-4741-B147-875CB22C04D2}.Debug|Win32.Build.0 = Debug|Win32
-		{CC5A15B7-FEC6-4741-B147-875CB22C04D2}.Release|Win32.ActiveCfg = Release|Win32
-		{CC5A15B7-FEC6-4741-B147-875CB22C04D2}.Release|Win32.Build.0 = Release|Win32
+		{A55A0DD6-DC07-4217-8621-25D46230B538}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A55A0DD6-DC07-4217-8621-25D46230B538}.Debug|Win32.Build.0 = Debug|Win32
+		{A55A0DD6-DC07-4217-8621-25D46230B538}.Release|Win32.ActiveCfg = Release|Win32
+		{A55A0DD6-DC07-4217-8621-25D46230B538}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -484,7 +484,7 @@ Global
 		{39CA72AF-0B0B-42DF-81D2-D71DA3C647F1} = {8E0B8DFD-41AF-4200-AC4A-83FA5B9C1897}
 		{F7078332-A386-479F-B95A-331B32BBC14C} = {8E0B8DFD-41AF-4200-AC4A-83FA5B9C1897}
 		{8A82A184-5BEB-4F59-9272-AF964FF7938C} = {8E0B8DFD-41AF-4200-AC4A-83FA5B9C1897}
-		{CC5A15B7-FEC6-4741-B147-875CB22C04D2} = {8E0B8DFD-41AF-4200-AC4A-83FA5B9C1897}
+		{A55A0DD6-DC07-4217-8621-25D46230B538} = {8E0B8DFD-41AF-4200-AC4A-83FA5B9C1897}
 	EndGlobalSection
 	GlobalSection(Qt) = preSolution
 		Integration = True
