@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="CameraPck"
+	ProjectGUID="{39A2B3AC-5D99-4982-820B-7C4BFFC5201F}"
 	RootNamespace="CameraPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"

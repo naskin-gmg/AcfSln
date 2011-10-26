@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="QtInspectionPck"
+	ProjectGUID="{12946F10-DC32-4B36-ADA0-7FFA75904268}"
 	RootNamespace="QtInspectionPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"

@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="SignalPck"
+	ProjectGUID="{33FF5B63-B133-4808-8973-B80422F6D998}"
 	RootNamespace="SignalPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"

@@ -113,7 +113,6 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				BasicRuntimeChecks="3"
-				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
@@ -158,6 +157,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CDataSequenceInfoBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDataSequenceStatistics.cpp"
 				>
 			</File>
@@ -198,6 +201,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CDataSequenceInfoBase.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CDataSequenceStatistics.h"
 				>

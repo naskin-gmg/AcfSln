@@ -224,6 +224,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IGeneralResultProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IIdProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iinsp.h"
 				>
 			</File>
@@ -233,6 +241,10 @@
 			</File>
 			<File
 				RelativePath="..\IInspectionTask.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ITimeStampProvider.h"
 				>
 			</File>
 		</Filter>

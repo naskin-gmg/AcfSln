@@ -184,6 +184,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConvolutionKernel2d.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CConvolutionProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDelegatedBitmapSupplierComp.cpp"
 				>
 			</File>
@@ -321,6 +329,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConvolutionProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDelegatedBitmapSupplierComp.h"
 				>
 			</File>
@@ -441,15 +453,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IConvolutionKernel2d.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFeature.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IFeaturesConsumer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IFeaturesContainer.h"
 				>
 			</File>
 			<File
@@ -514,14 +526,6 @@
 			</File>
 			<File
 				RelativePath="..\ISearchParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IValueProvider.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TConvolutionProcessorComp.h"
 				>
 			</File>
 			<File
