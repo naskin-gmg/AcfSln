@@ -448,7 +448,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SettingsGui
+              SettingsDialog
             </Id>
             <Type>
               icomp::CReferenceAttribute
