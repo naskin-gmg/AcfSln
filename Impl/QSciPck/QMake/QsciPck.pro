@@ -11,7 +11,7 @@ INCLUDEPATH += ../../../Include
 INCLUDEPATH += "$(QScintilla)/include" 
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqsci
-LIBS += -L"$(QScintilla)/Lib/$$COMPILER_DIR -lQScintilla
+LIBS += -L$(QScintilla)/Lib/$$COMPILER_DIR -lQScintilla
 
 CONFIG(debug, debug|release){
 	LIBS += QAxContainerd
