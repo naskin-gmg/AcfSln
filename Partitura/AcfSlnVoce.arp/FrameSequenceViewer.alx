@@ -15,60 +15,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        Application
+        PlaybackControllerGui
       </ComponentName>
       <X>
-        725
+        650
       </X>
       <X>
-        250
+        200
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AutoPersistence
+        VideoPlayerGui
       </ComponentName>
       <X>
-        725
+        975
       </X>
       <X>
-        425
+        400
       </X>
     </Element>
     <Element>
       <ComponentName>
-        FileDialogLoader
+        VideoViewGui
       </ComponentName>
       <X>
-        725
+        650
       </X>
       <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MediaLoader
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VideoView
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        425
+        575
       </X>
     </Element>
   </PositionMap>

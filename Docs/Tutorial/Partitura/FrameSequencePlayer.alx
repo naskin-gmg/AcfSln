@@ -15,24 +15,35 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
-        Application
+        DirParam
       </ComponentName>
       <X>
-        725
+        550
       </X>
       <X>
-        250
+        500
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AutoPersistence
+        DirParamGui
       </ComponentName>
       <X>
-        725
+        550
+      </X>
+      <X>
+        350
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FrameSequenceViewer
+      </ComponentName>
+      <X>
+        875
       </X>
       <X>
         425
@@ -40,35 +51,13 @@
     </Element>
     <Element>
       <ComponentName>
-        FileDialogLoader
+        GuiApplication
       </ComponentName>
       <X>
-        725
+        875
       </X>
       <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MediaLoader
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VideoView
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        425
+        200
       </X>
     </Element>
   </PositionMap>

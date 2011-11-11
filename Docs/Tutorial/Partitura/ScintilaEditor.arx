@@ -1,32 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1681
+          2040
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          302
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         App
@@ -106,25 +95,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial (Dynamic)
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               SplashScreenImage
             </Id>
             <Type>
@@ -139,6 +109,25 @@
               </IsEnabled>
               <Value>
                 $(ACFDIR)/Docs/Images/AcfSplashScreen.png
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -361,6 +350,27 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfSlnVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
