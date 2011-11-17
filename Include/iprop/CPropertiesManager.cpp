@@ -91,7 +91,7 @@ void CPropertiesManager::InsertProperty(
 }
 
 
-// reimplemented (ISerializable)
+// reimplemented (iser::ISerializable)
 
 bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {

@@ -137,7 +137,7 @@ std::string TProperty<Value>::GetFactoryId() const
 }
 
 
-// reimplemented (ISerializable)
+// reimplemented (iser::ISerializable)
 
 template <typename Value>
 bool TProperty<Value>::Serialize(iser::IArchive& archive)

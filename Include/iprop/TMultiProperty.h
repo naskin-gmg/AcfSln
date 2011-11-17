@@ -259,7 +259,7 @@ std::string TMultiProperty<Value>::GetFactoryId() const
 }
 
 
-// reimplemented (ISerializable)
+// reimplemented (iser::ISerializable)
 
 template <typename Value>
 bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
