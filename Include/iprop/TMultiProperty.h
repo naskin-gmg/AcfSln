@@ -25,11 +25,11 @@ namespace iprop
 	\internal
 */
 template <typename Value>
-class TMultiProperty: public iprop::CPropertyBase
+class TMultiProperty: public CPropertyBase
 {
 public:
 	typedef Value ValueType;
-	typedef iprop::CPropertyBase BaseClass;
+	typedef CPropertyBase BaseClass;
 	typedef std::vector<ValueType> ValueList;
 	typedef typename ValueList::iterator iterator;
 	typedef typename ValueList::const_iterator const_iterator;
@@ -49,7 +49,7 @@ public:
 		\param	valuesPtr		Pointer to array of elements.
 	*/
 	TMultiProperty(
-				iprop::IPropertiesManager* propertyOwnerPtr,
+				IPropertiesManager* propertyOwnerPtr,
 				const std::string& propertyId,
 				const std::string& propertyDescription,
 				int propertyFlags,
@@ -128,7 +128,7 @@ TMultiProperty<Value>::TMultiProperty()
 
 template <typename Value>
 TMultiProperty<Value>::TMultiProperty(
-				iprop::IPropertiesManager* propertyOwnerPtr,
+				IPropertiesManager* propertyOwnerPtr,
 				const std::string& propertyId,
 				const std::string& propertyDescription,
 				int propertyFlags,
@@ -310,7 +310,7 @@ const std::string& TMultiProperty<Value>::GetTypeName()
 }
 
 
-// private static attributes
+// private static properties
 
 template <typename Value>
 const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
@@ -318,10 +318,11 @@ const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TM
 
 // typedefs
 
-typedef TMultiProperty<double> CMultiDoubleAttribute;
-typedef TMultiProperty<bool> CMultiBoolAttribute;
-typedef TMultiProperty<int> CMultiIntAttribute;
-typedef TMultiProperty<istd::CString> CMultiStringAttribute;
+typedef TMultiProperty<double> CMultiDoubleProperty;
+typedef TMultiProperty<bool> CMultiBoolProperty;
+typedef TMultiProperty<int> CMultiIntProperty;
+typedef TMultiProperty<istd::CString> CMultiStringProperty;
+typedef TMultiProperty<std::string> CMultiStdStringProperty;
 
 
 } // namespace iprop

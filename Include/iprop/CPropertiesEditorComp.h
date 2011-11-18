@@ -23,12 +23,12 @@ namespace iprop
 */
 class CPropertiesEditorComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CPropertiesEditorComp, iprop::IPropertiesManager>
+						Ui::CPropertiesEditorComp, IPropertiesManager>
 {
 	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CPropertiesEditorComp, iprop::IPropertiesManager> BaseClass;
+				Ui::CPropertiesEditorComp, IPropertiesManager> BaseClass;
 
 	enum ColumnType
 	{
@@ -53,7 +53,7 @@ protected:
 
 private:
 	void UpdatePropertyEditor(
-				const iprop::IProperty& objectProperty,
+				const IProperty& objectProperty,
 				const QString& propertyId,
 				const QString& propertyDescription);
 
@@ -61,7 +61,7 @@ private:
 
 	QTreeWidgetItem* FindPropertyItem(const QString propertyId) const;
 
-	void SetDataToEditor(const iprop::IProperty& objectProperty, QTreeWidgetItem& propertyItem);
+	void SetDataToEditor(const IProperty& objectProperty, QTreeWidgetItem& propertyItem);
 };
 
 

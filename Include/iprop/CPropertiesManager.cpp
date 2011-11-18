@@ -138,7 +138,7 @@ bool CPropertiesManager::ReadProperties(
 
 			if (		existingPropertyPtr != NULL &&
 						existingPropertyPtr->objectPtr->GetFactoryId() == propertyTypeId &&
-						((existingPropertyPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0)){
+						((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
 				retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
 			}
 			else{
@@ -172,7 +172,7 @@ bool CPropertiesManager::WriteProperties(
 	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
 		PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
 
-		bool isPersistent = ((propertyInfoPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0);
+		bool isPersistent = ((propertyInfoPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0);
 		if (isPersistent){
 			++persistentPropertiesCount;
 		}
@@ -183,7 +183,7 @@ bool CPropertiesManager::WriteProperties(
 	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
 		PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
 
-		bool isPersistent = ((propertyInfoPtr->propertyFlags & iprop::IProperty::PF_PERSISTENT) != 0);
+		bool isPersistent = ((propertyInfoPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0);
 		if (!isPersistent){
 			continue;
 		}
@@ -219,21 +219,23 @@ bool CPropertiesManager::WriteProperties(
 
 CPropertiesManager::PropertyFactory CPropertiesManager::s_propertyFactory;
 
-static struct DefaultAttributeTypesRegistrator
+static struct DefaultPropertyTypesRegistrator
 {
-	DefaultAttributeTypesRegistrator()
+	DefaultPropertyTypesRegistrator()
 	{
-		CPropertiesManager::RegisterPropertyType<iprop::CIntAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CBoolAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CDoubleAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CStringAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CMultiIntAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CMultiBoolAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CMultiDoubleAttribute>();
-		CPropertiesManager::RegisterPropertyType<iprop::CMultiStringAttribute>();
+		CPropertiesManager::RegisterPropertyType<CIntProperty>();
+		CPropertiesManager::RegisterPropertyType<CBoolProperty>();
+		CPropertiesManager::RegisterPropertyType<CDoubleProperty>();
+		CPropertiesManager::RegisterPropertyType<CStringProperty>();
+		CPropertiesManager::RegisterPropertyType<CStdStringProperty>();
+		CPropertiesManager::RegisterPropertyType<CMultiIntProperty>();
+		CPropertiesManager::RegisterPropertyType<CMultiBoolProperty>();
+		CPropertiesManager::RegisterPropertyType<CMultiDoubleProperty>();
+		CPropertiesManager::RegisterPropertyType<CMultiStringProperty>();
+		CPropertiesManager::RegisterPropertyType<CMultiStdStringProperty>();
 	}
 
-} s_defaultAttributeTypesRegistrator;
+} s_defaultPropertyTypesRegistrator;
 
 
 } // namespace iprop

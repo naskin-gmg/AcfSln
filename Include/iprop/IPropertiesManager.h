@@ -44,7 +44,7 @@ public:
 	/**
 		Insert an property into the object.
 		\param objectPtr	Property data object.
-		\param propertyId	Unique ID of the property in the attributes repository.
+		\param propertyId	Unique ID of the property in the properties repository.
 		\param propertyDescription	Human readable description of the property.
 		\param propertyFlags	Property flags. \sa IProperty::PropertyFlags.
 		\param releaseFlag	Indicate who control the property's memory.

@@ -23,13 +23,13 @@ void CPropertiesEditorComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	iprop::IPropertiesManager* objectPtr = GetObjectPtr();
+	IPropertiesManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 
 		int propertiesCount = objectPtr->GetPropertiesCount();
 		
 		for(int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
-			const iprop::IProperty* propertyPtr = dynamic_cast<const iprop::IProperty*>(objectPtr->GetProperty(propertyIndex));
+			const IProperty* propertyPtr = dynamic_cast<const IProperty*>(objectPtr->GetProperty(propertyIndex));
 			if (propertyPtr != NULL){
 
 				istd::CString propertyId = objectPtr->GetPropertyId(propertyIndex);
@@ -55,7 +55,7 @@ void CPropertiesEditorComp::OnGuiCreated()
 // private methods
 
 void CPropertiesEditorComp::UpdatePropertyEditor(
-			const iprop::IProperty& objectProperty,
+			const IProperty& objectProperty,
 			const QString& propertyId,
 			const QString& propertyDescription)
 {
@@ -101,27 +101,32 @@ QTreeWidgetItem* CPropertiesEditorComp::FindPropertyItem(const QString propertyI
 }
 
 
-void CPropertiesEditorComp::SetDataToEditor(const iprop::IProperty& objectProperty, QTreeWidgetItem& propertyItem)
+void CPropertiesEditorComp::SetDataToEditor(const IProperty& objectProperty, QTreeWidgetItem& propertyItem)
 {
-	const iprop::CBoolAttribute* boolPropertyPtr = dynamic_cast<const iprop::CBoolAttribute*>(&objectProperty);
+	const CBoolProperty* boolPropertyPtr = dynamic_cast<const CBoolProperty*>(&objectProperty);
 	if (boolPropertyPtr != NULL){
 		bool value = boolPropertyPtr->GetValue();
 		propertyItem.setText(CT_VALUE, value ? tr("true") : tr("false"));
 	}
 
-	const iprop::CIntAttribute* intPropertyPtr = dynamic_cast<const iprop::CIntAttribute*>(&objectProperty);
+	const CIntProperty* intPropertyPtr = dynamic_cast<const CIntProperty*>(&objectProperty);
 	if (intPropertyPtr != NULL){
 		propertyItem.setText(CT_VALUE, QString("%1").arg(intPropertyPtr->GetValue()));
 	}
 
-	const iprop::CDoubleAttribute* doublePropertyPtr = dynamic_cast<const iprop::CDoubleAttribute*>(&objectProperty);
+	const CDoubleProperty* doublePropertyPtr = dynamic_cast<const CDoubleProperty*>(&objectProperty);
 	if (doublePropertyPtr != NULL){
 		propertyItem.setText(CT_VALUE, QString("%1").arg(doublePropertyPtr->GetValue(), 3, 'f', 3));
 	}
 
-	const iprop::CStringAttribute* stringPropertyPtr = dynamic_cast<const iprop::CStringAttribute*>(&objectProperty);
+	const CStringProperty* stringPropertyPtr = dynamic_cast<const CStringProperty*>(&objectProperty);
 	if (stringPropertyPtr != NULL){
 		propertyItem.setText(CT_VALUE, iqt::GetQString(stringPropertyPtr->GetValue()));
+	}
+
+	const CStdStringProperty* idPropertyPtr = dynamic_cast<const CStdStringProperty*>(&objectProperty);
+	if (idPropertyPtr != NULL){
+		propertyItem.setText(CT_VALUE, idPropertyPtr->GetValue().c_str());
 	}
 }
 

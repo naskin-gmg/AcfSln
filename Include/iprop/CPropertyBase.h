@@ -17,12 +17,12 @@ class IPropertiesManager;
 /**
 	Basic implementation of an property.
 */
-class CPropertyBase: public iser::TCopySerializedWrap<iprop::IProperty>
+class CPropertyBase: public iser::TCopySerializedWrap<IProperty>
 {
 public:
 	CPropertyBase();
 	CPropertyBase(
-				iprop::IPropertiesManager* propertyOwnerPtr,
+				IPropertiesManager* propertyOwnerPtr,
 				const std::string& propertyId,
 				const std::string& propertyDescription,
 				int propertyFlags,
@@ -32,7 +32,7 @@ public:
 	virtual const iser::IObject* GetDefaultPropertyValue() const;
 
 protected:
-	iprop::IPropertiesManager* m_propertyOwnerPtr;
+	IPropertiesManager* m_propertyOwnerPtr;
 	int m_changeFlags;
 };
 

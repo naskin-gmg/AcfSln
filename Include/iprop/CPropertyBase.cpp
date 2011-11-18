@@ -18,7 +18,7 @@ CPropertyBase::CPropertyBase()
 
 
 CPropertyBase::CPropertyBase(
-				iprop::IPropertiesManager* propertyOwnerPtr,
+				IPropertiesManager* propertyOwnerPtr,
 				const std::string& propertyId,
 				const std::string& propertyDescription,
 				int propertyFlags,
