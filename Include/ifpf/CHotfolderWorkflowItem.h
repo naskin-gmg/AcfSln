@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "ibase/TNamedWrap.h"
+#include "iprm/CNameParam.h"
 
 
 // AcfSln includes
@@ -18,10 +18,12 @@ namespace ifpf
 /**
 	Implementation of the dynamic data model of the hotfolder.
 */
-class CHotfolderWorkflowItem: public ibase::TNamedWrap<ifpf::IHotfolderWorkflowItem>
+class CHotfolderWorkflowItem:
+			public iprm::CNameParam,
+			virtual public ifpf::IHotfolderWorkflowItem
 {
 public:
-	typedef ibase::TNamedWrap<istd::INamed> BaseClass;
+	typedef iprm::CNameParam BaseClass;
 
 	void Initialize(const istd::CString& hotfolderId,
 					const ifpf::IHotfolderInfoManager* infoManagerPtr);

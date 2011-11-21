@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/INamed.h"
+#include "iprm/INameParam.h"
 
 
 namespace ifpf
@@ -13,7 +13,7 @@ namespace ifpf
 /**
 	Interface for getting some informations about properties of a given hotfolder.
 */
-class IHotfolderWorkflowItem: virtual public istd::INamed
+class IHotfolderWorkflowItem: virtual public iprm::INameParam
 {
 public:
 	/**

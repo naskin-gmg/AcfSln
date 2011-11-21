@@ -17,11 +17,16 @@ namespace ifpf
 /**
 	Implementation of the dynamic data model of the hotfolder.
 */
-class CVisualHotfolderWorkflowItem: public ifpf::CHotfolderWorkflowItem, virtual public i2d::CPosition2d
+class CVisualHotfolderWorkflowItem:
+			public ifpf::CHotfolderWorkflowItem,
+			public i2d::CPosition2d
 {
 public:
 	typedef ifpf::CHotfolderWorkflowItem BaseClass;
 	typedef i2d::CPosition2d BaseClass2;
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
 };
 
 
