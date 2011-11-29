@@ -4,7 +4,6 @@
 	Version="9,00"
 	Name="imeas"
 	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
-	SccLocalPath="..\iwin"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -38,7 +37,6 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
@@ -104,7 +102,6 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName="./iwin/DebugVC7/iwin.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
