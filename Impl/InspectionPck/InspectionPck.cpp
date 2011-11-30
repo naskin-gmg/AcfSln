@@ -26,6 +26,17 @@ I_EXPORT_COMPONENT(
 			"Group set of inspection tasks into single one",
 			"Task Model Supplier Product Composite Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
+I_EXPORT_COMPONENT(
+			GeneralResultCache,
+			"General inspection provider cache object",
+			"Provider Cache Results" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+
+
+I_EXPORT_COMPONENT(
+			IdCache,
+			"ID provider cache object",
+			"Provider Cache ID" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+
 
 } // namespace InspectionPck
 

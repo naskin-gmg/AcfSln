@@ -201,6 +201,14 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CGeneralResultCacheComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CIdCacheComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInspectionComp.cpp"
 				>
 			</File>
@@ -213,6 +221,14 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CGeneralResultCacheComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CIdCacheComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CInspectionComp.h"
 				>

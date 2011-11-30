@@ -22,12 +22,6 @@ public:
 		Get current ID value.
 	*/
 	virtual I_DWORD GetCurrentId() const = 0;
-
-	/**
-		Set current ID value.
-		\return	true if ID could be set in the implementation.
-	*/
-	virtual bool SetCurrentId(I_DWORD id) = 0;
 };
 
 
