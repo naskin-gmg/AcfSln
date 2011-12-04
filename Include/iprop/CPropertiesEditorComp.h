@@ -59,7 +59,7 @@ private:
 
 	QString GetPropertyId(const QTreeWidgetItem& propertyItem) const;
 
-	QTreeWidgetItem* FindPropertyItem(const QString propertyId) const;
+	QTreeWidgetItem* FindPropertyItem(const QString& propertyId) const;
 
 	void SetDataToEditor(const IProperty& objectProperty, QTreeWidgetItem& propertyItem);
 };

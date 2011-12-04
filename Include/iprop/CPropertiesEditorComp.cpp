@@ -80,7 +80,7 @@ QString CPropertiesEditorComp::GetPropertyId(const QTreeWidgetItem& propertyItem
 }
 
 
-QTreeWidgetItem* CPropertiesEditorComp::FindPropertyItem(const QString propertyId) const
+QTreeWidgetItem* CPropertiesEditorComp::FindPropertyItem(const QString& propertyId) const
 {
 	QTreeWidgetItemIterator treeIter(PropertyTree);
 
