@@ -71,7 +71,63 @@ iproc::ISupplier* CInspectionComp::GetSubtask(int subtaskIndex) const
 }
 
 
-iprm::IParamsSet* CInspectionComp::GetTaskParams() const
+// reimplemented (iproc::ISupplier)
+
+void CInspectionComp::InvalidateSupplier()
+{
+	int inspectionsCount = m_inspectionsCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
+		if (supplierPtr != NULL){
+			supplierPtr->InvalidateSupplier();
+		}
+	}
+}
+
+
+void CInspectionComp::EnsureWorkFinished()
+{
+	int inspectionsCount = m_inspectionsCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
+		if (supplierPtr != NULL){
+			supplierPtr->EnsureWorkFinished();
+		}
+	}
+}
+
+
+void CInspectionComp::ClearWorkResults()
+{
+	int inspectionsCount = m_inspectionsCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
+		if (supplierPtr != NULL){
+			supplierPtr->ClearWorkResults();
+		}
+	}
+}
+
+
+int CInspectionComp::GetWorkStatus() const
+{
+	int retVal = WS_NONE;
+	int inspectionsCount = m_inspectionsCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		const iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
+		if (supplierPtr != NULL){
+			int workStatus = supplierPtr->GetWorkStatus();
+			if (workStatus > retVal){
+				retVal = workStatus;
+			}
+		}
+	}
+
+	return retVal;
+}
+
+
+iprm::IParamsSet* CInspectionComp::GetModelParametersSet() const
 {
 	return m_generalParamsCompPtr.GetPtr();
 }

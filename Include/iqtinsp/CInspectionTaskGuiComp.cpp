@@ -110,7 +110,7 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 	}
 
 	if (m_generalParamsObserverCompPtr.IsValid()){
-		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetTaskParams());
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetModelParametersSet());
 		if (generalParamsModelPtr != NULL){
 			generalParamsModelPtr->AttachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}
@@ -154,7 +154,7 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 	}
 
 	if (m_generalParamsObserverCompPtr.IsValid()){
-		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetTaskParams());
+		imod::IModel* generalParamsModelPtr = dynamic_cast<imod::IModel*>(inspectionTaskPtr->GetModelParametersSet());
 		if ((generalParamsModelPtr != NULL) && generalParamsModelPtr->IsAttached(m_generalParamsObserverCompPtr.GetPtr())){
 			generalParamsModelPtr->DetachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}
@@ -364,16 +364,9 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 
 void CInspectionTaskGuiComp::OnAutoTest()
 {
-	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	iproc::ISupplier* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		int subtasksCount = objectPtr->GetSubtasksCount();
-
-		if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < subtasksCount)){
-			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(m_currentGuiIndex);
-			if (subtaskPtr != NULL){
-				subtaskPtr->EnsureWorkFinished();
-			}
-		}
+		objectPtr->EnsureWorkFinished();
 
 		UpdateProcessingState();
 	}
@@ -388,21 +381,8 @@ void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		int subtasksCount = objectPtr->GetSubtasksCount();
-
-		for (int invalidateIndex = 0; invalidateIndex < subtasksCount; ++invalidateIndex){
-			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(invalidateIndex);
-			if (subtaskPtr != NULL){
-				subtaskPtr->InvalidateSupplier();
-			}
-		}
-
-		for (int finishIndex = 0; finishIndex < subtasksCount; ++finishIndex){
-			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(finishIndex);
-			if (subtaskPtr != NULL){
-				subtaskPtr->EnsureWorkFinished();
-			}
-		}
+		objectPtr->InvalidateSupplier();
+		objectPtr->EnsureWorkFinished();
 
 		UpdateProcessingState();
 	}
@@ -439,33 +419,29 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 
 void CInspectionTaskGuiComp::UpdateProcessingState()
 {
+	int workStatus = iproc::ISupplier::WS_NONE;
+
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		int subtasksCount = objectPtr->GetSubtasksCount();
+		workStatus = objectPtr->GetWorkStatus();
+	}
 
-		int workStatus = iproc::ISupplier::WS_NONE;
-		for (int invalidateIndex = 0; invalidateIndex < subtasksCount; ++invalidateIndex){
-			iproc::ISupplier* subtaskPtr = objectPtr->GetSubtask(invalidateIndex);
-			if (subtaskPtr != NULL){
-				workStatus = istd::Max(workStatus, subtaskPtr->GetWorkStatus());
-			}
-		}
+	switch (workStatus){
+	case iproc::ISupplier::WS_OK:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+		break;
 
-		switch (workStatus){
-			case iproc::ISupplier::WS_OK:
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
-				break;
-			case iproc::ISupplier::WS_ERROR:
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
-				break;
-			case iproc::ISupplier::WS_CRITICAL:
-				StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
-				break;
-			default:
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
-				break;
-		
-		}
+	case iproc::ISupplier::WS_ERROR:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+		break;
+
+	case iproc::ISupplier::WS_CRITICAL:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
+		break;
+
+	default:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+		break;
 	}
 }
 
