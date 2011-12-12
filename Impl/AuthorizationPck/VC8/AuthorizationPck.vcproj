@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="AuthorisationPck"
+	Name="AuthorizationPck"
 	ProjectGUID="{0D2E7F91-67B5-4C9F-B67E-73F38808FE24}"
-	RootNamespace="AuthorisationPck"
+	RootNamespace="AuthorizationPck"
 	Keyword="Qt4VSv1.0"
 	TargetFrameworkVersion="0"
 	>

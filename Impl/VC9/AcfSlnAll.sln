@@ -121,7 +121,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iauth", "..\..\Include\iaut
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iqtauth", "..\..\Include\iqtauth\VC9\iqtauth.vcproj", "{9E71DCC4-A064-47E7-A2B9-AB625CB19C83}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthorisationPck", "..\AuthorizationPck\VC9\AuthorisationPck.vcproj", "{0D2E7F91-67B5-4C9F-B67E-73F38808FE24}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthorizationPck", "..\AuthorizationPck\VC9\AuthorizationPck.vcproj", "{0D2E7F91-67B5-4C9F-B67E-73F38808FE24}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D9A7459D-FADD-4CB5-9359-E272D41CECFE} = {D9A7459D-FADD-4CB5-9359-E272D41CECFE}
 	EndProjectSection
