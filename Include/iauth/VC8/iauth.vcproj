@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iinsp"
-	ProjectGUID="{34125E03-433E-4FFE-8D7A-9833C6B3AAA9}"
-	RootNamespace="iinsp"
+	Name="iauth"
+	ProjectGUID="{D9A7459D-FADD-4CB5-9359-E272D41CECFE}"
+	RootNamespace="iauth"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -13,12 +13,6 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Acf.rules"
-		/>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Tortoise.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -32,25 +26,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -68,13 +44,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				EnableFunctionLevelLinking="true"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
-				SuppressStartupBanner="true"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				PrecompiledHeaderFile=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -104,13 +75,12 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Debug.vsprops;$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -118,25 +88,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="DeployCopy"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -154,12 +106,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
-				StringPooling="true"
-				BrowseInformation="1"
-				WarningLevel="4"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				PrecompiledHeaderFile=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -189,7 +137,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -201,19 +148,23 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CGeneralResultCacheComp.cpp"
+				RelativePath="..\CSimpleLoginComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CIdCacheComp.cpp"
+				RelativePath="..\CStaticRightsProviderComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionComp.cpp"
+				RelativePath="..\CUser.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionTaskComp.cpp"
+				RelativePath="..\CUserLoginComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CUsersManagerComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -222,43 +173,43 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CGeneralResultCacheComp.h"
+				RelativePath="..\CSimpleLoginComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CIdCacheComp.h"
+				RelativePath="..\CStaticRightsProviderComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionComp.h"
+				RelativePath="..\CUser.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionTaskComp.h"
+				RelativePath="..\CUserLoginComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IGeneralResultProvider.h"
+				RelativePath="..\CUsersManagerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IIdProvider.h"
+				RelativePath="..\ILogin.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iinsp.h"
+				RelativePath="..\IPasswordChanger.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IInspection.h"
+				RelativePath="..\IRightsProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IInspectionTask.h"
+				RelativePath="..\IUserLogin.h"
 				>
 			</File>
 			<File
-				RelativePath="..\ITimeStampProvider.h"
+				RelativePath="..\IUsersManager.h"
 				>
 			</File>
 		</Filter>

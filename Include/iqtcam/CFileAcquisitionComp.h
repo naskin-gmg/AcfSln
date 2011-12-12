@@ -64,7 +64,7 @@ protected:
 	};
 
 private:
-	typedef ::std::map<istd::CString, ParamsInfo> DirInfos;
+	typedef std::map<istd::CString, ParamsInfo> DirInfos;
 	DirInfos m_dirInfos;
 
 	I_DWORD m_lastIdStamp;

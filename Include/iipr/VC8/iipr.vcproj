@@ -158,6 +158,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CBitmapCacheComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCaliperFeature.cpp"
 				>
 			</File>
@@ -242,6 +246,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiBitmapCacheComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPositionFromImageSupplierComp.cpp"
 				>
 			</File>
@@ -298,6 +306,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CBitmapCacheComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CCaliperFeature.h"
 				>
@@ -383,6 +395,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiBitmapCacheComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CPositionFromImageSupplierComp.h"
 				>
 			</File>
@@ -455,6 +471,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDataSequenceProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFeature.h"
 				>
 			</File>
@@ -496,10 +516,6 @@
 			</File>
 			<File
 				RelativePath="..\ILineProjectionProcessor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDataSequenceProvider.h"
 				>
 			</File>
 			<File

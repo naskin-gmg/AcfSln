@@ -6,7 +6,7 @@
 #include "imath/CVarVector.h"
 #include "icomp/CComponentBase.h"
 
-// QSF includes
+// ACF-Solutions includes
 #include "isig/IPulseParams.h"
 #include "isig/IPulseConstraints.h"
 
@@ -69,6 +69,5 @@ private:
 
 
 #endif // !isig_CPulseControllerParamsComp_included
-
 
 
