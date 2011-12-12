@@ -20,7 +20,6 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Debug.vsprops;$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
