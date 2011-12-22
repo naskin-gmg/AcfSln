@@ -23,8 +23,6 @@ void CSearchParamsGuiComp::UpdateModel() const
 	updatePtr->SetScaleRange(istd::CRange(m_spinMinimumScale->value(), m_spinMaximumScale->value()));
 	updatePtr->SetMinScore(m_spinMinimumScore->value());
 	updatePtr->SetNominalModelsCount(m_spinModelNumber->value());
-	updatePtr->SetRotationEnabled(m_checkEnableRotation->isChecked());
-	updatePtr->SetScaleEnabled(m_checkEnableScale->isChecked());
 }
 
 
@@ -59,9 +57,6 @@ void CSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 	m_spinMaximumScale->setValue(int(paramsPtr->GetScaleRange().GetMaxValue()));
 	m_spinMinimumScore->setValue(int(paramsPtr->GetMinScore()));
 	m_spinModelNumber->setValue(paramsPtr->GetNominalModelsCount());
-
-	m_checkEnableRotation->setChecked(paramsPtr->IsRotationEnabled());
-	m_checkEnableScale->setChecked(paramsPtr->IsScaleEnabled());
 
 	istd::TChangeNotifier<iimg::IBitmap> updatePtr(&m_modelBitmap);
 	const iimg::IBitmap* bitmapPtr = &paramsPtr->GetModelImage();
