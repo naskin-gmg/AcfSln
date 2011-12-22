@@ -1,12 +1,15 @@
 #include "iqtmeas/CNumericParamsGuiComp.h"
 
 
+// ACF includes
 #include "imeas/INumericConstraints.h"
 
 
 namespace iqtmeas
 {
 
+
+// public methods
 
 // reimplemented (imod::IModelEditor)
 

@@ -6,14 +6,16 @@
 #include <QFrame>
 #include <QGroupBox>
 
+
 // ACF includes
 #include "istd/TPointerVector.h"
+
 #include "imod/TModelWrap.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 
-// QSF includes
+// ACF-Solutions includes
 #include "imeas/INumericParams.h"
 
 #include "iqtmeas/CNumericValueWidget.h"
