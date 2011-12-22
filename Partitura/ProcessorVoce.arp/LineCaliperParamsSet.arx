@@ -215,7 +215,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FilterLengths
+              Values
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;double&gt;

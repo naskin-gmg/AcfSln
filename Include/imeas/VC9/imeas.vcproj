@@ -47,7 +47,6 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -110,10 +109,8 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				BasicRuntimeChecks="3"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

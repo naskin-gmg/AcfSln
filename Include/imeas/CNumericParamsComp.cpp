@@ -27,13 +27,13 @@ const INumericConstraints* CNumericParamsComp::GetNumericConstraints() const
 
 imath::CVarVector CNumericParamsComp::GetValues() const
 {
-	return m_filterLengts;
+	return m_values;
 }
 
 
 bool CNumericParamsComp::SetValues(const imath::CVarVector& lengths)
 {
-	if (m_filterLengts != lengths){
+	if (m_values != lengths){
 		const INumericConstraints* constraintsPtr = GetNumericConstraints();
 		I_ASSERT(constraintsPtr != NULL);
 		if (lengths.GetElementsCount() != constraintsPtr->GetNumericValuesCount()){
@@ -42,7 +42,7 @@ bool CNumericParamsComp::SetValues(const imath::CVarVector& lengths)
 
 		istd::CChangeNotifier notifier(this);
 
-		m_filterLengts = lengths;
+		m_values = lengths;
 	}
 
 	return true;
@@ -110,7 +110,7 @@ bool CNumericParamsComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag filterLengthsTag("FilterLengts", "List of filter lengths for each dimension");
 
 	bool retVal = archive.BeginTag(filterLengthsTag);
-	retVal = retVal && m_filterLengts.Serialize(archive);
+	retVal = retVal && m_values.Serialize(archive);
 	retVal = retVal && archive.EndTag(filterLengthsTag);
 
 	return retVal;
@@ -129,12 +129,12 @@ void CNumericParamsComp::OnComponentCreated()
 	I_ASSERT(constraintsPtr != NULL);
 
 	int count = constraintsPtr->GetNumericValuesCount();
-	m_filterLengts.SetElementsCount(count, 1);
+	m_values.SetElementsCount(count, 1);
 
 	if (m_filterLengthsAttrPtr.IsValid()){
 		int commonCount = istd::Min(count, m_filterLengthsAttrPtr.GetCount());
 		for (int i = 0; i < commonCount; ++i){
-			m_filterLengts[i] = m_filterLengthsAttrPtr[i];
+			m_values[i] = m_filterLengthsAttrPtr[i];
 		}
 	}
 }

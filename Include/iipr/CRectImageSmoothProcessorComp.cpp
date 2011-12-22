@@ -15,21 +15,31 @@ namespace iipr
 
 int CRectImageSmoothProcessorComp::GetNumericValuesCount() const
 {
-	return 2;
+	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
+		return 1;
+	}
+	else{
+		return 2;
+	}
 }
 
 
 istd::CString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
 {
-	switch (index){
-	case 0:
-		return "Filter width";
+	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
+		return "Filter length";
+	}
+	else{
+		switch (index){
+		case 0:
+			return "Filter width";
 
-	case 1:
-		return "Filter height";
+		case 1:
+			return "Filter height";
 
-	default:
-		return "";
+		default:
+			return "";
+		}
 	}
 }
 
@@ -315,9 +325,17 @@ istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
 
 const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetValueManip() const
 {
-	static imath::CFixedPointManip manip(0);
+	static imath::CFixedPointManip pixelManip(0);
+	static imath::CFixedPointManip percentManip(3);
 
-	return manip;
+	switch (*m_unitModeAttrPtr){
+	case UM_PERCENT:
+	case UM_PERCENT_DIAG:
+		return percentManip;
+
+	default:
+		return pixelManip;
+	}
 }
 
 

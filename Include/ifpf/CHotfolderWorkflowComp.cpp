@@ -26,7 +26,7 @@ CHotfolderWorkflowComp::CHotfolderWorkflowComp()
 
 // reimplemented (ifpf::IHotfolderInfoManager)
 
-ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const istd::CString& hotfolderName) const
+ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const istd::CString& /*hotfolderName*/) const
 {
 	return NULL;
 }
@@ -49,7 +49,7 @@ ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const istd::C
 }
 
 
-bool CHotfolderWorkflowComp::RemoveHotfolder(const istd::CString& hotfolderName)
+bool CHotfolderWorkflowComp::RemoveHotfolder(const istd::CString& /*hotfolderName*/)
 {
 	return true;
 }
@@ -99,7 +99,7 @@ ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::GetHotfolder(const istd::C
 
 // reimplemented (iser::ISerializable)
 
-bool CHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
+bool CHotfolderWorkflowComp::Serialize(iser::IArchive& /*archive*/)
 {
 	bool retVal = true;
 

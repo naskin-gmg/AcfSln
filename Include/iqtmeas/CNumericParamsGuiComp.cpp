@@ -1,14 +1,6 @@
 #include "iqtmeas/CNumericParamsGuiComp.h"
 
 
-// Qt includes
-#include <QString>
-
-// ACF includes
-#include "istd/TChangeNotifier.h"
-
-// ACF-Solutions includes
-#include "imeas/IUnitInfo.h"
 #include "imeas/INumericConstraints.h"
 
 
@@ -16,189 +8,109 @@ namespace iqtmeas
 {
 
 
-CNumericParamsGuiComp::CNumericParamsGuiComp()
-:	m_widthScaleFactor(1),
-	m_heightScaleFactor(1)
-{
-}
-
-
 // reimplemented (imod::IModelEditor)
 
 void CNumericParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
-
 	imeas::INumericParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	if (objectPtr != NULL && IsGuiCreated()){
+		int valuesCount = int(m_valueWidgets.GetCount());
+		imath::CVarVector values(valuesCount);
 
-	imath::CVarVector filterLengths = objectPtr->GetValues();
+		for (int i = 0; i < valuesCount; i++){
+			CNumericValueWidget* valueWidgetPtr = m_valueWidgets.GetAt(i);
 
-	if (filterLengths.GetElementsCount() >= 1){
-		filterLengths[0] = FilterWidthSlider->value() / m_widthScaleFactor;
-	}
+			values.SetElement(i, valueWidgetPtr->GetValue());
+		}
 
-	if (filterLengths.GetElementsCount() >= 2){
-		filterLengths[1] = FilterHeightSlider->value() / m_heightScaleFactor;
-	}
-
-	if (filterLengths != objectPtr->GetValues()){
-		istd::CChangeNotifier notifier(objectPtr);
-
-		objectPtr->SetValues(filterLengths);
+		objectPtr->SetValues(values);
 	}
 }
 
 
 // protected methods
 
-void CNumericParamsGuiComp::UpdateLabel()
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CNumericParamsGuiComp::OnGuiDestroyed()
 {
-	FilterWidthValueLabel->setText(QString::number(FilterWidthSlider->value()));
-	FilterHeightValueLabel->setText(QString::number(FilterHeightSlider->value()));
+	m_valueWidgets.Reset();
+
+	BaseClass::OnGuiDestroyed();
 }
 
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CNumericParamsGuiComp::OnGuiModelAttached()
-{
-	imeas::INumericParams* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		UpdateBlocker updateBlocker(this);
-
-		const imeas::INumericConstraints* constraintsPtr = objectPtr->GetNumericConstraints();
-
-		int filterDimensionsCount = 0;
-		if (constraintsPtr != NULL){
-			filterDimensionsCount = constraintsPtr->GetNumericValuesCount();
-		}
-		else{
-			const imath::CVarVector& filterLengths = objectPtr->GetValues();
-			filterDimensionsCount = filterLengths.GetElementsCount();
-		}
-
-		if (filterDimensionsCount >= 1){
-			QString unitName;
-			if (constraintsPtr != NULL){
-				FilterWidthLabel->setText(iqt::GetQString(constraintsPtr->GetNumericValueDescription(0)));
-
-				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(0);
-				unitName = iqt::GetQString(unitInfo.GetUnitName());
-
-				m_widthScaleFactor = unitInfo.GetDisplayMultiplicationFactor();
-				istd::CRange valueRange = unitInfo.GetValueRange();
-
-				FilterWidthSlider->setMinimum(int(valueRange.GetMinValue() * m_widthScaleFactor));
-				FilterWidthSlider->setMaximum(int(valueRange.GetMaxValue() * m_widthScaleFactor));
-			}
-			else{
-				FilterWidthSlider->setMinimum(1);
-				FilterWidthSlider->setMaximum(100);
-
-				m_widthScaleFactor = 1;
-			}
-
-			FilterWidthLabel->setVisible(true);
-			FilterWidthSlider->setVisible(true);
-			FilterWidthValueLabel->setVisible(true);
-			WidthUnitNameLabel->setText(unitName);
-			WidthUnitNameLabel->setVisible(!unitName.isEmpty());
-		}
-		else{
-			FilterWidthLabel->setVisible(false);
-			FilterWidthSlider->setVisible(false);
-			FilterWidthValueLabel->setVisible(false);
-			WidthUnitNameLabel->setVisible(false);
-		}
-
-		if (filterDimensionsCount >= 2){
-			QString unitName;
-			if (constraintsPtr != NULL){
-				FilterHeightLabel->setText(iqt::GetQString(constraintsPtr->GetNumericValueDescription(1)));
-
-				const imeas::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(1);
-				unitName = iqt::GetQString(unitInfo.GetUnitName());
-
-				m_heightScaleFactor = unitInfo.GetDisplayMultiplicationFactor();
-				istd::CRange valueRange = unitInfo.GetValueRange();
-
-				FilterHeightSlider->setMinimum(int(valueRange.GetMinValue() * m_heightScaleFactor));
-				FilterHeightSlider->setMaximum(int(valueRange.GetMaxValue() * m_heightScaleFactor));
-			}
-			else{
-				FilterHeightSlider->setMinimum(1);
-				FilterHeightSlider->setMaximum(100);
-
-				m_heightScaleFactor = 1;
-			}
-
-			FilterHeightLabel->setVisible(true);
-			FilterHeightSlider->setVisible(true);
-			FilterHeightValueLabel->setVisible(true);
-			HeightUnitNameLabel->setText(unitName);
-			HeightUnitNameLabel->setVisible(!unitName.isEmpty());
-		}
-		else{
-			FilterHeightLabel->setVisible(false);
-			FilterHeightSlider->setVisible(false);
-			FilterHeightValueLabel->setVisible(false);
-			HeightUnitNameLabel->setVisible(false);
-		}
-	}
-
-	BaseClass::OnGuiModelAttached();
-}
-
-
-void CNumericParamsGuiComp::UpdateGui(int /*updateFlags*/)
+void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
+	QWidget* panelPtr = GetQtWidget();
+	I_ASSERT(panelPtr != NULL);	// called inside UpdateGui(), widget must be defined.
+
+	QLayout* layoutPtr = panelPtr->layout();
+	if (layoutPtr == NULL){
+		layoutPtr = new QBoxLayout(QBoxLayout::TopToBottom);
+		layoutPtr->setMargin(0);
+		panelPtr->setLayout(layoutPtr);
+	}
+
 	imeas::INumericParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		const imath::CVarVector& filterLengths = objectPtr->GetValues();
+		const imeas::INumericConstraints* constraintsPtr = objectPtr->GetNumericConstraints();
 
-		int filterDimensionsCount = filterLengths.GetElementsCount();
+		imath::CVarVector values = objectPtr->GetValues();
 
-		if (filterDimensionsCount >= 1){
-			FilterWidthSlider->setValue(int(filterLengths[0] * m_widthScaleFactor + 0.5));
+		int widgetsCount = m_valueWidgets.GetCount();
+
+		int valuesCount;
+		if (constraintsPtr != NULL){
+			valuesCount = constraintsPtr->GetNumericValuesCount();
+		}
+		else{
+			valuesCount = values.GetElementsCount();
 		}
 
-		if (filterDimensionsCount >= 2){
-			FilterHeightSlider->setValue(int(filterLengths[1] * m_heightScaleFactor + 0.5));
+		m_valueWidgets.SetCount(valuesCount);
+		for (int i = widgetsCount; i < valuesCount; i++){
+			CNumericValueWidget* valueWidgetPtr = new CNumericValueWidget(panelPtr, *m_isSliderVisibleAttrPtr);
+			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
+
+			m_valueWidgets.SetElementAt(i, valueWidgetPtr);
+
+			layoutPtr->addWidget(valueWidgetPtr);
 		}
 
-		UpdateLabel();
+		for (int i = 0; i < valuesCount; i++){
+			CNumericValueWidget* valueWidgetPtr = m_valueWidgets.GetAt(i);
+			I_ASSERT(valueWidgetPtr != NULL);
+
+			if (constraintsPtr != NULL){
+				valueWidgetPtr->SetUnitInfo(
+							constraintsPtr->GetNumericValueDescription(i),
+							constraintsPtr->GetNumericValueUnitInfo(i));
+			}
+
+			if (i < values.GetElementsCount()){
+				valueWidgetPtr->SetValue(values.GetElement(i));
+			}
+			else{
+				valueWidgetPtr->SetValue(0);
+			}
+		}
 	}
 }
 
 
 // protected slots
 
-void CNumericParamsGuiComp::on_FilterWidthSlider_valueChanged(int /*value*/)
+void CNumericParamsGuiComp::OnValueChanged()
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateLabel();
-	}
-}
-
-
-void CNumericParamsGuiComp::on_FilterHeightSlider_valueChanged(int /*value*/)
-{
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateLabel();
-	}
+	UpdateModel();
 }
 
 
 } // namespace iqtmeas
+
 

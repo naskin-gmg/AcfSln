@@ -1,0 +1,55 @@
+#ifndef iqtmeas_CNumericValueWidget_included
+#define iqtmeas_CNumericValueWidget_included
+
+
+// Qt includes
+#include <QWidget>
+
+// QSF includes
+#include "imeas/IUnitInfo.h"
+
+#include "generated/ui_CNumericValueWidget.h"
+
+
+namespace iqtmeas
+{
+
+
+class CNumericValueWidget:
+			public QWidget,
+			protected Ui::CNumericValueWidget
+{
+	Q_OBJECT
+
+public:
+	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true);
+
+	void SetUnitInfo(const istd::CString& description, const imeas::IUnitInfo& unitInfo);
+
+	double GetValue() const;
+	void SetValue(double value);
+
+Q_SIGNALS:
+	/**
+		Will be emited when user changed value.
+	*/
+	void ValueChanged();
+
+protected Q_SLOTS:
+	void on_ValueSB_valueChanged(double value);
+	void on_ValueSlider_valueChanged(int value);
+
+private:
+	bool m_ignoreEvents;
+	double m_unitMultiplicationFactor;
+	double m_unitPrecisionFactor;
+};
+
+
+} // namespace iqtmeas
+
+
+#endif // !iqtmeas_CNumericValueWidget_included
+
+
+

@@ -118,7 +118,6 @@
 				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
-				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -170,6 +169,10 @@
 				RelativePath="..\CNumericParamsGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CNumericValueWidget.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -186,6 +189,10 @@
 			</File>
 			<File
 				RelativePath="..\CNumericParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericValueWidget.h"
 				>
 			</File>
 			<File
@@ -218,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CNumericValueWidget.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
 				>
 			</File>
@@ -226,7 +237,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CNumericParamsGuiComp.h"
+				RelativePath="..\generated\ui_CNumericValueWidget.h"
 				>
 			</File>
 		</Filter>
@@ -242,7 +253,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNumericParamsGuiComp.ui"
+				RelativePath="..\CNumericValueWidget.ui"
 				>
 			</File>
 		</Filter>
@@ -259,6 +270,10 @@
 			</File>
 			<File
 				RelativePath="..\CNumericParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericValueWidget.moc"
 				>
 			</File>
 		</Filter>

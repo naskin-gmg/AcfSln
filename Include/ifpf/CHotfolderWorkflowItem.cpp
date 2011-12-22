@@ -43,7 +43,7 @@ istd::CString CHotfolderWorkflowItem::GetOutputDirectory() const
 
 // reimplemented (iser::ISerializable)
 
-bool CHotfolderWorkflowItem::Serialize(iser::IArchive& archive)
+bool CHotfolderWorkflowItem::Serialize(iser::IArchive& /*archive*/)
 {
 	return true;
 }

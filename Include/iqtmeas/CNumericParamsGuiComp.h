@@ -2,52 +2,58 @@
 #define iqtmeas_CNumericParamsGuiComp_included
 
 
+// Qt includes
+#include <QFrame>
+#include <QGroupBox>
+
 // ACF includes
+#include "istd/TPointerVector.h"
+#include "imod/TModelWrap.h"
+
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-// ACF-Solutions includes
+
+// QSF includes
 #include "imeas/INumericParams.h"
 
-#include "iqtmeas/Generated/ui_CNumericParamsGuiComp.h"
+#include "iqtmeas/CNumericValueWidget.h"
 
 
 namespace iqtmeas
 {
 
 
-class CNumericParamsGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CNumericParamsGuiComp,
-			imeas::INumericParams>
+class CNumericParamsGuiComp: public ibase::TModelObserverCompWrap< iqtgui::TGuiObserverWrap<
+			iqtgui::TGuiComponentBase<QWidget>,
+			imod::TSingleModelObserverBase<imeas::INumericParams> > >
 {
 	Q_OBJECT
-
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CNumericParamsGuiComp,
-				imeas::INumericParams> BaseClass;
+	typedef ibase::TModelObserverCompWrap< iqtgui::TGuiObserverWrap<
+				iqtgui::TGuiComponentBase<QWidget>,
+				imod::TSingleModelObserverBase<imeas::INumericParams> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CNumericParamsGuiComp);
+		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
 	I_END_COMPONENT;
-
-	CNumericParamsGuiComp();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 
 protected:
-	void UpdateLabel();
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiDestroyed();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(int changeFlags);
 
-protected Q_SLOTS:
-	void on_FilterWidthSlider_valueChanged(int value);
-	void on_FilterHeightSlider_valueChanged(int value);
+public Q_SLOTS:
+	void OnValueChanged();
 
 private:
-	double m_widthScaleFactor;
-	double m_heightScaleFactor;
+	I_ATTR(bool, m_isSliderVisibleAttrPtr);
+
+	istd::TPointerVector<CNumericValueWidget> m_valueWidgets;
 };
 
 
