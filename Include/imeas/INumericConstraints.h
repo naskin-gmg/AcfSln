@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 
 // ACF-Solutions includes
 #include "imeas/IUnitInfo.h"
@@ -15,7 +15,7 @@ namespace imeas
 {
 
 
-class INumericConstraints: virtual public istd::IPolymorphic
+class INumericConstraints: virtual public istd::IChangeable
 {
 public:
 	/**

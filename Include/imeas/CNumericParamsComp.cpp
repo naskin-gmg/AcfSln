@@ -107,13 +107,28 @@ const imath::IDoubleManip& CNumericParamsComp::GetValueManip() const
 
 bool CNumericParamsComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag filterLengthsTag("FilterLengts", "List of filter lengths for each dimension");
+	static iser::CArchiveTag valuesTag("Values", "List of numeric values");
 
-	bool retVal = archive.BeginTag(filterLengthsTag);
+	bool retVal = archive.BeginTag(valuesTag);
 	retVal = retVal && m_values.Serialize(archive);
-	retVal = retVal && archive.EndTag(filterLengthsTag);
+	retVal = retVal && archive.EndTag(valuesTag);
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CNumericParamsComp::CopyFrom(const IChangeable& object)
+{
+	const INumericParams* nativeParamsPtr = dynamic_cast<const INumericParams*>(&object);
+	if (nativeParamsPtr != NULL){
+		m_values = nativeParamsPtr->GetValues();
+
+		return true;
+	}
+
+	return false;
 }
 
 

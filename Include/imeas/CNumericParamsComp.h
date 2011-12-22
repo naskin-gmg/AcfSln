@@ -61,6 +61,9 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object);
+
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
