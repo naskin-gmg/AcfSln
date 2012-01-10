@@ -19,11 +19,14 @@ bool CXslSerializerComp::IsOperationSupported(
 		return false;
 	}
 
-	if ((flags & QF_FILE) != 0){
+	if ((flags & QF_FILE) == 0){
 		return false;
 	}
 
-	if ((flags & (QF_LOAD | QF_SAVE)) == 0){
+	bool isSupported =
+				(((flags & QF_LOAD) != 0) && m_xslReadFilePath.IsValid() && !m_xslReadFilePath->GetPath().IsEmpty()) ||
+				(((flags & QF_SAVE) != 0) && m_xslWriteFilePath.IsValid() && !m_xslWriteFilePath->GetPath().IsEmpty());
+	if (!isSupported){
 		return false;
 	}
 
@@ -66,7 +69,7 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CStrin
 	}
 
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
-		CXslTransformationReadArchive archive(filePath, m_xslReadFilePath.GetPtr()->GetPath());
+		CXslTransformationReadArchive archive(filePath, m_xslReadFilePath->GetPath());
 
 		I_ASSERT(!archive.IsStoring());
 
@@ -95,7 +98,7 @@ int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const istd::CS
 	}
 
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
-		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath.GetPtr()->GetPath(), GetVersionInfo(), this);
+		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), this);
 		I_ASSERT(archive.IsStoring());
 
 		const iser::ISerializable* serializablePtr = dynamic_cast<const iser::ISerializable*>(&data);
