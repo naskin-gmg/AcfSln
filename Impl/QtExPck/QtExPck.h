@@ -6,6 +6,7 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "iqtex/CTcpTerminalGuiComp.h"
+#include "iqtex/CXslSerializerComp.h"
 
 
 /**
@@ -16,6 +17,7 @@ namespace QtExPck
 
 
 typedef iqtex::CTcpTerminalGuiComp TcpTerminalGui;
+typedef iqtex::CXslSerializerComp XslFileSerializer;
 
 
 } // namespace QtExPck
