@@ -16,8 +16,6 @@
 #include "iser/CFileArchiveInfo.h"
 #include "iser/CXmlDocumentInfoBase.h"
 
-#include "ibase/CLogComp.h"
-
 #include "iqtex/iqtex.h"
 
 
