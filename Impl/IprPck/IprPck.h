@@ -31,6 +31,7 @@
 #include "iipr/CRingPatternGeneratorComp.h"
 #include "iipr/CRingPatternGeneratorParamsComp.h"
 #include "iipr/CRgbToGrayProcessorComp.h"
+#include "iipr/CImageBinarizeProcessorComp.h"
 
 
 /**
@@ -76,8 +77,8 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> ImageInterpolationParams;
 
 typedef icomp::TModelCompWrap<iipr::CRingPatternGeneratorParamsComp> RingPatternGeneratorParams;
-
 typedef iipr::CRgbToGrayProcessorComp RgbToGrayProcessor;
+typedef iipr::CImageBinarizeProcessorComp ImageBinarizeProcessor;
 
 
 } // namespace IprPck

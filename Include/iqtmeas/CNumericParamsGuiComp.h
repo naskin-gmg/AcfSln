@@ -25,17 +25,21 @@ namespace iqtmeas
 {
 
 
-class CNumericParamsGuiComp: public ibase::TModelObserverCompWrap< iqtgui::TGuiObserverWrap<
-			iqtgui::TGuiComponentBase<QWidget>,
-			imod::TSingleModelObserverBase<imeas::INumericParams> > >
+class CNumericParamsGuiComp:
+			public ibase::TModelObserverCompWrap<
+						iqtgui::TGuiObserverWrap<
+									iqtgui::TGuiComponentBase<QWidget>,
+									imod::TSingleModelObserverBase<imeas::INumericParams> > >
 {
 	Q_OBJECT
 public:
-	typedef ibase::TModelObserverCompWrap< iqtgui::TGuiObserverWrap<
-				iqtgui::TGuiComponentBase<QWidget>,
-				imod::TSingleModelObserverBase<imeas::INumericParams> > > BaseClass;
+	typedef ibase::TModelObserverCompWrap<
+				iqtgui::TGuiObserverWrap<
+							iqtgui::TGuiComponentBase<QWidget>,
+							imod::TSingleModelObserverBase<imeas::INumericParams> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CNumericParamsGuiComp);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
 	I_END_COMPONENT;
 

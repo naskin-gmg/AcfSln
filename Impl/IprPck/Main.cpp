@@ -131,6 +131,11 @@ I_EXPORT_COMPONENT(
 			"RGB to Grayscale image conversion",
 			"RGB Grayscale Image Colorspace");
 
+I_EXPORT_COMPONENT(
+			ImageBinarizeProcessor,
+			"Image binarization processor with static threshold",
+			"Binarization Grayscale Image");
+
 
 } // namespace IprPck
 

@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageBinarizeProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageCropProcessorComp.cpp"
 				>
 			</File>
@@ -356,6 +360,10 @@
 			</File>
 			<File
 				RelativePath="..\CFeatureToImageMapperProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageBinarizeProcessorComp.h"
 				>
 			</File>
 			<File
