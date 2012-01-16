@@ -71,15 +71,13 @@ bool CImageBinarizeProcessorComp::ConvertImage(
 		return false;
 	}
 
-	istd::CChangeNotifier changePtr(&outputBitmap);
-
 	double threshold = values[0];
 
-	for(int y = 0; y < imageHeight; y++){
+	for(int y = 0; y < imageHeight; ++y){
 		I_BYTE* outputImageBufferPtr = (I_BYTE*)outputBitmap.GetLinePtr(y);
 		I_BYTE* inputImageBufferPtr = (I_BYTE*)inputBitmap.GetLinePtr(y);
 
-		for (int x = 0; x < imageWidth; x++){
+		for (int x = 0; x < imageWidth; ++x){
 			*outputImageBufferPtr = *inputImageBufferPtr > threshold ? 255 : 0;
 
 			++outputImageBufferPtr, ++inputImageBufferPtr;

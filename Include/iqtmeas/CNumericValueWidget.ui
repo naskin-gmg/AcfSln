@@ -23,7 +23,7 @@
    <item row="0" column="2">
     <widget class="QLabel" name="UnitLabel">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -45,19 +45,28 @@
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="DescriptionLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Value</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QDoubleSpinBox" name="ValueSB"/>
+    <widget class="QDoubleSpinBox" name="ValueSB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
   </layout>
-  <zorder>UnitLabel</zorder>
-  <zorder>ValueSlider</zorder>
-  <zorder>DescriptionLabel</zorder>
-  <zorder>ValueSB</zorder>
  </widget>
  <resources/>
  <connections/>
