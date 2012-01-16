@@ -24,7 +24,12 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			TriggerParams,
 			"Trigger params for cameras",
-			"Camera Acquisition Trigger Parameters Snap");
+			"Trigger Parameters Snap Edge Falling Rising Signal");
+
+I_EXPORT_COMPONENT(
+			PulseParams,
+			"Pulse control parameters",
+			"Trigger Pulse Signal Parameters Delay Duration Time Period");
 
 
 } // namespace SignalPck
