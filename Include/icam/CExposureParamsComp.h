@@ -20,7 +20,7 @@ public:
 	I_BEGIN_COMPONENT(CExposureParamsComp);
 		I_REGISTER_INTERFACE(IExposureParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_ASSIGN(m_exposureConstraintsCompPtr, "ExposureConstraints", "Information about valid exposure parameters", false, "ExposureConstraints");
+		I_ASSIGN(m_exposureConstraintsCompPtr, "Constraints", "Information about valid exposure parameters", false, "Constraints");
 		I_ASSIGN(m_defaultShutterTimeAttrPtr, "DefaultShutterTime", "Default value of shutter time in seconds", true, 0.001);
 	I_END_COMPONENT;
 

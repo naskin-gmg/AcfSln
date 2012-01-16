@@ -29,7 +29,7 @@ public:
 		I_REGISTER_INTERFACE(isig::IPulseParams);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(istd::IChangeable);
-		I_ASSIGN(m_pulseConstraintsCompPtr, "PulseConstraints", "Description of strobe parameter limits", false, "PulseConstraints");
+		I_ASSIGN(m_pulseConstraintsCompPtr, "Constraints", "Description of strobe parameter limits", false, "Constraints");
 		I_ASSIGN(m_delayTimeAttrPtr, "DelayTime", "Delay time from trigger to pulse, it is in seconds", true, 0);
 		I_ASSIGN(m_pulseDurationAttrPtr, "PulseDuration", "Duration of signal puls in seconds", true, 0);
 		I_ASSIGN(m_relaxingTimeAttrPtr, "RelaxingTime", "Relaxing time before new trigger is accepted after pulse", true, 0);

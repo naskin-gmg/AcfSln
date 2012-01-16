@@ -26,7 +26,7 @@ public:
 	I_BEGIN_COMPONENT(CSamplingParamsComp);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(isig::ISamplingParams);
-		I_ASSIGN(m_samplingConstraintsCompPtr, "SamplingConstraints", "Information about acceptable values for this parameters", false, "SamplingConstraints");
+		I_ASSIGN(m_samplingConstraintsCompPtr, "Constraints", "Information about acceptable values for this parameters", false, "Constraints");
 	I_END_COMPONENT;
 
 	CSamplingParamsComp();
