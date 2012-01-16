@@ -36,8 +36,13 @@ I_EXPORT_PACKAGE(
 
 I_EXPORT_COMPONENT(
 			SamplingParamsGui,
-			"Sampling parameters",
-			"Interval Sample Sampling Model Parameters GUI Qt");
+			"GUI editor for sampling parameters",
+			"Interval Sample Sampling Interval Observer Editor Parameters GUI Qt");
+
+I_EXPORT_COMPONENT(
+			PulseParamsGui,
+			"GUI editor for pulse parameters",
+			"Pulse Delay Relaxing Interval Observer Editor Parameters GUI Qt");
 
 I_EXPORT_COMPONENT(
 			SampleAcquisitionGui,
