@@ -2,9 +2,11 @@
 #define iqtsig_CPulseParamsGuiComp_included
 
 
-#include "isig/IPulseParams.h"
-
+// ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+// ACF-Solutions includes
+#include "isig/IPulseParams.h"
 
 #include "iqtsig/iqtsig.h"
 

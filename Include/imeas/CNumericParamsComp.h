@@ -34,10 +34,10 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(INumericParams);
-		I_ASSIGN(m_dimensionsCountAttrPtr, "DimensionsCount", "Number of filter dimensions (will be used if no constraints set)", true, 2);
-		I_ASSIGN(m_minFilterLengthAttrPtr, "MinFilterLength", "Minimal length of filter for all dimensions (will be used if no constraints set)", true, 1);
-		I_ASSIGN(m_maxFilterLengthAttrPtr, "MaxFilterLength", "Maximal length of filter for all dimensions (will be used if no constraints set)", true, 10);
-		I_ASSIGN_MULTI_0(m_filterLengthsAttrPtr, "Values", "Default values", false);
+		I_ASSIGN(m_dimensionsCountAttrPtr, "ValuesCount", "Default number of numeric values (will be used if no constraints set)", true, 1);
+		I_ASSIGN(m_minValuesAttrPtr, "MinValues", "List of minimal values (will be used if no constraints set)", true, 1);
+		I_ASSIGN(m_maxValuesAttrPtr, "MaxValues", "List of maximal values (will be used if no constraints set)", true, 10);
+		I_ASSIGN_MULTI_0(m_defaultValuesAttrPtr, "Values", "Default values", false);
 		I_ASSIGN(m_constraintsCompPtr, "Constraints", "Constraints object describing possible parameter values", false, "Constraints");
 	I_END_COMPONENT;
 
@@ -72,9 +72,9 @@ private:
 	imath::CVarVector m_values;
 
 	I_ATTR(int, m_dimensionsCountAttrPtr);
-	I_ATTR(double, m_minFilterLengthAttrPtr);
-	I_ATTR(double, m_maxFilterLengthAttrPtr);
-	I_MULTIATTR(double, m_filterLengthsAttrPtr);
+	I_ATTR(double, m_minValuesAttrPtr);
+	I_ATTR(double, m_maxValuesAttrPtr);
+	I_MULTIATTR(double, m_defaultValuesAttrPtr);
 	I_REF(INumericConstraints, m_constraintsCompPtr);
 };
 

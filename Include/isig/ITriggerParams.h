@@ -49,11 +49,18 @@ public:
 			There external trigger with negative edge control.
 		*/
 		TM_NEGATIVE_LEVEL,
-		TM_SOFTWARE
+		/**
+			Software trigger mode.
+		*/
+		TM_SOFTWARE,
+		/**
+			Last available trigger mode index.
+		*/
+		TM_LAST = TM_SOFTWARE
 	};
 
 	/**
-		Get constrints describing supported parameter states.
+		Get constraints describing supported parameter states.
 	*/
 	virtual const ITriggerConstraints* GetTriggerConstraints() const = 0;
 

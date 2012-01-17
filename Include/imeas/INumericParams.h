@@ -14,6 +14,9 @@ namespace imeas
 class INumericConstraints;
 
 
+/**
+	General parameter set containing list of numeric values.
+*/
 class INumericParams: virtual public iser::ISerializable
 {
 public:
@@ -23,12 +26,12 @@ public:
 	virtual const INumericConstraints* GetNumericConstraints() const = 0;
 
 	/**
-		Get filter length for each dimension.
+		Get list of numeric values.
 	*/
 	virtual imath::CVarVector GetValues() const = 0;
 
 	/**
-		Set filter length for each dimension.
+		Set list of numeric values.
 	*/
 	virtual bool SetValues(const imath::CVarVector& lengths) = 0;
 };

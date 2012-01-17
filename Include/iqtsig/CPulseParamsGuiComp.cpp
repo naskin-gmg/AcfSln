@@ -1,8 +1,10 @@
 #include "iqtsig/CPulseParamsGuiComp.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
+// ACF-Solutions includes
 #include "isig/IPulseConstraints.h"
 
 
@@ -40,7 +42,7 @@ void CPulseParamsGuiComp::OnGuiModelAttached()
 	BaseClass::OnGuiModelAttached();
 
 	I_ASSERT(IsGuiCreated());
-	isig::IPulseParams* objectPtr = GetObjectPtr();
+	const isig::IPulseParams* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
 
 	istd::CRange delayTimeRange(0, 0.1);
@@ -90,7 +92,7 @@ void CPulseParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	isig::IPulseParams* objectPtr = GetObjectPtr();
+	const isig::IPulseParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000);
 		PulseTimeSB->setValue(objectPtr->GetPulseDuration() * 1000);

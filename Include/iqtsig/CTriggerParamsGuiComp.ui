@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CTriggerParamsGuiComp</class>
+ <widget class="QWidget" name="CTriggerParamsGuiComp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>126</width>
+    <height>182</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QRadioButton" name="NoTriggerRB">
+     <property name="text">
+      <string>No trigger</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="ContinuousRB">
+     <property name="text">
+      <string>Continuous</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="RisingEdgeRB">
+     <property name="text">
+      <string>Rising edge</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="FallingEdgeRB">
+     <property name="text">
+      <string>Falling edge</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="PositiveLevelRB">
+     <property name="text">
+      <string>Positive level</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="NegativeLevelRB">
+     <property name="text">
+      <string>Negative level</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="SoftwareTriggerRB">
+     <property name="text">
+      <string>Software</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

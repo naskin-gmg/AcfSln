@@ -196,7 +196,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DimensionsCount
+              ValuesCount
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;

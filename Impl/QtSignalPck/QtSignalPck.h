@@ -8,6 +8,7 @@
 
 #include "iqtsig/CSamplingParamsGuiComp.h"
 #include "iqtsig/CPulseParamsGuiComp.h"
+#include "iqtsig/CTriggerParamsGuiComp.h"
 #include "iqtsig/CSampleAcquisitionGuiComp.h"
 #include "iqtsig/CScriptDataProcessorComp.h"
 
@@ -21,6 +22,7 @@ namespace QtSignalPck
 
 typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
 typedef iqtsig::CPulseParamsGuiComp PulseParamsGui;
+typedef iqtsig::CTriggerParamsGuiComp TriggerParamsGui;
 typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
 typedef iqtsig::CScriptDataProcessorComp ScriptDataProcessor;
 
