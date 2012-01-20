@@ -145,7 +145,6 @@
 				StringPooling="true"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
 			<Tool

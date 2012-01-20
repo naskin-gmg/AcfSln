@@ -50,8 +50,6 @@
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				SuppressStartupBanner="true"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -114,8 +112,6 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
 				StringPooling="true"
-				BrowseInformation="1"
-				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 			/>

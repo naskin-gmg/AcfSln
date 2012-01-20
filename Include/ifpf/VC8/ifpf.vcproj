@@ -74,7 +74,6 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -156,10 +155,8 @@
 				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
-				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
-				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
