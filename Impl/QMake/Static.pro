@@ -10,7 +10,6 @@ SUBDIRS += ../../Include/imeas/QMake/imeas.pro
 SUBDIRS += ../../Include/iprop/QMake/iprop.pro
 SUBDIRS += ../../Include/iqtfpf/QMake/iqtfpf.pro
 #SUBDIRS += ../../Include/iqtex/QMake/iqtex.pro
-SUBDIRS += ../../Include/iqtfpf/QMake/iqtfpf.pro
 SUBDIRS += ../../Include/iqtinsp/QMake/iqtinsp.pro
 SUBDIRS += ../../Include/iqtipr/QMake/iqtipr.pro
 SUBDIRS += ../../Include/iqtmeas/QMake/iqtmeas.pro
