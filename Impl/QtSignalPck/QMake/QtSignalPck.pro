@@ -7,4 +7,6 @@ TARGET = QtSignalPck
 
 INCLUDEPATH += ../../../Include
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -lisig -liqtsig
+LIBS += -L../../../Lib/$$COMPILER_DIR -lisig -liqtsig -limeas
+
+QT += script

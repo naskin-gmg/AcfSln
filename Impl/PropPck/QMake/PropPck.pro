@@ -7,4 +7,4 @@ TARGET = PropPck
 
 INCLUDEPATH += ../../../Include
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -lprop
+LIBS += -L../../../Lib/$$COMPILER_DIR -liprop

@@ -7,4 +7,4 @@ TARGET = QtIprPck
 
 INCLUDEPATH += ../../../Include
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -liipr -liqtipr
+LIBS += -L../../../Lib/$$COMPILER_DIR -liipr -liqtipr -limeas
