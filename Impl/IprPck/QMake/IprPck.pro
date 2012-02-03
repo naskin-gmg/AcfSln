@@ -7,4 +7,4 @@ TARGET = IprPck
 
 INCLUDEPATH += ../../../Include
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -liipr
+LIBS += -L../../../Lib/$$COMPILER_DIR -liipr -limeas

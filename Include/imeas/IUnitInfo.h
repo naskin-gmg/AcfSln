@@ -14,6 +14,9 @@ namespace imeas
 {
 
 
+/**
+	Common interface to get information about a measurement unit.
+*/
 class IUnitInfo: virtual public istd::IPolymorphic
 {
 public:

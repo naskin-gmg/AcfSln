@@ -5,3 +5,4 @@ TARGET = iqtsig
 
 INCLUDEPATH += ../..
 
+Qt+= script
