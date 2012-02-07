@@ -206,6 +206,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ITriggerController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ITriggerParams.h"
 				>
 			</File>

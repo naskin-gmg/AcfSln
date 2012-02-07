@@ -36,6 +36,10 @@ I_EXPORT_COMPONENT(
 			"Static acquisition constraints for some device",
 			"Image Bitmap Camera Snap Acquisition Constraints");
 
+I_EXPORT_COMPONENT(
+			SelectionParamCamera,
+			"Camera delegator enhancing parameter set using some selection and parameter manager",
+			"Image Bitmap Camera Snap Acquisition Parameter Manager Delegator");
 
 } // namespace CameraPck
 
