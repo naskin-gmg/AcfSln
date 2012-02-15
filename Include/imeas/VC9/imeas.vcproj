@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="imeas"
 	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
+	RootNamespace="imeas"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -179,6 +180,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNumericConstraintsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CNumericParamsComp.cpp"
 				>
 			</File>
@@ -221,6 +226,10 @@
 			</File>
 			<File
 				RelativePath="..\CMeasurementRange.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericConstraintsComp.h"
 				>
 			</File>
 			<File

@@ -49,60 +49,6 @@ bool CNumericParamsComp::SetValues(const imath::CVarVector& lengths)
 }
 
 
-// reimplemented (imeas::INumericConstraints)
-
-int CNumericParamsComp::GetNumericValuesCount() const
-{
-	return *m_dimensionsCountAttrPtr;
-}
-
-
-istd::CString CNumericParamsComp::GetNumericValueDescription(int index) const
-{
-	return istd::CString("Value ") + istd::CString::FromNumber(index + 1);
-}
-
-
-const imeas::IUnitInfo& CNumericParamsComp::GetNumericValueUnitInfo(int /*index*/) const
-{
-	return *this;
-}
-
-
-// reimplemented (imeas::IUnitInfo)
-
-int CNumericParamsComp::GetUnitType() const
-{
-	return UT_UNKNOWN;
-}
-
-
-istd::CString CNumericParamsComp::GetUnitName() const
-{
-	return "";
-}
-
-
-double CNumericParamsComp::GetDisplayMultiplicationFactor() const
-{
-	return 1;
-}
-
-
-istd::CRange CNumericParamsComp::GetValueRange() const
-{
-	return istd::CRange(*m_minValuesAttrPtr, *m_maxValuesAttrPtr);
-}
-
-
-const imath::IDoubleManip& CNumericParamsComp::GetValueManip() const
-{
-	static imath::CDoubleManip manip;
-
-	return manip;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CNumericParamsComp::Serialize(iser::IArchive& archive)
@@ -174,6 +120,60 @@ void CNumericParamsComp::OnComponentCreated()
 
 		m_values[i] = lastValue;
 	}
+}
+
+
+// reimplemented (imeas::INumericConstraints)
+
+int CNumericParamsComp::GetNumericValuesCount() const
+{
+	return *m_dimensionsCountAttrPtr;
+}
+
+
+istd::CString CNumericParamsComp::GetNumericValueDescription(int index) const
+{
+	return istd::CString("Value ") + istd::CString::FromNumber(index + 1);
+}
+
+
+const imeas::IUnitInfo& CNumericParamsComp::GetNumericValueUnitInfo(int /*index*/) const
+{
+	return *this;
+}
+
+
+// reimplemented (imeas::IUnitInfo)
+
+int CNumericParamsComp::GetUnitType() const
+{
+	return UT_UNKNOWN;
+}
+
+
+istd::CString CNumericParamsComp::GetUnitName() const
+{
+	return "";
+}
+
+
+double CNumericParamsComp::GetDisplayMultiplicationFactor() const
+{
+	return 1;
+}
+
+
+istd::CRange CNumericParamsComp::GetValueRange() const
+{
+	return istd::CRange(*m_minValueAttrPtr, *m_maxValueAttrPtr);
+}
+
+
+const imath::IDoubleManip& CNumericParamsComp::GetValueManip() const
+{
+	static imath::CDoubleManip manip;
+
+	return manip;
 }
 
 
