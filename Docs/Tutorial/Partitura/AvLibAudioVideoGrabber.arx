@@ -520,7 +520,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -603,7 +603,7 @@
               Names
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -648,7 +648,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -667,7 +667,7 @@
               ApplicationType
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -686,7 +686,7 @@
               CompanyName
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -705,7 +705,7 @@
               LegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -789,7 +789,7 @@
               ProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -848,7 +848,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               

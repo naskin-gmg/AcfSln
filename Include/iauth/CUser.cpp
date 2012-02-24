@@ -5,7 +5,7 @@ namespace iauth
 {
 
 
-CUser::CUser(const istd::CString& userName, const istd::CString& password, int userGroup)
+CUser::CUser(const QString& userName, const QString& password, int userGroup)
 :	m_userName(userName), m_password(password), m_userGroup(userGroup)
 {
 }
@@ -19,13 +19,13 @@ CUser::CUser(const CUser& user)
 }
 
 
-const istd::CString& CUser::GetUserName() const
+const QString& CUser::GetUserName() const
 {
 	return m_userName;
 }
 
 
-bool CUser::SetUserName(const istd::CString& name)
+bool CUser::SetUserName(const QString& name)
 {
 	m_userName = name;
 
@@ -33,15 +33,15 @@ bool CUser::SetUserName(const istd::CString& name)
 }
 
 
-const istd::CString& CUser::GetPassword() const
+const QString& CUser::GetPassword() const
 {
 	return m_password;
 }
 
 
-bool CUser::SetPassword(const istd::CString& password)
+bool CUser::SetPassword(const QString& password)
 {
-	if (!password.IsEmpty()){
+	if (!password.isEmpty()){
 		m_password = password;
 
 		return true;
@@ -63,7 +63,7 @@ void CUser::SetUserGroup(int group)
 }
 
 
-bool CUser::CheckPassword(const istd::CString& password) const
+bool CUser::CheckPassword(const QString& password) const
 {
 	return (m_password == password);
 }

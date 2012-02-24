@@ -41,14 +41,14 @@ void CStaticRightsProviderComp::OnComponentCreated()
 	if (m_rightsOnAttrPtr.IsValid()){
 		int attrCount = int(m_rightsOnAttrPtr.GetCount());
 		for (int i = 0; i < attrCount; ++i){
-			m_rightsOn.insert(m_rightsOnAttrPtr[i].ToString());
+			m_rightsOn.insert(m_rightsOnAttrPtr[i].toStdString());
 		}
 	}
 
 	if (m_rightsOffAttrPtr.IsValid()){
 		int attrCount = int(m_rightsOffAttrPtr.GetCount());
 		for (int i = 0; i < attrCount; ++i){
-			m_rightsOff.insert(m_rightsOffAttrPtr[i].ToString());
+			m_rightsOff.insert(m_rightsOffAttrPtr[i].toStdString());
 		}
 	}
 }

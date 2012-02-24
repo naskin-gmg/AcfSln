@@ -33,7 +33,7 @@ std::string CHotfolderProcessingItem::GetItemUuid() const
 		isys::ISystemEnvironment* systemEnvironmentPtr = istd::GetService<isys::ISystemEnvironment>();
 		I_ASSERT(systemEnvironmentPtr != NULL);
 		if (systemEnvironmentPtr != NULL){
-			m_itemId = systemEnvironmentPtr->GetUniqueIdentifier().ToString();
+			m_itemId = systemEnvironmentPtr->GetUniqueIdentifier().toStdString();
 		}
 	}
 
@@ -57,13 +57,13 @@ void CHotfolderProcessingItem::SetProcessingState(int processingState)
 }
 
 
-istd::CString CHotfolderProcessingItem::GetInputFile() const
+QString CHotfolderProcessingItem::GetInputFile() const
 {
 	return m_inputFile;
 }
 
 
-void CHotfolderProcessingItem::SetInputFile(const istd::CString& inputFile)
+void CHotfolderProcessingItem::SetInputFile(const QString& inputFile)
 {
 	if (m_inputFile != inputFile){
 		istd::CChangeNotifier changePtr(this);
@@ -73,13 +73,13 @@ void CHotfolderProcessingItem::SetInputFile(const istd::CString& inputFile)
 }
 
 
-istd::CString CHotfolderProcessingItem::GetOutputFile() const
+QString CHotfolderProcessingItem::GetOutputFile() const
 {
 	return m_outputFile;
 }
 
 
-void CHotfolderProcessingItem::SetOutputFile(const istd::CString& outputFile)
+void CHotfolderProcessingItem::SetOutputFile(const QString& outputFile)
 {
 	if (m_outputFile != outputFile){
 		istd::CChangeNotifier changePtr(this);

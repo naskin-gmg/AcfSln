@@ -38,13 +38,13 @@ public:
 		Return \c true if the item for the given input and output path already exists.
 		If foundItemPtr not equals \c NULL and an item was found, \c foundItemPtr will be set to the found item.
 	*/
-	virtual bool ItemExists(const istd::CString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr = NULL) const;
+	virtual bool ItemExists(const QString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr = NULL) const;
 	virtual bool ItemExists(const ifpf::IHotfolderProcessingItem& processingItem) const;
 
 	// reimplemented (ifpf::IHotfolderProcessingInfo)
 	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath = istd::CString());
+				const QString& inputFilePath,
+				const QString& outputFilePath = QString());
 	virtual void RemoveProcessingItem(ifpf::IHotfolderProcessingItem* fileItemPtr);
 	virtual int GetProcessingItemsCount() const;
 	virtual ifpf::IHotfolderProcessingItem* GetProcessingItem(int processingItemIndex) const;

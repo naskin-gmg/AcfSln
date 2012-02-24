@@ -40,7 +40,7 @@ public:
 	CHotfolderWorkflowScenographerComp();
 
 protected:
-	bool TryCreateHotfolder(const istd::CString& hofolderId, const i2d::CVector2d& position);
+	bool TryCreateHotfolder(const QString& hofolderId, const i2d::CVector2d& position);
 	QGraphicsItem* AddShapeToScene(istd::IPolymorphic* elementPtr) const;
 
 	// reimplemented (iqt2d::TScenographerCompBase)

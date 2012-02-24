@@ -25,19 +25,19 @@ CPhononVideoViewGuiComp::CPhononVideoViewGuiComp()
 
 // reimplemented (imm::IMediaController)
 
-istd::CString CPhononVideoViewGuiComp::GetOpenedMediumUrl() const
+QString CPhononVideoViewGuiComp::GetOpenedMediumUrl() const
 {
 	EnsureSync();
 
-	return iqt::GetCString(m_mediaObject.currentSource().url().path());
+	return m_mediaObject.currentSource().url().path();
 }
 
 
-bool CPhononVideoViewGuiComp::OpenMediumUrl(const istd::CString& url, bool autoPlay)
+bool CPhononVideoViewGuiComp::OpenMediumUrl(const QString& url, bool autoPlay)
 {
 	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
-	m_mediaObject.setCurrentSource(iqt::GetQString(url));
+	m_mediaObject.setCurrentSource(url);
 
 	if (autoPlay){
 		m_mediaObject.play();
@@ -172,7 +172,7 @@ bool CPhononVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CPhononVideoViewGuiComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CPhononVideoViewGuiComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -192,7 +192,7 @@ bool CPhononVideoViewGuiComp::GetFileExtensions(istd::CStringList& result, int f
 }
 
 
-istd::CString CPhononVideoViewGuiComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+QString CPhononVideoViewGuiComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
 	return "Video files";
 }

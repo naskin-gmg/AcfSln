@@ -21,18 +21,18 @@ int CNumericConstraintsComp::GetNumericValuesCount() const
 }
 
 
-istd::CString CNumericConstraintsComp::GetNumericValueDescription(int index) const
+QString CNumericConstraintsComp::GetNumericValueDescription(int index) const
 {
-	if (!(*m_elementDescriptionAttrPtr).IsEmpty()){
+	if (!(*m_elementDescriptionAttrPtr).isEmpty()){
 		if (*m_dimensionsCountAttrPtr > 1){
-			return *m_elementDescriptionAttrPtr + " " + istd::CString::FromNumber(index + 1);
+			return *m_elementDescriptionAttrPtr + " " + QString().setNum(index + 1);
 		}
 		else{
 			return *m_elementDescriptionAttrPtr;
 		}
 	}
 	else{
-		return istd::CString::FromNumber(index + 1);
+		return QString().setNum(index + 1);
 	}
 }
 
@@ -53,7 +53,7 @@ int CNumericConstraintsComp::GetUnitType() const
 }
 
 
-istd::CString CNumericConstraintsComp::GetUnitName() const
+QString CNumericConstraintsComp::GetUnitName() const
 {
 	return *m_unitNameAttrPtr;
 }

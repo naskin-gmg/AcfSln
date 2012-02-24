@@ -40,7 +40,7 @@ void CTcpTerminalGuiComp::OnGuiCreated()
 
 	int presetsCount = m_presetTextsAttrPtr.GetCount();
 	for (int i = 0; i < presetsCount; ++i){
-		CommandCB->addItem(iqt::GetQString(m_presetTextsAttrPtr[i]));
+		CommandCB->addItem(m_presetTextsAttrPtr[i]);
 	}
 
 	UpdateStateIcon();
@@ -124,8 +124,8 @@ void CTcpTerminalGuiComp::OnReadyRead()
 void CTcpTerminalGuiComp::OnConectTimer()
 {
 	if (m_urlParamCompPtr.IsValid()){
-		istd::CString urlString = m_urlParamCompPtr->GetPath();
-		QUrl url(iqt::GetQString(urlString));
+		QString urlString = m_urlParamCompPtr->GetPath();
+		QUrl url(urlString);
 
 		m_socket.connectToHost(url.host(), url.port());
 	}

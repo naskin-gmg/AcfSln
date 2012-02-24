@@ -50,7 +50,7 @@
               AcceptFilePatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -77,7 +77,7 @@
               AcceptPatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -390,7 +390,7 @@
               FileExtensions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               

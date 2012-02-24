@@ -34,27 +34,27 @@ public:
 	};
 
 	// reimplemented (iser::IFileLoader)
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const;
+	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath) const;
+	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath) const;
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 protected:
 	/**
 		Get the path of the static hotfolder parameter file.
 	*/
-	istd::CString GetStaticParamsPath(const istd::CString& objectPath) const;
+	QString GetStaticParamsPath(const QString& objectPath) const;
 
 	// reimplemented (ibase::TFileSerializerComp)
 	virtual void OnReadError(
 				const iser::CXmlFileReadArchive& archive,
 				const istd::IChangeable& data,
-				const istd::CString& filePath) const;
+				const QString& filePath) const;
 
 private:
-	I_ATTR(istd::CString, m_monitorSessionsParamIdAttrPtr);
+	I_ATTR(QString, m_monitorSessionsParamIdAttrPtr);
 };
 
 

@@ -16,7 +16,7 @@ namespace ifpf
 
 // reimplemented (iser::IFileLoader)
 
-int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		return StateFailed;
@@ -29,7 +29,7 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 	}
 
 	if (m_monitorSessionsParamIdAttrPtr.IsValid()){
-		const iser::ISerializable* monitoringSessionsPtr = hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).ToString());
+		const iser::ISerializable* monitoringSessionsPtr = hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).toStdString());
 		if (monitoringSessionsPtr != NULL){
 			ReadArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), this);
 
@@ -41,7 +41,7 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 }
 
 
-int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
@@ -55,7 +55,7 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 	int retVal = BaseClass::SaveToFile(data, filePath);
 	if (retVal != StateFailed){
 		if (m_monitorSessionsParamIdAttrPtr.IsValid()){
-			const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).ToString()));
+			const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter((*m_monitorSessionsParamIdAttrPtr).toStdString()));
 			if (monitoringSessionsPtr != NULL){
 				WriteArchiveEx staticParamsArchive(GetStaticParamsPath(filePath), GetVersionInfo(), this);
 
@@ -72,7 +72,7 @@ int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CHotfolderLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CHotfolderLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!BaseClass::GetFileExtensions(result, flags, doAppend)){
 		if (!doAppend){
@@ -86,10 +86,10 @@ bool CHotfolderLoaderComp::GetFileExtensions(istd::CStringList& result, int flag
 }
 
 
-istd::CString CHotfolderLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CHotfolderLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
-	if ((extensionPtr == NULL) || extensionPtr->IsEqualNoCase("hot")){
-		return istd::CString("Hotfolder Data File");
+	if ((extensionPtr == NULL) || (extensionPtr->compare("hot", Qt::CaseInsensitive) == 0)){
+		return QString("Hotfolder Data File");
 	}
 
 	return "";
@@ -98,13 +98,13 @@ istd::CString CHotfolderLoaderComp::GetTypeDescription(const istd::CString* exte
 
 // protected methods
 
-istd::CString CHotfolderLoaderComp::GetStaticParamsPath(const istd::CString& objectPath) const
+QString CHotfolderLoaderComp::GetStaticParamsPath(const QString& objectPath) const
 {
 	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
 	I_ASSERT(fileSystemPtr != NULL);
 
 	if (fileSystemPtr == NULL){
-		return istd::CString();
+		return QString();
 	}
 
 	return (fileSystemPtr->GetDirPath(objectPath) + "/" + fileSystemPtr->GetBaseFileName(objectPath) + ".dms");
@@ -116,7 +116,7 @@ istd::CString CHotfolderLoaderComp::GetStaticParamsPath(const istd::CString& obj
 void CHotfolderLoaderComp::OnReadError(
 			const iser::CXmlFileReadArchive& /*archive*/,
 			const istd::IChangeable& /*data*/,
-			const istd::CString& /*filePath*/) const
+			const QString& /*filePath*/) const
 {
 }
 

@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -71,7 +71,7 @@ public:
 	virtual bool IsAutoProjectionSizeSupported() const;
 
 private:
-	I_ATTR(istd::CString, m_lineParamIdAttrPtr);
+	I_ATTR(QString, m_lineParamIdAttrPtr);
 	I_REF(IFeatureToProjectionMapper, m_featureMapperCompPtr);
 };
 

@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
+#include <QString>
 #include "iser/IFileTypeInfo.h"
 
 #include "imm/imm.h"
@@ -36,12 +36,12 @@ public:
 	/**
 		Get URL of the medium object.
 	*/
-	virtual istd::CString GetOpenedMediumUrl() const = 0;
+	virtual QString GetOpenedMediumUrl() const = 0;
 
 	/**
 		Open some media file.
 	*/
-	virtual bool OpenMediumUrl(const istd::CString& url, bool autoPlay = true) = 0;
+	virtual bool OpenMediumUrl(const QString& url, bool autoPlay = true) = 0;
 
 	/**
 		Close this media player.

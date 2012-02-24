@@ -36,13 +36,13 @@ void CFileNamingParamsComp::SetRenamingMode(int renamingMode)
 }
 
 
-istd::CString CFileNamingParamsComp::GetPrefix() const
+QString CFileNamingParamsComp::GetPrefix() const
 {
 	return m_prefix;
 }
 
 
-void CFileNamingParamsComp::SetPrefix(const istd::CString& prefix)
+void CFileNamingParamsComp::SetPrefix(const QString& prefix)
 {
 	if (m_prefix != prefix){
 		istd::CChangeNotifier changePtr(this);
@@ -52,13 +52,13 @@ void CFileNamingParamsComp::SetPrefix(const istd::CString& prefix)
 }
 
 
-istd::CString CFileNamingParamsComp::GetSuffix() const
+QString CFileNamingParamsComp::GetSuffix() const
 {
 	return m_suffix;
 }
 
 
-void CFileNamingParamsComp::SetSuffix(const istd::CString& suffix)
+void CFileNamingParamsComp::SetSuffix(const QString& suffix)
 {
 	if (m_suffix != suffix){
 		istd::CChangeNotifier changePtr(this);

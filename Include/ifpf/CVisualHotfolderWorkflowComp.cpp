@@ -1,6 +1,10 @@
 #include "ifpf/CVisualHotfolderWorkflowComp.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -19,7 +23,7 @@ bool CVisualHotfolderWorkflowComp::SerializeLayout(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	istd::CStringList ids = this->GetHotfolderIds();
+	QStringList ids = this->GetHotfolderIds();
 	int positionsCount = ids.size();
 
 	retVal = retVal && archive.BeginMultiTag(positionMapTag, elementTag, positionsCount);
@@ -29,8 +33,8 @@ bool CVisualHotfolderWorkflowComp::SerializeLayout(iser::IArchive& archive)
 	}
 
 	if (archive.IsStoring()){
-		for (istd::CStringList::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
-			istd::CString elementId = *iter;
+		for (QStringList::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
+			QString elementId = *iter;
 
 			i2d::CVector2d position(0, 0);
 			const CVisualHotfolderWorkflowItem* elementPtr = dynamic_cast<const CVisualHotfolderWorkflowItem*>(GetHotfolder(elementId));
@@ -51,7 +55,7 @@ bool CVisualHotfolderWorkflowComp::SerializeLayout(iser::IArchive& archive)
 		for (int i = 0; i < positionsCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 			
-			istd::CString elementId;
+			QString elementId;
 			i2d::CVector2d position;
 
 			retVal = retVal && SerializeItemPosition(archive, elementId, position);
@@ -91,7 +95,7 @@ bool CVisualHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-bool CVisualHotfolderWorkflowComp::SerializeItemPosition(iser::IArchive& archive, istd::CString& hotfolderName, i2d::CVector2d& position)
+bool CVisualHotfolderWorkflowComp::SerializeItemPosition(iser::IArchive& archive, QString& hotfolderName, i2d::CVector2d& position)
 {
 	static iser::CArchiveTag nameTag("HotfolderName", "Name of the hotfolder");
 	static iser::CArchiveTag positionXTag("X", "X position of component");
@@ -115,7 +119,7 @@ bool CVisualHotfolderWorkflowComp::SerializeItemPosition(iser::IArchive& archive
 
 // reimplemented (ifpf::CHotfolderWorkflowComp)
 
-ifpf::IHotfolderWorkflowItem* CVisualHotfolderWorkflowComp::CreateWorkflowItem(const istd::CString& hotfolderId) const
+ifpf::IHotfolderWorkflowItem* CVisualHotfolderWorkflowComp::CreateWorkflowItem(const QString& hotfolderId) const
 {
 	Element* elementPtr = new Element();
 

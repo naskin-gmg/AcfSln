@@ -28,7 +28,7 @@ CHotfolderProcessingInfo::CHotfolderProcessingInfo()
 }
 
 
-bool CHotfolderProcessingInfo::ItemExists(const istd::CString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
+bool CHotfolderProcessingInfo::ItemExists(const QString& inputFilePath, ifpf::IHotfolderProcessingItem** foundItemPtr) const
 {
 	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
 
@@ -57,7 +57,7 @@ bool CHotfolderProcessingInfo::ItemExists(const ifpf::IHotfolderProcessingItem& 
 
 // reimplemented (ifpf::IHotfolderProcessingInfo)
 
-const ifpf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingItem(const istd::CString& inputFilePath, const istd::CString& outputFilePath)
+const ifpf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingItem(const QString& inputFilePath, const QString& outputFilePath)
 {
 	ifpf::IHotfolderProcessingItem* foundItemPtr = NULL;
 	if (ItemExists(inputFilePath, &foundItemPtr)){

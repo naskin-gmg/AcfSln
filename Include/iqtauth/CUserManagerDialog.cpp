@@ -34,20 +34,20 @@ CUserManagerDialog::CUserManagerDialog(const iauth::IUserLogin& login, iauth::IU
 	TreeUserList->setItemDelegate(new CUserManagerItemDelegate(*this));
 
 	//setting up the window title for the CUserManagerDialog
-	istd::CString userName = loggedUserPtr->GetUserName();
+	QString userName = loggedUserPtr->GetUserName();
 	int groupIndex = loggedUserPtr->GetUserGroup();
 
 	setWindowTitle(
 				windowTitle().
-				arg(iqt::GetQString(userName)).
-				arg(iqt::GetQString(m_manager.GetUserGroupName(groupIndex))));
+				arg(userName).
+				arg(m_manager.GetUserGroupName(groupIndex)));
 
 	//Setting up the GUI elements and filling the user list
 	UpdateUserList();
 }
 
 
-void CUserManagerDialog::SaveCurUsername(const istd::CString& userName)
+void CUserManagerDialog::SaveCurUsername(const QString& userName)
 {
 	m_curUserName = userName;
 }
@@ -58,9 +58,9 @@ void CUserManagerDialog::SaveCurUsername(const istd::CString& userName)
 void CUserManagerDialog::on_AddUserButton_clicked()
 {
 	int newUserSuffix = 0;
-	istd::CString userName;
+	QString userName;
 	do{
-		userName = iqt::GetCString(tr("User_%1").arg(++newUserSuffix));
+		userName = tr("User_%1").arg(++newUserSuffix);
 	} while (m_manager.FindUserIndex(userName) >= 0);
 
 	m_manager.AddUser(userName);
@@ -69,7 +69,7 @@ void CUserManagerDialog::on_AddUserButton_clicked()
 	UpdateUserList();
 
 	//finding the just added user on the screen
-	QList<QTreeWidgetItem *> itemList = TreeUserList->findItems(iqt::GetQString(userName), Qt::MatchExactly, 0);
+	QList<QTreeWidgetItem *> itemList = TreeUserList->findItems(userName, Qt::MatchExactly, 0);
 	if (itemList.size() > 0){
 		itemList.at(0)->setSelected(true);
 	}
@@ -80,7 +80,7 @@ void CUserManagerDialog::on_ResetPasswordButton_clicked()
 {
 	QTreeWidgetItem* curItemPtr = TreeUserList->currentItem();
 	if (curItemPtr != NULL){
-		istd::CString userName = iqt::GetCString(curItemPtr->data(0, Qt::DisplayRole).toString());
+		QString userName = curItemPtr->data(0, Qt::DisplayRole).toString();
 
 		int userIndex = m_manager.FindUserIndex(userName);
 
@@ -95,7 +95,7 @@ void CUserManagerDialog::on_RemoveUserButton_clicked()
 {
 	QTreeWidgetItem* curItemPtr = TreeUserList->currentItem();
 	if (curItemPtr != NULL){
-		if (m_manager.DeleteUser(curItemPtr->data(0, Qt::DisplayRole).toString().toStdString())){
+		if (m_manager.DeleteUser(curItemPtr->data(0, Qt::DisplayRole).toString())){
 			//update user list
 			UpdateUserList();
 		}
@@ -130,8 +130,8 @@ void CUserManagerDialog::UpdateUserList()
 			if (user.GetUserGroup() < loggedUserLevel){
 				QTreeWidgetItem* itemPtr;
 				itemPtr = new QTreeWidgetItem(QTreeWidgetItem::Type);
-				itemPtr->setText(LC_NAME, iqt::GetQString(user.GetUserName()));
-				itemPtr->setText(LC_GROUP, iqt::GetQString(m_manager.GetUserGroupName(user.GetUserGroup())));
+				itemPtr->setText(LC_NAME, user.GetUserName());
+				itemPtr->setText(LC_GROUP, m_manager.GetUserGroupName(user.GetUserGroup()));
 				itemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable);
 				itemPtr->setData(LC_NAME, Qt::UserRole, i);
 				itemPtr->setData(LC_GROUP, Qt::UserRole, i);
@@ -170,7 +170,7 @@ QWidget* CUserManagerDialog::CUserManagerItemDelegate::createEditor(
 			QString text = index.data().toString();
 			QLineEdit* lineEditPtr = new QLineEdit(parent);
 			lineEditPtr->setText(text);
-			m_parent.SaveCurUsername(iqt::GetCString(text));
+			m_parent.SaveCurUsername(text);
 			return lineEditPtr;
 		}
 
@@ -179,7 +179,7 @@ QWidget* CUserManagerDialog::CUserManagerItemDelegate::createEditor(
 			QComboBox* comboBoxPtr = new QComboBox(parent);
 
 			for (int i = 0; i < m_loggedUserLevel; ++i){
-				comboBoxPtr->addItem(iqt::GetQString(m_parent.m_manager.GetUserGroupName(i)));
+				comboBoxPtr->addItem(m_parent.m_manager.GetUserGroupName(i));
 			}
 			comboBoxPtr->setCurrentIndex(comboBoxPtr->findText(index.data().toString()));
 
@@ -212,7 +212,7 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 			istd::TChangeNotifier<iauth::IUsersManager> managerPtr(&m_parent.m_manager);
 
 			int userIndex = model->data(index, Qt::UserRole).toInt();
-			managerPtr->RenameUser(userIndex, iqt::GetCString(userName));
+			managerPtr->RenameUser(userIndex, userName);
 
 			return;
 		}
@@ -223,8 +223,8 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 			I_ASSERT(comboBoxPtr != NULL);	// was created by createEditor(...)
 
 			int groupIndex = comboBoxPtr->currentIndex();
-			istd::CString groupName = m_parent.m_manager.GetUserGroupName(groupIndex);
-			model->setData(index, iqt::GetQString(groupName));
+			QString groupName = m_parent.m_manager.GetUserGroupName(groupIndex);
+			model->setData(index, groupName);
 
 			istd::TChangeNotifier<iauth::IUsersManager> managerPtr(&m_parent.m_manager);
 

@@ -31,7 +31,7 @@ int CImageBinarizeProcessorComp::DoProcessing(
 
 	const imeas::INumericParams* thresholdParamsPtr = NULL;
 	if (paramsPtr != NULL && m_binarizationParamsIdAttrPtr.IsValid()){
-		thresholdParamsPtr = dynamic_cast<const imeas::INumericParams*>(paramsPtr->GetParameter((*m_binarizationParamsIdAttrPtr).ToString()));
+		thresholdParamsPtr = dynamic_cast<const imeas::INumericParams*>(paramsPtr->GetParameter((*m_binarizationParamsIdAttrPtr).toStdString()));
 	}
 
 	if (thresholdParamsPtr == NULL){

@@ -47,8 +47,8 @@ void CProcessingItemPreviewGuiComp::UpdateGui(int updateFlags)
 				break;
 		}
 
-		QString inputFile = iqt::GetQString(objectPtr->GetInputFile());
-		QString outputFile = iqt::GetQString(objectPtr->GetOutputFile());
+		QString inputFile = objectPtr->GetInputFile();
+		QString outputFile = objectPtr->GetOutputFile();
 
 		double inputFileSize = 0.0;
 		double outputFileSize = 0.0;
@@ -115,11 +115,11 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 		ifpf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL && m_outputFileNameParamCompPtr.IsValid()){
 
-			if (QFile::exists(iqt::GetQString(objectPtr->GetOutputFile()))){
+			if (QFile::exists(objectPtr->GetOutputFile())){
 				m_outputFileNameParamCompPtr->SetPath(objectPtr->GetOutputFile());
 			}
 			else{
-				m_outputFileNameParamCompPtr->SetPath(istd::CString());
+				m_outputFileNameParamCompPtr->SetPath(QString());
 			}
 		
 			m_outputFileNameParamModelCompPtr->AttachObserver(m_outputPreviewObserverCompPtr.GetPtr());

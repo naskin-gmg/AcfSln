@@ -2,6 +2,10 @@
 #define imeas_CGeneralDataSequence_included
 
 
+// STL includes
+#include <vector>
+
+
 // ACF includes
 #include "istd/TSmartPtr.h"
 #include "istd/TOptDelPtr.h"

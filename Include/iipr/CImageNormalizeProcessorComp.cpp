@@ -32,7 +32,7 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 
 	const i2d::CRectangle* aoiPtr = m_defaultAoiParamCompPtr.GetPtr();
 	if (m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter((*m_aoiParamIdAttrPtr).ToString()));
+		aoiPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter((*m_aoiParamIdAttrPtr).toStdString()));
 	}
 
 	if (aoiPtr != NULL){
@@ -50,7 +50,7 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 
 	const iprm::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
 	if (m_adjustParamsIdAttrPtr.IsValid()){
-		adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter((*m_adjustParamsIdAttrPtr).ToString()));
+		adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter((*m_adjustParamsIdAttrPtr).toStdString()));
 	}
 
 	double contrast = 1;

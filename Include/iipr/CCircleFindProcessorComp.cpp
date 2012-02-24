@@ -31,19 +31,19 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 	Rays inRays;
 	Rays outRays;
 
-	const istd::IChangeable* aoiObjectPtr = paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).ToString());
+	const istd::IChangeable* aoiObjectPtr = paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).toStdString());
 	if (aoiObjectPtr == NULL){
 		return TS_INVALID;
 	}
 
-	const iipr::ICircleFinderParams* circleFinderParamsPtr = dynamic_cast<const iipr::ICircleFinderParams*>(paramsPtr->GetParameter((*m_circleFinderParamsIdAttrPtr).ToString()));
+	const iipr::ICircleFinderParams* circleFinderParamsPtr = dynamic_cast<const iipr::ICircleFinderParams*>(paramsPtr->GetParameter((*m_circleFinderParamsIdAttrPtr).toStdString()));
 	if (circleFinderParamsPtr == NULL){
 		return TS_INVALID;
 	}
 
 	i2d::CLine2d projectionLine;
 	iprm::CParamsSet extendedParamsSet;
-	extendedParamsSet.SetEditableParameter((*m_slaveLineIdAttrPtr).ToString(), &projectionLine);
+	extendedParamsSet.SetEditableParameter((*m_slaveLineIdAttrPtr).toStdString(), &projectionLine);
 	extendedParamsSet.SetSlaveSet(paramsPtr);
 
 	i2d::CVector2d center;

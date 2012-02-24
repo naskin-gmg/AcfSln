@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "isys/IDateTime.h"
 
@@ -48,22 +48,22 @@ public:
 	/**
 		Get file path, of the file which must be processed.
 	*/
-	virtual istd::CString GetInputFile() const = 0;
+	virtual QString GetInputFile() const = 0;
 
 	/**
 		Set input file path.
 	*/
-	virtual void SetInputFile(const istd::CString& inputFile) = 0;
+	virtual void SetInputFile(const QString& inputFile) = 0;
 	
 	/**
 		Get file path of the processing output.
 	*/
-	virtual istd::CString GetOutputFile() const = 0;
+	virtual QString GetOutputFile() const = 0;
 
 	/**
 		Set file path of the processing output.
 	*/
-	virtual void SetOutputFile(const istd::CString& outputFile) = 0;
+	virtual void SetOutputFile(const QString& outputFile) = 0;
 
 	/**
 		Get processing time.

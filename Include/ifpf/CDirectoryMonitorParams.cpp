@@ -72,13 +72,13 @@ void CDirectoryMonitorParams::SetObservedChanges(int ovservedChanges)
 }
 
 
-istd::CStringList CDirectoryMonitorParams::GetAcceptPatterns() const
+QStringList CDirectoryMonitorParams::GetAcceptPatterns() const
 {
 	return m_acceptPatterns;
 }
 
 
-void CDirectoryMonitorParams::SetAcceptPatterns(const istd::CStringList& acceptPatterns)
+void CDirectoryMonitorParams::SetAcceptPatterns(const QStringList& acceptPatterns)
 {
 	if (acceptPatterns != m_acceptPatterns){
 		istd::CChangeNotifier changePtr(this);
@@ -89,13 +89,13 @@ void CDirectoryMonitorParams::SetAcceptPatterns(const istd::CStringList& acceptP
 
 
 
-istd::CStringList CDirectoryMonitorParams::GetIgnorePatterns() const
+QStringList CDirectoryMonitorParams::GetIgnorePatterns() const
 {
 	return m_ignorePatterns;
 }
 
 
-void CDirectoryMonitorParams::SetIgnorePatterns(const istd::CStringList& ignorePatterns)
+void CDirectoryMonitorParams::SetIgnorePatterns(const QStringList& ignorePatterns)
 {
 	if (ignorePatterns != m_acceptPatterns){
 		istd::CChangeNotifier changePtr(this);
@@ -142,7 +142,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 		m_acceptPatterns.clear();
 
 		for (int acceptPatternIndex = 0; acceptPatternIndex < acceptPatternsCount; acceptPatternIndex++){
-			istd::CString acceptPattern;
+			QString acceptPattern;
 			retVal = retVal && archive.BeginTag(acceptPatternTag);
 			retVal = retVal && archive.Process(acceptPattern);
 			retVal = retVal && archive.EndTag(acceptPatternTag);
@@ -171,7 +171,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 		m_ignorePatterns.clear();
 
 		for (int ignorePatternIndex = 0; ignorePatternIndex < ignorePatternsCount; ignorePatternIndex++){
-			istd::CString ignorePattern;
+			QString ignorePattern;
 			retVal = retVal && archive.BeginTag(ignorePatternTag);
 			retVal = retVal && archive.Process(ignorePattern);
 			retVal = retVal && archive.EndTag(ignorePatternTag);

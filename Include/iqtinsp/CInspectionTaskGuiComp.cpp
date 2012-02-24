@@ -198,7 +198,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 				panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
 				QString name;
 				if (i < m_namesAttrPtr.GetCount()){
-					name = iqt::GetQString(m_namesAttrPtr[i]);
+					name = m_namesAttrPtr[i];
 				}
 
 				guiPtr->CreateGui(panelPtr);
@@ -228,7 +228,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 				QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 				QString name;
 				if (i < m_namesAttrPtr.GetCount()){
-					name = iqt::GetQString(m_namesAttrPtr[i]);
+					name = m_namesAttrPtr[i];
 				}
 
 				guiPtr->CreateGui(panelPtr);

@@ -41,7 +41,7 @@ private:
 	bool ConvertImage(const iimg::IBitmap& input, const i2d::IObject2d* aoiPtr, iimg::IBitmap& outputBitmap) const;
 
 private:
-	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);
+	I_ATTR(QString, m_aoiParamsIdAttrPtr);
 };
 
 

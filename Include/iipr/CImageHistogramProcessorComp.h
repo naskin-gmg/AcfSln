@@ -44,7 +44,7 @@ private:
 					imeas::IDiscrDataSequence& histogram) const;
 
 private:
-	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);
+	I_ATTR(QString, m_aoiParamsIdAttrPtr);
 };
 
 

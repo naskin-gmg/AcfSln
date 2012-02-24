@@ -109,8 +109,8 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 
 				changePtr.Reset();
 
-				istd::CString inputFilePath = processingItemPtr->GetInputFile();
-				istd::CString outputFilePath = processingItemPtr->GetOutputFile();
+				QString inputFilePath = processingItemPtr->GetInputFile();
+				QString outputFilePath = processingItemPtr->GetOutputFile();
 				std::string itemUuid = processingItemPtr->GetItemUuid();
 
 				m_pendingProcessors.PushBack(new ItemProcessor(*this, inputFilePath, outputFilePath, itemUuid));
@@ -224,8 +224,8 @@ void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* modelPtr
 
 CHotfolderProcessingComp::ItemProcessor::ItemProcessor(
 			CHotfolderProcessingComp& parent,
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const std::string& itemUuid)
 	:m_parent(parent),
 	m_inputFilePath(inputFilePath),
@@ -294,7 +294,7 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 	iqt::CTimer m_timer;
 	
 	if (!m_parent.m_fileConvertCompPtr->ConvertFile(m_inputFilePath, m_outputFilePath)){
-		istd::CString message = istd::CString("Processing of ") + m_inputFilePath + " failed";
+		QString message = QString("Processing of ") + m_inputFilePath + " failed";
 		m_parent.SendErrorMessage(0, message, "Hotfolder");
 
 		m_processingState = iproc::IProcessor::TS_INVALID;

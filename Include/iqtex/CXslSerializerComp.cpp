@@ -7,7 +7,7 @@ namespace iqtex
 
 bool CXslSerializerComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool beQuiet) const
 {
@@ -24,8 +24,8 @@ bool CXslSerializerComp::IsOperationSupported(
 	}
 
 	bool isSupported =
-				(((flags & QF_LOAD) != 0) && m_xslReadFilePath.IsValid() && !m_xslReadFilePath->GetPath().IsEmpty()) ||
-				(((flags & QF_SAVE) != 0) && m_xslWriteFilePath.IsValid() && !m_xslWriteFilePath->GetPath().IsEmpty());
+				(((flags & QF_LOAD) != 0) && m_xslReadFilePath.IsValid() && !m_xslReadFilePath->GetPath().isEmpty()) ||
+				(((flags & QF_SAVE) != 0) && m_xslWriteFilePath.IsValid() && !m_xslWriteFilePath->GetPath().isEmpty());
 	if (!isSupported){
 		return false;
 	}
@@ -40,12 +40,12 @@ bool CXslSerializerComp::IsOperationSupported(
 			}
 		}
 
-		istd::CStringList fileExtensions;
+		QStringList fileExtensions;
 		if (GetFileExtensions(fileExtensions)){
 			int extensionsCount = fileExtensions.size();
 			for (int i = 0; i < extensionsCount; ++i){
-				const istd::CString& extension = fileExtensions[i];
-				if (!filePathPtr->IsEmpty() && filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){
+				const QString& extension = fileExtensions[i];
+				if (!filePathPtr->isEmpty() && filePathPtr->mid(filePathPtr->length() - extension.length() - 1) == QString(".") + extension.toLower()){
 					return true;
 				}
 			}
@@ -62,7 +62,7 @@ bool CXslSerializerComp::IsOperationSupported(
 }
 
 
-int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (!CheckInputFilePath(filePath)){
 		return false;
@@ -91,7 +91,7 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CStrin
 }
 
 
-int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!CheckTargetDirectory(filePath)){
 		return StateFailed;
@@ -129,9 +129,9 @@ const iser::IVersionInfo* CXslSerializerComp::GetVersionInfo() const
 }
 
 
-void CXslSerializerComp::OnReadError(const iser::IArchive& /*archive*/, const istd::IChangeable& /*data*/, const istd::CString& filePath) const
+void CXslSerializerComp::OnReadError(const iser::IArchive& /*archive*/, const istd::IChangeable& /*data*/, const QString& filePath) const
 {
-	SendWarningMessage(MI_CANNOT_LOAD, istd::CString(tr("Cannot load object from file ")) + filePath);
+	SendWarningMessage(MI_CANNOT_LOAD, QString(tr("Cannot load object from file ")) + filePath);
 }
 
 
@@ -158,7 +158,7 @@ bool CXslSerializerComp::CheckMinimalVersion(const iser::ISerializable& object, 
 }
 
 
-bool CXslSerializerComp::CheckInputFilePath(const istd::CString filePath) const
+bool CXslSerializerComp::CheckInputFilePath(const QString filePath) const
 {
 	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
 	if (fileSystemPtr == NULL){
@@ -168,7 +168,7 @@ bool CXslSerializerComp::CheckInputFilePath(const istd::CString filePath) const
 	}
 	
 	if (!fileSystemPtr->IsPresent(filePath)){
-		SendWarningMessage(MI_CANNOT_LOAD, "File " + filePath.ToString() + " does not exist");
+		SendWarningMessage(MI_CANNOT_LOAD, QString("File %1  does not exist").arg(filePath));
 
 		return false;
 	}
@@ -177,7 +177,7 @@ bool CXslSerializerComp::CheckInputFilePath(const istd::CString filePath) const
 }
 
 
-bool CXslSerializerComp::CheckTargetDirectory(const istd::CString dirPath) const
+bool CXslSerializerComp::CheckTargetDirectory(const QString dirPath) const
 {
 	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
 	if (fileSystemPtr == NULL){
@@ -187,7 +187,7 @@ bool CXslSerializerComp::CheckTargetDirectory(const istd::CString dirPath) const
 	}
 
 	if (!fileSystemPtr->IsPresent(fileSystemPtr->GetDirPath(dirPath))){
-		SendWarningMessage(MI_CANNOT_SAVE, "Save target directory " + fileSystemPtr->GetDirPath(dirPath).ToString() + " does not exist");
+		SendWarningMessage(MI_CANNOT_SAVE, QString("Save target directory %1  does not exist").arg(fileSystemPtr->GetDirPath(dirPath)));
 
 		return false;
 	}

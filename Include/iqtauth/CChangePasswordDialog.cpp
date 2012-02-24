@@ -21,7 +21,7 @@ CChangePasswordDialog::CChangePasswordDialog(iauth::IUsersManager& manager, iaut
 {
 	setupUi(this);
 
-	setWindowTitle(windowTitle().arg(iqt::GetQString(m_loggedUser.GetUserName())));
+	setWindowTitle(windowTitle().arg(m_loggedUser.GetUserName()));
 }
 
 
@@ -46,8 +46,8 @@ void CChangePasswordDialog::on_ButtonBox_accepted()
 		return;
 	}
 
-	istd::CString oldPassword = iqt::GetCString(OldPasswordEdit->text());
-	istd::CString newPassword = iqt::GetCString(NewPasswordEdit->text());
+	QString oldPassword = OldPasswordEdit->text();
+	QString newPassword = NewPasswordEdit->text();
 
 	//checking if the old password and the new password are not the same
 	if (oldPassword == newPassword){

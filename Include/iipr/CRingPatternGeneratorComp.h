@@ -29,7 +29,7 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 private:
-	I_ATTR(istd::CString, m_paramsIdAttrPtr);
+	I_ATTR(QString, m_paramsIdAttrPtr);
 };
 
 

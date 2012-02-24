@@ -37,20 +37,20 @@ bool CDirectoryItemGuiComp::SetSelectedOptionIndex(int index)
 	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
 		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetsCount();
 		if (m_setIndex < setsCount && m_setIndex >= 0){
-			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(m_setIndex);
+			QString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(m_setIndex);
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(m_setIndex);
 
 			std::string fileNameParamId;
 			if (m_directoryPathIdAttrPtr.IsValid()){
-				fileNameParamId = (*m_directoryPathIdAttrPtr).ToString();
+				fileNameParamId = (*m_directoryPathIdAttrPtr).toStdString();
 			}
 
-			m_hotfolderInputName = iqt::GetQString(setName);
+			m_hotfolderInputName = setName;
 
 			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(fileNameParamId));
 			if (fileNameParamPtr != NULL){
-				m_directoryPath = iqt::GetQString(fileNameParamPtr->GetPath());
+				m_directoryPath = fileNameParamPtr->GetPath();
 			}
 		}
 	}
@@ -94,10 +94,10 @@ void CDirectoryItemGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CDirectoryItemGuiComp::UpdateProgressBar(const ifpf::IHotfolderStatistics& statistics)
 {
-	int itemsCount = statistics.GetItemsCount(iqt::GetCString(m_directoryPath));
-	int successCount = statistics.GetSuccessCount(iqt::GetCString(m_directoryPath));
-	int errorCount = statistics.GetErrorsCount(iqt::GetCString(m_directoryPath));
-	int abortedCount = statistics.GetAbortedCount(iqt::GetCString(m_directoryPath));
+	int itemsCount = statistics.GetItemsCount(m_directoryPath);
+	int successCount = statistics.GetSuccessCount(m_directoryPath);
+	int errorCount = statistics.GetErrorsCount(m_directoryPath);
+	int abortedCount = statistics.GetAbortedCount(m_directoryPath);
 
 	I_ASSERT(itemsCount >= (successCount + errorCount + abortedCount));
 

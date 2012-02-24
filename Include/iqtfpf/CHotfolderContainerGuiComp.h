@@ -37,7 +37,7 @@ protected:
 	/**
 		Create the drag preview for the component.
 	*/
-	QPixmap CreateComponentDragPixmap(const istd::CString& hotfolderId) const;
+	QPixmap CreateComponentDragPixmap(const QString& hotfolderId) const;
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
@@ -46,7 +46,7 @@ protected:
 	virtual void OnGuiCreated();
 
 private:
-	I_MULTIATTR(istd::CString, m_hotoflderFactoryIdsAttrPtr);
+	I_MULTIATTR(QString, m_hotoflderFactoryIdsAttrPtr);
 };
 
 

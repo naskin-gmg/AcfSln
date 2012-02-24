@@ -50,7 +50,7 @@
               CaliperParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -90,7 +90,7 @@
               AoiParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -109,7 +109,7 @@
               CircleFinderParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               

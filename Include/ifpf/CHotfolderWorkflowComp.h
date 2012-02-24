@@ -50,14 +50,14 @@ public:
 	CHotfolderWorkflowComp();
 
 	// reimplemented (ifpf::IHotfolderInfoManager)
-	virtual ifpf::IHotfolderProcessingInfo* GetProcessingInfo(const istd::CString& hotfolderName) const;
+	virtual ifpf::IHotfolderProcessingInfo* GetProcessingInfo(const QString& hotfolderName) const;
 
 	// reimplemented (ifpf::IHotfolderWorkflow)
-	virtual ifpf::IHotfolderWorkflowItem* AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId = istd::CString());
-	virtual bool RemoveHotfolder(const istd::CString& hotfolderName);
-	virtual istd::CStringList GetHotfolderIds() const;
-	virtual istd::CStringList GetHotfolderList() const;
-	virtual ifpf::IHotfolderWorkflowItem* GetHotfolder(const istd::CString& hotfolderName) const;
+	virtual ifpf::IHotfolderWorkflowItem* AddHotfolder(const QString& hotfolderName, const QString& hotfolderId = QString());
+	virtual bool RemoveHotfolder(const QString& hotfolderName);
+	virtual QStringList GetHotfolderIds() const;
+	virtual QStringList GetHotfolderList() const;
+	virtual ifpf::IHotfolderWorkflowItem* GetHotfolder(const QString& hotfolderName) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -71,12 +71,12 @@ protected:
 
 	typedef istd::TPointerVector<HotfolderItem> Hotfolders;
 
-	virtual HotfolderItem* CreateHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId = istd::CString()) const;
-	virtual ifpf::IHotfolderWorkflowItem* CreateWorkflowItem(const istd::CString& hotfolderId) const;
+	virtual HotfolderItem* CreateHotfolder(const QString& hotfolderName, const QString& hotfolderId = QString()) const;
+	virtual ifpf::IHotfolderWorkflowItem* CreateWorkflowItem(const QString& hotfolderId) const;
 
 private:
 	I_MULTIFACT(iprm::IParamsSet, m_hotoflderFactoriesCompPtr);
-	I_MULTIATTR(istd::CString, m_hotoflderFactoryIdsAttrPtr);
+	I_MULTIATTR(QString, m_hotoflderFactoryIdsAttrPtr);
 
 	Hotfolders m_hotfolders;
 };

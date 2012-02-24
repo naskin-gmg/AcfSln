@@ -229,7 +229,7 @@ void CHotfolderGuiComp::OnGuiDestroyed()
 
 void CHotfolderGuiComp::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
-	QString inputFilePath = iqt::GetQString(fileItem.GetInputFile());
+	QString inputFilePath = fileItem.GetInputFile();
 	QFileInfo fileInfo(inputFilePath);
 	QDir fileDirectory = fileInfo.dir();
 
@@ -301,18 +301,18 @@ void CHotfolderGuiComp::RebuildItemList()
 	if (m_inputDirectoriesParamsManagerCompPtr.IsValid()){
 		int setsCount = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetsCount(); 
 		for (int setIndex = 0; setIndex < setsCount; setIndex++){
-			istd::CString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(setIndex);
+			QString setName = m_inputDirectoriesParamsManagerCompPtr->GetParamsSetName(setIndex);
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(setIndex);
 
 			std::string fileNameParamId = "DirectoryPath";
 			if (m_directoryPathIdAttrPtr.IsValid()){
-				fileNameParamId  = (*m_directoryPathIdAttrPtr).ToString();
+				fileNameParamId  = (*m_directoryPathIdAttrPtr).toStdString();
 			}
 
 			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(fileNameParamId));
 			if (fileNameParamPtr != NULL){
-				QString directoryPath = iqt::GetQString(fileNameParamPtr->GetPath());
+				QString directoryPath = fileNameParamPtr->GetPath();
 				DirectoryItem* directoryItemPtr = new DirectoryItem(*this, setIndex, QDir(directoryPath), FileList);
 
 				FileList->addTopLevelItem(directoryItemPtr);
@@ -422,7 +422,7 @@ void CHotfolderGuiComp::UpdateItemsVisibility(const QString& textFilter, bool sh
 		 if (itemPtr != NULL){
 			 ifpf::IHotfolderProcessingItem* processingItemPtr = itemPtr->GetObjectPtr();
 			 if (processingItemPtr != NULL){
-				 QString fileName = iqt::GetQString(processingItemPtr->GetInputFile());
+				 QString fileName = processingItemPtr->GetInputFile();
 				 QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::RegExp);
 				 bool isError = (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_INVALID);
 				 bool isMatched = fileName.contains(regExp);
@@ -682,7 +682,7 @@ const QDir& CHotfolderGuiComp::DirectoryItem::GetDirectory() const
 
 void CHotfolderGuiComp::DirectoryItem::AddFileItem(const ifpf::IHotfolderProcessingItem& fileItem)
 {
-	QString inputFilePath = iqt::GetQString(fileItem.GetInputFile());
+	QString inputFilePath = fileItem.GetInputFile();
 	QFileInfo fileInfo(inputFilePath);
 
 	ProcessingItem* fileItemPtr = new ProcessingItem(m_parent);

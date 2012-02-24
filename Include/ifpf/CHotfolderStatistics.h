@@ -33,11 +33,11 @@ public:
 	CHotfolderStatistics();
 
 	// reimplemented (ifpf::IHotfolderStatistics)
-	virtual int GetItemsCount(const istd::CString& directoryPath = istd::CString()) const;
-	virtual int GetSuccessCount(const istd::CString& directoryPath = istd::CString()) const;
-	virtual int GetErrorsCount(const istd::CString& directoryPath = istd::CString()) const;
-	virtual int GetAbortedCount(const istd::CString& directoryPath = istd::CString()) const;
-	virtual double GetProcessingTime(const istd::CString& directoryPath = istd::CString()) const;
+	virtual int GetItemsCount(const QString& directoryPath = QString()) const;
+	virtual int GetSuccessCount(const QString& directoryPath = QString()) const;
+	virtual int GetErrorsCount(const QString& directoryPath = QString()) const;
+	virtual int GetAbortedCount(const QString& directoryPath = QString()) const;
+	virtual double GetProcessingTime(const QString& directoryPath = QString()) const;
 
 	// reimplemented (imod::TSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -51,17 +51,17 @@ public:
 protected:
 	void ResetStatistics();
 	void RebuildStatistics();
-	void UpdateStateMaps(int itemState, const istd::CString& directoryPath);
-	static istd::CString GetDirectoryPath(const ifpf::IHotfolderProcessingItem& item);
+	void UpdateStateMaps(int itemState, const QString& directoryPath);
+	static QString GetDirectoryPath(const ifpf::IHotfolderProcessingItem& item);
 
 private:
-	typedef std::map<istd::CString, int> CounterMap;
+	typedef std::map<QString, int> CounterMap;
 	CounterMap m_itemsCount;
 	CounterMap m_successCount;
 	CounterMap m_errorsCount;
 	CounterMap m_abortedCount;
 
-	typedef std::map<istd::CString, double> ProcessingTimeMap;
+	typedef std::map<QString, double> ProcessingTimeMap;
 	ProcessingTimeMap m_processingTimeMap;
 };
 

@@ -175,7 +175,7 @@ const std::string TProperty<Value>::s_typeName(istd::CClassInfo::GetName<TProper
 typedef TProperty<double> CDoubleProperty;
 typedef TProperty<bool> CBoolProperty;
 typedef TProperty<int> CIntProperty;
-typedef TProperty<istd::CString> CStringProperty;
+typedef TProperty<QString> CStringProperty;
 typedef TProperty<std::string> CStdStringProperty;
 
 

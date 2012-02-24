@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/IPolymorphic.h"
 #include "istd/CRange.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "imath/IDoubleManip.h"
 
@@ -39,7 +39,7 @@ public:
 	/**
 		Get name of unit.
 	*/
-	virtual istd::CString GetUnitName() const = 0;
+	virtual QString GetUnitName() const = 0;
 
 	/**
 		Get multiplication factor used to calculate user input values.

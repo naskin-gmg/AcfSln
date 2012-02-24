@@ -38,7 +38,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifpf::IFileNaming)
-	virtual istd::CString GetFilePath(const istd::CString& inputFileName) const;
+	virtual QString GetFilePath(const QString& inputFileName) const;
 
 private:
 	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);

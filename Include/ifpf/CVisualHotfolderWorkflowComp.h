@@ -52,10 +52,10 @@ public:
 protected:
 	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualHotfolderWorkflowItem> > Element;
 
-	bool SerializeItemPosition(iser::IArchive& archive, istd::CString& hotfolderName, i2d::CVector2d& position);
+	bool SerializeItemPosition(iser::IArchive& archive, QString& hotfolderName, i2d::CVector2d& position);
 
 	// reimplemented (ifpf::CHotfolderWorkflowComp)
-	virtual ifpf::IHotfolderWorkflowItem* CreateWorkflowItem(const istd::CString& hotfolderId) const;
+	virtual ifpf::IHotfolderWorkflowItem* CreateWorkflowItem(const QString& hotfolderId) const;
 };
 
 

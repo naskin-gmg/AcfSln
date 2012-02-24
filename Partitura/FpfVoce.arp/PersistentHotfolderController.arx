@@ -71,7 +71,7 @@
               AcceptPatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               AcceptPatterns
@@ -103,7 +103,7 @@
               IgnorePatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               IgnorePatterns
@@ -170,7 +170,7 @@
               ProcessingParameterIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               ProcessingParameterIds
@@ -431,7 +431,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               HotfolderSettingsFilePath
@@ -565,7 +565,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               HotfolderStateFilePath
@@ -731,7 +731,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               

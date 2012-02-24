@@ -30,7 +30,7 @@ CHotfolderWorkflowScenographerComp::CHotfolderWorkflowScenographerComp()
 
 // protected methods
 
-bool CHotfolderWorkflowScenographerComp::TryCreateHotfolder(const istd::CString& hotfolderId, const i2d::CVector2d& position)
+bool CHotfolderWorkflowScenographerComp::TryCreateHotfolder(const QString& hotfolderId, const i2d::CVector2d& position)
 {
 	bool retVal = false;
 	
@@ -39,13 +39,13 @@ bool CHotfolderWorkflowScenographerComp::TryCreateHotfolder(const istd::CString&
 				tr("Workflow designer"), 
 				tr("Hotfolder name"), 
 				QLineEdit::Normal, 
-				iqt::GetQString(hotfolderId),
+				hotfolderId,
 				&retVal);
 	
 	if (retVal && !hotfolderName.isEmpty()){
 		istd::TChangeNotifier<ifpf::IHotfolderWorkflow> workflowPtr(GetObjectPtr());
 		if (workflowPtr.IsValid()){
-			ifpf::IHotfolderWorkflowItem* workflowItemPtr = workflowPtr->AddHotfolder(iqt::GetCString(hotfolderName), hotfolderId);
+			ifpf::IHotfolderWorkflowItem* workflowItemPtr = workflowPtr->AddHotfolder(hotfolderName, hotfolderId);
 			if (workflowItemPtr != NULL){
 				return true;
 			}
@@ -70,7 +70,7 @@ bool CHotfolderWorkflowScenographerComp::OnDropObject(const QMimeData& mimeData,
 	QByteArray byteData = mimeData.data("hotfolder");
 	iser::CMemoryReadArchive archive(byteData.constData(), byteData.size());
 
-	istd::CString hotfolderId;
+	QString hotfolderId;
 
 	bool retVal = archive.Process(hotfolderId);
 
@@ -93,7 +93,7 @@ void CHotfolderWorkflowScenographerComp::UpdateScene(int /*updateFlags*/)
 
 	ifpf::IHotfolderWorkflow* workflowPtr = GetObjectPtr();
 	if (workflowPtr != NULL){
-		istd::CStringList hotfolderList = workflowPtr->GetHotfolderList();
+		QStringList hotfolderList = workflowPtr->GetHotfolderList();
 		for (int hotfolderIndex = 0; hotfolderIndex < int(hotfolderList.size()); hotfolderIndex++){
 			ifpf::IHotfolderWorkflowItem* workflowItemPtr = workflowPtr->GetHotfolder(hotfolderList[hotfolderIndex]);
 				if (workflowItemPtr != NULL){

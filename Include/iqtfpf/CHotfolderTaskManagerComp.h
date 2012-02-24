@@ -70,15 +70,15 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	istd::CStringList GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const;
+	QStringList GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const;
 
 	void OnFilesAddedEvent(const ifpf::IFileSystemChangeStorage& storage);
 	void OnFilesRemovedEvent(const ifpf::IFileSystemChangeStorage& storage);
 	void OnFilesModifiedEvent(const ifpf::IFileSystemChangeStorage& storage);
 
-	void AddFilesToProcessingQueue(const istd::CStringList& files);
-	void RemoveFilesFromProcessingQueue(const istd::CStringList& files);
-	void RestartProcessingQueueFiles(const istd::CStringList& files);
+	void AddFilesToProcessingQueue(const QStringList& files);
+	void RemoveFilesFromProcessingQueue(const QStringList& files);
+	void RestartProcessingQueueFiles(const QStringList& files);
 
 	/**
 		Synchronize the hotfolder with its static parameters.
@@ -90,42 +90,42 @@ private:
 	/**
 		Get the list of output directories for the hotfolder.
 	*/
-	istd::CStringList GetInputDirectories() const;
+	QStringList GetInputDirectories() const;
 
 	/**
 		Get parameter set for the given directory path.
 	*/
-	const iprm::IParamsSet* GetMonitoringParamsSet(const istd::CString& directoryPath) const;
+	const iprm::IParamsSet* GetMonitoringParamsSet(const QString& directoryPath) const;
 
 	/**
 		Get list of newly added input directories.
 	*/
-	istd::CStringList GetAddedInputDirectories() const;
+	QStringList GetAddedInputDirectories() const;
 
 	/**
 		Get list of newly removed input directories.
 	*/
-	istd::CStringList GetRemovedInputDirectories() const;
+	QStringList GetRemovedInputDirectories() const;
 
 	/**
 		Create and add a directory monitor for the given path with given monitoring parameters.
 	*/
-	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
+	ifpf::IDirectoryMonitor* AddDirectoryMonitor(const QString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
 
 	/**
 		Remove a directory monitor for the given path.
 	*/
-	void RemoveDirectoryMonitor(const istd::CString& directoryPath);
+	void RemoveDirectoryMonitor(const QString& directoryPath);
 
 	/**
 		Remove all processing items of the given directory.
 	*/
-	void RemoveDirectoryItems(const istd::CString& directoryPath);
+	void RemoveDirectoryItems(const QString& directoryPath);
 
 	/**
 		Find a processing item for the given file name.
 	*/
-	ifpf::IHotfolderProcessingItem* FindProcessingItem(const istd::CString& fileName) const;
+	ifpf::IHotfolderProcessingItem* FindProcessingItem(const QString& fileName) const;
 
 	/**
 		Get procesing item from its UUID.
@@ -173,7 +173,7 @@ private:
 	I_REF(ifpf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
 	I_REF(imod::IModel, m_fileSystemChangeStorageModelCompPtr);
 
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
+	typedef std::map<QString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;
 
 	FileSystemChangeStorageObserver m_fileSystemChangeStorageObserver;

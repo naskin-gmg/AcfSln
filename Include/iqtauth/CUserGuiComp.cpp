@@ -44,11 +44,11 @@ void CUserGuiComp::UpdateButtonsState()
 
 	if (isUserLogged && m_rightsProviderIfPtr.IsValid()){
 		if (m_usersManagerRightIdAttrPtr.IsValid()){
-			isUsersManagerAllowed = m_rightsProviderIfPtr->HasRight((*m_usersManagerRightIdAttrPtr).ToString(), false);
+			isUsersManagerAllowed = m_rightsProviderIfPtr->HasRight((*m_usersManagerRightIdAttrPtr).toStdString(), false);
 		}
 
 		if (m_changePasswordRightIdAttrPtr.IsValid()){
-			isChangePasswordAllowed = m_rightsProviderIfPtr->HasRight((*m_changePasswordRightIdAttrPtr).ToString(), false);
+			isChangePasswordAllowed = m_rightsProviderIfPtr->HasRight((*m_changePasswordRightIdAttrPtr).toStdString(), false);
 		}
 	}
 

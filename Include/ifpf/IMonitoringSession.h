@@ -2,9 +2,16 @@
 #define ifpf_IMonitoringSession_included
 
 
+// STL includes
+#include <vector>
+
+
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
 
 #include "isys/CFileInfo.h"
 

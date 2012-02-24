@@ -44,8 +44,8 @@ protected:
 private:
 	I_REF(IRightsProvider, m_slaveProviderIfPtr);
 	I_ATTR(bool, m_defaultRightAttrPtr);
-	I_MULTIATTR(istd::CString, m_rightsOnAttrPtr);
-	I_MULTIATTR(istd::CString, m_rightsOffAttrPtr);
+	I_MULTIATTR(QString, m_rightsOnAttrPtr);
+	I_MULTIATTR(QString, m_rightsOffAttrPtr);
 
 	typedef std::set<std::string> RightsList;
 

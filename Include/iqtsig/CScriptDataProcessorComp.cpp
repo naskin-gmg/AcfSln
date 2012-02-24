@@ -38,10 +38,10 @@ int CScriptDataProcessorComp::DoProcessing(
 	QString functionScript;
 	
 	if (m_scriptParamIdAttrPtr.IsValid()){
-		const iser::ISerializable* parameterPtr = paramsPtr->GetParameter((*m_scriptParamIdAttrPtr).ToString());
+		const iser::ISerializable* parameterPtr = paramsPtr->GetParameter((*m_scriptParamIdAttrPtr).toStdString());
 		const ibase::ITextDocument* textPtr = dynamic_cast<const ibase::ITextDocument*>(parameterPtr);
 		if (textPtr != NULL){
-			functionScript = iqt::GetQString(textPtr->GetText());
+			functionScript = textPtr->GetText();
 		}
 		else if (parameterPtr != NULL){
 			SendCriticalMessage(MI_BAD_PARAMS, "Unknown script parameter object type");
@@ -50,7 +50,7 @@ int CScriptDataProcessorComp::DoProcessing(
 		}
 	}
 	else if (m_defaultScriptAttrPtr.IsValid()){
-		functionScript = iqt::GetQString(*m_defaultScriptAttrPtr);
+		functionScript = *m_defaultScriptAttrPtr;
 	}
 
 	if (functionScript.isEmpty()){
@@ -102,7 +102,7 @@ int CScriptDataProcessorComp::DoProcessing(
 			if (m_scriptEngine.hasUncaughtException()) {
 				retVal = TS_INVALID;
 
-				SendCriticalMessage(MI_PROCESSING_ERROR, iqt::GetCString(QObject::tr("Script error in line %1").arg(m_scriptEngine.uncaughtExceptionLineNumber())));
+				SendCriticalMessage(MI_PROCESSING_ERROR, QObject::tr("Script error in line %1").arg(m_scriptEngine.uncaughtExceptionLineNumber()));
 
 				goto end_iteration;
 			}

@@ -131,9 +131,9 @@ int CNumericParamsComp::GetNumericValuesCount() const
 }
 
 
-istd::CString CNumericParamsComp::GetNumericValueDescription(int index) const
+QString CNumericParamsComp::GetNumericValueDescription(int index) const
 {
-	return istd::CString("Value ") + istd::CString::FromNumber(index + 1);
+	return QString("Value ") + QString().setNum(index + 1);
 }
 
 
@@ -151,7 +151,7 @@ int CNumericParamsComp::GetUnitType() const
 }
 
 
-istd::CString CNumericParamsComp::GetUnitName() const
+QString CNumericParamsComp::GetUnitName() const
 {
 	return "";
 }

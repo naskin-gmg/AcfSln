@@ -20,29 +20,28 @@ namespace iqtmm
 
 bool CMediaLoaderComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool beQuiet) const
 {
 	if ((dataObjectPtr != NULL) && (dynamic_cast<const imm::IMediaController*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(tr("Object is not a valid")));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not a valid"));
 		}
 
 		return false;
 	}
 
 	if (filePathPtr != NULL){
-		QString qtFilePath = iqt::GetQString(*filePathPtr);
-		QFileInfo info(qtFilePath);
+		QFileInfo info(*filePathPtr);
 
-		istd::CStringList extensions;
+		QStringList extensions;
 		if (GetFileExtensions(extensions, flags)){
-			QStringList extensionsList = iqt::GetQStringList(extensions);
+			QStringList extensionsList = (extensions);
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
 				if (!beQuiet){
-					SendInfoMessage(MI_BAD_EXTENSION, iqt::GetCString(tr("Bad multimedia file extension %1").arg(info.suffix())));
+					SendInfoMessage(MI_BAD_EXTENSION, tr("Bad multimedia file extension %1").arg(info.suffix()));
 				}
 
 				return false;
@@ -54,7 +53,7 @@ bool CMediaLoaderComp::IsOperationSupported(
 }
 
 
-int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE | QF_DIRECTORY, false)){
 		imm::IMediaController* controllerPtr = dynamic_cast<imm::IMediaController*>(&data);
@@ -63,11 +62,11 @@ int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString&
 				return StateOk;
 			}
 			else{
-				SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(tr("Cannot open media '%1'").arg(iqt::GetQString(filePath))));
+				SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot open media '%1'").arg(filePath));
 			}
 		}
 		else{
-			SendWarningMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(tr("Wrong object type")));
+			SendWarningMessage(MI_BAD_OBJECT_TYPE, tr("Wrong object type"));
 		}
 	}
 
@@ -75,7 +74,7 @@ int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString&
 }
 
 
-int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const istd::CString&/* filePath*/) const
+int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const QString&/* filePath*/) const
 {
 	return StateFailed;
 }
@@ -83,7 +82,7 @@ int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const istd::
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CMediaLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CMediaLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -103,21 +102,21 @@ bool CMediaLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, b
 }
 
 
-istd::CString CMediaLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CMediaLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	bool isKnown = (extensionPtr == NULL);
 
 	if (!isKnown){
-		istd::CStringList extensions;
-		QStringList extensionsList = iqt::GetQStringList(extensions);
+		QStringList extensions;
+		QStringList extensionsList = (extensions);
 
-		if (!extensionsList.contains(iqt::GetQString(*extensionPtr), Qt::CaseInsensitive)){
+		if (!extensionsList.contains(*extensionPtr, Qt::CaseInsensitive)){
 			isKnown = true;
 		}
 	}
 
 	if (isKnown){
-		return iqt::GetCString(tr("Multimedia"));
+		return tr("Multimedia");
 	}
 
 	return "";

@@ -63,8 +63,8 @@ protected:
 
 		ItemProcessor(
 					CHotfolderProcessingComp& parent,
-					const istd::CString& inputFilePath,
-					const istd::CString& outputFilePath,
+					const QString& inputFilePath,
+					const QString& outputFilePath,
 					const std::string& itemUuid);
 
 		int GetProcessingState() const;
@@ -79,8 +79,8 @@ protected:
 
 	private:
 		CHotfolderProcessingComp& m_parent;
-		istd::CString m_inputFilePath;
-		istd::CString m_outputFilePath;
+		QString m_inputFilePath;
+		QString m_outputFilePath;
 		std::string m_itemUuid;
 		int m_processingState;
 		double m_processingTime;

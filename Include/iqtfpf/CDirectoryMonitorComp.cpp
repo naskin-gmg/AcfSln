@@ -151,7 +151,7 @@ void CDirectoryMonitorComp::run()
 					if (!fileInfo.exists()){
 						removedFiles.push_back(fileInfo.absoluteFilePath());
 
-						I_IF_DEBUG(SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was removed"));)
+						I_IF_DEBUG(SendInfoMessage(0, fileInfo.absoluteFilePath() + " was removed");)
 					}
 					else{
 						newFileItems.push_back(fileItem);
@@ -205,10 +205,10 @@ void CDirectoryMonitorComp::run()
 				FileItems::iterator foundFileIter = qFind(m_directoryFiles.begin(), m_directoryFiles.end(), currentFileItem);
 
 				if (foundFileIter == m_directoryFiles.end()){
-					QFile file(iqt::GetQString(currentFileItem.GetFilePath()));
+					QFile file(currentFileItem.GetFilePath());
 					bool hasAccess = file.open(QIODevice::ReadOnly);
 					if (hasAccess){
-						addedFiles.push_back(iqt::GetQString(currentFileItem.GetFilePath()));
+						addedFiles.push_back(currentFileItem.GetFilePath());
 
 						m_directoryFiles.push_back(currentFileItem);
 
@@ -217,7 +217,7 @@ void CDirectoryMonitorComp::run()
 						file.close();
 					}
 					else{
-						m_nonAccessedFiles.insert(iqt::GetQString(currentFileItem.GetFilePath()));
+						m_nonAccessedFiles.insert(currentFileItem.GetFilePath());
 					}
 				}
 			}
@@ -240,7 +240,7 @@ void CDirectoryMonitorComp::run()
 
 						fileItem.SetModificationTime(currentModifiedTime);
 
-						I_IF_DEBUG(SendInfoMessage(0, iqt::GetCString(fileInfo.absoluteFilePath() + " was modified")));
+						I_IF_DEBUG(SendInfoMessage(0, fileInfo.absoluteFilePath() + " was modified"));
 					}
 				}
 
@@ -252,7 +252,7 @@ void CDirectoryMonitorComp::run()
 
 						fileItem.SetPermissions(currentPermissions);
 
-						I_IF_DEBUG(SendInfoMessage(0, istd::CString("Attributes of") + iqt::GetCString(fileInfo.absoluteFilePath() + " have been changed")));
+						I_IF_DEBUG(SendInfoMessage(0, QString("Attributes of") + fileInfo.absoluteFilePath() + " have been changed"));
 					}
 				}
 			}
@@ -290,10 +290,10 @@ void CDirectoryMonitorComp::run()
 			double processingTime = measurementTimer.GetElapsed();
 
 			SendInfoMessage(0,
-				istd::CString("Folder monitoring of ") +
-				iqt::GetCString(m_currentDirectory.absolutePath()) +
-				istd::CString(": ") +
-				istd::CString().FromNumber(processingTime) + " seconds");
+				QString("Folder monitoring of ") +
+				m_currentDirectory.absolutePath() +
+				QString(": ") +
+				QString().setNum(processingTime) + " seconds");
 		)
 	}
 }
@@ -311,7 +311,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_NEW);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.addedFiles.size(); fileIndex++){
-				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.addedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_NEW);
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.addedFiles[fileIndex], ifpf::IFileSystemChangeStorage::CF_NEW);
 			}
 		}
 
@@ -319,7 +319,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_REMOVED);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.removedFiles.size(); fileIndex++){
-				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.removedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_REMOVED);
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.removedFiles[fileIndex], ifpf::IFileSystemChangeStorage::CF_REMOVED);
 			}
 		}
 
@@ -327,7 +327,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.modifiedFiles.size(); fileIndex++){
-				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.modifiedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.modifiedFiles[fileIndex], ifpf::IFileSystemChangeStorage::CF_MODIFIED);
 			}
 		}
 
@@ -335,7 +335,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ifpf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.attributeChangedFiles.size(); fileIndex++){
-				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(iqt::GetCString(m_folderChanges.attributeChangedFiles[fileIndex]), ifpf::IFileSystemChangeStorage::CF_MODIFIED);
+				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.attributeChangedFiles[fileIndex], ifpf::IFileSystemChangeStorage::CF_MODIFIED);
 			}
 		}
 	}
@@ -379,7 +379,7 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 	m_directoryWatcher.addPath(folderPath);
 
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
-		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(iqt::GetCString(m_currentDirectory.absolutePath()));
+		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(m_currentDirectory.absolutePath());
 		if (sessionPtr != NULL){
 			m_directoryFiles = sessionPtr->GetFileInfoList();
 		}
@@ -399,7 +399,7 @@ void CDirectoryMonitorComp::StartObserverThread()
 
 	QFileInfo fileInfo(m_currentDirectory.absolutePath());
 	if (fileInfo.exists()){
-		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(m_currentDirectory.absolutePath()), "DirectoryMonitor");
+		SendInfoMessage(0, QString("Start observing of: ") + m_currentDirectory.absolutePath(), "DirectoryMonitor");
 
 		BaseClass2::start(QThread::LowPriority);
 	}
@@ -440,8 +440,8 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 {
 	DisconnectFromParameterModel();
 
-	imod::IModel* pathModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).ToString())));
-	imod::IModel* monitorParamsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).ToString())));
+	imod::IModel* pathModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).toStdString())));
+	imod::IModel* monitorParamsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).toStdString())));
 
 	if ((pathModelPtr != NULL) && (monitorParamsModelPtr != NULL)){
 		return		pathModelPtr->AttachObserver(&m_directoryParamsObserver) &&
@@ -464,7 +464,7 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 {
 	// update current session:
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
-		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(iqt::GetCString(m_currentDirectory.absolutePath()));
+		ifpf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(m_currentDirectory.absolutePath());
 		if (sessionPtr != NULL){
 			sessionPtr->SetFileInfoList(m_directoryFiles);
 		}
@@ -494,7 +494,7 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 			m_parent.m_poolingFrequency = directoryMonitorParamsPtr->GetPoolingIntervall();
 			m_parent.m_observingItemTypes = directoryMonitorParamsPtr->GetObservedItemTypes();
 			m_parent.m_observingChanges = directoryMonitorParamsPtr->GetObservedChanges();
-			m_parent.m_fileFilterExpressions = iqt::GetQStringList(directoryMonitorParamsPtr->GetAcceptPatterns());
+			m_parent.m_fileFilterExpressions = (directoryMonitorParamsPtr->GetAcceptPatterns());
 		}
 	}
 
@@ -524,7 +524,7 @@ void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* m
 				m_parent.StopObserverThread();
 			}
 
-			QString currentPath = iqt::GetQString(directoryPathPtr->GetPath());
+			QString currentPath = directoryPathPtr->GetPath();
 			if (m_parent.m_currentDirectory != QDir(currentPath)){
 				m_parent.SetFolderPath(currentPath);
 			}

@@ -41,14 +41,14 @@ public:
 
 	// reimplemented (iauth::IUsersManager)
 	virtual int GetUsersCount() const;
-	virtual int FindUserIndex(const istd::CString& name) const;
+	virtual int FindUserIndex(const QString& name) const;
 	virtual const CUser& GetUser(int index) const;
 	virtual CUser& GetUserRef(int index);
-	virtual CUser* AddUser(const istd::CString& name);
-	virtual bool DeleteUser(const istd::CString& name);
-	virtual bool RenameUser(int userIndex, const istd::CString& userName);
+	virtual CUser* AddUser(const QString& name);
+	virtual bool DeleteUser(const QString& name);
+	virtual bool RenameUser(int userIndex, const QString& userName);
 	virtual int GetUserGroupsCount() const;
-	virtual const istd::CString& GetUserGroupName(int groupIndex) const;
+	virtual const QString& GetUserGroupName(int groupIndex) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -58,15 +58,15 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_MULTIATTR(istd::CString, m_userLevelNamesAttrPtr);
-	I_MULTIATTR(istd::CString, m_defaultUsersAttrPtr);
-	I_MULTIATTR(istd::CString, m_defaultUserPasswordsAttrPtr);
+	I_MULTIATTR(QString, m_userLevelNamesAttrPtr);
+	I_MULTIATTR(QString, m_defaultUsersAttrPtr);
+	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);
 
 	typedef std::vector<CUser> Users;
 	Users m_users;
 
-	typedef std::vector<istd::CString> UserLevels;
+	typedef std::vector<QString> UserLevels;
 	UserLevels m_userLevels;
 };
 

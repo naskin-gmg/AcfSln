@@ -152,11 +152,11 @@ int CExtremumCaliperProcessorComp::DoProcessing(
 	if (		(derivativePtr == NULL) ||
 				(consumerPtr == NULL) ||
 				(paramsPtr == NULL) ||
-				(*m_caliperParamsIdAttrPtr).IsEmpty()){
+				(*m_caliperParamsIdAttrPtr).isEmpty()){
 		return TS_INVALID;
 	}
 
-	const ICaliperParams* caliperParamsPtr = dynamic_cast<const ICaliperParams*>(paramsPtr->GetParameter((*m_caliperParamsIdAttrPtr).ToString()));
+	const ICaliperParams* caliperParamsPtr = dynamic_cast<const ICaliperParams*>(paramsPtr->GetParameter((*m_caliperParamsIdAttrPtr).toStdString()));
 
 	return DoCaliper(*derivativePtr, caliperParamsPtr, *consumerPtr)? TS_OK: TS_INVALID;
 }

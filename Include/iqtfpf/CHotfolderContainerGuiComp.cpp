@@ -14,7 +14,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
@@ -28,7 +28,7 @@ namespace iqtfpf
 
 // protected methods
 
-QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const istd::CString& /*hotfolderId*/) const
+QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const QString& /*hotfolderId*/) const
 {
 	/*
 	QPushButton componentLabel(NULL);
@@ -37,7 +37,7 @@ QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const istd::CStrin
 	font.setBold(true);
 	font.setPointSize(12);
 	componentLabel.setFont(font);
-	componentLabel.setText(iqt::GetQString(address.ToString()));
+	componentLabel.setText(address.toStdString()));
 	if (m_consistInfoCompPtr.IsValid()){
 		componentLabel.setIconSize(QSize(64, 64));
 		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));
@@ -85,7 +85,7 @@ bool CHotfolderContainerGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPt
 				if (selectedItemPtr != NULL){
 					QMimeData* mimeData = new QMimeData;
 
-					istd::CString hotfolderId = iqt::GetCString(selectedItemPtr->text());
+					QString hotfolderId = selectedItemPtr->text();
 					iser::CMemoryWriteArchive archive;
 					if (archive.Process(hotfolderId)){
 						QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());
@@ -123,7 +123,7 @@ void CHotfolderContainerGuiComp::OnGuiCreated()
 
 	if (m_hotoflderFactoryIdsAttrPtr.IsValid()){
 		for (int typeIndex = 0; typeIndex < m_hotoflderFactoryIdsAttrPtr.GetCount(); typeIndex++){
-			QString itemText = iqt::GetQString(m_hotoflderFactoryIdsAttrPtr[typeIndex]);
+			QString itemText = m_hotoflderFactoryIdsAttrPtr[typeIndex];
 
 			HotfolderList->addItem(itemText);
 		}

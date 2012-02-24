@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -51,7 +51,7 @@ public:
 				double& result) const;
 
 private:
-	I_ATTR(istd::CString, m_caliperParamsIdAttrPtr);
+	I_ATTR(QString, m_caliperParamsIdAttrPtr);
 };
 
 

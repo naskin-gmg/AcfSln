@@ -10,7 +10,7 @@
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
 #include "istd/itr.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "isys/IFileSystem.h"
 
@@ -59,11 +59,11 @@ public:
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr = NULL,
+				const QString* filePathPtr = NULL,
 				int flags = -1,
 				bool beQuiet = true) const;
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
+	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 
 protected:
 	/**
@@ -74,16 +74,16 @@ protected:
 	/**
 		Called if read error is occured.
 	*/
-	virtual void OnReadError(const iser::IArchive& archive, const istd::IChangeable& data, const istd::CString& filePath) const;
+	virtual void OnReadError(const iser::IArchive& archive, const istd::IChangeable& data, const QString& filePath) const;
 
 	/**
 		Check if minimal version of some serializable object is supported by version info.
 	*/
 	bool CheckMinimalVersion(const iser::ISerializable& object, const iser::IVersionInfo& versionInfo) const;
 
-	bool CheckInputFilePath(const istd::CString filePath) const;
+	bool CheckInputFilePath(const QString filePath) const;
 
-	bool CheckTargetDirectory(const istd::CString dirPath) const;
+	bool CheckTargetDirectory(const QString dirPath) const;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

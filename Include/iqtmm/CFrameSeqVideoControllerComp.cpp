@@ -52,7 +52,7 @@ int CFrameSeqVideoControllerComp::DoProcessing(
 
 			istd::CChangeNotifier notifier(bitmapPtr);
 
-			if (m_frameLoaderCompPtr->LoadFromFile(*bitmapPtr, iqt::GetCString(fileName)) == iser::IFileLoader::StateOk){
+			if (m_frameLoaderCompPtr->LoadFromFile(*bitmapPtr, fileName) == iser::IFileLoader::StateOk){
 				return TS_OK;
 			}
 		}
@@ -64,28 +64,28 @@ int CFrameSeqVideoControllerComp::DoProcessing(
 
 // reimplemented (imm::IMediaController)
 
-istd::CString CFrameSeqVideoControllerComp::GetOpenedMediumUrl() const
+QString CFrameSeqVideoControllerComp::GetOpenedMediumUrl() const
 {
 	return m_mediumUrl;
 }
 
 
-bool CFrameSeqVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool autoPlay)
+bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPlay)
 {
 	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
 
 	m_mediumUrl = url;
 
-	istd::CStringList fileExtensions;
+	QStringList fileExtensions;
 	
 	m_frameLoaderCompPtr->GetFileExtensions(fileExtensions);
 
 	QStringList fileFilter;
 	for (int fileExtensionIndex = 0; fileExtensionIndex < int(fileExtensions.size()); fileExtensionIndex++){
-		fileFilter.push_back(QString("*.") + iqt::GetQString(fileExtensions[fileExtensionIndex]));
+		fileFilter.push_back(QString("*.") + fileExtensions[fileExtensionIndex]);
 	}
 	
-	m_fileList.Create(iqt::GetQString(m_mediumUrl), 0, 0, fileFilter);
+	m_fileList.Create(m_mediumUrl, 0, 0, fileFilter);
 
 	SetCurrentFrame(-1);
 
@@ -195,7 +195,7 @@ bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CFrameSeqVideoControllerComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CFrameSeqVideoControllerComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -209,7 +209,7 @@ bool CFrameSeqVideoControllerComp::GetFileExtensions(istd::CStringList& result, 
 }
 
 
-istd::CString CFrameSeqVideoControllerComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+QString CFrameSeqVideoControllerComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
 	return "Video files";
 }
@@ -234,7 +234,7 @@ bool CFrameSeqVideoControllerComp::LoadCurrentFrame()
 	if (m_frameLoaderCompPtr.IsValid() && m_frameDataCompPtr.IsValid() && (m_currentFrameIndex < m_fileList.count())){
 		QString currentFile = m_fileList[m_currentFrameIndex];
 
-		int loadState = m_frameLoaderCompPtr->LoadFromFile(*m_frameDataCompPtr, iqt::GetCString(currentFile));
+		int loadState = m_frameLoaderCompPtr->LoadFromFile(*m_frameDataCompPtr, currentFile);
 
 		return (loadState == iser::IFileLoader::StateOk);
 	}

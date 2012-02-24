@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace ifpf
@@ -56,7 +56,7 @@ public:
 	/**
 		Get item path with the given index from the storage.
 	*/
-	virtual istd::CString GetItemPath(int fileIndex) const = 0;
+	virtual QString GetItemPath(int fileIndex) const = 0;
 
 	/**
 		Get item state with the given index from the storage.
@@ -68,7 +68,7 @@ public:
 		If the item is marked as "removed" it will not deleted from the storage.
 		Use RemoveItemStorage, if you want permanently remove the item from the storage.
 	*/
-	virtual void UpdateStorageItem(const istd::CString& path, int itemFlags) = 0;
+	virtual void UpdateStorageItem(const QString& path, int itemFlags) = 0;
 
 	/**
 		Reset the storage.

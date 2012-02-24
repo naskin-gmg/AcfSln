@@ -7,7 +7,7 @@
 #include <set>
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "imod/CMultiModelObserverBase.h"
 #include "iser/IFileLoader.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -99,7 +99,7 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);
 	I_MULTIREF(iqt2d::ISceneProvider, m_previewSceneProvidersCompPtr);
-	I_MULTIATTR(istd::CString, m_namesAttrPtr);
+	I_MULTIATTR(QString, m_namesAttrPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);

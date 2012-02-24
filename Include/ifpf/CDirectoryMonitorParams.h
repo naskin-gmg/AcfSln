@@ -2,6 +2,10 @@
 #define ifpf_CDirectoryMonitorParams_included
 
 
+// Qt includes
+#include <QStringList>
+
+
 // AcfSln includes
 #include "ifpf/IDirectoryMonitorParams.h"
 
@@ -25,10 +29,10 @@ public:
 	virtual void SetObservedItemTypes(int observedItemTypes);
 	virtual int GetObservedChanges() const;
 	virtual void SetObservedChanges(int ovservedChanges);
-	virtual istd::CStringList GetAcceptPatterns() const;
-	virtual void SetAcceptPatterns(const istd::CStringList& acceptPatterns);
-	virtual istd::CStringList GetIgnorePatterns() const;
-	virtual void SetIgnorePatterns(const istd::CStringList& acceptPatterns);
+	virtual QStringList GetAcceptPatterns() const;
+	virtual void SetAcceptPatterns(const QStringList& acceptPatterns);
+	virtual QStringList GetIgnorePatterns() const;
+	virtual void SetIgnorePatterns(const QStringList& acceptPatterns);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -38,8 +42,8 @@ private:
 	int m_observedItemTypes;
 	int m_observedChanges;
 
-	istd::CStringList m_acceptPatterns;
-	istd::CStringList m_ignorePatterns;
+	QStringList m_acceptPatterns;
+	QStringList m_ignorePatterns;
 };
 
 

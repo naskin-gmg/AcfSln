@@ -24,7 +24,7 @@ int CRectImageSmoothProcessorComp::GetNumericValuesCount() const
 }
 
 
-istd::CString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
+QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
 {
 	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
 		return "Filter length";
@@ -284,7 +284,7 @@ int CRectImageSmoothProcessorComp::GetUnitType() const
 }
 
 
-istd::CString CRectImageSmoothProcessorComp::GetUnitName() const
+QString CRectImageSmoothProcessorComp::GetUnitName() const
 {
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:

@@ -66,22 +66,22 @@ public:
 	/**
 		Get accept file filters, given as the list of regular expressions.
 	*/
-	virtual istd::CStringList GetAcceptPatterns() const = 0;
+	virtual QStringList GetAcceptPatterns() const = 0;
 
 	/**
 		Set the accept file filters. Only file system items, that match the specified filters will be observed.
 	*/
-	virtual void SetAcceptPatterns(const istd::CStringList& acceptPatterns) = 0;
+	virtual void SetAcceptPatterns(const QStringList& acceptPatterns) = 0;
 
 	/**
 		Get ignore file filters, given as the list of regular expressions.
 	*/
-	virtual istd::CStringList GetIgnorePatterns() const = 0;
+	virtual QStringList GetIgnorePatterns() const = 0;
 
 	/**
 		Set the ignore file filters. The file system items, that match the specified filters will be ignored.
 	*/
-	virtual void SetIgnorePatterns(const istd::CStringList& acceptPatterns) = 0;
+	virtual void SetIgnorePatterns(const QStringList& acceptPatterns) = 0;
 };
 
 

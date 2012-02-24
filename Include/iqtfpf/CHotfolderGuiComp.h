@@ -169,7 +169,7 @@ private:
 	I_REF(iqtgui::IDialog, m_processingParamsDialogCompPtr);
 	I_REF(iprm::IParamsManager, m_inputDirectoriesParamsManagerCompPtr);
 	I_REF(imod::IModel, m_inputDirectoriesParamsManagerModelCompPtr);
-	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
+	I_ATTR(QString, m_directoryPathIdAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;

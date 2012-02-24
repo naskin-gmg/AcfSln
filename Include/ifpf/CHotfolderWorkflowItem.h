@@ -25,23 +25,23 @@ class CHotfolderWorkflowItem:
 public:
 	typedef iprm::CNameParam BaseClass;
 
-	void Initialize(const istd::CString& hotfolderId,
+	void Initialize(const QString& hotfolderId,
 					const ifpf::IHotfolderInfoManager* infoManagerPtr);
 
 	/**
 		Get hotfolder's ID
 	*/
-	virtual istd::CString GetHotfolderId() const;
+	virtual QString GetHotfolderId() const;
 
 	// reimplemented (ifpf::IHotfolderWorkflowItem)
-	virtual istd::CStringList GetInputDirectories() const;
-	virtual istd::CString GetOutputDirectory() const;
+	virtual QStringList GetInputDirectories() const;
+	virtual QString GetOutputDirectory() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	istd::CString m_hotfolderId;
+	QString m_hotfolderId;
 
 	const ifpf::IHotfolderInfoManager* m_infoManagerPtr;
 };

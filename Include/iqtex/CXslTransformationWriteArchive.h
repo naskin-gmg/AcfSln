@@ -39,8 +39,8 @@ public:
 	typedef iser::CFileArchiveInfo BaseClass2;
 
 	CXslTransformationWriteArchive(
-				const istd::CString& filePath = "",
-				const istd::CString& xslFilePath = "",
+				const QString& filePath = "",
+				const QString& xslFilePath = "",
 				const iser::IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
@@ -50,7 +50,7 @@ public:
 
 	bool Flush();
 
-	bool OpenDocument(const istd::CString& filePath, const istd::CString& xslFilePath);
+	bool OpenDocument(const QString& filePath, const QString& xslFilePath);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -70,7 +70,7 @@ public:
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
 	virtual bool Process(std::string& value);
-	virtual bool Process(istd::CString& value);
+	virtual bool Process(QString& value);
 	virtual bool ProcessData(void* dataPtr, int size);
 
 protected:
@@ -82,8 +82,8 @@ protected:
 	virtual bool SendLogMessage(
 		MessageCategory category,
 		int id,
-		const istd::CString& message,
-		const istd::CString& messageSource,
+		const QString& message,
+		const QString& messageSource,
 		int flags = 0) const
 	{
 		return iser::CWriteArchiveBase::SendLogMessage(category, id, message, messageSource, flags);
@@ -95,7 +95,7 @@ private:
 	QDomElement m_currentParent;
 
 	QFile m_file;
-	istd::CString m_xslFilePath;
+	QString m_xslFilePath;
 
 	bool m_serializeHeader;
 	iser::CArchiveTag m_rootTag;

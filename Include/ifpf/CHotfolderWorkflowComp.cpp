@@ -1,6 +1,10 @@
 #include "ifpf/CHotfolderWorkflowComp.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
@@ -26,7 +30,7 @@ CHotfolderWorkflowComp::CHotfolderWorkflowComp()
 
 // reimplemented (ifpf::IHotfolderInfoManager)
 
-ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const istd::CString& /*hotfolderName*/) const
+ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const QString& /*hotfolderName*/) const
 {
 	return NULL;
 }
@@ -34,7 +38,7 @@ ifpf::IHotfolderProcessingInfo* CHotfolderWorkflowComp::GetProcessingInfo(const 
 
 // reimplemented (ifpf::IHotfolderWorkflow)
 
-ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId)
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const QString& hotfolderName, const QString& hotfolderId)
 {
 	HotfolderItem* newHotfolderInfoPtr = CreateHotfolder(hotfolderName, hotfolderId);
 	if (newHotfolderInfoPtr != NULL){
@@ -49,15 +53,15 @@ ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const istd::C
 }
 
 
-bool CHotfolderWorkflowComp::RemoveHotfolder(const istd::CString& /*hotfolderName*/)
+bool CHotfolderWorkflowComp::RemoveHotfolder(const QString& /*hotfolderName*/)
 {
 	return true;
 }
 
 
-istd::CStringList CHotfolderWorkflowComp::GetHotfolderIds() const
+QStringList CHotfolderWorkflowComp::GetHotfolderIds() const
 {
-	istd::CStringList hotfolderIds;
+	QStringList hotfolderIds;
 
 	if (m_hotoflderFactoryIdsAttrPtr.IsValid()){
 		for (int index = 0; index < m_hotoflderFactoryIdsAttrPtr.GetCount(); index++){
@@ -69,9 +73,9 @@ istd::CStringList CHotfolderWorkflowComp::GetHotfolderIds() const
 }
 
 
-istd::CStringList CHotfolderWorkflowComp::GetHotfolderList() const
+QStringList CHotfolderWorkflowComp::GetHotfolderList() const
 {
-	istd::CStringList hotfolderList;
+	QStringList hotfolderList;
 
 	for (int index = 0; index < m_hotfolders.GetCount(); index++){
 		hotfolderList.push_back(m_hotfolders.GetAt(index)->elementPtr->GetName());
@@ -81,7 +85,7 @@ istd::CStringList CHotfolderWorkflowComp::GetHotfolderList() const
 }
 
 
-ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::GetHotfolder(const istd::CString& hotfolderName) const
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::GetHotfolder(const QString& hotfolderName) const
 {
 	for (int index = 0; index < m_hotfolders.GetCount(); index++){
 		HotfolderItem* infoPtr = m_hotfolders.GetAt(index);
@@ -109,7 +113,7 @@ bool CHotfolderWorkflowComp::Serialize(iser::IArchive& /*archive*/)
 
 // protected methods
 	
-CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId) const
+CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(const QString& hotfolderName, const QString& hotfolderId) const
 {
 	if (!m_hotoflderFactoriesCompPtr.IsValid()){
 		return NULL;
@@ -142,7 +146,7 @@ CHotfolderWorkflowComp::HotfolderItem* CHotfolderWorkflowComp::CreateHotfolder(c
 }
 
 
-ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::CreateWorkflowItem(const istd::CString& hotfolderId) const
+ifpf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::CreateWorkflowItem(const QString& hotfolderId) const
 {
 	ifpf::CHotfolderWorkflowItem* itemPtr = new ifpf::CHotfolderWorkflowItem();
 

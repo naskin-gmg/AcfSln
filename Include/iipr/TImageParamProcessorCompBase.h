@@ -43,7 +43,7 @@ protected:
 				iimg::IBitmap& outputImage) = 0;
 
 private:
-	I_ATTR(istd::CString, m_paramsIdAttrPtr);
+	I_ATTR(QString, m_paramsIdAttrPtr);
 };
 
 
@@ -59,7 +59,7 @@ bool TImageParamProcessorCompBase<ParameterType>::ProcessImage(
 {
 	const ParameterType* processorParamsPtr = NULL;	
 	if ((paramsPtr != NULL) && m_paramsIdAttrPtr.IsValid()){
-		processorParamsPtr = dynamic_cast<const ParameterType*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
+		processorParamsPtr = dynamic_cast<const ParameterType*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().toStdString()));
 	}
 	
 	// do image processing:

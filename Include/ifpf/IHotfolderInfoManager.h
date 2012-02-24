@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 
 // AcfSln includes
@@ -24,7 +24,7 @@ public:
 	/**
 		Get processing info for a given hotfolder.
 	*/
-	virtual ifpf::IHotfolderProcessingInfo* GetProcessingInfo(const istd::CString& hotfolderName) const = 0;
+	virtual ifpf::IHotfolderProcessingInfo* GetProcessingInfo(const QString& hotfolderName) const = 0;
 
 };
 

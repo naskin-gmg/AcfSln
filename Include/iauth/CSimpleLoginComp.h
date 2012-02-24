@@ -40,8 +40,8 @@ public:
 
 	struct User
 	{
-		istd::CString name;
-		istd::CString password;
+		QString name;
+		QString password;
 		int group;
 	};
 
@@ -49,12 +49,12 @@ public:
 
 	virtual int GetUsersCount() const;
 	virtual User& GetUser(int index) const;
-	virtual int FindUserIndex(const istd::CString& name) const;
+	virtual int FindUserIndex(const QString& name) const;
 	virtual bool AddUser(const User& user);
 
 	// reimplemented (iauth::ILogin)
 	virtual bool IsUserLogged() const;
-	virtual bool Login(const istd::CString& userName, const istd::CString& password);
+	virtual bool Login(const QString& userName, const QString& password);
 	virtual bool Logout();
 
 	// reimplemented (iauth::IRightsProvider)
@@ -71,8 +71,8 @@ protected:
 
 private:
 	I_MULTIREF(IRightsProvider, m_userLevelsIfPtr);
-	I_MULTIATTR(istd::CString, m_defaultUsersAttrPtr);
-	I_MULTIATTR(istd::CString, m_defaultUserPasswordsAttrPtr);
+	I_MULTIATTR(QString, m_defaultUsersAttrPtr);
+	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);
 
 	typedef std::vector<User> Users;

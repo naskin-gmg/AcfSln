@@ -20,7 +20,7 @@ public:
 		Get the new file path for a given input file name.
 		\sa isys::IFileSystem
 	*/
-	virtual istd::CString GetFilePath(const istd::CString& inputFileName) const = 0;
+	virtual QString GetFilePath(const QString& inputFileName) const = 0;
 };
 
 

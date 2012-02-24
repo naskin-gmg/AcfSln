@@ -49,22 +49,22 @@ public:
 	/**
 		Get prefix of the file
 	*/
-	virtual istd::CString GetPrefix() const = 0;
+	virtual QString GetPrefix() const = 0;
 
 	/**
 		Set prefix of the file
 	*/
-	virtual void SetPrefix(const istd::CString& prefix) = 0;
+	virtual void SetPrefix(const QString& prefix) = 0;
 
 	/**
 		Set suffix of the file
 	*/
-	virtual istd::CString GetSuffix() const = 0;
+	virtual QString GetSuffix() const = 0;
 
 	/**
 		Get suffix of the file
 	*/
-	virtual void SetSuffix(const istd::CString& suffix) = 0;
+	virtual void SetSuffix(const QString& suffix) = 0;
 };
 
 

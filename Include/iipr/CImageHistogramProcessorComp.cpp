@@ -37,7 +37,7 @@ int CImageHistogramProcessorComp::DoProcessing(
 
 	const i2d::IObject2d* aoiPtr = NULL;
 	if (paramsPtr != NULL && m_aoiParamsIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).ToString()));
+		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).toStdString()));
 	}
 
 	return CalculateHistogramFromBitmap(*inputBitmapPtr, aoiPtr, *histogramPtr) ? TS_OK : TS_INVALID;

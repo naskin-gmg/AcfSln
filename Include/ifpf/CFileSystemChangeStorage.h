@@ -31,18 +31,18 @@ public:
 
 	// reimplemented (ifpf::IFileSystemChangeStorage)
 	virtual int	 GetStorageItemsCount() const;
-	virtual istd::CString GetItemPath(int fileIndex) const;
+	virtual QString GetItemPath(int fileIndex) const;
 	virtual int GetItemState(int fileIndex) const;
-	virtual void UpdateStorageItem(const istd::CString& path, int itemFlags);
+	virtual void UpdateStorageItem(const QString& path, int itemFlags);
 	virtual void ResetStorage();
 
 private:
-	int GetFileIndexFromPath(const istd::CString& filePath) const;
+	int GetFileIndexFromPath(const QString& filePath) const;
 
 private:
 	struct FileItem
 	{
-		istd::CString path;
+		QString path;
 		int state;
 	};
 

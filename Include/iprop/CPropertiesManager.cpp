@@ -60,12 +60,12 @@ std::string CPropertiesManager::GetPropertyId(int propertyIndex) const
 }
 
 
-istd::CString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
+QString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
 {
 	I_ASSERT(propertyIndex >= 0);
 	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
-	return m_propertiesList.GetAt(propertyIndex)->propertyDescription;
+	return QString::fromStdString(m_propertiesList.GetAt(propertyIndex)->propertyDescription);
 }
 
 

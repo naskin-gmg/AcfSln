@@ -54,7 +54,7 @@ public:
 	virtual int GetPropertiesCount() const;
 	virtual iser::IObject* GetProperty(int propertyIndex) const;
 	virtual std::string GetPropertyId(int propertyIndex) const;
-	virtual istd::CString GetPropertyDescription(int propertyIndex) const;
+	virtual QString GetPropertyDescription(int propertyIndex) const;
 	virtual void InsertProperty(
 				iser::IObject* objectPtr,
 				const std::string& propertyId,

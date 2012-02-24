@@ -41,17 +41,17 @@ int CFileAcquisitionComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	istd::CString filesPath = *m_defaultDirAttrPtr;
+	QString filesPath = *m_defaultDirAttrPtr;
 	const iprm::IFileNameParam* loaderParamsPtr = NULL;
 	if (paramsPtr != NULL){
-		loaderParamsPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter((*m_parameterIdAttrPtr).ToString()));
+		loaderParamsPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter((*m_parameterIdAttrPtr).toStdString()));
 		if (loaderParamsPtr != NULL){
 			filesPath = loaderParamsPtr->GetPath();
 		}
 	}
-	QDir directory(iqt::GetQString(filesPath));
+	QDir directory(filesPath);
 
-	istd::CStringList extensions;
+	QStringList extensions;
 	m_bitmapLoaderCompPtr->GetFileExtensions(extensions, iser::IFileLoader::QF_LOAD);
 
 	ParamsInfo& info = m_dirInfos[filesPath];
@@ -59,10 +59,10 @@ int CFileAcquisitionComp::DoProcessing(
 		QStringList nameFilters;
 
 		if (!extensions.empty()){
-			for (		istd::CStringList::iterator iter = extensions.begin();
+			for (		QStringList::iterator iter = extensions.begin();
 						iter != extensions.end();
 						++iter){
-				nameFilters << (QString("*.") + iqt::GetQString(*iter));
+				nameFilters << (QString("*.") + *iter);
 			}
 		}
 		else{
@@ -79,7 +79,7 @@ int CFileAcquisitionComp::DoProcessing(
 
 	int retVal = TS_INVALID;
 	if (info.filesIter != info.files.end()){
-		istd::CString fileName = iqt::GetCString(directory.absoluteFilePath(*info.filesIter));
+		QString fileName = directory.absoluteFilePath(*info.filesIter);
 		info.filesIter++;
 
 		if (outputPtr != NULL){

@@ -96,9 +96,9 @@ protected:
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_ATTR(istd::CString, m_aoiParamsIdAttrPtr);
-	I_ATTR(istd::CString, m_slaveLineIdAttrPtr);
-	I_ATTR(istd::CString, m_circleFinderParamsIdAttrPtr);
+	I_ATTR(QString, m_aoiParamsIdAttrPtr);
+	I_ATTR(QString, m_slaveLineIdAttrPtr);
+	I_ATTR(QString, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
 };
 

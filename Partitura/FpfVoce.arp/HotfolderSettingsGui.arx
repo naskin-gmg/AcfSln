@@ -117,7 +117,7 @@
               Ids
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -147,7 +147,7 @@
               Names
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -219,7 +219,7 @@
               PathLabel
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -238,7 +238,7 @@
               StartHint
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               

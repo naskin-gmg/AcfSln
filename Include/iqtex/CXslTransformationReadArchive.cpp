@@ -48,34 +48,34 @@ void ReadArchiveMessageHandler::handleMessage(
 	m_loggerPtr->SendLogMessage(
 					istd::ILogger::MC_WARNING,
 					0,
-					tr("Transformation message: ").append(iqt::GetCString(description)),
+					tr("Transformation message: ").append(description),
 					"XslTransformationWriteArchive");
 }
 
 
 CXslTransformationReadArchive::CXslTransformationReadArchive(
-			const istd::CString& filePath,
-			const istd::CString& xslFilePath,
+			const QString& filePath,
+			const QString& xslFilePath,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	m_serializeHeader(serializeHeader),
 	m_rootTag(rootTag)
 {
-	if (!filePath.IsEmpty()){
+	if (!filePath.isEmpty()){
 		OpenDocument(filePath, xslFilePath);
 	}
 }
 
 
-bool CXslTransformationReadArchive::OpenDocument(const istd::CString& filePath, const istd::CString& xslFilePath)
+bool CXslTransformationReadArchive::OpenDocument(const QString& filePath, const QString& xslFilePath)
 {
-	QFile xmlFile(iqt::GetQString(filePath));
+	QFile xmlFile(filePath);
 	if (!xmlFile.open(QIODevice::ReadOnly)){
 		return false;
 	}
 
 
-	if (xslFilePath.IsEmpty()){
+	if (xslFilePath.isEmpty()){
 		if (!m_document.setContent(&xmlFile)) {
 			xmlFile.close();
 
@@ -83,7 +83,7 @@ bool CXslTransformationReadArchive::OpenDocument(const istd::CString& filePath, 
 		}
 	}
 	else{
-		QFile xslfile(iqt::GetQString(xslFilePath));
+		QFile xslfile(xslFilePath);
 		if (!xslfile.open(QIODevice::ReadOnly)){
 			return false;
 		}
@@ -105,7 +105,7 @@ bool CXslTransformationReadArchive::OpenDocument(const istd::CString& filePath, 
 		}
 	}
 
-	if (m_currentNode.nodeValue() != iqt::GetQString(m_rootTag.GetId())){
+	if (m_currentNode.nodeValue() != QString::fromStdString(m_rootTag.GetId())){
 		QDomElement mainElement = m_document.documentElement();
 
 		m_currentNode = mainElement;
@@ -331,11 +331,11 @@ bool CXslTransformationReadArchive::Process(std::string& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(istd::CString& value)
+bool CXslTransformationReadArchive::Process(QString& value)
 {
 	QString text = PullTextNode();
 
-	value = iqt::GetCString(text);
+	value = text;
 
 	return !m_currentNode.isNull();
 }

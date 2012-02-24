@@ -28,18 +28,18 @@ CUser* CUserLoginComp::GetLoggedUser() const
 
 bool CUserLoginComp::IsUserLogged() const
 {
-	return (!m_loggedUserName.IsEmpty());
+	return (!m_loggedUserName.isEmpty());
 }
 
 
-bool CUserLoginComp::Login(const istd::CString& userName, const istd::CString& password)
+bool CUserLoginComp::Login(const QString& userName, const QString& password)
 {
 	if (m_usersManagerIfPtr.IsValid()){
 		int userIndex = m_usersManagerIfPtr->FindUserIndex(userName);
 		if (userIndex >= 0){
 			CUser& user = m_usersManagerIfPtr->GetUserRef(userIndex);
 			if (user.CheckPassword(password)){
-				if (m_passwordChangerIfPtr.IsValid() && password.IsEmpty()){
+				if (m_passwordChangerIfPtr.IsValid() && password.isEmpty()){
 					if (!m_passwordChangerIfPtr->TryChangePassword(user)){
 						return false;
 					}
@@ -61,10 +61,10 @@ bool CUserLoginComp::Login(const istd::CString& userName, const istd::CString& p
 bool CUserLoginComp::Logout()
 {
 	if (m_usersManagerIfPtr.IsValid()){
-		if (!m_loggedUserName.IsEmpty()){
+		if (!m_loggedUserName.isEmpty()){
 			istd::TChangeNotifier<IRightsProvider> updatePtr(this);
 
-			m_loggedUserName.Reset();
+			m_loggedUserName.clear();
 
 			return true;
 		}
@@ -78,7 +78,7 @@ bool CUserLoginComp::Logout()
 bool CUserLoginComp::HasRight(const std::string& operationId,	bool beQuiet) const
 {
 	int levelId = 0;
-	if (!m_loggedUserName.IsEmpty() && m_usersManagerIfPtr.IsValid()){
+	if (!m_loggedUserName.isEmpty() && m_usersManagerIfPtr.IsValid()){
 		int userIndex = m_usersManagerIfPtr->FindUserIndex(m_loggedUserName);
 		if (userIndex >= 0){
 			const CUser& user = m_usersManagerIfPtr->GetUser(userIndex);

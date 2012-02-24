@@ -20,28 +20,28 @@ namespace iqtfpf
 
 // reimplemented (ifpf::IFileNaming)
 
-istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) const
+QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 {
 	if (!m_directoryPathCompPtr.IsValid()){
-		return istd::CString::GetEmpty();
+		return QString();
 	}
 
-	QFileInfo inputFileInfo(iqt::GetQString(inputFilePath));
+	QFileInfo inputFileInfo(inputFilePath);
 	QString baseFileName = inputFileInfo.completeBaseName();
-	istd::CString outputExtension = iqt::GetCString(inputFileInfo.suffix());
+	QString outputExtension = inputFileInfo.suffix();
 
 	// calculate the base file name:
 	if (m_fileNamingParamsCompPtr.IsValid()){
-		baseFileName = iqt::GetQString(m_fileNamingParamsCompPtr->GetPrefix()) + baseFileName;
-		baseFileName += iqt::GetQString(m_fileNamingParamsCompPtr->GetSuffix());
+		baseFileName = m_fileNamingParamsCompPtr->GetPrefix() + baseFileName;
+		baseFileName += m_fileNamingParamsCompPtr->GetSuffix();
 	}
 
 	// calculate the new extension:
 	if (m_fileTypeInfoCompPtr.IsValid()){
-		istd::CStringList supportedExtensions;
+		QStringList supportedExtensions;
 		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_SAVE);
 
-		istd::CStringList::const_iterator inputFoundIter = std::find(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
+		QStringList::const_iterator inputFoundIter = std::find(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
 		if (inputFoundIter == supportedExtensions.end()){
 			if (supportedExtensions.empty()){
 				outputExtension.clear();
@@ -52,9 +52,9 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 		}
 	}
 
-	QString newFileName = baseFileName + "." + iqt::GetQString(outputExtension);
+	QString newFileName = baseFileName + "." + outputExtension;
 
-	QString outputDirectoryPath = iqt::GetQString(m_directoryPathCompPtr->GetPath());
+	QString outputDirectoryPath = m_directoryPathCompPtr->GetPath();
 
 	if (!outputDirectoryPath.isEmpty()){
 		QDir outputDirectory(outputDirectoryPath);
@@ -63,14 +63,14 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 
 		if (m_fileNamingParamsCompPtr.IsValid()){
 			if (m_fileNamingParamsCompPtr->GetRenamingMode() == ifpf::IFileNamingParams::RM_OVERWRITE){
-				return iqt::GetCString(outputFilePath);
+				return outputFilePath;
 			}
 			else{
 				int counter = 0;
 				while (true){
 					QFileInfo outputFileInfo(outputFilePath);
 					if (outputFileInfo.exists()){
-						newFileName = QString("%1_%2").arg(baseFileName).arg(++counter, 3, 10, QChar('0')) + "." + iqt::GetQString(outputExtension);
+						newFileName = QString("%1_%2").arg(baseFileName).arg(++counter, 3, 10, QChar('0')) + "." + outputExtension;
 						
 						outputFilePath = outputDirectory.absoluteFilePath(newFileName);
 					}
@@ -81,10 +81,10 @@ istd::CString CFileNamingComp::GetFilePath(const istd::CString& inputFilePath) c
 			}
 		}
 
-		return iqt::GetCString(outputDirectory.absoluteFilePath(newFileName));
+		return outputDirectory.absoluteFilePath(newFileName);
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 

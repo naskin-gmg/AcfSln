@@ -149,7 +149,7 @@ int CTriggerParamsComp::GetOptionsCount() const
 }
 
 
-istd::CString CTriggerParamsComp::GetOptionName(int index) const
+QString CTriggerParamsComp::GetOptionName(int index) const
 {
 	I_ASSERT(int(m_selectionList.size()) > index);
 	I_ASSERT(index >= 0);
@@ -158,7 +158,7 @@ istd::CString CTriggerParamsComp::GetOptionName(int index) const
 }
 
 
-istd::CString CTriggerParamsComp::GetOptionDescription(int index) const
+QString CTriggerParamsComp::GetOptionDescription(int index) const
 {
 	I_ASSERT(int(m_selectionList.size()) > index);
 	I_ASSERT(index >= 0);
@@ -172,7 +172,7 @@ std::string CTriggerParamsComp::GetOptionId(int index) const
 	I_ASSERT(int(m_selectionList.size()) > index);
 	I_ASSERT(index >= 0);
 
-	return m_selectionList[index].name.ToString();
+	return m_selectionList[index].name.toStdString();
 }
 
 

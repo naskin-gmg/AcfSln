@@ -26,13 +26,13 @@ class CMonitoringSessionsManager:
 public:
 	// reimplemented (ifpf::IMonitoringSessionManager)
 	virtual void ResetSessions();
-	virtual ifpf::IMonitoringSession* GetSession(const istd::CString& directoryPath) const;
+	virtual ifpf::IMonitoringSession* GetSession(const QString& directoryPath) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	typedef std::map<istd::CString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
+	typedef std::map<QString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
 	mutable MonitoringSessionsMap m_monitorSessionsMap;
 };
 

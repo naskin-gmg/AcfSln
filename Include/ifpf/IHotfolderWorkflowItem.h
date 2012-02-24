@@ -19,12 +19,12 @@ public:
 	/**
 		Get input direcories.
 	*/
-	virtual istd::CStringList GetInputDirectories() const = 0;
+	virtual QStringList GetInputDirectories() const = 0;
 	
 	/**
 		Get output directory.
 	*/
-	virtual istd::CString GetOutputDirectory() const = 0;
+	virtual QString GetOutputDirectory() const = 0;
 };
 
 

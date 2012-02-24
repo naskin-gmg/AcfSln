@@ -24,34 +24,33 @@ namespace iqtmm
 
 bool CSvgBitmapLoaderComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool beQuiet) const
 {
 	if (		(dataObjectPtr != NULL) &&
 				(dynamic_cast<const iimg::IRasterImage*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(tr("Object is not a valid")));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not a valid"));
 		}
 
 		return false;
 	}
 
 	if (filePathPtr != NULL){
-		if (filePathPtr->IsEmpty()){
+		if (filePathPtr->isEmpty()){
 			return false;
 		}
 
-		QString qtFilePath = iqt::GetQString(*filePathPtr);
-		QFileInfo info(qtFilePath);
+		QFileInfo info(*filePathPtr);
 
-		istd::CStringList extensions;
+		QStringList extensions;
 		if (GetFileExtensions(extensions, flags)){
-			QStringList extensionsList = iqt::GetQStringList(extensions);
+			QStringList extensionsList = (extensions);
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
 				if (!beQuiet){
-					SendInfoMessage(MI_BAD_EXTENSION, iqt::GetCString(tr("Bad SVG file extension %1").arg(info.suffix())));
+					SendInfoMessage(MI_BAD_EXTENSION, tr("Bad SVG file extension %1").arg(info.suffix()));
 				}
 
 				return false;
@@ -63,20 +62,20 @@ bool CSvgBitmapLoaderComp::IsOperationSupported(
 }
 
 
-int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
-		I_ASSERT(!filePath.IsEmpty());	// should be checked by IsOperationSupported
+		I_ASSERT(!filePath.isEmpty());	// should be checked by IsOperationSupported
 
 		iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IBitmap*>(&data);
 		I_ASSERT(imagePtr != NULL);	// should be checked by IsOperationSupported
 		if (filePath != m_lastFilePath){
 			QSvgRenderer renderer;
-			if (renderer.load(iqt::GetQString(filePath))){
+			if (renderer.load(filePath)){
 				if (!m_lastBitmap.CreateBitmap(iimg::IBitmap::PF_RGBA, istd::CIndex2d(*m_bitmapWidthAttrPtr, *m_bitmapHeightAttrPtr))){
-					m_lastFilePath.Reset();
+					m_lastFilePath.clear();
 
-					SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(tr("Cannot create bitmap")));
+					SendInfoMessage(MI_BITMAP_TYPE, tr("Cannot create bitmap"));
 
 					return StateFailed;
 				}
@@ -88,7 +87,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 				m_lastFilePath = filePath;
 			}
 			else{
-				SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(tr("Cannot load SVG file '%1'").arg(iqt::GetQString(filePath))));
+				SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot load SVG file '%1'").arg(filePath));
 
 				return StateFailed;
 			}
@@ -98,7 +97,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 			return StateOk;
 		}
 		else{
-			SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(tr("Cannot copy bitmap from Qt bitmap")));
+			SendInfoMessage(MI_BITMAP_TYPE, tr("Cannot copy bitmap from Qt bitmap"));
 		}
 	}
 
@@ -106,7 +105,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 }
 
 
-int CSvgBitmapLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const istd::CString&/* filePath*/) const
+int CSvgBitmapLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const QString&/* filePath*/) const
 {
 	return StateFailed;
 }
@@ -114,7 +113,7 @@ int CSvgBitmapLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const is
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CSvgBitmapLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CSvgBitmapLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -128,22 +127,22 @@ bool CSvgBitmapLoaderComp::GetFileExtensions(istd::CStringList& result, int flag
 }
 
 
-istd::CString CSvgBitmapLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CSvgBitmapLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	bool isKnown = (extensionPtr == NULL);
 
 	if (!isKnown){
-		istd::CStringList extensions;
+		QStringList extensions;
 		if (GetFileExtensions(extensions)){
-			QStringList extensionsList = iqt::GetQStringList(extensions);
-			if (!extensionsList.contains(iqt::GetQString(*extensionPtr), Qt::CaseInsensitive)){
+			QStringList extensionsList = (extensions);
+			if (!extensionsList.contains(*extensionPtr, Qt::CaseInsensitive)){
 				isKnown = true;
 			}
 		}
 	}
 
 	if (isKnown){
-		return iqt::GetCString(tr("SVG image"));
+		return tr("SVG image");
 	}
 
 	return "";

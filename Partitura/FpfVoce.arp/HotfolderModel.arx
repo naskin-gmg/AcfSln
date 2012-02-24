@@ -63,7 +63,7 @@
               ParametersId
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               
@@ -124,7 +124,7 @@
               AcceptPatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               AcceptPatterns
@@ -140,7 +140,7 @@
               IgnorePatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::TMultiAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               IgnorePatterns

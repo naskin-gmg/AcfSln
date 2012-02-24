@@ -32,10 +32,10 @@ void CPropertiesEditorComp::UpdateGui(int /*updateFlags*/)
 			const IProperty* propertyPtr = dynamic_cast<const IProperty*>(objectPtr->GetProperty(propertyIndex));
 			if (propertyPtr != NULL){
 
-				istd::CString propertyId = objectPtr->GetPropertyId(propertyIndex);
-				istd::CString propertyDescription = objectPtr->GetPropertyDescription(propertyIndex);
+				QString propertyId = QString::fromStdString(objectPtr->GetPropertyId(propertyIndex));
+				QString propertyDescription = objectPtr->GetPropertyDescription(propertyIndex);
 
-				UpdatePropertyEditor(*propertyPtr, iqt::GetQString(propertyId), iqt::GetQString(propertyDescription));
+				UpdatePropertyEditor(*propertyPtr, propertyId, propertyDescription);
 			}
 		}
 	}
@@ -121,7 +121,7 @@ void CPropertiesEditorComp::SetDataToEditor(const IProperty& objectProperty, QTr
 
 	const CStringProperty* stringPropertyPtr = dynamic_cast<const CStringProperty*>(&objectProperty);
 	if (stringPropertyPtr != NULL){
-		propertyItem.setText(CT_VALUE, iqt::GetQString(stringPropertyPtr->GetValue()));
+		propertyItem.setText(CT_VALUE, stringPropertyPtr->GetValue());
 	}
 
 	const CStdStringProperty* idPropertyPtr = dynamic_cast<const CStdStringProperty*>(&objectProperty);

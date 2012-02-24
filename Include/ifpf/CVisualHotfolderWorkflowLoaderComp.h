@@ -36,27 +36,27 @@ public:
 	CHotfolderWorkflowComp();
 
 	// reimplemented (ifpf::IHotfolderWorkflow)
-	virtual ifpf::IHotfolderProcessingInfo* AddHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId = istd::CString());
-	virtual bool RemoveHotfolder(const istd::CString& hotfolderName);
-	virtual ifpf::IHotfolderProcessingInfo* GetHotfolder(const istd::CString& hotfolderName) const;
-	virtual istd::CStringList GetHotfoldersList() const;
-	virtual int GetWorkingState(const istd::CString& hotfolderName) const;
+	virtual ifpf::IHotfolderProcessingInfo* AddHotfolder(const QString& hotfolderName, const QString& hotfolderId = QString());
+	virtual bool RemoveHotfolder(const QString& hotfolderName);
+	virtual ifpf::IHotfolderProcessingInfo* GetHotfolder(const QString& hotfolderName) const;
+	virtual QStringList GetHotfoldersList() const;
+	virtual int GetWorkingState(const QString& hotfolderName) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	virtual ifpf::IHotfolderProcessingInfo* CreateHotfolder(const istd::CString& hotfolderName, const istd::CString& hotfolderId = istd::CString()) const;
+	virtual ifpf::IHotfolderProcessingInfo* CreateHotfolder(const QString& hotfolderName, const QString& hotfolderId = QString()) const;
 
 private:
 	struct HotfolderInfo
 	{
 		istd::TDelPtr<ifpf::IHotfolderProcessingInfo> m_hotfolderPtr;
-		istd::CString hotfolderId;
+		QString hotfolderId;
 	};
 
 	I_MULTIFACT(ifpf::IHotfolderProcessingInfo, m_hotoflderFactoriesCompPtr);
-	I_MULTIATTR(istd::CString, m_hotoflderFactoryIdsAttrPtr);
+	I_MULTIATTR(QString, m_hotoflderFactoryIdsAttrPtr);
 };
 
 

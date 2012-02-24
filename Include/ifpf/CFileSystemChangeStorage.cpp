@@ -34,14 +34,14 @@ int CFileSystemChangeStorage::GetStorageItemsCount() const
 }
 
 
-istd::CString CFileSystemChangeStorage::GetItemPath(int fileIndex) const
+QString CFileSystemChangeStorage::GetItemPath(int fileIndex) const
 {
 	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
 
 	I_ASSERT(fileIndex >= 0);
 	I_ASSERT(fileIndex < int(m_storageItems.size()));
 
-	istd::CString filePath = m_storageItems[fileIndex].path;
+	QString filePath = m_storageItems[fileIndex].path;
 
 	return filePath;
 }
@@ -60,7 +60,7 @@ int CFileSystemChangeStorage::GetItemState(int fileIndex) const
 }
 
 
-void CFileSystemChangeStorage::UpdateStorageItem(const istd::CString& path, int itemFlags)
+void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int itemFlags)
 {
 	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
 
@@ -93,7 +93,7 @@ void CFileSystemChangeStorage::ResetStorage()
 
 // private methods
 
-int CFileSystemChangeStorage::GetFileIndexFromPath(const istd::CString& filePath) const
+int CFileSystemChangeStorage::GetFileIndexFromPath(const QString& filePath) const
 {
 	for (int index = 0; index < int(m_storageItems.size()); ++index){
 		if (m_storageItems[index].path == filePath){

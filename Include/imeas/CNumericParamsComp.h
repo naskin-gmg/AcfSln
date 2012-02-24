@@ -58,12 +58,12 @@ protected:
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetNumericValuesCount() const;
-	virtual istd::CString GetNumericValueDescription(int index) const;
+	virtual QString GetNumericValueDescription(int index) const;
 	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (imeas::IUnitInfo)
 	virtual int GetUnitType() const;
-	virtual istd::CString GetUnitName() const;
+	virtual QString GetUnitName() const;
 	virtual double GetDisplayMultiplicationFactor() const;
 	virtual istd::CRange GetValueRange() const;
 	virtual const imath::IDoubleManip& GetValueManip() const;

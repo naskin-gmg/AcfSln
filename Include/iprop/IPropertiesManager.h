@@ -39,7 +39,7 @@ public:
 	/**
 		Get the description of the property with the given index \c propertyIndex
 	*/
-	virtual istd::CString GetPropertyDescription(int propertyIndex) const = 0;
+	virtual QString GetPropertyDescription(int propertyIndex) const = 0;
 
 	/**
 		Insert an property into the object.

@@ -8,7 +8,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "iser/CMemoryWriteArchive.h"
 
 // ACF-Solutions includes
@@ -30,7 +30,7 @@ class CUserManagerDialog:
 public:
 	CUserManagerDialog(const iauth::IUserLogin& login, iauth::IUsersManager& manager);
 	
-	void SaveCurUsername(const istd::CString& Username);
+	void SaveCurUsername(const QString& Username);
 	int GetUserGroupSize();
 
 protected Q_SLOTS:
@@ -73,7 +73,7 @@ private:
 	void ResetGui();
 	void UpdateUserList();
 
-	istd::CString m_curUserName;
+	QString m_curUserName;
 	
 	void* userManagerMemBufferPtr;
 	int userManagerMemBufferSize;

@@ -68,8 +68,8 @@ void CLoginBarGuiComp::OnGuiCreated()
 void CLoginBarGuiComp::on_LoginButton_clicked()
 {
 	if (m_loginIfPtr.IsValid()){
-		istd::CString userName = iqt::GetCString(UserEdit->text());
-		istd::CString password = iqt::GetCString(PasswordEdit->text());
+		QString userName = UserEdit->text();
+		QString password = PasswordEdit->text();
 		if (m_loginIfPtr->Login(userName, password)){
 			if (m_autoLogoutMinutesAttrPtr.IsValid()){
 				I_ASSERT(*m_autoLogoutMinutesAttrPtr > 0);

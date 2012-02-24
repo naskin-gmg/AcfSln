@@ -6,7 +6,7 @@
 #include <vector>
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "iser/ISerializable.h"
 
 // ACF-Solutions includes
@@ -32,7 +32,7 @@ public:
 		Search for user with specified name.
 		\return		index of user, or negative value, if no user found.
 	*/
-	virtual int FindUserIndex(const istd::CString& name) const = 0;
+	virtual int FindUserIndex(const QString& name) const = 0;
 
 	/**
 		Get user using its index.
@@ -46,27 +46,27 @@ public:
 
 	/**
 		Add a new user to the user list
-		\param istd::CString Username: The user name of the new user. There can be each user name only once.
+		\param QString Username: The user name of the new user. There can be each user name only once.
 		\return pointer to user object, if user was added correctly, otherwise NULL.
 	*/
-	virtual CUser* AddUser(const istd::CString& userName) = 0;
+	virtual CUser* AddUser(const QString& userName) = 0;
 
 	/**
 		Delete the user with the user name
-		\param istd::CString Username: The user name of the user which shall be deleted.
+		\param QString Username: The user name of the user which shall be deleted.
 		\return true if the user was successfully deleted, otherwise false
 	*/
-	virtual bool DeleteUser(const istd::CString& userName) = 0;
+	virtual bool DeleteUser(const QString& userName) = 0;
 
 	/**
 		The method renames the user.
 		You should not call method CUser::SetUserName() directly,
 		becouse of user name is used as primary key of user list.
-		\param istd::CString userIndex: user index.
-		\param istd::CString userName: the new user name.
+		\param QString userIndex: user index.
+		\param QString userName: the new user name.
 		\return true if the user name could be changed, otherwise false.
 	*/
-	virtual bool RenameUser(int userIndex, const istd::CString& userName) = 0;
+	virtual bool RenameUser(int userIndex, const QString& userName) = 0;
 
 	/**
 		Get number of user groups.
@@ -76,7 +76,7 @@ public:
 	/**
 		Get number of user groups.
 	*/
-	virtual const istd::CString& GetUserGroupName(int groupIndex) const = 0;
+	virtual const QString& GetUserGroupName(int groupIndex) const = 0;
 };
 
 

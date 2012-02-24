@@ -164,7 +164,7 @@ bool CLineProjectionProcessorComp::GetImagePosition(
 			const iprm::IParamsSet* paramsPtr,
 			i2d::CVector2d& result) const
 {
-	const std::string& lineParamId = (*m_lineParamIdAttrPtr).ToString();
+	const std::string& lineParamId = (*m_lineParamIdAttrPtr).toStdString();
 
 	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL) && !lineParamId.empty()){
 		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(lineParamId));
@@ -208,7 +208,7 @@ int CLineProjectionProcessorComp::DoProcessing(
 	const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	imeas::IDataSequence* projectionPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 
-	const std::string& lineParamId = (*m_lineParamIdAttrPtr).ToString();
+	const std::string& lineParamId = (*m_lineParamIdAttrPtr).toStdString();
 
 	if (		(bitmapPtr == NULL) ||
 				(projectionPtr == NULL) ||

@@ -42,8 +42,8 @@ private:
 	I_ATTR(double, m_poolingIntervallAttrPtr);
 	I_ATTR(int, m_observedItemTypesAttrPtr);
 	I_ATTR(int, m_observedChangesAttrPtr);
-	I_MULTIATTR(istd::CString, m_acceptPatternsAttrPtr);
-	I_MULTIATTR(istd::CString, m_ignorePatternsAttrPtr);
+	I_MULTIATTR(QString, m_acceptPatternsAttrPtr);
+	I_MULTIATTR(QString, m_ignorePatternsAttrPtr);
 };
 
 

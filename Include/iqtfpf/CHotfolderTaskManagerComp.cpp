@@ -52,7 +52,7 @@ ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetNextProcessingTask
 
 		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
 			if (m_fileNamingCompPtr.IsValid()){
-				istd::CString outputFilePath = m_fileNamingCompPtr->GetFilePath(processingItemPtr->GetInputFile());
+				QString outputFilePath = m_fileNamingCompPtr->GetFilePath(processingItemPtr->GetInputFile());
 
 				processingItemPtr->SetOutputFile(outputFilePath);
 			}
@@ -67,11 +67,11 @@ ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetNextProcessingTask
 
 // protected methods
 
-istd::CStringList CHotfolderTaskManagerComp::GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const
+QStringList CHotfolderTaskManagerComp::GetFilesFromStorage(const ifpf::IFileSystemChangeStorage& storage, int fileState) const
 {
 	int filesCount = storage.GetStorageItemsCount();
 
-	istd::CStringList files;
+	QStringList files;
 	for (int index = 0; index < filesCount; index++){
 		int itemState = storage.GetItemState(index);
 
@@ -102,7 +102,7 @@ void CHotfolderTaskManagerComp::OnFilesModifiedEvent(const ifpf::IFileSystemChan
 }
 
 
-void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const istd::CStringList& files)
+void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	I_ASSERT(!files.empty());
@@ -118,7 +118,7 @@ void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const istd::CStringLis
 }
 
 
-void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const istd::CStringList& files)
+void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	I_ASSERT(!files.empty());
@@ -140,7 +140,7 @@ void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const istd::CStri
 }
 
 
-void CHotfolderTaskManagerComp::RestartProcessingQueueFiles(const istd::CStringList& files)
+void CHotfolderTaskManagerComp::RestartProcessingQueueFiles(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	I_ASSERT(!files.empty());
@@ -205,7 +205,7 @@ void CHotfolderTaskManagerComp::SynchronizeWithModel(bool /*applyToPendingTasks*
 	}
 
 	// setup directory monitoring:
-	istd::CStringList addedDirectories = GetAddedInputDirectories();
+	QStringList addedDirectories = GetAddedInputDirectories();
 	for (int pathIndex = 0; pathIndex < int(addedDirectories.size()); pathIndex++){
 		const iprm::IParamsSet* monitoringParamsPtr = GetMonitoringParamsSet(addedDirectories[pathIndex]);
 		if (monitoringParamsPtr != NULL){
@@ -213,7 +213,7 @@ void CHotfolderTaskManagerComp::SynchronizeWithModel(bool /*applyToPendingTasks*
 		}
 	}
 	
-	istd::CStringList removedDirectories = GetRemovedInputDirectories();
+	QStringList removedDirectories = GetRemovedInputDirectories();
 	for (int pathIndex = 0; pathIndex < int(removedDirectories.size()); pathIndex++){
 		RemoveDirectoryMonitor(removedDirectories[pathIndex]);
 
@@ -222,9 +222,9 @@ void CHotfolderTaskManagerComp::SynchronizeWithModel(bool /*applyToPendingTasks*
 }
 
 
-istd::CStringList CHotfolderTaskManagerComp::GetInputDirectories() const
+QStringList CHotfolderTaskManagerComp::GetInputDirectories() const
 {
-	istd::CStringList inputDirectories;
+	QStringList inputDirectories;
 
 	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
 		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
@@ -244,7 +244,7 @@ istd::CStringList CHotfolderTaskManagerComp::GetInputDirectories() const
 }
 
 
-const iprm::IParamsSet* CHotfolderTaskManagerComp::GetMonitoringParamsSet(const istd::CString& directoryPath) const
+const iprm::IParamsSet* CHotfolderTaskManagerComp::GetMonitoringParamsSet(const QString& directoryPath) const
 {
 	if (m_inputDirectoriesManagerCompPtr.IsValid() ){
 		int inputDirectoriesCount = m_inputDirectoriesManagerCompPtr->GetParamsSetsCount();
@@ -266,10 +266,10 @@ const iprm::IParamsSet* CHotfolderTaskManagerComp::GetMonitoringParamsSet(const 
 }
 
 
-istd::CStringList CHotfolderTaskManagerComp::GetAddedInputDirectories() const
+QStringList CHotfolderTaskManagerComp::GetAddedInputDirectories() const
 {
-	istd::CStringList inputDirectories = GetInputDirectories();
-	istd::CStringList addedDirectories;
+	QStringList inputDirectories = GetInputDirectories();
+	QStringList addedDirectories;
 
 	for (int index = 0; index < int(inputDirectories.size()); index++){
 		if (m_directoryMonitorsMap.find(inputDirectories[index]) == m_directoryMonitorsMap.end()){
@@ -281,15 +281,15 @@ istd::CStringList CHotfolderTaskManagerComp::GetAddedInputDirectories() const
 }
 
 
-istd::CStringList CHotfolderTaskManagerComp::GetRemovedInputDirectories() const
+QStringList CHotfolderTaskManagerComp::GetRemovedInputDirectories() const
 {
-	istd::CStringList inputDirectories = GetInputDirectories();
-	istd::CStringList removedDirectories;
+	QStringList inputDirectories = GetInputDirectories();
+	QStringList removedDirectories;
 
 	for (		DirectoryMonitorsMap::const_iterator index = m_directoryMonitorsMap.begin();
 				index != m_directoryMonitorsMap.end();
 				index++){
-		istd::CStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index->first);
+		QStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index->first);
 		if (foundIter == inputDirectories.end()){
 			removedDirectories.push_back(index->first);
 		}
@@ -299,7 +299,7 @@ istd::CStringList CHotfolderTaskManagerComp::GetRemovedInputDirectories() const
 }
 
 
-ifpf::IDirectoryMonitor* CHotfolderTaskManagerComp::AddDirectoryMonitor(const istd::CString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr)
+ifpf::IDirectoryMonitor* CHotfolderTaskManagerComp::AddDirectoryMonitor(const QString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr)
 {
 	istd::TDelPtr<icomp::IComponent> monitorCompPtr(m_monitorFactCompPtr.CreateComponent());
 	if (monitorCompPtr.IsValid()){
@@ -319,7 +319,7 @@ ifpf::IDirectoryMonitor* CHotfolderTaskManagerComp::AddDirectoryMonitor(const is
 }
 
 	
-void CHotfolderTaskManagerComp::RemoveDirectoryMonitor(const istd::CString& directoryPath)
+void CHotfolderTaskManagerComp::RemoveDirectoryMonitor(const QString& directoryPath)
 {
 	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
 	if (monitorIter != m_directoryMonitorsMap.end()){
@@ -330,22 +330,22 @@ void CHotfolderTaskManagerComp::RemoveDirectoryMonitor(const istd::CString& dire
 }
 
 
-void CHotfolderTaskManagerComp::RemoveDirectoryItems(const istd::CString& directoryPath)
+void CHotfolderTaskManagerComp::RemoveDirectoryItems(const QString& directoryPath)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
 	}
 
-	istd::CStringList removedFiles;
+	QStringList removedFiles;
 	int itemsCount = m_hotfolderProcessingInfoCompPtr->GetProcessingItemsCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		ifpf::IHotfolderProcessingItem* processingItemPtr = m_hotfolderProcessingInfoCompPtr->GetProcessingItem(itemIndex);
 		I_ASSERT(processingItemPtr != NULL);
 
-		QString filePath = iqt::GetQString(processingItemPtr->GetInputFile());
+		QString filePath = processingItemPtr->GetInputFile();
 		QFileInfo fileInfo(filePath);
-		if (fileInfo.canonicalPath() == iqt::GetQString(directoryPath)){
+		if (fileInfo.canonicalPath() == directoryPath){
 			removedFiles.push_back(processingItemPtr->GetInputFile());
 		}
 	}
@@ -354,7 +354,7 @@ void CHotfolderTaskManagerComp::RemoveDirectoryItems(const istd::CString& direct
 }
 
 
-ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::FindProcessingItem(const istd::CString& fileName) const
+ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::FindProcessingItem(const QString& fileName) const
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){

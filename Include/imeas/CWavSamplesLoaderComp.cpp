@@ -1,6 +1,10 @@
 #include "imeas/CWavSamplesLoaderComp.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 // STL includes
 #include <fstream>
 #include <cstring>
@@ -53,11 +57,11 @@ struct PcmFmtHeader: public FmtHeader
 
 bool CWavSamplesLoaderComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool /*beQuiet*/) const
 {
-	if ((filePathPtr != NULL) && filePathPtr->IsEmpty()){
+	if ((filePathPtr != NULL) && filePathPtr->isEmpty()){
 		return false;
 	}
 
@@ -67,19 +71,19 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 }
 
 
-int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& /*data*/, const istd::CString& /*filePath*/) const
+int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& /*data*/, const QString& /*filePath*/) const
 {
 	return StateFailed;
 }
 
 
-int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
 	}
 
-	std::ofstream fileStream(filePath.ToString().c_str(), std::ios::out | std::ios_base::binary);
+	std::ofstream fileStream(filePath.toStdString().c_str(), std::ios::out | std::ios_base::binary);
 	if (!fileStream.is_open()){
 		return StateFailed;
 	}
@@ -160,7 +164,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CWavSamplesLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CWavSamplesLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -174,7 +178,7 @@ bool CWavSamplesLoaderComp::GetFileExtensions(istd::CStringList& result, int fla
 }
 
 
-istd::CString CWavSamplesLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CWavSamplesLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if ((extensionPtr != NULL) && (*extensionPtr != "wav")){
 		return "";

@@ -24,12 +24,12 @@ CNumericValueWidget::CNumericValueWidget(
 }
 
 
-void CNumericValueWidget::SetUnitInfo(const istd::CString& description, const imeas::IUnitInfo& unitInfo)
+void CNumericValueWidget::SetUnitInfo(const QString& description, const imeas::IUnitInfo& unitInfo)
 {
-	DescriptionLabel->setText(iqt::GetQString(description));
-	const istd::CString& unitName = unitInfo.GetUnitName();
-	if (!unitName.IsEmpty()){
-		UnitLabel->setText(iqt::GetQString(unitName));
+	DescriptionLabel->setText(description);
+	const QString& unitName = unitInfo.GetUnitName();
+	if (!unitName.isEmpty()){
+		UnitLabel->setText(unitName);
 		UnitLabel->setVisible(true);
 	}
 	else{

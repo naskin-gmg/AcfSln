@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 #include "i2d/CRectangle.h"
 #include "iprm/ILinearAdjustParams.h"
 
@@ -38,8 +38,8 @@ protected:
 				iimg::IBitmap& outputImage);
 
 private:
-	I_ATTR(istd::CString, m_aoiParamIdAttrPtr);
-	I_ATTR(istd::CString, m_adjustParamsIdAttrPtr);
+	I_ATTR(QString, m_aoiParamIdAttrPtr);
+	I_ATTR(QString, m_adjustParamsIdAttrPtr);
 	I_REF(i2d::CRectangle, m_defaultAoiParamCompPtr);
 	I_REF(iprm::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 };

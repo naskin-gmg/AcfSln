@@ -35,8 +35,8 @@ public:
 		If the output file name is not set, the file name will be calculated automatically.
 	*/
 	virtual const ifpf::IHotfolderProcessingItem* AddProcessingItem(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath = istd::CString()) = 0;
+				const QString& inputFilePath,
+				const QString& outputFilePath = QString()) = 0;
 	
 	/**
 		Remove existing processing item from the hotfolder's state model.

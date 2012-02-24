@@ -24,7 +24,7 @@ class CNumericValueWidget:
 public:
 	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true);
 
-	void SetUnitInfo(const istd::CString& description, const imeas::IUnitInfo& unitInfo);
+	void SetUnitInfo(const QString& description, const imeas::IUnitInfo& unitInfo);
 
 	double GetValue() const;
 	void SetValue(double value);

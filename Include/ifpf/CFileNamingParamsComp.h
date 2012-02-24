@@ -29,18 +29,18 @@ public:
 	// reimplemented (ifpf::IFileNamingParams)
 	virtual int GetRenamingMode() const;
 	virtual void SetRenamingMode(int renamingMode);
-	virtual istd::CString GetPrefix() const;
-	virtual void SetPrefix(const istd::CString& prefix);
-	virtual istd::CString GetSuffix() const;
-	virtual void SetSuffix(const istd::CString& suffix);
+	virtual QString GetPrefix() const;
+	virtual void SetPrefix(const QString& prefix);
+	virtual QString GetSuffix() const;
+	virtual void SetSuffix(const QString& suffix);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
 	int m_renamingMode;
-	istd::CString m_suffix;
-	istd::CString m_prefix;
+	QString m_suffix;
+	QString m_prefix;
 };
 
 

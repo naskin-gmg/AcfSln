@@ -1,20 +1,24 @@
 #include "ifpf/CHotfolderWorkflowItem.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 namespace ifpf
 {
 
 
 // public methods
 
-istd::CString CHotfolderWorkflowItem::GetHotfolderId() const
+QString CHotfolderWorkflowItem::GetHotfolderId() const
 {
 	return m_hotfolderId;
 }
 
 
 void CHotfolderWorkflowItem::Initialize(
-			const istd::CString& hotfolderId,
+			const QString& hotfolderId,
 			const ifpf::IHotfolderInfoManager* infoManagerPtr)
 {
 	m_hotfolderId = hotfolderId;
@@ -25,17 +29,17 @@ void CHotfolderWorkflowItem::Initialize(
 
 // reimplemented (ifpf::IHotfolderWorkflowItem)
 
-istd::CStringList CHotfolderWorkflowItem::GetInputDirectories() const
+QStringList CHotfolderWorkflowItem::GetInputDirectories() const
 {
-	istd::CStringList retVal;
+	QStringList retVal;
 
 	return retVal;
 }
 
 
-istd::CString CHotfolderWorkflowItem::GetOutputDirectory() const
+QString CHotfolderWorkflowItem::GetOutputDirectory() const
 {
-	istd::CString retVal;
+	QString retVal;
 
 	return retVal;
 }

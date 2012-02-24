@@ -56,7 +56,7 @@ private:
 	void DoSearch();
 
 private:
-	I_ATTR(istd::CString, m_unitNameAttrPtr);
+	I_ATTR(QString, m_unitNameAttrPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 	I_REF(imod::IModel, m_searchResultsModelCompPtr);
 	I_REF(iipr::IFeaturesConsumer, m_searchResultsCompPtr);

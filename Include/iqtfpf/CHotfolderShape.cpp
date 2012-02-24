@@ -90,7 +90,7 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 
 	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 
-	QString hotfolderName = iqt::GetQString(objectPtr->GetName());
+	QString hotfolderName = objectPtr->GetName();
 
 	// draw component name:
 	QFont nameFont;
@@ -99,7 +99,7 @@ void CHotfolderShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem
 	painterPtr->setFont(nameFont);
 	painterPtr->drawText(mainRect, hotfolderName, Qt::AlignTop | Qt::AlignLeft);
 
-	QString hotfolderId = iqt::GetQString(objectPtr->GetHotfolderId());
+	QString hotfolderId = objectPtr->GetHotfolderId();
 	QFont detailFont = QApplication::font();
 	painterPtr->setFont(detailFont);
 	painterPtr->drawText(
@@ -137,15 +137,15 @@ void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowIte
 	QFontMetrics nameFontInfo(nameFont);
 	QFontMetrics detailFontInfo(detailFont);
 
-	QStringList inputDirectories = iqt::GetQStringList(element.GetInputDirectories());
-	QString outputDirectory = iqt::GetQString(element.GetOutputDirectory());
+	QStringList inputDirectories = (element.GetInputDirectories());
+	QString outputDirectory = element.GetOutputDirectory();
 
-	QString hotfolderName = iqt::GetQString(element.GetName());
+	QString hotfolderName = element.GetName();
 
 	int titleWidth = nameFontInfo.width(hotfolderName);
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
-	int width = istd::Max(titleWidth, detailFontInfo.width(iqt::GetQString(element.GetHotfolderId()))) + SIDE_OFFSET * 2;
+	int width = istd::Max(titleWidth, detailFontInfo.width(element.GetHotfolderId())) + SIDE_OFFSET * 2;
  
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;

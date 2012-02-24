@@ -321,7 +321,7 @@ const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TM
 typedef TMultiProperty<double> CMultiDoubleProperty;
 typedef TMultiProperty<bool> CMultiBoolProperty;
 typedef TMultiProperty<int> CMultiIntProperty;
-typedef TMultiProperty<istd::CString> CMultiStringProperty;
+typedef TMultiProperty<QString> CMultiStringProperty;
 typedef TMultiProperty<std::string> CMultiStdStringProperty;
 
 

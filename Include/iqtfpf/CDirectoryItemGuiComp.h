@@ -58,7 +58,7 @@ private:
 
 private:
 	I_REF(iprm::IParamsManager, m_inputDirectoriesParamsManagerCompPtr);
-	I_ATTR(istd::CString, m_directoryPathIdAttrPtr);
+	I_ATTR(QString, m_directoryPathIdAttrPtr);
 
 	QString m_directoryPath;
 	QString m_hotfolderInputName;

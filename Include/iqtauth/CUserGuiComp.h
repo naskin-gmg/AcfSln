@@ -22,7 +22,8 @@ namespace iqtauth
 
 class CUserGuiComp:
 			public ibase::TLoggerCompWrap<
-						iqtgui::TDesignerGuiObserverCompBase<Ui::CUserGuiComp, iauth::IUsersManager> >,
+						iqtgui::TDesignerGuiObserverCompBase<
+									Ui::CUserGuiComp, iauth::IUsersManager> >,
 			protected imod::CMultiModelDispatcherBase,
 			virtual public iauth::IPasswordChanger
 {
@@ -30,7 +31,8 @@ class CUserGuiComp:
 
 public:
 	typedef ibase::TLoggerCompWrap<
-				iqtgui::TDesignerGuiObserverCompBase<Ui::CUserGuiComp, iauth::IUsersManager> > BaseClass;
+				iqtgui::TDesignerGuiObserverCompBase<
+							Ui::CUserGuiComp, iauth::IUsersManager> > BaseClass;
 
 	I_BEGIN_COMPONENT(CUserGuiComp);
 		I_ASSIGN(m_rightsProviderIfPtr, "RightsProvider", "RightsProvider", false, "RightsProvider");
@@ -65,8 +67,8 @@ private:
 	I_REF(imod::IModel, m_rightsModelIfPtr);
 	I_REF(iauth::IUserLogin, m_userLoginIfPtr);
 
-	I_ATTR(istd::CString, m_usersManagerRightIdAttrPtr);
-	I_ATTR(istd::CString, m_changePasswordRightIdAttrPtr);
+	I_ATTR(QString, m_usersManagerRightIdAttrPtr);
+	I_ATTR(QString, m_changePasswordRightIdAttrPtr);
 };
 
 } // namespace iqtauth

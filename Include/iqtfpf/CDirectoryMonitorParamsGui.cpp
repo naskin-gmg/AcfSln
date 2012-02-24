@@ -63,9 +63,9 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	objectPtr->SetObservedChanges(observedChanges);
 
 	QTreeWidgetItemIterator acceptIter(AcceptPatternsList);
-	istd::CStringList acceptPatterns;
+	QStringList acceptPatterns;
 	while (*acceptIter){
-		acceptPatterns.push_back(iqt::GetCString((*acceptIter)->text(0)));
+		acceptPatterns.push_back((*acceptIter)->text(0));
 
 		++acceptIter;
 	}
@@ -73,9 +73,9 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	objectPtr->SetAcceptPatterns(acceptPatterns);
 
 	QTreeWidgetItemIterator ignoreIter(IgnorePatternsList);
-	istd::CStringList ignorePatterns;
+	QStringList ignorePatterns;
 	while (*ignoreIter){
-		ignorePatterns.push_back(iqt::GetCString((*ignoreIter)->text(0)));
+		ignorePatterns.push_back((*ignoreIter)->text(0));
 
 		++ignoreIter;
 	}
@@ -107,14 +107,14 @@ void CDirectoryMonitorParamsGui::UpdateGui(int /*updateFlags*/)
 		RemovedCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0);
 		AttributesCheck->setChecked((observedChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0);
 
-		istd::CStringList acceptPatterns = objectPtr->GetAcceptPatterns();
+		QStringList acceptPatterns = objectPtr->GetAcceptPatterns();
 		for (int patternIndex = 0; patternIndex < int(acceptPatterns.size()); patternIndex++){
-			AddPattern(iqt::GetQString(acceptPatterns[patternIndex]), AcceptPatternsList);
+			AddPattern(acceptPatterns[patternIndex], AcceptPatternsList);
 		}
 
-		istd::CStringList ignorePatterns = objectPtr->GetIgnorePatterns();
+		QStringList ignorePatterns = objectPtr->GetIgnorePatterns();
 		for (int patternIndex = 0; patternIndex < int(ignorePatterns.size()); patternIndex++){
-			AddPattern(iqt::GetQString(ignorePatterns[patternIndex]), IgnorePatternsList);
+			AddPattern(ignorePatterns[patternIndex], IgnorePatternsList);
 		}
 	}
 }
