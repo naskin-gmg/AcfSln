@@ -6,6 +6,10 @@
 #include <vector>
 
 
+// Qt includes
+#include <QStringList>
+
+
 // ACF includes
 #include "istd/CClassInfo.h"
 
@@ -24,13 +28,13 @@ namespace iprop
 	Template implementation of multiple property.
 	\internal
 */
-template <typename Value>
+template <typename Value, class Container = std::vector<Value> >
 class TMultiProperty: public CPropertyBase
 {
 public:
 	typedef Value ValueType;
 	typedef CPropertyBase BaseClass;
-	typedef std::vector<ValueType> ValueList;
+	typedef Container ValueList;
 	typedef typename ValueList::iterator iterator;
 	typedef typename ValueList::const_iterator const_iterator;
 
@@ -111,7 +115,7 @@ public:
 	static const std::string& GetTypeName();
 
 protected:
-	std::vector<Value> m_values;
+	Container m_values;
 
 private:
 	static const std::string s_typeName;
@@ -120,14 +124,14 @@ private:
 
 // public methods
 
-template <typename Value>
-TMultiProperty<Value>::TMultiProperty()
+template <typename Value, class Container>
+TMultiProperty<Value, Container>::TMultiProperty()
 {
 }
 
 
-template <typename Value>
-TMultiProperty<Value>::TMultiProperty(
+template <typename Value, class Container>
+TMultiProperty<Value, Container>::TMultiProperty(
 				IPropertiesManager* propertyOwnerPtr,
 				const std::string& propertyId,
 				const std::string& propertyDescription,
@@ -143,16 +147,16 @@ TMultiProperty<Value>::TMultiProperty(
 }
 
 
-template <typename Value>
-void TMultiProperty<Value>::SetValues(const ValueList& valueList)
+template <typename Value, class Container>
+void TMultiProperty<Value, Container>::SetValues(const ValueList& valueList)
 {
 	SetValues<ValueList>(valueList.begin(), valueList.end());
 }
 
 
-template <typename Value>
+template <typename Value, class Container>
 template <class ContainerImpl>
-void TMultiProperty<Value>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
+void TMultiProperty<Value, Container>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
 {
 	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 
@@ -166,22 +170,22 @@ void TMultiProperty<Value>::SetValues(typename ContainerImpl::const_iterator beg
 }
 
 
-template <typename Value>
-const typename TMultiProperty<Value>::ValueList& TMultiProperty<Value>::GetValues() const
+template <typename Value, class Container>
+const typename TMultiProperty<Value, Container>::ValueList& TMultiProperty<Value, Container>::GetValues() const
 {
 	return m_values;
 }
 
 
-template <typename Value>
-int TMultiProperty<Value>::GetValuesCount() const
+template <typename Value, class Container>
+int TMultiProperty<Value, Container>::GetValuesCount() const
 {
 	return int(m_values.size());
 }
 
 
-template <typename Value>
-Value TMultiProperty<Value>::GetValueAt(int index) const
+template <typename Value, class Container>
+Value TMultiProperty<Value, Container>::GetValueAt(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetValuesCount());
@@ -190,8 +194,8 @@ Value TMultiProperty<Value>::GetValueAt(int index) const
 }
 
 
-template <typename Value>
-void TMultiProperty<Value>::SetValueAt(int index, const Value& value)
+template <typename Value, class Container>
+void TMultiProperty<Value, Container>::SetValueAt(int index, const Value& value)
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetValuesCount());
@@ -204,15 +208,15 @@ void TMultiProperty<Value>::SetValueAt(int index, const Value& value)
 }
 
 
-template <typename Value>
-void TMultiProperty<Value>::InsertValue(const Value& value)
+template <typename Value, class Container>
+void TMultiProperty<Value, Container>::InsertValue(const Value& value)
 {
 	m_values.push_back(value);
 }
 
 
-template <typename Value>
-void TMultiProperty<Value>::ResetValues()
+template <typename Value, class Container>
+void TMultiProperty<Value, Container>::ResetValues()
 {
 	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
 	
@@ -222,29 +226,29 @@ void TMultiProperty<Value>::ResetValues()
 
 // STL compatibility
 
-template <typename Value>
-typename TMultiProperty<Value>::iterator TMultiProperty<Value>::begin()
+template <typename Value, class Container>
+typename TMultiProperty<Value, Container>::iterator TMultiProperty<Value, Container>::begin()
 {
 	return m_values.begin();
 }
 
 
-template <typename Value>
-typename TMultiProperty<Value>::const_iterator TMultiProperty<Value>::begin() const
+template <typename Value, class Container>
+typename TMultiProperty<Value, Container>::const_iterator TMultiProperty<Value, Container>::begin() const
 {
 	return m_values.begin();
 }
 
 
-template <typename Value>
-typename TMultiProperty<Value>::iterator TMultiProperty<Value>::end()
+template <typename Value, class Container>
+typename TMultiProperty<Value, Container>::iterator TMultiProperty<Value, Container>::end()
 {
 	return m_values.end();
 }
 	
 
-template <typename Value>
-typename TMultiProperty<Value>::const_iterator TMultiProperty<Value>::end() const
+template <typename Value, class Container>
+typename TMultiProperty<Value, Container>::const_iterator TMultiProperty<Value, Container>::end() const
 {
 	return m_values.end();
 }
@@ -252,8 +256,8 @@ typename TMultiProperty<Value>::const_iterator TMultiProperty<Value>::end() cons
 
 // reimplemented (iser::IObject)
 
-template <typename Value>
-std::string TMultiProperty<Value>::GetFactoryId() const
+template <typename Value, class Container>
+std::string TMultiProperty<Value, Container>::GetFactoryId() const
 {
 	return s_typeName;
 }
@@ -261,8 +265,8 @@ std::string TMultiProperty<Value>::GetFactoryId() const
 
 // reimplemented (iser::ISerializable)
 
-template <typename Value>
-bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
+template <typename Value, class Container>
+bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -284,7 +288,7 @@ bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
-		m_values.resize(valuesCount);
+		m_values.reserve(valuesCount);
 	}
 
 	for (int i = 0; i < valuesCount; ++i){
@@ -303,8 +307,8 @@ bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
 
 // static methods
 
-template <typename Value>
-const std::string& TMultiProperty<Value>::GetTypeName()
+template <typename Value, class Container>
+const std::string& TMultiProperty<Value, Container>::GetTypeName()
 {
 	return s_typeName;
 }
@@ -312,8 +316,8 @@ const std::string& TMultiProperty<Value>::GetTypeName()
 
 // private static properties
 
-template <typename Value>
-const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
+template <typename Value, class Container>
+const std::string TMultiProperty<Value, Container>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
 
 
 // typedefs
@@ -321,7 +325,7 @@ const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TM
 typedef TMultiProperty<double> CMultiDoubleProperty;
 typedef TMultiProperty<bool> CMultiBoolProperty;
 typedef TMultiProperty<int> CMultiIntProperty;
-typedef TMultiProperty<QString> CMultiStringProperty;
+typedef TMultiProperty<QString, QStringList> CMultiStringProperty;
 typedef TMultiProperty<std::string> CMultiStdStringProperty;
 
 
