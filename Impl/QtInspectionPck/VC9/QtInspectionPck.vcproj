@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtScript4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib imeas.lib QtGui4.lib QtXml4.lib QtScript4.lib"
 				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(QTDIR)\lib&quot;"
 			/>
 			<Tool
