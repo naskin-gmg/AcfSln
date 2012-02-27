@@ -10,8 +10,6 @@
 
 
 // ACF includes
-#include "istd/itr.h"
-
 #include "iser/CWriteArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 #include "iser/CXmlDocumentInfoBase.h"

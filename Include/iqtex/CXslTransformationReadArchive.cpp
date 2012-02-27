@@ -5,8 +5,8 @@
 #include <sstream>
 #include <cstring>
 
-
 // Qt includes
+#include <QObject>
 #include <QDomNodeList>
 #include <QXmlQuery>
 #include <QAbstractMessageHandler>
@@ -23,9 +23,9 @@ namespace iqtex
 
 class ReadArchiveMessageHandler: public QAbstractMessageHandler
 {
-	I_DECLARE_TR_FUNCTION(ReadArchiveMessageHandler);
 public:
 	ReadArchiveMessageHandler(CXslTransformationReadArchive* logger);
+
 protected:
 	void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);
 
@@ -48,7 +48,7 @@ void ReadArchiveMessageHandler::handleMessage(
 	m_loggerPtr->SendLogMessage(
 					istd::ILogger::MC_WARNING,
 					0,
-					tr("Transformation message: ").append(description),
+					QObject::tr("Transformation message: ").append(description),
 					"XslTransformationWriteArchive");
 }
 

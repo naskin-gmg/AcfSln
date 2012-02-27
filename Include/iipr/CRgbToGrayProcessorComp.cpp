@@ -1,11 +1,12 @@
 #include "iipr/CRgbToGrayProcessorComp.h"
 
 
+// Qt includes
+#include <QObject>
+
  // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "ibase/CSize.h"
-
 
 // IACF includes
 #include "iipr/TImagePixelInterpolator.h"
@@ -52,7 +53,7 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 		return outputBitmap.CopyFrom(inputBitmap);
 	}
 	else if (inputFormat != iimg::IBitmap::PF_RGB && inputFormat != iimg::IBitmap::PF_RGBA){
-		SendErrorMessage(0, tr("Image format must be RGB(A)"), "RgbToGrayProcessor");
+		SendErrorMessage(0, QObject::tr("Image format must be RGB(A)"), "RgbToGrayProcessor");
 
 		return false;
 	}

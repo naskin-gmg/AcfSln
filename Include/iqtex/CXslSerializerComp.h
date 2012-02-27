@@ -2,14 +2,9 @@
 #define iqtex_CXslSerializerComp_included
 
 
-// Qt includes
-#include <QObject>
-
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-#include "istd/itr.h"
 #include <QString>
 
 #include "isys/IFileSystem.h"
@@ -38,7 +33,6 @@ class CXslSerializerComp:
 	public ibase::TLoggerCompWrap<ibase::CFileTypeInfoComp>,
 			virtual public iser::IFileLoader
 {
-	I_DECLARE_TR_FUNCTION(CXslSerializerComp);
 public:	
 	typedef ibase::TLoggerCompWrap<ibase::CFileTypeInfoComp> BaseClass;
 

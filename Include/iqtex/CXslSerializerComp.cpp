@@ -1,6 +1,10 @@
 #include "iqtex/CXslSerializerComp.h"
 
 
+//Qt includes
+#include <QObject>
+
+
 namespace iqtex
 {
 
@@ -13,7 +17,7 @@ bool CXslSerializerComp::IsOperationSupported(
 {
 	if ((dataObjectPtr != NULL) && (dynamic_cast<const iser::ISerializable*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not serializable"));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, QObject::tr("Object is not serializable"));
 		}
 
 		return false;
@@ -51,7 +55,7 @@ bool CXslSerializerComp::IsOperationSupported(
 			}
 
 			if (!beQuiet){
-				SendInfoMessage(MI_BAD_EXTENSION, tr("File extension is not supported"));
+				SendInfoMessage(MI_BAD_EXTENSION, QObject::tr("File extension is not supported"));
 			}
 
 			return false;
@@ -105,14 +109,14 @@ int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString&
 		I_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
-			SendWarningMessage(MI_UNSUPPORTED_VERSION, tr("Archive version is not supported, possible lost of data"));
+			SendWarningMessage(MI_UNSUPPORTED_VERSION, QObject::tr("Archive version is not supported, possible lost of data"));
 		}
 
 		if ((const_cast<iser::ISerializable*>(serializablePtr))->Serialize(archive)){
 			return StateOk;
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_SAVE, tr("Cannot serialize object to file"));
+			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file"));
 		}
 	}
 
@@ -131,7 +135,7 @@ const iser::IVersionInfo* CXslSerializerComp::GetVersionInfo() const
 
 void CXslSerializerComp::OnReadError(const iser::IArchive& /*archive*/, const istd::IChangeable& /*data*/, const QString& filePath) const
 {
-	SendWarningMessage(MI_CANNOT_LOAD, QString(tr("Cannot load object from file ")) + filePath);
+	SendWarningMessage(MI_CANNOT_LOAD, QObject::tr("Cannot load object from file ") + filePath);
 }
 
 
