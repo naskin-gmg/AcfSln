@@ -1,8 +1,8 @@
 #include "iqtex/CXslSerializerComp.h"
 
 
-//Qt includes
-#include <QObject>
+// Qt includes
+#include <QtCore/QObject>
 
 
 namespace iqtex

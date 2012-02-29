@@ -2,8 +2,8 @@
 
 
 // Qt includes
-#include <QStyleOptionGraphicsItem>
-#include <QPainter>
+#include <QtGui/QStyleOptionGraphicsItem>
+#include <QtGui/QPainter>
 
 #include "iipr/CSearchFeature.h"
 

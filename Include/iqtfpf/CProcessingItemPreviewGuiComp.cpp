@@ -2,8 +2,8 @@
 
 
 // Qt includes
-#include <QFileInfo>
-#include <QDateTime>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDateTime>
 
 
 // ACF includes

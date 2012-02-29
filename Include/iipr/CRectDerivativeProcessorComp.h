@@ -2,7 +2,7 @@
 #define iipr_CRectDerivativeProcessorComp_included
 
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "icomp/CComponentBase.h"
 

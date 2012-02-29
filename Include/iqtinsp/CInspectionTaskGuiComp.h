@@ -7,7 +7,7 @@
 #include <set>
 
 // ACF includes
-#include <QString>
+#include <QtCore/QString>
 #include "imod/CMultiModelObserverBase.h"
 #include "iser/IFileLoader.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"

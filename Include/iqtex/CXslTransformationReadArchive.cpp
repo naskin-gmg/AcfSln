@@ -6,12 +6,11 @@
 #include <cstring>
 
 // Qt includes
-#include <QObject>
-#include <QDomNodeList>
-#include <QXmlQuery>
-#include <QAbstractMessageHandler>
-#include <QFile>
-
+#include <QtCore/QObject>
+#include <QtCore/QFile>
+#include <QtXml/QDomNodeList>
+#include <QtXmlPatterns/QXmlQuery>
+#include <QtXmlPatterns/QAbstractMessageHandler>
 
 // ACF includes
 #include "istd/CBase64.h"

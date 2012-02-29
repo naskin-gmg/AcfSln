@@ -3,7 +3,7 @@
 
 
 // Qt inclueds
-#include <QDialog>
+#include <QtGui/QDialog>
 
 // ACF-Solutions includes
 #include "iauth/IUsersManager.h"

@@ -3,16 +3,14 @@
 
 
 // Qt includes
-#include <QWidget>
-#include <QStandardItemModel>
+#include <QtGui/QWidget>
+#include <QtGui/QStandardItemModel>
 
 // ACF includes
 #include "istd/CRange.h"
 #include "imod/TSingleModelObserverBase.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "imeas/IDataSequence.h"
-
 #include "iqtmeas/Generated/ui_CDataSequenceViewComp.h"
 
 

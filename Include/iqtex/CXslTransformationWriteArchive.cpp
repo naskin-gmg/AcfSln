@@ -5,11 +5,10 @@
 #include <sstream>
 
 // Qt includes
-#include <QDomNodeList>
-#include <QTextStream>
-#include <QXmlQuery>
-#include <QAbstractMessageHandler>
-
+#include <QtCore/QTextStream>
+#include <QtXml/QDomNodeList>
+#include <QtXmlPatterns/QXmlQuery>
+#include <QtXmlPatterns/QAbstractMessageHandler>
 
 // ACF includes
 #include "istd/CBase64.h"

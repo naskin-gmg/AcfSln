@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QMessageBox>
+#include <QtGui/QMessageBox>
 
 #include "istd/TDelPtr.h"
 

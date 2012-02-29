@@ -2,7 +2,7 @@
 #define iqtsig_CSampleContainerView_included
 
 
-#include <QWidget>
+#include <QtGui/QWidget>
 
 #include "istd/CRange.h"
 

@@ -3,8 +3,8 @@
 
 
 // Qt includes
-#include <QDomDocument>
-#include <QDomNode>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNode>
 
 
 // ACF includes

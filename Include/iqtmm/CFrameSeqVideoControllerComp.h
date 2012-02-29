@@ -3,21 +3,19 @@
 
 
 // Qt includes
-#include <QObject>
-#include <QTimer>
+#include <QtCore/QObject>
+#include <QtCore/QTimer>
 
+// ACF includes
 #include "iser/IFileLoader.h"
-
 #include "imod/CSingleModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "iproc/IBitmapAcquisition.h"
 #include "iproc/TSyncProcessorCompBase.h"
-
-#include "imm/IVideoController.h"
-
 #include "iqt/CFileList.h"
+
+// ACF-Solutions includes
+#include "imm/IVideoController.h"
 
 
 namespace iqtmm

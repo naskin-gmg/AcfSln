@@ -2,9 +2,9 @@
 #define iqtex_CTcpTerminalGuiComp_included
 
 
-// QT includes
-#include <QTimer>
-#include <QTcpSocket>
+// Qt includes
+#include <QtCore/QTimer>
+#include <QtNetwork/QTcpSocket>
 
 // ACF includes
 #include "imod/IModel.h"

@@ -3,13 +3,13 @@
 
 
 // Qt includes
-#include <QTimer>
+#include <QtCore/QTimer>
 
-
-// ACF inlcudes
-#include "imm/IVideoController.h"
-
+// ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+// ACF-Solutions includes
+#include "imm/IVideoController.h"
 
 #include "Generated/ui_CPlaybackControllerGuiComp.h"
 

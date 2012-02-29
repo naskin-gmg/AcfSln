@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-#include <QString>
+#include <QtCore/QString>
 
 #include "isys/IFileSystem.h"
 

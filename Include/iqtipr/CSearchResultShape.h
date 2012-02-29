@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QGraphicsItemGroup>
+#include <QtGui/QGraphicsItemGroup>
 
 // ACF includes
 #include "istd/TPointerVector.h"

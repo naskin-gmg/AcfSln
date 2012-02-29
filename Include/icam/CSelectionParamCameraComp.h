@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-#include <QString>
+#include <QtCore/QString>
 #include "iprm/IParamsManager.h"
 
 // ACF-Solutions include

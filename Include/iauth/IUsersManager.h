@@ -6,7 +6,7 @@
 #include <vector>
 
 // ACF includes
-#include <QString>
+#include <QtCore/QString>
 #include "iser/ISerializable.h"
 
 // ACF-Solutions includes

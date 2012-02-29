@@ -3,12 +3,11 @@
 
 
 // Qt includes
-#include <QItemDelegate>
-#include <QDialog>
-
+#include <QtCore/QString>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QDialog>
 
 // ACF includes
-#include <QString>
 #include "iser/CMemoryWriteArchive.h"
 
 // ACF-Solutions includes

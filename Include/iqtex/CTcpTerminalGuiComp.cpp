@@ -1,8 +1,8 @@
 #include "iqtex/CTcpTerminalGuiComp.h"
 
 
-// QT includes
-#include <QUrl>
+// Qt includes
+#include <QtCore/QUrl>
 
 
 namespace iqtex

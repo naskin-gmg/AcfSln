@@ -3,8 +3,8 @@
 
 
 // Qt includes
-#include <QDir>
-#include <QLabel>
+#include <QtCore/QDir>
+#include <QtGui/QLabel>
 
 
 // ACF includes

@@ -2,9 +2,9 @@
 
 
 // Qt includes
-#include <QMessageBox>
-#include <QLineEdit>
-#include <QComboBox>
+#include <QtGui/QMessageBox>
+#include <QtGui/QLineEdit>
+#include <QtGui/QComboBox>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"

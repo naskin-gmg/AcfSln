@@ -2,19 +2,15 @@
 
 
 // Qt includes
-#include <QHeaderView>
-#include <QProgressBar>
-#include <QLabel>
-#include <QMenu>
-
+#include <QtGui/QHeaderView>
+#include <QtGui/QProgressBar>
+#include <QtGui/QLabel>
+#include <QtGui/QMenu>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "iprm/ISelectionConstraints.h"
-
 #include "iproc/IProcessor.h"
-
 #include "iqt/CSignalBlocker.h"
 
 

@@ -2,10 +2,10 @@
 
 
 // Qt includes
-#include <QFileInfo>
-#include <QByteArray>
-#include <QImageReader>
-#include <QStringList>
+#include <QtCore/QFileInfo>
+#include <QtCore/QByteArray>
+#include <QtGui/QImageReader>
+#include <QtCore/QStringList>
 
 #include "istd/TChangeNotifier.h"
 

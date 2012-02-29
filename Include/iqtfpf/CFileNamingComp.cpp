@@ -6,8 +6,8 @@
 
 
 // Qt includes
-#include <QFileInfo>
-#include <QDir>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 #include "iqt/iqt.h"
 

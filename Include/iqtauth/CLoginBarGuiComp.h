@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QTimer>
+#include <QtCore/QTimer>
 
 // ACF includes
 #include "iqtgui/TDesignerGuiCompBase.h"

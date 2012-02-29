@@ -2,8 +2,8 @@
 
 
 // Qt includes
-#include <QInputDialog>
-#include <QMessageBox>
+#include <QtGui/QInputDialog>
+#include <QtGui/QMessageBox>
 
 
 // ACF includes

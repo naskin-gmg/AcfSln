@@ -3,26 +3,20 @@
 
 
 // Qt includes
-#include <QFileSystemWatcher>
-#include <QFileInfo>
-#include <QTimer>
-#include <QThread>
-#include <QDir>
-#include <QDateTime>
-
+#include <QtCore/QFileSystemWatcher>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTimer>
+#include <QtCore/QThread>
+#include <QtCore/QDir>
+#include <QtCore/QDateTime>
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "ibase/TLoggerCompWrap.h"
-
 #include "iqt/CCriticalSection.h"
-
 #include "iprm/IParamsSet.h"
 #include "iprm/IFileNameParam.h"
-
 
 // AcfSln includes
 #include "ifpf/IFileSystemChangeStorage.h"

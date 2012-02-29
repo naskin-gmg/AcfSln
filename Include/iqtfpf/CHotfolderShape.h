@@ -3,9 +3,7 @@
 
 
 // Qt includes
-#include <QGraphicsRectItem>
-
-
+#include <QtGui/QGraphicsRectItem>
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"

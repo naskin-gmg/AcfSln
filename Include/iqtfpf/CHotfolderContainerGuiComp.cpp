@@ -2,19 +2,19 @@
 
 
 // Qt includes
-#include <QVBoxLayout>
-#include <QMouseEvent>
-#include <QApplication>
-#include <QHeaderView>
-#include <QItemDelegate>
-#include <QBitmap>
-#include <QPushButton>
-#include <QPainter>
-#include <QMenu>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QApplication>
+#include <QtGui/QHeaderView>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QBitmap>
+#include <QtGui/QPushButton>
+#include <QtGui/QPainter>
+#include <QtGui/QMenu>
 
 
 // ACF includes
-#include <QString>
+#include <QtCore/QString>
 
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"

@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QTimer>
+#include <QtCore/QTimer>
 
 #include "iser/IFileLoader.h"
 

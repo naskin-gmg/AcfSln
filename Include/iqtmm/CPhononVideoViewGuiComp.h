@@ -2,7 +2,7 @@
 #define iqtmm_CPhononVideoViewGuiComp_included
 
 
-// Qt/Phonon includes
+// Qt includes
 #include <Phonon/VideoWidget>
 #include <Phonon/MediaObject>
 

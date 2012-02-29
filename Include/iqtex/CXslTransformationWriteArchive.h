@@ -3,11 +3,10 @@
 
 
 // Qt includes
-#include <QDomDocument>
-#include <QDomNode>
-#include <QFile>
-#include <QBuffer>
-
+#include <QtCore/QFile>
+#include <QtCore/QBuffer>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNode>
 
 // ACF includes
 #include "iser/CWriteArchiveBase.h"

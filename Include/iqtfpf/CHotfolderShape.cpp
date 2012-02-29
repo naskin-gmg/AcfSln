@@ -2,17 +2,16 @@
 
 
 // Qt includes
-#include <QPainter>
-#include <QFont>
-#include <QFontMetrics>
-#include <QStyleOptionGraphicsItem>
-#include <QGraphicsScene>
-#include <QApplication>
-#include <QDir>
-#include <QGraphicsProxyWidget>
-#include <QLabel>
-#include <QGraphicsTextItem>
-
+#include <QtGui/QPainter>
+#include <QtGui/QFont>
+#include <QtGui/QFontMetrics>
+#include <QtGui/QStyleOptionGraphicsItem>
+#include <QtGui/QGraphicsScene>
+#include <QtGui/QApplication>
+#include <QtCore/QDir>
+#include <QtGui/QGraphicsProxyWidget>
+#include <QtGui/QLabel>
+#include <QtGui/QGraphicsTextItem>
 
 // ACF includes
 #include "iqtfpf/CHotfolderShape.h"
