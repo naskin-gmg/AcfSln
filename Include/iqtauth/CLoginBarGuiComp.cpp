@@ -20,7 +20,7 @@ CLoginBarGuiComp::CLoginBarGuiComp()
 bool CLoginBarGuiComp::eventFilter(QObject *obj, QEvent *event)
 {
 	if (m_loginIfPtr.IsValid()){
-		bool isLogged = m_loginIfPtr->IsUserLogged();
+		bool isLogged = (m_loginIfPtr->GetLoggedUser() != NULL);
 
 		if (isLogged && event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonRelease){
 			// Auto log off functionality is activated
@@ -38,7 +38,7 @@ bool CLoginBarGuiComp::eventFilter(QObject *obj, QEvent *event)
 void CLoginBarGuiComp::UpdateButtonsState()
 {
 	if (m_loginIfPtr.IsValid()){
-		bool isLogged = m_loginIfPtr->IsUserLogged();
+		bool isLogged = (m_loginIfPtr->GetLoggedUser() != NULL);
 
 		LoginButton->setVisible(!isLogged);
 		LogoutButton->setVisible(isLogged);

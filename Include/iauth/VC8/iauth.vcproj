@@ -205,10 +205,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IUserLogin.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IUsersManager.h"
 				>
 			</File>

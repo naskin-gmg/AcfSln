@@ -16,7 +16,7 @@ namespace iqtauth
 {
 
 
-CUserManagerDialog::CUserManagerDialog(const iauth::IUserLogin& login, iauth::IUsersManager& manager)
+CUserManagerDialog::CUserManagerDialog(const iauth::ILogin& login, iauth::IUsersManager& manager)
 	:m_login(login),
 	m_manager(manager)
 {

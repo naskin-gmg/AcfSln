@@ -13,6 +13,7 @@
 #include "imod/TModelWrap.h"
 #include "iauth/ILogin.h"
 #include "iauth/IRightsProvider.h"
+#include "iauth/CUser.h"
 
 
 namespace iauth
@@ -38,22 +39,15 @@ public:
 		I_ASSIGN_MULTI_0(m_defaultUserLevelsAttrPtr, "DefaultUserLevels", "DefaultUserLevels", false);
 	I_END_COMPONENT;
 
-	struct User
-	{
-		QString name;
-		QString password;
-		int group;
-	};
-
 	CSimpleLoginComp();
 
 	virtual int GetUsersCount() const;
-	virtual User& GetUser(int index) const;
+	virtual CUser& GetUser(int index) const;
 	virtual int FindUserIndex(const QString& name) const;
-	virtual bool AddUser(const User& user);
+	virtual bool AddUser(const CUser& user);
 
 	// reimplemented (iauth::ILogin)
-	virtual bool IsUserLogged() const;
+	virtual CUser* GetLoggedUser() const;
 	virtual bool Login(const QString& userName, const QString& password);
 	virtual bool Logout();
 
@@ -75,7 +69,7 @@ private:
 	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);
 
-	typedef std::vector<User> Users;
+	typedef std::vector<CUser> Users;
 	Users m_users;
 
 	int m_loggedUserIndex;

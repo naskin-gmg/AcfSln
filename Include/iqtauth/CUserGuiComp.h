@@ -9,7 +9,7 @@
 
 // ACF-Solutions includes
 #include "iauth/IRightsProvider.h"
-#include "iauth/IUserLogin.h"
+#include "iauth/ILogin.h"
 #include "iauth/IUsersManager.h"
 #include "iauth/IPasswordChanger.h"
 
@@ -65,7 +65,7 @@ protected Q_SLOTS:
 private:
 	I_REF(iauth::IRightsProvider, m_rightsProviderIfPtr);
 	I_REF(imod::IModel, m_rightsModelIfPtr);
-	I_REF(iauth::IUserLogin, m_userLoginIfPtr);
+	I_REF(iauth::ILogin, m_userLoginIfPtr);
 
 	I_ATTR(QString, m_usersManagerRightIdAttrPtr);
 	I_ATTR(QString, m_changePasswordRightIdAttrPtr);

@@ -23,12 +23,12 @@ int CSimpleLoginComp::GetUsersCount() const
 }
 
 
-CSimpleLoginComp::User& CSimpleLoginComp::GetUser(int index) const
+CUser& CSimpleLoginComp::GetUser(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < int(m_users.size()));
 
-	return const_cast<User&>(m_users[index]);
+	return const_cast<CUser&>(m_users[index]);
 }
 
 
@@ -37,9 +37,9 @@ int CSimpleLoginComp::FindUserIndex(const QString& name) const
 	int usersCount = GetUsersCount();
 
 	for (int i = 0; i < usersCount; ++i){
-		User& user = GetUser(i);
+		CUser& user = GetUser(i);
 
-		if (user.name == name){
+		if (user.GetUserName() == name){
 			return i;
 		}
 	}
@@ -48,9 +48,9 @@ int CSimpleLoginComp::FindUserIndex(const QString& name) const
 }
 
 
-bool CSimpleLoginComp::AddUser(const User& user)
+bool CSimpleLoginComp::AddUser(const CUser& user)
 {
-	if (FindUserIndex(user.name) < 0){
+	if (FindUserIndex(user.GetUserName()) < 0){
 		m_users.push_back(user);
 
 		return true;
@@ -62,9 +62,13 @@ bool CSimpleLoginComp::AddUser(const User& user)
 
 // reimplemented (iauth::ILogin)
 
-bool CSimpleLoginComp::IsUserLogged() const
+CUser* CSimpleLoginComp::GetLoggedUser() const
 {
-	return (m_loggedUserIndex >= 0);
+	if (m_loggedUserIndex >= 0){
+		return const_cast<CUser*>(&m_users[m_loggedUserIndex]);
+	}
+
+	return NULL;
 }
 
 
@@ -72,9 +76,9 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 {
 	int userIndex = FindUserIndex(userName);
 	if (userIndex >= 0){
-		User& user = GetUser(userIndex);
+		CUser& user = GetUser(userIndex);
 
-		if (user.password == password){
+		if (user.GetPassword() == password){
 			istd::TChangeNotifier<IRightsProvider> updatePtr(this);
 
 			m_loggedUserIndex = userIndex;
@@ -111,12 +115,13 @@ bool CSimpleLoginComp::HasRight(
 	if (m_loggedUserIndex >= 0){
 		I_ASSERT(m_loggedUserIndex < GetUsersCount());
 
-		const User& user = GetUser(m_loggedUserIndex);
+		const CUser& user = GetUser(m_loggedUserIndex);
 
-		I_ASSERT(user.group < m_userLevelsIfPtr.GetCount());
+		int userGroupId = user.GetUserGroup();
+		I_ASSERT(userGroupId < m_userLevelsIfPtr.GetCount());
 
-		if (user.group >= 0){
-			groupId = user.group + 1;
+		if (userGroupId >= 0){
+			groupId = userGroupId + 1;
 		}
 	}
 
@@ -135,9 +140,6 @@ bool CSimpleLoginComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag usersTag("Users", "List of users");
 	static iser::CArchiveTag userTag("User", "User");
-	static iser::CArchiveTag nameTag("Name", "Name of User");
-	static iser::CArchiveTag passwordTag("Password", "Password");
-	static iser::CArchiveTag groupIdTag("GroupID", "ID of group");
 
 	int usersCount = GetUsersCount();
 
@@ -151,21 +153,11 @@ bool CSimpleLoginComp::Serialize(iser::IArchive& archive)
 	}
 
 	for (int i = 0; i < usersCount; ++i){
-		User& user = m_users[i];
+		CUser& user = m_users[i];
 
 		retVal = retVal && archive.BeginTag(userTag);
 
-		retVal = retVal && archive.BeginTag(nameTag);
-		retVal = retVal && archive.Process(user.name);
-		retVal = retVal && archive.EndTag(nameTag);
-
-		retVal = retVal && archive.BeginTag(passwordTag);
-		retVal = retVal && archive.Process(user.password);
-		retVal = retVal && archive.EndTag(passwordTag);
-
-		retVal = retVal && archive.BeginTag(groupIdTag);
-		retVal = retVal && archive.Process(user.group);
-		retVal = retVal && archive.EndTag(groupIdTag);
+		retVal = retVal && user.Serialize(archive);
 
 		retVal = retVal && archive.EndTag(userTag);
 	}
@@ -189,26 +181,26 @@ void CSimpleLoginComp::OnComponentCreated()
 		if (groupsCount > 0){
 			int usersCount = m_defaultUsersAttrPtr.GetCount();
 			for (int i = 0; i < usersCount; ++i){
-				User user;
-				user.name = m_defaultUsersAttrPtr[i];
+				CUser user;
+				user.SetUserName(m_defaultUsersAttrPtr[i]);
 
 				if (		m_defaultUserPasswordsAttrPtr.IsValid() &&
 							(i < m_defaultUserPasswordsAttrPtr.GetCount())){
-					user.password = m_defaultUserPasswordsAttrPtr[i];
+					user.SetPassword(m_defaultUserPasswordsAttrPtr[i]);
 				}
 
 				if (		m_defaultUserLevelsAttrPtr.IsValid() &&
 							(i < m_defaultUserLevelsAttrPtr.GetCount())){
 					int group = m_defaultUserLevelsAttrPtr[i];
 					if (group < groupsCount){
-						user.group = m_defaultUserLevelsAttrPtr[i];
+						user.SetUserGroup(m_defaultUserLevelsAttrPtr[i]);
 					}
 					else{
-						user.group = groupsCount - 1;
+						user.SetUserGroup(groupsCount - 1);
 					}
 				}
 				else{
-					user.group = 0;
+					user.SetUserGroup(0);
 				}
 
 				AddUser(user);

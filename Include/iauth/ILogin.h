@@ -2,9 +2,12 @@
 #define iauth_ILogin_included
 
 
+// Qt includes
+#include <QtCore/QString>
+
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include <QtCore/QString>
+#include "iauth/CUser.h"
 
 
 namespace iauth
@@ -18,14 +21,17 @@ class ILogin: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Check, if any user is logged to the system.
+		Returns the currently logged on user.
+		\return	user is currently logged on, or NULL, if no user is logged.
 	*/
-	virtual bool IsUserLogged() const = 0;
+	virtual CUser* GetLoggedUser() const = 0;
+
 	/**
 		Log in user.
 		\return	true, if user is accepted.
 	*/
 	virtual bool Login(const QString& userName, const QString& password) = 0;
+
 	/**
 		Log in user.
 		\return	true, if logout successful.
