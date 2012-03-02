@@ -50,7 +50,7 @@
               CaliperParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               CaliperParamId
@@ -180,7 +180,7 @@
               FilterParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               FilterParamsId
@@ -236,7 +236,7 @@
               LineParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               LineParamId

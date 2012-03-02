@@ -440,8 +440,8 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 {
 	DisconnectFromParameterModel();
 
-	imod::IModel* pathModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryPathIdAttrPtr).toStdString())));
-	imod::IModel* monitorParamsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter((*m_directoryMonitorParamsIdAttrPtr).toStdString())));
+	imod::IModel* pathModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter(*m_directoryPathIdAttrPtr)));
+	imod::IModel* monitorParamsModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramsSet.GetParameter(*m_directoryMonitorParamsIdAttrPtr)));
 
 	if ((pathModelPtr != NULL) && (monitorParamsModelPtr != NULL)){
 		return		pathModelPtr->AttachObserver(&m_directoryParamsObserver) &&

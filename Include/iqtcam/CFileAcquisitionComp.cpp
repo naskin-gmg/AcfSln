@@ -44,7 +44,7 @@ int CFileAcquisitionComp::DoProcessing(
 	QString filesPath = *m_defaultDirAttrPtr;
 	const iprm::IFileNameParam* loaderParamsPtr = NULL;
 	if (paramsPtr != NULL){
-		loaderParamsPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter((*m_parameterIdAttrPtr).toStdString()));
+		loaderParamsPtr = dynamic_cast<const iprm::IFileNameParam*>(paramsPtr->GetParameter(*m_parameterIdAttrPtr));
 		if (loaderParamsPtr != NULL){
 			filesPath = loaderParamsPtr->GetPath();
 		}

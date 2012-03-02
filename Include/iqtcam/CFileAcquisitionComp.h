@@ -37,7 +37,7 @@ public:
 		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
-		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition");
+		I_ASSIGN(m_parameterIdAttrPtr, "DirParamId", "Id used to get directory parameter (iprm::IFileNameParam)", true, "FileBitmapAcquisition");
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 	I_END_COMPONENT;
 
@@ -73,7 +73,7 @@ private:
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_ATTR(QString, m_defaultDirAttrPtr);
-	I_ATTR(QString, m_parameterIdAttrPtr);
+	I_ATTR(std::string, m_parameterIdAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 };
 

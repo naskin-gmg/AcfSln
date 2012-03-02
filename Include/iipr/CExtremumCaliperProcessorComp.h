@@ -51,7 +51,7 @@ public:
 				double& result) const;
 
 private:
-	I_ATTR(QString, m_caliperParamsIdAttrPtr);
+	I_ATTR(std::string, m_caliperParamsIdAttrPtr);
 };
 
 

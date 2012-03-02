@@ -198,10 +198,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ParameterId
+              DirParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               ImageDirParamId

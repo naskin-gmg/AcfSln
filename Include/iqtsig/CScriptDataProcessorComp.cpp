@@ -38,7 +38,7 @@ int CScriptDataProcessorComp::DoProcessing(
 	QString functionScript;
 	
 	if (m_scriptParamIdAttrPtr.IsValid()){
-		const iser::ISerializable* parameterPtr = paramsPtr->GetParameter((*m_scriptParamIdAttrPtr).toStdString());
+		const iser::ISerializable* parameterPtr = paramsPtr->GetParameter(*m_scriptParamIdAttrPtr);
 		const ibase::ITextDocument* textPtr = dynamic_cast<const ibase::ITextDocument*>(parameterPtr);
 		if (textPtr != NULL){
 			functionScript = textPtr->GetText();

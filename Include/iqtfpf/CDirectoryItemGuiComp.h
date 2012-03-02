@@ -34,7 +34,7 @@ public:
 	I_BEGIN_COMPONENT(CDirectoryItemGuiComp);
 		I_REGISTER_INTERFACE(iprm::ISelectionParam);
 		I_ASSIGN(m_inputDirectoriesParamsManagerCompPtr, "InputDirectoriesManager", "Parameter manager for the input directories", true, "InputDirectoriesManager");
-		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathId", "Parameter ID of the directory path", true, "DirectoryPath");
+		I_ASSIGN(m_directoryPathIdAttrPtr, "DirParamId", "Parameter ID of the directory path", true, "DirectoryPath");
 	I_END_COMPONENT;
 
 	CDirectoryItemGuiComp();
@@ -58,7 +58,7 @@ private:
 
 private:
 	I_REF(iprm::IParamsManager, m_inputDirectoriesParamsManagerCompPtr);
-	I_ATTR(QString, m_directoryPathIdAttrPtr);
+	I_ATTR(std::string, m_directoryPathIdAttrPtr);
 
 	QString m_directoryPath;
 	QString m_hotfolderInputName;

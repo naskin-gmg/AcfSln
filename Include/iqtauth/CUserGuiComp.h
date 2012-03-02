@@ -67,8 +67,8 @@ private:
 	I_REF(imod::IModel, m_rightsModelIfPtr);
 	I_REF(iauth::ILogin, m_userLoginIfPtr);
 
-	I_ATTR(QString, m_usersManagerRightIdAttrPtr);
-	I_ATTR(QString, m_changePasswordRightIdAttrPtr);
+	I_ATTR(std::string, m_usersManagerRightIdAttrPtr);
+	I_ATTR(std::string, m_changePasswordRightIdAttrPtr);
 };
 
 } // namespace iqtauth

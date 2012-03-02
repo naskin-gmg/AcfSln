@@ -61,7 +61,7 @@ public:
 		I_ASSIGN(m_processingParamsDialogCompPtr, "ProcessingParamsDialog", "Dialog for the processing parameters", false, "ProcessingParamsDialog");
 		I_ASSIGN(m_inputDirectoriesParamsManagerCompPtr, "InputDirectoriesManager", "Parameter manager for the input directories", true, "InputDirectoriesManager");
 		I_ASSIGN_TO(m_inputDirectoriesParamsManagerModelCompPtr, m_inputDirectoriesParamsManagerCompPtr, true);
-		I_ASSIGN(m_directoryPathIdAttrPtr, "DirectoryPathId", "ID of the directory path in the input directory parameter set", true, "DirectoryPath");
+		I_ASSIGN(m_directoryPathIdAttrPtr, "DirParamId", "ID of the directory path in the input directory parameter set", true, "DirectoryPath");
 	I_END_COMPONENT;
 
 	CHotfolderGuiComp();
@@ -169,7 +169,7 @@ private:
 	I_REF(iqtgui::IDialog, m_processingParamsDialogCompPtr);
 	I_REF(iprm::IParamsManager, m_inputDirectoriesParamsManagerCompPtr);
 	I_REF(imod::IModel, m_inputDirectoriesParamsManagerModelCompPtr);
-	I_ATTR(QString, m_directoryPathIdAttrPtr);
+	I_ATTR(std::string, m_directoryPathIdAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;

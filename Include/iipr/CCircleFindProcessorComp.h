@@ -35,7 +35,7 @@ public:
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_slaveProcessorCompPtr, "SlaveEdgeProcessor", "Slave edge finder processor converting image to list of found edges", true, "SlaveEdgeProcessor");
 		I_ASSIGN(m_featuresMapperCompPtr, "FeaturesMapper", "Calculate position from caliper extracted features", true, "FeaturesMapper");
-		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of area of interest in parameter set", true, "AoiParams");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", true, "AoiParams");
 		I_ASSIGN(m_circleFinderParamsIdAttrPtr, "CircleFinderParamsId", "ID cirlcie finder parameters in parameter set", true, "CircleFinderParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
@@ -96,9 +96,9 @@ protected:
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_ATTR(QString, m_aoiParamsIdAttrPtr);
-	I_ATTR(QString, m_slaveLineIdAttrPtr);
-	I_ATTR(QString, m_circleFinderParamsIdAttrPtr);
+	I_ATTR(std::string, m_aoiParamIdAttrPtr);
+	I_ATTR(std::string, m_slaveLineIdAttrPtr);
+	I_ATTR(std::string, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
 };
 

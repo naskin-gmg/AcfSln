@@ -164,10 +164,8 @@ bool CLineProjectionProcessorComp::GetImagePosition(
 			const iprm::IParamsSet* paramsPtr,
 			i2d::CVector2d& result) const
 {
-	const std::string& lineParamId = (*m_lineParamIdAttrPtr).toStdString();
-
-	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL) && !lineParamId.empty()){
-		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(lineParamId));
+	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL)){
+		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(*m_lineParamIdAttrPtr));
 		double position;
 		if (		(linePtr != NULL) &&
 					m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
@@ -208,16 +206,13 @@ int CLineProjectionProcessorComp::DoProcessing(
 	const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	imeas::IDataSequence* projectionPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 
-	const std::string& lineParamId = (*m_lineParamIdAttrPtr).toStdString();
-
 	if (		(bitmapPtr == NULL) ||
 				(projectionPtr == NULL) ||
-				(paramsPtr == NULL) ||
-				lineParamId.empty()){
+				(paramsPtr == NULL)){
 		return TS_INVALID;
 	}
 
-	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(lineParamId));
+	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(*m_lineParamIdAttrPtr));
 	if (linePtr == NULL){
 		return TS_INVALID;
 	}

@@ -27,8 +27,7 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImagePolarTransformProcessorComp);
-		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI rectangle in the parameter set", false, "AoiParams");
-		I_ASSIGN(m_interpolationParamsIdAttrPtr, "InterpolationParamsId", "ID of the interpolation parameters in the parameter set", false, "InterpolationParams");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI rectangle in the parameter set", false, "AoiParams");
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
@@ -42,8 +41,7 @@ private:
 	bool ConvertImage(const iimg::IBitmap& input, const i2d::IObject2d* aoiPtr, iimg::IBitmap& outputBitmap) const;
 
 private:
-	I_ATTR(QString, m_aoiParamsIdAttrPtr);
-	I_ATTR(QString, m_interpolationParamsIdAttrPtr);
+	I_ATTR(std::string, m_aoiParamIdAttrPtr);
 };
 
 

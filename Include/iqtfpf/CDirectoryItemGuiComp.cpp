@@ -41,14 +41,9 @@ bool CDirectoryItemGuiComp::SetSelectedOptionIndex(int index)
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(m_setIndex);
 
-			std::string fileNameParamId;
-			if (m_directoryPathIdAttrPtr.IsValid()){
-				fileNameParamId = (*m_directoryPathIdAttrPtr).toStdString();
-			}
-
 			m_hotfolderInputName = setName;
 
-			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(fileNameParamId));
+			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(*m_directoryPathIdAttrPtr));
 			if (fileNameParamPtr != NULL){
 				m_directoryPath = fileNameParamPtr->GetPath();
 			}

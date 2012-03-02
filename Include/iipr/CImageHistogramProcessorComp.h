@@ -27,7 +27,7 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImageHistogramProcessorComp);
-		I_ASSIGN(m_aoiParamsIdAttrPtr, "AoiParamsId", "ID of the AOI parameter in the parameter set", false, "AoiParams");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI parameter in the parameter set", false, "AoiParams");
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
@@ -44,7 +44,7 @@ private:
 					imeas::IDiscrDataSequence& histogram) const;
 
 private:
-	I_ATTR(QString, m_aoiParamsIdAttrPtr);
+	I_ATTR(std::string, m_aoiParamIdAttrPtr);
 };
 
 

@@ -32,8 +32,8 @@ int CImageCropProcessorComp::DoProcessing(
 	}
 
 	const i2d::IObject2d* aoiPtr = NULL;
-	if (paramsPtr != NULL && m_aoiParamsIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter((*m_aoiParamsIdAttrPtr).toStdString()));
+	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
+		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
 	}
 
 	return ConvertImage(*inputBitmapPtr, aoiPtr, *outputBitmapPtr) ? TS_OK : TS_INVALID;
