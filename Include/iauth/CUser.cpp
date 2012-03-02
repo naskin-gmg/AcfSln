@@ -33,12 +33,6 @@ bool CUser::SetUserName(const QString& name)
 }
 
 
-const QString& CUser::GetPassword() const
-{
-	return m_password;
-}
-
-
 bool CUser::SetPassword(const QString& password)
 {
 	if (!password.isEmpty()){

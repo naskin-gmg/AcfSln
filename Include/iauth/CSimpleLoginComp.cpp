@@ -78,7 +78,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 	if (userIndex >= 0){
 		CUser& user = GetUser(userIndex);
 
-		if (user.GetPassword() == password){
+		if (user.CheckPassword(password)){
 			istd::TChangeNotifier<IRightsProvider> updatePtr(this);
 
 			m_loggedUserIndex = userIndex;
