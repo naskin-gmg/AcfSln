@@ -4,9 +4,9 @@
 // Qt includes
 #include <QtGui/QMessageBox>
 
+// ACF includes
 #include "istd/TDelPtr.h"
-
-#include "iqt2d/CImageShape.h"
+#include "iview/CImageShape.h"
 
 
 namespace iqtcam
@@ -20,9 +20,9 @@ CSnapImageGuiComp::CSnapImageGuiComp()
 }
 
 
-// reimplemented (iqt2d::ISceneExtender)
+// reimplemented (iqt2d::IViewExtender)
 
-void CSnapImageGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+void CSnapImageGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
@@ -32,7 +32,7 @@ void CSnapImageGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int 
 }
 
 
-void CSnapImageGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+void CSnapImageGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	if (m_paramsSetExtenderCompPtr.IsValid()){
 		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);
@@ -59,7 +59,7 @@ bool CSnapImageGuiComp::SnapImage()
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	if (m_bitmapModelCompPtr.IsValid()){
 		icmm::IColorTransformation* lookupTablePtr = NULL;
@@ -67,7 +67,7 @@ void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Sha
 			lookupTablePtr = m_lookupTableCompPtr.GetPtr();
 		}
 
-		istd::TDelPtr<iqt2d::CImageShape> shapePtr(new iqt2d::CImageShape(lookupTablePtr));
+		istd::TDelPtr<iview::CImageShape> shapePtr(new iview::CImageShape(lookupTablePtr));
 		if (shapePtr != NULL){
 			if (m_bitmapModelCompPtr->AttachObserver(shapePtr.GetPtr())){
 				result.PushBack(shapePtr.PopPtr());

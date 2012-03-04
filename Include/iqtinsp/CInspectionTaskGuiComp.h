@@ -11,8 +11,8 @@
 #include "imod/CMultiModelObserverBase.h"
 #include "iser/IFileLoader.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqt2d/ISceneExtender.h"
-#include "iqt2d/ISceneProvider.h"
+#include "iqt2d/IViewExtender.h"
+#include "iqt2d/IViewProvider.h"
 
 #include "iinsp/IInspectionTask.h"
 
@@ -95,10 +95,10 @@ private:
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
-	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
+	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);
-	I_MULTIREF(iqt2d::ISceneProvider, m_previewSceneProvidersCompPtr);
+	I_MULTIREF(iqt2d::IViewProvider, m_previewSceneProvidersCompPtr);
 	I_MULTIATTR(QString, m_namesAttrPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);

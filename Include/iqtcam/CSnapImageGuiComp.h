@@ -56,15 +56,15 @@ public:
 
 	CSnapImageGuiComp();
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
 	bool SnapImage();
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
-	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -94,7 +94,7 @@ private:
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
-	I_REF(iqt2d::ISceneExtender, m_paramsSetExtenderCompPtr);
+	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	I_ATTR(double, m_liveIntervalAttrPtr);
 

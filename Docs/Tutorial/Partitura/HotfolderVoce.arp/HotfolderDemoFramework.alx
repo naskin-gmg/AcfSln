@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2211
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        225
+        425
       </X>
       <X>
-        375
+        175
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         ApplicationSettingsProvider
       </ComponentName>
       <X>
-        225
+        750
       </X>
       <X>
-        275
+        175
       </X>
     </Element>
     <Element>
@@ -43,7 +43,7 @@
         HotfolderDemoGui
       </ComponentName>
       <X>
-        575
+        700
       </X>
       <X>
         500
@@ -54,10 +54,10 @@
         LogDock
       </ComponentName>
       <X>
-        925
+        275
       </X>
       <X>
-        275
+        325
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         SimpleMainGui
       </ComponentName>
       <X>
-        575
+        750
       </X>
       <X>
-        275
+        325
       </X>
     </Element>
     <Element>
@@ -76,11 +76,13 @@
         VersionInfo
       </ComponentName>
       <X>
-        225
+        150
       </X>
       <X>
-        500
+        175
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>

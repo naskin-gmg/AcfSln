@@ -53,7 +53,7 @@ protected:
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
-	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

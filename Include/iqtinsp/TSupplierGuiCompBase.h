@@ -36,9 +36,9 @@ public:
 
 	TSupplierGuiCompBase();
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
 	/**
@@ -76,7 +76,7 @@ protected:
 	virtual void OnGuiModelDetached();
 
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
-	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// abstract methods
 	/**
@@ -92,7 +92,7 @@ private:
 
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
-	I_REF(iqt2d::ISceneExtender, m_paramsSetExtenderCompPtr);
+	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	bool m_areParamsEditable;
 };
@@ -107,10 +107,10 @@ TSupplierGuiCompBase<UI, WidgetType>::TSupplierGuiCompBase()
 }
 
 
-// reimplemented (iqt2d::ISceneExtender)
+// reimplemented (iqt2d::IViewExtender)
 
 template <class UI, class WidgetType>
-void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
@@ -121,7 +121,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::ISceneProvider
 
 
 template <class UI, class WidgetType>
-void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	if (m_paramsSetExtenderCompPtr.IsValid()){
 		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);
@@ -297,7 +297,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelDetached()
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
 template <class UI, class WidgetType>
-void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& /*result*/)
+void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, Shapes& /*result*/)
 {
 }
 

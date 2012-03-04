@@ -22,15 +22,6 @@ I_EXPORT_PACKAGE(
 			"Standard Qt image processing package",
 			"Qt \"Image Processing\"" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
-I_EXPORT_COMPONENT(
-			SearchGui,
-			"SearchGui",
-			"Model Search Qt Image Processing");
-
-I_EXPORT_COMPONENT(
-		SearchParamsGui,
-		"SearchParamsGui",
-		"GUI Model Search Parameter Qt Image Processing");
 
 I_EXPORT_COMPONENT(
 			ValueSupplierGui,

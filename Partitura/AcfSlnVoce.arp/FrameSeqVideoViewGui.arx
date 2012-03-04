@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2040
+          2211
         </Number>
         <Description>
           ACF
@@ -70,58 +70,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsotropyFactor
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              IsotropyFactor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              SceneId
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               UseAntialiasing
@@ -222,7 +171,7 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        i2d::ISceneController
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         BitmapView
@@ -262,7 +211,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iqt2d::ISceneProvider
+        iqt2d::IViewProvider
       </InterfaceId>
       <ComponentId>
         BitmapView

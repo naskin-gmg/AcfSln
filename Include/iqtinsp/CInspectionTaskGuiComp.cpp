@@ -334,20 +334,30 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 		int extendersCount = m_extendersCompPtr.GetCount();
 		int previewProvidersCount = m_previewSceneProvidersCompPtr.GetCount();
 
+		iview::IShapeView* viewPtr = NULL;
+
 		if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < extendersCount) && (m_currentGuiIndex < previewProvidersCount)){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
-			iqt2d::ISceneProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[m_currentGuiIndex];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
+			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[m_currentGuiIndex];
 			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
 				extenderPtr->RemoveItemsFromScene(previewProviderPtr);
+				
+				viewPtr = previewProviderPtr->GetView();
 			}
 		}
 
 		if ((index >= 0) && (index < extendersCount) && (index < previewProvidersCount)){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[index];
-			iqt2d::ISceneProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[index];
+			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
 			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
-				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::ISceneExtender::SF_DIRECT);
+				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
+
+				viewPtr = previewProviderPtr->GetView();
 			}
+		}
+
+		if (viewPtr != NULL){
+			viewPtr->Update();
 		}
 
 		m_currentGuiIndex = index;

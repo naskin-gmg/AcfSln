@@ -6,8 +6,8 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iqt2d/CPosition2dShape.h"
-#include "iqt2d/CCircleShape.h"
+#include "iview/CInteractiveCircleShape.h"
+#include "iview/CInteractivePinShape.h"
 
 
 namespace iqtipr
@@ -54,22 +54,20 @@ QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	iqt2d::CCircleShape* circleShapePtr = new iqt2d::CCircleShape(false);
+	iview::CInteractiveCircleShape* circleShapePtr = new iview::CInteractiveCircleShape();
 	if (circleShapePtr != NULL){
-		circleShapePtr->setZValue(2);
-		circleShapePtr->setVisible(false);
+		circleShapePtr->SetVisible(false);
 
 		m_foundModel.AttachObserver(circleShapePtr);
 
 		result.PushBack(circleShapePtr);
 	}
 
-	iqt2d::CPosition2dShape* posShapePtr = new iqt2d::CPosition2dShape(false);
+	iview::CInteractivePinShape* posShapePtr = new iview::CInteractivePinShape();
 	if (posShapePtr != NULL){
-		posShapePtr->setZValue(2);
-		posShapePtr->setVisible(false);
+		posShapePtr->SetVisible(false);
 
 		m_foundModel.AttachObserver(posShapePtr);
 

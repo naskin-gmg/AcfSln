@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2211
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="5">
@@ -25,25 +36,6 @@
         <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              DirectoryMonitorParamsId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;std::string&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DirectoryMonitorParams
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               DirParamId
             </Id>
             <Type>
@@ -58,6 +50,25 @@
               </IsEnabled>
               <Value>
                 DirectoryPath
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DirectoryMonitorParamsId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;std::string&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryMonitorParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -383,7 +394,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               DirectoryPath
@@ -430,25 +441,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDirectoryId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                OutputDirectory
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

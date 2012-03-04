@@ -6,8 +6,6 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
-#include "iqtipr/CSearchGuiComp.h"
-#include "iqtipr/CSearchParamsGuiComp.h"
 #include "iqtipr/CValueSupplierGuiComp.h"
 #include "iqtipr/CCaliperParamsGuiComp.h"
 #include "iqtipr/CLineProjectionSupplierGuiComp.h"
@@ -21,8 +19,6 @@ namespace QtIprPck
 {
 
 
-typedef iqtipr::CSearchGuiComp SearchGui;
-typedef iqtipr::CSearchParamsGuiComp SearchParamsGui;
 typedef iqtipr::CValueSupplierGuiComp ValueSupplierGui;
 typedef iqtipr::CCaliperParamsGuiComp CaliperParamsGui;
 typedef iqtipr::CLineProjectionSupplierGuiComp LineProjectionSupplierGui;

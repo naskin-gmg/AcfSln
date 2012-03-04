@@ -413,7 +413,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iqt2d::ISceneExtender
+        iqt2d::IViewExtender
       </InterfaceId>
       <ComponentId>
         ValueSupplierGui
