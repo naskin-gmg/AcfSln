@@ -25,7 +25,7 @@ const i2d::ITransformation2d* CProcessedBitmapSupplierComp::GetLogTransform() co
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->first.GetPtr();
+		return productPtr->first;
 	}
 	else{
 		return NULL;
@@ -62,9 +62,26 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 	I_ASSERT(result.second.IsValid());
 
+	result.first = NULL;
+
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
 		return WS_ERROR;
+	}
+
+	if (m_workingLogTransformCompPtr.IsValid()){
+		const i2d::ITransformation2d* transformationPtr = m_bitmapProviderCompPtr->GetLogTransform();
+		if (transformationPtr != NULL){
+			if (m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), transformationPtr, m_workingLogTransformCompPtr.GetPtr()) == iproc::IProcessor::TS_OK){
+				result.first = m_workingLogTransformCompPtr.GetPtr();
+			}
+			else{
+				return WS_ERROR;
+			}
+		}
+	}
+	else{
+		result.first = m_defaultLogTransformCompPtr.GetPtr();
 	}
 
 	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.second.GetPtr());

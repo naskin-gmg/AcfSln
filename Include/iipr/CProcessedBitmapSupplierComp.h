@@ -21,11 +21,11 @@ namespace iipr
 	Image supplier providing processed image from some other input image supplier.
 */
 class CProcessedBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > >,
+			public iproc::TSupplierCompWrap< std::pair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iipr::IBitmapProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iproc::TSupplierCompWrap< std::pair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
@@ -33,6 +33,8 @@ public:
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
+		I_ASSIGN(m_workingLogTransformCompPtr, "WorkingLogTransform", "Transformation object will be used as processor output", false, "WorkingLogTransform");
+		I_ASSIGN(m_defaultLogTransformCompPtr, "DefaultLogTransform", "Default transformation used to calculate logical coordinates", false, "DefaultLogTransform");
 	I_END_COMPONENT;
 
 protected:
@@ -54,6 +56,8 @@ private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
+	I_REF(i2d::ITransformation2d, m_workingLogTransformCompPtr);
+	I_REF(i2d::ITransformation2d, m_defaultLogTransformCompPtr);
 };
 
 
