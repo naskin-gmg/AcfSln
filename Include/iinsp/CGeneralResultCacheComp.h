@@ -13,6 +13,11 @@ namespace iinsp
 {
 
 
+/**
+	General result provider returning always stored result state.
+	Stored result state can be changed only copying their from another result provider using CopyFrom method.
+	This object will be used to manage threading barrier for object supplier chain.
+*/
 class CGeneralResultCacheComp:
 			public icomp::CComponentBase,
 			virtual public IGeneralResultProvider

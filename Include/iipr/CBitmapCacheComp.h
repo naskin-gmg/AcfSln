@@ -14,6 +14,11 @@ namespace iipr
 {
 
 
+/**
+	Bitmap provider returning always stored bitmap.
+	Stored bitmap can be changed only copying the bitmap from another bitmap provider using CopyFrom method.
+	This object will be used to manage threading barrier for object supplier chain.
+*/
 class CBitmapCacheComp:
 			public icomp::CComponentBase,
 			virtual public IBitmapProvider

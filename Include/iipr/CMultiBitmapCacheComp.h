@@ -14,6 +14,11 @@ namespace iipr
 {
 
 
+/**
+	Multi bitmap provider returning always stored bitmaps.
+	Stored bitmaps can be changed only copying their from another multi bitmap provider using CopyFrom method.
+	This object will be used to manage threading barrier for object supplier chain.
+*/
 class CMultiBitmapCacheComp:
 			public icomp::CComponentBase,
 			virtual public IMultiBitmapProvider

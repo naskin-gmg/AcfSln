@@ -13,6 +13,11 @@ namespace iinsp
 {
 
 
+/**
+	General ID provider returning always stored ID.
+	Stored ID can be changed only copying their from another ID provider using CopyFrom method.
+	This object will be used to manage threading barrier for object supplier chain.
+*/
 class CIdCacheComp:
 			public icomp::CComponentBase,
 			virtual public IIdProvider
