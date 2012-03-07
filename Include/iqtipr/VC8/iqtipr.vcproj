@@ -184,26 +184,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchResultShape.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CValueSupplierGuiComp.cpp"
 				>
 			</File>
@@ -231,18 +211,6 @@
 			</File>
 			<File
 				RelativePath="..\CProjectionShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchResultShape.h"
 				>
 			</File>
 			<File
@@ -279,14 +247,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSearchGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CSearchParamsGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\Generated\moc_CValueSupplierGuiComp.cpp"
 				>
 			</File>
@@ -300,14 +260,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CLineProjectionSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CSearchGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CSearchParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -328,14 +280,6 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSearchParamsGuiComp.ui"
 				>
 			</File>
 			<File
