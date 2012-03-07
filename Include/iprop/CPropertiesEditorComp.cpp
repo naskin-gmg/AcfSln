@@ -1,14 +1,12 @@
 // Qt includes
-#include <QtCore/QUrl>
 #include <QtGui/QHeaderView>
 #include <QtGui/QToolButton>
-#include <QtGui/QDesktopServices>
 #include <QtGui/QTreeWidgetItemIterator>
-
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+// ACF-Solutions includes
 #include "iprop/TProperty.h"
 #include "iprop/CPropertiesEditorComp.h"
 
@@ -49,6 +47,10 @@ void CPropertiesEditorComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	PropertyTree->setSelectionMode(QAbstractItemView::SingleSelection);
+	PropertyTree->setRootIsDecorated(false);
+	PropertyTree->header()->setResizeMode(QHeaderView::ResizeToContents);
+
+	PropertyTree->setItemDelegate(new EditorDelegate(*this));
 }
 
 
@@ -62,10 +64,13 @@ void CPropertiesEditorComp::UpdatePropertyEditor(
 	QTreeWidgetItem* propertyItemPtr = FindPropertyItem(propertyId);
 	if (propertyItemPtr == NULL){
 		propertyItemPtr = new QTreeWidgetItem;
+		propertyItemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled);
 
 		propertyItemPtr->setText(CT_PROPERTY, propertyId);
 		propertyItemPtr->setData(CT_PROPERTY, DR_PROPERTY_ID, propertyId);
 		propertyItemPtr->setStatusTip(CT_PROPERTY, propertyDescription);
+
+		PropertyTree->addTopLevelItem(propertyItemPtr);
 	}
 
 	I_ASSERT(propertyItemPtr != NULL);
@@ -130,6 +135,44 @@ void CPropertiesEditorComp::SetDataToEditor(const IProperty& objectProperty, QTr
 	}
 }
 
+
+
+CPropertiesEditorComp::EditorDelegate::EditorDelegate(CPropertiesEditorComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (QItemDelegate)
+
+QWidget* CPropertiesEditorComp::EditorDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+	if (index.column() != CT_VALUE){
+		return NULL;
+	}
+
+	return BaseClass::createEditor(parent, option, index);
+}
+
+
+void CPropertiesEditorComp::EditorDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
+{
+	if (index.column() != CT_VALUE){
+		return;
+	}
+
+	BaseClass::setEditorData(editor, index);
+}
+
+
+void CPropertiesEditorComp::EditorDelegate::setModelData(QWidget* editor,QAbstractItemModel* model, const QModelIndex& index) const
+{
+	if (index.column() != CT_VALUE){
+		return;
+	}
+
+	BaseClass::setModelData(editor, model, index);
+}
 
 } // namespace iprop
 

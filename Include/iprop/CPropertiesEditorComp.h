@@ -10,6 +10,7 @@
 #include "iprop/IPropertiesManager.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/CItemDelegate.h"
 
 #include "iprop/Generated/ui_CPropertiesEditorComp.h"
 
@@ -52,6 +53,24 @@ protected:
 	virtual void OnGuiCreated();
 
 private:
+	class EditorDelegate: public iqtgui::CItemDelegate
+	{
+	public:
+		typedef iqtgui::CItemDelegate BaseClass;
+
+		EditorDelegate(CPropertiesEditorComp& parent);
+
+		// reimplemented (QItemDelegate)
+		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& /*option*/, const QModelIndex& index) const;
+		virtual void setEditorData(QWidget* editor, const QModelIndex& index) const;
+		virtual void setModelData(QWidget* editor,QAbstractItemModel* model, const QModelIndex& index) const;
+
+	private:
+		CPropertiesEditorComp& m_parent;
+	};
+
+private:
+
 	void UpdatePropertyEditor(
 				const IProperty& objectProperty,
 				const QString& propertyId,
