@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1526
+          2224
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          224
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -32,10 +21,10 @@
         Bitmap
       </ComponentName>
       <X>
-        275
+        575
       </X>
       <X>
-        125
+        275
       </X>
     </Element>
     <Element>
@@ -43,11 +32,13 @@
         ImageTask
       </ComponentName>
       <X>
-        275
+        575
       </X>
       <X>
-        225
+        400
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>

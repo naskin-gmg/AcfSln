@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1526
+          2224
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          224
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -137,15 +126,9 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        ImageTask
-      </ComponentId>
-    </Interface>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         iipr::IBitmapProvider
@@ -156,7 +139,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::ISupplier
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         ImageTask
@@ -164,7 +147,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iser::ISerializable
+        iproc::ISupplier
       </InterfaceId>
       <ComponentId>
         ImageTask
