@@ -32,13 +32,13 @@ public:
 	CGeneralResultCacheComp();
 
 	// reimplemented (iinsp::IGeneralResultProvider)
-	virtual GeneralResult GetGeneralResult() const;
+	virtual istd::IInformation::InformationCategory GetGeneralResult() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);
 
 private:
-	GeneralResult m_result;
+	istd::IInformation::InformationCategory m_result;
 };
 
 

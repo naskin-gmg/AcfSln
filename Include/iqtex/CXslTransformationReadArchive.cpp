@@ -45,7 +45,7 @@ void ReadArchiveMessageHandler::handleMessage(
 				const QSourceLocation& /*sourceLocation*/)
 {
 	m_loggerPtr->SendLogMessage(
-					istd::ILogger::MC_WARNING,
+					istd::IInformation::IC_WARNING,
 					0,
 					QObject::tr("Transformation message: ").append(description),
 					"XslTransformationWriteArchive");

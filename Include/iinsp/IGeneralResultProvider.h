@@ -4,6 +4,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
+#include "istd/ILogger.h"
 
 
 namespace iinsp
@@ -16,15 +17,7 @@ namespace iinsp
 class IGeneralResultProvider: virtual public istd::IChangeable
 {
 public:
-	enum GeneralResult
-	{
-		GR_OK,
-		GR_WARNING,
-		GR_FAILED,
-		GR_CRITICAL
-	};
-
-	virtual GeneralResult GetGeneralResult() const = 0;
+	virtual istd::IInformation::InformationCategory GetGeneralResult() const = 0;
 };
 
 
