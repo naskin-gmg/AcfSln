@@ -11,6 +11,7 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
 
 #include "iser/IArchive.h"
