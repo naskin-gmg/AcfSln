@@ -6,7 +6,7 @@ cd Impl\QMake
 qmake -recursive -tp vc AcfAll.pro
 cd ..\..
 
-call %ACFDIR%\Config\QMake\CopyQMakeToSubdir.js VC8
+call %ACFDIR%\Config\QMake\CopyVCProjToSubdir.js VC8
 
 echo Generating VC9 projects...
 set QMAKESPEC=%QTDIR%/mkspecs/win32-msvc2008
@@ -14,6 +14,6 @@ cd Impl\QMake
 qmake -recursive -tp vc AcfSlnAll.pro
 cd ..\..
 
-call %ACFDIR%\Config\QMake\CopyQMakeToSubdir.js VC9
+call %ACFDIR%\Config\QMake\CopyVCProjToSubdir.js VC9
 
 cd ..

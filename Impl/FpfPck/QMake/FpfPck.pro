@@ -1,5 +1,5 @@
 include($(ACFDIR)/Config/QMake/ComponentConfig.pri)
-include($(ACFDIR)/Impl/AcfStd/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = FpfPck
 
