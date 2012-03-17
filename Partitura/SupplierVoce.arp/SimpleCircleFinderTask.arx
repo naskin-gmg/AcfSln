@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1667
+          2238
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          299
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -50,7 +39,7 @@
               CaliperParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               
@@ -279,7 +268,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         imod::IModel
@@ -299,14 +288,6 @@
     <Interface>
       <InterfaceId>
         iproc::IValueProvider
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
       </InterfaceId>
       <ComponentId>
         PositionTask

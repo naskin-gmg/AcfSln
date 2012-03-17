@@ -143,9 +143,9 @@ void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 	int shapesCount = m_foundModel.GetObserverCount();
 	for (int i = 0; i < shapesCount; ++i){
-		QGraphicsItem* shapePtr = dynamic_cast<QGraphicsItem*>(m_foundModel.GetObserverPtr(i));
+		iview::CShapeControl* shapePtr = dynamic_cast<iview::CShapeControl*>(m_foundModel.GetObserverPtr(i));
 		if (shapePtr != NULL){
-			shapePtr->setVisible(isResultVisible);
+			shapePtr->SetVisible(isResultVisible);
 		}
 	}
 }
