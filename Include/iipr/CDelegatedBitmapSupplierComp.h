@@ -8,10 +8,10 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/CMultiModelObserverBase.h"
-#include "i2d/ITransformation2d.h"
+#include "i2d/ICalibrationProvider.h"
 #include "iproc/TSupplierCompWrap.h"
 
-// IACF includes
+// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 
 
@@ -24,15 +24,18 @@ namespace iipr
 */
 class CDelegatedBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< std::pair<const i2d::ITransformation2d*, const iimg::IBitmap*> >,
-			virtual public IBitmapProvider
+			virtual public IBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< std::pair<const i2d::ITransformation2d*, const iimg::IBitmap*> > BaseClass;
 
 	I_BEGIN_COMPONENT(CDelegatedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(IBitmapProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_inputBitmapProviderCompPtr, "SlaveSupplier", "Slave supplier where all calls will be delegated", false, "SlaveSupplier");
 		I_ASSIGN_TO(m_inputBitmapProviderModelCompPtr, m_inputBitmapProviderCompPtr, false);
+		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_inputBitmapProviderCompPtr, false);
 		I_ASSIGN(m_bitmapCompPtr, "BitmapObject", "Bitmap object used if no slave supplier is provided", false, "BitmapObject");
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, false);
 		I_ASSIGN(m_calibrationCompPtr, "CalibrationObject", "Calibration object used as image to log transformation, if no slave supplier is provided", false, "CalibrationObject");
@@ -42,7 +45,9 @@ public:
 protected:
 	// reimplemented (iipr::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
-	virtual const i2d::ITransformation2d* GetLogTransform() const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
 
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
@@ -52,6 +57,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_inputBitmapProviderCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_inputBitmapProviderModelCompPtr);
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);

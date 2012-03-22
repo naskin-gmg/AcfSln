@@ -52,13 +52,18 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
 			CSingleFeatureConsumer consumer(CSingleFeatureConsumer::FP_HEAVIEST);
-			int caliperState = m_processorCompPtr->DoProcessing(
+			int positionState = m_processorCompPtr->DoProcessing(
 							paramsSetPtr,
 							bitmapPtr,
 							&consumer);
 
-			if (caliperState != iproc::IProcessor::TS_OK){
+			if (positionState != iproc::IProcessor::TS_OK){
 				return WS_ERROR;
+			}
+
+			const i2d::ITransformation2d* logicalTransformPtr = NULL;	
+			if (m_calibrationProviderCompPtr.IsValid()){
+				logicalTransformPtr = m_calibrationProviderCompPtr->GetLogicalTransform();
 			}
 
 			const i2d::CPosition2d* positionPtr = dynamic_cast<const i2d::CPosition2d*>(consumer.GetFeature());
@@ -66,12 +71,33 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 				return WS_ERROR;
 			}
 
-			result = positionPtr->GetPosition();
+			if (logicalTransformPtr != NULL){
+				i2d::CPosition2d transofrmedPosition = *positionPtr;
+				if (!transofrmedPosition.Transform(*logicalTransformPtr)){
+					return WS_ERROR;
+				}
+	
+				result = transofrmedPosition.GetPosition();
+			}
+			else{
+				result = positionPtr->GetPosition();
+			}
 
 			const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
 			if (circlePtr != NULL){
 				result.SetElementsCount(3);
 				result[2] = circlePtr->GetRadius();
+
+				if (logicalTransformPtr != NULL){
+					i2d::CVector2d input = positionPtr->GetPosition();
+					input.SetX(input.GetX() + circlePtr->GetRadius());
+
+					if (!logicalTransformPtr->GetPositionAt(input, input)){
+						return WS_ERROR;
+					}
+
+					result[2] = i2d::CVector2d(result[0], result[1]).GetDistance(input);
+				}
 			}
 
 			return WS_OK;

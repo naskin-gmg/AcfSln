@@ -4,7 +4,6 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "i2d/ITransformation2d.h"
 #include "iimg/IBitmap.h"
 
 
@@ -23,13 +22,6 @@ public:
 		\return	pointer to bitmap instance if this bitmap is accessible, or NULL.
 	*/
 	virtual const iimg::IBitmap* GetBitmap() const = 0;
-
-	/**
-		Get access to transformation from bitmap to logical positions.
-		Please note, not all implementations must support this information.
-		\return	pointer to transformation if it is accessible, or NULL.
-	*/
-	virtual const i2d::ITransformation2d* GetLogTransform() const = 0;
 };
 
 

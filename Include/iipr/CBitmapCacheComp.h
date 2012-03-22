@@ -5,6 +5,7 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "icomp/CComponentBase.h"
+#include "i2d/ICalibrationProvider.h"
 
 // ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
@@ -21,18 +22,22 @@ namespace iipr
 */
 class CBitmapCacheComp:
 			public icomp::CComponentBase,
-			virtual public IBitmapProvider
+			virtual public IBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapCacheComp);
 		I_REGISTER_INTERFACE(IBitmapProvider);
+		I_REGISTER_INTERFACE(ICalibrationProvider);
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
-	virtual const i2d::ITransformation2d* GetLogTransform() const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);

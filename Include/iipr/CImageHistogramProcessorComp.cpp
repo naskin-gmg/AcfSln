@@ -30,7 +30,7 @@ int CImageHistogramProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	imeas::IDiscrDataSequence* histogramPtr = dynamic_cast<imeas::IDiscrDataSequence*>(outputPtr);
+	imeas::IDiscreteDataSequence* histogramPtr = dynamic_cast<imeas::IDiscreteDataSequence*>(outputPtr);
 	if (histogramPtr == NULL){
 		return TS_INVALID;
 	}
@@ -49,7 +49,7 @@ int CImageHistogramProcessorComp::DoProcessing(
 bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			const iimg::IBitmap& input,
 			const i2d::IObject2d* aoiPtr,
-			imeas::IDiscrDataSequence& histogram) const
+			imeas::IDiscreteDataSequence& histogram) const
 {
 	if (input.IsEmpty()){
 		histogram.ResetSequence();

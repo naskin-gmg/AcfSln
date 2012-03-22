@@ -11,7 +11,7 @@
 
 
 // ACF-Solutions includes
-#include "imeas/IDiscrDataSequence.h"
+#include "imeas/IDiscreteDataSequence.h"
 
 
 namespace iipr

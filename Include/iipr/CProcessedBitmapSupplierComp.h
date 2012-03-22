@@ -6,10 +6,11 @@
 #include <utility>
 
 // ACF includes
+#include "i2d/ICalibrationProvider.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 
-// IACF includes
+// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 
 
@@ -22,16 +23,19 @@ namespace iipr
 */
 class CProcessedBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< std::pair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iipr::IBitmapProvider
+			virtual public iipr::IBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< std::pair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
 		I_ASSIGN(m_workingLogTransformCompPtr, "WorkingLogTransform", "Transformation object will be used as processor output", false, "WorkingLogTransform");
 		I_ASSIGN(m_defaultLogTransformCompPtr, "DefaultLogTransform", "Default transformation used to calculate logical coordinates", false, "DefaultLogTransform");
@@ -42,7 +46,9 @@ protected:
 
 	// reimplemented (iipr::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
-	virtual const i2d::ITransformation2d* GetLogTransform() const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
 
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
@@ -54,6 +60,7 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
 	I_REF(i2d::ITransformation2d, m_workingLogTransformCompPtr);

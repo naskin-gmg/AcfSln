@@ -23,7 +23,9 @@ const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap() const
 }
 
 
-const i2d::ITransformation2d* CSnapBitmapSupplierComp::GetLogTransform() const
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ITransformation2d* CSnapBitmapSupplierComp::GetLogicalTransform() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){

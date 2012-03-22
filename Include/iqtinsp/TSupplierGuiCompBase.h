@@ -22,10 +22,13 @@ namespace iqtinsp
 
 
 template <class UI, class WidgetType = QWidget>
-class TSupplierGuiCompBase: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >
+class TSupplierGuiCompBase:
+			public iqt2d::TSceneExtenderCompBase<
+						iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >
 {
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<
+					iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");

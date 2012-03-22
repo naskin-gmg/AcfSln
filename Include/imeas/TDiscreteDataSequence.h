@@ -1,5 +1,5 @@
-#ifndef imeas_TDiscrDataSequence_included
-#define imeas_TDiscrDataSequence_included
+#ifndef imeas_TDiscreteDataSequence_included
+#define imeas_TDiscreteDataSequence_included
 
 
 // STL includes
@@ -13,7 +13,7 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "imeas/IDiscrDataSequence.h"
+#include "imeas/IDiscreteDataSequence.h"
 
 
 namespace imeas
@@ -21,12 +21,12 @@ namespace imeas
 
 
 template <typename Element>
-class TDiscrDataSequence: virtual public IDiscrDataSequence
+class TDiscreteDataSequence: virtual public IDiscreteDataSequence
 {
 public:
-	TDiscrDataSequence();
+	TDiscreteDataSequence();
 
-	// reimplemented (imeas::IDiscrDataSequence)
+	// reimplemented (imeas::IDiscreteDataSequence)
 	virtual bool CreateDiscrSequence(
 				int samplesCount,
 				void* dataPtr,
@@ -76,7 +76,7 @@ private:
 // public methods
 
 template <typename Element>
-TDiscrDataSequence<Element>::TDiscrDataSequence()
+TDiscreteDataSequence<Element>::TDiscreteDataSequence()
 :	m_allocatedElementsCount(0),
 	m_samplesCount(0),
 	m_channelsCount(0),
@@ -87,10 +87,10 @@ TDiscrDataSequence<Element>::TDiscrDataSequence()
 }
 
 
-// reimplemented (imeas::IDiscrDataSequence)
+// reimplemented (imeas::IDiscreteDataSequence)
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::CreateDiscrSequence(
+bool TDiscreteDataSequence<Element>::CreateDiscrSequence(
 			int samplesCount,
 			void* dataPtr,
 			bool releaseFlag,
@@ -116,14 +116,14 @@ bool TDiscrDataSequence<Element>::CreateDiscrSequence(
 
 
 template <typename Element>
-int TDiscrDataSequence<Element>::GetSampleDepth() const
+int TDiscreteDataSequence<Element>::GetSampleDepth() const
 {
 	return sizeof(Element) * 8;
 }
 
 
 template <typename Element>
-I_DWORD TDiscrDataSequence<Element>::GetDiscrSample(int position, int channel) const
+I_DWORD TDiscreteDataSequence<Element>::GetDiscrSample(int position, int channel) const
 {
 	const Element& element = *(const Element*)((const I_BYTE*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
@@ -132,7 +132,7 @@ I_DWORD TDiscrDataSequence<Element>::GetDiscrSample(int position, int channel) c
 
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::SetDiscrSample(int position, int channel, I_DWORD sample)
+bool TDiscreteDataSequence<Element>::SetDiscrSample(int position, int channel, I_DWORD sample)
 {
 	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
@@ -145,7 +145,7 @@ bool TDiscrDataSequence<Element>::SetDiscrSample(int position, int channel, I_DW
 // reimplemented (imeas::IDataSequence)
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsCount)
+bool TDiscreteDataSequence<Element>::CreateSequence(int samplesCount, int channelsCount)
 {
 	if (m_sequenceInfoPtr.IsValid()){
 		int flags = m_sequenceInfoPtr->GetSequenceInfoFlags();
@@ -186,7 +186,7 @@ bool TDiscrDataSequence<Element>::CreateSequence(int samplesCount, int channelsC
 
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::CreateSequenceWithInfo(
+bool TDiscreteDataSequence<Element>::CreateSequenceWithInfo(
 			const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 			int samplesCount,
 			int channelsCount)
@@ -198,21 +198,21 @@ bool TDiscrDataSequence<Element>::CreateSequenceWithInfo(
 
 
 template <typename Element>
-const IDataSequenceInfo* TDiscrDataSequence<Element>::GetSequenceInfo() const
+const IDataSequenceInfo* TDiscreteDataSequence<Element>::GetSequenceInfo() const
 {
 	return m_sequenceInfoPtr.GetPtr();
 }
 
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::IsEmpty() const
+bool TDiscreteDataSequence<Element>::IsEmpty() const
 {
 	return m_samplesCount <= 0;
 }
 
 
 template <typename Element>
-void TDiscrDataSequence<Element>::ResetSequence()
+void TDiscreteDataSequence<Element>::ResetSequence()
 {
 	m_sampleBuffer.Reset();
 	m_samplesCount = 0;
@@ -221,21 +221,21 @@ void TDiscrDataSequence<Element>::ResetSequence()
 
 
 template <typename Element>
-int TDiscrDataSequence<Element>::GetSamplesCount() const
+int TDiscreteDataSequence<Element>::GetSamplesCount() const
 {
 	return m_samplesCount;
 }
 
 
 template <typename Element>
-int TDiscrDataSequence<Element>::GetChannelsCount() const
+int TDiscreteDataSequence<Element>::GetChannelsCount() const
 {
 	return m_channelsCount;
 }
 
 
 template <typename Element>
-double TDiscrDataSequence<Element>::GetSample(int index, int channel) const
+double TDiscreteDataSequence<Element>::GetSample(int index, int channel) const
 {
 	const Element& element = *(const Element*)((const I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
@@ -244,7 +244,7 @@ double TDiscrDataSequence<Element>::GetSample(int index, int channel) const
 
 
 template <typename Element>
-void TDiscrDataSequence<Element>::SetSample(int index, int channel, double value)
+void TDiscreteDataSequence<Element>::SetSample(int index, int channel, double value)
 {
 	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
@@ -255,7 +255,7 @@ void TDiscrDataSequence<Element>::SetSample(int index, int channel, double value
 // reimplemented (iser::ISerializable)
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::Serialize(iser::IArchive& archive)
+bool TDiscreteDataSequence<Element>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -318,11 +318,11 @@ bool TDiscrDataSequence<Element>::Serialize(iser::IArchive& archive)
 // reimplemented (istd::IChangeable)
 
 template <typename Element>
-bool TDiscrDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
+bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 {
 	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&object);
 	if (sequencePtr != NULL){
-		const TDiscrDataSequence<Element>* nativeSequencePtr = dynamic_cast<const TDiscrDataSequence<Element>*>(sequencePtr);
+		const TDiscreteDataSequence<Element>* nativeSequencePtr = dynamic_cast<const TDiscreteDataSequence<Element>*>(sequencePtr);
 		if (		(nativeSequencePtr != NULL) &&
 					(nativeSequencePtr->m_channelDiff == sizeof(Element)) &&
 					(nativeSequencePtr->m_sampleDiff == int(nativeSequencePtr->m_channelsCount * sizeof(Element)))){
@@ -378,15 +378,15 @@ bool TDiscrDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 }
 
 
-typedef TDiscrDataSequence<I_BYTE> CSimpleSamplesSequence8;
-typedef TDiscrDataSequence<I_WORD> CSimpleSamplesSequence16;
-typedef TDiscrDataSequence<I_DWORD> CSimpleSamplesSequence32;
-typedef TDiscrDataSequence<I_QWORD> CSimpleSamplesSequence64;
+typedef TDiscreteDataSequence<I_BYTE> CSimpleSamplesSequence8;
+typedef TDiscreteDataSequence<I_WORD> CSimpleSamplesSequence16;
+typedef TDiscreteDataSequence<I_DWORD> CSimpleSamplesSequence32;
+typedef TDiscreteDataSequence<I_QWORD> CSimpleSamplesSequence64;
 
 
 } // namespace imeas
 
 
-#endif // !imeas_TDiscrDataSequence_included
+#endif // !imeas_TDiscreteDataSequence_included
 
 

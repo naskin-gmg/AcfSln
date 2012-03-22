@@ -5,7 +5,6 @@
 	Name="imeas"
 	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
 	RootNamespace="imeas"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -261,7 +260,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IDiscrDataSequence.h"
+				RelativePath="..\IDiscreteDataSequence.h"
 				>
 			</File>
 			<File
@@ -285,7 +284,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TDiscrDataSequence.h"
+				RelativePath="..\TDiscreteDataSequence.h"
 				>
 			</File>
 		</Filter>

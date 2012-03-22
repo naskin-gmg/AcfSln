@@ -5,10 +5,12 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "i2d/ITransformation2d.h"
+#include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "iproc/IBitmapAcquisition.h"
 
+// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 
 
@@ -21,13 +23,15 @@ namespace icam
 */
 class CSnapBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<const i2d::ITransformation2d>, istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iipr::IBitmapProvider
+			virtual public iipr::IBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<const i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision object for image snap", true, "BitmapAcquisition");
 		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
@@ -35,7 +39,9 @@ public:
 
 	// reimplemented (iipr::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
-	virtual const i2d::ITransformation2d* GetLogTransform() const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)

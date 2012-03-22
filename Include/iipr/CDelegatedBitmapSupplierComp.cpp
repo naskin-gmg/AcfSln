@@ -17,8 +17,10 @@ const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 	return NULL;
 }
 
+	
+// reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetLogTransform() const
+const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetLogicalTransform() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -37,8 +39,12 @@ const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetLogTransform() co
 int CDelegatedBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (m_inputBitmapProviderCompPtr.IsValid()){
-		result.first = m_inputBitmapProviderCompPtr->GetLogTransform();
+		result.first = NULL;
 		result.second = m_inputBitmapProviderCompPtr->GetBitmap();
+
+		if (m_calibrationProviderCompPtr.IsValid()){
+			result.first = m_calibrationProviderCompPtr->GetLogicalTransform();
+		}
 
 		if (result.second != NULL){
 			return ISupplier::WS_OK;

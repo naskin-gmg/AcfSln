@@ -3,11 +3,13 @@
 
 
 // ACF includes
+#include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "iproc/IValueProvider.h"
 
+// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 
 
@@ -31,6 +33,7 @@ public:
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(iproc::IValueProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationSupplier", "Provide 2D-calibration object", false, "CalibrationSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
@@ -47,6 +50,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 };

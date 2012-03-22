@@ -148,6 +148,8 @@ void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 			shapePtr->SetVisible(isResultVisible);
 		}
 	}
+
+	UpdateAllViews();
 }
 
 

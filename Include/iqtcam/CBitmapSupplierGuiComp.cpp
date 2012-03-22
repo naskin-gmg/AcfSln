@@ -112,8 +112,9 @@ void CBitmapSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 	SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
 	SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty());
-}
 
+	UpdateAllViews();
+}
 
 
 // reimplemented (imod::IObserver)

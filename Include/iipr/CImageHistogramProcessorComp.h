@@ -4,14 +4,11 @@
 
 // ACF includes
 #include "i2d/CRectangle.h"
-
 #include "iimg/IBitmap.h"
-
 #include "iproc/TSyncProcessorCompBase.h"
 
-
 // ACF-Solutions includes
-#include "imeas/IDiscrDataSequence.h"
+#include "imeas/IDiscreteDataSequence.h"
 
 
 namespace iipr
@@ -41,7 +38,7 @@ private:
 	bool CalculateHistogramFromBitmap(
 					const iimg::IBitmap& input,
 					const i2d::IObject2d* aoiPtr,
-					imeas::IDiscrDataSequence& histogram) const;
+					imeas::IDiscreteDataSequence& histogram) const;
 
 private:
 	I_ATTR(std::string, m_aoiParamIdAttrPtr);

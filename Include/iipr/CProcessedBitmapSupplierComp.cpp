@@ -1,8 +1,5 @@
 #include "iipr/CProcessedBitmapSupplierComp.h"
 
-// ACF includes
-#include "istd/IPolymorphic.h"
-
 
 namespace iipr
 {
@@ -21,7 +18,9 @@ const iimg::IBitmap* CProcessedBitmapSupplierComp::GetBitmap() const
 }
 
 
-const i2d::ITransformation2d* CProcessedBitmapSupplierComp::GetLogTransform() const
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ITransformation2d* CProcessedBitmapSupplierComp::GetLogicalTransform() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -69,8 +68,8 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
-	if (m_workingLogTransformCompPtr.IsValid()){
-		const i2d::ITransformation2d* transformationPtr = m_bitmapProviderCompPtr->GetLogTransform();
+	if (m_workingLogTransformCompPtr.IsValid() && m_calibrationProviderCompPtr.IsValid()){
+		const i2d::ITransformation2d* transformationPtr = m_calibrationProviderCompPtr->GetLogicalTransform();
 		if (transformationPtr != NULL){
 			if (m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), transformationPtr, m_workingLogTransformCompPtr.GetPtr()) == iproc::IProcessor::TS_OK){
 				result.first = m_workingLogTransformCompPtr.GetPtr();

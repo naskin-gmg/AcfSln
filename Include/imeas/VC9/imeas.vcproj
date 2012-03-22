@@ -261,7 +261,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IDiscrDataSequence.h"
+				RelativePath="..\IDiscreteDataSequence.h"
 				>
 			</File>
 			<File
@@ -285,7 +285,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TDiscrDataSequence.h"
+				RelativePath="..\TDiscreteDataSequence.h"
 				>
 			</File>
 		</Filter>
