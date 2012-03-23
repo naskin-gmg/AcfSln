@@ -21,7 +21,7 @@ namespace ifpf
 
 // reimplemented (iser::ISerializable)
 
-bool CVisualHotfolderWorkflowComp::Serialize(iser::IArchive& archive)
+bool CVisualHotfolderWorkflowComp::Serialize(iser::IArchive& /*archive*/)
 {
 	bool retVal = true;
 
