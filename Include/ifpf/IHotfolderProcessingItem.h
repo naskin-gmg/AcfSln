@@ -2,11 +2,11 @@
 #define ifpf_IHotfolderProcessingItem_included
 
 
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
+#include <QtCore/QDateTime.h>
 
-#include "isys/IDateTime.h"
-
+// ACF includes
 #include "iser/ISerializable.h"
 
 
@@ -78,12 +78,12 @@ public:
 	/**
 		Get start time of the job.
 	*/
-	virtual const isys::IDateTime& GetStartTime() const = 0;
+	virtual const QDateTime& GetStartTime() const = 0;
 
 	/**
 		Set start time of the job.
 	*/
-	virtual void SetStartTime(const isys::IDateTime& startTime) = 0;
+	virtual void SetStartTime(const QDateTime& startTime) = 0;
 };
 
 

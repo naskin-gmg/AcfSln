@@ -2,11 +2,11 @@
 #define ifpf_CHotfolderProcessingItem_included
 
 
+// Qt includes
+#include <QtCore/QDateTime>
+
 // ACF includes
 #include "imod/TModelWrap.h"
-
-#include "isys/CSimpleDateTime.h"
-
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingItem.h"
@@ -34,8 +34,8 @@ public:
 	virtual void SetOutputFile(const QString& outputFile);
 	virtual double GetProcessingTime() const;
 	virtual void SetProcessingTime(double processingTime);
-	virtual const isys::IDateTime& GetStartTime() const;
-	virtual void SetStartTime(const isys::IDateTime& startTime);
+	virtual const QDateTime& GetStartTime() const;
+	virtual void SetStartTime(const QDateTime& startTime);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -45,7 +45,7 @@ private:
 	QString m_outputFile;
 	int m_processingState;
 	double m_processingTime;
-	isys::CSimpleDateTime m_startTime;
+	QDateTime m_startTime;
 
 	mutable std::string m_itemId;
 };

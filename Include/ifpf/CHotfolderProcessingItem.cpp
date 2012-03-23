@@ -4,12 +4,10 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-
 #include "isys/ISystemEnvironment.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
+#include "iser/CPrimitiveTypesSerializer.h"
 #include "iproc/IProcessor.h"
 
 
@@ -105,13 +103,13 @@ void CHotfolderProcessingItem::SetProcessingTime(double processingTime)
 }
 
 
-const isys::IDateTime& CHotfolderProcessingItem::GetStartTime() const
+const QDateTime& CHotfolderProcessingItem::GetStartTime() const
 {
 	return m_startTime;
 }
 
 
-void CHotfolderProcessingItem::SetStartTime(const isys::IDateTime& startTime)
+void CHotfolderProcessingItem::SetStartTime(const QDateTime& startTime)
 {
 	if (m_startTime != startTime){
 		istd::CChangeNotifier changePtr(this);
@@ -154,7 +152,7 @@ bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 
 	static iser::CArchiveTag startTimeTag("StartTime", "Start time of the processing");
 	retVal = retVal && archive.BeginTag(startTimeTag);
-	retVal = retVal && m_startTime.Serialize(archive);
+	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, m_startTime);
 	retVal = retVal && archive.EndTag(startTimeTag);
 
 	return retVal;

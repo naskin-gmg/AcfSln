@@ -1,14 +1,15 @@
 #include "iqtfpf/CDirectoryMonitorComp.h"
 
 
+// Qt includes
+#include <QtCore/QElapsedTimer>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "imod/IModel.h"
 
 #include "isys/CSectionBlocker.h"
-
-#include "iqt/CTimer.h"
 
 
 namespace iqtfpf
@@ -102,19 +103,19 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 
 void CDirectoryMonitorComp::run()
 {
-	iqt::CTimer updateTimer;
+	QElapsedTimer updateTimer;
 
-	iqt::CTimer measurementTimer;
+	QElapsedTimer measurementTimer;
 
 	while (!m_finishThread){
-		bool needStateUpdate = (updateTimer.GetElapsed() >= m_poolingFrequency);
+		bool needStateUpdate = updateTimer.hasExpired(m_poolingFrequency);
 		if (!needStateUpdate || m_lockChanges){
 			msleep(100);
 
 			continue;
 		}
 
-		measurementTimer.Start();
+		measurementTimer.start();
 
 		QFileInfo currentDirectoryInfo(m_currentDirectory.absolutePath());
 		if (!currentDirectoryInfo.exists()){
@@ -143,118 +144,111 @@ void CDirectoryMonitorComp::run()
 		// check for changes:
 		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_REMOVE) != 0){
 			if (pendingChangesCounter > 0){
-				FileItems newFileItems;
-				for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
-					const isys::CFileInfo& fileItem = m_directoryFiles[fileIndex];
-
-					QFileInfo fileInfo(iqt::GetQFileInfo(fileItem));
+				for (		ifpf::IMonitoringSession::FileItems::Iterator fileIter = m_directoryFiles.begin();
+							fileIter != m_directoryFiles.end();){
+					QString filePath = fileIter.key();
+					QFileInfo fileInfo(filePath);
 					if (!fileInfo.exists()){
-						removedFiles.push_back(fileInfo.absoluteFilePath());
+						removedFiles.push_back(filePath);
+						fileIter = m_directoryFiles.erase(fileIter);
 
-						I_IF_DEBUG(SendInfoMessage(0, fileInfo.absoluteFilePath() + " was removed");)
+						I_IF_DEBUG(SendInfoMessage(0, QObject::tr("File %1 was removed").arg(filePath)));
 					}
 					else{
-						newFileItems.push_back(fileItem);
+						++fileIter;
 					}
 				}
-
-				m_directoryFiles = newFileItems;
 			}
 		}
 
 		// check previously not accessed files:
 		for (FilesSet::iterator fileIter = m_nonAccessedFiles.begin(); fileIter != m_nonAccessedFiles.end(); fileIter++){
-			QFile file(*fileIter);
+			const QString& filePath = *fileIter;
+
+			QFile file(filePath);
 
 			bool hasAccess = file.open(QIODevice::ReadOnly);
 			if (hasAccess){
-				QFileInfo fileInfo(*fileIter);
+				QFileInfo fileInfo(filePath);
 
-				m_directoryFiles.push_back(iqt::GetCFileInfo(fileInfo));
+				m_directoryFiles[filePath] = fileInfo.lastModified();
 
-				addedFiles.push_back(*fileIter);
+				addedFiles.push_back(filePath);
 
-				m_nonAccessedFiles.erase(fileIter);
-
-				break;
+				fileIter = m_nonAccessedFiles.erase(fileIter);
 			}
-
-			file.close();
 		}
 
 		if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ADD) != 0 && pendingChangesCounter > 0){
 			QStringList currentFiles = m_currentDirectory.entryList(acceptPatterns, QDir::Filters(observingItemTypes) | QDir::NoDotAndDotDot);
 
-			FileItems currentFileItems;
+			FilesSet currentFileItems;
 			for (int fileIndex = 0; fileIndex < int(currentFiles.size()); fileIndex++){
-				QString currentFilePath = m_currentDirectory.absolutePath() + QString("/") + currentFiles[fileIndex];
+				QString currentFilePath = m_currentDirectory.absoluteFilePath(currentFiles[fileIndex]);
 
 				QFileInfo fileInfo(currentFilePath);
 
-				currentFileItems.push_back(iqt::GetCFileInfo(fileInfo));
+				currentFileItems.insert(fileInfo.canonicalFilePath());
 			}
 
-
-			for (int currentFileIndex = 0; currentFileIndex < int(currentFileItems.size()); currentFileIndex++){
+			for (FilesSet::Iterator currentFileIter = currentFileItems.begin(); currentFileIter != currentFileItems.end(); ++currentFileIter){
 				// abort processing, if the thread must be finished:
 				if (m_finishThread){
 					return;
 				}
 
-				isys::CFileInfo& currentFileItem = currentFileItems[currentFileIndex];
-				FileItems::iterator foundFileIter = qFind(m_directoryFiles.begin(), m_directoryFiles.end(), currentFileItem);
+				const QString& currentFilePath = *currentFileIter;
 
-				if (foundFileIter == m_directoryFiles.end()){
-					QFile file(currentFileItem.GetFilePath());
+				if (!m_directoryFiles.contains(currentFilePath)){
+					QFile file(currentFilePath);
 					bool hasAccess = file.open(QIODevice::ReadOnly);
 					if (hasAccess){
-						addedFiles.push_back(currentFileItem.GetFilePath());
+						addedFiles.push_back(currentFilePath);
 
-						m_directoryFiles.push_back(currentFileItem);
+						m_directoryFiles[currentFilePath] = QFileInfo(file).lastModified();
 
-						I_IF_DEBUG(SendInfoMessage(0, currentFileItem.GetFilePath() + " was added"));
-
-						file.close();
+						I_IF_DEBUG(SendInfoMessage(0, QObject::tr("File %1 was added").arg(currentFilePath)));
 					}
 					else{
-						m_nonAccessedFiles.insert(currentFileItem.GetFilePath());
+						m_nonAccessedFiles.insert(currentFilePath);
 					}
 				}
 			}
 		}
 
-		if (		(observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0 ||
-					(observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED)){
-			for (int fileIndex = 0; fileIndex < int(m_directoryFiles.size()); fileIndex++){
-				isys::CFileInfo& fileItem = m_directoryFiles[fileIndex];
-				QFileInfo fileInfo(iqt::GetQFileInfo(m_directoryFiles[fileIndex]));
+		if (		((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0) ||
+					((observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0)){
+			for (		ifpf::IMonitoringSession::FileItems::Iterator fileIter = m_directoryFiles.begin();
+						fileIter != m_directoryFiles.end();){
+				const QString& filePath = fileIter.key();
+				QFileInfo fileInfo(filePath);
 				if (!fileInfo.exists()){
 					continue;
 				}
 
 				if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
-					isys::CSimpleDateTime currentModifiedTime = iqt::GetCSimpleDateTime(fileInfo.lastModified());
-					isys::CSimpleDateTime previousModifiedTime = fileItem.GetModificationTime();
+					QDateTime currentModifiedTime = fileInfo.lastModified();
+					QDateTime& previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
-						modifiedFiles.push_back(fileInfo.absoluteFilePath());
+						QString filePath = fileInfo.canonicalFilePath();
+						modifiedFiles.push_back(filePath);
 
-						fileItem.SetModificationTime(currentModifiedTime);
+						previousModifiedTime = currentModifiedTime;
 
-						I_IF_DEBUG(SendInfoMessage(0, fileInfo.absoluteFilePath() + " was modified"));
+						I_IF_DEBUG(SendInfoMessage(0, QObject::tr("File % 1 was modified").arg(filePath)));
 					}
 				}
-
+/*
 				if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0){
 					QFile::Permissions currentPermissions = fileInfo.permissions();
 					QFile::Permissions previousPermissions = (QFile::Permissions)fileItem.GetPermissions();
 					if (currentPermissions != previousPermissions){
 						attributeChangedFiles.push_back(fileInfo.absoluteFilePath());
 
-						fileItem.SetPermissions(currentPermissions);
-
 						I_IF_DEBUG(SendInfoMessage(0, QString("Attributes of") + fileInfo.absoluteFilePath() + " have been changed"));
 					}
 				}
+*/
 			}
 		}
 
@@ -284,10 +278,10 @@ void CDirectoryMonitorComp::run()
 		}
 
 		Q_EMIT FolderChanged(changeFlags);
-		updateTimer.Start();
+		updateTimer.start();
 
 		I_IF_DEBUG(
-			double processingTime = measurementTimer.GetElapsed();
+			double processingTime = measurementTimer.elapsed() * 0.001;
 
 			SendInfoMessage(0,
 				QString("Folder monitoring of ") +
@@ -411,8 +405,9 @@ void CDirectoryMonitorComp::StopObserverThread()
 	m_finishThread = true;
 
 	// wait for 30 seconds for finishing of thread:
-	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass2::isRunning());
+	QElapsedTimer timer;
+	while (!timer.hasExpired(30000) && BaseClass2::isRunning());
+
 	if (BaseClass2::isRunning()){
 		BaseClass2::terminate();
 	}

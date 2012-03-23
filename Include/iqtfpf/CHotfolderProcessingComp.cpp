@@ -4,11 +4,10 @@
 // STL includes
 #include <algorithm>
 
-
 // Qt includes
 #include <QtCore/QDir>
 #include <QtGui/QApplication>
-
+#include <QtCore/QElapsedTimer>
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
@@ -21,8 +20,6 @@
 #include "iprm/IFileNameParam.h"
 
 #include "iproc/IProcessor.h"
-
-#include "iqt/CTimer.h"
 
 
 namespace iqtfpf
@@ -129,10 +126,7 @@ void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& pro
 		istd::CChangeNotifier changePtr(itemPtr);
 
 		itemPtr->SetProcessingState(processor.GetProcessingState());
-
-		isys::CSimpleDateTime startTime = iqt::GetCSimpleDateTime(processor.GetStartTime());
-		itemPtr->SetStartTime(startTime);
-
+		itemPtr->SetStartTime(processor.GetStartTime());
 		itemPtr->SetProcessingTime(processor.GetProcessingTime());
 	}
 }
@@ -266,8 +260,8 @@ void CHotfolderProcessingComp::ItemProcessor::Cancel()
 		return;
 	}
 
-	iqt::CTimer timer;
-	while (isRunning() && timer.GetElapsed() < 5000){
+	QElapsedTimer timer;
+	while (isRunning() && !timer.hasExpired(5000)){
 		qApp->processEvents();
 	}
 
@@ -291,11 +285,10 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 		return;
 	}
 
-	iqt::CTimer m_timer;
+	QElapsedTimer timer;
 	
 	if (!m_parent.m_fileConvertCompPtr->ConvertFile(m_inputFilePath, m_outputFilePath)){
-		QString message = QString("Processing of ") + m_inputFilePath + " failed";
-		m_parent.SendErrorMessage(0, message, "Hotfolder");
+		m_parent.SendErrorMessage(0, QObject::tr("Processing of  %1 failed").arg(m_inputFilePath), "Hotfolder");
 
 		m_processingState = iproc::IProcessor::TS_INVALID;
 	}
@@ -303,7 +296,7 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 		m_processingState = iproc::IProcessor::TS_OK;
 	}
 
-	m_processingTime = m_timer.GetElapsed();
+	m_processingTime = timer.elapsed() * 0.001;
 }
 
 

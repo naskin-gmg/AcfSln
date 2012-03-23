@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "isys/ITimer.h"
+#include "istd/ITimeStamp.h"
 
 
 namespace iinsp
@@ -21,7 +21,7 @@ public:
 		Get current processing the time stamp.
 		\return	timer representing time stamp or NULL if it is impossible to retrive it.
 	*/
-	virtual const isys::ITimer* GetCurrentTimeStamp() const = 0;
+	virtual const istd::ITimeStamp* GetCurrentTimeStamp() const = 0;
 };
 
 

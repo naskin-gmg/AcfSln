@@ -9,6 +9,7 @@
 #include <QtCore/QThread>
 #include <QtCore/QDir>
 #include <QtCore/QDateTime>
+#include <QtCore/QSet>
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
@@ -132,10 +133,9 @@ private:
 	};
 
 
-	typedef std::vector<isys::CFileInfo> FileItems;
-	typedef std::set<QString> FilesSet;
+	typedef QSet<QString> FilesSet;
 
-	FileItems m_directoryFiles;
+	ifpf::IMonitoringSession::FileItems m_directoryFiles;
 	FilesSet m_nonAccessedFiles;
 
 	mutable iqt::CCriticalSection m_lock;
