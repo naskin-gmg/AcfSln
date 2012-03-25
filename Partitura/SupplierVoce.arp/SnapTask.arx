@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2224
+          2245
         </Number>
         <Description>
           ACF
@@ -128,7 +128,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="5">
+    <Interface>
+      <InterfaceId>
+        i2d::ICalibrationProvider
+      </InterfaceId>
+      <ComponentId>
+        ImageTask
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iipr::IBitmapProvider

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1426
+          2246
         </Number>
         <Description>
           ACF
@@ -16,145 +16,6 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="9">
-    <Element>
-      <Id>
-        ProcessorControlGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ProcessorControlGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="7">
-          <AttributeInfo>
-            <Id>
-              LiveInterval
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              LiveInterval
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsLoader
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSetGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSetGui
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputData
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapView
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Processor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              AcquisitionProcessor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDataLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImageDialogLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
     <Element>
       <Id>
         Application
@@ -262,7 +123,7 @@
         AcfGuiVoce
       </PackageId>
       <ComponentId>
-        ControlledBitmapView
+        BitmapView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -353,45 +214,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              ApplicationName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                AcquisitionTest
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              CompanyName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -413,6 +236,145 @@
           0
         </Flags>
         <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProcessorControlGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        ProcessorControlGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              LiveInterval
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              LiveInterval
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputData
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapView
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputDataLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImageDialogLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsLoader
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSetGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Processor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              AcquisitionProcessor
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -545,21 +507,15 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="6">
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Application
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IApplicationInfo
-      </InterfaceId>
-      <ComponentId>
-        Info
       </ComponentId>
     </Interface>
     <Interface>
@@ -603,7 +559,4 @@
   <Keywords>
     Image Processing Data Acquisition
   </Keywords>
-  <Category>
-    65
-  </Category>
 </Acf>

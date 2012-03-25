@@ -37,7 +37,7 @@ public:
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
+	virtual const i2d::ITransformation2d* GetCalibration() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);

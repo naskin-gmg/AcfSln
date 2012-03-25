@@ -15,7 +15,7 @@ const iimg::IBitmap* CBitmapCacheComp::GetBitmap() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CBitmapCacheComp::GetLogicalTransform() const
+const i2d::ITransformation2d* CBitmapCacheComp::GetCalibration() const
 {
 	return m_transformPtr.GetPtr();
 }
@@ -37,7 +37,7 @@ bool CBitmapCacheComp::CopyFrom(const IChangeable& object)
 
 		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(&object);
 		if (calibrationProviderPtr != NULL){
-			const i2d::ITransformation2d* transformPtr = calibrationProviderPtr->GetLogicalTransform();
+			const i2d::ITransformation2d* transformPtr = calibrationProviderPtr->GetCalibration();
 			if (transformPtr != NULL){
 				m_transformPtr.SetCastedOrRemove(transformPtr->CloneMe());
 			}

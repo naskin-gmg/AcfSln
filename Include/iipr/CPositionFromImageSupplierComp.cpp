@@ -63,7 +63,7 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 
 			const i2d::ITransformation2d* logicalTransformPtr = NULL;	
 			if (m_calibrationProviderCompPtr.IsValid()){
-				logicalTransformPtr = m_calibrationProviderCompPtr->GetLogicalTransform();
+				logicalTransformPtr = m_calibrationProviderCompPtr->GetCalibration();
 			}
 
 			const i2d::CPosition2d* positionPtr = dynamic_cast<const i2d::CPosition2d*>(consumer.GetFeature());

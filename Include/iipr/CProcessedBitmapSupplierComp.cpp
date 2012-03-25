@@ -20,7 +20,7 @@ const iimg::IBitmap* CProcessedBitmapSupplierComp::GetBitmap() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CProcessedBitmapSupplierComp::GetLogicalTransform() const
+const i2d::ITransformation2d* CProcessedBitmapSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -69,7 +69,7 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 
 	if (m_workingLogTransformCompPtr.IsValid() && m_calibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* transformationPtr = m_calibrationProviderCompPtr->GetLogicalTransform();
+		const i2d::ITransformation2d* transformationPtr = m_calibrationProviderCompPtr->GetCalibration();
 		if (transformationPtr != NULL){
 			if (m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), transformationPtr, m_workingLogTransformCompPtr.GetPtr()) == iproc::IProcessor::TS_OK){
 				result.first = m_workingLogTransformCompPtr.GetPtr();

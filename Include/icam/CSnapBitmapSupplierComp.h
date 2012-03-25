@@ -41,7 +41,7 @@ public:
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetLogicalTransform() const;
+	virtual const i2d::ITransformation2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)

@@ -20,7 +20,7 @@ const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 	
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetLogicalTransform() const
+const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -43,7 +43,7 @@ int CDelegatedBitmapSupplierComp::ProduceObject(ProductType& result) const
 		result.second = m_inputBitmapProviderCompPtr->GetBitmap();
 
 		if (m_calibrationProviderCompPtr.IsValid()){
-			result.first = m_calibrationProviderCompPtr->GetLogicalTransform();
+			result.first = m_calibrationProviderCompPtr->GetCalibration();
 		}
 
 		if (result.second != NULL){
