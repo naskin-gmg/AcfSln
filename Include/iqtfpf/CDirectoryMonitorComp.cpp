@@ -108,7 +108,7 @@ void CDirectoryMonitorComp::run()
 	QElapsedTimer measurementTimer;
 
 	while (!m_finishThread){
-		bool needStateUpdate = updateTimer.hasExpired(m_poolingFrequency);
+		bool needStateUpdate = updateTimer.hasExpired(quint64(m_poolingFrequency * 1000));
 		if (!needStateUpdate || m_lockChanges){
 			msleep(100);
 

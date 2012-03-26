@@ -260,6 +260,7 @@ void CHotfolderProcessingComp::ItemProcessor::Cancel()
 		return;
 	}
 
+	// wait for 5 seconds for finishing of thread:
 	QElapsedTimer timer;
 	while (isRunning() && !timer.hasExpired(5000)){
 		qApp->processEvents();
