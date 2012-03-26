@@ -1,32 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1526
+          2246
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          224
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
         FileDialogLoader
@@ -59,13 +48,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="1">
                 <Value>
                   XmlFileSerializer
                 </Value>
-                <Value>
-                  GzXmlFileSerializer
-                </Value>
               </Values>
             </Data>
           </AttributeInfo>
@@ -78,101 +64,6 @@
             </Type>
             <ExportId>
               Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        GzXmlFileSerializer
-      </Id>
-      <PackageId>
-        ZlibPck
-      </PackageId>
-      <ComponentId>
-        GzXmlFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  cifix
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TypeDescriptions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Circle finder XML parameters
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -394,6 +285,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>

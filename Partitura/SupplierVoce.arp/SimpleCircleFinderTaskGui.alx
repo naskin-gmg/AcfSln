@@ -1,32 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1526
+          2246
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          224
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         FileDialogLoader
@@ -37,17 +26,9 @@
       <X>
         425
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GzXmlFileSerializer
-      </ComponentName>
-      <X>
-        300
-      </X>
-      <X>
-        575
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,6 +40,9 @@
       <X>
         300
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -70,17 +54,23 @@
       <X>
         300
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         XmlFileSerializer
       </ComponentName>
       <X>
-        600
+        325
       </X>
       <X>
-        575
+        550
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>

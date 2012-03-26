@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1189
+          2246
         </Number>
         <Description>
           ACF
@@ -15,182 +15,48 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="16">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         ComposedParamsSetGui
       </ComponentName>
       <X>
-        130
+        325
       </X>
       <X>
-        -88
+        275
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorBinder
-      </ComponentName>
-      <X>
-        178.013
-      </X>
-      <X>
-        -14.78
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParams
-      </ComponentName>
-      <X>
-        178.013
-      </X>
-      <X>
-        -14.78
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParamsBinder
-      </ComponentName>
-      <X>
-        178.013
-      </X>
-      <X>
-        -14.78
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         DirectoryMonitorParamsGui
       </ComponentName>
       <X>
-        391
+        675
       </X>
       <X>
-        25
+        400
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         DirectoryParamsGui
       </ComponentName>
       <X>
-        390.5
+        675
       </X>
       <X>
-        -182
+        175
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileNameParamGui
-      </ComponentName>
-      <X>
-        390.5
-      </X>
-      <X>
-        -146
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileParamsBinder
-      </ComponentName>
-      <X>
-        -240.5
-      </X>
-      <X>
-        -127.5
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePersistence
-      </ComponentName>
-      <X>
-        -213.391
-      </X>
-      <X>
-        74.5355
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        FolderMonitor
-      </ComponentName>
-      <X>
-        -12
-      </X>
-      <X>
-        -13
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        468.722
-      </X>
-      <X>
-        20.849
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LayoutGui
-      </ComponentName>
-      <X>
-        301.5
-      </X>
-      <X>
-        -184.5
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        -190
-      </X>
-      <X>
-        -0.5
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        MainLayout
-      </ComponentName>
-      <X>
-        476
-      </X>
-      <X>
-        -122
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        -146.5
-      </X>
-      <X>
-        -123.5
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlFileSerializer
-      </ComponentName>
-      <X>
-        -213
-      </X>
-      <X>
-        186
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>
