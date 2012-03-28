@@ -91,7 +91,7 @@ void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 
 			if (constraintsPtr != NULL){
 				valueWidgetPtr->SetUnitInfo(
-							constraintsPtr->GetNumericValueDescription(i),
+							constraintsPtr->GetNumericValueName(i),
 							constraintsPtr->GetNumericValueUnitInfo(i));
 			}
 

@@ -10,6 +10,9 @@ namespace imeas
 {
 
 
+/**
+	Simple base class for implementations of interface \c imeas::IDataSequenceInfo.
+*/
 class CDataSequenceInfoBase: virtual public imeas::IDataSequenceInfo
 {
 public:
@@ -18,6 +21,12 @@ public:
 	virtual int GetDefaultSamplesCount() const;
 	virtual int GetDefaultChannelsCount() const;
 	virtual int GetWeightMode() const;
+
+	// reimplemented (imeas::INumericConstraints)
+	virtual int GetNumericValuesCount() const;
+	virtual QString GetNumericValueName(int index) const;
+	virtual QString GetNumericValueDescription(int index) const;
+	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

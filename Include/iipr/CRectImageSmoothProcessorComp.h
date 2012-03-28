@@ -47,6 +47,7 @@ public:
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetNumericValuesCount() const;
+	virtual QString GetNumericValueName(int index) const;
 	virtual QString GetNumericValueDescription(int index) const;
 	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 

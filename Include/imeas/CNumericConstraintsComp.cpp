@@ -21,19 +21,24 @@ int CNumericConstraintsComp::GetNumericValuesCount() const
 }
 
 
-QString CNumericConstraintsComp::GetNumericValueDescription(int index) const
+QString CNumericConstraintsComp::GetNumericValueName(int index) const
 {
-	if (!(*m_elementDescriptionAttrPtr).isEmpty()){
-		if (*m_dimensionsCountAttrPtr > 1){
-			return *m_elementDescriptionAttrPtr + " " + QString().setNum(index + 1);
-		}
-		else{
-			return *m_elementDescriptionAttrPtr;
-		}
+	if (index < m_namesAttrPtr.GetCount()){
+		return m_namesAttrPtr[index];
 	}
 	else{
 		return QString().setNum(index + 1);
 	}
+}
+
+
+QString CNumericConstraintsComp::GetNumericValueDescription(int index) const
+{
+	if (index < m_descriptionsAttrPtr.GetCount()){
+		return m_descriptionsAttrPtr[index];
+	}
+
+	return QString();
 }
 
 

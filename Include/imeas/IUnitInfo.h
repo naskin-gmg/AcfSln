@@ -25,10 +25,26 @@ public:
 	*/
 	enum UnitType
 	{
+		/**
+			Unit type is unknown.
+		*/
 		UT_UNKNOWN,
+		/**
+			Physical unit like volt or amper.
+		*/
 		UT_PHYSICAL,
+		/**
+			Technical unit without physical dimension like pixel.
+		*/
 		UT_TECHNICAL,
-		UT_RELATIVE
+		/**
+			Unit relative to something others (for example %).
+		*/
+		UT_RELATIVE,
+		/**
+			Integer number counter, it represents number of occurence of something.
+		*/
+		UT_COUNTER
 	};
 
 	/**

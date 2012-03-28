@@ -15,6 +15,10 @@ namespace imeas
 {
 
 
+/**
+	Describe additional meta information for set of numeric values.
+	\sa imeas::INumericParams
+*/
 class INumericConstraints: virtual public istd::IChangeable
 {
 public:
@@ -24,12 +28,20 @@ public:
 	virtual int GetNumericValuesCount() const = 0;
 
 	/**
-		Get description of numeric value for specified list index.
+		Get human readable name of numeric value for specified list index.
+		\param	index	index of numeric value.
+	*/
+	virtual QString GetNumericValueName(int index) const = 0;
+
+	/**
+		Get human readable description of numeric value for specified list index.
+		\param	index	index of numeric value.
 	*/
 	virtual QString GetNumericValueDescription(int index) const = 0;
 
 	/**
 		Get range of possible numeric values for specified list index.
+		\param	index	index of numeric value.
 	*/
 	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const = 0;
 };

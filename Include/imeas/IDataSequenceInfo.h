@@ -3,10 +3,9 @@
 
 
 // ACF includes
-#include "istd/CRange.h"
 #include "iser/ISerializable.h"
 
-#include "imeas/imeas.h"
+#include "imeas/INumericConstraints.h"
 
 
 namespace imeas
@@ -16,7 +15,9 @@ namespace imeas
 /**
 	Stores additional data sequence data used to interpret samples value correctly.
 */
-class IDataSequenceInfo: virtual public iser::ISerializable
+class IDataSequenceInfo:
+			virtual public INumericConstraints,
+			virtual public iser::ISerializable
 {
 public:
 	enum SequenceInfoFlags

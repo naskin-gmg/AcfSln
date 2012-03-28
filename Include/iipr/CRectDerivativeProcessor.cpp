@@ -1,6 +1,9 @@
 #include "iipr/CRectDerivativeProcessor.h"
 
 
+// Qt includes
+#include <QtCore/QObject>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TSmartPtr.h"
@@ -139,9 +142,15 @@ int CRectDerivativeProcessor::GetNumericValuesCount() const
 }
 
 
-QString CRectDerivativeProcessor::GetNumericValueDescription(int /*dimension*/) const
+QString CRectDerivativeProcessor::GetNumericValueName(int /*dimension*/) const
 {
-	return "Filter length";
+	return QObject::tr("Filter");
+}
+
+
+QString CRectDerivativeProcessor::GetNumericValueDescription(int /*index*/) const
+{
+	return QObject::tr("Smoothing filter length, higher value makes insensible to data noise");
 }
 
 

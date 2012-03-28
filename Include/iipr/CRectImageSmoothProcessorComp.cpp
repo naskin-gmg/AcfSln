@@ -24,18 +24,38 @@ int CRectImageSmoothProcessorComp::GetNumericValuesCount() const
 }
 
 
-QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
+QString CRectImageSmoothProcessorComp::GetNumericValueName(int index) const
 {
 	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
-		return "Filter length";
+		return QObject::tr("Filter");
 	}
 	else{
 		switch (index){
 		case 0:
-			return "Filter width";
+			return QObject::tr("Filter width");
 
 		case 1:
-			return "Filter height";
+			return QObject::tr("Filter height");
+
+		default:
+			return "";
+		}
+	}
+}
+
+
+QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
+{
+	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
+		return QObject::tr("Bluring filter length");
+	}
+	else{
+		switch (index){
+		case 0:
+			return QObject::tr("Horizontal bluring filter length");
+
+		case 1:
+			return QObject::tr("Vertical bluring filter length");
 
 		default:
 			return "";
