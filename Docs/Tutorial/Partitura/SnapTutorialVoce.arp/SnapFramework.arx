@@ -15,28 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="15">
-    <Element>
-      <Id>
-        AudioDock
-      </Id>
-      <PackageId>
-        AcfSlnVoce
-      </PackageId>
-      <ComponentId>
-        AudioDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="9">
     <Element>
       <Id>
         Bitmap
@@ -60,13 +39,13 @@
     </Element>
     <Element>
       <Id>
-        BitmapDialogLoader
+        BitmapLoader
       </Id>
       <PackageId>
-        AcfGuiVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        BitmapDialogLoader
+        BitmapLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -91,7 +70,7 @@
                 true
               </IsEnabled>
               <Value>
-                LogDock
+                Log
               </Value>
             </Data>
           </AttributeInfo>
@@ -100,210 +79,7 @@
     </Element>
     <Element>
       <Id>
-        BitmapPersistenceGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        FilePersistenceGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              FileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapDialogLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Object
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowLoad
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        BitmapView
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        ImageView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              DefaultModel
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ImageGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ComposedGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Guis
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  BitmapView
-                </Value>
-                <Value>
-                  VideoGrabber
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LogDock
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        LogDock
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                StandaloneApp
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        MediaDialogLoader
+        ImageDialogLoader
       </Id>
       <PackageId>
         QtGuiPck
@@ -335,7 +111,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  MediaLoader
+                  BitmapLoader
                 </Value>
               </Values>
             </Data>
@@ -355,7 +131,7 @@
                 true
               </IsEnabled>
               <Value>
-                LogDock
+                Log
               </Value>
             </Data>
           </AttributeInfo>
@@ -364,13 +140,13 @@
     </Element>
     <Element>
       <Id>
-        MediaLoader
+        Log
       </Id>
       <PackageId>
-        QtMmPck
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        MediaLoader
+        LogDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -382,26 +158,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              AutoPlay
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
+              ApplicationInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -414,7 +171,26 @@
                 true
               </IsEnabled>
               <Value>
-                LogDock
+                StandaloneApp
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -423,13 +199,13 @@
     </Element>
     <Element>
       <Id>
-        MediaPersistenceGui
+        SnapGui
       </Id>
       <PackageId>
-        QtGuiPck
+        QtCameraPck
       </PackageId>
       <ComponentId>
-        FilePersistenceGui
+        SnapImageGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -438,10 +214,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              FileLoader
+              Bitmap
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -454,129 +230,29 @@
                 true
               </IsEnabled>
               <Value>
-                MediaDialogLoader
+                Bitmap
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Object
+              BitmapAcquisition
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              BitmapAcquisition
             </ExportId>
             <Data>
               <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VideoGrabber
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowSave
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
                 false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        PersistenceDock
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        DockWidgetGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              AllowedDockAreas
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
               </IsEnabled>
-              <Value>
-                3
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DockArea
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DockTitle
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Load and Save
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveGui
+              BitmapLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -589,8 +265,56 @@
                 true
               </IsEnabled>
               <Value>
-                PersistenceGui
+                ImageDialogLoader
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsLoader
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsLoader
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ParamsSetGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -598,13 +322,13 @@
     </Element>
     <Element>
       <Id>
-        PersistenceGui
+        SnapTab
       </Id>
       <PackageId>
-        QtGuiPck
+        QtViewPck
       </PackageId>
       <ComponentId>
-        ComposedGui
+        SceneConnector
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -616,10 +340,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Guis
+              ExtenderGui
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -628,22 +352,17 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  BitmapPersistenceGui
-                </Value>
-                <Value>
-                  MediaPersistenceGui
-                </Value>
-              </Values>
+              <Value>
+                SnapGui
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Names
+              SceneGui
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -652,14 +371,9 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Bitmap
-                </Value>
-                <Value>
-                  Media
-                </Value>
-              </Values>
+              <Value>
+                View
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -682,7 +396,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -691,33 +405,14 @@
               icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
-              
+              ApplicationName
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                AVLib Demo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial
+                IACF Tutorial Application
               </Value>
             </Data>
           </AttributeInfo>
@@ -742,21 +437,18 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              LegalCopyright
+              IsMenuVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              
+              IsMenuVisible
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -767,14 +459,14 @@
               icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
-              
+              MainVersionId
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                1
+                10
               </Value>
             </Data>
           </AttributeInfo>
@@ -793,7 +485,7 @@
                 true
               </IsEnabled>
               <Value>
-                ImageGui
+                SnapTab
               </Value>
             </Data>
           </AttributeInfo>
@@ -811,36 +503,11 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="1">
                 <Value>
-                  PersistenceDock
-                </Value>
-                <Value>
-                  LogDock
-                </Value>
-                <Value>
-                  AudioDock
+                  Log
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;QString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF-Solutions
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -870,7 +537,7 @@
         VersionInfo
       </Id>
       <PackageId>
-        AcfSlnVoce
+        IacfVoce
       </PackageId>
       <ComponentId>
         VersionInfo
@@ -888,13 +555,13 @@
     </Element>
     <Element>
       <Id>
-        VideoGrabber
+        View
       </Id>
       <PackageId>
-        AcfSlnVoce
+        QtViewPck
       </PackageId>
       <ComponentId>
-        VideoGrabber
+        ViewProvider
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -903,77 +570,44 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              CurrentAudio
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                AudioDock
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CurrentBitmap
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LogDock
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         StandaloneApp
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ibase::IApplicationInfo
+      </InterfaceId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ibase::IMessageConsumer
+      </InterfaceId>
+      <ComponentId>
+        Log
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::IVersionInfo
+      </InterfaceId>
+      <ComponentId>
+        VersionInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

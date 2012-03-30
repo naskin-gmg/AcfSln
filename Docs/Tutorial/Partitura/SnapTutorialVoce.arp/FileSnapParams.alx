@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1505
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          210
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        FileSnapParams
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <X>
+        275
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <X>
+        150
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>

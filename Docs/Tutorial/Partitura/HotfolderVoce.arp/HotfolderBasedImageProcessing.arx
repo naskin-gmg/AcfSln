@@ -1,24 +1,35 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2040
+          1564
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          246
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="3">
     <Element>
       <Id>
-        Application
+        App
       </Id>
       <PackageId>
         QtGuiPck
@@ -33,7 +44,45 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImageProcessingHotfolderFramework
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;QString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Icons/Hotfolder.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               MainGui
@@ -49,7 +98,45 @@
                 true
               </IsEnabled>
               <Value>
-                VideoView
+                ImageProcessingHotfolderFramework
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;QString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Style/Asc.ass
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TitleFormat
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;QString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                %1 by %2
               </Value>
             </Data>
           </AttributeInfo>
@@ -58,25 +145,25 @@
     </Element>
     <Element>
       <Id>
-        AutoPersistence
+        ImageProcessingHotfolderFramework
       </Id>
       <PackageId>
-        BasePck
+        HotfolderVoce
       </PackageId>
       <ComponentId>
-        AutoPersistence
+        ImageProcessingHotfolderFramework
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              FileLoader
+              ImageConverter
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -89,13 +176,13 @@
                 true
               </IsEnabled>
               <Value>
-                FileDialogLoader
+                SmoothProcessorFramework
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Object
+              ProcessingParamsDialog
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -108,26 +195,7 @@
                 true
               </IsEnabled>
               <Value>
-                VideoView
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StoreOnEnd
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
+                SmoothProcessorFramework
               </Value>
             </Data>
           </AttributeInfo>
@@ -136,13 +204,13 @@
     </Element>
     <Element>
       <Id>
-        FileDialogLoader
+        SmoothProcessorFramework
       </Id>
       <PackageId>
-        QtGuiPck
+        IacfTutorialVoce
       </PackageId>
       <ComponentId>
-        FileDialogLoader
+        SmoothProcessorFramework
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -154,10 +222,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Loaders
+              Log
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -166,77 +234,31 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MediaLoader
-                </Value>
-              </Values>
+              <Value>
+                ImageProcessingHotfolderFramework
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        MediaLoader
-      </Id>
-      <PackageId>
-        QtMmPck
-      </PackageId>
-      <ComponentId>
-        MediaLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        VideoView
-      </Id>
-      <PackageId>
-        QaxPck
-      </PackageId>
-      <ComponentId>
-        VlcVideoViewGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="0">
-  </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        App
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Simple demonstration of hotfolder processing.Image files will be copied from the observed input location to the output folder.
   </Description>
   <Keywords>
-    
+    Hotfoder Demo Tutorial Image Processing
   </Keywords>
 </Acf>
