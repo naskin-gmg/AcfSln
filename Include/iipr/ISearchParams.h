@@ -19,11 +19,6 @@ namespace iipr
 class ISearchParams: virtual public iser::ISerializable
 {
 public:
-	/**
-		Gets the region that is used for model search.
-	*/
-	virtual i2d::CRectangle GetSearchRegion() const = 0;
-		
 	/** 
 		Returns the model image. 
 	*/
