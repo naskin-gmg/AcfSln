@@ -8,17 +8,14 @@
 #include <QtCore/QDir>
 #include <QtGui/QApplication>
 #include <QtCore/QElapsedTimer>
+#include <QtCore/QMutexLocker>
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-
 #include "isys/IProcessEnvironment.h"
-#include "isys/CSectionBlocker.h"
-
 #include "iprm/IFileNameParam.h"
-
 #include "iproc/IProcessor.h"
 
 

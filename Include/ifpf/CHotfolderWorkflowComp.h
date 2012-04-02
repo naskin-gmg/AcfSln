@@ -5,22 +5,16 @@
 // STL includes
 #include <map>
 
-
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "istd/TChangeDelegator.h"
 #include "istd/TPointerVector.h"
-
-#include "isys/ICriticalSection.h"
-
 #include "icomp/CComponentBase.h"
-
 
 // AcfSln includes
 #include "ifpf/IHotfolderWorkflow.h"
 #include "ifpf/IHotfolderInfoManager.h"
 #include "ifpf/CHotfolderWorkflowItem.h"
-
 
 
 namespace ifpf

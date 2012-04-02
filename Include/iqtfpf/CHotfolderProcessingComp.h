@@ -5,19 +5,13 @@
 // Qt includes
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
-#include <QtCore/QList>
 #include <QtCore/QDateTime>
 
 // ACF includes
 #include "istd/TPointerVector.h"
-#include "imod/TModelWrap.h"
-#include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "ibase/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/IParamsManager.h"
-#include "iqt/CCriticalSection.h"
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingInfo.h"

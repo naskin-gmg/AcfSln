@@ -5,17 +5,15 @@
 // STL includes
 #include <map>
 
+// Qt includes
+#include <QtCore/QMutex>
 
 // ACF includes
 #include "istd/TOptPointerVector.h"
 #include "istd/TDelPtr.h"
 #include "istd/TSmartPtr.h"
 #include "istd/TChangeDelegator.h"
-
-#include "isys/ICriticalSection.h"
-
 #include "imod/TModelWrap.h"
-
 
 // AcfSln includes
 #include "ifpf/IHotfolderProcessingInfo.h"
@@ -64,7 +62,7 @@ protected:
 
 	bool m_isWorking;
 
-	istd::TSmartPtr<isys::ICriticalSection> m_lockPtr;
+	mutable QMutex m_mutex;
 };
 
 

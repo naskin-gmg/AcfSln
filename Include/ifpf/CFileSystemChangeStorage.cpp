@@ -1,32 +1,23 @@
 #include "ifpf/CFileSystemChangeStorage.h"
 
 
+// Qt includes
+#include <QtCore/QMutexLocker>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-
-#include "isys/CSectionBlocker.h"
 
 
 namespace ifpf
 {
 
 
-// public methods
-
-CFileSystemChangeStorage::CFileSystemChangeStorage()
-{
-	m_lockPtr = istd::CreateService<isys::ICriticalSection>();
-
-	I_ASSERT(m_lockPtr.IsValid());
-}
-
-
 // reimplemented (ifpf::IFileSystemChangeStorage)
 
 int CFileSystemChangeStorage::GetStorageItemsCount() const
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	QMutexLocker locker(&m_mutex);
 
 	int itemsCount = int(m_storageItems.size());
 
@@ -36,7 +27,7 @@ int CFileSystemChangeStorage::GetStorageItemsCount() const
 
 QString CFileSystemChangeStorage::GetItemPath(int fileIndex) const
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	QMutexLocker locker(&m_mutex);
 
 	I_ASSERT(fileIndex >= 0);
 	I_ASSERT(fileIndex < int(m_storageItems.size()));
@@ -49,7 +40,7 @@ QString CFileSystemChangeStorage::GetItemPath(int fileIndex) const
 
 int CFileSystemChangeStorage::GetItemState(int fileIndex) const
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	QMutexLocker locker(&m_mutex);
 
 	I_ASSERT(fileIndex >= 0);
 	I_ASSERT(fileIndex < int(m_storageItems.size()));
@@ -62,7 +53,7 @@ int CFileSystemChangeStorage::GetItemState(int fileIndex) const
 
 void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int itemFlags)
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	QMutexLocker locker(&m_mutex);
 
 	istd::CChangeNotifier changePtr(this, itemFlags);
 
@@ -83,7 +74,7 @@ void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int itemFl
 
 void CFileSystemChangeStorage::ResetStorage()
 {
-	isys::CSectionBlocker lock(const_cast<isys::ICriticalSection*>(m_lockPtr.GetPtr()));
+	QMutexLocker locker(&m_mutex);
 
 	istd::CChangeNotifier changePtr(this);
 

@@ -1,15 +1,14 @@
 #include "ifpf/CVisualHotfolderWorkflowComp.h"
 
 
+// Qt includes
+#include <QtCore/QMutexLocker>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-
-#include "isys/CSectionBlocker.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
 #include "iproc/IProcessor.h"
 
 
