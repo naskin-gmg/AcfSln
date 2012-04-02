@@ -22,6 +22,12 @@ CSearchParams::CSearchParams()
 
 // reimplemented (iipr::ISearchParams)
 
+const ISearchConstraints* CSearchParams::GetSearchConstraints() const
+{
+	return NULL;
+}
+
+
 double CSearchParams::GetMinScore() const
 {
 	return m_minScore;

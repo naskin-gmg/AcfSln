@@ -539,6 +539,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ISearchConstraints.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ISearchModel.h"
 				>
 			</File>

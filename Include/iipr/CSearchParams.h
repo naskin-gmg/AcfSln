@@ -20,6 +20,7 @@ public:
 	CSearchParams();
 	
 	// reimplemented (iipr::ISearchParams)
+	virtual const ISearchConstraints* GetSearchConstraints() const;
 	virtual double GetMinScore() const;
 	virtual void SetMinScore(double minScore);
 	virtual const istd::CRange& GetRotationRange() const;
