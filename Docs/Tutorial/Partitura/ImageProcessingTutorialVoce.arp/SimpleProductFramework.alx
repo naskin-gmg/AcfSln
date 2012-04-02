@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2240
+          2257
         </Number>
         <Description>
           ACF
@@ -15,17 +15,20 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
         AboutDialog
       </ComponentName>
       <X>
-        675
+        475
       </X>
       <X>
         250
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -37,39 +40,37 @@
       <X>
         125
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InspectionGui
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        400
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         InspectionTask
       </ComponentName>
       <X>
-        911.314
+        1050
       </X>
       <X>
-        575.549
+        600
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         InspectionTaskEditor
       </ComponentName>
       <X>
-        886.314
+        1000
       </X>
       <X>
-        125.549
+        100
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -81,17 +82,23 @@
       <X>
         600
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         StandaloneApp
       </ComponentName>
       <X>
-        575
+        675
       </X>
       <X>
         400
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -101,8 +108,11 @@
         350
       </X>
       <X>
-        250
+        425
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -114,6 +124,9 @@
       <X>
         100
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>

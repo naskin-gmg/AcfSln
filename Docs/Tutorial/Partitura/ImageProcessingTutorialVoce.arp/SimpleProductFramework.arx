@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2240
+          2257
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="8">
     <Element>
       <Id>
         AboutDialog
@@ -135,65 +135,6 @@
     </Element>
     <Element>
       <Id>
-        InspectionGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ModelEditorGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Model
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InspectionTask
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveEditorGui
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InspectionTaskEditor
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         InspectionTask
       </Id>
       <PackageId>
@@ -265,7 +206,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              DefaultModel
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InspectionTask
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DesignType
@@ -606,7 +566,7 @@
                 true
               </IsEnabled>
               <Value>
-                InspectionGui
+                InspectionTaskEditor
               </Value>
             </Data>
           </AttributeInfo>
