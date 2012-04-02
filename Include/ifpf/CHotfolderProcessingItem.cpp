@@ -1,10 +1,12 @@
 #include "ifpf/CHotfolderProcessingItem.h"
 
 
+// Qt includes
+#include <QtCore/QUuid>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-#include "isys/ISystemEnvironment.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "iser/CPrimitiveTypesSerializer.h"
@@ -28,11 +30,7 @@ CHotfolderProcessingItem::CHotfolderProcessingItem()
 std::string CHotfolderProcessingItem::GetItemUuid() const
 {
 	if (m_itemId.empty()){
-		isys::ISystemEnvironment* systemEnvironmentPtr = istd::GetService<isys::ISystemEnvironment>();
-		I_ASSERT(systemEnvironmentPtr != NULL);
-		if (systemEnvironmentPtr != NULL){
-			m_itemId = systemEnvironmentPtr->GetUniqueIdentifier().toStdString();
-		}
+		m_itemId = QUuid::createUuid().toString().toStdString();
 	}
 
 	return m_itemId;
