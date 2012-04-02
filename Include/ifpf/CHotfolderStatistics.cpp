@@ -1,12 +1,13 @@
 #include "ifpf/CHotfolderStatistics.h"
 
 
+// Qt includes
+#include <QFileInfo>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
 #include "istd/CChangeDelegator.h"
-
-#include "isys/IFileSystem.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -184,12 +185,7 @@ QString CHotfolderStatistics::GetDirectoryPath(const ifpf::IHotfolderProcessingI
 {
 	QString filePath = item.GetInputFile();
 
-	isys::IFileSystem* systemPtr = istd::GetService<isys::IFileSystem>();
-	if (systemPtr != NULL){
-		return systemPtr->GetDirPath(filePath);
-	}
-
-	return QString();
+	return QFileInfo(filePath).absolutePath();
 }
 
 

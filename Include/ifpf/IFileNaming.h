@@ -18,7 +18,6 @@ class IFileNaming: virtual public istd::IPolymorphic
 public:
 	/**
 		Get the new file path for a given input file name.
-		\sa isys::IFileSystem
 	*/
 	virtual QString GetFilePath(const QString& inputFileName) const = 0;
 };

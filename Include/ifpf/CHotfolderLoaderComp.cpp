@@ -1,6 +1,10 @@
 #include "ifpf/CHotfolderLoaderComp.h"
 
 
+// Qt includes
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
@@ -100,14 +104,9 @@ QString CHotfolderLoaderComp::GetTypeDescription(const QString* extensionPtr) co
 
 QString CHotfolderLoaderComp::GetStaticParamsPath(const QString& objectPath) const
 {
-	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
-	I_ASSERT(fileSystemPtr != NULL);
+	QFileInfo fileInfo(objectPath);
 
-	if (fileSystemPtr == NULL){
-		return QString();
-	}
-
-	return (fileSystemPtr->GetDirPath(objectPath) + "/" + fileSystemPtr->GetBaseFileName(objectPath) + ".dms");
+	return fileInfo.dir().absoluteFilePath(fileInfo.baseName() + ".dms");
 }
 
 
