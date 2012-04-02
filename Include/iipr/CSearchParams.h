@@ -1,10 +1,12 @@
 #ifndef iipr_CSearchParams_included
 #define iipr_CSearchParams_included
-#include "iipr/ISearchParams.h"
 
 
 // ACF includes
 #include "iimg/CGeneralBitmap.h"
+
+// ACF-Solutions includes
+#include "iipr/ISearchParams.h"
 
 
 namespace iipr
