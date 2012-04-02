@@ -12,12 +12,20 @@ namespace iipr
 {
 
 
+class ISearchConstraints;
+
+
 /**	
 	Common interface for a set of parameters for a model search.
 */
 class ISearchParams: virtual public iser::ISerializable
 {
 public:
+	/**
+		Get constraints for the search parameters.
+	*/
+	virtual const ISearchConstraints* GetSearchConstraints() const = 0;
+
 	/**
 		Get minimum score for a succefull search.
 	*/

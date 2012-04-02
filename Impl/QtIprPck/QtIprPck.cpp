@@ -43,6 +43,11 @@ I_EXPORT_COMPONENT(
 			"GUI to parametrize the circle finder",
 			"GUI Observer Caliper Circle Parameters Qt");
 
+I_EXPORT_COMPONENT(
+			SearchBasedFeaturesSupplierGui,
+			"GUI for search based position supplier",
+			"GUI Observer Supplier Search Image Processing Qt");
+
 
 } // namespace QtIprPck
 

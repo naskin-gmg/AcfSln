@@ -184,6 +184,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CValueSupplierGuiComp.cpp"
 				>
 			</File>
@@ -214,6 +222,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CValueSupplierGuiComp.h"
 				>
 			</File>
@@ -228,6 +240,30 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="false"
 			>
+		</Filter>
+		<Filter
+			Name="Forms"
+			>
+			<File
+				RelativePath="..\CCaliperParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -247,6 +283,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CValueSupplierGuiComp.cpp"
 				>
 			</File>
@@ -263,27 +303,11 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_CSearchBasedFeaturesSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CValueSupplierGuiComp.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-			<File
-				RelativePath="..\CCaliperParamsGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CCircleFinderParamsGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CValueSupplierGuiComp.ui"
 				>
 			</File>
 		</Filter>

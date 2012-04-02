@@ -1,0 +1,103 @@
+#ifndef iqtipr_CSearchBasedFeaturesSupplierGuiComp_included
+#define iqtipr_CSearchBasedFeaturesSupplierGuiComp_included
+
+
+// ACF includes
+#include "imod/IObserver.h"
+#include "imod/TModelWrap.h"
+#include "imod/CSingleModelObserverBase.h"
+#include "i2d/CCircle.h"
+#include "iqtgui/IGuiObject.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+// ACF-Solutions includes
+#include "iqtinsp/TSupplierGuiCompBase.h"
+
+#include "iqtipr/iqtipr.h"
+
+#include "iqtipr/Generated/ui_CSearchBasedFeaturesSupplierGuiComp.h"
+
+
+namespace iqtipr
+{
+
+
+class CSearchBasedFeaturesSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CSearchBasedFeaturesSupplierGuiComp>
+{
+	Q_OBJECT
+
+public:
+	typedef iqtinsp::TSupplierGuiCompBase<Ui::CSearchBasedFeaturesSupplierGuiComp> BaseClass;
+
+	enum ColumnType
+	{
+		CT_SCORE,
+		CT_X,
+		CT_Y,
+		CT_ANGLE,
+		CT_X_SCALE,
+		CT_Y_SCALE
+	};
+
+	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierGuiComp);
+		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
+	I_END_COMPONENT;
+
+	CSearchBasedFeaturesSupplierGuiComp();
+
+protected Q_SLOTS:
+	void on_TestButton_clicked();
+	void on_LoadParamsButton_clicked();
+	void on_SaveParamsButton_clicked();
+
+protected:
+	class ParamsObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		ParamsObserver(CSearchBasedFeaturesSupplierGuiComp* parentPtr);
+
+		using imod::CSingleModelObserverBase::EnsureModelDetached;
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CSearchBasedFeaturesSupplierGuiComp& m_parent;
+	};
+
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
+	virtual QWidget* GetParamsWidget() const;
+
+	// reimplemented (iqt2d::TSceneExtenderCompBase)
+	virtual void CreateShapes(int sceneId, Shapes& result);
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+	virtual void UpdateGui(int updateFlags = 0);
+
+	// reimplemented (iqtgui::IGuiObject)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
+	// reimplemented (icomp::IComponentBase)
+	virtual void OnComponentDestroyed();
+
+private:
+	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
+
+	typedef imod::TModelWrap<i2d::CCircle> PositionModel;
+	typedef istd::TPointerVector<PositionModel> PositionList;
+
+	PositionList m_foundPositions;
+
+	ParamsObserver m_paramsObserver;
+};
+
+
+} // namespace iqtipr
+
+
+#endif // !iqtipr_CSearchBasedFeaturesSupplierGuiComp_included
+
+
