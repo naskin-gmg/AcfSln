@@ -22,12 +22,6 @@ CSearchParams::CSearchParams()
 
 // reimplemented (iipr::ISearchParams)
 
-const iimg::IBitmap& CSearchParams::GetModelImage() const
-{
-	return m_modelImage;
-}
-
-
 double CSearchParams::GetMinScore() const
 {
 	return m_minScore;
@@ -157,11 +151,6 @@ bool CSearchParams::Serialize(iser::IArchive & archive)
 	retVal = retVal && archive.BeginTag(nominalModelsCountTag);
 	retVal = retVal && archive.Process(m_nominalModelsCount);
 	retVal = retVal && archive.EndTag(nominalModelsCountTag);
-
-	static iser::CArchiveTag modelImageTag("ModelImage", "Teached model image");
-	retVal = retVal && archive.BeginTag(modelImageTag);
-	retVal = retVal && m_modelImage.Serialize(archive);
-	retVal = retVal && archive.EndTag(modelImageTag);
 
 	return retVal;
 }

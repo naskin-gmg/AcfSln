@@ -19,11 +19,6 @@ namespace iipr
 class ISearchParams: virtual public iser::ISerializable
 {
 public:
-	/** 
-		Returns the model image. 
-	*/
-	virtual const iimg::IBitmap& GetModelImage() const = 0;
-
 	/**
 		Get minimum score for a succefull search.
 	*/
