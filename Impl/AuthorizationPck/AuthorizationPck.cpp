@@ -8,8 +8,6 @@ namespace AuthorizationPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES
-
 I_EXPORT_PACKAGE(
 			"AuthorizationPck",
 			"Package for security and authorization components",

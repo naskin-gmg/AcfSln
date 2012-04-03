@@ -20,8 +20,6 @@ namespace QtMeasPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES;
-
 I_EXPORT_PACKAGE(
 			"AcfSln/Measure/GUI",
 			"Qt dependent package for sampling, measurement acquisition and related thema",

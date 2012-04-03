@@ -8,8 +8,6 @@ namespace MeasPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES;
-
 I_EXPORT_PACKAGE(
 			"AcfSln/Measure",
 			"System-undependent package for sampling, measurement acquisition and related thema",

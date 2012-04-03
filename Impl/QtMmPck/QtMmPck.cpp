@@ -3,8 +3,6 @@
 
 #include "icomp/export.h"
 
-#include "iqt/CDefaultServicesProvider.h"
-
 
 namespace QtMmPck
 {
@@ -12,8 +10,6 @@ namespace QtMmPck
 
 using namespace icomp;
 
-
-I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 I_EXPORT_PACKAGE(
 			"QtMm",

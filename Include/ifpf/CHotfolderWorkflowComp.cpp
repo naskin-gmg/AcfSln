@@ -7,7 +7,6 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "istd/CStaticServicesProvider.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "iproc/IProcessor.h"

@@ -3,8 +3,6 @@
 
 #include "icomp/export.h"
 
-#include "iqt/CDefaultServicesProvider.h"
-
 
 namespace PropPck
 {
@@ -19,8 +17,6 @@ static struct StaticInit
 
 } instance;
 
-
-I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 I_EXPORT_PACKAGE(
 			"PropPck",

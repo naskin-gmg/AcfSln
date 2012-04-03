@@ -3,7 +3,6 @@
 
 
 #include "iproc/iproc.h"
-#include "isys/isys.h"
 #include "iimg/iimg.h"
 #include "icomp/icomp.h"
 
@@ -15,7 +14,6 @@
 	\li	istd
 	\li	iser
 	\li	ibase
-	\li isys
 	\li	iproc
 	\li	iimg
 	\li	icomp

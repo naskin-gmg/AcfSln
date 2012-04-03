@@ -8,8 +8,6 @@ namespace InspectionPck
 {
 
 
-I_EXPORT_DEFAULT_SERVICES
-
 I_EXPORT_PACKAGE(
 			"InsopectionPck",
 			"General, system-independent image processing package",
