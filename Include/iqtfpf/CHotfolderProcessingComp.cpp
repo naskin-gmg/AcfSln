@@ -14,7 +14,6 @@
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
-#include "isys/IProcessEnvironment.h"
 #include "iprm/IFileNameParam.h"
 #include "iproc/IProcessor.h"
 
