@@ -4,7 +4,6 @@
 // Qt includes
 #include <QtCore/QDir>
 
-
 // ACF includes
 #include "icomp/export.h"
 
@@ -43,6 +42,11 @@ I_EXPORT_COMPONENT(
 			SearchBasedFeaturesSupplierGui,
 			"GUI for search based position supplier",
 			"GUI Observer Supplier Search Image Processing Qt");
+
+I_EXPORT_COMPONENT(
+			GeneralSearchParamsGui,
+			"GUI for general search parameters",
+			"GUI Observer Search Parameters Qt");
 
 
 } // namespace QtIprPck

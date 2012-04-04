@@ -172,6 +172,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralSearchParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGeneralSearchParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
@@ -214,6 +222,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralSearchParamsGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
@@ -253,6 +265,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralSearchParamsGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
 				>
 			</File>
@@ -279,6 +295,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CGeneralSearchParamsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
@@ -296,6 +316,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CCircleFinderParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CGeneralSearchParamsGuiComp.h"
 				>
 			</File>
 			<File
