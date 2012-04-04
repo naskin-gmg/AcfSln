@@ -13,7 +13,7 @@ CIdCacheComp::CIdCacheComp()
 
 // reimplemented (iinsp::IIdProvider)
 
-I_DWORD CIdCacheComp::GetCurrentId() const
+quint32 CIdCacheComp::GetCurrentId() const
 {
 	return m_currentId;
 }

@@ -39,7 +39,7 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 		}
 	}
 
-	double halfRealLength = istd::Max(1.0, filterLength * 0.5);
+	double halfRealLength = qMax(1.0, filterLength * 0.5);
 
 	int sumOffset = int(halfRealLength);
 	double sumLastAlpha = halfRealLength - sumOffset;

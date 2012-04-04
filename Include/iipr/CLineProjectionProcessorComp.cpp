@@ -22,7 +22,7 @@ namespace iipr
 
 template <class PixelConversion>
 bool ProjectionFunction(
-			const I_BYTE* firstPixelAddress,
+			const quint8* firstPixelAddress,
 			const istd::CIndex2d axisSizes,
 			const istd::CIndex2d addressDiffs,
 			const i2d::CLine2d& projectionLine,
@@ -62,7 +62,7 @@ bool ProjectionFunction(
 
 		int sampleIndex = 0;
 		for (int axis1Index = axis1Begin; axis1Index < axis1End; ++axis1Index, axis2Position += axis2Delta, ++sampleIndex){
-			const I_BYTE* firstLinePixelAddress = firstPixelAddress + (axis1Index * addressDiffs[0]);
+			const quint8* firstLinePixelAddress = firstPixelAddress + (axis1Index * addressDiffs[0]);
 
 			int axis2Index = int(axis2Position);
 			typename PixelConversion::CalcPixelType value;
@@ -80,7 +80,7 @@ bool ProjectionFunction(
 					I_ASSERT(alpha <= 1);
 
 					int axis2Offset = axis2Index * addressDiffs[1];
-					const I_BYTE* pixelPtr = (firstLinePixelAddress + axis2Offset);
+					const quint8* pixelPtr = (firstLinePixelAddress + axis2Offset);
 					value =	typename PixelConversion::CalcPixelType(
 								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr)) * alpha +
 								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr - addressDiffs[1])) * (1 - alpha));
@@ -115,7 +115,7 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 	}
 
 	istd::CIndex2d addressDiffs(bytesPerPixel, bitmap.GetLinesDifference());
-	const I_BYTE* firstPixelAddress = (const I_BYTE*)bitmap.GetLinePtr(0);
+	const quint8* firstPixelAddress = (const quint8*)bitmap.GetLinePtr(0);
 	i2d::CLine2d transformedLine = projectionLine;
 	i2d::CVector2d diffVector = projectionLine.GetDiffVector();
 

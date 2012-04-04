@@ -47,7 +47,7 @@ int CRingPatternGeneratorComp::DoProcessing(
 
 	double maxRadius = halfHeight - waveLength / 2.0; // margin
 	for( int y = 0; y < outputImageHeight; y++){
-		I_BYTE* imageLinePtr = (I_BYTE*)outputBitmapPtr->GetLinePtr(y);
+		quint8* imageLinePtr = (quint8*)outputBitmapPtr->GetLinePtr(y);
 		for(int x = 0; x < outputImageWidth; x++){
 			int dx = x - halfWidth;
 			int dy = y - halfHeight;
@@ -68,7 +68,7 @@ int CRingPatternGeneratorComp::DoProcessing(
 
 			double outputValue = cos(radius * usedFrequency * I_2PI);
 				
-			*(imageLinePtr + x) = I_BYTE(127 * outputValue + 128);
+			*(imageLinePtr + x) = quint8(127 * outputValue + 128);
 		}
 	}
 	

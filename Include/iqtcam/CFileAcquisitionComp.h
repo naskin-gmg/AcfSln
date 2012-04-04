@@ -60,14 +60,14 @@ protected:
 
 		QStringList files;
 		QStringList::Iterator filesIter;
-		I_DWORD idStamp;
+		quint32 idStamp;
 	};
 
 private:
 	typedef std::map<QString, ParamsInfo> DirInfos;
 	DirInfos m_dirInfos;
 
-	I_DWORD m_lastIdStamp;
+	quint32 m_lastIdStamp;
 
 	istd::CIndex2d m_lastImageSize;
 

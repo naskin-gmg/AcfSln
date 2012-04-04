@@ -36,8 +36,8 @@ public:
 				int sampleDepth,
 				int channelsCount = 1);
 	virtual int GetSampleDepth() const;
-	virtual I_DWORD GetDiscrSample(int position, int channel = 0) const;
-	virtual bool SetDiscrSample(int position, int channel, I_DWORD sample);
+	virtual quint32 GetDiscrSample(int position, int channel = 0) const;
+	virtual bool SetDiscrSample(int position, int channel, quint32 sample);
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
@@ -123,18 +123,18 @@ int TDiscreteDataSequence<Element>::GetSampleDepth() const
 
 
 template <typename Element>
-I_DWORD TDiscreteDataSequence<Element>::GetDiscrSample(int position, int channel) const
+quint32 TDiscreteDataSequence<Element>::GetDiscrSample(int position, int channel) const
 {
-	const Element& element = *(const Element*)((const I_BYTE*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
+	const Element& element = *(const Element*)((const quint8*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
 	return element;
 }
 
 
 template <typename Element>
-bool TDiscreteDataSequence<Element>::SetDiscrSample(int position, int channel, I_DWORD sample)
+bool TDiscreteDataSequence<Element>::SetDiscrSample(int position, int channel, quint32 sample)
 {
-	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
+	Element& element = *(Element*)((quint8*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
 	element = Element(sample);
 
@@ -237,7 +237,7 @@ int TDiscreteDataSequence<Element>::GetChannelsCount() const
 template <typename Element>
 double TDiscreteDataSequence<Element>::GetSample(int index, int channel) const
 {
-	const Element& element = *(const Element*)((const I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
+	const Element& element = *(const Element*)((const quint8*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
 	return double(element) / m_normFactor;
 }
@@ -246,7 +246,7 @@ double TDiscreteDataSequence<Element>::GetSample(int index, int channel) const
 template <typename Element>
 void TDiscreteDataSequence<Element>::SetSample(int index, int channel, double value)
 {
-	Element& element = *(Element*)((I_BYTE*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
+	Element& element = *(Element*)((quint8*)m_sampleBuffer.GetPtr() + index * m_sampleDiff + channel * m_channelDiff);
 
 	element = Element(value * m_normFactor - I_BIG_EPSILON);
 }
@@ -378,10 +378,10 @@ bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 }
 
 
-typedef TDiscreteDataSequence<I_BYTE> CSimpleSamplesSequence8;
-typedef TDiscreteDataSequence<I_WORD> CSimpleSamplesSequence16;
-typedef TDiscreteDataSequence<I_DWORD> CSimpleSamplesSequence32;
-typedef TDiscreteDataSequence<I_QWORD> CSimpleSamplesSequence64;
+typedef TDiscreteDataSequence<quint8> CSimpleSamplesSequence8;
+typedef TDiscreteDataSequence<quint16> CSimpleSamplesSequence16;
+typedef TDiscreteDataSequence<quint32> CSimpleSamplesSequence32;
+typedef TDiscreteDataSequence<quint64> CSimpleSamplesSequence64;
 
 
 } // namespace imeas

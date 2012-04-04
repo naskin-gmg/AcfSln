@@ -57,8 +57,8 @@ void CSampleAcquisitionGuiComp::OnGuiCreated()
 		areParamsEditable = true;
 	}
 
-	double minDisplayedValue = istd::Min(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
-	double maxDisplayedValue = istd::Max(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
+	double minDisplayedValue = qMin(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
+	double maxDisplayedValue = qMax(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
 	m_samplesView.SetDisplayedRange(istd::CRange(minDisplayedValue, maxDisplayedValue));
 
 	m_samples.AttachObserver(&m_samplesView);

@@ -90,7 +90,7 @@ bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 }
 
 
-typedef TUnaryTransformProcessorComp<I_BYTE, InvertFunction<I_BYTE> > CInvertOperatorComp;
+typedef TUnaryTransformProcessorComp<quint8, InvertFunction<quint8> > CInvertOperatorComp;
 
 
 } // namespace iipr

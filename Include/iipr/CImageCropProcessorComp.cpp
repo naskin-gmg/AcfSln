@@ -82,7 +82,7 @@ bool CImageCropProcessorComp::ConvertImage(
 	}
 
 	int outputBitmapLineSize = outputBitmap.GetLineBytesCount();
-	I_BYTE* outputImageBufferPtr = (I_BYTE*)outputBitmap.GetLinePtr(0);
+	quint8* outputImageBufferPtr = (quint8*)outputBitmap.GetLinePtr(0);
 	memset(outputImageBufferPtr, 0, outputBitmapLineSize * outputBitmap.GetImageSize().GetY()); 
 
 	int regionLeft = int(regionRect.GetLeft());
@@ -99,7 +99,7 @@ bool CImageCropProcessorComp::ConvertImage(
 		I_ASSERT((y - regionTop) >= 0);
 		I_ASSERT((y - regionTop) < outputBitmap.GetImageSize().GetY());
 
-		I_BYTE* outputImageLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(y - regionTop);
+		quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y - regionTop);
 
 		for (int rangeIndex = 0; rangeIndex < int(rangesPtr->size()); rangeIndex++){
 			const iimg::CBitmapRegion::PixelRange& pixelRange = rangesPtr->at(rangeIndex);
@@ -107,7 +107,7 @@ bool CImageCropProcessorComp::ConvertImage(
 			int rangeStart = int(pixelRange.range.GetMinValue()) - regionLeft;
 			int rangeEnd = int(pixelRange.range.GetMaxValue()) - regionLeft;
 
-			I_BYTE* inputImagePtr = ((I_BYTE*)pixelRange.pixelBufferPtr);
+			quint8* inputImagePtr = ((quint8*)pixelRange.pixelBufferPtr);
 			
 			for (int x = rangeStart; x < rangeEnd; x++){
 				I_ASSERT(x < outputBitmap.GetImageSize().GetX());

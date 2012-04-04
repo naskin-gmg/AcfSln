@@ -98,11 +98,11 @@ int CFileAcquisitionComp::DoProcessing(
 
 	if (int(m_dirInfos.size()) > *m_maxCachedDirectoriesAttrPtr){
 		DirInfos::iterator maxIdStampDiffIter = m_dirInfos.end();
-		I_DWORD maxIdStampDiff = 0;
+		quint32 maxIdStampDiff = 0;
 		for (		DirInfos::iterator iter = m_dirInfos.begin();
 					iter != m_dirInfos.end();
 					++iter){
-			I_DWORD idStampDiff = m_lastIdStamp - iter->second.idStamp;
+			quint32 idStampDiff = m_lastIdStamp - iter->second.idStamp;
 			if (idStampDiff >= maxIdStampDiff){
 				maxIdStampDiff = idStampDiff;
 				maxIdStampDiffIter = iter;

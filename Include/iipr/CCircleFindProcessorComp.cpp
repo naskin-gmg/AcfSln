@@ -167,7 +167,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 
 		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
 		if (circleFinderParams.GetRaysCount() >= 3){
-			stepsCount = istd::Min(stepsCount, circleFinderParams.GetRaysCount());
+			stepsCount = qMin(stepsCount, circleFinderParams.GetRaysCount());
 		}
 
 		for (int i = 0; i < stepsCount; ++i){
@@ -340,8 +340,8 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 	double relPosNorm = relX * relX + relY * relY;
 	double radius1 = sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2)));
 	double radius2 = sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 3)));
-	result.SetInnerRadius(istd::Min(radius1, radius2));
-	result.SetOuterRadius(istd::Max(radius1, radius2));
+	result.SetInnerRadius(qMin(radius1, radius2));
+	result.SetOuterRadius(qMax(radius1, radius2));
 
 	result.SetWeight(weightSum / (inRaysCount + outRaysCount));
 

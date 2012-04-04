@@ -27,7 +27,7 @@ namespace imeas
 struct PrefixHeader
 {
 	char code[4];
-	I_DWORD size;
+	quint32 size;
 };
 
 struct WavHeader: public PrefixHeader
@@ -37,16 +37,16 @@ struct WavHeader: public PrefixHeader
 
 struct FmtHeader: public PrefixHeader
 {
-	I_WORD formatTag;
-	I_WORD channelsCount;
-	I_DWORD samplesPerSecond;
-	I_DWORD bytesPerSecond;
-	I_WORD blockAlign;
+	quint16 formatTag;
+	quint16 channelsCount;
+	quint32 samplesPerSecond;
+	quint32 bytesPerSecond;
+	quint16 blockAlign;
 };
 
 struct PcmFmtHeader: public FmtHeader
 {
-	I_WORD bitsPerSample;
+	quint16 bitsPerSample;
 };
 
 
@@ -110,7 +110,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 		WavHeader header;
 		std::memcpy(header.code, "RIFF", 4);
 		std::memcpy(header.wave, "WAVE", 4);
-		header.size = I_DWORD(sizeof(WavHeader) + sizeof(PcmFmtHeader) + sizeof(PrefixHeader) + BYTES_PER_SAMPLE * samplesCount * channelsCount) - 8;
+		header.size = quint32(sizeof(WavHeader) + sizeof(PcmFmtHeader) + sizeof(PrefixHeader) + BYTES_PER_SAMPLE * samplesCount * channelsCount) - 8;
 
 		fileStream.write((const char*)&header, sizeof(header));
 
@@ -118,17 +118,17 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 		std::memcpy(pcmFormat.code, "fmt ", 4);
 		pcmFormat.size = sizeof(pcmFormat) - 8;
 		pcmFormat.formatTag = WAVE_FORMAT_PCM;
-		pcmFormat.channelsCount = I_WORD(channelsCount);
-		pcmFormat.samplesPerSecond = (samplingPeriod > 0)? I_DWORD(1 / samplingPeriod): 1000;
-		pcmFormat.bytesPerSecond = I_DWORD(pcmFormat.samplesPerSecond * BYTES_PER_SAMPLE * channelsCount);
-		pcmFormat.blockAlign = I_WORD(channelsCount * BYTES_PER_SAMPLE);
+		pcmFormat.channelsCount = quint16(channelsCount);
+		pcmFormat.samplesPerSecond = (samplingPeriod > 0)? quint32(1 / samplingPeriod): 1000;
+		pcmFormat.bytesPerSecond = quint32(pcmFormat.samplesPerSecond * BYTES_PER_SAMPLE * channelsCount);
+		pcmFormat.blockAlign = quint16(channelsCount * BYTES_PER_SAMPLE);
 		pcmFormat.bitsPerSample = BITS_PER_SAMPLE;
 
 		fileStream.write((const char*)&pcmFormat, sizeof(pcmFormat));
 
 		PrefixHeader dataPrefix;
 		std::memcpy(dataPrefix.code, "data", 4);
-		dataPrefix.size = I_DWORD(BYTES_PER_SAMPLE * samplesCount * channelsCount);
+		dataPrefix.size = quint32(BYTES_PER_SAMPLE * samplesCount * channelsCount);
 
 		fileStream.write((const char*)&dataPrefix, sizeof(dataPrefix));
 
@@ -147,7 +147,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
 
-				I_SDWORD rawSample = I_SDWORD(range.GetAlphaFromValue(sample) * amplitude + offset);
+				qint32 rawSample = qint32(range.GetAlphaFromValue(sample) * amplitude + offset);
 
 				fileStream.write((const char*)&rawSample, BYTES_PER_SAMPLE);
 			}

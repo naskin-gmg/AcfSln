@@ -36,10 +36,10 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 	}
 
 	if (aoiPtr != NULL){
-		outputImageLeft = istd::Max(outputImageLeft, int(aoiPtr->GetLeft()));
-		outputImageRight = istd::Min(outputImageRight, int(::ceil(aoiPtr->GetRight())));
-		outputImageTop = istd::Max(outputImageTop, int(aoiPtr->GetLeft()));
-		outputImageBottom = istd::Min(outputImageBottom, int(::ceil(aoiPtr->GetRight())));
+		outputImageLeft = qMax(outputImageLeft, int(aoiPtr->GetLeft()));
+		outputImageRight = qMin(outputImageRight, int(::ceil(aoiPtr->GetRight())));
+		outputImageTop = qMax(outputImageTop, int(aoiPtr->GetLeft()));
+		outputImageBottom = qMin(outputImageBottom, int(::ceil(aoiPtr->GetRight())));
 	}
 
 	if ((outputImageLeft > outputImageRight) || (outputImageTop > outputImageBottom)){	// if output image should be empty
@@ -70,8 +70,8 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 
 	if ((contrast != 1) || (brightness != 0)){
 		for (int lineIndex = outputImageTop; lineIndex <= outputImageBottom; ++lineIndex){
-			const I_BYTE* inputLinePtr = static_cast<const I_BYTE*>(inputImage.GetLinePtr(lineIndex));
-			I_BYTE* outputLinePtr = static_cast<I_BYTE*>(outputImage.GetLinePtr(lineIndex - outputImageTop));
+			const quint8* inputLinePtr = static_cast<const quint8*>(inputImage.GetLinePtr(lineIndex));
+			quint8* outputLinePtr = static_cast<quint8*>(outputImage.GetLinePtr(lineIndex - outputImageTop));
 
 			for (int x = outputImageLeft; x <= outputImageRight; ++x){
 				int outputValue = int(inputLinePtr[x] * contrast + brightness);
@@ -81,14 +81,14 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 				else if (outputValue > 255){
 					outputValue = 255;
 				}
-				outputLinePtr[x - outputImageLeft] = I_BYTE(outputValue);
+				outputLinePtr[x - outputImageLeft] = quint8(outputValue);
 			}
 		}
 	}
 	else{
 		for (int lineIndex = outputImageTop; lineIndex <= outputImageBottom; ++lineIndex){
-			const I_BYTE* inputLinePtr = static_cast<const I_BYTE*>(inputImage.GetLinePtr(lineIndex));
-			I_BYTE* outputLinePtr = static_cast<I_BYTE*>(outputImage.GetLinePtr(lineIndex - outputImageTop));
+			const quint8* inputLinePtr = static_cast<const quint8*>(inputImage.GetLinePtr(lineIndex));
+			quint8* outputLinePtr = static_cast<quint8*>(outputImage.GetLinePtr(lineIndex - outputImageTop));
 
 			for (int x = outputImageLeft; x <= outputImageRight; ++x){
 				outputLinePtr[x - outputImageLeft] = inputLinePtr[x];

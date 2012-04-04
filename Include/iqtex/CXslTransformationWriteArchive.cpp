@@ -192,49 +192,49 @@ bool CXslTransformationWriteArchive::Process(char& value)
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_BYTE& value)
+bool CXslTransformationWriteArchive::Process(quint8& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_SBYTE& value)
+bool CXslTransformationWriteArchive::Process(qint8& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_WORD& value)
+bool CXslTransformationWriteArchive::Process(quint16& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_SWORD& value)
+bool CXslTransformationWriteArchive::Process(qint16& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_DWORD& value)
+bool CXslTransformationWriteArchive::Process(quint32& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_SDWORD& value)
+bool CXslTransformationWriteArchive::Process(qint32& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_QWORD& value)
+bool CXslTransformationWriteArchive::Process(quint64& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXslTransformationWriteArchive::Process(I_SQWORD& value)
+bool CXslTransformationWriteArchive::Process(qint64& value)
 {
 	return PushTextNode(QString::number(value));
 }

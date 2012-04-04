@@ -117,7 +117,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 						PositionModel* searchShapeModelPtr = new PositionModel;
 						searchShapeModelPtr->SetPosition(searchFeaturePtr->GetPosition());
-						searchShapeModelPtr->SetRadius(istd::Max(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+						searchShapeModelPtr->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
 
 						m_foundPositions.PushBack(searchShapeModelPtr);
 					}

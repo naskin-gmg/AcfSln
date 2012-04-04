@@ -210,29 +210,29 @@ bool CXslTransformationReadArchive::Process(char& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_BYTE& value)
+bool CXslTransformationReadArchive::Process(quint8& value)
 {
 	QString text = PullTextNode();
 
 	bool retVal;
-	value = I_BYTE(text.toShort(&retVal));
+	value = quint8(text.toShort(&retVal));
 
 	return retVal;
 }
 
 
-bool CXslTransformationReadArchive::Process(I_SBYTE& value)
+bool CXslTransformationReadArchive::Process(qint8& value)
 {
 	QString text = PullTextNode();
 
 	bool retVal;
-	value = I_SBYTE(text.toShort(&retVal));
+	value = qint8(text.toShort(&retVal));
 
 	return retVal;
 }
 
 
-bool CXslTransformationReadArchive::Process(I_WORD& value)
+bool CXslTransformationReadArchive::Process(quint16& value)
 {
 	QString text = PullTextNode();
 
@@ -243,7 +243,7 @@ bool CXslTransformationReadArchive::Process(I_WORD& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_SWORD& value)
+bool CXslTransformationReadArchive::Process(qint16& value)
 {
 	QString text = PullTextNode();
 
@@ -254,7 +254,7 @@ bool CXslTransformationReadArchive::Process(I_SWORD& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_DWORD& value)
+bool CXslTransformationReadArchive::Process(quint32& value)
 {
 	QString text = PullTextNode();
 
@@ -265,7 +265,7 @@ bool CXslTransformationReadArchive::Process(I_DWORD& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_SDWORD& value)
+bool CXslTransformationReadArchive::Process(qint32& value)
 {
 	QString text = PullTextNode();
 
@@ -276,7 +276,7 @@ bool CXslTransformationReadArchive::Process(I_SDWORD& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_QWORD& value)
+bool CXslTransformationReadArchive::Process(quint64& value)
 {
 	QString text = PullTextNode();
 
@@ -287,7 +287,7 @@ bool CXslTransformationReadArchive::Process(I_QWORD& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(I_SQWORD& value)
+bool CXslTransformationReadArchive::Process(qint64& value)
 {
 	QString text = PullTextNode();
 
@@ -344,9 +344,9 @@ bool CXslTransformationReadArchive::ProcessData(void* dataPtr, int size)
 {
 	QString text = PullTextNode();
 
-	I_BYTE* data = (I_BYTE*)dataPtr;
+	quint8* data = (quint8*)dataPtr;
 
-	std::vector<I_BYTE> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
+	std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
 
 	I_ASSERT(size == int(decodedData.size()));
 

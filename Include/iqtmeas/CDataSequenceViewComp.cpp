@@ -165,8 +165,8 @@ void CDataSequenceViewComp::on_ZoomOutButton_clicked()
 	iqt::CSignalBlocker blocker2(TimeEndSB);
 
 	double center = (TimeBeginSB->value() + TimeEndSB->value()) * 0.5;
-	TimeBeginSB->setValue(istd::Max(0.0, TimeBeginSB->value() * 2 - center));
-	TimeEndSB->setValue(istd::Min(TimeEndSB->value() * 2 - center, maxTimeSpan));
+	TimeBeginSB->setValue(qMax(0.0, TimeBeginSB->value() * 2 - center));
+	TimeEndSB->setValue(qMin(TimeEndSB->value() * 2 - center, maxTimeSpan));
 
 	UpdateGui();
 }
@@ -184,7 +184,7 @@ void CDataSequenceViewComp::on_PrevButton_clicked()
 
 	double page = TimeEndSB->value() - TimeBeginSB->value();
 
-	double shift = istd::Min(istd::Min(TimeBeginSB->value(), TimeEndSB->value()), page * 0.5);
+	double shift = qMin(qMin(TimeBeginSB->value(), TimeEndSB->value()), page * 0.5);
 
 	if (shift < I_BIG_EPSILON){
 		return;
@@ -218,7 +218,7 @@ void CDataSequenceViewComp::on_NextButton_clicked()
 
 	double page = TimeEndSB->value() - TimeBeginSB->value();
 
-	double shift = istd::Min(maxTimeSpan - istd::Max(TimeBeginSB->value(), TimeEndSB->value()), page * 0.5);
+	double shift = qMin(maxTimeSpan - qMax(TimeBeginSB->value(), TimeEndSB->value()), page * 0.5);
 
 	if (shift < I_BIG_EPSILON){
 		return;
@@ -285,8 +285,8 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			valueRange = istd::CRange(m_parent.ValueMinSB->value(), m_parent.ValueMaxSB->value());
 		}
 		else{
-			int firstSample = istd::Max(0, int(floor(timeRange.GetMinValue() * samplesCount / maxTimeSpan)));
-			int lastSample = istd::Min(int(ceil(timeRange.GetMaxValue() * samplesCount / maxTimeSpan)), samplesCount - 1);
+			int firstSample = qMax(0, int(floor(timeRange.GetMinValue() * samplesCount / maxTimeSpan)));
+			int lastSample = qMin(int(ceil(timeRange.GetMaxValue() * samplesCount / maxTimeSpan)), samplesCount - 1);
 			for (int channelIndex = firstChannel; channelIndex <= lastChannel; ++channelIndex){
 				for (int i = firstSample; i <= lastSample; ++i){
 					double sample = samplesPtr->GetSample(i, channelIndex);
@@ -317,7 +317,7 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			int lastSampleEnd = 0;
 			for (int x = 0; x < rectWidth; ++x){
 				double time = timeRange.GetValueFromAlpha(double(x) / rectWidth);
-				int sampleEndIndex = istd::Min(int(floor(time * samplesCount / maxTimeSpan)), samplesCount - 1);
+				int sampleEndIndex = qMin(int(floor(time * samplesCount / maxTimeSpan)), samplesCount - 1);
 
 				istd::CRange sampleRange = istd::CRange::GetInvalid();
 

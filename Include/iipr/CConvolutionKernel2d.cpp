@@ -125,7 +125,7 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 }
 
 
-I_DWORD CConvolutionKernel2d::GetMinimalVersion(int versionId) const
+quint32 CConvolutionKernel2d::GetMinimalVersion(int versionId) const
 {
 	if (versionId == IacfVersionId){
 		return 405;

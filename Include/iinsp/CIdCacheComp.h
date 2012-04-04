@@ -32,7 +32,7 @@ public:
 	CIdCacheComp();
 
 	// reimplemented (iinsp::IIdProvider)
-	virtual I_DWORD GetCurrentId() const;
+	virtual quint32 GetCurrentId() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);

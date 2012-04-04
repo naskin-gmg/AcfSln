@@ -99,12 +99,12 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 		return false;
 	}
 
-	iipr::TImagePixelInterpolator<I_BYTE> pixelInterpolator(input, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(input, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
 	int pixelComponentsCount = input.GetComponentsCount();
 
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
 		for (int r = 0; r < radius; r++){
-			I_BYTE* outputImageBeginPtr = (I_BYTE*)outputBitmap.GetLinePtr(r);
+			quint8* outputImageBeginPtr = (quint8*)outputBitmap.GetLinePtr(r);
 		
 			for (int alpha = 0; alpha < angleRange; alpha++){
 				double angle = alpha / double(angleRange) * I_2PI;

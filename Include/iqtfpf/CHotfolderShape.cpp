@@ -144,7 +144,7 @@ void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowIte
 	int titleWidth = nameFontInfo.width(hotfolderName);
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
-	int width = istd::Max(titleWidth, detailFontInfo.width(element.GetHotfolderId())) + SIDE_OFFSET * 2;
+	int width = qMax(titleWidth, detailFontInfo.width(element.GetHotfolderId())) + SIDE_OFFSET * 2;
  
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;

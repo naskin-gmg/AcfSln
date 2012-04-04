@@ -103,10 +103,10 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	int histogramSize = 256 * usedColorComponents;
 
-	istd::TDelPtr<I_DWORD, istd::ArrayAccessor<I_DWORD> > histogramDataPtr(new I_DWORD[histogramSize]);
-	I_DWORD* histogramDataBufferPtr = histogramDataPtr.GetPtr();
+	istd::TDelPtr<quint32, istd::ArrayAccessor<quint32> > histogramDataPtr(new quint32[histogramSize]);
+	quint32* histogramDataBufferPtr = histogramDataPtr.GetPtr();
 
-	std::memset(histogramDataBufferPtr, 0, histogramSize * sizeof(I_DWORD));
+	std::memset(histogramDataBufferPtr, 0, histogramSize * sizeof(quint32));
 	int pixelCount = 0;
 
 	for(int y = regionTop; y < regionBottom; y++){
@@ -124,13 +124,13 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 			int rangeStart = int(pixelRange.range.GetMinValue());
 			int rangeEnd = int(pixelRange.range.GetMaxValue());
 
-			I_BYTE* inputImagePtr = ((I_BYTE*)pixelRange.pixelBufferPtr);
+			quint8* inputImagePtr = ((quint8*)pixelRange.pixelBufferPtr);
 			
 			for (int x = rangeStart; x < rangeEnd; x++){
 				I_ASSERT(x  < input.GetImageSize().GetX());
 				
 				for (int pixelByteIndex = 0; pixelByteIndex < pixelBytesCount; pixelByteIndex++){
-					I_BYTE pixelComponentValue = *inputImagePtr++;
+					quint8 pixelComponentValue = *inputImagePtr++;
 
 					if (pixelByteIndex < usedColorComponents){
 						++histogramDataBufferPtr[pixelByteIndex + pixelComponentValue * usedColorComponents];
@@ -149,12 +149,12 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
 		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);
 
-		histogramDataBufferPtr[histIndex] = I_DWORD(normHist * normFactor + 0.5);
+		histogramDataBufferPtr[histIndex] = quint32(normHist * normFactor + 0.5);
 	}
 
 	istd::CChangeNotifier changePtr(&histogram);
 
-	return histogram.CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(I_DWORD) * 8, usedColorComponents);
+	return histogram.CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(quint32) * 8, usedColorComponents);
 }
 
 

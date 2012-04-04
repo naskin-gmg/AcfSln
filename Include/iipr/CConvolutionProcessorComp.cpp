@@ -46,8 +46,8 @@ bool DoConvolution(
 	int kernelElementsCount = int(fastAccessElements.size());
 
 	for (int y = 0; y < outputImageSize.GetY(); ++y){
-		const I_BYTE* inputPtr = static_cast<const I_BYTE*>(outputImage.GetLinePtr(y));
-		I_BYTE* outputPtr = static_cast<I_BYTE*>(outputImage.GetLinePtr(y));
+		const quint8* inputPtr = static_cast<const quint8*>(outputImage.GetLinePtr(y));
+		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
 
 		for (int x = 0; x < outputImageSize.GetX(); ++x){
 			WorkingType sums[ChannelsCount] = {0};
@@ -183,19 +183,19 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		return DoConvolution<I_BYTE, I_SDWORD, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGB:
-		return DoConvolution<I_BYTE, I_SDWORD, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGBA:
-		return DoConvolution<I_BYTE, I_SDWORD, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY16:
-		return DoConvolution<I_WORD, I_SDWORD, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint16, qint32, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoConvolution<I_DWORD, I_SQWORD, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	default:
 		return false;

@@ -38,7 +38,7 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive) = 0;
-	virtual I_DWORD GetMinimalVersion(int versionId) const;
+	virtual quint32 GetMinimalVersion(int versionId) const;
 };
 
 

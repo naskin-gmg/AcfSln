@@ -106,21 +106,21 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	int kernelMaxHeight = 0;
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
-		kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0] * imageWidth), imageWidth));
-		kernelMaxHeight = istd::Max(1, istd::Min(int((filterDimensionsCount < 2)? filterLengths[0]: filterLengths[1] * imageHeight), imageHeight));
+		kernelMaxWidth = qMax(1, qMin(int(filterLengths[0] * imageWidth), imageWidth));
+		kernelMaxHeight = qMax(1, qMin(int((filterDimensionsCount < 2)? filterLengths[0]: filterLengths[1] * imageHeight), imageHeight));
 		break;
 
 	case UM_PERCENT_DIAG:
 		{
 			double diag = std::sqrt(double(imageWidth * imageWidth + imageHeight * imageHeight));
-			kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0] * diag), imageWidth));
-			kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * diag), imageHeight));
+			kernelMaxWidth = qMax(1, qMin(int(filterLengths[0] * diag), imageWidth));
+			kernelMaxHeight = qMax(1, qMin((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * diag), imageHeight));
 		}
 		break;
 
 	default:
-		kernelMaxWidth = istd::Max(1, istd::Min(int(filterLengths[0]), imageWidth));
-		kernelMaxHeight = istd::Max(1, istd::Min((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1]), imageHeight));
+		kernelMaxWidth = qMax(1, qMin(int(filterLengths[0]), imageWidth));
+		kernelMaxHeight = qMax(1, qMin((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1]), imageHeight));
 		break;
 	}
 
@@ -158,9 +158,9 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 		for(int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 			for (int y = 0; y < imageHeight; ++y){
-				I_BYTE* outputPtr = (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
+				quint8* outputPtr = (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
 
-				const I_BYTE* inputLinePtr = (const I_BYTE*)inputImage.GetLinePtr(y);
+				const quint8* inputLinePtr = (const quint8*)inputImage.GetLinePtr(y);
 
 				int meanValue = 0;
 
@@ -173,7 +173,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 					}
 
 					if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-						*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
+						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
 
 						outputPtr += componentsCount;
 					}
@@ -184,7 +184,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 				int headX = kernelWidth;
 				int tailX = 0;
 				while (headX < imageWidth){
-					*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
+					*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
 
 					outputPtr += componentsCount;
 
@@ -196,7 +196,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
 					while (kernelWidth > 0){
-						*outputPtr = I_BYTE((meanValue + 0.5) / kernelWidth);
+						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
 
 						outputPtr += componentsCount;
 
@@ -214,7 +214,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 					}
 				}
 
-				I_ASSERT(outputPtr <= (I_BYTE*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
+				I_ASSERT(outputPtr <= (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
 			}
 		}
 	}
@@ -227,9 +227,9 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 		for (int x = 0; x < outputImageWidth * componentsCount; ++x){	
 			double meanValue = 0;
-			const I_BYTE* inputHeadPixelPtr = ((const I_BYTE*)secondPassInputImagePtr->GetLinePtr(0)) + x;
-			const I_BYTE* inputTailPixelPtr = inputHeadPixelPtr;
-			I_BYTE* outputPixelPtr = (I_BYTE*)(outputImage.GetLinePtr(0)) + x;
+			const quint8* inputHeadPixelPtr = ((const quint8*)secondPassInputImagePtr->GetLinePtr(0)) + x;
+			const quint8* inputTailPixelPtr = inputHeadPixelPtr;
+			quint8* outputPixelPtr = (quint8*)(outputImage.GetLinePtr(0)) + x;
 
 			int kernelHeight = 0;
 			while (kernelHeight < kernelMaxHeight){
@@ -242,7 +242,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 				}
 
 				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-					*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
 					outputPixelPtr += outputLinesDifference;
 				}
 
@@ -254,7 +254,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 			int headY = kernelHeight;
 
 			for (;headY < imageHeight; ++headY){
-				*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+				*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
 				outputPixelPtr += outputLinesDifference;
 
 				meanValue += *inputHeadPixelPtr;
@@ -266,7 +266,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 			if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
 				while (kernelHeight > 0){
-					*outputPixelPtr = I_BYTE((meanValue + 0.5) / kernelHeight);
+					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
 					outputPixelPtr += outputLinesDifference;
 
 					meanValue -= *inputTailPixelPtr;

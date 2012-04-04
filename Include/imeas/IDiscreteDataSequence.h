@@ -45,7 +45,7 @@ public:
 		Get discrete sample at specified position.
 		\param	position	position, must be inside of returned size.
 	*/
-	virtual I_DWORD GetDiscrSample(int position, int channel = 0) const = 0;
+	virtual quint32 GetDiscrSample(int position, int channel = 0) const = 0;
 
 	/**
 		Set discrete sample at specified position.
@@ -54,7 +54,7 @@ public:
 		\param	sample		sample value will be set.
 		\return				true, if sample was changed.
 	*/
-	virtual bool SetDiscrSample(int position, int channel, I_DWORD sample) = 0;
+	virtual bool SetDiscrSample(int position, int channel, quint32 sample) = 0;
 };
 
 

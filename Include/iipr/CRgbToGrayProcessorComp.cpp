@@ -67,22 +67,22 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 	int inputPixelComponentCount = inputBitmap.GetComponentsCount();
 
 	for (int y = 0; y < imageSize.GetY(); ++y){
-		I_BYTE* inputImageLinePtr = (I_BYTE*)inputBitmap.GetLinePtr(y);
-		I_BYTE* outputImageLinePtr = (I_BYTE*)outputBitmap.GetLinePtr(y);
+		quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
+		quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 
 		for (int x = 0; x < imageSize.GetX(); ++x){
-			I_BYTE* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
+			quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-			I_BYTE r = pixelPtr[0];
-			I_BYTE g = pixelPtr[1];
-			I_BYTE b = pixelPtr[2];
+			quint8 r = pixelPtr[0];
+			quint8 g = pixelPtr[1];
+			quint8 b = pixelPtr[2];
 
 			if (inputFormat == iimg::IBitmap::PF_RGBA){
 				double alpha = pixelPtr[3] / 255.0;
 
-				r = I_BYTE(r * alpha);
-				g = I_BYTE(g * alpha);
-				b = I_BYTE(b * alpha);
+				r = quint8(r * alpha);
+				g = quint8(g * alpha);
+				b = quint8(b * alpha);
 			}
 
 			outputImageLinePtr[x] = (77 * r + 151 * g + 28 * b) >> 8;
