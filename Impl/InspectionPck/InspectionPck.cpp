@@ -9,7 +9,7 @@ namespace InspectionPck
 
 
 I_EXPORT_PACKAGE(
-			"InsopectionPck",
+			"AcfSln/InspectionPck",
 			"General, system-independent image processing package",
 			"Standard Base Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

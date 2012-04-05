@@ -16,7 +16,7 @@ namespace QtInspectionPck
 I_REGISTER_QT_RESOURCE(iqtgui);
 
 I_EXPORT_PACKAGE(
-			"QtInspectionPck",
+			"AcfSln/Inspection/Gui",
 			"General Qt-based image processing package",
 			"Qt Processing Image" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

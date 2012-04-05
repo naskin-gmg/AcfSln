@@ -16,7 +16,7 @@ namespace QtSignalPck
 I_REGISTER_QT_RESOURCE(iqtgui);
 
 I_EXPORT_PACKAGE(
-			"IacfQt",
+			"AcfSln/Signal/Gui",
 			"Imaging tools Qt-based general package",
 			"Imaging Tools Qt Standard" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools"));
 

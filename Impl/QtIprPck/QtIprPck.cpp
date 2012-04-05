@@ -13,7 +13,7 @@ namespace QtIprPck
 
 
 I_EXPORT_PACKAGE(
-			"QtIpr",
+			"AcfSln/Ipr",
 			"Standard Qt image processing package",
 			"Qt \"Image Processing\"" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

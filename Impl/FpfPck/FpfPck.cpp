@@ -9,7 +9,7 @@ namespace FpfPck
 
 
 I_EXPORT_PACKAGE(
-			"Fpf",
+			"AcfSln/Fpf",
 			"Acf-Solutions File-To-File Processing Framework package",
 			"File Processing Hotfolder Workflow" IM_TAG("Hotfolder") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

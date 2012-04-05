@@ -9,7 +9,7 @@ namespace QtCameraPck
 
 
 I_EXPORT_PACKAGE(
-			"QtCam",
+			"AcfSln/QtCamera",
 			"Qt camera package",
 			"Qt Camera" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

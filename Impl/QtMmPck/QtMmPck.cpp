@@ -12,7 +12,7 @@ using namespace icomp;
 
 
 I_EXPORT_PACKAGE(
-			"QtMm",
+			"AcfSln/Multimedia/Gui",
 			"Qt multimedia package",
 			"Media" IM_PROJECT("ACF") IM_TAG("Qt Multimedia") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

@@ -12,7 +12,7 @@ I_REGISTER_QT_RESOURCE(iqtgui);
 I_REGISTER_QT_RESOURCE(iqtfpf);
 
 I_EXPORT_PACKAGE(
-			"QtFpf",
+			"AcfSln/Fpf/Gui",
 			"Qt based package for File Processsing Framework",
 			"File Processing" IM_TAG("Qt Hotfolder") IM_PROJECT("ACF-Solutions") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
