@@ -9,19 +9,11 @@
 #include "icomp/export.h"
 
 
-static struct StaticInit
-{
-	StaticInit()
-	{
-		Q_INIT_RESOURCE(iqtgui);
-	}
-
-} instance;
-
-
 namespace QtInspectionPck
 {
 
+
+I_REGISTER_QT_RESOURCE(iqtgui);
 
 I_EXPORT_PACKAGE(
 			"QtInspectionPck",

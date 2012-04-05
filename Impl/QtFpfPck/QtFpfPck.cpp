@@ -8,16 +8,8 @@ namespace QtFpfPck
 {
 
 
-static struct StaticInit
-{
-	StaticInit()
-	{
-		Q_INIT_RESOURCE(iqtgui);
-		Q_INIT_RESOURCE(iqtfpf);
-	}
-
-} instance;
-
+I_REGISTER_QT_RESOURCE(iqtgui);
+I_REGISTER_QT_RESOURCE(iqtfpf);
 
 I_EXPORT_PACKAGE(
 			"QtFpf",
