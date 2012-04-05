@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -32,7 +32,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	typedef std::map<QString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
+	typedef QMap<QString, istd::TDelPtr<ifpf::CMonitoringSession> > MonitoringSessionsMap;
 	mutable MonitoringSessionsMap m_monitorSessionsMap;
 };
 

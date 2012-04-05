@@ -102,7 +102,7 @@ int CFileAcquisitionComp::DoProcessing(
 		for (		DirInfos::iterator iter = m_dirInfos.begin();
 					iter != m_dirInfos.end();
 					++iter){
-			quint32 idStampDiff = m_lastIdStamp - iter->second.idStamp;
+			quint32 idStampDiff = m_lastIdStamp - iter.value().idStamp;
 			if (idStampDiff >= maxIdStampDiff){
 				maxIdStampDiff = idStampDiff;
 				maxIdStampDiffIter = iter;

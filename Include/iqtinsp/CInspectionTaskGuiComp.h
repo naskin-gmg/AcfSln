@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 #include <set>
 
 // ACF includes
@@ -111,7 +111,7 @@ private:
 	TasksObserver m_tasksObserver;
 
 	int m_currentGuiIndex;
-	typedef std::map<int, int> GuiMap;
+	typedef QMap<int, int> GuiMap;
 	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
 	typedef std::set<imod::IModelEditor*> EditorsList;

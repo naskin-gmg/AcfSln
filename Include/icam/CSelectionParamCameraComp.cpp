@@ -89,7 +89,7 @@ int CSelectionParamCameraComp::WaitTaskFinished(
 
 	if (retVal != TS_WAIT){
 		if (taskId >= 0){
-			m_paramsMap.erase(retVal);
+			m_paramsMap.remove(retVal);
 		}
 		else{
 			m_paramsMap.clear();
@@ -105,7 +105,7 @@ void CSelectionParamCameraComp::CancelTask(int taskId)
 	BaseClass::WaitTaskFinished(taskId);
 
 	if (taskId >= 0){
-		m_paramsMap.erase(taskId);
+		m_paramsMap.remove(taskId);
 	}
 	else{
 		m_paramsMap.clear();

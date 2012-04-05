@@ -284,9 +284,9 @@ QStringList CHotfolderTaskManagerComp::GetRemovedInputDirectories() const
 	for (		DirectoryMonitorsMap::const_iterator index = m_directoryMonitorsMap.begin();
 				index != m_directoryMonitorsMap.end();
 				index++){
-		QStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index->first);
+		QStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index.key());
 		if (foundIter == inputDirectories.end()){
-			removedDirectories.push_back(index->first);
+			removedDirectories.push_back(index.key());
 		}
 	}
 
@@ -318,7 +318,7 @@ void CHotfolderTaskManagerComp::RemoveDirectoryMonitor(const QString& directoryP
 {
 	DirectoryMonitorsMap::iterator monitorIter = m_directoryMonitorsMap.find(directoryPath);
 	if (monitorIter != m_directoryMonitorsMap.end()){
-		monitorIter->second->StopObserving();
+		monitorIter.value()->StopObserving();
 
 		m_directoryMonitorsMap.erase(monitorIter);
 	}

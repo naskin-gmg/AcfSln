@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -55,13 +55,13 @@ protected:
 	static QString GetDirectoryPath(const ifpf::IHotfolderProcessingItem& item);
 
 private:
-	typedef std::map<QString, int> CounterMap;
+	typedef QMap<QString, int> CounterMap;
 	CounterMap m_itemsCount;
 	CounterMap m_successCount;
 	CounterMap m_errorsCount;
 	CounterMap m_abortedCount;
 
-	typedef std::map<QString, double> ProcessingTimeMap;
+	typedef QMap<QString, double> ProcessingTimeMap;
 	ProcessingTimeMap m_processingTimeMap;
 };
 

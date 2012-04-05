@@ -64,7 +64,7 @@ protected:
 	};
 
 private:
-	typedef std::map<QString, ParamsInfo> DirInfos;
+	typedef QMap<QString, ParamsInfo> DirInfos;
 	DirInfos m_dirInfos;
 
 	quint32 m_lastIdStamp;

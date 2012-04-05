@@ -172,7 +172,7 @@ private:
 	I_REF(ifpf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
 	I_REF(imod::IModel, m_fileSystemChangeStorageModelCompPtr);
 
-	typedef std::map<QString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
+	typedef QMap<QString, istd::TDelPtr<ifpf::IDirectoryMonitor> > DirectoryMonitorsMap;
 	DirectoryMonitorsMap m_directoryMonitorsMap;
 
 	FileSystemChangeStorageObserver m_fileSystemChangeStorageObserver;

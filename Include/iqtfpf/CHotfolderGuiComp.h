@@ -179,7 +179,7 @@ private:
 	iqtgui::CHierarchicalCommand m_restartItemCommand;
 	iqtgui::CHierarchicalCommand m_showProcessingDialogCommand;
 
-	typedef std::map<int, QIcon> StateIconsMap;
+	typedef QMap<int, QIcon> StateIconsMap;
 
 	iqtgui::CExtLineEdit* m_filterEditor;
 	StateIconsMap m_stateIconsMap;

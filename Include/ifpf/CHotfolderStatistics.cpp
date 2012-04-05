@@ -31,7 +31,7 @@ int CHotfolderStatistics::GetItemsCount(const QString& directoryPath) const
 {
 	CounterMap::const_iterator iter = m_itemsCount.find(directoryPath);
 	if (iter != m_itemsCount.end()){
-		return iter->second;
+		return iter.value();
 	}
 
 	return 0;
@@ -42,7 +42,7 @@ int CHotfolderStatistics::GetSuccessCount(const QString& directoryPath) const
 {
 	CounterMap::const_iterator iter = m_successCount.find(directoryPath);
 	if (iter != m_successCount.end()){
-		return iter->second;
+		return iter.value();
 	}
 
 	return 0;
@@ -53,7 +53,7 @@ int CHotfolderStatistics::GetErrorsCount(const QString& directoryPath) const
 {
 	CounterMap::const_iterator iter = m_errorsCount.find(directoryPath);
 	if (iter != m_errorsCount.end()){
-		return iter->second;
+		return iter.value();
 	}
 
 	return 0;
@@ -64,7 +64,7 @@ int CHotfolderStatistics::GetAbortedCount(const QString& directoryPath) const
 {
 	CounterMap::const_iterator iter = m_abortedCount.find(directoryPath);
 	if (iter != m_abortedCount.end()){
-		return iter->second;
+		return iter.value();
 	}
 
 	return 0;
@@ -76,7 +76,7 @@ double CHotfolderStatistics::GetProcessingTime(const QString& directoryPath) con
 	if (directoryPath.isEmpty()){
 		double processingTime = 0;
 		for (ProcessingTimeMap::const_iterator index = m_processingTimeMap.begin(); index != m_processingTimeMap.end(); index++){
-			processingTime += index->second;
+			processingTime += index.value();
 		}
 		
 		return processingTime;
@@ -84,7 +84,7 @@ double CHotfolderStatistics::GetProcessingTime(const QString& directoryPath) con
 
 	ProcessingTimeMap::const_iterator foundIter = m_processingTimeMap.find(directoryPath);
 	if (foundIter != m_processingTimeMap.end()){
-		return foundIter->second;
+		return foundIter.value();
 	}
 
 	return 0.0;

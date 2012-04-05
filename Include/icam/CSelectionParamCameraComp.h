@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "istd/TDelPtr.h"
@@ -84,7 +84,7 @@ private:
 	/**
 		Map task ID to parameter set.
 	*/
-	typedef std::map<int, ParamSetPtr> ParamsMap;
+	typedef QMap<int, ParamSetPtr> ParamsMap;
 
 	ParamsMap m_paramsMap;
 };

@@ -246,7 +246,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		layoutPtr->addWidget(tabWidgetPtr);
 	}
 
-	std::map<iqtgui::IGuiObject*, int> guiToStackIndexMap;
+	QMap<iqtgui::IGuiObject*, int> guiToStackIndexMap;
 
 	int previewGuisCount = m_previewGuisCompPtr.GetCount();
 	for (int previewIndex = 0; previewIndex < previewGuisCount; ++previewIndex){
@@ -256,7 +256,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 
 		int stackIndex;
-		std::map<iqtgui::IGuiObject*, int>::const_iterator stackRepeatIter = guiToStackIndexMap.find(guiObjectPtr);
+		QMap<iqtgui::IGuiObject*, int>::const_iterator stackRepeatIter = guiToStackIndexMap.find(guiObjectPtr);
 		if (stackRepeatIter == guiToStackIndexMap.end()){
 			istd::TDelPtr<QWidget> newPreviewPagePtr(new QWidget());
 			if (!newPreviewPagePtr.IsValid()){
@@ -276,7 +276,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 			guiToStackIndexMap[guiObjectPtr] = stackIndex;
 		}
 		else{
-			stackIndex = stackRepeatIter->second;
+			stackIndex = stackRepeatIter.value();
 		}
 
 		m_tabToStackIndexMap[previewIndex] = stackIndex;
@@ -308,7 +308,7 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 	for (		GuiMap::const_iterator iter = m_stackIndexToTabMap.begin();
 				iter != m_stackIndexToTabMap.end();
 				++iter){
-		int guiIndex = iter->second;
+		int guiIndex = iter.value();
 		I_ASSERT(guiIndex >= 0);
 		I_ASSERT(guiIndex < m_previewGuisCompPtr.GetCount());
 
