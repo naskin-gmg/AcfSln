@@ -6,8 +6,6 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iview/CInteractiveCircleShape.h"
-#include "iview/CInteractivePinShape.h"
 
 // ACF-Solutions includes
 #include "iipr/IFeaturesProvider.h"
@@ -19,7 +17,8 @@ namespace iqtipr
 
 
 CSearchBasedFeaturesSupplierGuiComp::CSearchBasedFeaturesSupplierGuiComp()
-:	m_paramsObserver(this)
+:	m_paramsObserver(this),
+	m_lastViewPtr(NULL)
 {
 }
 
@@ -56,19 +55,33 @@ QWidget* CSearchBasedFeaturesSupplierGuiComp::GetParamsWidget() const
 }
 
 
-// reimplemented (iqt2d::TSceneExtenderCompBase)
+// reimplemented (iqt2d::IViewExtender)
 
-void CSearchBasedFeaturesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
+void CSearchBasedFeaturesSupplierGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
-	int foundPositionsCount = m_foundPositions.GetCount();
-	
-	for (int positionIndex = 0; positionIndex < foundPositionsCount; positionIndex++){
-		iview::CInteractiveCircleShape* circleShapePtr = new iview::CInteractiveCircleShape();
+	I_ASSERT(providerPtr != NULL);
 
-		m_foundPositions.GetAt(positionIndex)->AttachObserver(circleShapePtr);
+	iview::IShapeView* viewPtr = providerPtr->GetView();
+	if (viewPtr != NULL){
+		m_lastViewPtr = viewPtr;
 
-		result.PushBack(circleShapePtr);
+		ConnectShapes(*viewPtr);
 	}
+	
+	BaseClass::AddItemsToScene(providerPtr, flags);
+}
+
+
+void CSearchBasedFeaturesSupplierGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
+{
+	I_ASSERT(providerPtr != NULL);
+
+	iview::IShapeView* viewPtr = providerPtr->GetView();
+	if (viewPtr != NULL){
+		DisconnectShapes(*viewPtr);
+	}
+
+	BaseClass::RemoveItemsFromScene(providerPtr);
 }
 
 
@@ -84,12 +97,21 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
+	if ((updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS) == 0){
+		return;
+	}
+
 	ResultsList->clear();
-	m_foundPositions.Reset();
+
+	if (m_lastViewPtr != NULL){
+		DisconnectShapes(*m_lastViewPtr);
+	}
+
+	m_visualPositions.Reset();
 
 	double maxScoreRadius = 50;
 
@@ -106,20 +128,25 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(foundFeatures[featureIndex]);
 					if (searchFeaturePtr != NULL){
 						QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
-						modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight()));
+						modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100));
 						modelItemPtr->setText(CT_X, QString::number(searchFeaturePtr->GetPosition().GetX()));
 						modelItemPtr->setText(CT_Y, QString::number(searchFeaturePtr->GetPosition().GetY()));
-						modelItemPtr->setText(CT_ANGLE, QString::number(searchFeaturePtr->GetAngle()));
+						modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle())));
 						modelItemPtr->setText(CT_X_SCALE, QString::number(searchFeaturePtr->GetScale().GetX()));
 						modelItemPtr->setText(CT_Y_SCALE, QString::number(searchFeaturePtr->GetScale().GetY()));
 
 						ResultsList->addTopLevelItem(modelItemPtr);
 
-						PositionModel* searchShapeModelPtr = new PositionModel;
-						searchShapeModelPtr->SetPosition(searchFeaturePtr->GetPosition());
-						searchShapeModelPtr->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+						VisualObject* visualObject = new VisualObject;
 
-						m_foundPositions.PushBack(searchShapeModelPtr);
+						visualObject->model.SetPtr(new PositionModel);
+						visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
+						visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+
+						visualObject->shape.SetPtr(new iview::CInteractiveCircleShape());
+						visualObject->model->AttachObserver(visualObject->shape.GetPtr());
+
+						m_visualPositions.PushBack(visualObject);
 					}
 				}
 			}
@@ -135,7 +162,12 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 		}
 	}
 
-	UpdateAllViews();
+	if (m_lastViewPtr != NULL){
+		ConnectShapes(*m_lastViewPtr);
+
+		m_lastViewPtr->Update();
+	}
+
 }
 
 
@@ -160,6 +192,32 @@ void CSearchBasedFeaturesSupplierGuiComp::OnComponentDestroyed()
 	m_paramsObserver.EnsureModelDetached();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// private methods
+
+void CSearchBasedFeaturesSupplierGuiComp::ConnectShapes(iview::IShapeView& view)
+{
+	int shapesCount = m_visualPositions.GetCount();
+	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
+		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
+		I_ASSERT(objectPtr != NULL);
+
+		view.ConnectShape(objectPtr->shape.GetPtr());
+	}
+}
+
+
+void CSearchBasedFeaturesSupplierGuiComp::DisconnectShapes(iview::IShapeView& view)
+{
+	int shapesCount = m_visualPositions.GetCount();
+	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
+		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
+		I_ASSERT(objectPtr != NULL);
+
+		view.DisconnectShape(objectPtr->shape.GetPtr());
+	}
 }
 
 

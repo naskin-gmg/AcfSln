@@ -84,6 +84,8 @@ void CBitmapSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	iview::CImageShape* shapePtr = new iview::CImageShape;
 	if (shapePtr != NULL){
+		shapePtr->AssignToLayer(iview::ILayer::LT_BACKGROUND);
+
 		result.PushBack(shapePtr);
 
 		m_bitmap.AttachObserver(shapePtr);

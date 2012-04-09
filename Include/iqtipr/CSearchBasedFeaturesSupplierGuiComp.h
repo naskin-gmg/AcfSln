@@ -9,6 +9,7 @@
 #include "i2d/CCircle.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "iview/CInteractiveCircleShape.h"
 
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
@@ -69,8 +70,9 @@ protected:
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 
-	// reimplemented (iqt2d::TSceneExtenderCompBase)
-	virtual void CreateShapes(int sceneId, Shapes& result);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
@@ -84,14 +86,27 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
+	void ConnectShapes(iview::IShapeView& view);
+	void DisconnectShapes(iview::IShapeView& view);
+
+private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
 	typedef imod::TModelWrap<i2d::CCircle> PositionModel;
-	typedef istd::TPointerVector<PositionModel> PositionList;
 
-	PositionList m_foundPositions;
+	struct VisualObject
+	{
+		istd::TDelPtr<PositionModel> model;
+		istd::TDelPtr<iview::CInteractiveCircleShape> shape;
+	};
+
+	typedef istd::TPointerVector<VisualObject> VisualObjects;
+
+	VisualObjects m_visualPositions;
 
 	ParamsObserver m_paramsObserver;
+
+	iview::IShapeView* m_lastViewPtr;
 };
 
 
