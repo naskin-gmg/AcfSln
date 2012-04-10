@@ -2,6 +2,9 @@
 #define icam_CSnapBitmapSupplierComp_included
 
 
+// Qt includes
+#include <QtCore/QPair>
+
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "i2d/ITransformation2d.h"
@@ -22,12 +25,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
 */
 class CSnapBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<const i2d::ITransformation2d>, istd::TDelPtr<iimg::IBitmap> > >,
+			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ITransformation2d>, istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iipr::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< std::pair<istd::TDelPtr<const i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);

@@ -29,7 +29,7 @@ public:
 	/**
 		Return the unique identifier for a processing item.
 	*/
-	virtual std::string GetItemUuid() const = 0;
+	virtual QByteArray GetItemUuid() const = 0;
 
 	/**
 		Get the processing state for the item.

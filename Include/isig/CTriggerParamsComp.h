@@ -2,10 +2,13 @@
 #define isig_CTriggerParamsComp_included
 
 
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
+// ACF includes
 #include "icomp/CComponentBase.h"
 
+// ACF-Solutions includes
 #include "isig/ITriggerConstraints.h"
 #include "isig/ITriggerParams.h"
 
@@ -61,7 +64,7 @@ protected:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -75,7 +78,7 @@ private:
 		QString description;
 		int triggerMode;
 	};
-	typedef std::vector<SelectionEntry> SelectionList;
+	typedef QVector<SelectionEntry> SelectionList;
 	SelectionList m_selectionList;
 
 	I_REF(isig::ITriggerConstraints, m_triggerConstraintsCompPtr);

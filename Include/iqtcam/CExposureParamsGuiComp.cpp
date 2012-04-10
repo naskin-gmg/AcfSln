@@ -97,19 +97,19 @@ void CExposureParamsGuiComp::UpdateModel() const
 	istd::CChangeNotifier notifier(NULL);
 
 	double shutterTime = ShutterTimeSB->value() * 0.001;
-	if (ShutterTimeSB->isVisible() && (fabs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){
+	if (ShutterTimeSB->isVisible() && (qAbs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetShutterTime(shutterTime);
 	}
 
 	double delayTime = DelayTimeSB->value() * 0.001;
-	if (DelayTimeSB->isVisible() && (fabs(objectPtr->GetDelayTime() - delayTime) > tolerance)){
+	if (DelayTimeSB->isVisible() && (qAbs(objectPtr->GetDelayTime() - delayTime) > tolerance)){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetDelayTime(delayTime);
 	}
 
 	double eenDelayTime = EenDelayTimeSB->value() * 0.001;
-	if (EenDelayTimeSB->isVisible() && (fabs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
+	if (EenDelayTimeSB->isVisible() && (qAbs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetEenDelay(eenDelayTime);
 	}

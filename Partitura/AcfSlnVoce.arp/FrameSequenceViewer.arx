@@ -39,7 +39,7 @@
               DefaultModel
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               ShowFrameIndex
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowFrameIndex
@@ -74,7 +74,7 @@
               ShowPlayButton
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowPlayButton
@@ -90,7 +90,7 @@
               ShowPositionSlider
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowPositionSlider
@@ -106,7 +106,7 @@
               ShowRepeatButton
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowRepeatButton
@@ -122,7 +122,7 @@
               ShowTimePosition
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowTimePosition
@@ -159,7 +159,7 @@
               ControllerBarGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -178,7 +178,7 @@
               MediaController
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -197,7 +197,7 @@
               UrlGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DirectoryGui
@@ -213,7 +213,7 @@
               UrlParams
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DirectoryParam
@@ -229,7 +229,7 @@
               VideoGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

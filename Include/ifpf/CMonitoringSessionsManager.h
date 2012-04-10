@@ -2,13 +2,11 @@
 #define ifpf_CMonitoringSessionsManager_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "istd/TDelPtr.h"
-
 
 // AcfSln includes
 #include "ifpf/IMonitoringSessionManager.h"

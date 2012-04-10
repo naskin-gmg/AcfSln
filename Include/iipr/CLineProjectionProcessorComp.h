@@ -71,7 +71,7 @@ public:
 	virtual bool IsAutoProjectionSizeSupported() const;
 
 private:
-	I_ATTR(std::string, m_lineParamIdAttrPtr);
+	I_ATTR(QByteArray, m_lineParamIdAttrPtr);
 	I_REF(IFeatureToProjectionMapper, m_featureMapperCompPtr);
 };
 

@@ -1,13 +1,11 @@
 #include "iipr/CImageHistogramProcessorComp.h"
 
 
-// STL includes
-#include <cmath>
+// Qt includes
+#include <QtCore/qmath.h>
 
-
- // ACF includes
+// ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "ibase/CSize.h"
 
 #include "iimg/CBitmapRegion.h"
@@ -144,7 +142,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	pixelCount /= usedColorComponents;
 
-	double normFactor = pow(2.0, histogram.GetSampleDepth()) - 1;
+	double normFactor = qPow(2.0, histogram.GetSampleDepth()) - 1;
 
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
 		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);

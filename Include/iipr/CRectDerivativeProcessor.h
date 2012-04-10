@@ -32,13 +32,13 @@ public:
 	/**
 		Get parameter ID used to extract caliper parameter object from parameter set.
 	*/
-	const std::string& GetFilterParamsId() const;
+	const QByteArray& GetFilterParamsId() const;
 
 	/**
 		Set parameter ID used to extract caliper parameter object from parameter set.
 		It is only needed while using general processing interface iproc::IProcessor.
 	*/
-	void SetFilterParamsId(const std::string& id);
+	void SetFilterParamsId(const QByteArray& id);
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
@@ -61,19 +61,19 @@ public:
 	virtual const imath::IDoubleManip& GetValueManip() const;
 
 private:
-	std::string m_filterParamsId;
+	QByteArray m_filterParamsId;
 };
 
 
 // inline methods
 
-inline const std::string& CRectDerivativeProcessor::GetFilterParamsId() const
+inline const QByteArray& CRectDerivativeProcessor::GetFilterParamsId() const
 {
 	return m_filterParamsId;
 }
 
 
-inline void CRectDerivativeProcessor::SetFilterParamsId(const std::string& id)
+inline void CRectDerivativeProcessor::SetFilterParamsId(const QByteArray& id)
 {
 	m_filterParamsId = id;
 }

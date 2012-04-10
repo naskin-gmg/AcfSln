@@ -71,7 +71,7 @@ private:
 	I_ATTR(int, m_samplesCountAttrPtr);
 	I_ATTR(int, m_channelsCountAttrPtr);
 	I_ATTR(QString, m_defaultScriptAttrPtr);
-	I_ATTR(std::string, m_scriptParamIdAttrPtr);
+	I_ATTR(QByteArray, m_scriptParamIdAttrPtr);
 };
 
 

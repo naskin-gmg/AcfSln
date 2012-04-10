@@ -50,7 +50,7 @@
               Parameters
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -71,7 +71,7 @@
               ParametersId
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -113,7 +113,7 @@
               AcceptPatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               AcceptPatterns
@@ -129,7 +129,7 @@
               IgnorePatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               IgnorePatterns
@@ -145,7 +145,7 @@
               ObservedChanges
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -164,7 +164,7 @@
               ObservedItems
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -183,7 +183,7 @@
               PoolingIntervall
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               

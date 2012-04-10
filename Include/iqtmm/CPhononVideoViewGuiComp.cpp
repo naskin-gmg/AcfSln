@@ -99,7 +99,7 @@ double CPhononVideoViewGuiComp::GetCurrentPosition() const
 
 bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 {
-	if (fabs(position - GetCurrentPosition()) < I_BIG_EPSILON){
+	if (qAbs(position - GetCurrentPosition()) < I_BIG_EPSILON){
 		return true;
 	}
 

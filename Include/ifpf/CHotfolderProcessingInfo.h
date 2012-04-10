@@ -2,7 +2,7 @@
 #define ifpf_CHotfolderProcessingInfo_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
 
 // Qt includes

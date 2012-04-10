@@ -38,8 +38,8 @@ protected:
 				iimg::IBitmap& outputImage);
 
 private:
-	I_ATTR(std::string, m_aoiParamIdAttrPtr);
-	I_ATTR(std::string, m_adjustParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_ATTR(QByteArray, m_adjustParamsIdAttrPtr);
 	I_REF(i2d::CRectangle, m_defaultAoiParamCompPtr);
 	I_REF(iprm::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 };

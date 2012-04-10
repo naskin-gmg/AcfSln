@@ -21,7 +21,7 @@ void CCaliperParamsGuiComp::UpdateModel() const
 	istd::CChangeNotifier notifier(NULL);
 
 	double threshold = ThresholdSB->value() * 0.01;
-	if (fabs(objectPtr->GetWeightThreshold() - threshold) > I_BIG_EPSILON){
+	if (qAbs(objectPtr->GetWeightThreshold() - threshold) > I_BIG_EPSILON){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetWeightThreshold(threshold);
 	}

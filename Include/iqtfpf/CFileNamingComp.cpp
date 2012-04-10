@@ -1,10 +1,6 @@
 #include "iqtfpf/CFileNamingComp.h"
 
 
-// STL includes
-#include <algorithm>
-
-
 // Qt includes
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
@@ -41,9 +37,9 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 		QStringList supportedExtensions;
 		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_SAVE);
 
-		QStringList::const_iterator inputFoundIter = std::find(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
+		QStringList::const_iterator inputFoundIter = qFind(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
 		if (inputFoundIter == supportedExtensions.end()){
-			if (supportedExtensions.empty()){
+			if (supportedExtensions.isEmpty()){
 				outputExtension.clear();
 			}
 			else{

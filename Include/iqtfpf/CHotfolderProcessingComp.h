@@ -53,10 +53,10 @@ protected:
 					CHotfolderProcessingComp& parent,
 					const QString& inputFilePath,
 					const QString& outputFilePath,
-					const std::string& itemUuid);
+					const QByteArray& itemUuid);
 
 		int GetProcessingState() const;
-		std::string GetItemUuid() const;
+		QByteArray GetItemUuid() const;
 		QDateTime GetStartTime() const;
 		double GetProcessingTime() const;
 		void Cancel();
@@ -69,7 +69,7 @@ protected:
 		CHotfolderProcessingComp& m_parent;
 		QString m_inputFilePath;
 		QString m_outputFilePath;
-		std::string m_itemUuid;
+		QByteArray m_itemUuid;
 		int m_processingState;
 		double m_processingTime;
 		QDateTime m_startTime; 
@@ -97,7 +97,7 @@ private:
 	/**
 		Get procesing item from its UUID.
 	*/
-	ifpf::IHotfolderProcessingItem* GetItemFromId(const std::string& itemUuid) const;
+	ifpf::IHotfolderProcessingItem* GetItemFromId(const QByteArray& itemUuid) const;
 
 private:
 	/**

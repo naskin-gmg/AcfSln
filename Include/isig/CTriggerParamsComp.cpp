@@ -167,12 +167,12 @@ QString CTriggerParamsComp::GetOptionDescription(int index) const
 }
 
 
-std::string CTriggerParamsComp::GetOptionId(int index) const
+QByteArray CTriggerParamsComp::GetOptionId(int index) const
 {
 	I_ASSERT(int(m_selectionList.size()) > index);
 	I_ASSERT(index >= 0);
 
-	return m_selectionList[index].name.toStdString();
+	return m_selectionList[index].name.toLocal8Bit();
 }
 
 

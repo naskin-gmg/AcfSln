@@ -43,7 +43,7 @@ public:
 
 	// reimplemented (iauth::IRightsProvider)
 	virtual bool HasRight(
-					const std::string& operationId,
+					const QByteArray& operationId,
 					bool beQuiet = false) const;
 
 private:

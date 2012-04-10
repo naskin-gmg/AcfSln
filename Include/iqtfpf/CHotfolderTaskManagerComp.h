@@ -129,7 +129,7 @@ private:
 	/**
 		Get procesing item from its UUID.
 	*/
-	ifpf::IHotfolderProcessingItem* GetItemFromId(const std::string& itemUuid) const;
+	ifpf::IHotfolderProcessingItem* GetItemFromId(const QByteArray& itemUuid) const;
 
 private:
 	/**

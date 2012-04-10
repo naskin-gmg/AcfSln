@@ -119,7 +119,7 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 	i2d::CLine2d transformedLine = projectionLine;
 	i2d::CVector2d diffVector = projectionLine.GetDiffVector();
 
-	if (fabs(diffVector.GetY()) > fabs(diffVector.GetX())){	// switch X and Y axis
+	if (qAbs(diffVector.GetY()) > qAbs(diffVector.GetX())){	// switch X and Y axis
 		axisSizes = istd::CIndex2d(axisSizes[1], axisSizes[0]);
 		addressDiffs = istd::CIndex2d(addressDiffs[1], addressDiffs[0]);
 		transformedLine.SetPoint1(i2d::CVector2d(

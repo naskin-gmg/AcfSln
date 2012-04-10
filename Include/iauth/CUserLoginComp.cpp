@@ -67,7 +67,7 @@ bool CUserLoginComp::Logout()
 
 // reimplemented (iauth::IRightsProvider)
 
-bool CUserLoginComp::HasRight(const std::string& operationId,	bool beQuiet) const
+bool CUserLoginComp::HasRight(const QByteArray& operationId,	bool beQuiet) const
 {
 	int levelId = 0;
 	if (!m_loggedUserName.isEmpty() && m_usersManagerIfPtr.IsValid()){

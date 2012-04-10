@@ -17,7 +17,7 @@ CPropertiesManager::CPropertiesManager()
 }
 
 
-CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const std::string& propertyId) const
+CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const QByteArray& propertyId) const
 {
 	int propertiesCount = m_propertiesList.GetCount();
 
@@ -51,7 +51,7 @@ iser::IObject* CPropertiesManager::GetProperty(int propertyIndex) const
 }
 
 
-std::string CPropertiesManager::GetPropertyId(int propertyIndex) const
+QByteArray CPropertiesManager::GetPropertyId(int propertyIndex) const
 {
 	I_ASSERT(propertyIndex >= 0);
 	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
@@ -65,14 +65,14 @@ QString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
 	I_ASSERT(propertyIndex >= 0);
 	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
-	return QString::fromStdString(m_propertiesList.GetAt(propertyIndex)->propertyDescription);
+	return m_propertiesList.GetAt(propertyIndex)->propertyDescription;
 }
 
 
 void CPropertiesManager::InsertProperty(
 			iser::IObject* objectPtr,
-			const std::string& propertyId,
-			const std::string& propertyDescription,
+			const QByteArray& propertyId,
+			const QByteArray& propertyDescription,
 			int propertyFlags,
 			bool releaseFlag)
 {
@@ -120,8 +120,8 @@ bool CPropertiesManager::ReadProperties(
 	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
 		retVal = retVal && archive.BeginTag(propertyTag);
 
-		std::string propertyId;
-		std::string propertyTypeId;
+		QByteArray propertyId;
+		QByteArray propertyTypeId;
 
 		iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
 		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
@@ -189,8 +189,8 @@ bool CPropertiesManager::WriteProperties(
 		}
 
 		iser::IObject* objectPtr = propertyInfoPtr->objectPtr.GetPtr();
-		std::string propertyId = propertyInfoPtr->propertyId;
-		std::string propertyTypeId = objectPtr->GetFactoryId();
+		QByteArray propertyId = propertyInfoPtr->propertyId;
+		QByteArray propertyTypeId = objectPtr->GetFactoryId();
 
 		retVal = retVal && archive.BeginTag(propertyTag);
 

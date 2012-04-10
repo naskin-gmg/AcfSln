@@ -2,8 +2,8 @@
 #define iipr_CDelegatedBitmapSupplierComp_included
 
 
-// STL includes
-#include <utility>
+// Qt includes
+#include <QtCore/QPair>
 
 // ACF includes
 #include "imod/IModel.h"
@@ -23,12 +23,12 @@ namespace iipr
 	Image supplier delegating the calls to another one or accessing some bitmap object directly.
 */
 class CDelegatedBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< std::pair<const i2d::ITransformation2d*, const iimg::IBitmap*> >,
+			public iproc::TSupplierCompWrap< QPair<const i2d::ITransformation2d*, const iimg::IBitmap*> >,
 			virtual public IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< std::pair<const i2d::ITransformation2d*, const iimg::IBitmap*> > BaseClass;
+	typedef iproc::TSupplierCompWrap< QPair<const i2d::ITransformation2d*, const iimg::IBitmap*> > BaseClass;
 
 	I_BEGIN_COMPONENT(CDelegatedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(IBitmapProvider);

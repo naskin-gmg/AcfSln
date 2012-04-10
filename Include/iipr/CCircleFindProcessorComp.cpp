@@ -214,7 +214,7 @@ bool CCircleFindProcessorComp::CalculateCircle(
 
 	for (int i = 0; i < raysCount; ++i){
 		Ray& ray = rays[i];
-		I_ASSERT(!ray.points.empty());
+		I_ASSERT(!ray.points.isEmpty());
 		I_ASSERT(ray.usedIndex >= 0);
 		I_ASSERT(ray.usedIndex < int(ray.points.size()));
 
@@ -254,7 +254,7 @@ bool CCircleFindProcessorComp::CalculateCircle(
 
 			double foundRadius = result.GetRadius();
 
-			if (fabs(currentRadius - foundRadius) < minOutliersDistance){
+			if (qAbs(currentRadius - foundRadius) < minOutliersDistance){
 				optimizedRays.push_back(ray);
 			}
 		}
@@ -293,7 +293,7 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 	for (int i = 0; i < inRaysCount; ++i){
 		Ray& ray = inRays[i];
-		I_ASSERT(!ray.points.empty());
+		I_ASSERT(!ray.points.isEmpty());
 		I_ASSERT(ray.usedIndex >= 0);
 		I_ASSERT(ray.usedIndex < int(ray.points.size()));
 
@@ -311,7 +311,7 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 	for (int i = 0; i < outRaysCount; ++i){
 		Ray& ray = outRays[i];
-		I_ASSERT(!ray.points.empty());
+		I_ASSERT(!ray.points.isEmpty());
 		I_ASSERT(ray.usedIndex >= 0);
 		I_ASSERT(ray.usedIndex < int(ray.points.size()));
 

@@ -2,13 +2,11 @@
 #define ifpf_CHotfolderStatistics_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
-
 
 // AcfSln includes
 #include "ifpf/IHotfolderStatistics.h"

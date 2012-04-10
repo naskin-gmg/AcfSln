@@ -39,7 +39,7 @@
               Buffers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -60,7 +60,7 @@
               Processors
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -105,7 +105,7 @@
               CaliperParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               CaliperParamId
@@ -121,7 +121,7 @@
               FilterParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               FilterParamsId
@@ -137,7 +137,7 @@
               LineParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               LineParamId
@@ -174,7 +174,7 @@
               FeaturesMapper
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

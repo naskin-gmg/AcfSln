@@ -2,11 +2,8 @@
 #define iprop_TMultiProperty_included
 
 
-// STL includes
-#include <vector>
-
-
 // Qt includes
+#include <QtCore/QVector>
 #include <QtCore/QStringList>
 
 
@@ -18,6 +15,7 @@
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 
+// ACF-Solutions includes
 #include "iprop/CPropertyBase.h"
 
 
@@ -29,7 +27,7 @@ namespace iprop
 	Template implementation of multiple property.
 	\internal
 */
-template <typename Value, class Container = std::vector<Value> >
+template <typename Value, class Container = QVector<Value> >
 class TMultiProperty: public CPropertyBase
 {
 public:
@@ -55,8 +53,8 @@ public:
 	*/
 	TMultiProperty(
 				IPropertiesManager* propertyOwnerPtr,
-				const std::string& propertyId,
-				const std::string& propertyDescription,
+				const QByteArray& propertyId,
+				const QByteArray& propertyDescription,
 				int propertyFlags,
 				int changeFlags = 0,
 				int elementsCount = 0,
@@ -107,19 +105,19 @@ public:
 	const_iterator end() const;
 
 	// reimplemented (iser::IObject)
-	std::string GetFactoryId() const;
+	QByteArray GetFactoryId() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static const std::string& GetTypeName();
+	static const QByteArray& GetTypeName();
 
 protected:
 	Container m_values;
 
 private:
-	static const std::string s_typeName;
+	static const QByteArray s_typeName;
 };
 
 
@@ -134,8 +132,8 @@ TMultiProperty<Value, Container>::TMultiProperty()
 template <typename Value, class Container>
 TMultiProperty<Value, Container>::TMultiProperty(
 				IPropertiesManager* propertyOwnerPtr,
-				const std::string& propertyId,
-				const std::string& propertyDescription,
+				const QByteArray& propertyId,
+				const QByteArray& propertyDescription,
 				int propertyFlags,
 				int changeFlags,
 				int elementsCount,
@@ -258,7 +256,7 @@ typename TMultiProperty<Value, Container>::const_iterator TMultiProperty<Value, 
 // reimplemented (iser::IObject)
 
 template <typename Value, class Container>
-std::string TMultiProperty<Value, Container>::GetFactoryId() const
+QByteArray TMultiProperty<Value, Container>::GetFactoryId() const
 {
 	return s_typeName;
 }
@@ -309,7 +307,7 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value, class Container>
-const std::string& TMultiProperty<Value, Container>::GetTypeName()
+const QByteArray& TMultiProperty<Value, Container>::GetTypeName()
 {
 	return s_typeName;
 }
@@ -318,7 +316,7 @@ const std::string& TMultiProperty<Value, Container>::GetTypeName()
 // private static properties
 
 template <typename Value, class Container>
-const std::string TMultiProperty<Value, Container>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
+const QByteArray TMultiProperty<Value, Container>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
 
 
 // typedefs
@@ -327,7 +325,7 @@ typedef TMultiProperty<double> CMultiDoubleProperty;
 typedef TMultiProperty<bool> CMultiBoolProperty;
 typedef TMultiProperty<int> CMultiIntProperty;
 typedef TMultiProperty<QString, QStringList> CMultiStringProperty;
-typedef TMultiProperty<std::string> CMultiStdStringProperty;
+typedef TMultiProperty<QByteArray> CMultiStdStringProperty;
 
 
 } // namespace iprop

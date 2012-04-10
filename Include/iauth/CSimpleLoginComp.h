@@ -53,7 +53,7 @@ public:
 
 	// reimplemented (iauth::IRightsProvider)
 	virtual bool HasRight(
-					const std::string& operationId,
+					const QByteArray& operationId,
 					bool beQuiet = false) const;
 
 	// reimplemented (iser::ISerializable)
@@ -69,7 +69,7 @@ private:
 	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);
 
-	typedef std::vector<CUser> Users;
+	typedef QVector<CUser> Users;
 	Users m_users;
 
 	int m_loggedUserIndex;

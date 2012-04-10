@@ -42,7 +42,7 @@ private:
 				iimg::IBitmap& outputBitmap) const;
 
 private:
-	I_ATTR(std::string, m_binarizationParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_binarizationParamsIdAttrPtr);
 };
 
 

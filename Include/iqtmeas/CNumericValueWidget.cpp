@@ -1,8 +1,8 @@
 #include "iqtmeas/CNumericValueWidget.h"
 
 
-// ACF includes
-#include "iqt/iqt.h"
+// Qt includes
+#include <QtCore/qmath.h>
 
 
 namespace iqtmeas
@@ -40,7 +40,7 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imeas::I
 	const imath::IDoubleManip& valueManip = unitInfo.GetValueManip();
 
 	int precision = valueManip.GetPrecision();
-	m_unitPrecisionFactor = std::pow(10.0, double(qMin(precision, 2)));
+	m_unitPrecisionFactor = qPow(10.0, double(qMin(precision, 2)));
 	int displayPrecision = qMin(2, qMax(0, precision - int(std::log10(m_unitMultiplicationFactor) + 0.5)));
 
 	istd::CRange valueRange = unitInfo.GetValueRange();

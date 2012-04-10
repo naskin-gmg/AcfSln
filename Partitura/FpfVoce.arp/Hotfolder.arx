@@ -39,7 +39,7 @@
               FileConverter
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               FileConverter
@@ -55,7 +55,7 @@
               FileNamingParams
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -74,7 +74,7 @@
               HotfolderOutputDirectory
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -93,7 +93,7 @@
               HotfolderProcessingInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -112,7 +112,7 @@
               HotfolderSettings
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -131,7 +131,7 @@
               InputDirectoriesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -150,7 +150,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -166,7 +166,7 @@
               MonitoringSessionManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MonitoringSessionManager
@@ -182,7 +182,7 @@
               OutputFileInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               OutputFileInfo
@@ -198,7 +198,7 @@
               ProcessingParams
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ProcessingParams
@@ -214,7 +214,7 @@
               SessionManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -275,7 +275,7 @@
               AcceptPatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               AcceptPatterns
@@ -291,7 +291,7 @@
               IgnorePatterns
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               IgnorePatterns
@@ -307,7 +307,7 @@
               ProcessingParameterIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               ProcessingParameterIds
@@ -323,7 +323,7 @@
               ProcessingParameters
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               ProcessingParameters

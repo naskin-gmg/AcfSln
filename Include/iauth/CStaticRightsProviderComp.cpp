@@ -8,7 +8,7 @@ namespace iauth
 // reimeplemented (IRightsProvider)
 
 bool CStaticRightsProviderComp::HasRight(
-			const std::string& operationId,
+			const QByteArray& operationId,
 			bool beQuiet) const
 {
 	if (m_rightsOn.find(operationId) != m_rightsOn.end()){
@@ -41,14 +41,14 @@ void CStaticRightsProviderComp::OnComponentCreated()
 	if (m_rightsOnAttrPtr.IsValid()){
 		int attrCount = int(m_rightsOnAttrPtr.GetCount());
 		for (int i = 0; i < attrCount; ++i){
-			m_rightsOn.insert(m_rightsOnAttrPtr[i].toStdString());
+			m_rightsOn.insert(m_rightsOnAttrPtr[i].toLocal8Bit());
 		}
 	}
 
 	if (m_rightsOffAttrPtr.IsValid()){
 		int attrCount = int(m_rightsOffAttrPtr.GetCount());
 		for (int i = 0; i < attrCount; ++i){
-			m_rightsOff.insert(m_rightsOffAttrPtr[i].toStdString());
+			m_rightsOff.insert(m_rightsOffAttrPtr[i].toLocal8Bit());
 		}
 	}
 }

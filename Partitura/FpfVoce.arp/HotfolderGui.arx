@@ -50,7 +50,7 @@
               InputDirectoriesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               InputDirectoriesManager
@@ -87,7 +87,7 @@
               DirectoryItemGui
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -106,7 +106,7 @@
               HotfolderStatistics
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -125,7 +125,7 @@
               InputDirectoriesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               InputDirectoriesManager
@@ -141,7 +141,7 @@
               ProcessingItemPreview
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ProcessingItemPreview
@@ -157,7 +157,7 @@
               ProcessingParamsDialog
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ProcessingParamsDialog
@@ -173,7 +173,7 @@
               ProgressManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -192,7 +192,7 @@
               StateIcons
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -253,7 +253,7 @@
               IconFiles
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -286,7 +286,7 @@
               IconsPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               

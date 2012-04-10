@@ -29,7 +29,7 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 private:
-	I_ATTR(std::string, m_paramsIdAttrPtr);
+	I_ATTR(QByteArray, m_paramsIdAttrPtr);
 };
 
 

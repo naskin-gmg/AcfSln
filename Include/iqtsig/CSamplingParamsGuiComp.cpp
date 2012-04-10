@@ -49,7 +49,7 @@ void CSamplingParamsGuiComp::on_IntervalSB_valueChanged(double value)
 	isig::ISamplingParams* objectPtr = GetObjectPtr();
 	if (IsGuiCreated() && (objectPtr != NULL)){
 		double interval = value * 0.001;
-		if (fabs(interval - objectPtr->GetInterval()) > I_EPSILON){
+		if (qAbs(interval - objectPtr->GetInterval()) > I_EPSILON){
 			istd::CChangeNotifier notifier(objectPtr);
 
 			objectPtr->SetInterval(interval);

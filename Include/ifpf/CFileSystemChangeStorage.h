@@ -2,10 +2,8 @@
 #define ifpf_CFileSystemChangeStorage_included
 
 
-// STL includes
-#include <vector>
-
 // Qt includes
+#include <QtCore/QVector>
 #include <QtCore/QMutex>
 
 // ACF includes
@@ -43,7 +41,7 @@ private:
 		int state;
 	};
 
-	typedef std::vector<FileItem> FileItems;
+	typedef QVector<FileItem> FileItems;
 	FileItems m_storageItems;
 
 	mutable QMutex m_mutex;

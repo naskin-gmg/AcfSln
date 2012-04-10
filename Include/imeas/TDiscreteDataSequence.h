@@ -2,9 +2,8 @@
 #define imeas_TDiscreteDataSequence_included
 
 
-// STL includes
-#include <cstring>
-
+// Qt includes
+#include <QtCore/qmath.h>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -83,7 +82,7 @@ TDiscreteDataSequence<Element>::TDiscreteDataSequence()
 	m_sampleDiff(0),
 	m_channelDiff(0)
 {
-	m_normFactor = ::pow(2.0, double(sizeof(Element) * 8)) - 1;
+	m_normFactor = qPow(2.0, double(sizeof(Element) * 8)) - 1;
 }
 
 

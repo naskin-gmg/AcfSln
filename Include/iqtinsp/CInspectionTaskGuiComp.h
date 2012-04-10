@@ -2,9 +2,9 @@
 #define iqtinsp_CInspectionTaskGuiComp_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-#include <set>
+#include <QtCore/QSet>
 
 // ACF includes
 #include <QtCore/QString>
@@ -114,7 +114,7 @@ private:
 	typedef QMap<int, int> GuiMap;
 	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
-	typedef std::set<imod::IModelEditor*> EditorsList;
+	typedef QSet<imod::IModelEditor*> EditorsList;
 	EditorsList m_editorsList;
 };
 

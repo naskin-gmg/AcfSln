@@ -2,8 +2,8 @@
 #define iauth_IRightsProvider_included
 
 
-// STL includes
-#include <string>
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/IChangeable.h"
@@ -22,7 +22,7 @@ public:
 		\param	beQuiet if it is true, user can not be asked for password during this check.
 	 */
 	virtual bool HasRight(
-				const std::string& operationId,
+				const QByteArray& operationId,
 				bool beQuiet = false) const = 0;
 };
 

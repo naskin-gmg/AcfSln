@@ -58,7 +58,7 @@ int CFileAcquisitionComp::DoProcessing(
 	if (info.filesIter == info.files.end()){
 		QStringList nameFilters;
 
-		if (!extensions.empty()){
+		if (!extensions.isEmpty()){
 			for (		QStringList::iterator iter = extensions.begin();
 						iter != extensions.end();
 						++iter){

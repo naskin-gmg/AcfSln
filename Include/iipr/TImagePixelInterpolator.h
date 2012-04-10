@@ -2,9 +2,11 @@
 #define iipr_TImagePixelInterpolator_included
 
 
+// Qt includes
+#include <QtCore/qmath.h>
+
 // ACF includes
 #include "istd/istd.h"
-
 
 // IACF includes
 #include "iipr/IImageInterpolationParams.h"
@@ -56,7 +58,7 @@ TImagePixelInterpolator<PixelComponentType>::TImagePixelInterpolator(const iimg:
 	m_imageWidth = bitmap.GetImageSize().GetX();
 	m_pixelBytesCount = bitmap.GetPixelBitsCount() / 8;
 	m_interpolationMode = interpolationMode;
-	m_maxValue = int(pow(2.0, double(sizeof(PixelComponentType) * 8)) - 1);
+	m_maxValue = int(qPow(2.0, double(sizeof(PixelComponentType) * 8)) - 1);
 }
 
 

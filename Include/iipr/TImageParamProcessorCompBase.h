@@ -43,7 +43,7 @@ protected:
 				iimg::IBitmap& outputImage) = 0;
 
 private:
-	I_ATTR(std::string, m_paramsIdAttrPtr);
+	I_ATTR(QByteArray, m_paramsIdAttrPtr);
 };
 
 

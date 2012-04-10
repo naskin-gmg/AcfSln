@@ -2,13 +2,9 @@
 
 
 // Qt includes
+#include <QtCore/qmath.h>
 #include <QtCore/QStringList>
-
-
-// STL includes
-#include <fstream>
-#include <cstring>
-#include <cmath>
+#include <QtCore/QFile>
 
 // ACF includes
 #include "istd/CRange.h"
@@ -83,8 +79,8 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 		return StateFailed;
 	}
 
-	std::ofstream fileStream(filePath.toStdString().c_str(), std::ios::out | std::ios_base::binary);
-	if (!fileStream.is_open()){
+	QFile fileStream(filePath);
+	if (!fileStream.open(QIODevice::WriteOnly | QIODevice::Truncate)){
 		return StateFailed;
 	}
 
@@ -141,8 +137,8 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 			}
 		}
 
-		double offset = std::pow(2.0, BITS_PER_SAMPLE - 1);
-		double amplitude = std::pow(2.0, BITS_PER_SAMPLE - 1) - I_BIG_EPSILON;
+		double offset = qPow(2.0, BITS_PER_SAMPLE - 1);
+		double amplitude = qPow(2.0, BITS_PER_SAMPLE - 1) - I_BIG_EPSILON;
 		for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 				double sample = sequencePtr->GetSample(sampleIndex, channelIndex);
@@ -153,7 +149,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 			}
 		}
 
-		retVal = fileStream.good() ? StateOk : StateFailed;
+		retVal = (fileStream.error() == QFile::NoError)? StateOk : StateFailed;
 	}
 
 	fileStream.close();

@@ -39,7 +39,7 @@
               DirParamId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               DirectoryMonitorParamsId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               
@@ -77,7 +77,7 @@
               FileSystemChangeStorage
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -96,7 +96,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -112,7 +112,7 @@
               SessionManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MonitoringSessionManager
@@ -170,7 +170,7 @@
               FileConverter
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               FileConverter
@@ -186,7 +186,7 @@
               HotfolderProcessingInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               HotfolderProcessingInfo
@@ -202,7 +202,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -218,7 +218,7 @@
               TaskManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               DirectoryMontorFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -277,7 +277,7 @@
               FileNamingStrategy
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -296,7 +296,7 @@
               FileSystemChangeStorage
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -315,7 +315,7 @@
               HotfolderProcessingInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               HotfolderProcessingInfo
@@ -331,7 +331,7 @@
               HotfolderSettingsModel
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               HotfolderSettings
@@ -347,7 +347,7 @@
               InputDirectoriesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               InputDirectoriesManager
@@ -363,7 +363,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -400,7 +400,7 @@
               DirectoryPath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               HotfolderOutputDirectory
@@ -416,7 +416,7 @@
               FileNamingParams
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               FileNamingParams
@@ -432,7 +432,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -448,7 +448,7 @@
               OutputFileInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               OutputFileInfo

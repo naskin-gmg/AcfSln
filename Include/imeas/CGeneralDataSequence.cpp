@@ -1,9 +1,6 @@
 #include "imeas/CGeneralDataSequence.h"
 
 
-// STL includes
-#include <cstring>
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TDelPtr.h"
@@ -64,7 +61,7 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 		return false;
 	}
 
-	m_samples.resize(samplesCount * m_channelsCount, 0.0);
+	m_samples.resize(samplesCount * m_channelsCount);
 
 	return true;
 }
@@ -89,7 +86,7 @@ const IDataSequenceInfo* CGeneralDataSequence::GetSequenceInfo() const
 
 bool CGeneralDataSequence::IsEmpty() const
 {
-	return m_samples.empty();
+	return m_samples.isEmpty();
 }
 
 

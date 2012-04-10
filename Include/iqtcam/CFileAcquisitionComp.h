@@ -73,7 +73,7 @@ private:
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_ATTR(QString, m_defaultDirAttrPtr);
-	I_ATTR(std::string, m_parameterIdAttrPtr);
+	I_ATTR(QByteArray, m_parameterIdAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 };
 

@@ -2,7 +2,7 @@
 #define iprm_CSelectionParamCameraComp_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
 
 // ACF includes
@@ -64,8 +64,8 @@ protected:
 		JoinParamsSet(const iprm::IParamsSet* origParamsPtr, const iprm::IParamsSet* selectedParamsPtr);
 
 		// reimplemented (iprm::IParamsSet)
-		virtual const iser::ISerializable* GetParameter(const std::string& id) const;
-		virtual iser::ISerializable* GetEditableParameter(const std::string& id);
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
@@ -76,7 +76,7 @@ protected:
 	};
 
 private:
-	I_ATTR(std::string, m_selectionIdAttrPtr);
+	I_ATTR(QByteArray, m_selectionIdAttrPtr);
 	I_ATTR(int, m_defaultIndexAttrPtr);
 	I_REF(iprm::IParamsManager, m_paramsManagerCompPtr);
 

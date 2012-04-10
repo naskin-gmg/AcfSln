@@ -26,10 +26,10 @@ CHotfolderProcessingItem::CHotfolderProcessingItem()
 
 // reimplemented ()ifpf::CHotfolderProcessingItem
 
-std::string CHotfolderProcessingItem::GetItemUuid() const
+QByteArray CHotfolderProcessingItem::GetItemUuid() const
 {
-	if (m_itemId.empty()){
-		m_itemId = QUuid::createUuid().toString().toStdString();
+	if (m_itemId.isEmpty()){
+		m_itemId = QUuid::createUuid().toString().toLocal8Bit();
 	}
 
 	return m_itemId;

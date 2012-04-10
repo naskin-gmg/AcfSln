@@ -1,10 +1,6 @@
 #include "iqtex/CXslTransformationReadArchive.h"
 
 
-// STL includes
-#include <sstream>
-#include <cstring>
-
 // Qt includes
 #include <QtCore/QObject>
 #include <QtCore/QFile>
@@ -69,7 +65,7 @@ CXslTransformationReadArchive::CXslTransformationReadArchive(
 bool CXslTransformationReadArchive::OpenDocument(const QString& filePath, const QString& xslFilePath)
 {
 	QFile xmlFile(filePath);
-	if (!xmlFile.open(QIODevice::ReadOnly)){
+	if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
 		return false;
 	}
 
@@ -83,7 +79,7 @@ bool CXslTransformationReadArchive::OpenDocument(const QString& filePath, const 
 	}
 	else{
 		QFile xslfile(xslFilePath);
-		if (!xslfile.open(QIODevice::ReadOnly)){
+		if (!xslfile.open(QIODevice::ReadOnly | QIODevice::Text)){
 			return false;
 		}
 
@@ -104,7 +100,7 @@ bool CXslTransformationReadArchive::OpenDocument(const QString& filePath, const 
 		}
 	}
 
-	if (m_currentNode.nodeValue() != QString::fromStdString(m_rootTag.GetId())){
+	if (m_currentNode.nodeValue() != m_rootTag.GetId()){
 		QDomElement mainElement = m_document.documentElement();
 
 		m_currentNode = mainElement;
@@ -130,7 +126,7 @@ bool CXslTransformationReadArchive::IsTagSkippingSupported() const
 
 bool CXslTransformationReadArchive::BeginTag(const iser::CArchiveTag& tag)
 {
-	QString tagId(tag.GetId().c_str());
+	QString tagId(tag.GetId());
 
 	QDomElement element = m_currentNode.firstChildElement(tagId);
 	if (!element.isNull()){
@@ -142,7 +138,7 @@ bool CXslTransformationReadArchive::BeginTag(const iser::CArchiveTag& tag)
 
 bool CXslTransformationReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count)
 {
-	QString tagId(tag.GetId().c_str());
+	QString tagId(tag.GetId());
 
 	QDomElement element = m_currentNode.firstChildElement(tagId);
 	if (!element.isNull()){
@@ -153,10 +149,10 @@ bool CXslTransformationReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, 
 	}
 
 	int tempCount = 0;
-	QDomElement child = element.firstChildElement(QString(subTag.GetId().c_str()));
+	QDomElement child = element.firstChildElement(QString(subTag.GetId()));
 	while (!child.isNull()){
 		tempCount++;
-		child = child.nextSiblingElement(QString(subTag.GetId().c_str()));
+		child = child.nextSiblingElement(QString(subTag.GetId()));
 	}
 	count = tempCount;
 
@@ -320,11 +316,11 @@ bool CXslTransformationReadArchive::Process(double& value)
 }
 
 
-bool CXslTransformationReadArchive::Process(std::string& value)
+bool CXslTransformationReadArchive::Process(QByteArray& value)
 {
 	QString text = PullTextNode();
 
-	value = text.toStdString();
+	value = text.toLocal8Bit();
 
 	return true;
 }
@@ -346,7 +342,7 @@ bool CXslTransformationReadArchive::ProcessData(void* dataPtr, int size)
 
 	quint8* data = (quint8*)dataPtr;
 
-	std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
+	QVector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toLocal8Bit());
 
 	I_ASSERT(size == int(decodedData.size()));
 

@@ -159,8 +159,8 @@ private:
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(ifpf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
 	I_REF(ifpf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
-	I_ATTR(std::string, m_directoryPathIdAttrPtr);
-	I_ATTR(std::string, m_directoryMonitorParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_directoryPathIdAttrPtr);
+	I_ATTR(QByteArray, m_directoryMonitorParamsIdAttrPtr);
 	I_ATTR(bool, m_autoStartAttrPtr);
 
 	bool m_lockChanges;

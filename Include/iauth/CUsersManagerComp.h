@@ -2,8 +2,8 @@
 #define iauth_CUsersManagerComp_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "iser/CArchiveTag.h"
@@ -63,10 +63,10 @@ private:
 	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);
 
-	typedef std::vector<CUser> Users;
+	typedef QVector<CUser> Users;
 	Users m_users;
 
-	typedef std::vector<QString> UserLevels;
+	typedef QVector<QString> UserLevels;
 	UserLevels m_userLevels;
 };
 

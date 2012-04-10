@@ -553,7 +553,7 @@ void CHotfolderGuiComp::OnContextMenuRequested(const QPoint& menuPoint)
 void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 {
 	ProcessingItems processingItems = GetSelectedProcessingItems();
-	if (!processingItems.empty()){
+	if (!processingItems.isEmpty()){
 		imod::IModel* itemModelPtr = processingItems[0]->GetModelPtr();
 		if (itemModelPtr != NULL){
 			m_itemModelProxy.SetModelPtr(itemModelPtr);

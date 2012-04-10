@@ -108,7 +108,7 @@ private:
 		CHotfolderGuiComp& m_parent;
 	};
 
-	typedef std::vector<ProcessingItem*> ProcessingItems;
+	typedef QVector<ProcessingItem*> ProcessingItems;
 
 	/**
 		Directory item
@@ -169,7 +169,7 @@ private:
 	I_REF(iqtgui::IDialog, m_processingParamsDialogCompPtr);
 	I_REF(iprm::IParamsManager, m_inputDirectoriesParamsManagerCompPtr);
 	I_REF(imod::IModel, m_inputDirectoriesParamsManagerModelCompPtr);
-	I_ATTR(std::string, m_directoryPathIdAttrPtr);
+	I_ATTR(QByteArray, m_directoryPathIdAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_hotfolderCommands;
 	iqtgui::CHierarchicalCommand m_runCommand;

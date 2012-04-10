@@ -37,7 +37,7 @@ QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const QString& /*h
 	font.setBold(true);
 	font.setPointSize(12);
 	componentLabel.setFont(font);
-	componentLabel.setText(address.toStdString()));
+	componentLabel.setText(address.toLocal8Bit()));
 	if (m_consistInfoCompPtr.IsValid()){
 		componentLabel.setIconSize(QSize(64, 64));
 		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));

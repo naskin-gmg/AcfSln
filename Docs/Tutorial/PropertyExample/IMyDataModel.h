@@ -2,9 +2,8 @@
 #define IMyDataModel_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "iser/ISerializable.h"
@@ -21,8 +20,8 @@ public:
 	virtual double GetNumber() const = 0;
 	virtual void SetNumber(double number) = 0;
 
-	virtual std::string GetText() const = 0;
-	virtual void SetText(const std::string& text) = 0;
+	virtual QByteArray GetText() const = 0;
+	virtual void SetText(const QByteArray& text) = 0;
 
 	virtual i2d::CRectangle GetRectangle() const = 0;
 	virtual void SetRectangle(const i2d::CRectangle& rectangle) = 0;

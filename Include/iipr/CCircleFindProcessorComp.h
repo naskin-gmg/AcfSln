@@ -64,7 +64,7 @@ protected:
 		i2d::CVector2d position;
 	};
 
-	typedef std::vector<Point> Points;
+	typedef QVector<Point> Points;
 
 	struct Ray
 	{
@@ -73,7 +73,7 @@ protected:
 		int usedIndex;
 	};
 
-	typedef std::vector<Ray> Rays;
+	typedef QVector<Ray> Rays;
 
 	bool AddAoiToRays(
 				const istd::IChangeable& aoiObject,
@@ -96,9 +96,9 @@ protected:
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_ATTR(std::string, m_aoiParamIdAttrPtr);
-	I_ATTR(std::string, m_slaveLineIdAttrPtr);
-	I_ATTR(std::string, m_circleFinderParamsIdAttrPtr);
+	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
+	I_ATTR(QByteArray, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
 };
 

@@ -26,8 +26,8 @@ public:
 	// reimplemented (IMyDataModel)
 	virtual double GetNumber() const;
 	virtual void SetNumber(double number);
-	virtual std::string GetText() const;
-	virtual void SetText(const std::string& text);
+	virtual QByteArray GetText() const;
+	virtual void SetText(const QByteArray& text);
 	virtual i2d::CRectangle GetRectangle() const;
 	virtual void SetRectangle(const i2d::CRectangle& rectangle);
 

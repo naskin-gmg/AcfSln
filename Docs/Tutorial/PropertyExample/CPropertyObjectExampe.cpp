@@ -27,13 +27,13 @@ void CPropertyObjectExampe::SetNumber(double number)
 }
 
 
-std::string CPropertyObjectExampe::GetText() const
+QByteArray CPropertyObjectExampe::GetText() const
 {
 	return m_text.GetValue();
 }
 
 
-void CPropertyObjectExampe::SetText(const std::string& text)
+void CPropertyObjectExampe::SetText(const QByteArray& text)
 {
 	m_text.SetValue(text);
 }

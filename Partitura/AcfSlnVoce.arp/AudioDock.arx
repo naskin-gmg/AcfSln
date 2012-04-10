@@ -71,7 +71,7 @@
               IsChannelPanelVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsChannelPanelVisible
@@ -90,7 +90,7 @@
               IsScalePanelVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsScalePanelVisible
@@ -109,7 +109,7 @@
               IsScaledValue
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -128,7 +128,7 @@
               IsTimeSpanPanelVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsTimeSpanPanelVisible
@@ -147,7 +147,7 @@
               MinValue
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               
@@ -187,7 +187,7 @@
               AllowedDockAreas
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               AllowedDockAreas
@@ -203,7 +203,7 @@
               DockArea
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DockArea
@@ -219,7 +219,7 @@
               DockFeatures
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DockFeatures
@@ -235,7 +235,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -254,7 +254,7 @@
               SlaveGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -294,7 +294,7 @@
               Model
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -313,7 +313,7 @@
               Observers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               

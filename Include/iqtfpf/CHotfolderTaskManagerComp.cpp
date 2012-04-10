@@ -1,9 +1,6 @@
 #include "iqtfpf/CHotfolderTaskManagerComp.h"
 
 
-// STL includes
-#include <algorithm>
-
 // Qt includes
 #include <QtCore/QDir>
 #include <QtGui/QApplication>
@@ -100,7 +97,7 @@ void CHotfolderTaskManagerComp::OnFilesModifiedEvent(const ifpf::IFileSystemChan
 void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	I_ASSERT(!files.empty());
+	I_ASSERT(!files.isEmpty());
 
 	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
 
@@ -116,7 +113,7 @@ void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const QStringList& fil
 void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	I_ASSERT(!files.empty());
+	I_ASSERT(!files.isEmpty());
 
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
@@ -138,7 +135,7 @@ void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const QStringList
 void CHotfolderTaskManagerComp::RestartProcessingQueueFiles(const QStringList& files)
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
-	I_ASSERT(!files.empty());
+	I_ASSERT(!files.isEmpty());
 
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
@@ -284,7 +281,7 @@ QStringList CHotfolderTaskManagerComp::GetRemovedInputDirectories() const
 	for (		DirectoryMonitorsMap::const_iterator index = m_directoryMonitorsMap.begin();
 				index != m_directoryMonitorsMap.end();
 				index++){
-		QStringList::const_iterator foundIter = std::find(inputDirectories.begin(), inputDirectories.end(), index.key());
+		QStringList::const_iterator foundIter = qFind(inputDirectories.begin(), inputDirectories.end(), index.key());
 		if (foundIter == inputDirectories.end()){
 			removedDirectories.push_back(index.key());
 		}
@@ -370,7 +367,7 @@ ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::FindProcessingItem(co
 }
 
 
-ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetItemFromId(const std::string& itemUuid) const
+ifpf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetItemFromId(const QByteArray& itemUuid) const
 {
 	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
