@@ -1,4 +1,4 @@
-	#ifndef iipr_CSearchFeature_included
+#ifndef iipr_CSearchFeature_included
 #define iipr_CSearchFeature_included
 
 
@@ -16,8 +16,7 @@ namespace iipr
 /**
 	Implementation of IFeature interface for pattern search features.
 */
-class CSearchFeature: public TFeatureWrap<i2d::CPosition2d>
-			
+class CSearchFeature: public TFeatureWrap<i2d::CPosition2d>		
 {
 public:
 	typedef TFeatureWrap<i2d::CPosition2d> BaseClass;
@@ -26,10 +25,12 @@ public:
 				double weight,
 				const i2d::CVector2d& position,
 				double angle,
-				const i2d::CVector2d& scale);
+				const i2d::CVector2d& scale,
+				int index = -1);
 
 	double GetAngle() const;
 	const i2d::CVector2d& GetScale() const;
+	int GetIndex() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -37,6 +38,7 @@ public:
 private:
 	double m_angle;
 	i2d::CVector2d m_scale;
+	int m_index;
 };
 
 
@@ -44,4 +46,5 @@ private:
 
 
 #endif // !iipr_CSearchFeature_included
+
 
