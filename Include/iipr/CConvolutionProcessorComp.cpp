@@ -173,7 +173,7 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 			KernelElement element;
 			element.offset = index[0] * pixelsDifference + index[1] * linesDifference;
 			element.factor = int(scaleFactor * value);
-			element.alphaFactor = std::abs(element.factor);
+			element.alphaFactor = stdqAbs(element.factor);
 
 			if (element.factor != 0){
 				fastAccessElements.push_back(element);

@@ -66,7 +66,7 @@ int CRingPatternGeneratorComp::DoProcessing(
 				usedFrequency = (1.0 - relativeRadius) * minFrequency + relativeRadius * patternFrequency;
 			}
 
-			double outputValue = cos(radius * usedFrequency * I_2PI);
+			double outputValue = qCos(radius * usedFrequency * I_2PI);
 				
 			*(imageLinePtr + x) = quint8(127 * outputValue + 128);
 		}

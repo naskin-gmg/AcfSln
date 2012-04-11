@@ -79,11 +79,11 @@ typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixel
 template <typename PixelComponentType>
 typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetBilinearInterpolated(double x, double y, int componentIndex) const
 {
-	int cx = int(::ceil(x));
-	int cy = int(::ceil(y));
+	int cx = int(qCeil(x));
+	int cy = int(qCeil(y));
 
-	int fx = int(::floor(x));
-	int fy = int(::floor(y));
+	int fx = int(qFloor(x));
+	int fy = int(qFloor(y));
 
 	double dx = cx - x;
 	double dy = cy - y;

@@ -153,8 +153,8 @@ void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowIte
 	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
 	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
 		gridSize *= 2;
-		width = ::ceil(width / gridSize) * gridSize;
-		height = ::ceil(height / gridSize) * gridSize;
+		width = qCeil(width / gridSize) * gridSize;
+		height = qCeil(height / gridSize) * gridSize;
 	}
 
 	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));

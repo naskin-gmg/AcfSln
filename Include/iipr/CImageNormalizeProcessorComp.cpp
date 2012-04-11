@@ -37,9 +37,9 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 
 	if (aoiPtr != NULL){
 		outputImageLeft = qMax(outputImageLeft, int(aoiPtr->GetLeft()));
-		outputImageRight = qMin(outputImageRight, int(::ceil(aoiPtr->GetRight())));
+		outputImageRight = qMin(outputImageRight, int(qCeil(aoiPtr->GetRight())));
 		outputImageTop = qMax(outputImageTop, int(aoiPtr->GetLeft()));
-		outputImageBottom = qMin(outputImageBottom, int(::ceil(aoiPtr->GetRight())));
+		outputImageBottom = qMin(outputImageBottom, int(qCeil(aoiPtr->GetRight())));
 	}
 
 	if ((outputImageLeft > outputImageRight) || (outputImageTop > outputImageBottom)){	// if output image should be empty

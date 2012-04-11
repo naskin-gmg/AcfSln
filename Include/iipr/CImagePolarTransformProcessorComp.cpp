@@ -75,7 +75,7 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 	i2d::CRectangle regionRect = bitmapRegion.GetBoundingBox();
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - regionRect.GetTopLeft();
-	int radius = int(::ceil(diffVector.GetLength()));
+	int radius = int(qCeil(diffVector.GetLength()));
 	int angleRange = int(radius * I_PI + 0.5);
 
 	int r1 = 0;
@@ -83,15 +83,15 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(realAoiPtr);
 	if (annulusPtr != NULL){
-		r1 = int(::ceil(annulusPtr->GetInnerRadius()));
-		r2 = int(::floor(annulusPtr->GetOuterRadius()));
+		r1 = int(qCeil(annulusPtr->GetInnerRadius()));
+		r2 = int(qFloor(annulusPtr->GetOuterRadius()));
 		radius = (r2 - r1);
 	}
 
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(realAoiPtr);
 	if (circlePtr != NULL){
 		r1 = 0;
-		r2 = int(::floor(circlePtr->GetRadius()));
+		r2 = int(qFloor(circlePtr->GetRadius()));
 		radius = r2;
 	}
 
@@ -109,8 +109,8 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 			for (int alpha = 0; alpha < angleRange; alpha++){
 				double angle = alpha / double(angleRange) * I_2PI;
 		
-				double x = (r + r1) * cos(angle); 			
-				double y = (r  + r1) * sin(angle);
+				double x = (r + r1) * qCos(angle); 			
+				double y = (r  + r1) * qSin(angle);
 
 				x += aoiCenter.GetX();
 				y += aoiCenter.GetY();

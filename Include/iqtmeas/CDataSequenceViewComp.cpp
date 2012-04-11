@@ -285,8 +285,8 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			valueRange = istd::CRange(m_parent.ValueMinSB->value(), m_parent.ValueMaxSB->value());
 		}
 		else{
-			int firstSample = qMax(0, int(floor(timeRange.GetMinValue() * samplesCount / maxTimeSpan)));
-			int lastSample = qMin(int(ceil(timeRange.GetMaxValue() * samplesCount / maxTimeSpan)), samplesCount - 1);
+			int firstSample = qMax(0, qFloor(timeRange.GetMinValue() * samplesCount / maxTimeSpan));
+			int lastSample = qMin(qCeil(timeRange.GetMaxValue() * samplesCount / maxTimeSpan), samplesCount - 1);
 			for (int channelIndex = firstChannel; channelIndex <= lastChannel; ++channelIndex){
 				for (int i = firstSample; i <= lastSample; ++i){
 					double sample = samplesPtr->GetSample(i, channelIndex);
@@ -317,7 +317,7 @@ void CDataSequenceViewComp::DiagramWidget::paintEvent(QPaintEvent* /*event*/)
 			int lastSampleEnd = 0;
 			for (int x = 0; x < rectWidth; ++x){
 				double time = timeRange.GetValueFromAlpha(double(x) / rectWidth);
-				int sampleEndIndex = qMin(int(floor(time * samplesCount / maxTimeSpan)), samplesCount - 1);
+				int sampleEndIndex = qMin(qFloor(time * samplesCount / maxTimeSpan), samplesCount - 1);
 
 				istd::CRange sampleRange = istd::CRange::GetInvalid();
 
