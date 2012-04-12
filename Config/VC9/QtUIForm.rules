@@ -24,6 +24,7 @@
 			AdditionalDependencies="$(QTDIR)\bin\rcc.exe"
 			FileExtensions="*.qrc"
 			ExecutionDescription="Rcc&apos;ing $(InputFileName)..."
+			ShowOnlyRuleProperties="false"
 			>
 			<Properties>
 			</Properties>
@@ -36,6 +37,18 @@
 			AdditionalDependencies="$(QTDIR)\bin\moc.exe;&quot;$(InputDir)/$(InputName).h&quot;"
 			FileExtensions="*.moc"
 			ExecutionDescription="Moc&apos;ing $(InputFileName)..."
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
+			Name="Qt Linguist"
+			DisplayName="QT Linguist"
+			CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputPath)&quot; -qm &quot;$(ProjectDir)\..\Generated\$(InputName).qm&quot;"
+			Outputs="&quot;$(ProjectDir)\..\Generated\$(InputName).qm&quot;"
+			AdditionalDependencies="$(QTDIR)\bin\lrelease.exe"
+			FileExtensions="*.ts"
+			ExecutionDescription="Creating translation of $(InputFileName)..."
 			>
 			<Properties>
 			</Properties>
