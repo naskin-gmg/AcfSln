@@ -29,24 +29,18 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
 				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
@@ -113,24 +107,18 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
+				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
 				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
@@ -194,7 +182,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CGeneralResultCacheComp.cpp"
+				RelativePath="..\CInformationProviderCacheComp.cpp"
 				>
 			</File>
 			<File
@@ -215,7 +203,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CGeneralResultCacheComp.h"
+				RelativePath="..\CInformationProviderCacheComp.h"
 				>
 			</File>
 			<File
@@ -228,10 +216,6 @@
 			</File>
 			<File
 				RelativePath="..\CInspectionTaskComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IGeneralResultProvider.h"
 				>
 			</File>
 			<File

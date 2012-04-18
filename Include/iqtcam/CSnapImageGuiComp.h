@@ -7,21 +7,17 @@
 
 // ACF includes
 #include "iser/IFileLoader.h"
-
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
-
 #include "iimg/IBitmap.h"
-
 #include "icmm/IColorTransformation.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqt2d/TSceneExtenderCompBase.h"
 
-#include "iproc/IBitmapAcquisition.h"
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -84,7 +80,7 @@ protected Q_SLOTS:
 private:
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
-	I_REF(iproc::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
+	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);

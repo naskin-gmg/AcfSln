@@ -10,10 +10,10 @@
 #include "iser/IFileLoader.h"
 #include "icomp/CComponentBase.h"
 #include "iprm/IFileNameParam.h"
-
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "iproc/IBitmapAcquisition.h"
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -23,18 +23,18 @@ namespace iqtcam
 
 
 /**
-	Bitmap loader component implementing interface \c iproc::IBitmapAcquisition over \c iser::IFileLoader.
+	Bitmap loader component implementing interface \c icam::IBitmapAcquisition over \c iser::IFileLoader.
 */
 class CFileAcquisitionComp:
 			public icomp::CComponentBase,
-			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
 		I_ASSIGN(m_parameterIdAttrPtr, "DirParamId", "Id used to get directory parameter (iprm::IFileNameParam)", true, "FileBitmapAcquisition");
@@ -50,7 +50,7 @@ public:
 				istd::IChangeable* outputPtr,
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
 protected:

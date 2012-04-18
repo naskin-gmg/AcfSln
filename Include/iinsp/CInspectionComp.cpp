@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -75,6 +76,8 @@ iproc::ISupplier* CInspectionComp::GetSubtask(int subtaskIndex) const
 
 void CInspectionComp::InvalidateSupplier()
 {
+	istd::CChangeNotifier notifier(this);
+
 	int inspectionsCount = m_inspectionsCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
 		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
@@ -82,23 +85,75 @@ void CInspectionComp::InvalidateSupplier()
 			supplierPtr->InvalidateSupplier();
 		}
 	}
+
+	m_isWorkFinished = false;
 }
 
 
 void CInspectionComp::EnsureWorkFinished()
 {
-	int inspectionsCount = m_inspectionsCompPtr.GetCount();
-	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
-		if (supplierPtr != NULL){
-			supplierPtr->EnsureWorkFinished();
+	if (!m_isWorkFinished){
+		{
+			istd::CChangeNotifier notifier(this);
+
+			m_workStatus = WS_NONE;
+			m_timeStamp = QDateTime();
+			m_informationCategory = IC_INFO;
+			m_informationId = 0;
+			m_informationDescription = "";
+			m_informationSource = "";
+			m_informationFlags = 0;
+
+			int inspectionsCount = m_inspectionsCompPtr.GetCount();
+			for (int i = 0; i < inspectionsCount; ++i){
+				iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
+				if (supplierPtr != NULL){
+					supplierPtr->EnsureWorkFinished();
+					int workStatus = supplierPtr->GetWorkStatus();
+					if (workStatus > m_workStatus){
+						m_workStatus = workStatus;
+					}
+
+					istd::IInformationProvider* infoProviderPtr = dynamic_cast<istd::IInformationProvider*>(supplierPtr);
+					if (infoProviderPtr != NULL){
+						InformationCategory category = infoProviderPtr->GetInformationCategory();
+						if (category >= m_informationCategory){
+							m_timeStamp = infoProviderPtr->GetInformationTimeStamp();
+							m_informationCategory = category;
+							m_informationId = infoProviderPtr->GetInformationId();
+							m_informationDescription = infoProviderPtr->GetInformationDescription();
+							m_informationSource = infoProviderPtr->GetInformationSource();
+							m_informationFlags = infoProviderPtr->GetInformationFlags();
+						}
+					}
+				}
+			}
+
+			if (m_timeStamp.isNull()){
+				m_timeStamp = QDateTime::currentDateTime();
+			}
+
+			if (m_informationId == 0){
+				m_informationId = MI_INSPECTION_DONE;
+			}
+
+			if (m_informationDescription.isEmpty()){
+				m_informationDescription = QObject::tr("Inspection done");
+			}
+			if (m_informationSource.isEmpty()){
+				m_informationSource = QObject::tr("Inspection");
+			}
 		}
+
+		m_isWorkFinished = true;
 	}
 }
 
 
 void CInspectionComp::ClearWorkResults()
 {
+	istd::CChangeNotifier notifier(this);
+
 	int inspectionsCount = m_inspectionsCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
 		iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
@@ -106,24 +161,16 @@ void CInspectionComp::ClearWorkResults()
 			supplierPtr->ClearWorkResults();
 		}
 	}
+
+	m_isWorkFinished = false;
 }
 
 
 int CInspectionComp::GetWorkStatus() const
 {
-	int retVal = WS_NONE;
-	int inspectionsCount = m_inspectionsCompPtr.GetCount();
-	for (int i = 0; i < inspectionsCount; ++i){
-		const iproc::ISupplier* supplierPtr = m_inspectionsCompPtr[i];
-		if (supplierPtr != NULL){
-			int workStatus = supplierPtr->GetWorkStatus();
-			if (workStatus > retVal){
-				retVal = workStatus;
-			}
-		}
-	}
+	const_cast<CInspectionComp*>(this)->EnsureWorkFinished();
 
-	return retVal;
+	return m_workStatus;
 }
 
 
@@ -176,6 +223,44 @@ bool CInspectionComp::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IInformationProvider)
+
+QDateTime CInspectionComp::GetInformationTimeStamp() const
+{
+	return m_timeStamp;
+}
+
+
+istd::IInformationProvider::InformationCategory CInspectionComp::GetInformationCategory() const
+{
+	return m_informationCategory;
+}
+
+
+int CInspectionComp::GetInformationId() const
+{
+	return m_informationId;
+}
+
+
+QString CInspectionComp::GetInformationDescription() const
+{
+	return m_informationDescription;
+}
+
+
+QString CInspectionComp::GetInformationSource() const
+{
+	return m_informationSource;
+}
+
+
+int CInspectionComp::GetInformationFlags() const
+{
+	return m_informationFlags;
 }
 
 

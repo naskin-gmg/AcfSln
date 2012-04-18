@@ -5,8 +5,8 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
-// IACF includes
-#include "iproc/IBitmapAcquisition.h"
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 
 
 namespace icam
@@ -19,13 +19,13 @@ namespace icam
 */
 class CCameraDelegatorBase:
 			public icomp::CComponentBase,
-			public iproc::IBitmapAcquisition
+			public IBitmapAcquisition
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CCameraDelegatorBase);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(IBitmapAcquisition);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_slaveCameraCompPtr, "SlaveCamera", "Slave camera object", true, "SlaveCamera");
 	I_END_COMPONENT;
@@ -59,7 +59,7 @@ public:
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 protected:
-	I_REF(iproc::IBitmapAcquisition, m_slaveCameraCompPtr);
+	I_REF(IBitmapAcquisition, m_slaveCameraCompPtr);
 };
 
 

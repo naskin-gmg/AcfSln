@@ -206,6 +206,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IBitmapAcquisition.h"
+				>
+			</File>
+			<File
 				RelativePath="..\icam.h"
 				>
 			</File>

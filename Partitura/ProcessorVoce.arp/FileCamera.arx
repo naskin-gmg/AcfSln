@@ -372,7 +372,7 @@
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        iproc::IBitmapAcquisition
+        icam::IBitmapAcquisition
       </InterfaceId>
       <ComponentId>
         FileCamera

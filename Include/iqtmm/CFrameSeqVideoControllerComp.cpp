@@ -18,7 +18,7 @@ CFrameSeqVideoControllerComp::CFrameSeqVideoControllerComp()
 }
 
 
-// reimplemented (iproc::IBitmapAcquisition)
+// reimplemented (icam::IBitmapAcquisition)
 
 istd::CIndex2d CFrameSeqVideoControllerComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {

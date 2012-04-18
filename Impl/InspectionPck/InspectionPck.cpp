@@ -25,14 +25,14 @@ I_EXPORT_COMPONENT(
 			"Task Model Supplier Product Composite Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 I_EXPORT_COMPONENT(
-			GeneralResultCache,
-			"General inspection provider cache object",
+			InformationProviderCache,
+			"General information provider cache object used to manage threading barrier for object supplier chain",
 			"Provider Cache Results" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 
 I_EXPORT_COMPONENT(
 			IdCache,
-			"ID provider cache object",
+			"ID provider cache object used to manage threading barrier for object supplier chain",
 			"Provider Cache ID" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 

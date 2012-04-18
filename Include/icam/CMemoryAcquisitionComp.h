@@ -7,12 +7,10 @@
 #include "icomp/CComponentBase.h"
 #include "iprm/IFileNameParam.h"
 #include "iimg/CGeneralBitmap.h"
-
 #include "iproc/TSyncProcessorWrap.h"
 
-#include "iproc/IBitmapAcquisition.h"
-
-#include "icam/icam.h"
+// ACF-Solutions includes
+#include "icam/IBitmapAcquisition.h"
 
 
 namespace icam
@@ -20,19 +18,19 @@ namespace icam
 
 
 /**
-	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c iproc::IBitmapAcquisition.
+	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
 */
 class CMemoryAcquisitionComp:
 			public icomp::CComponentBase,
 			public iimg::CGeneralBitmap,
-			virtual public iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
+			virtual public iproc::TSyncProcessorWrap<IBitmapAcquisition>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef iimg::CGeneralBitmap BaseClass2;
 
 	I_BEGIN_COMPONENT(CMemoryAcquisitionComp);
-		I_REGISTER_INTERFACE(iproc::IBitmapAcquisition);
+		I_REGISTER_INTERFACE(IBitmapAcquisition);
 		I_REGISTER_INTERFACE(iimg::IBitmap);
 	I_END_COMPONENT;
 
@@ -43,7 +41,7 @@ public:
 				istd::IChangeable* outputPtr,
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (iproc::IBitmapAcquisition)
+	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 };
 

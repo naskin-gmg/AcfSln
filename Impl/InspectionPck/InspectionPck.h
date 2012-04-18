@@ -8,7 +8,7 @@
 
 #include "iinsp/CInspectionTaskComp.h"
 #include "iinsp/CInspectionComp.h"
-#include "iinsp/CGeneralResultCacheComp.h"
+#include "iinsp/CInformationProviderCacheComp.h"
 #include "iinsp/CIdCacheComp.h"
 
 
@@ -21,7 +21,7 @@ namespace InspectionPck
 
 typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
 typedef icomp::TModelCompWrap<iinsp::CInspectionComp> Inspection;
-typedef icomp::TModelCompWrap<iinsp::CGeneralResultCacheComp> GeneralResultCache;
+typedef icomp::TModelCompWrap<iinsp::CInformationProviderCacheComp> InformationProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CIdCacheComp> IdCache;
 
 

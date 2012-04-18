@@ -9,7 +9,7 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IBitmapAcquisition)
+// reimplemented (icam::IBitmapAcquisition)
 
 istd::CIndex2d CProcessedAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
 {
@@ -21,7 +21,7 @@ istd::CIndex2d CProcessedAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* 
 }
 
 
-// reimplemented iproc::TSyncProcessorWrap<iproc::IBitmapAcquisition>
+// reimplemented iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 
 int CProcessedAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,

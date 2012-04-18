@@ -49,7 +49,7 @@ bool CSnapImageGuiComp::SnapImage()
 	if (m_bitmapAcquisitionCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
 		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
 		if (taskId >= 0){
-			return m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != iproc::IBitmapAcquisition::TS_INVALID;
+			return m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
 		}
 	}
 

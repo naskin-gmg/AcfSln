@@ -39,7 +39,7 @@ void WriteArchiveMessageHandler::handleMessage(
 			const QSourceLocation& /*sourceLocation*/)
 {
 	m_loggerPtr->SendLogMessage(
-					istd::IInformation::IC_WARNING,
+					istd::IInformationProvider::IC_WARNING,
 					0,
 					tr("Transformation message: ").append(description),
 					"XslTransformationWriteArchive");

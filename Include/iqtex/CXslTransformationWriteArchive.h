@@ -77,7 +77,7 @@ protected:
 	bool PushTextNode(const QString& text);
 
 	virtual bool SendLogMessage(
-		istd::IInformation::InformationCategory category,
+		istd::IInformationProvider::InformationCategory category,
 		int id,
 		const QString& message,
 		const QString& messageSource,

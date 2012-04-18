@@ -5,6 +5,20 @@ namespace iqtinsp
 {
 
 
+// reimplemented (istd::IVisualStatusProvider)
+
+QIcon CGeneralSupplierGuiComp::GetStatusIcon() const
+{
+	return m_statusIcon;
+}
+
+
+QString CGeneralSupplierGuiComp::GetStatusText() const
+{
+	return m_statusText;
+}
+
+
 // protected slots
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()
@@ -65,45 +79,80 @@ void CGeneralSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	QString statusText = tr("Unknown");
+	QString statusLabelText = tr("Unknown");
+	m_statusText = "";
+	m_statusIcon = QIcon();
 
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	QString description;
+
+	const iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
+		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
+
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
 		case iproc::ISupplier::WS_NONE:
-			statusText = tr("None");
+			statusLabelText = tr("None");
 			break;
 
 		case iproc::ISupplier::WS_INIT:
-			statusText = tr("Init");
+			statusLabelText = tr("Init");
 			break;
 
 		case iproc::ISupplier::WS_LOCKED:
-			statusText = tr("Locked");
+			statusLabelText = tr("Locked");
 			break;
 
 		case iproc::ISupplier::WS_OK:
-			statusText = tr("OK");
+			statusLabelText = tr("OK");
+			m_statusText = tr("Processing completed without errors");
+			if (infoProviderPtr != NULL){
+				if (infoProviderPtr->GetInformationCategory() == istd::IInformationProvider::IC_WARNING){
+					statusLabelText = tr("Warning");
+					m_statusText = tr("Processing completed with warnings");
+				}
+			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
-			statusText = tr("Canceled");
+			statusLabelText = tr("Canceled");
+			m_statusText = tr("Processing canceled by user");
 			break;
 
 		case iproc::ISupplier::WS_ERROR:
-			statusText = tr("Error");
+			statusLabelText = tr("Error");
+			m_statusText = tr("Processing with errors");
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
-			statusText = tr("Critical");
+			statusLabelText = tr("Critical");
+			m_statusText = tr("Critical error occurred");
 			break;
+		}
+
+		if (infoProviderPtr != NULL){
+			description = infoProviderPtr->GetInformationDescription();
 		}
 	}
 
-	StatusLabel->setText(statusText);
+	StatusLabel->setText(statusLabelText);
+	if (!description.isEmpty()){
+		DescriptionLabel->setText(description);
+		DescriptionLabel->setVisible(true);
+	}
+	else{
+		DescriptionLabel->setVisible(false);
+	}
 }
+
+
+// static attributes
+
+QIcon CGeneralSupplierGuiComp::s_noneIcon(":/Icons/StateNone.svg");
+QIcon CGeneralSupplierGuiComp::s_okIcon(":/Icons/StateOk.svg");
+QIcon CGeneralSupplierGuiComp::s_warningIcon(":/Icons/StateWarning.svg");
+QIcon CGeneralSupplierGuiComp::s_errorIcon(":/Icons/StateInvalid.svg");
 
 
 } // namespace iqtinsp
