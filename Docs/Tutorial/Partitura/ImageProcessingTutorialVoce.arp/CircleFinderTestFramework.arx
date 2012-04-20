@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2294
         </Number>
         <Description>
           ACF
@@ -184,7 +184,7 @@
         QtViewPck
       </PackageId>
       <ComponentId>
-        ImageView
+        ViewProvider
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -193,45 +193,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              CalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTask
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseGridCommands
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

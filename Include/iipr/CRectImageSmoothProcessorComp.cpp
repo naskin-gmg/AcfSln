@@ -112,7 +112,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 
 	case UM_PERCENT_DIAG:
 		{
-			double diag = std::sqrt(double(imageWidth * imageWidth + imageHeight * imageHeight));
+			double diag = qSqrt(double(imageWidth * imageWidth + imageHeight * imageHeight));
 			kernelMaxWidth = qMax(1, qMin(int(filterLengths[0] * diag), imageWidth));
 			kernelMaxHeight = qMax(1, qMin((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1] * diag), imageHeight));
 		}

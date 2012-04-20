@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2294
         </Number>
         <Description>
           ACF
@@ -18,41 +18,13 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        Framework
-      </ComponentName>
-      <X>
-        625
-      </X>
-      <X>
-        375
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        375
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SimpleCircleFinderTask
+        SnapTaskGui
       </ComponentName>
       <X>
         950
       </X>
       <X>
-        225
+        475
       </X>
       <Note>
         
@@ -74,10 +46,24 @@
     </Element>
     <Element>
       <ComponentName>
+        Framework
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         SnapTask
       </ComponentName>
       <X>
-        375
+        300
       </X>
       <X>
         225
@@ -88,13 +74,27 @@
     </Element>
     <Element>
       <ComponentName>
-        SnapTaskGui
+        ImageView
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SimpleCircleFinderTask
       </ComponentName>
       <X>
         950
       </X>
       <X>
-        475
+        225
       </X>
       <Note>
         

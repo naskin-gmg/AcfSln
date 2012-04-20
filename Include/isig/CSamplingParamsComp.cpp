@@ -1,6 +1,9 @@
 #include "isig/CSamplingParamsComp.h"
 
 
+// Qt includes
+#include <QtCore/qmath.h>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -110,7 +113,7 @@ void CSamplingParamsComp::OnComponentCreated()
 			}
 		}
 		istd::CRange intervalRange = m_samplingConstraintsCompPtr->GetIntervalRange();
-		m_interval = std::sqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
+		m_interval = qSqrt(intervalRange.GetMinValue() * intervalRange.GetMaxValue());
 	}
 }
 
