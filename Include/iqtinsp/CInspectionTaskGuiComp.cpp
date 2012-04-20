@@ -5,10 +5,7 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QSpacerItem>
-#include <QtGui/QToolBox>
-#include <QtGui/QTabWidget>
 #include <QtGui/QGroupBox>
-
 
 // ACF includes
 #include "imod/IModel.h"
@@ -21,7 +18,9 @@ namespace iqtinsp
 
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 :	m_tasksObserver(this),
-	m_currentGuiIndex(-1)
+	m_currentGuiIndex(-1),
+	m_toolBoxPtr(NULL),
+	m_tabWidgetPtr(NULL)
 {
 	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
 }
@@ -85,8 +84,8 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 
 		parameterModelPtr->AttachObserver(&m_tasksObserver);
 
-		if (i < m_observersCompPtr.GetCount()){
-			imod::IObserver* observerPtr = m_observersCompPtr[i];
+		if (i < m_editorObserversCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_editorObserversCompPtr[i];
 
 			if (observerPtr != NULL){
 				if (parameterModelPtr->AttachObserver(observerPtr)){
@@ -136,8 +135,8 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 
 		parameterModelPtr->DetachObserver(&m_tasksObserver);
 
-		if (i < m_observersCompPtr.GetCount()){
-			imod::IObserver* observerPtr = m_observersCompPtr[i];
+		if (i < m_editorObserversCompPtr.GetCount()){
+			imod::IObserver* observerPtr = m_editorObserversCompPtr[i];
 
 			if ((observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){
 				parameterModelPtr->DetachObserver(observerPtr);
@@ -164,6 +163,77 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 }
 
 
+// protected methods
+
+void CInspectionTaskGuiComp::UpdateProcessingState()
+{
+	int workStatus = iproc::ISupplier::WS_NONE;
+
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		workStatus = objectPtr->GetWorkStatus();
+	}
+
+	switch (workStatus){
+	case iproc::ISupplier::WS_OK:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+		break;
+
+	case iproc::ISupplier::WS_ERROR:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+		break;
+
+	case iproc::ISupplier::WS_CRITICAL:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
+		break;
+
+	default:
+		StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+		break;
+	}
+}
+
+
+void CInspectionTaskGuiComp::UpdateVisualElements()
+{
+	int visualProvidersCount = m_editorVisualsCompPtr.GetCount();
+
+	for (		GuiMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
+				iter != m_tabToGuiIndexMap.end();
+				++iter){
+		int tabIndex = iter.key();
+		I_ASSERT(tabIndex >= 0);
+
+		int guiIndex = iter.value();
+		I_ASSERT(guiIndex >= 0);
+		I_ASSERT(guiIndex < m_editorVisualsCompPtr.GetCount());
+
+		QIcon tabIcon;
+		QString toolTip;
+
+		if (guiIndex < visualProvidersCount){
+			const IVisualStatusProvider* visualProviderPtr = m_editorVisualsCompPtr[guiIndex];
+			if (visualProviderPtr != NULL){
+				tabIcon = visualProviderPtr->GetStatusIcon();
+				toolTip = visualProviderPtr->GetStatusText();
+			}
+		}
+
+		if (m_toolBoxPtr != NULL){
+			I_ASSERT(tabIndex < m_toolBoxPtr->count());
+			m_toolBoxPtr->setItemIcon(tabIndex, tabIcon);
+			m_toolBoxPtr->setItemToolTip(tabIndex, toolTip);
+		}
+
+		if (m_tabWidgetPtr != NULL){
+			I_ASSERT(tabIndex < m_tabWidgetPtr->count());
+			m_tabWidgetPtr->setTabIcon(tabIndex, tabIcon);
+			m_tabWidgetPtr->setTabToolTip(tabIndex, toolTip);
+		}
+	}
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CInspectionTaskGuiComp::OnGuiCreated()
@@ -187,13 +257,13 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 
 	if (*m_designTypeAttrPtr == 1){
-		QToolBox* toolBoxPtr = new QToolBox(ParamsFrame);
-		int subtasksCount = m_guisCompPtr.GetCount();
+		m_toolBoxPtr = new QToolBox(ParamsFrame);
+		int subtasksCount = m_editorGuisCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
-			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+			iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
 
 			if (guiPtr != NULL){
-				QWidget* panelPtr = new QWidget(ParamsFrame);
+				QWidget* panelPtr = new QWidget(m_toolBoxPtr);
 				QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 				panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
 				QString name;
@@ -203,28 +273,37 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 				guiPtr->CreateGui(panelPtr);
 
-				toolBoxPtr->addItem(panelPtr, name);
+				int toolBoxIndex = m_toolBoxPtr->addItem(panelPtr, name);
 
 				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
 				panelLayoutPtr->addItem(spacerPtr);
+
+				m_tabToGuiIndexMap[toolBoxIndex] = i;
+
+				if (i < m_editorVisualModelsCompPtr.GetCount()){
+					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+					if (modelPtr != NULL){
+						RegisterModel(modelPtr);
+					}
+				}
 			}
 		}
 
-		QObject::connect(toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+		QObject::connect(m_toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
 
-		layoutPtr->addWidget(toolBoxPtr);
+		layoutPtr->addWidget(m_toolBoxPtr);
 	}
 	else{
-		QTabWidget* tabWidgetPtr = new QTabWidget(ParamsFrame);
-		tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
+		m_tabWidgetPtr = new QTabWidget(ParamsFrame);
+		m_tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
 
-		int subtasksCount = m_guisCompPtr.GetCount();
+		int subtasksCount = m_editorGuisCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
-			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+			iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
 
 			if (guiPtr != NULL){
-				QWidget* panelPtr = new QWidget(tabWidgetPtr);
+				QWidget* panelPtr = new QWidget(m_tabWidgetPtr);
 				QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 				QString name;
 				if (i < m_namesAttrPtr.GetCount()){
@@ -233,17 +312,26 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 				guiPtr->CreateGui(panelPtr);
 
-				tabWidgetPtr->addTab(panelPtr, name);
+				int tabIndex = m_tabWidgetPtr->addTab(panelPtr, name);
 
 				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
 				panelLayoutPtr->addItem(spacerPtr);
+
+				m_tabToGuiIndexMap[tabIndex] = i;
+
+				if (i < m_editorVisualModelsCompPtr.GetCount()){
+					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+					if (modelPtr != NULL){
+						RegisterModel(modelPtr);
+					}
+				}
 			}
 		}
 
-		QObject::connect(tabWidgetPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+		QObject::connect(m_tabWidgetPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
 
-		layoutPtr->addWidget(tabWidgetPtr);
+		layoutPtr->addWidget(m_tabWidgetPtr);
 	}
 
 	QMap<iqtgui::IGuiObject*, int> guiToStackIndexMap;
@@ -288,6 +376,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 	OnEditorChanged(0);
 
+	UpdateVisualElements();
+
 	BaseClass::OnGuiCreated();
 }
 
@@ -296,9 +386,9 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 {
 	m_editorsList.clear();
 
-	int subtasksCount = m_guisCompPtr.GetCount();
+	int subtasksCount = m_editorGuisCompPtr.GetCount();
 	for (int i = 0; i < subtasksCount; ++i){
-		iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+		iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
 
 		if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
 			guiPtr->DestroyGui();
@@ -322,7 +412,27 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 		m_generalParamsGuiCompPtr->DestroyGui();
 	}
 
+	if (m_toolBoxPtr != NULL){
+		delete m_toolBoxPtr;
+
+		m_toolBoxPtr = NULL;
+	}
+
+	if (m_tabWidgetPtr != NULL){
+		delete m_tabWidgetPtr;
+
+		m_tabWidgetPtr = NULL;
+	}
+
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CInspectionTaskGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	UpdateVisualElements();
 }
 
 
@@ -331,13 +441,13 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 void CInspectionTaskGuiComp::OnEditorChanged(int index)
 {
 	if (index != m_currentGuiIndex){
-		int extendersCount = m_extendersCompPtr.GetCount();
+		int extendersCount = m_editorViewExtendersCompPtr.GetCount();
 		int previewProvidersCount = m_previewSceneProvidersCompPtr.GetCount();
 
 		iview::IShapeView* viewPtr = NULL;
 
 		if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < extendersCount) && (m_currentGuiIndex < previewProvidersCount)){
-			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
+			iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[m_currentGuiIndex];
 			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[m_currentGuiIndex];
 			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
 				extenderPtr->RemoveItemsFromScene(previewProviderPtr);
@@ -347,7 +457,7 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 		}
 
 		if ((index >= 0) && (index < extendersCount) && (index < previewProvidersCount)){
-			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[index];
+			iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[index];
 			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
 			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
 				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
@@ -421,37 +531,6 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
-	}
-}
-
-
-// private methods
-
-void CInspectionTaskGuiComp::UpdateProcessingState()
-{
-	int workStatus = iproc::ISupplier::WS_NONE;
-
-	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		workStatus = objectPtr->GetWorkStatus();
-	}
-
-	switch (workStatus){
-	case iproc::ISupplier::WS_OK:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
-		break;
-
-	case iproc::ISupplier::WS_ERROR:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
-		break;
-
-	case iproc::ISupplier::WS_CRITICAL:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
-		break;
-
-	default:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
-		break;
 	}
 }
 

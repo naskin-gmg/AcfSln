@@ -26,7 +26,7 @@ public:
 	virtual void Draw(QPainter& drawContext) const;
 
 	// reimplemented (iview::TShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

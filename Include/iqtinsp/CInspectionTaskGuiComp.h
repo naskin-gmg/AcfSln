@@ -5,10 +5,13 @@
 // Qt includes
 #include <QtCore/QMap>
 #include <QtCore/QSet>
+#include <QtGui/QToolBox>
+#include <QtGui/QTabWidget>
 
 // ACF includes
 #include <QtCore/QString>
 #include "imod/CMultiModelObserverBase.h"
+#include "imod/CMultiModelDispatcherBase.h"
 #include "iser/IFileLoader.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqt2d/IViewExtender.h"
@@ -26,7 +29,8 @@ namespace iqtinsp
 
 
 class CInspectionTaskGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>,
+			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
@@ -35,9 +39,11 @@ public:
 
 	I_BEGIN_COMPONENT(CInspectionTaskGuiComp);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
-		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
-		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
-		I_ASSIGN_TO(m_extendersCompPtr, m_editorsCompPtr, false);
+		I_ASSIGN_TO(m_editorGuisCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_editorObserversCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_editorViewExtendersCompPtr, m_editorsCompPtr, false);
+		I_ASSIGN_TO(m_editorVisualsCompPtr, m_editorsCompPtr, false);
+		I_ASSIGN_TO(m_editorVisualModelsCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_previewGuisCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", true);
 		I_ASSIGN_TO(m_previewObserversCompPtr, m_previewGuisCompPtr, false);
 		I_ASSIGN_TO(m_previewSceneProvidersCompPtr, m_previewGuisCompPtr, false);
@@ -62,9 +68,15 @@ public:
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
 protected:
+	void UpdateProcessingState();
+	void UpdateVisualElements();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
 Q_SIGNALS:
 	void DoAutoTest();
@@ -76,9 +88,6 @@ protected Q_SLOTS:
 	void on_AutoTestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
-
-private:
-	void UpdateProcessingState();
 
 private:
 	class TasksObserver: public imod::CMultiModelObserverBase
@@ -93,9 +102,11 @@ private:
 	};
 
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
-	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
-	I_MULTIREF(imod::IObserver, m_observersCompPtr);
-	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
+	I_MULTIREF(iqtgui::IGuiObject, m_editorGuisCompPtr);
+	I_MULTIREF(imod::IObserver, m_editorObserversCompPtr);
+	I_MULTIREF(iqt2d::IViewExtender, m_editorViewExtendersCompPtr);
+	I_MULTIREF(iqtgui::IVisualStatusProvider, m_editorVisualsCompPtr);
+	I_MULTIREF(imod::IModel, m_editorVisualModelsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);
 	I_MULTIREF(iqt2d::IViewProvider, m_previewSceneProvidersCompPtr);
@@ -114,8 +125,12 @@ private:
 	typedef QMap<int, int> GuiMap;
 	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
+	GuiMap m_tabToGuiIndexMap;		// map tab index to editor index
 	typedef QSet<imod::IModelEditor*> EditorsList;
 	EditorsList m_editorsList;
+
+	QToolBox* m_toolBoxPtr;
+	QTabWidget* m_tabWidgetPtr;
 };
 
 

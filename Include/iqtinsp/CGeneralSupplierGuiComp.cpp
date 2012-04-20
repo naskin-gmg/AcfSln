@@ -147,14 +147,6 @@ void CGeneralSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 }
 
 
-// static attributes
-
-QIcon CGeneralSupplierGuiComp::s_noneIcon(":/Icons/StateNone.svg");
-QIcon CGeneralSupplierGuiComp::s_okIcon(":/Icons/StateOk.svg");
-QIcon CGeneralSupplierGuiComp::s_warningIcon(":/Icons/StateWarning.svg");
-QIcon CGeneralSupplierGuiComp::s_errorIcon(":/Icons/StateInvalid.svg");
-
-
 } // namespace iqtinsp
 
 

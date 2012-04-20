@@ -49,11 +49,6 @@ protected:
 private:
 	QIcon m_statusIcon;
 	QString m_statusText;
-
-	static QIcon s_noneIcon;
-	static QIcon s_okIcon;
-	static QIcon s_warningIcon;
-	static QIcon s_errorIcon;
 };
 
 

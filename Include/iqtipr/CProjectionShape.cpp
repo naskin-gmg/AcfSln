@@ -44,9 +44,9 @@ void CProjectionShape::Draw(QPainter& drawContext) const
 // reimplemented (iview::TShapeBase)
 	
 
-void CProjectionShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CProjectionShape::CalcBoundingBox() const
 {
-	result = iqt::GetCRectangle(m_path.boundingRect());
+	return iqt::GetCRectangle(m_path.boundingRect());
 }
 
 	
