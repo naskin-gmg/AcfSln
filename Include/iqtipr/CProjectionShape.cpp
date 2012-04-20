@@ -41,8 +41,7 @@ void CProjectionShape::Draw(QPainter& drawContext) const
 }
 
 
-// reimplemented (iview::TShapeBase)
-	
+// reimplemented (iview::CShapeBase)
 
 i2d::CRect CProjectionShape::CalcBoundingBox() const
 {

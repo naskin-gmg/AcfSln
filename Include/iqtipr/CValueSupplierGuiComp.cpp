@@ -143,7 +143,7 @@ void CValueSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 
 	int shapesCount = m_foundModel.GetObserverCount();
 	for (int i = 0; i < shapesCount; ++i){
-		iview::CShapeControl* shapePtr = dynamic_cast<iview::CShapeControl*>(m_foundModel.GetObserverPtr(i));
+		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(m_foundModel.GetObserverPtr(i));
 		if (shapePtr != NULL){
 			shapePtr->SetVisible(isResultVisible);
 		}

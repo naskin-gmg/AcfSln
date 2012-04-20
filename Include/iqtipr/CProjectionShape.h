@@ -2,6 +2,10 @@
 #define iqtipr_CProjectionShape_included
 
 
+// Qt includes
+#include <QtGui/QPainterPath>
+#include <QtGui/QTransform>
+
 // ACF includes
 #include "iview/CShapeBase.h"
 
@@ -25,7 +29,7 @@ public:
 	// reimplemented (iview::IVisualizable)
 	virtual void Draw(QPainter& drawContext) const;
 
-	// reimplemented (iview::TShapeBase)
+	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const;
 
 	// reimplemented (imod::IObserver)
