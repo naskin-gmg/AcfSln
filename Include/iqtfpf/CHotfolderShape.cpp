@@ -127,7 +127,7 @@ bool CHotfolderShape::OnAttached(imod::IModel* modelPtr)
 
 void CHotfolderShape::UpdateGraphicsItem(const ifpf::CVisualHotfolderWorkflowItem& element)
 {
-	setPos(iqt::GetQPointF(element.GetCenter()));
+	setPos(element.GetCenter());
 
 	QFont nameFont;
 	nameFont.setPointSize(12);

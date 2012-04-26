@@ -48,9 +48,9 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 		return true;
 	}
 
-	const iprm::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
+	const imeas::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
 	if (m_adjustParamsIdAttrPtr.IsValid()){
-		adjustParamsPtr = dynamic_cast<const iprm::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
+		adjustParamsPtr = dynamic_cast<const imeas::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
 	}
 
 	double contrast = 1;

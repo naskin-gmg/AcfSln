@@ -2,10 +2,14 @@
 #define iipr_CImageNormalizeProcessorComp_included
 
 
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
+
+// ACF includes
 #include "i2d/CRectangle.h"
-#include "iprm/ILinearAdjustParams.h"
+
+// ACF-Solutions includes
+#include "imeas/ILinearAdjustParams.h"
 
 #include "iipr/CImageProcessorCompBase.h"
 
@@ -41,7 +45,7 @@ private:
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_ATTR(QByteArray, m_adjustParamsIdAttrPtr);
 	I_REF(i2d::CRectangle, m_defaultAoiParamCompPtr);
-	I_REF(iprm::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
+	I_REF(imeas::ILinearAdjustParams, m_defaultAdjustParamsCompPtr);
 };
 
 

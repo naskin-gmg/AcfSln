@@ -76,7 +76,7 @@ bool CHotfolderWorkflowScenographerComp::OnDropObject(const QMimeData& mimeData,
 
 	i2d::CVector2d position(0, 0);
 	if (retVal && eventPtr != NULL){
-		position = iqt::GetCVector2d(eventPtr->scenePos());
+		position = i2d::CVector2d(eventPtr->scenePos());
 	}
 
 	return TryCreateHotfolder(hotfolderId, position);

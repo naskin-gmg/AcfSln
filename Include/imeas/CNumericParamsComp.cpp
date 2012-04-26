@@ -31,18 +31,18 @@ imath::CVarVector CNumericParamsComp::GetValues() const
 }
 
 
-bool CNumericParamsComp::SetValues(const imath::CVarVector& lengths)
+bool CNumericParamsComp::SetValues(const imath::CVarVector& values)
 {
-	if (m_values != lengths){
+	if (m_values != values){
 		const INumericConstraints* constraintsPtr = GetNumericConstraints();
 		I_ASSERT(constraintsPtr != NULL);
-		if (lengths.GetElementsCount() != constraintsPtr->GetNumericValuesCount()){
+		if (values.GetElementsCount() != constraintsPtr->GetNumericValuesCount()){
 			return false;
 		}
 
 		istd::CChangeNotifier notifier(this);
 
-		m_values = lengths;
+		m_values = values;
 	}
 
 	return true;

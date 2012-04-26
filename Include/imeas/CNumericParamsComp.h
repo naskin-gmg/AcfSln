@@ -44,7 +44,7 @@ public:
 	// reimplemented (imeas::INumericParams)
 	virtual const INumericConstraints* GetNumericConstraints() const;
 	virtual imath::CVarVector GetValues() const;
-	virtual bool SetValues(const imath::CVarVector& lengths);
+	virtual bool SetValues(const imath::CVarVector& values);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

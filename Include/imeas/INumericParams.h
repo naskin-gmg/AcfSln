@@ -33,7 +33,7 @@ public:
 	/**
 		Set list of numeric values.
 	*/
-	virtual bool SetValues(const imath::CVarVector& lengths) = 0;
+	virtual bool SetValues(const imath::CVarVector& values) = 0;
 };
 
 

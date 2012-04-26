@@ -60,13 +60,18 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			NumericParams,
-			"Set of numeric values used for filter lengths, channel values etc.",
+			"Set of numeric values used for filter values, channel values etc.",
 			"Numeric Values Parameter" IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			NumericConstraints,
 			"Defines simple constraints for numeric parameters with the same units and ranges for all values",
 			"Numeric Values Parameter Constraints" IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
+			LinearAdjustParams,
+			"Parameter with scale and offset for simple linear transformations",
+			"Parameter Scale Offset Shift Contrast Brightness Linear Power" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Parameter") IM_AUTHOR("\"Witold Gantzke\""));
 
 
 } // namespace MeasPck
