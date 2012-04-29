@@ -79,6 +79,18 @@ void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
 		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
 		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
 		EenDelayTimeSB->setValue(objectPtr->GetEenDelay() * 1000.0);
+
+		const icam::IExposureConstraints* constrainsPtr = objectPtr->GetExposureConstraints();
+		if (constrainsPtr != NULL){
+			ShutterTimeSB->setMinimum(constrainsPtr->GetShutterTimeRange().GetMinValue() * 1000.0);
+			ShutterTimeSB->setMaximum(constrainsPtr->GetShutterTimeRange().GetMaxValue() * 1000.0);
+
+			DelayTimeSB->setMinimum(constrainsPtr->GetDelayTimeRange().GetMinValue() * 1000.0);
+			DelayTimeSB->setMaximum(constrainsPtr->GetDelayTimeRange().GetMaxValue() * 1000.0);
+
+			EenDelayTimeSB->setMinimum(constrainsPtr->GetEenDelayRange().GetMinValue() * 1000.0);
+			EenDelayTimeSB->setMaximum(constrainsPtr->GetEenDelayRange().GetMaxValue() * 1000.0);
+		}
 	}
 }
 

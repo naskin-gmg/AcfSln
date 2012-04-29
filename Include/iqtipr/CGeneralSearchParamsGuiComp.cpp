@@ -23,9 +23,22 @@ void CGeneralSearchParamsGuiComp::UpdateModel() const
 	istd::CChangeNotifier notifier(objectPtr);
 
 	objectPtr->SetMinScore(MinScoreSB->value() / 100.0);
+
 	objectPtr->SetNominalModelsCount(ModelOccurenceSB->value());
-	objectPtr->SetRotationRange(istd::CRange(MinRotationSB->value(), MaxRotationSB->value()));
-	objectPtr->SetScaleRange(istd::CRange(MinScaleSB->value(), MaxScaleSB->value()));
+
+	if (RotationCB->isChecked()){
+		objectPtr->SetRotationRange(istd::CRange(MinRotationSB->value(), MaxRotationSB->value()));
+	}
+	else{
+		objectPtr->SetRotationRange(istd::CRange(0,0));
+	}
+
+	if (ScalingCB->isChecked()){
+		objectPtr->SetScaleRange(istd::CRange(MinScaleSB->value(), MaxScaleSB->value()));
+	}
+	else{
+		objectPtr->SetScaleRange(istd::CRange(0,0));
+	}
 }
 
 
@@ -43,6 +56,8 @@ void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
 	connect(MaxRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
 	connect(MinScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
 	connect(MaxScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
+	connect(ScalingCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
+	connect(RotationCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
 }
 
 
@@ -74,6 +89,8 @@ void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 				MaxRotationSB->setRange(
 							constraintsPtr->GetRotationRangeConstraints().GetMinValue(),
 							constraintsPtr->GetRotationRangeConstraints().GetMaxValue());
+
+				RotationCB->setChecked(!constraintsPtr->GetRotationRangeConstraints().IsEmpty());
 			}
 
 			if (!constraintsPtr->IsScaleRangeSupported()){
@@ -89,6 +106,8 @@ void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 				MaxScaleSB->setRange(
 							constraintsPtr->GetScaleRangeConstraints().GetMinValue(),
 							constraintsPtr->GetScaleRangeConstraints().GetMaxValue());
+
+				ScalingCB->setChecked(!constraintsPtr->GetScaleRangeConstraints().IsEmpty());
 			}
 		}
 	}

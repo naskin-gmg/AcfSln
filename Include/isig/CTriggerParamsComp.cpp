@@ -95,6 +95,10 @@ bool CTriggerParamsComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_triggerMode);
 	retVal = retVal && archive.EndTag(bottomTag);
 
+	if (!archive.IsStoring()){
+		istd::CChangeNotifier notifier(this);
+	}
+
 	return retVal;
 }
 

@@ -16,6 +16,13 @@ namespace iqtcam
 
 // protected slots
 
+CBitmapSupplierGuiComp::CBitmapSupplierGuiComp()
+{
+	m_timer.setInterval(40);
+	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
+}
+
+
 void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
@@ -29,6 +36,17 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 						QObject::tr("Error"),
 						QObject::tr("Snap Error"));
 		}
+	}
+}
+
+
+void CBitmapSupplierGuiComp::on_LiveImageButton_toggled(bool checked)
+{
+	if (checked){
+		m_timer.start();
+	}
+	else{
+		m_timer.stop();
 	}
 }
 
@@ -54,6 +72,12 @@ void CBitmapSupplierGuiComp::on_LoadParamsButton_clicked()
 void CBitmapSupplierGuiComp::on_SaveParamsButton_clicked()
 {
 	SaveParams();
+}
+
+
+void CBitmapSupplierGuiComp::OnTimerReady()
+{
+	on_SnapImageButton_clicked();
 }
 
 

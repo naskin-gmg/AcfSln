@@ -123,6 +123,10 @@ bool CExposureParamsComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_eenDelayTime);
 	retVal = retVal && archive.EndTag(eenDelayTimeTag);
 
+	if (!archive.IsStoring()){
+		istd::CChangeNotifier notifier(this);
+	}
+
 	return retVal;
 }
 
