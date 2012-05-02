@@ -98,7 +98,7 @@ void CInspectionComp::EnsureWorkFinished()
 
 			m_workStatus = WS_NONE;
 			m_timeStamp = QDateTime();
-			m_informationCategory = IC_INFO;
+			m_informationCategory = IC_NONE;
 			m_informationId = 0;
 			m_informationDescription = "";
 			m_informationSource = "";
