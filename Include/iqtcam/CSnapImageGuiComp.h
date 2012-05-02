@@ -14,7 +14,7 @@
 #include "iprm/IParamsSet.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
-#include "iqt2d/TSceneExtenderCompBase.h"
+#include "iqt2d/TViewExtenderCompBase.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -28,12 +28,12 @@ namespace iqtcam
 {
 
 
-class CSnapImageGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> >
+class CSnapImageGuiComp: public iqt2d::TViewExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> >
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> > BaseClass;
+	typedef iqt2d::TViewExtenderCompBase<iqtgui::TDesignerGuiCompBase<Ui::CSnapImageGuiComp, QWidget> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapImageGuiComp);
 		I_ASSIGN(m_bitmapCompPtr, "Bitmap", "Bitmap will be shown", true, "Bitmap");
@@ -59,7 +59,7 @@ public:
 protected:
 	bool SnapImage();
 
-	// reimplemented (iqt2d::TSceneExtenderCompBase)
+	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::CGuiComponentBase)

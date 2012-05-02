@@ -52,7 +52,7 @@ QWidget* CLineProjectionSupplierGuiComp::GetParamsWidget() const
 }
 
 
-// reimplemented (iqt2d::TSceneExtenderCompBase)
+// reimplemented (iqt2d::TViewExtenderCompBase)
 
 void CLineProjectionSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {

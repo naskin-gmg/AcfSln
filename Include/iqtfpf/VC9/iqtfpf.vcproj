@@ -28,16 +28,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -93,16 +96,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -186,15 +192,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderShape.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderTaskManagerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowScenographerComp.cpp"
 				>
 			</File>
 			<File
@@ -236,15 +234,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderShape.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderTaskManagerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowScenographerComp.h"
 				>
 			</File>
 			<File
@@ -325,14 +315,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CHotfolderShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CHotfolderWorkflowScenographerComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CProcessingItemPreviewGuiComp.cpp"
 				>
 			</File>
@@ -386,14 +368,6 @@
 			</File>
 			<File
 				RelativePath="..\CHotfolderProcessingComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderShape.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowScenographerComp.moc"
 				>
 			</File>
 			<File
