@@ -52,11 +52,6 @@ I_EXPORT_COMPONENT(
 			"File Processing Editor View GUI Item");
 
 I_EXPORT_COMPONENT(
-			HotfolderWorkflowScenographer,
-			"Hotfolder workflow visualization",
-			"Hotfolder File Procesing Observer");
-
-I_EXPORT_COMPONENT(
 			HotfolderContainerGui,
 			"Hotfolder container UI",
 			"Hotfolder File Procesing Observer" IM_TAG("GUI"));

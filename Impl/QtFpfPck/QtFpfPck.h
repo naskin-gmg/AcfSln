@@ -11,7 +11,6 @@
 #include "iqtfpf/CFileNamingComp.h"
 #include "iqtfpf/CProcessingItemPreviewGuiComp.h"
 #include "iqtfpf/CDirectoryItemGuiComp.h"
-#include "iqtfpf/CHotfolderWorkflowScenographerComp.h"
 #include "iqtfpf/CHotfolderContainerGuiComp.h"
 #include "iqtfpf/CHotfolderTaskManagerComp.h"
 
@@ -30,7 +29,6 @@ typedef iqtfpf::CHotfolderGuiComp HotfolderGui;
 typedef iqtfpf::CFileNamingComp FileNaming;
 typedef iqtfpf::CProcessingItemPreviewGuiComp ProcessingItemPreviewGui;
 typedef iqtfpf::CDirectoryItemGuiComp DirectoryItemGui;
-typedef iqtfpf::CHotfolderWorkflowScenographerComp HotfolderWorkflowScenographer;
 typedef iqtfpf::CHotfolderContainerGuiComp HotfolderContainerGui;
 typedef iqtfpf::CHotfolderTaskManagerComp HotfolderTaskManager;
 
