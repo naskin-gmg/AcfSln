@@ -6,6 +6,7 @@
 #include <QtGui/QMessageBox>
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
@@ -42,6 +43,10 @@ public:
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
+
+	// reimplemented (istd::IVisualStatusProvider)
+	virtual QIcon GetStatusIcon() const;
+	virtual QString GetStatusText() const;
 
 protected:
 	/**
@@ -81,6 +86,9 @@ protected:
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags = 0);
+
 	// abstract methods
 	/**
 		Get parameters widget object.
@@ -98,6 +106,9 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	bool m_areParamsEditable;
+
+	QIcon m_statusIcon;
+	QString m_statusText;
 };
 
 
@@ -131,6 +142,22 @@ void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProv
 	}
 
 	BaseClass::RemoveItemsFromScene(providerPtr);
+}
+
+
+// reimplemented (istd::IVisualStatusProvider)
+
+template <class UI, class WidgetType>
+QIcon TSupplierGuiCompBase<UI, WidgetType>::GetStatusIcon() const
+{
+	return m_statusIcon;
+}
+
+
+template <class UI, class WidgetType>
+QString TSupplierGuiCompBase<UI, WidgetType>::GetStatusText() const
+{
+	return m_statusText;
 }
 
 
@@ -302,6 +329,75 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelDetached()
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, Shapes& /*result*/)
 {
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+template <class UI, class WidgetType>
+void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
+{
+	BaseClass::UpdateGui(updateFlags);
+
+	I_ASSERT(IsGuiCreated());
+
+	istd::CChangeNotifier notfier(this);
+
+	m_statusText = "";
+	m_statusIcon = QIcon(":/Icons/StateUnknown.svg");
+
+	QString description;
+
+	const iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
+
+		int workStatus = supplierPtr->GetWorkStatus();
+
+		switch (workStatus){
+		case iproc::ISupplier::WS_LOCKED:
+			m_statusText = tr("Locked");
+			break;
+
+		case iproc::ISupplier::WS_OK:
+			if (infoProviderPtr != NULL){
+				switch (infoProviderPtr->GetInformationCategory()){
+				case istd::IInformationProvider::IC_WARNING:
+					m_statusText = tr("Processing completed with warnings");
+					m_statusIcon = QIcon(":/Icons/StateWarning.svg");
+					break;
+
+				case istd::IInformationProvider::IC_ERROR:
+					m_statusText = tr("Processing completed with errors");
+					m_statusIcon = QIcon(":/Icons/StateInvalid.svg");
+					break;
+
+				default:
+					m_statusText = tr("Processing completed without errors");
+					m_statusIcon = QIcon(":/Icons/StateOk.svg");
+					break;
+				}
+			}
+			break;
+
+		case iproc::ISupplier::WS_CANCELED:
+			m_statusText = tr("Processing canceled by user");
+			break;
+
+		case iproc::ISupplier::WS_ERROR:
+			m_statusText = tr("Processing not possible");
+			m_statusIcon = QIcon(":/Icons/StateInvalid.svg");
+			break;
+
+		case iproc::ISupplier::WS_CRITICAL:
+			m_statusText = tr("Critical error occurred, application problem");
+			m_statusIcon = QIcon(":/Icons/Error.svg");
+			break;
+
+		default:
+			break;
+		}
+	}
 }
 
 

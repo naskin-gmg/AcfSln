@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2301
         </Number>
         <Description>
           ACF
@@ -112,7 +112,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              DefaultModel
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              DefaultModel
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ParamsLoader
@@ -287,7 +303,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         imod::IModelEditor
@@ -315,6 +331,14 @@
     <Interface>
       <InterfaceId>
         iqtgui::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        ValueSupplierGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IVisualStatusProvider
       </InterfaceId>
       <ComponentId>
         ValueSupplierGui

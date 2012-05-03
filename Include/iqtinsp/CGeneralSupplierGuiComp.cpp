@@ -1,22 +1,12 @@
 #include "iqtinsp/CGeneralSupplierGuiComp.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
+
 namespace iqtinsp
 {
-
-
-// reimplemented (istd::IVisualStatusProvider)
-
-QIcon CGeneralSupplierGuiComp::GetStatusIcon() const
-{
-	return m_statusIcon;
-}
-
-
-QString CGeneralSupplierGuiComp::GetStatusText() const
-{
-	return m_statusText;
-}
 
 
 // protected slots
@@ -75,13 +65,15 @@ void CGeneralSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CGeneralSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 {
+	BaseClass::UpdateGui(updateFlags);
+
 	I_ASSERT(IsGuiCreated());
 
+	istd::CChangeNotifier notfier(this);
+
 	QString statusLabelText = tr("Unknown");
-	m_statusText = "";
-	m_statusIcon = QIcon();
 
 	QString description;
 
@@ -105,29 +97,33 @@ void CGeneralSupplierGuiComp::UpdateGui(int /*updateFlags*/)
 			break;
 
 		case iproc::ISupplier::WS_OK:
-			statusLabelText = tr("OK");
-			m_statusText = tr("Processing completed without errors");
 			if (infoProviderPtr != NULL){
-				if (infoProviderPtr->GetInformationCategory() == istd::IInformationProvider::IC_WARNING){
+				switch (infoProviderPtr->GetInformationCategory()){
+				case istd::IInformationProvider::IC_WARNING:
 					statusLabelText = tr("Warning");
-					m_statusText = tr("Processing completed with warnings");
+					break;
+
+				case istd::IInformationProvider::IC_ERROR:
+					statusLabelText = tr("Error");
+					break;
+
+				default:
+					statusLabelText = tr("OK");
+					break;
 				}
 			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
 			statusLabelText = tr("Canceled");
-			m_statusText = tr("Processing canceled by user");
 			break;
 
 		case iproc::ISupplier::WS_ERROR:
-			statusLabelText = tr("Error");
-			m_statusText = tr("Processing with errors");
+			statusLabelText = tr("Not processed");
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
 			statusLabelText = tr("Critical");
-			m_statusText = tr("Critical error occurred");
 			break;
 		}
 
