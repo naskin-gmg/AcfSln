@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2238
+          2306
         </Number>
         <Description>
           ACF
@@ -191,7 +191,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               BitmapSupplier
@@ -201,6 +201,38 @@
             </Type>
             <ExportId>
               BitmapSupplier
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DiagnosticName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              DiagnosticName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
