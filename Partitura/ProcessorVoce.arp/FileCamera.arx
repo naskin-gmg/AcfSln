@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2257
+          2286
         </Number>
         <Description>
           ACF
@@ -369,7 +369,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         icam::IBitmapAcquisition
@@ -380,14 +380,46 @@
     </Interface>
     <Interface>
       <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
         iproc::IProcessor
       </InterfaceId>
       <ComponentId>
         FileCamera
       </ComponentId>
     </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        ComposedParamsSet
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="5">
+  <ExportedComponents count="4">
     <Component>
       <ExportedId>
         BitmapLoader
@@ -410,14 +442,6 @@
       </ExportedId>
       <ComponentId>
         FilePathParam
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        ParamsSet
-      </ExportedId>
-      <ComponentId>
-        ComposedParamsSet
       </ComponentId>
     </Component>
     <Component>
