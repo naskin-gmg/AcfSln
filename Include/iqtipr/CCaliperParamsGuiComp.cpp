@@ -66,31 +66,19 @@ void CCaliperParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CCaliperParamsGuiComp::on_ThresholdSB_valueChanged(int /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
 void CCaliperParamsGuiComp::on_EdgePolarityCB_currentIndexChanged(int /*index*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
 void CCaliperParamsGuiComp::on_DirectionCB_currentIndexChanged(int /*index*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker blockUpdate(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

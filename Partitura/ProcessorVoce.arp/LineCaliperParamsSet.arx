@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1705
+          2317
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          313
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -156,7 +145,83 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              X1
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              X2
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                100
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Y1
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Y2
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                100
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -165,8 +230,8 @@
         SmoothFilterParams
       </Id>
       <PackageId>
-				MeasPck
-			</PackageId>
+        MeasPck
+      </PackageId>
       <ComponentId>
         NumericParams
       </ComponentId>
@@ -196,10 +261,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ValuesCount
+              MaxFilterLength
             </Id>
             <Type>
-              Integer
+              Real
             </Type>
             <ExportId>
               
@@ -209,7 +274,7 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                50
               </Value>
             </Data>
           </AttributeInfo>
@@ -236,10 +301,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MaxFilterLength
+              ValuesCount
             </Id>
             <Type>
-              Real
+              Integer
             </Type>
             <ExportId>
               
@@ -249,7 +314,7 @@
                 true
               </IsEnabled>
               <Value>
-                50
+                1
               </Value>
             </Data>
           </AttributeInfo>

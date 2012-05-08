@@ -63,41 +63,25 @@ void CCircleFinderParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CCircleFinderParamsGuiComp::on_EnableOutliersElimination_toggled(bool /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
 void CCircleFinderParamsGuiComp::on_MinOutliersDistance_valueChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
 void CCircleFinderParamsGuiComp::on_MaxRaysCount_valueChanged(int /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
 void CCircleFinderParamsGuiComp::on_CaliperMode_currentIndexChanged(int /*index*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

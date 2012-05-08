@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2306
+          2317
         </Number>
         <Description>
           ACF
@@ -191,7 +191,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              AdditionalTriggerInputs
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              AdditionalTriggerInputs
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               BitmapSupplier
