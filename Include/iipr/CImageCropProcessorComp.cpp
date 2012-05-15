@@ -13,39 +13,15 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IProcessor)
+// protected methods
 
-int CImageCropProcessorComp::DoProcessing(
-				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* /*progressManagerPtr*/)
-{
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
+// reimplemented (CImageRegionProcessorCompBase)
 
-	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
-	if (outputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
-	const i2d::IObject2d* aoiPtr = NULL;
-	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
-	}
-
-	return ConvertImage(*inputBitmapPtr, aoiPtr, *outputBitmapPtr) ? TS_OK : TS_INVALID;
-}
-
-
-// private methods
-
-bool CImageCropProcessorComp::ConvertImage(
+bool CImageCropProcessorComp::ProcessImageRegion(
 			const iimg::IBitmap& input,
+			const iprm::IParamsSet* /*paramsPtr*/,
 			const i2d::IObject2d* aoiPtr,
-			iimg::IBitmap& outputBitmap) const
+			istd::IChangeable* outputPtr) const
 {
 	if (input.IsEmpty()){
 		SendWarningMessage(0, "Input bitmap is empty.");
@@ -55,6 +31,13 @@ bool CImageCropProcessorComp::ConvertImage(
 
 	if (aoiPtr == NULL){
 		SendWarningMessage(0, "Crop region is not defined");
+
+		return false;
+	}
+
+	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if (outputBitmapPtr == NULL){
+		SendWarningMessage(0, "Output bitmap is not set");
 
 		return false;
 	}
@@ -77,18 +60,18 @@ bool CImageCropProcessorComp::ConvertImage(
 				int(regionRect.GetWidth()),
 				int(regionRect.GetHeight()));
 
-	if (!outputBitmap.CreateBitmap(input.GetPixelFormat(), outputBitmapSize)){
+	if (!outputBitmapPtr->CreateBitmap(input.GetPixelFormat(), outputBitmapSize)){
 		return false;
 	}
 
-	int outputBitmapLineSize = outputBitmap.GetLineBytesCount();
-	quint8* outputImageBufferPtr = (quint8*)outputBitmap.GetLinePtr(0);
-	memset(outputImageBufferPtr, 0, outputBitmapLineSize * outputBitmap.GetImageSize().GetY()); 
+	int outputBitmapLineSize = outputBitmapPtr->GetLineBytesCount();
+	quint8* outputImageBufferPtr = (quint8*)outputBitmapPtr->GetLinePtr(0);
+	memset(outputImageBufferPtr, 0, outputBitmapLineSize * outputBitmapPtr->GetImageSize().GetY()); 
 
 	int regionLeft = int(regionRect.GetLeft());
 	int regionTop = int(regionRect.GetTop());
 	int regionBottom = int(regionRect.GetBottom());
-	int pixelBytes = outputBitmap.GetPixelBitsCount() / 8;
+	int pixelBytes = outputBitmapPtr->GetPixelBitsCount() / 8;
 	
 	for(int y = regionTop; y < regionBottom; y++){
 		const iimg::CBitmapRegion::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
@@ -97,9 +80,9 @@ bool CImageCropProcessorComp::ConvertImage(
 		}
 
 		I_ASSERT((y - regionTop) >= 0);
-		I_ASSERT((y - regionTop) < outputBitmap.GetImageSize().GetY());
+		I_ASSERT((y - regionTop) < outputBitmapPtr->GetImageSize().GetY());
 
-		quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y - regionTop);
+		quint8* outputImageLinePtr = (quint8*)outputBitmapPtr->GetLinePtr(y - regionTop);
 
 		for (int rangeIndex = 0; rangeIndex < int(rangesPtr->size()); rangeIndex++){
 			const iimg::CBitmapRegion::PixelRange& pixelRange = rangesPtr->at(rangeIndex);
@@ -110,7 +93,7 @@ bool CImageCropProcessorComp::ConvertImage(
 			quint8* inputImagePtr = ((quint8*)pixelRange.pixelBufferPtr);
 			
 			for (int x = rangeStart; x < rangeEnd; x++){
-				I_ASSERT(x < outputBitmap.GetImageSize().GetX());
+				I_ASSERT(x < outputBitmapPtr->GetImageSize().GetX());
 				I_ASSERT(x + regionLeft < input.GetImageSize().GetX());
 				
 				for (int pixelByteIndex = 0; pixelByteIndex < pixelBytes; pixelByteIndex++){

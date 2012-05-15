@@ -238,6 +238,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageRegionProcessorCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLineProjectionProcessorComp.cpp"
 				>
 			</File>
@@ -388,6 +392,10 @@
 			</File>
 			<File
 				RelativePath="..\CImageProcessorCompBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageRegionProcessorCompBase.h"
 				>
 			</File>
 			<File

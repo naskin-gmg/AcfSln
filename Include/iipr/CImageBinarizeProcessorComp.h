@@ -4,9 +4,7 @@
 
 // ACF includes
 #include "iimg/IBitmap.h"
-
 #include "iproc/TSyncProcessorCompBase.h"
-
 
 // ACF-Solutions includes
 #include "imeas/INumericParams.h"

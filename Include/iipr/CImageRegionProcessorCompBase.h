@@ -1,0 +1,68 @@
+#ifndef iipr_CImageRegionProcessorCompBase_included
+#define iipr_CImageRegionProcessorCompBase_included
+
+
+// ACF includes
+#include "iproc/TSyncProcessorCompBase.h"
+
+
+namespace i2d
+{
+	class ICalibrationProvider;
+	class IObject2d;
+}
+
+
+namespace iimg
+{
+	class IBitmap;
+}
+
+
+namespace iipr
+{
+
+
+/**	
+	Basic implementation for a image region processor.
+*/
+class CImageRegionProcessorCompBase: public iproc::CSyncProcessorCompBase
+{
+public:
+	typedef iproc::CSyncProcessorCompBase BaseClass;
+	
+	I_BEGIN_BASE_COMPONENT(CImageRegionProcessorCompBase);
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set", false, "AoiParams");
+		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
+	I_END_COMPONENT;
+
+	// reimplemented (iproc::IProcessor)
+	virtual int DoProcessing(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr,
+				iproc::IProgressManager* progressManagerPtr = NULL);
+
+protected:
+	// abstract methods
+	
+	/**
+		Process the defined image region.
+	*/
+	virtual bool ProcessImageRegion(
+				const iimg::IBitmap& input,
+				const iprm::IParamsSet* paramsPtr,
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr) const = 0;
+
+private:
+	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_REF(i2d::ICalibrationProvider, m_regionCalibrationProviderCompPtr);
+};
+
+
+} // namespace iipr
+
+
+#endif // !iipr_CImageRegionProcessorCompBase_included
+

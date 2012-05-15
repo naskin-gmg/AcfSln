@@ -3,9 +3,7 @@
 
  // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "ibase/CSize.h"
-
 #include "iimg/CBitmapRegion.h"
 
 
@@ -17,42 +15,23 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IProcessor)
+// protected methods
 
-int CImagePolarTransformProcessorComp::DoProcessing(
-				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* /*progressManagerPtr*/)
+// reimplemented (CImageRegionProcessorCompBase)
+
+bool CImagePolarTransformProcessorComp::ProcessImageRegion(
+			const iimg::IBitmap& input,
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const i2d::IObject2d* aoiPtr,
+			istd::IChangeable* outputPtr) const
 {
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		return TS_INVALID;
+	if (input.IsEmpty()){
+		return true;
 	}
 
 	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (outputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
-	const i2d::IObject2d* aoiPtr = NULL;
-	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
-	}
-
-	return ConvertImage(*inputBitmapPtr, aoiPtr, *outputBitmapPtr) ? TS_OK : TS_INVALID;
-}
-
-
-// private methods
-
-bool CImagePolarTransformProcessorComp::ConvertImage(
-			const iimg::IBitmap& input,
-			const i2d::IObject2d* aoiPtr,
-			iimg::IBitmap& outputBitmap) const
-{
-	if (input.IsEmpty()){
-		return true;
+		return false;
 	}
 
 	const i2d::IObject2d* realAoiPtr = aoiPtr;
@@ -95,7 +74,7 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 		radius = r2;
 	}
 
-	if (!outputBitmap.CreateBitmap(input.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
+	if (!outputBitmapPtr->CreateBitmap(input.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
 		return false;
 	}
 
@@ -104,7 +83,7 @@ bool CImagePolarTransformProcessorComp::ConvertImage(
 
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
 		for (int r = 0; r < radius; r++){
-			quint8* outputImageBeginPtr = (quint8*)outputBitmap.GetLinePtr(r);
+			quint8* outputImageBeginPtr = (quint8*)outputBitmapPtr->GetLinePtr(r);
 		
 			for (int alpha = 0; alpha < angleRange; alpha++){
 				double angle = alpha / double(angleRange) * I_2PI;

@@ -2,13 +2,9 @@
 #define iipr_CImageHistogramProcessorComp_included
 
 
-// ACF includes
-#include "i2d/CRectangle.h"
-#include "iimg/IBitmap.h"
-#include "iproc/TSyncProcessorCompBase.h"
-
 // ACF-Solutions includes
 #include "imeas/IDiscreteDataSequence.h"
+#include "iipr/CImageRegionProcessorCompBase.h"
 
 
 namespace iipr
@@ -18,30 +14,21 @@ namespace iipr
 /**	
 	Implementation of a processor for the image histogram calculation.
 */
-class CImageHistogramProcessorComp: public iproc::CSyncProcessorCompBase
+class CImageHistogramProcessorComp: public CImageRegionProcessorCompBase
 {
 public:
-	typedef iproc::CSyncProcessorCompBase BaseClass;
+	typedef CImageRegionProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImageHistogramProcessorComp);
-		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI parameter in the parameter set", false, "AoiParams");
 	I_END_COMPONENT;
 
-	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
+protected:
+	// reimplemented (CImageRegionProcessorCompBase)
+	virtual bool ProcessImageRegion(
+				const iimg::IBitmap& input,
 				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* progressManagerPtr = NULL);
-
-private:
-	bool CalculateHistogramFromBitmap(
-					const iimg::IBitmap& input,
-					const i2d::IObject2d* aoiPtr,
-					imeas::IDiscreteDataSequence& histogram) const;
-
-private:
-	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr) const;
 };
 
 

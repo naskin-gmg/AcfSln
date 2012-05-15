@@ -15,45 +15,27 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IProcessor)
+// protected methods
 
-int CImageHistogramProcessorComp::DoProcessing(
-				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* /*progressManagerPtr*/)
+// reimplemented (CImageRegionProcessorCompBase)
+
+bool CImageHistogramProcessorComp::ProcessImageRegion(
+			const iimg::IBitmap& input,
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const i2d::IObject2d* aoiPtr,
+			istd::IChangeable* outputPtr) const
 {
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
 	imeas::IDiscreteDataSequence* histogramPtr = dynamic_cast<imeas::IDiscreteDataSequence*>(outputPtr);
 	if (histogramPtr == NULL){
-		return TS_INVALID;
+		return false;
 	}
 
-	const i2d::IObject2d* aoiPtr = NULL;
-	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
-	}
-
-	return CalculateHistogramFromBitmap(*inputBitmapPtr, aoiPtr, *histogramPtr) ? TS_OK : TS_INVALID;
-}
-
-
-// private methods
-
-bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
-			const iimg::IBitmap& input,
-			const i2d::IObject2d* aoiPtr,
-			imeas::IDiscreteDataSequence& histogram) const
-{
 	if (input.IsEmpty()){
-		histogram.ResetSequence();
+		histogramPtr->ResetSequence();
 
 		return true;
 	}
+
 
 	int componentsBitCount = input.GetComponentBitsCount();
 	if (componentsBitCount != 8){
@@ -142,7 +124,7 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 
 	pixelCount /= usedColorComponents;
 
-	double normFactor = qPow(2.0, histogram.GetSampleDepth()) - 1;
+	double normFactor = qPow(2.0, histogramPtr->GetSampleDepth()) - 1;
 
 	for (int histIndex = 0; histIndex < histogramSize; histIndex++){
 		double normHist = histogramDataBufferPtr[histIndex] / double(pixelCount);
@@ -150,9 +132,9 @@ bool CImageHistogramProcessorComp::CalculateHistogramFromBitmap(
 		histogramDataBufferPtr[histIndex] = quint32(normHist * normFactor + 0.5);
 	}
 
-	istd::CChangeNotifier changePtr(&histogram);
+	istd::CChangeNotifier changePtr(histogramPtr);
 
-	return histogram.CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(quint32) * 8, usedColorComponents);
+	return histogramPtr->CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(quint32) * 8, usedColorComponents);
 }
 
 
