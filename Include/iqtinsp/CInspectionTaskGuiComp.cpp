@@ -287,7 +287,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 				if (i < m_editorVisualModelsCompPtr.GetCount()){
 					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
 					if (modelPtr != NULL){
-						RegisterModel(modelPtr);
+						RegisterModel(modelPtr, i);
 					}
 				}
 			}
@@ -326,7 +326,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 				if (i < m_editorVisualModelsCompPtr.GetCount()){
 					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
 					if (modelPtr != NULL){
-						RegisterModel(modelPtr);
+						RegisterModel(modelPtr, i);
 					}
 				}
 			}
