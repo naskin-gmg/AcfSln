@@ -18,7 +18,7 @@ namespace QtInspectionPck
 
 
 typedef iqtinsp::CInspectionTaskGuiComp InspectionTaskGui;
-typedef icomp::TModelCompWrap<iqtinsp::CGeneralSupplierGuiComp> GeneralSupplierGui;
+typedef iqtinsp::CGeneralSupplierGuiComp GeneralSupplierGui;
 
 
 } // namespace QtInspectionPck

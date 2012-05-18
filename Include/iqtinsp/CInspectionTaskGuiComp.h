@@ -42,7 +42,7 @@ public:
 		I_ASSIGN_TO(m_editorGuisCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_editorObserversCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_editorViewExtendersCompPtr, m_editorsCompPtr, false);
-		I_ASSIGN_TO(m_editorVisualsCompPtr, m_editorsCompPtr, false);
+		I_ASSIGN_MULTI_0(m_editorVisualInfosCompPtr, "EditorVisualInfos", "List editor visual informations for each editor", true);
 		I_ASSIGN_TO(m_editorVisualModelsCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_previewGuisCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", true);
 		I_ASSIGN_TO(m_previewObserversCompPtr, m_previewGuisCompPtr, false);
@@ -105,7 +105,7 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_editorGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_editorObserversCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_editorViewExtendersCompPtr);
-	I_MULTIREF(iqtgui::IVisualStatusProvider, m_editorVisualsCompPtr);
+	I_MULTIREF(iqtgui::IVisualStatusProvider, m_editorVisualInfosCompPtr);
 	I_MULTIREF(imod::IModel, m_editorVisualModelsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);

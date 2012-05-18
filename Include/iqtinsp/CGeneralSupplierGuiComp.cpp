@@ -71,8 +71,6 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 
 	I_ASSERT(IsGuiCreated());
 
-	istd::CChangeNotifier notfier(this);
-
 	QString statusLabelText = tr("Unknown");
 
 	QString description;

@@ -196,7 +196,7 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 
 void CInspectionTaskGuiComp::UpdateVisualElements()
 {
-	int visualProvidersCount = m_editorVisualsCompPtr.GetCount();
+	int visualProvidersCount = m_editorVisualInfosCompPtr.GetCount();
 
 	for (		GuiMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
 				iter != m_tabToGuiIndexMap.end();
@@ -206,13 +206,16 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 
 		int guiIndex = iter.value();
 		I_ASSERT(guiIndex >= 0);
-		I_ASSERT(guiIndex < m_editorVisualsCompPtr.GetCount());
+
+		if (guiIndex >= m_editorVisualInfosCompPtr.GetCount()){
+			continue;
+		}
 
 		QIcon tabIcon;
 		QString toolTip;
 
 		if (guiIndex < visualProvidersCount){
-			const IVisualStatusProvider* visualProviderPtr = m_editorVisualsCompPtr[guiIndex];
+			const iqtgui::IVisualStatusProvider* visualProviderPtr = m_editorVisualInfosCompPtr[guiIndex];
 			if (visualProviderPtr != NULL){
 				tabIcon = visualProviderPtr->GetStatusIcon();
 				toolTip = visualProviderPtr->GetStatusText();

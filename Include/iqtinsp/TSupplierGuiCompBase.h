@@ -44,10 +44,6 @@ public:
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
-	// reimplemented (istd::IVisualStatusProvider)
-	virtual QIcon GetStatusIcon() const;
-	virtual QString GetStatusText() const;
-
 protected:
 	/**
 		Check, if parameters are correct connected to GUI and can be editable.
@@ -106,9 +102,6 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	bool m_areParamsEditable;
-
-	QIcon m_statusIcon;
-	QString m_statusText;
 };
 
 
@@ -142,22 +135,6 @@ void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProv
 	}
 
 	BaseClass::RemoveItemsFromScene(providerPtr);
-}
-
-
-// reimplemented (istd::IVisualStatusProvider)
-
-template <class UI, class WidgetType>
-QIcon TSupplierGuiCompBase<UI, WidgetType>::GetStatusIcon() const
-{
-	return m_statusIcon;
-}
-
-
-template <class UI, class WidgetType>
-QString TSupplierGuiCompBase<UI, WidgetType>::GetStatusText() const
-{
-	return m_statusText;
 }
 
 
@@ -341,10 +318,8 @@ void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
 
 	I_ASSERT(IsGuiCreated());
 
-	istd::CChangeNotifier notfier(this);
-
-	m_statusText = "";
-	m_statusIcon = QIcon(":/Icons/StateUnknown.svg");
+	QString statusText = "";
+	QIcon statusIcon = QIcon(":/Icons/StateUnknown.svg");
 
 	QString description;
 
@@ -356,48 +331,52 @@ void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
 
 		switch (workStatus){
 		case iproc::ISupplier::WS_LOCKED:
-			m_statusText = tr("Locked");
+			statusText = tr("Locked");
 			break;
 
 		case iproc::ISupplier::WS_OK:
 			if (infoProviderPtr != NULL){
 				switch (infoProviderPtr->GetInformationCategory()){
 				case istd::IInformationProvider::IC_WARNING:
-					m_statusText = tr("Processing completed with warnings");
-					m_statusIcon = QIcon(":/Icons/StateWarning.svg");
+					statusText = tr("Processing completed with warnings");
+					statusIcon = QIcon(":/Icons/StateWarning.svg");
 					break;
 
 				case istd::IInformationProvider::IC_ERROR:
-					m_statusText = tr("Processing completed with errors");
-					m_statusIcon = QIcon(":/Icons/StateInvalid.svg");
+					statusText = tr("Processing completed with errors");
+					statusIcon = QIcon(":/Icons/StateInvalid.svg");
 					break;
 
 				default:
-					m_statusText = tr("Processing completed without errors");
-					m_statusIcon = QIcon(":/Icons/StateOk.svg");
+					statusText = tr("Processing completed without errors");
+					statusIcon = QIcon(":/Icons/StateOk.svg");
 					break;
 				}
 			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
-			m_statusText = tr("Processing canceled by user");
+			statusText = tr("Processing canceled by user");
 			break;
 
 		case iproc::ISupplier::WS_ERROR:
-			m_statusText = tr("Processing not possible");
-			m_statusIcon = QIcon(":/Icons/StateInvalid.svg");
+			statusText = tr("Processing not possible");
+			statusIcon = QIcon(":/Icons/StateInvalid.svg");
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
-			m_statusText = tr("Critical error occurred, application problem");
-			m_statusIcon = QIcon(":/Icons/Error.svg");
+			statusText = tr("Critical error occurred, application problem");
+			statusIcon = QIcon(":/Icons/Error.svg");
 			break;
 
 		default:
 			break;
 		}
 	}
+
+	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
+	SetStatusIcon(statusIcon);
+	SetStatusText(statusText);
 }
 
 

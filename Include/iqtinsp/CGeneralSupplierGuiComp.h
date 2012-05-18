@@ -4,7 +4,6 @@
 
 // ACF includes
 #include "iproc/ISupplier.h"
-#include "iqtgui/IVisualStatusProvider.h"
 
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
