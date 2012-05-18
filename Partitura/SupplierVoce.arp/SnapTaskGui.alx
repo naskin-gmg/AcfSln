@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2254
+          2328
         </Number>
         <Description>
           ACF
@@ -18,10 +18,10 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        BitmapDialogLoader
+        ImageTaskGui
       </ComponentName>
       <X>
-        600
+        250
       </X>
       <X>
         200
@@ -32,10 +32,10 @@
     </Element>
     <Element>
       <ComponentName>
-        ImageTaskGui
+        BitmapDialogLoader
       </ComponentName>
       <X>
-        250
+        600
       </X>
       <X>
         200

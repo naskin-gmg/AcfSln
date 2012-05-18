@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2286
+          2328
         </Number>
         <Description>
           ACF
@@ -319,7 +319,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="7">
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        ValueSupplierGui/VisualStatus
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imod::IModelEditor
@@ -357,7 +365,15 @@
         iqtgui::IVisualStatusProvider
       </InterfaceId>
       <ComponentId>
-        ValueSupplierGui
+        ValueSupplierGui/VisualStatus
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        ValueSupplierGui/VisualStatus
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

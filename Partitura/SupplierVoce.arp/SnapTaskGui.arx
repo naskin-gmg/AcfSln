@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2254
+          2328
         </Number>
         <Description>
           ACF
@@ -128,7 +128,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="7">
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        ImageTaskGui/VisualStatus
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imod::IModelEditor
@@ -159,6 +167,22 @@
       </InterfaceId>
       <ComponentId>
         ImageTaskGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IVisualStatusProvider
+      </InterfaceId>
+      <ComponentId>
+        ImageTaskGui/VisualStatus
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        ImageTaskGui/VisualStatus
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
