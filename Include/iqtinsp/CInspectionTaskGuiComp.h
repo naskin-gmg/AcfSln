@@ -42,7 +42,7 @@ public:
 		I_ASSIGN_TO(m_editorGuisCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_editorObserversCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_editorViewExtendersCompPtr, m_editorsCompPtr, false);
-		I_ASSIGN_MULTI_0(m_editorVisualInfosCompPtr, "EditorVisualInfos", "List editor visual informations for each editor", true);
+		I_ASSIGN_MULTI_0(m_editorVisualInfosCompPtr, "EditorVisualInfos", "List editor visual informations for each editor", false);
 		I_ASSIGN_TO(m_editorVisualModelsCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_previewGuisCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", true);
 		I_ASSIGN_TO(m_previewObserversCompPtr, m_previewGuisCompPtr, false);
