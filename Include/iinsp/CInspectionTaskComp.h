@@ -41,10 +41,12 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, istd::IChangeable, ExtractParameters);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, imod::IModel, ExtractParameters);
 		I_ASSIGN_MULTI_0(m_subtasksCompPtr, "Subtasks", "List of subtasks (suppliers)", true);
-		I_ASSIGN_TO(m_subtaskModelsCompPtr, m_subtasksCompPtr, false);
+		I_ASSIGN_TO(m_subtaskModelsCompPtr, m_subtasksCompPtr, true);
+		I_ASSIGN_TO(m_subtaskInspectionCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN(m_serializeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
+		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will rolled out", true, false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
-		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, false);
+		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iinsp::IInspectionTask)
@@ -66,9 +68,14 @@ protected:
 private:
 	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
+	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
 	I_ATTR(bool, m_serializeSuppliersAttrPtr);
+	I_ATTR(bool, m_reduceHierarchyAttrPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
 	I_REF(imod::IModel, m_generalParamsModelCompPtr);
+
+	typedef QVector<iproc::ISupplier*> Suppliers;
+	Suppliers m_subtasks;
 
 	class Parameters:
 				public imod::CMultiModelBridgeBase,
