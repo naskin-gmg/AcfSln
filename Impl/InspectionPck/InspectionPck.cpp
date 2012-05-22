@@ -20,11 +20,6 @@ I_EXPORT_COMPONENT(
 			"Task Model Supplier Product Process Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
 
 I_EXPORT_COMPONENT(
-			Inspection,
-			"Group set of inspection tasks into single one",
-			"Task Model Supplier Product Composite Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
-
-I_EXPORT_COMPONENT(
 			InformationProviderCache,
 			"General information provider cache object used to manage threading barrier for object supplier chain",
 			"Provider Cache Results" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));

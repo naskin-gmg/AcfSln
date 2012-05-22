@@ -4,6 +4,7 @@
 
 // ACF includes
 #include "imod/IModel.h"
+#include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
 #include "ibase/TLoggerCompWrap.h"
 
@@ -33,11 +34,17 @@ public:
 
 	I_BEGIN_COMPONENT(CInspectionTaskComp);
 		I_REGISTER_INTERFACE(IInspectionTask);
-		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(iproc::ISupplier);
+		I_REGISTER_SUBELEMENT(Parameters);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iprm::IParamsSet, ExtractParameters);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iser::ISerializable, ExtractParameters);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, istd::IChangeable, ExtractParameters);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, imod::IModel, ExtractParameters);
 		I_ASSIGN_MULTI_0(m_subtasksCompPtr, "Subtasks", "List of subtasks (suppliers)", true);
-		I_ASSIGN_MULTI_0(m_subtaskModelsCompPtr, "Subtasks", "List of subtasks (suppliers)", false);
-		I_ASSIGN(m_serialzeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
+		I_ASSIGN_TO(m_subtaskModelsCompPtr, m_subtasksCompPtr, false);
+		I_ASSIGN(m_serializeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
+		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, false);
 	I_END_COMPONENT;
 
 	// reimplemented (iinsp::IInspectionTask)
@@ -51,9 +58,6 @@ public:
 	virtual int GetWorkStatus() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -62,8 +66,38 @@ protected:
 private:
 	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
-	I_ATTR(bool, m_serialzeSuppliersAttrPtr);
+	I_ATTR(bool, m_serializeSuppliersAttrPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
+	I_REF(imod::IModel, m_generalParamsModelCompPtr);
+
+	class Parameters:
+				public imod::CMultiModelBridgeBase,
+				virtual public iprm::IParamsSet
+	{
+	public:
+		Parameters();
+
+		void SetParent(CInspectionTaskComp* parentPtr);
+
+		// reimplemented (iprm::IParamsSet)
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+	private:
+		CInspectionTaskComp* m_parentPtr;
+	};
+
+	typedef imod::TModelWrap<Parameters> ParametersModel;
+	mutable ParametersModel m_parameters;
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractParameters(CInspectionTaskComp& component)
+	{
+		return &component.m_parameters;
+	}
 };
 
 

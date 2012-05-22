@@ -182,15 +182,11 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CInformationProviderCacheComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CIdCacheComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionComp.cpp"
+				RelativePath="..\CInformationProviderCacheComp.cpp"
 				>
 			</File>
 			<File
@@ -203,15 +199,11 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CInformationProviderCacheComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CIdCacheComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CInspectionComp.h"
+				RelativePath="..\CInformationProviderCacheComp.h"
 				>
 			</File>
 			<File
@@ -224,10 +216,6 @@
 			</File>
 			<File
 				RelativePath="..\iinsp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IInspection.h"
 				>
 			</File>
 			<File

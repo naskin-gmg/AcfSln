@@ -16,9 +16,7 @@ namespace iinsp
 	Representation of complete inspection task.
 	Inspection contains of set of subtask suppliers (steps).
 */
-class IInspectionTask:
-			virtual public iproc::ISupplier,
-			virtual public iser::ISerializable
+class IInspectionTask: virtual public iproc::ISupplier
 {
 public:
 	/**
