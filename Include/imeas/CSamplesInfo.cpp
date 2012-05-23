@@ -2,6 +2,8 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -46,9 +48,10 @@ int CSamplesInfo::GetDefaultChannelsCount() const
 
 bool CSamplesInfo::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag logicalRangeTag("LogicalSamplesRange", "Logical range of samples axis, e.g. sampled time span");
+
 	bool retVal = true;
 
-	static iser::CArchiveTag logicalRangeTag("LogicalSamplesRange", "Logical range of samples axis, e.g. sampled time span");
 	retVal = retVal && archive.BeginTag(logicalRangeTag);
 	if (archive.IsStoring()){
 		double minValue = m_logicalSamplesRange.GetMinValue();
@@ -57,6 +60,8 @@ bool CSamplesInfo::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(maxValue);
 	}
 	else{
+		istd::CChangeNotifier notifier(this);
+
 		double minValue = 0;
 		double maxValue = 0;
 		retVal = retVal && archive.Process(minValue);

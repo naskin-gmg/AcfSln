@@ -83,19 +83,26 @@ double CDataStatistics::GetMedian() const
 
 bool CDataStatistics::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag averageTag("Average", "Data average");
+	static iser::CArchiveTag medianTag("Median", "Data median");
+	static iser::CArchiveTag standardDeviationTag("StandardDeviation", "Data's standard deviation");
+	static iser::CArchiveTag minValueTag("MinValue", "Minimal data value");
+	static iser::CArchiveTag maxValueTag("maxValue", "Maximal data value");
+
+	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag averageTag("Average", "Data average");
 	retVal = retVal && archive.BeginTag(averageTag);
 	retVal = retVal && archive.Process(m_average);
 	retVal = retVal && archive.EndTag(averageTag);
 
-	static iser::CArchiveTag medianTag("Median", "Data median");
 	retVal = retVal && archive.BeginTag(medianTag);
 	retVal = retVal && archive.Process(m_median);
 	retVal = retVal && archive.EndTag(medianTag);
 
-	static iser::CArchiveTag standardDeviationTag("StandardDeviation", "Data's standard deviation");
 	retVal = retVal && archive.BeginTag(standardDeviationTag);
 	retVal = retVal && archive.Process(m_standardDeviation);
 	retVal = retVal && archive.EndTag(standardDeviationTag);
@@ -103,17 +110,15 @@ bool CDataStatistics::Serialize(iser::IArchive& archive)
 	double minValue = m_dataBoundaries.GetMinValue();
 	double maxValue = m_dataBoundaries.GetMaxValue();
 
-	static iser::CArchiveTag minValueTag("MinValue", "Minimal data value");
 	retVal = retVal && archive.BeginTag(minValueTag);
 	retVal = retVal && archive.Process(minValue);
 	retVal = retVal && archive.EndTag(minValueTag);
 
-	static iser::CArchiveTag maxValueTag("maxValue", "Maximal data value");
 	retVal = retVal && archive.BeginTag(maxValueTag);
 	retVal = retVal && archive.Process(maxValue);
 	retVal = retVal && archive.EndTag(maxValueTag);
 
-	if (!archive.IsStoring()){
+	if (!isStoring){
 		m_dataBoundaries = istd::CRange(minValue, maxValue);
 	}
 

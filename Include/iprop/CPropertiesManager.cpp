@@ -95,8 +95,8 @@ void CPropertiesManager::InsertProperty(
 
 bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {
-	iser::CArchiveTag propertiesTag("Properties", "Liste of object properties");
-	iser::CArchiveTag propertyTag("Property", "Object property");
+	static iser::CArchiveTag propertiesTag("Properties", "Liste of object properties");
+	static iser::CArchiveTag propertyTag("Property", "Object property");
 
 	if (archive.IsStoring()){
 		return WriteProperties(archive, propertiesTag, propertyTag);
@@ -111,6 +111,8 @@ bool CPropertiesManager::ReadProperties(
 			const iser::CArchiveTag& propertiesTag,
 			const iser::CArchiveTag& propertyTag)
 {
+	istd::CChangeNotifier notifier(this);
+
 	bool retVal = true;
 
 	int propertiesCount = m_propertiesList.GetCount();

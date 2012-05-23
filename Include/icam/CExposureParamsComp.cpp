@@ -106,26 +106,25 @@ bool CExposureParamsComp::SetEenDelay(double time)
 
 bool CExposureParamsComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag shutterTimeTag("ShutterTime", "Shutter time in seconds");
+	static iser::CArchiveTag delayTimeTag("DelayTime", "Delay of shutter in seconds");
+	static iser::CArchiveTag eenDelayTimeTag("EenDelayTime", "Delay of exposure enabled signal in seconds");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag shutterTimeTag("ShutterTime", "Shutter time in seconds");
 	retVal = retVal && archive.BeginTag(shutterTimeTag);
 	retVal = retVal && archive.Process(m_shutterTime);
 	retVal = retVal && archive.EndTag(shutterTimeTag);
 
-	static iser::CArchiveTag delayTimeTag("DelayTime", "Delay of shutter in seconds");
 	retVal = retVal && archive.BeginTag(delayTimeTag);
 	retVal = retVal && archive.Process(m_delayTime);
 	retVal = retVal && archive.EndTag(delayTimeTag);
 
-	static iser::CArchiveTag eenDelayTimeTag("EenDelayTime", "Delay of exposure enabled signal in seconds");
 	retVal = retVal && archive.BeginTag(eenDelayTimeTag);
 	retVal = retVal && archive.Process(m_eenDelayTime);
 	retVal = retVal && archive.EndTag(eenDelayTimeTag);
-
-	if (!archive.IsStoring()){
-		istd::CChangeNotifier notifier(this);
-	}
 
 	return retVal;
 }

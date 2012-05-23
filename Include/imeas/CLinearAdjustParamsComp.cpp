@@ -98,14 +98,17 @@ bool CLinearAdjustParamsComp::SetValues(const imath::CVarVector& values)
 
 bool CLinearAdjustParamsComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag scaleTag("ScaleFactor", "Scale factor of linear adjust");
+	static iser::CArchiveTag offsetTag("OffsetFactor", "Offset factor of linear adjust");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag scaleTag("ScaleFactor", "Scale factor of linear adjust");
 	retVal = retVal && archive.BeginTag(scaleTag);
 	retVal = retVal && archive.Process(m_scale);
 	retVal = retVal && archive.EndTag(scaleTag);
 
-	static iser::CArchiveTag offsetTag("OffsetFactor", "Offset factor of linear adjust");
 	retVal = retVal && archive.BeginTag(offsetTag);
 	retVal = retVal && archive.Process(m_offset);
 	retVal = retVal && archive.EndTag(offsetTag);

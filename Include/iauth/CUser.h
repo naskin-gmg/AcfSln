@@ -2,18 +2,18 @@
 #define iauth_CUser_included
 
 
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+// ACF includes
+#include "iser/ISerializable.h"
 
 
 namespace iauth
 {
 
 
-class CUser
+class CUser: virtual public iser::ISerializable
 {
 public:
 	CUser(const QString& userName = "", const QString& password = "", int userGroup = 0);
@@ -58,6 +58,7 @@ public:
 	*/
 	void ResetPassword();
 
+	// reimplemented (iser::ISerializable)
 	bool Serialize(iser::IArchive& archive);
 
 private:

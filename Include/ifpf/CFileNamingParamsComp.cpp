@@ -72,19 +72,22 @@ void CFileNamingParamsComp::SetSuffix(const QString& suffix)
 
 bool CFileNamingParamsComp::Serialize(iser::IArchive& archive)
 {		
+	static iser::CArchiveTag renamingModeTag("RenamingMode", "Mode for the file renaming");
+	static iser::CArchiveTag prefixTag("FilePrefix", "File prefix");
+	static iser::CArchiveTag suffixTag("FileSuffix", "FileSuffix");
+
+	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag renamingModeTag("RenamingMode", "Mode for the file renaming");
 	retVal = retVal && archive.BeginTag(renamingModeTag);
 	retVal = retVal && archive.Process(m_renamingMode);
 	retVal = retVal && archive.EndTag(renamingModeTag);
 
-	static iser::CArchiveTag prefixTag("FilePrefix", "File prefix");
 	retVal = retVal && archive.BeginTag(prefixTag);
 	retVal = retVal && archive.Process(m_prefix);
 	retVal = retVal && archive.EndTag(prefixTag);
 
-	static iser::CArchiveTag suffixTag("FileSuffix", "FileSuffix");
 	retVal = retVal && archive.BeginTag(suffixTag);
 	retVal = retVal && archive.Process(m_suffix);
 	retVal = retVal && archive.EndTag(suffixTag);

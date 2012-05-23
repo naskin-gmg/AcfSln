@@ -130,31 +130,34 @@ void CSearchParams::SetScaleEnabled(bool isScaleEnabled)
 bool CSearchParams::Serialize(iser::IArchive & archive)
 {
 	static iser::CArchiveTag angleRangeTag("AngleRange", "Search angle range");
+	static iser::CArchiveTag scaleRangeTag("ScaleRange", "Search scale range");
+	static iser::CArchiveTag minScoreTag("MinScore", "Minimum match score");
+	static iser::CArchiveTag isRotationEnabledTag("RotationEnabled", "Is angle range enabled");
+	static iser::CArchiveTag isScaleEnabledTag("ScaleEnabledTag", "Is scale range enabled");
+	static iser::CArchiveTag nominalModelsCountTag("NominalModelsCount", "Minimum model matches count");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = archive.BeginTag(angleRangeTag);
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeRange(archive, m_angleRange);
 	retVal = retVal && archive.EndTag(angleRangeTag);
 
-	static iser::CArchiveTag scaleRangeTag("ScaleRange", "Search scale range");
 	retVal = retVal && archive.BeginTag(scaleRangeTag);
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeRange(archive, m_scaleRange);
 	retVal = retVal && archive.EndTag(scaleRangeTag);
 
-	static iser::CArchiveTag minScoreTag("MinScore", "Minimum match score");
 	retVal = retVal && archive.BeginTag(minScoreTag);
 	retVal = retVal && archive.Process(m_minScore);
 	retVal = retVal && archive.EndTag(minScoreTag);
 
-	static iser::CArchiveTag isRotationEnabledTag("RotationEnabled", "Is angle range enabled");
 	retVal = retVal && archive.BeginTag(isRotationEnabledTag);
 	retVal = retVal && archive.Process(m_isRotationEnabled);
 	retVal = retVal && archive.EndTag(isRotationEnabledTag);
 
-	static iser::CArchiveTag isScaleEnabledTag("ScaleEnabledTag", "Is scale range enabled");
 	retVal = retVal && archive.BeginTag(isScaleEnabledTag);
 	retVal = retVal && archive.Process(m_isScaleEnabled);
 	retVal = retVal && archive.EndTag(isScaleEnabledTag);
 
-	static iser::CArchiveTag nominalModelsCountTag("NominalModelsCount", "Minimum model matches count");
 	retVal = retVal && archive.BeginTag(nominalModelsCountTag);
 	retVal = retVal && archive.Process(m_nominalModelsCount);
 	retVal = retVal && archive.EndTag(nominalModelsCountTag);

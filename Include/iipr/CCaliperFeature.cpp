@@ -1,6 +1,8 @@
 #include "iipr/CCaliperFeature.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -36,16 +38,19 @@ int CCaliperFeature::GetEdgeMode() const
 
 bool CCaliperFeature::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag valueTag("Position", "Position on projection");
+	static iser::CArchiveTag edgeModeTag("EdgeMode", "Edge mode");
+
 	bool retVal = true;
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag valueTag("Position", "Position on projection");
 	retVal = retVal && archive.BeginTag(valueTag);
 	retVal = retVal && archive.Process(m_position);
 	retVal = retVal && archive.EndTag(valueTag);
 
-	static iser::CArchiveTag edgeModeTag("EdgeMode", "Edge mode");
 	retVal = retVal && archive.BeginTag(edgeModeTag);
 	retVal = retVal && archive.Process(m_edgeMode);
 	retVal = retVal && archive.EndTag(edgeModeTag);

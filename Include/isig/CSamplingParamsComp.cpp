@@ -72,16 +72,17 @@ bool CSamplingParamsComp::SetSamplingMode(int mode)
 
 bool CSamplingParamsComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag intervalTag("Interval", "Interval [s] of simple sample");
+	static iser::CArchiveTag samplingModeTag("SamplingMode", "Sampling mode (isig::ISamplingParams::SamplingMode)");
+
 	bool retVal = true;
 
 	double interval = m_interval;
-	static iser::CArchiveTag intervalTag("Interval", "Interval [s] of simple sample");
 	retVal = retVal && archive.BeginTag(intervalTag);
 	retVal = retVal && archive.Process(interval);
 	retVal = retVal && archive.EndTag(intervalTag);
 
 	int samplingMode = m_samplingMode;
-	static iser::CArchiveTag samplingModeTag("SamplingMode", "Sampling mode (isig::ISamplingParams::SamplingMode)");
 	retVal = retVal && archive.BeginTag(samplingModeTag);
 	retVal = retVal && archive.Process(samplingMode);
 	retVal = retVal && archive.EndTag(samplingModeTag);

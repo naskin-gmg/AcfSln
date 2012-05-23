@@ -68,19 +68,22 @@ void CPulseParamsComp::SetRelaxingTime(double time)
 
 bool CPulseParamsComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag delayTimeTag("DelayTime", "Delay time for strobe pulses in seconds");
+	static iser::CArchiveTag pulseDurationTag("PulseDuration", "Duration of strobe pulses in seconds");
+	static iser::CArchiveTag relaxingTimeTag("RelaxingTime", "Time of relaxing after strobe pulse in seconds");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag delayTimeTag("DelayTime", "Delay time for strobe pulses in seconds");
 	retVal = retVal && archive.BeginTag(delayTimeTag);
 	retVal = retVal && archive.Process(m_delayTime);
 	retVal = retVal && archive.EndTag(delayTimeTag);
 
-	static iser::CArchiveTag pulseDurationTag("PulseDuration", "Duration of strobe pulses in seconds");
 	retVal = retVal && archive.BeginTag(pulseDurationTag);
 	retVal = retVal && archive.Process(m_pulseDuration);
 	retVal = retVal && archive.EndTag(pulseDurationTag);
 
-	static iser::CArchiveTag relaxingTimeTag("RelaxingTime", "Time of relaxing after strobe pulse in seconds");
 	retVal = retVal && archive.BeginTag(relaxingTimeTag);
 	retVal = retVal && archive.Process(m_relaxingTime);
 	retVal = retVal && archive.EndTag(relaxingTimeTag);

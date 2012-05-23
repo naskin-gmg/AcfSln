@@ -41,9 +41,12 @@ double CFeatureBase::GetWeight() const
 
 bool CFeatureBase::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag weightTag("Weight", "Weight of feature");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag weightTag("Weight", "Weight of feature");
 	retVal = retVal && archive.BeginTag(weightTag);
 	retVal = retVal && archive.Process(m_weight);
 	retVal = retVal && archive.EndTag(weightTag);

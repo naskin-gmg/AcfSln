@@ -88,16 +88,15 @@ iprm::ISelectionParam* CTriggerParamsComp::GetActiveSubselection() const
 
 bool CTriggerParamsComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag bottomTag("TriggerMode", "Trigger mode");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag bottomTag("TriggerMode", "Trigger mode");
 	retVal = retVal && archive.BeginTag(bottomTag);
 	retVal = retVal && archive.Process(m_triggerMode);
 	retVal = retVal && archive.EndTag(bottomTag);
-
-	if (!archive.IsStoring()){
-		istd::CChangeNotifier notifier(this);
-	}
 
 	return retVal;
 }

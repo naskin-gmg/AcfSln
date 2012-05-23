@@ -75,14 +75,18 @@ const imeas::IDataStatistics* CDataSequenceStatistics::GetChannelStatistics(int 
 
 bool CDataSequenceStatistics::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
-
 	static iser::CArchiveTag statisticsTag("DataStatistics", "Data sequence statistics");
 	static iser::CArchiveTag statisticsChannelTag("StatisticsChannel", "Single statistics channel");
 
+	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
+	bool retVal = true;
+
 	int channelsCount = m_channelStatisticsList.GetCount();
 
-	if (!archive.IsStoring()){
+	if (!isStoring){
 		m_channelStatisticsList.SetCount(channelsCount);
 		for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 			m_channelStatisticsList.SetElementAt(channelIndex, new ChannelStatistics);

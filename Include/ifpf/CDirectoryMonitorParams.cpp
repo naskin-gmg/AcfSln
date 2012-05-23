@@ -109,25 +109,29 @@ void CDirectoryMonitorParams::SetIgnorePatterns(const QStringList& ignorePattern
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {		
+	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos");
+	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed");
+	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed");
+	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns");
+	static iser::CArchiveTag acceptPatternTag("AcceptPattern", "Single accepted file name pattern");
+	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns");
+	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern");
+
+	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos");
 	retVal = retVal && archive.BeginTag(poolingIntervallTag);
 	retVal = retVal && archive.Process(m_poolingIntervall);
 	retVal = retVal && archive.EndTag(poolingIntervallTag);
 
-	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed");
 	retVal = retVal && archive.BeginTag(observedItemTypesTag);
 	retVal = retVal && archive.Process(m_observedItemTypes);
 	retVal = retVal && archive.EndTag(observedItemTypesTag);
 
-	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed");
 	retVal = retVal && archive.BeginTag(observedChangesTag);
 	retVal = retVal && archive.Process(m_observedChanges);
 	retVal = retVal && archive.EndTag(observedChangesTag);
-
-	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns");
-	static iser::CArchiveTag acceptPatternTag("AcceptPattern", "Single accepted file name pattern");
 
 	int acceptPatternsCount = m_acceptPatterns.size();
 	retVal = retVal && archive.BeginMultiTag(acceptPatternsTag, acceptPatternTag, acceptPatternsCount);
@@ -155,9 +159,6 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && archive.EndTag(acceptPatternsTag);
 
-	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns");
-	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern");
-
 	int ignorePatternsCount = m_ignorePatterns.size();
 	retVal = retVal && archive.BeginMultiTag(ignorePatternsTag, ignorePatternTag, ignorePatternsCount);
 	if (archive.IsStoring()){
@@ -183,8 +184,6 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 	}
 
 	retVal = retVal && archive.EndTag(ignorePatternsTag);
-
-	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
 
 	return retVal;
 }

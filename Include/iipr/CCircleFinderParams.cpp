@@ -91,24 +91,27 @@ void CCircleFinderParams::SetRaysCount(int raysCount)
 
 bool CCircleFinderParams::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag caliperModeTag("CaliperMode", "Caliper mode");
+	static iser::CArchiveTag isOutlierEliminationEnabledTag("OutlierEliminationEnabled", "Outliers elimination is enabled");
+	static iser::CArchiveTag minOutlierDistanceTag("MinOutlierDistance", "Minimal outliers distance");
+	static iser::CArchiveTag raysCountTag("RaysCount", "Number of projection rays");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag caliperModeTag("CaliperMode", "Caliper mode");
 	retVal = retVal && archive.BeginTag(caliperModeTag);
 	retVal = retVal && archive.Process(m_caliperMode);
 	retVal = retVal && archive.EndTag(caliperModeTag);
 
-	static iser::CArchiveTag isOutlierEliminationEnabledTag("OutlierEliminationEnabled", "Outliers elimination is enabled");
 	retVal = retVal && archive.BeginTag(isOutlierEliminationEnabledTag);
 	retVal = retVal && archive.Process(m_isOutlierEliminationEnabled);
 	retVal = retVal && archive.EndTag(isOutlierEliminationEnabledTag);
 
-	static iser::CArchiveTag minOutlierDistanceTag("MinOutlierDistance", "Minimal outliers distance");
 	retVal = retVal && archive.BeginTag(minOutlierDistanceTag);
 	retVal = retVal && archive.Process(m_minOutlierDistance);
 	retVal = retVal && archive.EndTag(minOutlierDistanceTag);
 
-	static iser::CArchiveTag raysCountTag("RaysCount", "Number of projection rays");
 	retVal = retVal && archive.BeginTag(raysCountTag);
 	retVal = retVal && archive.Process(m_raysCount);
 	retVal = retVal && archive.EndTag(raysCountTag);

@@ -43,9 +43,12 @@ void CImageInterpolationParams::SetInterpolationMode(int interpolationMode)
 
 bool CImageInterpolationParams::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag interpolationModeTag("InterpolationMode", "Interpolation mode");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag interpolationModeTag("InterpolationMode", "Interpolation mode");
 	retVal = retVal && archive.BeginTag(interpolationModeTag);
 	retVal = retVal && archive.Process(m_interpolationMode);
 	retVal = retVal && archive.EndTag(interpolationModeTag);

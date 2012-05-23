@@ -1,6 +1,12 @@
 #include "iauth/CUser.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+#include "iser/IArchive.h"
+#include "iser/CArchiveTag.h"
+
+
 namespace iauth
 {
 
@@ -69,11 +75,15 @@ void CUser::ResetPassword()
 }
 
 
+// reimplemented (iser::ISerializable)
+
 bool CUser::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag nameTag("Name", "Name of User");
 	static iser::CArchiveTag passwordTag("Password", "Password");
 	static iser::CArchiveTag groupIdTag("GroupID", "ID of group");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 
 	bool retVal = true;
 

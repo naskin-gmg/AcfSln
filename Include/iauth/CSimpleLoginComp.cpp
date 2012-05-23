@@ -141,6 +141,9 @@ bool CSimpleLoginComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag usersTag("Users", "List of users");
 	static iser::CArchiveTag userTag("User", "User");
 
+	bool isStoring = archive.IsStoring();
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	int usersCount = GetUsersCount();
 
 	bool retVal = archive.BeginMultiTag(usersTag, userTag, usersCount);
@@ -148,7 +151,7 @@ bool CSimpleLoginComp::Serialize(iser::IArchive& archive)
 		return false;
 	}
 
-	if (!archive.IsStoring()){
+	if (!isStoring){
 		m_users.resize(usersCount);
 	}
 
