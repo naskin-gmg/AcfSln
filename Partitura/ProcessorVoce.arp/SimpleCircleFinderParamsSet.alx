@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1970
+          2342
         </Number>
         <Description>
           ACF
@@ -15,50 +15,76 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        AnnulusSegment
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParams
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        325
-      </X>
-    </Element>
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         CaliperParamsSet
       </ComponentName>
       <X>
-        300
+        200
       </X>
       <X>
         250
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         CircleFinderParams
       </ComponentName>
       <X>
-        300
+        550
       </X>
       <X>
         425
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParams
+      </ComponentName>
+      <X>
+        775
+      </X>
+      <X>
+        250
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        AOI
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilterLength
+      </ComponentName>
+      <X>
+        700
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>

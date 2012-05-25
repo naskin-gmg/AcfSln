@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2286
+          2342
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        CaliperParamsGui
+        CircleFinderParams
       </ComponentName>
       <X>
-        700
+        550
       </X>
       <X>
-        275
+        675
       </X>
       <Note>
         
@@ -32,13 +32,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CircleFinderParamsGui
+        CaliperParams
       </ComponentName>
       <X>
-        325
+        800
       </X>
       <X>
-        325
+        525
       </X>
       <Note>
         
@@ -46,13 +46,27 @@
     </Element>
     <Element>
       <ComponentName>
-        AnnulusSegmentParamsGui
+        AOI
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilterParams
       </ComponentName>
       <X>
         700
       </X>
       <X>
-        125
+        600
       </X>
       <Note>
         
@@ -63,10 +77,10 @@
         CaliperParamsSetGui
       </ComponentName>
       <X>
-        300
+        275
       </X>
       <X>
-        200
+        175
       </X>
       <Note>
         

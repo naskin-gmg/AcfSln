@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2286
+          2342
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
-        AnnulusSegmentParamsGui
+        AOI
       </Id>
       <PackageId>
         QtViewPck
       </PackageId>
       <ComponentId>
-        AnnulusSegmentParamsGui
+        AnnulusParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -55,7 +55,7 @@
     </Element>
     <Element>
       <Id>
-        CaliperParamsGui
+        CaliperParams
       </Id>
       <PackageId>
         QtIprPck
@@ -91,7 +91,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DesignType
@@ -125,15 +125,18 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
-                  AnnulusSegmentParamsGui
+                  AOI
                 </Value>
                 <Value>
-                  CaliperParamsGui
+                  CaliperParams
                 </Value>
                 <Value>
-                  CircleFinderParamsGui
+                  FilterParams
+                </Value>
+                <Value>
+                  CircleFinderParams
                 </Value>
               </Values>
             </Data>
@@ -152,12 +155,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   CircleFinderAoi
                 </Value>
                 <Value>
                   Caliper
+                </Value>
+                <Value>
+                  Filter
                 </Value>
                 <Value>
                   CircleFinderParams
@@ -187,10 +193,10 @@
                   Edge Detection
                 </Value>
                 <Value>
-                  Circle Finder
+                  Filter
                 </Value>
                 <Value>
-                  
+                  Circle Finder
                 </Value>
               </Values>
             </Data>
@@ -214,18 +220,55 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseVerticalSpacer
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseVerticalSpacer
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        CircleFinderParamsGui
+        CircleFinderParams
       </Id>
       <PackageId>
         QtIprPck
       </PackageId>
       <ComponentId>
         CircleFinderParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FilterParams
+      </Id>
+      <PackageId>
+        QtMeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParamsGui
       </ComponentId>
       <Data>
         <IsEnabled>

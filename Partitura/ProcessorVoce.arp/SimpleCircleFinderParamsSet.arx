@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1970
+          2342
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
-        AnnulusSegment
+        AOI
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        AnnulusSegment
+        Annulus
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -128,12 +128,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
-                  AnnulusSegment
+                  AOI
                 </Value>
                 <Value>
                   CaliperParams
+                </Value>
+                <Value>
+                  FilterLength
                 </Value>
                 <Value>
                   CircleFinderParams
@@ -163,10 +166,10 @@
                   Caliper
                 </Value>
                 <Value>
-                  CircleFinderParams
+                  Filter
                 </Value>
                 <Value>
-                  
+                  CircleFinderParams
                 </Value>
               </Values>
             </Data>
@@ -208,6 +211,43 @@
           0
         </Flags>
         <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FilterLength
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Constraints
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              FilterConstraints
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -256,15 +296,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
-    <Component>
-      <ExportedId>
-        AnnulusSegment
-      </ExportedId>
-      <ComponentId>
-        AnnulusSegment
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="1">
     <Component>
       <ExportedId>
         CaliperParams
