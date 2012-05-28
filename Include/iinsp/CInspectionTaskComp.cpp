@@ -11,6 +11,13 @@ namespace iinsp
 {
 
 
+CInspectionTaskComp::CInspectionTaskComp()
+:	m_isStatusKnown(false),
+	m_resultCategory(IC_NONE)
+{
+}
+
+
 // reimplemented (iinsp::IInspectionTask)
 
 int CInspectionTaskComp::GetSubtasksCount() const
@@ -93,7 +100,97 @@ iprm::IParamsSet* CInspectionTaskComp::GetModelParametersSet() const
 }
 
 
+// reimplemented (iproc::ISupplier)
+
+QDateTime CInspectionTaskComp::GetInformationTimeStamp() const
+{
+	const_cast<CInspectionTaskComp*>(this)->EnsureStatusKnown();
+
+	return m_resultTypeStamp;
+}
+
+
+istd::IInformationProvider::InformationCategory CInspectionTaskComp::GetInformationCategory() const
+{
+	const_cast<CInspectionTaskComp*>(this)->EnsureStatusKnown();
+
+	return m_resultCategory;
+}
+
+
+int CInspectionTaskComp::GetInformationId() const
+{
+	return -1;
+}
+
+
+QString CInspectionTaskComp::GetInformationDescription() const
+{
+	const_cast<CInspectionTaskComp*>(this)->EnsureStatusKnown();
+
+	return m_resultDescription;
+}
+
+
+QString CInspectionTaskComp::GetInformationSource() const
+{
+	return QObject::tr("Inspection task");
+}
+
+
+int CInspectionTaskComp::GetInformationFlags() const
+{
+	return ITF_SYSTEM;
+}
+
+
 // protected methods
+
+void CInspectionTaskComp::EnsureStatusKnown()
+{
+	if (!m_isStatusKnown){
+		m_resultTypeStamp = QDateTime::currentDateTime();
+		m_resultCategory = IC_INFO;
+		m_resultDescription = "";
+
+		int infoSubtasksCount = m_subtasksCompPtr.GetCount();
+		int subtasksCount = m_subtasksCompPtr.GetCount();
+		for (int i = 0; i < subtasksCount; ++i){
+			const iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+			if (supplierPtr != NULL){
+				int workStatus = supplierPtr->GetWorkStatus();
+
+				if (workStatus < WS_OK){	// no result was calculated for this subtask
+					continue;
+				}
+
+				if (i < infoSubtasksCount){
+					const istd::IInformationProvider* infoProviderPtr = m_subtaskInfoProviderCompPtr[i];
+					if (infoProviderPtr != NULL){
+						InformationCategory category = infoProviderPtr->GetInformationCategory();
+						if (category > m_resultCategory){
+							m_resultCategory = category;
+							m_resultDescription = infoProviderPtr->GetInformationDescription();
+						}
+					}
+				}
+
+				if (workStatus >= WS_ERROR){
+					InformationCategory supplierResult = (workStatus >= WS_CRITICAL)?
+								IC_CRITICAL:
+								IC_ERROR;
+					if (supplierResult > m_resultCategory){
+						m_resultCategory = supplierResult;
+						m_resultDescription = "";
+					}
+				}
+			}
+		}
+
+		m_isStatusKnown = true;
+	}
+}
+
 
 // reimplemented (icomp::CComponentBase)
 
@@ -133,6 +230,8 @@ void CInspectionTaskComp::OnComponentCreated()
 		m_subtasks.push_back(taskPtr);
 	}
 
+	m_isStatusKnown = false;
+
 	m_parameters.SetParent(this);
 }
 
@@ -146,6 +245,17 @@ void CInspectionTaskComp::OnComponentDestroyed()
 	EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+
+// reimplemented (imod::IObserver)
+
+void CInspectionTaskComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_isStatusKnown = false;
+
+	BaseClass2::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
