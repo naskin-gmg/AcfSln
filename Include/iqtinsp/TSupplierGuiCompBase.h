@@ -121,8 +121,10 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider*
 {
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
-	if (m_paramsSetExtenderCompPtr.IsValid()){
-		m_paramsSetExtenderCompPtr->AddItemsToScene(providerPtr, flags);
+	if ((flags & SF_DIRECT) != 0){
+		if (m_paramsSetExtenderCompPtr.IsValid()){
+			m_paramsSetExtenderCompPtr->AddItemsToScene(providerPtr, flags);
+		}
 	}
 }
 
