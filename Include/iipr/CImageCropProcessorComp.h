@@ -12,12 +12,12 @@ namespace iipr
 
 
 /**	
-	Processor for image croping.
+	Processor for image cropping.
 */
 class CImageCropProcessorComp: public CImageRegionProcessorCompBase
 {
 public:
-	typedef iproc::CSyncProcessorCompBase BaseClass;
+	typedef CImageRegionProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImageCropProcessorComp);
 	I_END_COMPONENT;
