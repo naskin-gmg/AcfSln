@@ -1,6 +1,10 @@
 #include "icam/CSelectionParamCameraComp.h"
 
 
+// ACF includes
+#include "iprm/TParamsPtr.h"
+
+
 namespace icam
 {
 
@@ -128,10 +132,14 @@ const iprm::IParamsSet* CSelectionParamCameraComp::CreateParamsSet(const iprm::I
 	const iprm::IParamsSet* selectedParamsPtr = NULL;
 
 	if (m_paramsManagerCompPtr.IsValid()){
-		int selectedIndex = *m_defaultIndexAttrPtr;
-		const iprm::ISelectionParam* selectionPtr = dynamic_cast<const iprm::ISelectionParam*>(paramsPtr->GetParameter(*m_selectionIdAttrPtr));
-		if (selectionPtr != NULL){
+		int selectedIndex = -1;
+
+		iprm::TParamsPtr<iprm::ISelectionParam> selectionPtr(paramsPtr, *m_selectionIdAttrPtr);
+		if (selectionPtr.IsValid()){
 			selectedIndex = selectionPtr->GetSelectedOptionIndex();
+		}
+		else{
+			selectedIndex = *m_defaultIndexAttrPtr;
 		}
 
 		if ((selectedIndex >= 0) && selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount()){
