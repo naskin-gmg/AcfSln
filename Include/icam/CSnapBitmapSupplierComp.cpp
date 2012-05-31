@@ -41,6 +41,18 @@ const i2d::ITransformation2d* CSnapBitmapSupplierComp::GetCalibration() const
 
 // reimplemented (iproc::TSupplierCompWrap)
 
+bool CSnapBitmapSupplierComp::InitializeWork()
+{
+	if (m_bitmapAcquisitionCompPtr.IsValid()){
+		m_bitmapAcquisitionCompPtr->InitProcessor(GetModelParametersSet());
+
+		return true;
+	}
+
+	return false;
+}
+
+
 int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapCompFact.IsValid()){

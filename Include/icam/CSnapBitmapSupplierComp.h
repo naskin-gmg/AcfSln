@@ -48,6 +48,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
+	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
 
 private:

@@ -167,7 +167,7 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 
 void CInspectionTaskGuiComp::UpdateProcessingState()
 {
-	int workStatus = iproc::ISupplier::WS_NONE;
+	int workStatus = iproc::ISupplier::WS_INVALID;
 
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -524,7 +524,10 @@ void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
 {
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		m_paramsLoaderCompPtr->LoadFromFile(*objectPtr);
+		iprm::IParamsSet* parametersPtr = objectPtr->GetModelParametersSet();
+		if (parametersPtr != NULL){
+			m_paramsLoaderCompPtr->LoadFromFile(*parametersPtr);
+		}
 	}
 }
 
@@ -533,7 +536,10 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 {
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
+		iprm::IParamsSet* parametersPtr = objectPtr->GetModelParametersSet();
+		if (parametersPtr != NULL){
+			m_paramsLoaderCompPtr->SaveToFile(*parametersPtr);
+		}
 	}
 }
 

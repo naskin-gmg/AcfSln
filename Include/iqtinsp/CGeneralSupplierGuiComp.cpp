@@ -82,7 +82,7 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
-		case iproc::ISupplier::WS_NONE:
+		case iproc::ISupplier::WS_INVALID:
 			statusLabelText = tr("None");
 			break;
 
