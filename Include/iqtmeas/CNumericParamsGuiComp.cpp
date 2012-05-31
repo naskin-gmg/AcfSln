@@ -11,6 +11,12 @@ namespace iqtmeas
 
 // public methods
 
+CNumericParamsGuiComp::~CNumericParamsGuiComp()
+{
+	I_ASSERT(m_valueWidgets.IsEmpty());
+}
+
+
 // reimplemented (imod::IModelEditor)
 
 void CNumericParamsGuiComp::UpdateModel() const

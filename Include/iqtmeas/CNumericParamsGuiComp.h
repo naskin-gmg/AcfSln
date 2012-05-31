@@ -43,6 +43,8 @@ public:
 		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
 	I_END_COMPONENT;
 
+	virtual ~CNumericParamsGuiComp();
+
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 
