@@ -166,12 +166,12 @@ const iser::ISerializable* CSelectionParamCameraComp::JoinParamsSet::GetParamete
 {
 	const iser::ISerializable* retVal = NULL;
 
-	if (m_selectedParamsPtr != NULL){
-		retVal = m_selectedParamsPtr->GetParameter(id);
+	if (m_origParamsPtr != NULL){
+		retVal = m_origParamsPtr->GetParameter(id);
 	}
 
-	if ((retVal == NULL) && (m_origParamsPtr != NULL)){
-		retVal = m_origParamsPtr->GetParameter(id);
+	if ((retVal == NULL) && (m_selectedParamsPtr != NULL)){
+		retVal = m_selectedParamsPtr->GetParameter(id);
 	}
 
 	return retVal;
