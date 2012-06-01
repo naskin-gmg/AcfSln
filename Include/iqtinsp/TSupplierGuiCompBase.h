@@ -82,8 +82,8 @@ protected:
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	// reimplemented (imod::IObserver)
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// abstract methods
 	/**
@@ -311,14 +311,15 @@ void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, Shapes&
 }
 
 
-// reimplemented (iqtgui::TGuiObserverWrap)
-
+// reimplemented (imod::IObserver)
 template <class UI, class WidgetType>
-void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
+void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	BaseClass::UpdateGui(updateFlags);
+	if (!IsGuiCreated()){
+		BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
-	I_ASSERT(IsGuiCreated());
+		return;
+	}
 
 	QString statusText = "";
 	QIcon statusIcon = QIcon(":/Icons/StateUnknown.svg");
@@ -355,6 +356,10 @@ void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
 					break;
 				}
 			}
+			else{
+				statusText = tr("Processing completed without errors");
+				statusIcon = QIcon(":/Icons/StateOk.svg");
+			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
@@ -379,6 +384,8 @@ void TSupplierGuiCompBase<UI, WidgetType>::UpdateGui(int updateFlags)
 	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
 	SetStatusIcon(statusIcon);
 	SetStatusText(statusText);
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 

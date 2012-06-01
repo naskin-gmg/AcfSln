@@ -131,8 +131,10 @@ void CBitmapSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CBitmapSupplierGuiComp::UpdateGui(int /*updateFlags*/)
+void CBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 {
+	BaseClass::UpdateGui(updateFlags);
+
 	I_ASSERT(IsGuiCreated());
 
 	istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();

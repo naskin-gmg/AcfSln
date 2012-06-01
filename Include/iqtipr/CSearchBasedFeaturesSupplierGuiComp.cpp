@@ -117,6 +117,8 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiModelAttached()
 
 void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 {
+	BaseClass::UpdateGui(updateFlags);
+
 	I_ASSERT(IsGuiCreated());
 
 	if ((updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS) == 0){
