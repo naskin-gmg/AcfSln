@@ -289,7 +289,7 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
-		m_values.reserve(valuesCount);
+		m_values.resize(valuesCount);
 	}
 
 	for (int i = 0; i < valuesCount; ++i){
