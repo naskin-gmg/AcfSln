@@ -276,31 +276,55 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	int valuesCount = 0;
-
 	if (isStoring){
-		valuesCount = int(m_values.size());
+		int valuesCount = int(m_values.size());
+
+		retVal = retVal && archive.BeginMultiTag(valuesTag, valueTag, valuesCount);
+		for (ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
+			retVal = retVal && archive.BeginTag(valueTag);
+			retVal = retVal && archive.Process(*iter);
+			retVal = retVal && archive.EndTag(valueTag);
+		}
+		retVal = retVal && archive.EndTag(valuesTag);
 	}
+	else{
+		int valuesCount = 0;
 
-	retVal = retVal && archive.BeginMultiTag(valuesTag, valueTag, valuesCount);
-
-	if (!isStoring){
+		retVal = retVal && archive.BeginMultiTag(valuesTag, valueTag, valuesCount);
 		if (!retVal){
 			return false;
 		}
 
-		m_values.resize(valuesCount);
-	}
+		// load properties 'in place', without allocation of new elements
+		int itemIndex = 0;
+		for (ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
+			// remove rest of elements, if current number of elements is bigger than the stored
+			if (itemIndex >= valuesCount){
+				m_values.erase(iter, m_values.end());
 
-	for (int i = 0; i < valuesCount; ++i){
-		retVal = retVal && archive.BeginTag(valueTag);
-		Value value = m_values[i];
-		retVal = retVal && archive.Process(value);
-		m_values[i] = value;
-		retVal = retVal && archive.EndTag(valueTag);
-	}
+				break;
+			}
 
-	retVal = retVal && archive.EndTag(valuesTag);
+			retVal = retVal && archive.BeginTag(valueTag);
+			retVal = retVal && archive.Process(*iter);
+			retVal = retVal && archive.EndTag(valueTag);
+
+			++itemIndex;
+		}
+
+		// load rest of properties if current number of elements is smaller than the stored
+		while (itemIndex < valuesCount){
+			retVal = retVal && archive.BeginTag(valueTag);
+			Value value;
+			retVal = retVal && archive.Process(value);
+			m_values.push_back(value);
+			retVal = retVal && archive.EndTag(valueTag);
+
+			++itemIndex;
+		}
+
+		retVal = retVal && archive.EndTag(valuesTag);
+	}
 
 	return retVal;
 }
