@@ -129,14 +129,14 @@
               String
             </Type>
             <ExportId>
-              
+              TitleFormat
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                %1 by %2
+                $(AppName) by $(CompanyName)
               </Value>
             </Data>
           </AttributeInfo>
