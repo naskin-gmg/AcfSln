@@ -11,24 +11,22 @@ namespace InspectionPck
 I_EXPORT_PACKAGE(
 			"AcfSln/InspectionPck",
 			"General, system-independent image processing package",
-			"Standard Base Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
-
+			"Standard Base Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools"));
 
 I_EXPORT_COMPONENT(
 			InspectionTask,
 			"Group set of suppliers into single inspection task",
-			"Task Model Supplier Product Process Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+			"Task Model Supplier Product Process Cascade" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			InformationProviderCache,
 			"General information provider cache object used to manage threading barrier for object supplier chain",
-			"Provider Cache Results" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
-
+			"Provider Cache Results" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			IdCache,
+			IdProviderCache,
 			"ID provider cache object used to manage threading barrier for object supplier chain",
-			"Provider Cache ID" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model"));
+			"Provider Cache ID" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Witold Gantzke\""));
 
 
 } // namespace InspectionPck

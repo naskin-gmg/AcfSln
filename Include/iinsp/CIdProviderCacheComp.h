@@ -1,5 +1,5 @@
-#ifndef iinsp_CIdCacheComp_included
-#define iinsp_CIdCacheComp_included
+#ifndef iinsp_CIdProviderCacheComp_included
+#define iinsp_CIdProviderCacheComp_included
 
 
 // ACF includes
@@ -18,18 +18,18 @@ namespace iinsp
 	Stored ID can be changed only copying their from another ID provider using CopyFrom method.
 	This object will be used to manage threading barrier for object supplier chain.
 */
-class CIdCacheComp:
+class CIdProviderCacheComp:
 			public icomp::CComponentBase,
 			virtual public IIdProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CIdCacheComp);
+	I_BEGIN_COMPONENT(CIdProviderCacheComp);
 		I_REGISTER_INTERFACE(IIdProvider);
 	I_END_COMPONENT;
 
-	CIdCacheComp();
+	CIdProviderCacheComp();
 
 	// reimplemented (iinsp::IIdProvider)
 	virtual quint32 GetCurrentId() const;
@@ -45,6 +45,6 @@ private:
 } // namespace iinsp
 
 
-#endif // !iinsp_CIdCacheComp_included
+#endif // !iinsp_CIdProviderCacheComp_included
 
 

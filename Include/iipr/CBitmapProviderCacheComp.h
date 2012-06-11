@@ -1,5 +1,5 @@
-#ifndef iipr_CBitmapCacheComp_included
-#define iipr_CBitmapCacheComp_included
+#ifndef iipr_CBitmapProviderCacheComp_included
+#define iipr_CBitmapProviderCacheComp_included
 
 
 // ACF includes
@@ -20,7 +20,7 @@ namespace iipr
 	Stored bitmap can be changed only copying the bitmap from another bitmap provider using CopyFrom method.
 	This object will be used to manage threading barrier for object supplier chain.
 */
-class CBitmapCacheComp:
+class CBitmapProviderCacheComp:
 			public icomp::CComponentBase,
 			virtual public IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
@@ -28,7 +28,7 @@ class CBitmapCacheComp:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CBitmapCacheComp);
+	I_BEGIN_COMPONENT(CBitmapProviderCacheComp);
 		I_REGISTER_INTERFACE(IBitmapProvider);
 		I_REGISTER_INTERFACE(ICalibrationProvider);
 	I_END_COMPONENT;
@@ -51,6 +51,6 @@ private:
 } // namespace iipr
 
 
-#endif // !iipr_CBitmapCacheComp_included
+#endif // !iipr_CBitmapProviderCacheComp_included
 
 

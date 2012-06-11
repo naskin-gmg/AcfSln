@@ -1,4 +1,4 @@
-#include "iipr/CBitmapCacheComp.h"
+#include "iipr/CBitmapProviderCacheComp.h"
 
 
 namespace iipr
@@ -7,7 +7,7 @@ namespace iipr
 
 // reimplemented (iipr::IBitmapProvider)
 
-const iimg::IBitmap* CBitmapCacheComp::GetBitmap() const
+const iimg::IBitmap* CBitmapProviderCacheComp::GetBitmap() const
 {
 	return m_bitmapPtr.GetPtr();
 }
@@ -15,7 +15,7 @@ const iimg::IBitmap* CBitmapCacheComp::GetBitmap() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CBitmapCacheComp::GetCalibration() const
+const i2d::ITransformation2d* CBitmapProviderCacheComp::GetCalibration() const
 {
 	return m_transformPtr.GetPtr();
 }
@@ -23,7 +23,7 @@ const i2d::ITransformation2d* CBitmapCacheComp::GetCalibration() const
 
 // reimplemented (istd::IChangeable)
 
-bool CBitmapCacheComp::CopyFrom(const IChangeable& object)
+bool CBitmapProviderCacheComp::CopyFrom(const IChangeable& object)
 {
 	const IBitmapProvider* providerPtr = dynamic_cast<const IBitmapProvider*>(&object);
 	if (providerPtr != NULL){

@@ -154,7 +154,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CBitmapCacheComp.cpp"
+				RelativePath="..\CBitmapProviderCacheComp.cpp"
 				>
 			</File>
 			<File
@@ -311,7 +311,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CBitmapCacheComp.h"
+				RelativePath="..\CBitmapProviderCacheComp.h"
 				>
 			</File>
 			<File

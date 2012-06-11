@@ -1,11 +1,11 @@
-#include "iinsp/CIdCacheComp.h"
+#include "iinsp/CIdProviderCacheComp.h"
 
 
 namespace iinsp
 {
 
 
-CIdCacheComp::CIdCacheComp()
+CIdProviderCacheComp::CIdProviderCacheComp()
 :	m_currentId(0)
 {
 }
@@ -13,7 +13,7 @@ CIdCacheComp::CIdCacheComp()
 
 // reimplemented (iinsp::IIdProvider)
 
-quint32 CIdCacheComp::GetCurrentId() const
+quint32 CIdProviderCacheComp::GetCurrentId() const
 {
 	return m_currentId;
 }
@@ -21,7 +21,7 @@ quint32 CIdCacheComp::GetCurrentId() const
 
 // reimplemented (istd::IChangeable)
 
-bool CIdCacheComp::CopyFrom(const IChangeable& object)
+bool CIdProviderCacheComp::CopyFrom(const IChangeable& object)
 {
 	const IIdProvider* providerPtr = dynamic_cast<const IIdProvider*>(&object);
 	if (providerPtr != NULL){

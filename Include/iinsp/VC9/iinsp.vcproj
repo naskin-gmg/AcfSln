@@ -182,7 +182,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CIdCacheComp.cpp"
+				RelativePath="..\CIdProviderCacheComp.cpp"
 				>
 			</File>
 			<File
@@ -199,7 +199,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CIdCacheComp.h"
+				RelativePath="..\CIdProviderCacheComp.h"
 				>
 			</File>
 			<File
