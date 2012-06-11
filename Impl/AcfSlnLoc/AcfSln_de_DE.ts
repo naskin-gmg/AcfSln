@@ -5,147 +5,147 @@
     <name>CBitmapSupplierGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Snap</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildaufnahme</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
     <message>
         <source>No Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Bild</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
 </context>
 <context>
     <name>CCaliperParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwellwert</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Edge polarity</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantenpolarität</translation>
     </message>
     <message>
         <source>Rise</source>
-        <translation type="unfinished"></translation>
+        <translation>Steigend</translation>
     </message>
     <message>
         <source>Drop</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallend</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Beliebig</translation>
     </message>
     <message>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Richtung</translation>
     </message>
     <message>
         <source>Forwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorwärts</translation>
     </message>
     <message>
         <source>Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückwärts</translation>
     </message>
 </context>
 <context>
     <name>CChangePasswordDialog</name>
     <message>
         <source>Change Password (User &apos;%1&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort ändern (Benutzer %1)</translation>
     </message>
     <message>
         <source>Old password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Altes Passwort:</translation>
     </message>
     <message>
         <source>New password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Passwort:</translation>
     </message>
     <message>
         <source>Reenter new password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Passwort wiederholen:</translation>
     </message>
 </context>
 <context>
     <name>CCircleFinderParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Enable Outlier Elimination</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausreißerelimination aktivieren</translation>
     </message>
     <message>
         <source>Minimal Outlier Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale Ausreißerentfernung</translation>
     </message>
     <message>
         <source>Maximal Ray Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Strahlenanzahl</translation>
     </message>
     <message>
         <source>Caliper Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Calipermode</translation>
     </message>
     <message>
         <source> pixels</source>
-        <translation type="unfinished"></translation>
+        <translation> Pixel</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>First</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstes</translation>
     </message>
     <message>
         <source>Best</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestes</translation>
     </message>
 </context>
 <context>
     <name>CDataSequenceViewComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Max</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Min</source>
@@ -352,81 +352,81 @@
     <name>CGeneralSearchParamsGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Minimum Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimales Score</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Model Occurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl von Modellen</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Von</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalierung</translation>
     </message>
 </context>
 <context>
     <name>CGeneralSupplierGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisse</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>CHotfolderContainerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -456,43 +456,43 @@
     <name>CInspectionTaskGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Inspection</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspektion</translation>
     </message>
     <message>
         <source>Recalculate all processing steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Verarbeitungsschritte wiederholen</translation>
     </message>
     <message>
         <source>Test All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles testen</translation>
     </message>
     <message>
         <source>Do processing steps automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitungsschritte automatisch ausführen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Load inspection data</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspektionsparameter laden</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
     <message>
         <source>Save inspection data</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspektionsparameter speichern</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
 </context>
 <context>
@@ -730,63 +730,63 @@
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitung</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Time elapsed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitungszeit:</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisse</translation>
     </message>
     <message>
         <source>ID</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Score (%)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <source>Angle (°)</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel(°)</translation>
     </message>
     <message>
         <source>X-Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>X-Skalierung</translation>
     </message>
     <message>
         <source>Y-Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Y-Skalierung</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
 </context>
 <context>
@@ -797,27 +797,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Snap</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildaufnahme</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
 </context>
 <context>
@@ -928,42 +928,42 @@
     <name>CValueSupplierGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation>Test</translation>
     </message>
     <message>
         <source>Found Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Gefundene Position</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern...</translation>
     </message>
     <message>
         <source>Intermediate Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporäre Ergebnisse</translation>
     </message>
 </context>
 <context>
     <name>CVideoPlayerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Current Frame</source>
@@ -1165,7 +1165,7 @@ Use other password.</source>
     <name>iqtcam::CBitmapSupplierGuiComp</name>
     <message>
         <source>(%1 x %2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1284,50 +1284,50 @@ Use other password.</source>
     <name>iqtinsp::CGeneralSupplierGuiComp</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Init</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesperrt</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgebrochen</translation>
     </message>
     <message>
         <source>Not processed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verarbeitet</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritisch</translation>
     </message>
 </context>
 <context>
     <name>iqtipr::CValueSupplierGuiComp</name>
     <message>
         <source>(%1, %2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

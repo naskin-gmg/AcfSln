@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2363
+          2364
         </Number>
         <Description>
           ACF
@@ -228,7 +228,39 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="0">
+  <ExportedInterfaces count="4">
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        AcfSolutionsLocalization
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::ISelectionConstraints
+      </InterfaceId>
+      <ComponentId>
+        AcfSolutionsLocalization
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqt::ITranslationManager
+      </InterfaceId>
+      <ComponentId>
+        AcfSolutionsLocalization
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        AcfSolutionsLocalization
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
