@@ -56,8 +56,8 @@ bool CSearchBasedFeaturesSupplierGuiComp::DoTest()
 
 	bool retVal = BaseClass::DoTest();
 
-	quint64 time = timer.elapsed();
-	TimeLabel->setText(QString::number(time));
+	quint64 time = timer.nsecsElapsed() / 1000000.0;
+	TimeLabel->setText(QString("%1 ms").arg(time));
 
 	return retVal;
 }
@@ -148,6 +148,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(foundFeatures[featureIndex]);
 					if (searchFeaturePtr != NULL){
 						QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
+						modelItemPtr->setText(CT_ID, searchFeaturePtr->GetId());
 						modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100, 'f', 2));
 						modelItemPtr->setText(CT_X, QString::number(searchFeaturePtr->GetPosition().GetX(), 'f', 2));
 						modelItemPtr->setText(CT_Y, QString::number(searchFeaturePtr->GetPosition().GetY(), 'f', 2));
