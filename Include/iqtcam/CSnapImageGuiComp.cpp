@@ -92,19 +92,24 @@ void CSnapImageGuiComp::OnGuiCreated()
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 
 	bool areParamsEditable = false;
-	if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetGuiCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
-		m_paramsSetModelCompPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
+	if (m_paramsSetGuiCompPtr.IsValid()){
 		m_paramsSetGuiCompPtr->CreateGui(ParamsFrame);
 
-		areParamsEditable = true;
+		if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
+			m_paramsSetModelCompPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
+
+			areParamsEditable = true;
+		}
+
+		ParamsFrame->setVisible(true);
+	}
+	else{
+		ParamsFrame->setVisible(false);
 	}
 
-	ParamsGB->setVisible(
-				m_paramsSetCompPtr.IsValid() &&
-				(areParamsEditable || m_paramsLoaderCompPtr.IsValid()));
+	ParamsGB->setVisible(m_paramsSetGuiCompPtr.IsValid() || m_paramsLoaderCompPtr.IsValid());
 	LoadParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
 	SaveParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
-	ParamsFrame->setVisible(m_paramsSetCompPtr.IsValid() && areParamsEditable);
 }
 
 

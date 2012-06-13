@@ -4,15 +4,18 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ConfigFiles count ="2">
+  <ConfigFiles count ="1">
     <FilePath>
       $(ACFDIR)/Config/Full.xpc
     </FilePath>
-    <FilePath>
-      ./Core.xpc
-    </FilePath>
   </ConfigFiles>
-  <PackageDirs count="2">
+  <PackageDirs count="4">
+    <Dir>
+      ../Bin/$(ConfigurationName)
+    </Dir>
+    <Dir>
+      ../Partitura
+    </Dir>
     <Dir>
       ../Bin/$(ConfigurationName)/Tutorial
     </Dir>
