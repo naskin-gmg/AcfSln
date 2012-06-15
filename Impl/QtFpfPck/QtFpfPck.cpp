@@ -4,12 +4,13 @@
 #include "icomp/export.h"
 
 
+I_REGISTER_QT_RESOURCE(iqtgui);
+I_REGISTER_QT_RESOURCE(iqtfpf);
+
+
 namespace QtFpfPck
 {
 
-
-I_REGISTER_QT_RESOURCE(iqtgui);
-I_REGISTER_QT_RESOURCE(iqtfpf);
 
 I_EXPORT_PACKAGE(
 			"AcfSln/Fpf/Gui",

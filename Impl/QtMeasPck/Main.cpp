@@ -6,11 +6,12 @@
 #include "iqtgui/iqtgui.h"
 
 
+I_REGISTER_QT_RESOURCE(iqtgui);
+
+
 namespace QtMeasPck
 {
 
-
-I_REGISTER_QT_RESOURCE(iqtgui);
 
 I_EXPORT_PACKAGE(
 			"AcfSln/Measure/GUI",

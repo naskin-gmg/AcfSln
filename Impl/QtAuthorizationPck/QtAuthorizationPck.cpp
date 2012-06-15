@@ -8,11 +8,12 @@
 #include "icomp/export.h"
 
 
+I_REGISTER_QT_RESOURCE(iqtgui);
+
+
 namespace QtAuthorizationPck
 {
 
-
-I_REGISTER_QT_RESOURCE(iqtgui);
 
 I_EXPORT_PACKAGE(
 			"AcfSln/Gui/AuthorizationPck",
