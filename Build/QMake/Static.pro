@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 CONFIG += ordered
+CONFIG += debug_and_release
 
 SUBDIRS += ../../Include/icam/QMake/icam.pro
 SUBDIRS += ../../Include/ifpf/QMake/ifpf.pro

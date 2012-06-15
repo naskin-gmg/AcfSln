@@ -9,6 +9,7 @@
 
 // ACF includes
 #include "istd/TPointerVector.h"
+#include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "ibase/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
@@ -72,7 +73,7 @@ protected:
 		QByteArray m_itemUuid;
 		int m_processingState;
 		double m_processingTime;
-		QDateTime m_startTime; 
+		QDateTime m_startTime;
 	};
 
 	// reimplemented (icomp::CComponentBase)
@@ -109,7 +110,7 @@ private:
 		typedef imod::CSingleModelObserverBase BaseClass;
 
 		StateObserver(CHotfolderProcessingComp& parent);
-		
+
 		// reimplemented (imod::IObserver)
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	private:

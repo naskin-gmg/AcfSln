@@ -2,8 +2,9 @@
 #define iprop_TProperty_included
 
 
-#include "istd/CClassInfo.h"
 #include "istd/TDelPtr.h"
+#include "istd/TChangeNotifier.h"
+#include "istd/CClassInfo.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"

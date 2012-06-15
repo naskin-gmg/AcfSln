@@ -3,12 +3,12 @@
 
 
 // ACF includes
+#include "i2d/ICalibrationProvider.h"
 #include "iproc/TSyncProcessorCompBase.h"
 
 
 namespace i2d
 {
-	class ICalibrationProvider;
 	class IObject2d;
 }
 
@@ -23,14 +23,14 @@ namespace iipr
 {
 
 
-/**	
+/**
 	Basic implementation for a image region processor.
 */
 class CImageRegionProcessorCompBase: public iproc::CSyncProcessorCompBase
 {
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
-	
+
 	I_BEGIN_BASE_COMPONENT(CImageRegionProcessorCompBase);
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set", false, "AoiParams");
 		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
@@ -45,7 +45,7 @@ public:
 
 protected:
 	// abstract methods
-	
+
 	/**
 		Process the defined image region.
 	*/
@@ -65,4 +65,5 @@ private:
 
 
 #endif // !iipr_CImageRegionProcessorCompBase_included
+
 

@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 CONFIG += ordered
+CONFIG += debug_and_release
 
 SUBDIRS += ../../Impl/CameraPck/QMake/CameraPck.pro
 SUBDIRS += ../../Impl/FpfPck/QMake/FpfPck.pro

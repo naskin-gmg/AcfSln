@@ -218,7 +218,7 @@ template <typename Value, class Container>
 void TMultiProperty<Value, Container>::ResetValues()
 {
 	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
-	
+
 	m_values.clear();
 }
 
@@ -244,7 +244,7 @@ typename TMultiProperty<Value, Container>::iterator TMultiProperty<Value, Contai
 {
 	return m_values.end();
 }
-	
+
 
 template <typename Value, class Container>
 typename TMultiProperty<Value, Container>::const_iterator TMultiProperty<Value, Container>::end() const
@@ -280,7 +280,7 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 		int valuesCount = int(m_values.size());
 
 		retVal = retVal && archive.BeginMultiTag(valuesTag, valueTag, valuesCount);
-		for (ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
+		for (typename ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
 			retVal = retVal && archive.BeginTag(valueTag);
 			retVal = retVal && archive.Process(*iter);
 			retVal = retVal && archive.EndTag(valueTag);
@@ -297,7 +297,7 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 
 		// load properties 'in place', without allocation of new elements
 		int itemIndex = 0;
-		for (ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
+		for (typename ValueList::iterator iter = m_values.begin(); iter != m_values.end(); ++iter){
 			// remove rest of elements, if current number of elements is bigger than the stored
 			if (itemIndex >= valuesCount){
 				m_values.erase(iter, m_values.end());

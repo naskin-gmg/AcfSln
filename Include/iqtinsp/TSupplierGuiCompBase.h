@@ -45,7 +45,9 @@ public:
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
-	/**
+	typedef typename BaseClass::Shapes Shapes;
+
+	/**‹‹
 		Check, if parameters are correct connected to GUI and can be editable.
 	*/
 	bool AreParamsEditable() const;
@@ -102,6 +104,8 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	bool m_areParamsEditable;
+
+	using BaseClass::m_visualStatus;
 };
 
 
@@ -121,7 +125,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider*
 {
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
-	if ((flags & SF_DIRECT) != 0){
+	if ((flags & iqt2d::IViewExtender::SF_DIRECT) != 0){
 		if (m_paramsSetExtenderCompPtr.IsValid()){
 			m_paramsSetExtenderCompPtr->AddItemsToScene(providerPtr, flags);
 		}
@@ -312,10 +316,11 @@ void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, Shapes&
 
 
 // reimplemented (imod::IObserver)
+
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	if (!IsGuiCreated()){
+	if (!BaseClass::IsGuiCreated()){
 		BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
 		return;
@@ -326,7 +331,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 	QString description;
 
-	const iproc::ISupplier* supplierPtr = GetObjectPtr();
+	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 
@@ -334,45 +339,45 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 		switch (workStatus){
 		case iproc::ISupplier::WS_LOCKED:
-			statusText = tr("Locked");
+			statusText = QObject::tr("Locked");
 			break;
 
 		case iproc::ISupplier::WS_OK:
 			if (infoProviderPtr != NULL){
 				switch (infoProviderPtr->GetInformationCategory()){
 				case istd::IInformationProvider::IC_WARNING:
-					statusText = tr("Processing completed with warnings");
+					statusText = QObject::tr("Processing completed with warnings");
 					statusIcon = QIcon(":/Icons/StateWarning.svg");
 					break;
 
 				case istd::IInformationProvider::IC_ERROR:
-					statusText = tr("Processing completed with errors");
+					statusText = QObject::tr("Processing completed with errors");
 					statusIcon = QIcon(":/Icons/StateInvalid.svg");
 					break;
 
 				default:
-					statusText = tr("Processing completed without errors");
+					statusText = QObject::tr("Processing completed without errors");
 					statusIcon = QIcon(":/Icons/StateOk.svg");
 					break;
 				}
 			}
 			else{
-				statusText = tr("Processing completed without errors");
+				statusText = QObject::tr("Processing completed without errors");
 				statusIcon = QIcon(":/Icons/StateOk.svg");
 			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
-			statusText = tr("Processing canceled by user");
+			statusText = QObject::tr("Processing canceled by user");
 			break;
 
 		case iproc::ISupplier::WS_ERROR:
-			statusText = tr("Processing not possible");
+			statusText = QObject::tr("Processing not possible");
 			statusIcon = QIcon(":/Icons/StateInvalid.svg");
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
-			statusText = tr("Critical error occurred, application problem");
+			statusText = QObject::tr("Critical error occurred, application problem");
 			statusIcon = QIcon(":/Icons/Error.svg");
 			break;
 
@@ -382,8 +387,8 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 	}
 
 	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
-	SetStatusIcon(statusIcon);
-	SetStatusText(statusText);
+	BaseClass::SetStatusIcon(statusIcon);
+	BaseClass::SetStatusText(statusText);
 
 	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }

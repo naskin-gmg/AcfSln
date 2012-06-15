@@ -41,7 +41,7 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imeas::I
 
 	int precision = valueManip.GetPrecision();
 	m_unitPrecisionFactor = qPow(10.0, double(qMin(precision, 2)));
-	int displayPrecision = qMin(2, qMax(0, precision - int(std::log10(m_unitMultiplicationFactor) + 0.5)));
+	int displayPrecision = qMin(2, qMax(0, precision - int(log10(m_unitMultiplicationFactor) + 0.5)));
 
 	istd::CRange valueRange = unitInfo.GetValueRange();
 	if (valueRange.IsEmpty()){
