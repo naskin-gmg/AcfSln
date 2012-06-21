@@ -111,13 +111,10 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static const QByteArray& GetTypeName();
+	static QByteArray GetTypeName();
 
 protected:
 	Container m_values;
-
-private:
-	static const QByteArray s_typeName;
 };
 
 
@@ -258,7 +255,7 @@ typename TMultiProperty<Value, Container>::const_iterator TMultiProperty<Value, 
 template <typename Value, class Container>
 QByteArray TMultiProperty<Value, Container>::GetFactoryId() const
 {
-	return s_typeName;
+	return GetTypeName();
 }
 
 
@@ -333,16 +330,10 @@ bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value, class Container>
-const QByteArray& TMultiProperty<Value, Container>::GetTypeName()
+QByteArray TMultiProperty<Value, Container>::GetTypeName()
 {
-	return s_typeName;
+	return istd::CClassInfo::GetName<TMultiProperty<Value> >();
 }
-
-
-// private static properties
-
-template <typename Value, class Container>
-const QByteArray TMultiProperty<Value, Container>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
 
 
 // typedefs
