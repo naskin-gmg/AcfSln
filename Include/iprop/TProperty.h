@@ -155,7 +155,7 @@ bool TProperty<Value>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value>
-const QByteArray& TProperty<Value>::GetTypeName()
+QByteArray TProperty<Value>::GetTypeName()
 {
 	return istd::CClassInfo::GetName<TProperty<Value> >();
 }
