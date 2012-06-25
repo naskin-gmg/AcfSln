@@ -66,8 +66,14 @@ template <typename PixelComponentType>
 typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetInterpolatedValue(double x, double y, int componentIndex) const
 {
 	switch (m_interpolationMode){
+		case iipr::IImageInterpolationParams::IM_NO_INTERPOLATION:
+			return GetBitmapPixelValue(int(x), int(y), componentIndex);
+
 		case iipr::IImageInterpolationParams::IM_BILINEAR:
 			return GetBilinearInterpolated(x, y, componentIndex);
+
+		default:
+			I_CRITICAL();
 	}
 
 	return GetBitmapPixelValue(int(x), int(y), componentIndex);
