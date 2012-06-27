@@ -24,7 +24,7 @@ public:
 protected:
 	// reimplemented (CImageRegionProcessorCompBase)
 	virtual bool ProcessImageRegion(
-				const iimg::IBitmap& input,
+				const iimg::IBitmap& inputBitmap,
 				const iprm::IParamsSet* paramsPtr,
 				const i2d::IObject2d* aoiPtr,
 				istd::IChangeable* outputPtr) const;

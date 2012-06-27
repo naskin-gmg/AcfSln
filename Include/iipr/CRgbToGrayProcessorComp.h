@@ -31,7 +31,7 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 private:
-	bool ConvertImage(const iimg::IBitmap& input, iimg::IBitmap& outputBitmap) const;
+	bool ConvertImage(const iimg::IBitmap& inputBitmap, iimg::IBitmap& outputBitmap) const;
 };
 
 

@@ -20,12 +20,12 @@ namespace iipr
 // reimplemented (CImageRegionProcessorCompBase)
 
 bool CImagePolarTransformProcessorComp::ProcessImageRegion(
-			const iimg::IBitmap& input,
+			const iimg::IBitmap& inputBitmap,
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const i2d::IObject2d* aoiPtr,
 			istd::IChangeable* outputPtr) const
 {
-	if (input.IsEmpty()){
+	if (inputBitmap.IsEmpty()){
 		return true;
 	}
 
@@ -35,13 +35,14 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	}
 
 	const i2d::IObject2d* realAoiPtr = aoiPtr;
-	i2d::CRectangle imageRect(input.GetImageSize());
+	i2d::CRectangle imageRect(inputBitmap.GetImageSize());
 	if (aoiPtr == NULL){
 		realAoiPtr = &imageRect;
 	}
 
-	iimg::CBitmapRegion bitmapRegion(&input);
-	if (!bitmapRegion.CreateFromGeometry(*realAoiPtr)){
+	iimg::CBitmapRegion bitmapRegion;
+	i2d::CRect clipArea(inputBitmap.GetImageSize());
+	if (!bitmapRegion.CreateFromGeometry(*realAoiPtr, &clipArea)){
 		return false;
 	}
 
@@ -51,9 +52,9 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	i2d::CRectangle regionRect = bitmapRegion.GetBoundingBox();
+	i2d::CRect regionRect = bitmapRegion.GetBoundingBox();
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
-	i2d::CVector2d diffVector = aoiCenter - regionRect.GetTopLeft();
+	i2d::CVector2d diffVector = aoiCenter - i2d::CVector2d(regionRect.GetLeftTop());
 	int radius = int(qCeil(diffVector.GetLength()));
 	int angleRange = int(radius * I_PI + 0.5);
 
@@ -74,12 +75,12 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		radius = r2;
 	}
 
-	if (!outputBitmapPtr->CreateBitmap(input.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
+	if (!outputBitmapPtr->CreateBitmap(inputBitmap.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
 		return false;
 	}
 
-	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(input, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
-	int pixelComponentsCount = input.GetComponentsCount();
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
+	int pixelComponentsCount = inputBitmap.GetComponentsCount();
 
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
 		for (int r = 0; r < radius; r++){

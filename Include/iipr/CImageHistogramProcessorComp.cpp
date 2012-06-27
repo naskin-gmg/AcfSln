@@ -20,7 +20,7 @@ namespace iipr
 // reimplemented (CImageRegionProcessorCompBase)
 
 bool CImageHistogramProcessorComp::ProcessImageRegion(
-			const iimg::IBitmap& input,
+			const iimg::IBitmap& inputBitmap,
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const i2d::IObject2d* aoiPtr,
 			istd::IChangeable* outputPtr) const
@@ -30,28 +30,28 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	if (input.IsEmpty()){
+	if (inputBitmap.IsEmpty()){
 		histogramPtr->ResetSequence();
 
 		return true;
 	}
 
 
-	int componentsBitCount = input.GetComponentBitsCount();
+	int componentsBitCount = inputBitmap.GetComponentBitsCount();
 	if (componentsBitCount != 8){
 		SendWarningMessage(0, "Only 8-bit images are supported");
 
 		return false;
 	}
 
-	ibase::CSize inputSize(input.GetImageSize());
-	i2d::CRectangle realArea = i2d::CRectangle(inputSize);
+	ibase::CSize inputBitmapSize(inputBitmap.GetImageSize());
+	i2d::CRectangle realArea = i2d::CRectangle(inputBitmapSize);
 
-	const i2d::IObject2d* usedAoiPtr = (aoiPtr != NULL) ? aoiPtr : &realArea;
+	const i2d::IObject2d* usedAoiPtr = (aoiPtr != NULL)? aoiPtr: &realArea;
 
-	iimg::CBitmapRegion bitmapRegion(&input);
-
-	if (!bitmapRegion.CreateFromGeometry(*usedAoiPtr)){
+	iimg::CBitmapRegion bitmapRegion;
+	i2d::CRect clipArea(inputBitmap.GetImageSize());
+	if (!bitmapRegion.CreateFromGeometry(*usedAoiPtr, &clipArea)){
 		SendWarningMessage(0, "Cannot create the region");
 
 		return false;
@@ -63,14 +63,14 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	i2d::CRectangle regionRect = bitmapRegion.GetBoundingBox();
-	int regionTop = int(regionRect.GetTop());
-	int regionBottom = int(regionRect.GetBottom());
+	i2d::CRect regionRect = bitmapRegion.GetBoundingBox();
+	int regionTop = qMax(regionRect.GetTop(), 0);
+	int regionBottom = qMin(regionRect.GetBottom(), inputBitmapSize.GetY());
 
-	int pixelBytesCount = input.GetComponentsCount();
+	int pixelBytesCount = inputBitmap.GetComponentsCount();
 	int usedColorComponents = pixelBytesCount;
 
-	int pixelFormat = input.GetPixelFormat();
+	int pixelFormat = inputBitmap.GetPixelFormat();
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_RGB:
 		usedColorComponents = 3;
@@ -89,40 +89,37 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 	std::memset(histogramDataBufferPtr, 0, histogramSize * sizeof(quint32));
 	int pixelCount = 0;
 
-	for(int y = regionTop; y < regionBottom; y++){
+	for (int y = regionTop; y < regionBottom; y++){
+		const quint8* inputLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
+
 		const iimg::CBitmapRegion::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
 		if (rangesPtr == NULL){
 			continue;
 		}
 
-		I_ASSERT(y >= 0);
-		I_ASSERT(y < input.GetImageSize().GetY());
+		for (int rangeIndex = 0; rangeIndex < rangesPtr->size(); rangeIndex++){
+			const istd::CIntRange& pixelRange = rangesPtr->at(rangeIndex);
 
-		for (int rangeIndex = 0; rangeIndex < int(rangesPtr->size()); rangeIndex++){
-			const iimg::CBitmapRegion::PixelRange& pixelRange = rangesPtr->at(rangeIndex);
+			int rangeStart = qMax(pixelRange.GetMinValue(), 0);
+			int rangeEnd = qMin(pixelRange.GetMaxValue(), inputBitmapSize.GetX());
 
-			int rangeStart = int(pixelRange.range.GetMinValue());
-			int rangeEnd = int(pixelRange.range.GetMaxValue());
+			if (rangeEnd > rangeStart){
+				const quint8* inputPixelPtr = inputLinePtr + rangeStart * pixelBytesCount;
 
-			quint8* inputImagePtr = ((quint8*)pixelRange.pixelBufferPtr);
-			
-			for (int x = rangeStart; x < rangeEnd; x++){
-				I_ASSERT(x  < input.GetImageSize().GetX());
-				
-				for (int pixelByteIndex = 0; pixelByteIndex < pixelBytesCount; pixelByteIndex++){
-					quint8 pixelComponentValue = *inputImagePtr++;
+				for (int x = rangeStart; x < rangeEnd; ++x){
+					for (int componentIndex = 0; componentIndex < usedColorComponents; ++componentIndex){
+						quint8 pixelComponentValue = inputPixelPtr[componentIndex];
 
-					if (pixelByteIndex < usedColorComponents){
-						++histogramDataBufferPtr[pixelByteIndex + pixelComponentValue * usedColorComponents];
-
-						pixelCount++;
+						++histogramDataBufferPtr[componentIndex + pixelComponentValue * usedColorComponents];
 					}
+
+					inputPixelPtr += pixelBytesCount;
 				}
+
+				pixelCount += rangeEnd - rangeStart;
 			}
 		}
 	}
-
-	pixelCount /= usedColorComponents;
 
 	double normFactor = qPow(2.0, histogramPtr->GetSampleDepth()) - 1;
 

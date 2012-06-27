@@ -4,9 +4,9 @@
  // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "ibase/CSize.h"
-#include "iimg/CBitmapRegion.h"
 #include "i2d/IObject2d.h"
 #include "i2d/ICalibrationProvider.h"
+#include "iimg/IBitmap.h"
 
 // IACF includes
 #include "iipr/TImagePixelInterpolator.h"
