@@ -5,6 +5,7 @@
 // ACF includes
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
+#include "i2d/CAffineTransformation2d.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "iproc/IValueProvider.h"
@@ -25,13 +26,15 @@ namespace iipr
 */
 class CPositionFromImageSupplierComp:
 			public iproc::TSupplierCompWrap<imath::CVarVector>,
-			virtual public iproc::IValueProvider
+			virtual public iproc::IValueProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap<imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(iproc::IValueProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationSupplier", "Provide 2D-calibration object", false, "CalibrationSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
@@ -40,6 +43,9 @@ public:
 
 	// reimplemented (iproc::IValueProvider)
 	virtual imath::CVarVector GetValue(int index = -1, int valueTypeId = VTI_AUTO) const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -53,6 +59,8 @@ private:
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
+
+	mutable istd::TDelPtr<const i2d::ITransformation2d> m_outputCalibrationPtr;
 };
 
 

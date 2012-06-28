@@ -39,6 +39,30 @@ imath::CVarVector CPositionFromImageSupplierComp::GetValue(int /*index*/, int va
 }
 
 
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() const
+{
+	m_outputCalibrationPtr.Reset();
+
+	imath::CVarVector position = CPositionFromImageSupplierComp::GetValue(VTI_POSITION);
+	if (position.GetElementsCount() >= 2){
+		i2d::CAffineTransformation2d* outputTransformPtr = new i2d::CAffineTransformation2d();
+		outputTransformPtr->Reset(i2d::CVector2d(-position[0], -position[1]));
+		m_outputCalibrationPtr.SetPtr(outputTransformPtr);
+
+		if (m_calibrationProviderCompPtr.IsValid()){
+			const i2d::ITransformation2d* inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+			if (inputCalibrationPtr != NULL){
+				m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedTransformation(*inputCalibrationPtr));
+			}
+		}
+	}
+
+	return m_outputCalibrationPtr.GetPtr();
+}
+
+
 // protected methods
 
 // reimplemented (iproc::TSupplierCompWrap)

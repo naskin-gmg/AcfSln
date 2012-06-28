@@ -135,7 +135,25 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		return (aoisCount > 0);
 	}
 
-	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(&aoiObject);
+	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
+	const i2d::IObject2d* calibratedAoiPtr = dynamic_cast<const i2d::IObject2d*>(&aoiObject);
+
+	if (m_regionCalibrationProviderCompPtr.IsValid()){
+		const i2d::ITransformation2d* pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+		if (pixelToLogicalTransformPtr != NULL){
+			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiObject.CloneMe());
+
+			if (transformedRegionPtr.IsValid()){
+				if (!transformedRegionPtr->InvTransform(*pixelToLogicalTransformPtr)){
+					return false;
+				}
+
+				calibratedAoiPtr = transformedRegionPtr.GetPtr();
+			}
+		}
+	}
+
+	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(calibratedAoiPtr);
 	if (annulusAoiPtr != NULL){
 		double beginAngle = 0;
 		double endAngle = 2 * I_PI;

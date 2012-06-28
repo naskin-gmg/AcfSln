@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2342
+          2374
         </Number>
         <Description>
           ACF
@@ -111,7 +111,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -167,6 +167,22 @@
               <Value>
                 Caliper
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegionCalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              RegionCalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -267,7 +283,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AdditionalTriggerInputs
@@ -293,6 +309,22 @@
             </Type>
             <ExportId>
               BitmapSupplier
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CalibrationSupplier
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              InputCalibrationSupplier
             </ExportId>
             <Data>
               <IsEnabled>
@@ -392,7 +424,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="5">
+    <Interface>
+      <InterfaceId>
+        i2d::ICalibrationProvider
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imod::IModel

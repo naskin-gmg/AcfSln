@@ -39,12 +39,12 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
 	if (aoiPtr != NULL && m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* logicalToPixelTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
-		if (logicalToPixelTransformPtr != NULL){
+		const i2d::ITransformation2d* pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+		if (pixelToLogicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
 
 			if (transformedRegionPtr.IsValid()){
-				if (!transformedRegionPtr->Transform(*logicalToPixelTransformPtr)){
+				if (!transformedRegionPtr->InvTransform(*pixelToLogicalTransformPtr)){
 					return TS_INVALID;
 				}
 
