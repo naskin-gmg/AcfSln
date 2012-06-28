@@ -2,10 +2,8 @@
 #define icam_IBitmapAcquisition_included
 
 
+// ACF includes
 #include "istd/CIndex2d.h"
-
-#include "iimg/IBitmap.h"
-
 #include "iproc/IProcessor.h"
 
 

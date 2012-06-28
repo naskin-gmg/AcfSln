@@ -9,7 +9,7 @@
 
 #include "ibase/CSize.h"
 
-#include "iimg/CBitmapRegion.h"
+#include "iimg/CScanlineMask.h"
 
 
 namespace iipr
@@ -47,7 +47,7 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 
 	istd::CIndex2d inputBitmapSize = inputBitmap.GetImageSize();
 
-	iimg::CBitmapRegion bitmapRegion;
+	iimg::CScanlineMask bitmapRegion;
 	i2d::CRect clipArea(inputBitmapSize);
 	if (!bitmapRegion.CreateFromGeometry(*aoiPtr, &clipArea)){
 		SendWarningMessage(0, "Cannot create the region");
@@ -89,7 +89,7 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 	for (int y = regionTop; y < regionBottom; y++){
 		const quint8* inputLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
 
-		const iimg::CBitmapRegion::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
+		const iimg::CScanlineMask::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
 		if (rangesPtr == NULL){
 			continue;
 		}

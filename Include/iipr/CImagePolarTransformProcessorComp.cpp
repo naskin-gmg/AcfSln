@@ -4,7 +4,7 @@
  // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "ibase/CSize.h"
-#include "iimg/CBitmapRegion.h"
+#include "iimg/CScanlineMask.h"
 
 
 // IACF includes
@@ -40,7 +40,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		realAoiPtr = &imageRect;
 	}
 
-	iimg::CBitmapRegion bitmapRegion;
+	iimg::CScanlineMask bitmapRegion;
 	i2d::CRect clipArea(inputBitmap.GetImageSize());
 	if (!bitmapRegion.CreateFromGeometry(*realAoiPtr, &clipArea)){
 		return false;
