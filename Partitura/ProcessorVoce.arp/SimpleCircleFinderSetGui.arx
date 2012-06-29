@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2342
+          2380
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               UnitName
@@ -43,6 +43,22 @@
             </Type>
             <ExportId>
               UnitName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ViewCalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ViewCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>

@@ -11,6 +11,8 @@
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
+#include "iview/IShapeView.h"
+
 
 namespace iqtinsp
 {

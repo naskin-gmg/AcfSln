@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2328
+          2380
         </Number>
         <Description>
           ACF
@@ -70,7 +70,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               BitmapLoader
@@ -122,13 +122,37 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ViewCalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ViewCalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="7">
+  <ExportedInterfaces count="8">
+    <Interface>
+      <InterfaceId>
+        i2d::ICalibrationProvider
+      </InterfaceId>
+      <ComponentId>
+        ImageTaskGui
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imod::IModel

@@ -10,6 +10,7 @@
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
+#include "i2d/ICalibrationProvider.h"
 #include "iproc/ISupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -25,13 +26,15 @@ namespace iqtinsp
 template <class UI, class WidgetType = QWidget>
 class TSupplierGuiCompBase:
 			public iqt2d::TViewExtenderCompBase<
-						iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >
+						iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iqt2d::TViewExtenderCompBase<
 					iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
@@ -43,6 +46,9 @@ public:
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetCalibration() const;
 
 protected:
 	typedef typename BaseClass::Shapes Shapes;
@@ -141,6 +147,20 @@ void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProv
 	}
 
 	BaseClass::RemoveItemsFromScene(providerPtr);
+}
+
+
+// reimplemented (i2d::ICalibrationProvider)
+
+template <class UI, class WidgetType>
+const i2d::ITransformation2d* TSupplierGuiCompBase<UI, WidgetType>::GetCalibration() const
+{
+	i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<i2d::ICalibrationProvider*>(GetObjectPtr());
+	if (calibrationProviderPtr != NULL){
+		return calibrationProviderPtr->GetCalibration();
+	}
+
+	return NULL;
 }
 
 
