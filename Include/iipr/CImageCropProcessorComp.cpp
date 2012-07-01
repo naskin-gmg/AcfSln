@@ -57,7 +57,7 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 	i2d::CRect regionRect = bitmapRegion.GetBoundingBox();
 
 	int regionLeft = qMax(regionRect.GetLeft(), 0);
-	int regionRight = qMin(regionRect.GetLeft(), inputBitmapSize.GetX());
+	int regionRight = qMin(regionRect.GetRight(), inputBitmapSize.GetX());
 	int regionTop = qMax(regionRect.GetTop(), 0);
 	int regionBottom = qMin(regionRect.GetBottom(), inputBitmapSize.GetY());
 
