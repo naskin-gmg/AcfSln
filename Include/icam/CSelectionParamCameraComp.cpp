@@ -162,6 +162,24 @@ CSelectionParamCameraComp::JoinParamsSet::JoinParamsSet(const iprm::IParamsSet* 
 
 // reimplemented (iprm::IParamsSet)
 
+iprm::IParamsSet::Ids CSelectionParamCameraComp::JoinParamsSet::GetParamIds(bool editableOnly) const
+{
+	iprm::IParamsSet::Ids retVal;
+
+	if (!editableOnly){
+		if (m_origParamsPtr != NULL){
+			retVal += m_origParamsPtr->GetParamIds(false);
+		}
+
+		if (m_selectedParamsPtr != NULL){
+			retVal += m_selectedParamsPtr->GetParamIds(false);
+		}
+	}
+
+	return retVal;
+}
+
+
 const iser::ISerializable* CSelectionParamCameraComp::JoinParamsSet::GetParameter(const QByteArray& id) const
 {
 	const iser::ISerializable* retVal = NULL;

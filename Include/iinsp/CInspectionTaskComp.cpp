@@ -315,6 +315,31 @@ void CInspectionTaskComp::Parameters::SetParent(CInspectionTaskComp* parentPtr)
 
 // reimplemented (iprm::IParamsSet)
 
+iprm::IParamsSet::Ids CInspectionTaskComp::Parameters::GetParamIds(bool editableOnly) const
+{
+	iprm::IParamsSet::Ids retVal;
+
+	if (m_parentPtr != NULL){
+		if (m_parentPtr->m_generalParamsCompPtr.IsValid()){
+			retVal += m_parentPtr->m_generalParamsCompPtr->GetParamIds(editableOnly);
+		}
+
+		int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
+		for (int i = 0; i < subtasksCount; ++i){
+			const iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
+			if (subtaskPtr != NULL){
+				iprm::IParamsSet* paramsSetPtr = subtaskPtr->GetModelParametersSet();
+				if (paramsSetPtr != NULL){
+					retVal += paramsSetPtr->GetParamIds(editableOnly);
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
+
 const iser::ISerializable* CInspectionTaskComp::Parameters::GetParameter(const QByteArray& id) const
 {
 	if (m_parentPtr != NULL){
