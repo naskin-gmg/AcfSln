@@ -17,7 +17,7 @@ namespace EdgePck
 {
 
 
-typedef icomp::TMakeComponentWrap<iedge::CEdgeLine::Container, iedge::CEdgeLine::Container, iser::ISerializable, istd::IChangeable> EdgesContainer;
+typedef icomp::TMakeComponentWrap<iedge::CEdgeLine::Container, iedge::CEdgeLine::Container, iser::ISerializable, istd::IChangeable> EdgeLinesContainer;
 typedef iedge::CEdgesReductorComp EdgesReductor;
 typedef iedge::CFastEdgesExtractorComp FastEdgesExtractor;
 
