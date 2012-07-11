@@ -14,6 +14,11 @@ I_EXPORT_PACKAGE(
 			"Edge Outline Contour Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Edge Processing\"") IM_COMPANY("ImagingTools"));
 
 I_EXPORT_COMPONENT(
+			EdgesContainer,
+			"Container of edge lines",
+			"Edges Lines Container Set Multiple" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model 2D") IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
 			EdgesReductor,
 			"Processor reducing complexity of edge lines",
 			"Processor Lines Reduction Correction Simplicity" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
