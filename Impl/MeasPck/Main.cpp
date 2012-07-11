@@ -21,22 +21,22 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			GeneralDataSequence,
 			"General, system undependent sample sequence implementation",
-			"Samples Sequence Acquisition" IM_TAG("Sampling") IM_AUTHOR("\"Witold Gantzke\""));
+			"Samples Sequence Acquisition" IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			SimpleSamplesSequence8,
 			"Simple sample sequence storing 8-bit samples, system undependent",
-			"Samples Sequence Measurement" IM_TAG("Sampling") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Samples Sequence Measurement" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SimpleSamplesSequence16,
 			"Simple sample sequence storing 16-bit samples, system undependent",
-			"Samples Sequence Measurement" IM_TAG("Sampling") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Samples Sequence Measurement" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SimpleSamplesSequence32,
 			"Simple sample sequence storing 32-bit samples, system undependent",
-			"Samples Sequence Measurement" IM_TAG("Sampling") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Samples Sequence Measurement" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			WavSamplesLoader,
