@@ -372,6 +372,6 @@
 		Version information for modules based directly on ACF-Solutions
 	</Description>
 	<Keywords>
-		Application Tag=Version Info Author="'Witold Gantzke'"
+		Application Tag=Version Info Author='"Witold Gantzke"'
 	</Keywords>
 </Acf>
