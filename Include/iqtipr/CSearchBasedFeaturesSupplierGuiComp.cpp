@@ -7,6 +7,7 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
+#include "iproc/IElapsedTimeProvider.h"
 
 // ACF-Solutions includes
 #include "iipr/IFeaturesProvider.h"
@@ -47,21 +48,6 @@ void CSearchBasedFeaturesSupplierGuiComp::on_SaveParamsButton_clicked()
 // protected methods
 
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
-
-
-bool CSearchBasedFeaturesSupplierGuiComp::DoTest()
-{
-	QElapsedTimer timer;
-	timer.start();
-
-	bool retVal = BaseClass::DoTest();
-
-	quint64 time = timer.nsecsElapsed() / 1000000.0;
-	TimeLabel->setText(QString("%1 ms").arg(time));
-
-	return retVal;
-}
-
 
 QWidget* CSearchBasedFeaturesSupplierGuiComp::GetParamsWidget() const
 {
@@ -135,6 +121,8 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	double maxScoreRadius = 50;
 
+	TimeLabel->clear();
+
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
@@ -173,6 +161,11 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 						m_visualPositions.PushBack(visualObject);
 					}
 				}
+			}
+			
+			const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(supplierPtr);
+			if (processingTimeProviderPtr != NULL){
+				TimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
 			}
 		}
 

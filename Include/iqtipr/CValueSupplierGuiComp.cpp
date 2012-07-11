@@ -9,6 +9,8 @@
 #include "iview/CInteractiveCircleShape.h"
 #include "iview/CInteractivePinShape.h"
 
+#include "iproc/IElapsedTimeProvider.h"
+
 
 namespace iqtipr
 {
@@ -59,6 +61,8 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	iview::CInteractiveCircleShape* circleShapePtr = new iview::CInteractiveCircleShape();
 	if (circleShapePtr != NULL){
 		circleShapePtr->SetVisible(false);
+		circleShapePtr->SetEditablePosition(false);
+		circleShapePtr->SetEditableRadius(false);
 
 		m_foundModel.AttachObserver(circleShapePtr);
 
@@ -68,6 +72,7 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	iview::CInteractivePinShape* posShapePtr = new iview::CInteractivePinShape();
 	if (posShapePtr != NULL){
 		posShapePtr->SetVisible(false);
+		posShapePtr->SetEditablePosition(false);
 
 		m_foundModel.AttachObserver(posShapePtr);
 
@@ -97,6 +102,8 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 	imath::CVarVector position;
 	imath::CVarVector radius;
 
+	ProcessingTimeLabel->clear();
+
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
@@ -105,6 +112,13 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 			if (providerPtr != NULL){
 				position = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_POSITION);
 				radius = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_RADIUS);
+
+				iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(supplierPtr);
+				if (processingTimeProviderPtr != NULL){
+					ProcessingTimeLabel->setText(QString(tr("in %1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
+
+					ProcessingTimeLabel->setVisible(true);
+				}
 			}
 		}
 
@@ -160,6 +174,8 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 void CValueSupplierGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
+
+	ProcessingTimeLabel->setVisible(false);
 
 	if (m_intermediateResultsGuiCompPtr.IsValid()){
 		m_intermediateResultsGuiCompPtr->CreateGui(IntResultsFrame);

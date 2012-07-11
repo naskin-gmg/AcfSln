@@ -8,7 +8,9 @@
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
 #include "ibase/TLoggerCompWrap.h"
+#include "iproc/IElapsedTimeProvider.h"
 
+// ACF-Solutions includes
 #include "iinsp/IInspectionTask.h"
 
 
@@ -23,6 +25,7 @@ class CInspectionTaskComp:
 			public ibase::CLoggerComponentBase,
 			virtual public IInspectionTask,
 			virtual public istd::IInformationProvider,
+			virtual public iproc::IElapsedTimeProvider,
 			protected imod::CMultiModelBridgeBase
 {
 public:
@@ -39,6 +42,7 @@ public:
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iproc::ISupplier);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
+		I_REGISTER_INTERFACE(iproc::IElapsedTimeProvider);
 		I_REGISTER_SUBELEMENT(Parameters);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iprm::IParamsSet, ExtractParameters);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iser::ISerializable, ExtractParameters);
@@ -68,13 +72,16 @@ public:
 	virtual int GetWorkStatus() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
-	// reimplemented (iproc::ISupplier)
+	// reimplemented (istd::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;
 	virtual InformationCategory GetInformationCategory() const;
 	virtual int GetInformationId() const;
 	virtual QString GetInformationDescription() const;
 	virtual QString GetInformationSource() const;
 	virtual int GetInformationFlags() const;
+
+	// reimplemented (iproc::IElapsedTimeProvider)
+	virtual double GetElapsedTime() const;
 
 protected:
 	void EnsureStatusKnown();

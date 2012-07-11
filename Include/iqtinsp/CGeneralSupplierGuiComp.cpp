@@ -4,6 +4,8 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "iproc/IElapsedTimeProvider.h"
+
 
 namespace iqtinsp
 {
@@ -75,6 +77,8 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 
 	QString description;
 
+	ProcessingTimeLabel->setText("-");
+
 	const iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
@@ -110,6 +114,19 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 					break;
 				}
 			}
+			else{
+				statusLabelText = tr("OK");
+			}
+
+			{
+				const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(supplierPtr);
+				if (processingTimeProviderPtr != NULL){
+					ProcessingTimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
+
+					ProcessingTimeLabel->setVisible(true);
+				}
+			}
+
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:

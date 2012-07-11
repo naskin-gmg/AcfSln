@@ -10,7 +10,7 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
-
+#include "iproc/IElapsedTimeProvider.h"
 #include "iview/IShapeView.h"
 
 
@@ -56,6 +56,11 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 		I_ASSERT(editorPtr != NULL);
 		
 		editorPtr->UpdateEditor(updateFlags);
+	}
+
+	const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(GetObjectPtr());
+	if (processingTimeProviderPtr != NULL){
+		ProcessingTimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
 	}
 
 	if (AutoTestButton->isChecked()){
@@ -377,6 +382,9 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 	if (m_generalParamsGuiCompPtr.IsValid()){
 		m_generalParamsGuiCompPtr->CreateGui(GeneralParamsFrame);
+	}
+	else{
+		GeneralParamsFrame->hide();
 	}
 
 	OnEditorChanged(0);

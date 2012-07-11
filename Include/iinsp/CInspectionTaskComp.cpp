@@ -115,7 +115,7 @@ iprm::IParamsSet* CInspectionTaskComp::GetModelParametersSet() const
 }
 
 
-// reimplemented (iproc::ISupplier)
+// reimplemented (istd::IInformationProvider)
 
 QDateTime CInspectionTaskComp::GetInformationTimeStamp() const
 {
@@ -156,6 +156,24 @@ QString CInspectionTaskComp::GetInformationSource() const
 int CInspectionTaskComp::GetInformationFlags() const
 {
 	return ITF_SYSTEM;
+}
+
+
+// reimplemented (iproc::IElapsedTimeProvider)
+
+double CInspectionTaskComp::GetElapsedTime() const
+{
+	int subtasksCount = m_subtasksCompPtr.GetCount();
+	double elapsedTime = 0.0;
+
+	for (int i = 0; i < subtasksCount; ++i){
+		const iproc::IElapsedTimeProvider* subTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(m_subtasksCompPtr[i]);
+		if (subTimeProviderPtr != NULL){
+			elapsedTime += subTimeProviderPtr->GetElapsedTime();
+		}
+	}
+
+	return elapsedTime;
 }
 
 

@@ -70,7 +70,6 @@ protected:
 	};
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
-	virtual bool DoTest();
 	virtual QWidget* GetParamsWidget() const;
 
 	// reimplemented (iqt2d::IViewExtender)

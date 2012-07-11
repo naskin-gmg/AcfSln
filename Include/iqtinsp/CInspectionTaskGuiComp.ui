@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
+    <width>654</width>
     <height>437</height>
    </rect>
   </property>
@@ -48,14 +48,14 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>48</width>
+              <height>48</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>48</width>
+              <height>48</height>
              </size>
             </property>
             <property name="text">
@@ -73,6 +73,12 @@
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
              <widget class="QPushButton" name="TestAllButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Recalculate all processing steps</string>
               </property>
@@ -85,8 +91,8 @@
               </property>
               <property name="iconSize">
                <size>
-                <width>32</width>
-                <height>32</height>
+                <width>24</width>
+                <height>24</height>
                </size>
               </property>
               <property name="default">
@@ -117,8 +123,8 @@
               </property>
               <property name="iconSize">
                <size>
-                <width>32</width>
-                <height>32</height>
+                <width>24</width>
+                <height>24</height>
                </size>
               </property>
               <property name="checkable">
@@ -126,7 +132,20 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
+            <item row="0" column="2">
+             <widget class="QLabel" name="ProcessingTimeLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="3">
              <widget class="QFrame" name="LoaderFrame">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -211,6 +230,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2"/>
         </widget>
        </item>
       </layout>
