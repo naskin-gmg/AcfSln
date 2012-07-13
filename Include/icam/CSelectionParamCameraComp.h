@@ -11,17 +11,17 @@
 #include "iprm/IParamsManager.h"
 
 // ACF-Solutions include
-#include "icam/CCameraDelegatorBase.h"
+#include "icam/CCameraDelegatorComp.h"
 
 
 namespace icam
 {
 
 
-class CSelectionParamCameraComp: public CCameraDelegatorBase
+class CSelectionParamCameraComp: public CCameraDelegatorComp
 {
 public:
-	typedef CCameraDelegatorBase BaseClass;
+	typedef CCameraDelegatorComp BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectionParamCameraComp);
 		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input");

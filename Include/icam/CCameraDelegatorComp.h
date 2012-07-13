@@ -17,14 +17,14 @@ namespace icam
 	Implementation of bitmap acquisition delegating all calls to some slave object.
 	It is used to provide cascades of camera implementations.
 */
-class CCameraDelegatorBase:
+class CCameraDelegatorComp:
 			public ibase::CLoggerComponentBase,
 			public IBitmapAcquisition
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CCameraDelegatorBase);
+	I_BEGIN_COMPONENT(CCameraDelegatorComp);
 		I_REGISTER_INTERFACE(IBitmapAcquisition);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_slaveCameraCompPtr, "SlaveCamera", "Slave camera object", true, "SlaveCamera");

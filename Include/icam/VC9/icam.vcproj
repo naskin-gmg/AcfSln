@@ -157,7 +157,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCameraDelegatorBase.cpp"
+				RelativePath="..\CCameraDelegatorComp.cpp"
 				>
 			</File>
 			<File
@@ -186,7 +186,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCameraDelegatorBase.h"
+				RelativePath="..\CCameraDelegatorComp.h"
 				>
 			</File>
 			<File

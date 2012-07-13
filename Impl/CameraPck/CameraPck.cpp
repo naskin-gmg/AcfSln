@@ -39,6 +39,12 @@ I_EXPORT_COMPONENT(
 			"Camera delegator enhancing parameter set using some selection and parameter manager",
 			"Image Bitmap Camera Snap Acquisition Parameter Manager Delegator");
 
+I_EXPORT_COMPONENT(
+			CameraDelegator, 
+			"Simple camera delegator",
+			"Image Bitmap Camera Snap Acquisition Manager Delegator");
+
+
 } // namespace CameraPck
 
 
