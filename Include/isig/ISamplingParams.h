@@ -2,7 +2,7 @@
 #define isig_ISamplingParams_included
 
 
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 
 #include "iser/ISerializable.h"
 

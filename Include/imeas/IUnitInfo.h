@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 #include <QtCore/QString>
 
 #include "imath/IDoubleManip.h"

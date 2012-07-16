@@ -92,13 +92,18 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 	for (int y = regionTop; y < regionBottom; y++){
 		const quint8* inputLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
 
-		const iimg::CScanlineMask::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
+		istd::CIntRanges::RangeList rangesList;
+		const istd::CIntRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
 		if (rangesPtr == NULL){
 			continue;
 		}
 
-		for (int rangeIndex = 0; rangeIndex < rangesPtr->size(); rangeIndex++){
-			const istd::CIntRange& pixelRange = rangesPtr->at(rangeIndex);
+		rangesPtr->GetAsList(clipArea.GetHorizontalRange(), rangesList);
+
+		for (		istd::CIntRanges::RangeList::ConstIterator iter = rangesList.begin();
+					iter != rangesList.end();
+					++iter){
+			const istd::CIntRange& pixelRange = *iter;
 
 			int rangeStart = qMax(pixelRange.GetMinValue(), 0);
 			int rangeEnd = qMin(pixelRange.GetMaxValue(), inputBitmapSize.GetX());

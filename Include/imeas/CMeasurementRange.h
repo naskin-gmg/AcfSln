@@ -5,7 +5,7 @@
 #include "imeas/imeas.h"
 
 
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 
 
 namespace imeas

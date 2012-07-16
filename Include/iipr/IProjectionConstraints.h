@@ -3,7 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 
 
 namespace iipr

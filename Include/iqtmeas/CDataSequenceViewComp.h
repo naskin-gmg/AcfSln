@@ -7,7 +7,7 @@
 #include <QtGui/QStandardItemModel>
 
 // ACF includes
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 #include "imod/TSingleModelObserverBase.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "imeas/IDataSequence.h"

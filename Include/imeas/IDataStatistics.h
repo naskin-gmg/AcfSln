@@ -2,7 +2,7 @@
 #define imeas_IDataStatistics_included
 
 
-#include "istd/CRange.h"
+#include "istd/TRange.h"
 
 #include "iser/ISerializable.h"
 

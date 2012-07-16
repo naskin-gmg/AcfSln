@@ -88,15 +88,20 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 	for (int y = regionTop; y < regionBottom; y++){
 		const quint8* inputLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
 
-		const iimg::CScanlineMask::PixelRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
+		istd::CIntRanges::RangeList rangesList;
+		const istd::CIntRanges* rangesPtr = bitmapRegion.GetPixelRanges(y);
 		if (rangesPtr == NULL){
 			continue;
 		}
 
+		rangesPtr->GetAsList(clipArea.GetHorizontalRange(), rangesList);
+
 		quint8* outputImageLinePtr = (quint8*)outputBitmapPtr->GetLinePtr(y - regionTop);
 
-		for (int rangeIndex = 0; rangeIndex < rangesPtr->size(); rangeIndex++){
-			const istd::CIntRange& pixelRange = rangesPtr->at(rangeIndex);
+		for (		istd::CIntRanges::RangeList::ConstIterator iter = rangesList.begin();
+					iter != rangesList.end();
+					++iter){
+			const istd::CIntRange& pixelRange = *iter;
 
 			int rangeStart = qMax(pixelRange.GetMinValue(), 0);
 			Q_ASSERT(rangeStart >= regionLeft);
@@ -106,7 +111,7 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 			int bytesToCopy = (rangeEnd - rangeStart) * pixelBytes;
 
 			if (bytesToCopy > 0){
-				std::memcpy(		outputImageLinePtr + (rangeStart - regionLeft) * pixelBytes,
+				std::memcpy(	outputImageLinePtr + (rangeStart - regionLeft) * pixelBytes,
 								inputLinePtr + rangeStart * pixelBytes,
 								bytesToCopy);
 			}
