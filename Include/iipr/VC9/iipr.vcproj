@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDifferenceBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.cpp"
 				>
 			</File>
@@ -348,6 +352,10 @@
 			</File>
 			<File
 				RelativePath="..\CDelegatedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDifferenceBitmapSupplierComp.h"
 				>
 			</File>
 			<File

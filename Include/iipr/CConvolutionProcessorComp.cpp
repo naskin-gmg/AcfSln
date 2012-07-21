@@ -70,7 +70,7 @@ bool DoConvolution(
 			}
 
 			for (int channelIndex = 0; channelIndex < ChannelsCount; ++channelIndex){
-				WorkingType outputValue = sums[channelIndex] >> ValueShift;
+				WorkingType outputValue = (sums[channelIndex] >> ValueShift) / kernelElementsCount;
 				if (UseClipMin){
 					if (outputValue < 0){
 						outputValue = 0;
@@ -149,15 +149,15 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_GRAY:
 	case iimg::IBitmap::PF_RGB:
 	case iimg::IBitmap::PF_RGBA:
-		scaleFactor = (1 << 22) / maxKernelAbsValue;
+		scaleFactor = (1 << 10) / maxKernelAbsValue;
 		break;
 
 	case iimg::IBitmap::PF_GRAY16:
-		scaleFactor = ((1 << 14) - 1) / maxKernelAbsValue;
+		scaleFactor = ((1 << 10) - 1) / maxKernelAbsValue;
 		break;
 
 	case iimg::IBitmap::PF_GRAY32:
-		scaleFactor = ((1 << 30) - 1) / maxKernelAbsValue;
+		scaleFactor = ((1 << 16) - 1) / maxKernelAbsValue;
 		break;
 
 	default:
@@ -183,19 +183,19 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		return DoConvolution<quint8, qint32, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 1, 1, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGB:
-		return DoConvolution<quint8, qint32, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGBA:
-		return DoConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, 3, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY16:
-		return DoConvolution<quint16, qint32, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint16, qint64, 1, 1, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint32, qint64, 1, 1, -1, 16, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	default:
 		return false;

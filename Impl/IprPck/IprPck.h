@@ -35,6 +35,9 @@
 #include "iipr/CImageBinarizeProcessorComp.h"
 #include "iipr/CBitmapProviderCacheComp.h"
 #include "iipr/CSearchParams.h"
+#include "iipr/CDifferenceBitmapSupplierComp.h"
+#include "iipr/CConvolutionProcessorComp.h"
+#include "iipr/CConvolutionKernel2d.h"
 
 
 /**
@@ -90,6 +93,14 @@ typedef icomp::TMakeComponentWrap<
 			istd::IChangeable,
 			imod::IModel> SearchParams;
 
+typedef icomp::TModelCompWrap<iipr::CDifferenceBitmapSupplierComp> DifferenceBitmapSupplier;
+typedef iipr::CConvolutionProcessorComp ConvolutionProcessor;
+typedef icomp::TModelCompWrap<
+			icomp::TMakeComponentWrap<
+						iipr::CConvolutionKernel2d,
+						iipr::IConvolutionKernel2d,
+						iser::ISerializable,
+						imath::ISampledFunction2d> > ConvolutionKernel2d;
 
 } // namespace IprPck
 

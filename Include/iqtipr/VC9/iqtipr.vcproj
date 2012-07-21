@@ -166,15 +166,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCaliperParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CCircleFinderParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CCircleFinderParamsGuiComp.moc"
+				RelativePath="..\CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -182,15 +178,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeneralSearchParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
 				>
 			</File>
 			<File
@@ -202,15 +190,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CValueSupplierGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -225,6 +205,10 @@
 			</File>
 			<File
 				RelativePath="..\CCircleFinderParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CConvolution2dParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -253,13 +237,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
 			Name="Qt Designer Files"
 			>
 			<File
@@ -268,6 +245,10 @@
 			</File>
 			<File
 				RelativePath="..\CCircleFinderParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CConvolution2dParamsGuiComp.ui"
 				>
 			</File>
 			<File
@@ -297,7 +278,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CCircleFinderParamsGuiComp.cpp"
+				RelativePath="..\Generated\moc_CCircleFinderParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\moc_CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -305,11 +290,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CLineProjectionSupplierGuiComp.cpp"
+				RelativePath="..\Generated\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -321,7 +306,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CCircleFinderParamsGuiComp.h"
+				RelativePath="..\Generated\ui_CCircleFinderParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CConvolution2dParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -329,15 +318,47 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CLineProjectionSupplierGuiComp.h"
+				RelativePath="..\Generated\ui_CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSearchBasedFeaturesSupplierGuiComp.h"
+				RelativePath="..\Generated\ui_CSearchBasedFeaturesSupplierGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CValueSupplierGuiComp.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CCaliperParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleFinderParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CConvolution2dParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CGeneralSearchParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.moc"
 				>
 			</File>
 		</Filter>

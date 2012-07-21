@@ -28,6 +28,8 @@ int CImageRegionProcessorCompBase::DoProcessing(
 {
 	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	if (inputBitmapPtr == NULL){
+		SendErrorMessage(0, "Processor input is not a bitmap");
+
 		return TS_INVALID;
 	}
 
@@ -38,13 +40,26 @@ int CImageRegionProcessorCompBase::DoProcessing(
 
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
-	if (aoiPtr != NULL && m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+	if (aoiPtr != NULL){
+		const i2d::ITransformation2d* pixelToLogicalTransformPtr = NULL;
+		if (m_regionCalibrationProviderCompPtr.IsValid()){
+			pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+		}
+		else{
+			// Try to get calibration direct from bitmap:
+			const i2d::ICalibrationProvider* bitmapCalibrationpProviderPtr = dynamic_cast<const i2d::ICalibrationProvider* >(inputPtr);
+			if (bitmapCalibrationpProviderPtr != NULL){
+				pixelToLogicalTransformPtr = bitmapCalibrationpProviderPtr->GetCalibration();
+			}
+		}
+
 		if (pixelToLogicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
 
 			if (transformedRegionPtr.IsValid()){
 				if (!transformedRegionPtr->InvTransform(*pixelToLogicalTransformPtr)){
+					SendErrorMessage(0, "2D-transformation of the processing region failed");
+
 					return TS_INVALID;
 				}
 

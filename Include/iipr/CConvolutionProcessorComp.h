@@ -19,6 +19,9 @@ class CConvolutionProcessorComp: public iipr::TImageParamProcessorCompBase<IConv
 public:
 	typedef iipr::TImageParamProcessorCompBase<IConvolutionKernel2d> BaseClass;
 
+	I_BEGIN_COMPONENT(CConvolutionProcessorComp);
+	I_END_COMPONENT;
+
 protected:
 	// reimplemented (iipr::TImageParamProcessorCompBase)
 	virtual bool ParamProcessImage(

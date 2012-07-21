@@ -34,6 +34,12 @@ istd::CIndex2d CConvolutionKernel2d::GetKernelSize() const
 }
 
 
+void CConvolutionKernel2d::SetKernelSize(const istd::CIndex2d& kernelSize)
+{
+	CreateGrid2d(kernelSize, 1.0);
+}
+
+
 double CConvolutionKernel2d::GetKernelElement(const istd::CIndex2d& index) const
 {
 	return GetSampleValue(index);

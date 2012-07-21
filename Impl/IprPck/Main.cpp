@@ -143,6 +143,21 @@ I_EXPORT_COMPONENT(
 			"General parameter for a pattern search",
 			"Pattern Search Model Geometric" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			DifferenceBitmapSupplier,
+			"Bitmap supplier based on difference of two other bitmap suppliers",
+			"Bitmap Difference Supplier Provider" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			ConvolutionProcessor,
+			"General convolution processor",
+			"Convolution Processor Filter" IM_AUTHOR("\"Kirill Lepskiy\"" "\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
+			ConvolutionKernel2d,
+			"2D-convolution kernel",
+			"Convolution Kerlnel Filter" IM_AUTHOR("\"Kirill Lepskiy\"" "\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 

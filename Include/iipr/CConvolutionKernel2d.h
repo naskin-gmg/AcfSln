@@ -33,11 +33,12 @@ public:
 
 	// reimplemented (iipr::IConvolutionKernel2d)
 	virtual istd::CIndex2d GetKernelSize() const;
+	virtual void SetKernelSize(const istd::CIndex2d& kernelSize);
 	virtual double GetKernelElement(const istd::CIndex2d& index) const;
 	virtual bool SetKernelElement(const istd::CIndex2d& index, double value);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive) = 0;
+	virtual bool Serialize(iser::IArchive& archive);
 	virtual quint32 GetMinimalVersion(int versionId) const;
 };
 

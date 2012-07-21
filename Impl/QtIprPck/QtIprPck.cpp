@@ -13,40 +13,47 @@ namespace QtIprPck
 
 
 I_EXPORT_PACKAGE(
-			"AcfSln/Ipr",
+			"AcfSln/QtIpr",
 			"Standard Qt image processing package",
-			"Qt \"Image Processing\"" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"Qt \"Image Processing\" Processing GUI" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 
 I_EXPORT_COMPONENT(
 			ValueSupplierGui,
 			"GUI for supplier implementation returning position found using caliper tool",
-			"GUI Observer Caliper Position Qt Processing Supplier");
+			"Observer Caliper Position Supplier");
 
 I_EXPORT_COMPONENT(
 			CaliperParamsGui,
 			"GUI to parametrize caliper",
-			"GUI Observer Caliper Parameters Direction Edge Mode Threshold Qt");
+			"Observer Caliper Parameters Direction Edge Mode Threshold");
 
 I_EXPORT_COMPONENT(
 			LineProjectionSupplierGui,
 			"GUI for line projection supplier",
-			"GUI Observer Supplier Line Projection Image Processing Qt");
+			"Observer Supplier Line Projection");
 
 I_EXPORT_COMPONENT(
 			CircleFinderParamsGui,
 			"GUI to parametrize the circle finder",
-			"GUI Observer Caliper Circle Parameters Qt");
+			"Observer Caliper Circle Parameters");
 
 I_EXPORT_COMPONENT(
 			SearchBasedFeaturesSupplierGui,
 			"GUI for search based position supplier",
-			"GUI Observer Supplier Search Image Processing Qt");
+			"Observer Supplier Search Image Processing");
 
 I_EXPORT_COMPONENT(
 			GeneralSearchParamsGui,
 			"GUI for general search parameters",
-			"GUI Observer Search Parameters Qt");
+			"Observer Search Parameters");
+
+I_EXPORT_COMPONENT(
+			Convolution2dParamsGui,
+			"GUI for definition of convolution kernel",
+			"Kernel Convolution Filter");
+
+
 
 
 } // namespace QtIprPck

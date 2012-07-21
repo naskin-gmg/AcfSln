@@ -28,7 +28,7 @@ public:
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
-		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
