@@ -46,7 +46,7 @@ bool DoConvolution(
 	int kernelElementsCount = int(fastAccessElements.size());
 
 	for (int y = 0; y < outputImageSize.GetY(); ++y){
-		const quint8* inputPtr = static_cast<const quint8*>(outputImage.GetLinePtr(y));
+		const quint8* inputPtr = static_cast<const quint8*>(inputImage.GetLinePtr(y));
 		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
 
 		for (int x = 0; x < outputImageSize.GetX(); ++x){
@@ -70,7 +70,7 @@ bool DoConvolution(
 			}
 
 			for (int channelIndex = 0; channelIndex < ChannelsCount; ++channelIndex){
-				WorkingType outputValue = (sums[channelIndex] >> ValueShift) / kernelElementsCount;
+				WorkingType outputValue = (sums[channelIndex] >> ValueShift);
 				if (UseClipMin){
 					if (outputValue < 0){
 						outputValue = 0;
@@ -131,14 +131,11 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	int linesDifference = inputImage.GetLinesDifference();
 	int pixelsDifference = inputImage.GetPixelsDifference();
 
-	double maxKernelAbsValue = 0;
 	istd::CIndex2d index;
+	double kernelSum = 0.0;
 	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
 		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			double absValue = qAbs(paramsPtr->GetKernelElement(index));
-			if (absValue > maxKernelAbsValue){
-				maxKernelAbsValue = absValue;
-			}
+			kernelSum += paramsPtr->GetKernelElement(index);
 		}
 	}
 
@@ -149,15 +146,15 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_GRAY:
 	case iimg::IBitmap::PF_RGB:
 	case iimg::IBitmap::PF_RGBA:
-		scaleFactor = (1 << 10) / maxKernelAbsValue;
+		scaleFactor = (1 << 22);
 		break;
 
 	case iimg::IBitmap::PF_GRAY16:
-		scaleFactor = ((1 << 10) - 1) / maxKernelAbsValue;
+		scaleFactor = (1 << 14);
 		break;
 
 	case iimg::IBitmap::PF_GRAY32:
-		scaleFactor = ((1 << 16) - 1) / maxKernelAbsValue;
+		scaleFactor = ((1 << 30) - 1);
 		break;
 
 	default:
@@ -172,7 +169,14 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 			KernelElement element;
 			element.offset = index[0] * pixelsDifference + index[1] * linesDifference;
-			element.factor = int(scaleFactor * value);
+
+			double sumFactor = 1.0;
+			if (kernelSum != 0){
+				sumFactor = 1.0 / kernelSum;
+			}
+			
+			element.factor = int(scaleFactor* sumFactor * value);
+
 			element.alphaFactor = qAbs(element.factor);
 
 			if (element.factor != 0){
@@ -183,19 +187,19 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		return DoConvolution<quint8, qint32, 1, 1, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGB:
-		return DoConvolution<quint8, qint32, 4, 4, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_RGBA:
-		return DoConvolution<quint8, qint32, 4, 4, 3, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY16:
-		return DoConvolution<quint16, qint64, 1, 1, -1, 10, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint16, qint32, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoConvolution<quint32, qint64, 1, 1, -1, 16, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
 
 	default:
 		return false;
