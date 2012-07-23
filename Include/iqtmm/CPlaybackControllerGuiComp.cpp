@@ -89,25 +89,19 @@ void CPlaybackControllerGuiComp::OnGuiCreated()
 	RepeatButton->setVisible(*m_showRepeatButtonAttrPtr);
 	RepeatButton->setEnabled(false);
 
+	connect(&m_playTimer, SIGNAL(timeout()), this, SLOT(OnTimerTick()));
+
 	BaseClass::OnGuiCreated();
 }
 
 
-// reimplemented (icomp::CComponentBase)
-
-void CPlaybackControllerGuiComp::OnComponentCreated()
+void CPlaybackControllerGuiComp::OnGuiDestroyed()
 {
-	BaseClass::OnComponentCreated();
+	m_playTimer.stop();
 
-	connect(&m_playTimer, SIGNAL(timeout()), this, SLOT(OnTimerTick()));
-}
-
-
-void CPlaybackControllerGuiComp::OnComponentDestroyed()
-{
 	disconnect(&m_playTimer, SIGNAL(timeout()), this, SLOT(OnTimerTick()));
 
-	BaseClass::OnComponentDestroyed();
+	BaseClass::OnGuiDestroyed();
 }
 
 
