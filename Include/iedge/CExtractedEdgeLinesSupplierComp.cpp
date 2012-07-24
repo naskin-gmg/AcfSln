@@ -1,4 +1,4 @@
-#include "iedge/CEdgeLinesSupplierComp.h"
+#include "iedge/CExtractedEdgeLinesSupplierComp.h"
 
 
 namespace iedge
@@ -7,7 +7,7 @@ namespace iedge
 
 // reimplemented (iedge::IEdgeLinesProvider)
 
-const CEdgeLine::Container* CEdgeLinesSupplierComp::GetEdgesContainer() const
+const CEdgeLine::Container* CExtractedEdgeLinesSupplierComp::GetEdgesContainer() const
 {
 	return GetWorkProduct();
 }
@@ -17,12 +17,12 @@ const CEdgeLine::Container* CEdgeLinesSupplierComp::GetEdgesContainer() const
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
+int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
 {
-	if (m_bitmapProviderCompPtr.IsValid() && edgesExtractorCompPtr.IsValid()){
+	if (m_bitmapProviderCompPtr.IsValid() && m_edgesExtractorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (		(bitmapPtr != NULL) &&
-					edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
+					m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
 			if (m_calibrationProviderCompPtr.IsValid()){
 				const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
@@ -50,7 +50,7 @@ int CEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
 
 // reimplemented (icomp::CComponentBase)
 
-void CEdgeLinesSupplierComp::OnComponentCreated()
+void CExtractedEdgeLinesSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
