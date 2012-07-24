@@ -21,7 +21,9 @@ namespace iipr
 
 
 /**
-	Processor finding circle on the image.
+	Cliper based circle finder.
+	This is realized as processor, as input the image, as output consumer of features must be given.
+	It uses set of 1D caliper lines to find the position and radius of circle.
 	It takes area of interests (AOI) from parameter set. As AOI can be used annulus, segment of annulus, rectangle and set of segments of annulus.
 */
 class CCircleFindProcessorComp:

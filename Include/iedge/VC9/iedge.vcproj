@@ -157,6 +157,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEdgeLinesSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CEdgeNode.cpp"
 				>
 			</File>
@@ -178,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEdgeLinesSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CEdgeNode.h"
 				>
 			</File>
@@ -191,6 +199,10 @@
 			</File>
 			<File
 				RelativePath="..\iedge.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IEdgeLinesProvider.h"
 				>
 			</File>
 			<File
