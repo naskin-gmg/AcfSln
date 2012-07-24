@@ -36,8 +36,8 @@ public:
 		I_REGISTER_INTERFACE(iproc::IValueProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
-		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationSupplier", "Provide 2D-calibration object", false, "CalibrationSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationSupplier", "Provide 2D-calibration object", false, "CalibrationSupplier");
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
@@ -56,8 +56,8 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 
 	mutable istd::TDelPtr<const i2d::ITransformation2d> m_outputCalibrationPtr;

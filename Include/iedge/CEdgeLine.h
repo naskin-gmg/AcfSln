@@ -3,8 +3,8 @@
 
 
 // ACF includes
-#include "iser/ISerializable.h"
 #include "ibase/TSerializableContainer.h"
+#include "i2d/IObject2d.h"
 #include "i2d/CPolyline.h"
 #include "i2d/CAffine2d.h"
 
@@ -16,7 +16,7 @@ namespace iedge
 {
 
 
-class CEdgeLine: virtual public iser::ISerializable
+class CEdgeLine: virtual public i2d::IObject2d
 {
 public:
 	class Container;
@@ -58,6 +58,28 @@ public:
 	void CopyFromPolyline(const i2d::CPolyline& polyline, const i2d::CAffine2d& transform, double weight = 1.0);
 	void CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d& transform) const;
 
+	// reimplemented (i2d::IObject2d)
+	virtual i2d::CVector2d GetCenter() const;
+	virtual void MoveCenterTo(const i2d::CVector2d& position);
+	virtual bool Transform(
+				const i2d::ITransformation2d& transformation,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+				const i2d::ITransformation2d& transformation,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool GetTransformed(
+				const i2d::ITransformation2d& transformation,
+				IObject2d& result,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+	virtual bool GetInvTransformed(
+				const i2d::ITransformation2d& transformation,
+				IObject2d& result,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -72,6 +94,7 @@ private:
 	bool m_isClosed;
 
 	mutable bool m_areVolatileValid;
+	mutable i2d::CVector2d m_center;
 	mutable double m_minWeight;
 	mutable double m_maxWeight;
 };

@@ -13,7 +13,7 @@ namespace iedge
 {
 
 
-class IEdgeLinesProvider: public istd::IChangeable
+class IEdgeLinesProvider: virtual public istd::IChangeable
 {
 public:
 	/**

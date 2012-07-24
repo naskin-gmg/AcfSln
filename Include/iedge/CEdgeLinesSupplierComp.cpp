@@ -23,6 +23,19 @@ int CEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (		(bitmapPtr != NULL) &&
 					edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
+			if (m_calibrationProviderCompPtr.IsValid()){
+				const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+
+				if (calibrationPtr != NULL){
+					int linesCount = result.GetItemsCount();
+					for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
+						CEdgeLine& edgeLine = result.GetAt(lineIndex);
+
+						edgeLine.Transform(*calibrationPtr);
+					}
+				}
+			}
+
 			return WS_OK;
 		}
 		else{

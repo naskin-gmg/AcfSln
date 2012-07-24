@@ -28,6 +28,11 @@ I_EXPORT_COMPONENT(
 			"Extract edge lines from image",
 			"Image Bitmap Picture Extraction Processing" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			EdgeLinesSupplier,
+			"Provide edge lines extracted from image",
+			"Extraction Processing Provider Contours Edges Borders Lines Polylines" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace EdgePck
 
