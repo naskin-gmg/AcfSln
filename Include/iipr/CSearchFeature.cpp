@@ -53,6 +53,14 @@ const QString& CSearchFeature::GetId() const
 }
 
 
+const i2d::ITransformation2d& CSearchFeature::GetTransformation() const
+{
+	m_transformation.Reset(GetPosition(), m_angle, m_scale);
+
+	return m_transformation;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CSearchFeature::Serialize(iser::IArchive& archive)
