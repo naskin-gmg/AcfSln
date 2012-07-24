@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1561
+          2403
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          242
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -112,6 +101,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
@@ -141,9 +132,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Directory monitoring parameter GUI
   </Description>
   <Keywords>
-    
+    Parameter Directory Monitoring File Observer Tag='GUI'
   </Keywords>
 </Acf>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2403
         </Number>
         <Description>
           ACF
@@ -414,9 +414,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    
+    Directory monitoring parameters
   </Description>
   <Keywords>
-    
+    Parameter Directory Monitoring File Observer
   </Keywords>
 </Acf>

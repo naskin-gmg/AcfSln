@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1705
+          2403
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          313
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -214,8 +203,8 @@
         SmoothFilterParamsGui
       </Id>
       <PackageId>
-				QtMeasPck
-			</PackageId>
+        QtMeasPck
+      </PackageId>
       <ComponentId>
         NumericParamsGui
       </ComponentId>
@@ -270,9 +259,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Caliper parameters GUI
   </Description>
   <Keywords>
-    
+    Caliper Line Parameter Editor Tag='GUI "Image Processing"'
   </Keywords>
 </Acf>

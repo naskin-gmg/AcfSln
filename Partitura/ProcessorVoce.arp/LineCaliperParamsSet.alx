@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2317
+          2403
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         CaliperParamsSet
       </ComponentName>
       <X>
-        225
+        575
       </X>
       <X>
-        325
+        350
       </X>
       <Note>
         
@@ -35,10 +35,10 @@
         Line
       </ComponentName>
       <X>
-        675
+        250
       </X>
       <X>
-        175
+        475
       </X>
       <Note>
         
@@ -49,10 +49,10 @@
         CaliperParams
       </ComponentName>
       <X>
-        675
+        900
       </X>
       <X>
-        325
+        475
       </X>
       <Note>
         
@@ -63,10 +63,10 @@
         SmoothFilterParams
       </ComponentName>
       <X>
-        675
+        600
       </X>
       <X>
-        450
+        475
       </X>
       <Note>
         

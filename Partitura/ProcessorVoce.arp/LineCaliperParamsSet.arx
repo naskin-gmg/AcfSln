@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2317
+          2403
         </Number>
         <Description>
           ACF
@@ -261,7 +261,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MaxFilterLength
+              MaxValues
             </Id>
             <Type>
               Real
@@ -385,9 +385,9 @@
     </Component>
   </ExportedComponents>
   <Description>
-    
+    Caliper parameters
   </Description>
   <Keywords>
-    
+    Caliper Line Parameters Tag='"Image Processing"'
   </Keywords>
 </Acf>

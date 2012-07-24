@@ -1,54 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1609
+          2403
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          277
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        DirectoryItemGui
-      </ComponentName>
-      <X>
-        525
-      </X>
-      <X>
-        450
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderGui
-      </ComponentName>
-      <X>
-        525
-      </X>
-      <X>
-        300
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         HotfolderStatistics
@@ -59,6 +26,9 @@
       <X>
         450
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -70,6 +40,37 @@
       <X>
         450
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DirectoryItemGui
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGui
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        300
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>
