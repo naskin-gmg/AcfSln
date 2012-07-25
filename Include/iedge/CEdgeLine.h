@@ -55,8 +55,8 @@ public:
 
 	bool InsertNode(const CEdgeNode& node);
 
-	void CopyFromPolyline(const i2d::CPolyline& polyline, const i2d::CAffine2d& transform, double weight = 1.0);
-	void CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d& transform) const;
+	void CopyFromPolyline(const i2d::CPolyline& polyline, double weight = 1.0, const i2d::CAffine2d* transformPtr = NULL);
+	void CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* transformPtr = NULL) const;
 
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;

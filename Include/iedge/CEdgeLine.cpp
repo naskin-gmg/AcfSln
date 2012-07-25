@@ -53,7 +53,7 @@ bool CEdgeLine::InsertNode(const CEdgeNode& node)
 }
 
 
-void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, const i2d::CAffine2d& transform, double weight)
+void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, const i2d::CAffine2d* transformPtr)
 {
 	int size = polyline.GetNodesCount();
 
@@ -69,44 +69,84 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, const i2d::CAff
 	i2d::CVector2d prevDelta;
 	i2d::CVector2d position;
 
-	if (m_isClosed){
-		i2d::CVector2d prevPosition = transform.GetApply(polyline.GetNode(size - 1));
-		position = transform.GetApply(polyline.GetNode(0));
-		prevDelta = position - prevPosition;
+	if (transformPtr != NULL){
+		if (m_isClosed){
+			i2d::CVector2d prevPosition = transformPtr->GetApply(polyline.GetNode(size - 1));
+			position = transformPtr->GetApply(polyline.GetNode(0));
+			prevDelta = position - prevPosition;
+		}
+		else{
+			position = transformPtr->GetApply(polyline.GetNode(0));
+			prevDelta = i2d::CVector2d(0, 0);
+		}
+
+		for (int i = 0; i < size; ++i){
+			const i2d::CVector2d& nextPosition = transformPtr->GetApply(polyline.GetNode(m_isClosed? (i + 1) % size: qMin(i + 1, size - 1)));
+			i2d::CVector2d prevDelta = nextPosition - position;
+			i2d::CVector2d orthogonal = prevDelta.GetOrthogonal() + prevDelta.GetOrthogonal();
+			if ((orthogonal.GetX() != 0) || (orthogonal.GetY() != 0)){
+				double orthogonalLength = orthogonal.GetLength();
+				i2d::CVector2d derivative = orthogonal * (weight / orthogonalLength);
+
+				CEdgeNode node(position, derivative, weight);
+
+				m_edgeLines.push_back(node);
+			}
+			position = nextPosition;
+			prevDelta = prevDelta;
+		}
 	}
 	else{
-		position = transform.GetApply(polyline.GetNode(0));
-		prevDelta = i2d::CVector2d(0, 0);
-	}
-
-	for (int i = 0; i < size; ++i){
-		const i2d::CVector2d& nextPosition = transform.GetApply(polyline.GetNode(m_isClosed? (i + 1) % size: qMin(i + 1, size - 1)));
-		i2d::CVector2d prevDelta = nextPosition - position;
-		i2d::CVector2d orthogonal = prevDelta.GetOrthogonal() + prevDelta.GetOrthogonal();
-		if ((orthogonal.GetX() != 0) || (orthogonal.GetY() != 0)){
-			double orthogonalLength = orthogonal.GetLength();
-			i2d::CVector2d derivative = orthogonal * (weight / orthogonalLength);
-
-			CEdgeNode node(position, derivative, weight);
-
-			m_edgeLines.push_back(node);
+		if (m_isClosed){
+			i2d::CVector2d prevPosition = polyline.GetNode(size - 1);
+			position = polyline.GetNode(0);
+			prevDelta = position - prevPosition;
 		}
-		position = nextPosition;
-		prevDelta = prevDelta;
+		else{
+			position = polyline.GetNode(0);
+			prevDelta = i2d::CVector2d(0, 0);
+		}
+
+		for (int i = 0; i < size; ++i){
+			const i2d::CVector2d& nextPosition = polyline.GetNode(m_isClosed? (i + 1) % size: qMin(i + 1, size - 1));
+			i2d::CVector2d prevDelta = nextPosition - position;
+			i2d::CVector2d orthogonal = prevDelta.GetOrthogonal() + prevDelta.GetOrthogonal();
+			if ((orthogonal.GetX() != 0) || (orthogonal.GetY() != 0)){
+				double orthogonalLength = orthogonal.GetLength();
+				i2d::CVector2d derivative = orthogonal * (weight / orthogonalLength);
+
+				CEdgeNode node(position, derivative, weight);
+
+				m_edgeLines.push_back(node);
+			}
+			position = nextPosition;
+			prevDelta = prevDelta;
+		}
 	}
 }
 
 
-void CEdgeLine::CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d& transform) const
+void CEdgeLine::CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* transformPtr) const
 {
 	polyline.Clear();
 
-	for (		Nodes::ConstIterator iter = m_edgeLines.constBegin();
-				iter != m_edgeLines.constEnd();
-				++iter){
-		const CEdgeNode& node = *iter;
+	if (transformPtr != NULL){
+		for (		Nodes::ConstIterator iter = m_edgeLines.constBegin();
+					iter != m_edgeLines.constEnd();
+					++iter){
+			const CEdgeNode& node = *iter;
 
-		polyline.InsertNode(transform.GetApply(node.GetPosition()));
+			polyline.InsertNode(transformPtr->GetApply(node.GetPosition()));
+		}
+	}
+	else{
+		for (		Nodes::ConstIterator iter = m_edgeLines.constBegin();
+					iter != m_edgeLines.constEnd();
+					++iter){
+			const CEdgeNode& node = *iter;
+
+			polyline.InsertNode(node.GetPosition());
+		}
 	}
 
 	polyline.SetClosed(IsClosed());
@@ -301,7 +341,7 @@ bool CEdgeLine::GetTransformed(
 			i2d::CAffine2d localTransform;
 			transformation.GetLocalTransform(i2d::CVector2d(0, 0), localTransform);
 
-			CopyToPolyline(*resultPolylinePtr, localTransform);
+			CopyToPolyline(*resultPolylinePtr, &localTransform);
 
 			if (errorFactorPtr != NULL){
 				*errorFactorPtr = 0;
