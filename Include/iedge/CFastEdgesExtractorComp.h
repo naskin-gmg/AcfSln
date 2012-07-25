@@ -8,7 +8,7 @@
 #include "iproc/TSyncProcessorCompBase.h"
 
 // ACF-Solutions includes
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
 // QSF includes
@@ -157,7 +157,7 @@ private:
 				quint32 threshold2Factor,
 				InternalContainer& container);
 
-	I_REF(imeas::INumericParams, m_defaultThresholdParamCompPtr);
+	I_REF(imeas::INumericValue, m_defaultThresholdParamCompPtr);
 	I_ATTR(QByteArray, m_thresholdParamIdAttrPtr);
 	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);

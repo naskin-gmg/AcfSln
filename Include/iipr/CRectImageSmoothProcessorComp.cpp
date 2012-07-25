@@ -70,10 +70,10 @@ const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(i
 }
 
 
-// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericParams>)
+// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
-			const imeas::INumericParams* paramsPtr,
+			const imeas::INumericValue* paramsPtr,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {

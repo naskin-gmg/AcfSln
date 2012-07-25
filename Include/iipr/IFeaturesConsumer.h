@@ -4,7 +4,7 @@
 
 #include "istd/IChangeable.h"
 
-#include "iipr/IFeature.h"
+#include "imeas/INumericValue.h"
 
 
 namespace iipr
@@ -32,7 +32,7 @@ public:
 							the added feature satisfy search constraints and no additionally features should be added
 		\return	true if the pushed feature is valid for this container and was inserted correctly.
 	*/
-	virtual bool AddFeature(const IFeature* featurePtr, bool* isFullPtr = NULL) = 0;
+	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL) = 0;
 };
 
 

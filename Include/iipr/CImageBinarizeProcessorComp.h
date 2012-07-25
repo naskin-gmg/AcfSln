@@ -7,7 +7,7 @@
 #include "iproc/TSyncProcessorCompBase.h"
 
 // ACF-Solutions includes
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 
 
 namespace iipr
@@ -36,7 +36,7 @@ public:
 private:
 	bool ConvertImage(
 				const iimg::IBitmap& inputBitmap,
-				const imeas::INumericParams& thresholdParams,
+				const imeas::INumericValue& thresholdParams,
 				iimg::IBitmap& outputBitmap) const;
 
 private:

@@ -7,11 +7,14 @@
 #include "iprm/IParamsSet.h"
 
 
+namespace imeas
+{
+	class INumericValue;
+}
+
+
 namespace iipr
 {
-
-
-class IFeature;
 
 
 /**
@@ -24,7 +27,7 @@ public:
 		Get position on projection using position extracted from projection.
 	*/
 	virtual bool GetProjectionPosition(
-				const IFeature& feature,
+				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
 				double& result) const = 0;
 };

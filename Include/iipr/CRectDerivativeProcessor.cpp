@@ -11,7 +11,7 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 #include "imeas/CSamplesInfo.h"
 
 
@@ -118,7 +118,7 @@ int CRectDerivativeProcessor::DoProcessing(
 
 	double filterLength = 5.0;
 	if (paramsPtr != NULL){
-		const imeas::INumericParams* filterParamsPtr = dynamic_cast<const imeas::INumericParams*>(
+		const imeas::INumericValue* filterParamsPtr = dynamic_cast<const imeas::INumericValue*>(
 					paramsPtr->GetParameter(m_filterParamsId));
 		if (filterParamsPtr != NULL){
 			imath::CVarVector filterLengths = filterParamsPtr->GetValues();

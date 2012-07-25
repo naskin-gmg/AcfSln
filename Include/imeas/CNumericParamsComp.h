@@ -8,9 +8,8 @@
 
 // ACF-Solutions incldues
 #include "imeas/IUnitInfo.h"
-
-#include "imeas/INumericParams.h"
 #include "imeas/INumericConstraints.h"
+#include "imeas/CSimpleNumericValue.h"
 
 
 namespace imeas
@@ -18,22 +17,23 @@ namespace imeas
 
 
 /**
-	Component implementating imeas::INumericParams interface.
+	Component implementating imeas::INumericValue interface.
 	All parameter constraints can be defined directly or can use external implementation.
 */
 class CNumericParamsComp:
 			public icomp::CComponentBase,
-			virtual public INumericParams,
+			public CSimpleNumericValue,
 			virtual protected INumericConstraints,
 			virtual protected imeas::IUnitInfo
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef CSimpleNumericValue BaseClass2;
 
 	I_BEGIN_COMPONENT(CNumericParamsComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_REGISTER_INTERFACE(INumericParams);
+		I_REGISTER_INTERFACE(INumericValue);
 		I_ASSIGN(m_dimensionsCountAttrPtr, "ValuesCount", "Default number of numeric values (will be used if no constraints set)", true, 1);
 		I_ASSIGN(m_minValueAttrPtr, "MinValues", "Minimal value (will be used if no constraints set)", true, 1);
 		I_ASSIGN(m_maxValueAttrPtr, "MaxValues", "Maximal value (will be used if no constraints set)", true, 10);
@@ -41,16 +41,8 @@ public:
 		I_ASSIGN(m_constraintsCompPtr, "Constraints", "Constraints object describing possible parameter values", false, "Constraints");
 	I_END_COMPONENT;
 
-	// reimplemented (imeas::INumericParams)
+	// reimplemented (imeas::INumericValue)
 	virtual const INumericConstraints* GetNumericConstraints() const;
-	virtual imath::CVarVector GetValues() const;
-	virtual bool SetValues(const imath::CVarVector& values);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
-	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -70,8 +62,6 @@ protected:
 	virtual const imath::IDoubleManip& GetValueManip() const;
 
 private:
-	imath::CVarVector m_values;
-
 	I_ATTR(int, m_dimensionsCountAttrPtr);
 	I_ATTR(double, m_minValueAttrPtr);
 	I_ATTR(double, m_maxValueAttrPtr);

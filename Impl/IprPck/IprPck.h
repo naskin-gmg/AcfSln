@@ -58,7 +58,7 @@ typedef iipr::CCircleFindProcessorComp CircleFindProcessor;
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iipr::CFeaturesContainer>,
 			iipr::IFeaturesConsumer,
-			iipr::IFeaturesProvider,
+			imeas::INumericValueProvider,
 			iser::ISerializable,
 			istd::IChangeable,
 			imod::IModel> FeaturesContainer;

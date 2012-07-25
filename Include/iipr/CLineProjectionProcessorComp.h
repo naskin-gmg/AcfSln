@@ -46,7 +46,7 @@ public:
 
 	// reimplemented (iipr::IFeatureToImageMapper)
 	virtual bool GetImagePosition(
-				const IFeature& feature,
+				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
 				i2d::CVector2d& result) const;
 

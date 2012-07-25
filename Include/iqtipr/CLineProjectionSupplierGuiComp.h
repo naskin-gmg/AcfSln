@@ -7,7 +7,7 @@
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
 #include "i2d/CPosition2d.h"
-#include "iproc/IValueProvider.h"
+#include "imeas/INumericValueProvider.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 

@@ -202,10 +202,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFeatureBase.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFeaturesContainer.cpp"
 				>
 			</File>
@@ -363,10 +359,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFeatureBase.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CFeaturesContainer.h"
 				>
 			</File>
@@ -495,15 +487,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFeature.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IFeaturesConsumer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IFeaturesProvider.h"
 				>
 			</File>
 			<File
@@ -567,10 +551,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TFeatureWrap.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TImageParamProcessorCompBase.h"
 				>
 			</File>
@@ -580,6 +560,10 @@
 			</File>
 			<File
 				RelativePath="..\TUnaryTransformProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TWeightedFeatureWrap.h"
 				>
 			</File>
 		</Filter>

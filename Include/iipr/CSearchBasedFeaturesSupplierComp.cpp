@@ -5,16 +5,25 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IFeaturesProvider)
+// reimplemented (imeas::INumericValueProvider)
 
-iipr::IFeaturesProvider::Features CSearchBasedFeaturesSupplierComp::GetFeatures() const
+int CSearchBasedFeaturesSupplierComp::GetValuesCount() const
 {
 	const CFeaturesContainer* containerPtr = GetWorkProduct();
 	if (containerPtr != NULL){
-		return containerPtr->GetFeatures();
+		return containerPtr->GetValuesCount();
 	}
 
-	return iipr::IFeaturesProvider::Features();
+	return 0;
+}
+	
+
+const imeas::INumericValue& CSearchBasedFeaturesSupplierComp::GetNumericValue(int index) const
+{
+	const CFeaturesContainer* containerPtr = GetWorkProduct();
+	I_ASSERT (containerPtr != NULL);
+
+	return containerPtr->GetNumericValue(index);
 }
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2342
+          2403
         </Number>
         <Description>
           ACF
@@ -21,7 +21,7 @@
         CaliperParamsSet
       </ComponentName>
       <X>
-        200
+        525
       </X>
       <X>
         250
@@ -35,10 +35,10 @@
         CircleFinderParams
       </ComponentName>
       <X>
-        550
+        400
       </X>
       <X>
-        425
+        450
       </X>
       <Note>
         
@@ -49,10 +49,10 @@
         CaliperParams
       </ComponentName>
       <X>
-        775
+        850
       </X>
       <X>
-        250
+        450
       </X>
       <Note>
         
@@ -63,10 +63,10 @@
         AOI
       </ComponentName>
       <X>
-        875
+        175
       </X>
       <X>
-        175
+        450
       </X>
       <Note>
         
@@ -77,10 +77,10 @@
         FilterLength
       </ComponentName>
       <X>
-        700
+        625
       </X>
       <X>
-        350
+        450
       </X>
       <Note>
         

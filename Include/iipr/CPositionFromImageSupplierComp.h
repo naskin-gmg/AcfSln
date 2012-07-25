@@ -8,7 +8,8 @@
 #include "i2d/CAffineTransformation2d.h"
 #include "iproc/IProcessor.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iproc/IValueProvider.h"
+#include "imeas/INumericValueProvider.h"
+#include "imeas/CSimpleNumericValue.h"
 
 // ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
@@ -26,14 +27,14 @@ namespace iipr
 */
 class CPositionFromImageSupplierComp:
 			public iproc::TSupplierCompWrap<imath::CVarVector>,
-			virtual public iproc::IValueProvider,
+			virtual public imeas::INumericValueProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap<imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
-		I_REGISTER_INTERFACE(iproc::IValueProvider);
+		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
@@ -41,8 +42,9 @@ public:
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
-	// reimplemented (iproc::IValueProvider)
-	virtual imath::CVarVector GetValue(int index = -1, int valueTypeId = VTI_AUTO) const;
+	// reimplemented (imeas::INumericValueProvider)
+	virtual int GetValuesCount() const;
+	virtual const imeas::INumericValue& GetNumericValue(int index) const;
 
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ITransformation2d* GetCalibration() const;
@@ -61,6 +63,16 @@ private:
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 
 	mutable istd::TDelPtr<const i2d::ITransformation2d> m_outputCalibrationPtr;
+
+	class Position: public imeas::CSimpleNumericValue
+	{
+	public:
+		// reimplemented (imeas::INumericValue)
+		virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
+		virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
+	};
+
+	mutable Position m_position;
 };
 
 

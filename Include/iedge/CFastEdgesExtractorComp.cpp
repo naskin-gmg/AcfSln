@@ -41,7 +41,7 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	imath::CVarVector thresholdValues;
 	if ((paramsPtr != NULL) && m_thresholdParamIdAttrPtr.IsValid()){
-		const imeas::INumericParams* thresholdParamPtr = dynamic_cast<const imeas::INumericParams*>(paramsPtr->GetParameter(*m_thresholdParamIdAttrPtr));
+		const imeas::INumericValue* thresholdParamPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_thresholdParamIdAttrPtr));
 		if (thresholdParamPtr != NULL){
 			thresholdValues = thresholdParamPtr->GetValues();
 		}

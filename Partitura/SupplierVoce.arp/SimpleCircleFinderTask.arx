@@ -451,7 +451,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::IValueProvider
+        imeas::INumericValueProvider
       </InterfaceId>
       <ComponentId>
         PositionTask

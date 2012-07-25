@@ -19,12 +19,12 @@ void CFeaturesContainer::ResetFeatures()
 }
 
 
-bool CFeaturesContainer::AddFeature(const iipr::IFeature* featurePtr, bool* /*isFullPtr*/)
+bool CFeaturesContainer::AddFeature(const imeas::INumericValue* featurePtr, bool* /*isFullPtr*/)
 {
 	if (featurePtr != NULL){
 		istd::CChangeNotifier changePtr(this);
 
-		m_featuresList.PushBack(const_cast<iipr::IFeature*>(featurePtr));
+		m_featuresList.PushBack(const_cast<imeas::INumericValue*>(featurePtr));
 		
 		return true;
 	}
@@ -33,17 +33,21 @@ bool CFeaturesContainer::AddFeature(const iipr::IFeature* featurePtr, bool* /*is
 }
 
 
-// reimplemented (iipr::IFeaturesProvider)
 
-iipr::IFeaturesProvider::Features CFeaturesContainer::GetFeatures() const
+// reimplemented (imeas::INumericValueProvider)
+
+int CFeaturesContainer::GetValuesCount() const
 {
-	iipr::IFeaturesProvider::Features featuresList;
-	
-	for (int index = 0; index < m_featuresList.GetCount(); index++){
-		featuresList.push_back(m_featuresList.GetAt(index));
-	}
+	return m_featuresList.GetCount();
+}
 
-	return featuresList;
+
+const imeas::INumericValue& CFeaturesContainer::GetNumericValue(int index) const
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < GetValuesCount());
+
+	return *m_featuresList.GetAt(index);
 }
 
 

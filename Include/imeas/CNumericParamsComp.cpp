@@ -13,7 +13,7 @@ namespace imeas
 {
 
 
-// reimplemented (imeas::INumericParams)
+// reimplemented (imeas::INumericValue)
 
 const INumericConstraints* CNumericParamsComp::GetNumericConstraints() const
 {
@@ -22,77 +22,6 @@ const INumericConstraints* CNumericParamsComp::GetNumericConstraints() const
 	}
 
 	return this;
-}
-
-
-imath::CVarVector CNumericParamsComp::GetValues() const
-{
-	return m_values;
-}
-
-
-bool CNumericParamsComp::SetValues(const imath::CVarVector& values)
-{
-	if (m_values != values){
-		const INumericConstraints* constraintsPtr = GetNumericConstraints();
-		I_ASSERT(constraintsPtr != NULL);
-		if (values.GetElementsCount() != constraintsPtr->GetNumericValuesCount()){
-			return false;
-		}
-
-		istd::CChangeNotifier notifier(this);
-
-		m_values = values;
-	}
-
-	return true;
-}
-
-
-// reimplemented (iser::ISerializable)
-
-bool CNumericParamsComp::Serialize(iser::IArchive& archive)
-{
-	static iser::CArchiveTag valuesTag("Values", "List of numeric values");
-
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
-
-	bool retVal = archive.BeginTag(valuesTag);
-	retVal = retVal && m_values.Serialize(archive);
-	retVal = retVal && archive.EndTag(valuesTag);
-
-	const INumericConstraints* constraintsPtr = GetNumericConstraints();
-	I_ASSERT(constraintsPtr != NULL);
-
-	m_values.SetElementsCount(constraintsPtr->GetNumericValuesCount());
-
-	return retVal;
-}
-
-
-// reimplemented (istd::IChangeable)
-
-bool CNumericParamsComp::CopyFrom(const IChangeable& object)
-{
-	const INumericParams* nativeParamsPtr = dynamic_cast<const INumericParams*>(&object);
-	if (nativeParamsPtr != NULL){
-		imath::CVarVector values = nativeParamsPtr->GetValues();
-
-		const INumericConstraints* constraintsPtr = GetNumericConstraints();
-		if (constraintsPtr != NULL){
-			values.SetElementsCount(constraintsPtr->GetNumericValuesCount(), 0);
-		}
-
-		if (values != m_values){
-			istd::CChangeNotifier notifier(this);
-
-			m_values = nativeParamsPtr->GetValues();
-		}
-
-		return true;
-	}
-
-	return false;
 }
 
 

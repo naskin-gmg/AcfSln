@@ -21,7 +21,7 @@ CNumericParamsGuiComp::~CNumericParamsGuiComp()
 
 void CNumericParamsGuiComp::UpdateModel() const
 {
-	imeas::INumericParams* objectPtr = GetObjectPtr();
+	imeas::INumericValue* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL && IsGuiCreated()){
 		int valuesCount = int(m_valueWidgets.GetCount());
 		imath::CVarVector values(valuesCount);
@@ -65,7 +65,7 @@ void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 		panelPtr->setLayout(layoutPtr);
 	}
 
-	imeas::INumericParams* objectPtr = GetObjectPtr();
+	imeas::INumericValue* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		const imeas::INumericConstraints* constraintsPtr = objectPtr->GetNumericConstraints();
 

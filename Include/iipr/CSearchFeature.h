@@ -8,7 +8,7 @@
 #include "i2d/CAffineTransformation2d.h"
 
 // ACF-Solutions includes
-#include "iipr/TFeatureWrap.h"
+#include "iipr/TWeightedFeatureWrap.h"
 
 
 namespace iipr
@@ -16,13 +16,12 @@ namespace iipr
 
 
 /**
-	Implementation of IFeature interface for pattern search features.
+	Implementation of the pattern search feature.
 */
-class CSearchFeature:
-	public TFeatureWrap<i2d::CPosition2d>
+class CSearchFeature: public TWeightedFeatureWrap<i2d::CPosition2d>
 {
 public:
-	typedef TFeatureWrap<i2d::CPosition2d> BaseClass;
+	typedef TWeightedFeatureWrap<i2d::CPosition2d> BaseClass;
 
 	CSearchFeature(
 				double weight,

@@ -2,7 +2,7 @@
 
 
 // IACF includes
-#include "iipr/IFeature.h"
+#include "imeas/INumericValue.h"
 
 
 namespace iipr
@@ -31,12 +31,6 @@ void CSingleFeatureConsumer::SetFeaturePolicy(int featurePolicy)
 }
 
 
-const IFeature* CSingleFeatureConsumer::GetFeature() const
-{
-	return m_featurePtr.GetPtr();
-}
-
-
 // reimplemented (iipr::IFeaturesConsumer)
 
 void CSingleFeatureConsumer::ResetFeatures()
@@ -45,7 +39,7 @@ void CSingleFeatureConsumer::ResetFeatures()
 }
 
 
-bool CSingleFeatureConsumer::AddFeature(const IFeature* featurePtr, bool* isFullPtr)
+bool CSingleFeatureConsumer::AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr)
 {
 	I_ASSERT(featurePtr != NULL);
 	if (!m_featurePtr.IsValid() || m_featurePolicy == FP_LAST){
@@ -58,8 +52,16 @@ bool CSingleFeatureConsumer::AddFeature(const IFeature* featurePtr, bool* isFull
 				break;
 
 			case FP_HEAVIEST:
-				if (featurePtr->GetWeight() > m_featurePtr->GetWeight()){
-					m_featurePtr.SetPtr(featurePtr);
+				if (		m_featurePtr.IsValid() &&
+							featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT) && 
+							m_featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT)){
+				
+					double featureWeight = featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
+					double currentWeight = m_featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
+				
+					if (featureWeight > currentWeight){
+						m_featurePtr.SetPtr(featurePtr);
+					}
 				}
 				else{
 					delete featurePtr;
@@ -76,17 +78,20 @@ bool CSingleFeatureConsumer::AddFeature(const IFeature* featurePtr, bool* isFull
 }
 
 
-// reimplemented (iipr::IFeaturesProvider)
+// reimplemented (imeas::INumericValueProvider)
 
-IFeaturesProvider::Features CSingleFeatureConsumer::GetFeatures() const
+int CSingleFeatureConsumer::GetValuesCount() const
 {
-	Features retVal;
+	return m_featurePtr.IsValid() ? 1 : 0;
+}
 
-	if (m_featurePtr.IsValid()){
-		retVal.push_back(m_featurePtr.GetPtr());
-	}
 
-	return retVal;
+const imeas::INumericValue& CSingleFeatureConsumer::GetNumericValue(int I_IF_DEBUG(index)) const
+{
+	I_ASSERT(m_featurePtr.IsValid());
+	I_ASSERT(index == 0);
+
+	return *m_featurePtr.GetPtr();
 }
 
 

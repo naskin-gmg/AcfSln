@@ -108,10 +108,12 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
 		if (workStatus == iproc::ISupplier::WS_OK){
-			iproc::IValueProvider* providerPtr = dynamic_cast<iproc::IValueProvider*>(supplierPtr);
-			if (providerPtr != NULL){
-				position = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_POSITION);
-				radius = providerPtr->GetValue(-1, iproc::IValueProvider::VTI_RADIUS);
+			imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
+			if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){
+				const imeas::INumericValue& resultValue = providerPtr->GetNumericValue(0);
+
+				position = resultValue.GetComponentValue(imeas::INumericValue::VTI_POSITION);
+				radius = resultValue.GetComponentValue(imeas::INumericValue::VTI_RADIUS);
 
 				iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(supplierPtr);
 				if (processingTimeProviderPtr != NULL){

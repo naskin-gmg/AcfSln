@@ -6,12 +6,12 @@
 #include "i2d/CVector2d.h"
 #include "iprm/IParamsSet.h"
 
+// ACF-Solutions includes
+#include "imeas/INumericValue.h"
+
 
 namespace iipr
 {
-
-
-class IFeature;
 
 
 /**
@@ -24,7 +24,7 @@ public:
 		Get position in image coordination system using position extracted from projection.
 	*/
 	virtual bool GetImagePosition(
-				const IFeature& feature,
+				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
 				i2d::CVector2d& result) const = 0;
 };

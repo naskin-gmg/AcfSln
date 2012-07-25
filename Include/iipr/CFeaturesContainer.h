@@ -5,7 +5,7 @@
 #include "istd/TPointerVector.h"
 
 #include "iipr/IFeaturesConsumer.h"
-#include "iipr/IFeaturesProvider.h"
+#include "imeas/INumericValueProvider.h"
 
 
 namespace iipr
@@ -17,18 +17,19 @@ namespace iipr
 */
 class CFeaturesContainer:
 			virtual public IFeaturesConsumer,
-			virtual public IFeaturesProvider
+			virtual public imeas::INumericValueProvider
 {
 public:
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
-	virtual bool AddFeature(const iipr::IFeature* featurePtr, bool* isFullPtr = NULL);
+	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
 
-	// reimplemented (iipr::IFeaturesProvider)
-	virtual Features GetFeatures() const;
+	// reimplemented (imeas::INumericValueProvider)
+	virtual int GetValuesCount() const;
+	virtual const imeas::INumericValue& GetNumericValue(int index) const;
 
 private:
-	typedef istd::TPointerVector<iipr::IFeature> FeaturesList;
+	typedef istd::TPointerVector<imeas::INumericValue> FeaturesList;
 
 	FeaturesList m_featuresList;
 };

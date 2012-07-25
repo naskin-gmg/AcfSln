@@ -7,7 +7,7 @@
 #include "iproc/TSyncProcessorCompBase.h"
 
 // ACF-Solutions includes
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
 // QSF includes
@@ -80,7 +80,7 @@ protected:
 				NodeInfos& nodeInfos) const;
 
 private:
-	I_REF(imeas::INumericParams, m_defaultToleranceParamsCompPtr);
+	I_REF(imeas::INumericValue, m_defaultToleranceParamsCompPtr);
 	I_ATTR(QByteArray, m_toleranceParamsIdAttrPtr);
 	I_REF(imeas::IUnitInfo, m_distanceUnitInfoCompPtr);
 };

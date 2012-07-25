@@ -10,7 +10,7 @@
 #include "iproc/IElapsedTimeProvider.h"
 
 // ACF-Solutions includes
-#include "iipr/IFeaturesProvider.h"
+#include "imeas/INumericValueProvider.h"
 #include "iipr/CSearchFeature.h"
 
 
@@ -127,13 +127,12 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
 		if (workStatus == iproc::ISupplier::WS_OK){
-			iipr::IFeaturesProvider* providerPtr = dynamic_cast<iipr::IFeaturesProvider*>(supplierPtr);
+			imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
 			if (providerPtr != NULL){
-				iipr::IFeaturesProvider::Features foundFeatures = providerPtr->GetFeatures();
-				int featuresCount = foundFeatures.size();
+				int featuresCount = providerPtr->GetValuesCount();
 
 				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(foundFeatures[featureIndex]);
+					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
 					if (searchFeaturePtr != NULL){
 						QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
 						modelItemPtr->setText(CT_ID, searchFeaturePtr->GetId());

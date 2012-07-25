@@ -63,9 +63,29 @@ void CLinearAdjustParamsComp::SetOffsetFactor(double offset)
 
 // reimplemented (imeas::ILinearAdjustParams)
 
+bool CLinearAdjustParamsComp::IsValueTypeSupported(ValueTypeId valueTypeId) const
+{
+	if (valueTypeId == VTI_AUTO){
+		return true;
+	}
+
+	return false;
+}
+
+
 const INumericConstraints* CLinearAdjustParamsComp::GetNumericConstraints() const
 {
 	return this;
+}
+
+
+imath::CVarVector CLinearAdjustParamsComp::GetComponentValue(ValueTypeId valueTypeId) const
+{
+	if (!IsValueTypeSupported(valueTypeId)){
+		return imath::CVarVector();
+	}
+
+	return GetValues();
 }
 
 

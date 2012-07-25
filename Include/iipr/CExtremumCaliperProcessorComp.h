@@ -46,7 +46,7 @@ public:
 
 	// reimplemented (iipr::IFeatureToProjectionMapper)
 	virtual bool GetProjectionPosition(
-				const IFeature& feature,
+				const imeas::INumericValue& feature,
 				const iprm::IParamsSet* paramsPtr,
 				double& result) const;
 

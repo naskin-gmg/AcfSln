@@ -10,8 +10,7 @@
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
 #include "imeas/CSamplesInfo.h"
-
-#include "iipr/IFeature.h"
+#include "imeas/INumericValue.h"
 
 
 namespace iipr
@@ -160,7 +159,7 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 // reimplemented (iipr::IFeatureToImageMapper)
 
 bool CLineProjectionProcessorComp::GetImagePosition(
-			const IFeature& feature,
+			const imeas::INumericValue& feature,
 			const iprm::IParamsSet* paramsPtr,
 			i2d::CVector2d& result) const
 {

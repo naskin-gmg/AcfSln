@@ -8,7 +8,7 @@
 
 #include "imeas/ILinearAdjustParams.h"
 #include "imeas/ILinearAdjustConstraints.h"
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
 
@@ -22,7 +22,7 @@ namespace imeas
 class CLinearAdjustParamsComp:
 			public icomp::CComponentBase,
 			virtual public ILinearAdjustParams,
-			virtual public INumericParams,
+			virtual public INumericValue,
 			virtual protected INumericConstraints
 {
 public:
@@ -30,7 +30,7 @@ public:
 
 	I_BEGIN_COMPONENT(CLinearAdjustParamsComp);
 		I_REGISTER_INTERFACE(ILinearAdjustParams);
-		I_REGISTER_INTERFACE(INumericParams);
+		I_REGISTER_INTERFACE(INumericValue);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_constraintsCompPtr, "Constraints", "Constraints describing allowed value ranges", false, "Constraints");
 		I_ASSIGN(m_defaultScaleAttrPtr, "DefaultScale", "Default value of scale factor", true, 1);
@@ -46,8 +46,10 @@ public:
 	virtual double GetOffsetFactor() const;
 	virtual void SetOffsetFactor(double offset);
 
-	// reimplemented (imeas::INumericParams)
+	// reimplemented (imeas::INumericValue)
+	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
 	virtual const INumericConstraints* GetNumericConstraints() const;
+	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
 	virtual imath::CVarVector GetValues() const;
 	virtual bool SetValues(const imath::CVarVector& values);
 

@@ -134,7 +134,7 @@ bool CEdgesReductorComp::DoLinesProcessing(
 {
 	imath::CVarVector toleranceValues;
 	if ((paramsPtr != NULL) && m_toleranceParamsIdAttrPtr.IsValid()){
-		const imeas::INumericParams* toleranceParamsPtr = dynamic_cast<const imeas::INumericParams*>(paramsPtr->GetParameter(*m_toleranceParamsIdAttrPtr));
+		const imeas::INumericValue* toleranceParamsPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_toleranceParamsIdAttrPtr));
 		if (toleranceParamsPtr != NULL){
 			toleranceValues = toleranceParamsPtr->GetValues();
 		}

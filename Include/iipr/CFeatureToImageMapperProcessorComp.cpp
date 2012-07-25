@@ -1,5 +1,7 @@
 #include "iipr/CFeatureToImageMapperProcessorComp.h"
 
+#include "imeas/INumericValue.h"
+
 
 namespace iipr
 {
@@ -9,24 +11,27 @@ namespace iipr
 
 int CFeatureToImageMapperProcessorComp::DoConvertFeatures(
 			const iprm::IParamsSet* paramsPtr,
-			const IFeaturesProvider& container,
+			const imeas::INumericValueProvider& container,
 			IFeaturesConsumer& results)
 {
 	if (!m_featuresMapperCompPtr.IsValid()){
 		return TS_INVALID;
 	}
 
-	IFeaturesProvider::Features features = container.GetFeatures();
+	int featuresCount = container.GetValuesCount();
 
-	for (		IFeaturesProvider::Features::const_iterator iter = features.begin();
-				iter != features.end();
-				++iter){
-		const IFeature* featurePtr = *iter;
-		I_ASSERT(featurePtr != NULL);
+	for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
+		const imeas::INumericValue& feature = container.GetNumericValue(featureIndex);
 
 		i2d::CVector2d position;
-		if (m_featuresMapperCompPtr->GetImagePosition(*featurePtr, paramsPtr, position)){
-			PositionFeature* positionFeaturePtr = new PositionFeature(featurePtr->GetWeight());
+		if (m_featuresMapperCompPtr->GetImagePosition(feature, paramsPtr, position)){
+			double weight = 1.0;
+
+			if (feature.IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT)){
+				weight = feature.GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
+			}
+
+			PositionFeature* positionFeaturePtr = new PositionFeature(weight);
 			positionFeaturePtr->SetPosition(position);
 
 			bool isFull = false;
@@ -57,7 +62,7 @@ int CFeatureToImageMapperProcessorComp::DoProcessing(
 		return TS_OK;
 	}
 
-	const IFeaturesProvider* containerPtr = dynamic_cast<const IFeaturesProvider*>(inputPtr);
+	const imeas::INumericValueProvider* containerPtr = dynamic_cast<const imeas::INumericValueProvider*>(inputPtr);
 	IFeaturesConsumer* consumerPtr = dynamic_cast<IFeaturesConsumer*>(outputPtr);
 
 	if (		(containerPtr == NULL) ||

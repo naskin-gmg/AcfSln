@@ -5,7 +5,7 @@
 #include "istd/TDelPtr.h"
 
 #include "iipr/IFeaturesConsumer.h"
-#include "iipr/IFeaturesProvider.h"
+#include "imeas/INumericValueProvider.h"
 
 
 namespace iipr
@@ -17,7 +17,7 @@ namespace iipr
 */
 class CSingleFeatureConsumer:
 			virtual public IFeaturesConsumer,
-			virtual public IFeaturesProvider
+			virtual public imeas::INumericValueProvider
 {
 public:
 
@@ -56,17 +56,16 @@ public:
 	*/
 	void SetFeaturePolicy(int featurePolicy);
 
-	const IFeature* GetFeature() const;
-
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
-	virtual bool AddFeature(const IFeature* featurePtr, bool* isFullPtr = NULL);
+	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
 
-	// reimplemented (iipr::IFeaturesProvider)
-	virtual Features GetFeatures() const;
+	// reimplemented (imeas::INumericValueProvider)
+	virtual int GetValuesCount() const;
+	virtual const imeas::INumericValue& GetNumericValue(int index) const;
 
 private:
-	istd::TDelPtr<const IFeature> m_featurePtr;
+	istd::TDelPtr<const imeas::INumericValue> m_featurePtr;
 
 	int m_featurePolicy;
 };

@@ -9,7 +9,7 @@
 
 #include "iipr/IFeatureToFeatureProcessor.h"
 #include "iipr/IFeatureToImageMapper.h"
-#include "iipr/TFeatureWrap.h"
+#include "iipr/TWeightedFeatureWrap.h"
 
 
 namespace iipr
@@ -37,7 +37,7 @@ public:
 	// reimplemented (iipr::IFeatureToFeatureProcessor)
 	virtual int DoConvertFeatures(
 				const iprm::IParamsSet* paramsPtr,
-				const IFeaturesProvider& container,
+				const imeas::INumericValueProvider& container,
 				IFeaturesConsumer& results);
 
 	// reimplemented (iproc::IProcessor)
@@ -48,7 +48,7 @@ public:
 				iproc::IProgressManager* progressManagerPtr = NULL);
 
 protected:
-	typedef TFeatureWrap<i2d::CPosition2d> PositionFeature;
+	typedef TWeightedFeatureWrap<i2d::CPosition2d> PositionFeature;
 
 private:
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);

@@ -9,7 +9,7 @@
 // ACF-Solutions incldues
 #include "imeas/IUnitInfo.h"
 
-#include "imeas/INumericParams.h"
+#include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
 

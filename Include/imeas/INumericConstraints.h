@@ -17,7 +17,7 @@ namespace imeas
 
 /**
 	Describe additional meta information for set of numeric values.
-	\sa imeas::INumericParams
+	\sa imeas::INumericValue
 */
 class INumericConstraints: virtual public istd::IChangeable
 {
