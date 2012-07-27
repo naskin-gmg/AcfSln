@@ -53,7 +53,7 @@ public:
 		I_ASSIGN_TO(m_subtaskInspectionCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN_TO(m_subtaskInfoProviderCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN(m_serializeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
-		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will rolled out", true, false);
+		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will be rolled out", true, false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
 		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, true);
 	I_END_COMPONENT;
