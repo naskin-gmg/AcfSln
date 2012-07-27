@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2366
+          2388
         </Number>
         <Description>
           ACF
@@ -214,7 +214,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               Bitmap
@@ -267,6 +267,22 @@
               <Value>
                 ImageDialogLoader
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LiveInterval
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              LiveInterval
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

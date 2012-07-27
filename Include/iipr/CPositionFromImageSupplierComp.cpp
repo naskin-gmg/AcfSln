@@ -44,8 +44,6 @@ const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() c
 	m_outputCalibrationPtr.Reset();
 
 	const imath::CVarVector* productPtr = GetWorkProduct();
-	I_ASSERT(productPtr != NULL);
-
 	if (productPtr != NULL){
 		m_position.SetValues(*productPtr);
 	

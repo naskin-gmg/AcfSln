@@ -13,13 +13,13 @@ namespace icam
 
 /**
 	Bitmap acquisition processor.
-	This processor use as \c iproc::IProcessor template parameter Input optional istd::ITimeStamp object to indicate trigger time of acquision.
+	This processor uses optional input parameter of type \c istd::ITimeStamp to identify the image by its trigger time.
 */
 class IBitmapAcquisition: virtual public iproc::IProcessor
 {
 public:
 	/**
-		Get size of acquired bitmap fo specified parameters.
+		Get size of acquired bitmap for specified parameters.
 		\return		if size of bitmap is known it returns this value. Elsewhere invalid size will be returned.
 					\sa \c istd::TIndex::IsValid().
 	*/
