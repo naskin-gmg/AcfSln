@@ -1,6 +1,9 @@
 #include "iipr/CImageRegionProcessorCompBase.h"
 
 
+// Qt includes
+#include <QStringList>
+
  // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "ibase/CSize.h"
@@ -36,6 +39,17 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	const i2d::IObject2d* aoiPtr = NULL;
 	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
 		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
+		if (aoiPtr == NULL){
+			iprm::IParamsSet::Ids existingParamIds = paramsPtr->GetParamIds();
+			QStringList existingIds;
+			for (iprm::IParamsSet::Ids::ConstIterator index = existingParamIds.constBegin(); index != existingParamIds.constEnd(); index++){
+				existingIds.push_back(*index);
+			}
+
+			QString idList = existingIds.join(", ");
+
+			SendVerboseMessage(QString("Parameter %1 was not found in the parameter set. Following parameter IDs are registered: %2").arg(QString(*m_aoiParamIdAttrPtr)).arg(idList));
+		}
 	}
 
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
