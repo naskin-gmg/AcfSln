@@ -1,6 +1,10 @@
 #include "iipr/CExtremumCaliperProcessorComp.h"
 
 
+// ACF includes
+#include "iprm/TParamsPtr.h"
+
+
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
 #include "imeas/CSamplesInfo.h"
@@ -155,9 +159,9 @@ int CExtremumCaliperProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const ICaliperParams* caliperParamsPtr = dynamic_cast<const ICaliperParams*>(paramsPtr->GetParameter(*m_caliperParamsIdAttrPtr));
+	iprm::TParamsPtr<ICaliperParams> caliperParamsPtr(paramsPtr, *m_caliperParamsIdAttrPtr);
 
-	return DoCaliper(*derivativePtr, caliperParamsPtr, *consumerPtr)? TS_OK: TS_INVALID;
+	return DoCaliper(*derivativePtr, caliperParamsPtr.GetPtr(), *consumerPtr)? TS_OK: TS_INVALID;
 }
 
 

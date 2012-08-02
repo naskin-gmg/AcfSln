@@ -4,6 +4,7 @@
 // ACF includes
 #include "imath/CFixedPointManip.h"
 #include "iimg/CGeneralBitmap.h"
+#include "iprm/TParamsPtr.h"
 
 
 namespace iipr
@@ -30,9 +31,9 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 	int outputImageTop = 0;
 	int outputImageBottom = imageHeight - 1;
 
-	const i2d::CRectangle* aoiPtr = m_defaultAoiParamCompPtr.GetPtr();
+	iprm::TParamsPtr<i2d::CRectangle> aoiPtr(m_defaultAoiParamCompPtr.GetPtr());
 	if (m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::CRectangle*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
+		aoiPtr.Init(paramsPtr, *m_aoiParamIdAttrPtr);
 	}
 
 	if (aoiPtr != NULL){
@@ -48,9 +49,9 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 		return true;
 	}
 
-	const imeas::ILinearAdjustParams* adjustParamsPtr = m_defaultAdjustParamsCompPtr.GetPtr();
+	iprm::TParamsPtr<imeas::ILinearAdjustParams> adjustParamsPtr(m_defaultAdjustParamsCompPtr.GetPtr());
 	if (m_adjustParamsIdAttrPtr.IsValid()){
-		adjustParamsPtr = dynamic_cast<const imeas::ILinearAdjustParams*>(paramsPtr->GetParameter(*m_adjustParamsIdAttrPtr));
+		adjustParamsPtr.Init(paramsPtr, *m_adjustParamsIdAttrPtr);
 	}
 
 	double contrast = 1;

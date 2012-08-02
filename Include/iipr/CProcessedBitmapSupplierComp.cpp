@@ -85,14 +85,21 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.second.GetPtr());
 	switch (status){
-	case iproc::IProcessor::TS_OK:
-		return WS_OK;
+		case iproc::IProcessor::TS_OK:
+			if (result.first == NULL){
+				const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(bitmapPtr);
+				if (calibrationProviderPtr != NULL){
+					result.first = calibrationProviderPtr->GetCalibration();
+				}
+			}
 
-	case iproc::IProcessor::TS_CANCELED:
-		return WS_CANCELED;
+			return WS_OK;
 
-	default:
-		return WS_ERROR;
+		case iproc::IProcessor::TS_CANCELED:
+			return WS_CANCELED;
+
+		default:
+			return WS_ERROR;
 	}
 }
 

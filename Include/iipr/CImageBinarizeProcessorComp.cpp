@@ -3,6 +3,7 @@
 
  // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "iprm/TParamsPtr.h"
 
 #include "ibase/CSize.h"
 
@@ -29,12 +30,12 @@ int CImageBinarizeProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const imeas::INumericValue* thresholdParamsPtr = NULL;
+	iprm::TParamsPtr<imeas::INumericValue> thresholdParamsPtr;
 	if (paramsPtr != NULL && m_binarizationParamsIdAttrPtr.IsValid()){
-		thresholdParamsPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_binarizationParamsIdAttrPtr));
+		thresholdParamsPtr.Init(paramsPtr, *m_binarizationParamsIdAttrPtr);
 	}
 
-	if (thresholdParamsPtr == NULL){
+	if (!thresholdParamsPtr.IsValid()){
 		SendErrorMessage(0, "Threshold parameter is not set");
 
 		return TS_INVALID;

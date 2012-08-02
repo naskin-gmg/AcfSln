@@ -6,6 +6,7 @@
 #include "istd/TSmartPtr.h"
 #include "i2d/CRectangle.h"
 #include "iimg/TPixelConversion.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
@@ -164,9 +165,9 @@ bool CLineProjectionProcessorComp::GetImagePosition(
 			i2d::CVector2d& result) const
 {
 	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL)){
-		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(*m_lineParamIdAttrPtr));
+		iprm::TParamsPtr<i2d::CLine2d> linePtr(paramsPtr, *m_lineParamIdAttrPtr);
 		double position;
-		if (		(linePtr != NULL) &&
+		if (		(linePtr.IsValid()) &&
 					m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
 			result = linePtr->GetPositionFromAlpha(position);
 
@@ -211,8 +212,8 @@ int CLineProjectionProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(*m_lineParamIdAttrPtr));
-	if (linePtr == NULL){
+	iprm::TParamsPtr<i2d::CLine2d> linePtr(paramsPtr, *m_lineParamIdAttrPtr);
+	if (!linePtr.IsValid()){
 		return TS_INVALID;
 	}
 

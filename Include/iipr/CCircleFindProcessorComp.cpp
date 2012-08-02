@@ -5,7 +5,7 @@
 #include "imath/CVarMatrix.h"
 #include "i2d/CAnnulusSegment.h"
 #include "iprm/CParamsSet.h"
-
+#include "iprm/TParamsPtr.h"
 
 // IACF includes
 #include "iipr/CCaliperFeature.h"
@@ -31,13 +31,13 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 	Rays inRays;
 	Rays outRays;
 
-	const istd::IChangeable* aoiObjectPtr = paramsPtr->GetParameter(*m_aoiParamIdAttrPtr);
-	if (aoiObjectPtr == NULL){
+	iprm::TParamsPtr<istd::IChangeable> aoiObjectPtr(paramsPtr, *m_aoiParamIdAttrPtr);
+	if (!aoiObjectPtr.IsValid()){
 		return TS_INVALID;
 	}
 
-	const iipr::ICircleFinderParams* circleFinderParamsPtr = dynamic_cast<const iipr::ICircleFinderParams*>(paramsPtr->GetParameter(*m_circleFinderParamsIdAttrPtr));
-	if (circleFinderParamsPtr == NULL){
+	iprm::TParamsPtr<iipr::ICircleFinderParams> circleFinderParamsPtr(paramsPtr, *m_circleFinderParamsIdAttrPtr);
+	if (!circleFinderParamsPtr.IsValid()){
 		return TS_INVALID;
 	}
 

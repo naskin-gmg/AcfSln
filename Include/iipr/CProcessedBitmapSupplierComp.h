@@ -19,12 +19,12 @@ namespace iipr
 	Image supplier providing processed image from some other input image supplier.
 */
 class CProcessedBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
+			public iproc::TSupplierCompWrap< QPair<const i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iipr::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iproc::TSupplierCompWrap< QPair<const i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);

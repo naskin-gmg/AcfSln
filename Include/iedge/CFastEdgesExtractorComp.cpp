@@ -11,6 +11,7 @@
 // ACF includes
 #include "i2d/CPolypoint.h"
 #include "i2d/CVector2d.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "imeas/CGeneralUnitInfo.h"
@@ -41,8 +42,8 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	imath::CVarVector thresholdValues;
 	if ((paramsPtr != NULL) && m_thresholdParamIdAttrPtr.IsValid()){
-		const imeas::INumericValue* thresholdParamPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_thresholdParamIdAttrPtr));
-		if (thresholdParamPtr != NULL){
+		iprm::TParamsPtr<imeas::INumericValue> thresholdParamPtr(paramsPtr, *m_thresholdParamIdAttrPtr);
+		if (thresholdParamPtr.IsValid()){
 			thresholdValues = thresholdParamPtr->GetValues();
 		}
 	}
@@ -52,20 +53,20 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	double threshold = (thresholdValues.GetElementsCount() > 0)? thresholdValues.GetElement(0): 0.1;
 
-	const i2d::IObject2d* aoiObjectPtr = NULL;
+	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr;
 	if ((paramsPtr != NULL) && m_aoiParamIdAttrPtr.IsValid()){
-		aoiObjectPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
+		aoiObjectPtr.Init(paramsPtr, *m_aoiParamIdAttrPtr);
 	}
 	else if (m_defaultAoiCompPtr.IsValid()){
-		aoiObjectPtr = m_defaultAoiCompPtr.GetPtr();
+		aoiObjectPtr.SetPtr(m_defaultAoiCompPtr.GetPtr());
 	}
 
 	const iimg::CScanlineMask* maskPtr = NULL;
 
 	iimg::CScanlineMask mask;
-	if (aoiObjectPtr != NULL){
+	if (aoiObjectPtr.IsValid()){
 		i2d::CRect clipArea(size);
-		if (mask.CreateFromGeometry(*aoiObjectPtr, &clipArea)){
+		if (mask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &clipArea)){
 			maskPtr = &mask;
 		}
 	}

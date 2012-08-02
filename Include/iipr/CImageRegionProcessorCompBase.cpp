@@ -10,6 +10,7 @@
 #include "i2d/IObject2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
+#include "iprm/TParamsPtr.h"
 
 // IACF includes
 #include "iipr/TImagePixelInterpolator.h"
@@ -36,25 +37,11 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const i2d::IObject2d* aoiPtr = NULL;
-	if (paramsPtr != NULL && m_aoiParamIdAttrPtr.IsValid()){
-		aoiPtr = dynamic_cast<const i2d::IObject2d*>(paramsPtr->GetParameter(*m_aoiParamIdAttrPtr));
-		if (aoiPtr == NULL){
-			iprm::IParamsSet::Ids existingParamIds = paramsPtr->GetParamIds();
-			QStringList existingIds;
-			for (iprm::IParamsSet::Ids::ConstIterator index = existingParamIds.constBegin(); index != existingParamIds.constEnd(); index++){
-				existingIds.push_back(*index);
-			}
-
-			QString idList = existingIds.join(", ");
-
-			SendVerboseMessage(QString("Parameter %1 was not found in the parameter set. Following parameter IDs are registered: %2").arg(QString(*m_aoiParamIdAttrPtr)).arg(idList));
-		}
-	}
+	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, *m_aoiParamIdAttrPtr);
 
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
-	if (aoiPtr != NULL){
+	if (aoiPtr.IsValid()){
 		const i2d::ITransformation2d* pixelToLogicalTransformPtr = NULL;
 		if (m_regionCalibrationProviderCompPtr.IsValid()){
 			pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
@@ -77,12 +64,12 @@ int CImageRegionProcessorCompBase::DoProcessing(
 					return TS_INVALID;
 				}
 
-				aoiPtr = transformedRegionPtr.GetPtr();
+				aoiPtr.SetPtr(transformedRegionPtr.GetPtr());
 			}
 		}
 	}
 
-	return ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr, outputPtr) ? TS_OK : TS_INVALID;
+	return ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr.GetPtr(), outputPtr) ? TS_OK : TS_INVALID;
 }
 
 

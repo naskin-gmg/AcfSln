@@ -5,6 +5,7 @@
 #include "istd/TChangeNotifier.h"
 #include "ibase/ITextDocument.h"
 #include "iproc/IProgressManager.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solution includes
 #include "imeas/IDataSequence.h"
@@ -38,8 +39,8 @@ int CScriptDataProcessorComp::DoProcessing(
 	QString functionScript;
 	
 	if (m_scriptParamIdAttrPtr.IsValid()){
-		const iser::ISerializable* parameterPtr = paramsPtr->GetParameter(*m_scriptParamIdAttrPtr);
-		const ibase::ITextDocument* textPtr = dynamic_cast<const ibase::ITextDocument*>(parameterPtr);
+		iprm::TParamsPtr<iser::ISerializable> parameterPtr(paramsPtr, *m_scriptParamIdAttrPtr);
+		const ibase::ITextDocument* textPtr = dynamic_cast<const ibase::ITextDocument*>(parameterPtr.GetPtr());
 		if (textPtr != NULL){
 			functionScript = textPtr->GetText();
 		}

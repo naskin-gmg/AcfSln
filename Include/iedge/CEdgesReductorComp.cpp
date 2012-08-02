@@ -2,6 +2,7 @@
 
 // ACF includes
 #include "istd/istd.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "imeas/CGeneralUnitInfo.h"
@@ -134,8 +135,8 @@ bool CEdgesReductorComp::DoLinesProcessing(
 {
 	imath::CVarVector toleranceValues;
 	if ((paramsPtr != NULL) && m_toleranceParamsIdAttrPtr.IsValid()){
-		const imeas::INumericValue* toleranceParamsPtr = dynamic_cast<const imeas::INumericValue*>(paramsPtr->GetParameter(*m_toleranceParamsIdAttrPtr));
-		if (toleranceParamsPtr != NULL){
+		iprm::TParamsPtr<imeas::INumericValue> toleranceParamsPtr(paramsPtr, *m_toleranceParamsIdAttrPtr);
+		if (toleranceParamsPtr.IsValid()){
 			toleranceValues = toleranceParamsPtr->GetValues();
 		}
 	}

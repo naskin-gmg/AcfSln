@@ -8,6 +8,7 @@
 #include "istd/TChangeNotifier.h"
 #include "istd/TSmartPtr.h"
 #include "imath/CDoubleManip.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
@@ -118,9 +119,8 @@ int CRectDerivativeProcessor::DoProcessing(
 
 	double filterLength = 5.0;
 	if (paramsPtr != NULL){
-		const imeas::INumericValue* filterParamsPtr = dynamic_cast<const imeas::INumericValue*>(
-					paramsPtr->GetParameter(m_filterParamsId));
-		if (filterParamsPtr != NULL){
+		iprm::TParamsPtr<imeas::INumericValue> filterParamsPtr(paramsPtr, m_filterParamsId);
+		if (filterParamsPtr.IsValid()){
 			imath::CVarVector filterLengths = filterParamsPtr->GetValues();
 			if (filterLengths.GetElementsCount() > 0){
 				filterLength = filterLengths[0];
