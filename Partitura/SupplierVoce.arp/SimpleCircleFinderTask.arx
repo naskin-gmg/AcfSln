@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2410
+          2415
         </Number>
         <Description>
           ACF
@@ -243,7 +243,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               FilterConstraints
@@ -260,25 +260,6 @@
               </IsEnabled>
               <Value>
                 Caliper
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WeightThreshold
-            </Id>
-            <Type>
-              Real
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                10
               </Value>
             </Data>
           </AttributeInfo>
