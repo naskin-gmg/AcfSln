@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1627
+          2415
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          286
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -29,25 +18,17 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        Framework
+        LineCaliperTaskGui
       </ComponentName>
       <X>
-        550
+        850
       </X>
       <X>
-        350
+        475
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        350
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,28 +40,9 @@
       <X>
         225
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LineCaliperTaskGui
-      </ComponentName>
-      <X>
-        850
-      </X>
-      <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTask
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        225
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -92,6 +54,51 @@
       <X>
         475
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Framework
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SnapTask
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <X>
+        225
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageView
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
 </Acf>
