@@ -103,12 +103,12 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 			}
 
 			if (logicalTransformPtr != NULL){
-				i2d::CPosition2d transofrmedPosition = *positionPtr;
-				if (!transofrmedPosition.Transform(*logicalTransformPtr)){
+				i2d::CPosition2d transformedPosition = *positionPtr;
+				if (!transformedPosition.Transform(*logicalTransformPtr)){
 					return WS_ERROR;
 				}
 	
-				result = transofrmedPosition.GetPosition();
+				result = transformedPosition.GetPosition();
 			}
 			else{
 				result = positionPtr->GetPosition();
@@ -179,14 +179,14 @@ imath::CVarVector CPositionFromImageSupplierComp::Position::GetComponentValue(Va
 			return m_values;
 
 		case VTI_POSITION:
-			I_ASSERT (m_values.GetElementsCount() >= 2);
-				
-			return i2d::CVector2d(m_values.GetElement(0), m_values.GetElement(1));
+			if (m_values.GetElementsCount() >= 2){
+				return i2d::CVector2d(m_values.GetElement(0), m_values.GetElement(1));
+			}
 
 		case VTI_RADIUS:
-			I_ASSERT(m_values.GetElementsCount() >= 3);
-				
-			return imath::CVarVector(1, m_values.GetElement(2));
+			if (m_values.GetElementsCount() >= 3){
+				return imath::CVarVector(1, m_values.GetElement(2));
+			}
 	}
 
 	return imath::CVarVector();
