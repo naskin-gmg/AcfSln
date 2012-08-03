@@ -4,7 +4,7 @@
 #include "iser/CXmlFileReadArchive.h"
 
 
-int main(int /*argc*/, char* argv[])
+int main(int /*argc*/, char* /*argv*/[])
 {
 	CPropertyObjectExampe myObject;
 
@@ -18,7 +18,6 @@ int main(int /*argc*/, char* argv[])
 	myObject.SetNumber(42);
 	myObject.SetText("bla bla bla");
 	myObject.SetRectangle(i2d::CRectangle(42, 42, 1000, 1000));
-
 
 	// write changed object to the file:
 	iser::CXmlFileWriteArchive archive2("MyModifiedFile.xml");

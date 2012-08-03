@@ -18,10 +18,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\Bin\$(ConfigurationName)VC9\Tutorial"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
 			UseOfATL="2"
 			CharacterSet="1"
 			>
@@ -98,10 +97,9 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Bin/$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\Bin\$(ConfigurationName)VC9\Tutorial"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -139,10 +137,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfWin.lib AdobePDFL.lib IPP_JPEG.lib ippsmerged.lib ippsemerged.lib ippjmerged.lib ippjemerged.lib ippimerged.lib ippiemerged.lib ippcorel.lib Iphlpapi.lib Rpcrt4.lib"
+				AdditionalDependencies="AcfStd.lib iprop.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;"
-				IgnoreDefaultLibraryNames="libc.lib"
+				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				EntryPointSymbol="mainCRTStartup"
