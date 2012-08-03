@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2294
+          2413
         </Number>
         <Description>
           ACF
@@ -327,7 +327,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/VersionInfo
               </Value>
             </Data>
           </AttributeInfo>

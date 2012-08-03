@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2294
+          2413
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         SnapTaskGui
       </ComponentName>
       <X>
-        950
+        225
       </X>
       <X>
-        475
+        575
       </X>
       <Note>
         
@@ -35,10 +35,10 @@
         SimpleCircleFinderTaskGui
       </ComponentName>
       <X>
-        325
+        1000
       </X>
       <X>
-        475
+        575
       </X>
       <Note>
         
@@ -49,10 +49,10 @@
         Framework
       </ComponentName>
       <X>
-        625
+        600
       </X>
       <X>
-        375
+        400
       </X>
       <Note>
         
@@ -63,7 +63,7 @@
         SnapTask
       </ComponentName>
       <X>
-        300
+        225
       </X>
       <X>
         225
@@ -77,10 +77,10 @@
         ImageView
       </ComponentName>
       <X>
-        150
+        125
       </X>
       <X>
-        375
+        400
       </X>
       <Note>
         
@@ -91,7 +91,7 @@
         SimpleCircleFinderTask
       </ComponentName>
       <X>
-        950
+        1000
       </X>
       <X>
         225

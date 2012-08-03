@@ -61,6 +61,10 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 	const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(GetObjectPtr());
 	if (processingTimeProviderPtr != NULL){
 		ProcessingTimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
+		ProcessingTimeLabel->setVisible(true);
+	}
+	else{
+		ProcessingTimeLabel->setVisible(false);
 	}
 
 	if (AutoTestButton->isChecked()){

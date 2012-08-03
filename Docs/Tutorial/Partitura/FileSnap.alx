@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2410
         </Number>
         <Description>
           ACF
@@ -15,58 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
-        BitmapLoader
+        FileCamera
       </ComponentName>
       <X>
-        675
+        550
       </X>
       <X>
-        425
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileAcquisition
-      </ComponentName>
-      <X>
-        625
-      </X>
-      <X>
-        300
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParam
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        75
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSnapParamGui
-      </ComponentName>
-      <X>
-        750
-      </X>
-      <X>
-        75
+        225
       </X>
       <Note>
         
@@ -77,38 +35,10 @@
         Framework
       </ComponentName>
       <X>
-        925
+        900
       </X>
       <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParams
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <X>
-        75
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapParamsGui
-      </ComponentName>
-      <X>
-        975
-      </X>
-      <X>
-        75
+        375
       </X>
       <Note>
         

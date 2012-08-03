@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2374
+          2410
         </Number>
         <Description>
           ACF
@@ -24,7 +24,7 @@
         950
       </X>
       <X>
-        125
+        175
       </X>
       <Note>
         
@@ -35,10 +35,10 @@
         Caliper
       </ComponentName>
       <X>
-        325
+        350
       </X>
       <X>
-        125
+        550
       </X>
       <Note>
         
@@ -52,7 +52,7 @@
         950
       </X>
       <X>
-        275
+        550
       </X>
       <Note>
         
@@ -63,10 +63,10 @@
         CircleFindProcessor
       </ComponentName>
       <X>
-        650
+        350
       </X>
       <X>
-        125
+        175
       </X>
       <Note>
         

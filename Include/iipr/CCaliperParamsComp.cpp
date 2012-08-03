@@ -13,6 +13,8 @@ void CCaliperParamsComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	istd::CChangeNotifier notifier(this);
+
 	SetWeightThreshold(*m_weightThresholdAttrPtr);
 	SetPolarityMode(*m_polarityModeAttrPtr);
 	SetDirectionMode(*m_directionModeAttrPtr);
