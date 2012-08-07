@@ -38,6 +38,11 @@ class CEdgeLinesTestGuiComp:
 
 	 CEdgeLinesTestGuiComp();
 protected:
+	/**
+		Fill the container with random lines.
+	*/
+	void GenerateLines();
+
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
  
@@ -52,7 +57,6 @@ private:
 	//I_REF(IModel, m_container); 
  
 	imod::TModelWrap<iedge::CEdgeLine::Container> m_model;
-	void initModel();
 };
 
 

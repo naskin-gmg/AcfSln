@@ -11,33 +11,17 @@ namespace edgetest
 {
 
 
+CEdgeLinesTestGuiComp::CEdgeLinesTestGuiComp()
+{
+	GenerateLines();
+}
+
+
 // protected methods
 
-// reimplemented (iqt2d::TViewExtenderCompBase)
-
-CEdgeLinesTestGuiComp::CEdgeLinesTestGuiComp(){
-	initModel();
-}
-
-void CEdgeLinesTestGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
+void CEdgeLinesTestGuiComp::GenerateLines()
 {
-	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape;
-	if (shapePtr != NULL){
-		shapePtr->AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
-
-		result.PushBack(shapePtr);
-
-		m_model.AttachObserver(shapePtr);
-	}
-}
-
-
-void CEdgeLinesTestGuiComp::initModel(){
-//clean the container
-
 	m_model.Reset();
-
-//fill the container with random lines
 
 	for(int c=0; c<2; c++){
 		iedge::CEdgeLine line;
@@ -58,13 +42,26 @@ void CEdgeLinesTestGuiComp::initModel(){
 }
 
 
+// reimplemented (iqt2d::TViewExtenderCompBase)
+
+void CEdgeLinesTestGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
+{
+	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape;
+	if (shapePtr != NULL){
+		shapePtr->AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
+
+		result.PushBack(shapePtr);
+
+		m_model.AttachObserver(shapePtr);
+	}
+}
+
+
 // private slots
 
 void CEdgeLinesTestGuiComp::on_CreateLinesButton_clicked()
 {
-    // QMessageBox::information(this->GetQtWidget(),"HelloWorld","HelloWorld");
-
-	initModel();
+	GenerateLines();
 }
 
 
