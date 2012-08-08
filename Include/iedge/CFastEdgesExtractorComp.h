@@ -111,7 +111,7 @@ private:
 					ExtNode* neightborNodePtr,
 					ExtNode* nodePtr);
 
-	static void AddPointToContour(
+	static ExtNode* AddPointToContour(
 				double posX,
 				double posY,
 				double derivativeX,

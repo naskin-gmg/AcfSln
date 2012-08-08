@@ -203,6 +203,8 @@ __forceinline void CFastEdgesExtractorComp::TryConnectElements(
 							((neightborNodePtr->prevPtr == NULL) || (neightborNodePtr->prevWeight < connectionWeight))){
 				// disconnect neighbor from previous connection
 				if (neightborNodePtr->prevPtr != NULL){
+					Q_ASSERT(neightborNodePtr->prevPtr->nextPtr == neightborNodePtr);
+
 					neightborNodePtr->prevPtr->nextPtr = NULL;
 				}
 
@@ -219,6 +221,8 @@ __forceinline void CFastEdgesExtractorComp::TryConnectElements(
 							((neightborNodePtr->nextPtr == NULL) || (neightborNodePtr->nextWeight < connectionWeight))){
 				// disconnect neighbor from previous connection
 				if (neightborNodePtr->nextPtr != NULL){
+					Q_ASSERT(neightborNodePtr->nextPtr->prevPtr == neightborNodePtr);
+
 					neightborNodePtr->nextPtr->prevPtr = NULL;
 				}
 
@@ -233,7 +237,7 @@ __forceinline void CFastEdgesExtractorComp::TryConnectElements(
 }
 
 
-__forceinline void CFastEdgesExtractorComp::AddPointToContour(
+__forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPointToContour(
 				double posX,
 				double posY,
 				double derivativeX,
@@ -249,6 +253,10 @@ __forceinline void CFastEdgesExtractorComp::AddPointToContour(
 		nodePtr->position = i2d::CVector2d(posX, posY);
 		nodePtr->derivative = i2d::CVector2d(derivativeX, derivativeY);
 		nodePtr->weight = weight;
+		nodePtr->prevPtr = NULL;
+		nodePtr->nextPtr = NULL;
+		nodePtr->prevWeight = 0;
+		nodePtr->nextWeight = 0;
 
 		// try connects with all already calculated neighbours
 		TryConnectElements(destLine1[x - 1].listReference, nodePtr);
@@ -257,7 +265,7 @@ __forceinline void CFastEdgesExtractorComp::AddPointToContour(
 		TryConnectElements(destLine2[x - 1].listReference, nodePtr);
 	}
 
-	destLine2[x].listReference = nodePtr;
+	return nodePtr;
 }
 
 
@@ -277,7 +285,7 @@ __forceinline void CFastEdgesExtractorComp::CalcFullDerivative(
 	PixelDescriptor& pixelDescr = destLine[x];
 
 	pixelDescr.dx = qint16(dx);
-	pixelDescr.dy = qint16(dx);
+	pixelDescr.dy = qint16(dy);
 	pixelDescr.dirLength2 = quint32(dx * dx + dy * dy);
 }
 
@@ -302,10 +310,13 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 			int x,
 			int y,
 			quint32 threshold2Factor,
-			InternalContainer& container){
+			InternalContainer& container)
+{
 	CalcFullDerivative(sourceLine1, sourceLine2, destLine3, x + 1);	// shift 1 line
 
-	const PixelDescriptor& pixelDescriptor = destLine2[x];
+	PixelDescriptor& pixelDescriptor = destLine2[x];
+
+	ExtNode* nodePtr = NULL;
 
 	quint32 dirLength2 = pixelDescriptor.dirLength2;
 
@@ -331,9 +342,9 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 			double derivative2 = weight - std::sqrt(double(rightPixelDescriptor.dirLength2));
 			double shiftX = derivative1 / (derivative1 + derivative2);
 
-			AddPointToContour(
+			nodePtr = AddPointToContour(
 						x + shiftX, y + 0.5,
-						pixelDescriptor.dx, pixelDescriptor.dy,
+						pixelDescriptor.dx / THRESHOLD_FACTOR, pixelDescriptor.dy / THRESHOLD_FACTOR,
 						weight / THRESHOLD_FACTOR,
 						destLine1, destLine2,
 						x, y,
@@ -345,7 +356,7 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 			double derivative2 = weight - std::sqrt(double(bottomPixelDescriptor.dirLength2));
 			double shiftY = derivative1 / (derivative1 + derivative2);
 
-			AddPointToContour(
+			nodePtr = AddPointToContour(
 						x + 0.5, y + shiftY,
 						pixelDescriptor.dx, pixelDescriptor.dy,
 						weight / THRESHOLD_FACTOR,
@@ -354,6 +365,8 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 						container);
 		}
 	}
+
+	pixelDescriptor.listReference = nodePtr;
 }
 
 
