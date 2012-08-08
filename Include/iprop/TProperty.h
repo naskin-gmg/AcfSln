@@ -18,6 +18,10 @@ namespace iprop
 
 /**
 	Template implementation of an atomic property.
+	The type of the template argument must be supported by archive implementation.
+	\sa IArchive::Process
+	If you want to define a property of the complex, already serializable object type,
+	please use TObjectProperty class
 */
 template <typename Value>
 class TProperty: public CPropertyBase

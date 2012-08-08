@@ -16,7 +16,8 @@ namespace iprop
 
 
 /**
-	Template implementation of an atomic property.
+	Property implementation for serializable objects.
+	This implementation can be also interpreted as a property "wrapper" for any serializeable object.
 */
 template <typename Value>
 class TObjectProperty: public CPropertyBase
