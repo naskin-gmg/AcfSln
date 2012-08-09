@@ -34,6 +34,8 @@ int CFileAcquisitionComp::DoProcessing(
 			istd::IChangeable* outputPtr,
 			iproc::IProgressManager* /*progressManagerPtr*/)
 {
+	QMutexLocker lock(&m_lock);
+
 	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_parameterIdAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_maxCachedDirectoriesAttrPtr.IsValid());	// obligatory attribute
