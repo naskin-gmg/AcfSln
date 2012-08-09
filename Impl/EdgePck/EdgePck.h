@@ -10,6 +10,8 @@
 #include "iedge/CFastEdgesExtractorComp.h"
 #include "iedge/CExtractedEdgeLinesSupplierComp.h"
 
+#include "iedgegui/CEdgeLinesSupplierGuiComp.h"
+
 
 /**
 	Base system-undependent general package.
@@ -22,6 +24,7 @@ typedef icomp::TMakeComponentWrap<iedge::CEdgeLine::Container, iedge::CEdgeLine:
 typedef iedge::CEdgesReductorComp EdgesReductor;
 typedef iedge::CFastEdgesExtractorComp FastEdgesExtractor;
 typedef icomp::TModelCompWrap<iedge::CExtractedEdgeLinesSupplierComp> ExtractedEdgeLinesSupplier;
+typedef iedgegui::CEdgeLinesSupplierGuiComp EdgeLinesSupplierGui;
 
 
 } // namespace EdgePck

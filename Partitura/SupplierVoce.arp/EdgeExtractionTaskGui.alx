@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2433
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="3">
+    <Element>
+      <ComponentName>
+        ComposedParamsSetGui
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ThresholdParamGui
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        625
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        EdgeLinesSupplierGui
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+</Acf>
