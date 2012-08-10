@@ -302,13 +302,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              BitmapSupplier
+              BitmapProvider
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              BitmapSupplier
+              BitmapProvider
             </ExportId>
             <Data>
               <IsEnabled>
@@ -318,7 +318,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CalibrationSupplier
+              CalibrationProvider
             </Id>
             <Type>
               Reference

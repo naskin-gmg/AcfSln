@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2413
+          2428
         </Number>
         <Description>
           ACF
@@ -601,8 +601,13 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Values count="1">
+                <Value>
+                  LogDock
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -821,7 +826,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="3">
+    <Component>
+      <ExportedId>
+        ApplicationInfo
+      </ExportedId>
+      <ComponentId>
+        StandaloneApp/ApplicationInfo
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         LogDock

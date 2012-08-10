@@ -154,13 +154,13 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              BitmapSupplier
+              BitmapProvider
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              BitmapSupplier
+              BitmapProvider
             </ExportId>
             <Data>
               <IsEnabled>

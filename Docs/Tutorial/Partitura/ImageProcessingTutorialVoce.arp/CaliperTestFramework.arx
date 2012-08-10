@@ -216,7 +216,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              BitmapSupplier
+              BitmapProvider
             </Id>
             <Type>
               Reference

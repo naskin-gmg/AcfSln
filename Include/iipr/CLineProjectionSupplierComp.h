@@ -29,7 +29,7 @@ public:
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IDataSequenceProvider);
-		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
+		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_projectionProcessorCompPtr, "ProjectionProcessor", "Processor for projection data generation", true, "ProjectionProcessor");
 	I_END_COMPONENT;
