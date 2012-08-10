@@ -432,7 +432,7 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginMultiTag(nodesTag, nodeTag, nodesCount);
 		for (		Nodes::Iterator iter = m_edgeLines.begin();
-					iter != m_edgeLines.begin();
+					iter != m_edgeLines.end();
 					++iter){
 			CEdgeNode& node = *iter;
 

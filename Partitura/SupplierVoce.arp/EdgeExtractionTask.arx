@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2414
+          2428
         </Number>
         <Description>
           ACF
@@ -15,7 +15,28 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="8">
+    <Element>
+      <Id>
+        Bitmap
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        Bitmap
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         ComposedParamsSet
@@ -48,9 +69,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   ThresholdParam
+                </Value>
+                <Value>
+                  SmoothParams
                 </Value>
               </Values>
             </Data>
@@ -69,9 +93,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   EdgeThreshold
+                </Value>
+                <Value>
+                  SmoothFilter
                 </Value>
               </Values>
             </Data>
@@ -121,23 +148,26 @@
               Reference
             </Type>
             <ExportId>
-              BitmapProvider
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                ProcessedBitmapSupplier
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CalibrationSupplier
+              CalibrationProvider
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              CalibrationSupplier
+              CalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>
@@ -287,6 +317,274 @@
               </IsEnabled>
               <Value>
                 EdgeThreshold
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ProcessedBitmapSupplier
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        ProcessedBitmapSupplier
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              BitmapFactory
+            </Id>
+            <Type>
+              Factory
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Bitmap
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              BitmapProcessor
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RectImageSmoothProcessor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              BitmapProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              BitmapProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DiagnosticName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgeDetectionFilter
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ComposedParamsSet
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RectImageSmoothProcessor
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        RectImageSmoothProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ParamsId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SmoothFilter
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SmoothParams
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Constraints
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RectImageSmoothProcessor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Values
+            </Id>
+            <Type>
+              Real[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  3
+                </Value>
+                <Value>
+                  3
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ValuesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
               </Value>
             </Data>
           </AttributeInfo>

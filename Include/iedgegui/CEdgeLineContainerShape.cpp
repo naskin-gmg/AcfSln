@@ -87,7 +87,6 @@ bool CEdgeLineContainerShape::OnAttached(imod::IModel* modelPtr)
 
 i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 {
-
 	I_ASSERT(IsDisplayConnected());
 
 	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());

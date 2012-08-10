@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2433
+          2428
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
         ComposedParamsSetGui
@@ -25,6 +25,20 @@
       </X>
       <X>
         475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SmoothParamsGui
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        625
       </X>
       <Note>
         

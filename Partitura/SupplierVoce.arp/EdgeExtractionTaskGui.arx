@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2433
+          2428
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="4">
     <Element>
       <Id>
         ComposedParamsSetGui
@@ -48,9 +48,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   ThresholdParamGui
+                </Value>
+                <Value>
+                  SmoothParamsGui
                 </Value>
               </Values>
             </Data>
@@ -69,9 +72,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   EdgeThreshold
+                </Value>
+                <Value>
+                  SmoothFilter
                 </Value>
               </Values>
             </Data>
@@ -196,6 +202,27 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SmoothParamsGui
+      </Id>
+      <PackageId>
+        QtMeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

@@ -19,6 +19,8 @@ const CEdgeLine::Container* CExtractedEdgeLinesSupplierComp::GetEdgesContainer()
 
 int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
 {
+	result.Reset();
+
 	if (m_bitmapProviderCompPtr.IsValid() && m_edgesExtractorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (		(bitmapPtr != NULL) &&

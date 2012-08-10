@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2426
+          2428
         </Number>
         <Description>
           ACF
@@ -68,7 +68,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -92,26 +92,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              SlaveSceneExtender
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapTaskGui
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

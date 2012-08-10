@@ -62,13 +62,14 @@ QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
 
 void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	iedgegui::CEdgeLineContainerShape* lineContainerShapePtr = new iedgegui::CEdgeLineContainerShape(); 
+	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape(); 
 
-	if(lineContainerShapePtr != NULL){
-		
-		m_foundModel.AttachObserver(lineContainerShapePtr);
+	if (shapePtr != NULL){
+		shapePtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 
-		result.PushBack(lineContainerShapePtr);
+		m_foundModel.AttachObserver(shapePtr);
+
+		result.PushBack(shapePtr);
 	}	
 }
 
@@ -97,31 +98,15 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 		if (workStatus == iproc::ISupplier::WS_OK){
 			iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(supplierPtr);
 			if (providerPtr != NULL ){
-				const iedge::CEdgeLine::Container* resultValue = providerPtr->GetEdgesContainer();	
+				const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
-				m_foundModel.Reset();
-
-				int numLines = resultValue->GetItemsCount();
-
-				for(int lineIndex = 0; lineIndex < numLines; lineIndex++){
-					const iedge::CEdgeLine& line = resultValue->GetAt(lineIndex);					
-					m_foundModel.PushBack(iedge::CEdgeLine(line));
+				if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
+					m_foundModel.Reset();
 				}
-				
 			}
 		}
 	}
 		
-	bool isResultVisible = true;
-
-	int shapesCount = m_foundModel.GetObserverCount();
-	for (int i = 0; i < shapesCount; ++i){
-		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(m_foundModel.GetObserverPtr(i));
-		if (shapePtr != NULL){
-			shapePtr->SetVisible(isResultVisible);
-		}
-	}
-
 	UpdateAllViews();
 }
 

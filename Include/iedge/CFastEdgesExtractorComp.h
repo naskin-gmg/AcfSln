@@ -78,15 +78,14 @@ private:
 		mutable bool isExtracted;
 	};
 
-
 	struct PixelDescriptor
 	{
+		qint16 brightness;
 		qint16 dx;
 		qint16 dy;
 		quint32 dirLength2;
 		ExtNode* listReference;
 	};
-
 
 	class InternalContainer
 	{
@@ -108,8 +107,8 @@ private:
 
 	// static methods
 	static void TryConnectElements(
-					ExtNode* neightborNodePtr,
-					ExtNode* nodePtr);
+					PixelDescriptor& neightborPixel,
+					PixelDescriptor& pixel);
 
 	static ExtNode* AddPointToContour(
 				double posX,

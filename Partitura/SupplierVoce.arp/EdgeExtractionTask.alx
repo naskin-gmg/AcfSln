@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2414
+          2428
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
         ThresholdParam
@@ -35,10 +35,24 @@
         FastEdgesExtractor
       </ComponentName>
       <X>
-        850
+        900
       </X>
       <X>
         325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RectImageSmoothProcessor
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <X>
+        200
       </X>
       <Note>
         
@@ -60,6 +74,20 @@
     </Element>
     <Element>
       <ComponentName>
+        ProcessedBitmapSupplier
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         ComposedParamsSet
       </ComponentName>
       <X>
@@ -67,6 +95,34 @@
       </X>
       <X>
         450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Bitmap
+      </ComponentName>
+      <X>
+        200
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SmoothParams
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        575
       </X>
       <Note>
         
