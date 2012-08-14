@@ -163,6 +163,11 @@ I_EXPORT_COMPONENT(
 			"Bitmap supplier convert bitmap chanels into new bitmaps",
 			"Bitmap Color Separator Supplier Provider" IM_AUTHOR("\"Krzysztof Srodon\" \"Ryszard Mroczka\""));
 
+I_EXPORT_COMPONENT(
+			BitmapJoinerSupplier,
+			"Bitmap joiner from a multi-bitmap-provider",
+			"Bitmap Supplier Provider Join" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 
