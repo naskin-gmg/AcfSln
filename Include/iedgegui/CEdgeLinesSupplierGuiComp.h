@@ -21,7 +21,9 @@
 
 
 
-namespace iedgegui{
+namespace iedgegui
+{
+
 
 class CEdgeLinesSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierGuiComp>
 {
