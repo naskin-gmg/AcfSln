@@ -166,6 +166,8 @@ bool CPositionFromImageSupplierComp::Position::IsValueTypeSupported(ValueTypeId 
 
 		case VTI_RADIUS:
 			return (m_values.GetElementsCount() >= 3);
+		default:
+			break;
 	}
 
 	return false;
@@ -187,6 +189,8 @@ imath::CVarVector CPositionFromImageSupplierComp::Position::GetComponentValue(Va
 			if (m_values.GetElementsCount() >= 3){
 				return imath::CVarVector(1, m_values.GetElement(2));
 			}
+		default:
+			break;	
 	}
 
 	return imath::CVarVector();

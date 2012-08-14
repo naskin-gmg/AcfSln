@@ -55,6 +55,8 @@ bool CCaliperFeature::IsValueTypeSupported(ValueTypeId valueTypeId) const
 		case VTI_AUTO:
 		case VTI_WEIGHT:
 			return true;
+		default:
+			break;
 	}
 
 	return false;
@@ -71,6 +73,8 @@ imath::CVarVector CCaliperFeature::GetComponentValue(ValueTypeId valueTypeId) co
 		case VTI_WEIGHT:
 			retVal.SetElementsCount(1);
 			retVal.SetElement(0, m_weight);
+			break;
+		default:
 			break;
 	}
 
