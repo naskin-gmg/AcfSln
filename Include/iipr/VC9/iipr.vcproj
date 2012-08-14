@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorBitmapSeparatorSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolutionKernel2d.cpp"
 				>
 			</File>
@@ -336,6 +340,10 @@
 			</File>
 			<File
 				RelativePath="..\CCircleFindProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CColorBitmapSeparatorSupplierComp.h"
 				>
 			</File>
 			<File

@@ -158,6 +158,11 @@ I_EXPORT_COMPONENT(
 			"2D-convolution kernel",
 			"Convolution Kerlnel Filter" IM_AUTHOR("\"Kirill Lepskiy\"" "\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			ColorBitmapSeparatorSupplier,
+			"Bitmap supplier convert bitmap chanels into new bitmaps",
+			"Bitmap Color Separator Supplier Provider" IM_AUTHOR("\"Krzysztof Srodon\" \"Ryszard Mroczka\""));
+
 
 } // namespace IprPck
 

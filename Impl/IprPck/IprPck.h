@@ -38,6 +38,7 @@
 #include "iipr/CDifferenceBitmapSupplierComp.h"
 #include "iipr/CConvolutionProcessorComp.h"
 #include "iipr/CConvolutionKernel2d.h"
+#include "iipr/CColorBitmapSeparatorSupplierComp.h"
 
 
 /**
@@ -101,6 +102,8 @@ typedef icomp::TModelCompWrap<
 						iipr::IConvolutionKernel2d,
 						iser::ISerializable,
 						imath::ISampledFunction2d> > ConvolutionKernel2d;
+
+typedef icomp::TModelCompWrap<iipr::CColorBitmapSeparatorSupplierComp> ColorBitmapSeparatorSupplier;
 
 } // namespace IprPck
 
