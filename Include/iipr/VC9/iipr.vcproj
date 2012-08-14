@@ -154,6 +154,14 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CBitmapJoinerSupplierComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapOperations.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitmapProviderCacheComp.cpp"
 				>
 			</File>
@@ -314,6 +322,14 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CBitmapJoinerSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapOperations.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CBitmapProviderCacheComp.h"
 				>
