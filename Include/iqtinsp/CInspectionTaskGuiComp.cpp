@@ -441,6 +441,12 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 		m_tabWidgetPtr = NULL;
 	}
 
+	UnregisterAllModels();
+
+	m_tabToStackIndexMap.clear();
+	m_stackIndexToTabMap.clear();
+	m_tabToGuiIndexMap.clear();
+
 	BaseClass::OnGuiDestroyed();
 }
 

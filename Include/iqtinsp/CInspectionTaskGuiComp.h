@@ -126,6 +126,7 @@ private:
 	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
 	GuiMap m_tabToGuiIndexMap;		// map tab index to editor index
+
 	typedef QSet<imod::IModelEditor*> EditorsList;
 	EditorsList m_editorsList;
 
