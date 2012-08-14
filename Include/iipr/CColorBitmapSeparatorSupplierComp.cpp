@@ -23,8 +23,6 @@ int CColorBitmapSeparatorSupplierComp::GetBitmapsCount() const
 }
 
 
-// reimplemented (iipr::IMultiBitmapProvider)
-
 const iimg::IBitmap* CColorBitmapSeparatorSupplierComp::GetBitmap(int bitmapIndex) const
 {
 	const ProductType* productPtr = GetWorkProduct();
@@ -47,11 +45,9 @@ const iimg::IBitmap* CColorBitmapSeparatorSupplierComp::GetBitmap(int bitmapInde
 }
 
 
-// reimplemented (iipr::IMultiBitmapProvider)
-
-const i2d::ITransformation2d* CColorBitmapSeparatorSupplierComp::GetLogTransform(int bitmapIndex) const
+const i2d::ITransformation2d* CColorBitmapSeparatorSupplierComp::GetLogTransform(int /*bitmapIndex*/) const
 {
-	return NULL;
+	return m_calibrationCompPtr.GetPtr();
 }
 
 
@@ -65,7 +61,7 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
-		SendErrorMessage(0, "Input image could not be provided", "ColorBitmapSeparatorSupplier");
+		SendErrorMessage(0, "Input image could not be provided");
 
 		return WS_ERROR;
 	}
@@ -83,52 +79,45 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 	istd::CIndex2d imageSize = bitmapPtr->GetImageSize();	
 
 	//create red bitmap
-	iimg::IBitmap* rOutputBitmapPtr = m_bitmapCompFact.CreateInstance();
-	
-	if(rOutputBitmapPtr == NULL){
+	istd::TDelPtr<iimg::IBitmap> rOutputBitmapPtr(m_bitmapCompFact.CreateInstance());
+	if (!rOutputBitmapPtr.IsValid()){
 		return WS_ERROR;
 	}
 
-	if(!rOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
+	if (!rOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 		return WS_ERROR;
 	}
 
 	//create green bitmap
-	iimg::IBitmap* gOutputBitmapPtr = m_bitmapCompFact.CreateInstance();
-	
-	if(gOutputBitmapPtr == NULL){
+	istd::TDelPtr<iimg::IBitmap> gOutputBitmapPtr(m_bitmapCompFact.CreateInstance());
+	if (!gOutputBitmapPtr.IsValid()){
 		return WS_ERROR;
 	}
 
-	if(!gOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
+	if (!gOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 		return WS_ERROR;
 	}
 
 	//create blue bitmap
-	iimg::IBitmap* bOutputBitmapPtr = m_bitmapCompFact.CreateInstance();
-	
-	if(bOutputBitmapPtr == NULL){
+	istd::TDelPtr<iimg::IBitmap> bOutputBitmapPtr(m_bitmapCompFact.CreateInstance());
+	if (!bOutputBitmapPtr.IsValid()){
 		return WS_ERROR;
 	}
 
-	if(!bOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
+	if (!bOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 		return WS_ERROR;
 	}
 
 	//create alpha bitmap
-	iimg::IBitmap* aOutputBitmapPtr = NULL;
-	
-	if(bitmapPtr->GetPixelFormat() == iimg::IBitmap::PF_RGBA){
-
-		if(m_createBitmapForAlpha.IsValid() && m_createBitmapForAlpha.GetAttributePtr()->GetValue()){
-
-			aOutputBitmapPtr = m_bitmapCompFact.CreateInstance();
-			
-			if(aOutputBitmapPtr == NULL){
+	istd::TDelPtr<iimg::IBitmap> aOutputBitmapPtr;
+	if (bitmapPtr->GetPixelFormat() == iimg::IBitmap::PF_RGBA){
+		if (*m_useAlphaChannelAttrPtr){
+			aOutputBitmapPtr.SetPtr(m_bitmapCompFact.CreateInstance());
+			if (!aOutputBitmapPtr.IsValid()){
 				return WS_ERROR;
 			}
 
-			if(!aOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
+			if (!aOutputBitmapPtr->CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 				return WS_ERROR;
 			}
 		}
@@ -144,7 +133,7 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 		quint8* bOutputLinePtr = (quint8*)bOutputBitmapPtr->GetLinePtr(y);
 
 		quint8* aOutputLinePtr = NULL;
-		if(aOutputBitmapPtr != NULL){
+		if (aOutputBitmapPtr.IsValid()){
 			aOutputLinePtr = (quint8*)aOutputBitmapPtr->GetLinePtr(y);
 		}
 
@@ -155,18 +144,18 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 			gOutputLinePtr[x] = pixelPtr[1];
 			bOutputLinePtr[x] = pixelPtr[2];
 
-			if(aOutputLinePtr != NULL){
+			if (aOutputLinePtr != NULL){
 				aOutputLinePtr[x] = pixelPtr[3];
 			}
 		}
 	}
 
-	result.PushBack(rOutputBitmapPtr);
-	result.PushBack(gOutputBitmapPtr);
-	result.PushBack(bOutputBitmapPtr);
+	result.PushBack(rOutputBitmapPtr.PopPtr());
+	result.PushBack(gOutputBitmapPtr.PopPtr());
+	result.PushBack(bOutputBitmapPtr.PopPtr());
 
-	if(aOutputBitmapPtr != NULL){
-		result.PushBack(aOutputBitmapPtr);
+	if (aOutputBitmapPtr != NULL){
+		result.PushBack(aOutputBitmapPtr.PopPtr());
 	}
 
 	return WS_OK;
@@ -183,10 +172,11 @@ void CColorBitmapSeparatorSupplierComp::OnComponentCreated()
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
 	}
 
-	if (m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+	if (m_calibrationModelCompPtr.IsValid()){
+		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
 	}
 }
+
 
 } // namespace iipr
 

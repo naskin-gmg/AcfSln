@@ -31,7 +31,9 @@ public:
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
-		I_ASSIGN(m_createBitmapForAlpha, "BitmapForAlpha", "If enabled and image format of bitmap is RGBA, create bitmap for alpha chanel", false, false);		
+		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
+		I_ASSIGN_TO(m_calibrationModelCompPtr, m_calibrationCompPtr, false);
+		I_ASSIGN(m_useAlphaChannelAttrPtr, "UseAlphaChannel", "If enabled and image format of bitmap is RGBA, create bitmap for alpha chanel", true, false);		
 	I_END_COMPONENT;
 
 protected:
@@ -39,11 +41,7 @@ protected:
 
 	// reimplemented (iipr::IMultiBitmapProvider)
 	virtual int GetBitmapsCount() const;
-
-	// reimplemented (iipr::IMultiBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
-
-	// reimplemented (iipr::IMultiBitmapProvider)
 	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const;	
 
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -58,7 +56,10 @@ private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 
-	I_ATTR(bool, m_createBitmapForAlpha);
+	I_REF(i2d::ITransformation2d, m_calibrationCompPtr);
+	I_REF(imod::IModel, m_calibrationModelCompPtr);
+
+	I_ATTR(bool, m_useAlphaChannelAttrPtr);
 };
 
 
