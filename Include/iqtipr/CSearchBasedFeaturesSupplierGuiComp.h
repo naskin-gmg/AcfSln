@@ -54,23 +54,9 @@ protected Q_SLOTS:
 	void on_SaveParamsButton_clicked();
 
 protected:
-	class ParamsObserver: public imod::CSingleModelObserverBase
-	{
-	public:
-		ParamsObserver(CSearchBasedFeaturesSupplierGuiComp* parentPtr);
-
-		using imod::CSingleModelObserverBase::EnsureModelDetached;
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CSearchBasedFeaturesSupplierGuiComp& m_parent;
-	};
-
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
+	virtual void OnSupplierParamsChanged();
 
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
@@ -82,7 +68,6 @@ protected:
 
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 	// reimplemented (icomp::IComponentBase)
 	virtual void OnComponentDestroyed();
@@ -105,8 +90,6 @@ private:
 	typedef istd::TPointerVector<VisualObject> VisualObjects;
 
 	VisualObjects m_visualPositions;
-
-	ParamsObserver m_paramsObserver;
 
 	iview::IShapeView* m_lastViewPtr;
 };

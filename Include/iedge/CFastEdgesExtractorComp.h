@@ -11,14 +11,11 @@
 #include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
-// QSF includes
 #include "iedge/IEdgesExtractor.h"
-
 
 
 namespace iedge
 {
-
 
 
 class CFastEdgesExtractorComp:

@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 
-// QSF includes
+// ACF-Solutions includes
 #include "iedge/CEdgeLine.h"
 
 

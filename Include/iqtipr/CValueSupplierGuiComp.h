@@ -34,31 +34,15 @@ public:
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
 
-	CValueSupplierGuiComp();
-
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 
 protected:
-	class ParamsObserver: public imod::CSingleModelObserverBase
-	{
-	public:
-		ParamsObserver(CValueSupplierGuiComp* parentPtr);
-
-		using imod::CSingleModelObserverBase::EnsureModelDetached;
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CValueSupplierGuiComp& m_parent;
-	};
-
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
+	virtual void OnSupplierParamsChanged();
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
@@ -78,8 +62,6 @@ private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
 	imod::TModelWrap<i2d::CCircle> m_foundModel;
-
-	ParamsObserver m_paramsObserver;
 };
 
 

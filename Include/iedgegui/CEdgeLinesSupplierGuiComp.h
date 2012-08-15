@@ -36,31 +36,15 @@ public:
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
 
-	CEdgeLinesSupplierGuiComp();
-
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
 
 protected:
-	class ParamsObserver: public imod::CSingleModelObserverBase
-	{
-	public:
-		ParamsObserver(CEdgeLinesSupplierGuiComp* parentPtr);
-
-		using imod::CSingleModelObserverBase::EnsureModelDetached;
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CEdgeLinesSupplierGuiComp& m_parent;
-	};
-
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
+	virtual void OnSupplierParamsChanged();
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
@@ -73,16 +57,10 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
-	// reimplemented (icomp::IComponentBase)
-	virtual void OnComponentDestroyed();
-
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
-	//imod::TModelWrap<i2d::CCircle> m_foundModel;
 	imod::TModelWrap<iedge::CEdgeLine::Container> m_foundModel;
-
-	ParamsObserver m_paramsObserver;
 };
 
 }//namespace iedgegui

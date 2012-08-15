@@ -6,7 +6,7 @@
 #include "iimg/IBitmap.h"
 #include "iproc/IProcessor.h"
 
-// QSF includes
+// ACF-Solutions includes
 #include "iedge/CEdgeLine.h"
 
 

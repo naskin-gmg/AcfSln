@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2428
+          2449
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        ComposedParamsSetGui
+        EdgeExtractorParamsGui
       </ComponentName>
       <X>
         550
@@ -49,7 +49,7 @@
         ThresholdParamGui
       </ComponentName>
       <X>
-        550
+        250
       </X>
       <X>
         625

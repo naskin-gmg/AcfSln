@@ -6,24 +6,17 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iview/CInteractiveCircleShape.h"
-#include "iview/CInteractivePinShape.h"
-
 #include "iproc/IElapsedTimeProvider.h"
 
+// ACF-Solutions includes
 #include "iedge/IEdgeLinesProvider.h"
-
-// QSF includes
 #include "iedge/CEdgeLine.h"
 
 #include "iedgegui/CEdgeLineContainerShape.h"
 
-namespace iedgegui{
 
-CEdgeLinesSupplierGuiComp::CEdgeLinesSupplierGuiComp()
-:	m_paramsObserver(this)
+namespace iedgegui
 {
-}
 
 
 // protected slots
@@ -55,6 +48,14 @@ QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
 	I_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
+}
+
+
+void CEdgeLinesSupplierGuiComp::OnSupplierParamsChanged()
+{
+	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
+		DoTest();
+	}
 }
 
 
@@ -106,6 +107,11 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 			}
 		}
 	}
+
+	iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(supplierPtr);
+	if (processingTimeProviderPtr != NULL){
+		ProcessingTimeLabel->setText(QString(tr("Edges found in %1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
+	}
 		
 	UpdateAllViews();
 }
@@ -116,8 +122,6 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 void CEdgeLinesSupplierGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
-
-	ProcessingTimeLabel->setVisible(false);
 
 	if (m_intermediateResultsGuiCompPtr.IsValid()){
 		m_intermediateResultsGuiCompPtr->CreateGui(IntResultsFrame);
@@ -139,36 +143,6 @@ void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
 	BaseClass::OnGuiDestroyed();
 }
 
-
-// reimplemented (icomp::IComponentBase)
-
-void CEdgeLinesSupplierGuiComp::OnComponentDestroyed()
-{
-	m_paramsObserver.EnsureModelDetached();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
-// public methods of embedded class ParamsObserver
-
-CEdgeLinesSupplierGuiComp::ParamsObserver::ParamsObserver(CEdgeLinesSupplierGuiComp* parentPtr)
-:	m_parent(*parentPtr)
-{
-	I_ASSERT(parentPtr != NULL);
-}
-
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CEdgeLinesSupplierGuiComp::ParamsObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	if (		((updateFlags & istd::IChangeable::CF_MODEL) != 0) &&
-				m_parent.IsGuiCreated() &&
-				m_parent.AutoUpdateButton->isChecked()){
-		m_parent.DoTest();
-	}
-}
 
 }//Namespace iedgegui
 

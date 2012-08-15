@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2428
+          2449
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
   <ElementsList count="4">
     <Element>
       <Id>
-        ComposedParamsSetGui
+        EdgeExtractorParamsGui
       </Id>
       <PackageId>
         QtGuiPck
@@ -166,7 +166,7 @@
                 true
               </IsEnabled>
               <Value>
-                ComposedParamsSetGui
+                EdgeExtractorParamsGui
               </Value>
             </Data>
           </AttributeInfo>

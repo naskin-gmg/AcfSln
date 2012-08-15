@@ -11,6 +11,7 @@
 
 // ACF-Solutions includes
 #include "imeas/INumericValueProvider.h"
+
 #include "iipr/CSearchFeature.h"
 
 
@@ -19,8 +20,7 @@ namespace iqtipr
 
 
 CSearchBasedFeaturesSupplierGuiComp::CSearchBasedFeaturesSupplierGuiComp()
-:	m_paramsObserver(this),
-	m_lastViewPtr(NULL)
+	:m_lastViewPtr(NULL)
 {
 }
 
@@ -54,6 +54,14 @@ QWidget* CSearchBasedFeaturesSupplierGuiComp::GetParamsWidget() const
 	I_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
+}
+
+
+void CSearchBasedFeaturesSupplierGuiComp::OnSupplierParamsChanged()
+{
+	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
+		DoTest();
+	}
 }
 
 
@@ -194,11 +202,6 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiCreated()
 }
 
 
-void CSearchBasedFeaturesSupplierGuiComp::OnGuiDestroyed()
-{	
-	BaseClass::OnGuiDestroyed();
-}
-
 
 // reimplemented (icomp::IComponentBase)
 
@@ -232,27 +235,6 @@ void CSearchBasedFeaturesSupplierGuiComp::DisconnectShapes(iview::IShapeView& vi
 		I_ASSERT(objectPtr != NULL);
 
 		view.DisconnectShape(objectPtr->shape.GetPtr());
-	}
-}
-
-
-// public methods of embedded class ParamsObserver
-
-CSearchBasedFeaturesSupplierGuiComp::ParamsObserver::ParamsObserver(CSearchBasedFeaturesSupplierGuiComp* parentPtr)
-:	m_parent(*parentPtr)
-{
-	I_ASSERT(parentPtr != NULL);
-}
-
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CSearchBasedFeaturesSupplierGuiComp::ParamsObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	if (		((updateFlags & istd::IChangeable::CF_MODEL) != 0) &&
-				m_parent.IsGuiCreated() &&
-				m_parent.AutoUpdateButton->isChecked()){
-		m_parent.DoTest();
 	}
 }
 

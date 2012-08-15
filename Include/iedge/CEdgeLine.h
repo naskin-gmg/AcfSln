@@ -8,7 +8,7 @@
 #include "i2d/CPolyline.h"
 #include "i2d/CAffine2d.h"
 
-// QSF includes
+// ACF-Solutions includes
 #include "iedge/CEdgeNode.h"
 
 
