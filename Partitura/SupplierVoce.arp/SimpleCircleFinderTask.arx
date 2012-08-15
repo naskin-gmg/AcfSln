@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2415
+          2447
         </Number>
         <Description>
           ACF
@@ -424,7 +424,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         i2d::ICalibrationProvider
@@ -435,7 +435,23 @@
     </Interface>
     <Interface>
       <InterfaceId>
+        imeas::INumericValueProvider
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
         imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iproc::IElapsedTimeProvider
       </InterfaceId>
       <ComponentId>
         PositionTask
