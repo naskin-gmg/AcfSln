@@ -178,6 +178,7 @@ bool CBitmapOperations::CombineBitmaps(
 						case CM_AVERAGE:
 							if (weghtsPtr == NULL){
 								outputPixelComponentValue += *inputPixelPtr;
+								weightSum += 1.0;
 							}
 							else{
 								double weight = weghtsPtr->GetElement(inputBitmapIndex);

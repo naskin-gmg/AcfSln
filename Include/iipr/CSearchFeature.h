@@ -41,8 +41,8 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	double m_angle;
 	i2d::CVector2d m_scale;
+	double m_angle;
 	int m_index;
 	QString m_id;
 	mutable i2d::CAffineTransformation2d m_transformation;
