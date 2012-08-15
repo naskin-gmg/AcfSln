@@ -46,13 +46,6 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		if (m_regionCalibrationProviderCompPtr.IsValid()){
 			pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
 		}
-		else{
-			// Try to get calibration direct from bitmap:
-			const i2d::ICalibrationProvider* bitmapCalibrationpProviderPtr = dynamic_cast<const i2d::ICalibrationProvider* >(inputPtr);
-			if (bitmapCalibrationpProviderPtr != NULL){
-				pixelToLogicalTransformPtr = bitmapCalibrationpProviderPtr->GetCalibration();
-			}
-		}
 
 		if (pixelToLogicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
