@@ -48,6 +48,7 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 
 	result.first.Reset();
+	result.second.Reset();
 
 	if (!result.second.IsValid()){
 		result.second.SetPtr(m_bitmapCompFact.CreateInstance());

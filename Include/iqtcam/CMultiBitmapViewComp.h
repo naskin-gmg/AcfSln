@@ -45,9 +45,10 @@ public:
 	I_BEGIN_COMPONENT(CMultiBitmapViewComp);
 		I_ASSIGN(m_horizontalViewsAttrPtr, "HorizontalViewsCount", "Number of horizontal views", false, 1);
 		I_ASSIGN(m_verticalViewsAttrPtr, "VerticalViewsCount", "Number of vertical views", false, 1);
-		I_ASSIGN_MULTI_0(m_informationProvidersCompPtr, "InformationProviders", "Information providers", true);
+		I_ASSIGN_MULTI_0(m_informationProvidersCompPtr, "InformationProviders", "Information providers", false);
 		I_ASSIGN_TO(m_informationModelsCompPtr, m_informationProvidersCompPtr, true);
-		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", true);
+		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
+		I_ASSIGN(m_viewLabelPrefixAttrPtr, "ViewLabelPrefix", "Prefix used to title the single bitmap view", true, "Image");
 	I_END_COMPONENT;
 
 protected:
@@ -75,7 +76,7 @@ protected:
 		void UpdateImage(const iimg::IBitmap* bitmapPtr);
 
 		// called once at initialization stage, at this moment the model should be connected already.
-		virtual void Init();
+		virtual void Init(bool hasStatusInfo);
 		virtual void SetInspectionResult(int result);
 
 		// reimplemented (iqt2d::IViewProvider)
@@ -103,6 +104,7 @@ private:
 	I_MULTIREF(istd::IInformationProvider, m_informationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_informationModelsCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
+	I_ATTR(QString, m_viewLabelPrefixAttrPtr);
 	
 	int m_rowCount;
 	int m_columnCount;

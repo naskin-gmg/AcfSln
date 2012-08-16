@@ -67,8 +67,6 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(1, *m_horizontalViewsAttrPtr) : 1;
 	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(1, *m_verticalViewsAttrPtr) : 1;
 
-	int viewsCount = m_rowCount * m_columnCount;
-
 	QWidget* widgetPtr = GetQtWidget();
 	QGridLayout* layoutPtr = new QGridLayout(widgetPtr);
 	layoutPtr->setContentsMargins(0, 0, 0, 0);
@@ -77,21 +75,31 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	int viewIndex = 0;
 	for (int row = 0; row < m_rowCount; row++){
 		for (int col = 0; col < m_columnCount; col++){
-			if (viewIndex >= viewsCount){
-				break;
+			QString titlePrefix = *m_viewLabelPrefixAttrPtr;
+			
+			QString title;
+			if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
 			}
-
-			QString title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
+			else{
+				title = QString("%1 %2").arg(titlePrefix).arg(viewIndex + 1);
+			}
+			
 			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
 			layoutPtr->addWidget(viewPtr, row, col);
 			m_views.append(viewPtr);
 
-			imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
-			I_ASSERT(modelPtr != NULL);
-			bool isModelConnected = RegisterModel(modelPtr, viewIndex);
-			I_ASSERT(isModelConnected);
+			bool hasStatusInfo = false;
+			if (viewIndex < m_informationModelsCompPtr.GetCount()){
+				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
+				I_ASSERT(modelPtr != NULL);
+				
+				if (RegisterModel(modelPtr, viewIndex)){
+					hasStatusInfo = true;
+				}
+			}
 
-			viewPtr->Init();
+			viewPtr->Init(hasStatusInfo);
 
 			viewIndex++;
 		}
@@ -136,6 +144,9 @@ CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const
 	m_backgroundModel.AttachObserver(&m_backgroundShape);
 
 	m_console.GetViewRef().ConnectShape(&m_backgroundShape);
+
+	m_console.SetFitMode(iview::CConsoleBase::FM_BOTH);
+	m_console.SetZoomToFit(true);
 }
 
 
@@ -154,7 +165,7 @@ void CMultiBitmapViewComp::CSingleView::UpdateImage(const iimg::IBitmap* bitmapP
 }
 
 
-void CMultiBitmapViewComp::CSingleView::Init()
+void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
 {
 	// create default layout
 	QVBoxLayout* viewLayoutPtr = new QVBoxLayout;
@@ -164,7 +175,9 @@ void CMultiBitmapViewComp::CSingleView::Init()
 	viewLayoutPtr->addWidget(&m_console);
 
 	// add status label(s)
-	AddStatusItems(viewLayoutPtr);
+	if (hasStatusInfo){
+		AddStatusItems(viewLayoutPtr);
+	}
 }
 
 
