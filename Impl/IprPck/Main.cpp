@@ -139,6 +139,11 @@ I_EXPORT_COMPONENT(
 			"Provider Cache Bitmap" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			MultiBitmapProviderCacheComp,
+			"Multi bitmap provider cache object used to manage threading barrier for object supplier chain",
+			"Provider Cache Bitmap Multi" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
 			SearchParams,
 			"General parameter for a pattern search",
 			"Pattern Search Model Geometric" IM_AUTHOR("\"Kirill Lepskiy\""));

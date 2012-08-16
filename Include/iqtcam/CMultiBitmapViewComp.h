@@ -9,24 +9,38 @@
 
 // ACF includes
 #include <iqtgui/TGuiComponentBase.h>
+#include <ibase/TModelObserverCompWrap.h>
 #include <imod/CMultiModelDispatcherBase.h>
+#include <imod/TSingleModelObserverBase.h>
 #include <istd/IInformationProvider.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/TGuiComponentBase.h>
 #include <iqt2d/IViewExtender.h>
 #include <iqt2d/IViewProvider.h>
 #include <iview/CConsoleGui.h>
 #include <iqt/CBitmap.h>
+
+// ACF-Solutions includes
+#include <iipr/IMultiBitmapProvider.h>
 
 
 namespace iqtcam
 {
 
 
-class CMultiBitmapViewComp: 
-			public iqtgui::TGuiComponentBase<QWidget>,
-			public imod::CMultiModelDispatcherBase
+class CMultiBitmapViewComp:
+			public ibase::TModelObserverCompWrap<
+						iqtgui::TGuiObserverWrap<
+									iqtgui::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iipr::IMultiBitmapProvider> > >,
+			protected imod::CMultiModelDispatcherBase
 {
 public:
-	typedef iqtgui::TGuiComponentBase<QWidget> BaseClass;
+	typedef ibase::TModelObserverCompWrap<
+				iqtgui::TGuiObserverWrap<
+							iqtgui::TGuiComponentBase<QWidget>,
+							imod::TSingleModelObserverBase<iipr::IMultiBitmapProvider> > > BaseClass;
+
+	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CMultiBitmapViewComp);
 		I_ASSIGN(m_horizontalViewsAttrPtr, "HorizontalViewsCount", "Number of horizontal views", false, 1);
@@ -58,6 +72,8 @@ protected:
 
 		CSingleView(QWidget* parentPtr, int id = -1, const QString& title = "");
 
+		void UpdateImage(const iimg::IBitmap* bitmapPtr);
+
 		// called once at initialization stage, at this moment the model should be connected already.
 		virtual void Init();
 		virtual void SetInspectionResult(int result);
@@ -87,7 +103,7 @@ private:
 	I_MULTIREF(istd::IInformationProvider, m_informationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_informationModelsCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
-
+	
 	int m_rowCount;
 	int m_columnCount;
 	int m_viewCount;

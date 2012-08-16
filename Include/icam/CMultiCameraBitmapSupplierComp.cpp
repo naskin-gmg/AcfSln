@@ -77,27 +77,37 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	result.Reset();
 
-	int camerasCount = m_cameraParamsManagerCompPtr->GetParamsSetsCount();
+	if (m_cameraParamsManagerCompPtr.IsValid()){
+		int camerasCount = m_cameraParamsManagerCompPtr->GetParamsSetsCount();
+		if (camerasCount <= 0){
+			return WS_ERROR;
+		}
 
-	for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
-		istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
+		for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
+			istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
 
-		if (cameraBitmapPtr.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
-			int status = m_bitmapAcquisitionCompPtr->DoProcessing(m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), NULL, cameraBitmapPtr.GetPtr());
+			if (cameraBitmapPtr.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
+				int status = m_bitmapAcquisitionCompPtr->DoProcessing(m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), NULL, cameraBitmapPtr.GetPtr());
 
-			switch (status){
-				case iproc::IProcessor::TS_OK:
-					result.PushBack(cameraBitmapPtr.PopPtr());
+				switch (status){
+					case iproc::IProcessor::TS_OK:
+						result.PushBack(cameraBitmapPtr.PopPtr());
+						break;
 
-					return WS_OK;
+					case iproc::IProcessor::TS_CANCELED:
+						result.Reset();
 
-				case iproc::IProcessor::TS_CANCELED:
-					return WS_CANCELED;
+						return WS_CANCELED;
 
-				default:
-					return WS_ERROR;
+					default:
+						result.Reset();
+
+						return WS_ERROR;
+				}
 			}
 		}
+
+		return WS_OK;
 	}
 
 	return WS_CRITICAL;

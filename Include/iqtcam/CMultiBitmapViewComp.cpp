@@ -32,11 +32,26 @@ void CMultiBitmapViewComp::OnModelChanged(int modelId, int /*changeFlags*/, istd
 
 void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 {
+	iipr::IMultiBitmapProvider* objectPtr = GetObjectPtr();
+
+	int bitmapsCount = objectPtr->GetBitmapsCount();
+	int viewsCount = m_views.count();
+
+	for (int bitmapIndex = 0; bitmapIndex < bitmapsCount; bitmapIndex++){
+		if (bitmapIndex < viewsCount){
+			CSingleView* viewPtr = m_views.at(bitmapIndex);
+			
+			viewPtr->UpdateImage(objectPtr->GetBitmap(bitmapIndex));
+		}
+	}
+
 	for (int index = 0; index < m_views.count() && index < m_viewExtendersCompPtr.GetCount(); index++){
 		iqt2d::IViewExtender* viewExtenderPtr = m_viewExtendersCompPtr[index];
 		I_ASSERT(viewExtenderPtr != NULL);
 
 		CSingleView* viewPtr = m_views.at(index);
+		I_ASSERT(viewPtr != NULL);
+
 		viewExtenderPtr->RemoveItemsFromScene(viewPtr);
 		viewExtenderPtr->AddItemsToScene(viewPtr, updateFlags);
 	}
@@ -52,7 +67,7 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(1, *m_horizontalViewsAttrPtr) : 1;
 	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(1, *m_verticalViewsAttrPtr) : 1;
 
-	int viewsCount = qMin(m_informationProvidersCompPtr.GetCount(), m_rowCount * m_columnCount);
+	int viewsCount = m_rowCount * m_columnCount;
 
 	QWidget* widgetPtr = GetQtWidget();
 	QGridLayout* layoutPtr = new QGridLayout(widgetPtr);
@@ -116,6 +131,26 @@ CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const
 	m_id(id)
 {
 	setTitle(title);
+
+	m_backgroundShape.AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
+	m_backgroundModel.AttachObserver(&m_backgroundShape);
+
+	m_console.GetViewRef().ConnectShape(&m_backgroundShape);
+}
+
+
+void CMultiBitmapViewComp::CSingleView::UpdateImage(const iimg::IBitmap* bitmapPtr)
+{
+	if (bitmapPtr == NULL){
+		m_backgroundModel.ResetImage();
+	}
+	else{
+		m_backgroundModel.CopyFrom(*bitmapPtr);
+
+		istd::CIndex2d imageSize = bitmapPtr->GetImageSize();
+
+		m_console.GetViewRef().SetFitArea(i2d::CRectangle(0, 0, imageSize.GetX(), imageSize.GetY()));
+	}
 }
 
 

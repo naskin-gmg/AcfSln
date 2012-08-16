@@ -51,6 +51,7 @@ public:
 	static bool RegisterPropertyType();
 
 	// reimplemented (iprop::IPropertiesManager)
+	virtual void RemoveAllProperties();
 	virtual int GetPropertiesCount() const;
 	virtual iser::IObject* GetProperty(int propertyIndex) const;
 	virtual QByteArray GetPropertyId(int propertyIndex) const;

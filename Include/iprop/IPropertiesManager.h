@@ -21,6 +21,27 @@ class IPropertiesManager: virtual public iser::ISerializable
 {
 public:
 	/**
+		Data model change notification flags.
+	*/
+	enum ChangeFlags
+	{
+		/**
+			The property manager was initialized
+		*/
+		CF_RESET = 1 << 15,
+
+		/**
+			A new property was added to the manager
+		*/
+		CF_ADD_PROPERTY = 1 << 16
+	};
+
+	/**
+		Remove all properties from the manager.
+	*/
+	virtual void RemoveAllProperties() = 0;
+
+	/**
 		Get number of properties.
 	*/
 	virtual int GetPropertiesCount() const = 0;
