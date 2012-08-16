@@ -29,8 +29,8 @@ typedef icam::CMemoryAcquisitionComp MemoryAcquisition;
 typedef icam::CAcquisitionConstraintsComp AcquisitionConstraints;
 typedef icam::CSelectionParamCameraComp SelectionParamCamera;
 typedef icam::CCameraDelegatorComp CameraDelegator;
-typedef icam::CMultiCameraBitmapSupplierComp MultiCameraBitmapSupplier;
-typedef icam::CSelectableBitmapSupplierComp SelectableBitmapSupplier;
+typedef icomp::TModelCompWrap<icam::CMultiCameraBitmapSupplierComp> MultiCameraBitmapSupplier;
+typedef icomp::TModelCompWrap<icam::CSelectableBitmapSupplierComp> SelectableBitmapSupplier;
 
 
 } // namespace CameraPck
