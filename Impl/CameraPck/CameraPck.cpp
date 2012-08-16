@@ -44,6 +44,16 @@ I_EXPORT_COMPONENT(
 			"Simple camera delegator",
 			"Image Bitmap Camera Snap Acquisition Manager Delegator");
 
+I_EXPORT_COMPONENT(
+			MultiCameraBitmapSupplier,
+			"Multi camera bitmap provider", 
+			"Image Bitmap Camera Snap Acquisition Supplier Multi Manager");
+
+I_EXPORT_COMPONENT(
+			SelectableBitmapSupplier,
+			"Single bitmap supplier from a mutli bitmap provider", 
+			"Image Bitmap Camera Snap Acquisition Supplier Multi Selection Single Manager");
+
 
 } // namespace CameraPck
 

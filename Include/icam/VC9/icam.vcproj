@@ -169,6 +169,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiCameraBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamCameraComp.cpp"
 				>
 			</File>
@@ -195,6 +203,14 @@
 			</File>
 			<File
 				RelativePath="..\CMemoryAcquisitionComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiCameraBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableBitmapSupplierComp.h"
 				>
 			</File>
 			<File
