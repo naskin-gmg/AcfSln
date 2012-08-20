@@ -1,9 +1,3 @@
-#define XERCESDIR GetEnv("XERCESDIR")
-#define XALANDIR GetEnv("XALANDIR")
-#define ZLIBDIR GetEnv("ZLIBDIR")
-#define CBIOSDIR GetEnv("CBIOSDIR")
-#define FFMPEGDIR GetEnv("FFMPEGDIR")
-#define EXTLIBDIR GetEnv("EXTLIBDIR")
 #define QTDIR GetEnv("QTDIR")
 
 [Setup]
@@ -33,26 +27,10 @@ ChangesEnvironment=yes
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfSlnComp
-Source: {#EXTLIBDIR}\Microsoft\Redist\Debug$CompilerName$\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
-Source: {#EXTLIBDIR}\Microsoft\Redist\Release$CompilerName$\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfSlnComp
 Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: acfSlnComp
 Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: acfSlnComp
 Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: acfSlnComp
 Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: acfSlnComp
-
-Source: {#XERCESDIR}\Lib\*.dll; DestDir: {app}\ExtLib\Bin; Components: xercesComp
-Source: {#XERCESDIR}\*; DestDir: {app}\ExtLib\Xerces; Flags: recursesubdirs; Excludes: *.dll; Components: xercesComp
-
-Source: {#XALANDIR}\Lib\*.dll; DestDir: {app}\ExtLib\Bin; Components: xalanComp
-Source: {#XALANDIR}\*; DestDir: {app}\ExtLib\Xalan; Flags: recursesubdirs; Excludes: *.dll; Components: xalanComp
-
-Source: {#ZLIBDIR}\*; DestDir: {app}\ExtLib\Zlib; Flags: recursesubdirs; Excludes: *.dll; Components: zlibComp
-
-Source: {#CBIOSDIR}\bin\*.exe; DestDir: {app}\ExtLib\Bin; Components: cbiosComp
-Source: {#CBIOSDIR}\*; DestDir: {app}\ExtLib\CBios; Flags: recursesubdirs; Excludes: *.exe; Components: cbiosComp
-
-Source: {#FFMPEGDIR}\bin\*.dll; DestDir: {app}\ExtLib\Bin; Components: ffmpegComp
-Source: {#FFMPEGDIR}\*; DestDir: {app}\ExtLib\FFMpeg; Flags: recursesubdirs; Excludes: *.dll; Components: ffmpegComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl
