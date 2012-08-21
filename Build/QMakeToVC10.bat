@@ -1,4 +1,4 @@
-echo Generating VC10 projects...
+echo Generating Visual Studio 2010 projects...
 
 cd ..
 call %ACFDIR%\Config\QMake\CopyProToSubdir.js VC10
@@ -9,7 +9,6 @@ qmake -recursive -tp vc AcfSlnAll.pro
 
 del /q Static.sln
 del /q Component.sln
-del /q Tool.sln
 
 cd ..\..
 call %ACFDIR%\Config\QMake\RemoveProFromSubdir.js VC10
