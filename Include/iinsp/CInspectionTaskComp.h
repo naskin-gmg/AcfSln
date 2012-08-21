@@ -93,19 +93,11 @@ protected:
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
+#if _MSC_VER < 1500
+public:
+#else
 private:
-	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
-	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
-	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
-	I_MULTIREF(istd::IInformationProvider, m_subtaskInfoProviderCompPtr);
-	I_ATTR(bool, m_serializeSuppliersAttrPtr);
-	I_ATTR(bool, m_reduceHierarchyAttrPtr);
-	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
-	I_REF(imod::IModel, m_generalParamsModelCompPtr);
-
-	typedef QVector<iproc::ISupplier*> Suppliers;
-	Suppliers m_subtasks;
-
+#endif
 	class Parameters:
 				public imod::CMultiModelBridgeBase,
 				virtual public iprm::IParamsSet
@@ -126,6 +118,19 @@ private:
 	private:
 		CInspectionTaskComp* m_parentPtr;
 	};
+
+private:
+	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
+	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
+	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
+	I_MULTIREF(istd::IInformationProvider, m_subtaskInfoProviderCompPtr);
+	I_ATTR(bool, m_serializeSuppliersAttrPtr);
+	I_ATTR(bool, m_reduceHierarchyAttrPtr);
+	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
+	I_REF(imod::IModel, m_generalParamsModelCompPtr);
+
+	typedef QVector<iproc::ISupplier*> Suppliers;
+	Suppliers m_subtasks;
 
 	typedef imod::TModelWrap<Parameters> ParametersModel;
 	mutable ParametersModel m_parameters;
