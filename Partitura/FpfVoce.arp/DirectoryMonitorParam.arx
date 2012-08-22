@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1561
+          2470
         </Number>
         <Description>
           ACF
@@ -15,13 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1025
         </Id>
         <Number>
-          242
+          264194
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Compiled Version
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1026
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Runtime Version
         </Description>
       </Version>
     </VersionInfos>
@@ -44,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Parameters
@@ -85,6 +96,25 @@
                   DirectoryMonitorParams
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              TypeId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DirectoryMonitor
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -201,6 +231,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
