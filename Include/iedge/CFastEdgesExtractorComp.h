@@ -31,7 +31,7 @@ public:
 		I_ASSIGN(m_thresholdParamIdAttrPtr, "ThresholdParamId", "Threshold parameter ID (imeas::INumericValue)", false, "EdgeThreshold");
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
-		I_ASSIGN(m_maxNodesCountAttrPtr, "MaxNodesCount", "Maximal number of nodes in container", true, 50000);
+		I_ASSIGN(m_maxNodesCountAttrPtr, "MaxNodesCount", "Maximal number of nodes in container", true, 100000);
 	I_END_COMPONENT;
 
 	//	reimplemented (iedge::IEdgesExtractor)
@@ -91,7 +91,7 @@ private:
 
 		bool IsContainerFull() const;
 
-		void ExtractContours(CEdgeLine::Container& result);
+		void ExtractContours(double weightScale, CEdgeLine::Container& result);
 
 		ExtNode* AddElementToList();
 
@@ -110,8 +110,6 @@ private:
 	static ExtNode* AddPointToContour(
 				double posX,
 				double posY,
-				double derivativeX,
-				double derivativeY,
 				double weight,
 				PixelDescriptor* destLine1,
 				PixelDescriptor* destLine2,

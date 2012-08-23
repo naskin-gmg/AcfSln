@@ -26,7 +26,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 		if (numLines > 0){
 			i2d::CAffine2d destTransform = GetLogToScreenTransform();
 
-			double scale = qMin(4.0, qSqrt(destTransform.GetDeformMatrix().GetFrobeniusNorm()));
+			double scale = qSqrt(destTransform.GetDeformMatrix().GetFrobeniusNorm());
 
 			const iview::IColorShema& colorShema = GetColorShema();
 			const QPen& defaultPen = colorShema.GetPen(iview::IColorShema::SP_NORMAL);
@@ -39,33 +39,54 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 
 			QPolygonF polygon(4);
 
-			for(int lineIndex = 0; lineIndex < numLines; lineIndex++){
+			for (int lineIndex = 0; lineIndex < numLines; lineIndex++){
 				const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
-				// first point position
-				i2d::CVector2d prevPos = destTransform.GetApply(line.GetNode(0).GetPosition());
-				double prevWeight = line.GetNode(0).GetWeight();
-				// ignore case when a polyline consists of only a single point
-				for(int pointIndex = 1; pointIndex < line.GetNodesCount(); pointIndex++){
-					const iedge::CEdgeNode& node = line.GetNode(pointIndex);
+
+				int nodesCount = line.GetNodesCount();
+
+				if (nodesCount > 1){
+					int pointIndex = line.IsClosed()? nodesCount - 1: 0;
+
+					// first point position
+					const iedge::CEdgeNode& firstNode = line.GetNode(pointIndex);
+					i2d::CVector2d prevPos = destTransform.GetApply(firstNode.GetPosition());
+					double prevWeight = firstNode.GetWeight();
+
+					for (pointIndex = (pointIndex + 1) % nodesCount; pointIndex < nodesCount; pointIndex++){
+						const iedge::CEdgeNode& node = line.GetNode(pointIndex);
+						i2d::CVector2d pos = destTransform.GetApply(node.GetPosition());
+						double weight = node.GetWeight();
+
+						i2d::CVector2d dif = pos - prevPos;
+						dif.Normalize();
+						i2d::CVector2d orthogonal = dif.GetOrthogonal();
+
+						i2d::CVector2d thickVector = orthogonal * qMin(4.0, scale * prevWeight);
+						polygon[0] = QPointF(prevPos - thickVector);
+						polygon[1] = QPointF(prevPos + thickVector);
+
+						thickVector = orthogonal * qMin(4.0, scale * weight);
+						polygon[2] = QPointF(pos + thickVector);
+						polygon[3] = QPointF(pos - thickVector);
+
+						drawContext.drawPolygon(polygon);
+
+						prevPos = pos;
+						prevWeight = weight;
+					}
+				}
+				else if (nodesCount > 0){
+					// only one node exists
+					const iedge::CEdgeNode& node = line.GetNode(0);
 					i2d::CVector2d pos = destTransform.GetApply(node.GetPosition());
-					double weight = node.GetWeight();
+					double radius = qMin(4.0, node.GetWeight() * scale);
 
-					i2d::CVector2d dif = pos - prevPos;
-					dif.Normalize(scale);
-					i2d::CVector2d orthogonal = dif.GetOrthogonal();
-
-					i2d::CVector2d thickVector = orthogonal * prevWeight;
-					polygon[0] = QPointF(prevPos - thickVector);
-					polygon[1] = QPointF(prevPos + thickVector);
-
-					thickVector = orthogonal * weight;
-					polygon[2] = QPointF(pos + thickVector);
-					polygon[3] = QPointF(pos - thickVector);
+					polygon[0] = QPointF(pos.GetX() - radius, pos.GetY() - radius);
+					polygon[1] = QPointF(pos.GetX() + radius, pos.GetY() - radius);
+					polygon[2] = QPointF(pos.GetX() + radius, pos.GetY() + radius);
+					polygon[3] = QPointF(pos.GetX() - radius, pos.GetY() + radius);
 
 					drawContext.drawPolygon(polygon);
-
-					prevPos = pos;
-					prevWeight = weight;
 				}
 			}
 		}

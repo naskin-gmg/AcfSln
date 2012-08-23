@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2449
+          2477
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -215,7 +226,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               EnableVerbose
@@ -246,6 +257,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MaxNodesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                500000
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -678,25 +708,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MaxValues
-            </Id>
-            <Type>
-              Real
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                50
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               Values
             </Id>
             <Type>
@@ -709,11 +720,33 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
-                  5
+                  0.1
+                </Value>
+                <Value>
+                  0
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ValuesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
