@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1705
+          2478
         </Number>
         <Description>
           ACF
@@ -15,13 +15,13 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          313
+          264192
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -285,18 +285,18 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        imeas::INumericConstraints
-      </InterfaceId>
-      <ComponentId>
-        DerivativeProcessor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
         iipr::IProjectionConstraints
       </InterfaceId>
       <ComponentId>
         LineProjection
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imeas::INumericConstraints
+      </InterfaceId>
+      <ComponentId>
+        DerivativeProcessor
       </ComponentId>
     </Interface>
     <Interface>

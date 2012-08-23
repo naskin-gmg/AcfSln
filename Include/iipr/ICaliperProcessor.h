@@ -24,7 +24,7 @@ public:
 	enum FeatureTypeId
 	{
 		/**
-			Unique ID of caliper fearutes.
+			Unique ID of the caliper feature.
 		*/
 		FTI_CALIPER_FEATURE = 6572
 	};
