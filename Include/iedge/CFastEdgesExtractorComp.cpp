@@ -282,7 +282,7 @@ __forceinline void CFastEdgesExtractorComp::TryConnectElements(
 __forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPointToContour(
 			double posX,
 			double posY,
-			double weight,
+			double rawWeight,
 			PixelDescriptor* destLine1,
 			PixelDescriptor* destLine2,
 			int x,
@@ -294,7 +294,7 @@ __forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPoin
 
 		nodePtr->position = i2d::CVector2d(posX, posY);
 		nodePtr->derivative = i2d::CVector2d(double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR);
-		nodePtr->weight = weight;
+		nodePtr->rawWeight = rawWeight;
 		nodePtr->prevPtr = NULL;
 		nodePtr->nextPtr = NULL;
 		nodePtr->prevWeight = 0;
@@ -370,200 +370,62 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 		const PixelDescriptor& topDescriptor = destLine1[x];
 		const PixelDescriptor& bottomDescriptor = destLine3[x];
 
-		int leftDiff = dirLength2 - leftDescriptor.dirLength2;
-		int rightDiff = dirLength2 - rightDescriptor.dirLength2;
-		int topDiff = dirLength2 - topDescriptor.dirLength2;
-		int bottomDiff = dirLength2 - bottomDescriptor.dirLength2;
+		int left2Diff = dirLength2 - leftDescriptor.dirLength2;
+		int right2Diff = dirLength2 - rightDescriptor.dirLength2;
+		int top2Diff = dirLength2 - topDescriptor.dirLength2;
+		int bottom2Diff = dirLength2 - bottomDescriptor.dirLength2;
 
-		if (((leftDiff >= 0) && (rightDiff > 0)) || ((topDiff >= 0) && (bottomDiff > 0))){
+		if (((left2Diff >= 0) && (right2Diff > 0)) || ((top2Diff >= 0) && (bottom2Diff > 0))){
 			double horizStrength = 0;
-			if ((leftDiff >= 0) && (rightDiff > 0)){
-				horizStrength = leftDiff + rightDiff;
+			if ((left2Diff >= 0) && (right2Diff > 0)){
+				horizStrength = left2Diff + right2Diff;
 			}
 
 			double vertStrength = 0;
-			if ((topDiff >= 0) && (bottomDiff > 0)){
-				vertStrength = topDiff + bottomDiff;
+			if ((top2Diff >= 0) && (bottom2Diff > 0)){
+				vertStrength = top2Diff + bottom2Diff;
 			}
 
 			if (horizStrength + vertStrength > threshold2Factor){
-				double weight = qSqrt(horizStrength + vertStrength);
+				double dirLength = qSqrt(dirLength2);
+				double rawWeight = qSqrt(horizStrength + vertStrength);
+
 				if (horizStrength > vertStrength){
-					if (qAbs(pixelDescriptor.dx) * 3 > qAbs(pixelDescriptor.dy) * 2){
-						double shift = double(leftDiff) / (leftDiff + rightDiff);
+//					if (qAbs(pixelDescriptor.dx) * 2 > qAbs(pixelDescriptor.dy)){
+						double leftDiff = qSqrt(dirLength) - qSqrt(qSqrt(leftDescriptor.dirLength2));
+						Q_ASSERT(leftDiff >= 0);
+						double rightDiff = qSqrt(dirLength) - qSqrt(qSqrt(rightDescriptor.dirLength2));
+						Q_ASSERT(rightDiff >= 0);
+
+						double shift = leftDiff / (leftDiff + rightDiff);
 
 						AddPointToContour(
 									x + 0.5 + shift, y + 1,
-									weight,
+									rawWeight,
 									destLine1, destLine2,
 									x, y,
 									container);
-					}
+//					}
 				}
 				else{
-					if (qAbs(pixelDescriptor.dy) * 3 > qAbs(pixelDescriptor.dx) * 2){
-						double shift = double(topDiff) / (topDiff + bottomDiff);
+//					if (qAbs(pixelDescriptor.dy) * 2 > qAbs(pixelDescriptor.dx)){
+						double topDiff = qSqrt(dirLength) - qSqrt(qSqrt(topDescriptor.dirLength2));
+						Q_ASSERT(topDiff >= 0);
+						double bottomDiff = qSqrt(dirLength) - qSqrt(qSqrt(bottomDescriptor.dirLength2));
+						Q_ASSERT(bottomDiff >= 0);
+
+						double shift = topDiff / (topDiff + bottomDiff);
 
 						AddPointToContour(
 									x + 1, y + 0.5 + shift,
-									weight,
+									rawWeight,
 									destLine1, destLine2,
 									x, y,
 									container);
-					}
+//					}
 				}
 			}
 		}
-/*		else{
-			if (		(dirLength2 * 2 > leftDescriptor.dirLength2 + bottomDescriptor.dirLength2) &&
-						(dirLength2 * 2 > rightDescriptor.dirLength2 + topDescriptor.dirLength2)){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = weight - qSqrt((leftDescriptor.dirLength2 + bottomDescriptor.dirLength2) * 0.5);
-				double derivative2 = weight - qSqrt((rightDescriptor.dirLength2 + topDescriptor.dirLength2) * 0.5);
-				double shift = (derivative1 - derivative2) / (derivative1 + derivative2) * 0.5;
-
-				AddPointToContour(
-							x + 1 + shift, y + 1 - shift,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-
-
-		int absDirectionX = qAbs(pixelDescriptor.dx);
-		int absDirectionY = qAbs(pixelDescriptor.dy);
-
-		if ((absDirectionX * 3 >= absDirectionY * 2)){
-			const PixelDescriptor& prevDescriptor = destLine2[x - 1];
-			const PixelDescriptor& nextDescriptor = destLine2[x + 1];
-			if (		(absDirectionX > qAbs(prevDescriptor.dx)) &&
-						(absDirectionX >= qAbs(nextDescriptor.dx))){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = absDirectionX - qAbs(prevDescriptor.dx);
-				double derivative2 = absDirectionX - qAbs(nextDescriptor.dx);
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + shift + 0.5, y + 1,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-
-		if ((absDirectionY * 3 >= absDirectionX * 2)){
-			const PixelDescriptor& prevDescriptor = destLine1[x];
-			const PixelDescriptor& nextDescriptor = destLine3[x];
-			if (		(absDirectionY > qAbs(prevDescriptor.dy)) &&
-						(absDirectionY >= qAbs(nextDescriptor.dy))){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = absDirectionY - qAbs(prevDescriptor.dy);
-				double derivative2 = absDirectionY - qAbs(nextDescriptor.dy);
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + 1, y + shift + 0.5,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-
-		if ((absDirectionX * 3 >= absDirectionY * 2)){
-			const PixelDescriptor& prevDescriptor = destLine2[x - 1];
-			const PixelDescriptor& nextDescriptor = destLine2[x + 1];
-			if (		(dirLength2 > prevDescriptor.dirLength2) &&
-						(dirLength2 >= nextDescriptor.dirLength2)){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = weight - qSqrt(double(prevDescriptor.dirLength2));
-				double derivative2 = weight - qSqrt(double(nextDescriptor.dirLength2));
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + shift, y + 0.5,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-
-		if ((absDirectionY * 3 >= absDirectionX * 2)){
-			const PixelDescriptor& prevDescriptor = destLine1[x];
-			const PixelDescriptor& nextDescriptor = destLine3[x];
-			if (		(dirLength2 > prevDescriptor.dirLength2) &&
-						(dirLength2 >= nextDescriptor.dirLength2)){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = weight - qSqrt(double(prevDescriptor.dirLength2));
-				double derivative2 = weight - qSqrt(double(nextDescriptor.dirLength2));
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + 0.5, y + shift,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-
-		if (pixelDescriptor.dx * pixelDescriptor.dy > 0){
-			const PixelDescriptor& prevDescriptor = destLine1[x - 1];
-			const PixelDescriptor& nextDescriptor = destLine3[x + 1];
-
-			if (		(dirLength2 > prevDescriptor.dirLength2) &&
-						(dirLength2 >= nextDescriptor.dirLength2)){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = weight - qSqrt(double(prevDescriptor.dirLength2));
-				double derivative2 = weight - qSqrt(double(nextDescriptor.dirLength2));
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + shift, y + shift,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-		else{
-			const PixelDescriptor& prevDescriptor = destLine3[x - 1];
-			const PixelDescriptor& nextDescriptor = destLine1[x + 1];
-
-			if (		(dirLength2 > prevDescriptor.dirLength2) &&
-						(dirLength2 >= nextDescriptor.dirLength2)){
-				double weight = qSqrt(double(dirLength2));
-				double derivative1 = weight - qSqrt(double(prevDescriptor.dirLength2));
-				double derivative2 = weight - qSqrt(double(nextDescriptor.dirLength2));
-				double shift = derivative1 / (derivative1 + derivative2);
-
-				AddPointToContour(
-							x + shift, y + 1 - shift,
-							double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR,
-							weight / THRESHOLD_FACTOR,
-							destLine1, destLine2,
-							x, y,
-							container);
-				return;
-			}
-		}
-*/
 	}
 }
 
@@ -644,7 +506,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractContours(double weightSc
 				CEdgeNode node(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative,
-							nodeElementPtr->weight * weightScale / THRESHOLD_FACTOR);
+							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);
 			}
@@ -671,7 +533,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractContours(double weightSc
 				CEdgeNode node(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative,
-							nodeElementPtr->weight * weightScale / THRESHOLD_FACTOR);
+							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);
 

@@ -64,7 +64,7 @@ private:
 	{
 		i2d::CVector2d position;
 		i2d::CVector2d derivative;
-		double weight;
+		double rawWeight;
 
 		ExtNode* prevPtr;
 		ExtNode* nextPtr;
@@ -110,7 +110,7 @@ private:
 	static ExtNode* AddPointToContour(
 				double posX,
 				double posY,
-				double weight,
+				double rawWeight,
 				PixelDescriptor* destLine1,
 				PixelDescriptor* destLine2,
 				int x,
