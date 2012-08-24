@@ -7,6 +7,12 @@ namespace iipr
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
+const iprm::ISelectionConstraints* CColorBitmapSeparatorSupplierComp::GetBitmapSelectionContraints() const
+{
+	return this;
+}
+
+
 int CColorBitmapSeparatorSupplierComp::GetBitmapsCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
@@ -48,6 +54,89 @@ const iimg::IBitmap* CColorBitmapSeparatorSupplierComp::GetBitmap(int bitmapInde
 const i2d::ITransformation2d* CColorBitmapSeparatorSupplierComp::GetLogTransform(int /*bitmapIndex*/) const
 {
 	return m_calibrationCompPtr.GetPtr();
+}
+
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CColorBitmapSeparatorSupplierComp::GetConstraintsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CColorBitmapSeparatorSupplierComp::GetOptionsCount() const
+{
+	return CColorBitmapSeparatorSupplierComp::GetBitmapsCount();
+}
+
+
+QString CColorBitmapSeparatorSupplierComp::GetOptionName(int index) const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if ((productPtr != NULL) && (!productPtr->IsEmpty())){
+		switch (index){
+		case 0:
+			return QObject::tr("Red");
+
+		case 1:
+			return QObject::tr("Green");
+
+		case 2:
+			return QObject::tr("Blue");
+
+		case 3:
+			return QObject::tr("Alpha");
+		}
+	}
+
+	return QObject::tr("Original");
+}
+
+
+QString CColorBitmapSeparatorSupplierComp::GetOptionDescription(int index) const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if ((productPtr != NULL) && (!productPtr->IsEmpty())){
+		switch (index){
+		case 0:
+			return QObject::tr("Red color channel");
+
+		case 1:
+			return QObject::tr("Green color channel");
+
+		case 2:
+			return QObject::tr("Blue color channel");
+
+		case 3:
+			return QObject::tr("Alpha (transparency) channel");
+		}
+	}
+
+	return QObject::tr("Original gray value channel");
+}
+
+
+QByteArray CColorBitmapSeparatorSupplierComp::GetOptionId(int index) const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if ((productPtr != NULL) && (!productPtr->IsEmpty())){
+		switch (index){
+		case 0:
+			return "Red";
+
+		case 1:
+			return "Green";
+
+		case 2:
+			return "Blue";
+
+		case 3:
+			return "Alpha";
+		}
+	}
+
+	return "Original";
 }
 
 
@@ -140,9 +229,9 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 		for (int x = 0; x < imageSize.GetX(); ++x){
 			quint8* pixelPtr = inputLinePtr + x * inputPixelComponentCount;
 
-			rOutputLinePtr[x] = pixelPtr[0];
+			rOutputLinePtr[x] = pixelPtr[2];
 			gOutputLinePtr[x] = pixelPtr[1];
-			bOutputLinePtr[x] = pixelPtr[2];
+			bOutputLinePtr[x] = pixelPtr[0];
 
 			if (aOutputLinePtr != NULL){
 				aOutputLinePtr[x] = pixelPtr[3];

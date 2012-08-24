@@ -5,6 +5,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 #include "i2d/ITransformation2d.h"
+#include "iprm/ISelectionConstraints.h"
 #include "iimg/IBitmap.h"
 
 
@@ -18,6 +19,12 @@ namespace iipr
 class IMultiBitmapProvider: virtual public istd::IChangeable
 {
 public:
+	/**
+		Get optional information about bitmaps in form of section contraints.
+		It allows to get name and description of each bitmap channel.
+	*/
+	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const = 0;
+
 	/**
 		Get number of produced bitmaps.
 	*/

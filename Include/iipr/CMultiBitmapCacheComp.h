@@ -33,6 +33,7 @@ public:
 	CMultiBitmapCacheComp();
 
 	// reimplemented (iipr::IMultiBitmapProvider)
+	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const;

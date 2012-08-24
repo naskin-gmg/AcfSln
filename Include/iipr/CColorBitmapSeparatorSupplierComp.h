@@ -21,7 +21,8 @@ namespace iipr
 */
 class CColorBitmapSeparatorSupplierComp:
 			public iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> >,
-			virtual public iipr::IMultiBitmapProvider
+			virtual public iipr::IMultiBitmapProvider,
+			virtual protected iprm::ISelectionConstraints
 {
 public:
 	typedef iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> > BaseClass;
@@ -36,13 +37,21 @@ public:
 		I_ASSIGN(m_useAlphaChannelAttrPtr, "UseAlphaChannel", "If enabled and image format of bitmap is RGBA, create bitmap for alpha chanel", true, false);		
 	I_END_COMPONENT;
 
-protected:
-	bool EnsureBitmapCreated(ProductType& result) const;
-
 	// reimplemented (iipr::IMultiBitmapProvider)
+	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const;	
+
+protected:
+	bool EnsureBitmapCreated(ProductType& result) const;
+
+	// reimplemented (iprm::ISelectionConstraints)
+	virtual int GetConstraintsFlags() const;
+	virtual int GetOptionsCount() const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;

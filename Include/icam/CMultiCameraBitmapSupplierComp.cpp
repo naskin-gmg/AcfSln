@@ -12,6 +12,12 @@ namespace icam
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
+const iprm::ISelectionConstraints* CMultiCameraBitmapSupplierComp::GetBitmapSelectionContraints() const
+{
+	return NULL;
+}
+
+
 int CMultiCameraBitmapSupplierComp::GetBitmapsCount() const
 {
 	if (m_cameraParamsManagerCompPtr.IsValid()){

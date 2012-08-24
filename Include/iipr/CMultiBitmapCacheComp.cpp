@@ -16,6 +16,12 @@ CMultiBitmapCacheComp::CMultiBitmapCacheComp()
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
+const iprm::ISelectionConstraints* CMultiBitmapCacheComp::GetBitmapSelectionContraints() const
+{
+	return NULL;
+}
+
+
 int CMultiBitmapCacheComp::GetBitmapsCount() const
 {
 	return m_bitmapsPtr.GetCount();

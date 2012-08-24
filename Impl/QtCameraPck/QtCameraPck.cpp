@@ -34,6 +34,11 @@ I_EXPORT_COMPONENT(
 			"Image Bitmap Camera Snap Acquisition Supplier Parameters");
 
 I_EXPORT_COMPONENT(
+			SnapMultiBitmapSupplierGui,
+			"Gui getting a set of images from camera and connecting one of them to display console", 
+			"Multi Image Bitmap Camera Snap Acquisition Supplier Parameters GUI Qt");
+
+I_EXPORT_COMPONENT(
 			MultiBitmapView,
 			"Bitmap visualization for multi bitmap provider", 
 			"Image Bitmap Camera Snap Acquisition Supplier Multi");
