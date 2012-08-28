@@ -61,22 +61,21 @@ public:
 	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 protected:
-	struct NodeInfo
-	{
-		int index;
-		double removedDistance;		// distance to line if removed
-		double removedWeightDiff;	// difference to interpolated weight if removed
-	};
+	typedef QVector<bool> NodesToRemove;
 
-	typedef QVector<NodeInfo> NodeInfos;
-
-	bool ReduceNodes(
+	/**
+		Mark points to remove.
+		\return	number of removed points.
+	*/
+	int ReduceNodes(
 				const CEdgeLine& edgeLine,
 				double positionTolerance,
 				double weightTolerance,
-				NodeInfos::Iterator firstIter,
-				NodeInfos::Iterator endIter,
-				NodeInfos& nodeInfos) const;
+				int firstIndex,
+				int lastIndex,
+				NodesToRemove& nodesToRemove,
+				int& firstInsideIndex,
+				int& lastInsideIndex) const;
 
 private:
 	I_REF(imeas::INumericValue, m_defaultToleranceParamsCompPtr);

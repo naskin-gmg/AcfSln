@@ -1,5 +1,6 @@
 #include "iedge/CEdgesReductorComp.h"
 
+
 // ACF includes
 #include "istd/istd.h"
 #include "iprm/TParamsPtr.h"
@@ -18,84 +19,50 @@ void CEdgesReductorComp::GetReducedLine(
 			double weightTolerance,
 			CEdgeLine& result) const
 {
-	int nodesCount = edgeLine.GetNodesCount();
-	if (nodesCount < 2){
-		return;	// not enough nodes to reduce
-	}
-
 	bool isClosed = edgeLine.IsClosed();
 
-	const CEdgeNode* prevNodePtr = NULL;
-	const CEdgeNode* nodePtr = NULL;
-	int nodeIndex = 0;
-	int nextNodeIndex = 0;
+	int nodesCount = edgeLine.GetNodesCount();
 	if (isClosed){
-		prevNodePtr = &edgeLine.GetNode(nodesCount - 2);
-		nodePtr = &edgeLine.GetNode(nodesCount - 1);
-		nodeIndex = nodesCount - 1;
+		if (nodesCount <= 3){
+			result = edgeLine;
+
+			return;	// not enough nodes to reduce
+		}
 	}
 	else{
-		prevNodePtr = &edgeLine.GetNode(0);
-		nodePtr = &edgeLine.GetNode(1);
-		nodeIndex = 1;
-		nextNodeIndex = 2;
+		if (nodesCount <= 2){
+			result = edgeLine;
+
+			return;	// not enough nodes to reduce
+		}
 	}
 
-	NodeInfos nodeInfos(nodesCount - nextNodeIndex);
+	NodesToRemove nodesToRemove(nodesCount, false);
 
-	for (		int nodeInfoIndex = 0;	// initialization of other index
-				nextNodeIndex < nodesCount;
-				++nodeInfoIndex, ++nodeIndex, ++nextNodeIndex){
-		NodeInfo& nodeInfo = nodeInfos[nodeInfoIndex];
+	int firstInsideIndex = 0;
+	int lastInsideIndex = 0;
+	int reducedCount = ReduceNodes(
+				edgeLine,
+				positionTolerance,
+				weightTolerance,
+				0,
+				isClosed? nodesCount + 1: nodesCount - 1,
+				nodesToRemove,
+				firstInsideIndex,
+				lastInsideIndex);
 
-		nodeInfo.index = nodeIndex;
-
-		const CEdgeNode* nextNodePtr = &edgeLine.GetNode(nextNodeIndex);
-
-		i2d::CVector2d nextPrevDelta = nextNodePtr->GetPosition() - prevNodePtr->GetPosition();
-		i2d::CVector2d prevDelta = nodePtr->GetPosition() - prevNodePtr->GetPosition();
-
-		double nextPrevDistance = nextPrevDelta.GetLength();
-		if (nextPrevDistance >= I_BIG_EPSILON){
-			nodeInfo.removedDistance = qFabs(prevDelta.GetCrossProductZ(nextPrevDelta) / nextPrevDistance);
-
-			double segmentAlpha = prevDelta.GetDotProduct(nextPrevDelta) / nextPrevDelta.GetLength2();
-			double interpolatedWeight = (1 - segmentAlpha) * prevNodePtr->GetWeight() + segmentAlpha * nextNodePtr->GetWeight();
-
-			nodeInfo.removedWeightDiff = qFabs(nodePtr->GetWeight() - interpolatedWeight);
-		}
-		else{
-			nodeInfo.removedDistance = prevDelta.GetLength();
-
-			double averageWeight = (prevNodePtr->GetWeight() + nextNodePtr->GetWeight()) * 0.5;
-
-			nodeInfo.removedWeightDiff = qFabs(nodePtr->GetWeight() - averageWeight);
-		}
-
-		prevNodePtr = nodePtr;
-		nodePtr = nextNodePtr;
-	}
-
-	if (ReduceNodes(edgeLine, positionTolerance, weightTolerance, nodeInfos.begin(), nodeInfos.end(), nodeInfos)){
+	if (nodesCount - reducedCount >= (isClosed? 3: 2)){
 		// copy the nodes could not be reduced
 		result.Clear();
 
-		if (!isClosed){	// first node is always copied for not closed edges
-			result.InsertNode(edgeLine.GetNode(0));
-		}
+		for (		int nodeIndex = 0;
+					nodeIndex < nodesCount;
+					++nodeIndex){
+			if (!nodesToRemove[nodeIndex]){
+				const CEdgeNode& node = edgeLine.GetNode(nodeIndex);
 
-		for (		NodeInfos::ConstIterator nodeIter = nodeInfos.constBegin();
-					nodeIter != nodeInfos.constEnd();
-					++nodeIter){
-			int nodeIndex = nodeIter->index;
-
-			const CEdgeNode& node = edgeLine.GetNode(nodeIndex);
-
-			result.InsertNode(node);
-		}
-
-		if (!isClosed){	// last node is always copied for not closed edges
-			result.InsertNode(edgeLine.GetNode(nodesCount - 1));
+				result.InsertNode(node);
+			}
 		}
 
 		result.SetClosed(isClosed);
@@ -239,37 +206,107 @@ const imeas::IUnitInfo& CEdgesReductorComp::GetNumericValueUnitInfo(int index) c
 
 // protected methods
 
-bool CEdgesReductorComp::ReduceNodes(
+int CEdgesReductorComp::ReduceNodes(
 			const CEdgeLine& edgeLine,
 			double positionTolerance,
 			double weightTolerance,
-			NodeInfos::Iterator firstIter,
-			NodeInfos::Iterator endIter,
-			NodeInfos& nodeInfos) const
+			int firstIndex,
+			int lastIndex,
+			NodesToRemove& nodesToRemove,
+			int& firstInsideIndex,
+			int& lastInsideIndex) const
 {
-	if (edgeLine.IsClosed() && (nodeInfos.size() <= 3)){
-		return false;
+	Q_ASSERT(firstIndex >= 0);
+	Q_ASSERT(lastIndex > firstIndex);
+
+	int removedPoints = 0;
+
+	int nodesInsideCount = lastIndex - firstIndex - 1;
+
+	if (nodesInsideCount >= 1){
+		int nodesCount = edgeLine.GetNodesCount();
+
+		int nodeIndex = firstIndex + nodesInsideCount / 2 + 1;
+		int leftNodeIndex = (nodeIndex - 1) % nodesCount;
+		int rightNodeIndex = (nodeIndex + 1) % nodesCount;
+
+		if (nodeIndex > firstIndex + 1){
+			removedPoints += ReduceNodes(
+						edgeLine,
+						positionTolerance,
+						weightTolerance,
+						firstIndex,
+						nodeIndex,
+						nodesToRemove,
+						firstInsideIndex,
+						leftNodeIndex);
+		}
+		else{
+			firstInsideIndex = firstIndex + 1;
+		}
+
+		if (nodeIndex < lastIndex - 1){
+			removedPoints += ReduceNodes(
+						edgeLine,
+						positionTolerance,
+						weightTolerance,
+						nodeIndex,
+						lastIndex,
+						nodesToRemove,
+						rightNodeIndex,
+						lastInsideIndex);
+		}
+		else{
+			lastInsideIndex = lastIndex - 1;
+		}
+
+		const CEdgeNode& node = edgeLine.GetNode(nodeIndex % nodesCount);
+		const CEdgeNode& prevNode = edgeLine.GetNode(leftNodeIndex % nodesCount);
+		const CEdgeNode& nextNode = edgeLine.GetNode(rightNodeIndex % nodesCount);
+
+		i2d::CVector2d nextPrevDelta = nextNode.GetPosition() - prevNode.GetPosition();
+		i2d::CVector2d prevDelta = node.GetPosition() - prevNode.GetPosition();
+
+		double removedDistance = 0;
+		double removedWeightDiff = 0;
+
+		double nextPrevDistance = nextPrevDelta.GetLength();
+		if (nextPrevDistance >= I_BIG_EPSILON){
+			removedDistance = qFabs(prevDelta.GetCrossProductZ(nextPrevDelta) / nextPrevDistance);
+
+			double segmentAlpha = prevDelta.GetDotProduct(nextPrevDelta) / nextPrevDelta.GetLength2();
+			double interpolatedWeight = (1 - segmentAlpha) * prevNode.GetWeight() + segmentAlpha * nextNode.GetWeight();
+
+			removedWeightDiff = qFabs(node.GetWeight() - interpolatedWeight);
+		}
+		else{
+			removedDistance = prevDelta.GetLength();
+
+			double averageWeight = (prevNode.GetWeight() + nextNode.GetWeight()) * 0.5;
+
+			removedWeightDiff = qFabs(node.GetWeight() - averageWeight);
+		}
+
+		if ((removedDistance < positionTolerance) && (removedWeightDiff < weightTolerance)){
+			nodesToRemove[nodeIndex % nodesCount] = true;
+
+			if (firstInsideIndex == nodeIndex){
+				firstInsideIndex = rightNodeIndex;
+			}
+
+			if (lastInsideIndex == nodeIndex){
+				lastInsideIndex = leftNodeIndex;
+			}
+
+			++removedPoints;
+		}
+	}
+	else{
+		firstInsideIndex = firstIndex + 1;
+		lastInsideIndex = lastIndex - 1;
 	}
 
-	bool retVal = false;
-
-	NodeInfos::Iterator nodeIter = firstIter + (endIter - firstIter) / 2;
-
-	if ((nodeIter->removedDistance < positionTolerance) && (nodeIter->removedWeightDiff < weightTolerance)){
-		nodeIter = nodeInfos.erase(nodeIter);
-
-		retVal = true;
-	}
-
-	if (nodeIter != firstIter){
-		retVal = ReduceNodes(edgeLine, positionTolerance, weightTolerance, firstIter, nodeIter, nodeInfos) || retVal;
-	}
-
-	if (nodeIter != endIter){
-		retVal = ReduceNodes(edgeLine, positionTolerance, weightTolerance, nodeIter + 1, endIter, nodeInfos) || retVal;
-	}
-
-	return retVal;
+	return removedPoints;
 }
 
 
