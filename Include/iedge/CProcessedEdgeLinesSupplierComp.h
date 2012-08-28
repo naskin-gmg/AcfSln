@@ -26,7 +26,7 @@ public:
 		I_REGISTER_INTERFACE(IEdgeLinesProvider);
 		I_ASSIGN(m_edgeLinesProviderCompPtr, "EdgeLinesProvider", "Provide list of edge list to processing", true, "EdgeLinesProvider");
 		I_ASSIGN_TO(m_edgeLinesProviderModelCompPtr, m_edgeLinesProviderCompPtr, false);
-		I_ASSIGN(m_edgesProcessorCompPtr, "EdgesExtractor", "Extractor of edges", true, "EdgesExtractor");
+		I_ASSIGN(m_edgesProcessorCompPtr, "EdgesProcessor", "Processor (edges to edges)", true, "EdgesProcessor");
 	I_END_COMPONENT;
 
 	// reimplemented (iedge::IEdgeLinesProvider)

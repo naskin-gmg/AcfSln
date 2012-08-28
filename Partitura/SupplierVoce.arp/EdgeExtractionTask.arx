@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2477
+          2487
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="11">
     <Element>
       <Id>
         Bitmap
@@ -50,7 +50,245 @@
     </Element>
     <Element>
       <Id>
-        ExtractedEdgeLinesSupplier
+        EdgeExtractionParams
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Constraints
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FastEdgesExtractor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Values
+            </Id>
+            <Type>
+              Real[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  0.1
+                </Value>
+                <Value>
+                  0
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ValuesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        EdgeReductionParams
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        NumericParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              Constraints
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgesReductor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Values
+            </Id>
+            <Type>
+              Real[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  0.5
+                </Value>
+                <Value>
+                  3
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ValuesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        EdgesReductor
+      </Id>
+      <PackageId>
+        EdgePck
+      </PackageId>
+      <ComponentId>
+        EdgesReductor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ToleranceParamsId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ReductionThreshold
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ExtractedEdgesSupplier
       </Id>
       <PackageId>
         EdgePck
@@ -125,14 +363,14 @@
               String
             </Type>
             <ExportId>
-              DiagnosticName
+              
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                EdgeSupplier
+                EdgeExtractor
               </Value>
             </Data>
           </AttributeInfo>
@@ -462,7 +700,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Parameters
@@ -477,12 +715,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  ThresholdParam
-                </Value>
+              <Values count="3">
                 <Value>
                   SmoothParams
+                </Value>
+                <Value>
+                  EdgeExtractionParams
+                </Value>
+                <Value>
+                  EdgeReductionParams
                 </Value>
               </Values>
             </Data>
@@ -501,14 +742,36 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
+                <Value>
+                  SmoothFilter
+                </Value>
                 <Value>
                   EdgeThreshold
                 </Value>
                 <Value>
-                  SmoothFilter
+                  ReductionThreshold
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ContourExtraction
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -580,6 +843,135 @@
               </IsEnabled>
               <Value>
                 SmoothFilter
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ReducedEdgesSupplier
+      </Id>
+      <PackageId>
+        EdgePck
+      </PackageId>
+      <ComponentId>
+        ProcessedEdgeLinesSupplier
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              DiagnosticName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgeReductor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EdgeLinesProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ExtractedEdgesSupplier
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EdgesProcessor
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                EdgesReductor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ProcessingParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -669,89 +1061,6 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        ThresholdParam
-      </Id>
-      <PackageId>
-        MeasPck
-      </PackageId>
-      <ComponentId>
-        NumericParams
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              Constraints
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FastEdgesExtractor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Values
-            </Id>
-            <Type>
-              Real[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  0.1
-                </Value>
-                <Value>
-                  0
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ValuesCount
-            </Id>
-            <Type>
-              Integer
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
@@ -761,7 +1070,7 @@
         iedge::IEdgeLinesProvider
       </InterfaceId>
       <ComponentId>
-        ExtractedEdgeLinesSupplier
+        ReducedEdgesSupplier
       </ComponentId>
     </Interface>
     <Interface>
@@ -769,7 +1078,7 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        ExtractedEdgeLinesSupplier
+        ReducedEdgesSupplier
       </ComponentId>
     </Interface>
     <Interface>
@@ -777,7 +1086,7 @@
         iproc::IElapsedTimeProvider
       </InterfaceId>
       <ComponentId>
-        ExtractedEdgeLinesSupplier
+        ReducedEdgesSupplier
       </ComponentId>
     </Interface>
     <Interface>
@@ -785,7 +1094,7 @@
         iproc::ISupplier
       </InterfaceId>
       <ComponentId>
-        ExtractedEdgeLinesSupplier
+        ReducedEdgesSupplier
       </ComponentId>
     </Interface>
     <Interface>
@@ -793,7 +1102,7 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        ExtractedEdgeLinesSupplier
+        ReducedEdgesSupplier
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
@@ -811,7 +1120,7 @@
         ThresholdParam
       </ExportedId>
       <ComponentId>
-        ThresholdParam
+        EdgeExtractionParams
       </ComponentId>
     </Component>
   </ExportedComponents>
