@@ -17,7 +17,9 @@ namespace iedge
 {
 
 
-class CEdgesReductorComp: public iproc::TSyncProcessorCompBase<IEdgeLinesProcessor>
+class CEdgesReductorComp:
+			public iproc::TSyncProcessorCompBase<IEdgeLinesProcessor>,
+			virtual public imeas::INumericConstraints
 {
 public:
 	typedef iproc::TSyncProcessorCompBase<IEdgeLinesProcessor> BaseClass;
