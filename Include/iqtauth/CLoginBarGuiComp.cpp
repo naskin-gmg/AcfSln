@@ -24,7 +24,7 @@ bool CLoginBarGuiComp::eventFilter(QObject *obj, QEvent *event)
 
 		if (isLogged && event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonRelease){
 			// Auto log off functionality is activated
-			if(m_autoLogoutMilisec > 0){
+			if (m_autoLogoutMilisec > 0){
 				m_autoLogoutTimer.start(m_autoLogoutMilisec);
 			}
 		}
