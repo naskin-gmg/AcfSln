@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2484
+          2498
         </Number>
         <Description>
           ACF
@@ -47,6 +47,21 @@
   </PackageDirs>
   <PackageFiles count="0">
   </PackageFiles>
-  <RegistryFiles count="0">
+  <RegistryFiles count="5">
+    <FilePath>
+      ../Docs/Tutorial/Partitura/CaliperTest.arx
+    </FilePath>
+    <FilePath>
+      ../Docs/Tutorial/Partitura/CircleFinderTest.arx
+    </FilePath>
+    <FilePath>
+      ../Docs/Tutorial/Partitura/ColorImagesSeparator.arx
+    </FilePath>
+    <FilePath>
+      ../Docs/Tutorial/Partitura/EdgeExtractionTest.arx
+    </FilePath>
+    <FilePath>
+      ../Docs/Tutorial/Partitura/EdgeLinesTest.arx
+    </FilePath>
   </RegistryFiles>
 </Acf>

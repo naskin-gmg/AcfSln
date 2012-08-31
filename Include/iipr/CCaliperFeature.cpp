@@ -68,14 +68,21 @@ imath::CVarVector CCaliperFeature::GetComponentValue(ValueTypeId valueTypeId) co
 	imath::CVarVector retVal;
 
 	switch (valueTypeId){
-		case VTI_AUTO:
-			return GetValues();
-		case VTI_WEIGHT:
-			retVal.SetElementsCount(1);
-			retVal.SetElement(0, m_weight);
-			break;
-		default:
-			break;
+	case VTI_AUTO:
+		return GetValues();
+
+	case VT_ALPHA:
+		retVal.SetElementsCount(1);
+		retVal.SetElement(0, m_position);
+		break;
+
+	case VTI_WEIGHT:
+		retVal.SetElementsCount(1);
+		retVal.SetElement(0, m_weight);
+		break;
+
+	default:
+		break;
 	}
 
 	return retVal;

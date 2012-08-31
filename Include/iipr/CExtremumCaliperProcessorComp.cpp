@@ -172,9 +172,9 @@ bool CExtremumCaliperProcessorComp::GetProjectionPosition(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			double& result) const
 {
-	const CCaliperFeature* caliperFeaturePtr = dynamic_cast<const CCaliperFeature*>(&feature);
-	if (caliperFeaturePtr != NULL){
-		result = caliperFeaturePtr->GetPosition();
+	imath::CVarVector values = feature.GetComponentValue(imeas::INumericValue::VT_ALPHA);
+	if (values.GetElementsCount() > 0){
+		result = values.GetElement(0);
 
 		return true;
 	}

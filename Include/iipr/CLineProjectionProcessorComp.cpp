@@ -169,6 +169,7 @@ bool CLineProjectionProcessorComp::GetImagePosition(
 		double position;
 		if (		(linePtr.IsValid()) &&
 					m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
+			// TODO: correct exactness of this mapping: DoAutosizeProjection return rough line exactness!
 			result = linePtr->GetPositionFromAlpha(position);
 
 			return true;
