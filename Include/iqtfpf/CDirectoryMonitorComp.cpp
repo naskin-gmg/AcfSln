@@ -216,8 +216,10 @@ void CDirectoryMonitorComp::run()
 
 		if (		((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0) ||
 					((observingChanges & ifpf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0)){
-			for (		ifpf::IMonitoringSession::FileItems::Iterator fileIter = m_directoryFiles.begin();
-						fileIter != m_directoryFiles.end();){
+			
+			for (		ifpf::IMonitoringSession::FileItems::ConstIterator fileIter = m_directoryFiles.constBegin();
+						fileIter != m_directoryFiles.constEnd();
+						fileIter++){
 				const QString& filePath = fileIter.key();
 				QFileInfo fileInfo(filePath);
 				if (!fileInfo.exists()){
@@ -226,7 +228,7 @@ void CDirectoryMonitorComp::run()
 
 				if ((observingChanges & ifpf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
 					QDateTime currentModifiedTime = fileInfo.lastModified();
-					QDateTime& previousModifiedTime = fileIter.value();
+					QDateTime previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
 						QString filePath = fileInfo.canonicalFilePath();
 						modifiedFiles.push_back(filePath);
