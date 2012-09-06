@@ -63,7 +63,7 @@ public:
 	virtual double GetDisplayMultiplicationFactor() const = 0;
 
 	/**
-		Get range of possible filter value for specified dimension.
+		Get range of possible value.
 	*/
 	virtual istd::CRange GetValueRange() const = 0;
 

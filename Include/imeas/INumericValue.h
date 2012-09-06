@@ -69,7 +69,12 @@ public:
 		/**
 			2D-transformation, given in the form (m11, m21, m12, m22, dx, dy)
 		*/
-		VTI_2D_TRANSFORM
+		VTI_2D_TRANSFORM,
+
+		/**
+			Line in 2D-space given in the form (x1, y1, x2, y2)
+		*/
+		VTI_2D_LINE
 	};
 
 	/**
