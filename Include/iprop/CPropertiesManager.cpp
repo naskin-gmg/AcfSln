@@ -127,8 +127,6 @@ bool CPropertiesManager::ReadProperties(
 
 	bool retVal = true;
 
-	m_propertiesList.Reset();
-
 	int propertiesCount = m_propertiesList.GetCount();
 
 	retVal = retVal && archive.BeginMultiTag(propertiesTag, propertyTag, propertiesCount);
