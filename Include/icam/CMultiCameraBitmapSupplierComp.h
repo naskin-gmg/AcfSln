@@ -42,6 +42,8 @@ public:
 		I_ASSIGN(m_cameraParamsManagerCompPtr, "CameraParamsManager", "Manager of camera parameters", true, "CameraParamsManager");
 	I_END_COMPONENT;
 
+	CMultiCameraBitmapSupplierComp();
+
 	// reimplemented (iipr::IMultiBitmapProvider)
 	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
@@ -55,6 +57,9 @@ protected:
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 
 private:
 	/**
@@ -76,6 +81,11 @@ private:
 		Camera parameters.
 	*/
 	I_REF(iprm::IParamsManager, m_cameraParamsManagerCompPtr);
+
+	// Shadows
+	IBitmapAcquisition* m_bitmapAcquisitionPtr;
+	iprm::IParamsManager* m_cameraParamsManagerPtr;
+	i2d::ITransformation2d* m_logTransformPtr;
 };
 
 
