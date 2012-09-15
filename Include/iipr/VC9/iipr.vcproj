@@ -166,6 +166,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCaliperDistanceFeature.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCaliperFeature.cpp"
 				>
 			</File>
@@ -207,6 +211,14 @@
 			</File>
 			<File
 				RelativePath="..\CDifferenceBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CEdgeDistanceProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CEdgeDistancesSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -266,6 +278,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLineSupplierCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPositionFromImageSupplierComp.cpp"
 				>
 			</File>
@@ -317,6 +333,10 @@
 				RelativePath="..\CSingleFeatureConsumer.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CTubeProjectionLinesProviderComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -332,6 +352,10 @@
 			</File>
 			<File
 				RelativePath="..\CBitmapProviderCacheComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCaliperDistanceFeature.h"
 				>
 			</File>
 			<File
@@ -376,6 +400,14 @@
 			</File>
 			<File
 				RelativePath="..\CDifferenceBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CEdgeDistanceProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CEdgeDistancesSupplierComp.h"
 				>
 			</File>
 			<File
@@ -435,6 +467,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLineSupplierCompBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CPositionFromImageSupplierComp.h"
 				>
 			</File>
@@ -484,6 +520,10 @@
 			</File>
 			<File
 				RelativePath="..\CSingleFeatureConsumer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTubeProjectionLinesProviderComp.h"
 				>
 			</File>
 			<File

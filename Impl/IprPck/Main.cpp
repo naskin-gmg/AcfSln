@@ -173,6 +173,21 @@ I_EXPORT_COMPONENT(
 			"Bitmap joiner from a multi-bitmap-provider",
 			"Bitmap Supplier Provider Join" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			EdgeDistanceProcessor,
+			"Processor for calculation of distance between two edges",
+			"Bitmap Edge Caliper Distance" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			EdgeDistancesSupplier,
+			"Supplier of found distances between two edges based on caliper calculation",
+			"Bitmap Edge Caliper Distance" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			TubeProjectionLinesProvider,
+			"Supplier list of projection lines in a tube region",
+			"Bitmap Projection Line Tube Region" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 

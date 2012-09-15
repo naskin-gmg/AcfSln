@@ -41,7 +41,9 @@
 #include "iipr/CColorBitmapSeparatorSupplierComp.h"
 #include "iipr/CBitmapJoinerSupplierComp.h"
 #include "iipr/CMultiBitmapCacheComp.h"
-
+#include "iipr/CEdgeDistanceProcessorComp.h"
+#include "iipr/CEdgeDistancesSupplierComp.h"
+#include "iipr/CTubeProjectionLinesProviderComp.h"
 
 /**
 	System-undependent image processing package.
@@ -108,6 +110,9 @@ typedef icomp::TModelCompWrap<
 
 typedef icomp::TModelCompWrap<iipr::CColorBitmapSeparatorSupplierComp> ColorBitmapSeparatorSupplier;
 typedef icomp::TModelCompWrap<iipr::CBitmapJoinerSupplierComp> BitmapJoinerSupplier;
+typedef iipr::CEdgeDistanceProcessorComp EdgeDistanceProcessor;
+typedef icomp::TModelCompWrap<iipr::CEdgeDistancesSupplierComp> EdgeDistancesSupplier;
+typedef icomp::TModelCompWrap<iipr::CTubeProjectionLinesProviderComp> TubeProjectionLinesProvider;
 
 
 } // namespace IprPck

@@ -1,0 +1,61 @@
+#ifndef iipr_CEdgeDistancesSupplierComp_included
+#define iipr_CEdgeDistancesSupplierComp_included
+
+
+// ACF includes
+#include "istd/TPointerVector.h"
+#include "i2d/CVector2d.h"
+#include "iproc/IProcessor.h"
+#include "iproc/TSupplierCompWrap.h"
+#include "imeas/INumericValueProvider.h"
+#include "imeas/CSimpleNumericValue.h"
+
+// ACF-Solutions includes
+#include "iipr/IBitmapProvider.h"
+#include "iipr/IImageToFeatureProcessor.h"
+#include "iipr/CCaliperDistanceFeature.h"
+#include "iipr/CFeaturesContainer.h"
+
+
+namespace iipr
+{
+
+
+class CEdgeDistancesSupplierComp:
+			public iproc::TSupplierCompWrap<CFeaturesContainer>,
+			virtual public imeas::INumericValueProvider
+{
+public:
+	typedef iproc::TSupplierCompWrap<CFeaturesContainer> BaseClass;
+
+	I_BEGIN_COMPONENT(CEdgeDistancesSupplierComp);
+		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
+	I_END_COMPONENT;
+
+	// reimplemented (imeas::INumericValueProvider)
+	virtual int GetValuesCount() const;
+	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+
+protected:
+	// reimplemented (iproc::TSupplierCompWrap)
+	virtual int ProduceObject(ProductType& result) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+private:
+	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
+	I_REF(iproc::IProcessor, m_processorCompPtr);
+};
+
+
+} // namespace iipr
+
+
+#endif // !iipr_CEdgeDistancesSupplierComp_included
+
+
