@@ -15,6 +15,8 @@ namespace iipr
 
 int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 {
+	result.clear();
+
 	iprm::IParamsSet* paramsPtr = GetModelParametersSet();
 	if (paramsPtr == NULL){
 		return WS_CRITICAL;
