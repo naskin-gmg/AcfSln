@@ -14,6 +14,7 @@
 #include "iqtipr/CSearchBasedFeaturesSupplierGuiComp.h"
 #include "iqtipr/CGeneralSearchParamsGuiComp.h"
 #include "iqtipr/CConvolution2dParamsGuiComp.h"
+#include "iqtipr/CMultiLineSupplierGuiComp.h"
 
 
 /**
@@ -30,6 +31,7 @@ typedef iqtipr::CCircleFinderParamsGuiComp CircleFinderParamsGui;
 typedef iqtipr::CSearchBasedFeaturesSupplierGuiComp SearchBasedFeaturesSupplierGui;
 typedef iqtipr::CGeneralSearchParamsGuiComp GeneralSearchParamsGui;
 typedef iqtipr::CConvolution2dParamsGuiComp Convolution2dParamsGui;
+typedef iqtipr::CMultiLineSupplierGuiComp MultiLineSupplierGui;
 
 
 } // namespace QtIprPck

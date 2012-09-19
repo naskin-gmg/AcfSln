@@ -53,6 +53,10 @@ I_EXPORT_COMPONENT(
 			"GUI for definition of convolution kernel",
 			"Kernel Convolution Filter");
 
+I_EXPORT_COMPONENT(
+			MultiLineSupplierGui, 
+			"Multi line supplier GUI",
+			"Multi Line Supplier GUI")
 
 
 

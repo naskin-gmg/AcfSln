@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSimpleNumericValueProvider.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CWavSamplesLoaderComp.cpp"
 				>
 			</File>
@@ -254,6 +258,10 @@
 			</File>
 			<File
 				RelativePath="..\CSimpleNumericValue.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimpleNumericValueProvider.h"
 				>
 			</File>
 			<File
