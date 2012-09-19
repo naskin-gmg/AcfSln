@@ -31,7 +31,7 @@ typedef iqtipr::CCircleFinderParamsGuiComp CircleFinderParamsGui;
 typedef iqtipr::CSearchBasedFeaturesSupplierGuiComp SearchBasedFeaturesSupplierGui;
 typedef iqtipr::CGeneralSearchParamsGuiComp GeneralSearchParamsGui;
 typedef iqtipr::CConvolution2dParamsGuiComp Convolution2dParamsGui;
-typedef iqtipr::CMultiLineSupplierGuiComp MultiLineSupplierGui;
+typedef imod::TModelWrap<iqtipr::CMultiLineSupplierGuiComp> MultiLineSupplierGui;
 
 
 } // namespace QtIprPck
