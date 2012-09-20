@@ -104,7 +104,7 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 		CalcFullDerivativeLine(sourceLinePtr, sourceLinePtr + sourceLineDiff, destLine2Ptr, width);
 		sourceLinePtr += sourceLineDiff;
 
-		for (int y = 1; y < size.GetY() - 1; ++y){
+		for (int y = 1; y < size.GetY() - 2; ++y){
 			CalcLine(sourceLinePtr, sourceLinePtr + sourceLineDiff, destLine1Ptr, destLine2Ptr, destLine3Ptr, y, width, threshold2Factor, container);
 
 			// move line address in rolling line buffer
@@ -206,7 +206,7 @@ const imeas::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int ind
 
 // private static methods
 
-__forceinline void CFastEdgesExtractorComp::TryConnectElements(
+inline void CFastEdgesExtractorComp::TryConnectElements(
 			PixelDescriptor& neightborPixel,
 			PixelDescriptor& pixel)
 {
@@ -279,7 +279,7 @@ __forceinline void CFastEdgesExtractorComp::TryConnectElements(
 }
 
 
-__forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPointToContour(
+inline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPointToContour(
 			double posX,
 			double posY,
 			double rawWeight,
@@ -313,7 +313,7 @@ __forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPoin
 }
 
 
-__forceinline void CFastEdgesExtractorComp::CalcFullDerivative(
+inline void CFastEdgesExtractorComp::CalcFullDerivative(
 			const quint8* sourceLine1,
 			const quint8* sourceLine2,
 			PixelDescriptor* destLine,
@@ -336,7 +336,7 @@ __forceinline void CFastEdgesExtractorComp::CalcFullDerivative(
 }
 
 
-__forceinline void CFastEdgesExtractorComp::CalcFullDerivativeLine(
+inline void CFastEdgesExtractorComp::CalcFullDerivativeLine(
 			const quint8* sourceLine1,
 			const quint8* sourceLine2,
 			PixelDescriptor* destLine,
@@ -347,7 +347,7 @@ __forceinline void CFastEdgesExtractorComp::CalcFullDerivativeLine(
 }
 
 
-__forceinline void CFastEdgesExtractorComp::CalcPoint(
+inline void CFastEdgesExtractorComp::CalcPoint(
 			const quint8* sourceLine1,
 			const quint8* sourceLine2,
 			PixelDescriptor* destLine1,
@@ -430,7 +430,7 @@ __forceinline void CFastEdgesExtractorComp::CalcPoint(
 }
 
 
-__forceinline void CFastEdgesExtractorComp::CalcLine(
+inline void CFastEdgesExtractorComp::CalcLine(
 			const quint8* sourceLine1,
 			const quint8* sourceLine2,
 			PixelDescriptor* destLine1,
@@ -450,7 +450,7 @@ __forceinline void CFastEdgesExtractorComp::CalcLine(
 
 // inline methods of embedded class InternalContainer
 
-__forceinline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::InternalContainer::AddElementToList()
+inline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::InternalContainer::AddElementToList()
 {
 	if (m_freeIndex < m_buffer.size()){
 		return &m_buffer[m_freeIndex++];

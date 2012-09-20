@@ -36,6 +36,8 @@ public:
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
 
+	CEdgeLinesSupplierGuiComp();
+
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
@@ -61,6 +63,8 @@ private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
 	imod::TModelWrap<iedge::CEdgeLine::Container> m_foundModel;
+
+	iview::CColorShema m_edgesColorShema;
 };
 
 }//namespace iedgegui
