@@ -309,6 +309,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\INumericValueProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ISampleAcquisition.h"
 				>
 			</File>

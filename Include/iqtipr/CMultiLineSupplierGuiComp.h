@@ -7,6 +7,7 @@
 #include "iqtinsp/TSupplierGuiCompBase.h"
 #include "imeas/CSimpleNumericValueProvider.h"
 #include "iprm/ISelectionParam.h"
+#include "imod/CMultiModelDispatcherBase.h"
 
 // ACF-Solutions includes
 #include "Generated/ui_CMultiLineSupplierGuiComp.h"
@@ -16,11 +17,10 @@ namespace iqtipr
 {
 
 
-class CMultiLineSupplierGuiComp:
+class CMultiLineSupplierGuiComp: 
 			public iqtinsp::TSupplierGuiCompBase<
 						Ui::CMultiLineSupplierGuiComp,
-						imeas::INumericValueProvider>,
-			virtual public iprm::ISelectionParam
+						imeas::INumericValueProvider>
 {
 	Q_OBJECT
 
@@ -30,7 +30,8 @@ public:
 				imeas::INumericValueProvider> BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiLineSupplierGuiComp);
-		I_REGISTER_INTERFACE(iprm::ISelectionParam);
+		I_REGISTER_SUBELEMENT(CLineSelection);
+		I_REGISTER_SUBELEMENT_INTERFACE(CLineSelection, iprm::ISelectionParam, ExtractLineSelection);
 	I_END_COMPONENT;
 
 	CMultiLineSupplierGuiComp();
@@ -49,28 +50,41 @@ protected:
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
-	// reimplemented (iprm::ISelectionParam)
-	virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
-	virtual int GetSelectedOptionIndex() const;
-	virtual bool SetSelectedOptionIndex(int index);
-	virtual iprm::ISelectionParam* GetActiveSubselection() const;
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& /*archive*/)
+protected:
+	class CLineSelection: public iprm::ISelectionParam
 	{
-		return true;
-	}
+	public:
+		CLineSelection();
 
-private:
-	class CShape: public iview::CShapeBase				
+		// reimplemented (iprm::ISelectionParam)
+		virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+		virtual int GetSelectedOptionIndex() const;
+		virtual bool SetSelectedOptionIndex(int index);
+		virtual iprm::ISelectionParam* GetActiveSubselection() const;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+	protected:
+		int m_selectedLineIndex;
+	};
+
+	class CShape: 
+				public iview::CShapeBase,
+				protected imod::CMultiModelDispatcherBase
 	{
 	public:
 		typedef iview::CShapeBase BaseClass;
+		typedef imod::CMultiModelDispatcherBase BaseClass2;
 
 		CShape(iprm::ISelectionParam& selection);
+		virtual ~CShape();
 
 		// reimplemented (iview::IVisualizable)
 		virtual void Draw(QPainter& drawContext) const;
+
+		// reimplemented (imod::CMultiModelDispatcherBase)
+		virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
 	protected:
 		// reimplemented (iview::CShapeBase)
@@ -80,9 +94,14 @@ private:
 		iprm::ISelectionParam& m_lineSelection;
 	};
 
-	int m_selectedLineIndex;
-
 	imod::TModelWrap<imeas::CSimpleNumericValueProvider> m_results;
+
+	imod::TModelWrap<CLineSelection> m_lineSelection;
+
+	static iprm::ISelectionParam* ExtractLineSelection(CMultiLineSupplierGuiComp& component)
+	{
+		return &component.m_lineSelection;
+	}
 };
 
 
