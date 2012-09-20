@@ -23,9 +23,9 @@ void CEdgeLinesTestGuiComp::GenerateLines()
 {
 	m_model.Reset();
 
-	for(int c=0; c<2; c++){
+	for (int c=0; c<2; c++){
 		iedge::CEdgeLine line;
-		for(int p=0; p<6; p++){
+		for (int p=0; p<6; p++){
 			double x = rand() & 255;
 			double y = rand() & 255;
 			double dx = (rand() & 255) - 127.5;

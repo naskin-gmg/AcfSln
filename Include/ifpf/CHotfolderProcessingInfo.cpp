@@ -27,7 +27,7 @@ bool CHotfolderProcessingInfo::ItemExists(const QString& inputFilePath, ifpf::IH
 {
 	QMutexLocker locker(&m_mutex);
 
-	for(int itemIndex = 0; itemIndex < m_processingItems.GetCount(); itemIndex++){
+	for (int itemIndex = 0; itemIndex < m_processingItems.GetCount(); itemIndex++){
 		ifpf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
 		I_ASSERT(itemPtr != NULL);
 

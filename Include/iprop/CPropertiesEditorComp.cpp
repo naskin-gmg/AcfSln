@@ -26,7 +26,7 @@ void CPropertiesEditorComp::UpdateGui(int /*updateFlags*/)
 
 		int propertiesCount = objectPtr->GetPropertiesCount();
 		
-		for(int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
+		for (int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
 			const IProperty* propertyPtr = dynamic_cast<const IProperty*>(objectPtr->GetProperty(propertyIndex));
 			if (propertyPtr != NULL){
 

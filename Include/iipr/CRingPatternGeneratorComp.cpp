@@ -46,9 +46,9 @@ int CRingPatternGeneratorComp::DoProcessing(
 	int patternGenerationMode = iipr::IRingPatternGeneratorParams::PT_DYNAMIC_WAVELENGTH;	
 
 	double maxRadius = halfHeight - waveLength / 2.0; // margin
-	for( int y = 0; y < outputImageHeight; y++){
+	for ( int y = 0; y < outputImageHeight; y++){
 		quint8* imageLinePtr = (quint8*)outputBitmapPtr->GetLinePtr(y);
-		for(int x = 0; x < outputImageWidth; x++){
+		for (int x = 0; x < outputImageWidth; x++){
 			int dx = x - halfWidth;
 			int dy = y - halfHeight;
 

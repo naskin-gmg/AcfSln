@@ -93,7 +93,7 @@ void CProjectionShape::UpdateFigure() const
 
 		double prevSample = projectionPtr->GetSample(0);
 
-		for(int x = 1; x < samplesCount - 1; x++){
+		for (int x = 1; x < samplesCount - 1; x++){
 			double sample = projectionPtr->GetSample(x);
 			
 			m_path.moveTo(x - 1, prevSample * 100);

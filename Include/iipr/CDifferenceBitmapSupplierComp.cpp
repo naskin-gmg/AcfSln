@@ -118,7 +118,7 @@ int CDifferenceBitmapSupplierComp::CalculateDifferenceBitmap(
 
 	int componentsCount = firstInputBitmap.GetComponentsCount();
 
-	for(int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 		for (int y = 0; y < outputImageSize.GetY(); ++y){
 			const quint8* firstLinePtr = (const quint8*)firstInputBitmap.GetLinePtr(y);
 			const quint8* secondLinePtr = (const quint8*)secondInputBitmap.GetLinePtr(y);
