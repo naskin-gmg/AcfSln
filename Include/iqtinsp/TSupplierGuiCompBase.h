@@ -459,8 +459,6 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 }
 
 
-
-
 // public methods of embedded class ParamsObserver
 
 template <class UI, class WidgetType>
