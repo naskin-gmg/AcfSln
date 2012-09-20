@@ -365,8 +365,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 				continue;
 			}
 
-			new QVBoxLayout(newPreviewPagePtr.GetPtr());
-			newPreviewPagePtr->setContentsMargins(0, 0, 0, 0);
+			QVBoxLayout* pageLayoutPtr = new QVBoxLayout(newPreviewPagePtr.GetPtr());
+			pageLayoutPtr->setContentsMargins(0, 0, 0, 0);
 
 			if (!guiObjectPtr->CreateGui(newPreviewPagePtr.GetPtr())){
 				continue;
