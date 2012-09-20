@@ -8,7 +8,7 @@
 #include "imeas/CSimpleNumericValueProvider.h"
 #include "iprm/ISelectionParam.h"
 
-// QSF includes
+// ACF-Solutions includes
 #include "Generated/ui_CMultiLineSupplierGuiComp.h"
 
 
@@ -16,7 +16,7 @@ namespace iqtipr
 {
 
 
-class CMultiLineSupplierGuiComp: 
+class CMultiLineSupplierGuiComp:
 			public iqtinsp::TSupplierGuiCompBase<
 						Ui::CMultiLineSupplierGuiComp,
 						imeas::INumericValueProvider>,
@@ -73,8 +73,6 @@ private:
 		virtual void Draw(QPainter& drawContext) const;
 
 	protected:
-		void UpdateShape();
-
 		// reimplemented (iview::CShapeBase)
 		virtual i2d::CRect CalcBoundingBox() const;
 
