@@ -30,8 +30,8 @@ public:
 				imeas::INumericValueProvider> BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiLineSupplierGuiComp);
-		I_REGISTER_SUBELEMENT(CLineSelection);
-		I_REGISTER_SUBELEMENT_INTERFACE(CLineSelection, iprm::ISelectionParam, ExtractLineSelection);
+		I_REGISTER_SUBELEMENT(LineSelection);
+		I_REGISTER_SUBELEMENT_INTERFACE(LineSelection, iprm::ISelectionParam, ExtractLineSelection);
 	I_END_COMPONENT;
 
 	CMultiLineSupplierGuiComp();
@@ -51,10 +51,10 @@ protected:
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 protected:
-	class CLineSelection: public iprm::ISelectionParam
+	class LineSelection: public iprm::ISelectionParam
 	{
 	public:
-		CLineSelection();
+		LineSelection();
 
 		// reimplemented (iprm::ISelectionParam)
 		virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
@@ -96,7 +96,7 @@ protected:
 
 	imod::TModelWrap<imeas::CSimpleNumericValueProvider> m_results;
 
-	imod::TModelWrap<CLineSelection> m_lineSelection;
+	imod::TModelWrap<LineSelection> m_lineSelection;
 
 	static iprm::ISelectionParam* ExtractLineSelection(CMultiLineSupplierGuiComp& component)
 	{

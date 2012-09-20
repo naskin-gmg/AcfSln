@@ -78,7 +78,7 @@ void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 
 // internal class CLineSelection
 
-CMultiLineSupplierGuiComp::CLineSelection::CLineSelection()
+CMultiLineSupplierGuiComp::LineSelection::LineSelection()
 :	m_selectedLineIndex(-1)
 {
 
@@ -87,19 +87,19 @@ CMultiLineSupplierGuiComp::CLineSelection::CLineSelection()
 
 // reimplemented (iprm::ISelectionParam)
 
-const iprm::ISelectionConstraints* CMultiLineSupplierGuiComp::CLineSelection::GetSelectionConstraints() const
+const iprm::ISelectionConstraints* CMultiLineSupplierGuiComp::LineSelection::GetSelectionConstraints() const
 {
 	return NULL;
 }
 
 
-int CMultiLineSupplierGuiComp::CLineSelection::GetSelectedOptionIndex() const
+int CMultiLineSupplierGuiComp::LineSelection::GetSelectedOptionIndex() const
 {
 	return m_selectedLineIndex;
 }
 
 
-bool CMultiLineSupplierGuiComp::CLineSelection::SetSelectedOptionIndex(int index)
+bool CMultiLineSupplierGuiComp::LineSelection::SetSelectedOptionIndex(int index)
 {
 	if (m_selectedLineIndex != index){
 		istd::CChangeNotifier updatePtr(this);
@@ -111,7 +111,7 @@ bool CMultiLineSupplierGuiComp::CLineSelection::SetSelectedOptionIndex(int index
 }
 
 
-iprm::ISelectionParam* CMultiLineSupplierGuiComp::CLineSelection::GetActiveSubselection() const
+iprm::ISelectionParam* CMultiLineSupplierGuiComp::LineSelection::GetActiveSubselection() const
 {
 	return NULL;
 }
@@ -119,7 +119,7 @@ iprm::ISelectionParam* CMultiLineSupplierGuiComp::CLineSelection::GetActiveSubse
 
 // reimplemented (iser::ISerializable)
 
-bool CMultiLineSupplierGuiComp::CLineSelection::Serialize(iser::IArchive& /*archive*/)
+bool CMultiLineSupplierGuiComp::LineSelection::Serialize(iser::IArchive& /*archive*/)
 {
 	return true;
 }
