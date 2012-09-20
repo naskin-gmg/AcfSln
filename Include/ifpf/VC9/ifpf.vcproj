@@ -29,11 +29,6 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-			/>
-			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\Generated"
@@ -112,11 +107,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
 				Name="SubVersionTransform"
