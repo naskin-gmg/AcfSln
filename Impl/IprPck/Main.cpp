@@ -188,6 +188,11 @@ I_EXPORT_COMPONENT(
 			"Supplier list of projection lines in a tube region",
 			"Bitmap Projection Line Tube Region" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			MorphologicalProcessor,
+			"Processor for simple morphological operations on a bitmap",
+			"Bitmap Morphology Erosion Dilatation Opening Closing Structure" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 

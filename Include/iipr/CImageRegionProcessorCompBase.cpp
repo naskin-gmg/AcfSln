@@ -37,6 +37,8 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		return TS_INVALID;
 	}
 
+	i2d::CRectangle inputImageArea(inputBitmapPtr->GetImageSize());
+
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, *m_aoiParamIdAttrPtr);
 
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
@@ -59,6 +61,11 @@ int CImageRegionProcessorCompBase::DoProcessing(
 
 				aoiPtr.SetPtr(transformedRegionPtr.GetPtr());
 			}
+		}
+	}
+	else{
+		if (*m_allowEmptyRegionAttrPtr){
+			aoiPtr.SetPtr(&inputImageArea);			
 		}
 	}
 

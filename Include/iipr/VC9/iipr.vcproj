@@ -274,6 +274,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMorphologicalProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiBitmapCacheComp.cpp"
 				>
 			</File>
@@ -460,6 +464,10 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMorphologicalProcessorComp.h"
 				>
 			</File>
 			<File

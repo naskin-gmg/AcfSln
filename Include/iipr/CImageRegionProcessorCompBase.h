@@ -32,7 +32,8 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CImageRegionProcessorCompBase);
-		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set", false, "AoiParams");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set", true, "AoiParams");
+		I_ASSIGN(m_allowEmptyRegionAttrPtr, "AllowEmptyAoi", "If enabled the full image area is used of no AOI was set", true, false);
 		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
 	I_END_COMPONENT;
 
@@ -57,6 +58,7 @@ protected:
 
 private:
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_ATTR(bool, m_allowEmptyRegionAttrPtr);
 	I_REF(i2d::ICalibrationProvider, m_regionCalibrationProviderCompPtr);
 };
 
