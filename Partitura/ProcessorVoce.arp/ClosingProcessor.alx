@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2535
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="4">
+    <Element>
+      <ComponentName>
+        Erosion
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Bitmap
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        100
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Closing
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Dilatation
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
+</Acf>
