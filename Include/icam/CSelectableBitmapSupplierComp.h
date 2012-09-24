@@ -39,6 +39,7 @@ public:
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_multiBitmapProviderCompPtr, "MultiBitmapProvider", "Provider of the bitmap list", true, "MultiBitmapProvider");
 		I_ASSIGN_TO(m_multiBitmapSupplierCompPtr, m_multiBitmapProviderCompPtr, false);
+		I_ASSIGN_TO(m_multiBitmapProviderModelCompPtr, m_multiBitmapProviderCompPtr, false);
 		I_ASSIGN(m_bitmapSelectionCompPtr, "BitmapSelection", "Index of the bitmap in the list", true, "BitmapSelection");
 		I_ASSIGN_TO(m_bitmapSelectionModelCompPtr, m_bitmapSelectionCompPtr, true);
 	I_END_COMPONENT;
