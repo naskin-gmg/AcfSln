@@ -6,14 +6,20 @@ namespace iedge
 
 
 CEdgeLine::CEdgeLine()
-:	m_isClosed(false)
+:	m_isClosed(false),
+	m_totalLength(0),
+	m_minWeight(0),
+	m_maxWeight(0)
 {
 }
 
 
 CEdgeLine::CEdgeLine(const CEdgeLine& edge)
 :	m_edgeLines(edge.m_edgeLines),
-	m_isClosed(false)
+	m_isClosed(false),
+	m_totalLength(0),
+	m_minWeight(0),
+	m_maxWeight(0)
 {
 }
 
@@ -22,6 +28,9 @@ void CEdgeLine::Clear()
 {
 	m_edgeLines.clear();
 	m_isClosed = false;
+	m_totalLength = 0;
+	m_minWeight = 0;
+	m_maxWeight = 0;
 }
 
 
@@ -479,10 +488,13 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 
 void CEdgeLine::CalcVolatile() const
 {
+	m_totalLength = 0;
+
 	if (!m_edgeLines.isEmpty()){
 		const CEdgeNode& firstNode = m_edgeLines.first();
 		double firstWeight = firstNode.GetWeight();
-		m_center = firstNode.GetPosition() * firstWeight;
+		i2d::CVector2d lastPosition = firstNode.GetPosition();
+		m_center = lastPosition * firstWeight;
 		m_minWeight = firstWeight;
 		m_maxWeight = firstWeight;
 
@@ -492,9 +504,13 @@ void CEdgeLine::CalcVolatile() const
 					iter != m_edgeLines.constEnd();
 					++iter){
 			const CEdgeNode& node = *iter;
+
+			const i2d::CVector2d& position = node.GetPosition();
+
+			m_totalLength += lastPosition.GetDistance(position);
 			double weight = node.GetWeight();
 
-			m_center = node.GetPosition() * weight;
+			m_center = position * weight;
 
 			if (weight < m_minWeight){
 				m_minWeight = weight;
@@ -502,6 +518,8 @@ void CEdgeLine::CalcVolatile() const
 			else if (weight > m_maxWeight){
 				m_maxWeight = weight;
 			}
+
+			lastPosition = position;
 		}
 
 		if (weightsSum > I_BIG_EPSILON){

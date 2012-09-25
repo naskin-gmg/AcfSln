@@ -50,6 +50,7 @@ public:
 	int GetNodesCount() const;
 	int GetSegmentsCount() const;
 
+	double GetTotalLength() const;
 	double GetMinWeight() const;
 	double GetMaxWeight() const;
 
@@ -94,6 +95,7 @@ private:
 	bool m_isClosed;
 
 	mutable bool m_areVolatileValid;
+	mutable double m_totalLength;
 	mutable i2d::CVector2d m_center;
 	mutable double m_minWeight;
 	mutable double m_maxWeight;
@@ -121,6 +123,16 @@ inline int CEdgeLine::GetNodesCount() const
 inline int CEdgeLine::GetSegmentsCount() const
 {
 	return m_isClosed? m_edgeLines.size(): m_edgeLines.size() - 1;
+}
+
+
+inline double CEdgeLine::GetTotalLength() const
+{
+	if (!m_areVolatileValid){
+		CalcVolatile();
+	}
+
+	return m_totalLength;
 }
 
 
