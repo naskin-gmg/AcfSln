@@ -29,19 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -109,19 +106,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\Generated"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -193,6 +187,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileListConverterComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNamingParamsComp.cpp"
 				>
 			</File>
@@ -251,6 +249,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileListConverterComp.h"
 				>
 			</File>
 			<File

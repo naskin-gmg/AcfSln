@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2546
         </Number>
         <Description>
           ACF
@@ -93,7 +93,7 @@
               Id
             </Type>
             <ExportId>
-              
+              AoiParamId
             </ExportId>
             <Data>
               <IsEnabled>
@@ -132,8 +132,11 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                FilterSize
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

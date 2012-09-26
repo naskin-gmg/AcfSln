@@ -63,6 +63,12 @@ I_EXPORT_COMPONENT(
 			"File storage component",
 			"File Processing Hotfolder Parameter");
 
+I_EXPORT_COMPONENT(
+			FileListConverter,
+			"Component for conversion of a list of files",
+			"File Processing Conversion List");
+
+
 } // namespace FpfPck
 
 
