@@ -115,6 +115,65 @@ iprm::IParamsSet* CInspectionTaskComp::GetModelParametersSet() const
 }
 
 
+// reimplemented (ibase::IMessageContainer)
+
+int CInspectionTaskComp::GetWorstCategory() const
+{
+	const_cast<CInspectionTaskComp*>(this)->EnsureStatusKnown();
+
+	return m_resultCategory;
+}
+
+
+ibase::IMessageContainer::Messages CInspectionTaskComp::GetMessages() const
+{
+	ibase::IMessageContainer::Messages retVal;
+
+	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		const ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			retVal += containerPtr->GetMessages();
+		}
+	}
+
+	return retVal;
+}
+
+
+void CInspectionTaskComp::ClearMessages()
+{
+	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			containerPtr->ClearMessages();
+		}
+	}
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
+{
+	bool retVal = true;
+
+	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			retVal = containerPtr->Serialize(archive) && retVal;
+		}
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (istd::IInformationProvider)
 
 QDateTime CInspectionTaskComp::GetInformationTimeStamp() const
