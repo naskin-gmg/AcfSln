@@ -49,6 +49,8 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
+	MessageList->clear();
+
 	for (		EditorsList::const_iterator iter = m_editorsList.begin();
 				iter != m_editorsList.end();
 				++iter){
@@ -58,7 +60,9 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 		editorPtr->UpdateEditor(updateFlags);
 	}
 
-	const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(GetObjectPtr());
+	iinsp::IInspectionTask* taskPtr = GetObjectPtr();
+
+	const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(taskPtr);
 	if (processingTimeProviderPtr != NULL){
 		ProcessingTimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
 		ProcessingTimeLabel->setVisible(true);
@@ -66,6 +70,28 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 	else{
 		ProcessingTimeLabel->setVisible(false);
 	}
+
+	if (taskPtr != NULL){
+		int subtasksCount = taskPtr->GetSubtasksCount();
+		for (int subTaskIndex = 0; subTaskIndex < subtasksCount; subTaskIndex++){
+			const ibase::IMessageContainer* messageContainerPtr = dynamic_cast<const ibase::IMessageContainer*>(taskPtr->GetSubtask(subTaskIndex));
+			if (messageContainerPtr != NULL){
+				AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex);
+			}
+		}
+	}
+
+	// Close message view if no messages were provded:
+	QList<int> sizes = MessageListSplitter->sizes();
+
+	if (MessageList->topLevelItemCount() == 0){
+		sizes[1] = 0;
+	}
+	else{
+		sizes[1] = sizes[0] / 4;
+	}
+
+	MessageListSplitter->setSizes(sizes);
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
@@ -456,6 +482,55 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 void CInspectionTaskGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	UpdateVisualElements();
+}
+
+
+
+void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex)
+{
+	ibase::IMessageContainer::Messages messageList = messageContainer.GetMessages();
+	int messagesCount = messageList.count();
+
+	for (int messageIndex = 0; messageIndex < messagesCount; messageIndex++){
+		ibase::IMessageConsumer::MessagePtr messagePtr = messageList[messageIndex];
+
+		QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
+
+		messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
+
+		QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
+		messageItemPtr->setIcon(0, messageIcon);
+
+		messageItemPtr->setText(0, messagePtr->GetInformationDescription());
+
+		MessageList->addTopLevelItem(messageItemPtr);
+	}
+}
+
+
+// private static methods
+
+QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category)
+{
+	static QIcon logIcon(":/Icons/Log");
+	static QIcon infoIcon(":/Icons/Info.svg");
+	static QIcon warningIcon(":/Icons/Warning.svg");
+	static QIcon errorIcon(":/Icons/Error.svg");
+
+	switch (category){
+	case istd::IInformationProvider::IC_INFO:
+		return infoIcon;
+
+	case istd::IInformationProvider::IC_WARNING:
+		return warningIcon;
+
+	case istd::IInformationProvider::IC_ERROR:
+	case istd::IInformationProvider::IC_CRITICAL:
+		return errorIcon;
+
+	default:
+		return logIcon;
+	}
 }
 
 

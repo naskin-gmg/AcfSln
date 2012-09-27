@@ -3,25 +3,26 @@
 
 
 // Qt includes
+#include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QSet>
 #include <QtGui/QToolBox>
 #include <QtGui/QTabWidget>
 
 // ACF includes
-#include <QtCore/QString>
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CMultiModelDispatcherBase.h"
 #include "iser/IFileLoader.h"
+#include "ibase/IMessageContainer.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqt2d/IViewExtender.h"
 #include "iqt2d/IViewProvider.h"
 
+// ACF-Solutions includes
 #include "iinsp/IInspectionTask.h"
 
-#include "iqtinsp/Generated/ui_CInspectionTaskGuiComp.h"
-
 #include "iqtinsp/iqtinsp.h"
+#include "iqtinsp/Generated/ui_CInspectionTaskGuiComp.h"
 
 
 namespace iqtinsp
@@ -36,6 +37,11 @@ class CInspectionTaskGuiComp:
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
+
+	enum DataRole
+	{
+		DR_TASK_INDEX = Qt::UserRole + 1
+	};
 
 	I_BEGIN_COMPONENT(CInspectionTaskGuiComp);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
@@ -77,6 +83,10 @@ protected:
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+
+private:
+	void AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex);
+	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
 
 Q_SIGNALS:
 	void DoAutoTest();
