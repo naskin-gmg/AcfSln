@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2380
+          2556
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -144,7 +155,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DefaultModel
@@ -224,6 +235,22 @@
             </Type>
             <ExportId>
               SlaveSceneExtender
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ViewCalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ViewCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>
@@ -335,21 +362,13 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="8">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         i2d::ICalibrationProvider
       </InterfaceId>
       <ComponentId>
         ValueSupplierGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        ValueSupplierGui/VisualStatus
       </ComponentId>
     </Interface>
     <Interface>
@@ -384,24 +403,8 @@
         ValueSupplierGui
       </ComponentId>
     </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IVisualStatusProvider
-      </InterfaceId>
-      <ComponentId>
-        ValueSupplierGui/VisualStatus
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        ValueSupplierGui/VisualStatus
-      </ComponentId>
-    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="5">
     <Component>
       <ExportedId>
         AnnulusSegment
@@ -432,6 +435,14 @@
       </ExportedId>
       <ComponentId>
         ParamsGui
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VisualStatus
+      </ExportedId>
+      <ComponentId>
+        ValueSupplierGui/VisualStatus
       </ComponentId>
     </Component>
   </ExportedComponents>

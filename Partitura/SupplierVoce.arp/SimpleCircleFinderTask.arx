@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2447
+          2556
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -243,7 +254,103 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="13">
+          <AttributeInfo>
+            <Id>
+              AoiInnerRadius
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultAoiInnerRadius
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AoiOuterRadius
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultAoiOuterRadius
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AoiX
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultAoiX
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AoiY
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultAoiY
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CaliperMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DefaultCaliperMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DirectionMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DefaultDirectionMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               FilterConstraints
@@ -261,6 +368,102 @@
               <Value>
                 Caliper
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FilterLegthValues
+            </Id>
+            <Type>
+              Real[]
+            </Type>
+            <ExportId>
+              DefaultFilterLegthValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MinOutlierDistance
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultMinOutlierDistance
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutlierEliminationEnabled
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              DefaultOutlierEliminationEnabled
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PolarityMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DefaultPolarityMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RaysCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DefaultRaysCount
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WeightThreshold
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              DefaultWeightThreshold
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
