@@ -23,7 +23,7 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& fil
 
 		I_ASSERT(!archive.IsStoring());
 
-		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
+		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
 		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
@@ -47,7 +47,7 @@ int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString&
 		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), this);
 		I_ASSERT(archive.IsStoring());
 
-		const iser::ISerializable* serializablePtr = dynamic_cast<const iser::ISerializable*>(&data);
+		const iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){

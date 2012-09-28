@@ -43,6 +43,7 @@ public:
 	I_BEGIN_COMPONENT(CInspectionTaskComp);
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iproc::ISupplier);
+		I_REGISTER_INTERFACE(ibase::IMessageContainer);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_INTERFACE(iproc::IElapsedTimeProvider);
 		I_REGISTER_SUBELEMENT(Parameters);
