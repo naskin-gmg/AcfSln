@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "ibase/TSerializableContainer.h"
-#include "i2d/IObject2d.h"
+#include "i2d/CObject2dBase.h"
 #include "i2d/CPolyline.h"
 #include "i2d/CAffine2d.h"
 
@@ -16,7 +16,7 @@ namespace iedge
 {
 
 
-class CEdgeLine: virtual public i2d::IObject2d
+class CEdgeLine: public i2d::CObject2dBase
 {
 public:
 	class Container;

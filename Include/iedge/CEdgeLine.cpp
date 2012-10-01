@@ -17,6 +17,7 @@ CEdgeLine::CEdgeLine()
 CEdgeLine::CEdgeLine(const CEdgeLine& edge)
 :	m_edgeLines(edge.m_edgeLines),
 	m_isClosed(false),
+	m_areVolatileValid(true),
 	m_totalLength(0),
 	m_minWeight(0),
 	m_maxWeight(0)
@@ -49,6 +50,8 @@ CEdgeNode& CEdgeLine::GetNodeRef(int index)
 void CEdgeLine::SetNode(int index, const CEdgeNode& node)
 {
 	m_edgeLines[index] = node;
+
+	m_areVolatileValid = false;
 }
 
 
@@ -132,6 +135,8 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 			prevDelta = prevDelta;
 		}
 	}
+
+	m_areVolatileValid = false;
 }
 
 
@@ -235,6 +240,8 @@ bool CEdgeLine::Transform(
 		*errorFactorPtr = 0;
 	}
 
+	m_areVolatileValid = false;
+
 	return true;
 }
 
@@ -280,6 +287,8 @@ bool CEdgeLine::InvTransform(
 	if (errorFactorPtr != NULL){
 		*errorFactorPtr = 0;
 	}
+
+	m_areVolatileValid = false;
 
 	return true;
 }
@@ -472,6 +481,8 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 		}
 
 		retVal = retVal && archive.EndTag(nodesTag);
+
+		m_areVolatileValid = false;
 	}
 
 	retVal = retVal && archive.BeginTag(isClosedTag);
