@@ -68,6 +68,11 @@ I_EXPORT_COMPONENT(
 			"Component for conversion of a list of files",
 			"File Processing Conversion List");
 
+I_EXPORT_COMPONENT(
+			FilesContainer,
+			"A simple container of file pathes",
+			"File List Container");
+
 
 } // namespace FpfPck
 

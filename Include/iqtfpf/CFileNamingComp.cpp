@@ -58,7 +58,7 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 		QString outputFilePath = outputDirectory.absoluteFilePath(newFileName);
 
 		if (m_fileNamingParamsCompPtr.IsValid()){
-			if (m_fileNamingParamsCompPtr->GetRenamingMode() == ifpf::IFileNamingParams::RM_OVERWRITE){
+			if (m_fileNamingParamsCompPtr->GetOverwriteStrategy() == ifpf::IFileNamingParams::RM_OVERWRITE){
 				return outputFilePath;
 			}
 			else{

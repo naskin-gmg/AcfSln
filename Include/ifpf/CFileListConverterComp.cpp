@@ -3,6 +3,10 @@
 
 // Qt includes
 #include <QtCore/QStringList>
+#include <QtCore/QDir>
+
+// ACF-Solutions includes
+#include <ifpf/CFileContainer.h>
 
 
 namespace ifpf
@@ -16,7 +20,7 @@ namespace ifpf
 int CFileListConverterComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* /*outputPtr*/,
+			istd::IChangeable* outputPtr,
 			iproc::IProgressManager* progressManagerPtr)
 {
 	if (!m_fileConvertCompPtr.IsValid()){
@@ -40,20 +44,36 @@ int CFileListConverterComp::DoProcessing(
 
 	int retVal = TS_OK;
 
+	CFileContainer* convertedFileListPtr = dynamic_cast<CFileContainer*>(outputPtr);
+
 	QStringList fileList = inputFileListProviderPtr->GetFileList();
 	int filesCount = fileList.count();
 
 	double progressStep = 1.0 / (double)filesCount;
+	
+	if (convertedFileListPtr != NULL){
+		convertedFileListPtr->ResetFiles();
+	}
 
 	for (int inputFileIndex = 0; inputFileIndex < filesCount; inputFileIndex++){
 		const QString& inputFile = fileList[inputFileIndex];
 
 		const QString outputFileName = m_outputFileNameCompPtr->GetFilePath(inputFile);
 
+		QFileInfo outputFileInfo(outputFileName);
+
+		QDir outputDirectory(outputFileInfo.absoluteDir());
+		if (!outputDirectory.mkpath(outputFileInfo.absolutePath())){
+			SendErrorMessage(0, QObject::tr("Output directry doesn't exist").arg(outputFileInfo.absolutePath()));			
+		}
+
 		if (!m_fileConvertCompPtr->ConvertFile(inputFile, outputFileName, paramsPtr)){
 			SendErrorMessage(0, QObject::tr("Processing of %1 failed").arg(inputFile));
-
-			retVal = TS_INVALID;
+		}
+		else{
+			if (convertedFileListPtr != NULL){
+				convertedFileListPtr->InsertFile(outputFileName);
+			}
 		}
 
 		if (progressManagerPtr != NULL){

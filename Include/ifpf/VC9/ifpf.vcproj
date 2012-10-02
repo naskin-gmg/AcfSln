@@ -231,6 +231,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileContainer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVisualHotfolderWorkflowComp.cpp"
 				>
 			</File>
@@ -293,6 +297,10 @@
 			</File>
 			<File
 				RelativePath="..\CMonitoringSessionsManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileContainer.h"
 				>
 			</File>
 			<File

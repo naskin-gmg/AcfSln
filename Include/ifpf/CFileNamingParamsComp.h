@@ -14,7 +14,9 @@ namespace ifpf
 {
 
 
-class CFileNamingParamsComp: public icomp::CComponentBase, virtual public ifpf::IFileNamingParams
+class CFileNamingParamsComp:
+			public icomp::CComponentBase,
+			virtual public ifpf::IFileNamingParams
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -24,11 +26,14 @@ public:
 	I_BEGIN_COMPONENT(ifpf::CFileNamingParamsComp);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(ifpf::IFileNamingParams);
+		I_ASSIGN(m_prefixAttrPtr, "Prefix", "Prefix attached to the output file name", true, "");
+		I_ASSIGN(m_suffixAttrPtr, "Suffix", "Suffix attached to the output file name", true, "");
+		I_ASSIGN(m_overwriteStrategyAttrPtr, "OverwriteStrategy", "Strategy for overwriting of existing files.\n0 - Overwrite existing file\n1 - Add auto generated numbered suffix to the output file name", true, 0);
 	I_END_COMPONENT;
 
 	// reimplemented (ifpf::IFileNamingParams)
-	virtual int GetRenamingMode() const;
-	virtual void SetRenamingMode(int renamingMode);
+	virtual OverwriteStrategy GetOverwriteStrategy() const;
+	virtual void SetOverwriteStrategy(OverwriteStrategy overwriteStrategy);
 	virtual QString GetPrefix() const;
 	virtual void SetPrefix(const QString& prefix);
 	virtual QString GetSuffix() const;
@@ -37,10 +42,18 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
-	int m_renamingMode;
+	OverwriteStrategy m_overwriteStrategy;
 	QString m_suffix;
 	QString m_prefix;
+
+	I_ATTR(QString, m_prefixAttrPtr);
+	I_ATTR(QString, m_suffixAttrPtr);
+	I_ATTR(int, m_overwriteStrategyAttrPtr);
 };
 
 

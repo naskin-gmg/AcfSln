@@ -21,7 +21,7 @@ public:
 	/**
 		Strategy mode
 	*/
-	enum RenamingMode
+	enum OverwriteStrategy
 	{
 		/**
 			Output file name is equals the input file name.
@@ -35,16 +35,16 @@ public:
 	};
 
 	/**
-		Get current renaming mode.
-		\sa RenamingMode
+		Get used strategy for possible overwriting of existing files.
+		\sa OverwriteStrategy
 	*/
-	virtual int GetRenamingMode() const = 0;
+	virtual OverwriteStrategy GetOverwriteStrategy() const = 0;
 
 	/**
 		Set renaming mode.
-		\sa RenamingMode
+		\sa OverwriteStrategy
 	*/
-	virtual void SetRenamingMode(int renamingMode) = 0;
+	virtual void SetOverwriteStrategy(OverwriteStrategy overwriteStrategy) = 0;
 
 	/**
 		Get prefix of the file

@@ -14,24 +14,24 @@ namespace ifpf
 
 
 CFileNamingParamsComp::CFileNamingParamsComp()
-	:m_renamingMode(RM_NUMBERING)
+	:m_overwriteStrategy(RM_NUMBERING)
 {
 }
 
 // reimplemented (ifpf::IFileNamingParams)
 
-int CFileNamingParamsComp::GetRenamingMode() const
+CFileNamingParamsComp::OverwriteStrategy CFileNamingParamsComp::GetOverwriteStrategy() const
 {
-	return m_renamingMode;
+	return m_overwriteStrategy;
 }
 
 
-void CFileNamingParamsComp::SetRenamingMode(int renamingMode)
+void CFileNamingParamsComp::SetOverwriteStrategy(OverwriteStrategy overwriteStrategy)
 {
-	if (m_renamingMode != renamingMode){
+	if (m_overwriteStrategy != overwriteStrategy){
 		istd::CChangeNotifier changePtr(this);
 
-		m_renamingMode = renamingMode;
+		m_overwriteStrategy = overwriteStrategy;
 	}
 }
 
@@ -72,17 +72,23 @@ void CFileNamingParamsComp::SetSuffix(const QString& suffix)
 
 bool CFileNamingParamsComp::Serialize(iser::IArchive& archive)
 {		
-	static iser::CArchiveTag renamingModeTag("RenamingMode", "Mode for the file renaming");
-	static iser::CArchiveTag prefixTag("FilePrefix", "File prefix");
-	static iser::CArchiveTag suffixTag("FileSuffix", "FileSuffix");
+	static iser::CArchiveTag overwriteStrategyTag("OverwriteStrategy", "Strategy for overwriting of existing files");
+	static iser::CArchiveTag prefixTag("FilePrefix", "Prefix for the output file name");
+	static iser::CArchiveTag suffixTag("FileSuffix", "Suffix for the output file name");
 
 	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
 
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(renamingModeTag);
-	retVal = retVal && archive.Process(m_renamingMode);
-	retVal = retVal && archive.EndTag(renamingModeTag);
+	int overwriteMode = m_overwriteStrategy;
+
+	retVal = retVal && archive.BeginTag(overwriteStrategyTag);
+	retVal = retVal && archive.Process(overwriteMode);
+	retVal = retVal && archive.EndTag(overwriteStrategyTag);
+
+	if (retVal){
+		m_overwriteStrategy = OverwriteStrategy(overwriteMode);
+	}
 
 	retVal = retVal && archive.BeginTag(prefixTag);
 	retVal = retVal && archive.Process(m_prefix);
@@ -93,6 +99,20 @@ bool CFileNamingParamsComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(suffixTag);
 
 	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CFileNamingParamsComp::OnComponentCreated()
+{
+	m_prefix = *m_prefixAttrPtr;
+	m_suffix = *m_suffixAttrPtr;
+	m_overwriteStrategy = OverwriteStrategy(*m_overwriteStrategyAttrPtr);
+
+	BaseClass::OnComponentCreated();
 }
 
 
