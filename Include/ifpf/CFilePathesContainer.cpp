@@ -1,9 +1,8 @@
-#include "ifpf/CFileContainer.h"
+#include "ifpf/CFilePathesContainer.h"
 
 
 // Qt includes
 #include <QtCore/QStringList>
-
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -15,14 +14,14 @@ namespace ifpf
 
 // public methods
 
-void CFileContainer::ResetFiles()
+void CFilePathesContainer::ResetFiles()
 {
 	istd::CChangeNotifier changePtr(this);
 
 	m_fileList.clear();
 }
 
-bool CFileContainer::InsertFile(const QString& file, int index)
+bool CFilePathesContainer::InsertFile(const QString& file, int index)
 {
 	QFileInfo fileInfo(file);
 	if (fileInfo.exists()){
@@ -44,7 +43,7 @@ bool CFileContainer::InsertFile(const QString& file, int index)
 
 // reimplemented (ibase::IFileListProvider)
 
-QStringList CFileContainer::GetFileList() const
+QStringList CFilePathesContainer::GetFileList() const
 {
 	QStringList fileList;
 

@@ -231,7 +231,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileContainer.cpp"
+				RelativePath="..\CFilePathesContainer.cpp"
 				>
 			</File>
 			<File
@@ -300,7 +300,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileContainer.h"
+				RelativePath="..\CFilePathesContainer.h"
 				>
 			</File>
 			<File
