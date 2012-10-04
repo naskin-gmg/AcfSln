@@ -11,14 +11,6 @@ namespace icam
 
 // public methods
 
-CMultiCameraBitmapSupplierComp::CMultiCameraBitmapSupplierComp()
-	:m_bitmapAcquisitionPtr(NULL),
-	m_cameraParamsManagerPtr(NULL),
-	m_logTransformPtr(NULL)
-{
-}
-
-
 // reimplemented (iipr::IMultiBitmapProvider)
 
 const iprm::ISelectionConstraints* CMultiCameraBitmapSupplierComp::GetBitmapSelectionContraints() const
@@ -29,8 +21,8 @@ const iprm::ISelectionConstraints* CMultiCameraBitmapSupplierComp::GetBitmapSele
 
 int CMultiCameraBitmapSupplierComp::GetBitmapsCount() const
 {
-	if (m_cameraParamsManagerPtr != NULL){
-		return m_cameraParamsManagerPtr->GetParamsSetsCount();	
+	if (m_cameraParamsManagerCompPtr.IsValid()){
+		return m_cameraParamsManagerCompPtr->GetParamsSetsCount();	
 	}
 
 	return 0;
@@ -50,7 +42,7 @@ const iimg::IBitmap* CMultiCameraBitmapSupplierComp::GetBitmap(int bitmapIndex) 
 
 const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetLogTransform(int /*bitmapIndex*/) const
 {
-	return m_logTransformPtr;	
+	return m_logTransformCompPtr.GetPtr();	
 }
 
 
@@ -58,7 +50,7 @@ const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetLogTransform(in
 
 const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetCalibration() const
 {
-	return m_logTransformPtr;
+	return m_logTransformCompPtr.GetPtr();
 }
 
 
@@ -68,12 +60,12 @@ const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetCalibration() c
 
 bool CMultiCameraBitmapSupplierComp::InitializeWork()
 {
-	if (m_cameraParamsManagerPtr != NULL){
-		int camerasCount = m_cameraParamsManagerPtr->GetParamsSetsCount();
+	if (m_cameraParamsManagerCompPtr.IsValid()){
+		int camerasCount = m_cameraParamsManagerCompPtr->GetParamsSetsCount();
 
 		for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
-			if (m_bitmapAcquisitionPtr != NULL){
-				m_bitmapAcquisitionPtr->InitProcessor(m_cameraParamsManagerPtr->GetParamsSet(cameraIndex));
+			if (m_bitmapAcquisitionCompPtr.IsValid()){
+				m_bitmapAcquisitionCompPtr->InitProcessor(m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex));
 			}
 		}
 
@@ -92,8 +84,8 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	result.Reset();
 
-	if (m_cameraParamsManagerPtr != NULL){
-		int camerasCount = m_cameraParamsManagerPtr->GetParamsSetsCount();
+	if (m_cameraParamsManagerCompPtr.IsValid()){
+		int camerasCount = m_cameraParamsManagerCompPtr->GetParamsSetsCount();
 		if (camerasCount <= 0){
 			return WS_ERROR;
 		}
@@ -101,8 +93,8 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 		for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
 			istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
 
-			if (cameraBitmapPtr.IsValid() && (m_bitmapAcquisitionPtr != NULL)){
-				int status = m_bitmapAcquisitionPtr->DoProcessing(m_cameraParamsManagerPtr->GetParamsSet(cameraIndex), NULL, cameraBitmapPtr.GetPtr());
+			if (cameraBitmapPtr.IsValid() && (m_bitmapAcquisitionCompPtr.IsValid())){
+				int status = m_bitmapAcquisitionCompPtr->DoProcessing(m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), NULL, cameraBitmapPtr.GetPtr());
 
 				switch (status){
 					case iproc::IProcessor::TS_OK:
@@ -129,19 +121,6 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 }
 
 
-// reimplemented (icomp::CComponentBase)
-
-void CMultiCameraBitmapSupplierComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	m_bitmapAcquisitionPtr = m_bitmapAcquisitionCompPtr.GetPtr();
-
-	m_cameraParamsManagerPtr = m_cameraParamsManagerCompPtr.GetPtr();
-
-	m_logTransformPtr = m_logTransformCompPtr.GetPtr();
-}
-
-
 } // namespace icam
+
 
