@@ -46,18 +46,25 @@ const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() c
 	const imath::CVarVector* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		m_position.SetValues(*productPtr);
-	
+
+		const i2d::ITransformation2d* inputCalibrationPtr = NULL;
+		if (m_calibrationProviderCompPtr.IsValid()){
+			inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+		}
+
 		imath::CVarVector position = m_position.GetComponentValue(imeas::INumericValue::VTI_POSITION);
 		if (position.GetElementsCount() >= 2){
+			i2d::CVector2d originalZeroPos(0, 0);
+			if (inputCalibrationPtr != NULL){
+				originalZeroPos = inputCalibrationPtr->GetValueAt(i2d::CVector2d(0, 0));
+			}
+
 			i2d::CAffineTransformation2d* outputTransformPtr = new i2d::CAffineTransformation2d();
-			outputTransformPtr->Reset(i2d::CVector2d(-position[0], -position[1]));
+			outputTransformPtr->Reset(i2d::CVector2d(position[0] - originalZeroPos[0], position[1] - originalZeroPos[1]));
 			m_outputCalibrationPtr.SetPtr(outputTransformPtr);
 
-			if (m_calibrationProviderCompPtr.IsValid()){
-				const i2d::ITransformation2d* inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
-				if (inputCalibrationPtr != NULL){
-					m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedTransformation(*inputCalibrationPtr));
-				}
+			if (inputCalibrationPtr != NULL){
+				m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedTransformation(*inputCalibrationPtr));
 			}
 		}
 	}

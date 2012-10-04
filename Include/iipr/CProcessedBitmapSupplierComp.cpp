@@ -68,31 +68,18 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
-	if (m_workingLogTransformCompPtr.IsValid() && m_calibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* transformationPtr = m_calibrationProviderCompPtr->GetCalibration();
-		if (transformationPtr != NULL){
-			if (m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), transformationPtr, m_workingLogTransformCompPtr.GetPtr()) == iproc::IProcessor::TS_OK){
-				result.first = m_workingLogTransformCompPtr.GetPtr();
-			}
-			else{
-				return WS_ERROR;
-			}
-		}
-	}
-	else{
-		result.first = m_defaultLogTransformCompPtr.GetPtr();
-	}
-
 	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.second.GetPtr());
 	switch (status){
 		case iproc::IProcessor::TS_OK:
-			if (result.first == NULL){
+			{
 				const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(bitmapPtr);
 				if (calibrationProviderPtr != NULL){
 					result.first = calibrationProviderPtr->GetCalibration();
 				}
+				else{
+					result.first = m_calibrationProviderCompPtr->GetCalibration();
+				}
 			}
-
 			return WS_OK;
 
 		case iproc::IProcessor::TS_CANCELED:

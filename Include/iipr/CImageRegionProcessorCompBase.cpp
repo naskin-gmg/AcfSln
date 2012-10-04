@@ -44,16 +44,16 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
 	if (aoiPtr.IsValid()){
-		const i2d::ITransformation2d* pixelToLogicalTransformPtr = NULL;
+		const i2d::ITransformation2d* logToPhysicalTransformPtr = NULL;
 		if (m_regionCalibrationProviderCompPtr.IsValid()){
-			pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+			logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
 		}
 
-		if (pixelToLogicalTransformPtr != NULL){
+		if (logToPhysicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
 
 			if (transformedRegionPtr.IsValid()){
-				if (!transformedRegionPtr->InvTransform(*pixelToLogicalTransformPtr)){
+				if (!transformedRegionPtr->Transform(*logToPhysicalTransformPtr)){
 					SendErrorMessage(0, "2D-transformation of the processing region failed");
 
 					return TS_INVALID;

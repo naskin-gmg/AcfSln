@@ -139,12 +139,12 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 	const i2d::IObject2d* calibratedAoiPtr = dynamic_cast<const i2d::IObject2d*>(&aoiObject);
 
 	if (m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* pixelToLogicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
-		if (pixelToLogicalTransformPtr != NULL){
+		const i2d::ITransformation2d* logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+		if (logToPhysicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiObject.CloneMe());
 
 			if (transformedRegionPtr.IsValid()){
-				if (!transformedRegionPtr->InvTransform(*pixelToLogicalTransformPtr)){
+				if (!transformedRegionPtr->Transform(*logToPhysicalTransformPtr)){
 					return false;
 				}
 

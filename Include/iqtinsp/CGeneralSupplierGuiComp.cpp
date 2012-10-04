@@ -145,6 +145,8 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 		if (infoProviderPtr != NULL){
 			description = infoProviderPtr->GetInformationDescription();
 		}
+
+		UpdateAllViews();
 	}
 
 	StatusLabel->setText(statusLabelText);
