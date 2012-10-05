@@ -81,10 +81,10 @@ int CFileListConverterComp::DoProcessing(
 			if (convertedFileListPtr != NULL){
 				convertedFileListPtr->InsertFile(outputFileName);
 			}
+		}
 
-			if (*m_inputFilesRemovingEnabledAttrPtr){
-				filesToRemove.push_back(inputFile);
-			}
+		if (*m_inputFilesRemovingEnabledAttrPtr){
+			filesToRemove.push_back(inputFile);
 		}
 
 		if (progressManagerPtr != NULL){
