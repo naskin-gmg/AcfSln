@@ -26,13 +26,15 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 	QString baseFileName = inputFileInfo.completeBaseName();
 	QString outputExtension = inputFileInfo.suffix();
 
-	// calculate the base file name:
+	// Remove patterns to be ingnored:
+
+	// Calculate the base file name:
 	if (m_fileNamingParamsCompPtr.IsValid()){
 		baseFileName = m_fileNamingParamsCompPtr->GetPrefix() + baseFileName;
 		baseFileName += m_fileNamingParamsCompPtr->GetSuffix();
 	}
 
-	// calculate the new extension:
+	// Calculate the new extension:
 	if (m_fileTypeInfoCompPtr.IsValid()){
 		QStringList supportedExtensions;
 		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_SAVE);
@@ -48,7 +50,11 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 		}
 	}
 
-	QString newFileName = baseFileName + "." + outputExtension;
+	QString newFileName = baseFileName;
+	
+	if (!outputExtension.isEmpty()){
+		newFileName += QString(".") + outputExtension;
+	}
 
 	QString outputDirectoryPath = m_directoryPathCompPtr->GetPath();
 

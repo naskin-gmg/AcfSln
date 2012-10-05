@@ -21,10 +21,17 @@ void CFilePathesContainer::ResetFiles()
 	m_fileList.clear();
 }
 
-bool CFilePathesContainer::InsertFile(const QString& file, int index)
+bool CFilePathesContainer::InsertFile(const QString& file, int index, bool ignoreNonExistingFiles)
 {
+	bool addFile = true;
+
 	QFileInfo fileInfo(file);
-	if (fileInfo.exists()){
+
+	if (ignoreNonExistingFiles){
+		addFile = fileInfo.exists();
+	}
+	
+	if (addFile){
 		istd::CChangeNotifier changePtr(this);
 	
 		if (index < 0){

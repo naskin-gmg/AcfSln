@@ -23,10 +23,6 @@ int CFileListConverterComp::DoProcessing(
 			istd::IChangeable* outputPtr,
 			iproc::IProgressManager* progressManagerPtr)
 {
-	if (!m_fileConvertCompPtr.IsValid()){
-		return TS_INVALID;
-	}
-
 	if (!m_outputFileNameCompPtr.IsValid()){
 		return TS_INVALID;
 	}
@@ -55,6 +51,8 @@ int CFileListConverterComp::DoProcessing(
 		convertedFileListPtr->ResetFiles();
 	}
 
+	QStringList filesToRemove;
+
 	for (int inputFileIndex = 0; inputFileIndex < filesCount; inputFileIndex++){
 		const QString& inputFile = fileList[inputFileIndex];
 
@@ -67,12 +65,25 @@ int CFileListConverterComp::DoProcessing(
 			SendErrorMessage(0, QObject::tr("Output directry doesn't exist").arg(outputFileInfo.absolutePath()));			
 		}
 
-		if (!m_fileConvertCompPtr->ConvertFile(inputFile, outputFileName, paramsPtr)){
+		bool isConverted = false;
+
+		if (m_fileConvertCompPtr.IsValid()){
+			isConverted = m_fileConvertCompPtr->ConvertFile(inputFile, outputFileName, paramsPtr);
+		}
+		else{
+			isConverted = QFile::copy(inputFile, outputFileName);
+		}
+
+		if (!isConverted){
 			SendErrorMessage(0, QObject::tr("Processing of %1 failed").arg(inputFile));
 		}
 		else{
 			if (convertedFileListPtr != NULL){
 				convertedFileListPtr->InsertFile(outputFileName);
+			}
+
+			if (*m_inputFilesRemovingEnabledAttrPtr){
+				filesToRemove.push_back(inputFile);
 			}
 		}
 
@@ -84,6 +95,14 @@ int CFileListConverterComp::DoProcessing(
 			
 				return iproc::IProcessor::TS_CANCELED;
 			}
+		}
+	}
+
+	int removeFilesCount = filesToRemove.size();
+	for (int fileIndex = 0; fileIndex < removeFilesCount; fileIndex++){
+		QString fileToRemove = filesToRemove[fileIndex];
+		if (!QFile::remove(fileToRemove)){
+			SendErrorMessage(0, QObject::tr("File %1 could not be removed").arg(fileToRemove));
 		}
 	}
 

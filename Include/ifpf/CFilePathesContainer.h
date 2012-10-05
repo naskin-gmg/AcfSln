@@ -22,8 +22,9 @@ public:
 
 	/**
 		Insert a new file into the list.
+		If \ignoreNonExistingFiles is set, only existing files will be added to the list.
 	*/
-	virtual bool InsertFile(const QString& file, int index = -1);
+	virtual bool InsertFile(const QString& file, int index = -1, bool ignoreNonExistingFiles = false);
 
 	// reimplemented (ibase::IFileListProvider)
 	virtual QStringList GetFileList() const;

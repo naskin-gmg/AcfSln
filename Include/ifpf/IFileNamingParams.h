@@ -17,7 +17,6 @@ namespace ifpf
 class IFileNamingParams: virtual public iser::ISerializable
 {
 public:
-
 	/**
 		Strategy mode
 	*/
@@ -65,6 +64,19 @@ public:
 		Get suffix of the file
 	*/
 	virtual void SetSuffix(const QString& suffix) = 0;
+
+	/**
+		Get list of text patterns, that must be removed from the output file name.
+		\sa SetPatternsToRemove
+	*/
+	virtual QStringList GetPatternsToRemove() const = 0;
+	
+	/**
+		Set list of text patterns, that must be removed from the output file name.
+		For example, the file name \c foo_some.txt will be transformed into \c foo.txt if \c _some pattern is set.
+		\sa GetPatternsToRemove
+	*/
+	virtual void SetPatternsToRemove(const QStringList& patternsToRemove) = 0;
 };
 
 
