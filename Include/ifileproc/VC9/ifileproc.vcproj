@@ -16,6 +16,9 @@
 		<ToolFile
 			RelativePath="..\..\..\Config\VC9\Acf.rules"
 		/>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC9\QtUIForm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -38,6 +41,18 @@
 				Name="Arxc"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
 				Name="FileConvertCopy"
 			/>
 			<Tool
@@ -57,7 +72,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -115,6 +130,18 @@
 				Name="Arxc"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
 				Name="FileConvertCopy"
 			/>
 			<Tool
@@ -133,7 +160,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				SuppressStartupBanner="true"
@@ -179,6 +206,18 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CCopyProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalFileConverterComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileConvertOverProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileListConverterComp.cpp"
 				>
 			</File>
@@ -194,11 +233,27 @@
 				RelativePath="..\CFilePathesContainer.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSelectableFileConverterComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CCopyProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalFileConverterComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileConvertOverProcessorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CFileListConverterComp.h"
 				>
@@ -216,11 +271,36 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableFileConverterComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileNaming.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IFileNamingParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ifileproc.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			Filter="*.moc"
+			>
+			<File
+				RelativePath="..\CExternalFileConverterComp.moc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			>
+			<File
+				RelativePath="..\Generated\moc_CExternalFileConverterComp.cpp"
 				>
 			</File>
 		</Filter>

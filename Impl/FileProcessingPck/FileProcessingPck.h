@@ -9,6 +9,10 @@
 #include "ifileproc/CFileNamingParamsComp.h"
 #include "ifileproc/CFileListConverterComp.h"
 #include "ifileproc/CFilePathesContainer.h"
+#include "ifileproc/CSelectableFileConverterComp.h"
+#include "ifileproc/CFileConvertOverProcessorComp.h"
+#include "ifileproc/CExternalFileConverterComp.h"
+#include "ifileproc/CCopyProcessorComp.h"
 
 
 /**
@@ -26,6 +30,11 @@ typedef ifileproc::CFileListConverterComp FileListConverter;
 
 typedef icomp::TMakeComponentWrap<
 			ifileproc::CFilePathesContainer, ibase::IFileListProvider, istd::IChangeable> FilesContainer;
+
+typedef ifileproc::CExternalFileConverterComp ExternalFileConverter;
+typedef icomp::TModelCompWrap<ifileproc::CSelectableFileConverterComp> SelectableFileConverter;
+typedef ifileproc::CFileConvertOverProcessorComp FileConvertOverProcessor;
+typedef ifileproc::CCopyProcessorComp CopyProcessor;
 
 
 } // namespace FileProcessingPck

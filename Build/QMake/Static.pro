@@ -2,14 +2,17 @@ TEMPLATE = subdirs
 CONFIG += ordered
 CONFIG += debug_and_release
 
+SUBDIRS += ../../Include/iproc/QMake/iproc.pro
+SUBDIRS += ../../Include/iwiz/QMake/iwiz.pro
 SUBDIRS += ../../Include/icam/QMake/icam.pro
 SUBDIRS += ../../Include/ifpf/QMake/ifpf.pro
 SUBDIRS += ../../Include/iinsp/QMake/iinsp.pro
 SUBDIRS += ../../Include/iipr/QMake/iipr.pro
 SUBDIRS += ../../Include/imeas/QMake/imeas.pro
-#SUBDIRS += ../../Include/imm/QMake/imm.pro
 SUBDIRS += ../../Include/iprop/QMake/iprop.pro
 SUBDIRS += ../../Include/isig/QMake/isig.pro
+SUBDIRS += ../../Include/iprocgui/QMake/iprocgui.pro
+SUBDIRS += ../../Include/iwizgui/QMake/iwizgui.pro
 SUBDIRS += ../../Include/iqtfpf/QMake/iqtfpf.pro
 SUBDIRS += ../../Include/iqtex/QMake/iqtex.pro
 SUBDIRS += ../../Include/iqtinsp/QMake/iqtinsp.pro
@@ -18,3 +21,4 @@ SUBDIRS += ../../Include/iqtipr/QMake/iqtipr.pro
 SUBDIRS += ../../Include/iqtmeas/QMake/iqtmeas.pro
 SUBDIRS += ../../Include/iqtmm/QMake/iqtmm.pro
 SUBDIRS += ../../Include/iqtsig/QMake/iqtsig.pro
+

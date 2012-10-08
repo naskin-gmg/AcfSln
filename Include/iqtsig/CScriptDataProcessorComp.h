@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QtScript>
+#include <QtScript/QtScript>
 
 // ACF includes
 #include "icomp/CComponentBase.h"

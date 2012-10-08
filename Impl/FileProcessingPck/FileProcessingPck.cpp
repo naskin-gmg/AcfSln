@@ -33,6 +33,26 @@ I_EXPORT_COMPONENT(
 			"A simple container of file pathes",
 			"File List Container");
 
+I_EXPORT_COMPONENT(
+			ExternalFileConverter,
+			"General file copy or transform using loaders and any object",
+			"File Converter External Application" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Converter"));
+
+I_EXPORT_COMPONENT(
+			SelectableFileConverter,
+			"Selectable file converter",
+			"File Converter" IM_CATEGORY(I_DATA_PROCESSING I_SERVICE));
+
+I_EXPORT_COMPONENT(
+			FileConvertOverProcessor,
+			"File conversion over processor",
+			"File Converter" IM_CATEGORY(I_DATA_PROCESSING I_SERVICE));
+
+I_EXPORT_COMPONENT(
+			CopyProcessor,
+			"Copy files from one directory to another one",
+			"Copy Dir Filter Installation Tool" IM_TAG("File Processing"));
+
 
 } // namespace FileProcessingPck
 

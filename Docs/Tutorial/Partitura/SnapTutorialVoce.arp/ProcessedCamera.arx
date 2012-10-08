@@ -202,7 +202,7 @@
         IterativeProcessor
       </Id>
       <PackageId>
-        BasePck
+        ProcessingPck
       </PackageId>
       <ComponentId>
         IterativeProcessor

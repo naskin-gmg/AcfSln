@@ -21,7 +21,7 @@
         CascadedProcessor
       </Id>
       <PackageId>
-        BasePck
+        ProcessingPck
       </PackageId>
       <ComponentId>
         CascadedProcessor

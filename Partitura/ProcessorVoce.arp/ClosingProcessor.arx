@@ -53,7 +53,7 @@
         Closing
       </Id>
       <PackageId>
-        BasePck
+        ProcessingPck
       </PackageId>
       <ComponentId>
         CascadedProcessor

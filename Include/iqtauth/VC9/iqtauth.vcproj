@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;QT_DLL;QT_THREAD_SUPPORT;_DLL"
 				EnableFunctionLevelLinking="false"
 				RuntimeTypeInfo="true"
@@ -131,7 +131,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;QT_DLL;QT_THREAD_SUPPORT;QT_ACCESSIBILITY_SUPPORT;QT_TABLET_SUPPORT"
 				SuppressStartupBanner="true"
 			/>

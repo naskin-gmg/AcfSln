@@ -39,6 +39,9 @@
 				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -54,7 +57,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				EnableFunctionLevelLinking="true"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -112,6 +115,9 @@
 				ConfigFile="..\..\..\Config\BaseOnly.xpc"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -127,7 +133,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				StringPooling="true"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"

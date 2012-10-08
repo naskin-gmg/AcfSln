@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				EnableFunctionLevelLinking="true"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -110,7 +110,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 			/>
