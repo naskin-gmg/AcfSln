@@ -1,0 +1,189 @@
+#ifndef ihotfgui_CHotfolderTaskManagerComp_included
+#define ihotfgui_CHotfolderTaskManagerComp_included
+
+
+// Qt includes
+#include <QtCore/QThread>
+#include <QtCore/QTimer>
+#include <QtCore/QList>
+#include <QtCore/QDateTime>
+
+// ACF includes
+#include "istd/TPointerVector.h"
+
+#include "imod/TModelWrap.h"
+#include "imod/CMultiModelObserverBase.h"
+#include "imod/CSingleModelObserverBase.h"
+
+#include "ibase/TLoggerCompWrap.h"
+
+#include "iprm/IParamsSet.h"
+#include "iprm/IParamsManager.h"
+
+
+// AcfSln includes
+#include "ifileproc/IFileNaming.h"
+#include "ihotf/IFileSystemChangeStorage.h"
+#include "ihotf/IHotfolderProcessingInfo.h"
+#include "ihotf/IDirectoryMonitor.h"
+#include "ihotf/IHotfolderTaskManager.h"
+
+
+namespace ihotfgui
+{
+
+
+/**
+	Processing task manager.
+
+	This component creates and managed processing tasks for the incomming hotfolder items.
+	It also manages and observes the folder-monitors, to get information about folder-activities.
+*/
+class CHotfolderTaskManagerComp:
+			public ibase::CLoggerComponentBase,
+			virtual public ihotf::IHotfolderTaskManager
+{
+public:
+	typedef ibase::CLoggerComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CHotfolderTaskManagerComp);
+		I_REGISTER_INTERFACE(ihotf::IHotfolderTaskManager);
+		I_ASSIGN(m_fileNamingCompPtr, "FileNamingStrategy", "Strategy for naming of the output file", true, "FileNamingStrategy");
+		I_ASSIGN(m_monitorFactCompPtr, "DirectoryMontorFactory", "Factory for creation of a directory monitor", true, "DirectoryMontorFactory");
+		I_ASSIGN(m_hotfolderProcessingInfoCompPtr, "HotfolderProcessingInfo", "State data model of the hotfolder", true, "HotfolderProcessingInfo");
+		I_ASSIGN_TO(m_hotfolderProcessingModelCompPtr, m_hotfolderProcessingInfoCompPtr, true);
+		I_ASSIGN(m_inputDirectoriesManagerCompPtr, "InputDirectoriesManager", "Parameter's manageer for the hotfolder's input directories", true, "InputDirectoriesManager");
+		I_ASSIGN(m_hotfolderSettingsModelCompPtr, "HotfolderSettingsModel", "Hotfolder settings", true, "HotfolderSettingsModel");
+		I_ASSIGN(m_fileSystemChangeStorageCompPtr, "FileSystemChangeStorage", "File storage used by directory monitor", true, "FileSystemChangeStorage");
+		I_ASSIGN_TO(m_fileSystemChangeStorageModelCompPtr, m_fileSystemChangeStorageCompPtr, true);
+		I_END_COMPONENT;
+
+	CHotfolderTaskManagerComp();
+
+	// reimplemented (ihotf::IHotfolderTaskManager)
+	virtual ihotf::IHotfolderProcessingItem* GetNextProcessingTask() const;
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
+
+private:
+	QStringList GetFilesFromStorage(const ihotf::IFileSystemChangeStorage& storage, int fileState) const;
+
+	void OnFilesAddedEvent(const ihotf::IFileSystemChangeStorage& storage);
+	void OnFilesRemovedEvent(const ihotf::IFileSystemChangeStorage& storage);
+	void OnFilesModifiedEvent(const ihotf::IFileSystemChangeStorage& storage);
+
+	void AddFilesToProcessingQueue(const QStringList& files);
+	void RemoveFilesFromProcessingQueue(const QStringList& files);
+	void RestartProcessingQueueFiles(const QStringList& files);
+
+	/**
+		Synchronize the hotfolder with its static parameters.
+		If \c applyToPendingTasks is enabled, 
+		the changes are applied to the processing item, which are already in processing pipeline.
+	*/
+	void SynchronizeWithModel(bool applyToPendingTasks = false);
+
+	/**
+		Get the list of output directories for the hotfolder.
+	*/
+	QStringList GetInputDirectories() const;
+
+	/**
+		Get parameter set for the given directory path.
+	*/
+	const iprm::IParamsSet* GetMonitoringParamsSet(const QString& directoryPath) const;
+
+	/**
+		Get list of newly added input directories.
+	*/
+	QStringList GetAddedInputDirectories() const;
+
+	/**
+		Get list of newly removed input directories.
+	*/
+	QStringList GetRemovedInputDirectories() const;
+
+	/**
+		Create and add a directory monitor for the given path with given monitoring parameters.
+	*/
+	ihotf::IDirectoryMonitor* AddDirectoryMonitor(const QString& directoryPath, const iprm::IParamsSet* monitoringParamsPtr);
+
+	/**
+		Remove a directory monitor for the given path.
+	*/
+	void RemoveDirectoryMonitor(const QString& directoryPath);
+
+	/**
+		Remove all processing items of the given directory.
+	*/
+	void RemoveDirectoryItems(const QString& directoryPath);
+
+	/**
+		Find a processing item for the given file name.
+	*/
+	ihotf::IHotfolderProcessingItem* FindProcessingItem(const QString& fileName) const;
+
+	/**
+		Get procesing item from its UUID.
+	*/
+	ihotf::IHotfolderProcessingItem* GetItemFromId(const QByteArray& itemUuid) const;
+
+private:
+	/**
+		Internal observer of the changes in the input directories.
+	*/
+	class FileSystemChangeStorageObserver: public imod::CMultiModelObserverBase
+	{
+	public:
+		FileSystemChangeStorageObserver(CHotfolderTaskManagerComp& parent);
+
+		// reimplemented (imod::IObserver)
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CHotfolderTaskManagerComp& m_parent;
+	};
+
+
+	/**
+		Class for observation of the changes in the hotfolder parameter model
+	*/
+	class ParametersObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		ParametersObserver(CHotfolderTaskManagerComp& parent);
+		
+		// reimplemented (imod::IObserver)
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	private:
+		CHotfolderTaskManagerComp& m_parent;
+	};
+
+private:
+	I_REF(ifileproc::IFileNaming, m_fileNamingCompPtr);
+	I_REF(ihotf::IHotfolderProcessingInfo, m_hotfolderProcessingInfoCompPtr);
+	I_REF(imod::IModel, m_hotfolderProcessingModelCompPtr);
+	I_REF(iprm::IParamsManager, m_inputDirectoriesManagerCompPtr);
+	I_REF(imod::IModel, m_hotfolderSettingsModelCompPtr);
+	I_FACT(ihotf::IDirectoryMonitor, m_monitorFactCompPtr);
+	I_REF(ihotf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
+	I_REF(imod::IModel, m_fileSystemChangeStorageModelCompPtr);
+
+	typedef QMap<QString, istd::TDelPtr<ihotf::IDirectoryMonitor> > DirectoryMonitorsMap;
+	DirectoryMonitorsMap m_directoryMonitorsMap;
+
+	FileSystemChangeStorageObserver m_fileSystemChangeStorageObserver;
+	ParametersObserver m_parametersObserver;
+
+	bool m_isInitialized;
+};
+
+
+} // namespace ihotfgui
+
+
+#endif // !ihotfgui_CHotfolderTaskManagerComp_included
+

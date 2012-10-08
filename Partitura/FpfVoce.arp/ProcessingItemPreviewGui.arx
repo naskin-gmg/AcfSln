@@ -112,7 +112,7 @@
         ProcessingItemPreviewGui
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         ProcessingItemPreviewGui

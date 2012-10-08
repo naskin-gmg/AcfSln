@@ -247,7 +247,7 @@
         DirectoryMonitorParams
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         DirectoryMonitorParams

@@ -43,7 +43,7 @@
         HotfolderProcessingInfo
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         HotfolderProcessingInfo
@@ -64,7 +64,7 @@
         HotfolderStatistics
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         HotfolderStatistics

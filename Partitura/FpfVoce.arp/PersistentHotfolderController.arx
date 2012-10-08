@@ -32,7 +32,7 @@
         DirectoryMonitorCache
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         MonitoringSessionsManager

@@ -21,7 +21,7 @@
         DirectoryMonitor
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         DirectoryMonitor

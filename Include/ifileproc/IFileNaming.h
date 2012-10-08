@@ -1,0 +1,31 @@
+#ifndef ifileproc_IFileNaming_included
+#define ifileproc_IFileNaming_included
+
+
+// ACF includes
+#include "istd/IPolymorphic.h"
+
+
+namespace ifileproc
+{
+
+
+/**
+	Interface for calculation of the new file path for an existing file.
+*/
+class IFileNaming: virtual public istd::IPolymorphic
+{
+public:
+	/**
+		Get the new file path for a given input file name.
+	*/
+	virtual QString GetFilePath(const QString& inputFileName) const = 0;
+};
+
+
+} // namespace ifileproc
+
+
+#endif // !ifileproc_IFileNaming_included
+
+

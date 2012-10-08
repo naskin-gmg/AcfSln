@@ -21,7 +21,7 @@
         DirectoryItemGui
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         DirectoryItemGui
@@ -58,7 +58,7 @@
         HotfolderGui
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         HotfolderGui
@@ -203,7 +203,7 @@
         HotfolderStatistics
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         HotfolderStatistics

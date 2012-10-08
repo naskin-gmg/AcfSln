@@ -1,0 +1,54 @@
+#ifndef ifileproc_CFileNamingComp_included
+#define ifileproc_CFileNamingComp_included
+
+
+// ACF includes
+#include "iser/IFileLoader.h"
+
+#include "ibase/TLoggerCompWrap.h"
+
+#include "iprm/IFileNameParam.h"
+
+
+// AcfSln includes
+#include "ifileproc/IFileNaming.h"
+#include "ifileproc/IFileNamingParams.h"
+
+
+namespace ifileproc
+{
+
+
+/**
+	Component for calculating of the new file name.
+	\sa ifileproc::IFileNaming
+*/
+class CFileNamingComp:
+			public ibase::CLoggerComponentBase,
+			virtual public ifileproc::IFileNaming
+{
+public:
+	typedef ibase::CLoggerComponentBase BaseClass;
+
+	I_BEGIN_COMPONENT(CFileNamingComp);
+		I_REGISTER_INTERFACE(ifileproc::IFileNaming);
+		I_ASSIGN(m_fileTypeInfoCompPtr, "OutputFileInfo", "Output file info, which will be used for file name calculation", false, "OutputFileInfo");
+		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPath", "Output directory", true, "DirectoryPath"); 
+		I_ASSIGN(m_fileNamingParamsCompPtr, "FileNamingParams", "Rules for the file naming", false, "FileNamingParams"); 
+	I_END_COMPONENT;
+
+	// reimplemented (ifileproc::IFileNaming)
+	virtual QString GetFilePath(const QString& inputFileName) const;
+
+private:
+	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);
+	I_REF(iprm::IFileNameParam, m_directoryPathCompPtr);
+	I_REF(ifileproc::IFileNamingParams, m_fileNamingParamsCompPtr);
+};
+
+
+} // namespace ifileproc
+
+
+#endif // !ifileproc_CFileNamingComp_included
+

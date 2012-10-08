@@ -1176,7 +1176,7 @@ Use other password.</source>
     </message>
 </context>
 <context>
-    <name>iqtfpf::CHotfolderGuiComp</name>
+    <name>ihotfgui::CHotfolderGuiComp</name>
     <message>
         <source>&amp;Run</source>
         <translation type="unfinished"></translation>
@@ -1227,7 +1227,7 @@ Use other password.</source>
     </message>
 </context>
 <context>
-    <name>iqtfpf::CProcessingItemPreviewGuiComp</name>
+    <name>ihotfgui::CProcessingItemPreviewGuiComp</name>
     <message>
         <source>Waiting for processing...</source>
         <translation type="unfinished"></translation>

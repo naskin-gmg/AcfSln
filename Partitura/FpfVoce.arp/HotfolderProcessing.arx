@@ -21,7 +21,7 @@
         DirectoryMonitor
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         DirectoryMonitor
@@ -131,7 +131,7 @@
         FileSystemChangeStorage
       </Id>
       <PackageId>
-        FpfPck
+        HotfolderPck
       </PackageId>
       <ComponentId>
         FileSystemChangeStorage
@@ -152,7 +152,7 @@
         HotfolderProcessor
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         HotfolderProcessor
@@ -240,7 +240,7 @@
         HotfolderTaskManager
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         HotfolderTaskManager
@@ -382,7 +382,7 @@
         OutputFileRenaming
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         FileNaming

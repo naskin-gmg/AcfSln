@@ -84,7 +84,7 @@
         DirectoryMonitorParamsGui
       </Id>
       <PackageId>
-        QtFpfPck
+        HotfolderGuiPck
       </PackageId>
       <ComponentId>
         DirectoryMonitorParamsGui

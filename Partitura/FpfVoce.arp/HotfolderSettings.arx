@@ -85,7 +85,7 @@
         FileNamingParams
       </Id>
       <PackageId>
-        FpfPck
+        FileProcessingPck
       </PackageId>
       <ComponentId>
         FileNamingParams
