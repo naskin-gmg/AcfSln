@@ -23,7 +23,7 @@ int CHistogramStatisticsProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* /*progressManagerPtr*/)
+				ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	const imeas::IDataSequence* dataSequencePtr = dynamic_cast<const imeas::IDataSequence*>(inputPtr);
 	if (dataSequencePtr == NULL){

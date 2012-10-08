@@ -21,7 +21,7 @@ int CFileListConverterComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (!m_outputFileNameCompPtr.IsValid()){
 		return TS_INVALID;

@@ -22,7 +22,7 @@ int CRgbToGrayProcessorComp::DoProcessing(
 				const iprm::IParamsSet* /*paramsPtr*/,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* /*progressManagerPtr*/)
+				ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
 	if (inputBitmapPtr == NULL){

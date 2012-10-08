@@ -47,7 +47,7 @@ int CSelectionParamCameraComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
@@ -63,7 +63,7 @@ int CSelectionParamCameraComp::BeginTask(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 

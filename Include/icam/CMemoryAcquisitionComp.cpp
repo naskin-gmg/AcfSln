@@ -17,7 +17,7 @@ int CMemoryAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
-			iproc::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	iimg::IBitmap* outputImagePtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (outputImagePtr == NULL){

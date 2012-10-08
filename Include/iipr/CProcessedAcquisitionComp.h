@@ -31,7 +31,7 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				iproc::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL);
 
 private:
 	I_REF(icam::IBitmapAcquisition, m_slaveAcquisitionCompPtr);
