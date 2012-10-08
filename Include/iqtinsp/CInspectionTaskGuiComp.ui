@@ -45,6 +45,11 @@
          <widget class="QTreeWidget" name="MessageList">
           <column>
            <property name="text">
+            <string>Source</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Messages</string>
            </property>
           </column>

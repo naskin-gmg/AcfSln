@@ -12,6 +12,8 @@
 #include "imod/IObserver.h"
 #include "iproc/IElapsedTimeProvider.h"
 #include "iview/IShapeView.h"
+#include "iview/IInteractiveShape.h"
+#include "iview/CShapeBase.h"
 
 
 namespace iqtinsp
@@ -491,17 +493,67 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer
 	ibase::IMessageContainer::Messages messageList = messageContainer.GetMessages();
 	int messagesCount = messageList.count();
 
+	if (messagesCount == 0){
+		return;
+	}
+
+	QString tabName;
+	if (taskIndex < m_namesAttrPtr.GetCount()){
+		tabName = m_namesAttrPtr[taskIndex];
+	}
+
+	istd::TPointerVector<iview::IShape>& resultShapes = m_resultShapesMap[taskIndex];
+
+	// find view associated with this task
+	iview::IShapeView* viewPtr = NULL;
+	if (taskIndex < m_previewSceneProvidersCompPtr.GetCount()){
+		const iqt2d::IViewProvider* viewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
+		if (viewProviderPtr != NULL){
+			viewPtr = viewProviderPtr->GetView();
+		}
+	}
+
 	for (int messageIndex = 0; messageIndex < messagesCount; messageIndex++){
 		ibase::IMessageConsumer::MessagePtr messagePtr = messageList[messageIndex];
+
+		int shapeIndex = -1;
+
+		// add result shapes to view and internal shape list
+		if (viewPtr != NULL){
+			if (m_resultShapeFactoryCompPtr.IsValid()){
+				const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
+				if (object2dPtr != NULL){
+					iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(*object2dPtr, true);
+					if (shapePtr != NULL){
+						iview::CShapeBase* shapeBasePtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
+						if (shapeBasePtr != NULL){
+							shapeBasePtr->SetVisible(false);
+						}
+
+						shapeIndex = resultShapes.GetCount();
+						resultShapes.PushBack(shapePtr);
+
+						viewPtr->ConnectShape(shapePtr);
+					}
+				}
+			}
+		}
 
 		QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
 
 		messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
+		messageItemPtr->setData(0, DR_SHAPE_INDEX, shapeIndex);
 
 		QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
 		messageItemPtr->setIcon(0, messageIcon);
 
-		messageItemPtr->setText(0, messagePtr->GetInformationDescription());
+		QString sourceName = tabName;
+		if (sourceName.isEmpty()){
+			sourceName = messagePtr->GetInformationSource();
+		}
+
+		messageItemPtr->setText(0, sourceName);
+		messageItemPtr->setText(1, messagePtr->GetInformationDescription());
 
 		MessageList->addTopLevelItem(messageItemPtr);
 	}
@@ -554,13 +606,35 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 			}
 		}
 
-		if ((index >= 0) && (index < extendersCount) && (index < previewProvidersCount)){
-			iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[index];
-			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
-			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
-				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
+		if (index >= 0){
+			// add shapes from editor to view
+			if ((index < extendersCount) && (index < previewProvidersCount)){
+				iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[index];
+				iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
+				if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
+					extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
 
-				viewPtr = previewProviderPtr->GetView();
+					viewPtr = previewProviderPtr->GetView();
+				}
+			}
+		}
+
+		// activate task related shapes
+		for (		ResultShapesMap::ConstIterator shapesContainerIter = m_resultShapesMap.begin();
+					shapesContainerIter != m_resultShapesMap.end();
+					++shapesContainerIter){
+			int shapeTaskIndex = shapesContainerIter.key();
+			const istd::TPointerVector<iview::IShape>& resultShapes = shapesContainerIter.value();
+
+			int shapesCount = resultShapes.GetCount();
+			for (int i = 0; i < shapesCount; ++i){
+				iview::IShape* shapePtr = resultShapes.GetAt(i);
+				Q_ASSERT(shapePtr != NULL);	// only correct instances should be added to container
+
+				iview::CShapeBase* shapeBasePtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
+				if (shapeBasePtr != NULL){
+					shapeBasePtr->SetVisible(index == shapeTaskIndex);
+				}
 			}
 		}
 
@@ -634,6 +708,60 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 		iprm::IParamsSet* parametersPtr = objectPtr->GetModelParametersSet();
 		if (parametersPtr != NULL){
 			m_paramsLoaderCompPtr->SaveToFile(*parametersPtr);
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_MessageList_itemClicked(QTreeWidgetItem* item, int /*column*/)
+{
+	Q_ASSERT(item != NULL);
+
+	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
+	int shapeIndex = item->data(0, DR_SHAPE_INDEX).toInt();
+
+	if ((shapeIndex >= 0) && (taskIndex >= 0) && m_resultShapesMap.contains(taskIndex)){
+		if (taskIndex < m_previewSceneProvidersCompPtr.GetCount()){
+			const iqt2d::IViewProvider* viewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
+			if (viewProviderPtr != NULL){
+				iview::IShapeView* viewPtr = viewProviderPtr->GetView();
+				if (viewPtr != NULL){
+					viewPtr->DeselectAllShapes();
+				}
+			}
+		}
+
+		const istd::TPointerVector<iview::IShape>& resultShapes = m_resultShapesMap[taskIndex];
+		if (shapeIndex < resultShapes.GetCount()){
+			iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(resultShapes.GetAt(shapeIndex));
+			if (shapePtr != NULL){
+				shapePtr->SetSelected();
+			}
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int /*column*/)
+{
+	Q_ASSERT(item != NULL);
+
+	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
+
+	for (		GuiMap::ConstIterator tabsIter = m_tabToGuiIndexMap.begin();
+				tabsIter != m_tabToGuiIndexMap.end();
+				++tabsIter){
+		int tabIndex = tabsIter.key();
+		if (tabsIter.value() == taskIndex){
+			if (m_toolBoxPtr != NULL){
+				m_toolBoxPtr->setCurrentIndex(tabIndex);
+			}
+
+			if (m_tabWidgetPtr != NULL){
+				m_tabWidgetPtr->setCurrentIndex(tabIndex);
+			}
+
+			return;
 		}
 	}
 }

@@ -72,6 +72,7 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 	if (size <= 1){
 		m_edgeLines.clear();
 		m_isClosed = false;
+		m_areVolatileValid = false;
 
 		return;
 	}
