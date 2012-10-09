@@ -2,7 +2,6 @@
 #define iprocgui_CProcessorCommandComp_included
 
 
-
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
