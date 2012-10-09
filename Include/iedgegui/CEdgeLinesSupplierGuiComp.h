@@ -33,7 +33,8 @@ public:
 	typedef iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeLinesSupplierGuiComp);
-		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
+		I_ASSIGN(m_contoursColorShemaCompPtr, "ContourColorShema", "Color shema for contour visualization", false, "ContourColorShema");
+		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
 
 	CEdgeLinesSupplierGuiComp();
@@ -59,7 +60,11 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
+	// reimplemented (imod::IObserver)
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
 private:
+	I_REF(iview::IColorShema, m_contoursColorShemaCompPtr);
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
 	imod::TModelWrap<iedge::CEdgeLine::Container> m_foundModel;

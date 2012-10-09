@@ -72,7 +72,12 @@ void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape(); 
 
 	if (shapePtr != NULL){
-		shapePtr->SetUserColorShema(&m_edgesColorShema);
+		if (m_contoursColorShemaCompPtr.IsValid()){
+			shapePtr->SetUserColorShema(m_contoursColorShemaCompPtr.GetPtr());
+		}
+		else{
+			shapePtr->SetUserColorShema(&m_edgesColorShema);
+		}
 
 		shapePtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 
@@ -101,22 +106,7 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	I_ASSERT(IsGuiCreated());
 
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(supplierPtr);
-			if (providerPtr != NULL ){
-				const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
-
-				if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
-					m_foundModel.Reset();
-				}
-			}
-		}
-	}
-
-	iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(supplierPtr);
+	iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(GetObjectPtr());
 	if (processingTimeProviderPtr != NULL){
 		ProcessingTimeLabel->setText(QString(tr("Edges found in %1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
 	}
@@ -149,6 +139,29 @@ void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
 	}
 	
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (imod::IObserver)
+
+void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		int workStatus = supplierPtr->GetWorkStatus();
+		if (workStatus == iproc::ISupplier::WS_OK){
+			iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(supplierPtr);
+			if (providerPtr != NULL ){
+				const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
+
+				if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
+					m_foundModel.Reset();
+				}
+			}
+		}
+	}
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
