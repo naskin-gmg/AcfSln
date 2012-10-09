@@ -713,12 +713,18 @@ void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
 }
 
 
-void CInspectionTaskGuiComp::on_MessageList_itemClicked(QTreeWidgetItem* item, int /*column*/)
+void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
 {
-	Q_ASSERT(item != NULL);
+	QList<QTreeWidgetItem*> selectedItems = MessageList->selectedItems();
+	if (selectedItems.empty()){
+		return;
+	}
 
-	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
-	int shapeIndex = item->data(0, DR_SHAPE_INDEX).toInt();
+	QTreeWidgetItem* itemPtr = selectedItems.front();
+	Q_ASSERT(itemPtr != NULL);
+
+	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
+	int shapeIndex = itemPtr->data(0, DR_SHAPE_INDEX).toInt();
 
 	if ((shapeIndex >= 0) && (taskIndex >= 0) && m_resultShapesMap.contains(taskIndex)){
 		if (taskIndex < m_previewSceneProvidersCompPtr.GetCount()){

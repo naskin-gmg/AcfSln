@@ -103,7 +103,7 @@ protected Q_SLOTS:
 	void on_AutoTestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
-	void on_MessageList_itemClicked(QTreeWidgetItem* item, int column);
+	void on_MessageList_itemSelectionChanged();
 	void on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int column);
 
 private:
