@@ -206,7 +206,11 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CCopyProcessorComp.cpp"
+				RelativePath="..\CComposedCopyFilesComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CCopyFilesTreeComp.cpp"
 				>
 			</File>
 			<File
@@ -243,7 +247,11 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CCopyProcessorComp.h"
+				RelativePath="..\CComposedCopyFilesComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCopyFilesTreeComp.h"
 				>
 			</File>
 			<File

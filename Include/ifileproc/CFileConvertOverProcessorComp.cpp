@@ -19,9 +19,9 @@ CFileConvertOverProcessorComp::CFileConvertOverProcessorComp()
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CFileConvertOverProcessorComp::ConvertFile(
-			const QString& inputFilePath,
-			const QString& outputFilePath,
+bool CFileConvertOverProcessorComp::ConvertFiles(
+			const QString& inputPath,
+			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	QMutexLocker blocker(&m_mutex);
@@ -44,13 +44,13 @@ bool CFileConvertOverProcessorComp::ConvertFile(
 		return false;
 	}
 
-	if (!m_inputFileLoaderCompPtr->IsOperationSupported(m_inputDataCompPtr.GetPtr(), &inputFilePath, iser::IFileLoader::QF_LOAD | iser::IFileLoader::QF_FILE)){
+	if (!m_inputFileLoaderCompPtr->IsOperationSupported(m_inputDataCompPtr.GetPtr(), &inputPath, iser::IFileLoader::QF_LOAD | iser::IFileLoader::QF_FILE)){
 		SendErrorMessage(0, "File could not be loaded", "File processing component");
 		
 		return false;
 	}
 
-	if (m_inputFileLoaderCompPtr->LoadFromFile(*m_inputDataCompPtr.GetPtr(), inputFilePath) != iser::IFileLoader::StateOk){
+	if (m_inputFileLoaderCompPtr->LoadFromFile(*m_inputDataCompPtr.GetPtr(), inputPath) != iser::IFileLoader::StateOk){
 		SendErrorMessage(0, "File could not be loaded", "File processing component");
 		
 		return false;
@@ -80,7 +80,7 @@ bool CFileConvertOverProcessorComp::ConvertFile(
 
 	I_ASSERT(outputFileLoader != NULL);
 
-	return (outputFileLoader->SaveToFile(*m_outputDataCompPtr.GetPtr(), outputFilePath) == iser::IFileLoader::StateOk);
+	return (outputFileLoader->SaveToFile(*m_outputDataCompPtr.GetPtr(), outputPath) == iser::IFileLoader::StateOk);
 }
 
 

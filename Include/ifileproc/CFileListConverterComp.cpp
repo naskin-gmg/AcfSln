@@ -68,7 +68,7 @@ int CFileListConverterComp::DoProcessing(
 		bool isConverted = false;
 
 		if (m_fileConvertCompPtr.IsValid()){
-			isConverted = m_fileConvertCompPtr->ConvertFile(inputFile, outputFileName, paramsPtr);
+			isConverted = m_fileConvertCompPtr->ConvertFiles(inputFile, outputFileName, paramsPtr);
 		}
 		else{
 			isConverted = QFile::copy(inputFile, outputFileName);

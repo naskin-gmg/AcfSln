@@ -1,75 +1,75 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1637
+          2584
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        375
+        425
       </X>
       <X>
-        100
+        300
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
+        ScriptFilesCopy
       </ComponentName>
       <X>
-        375
+        700
       </X>
       <X>
-        350
+        450
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DoxyfileCopy
-      </ComponentName>
-      <X>
-        800
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        800
-      </X>
-      <X>
-        550
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
         VersionInfo
       </ComponentName>
       <X>
-        375
+        925
       </X>
       <X>
-        225
+        300
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

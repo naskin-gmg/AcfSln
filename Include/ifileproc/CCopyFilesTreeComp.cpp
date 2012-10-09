@@ -1,4 +1,4 @@
-#include "ifileproc/CCopyProcessorComp.h"
+#include "ifileproc/CCopyFilesTreeComp.h"
 
 
 // Qt includes
@@ -13,9 +13,65 @@ namespace ifileproc
 {
 
 
+// reimplemented (ibase::IFileConvertCopy)
+
+bool CCopyFilesTreeComp::ConvertFiles(
+			const QString& inputPath,
+			const QString& outputPath,
+			const iprm::IParamsSet* paramsPtr) const
+{
+	if (!m_fileCopyCompPtr.IsValid()){
+		SendErrorMessage(MI_END_STATUS, tr("File copy provider is not present"));
+
+		return false;
+	}
+
+	QStringList filters;
+	for (int filterIndex = 0; filterIndex < m_filtersAttrPtr.GetCount(); ++filterIndex){
+		const QString& filter = m_filtersAttrPtr[filterIndex];
+
+		filters << filter;
+	}
+
+	QStringList excludeFilters;
+	for (int excludeIndex = 0; excludeIndex < m_excludeFiltersAttrPtr.GetCount(); ++excludeIndex){
+		const QString& excludeFilter = m_excludeFiltersAttrPtr[excludeIndex];
+
+		excludeFilters << excludeFilter;
+	}
+
+	QDir inputDir(iqt::CSystem::GetEnrolledPath(inputPath));
+	inputDir.cd(iqt::CSystem::GetEnrolledPath(*m_inputSubdirAttrPtr));
+
+	QDir outputDir(iqt::CSystem::GetEnrolledPath(outputPath));
+	outputDir.cd(iqt::CSystem::GetEnrolledPath(*m_outputSubdirAttrPtr));
+
+	SendVerboseMessage(QString("Copy files from %1 to %2").arg(inputPath).arg(outputPath));
+
+	int counter = 0;
+	if (CopyFileTree(
+				inputDir,
+				outputDir,
+				paramsPtr,
+				filters,
+				excludeFilters,
+				*m_recursionDepthAttrPtr,
+				counter)){
+		SendInfoMessage(MI_END_STATUS, tr("Success: %1 files copied").arg(counter));
+
+		return true;
+	}
+	else{
+		SendErrorMessage(MI_END_STATUS, tr("Failed: %1 files copied").arg(counter));
+
+		return false;
+	}
+}
+
+
 // protected methods
 
-bool CCopyProcessorComp::CheckFileExistTree(
+bool CCopyFilesTreeComp::CheckFileExistTree(
 			const QDir& inputDir,
 			const QStringList& filters,
 			const QStringList& excludeFilters,
@@ -57,9 +113,10 @@ bool CCopyProcessorComp::CheckFileExistTree(
 }
 
 
-bool CCopyProcessorComp::CopyFileTree(
+bool CCopyFilesTreeComp::CopyFileTree(
 			const QDir& inputDir,
 			const QDir& outputDir,
+			const iprm::IParamsSet* paramsPtr,
 			const QStringList& filters,
 			const QStringList& excludeFilters,
 			int recursionDepth,
@@ -92,11 +149,11 @@ bool CCopyProcessorComp::CopyFileTree(
 		}
 
 		QString inputFilePath = inputDir.absoluteFilePath(fileName);
-		QString outputFilePath = outputDir.absoluteFilePath(fileName);
+		QString outputPath = outputDir.absoluteFilePath(fileName);
 
 		I_ASSERT(m_fileCopyCompPtr.IsValid());	// it should be checked before whole process started
 
-		if (m_fileCopyCompPtr->ConvertFile(inputFilePath, outputFilePath)){
+		if (m_fileCopyCompPtr->ConvertFiles(inputFilePath, outputPath, paramsPtr)){
 			counter++;
 		}
 	}
@@ -121,7 +178,7 @@ bool CCopyProcessorComp::CopyFileTree(
 			QDir outputSubDir(outputDir.absoluteFilePath(fileName));
 
 			if (CheckFileExistTree(inputSubDir, filters, excludeFilters, recursionDepth - 1)){
-				retVal = CopyFileTree(inputSubDir, outputSubDir, filters, excludeFilters, recursionDepth - 1, counter) && retVal;
+				retVal = CopyFileTree(inputSubDir, outputSubDir, paramsPtr, filters, excludeFilters, recursionDepth - 1, counter) && retVal;
 			}
 		}
 	}
@@ -130,7 +187,7 @@ bool CCopyProcessorComp::CopyFileTree(
 }
 
 
-bool CCopyProcessorComp::CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const
+bool CCopyFilesTreeComp::CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const
 {
 	for (		QStringList::const_iterator excludeIter = excludeFilters.begin();
 				excludeIter != excludeFilters.end();
@@ -144,54 +201,6 @@ bool CCopyProcessorComp::CheckIfExcluded(const QString& fileName, const QStringL
 	}
 
 	return false;
-}
-
-
-// reimplemented (icomp::CComponentBase)
-
-void CCopyProcessorComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (!m_fileCopyCompPtr.IsValid()){
-		SendErrorMessage(MI_END_STATUS, tr("File copy provider is not present"));
-
-		return;
-	}
-
-	QStringList filters;
-	for (int filterIndex = 0; filterIndex < m_filtersAttrPtr.GetCount(); ++filterIndex){
-		const QString& filter = m_filtersAttrPtr[filterIndex];
-
-		filters << filter;
-	}
-
-	QStringList excludeFilters;
-	for (int excludeIndex = 0; excludeIndex < m_excludeFiltersAttrPtr.GetCount(); ++excludeIndex){
-		const QString& excludeFilter = m_excludeFiltersAttrPtr[excludeIndex];
-
-		excludeFilters << excludeFilter;
-	}
-
-	QString inputPath = iqt::CSystem::GetEnrolledPath(*m_inputPathAttrPtr);
-	QString outputPath = iqt::CSystem::GetEnrolledPath(*m_outputPathAttrPtr);
-
-	SendVerboseMessage(QString("Copy files from %1 to %2").arg(inputPath).arg(outputPath));
-
-	int counter = 0;
-	if (CopyFileTree(
-				inputPath,
-				outputPath,
-				filters,
-				excludeFilters,
-				*m_recursionDepthAttrPtr,
-				counter)){
-
-		SendInfoMessage(MI_END_STATUS, tr("Success: %1 files copied").arg(counter));
-	}
-	else{
-		SendErrorMessage(MI_END_STATUS, tr("Failed: %1 files copied").arg(counter));
-	}
 }
 
 

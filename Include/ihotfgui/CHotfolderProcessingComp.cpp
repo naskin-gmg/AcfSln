@@ -280,7 +280,7 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 
 	QElapsedTimer timer;
 	
-	if (!m_parent.m_fileConvertCompPtr->ConvertFile(m_inputFilePath, m_outputFilePath)){
+	if (!m_parent.m_fileConvertCompPtr->ConvertFiles(m_inputFilePath, m_outputFilePath)){
 		m_parent.SendErrorMessage(0, QObject::tr("Processing of  %1 failed").arg(m_inputFilePath), "Hotfolder");
 
 		m_processingState = iproc::IProcessor::TS_INVALID;

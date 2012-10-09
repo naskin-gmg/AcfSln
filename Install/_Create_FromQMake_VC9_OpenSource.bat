@@ -14,6 +14,9 @@ mkdir Temp
 mkdir TempExcl
 
 set COMPILER_EXT=VC9
+set LICENSE_TYPE=LGPL
+
+call CreateScripts.bat
 
 call Create_TechnicalDoc.bat
 

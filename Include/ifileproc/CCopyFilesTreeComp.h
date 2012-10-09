@@ -1,5 +1,5 @@
-#ifndef ifileproc_CCopyProcessorComp_included
-#define ifileproc_CCopyProcessorComp_included
+#ifndef ifileproc_CCopyFilesTreeComp_included
+#define ifileproc_CCopyFilesTreeComp_included
 
 
 // Qt includes
@@ -19,9 +19,10 @@ namespace ifileproc
 	Copy files from one directory to another one.
 	This component is part of installation concept. It is designed to use it as free component.
 */
-class CCopyProcessorComp:
-	public QObject,
-	public ibase::CLoggerComponentBase
+class CCopyFilesTreeComp:
+			public QObject,
+			public ibase::CLoggerComponentBase,
+			virtual public ibase::IFileConvertCopy
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -33,14 +34,21 @@ public:
 		MI_NO_OUTPUT
 	};
 
-	I_BEGIN_COMPONENT(CCopyProcessorComp);
+	I_BEGIN_COMPONENT(CCopyFilesTreeComp);
+		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
 		I_ASSIGN(m_fileCopyCompPtr, "FileCopy", "Provide copy of single file", true, "FileCopy");
-		I_ASSIGN(m_inputPathAttrPtr, "InputDir", "Path of input file or directory", true, ".");
-		I_ASSIGN(m_outputPathAttrPtr, "OutputDir", "Path of input file or directory", true, "./Copy");
 		I_ASSIGN_MULTI_1(m_filtersAttrPtr, "Filters", "List of file filters will be copied", true, "*");
 		I_ASSIGN_MULTI_0(m_excludeFiltersAttrPtr, "ExcludeFilters", "List of file filters will be exclude from copy", false);
 		I_ASSIGN(m_recursionDepthAttrPtr, "RecursionDepth", "Depth of recursion. Negative value means no depth limitation", true, 0);
+		I_ASSIGN(m_inputSubdirAttrPtr, "InputSubDir", "Input sub-directory", true, ".");
+		I_ASSIGN(m_outputSubdirAttrPtr, "OutputSubDir", "Output sub-directory", true, ".");
 	I_END_COMPONENT;
+
+	// reimplemented (ibase::IFileConvertCopy)
+	virtual bool ConvertFiles(
+				const QString& inputPath,
+				const QString& outputPath,
+				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 protected:
 	/**
@@ -65,6 +73,7 @@ protected:
 	bool CopyFileTree(
 				const QDir& inputDir,
 				const QDir& outputDir,
+				const iprm::IParamsSet* paramsPtr,
 				const QStringList& filters,
 				const QStringList& excludeFilters,
 				int recursionDepth,
@@ -75,22 +84,19 @@ protected:
 	*/
 	bool CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const;
 
-	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-
 private:
 	I_REF(ibase::IFileConvertCopy, m_fileCopyCompPtr);
-	I_ATTR(QString, m_inputPathAttrPtr);
-	I_ATTR(QString, m_outputPathAttrPtr);
 	I_MULTIATTR(QString, m_filtersAttrPtr);
 	I_MULTIATTR(QString, m_excludeFiltersAttrPtr);
 	I_ATTR(int, m_recursionDepthAttrPtr);
+	I_ATTR(QString, m_inputSubdirAttrPtr);
+	I_ATTR(QString, m_outputSubdirAttrPtr);
 };
 
 
 } // namespace ifileproc
 
 
-#endif // !ifileproc_CCopyProcessorComp_included
+#endif // !ifileproc_CCopyFilesTreeComp_included
 
 

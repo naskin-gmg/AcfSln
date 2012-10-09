@@ -36,9 +36,9 @@ public:
 	CSelectableFileConverterComp();
 
 	// reimplemented (ibase::IFileConvertCopy)
-	virtual bool ConvertFile(
-				const QString& inputFilePath,
-				const QString& outputFilePath,
+	virtual bool ConvertFiles(
+				const QString& inputPath,
+				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 	// reimplemented (iprm::ISelectionParam)

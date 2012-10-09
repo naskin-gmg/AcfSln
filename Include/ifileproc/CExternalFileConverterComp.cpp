@@ -17,9 +17,9 @@ namespace ifileproc
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CExternalFileConverterComp::ConvertFile(
-			const QString& inputFilePath,
-			const QString& outputFilePath,
+bool CExternalFileConverterComp::ConvertFiles(
+			const QString& inputPath,
+			const QString& outputPath,
 			const iprm::IParamsSet* paramsSetPtr) const
 {
 	if (!m_executablePathCompPtr.IsValid()){
@@ -45,8 +45,8 @@ bool CExternalFileConverterComp::ConvertFile(
 			}
 		}
 		else{
-			arguments.push_back(inputFilePath);
-			arguments.push_back(outputFilePath);
+			arguments.push_back(inputPath);
+			arguments.push_back(outputPath);
 		}
 	}
 	else{
@@ -55,13 +55,13 @@ bool CExternalFileConverterComp::ConvertFile(
 		arguments = applicationArguments.split(" ");
 	}
 
-	QFileInfo outputFileInfo(outputFilePath);
+	QFileInfo outputFileInfo(outputPath);
 
 	QString outputDirectory = outputFileInfo.dir().absolutePath();
 
 	for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
-		arguments[argIndex].replace("$(Input)", inputFilePath);
-		arguments[argIndex].replace("$(Output)", outputFilePath);
+		arguments[argIndex].replace("$(Input)", inputPath);
+		arguments[argIndex].replace("$(Output)", outputPath);
 		arguments[argIndex].replace("$(OutputDir)", outputDirectory);
 	}
 
