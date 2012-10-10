@@ -128,6 +128,7 @@ HTML_OUTPUT            = TechnicalDoc
 HTML_FILE_EXTENSION    = .html
 HTML_HEADER            = $(ACFDIR)/Docs/Design/DocHeader.html
 HTML_FOOTER            = $(ACFDIR)/Docs/Design/DocFooter.html
+HTML_TIMESTAMP         = NO
 HTML_STYLESHEET        = 
 HTML_ALIGN_MEMBERS     = YES
 GENERATE_HTMLHELP      = YES
