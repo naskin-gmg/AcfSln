@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2584
+          2585
         </Number>
         <Description>
           ACF
@@ -43,7 +43,7 @@
     </Element>
     <Element>
       <ComponentName>
-        ScriptFilesCopy
+        CopyScriptFiles
       </ComponentName>
       <X>
         700

@@ -9,7 +9,7 @@
 \section Introduction
 ACF-Solutions is a set of extensions for framework ACF.
 
-See http://www.imagingtools.de, write info@imagingtools.de or contact
+See http://www.ilena.org, write info@imagingtools.de or contact
 by Skype to ACF_infoline for further information about the ACF-Solutions.
 
 \section Example

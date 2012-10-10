@@ -15,13 +15,15 @@ mkdir TempExcl
 
 set COMPILER_EXT=VC9
 set LICENSE_TYPE=LGPL
+set LICENSE_DIR=Install/LGPL
+set LICENSE_INSTALL_PATH=..\LGPL\License.txt
 
 call CreateScripts.bat
 
 call Create_TechnicalDoc.bat
 
 echo Copying files to Temp directory...
-"%ACFDIR%/bin/Debug%COMPILER_EXT%/Acf.exe" Create_FromQMake_VC9_OpenSource.arx -config ../Config/Core.xpc
+"%ACFDIR%/bin/Debug%COMPILER_EXT%/Acf.exe" Create_FromQMake_VC9_OpenSource.arx -config ../Config/Core.xpc -input .. -output Temp
 
 call MakeVCProjects.bat
 

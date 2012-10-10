@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2584
+          2585
         </Number>
         <Description>
           ACF
@@ -80,7 +80,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  ScriptFilesCopy
+                  CopyScriptFiles
                 </Value>
               </Values>
             </Data>
@@ -128,7 +128,7 @@
     </Element>
     <Element>
       <Id>
-        ScriptFilesCopy
+        CopyScriptFiles
       </Id>
       <PackageId>
         InstallVoce

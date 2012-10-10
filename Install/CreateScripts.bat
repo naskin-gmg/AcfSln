@@ -1,0 +1,3 @@
+echo Creating installation scripts...
+
+"%ACFDIR%/Bin/Debug%COMPILER_EXT%/Acf.exe" CreateScripts.arx -config ../Config/Core.xpc -input . -output TempExcl
