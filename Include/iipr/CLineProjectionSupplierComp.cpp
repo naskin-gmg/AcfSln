@@ -10,7 +10,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IDataSequenceProvider)
+// reimplemented (imeas::IDataSequenceProvider)
 
 const imeas::IDataSequence* CLineProjectionSupplierComp::GetDataSequence() const
 {

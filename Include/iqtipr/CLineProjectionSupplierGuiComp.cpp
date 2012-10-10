@@ -4,13 +4,11 @@
 // Qt includes
 #include <QtGui/QMessageBox>
 
-
 // ACF includes
 #include "imath/CVarVector.h"
 
 #include "istd/TChangeNotifier.h"
 #include "iser/CMemoryReadArchive.h"
-
 
 // IACF includes
 #include "iqtipr/CProjectionShape.h"
@@ -93,7 +91,7 @@ void CLineProjectionSupplierGuiComp::UpdateGui(int updateFlags)
 	if (supplierPtr != NULL){
 		int workStatus = supplierPtr->GetWorkStatus();
 		if (workStatus == iproc::ISupplier::WS_OK){
-			const iipr::IDataSequenceProvider* providerPtr = dynamic_cast<const iipr::IDataSequenceProvider*>(supplierPtr);
+			const imeas::IDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IDataSequenceProvider*>(supplierPtr);
 			if (providerPtr != NULL){
 				projectionPtr = providerPtr->GetDataSequence();
 			}

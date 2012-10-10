@@ -1,5 +1,5 @@
-#ifndef iipr_IDataSequenceProvider_included
-#define iipr_IDataSequenceProvider_included
+#ifndef imeas_IDataSequenceProvider_included
+#define imeas_IDataSequenceProvider_included
 
 
 // ACF includes
@@ -9,12 +9,12 @@
 #include "imeas/IDataSequence.h"
 
 
-namespace iipr
+namespace imeas
 {
 
 
 /**
-	Image line projection supplier.
+	Simple data sequence provider.
 */
 class IDataSequenceProvider: virtual public istd::IChangeable
 {
@@ -26,9 +26,9 @@ public:
 };
 
 
-} // namespace iipr
+} // namespace imeas
 
 
-#endif // !iipr_IDataSequenceProvider_included
+#endif // !imeas_IDataSequenceProvider_included
 
 

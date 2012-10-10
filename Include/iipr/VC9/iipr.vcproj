@@ -341,6 +341,10 @@
 				RelativePath="..\CTubeProjectionLinesProviderComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CTubeProjectionsGenerator.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -535,6 +539,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTubeProjectionsGenerator.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IBitmapProvider.h"
 				>
 			</File>
@@ -552,10 +560,6 @@
 			</File>
 			<File
 				RelativePath="..\IConvolutionKernel2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDataSequenceProvider.h"
 				>
 			</File>
 			<File

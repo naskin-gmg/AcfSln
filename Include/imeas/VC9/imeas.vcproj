@@ -277,6 +277,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDataSequenceProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IDataSequenceStatistics.h"
 				>
 			</File>
@@ -298,6 +302,10 @@
 			</File>
 			<File
 				RelativePath="..\imeas.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMultiDataSequenceProvider.h"
 				>
 			</File>
 			<File

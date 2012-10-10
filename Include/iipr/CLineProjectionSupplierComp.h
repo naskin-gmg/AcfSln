@@ -9,10 +9,10 @@
 #include "iproc/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
+#include "imeas/IDataSequenceProvider.h"
 #include "imeas/CGeneralDataSequence.h"
 
 #include "iipr/IBitmapProvider.h"
-#include "iipr/IDataSequenceProvider.h"
 #include "iipr/ILineProjectionProcessor.h"
 
 
@@ -22,19 +22,19 @@ namespace iipr
 
 class CLineProjectionSupplierComp:
 			public iproc::TSupplierCompWrap<imeas::CGeneralDataSequence>,
-			virtual public iipr::IDataSequenceProvider
+			virtual public imeas::IDataSequenceProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap<imeas::CGeneralDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
-		I_REGISTER_INTERFACE(iipr::IDataSequenceProvider);
+		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_projectionProcessorCompPtr, "ProjectionProcessor", "Processor for projection data generation", true, "ProjectionProcessor");
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IDataSequenceProvider)
+	// reimplemented (imeas::IDataSequenceProvider)
 	virtual const imeas::IDataSequence* GetDataSequence() const;
 
 protected:

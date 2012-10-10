@@ -33,7 +33,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 			}
 		}
 		
-		return i2d::CTubeProjectionsGenerator::GeneratorProjections(*tubeRegionPtr, projectionsCount, result) ? WS_OK : WS_ERROR;
+		return i2d::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result) ? WS_OK : WS_ERROR;
 	}
 
 	return WS_CRITICAL;
