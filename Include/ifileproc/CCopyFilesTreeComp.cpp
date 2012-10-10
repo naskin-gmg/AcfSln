@@ -41,10 +41,14 @@ bool CCopyFilesTreeComp::ConvertFiles(
 	}
 
 	QDir inputDir(iqt::CSystem::GetEnrolledPath(inputPath));
-	inputDir.cd(iqt::CSystem::GetEnrolledPath(*m_inputSubdirAttrPtr));
+	if (m_inputSubdirAttrPtr.IsValid() && !(*m_inputSubdirAttrPtr).isEmpty()){
+		inputDir.setPath(inputDir.filePath(iqt::CSystem::GetEnrolledPath(*m_inputSubdirAttrPtr)));
+	}
 
 	QDir outputDir(iqt::CSystem::GetEnrolledPath(outputPath));
-	outputDir.cd(iqt::CSystem::GetEnrolledPath(*m_outputSubdirAttrPtr));
+	if (m_outputSubdirAttrPtr.IsValid() && !(*m_outputSubdirAttrPtr).isEmpty()){
+		outputDir.setPath(outputDir.filePath(iqt::CSystem::GetEnrolledPath(*m_outputSubdirAttrPtr)));
+	}
 
 	SendVerboseMessage(QString("Copy files from %1 to %2").arg(inputPath).arg(outputPath));
 
