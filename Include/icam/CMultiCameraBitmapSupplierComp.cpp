@@ -4,6 +4,8 @@
 // ACF includes
 #include "i2d/CAffineTransformation2d.h"
 
+#include "istd/CGeneralTimeStamp.h"
+
 
 namespace icam
 {
@@ -78,6 +80,9 @@ bool CMultiCameraBitmapSupplierComp::InitializeWork()
 
 int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
+	istd::CGeneralTimeStamp timer;
+	timer.Start();
+
 	if (!m_bitmapCompFact.IsValid()){
 		return WS_CRITICAL;
 	}
@@ -90,11 +95,16 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 			return WS_ERROR;
 		}
 
+		int retVal = WS_OK;
+
 		for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
 			istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
 
 			if (cameraBitmapPtr.IsValid() && (m_bitmapAcquisitionCompPtr.IsValid())){
-				int status = m_bitmapAcquisitionCompPtr->DoProcessing(m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), NULL, cameraBitmapPtr.GetPtr());
+				int status = m_bitmapAcquisitionCompPtr->DoProcessing(
+					m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), 
+					&timer, 
+					cameraBitmapPtr.GetPtr());
 
 				switch (status){
 					case iproc::IProcessor::TS_OK:
@@ -103,18 +113,18 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 					case iproc::IProcessor::TS_CANCELED:
 						result.Reset();
-
-						return WS_CANCELED;
+						retVal = WS_CANCELED;
+						break;
 
 					default:
 						result.Reset();
-
-						return WS_ERROR;
+						retVal = WS_ERROR;
+						break;
 				}
 			}
 		}
 
-		return WS_OK;
+		return retVal;
 	}
 
 	return WS_CRITICAL;
