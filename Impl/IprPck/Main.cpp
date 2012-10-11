@@ -193,6 +193,11 @@ I_EXPORT_COMPONENT(
 			"Processor for simple morphological operations on a bitmap",
 			"Bitmap Morphology Erosion Dilatation Opening Closing Structure" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			MultiLineProjectionSupplier, 
+			"Multi line projection supplier",
+			"Multi Line Projection Supplier")
+
 
 } // namespace IprPck
 

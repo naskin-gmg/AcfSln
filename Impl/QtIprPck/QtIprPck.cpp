@@ -58,6 +58,10 @@ I_EXPORT_COMPONENT(
 			"Multi line supplier GUI",
 			"Multi Line Supplier GUI")
 
+I_EXPORT_COMPONENT(
+			MultiLineProjectionSupplierGui, 
+			"Multi line projection supplier GUI",
+			"Multi Line Projection Supplier GUI")
 
 
 } // namespace QtIprPck

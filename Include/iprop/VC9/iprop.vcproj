@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="iprop"
 	ProjectGUID="{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
+	RootNamespace="iprop"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -239,6 +240,7 @@
 		</Filter>
 		<Filter
 			Name="Designer Files"
+			Filter="ui"
 			>
 			<File
 				RelativePath="..\CPropertiesEditorComp.ui"

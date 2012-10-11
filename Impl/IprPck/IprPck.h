@@ -45,6 +45,7 @@
 #include "iipr/CEdgeDistancesSupplierComp.h"
 #include "iipr/CTubeProjectionLinesProviderComp.h"
 #include "iipr/CMorphologicalProcessorComp.h"
+#include "iipr/CMultiLineProjectionSupplierComp.h"
 
 
 /**
@@ -116,6 +117,8 @@ typedef iipr::CEdgeDistanceProcessorComp EdgeDistanceProcessor;
 typedef icomp::TModelCompWrap<iipr::CEdgeDistancesSupplierComp> EdgeDistancesSupplier;
 typedef icomp::TModelCompWrap<iipr::CTubeProjectionLinesProviderComp> TubeProjectionLinesProvider;
 typedef iipr::CMorphologicalProcessorComp MorphologicalProcessor;
+typedef icomp::TModelCompWrap<
+			iipr::CMultiLineProjectionSupplierComp> MultiLineProjectionSupplier;
 
 
 } // namespace IprPck

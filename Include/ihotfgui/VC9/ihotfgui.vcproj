@@ -255,6 +255,7 @@
 		</Filter>
 		<Filter
 			Name="Qt Designer Files"
+			Filter="ui"
 			>
 			<File
 				RelativePath="..\CDirectoryItemGuiComp.ui"

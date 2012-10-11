@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLineProjectionSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.cpp"
 				>
 			</File>
@@ -224,6 +228,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLineProjectionSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.h"
 				>
 			</File>
@@ -246,6 +254,7 @@
 		</Filter>
 		<Filter
 			Name="Qt Designer Files"
+			Filter="ui"
 			>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.ui"
@@ -265,6 +274,10 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiLineProjectionSupplierGuiComp.ui"
 				>
 			</File>
 			<File
@@ -306,6 +319,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CMultiLineProjectionSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CMultiLineSupplierGuiComp.cpp"
 				>
 			</File>
@@ -335,6 +352,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CLineProjectionSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CMultiLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
@@ -371,6 +392,10 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionSupplierGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiLineProjectionSupplierGuiComp.moc"
 				>
 			</File>
 			<File

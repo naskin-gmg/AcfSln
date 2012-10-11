@@ -282,6 +282,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLineProjectionSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiLineSupplierCompBase.cpp"
 				>
 			</File>
@@ -476,6 +480,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiBitmapCacheComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiLineProjectionSupplierComp.h"
 				>
 			</File>
 			<File
