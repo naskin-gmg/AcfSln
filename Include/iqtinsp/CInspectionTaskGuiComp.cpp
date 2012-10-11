@@ -83,7 +83,7 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 		}
 	}
 
-	// Close message view if no messages were provded:
+	// Close message view if no messages were provided:
 	QList<int> sizes = MessageListSplitter->sizes();
 
 	if (MessageList->topLevelItemCount() == 0){
@@ -298,6 +298,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 	ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 
+	bool useSpacer = *m_useVerticalSpacerAttrPtr;
+
 	if (*m_designTypeAttrPtr == 1){
 		m_toolBoxPtr = new QToolBox(ParamsFrame);
 		int subtasksCount = m_editorGuisCompPtr.GetCount();
@@ -317,9 +319,11 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 				int toolBoxIndex = m_toolBoxPtr->addItem(panelPtr, name);
 
-				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+				if (useSpacer){
+					QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-				panelLayoutPtr->addItem(spacerPtr);
+					panelLayoutPtr->addItem(spacerPtr);
+				}
 
 				m_tabToGuiIndexMap[toolBoxIndex] = i;
 
@@ -356,9 +360,11 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 				int tabIndex = m_tabWidgetPtr->addTab(panelPtr, name);
 
-				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+				if (useSpacer){
+					QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-				panelLayoutPtr->addItem(spacerPtr);
+					panelLayoutPtr->addItem(spacerPtr);
+				}
 
 				m_tabToGuiIndexMap[tabIndex] = i;
 

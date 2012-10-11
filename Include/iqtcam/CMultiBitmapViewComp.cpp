@@ -109,13 +109,14 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	layoutPtr->setContentsMargins(0, 0, 0, 0);
 	widgetPtr->setLayout(layoutPtr);
 
+	QString titlePrefix = *m_viewLabelPrefixAttrPtr;
+	
 	int viewIndex = 0;
 	for (int row = 0; row < m_rowCount; row++){
 		for (int col = 0; col < m_columnCount; col++){
-			QString titlePrefix = *m_viewLabelPrefixAttrPtr;
-			
+		
 			QString title;
-			if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+			if (titlePrefix.isEmpty() && (viewIndex < m_informationProvidersCompPtr.GetCount())){
 				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
 			}
 			else{
