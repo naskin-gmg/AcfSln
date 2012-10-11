@@ -4,7 +4,7 @@
 // ACF includes
 #include "iprm/TParamsPtr.h"
 #include "imeas/INumericValue.h"
-#include "i2d/CTubeProjectionsGenerator.h"
+#include "iipr/CTubeProjectionsGenerator.h"
 
 
 namespace iipr
@@ -33,7 +33,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 			}
 		}
 		
-		return i2d::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result) ? WS_OK : WS_ERROR;
+		return iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result) ? WS_OK : WS_ERROR;
 	}
 
 	return WS_CRITICAL;
