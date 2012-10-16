@@ -47,6 +47,30 @@ public:
 		MI_DURATION_TIME = 0x077a1b
 	};
 
+	enum SupplierWorkingMode
+	{
+		/**
+			This supplier works in explicit initialization mode.
+			It means, that this suppolier need explicite call of method EnsureWorkInitialized() to start its work.
+			In this case, the products of supplier logically changes beetwen supplier invalidation and initialization.
+			After call of method EnsureWorkInitialized() the supplier signalize that its state has been changed,
+			the real calculation is postponed and will be done on demand without signalizing object changes.
+		*/
+		SWM_EXPLICIT_INIT,
+		/**
+			This supplier works in implicit initialization mode.
+			It means, that this suppolier doesn't need the explicite call of method EnsureWorkInitialized().
+			Work will be started automatically after the supplier was initialized (inputs or parameters changed) and supplier change starts.
+			After recalculation of results the supplier signalize that its state has been changed.
+		*/
+		SWM_IMPLICIT_INIT,
+		/**
+			This supplier works synchronized to its inputs.
+			It means, it is during changes when one of its inputs is during changes.
+		*/
+		SWM_DIRECT_INPUT
+	};
+
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 		I_REGISTER_INTERFACE(ISupplier);
 		I_REGISTER_INTERFACE(IElapsedTimeProvider);
@@ -56,7 +80,7 @@ public:
 		I_ASSIGN_MULTI_0(m_additionalTriggerInputsCompPtr, "AdditionalTriggerInputs", "Additional observed trigger inputs, the supplier will be invalidated if some input signal the change", false);
 	I_END_COMPONENT;
 
-	TSupplierCompWrap();
+	TSupplierCompWrap(SupplierWorkingMode mode = SWM_EXPLICIT_INIT);
 
 	// reimplemented (iproc::ISupplier)
 	virtual void InvalidateSupplier();
@@ -120,6 +144,7 @@ protected:
 	protected:
 		// reimplemented (imod::CMultiModelObserverBase)
 		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 		TSupplierCompWrap<Product>& m_parent;
 	};
@@ -133,6 +158,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::CMultiModelObserverBase)
+		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 		TSupplierCompWrap<Product>& m_parent;
@@ -155,19 +181,24 @@ private:
 	double m_elapsedTime;
 
 	bool m_areParametersValid;
+
+	int m_updateMode;
+	int m_changedInputsCounter;
 };
 
 
 // public methods
 
 template <class Product>
-TSupplierCompWrap<Product>::TSupplierCompWrap()
+TSupplierCompWrap<Product>::TSupplierCompWrap(SupplierWorkingMode mode)
 :	m_workStatus(WS_INVALID),
 	m_inputsObserver(this),
 	m_paramsObserver(this),
 	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
 	m_elapsedTime(0),
-	m_areParametersValid(false)
+	m_areParametersValid(false),
+	m_updateMode(mode),
+	m_changedInputsCounter(0)
 {
 }
 
@@ -184,7 +215,9 @@ void TSupplierCompWrap<Product>::InvalidateSupplier()
 	m_elapsedTime = 0.0;
 
 	if (m_workStatus != ISupplier::WS_INVALID){
-		m_productChangeNotifier.SetPtr(this);
+		if (m_updateMode == SWM_EXPLICIT_INIT){
+			m_productChangeNotifier.SetPtr(this);
+		}
 
 		m_workStatus = ISupplier::WS_INVALID;
 	}
@@ -195,7 +228,9 @@ template <class Product>
 void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 {
 	if (m_workStatus < ISupplier::WS_INIT){
-		m_productChangeNotifier.SetPtr(this);
+		if (m_updateMode == SWM_EXPLICIT_INIT){
+			m_productChangeNotifier.SetPtr(this);
+		}
 
 		if (!m_areParametersValid){
 			m_areParametersValid = true;
@@ -209,7 +244,9 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 		else{
 			m_workStatus = WS_CRITICAL;
 
-			m_productChangeNotifier.SetPtr(NULL);
+			if (m_updateMode == SWM_EXPLICIT_INIT){
+				m_productChangeNotifier.Reset();
+			}
 		}
 	}
 }
@@ -235,7 +272,18 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 
 		m_elapsedTime = timer.nsecsElapsed() / 1000000000.0;
 
-		m_productChangeNotifier.SetPtr(NULL);
+		switch (m_updateMode){
+		case SWM_EXPLICIT_INIT:
+			m_productChangeNotifier.Reset();
+			break;
+
+		case SWM_IMPLICIT_INIT:
+			m_productChangeNotifier.SetPtr(this);
+			break;
+
+		default:
+			break;
+		}
 	}
 }
 
@@ -250,7 +298,18 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 	m_elapsedTime = 0.0;
 
 	if (m_workStatus != ISupplier::WS_INVALID){
-		m_productChangeNotifier.SetPtr(this);
+		switch (m_updateMode){
+		case SWM_EXPLICIT_INIT:
+			m_productChangeNotifier.Reset();
+			break;
+
+		case SWM_IMPLICIT_INIT:
+			m_productChangeNotifier.SetPtr(this);
+			break;
+
+		default:
+			break;
+		}
 
 		m_productPtr.Reset();
 
@@ -379,7 +438,44 @@ TSupplierCompWrap<Product>::InputsObserver::InputsObserver(TSupplierCompWrap<Pro
 template <class Product>
 void TSupplierCompWrap<Product>::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	m_parent.InvalidateSupplier();
+	switch (m_parent.m_updateMode){
+	case SWM_EXPLICIT_INIT:
+		m_parent.InvalidateSupplier();
+		break;
+
+	case SWM_DIRECT_INPUT:
+		if (m_parent.m_changedInputsCounter == 0){
+			m_parent.m_productChangeNotifier.SetPtr(&m_parent);
+		}
+
+		++m_parent.m_changedInputsCounter;
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+template <class Product>
+void TSupplierCompWrap<Product>::InputsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	switch (m_parent.m_updateMode){
+	case SWM_IMPLICIT_INIT:
+		m_parent.InvalidateSupplier();
+		break;
+
+	case SWM_DIRECT_INPUT:
+		--m_parent.m_changedInputsCounter;
+
+		if (m_parent.m_changedInputsCounter == 0){
+			m_parent.m_productChangeNotifier.SetPtr(NULL);
+		}
+		break;
+
+	default:
+		break;
+	}
 }
 
 
@@ -398,8 +494,38 @@ TSupplierCompWrap<Product>::ParamsObserver::ParamsObserver(TSupplierCompWrap<Pro
 // reimplemented (imod::CMultiModelObserverBase)
 
 template <class Product>
+void TSupplierCompWrap<Product>::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	switch (m_parent.m_updateMode){
+	case SWM_EXPLICIT_INIT:
+		m_parent.InvalidateSupplier();
+		break;
+
+	case SWM_DIRECT_INPUT:
+		if (m_parent.m_changedInputsCounter == 0){
+			m_parent.m_productChangeNotifier.SetPtr(&m_parent);
+		}
+
+		++m_parent.m_changedInputsCounter;
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+template <class Product>
 void TSupplierCompWrap<Product>::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	if (m_parent.m_updateMode == SWM_DIRECT_INPUT){
+		--m_parent.m_changedInputsCounter;
+
+		if (m_parent.m_changedInputsCounter == 0){
+			m_parent.m_productChangeNotifier.SetPtr(NULL);
+		}
+	}
+
 	m_parent.m_areParametersValid = false;
 
 	m_parent.InvalidateSupplier();
