@@ -17,7 +17,6 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-
 // ACF includes
 #include "iproc/ISupplier.h"
 #include "iproc/IElapsedTimeProvider.h"
@@ -29,7 +28,7 @@ namespace iproc
 
 /**
 	Wrapper implementation of interface iproc::ISupplier with preparation for component implementation.
-	During component initalization you should call \c RegisterSupplierInput for all suppliers used by this component as a input.
+	During component initialization you should call \c RegisterSupplierInput for all suppliers used by this component as a input.
 */
 template <class Product>
 class TSupplierCompWrap:
@@ -51,15 +50,15 @@ public:
 	{
 		/**
 			This supplier works in explicit initialization mode.
-			It means, that this suppolier need explicite call of method EnsureWorkInitialized() to start its work.
-			In this case, the products of supplier logically changes beetwen supplier invalidation and initialization.
+			It means, that this supplier need explicit call of method EnsureWorkInitialized() to start its work.
+			In this case, the products of supplier logically changes between supplier invalidation and initialization.
 			After call of method EnsureWorkInitialized() the supplier signalize that its state has been changed,
 			the real calculation is postponed and will be done on demand without signalizing object changes.
 		*/
 		SWM_EXPLICIT_INIT,
 		/**
 			This supplier works in implicit initialization mode.
-			It means, that this suppolier doesn't need the explicite call of method EnsureWorkInitialized().
+			It means, that this supplier doesn't need the explicit call of method EnsureWorkInitialized().
 			Work will be started automatically after the supplier was initialized (inputs or parameters changed) and supplier change starts.
 			After recalculation of results the supplier signalize that its state has been changed.
 		*/
@@ -95,14 +94,14 @@ public:
 
 protected:
 	/**
-		Called if the new work should be initiliazed.
-		Default implementation do nothing. It is dedicated to be overriden.
+		Called if the new work should be initialized.
+		Default implementation do nothing. It is dedicated to be overridden.
 	*/
 	virtual bool InitializeWork();
 
 	/**
 		Called if the supplier parameters was changed.
-		Default implementation do nothing. It is dedicated to be overriden.
+		Default implementation do nothing. It is dedicated to be overridden.
 	*/
 	virtual void OnParametersChanged();
 
@@ -114,7 +113,7 @@ protected:
 	/**
 		Register supplier input.
 		Changes of supplier input will force this supplier invalidate.
-		All registered inputs will be unregistered ducring component destroing (OnComponentDestryed method).
+		All registered inputs will be unregistered during component destruction (OnComponentDestryed method).
 	*/
 	virtual void RegisterSupplierInput(imod::IModel* modelPtr);
 	/**

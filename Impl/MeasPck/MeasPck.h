@@ -17,10 +17,11 @@
 #include "imeas/CNumericParamsComp.h"
 #include "imeas/CNumericConstraintsComp.h"
 #include "imeas/CLinearAdjustParamsComp.h"
+#include "imeas/CNumericValuesJoinerComp.h"
 
 
 /**
-	System-undependent package for sampling, measurement acquisition and related thema.
+	System-independent package for sampling, measurement acquisition and related themas.
 */
 namespace MeasPck
 {
@@ -69,6 +70,7 @@ typedef imeas::CHistogramStatisticsProcessorComp HistogramStatisticsProcessor;
 typedef icomp::TModelCompWrap<imeas::CNumericParamsComp> NumericParams;
 typedef imeas::CNumericConstraintsComp NumericConstraints;
 typedef icomp::TModelCompWrap<imeas::CLinearAdjustParamsComp> LinearAdjustParams;
+typedef imeas::CNumericValuesJoinerComp NumericValuesJoiner;
 
 
 } // namespace MeasPck

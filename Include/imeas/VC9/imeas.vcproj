@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNumericValuesJoinerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSamplesInfo.cpp"
 				>
 			</File>
@@ -250,6 +254,10 @@
 			</File>
 			<File
 				RelativePath="..\CNumericParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNumericValuesJoinerComp.h"
 				>
 			</File>
 			<File
