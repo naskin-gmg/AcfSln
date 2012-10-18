@@ -33,7 +33,26 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 			}
 		}
 		
-		return iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result) ? WS_OK : WS_ERROR;
+		if (iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result)){
+			if (m_calibrationProviderCompPtr.IsValid()){
+				const i2d::ITransformation2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();
+				if (transformPtr != NULL){
+					for (int lineIndex = 0; lineIndex < result.count(); lineIndex++){
+						i2d::CLine2d& line = result[lineIndex];
+
+						if (!line.Transform(*transformPtr)){
+							result.clear();
+
+							return WS_ERROR;
+						}
+					}
+				}
+			}
+
+			return WS_OK;
+		}
+	
+		return WS_ERROR;
 	}
 
 	return WS_CRITICAL;

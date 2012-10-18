@@ -198,6 +198,11 @@ I_EXPORT_COMPONENT(
 			"Multi line projection supplier",
 			"Multi Line Projection Supplier")
 
+I_EXPORT_COMPONENT(
+			SelectableCalibrationSupplier, 
+			"Provider of a single (selected) calibration from a list of calibrations",
+			"Multi Single Calibration Supplier Provider" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 

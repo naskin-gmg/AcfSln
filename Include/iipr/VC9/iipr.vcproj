@@ -338,6 +338,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableCalibrationSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSingleFeatureConsumer.cpp"
 				>
 			</File>
@@ -536,6 +540,10 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableCalibrationSupplierComp.h"
 				>
 			</File>
 			<File

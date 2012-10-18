@@ -18,6 +18,7 @@ public:
 	I_BEGIN_COMPONENT(CTubeProjectionLinesProviderComp);
 		I_ASSIGN(m_tubeParamsIdAttrPtr, "TubeParamsId", "ID of the tube parameter in the parameter set", true, "TubeParamsId");
 		I_ASSIGN(m_linesCountParamsIdAttrPtr, "LinesCountParamsId", "ID of the line count parameter in the parameter set", true, "LinesCountParamsId");
+		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provider of the transformation between logical and physical coordinate systems", false, "CalibrationProvider");
 	I_END_COMPONENT;
 
 protected:
@@ -27,6 +28,7 @@ protected:
 private:
 	I_ATTR(QByteArray, m_tubeParamsIdAttrPtr);
 	I_ATTR(QByteArray, m_linesCountParamsIdAttrPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 };
 
 
