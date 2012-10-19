@@ -155,6 +155,8 @@ int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
+	Timer performanceTimer(this, "Bitmap separation");
+
 	result.Reset();	
 	
 	if (bitmapPtr->GetPixelFormat() != iimg::IBitmap::PF_RGB &&
@@ -258,11 +260,11 @@ void CColorBitmapSeparatorSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 
 	if (m_calibrationModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
 	}
 }
 

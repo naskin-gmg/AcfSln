@@ -7,11 +7,13 @@
 #include "i2d/CVector2d.h"
 #include "i2d/CAffineTransformation2d.h"
 #include "iprm/IParamsSet.h"
-#include "iproc/IProcessor.h"
-#include "iproc/TSupplierCompWrap.h"
 
-#include "iipr/IBitmapProvider.h"
+// ACF-Solutions includes
+#include "iproc/IProcessor.h"
+#include "iproc/ISupplier.h"
+#include "iproc/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
+#include "iipr/IBitmapProvider.h"
 #include "iipr/CFeaturesContainer.h"
 
 
@@ -31,6 +33,7 @@ public:
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_REGISTER_INTERFACE(i2d::IMultiCalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Calculate model positions in the image", true, "Processor");
 	I_END_COMPONENT;
@@ -54,6 +57,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 

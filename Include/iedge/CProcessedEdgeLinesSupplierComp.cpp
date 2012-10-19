@@ -21,13 +21,16 @@ int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result)
 {
 	if (m_edgeLinesProviderCompPtr.IsValid() && m_edgesProcessorCompPtr.IsValid()){
 		const CEdgeLine::Container* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
-		if (		(containerPtr != NULL) &&
-					m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
-			return WS_OK;
+
+		if (containerPtr != NULL){
+			Timer performanceTimer(this, "Edge processing");
+
+			if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
+				return WS_OK;
+			}
 		}
-		else{
-			return WS_ERROR;
-		}
+
+		return WS_ERROR;
 	}
 	else{
 		return WS_CRITICAL;
@@ -42,7 +45,7 @@ void CProcessedEdgeLinesSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_edgeLinesProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_edgeLinesProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_edgeLinesProviderModelCompPtr.GetPtr(), m_edgeLinesSupplierCompPtr.GetPtr());
 	}
 }
 

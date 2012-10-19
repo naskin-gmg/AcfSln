@@ -3,9 +3,8 @@
 
 
 // ACF includes
+#include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
-
-// ACF-Solutions includes
 #include "iedge/IEdgeLinesProvider.h"
 #include "iedge/IEdgeLinesProcessor.h"
 #include "iedge/CEdgeLine.h"
@@ -25,6 +24,7 @@ public:
 	I_BEGIN_COMPONENT(CProcessedEdgeLinesSupplierComp);
 		I_REGISTER_INTERFACE(IEdgeLinesProvider);
 		I_ASSIGN(m_edgeLinesProviderCompPtr, "EdgeLinesProvider", "Provide list of edge list to processing", true, "EdgeLinesProvider");
+		I_ASSIGN_TO(m_edgeLinesSupplierCompPtr, m_edgeLinesProviderCompPtr, false);
 		I_ASSIGN_TO(m_edgeLinesProviderModelCompPtr, m_edgeLinesProviderCompPtr, false);
 		I_ASSIGN(m_edgesProcessorCompPtr, "EdgesProcessor", "Processor (edges to edges)", true, "EdgesProcessor");
 	I_END_COMPONENT;
@@ -41,6 +41,7 @@ protected:
 
 private:
 	I_REF(IEdgeLinesProvider, m_edgeLinesProviderCompPtr);
+	I_REF(iproc::ISupplier, m_edgeLinesSupplierCompPtr);
 	I_REF(imod::IModel, m_edgeLinesProviderModelCompPtr);
 	I_REF(IEdgeLinesProcessor, m_edgesProcessorCompPtr);
 };

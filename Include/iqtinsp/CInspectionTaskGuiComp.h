@@ -108,17 +108,6 @@ protected Q_SLOTS:
 	void on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int column);
 
 private:
-	class TasksObserver: public imod::CMultiModelObserverBase
-	{
-	public:
-		TasksObserver(CInspectionTaskGuiComp* parentPtr);
-	protected:
-		virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CInspectionTaskGuiComp& m_parent;
-	};
-
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_editorGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_editorObserversCompPtr);
@@ -138,8 +127,6 @@ private:
 	I_ATTR(int, m_tabOrientationAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
-
-	TasksObserver m_tasksObserver;
 
 	int m_currentGuiIndex;
 	typedef QMap<int, int> GuiMap;

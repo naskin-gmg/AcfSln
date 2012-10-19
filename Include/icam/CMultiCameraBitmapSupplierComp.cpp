@@ -97,6 +97,8 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 		int retVal = WS_OK;
 
+		Timer performanceTimer(this, "Acquisition of image(s)");
+
 		for (int cameraIndex = 0; cameraIndex < camerasCount; cameraIndex++){
 			istd::TDelPtr<iimg::IBitmap> cameraBitmapPtr(m_bitmapCompFact.CreateInstance());
 
@@ -107,19 +109,19 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 					cameraBitmapPtr.GetPtr());
 
 				switch (status){
-					case iproc::IProcessor::TS_OK:
-						result.PushBack(cameraBitmapPtr.PopPtr());
-						break;
+				case iproc::IProcessor::TS_OK:
+					result.PushBack(cameraBitmapPtr.PopPtr());
+					break;
 
-					case iproc::IProcessor::TS_CANCELED:
-						result.Reset();
-						retVal = WS_CANCELED;
-						break;
+				case iproc::IProcessor::TS_CANCELED:
+					result.Reset();
+					retVal = WS_CANCELED;
+					break;
 
-					default:
-						result.Reset();
-						retVal = WS_ERROR;
-						break;
+				default:
+					result.Reset();
+					retVal = WS_ERROR;
+					break;
 				}
 			}
 		}

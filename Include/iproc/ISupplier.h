@@ -4,10 +4,8 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-
+#include "ibase/IMessageContainer.h"
 #include "iprm/IParamsSet.h"
-
-#include "iproc/iproc.h"
 
 
 namespace iproc
@@ -65,6 +63,12 @@ public:
 	};
 
 	/**
+		Get status of last work.
+		\return	work status defined in iproc::ISupplier::WorkStatus.
+	*/
+	virtual int GetWorkStatus() const = 0;
+
+	/**
 		Called to signalize that this supplier is invalid.
 		This signal will be transfered to all supplier which are registered as output.
 		\return	true, if initialization could be done.
@@ -89,10 +93,10 @@ public:
 	virtual void ClearWorkResults() = 0;
 
 	/**
-		Get status of last work.
-		\return	work status defined in iproc::ISupplier::WorkStatus.
+		Get messages outputted by this work.
+		If the supplier doesn't support list of messages, it returns NULL.
 	*/
-	virtual int GetWorkStatus() const = 0;
+	virtual const ibase::IMessageContainer* GetWorkMessages() const = 0;
 
 	/**
 		Get parameter set using by this supplier.

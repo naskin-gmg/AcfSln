@@ -68,6 +68,8 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
+	Timer performanceTimer(this, "Bitmap processing");
+
 	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.second.GetPtr());
 	switch (status){
 		case iproc::IProcessor::TS_OK:
@@ -98,7 +100,7 @@ void CProcessedBitmapSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 }
 

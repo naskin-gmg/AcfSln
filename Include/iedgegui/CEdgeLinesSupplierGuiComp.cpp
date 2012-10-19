@@ -6,7 +6,6 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iproc/IElapsedTimeProvider.h"
 
 // ACF-Solutions includes
 #include "iedge/IEdgeLinesProvider.h"
@@ -106,11 +105,6 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	I_ASSERT(IsGuiCreated());
 
-	iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(GetObjectPtr());
-	if (processingTimeProviderPtr != NULL){
-		ProcessingTimeLabel->setText(QString(tr("Edges found in %1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
-	}
-		
 	UpdateAllViews();
 }
 
@@ -146,18 +140,12 @@ void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
 
 void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(supplierPtr);
-			if (providerPtr != NULL ){
-				const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
+	iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(GetObjectPtr());
+	if (providerPtr != NULL ){
+		const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
-				if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
-					m_foundModel.Reset();
-				}
-			}
+		if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
+			m_foundModel.Reset();
 		}
 	}
 

@@ -7,7 +7,6 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iproc/IElapsedTimeProvider.h"
 
 // ACF-Solutions includes
 #include "imeas/INumericValueProvider.h"
@@ -129,50 +128,40 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	double maxScoreRadius = 50;
 
-	TimeLabel->clear();
-
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
-			if (providerPtr != NULL){
-				int featuresCount = providerPtr->GetValuesCount();
+		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObjectPtr());
+		if (providerPtr != NULL){
+			int featuresCount = providerPtr->GetValuesCount();
 
-				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
-					if (searchFeaturePtr != NULL){
-						QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
-						modelItemPtr->setText(CT_ID, searchFeaturePtr->GetId());
-						modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100, 'f', 2));
-						modelItemPtr->setText(CT_X, QString::number(searchFeaturePtr->GetPosition().GetX(), 'f', 2));
-						modelItemPtr->setText(CT_Y, QString::number(searchFeaturePtr->GetPosition().GetY(), 'f', 2));
-						modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle()), 'f', 2));
-						modelItemPtr->setText(CT_X_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2));
-						modelItemPtr->setText(CT_Y_SCALE, QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
+			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
+				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
+				if (searchFeaturePtr != NULL){
+					QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
+					modelItemPtr->setText(CT_ID, searchFeaturePtr->GetId());
+					modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100, 'f', 2));
+					modelItemPtr->setText(CT_X, QString::number(searchFeaturePtr->GetPosition().GetX(), 'f', 2));
+					modelItemPtr->setText(CT_Y, QString::number(searchFeaturePtr->GetPosition().GetY(), 'f', 2));
+					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle()), 'f', 2));
+					modelItemPtr->setText(CT_X_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2));
+					modelItemPtr->setText(CT_Y_SCALE, QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
 
-						ResultsList->addTopLevelItem(modelItemPtr);
+					ResultsList->addTopLevelItem(modelItemPtr);
 
-						VisualObject* visualObject = new VisualObject;
+					VisualObject* visualObject = new VisualObject;
 
-						visualObject->model.SetPtr(new PositionModel);
-						visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
-						visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+					visualObject->model.SetPtr(new PositionModel);
+					visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
+					visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
 
-						visualObject->shape.SetPtr(new iview::CInteractiveCircleShape());
-						visualObject->shape->SetEditablePosition(false);
-						visualObject->shape->SetEditableRadius(false);
+					visualObject->shape.SetPtr(new iview::CInteractiveCircleShape());
+					visualObject->shape->SetEditablePosition(false);
+					visualObject->shape->SetEditableRadius(false);
 
-						visualObject->model->AttachObserver(visualObject->shape.GetPtr());
+					visualObject->model->AttachObserver(visualObject->shape.GetPtr());
 
-						m_visualPositions.PushBack(visualObject);
-					}
+					m_visualPositions.PushBack(visualObject);
 				}
-			}
-			
-			const iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(supplierPtr);
-			if (processingTimeProviderPtr != NULL){
-				TimeLabel->setText(QString(tr("%1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
 			}
 		}
 

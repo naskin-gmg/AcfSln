@@ -9,8 +9,6 @@
 #include "iview/CInteractiveCircleShape.h"
 #include "iview/CInteractivePinShape.h"
 
-#include "iproc/IElapsedTimeProvider.h"
-
 
 namespace iqtipr
 {
@@ -104,26 +102,14 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 	imath::CVarVector position;
 	imath::CVarVector radius;
 
-	ProcessingTimeLabel->clear();
-
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
-			if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){
-				const imeas::INumericValue& resultValue = providerPtr->GetNumericValue(0);
+		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
+		if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){
+			const imeas::INumericValue& resultValue = providerPtr->GetNumericValue(0);
 
-				position = resultValue.GetComponentValue(imeas::INumericValue::VTI_POSITION);
-				radius = resultValue.GetComponentValue(imeas::INumericValue::VTI_RADIUS);
-
-				iproc::IElapsedTimeProvider* processingTimeProviderPtr = dynamic_cast<iproc::IElapsedTimeProvider*>(supplierPtr);
-				if (processingTimeProviderPtr != NULL){
-					ProcessingTimeLabel->setText(QString(tr("in %1 ms").arg(processingTimeProviderPtr->GetElapsedTime() * 1000, 1, 'f', 1)));
-
-					ProcessingTimeLabel->setVisible(true);
-				}
-			}
+			position = resultValue.GetComponentValue(imeas::INumericValue::VTI_POSITION);
+			radius = resultValue.GetComponentValue(imeas::INumericValue::VTI_RADIUS);
 		}
 
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
@@ -178,8 +164,6 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 void CValueSupplierGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
-
-	ProcessingTimeLabel->setVisible(false);
 
 	if (m_intermediateResultsGuiCompPtr.IsValid()){
 		m_intermediateResultsGuiCompPtr->CreateGui(IntResultsFrame);

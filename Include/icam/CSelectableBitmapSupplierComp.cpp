@@ -106,7 +106,7 @@ void CSelectableBitmapSupplierComp::OnComponentCreated()
 	}
 
 	if (m_multiBitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_multiBitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_multiBitmapProviderModelCompPtr.GetPtr(), m_multiBitmapSupplierCompPtr.GetPtr());
 	}
 }
 

@@ -1064,7 +1064,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         iedge::IEdgeLinesProvider
@@ -1076,14 +1076,6 @@
     <Interface>
       <InterfaceId>
         imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        ReducedEdgesSupplier
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iproc::IElapsedTimeProvider
       </InterfaceId>
       <ComponentId>
         ReducedEdgesSupplier

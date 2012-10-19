@@ -5,12 +5,13 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 #include "i2d/CVector2d.h"
+
+// ACF-Solutions includes
 #include "iproc/IProcessor.h"
+#include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
-
-// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 #include "iipr/IImageToFeatureProcessor.h"
 #include "iipr/CCaliperDistanceFeature.h"
@@ -31,6 +32,7 @@ public:
 	I_BEGIN_COMPONENT(CEdgeDistancesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
@@ -48,6 +50,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 };

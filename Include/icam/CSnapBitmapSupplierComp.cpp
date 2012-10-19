@@ -69,6 +69,8 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 	}
 
 	if (result.second.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
+		Timer performanceTimer(this, "Image acquisition");
+
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.second.GetPtr());
 		switch (status){
 		case iproc::IProcessor::TS_OK:

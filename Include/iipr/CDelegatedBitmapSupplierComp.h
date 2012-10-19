@@ -33,16 +33,15 @@ public:
 	I_BEGIN_COMPONENT(CDelegatedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(IBitmapProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
-		I_ASSIGN(m_inputBitmapProviderCompPtr, "SlaveSupplier", "Slave supplier where all calls will be delegated", false, "SlaveSupplier");
-		I_ASSIGN_TO(m_inputBitmapProviderModelCompPtr, m_inputBitmapProviderCompPtr, false);
-		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_inputBitmapProviderCompPtr, false);
 		I_ASSIGN(m_bitmapCompPtr, "BitmapObject", "Bitmap object used if no slave supplier is provided", false, "BitmapObject");
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, false);
 		I_ASSIGN(m_calibrationCompPtr, "CalibrationObject", "Calibration object used as image to log transformation, if no slave supplier is provided", false, "CalibrationObject");
 		I_ASSIGN_TO(m_calibrationModelCompPtr, m_calibrationCompPtr, false);
+		I_ASSIGN(m_bitmapProviderCompPtr, "SlaveSupplier", "Slave supplier where all calls will be delegated", false, "SlaveSupplier");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_bitmapProviderCompPtr, false);
 	I_END_COMPONENT;
-
-	CDelegatedBitmapSupplierComp();
 
 protected:
 	// reimplemented (iipr::IBitmapProvider)
@@ -58,13 +57,16 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iipr::IBitmapProvider, m_inputBitmapProviderCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
-	I_REF(imod::IModel, m_inputBitmapProviderModelCompPtr);
 	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
+
 	I_REF(i2d::ITransformation2d, m_calibrationCompPtr);
 	I_REF(imod::IModel, m_calibrationModelCompPtr);
+
+	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 };
 
 

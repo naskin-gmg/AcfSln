@@ -1,10 +1,6 @@
 #include "iqtipr/CMultiLineProjectionSupplierGuiComp.h"
 
 
-// ACF includes
-#include "iproc/IElapsedTimeProvider.h"
-
-
 namespace iqtipr
 {
 
@@ -14,11 +10,6 @@ namespace iqtipr
 void CMultiLineProjectionSupplierGuiComp::on_TestButton_clicked()
 {
 	DoTest();
-
-	iproc::IElapsedTimeProvider* timePtr = dynamic_cast<iproc::IElapsedTimeProvider*>(GetObjectPtr());
-	if (timePtr != NULL){
-		TimeLabel->setText(QString("%1 ms").arg(timePtr->GetElapsedTime() * 1000.0, 0, 'f', 2));
-	}
 }
 
 
@@ -89,30 +80,24 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(int updateFlags)
 	istd::CChangeNotifier changePtr(&m_projectionData);
 	m_projectionData.ResetSequence();
 
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			const imeas::IMultiDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IMultiDataSequenceProvider*>(supplierPtr);
-			if (providerPtr != NULL){
-				int count = providerPtr->GetSequencesCount();
+	const imeas::IMultiDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IMultiDataSequenceProvider*>(GetObjectPtr());
+	if (providerPtr != NULL){
+		int count = providerPtr->GetSequencesCount();
 
-				if (count != ProjectionSlider->maximum()){
-					ProjectionSlider->setMaximum(count - 1);
-					ProjectionSpin->setMaximum(count - 1);
-				}
+		if (count != ProjectionSlider->maximum()){
+			ProjectionSlider->setMaximum(count - 1);
+			ProjectionSpin->setMaximum(count - 1);
+		}
 
-				int currentIndex = ProjectionSlider->value();
-				const imeas::IDataSequence* projectionPtr = providerPtr->GetDataSequence(currentIndex);
-				if (projectionPtr != NULL){
-					m_projectionData.CopyFrom(*projectionPtr);
-				}
-			}
+		int currentIndex = ProjectionSlider->value();
+		const imeas::IDataSequence* projectionPtr = providerPtr->GetDataSequence(currentIndex);
+		if (projectionPtr != NULL){
+			m_projectionData.CopyFrom(*projectionPtr);
 		}
-		else{
-			ProjectionSlider->setMaximum(0);
-			ProjectionSpin->setMaximum(0);
-		}
+	}
+	else{
+		ProjectionSlider->setMaximum(0);
+		ProjectionSpin->setMaximum(0);
 	}
 }
 

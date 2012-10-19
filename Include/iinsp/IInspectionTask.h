@@ -16,17 +16,23 @@ namespace iinsp
 	Representation of complete inspection task.
 	Inspection contains of set of subtask suppliers (steps).
 */
-class IInspectionTask: virtual public iproc::ISupplier
+class IInspectionTask: virtual public iser::ISerializable
 {
 public:
 	/**
 		Get number of inspection steps (subtasks).
 	*/
 	virtual int GetSubtasksCount() const = 0;
+
 	/**
 		Get single inspection steps (subtasks).
 	*/
 	virtual iproc::ISupplier* GetSubtask(int subtaskIndex) const = 0;
+
+	/**
+		Get general parameters additionaly stored next to parameters stored in suppliers.
+	*/
+	virtual iprm::IParamsSet* GetGeneralParameters() const = 0;
 };
 
 

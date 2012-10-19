@@ -627,7 +627,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         i2d::ICalibrationProvider
@@ -647,14 +647,6 @@
     <Interface>
       <InterfaceId>
         imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        PositionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iproc::IElapsedTimeProvider
       </InterfaceId>
       <ComponentId>
         PositionTask

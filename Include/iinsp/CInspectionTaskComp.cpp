@@ -14,6 +14,7 @@ namespace iinsp
 CInspectionTaskComp::CInspectionTaskComp()
 :	m_isStatusKnown(false),
 	m_resultCategory(IC_NONE),
+	m_messageContainer(this),
 	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL)
 {
 }
@@ -33,7 +34,84 @@ iproc::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
 }
 
 
+iprm::IParamsSet* CInspectionTaskComp::GetGeneralParameters() const
+{
+	return 	m_generalParamsCompPtr.GetPtr();
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
+{
+	bool retVal = true;
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
+	if (*m_serializeSuppliersAttrPtr){
+		static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks");
+		static iser::CArchiveTag taskTag("Subtask", "Single subtask");
+
+		int subtasksCount = m_subtasksCompPtr.GetCount();
+
+		retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
+
+		if (!retVal || (!archive.IsStoring() && (subtasksCount != m_subtasksCompPtr.GetCount()))){
+			SendWarningMessage(MI_BAD_PARAMS_COUNT, "Bad number of parameter to serialize");
+			return false;
+		}
+
+		for (int i = 0; i < subtasksCount; ++i){
+			retVal = retVal && archive.BeginTag(taskTag);
+
+			iproc::ISupplier* taskPtr = m_subtasksCompPtr[i];
+			if (taskPtr == NULL){
+				SendCriticalMessage(MI_NO_SUBTASK, "No subtask connected");
+				return false;
+			}
+
+			iprm::IParamsSet* paramsSetPtr = taskPtr->GetModelParametersSet();
+			if (paramsSetPtr != NULL){
+				retVal = retVal && paramsSetPtr->Serialize(archive);
+			}
+
+			retVal = retVal && archive.EndTag(taskTag);
+		}
+
+		retVal = retVal && archive.EndTag(taskListTag);
+	}
+
+	if (m_generalParamsCompPtr.IsValid()){
+		static iser::CArchiveTag generalParamsTag("GeneralParams", "General inspection parameters");
+
+		retVal = retVal && archive.BeginTag(generalParamsTag);
+		retVal = retVal && m_generalParamsCompPtr->Serialize(archive);
+		retVal = retVal && archive.EndTag(generalParamsTag);
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (iproc::ISupplier)
+
+int CInspectionTaskComp::GetWorkStatus() const
+{
+	int retVal = WS_INVALID;
+	int inspectionsCount = m_subtasksCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		const iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		if (supplierPtr != NULL){
+			int workStatus = supplierPtr->GetWorkStatus();
+			if (workStatus > retVal){
+				retVal = workStatus;
+			}
+		}
+	}
+
+	return retVal;
+}
+
 
 void CInspectionTaskComp::InvalidateSupplier()
 {
@@ -91,86 +169,15 @@ void CInspectionTaskComp::ClearWorkResults()
 }
 
 
-int CInspectionTaskComp::GetWorkStatus() const
+const ibase::IMessageContainer* CInspectionTaskComp::GetWorkMessages() const
 {
-	int retVal = WS_INVALID;
-	int inspectionsCount = m_subtasksCompPtr.GetCount();
-	for (int i = 0; i < inspectionsCount; ++i){
-		const iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
-		if (supplierPtr != NULL){
-			int workStatus = supplierPtr->GetWorkStatus();
-			if (workStatus > retVal){
-				retVal = workStatus;
-			}
-		}
-	}
-
-	return retVal;
+	return &m_messageContainer;
 }
 
 
 iprm::IParamsSet* CInspectionTaskComp::GetModelParametersSet() const
 {
 	return &m_parameters;
-}
-
-
-// reimplemented (ibase::IMessageContainer)
-
-int CInspectionTaskComp::GetWorstCategory() const
-{
-	const_cast<CInspectionTaskComp*>(this)->EnsureStatusKnown();
-
-	return m_resultCategory;
-}
-
-
-ibase::IMessageContainer::Messages CInspectionTaskComp::GetMessages() const
-{
-	ibase::IMessageContainer::Messages retVal;
-
-	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
-	for (int i = 0; i < subtasksCount; ++i){
-		const ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
-
-		if (containerPtr != NULL){
-			retVal += containerPtr->GetMessages();
-		}
-	}
-
-	return retVal;
-}
-
-
-void CInspectionTaskComp::ClearMessages()
-{
-	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
-	for (int i = 0; i < subtasksCount; ++i){
-		ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
-
-		if (containerPtr != NULL){
-			containerPtr->ClearMessages();
-		}
-	}
-}
-
-
-// reimplemented (iser::ISerializable)
-
-bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
-{
-	bool retVal = true;
-
-	int subtasksCount = m_subtaskMessageContainerCompPtr.GetCount();
-	for (int i = 0; i < subtasksCount; ++i){
-		ibase::IMessageContainer* containerPtr = m_subtaskMessageContainerCompPtr[i];
-
-		if (containerPtr != NULL){
-			retVal = containerPtr->Serialize(archive) && retVal;
-		}
-	}
-
-	return retVal;
 }
 
 
@@ -215,24 +222,6 @@ QString CInspectionTaskComp::GetInformationSource() const
 int CInspectionTaskComp::GetInformationFlags() const
 {
 	return ITF_SYSTEM;
-}
-
-
-// reimplemented (iproc::IElapsedTimeProvider)
-
-double CInspectionTaskComp::GetElapsedTime() const
-{
-	int subtasksCount = m_subtasksCompPtr.GetCount();
-	double elapsedTime = 0.0;
-
-	for (int i = 0; i < subtasksCount; ++i){
-		const iproc::IElapsedTimeProvider* subTimeProviderPtr = dynamic_cast<const iproc::IElapsedTimeProvider*>(m_subtasksCompPtr[i]);
-		if (subTimeProviderPtr != NULL){
-			elapsedTime += subTimeProviderPtr->GetElapsedTime();
-		}
-	}
-
-	return elapsedTime;
 }
 
 
@@ -348,6 +337,73 @@ void CInspectionTaskComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, i
 	m_isStatusKnown = false;
 
 	BaseClass2::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+}
+
+
+// public methods of embedded class MessageContainer
+
+CInspectionTaskComp::MessageContainer::MessageContainer(CInspectionTaskComp* parentPtr)
+:	m_parentPtr(parentPtr)
+{
+}
+
+
+// reimplemented (ibase::IMessageContainer)
+
+int CInspectionTaskComp::MessageContainer::GetWorstCategory() const
+{
+	m_parentPtr->EnsureStatusKnown();
+
+	return m_parentPtr->m_resultCategory;
+}
+
+
+ibase::IMessageContainer::Messages CInspectionTaskComp::MessageContainer::GetMessages() const
+{
+	ibase::IMessageContainer::Messages retVal;
+
+	int subtasksCount = m_parentPtr->m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		const ibase::IMessageContainer* containerPtr = m_parentPtr->m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			retVal += containerPtr->GetMessages();
+		}
+	}
+
+	return retVal;
+}
+
+
+void CInspectionTaskComp::MessageContainer::ClearMessages()
+{
+	int subtasksCount = m_parentPtr->m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		ibase::IMessageContainer* containerPtr = m_parentPtr->m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			containerPtr->ClearMessages();
+		}
+	}
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
+{
+	bool retVal = true;
+
+	int subtasksCount = m_parentPtr->m_subtaskMessageContainerCompPtr.GetCount();
+	for (int i = 0; i < subtasksCount; ++i){
+		ibase::IMessageContainer* containerPtr = m_parentPtr->m_subtaskMessageContainerCompPtr[i];
+
+		if (containerPtr != NULL){
+			retVal = containerPtr->Serialize(archive) && retVal;
+		}
+	}
+
+	return retVal;
 }
 
 
@@ -479,57 +535,11 @@ iser::ISerializable* CInspectionTaskComp::Parameters::GetEditableParameter(const
 
 bool CInspectionTaskComp::Parameters::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
-
 	if (m_parentPtr != NULL){
-		istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
-
-		if (*m_parentPtr->m_serializeSuppliersAttrPtr){
-			static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks");
-			static iser::CArchiveTag taskTag("Subtask", "Single subtask");
-
-			int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
-
-			retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
-
-			if (!retVal || (!archive.IsStoring() && (subtasksCount != m_parentPtr->m_subtasksCompPtr.GetCount()))){
-				m_parentPtr->SendWarningMessage(MI_BAD_PARAMS_COUNT, "Bad number of parameter to serialize");
-				return false;
-			}
-
-			for (int i = 0; i < subtasksCount; ++i){
-				retVal = retVal && archive.BeginTag(taskTag);
-
-				iproc::ISupplier* taskPtr = m_parentPtr->m_subtasksCompPtr[i];
-				if (taskPtr == NULL){
-					m_parentPtr->SendCriticalMessage(MI_NO_SUBTASK, "No subtask connected");
-					return false;
-				}
-
-				iprm::IParamsSet* paramsSetPtr = taskPtr->GetModelParametersSet();
-				if (paramsSetPtr != NULL){
-					retVal = retVal && paramsSetPtr->Serialize(archive);
-				}
-
-				retVal = retVal && archive.EndTag(taskTag);
-			}
-
-			retVal = retVal && archive.EndTag(taskListTag);
-		}
-
-		if (m_parentPtr->m_generalParamsCompPtr.IsValid()){
-			static iser::CArchiveTag generalParamsTag("GeneralParams", "General inspection parameters");
-
-			retVal = retVal && archive.BeginTag(generalParamsTag);
-			retVal = retVal && m_parentPtr->m_generalParamsCompPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(generalParamsTag);
-		}
-	}
-	else{
-		retVal = false;
+		return m_parentPtr->Serialize(archive);
 	}
 
-	return retVal;
+	return false;
 }
 
 

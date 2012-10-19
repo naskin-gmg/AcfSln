@@ -85,6 +85,8 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
+			Timer performanceTimer(this, "Calculation of position");
+
 			CSingleFeatureConsumer consumer(CSingleFeatureConsumer::FP_HEAVIEST);
 			int positionState = m_processorCompPtr->DoProcessing(
 							paramsSetPtr,

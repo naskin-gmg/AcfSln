@@ -6,12 +6,13 @@
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
 #include "i2d/CAffineTransformation2d.h"
+
+// ACF-Solutions includes
 #include "iproc/IProcessor.h"
+#include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
-
-// ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
 
 
@@ -37,6 +38,7 @@ public:
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provide 2D-calibration object", false, "CalibrationProvider");
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
@@ -58,6 +60,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);

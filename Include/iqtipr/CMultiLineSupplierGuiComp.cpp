@@ -4,7 +4,6 @@
 // ACF includes
 #include "iview/CInteractivePolylineShape.h"
 #include "iprm/TParamsPtr.h"
-#include "iproc/IElapsedTimeProvider.h"
 
 
 namespace iqtipr
@@ -21,11 +20,6 @@ CMultiLineSupplierGuiComp::CMultiLineSupplierGuiComp()
 void CMultiLineSupplierGuiComp::on_TestButton_clicked()
 {
 	DoTest();
-
-	iproc::IElapsedTimeProvider* timePtr = dynamic_cast<iproc::IElapsedTimeProvider*>(GetObjectPtr());
-	if (timePtr != NULL){
-		TimeLabel->setText(QString("%1 ms").arg(timePtr->GetElapsedTime() * 1000.0, 0, 'f', 2));
-	}
 }
 
 

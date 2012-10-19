@@ -4,10 +4,11 @@
 
 // ACF includes
 #include "i2d/ICalibrationProvider.h"
-#include "iproc/IProcessor.h"
-#include "iproc/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
+#include "iproc/IProcessor.h"
+#include "iproc/ISupplier.h"
+#include "iproc/TSupplierCompWrap.h"
 #include "iipr/IBitmapProvider.h"
 
 
@@ -31,6 +32,7 @@ public:
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
@@ -55,6 +57,7 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);

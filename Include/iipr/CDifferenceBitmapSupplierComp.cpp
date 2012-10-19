@@ -83,6 +83,8 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
+	Timer performanceTimer(this, "Image difference");
+
 	return CalculateDifferenceBitmap(*firstBitmapPtr, *secondBitmapPtr, result);
 }
 
@@ -94,11 +96,11 @@ void CDifferenceBitmapSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_firstBitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_firstBitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_firstBitmapProviderModelCompPtr.GetPtr(), m_firstBitmapSupplierCompPtr.GetPtr());
 	}
 
 	if (m_secondBitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_secondBitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_secondBitmapProviderModelCompPtr.GetPtr(), m_secondBitmapSupplierCompPtr.GetPtr());
 	}
 }
 

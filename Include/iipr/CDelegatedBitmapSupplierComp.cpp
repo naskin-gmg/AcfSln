@@ -7,14 +7,10 @@ namespace iipr
 
 // reimplemented (iipr::IBitmapProvider)
 
-CDelegatedBitmapSupplierComp::CDelegatedBitmapSupplierComp()
-:	BaseClass(SWM_DIRECT_INPUT)
-{
-}
-
-
 const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 {
+	const_cast<CDelegatedBitmapSupplierComp*>(this)->BaseClass::EnsureWorkInitialized();
+
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return productPtr->second;
@@ -44,9 +40,9 @@ const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetCalibration() con
 
 int CDelegatedBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
-	if (m_inputBitmapProviderCompPtr.IsValid()){
+	if (m_bitmapProviderCompPtr.IsValid()){
 		result.first = NULL;
-		result.second = m_inputBitmapProviderCompPtr->GetBitmap();
+		result.second = m_bitmapProviderCompPtr->GetBitmap();
 
 		if (m_calibrationProviderCompPtr.IsValid()){
 			result.first = m_calibrationProviderCompPtr->GetCalibration();
@@ -79,15 +75,16 @@ void CDelegatedBitmapSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_inputBitmapProviderCompPtr.IsValid()){
-		if (m_inputBitmapProviderModelCompPtr.IsValid()){
-			RegisterSupplierInput(m_inputBitmapProviderModelCompPtr.GetPtr());
+	if (m_bitmapProviderCompPtr.IsValid()){
+		if (m_bitmapProviderModelCompPtr.IsValid()){
+			RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 		}
 	}
 	else{
 		if (m_bitmapModelCompPtr.IsValid()){
 			RegisterSupplierInput(m_bitmapModelCompPtr.GetPtr());
 		}
+
 		if (m_calibrationModelCompPtr.IsValid()){
 			RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
 		}

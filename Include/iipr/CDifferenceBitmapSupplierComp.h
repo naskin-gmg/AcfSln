@@ -31,8 +31,10 @@ public:
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_firstBitmapProviderCompPtr, "FirstBitmapSupplier", "Provide fist input image", true, "FirstBitmapSupplier");
+		I_ASSIGN_TO(m_firstBitmapSupplierCompPtr, m_firstBitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_firstBitmapProviderModelCompPtr, m_firstBitmapProviderCompPtr, false);
 		I_ASSIGN(m_secondBitmapProviderCompPtr, "SecondBitmapSupplier", "Provide second input image", true, "SecondBitmapSupplier");
+		I_ASSIGN_TO(m_secondBitmapSupplierCompPtr, m_secondBitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_secondBitmapProviderModelCompPtr, m_secondBitmapProviderCompPtr, false);
 	I_END_COMPONENT;
 
@@ -60,9 +62,11 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iipr::IBitmapProvider, m_firstBitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_firstBitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_firstBitmapProviderModelCompPtr);
 
 	I_REF(iipr::IBitmapProvider, m_secondBitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_secondBitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_secondBitmapProviderModelCompPtr);
 };
 

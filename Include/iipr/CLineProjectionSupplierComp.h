@@ -5,10 +5,11 @@
 // ACF includes
 #include "i2d/CVector2d.h"
 #include "iprm/IParamsSet.h"
-#include "iproc/IProcessor.h"
-#include "iproc/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
+#include "iproc/IProcessor.h"
+#include "iproc/ISupplier.h"
+#include "iproc/TSupplierCompWrap.h"
 #include "imeas/IDataSequenceProvider.h"
 #include "imeas/CGeneralDataSequence.h"
 
@@ -30,6 +31,7 @@ public:
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_projectionProcessorCompPtr, "ProjectionProcessor", "Processor for projection data generation", true, "ProjectionProcessor");
 	I_END_COMPONENT;
@@ -46,6 +48,7 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 };

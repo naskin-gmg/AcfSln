@@ -11,9 +11,10 @@
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
 #include "iprm/ISelectionParam.h"
-#include "iproc/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
+#include "iproc/ISupplier.h"
+#include "iproc/TSupplierCompWrap.h"
 #include "iipr/IBitmapProvider.h"
 #include "iipr/IMultiBitmapProvider.h"
 

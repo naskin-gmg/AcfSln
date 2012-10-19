@@ -6,121 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>637</width>
-    <height>733</height>
+    <width>502</width>
+    <height>397</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
     <number>0</number>
    </property>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
+   <item row="2" column="0" colspan="2">
+    <widget class="QGroupBox" name="ParamsGB">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="title">
-      <string>Edges</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <property name="margin">
-       <number>9</number>
-      </property>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="TestButton">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Test</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="AutoUpdateButton">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>:/Icons/AutoUpdate.svg</normaloff>:/Icons/AutoUpdate.svg</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QFrame" name="ResultsLabel">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout">
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="ProcessingTimeLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="ParamsGB">
      <property name="title">
       <string>Parameters</string>
      </property>
@@ -175,19 +79,58 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QGroupBox" name="IntResultsFrame">
-        <property name="title">
-         <string>Intermediate Results</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout"/>
-       </widget>
-      </item>
      </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QToolButton" name="AutoUpdateButton">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+       <normaloff>:/Icons/AutoUpdate.svg</normaloff>:/Icons/AutoUpdate.svg</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QGroupBox" name="IntResultsFrame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Intermediate Results</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="TestButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Test</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+       <normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
+ </resources>
  <connections/>
 </ui>

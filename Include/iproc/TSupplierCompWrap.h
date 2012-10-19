@@ -9,17 +9,15 @@
 // ACF includes
 #include "istd/IChangeable.h"
 #include "istd/TChangeNotifier.h"
-
 #include "imod/IModel.h"
+#include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "ibase/TLoggerCompWrap.h"
+#include "ibase/CMessageContainer.h"
 
-// ACF includes
+// ACF-Solutions includes
 #include "iproc/ISupplier.h"
-#include "iproc/IElapsedTimeProvider.h"
 
 
 namespace iproc
@@ -27,15 +25,15 @@ namespace iproc
 
 
 /**
-	Wrapper implementation of interface iproc::ISupplier with preparation for component implementation.
+	Standard implementation of interface iproc::ISupplier with preparation for component implementation.
 	During component initialization you should call \c RegisterSupplierInput for all suppliers used by this component as a input.
 */
 template <class Product>
 class TSupplierCompWrap:
 			public ibase::CLoggerComponentBase,
 			virtual public ISupplier,
-			virtual public IElapsedTimeProvider,
-			virtual public istd::IChangeable
+			virtual public istd::IChangeable,
+			virtual protected ibase::IMessageConsumer
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -46,53 +44,38 @@ public:
 		MI_DURATION_TIME = 0x077a1b
 	};
 
-	enum SupplierWorkingMode
-	{
-		/**
-			This supplier works in explicit initialization mode.
-			It means, that this supplier need explicit call of method EnsureWorkInitialized() to start its work.
-			In this case, the products of supplier logically changes between supplier invalidation and initialization.
-			After call of method EnsureWorkInitialized() the supplier signalize that its state has been changed,
-			the real calculation is postponed and will be done on demand without signalizing object changes.
-		*/
-		SWM_EXPLICIT_INIT,
-		/**
-			This supplier works in implicit initialization mode.
-			It means, that this supplier doesn't need the explicit call of method EnsureWorkInitialized().
-			Work will be started automatically after the supplier was initialized (inputs or parameters changed) and supplier change starts.
-			After recalculation of results the supplier signalize that its state has been changed.
-		*/
-		SWM_IMPLICIT_INIT,
-		/**
-			This supplier works synchronized to its inputs.
-			It means, it is during changes when one of its inputs is during changes.
-		*/
-		SWM_DIRECT_INPUT
-	};
-
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 		I_REGISTER_INTERFACE(ISupplier);
-		I_REGISTER_INTERFACE(IElapsedTimeProvider);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 		I_ASSIGN_MULTI_0(m_additionalTriggerInputsCompPtr, "AdditionalTriggerInputs", "Additional observed trigger inputs, the supplier will be invalidated if some input signal the change", false);
 	I_END_COMPONENT;
 
-	TSupplierCompWrap(SupplierWorkingMode mode = SWM_EXPLICIT_INIT);
+	TSupplierCompWrap();
 
 	// reimplemented (iproc::ISupplier)
+	virtual int GetWorkStatus() const;
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual int GetWorkStatus() const;
+	virtual const ibase::IMessageContainer* GetWorkMessages() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
-	// reimplemented (iproc::IElapsedTimeProvider)
-	virtual double GetElapsedTime() const;
-
 protected:
+	class Timer
+	{
+	public:
+		Timer(const TSupplierCompWrap* parentPtr, const QString& measuredFeatureName);
+		~Timer();
+
+	private:
+		QElapsedTimer m_timer;
+		const TSupplierCompWrap* m_parentPtr;
+		QString m_measuredFeatureName;
+	};
+
 	/**
 		Called if the new work should be initialized.
 		Default implementation do nothing. It is dedicated to be overridden.
@@ -115,7 +98,7 @@ protected:
 		Changes of supplier input will force this supplier invalidate.
 		All registered inputs will be unregistered during component destruction (OnComponentDestryed method).
 	*/
-	virtual void RegisterSupplierInput(imod::IModel* modelPtr);
+	virtual void RegisterSupplierInput(imod::IModel* modelPtr, ISupplier* supplierPtr = NULL);
 	/**
 		Unregister supplier input.
 		Changes of this input will no more invalidate this supplier.
@@ -125,14 +108,22 @@ protected:
 	// abstract methods
 	/**
 		Produce single object.
-		\return	work status. \sa iproc::ISupplier::WorkStatus
+		\return	work status. \sa iproc::WorkStatus
 	*/
 	virtual int ProduceObject(Product& result) const = 0;
+
+	// reimplemented (ibase::IMessageConsumer)
+	virtual bool IsMessageSupported(
+				int messageCategory = -1,
+				int messageId = -1,
+				const istd::IInformationProvider* messagePtr = NULL) const;
+	virtual void AddMessage(const MessagePtr& messagePtr);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+private:
 	class InputsObserver: public imod::CMultiModelObserverBase
 	{
 	public:
@@ -163,7 +154,6 @@ protected:
 		TSupplierCompWrap<Product>& m_parent;
 	};
 
-private:
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
@@ -177,145 +167,32 @@ private:
 
 	istd::CChangeNotifier m_productChangeNotifier;
 
-	double m_elapsedTime;
+	typedef QMap<imod::IModel*, ISupplier*> InputSuppliersMap;
+	InputSuppliersMap m_inputSuppliersMap;
+
+	mutable imod::TModelWrap<ibase::CMessageContainer> m_messageContainer;
 
 	bool m_areParametersValid;
 
-	int m_updateMode;
-	int m_changedInputsCounter;
+	int m_inputChangesCounter;
 };
 
 
 // public methods
 
 template <class Product>
-TSupplierCompWrap<Product>::TSupplierCompWrap(SupplierWorkingMode mode)
+TSupplierCompWrap<Product>::TSupplierCompWrap()
 :	m_workStatus(WS_INVALID),
 	m_inputsObserver(this),
 	m_paramsObserver(this),
 	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
-	m_elapsedTime(0),
 	m_areParametersValid(false),
-	m_updateMode(mode),
-	m_changedInputsCounter(0)
+	m_inputChangesCounter(0)
 {
 }
 
 
-// pseudo-reimplemented (iproc::ISupplier)
-
-template <class Product>
-void TSupplierCompWrap<Product>::InvalidateSupplier()
-{
-	if (m_workStatus == ISupplier::WS_LOCKED){
-		return;
-	}
-
-	m_elapsedTime = 0.0;
-
-	if (m_workStatus != ISupplier::WS_INVALID){
-		if (m_updateMode == SWM_EXPLICIT_INIT){
-			m_productChangeNotifier.SetPtr(this);
-		}
-
-		m_workStatus = ISupplier::WS_INVALID;
-	}
-}
-
-
-template <class Product>
-void TSupplierCompWrap<Product>::EnsureWorkInitialized()
-{
-	if (m_workStatus < ISupplier::WS_INIT){
-		if (m_updateMode == SWM_EXPLICIT_INIT){
-			m_productChangeNotifier.SetPtr(this);
-		}
-
-		if (!m_areParametersValid){
-			m_areParametersValid = true;
-
-			OnParametersChanged();
-		}
-
-		if (InitializeWork()){
-			m_workStatus = WS_INIT;
-		}
-		else{
-			m_workStatus = WS_CRITICAL;
-
-			if (m_updateMode == SWM_EXPLICIT_INIT){
-				m_productChangeNotifier.Reset();
-			}
-		}
-	}
-}
-
-
-template <class Product>
-void TSupplierCompWrap<Product>::EnsureWorkFinished()
-{
-	if (m_workStatus <= ISupplier::WS_INIT){
-		TSupplierCompWrap<Product>::EnsureWorkInitialized();
-
-		m_workStatus = WS_LOCKED;
-
-		if (!m_productPtr.IsValid()){
-			m_productPtr.SetPtr(new Product());
-		}
-
-		QElapsedTimer timer;
-		timer.start();
-
-		m_workStatus = ProduceObject(*m_productPtr);
-		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
-
-		m_elapsedTime = timer.nsecsElapsed() / 1000000000.0;
-
-		switch (m_updateMode){
-		case SWM_EXPLICIT_INIT:
-			m_productChangeNotifier.Reset();
-			break;
-
-		case SWM_IMPLICIT_INIT:
-			m_productChangeNotifier.SetPtr(this);
-			break;
-
-		default:
-			break;
-		}
-	}
-}
-
-
-template <class Product>
-void TSupplierCompWrap<Product>::ClearWorkResults()
-{
-	if (m_workStatus == ISupplier::WS_LOCKED){
-		return;
-	}
-
-	m_elapsedTime = 0.0;
-
-	if (m_workStatus != ISupplier::WS_INVALID){
-		switch (m_updateMode){
-		case SWM_EXPLICIT_INIT:
-			m_productChangeNotifier.Reset();
-			break;
-
-		case SWM_IMPLICIT_INIT:
-			m_productChangeNotifier.SetPtr(this);
-			break;
-
-		default:
-			break;
-		}
-
-		m_productPtr.Reset();
-
-		m_workStatus = ISupplier::WS_INVALID;
-	}
-}
-
+// reimplemented (iproc::ISupplier)
 
 template <class Product>
 int TSupplierCompWrap<Product>::GetWorkStatus() const
@@ -325,18 +202,104 @@ int TSupplierCompWrap<Product>::GetWorkStatus() const
 
 
 template <class Product>
-iprm::IParamsSet* TSupplierCompWrap<Product>::GetModelParametersSet() const
+void TSupplierCompWrap<Product>::InvalidateSupplier()
 {
-	return m_paramsSetCompPtr.GetPtr();
+	if (m_workStatus == WS_LOCKED){
+		return;
+	}
+
+	if (m_workStatus != WS_INVALID){
+		m_productChangeNotifier.SetPtr(this);
+
+		m_workStatus = WS_INVALID;
+
+		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
+					inputSupplierIter != m_inputSuppliersMap.end();
+					++inputSupplierIter){
+			ISupplier* inputSupplierPtr = inputSupplierIter.value();
+
+			inputSupplierPtr->InvalidateSupplier();
+		}
+	}
 }
 
 
-// reimplemented (iproc::IElapsedTimeProvider)
+template <class Product>
+void TSupplierCompWrap<Product>::EnsureWorkInitialized()
+{
+	if (m_workStatus < WS_INIT){
+		m_productChangeNotifier.SetPtr(this);
+
+		if (!m_areParametersValid){
+			m_areParametersValid = true;
+
+			OnParametersChanged();
+		}
+
+		if (InitializeWork()){
+			m_workStatus = WS_INIT;
+
+			m_productChangeNotifier.Reset();
+		}
+		else{
+			m_workStatus = WS_CRITICAL;
+		}
+
+		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
+					inputSupplierIter != m_inputSuppliersMap.end();
+					++inputSupplierIter){
+			ISupplier* inputSupplierPtr = inputSupplierIter.value();
+
+			inputSupplierPtr->EnsureWorkInitialized();
+		}
+	}
+}
+
 
 template <class Product>
-double TSupplierCompWrap<Product>::GetElapsedTime() const
+void TSupplierCompWrap<Product>::EnsureWorkFinished()
 {
-	return m_elapsedTime;
+	if (m_workStatus == WS_INIT){
+		m_workStatus = WS_LOCKED;
+
+		if (!m_productPtr.IsValid()){
+			m_productPtr.SetPtr(new Product());
+		}
+
+		m_workStatus = ProduceObject(*m_productPtr);
+		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
+	}
+}
+
+
+template <class Product>
+void TSupplierCompWrap<Product>::ClearWorkResults()
+{
+	if (m_workStatus == WS_LOCKED){
+		return;
+	}
+
+	if (m_workStatus != WS_INVALID){
+		m_productChangeNotifier.SetPtr(this);
+
+		m_productPtr.Reset();
+
+		m_workStatus = WS_INVALID;
+	}
+}
+
+
+template <class Product>
+const ibase::IMessageContainer* TSupplierCompWrap<Product>::GetWorkMessages() const
+{
+	return &m_messageContainer;
+}
+
+
+template <class Product>
+iprm::IParamsSet* TSupplierCompWrap<Product>::GetModelParametersSet() const
+{
+	return m_paramsSetCompPtr.GetPtr();
 }
 
 
@@ -360,7 +323,7 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
-	if (m_workStatus == WS_OK){
+	if (m_workStatus <= WS_OK){
 		return m_productPtr.GetPtr();
 	}
 	else{
@@ -370,10 +333,15 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 
 
 template <class Product>
-void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr)
+void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr, ISupplier* supplierPtr)
 {
 	I_ASSERT(modelPtr != NULL);
+
 	modelPtr->AttachObserver(&m_inputsObserver);
+
+	if (supplierPtr != NULL){
+		m_inputSuppliersMap[modelPtr] = supplierPtr;
+	}
 }
 
 
@@ -384,6 +352,26 @@ void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 	if (m_inputsObserver.IsModelAttached(modelPtr)){
 		modelPtr->DetachObserver(&m_inputsObserver);
 	}
+
+	m_inputSuppliersMap.remove(modelPtr);
+}
+
+
+// reimplemented (ibase::IMessageConsumer)
+template <class Product>
+bool TSupplierCompWrap<Product>::IsMessageSupported(
+			int messageCategory,
+			int messageId,
+			const istd::IInformationProvider* messagePtr) const
+{
+	return m_messageContainer.IsMessageSupported(messageCategory, messageId, messagePtr);
+}
+
+
+template <class Product>
+void TSupplierCompWrap<Product>::AddMessage(const MessagePtr& messagePtr)
+{
+	m_messageContainer.AddMessage(messagePtr);
 }
 
 
@@ -406,7 +394,7 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 		}
 	}
 
-	m_workStatus = ISupplier::WS_INVALID;
+	m_workStatus = WS_INVALID;
 }
 
 
@@ -417,6 +405,30 @@ void TSupplierCompWrap<Product>::OnComponentDestroyed()
 	m_paramsObserver.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// public methods of embedded class Timer
+
+template <class Product>
+TSupplierCompWrap<Product>::Timer::Timer(const TSupplierCompWrap* parentPtr, const QString& measuredFeatureName)
+:	m_parentPtr(parentPtr), m_measuredFeatureName(measuredFeatureName)
+{
+	m_timer.start();
+}
+
+
+template <class Product>
+TSupplierCompWrap<Product>::Timer::~Timer()
+{
+	if ((m_parentPtr != NULL) && (m_parentPtr->m_diagnosticNameAttrPtr.IsValid())){
+		MessagePtr messagePtr(new ibase::CMessage(
+					istd::IInformationProvider::IC_INFO,
+					0,
+					QObject::tr("%1 taken %2 ms").arg(m_measuredFeatureName).arg(m_timer.elapsed()),
+					*m_parentPtr->m_diagnosticNameAttrPtr));
+		m_parentPtr->m_messageContainer.AddMessage(messagePtr);
+	}
 }
 
 
@@ -437,44 +449,22 @@ TSupplierCompWrap<Product>::InputsObserver::InputsObserver(TSupplierCompWrap<Pro
 template <class Product>
 void TSupplierCompWrap<Product>::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	switch (m_parent.m_updateMode){
-	case SWM_EXPLICIT_INIT:
-		m_parent.InvalidateSupplier();
-		break;
-
-	case SWM_DIRECT_INPUT:
-		if (m_parent.m_changedInputsCounter == 0){
+	if (m_parent.m_inputChangesCounter == 0){
+		if (m_parent.m_workStatus != WS_INVALID){
 			m_parent.m_productChangeNotifier.SetPtr(&m_parent);
+
+			m_parent.m_workStatus = WS_INVALID;
 		}
-
-		++m_parent.m_changedInputsCounter;
-		break;
-
-	default:
-		break;
 	}
+
+	++m_parent.m_inputChangesCounter;
 }
 
 
 template <class Product>
 void TSupplierCompWrap<Product>::InputsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	switch (m_parent.m_updateMode){
-	case SWM_IMPLICIT_INIT:
-		m_parent.InvalidateSupplier();
-		break;
-
-	case SWM_DIRECT_INPUT:
-		--m_parent.m_changedInputsCounter;
-
-		if (m_parent.m_changedInputsCounter == 0){
-			m_parent.m_productChangeNotifier.SetPtr(NULL);
-		}
-		break;
-
-	default:
-		break;
-	}
+	--m_parent.m_inputChangesCounter;
 }
 
 
@@ -495,39 +485,24 @@ TSupplierCompWrap<Product>::ParamsObserver::ParamsObserver(TSupplierCompWrap<Pro
 template <class Product>
 void TSupplierCompWrap<Product>::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	switch (m_parent.m_updateMode){
-	case SWM_EXPLICIT_INIT:
-		m_parent.InvalidateSupplier();
-		break;
-
-	case SWM_DIRECT_INPUT:
-		if (m_parent.m_changedInputsCounter == 0){
+	if (m_parent.m_inputChangesCounter == 0){
+		if (m_parent.m_workStatus != WS_INVALID){
 			m_parent.m_productChangeNotifier.SetPtr(&m_parent);
+
+			m_parent.m_workStatus = WS_INVALID;
 		}
-
-		++m_parent.m_changedInputsCounter;
-		break;
-
-	default:
-		break;
 	}
+
+	++m_parent.m_inputChangesCounter;
 }
 
 
 template <class Product>
 void TSupplierCompWrap<Product>::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (m_parent.m_updateMode == SWM_DIRECT_INPUT){
-		--m_parent.m_changedInputsCounter;
-
-		if (m_parent.m_changedInputsCounter == 0){
-			m_parent.m_productChangeNotifier.SetPtr(NULL);
-		}
-	}
-
 	m_parent.m_areParametersValid = false;
 
-	m_parent.InvalidateSupplier();
+	--m_parent.m_inputChangesCounter;
 }
 
 

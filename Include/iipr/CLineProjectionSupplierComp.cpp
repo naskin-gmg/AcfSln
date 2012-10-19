@@ -30,6 +30,8 @@ int CLineProjectionSupplierComp::ProduceObject(imeas::CGeneralDataSequence& resu
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
+			Timer performanceTimer(this, "Projection extraction");
+
 			int projectionState = m_projectionProcessorCompPtr->DoProcessing(
 						paramsSetPtr,
 						bitmapPtr,
@@ -53,7 +55,7 @@ void CLineProjectionSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 }
 

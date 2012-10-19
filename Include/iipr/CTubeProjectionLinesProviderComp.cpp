@@ -32,7 +32,9 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 				projectionsCount = qMax<int>(2, (int)values.GetElement(0));
 			}
 		}
-		
+
+		Timer performanceTimer(this, "Tube generating");
+
 		if (iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result)){
 			if (m_calibrationProviderCompPtr.IsValid()){
 				const i2d::ITransformation2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();

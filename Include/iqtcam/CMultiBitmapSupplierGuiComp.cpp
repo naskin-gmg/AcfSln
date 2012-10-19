@@ -25,6 +25,7 @@ void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
@@ -169,17 +170,7 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 	IconsView->clear();
 	m_icons.clear();
 
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr == NULL){
-		return;
-	}
-
-	int workStatus = supplierPtr->GetWorkStatus();
-	if (workStatus != iproc::ISupplier::WS_OK){
-		return;
-	}
-
-	iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*>(supplierPtr);
+	iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*>(GetObjectPtr());
 	if (providerPtr == NULL){
 		return;
 	}
@@ -212,7 +203,8 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 	if (bitmapsCount > 0){
 		if (IconsView->selectedItems().empty()){
 			SizeLabel->setText("");
-		} else{
+		}
+		else{
 			SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
 		}
 	}
@@ -228,22 +220,14 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 
 void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		const iimg::IBitmap* bitmapPtr = NULL;
+	const iimg::IBitmap* bitmapPtr = NULL;
 
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*> (supplierPtr);
-			if (providerPtr != NULL){
-				bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
-			}
-		}
+	iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*>(GetObjectPtr());
+	if (providerPtr != NULL){
+		bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
+	}
 
-		if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
-			m_bitmap.ResetImage();
-		}
-	} else{
+	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
 		m_bitmap.ResetImage();
 	}
 

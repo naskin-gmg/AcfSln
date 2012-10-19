@@ -38,7 +38,7 @@ const i2d::ITransformation2d* CBitmapJoinerSupplierComp::GetLogTransform() const
 
 int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 {
-	if (!m_inputBitmapsProviderCompPtr.IsValid()){
+	if (!m_bitmapsProviderCompPtr.IsValid()){
 		return WS_CRITICAL;
 	}
 
@@ -50,7 +50,7 @@ int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 
 	result.first = NULL;
 
-	int inputBitmapsCount = m_inputBitmapsProviderCompPtr->GetBitmapsCount();
+	int inputBitmapsCount = m_bitmapsProviderCompPtr->GetBitmapsCount();
 
 	if (inputBitmapsCount <= 0){
 		return WS_ERROR;
@@ -59,8 +59,7 @@ int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 	QVector<const iimg::IBitmap*> inputBitmaps;
 
 	for (int inputBitmapIndex = 0; inputBitmapIndex < inputBitmapsCount; inputBitmapIndex++){
-	
-		const iimg::IBitmap* bitmapPtr = m_inputBitmapsProviderCompPtr->GetBitmap(inputBitmapIndex);
+			const iimg::IBitmap* bitmapPtr = m_bitmapsProviderCompPtr->GetBitmap(inputBitmapIndex);
 		if (bitmapPtr == NULL){
 			SendErrorMessage(0, "Input image could not be provided");
 
@@ -100,12 +99,12 @@ void CBitmapJoinerSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_inputBitmapsProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_inputBitmapsProviderModelCompPtr.GetPtr());
+	if (m_bitmapsProviderModelCompPtr.IsValid()){
+		RegisterSupplierInput(m_bitmapsProviderModelCompPtr.GetPtr(), m_bitmapsSupplierCompPtr.GetPtr());
 	}
 
 	if (m_calibrationModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
 	}
 }
 

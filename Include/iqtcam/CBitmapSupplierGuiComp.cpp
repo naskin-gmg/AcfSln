@@ -38,6 +38,7 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 	iproc::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
@@ -160,23 +161,14 @@ void CBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 
 void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
-	if (supplierPtr != NULL){
-		const iimg::IBitmap* bitmapPtr = NULL;
+	const iimg::IBitmap* bitmapPtr = NULL;
 
-		int workStatus = supplierPtr->GetWorkStatus();
-		if (workStatus == iproc::ISupplier::WS_OK){
-			iipr::IBitmapProvider* providerPtr = dynamic_cast<iipr::IBitmapProvider*>(supplierPtr);
-			if (providerPtr != NULL){
-				bitmapPtr = providerPtr->GetBitmap();
-			}
-		}
-
-		if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
-			m_bitmap.ResetImage();
-		}
+	iipr::IBitmapProvider* providerPtr = dynamic_cast<iipr::IBitmapProvider*>(GetObjectPtr());
+	if (providerPtr != NULL){
+		bitmapPtr = providerPtr->GetBitmap();
 	}
-	else{
+
+	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
 		m_bitmap.ResetImage();
 	}
 

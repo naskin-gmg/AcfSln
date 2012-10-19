@@ -3,6 +3,7 @@
 
 
 // ACF-Solutions includes
+#include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
 #include "iipr/IBitmapProvider.h"
 #include "iipr/ILineProjectionProcessor.h"
@@ -28,8 +29,10 @@ public:
 	I_BEGIN_COMPONENT(CMultiLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IMultiDataSequenceProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provides image to analyse", true, "BitmapProvider");
+		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_linesProviderCompPtr, "LinesProvider", "Provides set of line projections", true, "LinesProvider");
+		I_ASSIGN_TO(m_linesSupplierCompPtr, m_linesProviderCompPtr, false);
 		I_ASSIGN_TO(m_linesProviderModelCompPtr, m_linesProviderCompPtr, false);
 		I_ASSIGN(m_projectionProcessorCompPtr, "ProjectionProcessor", "Processor for projection data generation", true, "ProjectionProcessor");
 	I_END_COMPONENT;
@@ -47,8 +50,10 @@ protected:
 
 private:
 	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(imeas::INumericValueProvider, m_linesProviderCompPtr);
+	I_REF(iproc::ISupplier, m_linesSupplierCompPtr);
 	I_REF(imod::IModel, m_linesProviderModelCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 };

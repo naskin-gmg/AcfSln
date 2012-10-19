@@ -292,6 +292,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::DoTest()
 	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
 		return supplierPtr->GetWorkStatus() < iproc::ISupplier::WS_ERROR;

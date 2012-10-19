@@ -23,26 +23,28 @@ int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result)
 
 	if (m_bitmapProviderCompPtr.IsValid() && m_edgesExtractorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
-		if (		(bitmapPtr != NULL) &&
-					m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
-			if (m_calibrationProviderCompPtr.IsValid()){
-				const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+		if (bitmapPtr != NULL){
+			Timer performanceTimer(this, "Edge extraction");
 
-				if (calibrationPtr != NULL){
-					int linesCount = result.GetItemsCount();
-					for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-						CEdgeLine& edgeLine = result.GetAt(lineIndex);
+			if (m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
+				if (m_calibrationProviderCompPtr.IsValid()){
+					const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
-						edgeLine.Transform(*calibrationPtr);
+					if (calibrationPtr != NULL){
+						int linesCount = result.GetItemsCount();
+						for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
+							CEdgeLine& edgeLine = result.GetAt(lineIndex);
+
+							edgeLine.Transform(*calibrationPtr);
+						}
 					}
 				}
-			}
 
-			return WS_OK;
+				return WS_OK;
+			}
 		}
-		else{
-			return WS_ERROR;
-		}
+
+		return WS_ERROR;
 	}
 	else{
 		return WS_CRITICAL;
@@ -57,11 +59,11 @@ void CExtractedEdgeLinesSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 
 	if (m_calibrationProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_calibrationProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_calibrationProviderModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
 	}
 }
 
