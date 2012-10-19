@@ -19,6 +19,7 @@ namespace iproc
 	Additional interfaces (providers) should provide access to intern stored produced objects.
 	For example image provider should provide method \c{const i2d::CRectangle* GetAoi() const}.
 	The internal stored object should be created on demand.
+	\image html SupplierStates.svg
 */
 class ISupplier: virtual public istd::IPolymorphic
 {
