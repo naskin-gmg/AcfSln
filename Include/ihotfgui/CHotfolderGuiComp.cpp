@@ -408,23 +408,23 @@ QIcon CHotfolderGuiComp::GetStateIcon(int fileState) const
 void CHotfolderGuiComp::UpdateItemsVisibility(const QString& textFilter, bool showOnlyErrors)
 {
 	QTreeWidgetItemIterator treeIterator(FileList);
-     while (*treeIterator){
-		 ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
-		 if (itemPtr != NULL){
-			 ihotf::IHotfolderProcessingItem* processingItemPtr = itemPtr->GetObjectPtr();
-			 if (processingItemPtr != NULL){
-				 QString fileName = processingItemPtr->GetInputFile();
-				 QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::RegExp);
-				 bool isError = (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_INVALID);
-				 bool isMatched = fileName.contains(regExp);
-				 bool isVisible = ((showOnlyErrors && isError) && isMatched) || (!showOnlyErrors && isMatched);
-				 
-				 itemPtr->setHidden(!isVisible);
-			 }
-		 }
+	while (*treeIterator){
+		ProcessingItem* itemPtr = dynamic_cast<ProcessingItem*>(*treeIterator);
+		if (itemPtr != NULL){
+			ihotf::IHotfolderProcessingItem* processingItemPtr = itemPtr->GetObjectPtr();
+			if (processingItemPtr != NULL){
+				QString fileName = processingItemPtr->GetInputFile();
+				QRegExp regExp(textFilter, Qt::CaseInsensitive, QRegExp::RegExp);
+				bool isError = (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_INVALID);
+				bool isMatched = fileName.contains(regExp);
+				bool isVisible = ((showOnlyErrors && isError) && isMatched) || (!showOnlyErrors && isMatched);
+				
+				itemPtr->setHidden(!isVisible);
+			}
+		}
 
-		 ++treeIterator;
-     }
+		++treeIterator;
+	}
 }
 
 

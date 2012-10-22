@@ -23,7 +23,7 @@ namespace ihotfgui
 class CHotfolderContainerGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CHotfolderContainerGuiComp>
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CHotfolderContainerGuiComp> BaseClass;
