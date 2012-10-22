@@ -1,21 +1,32 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2428
+          2613
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="9">
     <Element>
       <Id>
         AboutDialog
@@ -387,6 +398,103 @@
               </IsEnabled>
               <Value>
                 VersionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SettingsPersistence
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        SettingsPersistence
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          1
+        </Flags>
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                StandaloneApp/ApplicationInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Object
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InspectionTask
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RootKey
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LastParameters
               </Value>
             </Data>
           </AttributeInfo>
@@ -800,7 +908,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -809,24 +917,8 @@
         StandaloneApp
       </ComponentId>
     </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageConsumer
-      </InterfaceId>
-      <ComponentId>
-        LogDock
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        LogDock
-      </ComponentId>
-    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
+  <ExportedComponents count="4">
     <Component>
       <ExportedId>
         ApplicationInfo
@@ -841,6 +933,14 @@
       </ExportedId>
       <ComponentId>
         LogDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Parameters
+      </ExportedId>
+      <ComponentId>
+        InspectionTask/Parameters
       </ComponentId>
     </Component>
     <Component>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2493
+          2613
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="12">
     <Element>
       <Id>
         Bitmap
@@ -533,6 +533,92 @@
               <Value>
                 EdgeThreshold
               </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        InspectionTask
+      </Id>
+      <PackageId>
+        InspectionPck
+      </PackageId>
+      <ComponentId>
+        InspectionTask
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              GeneralParams
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ProcessingParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SerializeSuppliers
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Subtasks
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  ProcessedBitmapSupplier
+                </Value>
+                <Value>
+                  ExtractedEdgesSupplier
+                </Value>
+                <Value>
+                  ReducedEdgesSupplier
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -1064,13 +1150,29 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="9">
+    <Interface>
+      <InterfaceId>
+        ibase::IMessageContainer
+      </InterfaceId>
+      <ComponentId>
+        InspectionTask
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iedge::IEdgeLinesProvider
       </InterfaceId>
       <ComponentId>
         ReducedEdgesSupplier
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iinsp::IInspectionTask
+      </InterfaceId>
+      <ComponentId>
+        InspectionTask
       </ComponentId>
     </Interface>
     <Interface>
@@ -1086,7 +1188,15 @@
         iproc::ISupplier
       </InterfaceId>
       <ComponentId>
-        ReducedEdgesSupplier
+        InspectionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::ISerializable
+      </InterfaceId>
+      <ComponentId>
+        InspectionTask
       </ComponentId>
     </Interface>
     <Interface>
@@ -1097,14 +1207,30 @@
         ReducedEdgesSupplier
       </ComponentId>
     </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IInformationProvider
+      </InterfaceId>
+      <ComponentId>
+        InspectionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
+      </InterfaceId>
+      <ComponentId>
+        ReducedEdgesSupplier
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        ParamsSet
+        Parameters
       </ExportedId>
       <ComponentId>
-        ProcessingParams
+        InspectionTask/Parameters
       </ComponentId>
     </Component>
     <Component>

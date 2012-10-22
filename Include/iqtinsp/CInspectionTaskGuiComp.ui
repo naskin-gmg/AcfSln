@@ -43,6 +43,9 @@
          </property>
          <widget class="QStackedWidget" name="PreviewStack"/>
          <widget class="QTreeWidget" name="MessageList">
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
           <column>
            <property name="text">
             <string>Source</string>

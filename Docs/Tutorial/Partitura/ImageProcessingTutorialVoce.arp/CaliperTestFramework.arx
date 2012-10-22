@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2415
+          2613
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -33,7 +44,42 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Edge Finder
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationSubname
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ApplicationSubname
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               InspectionGuis
@@ -54,48 +100,6 @@
                 </Value>
                 <Value>
                   LineCaliperTaskGui
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InspectionIds
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="8">
-                <Value>
-                  Image
-                </Value>
-                <Value>
-                  Line
-                </Value>
-                <Value>
-                  Rectangle
-                </Value>
-                <Value>
-                  Quadrangle
-                </Value>
-                <Value>
-                  Circle
-                </Value>
-                <Value>
-                  Annulus
-                </Value>
-                <Value>
-                  AnnulusSegment
-                </Value>
-                <Value>
-                  Position
                 </Value>
               </Values>
             </Data>
@@ -248,7 +252,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -288,7 +292,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -398,7 +402,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -454,7 +458,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -464,7 +468,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="6">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -473,48 +477,32 @@
         Framework
       </ComponentId>
     </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IApplicationInfo
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageConsumer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::IVersionInfo
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="3">
+    <Component>
+      <ExportedId>
+        ApplicationInfo
+      </ExportedId>
+      <ComponentId>
+        Framework/ApplicationInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        LogDock
+      </ExportedId>
+      <ComponentId>
+        Framework/LogDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VersionInfo
+      </ExportedId>
+      <ComponentId>
+        Framework/VersionInfo
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Complex framework showing different task

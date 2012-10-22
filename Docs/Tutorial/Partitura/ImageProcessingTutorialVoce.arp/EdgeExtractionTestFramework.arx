@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2443
+          2613
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -132,7 +143,42 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Edge Extraction
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationSubname
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ApplicationSubname
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               InspectionGuis
@@ -318,7 +364,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -374,7 +420,7 @@
                 true
               </IsEnabled>
               <Value>
-                Framework
+                Framework/LogDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -384,7 +430,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -393,24 +439,40 @@
         Framework
       </ComponentId>
     </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageConsumer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        Framework
-      </ComponentId>
-    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="4">
+    <Component>
+      <ExportedId>
+        ApplicationInfo
+      </ExportedId>
+      <ComponentId>
+        Framework/ApplicationInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        LogDock
+      </ExportedId>
+      <ComponentId>
+        Framework/LogDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Parameters
+      </ExportedId>
+      <ComponentId>
+        Framework/Parameters
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VersionInfo
+      </ExportedId>
+      <ComponentId>
+        Framework/VersionInfo
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Complex framework showing different task

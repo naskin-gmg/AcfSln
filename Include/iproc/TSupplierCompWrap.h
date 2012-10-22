@@ -228,6 +228,22 @@ template <class Product>
 void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 {
 	if (m_workStatus < WS_INIT){
+		m_messageContainer.ClearMessages();
+
+		// set change notifier for each input supplier
+		QMap<iproc::ISupplier*, istd::CChangeNotifier> notifiers;
+		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
+					inputSupplierIter != m_inputSuppliersMap.end();
+					++inputSupplierIter){
+			ISupplier* supplierPtr = inputSupplierIter.value();
+
+			istd::IChangeable* changeableSupplierPtr = dynamic_cast<istd::IChangeable*>(supplierPtr);
+
+			if (changeableSupplierPtr != NULL){
+				notifiers[supplierPtr].SetPtr(changeableSupplierPtr);
+			}
+		}
+
 		m_productChangeNotifier.SetPtr(this);
 
 		if (!m_areParametersValid){
@@ -238,8 +254,6 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 
 		if (InitializeWork()){
 			m_workStatus = WS_INIT;
-
-			m_productChangeNotifier.Reset();
 		}
 		else{
 			m_workStatus = WS_CRITICAL;
@@ -248,9 +262,9 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
 					inputSupplierIter != m_inputSuppliersMap.end();
 					++inputSupplierIter){
-			ISupplier* inputSupplierPtr = inputSupplierIter.value();
+			ISupplier* supplierPtr = inputSupplierIter.value();
 
-			inputSupplierPtr->EnsureWorkInitialized();
+			supplierPtr->EnsureWorkInitialized();
 		}
 	}
 }
@@ -268,6 +282,8 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 
 		m_workStatus = ProduceObject(*m_productPtr);
 		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
+
+		m_productChangeNotifier.Reset();
 	}
 }
 
@@ -282,9 +298,9 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 	if (m_workStatus != WS_INVALID){
 		m_productChangeNotifier.SetPtr(this);
 
-		m_productPtr.Reset();
-
 		m_workStatus = WS_INVALID;
+
+		m_productPtr.Reset();
 	}
 }
 
@@ -425,7 +441,7 @@ TSupplierCompWrap<Product>::Timer::~Timer()
 		MessagePtr messagePtr(new ibase::CMessage(
 					istd::IInformationProvider::IC_INFO,
 					0,
-					QObject::tr("%1 taken %2 ms").arg(m_measuredFeatureName).arg(m_timer.elapsed()),
+					QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.elapsed()),
 					*m_parentPtr->m_diagnosticNameAttrPtr));
 		m_parentPtr->m_messageContainer.AddMessage(messagePtr);
 	}

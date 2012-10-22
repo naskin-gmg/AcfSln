@@ -53,7 +53,6 @@ public:
 		I_ASSIGN_MULTI_0(m_subtasksCompPtr, "Subtasks", "List of subtasks (suppliers)", true);
 		I_ASSIGN_TO(m_subtaskModelsCompPtr, m_subtasksCompPtr, true);
 		I_ASSIGN_TO(m_subtaskInspectionCompPtr, m_subtasksCompPtr, false);
-		I_ASSIGN_TO(m_subtaskMessageContainerCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN_TO(m_subtaskInfoProviderCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN(m_serializeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
 		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will be rolled out", true, false);
@@ -145,7 +144,6 @@ private:
 	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
 	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
-	I_MULTIREF(ibase::IMessageContainer, m_subtaskMessageContainerCompPtr);
 	I_MULTIREF(istd::IInformationProvider, m_subtaskInfoProviderCompPtr);
 	I_ATTR(bool, m_serializeSuppliersAttrPtr);
 	I_ATTR(bool, m_reduceHierarchyAttrPtr);

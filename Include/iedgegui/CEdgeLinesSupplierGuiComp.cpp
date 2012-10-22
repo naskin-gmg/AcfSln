@@ -140,7 +140,7 @@ void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
 
 void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	iedge::IEdgeLinesProvider* providerPtr = dynamic_cast<iedge::IEdgeLinesProvider*>(GetObjectPtr());
+	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObjectPtr());
 	if (providerPtr != NULL ){
 		const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
 

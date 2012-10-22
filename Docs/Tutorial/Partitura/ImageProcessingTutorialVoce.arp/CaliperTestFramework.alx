@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2415
+          2613
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -21,7 +32,7 @@
         LineCaliperTaskGui
       </ComponentName>
       <X>
-        850
+        925
       </X>
       <X>
         475
@@ -35,7 +46,7 @@
         LineCaliperTask
       </ComponentName>
       <X>
-        850
+        925
       </X>
       <X>
         225
@@ -101,4 +112,6 @@
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>
