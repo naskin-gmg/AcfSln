@@ -63,6 +63,7 @@ QWidget* CMultiLineSupplierGuiComp::GetParamsWidget() const
 void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	CShape* shapePtr = new CShape(m_lineSelection);
+	shapePtr->SetTransformMode(iview::CShapeControl::STM_SHAPE);
 
 	m_results.AttachObserver(shapePtr);
 
