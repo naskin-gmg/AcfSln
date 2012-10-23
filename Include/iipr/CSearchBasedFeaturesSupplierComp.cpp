@@ -1,6 +1,10 @@
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 
 
+// ACF-Solutions includes
+#include "iipr/CSearchFeature.h"
+
+
 namespace iipr
 {
 
@@ -81,6 +85,11 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			int featuresCount = result.GetValuesCount();
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 				i2d::CAffineTransformation2d transform;
+
+				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
+				I_ASSERT(searchFeaturePtr != NULL);
+
+				transform.Reset(searchFeaturePtr->GetPosition(), searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());
 
 				m_transformationList.push_back(transform);
 			}
