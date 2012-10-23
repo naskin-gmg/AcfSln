@@ -6,6 +6,7 @@
 #include "ibase/TLoggerCompWrap.h"
 
 #include "imeas/INumericValueProvider.h"
+#include "imeas/CSimpleNumericValue.h"
 
 
 namespace imeas
@@ -17,7 +18,8 @@ namespace imeas
 */
 class CNumericValuesJoinerComp:
 			public ibase::CLoggerComponentBase,
-			virtual public imeas::INumericValueProvider
+			virtual public imeas::INumericValueProvider,
+			protected imeas::CSimpleNumericValue
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -30,6 +32,11 @@ public:
 	// reimplemented (imeas::INumericValueProvider)
 	virtual int GetValuesCount() const;
 	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+
+protected:
+	// reimplemented (imeas::CSimpleNumericValue)
+	virtual bool IsValueTypeSupported(imeas::INumericValue::ValueTypeId valueTypeId) const;
+	virtual imath::CVarVector GetComponentValue(imeas::INumericValue::ValueTypeId valueTypeId) const;
 
 private:
 	I_MULTIREF(imeas::INumericValueProvider, m_valueProvidersCompPtr);
