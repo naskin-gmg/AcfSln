@@ -24,7 +24,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 		int numLines = containerPtr->GetItemsCount();
 
 		if (numLines > 0){
-			double scale = qSqrt(GetViewToScreenTransform().GetDeformMatrix().GetFrobeniusNorm());
+			double scale = qSqrt(GetViewToScreenTransform().GetDeformMatrix().GetFrobeniusNorm()) * 2;
 
 			const iview::IColorShema& colorShema = GetColorShema();
 			const QPen& defaultPen = colorShema.GetPen(iview::IColorShema::SP_NORMAL);
@@ -61,7 +61,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 						dif.Normalize();
 						i2d::CVector2d orthogonal = dif.GetOrthogonal();
 
-						i2d::CVector2d thickVector = orthogonal * qMin(4.0, scale * prevWeight);
+						i2d::CVector2d thickVector = orthogonal * qMin(5.0, scale * prevWeight);
 						polygon[0] = QPointF(prevPos - thickVector);
 						polygon[1] = QPointF(prevPos + thickVector);
 
@@ -136,7 +136,7 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 				}
 			}
 		}
-		boundingBox.Expand(i2d::CRect(-4, -4, 4, 4));
+		boundingBox.Expand(i2d::CRect(-5, -5, 5, 5));
 	}
 
 	return boundingBox;
