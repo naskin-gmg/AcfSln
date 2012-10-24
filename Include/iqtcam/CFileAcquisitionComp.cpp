@@ -99,8 +99,8 @@ int CFileAcquisitionComp::DoProcessing(
 				m_lastImageSize = imagePtr->GetImageSize();
 			}
 
-			if (m_lastFileNameAttrPtr.IsValid()){
-				m_lastFileNameAttrPtr->SetPath(fileName);
+			if (m_lastFileNameCompPtr.IsValid()){
+				m_lastFileNameCompPtr->SetPath(fileName);
 			}
 		}
 		else{
