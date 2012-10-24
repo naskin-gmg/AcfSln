@@ -90,7 +90,7 @@ protected:
 private:
 	typedef QList<CEdgeNode> Nodes;
 
-	Nodes m_edgeLines;
+	Nodes m_nodes;
 
 	bool m_isClosed;
 
@@ -116,13 +116,13 @@ protected:
 
 inline int CEdgeLine::GetNodesCount() const
 {
-	return m_edgeLines.size();
+	return m_nodes.size();
 }
 
 
 inline int CEdgeLine::GetSegmentsCount() const
 {
-	return m_isClosed? m_edgeLines.size(): m_edgeLines.size() - 1;
+	return m_isClosed? m_nodes.size(): m_nodes.size() - 1;
 }
 
 
