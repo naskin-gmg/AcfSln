@@ -244,6 +244,15 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 			}
 		}
 
+		// distribute initializing to input...
+		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
+					inputSupplierIter != m_inputSuppliersMap.end();
+					++inputSupplierIter){
+			ISupplier* supplierPtr = inputSupplierIter.value();
+
+			supplierPtr->EnsureWorkInitialized();
+		}
+
 		m_productChangeNotifier.SetPtr(this);
 
 		if (!m_areParametersValid){
@@ -257,14 +266,6 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 		}
 		else{
 			m_workStatus = WS_CRITICAL;
-		}
-
-		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
-					inputSupplierIter != m_inputSuppliersMap.end();
-					++inputSupplierIter){
-			ISupplier* supplierPtr = inputSupplierIter.value();
-
-			supplierPtr->EnsureWorkInitialized();
 		}
 	}
 }
