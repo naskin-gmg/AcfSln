@@ -50,8 +50,8 @@ public:
 		I_ASSIGN(m_generalInformationProviderCompPtr, "GeneralInformationProvider", "General information provider", false, "GeneralInformationProvider");
 		I_ASSIGN_TO(m_generalInformationModelCompPtr, m_generalInformationProviderCompPtr, true);
 		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
-		I_ASSIGN(m_viewLabelPrefixAttrPtr, "ViewLabelPrefix", "Prefix used to title the single bitmap view", true, "Image");
-		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "Makes status label visible or not", false, false);
+		I_ASSIGN_MULTI_0(m_viewLabelPrefixesAttrPtr, "ViewLabelPrefixes", "Prefixes used to title the single bitmap view. If none present, information from InformationProviders will be used.", false);
+		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "Makes status label visible or not", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -113,7 +113,7 @@ private:
 	I_MULTIREF(istd::IInformationProvider, m_informationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_informationModelsCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
-	I_ATTR(QString, m_viewLabelPrefixAttrPtr);
+	I_MULTIATTR(QString, m_viewLabelPrefixesAttrPtr);
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
 	
 	int m_rowCount;

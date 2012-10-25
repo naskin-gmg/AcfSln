@@ -109,18 +109,21 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	layoutPtr->setContentsMargins(0, 0, 0, 0);
 	widgetPtr->setLayout(layoutPtr);
 
-	QString titlePrefix = *m_viewLabelPrefixAttrPtr;
-	
 	int viewIndex = 0;
 	for (int row = 0; row < m_rowCount; row++){
 		for (int col = 0; col < m_columnCount; col++){
-		
 			QString title;
-			if (titlePrefix.isEmpty() && (viewIndex < m_informationProvidersCompPtr.GetCount())){
-				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
+
+			if (m_viewLabelPrefixesAttrPtr.IsValid()){
+				if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
+					title = QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
+				}
+				else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
+					title = m_viewLabelPrefixesAttrPtr[viewIndex];
+				}
 			}
-			else{
-				title = QString("%1 %2").arg(titlePrefix).arg(viewIndex + 1);
+			else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
 			}
 			
 			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
