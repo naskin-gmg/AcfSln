@@ -200,13 +200,7 @@ int TSupplierCompWrap<Product>::GetWorkStatus() const
 template <class Product>
 void TSupplierCompWrap<Product>::InvalidateSupplier()
 {
-	if (m_workStatus == WS_LOCKED){
-		return;
-	}
-
-	if (m_workStatus != WS_INVALID){
-		m_productChangeNotifier.SetPtr(this);
-
+	if (m_workStatus >= WS_OK){
 		m_workStatus = WS_INVALID;
 	}
 }
@@ -217,20 +211,6 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 {
 	if (m_workStatus < WS_INIT){
 		m_messageContainer.ClearMessages();
-
-		// set change notifier for each input supplier
-		QMap<iproc::ISupplier*, istd::CChangeNotifier> notifiers;
-		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
-					inputSupplierIter != m_inputSuppliersMap.end();
-					++inputSupplierIter){
-			ISupplier* supplierPtr = inputSupplierIter.value();
-
-			istd::IChangeable* changeableSupplierPtr = dynamic_cast<istd::IChangeable*>(supplierPtr);
-
-			if (changeableSupplierPtr != NULL){
-				notifiers[supplierPtr].SetPtr(changeableSupplierPtr);
-			}
-		}
 
 		// distribute initializing to input...
 		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
@@ -244,9 +224,9 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 		m_productChangeNotifier.SetPtr(this);
 
 		if (!m_areParametersValid){
-			m_areParametersValid = true;
-
 			OnParametersChanged();
+
+			m_areParametersValid = true;
 		}
 
 		if (InitializeWork()){
@@ -284,13 +264,11 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 		return;
 	}
 
-	if (m_workStatus != WS_INVALID){
-		m_productChangeNotifier.SetPtr(this);
+	m_workStatus = WS_INVALID;
 
-		m_workStatus = WS_INVALID;
+	m_productPtr.Reset();
 
-		m_productPtr.Reset();
-	}
+	m_productChangeNotifier.Reset();
 }
 
 
@@ -328,12 +306,7 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
-	if (m_workStatus <= WS_OK){
-		return m_productPtr.GetPtr();
-	}
-	else{
-		return NULL;
-	}
+	return m_productPtr.GetPtr();
 }
 
 
@@ -387,6 +360,8 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	m_productChangeNotifier.Reset();
+
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
 	}
@@ -400,7 +375,6 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 	}
 
 	m_workStatus = WS_INVALID;
-	m_productChangeNotifier.SetPtr(this);
 }
 
 
@@ -409,6 +383,8 @@ void TSupplierCompWrap<Product>::OnComponentDestroyed()
 {
 	m_inputsObserver.EnsureModelsDetached();
 	m_paramsObserver.EnsureModelsDetached();
+
+	m_productChangeNotifier.Reset();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -455,11 +431,7 @@ TSupplierCompWrap<Product>::InputsObserver::InputsObserver(TSupplierCompWrap<Pro
 template <class Product>
 void TSupplierCompWrap<Product>::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (m_parent.m_workStatus != WS_INVALID){
-		m_parent.m_productChangeNotifier.SetPtr(&m_parent);
-
-		m_parent.m_workStatus = WS_INVALID;
-	}
+	m_parent.InvalidateSupplier();
 }
 
 
@@ -480,11 +452,7 @@ TSupplierCompWrap<Product>::ParamsObserver::ParamsObserver(TSupplierCompWrap<Pro
 template <class Product>
 void TSupplierCompWrap<Product>::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (m_parent.m_workStatus != WS_INVALID){
-		m_parent.m_productChangeNotifier.SetPtr(&m_parent);
-
-		m_parent.m_workStatus = WS_INVALID;
-	}
+	m_parent.InvalidateSupplier();
 }
 
 

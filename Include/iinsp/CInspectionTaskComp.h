@@ -2,8 +2,12 @@
 #define iinsp_CInspectionTaskComp_included
 
 
+// Qt includes
+#include <QMap>
+
 // ACF includes
 #include "istd/IInformationProvider.h"
+#include "istd/TChangeNotifier.h"
 #include "imod/IModel.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
@@ -97,11 +101,6 @@ protected:
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
-#if _MSC_VER < 1500
-public:
-#else
-private:
-#endif
 private:
 	class MessageContainer: virtual public ibase::IMessageContainer
 	{
@@ -171,6 +170,8 @@ private:
 	MessageContainer m_messageContainer;
 
 	istd::CChangeNotifier m_productChangeNotifier;
+
+	QMap<iproc::ISupplier*, istd::CChangeNotifier> m_subtaskNotifiers;
 };
 
 
