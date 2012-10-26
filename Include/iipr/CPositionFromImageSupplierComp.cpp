@@ -29,9 +29,13 @@ const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int 
 	I_ASSERT(index == 0);
 
 	const imath::CVarVector* productPtr = GetWorkProduct();
-	I_ASSERT(productPtr != NULL);
-
-	m_position.SetValues(*productPtr);
+	if (productPtr != NULL){
+		m_position.SetValues(*productPtr);
+	}
+	else{
+		// set wrong position (-1,-1) here
+		m_position.SetValues(imath::CVarVector(2, -1));		
+	}
 
 	return m_position;
 }
