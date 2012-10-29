@@ -328,6 +328,7 @@ void CInspectionTaskComp::OnComponentCreated()
 
 void CInspectionTaskComp::OnComponentDestroyed()
 {
+	m_subtaskNotifiers.clear();
 	m_subtasks.clear();
 
 	EnsureModelsDetached();

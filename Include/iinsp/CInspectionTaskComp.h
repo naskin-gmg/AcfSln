@@ -171,7 +171,8 @@ private:
 
 	istd::CChangeNotifier m_productChangeNotifier;
 
-	QMap<iproc::ISupplier*, istd::CChangeNotifier> m_subtaskNotifiers;
+	typedef QMap<iproc::ISupplier*, istd::CChangeNotifier> SubtaskNotifiers;
+	SubtaskNotifiers m_subtaskNotifiers;
 };
 
 
