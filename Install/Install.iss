@@ -86,9 +86,3 @@ Name: AddAcfSlnPath; Description: {cm:AddAcfSlnPath}; Flags: checkedonce; Compon
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\ExtLib\Bin"; Flags: createvalueifdoesntexist; Tasks: AddExtPath
 Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\Bin\Release$CompilerName$"; Flags: createvalueifdoesntexist; Tasks: AddAcfSlnPath
-Root: HKCU; Subkey: "Environment"; ValueName: ACFSLNDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: acfSlnComp
-Root: HKCU; Subkey: "Environment"; ValueName: XERCESDIR; ValueData: {app}\ExtLib\Xerces; ValueType: string; Flags: uninsdeletevalue; Components: xercesComp
-Root: HKCU; Subkey: "Environment"; ValueName: XALANDIR; ValueData: {app}\ExtLib\Xalan; ValueType: string; Flags: uninsdeletevalue; Components: xalanComp
-Root: HKCU; Subkey: "Environment"; ValueName: ZLIBDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: zlibComp
-Root: HKCU; Subkey: "Environment"; ValueName: CBIOSDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: cbiosComp
-Root: HKCU; Subkey: "Environment"; ValueName: FFMPEGDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: ffmpegComp
