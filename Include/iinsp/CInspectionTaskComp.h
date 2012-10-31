@@ -58,6 +58,7 @@ public:
 		I_ASSIGN_TO(m_subtaskModelsCompPtr, m_subtasksCompPtr, true);
 		I_ASSIGN_TO(m_subtaskInspectionCompPtr, m_subtasksCompPtr, false);
 		I_ASSIGN_TO(m_subtaskInfoProviderCompPtr, m_subtasksCompPtr, false);
+		I_ASSIGN_MULTI_0(m_additionalSupppliersCompPtr, "AdditionalSuppliers", "Set of suppliers will be initialized and controlled together with subtasks, but they will be not listed as subtasks", false)
 		I_ASSIGN(m_serializeSuppliersAttrPtr, "SerializeSuppliers", "If it is true, parameters of suppliers will be serialized", true, true);
 		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will be rolled out", true, false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
@@ -144,6 +145,7 @@ private:
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
 	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
 	I_MULTIREF(istd::IInformationProvider, m_subtaskInfoProviderCompPtr);
+	I_MULTIREF(iproc::ISupplier, m_additionalSupppliersCompPtr);
 	I_ATTR(bool, m_serializeSuppliersAttrPtr);
 	I_ATTR(bool, m_reduceHierarchyAttrPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
