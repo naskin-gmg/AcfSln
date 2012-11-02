@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2498
+          2624
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264195
         </Number>
         <Description>
           Qt Framework
@@ -28,7 +28,7 @@
   </AcfHeader>
   <ConfigFiles count="1">
     <FilePath>
-      $(ACFDIR)/Config/Full.xpc
+      ../../Acf/Config/Full.xpc
     </FilePath>
   </ConfigFiles>
   <PackageDirs count="4">

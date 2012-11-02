@@ -36,7 +36,7 @@ inline void MaxFunctor(PixelComponentType inputValue, PixelComponentType& output
 }
 
 
-template <typename PixelComponentType, PixelComponentType OutputInitValue, typename void(*CalculateOutputValue)(PixelComponentType, PixelComponentType&)>
+template <typename PixelComponentType, PixelComponentType OutputInitValue, void (*CalculateOutputValue)(PixelComponentType, PixelComponentType&)>
 static void DoFilter(
 			int kernelWidth,
 			int kernelHeight,
@@ -56,7 +56,7 @@ static void DoFilter(
 	int inputImageHeight = inputImage.GetImageSize().GetY();
 
 	int componentsCount = outputImage.GetComponentsCount();
-	
+
 	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
 		for( int y = regionTop; y < regionBottom; ++y){
 			I_ASSERT(y >= 0);
@@ -86,7 +86,7 @@ static void DoFilter(
 			for(int x = regionLeft + kernelHalfWidth; x < regionRight - kernelHalfWidth; ++x){
 				PixelComponentType outputValue = OutputInitValue;
 				int outputComponentPosition = x * componentsCount + componentIndex;
-				
+
 				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
 					int pixelIndex = (x + kernelX) * componentsCount + componentIndex;
 
@@ -182,7 +182,7 @@ static void DoFilter(
 
 				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
 					int imageLineIndex = y + kernelY;
-	
+
 					if (imageLineIndex >= 0 && imageLineIndex < inputImageHeight){
 						PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
 
@@ -240,7 +240,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	if (regionRect.IsEmpty() || !regionRect.IsValid()){
 		SendWarningMessage(0, "Cannot process an empty or invalid region");
 
-		return false;	
+		return false;
 	}
 
 	if (!outputBitmapPtr->CopyFrom(inputBitmap)){
@@ -303,7 +303,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	default:
 		return false;
 	}
-	
+
 	return true;
 }
 
