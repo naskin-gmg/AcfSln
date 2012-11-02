@@ -396,8 +396,8 @@ QIcon CHotfolderGuiComp::GetStateIcon(int fileState) const
 {
 	static QIcon emptyIcon;
 
-	StateIconsMap::const_iterator foundIconIter = m_stateIconsMap.find(fileState);
-	if (foundIconIter != m_stateIconsMap.end()){
+	StateIconsMap::ConstIterator foundIconIter = m_stateIconsMap.constFind(fileState);
+	if (foundIconIter != m_stateIconsMap.constEnd()){
 		return foundIconIter.value();
 	}
 

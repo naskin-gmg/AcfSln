@@ -29,8 +29,8 @@ CHotfolderStatistics::CHotfolderStatistics()
 
 int CHotfolderStatistics::GetItemsCount(const QString& directoryPath) const
 {
-	CounterMap::const_iterator iter = m_itemsCount.find(directoryPath);
-	if (iter != m_itemsCount.end()){
+	CounterMap::ConstIterator iter = m_itemsCount.constFind(directoryPath);
+	if (iter != m_itemsCount.constEnd()){
 		return iter.value();
 	}
 
@@ -40,8 +40,8 @@ int CHotfolderStatistics::GetItemsCount(const QString& directoryPath) const
 
 int CHotfolderStatistics::GetSuccessCount(const QString& directoryPath) const
 {
-	CounterMap::const_iterator iter = m_successCount.find(directoryPath);
-	if (iter != m_successCount.end()){
+	CounterMap::ConstIterator iter = m_successCount.constFind(directoryPath);
+	if (iter != m_successCount.constEnd()){
 		return iter.value();
 	}
 
@@ -51,8 +51,8 @@ int CHotfolderStatistics::GetSuccessCount(const QString& directoryPath) const
 
 int CHotfolderStatistics::GetErrorsCount(const QString& directoryPath) const
 {
-	CounterMap::const_iterator iter = m_errorsCount.find(directoryPath);
-	if (iter != m_errorsCount.end()){
+	CounterMap::ConstIterator iter = m_errorsCount.constFind(directoryPath);
+	if (iter != m_errorsCount.constEnd()){
 		return iter.value();
 	}
 
@@ -62,8 +62,8 @@ int CHotfolderStatistics::GetErrorsCount(const QString& directoryPath) const
 
 int CHotfolderStatistics::GetAbortedCount(const QString& directoryPath) const
 {
-	CounterMap::const_iterator iter = m_abortedCount.find(directoryPath);
-	if (iter != m_abortedCount.end()){
+	CounterMap::ConstIterator iter = m_abortedCount.constFind(directoryPath);
+	if (iter != m_abortedCount.constEnd()){
 		return iter.value();
 	}
 
@@ -82,8 +82,8 @@ double CHotfolderStatistics::GetProcessingTime(const QString& directoryPath) con
 		return processingTime;
 	}
 
-	ProcessingTimeMap::const_iterator foundIter = m_processingTimeMap.find(directoryPath);
-	if (foundIter != m_processingTimeMap.end()){
+	ProcessingTimeMap::ConstIterator foundIter = m_processingTimeMap.constFind(directoryPath);
+	if (foundIter != m_processingTimeMap.constEnd()){
 		return foundIter.value();
 	}
 

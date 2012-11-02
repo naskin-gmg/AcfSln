@@ -353,8 +353,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 
 		int stackIndex;
-		QMap<iqtgui::IGuiObject*, int>::const_iterator stackRepeatIter = guiToStackIndexMap.find(guiObjectPtr);
-		if (stackRepeatIter == guiToStackIndexMap.end()){
+		QMap<iqtgui::IGuiObject*, int>::ConstIterator stackRepeatIter = guiToStackIndexMap.constFind(guiObjectPtr);
+		if (stackRepeatIter == guiToStackIndexMap.constEnd()){
 			istd::TDelPtr<QWidget> newPreviewPagePtr(new QWidget());
 			if (!newPreviewPagePtr.IsValid()){
 				continue;

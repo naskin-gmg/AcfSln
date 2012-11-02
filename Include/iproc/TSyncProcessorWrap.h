@@ -163,8 +163,8 @@ int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 	int retVal = IProcessor::TS_NONE;
 
 	if (taskId >= 0){
-		TaskToStateMap::const_iterator foundIter = m_taskToStateMap.find(taskId);
-		if (foundIter != m_taskToStateMap.end()){
+		TaskToStateMap::ConstIterator foundIter = m_taskToStateMap.constFind(taskId);
+		if (foundIter != m_taskToStateMap.constEnd()){
 			retVal = foundIter.value();
 		}
 	}

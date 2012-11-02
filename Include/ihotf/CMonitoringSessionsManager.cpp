@@ -24,8 +24,8 @@ void CMonitoringSessionsManager::ResetSessions()
 
 ihotf::IMonitoringSession* CMonitoringSessionsManager::GetSession(const QString& directoryPath) const
 {
-	MonitoringSessionsMap::const_iterator sessionIter = m_monitorSessionsMap.find(directoryPath);
-	if (sessionIter != m_monitorSessionsMap.end()){
+	MonitoringSessionsMap::ConstIterator sessionIter = m_monitorSessionsMap.constFind(directoryPath);
+	if (sessionIter != m_monitorSessionsMap.constEnd()){
 		return sessionIter.value().GetPtr();
 	}
 
