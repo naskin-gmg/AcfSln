@@ -182,7 +182,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProv
 template <class UI, class WidgetType>
 const i2d::ITransformation2d* TSupplierGuiCompBase<UI, WidgetType>::GetCalibration() const
 {
-	i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<i2d::ICalibrationProvider*>(GetObjectPtr());
+	i2d::ICalibrationProvider* calibrationProviderPtr = CompCastPtr<i2d::ICalibrationProvider>(GetObjectPtr());
 	if (calibrationProviderPtr != NULL){
 		return calibrationProviderPtr->GetCalibration();
 	}

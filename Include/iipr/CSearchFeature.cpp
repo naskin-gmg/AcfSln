@@ -26,6 +26,17 @@ CSearchFeature::CSearchFeature(
 	m_id(id)
 {
 	BaseClass::SetPosition(position);
+
+	imath::CVarVector values(6, 0.0);
+
+	values[0] = weight;
+	values[1] = position.GetX();
+	values[2] = position.GetY();
+	values[3] = scale.GetX();
+	values[4] = scale.GetY();
+	values[5] = angle;
+
+	SetValues(values);
 }
 
 
@@ -84,8 +95,13 @@ imath::CVarVector CSearchFeature::GetComponentValue(CSearchFeature::ValueTypeId 
 
 	switch (valueTypeId){
 		case VTI_AUTO:
-		case VTI_POSITION:
 			return BaseClass::GetComponentValue(VTI_AUTO);
+
+		case VTI_POSITION:
+			result.SetElementsCount(2, 0);
+			result[0] = GetPosition().GetX();
+			result[1] = GetPosition().GetY();
+			break;
 
 		case VTI_ANGLE:
 			result.SetElementsCount(1, m_angle);
