@@ -313,7 +313,12 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
-	return m_productPtr.GetPtr();
+	if (m_workStatus <= WS_OK){
+		return m_productPtr.GetPtr();
+	}
+	else{
+		return NULL;
+	}
 }
 
 
