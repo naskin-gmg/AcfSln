@@ -206,6 +206,8 @@ template <class Product>
 void TSupplierCompWrap<Product>::InvalidateSupplier()
 {
 	if (m_workStatus >= WS_OK){
+		m_productChangeNotifier.SetPtr(this);
+
 		m_workStatus = WS_INVALID;
 	}
 }
@@ -405,7 +407,7 @@ void TSupplierCompWrap<Product>::OnComponentDestroyed()
 	m_inputsObserver.EnsureModelsDetached();
 	m_paramsObserver.EnsureModelsDetached();
 
-	m_productChangeNotifier.Reset();
+	m_productChangeNotifier.Abort();
 
 	BaseClass::OnComponentDestroyed();
 }
