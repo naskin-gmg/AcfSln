@@ -89,7 +89,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
 				I_ASSERT(searchFeaturePtr != NULL);
 
-				transform.Reset(searchFeaturePtr->GetPosition(), searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());
+				transform.Reset(searchFeaturePtr->GetPosition(), -searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());
 
 				m_transformationList.push_back(transform);
 			}
