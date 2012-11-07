@@ -77,7 +77,7 @@ void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 	for (int bitmapIndex = 0; bitmapIndex < bitmapsCount; bitmapIndex++){
 		if (bitmapIndex < viewsCount){
 			CSingleView* viewPtr = m_views.at(bitmapIndex);
-			
+
 			viewPtr->UpdateImage(objectPtr->GetBitmap(bitmapIndex));
 		}
 	}
@@ -125,7 +125,7 @@ void CMultiBitmapViewComp::OnGuiCreated()
 			else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
 				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
 			}
-			
+
 			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
 			layoutPtr->addWidget(viewPtr, row, col);
 			m_views.append(viewPtr);
@@ -134,7 +134,7 @@ void CMultiBitmapViewComp::OnGuiCreated()
 			if (viewIndex < m_informationModelsCompPtr.GetCount()){
 				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
 				I_ASSERT(modelPtr != NULL);
-				
+
 				if (RegisterModel(modelPtr, viewIndex)){
 					if (m_showStatusLabelAttrPtr.IsValid()){
 						hasStatusInfo = *m_showStatusLabelAttrPtr;
@@ -183,8 +183,8 @@ CMultiBitmapViewComp::CSingleView* CMultiBitmapViewComp::CreateView(QWidget* par
 CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const QString& title)
 :	BaseClass(parentPtr),
 	m_console(this),
-	m_id(id),
-	m_statusLabel(NULL)
+	m_statusLabel(NULL),
+	m_id(id)
 {
 	setTitle(title);
 

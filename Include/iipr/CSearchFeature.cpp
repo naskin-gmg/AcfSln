@@ -77,15 +77,16 @@ const i2d::ITransformation2d& CSearchFeature::GetTransformation() const
 bool CSearchFeature::IsValueTypeSupported(CSearchFeature::ValueTypeId valueTypeId) const
 {
 	switch (valueTypeId){
-		case VTI_AUTO:
-		case VTI_POSITION:
-		case VTI_ANGLE:
-		case VTI_WEIGHT:
-		case VTI_2D_TRANSFORM:
-			return true;
-	}
+	case VTI_AUTO:
+	case VTI_POSITION:
+	case VTI_ANGLE:
+	case VTI_WEIGHT:
+	case VTI_2D_TRANSFORM:
+		return true;
 
-	return false;
+	default:
+		return false;
+	}
 }
 
 
@@ -94,37 +95,40 @@ imath::CVarVector CSearchFeature::GetComponentValue(CSearchFeature::ValueTypeId 
 	imath::CVarVector result;
 
 	switch (valueTypeId){
-		case VTI_AUTO:
-			return BaseClass::GetComponentValue(VTI_AUTO);
+	case VTI_AUTO:
+		return BaseClass::GetComponentValue(VTI_AUTO);
 
-		case VTI_POSITION:
-			result.SetElementsCount(2, 0);
-			result[0] = GetPosition().GetX();
-			result[1] = GetPosition().GetY();
-			break;
+	case VTI_POSITION:
+		result.SetElementsCount(2, 0);
+		result[0] = GetPosition().GetX();
+		result[1] = GetPosition().GetY();
+		break;
 
-		case VTI_ANGLE:
-			result.SetElementsCount(1, m_angle);
-			break;
+	case VTI_ANGLE:
+		result.SetElementsCount(1, m_angle);
+		break;
 
-		case VTI_WEIGHT:
-			result.SetElementsCount(1, m_weight);
-			break;
+	case VTI_WEIGHT:
+		result.SetElementsCount(1, m_weight);
+		break;
 
-		case VTI_2D_TRANSFORM:
-			result.SetElementsCount(6);
-			{
-				const i2d::CMatrix2d& matrix = m_transformation.GetTransformation().GetDeformMatrix();
-				result.SetElement(0, matrix.GetAt(0,0));
-				result.SetElement(1, matrix.GetAt(0,1));
-				result.SetElement(2, matrix.GetAt(1,0));
-				result.SetElement(3, matrix.GetAt(1,1));
+	case VTI_2D_TRANSFORM:
+		result.SetElementsCount(6);
+		{
+			const i2d::CMatrix2d& matrix = m_transformation.GetTransformation().GetDeformMatrix();
+			result.SetElement(0, matrix.GetAt(0,0));
+			result.SetElement(1, matrix.GetAt(0,1));
+			result.SetElement(2, matrix.GetAt(1,0));
+			result.SetElement(3, matrix.GetAt(1,1));
 
-				const i2d::CVector2d& translation = m_transformation.GetTransformation().GetTranslation();
-				result.SetElement(4, translation.GetX());
-				result.SetElement(5, translation.GetY());
-			}
-			break;
+			const i2d::CVector2d& translation = m_transformation.GetTransformation().GetTranslation();
+			result.SetElement(4, translation.GetX());
+			result.SetElement(5, translation.GetY());
+		}
+		break;
+
+	default:
+		break;
 	}
 
 	return result;

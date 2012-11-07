@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2388
+          2626
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264195
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -183,7 +194,7 @@
               Reference
             </Type>
             <ExportId>
-              
+              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -412,7 +423,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="23">
+          <AttributeInfo>
+            <Id>
+              AboutDialog
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              AboutDialog
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -434,13 +461,45 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ApplicationSubname
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ApplicationSubname
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationType
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ApplicationType
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               CompanyName
             </Id>
             <Type>
               String
             </Type>
             <ExportId>
-              
+              CompanyName
             </ExportId>
             <Data>
               <IsEnabled>
@@ -453,6 +512,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IconPath
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              IconPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconSize
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              IconSize
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               IsMenuVisible
             </Id>
             <Type>
@@ -460,6 +551,38 @@
             </Type>
             <ExportId>
               IsMenuVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsToolbarVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              IsToolbarVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LegalCopyright
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              LegalCopyright
             </ExportId>
             <Data>
               <IsEnabled>
@@ -528,13 +651,157 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProductName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ProductName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SettingsDialog
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              SettingsDialog
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashScreen
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              SplashScreen
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashTime
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              SplashTime
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              StyleSheet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TitleFormat
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              TitleFormat
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TranslationManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              TranslationManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UiStartMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              UiStartMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseIconText
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseIconText
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               VersionInfo
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              
+              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -586,7 +853,55 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              BackgroundMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              ViewBackgroundMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FitMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              ViewFitMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ZoomToFitEnabled
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ViewZoomToFitEnabled
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

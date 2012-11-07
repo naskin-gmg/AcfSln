@@ -19,7 +19,7 @@ bool CBitmapOperations::JoinBitmaps(
 
 	if (inputBitmapsCount <= 0){
 		if (operationLogPtr != NULL){
-			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "The list of input bitmaps is empty", "BitmapOperations"); 
+			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "The list of input bitmaps is empty", "BitmapOperations");
 		}
 
 		return false;
@@ -42,9 +42,9 @@ bool CBitmapOperations::JoinBitmaps(
 
 	if (!outputBitmap.CreateBitmap(outputPixelFormat, istd::CIndex2d(width, height))){
 		if (operationLogPtr != NULL){
-			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Output bitmap could not be created", "BitmapOperations"); 
+			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Output bitmap could not be created", "BitmapOperations");
 		}
-		
+
 		return false;
 	}
 
@@ -59,9 +59,9 @@ bool CBitmapOperations::JoinBitmaps(
 		// If there is a bitmap in the list with different pixel format, cancel the calculation and exit:
 		if (inputSingleBitmap.GetPixelFormat() != outputPixelFormat){
 			if (operationLogPtr != NULL){
-				operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Input bitmaps have different pixel format", "BitmapOperations"); 
+				operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Input bitmaps have different pixel format", "BitmapOperations");
 			}
-	
+
 			outputBitmap.ResetImage();
 
 			return false;
@@ -105,7 +105,7 @@ bool CBitmapOperations::CombineBitmaps(
 
 	if (inputBitmapsCount <= 0){
 		if (operationLogPtr != NULL){
-			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "The list of input bitmaps is empty", "BitmapOperations"); 
+			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "The list of input bitmaps is empty", "BitmapOperations");
 		}
 
 		return false;
@@ -121,12 +121,12 @@ bool CBitmapOperations::CombineBitmaps(
 
 		default:
 			if (operationLogPtr != NULL){
-				operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Currently the image format is not supported for this operation", "BitmapOperations"); 
+				operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Currently the image format is not supported for this operation", "BitmapOperations");
 			}
 
 			return false;
 	}
-	
+
 	int width = bitmapList.at(0)->GetImageSize().GetX();
 	int height = bitmapList.at(0)->GetImageSize().GetY();
 
@@ -140,9 +140,9 @@ bool CBitmapOperations::CombineBitmaps(
 
 	if (!outputBitmap.CreateBitmap(outputPixelFormat, istd::CIndex2d(width, height))){
 		if (operationLogPtr != NULL){
-			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Output bitmap could not be created", "BitmapOperations"); 
+			operationLogPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, "Output bitmap could not be created", "BitmapOperations");
 		}
-		
+
 		return false;
 	}
 
@@ -151,24 +151,27 @@ bool CBitmapOperations::CombineBitmaps(
 	for (int y = 0; y < height; y++){
 		void* outputLinePtr = const_cast<void*>(outputBitmap.GetLinePtr(y));
 
-		for (int x = 0; x < width; x++){		
+		for (int x = 0; x < width; x++){
 			for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
 				quint32 outputPixelComponentValue = 0;
 				double weightSum = 0.0;
 
 				switch (combineMode){
-					case CM_MIN:
-						weightSum = 1.0;
-						outputPixelComponentValue = INT_MAX;
-						break;
+				case CM_MIN:
+					weightSum = 1.0;
+					outputPixelComponentValue = INT_MAX;
+					break;
 
-					case CM_MAX:
-						weightSum = 1.0;
-						break;
+				case CM_MAX:
+					weightSum = 1.0;
+					break;
+
+				default:
+					break;
 				}
 
 				int pixelComponentIndex = x * pixelComponentsCount + componentIndex;
-				
+
 				for (int inputBitmapIndex = 0; inputBitmapIndex < inputBitmapsCount; inputBitmapIndex++){
 					const iimg::IBitmap& inputBitmap = *bitmapList.at(inputBitmapIndex);
 
@@ -188,7 +191,7 @@ bool CBitmapOperations::CombineBitmaps(
 								outputPixelComponentValue += *inputPixelPtr * weight;
 							}
 							break;
-						
+
 						case CM_MAX:
 							outputPixelComponentValue = qMax<quint32>(*inputPixelPtr, outputPixelComponentValue);
 							break;
@@ -200,7 +203,7 @@ bool CBitmapOperations::CombineBitmaps(
 				}
 
 				quint8* outputPixelPtr = ((quint8*)outputLinePtr) + pixelComponentIndex;
-				
+
 				*outputPixelPtr = quint8(outputPixelComponentValue / weightSum);
 			}
 		}
