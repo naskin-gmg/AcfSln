@@ -107,7 +107,7 @@
         File
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam

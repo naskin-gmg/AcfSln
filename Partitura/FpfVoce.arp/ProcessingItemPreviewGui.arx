@@ -32,7 +32,7 @@
         InputFileName
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam
@@ -72,7 +72,7 @@
         OutputFileName
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam

@@ -11,7 +11,7 @@
 #include "imod/CSingleModelObserverBase.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorCompBase.h"
-#include "iqt/CFileList.h"
+#include "ifile/CFileList.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -96,7 +96,7 @@ private:
 
 	QString m_mediumUrl;
 
-	iqt::CFileList m_fileList;
+	ifile::CFileList m_fileList;
 	bool m_isPlaying;
 
 	bool m_isFrameLoaded;

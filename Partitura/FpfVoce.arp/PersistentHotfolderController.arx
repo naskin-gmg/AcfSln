@@ -413,7 +413,7 @@
         HotfolderSettingsFilePath
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam
@@ -547,7 +547,7 @@
         HotfolderStateFilePath
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam
@@ -713,7 +713,7 @@
         MonitorCacheFile
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam

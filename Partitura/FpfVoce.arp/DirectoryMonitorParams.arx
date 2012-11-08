@@ -268,7 +268,7 @@
         DirectoryPath
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam
@@ -308,7 +308,7 @@
         File
       </Id>
       <PackageId>
-        BasePck
+        FilePck
       </PackageId>
       <ComponentId>
         FileNameParam
