@@ -26,28 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
-    <Element>
-      <Id>
-        Bitmap
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="6">
     <Element>
       <Id>
         BitmapLoader
@@ -105,7 +84,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Loaders
@@ -144,6 +123,22 @@
               <Value>
                 Log
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseNative
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseNativeSaveDialog
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -210,10 +205,10 @@
     </Element>
     <Element>
       <Id>
-        SnapGui
+        SnapImageGui
       </Id>
       <PackageId>
-        QtCameraPck
+        
       </PackageId>
       <ComponentId>
         SnapImageGui
@@ -225,26 +220,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
-          <AttributeInfo>
-            <Id>
-              Bitmap
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               BitmapAcquisition
@@ -282,125 +258,18 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              LiveInterval
+              SlaveSceneExtender
             </Id>
             <Type>
-              Real
+              Reference
             </Type>
             <ExportId>
-              LiveInterval
+              SlaveSceneExtender
             </ExportId>
             <Data>
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsLoader
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ParamsLoader
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSetGui
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ParamsSetGui
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SnapTab
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        SceneConnector
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ExtenderGui
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SnapGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneGui
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                View
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -624,7 +493,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapTab
+                SnapImageGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -836,93 +705,362 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        View
-      </Id>
-      <PackageId>
-        QtViewPck
-      </PackageId>
-      <ComponentId>
-        ViewProvider
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              BackgroundMode
-            </Id>
-            <Type>
-              Integer
-            </Type>
-            <ExportId>
-              ViewBackgroundMode
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              Integer
-            </Type>
-            <ExportId>
-              ViewFitMode
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ZoomToFitEnabled
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              ViewZoomToFitEnabled
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="0">
+  <EmbeddedRegistriesList count="1">
+    <EmbeddedRegistry>
+      <Id>
+        SnapImageGui
+      </Id>
+      <Data>
+        <ElementsList count="4">
+          <Element>
+            <Id>
+              Bitmap
+            </Id>
+            <PackageId>
+              QtPck
+            </PackageId>
+            <ComponentId>
+              Bitmap
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="0">
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              SnapGui
+            </Id>
+            <PackageId>
+              QtCameraPck
+            </PackageId>
+            <ComponentId>
+              SnapImageGui
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="8">
+                <AttributeInfo>
+                  <Id>
+                    Bitmap
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      Bitmap
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    BitmapAcquisition
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    BitmapAcquisition
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    BitmapLoader
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    BitmapLoader
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    LiveInterval
+                  </Id>
+                  <Type>
+                    Real
+                  </Type>
+                  <ExportId>
+                    LiveInterval
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    ParamsLoader
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    ParamsLoader
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    ParamsSet
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    ParamsSet
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    ParamsSetGui
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    ParamsSetGui
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    SlaveSceneExtender
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    SlaveSceneExtender
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              SnapTab
+            </Id>
+            <PackageId>
+              QtViewPck
+            </PackageId>
+            <ComponentId>
+              SceneConnector
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="2">
+                <AttributeInfo>
+                  <Id>
+                    ExtenderGui
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      SnapGui
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    SceneGui
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      View
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              View
+            </Id>
+            <PackageId>
+              QtViewPck
+            </PackageId>
+            <ComponentId>
+              ViewProvider
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="3">
+                <AttributeInfo>
+                  <Id>
+                    BackgroundMode
+                  </Id>
+                  <Type>
+                    Integer
+                  </Type>
+                  <ExportId>
+                    ViewBackgroundMode
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    FitMode
+                  </Id>
+                  <Type>
+                    Integer
+                  </Type>
+                  <ExportId>
+                    ViewFitMode
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    ZoomToFitEnabled
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    ViewZoomToFitEnabled
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+        </ElementsList>
+        <EmbeddedRegistriesList count="0">
+        </EmbeddedRegistriesList>
+        <ExportedInterfaces count="2">
+          <Interface>
+            <InterfaceId>
+              ibase::ICommandsProvider
+            </InterfaceId>
+            <ComponentId>
+              View
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              iqtgui::IGuiObject
+            </InterfaceId>
+            <ComponentId>
+              SnapTab
+            </ComponentId>
+          </Interface>
+        </ExportedInterfaces>
+        <ExportedComponents count="1">
+          <Component>
+            <ExportedId>
+              VisualStatus
+            </ExportedId>
+            <ComponentId>
+              SnapTab/VisualStatus
+            </ComponentId>
+          </Component>
+        </ExportedComponents>
+        <Description>
+          
+        </Description>
+        <Keywords>
+          
+        </Keywords>
+      </Data>
+    </EmbeddedRegistry>
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         StandaloneApp
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ibase::IApplicationInfo
-      </InterfaceId>
-      <ComponentId>
-        VersionInfo
       </ComponentId>
     </Interface>
     <Interface>
@@ -942,7 +1080,23 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        ApplicationInfo
+      </ExportedId>
+      <ComponentId>
+        StandaloneApp/ApplicationInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Log
+      </ExportedId>
+      <ComponentId>
+        Log
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     
