@@ -28,7 +28,7 @@ bool CExternalFileConverterComp::ConvertFiles(
 		return false;
 	}
 
-	if (m_executablePathCompPtr->GetPathType() != iprm::IFileNameParam::PT_FILE){
+	if (m_executablePathCompPtr->GetPathType() != ifile::IFileNameParam::PT_FILE){
 		SendErrorMessage(0, "Wrong executable path type. Must be path to a file.");
 
 		return false;

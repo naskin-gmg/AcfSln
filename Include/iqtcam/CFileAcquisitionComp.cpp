@@ -47,7 +47,7 @@ int CFileAcquisitionComp::DoProcessing(
 	}
 
 	QString filesPath = *m_defaultDirAttrPtr;
-	iprm::TParamsPtr<iprm::IFileNameParam> loaderParamsPtr;
+	iprm::TParamsPtr<ifile::IFileNameParam> loaderParamsPtr;
 	if (paramsPtr != NULL){
 		loaderParamsPtr.Init(paramsPtr, *m_parameterIdAttrPtr);
 		if (loaderParamsPtr.IsValid()){

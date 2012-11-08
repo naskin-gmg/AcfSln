@@ -9,7 +9,7 @@
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iproc/IProcessor.h"
 
@@ -224,9 +224,9 @@ QStringList CHotfolderTaskManagerComp::GetInputDirectories() const
 			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
 			I_ASSERT(inputDirectoryParamPtr != NULL);
 
-			const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
+			const ifile::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const ifile::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
 			I_ASSERT(monitoringDirectoryPtr != NULL);
-			I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
+			I_ASSERT(monitoringDirectoryPtr->GetPathType() == ifile::IFileNameParam::PT_DIRECTORY);
 
 			inputDirectories.push_back(monitoringDirectoryPtr->GetPath());
 		}
@@ -244,9 +244,9 @@ const iprm::IParamsSet* CHotfolderTaskManagerComp::GetMonitoringParamsSet(const 
 			iprm::IParamsSet* inputDirectoryParamPtr = m_inputDirectoriesManagerCompPtr->GetParamsSet(inputIndex);
 			I_ASSERT(inputDirectoryParamPtr != NULL);
 
-			const iprm::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const iprm::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
+			const ifile::IFileNameParam* monitoringDirectoryPtr = dynamic_cast<const ifile::IFileNameParam*>(inputDirectoryParamPtr->GetParameter("DirectoryPath"));
 			I_ASSERT(monitoringDirectoryPtr != NULL);
-			I_ASSERT(monitoringDirectoryPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY);
+			I_ASSERT(monitoringDirectoryPtr->GetPathType() == ifile::IFileNameParam::PT_DIRECTORY);
 
 			if (monitoringDirectoryPtr->GetPath() == directoryPath){
 				return inputDirectoryParamPtr;

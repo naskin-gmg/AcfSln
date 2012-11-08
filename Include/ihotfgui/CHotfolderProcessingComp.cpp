@@ -10,7 +10,7 @@
 // ACF includes
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 #include "iproc/IProcessor.h"
 
 

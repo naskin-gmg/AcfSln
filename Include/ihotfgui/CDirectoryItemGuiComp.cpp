@@ -43,7 +43,7 @@ bool CDirectoryItemGuiComp::SetSelectedOptionIndex(int index)
 
 			m_hotfolderInputName = setName;
 
-			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(*m_directoryPathIdAttrPtr));
+			const ifile::IFileNameParam* fileNameParamPtr = dynamic_cast<const ifile::IFileNameParam*>(paramSetPtr->GetParameter(*m_directoryPathIdAttrPtr));
 			if (fileNameParamPtr != NULL){
 				m_directoryPath = fileNameParamPtr->GetPath();
 			}

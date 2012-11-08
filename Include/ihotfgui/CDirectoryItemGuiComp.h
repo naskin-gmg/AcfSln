@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "iprm/IParamsManager.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 #include "iprm/ISelectionParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"

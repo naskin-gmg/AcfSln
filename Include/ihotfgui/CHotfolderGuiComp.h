@@ -14,7 +14,7 @@
 #include "ibase/ICommandsProvider.h"
 
 #include "iprm/IParamsManager.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/IIconProvider.h"
 #include "iqtgui/IDialog.h"

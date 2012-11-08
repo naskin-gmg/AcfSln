@@ -5,7 +5,7 @@
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "imm/IMediaController.h"
 
@@ -54,7 +54,7 @@ private:
 	I_REF(iqtgui::IGuiObject, m_videoGuiCompPtr);
 	I_REF(iqtgui::IGuiObject, m_urlParamsGuiCompPtr);
 	I_REF(iqtgui::IGuiObject, m_controllerBarGuiCompPtr);
-	I_REF(iprm::IFileNameParam, m_urlParamCompPtr);
+	I_REF(ifile::IFileNameParam, m_urlParamCompPtr);
 	I_REF(imod::IModel, m_urlParamModelCompPtr);
 };
 

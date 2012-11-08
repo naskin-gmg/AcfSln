@@ -10,7 +10,7 @@
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/INameParam.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 
 namespace ifileproc
@@ -66,7 +66,7 @@ private Q_SLOTS:
 	void OnReadyReadStandardOutput();
 
 private:
-	I_REF(iprm::IFileNameParam, m_executablePathCompPtr);
+	I_REF(ifile::IFileNameParam, m_executablePathCompPtr);
 	I_ATTR(QString, m_defaultProcessArgumentsAttrPtr);
 	I_ATTR(QByteArray, m_processArgumentsParamsIdAttrPtr);
 	I_MULTIREF(iprm::INameParam, m_additionalArgumentsCompPtr);

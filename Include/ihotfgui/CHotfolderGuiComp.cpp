@@ -301,7 +301,7 @@ void CHotfolderGuiComp::RebuildItemList()
 
 			iprm::IParamsSet* paramSetPtr = m_inputDirectoriesParamsManagerCompPtr->GetParamsSet(setIndex);
 
-			const iprm::IFileNameParam* fileNameParamPtr = dynamic_cast<const iprm::IFileNameParam*>(paramSetPtr->GetParameter(*m_directoryPathIdAttrPtr));
+			const ifile::IFileNameParam* fileNameParamPtr = dynamic_cast<const ifile::IFileNameParam*>(paramSetPtr->GetParameter(*m_directoryPathIdAttrPtr));
 			if (fileNameParamPtr != NULL){
 				QString directoryPath = fileNameParamPtr->GetPath();
 				DirectoryItem* directoryItemPtr = new DirectoryItem(*this, setIndex, QDir(directoryPath), FileList);

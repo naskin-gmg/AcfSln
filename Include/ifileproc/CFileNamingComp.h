@@ -7,7 +7,7 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 
 // AcfSln includes
@@ -42,7 +42,7 @@ public:
 
 private:
 	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);
-	I_REF(iprm::IFileNameParam, m_directoryPathCompPtr);
+	I_REF(ifile::IFileNameParam, m_directoryPathCompPtr);
 	I_REF(ifileproc::IFileNamingParams, m_fileNamingParamsCompPtr);
 };
 

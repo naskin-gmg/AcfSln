@@ -9,7 +9,7 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
 #include "iqtex/Generated/Ui_CTcpTerminalGuiComp.h"
@@ -61,7 +61,7 @@ protected slots:
 	void OnStateChanged(QAbstractSocket::SocketState socketState);
 
 private:
-	I_REF(iprm::IFileNameParam, m_urlParamCompPtr);
+	I_REF(ifile::IFileNameParam, m_urlParamCompPtr);
 	I_REF(imod::IModel, m_urlParamModelCompPtr);
 	I_MULTIATTR(QString, m_presetTextsAttrPtr);
 

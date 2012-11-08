@@ -511,7 +511,7 @@ void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* m
 {
 	I_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
-		const iprm::IFileNameParam* directoryPathPtr = dynamic_cast<const iprm::IFileNameParam*>(modelPtr);
+		const ifile::IFileNameParam* directoryPathPtr = dynamic_cast<const ifile::IFileNameParam*>(modelPtr);
 		I_ASSERT(directoryPathPtr != NULL);
 		if (directoryPathPtr != NULL){
 			bool needRestart = m_parent.isRunning();

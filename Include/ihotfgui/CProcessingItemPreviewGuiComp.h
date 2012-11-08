@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "imod/IModel.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/IIconProvider.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -59,9 +59,9 @@ private:
 	I_REF(iqtgui::IGuiObject, m_inputPreviewGuiCompPtr);
 	I_REF(imod::IObserver, m_outputPreviewObserverCompPtr);
 	I_REF(iqtgui::IGuiObject, m_outputPreviewGuiCompPtr);
-	I_REF(iprm::IFileNameParam, m_inputFileNameParamCompPtr);
+	I_REF(ifile::IFileNameParam, m_inputFileNameParamCompPtr);
 	I_REF(imod::IModel, m_inputFileNameParamModelCompPtr);
-	I_REF(iprm::IFileNameParam, m_outputFileNameParamCompPtr);
+	I_REF(ifile::IFileNameParam, m_outputFileNameParamCompPtr);
 	I_REF(imod::IModel, m_outputFileNameParamModelCompPtr);
 };
 

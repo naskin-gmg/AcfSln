@@ -9,7 +9,7 @@
 
 // ACF includes
 #include "iser/IFileLoader.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -38,7 +38,7 @@ public:
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
-		I_ASSIGN(m_parameterIdAttrPtr, "DirParamId", "Id used to get directory parameter (iprm::IFileNameParam)", true, "FileBitmapAcquisition");
+		I_ASSIGN(m_parameterIdAttrPtr, "DirParamId", "Id used to get directory parameter (ifile::IFileNameParam)", true, "FileBitmapAcquisition");
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
 	I_END_COMPONENT;
@@ -77,7 +77,7 @@ private:
 	I_ATTR(QString, m_defaultDirAttrPtr);
 	I_ATTR(QByteArray, m_parameterIdAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
-	I_REF(iprm::IFileNameParam, m_lastFileNameCompPtr);
+	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
 
 	QMutex m_lock;
 };
