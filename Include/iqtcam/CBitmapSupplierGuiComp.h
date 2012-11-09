@@ -9,7 +9,7 @@
 #include "iser/IFileLoader.h"
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -73,7 +73,7 @@ protected:
 private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 
-	imod::TModelWrap<iqt::CBitmap> m_bitmap;
+	imod::TModelWrap<iimg::CBitmap> m_bitmap;
 
 	QTimer m_timer;
 };

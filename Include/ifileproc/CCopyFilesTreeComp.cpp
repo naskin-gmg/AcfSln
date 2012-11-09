@@ -6,7 +6,7 @@
 
 
 // ACF includes
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 
 namespace ifileproc
@@ -40,14 +40,14 @@ bool CCopyFilesTreeComp::ConvertFiles(
 		excludeFilters << excludeFilter;
 	}
 
-	QDir inputDir(iqt::CSystem::GetEnrolledPath(inputPath));
+	QDir inputDir(istd::CSystem::GetEnrolledPath(inputPath));
 	if (m_inputSubdirAttrPtr.IsValid() && !(*m_inputSubdirAttrPtr).isEmpty()){
-		inputDir.setPath(inputDir.filePath(iqt::CSystem::GetEnrolledPath(*m_inputSubdirAttrPtr)));
+		inputDir.setPath(inputDir.filePath(istd::CSystem::GetEnrolledPath(*m_inputSubdirAttrPtr)));
 	}
 
-	QDir outputDir(iqt::CSystem::GetEnrolledPath(outputPath));
+	QDir outputDir(istd::CSystem::GetEnrolledPath(outputPath));
 	if (m_outputSubdirAttrPtr.IsValid() && !(*m_outputSubdirAttrPtr).isEmpty()){
-		outputDir.setPath(outputDir.filePath(iqt::CSystem::GetEnrolledPath(*m_outputSubdirAttrPtr)));
+		outputDir.setPath(outputDir.filePath(istd::CSystem::GetEnrolledPath(*m_outputSubdirAttrPtr)));
 	}
 
 	SendVerboseMessage(QString("Copy files from %1 to %2").arg(inputPath).arg(outputPath));

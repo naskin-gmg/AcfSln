@@ -32,7 +32,7 @@
         BitmapLoader
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         BitmapLoader
@@ -214,7 +214,7 @@
         InputData
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         Bitmap

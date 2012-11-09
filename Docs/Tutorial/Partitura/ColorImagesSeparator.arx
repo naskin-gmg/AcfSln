@@ -72,7 +72,7 @@
         Bitmap
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         Bitmap

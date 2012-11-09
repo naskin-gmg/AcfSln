@@ -8,7 +8,7 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 
 #include "iqtmm/iqtmm.h"
 
@@ -61,7 +61,7 @@ private:
 	I_ATTR(int, m_bitmapHeightAttrPtr);
 
 	mutable QString m_lastFilePath;
-	mutable iqt::CBitmap m_lastBitmap;
+	mutable iimg::CBitmap m_lastBitmap;
 };
 
 

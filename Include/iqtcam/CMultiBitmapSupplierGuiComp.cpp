@@ -181,7 +181,7 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 
 	// create bitmap thumbnails
 	for (int bitmapIndex = 0; bitmapIndex < bitmapsCount; bitmapIndex++){
-		const iqt::CBitmap* bitmapPtr = dynamic_cast<const iqt::CBitmap*> (providerPtr->GetBitmap(bitmapIndex));
+		const iimg::CBitmap* bitmapPtr = dynamic_cast<const iimg::CBitmap*> (providerPtr->GetBitmap(bitmapIndex));
 		if (bitmapPtr != NULL){
 			const QImage& image = bitmapPtr->GetQImage();
 			QPixmap iconPixmap;

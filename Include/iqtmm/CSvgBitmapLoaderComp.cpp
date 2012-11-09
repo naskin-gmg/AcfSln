@@ -9,8 +9,7 @@
 
 // ACF includes
 #include "iimg/IBitmap.h"
-
-#include "iqt/IQImageProvider.h"
+#include "iimg/IQImageProvider.h"
 
 
 namespace iqtmm

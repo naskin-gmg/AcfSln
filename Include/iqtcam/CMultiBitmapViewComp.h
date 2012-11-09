@@ -18,7 +18,7 @@
 #include <iqt2d/IViewExtender.h>
 #include <iqt2d/IViewProvider.h>
 #include <iview/CConsoleGui.h>
-#include <iqt/CBitmap.h>
+#include <iimg/CBitmap.h>
 
 // ACF-Solutions includes
 #include <iipr/IMultiBitmapProvider.h>
@@ -96,7 +96,7 @@ protected:
 
 	protected:
 		iview::CImageShape m_backgroundShape;
-		imod::TModelWrap<iqt::CBitmap> m_backgroundModel;
+		imod::TModelWrap<iimg::CBitmap> m_backgroundModel;
 
 		mutable iview::CConsoleGui m_console;
 		QLabel* m_statusLabel;

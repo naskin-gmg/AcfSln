@@ -32,7 +32,7 @@
         BitmapGray
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         Bitmap
@@ -53,7 +53,7 @@
         BitmapSmooth
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         Bitmap

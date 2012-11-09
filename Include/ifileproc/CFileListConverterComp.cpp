@@ -27,7 +27,7 @@ int CFileListConverterComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const ibase::IFileListProvider* inputFileListProviderPtr = dynamic_cast<const ibase::IFileListProvider*>(inputPtr);
+	const ifile::IFileListProvider* inputFileListProviderPtr = dynamic_cast<const ifile::IFileListProvider*>(inputPtr);
 	if (inputFileListProviderPtr == NULL){
 		return TS_INVALID;
 	}

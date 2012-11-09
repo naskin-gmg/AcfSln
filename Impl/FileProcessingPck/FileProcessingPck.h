@@ -30,7 +30,7 @@ typedef icomp::TModelCompWrap<ifileproc::CFileNamingParamsComp> FileNamingParams
 typedef ifileproc::CFileListConverterComp FileListConverter;
 
 typedef icomp::TMakeComponentWrap<
-			ifileproc::CFilePathesContainer, ibase::IFileListProvider, istd::IChangeable> FilesContainer;
+			ifileproc::CFilePathesContainer, ifile::IFileListProvider, istd::IChangeable> FilesContainer;
 
 typedef ifileproc::CExternalFileConverterComp ExternalFileConverter;
 typedef icomp::TModelCompWrap<ifileproc::CSelectableFileConverterComp> SelectableFileConverter;

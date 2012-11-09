@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 #include "iproc/TSyncProcessorCompBase.h"
-#include "ibase/IFileListProvider.h"
+#include "ifile/IFileListProvider.h"
 #include "ibase/IFileConvertCopy.h"
 
 // ACF-Solutions includes

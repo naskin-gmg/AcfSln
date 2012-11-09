@@ -6,7 +6,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 
 // ACF-Solutions includes
 #include "iipr/IMultiBitmapProvider.h"
@@ -66,7 +66,7 @@ private:
 	/** Fetches a selected bitmap from IMultiBitmapProvider */
 	void SelectBitmap(int bitmapIdx);
 
-	imod::TModelWrap<iqt::CBitmap> m_bitmap;
+	imod::TModelWrap<iimg::CBitmap> m_bitmap;
 	QList<QIcon>m_icons;
 
 	QTimer m_timer;
