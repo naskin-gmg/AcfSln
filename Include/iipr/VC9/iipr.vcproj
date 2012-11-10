@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCheckerboardPatternGeneratorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCircleFinderParams.cpp"
 				>
 			</File>
@@ -384,6 +388,10 @@
 			</File>
 			<File
 				RelativePath="..\CCaliperParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCheckerboardPatternGeneratorComp.h"
 				>
 			</File>
 			<File

@@ -203,6 +203,11 @@ I_EXPORT_COMPONENT(
 			"Provider of a single (selected) calibration from a list of calibrations",
 			"Multi Single Calibration Supplier Provider" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			CheckerboardPatternGenerator, 
+			"Generator of checker board pattern bitmap",
+			"Generator Bitmap Processor" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 
