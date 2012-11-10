@@ -37,7 +37,7 @@ ihotf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::AddHotfolder(const QStrin
 {
 	HotfolderItem* newHotfolderInfoPtr = CreateHotfolder(hotfolderName, hotfolderId);
 	if (newHotfolderInfoPtr != NULL){
-		istd::CChangeNotifier changePtr(this, CF_HOTFOLDER_ADDED);
+		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_HOTFOLDER_ADDED);
 
 		m_hotfolders.PushBack(newHotfolderInfoPtr);
 

@@ -61,7 +61,7 @@ const ihotf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingIt
 
 	ProcessingItem* itemPtr = new ProcessingItem;
 
-	istd::CChangeNotifier changePtr(this, CF_FILE_ADDED, itemPtr);
+	istd::CChangeNotifier changePtr(this, CF_MODEL | CF_FILE_ADDED, itemPtr);
 
 	itemPtr->SetInputFile(inputFilePath);
 	itemPtr->SetOutputFile(outputFilePath);
@@ -85,7 +85,7 @@ void CHotfolderProcessingInfo::RemoveProcessingItem(ihotf::IHotfolderProcessingI
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(this, CF_FILE_REMOVED, fileItemPtr);
+	istd::CChangeNotifier changePtr(this, CF_MODEL | CF_FILE_REMOVED, fileItemPtr);
 
 	if (!m_processingItems.Remove(fileItemPtr)){
 		changePtr.Abort();
@@ -118,7 +118,7 @@ bool CHotfolderProcessingInfo::IsWorking() const
 void CHotfolderProcessingInfo::SetWorking(bool working)
 {
 	if (working != m_isWorking){
-		istd::CChangeNotifier changePtr(this, CF_WORKING_STATE_CHANGED);
+		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_WORKING_STATE_CHANGED);
 	
 		m_isWorking = working;
 	}
@@ -138,7 +138,7 @@ bool CHotfolderProcessingInfo::Serialize(iser::IArchive& archive)
 		SetWorking(false);
 	}
 
-	istd::CChangeNotifier changePtr(NULL, CF_CREATE);
+	istd::CChangeNotifier changePtr(NULL, CF_MODEL | CF_CREATE);
 
 	static iser::CArchiveTag isWorkingTag("Working", "Hotfolder is in running state");
 	retVal = retVal && archive.BeginTag(isWorkingTag);

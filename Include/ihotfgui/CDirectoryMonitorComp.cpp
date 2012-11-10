@@ -259,7 +259,7 @@ void CDirectoryMonitorComp::run()
 		m_folderChanges.modifiedFiles = modifiedFiles;
 		m_folderChanges.attributeChangedFiles = attributeChangedFiles;
 
-		int changeFlags = 0;
+		int changeFlags = istd::IChangeable::CF_MODEL;
 
 		if (!addedFiles.isEmpty()){
 			changeFlags |= ihotf::IFileSystemChangeStorage::CF_NEW;

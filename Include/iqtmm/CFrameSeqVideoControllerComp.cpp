@@ -72,7 +72,7 @@ QString CFrameSeqVideoControllerComp::GetOpenedMediumUrl() const
 
 bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPlay)
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS | CF_MEDIA_POSITION);
+	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS | CF_MEDIA_POSITION);
 
 	m_mediumUrl = url;
 
@@ -97,7 +97,7 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPl
 
 void CFrameSeqVideoControllerComp::CloseMedium()
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
 
 	SetPlaying(false);
 }
@@ -111,7 +111,7 @@ bool CFrameSeqVideoControllerComp::IsPlaying() const
 
 bool CFrameSeqVideoControllerComp::SetPlaying(bool state)
 {
-	istd::CChangeNotifier notifier(this, CF_STATUS);
+	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
 
 	if (m_isPlaying != state){
 		m_isPlaying = state;
@@ -182,7 +182,7 @@ int CFrameSeqVideoControllerComp::GetCurrentFrame() const
 bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 {
 	if (frameIndex != m_currentFrameIndex){
-		istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
+		istd::CChangeNotifier notifier(this, CF_MODEL | CF_MEDIA_POSITION);
 
 		m_currentFrameIndex = frameIndex;
 
