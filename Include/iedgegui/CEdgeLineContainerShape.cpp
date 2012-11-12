@@ -112,30 +112,22 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
-	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
 	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
+
+	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
 	if (containerPtr != NULL){
 		for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 			const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
 
 			const i2d::ITransformation2d* calibrationPtr = line.GetCalibration();
-
 			int nodesCount = line.GetNodesCount();
-			if (nodesCount > 0){
-				istd::CIndex2d sp = GetScreenPosition(line.GetNode(0).GetPosition(), calibrationPtr).ToIndex2d();
-				if (boundingBox.IsEmpty()){
-					boundingBox = i2d::CRect(sp, sp);
-				}
-				else{
-					boundingBox.Union(sp);
-				}
 
-				for (int i = 1; i < nodesCount; i++){
-					sp = GetScreenPosition(line.GetNode(i).GetPosition(), calibrationPtr).ToIndex2d();
-					boundingBox.Union(sp);
-				}
+			for (int i = 0; i < nodesCount; i++){
+				istd::CIndex2d sp = GetScreenPosition(line.GetNode(i).GetPosition(), calibrationPtr).ToIndex2d();
+				boundingBox.Union(sp);
 			}
 		}
+
 		boundingBox.Expand(i2d::CRect(-5, -5, 5, 5));
 	}
 
