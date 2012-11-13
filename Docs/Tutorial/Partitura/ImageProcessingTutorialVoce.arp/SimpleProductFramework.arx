@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2613
+          2646
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="10">
     <Element>
       <Id>
         AboutDialog
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -66,6 +66,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              DialogIconPath
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              AboutDialogIconPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DialogTitle
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              AboutDialogTitle
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               LogoPath
             </Id>
             <Type>
@@ -73,6 +105,118 @@
             </Type>
             <ExportId>
               AboutLogoPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowApplicationName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowApplicationName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowApplicationSubName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowApplicationSubName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowLegalCopyright
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowLegalCopyright
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowProductName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowProductName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowProductType
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowProductType
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionIds
+            </Id>
+            <Type>
+              Integer[]
+            </Type>
+            <ExportId>
+              AboutVersionIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionNames
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              AboutVersionNames
             </ExportId>
             <Data>
               <IsEnabled>
@@ -217,7 +361,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               DefaultModel
@@ -254,6 +398,22 @@
               <Value>
                 2
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EditorVisualInfos
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              EditorVisualInfos
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -321,6 +481,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ResultShapeFactory
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SimpleShapeFactory
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -503,6 +682,27 @@
     </Element>
     <Element>
       <Id>
+        SimpleShapeFactory
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        SimpleShapeFactory
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         StandaloneApp
       </Id>
       <PackageId>
@@ -518,7 +718,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="15">
+        <AttributeInfoMap count="22">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -661,6 +861,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IsToolbarVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              IsToolbarVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               LegalCopyright
             </Id>
             <Type>
@@ -676,6 +892,22 @@
               <Value>
                 &#169; Copyright 2012 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              MainVersionId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -752,6 +984,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SplashTime
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              SplashTime
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              StyleSheet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               TitleFormat
             </Id>
             <Type>
@@ -759,6 +1023,54 @@
             </Type>
             <ExportId>
               TitleFormat
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TranslationManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              TranslationManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UiStartMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              UiStartMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseIconText
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseIconText
             </ExportId>
             <Data>
               <IsEnabled>
@@ -805,23 +1117,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              SlaveVersionInfo
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              SlaveVersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -842,7 +1138,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               FileExtensions
@@ -851,7 +1163,7 @@
               String[]
             </Type>
             <ExportId>
-              
+              XmlFileExtensions
             </ExportId>
             <Data>
               <IsEnabled>
@@ -881,6 +1193,27 @@
               <Value>
                 LogDock
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeDescriptions
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              XmlTypeDescriptions
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  Inspection parameters
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
