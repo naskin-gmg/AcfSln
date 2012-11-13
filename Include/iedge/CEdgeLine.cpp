@@ -198,6 +198,16 @@ void CEdgeLine::MoveCenterTo(const i2d::CVector2d& position)
 }
 
 
+i2d::CRectangle CEdgeLine::GetBoundingBox() const
+{
+	// TODO: implement bounding box of edge line better
+	i2d::CPolyline tempPolyline;
+	CopyToPolyline(tempPolyline);
+
+	return tempPolyline.GetBoundingBox();
+}
+
+
 bool CEdgeLine::Transform(
 			const i2d::ITransformation2d& transformation,
 			i2d::ITransformation2d::ExactnessMode /*mode*/,
