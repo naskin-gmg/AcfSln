@@ -7,7 +7,9 @@ namespace iedge
 
 CEdgeLine::CEdgeLine()
 :	m_isClosed(false),
+	m_areVolatileValid(true),
 	m_totalLength(0),
+	m_center(0, 0),
 	m_minWeight(0),
 	m_maxWeight(0)
 {
@@ -17,10 +19,11 @@ CEdgeLine::CEdgeLine()
 CEdgeLine::CEdgeLine(const CEdgeLine& edge)
 :	m_nodes(edge.m_nodes),
 	m_isClosed(false),
-	m_areVolatileValid(true),
-	m_totalLength(0),
-	m_minWeight(0),
-	m_maxWeight(0)
+	m_areVolatileValid(edge.m_areVolatileValid),
+	m_totalLength(edge.m_totalLength),
+	m_center(edge.m_center),
+	m_minWeight(edge.m_minWeight),
+	m_maxWeight(edge.m_maxWeight)
 {
 }
 
@@ -29,6 +32,8 @@ void CEdgeLine::Clear()
 {
 	m_nodes.clear();
 	m_isClosed = false;
+	m_areVolatileValid = true;
+	m_center.Reset();
 	m_totalLength = 0;
 	m_minWeight = 0;
 	m_maxWeight = 0;
@@ -52,6 +57,16 @@ void CEdgeLine::SetNode(int index, const CEdgeNode& node)
 	m_nodes[index] = node;
 
 	m_areVolatileValid = false;
+}
+
+
+void CEdgeLine::SetClosed(bool state)
+{
+	if (state != m_isClosed){
+		m_isClosed = state;
+
+		m_areVolatileValid = false;
+	}
 }
 
 
@@ -515,11 +530,11 @@ void CEdgeLine::CalcVolatile() const
 	int nodesCount = m_nodes.size();
 	if (nodesCount > 0){
 		const CEdgeNode& firstNode = m_nodes.first();
-		double lastWeight = firstNode.GetWeight();
-		i2d::CVector2d lastPosition = firstNode.GetPosition();
+		double prevWeight = firstNode.GetWeight();
+		i2d::CVector2d prevPosition = firstNode.GetPosition();
 
-		m_minWeight = lastWeight;
-		m_maxWeight = lastWeight;
+		m_minWeight = prevWeight;
+		m_maxWeight = prevWeight;
 		int segmentsCount = CEdgeLine::GetSegmentsCount();
 		if (segmentsCount > 0){
 			m_center.Reset();
@@ -532,35 +547,38 @@ void CEdgeLine::CalcVolatile() const
 						++segmentIndex){
 				const CEdgeNode& node = m_nodes.at((segmentIndex + 1) % nodesCount);
 
-				const i2d::CVector2d& position = node.GetPosition();
+				const i2d::CVector2d& nextPosition = node.GetPosition();
+				double nextWeight = node.GetWeight();
 
-				double segmentLength = lastPosition.GetDistance(position);
-				double weight = node.GetWeight();
+				i2d::CVector2d deltaLine = nextPosition - prevPosition;
+				double deltaWeight = nextWeight - prevWeight;
 
-				m_center = position * weight + lastPosition * lastWeight;
-				centerWeightSum += weight + lastWeight;
+				double segmentLength = deltaLine.GetLength();
+
+				m_center += (prevPosition * prevWeight + (deltaLine * prevWeight + prevPosition * deltaWeight) / 2.0 + deltaLine * deltaWeight / 3.0) * segmentLength;
+				centerWeightSum += (prevWeight + nextWeight) * segmentLength * 0.5;
 				m_totalLength += segmentLength;
 
-				if (weight < m_minWeight){
-					m_minWeight = weight;
+				if (nextWeight < m_minWeight){
+					m_minWeight = nextWeight;
 				}
-				else if (weight > m_maxWeight){
-					m_maxWeight = weight;
+				else if (nextWeight > m_maxWeight){
+					m_maxWeight = nextWeight;
 				}
 
-				lastPosition = position;
-				lastWeight = weight;
+				prevPosition = nextPosition;
+				prevWeight = nextWeight;
 			}
 
 			if (centerWeightSum > I_BIG_EPSILON){
 				m_center /= centerWeightSum;
 			}
 			else{
-				m_center = lastPosition;
+				m_center = prevPosition;
 			}
 		}
 		else{
-			m_center = lastPosition;
+			m_center = prevPosition;
 		}
 	}
 	else{
