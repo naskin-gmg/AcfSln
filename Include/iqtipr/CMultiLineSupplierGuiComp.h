@@ -94,8 +94,6 @@ protected:
 		iprm::ISelectionParam& m_lineSelection;
 	};
 
-	imod::TModelWrap<imeas::CSimpleNumericValueProvider> m_results;
-
 	imod::TModelWrap<LineSelection> m_lineSelection;
 
 	static iprm::ISelectionParam* ExtractLineSelection(CMultiLineSupplierGuiComp& component)

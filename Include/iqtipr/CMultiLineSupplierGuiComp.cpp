@@ -30,13 +30,6 @@ void CMultiLineSupplierGuiComp::on_TestButton_clicked()
 void CMultiLineSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
-
-	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObjectPtr());
-	I_ASSERT(objectPtr != NULL);
-
-	istd::CChangeNotifier changePtr(&m_results);
-
-	m_results.CopyFrom(*objectPtr);
 }
 
 
@@ -62,10 +55,21 @@ QWidget* CMultiLineSupplierGuiComp::GetParamsWidget() const
 
 void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
+	iproc::ISupplier* objectPtr = GetObjectPtr();
+	if (objectPtr == NULL){
+		return;
+	}
+	if (objectPtr->GetWorkStatus() != iproc::ISupplier::WS_OK){
+		return;
+	}
+
 	CShape* shapePtr = new CShape(m_lineSelection);
 	shapePtr->SetTransformMode(iview::CShapeControl::STM_SHAPE);
 
-	m_results.AttachObserver(shapePtr);
+	imod::IModel* modelPtr = GetModelPtr();
+	if (modelPtr != NULL){
+		modelPtr->AttachObserver(shapePtr);
+	}
 
 	result.PushBack(shapePtr);
 }

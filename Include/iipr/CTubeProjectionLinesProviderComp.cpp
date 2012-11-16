@@ -50,7 +50,10 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 		if (iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result)){
 			if (m_calibrationProviderCompPtr.IsValid()){
 				const i2d::ITransformation2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();
-				if (transformPtr != NULL){
+				if (transformPtr == NULL){
+					return WS_ERROR;
+				}
+				else{
 					for (int lineIndex = 0; lineIndex < result.count(); lineIndex++){
 						i2d::CLine2d& line = result[lineIndex];
 
@@ -72,8 +75,6 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 	return WS_CRITICAL;
 }
 
-
-// reimplemented (icomp::CComponentBase)
 
 // reimplemented (icomp::CComponentBase)
 

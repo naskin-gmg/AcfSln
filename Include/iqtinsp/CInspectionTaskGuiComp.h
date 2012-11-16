@@ -93,6 +93,7 @@ protected:
 private:
 	void AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex);
 	void UpdateTaskMessages();
+	void DoUpdateEditor(int taskIndex);
 	void ActivateTaskShapes(int taskIndex);
 	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
 

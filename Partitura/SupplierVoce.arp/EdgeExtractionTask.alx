@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2626
+          2630
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264195
+          264192
         </Number>
         <Description>
           Qt Framework
@@ -26,114 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="15">
-    <Element>
-      <ComponentName>
-        BitmapGray
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        100
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapSmooth
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        EdgesReductor
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FastEdgesExtractor
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        325
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RectImageSmoothProcessor
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         ProcessingParams
       </ComponentName>
       <X>
-        400
+        200
       </X>
       <X>
-        700
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RgbToGrayProcessor
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        100
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        EdgeReductionParams
-      </ComponentName>
-      <X>
-        950
-      </X>
-      <X>
-        700
+        600
       </X>
       <Note>
         
@@ -144,10 +46,24 @@
         GrayImageSupplier
       </ComponentName>
       <X>
-        400
+        350
       </X>
       <X>
-        100
+        225
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        EdgeExtractor
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <X>
+        600
       </X>
       <Note>
         
@@ -161,21 +77,7 @@
         150
       </X>
       <X>
-        575
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ReducedEdgesSupplier
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <X>
-        450
+        50
       </X>
       <Note>
         
@@ -186,58 +88,248 @@
         SmoothedImageSupplier
       </ComponentName>
       <X>
-        400
+        650
       </X>
       <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        EdgeExtractionParams
-      </ComponentName>
-      <X>
-        800
-      </X>
-      <X>
-        625
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ExtractedEdgesSupplier
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <X>
-        325
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SmoothParams
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        550
+        375
       </X>
       <Note>
         
       </Note>
     </Element>
   </PositionMap>
-  <EmbeddedRegistries count="0">
+  <EmbeddedRegistries count="4">
+    <EmbededRegistry>
+      <Id>
+        ProcessingParams
+      </Id>
+      <PositionMap count="4">
+        <Element>
+          <ComponentName>
+            ProcessingParams
+          </ComponentName>
+          <X>
+            525
+          </X>
+          <X>
+            200
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            EdgeReductionParams
+          </ComponentName>
+          <X>
+            825
+          </X>
+          <X>
+            450
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            EdgeExtractionParams
+          </ComponentName>
+          <X>
+            500
+          </X>
+          <X>
+            450
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            SmoothParams
+          </ComponentName>
+          <X>
+            175
+          </X>
+          <X>
+            450
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+      </PositionMap>
+      <EmbeddedRegistries count="0">
+      </EmbeddedRegistries>
+    </EmbededRegistry>
+    <EmbededRegistry>
+      <Id>
+        GrayImageSupplier
+      </Id>
+      <PositionMap count="3">
+        <Element>
+          <ComponentName>
+            BitmapGray
+          </ComponentName>
+          <X>
+            825
+          </X>
+          <X>
+            125
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            RgbToGrayProcessor
+          </ComponentName>
+          <X>
+            500
+          </X>
+          <X>
+            275
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            GrayImageSupplier
+          </ComponentName>
+          <X>
+            500
+          </X>
+          <X>
+            125
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+      </PositionMap>
+      <EmbeddedRegistries count="0">
+      </EmbeddedRegistries>
+    </EmbededRegistry>
+    <EmbededRegistry>
+      <Id>
+        EdgeExtractor
+      </Id>
+      <PositionMap count="4">
+        <Element>
+          <ComponentName>
+            EdgesReductor
+          </ComponentName>
+          <X>
+            725
+          </X>
+          <X>
+            325
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            FastEdgesExtractor
+          </ComponentName>
+          <X>
+            275
+          </X>
+          <X>
+            325
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            ReducedEdgesSupplier
+          </ComponentName>
+          <X>
+            725
+          </X>
+          <X>
+            225
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            ExtractedEdgesSupplier
+          </ComponentName>
+          <X>
+            275
+          </X>
+          <X>
+            225
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+      </PositionMap>
+      <EmbeddedRegistries count="0">
+      </EmbeddedRegistries>
+    </EmbededRegistry>
+    <EmbededRegistry>
+      <Id>
+        SmoothedImageSupplier
+      </Id>
+      <PositionMap count="3">
+        <Element>
+          <ComponentName>
+            BitmapSmooth
+          </ComponentName>
+          <X>
+            200
+          </X>
+          <X>
+            225
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            RectImageSmoothProcessor
+          </ComponentName>
+          <X>
+            550
+          </X>
+          <X>
+            400
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            SmoothedImageSupplier
+          </ComponentName>
+          <X>
+            550
+          </X>
+          <X>
+            225
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+      </PositionMap>
+      <EmbeddedRegistries count="0">
+      </EmbeddedRegistries>
+    </EmbededRegistry>
   </EmbeddedRegistries>
 </Acf>

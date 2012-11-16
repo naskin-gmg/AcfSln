@@ -448,13 +448,15 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CInspectionTaskGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CInspectionTaskGuiComp::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	UpdateVisualElements();
+	if (modelId == m_currentGuiIndex){
+		UpdateVisualElements();
 
-	UpdateTaskMessages();
+		UpdateTaskMessages();
 
-	ActivateTaskShapes(m_currentGuiIndex);
+		DoUpdateEditor(m_currentGuiIndex);
+	}
 }
 
 
@@ -570,6 +572,45 @@ void CInspectionTaskGuiComp::UpdateTaskMessages()
 }
 
 
+void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
+{
+	int extendersCount = m_editorViewExtendersCompPtr.GetCount();
+	int previewProvidersCount = m_previewSceneProvidersCompPtr.GetCount();
+
+	iview::IShapeView* viewPtr = NULL;
+
+	if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < extendersCount) && (m_currentGuiIndex < previewProvidersCount)){
+		iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[m_currentGuiIndex];
+		iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[m_currentGuiIndex];
+		if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
+			extenderPtr->RemoveItemsFromScene(previewProviderPtr);
+
+			viewPtr = previewProviderPtr->GetView();
+		}
+	}
+
+	if (taskIndex >= 0){
+		// add shapes from editor to view
+		if ((taskIndex < extendersCount) && (taskIndex < previewProvidersCount)){
+			iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[taskIndex];
+			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
+			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
+				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
+
+				viewPtr = previewProviderPtr->GetView();
+			}
+		}
+	}
+
+	// Activate task related shapes:
+	ActivateTaskShapes(taskIndex);
+
+	if (viewPtr != NULL){
+		viewPtr->Update();
+	}
+}
+
+
 void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 {
 	if (!IsGuiCreated()){
@@ -638,43 +679,9 @@ QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::Inform
 void CInspectionTaskGuiComp::OnEditorChanged(int index)
 {
 	if (index != m_currentGuiIndex){
-		int extendersCount = m_editorViewExtendersCompPtr.GetCount();
-		int previewProvidersCount = m_previewSceneProvidersCompPtr.GetCount();
-
-		iview::IShapeView* viewPtr = NULL;
-
-		if ((m_currentGuiIndex >= 0) && (m_currentGuiIndex < extendersCount) && (m_currentGuiIndex < previewProvidersCount)){
-			iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[m_currentGuiIndex];
-			iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[m_currentGuiIndex];
-			if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
-				extenderPtr->RemoveItemsFromScene(previewProviderPtr);
-				
-				viewPtr = previewProviderPtr->GetView();
-			}
-		}
-
-		if (index >= 0){
-			// add shapes from editor to view
-			if ((index < extendersCount) && (index < previewProvidersCount)){
-				iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[index];
-				iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[index];
-				if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
-					extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
-
-					viewPtr = previewProviderPtr->GetView();
-				}
-			}
-		}
-
-		// Activate task related shapes:
-		ActivateTaskShapes(index);
-
-		if (viewPtr != NULL){
-			viewPtr->Update();
-		}
+		DoUpdateEditor(index);
 
 		m_currentGuiIndex = index;
-
 		int stackIndex = m_tabToStackIndexMap[index];
 		PreviewStack->setCurrentIndex(stackIndex);
 
