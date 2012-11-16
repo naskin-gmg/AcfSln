@@ -27,8 +27,8 @@ public:
 	I_BEGIN_COMPONENT(CProcessingResultsReviewComp);
 		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
 		I_ASSIGN(m_inputPathObjectPtr, "InputPathObject", "Path to files", true, "InputPathObject");
-		I_ASSIGN(m_processingInputFilePath, "ProcessingInputFilePath ", "Full path to currently processing file", true, "ProcessingInputFilePath");
-		I_ASSIGN(m_outputSupplierPtr, "OutputSupplier ", "Supplier to process files", true, "OutputSupplier");
+		I_ASSIGN(m_processingInputFilePathPtr, "ProcessingInputFilePath", "Full path to currently processing file", true, "ProcessingInputFilePath");
+		I_ASSIGN(m_outputSupplierPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
 		I_ASSIGN_TO(m_outputSupplierSerializerPtr, m_outputSupplierPtr, true);		
 		I_ASSIGN(m_outputFileSerializerPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");		
 	I_END_COMPONENT;
@@ -53,12 +53,10 @@ private:
 
 	protected:
 		const CProcessingResultsReviewComp* m_parentPtr;
-	};
-
-	friend class CProcessingResultsReviewSerializer;
-
+	};	
+	
 	I_REF(ifile::IFileNameParam, m_inputPathObjectPtr);
-	I_REF(ifile::IFileNameParam, m_processingInputFilePath);
+	I_REF(ifile::IFileNameParam, m_processingInputFilePathPtr);
 	I_REF(iproc::ISupplier, m_outputSupplierPtr);
 	I_REF(iser::ISerializable, m_outputSupplierSerializerPtr);
 	I_REF(iser::IFileLoader, m_outputFileSerializerPtr);	

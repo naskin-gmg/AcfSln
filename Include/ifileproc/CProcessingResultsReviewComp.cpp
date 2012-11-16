@@ -24,9 +24,10 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsPtr*/) const
 {
-	if(		!m_inputPathObjectPtr.IsValid() ||
-			!m_processingInputFilePath.IsValid() ||
+	if(		!m_inputPathObjectPtr.IsValid() || 
+			!m_processingInputFilePathPtr.IsValid() ||
 			!m_outputSupplierPtr.IsValid() ||
+			!m_outputSupplierSerializerPtr.IsValid() ||
 			!m_outputFileSerializerPtr.IsValid()){
 
 		return false;
@@ -63,6 +64,7 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 	static iser::CArchiveTag outputDataTag("OutputData", "OutputData");
 
 	bool retVal = true;
+	bool a = archive.IsStoring();
 
 	int pathType = m_parentPtr->m_inputPathObjectPtr->GetPathType();
 
@@ -72,7 +74,7 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 
 		QString filePath = m_parentPtr->m_inputPathObjectPtr->GetPath();
 
-		m_parentPtr->m_processingInputFilePath->SetPath(filePath);
+		m_parentPtr->m_processingInputFilePathPtr->SetPath(filePath);
 
 		m_parentPtr->m_outputSupplierPtr->ClearWorkResults();
 		m_parentPtr->m_outputSupplierPtr->EnsureWorkInitialized();
@@ -103,8 +105,8 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 
 		return retVal;
 	}
-	else if(pathType == ifile::IFileNameParam::PT_DIRECTORY){
-		QDir dir(m_parentPtr->m_inputPathObjectPtr->GetPath());		
+	else if(pathType == ifile::IFileNameParam::PT_DIRECTORY){		
+		QDir dir(m_parentPtr->m_inputPathObjectPtr->GetPath());
 		
 		QStringList fileList = dir.entryList(QDir::Files, QDir::Name);
 
@@ -118,7 +120,7 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 
 			QString filePath = dir.filePath(*iter);
 			
-			m_parentPtr->m_processingInputFilePath->SetPath(filePath);
+			m_parentPtr->m_processingInputFilePathPtr->SetPath(filePath);
 
 			m_parentPtr->m_outputSupplierPtr->ClearWorkResults();
 			m_parentPtr->m_outputSupplierPtr->EnsureWorkInitialized();
