@@ -58,6 +58,11 @@ I_EXPORT_COMPONENT(
 			"Composed file copy",
 			"Copy Dir Files Composed Set List Multiple" IM_TAG("File Processing"));
 
+I_EXPORT_COMPONENT(
+			ProcessingResultsReview,
+			"Process files and saves results to a report file",
+			"Processing Result Review File" IM_TAG("File Processing"));
+
 
 } // namespace FileProcessingPck
 

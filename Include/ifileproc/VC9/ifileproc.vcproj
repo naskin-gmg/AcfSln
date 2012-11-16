@@ -238,6 +238,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProcessingResultsReviewComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableFileConverterComp.cpp"
 				>
 			</File>
@@ -276,6 +280,10 @@
 			</File>
 			<File
 				RelativePath="..\CFilePathesContainer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessingResultsReviewComp.h"
 				>
 			</File>
 			<File
