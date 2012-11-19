@@ -143,6 +143,17 @@ QByteArray CSelectableFileConverterComp::GetOptionId(int /*index*/) const
 }
 
 
+bool CSelectableFileConverterComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
+}
+
+
+void CSelectableFileConverterComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
+{
+}
+
+
 } // namespace ifileproc
 
 

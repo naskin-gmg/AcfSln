@@ -134,6 +134,17 @@ QByteArray CIterativeProcessorComp::GetOptionId(int /*index*/) const
 }
 
 
+bool CIterativeProcessorComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
+}
+
+
+void CIterativeProcessorComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
+{
+}
+
+
 // protected methods
 
 int CIterativeProcessorComp::ProcessSlave(

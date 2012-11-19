@@ -140,6 +140,17 @@ QByteArray CColorBitmapSeparatorSupplierComp::GetOptionId(int index) const
 }
 
 
+bool CColorBitmapSeparatorSupplierComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
+}
+
+
+void CColorBitmapSeparatorSupplierComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
+{
+}
+
+
 // reimplemented (iproc::TSupplierCompWrap)
 
 int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
