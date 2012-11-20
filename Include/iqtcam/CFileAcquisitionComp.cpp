@@ -37,7 +37,7 @@ int CFileAcquisitionComp::DoProcessing(
 	QMutexLocker lock(&m_lock);
 
 	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
-	I_ASSERT(m_parameterIdAttrPtr.IsValid());	// obligatory attribute
+	I_ASSERT(m_pathParamIdAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_maxCachedDirectoriesAttrPtr.IsValid());	// obligatory attribute
 
 	if (!m_bitmapLoaderCompPtr.IsValid()){
@@ -46,52 +46,58 @@ int CFileAcquisitionComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	QString filesPath = *m_defaultDirAttrPtr;
-	iprm::TParamsPtr<ifile::IFileNameParam> loaderParamsPtr;
-	if (paramsPtr != NULL){
-		loaderParamsPtr.Init(paramsPtr, *m_parameterIdAttrPtr);
-		if (loaderParamsPtr.IsValid()){
-			filesPath = loaderParamsPtr->GetPath();
-		}
-		else{
-			SendVerboseMessage("Bitmap directory parameter not found in the parameter set");
-		}
+	QString inputPath = *m_defaultDirAttrPtr;
+	iprm::TParamsPtr<ifile::IFileNameParam> loaderParamsPtr(paramsPtr, m_pathParamIdAttrPtr, m_defaultDirParamCompPtr, false);
+	if (loaderParamsPtr.IsValid()){
+		inputPath = loaderParamsPtr->GetPath();
 	}
-	QDir directory(filesPath);
 
-	QStringList extensions;
-	m_bitmapLoaderCompPtr->GetFileExtensions(extensions, iser::IFileLoader::QF_LOAD);
+	QString imageFileName;
 
-	ParamsInfo& info = m_dirInfos[filesPath];
-	if (info.filesIter == info.files.end()){
-		QStringList nameFilters;
+	QFileInfo inputPathInfo(inputPath);
+	if (inputPathInfo.isDir()){
+		QDir directory(inputPath);
 
-		if (!extensions.isEmpty()){
-			for (		QStringList::iterator iter = extensions.begin();
-						iter != extensions.end();
-						++iter){
-				nameFilters << (QString("*.") + *iter);
+		QStringList extensions;
+		m_bitmapLoaderCompPtr->GetFileExtensions(extensions, iser::IFileLoader::QF_LOAD);
+
+		ParamsInfo& info = m_dirInfos[inputPath];
+		if (info.filesIter == info.files.end()){
+			QStringList nameFilters;
+
+			if (!extensions.isEmpty()){
+				for (		QStringList::iterator iter = extensions.begin();
+							iter != extensions.end();
+							++iter){
+					nameFilters << (QString("*.") + *iter);
+				}
 			}
-		}
-		else{
-			nameFilters << "*.bmp";
-			nameFilters << "*.png";
-			nameFilters << "*.jpg";
+			else{
+				nameFilters << "*.bmp";
+				nameFilters << "*.png";
+				nameFilters << "*.jpg";
+			}
+
+			info.files = directory.entryList(nameFilters, QDir::Files | QDir::Readable);
+			info.filesIter = info.files.begin();
 		}
 
-		info.files = directory.entryList(nameFilters, QDir::Files | QDir::Readable);
-		info.filesIter = info.files.begin();
+		info.idStamp = ++m_lastIdStamp;
+
+		if (info.filesIter != info.files.end()){
+			imageFileName = directory.absoluteFilePath(*info.filesIter);
+			info.filesIter++;
+		}
 	}
-
-	info.idStamp = ++m_lastIdStamp;
+	else if (inputPathInfo.isFile()){
+		imageFileName = inputPath;
+	}
 
 	int retVal = TS_INVALID;
-	if (info.filesIter != info.files.end()){
-		QString fileName = directory.absoluteFilePath(*info.filesIter);
-		info.filesIter++;
 
+	if (!imageFileName.isEmpty()){
 		if (outputPtr != NULL){
-			int loadState = m_bitmapLoaderCompPtr->LoadFromFile(*outputPtr, fileName);
+			int loadState = m_bitmapLoaderCompPtr->LoadFromFile(*outputPtr, imageFileName);
 			retVal = (loadState == iser::IFileLoader::StateOk)? TS_OK: TS_INVALID;
 
 			iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IRasterImage*>(outputPtr);
@@ -100,7 +106,7 @@ int CFileAcquisitionComp::DoProcessing(
 			}
 
 			if (m_lastFileNameCompPtr.IsValid()){
-				m_lastFileNameCompPtr->SetPath(fileName);
+				m_lastFileNameCompPtr->SetPath(imageFileName);
 			}
 		}
 		else{
@@ -111,6 +117,7 @@ int CFileAcquisitionComp::DoProcessing(
 	if (int(m_dirInfos.size()) > *m_maxCachedDirectoriesAttrPtr){
 		DirInfos::iterator maxIdStampDiffIter = m_dirInfos.end();
 		quint32 maxIdStampDiff = 0;
+
 		for (		DirInfos::iterator iter = m_dirInfos.begin();
 					iter != m_dirInfos.end();
 					++iter){

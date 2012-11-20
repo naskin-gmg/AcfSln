@@ -38,7 +38,8 @@ public:
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Load bitmap from file", true, "BitmapLoader");
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".");
-		I_ASSIGN(m_parameterIdAttrPtr, "DirParamId", "Id used to get directory parameter (ifile::IFileNameParam)", true, "FileBitmapAcquisition");
+		I_ASSIGN(m_defaultDirParamCompPtr, "DefaultPathParam", "Path of file or directory will be used if no parameters are specified in paramter set", false, "DefaultDirParam");
+		I_ASSIGN(m_pathParamIdAttrPtr, "DirParamId", "Id used to get directory parameter (ifile::IFileNameParam)", true, "FileBitmapAcquisition");
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
 	I_END_COMPONENT;
@@ -75,7 +76,8 @@ private:
 
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_ATTR(QString, m_defaultDirAttrPtr);
-	I_ATTR(QByteArray, m_parameterIdAttrPtr);
+	I_REF(ifile::IFileNameParam, m_defaultDirParamCompPtr);
+	I_ATTR(QByteArray, m_pathParamIdAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
 

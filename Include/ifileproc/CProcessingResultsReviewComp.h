@@ -25,13 +25,12 @@ public:
 
 	I_BEGIN_COMPONENT(CProcessingResultsReviewComp);
 		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
-		I_ASSIGN(m_inputPathObjectPtr, "InputPathObject", "Path to files", true, "InputPathObject");
-		I_ASSIGN(m_processingInputFilePathPtr, "ProcessingInputFilePath", "Full path to currently processing file", true, "ProcessingInputFilePath");
-		I_ASSIGN(m_outputSupplierPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
-		I_ASSIGN_TO(m_outputSupplierSerializerPtr, m_outputSupplierPtr, true);		
-		I_ASSIGN(m_outputFileSerializerPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");		
+		I_ASSIGN(m_inputPathCompPtr, "InputPathObject", "Optional storage of current processed input (file or directory)", false, "InputPathObject");
+		I_ASSIGN(m_processingInputFilePathCompPtr, "ProcessingInputFilePath", "Full path to currently processing file, should be used by supplier as input file path", true, "ProcessingInputFilePath");
+		I_ASSIGN(m_outputSupplierCompPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
+		I_ASSIGN_TO(m_outputSupplierSerializerCompPtr, m_outputSupplierCompPtr, true);
+		I_ASSIGN(m_outputFileSerializerCompPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");		
 	I_END_COMPONENT;
-
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool ConvertFiles(				
@@ -39,26 +38,34 @@ public:
 				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
-private:
-	class CProcessSerializer : public iser::ISerializable
-	{
+protected:
+	/**
+		Process single file and send the results to archive.
+	*/
+	virtual bool ProcessSingleFile(const QString& filePath, iser::IArchive& archive);
 
+private:
+	class CProcessSerializer: public iser::ISerializable
+	{
 	public:
-		CProcessSerializer(
-				const CProcessingResultsReviewComp* parent);
+		/**
+			Initialize the serializer with parent object and path to be processed.
+		*/
+		CProcessSerializer(const CProcessingResultsReviewComp* parentPtr, const QString& path);
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
 
-	protected:
-		const CProcessingResultsReviewComp* m_parentPtr;
-	};	
-	
-	I_REF(ifile::IFileNameParam, m_inputPathObjectPtr);
-	I_REF(ifile::IFileNameParam, m_processingInputFilePathPtr);
-	I_REF(iproc::ISupplier, m_outputSupplierPtr);
-	I_REF(iser::ISerializable, m_outputSupplierSerializerPtr);
-	I_REF(iser::IFileLoader, m_outputFileSerializerPtr);	
+	private:
+		const CProcessingResultsReviewComp& m_parent;
+		QString m_path;
+	};
+
+	I_REF(ifile::IFileNameParam, m_inputPathCompPtr);
+	I_REF(ifile::IFileNameParam, m_processingInputFilePathCompPtr);
+	I_REF(iproc::ISupplier, m_outputSupplierCompPtr);
+	I_REF(iser::ISerializable, m_outputSupplierSerializerCompPtr);
+	I_REF(iser::IFileLoader, m_outputFileSerializerCompPtr);	
 };
 
 
@@ -66,3 +73,5 @@ private:
 
 
 #endif // !ifileproc_CProcessingResultsReviewComp_included
+
+
