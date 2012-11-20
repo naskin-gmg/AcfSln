@@ -56,7 +56,6 @@ protected:
 	virtual QString GetOptionDescription(int index) const;
 	virtual QByteArray GetOptionId(int index) const;
 	virtual bool IsOptionEnabled(int index) const;
-	virtual void SetOptionEnabled(int index, bool isEnabled = true);
 
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;

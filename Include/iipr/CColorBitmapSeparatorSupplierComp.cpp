@@ -146,11 +146,6 @@ bool CColorBitmapSeparatorSupplierComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CColorBitmapSeparatorSupplierComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 // reimplemented (iproc::TSupplierCompWrap)
 
 int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const

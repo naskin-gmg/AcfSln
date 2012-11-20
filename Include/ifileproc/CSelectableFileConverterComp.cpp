@@ -149,11 +149,6 @@ bool CSelectableFileConverterComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CSelectableFileConverterComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 } // namespace ifileproc
 
 

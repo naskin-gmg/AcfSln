@@ -140,11 +140,6 @@ bool CIterativeProcessorComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CIterativeProcessorComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 // protected methods
 
 int CIterativeProcessorComp::ProcessSlave(
