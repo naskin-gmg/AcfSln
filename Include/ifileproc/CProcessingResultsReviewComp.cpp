@@ -48,6 +48,10 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 		m_inputPathCompPtr->SetPath(inputPath);
 	}
 
+	if (IsVerboseEnabled()){
+		SendVerboseMessage(QObject::tr("Processing input '%1' to output '%2'").arg(inputPath).arg(outputPath));
+	}
+
 	CProcessSerializer processSerializer(this, inputPath);
 
 	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath) == iser::IFileLoader::StateOk){
@@ -63,6 +67,10 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, iser::IArchive& archive)
 {
 	Q_ASSERT(archive.IsStoring());
+
+	if (IsVerboseEnabled()){
+		SendVerboseMessage(QObject::tr("File to process %1").arg(filePath));
+	}
 
 	bool retVal = true;
 
