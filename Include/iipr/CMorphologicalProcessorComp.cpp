@@ -73,7 +73,7 @@ static void DoFilter(
 				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
 					int pixelIndex = x + kernelX;
 
-					if (pixelIndex >= 0 && pixelIndex < inputImageWidth){
+					if (pixelIndex >= regionLeft && pixelIndex < inputImageWidth){
 						int componentPosition = pixelIndex * componentsCount + componentIndex;
 
 						CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
@@ -103,7 +103,7 @@ static void DoFilter(
 				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
 					int pixelIndex = x + kernelX;
 
-					if (pixelIndex >= 0 && pixelIndex < inputImageWidth){
+					if (pixelIndex >= 0 && pixelIndex < regionRight){
 						int componentPosition = pixelIndex * componentsCount + componentIndex;
 
 						CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
@@ -136,7 +136,7 @@ static void DoFilter(
 				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
 					int imageLineIndex = y + kernelY;
 
-					if (imageLineIndex >= 0 && imageLineIndex < inputImageHeight){
+					if (imageLineIndex >= regionTop && imageLineIndex < inputImageHeight){
 						PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
 
 						CalculateOutputValue(value, outputValue);
@@ -183,7 +183,7 @@ static void DoFilter(
 				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
 					int imageLineIndex = y + kernelY;
 
-					if (imageLineIndex >= 0 && imageLineIndex < inputImageHeight){
+					if (imageLineIndex >= 0 && imageLineIndex < regionBottom){
 						PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
 
 						CalculateOutputValue(value, outputValue);
@@ -194,6 +194,44 @@ static void DoFilter(
 			}
 		}
 	} // componentIndex
+}
+
+
+template <typename PixelComponentType, PixelComponentType InitMaxValue>
+static void ProcessImage(
+			CMorphologicalProcessorComp::ProcessingMode processingMode,
+			int kernelWidth,
+			int kernelHeight,
+			const iimg::IBitmap& inputImage,
+			const i2d::CRect& regionRect,
+			iimg::IBitmap& outputImage)	
+{	
+	switch (processingMode){
+		case CMorphologicalProcessorComp::PM_EROSION:
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
+			break;
+				
+		case CMorphologicalProcessorComp::PM_DILATATION:
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
+			break;
+				
+		case CMorphologicalProcessorComp::PM_OPENING:{
+			iimg::CGeneralBitmap tempBitmap;
+			tempBitmap.CopyFrom(outputImage);
+
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
+			break;
+		}
+		case CMorphologicalProcessorComp::PM_CLOSING:{
+			iimg::CGeneralBitmap tempBitmap;
+			tempBitmap.CopyFrom(outputImage);
+
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
+			break;
+		}
+	}
 }
 
 
@@ -214,7 +252,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	}
 
 	if (aoiPtr == NULL){
-		SendWarningMessage(0, "Crop region is not defined");
+		SendWarningMessage(0, "Filter region is not defined");
 
 		return false;
 	}
@@ -244,21 +282,27 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	}
 
 	if (!outputBitmapPtr->CopyFrom(inputBitmap)){
+		SendErrorMessage(0, "Data could not be copied from input bitmap to the output");
+
 		return false;
 	}
 
-	regionRect.Intersection(i2d::CRect(inputBitmap.GetImageSize()));
-
 	iprm::TParamsPtr<imeas::INumericValue> filterSizePtr(paramsPtr, *m_filterSizeParamsIdAttrPtr);
 	if (filterSizePtr == NULL){
+		SendErrorMessage(0, "No fiter dimension was set");
+
 		return false;
 	}
 
 	imath::CVarVector filterLengths = filterSizePtr->GetValues();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
+		SendErrorMessage(0, "Processing filter can't have dimension smaller 1");
+
 		return false;
 	}
+
+	regionRect.Intersection(i2d::CRect(inputBitmap.GetImageSize()));
 
 	int imageWidth = inputBitmapSize.GetX();
 	int imageHeight = inputBitmapSize.GetY();
@@ -274,30 +318,33 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 		case iimg::IBitmap::PF_GRAY:
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
-			if (*m_processingModeAttrPtr == PM_EROSION){
-				DoFilter<quint8, 255, MinFunctor<quint8> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
-			else{
-				DoFilter<quint8, 0, MaxFunctor<quint8> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
+			ProcessImage<quint8, 255>(
+							CMorphologicalProcessorComp::ProcessingMode(*m_processingModeAttrPtr),
+							kernelMaxWidth,
+							kernelMaxHeight,
+							inputBitmap,
+							regionRect,
+							*outputBitmapPtr);
 			break;
 
 		case iimg::IBitmap::PF_GRAY16:
-			if (*m_processingModeAttrPtr == PM_EROSION){
-				DoFilter<quint16, (1 << 16) - 1, MinFunctor<quint16> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
-			else{
-				DoFilter<quint16, 0, MaxFunctor<quint16> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
+			ProcessImage<quint16, (1 << 16) - 1>(
+							CMorphologicalProcessorComp::ProcessingMode(*m_processingModeAttrPtr),
+							kernelMaxWidth,
+							kernelMaxHeight,
+							inputBitmap,
+							regionRect,
+							*outputBitmapPtr);
 			break;
 
 		case iimg::IBitmap::PF_GRAY32:
-			if (*m_processingModeAttrPtr == PM_EROSION){
-				DoFilter<quint32, (quint64(1) << 32) - 1, MinFunctor<quint32> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
-			else{
-				DoFilter<quint32, 0, MaxFunctor<quint32> >(kernelMaxWidth, kernelMaxHeight, inputBitmap, regionRect, *outputBitmapPtr);
-			}
+			ProcessImage<quint32, (quint64(1) << 32) - 1>(
+							CMorphologicalProcessorComp::ProcessingMode(*m_processingModeAttrPtr),
+							kernelMaxWidth,
+							kernelMaxHeight,
+							inputBitmap,
+							regionRect,
+							*outputBitmapPtr);
 			break;
 
 	default:

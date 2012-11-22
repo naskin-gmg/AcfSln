@@ -21,12 +21,14 @@ public:
 	enum ProcessingMode
 	{
 		PM_EROSION,
-		PM_DILATATION
+		PM_DILATATION,
+		PM_OPENING,
+		PM_CLOSING
 	};
 	
 	I_BEGIN_COMPONENT(CMorphologicalProcessorComp);
 		I_ASSIGN(m_filterSizeParamsIdAttrPtr, "FilterSizeParamsId", "ID of the filter dimension parameter set", true, "FilterSizeParamsId");
-		I_ASSIGN(m_processingModeAttrPtr, "ProcessingMode", "Filter processing mode.0 - Erosion\n1 - Dilatation", true, 0);
+		I_ASSIGN(m_processingModeAttrPtr, "ProcessingMode", "Filter processing mode\n0 - Erosion\n1 - Dilatation\n2 - Opening\n3 - Closing", true, 0);
 	I_END_COMPONENT;
 
 protected:
