@@ -49,16 +49,9 @@ void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
-	for (		EditorsList::const_iterator iter = m_editorsList.begin();
-				iter != m_editorsList.end();
-				++iter){
-		imod::IModelEditor* editorPtr = *iter;
-		I_ASSERT(editorPtr != NULL);
-		
-		editorPtr->UpdateEditor(updateFlags);
-	}
-
 	UpdateTaskMessages();
+
+	DoUpdateEditor(m_currentGuiIndex);
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
@@ -174,28 +167,56 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 		workStatus = supplierPtr->GetWorkStatus();
 	}
 
+	const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
+
 	switch (workStatus){
-	case iproc::ISupplier::WS_OK:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
-		break;
+		case iproc::ISupplier::WS_OK:
+			if (infoProviderPtr != NULL){
+				switch (infoProviderPtr->GetInformationCategory()){
+					case istd::IInformationProvider::IC_NONE:
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+						break;
 
-	case iproc::ISupplier::WS_ERROR:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
-		break;
+					case istd::IInformationProvider::IC_WARNING:
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateWarning.svg"));
+						break;
 
-	case iproc::ISupplier::WS_CRITICAL:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
-		break;
+					case istd::IInformationProvider::IC_ERROR:
+					case istd::IInformationProvider::IC_CRITICAL:
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+						break;
 
-	default:
-		StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
-		break;
+					default:
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+						break;
+				}
+			}
+			else{
+				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+			}
+			break;
+
+		case iproc::ISupplier::WS_ERROR:
+			StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+			break;
+
+		case iproc::ISupplier::WS_CRITICAL:
+			StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
+			break;
+
+		default:
+			StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+			break;
 	}
 }
 
 
 void CInspectionTaskGuiComp::UpdateVisualElements()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	int visualProvidersCount = m_editorVisualInfosCompPtr.GetCount();
 
 	for (		GuiMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
@@ -450,9 +471,9 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 
 void CInspectionTaskGuiComp::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (modelId == m_currentGuiIndex){
-		UpdateVisualElements();
+	UpdateVisualElements();
 
+	if (modelId == m_currentGuiIndex){
 		UpdateTaskMessages();
 
 		DoUpdateEditor(m_currentGuiIndex);
@@ -521,9 +542,9 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer
 		QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
 		messageItemPtr->setIcon(0, messageIcon);
 
-		QString sourceName = tabName;
+		QString sourceName = messagePtr->GetInformationSource();
 		if (sourceName.isEmpty()){
-			sourceName = messagePtr->GetInformationSource();
+			sourceName = tabName;
 		}
 
 		messageItemPtr->setText(0, sourceName);
@@ -598,6 +619,14 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 				extenderPtr->AddItemsToScene(previewProviderPtr, iqt2d::IViewExtender::SF_DIRECT);
 
 				viewPtr = previewProviderPtr->GetView();
+			}
+		}
+
+		int editorsCount = m_editorsCompPtr.GetCount();
+		if (taskIndex < editorsCount){
+			imod::IModelEditor* editorPtr = m_editorsCompPtr[taskIndex];
+			if (editorPtr != NULL){
+				editorPtr->UpdateEditor();
 			}
 		}
 	}
