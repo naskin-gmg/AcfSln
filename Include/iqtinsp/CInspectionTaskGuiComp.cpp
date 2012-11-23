@@ -45,13 +45,9 @@ void CInspectionTaskGuiComp::UpdateModel() const
 }
 
 
-void CInspectionTaskGuiComp::UpdateEditor(int updateFlags)
+void CInspectionTaskGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
-
-	UpdateTaskMessages();
-
-	DoUpdateEditor(m_currentGuiIndex);
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
