@@ -42,6 +42,7 @@ protected:
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiHidden();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

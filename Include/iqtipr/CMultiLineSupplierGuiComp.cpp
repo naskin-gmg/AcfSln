@@ -75,6 +75,14 @@ void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 }
 
 
+void CMultiLineSupplierGuiComp::OnGuiHidden()
+{
+	AutoUpdateButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
+}
+
+
 // internal class CLineSelection
 
 CMultiLineSupplierGuiComp::LineSelection::LineSelection()

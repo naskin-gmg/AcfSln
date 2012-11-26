@@ -56,6 +56,7 @@ protected Q_SLOTS:
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiHidden();
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;

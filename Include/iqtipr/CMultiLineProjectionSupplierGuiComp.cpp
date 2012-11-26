@@ -49,6 +49,14 @@ void CMultiLineProjectionSupplierGuiComp::OnGuiDestroyed()
 }
 
 
+void CMultiLineProjectionSupplierGuiComp::OnGuiHidden()
+{
+	AutoUpdateButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
+}
+
+
 // reimplemented (iqtgui::TGuiObserverWrap)
 
 void CMultiLineProjectionSupplierGuiComp::OnGuiModelAttached()

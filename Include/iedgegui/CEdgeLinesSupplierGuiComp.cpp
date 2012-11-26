@@ -136,6 +136,14 @@ void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
 }
 
 
+void CEdgeLinesSupplierGuiComp::OnGuiHidden()
+{
+	AutoUpdateButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
+}
+
+
 // reimplemented (imod::IObserver)
 
 void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)

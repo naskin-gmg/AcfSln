@@ -59,6 +59,7 @@ protected:
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiHidden();
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

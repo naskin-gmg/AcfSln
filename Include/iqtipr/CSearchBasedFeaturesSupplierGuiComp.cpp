@@ -191,6 +191,13 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiCreated()
 }
 
 
+void CSearchBasedFeaturesSupplierGuiComp::OnGuiHidden()
+{
+	AutoUpdateButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
+}
+
 
 // reimplemented (icomp::IComponentBase)
 

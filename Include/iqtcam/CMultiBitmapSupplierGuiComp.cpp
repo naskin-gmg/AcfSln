@@ -122,6 +122,14 @@ void CMultiBitmapSupplierGuiComp::OnGuiCreated()
 }
 
 
+void CMultiBitmapSupplierGuiComp::OnGuiHidden()
+{
+	LiveImageButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
+}
+
+
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CMultiBitmapSupplierGuiComp::GetParamsWidget() const
