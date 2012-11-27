@@ -12,23 +12,23 @@
 #include "istd/CBase64.h"
 
 
-namespace iqtex
+namespace
 {
 
 
 class ReadArchiveMessageHandler: public QAbstractMessageHandler
 {
 public:
-	ReadArchiveMessageHandler(CXslTransformationReadArchive* logger);
+	ReadArchiveMessageHandler(istd::ILogger* logger);
 
 protected:
 	void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);
 
-	CXslTransformationReadArchive* m_loggerPtr;
+	istd::ILogger* m_loggerPtr;
 };
 
 
-ReadArchiveMessageHandler::ReadArchiveMessageHandler(CXslTransformationReadArchive* logger)
+ReadArchiveMessageHandler::ReadArchiveMessageHandler(istd::ILogger* logger)
 {
 	m_loggerPtr = logger;
 }
@@ -41,11 +41,18 @@ void ReadArchiveMessageHandler::handleMessage(
 				const QSourceLocation& /*sourceLocation*/)
 {
 	m_loggerPtr->SendLogMessage(
-					istd::IInformationProvider::IC_WARNING,
-					0,
-					QObject::tr("Transformation message: ").append(description),
-					"XslTransformationWriteArchive");
+				istd::IInformationProvider::IC_WARNING,
+				0,
+				QObject::tr("Transformation message: %1").arg(description),
+				"XslTransformationWriteArchive");
 }
+
+
+}
+
+
+namespace iqtex
+{
 
 
 CXslTransformationReadArchive::CXslTransformationReadArchive(
