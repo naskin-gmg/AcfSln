@@ -154,13 +154,13 @@ QString CRectDerivativeProcessor::GetNumericValueDescription(int /*index*/) cons
 }
 
 
-const imeas::IUnitInfo& CRectDerivativeProcessor::GetNumericValueUnitInfo(int /*dimension*/) const
+const imath::IUnitInfo& CRectDerivativeProcessor::GetNumericValueUnitInfo(int /*dimension*/) const
 {
 	return *this;
 }
 
 
-// reimplemented (imeas::IUnitInfo)
+// reimplemented (imath::IUnitInfo)
 
 int CRectDerivativeProcessor::GetUnitType() const
 {

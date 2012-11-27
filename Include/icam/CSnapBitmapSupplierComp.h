@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-#include "i2d/ITransformation2d.h"
+#include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
 #include "iproc/TSupplierCompWrap.h"
@@ -25,12 +25,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
 */
 class CSnapBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ITransformation2d>, istd::TDelPtr<iimg::IBitmap> > >,
+			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iipr::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ITransformation2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
@@ -44,7 +44,7 @@ public:
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -55,7 +55,7 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
-	I_REF(i2d::ITransformation2d, m_calibrationCompPtr);
+	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);
 };
 
 

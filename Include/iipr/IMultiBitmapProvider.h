@@ -34,13 +34,6 @@ public:
 		\return	pointer to bitmap instance if this bitmap is accessible, or NULL.
 	*/
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const = 0;
-
-	/**
-		Get access to transformation from bitmap to logical positions.
-		Please note, not all implementations must support this information.
-		\return	pointer to transformation if it is accessible, or NULL.
-	*/
-	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const = 0;
 };
 
 

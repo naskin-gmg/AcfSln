@@ -6,7 +6,7 @@
 #include <QtGui/QWidget>
 
 
-#include "imeas/IUnitInfo.h"
+#include "imath/IUnitInfo.h"
 
 #include "generated/ui_CNumericValueWidget.h"
 
@@ -24,7 +24,7 @@ class CNumericValueWidget:
 public:
 	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true);
 
-	void SetUnitInfo(const QString& description, const imeas::IUnitInfo& unitInfo);
+	void SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo);
 
 	double GetValue() const;
 	void SetValue(double value);

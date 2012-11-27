@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
 #include "i2d/CAffineTransformation2d.h"
@@ -49,7 +50,7 @@ public:
 	virtual const imeas::INumericValue& GetNumericValue(int index) const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -65,7 +66,7 @@ private:
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 
-	mutable istd::TDelPtr<const i2d::ITransformation2d> m_outputCalibrationPtr;
+	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;
 
 	class Position: public imeas::CSimpleNumericValue
 	{

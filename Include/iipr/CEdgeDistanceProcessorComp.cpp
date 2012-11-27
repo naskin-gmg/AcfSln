@@ -124,7 +124,7 @@ bool CEdgeDistanceProcessorComp::CalculateCaliperLines(
 	const i2d::IObject2d* calibratedAoiPtr = dynamic_cast<const i2d::IObject2d*>(&aoiObject);
 
 	if (m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
+		const i2d::ICalibration2d* logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
 		if (logToPhysicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiObject.CloneMe());
 

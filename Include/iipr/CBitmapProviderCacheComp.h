@@ -37,14 +37,14 @@ public:
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);
 
 private:
 	istd::TDelPtr<iimg::IBitmap> m_bitmapPtr;
-	istd::TDelPtr<i2d::ITransformation2d> m_transformPtr;
+	istd::TDelPtr<i2d::ICalibration2d> m_transformPtr;
 };
 
 

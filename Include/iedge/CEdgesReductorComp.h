@@ -60,7 +60,7 @@ public:
 	virtual int GetNumericValuesCount() const;
 	virtual QString GetNumericValueName(int index) const;
 	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
+	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 protected:
 	typedef QVector<bool> NodesToRemove;
@@ -82,7 +82,7 @@ protected:
 private:
 	I_REF(imeas::INumericValue, m_defaultToleranceParamsCompPtr);
 	I_ATTR(QByteArray, m_toleranceParamsIdAttrPtr);
-	I_REF(imeas::IUnitInfo, m_distanceUnitInfoCompPtr);
+	I_REF(imath::IUnitInfo, m_distanceUnitInfoCompPtr);
 };
 
 

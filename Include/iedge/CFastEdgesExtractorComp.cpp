@@ -9,13 +9,12 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
+#include "imath/CGeneralUnitInfo.h"
 #include "i2d/CPolypoint.h"
 #include "i2d/CVector2d.h"
 #include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
-#include "imeas/CGeneralUnitInfo.h"
-
 #include "iedge/CEdgeNode.h"
 #include "iedge/CEdgeLine.h"
 #include "iedge/CEdgeLine.h"
@@ -189,10 +188,10 @@ QString CFastEdgesExtractorComp::GetNumericValueDescription(int index) const
 }
 
 
-const imeas::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int index) const
 {
-	static imeas::CGeneralUnitInfo thresholdUnitInfo(imeas::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.01, 1));
-	static imeas::CGeneralUnitInfo scaleUnitInfo(imeas::IUnitInfo::UT_RELATIVE, "dB", 1, istd::CRange(-10, 10));
+	static imath::CGeneralUnitInfo thresholdUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.01, 1));
+	static imath::CGeneralUnitInfo scaleUnitInfo(imath::IUnitInfo::UT_RELATIVE, "dB", 1, istd::CRange(-10, 10));
 
 	switch (index){
 	case 0:

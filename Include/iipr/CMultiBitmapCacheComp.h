@@ -5,6 +5,8 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 #include "icomp/CComponentBase.h"
+#include "i2d/ICalibration2d.h"
+#include "i2d/IMultiCalibrationProvider.h"
 
 // ACF-Solutions includes
 #include "iipr/IMultiBitmapProvider.h"
@@ -21,7 +23,8 @@ namespace iipr
 */
 class CMultiBitmapCacheComp:
 			public icomp::CComponentBase,
-			virtual public IMultiBitmapProvider
+			virtual public IMultiBitmapProvider,
+			virtual public i2d::IMultiCalibrationProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -36,14 +39,18 @@ public:
 	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
-	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const;
+
+	// reimplemented (i2d::IMultiCalibrationProvider)
+	virtual const iprm::ISelectionConstraints* GetCalibrationSelectionContraints() const;
+	virtual int GetCalibrationsCount() const;
+	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object);
 
 private:
 	istd::TPointerVector<iimg::IBitmap> m_bitmapsPtr;
-	istd::TPointerVector<i2d::ITransformation2d> m_transformsPtr;
+	istd::TPointerVector<i2d::ICalibration2d> m_transformsPtr;
 };
 
 

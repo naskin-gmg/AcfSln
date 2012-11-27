@@ -72,13 +72,13 @@ QString CNumericParamsComp::GetNumericValueDescription(int /*index*/) const
 }
 
 
-const imeas::IUnitInfo& CNumericParamsComp::GetNumericValueUnitInfo(int /*index*/) const
+const imath::IUnitInfo& CNumericParamsComp::GetNumericValueUnitInfo(int /*index*/) const
 {
 	return *this;
 }
 
 
-// reimplemented (imeas::IUnitInfo)
+// reimplemented (imath::IUnitInfo)
 
 int CNumericParamsComp::GetUnitType() const
 {

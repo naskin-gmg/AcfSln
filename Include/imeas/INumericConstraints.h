@@ -6,7 +6,7 @@
 #include "istd/IChangeable.h"
 
 // ACF-Solutions includes
-#include "imeas/IUnitInfo.h"
+#include "imath/IUnitInfo.h"
 
 #include "imeas/imeas.h"
 
@@ -43,7 +43,7 @@ public:
 		Get range of possible numeric values for specified list index.
 		\param	index	index of numeric value.
 	*/
-	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const = 0;
+	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const = 0;
 };
 
 

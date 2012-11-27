@@ -24,7 +24,7 @@ CNumericValueWidget::CNumericValueWidget(
 }
 
 
-void CNumericValueWidget::SetUnitInfo(const QString& description, const imeas::IUnitInfo& unitInfo)
+void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo)
 {
 	DescriptionLabel->setText(description);
 	const QString& unitName = unitInfo.GetUnitName();

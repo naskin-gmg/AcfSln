@@ -22,7 +22,7 @@ const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 	
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CDelegatedBitmapSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CDelegatedBitmapSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){

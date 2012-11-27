@@ -3,10 +3,8 @@
 
 // ACF includes
 #include "istd/istd.h"
+#include "imath/CGeneralUnitInfo.h"
 #include "iprm/TParamsPtr.h"
-
-// ACF-Solutions includes
-#include "imeas/CGeneralUnitInfo.h"
 
 
 namespace iedge
@@ -184,10 +182,10 @@ QString CEdgesReductorComp::GetNumericValueDescription(int index) const
 }
 
 
-const imeas::IUnitInfo& CEdgesReductorComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo& CEdgesReductorComp::GetNumericValueUnitInfo(int index) const
 {
-	static imeas::CGeneralUnitInfo positionUnitInfo(imeas::IUnitInfo::UT_RELATIVE, "px", 1, istd::CRange(0, 10));
-	static imeas::CGeneralUnitInfo weightUnitInfo(imeas::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.00, 1));
+	static imath::CGeneralUnitInfo positionUnitInfo(imath::IUnitInfo::UT_RELATIVE, "px", 1, istd::CRange(0, 10));
+	static imath::CGeneralUnitInfo weightUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.00, 1));
 
 	switch (index){
 	case 1:

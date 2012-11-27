@@ -25,7 +25,7 @@ int CSearchBasedFeaturesSupplierComp::GetCalibrationsCount() const
 }
 
 
-const i2d::ITransformation2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
+const i2d::ICalibration2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
 {
 	I_ASSERT(calibrationIndex >= 0);
 	I_ASSERT(calibrationIndex < m_transformationList.count());

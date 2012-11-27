@@ -7,7 +7,7 @@
 #include "icomp/CComponentBase.h"
 
 // ACF-Solutions incldues
-#include "imeas/IUnitInfo.h"
+#include "imath/IUnitInfo.h"
 
 #include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
@@ -24,7 +24,7 @@ namespace imeas
 class CNumericConstraintsComp:
 			public icomp::CComponentBase,
 			virtual public INumericConstraints,
-			virtual protected imeas::IUnitInfo
+			virtual protected imath::IUnitInfo
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -46,10 +46,10 @@ public:
 	virtual int GetNumericValuesCount() const;
 	virtual QString GetNumericValueName(int index) const;
 	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
+	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 protected:
-	// reimplemented (imeas::IUnitInfo)
+	// reimplemented (imath::IUnitInfo)
 	virtual int GetUnitType() const;
 	virtual QString GetUnitName() const;
 	virtual double GetDisplayMultiplicationFactor() const;

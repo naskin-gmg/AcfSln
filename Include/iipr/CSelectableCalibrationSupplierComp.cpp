@@ -13,7 +13,7 @@ namespace iipr
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CSelectableCalibrationSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CSelectableCalibrationSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -55,7 +55,7 @@ int CSelectableCalibrationSupplierComp::ProduceObject(ProductType& result) const
 			return WS_ERROR;		
 		}
 
-		const i2d::ITransformation2d* outputCalibrationPtr = m_multiCalibrationProviderCompPtr->GetCalibration(selectedIndex);
+		const i2d::ICalibration2d* outputCalibrationPtr = m_multiCalibrationProviderCompPtr->GetCalibration(selectedIndex);
 		if (outputCalibrationPtr != NULL){
 			if (result->CopyFrom(*outputCalibrationPtr)){
 				return WS_OK;

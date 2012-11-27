@@ -44,7 +44,7 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
 	if (aoiPtr.IsValid()){
-		const i2d::ITransformation2d* logToPhysicalTransformPtr = NULL;
+		const i2d::ICalibration2d* logToPhysicalTransformPtr = NULL;
 		if (m_regionCalibrationProviderCompPtr.IsValid()){
 			logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
 		}

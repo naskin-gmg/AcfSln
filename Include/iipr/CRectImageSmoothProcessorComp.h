@@ -3,7 +3,7 @@
 
 
 // ACF-Solutions includes
-#include "imeas/IUnitInfo.h"
+#include "imath/IUnitInfo.h"
 #include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
 
@@ -21,7 +21,7 @@ namespace iipr
 class CRectImageSmoothProcessorComp:
 			public TImageParamProcessorCompBase<imeas::INumericValue>,
 			virtual public imeas::INumericConstraints,
-			virtual protected imeas::IUnitInfo
+			virtual protected imath::IUnitInfo
 {
 public:
 	typedef iipr::TImageParamProcessorCompBase<imeas::INumericValue> BaseClass;
@@ -49,7 +49,7 @@ public:
 	virtual int GetNumericValuesCount() const;
 	virtual QString GetNumericValueName(int index) const;
 	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imeas::IUnitInfo& GetNumericValueUnitInfo(int index) const;
+	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 protected:
 	// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
@@ -58,7 +58,7 @@ protected:
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 
-	// reimplemented (imeas::IUnitInfo)
+	// reimplemented (imath::IUnitInfo)
 	virtual int GetUnitType() const;
 	virtual QString GetUnitName() const;
 	virtual double GetDisplayMultiplicationFactor() const;

@@ -25,7 +25,7 @@ const iimg::IBitmap* CSnapBitmapSupplierComp::GetBitmap() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CSnapBitmapSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CSnapBitmapSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -80,7 +80,7 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 				if (m_calibrationCompPtr.IsValid()){
 					i2d::CAffineTransformation2d transform;
 					transform.Reset(-center);
-					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedTransformation(transform));
+					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transform));
 				}
 				else{
 					i2d::CAffineTransformation2d* transformPtr = new i2d::CAffineTransformation2d();

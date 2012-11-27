@@ -25,7 +25,7 @@ const iimg::IBitmap* CSelectableBitmapSupplierComp::GetBitmap() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CSelectableBitmapSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CSelectableBitmapSupplierComp::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
@@ -73,14 +73,23 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 		const iimg::IBitmap* outputBitmapPtr = m_multiBitmapProviderCompPtr->GetBitmap(selectedIndex);
 		if (outputBitmapPtr != NULL){
 			if (result.second->CopyFrom(*outputBitmapPtr)){
-				const i2d::ITransformation2d* calbirationPtr = m_multiBitmapProviderCompPtr->GetLogTransform(selectedIndex);
-				if (calbirationPtr != NULL){
-					i2d::CAffineTransformation2d* defaultTranformPtr = new i2d::CAffineTransformation2d();
-					defaultTranformPtr->Reset();
+				const i2d::ICalibration2d* calibrationPtr = NULL;
 
-					result.first.SetPtr(defaultTranformPtr);
+				if (m_multiBitmapMultiCalibCompPtr.IsValid() && (selectedIndex < m_multiBitmapMultiCalibCompPtr->GetCalibrationsCount())){
+					calibrationPtr = m_multiBitmapMultiCalibCompPtr->GetCalibration(selectedIndex);
+				}
 
-					result.first->CreateCombinedTransformation(*calbirationPtr);
+				if ((calibrationPtr == NULL) && m_multiBitmapCalibCompPtr.IsValid()){
+					calibrationPtr = m_multiBitmapCalibCompPtr->GetCalibration();
+				}
+
+				if (calibrationPtr != NULL){
+					i2d::CAffineTransformation2d* defaultTransformPtr = new i2d::CAffineTransformation2d();
+					defaultTransformPtr->Reset();
+
+					result.first.SetPtr(defaultTransformPtr);
+
+					result.first->CreateCombinedCalibration(*calibrationPtr);
 				}
 	
 				return WS_OK;

@@ -13,7 +13,7 @@ namespace iipr
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CTubeProjectionLinesProviderComp::GetCalibration() const
+const i2d::ICalibration2d* CTubeProjectionLinesProviderComp::GetCalibration() const
 {
 	if (m_calibrationProviderCompPtr.IsValid()){
 		return m_calibrationProviderCompPtr->GetCalibration();
@@ -49,7 +49,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 
 		if (iipr::CTubeProjectionsGenerator::GenerateProjections(*tubeRegionPtr, projectionsCount, result)){
 			if (m_calibrationProviderCompPtr.IsValid()){
-				const i2d::ITransformation2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();
+				const i2d::ICalibration2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();
 				if (transformPtr == NULL){
 					return WS_ERROR;
 				}

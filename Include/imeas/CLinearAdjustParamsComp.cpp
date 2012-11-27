@@ -14,8 +14,8 @@ namespace imeas
 CLinearAdjustParamsComp::CLinearAdjustParamsComp()
 :	m_scale(1.0),
 	m_offset(0),
-	m_offsetUnitInfo(IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1)),
-	m_scaleUnitInfo(IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1))
+	m_offsetUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1)),
+	m_scaleUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1))
 {
 }
 
@@ -176,7 +176,7 @@ QString CLinearAdjustParamsComp::GetNumericValueDescription(int index) const
 }
 
 
-const imeas::IUnitInfo& CLinearAdjustParamsComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo& CLinearAdjustParamsComp::GetNumericValueUnitInfo(int index) const
 {
 	switch (index){
 	case 0:

@@ -41,7 +41,7 @@ public:
 	// reimplemented (i2d::IMultiCalibrationProvider)
 	virtual const iprm::ISelectionConstraints* GetCalibrationSelectionContraints() const;
 	virtual int GetCalibrationsCount() const;
-	virtual const i2d::ITransformation2d* GetCalibration(int calibrationIndex) const;
+	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 
 	// reimplemented (imeas::INumericValueProvider)
 	virtual int GetValuesCount() const;

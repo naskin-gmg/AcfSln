@@ -7,7 +7,6 @@
 
 // ACF-Solutions includes
 #include "iipr/IBitmapProvider.h"
-#include "iipr/IMultiBitmapProvider.h"
 
 
 namespace iipr

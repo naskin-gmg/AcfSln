@@ -43,7 +43,7 @@ const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int 
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() const
 {
 	m_outputCalibrationPtr.Reset();
 
@@ -51,7 +51,7 @@ const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() c
 	if (productPtr != NULL){
 		m_position.SetValues(*productPtr);
 
-		const i2d::ITransformation2d* inputCalibrationPtr = NULL;
+		const i2d::ICalibration2d* inputCalibrationPtr = NULL;
 		if (m_calibrationProviderCompPtr.IsValid()){
 			inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 		}
@@ -68,7 +68,7 @@ const i2d::ITransformation2d* CPositionFromImageSupplierComp::GetCalibration() c
 			m_outputCalibrationPtr.SetPtr(outputTransformPtr);
 
 			if (inputCalibrationPtr != NULL){
-				m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedTransformation(*inputCalibrationPtr));
+				m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedCalibration(*inputCalibrationPtr));
 			}
 		}
 	}
@@ -101,7 +101,7 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 				return WS_ERROR;
 			}
 
-			const i2d::ITransformation2d* logicalTransformPtr = NULL;	
+			const i2d::ICalibration2d* logicalTransformPtr = NULL;	
 			if (m_calibrationProviderCompPtr.IsValid()){
 				logicalTransformPtr = m_calibrationProviderCompPtr->GetCalibration();
 			}

@@ -64,7 +64,7 @@ QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) con
 }
 
 
-const imeas::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
+const imath::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
 {
 	return *this;
 }
@@ -289,7 +289,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 }
 
 
-// reimplemented (imeas::IUnitInfo)
+// reimplemented (imath::IUnitInfo)
 
 int CRectImageSmoothProcessorComp::GetUnitType() const
 {

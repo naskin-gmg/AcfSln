@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-#include "i2d/ITransformation2d.h"
+#include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/IMultiCalibrationProvider.h"
 #include "iprm/ISelectionParam.h"
@@ -19,11 +19,11 @@ namespace iipr
 	Single 2D-calibration supplier implemented as a selector from a multi calibration provider.
 */
 class CSelectableCalibrationSupplierComp:
-			public iproc::TSupplierCompWrap< istd::TDelPtr<i2d::ITransformation2d> >,
+			public iproc::TSupplierCompWrap< istd::TDelPtr<i2d::ICalibration2d> >,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< istd::TDelPtr<i2d::ITransformation2d> > BaseClass;
+	typedef iproc::TSupplierCompWrap< istd::TDelPtr<i2d::ICalibration2d> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectableCalibrationSupplierComp);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
@@ -36,7 +36,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -47,7 +47,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_FACT(i2d::ITransformation2d, m_calibrationCompFact);
+	I_FACT(i2d::ICalibration2d, m_calibrationCompFact);
 
 	I_REF(i2d::IMultiCalibrationProvider, m_multiCalibrationProviderCompPtr);
 	I_REF(iproc::ISupplier, m_multiCalibrationSupplierCompPtr);

@@ -168,10 +168,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeneralUnitInfo.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHistogramStatisticsProcessorComp.cpp"
 				>
 			</File>
@@ -230,10 +226,6 @@
 			</File>
 			<File
 				RelativePath="..\CGeneralDataSequence.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CGeneralUnitInfo.h"
 				>
 			</File>
 			<File
@@ -330,10 +322,6 @@
 			</File>
 			<File
 				RelativePath="..\ISampleAcquisition.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IUnitInfo.h"
 				>
 			</File>
 			<File

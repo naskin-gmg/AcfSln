@@ -42,15 +42,9 @@ const iimg::IBitmap* CMultiCameraBitmapSupplierComp::GetBitmap(int bitmapIndex) 
 }
 
 
-const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetLogTransform(int /*bitmapIndex*/) const
-{
-	return m_logTransformCompPtr.GetPtr();	
-}
-
-
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CMultiCameraBitmapSupplierComp::GetCalibration() const
+const i2d::ICalibration2d* CMultiCameraBitmapSupplierComp::GetCalibration() const
 {
 	return m_logTransformCompPtr.GetPtr();
 }

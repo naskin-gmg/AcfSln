@@ -102,10 +102,6 @@ void CBitmapJoinerSupplierComp::OnComponentCreated()
 	if (m_bitmapsProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapsProviderModelCompPtr.GetPtr(), m_bitmapsSupplierCompPtr.GetPtr());
 	}
-
-	if (m_calibrationModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
-	}
 }
 
 

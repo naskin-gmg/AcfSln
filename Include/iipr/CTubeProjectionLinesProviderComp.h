@@ -27,7 +27,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iipr::CMultiLineSupplierCompBase)

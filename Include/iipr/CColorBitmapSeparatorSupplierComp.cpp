@@ -51,12 +51,6 @@ const iimg::IBitmap* CColorBitmapSeparatorSupplierComp::GetBitmap(int bitmapInde
 }
 
 
-const i2d::ITransformation2d* CColorBitmapSeparatorSupplierComp::GetLogTransform(int /*bitmapIndex*/) const
-{
-	return m_calibrationCompPtr.GetPtr();
-}
-
-
 // reimplemented (iprm::ISelectionConstraints)
 
 int CColorBitmapSeparatorSupplierComp::GetConstraintsFlags() const
@@ -267,10 +261,6 @@ void CColorBitmapSeparatorSupplierComp::OnComponentCreated()
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
-	}
-
-	if (m_calibrationModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
 	}
 }
 

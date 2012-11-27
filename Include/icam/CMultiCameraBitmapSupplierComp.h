@@ -13,7 +13,6 @@
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
-
 #include "iipr/IMultiBitmapProvider.h"
 
 
@@ -28,7 +27,8 @@ namespace icam
 */
 class CMultiCameraBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> >,
-			virtual public iipr::IMultiBitmapProvider
+			virtual public iipr::IMultiBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> > BaseClass;
@@ -46,10 +46,9 @@ public:
 	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
-	virtual const i2d::ITransformation2d* GetLogTransform(int bitmapIndex) const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
@@ -70,7 +69,7 @@ private:
 	/**
 		Pixel to logical units transformation.
 	*/
-	I_REF(i2d::ITransformation2d, m_logTransformCompPtr);
+	I_REF(i2d::ICalibration2d, m_logTransformCompPtr);
 
 	/**
 		Camera parameters.
