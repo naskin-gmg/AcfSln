@@ -138,7 +138,10 @@ private:
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
 	GuiMap m_tabToGuiIndexMap;		// map tab index to editor index
 
-	typedef QMap< int, istd::TPointerVector<iview::IShape> > ResultShapesMap;	// Map GUI index to list of result shapes
+	typedef QMap<int, ibase::IMessageContainer::Messages> ResultMessagesMap;
+	ResultMessagesMap m_resultMessagesMap;
+
+	typedef QMap<int, istd::TPointerVector<iview::IShape> > ResultShapesMap;	// Map GUI index to list of result shapes
 	ResultShapesMap m_resultShapesMap;
 
 	typedef QSet<imod::IModelEditor*> EditorsList;

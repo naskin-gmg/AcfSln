@@ -56,6 +56,68 @@ const imeas::INumericValue& CSearchBasedFeaturesSupplierComp::GetNumericValue(in
 }
 
 
+// reimplemented (istd::IInformationProvider)
+
+QDateTime CSearchBasedFeaturesSupplierComp::GetInformationTimeStamp() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationTimeStamp();
+	}
+
+	return QDateTime::currentDateTime();
+}
+
+
+istd::IInformationProvider::InformationCategory CSearchBasedFeaturesSupplierComp::GetInformationCategory() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationCategory();
+	}
+
+	return istd::IInformationProvider::IC_NONE;
+}
+
+
+int CSearchBasedFeaturesSupplierComp::GetInformationId() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationId();
+	}
+
+	return -1;
+}
+
+
+QString CSearchBasedFeaturesSupplierComp::GetInformationDescription() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationDescription();
+	}
+
+	return "";
+}
+
+
+QString CSearchBasedFeaturesSupplierComp::GetInformationSource() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationSource();
+	}
+
+	return "";
+}
+
+
+int CSearchBasedFeaturesSupplierComp::GetInformationFlags() const
+{
+	if (m_slaveInformationProviderCompPtr.IsValid()){
+		return m_slaveInformationProviderCompPtr->GetInformationFlags();
+	}
+
+	return 0;
+}
+
+
 // protected methods
 
 // reimplemented (iproc::TSupplierCompWrap)
