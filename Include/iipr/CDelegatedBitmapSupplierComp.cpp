@@ -9,11 +9,12 @@ namespace iipr
 
 const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 {
-	const_cast<CDelegatedBitmapSupplierComp*>(this)->BaseClass::EnsureWorkInitialized();
+	if (m_bitmapProviderCompPtr.IsValid()){
+		return m_bitmapProviderCompPtr->GetBitmap();
+	}
 
-	const ProductType* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		return productPtr->second;
+	if (m_bitmapCompPtr.IsValid()){
+		return m_bitmapCompPtr.GetPtr();
 	}
 
 	return NULL;
@@ -24,48 +25,83 @@ const iimg::IBitmap* CDelegatedBitmapSupplierComp::GetBitmap() const
 
 const i2d::ICalibration2d* CDelegatedBitmapSupplierComp::GetCalibration() const
 {
-	const ProductType* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		return productPtr->first;
+	if (m_calibrationProviderCompPtr.IsValid()){
+		return m_calibrationProviderCompPtr->GetCalibration();
 	}
-	else{
-		return NULL;
+
+	if (m_calibrationCompPtr.IsValid()){
+		return m_calibrationCompPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
+// reimplemented (iproc::ISupplier)
+
+int CDelegatedBitmapSupplierComp::GetWorkStatus() const
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		return m_bitmapSupplierCompPtr->GetWorkStatus();
+	}
+
+	if (m_bitmapCompPtr.IsValid()){
+		return WS_OK;
+	}
+
+	return WS_CRITICAL;
+}
+
+
+void CDelegatedBitmapSupplierComp::InvalidateSupplier()
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		m_bitmapSupplierCompPtr->InvalidateSupplier();
 	}
 }
 
 
-//protected methods
-
-// reimplemented (iproc::TSupplierCompWrap)
-
-int CDelegatedBitmapSupplierComp::ProduceObject(ProductType& result) const
+void CDelegatedBitmapSupplierComp::EnsureWorkInitialized()
 {
-	if (m_bitmapProviderCompPtr.IsValid()){
-		result.first = NULL;
-		result.second = m_bitmapProviderCompPtr->GetBitmap();
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		m_bitmapSupplierCompPtr->EnsureWorkInitialized();
+	}
+}
 
-		if (m_calibrationProviderCompPtr.IsValid()){
-			result.first = m_calibrationProviderCompPtr->GetCalibration();
-		}
 
-		if (result.second != NULL){
-			return WS_OK;
-		}
-		else{
-			return WS_ERROR;
-		}
+void CDelegatedBitmapSupplierComp::EnsureWorkFinished()
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		m_bitmapSupplierCompPtr->EnsureWorkFinished();
+	}
+}
+
+
+void CDelegatedBitmapSupplierComp::ClearWorkResults()
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		m_bitmapSupplierCompPtr->ClearWorkResults();
+	}
+}
+
+
+const ibase::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages() const
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		return m_bitmapSupplierCompPtr->GetWorkMessages();
 	}
 
-	if (m_bitmapCompPtr.IsValid()){
-		result.first = m_calibrationCompPtr.GetPtr();
-		result.second = m_bitmapCompPtr.GetPtr();
+	return NULL;
+}
 
-		return WS_OK;
+
+iprm::IParamsSet* CDelegatedBitmapSupplierComp::GetModelParametersSet() const
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		return m_bitmapSupplierCompPtr->GetModelParametersSet();
 	}
 
-	SendVerboseMessage("Either input bitmap supplier or bitmap object must be set!");
-
-	return WS_CRITICAL;
+	return NULL;
 }
 
 
@@ -77,18 +113,26 @@ void CDelegatedBitmapSupplierComp::OnComponentCreated()
 
 	if (m_bitmapProviderCompPtr.IsValid()){
 		if (m_bitmapProviderModelCompPtr.IsValid()){
-			RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
+			m_bitmapProviderModelCompPtr->AttachObserver(this);
 		}
 	}
 	else{
 		if (m_bitmapModelCompPtr.IsValid()){
-			RegisterSupplierInput(m_bitmapModelCompPtr.GetPtr());
+			m_bitmapModelCompPtr->AttachObserver(this);
 		}
 
 		if (m_calibrationModelCompPtr.IsValid()){
-			RegisterSupplierInput(m_calibrationModelCompPtr.GetPtr());
+			m_calibrationModelCompPtr->AttachObserver(this);
 		}
 	}
+}
+
+
+void CDelegatedBitmapSupplierComp::OnComponentDestroyed()
+{
+	BaseClass2::EnsureModelsDetached();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
