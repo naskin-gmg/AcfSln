@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2624
+          2681
         </Number>
         <Description>
           ACF
@@ -81,7 +81,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               BitmapLoader
@@ -99,6 +99,22 @@
               <Value>
                 BitmapDialogLoader
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ConnectParametersToEditor
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ConnectParametersToEditor
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
