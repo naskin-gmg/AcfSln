@@ -39,6 +39,7 @@ public:
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetGuiCompPtr, false);
+		I_ASSIGN(m_connectParametersToEditorAttrPtr, "ConnectParametersToEditor", "If enabled, the parameter set of the supplier will be connected to the parameter editor", true, true);
 	I_END_COMPONENT;
 
 	TSupplierGuiCompBase();
@@ -134,6 +135,8 @@ private:
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
+
+	I_ATTR(bool, m_connectParametersToEditorAttrPtr);
 
 	bool m_areParamsEditable;
 
@@ -321,17 +324,19 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelAttached()
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
 	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
 
-	m_areParamsEditable = false;
-	bool areParamsAttachedToEditor = false;
+	m_areParamsEditable = !*m_connectParametersToEditorAttrPtr;
+	bool areParamsAttachedToEditor = !*m_connectParametersToEditorAttrPtr;
 	QWidget* paramsWidget = GetParamsWidget();
 	if (paramsWidget != NULL){
-		if ((paramsModelPtr != NULL) && m_paramsSetGuiCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
+		if (m_paramsSetGuiCompPtr.IsValid()){
+			m_paramsSetGuiCompPtr->CreateGui(paramsWidget);
+		}
+
+		if (*m_connectParametersToEditorAttrPtr && (paramsModelPtr != NULL) && m_paramsSetObserverCompPtr.IsValid()){
 			areParamsAttachedToEditor = paramsModelPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
 			if (!areParamsAttachedToEditor){
 				qWarning("Supplier parameters could not be connected to the editor");
 			}
-
-			m_paramsSetGuiCompPtr->CreateGui(paramsWidget);
 
 			m_areParamsEditable = true;
 
