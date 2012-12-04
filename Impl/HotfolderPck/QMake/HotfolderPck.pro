@@ -3,7 +3,5 @@ include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = HotfolderPck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -lhotf
+LIBS += -L../../../Lib/$$COMPILER_DIR -lihotf -lifileproc -liproc
 

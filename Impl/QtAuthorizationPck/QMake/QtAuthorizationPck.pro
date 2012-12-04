@@ -5,6 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtAuthorizationPck
 
-INCLUDEPATH += ../../../Include
-
 LIBS += -L../../../Lib/$$COMPILER_DIR -liauth -liqtauth

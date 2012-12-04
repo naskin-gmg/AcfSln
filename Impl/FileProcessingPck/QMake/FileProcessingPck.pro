@@ -3,7 +3,5 @@ include($(ACFDIR)/Config/QMake/AcfStd.pri)
 
 TARGET = FileProcessingPck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -lfileproc
+LIBS += -L../../../Lib/$$COMPILER_DIR -lifileproc -iproc
 

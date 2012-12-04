@@ -5,7 +5,5 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtExPck
 
-INCLUDEPATH += ../../../Include
-
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqtex
 

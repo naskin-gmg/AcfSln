@@ -1,6 +1,7 @@
+include($(ACFDIR)/Config/QMake/ComponentConfig.pri)
+include($(ACFDIR)/Config/QMake/AcfStd.pri)
+
 TARGET = WizardPck
 
-include(../../../Config/QMake/ComponentConfig.pri)
-include(../../../Config/QMake/AcfStd.pri)
+LIBS += -L../../../Lib/$$COMPILER_DIR -liwiz -liproc
 
-QT -= gui core

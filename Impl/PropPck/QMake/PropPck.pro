@@ -5,6 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = PropPck
 
-INCLUDEPATH += ../../../Include
-
 LIBS += -L../../../Lib/$$COMPILER_DIR -liprop

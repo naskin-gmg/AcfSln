@@ -5,6 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = EdgePck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -liedge
+LIBS += -L../../../Lib/$$COMPILER_DIR -liedge -liedgegui -liproc

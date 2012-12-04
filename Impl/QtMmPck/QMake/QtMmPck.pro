@@ -7,6 +7,4 @@ TARGET = QtMmPck
 
 QT += svg phonon
 
-INCLUDEPATH += ../../../Include
-
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqtmm

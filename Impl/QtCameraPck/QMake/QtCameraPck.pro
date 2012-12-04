@@ -5,6 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtCameraPck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -licam -liqtcam
+LIBS += -L../../../Lib/$$COMPILER_DIR -liqtcam -licam -liproc

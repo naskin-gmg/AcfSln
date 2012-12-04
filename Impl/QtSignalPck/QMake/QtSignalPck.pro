@@ -5,8 +5,6 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtSignalPck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -lisig -liqtsig -limeas
+LIBS += -L../../../Lib/$$COMPILER_DIR -lisig -liqtsig -limeas -liproc
 
 QT += script

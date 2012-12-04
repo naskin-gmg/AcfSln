@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 CONFIG += debug_and_release
 
+SUBDIRS += iauth
 SUBDIRS += ihotf
 SUBDIRS += ihotfgui
 SUBDIRS += imeas
@@ -26,6 +27,7 @@ SUBDIRS += iwizgui
 SUBDIRS += iedge
 SUBDIRS += iedgegui
 
+iauth.file = ../../Include/iauth/QMake/iauth.pro
 ihotf.file = ../../Include/ihotf/QMake/ihotf.pro
 ihotfgui.file = ../../Include/ihotfgui/QMake/ihotfgui.pro
 imeas.file = ../../Include/imeas/QMake/imeas.pro

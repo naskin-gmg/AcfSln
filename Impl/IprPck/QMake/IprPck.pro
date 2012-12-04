@@ -5,6 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = IprPck
 
-INCLUDEPATH += ../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -liipr -limeas
+LIBS += -L../../../Lib/$$COMPILER_DIR -liipr -limeas -liproc
