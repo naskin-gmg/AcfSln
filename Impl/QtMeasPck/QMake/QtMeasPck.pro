@@ -5,5 +5,5 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtMeasPck
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -liqtmeas -limeas -liproc
+LIBS += -L../../../Lib/$$COMPILER_DIR -limeas -liqtmeas
 

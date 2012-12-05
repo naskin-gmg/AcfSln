@@ -5,4 +5,4 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtInspectionPck
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -liinsp -liqtinsp
+LIBS += -L../../../Lib/$$COMPILER_DIR -liqtinsp
