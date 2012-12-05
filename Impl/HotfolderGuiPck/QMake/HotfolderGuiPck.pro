@@ -3,6 +3,6 @@ include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
 include($(ACFDIR)/Config/QMake/AcfStd.pri)
 include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
-TARGET = QtFpfPck
+TARGET = HotfolderGuiPck
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -lifpf -liqtfpf
+LIBS += -L../../../Lib/$$COMPILER_DIR -lihotfgui
