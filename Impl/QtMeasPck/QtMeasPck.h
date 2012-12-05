@@ -10,6 +10,7 @@
 #include "iqtmeas/CDataSequenceViewComp.h"
 #include "iqtmeas/CDataStatisticsGuiComp.h"
 #include "iqtmeas/CNumericParamsGuiComp.h"
+#include <iqtmeas/CScaleCalibrationEditorComp.h>
 
 
 /**
@@ -22,6 +23,7 @@ namespace QtMeasPck
 typedef iqtmeas::CDataSequenceViewComp DataSequenceView;
 typedef iqtmeas::CDataStatisticsGuiComp DataStatisticsGui;
 typedef iqtmeas::CNumericParamsGuiComp NumericParamsGui;
+typedef iqtmeas::CScaleCalibrationEditorComp ScaleCalibrationEditor;
 
 
 } // namespace QtMeasPck

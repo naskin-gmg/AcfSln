@@ -33,6 +33,11 @@ I_EXPORT_COMPONENT(
 			"Editor for numeric parameters",
 			"Numeric Values Filter Ranges Parameter Editor");
 
+I_EXPORT_COMPONENT(
+			ScaleCalibrationEditor,
+			"Editor for scale calibration parameters",
+			"Scale Calibration Numeric Values Filter Ranges Parameter Editor");
+
 
 } // namespace QtMeasPck
 
