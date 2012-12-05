@@ -57,6 +57,7 @@ protected:
 Q_SLOTS:
 	void OnValueChanged(double);
 	void on_CalibrateButton_clicked();
+	void on_NominalRadiusSpinBox_valueChanged(double d);
 private:
 	I_REF(imeas::INumericValueProvider, m_circleProviderPtr);
 };

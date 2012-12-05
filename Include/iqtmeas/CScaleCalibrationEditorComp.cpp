@@ -1,6 +1,7 @@
 #include "CScaleCalibrationEditorComp.h"
 #include <iostream>
 #include <imath/CVarVector.h>
+#include <QtGui/qmessagebox.h>
 #define SHOWDEBUG(x) std::cerr<<__FILE__<<"@"<<__LINE__<<":"<<#x << "=`" << x << "'" << std::endl
 
 
@@ -33,6 +34,10 @@ void CScaleCalibrationEditorComp::OnGuiCreated()
 
 	if (!m_circleProviderPtr.IsValid()){
 		CalibrationGroupBox->setVisible(false);
+	}
+
+	if (NominalRadiusSpinBox->value() == 0){
+		CalibrateButton->setDisabled(true);
 	}
 }
 
@@ -73,9 +78,6 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 	}
 
 	double nominalRadius = NominalRadiusSpinBox->value();
-	if (nominalRadius == 0){
-		return;
-	}
 
 	for (int i = 0; i < m_circleProviderPtr->GetValuesCount(); i++){
 		const imeas::INumericValue& value = m_circleProviderPtr->GetNumericValue(i);
@@ -98,6 +100,11 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 	}
 }
 
+
+void CScaleCalibrationEditorComp::on_NominalRadiusSpinBox_valueChanged(double d)
+{
+	CalibrateButton->setDisabled(d == 0);
+}
 
 } // namespace iqtmeas
 
