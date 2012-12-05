@@ -3,10 +3,72 @@
 
 // ACF includes
 #include "i2d/CAffineTransformation2d.h"
-
+#include "imath/CGeneralUnitInfo.h"
 
 namespace icam
 {
+
+
+const imeas::INumericConstraints* CSnapBitmapSupplierComp::GetScaleConstraints(CSnapBitmapSupplierComp&)
+{
+
+
+	const struct: public imeas::INumericConstraints
+	{
+
+
+		/**
+			Get number of expected numeric values.
+		 */
+		virtual int GetNumericValuesCount() const
+		{
+			return 2;
+		}
+
+
+		/**
+			Get human readable name of numeric value for specified list index.
+			\param	index	index of numeric value.
+		 */
+		virtual QString GetNumericValueName(int index) const
+		{
+			switch (index){
+				case 0: return "X";
+				case 1: return "Y";
+				default: return "";
+			}
+		}
+
+
+		/**
+			Get human readable description of numeric value for specified list index.
+			\param	index	index of numeric value.
+		 */
+		virtual QString GetNumericValueDescription(int index) const
+		{
+			switch (index){
+				case 0: return "X scale in pixels per millimeter";
+				case 1: return "Y scale in pixels per millimeter";
+				default: return QString("invalid value index: %").arg(index);
+			}
+		}
+
+
+		/**
+			Get range of possible numeric values for specified list index.
+			\param	index	index of numeric value.
+		 */
+		virtual const imath::IUnitInfo & GetNumericValueUnitInfo(int index) const
+		{
+			const imath::CGeneralUnitInfo info(imath::IUnitInfo::UT_TECHNICAL, "scale", 1.0, istd::CRange(0.0, 100.0));
+			return info;
+		}
+
+	} ScaleConstraints;
+
+
+	return &ScaleConstraints;
+}
 
 
 // reimplemented (iipr::IBitmapProvider)
@@ -73,7 +135,7 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.second.GetPtr());
 		switch (status){
-		case iproc::IProcessor::TS_OK:
+			case iproc::IProcessor::TS_OK:
 			{
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
 				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
@@ -88,13 +150,13 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 					result.first.SetPtr(transformPtr);
 				}
 			}
-			return WS_OK;
+				return WS_OK;
 
-		case iproc::IProcessor::TS_CANCELED:
-			return WS_CANCELED;
+			case iproc::IProcessor::TS_CANCELED:
+				return WS_CANCELED;
 
-		default:
-			return WS_ERROR;
+			default:
+				return WS_ERROR;
 		}
 	}
 
