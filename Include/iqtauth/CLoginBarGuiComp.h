@@ -11,7 +11,7 @@
 // ACF-Solutions includes
 #include "iauth/ILogin.h"
 
-#include "generated/ui_CLoginBarGuiComp.h"
+#include "Generated/ui_CLoginBarGuiComp.h"
 
 
 namespace iqtauth

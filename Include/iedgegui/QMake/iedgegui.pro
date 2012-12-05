@@ -3,5 +3,3 @@ include($(ACFDIR)/Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = iedgegui
 
-INCLUDEPATH += ../..
-

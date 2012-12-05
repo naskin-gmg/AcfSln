@@ -3,6 +3,4 @@ include($(ACFDIR)/Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = iqtsig
 
-INCLUDEPATH += ../..
-
 QT += script
