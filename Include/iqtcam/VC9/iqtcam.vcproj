@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CScaleCalibrationEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSnapImageGuiComp.cpp"
 				>
 			</File>
@@ -225,6 +229,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiBitmapViewComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CScaleCalibrationEditorComp.h"
 				>
 			</File>
 			<File
@@ -261,6 +269,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CScaleCalibrationEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp"
 				>
 			</File>
@@ -274,6 +286,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CMultiBitmapSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CScaleCalibrationEditorComp.h"
 				>
 			</File>
 			<File
@@ -298,7 +314,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CScaleCalibrationEditorComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CSnapImageGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CScaleCalibrationEditorComp.moc"
 				>
 			</File>
 		</Filter>

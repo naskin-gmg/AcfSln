@@ -2,7 +2,6 @@
 #include <iostream>
 #include <imath/CVarVector.h>
 #include <QtGui/qmessagebox.h>
-#define SHOWDEBUG(x) std::cerr<<__FILE__<<"@"<<__LINE__<<":"<<#x << "=`" << x << "'" << std::endl
 
 
 namespace iqtmeas
@@ -56,12 +55,6 @@ void CScaleCalibrationEditorComp::UpdateGui(int)
 
 	ScaleXSpinBox->setValue(vec[0]);
 	ScaleYSpinBox->setValue(vec[1]);
-}
-
-
-void CScaleCalibrationEditorComp::UpdateEditor(int changeFlags)
-{
-	UpdateGui(changeFlags);
 }
 
 

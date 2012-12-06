@@ -14,10 +14,13 @@
 #include <QtGui/QGroupBox>
 
 
-// ACF includes
+// Acf includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include <imeas/INumericValueProvider.h>
 #include <istd/TPointerVector.h>
+
+// AcfSln includes
+#include <imeas/INumericValueProvider.h>
+
 
 #include "Generated/ui_CScaleCalibrationEditorComp.h"
 
@@ -49,9 +52,6 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int changeFlags);
-
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(int changeFlags);
 
 	public
 Q_SLOTS:

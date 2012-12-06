@@ -179,10 +179,6 @@
 				RelativePath="..\CNumericValueWidget.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CScaleCalibrationEditorComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -203,10 +199,6 @@
 			</File>
 			<File
 				RelativePath="..\CNumericValueWidget.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibrationEditorComp.h"
 				>
 			</File>
 			<File
@@ -243,10 +235,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CScaleCalibrationEditorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\ui_CDataSequenceViewComp.h"
 				>
 			</File>
@@ -256,10 +244,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CNumericValueWidget.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CScaleCalibrationEditorComp.h"
 				>
 			</File>
 		</Filter>
@@ -277,10 +261,6 @@
 			</File>
 			<File
 				RelativePath="..\CNumericValueWidget.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibrationEditorComp.ui"
 				>
 			</File>
 		</Filter>
@@ -301,10 +281,6 @@
 			</File>
 			<File
 				RelativePath="..\CNumericValueWidget.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibrationEditorComp.moc"
 				>
 			</File>
 		</Filter>
