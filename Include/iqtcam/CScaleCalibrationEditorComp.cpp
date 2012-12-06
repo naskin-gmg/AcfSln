@@ -4,7 +4,7 @@
 #include <QtGui/qmessagebox.h>
 
 
-namespace iqtmeas
+namespace iqtcam
 {
 
 
@@ -99,5 +99,5 @@ void CScaleCalibrationEditorComp::on_NominalRadiusSpinBox_valueChanged(double d)
 	CalibrateButton->setDisabled(d == 0);
 }
 
-} // namespace iqtmeas
+} // namespace iqtcam
 

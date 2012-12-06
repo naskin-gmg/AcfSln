@@ -5,8 +5,8 @@
  * Created on 29 listopad 2012, 13:50
  */
 
-#ifndef iqtmeas_CScaleCalibrationEditorComp_included
-#define	iqtmeas_CScaleCalibrationEditorComp_included
+#ifndef iqtcam_CScaleCalibrationEditorComp_included
+#define	iqtcam_CScaleCalibrationEditorComp_included
 
 
 // Qt includes
@@ -24,7 +24,7 @@
 
 #include "Generated/ui_CScaleCalibrationEditorComp.h"
 
-namespace iqtmeas
+namespace iqtcam
 {
 
 
@@ -63,8 +63,8 @@ private:
 };
 
 
-} // namespace iqtmeas
+} // namespace iqtcam
 
 
-#endif	/* iqtmeas_CScaleCalibrationEditorComp_included */
+#endif	/* iqtcam_CScaleCalibrationEditorComp_included */
 

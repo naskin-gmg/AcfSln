@@ -43,5 +43,9 @@ I_EXPORT_COMPONENT(
 			"Bitmap visualization for multi bitmap provider", 
 			"Image Bitmap Camera Snap Acquisition Supplier Multi");
 
+I_EXPORT_COMPONENT(
+			ScaleCalibrationEditor,
+			"Editor for scale calibration parameters",
+			"Scale Calibration Numeric Values Filter Ranges Parameter Editor");
 
 } // namespace QtCameraPck
