@@ -32,7 +32,6 @@ class CScaleCalibrationEditorComp:
 public iqtgui::TDesignerGuiObserverCompBase<
 Ui::CScaleCalibrationEditorComp, imeas::INumericValue>
 {
-	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 	Ui::CScaleCalibrationEditorComp, imeas::INumericValue> BaseClass;
@@ -53,11 +52,12 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int changeFlags);
 
-	public
-Q_SLOTS:
+	Q_OBJECT
+	private Q_SLOTS:
 	void OnValueChanged(double);
 	void on_CalibrateButton_clicked();
 	void on_NominalRadiusSpinBox_valueChanged(double d);
+
 private:
 	I_REF(imeas::INumericValueProvider, m_circleProviderPtr);
 };

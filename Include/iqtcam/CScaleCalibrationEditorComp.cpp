@@ -49,12 +49,12 @@ void CScaleCalibrationEditorComp::UpdateGui(int)
 	}
 
 	imath::CVarVector vec = model->GetValues();
-	if (vec.GetElementsCount() < 2){
-		return;
+	if (vec.GetElementsCount() >= 2){
+		ScaleYSpinBox->setValue(vec[1]);
 	}
-
-	ScaleXSpinBox->setValue(vec[0]);
-	ScaleYSpinBox->setValue(vec[1]);
+	if (vec.GetElementsCount() >= 1){
+		ScaleXSpinBox->setValue(vec[0]);
+	}
 }
 
 
@@ -71,6 +71,9 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 	}
 
 	double nominalRadius = NominalRadiusSpinBox->value();
+	if (nominalRadius == 0){
+		return; // avoid division by zero
+	}
 
 	for (int i = 0; i < m_circleProviderPtr->GetValuesCount(); i++){
 		const imeas::INumericValue& value = m_circleProviderPtr->GetNumericValue(i);
@@ -80,11 +83,14 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 
 		imath::CVarVector vec = value.GetValues();
 		if (vec.GetElementsCount() > 0){
-			CalibrationGroupBox->setVisible(true);
+			double scaleX = vec[2] / nominalRadius;
+			double scaleY = scaleX;
+			if (vec.GetElementsCount() > 3){
+				scaleX = vec[3] / nominalRadius;
+			}
 
-			double scale = vec[0] / nominalRadius;
-			ScaleXSpinBox->setValue(scale);
-			ScaleYSpinBox->setValue(scale);
+			ScaleXSpinBox->setValue(scaleX);
+			ScaleYSpinBox->setValue(scaleY);
 
 			DoUpdateModel();
 
@@ -96,7 +102,7 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 
 void CScaleCalibrationEditorComp::on_NominalRadiusSpinBox_valueChanged(double d)
 {
-	CalibrateButton->setDisabled(d == 0);
+	CalibrateButton->setDisabled(d == 0 || !m_circleProviderPtr.IsValid());
 }
 
 } // namespace iqtcam
