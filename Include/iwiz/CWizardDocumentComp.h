@@ -27,6 +27,8 @@ public:
 	I_BEGIN_COMPONENT(CWizardDocumentComp);
 		I_REGISTER_INTERFACE(IParamsManagerWizard);
 		I_REGISTER_INTERFACE(IWizardNavigationController);
+		I_ASSIGN(m_defaultPageIndexAttrPtr, "DefaultPageIndex", "Default page index", false, 0);
+		I_ASSIGN_MULTI_0(m_additionalObjectsCompPtr, "AdditionalPersistentObjects", "List of components that have to be serialized together with wizard document", false);
 	I_END_COMPONENT;
 
 	// reimplemented (iwiz::IParamsManagerWizard)
@@ -43,6 +45,14 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+private:
+	I_ATTR(int, m_defaultPageIndexAttrPtr);
+	I_MULTIREF(iser::ISerializable, m_additionalObjectsCompPtr);
 };
 
 

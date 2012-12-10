@@ -71,6 +71,12 @@ bool CSelectionConsistencyControllerComp::TryLeaveState(bool /*isActionAllowed*/
 }
 
 
+bool CSelectionConsistencyControllerComp::IsResetAllowed() const
+{
+	return true;
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CSelectionConsistencyControllerComp::OnComponentCreated()

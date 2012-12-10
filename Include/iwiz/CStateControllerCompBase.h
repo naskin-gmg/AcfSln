@@ -33,6 +33,7 @@ public:
 	virtual bool IsLeaveAllowed(bool isActionAllowed = true, const IStateController* nextStatePtr = NULL) const;
 	virtual bool TryEnterState(bool isActionAllowed = true, const IStateController* prevStatePtr = NULL);
 	virtual bool TryLeaveState(bool isActionAllowed = true, const IStateController* nextStatePtr = NULL);
+	virtual bool IsResetAllowed() const;
 
 protected:
 	mutable bool m_isStateActive;
