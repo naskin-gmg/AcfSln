@@ -33,6 +33,12 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// reimplemented to resolve inheritance ambiguity introduced in #119
+	// todo consider using 'using' directive
+	virtual bool CopyFrom(const IChangeable& object){
+		return BaseObject::CopyFrom(object);
+	}
+
 protected:
 	double m_weight;
 };
