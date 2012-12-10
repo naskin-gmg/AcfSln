@@ -64,7 +64,7 @@ bool CSelectableFileConverterComp::SetSelectedOptionIndex(int index)
 }
 
 
-iprm::ISelectionParam* CSelectableFileConverterComp::GetActiveSubselection() const
+iprm::ISelectionParam* CSelectableFileConverterComp::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }

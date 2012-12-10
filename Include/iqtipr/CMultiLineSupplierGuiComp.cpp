@@ -118,7 +118,7 @@ bool CMultiLineSupplierGuiComp::LineSelection::SetSelectedOptionIndex(int index)
 }
 
 
-iprm::ISelectionParam* CMultiLineSupplierGuiComp::LineSelection::GetActiveSubselection() const
+iprm::ISelectionParam* CMultiLineSupplierGuiComp::LineSelection::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }

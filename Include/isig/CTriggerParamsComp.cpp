@@ -78,7 +78,7 @@ bool CTriggerParamsComp::SetSelectedOptionIndex(int index)
 }
 
 
-iprm::ISelectionParam* CTriggerParamsComp::GetActiveSubselection() const
+iprm::ISelectionParam* CTriggerParamsComp::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }
