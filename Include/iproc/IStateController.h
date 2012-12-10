@@ -70,6 +70,12 @@ public:
 		\return	true, if state could be enter.
 	*/
 	virtual bool TryLeaveState(bool isActionAllowed = true, const IStateController* nextStatePtr = NULL) = 0;
+
+	/**
+		Check if reseting is allowed.
+		\sa	\c IsEnterAllowed.
+	*/
+	virtual bool IsResetAllowed() const = 0;
 };
 
 
