@@ -76,12 +76,12 @@
      </property>
      <item>
       <property name="text">
-       <string>Rise</string>
+       <string>White -&gt; Black</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Drop</string>
+       <string>Black -&gt; White</string>
       </property>
      </item>
      <item>
@@ -114,12 +114,12 @@
      </property>
      <item>
       <property name="text">
-       <string>Forwards</string>
+       <string>In -&gt; Out</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Backwards</string>
+       <string>Out -&gt; In</string>
       </property>
      </item>
     </widget>
