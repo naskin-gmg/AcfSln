@@ -40,16 +40,10 @@ public:
 	I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 	I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
 	I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
-	I_ASSIGN_MULTI_2(m_PPM, "ScaleParamId", "Resolution in pixels per millimeter", false, 4.0, 4.0);
-	I_ASSIGN(m_defaultPPMValuePtr, "DefaultScaleParam", "Default resolution in pixels per millimeter", false, "DefaultScaleParam");
+	I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "Resolution parameter ID", false, "ScaleParamId");
+	I_ASSIGN(m_defaultScaleValuePtr, "DefaultScaleParam", "Default resolution", false, "DefaultScaleParam");
 	I_REGISTER_SUBELEMENT(ScaleConstraints);
-	I_REGISTER_SUBELEMENT_INTERFACE(ScaleConstraints, const imeas::INumericConstraints, GetScaleConstraints);
 	I_END_COMPONENT;
-
-	/**
-		Provide meta information of scaling parameters (ScaleConstraints subelement)
-	 */
-	static const imeas::INumericConstraints* GetScaleConstraints(CSnapBitmapSupplierComp&);
 
 	// reimplemented (iipr::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
@@ -67,8 +61,8 @@ private:
 
 	I_REF(IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);
-	I_MULTIATTR(double, m_PPM); // implemented as multi double instead of imeas::CSimpleNumericValue due to no serialization for that class
-	I_REF(imeas::INumericValue, m_defaultPPMValuePtr);
+	I_ATTR(QByteArray, m_scaleParamIdAttrPtr);
+	I_REF(imeas::INumericValue, m_defaultScaleValuePtr);
 };
 
 

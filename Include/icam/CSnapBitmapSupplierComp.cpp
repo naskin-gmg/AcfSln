@@ -4,71 +4,11 @@
 // ACF includes
 #include "i2d/CAffineTransformation2d.h"
 #include "imath/CGeneralUnitInfo.h"
+#include <iprm/TParamsPtr.h>
+
 
 namespace icam
 {
-
-
-const imeas::INumericConstraints* CSnapBitmapSupplierComp::GetScaleConstraints(CSnapBitmapSupplierComp&)
-{
-
-
-	const struct: public imeas::INumericConstraints
-	{
-
-
-		/**
-			Get number of expected numeric values.
-		 */
-		virtual int GetNumericValuesCount() const
-		{
-			return 2;
-		}
-
-
-		/**
-			Get human readable name of numeric value for specified list index.
-			\param	index	index of numeric value.
-		 */
-		virtual QString GetNumericValueName(int index) const
-		{
-			switch (index){
-				case 0: return "X";
-				case 1: return "Y";
-				default: return "";
-			}
-		}
-
-
-		/**
-			Get human readable description of numeric value for specified list index.
-			\param	index	index of numeric value.
-		 */
-		virtual QString GetNumericValueDescription(int index) const
-		{
-			switch (index){
-				case 0: return "X scale in pixels per millimeter";
-				case 1: return "Y scale in pixels per millimeter";
-				default: return QString("invalid value index: %").arg(index);
-			}
-		}
-
-
-		/**
-			Get range of possible numeric values for specified list index.
-			\param	index	index of numeric value.
-		 */
-		virtual const imath::IUnitInfo & GetNumericValueUnitInfo(int index) const
-		{
-			const imath::CGeneralUnitInfo info(imath::IUnitInfo::UT_TECHNICAL, "scale", 1.0, istd::CRange(0.0, 100.0));
-			return info;
-		}
-
-	} ScaleConstraints;
-
-
-	return &ScaleConstraints;
-}
 
 
 // reimplemented (iipr::IBitmapProvider)
@@ -139,14 +79,40 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 			{
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
 				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
+
+				i2d::CVector2d scale(1, 1);
+
+				const imeas::INumericValue *scalePtr = NULL;
+
+				if (m_scaleParamIdAttrPtr.IsValid()){
+					iprm::TParamsPtr<imeas::INumericValue> paramPtr(GetModelParametersSet(), m_scaleParamIdAttrPtr->GetValue(), false);
+					if (paramPtr.IsValid()){
+						scalePtr = paramPtr.GetPtr();
+					}
+				}
+
+				if (scalePtr == NULL && m_defaultScaleValuePtr.IsValid()){
+					scalePtr = m_defaultScaleValuePtr.GetPtr();
+				}
+
+				if (scalePtr != NULL){
+					imath::CVarVector scaleValues = scalePtr->GetValues();
+					if (scaleValues.GetElementsCount() >= 2){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
+					}
+					else if (scaleValues.GetElementsCount() >= 1){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+					}
+				}
+
 				if (m_calibrationCompPtr.IsValid()){
 					i2d::CAffineTransformation2d transform;
-					transform.Reset(-center);
+					transform.Reset(-center, 0, scale);
 					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transform));
 				}
 				else{
 					i2d::CAffineTransformation2d* transformPtr = new i2d::CAffineTransformation2d();
-					transformPtr->Reset(-center);
+					transformPtr->Reset(-center, 0, scale);
 					result.first.SetPtr(transformPtr);
 				}
 			}
