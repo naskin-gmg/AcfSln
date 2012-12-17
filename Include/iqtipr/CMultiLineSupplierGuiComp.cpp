@@ -202,7 +202,7 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 
 	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetModelPtr());
 	if (objectPtr != NULL){
-		const iview::IColorShema& colorShema = GetColorShema();
+		const iview::IColorSchema& colorSchema = GetColorSchema();
 
 		int linesCount = objectPtr->GetValuesCount();
 
@@ -221,7 +221,7 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 			boundingBox.Union(endPoint);
 		}
 
-		const i2d::CRect& tickerBox = colorShema.GetTickerBox(iview::IColorShema::TT_INACTIVE);
+		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(iview::IColorSchema::TT_INACTIVE);
 
 		return boundingBox.GetExpanded(tickerBox);
 	}

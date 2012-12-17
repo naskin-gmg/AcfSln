@@ -20,7 +20,7 @@ namespace iedgegui
 
 CEdgeLinesSupplierGuiComp::CEdgeLinesSupplierGuiComp()
 {
-	m_edgesColorShema.SetPen(iview::IColorShema::SP_NORMAL, QPen(Qt::blue));
+	m_edgesColorSchema.SetPen(iview::IColorSchema::SP_NORMAL, QPen(Qt::blue));
 }
 
 
@@ -71,11 +71,11 @@ void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape(); 
 
 	if (shapePtr != NULL){
-		if (m_contoursColorShemaCompPtr.IsValid()){
-			shapePtr->SetUserColorShema(m_contoursColorShemaCompPtr.GetPtr());
+		if (m_contoursColorSchemaCompPtr.IsValid()){
+			shapePtr->SetUserColorSchema(m_contoursColorSchemaCompPtr.GetPtr());
 		}
 		else{
-			shapePtr->SetUserColorShema(&m_edgesColorShema);
+			shapePtr->SetUserColorSchema(&m_edgesColorSchema);
 		}
 
 		shapePtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);

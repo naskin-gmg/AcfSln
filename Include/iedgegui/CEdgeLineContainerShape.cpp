@@ -6,7 +6,7 @@
 
 // ACF includes
 #include "imod/IModel.h"
-#include "iview/IColorShema.h"
+#include "iview/IColorSchema.h"
 #include "iview/CScreenTransform.h"
 #include "iedge/CEdgeLine.h"
 
@@ -26,8 +26,8 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 		if (numLines > 0){
 			double scale = qSqrt(GetViewToScreenTransform().GetDeformMatrix().GetFrobeniusNorm()) * 2;
 
-			const iview::IColorShema& colorShema = GetColorShema();
-			const QPen& defaultPen = colorShema.GetPen(iview::IColorShema::SP_NORMAL);
+			const iview::IColorSchema& colorSchema = GetColorSchema();
+			const QPen& defaultPen = colorSchema.GetPen(iview::IColorSchema::SP_NORMAL);
 
 			// prepare draw context
 			QBrush brush(Qt::green, Qt::SolidPattern);

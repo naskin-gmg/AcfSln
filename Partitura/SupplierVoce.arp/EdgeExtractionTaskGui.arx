@@ -187,13 +187,13 @@
         <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
-              ContourColorShema
+              ContourColorSchema
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              ContourColorShema
+              ContourColorSchema
             </ExportId>
             <Data>
               <IsEnabled>
