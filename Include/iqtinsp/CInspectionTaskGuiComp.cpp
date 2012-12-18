@@ -34,8 +34,8 @@ void CInspectionTaskGuiComp::UpdateModel() const
 {
 	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
-	for (		EditorsList::const_iterator iter = m_editorsList.begin();
-				iter != m_editorsList.end();
+	for (		EditorsList::const_iterator iter = m_editorsList.constBegin();
+				iter != m_editorsList.constEnd();
 				++iter){
 		const imod::IModelEditor* editorPtr = *iter;
 		I_ASSERT(editorPtr != NULL);
@@ -215,8 +215,8 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 
 	int visualProvidersCount = m_editorVisualInfosCompPtr.GetCount();
 
-	for (		GuiMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
-				iter != m_tabToGuiIndexMap.end();
+	for (		GuiMap::ConstIterator iter = m_tabToGuiIndexMap.constBegin();
+				iter != m_tabToGuiIndexMap.constEnd();
 				++iter){
 		int tabIndex = iter.key();
 		I_ASSERT(tabIndex >= 0);
@@ -426,8 +426,8 @@ void CInspectionTaskGuiComp::OnGuiDestroyed()
 		}
 	}
 
-	for (		GuiMap::const_iterator iter = m_stackIndexToTabMap.begin();
-				iter != m_stackIndexToTabMap.end();
+	for (		GuiMap::const_iterator iter = m_stackIndexToTabMap.constBegin();
+				iter != m_stackIndexToTabMap.constEnd();
 				++iter){
 		int guiIndex = iter.value();
 		I_ASSERT(guiIndex >= 0);
@@ -661,8 +661,8 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 		return;
 	}
 
-	for (		ResultShapesMap::ConstIterator shapesContainerIter = m_resultShapesMap.begin();
-				shapesContainerIter != m_resultShapesMap.end();
+	for (		ResultShapesMap::ConstIterator shapesContainerIter = m_resultShapesMap.constBegin();
+				shapesContainerIter != m_resultShapesMap.constEnd();
 				++shapesContainerIter){
 		int shapeTaskIndex = shapesContainerIter.key();
 		const istd::TPointerVector<iview::IShape>& resultShapes = shapesContainerIter.value();
@@ -739,6 +739,9 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 void CInspectionTaskGuiComp::OnAutoTest()
 {
 	m_currentGuiUpdated = false;
+
+	MessageList->clear();
+	m_resultShapesMap.clear();
 
 	iproc::ISupplier* supplierPtr = dynamic_cast<iproc::ISupplier*>(GetObjectPtr());
 	if (supplierPtr != NULL){
@@ -832,8 +835,8 @@ void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* i
 
 	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
 
-	for (		GuiMap::ConstIterator tabsIter = m_tabToGuiIndexMap.begin();
-				tabsIter != m_tabToGuiIndexMap.end();
+	for (		GuiMap::ConstIterator tabsIter = m_tabToGuiIndexMap.constBegin();
+				tabsIter != m_tabToGuiIndexMap.constEnd();
 				++tabsIter){
 		int tabIndex = tabsIter.key();
 		if (tabsIter.value() == taskIndex){

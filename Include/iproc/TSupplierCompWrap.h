@@ -220,8 +220,8 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 		m_messageContainer.ClearMessages();
 
 		// distribute initializing to input...
-		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.begin();
-					inputSupplierIter != m_inputSuppliersMap.end();
+		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.constBegin();
+					inputSupplierIter != m_inputSuppliersMap.constEnd();
 					++inputSupplierIter){
 			ISupplier* supplierPtr = inputSupplierIter.value();
 
