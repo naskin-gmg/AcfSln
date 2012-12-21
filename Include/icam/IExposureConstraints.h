@@ -2,7 +2,7 @@
 #define icam_IExposureConstraints_included
 
 
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 #include "istd/TRange.h"
 
 #include "icam/icam.h"
@@ -12,7 +12,7 @@ namespace icam
 {
 
 
-class IExposureConstraints: virtual public istd::IPolymorphic
+class IExposureConstraints: virtual public istd::IChangeable
 {
 public:
 	/**
