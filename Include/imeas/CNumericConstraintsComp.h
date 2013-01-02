@@ -1,3 +1,4 @@
+
 #ifndef imeas_CNumericConstraintsComp_included
 #define imeas_CNumericConstraintsComp_included
 
@@ -6,8 +7,9 @@
 #include "iser/ISerializable.h"
 #include "icomp/CComponentBase.h"
 
-// ACF-Solutions incldues
+// ACF-Solutions includes
 #include "imath/IUnitInfo.h"
+#include "imath/CDoubleManip.h"
 
 #include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
@@ -24,7 +26,8 @@ namespace imeas
 class CNumericConstraintsComp:
 			public icomp::CComponentBase,
 			virtual public INumericConstraints,
-			virtual protected imath::IUnitInfo
+			virtual protected imath::IUnitInfo,
+			protected imath::CDoubleManip
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -40,6 +43,7 @@ public:
 		I_ASSIGN(m_displayMultFactorAttrPtr, "DisplayMultFactor", "Scale factor used for display, e.g for unit name '%' it will be 100", true, 1);
 		I_ASSIGN(m_minValueAttrPtr, "MinValue", "Minimal value", true, 0);
 		I_ASSIGN(m_maxValueAttrPtr, "MaxValue", "Maximal value", true, 1);
+		I_ASSIGN(m_precisionAttrPtr, "Precision", "Typical values: 0 - integer, 15 - double", true, 15);
 	I_END_COMPONENT;
 
 	// reimplemented (imeas::INumericConstraints)
@@ -56,6 +60,12 @@ protected:
 	virtual istd::CRange GetValueRange() const;
 	virtual const imath::IDoubleManip& GetValueManip() const;
 
+	// reimplemented (imath::IDoubleManip)
+	virtual int GetPrecision() const;
+
+	// reimplemented (ibase::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_ATTR(int, m_dimensionsCountAttrPtr);
 	I_MULTIATTR(QString, m_namesAttrPtr);
@@ -66,6 +76,9 @@ private:
 	I_ATTR(double, m_displayMultFactorAttrPtr);
 	I_ATTR(double, m_minValueAttrPtr);
 	I_ATTR(double, m_maxValueAttrPtr);
+	I_ATTR(int, m_precisionAttrPtr);
+
+	int m_precision;
 };
 
 

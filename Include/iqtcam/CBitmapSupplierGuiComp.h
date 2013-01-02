@@ -27,13 +27,15 @@ namespace iqtcam
 
 
 class CBitmapSupplierGuiComp:
-			public iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp>,
+			public ibase::TLoggerCompWrap<
+						iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp> >,
 			virtual public iipr::IBitmapProvider
 {
 	Q_OBJECT
 
 public:
-	typedef iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp> BaseClass;
+	typedef ibase::TLoggerCompWrap<
+				iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp> > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapSupplierGuiComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);

@@ -1,3 +1,4 @@
+
 #include "imeas/CNumericConstraintsComp.h"
 
 
@@ -5,8 +6,6 @@
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
-#include "imath/CDoubleManip.h"
 
 
 namespace imeas
@@ -78,9 +77,25 @@ istd::CRange CNumericConstraintsComp::GetValueRange() const
 
 const imath::IDoubleManip& CNumericConstraintsComp::GetValueManip() const
 {
-	static imath::CDoubleManip manip;
+	return *this;
+}
 
-	return manip;
+
+// reimplemented (imath::IDoubleManip)
+
+int CNumericConstraintsComp::GetPrecision() const
+{
+	return m_precision;
+}
+
+
+// reimplemented (ibase::CComponentBase)
+
+void CNumericConstraintsComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_precision = qMax(0, *m_precisionAttrPtr);
 }
 
 

@@ -88,7 +88,16 @@ void CBitmapSupplierGuiComp::on_SaveParamsButton_clicked()
 
 void CBitmapSupplierGuiComp::OnTimerReady()
 {
-	on_SnapImageButton_clicked();
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	if (supplierPtr != NULL){
+		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
+		supplierPtr->EnsureWorkFinished();
+
+		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
+			SendCriticalMessage(0, QObject::tr("Snap Error"));
+		}
+	}
 }
 
 

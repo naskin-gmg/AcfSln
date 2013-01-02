@@ -477,25 +477,17 @@ void CInspectionTaskGuiComp::OnGuiHidden()
 
 void CInspectionTaskGuiComp::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (modelId == m_currentGuiIndex){
-		DoUpdateCurrentTab();
+	if (modelId == m_currentGuiIndex && !m_testStarted){
+		UpdateVisualElements();
+
+		UpdateTaskMessages();
+
+		DoUpdateEditor(m_currentGuiIndex);
 	}
 }
 
 
 // private methods
-
-void CInspectionTaskGuiComp::DoUpdateCurrentTab()
-{
-	m_currentGuiUpdated = true;
-
-	UpdateVisualElements();
-
-	UpdateTaskMessages();
-
-	DoUpdateEditor(m_currentGuiIndex);
-}
-
 
 void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex)
 {
@@ -738,7 +730,7 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 
 void CInspectionTaskGuiComp::OnAutoTest()
 {
-	m_currentGuiUpdated = false;
+	m_testStarted = true;
 
 	MessageList->clear();
 	m_resultShapesMap.clear();
@@ -749,12 +741,16 @@ void CInspectionTaskGuiComp::OnAutoTest()
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (!m_currentGuiUpdated){
-			DoUpdateCurrentTab();
-		}
+		UpdateVisualElements();
+
+		UpdateTaskMessages();
+
+		DoUpdateEditor(m_currentGuiIndex);
 
 		UpdateProcessingState();
 	}
+
+	m_testStarted = false;
 }
 
 

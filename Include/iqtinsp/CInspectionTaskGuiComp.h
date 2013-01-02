@@ -92,7 +92,6 @@ protected:
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	void DoUpdateCurrentTab();
 	void AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex);
 	void UpdateTaskMessages();
 	void DoUpdateEditor(int taskIndex);
@@ -134,7 +133,7 @@ private:
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 
 	int m_currentGuiIndex;
-	bool m_currentGuiUpdated;
+	bool m_testStarted;
 
 	typedef QMap<int, int> GuiMap;
 	GuiMap m_tabToStackIndexMap;	// map GUI index (for editors) to stack index (for preview GUI)
