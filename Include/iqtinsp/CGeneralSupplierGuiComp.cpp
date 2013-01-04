@@ -24,6 +24,10 @@ void CGeneralSupplierGuiComp::on_TestButton_clicked()
 						NULL,
 						QObject::tr("Error"),
 						QObject::tr("Processing Error"));
+
+			if (AutoTestButton->isChecked()){
+				AutoTestButton->setChecked(false);
+			}
 		}
 	}
 }
@@ -53,6 +57,14 @@ QWidget* CGeneralSupplierGuiComp::GetParamsWidget() const
 }
 
 
+void CGeneralSupplierGuiComp::OnSupplierParamsChanged()
+{
+	if (IsGuiCreated() && AutoTestButton->isChecked()){
+		DoTest();
+	}
+}
+
+
 // reimplemented (iqtgui::TGuiObserverWrap)
 
 void CGeneralSupplierGuiComp::OnGuiModelAttached()
@@ -63,6 +75,14 @@ void CGeneralSupplierGuiComp::OnGuiModelAttached()
 
 	LoadParamsButton->setVisible(IsLoadParamsSupported());
 	SaveParamsButton->setVisible(IsSaveParamsSupported());
+}
+
+
+void CGeneralSupplierGuiComp::OnGuiHidden()
+{
+	AutoTestButton->setChecked(false);
+
+	BaseClass::OnGuiHidden();
 }
 
 

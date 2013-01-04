@@ -238,6 +238,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageAffineTransformProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageBinarizeProcessorComp.cpp"
 				>
 			</File>
@@ -339,6 +343,10 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParams.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchParamsComp.cpp"
 				>
 			</File>
 			<File
@@ -447,6 +455,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageAffineTransformProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageBinarizeProcessorComp.h"
 				>
 			</File>
@@ -548,6 +560,10 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSearchParamsComp.h"
 				>
 			</File>
 			<File

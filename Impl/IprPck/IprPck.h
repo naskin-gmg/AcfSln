@@ -34,7 +34,7 @@
 #include "iipr/CRgbToGrayProcessorComp.h"
 #include "iipr/CImageBinarizeProcessorComp.h"
 #include "iipr/CBitmapProviderCacheComp.h"
-#include "iipr/CSearchParams.h"
+#include "iipr/CSearchParamsComp.h"
 #include "iipr/CDifferenceBitmapSupplierComp.h"
 #include "iipr/CConvolutionProcessorComp.h"
 #include "iipr/CConvolutionKernel2d.h"
@@ -48,10 +48,11 @@
 #include "iipr/CMultiLineProjectionSupplierComp.h"
 #include "iipr/CSelectableCalibrationSupplierComp.h"
 #include "iipr/CCheckerboardPatternGeneratorComp.h"
+//#include "iipr/CImageAffineTransformProcessorComp.h"
 
 
 /**
-	System-undependent image processing package.
+	System-independent image processing package.
 */
 namespace IprPck
 {
@@ -95,14 +96,10 @@ typedef icomp::TMakeComponentWrap<
 typedef icomp::TModelCompWrap<iipr::CRingPatternGeneratorParamsComp> RingPatternGeneratorParams;
 typedef iipr::CRgbToGrayProcessorComp RgbToGrayProcessor;
 typedef iipr::CImageBinarizeProcessorComp ImageBinarizeProcessor;
+//typedef iipr::CImageAffineTransformProcessorComp ImageAffineTransformProcessor;
 typedef icomp::TModelCompWrap<iipr::CBitmapProviderCacheComp> BitmapProviderCache;
 typedef icomp::TModelCompWrap<iipr::CMultiBitmapCacheComp> MultiBitmapProviderCacheComp;
-typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<iipr::CSearchParams>,
-			iipr::ISearchParams,
-			iser::ISerializable,
-			istd::IChangeable,
-			imod::IModel> SearchParams;
+typedef icomp::TModelCompWrap<iipr::CSearchParamsComp> SearchParams;
 
 typedef icomp::TModelCompWrap<iipr::CDifferenceBitmapSupplierComp> DifferenceBitmapSupplier;
 typedef iipr::CConvolutionProcessorComp ConvolutionProcessor;

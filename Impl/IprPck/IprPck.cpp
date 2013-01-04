@@ -93,6 +93,11 @@ I_EXPORT_COMPONENT(
 			"Calculate image histogram",
 			"Processor Histogram" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+//I_EXPORT_COMPONENT(
+//			ImageAffineTransformProcessor,
+//			"Performs affine transformation of the image",
+//			"Processor Affine Transformation" IM_AUTHOR("\"Arseniy Masyuk\""));
+
 I_EXPORT_COMPONENT(
 			CircleFinderParams,
 			"Circle finder parameters",

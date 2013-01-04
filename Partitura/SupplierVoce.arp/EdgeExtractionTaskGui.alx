@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2695
+          2736
         </Number>
         <Description>
           ACF
@@ -46,7 +46,7 @@
         SmoothParamsGui
       </ComponentName>
       <X>
-        225
+        200
       </X>
       <X>
         650
@@ -74,7 +74,7 @@
         EdgesReductionParamsGui
       </ComponentName>
       <X>
-        925
+        900
       </X>
       <X>
         650

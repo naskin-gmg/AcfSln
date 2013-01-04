@@ -376,7 +376,7 @@
     </message>
     <message>
         <source>From</source>
-        <translation></translation>
+        <translation>Von</translation>
     </message>
     <message utf8="true">
         <source>°</source>
@@ -384,7 +384,7 @@
     </message>
     <message>
         <source>To</source>
-        <translation>Von</translation>
+        <translation>Bis</translation>
     </message>
     <message>
         <source>Scaling</source>

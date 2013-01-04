@@ -34,9 +34,11 @@ protected Q_SLOTS:
 protected:
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
+	virtual void OnSupplierParamsChanged();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void OnGuiHidden();
 	virtual void UpdateGui(int updateFlags = 0);
 };
 

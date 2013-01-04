@@ -37,7 +37,7 @@ void CGeneralSearchParamsGuiComp::UpdateModel() const
 		objectPtr->SetScaleRange(istd::CRange(MinScaleSB->value(), MaxScaleSB->value()));
 	}
 	else{
-		objectPtr->SetScaleRange(istd::CRange(0,0));
+		objectPtr->SetScaleRange(istd::CRange(1,1));
 	}
 }
 
@@ -82,15 +82,11 @@ void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 				MaxRotationSB->setEnabled(false);
 			}
 			else{
-				MinRotationSB->setRange(
-							constraintsPtr->GetRotationRangeConstraints().GetMinValue(),
-							constraintsPtr->GetRotationRangeConstraints().GetMaxValue());
+				const istd::CRange& range = constraintsPtr->GetRotationRangeConstraints();
+				MinRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
+				MaxRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
 
-				MaxRotationSB->setRange(
-							constraintsPtr->GetRotationRangeConstraints().GetMinValue(),
-							constraintsPtr->GetRotationRangeConstraints().GetMaxValue());
-
-				RotationCB->setChecked(!constraintsPtr->GetRotationRangeConstraints().IsEmpty());
+				RotationCB->setChecked(!objectPtr->GetRotationRange().IsEmpty());
 			}
 
 			if (!constraintsPtr->IsScaleRangeSupported()){
@@ -99,15 +95,11 @@ void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 				MaxScaleSB->setEnabled(false);
 			}
 			else{
-				MinScaleSB->setRange(
-							constraintsPtr->GetScaleRangeConstraints().GetMinValue(),
-							constraintsPtr->GetScaleRangeConstraints().GetMaxValue());
+				const istd::CRange& range = constraintsPtr->GetScaleRangeConstraints();
+				MinScaleSB->setRange(range.GetMinValue(), range.GetMaxValue());
+				MaxScaleSB->setRange(range.GetMinValue(), range.GetMaxValue());
 
-				MaxScaleSB->setRange(
-							constraintsPtr->GetScaleRangeConstraints().GetMinValue(),
-							constraintsPtr->GetScaleRangeConstraints().GetMaxValue());
-
-				ScalingCB->setChecked(!constraintsPtr->GetScaleRangeConstraints().IsEmpty());
+				ScalingCB->setChecked(!objectPtr->GetScaleRange().IsEmpty());
 			}
 		}
 	}
