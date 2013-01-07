@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2556
+          2740
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264192
         </Number>
         <Description>
           Qt Framework
@@ -669,29 +669,13 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
-    <Component>
-      <ExportedId>
-        AnnulusSegment
-      </ExportedId>
-      <ComponentId>
-        ParamsSet/AnnulusSegment
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="2">
     <Component>
       <ExportedId>
         CaliperParams
       </ExportedId>
       <ComponentId>
         ParamsSet/CaliperParams
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        Line
-      </ExportedId>
-      <ComponentId>
-        LineCaliperParamsSet/Line
       </ComponentId>
     </Component>
     <Component>
