@@ -238,10 +238,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CImageAffineTransformProcessorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CImageBinarizeProcessorComp.cpp"
 				>
 			</File>
@@ -452,10 +448,6 @@
 			</File>
 			<File
 				RelativePath="..\CFeatureToImageMapperProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CImageAffineTransformProcessorComp.h"
 				>
 			</File>
 			<File

@@ -356,7 +356,7 @@
     </message>
     <message>
         <source>Minimum Score</source>
-        <translation>Minimales Score</translation>
+        <translation>Min. Score</translation>
     </message>
     <message>
         <source>%</source>

@@ -42,6 +42,8 @@ public:
 		I_ASSIGN(m_pathParamIdAttrPtr, "DirParamId", "Id used to get directory parameter (ifile::IFileNameParam)", true, "FileBitmapAcquisition");
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
+		I_ASSIGN(m_mirrorXParamIdAttrPtr, "MirrorXParamId", "Id used to get Mirror By X parameter", false, "MirrorXParamId");
+		I_ASSIGN(m_mirrorYParamIdAttrPtr, "MirrorYParamId", "Id used to get Mirror By Y parameter", false, "MirrorYParamId");
 	I_END_COMPONENT;
 
 	CFileAcquisitionComp();
@@ -66,20 +68,24 @@ protected:
 		quint32 idStamp;
 	};
 
+	void DoProcessImage(const iprm::IParamsSet* paramsPtr, istd::IChangeable* outputPtr) const;
+
 private:
+	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+	I_ATTR(QString, m_defaultDirAttrPtr);
+	I_REF(ifile::IFileNameParam, m_defaultDirParamCompPtr);
+	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
+	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
+
+	I_ATTR(QByteArray, m_pathParamIdAttrPtr);
+	I_ATTR(QByteArray, m_mirrorXParamIdAttrPtr);
+	I_ATTR(QByteArray, m_mirrorYParamIdAttrPtr);
+
 	typedef QMap<QString, ParamsInfo> DirInfos;
 	DirInfos m_dirInfos;
 
 	quint32 m_lastIdStamp;
-
 	istd::CIndex2d m_lastImageSize;
-
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
-	I_ATTR(QString, m_defaultDirAttrPtr);
-	I_REF(ifile::IFileNameParam, m_defaultDirParamCompPtr);
-	I_ATTR(QByteArray, m_pathParamIdAttrPtr);
-	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
-	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
 
 	QMutex m_lock;
 };
