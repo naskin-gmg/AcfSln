@@ -213,6 +213,11 @@ I_EXPORT_COMPONENT(
 			"Generator of checker board pattern bitmap",
 			"Generator Bitmap Processor" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			ImageFlipProcessor,
+			"Image flipping processor (vertical/horizontal)",
+			"Flip Mirror Image" IM_AUTHOR("\"Arseniy Masyuk\""));
+
 
 } // namespace IprPck
 

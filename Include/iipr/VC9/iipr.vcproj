@@ -246,6 +246,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageFlipProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
 				>
 			</File>
@@ -456,6 +460,10 @@
 			</File>
 			<File
 				RelativePath="..\CImageCropProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageFlipProcessorComp.h"
 				>
 			</File>
 			<File

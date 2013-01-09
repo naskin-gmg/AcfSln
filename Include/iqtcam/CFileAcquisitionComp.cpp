@@ -12,9 +12,7 @@
 #include "iprm/IParamsSet.h"
 #include "iimg/IRasterImage.h"
 #include "iimg/IQImageProvider.h"
-#include "iimg/CBitmap.h"
 #include "iprm/TParamsPtr.h"
-#include "iprm/IEnableableParam.h"
 
 
 namespace iqtcam
@@ -110,8 +108,6 @@ int CFileAcquisitionComp::DoProcessing(
 			if (m_lastFileNameCompPtr.IsValid()){
 				m_lastFileNameCompPtr->SetPath(imageFileName);
 			}
-
-			DoProcessImage(paramsPtr, outputPtr);
 		}
 		else{
 			retVal = TS_OK;
@@ -154,40 +150,6 @@ istd::CIndex2d CFileAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*par
 CFileAcquisitionComp::ParamsInfo::ParamsInfo()
 {
 	filesIter = files.end();
-}
-
-
-// protected methods
-
-void CFileAcquisitionComp::DoProcessImage(const iprm::IParamsSet* paramsPtr, istd::IChangeable* outputPtr) const
-{
-	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
-	if (bitmapPtr == NULL || paramsPtr == NULL){
-		return;
-	}
-
-	// check if postprocessing needed
-	bool mirrorX = false, mirrorY = false;
-
-	if (m_mirrorXParamIdAttrPtr.IsValid()){
-		iprm::TParamsPtr<iprm::IEnableableParam> mirrorXParam(paramsPtr, *m_mirrorXParamIdAttrPtr);
-		mirrorX = mirrorXParam->IsEnabled();
-	}
-
-	if (m_mirrorYParamIdAttrPtr.IsValid()){
-		iprm::TParamsPtr<iprm::IEnableableParam> mirrorYParam(paramsPtr, *m_mirrorYParamIdAttrPtr);
-		mirrorY = mirrorYParam->IsEnabled();
-	}
-
-	if (mirrorX || mirrorY){
-		iimg::CBitmap tempBitmap;
-		if (tempBitmap.CopyFrom(*bitmapPtr)){
-			QImage tempImage(tempBitmap.GetQImageRef().mirrored(mirrorX, mirrorY));
-			if (tempBitmap.CopyImageFrom(tempImage)){
-				bitmapPtr->CopyFrom(tempBitmap);
-			}
-		}
-	}
 }
 
 
