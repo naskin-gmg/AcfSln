@@ -18,7 +18,6 @@ namespace iqtcam
 
 CBitmapSupplierGuiComp::CBitmapSupplierGuiComp()
 {
-	m_timer.setInterval(40);
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
 }
 
@@ -54,6 +53,8 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 void CBitmapSupplierGuiComp::on_LiveImageButton_toggled(bool checked)
 {
 	if (checked){
+		m_timer.setInterval(*m_snapIntervalAttrPtr);
+
 		m_timer.start();
 	}
 	else{

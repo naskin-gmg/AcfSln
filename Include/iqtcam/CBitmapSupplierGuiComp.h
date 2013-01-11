@@ -40,6 +40,7 @@ public:
 	I_BEGIN_COMPONENT(CBitmapSupplierGuiComp);
 		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
+		I_ASSIGN(m_snapIntervalAttrPtr, "SnapInterval", "Snap interval in ms", true, 40);
 	I_END_COMPONENT;
 
 	CBitmapSupplierGuiComp();
@@ -75,6 +76,7 @@ protected:
 
 private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+	I_ATTR(int, m_snapIntervalAttrPtr);
 
 	imod::TModelWrap<iimg::CBitmap> m_bitmap;
 

@@ -219,13 +219,18 @@ void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
 	QVBoxLayout* viewLayoutPtr = new QVBoxLayout;
 	setLayout(viewLayoutPtr);
 
+	// add console
+	QWidget* holderPtr = new QWidget(this);
+	holderPtr->setLayout(new QVBoxLayout());
+	holderPtr->layout()->setContentsMargins(0,0,0,0);
+	holderPtr->layout()->addWidget(&m_console);
+
+	viewLayoutPtr->addWidget(holderPtr);
+
 	// add status label(s)
 	if (hasStatusInfo){
 		AddStatusItems(viewLayoutPtr);
 	}
-
-	// add console
-	viewLayoutPtr->addWidget(&m_console);
 }
 
 
