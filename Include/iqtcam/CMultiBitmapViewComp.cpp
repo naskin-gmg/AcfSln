@@ -104,6 +104,10 @@ void CMultiBitmapViewComp::OnGuiCreated()
 	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(1, *m_horizontalViewsAttrPtr) : 1;
 	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(1, *m_verticalViewsAttrPtr) : 1;
 
+	QColor backgroundColor = m_viewBackgroundColorAttrPtr.IsValid() ? 
+		QColor(QString(*m_viewBackgroundColorAttrPtr)) : 
+		Qt::transparent;
+
 	QWidget* widgetPtr = GetQtWidget();
 	QGridLayout* layoutPtr = new QGridLayout(widgetPtr);
 	layoutPtr->setContentsMargins(0, 0, 0, 0);
@@ -129,6 +133,10 @@ void CMultiBitmapViewComp::OnGuiCreated()
 			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
 			layoutPtr->addWidget(viewPtr, row, col);
 			m_views.append(viewPtr);
+
+			if (m_viewBackgroundColorAttrPtr.IsValid()){
+				viewPtr->SetBackgroundColor(backgroundColor);
+			}
 
 			bool hasStatusInfo = false;
 			if (viewIndex < m_informationModelsCompPtr.GetCount()){
@@ -195,6 +203,14 @@ CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const
 
 	m_console.SetFitMode(iview::CConsoleBase::FM_BOTH);
 	m_console.SetZoomToFit(true);
+}
+
+
+void CMultiBitmapViewComp::CSingleView::SetBackgroundColor(const QColor& color)
+{
+	static iview::CColorSchema s_colorShema;
+	s_colorShema.SetBrush(iview::IColorSchema::SB_BACKGROUND, color);
+	m_console.GetViewRef().SetDefaultColorSchema(&s_colorShema);
 }
 
 

@@ -52,6 +52,7 @@ public:
 		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
 		I_ASSIGN_MULTI_0(m_viewLabelPrefixesAttrPtr, "ViewLabelPrefixes", "Prefixes used to title the single bitmap view. If none present, information from InformationProviders will be used.", false);
 		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "Makes status label visible or not", true, false);
+		I_ASSIGN(m_viewBackgroundColorAttrPtr, "BackgroundColor", "Background color of the console", false, "black");
 	I_END_COMPONENT;
 
 protected:
@@ -81,6 +82,8 @@ protected:
 		CSingleView(QWidget* parentPtr, int id = -1, const QString& title = "");
 
 		void UpdateImage(const iimg::IBitmap* bitmapPtr);
+
+		void SetBackgroundColor(const QColor& color);
 
 		// called once at initialization stage, at this moment the model should be connected already.
 		virtual void Init(bool hasStatusInfo);
@@ -115,6 +118,7 @@ private:
 	I_MULTIREF(iqt2d::IViewExtender, m_viewExtendersCompPtr);
 	I_MULTIATTR(QString, m_viewLabelPrefixesAttrPtr);
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
+	I_ATTR(QByteArray, m_viewBackgroundColorAttrPtr);
 	
 	int m_rowCount;
 	int m_columnCount;
