@@ -134,6 +134,71 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 	return boundingBox;
 }
 
+namespace
+{
+
+
+/** Wikipedia code to calculate distance between P and a line connecting A and B */
+double pointToLineDistance(i2d::CVector2d A, i2d::CVector2d B, i2d::CVector2d P)
+{
+	double normalLength = _hypot(B.GetX() - A.GetX(), B.GetY() - A.GetY());
+	return abs((P.GetX() - A.GetX()) * (B.GetY() - A.GetY()) - (P.GetY() - A.GetY()) * (B.GetX() - A.GetX())) / normalLength;
+}
+
+} // namespace
+
+
+QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) const
+{
+	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
+	if (containerPtr == NULL){
+		return "";
+	}
+
+	// convert minimum distance of 1.5px to logical units
+	const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
+	double distance = 2 * minDistance;
+	int foundLineIndex, foundNodeIndex;
+	i2d::CVector2d P = transform.GetClientPosition(position);
+
+	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
+		const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
+
+		for (int i = 0; i < line.GetNodesCount() - 1; i++){
+			i2d::CVector2d A = line.GetNode(i).GetPosition();
+			i2d::CVector2d B = line.GetNode(i + 1).GetPosition();
+			double currentDistance = pointToLineDistance(A, B, P);
+			if (currentDistance < distance){
+				foundLineIndex = lineIndex;
+				foundNodeIndex = i;
+				distance = currentDistance;
+			}
+		}
+	}
+
+	if (distance <= minDistance){
+		const iedge::CEdgeLine& line = containerPtr->GetAt(foundLineIndex);
+		const iedge::CEdgeNode& node1 = line.GetNode(foundNodeIndex);
+		const iedge::CEdgeNode& node2 = line.GetNode(foundNodeIndex + 1);
+		double dist1 = node1.GetPosition().GetDistance(P);
+		double dist2 = node2.GetPosition().GetDistance(P);
+		dist1 = sqrt(dist1 * dist1 - distance * distance);
+		dist2 = sqrt(dist2 * dist2 - distance * distance);
+		double weight1 = node1.GetWeight();
+		double weight2 = node2.GetWeight();
+		double approxWeight = weight1 + (weight2 - weight1) * (dist1 / (dist1 + dist2));
+		return "Contour strength: " + QString::number(approxWeight);
+	}
+
+	return "";
+}
+
+
+iview::ITouchable::TouchState CEdgeLineContainerShape::IsTouched(istd::CIndex2d /*position*/) const
+{
+	return TS_INACTIVE;
+}
 
 } // namespace iedgegui
 

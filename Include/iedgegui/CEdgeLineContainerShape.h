@@ -24,6 +24,10 @@ public:
 
 	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const;
+
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
+	
+	iview::ITouchable::TouchState IsTouched(istd::CIndex2d /*position*/) const;
 };
 
 
