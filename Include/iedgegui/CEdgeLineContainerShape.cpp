@@ -158,8 +158,7 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 	// convert minimum distance of 1.5px to logical units
 	const iview::CScreenTransform& transform = GetLogToScreenTransform();
 	const double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
-	double distance = 2 * minDistance;
-	int foundLineIndex, foundNodeIndex;
+	double contourStrength = 0;
 	i2d::CVector2d P = transform.GetClientPosition(position);
 
 	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
@@ -168,27 +167,28 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 		for (int i = 0; i < line.GetNodesCount() - 1; i++){
 			i2d::CVector2d A = line.GetNode(i).GetPosition();
 			i2d::CVector2d B = line.GetNode(i + 1).GetPosition();
-			double currentDistance = pointToLineDistance(A, B, P);
-			if (currentDistance < distance){
-				foundLineIndex = lineIndex;
-				foundNodeIndex = i;
-				distance = currentDistance;
+			double d = pointToLineDistance(A, B, P);
+			if (d <= minDistance){
+				const iedge::CEdgeNode& node1 = line.GetNode(i);
+				const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
+				double a = node1.GetPosition().GetDistance(P);
+				double b = node2.GetPosition().GetDistance(P);
+				// both distances projected onto the line because lim_{d->inf} a/(a+b) = 0.5
+				a = sqrt(a * a - d * d);
+				b = sqrt(b * b - d * d);
+				double u = node1.GetWeight();
+				double v = node2.GetWeight();
+				double approxWeight = u + (v - u) * (a / (a + b));
+				double newContourStrength = ceil(approxWeight * 100 - 0.5);
+				if (newContourStrength > contourStrength){
+					contourStrength = newContourStrength;
+				}
 			}
 		}
 	}
 
-	if (distance <= minDistance){
-		const iedge::CEdgeLine& line = containerPtr->GetAt(foundLineIndex);
-		const iedge::CEdgeNode& node1 = line.GetNode(foundNodeIndex);
-		const iedge::CEdgeNode& node2 = line.GetNode(foundNodeIndex + 1);
-		double dist1 = node1.GetPosition().GetDistance(P);
-		double dist2 = node2.GetPosition().GetDistance(P);
-		dist1 = sqrt(dist1 * dist1 - distance * distance);
-		dist2 = sqrt(dist2 * dist2 - distance * distance);
-		double weight1 = node1.GetWeight();
-		double weight2 = node2.GetWeight();
-		double approxWeight = weight1 + (weight2 - weight1) * (dist1 / (dist1 + dist2));
-		return "Contour strength: " + QString::number(approxWeight);
+	if (contourStrength > 0){
+		return "Contour strength " + QString::number(contourStrength) + "%";
 	}
 
 	return "";
