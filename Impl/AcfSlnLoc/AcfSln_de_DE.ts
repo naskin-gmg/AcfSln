@@ -4,20 +4,12 @@
 <context>
     <name>CBitmapSupplierGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation>Bild</translation>
     </message>
     <message>
         <source>Snap</source>
         <translation>Bildaufnahme</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
     </message>
     <message>
         <source>Save...</source>
@@ -29,26 +21,30 @@
     </message>
     <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="obsolete">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
         <translation>Laden...</translation>
     </message>
-</context>
-<context>
-    <name>CCaliperParamsGuiComp</name>
     <message>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <source>Threshold</source>
-        <translation>Schwellwert</translation>
+        <source>...</source>
+        <translation></translation>
     </message>
     <message>
-        <source>%</source>
+        <source>Ctrl+R</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>CCaliperParamsGuiComp</name>
+    <message>
+        <source>Threshold</source>
+        <translation>Schwellwert</translation>
     </message>
     <message>
         <source>Edge polarity</source>
@@ -56,11 +52,11 @@
     </message>
     <message>
         <source>Rise</source>
-        <translation>Steigend</translation>
+        <translation type="obsolete">Steigend</translation>
     </message>
     <message>
         <source>Drop</source>
-        <translation>Fallend</translation>
+        <translation type="obsolete">Fallend</translation>
     </message>
     <message>
         <source>Any</source>
@@ -72,11 +68,35 @@
     </message>
     <message>
         <source>Forwards</source>
-        <translation>Vorwärts</translation>
+        <translation type="obsolete">Vorwärts</translation>
     </message>
     <message>
         <source>Backwards</source>
-        <translation>Rückwärts</translation>
+        <translation type="obsolete">Rückwärts</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>White -&gt; Black</source>
+        <translation>Hell -&gt; Dunkel</translation>
+    </message>
+    <message>
+        <source>Black -&gt; White</source>
+        <translation>Dunkel -&gt; Hell</translation>
+    </message>
+    <message>
+        <source>In -&gt; Out</source>
+        <translation>Innen -&gt; Außen</translation>
+    </message>
+    <message>
+        <source>Out -&gt; In</source>
+        <translation>Außen -&gt; Innen</translation>
     </message>
 </context>
 <context>
@@ -100,10 +120,6 @@
 </context>
 <context>
     <name>CCircleFinderParamsGuiComp</name>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Enable Outlier Elimination</source>
         <translation>Ausreißerelimination aktivieren</translation>
@@ -136,16 +152,35 @@
         <source>Best</source>
         <translation>Bestes</translation>
     </message>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
-    <name>CDataSequenceViewComp</name>
+    <name>CConvolution2dParamsGuiComp</name>
     <message>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
+        <source>Kernel Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kernel Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CDataSequenceViewComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Max</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Min</source>
@@ -326,6 +361,44 @@
     </message>
 </context>
 <context>
+    <name>CEdgeLinesSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished">Test</translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished">Laden...</translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+    <message>
+        <source>Intermediate Results</source>
+        <translation type="unfinished">Temporäre Ergebnisse</translation>
+    </message>
+</context>
+<context>
+    <name>CEdgeLinesTestGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CExposureParamsGuiComp</name>
     <message>
         <source>Form</source>
@@ -351,82 +424,86 @@
 <context>
     <name>CGeneralSearchParamsGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Minimum Score</source>
-        <translation>Min. Score</translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation></translation>
+        <translation type="unfinished">Min. Score</translation>
     </message>
     <message>
         <source>Model Occurrence</source>
-        <translation>Anzahl von Modellen</translation>
+        <translation type="unfinished">Anzahl von Modellen</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation></translation>
+        <translation type="unfinished">Alle</translation>
     </message>
     <message>
         <source>From</source>
-        <translation>Von</translation>
-    </message>
-    <message utf8="true">
-        <source>°</source>
-        <translation></translation>
+        <translation type="unfinished">Von</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>Bis</translation>
+        <translation type="unfinished">Bis</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Skalierung</translation>
+        <translation type="unfinished">Skalierung</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>°</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CGeneralSupplierGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Test</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation>Ergebnisse</translation>
+        <translation type="unfinished">Ergebnisse</translation>
     </message>
     <message>
-        <source>Status</source>
-        <translation></translation>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished">Test</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CHotfolderContainerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -445,7 +522,7 @@
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alle</translation>
     </message>
     <message>
         <source>Errors</source>
@@ -455,44 +532,52 @@
 <context>
     <name>CInspectionTaskGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Inspection</source>
-        <translation>Inspektion</translation>
+        <translation type="unfinished">Inspektion</translation>
     </message>
     <message>
         <source>Recalculate all processing steps</source>
-        <translation>Alle Verarbeitungsschritte wiederholen</translation>
+        <translation type="unfinished">Alle Verarbeitungsschritte wiederholen</translation>
     </message>
     <message>
         <source>Test All</source>
-        <translation>Alles testen</translation>
+        <translation type="unfinished">Alles testen</translation>
     </message>
     <message>
         <source>Do processing steps automatically</source>
-        <translation>Verarbeitungsschritte automatisch ausführen</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
+        <translation type="unfinished">Verarbeitungsschritte automatisch ausführen</translation>
     </message>
     <message>
         <source>Load inspection data</source>
-        <translation>Inspektionsparameter laden</translation>
+        <translation type="unfinished">Inspektionsparameter laden</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save inspection data</source>
-        <translation>Inspektionsparameter speichern</translation>
+        <translation type="unfinished">Inspektionsparameter speichern</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -503,11 +588,11 @@
     </message>
     <message>
         <source>Processing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verarbeitung</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Test</translation>
     </message>
     <message>
         <source>Projection</source>
@@ -515,15 +600,15 @@
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
 </context>
 <context>
@@ -543,6 +628,83 @@
     <message>
         <source>Logout</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMultiBitmapSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snap</source>
+        <translation type="unfinished">Bildaufnahme</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No image selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished">Laden...</translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+</context>
+<context>
+    <name>CMultiLineProjectionSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished">Test</translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished">Ergebnisse</translation>
+    </message>
+    <message>
+        <source>Current Projection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMultiLineSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished">Test</translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
     </message>
 </context>
 <context>
@@ -619,6 +781,45 @@
     </message>
 </context>
 <context>
+    <name>CProcessorControlGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished">Verarbeitung</translation>
+    </message>
+    <message>
+        <source>Do single processing step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable/disable continuous processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Result...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished">Laden...</translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+</context>
+<context>
     <name>CPropertiesEditorComp</name>
     <message>
         <source>Form</source>
@@ -680,15 +881,15 @@
     </message>
     <message>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
 </context>
 <context>
@@ -723,101 +924,148 @@
     </message>
 </context>
 <context>
-    <name>CSearchBasedFeaturesSupplierGuiComp</name>
+    <name>CScaleCalibrationEditorComp</name>
     <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing</source>
-        <translation>Verarbeitung</translation>
-    </message>
-    <message>
-        <source>Test</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Time elapsed:</source>
-        <translation>Verarbeitungszeit:</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Results</source>
-        <translation>Ergebnisse</translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Score (%)</source>
-        <translation></translation>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>X</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calibration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nominal radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calibrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSearchBasedFeaturesSupplierGuiComp</name>
+    <message>
+        <source>Processing</source>
+        <translation type="obsolete">Verarbeitung</translation>
+    </message>
+    <message>
+        <source>Time elapsed:</source>
+        <translation type="obsolete">Verarbeitungszeit:</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished">Ergebnisse</translation>
     </message>
     <message utf8="true">
         <source>Angle (°)</source>
-        <translation>Winkel(°)</translation>
+        <translation type="obsolete">Winkel(°)</translation>
     </message>
     <message>
         <source>X-Scale</source>
-        <translation>X-Skalierung</translation>
+        <translation type="unfinished">X-Skalierung</translation>
     </message>
     <message>
         <source>Y-Scale</source>
-        <translation>Y-Skalierung</translation>
+        <translation type="unfinished">Y-Skalierung</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished">Test</translation>
+    </message>
+    <message>
+        <source>ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score of model [%]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position X of found model in logical units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position Y of found model in logical units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Angle of found model [°]</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CSnapImageGuiComp</name>
     <message>
+        <source>Image</source>
+        <translation type="unfinished">Bild</translation>
+    </message>
+    <message>
+        <source>Snap</source>
+        <translation type="unfinished">Bildaufnahme</translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished">Parameter</translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished">Laden...</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Image</source>
-        <translation>Bild</translation>
-    </message>
-    <message>
-        <source>Snap</source>
-        <translation>Bildaufnahme</translation>
-    </message>
-    <message>
         <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Save...</source>
-        <translation>Speichern...</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation>Parameter</translation>
-    </message>
-    <message>
-        <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -927,43 +1175,43 @@
 <context>
     <name>CValueSupplierGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Point</source>
-        <translation>Position</translation>
+        <translation type="unfinished">Position</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation>Test</translation>
+        <translation type="unfinished">Test</translation>
     </message>
     <message>
         <source>Found Position</source>
-        <translation>Gefundene Position</translation>
+        <translation type="obsolete">Gefundene Position</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
     <message>
         <source>Intermediate Results</source>
-        <translation>Temporäre Ergebnisse</translation>
+        <translation type="unfinished">Temporäre Ergebnisse</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CVideoPlayerGuiComp</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current Frame</source>
@@ -971,9 +1219,126 @@
     </message>
 </context>
 <context>
+    <name>CWizardOptionsListGuiComp</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
+        <source>Weight tolerance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position tolerance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tolerance of weight for edge node reduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tolerance of position for edge node reduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Threshold</source>
+        <comment>Contour extraction threshold</comment>
+        <translation type="unfinished">Schwellwert</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <comment>Contour scale factor</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour extraction threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour scale factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output directry doesn&apos;t exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing of %1 failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 could not be removed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing input &apos;%1&apos; to output &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File to process %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 was removed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 was added</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File % 1 was modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing of  %1 failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Inspection task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alpha (transparency) channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original gray value channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1029,8 +1394,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
+        <source>%1 took %2 ms</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing time: %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Snap Error</source>
@@ -1061,27 +1434,39 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transformation message: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File %1 was removed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File %1 was added</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File % 1 was modified</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing of  %1 failed</source>
+        <source>Transformation message: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Processing Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locked</source>
+        <translation type="unfinished">Gesperrt</translation>
+    </message>
+    <message>
+        <source>Processing completed with warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing completed with errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing completed without errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing canceled by user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing not possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error occurred, application problem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1094,84 +1479,32 @@
     </message>
 </context>
 <context>
-    <name>iprop::CPropertiesEditorComp</name>
+    <name>ifileproc::CComposedCopyFilesComp</name>
     <message>
-        <source>true</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>false</source>
+        <source>File copy provider is not present</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>iqtauth::CChangePasswordDialog</name>
+    <name>ifileproc::CCopyFilesTreeComp</name>
     <message>
-        <source>Error</source>
+        <source>File copy provider is not present</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The new password is not entered correctly the second time.
-Please correct the new passwords.</source>
+        <source>Success: %1 files copied</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The old password and the new password are similar!
-Use another password.</source>
+        <source>Failed: %1 files copied</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The old password is not correct.
-Reenter the passwords.</source>
+        <source>No input directory %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The new password is not conform with guide lines.
-Use other password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>iqtauth::CLoginBarGuiComp</name>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrong password</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>iqtauth::CUserManagerDialog</name>
-    <message>
-        <source>User_%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The user could not be removed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot restore user list.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>iqtcam::CBitmapSupplierGuiComp</name>
-    <message>
-        <source>(%1 x %2)</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>iqtex::WriteArchiveMessageHandler</name>
-    <message>
-        <source>Transformation message: </source>
+        <source>No output directory %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1238,7 +1571,7 @@ Use other password.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Processing...</source>
@@ -1246,88 +1579,180 @@ Use other password.</source>
     </message>
     <message>
         <source>Canceled</source>
+        <translation type="unfinished">Abgebrochen</translation>
+    </message>
+</context>
+<context>
+    <name>iprocgui::CDocumentProcessingManagerCompBase</name>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished">Verarbeitung</translation>
+    </message>
+    <message>
+        <source>Document processing actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>iqtinsp</name>
+    <name>iprocgui::CProcessorControlGuiComp</name>
     <message>
-        <source>Locked</source>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Cannot save the output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing completed with warnings</source>
+        <source>Cannot load parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing completed with errors</source>
+        <source>Cannot save parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iprop::CPropertiesEditorComp</name>
+    <message>
+        <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing completed without errors</source>
+        <source>false</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtauth::CChangePasswordDialog</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>The new password is not entered correctly the second time.
+Please correct the new passwords.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing canceled by user</source>
+        <source>The old password and the new password are similar!
+Use another password.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing not possible</source>
+        <source>The old password is not correct.
+Reenter the passwords.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Critical error occurred, application problem</source>
+        <source>The new password is not conform with guide lines.
+Use other password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtauth::CLoginBarGuiComp</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Wrong password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtauth::CUserManagerDialog</name>
+    <message>
+        <source>User_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>The user could not be removed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot restore user list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtcam::CBitmapSupplierGuiComp</name>
+    <message>
+        <source>(%1 x %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtcam::CMultiBitmapSupplierGuiComp</name>
+    <message>
+        <source>(%1 x %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtex::WriteArchiveMessageHandler</name>
+    <message>
+        <source>Transformation message: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtinsp::CGeneralSupplierGuiComp</name>
     <message>
-        <source>Unknown</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>None</source>
-        <translation>Keine</translation>
-    </message>
-    <message>
-        <source>Init</source>
-        <translation></translation>
+        <translation type="unfinished">Keine</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Gesperrt</translation>
+        <translation type="unfinished">Gesperrt</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Canceled</source>
-        <translation>Abgebrochen</translation>
+        <translation type="unfinished">Abgebrochen</translation>
     </message>
     <message>
         <source>Not processed</source>
-        <translation>Nicht verarbeitet</translation>
+        <translation type="unfinished">Nicht verarbeitet</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation>Kritisch</translation>
+        <translation type="unfinished">Kritisch</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Init</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtipr::CValueSupplierGuiComp</name>
     <message>
         <source>(%1, %2)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

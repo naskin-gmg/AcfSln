@@ -20,19 +20,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parameters</source>
+        <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55,11 +55,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rise</source>
+        <source>White -&gt; Black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Drop</source>
+        <source>Black -&gt; White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -71,11 +71,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Forwards</source>
+        <source>In -&gt; Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Backwards</source>
+        <source>Out -&gt; In</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -134,6 +134,21 @@
     </message>
     <message>
         <source>Best</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CConvolution2dParamsGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kernel Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kernel Height</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -326,6 +341,44 @@
     </message>
 </context>
 <context>
+    <name>CEdgeLinesSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intermediate Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CEdgeLinesTestGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CExposureParamsGuiComp</name>
     <message>
         <source>Form</source>
@@ -355,15 +408,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Minimum Score</source>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Model Occurrence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -383,11 +436,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To</source>
+        <source>Minimum Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Scaling</source>
+        <source>Model Occurrence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -399,6 +452,10 @@
     </message>
     <message>
         <source>Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -418,7 +475,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Status</source>
+        <source>Status:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -459,6 +516,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Inspection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -468,14 +533,6 @@
     </message>
     <message>
         <source>Test All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do processing steps automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -492,6 +549,14 @@
     </message>
     <message>
         <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do processing steps automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -542,6 +607,83 @@
     </message>
     <message>
         <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMultiBitmapSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No image selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMultiLineProjectionSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current Projection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMultiLineSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -615,6 +757,45 @@
     </message>
     <message>
         <source>State:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CProcessorControlGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do single processing step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable/disable continuous processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Result...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -723,37 +904,13 @@
     </message>
 </context>
 <context>
-    <name>CSearchBasedFeaturesSupplierGuiComp</name>
+    <name>CScaleCalibrationEditorComp</name>
     <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Processing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Test</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time elapsed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Results</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Score (%)</source>
+        <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -764,16 +921,27 @@
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
-        <source>Angle (°)</source>
+    <message>
+        <source>Calibration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>X-Scale</source>
+        <source>Nominal radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Y-Scale</source>
+        <source>Calibrate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CSearchBasedFeaturesSupplierGuiComp</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -786,6 +954,54 @@
     </message>
     <message>
         <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score of model [%]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position X of found model in logical units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position Y of found model in logical units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Angle of found model [°]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X-Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y-Scale</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -939,10 +1155,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Found Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parameters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -971,9 +1183,126 @@
     </message>
 </context>
 <context>
+    <name>CWizardOptionsListGuiComp</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
+        <source>Weight tolerance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Position tolerance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tolerance of weight for edge node reduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tolerance of position for edge node reduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Threshold</source>
+        <comment>Contour extraction threshold</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <comment>Contour scale factor</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour extraction threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contour scale factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output directry doesn&apos;t exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing of %1 failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 could not be removed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing input &apos;%1&apos; to output &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File to process %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 was removed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File %1 was added</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File % 1 was modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing of  %1 failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Inspection task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue color channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alpha (transparency) channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original gray value channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1029,6 +1358,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>%1 took %2 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing time: %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1061,27 +1398,39 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transformation message: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File %1 was removed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File %1 was added</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File % 1 was modified</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing of  %1 failed</source>
+        <source>Transformation message: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Processing Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing completed with warnings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing completed with errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing completed without errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing canceled by user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing not possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error occurred, application problem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1090,6 +1439,140 @@
     </message>
     <message>
         <source>Script error in line %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ifileproc::CComposedCopyFilesComp</name>
+    <message>
+        <source>File copy provider is not present</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ifileproc::CCopyFilesTreeComp</name>
+    <message>
+        <source>File copy provider is not present</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Success: %1 files copied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed: %1 files copied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No input directory %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No output directory %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ihotfgui::CHotfolderGuiComp</name>
+    <message>
+        <source>&amp;Run</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start/Continue the execution of the hotfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold the execution of the hotfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart selected job(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove Job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove processing item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel Job</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel processing of the selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Processing Parameters...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define parameters for the hotfolder processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ihotfgui::CProcessingItemPreviewGuiComp</name>
+    <message>
+        <source>Waiting for processing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Processing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iprocgui::CDocumentProcessingManagerCompBase</name>
+    <message>
+        <source>Processing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document processing actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iprocgui::CProcessorControlGuiComp</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save the output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot load parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot save parameters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1169,114 +1652,20 @@ Use other password.</source>
     </message>
 </context>
 <context>
+    <name>iqtcam::CMultiBitmapSupplierGuiComp</name>
+    <message>
+        <source>(%1 x %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>iqtex::WriteArchiveMessageHandler</name>
     <message>
         <source>Transformation message: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ihotfgui::CHotfolderGuiComp</name>
-    <message>
-        <source>&amp;Run</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start/Continue the execution of the hotfolder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Hold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hold the execution of the hotfolder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Restart selected job(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Remove Job</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove processing item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cancel Job</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel processing of the selected item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Processing Parameters...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Define parameters for the hotfolder processing</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ihotfgui::CProcessingItemPreviewGuiComp</name>
-    <message>
-        <source>Waiting for processing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Canceled</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>iqtinsp</name>
-    <message>
-        <source>Locked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing completed with warnings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing completed with errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing completed without errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing canceled by user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Processing not possible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Critical error occurred, application problem</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
