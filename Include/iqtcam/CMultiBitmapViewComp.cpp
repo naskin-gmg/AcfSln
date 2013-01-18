@@ -191,7 +191,7 @@ CMultiBitmapViewComp::CSingleView* CMultiBitmapViewComp::CreateView(QWidget* par
 CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const QString& title)
 :	BaseClass(parentPtr),
 	m_console(this),
-	m_statusLabel(NULL),
+	m_showStatus(true),
 	m_id(id)
 {
 	setTitle(title);
@@ -231,6 +231,13 @@ void CMultiBitmapViewComp::CSingleView::UpdateImage(const iimg::IBitmap* bitmapP
 
 void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
 {
+	m_showStatus = hasStatusInfo;
+
+	// enable title info
+	if (hasStatusInfo && title().isEmpty()){
+		setTitle(" "); // a trick, otherwise if QGroupBox has no title text, then it will not be shown.
+	}
+
 	// create default layout
 	QVBoxLayout* viewLayoutPtr = new QVBoxLayout;
 	setLayout(viewLayoutPtr);
@@ -244,58 +251,64 @@ void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
 	viewLayoutPtr->addWidget(holderPtr);
 
 	// add status label(s)
-	if (hasStatusInfo){
-		AddStatusItems(viewLayoutPtr);
-	}
+	AddStatusItems(viewLayoutPtr);
+
+	// default status
+	SetInspectionResult(istd::IInformationProvider::IC_NONE);
 }
 
 
 void CMultiBitmapViewComp::CSingleView::SetInspectionResult(int result)
 {
-	if (m_statusLabel == NULL){
+	if (!m_showStatus){
 		return;
 	}
 
-	static QString s_defaultStyleSheet = "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-		"stop: 0 #ffffff, stop: 0.5 #e0f0ff, stop: 0.51 #d0e0ee, stop: 1 #d0e0ee); "
-		"border: 1px solid #aaaaaa; "
-		"border-radius: 2px; "
-		"color: #999999; font-size: 10pt; font-weight: bold;";
+	static QString s_defaultStyleSheet = 
+		"QGroupBox::title{"
+		"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.5, y2:1, stop:0 #d5eefc, stop:0.5 #d5eefc, stop:0.51 #b8e3f9, stop:1 #a5dbf7);"
+		"}";
 
-	static QString s_okStyleSheet = "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+	static QString s_okStyleSheet = 
+		"QGroupBox::title{"
+		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
 		"stop: 0.0 rgba(120,250,145), stop: 0.49 rgba(70,212,145), stop: 0.52 rgba(70,200,105), stop: 1.0 rgba(70,250,105)); "
 		"border: 1px solid #339933; "
-		"border-radius: 2px; "
-		"color: #000000; font-size: 10pt; font-weight: bold;";
+		"color: #000000; font-size: 10pt; font-weight: bold;"
+		"}";
 
-	static QString s_errorStyleSheet = "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+	static QString s_errorStyleSheet = 
+		"QGroupBox::title{"
+		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
 		"stop: 0.0 rgba(250,120,145), stop: 0.49 rgba(212,120,145), stop: 0.52 rgba(200,70,105), stop: 1.0 rgba(250,120,145)); "
 		"border: 1px solid #993333; "
-		"border-radius: 2px; "
-		"color: #ffffff; font-size: 10pt; font-weight: bold;";
+		"color: #ffffff; font-size: 10pt; font-weight: bold;"
+		"}";
 
-	static QString s_warningStyleSheet = "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+	static QString s_warningStyleSheet = 
+		"QGroupBox::title{"
+		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
 		"stop: 0.0 rgba(250,250,145), stop: 0.49 rgba(212,212,145), stop: 0.52 rgba(200,200,105), stop: 1.0 rgba(250,250,105)); "
 		"border: 1px solid #996633; "
-		"border-radius: 2px; "
-		"color: #000000; font-size: 10pt; font-weight: bold;";
+		"color: #000000; font-size: 10pt; font-weight: bold;"
+		"}";
 
 	switch (result){
 		case istd::IInformationProvider::IC_INFO:
-			m_statusLabel->setStyleSheet(s_okStyleSheet);
+			setStyleSheet(s_okStyleSheet);
 			return;
 
 		case istd::IInformationProvider::IC_ERROR:
 		case istd::IInformationProvider::IC_CRITICAL:
-			m_statusLabel->setStyleSheet(s_errorStyleSheet);
+			setStyleSheet(s_errorStyleSheet);
 			return;
 
 		case istd::IInformationProvider::IC_WARNING:
-			m_statusLabel->setStyleSheet(s_warningStyleSheet);
+			setStyleSheet(s_warningStyleSheet);
 			return;
 	}
 
-	m_statusLabel->setStyleSheet(s_defaultStyleSheet);
+	setStyleSheet(s_defaultStyleSheet);
 }
 
 
@@ -315,13 +328,9 @@ iview::IShapeView* CMultiBitmapViewComp::CSingleView::GetView() const
 
 // protected members
 
-void CMultiBitmapViewComp::CSingleView::AddStatusItems(QBoxLayout* layoutPtr)
+void CMultiBitmapViewComp::CSingleView::AddStatusItems(QBoxLayout* /*layoutPtr*/)
 {
-	// create default status label
-	m_statusLabel = new QLabel(this);
-	layoutPtr->addWidget(m_statusLabel);
-
-	SetInspectionResult(istd::IInformationProvider::IC_NONE);
+	// do nothing here, it is only for extension
 }
 
 

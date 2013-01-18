@@ -51,7 +51,7 @@ public:
 		I_ASSIGN_TO(m_generalInformationModelCompPtr, m_generalInformationProviderCompPtr, true);
 		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
 		I_ASSIGN_MULTI_0(m_viewLabelPrefixesAttrPtr, "ViewLabelPrefixes", "Prefixes used to title the single bitmap view. If none present, information from InformationProviders will be used.", false);
-		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "Makes status label visible or not", true, false);
+		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "If active then status will be shown in the view's header", true, false);
 		I_ASSIGN(m_viewBackgroundColorAttrPtr, "BackgroundColor", "Background color of the console", false, "black");
 	I_END_COMPONENT;
 
@@ -102,8 +102,8 @@ protected:
 		imod::TModelWrap<iimg::CBitmap> m_backgroundModel;
 
 		mutable iview::CConsoleGui m_console;
-		QLabel* m_statusLabel;
 		int m_id;
+		bool m_showStatus;
 	};
 
 	virtual CSingleView* CreateView(QWidget* parentPtr, int id = -1, const QString& title = "");
