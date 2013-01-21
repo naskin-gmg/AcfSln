@@ -138,11 +138,39 @@ namespace
 {
 
 
-/** Wikipedia code to calculate distance between P and a line connecting A and B */
-double pointToLineDistance(i2d::CVector2d A, i2d::CVector2d B, i2d::CVector2d P)
+/** 
+	Function to calculate distance between P and a line segment connecting A and B.
+	Will return a distance to a point, if it is closer than the segment.
+ 
+	\return distance and weight between points A, B
+ */
+QPair<double, double> pointToLineDistance(i2d::CVector2d A, i2d::CVector2d B, i2d::CVector2d P)
 {
-	double normalLength = _hypot(B.GetX() - A.GetX(), B.GetY() - A.GetY());
-	return abs((P.GetX() - A.GetX()) * (B.GetY() - A.GetY()) - (P.GetY() - A.GetY()) * (B.GetX() - A.GetX())) / normalLength;
+	QPair<double, double> result;
+
+	i2d::CVector2d ap = P - A;
+	i2d::CVector2d ab = B - A;
+	i2d::CVector2d n = ab.GetNormalized(1);
+	double dp = ap.GetDotProduct(n);
+
+	double weight = dp / ab.GetLength();
+
+	if (weight < 0){ // point is before A
+		result.first = ap.GetLength();
+		weight = 0;
+	}
+	else if (weight > 1){ // point is after B
+		i2d::CVector2d bp = P - B;
+		result.first = bp.GetLength();
+		weight = 1;
+	}
+	else{
+		i2d::CVector2d directional = ap - dp * n;
+		result.first = directional.GetLength();
+	}
+
+	result.second = weight;
+	return result;
 }
 
 } // namespace
@@ -159,6 +187,7 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 	const iview::CScreenTransform& transform = GetLogToScreenTransform();
 	const double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
 	double contourStrength = 0;
+
 	i2d::CVector2d P = transform.GetClientPosition(position);
 
 	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
@@ -167,18 +196,16 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 		for (int i = 0; i < line.GetNodesCount() - 1; i++){
 			i2d::CVector2d A = line.GetNode(i).GetPosition();
 			i2d::CVector2d B = line.GetNode(i + 1).GetPosition();
-			double d = pointToLineDistance(A, B, P);
+			QPair<double, double> distance = pointToLineDistance(A, B, P);
+			double d = distance.first;
+			double weight = distance.second;
+
 			if (d <= minDistance){
 				const iedge::CEdgeNode& node1 = line.GetNode(i);
 				const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
-				double a = node1.GetPosition().GetDistance(P);
-				double b = node2.GetPosition().GetDistance(P);
-				// both distances projected onto the line because lim_{d->inf} a/(a+b) = 0.5
-				a = sqrt(a * a - d * d);
-				b = sqrt(b * b - d * d);
 				double u = node1.GetWeight();
 				double v = node2.GetWeight();
-				double approxWeight = u + (v - u) * (a / (a + b));
+				double approxWeight = u + (v - u) * weight;
 				double newContourStrength = ceil(approxWeight * 100 - 0.5);
 				if (newContourStrength > contourStrength){
 					contourStrength = newContourStrength;
