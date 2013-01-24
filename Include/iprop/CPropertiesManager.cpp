@@ -14,6 +14,7 @@ namespace iprop
 
 CPropertiesManager::CPropertiesManager()
 {
+	m_itemModel.setColumnCount(2);
 }
 
 
@@ -42,6 +43,8 @@ void CPropertiesManager::RemoveAllProperties()
 		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET);
 
 		m_propertiesList.Reset();
+
+		m_itemModel.clear();
 	}
 }
 
@@ -99,7 +102,25 @@ void CPropertiesManager::InsertProperty(
 		propertyInfoPtr->propertyFlags = propertyFlags;
 
 		m_propertiesList.PushBack(propertyInfoPtr);
+
+		QList<QStandardItem*> row;
+		QStandardItem* propertyItemPtr = new QStandardItem(QString(propertyId));
+		propertyItemPtr->setToolTip(QString(propertyDescription));
+		row << propertyItemPtr;
+	
+		QStandardItem* propertyValueItemPtr = new QStandardItem();
+		row << propertyValueItemPtr;
+
+		m_itemModel.appendRow(row);
 	}
+}
+
+
+// reimplemented (ibase::IQtItemModelProvider)
+
+const QAbstractItemModel* CPropertiesManager::GetItemModel() const
+{
+	return &m_itemModel;
 }
 
 
@@ -226,6 +247,13 @@ bool CPropertiesManager::WriteProperties(
 	retVal = retVal && archive.EndTag(propertiesTag);
 
 	return retVal;
+}
+
+
+// private methods
+
+CPropertiesManager::CPropertiesManager(const CPropertiesManager&)
+{
 }
 
 

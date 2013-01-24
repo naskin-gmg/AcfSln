@@ -2,6 +2,10 @@
 #define iprop_CPropertiesManager_included
 
 
+// Qt includes
+#include <QtGui/QStandardItemModel>
+
+// ACF includes
 #include "istd/TComposedFactory.h"
 #include "istd/TSingleFactory.h"
 #include "istd/TOptPointerVector.h"
@@ -9,6 +13,8 @@
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+
+#include "ibase/IQtItemModelProvider.h"
 
 #include "iprop/TProperty.h"
 #include "iprop/TMultiProperty.h"
@@ -22,7 +28,9 @@ namespace iprop
 /**
 	Basic implementation of an property container.
 */
-class CPropertiesManager: virtual public IPropertiesManager
+class CPropertiesManager:
+			virtual public IPropertiesManager,
+			virtual public ibase::IQtItemModelProvider
 {
 public:
 	/*
@@ -63,6 +71,9 @@ public:
 				int propertyFlags,
 				bool releaseFlag);
 
+	// reimplemented (ibase::IQtItemModelProvider)
+	virtual const QAbstractItemModel* GetItemModel() const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -78,11 +89,15 @@ protected:
 				const iser::CArchiveTag& propertyTag) const;
 
 private:
+	CPropertiesManager(const CPropertiesManager&);
+
 	typedef istd::TComposedFactory<iser::IObject> PropertyFactory;
 
 	istd::TPointerVector<PropertyInfo> m_propertiesList;
 
 	static PropertyFactory s_propertyFactory;
+
+	QStandardItemModel m_itemModel;
 };
 
 
