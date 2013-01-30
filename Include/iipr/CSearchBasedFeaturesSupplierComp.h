@@ -43,7 +43,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::IMultiCalibrationProvider)
-	virtual const iprm::ISelectionConstraints* GetCalibrationSelectionContraints() const;
+	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const;
 	virtual int GetCalibrationsCount() const;
 	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 

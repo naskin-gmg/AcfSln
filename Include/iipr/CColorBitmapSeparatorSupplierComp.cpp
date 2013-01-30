@@ -7,7 +7,7 @@ namespace iipr
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
-const iprm::ISelectionConstraints* CColorBitmapSeparatorSupplierComp::GetBitmapSelectionContraints() const
+const iprm::IOptionsList* CColorBitmapSeparatorSupplierComp::GetBitmapSelectionContraints() const
 {
 	return this;
 }
@@ -51,9 +51,9 @@ const iimg::IBitmap* CColorBitmapSeparatorSupplierComp::GetBitmap(int bitmapInde
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int CColorBitmapSeparatorSupplierComp::GetConstraintsFlags() const
+int CColorBitmapSeparatorSupplierComp::GetOptionsFlags() const
 {
 	return SCF_SUPPORT_UNIQUE_ID;
 }

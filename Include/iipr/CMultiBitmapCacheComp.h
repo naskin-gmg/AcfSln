@@ -36,12 +36,12 @@ public:
 	CMultiBitmapCacheComp();
 
 	// reimplemented (iipr::IMultiBitmapProvider)
-	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
+	virtual const iprm::IOptionsList* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
 	// reimplemented (i2d::IMultiCalibrationProvider)
-	virtual const iprm::ISelectionConstraints* GetCalibrationSelectionContraints() const;
+	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const;
 	virtual int GetCalibrationsCount() const;
 	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 

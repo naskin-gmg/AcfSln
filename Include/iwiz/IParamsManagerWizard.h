@@ -27,7 +27,7 @@ public:
 		It is used to avoid trying switch to inactive pages.
 		\param	pageIndex	index of page.
 							It has the same interpretation as e.g. \c index in iprm::IParamsManager::GetParamsSet or
-							\c index in iprm::ISelectionConstraints::GetOptionName.
+							\c index in iprm::IOptionsList::GetOptionName.
 	*/
 	virtual bool IsPageSelectionAllowed(int pageIndex) const = 0;
 };

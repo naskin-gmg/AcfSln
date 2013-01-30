@@ -60,7 +60,7 @@ protected:
 		LineSelection();
 
 		// reimplemented (iprm::ISelectionParam)
-		virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+		virtual const iprm::IOptionsList* GetSelectionConstraints() const;
 		virtual int GetSelectedOptionIndex() const;
 		virtual bool SetSelectedOptionIndex(int index);
 		virtual iprm::ISelectionParam* GetSubselection(int index) const;

@@ -9,7 +9,7 @@
 // ACF includes
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -25,7 +25,7 @@ namespace iproc
 class CIterativeProcessorComp:
 			public ibase::CLoggerComponentBase,
 			public iproc::CSyncProcessorBase,
-			virtual public iprm::ISelectionConstraints
+			virtual public iprm::IOptionsList
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -38,7 +38,7 @@ public:
 
 	I_BEGIN_COMPONENT(CIterativeProcessorComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN(m_paramsIdAttrPtr, "IterationParamId", "ID of parameter defining number of iterations (type iprm::ISelectionParam)", true, "ParamsId");
 		I_ASSIGN(m_maxIterationsCountAttrPtr, "MaxIterations", "Maximal number of iterations", true, 10);
 		I_ASSIGN(m_bufferObjectCompPtr, "BufferObject", "Object used as buffer between single processing steps", true, "BufferObject");
@@ -52,8 +52,8 @@ public:
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

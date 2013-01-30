@@ -18,7 +18,7 @@ CDirectoryItemGuiComp::CDirectoryItemGuiComp()
 
 // reimplemented (iprm::ISelectionParam)
 
-const iprm::ISelectionConstraints* CDirectoryItemGuiComp::GetSelectionConstraints() const
+const iprm::IOptionsList* CDirectoryItemGuiComp::GetSelectionConstraints() const
 {
 	return NULL;
 }

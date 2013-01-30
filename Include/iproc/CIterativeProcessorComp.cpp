@@ -99,9 +99,9 @@ int CIterativeProcessorComp::DoProcessing(
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int CIterativeProcessorComp::GetConstraintsFlags() const
+int CIterativeProcessorComp::GetOptionsFlags() const
 {
 	return SCF_NONE;
 }

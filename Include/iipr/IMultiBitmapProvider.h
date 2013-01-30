@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 #include "i2d/ITransformation2d.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iimg/IBitmap.h"
 
 
@@ -23,7 +23,7 @@ public:
 		Get optional information about bitmaps in form of section contraints.
 		It allows to get name and description of each bitmap channel.
 	*/
-	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const = 0;
+	virtual const iprm::IOptionsList* GetBitmapSelectionContraints() const = 0;
 
 	/**
 		Get number of produced bitmaps.

@@ -23,7 +23,7 @@ namespace iipr
 class CColorBitmapSeparatorSupplierComp:
 			public iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> >,
 			virtual public iipr::IMultiBitmapProvider,
-			virtual protected iprm::ISelectionConstraints
+			virtual protected iprm::IOptionsList
 {
 public:
 	typedef iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> > BaseClass;
@@ -38,15 +38,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IMultiBitmapProvider)
-	virtual const iprm::ISelectionConstraints* GetBitmapSelectionContraints() const;
+	virtual const iprm::IOptionsList* GetBitmapSelectionContraints() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
 protected:
 	bool EnsureBitmapCreated(ProductType& result) const;
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

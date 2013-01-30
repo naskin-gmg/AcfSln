@@ -13,7 +13,7 @@
 #include "isig/ITriggerParams.h"
 
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 
 namespace isig
@@ -27,7 +27,7 @@ class CTriggerParamsComp:
 			public icomp::CComponentBase, 
 			virtual public isig::ITriggerParams,
 			virtual public iprm::ISelectionParam,
-			virtual protected iprm::ISelectionConstraints
+			virtual protected iprm::IOptionsList
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -48,7 +48,7 @@ public:
 	virtual void SetTriggerMode(int triggerMode);
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+	virtual const iprm::IOptionsList* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
 	virtual iprm::ISelectionParam* GetSubselection(int index) const;
@@ -59,8 +59,8 @@ public:
 protected:
 	void InitializeSelectionList();
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

@@ -16,7 +16,7 @@ CMultiBitmapCacheComp::CMultiBitmapCacheComp()
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
-const iprm::ISelectionConstraints* CMultiBitmapCacheComp::GetBitmapSelectionContraints() const
+const iprm::IOptionsList* CMultiBitmapCacheComp::GetBitmapSelectionContraints() const
 {
 	return NULL;
 }
@@ -39,7 +39,7 @@ const iimg::IBitmap* CMultiBitmapCacheComp::GetBitmap(int bitmapIndex) const
 
 // reimplemented (i2d::IMultiCalibrationProvider)
 
-const iprm::ISelectionConstraints* CMultiBitmapCacheComp::GetCalibrationSelectionContraints() const
+const iprm::IOptionsList* CMultiBitmapCacheComp::GetCalibrationSelectionContraints() const
 {
 	return NULL;
 }

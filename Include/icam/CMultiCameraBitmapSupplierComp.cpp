@@ -15,7 +15,7 @@ namespace icam
 
 // reimplemented (iipr::IMultiBitmapProvider)
 
-const iprm::ISelectionConstraints* CMultiCameraBitmapSupplierComp::GetBitmapSelectionContraints() const
+const iprm::IOptionsList* CMultiCameraBitmapSupplierComp::GetBitmapSelectionContraints() const
 {
 	return NULL;
 }

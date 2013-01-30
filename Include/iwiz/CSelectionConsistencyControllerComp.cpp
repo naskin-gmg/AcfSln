@@ -4,7 +4,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 
 namespace iwiz
@@ -168,7 +168,7 @@ bool CSelectionConsistencyControllerComp::CheckParamConsistency(const iprm::ISel
 		return false;
 	}
 
-	const iprm::ISelectionConstraints* constraintsPtr = param.GetSelectionConstraints();
+	const iprm::IOptionsList* constraintsPtr = param.GetSelectionConstraints();
 	if (constraintsPtr != NULL){
 		if (index >= constraintsPtr->GetOptionsCount()){
 			return false;
