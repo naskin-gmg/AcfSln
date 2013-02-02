@@ -4,9 +4,9 @@
  // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "ibase/CSize.h"
+#include "i2d/CAnnulusSegment.h"
 #include "iimg/IBitmap.h"
 #include "iimg/CScanlineMask.h"
-
 
 // IACF includes
 #include "iipr/TImagePixelInterpolator.h"
@@ -57,7 +57,9 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - i2d::CVector2d(regionRect.GetLeftTop());
 	int radius = int(qCeil(diffVector.GetLength()));
-	int angleRange = int(radius * I_PI + 0.5);
+	int angleDimension = int(radius * I_PI + 0.5);
+	double startAngle = 0;
+	double angleRange = I_2PI;
 
 	int r1 = 0;
 	int r2 = radius;
@@ -76,7 +78,22 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		radius = r2;
 	}
 
-	if (!outputBitmapPtr->CreateBitmap(inputBitmap.GetPixelFormat(), istd::CIndex2d(angleRange, radius))){
+	const i2d::CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(realAoiPtr);
+	if (annulusPtr != NULL){
+		r1 = int(qCeil(annulusSegmentPtr->GetInnerRadius()));
+		r2 = int(qFloor(annulusSegmentPtr->GetOuterRadius()));
+		radius = (r2 - r1);
+
+		int length = int(qCeil(diffVector.GetLength()));
+
+		angleRange = fabs(annulusSegmentPtr->GetEndAngle() - annulusSegmentPtr->GetBeginAngle());
+
+		angleDimension = int(0.5 * length * angleRange + 0.5);
+
+		startAngle = annulusSegmentPtr->GetBeginAngle();
+	}
+
+	if (!outputBitmapPtr->CreateBitmap(inputBitmap.GetPixelFormat(), istd::CIndex2d(angleDimension, radius))){
 		return false;
 	}
 
@@ -87,11 +104,12 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		for (int r = 0; r < radius; r++){
 			quint8* outputImageBeginPtr = (quint8*)outputBitmapPtr->GetLinePtr(r);
 		
-			for (int alpha = 0; alpha < angleRange; alpha++){
-				double angle = alpha / double(angleRange) * I_2PI;
+			for (int alpha = 0; alpha < angleDimension; alpha++){
+				double angle = alpha / double(angleDimension) * angleRange;
+				angle += startAngle;
 		
 				double x = (r + r1) * qCos(angle); 			
-				double y = (r  + r1) * qSin(angle);
+				double y = (r + r1) * qSin(angle);
 
 				x += aoiCenter.GetX();
 				y += aoiCenter.GetY();
