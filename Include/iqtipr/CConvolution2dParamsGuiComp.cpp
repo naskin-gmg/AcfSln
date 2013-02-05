@@ -13,7 +13,7 @@ namespace iqtipr
 
 void CConvolution2dParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	UpdateKernelSize();
 }
@@ -25,7 +25,7 @@ void CConvolution2dParamsGuiComp::UpdateModel() const
 
 void CConvolution2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iipr::IConvolutionKernel2d* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -84,7 +84,7 @@ void CConvolution2dParamsGuiComp::on_KernelTable_itemChanged(QTableWidgetItem* i
 		int y = item->row();
 
 		iipr::IConvolutionKernel2d* objectPtr = GetObjectPtr();
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		if (objectPtr != NULL){
 			bool isValid = false;
@@ -103,7 +103,7 @@ void CConvolution2dParamsGuiComp::on_KernelTable_itemChanged(QTableWidgetItem* i
 
 void CConvolution2dParamsGuiComp::UpdateTableSize()
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	int kernelWidth = KernelTable->columnCount();
 	int kernelHeight = KernelTable->rowCount();
@@ -125,7 +125,7 @@ void CConvolution2dParamsGuiComp::UpdateTableSize()
 void CConvolution2dParamsGuiComp::UpdateKernelSize() const
 {
 	iipr::IConvolutionKernel2d* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	int newKernelWidth = KernelWidthSpin->value();
 	int newKernelHeight = KernelHeightSpin->value();

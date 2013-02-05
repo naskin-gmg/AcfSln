@@ -45,7 +45,7 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 
 	// if external parameter model is used, connect to it, otherwise use the default parameter set:
 	const iprm::IParamsSet* parameterModelPtr = (paramsSetPtr == NULL) ? m_paramsSetCompPtr.GetPtr() : paramsSetPtr;
-	I_ASSERT(parameterModelPtr != NULL);
+	Q_ASSERT(parameterModelPtr != NULL);
 
 	// connect to own parameter model:
 	if (ConnectToParameterModel(*parameterModelPtr)){
@@ -72,8 +72,8 @@ void CDirectoryMonitorComp::StopObserving()
 
 void CDirectoryMonitorComp::OnComponentCreated()
 {
-	I_ASSERT(m_directoryPathIdAttrPtr.IsValid());
-	I_ASSERT(m_directoryMonitorParamsIdAttrPtr.IsValid());
+	Q_ASSERT(m_directoryPathIdAttrPtr.IsValid());
+	Q_ASSERT(m_directoryMonitorParamsIdAttrPtr.IsValid());
 
 	BaseClass::OnComponentCreated();
 
@@ -299,7 +299,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 {
 	QMutexLocker locker(&m_mutex);
 
-	I_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
+	Q_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
 	if (m_fileSystemChangeStorageCompPtr.IsValid()){
 		if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_NEW) != 0){
 			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ihotf::IFileSystemChangeStorage::CF_NEW);
@@ -355,7 +355,7 @@ void CDirectoryMonitorComp::OnDirectoryChangeNotification(const QString& /*direc
 
 void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 {
-	I_ASSERT(!BaseClass2::isRunning());
+	Q_ASSERT(!BaseClass2::isRunning());
 
 	if (m_currentDirectory == QDir(folderPath)){
 		return;
@@ -479,12 +479,12 @@ CDirectoryMonitorComp::MonitoringParamsObserver::MonitoringParamsObserver(CDirec
 
 void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
 		QMutexLocker locker(&m_parent.m_mutex);
 
 		const ihotf::IDirectoryMonitorParams* directoryMonitorParamsPtr = dynamic_cast<const ihotf::IDirectoryMonitorParams*>(modelPtr);
-		I_ASSERT(directoryMonitorParamsPtr != NULL);
+		Q_ASSERT(directoryMonitorParamsPtr != NULL);
 		if (directoryMonitorParamsPtr != NULL){
 			m_parent.m_poolingFrequency = directoryMonitorParamsPtr->GetPoolingIntervall();
 			m_parent.m_observingItemTypes = directoryMonitorParamsPtr->GetObservedItemTypes();
@@ -509,10 +509,10 @@ CDirectoryMonitorComp::DirectoryParamsObserver::DirectoryParamsObserver(CDirecto
 
 void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
 		const ifile::IFileNameParam* directoryPathPtr = dynamic_cast<const ifile::IFileNameParam*>(modelPtr);
-		I_ASSERT(directoryPathPtr != NULL);
+		Q_ASSERT(directoryPathPtr != NULL);
 		if (directoryPathPtr != NULL){
 			bool needRestart = m_parent.isRunning();
 			if (needRestart){

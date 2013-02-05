@@ -90,7 +90,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
 			cacheFilePath = foundIter.value();
-			I_ASSERT(!cacheFilePath.isEmpty());
+			Q_ASSERT(!cacheFilePath.isEmpty());
 		}
 		else{
 			cacheFilePath = CalcCacheFilePath(key);
@@ -144,7 +144,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 template <class Key, class CacheObject>
 void TFileCachedProducerCompBase<Key, CacheObject>::UnlockObject(const CacheObject* objectPtr)
 {
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	typename OwnedObjects::iterator foundIter = m_ownedObjects.find(objectPtr);
 	if (foundIter != m_ownedObjects.end()){
@@ -184,7 +184,7 @@ template <class Key, class CacheObject>
 void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 {
 	int maxCachedFiles = GetMaxCachedFilesCount();
-	I_ASSERT(maxCachedFiles >= 0);
+	Q_ASSERT(maxCachedFiles >= 0);
 
 	while (int(m_recentlyUsedKeys.size()) > maxCachedFiles){
 		const QString& key = m_recentlyUsedKeys.front();

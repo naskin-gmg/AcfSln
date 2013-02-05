@@ -24,7 +24,7 @@ CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const QByt
 
 	for (int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
 		CPropertiesManager::PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
-		I_ASSERT(propertyInfoPtr != NULL);
+		Q_ASSERT(propertyInfoPtr != NULL);
 
 		if (propertyInfoPtr->propertyId == propertyId){
 			return propertyInfoPtr;
@@ -57,8 +57,8 @@ int CPropertiesManager::GetPropertiesCount() const
 
 iser::IObject* CPropertiesManager::GetProperty(int propertyIndex) const
 {
-	I_ASSERT(propertyIndex >= 0);
-	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
+	Q_ASSERT(propertyIndex >= 0);
+	Q_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
 	return m_propertiesList.GetAt(propertyIndex)->objectPtr.GetPtr();
 }
@@ -66,8 +66,8 @@ iser::IObject* CPropertiesManager::GetProperty(int propertyIndex) const
 
 QByteArray CPropertiesManager::GetPropertyId(int propertyIndex) const
 {
-	I_ASSERT(propertyIndex >= 0);
-	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
+	Q_ASSERT(propertyIndex >= 0);
+	Q_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
 	return m_propertiesList.GetAt(propertyIndex)->propertyId;
 }
@@ -75,8 +75,8 @@ QByteArray CPropertiesManager::GetPropertyId(int propertyIndex) const
 
 QString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
 {
-	I_ASSERT(propertyIndex >= 0);
-	I_ASSERT(propertyIndex < m_propertiesList.GetCount());
+	Q_ASSERT(propertyIndex >= 0);
+	Q_ASSERT(propertyIndex < m_propertiesList.GetCount());
 
 	return m_propertiesList.GetAt(propertyIndex)->propertyDescription;
 }
@@ -92,7 +92,7 @@ void CPropertiesManager::InsertProperty(
 	istd::CChangeNotifier notifier(this, CF_MODEL | CF_ADD_PROPERTY);
 
 	PropertyInfo* existingInfoPtr = GetPropertyInfo(propertyId);
-	I_ASSERT(existingInfoPtr == NULL);
+	Q_ASSERT(existingInfoPtr == NULL);
 	if (objectPtr != NULL && existingInfoPtr == NULL){
 		PropertyInfo* propertyInfoPtr = new PropertyInfo;
 

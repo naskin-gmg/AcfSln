@@ -9,7 +9,7 @@ namespace iqtmeas
 
 void CDataStatisticsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	imeas::IDataStatistics* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

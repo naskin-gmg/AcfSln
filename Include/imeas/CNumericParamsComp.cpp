@@ -34,7 +34,7 @@ void CNumericParamsComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	const INumericConstraints* constraintsPtr = GetNumericConstraints();
-	I_ASSERT(constraintsPtr != NULL);
+	Q_ASSERT(constraintsPtr != NULL);
 
 	int count = constraintsPtr->GetNumericValuesCount();
 	m_values.SetElementsCount(count);

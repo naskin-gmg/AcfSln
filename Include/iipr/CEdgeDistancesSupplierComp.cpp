@@ -21,10 +21,10 @@ int CEdgeDistancesSupplierComp::GetValuesCount() const
 
 const imeas::INumericValue& CEdgeDistancesSupplierComp::GetNumericValue(int index) const
 {
-	I_ASSERT(index == 0);
+	Q_ASSERT(index == 0);
 
 	const ProductType* productPtr = GetWorkProduct();
-	I_ASSERT(productPtr != NULL);
+	Q_ASSERT(productPtr != NULL);
 
 	return productPtr->GetNumericValue(index);
 }

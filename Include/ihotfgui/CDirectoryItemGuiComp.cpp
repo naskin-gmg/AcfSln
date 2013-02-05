@@ -72,7 +72,7 @@ bool CDirectoryItemGuiComp::Serialize(iser::IArchive& /*archive*/)
 
 void CDirectoryItemGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IHotfolderStatistics* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -94,7 +94,7 @@ void CDirectoryItemGuiComp::UpdateProgressBar(const ihotf::IHotfolderStatistics&
 	int errorCount = statistics.GetErrorsCount(m_directoryPath);
 	int abortedCount = statistics.GetAbortedCount(m_directoryPath);
 
-	I_ASSERT(itemsCount >= (successCount + errorCount + abortedCount));
+	Q_ASSERT(itemsCount >= (successCount + errorCount + abortedCount));
 
 	double successed = itemsCount == 0 ? 0 : successCount / double(itemsCount);
 	double errors = itemsCount == 0 ? 0 : errorCount / double(itemsCount);

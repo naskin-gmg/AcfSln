@@ -203,7 +203,7 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 	case LC_NAME:
 		{
 			QLineEdit* lineEditPtr = dynamic_cast<QLineEdit*>(editor);
-			I_ASSERT(lineEditPtr != NULL);	// was created by createEditor(...)
+			Q_ASSERT(lineEditPtr != NULL);	// was created by createEditor(...)
 
 			//editor is a QLineEdit
 			QString userName = lineEditPtr->text();
@@ -220,7 +220,7 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 	case LC_GROUP:
 		{
 			QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(editor);
-			I_ASSERT(comboBoxPtr != NULL);	// was created by createEditor(...)
+			Q_ASSERT(comboBoxPtr != NULL);	// was created by createEditor(...)
 
 			int groupIndex = comboBoxPtr->currentIndex();
 			QString groupName = m_parent.m_manager.GetUserGroupName(groupIndex);

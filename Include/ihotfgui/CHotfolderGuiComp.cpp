@@ -43,7 +43,7 @@ const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 
 void CHotfolderGuiComp::UpdateGui(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -65,7 +65,7 @@ void CHotfolderGuiComp::UpdateGui(int updateFlags)
 			UpdateProcessingCommands();
 		}
 
-		I_ASSERT(m_filterEditor != NULL);
+		Q_ASSERT(m_filterEditor != NULL);
 
 		UpdateItemsVisibility(m_filterEditor->GetText(), ErrorsRadio->isChecked());
 	}
@@ -82,7 +82,7 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){
 		imod::IModel* hotfolderModelPtr = GetModelPtr();
-		I_ASSERT(hotfolderModelPtr != NULL);
+		Q_ASSERT(hotfolderModelPtr != NULL);
 
 		hotfolderModelPtr->AttachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
 	}
@@ -101,7 +101,7 @@ void CHotfolderGuiComp::OnGuiModelDetached()
 {
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){
 		imod::IModel* hotfolderModelPtr = GetModelPtr();
-		I_ASSERT(hotfolderModelPtr != NULL);
+		Q_ASSERT(hotfolderModelPtr != NULL);
 
 		if (hotfolderModelPtr->IsAttached(m_statisticsHotfolderObserverCompPtr.GetPtr())){
 			hotfolderModelPtr->DetachObserver(m_statisticsHotfolderObserverCompPtr.GetPtr());
@@ -202,7 +202,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	// Create preview GUI:
 	if (m_processingItemPreviewGuiCompPtr.IsValid()){
-		I_ASSERT(!m_processingItemPreviewGuiCompPtr->IsGuiCreated());
+		Q_ASSERT(!m_processingItemPreviewGuiCompPtr->IsGuiCreated());
 
 		m_processingItemPreviewGuiCompPtr->CreateGui(PreviewFrame);
 	}
@@ -233,7 +233,7 @@ void CHotfolderGuiComp::AddFileItem(const ihotf::IHotfolderProcessingItem& fileI
 	int itemsCount = FileList->topLevelItemCount();
 	for (int index = 0; index < itemsCount;index++){
 		DirectoryItem* itemPtr = dynamic_cast<DirectoryItem*>(FileList->topLevelItem(index));
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		if (itemPtr->GetDirectory() == fileDirectory){
 			parentItemPtr = itemPtr;
@@ -269,7 +269,7 @@ void CHotfolderGuiComp::UpdateItemCommands()
 	bool enableRestartAction = false;
 
 	for (int itemIndex = 0; itemIndex < int(selectedItems.size()); itemIndex++){
-		I_ASSERT(selectedItems[itemIndex] != NULL);
+		Q_ASSERT(selectedItems[itemIndex] != NULL);
 
 		int itemState = selectedItems[itemIndex]->GetObjectPtr()->GetProcessingState();
 
@@ -335,7 +335,7 @@ void CHotfolderGuiComp::UpdateAddedItemList()
 			currentItemsCount += FileList->topLevelItem(itemIndex)->childCount();
 		}
 
-		I_ASSERT(currentItemsCount < itemsCount);
+		Q_ASSERT(currentItemsCount < itemsCount);
 
 		for (int itemIndex = currentItemsCount; itemIndex < itemsCount; itemIndex++){
 			ihotf::IHotfolderProcessingItem* processingItemPtr = objectPtr->GetProcessingItem(itemIndex);
@@ -461,13 +461,13 @@ void CHotfolderGuiComp::OnItemRemove()
 			ProcessingItem* processingItemPtr = processingItems[itemIndex];
 
 			ihotf::IHotfolderProcessingItem* itemPtr = processingItemPtr->GetObjectPtr();
-			I_ASSERT(itemPtr != NULL);
+			Q_ASSERT(itemPtr != NULL);
 			if (itemPtr != NULL && itemPtr->GetProcessingState() == iproc::IProcessor::TS_WAIT){		
 				itemPtr->SetProcessingState(iproc::IProcessor::TS_CANCELED);
 			}
 
 			QTreeWidgetItem* parentItem = processingItemPtr->parent();
-			I_ASSERT(parentItem != NULL);
+			Q_ASSERT(parentItem != NULL);
 
 			parentItem->removeChild(processingItemPtr);
 
@@ -488,7 +488,7 @@ void CHotfolderGuiComp::OnItemCancel()
 	if (objectPtr != NULL){
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
 			ihotf::IHotfolderProcessingItem* processingItemPtr = processingItems[itemIndex]->GetObjectPtr();
-			I_ASSERT(processingItemPtr != NULL);
+			Q_ASSERT(processingItemPtr != NULL);
 
 			int itemState = processingItemPtr->GetProcessingState();
 			if ((itemState == iproc::IProcessor::TS_NONE) || (itemState == iproc::IProcessor::TS_WAIT)){
@@ -538,7 +538,7 @@ void CHotfolderGuiComp::OnShowProcessingParamsDialog()
 
 void CHotfolderGuiComp::OnContextMenuRequested(const QPoint& menuPoint)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	QPoint localPoint;
 	localPoint = FileList->viewport()->mapToGlobal(menuPoint);
@@ -570,7 +570,7 @@ void CHotfolderGuiComp::on_FileList_itemSelectionChanged()
 void CHotfolderGuiComp::on_AllRadio_toggled(bool isChecked)
 {
 	if (isChecked){
-		I_ASSERT(m_filterEditor != NULL);
+		Q_ASSERT(m_filterEditor != NULL);
 
 		UpdateItemsVisibility(m_filterEditor->GetText(), false);
 	}
@@ -580,7 +580,7 @@ void CHotfolderGuiComp::on_AllRadio_toggled(bool isChecked)
 void CHotfolderGuiComp::on_ErrorsRadio_toggled(bool isChecked)
 {
 	if (isChecked){
-		I_ASSERT(m_filterEditor != NULL);
+		Q_ASSERT(m_filterEditor != NULL);
 
 		UpdateItemsVisibility(m_filterEditor->GetText(), true);
 	}

@@ -89,7 +89,7 @@ void CDocumentProcessingManagerCompBase::OnComponentDestroyed()
 void CDocumentProcessingManagerCompBase::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	idoc::IDocumentManager* objectPtr = GetObjectAt<idoc::IDocumentManager>(modelId);
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 	if (objectPtr != NULL){
 		SetProcessingCommandEnabled((objectPtr->GetActiveView() != NULL) || !IsInputDocumentRequired());
 	}

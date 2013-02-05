@@ -52,7 +52,7 @@ void CProcessorCommandComp::OnComponentCreated()
 
 void CProcessorCommandComp::OnCommandActivated()
 {
-	I_ASSERT(m_processorCompPtr.IsValid());
+	Q_ASSERT(m_processorCompPtr.IsValid());
 
 	int processingState = m_processorCompPtr->DoProcessing(
 				m_processorParamsCompPtr.GetPtr(),

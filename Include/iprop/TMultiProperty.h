@@ -183,8 +183,8 @@ int TMultiProperty<Value, Container>::GetValuesCount() const
 template <typename Value, class Container>
 Value TMultiProperty<Value, Container>::GetValueAt(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
 
 	return m_values[index];
 }
@@ -193,8 +193,8 @@ Value TMultiProperty<Value, Container>::GetValueAt(int index) const
 template <typename Value, class Container>
 void TMultiProperty<Value, Container>::SetValueAt(int index, const Value& value)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
 
 	if (m_values[index] != value){
 		istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);

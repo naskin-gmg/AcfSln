@@ -351,7 +351,7 @@ bool CXslTransformationReadArchive::ProcessData(void* dataPtr, int size)
 
 	QVector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toLocal8Bit());
 
-	I_ASSERT(size == int(decodedData.size()));
+	Q_ASSERT(size == int(decodedData.size()));
 
 	std::memcpy(data, &decodedData[0], size);
 

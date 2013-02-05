@@ -17,7 +17,7 @@ namespace iqtmm
 
 void CPlaybackControllerGuiComp::UpdateGui(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -133,7 +133,7 @@ void CPlaybackControllerGuiComp::on_PlayButton_toggled(bool isToggled)
 
 void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int position)
 {
-	I_ASSERT(position > 0);
+	Q_ASSERT(position > 0);
 
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -144,7 +144,7 @@ void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int position)
 
 void CPlaybackControllerGuiComp::on_FrameIndexSB_valueChanged(int position)
 {
-	I_ASSERT(position > 0);
+	Q_ASSERT(position > 0);
 
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -173,7 +173,7 @@ void CPlaybackControllerGuiComp::OnTimerTick()
 		int framesCount = objectPtr->GetFramesCount();
 		if (framesCount > 0){
 			int currentFrameIndex = objectPtr->GetCurrentFrame();
-			I_ASSERT(currentFrameIndex < framesCount);
+			Q_ASSERT(currentFrameIndex < framesCount);
 			int nextCurrentFrameIndex = RepeatButton->isChecked() ? (currentFrameIndex + 1) % framesCount : currentFrameIndex + 1;
 			if (nextCurrentFrameIndex < framesCount){
 				objectPtr->SetCurrentFrame(nextCurrentFrameIndex);

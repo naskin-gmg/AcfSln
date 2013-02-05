@@ -247,10 +247,10 @@ void CEdgeDistanceProcessorComp::SetCaliperResults(
 			ICaliperParams::DirectionMode caliperDirectionMode,
 			CaliperLine& caliperLine) const
 {
-	I_ASSERT(m_featuresMapperCompPtr.IsValid());	// validíty of features mapper should be checked on the beginning
+	Q_ASSERT(m_featuresMapperCompPtr.IsValid());	// validíty of features mapper should be checked on the beginning
 
 	int featuresCount = container.GetValuesCount();
-	I_ASSERT ((featuresCount == 0) || (featuresCount == 1));
+	Q_ASSERT ((featuresCount == 0) || (featuresCount == 1));
 
 	if (featuresCount > 0){ 
 		const CCaliperFeature* featurePtr = dynamic_cast<const CCaliperFeature*>(&container.GetNumericValue(0));

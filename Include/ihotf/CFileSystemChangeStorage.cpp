@@ -28,8 +28,8 @@ QString CFileSystemChangeStorage::GetItemPath(int fileIndex) const
 {
 	QMutexLocker locker(&m_mutex);
 
-	I_ASSERT(fileIndex >= 0);
-	I_ASSERT(fileIndex < int(m_storageItems.size()));
+	Q_ASSERT(fileIndex >= 0);
+	Q_ASSERT(fileIndex < int(m_storageItems.size()));
 
 	QString filePath = m_storageItems[fileIndex].path;
 
@@ -41,8 +41,8 @@ int CFileSystemChangeStorage::GetItemState(int fileIndex) const
 {
 	QMutexLocker locker(&m_mutex);
 
-	I_ASSERT(fileIndex >= 0);
-	I_ASSERT(fileIndex < int(m_storageItems.size()));
+	Q_ASSERT(fileIndex >= 0);
+	Q_ASSERT(fileIndex < int(m_storageItems.size()));
 
 	int fileState = m_storageItems[fileIndex].state;
 

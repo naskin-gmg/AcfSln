@@ -94,8 +94,8 @@ void CSelectableFileConverterComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
-	I_ASSERT(m_slaveConvertersCompPtr.IsValid());
+	Q_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
+	Q_ASSERT(m_slaveConvertersCompPtr.IsValid());
 
 	m_optionsCount = qMin(m_slaveConvertersCompPtr.GetCount(), m_slaveConverterNamesAttrPtr.GetCount());
 	if (m_optionsCount > 0){
@@ -121,7 +121,7 @@ int CSelectableFileConverterComp::GetOptionsCount() const
 
 QString CSelectableFileConverterComp::GetOptionName(int index) const
 {
-	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
+	Q_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
 
 	return m_slaveConverterNamesAttrPtr[index];
 }

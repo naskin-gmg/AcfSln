@@ -35,7 +35,7 @@ bool CExtremumCaliperProcessorComp::DoCaliper(
 	}
 
 	double weightThreshold = paramsPtr->GetWeightThreshold();
-	I_ASSERT(weightThreshold >= 0);
+	Q_ASSERT(weightThreshold >= 0);
 
 	istd::CRange proportionRange(0, 1);
 
@@ -71,20 +71,20 @@ bool CExtremumCaliperProcessorComp::DoCaliper(
 			if (isRisedEdgeSupported && (risedCount > 0)){
 				if (value > weightThreshold){
 					double prevDelta = value - prevValue;
-					I_ASSERT(prevDelta >= 0);
+					Q_ASSERT(prevDelta >= 0);
 
 					double nextDelta = value - nextValue;
-					I_ASSERT(nextDelta >= 0);
-					I_ASSERT(nextDelta + prevDelta > 0);
+					Q_ASSERT(nextDelta >= 0);
+					Q_ASSERT(nextDelta + prevDelta > 0);
 
 					double deltaSum = (nextDelta + prevDelta);
-					I_ASSERT(deltaSum >= 0);
+					Q_ASSERT(deltaSum >= 0);
 
 					double shift = prevDelta / deltaSum;
 
 					double position = proportionRange.GetValueFromAlpha((index + shift) / samplesCount);
-					I_ASSERT(position >= 0 - I_EPSILON);
-					I_ASSERT(position <= 1 + I_EPSILON);
+					Q_ASSERT(position >= 0 - I_EPSILON);
+					Q_ASSERT(position <= 1 + I_EPSILON);
 
 					bool isReady = false;
 					if (		!results.AddFeature(new CCaliperFeature(value, position, CCaliperFeature::EM_RISING), &isReady) ||
@@ -101,20 +101,20 @@ bool CExtremumCaliperProcessorComp::DoCaliper(
 			if (isDropppedEdgeSupported && (droppedCount > 0)){
 				if (value < -weightThreshold){
 					double prevDelta = prevValue - value;
-					I_ASSERT(prevDelta >= 0);
+					Q_ASSERT(prevDelta >= 0);
 
 					double nextDelta = nextValue - value;
-					I_ASSERT(nextDelta >= 0);
-					I_ASSERT(nextDelta + prevDelta > 0);
+					Q_ASSERT(nextDelta >= 0);
+					Q_ASSERT(nextDelta + prevDelta > 0);
 
 					double deltaSum = (nextDelta + prevDelta);
-					I_ASSERT(deltaSum >= 0);
+					Q_ASSERT(deltaSum >= 0);
 
 					double shift = prevDelta / deltaSum;
 
 					double position = proportionRange.GetValueFromAlpha((index + shift) / samplesCount);
-					I_ASSERT(position >= 0 - I_EPSILON);
-					I_ASSERT(position <= 1 + I_EPSILON);
+					Q_ASSERT(position >= 0 - I_EPSILON);
+					Q_ASSERT(position <= 1 + I_EPSILON);
 
 					bool isReady = false;
 					if (		!results.AddFeature(new CCaliperFeature(-value, position, CCaliperFeature::EM_FALLING), &isReady) ||

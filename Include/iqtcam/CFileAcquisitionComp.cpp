@@ -36,9 +36,9 @@ int CFileAcquisitionComp::DoProcessing(
 {
 	QMutexLocker lock(&m_lock);
 
-	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
-	I_ASSERT(m_pathParamIdAttrPtr.IsValid());	// obligatory attribute
-	I_ASSERT(m_maxCachedDirectoriesAttrPtr.IsValid());	// obligatory attribute
+	Q_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
+	Q_ASSERT(m_pathParamIdAttrPtr.IsValid());	// obligatory attribute
+	Q_ASSERT(m_maxCachedDirectoriesAttrPtr.IsValid());	// obligatory attribute
 
 	if (!m_bitmapLoaderCompPtr.IsValid()){
 		SendVerboseMessage("Bitmap loader was not set");

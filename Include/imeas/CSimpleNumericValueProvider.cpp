@@ -19,8 +19,8 @@ int CSimpleNumericValueProvider::GetValuesCount() const
 
 const imeas::INumericValue& CSimpleNumericValueProvider::GetNumericValue(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_values.count());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_values.count());
 
 	return m_values[index];
 }

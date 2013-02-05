@@ -37,7 +37,7 @@ void CHotfolderProcessingComp::OnComponentCreated()
 
 	m_processingTimer.start(500);
 
-	I_ASSERT(m_processingTimer.isActive());
+	Q_ASSERT(m_processingTimer.isActive());
 	
 	BaseClass::OnComponentCreated();
 
@@ -112,7 +112,7 @@ void CHotfolderProcessingComp::OnProcessingTimer()
 void CHotfolderProcessingComp::OnProcessingItemFinished(const ItemProcessor& processor)
 {
 	ihotf::IHotfolderProcessingItem* itemPtr = GetItemFromId(processor.GetItemUuid());
-	I_ASSERT(itemPtr != NULL);
+	Q_ASSERT(itemPtr != NULL);
 	
 	if (itemPtr != NULL && itemPtr->GetProcessingState() != iproc::IProcessor::TS_CANCELED){
 		istd::CChangeNotifier changePtr(itemPtr);
@@ -128,7 +128,7 @@ void CHotfolderProcessingComp::OnCancelProcessingItem(const ihotf::IHotfolderPro
 {
 	for (int pendingProcessorIndex = 0; pendingProcessorIndex < m_pendingProcessors.GetCount(); pendingProcessorIndex++){
 		ItemProcessor* processorPtr = m_pendingProcessors.GetAt(pendingProcessorIndex);
-		I_ASSERT(processorPtr != NULL);
+		Q_ASSERT(processorPtr != NULL);
 
 		if (processorPtr->GetItemUuid() == processingItemPtr->GetItemUuid()){
 			processorPtr->Cancel();
@@ -149,7 +149,7 @@ void CHotfolderProcessingComp::CancelAllProcessingItems()
 
 	m_pendingProcessors.Reset();
 
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	Q_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return;
 	}
@@ -167,7 +167,7 @@ void CHotfolderProcessingComp::CancelAllProcessingItems()
 
 ihotf::IHotfolderProcessingItem* CHotfolderProcessingComp::GetItemFromId(const QByteArray& itemUuid) const
 {
-	I_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
+	Q_ASSERT(m_hotfolderProcessingInfoCompPtr.IsValid());
 	if (!m_hotfolderProcessingInfoCompPtr.IsValid()){
 		return NULL;
 	}

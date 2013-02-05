@@ -155,7 +155,7 @@ bool CCopyFilesTreeComp::CopyFileTree(
 		QString inputFilePath = inputDir.absoluteFilePath(fileName);
 		QString outputPath = outputDir.absoluteFilePath(fileName);
 
-		I_ASSERT(m_fileCopyCompPtr.IsValid());	// it should be checked before whole process started
+		Q_ASSERT(m_fileCopyCompPtr.IsValid());	// it should be checked before whole process started
 
 		if (m_fileCopyCompPtr->ConvertFiles(inputFilePath, outputPath, paramsPtr)){
 			counter++;

@@ -31,8 +31,8 @@ bool DoConvolution(
 			QVector<KernelElement> fastAccessElements,
 			iimg::IBitmap& outputImage)
 {
-	I_ASSERT(kernelSize.GetX() > 0);
-	I_ASSERT(kernelSize.GetY() > 0);
+	Q_ASSERT(kernelSize.GetX() > 0);
+	Q_ASSERT(kernelSize.GetY() > 0);
 
 	static const WorkingType maxClipValue = (WorkingType(1) << (sizeof(PixelType) * 8 + ValueShift)) - 1;
 

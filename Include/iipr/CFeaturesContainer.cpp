@@ -44,8 +44,8 @@ int CFeaturesContainer::GetValuesCount() const
 
 const imeas::INumericValue& CFeaturesContainer::GetNumericValue(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
 
 	return *m_featuresList.GetAt(index);
 }

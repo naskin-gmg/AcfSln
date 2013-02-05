@@ -13,7 +13,7 @@ namespace iqtmeas
 
 CNumericParamsGuiComp::~CNumericParamsGuiComp()
 {
-	I_ASSERT(m_valueWidgets.IsEmpty());
+	Q_ASSERT(m_valueWidgets.IsEmpty());
 }
 
 
@@ -53,10 +53,10 @@ void CNumericParamsGuiComp::OnGuiDestroyed()
 
 void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	QWidget* panelPtr = GetQtWidget();
-	I_ASSERT(panelPtr != NULL);	// called inside UpdateGui(), widget must be defined.
+	Q_ASSERT(panelPtr != NULL);	// called inside UpdateGui(), widget must be defined.
 
 	QLayout* layoutPtr = panelPtr->layout();
 	if (layoutPtr == NULL){
@@ -93,7 +93,7 @@ void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 
 		for (int i = 0; i < valuesCount; i++){
 			CNumericValueWidget* valueWidgetPtr = m_valueWidgets.GetAt(i);
-			I_ASSERT(valueWidgetPtr != NULL);
+			Q_ASSERT(valueWidgetPtr != NULL);
 
 			if (constraintsPtr != NULL){
 				valueWidgetPtr->SetUnitInfo(

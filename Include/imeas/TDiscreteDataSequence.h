@@ -354,8 +354,8 @@ bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
 			int samplesCount = sequencePtr->GetSamplesCount();
 			int channelsCount = sequencePtr->GetChannelsCount();
 
-			I_ASSERT(samplesCount >= 0);
-			I_ASSERT(channelsCount >= 0);
+			Q_ASSERT(samplesCount >= 0);
+			Q_ASSERT(channelsCount >= 0);
 
 			if (!CreateSequence(samplesCount, channelsCount)){
 				return false;

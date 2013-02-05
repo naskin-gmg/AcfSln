@@ -29,7 +29,7 @@ bool CHotfolderProcessingInfo::ItemExists(const QString& inputFilePath, ihotf::I
 
 	for (int itemIndex = 0; itemIndex < m_processingItems.GetCount(); itemIndex++){
 		ihotf::IHotfolderProcessingItem* itemPtr = m_processingItems.GetAt(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		if (itemPtr->GetInputFile() == inputFilePath){
 			if (foundItemPtr != NULL){

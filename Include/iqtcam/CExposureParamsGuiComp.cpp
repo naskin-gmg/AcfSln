@@ -72,7 +72,7 @@ void CExposureParamsGuiComp::OnGuiModelDetached()
 
 void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	icam::IExposureParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -99,10 +99,10 @@ void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CExposureParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	icam::IExposureParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	double tolerance = 0.9e-6;
 

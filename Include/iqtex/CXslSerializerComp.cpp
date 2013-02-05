@@ -21,10 +21,10 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& fil
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		CXslTransformationReadArchive archive(filePath, m_xslReadFilePath->GetPath());
 
-		I_ASSERT(!archive.IsStoring());
+		Q_ASSERT(!archive.IsStoring());
 
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
-		I_ASSERT(serializablePtr != NULL);
+		Q_ASSERT(serializablePtr != NULL);
 
 		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
 
@@ -45,10 +45,10 @@ int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString&
 {
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), this);
-		I_ASSERT(archive.IsStoring());
+		Q_ASSERT(archive.IsStoring());
 
 		const iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
-		I_ASSERT(serializablePtr != NULL);
+		Q_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
 			SendWarningMessage(MI_UNSUPPORTED_VERSION, QObject::tr("Archive version is not supported, possible lost of data"));

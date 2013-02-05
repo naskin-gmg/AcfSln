@@ -14,9 +14,9 @@ namespace iqtsig
 
 void CSamplingParamsGuiComp::OnGuiModelAttached()
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	isig::ISamplingParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CRange range(0, 0.1);
 
@@ -32,7 +32,7 @@ void CSamplingParamsGuiComp::OnGuiModelAttached()
 
 void CSamplingParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	isig::ISamplingParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

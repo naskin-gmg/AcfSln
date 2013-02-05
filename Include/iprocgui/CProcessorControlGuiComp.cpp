@@ -26,7 +26,7 @@ CProcessorControlGuiComp::CProcessorControlGuiComp()
 
 void CProcessorControlGuiComp::OnComponentCreated()
 {
-	I_ASSERT(m_liveIntervalAttrPtr.IsValid());
+	Q_ASSERT(m_liveIntervalAttrPtr.IsValid());
 
 	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
 }

@@ -38,7 +38,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 		return;
 	}
 
-	I_ASSERT(outputDocumentPtr != NULL);
+	Q_ASSERT(outputDocumentPtr != NULL);
 
 	int documentIndex = -1;
 
@@ -51,7 +51,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 		}
 	}
 
-	I_ASSERT(documentIndex >= 0);
+	Q_ASSERT(documentIndex >= 0);
 
 	istd::CChangeNotifier changePtr(outputDocumentPtr);
 

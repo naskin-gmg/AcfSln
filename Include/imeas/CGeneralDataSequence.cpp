@@ -115,8 +115,8 @@ int CGeneralDataSequence::GetChannelsCount() const
 
 double CGeneralDataSequence::GetSample(int index, int channel) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
 
 	return m_samples[index * m_channelsCount + channel];
 }
@@ -124,10 +124,10 @@ double CGeneralDataSequence::GetSample(int index, int channel) const
 
 void CGeneralDataSequence::SetSample(int index, int channel, double value)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
-	I_ASSERT(channel >= 0);
-	I_ASSERT(channel < m_channelsCount);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+	Q_ASSERT(channel >= 0);
+	Q_ASSERT(channel < m_channelsCount);
 
 	m_samples[index * m_channelsCount + channel] = value;
 }
@@ -304,8 +304,8 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object)
 			int samplesCount = sequencePtr->GetSamplesCount();
 			int channelsCount = sequencePtr->GetChannelsCount();
 
-			I_ASSERT(samplesCount >= 0);
-			I_ASSERT(channelsCount >= 0);
+			Q_ASSERT(samplesCount >= 0);
+			Q_ASSERT(channelsCount >= 0);
 
 			if (!CreateSequence(samplesCount, channelsCount)){
 				return false;

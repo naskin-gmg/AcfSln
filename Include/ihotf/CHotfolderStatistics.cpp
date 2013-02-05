@@ -148,7 +148,7 @@ void CHotfolderStatistics::RebuildStatistics()
 	int itemsCount = objectPtr->GetProcessingItemsCount();
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		ihotf::IHotfolderProcessingItem* itemPtr = objectPtr->GetProcessingItem(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		int itemState = itemPtr->GetProcessingState();
 		QString directoryPath = GetDirectoryPath(*itemPtr);

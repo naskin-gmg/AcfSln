@@ -26,7 +26,7 @@ int CPositionFromImageSupplierComp::GetValuesCount() const
 
 const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int I_IF_DEBUG(index)) const
 {
-	I_ASSERT(index == 0);
+	Q_ASSERT(index == 0);
 
 	const imath::CVarVector* productPtr = GetWorkProduct();
 	if (productPtr != NULL){

@@ -83,8 +83,8 @@ bool CBitmapOperations::JoinBitmaps(
 
 			const void* inputLinePtr = inputSingleBitmap.GetLinePtr(y);
 
-			I_ASSERT(outputLinePtr != NULL);
-			I_ASSERT(inputLinePtr != NULL);
+			Q_ASSERT(outputLinePtr != NULL);
+			Q_ASSERT(inputLinePtr != NULL);
 
 			memcpy(outputLinePtr, inputLinePtr, lineBytes);
 		}
@@ -185,8 +185,8 @@ bool CBitmapOperations::CombineBitmaps(
 							}
 							else{
 								double weight = weghtsPtr->GetElement(inputBitmapIndex);
-								I_ASSERT(weight >= 0);
-								I_ASSERT(weight <= 1.0);
+								Q_ASSERT(weight >= 0);
+								Q_ASSERT(weight <= 1.0);
 
 								outputPixelComponentValue += *inputPixelPtr * weight;
 							}

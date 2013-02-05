@@ -30,22 +30,22 @@ bool ProjectionFunction(
 			const PixelConversion& conversion,
 			imeas::IDataSequence& results)
 {
-	I_ASSERT(projectionLine.GetPoint1().GetX() <= projectionLine.GetPoint2().GetX());
-	I_ASSERT(clippedLine.GetPoint1().GetX() <= clippedLine.GetPoint2().GetX());
-	I_ASSERT(axisSizes[0] != 0);
-	I_ASSERT(axisSizes[1] != 0);
-	I_ASSERT(addressDiffs[0] != 0);
-	I_ASSERT(addressDiffs[1] != 0);
+	Q_ASSERT(projectionLine.GetPoint1().GetX() <= projectionLine.GetPoint2().GetX());
+	Q_ASSERT(clippedLine.GetPoint1().GetX() <= clippedLine.GetPoint2().GetX());
+	Q_ASSERT(axisSizes[0] != 0);
+	Q_ASSERT(axisSizes[1] != 0);
+	Q_ASSERT(addressDiffs[0] != 0);
+	Q_ASSERT(addressDiffs[1] != 0);
 
 	i2d::CVector2d delta = clippedLine.GetDiffVector();
 	i2d::CVector2d beginPoint = clippedLine.GetPoint1();
-	I_ASSERT(delta.GetX() >= 0);
+	Q_ASSERT(delta.GetX() >= 0);
 
 	int axis1Begin = int(beginPoint.GetX() + I_BIG_EPSILON);
 	int axis1End = int(beginPoint.GetX() + delta.GetX() - I_BIG_EPSILON) + 1;
-	I_ASSERT(axis1Begin <= axis1End);
-	I_ASSERT(axis1Begin >= 0);
-	I_ASSERT(axis1End <= axisSizes[0]);
+	Q_ASSERT(axis1Begin <= axis1End);
+	Q_ASSERT(axis1Begin >= 0);
+	Q_ASSERT(axis1End <= axisSizes[0]);
 
 	istd::CChangeNotifier projectionNotifier(&results);
 
@@ -76,8 +76,8 @@ bool ProjectionFunction(
 				}
 				else{
 					double alpha = axis2Position - axis2Index;
-					I_ASSERT(alpha >= 0);
-					I_ASSERT(alpha <= 1);
+					Q_ASSERT(alpha >= 0);
+					Q_ASSERT(alpha <= 1);
 
 					int axis2Offset = axis2Index * addressDiffs[1];
 					const quint8* pixelPtr = (firstLinePixelAddress + axis2Offset);

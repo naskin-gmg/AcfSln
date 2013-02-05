@@ -257,7 +257,7 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 		}
 
 		m_workStatus = ProduceObject(*m_productPtr);
-		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
+		Q_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
 
 		m_productChangeNotifier.Reset();
 	}
@@ -327,7 +327,7 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 template <class Product>
 void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr, ISupplier* supplierPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 
 	modelPtr->AttachObserver(&m_inputsObserver);
 
@@ -340,7 +340,7 @@ void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr, I
 template <class Product>
 void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 	if (m_inputsObserver.IsModelAttached(modelPtr)){
 		modelPtr->DetachObserver(&m_inputsObserver);
 	}
@@ -352,7 +352,7 @@ void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 template <class Product>
 void TSupplierCompWrap<Product>::AddMessage(const ibase::CMessage* messagePtr) const
 {
-	I_ASSERT(messagePtr != NULL);
+	Q_ASSERT(messagePtr != NULL);
 
 	m_messageContainer.AddMessage((const istd::TSmartPtr<const istd::IInformationProvider>)messagePtr);
 }
@@ -443,7 +443,7 @@ template <class Product>
 TSupplierCompWrap<Product>::InputsObserver::InputsObserver(TSupplierCompWrap<Product>* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 
@@ -464,7 +464,7 @@ template <class Product>
 TSupplierCompWrap<Product>::ParamsObserver::ParamsObserver(TSupplierCompWrap<Product>* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

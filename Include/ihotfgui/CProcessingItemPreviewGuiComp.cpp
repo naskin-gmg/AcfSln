@@ -24,7 +24,7 @@ namespace ihotfgui
 
 void CProcessingItemPreviewGuiComp::UpdateGui(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -97,10 +97,10 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	I_ASSERT(m_inputFileNameParamCompPtr.IsValid());
-	I_ASSERT(m_inputFileNameParamModelCompPtr.IsValid());
-	I_ASSERT(m_outputFileNameParamCompPtr.IsValid());
-	I_ASSERT(m_outputFileNameParamModelCompPtr.IsValid());
+	Q_ASSERT(m_inputFileNameParamCompPtr.IsValid());
+	Q_ASSERT(m_inputFileNameParamModelCompPtr.IsValid());
+	Q_ASSERT(m_outputFileNameParamCompPtr.IsValid());
+	Q_ASSERT(m_outputFileNameParamModelCompPtr.IsValid());
 
 	if (m_inputPreviewObserverCompPtr.IsValid() && m_inputFileNameParamModelCompPtr.IsValid()){
 		ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
@@ -178,7 +178,7 @@ void CProcessingItemPreviewGuiComp::OnGuiDestroyed()
 
 void CProcessingItemPreviewGuiComp::ResetEditor()
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	InputFileNameLabel->clear();
 	OutputFileNameLabel->clear();

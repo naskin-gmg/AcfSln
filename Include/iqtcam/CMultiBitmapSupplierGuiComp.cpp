@@ -134,7 +134,7 @@ void CMultiBitmapSupplierGuiComp::OnGuiHidden()
 
 QWidget* CMultiBitmapSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -172,7 +172,7 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	IconsView->reset();
 	IconsView->clear();
@@ -248,7 +248,7 @@ void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 			viewIter != views.end();
 			++viewIter){
 		iqt2d::IViewProvider* viewProviderPtr = *viewIter;
-		I_ASSERT(viewProviderPtr != NULL);
+		Q_ASSERT(viewProviderPtr != NULL);
 
 		iview::CViewBase* viewPtr = dynamic_cast<iview::CViewBase*> (viewProviderPtr->GetView());
 		if (viewPtr != NULL){

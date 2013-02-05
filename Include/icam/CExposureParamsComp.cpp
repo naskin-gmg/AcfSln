@@ -138,7 +138,7 @@ void CExposureParamsComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_defaultShutterTimeAttrPtr.IsValid());	// isObligatory is set
+	Q_ASSERT(m_defaultShutterTimeAttrPtr.IsValid());	// isObligatory is set
 	m_shutterTime = *m_defaultShutterTimeAttrPtr;
 }
 

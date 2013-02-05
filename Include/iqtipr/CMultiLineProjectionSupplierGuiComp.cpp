@@ -83,7 +83,7 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	istd::CChangeNotifier changePtr(&m_projectionData);
 	m_projectionData.ResetSequence();
@@ -124,7 +124,7 @@ void CMultiLineProjectionSupplierGuiComp::OnSupplierParamsChanged()
 
 QWidget* CMultiLineProjectionSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }

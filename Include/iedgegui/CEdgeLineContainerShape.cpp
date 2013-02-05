@@ -110,7 +110,7 @@ bool CEdgeLineContainerShape::OnAttached(imod::IModel* modelPtr)
 
 i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 

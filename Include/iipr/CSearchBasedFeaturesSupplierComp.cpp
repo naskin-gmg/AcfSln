@@ -27,8 +27,8 @@ int CSearchBasedFeaturesSupplierComp::GetCalibrationsCount() const
 
 const i2d::ICalibration2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
 {
-	I_ASSERT(calibrationIndex >= 0);
-	I_ASSERT(calibrationIndex < m_transformationList.count());
+	Q_ASSERT(calibrationIndex >= 0);
+	Q_ASSERT(calibrationIndex < m_transformationList.count());
 
 	return &m_transformationList.at(calibrationIndex);
 }
@@ -50,7 +50,7 @@ int CSearchBasedFeaturesSupplierComp::GetValuesCount() const
 const imeas::INumericValue& CSearchBasedFeaturesSupplierComp::GetNumericValue(int index) const
 {
 	const CFeaturesContainer* containerPtr = GetWorkProduct();
-	I_ASSERT (containerPtr != NULL);
+	Q_ASSERT (containerPtr != NULL);
 
 	return containerPtr->GetNumericValue(index);
 }
@@ -149,7 +149,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				i2d::CAffineTransformation2d transform;
 
 				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
-				I_ASSERT(searchFeaturePtr != NULL);
+				Q_ASSERT(searchFeaturePtr != NULL);
 
 				transform.Reset(searchFeaturePtr->GetPosition(), -searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());
 

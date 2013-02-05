@@ -44,7 +44,7 @@ void CLineProjectionSupplierGuiComp::on_SaveParamsButton_clicked()
 
 QWidget* CLineProjectionSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -83,7 +83,7 @@ void CLineProjectionSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	const imeas::IDataSequence* projectionPtr = NULL;
 

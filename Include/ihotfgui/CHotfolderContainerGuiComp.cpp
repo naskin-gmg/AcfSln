@@ -69,12 +69,12 @@ QPixmap CHotfolderContainerGuiComp::CreateComponentDragPixmap(const QString& /*h
 bool CHotfolderContainerGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
 	QWidget* sourceWidgetPtr = dynamic_cast<QWidget*>(sourcePtr);
-	I_ASSERT(sourceWidgetPtr != NULL);
+	Q_ASSERT(sourceWidgetPtr != NULL);
 
 	switch (eventPtr->type()){
 		case QEvent::MouseButtonPress:{
 			QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(eventPtr);
-			I_ASSERT(mouseEvent != NULL);
+			Q_ASSERT(mouseEvent != NULL);
 
 			if (mouseEvent->button() == Qt::LeftButton && HotfolderList != NULL){
 				QListWidgetItem* selectedItemPtr = NULL;

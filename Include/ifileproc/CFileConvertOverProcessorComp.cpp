@@ -78,7 +78,7 @@ bool CFileConvertOverProcessorComp::ConvertFiles(
 		outputFileLoader = m_outputFileLoaderCompPtr.GetPtr(); 
 	}
 
-	I_ASSERT(outputFileLoader != NULL);
+	Q_ASSERT(outputFileLoader != NULL);
 
 	return (outputFileLoader->SaveToFile(*m_outputDataCompPtr.GetPtr(), outputPath) == iser::IFileLoader::StateOk);
 }

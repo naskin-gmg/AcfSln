@@ -40,7 +40,7 @@ void CValueSupplierGuiComp::on_SaveParamsButton_clicked()
 
 QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -99,7 +99,7 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	imath::CVarVector position;
 	imath::CVarVector radius;

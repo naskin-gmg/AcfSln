@@ -21,10 +21,10 @@ namespace ihotfgui
 
 void CDirectoryMonitorParamsGui::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	objectPtr->SetPoolingIntervall(PoolingIntervallSpin->value());
 
@@ -88,7 +88,7 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 
 void CDirectoryMonitorParamsGui::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

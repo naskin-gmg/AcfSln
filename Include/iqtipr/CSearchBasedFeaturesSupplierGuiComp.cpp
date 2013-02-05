@@ -50,7 +50,7 @@ void CSearchBasedFeaturesSupplierGuiComp::on_SaveParamsButton_clicked()
 
 QWidget* CSearchBasedFeaturesSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -68,7 +68,7 @@ void CSearchBasedFeaturesSupplierGuiComp::OnSupplierParamsChanged()
 
 void CSearchBasedFeaturesSupplierGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	iview::IShapeView* viewPtr = providerPtr->GetView();
 	if (viewPtr != NULL){
@@ -83,7 +83,7 @@ void CSearchBasedFeaturesSupplierGuiComp::AddItemsToScene(iqt2d::IViewProvider* 
 
 void CSearchBasedFeaturesSupplierGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	iview::IShapeView* viewPtr = providerPtr->GetView();
 	if (viewPtr != NULL){
@@ -112,7 +112,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if ((updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS) == 0){
 		return;
@@ -216,7 +216,7 @@ void CSearchBasedFeaturesSupplierGuiComp::ConnectShapes(iview::IShapeView& view)
 	int shapesCount = m_visualPositions.GetCount();
 	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
 		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		view.ConnectShape(objectPtr->shape.GetPtr());
 	}
@@ -228,7 +228,7 @@ void CSearchBasedFeaturesSupplierGuiComp::DisconnectShapes(iview::IShapeView& vi
 	int shapesCount = m_visualPositions.GetCount();
 	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
 		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		view.DisconnectShape(objectPtr->shape.GetPtr());
 	}

@@ -59,7 +59,7 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (!EnsureBitmapCreated(result)){
 		return WS_CRITICAL;
 	}
-	I_ASSERT(result.second.IsValid());
+	Q_ASSERT(result.second.IsValid());
 
 	result.first = NULL;
 

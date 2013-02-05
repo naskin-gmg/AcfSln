@@ -51,7 +51,7 @@ const iprm::IOptionsList* CTriggerParamsComp::GetSelectionConstraints() const
 
 int CTriggerParamsComp::GetSelectedOptionIndex() const
 {
-	I_ASSERT(m_triggerMode >= 0);
+	Q_ASSERT(m_triggerMode >= 0);
 
 	int optionsCount = int(m_selectionList.size());
 	for (int i = 0; i < optionsCount; ++i){
@@ -154,8 +154,8 @@ int CTriggerParamsComp::GetOptionsCount() const
 
 QString CTriggerParamsComp::GetOptionName(int index) const
 {
-	I_ASSERT(int(m_selectionList.size()) > index);
-	I_ASSERT(index >= 0);
+	Q_ASSERT(int(m_selectionList.size()) > index);
+	Q_ASSERT(index >= 0);
 
 	return m_selectionList[index].name;
 }
@@ -163,8 +163,8 @@ QString CTriggerParamsComp::GetOptionName(int index) const
 
 QString CTriggerParamsComp::GetOptionDescription(int index) const
 {
-	I_ASSERT(int(m_selectionList.size()) > index);
-	I_ASSERT(index >= 0);
+	Q_ASSERT(int(m_selectionList.size()) > index);
+	Q_ASSERT(index >= 0);
 
 	return m_selectionList[index].description;
 }
@@ -172,8 +172,8 @@ QString CTriggerParamsComp::GetOptionDescription(int index) const
 
 QByteArray CTriggerParamsComp::GetOptionId(int index) const
 {
-	I_ASSERT(int(m_selectionList.size()) > index);
-	I_ASSERT(index >= 0);
+	Q_ASSERT(int(m_selectionList.size()) > index);
+	Q_ASSERT(index >= 0);
 
 	return m_selectionList[index].name.toLocal8Bit();
 }

@@ -15,10 +15,10 @@ namespace iqtipr
 
 void CGeneralSearchParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iipr::ISearchParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(objectPtr);
 
@@ -63,7 +63,7 @@ void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
 
 void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iipr::ISearchParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

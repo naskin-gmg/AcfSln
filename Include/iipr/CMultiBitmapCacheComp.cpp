@@ -30,8 +30,8 @@ int CMultiBitmapCacheComp::GetBitmapsCount() const
 
 const iimg::IBitmap* CMultiBitmapCacheComp::GetBitmap(int bitmapIndex) const
 {
-	I_ASSERT(bitmapIndex >= 0);
-	I_ASSERT(bitmapIndex < GetBitmapsCount());
+	Q_ASSERT(bitmapIndex >= 0);
+	Q_ASSERT(bitmapIndex < GetBitmapsCount());
 
 	return m_bitmapsPtr.GetAt(bitmapIndex);
 }
@@ -53,9 +53,9 @@ int CMultiBitmapCacheComp::GetCalibrationsCount() const
 
 const i2d::ICalibration2d* CMultiBitmapCacheComp::GetCalibration(int calibrationIndex) const
 {
-	I_ASSERT(calibrationIndex >= 0);
-	I_ASSERT(calibrationIndex < GetBitmapsCount());
-	I_ASSERT(m_bitmapsPtr.GetCount() == m_transformsPtr.GetCount());
+	Q_ASSERT(calibrationIndex >= 0);
+	Q_ASSERT(calibrationIndex < GetBitmapsCount());
+	Q_ASSERT(m_bitmapsPtr.GetCount() == m_transformsPtr.GetCount());
 
 	return m_transformsPtr.GetAt(calibrationIndex);
 }

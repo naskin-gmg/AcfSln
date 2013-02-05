@@ -47,8 +47,8 @@ bool CAcquisitionConstraintsComp::IsTriggerModeSupported(int triggerMode) const
 
 istd::CRange CAcquisitionConstraintsComp::GetShutterTimeRange() const
 {
-	I_ASSERT(m_minShutterTimeAttrPtr.IsValid());
-	I_ASSERT(m_maxShutterTimeAttrPtr.IsValid());
+	Q_ASSERT(m_minShutterTimeAttrPtr.IsValid());
+	Q_ASSERT(m_maxShutterTimeAttrPtr.IsValid());
 
 	return istd::CRange(*m_minShutterTimeAttrPtr, *m_maxShutterTimeAttrPtr);
 }
@@ -56,8 +56,8 @@ istd::CRange CAcquisitionConstraintsComp::GetShutterTimeRange() const
 
 istd::CRange CAcquisitionConstraintsComp::GetDelayTimeRange() const
 {
-	I_ASSERT(m_minDelayTimeAttrPtr.IsValid());
-	I_ASSERT(m_maxDelayTimeAttrPtr.IsValid());
+	Q_ASSERT(m_minDelayTimeAttrPtr.IsValid());
+	Q_ASSERT(m_maxDelayTimeAttrPtr.IsValid());
 
 	return istd::CRange(*m_minDelayTimeAttrPtr, *m_maxDelayTimeAttrPtr);
 }
@@ -65,8 +65,8 @@ istd::CRange CAcquisitionConstraintsComp::GetDelayTimeRange() const
 
 istd::CRange CAcquisitionConstraintsComp::GetEenDelayRange() const
 {
-	I_ASSERT(m_minEenDelayAttrPtr.IsValid());
-	I_ASSERT(m_maxEenDelayAttrPtr.IsValid());
+	Q_ASSERT(m_minEenDelayAttrPtr.IsValid());
+	Q_ASSERT(m_maxEenDelayAttrPtr.IsValid());
 
 	return istd::CRange(*m_minEenDelayAttrPtr, *m_maxEenDelayAttrPtr);
 }

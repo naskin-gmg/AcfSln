@@ -87,7 +87,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 	int retVal = StateFailed;
 
 	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&data);
-	I_ASSERT(sequencePtr != NULL);
+	Q_ASSERT(sequencePtr != NULL);
 
 	if (sequencePtr != NULL){
 		int samplesCount = sequencePtr->GetSamplesCount();

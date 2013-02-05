@@ -84,10 +84,10 @@ void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 
 	for (int index = 0; index < m_views.count() && index < m_viewExtendersCompPtr.GetCount(); index++){
 		iqt2d::IViewExtender* viewExtenderPtr = m_viewExtendersCompPtr[index];
-		I_ASSERT(viewExtenderPtr != NULL);
+		Q_ASSERT(viewExtenderPtr != NULL);
 
 		CSingleView* viewPtr = m_views.at(index);
-		I_ASSERT(viewPtr != NULL);
+		Q_ASSERT(viewPtr != NULL);
 
 		viewExtenderPtr->RemoveItemsFromScene(viewPtr);
 		viewExtenderPtr->AddItemsToScene(viewPtr, updateFlags);
@@ -141,7 +141,7 @@ void CMultiBitmapViewComp::OnGuiCreated()
 			bool hasStatusInfo = false;
 			if (viewIndex < m_informationModelsCompPtr.GetCount()){
 				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
-				I_ASSERT(modelPtr != NULL);
+				Q_ASSERT(modelPtr != NULL);
 
 				if (RegisterModel(modelPtr, viewIndex)){
 					if (m_showStatusLabelAttrPtr.IsValid()){

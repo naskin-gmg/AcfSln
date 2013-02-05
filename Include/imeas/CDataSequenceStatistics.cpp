@@ -17,8 +17,8 @@ bool CDataSequenceStatistics::SetChannelStatistics(const imeas::IDataStatistics&
 {
 	int channelsCount = GetChannelsCount();
 
-	I_ASSERT(channelIndex >= 0);
-	I_ASSERT(channelIndex <= channelsCount);
+	Q_ASSERT(channelIndex >= 0);
+	Q_ASSERT(channelIndex <= channelsCount);
 	if (channelIndex < 0 || channelIndex > channelsCount){
 		return false;
 	}
@@ -64,8 +64,8 @@ int CDataSequenceStatistics::GetChannelsCount() const
 
 const imeas::IDataStatistics* CDataSequenceStatistics::GetChannelStatistics(int channelIndex) const
 {
-	I_ASSERT(channelIndex >= 0);
-	I_ASSERT(channelIndex < GetChannelsCount());
+	Q_ASSERT(channelIndex >= 0);
+	Q_ASSERT(channelIndex < GetChannelsCount());
 
 	return m_channelStatisticsList.GetAt(channelIndex);
 }

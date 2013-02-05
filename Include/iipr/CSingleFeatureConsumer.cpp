@@ -41,7 +41,7 @@ void CSingleFeatureConsumer::ResetFeatures()
 
 bool CSingleFeatureConsumer::AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr)
 {
-	I_ASSERT(featurePtr != NULL);
+	Q_ASSERT(featurePtr != NULL);
 	if (!m_featurePtr.IsValid() || m_featurePolicy == FP_LAST){
 		m_featurePtr.SetPtr(featurePtr);
 	}
@@ -88,8 +88,8 @@ int CSingleFeatureConsumer::GetValuesCount() const
 
 const imeas::INumericValue& CSingleFeatureConsumer::GetNumericValue(int I_IF_DEBUG(index)) const
 {
-	I_ASSERT(m_featurePtr.IsValid());
-	I_ASSERT(index == 0);
+	Q_ASSERT(m_featurePtr.IsValid());
+	Q_ASSERT(index == 0);
 
 	return *m_featurePtr.GetPtr();
 }

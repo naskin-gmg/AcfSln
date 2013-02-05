@@ -50,7 +50,7 @@ void CEdgeLinesSupplierGuiComp::on_SaveParamsButton_clicked()
 
 QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -103,7 +103,7 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	UpdateAllViews();
 }

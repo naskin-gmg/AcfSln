@@ -18,10 +18,10 @@ namespace iwizgui
 
 void CWizardOptionsListGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iprm::ISelectionParam* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	QList<QTreeWidgetItem*> selectedItems = OptionsList->selectedItems();
 	if (selectedItems.isEmpty()){
@@ -53,7 +53,7 @@ void CWizardOptionsListGuiComp::UpdateModel() const
 
 void CWizardOptionsListGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	OptionsList->clear();
 	

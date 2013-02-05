@@ -106,10 +106,10 @@ template <class Key, class CacheObject>
 void TMemCachedProducerComp<Key, CacheObject>::UnlockObject(const CacheObject* objectPtr)
 {
 	typename ObjectToListMap::iterator foundIter = m_objectToListMap.find(objectPtr);
-	I_ASSERT(foundIter != m_objectToListMap.end());	// if locked is done correctly, this element must exist.
+	Q_ASSERT(foundIter != m_objectToListMap.end());	// if locked is done correctly, this element must exist.
 
 	typename CachedList::reverse_iterator objectIter = foundIter.value();
-	I_ASSERT(objectIter != m_cachedList.rend());
+	Q_ASSERT(objectIter != m_cachedList.rend());
 
 	objectIter->lockedCount--;
 
@@ -127,10 +127,10 @@ void TMemCachedProducerComp<Key, CacheObject>::CleanElementList()
 	typename CachedList::iterator iter = m_cachedList.begin();
 	while (		(int(m_cachedList.size()) > maxCachedObjects) &&
 				(iter != m_cachedList.end())){
-		I_ASSERT(m_objectToListMap.find(iter->objectPtr) != m_objectToListMap.end());	// object is present in objects map
+		Q_ASSERT(m_objectToListMap.find(iter->objectPtr) != m_objectToListMap.end());	// object is present in objects map
 
 		if (iter->lockedCount <= 0){
-			I_ASSERT(m_slaveCacheEngineCompPtr.IsValid());
+			Q_ASSERT(m_slaveCacheEngineCompPtr.IsValid());
 
 			m_slaveCacheEngineCompPtr->UnlockObject(iter->objectPtr);
 
@@ -142,7 +142,7 @@ void TMemCachedProducerComp<Key, CacheObject>::CleanElementList()
 		}
 	}
 
-	I_ASSERT(m_cachedList.size() == m_objectToListMap.size());	// this both structures are coupled, the number of elements must be the same
+	Q_ASSERT(m_cachedList.size() == m_objectToListMap.size());	// this both structures are coupled, the number of elements must be the same
 }
 
 

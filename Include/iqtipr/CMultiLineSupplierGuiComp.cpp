@@ -45,7 +45,7 @@ void CMultiLineSupplierGuiComp::OnSupplierParamsChanged()
 
 QWidget* CMultiLineSupplierGuiComp::GetParamsWidget() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	return ParamsFrame;
 }
@@ -155,7 +155,7 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 	static QPen selectionPen(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap);
 
 	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetModelPtr());
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	drawContext.setPen(normalPen);
 
@@ -166,7 +166,7 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 
 	for (int i = 0; i < linesCount; i++){
 		const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
-		I_ASSERT(lineValues.GetElementsCount() == 4);
+		Q_ASSERT(lineValues.GetElementsCount() == 4);
 
 		QPointF startPoint = transform.GetApply(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
 		QPointF endPoint = transform.GetApply(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));
@@ -198,7 +198,7 @@ void CMultiLineSupplierGuiComp::CShape::OnModelChanged(int /*modelId*/, int /*ch
 
 i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetModelPtr());
 	if (objectPtr != NULL){
@@ -212,7 +212,7 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 
 		for (int i = 0; i < linesCount; i++){
 			const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
-			I_ASSERT(lineValues.GetElementsCount() == 4);
+			Q_ASSERT(lineValues.GetElementsCount() == 4);
 
 			istd::CIndex2d startPoint = transform.GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
 			istd::CIndex2d endPoint = transform.GetScreenPosition(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));

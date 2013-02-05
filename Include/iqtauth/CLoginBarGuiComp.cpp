@@ -72,7 +72,7 @@ void CLoginBarGuiComp::on_LoginButton_clicked()
 		QString password = PasswordEdit->text();
 		if (m_loginIfPtr->Login(userName, password)){
 			if (m_autoLogoutMinutesAttrPtr.IsValid()){
-				I_ASSERT(*m_autoLogoutMinutesAttrPtr > 0);
+				Q_ASSERT(*m_autoLogoutMinutesAttrPtr > 0);
 
 				m_autoLogoutMilisec = *m_autoLogoutMinutesAttrPtr * 60 * 1000;
 				m_autoLogoutTimer.start(m_autoLogoutMilisec);

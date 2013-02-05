@@ -64,10 +64,10 @@ bool CSvgBitmapLoaderComp::IsOperationSupported(
 int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
-		I_ASSERT(!filePath.isEmpty());	// should be checked by IsOperationSupported
+		Q_ASSERT(!filePath.isEmpty());	// should be checked by IsOperationSupported
 
 		iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IBitmap*>(&data);
-		I_ASSERT(imagePtr != NULL);	// should be checked by IsOperationSupported
+		Q_ASSERT(imagePtr != NULL);	// should be checked by IsOperationSupported
 		if (filePath != m_lastFilePath){
 			QSvgRenderer renderer;
 			if (renderer.load(filePath)){

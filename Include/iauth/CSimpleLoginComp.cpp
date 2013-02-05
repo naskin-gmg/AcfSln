@@ -25,8 +25,8 @@ int CSimpleLoginComp::GetUsersCount() const
 
 CUser& CSimpleLoginComp::GetUser(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_users.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_users.size()));
 
 	return const_cast<CUser&>(m_users[index]);
 }
@@ -113,12 +113,12 @@ bool CSimpleLoginComp::HasRight(
 {
 	int groupId = 0;
 	if (m_loggedUserIndex >= 0){
-		I_ASSERT(m_loggedUserIndex < GetUsersCount());
+		Q_ASSERT(m_loggedUserIndex < GetUsersCount());
 
 		const CUser& user = GetUser(m_loggedUserIndex);
 
 		int userGroupId = user.GetUserGroup();
-		I_ASSERT(userGroupId < m_userLevelsIfPtr.GetCount());
+		Q_ASSERT(userGroupId < m_userLevelsIfPtr.GetCount());
 
 		if (userGroupId >= 0){
 			groupId = userGroupId + 1;

@@ -14,10 +14,10 @@ namespace iqtsig
 
 void CTriggerParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	isig::ITriggerParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	int triggerMode = -1;
 
@@ -59,9 +59,9 @@ void CTriggerParamsGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	const isig::ITriggerParams* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	const isig::ITriggerConstraints* constraintsPtr = objectPtr->GetTriggerConstraints();
 	if (constraintsPtr != NULL){
@@ -87,7 +87,7 @@ void CTriggerParamsGuiComp::OnGuiModelAttached()
 
 void CTriggerParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	const isig::ITriggerParams* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

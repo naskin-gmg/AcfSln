@@ -84,8 +84,8 @@ ihotf::IHotfolderWorkflowItem* CHotfolderWorkflowComp::GetHotfolder(const QStrin
 {
 	for (int index = 0; index < m_hotfolders.GetCount(); index++){
 		HotfolderItem* infoPtr = m_hotfolders.GetAt(index);
-		I_ASSERT(infoPtr != NULL);
-		I_ASSERT(infoPtr->elementPtr != NULL);
+		Q_ASSERT(infoPtr != NULL);
+		Q_ASSERT(infoPtr->elementPtr != NULL);
 
 		if (infoPtr->elementPtr->GetName() == hotfolderName){
 			return infoPtr->elementPtr.GetPtr();
