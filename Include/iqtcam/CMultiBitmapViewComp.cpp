@@ -138,19 +138,14 @@ void CMultiBitmapViewComp::OnGuiCreated()
 				viewPtr->SetBackgroundColor(backgroundColor);
 			}
 
-			bool hasStatusInfo = false;
 			if (viewIndex < m_informationModelsCompPtr.GetCount()){
 				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
 				Q_ASSERT(modelPtr != NULL);
 
-				if (RegisterModel(modelPtr, viewIndex)){
-					if (m_showStatusLabelAttrPtr.IsValid()){
-						hasStatusInfo = *m_showStatusLabelAttrPtr;
-					}
-				}
+				RegisterModel(modelPtr, viewIndex);
 			}
 
-			viewPtr->Init(hasStatusInfo);
+			viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
 
 			viewIndex++;
 		}
@@ -191,7 +186,8 @@ CMultiBitmapViewComp::CSingleView* CMultiBitmapViewComp::CreateView(QWidget* par
 CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const QString& title)
 :	BaseClass(parentPtr),
 	m_console(this),
-	m_showStatus(true),
+	m_showStatusLabel(true),
+	m_showStatusBackground(true),
 	m_id(id)
 {
 	setTitle(title);
@@ -232,12 +228,13 @@ void CMultiBitmapViewComp::CSingleView::UpdateImage(const iimg::IBitmap* bitmapP
 }
 
 
-void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
+void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusLabel, bool hasStatusBackground)
 {
-	m_showStatus = hasStatusInfo;
+	m_showStatusLabel = hasStatusLabel;
+	m_showStatusBackground = hasStatusBackground;
 
 	// enable title info
-	if (hasStatusInfo && title().isEmpty()){
+	if (hasStatusLabel && title().isEmpty()){
 		setTitle(" "); // a trick, otherwise if QGroupBox has no title text, then it will not be shown.
 	}
 
@@ -263,79 +260,75 @@ void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusInfo)
 
 void CMultiBitmapViewComp::CSingleView::SetInspectionResult(int result)
 {
-	if (!m_showStatus){
-		return;
+	if (m_showStatusBackground){
+		switch (result){
+			case istd::IInformationProvider::IC_INFO:
+				SetBackgroundColor(Qt::darkGreen);
+				break;
+
+			case istd::IInformationProvider::IC_ERROR:
+			case istd::IInformationProvider::IC_CRITICAL:
+				SetBackgroundColor(Qt::darkRed);
+				break;
+
+			case istd::IInformationProvider::IC_WARNING:
+				SetBackgroundColor(Qt::darkYellow);
+				break;
+
+			default:
+				SetBackgroundColor(Qt::lightGray);
+		}
 	}
 
-	switch (result){
-		case istd::IInformationProvider::IC_NONE:
-			SetBackgroundColor(Qt::darkGray);
-			return;
 
-		case istd::IInformationProvider::IC_INFO:
-			SetBackgroundColor(Qt::darkGreen);
-			return;
+	if (m_showStatusLabel){
+		static QString s_defaultStyleSheet = 
+			"QGroupBox::title{"
+			"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.5, y2:1, stop:0 #d5eefc, stop:0.5 #d5eefc, stop:0.51 #b8e3f9, stop:1 #a5dbf7);"
+			"}";
 
-		case istd::IInformationProvider::IC_ERROR:
-		case istd::IInformationProvider::IC_CRITICAL:
-			SetBackgroundColor(Qt::darkRed);
-			return;
+		static QString s_okStyleSheet = 
+			"QGroupBox::title{"
+			"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+			"stop: 0.0 rgba(120,250,145), stop: 0.49 rgba(70,212,145), stop: 0.52 rgba(70,200,105), stop: 1.0 rgba(70,250,105)); "
+			"border: 1px solid #339933; "
+			"color: #000000; font-size: 10pt; font-weight: bold;"
+			"}";
 
-		case istd::IInformationProvider::IC_WARNING:
-			SetBackgroundColor(Qt::darkYellow);
-			return;
+		static QString s_errorStyleSheet = 
+			"QGroupBox::title{"
+			"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+			"stop: 0.0 rgba(250,120,145), stop: 0.49 rgba(212,120,145), stop: 0.52 rgba(200,70,105), stop: 1.0 rgba(250,120,145)); "
+			"border: 1px solid #993333; "
+			"color: #ffffff; font-size: 10pt; font-weight: bold;"
+			"}";
+
+		static QString s_warningStyleSheet = 
+			"QGroupBox::title{"
+			"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+			"stop: 0.0 rgba(250,250,145), stop: 0.49 rgba(212,212,145), stop: 0.52 rgba(200,200,105), stop: 1.0 rgba(250,250,105)); "
+			"border: 1px solid #996633; "
+			"color: #000000; font-size: 10pt; font-weight: bold;"
+			"}";
+
+		switch (result){
+			case istd::IInformationProvider::IC_INFO:
+				setStyleSheet(s_okStyleSheet);
+				break;
+
+			case istd::IInformationProvider::IC_ERROR:
+			case istd::IInformationProvider::IC_CRITICAL:
+				setStyleSheet(s_errorStyleSheet);
+				break;
+
+			case istd::IInformationProvider::IC_WARNING:
+				setStyleSheet(s_warningStyleSheet);
+				break;
+
+			default:
+				setStyleSheet(s_defaultStyleSheet);
+		}
 	}
-
-	SetBackgroundColor(Qt::darkGray);
-
-	/*
-	static QString s_defaultStyleSheet = 
-		"QGroupBox::title{"
-		"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.5, y2:1, stop:0 #d5eefc, stop:0.5 #d5eefc, stop:0.51 #b8e3f9, stop:1 #a5dbf7);"
-		"}";
-
-	static QString s_okStyleSheet = 
-		"QGroupBox::title{"
-		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-		"stop: 0.0 rgba(120,250,145), stop: 0.49 rgba(70,212,145), stop: 0.52 rgba(70,200,105), stop: 1.0 rgba(70,250,105)); "
-		"border: 1px solid #339933; "
-		"color: #000000; font-size: 10pt; font-weight: bold;"
-		"}";
-
-	static QString s_errorStyleSheet = 
-		"QGroupBox::title{"
-		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-		"stop: 0.0 rgba(250,120,145), stop: 0.49 rgba(212,120,145), stop: 0.52 rgba(200,70,105), stop: 1.0 rgba(250,120,145)); "
-		"border: 1px solid #993333; "
-		"color: #ffffff; font-size: 10pt; font-weight: bold;"
-		"}";
-
-	static QString s_warningStyleSheet = 
-		"QGroupBox::title{"
-		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-		"stop: 0.0 rgba(250,250,145), stop: 0.49 rgba(212,212,145), stop: 0.52 rgba(200,200,105), stop: 1.0 rgba(250,250,105)); "
-		"border: 1px solid #996633; "
-		"color: #000000; font-size: 10pt; font-weight: bold;"
-		"}";
-
-	switch (result){
-		case istd::IInformationProvider::IC_INFO:
-			setStyleSheet(s_okStyleSheet);
-			return;
-
-		case istd::IInformationProvider::IC_ERROR:
-		case istd::IInformationProvider::IC_CRITICAL:
-			setStyleSheet(s_errorStyleSheet);
-			return;
-
-		case istd::IInformationProvider::IC_WARNING:
-			setStyleSheet(s_warningStyleSheet);
-			return;
-	}
-
-	setStyleSheet(s_defaultStyleSheet);
-
-	*/
 }
 
 

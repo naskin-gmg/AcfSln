@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2758
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="10">
+    <Element>
+      <ComponentName>
+        CaliperParamsSet
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        525
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        PositionTask
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CircleFinderParams
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        725
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParams
+      </ComponentName>
+      <X>
+        1100
+      </X>
+      <X>
+        725
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RadiusConstraints
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <X>
+        525
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RadiusParams
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <X>
+        525
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Aoi
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        725
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Caliper
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilterLength
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CircleFindProcessor
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
+</Acf>
