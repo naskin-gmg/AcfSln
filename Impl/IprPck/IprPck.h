@@ -37,7 +37,7 @@
 #include "iipr/CSearchParamsComp.h"
 #include "iipr/CDifferenceBitmapSupplierComp.h"
 #include "iipr/CConvolutionProcessorComp.h"
-#include "iipr/CConvolutionKernel2d.h"
+#include "iipr/CConvolutionKernel2dComp.h"
 #include "iipr/CColorBitmapSeparatorSupplierComp.h"
 #include "iipr/CBitmapJoinerSupplierComp.h"
 #include "iipr/CMultiBitmapCacheComp.h"
@@ -104,13 +104,7 @@ typedef icomp::TModelCompWrap<iipr::CSearchParamsComp> SearchParams;
 
 typedef icomp::TModelCompWrap<iipr::CDifferenceBitmapSupplierComp> DifferenceBitmapSupplier;
 typedef iipr::CConvolutionProcessorComp ConvolutionProcessor;
-typedef icomp::TModelCompWrap<
-			icomp::TMakeComponentWrap<
-						iipr::CConvolutionKernel2d,
-						iipr::IConvolutionKernel2d,
-						iser::ISerializable,
-						imath::ISampledFunction2d> > ConvolutionKernel2d;
-
+typedef icomp::TModelCompWrap<iipr::CConvolutionKernel2dComp> ConvolutionKernel2d;
 typedef icomp::TModelCompWrap<iipr::CColorBitmapSeparatorSupplierComp> ColorBitmapSeparatorSupplier;
 typedef icomp::TModelCompWrap<iipr::CBitmapJoinerSupplierComp> BitmapJoinerSupplier;
 typedef iipr::CEdgeDistanceProcessorComp EdgeDistanceProcessor;

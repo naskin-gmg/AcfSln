@@ -17,9 +17,6 @@ namespace iipr
 	Implementation of a general 2D convolution kernel. 
 	Internally the kernel is represented by an array of filter weights and offset positions
 	for fast access to the corresponding bitmap values.
-
-	For access and iterating through the kernel values you can use the Begin() and End() function, 
-	which returns an iterator/accessor.
 */
 class CConvolutionKernel2d:
 			virtual public imath::CSampledFunction2d,

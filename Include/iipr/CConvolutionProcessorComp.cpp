@@ -37,19 +37,22 @@ bool DoConvolution(
 	static const WorkingType maxClipValue = (WorkingType(1) << (sizeof(PixelType) * 8 + ValueShift)) - 1;
 
 	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	istd::CIndex2d outputImageSize(inputImageSize.GetX() - kernelSize.GetX() + 1, inputImageSize.GetY() - kernelSize.GetY() + 1);
+	istd::CIndex2d outputImageSize = inputImageSize;//(inputImageSize.GetX() - kernelSize.GetX() + 1, inputImageSize.GetY() - kernelSize.GetY() + 1);
 
 	if (outputImageSize.IsSizeEmpty()){
 		return false;
 	}
 
+	int halfKernelWidth = kernelSize.GetX() / 2;
+	int halfKernelHeight = kernelSize.GetY() / 2;
+
 	int kernelElementsCount = int(fastAccessElements.size());
 
-	for (int y = 0; y < outputImageSize.GetY(); ++y){
+	for (int y = halfKernelHeight; y < outputImageSize.GetY() - halfKernelHeight; ++y){
 		const quint8* inputPtr = static_cast<const quint8*>(inputImage.GetLinePtr(y));
 		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
 
-		for (int x = 0; x < outputImageSize.GetX(); ++x){
+		for (int x = halfKernelWidth; x < outputImageSize.GetX() - halfKernelWidth; ++x){
 			WorkingType sums[ChannelsCount] = {0};
 			WorkingType alphaSum = 0;
 			for (int i = 0; i < kernelElementsCount; ++i){
@@ -120,7 +123,18 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 			iimg::IBitmap& outputImage)
 {
 	if (paramsPtr == NULL){
+		SendErrorMessage(0, "Processing parameters are not set");		
+		
 		return false;
+	}
+
+	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
+	if (inputImageSize != outputImage.GetImageSize()){
+		if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImageSize)){
+			SendErrorMessage(0, "Output image could not be created");		
+
+			return false;
+		}
 	}
 
 	istd::CIndex2d kernelSize = paramsPtr->GetKernelSize();
@@ -163,12 +177,15 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	QVector<KernelElement> fastAccessElements;
 
+	int halfKernelWidth = kernelSize.GetX() / 2;
+	int halfKernelHeight = kernelSize.GetY() / 2;
+
 	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
 		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
 			double value = paramsPtr->GetKernelElement(index);
 
 			KernelElement element;
-			element.offset = index[0] * pixelsDifference + index[1] * linesDifference;
+			element.offset = (index[0] - halfKernelWidth) * pixelsDifference + (index[1] - halfKernelHeight) * linesDifference;
 
 			double sumFactor = 1.0;
 			if (kernelSum != 0){

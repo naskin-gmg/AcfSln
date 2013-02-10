@@ -39,6 +39,7 @@ void CConvolution2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
 				double kernelElement = objectPtr->GetKernelElement(istd::CIndex2d(x, y));
 
 				QTableWidgetItem* itemPtr = new QTableWidgetItem(QString::number(kernelElement));
+				itemPtr->setTextAlignment(Qt::AlignRight);
 				KernelTable->setItem(y, x, itemPtr); 
 			}
 		}
