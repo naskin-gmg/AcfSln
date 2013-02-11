@@ -1,0 +1,59 @@
+#ifndef iqtipr_CColorPatternComparatorGuiComp_included
+#define iqtipr_CColorPatternComparatorGuiComp_included
+
+
+// ACF includes
+#include "istd/IInformationProvider.h"
+
+// ACF-Solutions includes
+#include "iqtinsp/TSupplierGuiCompBase.h"
+
+#include "imeas/CGeneralDataSequence.h"
+#include "imeas/INumericValueProvider.h"
+
+#include "Generated/ui_CColorPatternComparatorGuiComp.h"
+
+
+namespace iqtipr
+{
+
+
+class CColorPatternComparatorGuiComp: public iqtinsp::TSupplierGuiCompBase<
+			Ui::CColorPatternComparatorGuiComp,
+			istd::IInformationProvider>
+{
+	Q_OBJECT
+
+public:
+	typedef iqtinsp::TSupplierGuiCompBase<
+				Ui::CColorPatternComparatorGuiComp,
+				istd::IInformationProvider> BaseClass;
+
+	I_BEGIN_COMPONENT(CColorPatternComparatorGuiComp);
+	I_END_COMPONENT;
+
+protected Q_SLOTS:
+	void on_TestButton_clicked();
+
+protected:
+	// reimplemented (iqtgui::IGuiObject)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+	virtual void UpdateGui(int updateFlags = 0);
+
+	// reimplemented (iqtinsp::TSupplierGuiCompBase)
+	virtual void OnSupplierParamsChanged();
+	virtual QWidget* GetParamsWidget() const;
+
+private:
+};
+
+
+} // namespace iqtipr
+
+
+#endif // !iqtipr_CColorPatternComparatorGuiComp_included

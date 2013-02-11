@@ -55,14 +55,23 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			MultiLineSupplierGui, 
-			"Multi line supplier GUI",
+			"Editor for multi-line provider",
 			"Multi Line Supplier GUI")
 
 I_EXPORT_COMPONENT(
 			MultiLineProjectionSupplierGui, 
-			"Multi line projection supplier GUI",
-			"Multi Line Projection Supplier GUI")
+			"Editor for multi-line projection provider",
+			"Multi Line Projection Supplier GUI");
 
+I_EXPORT_COMPONENT(
+			PatternTeachingControllerGui, 
+			"UI for the pattern teaching controller",
+			"Pattern Teaching Editor");
+
+I_EXPORT_COMPONENT(
+			ColorPatternComparatorGui, 
+			"Editor for color pattern comparator",
+			"Color Pattern Comparator Compare Match Matching");
 
 } // namespace QtIprPck
 

@@ -39,39 +39,39 @@ int CHistogramStatisticsProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return CalculateHistogramStatistics(*dataSequencePtr, *histogramStatisticsPtr) ? TS_OK : TS_INVALID;
+	return CalculateDataStatistics(*dataSequencePtr, *histogramStatisticsPtr);
 }
 
 
-// private methods
+// reimplemented (IDataSequenceStatisticsProcessor)
 
-bool CHistogramStatisticsProcessorComp::CalculateHistogramStatistics(
-			const imeas::IDataSequence& input,
-			imeas::IDataSequenceStatistics& histogramStatistics) const
+int CHistogramStatisticsProcessorComp::CalculateDataStatistics(
+			const imeas::IDataSequence& dataSequence,
+			imeas::IDataSequenceStatistics& dataStatistics) const
 {
-	istd::CChangeNotifier changePtr(&histogramStatistics);
+	istd::CChangeNotifier changePtr(&dataStatistics);
 
-	if (input.IsEmpty()){
-		histogramStatistics.ResetStatistics();
+	if (dataSequence.IsEmpty()){
+		dataStatistics.ResetStatistics();
 
-		return true;
+		return TS_INVALID;
 	}
 
-	if (input.GetChannelsCount() != histogramStatistics.GetChannelsCount()){
-		histogramStatistics.ResetStatistics();
+	if (dataSequence.GetChannelsCount() != dataStatistics.GetChannelsCount()){
+		dataStatistics.ResetStatistics();
 	}
 
 	bool retVal = true;
-	int channelsCount = input.GetChannelsCount();
+	int channelsCount = dataSequence.GetChannelsCount();
 	for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
 		imeas::CDataStatistics channelStatistics;
 
-		retVal = retVal && CalculateChannelStatistics(input, channelIndex, channelStatistics);
+		retVal = retVal && CalculateChannelStatistics(dataSequence, channelIndex, channelStatistics);
 
-		retVal = retVal && histogramStatistics.SetChannelStatistics(channelStatistics, channelIndex);
+		retVal = retVal && dataStatistics.SetChannelStatistics(channelStatistics, channelIndex);
 	}
 
-	return retVal;
+	return retVal ? TS_OK : TS_INVALID;
 }
 
 
@@ -80,7 +80,7 @@ bool CHistogramStatisticsProcessorComp::CalculateChannelStatistics(
 			int channelIndex,
 			imeas::IDataStatistics& dataStatistics) const
 {
-	int channleSamplesCount = input.GetSamplesCount() / input.GetChannelsCount();
+	int channleSamplesCount = input.GetSamplesCount();
 
 	double average = 0.0;
 	double median = -1.0;
@@ -91,7 +91,7 @@ bool CHistogramStatisticsProcessorComp::CalculateChannelStatistics(
 		double sample = input.GetSample(sampleIndex, channelIndex);
 
 		if (sample != 0){
-			boundaries.SetMinValue(sampleIndex);
+			boundaries.SetMinValue(sampleIndex / channleSamplesCount);
 			break;
 		}
 	}
@@ -100,7 +100,7 @@ bool CHistogramStatisticsProcessorComp::CalculateChannelStatistics(
 		double sample = input.GetSample(sampleIndex, channelIndex);
 
 		if (sample != 0){
-			boundaries.SetMaxValue(sampleIndex);
+			boundaries.SetMaxValue(sampleIndex / channleSamplesCount);
 			break;
 		}
 	}
@@ -127,7 +127,7 @@ bool CHistogramStatisticsProcessorComp::CalculateChannelStatistics(
 
 	standardDeviation = qSqrt(standardDeviation);
 
-	dataStatistics.CreateStatistics(average, median, standardDeviation, boundaries);
+	dataStatistics.CreateStatistics(average / channleSamplesCount, median / channleSamplesCount, standardDeviation / channleSamplesCount, boundaries);
 
 	return true;
 }

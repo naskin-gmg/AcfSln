@@ -63,6 +63,11 @@ public:
 	typedef QVector<const iimg::IBitmap*> BitmapList;
 
 	/**
+		Crop the bitmap to the bounding box of a given region.
+	*/
+	static bool ReduceBitmapToRegion(const iimg::IBitmap& inputBitmap, const i2d::IObject2d& region, iimg::IBitmap& outputBitmap);
+
+	/**
 		Join more bitmaps into a single one by placing of the input bitmaps into the output.
 		\sa JoinMode
 	*/

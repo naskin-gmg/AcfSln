@@ -202,6 +202,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CColorPatternControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolutionKernel2d.cpp"
 				>
 			</File>
@@ -255,6 +263,10 @@
 			</File>
 			<File
 				RelativePath="..\CImageHistogramProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageHistogramSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -423,6 +435,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CColorPatternControllerComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolutionKernel2d.h"
 				>
 			</File>
@@ -476,6 +496,10 @@
 			</File>
 			<File
 				RelativePath="..\CImageHistogramProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageHistogramSupplierComp.h"
 				>
 			</File>
 			<File

@@ -218,6 +218,20 @@ I_EXPORT_COMPONENT(
 			"Image flipping processor (vertical/horizontal)",
 			"Flip Mirror Image" IM_AUTHOR("\"Arseniy Masyuk\""));
 
+I_EXPORT_COMPONENT(
+			ColorPatternController,
+			"Pattern controller for color matching",
+			"Pattern Color Matching" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			ColorPatternComparator,
+			"Pattern controller for color matching",
+			"Pattern Color Matching Compare" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+			ImageHistogramSupplier,
+			"Image histogram supplier",
+			"Image Bitmap Histogram Statistics" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 } // namespace IprPck
 

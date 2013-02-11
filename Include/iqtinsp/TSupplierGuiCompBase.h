@@ -128,6 +128,9 @@ protected:
 
 	ParamsObserver m_paramsObserver;
 
+protected:	
+	using BaseClass::m_visualStatus;
+
 private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
@@ -139,8 +142,6 @@ private:
 	I_ATTR(bool, m_connectParametersToEditorAttrPtr);
 
 	bool m_areParamsEditable;
-
-	using BaseClass::m_visualStatus;
 };
 
 

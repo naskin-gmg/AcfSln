@@ -26,7 +26,7 @@ public:
 	TDiscreteDataSequence();
 
 	// reimplemented (imeas::IDiscreteDataSequence)
-	virtual bool CreateDiscrSequence(
+	virtual bool CreateDiscreteSequence(
 				int samplesCount,
 				void* dataPtr,
 				bool releaseFlag,
@@ -34,9 +34,19 @@ public:
 				int channelDiff,
 				int sampleDepth,
 				int channelsCount = 1);
+	virtual bool CreateDiscreteSequenceWithInfo(
+				const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
+				int samplesCount,
+				void* dataPtr,
+				bool releaseFlag,
+				int sampleDiff,
+				int channelDiff,
+				int sampleDepth,
+				int channelsCount = 1);
+
 	virtual int GetSampleDepth() const;
-	virtual quint32 GetDiscrSample(int position, int channel = 0) const;
-	virtual bool SetDiscrSample(int position, int channel, quint32 sample);
+	virtual quint32 GetDiscreteSample(int position, int channel = 0) const;
+	virtual bool SetDiscreteSample(int position, int channel, quint32 sample);
 
 	// reimplemented (imeas::IDataSequence)
 	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
@@ -89,7 +99,7 @@ TDiscreteDataSequence<Element>::TDiscreteDataSequence()
 // reimplemented (imeas::IDiscreteDataSequence)
 
 template <typename Element>
-bool TDiscreteDataSequence<Element>::CreateDiscrSequence(
+bool TDiscreteDataSequence<Element>::CreateDiscreteSequence(
 			int samplesCount,
 			void* dataPtr,
 			bool releaseFlag,
@@ -115,6 +125,23 @@ bool TDiscreteDataSequence<Element>::CreateDiscrSequence(
 
 
 template <typename Element>
+bool TDiscreteDataSequence<Element>::CreateDiscreteSequenceWithInfo(
+			const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
+			int samplesCount,
+			void* dataPtr,
+			bool releaseFlag,
+			int sampleDiff,
+			int channelDiff,
+			int sampleDepth,
+			int channelsCount)
+{
+	m_sequenceInfoPtr = infoPtr;
+
+	return CreateDiscreteSequence(samplesCount, dataPtr, releaseFlag, sampleDiff, channelDiff, sampleDepth, channelsCount);
+}
+
+
+template <typename Element>
 int TDiscreteDataSequence<Element>::GetSampleDepth() const
 {
 	return sizeof(Element) * 8;
@@ -122,7 +149,7 @@ int TDiscreteDataSequence<Element>::GetSampleDepth() const
 
 
 template <typename Element>
-quint32 TDiscreteDataSequence<Element>::GetDiscrSample(int position, int channel) const
+quint32 TDiscreteDataSequence<Element>::GetDiscreteSample(int position, int channel) const
 {
 	const Element& element = *(const Element*)((const quint8*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
@@ -131,7 +158,7 @@ quint32 TDiscreteDataSequence<Element>::GetDiscrSample(int position, int channel
 
 
 template <typename Element>
-bool TDiscreteDataSequence<Element>::SetDiscrSample(int position, int channel, quint32 sample)
+bool TDiscreteDataSequence<Element>::SetDiscreteSample(int position, int channel, quint32 sample)
 {
 	Element& element = *(Element*)((quint8*)m_sampleBuffer.GetPtr() + position * m_sampleDiff + channel * m_channelDiff);
 
@@ -282,7 +309,7 @@ bool TDiscreteDataSequence<Element>::Serialize(iser::IArchive& archive)
 		for (int i = 0; i < samplesCount; ++i){
 			retVal = retVal && archive.BeginTag(channelsTag);
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-				Element sample = Element(GetDiscrSample(i, channelIndex));
+				Element sample = Element(GetDiscreteSample(i, channelIndex));
 
 				retVal = retVal && archive.Process(sample);
 			}
@@ -302,7 +329,7 @@ bool TDiscreteDataSequence<Element>::Serialize(iser::IArchive& archive)
 
 				retVal = retVal && archive.Process(sample);
 
-				SetDiscrSample(i, channelIndex, sample);
+				SetDiscreteSample(i, channelIndex, sample);
 			}
 			retVal = retVal && archive.EndTag(channelsTag);
 		}

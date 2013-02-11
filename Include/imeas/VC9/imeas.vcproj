@@ -152,6 +152,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CCrossCorrelationProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDataSequenceInfoBase.cpp"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CCrossCorrelationProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDataSequenceInfoBase.h"
 				>
 			</File>
@@ -273,6 +281,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDataSequenceCorrelationProcessor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IDataSequenceInfo.h"
 				>
 			</File>
@@ -282,6 +294,10 @@
 			</File>
 			<File
 				RelativePath="..\IDataSequenceStatistics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDataSequenceStatisticsProcessor.h"
 				>
 			</File>
 			<File

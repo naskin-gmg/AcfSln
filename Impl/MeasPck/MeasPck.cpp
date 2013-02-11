@@ -78,6 +78,11 @@ I_EXPORT_COMPONENT(
 			"Joins several numeric values under the single interface",
 			"Numeric Value Join" IM_AUTHOR("\"Arseniy Masyuk\""));
 
+I_EXPORT_COMPONENT(
+			CrossCorrelationProcessor,
+			"Calculate the cross correlation of two data sequences",
+			"Correlation Processor Comparsion" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace MeasPck
 

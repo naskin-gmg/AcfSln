@@ -170,6 +170,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
@@ -187,6 +191,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CPatternTeachingControllerGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -216,6 +224,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolution2dParamsGuiComp.h"
 				>
 			</File>
@@ -233,6 +245,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPatternTeachingControllerGuiComp.h"
 				>
 			</File>
 			<File
@@ -265,6 +281,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolution2dParamsGuiComp.ui"
 				>
 			</File>
@@ -282,6 +302,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CPatternTeachingControllerGuiComp.ui"
 				>
 			</File>
 			<File
@@ -307,6 +331,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CColorPatternComparatorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
@@ -327,6 +355,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CPatternTeachingControllerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
 				>
 			</File>
@@ -340,6 +372,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CCircleFinderParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CColorPatternComparatorGuiComp.h"
 				>
 			</File>
 			<File
@@ -363,6 +399,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\ui_CPatternTeachingControllerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CSearchBasedFeaturesSupplierGuiComp.h"
 				>
 			</File>
@@ -383,6 +423,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorPatternComparatorGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CConvolution2dParamsGuiComp.moc"
 				>
 			</File>
@@ -400,6 +444,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiLineSupplierGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CPatternTeachingControllerGuiComp.moc"
 				>
 			</File>
 			<File

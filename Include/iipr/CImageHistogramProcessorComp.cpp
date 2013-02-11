@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/qmath.h>
+#include <QtCore/QCoreApplication.h>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -70,15 +71,24 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 	int pixelBytesCount = inputBitmap.GetComponentsCount();
 	int usedColorComponents = pixelBytesCount;
 
+	QStringList channelNames;
+
 	int pixelFormat = inputBitmap.GetPixelFormat();
 	switch (pixelFormat){
-	case iimg::IBitmap::PF_RGB:
-		usedColorComponents = 3;
-		break;
+		case iimg::IBitmap::PF_GRAY:
+			usedColorComponents = 1;
+			channelNames << QCoreApplication::tr("Gray");
+			break;
 
-	case iimg::IBitmap::PF_RGBA:
-		usedColorComponents = 4;
-		break;
+		case iimg::IBitmap::PF_RGB:
+			usedColorComponents = 3;
+			channelNames << QCoreApplication::tr("Red") << QCoreApplication::tr("Green") << QCoreApplication::tr("Blue");
+			break;
+
+		case iimg::IBitmap::PF_RGBA:
+			usedColorComponents = 4;
+			channelNames << QCoreApplication::tr("Alpha") << QCoreApplication::tr("Red") << QCoreApplication::tr("Green") << QCoreApplication::tr("Blue");
+			break;
 	}
 
 	int histogramSize = 256 * usedColorComponents;
@@ -115,7 +125,9 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 					for (int componentIndex = 0; componentIndex < usedColorComponents; ++componentIndex){
 						quint8 pixelComponentValue = inputPixelPtr[componentIndex];
 
-						++histogramDataBufferPtr[componentIndex + pixelComponentValue * usedColorComponents];
+						int mappedIndex = usedColorComponents - componentIndex - 1;
+
+						++histogramDataBufferPtr[mappedIndex + pixelComponentValue * usedColorComponents];
 					}
 
 					inputPixelPtr += pixelBytesCount;
@@ -136,9 +148,49 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 
 	istd::CChangeNotifier changePtr(histogramPtr);
 
-	return histogramPtr->CreateDiscrSequence(256, histogramDataPtr.PopPtr(), true, 0, 0, sizeof(quint32) * 8, usedColorComponents);
+	return histogramPtr->CreateDiscreteSequenceWithInfo(
+					istd::TSmartPtr<const imeas::IDataSequenceInfo>(new HistogramChannelInfo(channelNames)),
+					256,
+					histogramDataPtr.PopPtr(),
+					true,
+					0,
+					0,
+					sizeof(quint32) * 8,
+					usedColorComponents);
+}
+
+
+// public methods of the embedded class HistogramChannelInfo
+
+CImageHistogramProcessorComp::HistogramChannelInfo::HistogramChannelInfo(const QStringList& channelNames)
+	:m_channelNames(channelNames)
+{
+}
+
+
+// reimplemented (imeas::INumericConstraints)
+
+int CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValuesCount() const
+{
+	return m_channelNames.count();
+}
+
+
+QString CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValueName(int index) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_channelNames.count());
+
+	return m_channelNames[index];
+}
+
+
+QString CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValueDescription(int index) const
+{
+	return GetNumericValueName(index);
 }
 
 
 } // namespace iipr
+
 
