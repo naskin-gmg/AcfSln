@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2795
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="5">
+    <Element>
+      <ComponentName>
+        ComparatorParams
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        300
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageHistogramSupplier
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HistogramStatisticsProcessor
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        50
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ColorPatternComparator
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageHistogramProcessor
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+  <EmbeddedRegistries count="1">
+    <EmbededRegistry>
+      <Id>
+        ComparatorParams
+      </Id>
+      <PositionMap count="6">
+        <Element>
+          <ComponentName>
+            PatternComparatorParams
+          </ComponentName>
+          <X>
+            700
+          </X>
+          <X>
+            375
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            Region
+          </ComponentName>
+          <X>
+            425
+          </X>
+          <X>
+            500
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            Calibration2dProxy
+          </ComponentName>
+          <X>
+            425
+          </X>
+          <X>
+            600
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            PatternController
+          </ComponentName>
+          <X>
+            200
+          </X>
+          <X>
+            375
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            ComparisonThreshold
+          </ComponentName>
+          <X>
+            1025
+          </X>
+          <X>
+            375
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            NumericConstraints
+          </ComponentName>
+          <X>
+            1025
+          </X>
+          <X>
+            475
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+      </PositionMap>
+      <EmbeddedRegistries count="0">
+      </EmbeddedRegistries>
+    </EmbededRegistry>
+  </EmbeddedRegistries>
+</Acf>
