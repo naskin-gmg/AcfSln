@@ -32,6 +32,7 @@ public:
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
 		I_ASSIGN(m_maxNodesCountAttrPtr, "MaxNodesCount", "Maximal number of nodes in container", true, 100000);
+		I_ASSIGN(m_keepSingletonsAttrPtr, "KeepSingletons", "If enabled lines containing only single isolated edge point will be also created", true, false);
 	I_END_COMPONENT;
 
 	//	reimplemented (iedge::IEdgesExtractor)
@@ -95,7 +96,7 @@ private:
 		void ExtractLines(
 					double weightScale,
 					CEdgeLine::Container& result,
-					bool keepSingletons = false);
+					bool keepSingletons);
 
 		ExtNode* AddElementToList();
 
@@ -161,6 +162,7 @@ private:
 	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_ATTR(int, m_maxNodesCountAttrPtr);
+	I_ATTR(bool, m_keepSingletonsAttrPtr);
 };
 
 

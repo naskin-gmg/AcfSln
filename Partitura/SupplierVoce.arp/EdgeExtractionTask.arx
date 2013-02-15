@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2630
+          2800
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               BitmapProvider
@@ -98,6 +98,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              KeepSingletons
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              KeepSingletons
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Log
             </Id>
             <Type>
@@ -105,6 +121,22 @@
             </Type>
             <ExportId>
               Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MaxNodesCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              MaxNodesCount
             </ExportId>
             <Data>
               <IsEnabled>
@@ -745,7 +777,7 @@
               <Flags>
                 0
               </Flags>
-              <AttributeInfoMap count="4">
+              <AttributeInfoMap count="5">
                 <AttributeInfo>
                   <Id>
                     EnableVerbose
@@ -755,6 +787,22 @@
                   </Type>
                   <ExportId>
                     EnableVerbose
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    KeepSingletons
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    KeepSingletons
                   </ExportId>
                   <Data>
                     <IsEnabled>
@@ -786,7 +834,7 @@
                     Integer
                   </Type>
                   <ExportId>
-                    
+                    MaxNodesCount
                   </ExportId>
                   <Data>
                     <IsEnabled>

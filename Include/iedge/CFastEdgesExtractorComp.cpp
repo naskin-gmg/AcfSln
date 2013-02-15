@@ -116,7 +116,7 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 		}
 	}
 
-	container.ExtractLines(weightScale, result);
+	container.ExtractLines(weightScale, result, *m_keepSingletonsAttrPtr);
 
 	if (container.IsContainerFull()){
 		SendErrorMessage(0, "Container of nodes is full");
@@ -225,7 +225,7 @@ inline void CFastEdgesExtractorComp::TryConnectElements(
 	if (derivativeDotProduct > 0){
 		double derivativeAngleCos = derivativeDotProduct / (nodePtr->derivative.GetLength() * neightborNodePtr->derivative.GetLength());
 
-		double coherenceFactor = (nodePtr->isHorizontal == neightborNodePtr->isHorizontal)? 1: 0.5;
+		double coherenceFactor = (nodePtr->isHorizontal == neightborNodePtr->isHorizontal)? 1: 0.7;
 
 		double orientationFactor = (nodePtr->derivative + neightborNodePtr->derivative).GetCrossProductZ(displacement) / displacement.GetLength2();
 		if (orientationFactor >= 0){
