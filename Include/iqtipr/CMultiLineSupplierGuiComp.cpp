@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iview/CInteractivePolylineShape.h"
+#include "iview/CPolylineShape.h"
 #include "iprm/TParamsPtr.h"
 
 

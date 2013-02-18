@@ -6,8 +6,8 @@
 
 // ACF includes
 #include "imath/CVarVector.h"
-#include "iview/CInteractiveCircleShape.h"
-#include "iview/CInteractivePinShape.h"
+#include "iview/CCircleShape.h"
+#include "iview/CPinShape.h"
 
 
 namespace iqtipr
@@ -60,7 +60,7 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	m_foundModel.DetachAllObservers();
 
-	iview::CInteractiveCircleShape* circleShapePtr = new iview::CInteractiveCircleShape();
+	iview::CCircleShape* circleShapePtr = new iview::CCircleShape();
 	if (circleShapePtr != NULL){
 		circleShapePtr->SetVisible(false);
 		circleShapePtr->SetEditablePosition(false);
@@ -71,7 +71,7 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 		result.PushBack(circleShapePtr);
 	}
 
-	iview::CInteractivePinShape* posShapePtr = new iview::CInteractivePinShape();
+	iview::CPinShape* posShapePtr = new iview::CPinShape();
 	if (posShapePtr != NULL){
 		posShapePtr->SetVisible(false);
 		posShapePtr->SetEditablePosition(false);

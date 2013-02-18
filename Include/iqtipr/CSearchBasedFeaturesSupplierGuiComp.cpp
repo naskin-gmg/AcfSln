@@ -154,7 +154,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 					visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
 					visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
 
-					visualObject->shape.SetPtr(new iview::CInteractiveCircleShape());
+					visualObject->shape.SetPtr(new iview::CCircleShape());
 					visualObject->shape->SetEditablePosition(false);
 					visualObject->shape->SetEditableRadius(false);
 
