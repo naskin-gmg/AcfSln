@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
-    <height>543</height>
+    <width>523</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -170,15 +170,7 @@
          </column>
          <column>
           <property name="text">
-           <string>X</string>
-          </property>
-          <property name="toolTip">
-           <string>Position X of found model in logical units</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Y</string>
+           <string>Position</string>
           </property>
           <property name="toolTip">
            <string>Position Y of found model in logical units</string>
@@ -194,12 +186,7 @@
          </column>
          <column>
           <property name="text">
-           <string>X-Scale</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Y-Scale</string>
+           <string>Scale</string>
           </property>
          </column>
         </widget>

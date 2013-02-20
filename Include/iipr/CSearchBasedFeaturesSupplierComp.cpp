@@ -1,3 +1,4 @@
+
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 
 
@@ -121,6 +122,18 @@ int CSearchBasedFeaturesSupplierComp::GetInformationFlags() const
 // protected methods
 
 // reimplemented (iproc::TSupplierCompWrap)
+
+bool CSearchBasedFeaturesSupplierComp::InitializeWork()
+{
+	if (m_searchProcessorCompPtr.IsValid()){
+		m_searchProcessorCompPtr->InitProcessor(GetModelParametersSet());
+
+		return true;
+	}
+
+	return false;
+}
+
 
 int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) const
 {

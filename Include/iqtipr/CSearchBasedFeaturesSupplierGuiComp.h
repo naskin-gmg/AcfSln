@@ -35,11 +35,10 @@ public:
 	{
 		CT_ID,
 		CT_SCORE,
-		CT_X,
-		CT_Y,
+		CT_POSITION,
 		CT_ANGLE,
-		CT_X_SCALE,
-		CT_Y_SCALE
+		CT_SCALE,
+		CT_LAST = CT_SCALE
 	};
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierGuiComp);
