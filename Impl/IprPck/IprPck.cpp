@@ -229,9 +229,15 @@ I_EXPORT_COMPONENT(
 			"Pattern Color Matching Compare" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			ImageHistogramSupplier,
-			"Image histogram supplier",
-			"Image Bitmap Histogram Statistics" IM_AUTHOR("\"Kirill Lepskiy\""));
+				   ImageHistogramSupplier,
+				   "Image histogram supplier",
+				   "Image Bitmap Histogram Statistics" IM_AUTHOR("\"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
+				   FastGaussianProcessor,
+				   "Fast Gaussian processor with statically defined kernel",
+				   "Filter Smoothing Convolution Gaussian Blur" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace IprPck
 

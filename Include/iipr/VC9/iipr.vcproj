@@ -242,6 +242,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFastGaussianProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFeaturesContainer.cpp"
 				>
 			</File>
@@ -472,6 +476,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFastGaussianProcessorComp.h"
 				>
 			</File>
 			<File
