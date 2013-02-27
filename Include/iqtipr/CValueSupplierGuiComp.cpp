@@ -149,9 +149,11 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 		m_foundModel.SetRadius(0);
 	}
 
-	int shapesCount = m_foundModel.GetObserverCount();
-	for (int i = 0; i < shapesCount; ++i){
-		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(m_foundModel.GetObserverPtr(i));
+	FoundModel::Observers observers = m_foundModel.GetObservers();
+	for (		FoundModel::Observers::ConstIterator observerIter = observers.constBegin();
+				observerIter != observers.constEnd();
+				++observerIter){
+		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(*observerIter);
 		if (shapePtr != NULL){
 			shapePtr->SetVisible(isResultVisible);
 		}
