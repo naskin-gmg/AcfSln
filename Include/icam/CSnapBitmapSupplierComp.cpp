@@ -2,9 +2,10 @@
 
 
 // ACF includes
-#include "i2d/CAffineTransformation2d.h"
+#include "imod/TModelWrap.h"
 #include "imath/CGeneralUnitInfo.h"
-#include <iprm/TParamsPtr.h>
+#include "i2d/CAffineTransformation2d.h"
+#include "iprm/TParamsPtr.h"
 
 
 namespace icam
@@ -84,18 +85,12 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 				const imeas::INumericValue *scalePtr = NULL;
 
-				if (m_scaleParamIdAttrPtr.IsValid()){
-					iprm::TParamsPtr<imeas::INumericValue> paramPtr(GetModelParametersSet(), m_scaleParamIdAttrPtr->GetValue(), false);
-					if (paramPtr.IsValid()){
-						scalePtr = paramPtr.GetPtr();
-					}
-				}
-
-				if (scalePtr == NULL && m_defaultScaleValuePtr.IsValid()){
-					scalePtr = m_defaultScaleValuePtr.GetPtr();
-				}
-
-				if (scalePtr != NULL){
+				iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
+							GetModelParametersSet(),
+							m_scaleParamIdAttrPtr,
+							m_defaultScaleValueCompPtr,
+							false);
+				if (scaleParamPtr.IsValid()){
 					imath::CVarVector scaleValues = scalePtr->GetValues();
 					if (scaleValues.GetElementsCount() >= 2){
 						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
@@ -107,12 +102,12 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 				if (m_calibrationCompPtr.IsValid()){
 					i2d::CAffineTransformation2d transform;
-					transform.Reset(-center, 0, scale);
+					transform.Reset(center, 0, scale);
 					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transform));
 				}
 				else{
-					i2d::CAffineTransformation2d* transformPtr = new i2d::CAffineTransformation2d();
-					transformPtr->Reset(-center, 0, scale);
+					i2d::CAffineTransformation2d* transformPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+					transformPtr->Reset(center, 0, scale);
 					result.first.SetPtr(transformPtr);
 				}
 			}

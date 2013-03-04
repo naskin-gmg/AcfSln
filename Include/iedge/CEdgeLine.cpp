@@ -94,61 +94,38 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 
 	m_isClosed = polyline.IsClosed();
 
-	i2d::CVector2d prevDelta;
 	i2d::CVector2d position;
 
 	if (transformPtr != NULL){
-		if (m_isClosed){
-			i2d::CVector2d prevPosition = transformPtr->GetApply(polyline.GetNode(size - 1));
-			position = transformPtr->GetApply(polyline.GetNode(0));
-			prevDelta = position - prevPosition;
-		}
-		else{
-			position = transformPtr->GetApply(polyline.GetNode(0));
-			prevDelta = i2d::CVector2d(0, 0);
-		}
+		i2d::CVector2d prevPosition = transformPtr->GetApply(m_isClosed?
+					polyline.GetNode(size - 1):
+					polyline.GetNode(0));
 
-		for (int i = 0; i < size; ++i){
-			const i2d::CVector2d& nextPosition = transformPtr->GetApply(polyline.GetNode(m_isClosed? (i + 1) % size: qMin(i + 1, size - 1)));
-			i2d::CVector2d prevDelta = nextPosition - position;
-			i2d::CVector2d orthogonal = prevDelta.GetOrthogonal() + prevDelta.GetOrthogonal();
-			if ((orthogonal.GetX() != 0) || (orthogonal.GetY() != 0)){
-				double orthogonalLength = orthogonal.GetLength();
-				i2d::CVector2d derivative = orthogonal * (weight / orthogonalLength);
+		m_nodes.push_back(CEdgeNode(prevPosition, weight));
 
-				CEdgeNode node(position, derivative, weight);
-
-				m_nodes.push_back(node);
+		for (int i = 1; i < size; ++i){
+			const i2d::CVector2d& position = transformPtr->GetApply(polyline.GetNode(i));
+			if (position != prevPosition){
+				m_nodes.push_back(CEdgeNode(position, weight));
 			}
-			position = nextPosition;
-			prevDelta = prevDelta;
+
+			prevPosition = position;
 		}
 	}
 	else{
-		if (m_isClosed){
-			i2d::CVector2d prevPosition = polyline.GetNode(size - 1);
-			position = polyline.GetNode(0);
-			prevDelta = position - prevPosition;
-		}
-		else{
-			position = polyline.GetNode(0);
-			prevDelta = i2d::CVector2d(0, 0);
-		}
+		i2d::CVector2d prevPosition = m_isClosed?
+					polyline.GetNode(size - 1):
+					polyline.GetNode(0);
 
-		for (int i = 0; i < size; ++i){
-			const i2d::CVector2d& nextPosition = polyline.GetNode(m_isClosed? (i + 1) % size: qMin(i + 1, size - 1));
-			i2d::CVector2d nextDelta = nextPosition - position;
-			i2d::CVector2d orthogonal = prevDelta.GetOrthogonal() + nextDelta.GetOrthogonal();
-			if ((orthogonal.GetX() != 0) || (orthogonal.GetY() != 0)){
-				double orthogonalLength = orthogonal.GetLength();
-				i2d::CVector2d derivative = orthogonal * (weight / orthogonalLength);
+		m_nodes.push_back(CEdgeNode(prevPosition, weight));
 
-				CEdgeNode node(position, derivative, weight);
-
-				m_nodes.push_back(node);
+		for (int i = 1; i < size; ++i){
+			const i2d::CVector2d& position = polyline.GetNode(i);
+			if (position != prevPosition){
+				m_nodes.push_back(CEdgeNode(position, weight));
 			}
-			position = nextPosition;
-			prevDelta = nextDelta;
+
+			prevPosition = position;
 		}
 	}
 
@@ -239,7 +216,6 @@ bool CEdgeLine::Transform(
 			CEdgeNode& node = *iter;
 
 			node.SetPosition(localTransform.GetApply(node.GetPosition()));
-			node.SetDerivative(localTransform.GetApplyToDelta(node.GetDerivative()));
 		}
 	}
 	else{
@@ -252,8 +228,6 @@ bool CEdgeLine::Transform(
 
 			i2d::CAffine2d localTransform;
 			transformation.GetLocalTransform(position, localTransform);
-
-			node.SetDerivative(localTransform.GetApplyToDelta(node.GetDerivative()));
 
 			i2d::CVector2d resultPosition;
 			transformation.GetPositionAt(position, resultPosition);
@@ -288,7 +262,6 @@ bool CEdgeLine::InvTransform(
 			CEdgeNode& node = *iter;
 
 			node.SetPosition(localInvTransform.GetApply(node.GetPosition()));
-			node.SetDerivative(localInvTransform.GetApplyToDelta(node.GetDerivative()));
 		}
 	}
 	else{
@@ -301,8 +274,6 @@ bool CEdgeLine::InvTransform(
 
 			i2d::CAffine2d localTransform;
 			transformation.GetLocalTransform(position, localTransform);
-
-			node.SetDerivative(localTransform.GetDeformMatrix().GetInvMultiplied(node.GetDerivative()));
 
 			i2d::CVector2d resultPosition;
 			transformation.GetInvPositionAt(position, resultPosition);
@@ -342,7 +313,6 @@ bool CEdgeLine::GetTransformed(
 
 				CEdgeNode resultNode(
 							localTransform.GetApply(node.GetPosition()),
-							localTransform.GetApplyToDelta(node.GetDerivative()),
 							node.GetWeight());
 
 				resultEdgeLinePtr->InsertNode(resultNode);
@@ -364,7 +334,6 @@ bool CEdgeLine::GetTransformed(
 
 				CEdgeNode resultNode(
 							resultPosition,
-							localTransform.GetApplyToDelta(node.GetDerivative()),
 							node.GetWeight());
 
 				resultEdgeLinePtr->InsertNode(resultNode);
@@ -421,7 +390,6 @@ bool CEdgeLine::GetInvTransformed(
 
 				CEdgeNode resultNode(
 							localInvTransform.GetApply(node.GetPosition()),
-							localInvTransform.GetApplyToDelta(node.GetDerivative()),
 							node.GetWeight());
 
 				resultEdgeLinePtr->InsertNode(resultNode);
@@ -443,7 +411,6 @@ bool CEdgeLine::GetInvTransformed(
 
 				CEdgeNode resultNode(
 							resultPosition,
-							localTransform.GetDeformMatrix().GetInvMultiplied(node.GetDerivative()),
 							node.GetWeight());
 
 				resultEdgeLinePtr->InsertNode(resultNode);
@@ -588,16 +555,6 @@ void CEdgeLine::CalcVolatile() const
 	}
 
 	m_areVolatileValid = true;
-}
-
-
-// protected methods of embedded class Container
-
-// reimplemented (ibase::TSerializableContainer)
-
-bool CEdgeLine::Container::SerializeItem(CEdgeLine& item, iser::IArchive& archive)
-{
-	return item.Serialize(archive);
 }
 
 

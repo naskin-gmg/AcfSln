@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2646
+          2803
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="11">
     <Element>
       <ComponentName>
         FileDialogLoader
@@ -47,6 +47,34 @@
       </ComponentName>
       <X>
         150
+      </X>
+      <X>
+        100
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ErrorColorSchema
+      </ComponentName>
+      <X>
+        775
+      </X>
+      <X>
+        100
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ErrorShapeFactory
+      </ComponentName>
+      <X>
+        1050
       </X>
       <X>
         100
@@ -106,20 +134,6 @@
       </X>
       <X>
         425
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SimpleShapeFactory
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        100
       </X>
       <Note>
         

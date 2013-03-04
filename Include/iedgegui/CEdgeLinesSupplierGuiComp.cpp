@@ -9,7 +9,7 @@
 
 // ACF-Solutions includes
 #include "iedge/IEdgeLinesProvider.h"
-#include "iedge/CEdgeLine.h"
+#include "iedge/CEdgeLineContainer.h"
 
 #include "iedgegui/CEdgeLineContainerShape.h"
 
@@ -150,9 +150,12 @@ void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFl
 {
 	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObjectPtr());
 	if (providerPtr != NULL ){
-		const iedge::CEdgeLine::Container* resultContainerPtr = providerPtr->GetEdgesContainer();	
+		const iedge::CEdgeLineContainer* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
-		if ((resultContainerPtr == NULL) || ! m_foundModel.CopyFrom(*resultContainerPtr)){
+		if ((resultContainerPtr != NULL) && m_foundModel.CopyFrom(*resultContainerPtr)){
+			m_foundModel.SetCalibration(resultContainerPtr->GetCalibration());
+		}
+		else{
 			m_foundModel.Reset();
 		}
 	}

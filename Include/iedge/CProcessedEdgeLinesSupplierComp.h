@@ -7,7 +7,7 @@
 #include "iproc/TSupplierCompWrap.h"
 #include "iedge/IEdgeLinesProvider.h"
 #include "iedge/IEdgeLinesProcessor.h"
-#include "iedge/CEdgeLine.h"
+#include "iedge/CEdgeLineContainer.h"
 
 
 namespace iedge
@@ -15,11 +15,11 @@ namespace iedge
 
 
 class CProcessedEdgeLinesSupplierComp:
-			public iproc::TSupplierCompWrap<CEdgeLine::Container>,
+			public iproc::TSupplierCompWrap<CEdgeLineContainer>,
 			virtual public IEdgeLinesProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<CEdgeLine::Container> BaseClass;
+	typedef iproc::TSupplierCompWrap<CEdgeLineContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedEdgeLinesSupplierComp);
 		I_REGISTER_INTERFACE(IEdgeLinesProvider);
@@ -30,11 +30,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iedge::IEdgeLinesProvider)
-	virtual const CEdgeLine::Container* GetEdgesContainer() const;
+	virtual const CEdgeLineContainer* GetEdgesContainer() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(CEdgeLine::Container& result) const;
+	virtual int ProduceObject(CEdgeLineContainer& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

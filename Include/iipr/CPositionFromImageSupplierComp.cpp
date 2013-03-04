@@ -2,8 +2,10 @@
 
 
 // ACF includes
+#include "imod/TModelWrap.h"
 #include "i2d/CCircle.h"
 
+// ACF-Solutions includes
 #include "iipr/CSingleFeatureConsumer.h"
 
 
@@ -131,7 +133,7 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 					originalZeroPos = inputCalibrationPtr->GetValueAt(i2d::CVector2d(0, 0));
 				}
 
-				i2d::CAffineTransformation2d* outputTransformPtr = new i2d::CAffineTransformation2d();
+				i2d::CAffineTransformation2d* outputTransformPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
 				outputTransformPtr->Reset(i2d::CVector2d(position[0] - originalZeroPos[0], position[1] - originalZeroPos[1]));
 				m_outputCalibrationPtr.SetPtr(outputTransformPtr);
 

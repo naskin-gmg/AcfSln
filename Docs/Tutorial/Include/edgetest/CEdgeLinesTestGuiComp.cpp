@@ -28,13 +28,11 @@ void CEdgeLinesTestGuiComp::GenerateLines()
 		for (int p=0; p<6; p++){
 			double x = rand() & 255;
 			double y = rand() & 255;
-			double dx = (rand() & 255) - 127.5;
-			double dy = (rand() & 255) - 127.5;
 			double w = rand() * 1.0 / RAND_MAX;
 			
-			i2d::CVector2d pos(x,y), dif(dx,dy);
+			i2d::CVector2d pos(x,y);
 
-			iedge::CEdgeNode node(pos, dif, w);
+			iedge::CEdgeNode node(pos, w);
 			line.InsertNode(node);
 		}
 		m_model.PushBack(line);

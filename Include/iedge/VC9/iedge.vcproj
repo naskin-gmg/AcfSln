@@ -157,6 +157,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEdgeLineContainer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CEdgeNode.cpp"
 				>
 			</File>
@@ -183,6 +187,10 @@
 			>
 			<File
 				RelativePath="..\CEdgeLine.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CEdgeLineContainer.h"
 				>
 			</File>
 			<File

@@ -15,9 +15,8 @@ CEdgeNode::CEdgeNode()
 }
 
 
-CEdgeNode::CEdgeNode(const i2d::CVector2d& position, const i2d::CVector2d& derivative, double weight)
+CEdgeNode::CEdgeNode(const i2d::CVector2d& position, double weight)
 :	m_position(position),
-	m_derivative(derivative),
 	m_weight(weight)
 {
 }
@@ -36,10 +35,6 @@ bool CEdgeNode::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(positionTag);
 	retVal = retVal && m_position.Serialize(archive);
 	retVal = retVal && archive.EndTag(positionTag);
-
-	retVal = retVal && archive.BeginTag(derivativeTag);
-	retVal = retVal && m_derivative.Serialize(archive);
-	retVal = retVal && archive.EndTag(derivativeTag);
 
 	retVal = retVal && archive.BeginTag(weightTag);
 	retVal = retVal && archive.Process(m_weight);

@@ -6,7 +6,7 @@
 #include "istd/IChangeable.h"
 
 // ACF-Solutions includes
-#include "iedge/CEdgeLine.h"
+#include "iedge/CEdgeLineContainer.h"
 
 
 namespace iedge
@@ -20,7 +20,7 @@ public:
 		Provide access to container of endges.
 		\return contour container containing set of contours or NULL if no contours are available.
 	*/
-	virtual const CEdgeLine::Container* GetEdgesContainer() const = 0;
+	virtual const CEdgeLineContainer* GetEdgesContainer() const = 0;
 };
 
 

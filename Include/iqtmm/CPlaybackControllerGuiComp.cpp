@@ -131,35 +131,65 @@ void CPlaybackControllerGuiComp::on_PlayButton_toggled(bool isToggled)
 }
 
 
-void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int position)
+void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int frameIndex)
 {
-	Q_ASSERT(position > 0);
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
+	Q_ASSERT(frameIndex > 0);
 
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		objectPtr->SetCurrentFrame(position - 1);
+		objectPtr->SetCurrentFrame(frameIndex - 1);
+
+		FrameIndexSB->setValue(frameIndex);
+
+		double position = objectPtr->GetCurrentPosition();
+		TimeEdit->setTime(QTime().addMSecs(position * 1000));
 	}
 }
 
 
-void CPlaybackControllerGuiComp::on_FrameIndexSB_valueChanged(int position)
+void CPlaybackControllerGuiComp::on_FrameIndexSB_valueChanged(int frameIndex)
 {
-	Q_ASSERT(position > 0);
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
 
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		objectPtr->SetCurrentFrame(position - 1);
+		objectPtr->SetCurrentFrame(frameIndex - 1);
+
+		PositionSlider->setValue(frameIndex);
+
+		double position = objectPtr->GetCurrentPosition();
+		TimeEdit->setTime(QTime().addMSecs(position * 1000));
 	}
 }
 
 
 void CPlaybackControllerGuiComp::on_TimeEdit_editingFinished()
 {
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		QTime time = TimeEdit->time();
 		double t = (time.hour() * 60.0 + time.minute()) * 60 + time.second() + time.msec() * 0.001;
 		objectPtr->SetCurrentPosition(t);
+
+		int frameIndex = objectPtr->GetCurrentFrame() + 1;
+		PositionSlider->setValue(frameIndex);
+		FrameIndexSB->setValue(frameIndex);
 	}
 }
 

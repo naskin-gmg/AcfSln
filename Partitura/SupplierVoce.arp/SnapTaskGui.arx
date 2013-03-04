@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2681
+          2804
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -167,18 +167,21 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ViewCalibrationProvider
+              ViewCalibrationMode
             </Id>
             <Type>
-              Reference
+              Integer
             </Type>
             <ExportId>
-              ViewCalibrationProvider
+              ViewCalibrationMode
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                2
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

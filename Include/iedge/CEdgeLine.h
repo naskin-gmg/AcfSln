@@ -19,8 +19,6 @@ namespace iedge
 class CEdgeLine: public i2d::CObject2dBase
 {
 public:
-	class Container;
-
 	CEdgeLine();
 	CEdgeLine(const CEdgeLine& iedge);
 
@@ -56,7 +54,20 @@ public:
 
 	bool InsertNode(const CEdgeNode& node);
 
+	/**
+		Create this line using polyline object.
+		Please note, that no calibration will be copied.
+		\param	polyline		source polyline object.
+		\param	weight			weight used for all nodes.
+		\param	transformPtr	optional transformation used to convert node positions.
+	*/
 	void CopyFromPolyline(const i2d::CPolyline& polyline, double weight = 1.0, const i2d::CAffine2d* transformPtr = NULL);
+	/**
+		Copy this line to polyline.
+		Please note, that no calibration will be copied.
+		\param	polyline		result polyline object.
+		\param	transformPtr	optional transformation used to convert node positions.
+	*/
 	void CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* transformPtr = NULL) const;
 
 	// reimplemented (i2d::IObject2d)
@@ -100,16 +111,6 @@ private:
 	mutable i2d::CVector2d m_center;
 	mutable double m_minWeight;
 	mutable double m_maxWeight;
-};
-
-
-// embedded class definitions
-
-class CEdgeLine::Container: public ibase::TSerializableContainer<CEdgeLine>
-{
-protected:
-	// reimplemented (ibase::TSerializableContainer)
-	virtual bool SerializeItem(CEdgeLine& item, iser::IArchive& archive);
 };
 
 

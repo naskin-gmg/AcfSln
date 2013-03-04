@@ -17,7 +17,7 @@
 // ACF-Solutions includes
 #include "iedge/CEdgeNode.h"
 #include "iedge/CEdgeLine.h"
-#include "iedge/CEdgeLine.h"
+#include "iedge/CEdgeLineContainer.h"
 
 
 namespace iedge
@@ -29,7 +29,7 @@ namespace iedge
 bool CFastEdgesExtractorComp::DoContourExtraction(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& bitmap,
-			CEdgeLine::Container& result) const
+			CEdgeLineContainer& result) const
 {
 	result.Reset();
 
@@ -139,7 +139,7 @@ int CFastEdgesExtractorComp::DoProcessing(
 	}
 
 	const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	CEdgeLine::Container* containerPtr = dynamic_cast<CEdgeLine::Container*>(outputPtr);
+	CEdgeLineContainer* containerPtr = dynamic_cast<CEdgeLineContainer*>(outputPtr);
 
 	if (		(bitmapPtr == NULL) ||
 				(containerPtr == NULL)){
@@ -487,7 +487,7 @@ bool CFastEdgesExtractorComp::InternalContainer::IsContainerFull() const
 
 void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 			double weightScale,
-			CEdgeLine::Container& result,
+			CEdgeLineContainer& result,
 			bool keepSingletons)
 {
 	// mark all as not extracted
@@ -519,7 +519,6 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				CEdgeNode node(
 							nodeElementPtr->position,
-							nodeElementPtr->derivative,
 							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);
@@ -551,7 +550,6 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				CEdgeNode node(
 							nodeElementPtr->position,
-							nodeElementPtr->derivative,
 							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);

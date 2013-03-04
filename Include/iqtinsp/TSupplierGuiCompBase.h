@@ -40,6 +40,7 @@ public:
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN(m_connectParametersToEditorAttrPtr, "ConnectParametersToEditor", "If enabled, the parameter set of the supplier will be connected to the parameter editor", true, true);
+		I_ASSIGN(m_viewCalibrationModeAttrPtr, "ViewCalibrationMode", "Control when calibration from supplier will be set to view\n\t0 - never use calibration\n\t1 - only indirect (used as slave)\n\t2 - allways set calibration if available", true, 0);
 	I_END_COMPONENT;
 
 	TSupplierGuiCompBase();
@@ -132,6 +133,25 @@ protected:
 	using BaseClass::m_visualStatus;
 
 private:
+	/**
+		Control mode of calibration.
+	*/
+	enum ViewCalibrationMode
+	{
+		/**
+			Never set calibration to view.
+		*/
+		VCM_NONE,
+		/**
+			Set calibration to view only if indirect call.
+		*/
+		VCM_INDIRECT,
+		/**
+			Always set calibration to view, if supplier provide it.
+		*/
+		VCM_ALWAYS
+	};
+
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 
@@ -140,6 +160,7 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	I_ATTR(bool, m_connectParametersToEditorAttrPtr);
+	I_ATTR(int, m_viewCalibrationModeAttrPtr);
 
 	bool m_areParamsEditable;
 };
@@ -160,6 +181,17 @@ TSupplierGuiCompBase<UI, WidgetType>::TSupplierGuiCompBase()
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
+	if (*m_viewCalibrationModeAttrPtr > VCM_NONE){
+		if ((*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS) || ((flags & iqt2d::IViewExtender::SF_DIRECT) == 0)){
+			const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObjectPtr());
+			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
+
+			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
+				viewPtr->SetDisplayCalibration(calibrationProviderPtr->GetCalibration());
+			}
+		}
+	}
+
 	BaseClass::AddItemsToScene(providerPtr, flags);
 
 	if ((flags & iqt2d::IViewExtender::SF_DIRECT) != 0){

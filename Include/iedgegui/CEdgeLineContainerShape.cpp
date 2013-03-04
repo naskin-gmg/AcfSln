@@ -9,6 +9,7 @@
 #include "iview/IColorSchema.h"
 #include "iview/CScreenTransform.h"
 #include "iedge/CEdgeLine.h"
+#include "iedge/CEdgeLineContainer.h"
 
 
 namespace iedgegui
@@ -19,7 +20,7 @@ namespace iedgegui
 
 void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 {
-	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
 	if (IsDisplayConnected() && containerPtr != NULL){
 		int numLines = containerPtr->GetItemsCount();
 
@@ -40,8 +41,6 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 			for (int lineIndex = 0; lineIndex < numLines; lineIndex++){
 				const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
 
-				const i2d::ICalibration2d* calibrationPtr = line.GetCalibration();
-
 				int nodesCount = line.GetNodesCount();
 
 				if (nodesCount > 1){
@@ -49,12 +48,12 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 
 					// first point position
 					const iedge::CEdgeNode& firstNode = line.GetNode(pointIndex);
-					i2d::CVector2d prevPos = GetScreenPosition(firstNode.GetPosition(), calibrationPtr);
+					i2d::CVector2d prevPos = GetScreenPosition(firstNode.GetPosition());
 					double prevWeight = firstNode.GetWeight();
 
 					for (pointIndex = (pointIndex + 1) % nodesCount; pointIndex < nodesCount; pointIndex++){
 						const iedge::CEdgeNode& node = line.GetNode(pointIndex);
-						i2d::CVector2d pos = GetScreenPosition(node.GetPosition(), calibrationPtr);
+						i2d::CVector2d pos = GetScreenPosition(node.GetPosition());
 						double weight = node.GetWeight();
 
 						i2d::CVector2d dif = pos - prevPos;
@@ -78,7 +77,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 				else if (nodesCount > 0){
 					// only one node exists
 					const iedge::CEdgeNode& node = line.GetNode(0);
-					i2d::CVector2d pos = GetScreenPosition(node.GetPosition(), calibrationPtr);
+					i2d::CVector2d pos = GetScreenPosition(node.GetPosition());
 					double radius = qMin(4.0, node.GetWeight() * scale);
 
 					polygon[0] = QPointF(pos.GetX() - radius, pos.GetY() - radius);
@@ -93,11 +92,12 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 	}
 }
 
+
 // reimplemented (imod::IObserver)
 
 bool CEdgeLineContainerShape::OnAttached(imod::IModel* modelPtr)
 {
-	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(modelPtr);
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(modelPtr);
 	if (containerPtr != NULL){
 		return BaseClass::OnAttached(modelPtr);
 	}
@@ -114,16 +114,15 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 
 	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 
-	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
 	if (containerPtr != NULL){
 		for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 			const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
 
-			const i2d::ICalibration2d* calibrationPtr = line.GetCalibration();
 			int nodesCount = line.GetNodesCount();
 
 			for (int i = 0; i < nodesCount; i++){
-				istd::CIndex2d sp = GetScreenPosition(line.GetNode(i).GetPosition(), calibrationPtr).ToIndex2d();
+				istd::CIndex2d sp = GetScreenPosition(line.GetNode(i).GetPosition()).ToIndex2d();
 				boundingBox.Union(sp);
 			}
 		}
@@ -134,88 +133,50 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 	return boundingBox;
 }
 
-namespace
-{
-
-
-/** 
-	Function to calculate distance between P and a line segment connecting A and B.
-	Will return a distance to a point, if it is closer than the segment.
- 
-	\return distance and weight between points A, B
- */
-QPair<double, double> pointToLineDistance(i2d::CVector2d A, i2d::CVector2d B, i2d::CVector2d P)
-{
-	QPair<double, double> result;
-
-	i2d::CVector2d ap = P - A;
-	i2d::CVector2d ab = B - A;
-	i2d::CVector2d n = ab.GetNormalized(1);
-	double dp = ap.GetDotProduct(n);
-
-	double weight = dp / ab.GetLength();
-
-	if (weight < 0){ // point is before A
-		result.first = ap.GetLength();
-		weight = 0;
-	}
-	else if (weight > 1){ // point is after B
-		i2d::CVector2d bp = P - B;
-		result.first = bp.GetLength();
-		weight = 1;
-	}
-	else{
-		i2d::CVector2d directional = ap - dp * n;
-		result.first = directional.GetLength();
-	}
-
-	result.second = weight;
-	return result;
-}
-
-} // namespace
-
 
 QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 {
-	const iedge::CEdgeLine::Container* containerPtr = dynamic_cast<const iedge::CEdgeLine::Container*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
 	if (containerPtr == NULL){
 		return "";
 	}
 
 	// convert minimum distance of 1.5px to logical units
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const iview::CScreenTransform& transform = GetViewToScreenTransform();
 	const double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
-	double contourStrength = 0;
+	double maxContourStrength = 0;
 
-	i2d::CVector2d P = transform.GetClientPosition(position);
+	i2d::CVector2d cp = GetLogPosition(position);
 
 	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 		const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
 
-		for (int i = 0; i < line.GetNodesCount() - 1; i++){
-			i2d::CVector2d A = line.GetNode(i).GetPosition();
-			i2d::CVector2d B = line.GetNode(i + 1).GetPosition();
-			QPair<double, double> distance = pointToLineDistance(A, B, P);
-			double d = distance.first;
-			double weight = distance.second;
+		i2d::CLine2d segmentLine;
 
-			if (d <= minDistance){
+		for (int i = 0; i < line.GetNodesCount() - 1; i++){
+			segmentLine.SetPoint1(line.GetNode(i).GetPosition());
+			segmentLine.SetPoint2(line.GetNode(i + 1).GetPosition());
+
+			QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(cp);
+			double distance = qAbs(castDistance.second);
+
+			if (distance <= minDistance){
+				double alpha = castDistance.first;
+
 				const iedge::CEdgeNode& node1 = line.GetNode(i);
 				const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
-				double u = node1.GetWeight();
-				double v = node2.GetWeight();
-				double approxWeight = u + (v - u) * weight;
-				double newContourStrength = ceil(approxWeight * 100 - 0.5);
-				if (newContourStrength > contourStrength){
-					contourStrength = newContourStrength;
+				double weight1 = node1.GetWeight();
+				double weight2 = node2.GetWeight();
+				double contourStrength = weight2 * alpha + weight1 * (1 - alpha);
+				if (contourStrength > maxContourStrength){
+					maxContourStrength = contourStrength;
 				}
 			}
 		}
 	}
 
-	if (contourStrength > 0){
-		return "Contour strength " + QString::number(contourStrength) + "%";
+	if (maxContourStrength > 0){
+		return QObject::tr("Contour strength %1%").arg(int(maxContourStrength * 100 + 0.5));
 	}
 
 	return "";
@@ -226,6 +187,7 @@ iview::ITouchable::TouchState CEdgeLineContainerShape::IsTouched(istd::CIndex2d 
 {
 	return TS_INACTIVE;
 }
+
 
 } // namespace iedgegui
 

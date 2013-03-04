@@ -38,16 +38,16 @@ public:
 				double weightTolerance,
 				CEdgeLine& result) const;
 	void GetReducedLines(
-				const CEdgeLine::Container& edgeLines,
+				const CEdgeLineContainer& edgeLines,
 				double positionTolerance,
 				double weightTolerance,
-				CEdgeLine::Container& result) const;
+				CEdgeLineContainer& result) const;
 
 	// reimplemented (iedge::IEdgeLinesProcessor)
 	virtual bool DoLinesProcessing(
 				const iprm::IParamsSet* paramsPtr,
-				const CEdgeLine::Container& edgeLines,
-				CEdgeLine::Container& result) const;
+				const CEdgeLineContainer& edgeLines,
+				CEdgeLineContainer& result) const;
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(

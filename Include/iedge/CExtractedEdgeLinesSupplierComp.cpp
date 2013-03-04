@@ -7,7 +7,7 @@ namespace iedge
 
 // reimplemented (iedge::IEdgeLinesProvider)
 
-const CEdgeLine::Container* CExtractedEdgeLinesSupplierComp::GetEdgesContainer() const
+const CEdgeLineContainer* CExtractedEdgeLinesSupplierComp::GetEdgesContainer() const
 {
 	return GetWorkProduct();
 }
@@ -17,7 +17,7 @@ const CEdgeLine::Container* CExtractedEdgeLinesSupplierComp::GetEdgesContainer()
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
+int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {
 	result.Reset();
 
@@ -27,16 +27,17 @@ int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result)
 			Timer performanceTimer(this, "Edge extraction");
 
 			if (m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
+				const i2d::ICalibration2d* bitmapCalibrationPtr = bitmapPtr->GetCalibration();
+				if (bitmapCalibrationPtr != NULL){
+					result.Transform(*bitmapCalibrationPtr);	// move to global coordinates
+				}
+
 				if (m_calibrationProviderCompPtr.IsValid()){
 					const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
 					if (calibrationPtr != NULL){
-						int linesCount = result.GetItemsCount();
-						for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-							CEdgeLine& edgeLine = result.GetAt(lineIndex);
-
-							edgeLine.Transform(*calibrationPtr);
-						}
+						result.InvTransform(*calibrationPtr);
+						result.SetCalibration(calibrationPtr);
 					}
 				}
 

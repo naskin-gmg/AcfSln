@@ -64,7 +64,7 @@ void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	}
 
 	CShape* shapePtr = new CShape(m_lineSelection);
-	shapePtr->SetTransformMode(iview::CShapeControl::STM_SHAPE);
+	shapePtr->SetTransformMode(iview::CShapeBase::STM_SHAPE);
 
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
@@ -162,14 +162,12 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 	int linesCount = objectPtr->GetValuesCount();
 	int selectedLineIndex = m_lineSelection.GetSelectedOptionIndex();
 
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 	for (int i = 0; i < linesCount; i++){
 		const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
 		Q_ASSERT(lineValues.GetElementsCount() == 4);
 
-		QPointF startPoint = transform.GetApply(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
-		QPointF endPoint = transform.GetApply(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));
+		i2d::CVector2d startPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
+		i2d::CVector2d endPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));
 
 		if (selectedLineIndex == i){
 			drawContext.setPen(selectionPen);
@@ -206,19 +204,17 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 
 		int linesCount = objectPtr->GetValuesCount();
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 		i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 
 		for (int i = 0; i < linesCount; i++){
 			const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
 			Q_ASSERT(lineValues.GetElementsCount() == 4);
 
-			istd::CIndex2d startPoint = transform.GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
-			istd::CIndex2d endPoint = transform.GetScreenPosition(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));
+			i2d::CVector2d startPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
+			i2d::CVector2d endPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(2), lineValues.GetElement(3)));
 
-			boundingBox.Union(startPoint);
-			boundingBox.Union(endPoint);
+			boundingBox.Union(startPoint.ToIndex2d());
+			boundingBox.Union(endPoint.ToIndex2d());
 		}
 
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(iview::IColorSchema::TT_INACTIVE);

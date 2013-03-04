@@ -84,12 +84,7 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 				}
 
 				if (calibrationPtr != NULL){
-					i2d::CAffineTransformation2d* defaultTransformPtr = new i2d::CAffineTransformation2d();
-					defaultTransformPtr->Reset();
-
-					result.first.SetPtr(defaultTransformPtr);
-
-					result.first->CreateCombinedCalibration(*calibrationPtr);
+					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
 				}
 	
 				return WS_OK;

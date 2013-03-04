@@ -7,7 +7,7 @@ namespace iedge
 
 // reimplemented (iedge::IEdgeLinesProvider)
 
-const CEdgeLine::Container* CProcessedEdgeLinesSupplierComp::GetEdgesContainer() const
+const CEdgeLineContainer* CProcessedEdgeLinesSupplierComp::GetEdgesContainer() const
 {
 	return GetWorkProduct();
 }
@@ -17,15 +17,17 @@ const CEdgeLine::Container* CProcessedEdgeLinesSupplierComp::GetEdgesContainer()
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLine::Container& result) const
+int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {
 	if (m_edgeLinesProviderCompPtr.IsValid() && m_edgesProcessorCompPtr.IsValid()){
-		const CEdgeLine::Container* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
+		const CEdgeLineContainer* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
 
 		if (containerPtr != NULL){
 			Timer performanceTimer(this, "Edge processing");
 
 			if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
+				result.SetCalibration(containerPtr->GetCalibration());
+
 				return WS_OK;
 			}
 		}
