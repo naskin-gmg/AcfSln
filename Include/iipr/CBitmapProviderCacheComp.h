@@ -40,7 +40,7 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	istd::TDelPtr<iimg::IBitmap> m_bitmapPtr;

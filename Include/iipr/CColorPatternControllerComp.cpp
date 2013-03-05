@@ -136,14 +136,14 @@ bool CColorPatternControllerComp::Serialize(iser::IArchive& archive)
 
 // reimplemented (istd::IChangeable)
 
-bool CColorPatternControllerComp::CopyFrom(const IChangeable& object)
+bool CColorPatternControllerComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CColorPatternControllerComp* sourcePtr = dynamic_cast<const CColorPatternControllerComp*>(&object);
 	if (sourcePtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		bool retVal = m_patternBitmap.CopyFrom(sourcePtr->m_patternBitmap);
-		retVal = m_histogram.CopyFrom(sourcePtr->m_histogram) && retVal;
+		bool retVal = m_patternBitmap.CopyFrom(sourcePtr->m_patternBitmap, mode);
+		retVal = m_histogram.CopyFrom(sourcePtr->m_histogram, mode) && retVal;
 
 		return retVal;
 	}

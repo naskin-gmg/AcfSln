@@ -112,7 +112,7 @@ bool CMultiLineSupplierCompBase::Line::Serialize(iser::IArchive& /*archive*/)
 
 // reimplemented (istd::IChangeable)
 
-bool CMultiLineSupplierCompBase::Line::CopyFrom(const IChangeable& object)
+bool CMultiLineSupplierCompBase::Line::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const Line* linePtr = dynamic_cast<const Line*>(&object);
 	if (linePtr != NULL){

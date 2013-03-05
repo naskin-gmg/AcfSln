@@ -152,10 +152,7 @@ void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFl
 	if (providerPtr != NULL ){
 		const iedge::CEdgeLineContainer* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
-		if ((resultContainerPtr != NULL) && m_foundModel.CopyFrom(*resultContainerPtr)){
-			m_foundModel.SetCalibration(resultContainerPtr->GetCalibration());
-		}
-		else{
+		if ((resultContainerPtr == NULL) || !m_foundModel.CopyFrom(*resultContainerPtr, istd::IChangeable::CM_CONVERT)){
 			m_foundModel.Reset();
 		}
 	}

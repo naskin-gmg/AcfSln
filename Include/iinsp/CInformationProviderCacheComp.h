@@ -38,7 +38,7 @@ public:
 	virtual int GetInformationFlags() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	QDateTime m_timeStamp;

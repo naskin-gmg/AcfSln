@@ -63,7 +63,7 @@ const i2d::ICalibration2d* CMultiBitmapCacheComp::GetCalibration(int calibration
 
 // reimplemented (istd::IChangeable)
 
-bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object)
+bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	bool retVal = false;
 

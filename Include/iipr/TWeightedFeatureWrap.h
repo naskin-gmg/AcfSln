@@ -35,8 +35,9 @@ public:
 
 	// reimplemented to resolve inheritance ambiguity introduced in #119
 	// todo consider using 'using' directive
-	virtual bool CopyFrom(const IChangeable& object){
-		return BaseObject::CopyFrom(object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode)
+	{
+		return BaseObject::CopyFrom(object, mode);
 	}
 
 protected:

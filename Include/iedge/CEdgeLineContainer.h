@@ -15,12 +15,12 @@ namespace iedge
 
 
 class CEdgeLineContainer:
-			public i2d::CObject2dBase,
-			public ibase::TSerializableContainer<CEdgeLine>
+			public ibase::TSerializableContainer<CEdgeLine>,
+			public i2d::CObject2dBase
 {
 public:
-	typedef i2d::CObject2dBase BaseClass;
-	typedef ibase::TSerializableContainer<CEdgeLine> BaseClass2;
+	typedef ibase::TSerializableContainer<CEdgeLine> BaseClass;
+	typedef i2d::CObject2dBase BaseClass2;
 
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
@@ -44,6 +44,9 @@ public:
 				i2d::IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
 				double* errorFactorPtr = NULL) const;
+
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 protected:
 	// reimplemented (ibase::TSerializableContainer)

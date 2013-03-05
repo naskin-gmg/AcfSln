@@ -66,7 +66,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	istd::TOptDelPtr<Element, true> m_sampleBuffer;
@@ -344,7 +344,7 @@ bool TDiscreteDataSequence<Element>::Serialize(iser::IArchive& archive)
 // reimplemented (istd::IChangeable)
 
 template <typename Element>
-bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object)
+bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&object);
 	if (sequencePtr != NULL){

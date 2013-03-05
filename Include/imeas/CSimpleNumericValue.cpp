@@ -92,7 +92,7 @@ bool CSimpleNumericValue::Serialize(iser::IArchive& archive)
 
 // reimplemented (istd::IChangeable)
 
-bool CSimpleNumericValue::CopyFrom(const IChangeable& object)
+bool CSimpleNumericValue::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const INumericValue* sourcePtr = dynamic_cast<const INumericValue*>(&object);
 	if (sourcePtr != NULL){
@@ -100,7 +100,12 @@ bool CSimpleNumericValue::CopyFrom(const IChangeable& object)
 
 		const INumericConstraints* constraintsPtr = GetNumericConstraints();
 		if (constraintsPtr != NULL){
-			values.SetElementsCount(constraintsPtr->GetNumericValuesCount(), 0);
+			int expectedElemetsCount = constraintsPtr->GetNumericValuesCount();
+			if ((mode == CM_STRICT) && (values.GetElementsCount() != expectedElemetsCount)){
+				return false;
+			}
+
+			values.SetElementsCount(expectedElemetsCount, 0);
 		}
 
 		if (values != m_values){

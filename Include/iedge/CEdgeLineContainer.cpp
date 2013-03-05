@@ -17,7 +17,7 @@ void CEdgeLineContainer::MoveCenterTo(const i2d::CVector2d& position)
 {
 	i2d::CVector2d diffVector = position - GetCenter();
 
-	int contoursCount = BaseClass2::GetItemsCount();
+	int contoursCount = BaseClass::GetItemsCount();
 	for (int i = 0; i < contoursCount; ++i){
 		CEdgeLine& edgeLine = GetAt(i);
 
@@ -30,7 +30,7 @@ i2d::CRectangle CEdgeLineContainer::GetBoundingBox() const
 {
 	i2d::CRectangle retVal = i2d::CRectangle::GetEmpty();
 
-	int contoursCount = BaseClass2::GetItemsCount();
+	int contoursCount = BaseClass::GetItemsCount();
 	for (int i = 0; i < contoursCount; ++i){
 		const CEdgeLine& edgeLine = GetAt(i);
 
@@ -50,9 +50,9 @@ bool CEdgeLineContainer::Transform(
 
 	double errorFactorSum = 0;
 
-	int linesCount = BaseClass2::GetItemsCount();
+	int linesCount = BaseClass::GetItemsCount();
 	for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-		CEdgeLine& edgeLine = BaseClass2::GetAt(lineIndex);
+		CEdgeLine& edgeLine = BaseClass::GetAt(lineIndex);
 
 		if (errorFactorPtr != NULL){
 			double factor;
@@ -83,9 +83,9 @@ bool CEdgeLineContainer::InvTransform(
 
 	double errorFactorSum = 0;
 
-	int linesCount = BaseClass2::GetItemsCount();
+	int linesCount = BaseClass::GetItemsCount();
 	for (int lineIndex = 0; lineIndex < linesCount; ++lineIndex){
-		CEdgeLine& edgeLine = BaseClass2::GetAt(lineIndex);
+		CEdgeLine& edgeLine = BaseClass::GetAt(lineIndex);
 
 		if (errorFactorPtr != NULL){
 			double factor;
@@ -140,6 +140,14 @@ bool CEdgeLineContainer::GetInvTransformed(
 	else{
 		return false;
 	}
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CEdgeLineContainer::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
+{
+	return BaseClass::CopyFrom(object, mode) && BaseClass2::CopyFrom(object, mode);
 }
 
 

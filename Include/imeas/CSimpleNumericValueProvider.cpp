@@ -53,7 +53,7 @@ bool CSimpleNumericValueProvider::Serialize(iser::IArchive& archive)
 
 // reimplemented (istd::IChangeable)
 
-bool CSimpleNumericValueProvider::CopyFrom(const IChangeable& object)
+bool CSimpleNumericValueProvider::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const imeas::INumericValueProvider* sourcePtr = dynamic_cast<const imeas::INumericValueProvider*>(&object);
 	if (sourcePtr != NULL){

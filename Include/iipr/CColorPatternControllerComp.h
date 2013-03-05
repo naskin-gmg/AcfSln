@@ -59,7 +59,7 @@ public:
 	virtual bool Serialize(iser::IArchive & archive);
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	imod::TModelWrap<iimg::CGeneralBitmap> m_patternBitmap;

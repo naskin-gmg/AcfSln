@@ -35,7 +35,7 @@ public:
 	virtual quint32 GetCurrentId() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	int m_currentId;
