@@ -143,7 +143,7 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 	// convert minimum distance of 1.5px to logical units
 	const iview::CScreenTransform& transform = GetViewToScreenTransform();
-	const double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
+	double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
 	double maxContourStrength = 0;
 
 	i2d::CVector2d cp = GetLogPosition(position);
@@ -153,23 +153,41 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 		i2d::CLine2d segmentLine;
 
-		for (int i = 0; i < line.GetNodesCount() - 1; i++){
-			segmentLine.SetPoint1(line.GetNode(i).GetPosition());
-			segmentLine.SetPoint2(line.GetNode(i + 1).GetPosition());
+		int nodesCount = line.GetNodesCount();
+		if (nodesCount > 1){
+			int segmentsCount = line.GetSegmentsCount();
+			for (int i = 0; i < segmentsCount; i++){
+				segmentLine.SetPoint1(line.GetNode(i).GetPosition());
+				segmentLine.SetPoint2(line.GetNode((i + 1) % nodesCount).GetPosition());
 
-			QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(cp);
-			double distance = qAbs(castDistance.second);
+				if (segmentLine.GetLength2() < I_BIG_EPSILON){
+					continue;
+				}
+
+				QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(cp);
+				double alpha = castDistance.first;
+				double distance = qAbs(castDistance.second);
+
+				if ((alpha >= 0) && (alpha <= 1) && (distance <= minDistance)){
+					const iedge::CEdgeNode& node1 = line.GetNode(i);
+					const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
+					double weight1 = node1.GetWeight();
+					double weight2 = node2.GetWeight();
+					double contourStrength = weight2 * alpha + weight1 * (1 - alpha);
+					if (contourStrength > maxContourStrength){
+						maxContourStrength = contourStrength;
+					}
+				}
+			}
+		}
+		else if (nodesCount == 1){
+			const iedge::CEdgeNode& node = line.GetNode(0);
+			double distance = node.GetPosition().GetDistance(cp);
 
 			if (distance <= minDistance){
-				double alpha = castDistance.first;
-
-				const iedge::CEdgeNode& node1 = line.GetNode(i);
-				const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
-				double weight1 = node1.GetWeight();
-				double weight2 = node2.GetWeight();
-				double contourStrength = weight2 * alpha + weight1 * (1 - alpha);
-				if (contourStrength > maxContourStrength){
-					maxContourStrength = contourStrength;
+				double weight = node.GetWeight();
+				if (weight > maxContourStrength){
+					maxContourStrength = weight;
 				}
 			}
 		}
