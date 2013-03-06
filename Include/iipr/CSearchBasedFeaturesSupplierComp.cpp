@@ -1,6 +1,9 @@
-
 #include "iipr/CSearchBasedFeaturesSupplierComp.h"
 
+
+// ACF includes
+#include "iprm/IParamsManager.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "iipr/CSearchFeature.h"
@@ -145,15 +148,61 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
+			const iprm::IParamsManager* multiSearchParamsManagerPtr = NULL;
+			
+			if (m_searchParamsManagerParamIdAttrPtr.IsValid()){
+				iprm::TParamsPtr<iprm::IParamsManager> paramsManagerPtr(paramsSetPtr, *m_searchParamsManagerParamIdAttrPtr);
+				if (!paramsManagerPtr.IsValid()){
+					SendErrorMessage(iproc::IProcessor::MI_BAD_PARAMS, "No inspection list found");
+
+					return WS_ERROR;
+				}
+
+				multiSearchParamsManagerPtr = paramsManagerPtr.GetPtr();
+			}
+
 			Timer performanceTimer(this, "Search of features");
 
-			int searchState = m_searchProcessorCompPtr->DoProcessing(
-							paramsSetPtr,
-							bitmapPtr,
-							&result);
+			if (multiSearchParamsManagerPtr != NULL){
+				int searchCount = multiSearchParamsManagerPtr->GetParamsSetsCount();
+				for (int searchIndex = 0; searchIndex < searchCount; searchIndex++){
+					const iprm::IParamsSet* paramsPtr = multiSearchParamsManagerPtr->GetParamsSet(searchIndex);
 
-			if (searchState != iproc::IProcessor::TS_OK){
-				return WS_ERROR;
+					CFeaturesContainer searchResults;
+					int searchState = m_searchProcessorCompPtr->DoProcessing(
+						paramsPtr,
+						bitmapPtr,
+						&searchResults);
+
+					if (searchState != iproc::IProcessor::TS_OK){
+						return WS_ERROR;
+					}
+
+					int featuresCount = searchResults.GetValuesCount();
+					for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
+						istd::IChangeable* featurePtr = searchResults.GetNumericValue(featureIndex).CloneMe();
+						if (featurePtr == NULL){
+							return WS_CRITICAL;
+						}
+
+						imeas::INumericValue* valuePtr = dynamic_cast<imeas::INumericValue*>(featurePtr);
+						if (valuePtr == NULL){
+							return WS_CRITICAL;
+						}
+
+						result.AddFeature(valuePtr);
+					}
+				}
+			}
+			else{
+				int searchState = m_searchProcessorCompPtr->DoProcessing(
+								paramsSetPtr,
+								bitmapPtr,
+								&result);
+
+				if (searchState != iproc::IProcessor::TS_OK){
+					return WS_ERROR;
+				}
 			}
 
 			// Update calibration list:
