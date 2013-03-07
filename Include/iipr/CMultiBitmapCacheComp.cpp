@@ -77,7 +77,7 @@ bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMod
 			istd::TDelPtr<iimg::IBitmap> clonedBitmapPtr;
 			const iimg::IBitmap* bitmapPtr = providerPtr->GetBitmap(i);
 			if (bitmapPtr != NULL){
-				clonedBitmapPtr.SetCastedOrRemove(bitmapPtr->CloneMe());
+				clonedBitmapPtr.SetCastedOrRemove(bitmapPtr->CloneMe(mode));
 			}
 			m_bitmapsPtr.SetElementAt(i, clonedBitmapPtr.PopPtr());
 		}
@@ -95,7 +95,7 @@ bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMod
 			istd::TDelPtr<i2d::ICalibration2d> clonedTransformPtr;
 			const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration(i);
 			if (calibrationPtr != NULL){
-				clonedTransformPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+				clonedTransformPtr.SetCastedOrRemove(calibrationPtr->CloneMe(mode));
 			}
 			m_transformsPtr.SetElementAt(i, clonedTransformPtr.PopPtr());
 		}
