@@ -167,6 +167,29 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CSearchFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	const CSearchFeature* objectPtr = dynamic_cast<const CSearchFeature*>(&object);
+
+	if (objectPtr != NULL){
+		istd::CChangeNotifier notifier(this);
+
+		m_scale = objectPtr->GetScale();
+		m_angle = objectPtr->GetAngle();
+		m_index = objectPtr->GetIndex();
+		m_id = objectPtr->GetId();
+
+		BaseClass::CopyFrom(object, mode);
+
+		return true;
+	}
+
+	return false;
+}
+
+
 } // namespace iipr
 
 

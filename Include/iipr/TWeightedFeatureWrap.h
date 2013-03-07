@@ -37,6 +37,11 @@ public:
 	// todo consider using 'using' directive
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	{
+		const TWeightedFeatureWrap<BaseObject>* objectPtr = dynamic_cast<const TWeightedFeatureWrap<BaseObject>*>(&object);
+		if (objectPtr != NULL){
+			m_weight = objectPtr->GetWeight();
+		}
+
 		return BaseObject::CopyFrom(object, mode);
 	}
 

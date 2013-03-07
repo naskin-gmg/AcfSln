@@ -164,6 +164,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			Timer performanceTimer(this, "Search of features");
 
 			if (multiSearchParamsManagerPtr != NULL){
+				result.ResetFeatures();
+
 				int searchCount = multiSearchParamsManagerPtr->GetParamsSetsCount();
 				for (int searchIndex = 0; searchIndex < searchCount; searchIndex++){
 					const iprm::IParamsSet* paramsPtr = multiSearchParamsManagerPtr->GetParamsSet(searchIndex);
