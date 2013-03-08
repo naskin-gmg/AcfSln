@@ -33,17 +33,8 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	// reimplemented to resolve inheritance ambiguity introduced in #119
-	// todo consider using 'using' directive
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode)
-	{
-		const TWeightedFeatureWrap<BaseObject>* objectPtr = dynamic_cast<const TWeightedFeatureWrap<BaseObject>*>(&object);
-		if (objectPtr != NULL){
-			m_weight = objectPtr->GetWeight();
-		}
-
-		return BaseObject::CopyFrom(object, mode);
-	}
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode);
 
 protected:
 	double m_weight;
@@ -91,6 +82,20 @@ bool TWeightedFeatureWrap<BaseObject>::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(weightTag);
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IChangeable)
+
+template <class BaseObject>
+bool TWeightedFeatureWrap<BaseObject>::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	const TWeightedFeatureWrap<BaseObject>* objectPtr = dynamic_cast<const TWeightedFeatureWrap<BaseObject>*>(&object);
+	if (objectPtr != NULL){
+		m_weight = objectPtr->GetWeight();
+	}
+
+	return BaseObject::CopyFrom(object, mode);
 }
 
 
