@@ -5,6 +5,21 @@ namespace iedge
 {
 
 
+// reimplemented (i2d::CObject2dBase)
+
+void CEdgeLineContainer::SetCalibration(const i2d::ICalibration2d* calibrationPtr)
+{
+	BaseClass2::SetCalibration(calibrationPtr);
+
+	int contoursCount = BaseClass::GetItemsCount();
+	for (int i = 0; i < contoursCount; ++i){
+		CEdgeLine& edgeLine = GetAt(i);
+
+		edgeLine.SetCalibration(calibrationPtr);
+	}
+}
+
+
 // reimplemented (i2d::IObject2d)
 
 i2d::CVector2d CEdgeLineContainer::GetCenter() const
@@ -19,7 +34,7 @@ void CEdgeLineContainer::MoveCenterTo(const i2d::CVector2d& position)
 
 	int contoursCount = BaseClass::GetItemsCount();
 	for (int i = 0; i < contoursCount; ++i){
-		CEdgeLine& edgeLine = GetAt(i);
+		CEdgeLine& edgeLine = BaseClass::GetAt(i);
 
 		edgeLine.MoveCenterTo(edgeLine.GetCenter() + diffVector);
 	}
@@ -32,7 +47,7 @@ i2d::CRectangle CEdgeLineContainer::GetBoundingBox() const
 
 	int contoursCount = BaseClass::GetItemsCount();
 	for (int i = 0; i < contoursCount; ++i){
-		const CEdgeLine& edgeLine = GetAt(i);
+		const CEdgeLine& edgeLine = BaseClass::GetAt(i);
 
 		retVal.Unite(edgeLine.GetBoundingBox());
 	}

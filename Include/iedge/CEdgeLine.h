@@ -19,8 +19,9 @@ namespace iedge
 class CEdgeLine: public i2d::CObject2dBase
 {
 public:
+	typedef i2d::CObject2dBase BaseClass;
+
 	CEdgeLine();
-	CEdgeLine(const CEdgeLine& iedge);
 
 	void Clear();
 

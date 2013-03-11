@@ -22,6 +22,9 @@ public:
 	typedef ibase::TSerializableContainer<CEdgeLine> BaseClass;
 	typedef i2d::CObject2dBase BaseClass2;
 
+	// reimplemented (i2d::CObject2dBase)
+	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr);
+
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const i2d::CVector2d& position);

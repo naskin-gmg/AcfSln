@@ -489,12 +489,153 @@ void CInspectionTaskGuiComp::OnModelChanged(int modelId, int /*changeFlags*/, is
 }
 
 
+// protected slots
+
+void CInspectionTaskGuiComp::OnEditorChanged(int index)
+{
+	if (index != m_currentGuiIndex){
+		DoUpdateEditor(index);
+
+		m_currentGuiIndex = index;
+		int stackIndex = m_tabToStackIndexMap[index];
+		PreviewStack->setCurrentIndex(stackIndex);
+
+		if (AutoTestButton->isChecked()){
+			DoAutoTest();
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnAutoTest()
+{
+	m_testStarted = true;
+
+	MessageList->clear();
+	m_resultShapesMap.clear();
+
+	iproc::ISupplier* supplierPtr = dynamic_cast<iproc::ISupplier*>(GetObjectPtr());
+	if (supplierPtr != NULL){
+		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
+		supplierPtr->EnsureWorkFinished();
+
+		UpdateVisualElements();
+
+		UpdateTaskMessages();
+
+		DoUpdateEditor(m_currentGuiIndex);
+
+		UpdateProcessingState();
+	}
+
+	m_testStarted = false;
+}
+
+
+void CInspectionTaskGuiComp::on_TestAllButton_clicked()
+{
+	if (m_generalParamsEditorCompPtr.IsValid()){
+		m_generalParamsEditorCompPtr->UpdateModel();
+	}
+
+	OnAutoTest();
+}
+
+
+void CInspectionTaskGuiComp::on_AutoTestButton_clicked()
+{
+	if (AutoTestButton->isChecked()){
+		OnAutoTest();
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		m_paramsLoaderCompPtr->LoadFromFile(*objectPtr);
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selectedItems = MessageList->selectedItems();
+	if (selectedItems.empty()){
+		return;
+	}
+
+	QTreeWidgetItem* itemPtr = selectedItems.front();
+	Q_ASSERT(itemPtr != NULL);
+
+	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
+	int shapeIndex = itemPtr->data(0, DR_SHAPE_INDEX).toInt();
+
+	if ((taskIndex >= 0) && m_resultShapesMap.contains(taskIndex)){
+		if (taskIndex < m_previewSceneProvidersCompPtr.GetCount()){
+			const iqt2d::IViewProvider* viewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
+			if (viewProviderPtr != NULL){
+				iview::IShapeView* viewPtr = viewProviderPtr->GetView();
+				if (viewPtr != NULL){
+					viewPtr->DeselectAllShapes();
+				}
+			}
+		}
+
+		const istd::TPointerVector<iview::IShape>& resultShapes = m_resultShapesMap[taskIndex];
+		if ((shapeIndex >= 0) && (shapeIndex < resultShapes.GetCount())){
+			iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(resultShapes.GetAt(shapeIndex));
+			if (shapePtr != NULL){
+				shapePtr->SetSelected();
+			}
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int /*column*/)
+{
+	Q_ASSERT(item != NULL);
+
+	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
+
+	for (		GuiMap::ConstIterator tabsIter = m_tabToGuiIndexMap.constBegin();
+				tabsIter != m_tabToGuiIndexMap.constEnd();
+				++tabsIter){
+		int tabIndex = tabsIter.key();
+		if (tabsIter.value() == taskIndex){
+			if (m_toolBoxPtr != NULL){
+				m_toolBoxPtr->setCurrentIndex(tabIndex);
+			}
+
+			if (m_tabWidgetPtr != NULL){
+				m_tabWidgetPtr->setCurrentIndex(tabIndex);
+			}
+
+			return;
+		}
+	}
+}
+
+
 // private methods
 
 void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex)
 {
-	m_resultMessagesMap[taskIndex] = messageContainer.GetMessages();
-	ibase::IMessageContainer::Messages& messagesList = m_resultMessagesMap[taskIndex];
+	m_resultMessagesMap[taskIndex].CopyFrom(messageContainer, istd::IChangeable::CM_CONVERT);
+
+	ibase::IMessageContainer::Messages messagesList = m_resultMessagesMap[taskIndex].GetMessages();
 
 	int messagesCount = messagesList.count();
 	if (messagesCount == 0){
@@ -685,7 +826,6 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 }
 
 
-
 // private static methods
 
 QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category)
@@ -708,146 +848,6 @@ QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::Inform
 
 	default:
 		return logIcon;
-	}
-}
-
-
-// protected slots
-
-void CInspectionTaskGuiComp::OnEditorChanged(int index)
-{
-	if (index != m_currentGuiIndex){
-		DoUpdateEditor(index);
-
-		m_currentGuiIndex = index;
-		int stackIndex = m_tabToStackIndexMap[index];
-		PreviewStack->setCurrentIndex(stackIndex);
-
-		if (AutoTestButton->isChecked()){
-			DoAutoTest();
-		}
-	}
-}
-
-
-void CInspectionTaskGuiComp::OnAutoTest()
-{
-	m_testStarted = true;
-
-	MessageList->clear();
-	m_resultShapesMap.clear();
-
-	iproc::ISupplier* supplierPtr = dynamic_cast<iproc::ISupplier*>(GetObjectPtr());
-	if (supplierPtr != NULL){
-		supplierPtr->InvalidateSupplier();
-		supplierPtr->EnsureWorkInitialized();
-		supplierPtr->EnsureWorkFinished();
-
-		UpdateVisualElements();
-
-		UpdateTaskMessages();
-
-		DoUpdateEditor(m_currentGuiIndex);
-
-		UpdateProcessingState();
-	}
-
-	m_testStarted = false;
-}
-
-
-void CInspectionTaskGuiComp::on_TestAllButton_clicked()
-{
-	if (m_generalParamsEditorCompPtr.IsValid()){
-		m_generalParamsEditorCompPtr->UpdateModel();
-	}
-
-	OnAutoTest();
-}
-
-
-void CInspectionTaskGuiComp::on_AutoTestButton_clicked()
-{
-	if (AutoTestButton->isChecked()){
-		OnAutoTest();
-	}
-}
-
-
-void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
-{
-	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		m_paramsLoaderCompPtr->LoadFromFile(*objectPtr);
-	}
-}
-
-
-void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
-{
-	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
-	}
-}
-
-
-void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
-{
-	QList<QTreeWidgetItem*> selectedItems = MessageList->selectedItems();
-	if (selectedItems.empty()){
-		return;
-	}
-
-	QTreeWidgetItem* itemPtr = selectedItems.front();
-	Q_ASSERT(itemPtr != NULL);
-
-	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
-	int shapeIndex = itemPtr->data(0, DR_SHAPE_INDEX).toInt();
-
-	if ((taskIndex >= 0) && m_resultShapesMap.contains(taskIndex)){
-		if (taskIndex < m_previewSceneProvidersCompPtr.GetCount()){
-			const iqt2d::IViewProvider* viewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
-			if (viewProviderPtr != NULL){
-				iview::IShapeView* viewPtr = viewProviderPtr->GetView();
-				if (viewPtr != NULL){
-					viewPtr->DeselectAllShapes();
-				}
-			}
-		}
-
-		const istd::TPointerVector<iview::IShape>& resultShapes = m_resultShapesMap[taskIndex];
-		if ((shapeIndex >= 0) && (shapeIndex < resultShapes.GetCount())){
-			iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(resultShapes.GetAt(shapeIndex));
-			if (shapePtr != NULL){
-				shapePtr->SetSelected();
-			}
-		}
-	}
-}
-
-
-void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int /*column*/)
-{
-	Q_ASSERT(item != NULL);
-
-	int taskIndex = item->data(0, DR_TASK_INDEX).toInt();
-
-	for (		GuiMap::ConstIterator tabsIter = m_tabToGuiIndexMap.constBegin();
-				tabsIter != m_tabToGuiIndexMap.constEnd();
-				++tabsIter){
-		int tabIndex = tabsIter.key();
-		if (tabsIter.value() == taskIndex){
-			if (m_toolBoxPtr != NULL){
-				m_toolBoxPtr->setCurrentIndex(tabIndex);
-			}
-
-			if (m_tabWidgetPtr != NULL){
-				m_tabWidgetPtr->setCurrentIndex(tabIndex);
-			}
-
-			return;
-		}
 	}
 }
 

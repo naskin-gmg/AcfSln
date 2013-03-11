@@ -6,24 +6,13 @@ namespace iedge
 
 
 CEdgeLine::CEdgeLine()
-:	m_isClosed(false),
+:	BaseClass(),
+	m_isClosed(false),
 	m_areVolatileValid(true),
 	m_totalLength(0),
 	m_center(0, 0),
 	m_minWeight(0),
 	m_maxWeight(0)
-{
-}
-
-
-CEdgeLine::CEdgeLine(const CEdgeLine& edge)
-:	m_nodes(edge.m_nodes),
-	m_isClosed(false),
-	m_areVolatileValid(edge.m_areVolatileValid),
-	m_totalLength(edge.m_totalLength),
-	m_center(edge.m_center),
-	m_minWeight(edge.m_minWeight),
-	m_maxWeight(edge.m_maxWeight)
 {
 }
 
