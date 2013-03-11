@@ -25,7 +25,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 		int numLines = containerPtr->GetItemsCount();
 
 		if (numLines > 0){
-			double scale = qSqrt(GetViewToScreenTransform().GetDeformMatrix().GetFrobeniusNorm()) * 2;
+			double scale = qSqrt(GetViewToScreenTransform().GetDeformMatrix().GetApproxScale());
 
 			const iview::IColorSchema& colorSchema = GetColorSchema();
 			const QPen& defaultPen = colorSchema.GetPen(iview::IColorSchema::SP_NORMAL);
@@ -60,7 +60,7 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 						dif.Normalize();
 						i2d::CVector2d orthogonal = dif.GetOrthogonal();
 
-						i2d::CVector2d thickVector = orthogonal * qMin(5.0, scale * prevWeight);
+						i2d::CVector2d thickVector = orthogonal * qMin(4.0, scale * prevWeight);
 						polygon[0] = QPointF(prevPos - thickVector);
 						polygon[1] = QPointF(prevPos + thickVector);
 
@@ -143,49 +143,52 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 	// convert minimum distance of 1.5px to logical units
 	const iview::CScreenTransform& transform = GetViewToScreenTransform();
-	double minDistance = 1.5 / transform.GetDeformMatrix().GetApproxScale();
+	double scale = qSqrt(transform.GetDeformMatrix().GetApproxScale());
 	double maxContourStrength = 0;
-
-	i2d::CVector2d cp = GetLogPosition(position);
 
 	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 		const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
-
-		i2d::CLine2d segmentLine;
 
 		int nodesCount = line.GetNodesCount();
 		if (nodesCount > 1){
 			int segmentsCount = line.GetSegmentsCount();
 			for (int i = 0; i < segmentsCount; i++){
-				segmentLine.SetPoint1(line.GetNode(i).GetPosition());
-				segmentLine.SetPoint2(line.GetNode((i + 1) % nodesCount).GetPosition());
+				const iedge::CEdgeNode& node1 = line.GetNode(i);
+				const iedge::CEdgeNode& node2 = line.GetNode((i + 1) % nodesCount);
+
+				i2d::CLine2d segmentLine(GetScreenPosition(node1.GetPosition()), GetScreenPosition(node2.GetPosition()));
 
 				if (segmentLine.GetLength2() < I_BIG_EPSILON){
 					continue;
 				}
 
-				QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(cp);
+				QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(position);
 				double alpha = castDistance.first;
 				double distance = qAbs(castDistance.second);
 
-				if ((alpha >= 0) && (alpha <= 1) && (distance <= minDistance)){
-					const iedge::CEdgeNode& node1 = line.GetNode(i);
-					const iedge::CEdgeNode& node2 = line.GetNode(i + 1);
+				if ((alpha >= 0) && (alpha <= 1)){
 					double weight1 = node1.GetWeight();
 					double weight2 = node2.GetWeight();
-					double contourStrength = weight2 * alpha + weight1 * (1 - alpha);
-					if (contourStrength > maxContourStrength){
-						maxContourStrength = contourStrength;
+
+					double weight = weight2 * alpha + weight1 * (1 - alpha);
+
+					double minDistance = qMax(1.0, qMin(4.0, scale * weight));
+					if (distance <= minDistance){
+						if (weight > maxContourStrength){
+							maxContourStrength = weight;
+						}
 					}
 				}
 			}
 		}
 		else if (nodesCount == 1){
 			const iedge::CEdgeNode& node = line.GetNode(0);
-			double distance = node.GetPosition().GetDistance(cp);
+			i2d::CVector2d screenPoint = GetScreenPosition(node.GetPosition());
+			double distance = screenPoint.GetDistance(i2d::CVector2d(position));
+			double weight = node.GetWeight();
 
+			double minDistance = qMax(1.0, qMin(4.0, scale * weight));
 			if (distance <= minDistance){
-				double weight = node.GetWeight();
 				if (weight > maxContourStrength){
 					maxContourStrength = weight;
 				}
