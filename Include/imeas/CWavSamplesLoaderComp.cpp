@@ -1,6 +1,9 @@
 #include "imeas/CWavSamplesLoaderComp.h"
 
 
+// STL includes
+#include <cstring>
+
 // Qt includes
 #include <QtCore/qmath.h>
 #include <QtCore/QStringList>
@@ -9,6 +12,7 @@
 // ACF includes
 #include "istd/TRange.h"
 
+// ACF-Solutions
 #include "imeas/IDataSequence.h"
 #include "imeas/CSamplesInfo.h"
 

@@ -1,12 +1,16 @@
 #include "imeas/CGeneralDataSequence.h"
 
 
+// STL includes
+#include <cstring>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TDelPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
+// ACF-Solutions
 #include "imeas/CSamplesInfo.h"
 
 
