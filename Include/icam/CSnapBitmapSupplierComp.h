@@ -42,6 +42,7 @@ public:
 	I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
 	I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID ´of resolution parameter in parameter set (type imeas::INumericValue, unit: pixel/mm)", false, "ScaleParamId");
 	I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
+	I_ASSIGN(m_calibratedUnitInfoCompPtr, "CalibratedUnit", "Describe unit of result calibration", false, "CalibratedUnit");
 	I_REGISTER_SUBELEMENT(ScaleConstraints);
 	I_END_COMPONENT;
 
@@ -63,6 +64,7 @@ private:
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);
 	I_ATTR(QByteArray, m_scaleParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultScaleValueCompPtr);
+	I_REF(imath::IUnitInfo, m_calibratedUnitInfoCompPtr);
 };
 
 

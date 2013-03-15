@@ -101,14 +101,22 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 				}
 
 				if (m_calibrationCompPtr.IsValid()){
-					i2d::CAffineTransformation2d transform;
-					transform.Reset(center, 0, scale);
-					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transform));
+					i2d::CAffineTransformation2d calibration;
+					calibration.Reset(center, 0, scale);
+					if (m_calibratedUnitInfoCompPtr.IsValid()){
+						calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+					}
+
+					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
 				}
 				else{
-					i2d::CAffineTransformation2d* transformPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
-					transformPtr->Reset(center, 0, scale);
-					result.first.SetPtr(transformPtr);
+					i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+					calibrationPtr->Reset(center, 0, scale);
+					if (m_calibratedUnitInfoCompPtr.IsValid()){
+						calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+					}
+
+					result.first.SetPtr(calibrationPtr);
 				}
 			}
 				return WS_OK;

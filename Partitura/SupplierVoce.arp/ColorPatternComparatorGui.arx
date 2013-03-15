@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2795
+          2818
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               ParamsSetGui
@@ -62,22 +62,6 @@
               <Value>
                 ParamsSetGui
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ViewCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ViewCalibrationProvider
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -285,13 +269,13 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              SlaveSceneExtender
+              DefaultUnitInfo
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              SlaveSceneExtender
+              UnitInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -301,13 +285,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ViewCalibrationProvider
+              SlaveSceneExtender
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              AoiCalibrationProvider
+              SlaveSceneExtender
             </ExportId>
             <Data>
               <IsEnabled>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2736
+          2818
         </Number>
         <Description>
           ACF
@@ -102,7 +102,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               DesignType
@@ -121,13 +121,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UnitName
+              UnitInfo
             </Id>
             <Type>
-              String
+              Reference
             </Type>
             <ExportId>
-              UnitName
+              UnitInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -154,22 +154,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ViewCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ViewCalibrationProvider
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -190,7 +174,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DefaultModel
@@ -270,22 +254,6 @@
             </Type>
             <ExportId>
               SlaveSceneExtender
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ViewCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ViewCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>

@@ -144,13 +144,18 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 	// convert minimum distance of 1.5px to logical units
 	const iview::CScreenTransform& transform = GetViewToScreenTransform();
 	double scale = qSqrt(transform.GetDeformMatrix().GetApproxScale());
-	double maxContourStrength = 0;
+
+	int bestLineIndex = -1;	// index of the nearest found edge line
+	double bestLineStrength = 0;	// strength (weight) of the nearest found edge line
+	double bestLinePosition = 0;	// position of the nearest found edge line
 
 	for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 		const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
 
 		int nodesCount = line.GetNodesCount();
 		if (nodesCount > 1){
+			double segmentPosition = 0;
+
 			int segmentsCount = line.GetSegmentsCount();
 			for (int i = 0; i < segmentsCount; i++){
 				const iedge::CEdgeNode& node1 = line.GetNode(i);
@@ -158,27 +163,31 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 				i2d::CLine2d segmentLine(GetScreenPosition(node1.GetPosition()), GetScreenPosition(node2.GetPosition()));
 
-				if (segmentLine.GetLength2() < I_BIG_EPSILON){
-					continue;
-				}
+				double segmentLength = segmentLine.GetLength();
 
-				QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(position);
-				double alpha = castDistance.first;
-				double distance = qAbs(castDistance.second);
+				if (segmentLength > I_BIG_EPSILON){
+					QPair<double, double> castDistance = segmentLine.GetAlphaAndCastDistance(position);
+					double alpha = castDistance.first;
+					double distance = qAbs(castDistance.second);
 
-				if ((alpha >= 0) && (alpha <= 1)){
-					double weight1 = node1.GetWeight();
-					double weight2 = node2.GetWeight();
+					if ((alpha >= 0) && (alpha <= 1)){
+						double weight1 = node1.GetWeight();
+						double weight2 = node2.GetWeight();
 
-					double weight = weight2 * alpha + weight1 * (1 - alpha);
+						double weight = weight2 * alpha + weight1 * (1 - alpha);
 
-					double minDistance = qMax(1.0, qMin(4.0, scale * weight));
-					if (distance <= minDistance){
-						if (weight > maxContourStrength){
-							maxContourStrength = weight;
+						double minDistance = qMax(1.0, qMin(4.0, scale * weight));
+						if (distance <= minDistance){
+							if (weight > bestLineStrength){
+								bestLineIndex = lineIndex;
+								bestLinePosition = segmentPosition + segmentLength * alpha;
+								bestLineStrength = weight;
+							}
 						}
 					}
 				}
+
+				segmentPosition += segmentLength;
 			}
 		}
 		else if (nodesCount == 1){
@@ -189,15 +198,34 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 			double minDistance = qMax(1.0, qMin(4.0, scale * weight));
 			if (distance <= minDistance){
-				if (weight > maxContourStrength){
-					maxContourStrength = weight;
+				if (weight > bestLineStrength){
+					bestLineIndex = lineIndex;
+					bestLinePosition = 0;
+					bestLineStrength = weight;
 				}
 			}
 		}
 	}
 
-	if (maxContourStrength > 0){
-		return QObject::tr("Contour strength %1%").arg(int(maxContourStrength * 100 + 0.5));
+	if (bestLineIndex >= 0){
+		const iedge::CEdgeLine& line = containerPtr->GetAt(bestLineIndex);
+
+		double lineLength = line.GetTotalLength();
+
+		QString unitName;
+		const i2d::ICalibration2d* calibrationPtr = line.GetCalibration();
+		if (calibrationPtr != NULL){
+			const imath::IUnitInfo* unitInfoPtr = calibrationPtr->GetArgumentUnitInfo();
+			if (unitInfoPtr != NULL){
+				unitName = unitInfoPtr->GetUnitName();
+			}
+		}
+
+		return QObject::tr("Line at %1%3 (total %2%3): strength %4%")
+					.arg(bestLinePosition, 0, 'f', 2)
+					.arg(lineLength, 0, 'f', 2)
+					.arg(unitName)
+					.arg(int(bestLineStrength * 100 + 0.5));
 	}
 
 	return "";
