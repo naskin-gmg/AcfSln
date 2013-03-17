@@ -814,7 +814,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 		}
 	}
 	
-	if (taskIndex >= 0 && m_previewSceneProvidersCompPtr.IsValid()){
+	if ((taskIndex >= 0) && (taskIndex  < m_previewSceneProvidersCompPtr.GetCount())){
 		iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
 		if (previewProviderPtr != NULL){
 			iview::IShapeView* viewPtr = previewProviderPtr->GetView();
