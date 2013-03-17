@@ -490,7 +490,7 @@ void CInspectionTaskComp::Parameters::SetParent(CInspectionTaskComp* parentPtr)
 					const iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
 					if (subtaskPtr != NULL){
 						imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(subtaskPtr->GetModelParametersSet());
-						if (modelPtr != NULL){
+						if (modelPtr != NULL && !modelPtr->IsAttached(this)){
 							modelPtr->AttachObserver(this);
 						}
 					}
