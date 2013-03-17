@@ -23,11 +23,11 @@ namespace iipr
 
 
 class CImageHistogramSupplierComp:
-			public iproc::TSupplierCompWrap<imeas::CSimpleSamplesSequence32>,
+			public iproc::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> >,
 			virtual public imeas::IDataSequenceProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<imeas::CSimpleSamplesSequence32> BaseClass;
+	typedef iproc::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> > BaseClass;
 
 	I_BEGIN_COMPONENT(CImageHistogramSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
@@ -42,7 +42,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(imeas::CSimpleSamplesSequence32& result) const;
+	virtual int ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
