@@ -32,6 +32,12 @@ I_EXPORT_COMPONENT(
 			"Editor for numeric parameters",
 			"Numeric Values Filter Ranges Parameter Editor");
 
+I_EXPORT_COMPONENT(
+			DataSequenceSupplierResultsView,
+			"Results view for any data sequence supplier/provider",
+			"Task Supplier Observer Subtask Data Sequence Preview" IM_TAG("Inspection GUI Editor"));
+
+
 } // namespace QtMeasPck
 
 

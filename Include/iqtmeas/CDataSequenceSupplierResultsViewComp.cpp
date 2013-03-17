@@ -1,0 +1,57 @@
+#include "iqtmeas/CDataSequenceSupplierResultsViewComp.h"
+
+
+namespace iqtmeas
+{
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CDataSequenceSupplierResultsViewComp::UpdateGui(int updateFlags)
+{
+	if (updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS){
+		imeas::IDataSequenceProvider* providerPtr = dynamic_cast<imeas::IDataSequenceProvider*>(GetModelPtr());
+		if (providerPtr != NULL){
+			const imod::IModel* productModelPtr = dynamic_cast<const imod::IModel*>(providerPtr->GetDataSequence());
+			if ((productModelPtr != NULL) && m_resultsObserverCompPtr.IsValid()){
+				if (!productModelPtr->IsAttached(m_resultsObserverCompPtr.GetPtr())){
+					(const_cast<imod::IModel*>(productModelPtr))->AttachObserver(m_resultsObserverCompPtr.GetPtr());
+				}
+			}
+		}
+	}
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CDataSequenceSupplierResultsViewComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	QWidget* widgetPtr = GetWidget();
+
+	QVBoxLayout* layoutPtr = new QVBoxLayout(widgetPtr);
+	layoutPtr->setMargin(0);
+
+	if (m_resultsGuiCompPtr.IsValid() && m_resultsObserverCompPtr.IsValid()){
+		m_resultsGuiCompPtr->CreateGui(widgetPtr);
+	}
+}
+
+
+void CDataSequenceSupplierResultsViewComp::OnGuiDestroyed()
+{
+	if (m_resultsGuiCompPtr.IsValid()){
+		m_resultsGuiCompPtr->DestroyGui();
+	}
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+} // namespace iqtmeas
+
+
