@@ -154,6 +154,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CAutoImageNormalizeProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitmapJoinerSupplierComp.cpp"
 				>
 			</File>
@@ -390,6 +394,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CAutoImageNormalizeProcessorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CBitmapJoinerSupplierComp.h"
 				>

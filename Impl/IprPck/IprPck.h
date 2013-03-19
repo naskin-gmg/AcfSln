@@ -53,8 +53,7 @@
 #include "iipr/CColorPatternComparatorComp.h"
 #include "iipr/CImageHistogramSupplierComp.h"
 #include "iipr/CFastGaussianProcessorComp.h"
-
-//#include "iipr/CImageAffineTransformProcessorComp.h"
+#include "iipr/CAutoImageNormalizeProcessorComp.h"
 
 
 /**
@@ -126,9 +125,7 @@ typedef icomp::TModelCompWrap<iipr::CColorPatternControllerComp> ColorPatternCon
 typedef icomp::TModelCompWrap<iipr::CColorPatternComparatorComp> ColorPatternComparator;
 typedef icomp::TModelCompWrap<iipr::CImageHistogramSupplierComp> ImageHistogramSupplier;
 typedef iipr::CFastGaussianProcessorComp FastGaussianProcessor;
-
-
-//typedef iipr::CImageAffineTransformProcessorComp ImageAffineTransformProcessor;
+typedef iipr::CAutoImageNormalizeProcessorComp AutoImageNormalizeProcessor;
 
 
 } // namespace IprPck
