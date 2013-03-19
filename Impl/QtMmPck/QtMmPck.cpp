@@ -22,11 +22,6 @@ I_EXPORT_COMPONENT(
 			"Qt Video File Loader Play" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
-			PhononVideoViewGui,
-			"Video widget based on Phonon library",
-			"Phonon Widget Video Play" IM_TAG("GUI"));
-
-I_EXPORT_COMPONENT(
 			MediaLoader,
 			"Loader for multimedia files",
 			"Video File Loader Play" IM_TAG("Loader"));

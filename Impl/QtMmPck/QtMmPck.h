@@ -20,7 +20,6 @@ namespace QtMmPck
 
 
 typedef iqtmm::CVideoPlayerGuiComp VideoPlayerGui;
-typedef iqtmm::CPhononVideoViewGuiComp PhononVideoViewGui;
 typedef iqtmm::CMediaLoaderComp MediaLoader;
 typedef iqtmm::CPlaybackControllerGuiComp PlaybackControllerGui;
 typedef icomp::TModelCompWrap<iqtmm::CFrameSeqVideoControllerComp> FrameSeqVideoController;

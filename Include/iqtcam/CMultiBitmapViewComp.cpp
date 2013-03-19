@@ -186,9 +186,9 @@ CMultiBitmapViewComp::CSingleView* CMultiBitmapViewComp::CreateView(QWidget* par
 CMultiBitmapViewComp::CSingleView::CSingleView(QWidget* parentPtr, int id, const QString& title)
 :	BaseClass(parentPtr),
 	m_console(this),
+	m_id(id),
 	m_showStatusLabel(true),
-	m_showStatusBackground(true),
-	m_id(id)
+	m_showStatusBackground(true)
 {
 	setTitle(title);
 

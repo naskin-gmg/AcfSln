@@ -22,7 +22,7 @@ bool CLoginBarGuiComp::eventFilter(QObject *obj, QEvent *event)
 	if (m_loginIfPtr.IsValid()){
 		bool isLogged = (m_loginIfPtr->GetLoggedUser() != NULL);
 
-		if (isLogged && event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonRelease){
+		if (isLogged && ((event->type() == QEvent::KeyRelease) || (event->type() == QEvent::MouseButtonRelease))){
 			// Auto log off functionality is activated
 			if (m_autoLogoutMilisec > 0){
 				m_autoLogoutTimer.start(m_autoLogoutMilisec);

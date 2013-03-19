@@ -1,6 +1,9 @@
 #include "iipr/CBitmapOperations.h"
 
 
+// STL incldues
+#include <cstring>
+
 // ACF includes
 #include "iimg/CScanlineMask.h"
 

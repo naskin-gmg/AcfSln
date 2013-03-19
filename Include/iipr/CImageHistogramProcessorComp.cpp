@@ -1,9 +1,12 @@
 #include "iipr/CImageHistogramProcessorComp.h"
 
 
+// STL incldues
+#include <cstring>
+
 // Qt includes
 #include <QtCore/qmath.h>
-#include <QtCore/QCoreApplication.h>
+#include <QtCore/QCoreApplication>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"

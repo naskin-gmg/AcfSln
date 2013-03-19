@@ -3,4 +3,4 @@ include($(ACFDIR)/Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = iqtmm
 
-QT += xml svg phonon
+QT += xml svg

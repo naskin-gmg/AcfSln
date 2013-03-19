@@ -5,7 +5,7 @@
 // Qt includes
 #include <QtCore/QDir>
 #include <QtCore/QStringList>
-#include <QtCore/QMutex.h>
+#include <QtCore/QMutex>
 
 // ACF includes
 #include "iser/IFileLoader.h"
