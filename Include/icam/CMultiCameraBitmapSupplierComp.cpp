@@ -33,6 +33,8 @@ int CMultiCameraBitmapSupplierComp::GetBitmapsCount() const
 
 const iimg::IBitmap* CMultiCameraBitmapSupplierComp::GetBitmap(int bitmapIndex) const
 {
+	QMutexLocker lock(&m_lock);
+
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return productPtr->GetAt(bitmapIndex);
