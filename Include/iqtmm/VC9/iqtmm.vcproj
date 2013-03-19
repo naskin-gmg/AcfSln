@@ -202,14 +202,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CPhononVideoViewGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CPhononVideoViewGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CPlaybackControllerGuiComp.cpp"
 				>
 			</File>
@@ -237,10 +229,6 @@
 			</File>
 			<File
 				RelativePath="..\CMediaLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CPhononVideoViewGuiComp.h"
 				>
 			</File>
 			<File
@@ -274,10 +262,6 @@
 			>
 			<File
 				RelativePath="..\generated\moc_CFrameSeqVideoControllerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CPhononVideoViewGuiComp.cpp"
 				>
 			</File>
 			<File
