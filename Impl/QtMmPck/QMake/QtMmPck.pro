@@ -5,6 +5,6 @@ include($(ACFDIR)/Config/QMake/AcfQt.pri)
 
 TARGET = QtMmPck
 
-QT += svg phonon
+QT += svg
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqtmm
