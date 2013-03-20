@@ -1,9 +1,6 @@
 #include "iqtipr/CValueSupplierGuiComp.h"
 
 
-// Qt includes
-#include <QtGui/QMessageBox>
-
 // ACF includes
 #include "imath/CVarVector.h"
 #include "iview/CCircleShape.h"

@@ -63,26 +63,29 @@ void CProcessorCommandComp::OnCommandActivated()
 	QString finishMessage;
 
 	switch (processingState){
-		case iproc::IProcessor::TS_OK:
-			finishMessage = m_successMessageAttrPtr.IsValid() ? *m_successMessageAttrPtr : QString();
-			if (!finishMessage.isEmpty()){
-				QMessageBox::information(NULL, "", finishMessage);
-			}
-			break;
-		case iproc::IProcessor::TS_INVALID:
-			finishMessage = m_errorMessageAttrPtr.IsValid() ? *m_errorMessageAttrPtr : QString();
-			if (!finishMessage.isEmpty()){
-				QMessageBox::critical(NULL, "", finishMessage);
-			}
-			break;
-		case iproc::IProcessor::TS_CANCELED:
-			finishMessage = m_cancelMessageAttrPtr.IsValid() ? *m_cancelMessageAttrPtr: QString();
-			if (!finishMessage.isEmpty()){
-				QMessageBox::information(NULL, "", finishMessage);
-			}
-			break;
-		default:
-			;
+	case iproc::IProcessor::TS_OK:
+		finishMessage = m_successMessageAttrPtr.IsValid()? *m_successMessageAttrPtr: QString();
+		if (!finishMessage.isEmpty()){
+			QMessageBox::information(NULL, "", finishMessage);
+		}
+		break;
+
+	case iproc::IProcessor::TS_INVALID:
+		finishMessage = m_errorMessageAttrPtr.IsValid() ? *m_errorMessageAttrPtr : QString();
+		if (!finishMessage.isEmpty()){
+			QMessageBox::critical(NULL, "", finishMessage);
+		}
+		break;
+
+	case iproc::IProcessor::TS_CANCELED:
+		finishMessage = m_cancelMessageAttrPtr.IsValid() ? *m_cancelMessageAttrPtr: QString();
+		if (!finishMessage.isEmpty()){
+			QMessageBox::information(NULL, "", finishMessage);
+		}
+		break;
+
+	default:
+		break;
 	}
 }
 

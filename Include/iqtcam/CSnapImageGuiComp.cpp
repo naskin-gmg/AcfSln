@@ -170,8 +170,8 @@ void CSnapImageGuiComp::on_SaveImageButton_clicked()
 {
 	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
 		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Cannot save image"));
 		}
@@ -183,8 +183,8 @@ void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Cannot load parameters"));
 		}
@@ -196,8 +196,8 @@ void CSnapImageGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Cannot save parameters"));
 		}

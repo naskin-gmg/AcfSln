@@ -83,7 +83,7 @@ void CLoginBarGuiComp::on_LoginButton_clicked()
 			UpdateButtonsState();
 		}
 		else{
-			QMessageBox::information(NULL, tr("Error"), tr("Wrong password"));
+			QMessageBox::warning(GetQtWidget(), tr("Error"), tr("Wrong password"));
 		}
 	}
 

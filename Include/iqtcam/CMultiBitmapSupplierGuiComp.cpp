@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QDateTime>
+#include <QtGui/QMessageBox>
 
 // ACF includes
 #include "iview/CImageShape.h"
@@ -65,8 +66,8 @@ void CMultiBitmapSupplierGuiComp::on_SaveImageButton_clicked()
 		}
 
 		if (m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, newFilePath) == iser::IFileLoader::StateFailed){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Cannot save image"));
 		}

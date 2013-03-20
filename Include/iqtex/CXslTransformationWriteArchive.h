@@ -47,7 +47,7 @@ public:
 
 	bool Flush();
 
-	bool OpenDocument(const QString& filePath, const QString& xslFilePath);
+	bool OpenFile(const QString& filePath, const QString& xslFilePath);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;

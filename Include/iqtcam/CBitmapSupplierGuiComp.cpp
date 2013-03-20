@@ -41,8 +41,8 @@ void CBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Snap Error"));
 		}
@@ -67,8 +67,8 @@ void CBitmapSupplierGuiComp::on_SaveImageButton_clicked()
 {
 	if (		m_bitmapLoaderCompPtr.IsValid() &&
 				m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, "") == iser::IFileLoader::StateFailed){
-		QMessageBox::information(
-					NULL,
+		QMessageBox::warning(
+					GetQtWidget(),
 					QObject::tr("Error"),
 					QObject::tr("Cannot save image"));
 	}

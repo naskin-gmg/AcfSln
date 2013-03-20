@@ -20,8 +20,8 @@ void CGeneralSupplierGuiComp::on_TestButton_clicked()
 		supplierPtr->EnsureWorkFinished();
 
 		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
-			QMessageBox::information(
-						NULL,
+			QMessageBox::warning(
+						GetQtWidget(),
 						QObject::tr("Error"),
 						QObject::tr("Processing Error"));
 

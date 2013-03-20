@@ -100,7 +100,7 @@ void CUserManagerDialog::on_RemoveUserButton_clicked()
 			UpdateUserList();
 		}
 		else{
-			QMessageBox::information(NULL, tr("Error"), tr("The user could not be removed."));
+			QMessageBox::warning(this, tr("Error"), tr("The user could not be removed."));
 		}
 	}
 }
@@ -110,7 +110,7 @@ void CUserManagerDialog::OnCancel()
 {
 	iser::CMemoryReadArchive restoreArchive(m_storedUsersManager);
 	if (!m_manager.Serialize(restoreArchive)){
-		QMessageBox::information(NULL, tr("Error"), tr("Cannot restore user list."));
+		QMessageBox::warning(this, tr("Error"), tr("Cannot restore user list."));
 	}
 }
 

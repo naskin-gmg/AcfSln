@@ -41,7 +41,7 @@ void CChangePasswordDialog::on_ButtonBox_accepted()
 {
 	//checking if the lineEdit boxes for the new password contain the same
 	if (NewPasswordEdit->text() != ConfirmPasswordEdit->text()){
-		QMessageBox::information(NULL, tr("Error"), tr("The new password is not entered correctly the second time.\nPlease correct the new passwords."));
+		QMessageBox::warning(this, tr("Error"), tr("The new password is not entered correctly the second time.\nPlease correct the new passwords."));
 
 		return;
 	}
@@ -51,13 +51,13 @@ void CChangePasswordDialog::on_ButtonBox_accepted()
 
 	//checking if the old password and the new password are not the same
 	if (oldPassword == newPassword){
-		QMessageBox::information(NULL, tr("Error"), tr("The old password and the new password are similar!\nUse another password."));
+		QMessageBox::warning(this, tr("Error"), tr("The old password and the new password are similar!\nUse another password."));
 
 		return;
 	}
 
 	if (!m_loggedUser.CheckPassword(oldPassword)){
-		QMessageBox::information(NULL, tr("Error"), tr("The old password is not correct.\nReenter the passwords."));
+		QMessageBox::warning(this, tr("Error"), tr("The old password is not correct.\nReenter the passwords."));
 
 		ResetGui();
 	}
@@ -69,7 +69,7 @@ void CChangePasswordDialog::on_ButtonBox_accepted()
 		accept();
 	}
 	else{
-		QMessageBox::information(NULL, tr("Error"), tr("The new password is not conform with guide lines.\nUse other password."));
+		QMessageBox::warning(this, tr("Error"), tr("The new password is not conform with guide lines.\nUse other password."));
 
 		ResetGui();
 	}

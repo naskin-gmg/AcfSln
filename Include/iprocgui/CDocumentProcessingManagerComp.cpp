@@ -32,7 +32,7 @@ void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeabl
 void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId)
 {
 	istd::IChangeable* outputDocumentPtr = NULL;
-	if (!m_documentManagerCompPtr->FileNew(documentTypeId, false, "", &outputDocumentPtr)){
+	if (!m_documentManagerCompPtr->InsertNewDocument(documentTypeId, false, "", &outputDocumentPtr)){
 		SendErrorMessage(0, "Output document could not be created", "Document processing manager");
 
 		return;
@@ -77,7 +77,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 
 		changePtr.Abort();
 
-		m_documentManagerCompPtr->FileClose(documentIndex);
+		m_documentManagerCompPtr->CloseDocument(documentIndex, true);
 	}
 	else{
 		istd::IPolymorphic* viewPtr = m_documentManagerCompPtr->AddViewToDocument(*outputDocumentPtr);
@@ -86,7 +86,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 
 			changePtr.Abort();
 	
-			m_documentManagerCompPtr->FileClose(documentIndex);		
+			m_documentManagerCompPtr->CloseDocument(documentIndex, true);
 		}
 	}
 }

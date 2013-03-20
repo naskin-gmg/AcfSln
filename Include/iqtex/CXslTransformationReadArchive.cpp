@@ -67,12 +67,12 @@ CXslTransformationReadArchive::CXslTransformationReadArchive(
 	m_rootTag(rootTag)
 {
 	if (!filePath.isEmpty()){
-		OpenDocument(filePath, xslFilePath);
+		OpenFile(filePath, xslFilePath);
 	}
 }
 
 
-bool CXslTransformationReadArchive::OpenDocument(const QString& filePath, const QString& xslFilePath)
+bool CXslTransformationReadArchive::OpenFile(const QString& filePath, const QString& xslFilePath)
 {
 	QFile xmlFile(filePath);
 	if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
