@@ -281,6 +281,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	if (*m_designTypeAttrPtr == 1){
 		m_toolBoxPtr = new QToolBox(ParamsFrame);
 		m_toolBoxPtr->setBackgroundRole(QPalette::Window);
+		m_toolBoxPtr->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 
 		int subtasksCount = m_editorGuisCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
