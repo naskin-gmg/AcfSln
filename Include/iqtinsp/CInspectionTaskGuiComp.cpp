@@ -6,6 +6,9 @@
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QGroupBox>
+#include <QtGui/QMenu>
+#include <QtGui/QClipboard>
+#include <QtCore/QMimeData>
 
 // ACF includes
 #include "imod/IModel.h"
@@ -13,10 +16,16 @@
 #include "iview/IShapeView.h"
 #include "iview/IInteractiveShape.h"
 #include "iview/CShapeBase.h"
+#include "iser/CXmlStringReadArchive.h"
+#include "iser/CXmlStringWriteArchive.h"
 
 
 namespace iqtinsp
 {
+
+
+static const char InspectionTaskMimeType[] = "acf/iqtinsp::CInspectionTask";
+static const char SupplierTaskMimeType[] = "acf/iproc::ISupplier";
 
 
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
@@ -48,6 +57,8 @@ void CInspectionTaskGuiComp::UpdateModel() const
 void CInspectionTaskGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	Q_ASSERT(IsGuiCreated());
+
+	UpdateMenu();
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
@@ -268,10 +279,6 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 	}
 
-	if (!m_paramsLoaderCompPtr.IsValid()){
-		LoaderFrame->hide();
-	}
-
 	layoutPtr->setMargin(0);
 
 	ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
@@ -405,6 +412,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	else{
 		GeneralParamsFrame->hide();
 	}
+
+	CreateMenu();
 
 	UpdateTaskMessages();
 
@@ -552,7 +561,7 @@ void CInspectionTaskGuiComp::on_AutoTestButton_clicked()
 }
 
 
-void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
+void CInspectionTaskGuiComp::OnLoadParams()
 {
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -561,11 +570,59 @@ void CInspectionTaskGuiComp::on_LoadParamsButton_clicked()
 }
 
 
-void CInspectionTaskGuiComp::on_SaveParamsButton_clicked()
+void CInspectionTaskGuiComp::OnSaveParams()
 {
 	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		m_paramsLoaderCompPtr->SaveToFile(*objectPtr);
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnCopyAll()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		CopyTaskParametersToClipboard(objectPtr, InspectionTaskMimeType);
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnPasteAll()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		ReadTaskParametersFromClipboard(objectPtr, InspectionTaskMimeType);
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnCopyCurrent()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		iproc::ISupplier* supplierPtr = objectPtr->GetSubtask(m_currentGuiIndex);
+		if (supplierPtr != NULL){
+			iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
+			if (paramsPtr != NULL){
+				CopyTaskParametersToClipboard(paramsPtr, SupplierTaskMimeType);
+			}
+		}
+	}
+}
+
+
+void CInspectionTaskGuiComp::OnPasteCurrent()
+{
+	iinsp::IInspectionTask* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		iproc::ISupplier* supplierPtr = objectPtr->GetSubtask(m_currentGuiIndex);
+		if (supplierPtr != NULL){
+			iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
+			if (paramsPtr != NULL){
+				ReadTaskParametersFromClipboard(paramsPtr, SupplierTaskMimeType);
+			}
+		}
 	}
 }
 
@@ -824,6 +881,94 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 			}
 		}
 	}
+}
+
+
+void CInspectionTaskGuiComp::CreateMenu()
+{
+	QMenu* actionsMenuPtr = new QMenu(MenuButton);
+	MenuButton->setMenu(actionsMenuPtr);
+
+	m_copyCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy current task"), this, SLOT(OnCopyCurrent()));
+	m_pasteCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste current task"), this, SLOT(OnPasteCurrent()));
+	actionsMenuPtr->addSeparator();
+	m_copyAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy all tasks"), this, SLOT(OnCopyAll()));
+	m_pasteAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste all tasks"), this, SLOT(OnPasteAll()));
+
+	if (m_paramsLoaderCompPtr.IsValid()){
+		actionsMenuPtr->addSeparator();
+		m_loadAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Open"), tr("Load..."), this, SLOT(OnLoadParams()));
+		m_saveAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Save"), tr("Save..."), this, SLOT(OnSaveParams()));
+	}
+
+	UpdateMenu();
+}
+
+
+void CInspectionTaskGuiComp::UpdateMenu()
+{
+	QClipboard* clipboardPtr = QApplication::clipboard();
+	const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
+	if (mimeDataPtr != NULL){
+		m_pasteCurrentTaskActionPtr->setEnabled(mimeDataPtr->hasFormat(SupplierTaskMimeType) || mimeDataPtr->hasText());
+		m_pasteAllActionPtr->setEnabled(mimeDataPtr->hasFormat(InspectionTaskMimeType) || mimeDataPtr->hasText());
+	}
+	else{
+		m_pasteCurrentTaskActionPtr->setEnabled(false);
+		m_pasteAllActionPtr->setEnabled(false);
+	}
+}
+
+
+bool CInspectionTaskGuiComp::CopyTaskParametersToClipboard(iser::ISerializable* objectPtr, const char* mimeType) const
+{
+	QClipboard* clipboardPtr = QApplication::clipboard();
+	Q_ASSERT(clipboardPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
+
+	iser::CXmlStringWriteArchive archive;
+	if (objectPtr->Serialize(archive)){
+		QMimeData* mimeDataPtr = new QMimeData;
+		mimeDataPtr->setData(mimeType, archive.GetString());
+		clipboardPtr->setMimeData(mimeDataPtr);
+		clipboardPtr->setText(archive.GetString());
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable* objectPtr, const char* mimeType)
+{
+	const QClipboard* clipboardPtr = QApplication::clipboard();
+	Q_ASSERT(clipboardPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
+
+	// try via mime data
+	const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
+	if (mimeDataPtr != NULL && mimeType != NULL){
+		if (mimeDataPtr->hasFormat(mimeType)){
+			iser::CXmlStringReadArchive archive(mimeDataPtr->data(mimeType));
+			if (objectPtr->Serialize(archive)){
+				UpdateGui(0);
+
+				return true;
+			}
+		}
+	}	
+
+	// else try via plain text
+	QByteArray dataToPaste(clipboardPtr->text().toUtf8());
+	iser::CXmlStringReadArchive archive(dataToPaste);
+	if (objectPtr->Serialize(archive)){
+		UpdateGui(0);
+
+		return true;
+	}
+
+	return false;
 }
 
 

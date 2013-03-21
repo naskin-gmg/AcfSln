@@ -69,6 +69,9 @@
           <string>Inspection</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="topMargin">
+           <number>3</number>
+          </property>
           <item>
            <widget class="QLabel" name="StateIconLabel">
             <property name="sizePolicy">
@@ -134,67 +137,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="3">
-             <widget class="QFrame" name="LoaderFrame">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <property name="margin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QPushButton" name="LoadParamsButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Load inspection data</string>
-                 </property>
-                 <property name="text">
-                  <string>Load...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-                   <normaloff>:/Icons/Open.svg</normaloff>:/Icons/Open.svg</iconset>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="SaveParamsButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Save inspection data</string>
-                 </property>
-                 <property name="text">
-                  <string>Save...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-                   <normaloff>:/Icons/Save.svg</normaloff>:/Icons/Save.svg</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
             <item row="0" column="1" colspan="2">
              <widget class="QToolButton" name="AutoTestButton">
               <property name="sizePolicy">
@@ -221,6 +163,32 @@
               </property>
               <property name="checkable">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QToolButton" name="MenuButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Additional clipboard and IO operations</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+                <normaloff>:/Icons/Tools.svg</normaloff>:/Icons/Tools.svg</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="popupMode">
+               <enum>QToolButton::InstantPopup</enum>
               </property>
              </widget>
             </item>

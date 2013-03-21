@@ -96,8 +96,12 @@ protected Q_SLOTS:
 	void OnAutoTest();
 	void on_TestAllButton_clicked();
 	void on_AutoTestButton_clicked();
-	void on_LoadParamsButton_clicked();
-	void on_SaveParamsButton_clicked();
+	void OnLoadParams();
+	void OnSaveParams();
+	void OnCopyAll();
+	void OnPasteAll();
+	void OnCopyCurrent();
+	void OnPasteCurrent();
 	void on_MessageList_itemSelectionChanged();
 	void on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int column);
 
@@ -109,6 +113,10 @@ private:
 	void UpdateTaskMessages();
 	void DoUpdateEditor(int taskIndex);
 	void ActivateTaskShapes(int taskIndex);
+	void CreateMenu();
+	void UpdateMenu();
+	bool CopyTaskParametersToClipboard(iser::ISerializable* objectPtr, const char* mimeType) const;
+	bool ReadTaskParametersFromClipboard(iser::ISerializable* objectPtr, const char* mimeType);
 
 	// static methods
 	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
@@ -153,6 +161,13 @@ private:
 
 	QToolBox* m_toolBoxPtr;
 	QTabWidget* m_tabWidgetPtr;
+
+	QAction* m_copyAllActionPtr;
+	QAction* m_pasteAllActionPtr;
+	QAction* m_copyCurrentTaskActionPtr;
+	QAction* m_pasteCurrentTaskActionPtr;
+	QAction* m_loadAllActionPtr;
+	QAction* m_saveAllActionPtr;
 };
 
 
