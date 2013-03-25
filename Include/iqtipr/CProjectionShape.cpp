@@ -76,8 +76,6 @@ void CProjectionShape::UpdateFigure() const
 		return;
 	}
 
-	const i2d::CVector2d center = m_projectionLine.GetCenter();
-
 	int samplesCount = projectionPtr->GetSamplesCount();
 	if (		(samplesCount > 0) &&
 				(projectionPtr->GetChannelsCount() > 0) &&

@@ -91,14 +91,11 @@ void CSnapImageGuiComp::OnGuiCreated()
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 
-	bool areParamsEditable = false;
 	if (m_paramsSetGuiCompPtr.IsValid()){
 		m_paramsSetGuiCompPtr->CreateGui(ParamsFrame);
 
 		if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
 			m_paramsSetModelCompPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
-
-			areParamsEditable = true;
 		}
 
 		ParamsFrame->setVisible(true);

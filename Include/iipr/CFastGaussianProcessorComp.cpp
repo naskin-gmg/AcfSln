@@ -138,11 +138,8 @@ bool CFastGaussianProcessorComp::ProcessImage(
 	int linesDifference = inputImage.GetLinesDifference();
 	int pixelsDifference = inputImage.GetPixelsDifference();
 
-	double kernelSum = 0;
-
 	switch (*m_kernelTypeAttrPtr){
 		case KT_3x3:
-			kernelSum = 16;
 			break;
 
 		default:
