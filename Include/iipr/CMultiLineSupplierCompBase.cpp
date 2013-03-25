@@ -1,10 +1,6 @@
 #include "iipr/CMultiLineSupplierCompBase.h"
 
 
-// ACF includes
-#include "iprm/TParamsPtr.h"
-
-
 namespace iipr
 {
 

@@ -47,9 +47,9 @@ int CFileAcquisitionComp::DoProcessing(
 	}
 
 	QString inputPath = *m_defaultDirAttrPtr;
-	iprm::TParamsPtr<ifile::IFileNameParam> loaderParamsPtr(paramsPtr, m_pathParamIdAttrPtr, m_defaultDirParamCompPtr, false);
-	if (loaderParamsPtr.IsValid()){
-		inputPath = loaderParamsPtr->GetPath();
+	iprm::TParamsPtr<ifile::IFileNameParam> pathParamsPtr(paramsPtr, m_pathParamIdAttrPtr, m_defaultDirParamCompPtr, false);
+	if (pathParamsPtr.IsValid()){
+		inputPath = pathParamsPtr->GetPath();
 	}
 
 	QString imageFileName;
