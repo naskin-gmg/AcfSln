@@ -204,9 +204,9 @@ I_EXPORT_COMPONENT(
 			"Multi Line Projection Supplier")
 
 I_EXPORT_COMPONENT(
-			SelectableCalibrationSupplier, 
+			SelectableCalibrationProvider, 
 			"Provider of a single (selected) calibration from a list of calibrations",
-			"Multi Single Calibration Supplier Provider" IM_AUTHOR("\"Kirill Lepskiy\""));
+			"Multi Single Calibration Provider" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			CheckerboardPatternGenerator, 

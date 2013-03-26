@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2804
+          2843
         </Number>
         <Description>
           ACF
@@ -264,7 +264,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        VisualStatus
+      </ExportedId>
+      <ComponentId>
+        ImageTaskGui/VisualStatus
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Image acquisition GUI for image acquisition task

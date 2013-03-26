@@ -374,7 +374,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSelectableCalibrationSupplierComp.cpp"
+				RelativePath="..\CSelectableCalibrationProviderComp.cpp"
 				>
 			</File>
 			<File
@@ -615,7 +615,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSelectableCalibrationSupplierComp.h"
+				RelativePath="..\CSelectableCalibrationProviderComp.h"
 				>
 			</File>
 			<File

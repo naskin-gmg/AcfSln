@@ -46,7 +46,7 @@
 #include "iipr/CTubeProjectionLinesProviderComp.h"
 #include "iipr/CMorphologicalProcessorComp.h"
 #include "iipr/CMultiLineProjectionSupplierComp.h"
-#include "iipr/CSelectableCalibrationSupplierComp.h"
+#include "iipr/CSelectableCalibrationProviderComp.h"
 #include "iipr/CCheckerboardPatternGeneratorComp.h"
 #include "iipr/CImageFlipProcessorComp.h"
 #include "iipr/CColorPatternControllerComp.h"
@@ -118,7 +118,7 @@ typedef iipr::CMorphologicalProcessorComp MorphologicalProcessor;
 typedef icomp::TModelCompWrap<
 			iipr::CMultiLineProjectionSupplierComp> MultiLineProjectionSupplier;
 typedef icomp::TModelCompWrap<
-			iipr::CSelectableCalibrationSupplierComp> SelectableCalibrationSupplier;
+			iipr::CSelectableCalibrationProviderComp> SelectableCalibrationProvider;
 typedef iipr::CCheckerboardPatternGeneratorComp CheckerboardPatternGenerator;
 typedef iipr::CImageFlipProcessorComp ImageFlipProcessor;
 typedef icomp::TModelCompWrap<iipr::CColorPatternControllerComp> ColorPatternController;
