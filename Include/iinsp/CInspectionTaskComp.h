@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QMap>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "istd/IInformationProvider.h"
