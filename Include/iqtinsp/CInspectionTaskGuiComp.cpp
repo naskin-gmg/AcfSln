@@ -585,6 +585,8 @@ void CInspectionTaskGuiComp::OnCopyAll()
 	if (objectPtr != NULL){
 		CopyTaskParametersToClipboard(objectPtr, InspectionTaskMimeType);
 	}
+
+	UpdateMenu();
 }
 
 
@@ -609,6 +611,8 @@ void CInspectionTaskGuiComp::OnCopyCurrent()
 			}
 		}
 	}
+
+	UpdateMenu();
 }
 
 
