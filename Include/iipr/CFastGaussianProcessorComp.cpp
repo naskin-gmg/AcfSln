@@ -4,6 +4,9 @@
 // Qt includes
 #include <QtCore/QVector>
 
+// OpenMP includes
+#include <omp.h>
+
 
 namespace iipr
 {
@@ -27,18 +30,30 @@ bool DoConvolution(
 			KernelElement fastAccessElements[9],
 			iimg::IBitmap& outputImage)
 {
-	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	istd::CIndex2d outputImageSize = inputImageSize;
-
-	if (outputImageSize.IsSizeEmpty()){
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	if (imageSize.IsSizeEmpty()){
 		return false;
 	}
 
-	for (int y = 1; y < outputImageSize.GetY() - 1; ++y){
-		const quint8* inputPtr = static_cast<const quint8*>(inputImage.GetLinePtr(y));
-		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
+	Q_ASSERT(imageSize == outputImage.GetImageSize());
+	QVector<const quint8*> inputLines;
+	QVector<quint8*> outputLines;
 
-		for (int x = 1; x < outputImageSize.GetX() - 1; ++x){
+	for (int y = 1; y < imageSize.GetY() - 1; ++y){
+		inputLines.push_back(static_cast<const quint8*>(inputImage.GetLinePtr(y)));
+		outputLines.push_back(static_cast<quint8*>(outputImage.GetLinePtr(y)));
+	}
+
+	int imageHeight = imageSize.GetY();
+	int imageWidth = imageSize.GetX();
+
+	#pragma omp parallel for
+
+	for (int y = 1; y < imageHeight - 1; ++y){
+		const quint8* inputPtr = inputLines[y - 1];
+		quint8* outputPtr = outputLines[y - 1];
+
+		for (int x = 1; x < imageWidth - 1; ++x){
 			WorkingType sums[ChannelsCount] = {0};
 			WorkingType alphaSum = 0;
 			for (int i = 0; i < 9; ++i){
@@ -84,18 +99,30 @@ bool DoGrayConvolution(
 			KernelElement fastAccessElements[9],
 			iimg::IBitmap& outputImage)
 {
-	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	istd::CIndex2d outputImageSize = inputImageSize;
-
-	if (outputImageSize.IsSizeEmpty()){
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	if (imageSize.IsSizeEmpty()){
 		return false;
 	}
 
-	for (int y = 1; y < outputImageSize.GetY() - 1; ++y){
-		const quint8* inputPtr = static_cast<const quint8*>(inputImage.GetLinePtr(y));
-		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
+	Q_ASSERT(imageSize == outputImage.GetImageSize());
 
-		for (int x = 1; x < outputImageSize.GetX() - 1; ++x){
+	QVector<const quint8*> inputLines;
+	QVector<quint8*> outputLines;
+	for (int y = 1; y < imageSize.GetY() - 1; ++y){
+		inputLines.push_back(static_cast<const quint8*>(inputImage.GetLinePtr(y)));
+		outputLines.push_back(static_cast<quint8*>(outputImage.GetLinePtr(y)));
+	}
+
+	int imageHeight = imageSize.GetY();
+	int imageWidth = imageSize.GetX();
+
+	#pragma omp parallel for
+
+	for (int y = 1; y < imageHeight - 1; ++y){
+		const quint8* inputPtr = inputLines[y - 1];
+		quint8* outputPtr = outputLines[y - 1];
+
+		for (int x = 1; x < imageWidth - 1; ++x){
 			int sums = 0;
 			for (int i = 0; i < 9; ++i){
 				const KernelElement& kernelElement = fastAccessElements[i];

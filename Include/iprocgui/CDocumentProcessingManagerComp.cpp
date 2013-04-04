@@ -70,7 +70,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 	double processingTime = timer.elapsed();
 #endif
 
-	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
+	SendVerboseMessage(QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
 
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");
