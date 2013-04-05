@@ -41,8 +41,8 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura\AcfInfoCopyApp.arx"
-				ConfigFile="../../../Config\BaseOnly.xpc"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../Generated"
 			/>
 			<Tool
@@ -133,8 +133,8 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura\AcfInfoCopyApp.arx"
-				ConfigFile="../../../Config\BaseOnly.xpc"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../Generated"
 			/>
 			<Tool

@@ -1,29 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          2528
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="5">
@@ -406,7 +384,7 @@
         VersionInfo
       </Id>
       <PackageId>
-        AcfVoce
+        AcfSlnVoce
       </PackageId>
       <ComponentId>
         VersionInfo
@@ -451,15 +429,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
-    <Component>
-      <ExportedId>
-        VersionInfo
-      </ExportedId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Replacer for marked text file content

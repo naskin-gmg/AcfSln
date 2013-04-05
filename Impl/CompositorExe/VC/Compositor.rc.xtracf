@@ -29,8 +29,8 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION $AcfRcVersion:0$
- PRODUCTVERSION $AcfRcVersion:0$
+ FILEVERSION $AcfRcVersion:1$
+ PRODUCTVERSION $AcfRcVersion:1$
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -45,15 +45,15 @@ BEGIN
     BEGIN
         BLOCK "040704b0"
         BEGIN
-            VALUE "Comments", "Internal build version ($AcfRawVersion:0$), build on $AcfTimestamp$ ($CompilerName$)"
+            VALUE "Comments", "Internal build version ($AcfRawVersion:1$), based on ACF $AcfVersion:1$ ($AcfRawVersion:1$) and QT $AcfVersion:1023$, build on $AcfTimestamp$ ($CompilerName$)"
             VALUE "CompanyName", "Witold Gantzke and Kirill Lepskiy"
             VALUE "FileDescription", "ACF Compositor"
-            VALUE "FileVersion", "$AcfVersion:0$"
+            VALUE "FileVersion", "$AcfVersion:1$"
             VALUE "InternalName", "Compositor"
             VALUE "LegalCopyright", "Copyright (C) 2009-2011 Witold Gantzke and Kirill Lepskiy"
             VALUE "OriginalFilename", "Compositor.exe"
             VALUE "ProductName", "ACF Compositor"
-            VALUE "ProductVersion", "$AcfVersion:0$"
+            VALUE "ProductVersion", "$AcfVersion:1$"
         END
     END
     BLOCK "VarFileInfo"
