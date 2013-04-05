@@ -260,7 +260,7 @@ bool CXslTransformationWriteArchive::Process(QString& value)
 
 bool CXslTransformationWriteArchive::ProcessData(void* dataPtr, int size)
 {
-	QByteArray encodedString = QByteArray(dataPtr, size).toBase64();
+	QByteArray encodedString = QByteArray((const char*)dataPtr, size).toBase64();
 
 	return PushTextNode(encodedString);
 }
