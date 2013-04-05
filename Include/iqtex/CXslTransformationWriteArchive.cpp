@@ -7,9 +7,6 @@
 #include <QtXmlPatterns/QXmlQuery>
 #include <QtXmlPatterns/QAbstractMessageHandler>
 
-// ACF includes
-#include "istd/CBase64.h"
-
 
 namespace iqtex
 {
