@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iser/CXmlFileReadArchive.h"
-#include "iser/CXmlFileWriteArchive.h"
+#include "ifile/CXmlFileReadArchive.h"
+#include "ifile/CXmlFileWriteArchive.h"
 
-#include "ibase/TFileSerializerComp.h"
+#include "ifile/TFileSerializerComp.h"
 
 
 namespace ihotf
@@ -17,10 +17,10 @@ namespace ihotf
 	Hotfolder data loader.
 	This implementation supports persistence of the static and dynamic model of the hotfolder.
 */
-class CHotfolderLoaderComp: public ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive>
+class CHotfolderLoaderComp: public ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>
 {
 public:
-	typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> BaseClass;
+	typedef ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive> BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderLoaderComp);
 		I_ASSIGN(m_monitorSessionsParamIdAttrPtr, "MonitorSessionsParamId", "Parameter ID for monitoring sessions", true, "MonitoringSessions");
@@ -33,11 +33,11 @@ public:
 		MI_CANNOT_READ_DYNAMIC_PARAMS
 	};
 
-	// reimplemented (iser::IFileLoader)
+	// reimplemented (ifile::IFilePersistence)
 	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath) const;
 
-	// reimplemented (iser::IFileTypeInfo)
+	// reimplemented (ifile::IFileTypeInfo)
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
@@ -47,9 +47,9 @@ protected:
 	*/
 	QString GetStaticParamsPath(const QString& objectPath) const;
 
-	// reimplemented (ibase::TFileSerializerComp)
+	// reimplemented (ifile::TFileSerializerComp)
 	virtual void OnReadError(
-				const iser::CXmlFileReadArchive& archive,
+				const ifile::CXmlFileReadArchive& archive,
 				const istd::IChangeable& data,
 				const QString& filePath) const;
 

@@ -6,7 +6,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
 #include "iimg/CBitmap.h"
@@ -75,7 +75,7 @@ protected:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
 	I_ATTR(int, m_snapIntervalAttrPtr);
 
 	imod::TModelWrap<iimg::CBitmap> m_bitmap;

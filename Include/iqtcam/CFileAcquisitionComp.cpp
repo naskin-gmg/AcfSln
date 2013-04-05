@@ -59,7 +59,7 @@ int CFileAcquisitionComp::DoProcessing(
 		QDir directory(inputPath);
 
 		QStringList extensions;
-		m_bitmapLoaderCompPtr->GetFileExtensions(extensions, iser::IFileLoader::QF_LOAD);
+		m_bitmapLoaderCompPtr->GetFileExtensions(extensions, ifile::IFilePersistence::QF_LOAD);
 
 		ParamsInfo& info = m_dirInfos[inputPath];
 		if (info.filesIter == info.files.end()){
@@ -98,7 +98,7 @@ int CFileAcquisitionComp::DoProcessing(
 	if (!imageFileName.isEmpty()){
 		if (outputPtr != NULL){
 			int loadState = m_bitmapLoaderCompPtr->LoadFromFile(*outputPtr, imageFileName);
-			retVal = (loadState == iser::IFileLoader::StateOk)? TS_OK: TS_INVALID;
+			retVal = (loadState == ifile::IFilePersistence::StateOk)? TS_OK: TS_INVALID;
 
 			iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IRasterImage*>(outputPtr);
 			if (imagePtr != NULL){

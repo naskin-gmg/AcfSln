@@ -587,7 +587,7 @@
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        ibase::IFileConvertCopy
+        ifileproc::IFileConvertCopy
       </InterfaceId>
       <ComponentId>
         BitmapFileProcessing

@@ -63,6 +63,21 @@ I_EXPORT_COMPONENT(
 			"Process files and saves results to a report file",
 			"Processing Result Review File" IM_TAG("File Processing"));
 
+I_EXPORT_COMPONENT(
+			FileInfoCopy,
+			"Copy file attaching some additional information like version and license",
+			"Copy Move Attach License Version Tags" IM_TAG("File Processing"));
+
+I_EXPORT_COMPONENT(
+			FileCopyOverLoader,
+			"General file copy or transform using loaders and any object",
+			"Copy Compile Transform Saver" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Loader"));
+
+I_EXPORT_COMPONENT(
+			CopyApp,
+			"Copy application transforming files",
+			"Copy Compile Transform Application" IM_CATEGORY(I_DATA_PROCESSING I_APPLICATION) IM_TAG("File"));
+
 
 } // namespace FileProcessingPck
 

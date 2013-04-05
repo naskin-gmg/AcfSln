@@ -7,7 +7,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorCompBase.h"
@@ -79,7 +79,7 @@ public:
 	virtual int GetCurrentFrame() const;
 	virtual bool SetCurrentFrame(int frameIndex);
 
-	// reimplemented (iser::IFileTypeInfo)
+	// reimplemented (ifile::IFileTypeInfo)
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
@@ -89,7 +89,7 @@ protected:
 private:
 	I_ATTR(QString, m_defaultSequenceDirectoryAttrPtr);
 	I_ATTR(double, m_framesPerSecondAttrPtr);
-	I_REF(iser::IFileLoader, m_frameLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_frameLoaderCompPtr);
 	I_REF(istd::IChangeable, m_frameDataCompPtr);
 
 	int m_currentFrameIndex;

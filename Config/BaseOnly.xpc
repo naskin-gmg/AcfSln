@@ -33,9 +33,15 @@
   </ConfigFiles>
   <PackageDirs count="0">
   </PackageDirs>
-  <PackageFiles count="1">
+  <PackageFiles count="3">
     <FilePath>
       ../Partitura/AcfSlnVoce.arp
+    </FilePath>
+    <FilePath>
+      ../Partitura/FileProcessingVoce.arp
+    </FilePath>
+    <FilePath>
+      ../Bin/$(ConfigurationName)/FileProcessingPck.arp
     </FilePath>
   </PackageFiles>
   <RegistryFiles count="0">

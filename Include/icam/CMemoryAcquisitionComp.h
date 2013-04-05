@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "icomp/CComponentBase.h"
 #include "ifile/IFileNameParam.h"
 #include "iimg/CGeneralBitmap.h"
@@ -18,7 +18,7 @@ namespace icam
 
 
 /**
-	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
+	Bitmap loader component implementing interfaces \c ifile::IFilePersistence and \c icam::IBitmapAcquisition.
 */
 class CMemoryAcquisitionComp:
 			public icomp::CComponentBase,

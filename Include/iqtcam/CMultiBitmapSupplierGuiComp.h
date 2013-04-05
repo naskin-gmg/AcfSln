@@ -60,7 +60,7 @@ protected:
 	virtual void UpdateGui(int updateFlags = 0);
 
 private:
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(QString, m_filePathFormatAttrPtr);
 

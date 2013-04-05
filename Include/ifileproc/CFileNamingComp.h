@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
 #include "ibase/TLoggerCompWrap.h"
 
@@ -41,7 +41,7 @@ public:
 	virtual QString GetFilePath(const QString& inputFileName) const;
 
 private:
-	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);
+	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoCompPtr);
 	I_REF(ifile::IFileNameParam, m_directoryPathCompPtr);
 	I_REF(ifileproc::IFileNamingParams, m_fileNamingParamsCompPtr);
 };

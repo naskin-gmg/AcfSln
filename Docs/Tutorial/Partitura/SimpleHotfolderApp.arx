@@ -190,7 +190,7 @@
         ImageCopy
       </Id>
       <PackageId>
-        BasePck
+        FileProcessingPck
       </PackageId>
       <ComponentId>
         FileCopyOverLoader

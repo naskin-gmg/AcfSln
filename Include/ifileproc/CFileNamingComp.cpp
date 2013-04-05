@@ -35,7 +35,7 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 	// Calculate the new extension:
 	if (m_fileTypeInfoCompPtr.IsValid()){
 		QStringList supportedExtensions;
-		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, iser::IFileLoader::QF_SAVE);
+		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, ifile::IFilePersistence::QF_SAVE);
 
 		QStringList::const_iterator inputFoundIter = qFind(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
 		if (inputFoundIter == supportedExtensions.end()){

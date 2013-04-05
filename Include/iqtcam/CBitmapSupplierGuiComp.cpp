@@ -66,7 +66,7 @@ void CBitmapSupplierGuiComp::on_LiveImageButton_toggled(bool checked)
 void CBitmapSupplierGuiComp::on_SaveImageButton_clicked()
 {
 	if (		m_bitmapLoaderCompPtr.IsValid() &&
-				m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, "") == iser::IFileLoader::StateFailed){
+				m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, "") == ifile::IFilePersistence::StateFailed){
 		QMessageBox::warning(
 					GetQtWidget(),
 					QObject::tr("Error"),

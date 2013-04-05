@@ -13,7 +13,7 @@ namespace ifileproc
 {
 
 
-// reimplemented (ibase::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConvertCopy)
 
 bool CCopyFilesTreeComp::ConvertFiles(
 			const QString& inputPath,

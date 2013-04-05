@@ -11,7 +11,7 @@
 #include "istd/TPointerVector.h"
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
-#include "ibase/IFileConvertCopy.h"
+#include "ifileproc/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
 // AcfSln includes
@@ -118,7 +118,7 @@ private:
 	};
 
 private:
-	I_REF(ibase::IFileConvertCopy, m_fileConvertCompPtr);
+	I_REF(ifileproc::IFileConvertCopy, m_fileConvertCompPtr);
 	I_REF(ihotf::IHotfolderProcessingInfo, m_hotfolderProcessingInfoCompPtr);
 	I_REF(imod::IModel, m_hotfolderProcessingModelCompPtr);
 	I_REF(ihotf::IHotfolderTaskManager, m_taskManagerCompPtr);

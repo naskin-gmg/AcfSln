@@ -2,7 +2,7 @@
 #define iqtmm_CMediaLoaderComp_included
 
 
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -18,14 +18,14 @@ namespace iqtmm
 class CMediaLoaderComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,
-			virtual public iser::IFileLoader
+			virtual public ifile::IFilePersistence
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CMediaLoaderComp);
-		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
-		I_REGISTER_INTERFACE(iser::IFileLoader);
+		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
+		I_REGISTER_INTERFACE(ifile::IFilePersistence);
 		I_ASSIGN(m_autoPlayAttrPtr, "AutoPlay", "If enabled, movie will be automatically played after loading", true, true);
 	I_END_COMPONENT;
 
@@ -36,7 +36,7 @@ public:
 		MI_BAD_FORMAT
 	};
 
-	// reimplemented (iser::IFileLoader)
+	// reimplemented (ifile::IFilePersistence)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
 				const QString* filePathPtr = NULL,
@@ -45,7 +45,7 @@ public:
 	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath) const;
 
-	// reimplemented (iser::IFileTypeInfo)
+	// reimplemented (ifile::IFileTypeInfo)
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 

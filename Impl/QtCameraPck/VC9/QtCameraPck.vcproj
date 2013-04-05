@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
 				AdditionalUsingDirectories=""
 			/>
 			<Tool
@@ -53,7 +53,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib QtGui4.lib QtXml4.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -113,7 +113,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

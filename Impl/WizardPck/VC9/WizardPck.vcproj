@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;NDEBUG"
 				PrecompiledHeaderFile=""
 				CompileAs="0"
@@ -55,7 +55,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -104,7 +104,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
@@ -124,7 +124,7 @@
 				AdditionalDependencies="AcfStd.lib QtCored4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;../../../Lib/$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFSLNDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>

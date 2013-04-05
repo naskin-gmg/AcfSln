@@ -255,7 +255,7 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        ibase::IFileConvertCopy
+        ifileproc::IFileConvertCopy
       </InterfaceId>
       <ComponentId>
         FileConvertOverProcessor

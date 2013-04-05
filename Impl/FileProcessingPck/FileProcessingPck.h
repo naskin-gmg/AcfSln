@@ -15,6 +15,9 @@
 #include "ifileproc/CCopyFilesTreeComp.h"
 #include "ifileproc/CComposedCopyFilesComp.h"
 #include "ifileproc/CProcessingResultsReviewComp.h"
+#include "ifileproc/CFileInfoCopyComp.h"
+#include "ifileproc/CFileCopyOverLoaderComp.h"
+#include "ifileproc/CCopyAppComp.h"
 
 
 /**
@@ -40,6 +43,10 @@ typedef ifileproc::CCopyFilesTreeComp CopyFilesTree;
 typedef ifileproc::CComposedCopyFilesComp ComposedCopyFiles;
 
 typedef ifileproc::CProcessingResultsReviewComp ProcessingResultsReview;
+
+typedef ifileproc::CFileInfoCopyComp FileInfoCopy;
+typedef ifileproc::CFileCopyOverLoaderComp FileCopyOverLoader;
+typedef ifileproc::CCopyAppComp CopyApp;
 
 
 } // namespace FileProcessingPck

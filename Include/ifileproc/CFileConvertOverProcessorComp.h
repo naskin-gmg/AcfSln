@@ -8,9 +8,9 @@
 // ACF includes
 #include "istd/TSmartPtr.h"
 
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
-#include "ibase/IFileConvertCopy.h"
+#include "ifileproc/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
 #include "ibase/IProgressManager.h"
@@ -26,7 +26,7 @@ namespace ifileproc
 */
 class CFileConvertOverProcessorComp:
 			public ibase::CLoggerComponentBase,
-			virtual public ibase::IFileConvertCopy
+			virtual public ifileproc::IFileConvertCopy
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -34,7 +34,7 @@ public:
 	CFileConvertOverProcessorComp();
 
 	I_BEGIN_COMPONENT(CFileConvertOverProcessorComp);
-		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
 		I_ASSIGN(m_inputFileLoaderCompPtr, "InputFileLoader", "Loader for the input file", true, "InputFileLoader");
 		I_ASSIGN(m_outputFileLoaderCompPtr, "OutputFileLoader", "Persistence for the output file. If not set, the input file loader will be used", false, "OutputFileLoader");
 		I_ASSIGN(m_processorCompPtr, "DataProcessor", "Processor for the file", true, "FileProcessor");
@@ -44,15 +44,15 @@ public:
 		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
 	I_END_COMPONENT;
 
-	// reimplemented (ibase::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConvertCopy)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 private:
-	I_REF(iser::IFileLoader, m_inputFileLoaderCompPtr);
-	I_REF(iser::IFileLoader, m_outputFileLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_inputFileLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_outputFileLoaderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 	I_REF(istd::IChangeable, m_inputDataCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);

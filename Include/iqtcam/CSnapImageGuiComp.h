@@ -6,7 +6,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 #include "iimg/IBitmap.h"
@@ -84,8 +84,8 @@ private:
 	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);
 
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);

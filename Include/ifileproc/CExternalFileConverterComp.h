@@ -6,7 +6,7 @@
 #include <QtCore/QProcess>
 
 // ACF includes
-#include "ibase/IFileConvertCopy.h"
+#include "ifileproc/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/INameParam.h"
@@ -36,7 +36,7 @@ namespace ifileproc
 class CExternalFileConverterComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,
-			virtual public ibase::IFileConvertCopy
+			virtual public ifileproc::IFileConvertCopy
 {
 	Q_OBJECT
 
@@ -44,14 +44,14 @@ public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CExternalFileConverterComp);
-		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
 		I_ASSIGN(m_executablePathCompPtr, "ExecutablePath", "Path to the application's binary", true, "ExecutablePath");
 		I_ASSIGN(m_defaultProcessArgumentsAttrPtr, "DefaultProcessArguments", "Application conversion arguments.\nUse $(Input) to specify the input and $(Output) for output file name", false, "$(Input) $(Output)");
 		I_ASSIGN(m_processArgumentsParamsIdAttrPtr, "ProcessArgumentsParamsId", "ID of the command line parameter (given as a INameParam object) in the parameter set", true, "ProcessArgumentsParamsId");
 		I_ASSIGN_MULTI_0(m_additionalArgumentsCompPtr, "AdditionalArguments", "Additional command line arguments", false);
 	I_END_COMPONENT;
 
-	// reimplemented (ibase::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConvertCopy)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,

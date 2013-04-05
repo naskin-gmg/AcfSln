@@ -3,7 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "ibase/ITextDocument.h"
+#include "idoc/ITextDocument.h"
 #include "ibase/IProgressManager.h"
 #include "iprm/TParamsPtr.h"
 
@@ -40,7 +40,7 @@ int CScriptDataProcessorComp::DoProcessing(
 	
 	if (m_scriptParamIdAttrPtr.IsValid()){
 		iprm::TParamsPtr<iser::ISerializable> parameterPtr(paramsPtr, *m_scriptParamIdAttrPtr);
-		const ibase::ITextDocument* textPtr = dynamic_cast<const ibase::ITextDocument*>(parameterPtr.GetPtr());
+		const idoc::ITextDocument* textPtr = dynamic_cast<const idoc::ITextDocument*>(parameterPtr.GetPtr());
 		if (textPtr != NULL){
 			functionScript = textPtr->GetText();
 		}

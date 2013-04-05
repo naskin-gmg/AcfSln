@@ -1,7 +1,7 @@
 #include "CPropertyObjectExampe.h"
 
-#include "iser/CXmlFileWriteArchive.h"
-#include "iser/CXmlFileReadArchive.h"
+#include "ifile/CXmlFileWriteArchive.h"
+#include "ifile/CXmlFileReadArchive.h"
 
 
 int main(int /*argc*/, char* /*argv*/[])
@@ -10,7 +10,7 @@ int main(int /*argc*/, char* /*argv*/[])
 
 	{
 		// write unchanged object to the file:
-		iser::CXmlFileWriteArchive archive("MyFile.xml");
+		ifile::CXmlFileWriteArchive archive("MyFile.xml");
 		myObject.Serialize(archive);
 	}
 
@@ -20,15 +20,15 @@ int main(int /*argc*/, char* /*argv*/[])
 	myObject.SetRectangle(i2d::CRectangle(42, 42, 1000, 1000));
 
 	// write changed object to the file:
-	iser::CXmlFileWriteArchive archive2("MyModifiedFile.xml");
+	ifile::CXmlFileWriteArchive archive2("MyModifiedFile.xml");
 	myObject.Serialize(archive2);
 
 	// read original data from file:
-	iser::CXmlFileReadArchive archive3("MyFile.xml");
+	ifile::CXmlFileReadArchive archive3("MyFile.xml");
 	myObject.Serialize(archive3);
 
 	// and write restored object to the file:
-	iser::CXmlFileWriteArchive archive4("RestoredFile.xml");
+	ifile::CXmlFileWriteArchive archive4("RestoredFile.xml");
 	myObject.Serialize(archive4);
 
 	return 0;

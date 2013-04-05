@@ -5,7 +5,7 @@
 // Qt includes
 #include <QtCore/QTimer>
 
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
@@ -73,8 +73,8 @@ protected Q_SLOTS:
 private:
 	I_REF(iproc::IProcessor, m_sampleAcquisitionCompPtr);
 
-	I_REF(iser::IFileLoader, m_sampleLoaderCompPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_sampleLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);

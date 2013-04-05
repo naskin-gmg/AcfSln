@@ -4,8 +4,8 @@
 
 // ACF includes
 #include "ifile/IFileNameParam.h"
-#include "iser/IFileLoader.h"
-#include "ibase/IFileConvertCopy.h"
+#include "ifile/IFilePersistence.h"
+#include "ifileproc/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
 // ACF-Solutions includes
@@ -17,13 +17,13 @@ namespace ifileproc
 
 class CProcessingResultsReviewComp:
 			public ibase::CLoggerComponentBase,
-			virtual public ibase::IFileConvertCopy			
+			virtual public ifileproc::IFileConvertCopy			
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessingResultsReviewComp);
-		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
 		I_ASSIGN(m_inputPathCompPtr, "InputPathObject", "Optional storage of current processed input (file or directory)", false, "InputPathObject");
 		I_ASSIGN(m_processingInputFilePathCompPtr, "ProcessingInputFilePath", "Full path to currently processing file, should be used by supplier as input file path", true, "ProcessingInputFilePath");
 		I_ASSIGN(m_outputSupplierCompPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
@@ -31,7 +31,7 @@ public:
 		I_ASSIGN(m_outputFileSerializerCompPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");		
 	I_END_COMPONENT;
 
-	// reimplemented (ibase::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConvertCopy)
 	virtual bool ConvertFiles(				
 				const QString& inputPath,
 				const QString& outputPath,
@@ -64,7 +64,7 @@ private:
 	I_REF(ifile::IFileNameParam, m_processingInputFilePathCompPtr);
 	I_REF(iproc::ISupplier, m_outputSupplierCompPtr);
 	I_REF(iser::ISerializable, m_outputSupplierSerializerCompPtr);
-	I_REF(iser::IFileLoader, m_outputFileSerializerCompPtr);	
+	I_REF(ifile::IFilePersistence, m_outputFileSerializerCompPtr);	
 };
 
 

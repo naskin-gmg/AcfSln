@@ -8,7 +8,7 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
@@ -24,7 +24,7 @@ namespace iqtcam
 
 
 /**
-	Bitmap loader component implementing interface \c icam::IBitmapAcquisition over \c iser::IFileLoader.
+	Bitmap loader component implementing interface \c icam::IBitmapAcquisition over \c ifile::IFilePersistence.
 */
 class CFileAcquisitionComp:
 			public ibase::CLoggerComponentBase,
@@ -74,7 +74,7 @@ private:
 
 	istd::CIndex2d m_lastImageSize;
 
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
 	I_ATTR(QString, m_defaultDirAttrPtr);
 	I_REF(ifile::IFileNameParam, m_defaultDirParamCompPtr);
 	I_ATTR(QByteArray, m_pathParamIdAttrPtr);

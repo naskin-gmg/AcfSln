@@ -7,7 +7,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "ibase/IFileConvertCopy.h"
+#include "ifileproc/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
 
@@ -22,7 +22,7 @@ namespace ifileproc
 class CCopyFilesTreeComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,
-			virtual public ibase::IFileConvertCopy
+			virtual public ifileproc::IFileConvertCopy
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -35,7 +35,7 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CCopyFilesTreeComp);
-		I_REGISTER_INTERFACE(ibase::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
 		I_ASSIGN(m_fileCopyCompPtr, "FileCopy", "Provide copy of single file", true, "FileCopy");
 		I_ASSIGN_MULTI_1(m_filtersAttrPtr, "Filters", "List of file filters will be copied", true, "*");
 		I_ASSIGN_MULTI_0(m_excludeFiltersAttrPtr, "ExcludeFilters", "List of file filters will be exclude from copy", false);
@@ -44,7 +44,7 @@ public:
 		I_ASSIGN(m_outputSubdirAttrPtr, "OutputSubDir", "Output sub-directory", true, ".");
 	I_END_COMPONENT;
 
-	// reimplemented (ibase::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConvertCopy)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
@@ -85,7 +85,7 @@ protected:
 	bool CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const;
 
 private:
-	I_REF(ibase::IFileConvertCopy, m_fileCopyCompPtr);
+	I_REF(ifileproc::IFileConvertCopy, m_fileCopyCompPtr);
 	I_MULTIATTR(QString, m_filtersAttrPtr);
 	I_MULTIATTR(QString, m_excludeFiltersAttrPtr);
 	I_ATTR(int, m_recursionDepthAttrPtr);

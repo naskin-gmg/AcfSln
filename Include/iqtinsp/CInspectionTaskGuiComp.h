@@ -13,7 +13,7 @@
 #include "istd/TPointerVector.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CMultiModelDispatcherBase.h"
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "ibase/CMessageContainer.h"
 #include "iview/IShape.h"
 #include "iview/IShapeFactory.h"
@@ -133,7 +133,7 @@ private:
 	I_MULTIREF(iqt2d::IViewProvider, m_previewSceneProvidersCompPtr);
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_MULTIATTR(QString, m_namesAttrPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
 	I_REF(imod::IModelEditor, m_generalParamsEditorCompPtr);

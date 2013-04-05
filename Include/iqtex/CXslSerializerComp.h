@@ -6,7 +6,7 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "ibase/CFileSerializerCompBase.h"
+#include "ifile/CFileSerializerCompBase.h"
 #include "ifile/IFileNameParam.h"
 
 
@@ -17,17 +17,17 @@ namespace iqtex
 /**
 	Template implementation of file serializer using loading and storing archive implementation.
 */
-class CXslSerializerComp: public ibase::CFileSerializerCompBase
+class CXslSerializerComp: public ifile::CFileSerializerCompBase
 {
 public:	
-	typedef ibase::CFileSerializerCompBase BaseClass;
+	typedef ifile::CFileSerializerCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CXslSerializerComp);
 		I_ASSIGN(m_xslReadFilePath, "ReadTransformationFile", "Transformation file for reading action", true, "ReadTransformationFile");
 		I_ASSIGN(m_xslWriteFilePath, "WriteTransformationFile", "Transformation file for writing action", true, "WriteTransformationFile");
 	I_END_COMPONENT;
 
-	// reimplemented (iser::IFileLoader)
+	// reimplemented (ifile::IFilePersistence)
 	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 

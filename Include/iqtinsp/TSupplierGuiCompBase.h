@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
 #include "i2d/ICalibrationProvider.h"
@@ -152,8 +152,8 @@ private:
 		VCM_ALWAYS
 	};
 
-	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
@@ -246,7 +246,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::IsLoadParamsSupported() const
 			if (m_paramsLoaderCompPtr->IsOperationSupported(
 						paramsPtr,
 						NULL,
-						iser::IFileLoader::QF_LOAD | iser::IFileLoader::QF_ANONYMOUS)){
+						ifile::IFilePersistence::QF_LOAD | ifile::IFilePersistence::QF_ANONYMOUS)){
 				return true;
 			}
 		}
@@ -266,7 +266,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::IsSaveParamsSupported() const
 			if (m_paramsLoaderCompPtr->IsOperationSupported(
 						paramsPtr,
 						NULL,
-						iser::IFileLoader::QF_SAVE | iser::IFileLoader::QF_ANONYMOUS)){
+						ifile::IFilePersistence::QF_SAVE | ifile::IFilePersistence::QF_ANONYMOUS)){
 				return true;
 			}
 		}
@@ -283,7 +283,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::LoadParams()
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->LoadFromFile(*paramsPtr, "") != iser::IFileLoader::StateFailed){
+			if (m_paramsLoaderCompPtr->LoadFromFile(*paramsPtr, "") != ifile::IFilePersistence::StateFailed){
 				return true;
 			}
 			else{
@@ -306,7 +306,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::SaveParams()
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->SaveToFile(*paramsPtr, "") != iser::IFileLoader::StateFailed){
+			if (m_paramsLoaderCompPtr->SaveToFile(*paramsPtr, "") != ifile::IFilePersistence::StateFailed){
 				return true;
 			}
 			else{

@@ -6,7 +6,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iser/IFileLoader.h"
+#include "ifile/IFilePersistence.h"
 
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
@@ -69,13 +69,13 @@ protected:
 private:
 	I_REF(istd::IChangeable, m_inputDataCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);
-	I_REF(iser::IFileLoader, m_outputDataLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_outputDataLoaderCompPtr);
 
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
