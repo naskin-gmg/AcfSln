@@ -1,11 +1,9 @@
 #include "iprocgui/CDocumentProcessingManagerComp.h"
 
 
-// Qt includes
-#include <QtCore/QElapsedTimer>
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/CGeneralTimeStamp.h"
 
 
 namespace iprocgui
@@ -55,8 +53,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 
 	istd::CChangeNotifier changePtr(outputDocumentPtr);
 
-	QElapsedTimer timer;
-	timer.start();
+    istd::CGeneralTimeStamp timer;
 
 	int retVal = m_processorCompPtr->DoProcessing(
 				m_paramsSetCompPtr.GetPtr(),
@@ -64,11 +61,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 				outputDocumentPtr,
 				m_progressManagerCompPtr.GetPtr());
 
-#if QT_VERSION > 0x040800
-	double processingTime = timer.nsecsElapsed() / 1000000.0;
-#else
-	double processingTime = timer.elapsed();
-#endif
+    double processingTime = timer.GetElapsed();
 
 	SendVerboseMessage(QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
 
@@ -109,8 +102,7 @@ void CDocumentProcessingManagerComp::DoInPlaceProcessing(istd::IChangeable* inpu
 		return;
 	}
 
-	QElapsedTimer timer;
-	timer.start();
+    istd::CGeneralTimeStamp timer;
 
 	int retVal = m_processorCompPtr->DoProcessing(
 				m_paramsSetCompPtr.GetPtr(),
@@ -118,13 +110,9 @@ void CDocumentProcessingManagerComp::DoInPlaceProcessing(istd::IChangeable* inpu
 				outputDocumentPtr.GetPtr(),
 				m_progressManagerCompPtr.GetPtr());
 
-#if QT_VERSION > 0x040800
-	double processingTime = timer.nsecsElapsed() / 1000000.0;
-#else
-	double processingTime = timer.elapsed();
-#endif
+    double processingTime = timer.GetElapsed();
 
-	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
+    SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime * 1000, 2, 'f', 2), "Document processing manager");
 
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");

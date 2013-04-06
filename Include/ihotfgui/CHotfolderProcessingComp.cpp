@@ -4,12 +4,12 @@
 // Qt includes
 #include <QtCore/QDir>
 #include <QtGui/QApplication>
-#include <QtCore/QElapsedTimer>
 #include <QtCore/QMutexLocker>
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
+#include "istd/CGeneralTimeStamp.h"
 #include "ifile/IFileNameParam.h"
 #include "iproc/IProcessor.h"
 
@@ -253,8 +253,8 @@ void CHotfolderProcessingComp::ItemProcessor::Cancel()
 	}
 
 	// wait for 5 seconds for finishing of thread:
-	QElapsedTimer timer;
-	while (isRunning() && !timer.hasExpired(5000)){
+    istd::CGeneralTimeStamp timer;
+    while (isRunning() && timer.GetElapsed() < 5){
 		qApp->processEvents();
 	}
 
@@ -278,8 +278,8 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 		return;
 	}
 
-	QElapsedTimer timer;
-	
+    istd::CGeneralTimeStamp timer;
+
 	if (!m_parent.m_fileConvertCompPtr->ConvertFiles(m_inputFilePath, m_outputFilePath)){
 		m_parent.SendErrorMessage(0, QObject::tr("Processing of  %1 failed").arg(m_inputFilePath), "Hotfolder");
 
@@ -289,7 +289,7 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 		m_processingState = iproc::IProcessor::TS_OK;
 	}
 
-	m_processingTime = timer.elapsed() * 0.001;
+    m_processingTime = timer.GetElapsed();
 }
 
 

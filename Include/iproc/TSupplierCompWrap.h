@@ -4,11 +4,11 @@
 
 // Qt includes
 #include <QtCore/QSet>
-#include <QtCore/QElapsedTimer>
 
 // ACF includes
 #include "istd/IChangeable.h"
 #include "istd/TChangeNotifier.h"
+#include "istd/CGeneralTimeStamp.h"
 #include "imod/IModel.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
@@ -71,7 +71,7 @@ protected:
 		~Timer();
 
 	private:
-		QElapsedTimer m_timer;
+        istd::CGeneralTimeStamp m_timer;
 		const TSupplierCompWrap* m_parentPtr;
 		QString m_measuredFeatureName;
 	};
@@ -419,7 +419,7 @@ template <class Product>
 TSupplierCompWrap<Product>::Timer::Timer(const TSupplierCompWrap* parentPtr, const QString& measuredFeatureName)
 :	m_parentPtr(parentPtr), m_measuredFeatureName(measuredFeatureName)
 {
-	m_timer.start();
+    m_timer.Start();
 }
 
 
@@ -430,7 +430,7 @@ TSupplierCompWrap<Product>::Timer::~Timer()
 		MessagePtr messagePtr(new ibase::CMessage(
 					istd::IInformationProvider::IC_INFO,
 					0,
-					QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.elapsed()),
+                    QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
 					*m_parentPtr->m_diagnosticNameAttrPtr));
 		m_parentPtr->m_messageContainer.AddMessage(messagePtr);
 	}

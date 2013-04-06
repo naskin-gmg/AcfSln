@@ -451,8 +451,9 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
+#if QT_VERSION >= 0x040700
 		m_nodes.reserve(nodesCount);
-
+#endif
 		for (int i = 0; i < nodesCount; ++i){
 			m_nodes.push_back(CEdgeNode());
 			CEdgeNode& node = m_nodes.back();
