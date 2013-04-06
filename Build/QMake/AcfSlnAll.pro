@@ -80,6 +80,9 @@ iedge.file = ../../Include/iedge/QMake/iedge.pro
 SUBDIRS += iedgegui
 iedgegui.file = ../../Include/iedgegui/QMake/iedgegui.pro
 
+SUBDIRS += icmpstr
+icmpstr.file = ../../Include/icmpstr/QMake/icmpstr.pro
+
 
 # Translation
 
@@ -154,4 +157,19 @@ HotfolderGuiPck.file = ../../Impl/HotfolderGuiPck/QMake/HotfolderGuiPck.pro
 
 SUBDIRS += ProcessingGuiPck
 ProcessingGuiPck.file = ../../Impl/ProcessingGuiPck/QMake/ProcessingGuiPck.pro
+
+SUBDIRS += CompositorPck
+CompositorPck.file = ../../Impl/CompositorPck/QMake/CompositorPck.pro
+
+
+#Tool
+
+SUBDIRS += Compositor
+Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
+
+SUBDIRS += XpcEditor
+XpcEditor.file = ../../Impl/XpcEditorExe/QMake/XpcEditor.pro
+
+SUBDIRS += AcfStarter
+AcfStarter.file = ../../Impl/AcfStarterExe/QMake/AcfStarter.pro
 

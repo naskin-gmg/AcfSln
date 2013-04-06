@@ -22,7 +22,7 @@
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Config\VC9\Release.vsprops;..\..\..\Config\VC9\General.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Release.vsprops;$(ACFDIR)\Config\VC9\General.vsprops"
 			UseOfMFC="0"
 			>
 			<Tool
@@ -54,7 +54,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;../../../Include"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -68,9 +68,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="true"
-				AdditionalDependencies="QtGui4.lib"
+				AdditionalDependencies="QtGui4.lib AcfStd.lib AcfQt.lib AcfLoc.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="2"
 			/>
 			<Tool
@@ -99,7 +99,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Debug.vsprops;$(ACFDIR)\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
 			>
 			<Tool
@@ -131,7 +131,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include"
+				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;../../../Include"
 				RuntimeLibrary="3"
 			/>
 			<Tool
@@ -145,9 +145,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtGuid4.lib"
+				AdditionalDependencies="QtGuid4.lib AcfStd.lib AcfQt.lib AcfLoc.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="0"
 			/>
 			<Tool

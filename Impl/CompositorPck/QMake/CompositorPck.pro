@@ -1,11 +1,11 @@
-TARGET = CompositorPck
+include($(ACFDIR)/Config/QMake/ComponentConfig.pri)
+include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
 
-include(../../../Config/QMake/ComponentConfig.pri)
-include(../../../Config/QMake/QtBaseConfig.pri)
+TARGET = CompositorPck
 
 LIBS += -licmpstr
 
 QT += xml
 
-include(../../../Config/QMake/AcfQt.pri)
-include(../../../Config/QMake/AcfStd.pri)
+include($(ACFDIR)/Config/QMake/AcfQt.pri)
+include($(ACFDIR)/Config/QMake/AcfStd.pri)
