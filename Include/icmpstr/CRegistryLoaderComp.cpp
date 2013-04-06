@@ -24,7 +24,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 	istd::CChangeNotifier notifier(&data);
 
 	if (!IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	CVisualRegistry* geometricalRegistryPtr = dynamic_cast<CVisualRegistry*>(&data);
@@ -35,7 +35,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 		if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
 			OnReadError(registryArchive, data, filePath);
 
-			return StateFailed;
+			return OS_FAILED;
 		}
 
 		ReadArchiveEx layoutArchive(GetLayoutPath(filePath), this);
@@ -47,20 +47,20 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 						tr("Layout information cannot be loaded (%1)").arg(filePath));
 		}
 
-		return StateOk;
+		return OS_OK;
 	}
 	else{
 		return BaseClass::LoadFromFile(data, filePath);
 	}
 
-	return StateFailed;
+	return OS_FAILED;
 }
 
 
 int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	const CVisualRegistry* geometricalRegistryPtr = dynamic_cast<const CVisualRegistry*>(&data);
@@ -73,7 +73,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString
 						MI_LOAD_ERROR,
 						tr("Cannot store to file %1").arg(filePath));
 
-			return StateFailed;
+			return OS_FAILED;
 		}
 
 		WriteArchiveEx layoutArchive(GetLayoutPath(filePath), GetVersionInfo(), this);
@@ -85,10 +85,10 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString
 						tr("Layout information cannot be stored (%1)").arg(filePath));
 		}
 
-		return StateOk;
+		return OS_OK;
 	}
 
-	return StateFailed;
+	return OS_FAILED;
 }
 
 

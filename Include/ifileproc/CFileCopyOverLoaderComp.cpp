@@ -62,14 +62,14 @@ bool CFileCopyOverLoaderComp::ConvertFiles(
 	}
 
 	int loadState = m_inputLoaderCompPtr->LoadFromFile(*m_objectCompPtr, inputPath);
-	if (loadState != ifile::IFilePersistence::StateOk){
+	if (loadState != ifile::IFilePersistence::OS_OK){
 		SendErrorMessage(0, "Data could not be loaded", "FileCopyOverLoader");
 
 		return false;
 	}
 
 	int saveState = m_outputLoaderCompPtr->SaveToFile(*m_objectCompPtr, usedOutputPath);
-	if (saveState != ifile::IFilePersistence::StateOk){
+	if (saveState != ifile::IFilePersistence::OS_OK){
 		SendErrorMessage(0, "Data could not be saved", "FileCopyOverLoader");
 
 		return false;

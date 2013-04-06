@@ -23,13 +23,13 @@ namespace ihotf
 int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	istd::CChangeNotifier notifier(&data);
 	iprm::IParamsSet* hotfolderParamsSet = dynamic_cast<iprm::IParamsSet*>(&data);
 	if (hotfolderParamsSet == NULL){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	if (m_monitorSessionsParamIdAttrPtr.IsValid()){
@@ -48,16 +48,16 @@ int CHotfolderLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& f
 int CHotfolderLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	const iprm::IParamsSet* hotfolderParamsSet = dynamic_cast<const iprm::IParamsSet*>(&data);
 	if (hotfolderParamsSet == NULL){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	int retVal = BaseClass::SaveToFile(data, filePath);
-	if (retVal != StateFailed){
+	if (retVal != OS_FAILED){
 		if (m_monitorSessionsParamIdAttrPtr.IsValid()){
 			const iser::ISerializable* monitoringSessionsPtr = dynamic_cast<const iser::ISerializable*>(hotfolderParamsSet->GetParameter(*m_monitorSessionsParamIdAttrPtr));
 			if (monitoringSessionsPtr != NULL){

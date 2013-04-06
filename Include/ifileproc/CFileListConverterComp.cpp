@@ -98,6 +98,10 @@ int CFileListConverterComp::DoProcessing(
 		}
 	}
 
+	if (progressManagerPtr != NULL){
+		progressManagerPtr->OnProgress(progressSessionId, 1.0);
+	}
+
 	int removeFilesCount = filesToRemove.size();
 	for (int fileIndex = 0; fileIndex < removeFilesCount; fileIndex++){
 		QString fileToRemove = filesToRemove[fileIndex];
@@ -105,11 +109,11 @@ int CFileListConverterComp::DoProcessing(
 			SendErrorMessage(0, QObject::tr("File %1 could not be removed").arg(fileToRemove));
 		}
 	}
-
+/*
 	if (progressManagerPtr != NULL){
 		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
-
+*/
 	return retVal;
 }
 

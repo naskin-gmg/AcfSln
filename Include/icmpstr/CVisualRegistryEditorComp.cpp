@@ -1148,7 +1148,7 @@ void CVisualRegistryEditorComp::OnExportToCode()
 		QString filter = tr("C++ code file (*.cpp)");
 		QString file = QFileDialog::getSaveFileName(NULL, tr("Export registry to code"), "", filter);
 		if (!file.isEmpty()){
-			if (m_registryCodeSaverCompPtr->SaveToFile(*registryPtr, file) == ifile::IFilePersistence::StateFailed){
+			if (m_registryCodeSaverCompPtr->SaveToFile(*registryPtr, file) == ifile::IFilePersistence::OS_FAILED){
 				QMessageBox::warning(GetQtWidget(), tr("Error"), tr("Cannot export to file\n%1").arg(file));
 			}
 		}

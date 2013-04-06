@@ -125,7 +125,7 @@ void CSampleAcquisitionGuiComp::on_StartButton_toggled(bool checked)
 void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
 {
 	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetSamplesCount() > 0)){
-		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == ifile::IFilePersistence::StateFailed){
+		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),
@@ -138,7 +138,7 @@ void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
 void CSampleAcquisitionGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),
@@ -151,7 +151,7 @@ void CSampleAcquisitionGuiComp::on_LoadParamsButton_clicked()
 void CSampleAcquisitionGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),

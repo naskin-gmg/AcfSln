@@ -261,6 +261,7 @@ CPropertiesManager::CPropertiesManager(const CPropertiesManager&)
 
 CPropertiesManager::PropertyFactory CPropertiesManager::s_propertyFactory;
 
+
 static struct DefaultPropertyTypesRegistrator
 {
 	DefaultPropertyTypesRegistrator()

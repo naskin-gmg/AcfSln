@@ -283,7 +283,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::LoadParams()
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->LoadFromFile(*paramsPtr, "") != ifile::IFilePersistence::StateFailed){
+			if (m_paramsLoaderCompPtr->LoadFromFile(*paramsPtr, "") != ifile::IFilePersistence::OS_FAILED){
 				return true;
 			}
 			else{
@@ -306,7 +306,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::SaveParams()
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
-			if (m_paramsLoaderCompPtr->SaveToFile(*paramsPtr, "") != ifile::IFilePersistence::StateFailed){
+			if (m_paramsLoaderCompPtr->SaveToFile(*paramsPtr, "") != ifile::IFilePersistence::OS_FAILED){
 				return true;
 			}
 			else{
@@ -463,13 +463,13 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 				default:
 					statusText = QObject::tr("Processing completed without errors");
-					statusIcon = QIcon(":/Icons/StateOk.svg");
+					statusIcon = QIcon(":/Icons/OS_OK.svg");
 					break;
 				}
 			}
 			else{
 				statusText = QObject::tr("Processing completed without errors");
-				statusIcon = QIcon(":/Icons/StateOk.svg");
+				statusIcon = QIcon(":/Icons/OS_OK.svg");
 			}
 			break;
 

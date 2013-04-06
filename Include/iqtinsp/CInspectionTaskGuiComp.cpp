@@ -194,12 +194,12 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 						break;
 
 					default:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+						StateIconLabel->setPixmap(QPixmap(":/Icons/OS_OK.svg"));
 						break;
 				}
 			}
 			else{
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+				StateIconLabel->setPixmap(QPixmap(":/Icons/OS_OK.svg"));
 			}
 			break;
 

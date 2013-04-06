@@ -1,6 +1,10 @@
 #include "iqtmm/CFrameSeqVideoControllerComp.h"
 
 
+// Qt includes
+#include <QtCore/QStringList>
+#include <QtCore/QDir>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -48,11 +52,11 @@ int CFrameSeqVideoControllerComp::DoProcessing(
 		}
 
 		if (m_frameLoaderCompPtr.IsValid() && (m_currentFrameIndex < m_fileList.count())){
-			QString fileName = m_fileList[m_currentFrameIndex];
+			QString filePath = m_fileList.at(m_currentFrameIndex).absoluteFilePath();
 
 			istd::CChangeNotifier notifier(bitmapPtr);
 
-			if (m_frameLoaderCompPtr->LoadFromFile(*bitmapPtr, fileName) == ifile::IFilePersistence::StateOk){
+			if (m_frameLoaderCompPtr->LoadFromFile(*bitmapPtr, filePath) == ifile::IFilePersistence::OS_OK){
 				return TS_OK;
 			}
 		}
@@ -85,7 +89,9 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPl
 		fileFilter.push_back(QString("*.") + fileExtensions[fileExtensionIndex]);
 	}
 	
-	m_fileList.Create(m_mediumUrl, 0, 0, fileFilter);
+	QDir mediumDir(m_mediumUrl);
+
+	m_fileList = mediumDir.entryInfoList(fileFilter, QDir::Files);
 
 	SetCurrentFrame(-1);
 
@@ -232,11 +238,11 @@ bool CFrameSeqVideoControllerComp::LoadCurrentFrame()
 	}
 
 	if (m_frameLoaderCompPtr.IsValid() && m_frameDataCompPtr.IsValid() && (m_currentFrameIndex < m_fileList.count())){
-		QString currentFile = m_fileList[m_currentFrameIndex];
+		QString currentFile = m_fileList[m_currentFrameIndex].absoluteFilePath();
 
 		int loadState = m_frameLoaderCompPtr->LoadFromFile(*m_frameDataCompPtr, currentFile);
 
-		return (loadState == ifile::IFilePersistence::StateOk);
+		return (loadState == ifile::IFilePersistence::OS_OK);
 	}
 	else{
 		return false;

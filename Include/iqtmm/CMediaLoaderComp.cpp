@@ -59,7 +59,7 @@ int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fileP
 		imm::IMediaController* controllerPtr = dynamic_cast<imm::IMediaController*>(&data);
 		if (controllerPtr != NULL){
 			if (controllerPtr->OpenMediumUrl(filePath, *m_autoPlayAttrPtr)){
-				return StateOk;
+				return OS_OK;
 			}
 			else{
 				SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot open media '%1'").arg(filePath));
@@ -70,13 +70,13 @@ int CMediaLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fileP
 		}
 	}
 
-	return StateFailed;
+	return OS_FAILED;
 }
 
 
 int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const QString&/* filePath*/) const
 {
-	return StateFailed;
+	return OS_FAILED;
 }
 
 

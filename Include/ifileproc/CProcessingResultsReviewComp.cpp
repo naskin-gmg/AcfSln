@@ -54,7 +54,7 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 
 	CProcessSerializer processSerializer(this, inputPath);
 
-	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath) == ifile::IFilePersistence::StateOk){
+	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath) == ifile::IFilePersistence::OS_OK){
 		return true;
 	}
 

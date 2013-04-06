@@ -73,22 +73,22 @@ bool CWavSamplesLoaderComp::IsOperationSupported(
 
 int CWavSamplesLoaderComp::LoadFromFile(istd::IChangeable& /*data*/, const QString& /*filePath*/) const
 {
-	return StateFailed;
+	return OS_FAILED;
 }
 
 
 int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
 	QFile fileStream(filePath);
 	if (!fileStream.open(QIODevice::WriteOnly | QIODevice::Truncate)){
-		return StateFailed;
+		return OS_FAILED;
 	}
 
-	int retVal = StateFailed;
+	int retVal = OS_FAILED;
 
 	const IDataSequence* sequencePtr = dynamic_cast<const IDataSequence*>(&data);
 	Q_ASSERT(sequencePtr != NULL);
@@ -153,7 +153,7 @@ int CWavSamplesLoaderComp::SaveToFile(const istd::IChangeable& data, const QStri
 			}
 		}
 
-		retVal = (fileStream.error() == QFile::NoError)? StateOk : StateFailed;
+		retVal = (fileStream.error() == QFile::NoError)? OS_OK : OS_FAILED;
 	}
 
 	fileStream.close();

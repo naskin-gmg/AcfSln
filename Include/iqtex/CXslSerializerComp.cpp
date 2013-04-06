@@ -31,13 +31,13 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& fil
 		if (serializablePtr->Serialize(archive)){
 			changePtr.SetPtr(&data);
 
-			return StateOk;
+			return OS_OK;
 		}
 		else{
 			OnReadError(archive, data, filePath);
 		}
 	}
-	return StateFailed;
+	return OS_FAILED;
 }
 
 
@@ -55,14 +55,14 @@ int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString&
 		}
 
 		if ((const_cast<iser::ISerializable*>(serializablePtr))->Serialize(archive)){
-			return StateOk;
+			return OS_OK;
 		}
 		else{
 			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file"));
 		}
 	}
 
-	return StateFailed;
+	return OS_FAILED;
 }
 
 

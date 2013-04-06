@@ -56,7 +56,7 @@ void CProcessorControlGuiComp::on_LiveDataAcquisitionButton_toggled(bool checked
 void CProcessorControlGuiComp::on_SaveDataButton_clicked()
 {
 	if (m_outputDataLoaderCompPtr.IsValid() && m_outputDataCompPtr.IsValid()){
-		if (m_outputDataLoaderCompPtr->SaveToFile(*m_outputDataCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_outputDataLoaderCompPtr->SaveToFile(*m_outputDataCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::information(
 						GetQtWidget(),
 						tr("Error"),
@@ -69,7 +69,7 @@ void CProcessorControlGuiComp::on_SaveDataButton_clicked()
 void CProcessorControlGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::critical(
 						GetQtWidget(),
 						tr("Error"),
@@ -82,7 +82,7 @@ void CProcessorControlGuiComp::on_LoadParamsButton_clicked()
 void CProcessorControlGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						tr("Error"),

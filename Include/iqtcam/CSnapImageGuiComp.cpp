@@ -166,7 +166,7 @@ void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
 void CSnapImageGuiComp::on_SaveImageButton_clicked()
 {
 	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
-		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),
@@ -179,7 +179,7 @@ void CSnapImageGuiComp::on_SaveImageButton_clicked()
 void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),
@@ -192,7 +192,7 @@ void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 void CSnapImageGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::StateFailed){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),

@@ -17,7 +17,7 @@ namespace iqtcam
 QIcon CMultiBitmapViewComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category)
 {
 	static QIcon defaultIcon(":/Icons/StateUnknown.svg");
-	static QIcon infoIcon(":/Icons/StateOk.svg");
+	static QIcon infoIcon(":/Icons/OS_OK.svg");
 	static QIcon warningIcon(":/Icons/StateWarning.svg");
 	static QIcon errorIcon(":/Icons/StateInvalid.svg");
 

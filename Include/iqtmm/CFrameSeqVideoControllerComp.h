@@ -5,13 +5,13 @@
 // Qt includes
 #include <QtCore/QObject>
 #include <QtCore/QTimer>
+#include <QtCore/QFileInfoList>
 
 // ACF includes
 #include "ifile/IFilePersistence.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "icomp/CComponentBase.h"
 #include "iproc/TSyncProcessorCompBase.h"
-#include "ifile/CFileList.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -96,7 +96,7 @@ private:
 
 	QString m_mediumUrl;
 
-	ifile::CFileList m_fileList;
+	QFileInfoList m_fileList;
 	bool m_isPlaying;
 
 	bool m_isFrameLoaded;

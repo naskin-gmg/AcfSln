@@ -76,7 +76,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& f
 
 					SendInfoMessage(MI_BITMAP_TYPE, tr("Cannot create bitmap"));
 
-					return StateFailed;
+					return OS_FAILED;
 				}
 
 				QPainter painter(&m_lastBitmap.GetQImageRef());
@@ -88,25 +88,25 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& f
 			else{
 				SendInfoMessage(MI_CANNOT_LOAD, tr("Cannot load SVG file '%1'").arg(filePath));
 
-				return StateFailed;
+				return OS_FAILED;
 			}
 		}
 
 		if (imagePtr->CopyFrom(m_lastBitmap)){
-			return StateOk;
+			return OS_OK;
 		}
 		else{
 			SendInfoMessage(MI_BITMAP_TYPE, tr("Cannot copy bitmap from Qt bitmap"));
 		}
 	}
 
-	return StateFailed;
+	return OS_FAILED;
 }
 
 
 int CSvgBitmapLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const QString&/* filePath*/) const
 {
-	return StateFailed;
+	return OS_FAILED;
 }
 
 

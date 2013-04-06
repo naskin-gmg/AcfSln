@@ -105,7 +105,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 				istd::TDelPtr<CacheObject> objectPtr(new CacheObject);
 
 				if (objectPtr.IsValid()){
-					if (m_cacheLoaderCompPtr->LoadFromFile(*objectPtr, cacheFilePath) == ifile::IFilePersistence::StateOk){
+					if (m_cacheLoaderCompPtr->LoadFromFile(*objectPtr, cacheFilePath) == ifile::IFilePersistence::OS_OK){
 						m_ownedObjects.insert(objectPtr.GetPtr());
 
 						return objectPtr.PopPtr();
@@ -123,7 +123,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 		if (objectPtr != NULL){
 			QString cacheFilePath = CalcCacheFilePath(key);
 			if (!cacheFilePath.isEmpty() && m_cacheLoaderCompPtr.IsValid()){
-				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath) == ifile::IFilePersistence::StateOk){
+				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath) == ifile::IFilePersistence::OS_OK){
 					OnCacheFileSaved(key, cacheFilePath);
 
 					m_keyToFileNameMap[key] = cacheFilePath;
