@@ -5,7 +5,10 @@ TARGET = XpcEditor
 
 RESOURCES += ../*.qrc
 
-LIBS += -licmpstr
+INCLUDEPATH += $$PWD/../../../Impl
+INCLUDEPATH += $$PWD/../../../Include
+
+LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lipackage
 LIBS += -lAcfLoc
 
 HEADERS -= ../*.h

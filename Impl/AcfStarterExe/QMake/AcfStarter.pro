@@ -3,6 +3,7 @@ include($(ACFDIR)/Config/QMake/QtGuiBaseConfig.pri)
 
 TARGET = AcfStarter
 
-RESOURCES += ../*.qrc
+#RESOURCES += ../*.qrc
 
 LIBS += -liqtgui
+
