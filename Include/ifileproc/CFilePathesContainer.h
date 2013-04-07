@@ -27,7 +27,7 @@ public:
 	virtual bool InsertFile(const QString& file, int index = -1, bool ignoreNonExistingFiles = false);
 
 	// reimplemented (ifile::IFileListProvider)
-	virtual QStringList GetFileList() const;
+	virtual const QFileInfoList& GetFileList() const;
 
 private:
 	QFileInfoList m_fileList;

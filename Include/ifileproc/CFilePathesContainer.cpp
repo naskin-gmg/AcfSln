@@ -50,17 +50,9 @@ bool CFilePathesContainer::InsertFile(const QString& file, int index, bool ignor
 
 // reimplemented (ifile::IFileListProvider)
 
-QStringList CFilePathesContainer::GetFileList() const
+const QFileInfoList& CFilePathesContainer::GetFileList() const
 {
-	QStringList fileList;
-
-	for (		QFileInfoList::ConstIterator index = m_fileList.constBegin(); 
-				index != m_fileList.constEnd();
-				index++){
-		fileList.push_back((*index).absoluteFilePath());
-	}
-
-	return fileList;
+	return m_fileList;
 }
 
 
