@@ -79,7 +79,13 @@ void CColorPatternComparatorGuiComp::UpdateGui(int updateFlags)
 			}
 			else if(colorValuesCount == 6){
 				ColorTable->setRowCount(3);
-				ColorTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+
+			#if QT_VERSION < 0x050000
+				ColorTable->verticalHeader()->setResizeMode(QHeaderView::Stretch);
+			#else
+				ColorTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+			#endif
+
 				ColorTable->setVerticalHeaderItem(0, new QTableWidgetItem(tr("Hue")));
 				ColorTable->setVerticalHeaderItem(1, new QTableWidgetItem(tr("Saturation")));
 				ColorTable->setVerticalHeaderItem(2, new QTableWidgetItem(tr("Value")));

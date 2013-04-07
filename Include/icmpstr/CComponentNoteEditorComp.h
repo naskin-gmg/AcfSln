@@ -7,11 +7,8 @@
 
 // ACF includes
 #include "imod/CMultiModelDispatcherBase.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "icmpstr/IElementSelectionInfo.h"
-
 #include "Generated/ui_CComponentNoteEditorComp.h"
 
 

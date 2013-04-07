@@ -294,9 +294,11 @@ void CRegistryTreeViewComp::OnGuiCreated()
 
 	MainSplitter->setSizes(sizes);
 
-//	RegistryTree->setItemDelegate(new iqtgui::CItemDelegate);
-
+#if QT_VERSION < 0x050000
 	RegistryTree->header()->setResizeMode(QHeaderView::Stretch);
+#else
+	RegistryTree->header()->setSectionResizeMode(QHeaderView::Stretch);
+#endif
 }
 
 

@@ -418,8 +418,8 @@ void CComponentPromotorDialogComp::OnPromoteCommand()
 
 	if (BaseClass3::exec() == QDialog::Accepted){
 		icomp::CComponentAddress newAddress(
-					PackageNameCB->currentText().toAscii(),
-					ComponentNameCB->currentText().toAscii());
+					PackageNameCB->currentText().toLatin1(),
+					ComponentNameCB->currentText().toLatin1());
 
 		istd::CChangeNotifier registryNotifier(registryPtr, icomp::IRegistry::CF_ELEMENT_REMOVED | icomp::IRegistry::CF_ELEMENT_ADDED | istd::IChangeable::CF_MODEL);
 

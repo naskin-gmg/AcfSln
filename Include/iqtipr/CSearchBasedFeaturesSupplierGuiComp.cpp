@@ -181,7 +181,11 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+#if QT_VERSION < 0x050000
 	ResultsList->header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+	ResultsList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#endif
 }
 
 

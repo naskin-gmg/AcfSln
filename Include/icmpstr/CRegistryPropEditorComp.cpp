@@ -174,7 +174,11 @@ void CRegistryPropEditorComp::OnGuiCreated()
 	connect(KeywordsEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
 	connect(this, SIGNAL(AfterExportsChanged()), this, SLOT(OnUpdateExportsTree()), Qt::QueuedConnection);
 
+#if QT_VERSION < 0x050000
 	OverviewTree->header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+	OverviewTree->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#endif
 	OverviewTree->setStyleSheet("QTreeView {background: palette(window)} QTreeView::branch {background: palette(window);} QTreeView::item {min-height: 25px}");
 }
 

@@ -209,8 +209,12 @@ bool CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
 double CSceneProviderGuiComp::GetScale() const
 {
 	QMatrix currentMatrix = SceneView->matrix();
-	double currentScale = sqrt(currentMatrix.det());
 
+#if QT_VERSION < 0x050000
+	double currentScale = sqrt(currentMatrix.det());
+#else
+	double currentScale = sqrt(currentMatrix.determinant());
+#endif
 	return currentScale;
 }
 

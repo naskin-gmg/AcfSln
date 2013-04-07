@@ -172,7 +172,12 @@ void CHotfolderGuiComp::OnGuiCreated()
 	m_hotfolderCommands.InsertChild(hotfolderMenuPtr, true);
 
 	// some visual details:
+#if QT_VERSION < 0x050000
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+    FileList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#endif
+
 	FileList->header()->setStretchLastSection(true);
 
 	// initialize state icons map:

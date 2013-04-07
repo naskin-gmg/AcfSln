@@ -1238,7 +1238,7 @@ void CVisualRegistryEditorComp::OnEmbeddedComponentButtonClicked()
 {
 	QToolButton* buttonPtr = dynamic_cast<QToolButton*>(sender());
 	if ((buttonPtr != NULL) && (buttonPtr != RootButton)){
-		QByteArray id = buttonPtr->objectName().toAscii();
+		QByteArray id = buttonPtr->objectName().toLatin1();
 
 		UpdateEmbeddedRegistryView(id);
 	}

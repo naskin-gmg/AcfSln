@@ -1028,7 +1028,12 @@ void CPackageOverviewComp::OnGuiCreated()
 	PackagesList->setColumnCount(1);
 	PackagesList->setItemDelegate(new CItemDelegate());
 
+#if QT_VERSION < 0x050000
 	PackagesList->header()->setResizeMode(0, QHeaderView::Stretch);
+#else
+	PackagesList->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+#endif
+
 	PackagesList->header()->hide();
 
 	QPalette palette = qApp->palette();

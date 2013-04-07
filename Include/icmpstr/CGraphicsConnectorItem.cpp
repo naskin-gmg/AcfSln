@@ -190,7 +190,7 @@ QRectF CGraphicsConnectorItem::boundingRect() const
 	double extra = penWidth + GP_RADIUS2;
 
 	QRectF rect = m_connectionLine.boundingRect();
-	rect = rect.unite(QRectF(m_touchPoint, QSize(1, 1)));
+	rect = rect.united(QRectF(m_touchPoint, QSize(1, 1)));
 
 	return rect.adjusted(-extra, -extra, extra, extra);
 }

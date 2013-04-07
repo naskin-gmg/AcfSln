@@ -204,7 +204,7 @@ bool CXslTransformationReadArchive::Process(char& value)
 	QString text = PullTextNode();
 
 	if (!text.isEmpty()){
-		value = text.at(0).toAscii();
+        value = text.at(0).toLatin1();
 
 		return true;
 	}

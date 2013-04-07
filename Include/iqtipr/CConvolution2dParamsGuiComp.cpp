@@ -53,8 +53,13 @@ void CConvolution2dParamsGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+#if QT_VERSION < 0x050000
 	KernelTable->verticalHeader()->setResizeMode(QHeaderView::Stretch);
 	KernelTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+#else
+	KernelTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	KernelTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+#endif
 }
 
 

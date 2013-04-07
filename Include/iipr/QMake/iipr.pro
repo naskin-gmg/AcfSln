@@ -1,11 +1,9 @@
 include($(ACFDIR)/Config/QMake/StaticConfig.pri)
 
 
-win32-msvc*{
+win32-msvc* | *-gcc*{
 	QMAKE_CXXFLAGS += /openmp
 }
-else{
-	QMAKE_CXXFLAGS += -fopenmp
-}
+
 
 TARGET = iipr
