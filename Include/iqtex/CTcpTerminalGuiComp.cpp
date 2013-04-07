@@ -91,7 +91,7 @@ void CTcpTerminalGuiComp::on_SendButton_clicked()
 {
 	QString command = CommandCB->currentText();
 
-    m_socket.write((command + "\n").toLatin1());
+	m_socket.write((command + "\n").toLatin1());
 
 	QTreeWidgetItem* lineItemPtr = new QTreeWidgetItem(SentList);
 	lineItemPtr->setText(0, command);

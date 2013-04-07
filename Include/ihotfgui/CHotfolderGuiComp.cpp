@@ -175,7 +175,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 #if QT_VERSION < 0x050000
 	FileList->header()->setResizeMode(QHeaderView::ResizeToContents);
 #else
-    FileList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	FileList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 #endif
 
 	FileList->header()->setStretchLastSection(true);
