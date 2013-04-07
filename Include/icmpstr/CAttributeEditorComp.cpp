@@ -440,8 +440,8 @@ void CAttributeEditorComp::UpdateAttributesView()
 						if (attributeInfoPtr != NULL){
 							AttrInfo& attrInfo = m_attrInfosMap[attributeId][elementId];
 
-							attrInfo.elementPtr.SetPtr(elementPtr);
-							attrInfo.infoPtr.SetPtr(attributeInfoPtr);
+							attrInfo.elementPtr = elementPtr;
+							attrInfo.infoPtr = attributeInfoPtr;
 						}
 					}
 				}
@@ -457,9 +457,9 @@ void CAttributeEditorComp::UpdateAttributesView()
 
 						AttrInfo& attrInfo = m_attrInfosMap[attributeId][elementId];
 
-						Q_ASSERT(!(attrInfo.elementPtr.IsValid() && (elementPtr == NULL)));	// check if we dont reset existing element pointer, it shouldn't happen
-						attrInfo.elementPtr.SetPtr(elementPtr);
-						attrInfo.staticInfoPtr.SetPtr(infoPtr->GetAttributeInfo(attributeId));
+						Q_ASSERT(!((attrInfo.elementPtr != NULL) && (elementPtr == NULL)));	// check if we dont reset existing element pointer, it shouldn't happen
+						attrInfo.elementPtr = elementPtr;
+						attrInfo.staticInfoPtr = infoPtr->GetAttributeInfo(attributeId);
 					}
 				}
 			}
@@ -772,7 +772,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			isAttributeError = true;
 		}
 
-		if (attrInfo.infoPtr.IsValid()){
+		if (attrInfo.infoPtr != NULL){
 			if (!attributeExportValue.isEmpty() && (attrInfo.infoPtr->exportId != attributeExportValue)){
 				attributeImportText = tr("<multi selection>");
 			}
@@ -783,7 +783,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		}
 
 		const iser::IObject* attributePtr = NULL;
-		if (attrInfo.infoPtr.IsValid() && attrInfo.infoPtr->attributePtr.IsValid()){
+		if ((attrInfo.infoPtr != NULL) && attrInfo.infoPtr->attributePtr.IsValid()){
 			isAttributeEnabled = true;
 			attributePtr = attrInfo.infoPtr->attributePtr.GetPtr();
 		}
@@ -793,7 +793,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		QString text;
 
 		QByteArray currentAttrTypeId;
-		if (attrInfo.infoPtr.IsValid()){
+		if (attrInfo.infoPtr != NULL){
 			currentAttrTypeId = attrInfo.infoPtr->attributeTypeName;
 			if (!currentAttrTypeId.isEmpty()){
 				if (attributeValueTypeId.isEmpty()){
@@ -2101,15 +2101,15 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 					++elemIter){
 			const AttrInfo& attributeInfo = elemIter.value();
 
-			icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = attributeInfo.infoPtr.GetPtr();
+			icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = attributeInfo.infoPtr;
 
-			istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(attributeInfo.elementPtr.GetPtr(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+			istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(attributeInfo.elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 			if (!elementPtr.IsValid()){
 				continue;
 			}
 
 			if ((attributeInfoPtr == NULL) && !value.isEmpty()){
-				Q_ASSERT(attributeInfo.staticInfoPtr.IsValid());	// attributeInfo.infoPtr or attributeInfo.staticInfoPtr must be valid for attribute!
+				Q_ASSERT(attributeInfo.staticInfoPtr != NULL);	// attributeInfo.infoPtr or attributeInfo.staticInfoPtr must be valid for attribute!
 
 				QByteArray attributeValueTypeId = attributeInfo.staticInfoPtr->GetAttributeTypeName();
 

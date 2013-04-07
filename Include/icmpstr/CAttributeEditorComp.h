@@ -113,9 +113,9 @@ Q_SIGNALS:
 protected:
 	struct AttrInfo
 	{
-		istd::TPointerBase<icomp::IRegistryElement> elementPtr;
-		istd::TPointerBase<icomp::IRegistryElement::AttributeInfo> infoPtr;
-		istd::TPointerBase<const icomp::IAttributeStaticInfo> staticInfoPtr;
+		icomp::IRegistryElement* elementPtr;
+		icomp::IRegistryElement::AttributeInfo* infoPtr;
+		const icomp::IAttributeStaticInfo* staticInfoPtr;
 	};
 
 	typedef QMap<QByteArray, AttrInfo> ElementIdToAttrInfoMap;
