@@ -440,6 +440,9 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
+		int category = infoProviderPtr == NULL ? 
+			istd::IInformationProvider::IC_INFO:
+			infoProviderPtr->GetInformationCategory();
 
 		int workStatus = supplierPtr->GetWorkStatus();
 
@@ -449,8 +452,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 			break;
 
 		case iproc::ISupplier::WS_OK:
-			if (infoProviderPtr != NULL){
-				switch (infoProviderPtr->GetInformationCategory()){
+			switch (category){
 				case istd::IInformationProvider::IC_WARNING:
 					statusText = QObject::tr("Processing completed with warnings");
 					statusIcon = QIcon(":/Icons/StateWarning.svg");
@@ -463,14 +465,9 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 				default:
 					statusText = QObject::tr("Processing completed without errors");
-					statusIcon = QIcon(":/Icons/OS_OK.svg");
+					statusIcon = QIcon(":/Icons/StateOk.svg");
 					break;
 				}
-			}
-			else{
-				statusText = QObject::tr("Processing completed without errors");
-				statusIcon = QIcon(":/Icons/OS_OK.svg");
-			}
 			break;
 
 		case iproc::ISupplier::WS_CANCELED:
