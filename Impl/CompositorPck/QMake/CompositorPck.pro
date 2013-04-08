@@ -3,7 +3,7 @@ include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
 
 TARGET = CompositorPck
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lipackage
+LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr
 
 QT += xml
 

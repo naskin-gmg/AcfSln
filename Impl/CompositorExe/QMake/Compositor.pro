@@ -3,12 +3,12 @@ include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
 
 TARGET = Compositor
 
+INCLUDEPATH += ../../../Include
+INCLUDEPATH += ../../../Impl
+
 RESOURCES += ../*.qrc
 
-INCLUDEPATH += $$PWD/../../../Impl
-INCLUDEPATH += $$PWD/../../../Include
-
-LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lipackage
+LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lAcfSlnLoc
 LIBS += -lAcfLoc
 
 HEADERS -= ../*.h
