@@ -35,6 +35,7 @@ public:
 							Ui::CUserGuiComp, iauth::IUsersManager> > BaseClass;
 
 	I_BEGIN_COMPONENT(CUserGuiComp);
+		I_REGISTER_INTERFACE(iauth::IPasswordChanger);
 		I_ASSIGN(m_rightsProviderIfPtr, "RightsProvider", "RightsProvider", false, "RightsProvider");
 		I_ASSIGN(m_rightsModelIfPtr, "RightsProvider", "RightsProvider", true, "RightsProvider");
 		I_ASSIGN(m_userLoginIfPtr, "RightsProvider", "RightsProvider", true, "RightsProvider");
