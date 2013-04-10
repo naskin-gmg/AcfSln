@@ -4,7 +4,3 @@ xcopy /Y %QTDIR%\plugins\iconengines\*.* ..\..\Bin\ReleaseVC9\iconengines\*.*
 
 copy /Y %ACFDIR%\Bin\ReleaseVC8\Acf.exe ..\..\Bin\ReleaseVC9
 
-copy /Y %AVTDIR%\FireGrab\*.dll ..\..\Bin\ReleaseVC9
-copy /Y %MILDIR%\Dll\*.dll ..\..\Bin\ReleaseVC9
-copy /Y %OPENCVDIR%\Bin\*.dll ..\..\Bin\ReleaseVC9
-copy /Y %FFMPEGDIR_20121010%\bin\*.dll ..\..\Bin\ReleaseVC9
