@@ -34,6 +34,11 @@ I_EXPORT_COMPONENT(
 			"Allows manage of list of users",
 			"Authentication Manager User Rights" IM_TAG("\"User Management\""));
 
+I_EXPORT_COMPONENT(
+			RightsBasedEnabler,
+			"Enabling state based on a rights provider",
+			"Authentication Rights Enable Allow" IM_TAG("\"User Management\""));
+
 
 } // namespace AuthorizationPck
 

@@ -148,6 +148,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CRightsBasedEnablerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleLoginComp.cpp"
 				>
 			</File>
@@ -172,6 +176,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CRightsBasedEnablerComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CSimpleLoginComp.h"
 				>
