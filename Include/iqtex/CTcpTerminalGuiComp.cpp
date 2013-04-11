@@ -10,7 +10,7 @@ namespace iqtex
 
 
 CTcpTerminalGuiComp::CTcpTerminalGuiComp()
-:	m_connectedIcon(":/Icons/OS_OK.svg"),
+:	m_connectedIcon(":/Icons/StateOk.svg"),
 	m_disconnectedIcon(":/Icons/StateInvalid.svg")
 {
 	QObject::connect(&m_connectTimer, SIGNAL(timeout()), this, SLOT(OnConectTimer()));
