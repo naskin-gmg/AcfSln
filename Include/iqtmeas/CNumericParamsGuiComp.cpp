@@ -83,7 +83,11 @@ void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 
 		m_valueWidgets.SetCount(valuesCount);
 		for (int i = widgetsCount; i < valuesCount; i++){
-			CNumericValueWidget* valueWidgetPtr = new CNumericValueWidget(panelPtr, *m_isSliderVisibleAttrPtr);
+			CNumericValueWidget* valueWidgetPtr = 
+				new CNumericValueWidget(panelPtr, 
+					*m_isSliderVisibleAttrPtr, 
+					*m_inputPolicyAttrPtr);
+			
 			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
 
 			m_valueWidgets.SetElementAt(i, valueWidgetPtr);

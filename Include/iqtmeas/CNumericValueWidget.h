@@ -22,7 +22,7 @@ class CNumericValueWidget:
 	Q_OBJECT
 
 public:
-	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true);
+	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, int inputPolicy = 0);
 
 	void SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo);
 

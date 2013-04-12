@@ -41,6 +41,7 @@ public:
 	I_BEGIN_COMPONENT(CNumericParamsGuiComp);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
+		I_ASSIGN(m_inputPolicyAttrPtr, "InputSizePolicy", "0 - minimal width (default)\n1 - expanding input \n2 - label and input have same width", true, 0);
 	I_END_COMPONENT;
 
 	virtual ~CNumericParamsGuiComp();
@@ -60,6 +61,7 @@ public Q_SLOTS:
 
 private:
 	I_ATTR(bool, m_isSliderVisibleAttrPtr);
+	I_ATTR(int, m_inputPolicyAttrPtr);
 
 	istd::TPointerVector<CNumericValueWidget> m_valueWidgets;
 };
