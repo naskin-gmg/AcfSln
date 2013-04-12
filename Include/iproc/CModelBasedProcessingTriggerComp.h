@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "imod/TSingleModelObserverBase.h"
 
@@ -18,11 +18,11 @@ namespace iproc
 	Component to trigger a processing action depending on model changes.
 */
 class CModelBasedProcessingTriggerComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public imod::CSingleModelObserverBase
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CModelBasedProcessingTriggerComp);
 		I_REGISTER_INTERFACE(imod::IObserver);

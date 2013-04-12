@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
 
 #include "iqtsig/iqtsig.h"
@@ -27,11 +27,11 @@ namespace iqtsig
 	\li	maxValue	user defined minimal value.
 */
 class CScriptDataProcessorComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public iproc::CSyncProcessorBase
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CScriptDataProcessorComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);

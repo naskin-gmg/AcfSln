@@ -369,7 +369,7 @@ QString CRegistryPropEditorComp::ConvertToKeyword(const QString& input, const QS
 
 // public methods of embedded class TextLog
 
-// reimplemented (ibase::IMessageConsumer)
+// reimplemented (ilog::IMessageConsumer)
 
 bool CRegistryPropEditorComp::TextLog::IsMessageSupported(
 			int /*messageCategory*/,

@@ -9,7 +9,7 @@
 // ACF includes
 #include "imod/CMultiModelDispatcherBase.h"
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "ibase/ICommandsProvider.h"
 
 #include "idoc/IDocumentManager.h"
@@ -26,13 +26,13 @@ namespace iprocgui
 
 class CDocumentProcessingManagerCompBase:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			protected imod::CMultiModelDispatcherBase,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	
 	I_BEGIN_BASE_COMPONENT(CDocumentProcessingManagerCompBase);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);

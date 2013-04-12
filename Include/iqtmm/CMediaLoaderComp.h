@@ -6,7 +6,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iqtmm/iqtmm.h"
 
@@ -17,11 +17,11 @@ namespace iqtmm
 
 class CMediaLoaderComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFilePersistence
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CMediaLoaderComp);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);

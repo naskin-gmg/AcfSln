@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "iser/ISerializable.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "imeas/CSimpleNumericValue.h"
 
 // QSF includes

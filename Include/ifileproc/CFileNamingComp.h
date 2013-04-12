@@ -5,7 +5,7 @@
 // ACF includes
 #include "ifile/IFilePersistence.h"
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "ifile/IFileNameParam.h"
 
@@ -24,11 +24,11 @@ namespace ifileproc
 	\sa ifileproc::IFileNaming
 */
 class CFileNamingComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileNaming
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileNamingComp);
 		I_REGISTER_INTERFACE(ifileproc::IFileNaming);

@@ -12,7 +12,7 @@
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "ifileproc/IFileConvertCopy.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 // AcfSln includes
 #include "ihotf/IHotfolderProcessingInfo.h"
@@ -26,11 +26,11 @@ namespace ihotfgui
 /**
 	Hotfolder representation.
 */
-class CHotfolderProcessingComp: public QObject, public ibase::CLoggerComponentBase
+class CHotfolderProcessingComp: public QObject, public ilog::CLoggerComponentBase
 {
 	Q_OBJECT
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderProcessingComp);
 		I_ASSIGN(m_fileConvertCompPtr, "FileConverter", "File converter", true, "FileConverter");

@@ -2028,7 +2028,7 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         InspectionTask

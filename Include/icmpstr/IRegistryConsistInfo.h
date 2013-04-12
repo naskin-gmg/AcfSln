@@ -8,11 +8,10 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-
 #include "icomp/IRegistry.h"
+#include "ilog/IMessageConsumer.h"
 
-#include "ibase/IMessageConsumer.h"
-
+// ACF-Solutions includes
 #include "icmpstr/icmpstr.h"
 
 
@@ -60,7 +59,7 @@ public:
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
-				ibase::IMessageConsumer* reasonConsumerPtr) const = 0;
+				ilog::IMessageConsumer* reasonConsumerPtr) const = 0;
 
 	/**
 		Check if element is valid.
@@ -75,7 +74,7 @@ public:
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
-				ibase::IMessageConsumer* reasonConsumerPtr) const = 0;
+				ilog::IMessageConsumer* reasonConsumerPtr) const = 0;
 
 	/**
 		Check if attribute is valid.
@@ -92,7 +91,7 @@ public:
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
-				ibase::IMessageConsumer* reasonConsumerPtr) const = 0;
+				ilog::IMessageConsumer* reasonConsumerPtr) const = 0;
 	/**
 		Get icon of component.
 	*/

@@ -6,7 +6,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iimg/CBitmap.h"
 
@@ -22,11 +22,11 @@ namespace iqtmm
 */
 class CSvgBitmapLoaderComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFilePersistence
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSvgBitmapLoaderComp);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);

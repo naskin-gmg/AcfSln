@@ -8,7 +8,7 @@
 
 // ACF includes
 #include "ifileproc/IFileConvertCopy.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 
 namespace ifileproc
@@ -21,11 +21,11 @@ namespace ifileproc
 */
 class CCopyFilesTreeComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileConvertCopy
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	enum MessageId
 	{

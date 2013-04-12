@@ -2,7 +2,7 @@
 #define iproc_TSyncProcessorCompBase_included
 
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iproc/TSyncProcessorWrap.h"
 
@@ -18,11 +18,11 @@ namespace iproc
 */
 template <class Base, class Interface = Base>
 class TSyncProcessorCompBase:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public iproc::TSyncProcessorWrap<Base>
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef iproc::TSyncProcessorWrap<Base> BaseClass2;
 	typedef Interface InterfaceType;
 

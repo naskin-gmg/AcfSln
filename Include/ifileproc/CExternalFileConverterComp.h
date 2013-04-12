@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "ifileproc/IFileConvertCopy.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iprm/INameParam.h"
 #include "ifile/IFileNameParam.h"
@@ -35,13 +35,13 @@ namespace ifileproc
 */
 class CExternalFileConverterComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileConvertCopy
 {
 	Q_OBJECT
 
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CExternalFileConverterComp);
 		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);

@@ -693,11 +693,11 @@ void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* i
 
 // private methods
 
-void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex)
+void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex)
 {
 	m_resultMessagesMap[taskIndex].CopyFrom(messageContainer, istd::IChangeable::CM_CONVERT);
 
-	ibase::IMessageContainer::Messages messagesList = m_resultMessagesMap[taskIndex].GetMessages();
+	ilog::IMessageContainer::Messages messagesList = m_resultMessagesMap[taskIndex].GetMessages();
 
 	int messagesCount = messagesList.count();
 	if (messagesCount == 0){
@@ -721,7 +721,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ibase::IMessageContainer
 	}
 
 	for (int messageIndex = 0; messageIndex < messagesCount; messageIndex++){
-		ibase::IMessageConsumer::MessagePtr messagePtr = messagesList[messageIndex];
+		ilog::IMessageConsumer::MessagePtr messagePtr = messagesList[messageIndex];
 
 		int shapeIndex = -1;
 
@@ -783,7 +783,7 @@ void CInspectionTaskGuiComp::UpdateTaskMessages()
 		for (int subTaskIndex = 0; subTaskIndex < subtasksCount; subTaskIndex++){
 			iproc::ISupplier* subTaskPtr = taskPtr->GetSubtask(subTaskIndex);
 			if (subTaskPtr != NULL){
-				const ibase::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages();
+				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages();
 				if (messageContainerPtr != NULL){
 					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex);
 				}

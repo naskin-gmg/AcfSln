@@ -442,7 +442,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        ilog::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         HotfolderDemoFramework
@@ -450,7 +450,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         HotfolderDemoFramework

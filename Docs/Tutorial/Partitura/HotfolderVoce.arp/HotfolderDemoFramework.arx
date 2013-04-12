@@ -625,7 +625,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        ilog::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         LogDock
@@ -633,7 +633,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         LogDock

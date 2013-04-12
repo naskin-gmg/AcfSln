@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/IMultiCalibrationProvider.h"
@@ -18,11 +18,11 @@ namespace iipr
 	Single 2D-calibration supplier implemented as a selector from a multi calibration provider.
 */
 class CSelectableCalibrationProviderComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectableCalibrationProviderComp);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);

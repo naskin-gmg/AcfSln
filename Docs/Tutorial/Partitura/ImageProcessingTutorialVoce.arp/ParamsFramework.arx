@@ -499,7 +499,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        ilog::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         LogTab
@@ -507,7 +507,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         LogTab

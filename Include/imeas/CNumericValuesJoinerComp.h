@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
@@ -17,12 +17,12 @@ namespace imeas
 	Joins several numeric values into one.
 */
 class CNumericValuesJoinerComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public imeas::INumericValueProvider,
 			protected imeas::CSimpleNumericValue
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CNumericValuesJoinerComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);

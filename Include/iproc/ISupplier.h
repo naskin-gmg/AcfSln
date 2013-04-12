@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IChangeable.h"
-#include "ibase/IMessageContainer.h"
+#include "ilog/IMessageContainer.h"
 #include "iprm/IParamsSet.h"
 
 
@@ -98,7 +98,7 @@ public:
 		The pointed object will not be relocated - no reconnect is needed if it is observed.
 		If the supplier doesn't support list of messages, it returns NULL.
 	*/
-	virtual const ibase::IMessageContainer* GetWorkMessages() const = 0;
+	virtual const ilog::IMessageContainer* GetWorkMessages() const = 0;
 
 	/**
 		Get parameter set using by this supplier.

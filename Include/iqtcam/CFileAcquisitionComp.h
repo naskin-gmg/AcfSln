@@ -10,7 +10,7 @@
 // ACF includes
 #include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
 
 // ACF-Solutions includes
@@ -27,11 +27,11 @@ namespace iqtcam
 	Bitmap loader component implementing interface \c icam::IBitmapAcquisition over \c ifile::IFilePersistence.
 */
 class CFileAcquisitionComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileAcquisitionComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);

@@ -11,8 +11,8 @@
 #include "imod/IModel.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
-#include "ibase/IMessageContainer.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/IMessageContainer.h"
+#include "ilog/TLoggerCompWrap.h"
 
 // ACF-Solutions includes
 #include "iinsp/IInspectionTask.h"
@@ -27,14 +27,14 @@ namespace iinsp
 	Serializing of this object serialize all inspection parameters.
 */
 class CInspectionTaskComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public IInspectionTask,
 			virtual public iproc::ISupplier,
 			virtual public istd::IInformationProvider,
 			protected imod::CMultiModelBridgeBase
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef imod::CMultiModelBridgeBase BaseClass2;
 
 	enum MessageId
@@ -47,7 +47,7 @@ public:
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(iproc::ISupplier);
-		I_REGISTER_INTERFACE(ibase::IMessageContainer);
+		I_REGISTER_INTERFACE(ilog::IMessageContainer);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_SUBELEMENT(Parameters);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iprm::IParamsSet, ExtractParameters);
@@ -81,7 +81,7 @@ public:
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ibase::IMessageContainer* GetWorkMessages() const;
+	virtual const ilog::IMessageContainer* GetWorkMessages() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 	// reimplemented (istd::IInformationProvider)
@@ -103,12 +103,12 @@ protected:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	class MessageContainer: virtual public ibase::IMessageContainer
+	class MessageContainer: virtual public ilog::IMessageContainer
 	{
 	public:
 		MessageContainer(CInspectionTaskComp* parentPtr);
 
-		// reimplemented (ibase::IMessageContainer)
+		// reimplemented (ilog::IMessageContainer)
 		virtual int GetWorstCategory() const;
 		virtual Messages GetMessages() const;
 		virtual void ClearMessages();

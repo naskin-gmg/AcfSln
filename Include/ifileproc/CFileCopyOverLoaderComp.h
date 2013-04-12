@@ -7,7 +7,7 @@
 #include "ifile/IFilePersistence.h"
 
 #include "ifileproc/IFileConvertCopy.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 
 namespace ifileproc
@@ -19,11 +19,11 @@ namespace ifileproc
 	This implementation uses general file loader, saver and any object instance.
 */
 class CFileCopyOverLoaderComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public IFileConvertCopy
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileCopyOverLoaderComp);
 		I_REGISTER_INTERFACE(IFileConvertCopy);

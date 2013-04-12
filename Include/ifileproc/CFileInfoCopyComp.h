@@ -10,7 +10,7 @@
 #include <QtCore/QString>
 
 #include "ibase/IApplicationInfo.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "ifileproc/IFileConvertCopy.h"
 
 #include "ifileproc/ifileproc.h"
@@ -38,11 +38,11 @@ namespace ifileproc
 */
 class CFileInfoCopyComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileConvertCopy
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	enum MessageId
 	{

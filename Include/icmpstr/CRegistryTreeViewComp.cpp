@@ -8,7 +8,7 @@
 // ACF includes
 #include "icomp/CCompositeComponentStaticInfo.h"
 
-#include "ibase/CMessageContainer.h"
+#include "ilog/CMessageContainer.h"
 
 #include "iqtgui/CItemDelegate.h"
 
@@ -93,7 +93,7 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 		}
 		
 		bool isConsistent = true;
-		ibase::CMessageContainer messageContainer;
+		ilog::CMessageContainer messageContainer;
 
 		if (m_consistInfoCompPtr.IsValid()){
 			isConsistent = m_consistInfoCompPtr->IsElementValid(
@@ -109,7 +109,7 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 		if (!isConsistent){
 			elementItemPtr->setIcon(CT_NAME, errorIcon);
 
-			ibase::CMessageContainer::Messages messages = messageContainer.GetMessages();
+			ilog::CMessageContainer::Messages messages = messageContainer.GetMessages();
 			QString messageText;
 			for (int messageIndex = 0; messageIndex < messages.count(); messageIndex++){
 				messageText += messages[messageIndex]->GetInformationDescription();

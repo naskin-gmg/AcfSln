@@ -563,7 +563,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        ilog::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         Framework
@@ -571,7 +571,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         Framework

@@ -13,8 +13,8 @@
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelObserverBase.h"
 #include "icomp/CComponentBase.h"
-#include "ibase/TLoggerCompWrap.h"
-#include "ibase/CMessageContainer.h"
+#include "ilog/TLoggerCompWrap.h"
+#include "ilog/CMessageContainer.h"
 
 // ACF-Solutions includes
 #include "iproc/ISupplier.h"
@@ -30,13 +30,13 @@ namespace iproc
 */
 template <class Product>
 class TSupplierCompWrap:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ISupplier,
 			virtual public istd::IChangeable,
-			virtual protected ibase::IMessageConsumer
+			virtual protected ilog::IMessageConsumer
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef Product ProductType;
 
 	enum MessageId
@@ -60,7 +60,7 @@ public:
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ibase::IMessageContainer* GetWorkMessages() const;
+	virtual const ilog::IMessageContainer* GetWorkMessages() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:
@@ -106,9 +106,9 @@ protected:
 	virtual void UnregisterSupplierInput(imod::IModel* modelPtr);
 
 	/**
-		Add ibase::CMessage to the internal message container (also from const functions).
+		Add ilog::CMessage to the internal message container (also from const functions).
 	*/
-	virtual void AddMessage(const ibase::CMessage* messagePtr) const;
+	virtual void AddMessage(const ilog::CMessage* messagePtr) const;
 
 	// abstract methods
 	/**
@@ -117,7 +117,7 @@ protected:
 	*/
 	virtual int ProduceObject(Product& result) const = 0;
 
-	// reimplemented (ibase::IMessageConsumer)
+	// reimplemented (ilog::IMessageConsumer)
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
@@ -174,7 +174,7 @@ private:
 	typedef QMap<imod::IModel*, ISupplier*> InputSuppliersMap;
 	InputSuppliersMap m_inputSuppliersMap;
 
-	mutable imod::TModelWrap<ibase::CMessageContainer> m_messageContainer;
+	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
 
 	bool m_areParametersValid;
 };
@@ -282,7 +282,7 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 
 
 template <class Product>
-const ibase::IMessageContainer* TSupplierCompWrap<Product>::GetWorkMessages() const
+const ilog::IMessageContainer* TSupplierCompWrap<Product>::GetWorkMessages() const
 {
 	return &m_messageContainer;
 }
@@ -350,7 +350,7 @@ void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 
 
 template <class Product>
-void TSupplierCompWrap<Product>::AddMessage(const ibase::CMessage* messagePtr) const
+void TSupplierCompWrap<Product>::AddMessage(const ilog::CMessage* messagePtr) const
 {
 	Q_ASSERT(messagePtr != NULL);
 
@@ -358,7 +358,7 @@ void TSupplierCompWrap<Product>::AddMessage(const ibase::CMessage* messagePtr) c
 }
 
 
-// reimplemented (ibase::IMessageConsumer)
+// reimplemented (ilog::IMessageConsumer)
 template <class Product>
 bool TSupplierCompWrap<Product>::IsMessageSupported(
 			int messageCategory,
@@ -427,7 +427,7 @@ template <class Product>
 TSupplierCompWrap<Product>::Timer::~Timer()
 {
 	if ((m_parentPtr != NULL) && (m_parentPtr->m_diagnosticNameAttrPtr.IsValid())){
-		MessagePtr messagePtr(new ibase::CMessage(
+		MessagePtr messagePtr(new ilog::CMessage(
 					istd::IInformationProvider::IC_INFO,
 					0,
                     QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),

@@ -5,12 +5,11 @@
 // ACF includes
 #include "icomp/IRegistry.h"
 #include "icomp/IComponentEnvironmentManager.h"
-
-#include "ibase/IMessageConsumer.h"
-
+#include "ilog/IMessageConsumer.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CCheckableComboBox.h"
 
+// ACF-Solutions includes
 #include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/Generated/ui_CRegistryPropEditorComp.h"
 
@@ -51,10 +50,10 @@ public:
 protected:
 	class TextLog:
 				public QString,
-				virtual public ibase::IMessageConsumer
+				virtual public ilog::IMessageConsumer
 	{
 	public:
-		// reimplemented (ibase::IMessageConsumer)
+		// reimplemented (ilog::IMessageConsumer)
 		virtual bool IsMessageSupported(
 					int messageCategory = -1,
 					int messageId = -1,

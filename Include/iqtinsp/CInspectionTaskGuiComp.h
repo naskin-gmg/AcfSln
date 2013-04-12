@@ -14,7 +14,7 @@
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CMultiModelDispatcherBase.h"
 #include "ifile/IFilePersistence.h"
-#include "ibase/CMessageContainer.h"
+#include "ilog/CMessageContainer.h"
 #include "iview/IShape.h"
 #include "iview/IShapeFactory.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -109,7 +109,7 @@ Q_SIGNALS:
 	void DoAutoTest();
 
 private:
-	void AddTaskMessagesToLog(const ibase::IMessageContainer& messageContainer, int taskIndex);
+	void AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex);
 	void UpdateTaskMessages();
 	void DoUpdateEditor(int taskIndex);
 	void ActivateTaskShapes(int taskIndex);
@@ -150,7 +150,7 @@ private:
 	GuiMap m_stackIndexToTabMap;	// map stack index (for preview GUI) to GUI index (for editors)
 	GuiMap m_tabToGuiIndexMap;		// map tab index to editor index
 
-	typedef QMap<int, ibase::CMessageContainer> ResultMessagesMap;
+	typedef QMap<int, ilog::CMessageContainer> ResultMessagesMap;
 	ResultMessagesMap m_resultMessagesMap;
 
 	typedef QMap<int, istd::TPointerVector<iview::IShape> > ResultShapesMap;	// Map GUI index to list of result shapes

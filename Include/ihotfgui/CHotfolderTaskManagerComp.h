@@ -15,7 +15,7 @@
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
 
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iprm/IParamsSet.h"
 #include "iprm/IParamsManager.h"
@@ -40,11 +40,11 @@ namespace ihotfgui
 	It also manages and observes the folder-monitors, to get information about folder-activities.
 */
 class CHotfolderTaskManagerComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ihotf::IHotfolderTaskManager
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CHotfolderTaskManagerComp);
 		I_REGISTER_INTERFACE(ihotf::IHotfolderTaskManager);

@@ -7,7 +7,7 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 
 #include "iprm/IOptionsList.h"
 
@@ -23,12 +23,12 @@ namespace iproc
 	Input at k-iteration for the slave operator is processor output at (k-1)-iteration.
 */
 class CIterativeProcessorComp:
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public iproc::CSyncProcessorBase,
 			virtual public iprm::IOptionsList
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef iproc::CSyncProcessorBase BaseClass2;
 
 	enum MessageId

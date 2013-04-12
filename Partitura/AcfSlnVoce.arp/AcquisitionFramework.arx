@@ -520,7 +520,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageConsumer
+        ilog::IMessageConsumer
       </InterfaceId>
       <ComponentId>
         Log
@@ -528,7 +528,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         Log

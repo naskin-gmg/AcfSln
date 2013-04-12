@@ -85,7 +85,7 @@ void CDelegatedBitmapSupplierComp::ClearWorkResults()
 }
 
 
-const ibase::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages() const
+const ilog::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages() const
 {
 	if (m_bitmapSupplierCompPtr.IsValid()){
 		return m_bitmapSupplierCompPtr->GetWorkMessages();

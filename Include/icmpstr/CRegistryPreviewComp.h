@@ -8,7 +8,7 @@
 
 // ACF includes
 #include "icomp/IComponentEnvironmentManager.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "ifile/IFileNameParam.h"
 #include "icmpstr/IRegistryPreview.h"
 
@@ -19,12 +19,12 @@ namespace icmpstr
 
 class CRegistryPreviewComp:
 			public QObject,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			public IRegistryPreview
 {
 	Q_OBJECT
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CRegistryPreviewComp);
 		I_REGISTER_INTERFACE(icmpstr::IRegistryPreview);

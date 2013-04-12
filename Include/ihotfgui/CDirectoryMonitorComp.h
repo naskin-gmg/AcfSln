@@ -12,7 +12,7 @@
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 #include "icomp/CComponentBase.h"
-#include "ibase/TLoggerCompWrap.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "iprm/IParamsSet.h"
 #include "ifile/IFileNameParam.h"
 
@@ -32,13 +32,13 @@ namespace ihotfgui
 */
 class CDirectoryMonitorComp:
 			public QThread,
-			public ibase::CLoggerComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ihotf::IDirectoryMonitor
 {
 	Q_OBJECT
 
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
 
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
