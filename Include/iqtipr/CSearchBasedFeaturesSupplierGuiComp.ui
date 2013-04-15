@@ -37,7 +37,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="AutoUpdateButton">
+      <widget class="QToolButton" name="AutoTestButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -200,5 +200,22 @@
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>AutoTestButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TestButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>507</x>
+     <y>9</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

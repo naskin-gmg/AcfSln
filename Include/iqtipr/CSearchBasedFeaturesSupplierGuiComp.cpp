@@ -54,7 +54,7 @@ QWidget* CSearchBasedFeaturesSupplierGuiComp::GetParamsWidget() const
 
 void CSearchBasedFeaturesSupplierGuiComp::OnSupplierParamsChanged()
 {
-	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
+	if (IsGuiCreated() && AutoTestButton->isChecked()){
 		DoTest();
 	}
 }
@@ -191,7 +191,7 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiCreated()
 
 void CSearchBasedFeaturesSupplierGuiComp::OnGuiHidden()
 {
-	AutoUpdateButton->setChecked(false);
+	AutoTestButton->setChecked(false);
 
 	BaseClass::OnGuiHidden();
 }

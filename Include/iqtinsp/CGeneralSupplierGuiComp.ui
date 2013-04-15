@@ -199,5 +199,22 @@
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>AutoTestButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TestButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>10</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

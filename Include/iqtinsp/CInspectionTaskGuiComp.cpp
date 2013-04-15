@@ -19,6 +19,8 @@
 #include "iser/CXmlStringReadArchive.h"
 #include "iser/CXmlStringWriteArchive.h"
 
+#include "iqtgui/CFlowLayout.h"
+
 
 namespace iqtinsp
 {
@@ -31,7 +33,8 @@ static const char SupplierTaskMimeType[] = "acf/iproc::ISupplier";
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 :	m_currentGuiIndex(-1),
 	m_toolBoxPtr(NULL),
-	m_tabWidgetPtr(NULL)
+	m_tabWidgetPtr(NULL),
+	m_stackedWidgetPtr(NULL)
 {
 	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
 }
@@ -261,6 +264,14 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 			m_tabWidgetPtr->setTabIcon(tabIndex, tabIcon);
 			m_tabWidgetPtr->setTabToolTip(tabIndex, toolTip);
 		}
+
+		if (m_stackedWidgetPtr != NULL && m_buttonGroupPtr != NULL){
+			Q_ASSERT(tabIndex < m_stackedWidgetPtr->count());
+			QAbstractButton* buttonPtr = m_buttonGroupPtr->button(tabIndex);
+			Q_ASSERT(buttonPtr != NULL);
+			buttonPtr->setIcon(tabIcon);
+			buttonPtr->setToolTip(toolTip);
+		}
 	}
 }
 
@@ -285,89 +296,154 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
 
-	if (*m_designTypeAttrPtr == 1){
-		m_toolBoxPtr = new QToolBox(ParamsFrame);
-		m_toolBoxPtr->setBackgroundRole(QPalette::Window);
-		m_toolBoxPtr->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+	switch (*m_designTypeAttrPtr){
+		case 0:	// floating buttons
+		{
+			QVBoxLayout* mainLayout = new QVBoxLayout();
+			((QBoxLayout*)layoutPtr)->addLayout(mainLayout);
 
-		int subtasksCount = m_editorGuisCompPtr.GetCount();
-		for (int i = 0; i < subtasksCount; ++i){
-			iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
+			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(0, 0, 0);
+			mainLayout->addLayout(buttonsLayout);
+			
+			m_stackedWidgetPtr = new QStackedWidget(ParamsFrame);
+			mainLayout->addWidget(m_stackedWidgetPtr);
 
-			if (guiPtr != NULL){
-				QWidget* panelPtr = new QWidget(m_toolBoxPtr);
-				QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-				panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
-				QString name;
-				if (i < m_namesAttrPtr.GetCount()){
-					name = m_namesAttrPtr[i];
-				}
+			m_buttonGroupPtr = new QButtonGroup(ParamsFrame);
+			m_buttonGroupPtr->setExclusive(true);
 
-				guiPtr->CreateGui(panelPtr);
+			int subtasksCount = m_editorGuisCompPtr.GetCount();
+			for (int i = 0; i < subtasksCount; ++i){
+				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
 
-				int toolBoxIndex = m_toolBoxPtr->addItem(panelPtr, name);
+				if (guiPtr != NULL){
+					QWidget* panelPtr = new QWidget(m_stackedWidgetPtr);
+					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
+					QString name;
+					if (i < m_namesAttrPtr.GetCount()){
+						name = m_namesAttrPtr[i];
+					}
 
-				if (useSpacer){
-					QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+					guiPtr->CreateGui(panelPtr);
 
-					panelLayoutPtr->addItem(spacerPtr);
-				}
+					int tabIndex = m_stackedWidgetPtr->addWidget(panelPtr);
+					QPushButton* buttonPtr = new QPushButton(name, panelPtr);
+					buttonPtr->setCheckable(true);
+					buttonPtr->setFlat(true);
 
-				m_tabToGuiIndexMap[toolBoxIndex] = i;
+					buttonsLayout->addWidget(buttonPtr);
+					m_buttonGroupPtr->addButton(buttonPtr, i);
 
-				if (i < m_editorVisualModelsCompPtr.GetCount()){
-					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
-					if (modelPtr != NULL){
-						RegisterModel(modelPtr, i);
+					if (useSpacer){
+						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+						panelLayoutPtr->addItem(spacerPtr);
+					}
+
+					m_tabToGuiIndexMap[tabIndex] = i;
+
+					if (i < m_editorVisualModelsCompPtr.GetCount()){
+						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+						if (modelPtr != NULL){
+							RegisterModel(modelPtr, i);
+						}
 					}
 				}
 			}
+
+			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), this, SLOT(OnEditorChanged(int)));
+			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), m_stackedWidgetPtr, SLOT(setCurrentIndex(int)));
 		}
+		break;
 
-		QObject::connect(m_toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+		case 1: // toolbox
+		{
+			m_toolBoxPtr = new QToolBox(ParamsFrame);
+			m_toolBoxPtr->setBackgroundRole(QPalette::Window);
+			m_toolBoxPtr->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 
-		layoutPtr->addWidget(m_toolBoxPtr);
-	}
-	else{
-		m_tabWidgetPtr = new QTabWidget(ParamsFrame);
-		m_tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
+			int subtasksCount = m_editorGuisCompPtr.GetCount();
+			for (int i = 0; i < subtasksCount; ++i){
+				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
 
-		int subtasksCount = m_editorGuisCompPtr.GetCount();
-		for (int i = 0; i < subtasksCount; ++i){
-			iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
+				if (guiPtr != NULL){
+					QWidget* panelPtr = new QWidget(m_toolBoxPtr);
+					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
+					panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
+					QString name;
+					if (i < m_namesAttrPtr.GetCount()){
+						name = m_namesAttrPtr[i];
+					}
 
-			if (guiPtr != NULL){
-				QWidget* panelPtr = new QWidget(m_tabWidgetPtr);
-				QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-				QString name;
-				if (i < m_namesAttrPtr.GetCount()){
-					name = m_namesAttrPtr[i];
-				}
+					guiPtr->CreateGui(panelPtr);
 
-				guiPtr->CreateGui(panelPtr);
+					int toolBoxIndex = m_toolBoxPtr->addItem(panelPtr, name);
 
-				int tabIndex = m_tabWidgetPtr->addTab(panelPtr, name);
+					if (useSpacer){
+						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-				if (useSpacer){
-					QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+						panelLayoutPtr->addItem(spacerPtr);
+					}
 
-					panelLayoutPtr->addItem(spacerPtr);
-				}
+					m_tabToGuiIndexMap[toolBoxIndex] = i;
 
-				m_tabToGuiIndexMap[tabIndex] = i;
-
-				if (i < m_editorVisualModelsCompPtr.GetCount()){
-					imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
-					if (modelPtr != NULL){
-						RegisterModel(modelPtr, i);
+					if (i < m_editorVisualModelsCompPtr.GetCount()){
+						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+						if (modelPtr != NULL){
+							RegisterModel(modelPtr, i);
+						}
 					}
 				}
 			}
+
+			QObject::connect(m_toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+
+			layoutPtr->addWidget(m_toolBoxPtr);
 		}
+		break;
 
-		QObject::connect(m_tabWidgetPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+		default: // tabs
+		{
+			m_tabWidgetPtr = new QTabWidget(ParamsFrame);
+			m_tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
 
-		layoutPtr->addWidget(m_tabWidgetPtr);
+			int subtasksCount = m_editorGuisCompPtr.GetCount();
+			for (int i = 0; i < subtasksCount; ++i){
+				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
+
+				if (guiPtr != NULL){
+					QWidget* panelPtr = new QWidget(m_tabWidgetPtr);
+					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
+					QString name;
+					if (i < m_namesAttrPtr.GetCount()){
+						name = m_namesAttrPtr[i];
+					}
+
+					guiPtr->CreateGui(panelPtr);
+
+					int tabIndex = m_tabWidgetPtr->addTab(panelPtr, name);
+
+					if (useSpacer){
+						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+						panelLayoutPtr->addItem(spacerPtr);
+					}
+
+					m_tabToGuiIndexMap[tabIndex] = i;
+
+					if (i < m_editorVisualModelsCompPtr.GetCount()){
+						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+						if (modelPtr != NULL){
+							RegisterModel(modelPtr, i);
+						}
+					}
+				}
+			}
+
+			QObject::connect(m_tabWidgetPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
+
+			layoutPtr->addWidget(m_tabWidgetPtr);
+		}
+		break;
 	}
 
 	QMap<iqtgui::IGuiObject*, int> guiToStackIndexMap;

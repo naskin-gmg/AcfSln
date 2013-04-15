@@ -97,7 +97,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
+         <enum>QSizePolicy::Maximum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -215,5 +215,38 @@
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>LiveImageButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SnapImageButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LiveImageButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SaveImageButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
