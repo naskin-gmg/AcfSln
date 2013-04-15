@@ -1,8 +1,8 @@
 #include "iauth/CUsersManagerComp.h"
 
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "iser/IArchive.h"
 
 
@@ -14,13 +14,13 @@ namespace iauth
 
 int CUsersManagerComp::GetUsersCount() const
 {
-	return int(m_users.size());
+	return m_users.count();
 }
 
 
 int CUsersManagerComp::FindUserIndex(const QString& name) const
 {
-	int usersCount = int(m_users.size());
+	int usersCount = m_users.count();
 
 	for (int i = 0; i < usersCount; ++i){
 		if (m_users[i].GetUserName() == name){
@@ -64,13 +64,13 @@ void CUsersManagerComp::Reset()
 		QString userName(m_defaultUsersAttrPtr[i]);
 		QString password;
 		if (			m_defaultUserPasswordsAttrPtr.IsValid() &&
-						(i < int(m_defaultUserPasswordsAttrPtr.GetCount()))){
-			password = QString(m_defaultUserPasswordsAttrPtr[i]);
+						(i < m_defaultUserPasswordsAttrPtr.GetCount())){
+			password = m_defaultUserPasswordsAttrPtr[i];
 		}
 
 		int userGroup = 0;
 		if (			m_defaultUserLevelsAttrPtr.IsValid() &&
-						(i < int(m_defaultUserLevelsAttrPtr.GetCount()))){
+						(i < m_defaultUserLevelsAttrPtr.GetCount())){
 			userGroup = m_defaultUserLevelsAttrPtr[i];
 		}
 
@@ -95,6 +95,8 @@ CUser* CUsersManagerComp::AddUser(const QString& userName)
 		return NULL;
 	}
 
+	istd::CChangeNotifier changePtr(this);
+
 	m_users.push_back(CUser(userName));
 
 	return &m_users.back();
@@ -105,6 +107,8 @@ bool CUsersManagerComp::DeleteUser(const QString& userName)
 {
 	for (Users::iterator iter = m_users.begin(); iter != m_users.end(); iter++){
 		if (iter->GetUserName() == userName){
+			istd::CChangeNotifier changePtr(this);
+			
 			m_users.erase(iter);
 
 			return true;
