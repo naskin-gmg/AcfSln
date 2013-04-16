@@ -31,7 +31,7 @@ public:
 	typedef imod::TSingleModelObserverBase<iauth::IRightsProvider> BaseClass2;
 
 	I_BEGIN_COMPONENT(CRightsBasedEnablerComp);
-		I_REGISTER_INTERFACE(IRightsProvider);
+		I_REGISTER_INTERFACE(iprm::IEnableableParam);
 		I_ASSIGN(m_rightsProviderCompPtr, "RightsProvider", "Slave rights provider", true, "RightsProvider");
 		I_ASSIGN_TO(m_rightsProviderModelCompPtr, m_rightsProviderCompPtr, true);
 		I_ASSIGN_MULTI_0(m_rightIdsAttrPtr, "RightIds", "List of right IDs to be checked for calculation of the entire enabling state", true);

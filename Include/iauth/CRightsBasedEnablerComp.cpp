@@ -72,6 +72,8 @@ void CRightsBasedEnablerComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* 
 	if (m_rightsProviderCompPtr.IsValid()){
 		int rightsCount = m_rightIdsAttrPtr.GetCount();
 
+		retVal = (rightsCount > 0);
+	
 		for (int rightIndex = 0; rightIndex < rightsCount; rightIndex++){
 			retVal = retVal && m_rightsProviderCompPtr->HasRight(m_rightIdsAttrPtr[rightIndex], true);
 		}
