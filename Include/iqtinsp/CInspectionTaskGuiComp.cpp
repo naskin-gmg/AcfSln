@@ -19,8 +19,6 @@
 #include "iser/CXmlStringReadArchive.h"
 #include "iser/CXmlStringWriteArchive.h"
 
-#include "iqtgui/CFlowLayout.h"
-
 
 namespace iqtinsp
 {
@@ -297,64 +295,6 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
 
 	switch (*m_designTypeAttrPtr){
-		case 0:	// floating buttons
-		{
-			QVBoxLayout* mainLayout = new QVBoxLayout();
-			((QBoxLayout*)layoutPtr)->addLayout(mainLayout);
-
-			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(0, 0, 0);
-			mainLayout->addLayout(buttonsLayout);
-			
-			m_stackedWidgetPtr = new QStackedWidget(ParamsFrame);
-			mainLayout->addWidget(m_stackedWidgetPtr);
-
-			m_buttonGroupPtr = new QButtonGroup(ParamsFrame);
-			m_buttonGroupPtr->setExclusive(true);
-
-			int subtasksCount = m_editorGuisCompPtr.GetCount();
-			for (int i = 0; i < subtasksCount; ++i){
-				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
-
-				if (guiPtr != NULL){
-					QWidget* panelPtr = new QWidget(m_stackedWidgetPtr);
-					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-					QString name;
-					if (i < m_namesAttrPtr.GetCount()){
-						name = m_namesAttrPtr[i];
-					}
-
-					guiPtr->CreateGui(panelPtr);
-
-					int tabIndex = m_stackedWidgetPtr->addWidget(panelPtr);
-					QPushButton* buttonPtr = new QPushButton(name, panelPtr);
-					buttonPtr->setCheckable(true);
-					buttonPtr->setFlat(true);
-
-					buttonsLayout->addWidget(buttonPtr);
-					m_buttonGroupPtr->addButton(buttonPtr, i);
-
-					if (useSpacer){
-						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-						panelLayoutPtr->addItem(spacerPtr);
-					}
-
-					m_tabToGuiIndexMap[tabIndex] = i;
-
-					if (i < m_editorVisualModelsCompPtr.GetCount()){
-						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
-						if (modelPtr != NULL){
-							RegisterModel(modelPtr, i);
-						}
-					}
-				}
-			}
-
-			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), this, SLOT(OnEditorChanged(int)));
-			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), m_stackedWidgetPtr, SLOT(setCurrentIndex(int)));
-		}
-		break;
-
 		case 1: // toolbox
 		{
 			m_toolBoxPtr = new QToolBox(ParamsFrame);
