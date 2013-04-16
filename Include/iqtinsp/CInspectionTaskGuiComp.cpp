@@ -49,7 +49,7 @@ void CInspectionTaskGuiComp::UpdateModel() const
 				++iter){
 		const imod::IModelEditor* editorPtr = *iter;
 		Q_ASSERT(editorPtr != NULL);
-		
+
 		editorPtr->UpdateModel();
 	}
 }
@@ -295,7 +295,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
 
 	switch (*m_designTypeAttrPtr){
-		case 1: // toolbox
+	case 1: // toolbox
 		{
 			m_toolBoxPtr = new QToolBox(ParamsFrame);
 			m_toolBoxPtr->setBackgroundRole(QPalette::Window);
@@ -341,7 +341,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 		break;
 
-		default: // tabs
+	default: // tabs
 		{
 			m_tabWidgetPtr = new QTabWidget(ParamsFrame);
 			m_tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
@@ -891,7 +891,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 			}
 		}
 	}
-	
+
 	if ((taskIndex >= 0) && (taskIndex  < m_previewSceneProvidersCompPtr.GetCount())){
 		iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
 		if (previewProviderPtr != NULL){
@@ -977,7 +977,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 				return true;
 			}
 		}
-	}	
+	}
 
 	// else try via plain text
 	QByteArray dataToPaste(clipboardPtr->text().toUtf8());
