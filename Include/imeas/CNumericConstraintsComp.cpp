@@ -25,9 +25,8 @@ QString CNumericConstraintsComp::GetNumericValueName(int index) const
 	if (index < m_namesAttrPtr.GetCount()){
 		return m_namesAttrPtr[index];
 	}
-	else{
-		return QString().setNum(index + 1);
-	}
+		
+	return QString();
 }
 
 

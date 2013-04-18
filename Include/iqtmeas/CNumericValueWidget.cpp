@@ -42,7 +42,9 @@ CNumericValueWidget::CNumericValueWidget(
 
 void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo)
 {
+	DescriptionLabel->setVisible(!description.isEmpty());
 	DescriptionLabel->setText(description);
+
 	const QString& unitName = unitInfo.GetUnitName();
 	if (!unitName.isEmpty()){
 		UnitLabel->setText(unitName);
