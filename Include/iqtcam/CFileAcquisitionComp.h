@@ -66,7 +66,6 @@ protected:
 		quint32 idStamp;
 	};
 
-private:
 	typedef QMap<QString, ParamsInfo> DirInfos;
 	DirInfos m_dirInfos;
 
@@ -74,13 +73,15 @@ private:
 
 	istd::CIndex2d m_lastImageSize;
 
+	QMutex m_lock;
+
+private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
 	I_ATTR(QString, m_defaultDirAttrPtr);
 	I_REF(ifile::IFileNameParam, m_defaultDirParamCompPtr);
 	I_ATTR(QByteArray, m_pathParamIdAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
-	QMutex m_lock;
 };
 
 
