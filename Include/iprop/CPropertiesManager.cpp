@@ -173,7 +173,7 @@ bool CPropertiesManager::ReadProperties(
 
 			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
 			if (existingPropertyPtr != NULL){
-				bool isEqual = IsEqual(propertyTypeId, existingPropertyPtr->objectPtr->GetFactoryId());
+				bool isEqual = AreIdsEqual(propertyTypeId, existingPropertyPtr->objectPtr->GetFactoryId());
 				if (isEqual && ((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
 					isDeprecated = false;
 					retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
@@ -256,7 +256,7 @@ bool CPropertiesManager::WriteProperties(
 
 // private methods
 
-bool CPropertiesManager::IsEqual(QByteArray firstId, QByteArray secondId) const
+bool CPropertiesManager::AreIdsEqual(QByteArray firstId, QByteArray secondId) const
 {
 	if (firstId == secondId){
 		return true;

@@ -92,7 +92,7 @@ private:
 		Compare two property ids.
 		NOTE: Mac add extra space.
 	*/
-	bool IsEqual(QByteArray firstId, QByteArray secondId) const;
+	bool AreIdsEqual(QByteArray firstId, QByteArray secondId) const;
 
 private:
 	typedef istd::TComposedFactory<iser::IObject> PropertyFactory;
