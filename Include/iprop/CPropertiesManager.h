@@ -87,10 +87,14 @@ protected:
 				iser::IArchive& archive,
 				const iser::CArchiveTag& propertiesTag,
 				const iser::CArchiveTag& propertyTag) const;
+private:
+	/**
+		Compare two property ids.
+		NOTE: Mac add extra space.
+	*/
+	bool IsEqual(QByteArray firstId, QByteArray secondId) const;
 
 private:
-	CPropertiesManager(const CPropertiesManager&);
-
 	typedef istd::TComposedFactory<iser::IObject> PropertyFactory;
 
 	istd::TPointerVector<PropertyInfo> m_propertiesList;

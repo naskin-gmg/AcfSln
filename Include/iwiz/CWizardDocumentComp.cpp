@@ -112,6 +112,13 @@ bool CWizardDocumentComp::DoWizardFinish()
 		}
 	}
 
+	iproc::IStateController* currentPageInfoPtr = CompCastPtr<iproc::IStateController>(GetParamsSet(currentPageIndex));
+	if (currentPageInfoPtr != NULL){
+		if (!currentPageInfoPtr->TryLeaveState(true, NULL)){
+			return false;
+		}
+	}
+
 	return true;
 }
 

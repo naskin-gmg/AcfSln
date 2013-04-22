@@ -169,14 +169,18 @@ bool CPropertiesManager::ReadProperties(
 		retVal = retVal && archive.EndTag(propertyIdTag);
 
 		if (retVal){
-			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
+			bool isDeprecated = true;
 
-			if (		existingPropertyPtr != NULL &&
-						existingPropertyPtr->objectPtr->GetFactoryId() == propertyTypeId &&
-						((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
-				retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
+			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
+			if (existingPropertyPtr != NULL){
+				bool isEqual = IsEqual(propertyTypeId, existingPropertyPtr->objectPtr->GetFactoryId());
+				if (isEqual && ((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
+					isDeprecated = false;
+					retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
+				}
 			}
-			else{
+
+			if (isDeprecated){
 				// try to serialize deprecated property:
 				istd::TDelPtr<iser::IObject> objectPtr(s_propertyFactory.CreateInstance(propertyTypeId));
 				if (objectPtr.IsValid()){
@@ -252,15 +256,22 @@ bool CPropertiesManager::WriteProperties(
 
 // private methods
 
-CPropertiesManager::CPropertiesManager(const CPropertiesManager&)
+bool CPropertiesManager::IsEqual(QByteArray firstId, QByteArray secondId) const
 {
+	if (firstId == secondId){
+		return true;
+	}
+
+	firstId.replace(QByteArray(" "), QByteArray(""));
+	secondId.replace(QByteArray(" "), QByteArray(""));
+
+	return (firstId == secondId);
 }
 
 
 // private static members
 
 CPropertiesManager::PropertyFactory CPropertiesManager::s_propertyFactory;
-
 
 static struct DefaultPropertyTypesRegistrator
 {
