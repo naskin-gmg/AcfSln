@@ -65,7 +65,7 @@ bool CFileInfoCopyComp::ConvertFiles(
 
 		while (!licenseStream.atEnd()){
 			QString line = licenseStream.readLine();
-			outputStream << line << endl;			
+			outputStream << line << endl;
 		}
 	}
 
@@ -75,6 +75,11 @@ bool CFileInfoCopyComp::ConvertFiles(
 		int endIndex = -1;
 		if (*m_useSubstitutionAttrPtr){
 			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
+				if ((beginIndex > 0) && (line[beginIndex - 1] == '\\')){
+					line.replace(beginIndex - 1, 1, "");
+					continue;
+				}
+
 				endIndex = line.indexOf("$", beginIndex + 1);
 				if (endIndex < 0){
 					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is uncomplete").arg(inputFileName).arg(lineCounter));
@@ -90,16 +95,15 @@ bool CFileInfoCopyComp::ConvertFiles(
 					endIndex += substituted.length() - (endIndex - beginIndex + 1);
 				}
 				else{
-					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+					SendErrorMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+
+					return false;
 				}
 			}
 		}
 
 		outputStream << line << endl;
 	}
-
-	inputFile.close();
-	outputFile.close();
 
 	return true;
 }

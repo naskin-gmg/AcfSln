@@ -18,7 +18,7 @@ bool CCopyAppComp::InitializeApplication(int argc, char** argv)
 	for (int argIndex = 0; argIndex < argc; argIndex++){
 		m_applicationArguments << QString::fromLocal8Bit(argv[argIndex]);
 	}
-	
+
 	return true;
 }
 
@@ -56,24 +56,24 @@ int CCopyAppComp::Execute(int argc, char** argv)
 	}
 
 	if (inputFilePath.isEmpty()){
-		SendErrorMessage(0, QObject::tr("Input path not specified"));;	
+		SendErrorMessage(0, QObject::tr("Input path not specified"));;
 
 		return 30;
 	}
 
 	if (outputFilePath.isEmpty()){
-		SendErrorMessage(0, QObject::tr("Output path not specified"));;	
+		SendErrorMessage(0, QObject::tr("Output path not specified"));;
 
 		return 31;
 	}
 
 	QFileInfo inputFileInfo(inputFilePath);
 	if (!inputFileInfo.exists()){
-		SendWarningMessage(0, QString("Input file doesn't exist: %1").arg(inputFilePath));;	
+		SendWarningMessage(0, QString("Input file doesn't exist: %1").arg(inputFilePath));;
 	}
 
 	if (!m_fileCopyCompPtr->ConvertFiles(inputFilePath, outputFilePath)){
-		SendErrorMessage(0, QString("Copy of ") + inputFilePath + QString(" to ") + outputFilePath + " failed", "CopyApp");
+		SendErrorMessage(0, QObject::tr("Copy of %1 to %2 failed").arg(inputFilePath).arg(outputFilePath));
 
 		return 20;
 	}
