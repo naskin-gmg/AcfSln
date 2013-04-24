@@ -6,15 +6,15 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = ACF-Solutions
 PROJECT_NUMBER         = $AcfVersion:1$
-PROJECT_LOGO           = $(ACFDIR)/Docs/Images/LogoDoxygen.png
+PROJECT_LOGO           = $$(ACFDIR)/Docs/Images/LogoDoxygen.png
 OUTPUT_DIRECTORY       = ../../Docs
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
-ABBREVIATE_BRIEF       = "The \$name class                     " \
-                         "The \$name widget                     " \
-                         "The \$name file                     " \
+ABBREVIATE_BRIEF       = "The $$name class                     " \
+                         "The $$name widget                     " \
+                         "The $$name file                     " \
                          is \
                          provides \
                          specifies \
@@ -83,7 +83,7 @@ WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = NO
-WARN_FORMAT            = "\$file:\$line: \$text                     "
+WARN_FORMAT            = "$$file:$$line: $$text                     "
 WARN_LOGFILE           = 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -126,8 +126,8 @@ IGNORE_PREFIX          = C T I TI
 GENERATE_HTML          = YES
 HTML_OUTPUT            = TechnicalDoc
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            = \$(ACFDIR)/Docs/Design/DocHeader.html
-HTML_FOOTER            = \$(ACFDIR)/Docs/Design/DocFooter.html
+HTML_HEADER            = $$(ACFDIR)/Docs/Design/DocHeader.html
+HTML_FOOTER            = $$(ACFDIR)/Docs/Design/DocFooter.html
 HTML_TIMESTAMP         = NO
 HTML_STYLESHEET        = 
 HTML_ALIGN_MEMBERS     = YES
@@ -207,7 +207,7 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = $ACFDIR$/Docs/TechnicalDoc/Package.tag=file:\\$ACFDIR$/Docs/TechnicalDoc
+TAGFILES               = $ACFDIR$/Docs/TechnicalDoc/Package.tag=../../../Acf/Docs/TechnicalDoc
 GENERATE_TAGFILE       = ../../Docs/TechnicalDoc/Package.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = NO
@@ -231,7 +231,7 @@ CALLER_GRAPH           = NO
 GRAPHICAL_HIERARCHY    = YES
 DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
-DOT_PATH               = \$(GRAPHVIZDIR)/bin
+DOT_PATH               = $$(GRAPHVIZDIR)/bin
 DOTFILE_DIRS           = 
 DOT_GRAPH_MAX_NODES    = 1000
 MAX_DOT_GRAPH_DEPTH    = 1000
