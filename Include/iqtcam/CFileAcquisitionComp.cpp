@@ -109,7 +109,7 @@ int CFileAcquisitionComp::DoProcessing(
 				m_lastFileNameCompPtr->SetPath(imageFileName);
 			}
 
-			iprm::TParamsPtr<ifile::IFileNameParam> lastFileNameParamsPtr(paramsPtr, *m_lastFileNameParamIdAttrPtr);
+			iprm::TParamsPtr<ifile::IFileNameParam> lastFileNameParamsPtr(paramsPtr, *m_lastFileNameParamIdAttrPtr, false);
 			if (lastFileNameParamsPtr.IsValid()){
 				(const_cast<ifile::IFileNameParam*>(lastFileNameParamsPtr.GetPtr()))->SetPath(imageFileName);
 			}

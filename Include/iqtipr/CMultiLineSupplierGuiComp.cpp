@@ -68,6 +68,10 @@ void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
+		if (modelPtr->IsAttached(shapePtr)){
+			modelPtr->DetachObserver(shapePtr);
+		}
+
 		modelPtr->AttachObserver(shapePtr);
 	}
 
@@ -143,6 +147,8 @@ CMultiLineSupplierGuiComp::CShape::CShape(iprm::ISelectionParam& selection)
 
 CMultiLineSupplierGuiComp::CShape::~CShape()
 {
+	EnsureModelDetached();
+
 	UnregisterAllModels();
 }
 
