@@ -128,6 +128,10 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+protected:
+	istd::TDelPtr<Product> m_productPtr;
+	int m_workStatus;
+
 private:
 	class InputsObserver: public imod::CMultiModelObserverBase
 	{
@@ -162,9 +166,6 @@ private:
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_MULTIREF(imod::IModel, m_additionalTriggerInputsCompPtr);
-
-	istd::TDelPtr<Product> m_productPtr;
-	int m_workStatus;
 
 	InputsObserver m_inputsObserver;
 	ParamsObserver m_paramsObserver;
