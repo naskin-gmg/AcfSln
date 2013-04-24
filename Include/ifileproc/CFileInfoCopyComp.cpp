@@ -75,16 +75,11 @@ bool CFileInfoCopyComp::ConvertFiles(
 		int endIndex = -1;
 		if (*m_useSubstitutionAttrPtr){
 			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
-				if ((beginIndex > 0) && (line[beginIndex - 1] == '\\')){
-					line.replace(beginIndex - 1, 1, "");
-					continue;
-				}
-
 				endIndex = line.indexOf("$", beginIndex + 1);
 				if (endIndex < 0){
-					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is uncomplete").arg(inputFileName).arg(lineCounter));
+					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is incomplete").arg(inputFileName).arg(lineCounter));
 
-					break;
+					return false;
 				}
 				QString substitutionTag = line.mid(beginIndex + 1, endIndex - beginIndex - 1);
 				QString substituted;
@@ -123,6 +118,12 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 	static const QString acfRawVersionTag("AcfRawVersion");
 	static const QString acfRcVersionTag("AcfRcVersion");
 	static const QString acfTimestampTag("AcfTimestamp");
+
+	if (tag.isEmpty()){
+		result = "$";
+
+		return true;
+	}
 
 	int separatorIndex = tag.indexOf(":");
 
