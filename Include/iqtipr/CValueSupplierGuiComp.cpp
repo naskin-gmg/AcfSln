@@ -135,7 +135,7 @@ void CValueSupplierGuiComp::UpdateGui(int updateFlags)
 		m_foundModel.SetPosition(i2d::CVector2d(0, 0));
 
 		if (IsGuiCreated()){
-			PositionLabel->setText("No position");
+			PositionLabel->setText(tr("No position"));
 		}
 	}
 
