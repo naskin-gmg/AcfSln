@@ -113,6 +113,8 @@ int CFileAcquisitionComp::DoProcessing(
 			if (lastFileNameParamsPtr.IsValid()){
 				(const_cast<ifile::IFileNameParam*>(lastFileNameParamsPtr.GetPtr()))->SetPath(imageFileName);
 			}
+
+			SendVerboseMessage(QString("File Name: %1").arg(imageFileName), GetComponentContext()->GetContextId());
 		}
 		else{
 			retVal = TS_OK;
