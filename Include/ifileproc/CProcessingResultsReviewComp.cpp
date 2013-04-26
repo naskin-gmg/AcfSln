@@ -35,7 +35,7 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsPtr*/) const
 {
-	if (		!m_processingInputFilePathCompPtr.IsValid() ||
+	if (		!m_currentProcessedFilePathCompPtr.IsValid() ||
 				!m_outputSupplierCompPtr.IsValid() ||
 				!m_outputSupplierSerializerCompPtr.IsValid() ||
 				!m_outputFileSerializerCompPtr.IsValid()){
@@ -52,7 +52,7 @@ bool CProcessingResultsReviewComp::ConvertFiles(
 		SendVerboseMessage(QObject::tr("Processing input '%1' to output '%2'").arg(inputPath).arg(outputPath));
 	}
 
-	CProcessSerializer processSerializer(this, inputPath);
+	ProcessSerializer processSerializer(this, inputPath);
 
 	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath) == ifile::IFilePersistence::OS_OK){
 		return true;
@@ -74,7 +74,7 @@ bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, is
 
 	bool retVal = true;
 
-	m_processingInputFilePathCompPtr->SetPath(filePath);
+	m_currentProcessedFilePathCompPtr->SetPath(filePath);
 
 	m_outputSupplierCompPtr->ClearWorkResults();
 	m_outputSupplierCompPtr->EnsureWorkInitialized();
@@ -104,9 +104,9 @@ bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, is
 }
 
 
-// public methods of embedded class CProcessSerializer
+// public methods of embedded class ProcessSerializer
 
-CProcessingResultsReviewComp::CProcessSerializer::CProcessSerializer(
+CProcessingResultsReviewComp::ProcessSerializer::ProcessSerializer(
 			const CProcessingResultsReviewComp* parentPtr,
 			const QString& path)
 :	m_parent(*parentPtr),
@@ -118,7 +118,7 @@ CProcessingResultsReviewComp::CProcessSerializer::CProcessSerializer(
 
 // reimplemented (iser::ISerializable)
 
-bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive& archive)
+bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& archive)
 {
 	if (!archive.IsStoring()){
 		return false;
@@ -138,10 +138,46 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 
 		return retVal;
 	}
-	else if (fileInfo.isDir()){		
-		QDir dir(m_path);
+	else{
+		QStringList filters;
+		QDir dir(".");
+		if (fileInfo.isDir()){
+			dir = QDir(m_path);
 
-		QStringList fileList = dir.entryList(QDir::Files, QDir::Name);
+			if (m_parent.m_inputFileTypeInfoCompPtr.IsValid()){
+				QStringList extensions;
+				m_parent.m_inputFileTypeInfoCompPtr->GetFileExtensions(extensions);
+
+				for (		QStringList::ConstIterator extensionIter = extensions.begin();
+							extensionIter != extensions.begin();
+							++extensionIter){
+					const QString& extension = *extensionIter;
+					filters += "*." + extension;
+				}
+			}
+			else{
+				filters += "*";
+			}
+		}
+		else if (m_path.contains("*") || m_path.contains("?")){
+			int lastSlash = qMax(m_path.lastIndexOf('/'), m_path.lastIndexOf('\\'));
+			if (lastSlash > 0){
+				filters += m_path.mid(lastSlash + 1);
+
+				dir = QDir(m_path.left(lastSlash));
+			}
+			else{
+				filters += m_path;
+			}
+		}
+
+		if (!dir.exists()){
+			m_parent.SendErrorMessage(MI_INPUT_PATH, QObject::tr("Directory %1 not exists").arg(dir.canonicalPath()));
+
+			return false;
+		}
+
+		QStringList fileList = dir.entryList(filters, QDir::Files, QDir::Name);
 
 		int count = fileList.count();
 
@@ -162,9 +198,6 @@ bool CProcessingResultsReviewComp::CProcessSerializer::Serialize(iser::IArchive&
 		retVal = retVal && archive.EndTag(processedFilesTag);
 
 		return retVal;		
-	}
-	else{
-		m_parent.SendErrorMessage(MI_INPUT_PATH, "Invalid input path");
 	}
 
 	return false;

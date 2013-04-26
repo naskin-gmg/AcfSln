@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "ifile/IFileTypeInfo.h"
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFilePersistence.h"
 #include "ifileproc/IFileConvertCopy.h"
@@ -25,10 +26,11 @@ public:
 	I_BEGIN_COMPONENT(CProcessingResultsReviewComp);
 		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
 		I_ASSIGN(m_inputPathCompPtr, "InputPathObject", "Optional storage of current processed input (file or directory)", false, "InputPathObject");
-		I_ASSIGN(m_processingInputFilePathCompPtr, "ProcessingInputFilePath", "Full path to currently processing file, should be used by supplier as input file path", true, "ProcessingInputFilePath");
+		I_ASSIGN(m_currentProcessedFilePathCompPtr, "CurrentProcessedFilePath", "Full path to currently processed file, should be used by supplier as input file path", true, "ProcessingInputFilePath");
 		I_ASSIGN(m_outputSupplierCompPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
 		I_ASSIGN_TO(m_outputSupplierSerializerCompPtr, m_outputSupplierCompPtr, true);
-		I_ASSIGN(m_outputFileSerializerCompPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");		
+		I_ASSIGN(m_outputFileSerializerCompPtr, "OutputFileSerializer", "Output formatter", true, "OutputFileSerializer");
+		I_ASSIGN(m_inputFileTypeInfoCompPtr, "InputFilesTypeInfo", "Optional input files type information used if user specified directory", false, "InputFilesTypeInfo");
 	I_END_COMPONENT;
 
 	// reimplemented (ifileproc::IFileConvertCopy)
@@ -44,13 +46,15 @@ protected:
 	virtual bool ProcessSingleFile(const QString& filePath, iser::IArchive& archive);
 
 private:
-	class CProcessSerializer: public iser::ISerializable
+	class ProcessSerializer: public iser::ISerializable
 	{
 	public:
 		/**
 			Initialize the serializer with parent object and path to be processed.
 		*/
-		CProcessSerializer(const CProcessingResultsReviewComp* parentPtr, const QString& path);
+		ProcessSerializer(
+					const CProcessingResultsReviewComp* parentPtr,
+					const QString& path);
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
@@ -61,10 +65,11 @@ private:
 	};
 
 	I_REF(ifile::IFileNameParam, m_inputPathCompPtr);
-	I_REF(ifile::IFileNameParam, m_processingInputFilePathCompPtr);
+	I_REF(ifile::IFileNameParam, m_currentProcessedFilePathCompPtr);
 	I_REF(iproc::ISupplier, m_outputSupplierCompPtr);
 	I_REF(iser::ISerializable, m_outputSupplierSerializerCompPtr);
-	I_REF(ifile::IFilePersistence, m_outputFileSerializerCompPtr);	
+	I_REF(ifile::IFilePersistence, m_outputFileSerializerCompPtr);
+	I_REF(ifile::IFileTypeInfo, m_inputFileTypeInfoCompPtr);
 };
 
 
