@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1614
+          2934
         </Number>
         <Description>
           ACF
@@ -18,10 +18,21 @@
           1
         </Id>
         <Number>
-          281
+          920
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -32,8 +43,8 @@
         AverageParams
       </Id>
       <PackageId>
-				MeasPck
-			</PackageId>
+        MeasPck
+      </PackageId>
       <ComponentId>
         NumericParams
       </ComponentId>
@@ -53,8 +64,8 @@
         AverageParamsGui
       </Id>
       <PackageId>
-				QtMeasPck
-			</PackageId>
+        QtMeasPck
+      </PackageId>
       <ComponentId>
         NumericParamsGui
       </ComponentId>
@@ -624,6 +635,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>

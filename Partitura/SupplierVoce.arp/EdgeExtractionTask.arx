@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2800
+          2934
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
@@ -2028,14 +2039,6 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        ilog::IMessageContainer
-      </InterfaceId>
-      <ComponentId>
-        InspectionTask
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
         iedge::IEdgeLinesProvider
       </InterfaceId>
       <ComponentId>
@@ -2045,6 +2048,14 @@
     <Interface>
       <InterfaceId>
         iinsp::IInspectionTask
+      </InterfaceId>
+      <ComponentId>
+        InspectionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ilog::IMessageContainer
       </InterfaceId>
       <ComponentId>
         InspectionTask

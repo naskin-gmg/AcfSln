@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1561
+          2934
         </Number>
         <Description>
           ACF
@@ -18,26 +18,26 @@
           1
         </Id>
         <Number>
-          242
+          920
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="6">
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParams
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        325
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         FileNamingParams
@@ -48,6 +48,9 @@
       <X>
         625
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,6 +62,9 @@
       <X>
         625
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -70,17 +76,9 @@
       <X>
         450
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InputDirectories
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        225
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -92,6 +90,39 @@
       <X>
         425
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DirectoryMonitorParams
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InputDirectories
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        225
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

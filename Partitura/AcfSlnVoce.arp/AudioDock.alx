@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1505
+          2934
         </Number>
         <Description>
           ACF
@@ -18,15 +18,40 @@
           1
         </Id>
         <Number>
-          210
+          920
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
+    <Element>
+      <ComponentName>
+        ViewBinder
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         Audio
@@ -37,17 +62,9 @@
       <X>
         325
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DataSequenceView
-      </ComponentName>
-      <X>
-        375
-      </X>
-      <X>
-        300
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,17 +76,25 @@
       <X>
         475
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
-        ViewBinder
+        DataSequenceView
       </ComponentName>
       <X>
-        625
+        375
       </X>
       <X>
-        175
+        300
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

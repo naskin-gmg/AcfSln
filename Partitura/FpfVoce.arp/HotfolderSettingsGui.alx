@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1561
+          2934
         </Number>
         <Description>
           ACF
@@ -18,15 +18,40 @@
           1
         </Id>
         <Number>
-          242
+          920
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
+    <Element>
+      <ComponentName>
+        OutputDirectory
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         DirectoryMonitorParams
@@ -37,17 +62,9 @@
       <X>
         400
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettingsGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        400
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,17 +76,25 @@
       <X>
         400
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
-        OutputDirectory
+        HotfolderSettingsGui
       </ComponentName>
       <X>
         575
       </X>
       <X>
-        200
+        400
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

@@ -1,16 +1,38 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2934
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -22,20 +44,6 @@
       </ComponentName>
       <X>
         175
-      </X>
-      <X>
-        350
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileSystemChangeStorage
-      </ComponentName>
-      <X>
-        600
       </X>
       <X>
         350
@@ -60,6 +68,20 @@
     </Element>
     <Element>
       <ComponentName>
+        OutputFileRenaming
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         HotfolderTaskManager
       </ComponentName>
       <X>
@@ -74,17 +96,19 @@
     </Element>
     <Element>
       <ComponentName>
-        OutputFileRenaming
+        FileSystemChangeStorage
       </ComponentName>
       <X>
-        925
+        600
       </X>
       <X>
-        475
+        350
       </X>
       <Note>
         
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

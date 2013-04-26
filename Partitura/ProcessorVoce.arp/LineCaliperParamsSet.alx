@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2470
+          2934
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1025
+          1
         </Id>
         <Number>
-          264194
+          920
         </Number>
         <Description>
-          Qt Compiled Version
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
         <Id>
-          1026
+          1023
         </Id>
         <Number>
           264194
         </Number>
         <Description>
-          Qt Runtime Version
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -95,4 +95,6 @@
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

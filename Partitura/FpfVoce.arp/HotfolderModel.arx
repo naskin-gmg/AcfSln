@@ -1,16 +1,38 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1398
+          2934
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -103,6 +125,27 @@
     </Element>
     <Element>
       <Id>
+        HotfolderProcessingInfo
+      </Id>
+      <PackageId>
+        FpfVoce
+      </PackageId>
+      <ComponentId>
+        HotfolderProcessingInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         HotfolderSettings
       </Id>
       <PackageId>
@@ -154,28 +197,9 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        HotfolderProcessingInfo
-      </Id>
-      <PackageId>
-        FpfVoce
-      </PackageId>
-      <ComponentId>
-        HotfolderProcessingInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
@@ -213,18 +237,18 @@
   <ExportedComponents count="2">
     <Component>
       <ExportedId>
-        HotfolderSettings
-      </ExportedId>
-      <ComponentId>
-        HotfolderSettings
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
         HotfolderProcessingInfo
       </ExportedId>
       <ComponentId>
         HotfolderProcessingInfo/HotfolderProcessingInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        HotfolderSettings
+      </ExportedId>
+      <ComponentId>
+        HotfolderSettings
       </ComponentId>
     </Component>
   </ExportedComponents>

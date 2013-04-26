@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1916
+          2934
         </Number>
         <Description>
           ACF
@@ -18,81 +18,26 @@
           1
         </Id>
         <Number>
-          389
+          920
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="13">
-    <Element>
-      <ComponentName>
-        DirectoryMonitorCache
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        750
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Hotfolder
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderGui
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <X>
-        450
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderGuiBinder
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettingsDialog
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        625
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettingsFilePath
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        125
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         HotfolderSettingsPersistence
@@ -103,39 +48,9 @@
       <X>
         125
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderStateFilePath
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        450
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderStatePersistence
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        350
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Instantiator
-      </ComponentName>
-      <X>
-        225
-      </X>
-      <X>
-        25
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -147,6 +62,65 @@
       <X>
         650
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderStateFilePath
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderSettingsDialog
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        625
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderSettingsFilePath
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        125
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Instantiator
+      </ComponentName>
+      <X>
+        225
+      </X>
+      <X>
+        25
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -158,6 +132,65 @@
       <X>
         750
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGuiBinder
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderGui
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DirectoryMonitorCache
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        750
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderStatePersistence
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -169,6 +202,25 @@
       <X>
         550
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Hotfolder
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

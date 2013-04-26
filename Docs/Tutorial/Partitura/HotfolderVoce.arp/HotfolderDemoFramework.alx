@@ -1,32 +1,43 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2211
+          2934
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="6">
-    <Element>
-      <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        175
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         ApplicationSettingsProvider
@@ -37,6 +48,23 @@
       <X>
         175
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        425
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -48,6 +76,9 @@
       <X>
         500
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,6 +90,9 @@
       <X>
         325
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -70,6 +104,9 @@
       <X>
         325
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -81,6 +118,11 @@
       <X>
         175
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

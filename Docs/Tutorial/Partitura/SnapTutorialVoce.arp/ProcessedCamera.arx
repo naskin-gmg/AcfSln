@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1614
+          2934
         </Number>
         <Description>
           ACF
@@ -18,10 +18,21 @@
           1
         </Id>
         <Number>
-          281
+          920
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -236,6 +247,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IterationParamId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                IterationParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Log
             </Id>
             <Type>
@@ -266,25 +296,6 @@
               </IsEnabled>
               <Value>
                 5
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IterationParamId
-            </Id>
-            <Type>
-              Id
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                IterationParams
               </Value>
             </Data>
           </AttributeInfo>
@@ -495,6 +506,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
@@ -514,18 +527,18 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IOptionsList
-      </InterfaceId>
-      <ComponentId>
-        IterativeProcessor
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
         icam::IBitmapAcquisition
       </InterfaceId>
       <ComponentId>
         ProcessedCamera
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iprm::IOptionsList
+      </InterfaceId>
+      <ComponentId>
+        IterativeProcessor
       </ComponentId>
     </Interface>
     <Interface>

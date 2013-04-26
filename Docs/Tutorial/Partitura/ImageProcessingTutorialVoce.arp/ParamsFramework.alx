@@ -1,16 +1,38 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2211
+          2934
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -26,17 +48,9 @@
       <X>
         195
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        325
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -48,61 +62,9 @@
       <X>
         200
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsEditorGui
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        325
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSet
-      </ComponentName>
-      <X>
-        1100
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSetGui
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsTab
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        325
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Tabs
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        200
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -114,8 +76,95 @@
       <X>
         425
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsTab
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
+      </ComponentName>
+      <X>
+        875
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsEditorGui
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Info
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Tabs
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        1100
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
-  <NotesMap count="0">
-  </NotesMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

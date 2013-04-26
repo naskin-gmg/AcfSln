@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1493
+          2934
         </Number>
         <Description>
           ACF
@@ -18,26 +18,26 @@
           1
         </Id>
         <Number>
-          193
+          920
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="3">
-    <Element>
-      <ComponentName>
-        HotfolderSettingsGui
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        425
-      </X>
-    </Element>
     <Element>
       <ComponentName>
         SettingsDialog
@@ -48,6 +48,9 @@
       <X>
         225
       </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -59,6 +62,25 @@
       <X>
         425
       </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderSettingsGui
+      </ComponentName>
+      <X>
+        900
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>
