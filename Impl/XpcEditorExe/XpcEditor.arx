@@ -269,7 +269,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              LogoPath
+              AboutLogoPath
             </Id>
             <Type>
               String
