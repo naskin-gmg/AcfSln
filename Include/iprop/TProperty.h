@@ -5,10 +5,8 @@
 #include "istd/TDelPtr.h"
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
 #include "iprop/CPropertyBase.h"
 
 
