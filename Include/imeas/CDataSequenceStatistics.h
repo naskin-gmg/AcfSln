@@ -4,9 +4,7 @@
 
 // ACF includes
 #include "istd/TPointerVector.h"
-
 #include "imod/TModelWrap.h"
-
 
 // ACF-Solutions includes
 #include "imeas/IDataSequenceStatistics.h"

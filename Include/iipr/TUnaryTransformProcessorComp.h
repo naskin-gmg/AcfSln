@@ -2,10 +2,15 @@
 #define iipr_TUnaryTransformProcessorComp_included
 
 
+// STL includes
 #include <functional>
 
-
+// ACF includes
 #include "iipr/CImageProcessorCompBase.h"
+
+#ifdef max
+	#undef max
+#endif
 
 
 namespace iipr
