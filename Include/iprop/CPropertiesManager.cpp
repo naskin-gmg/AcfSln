@@ -1,6 +1,9 @@
 #include "iprop/CPropertiesManager.h"
 
 
+// Qt includes
+#include <QtCore/QMap>
+
 // ACF includes
 #include "iprop/TProperty.h"
 #include "iprop/TMultiProperty.h"
@@ -14,7 +17,6 @@ namespace iprop
 
 CPropertiesManager::CPropertiesManager()
 {
-	m_itemModel.setColumnCount(2);
 }
 
 
@@ -37,14 +39,38 @@ CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const QByt
 
 // reimplemented (iprop::IPropertiesManager)
 
-void CPropertiesManager::RemoveAllProperties()
+void CPropertiesManager::ResetProperties()
 {
 	if (!m_propertiesList.IsEmpty()){
 		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET);
 
-		m_propertiesList.Reset();
+		bool workDone = false;
+		while (!workDone){
+			workDone = true;
+			int propertiesCount = m_propertiesList.GetCount();
 
-		m_itemModel.clear();
+			for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
+				IProperty::PropertyFlags flags = GetPropertyFlags(propertyIndex);
+
+				if ((flags & IProperty::PF_DYNAMIC)){
+					m_propertiesList.RemoveAt(propertyIndex);
+
+					workDone = false;
+
+					break;
+				}
+				else
+				{
+					PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
+					Q_ASSERT(propertyInfoPtr != NULL);
+
+					IProperty* propertyPtr = dynamic_cast<IProperty*>(propertyInfoPtr->objectPtr.GetPtr());
+					if (propertyPtr != NULL){
+						propertyPtr->ResetValue();
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -82,6 +108,15 @@ QString CPropertiesManager::GetPropertyDescription(int propertyIndex) const
 }
 
 
+IProperty::PropertyFlags CPropertiesManager::GetPropertyFlags(int propertyIndex) const
+{
+	Q_ASSERT(propertyIndex >= 0);
+	Q_ASSERT(propertyIndex < m_propertiesList.GetCount());
+
+	return IProperty::PropertyFlags(m_propertiesList.GetAt(propertyIndex)->propertyFlags);
+}
+
+
 void CPropertiesManager::InsertProperty(
 			iser::IObject* objectPtr,
 			const QByteArray& propertyId,
@@ -102,25 +137,7 @@ void CPropertiesManager::InsertProperty(
 		propertyInfoPtr->propertyFlags = propertyFlags;
 
 		m_propertiesList.PushBack(propertyInfoPtr);
-
-		QList<QStandardItem*> row;
-		QStandardItem* propertyItemPtr = new QStandardItem(QString(propertyId));
-		propertyItemPtr->setToolTip(QString(propertyDescription));
-		row << propertyItemPtr;
-	
-		QStandardItem* propertyValueItemPtr = new QStandardItem();
-		row << propertyValueItemPtr;
-
-		m_itemModel.appendRow(row);
 	}
-}
-
-
-// reimplemented (ibase::IQtItemModelProvider)
-
-const QAbstractItemModel* CPropertiesManager::GetItemModel() const
-{
-	return &m_itemModel;
 }
 
 
@@ -128,7 +145,7 @@ const QAbstractItemModel* CPropertiesManager::GetItemModel() const
 
 bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag propertiesTag("Properties", "Liste of object properties");
+	static iser::CArchiveTag propertiesTag("Properties", "List of object properties");
 	static iser::CArchiveTag propertyTag("Property", "Object property");
 
 	if (archive.IsStoring()){
@@ -157,34 +174,79 @@ bool CPropertiesManager::ReadProperties(
 
 		QByteArray propertyId;
 		QByteArray propertyTypeId;
+		int propertyFlags = 0;
+		QByteArray propertyDescription;
 
-		iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
+		static iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
 		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
 		retVal = retVal && archive.Process(propertyTypeId);
 		retVal = retVal && archive.EndTag(propertyTypeIdTag);
 
-		iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
+		static iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
 		retVal = retVal && archive.BeginTag(propertyIdTag);
 		retVal = retVal && archive.Process(propertyId);
 		retVal = retVal && archive.EndTag(propertyIdTag);
 
+		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+		quint32 versionNumber = 0;
+
+		if (versionInfo.GetVersionNumber(1, versionNumber)){
+			if (versionNumber > 931){
+				static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
+				retVal = retVal && archive.BeginTag(propertyFlagsTag);
+				retVal = retVal && archive.Process(propertyFlags);
+				retVal = retVal && archive.EndTag(propertyFlagsTag);
+
+				static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
+				retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+				retVal = retVal && archive.Process(propertyDescription);
+				retVal = retVal && archive.EndTag(propertyDescriptionTag);
+
+				static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
+				retVal = retVal && archive.BeginTag(propertyFlagsTag);
+			}
+		}
+
 		if (retVal){
-			bool isDeprecated = true;
+			bool isStatic = false;
 
 			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
 			if (existingPropertyPtr != NULL){
 				bool isEqual = AreIdsEqual(propertyTypeId, existingPropertyPtr->objectPtr->GetFactoryId());
 				if (isEqual && ((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
-					isDeprecated = false;
+					isStatic = true;
 					retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
 				}
 			}
 
-			if (isDeprecated){
-				// try to serialize deprecated property:
-				istd::TDelPtr<iser::IObject> objectPtr(s_propertyFactory.CreateInstance(propertyTypeId));
+			if (!isStatic){
+				// Support for old property type format:
+				QMap<QByteArray, QByteArray> oldPropertyTypeMap;
+
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<int> >()] = TProperty<int>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<double> >()] = TProperty<double>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<bool> >()] = TProperty<bool>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QString> >()] = TProperty<QString>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QByteArray> >()] = TProperty<QByteArray>::GetTypeName();
+
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<int> >()] = TMultiProperty<int>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<double> >()] = TMultiProperty<double>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<bool> >()] = TMultiProperty<bool>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QString> >()] = TMultiProperty<QString>::GetTypeName();
+				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QByteArray> >()] = TMultiProperty<QByteArray>::GetTypeName();
+
+				if (oldPropertyTypeMap.contains(propertyTypeId)){
+					propertyTypeId = oldPropertyTypeMap.value(propertyTypeId);
+				}
+
+				// try to serialize a deprecated or dynamic property:
+				istd::TDelPtr<iser::IObject> objectPtr(GetPropertyFactory().CreateInstance(propertyTypeId));
 				if (objectPtr.IsValid()){
 					retVal = retVal && objectPtr->Serialize(archive);
+
+					if (retVal && (propertyFlags & iprop::IProperty::PF_DYNAMIC)){
+						InsertProperty(objectPtr.PopPtr(), propertyId, propertyDescription, propertyFlags, true);
+					}
 				}
 			}
 		}
@@ -230,20 +292,35 @@ bool CPropertiesManager::WriteProperties(
 		iser::IObject* objectPtr = propertyInfoPtr->objectPtr.GetPtr();
 		QByteArray propertyId = propertyInfoPtr->propertyId;
 		QByteArray propertyTypeId = objectPtr->GetFactoryId();
+		int propertyFlags = propertyInfoPtr->propertyFlags;
+		QByteArray propertyDescription = propertyInfoPtr->propertyDescription;
 
 		retVal = retVal && archive.BeginTag(propertyTag);
 
-		iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
+		static iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object");
 		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
 		retVal = retVal && archive.Process(propertyTypeId);
 		retVal = retVal && archive.EndTag(propertyTypeIdTag);
 
-		iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
+		static iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object");
 		retVal = retVal && archive.BeginTag(propertyIdTag);
 		retVal = retVal && archive.Process(propertyId);
 		retVal = retVal && archive.EndTag(propertyIdTag);
 
+		static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
+		retVal = retVal && archive.BeginTag(propertyFlagsTag);
+		retVal = retVal && archive.Process(propertyFlags);
+		retVal = retVal && archive.EndTag(propertyFlagsTag);
+
+		static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
+		retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+		retVal = retVal && archive.Process(propertyDescription);
+		retVal = retVal && archive.EndTag(propertyDescriptionTag);
+
+		static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
+		retVal = retVal && archive.BeginTag(propertyObjectTag);
 		retVal = retVal && objectPtr->Serialize(archive);
+		retVal = retVal && archive.EndTag(propertyObjectTag);
 
 		retVal = retVal && archive.EndTag(propertyTag);
 	}
@@ -269,9 +346,15 @@ bool CPropertiesManager::AreIdsEqual(QByteArray firstId, QByteArray secondId) co
 }
 
 
-// private static members
+// private static methods
 
-CPropertiesManager::PropertyFactory CPropertiesManager::s_propertyFactory;
+CPropertiesManager::PropertyFactory& CPropertiesManager::GetPropertyFactory()
+{
+	static PropertyFactory propertyFactory;
+
+	return propertyFactory;
+}
+
 
 static struct DefaultPropertyTypesRegistrator
 {

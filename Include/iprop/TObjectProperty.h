@@ -2,13 +2,14 @@
 #define iprop_TObjectProperty_included
 
 
+// ACF includes
 #include "istd/CClassInfo.h"
 #include "istd/TDelPtr.h"
 #include "istd/TChangeNotifier.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
+// ACF-Solutions includes
 #include "iprop/CPropertyBase.h"
 
 
@@ -18,7 +19,7 @@ namespace iprop
 
 /**
 	Property implementation for serializable objects.
-	This implementation can be also interpreted as a property "wrapper" for any serializeable object.
+	This implementation can be also interpreted as a property "wrapper" for any serializable object.
 */
 template <typename Value>
 class TObjectProperty: public CPropertyBase

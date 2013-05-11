@@ -2,20 +2,15 @@
 #define iprop_CPropertiesManager_included
 
 
-// Qt includes
-#include <QtGui/QStandardItemModel>
-
 // ACF includes
 #include "istd/TComposedFactory.h"
 #include "istd/TSingleFactory.h"
 #include "istd/TOptPointerVector.h"
 #include "istd/TDelPtr.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "ibase/IQtItemModelProvider.h"
-
+// ACF-Solutions includes
 #include "iprop/TProperty.h"
 #include "iprop/TMultiProperty.h"
 #include "iprop/IPropertiesManager.h"
@@ -28,13 +23,11 @@ namespace iprop
 /**
 	Basic implementation of an property container.
 */
-class CPropertiesManager:
-			virtual public IPropertiesManager,
-			virtual public ibase::IQtItemModelProvider
+class CPropertiesManager: virtual public IPropertiesManager
 {
 public:
 	/*
-		Internal property info item.
+		Internal property info object.
 	*/
 	struct PropertyInfo
 	{
@@ -59,20 +52,18 @@ public:
 	static bool RegisterPropertyType();
 
 	// reimplemented (iprop::IPropertiesManager)
-	virtual void RemoveAllProperties();
+	virtual void ResetProperties();
 	virtual int GetPropertiesCount() const;
 	virtual iser::IObject* GetProperty(int propertyIndex) const;
 	virtual QByteArray GetPropertyId(int propertyIndex) const;
 	virtual QString GetPropertyDescription(int propertyIndex) const;
+	virtual IProperty::PropertyFlags GetPropertyFlags(int propertyIndex) const;
 	virtual void InsertProperty(
 				iser::IObject* objectPtr,
 				const QByteArray& propertyId,
 				const QByteArray& propertyDescription,
 				int propertyFlags,
 				bool releaseFlag);
-
-	// reimplemented (ibase::IQtItemModelProvider)
-	virtual const QAbstractItemModel* GetItemModel() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -94,14 +85,12 @@ private:
 	*/
 	bool AreIdsEqual(QByteArray firstId, QByteArray secondId) const;
 
-private:
 	typedef istd::TComposedFactory<iser::IObject> PropertyFactory;
 
+	static PropertyFactory& GetPropertyFactory();
+
+private:
 	istd::TPointerVector<PropertyInfo> m_propertiesList;
-
-	static PropertyFactory s_propertyFactory;
-
-	QStandardItemModel m_itemModel;
 };
 
 
@@ -110,7 +99,7 @@ private:
 template <typename PropertyImpl>
 bool CPropertiesManager::RegisterPropertyType()
 {
-	return s_propertyFactory.RegisterFactory(new istd::TSingleFactory<iser::IObject, PropertyImpl>(PropertyImpl::GetTypeName()), true);
+	return GetPropertyFactory().RegisterFactory(new istd::TSingleFactory<iser::IObject, PropertyImpl>(PropertyImpl::GetTypeName()), true);
 }
 
 

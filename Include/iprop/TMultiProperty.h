@@ -10,7 +10,6 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
-
 #include "iser/IArchive.h"
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
@@ -44,8 +43,8 @@ public:
 
 	/**
 		Constructor.
-		\param	propertyOwnerPtr	Owner of the attrbiute.
-		\param	propertyId		Unique ID of the attrbiute.
+		\param	propertyOwnerPtr	Owner of the property.
+		\param	propertyId		Unique ID of the property.
 		\param	propertyId		Property description.
 		\param	changeFlags		Change flags for model update notification.
 		\param	elementsCount	Number of elements stored at \c valuesPtr.
@@ -333,6 +332,41 @@ template <typename Value, class Container>
 QByteArray TMultiProperty<Value, Container>::GetTypeName()
 {
 	return istd::CClassInfo::GetName<TMultiProperty<Value> >();
+}
+
+
+template <>
+inline QByteArray TMultiProperty<int>::GetTypeName()
+{
+	return "Integer[]";
+}
+
+
+template <>
+inline QByteArray TMultiProperty<double>::GetTypeName()
+{
+	return "Real[]";
+}
+
+
+template <>
+inline QByteArray TMultiProperty<bool>::GetTypeName()
+{
+	return "Boolean[]";
+}
+
+
+template <>
+inline QByteArray TMultiProperty<QString>::GetTypeName()
+{
+	return "String[]";
+}
+
+
+template <>
+inline QByteArray TMultiProperty<QByteArray>::GetTypeName()
+{
+	return "Id[]";
 }
 
 

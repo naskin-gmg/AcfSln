@@ -27,12 +27,17 @@ CPropertyBase::CPropertyBase(
 	m_changeFlags(changeFlags)
 {
 	if (propertyOwnerPtr != NULL){
-		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags, false);
+		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags & (~PF_DYNAMIC), false);
 	}
 }
 
 
 // reimplemented (iprop::IProperty)
+
+void CPropertyBase::ResetValue()
+{
+}
+
 
 const iser::IObject* CPropertyBase::GetDefaultPropertyValue() const
 {
