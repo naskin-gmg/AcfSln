@@ -2,11 +2,14 @@
 #define iprop_TProperty_included
 
 
+// ACF includes
 #include "istd/TDelPtr.h"
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+
+// ACF-Solutions includes
 #include "iprop/CPropertyBase.h"
 
 
@@ -73,12 +76,12 @@ TProperty<Value>::TProperty()
 
 template <typename Value>
 TProperty<Value>::TProperty(
-				IPropertiesManager* propertyOwnerPtr,
-				const QByteArray& propertyName,
-				const QByteArray& propertyDescription,
-				int propertyFlags,
-				int changeFlags,
-				const ValueType& defaultValue)
+			IPropertiesManager* propertyOwnerPtr,
+			const QByteArray& propertyName,
+			const QByteArray& propertyDescription,
+			int propertyFlags,
+			int changeFlags,
+			const ValueType& defaultValue)
 	:BaseClass(propertyOwnerPtr, propertyName, propertyDescription, propertyFlags, changeFlags),
 	m_value(defaultValue)
 {

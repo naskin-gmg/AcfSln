@@ -73,12 +73,12 @@ TObjectProperty<Value>::TObjectProperty()
 
 template <typename Value>
 TObjectProperty<Value>::TObjectProperty(
-				IPropertiesManager* propertyOwnerPtr,
-				const QByteArray& propertyName,
-				const QByteArray& propertyDescription,
-				int propertyFlags,
-				int changeFlags,
-				const ValueType& defaultValue)
+			IPropertiesManager* propertyOwnerPtr,
+			const QByteArray& propertyName,
+			const QByteArray& propertyDescription,
+			int propertyFlags,
+			int changeFlags,
+			const ValueType& defaultValue)
 	:BaseClass(propertyOwnerPtr, propertyName, propertyDescription, propertyFlags, changeFlags)
 {
 	m_defaultPropertyValuePtr.SetPtr(new PropertyType());
@@ -99,7 +99,7 @@ const Value& TObjectProperty<Value>::GetValue() const
 template <typename Value>
 bool TObjectProperty<Value>::SetValue(const Value& value)
 {
-	if (m_value != value){
+	if (!m_value.IsEqual(value)){
 		return m_value.CopyFrom(value);
 	}
 

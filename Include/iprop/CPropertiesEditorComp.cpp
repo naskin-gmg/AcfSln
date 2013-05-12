@@ -173,6 +173,7 @@ void CPropertiesEditorComp::EditorDelegate::setModelData(QWidget* editor,QAbstra
 	BaseClass::setModelData(editor, model, index);
 }
 
+
 } // namespace iprop
 
 

@@ -127,13 +127,13 @@ TMultiProperty<Value, Container>::TMultiProperty()
 
 template <typename Value, class Container>
 TMultiProperty<Value, Container>::TMultiProperty(
-				IPropertiesManager* propertyOwnerPtr,
-				const QByteArray& propertyId,
-				const QByteArray& propertyDescription,
-				int propertyFlags,
-				int changeFlags,
-				int elementsCount,
-				Value* valuesPtr)
+			IPropertiesManager* propertyOwnerPtr,
+			const QByteArray& propertyId,
+			const QByteArray& propertyDescription,
+			int propertyFlags,
+			int changeFlags,
+			int elementsCount,
+			Value* valuesPtr)
 	:BaseClass(propertyOwnerPtr, propertyId, propertyDescription, propertyFlags, changeFlags)
 {
 	for (int i = 0; i < elementsCount; ++i){
