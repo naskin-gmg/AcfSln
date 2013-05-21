@@ -19,6 +19,8 @@
 #include "iser/CXmlStringReadArchive.h"
 #include "iser/CXmlStringWriteArchive.h"
 
+#include "iqtgui/CFlowLayout.h"
+
 
 namespace iqtinsp
 {
@@ -49,7 +51,7 @@ void CInspectionTaskGuiComp::UpdateModel() const
 				++iter){
 		const imod::IModelEditor* editorPtr = *iter;
 		Q_ASSERT(editorPtr != NULL);
-
+		
 		editorPtr->UpdateModel();
 	}
 }
@@ -295,7 +297,75 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
 
 	switch (*m_designTypeAttrPtr){
-	case 1: // toolbox
+		case 0:	// floating buttons
+		{
+			QVBoxLayout* mainLayout = new QVBoxLayout();
+			((QBoxLayout*)layoutPtr)->addLayout(mainLayout);
+
+			QFrame* buttonsFrame = new QFrame(ParamsFrame);
+			buttonsFrame->setFrameStyle(QFrame::StyledPanel);
+			mainLayout->addWidget(buttonsFrame);
+
+			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(6, 0, 0);
+			buttonsFrame->setLayout(buttonsLayout);
+	
+			m_stackedWidgetPtr = new QStackedWidget(ParamsFrame);
+			mainLayout->addWidget(m_stackedWidgetPtr);
+
+			m_buttonGroupPtr = new QButtonGroup(ParamsFrame);
+			m_buttonGroupPtr->setExclusive(true);
+
+			int subtasksCount = m_editorGuisCompPtr.GetCount();
+			for (int i = 0; i < subtasksCount; ++i){
+				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
+
+				if (guiPtr != NULL){
+					QWidget* panelPtr = new QWidget(m_stackedWidgetPtr);
+					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
+					panelLayoutPtr->setContentsMargins(0,0,0,0);
+
+					QString name;
+					if (i < m_namesAttrPtr.GetCount()){
+						name = m_namesAttrPtr[i];
+					}
+
+					guiPtr->CreateGui(panelPtr);
+
+					int tabIndex = m_stackedWidgetPtr->addWidget(panelPtr);
+					QPushButton* buttonPtr = new QPushButton(name, panelPtr);
+					buttonPtr->setCheckable(true);
+					buttonPtr->setFlat(true);
+					buttonPtr->setMinimumWidth(32);
+					if (i == 0){
+						buttonPtr->setChecked(true);
+					}
+
+					buttonsLayout->addWidget(buttonPtr);
+					m_buttonGroupPtr->addButton(buttonPtr, i);
+
+					if (useSpacer){
+						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+						panelLayoutPtr->addItem(spacerPtr);
+					}
+
+					m_tabToGuiIndexMap[tabIndex] = i;
+
+					if (i < m_editorVisualModelsCompPtr.GetCount()){
+						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
+						if (modelPtr != NULL){
+							RegisterModel(modelPtr, i);
+						}
+					}
+				}
+			}
+
+			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), this, SLOT(OnEditorChanged(int)));
+			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), m_stackedWidgetPtr, SLOT(setCurrentIndex(int)));
+		}
+		break;
+
+		case 1: // toolbox
 		{
 			m_toolBoxPtr = new QToolBox(ParamsFrame);
 			m_toolBoxPtr->setBackgroundRole(QPalette::Window);
@@ -341,7 +411,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 		break;
 
-	default: // tabs
+		default: // tabs
 		{
 			m_tabWidgetPtr = new QTabWidget(ParamsFrame);
 			m_tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
@@ -891,7 +961,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 			}
 		}
 	}
-
+	
 	if ((taskIndex >= 0) && (taskIndex  < m_previewSceneProvidersCompPtr.GetCount())){
 		iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[taskIndex];
 		if (previewProviderPtr != NULL){
@@ -977,7 +1047,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 				return true;
 			}
 		}
-	}
+	}	
 
 	// else try via plain text
 	QByteArray dataToPaste(clipboardPtr->text().toUtf8());

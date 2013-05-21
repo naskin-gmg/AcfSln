@@ -170,6 +170,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCameraInfoGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsGuiComp.cpp"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			>
 			<File
 				RelativePath="..\CBitmapSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCameraInfoGuiComp.h"
 				>
 			</File>
 			<File
@@ -261,6 +269,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CCameraInfoGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CExposureParamsGuiComp.cpp"
 				>
 			</File>
@@ -278,6 +290,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CBitmapSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CCameraInfoGuiComp.h"
 				>
 			</File>
 			<File
@@ -306,6 +322,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCameraInfoGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CExposureParamsGuiComp.ui"
 				>
 			</File>
@@ -325,6 +345,10 @@
 		<Filter
 			Name="Moc Files"
 			>
+			<File
+				RelativePath="..\CCameraInfoGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CScaleCalibrationEditorComp.moc"
 				>

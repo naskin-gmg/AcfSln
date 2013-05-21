@@ -48,4 +48,9 @@ I_EXPORT_COMPONENT(
 			"Editor for scale calibration parameters",
 			"Scale Calibration Numeric Values Filter Ranges Parameter Editor");
 
+I_EXPORT_COMPONENT(
+			CameraInfoGui,
+			"Gui showing selected camera information",
+			"GUI Camera Information");
+
 } // namespace QtCameraPck
