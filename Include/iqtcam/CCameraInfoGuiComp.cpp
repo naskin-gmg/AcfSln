@@ -17,6 +17,7 @@ void CCameraInfoGuiComp::UpdateGui(int /*updateFlags*/)
 		TableView->setUpdatesEnabled(false);
 
 		TableView->clear();
+		TableView->setRowCount(0);
 		TableView->setColumnCount(1);
 
 		AddItem(cameraIndex, icam::ICameraInfo::CA_VENDOR, tr("Vendor"));
@@ -30,6 +31,8 @@ void CCameraInfoGuiComp::UpdateGui(int /*updateFlags*/)
 		AddItem(cameraIndex, icam::ICameraInfo::CA_IP_ADDRESS, tr("IP address"));
 		AddItem(cameraIndex, icam::ICameraInfo::CA_MAC_ADDRESS, tr("MAC address"));
 		AddItem(cameraIndex, icam::ICameraInfo::CA_PORT, tr("Port number"));
+		AddItem(cameraIndex, icam::ICameraInfo::CA_MAX_WIDTH, tr("Sensor width"));
+		AddItem(cameraIndex, icam::ICameraInfo::CA_MAX_HEIGHT, tr("Sensor height"));
 
 		TableView->setUpdatesEnabled(true);
 	}
