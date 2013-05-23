@@ -117,6 +117,10 @@
      <property name="text">
       <string>Login</string>
      </property>
+     <property name="icon">
+      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+       <normaloff>:/Icons/Ok</normaloff>:/Icons/Ok</iconset>
+     </property>
     </widget>
    </item>
    <item>
@@ -130,11 +134,17 @@
      <property name="text">
       <string>Logout</string>
      </property>
+     <property name="icon">
+      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+       <normaloff>:/Icons/Shutdown.svg</normaloff>:/Icons/Shutdown.svg</iconset>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>PasswordEdit</sender>
@@ -143,12 +153,28 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>259</x>
-     <y>34</y>
+     <x>315</x>
+     <y>25</y>
     </hint>
     <hint type="destinationlabel">
-     <x>346</x>
-     <y>34</y>
+     <x>396</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>UserEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>LoginButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>14</y>
     </hint>
    </hints>
   </connection>

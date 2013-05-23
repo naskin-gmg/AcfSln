@@ -84,12 +84,15 @@ void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
 		if (constrainsPtr != NULL){
 			ShutterTimeSB->setMinimum(constrainsPtr->GetShutterTimeRange().GetMinValue() * 1000.0);
 			ShutterTimeSB->setMaximum(constrainsPtr->GetShutterTimeRange().GetMaxValue() * 1000.0);
+			ShutterTimeSB->setSingleStep(0.01);
 
 			DelayTimeSB->setMinimum(constrainsPtr->GetDelayTimeRange().GetMinValue() * 1000.0);
 			DelayTimeSB->setMaximum(constrainsPtr->GetDelayTimeRange().GetMaxValue() * 1000.0);
+			DelayTimeSB->setSingleStep(0.01);
 
 			EenDelayTimeSB->setMinimum(constrainsPtr->GetEenDelayRange().GetMinValue() * 1000.0);
 			EenDelayTimeSB->setMaximum(constrainsPtr->GetEenDelayRange().GetMaxValue() * 1000.0);
+			EenDelayTimeSB->setSingleStep(0.01);
 		}
 	}
 }

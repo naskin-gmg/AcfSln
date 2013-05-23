@@ -29,6 +29,9 @@
      <property name="maximum">
       <double>1000.000000000000000</double>
      </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
     </widget>
    </item>
    <item row="0" column="2">
@@ -62,6 +65,9 @@
      <property name="maximum">
       <double>1000.000000000000000</double>
      </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
     </widget>
    </item>
    <item row="1" column="2">
@@ -94,6 +100,9 @@
     <widget class="QDoubleSpinBox" name="EenDelayTimeSB">
      <property name="maximum">
       <double>1000.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
      </property>
     </widget>
    </item>
