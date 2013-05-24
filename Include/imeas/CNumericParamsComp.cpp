@@ -47,7 +47,13 @@ void CNumericParamsComp::OnComponentCreated()
 			lastValue = m_defaultValuesAttrPtr[i];
 		}
 
-		m_values[i] = lastValue;
+		// correct the value according to the constraints
+		const imath::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(i);
+		if (unitInfo.GetValueRange().IsValid()){
+			m_values[i] = unitInfo.GetValueRange().GetClipped(lastValue);
+		} else {
+			m_values[i] = lastValue;
+		}
 	}
 }
 

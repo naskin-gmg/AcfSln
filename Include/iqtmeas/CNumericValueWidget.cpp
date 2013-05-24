@@ -12,6 +12,7 @@ namespace iqtmeas
 CNumericValueWidget::CNumericValueWidget(
 			QWidget* parentPtr,
 			bool showSlilder,
+			bool showButtons,
 			int inputPolicy)
 :	QWidget(parentPtr),
 	m_unitMultiplicationFactor(1),
@@ -22,6 +23,8 @@ CNumericValueWidget::CNumericValueWidget(
 	setupUi(this);
 
 	ValueSlider->setVisible(showSlilder);
+	MinButton->setVisible(showSlilder && showButtons);
+	MaxButton->setVisible(showSlilder && showButtons);
 
 	switch (inputPolicy){
 		case 2:
@@ -48,10 +51,8 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::I
 	const QString& unitName = unitInfo.GetUnitName();
 	if (!unitName.isEmpty()){
 		UnitLabel->setText(unitName);
-		//UnitLabel->setVisible(true);
 	}
 	else{
-		//UnitLabel->setVisible(false);
 		UnitLabel->setFixedWidth(0);
 	}
 
@@ -67,11 +68,15 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::I
 		valueRange = istd::CRange(0, 100);
 	}
 
+	double minValue = valueRange.GetMinValue() * m_unitMultiplicationFactor;
+	double maxValue = valueRange.GetMaxValue() * m_unitMultiplicationFactor;
+
 	ValueSB->setDecimals(displayPrecision);
-	ValueSB->setMinimum(valueRange.GetMinValue() * m_unitMultiplicationFactor);
-	ValueSB->setMaximum(valueRange.GetMaxValue() * m_unitMultiplicationFactor);
-	ValueSlider->setMinimum(valueRange.GetMinValue() * m_unitPrecisionFactor);
-	ValueSlider->setMaximum(valueRange.GetMaxValue() * m_unitPrecisionFactor);
+	ValueSB->setRange(minValue, maxValue);
+	ValueSlider->setRange(valueRange.GetMinValue() * m_unitPrecisionFactor, valueRange.GetMaxValue() * m_unitPrecisionFactor);
+	MinButton->setText(QString::number(minValue));
+	MaxButton->setText(QString::number(maxValue));
+	ValueSB->setToolTip(tr("Range: %1 - %2").arg(minValue).arg(maxValue));
 }
 
 
@@ -117,6 +122,20 @@ void CNumericValueWidget::on_ValueSlider_valueChanged(int value)
 	m_ignoreEvents = false;
 
 	Q_EMIT ValueChanged();
+}
+
+
+void CNumericValueWidget::on_MinButton_clicked()
+{
+	ValueSB->setValue(ValueSB->minimum());
+	ValueSlider->setValue(ValueSlider->minimum());
+}
+
+
+void CNumericValueWidget::on_MaxButton_clicked()
+{
+	ValueSB->setValue(ValueSB->maximum());
+	ValueSlider->setValue(ValueSlider->maximum());
 }
 
 

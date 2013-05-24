@@ -22,7 +22,7 @@ class CNumericValueWidget:
 	Q_OBJECT
 
 public:
-	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, int inputPolicy = 0);
+	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, bool showButtons = true, int inputPolicy = 0);
 
 	void SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo);
 
@@ -31,13 +31,15 @@ public:
 
 Q_SIGNALS:
 	/**
-		Will be emited when user changed value.
+		Will be emitted when user changed value.
 	*/
 	void ValueChanged();
 
 protected Q_SLOTS:
 	void on_ValueSB_valueChanged(double value);
 	void on_ValueSlider_valueChanged(int value);
+	void on_MinButton_clicked();
+	void on_MaxButton_clicked();
 
 private:
 	bool m_ignoreEvents;
