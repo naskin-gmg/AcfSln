@@ -172,7 +172,7 @@ bool CExtremumCaliperProcessorComp::GetProjectionPosition(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			double& result) const
 {
-	imath::CVarVector values = feature.GetComponentValue(imeas::INumericValue::VT_ALPHA);
+	imath::CVarVector values = feature.GetComponentValue(imeas::INumericValue::VTI_ALPHA);
 	if (values.GetElementsCount() > 0){
 		result = values.GetElement(0);
 

@@ -71,7 +71,7 @@ imath::CVarVector CCaliperFeature::GetComponentValue(ValueTypeId valueTypeId) co
 	case VTI_AUTO:
 		return GetValues();
 
-	case VT_ALPHA:
+	case VTI_ALPHA:
 		retVal.SetElementsCount(1);
 		retVal.SetElement(0, m_position);
 		break;
