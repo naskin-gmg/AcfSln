@@ -59,7 +59,7 @@ public:
 		/**
 			Alpha value (proportion).
 		*/
-		VT_ALPHA,
+		VTI_ALPHA,
 
 		/**
 			Length or distance.
