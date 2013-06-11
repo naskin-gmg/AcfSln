@@ -306,7 +306,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 			buttonsFrame->setFrameStyle(QFrame::StyledPanel);
 			mainLayout->addWidget(buttonsFrame);
 
-			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(6, 0, 0);
+			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(6, 3, 3);
 			buttonsFrame->setLayout(buttonsLayout);
 	
 			m_stackedWidgetPtr = new QStackedWidget(ParamsFrame);
@@ -324,9 +324,9 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 					panelLayoutPtr->setContentsMargins(0,0,0,0);
 
-					QString name;
+					QString name = QString::number(i+1) + ". ";
 					if (i < m_namesAttrPtr.GetCount()){
-						name = m_namesAttrPtr[i];
+						name += m_namesAttrPtr[i];
 					}
 
 					guiPtr->CreateGui(panelPtr);
@@ -334,8 +334,9 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 					int tabIndex = m_stackedWidgetPtr->addWidget(panelPtr);
 					QPushButton* buttonPtr = new QPushButton(name, panelPtr);
 					buttonPtr->setCheckable(true);
-					buttonPtr->setFlat(true);
+					//buttonPtr->setFlat(true);
 					buttonPtr->setMinimumWidth(32);
+					buttonPtr->setStyleSheet("QPushButton:checked{color:darkCyan;font-weight:bold;}");
 					if (i == 0){
 						buttonPtr->setChecked(true);
 					}
