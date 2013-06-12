@@ -84,7 +84,7 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 
 		istd::CIndex2d index;
 		for (index[0] = 0; index[0] < size[0]; ++index[0]){
-			for (index[1] = 0; index[1] < size[0]; ++index[1]){
+			for (index[1] = 0; index[1] < size[1]; ++index[1]){
 				double value = GetSampleValue(index);
 				retVal = retVal && archive.Process(value);
 			}
@@ -117,7 +117,7 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 
 		istd::CIndex2d index;
 		for (index[0] = 0; index[0] < size[0]; ++index[0]){
-			for (index[1] = 0; index[1] < size[0]; ++index[1]){
+			for (index[1] = 0; index[1] < size[1]; ++index[1]){
 				double value = 0;
 				retVal = retVal && archive.Process(value);
 				if (!retVal){
