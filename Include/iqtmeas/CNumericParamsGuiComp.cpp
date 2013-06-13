@@ -60,7 +60,7 @@ void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
 
 	QLayout* layoutPtr = panelPtr->layout();
 	if (layoutPtr == NULL){
-		layoutPtr = new QBoxLayout(QBoxLayout::TopToBottom);
+		layoutPtr = new QVBoxLayout;
 		layoutPtr->setMargin(0);
 		panelPtr->setLayout(layoutPtr);
 	}
