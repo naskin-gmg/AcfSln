@@ -5,13 +5,16 @@
 #include "istd/TChangeNotifier.h"
 #include "iser/CArchiveTag.h"
 
+
 namespace imeas
 {
 
 
 void CGeneralNumericValue::SetComponentValue(imeas::INumericValue::ValueTypeId valueTypeId, imath::CVarVector value)
 {
-	m_supportMap.insert(valueTypeId, value);
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_supportMap[valueTypeId] = value;
 }
 
 

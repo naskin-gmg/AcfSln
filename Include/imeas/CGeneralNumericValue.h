@@ -28,11 +28,11 @@ public:
 	virtual bool SetValues(const imath::CVarVector& values);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool iser::ISerializable::Serialize(iser::IArchive &archive);
+	virtual bool Serialize(iser::IArchive &archive);
 
 	// reimplemented (istd::IChangable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
 	typedef QMap<imeas::INumericValue::ValueTypeId, imath::CVarVector> SupportMap;
