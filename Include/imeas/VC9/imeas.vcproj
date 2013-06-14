@@ -172,6 +172,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralNumericValue.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHistogramStatisticsProcessorComp.cpp"
 				>
 			</File>
@@ -234,6 +238,10 @@
 			</File>
 			<File
 				RelativePath="..\CGeneralDataSequence.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CGeneralNumericValue.h"
 				>
 			</File>
 			<File
