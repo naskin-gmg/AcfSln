@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "istd/TDelPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -11,6 +12,15 @@ namespace iipr
 
 
 // public methods
+
+CSearchFeature::CSearchFeature()
+	:BaseClass(0.0),
+	m_scale(i2d::CVector2d()),
+	m_angle(0.0),
+	m_index(0)
+{
+}
+
 
 CSearchFeature::CSearchFeature(
 			double weight,
@@ -61,6 +71,16 @@ int CSearchFeature::GetIndex() const
 const QString& CSearchFeature::GetId() const
 {
 	return m_id;
+}
+
+
+void CSearchFeature::SetId(QString id)
+{
+	if (m_id != id){
+		istd::CChangeNotifier notifier(this);
+		
+		m_id = id;
+	}
 }
 
 
@@ -187,6 +207,17 @@ bool CSearchFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	}
 
 	return false;
+}
+
+istd::IChangeable* CSearchFeature::CloneMe(CompatibilityMode mode) const
+{
+	istd::TDelPtr<CSearchFeature> retVal(new CSearchFeature);
+
+	if (retVal->CopyFrom(*this, mode)){
+		return retVal.PopPtr();
+	}
+
+	return NULL;
 }
 
 

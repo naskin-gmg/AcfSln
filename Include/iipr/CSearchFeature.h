@@ -23,6 +23,8 @@ class CSearchFeature: public TWeightedFeatureWrap<i2d::CPosition2d>
 public:
 	typedef TWeightedFeatureWrap<i2d::CPosition2d> BaseClass;
 
+	CSearchFeature();
+
 	CSearchFeature(
 				double weight,
 				const i2d::CVector2d& position,
@@ -35,6 +37,7 @@ public:
 	const i2d::CVector2d& GetScale() const;
 	int GetIndex() const;
 	const QString& GetId() const;
+	void SetId(QString id);
 	const i2d::ITransformation2d& GetTransformation() const;
 
 	// reimplemented (imeas::INumericValue)
@@ -46,6 +49,7 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
 	i2d::CVector2d m_scale;
