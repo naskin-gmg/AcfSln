@@ -252,23 +252,25 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 				// check if certain amount of models was found
 				const iipr::ISearchParams* searchParamsPtr = dynamic_cast<const iipr::ISearchParams*>(paramsSetPtr->GetParameter(*m_searchParamsIdAttrPtr));
-				int nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
-				int foundModelsCount = result.GetValuesCount();
+				if (searchParamsPtr != NULL){
+					int nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
+					int foundModelsCount = result.GetValuesCount();
 
-				if (nominalModelsCount > 0 && foundModelsCount < nominalModelsCount){
-					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+					if (nominalModelsCount > 0 && foundModelsCount < nominalModelsCount){
+						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+					}
+					else{
+						m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
+					}
+
+					ilog::CMessage* message = new ilog::CMessage(
+						m_defaultInformationCategory,
+						0,
+						"",
+						"SearchResult");
+
+					AddMessage(message);
 				}
-				else{
-					m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
-				}
-
-				ilog::CMessage* message = new ilog::CMessage(
-					m_defaultInformationCategory,
-					0,
-					"",
-					"SearchResult");
-
-				AddMessage(message);
 			}
 
 			// Update calibration list:
