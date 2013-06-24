@@ -203,7 +203,9 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					}
 
 					istd::IInformationProvider::InformationCategory searchResult = (featuresCount < nominalModelsCount) ? istd::IInformationProvider::IC_ERROR : istd::IInformationProvider::IC_INFO;
-					QString searchResultText = (searchResult == istd::IInformationProvider::IC_INFO) ? "Search model was found" : "Search model was not found"; 
+					QString searchResultText = (searchResult == istd::IInformationProvider::IC_INFO) ? 
+						"Search model was found" : 
+						"Search model was not found"; 
 
 					ilog::CMessage* message = new ilog::CMessage(
 								searchResult,
@@ -251,29 +253,35 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				}
 
 				// check if certain amount of models was found
+				int modelsCount = result.GetValuesCount();
+				int nominalModelsCount = -1;
+
 				const iipr::ISearchParams* searchParamsPtr = dynamic_cast<const iipr::ISearchParams*>(paramsSetPtr->GetParameter(*m_searchParamsIdAttrPtr));
 				if (searchParamsPtr != NULL){
-					int nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
-					int foundModelsCount = result.GetValuesCount();
-
-					if (nominalModelsCount > 0 && foundModelsCount < nominalModelsCount){
-						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
-					}
-					else{
-						m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
-					}
-
-					ilog::CMessage* message = new ilog::CMessage(
-						m_defaultInformationCategory,
-						0,
-						"",
-						"SearchResult");
-
-					AddMessage(message);
+					nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
 				}
+
+				if (nominalModelsCount > 0 && modelsCount < nominalModelsCount){
+					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+				}
+				else{
+					m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
+				}
+
+				QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO) ? 
+					"Search model was found" : 
+					"Search model was not found"; 
+
+				ilog::CMessage* message = new ilog::CMessage(
+					m_defaultInformationCategory,
+					MT_SEARCH_RESULT,
+					searchResultText,
+					"SearchResult");
+
+				AddMessage(message);
 			}
 
-			// Update calibration list:
+			// Update calibration list
 			int featuresCount = result.GetValuesCount();
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 				i2d::CAffineTransformation2d transform;
