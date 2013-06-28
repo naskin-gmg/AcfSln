@@ -11,7 +11,7 @@
 #include "imod/IModel.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
-#include "ilog/IMessageContainer.h"
+#include "ilog/CMessageContainer.h"
 #include "ilog/TLoggerCompWrap.h"
 
 // ACF-Solutions includes
@@ -63,6 +63,7 @@ public:
 		I_ASSIGN(m_reduceHierarchyAttrPtr, "ReduceHierarchy", "If it is true, sub inspection tasks will be rolled out", true, false);
 		I_ASSIGN(m_generalParamsCompPtr, "GeneralParams", "Optional general parameter set, it will be always serialized", false, "GeneralParams");
 		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, true);
+		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 	I_END_COMPONENT;
 
 	CInspectionTaskComp();
@@ -103,9 +104,11 @@ protected:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	class MessageContainer: virtual public ilog::IMessageContainer
+	class MessageContainer: virtual public ilog::CMessageContainer
 	{
 	public:
+		typedef ilog::CMessageContainer BaseClass;
+
 		MessageContainer(CInspectionTaskComp* parentPtr);
 
 		// reimplemented (ilog::IMessageContainer)
@@ -150,6 +153,7 @@ private:
 	I_ATTR(bool, m_reduceHierarchyAttrPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
 	I_REF(imod::IModel, m_generalParamsModelCompPtr);
+	I_ATTR(QString, m_diagnosticNameAttrPtr);
 
 	typedef QVector<iproc::ISupplier*> Suppliers;
 	Suppliers m_subtasks;
