@@ -48,7 +48,6 @@
 				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				EnableFunctionLevelLinking="true"
 				RuntimeTypeInfo="true"
-				OpenMP="true"
 				UsePrecompiledHeader="0"
 				SuppressStartupBanner="true"
 			/>
@@ -113,7 +112,6 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="$(ACFDIR)/Include"
 				StringPooling="true"
-				OpenMP="true"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 			/>

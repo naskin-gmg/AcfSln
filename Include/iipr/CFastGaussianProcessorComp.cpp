@@ -4,11 +4,6 @@
 // Qt includes
 #include <QtCore/QVector>
 
-// OpenMP includes
-#ifdef _OPENMP
-#include <omp.h>
-#endif
-
 
 namespace iipr
 {
