@@ -1,3 +1,3 @@
-include($(ACFDIR)/Config/QMake/StaticConfig.pri)
+include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
 TARGET = iwiz

@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -90,7 +90,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Component.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"

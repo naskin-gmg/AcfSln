@@ -1,5 +1,5 @@
-include($(ACFDIR)/Config/QMake/ComponentConfig.pri)
-include($(ACFDIR)/Config/QMake/QtBaseConfig.pri)
+include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
+include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 
 TARGET = ProcessingGuiPck
 
@@ -7,5 +7,5 @@ LIBS += -L../../../Lib/$$COMPILER_DIR -liprocgui -liproc
 
 QT += xml
 
-include($(ACFDIR)/Config/QMake/AcfStd.pri)
-include($(ACFDIR)/Config/QMake/AcfQt.pri)
+include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+include($(ACFCONFIGDIR)/QMake/AcfQt.pri)

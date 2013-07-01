@@ -1,5 +1,5 @@
-include($(ACFDIR)/Config/QMake/StaticConfig.pri)
-include($(ACFDIR)/Config/QMake/CustomBuild.pri)
+include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
+include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
 
 TARGET = AcfSlnLoc
 

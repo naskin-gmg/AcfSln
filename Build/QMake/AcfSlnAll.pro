@@ -1,6 +1,6 @@
 # Root of ACF-Solutions project
 
-include ($(ACFDIR)/Config/QMake/GeneralConfig.pri)
+include ($(ACFCONFIGDIR)/QMake/GeneralConfig.pri)
 
 TEMPLATE = subdirs
 CONFIG += ordered

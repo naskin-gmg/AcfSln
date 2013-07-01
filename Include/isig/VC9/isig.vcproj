@@ -17,7 +17,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -83,7 +83,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops;$(ACFDIR)\Config\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
