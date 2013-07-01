@@ -44,7 +44,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (IPatternController)
-	virtual bool TeachPattern();
+	virtual bool TeachPattern(const istd::IChangeable* sourceObjectPtr = NULL);
 	virtual void ResetPattern();
 	virtual bool IsPatternValid() const;
 	const iser::ISerializable* GetPatternObject() const;

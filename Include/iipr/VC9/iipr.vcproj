@@ -691,6 +691,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IPatternController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IProjectionConstraints.h"
 				>
 			</File>

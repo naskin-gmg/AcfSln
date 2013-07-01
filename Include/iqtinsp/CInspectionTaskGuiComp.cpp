@@ -337,13 +337,17 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 					//buttonPtr->setFlat(true);
 					buttonPtr->setMinimumWidth(32);
 
-					QFont boldFont; boldFont.setBold(true);
-					buttonPtr->setFont(boldFont);
-
 					buttonPtr->setStyleSheet(
-						"QPushButton{padding:5px;border-radius:4px;border:1px solid #ccc;}"
-						"QPushButton:enabled{color:#31688a;background-color:#fff;}"
-						"QPushButton:checked{color:#fff;background-color:#31688a;}");
+						"QPushButton{border:1px solid transparent; padding:4px;}"
+
+						"QPushButton:enabled{color:#000;}"
+						"QPushButton:enabled:hover:!checked{color:#31688a; border-color:#ccc;}"
+						"QPushButton:checked{color:#fff; border-color:#666; background-color:#888;}"
+						);
+
+						//"QPushButton{padding:5px;border-radius:4px;border:1px solid #ccc;}"
+						//"QPushButton:enabled{color:#31688a;background-color:#fff;}"
+						//"QPushButton:checked{color:#fff;background-color:#31688a;}");
 
 					if (i == 0){
 						buttonPtr->setChecked(true);
