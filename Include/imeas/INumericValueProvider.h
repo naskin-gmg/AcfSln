@@ -1,5 +1,5 @@
-#ifndef imeas_IValueProvider_included
-#define imeas_IValueProvider_included
+#ifndef imeas_INumericValueProvider_included
+#define imeas_INumericValueProvider_included
 
 
 // ACF includes
@@ -35,6 +35,6 @@ public:
 } // namespace imeas
 
 
-#endif // !imeas_IValueProvider_included
+#endif // !imeas_INumericValueProvider_included
 
 
