@@ -225,6 +225,10 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 							return WS_CRITICAL;
 						}
 
+						if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled()){
+							m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+						}
+
 						const_cast<iipr::CSearchFeature*>(searchFeaturePtr)->SetId(multiSearchParamsManagerPtr->GetParamsSetName(searchIndex)+"/"+searchFeaturePtr->GetId());
 
 						istd::IChangeable* featurePtr = searchFeaturePtr->CloneMe();
@@ -267,6 +271,14 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				else{
 					m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
 				}
+
+				for (int featureIndex = 0; featureIndex < modelsCount; featureIndex++){
+					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
+
+					if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled()){
+						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+					}
+				}				
 
 				QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO) ? 
 					"Search model was found" : 

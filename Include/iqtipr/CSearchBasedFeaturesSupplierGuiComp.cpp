@@ -140,6 +140,15 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle()), 'f', 2));
 					modelItemPtr->setText(CT_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2)+","+QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
 
+					if (searchFeaturePtr->IsNegativeModelEnabled()){
+						modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));
+						modelItemPtr->setBackground(CT_SCORE, QBrush(Qt::red));
+						modelItemPtr->setBackground(CT_POSITION, QBrush(Qt::red));
+						modelItemPtr->setBackground(CT_ANGLE, QBrush(Qt::red));
+						modelItemPtr->setBackground(CT_SCALE, QBrush(Qt::red));
+					}
+
+
 					ResultsList->addTopLevelItem(modelItemPtr);
 
 					VisualObject* visualObject = new VisualObject;

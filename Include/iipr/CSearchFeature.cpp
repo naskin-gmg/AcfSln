@@ -27,13 +27,15 @@ CSearchFeature::CSearchFeature(
 			const i2d::CVector2d& position,
 			double angle,
 			const i2d::CVector2d& scale,
+			bool negativeModel,
 			int index,
 			const QString& id)
 :	BaseClass(weight),
 	m_scale(scale),
 	m_angle(angle),
 	m_index(index),
-	m_id(id)
+	m_id(id),
+	m_isNegativeModelEnabled(negativeModel)
 {
 	BaseClass::SetPosition(position);
 
@@ -80,6 +82,22 @@ void CSearchFeature::SetId(QString id)
 		istd::CChangeNotifier notifier(this);
 		
 		m_id = id;
+	}
+}
+
+
+bool CSearchFeature::IsNegativeModelEnabled() const
+{
+	return m_isNegativeModelEnabled;
+}
+
+
+void CSearchFeature::SetNegativeModelEnabled(bool enable)
+{
+	if (m_isNegativeModelEnabled != enable){
+		istd::CChangeNotifier notifier(this);
+		
+		m_isNegativeModelEnabled = enable;
 	}
 }
 
@@ -183,6 +201,11 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_id);
 	retVal = retVal && archive.EndTag(idTag);
 
+	static iser::CArchiveTag negativeModelTag("NegativeModelEnabled", "Is negative model enabled");
+	retVal = retVal && archive.BeginTag(negativeModelTag);
+	retVal = retVal && archive.Process(m_isNegativeModelEnabled);
+	retVal = retVal && archive.EndTag(negativeModelTag);
+
 	return retVal;
 }
 
@@ -200,6 +223,7 @@ bool CSearchFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 		m_angle = objectPtr->GetAngle();
 		m_index = objectPtr->GetIndex();
 		m_id = objectPtr->GetId();
+		m_isNegativeModelEnabled = objectPtr->IsNegativeModelEnabled();
 
 		BaseClass::CopyFrom(object, mode);
 

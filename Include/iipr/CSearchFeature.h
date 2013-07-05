@@ -30,6 +30,7 @@ public:
 				const i2d::CVector2d& position,
 				double angle,
 				const i2d::CVector2d& scale,
+				bool negativeModel = false,
 				int index = -1,
 				const QString& id = "");
 
@@ -38,6 +39,8 @@ public:
 	int GetIndex() const;
 	const QString& GetId() const;
 	void SetId(QString id);
+	bool IsNegativeModelEnabled() const;
+	void SetNegativeModelEnabled(bool enable);
 	const i2d::ITransformation2d& GetTransformation() const;
 
 	// reimplemented (imeas::INumericValue)
@@ -57,6 +60,7 @@ private:
 	int m_index;
 	QString m_id;
 	mutable i2d::CAffineTransformation2d m_transformation;
+	bool m_isNegativeModelEnabled;
 };
 
 
