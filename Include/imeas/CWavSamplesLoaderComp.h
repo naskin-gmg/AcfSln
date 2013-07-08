@@ -37,11 +37,11 @@ public:
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 protected:
-	enum
+	enum WavContaints
 	{
-		BYTES_PER_SAMPLE = 2,
-		BITS_PER_SAMPLE = BYTES_PER_SAMPLE * 8,
-		WAVE_FORMAT_PCM = 1
+		WC_BYTES_PER_SAMPLE = 2,
+		WC_BITS_PER_SAMPLE = WC_BYTES_PER_SAMPLE * 8,
+		WC_WAVE_FORMAT_PCM = 1
 	};
 };
 
