@@ -281,6 +281,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CMultiBitmapViewComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CScaleCalibrationEditorComp.cpp"
 				>
 			</File>
@@ -347,6 +351,10 @@
 			>
 			<File
 				RelativePath="..\CCameraInfoGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiBitmapViewComp.moc"
 				>
 			</File>
 			<File

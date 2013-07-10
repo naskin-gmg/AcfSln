@@ -6,10 +6,49 @@
 
 // Qt includes
 #include <QtGui/QGridLayout>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QToolButton>
 
 
 namespace iqtcam
 {
+
+
+// reimplemented (imod::IModelEditor)
+
+void CMultiBitmapViewComp::UpdateEditor(int updateFlags)
+{
+	if (m_floatWindowPtr != NULL){
+		if (!IsUpdateBlocked() && IsGuiCreated()){
+			UpdateBlocker updateBlocker(this);
+
+			UpdateGui(updateFlags);
+		}
+	} else {
+		BaseClass::UpdateEditor(updateFlags);
+	}
+}
+
+
+void CMultiBitmapViewComp::UpdateModel() const
+{
+	// do nothing here
+}
+
+
+// reimplemented (iqtgui::IDialog)
+
+int CMultiBitmapViewComp::ExecuteDialog(IGuiObject* /*parentPtr*/)
+{
+	if (m_floatWindowPtr == NULL){
+		return QDialog::Rejected;
+	}
+
+	m_floatWindowPtr->move(m_floatPos);
+	m_floatWindowPtr->show();
+
+	return QDialog::Accepted;
+}
 
 
 // protected methods
@@ -34,6 +73,103 @@ QIcon CMultiBitmapViewComp::GetCategoryIcon(istd::IInformationProvider::Informat
 
 	default:
 		return defaultIcon;
+	}
+}
+
+
+void CMultiBitmapViewComp::DoCreateGui(QWidget* widgetPtr)
+{
+	if (!m_views.isEmpty()){
+		return;
+	}
+
+	iipr::IMultiBitmapProvider* objectPtr = GetObjectPtr();
+	if (objectPtr == NULL){
+		return;
+	}
+
+	int totalViewsCount = objectPtr->GetBitmapsCount();
+	if (totalViewsCount == 0){
+		return;
+	}
+
+	const iprm::IOptionsList* bitmapConstraintsPtr = objectPtr->GetBitmapSelectionContraints();
+
+	QGridLayout* layoutPtr = new QGridLayout(widgetPtr);
+	layoutPtr->setContentsMargins(0, 0, 0, 0);
+	widgetPtr->setLayout(layoutPtr);
+
+	if (m_horizontalViewsAttrPtr.IsValid() && m_verticalViewsAttrPtr.IsValid()){
+		m_columnCount = qMax(1, *m_horizontalViewsAttrPtr);
+		m_rowCount = qMax(1, *m_verticalViewsAttrPtr);
+	} else if (m_horizontalViewsAttrPtr.IsValid()){
+		m_columnCount = qMax(1, *m_horizontalViewsAttrPtr);
+		m_rowCount = totalViewsCount / m_columnCount;
+		if (totalViewsCount % m_columnCount){
+			m_rowCount++;
+		}
+	} else if (m_verticalViewsAttrPtr.IsValid()){
+		m_rowCount = qMax(1, *m_verticalViewsAttrPtr);
+		m_columnCount = totalViewsCount / m_rowCount;
+		if (totalViewsCount % m_rowCount){
+			m_columnCount++;
+		}
+	} else {
+		m_columnCount = qMax(1, (int)sqrt((double)totalViewsCount));
+		m_rowCount = totalViewsCount / m_columnCount;
+		if (totalViewsCount % m_columnCount){
+			m_rowCount++;
+		}
+	}
+
+	QColor backgroundColor = m_viewBackgroundColorAttrPtr.IsValid() ? 
+		QColor(QString(*m_viewBackgroundColorAttrPtr)) : 
+		Qt::transparent;
+
+	int viewIndex = 0;
+	for (int row = 0; row < m_rowCount; row++){
+		for (int col = 0; col < m_columnCount; col++){
+			QString title;
+
+			if (m_viewLabelPrefixesAttrPtr.IsValid()){
+				if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
+					title = QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
+				}
+				else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
+					title = m_viewLabelPrefixesAttrPtr[viewIndex];
+				}
+			}
+			else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
+			}
+			else if (bitmapConstraintsPtr != NULL){
+				if (viewIndex < bitmapConstraintsPtr->GetOptionsCount()){
+					title = bitmapConstraintsPtr->GetOptionDescription(viewIndex);
+					if (title.isEmpty()){
+						title = bitmapConstraintsPtr->GetOptionName(viewIndex);
+					}
+				}
+			}
+
+			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
+			layoutPtr->addWidget(viewPtr, row, col);
+			m_views.append(viewPtr);
+
+			if (m_viewBackgroundColorAttrPtr.IsValid()){
+				viewPtr->SetBackgroundColor(backgroundColor);
+			}
+
+			if (viewIndex < m_informationModelsCompPtr.GetCount()){
+				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
+				Q_ASSERT(modelPtr != NULL);
+
+				RegisterModel(modelPtr, viewIndex);
+			}
+
+			viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
+
+			viewIndex++;
+		}
 	}
 }
 
@@ -69,6 +205,16 @@ void CMultiBitmapViewComp::OnModelChanged(int modelId, int /*changeFlags*/, istd
 
 void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 {
+	QSize floatSize;
+	if (m_floatWindowPtr != NULL){
+		DoCreateGui(m_floatWindowPtr);
+
+		floatSize = m_floatWindowPtr->size();
+		m_floatPos = m_floatWindowPtr->pos();
+	} else {
+		DoCreateGui(GetQtWidget());
+	}
+
 	iipr::IMultiBitmapProvider* objectPtr = GetObjectPtr();
 
 	int bitmapsCount = objectPtr->GetBitmapsCount();
@@ -92,6 +238,10 @@ void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 		viewExtenderPtr->RemoveItemsFromScene(viewPtr);
 		viewExtenderPtr->AddItemsToScene(viewPtr, updateFlags);
 	}
+
+	if (m_floatWindowPtr != NULL){
+		m_floatWindowPtr->resize(floatSize);
+	}
 }
 
 
@@ -101,54 +251,22 @@ void CMultiBitmapViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(1, *m_horizontalViewsAttrPtr) : 1;
-	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(1, *m_verticalViewsAttrPtr) : 1;
-
-	QColor backgroundColor = m_viewBackgroundColorAttrPtr.IsValid() ? 
-		QColor(QString(*m_viewBackgroundColorAttrPtr)) : 
-		Qt::transparent;
-
 	QWidget* widgetPtr = GetQtWidget();
-	QGridLayout* layoutPtr = new QGridLayout(widgetPtr);
-	layoutPtr->setContentsMargins(0, 0, 0, 0);
-	widgetPtr->setLayout(layoutPtr);
 
-	int viewIndex = 0;
-	for (int row = 0; row < m_rowCount; row++){
-		for (int col = 0; col < m_columnCount; col++){
-			QString title;
+	if (*m_floatingWindowAttrPtr){
+		m_floatWindowPtr = new QDialog(GetQtWidget());
+		m_floatWindowPtr->setModal(false);
+		m_floatWindowPtr->resize(800, 600);
+		m_floatWindowPtr->setWindowTitle(tr("Images Preview"));
+		m_floatWindowPtr->setWindowIcon(QIcon(":/Icons/Luppe"));
+		m_floatWindowPtr->setSizeGripEnabled(true);
 
-			if (m_viewLabelPrefixesAttrPtr.IsValid()){
-				if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
-					title = QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
-				}
-				else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
-					title = m_viewLabelPrefixesAttrPtr[viewIndex];
-				}
-			}
-			else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
-				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
-			}
+		QToolButton* showButtonPtr = new QToolButton(widgetPtr);
+		showButtonPtr->setText(tr("Preview..."));
+		widgetPtr->setLayout(new QHBoxLayout);
+		widgetPtr->layout()->addWidget(showButtonPtr);
 
-			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
-			layoutPtr->addWidget(viewPtr, row, col);
-			m_views.append(viewPtr);
-
-			if (m_viewBackgroundColorAttrPtr.IsValid()){
-				viewPtr->SetBackgroundColor(backgroundColor);
-			}
-
-			if (viewIndex < m_informationModelsCompPtr.GetCount()){
-				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
-				Q_ASSERT(modelPtr != NULL);
-
-				RegisterModel(modelPtr, viewIndex);
-			}
-
-			viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
-
-			viewIndex++;
-		}
+		connect(showButtonPtr, SIGNAL(clicked()), m_floatWindowPtr, SLOT(show()));
 	}
 
 	if (m_generalInformationModelCompPtr.IsValid() && m_generalInformationProviderCompPtr.IsValid()){
@@ -161,6 +279,8 @@ void CMultiBitmapViewComp::OnGuiCreated()
 
 void CMultiBitmapViewComp::OnComponentCreated()
 {
+	m_floatWindowPtr = NULL;
+
 	BaseClass::OnComponentCreated();
 }
 

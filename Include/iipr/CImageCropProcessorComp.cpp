@@ -74,9 +74,8 @@ bool CImageCropProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	int outputBitmapLineSize = outputBitmapPtr->GetLineBytesCount();
-	quint8* outputImageBufferPtr = (quint8*)outputBitmapPtr->GetLinePtr(0);
-	std::memset(outputImageBufferPtr, 0, outputBitmapLineSize * outputBitmapPtr->GetImageSize().GetY()); 
+	// CreateBitmap does NOT clear the image (performance reasons?)
+	outputBitmapPtr->ClearImage();
 
 	int pixelBits = outputBitmapPtr->GetPixelBitsCount();
 	int pixelBytes = pixelBits / 8;

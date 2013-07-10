@@ -2,6 +2,9 @@
 #define iipr_CMultiBitmapCacheComp_included
 
 
+// Qt includes
+#include <QtCore/QStringList>
+
 // ACF includes
 #include "istd/TPointerVector.h"
 #include "icomp/CComponentBase.h"
@@ -24,13 +27,16 @@ namespace iipr
 class CMultiBitmapCacheComp:
 			public icomp::CComponentBase,
 			virtual public IMultiBitmapProvider,
-			virtual public i2d::IMultiCalibrationProvider
+			virtual public i2d::IMultiCalibrationProvider,
+			virtual public iser::ISerializable
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiBitmapCacheComp);
 		I_REGISTER_INTERFACE(IMultiBitmapProvider);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_ASSIGN(m_copyConstraintsAttrPtr, "CopyConstraints", "Copy bitmap constraints from provider", true, false);
 	I_END_COMPONENT;
 
 	CMultiBitmapCacheComp();
@@ -48,9 +54,76 @@ public:
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
 private:
+	class CBitmapConstraints: virtual public iprm::IOptionsList
+	{
+		friend class CMultiBitmapCacheComp;
+
+	public:
+		CBitmapConstraints()
+		{
+			Reset();
+		}
+
+		void Reset()
+		{
+			m_flags = 0;
+			m_count = -1;
+			m_names.clear();
+			m_descriptions.clear();
+			m_ids.clear();
+			m_enabled.clear();
+		}
+
+		virtual int GetOptionsFlags() const
+		{
+			return m_flags;
+		}
+
+		virtual int GetOptionsCount() const
+		{
+			return m_count;
+		}
+
+		virtual QString GetOptionName(int index) const
+		{
+			return m_names.at(index);
+		}
+
+		virtual QString GetOptionDescription(int index) const
+		{
+			return m_descriptions.at(index);
+		}
+
+		virtual QByteArray GetOptionId(int index) const
+		{
+			return m_ids.at(index);
+		}
+
+		virtual bool IsOptionEnabled(int index) const
+		{
+			return m_enabled.at(index);
+		}
+
+	private:
+		int m_flags;
+		int m_count;
+		QStringList m_names;
+		QStringList m_descriptions;
+		QList<QByteArray> m_ids;
+		QList<bool> m_enabled;
+	};
+
+	CBitmapConstraints m_bitmapConstraints;
+	bool m_copyConstraints;
+
 	istd::TPointerVector<iimg::IBitmap> m_bitmapsPtr;
 	istd::TPointerVector<i2d::ICalibration2d> m_transformsPtr;
+
+	I_ATTR(bool, m_copyConstraintsAttrPtr);
 };
 
 

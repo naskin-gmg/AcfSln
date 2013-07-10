@@ -11,6 +11,7 @@ namespace iipr
 
 CMultiBitmapCacheComp::CMultiBitmapCacheComp()
 {
+	m_copyConstraints = false;
 }
 
 
@@ -18,7 +19,15 @@ CMultiBitmapCacheComp::CMultiBitmapCacheComp()
 
 const iprm::IOptionsList* CMultiBitmapCacheComp::GetBitmapSelectionContraints() const
 {
-	return NULL;
+	if (!m_copyConstraints){
+		return NULL;
+	}
+
+	if (m_bitmapConstraints.m_count < 0){
+		return NULL;
+	}
+
+	return &m_bitmapConstraints;
 }
 
 
@@ -67,6 +76,12 @@ bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMod
 {
 	bool retVal = false;
 
+	m_copyConstraints = *m_copyConstraintsAttrPtr;
+	
+	if (m_copyConstraints){
+		m_bitmapConstraints.Reset();
+	}
+
 	const IMultiBitmapProvider* providerPtr = CompCastPtr<const IMultiBitmapProvider>(&object);
 	if (providerPtr != NULL){
 		int bitmapsCount = providerPtr->GetBitmapsCount();
@@ -83,6 +98,20 @@ bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMod
 		}
 
 		retVal = true;
+
+		if (m_copyConstraints){
+			const iprm::IOptionsList* bitmapConstraintsPtr = providerPtr->GetBitmapSelectionContraints();
+			if (bitmapConstraintsPtr != NULL){
+				m_bitmapConstraints.m_count = bitmapConstraintsPtr->GetOptionsCount();
+				m_bitmapConstraints.m_flags = bitmapConstraintsPtr->GetOptionsFlags();
+				for (int i = 0; i < m_bitmapConstraints.m_count; i++){
+					m_bitmapConstraints.m_names.append(bitmapConstraintsPtr->GetOptionName(i));
+					m_bitmapConstraints.m_descriptions.append(bitmapConstraintsPtr->GetOptionDescription(i));
+					m_bitmapConstraints.m_ids.append(bitmapConstraintsPtr->GetOptionId(i));
+					m_bitmapConstraints.m_enabled.append(bitmapConstraintsPtr->IsOptionEnabled(i));
+				}
+			}
+		}
 	}
 
 	const i2d::IMultiCalibrationProvider* calibrationProviderPtr = CompCastPtr<const i2d::IMultiCalibrationProvider>(&object);
@@ -105,6 +134,16 @@ bool CMultiBitmapCacheComp::CopyFrom(const IChangeable& object, CompatibilityMod
 
 	return retVal;
 }
+
+
+// reimplemented (iser::ISerializable)
+
+bool CMultiBitmapCacheComp::Serialize(iser::IArchive& /*archive*/)
+{
+	// do nothing; only for compatibility reasons
+	return true;
+}
+
 
 
 } // namespace iipr
