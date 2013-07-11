@@ -35,7 +35,7 @@ public:
 		QByteArray propertyDescription;
 		int propertyFlags;
 
-		istd::TOptDelPtr<iser::IObject> objectPtr; 
+		istd::TOptDelPtr<iser::IObject> objectPtr;
 	};
 
 	CPropertiesManager();
@@ -69,6 +69,14 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	/**
+		Remove property from manager.
+		\param	propertyId	ID of property to remove.
+		\param	onlyOwned	if true, only properties owned by manager can be removed.
+							Property is owned by manager if it was inserted with set \c releaseFlag.
+		\return	true, if property could be removed.
+	 */
+	bool RemoveProperty(const QByteArray& propertyId, bool onlyOwned = true);
 	bool ReadProperties(
 				iser::IArchive& archive,
 				const iser::CArchiveTag& propertiesTag,

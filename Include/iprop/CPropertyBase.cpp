@@ -27,7 +27,7 @@ CPropertyBase::CPropertyBase(
 	m_changeFlags(changeFlags)
 {
 	if (propertyOwnerPtr != NULL){
-		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags & (~PF_DYNAMIC), false);
+		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags, false);
 	}
 }
 

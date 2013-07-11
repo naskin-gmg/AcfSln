@@ -44,30 +44,19 @@ void CPropertiesManager::ResetProperties()
 	if (!m_propertiesList.IsEmpty()){
 		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET);
 
-		bool workDone = false;
-		while (!workDone){
-			workDone = true;
-			int propertiesCount = m_propertiesList.GetCount();
+		int propertiesCount = m_propertiesList.GetCount();
 
-			for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
-				IProperty::PropertyFlags flags = GetPropertyFlags(propertyIndex);
+		for (int propertyIndex = propertiesCount - 1; propertyIndex >= 0; --propertyIndex){
+			PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
+			Q_ASSERT(propertyInfoPtr != NULL);
 
-				if ((flags & IProperty::PF_DYNAMIC)){
-					m_propertiesList.RemoveAt(propertyIndex);
-
-					workDone = false;
-
-					break;
-				}
-				else
-				{
-					PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
-					Q_ASSERT(propertyInfoPtr != NULL);
-
-					IProperty* propertyPtr = dynamic_cast<IProperty*>(propertyInfoPtr->objectPtr.GetPtr());
-					if (propertyPtr != NULL){
-						propertyPtr->ResetValue();
-					}
+			if (propertyInfoPtr->objectPtr.IsToRelase()){
+				m_propertiesList.RemoveAt(propertyIndex);
+			}
+			else{
+				IProperty* propertyPtr = dynamic_cast<IProperty*>(propertyInfoPtr->objectPtr.GetPtr());
+				if (propertyPtr != NULL){
+					propertyPtr->ResetValue();
 				}
 			}
 		}
@@ -126,18 +115,18 @@ void CPropertiesManager::InsertProperty(
 {
 	istd::CChangeNotifier notifier(this, CF_MODEL | CF_ADD_PROPERTY);
 
-	PropertyInfo* existingInfoPtr = GetPropertyInfo(propertyId);
-	Q_ASSERT(existingInfoPtr == NULL);
-	if (objectPtr != NULL && existingInfoPtr == NULL){
-		PropertyInfo* propertyInfoPtr = new PropertyInfo;
+	PropertyInfo* infoPtr = GetPropertyInfo(propertyId);
+	if ((objectPtr != NULL) && (infoPtr == NULL)){
+		infoPtr = new PropertyInfo;
 
-		propertyInfoPtr->objectPtr.SetPtr(objectPtr, releaseFlag);
-		propertyInfoPtr->propertyId = propertyId;
-		propertyInfoPtr->propertyDescription = propertyDescription;
-		propertyInfoPtr->propertyFlags = propertyFlags;
+		infoPtr->propertyId = propertyId;
 
-		m_propertiesList.PushBack(propertyInfoPtr);
+		m_propertiesList.PushBack(infoPtr);
 	}
+
+	infoPtr->objectPtr.SetPtr(objectPtr, releaseFlag);
+	infoPtr->propertyDescription = propertyDescription;
+	infoPtr->propertyFlags = propertyFlags;
 }
 
 
@@ -153,6 +142,31 @@ bool CPropertiesManager::Serialize(iser::IArchive& archive)
 	}
 
 	return ReadProperties(archive, propertiesTag, propertyTag);
+}
+
+
+// protected methods
+
+bool CPropertiesManager::RemoveProperty(const QByteArray& propertyId, bool onlyOwned)
+{
+	int propertiesCount = m_propertiesList.GetCount();
+
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; ++propertyIndex){
+		PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
+		Q_ASSERT(propertyInfoPtr != NULL);
+
+		if (AreIdsEqual(propertyInfoPtr->propertyId, propertyId)){
+			if (onlyOwned && !propertyInfoPtr->objectPtr.IsToRelase()){
+				return false;
+			}
+
+			m_propertiesList.RemoveAt(propertyIndex);
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 
@@ -188,65 +202,79 @@ bool CPropertiesManager::ReadProperties(
 		retVal = retVal && archive.EndTag(propertyIdTag);
 
 		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+
 		quint32 versionNumber = 0;
+		if (!versionInfo.GetVersionNumber(1, versionNumber) || (versionNumber > 931)){
+			static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
+			retVal = retVal && archive.BeginTag(propertyFlagsTag);
+			retVal = retVal && archive.Process(propertyFlags);
+			retVal = retVal && archive.EndTag(propertyFlagsTag);
 
-		if (versionInfo.GetVersionNumber(1, versionNumber)){
-			if (versionNumber > 931){
-				static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
-				retVal = retVal && archive.BeginTag(propertyFlagsTag);
-				retVal = retVal && archive.Process(propertyFlags);
-				retVal = retVal && archive.EndTag(propertyFlagsTag);
-
-				static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
-				retVal = retVal && archive.BeginTag(propertyDescriptionTag);
-				retVal = retVal && archive.Process(propertyDescription);
-				retVal = retVal && archive.EndTag(propertyDescriptionTag);
-
-				static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
-				retVal = retVal && archive.BeginTag(propertyFlagsTag);
-			}
+			static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
+			retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+			retVal = retVal && archive.Process(propertyDescription);
+			retVal = retVal && archive.EndTag(propertyDescriptionTag);
 		}
 
 		if (retVal){
-			bool isStatic = false;
+			bool isToSerialize = true;
+
+			istd::TDelPtr<iser::IObject> newObjectPtr;
 
 			PropertyInfo* existingPropertyPtr = GetPropertyInfo(propertyId);
 			if (existingPropertyPtr != NULL){
 				bool isEqual = AreIdsEqual(propertyTypeId, existingPropertyPtr->objectPtr->GetFactoryId());
-				if (isEqual && ((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0)){
-					isStatic = true;
-					retVal = retVal && existingPropertyPtr->objectPtr->Serialize(archive);
+				if (isEqual){
+					isToSerialize = ((existingPropertyPtr->propertyFlags & IProperty::PF_PERSISTENT) != 0);
+				}
+				else{
+					if (existingPropertyPtr->objectPtr.IsToRelase()){
+						RemoveProperty(propertyId);
+						existingPropertyPtr = NULL;
+					}
+					else{
+						return false;
+					}
 				}
 			}
 
-			if (!isStatic){
-				// Support for old property type format:
-				QMap<QByteArray, QByteArray> oldPropertyTypeMap;
+			iser::IObject* propertyPtr = NULL;
+			if (isToSerialize && (existingPropertyPtr != NULL)){
+				Q_ASSERT(existingPropertyPtr->objectPtr.IsValid());
+				propertyPtr = existingPropertyPtr->objectPtr.GetPtr();
+			}
+			else{
+				newObjectPtr.SetPtr(GetPropertyFactory().CreateInstance(propertyTypeId));
+				propertyPtr = newObjectPtr.GetPtr();
+			}
 
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<int> >()] = TProperty<int>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<double> >()] = TProperty<double>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<bool> >()] = TProperty<bool>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QString> >()] = TProperty<QString>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QByteArray> >()] = TProperty<QByteArray>::GetTypeName();
+			// Support for old property type format:
+			QMap<QByteArray, QByteArray> oldPropertyTypeMap;
 
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<int> >()] = TMultiProperty<int>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<double> >()] = TMultiProperty<double>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<bool> >()] = TMultiProperty<bool>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QString> >()] = TMultiProperty<QString>::GetTypeName();
-				oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QByteArray> >()] = TMultiProperty<QByteArray>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<int> >()] = TProperty<int>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<double> >()] = TProperty<double>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<bool> >()] = TProperty<bool>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QString> >()] = TProperty<QString>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QByteArray> >()] = TProperty<QByteArray>::GetTypeName();
 
-				if (oldPropertyTypeMap.contains(propertyTypeId)){
-					propertyTypeId = oldPropertyTypeMap.value(propertyTypeId);
-				}
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<int> >()] = TMultiProperty<int>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<double> >()] = TMultiProperty<double>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<bool> >()] = TMultiProperty<bool>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QString> >()] = TMultiProperty<QString>::GetTypeName();
+			oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QByteArray> >()] = TMultiProperty<QByteArray>::GetTypeName();
 
-				// try to serialize a deprecated or dynamic property:
-				istd::TDelPtr<iser::IObject> objectPtr(GetPropertyFactory().CreateInstance(propertyTypeId));
-				if (objectPtr.IsValid()){
-					retVal = retVal && objectPtr->Serialize(archive);
+			if (oldPropertyTypeMap.contains(propertyTypeId)){
+				propertyTypeId = oldPropertyTypeMap.value(propertyTypeId);
+			}
 
-					if (retVal && (propertyFlags & iprop::IProperty::PF_DYNAMIC)){
-						InsertProperty(objectPtr.PopPtr(), propertyId, propertyDescription, propertyFlags, true);
-					}
+			static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
+			retVal = retVal && archive.BeginTag(propertyObjectTag);
+			retVal = retVal && propertyPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(propertyObjectTag);
+
+			if (isToSerialize){
+				if (retVal && newObjectPtr.IsValid()){
+					InsertProperty(newObjectPtr.PopPtr(), propertyId, propertyDescription, propertyFlags, true);
 				}
 			}
 		}
@@ -307,15 +335,20 @@ bool CPropertiesManager::WriteProperties(
 		retVal = retVal && archive.Process(propertyId);
 		retVal = retVal && archive.EndTag(propertyIdTag);
 
-		static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
-		retVal = retVal && archive.BeginTag(propertyFlagsTag);
-		retVal = retVal && archive.Process(propertyFlags);
-		retVal = retVal && archive.EndTag(propertyFlagsTag);
+		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 
-		static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
-		retVal = retVal && archive.BeginTag(propertyDescriptionTag);
-		retVal = retVal && archive.Process(propertyDescription);
-		retVal = retVal && archive.EndTag(propertyDescriptionTag);
+		quint32 versionNumber = 0;
+		if (!versionInfo.GetVersionNumber(1, versionNumber) || (versionNumber > 931)){
+			static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags");
+			retVal = retVal && archive.BeginTag(propertyFlagsTag);
+			retVal = retVal && archive.Process(propertyFlags);
+			retVal = retVal && archive.EndTag(propertyFlagsTag);
+
+			static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description");
+			retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+			retVal = retVal && archive.Process(propertyDescription);
+			retVal = retVal && archive.EndTag(propertyDescriptionTag);
+		}
 
 		static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
 		retVal = retVal && archive.BeginTag(propertyObjectTag);

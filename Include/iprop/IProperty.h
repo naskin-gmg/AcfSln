@@ -24,12 +24,7 @@ public:
 		/**
 			Property is persistent.
 		*/
-		PF_PERSISTENT = 0x1,
-
-		/**
-			Property was added to the container at the run time.
-		*/
-		PF_DYNAMIC = 0x2
+		PF_PERSISTENT = 0x1
 	};
 
 	/**
