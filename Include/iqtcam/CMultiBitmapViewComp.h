@@ -6,7 +6,6 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QBoxLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QDialog>
 
 // ACF includes
 #include <iqtgui/TGuiComponentBase.h>
@@ -14,7 +13,6 @@
 #include <imod/CMultiModelDispatcherBase.h>
 #include <imod/TSingleModelObserverBase.h>
 #include <istd/IInformationProvider.h>
-#include <iqtgui/IDialog.h>
 #include <iqtgui/TGuiObserverWrap.h>
 #include <iqtgui/TGuiComponentBase.h>
 #include <iqt2d/IViewExtender.h>
@@ -33,13 +31,9 @@ namespace iqtcam
 class CMultiBitmapViewComp:
 			public ibase::TModelObserverCompWrap<
 						iqtgui::TGuiObserverWrap<
-									iqtgui::TGuiComponentBase<QWidget>, 
-									imod::TSingleModelObserverBase<iipr::IMultiBitmapProvider> > >,
-			public iqtgui::IDialog,
+									iqtgui::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iipr::IMultiBitmapProvider> > >,
 			protected imod::CMultiModelDispatcherBase
 {
-	Q_OBJECT
-
 public:
 	typedef ibase::TModelObserverCompWrap<
 				iqtgui::TGuiObserverWrap<
@@ -49,8 +43,6 @@ public:
 	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CMultiBitmapViewComp);
-		I_REGISTER_INTERFACE(imod::IModelEditor);
-		I_REGISTER_INTERFACE(iqtgui::IDialog);
 		I_ASSIGN(m_horizontalViewsAttrPtr, "HorizontalViewsCount", "Number of horizontal views", false, 1);
 		I_ASSIGN(m_verticalViewsAttrPtr, "VerticalViewsCount", "Number of vertical views", false, 1);
 		I_ASSIGN_MULTI_0(m_informationProvidersCompPtr, "InformationProviders", "Information providers", false);
@@ -62,22 +54,12 @@ public:
 		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "If active then status will be shown in the view's header", true, false);
 		I_ASSIGN(m_showStatusBackgroundAttrPtr, "ShowStatusBackground", "If active then status will be shown as the view's background color", true, false);
 		I_ASSIGN(m_viewBackgroundColorAttrPtr, "BackgroundColor", "Background color of the console", false, "black");
-		I_ASSIGN(m_floatingWindowAttrPtr, "FloatingMode", "Creates standalone floating window instead", true, false);
 	I_END_COMPONENT;
-
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(int updateFlags = 0);
-	virtual void UpdateModel() const;
-
-	// reimplemented (iqtgui::IDialog)
-	virtual int ExecuteDialog(IGuiObject* parentPtr);
 
 protected:
 	static const int GeneralStatusModelId = -1;
 
 	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
-
-	virtual void DoCreateGui(QWidget* parentWidget);
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
@@ -140,15 +122,11 @@ private:
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
 	I_ATTR(bool, m_showStatusBackgroundAttrPtr);
 	I_ATTR(QByteArray, m_viewBackgroundColorAttrPtr);
-	I_ATTR(bool, m_floatingWindowAttrPtr);
 	
 	int m_rowCount;
 	int m_columnCount;
 	int m_viewCount;
 	QList<CSingleView*> m_views;
-
-	QDialog* m_floatWindowPtr;
-	QPoint m_floatPos;
 };
 
 

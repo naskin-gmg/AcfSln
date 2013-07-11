@@ -198,6 +198,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProcessedBitmapView.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedMultiBitmapView.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CProjectionShape.cpp"
 				>
 			</File>
@@ -249,6 +257,14 @@
 			</File>
 			<File
 				RelativePath="..\CPatternTeachingControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapView.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedMultiBitmapView.h"
 				>
 			</File>
 			<File
@@ -309,6 +325,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProcessedBitmapView.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchBasedFeaturesSupplierGuiComp.ui"
 				>
 			</File>
@@ -359,6 +379,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CProcessedBitmapView.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
 				>
 			</File>
@@ -400,6 +424,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CPatternTeachingControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CProcessedBitmapView.h"
 				>
 			</File>
 			<File
@@ -448,6 +476,10 @@
 			</File>
 			<File
 				RelativePath="..\CPatternTeachingControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessedBitmapView.moc"
 				>
 			</File>
 			<File
