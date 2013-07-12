@@ -39,6 +39,10 @@ QString CInformationProviderCacheComp::GetInformationDescription() const
 
 QString CInformationProviderCacheComp::GetInformationSource() const
 {
+	if (m_source.isEmpty() && m_defaultSourceAttrPtr.IsValid()){
+		return *m_defaultSourceAttrPtr;
+	}
+
 	return m_source;
 }
 

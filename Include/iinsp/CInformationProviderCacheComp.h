@@ -25,6 +25,7 @@ public:
 
 	I_BEGIN_COMPONENT(CInformationProviderCacheComp);
 		I_REGISTER_INTERFACE(IInformationProvider);
+		I_ASSIGN(m_defaultSourceAttrPtr, "DefaultSource", "Default source of information. Will be used if no information source was set", false, "Unknown");
 	I_END_COMPONENT;
 
 	CInformationProviderCacheComp();
@@ -47,6 +48,8 @@ private:
 	QString m_description;
 	QString m_source;
 	int m_flags;
+
+	I_ATTR(QString, m_defaultSourceAttrPtr);
 };
 
 

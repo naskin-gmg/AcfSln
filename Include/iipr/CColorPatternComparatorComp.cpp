@@ -94,13 +94,17 @@ int CColorPatternComparatorComp::GetInformationId() const
 
 QString CColorPatternComparatorComp::GetInformationDescription() const
 {
-	return QObject::tr("Color pattern comparison status");
+	if (m_isColorPatternMatched){
+		return QObject::tr("Color Check OK");
+	}
+	
+	return QObject::tr("Color Check NOT OK");
 }
 
 
 QString CColorPatternComparatorComp::GetInformationSource() const
 {
-	return QObject::tr("Color pattern comparison component");
+	return QObject::tr("Color Check");
 }
 
 
@@ -192,7 +196,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
-	// Input image is RGB. Differences betweeen teached and working images are done in HSV color space:
+	// Input image is RGB. Differences between teached and working images are done in HSV color space:
 	if (channelsCount == 3){
 		
 		icmm::CHsv teachedHsvColor;
