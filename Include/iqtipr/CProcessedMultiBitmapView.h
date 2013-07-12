@@ -22,7 +22,7 @@ class CProcessedMultiBitmapView: public QWidget
 public:
 	CProcessedMultiBitmapView(QWidget* parent = NULL);
 	
-	void Update(iipr::IMultiBitmapProvider* bitmapProviderPtr);
+	void Update(const iipr::IMultiBitmapProvider* bitmapProviderPtr);
 
 private:
 	QList<CProcessedBitmapView*> m_views;

@@ -6,10 +6,9 @@
 #include "imod/IObserver.h"
 #include "imod/TModelWrap.h"
 #include "imod/CSingleModelObserverBase.h"
-#include "i2d/CCircle.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iview/CCircleShape.h"
+#include "iview/TVisualObjects.h"
 
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
@@ -79,16 +78,9 @@ private:
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
-	typedef imod::TModelWrap<i2d::CCircle> PositionModel;
-
-	struct VisualObject
-	{
-		istd::TDelPtr<PositionModel> model;
-		istd::TDelPtr<iview::CCircleShape> shape;
-	};
-
+	// result shapes
+	typedef iview::TCircleVisualObject<> VisualObject;
 	typedef istd::TPointerVector<VisualObject> VisualObjects;
-
 	VisualObjects m_visualPositions;
 
 	iview::IShapeView* m_lastViewPtr;

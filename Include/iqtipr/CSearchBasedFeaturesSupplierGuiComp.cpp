@@ -151,18 +151,10 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 
 					ResultsList->addTopLevelItem(modelItemPtr);
 
-					VisualObject* visualObject = new VisualObject;
-
-					visualObject->model.SetPtr(new PositionModel);
+					// add shape
+					VisualObject* visualObject = new VisualObject(false);
 					visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
 					visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
-
-					visualObject->shape.SetPtr(new iview::CCircleShape());
-					visualObject->shape->SetEditablePosition(false);
-					visualObject->shape->SetEditableRadius(false);
-
-					visualObject->model->AttachObserver(visualObject->shape.GetPtr());
-
 					m_visualPositions.PushBack(visualObject);
 				}
 			}

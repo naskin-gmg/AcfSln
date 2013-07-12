@@ -22,7 +22,7 @@ CProcessedMultiBitmapView::CProcessedMultiBitmapView(QWidget* parent): QWidget(p
 }
 
 
-void CProcessedMultiBitmapView::Update(iipr::IMultiBitmapProvider* bitmapProviderPtr)
+void CProcessedMultiBitmapView::Update(const iipr::IMultiBitmapProvider* bitmapProviderPtr)
 {
 	for (int i = 0; i < m_views.count(); i++){
 		m_views.at(i)->hide();
@@ -47,7 +47,12 @@ void CProcessedMultiBitmapView::Update(iipr::IMultiBitmapProvider* bitmapProvide
 		viewPtr->SetBitmap(bitmapProviderPtr->GetBitmap(i));
 
 		if (constraintsPtr != NULL){
-			viewPtr->SetTitle(constraintsPtr->GetOptionName(i));
+			QString titleText = constraintsPtr->GetOptionDescription(i);
+			if (titleText.isEmpty()){
+				titleText = constraintsPtr->GetOptionName(i);
+			}
+
+			viewPtr->SetTitle(titleText);
 		}
 
 		viewPtr->show();
