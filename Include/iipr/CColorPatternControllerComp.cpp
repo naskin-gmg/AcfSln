@@ -95,7 +95,7 @@ const iser::ISerializable* CColorPatternControllerComp::GetPatternObject() const
 }
 
 
-// reimplemented (iipr::IBitmapProvider)
+// reimplemented (iimg::IBitmapProvider)
 
 const iimg::IBitmap* CColorPatternControllerComp::GetBitmap() const
 {

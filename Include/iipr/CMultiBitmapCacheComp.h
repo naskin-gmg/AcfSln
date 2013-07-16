@@ -12,7 +12,7 @@
 #include "i2d/IMultiCalibrationProvider.h"
 
 // ACF-Solutions includes
-#include "iipr/IMultiBitmapProvider.h"
+#include "iimg/IMultiBitmapProvider.h"
 
 
 namespace iipr
@@ -26,7 +26,7 @@ namespace iipr
 */
 class CMultiBitmapCacheComp:
 			public icomp::CComponentBase,
-			virtual public IMultiBitmapProvider,
+			virtual public iimg::IMultiBitmapProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public iser::ISerializable
 {
@@ -34,15 +34,15 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiBitmapCacheComp);
-		I_REGISTER_INTERFACE(IMultiBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_copyConstraintsAttrPtr, "CopyConstraints", "Copy bitmap constraints from provider", true, false);
 	I_END_COMPONENT;
 
 	CMultiBitmapCacheComp();
 
-	// reimplemented (iipr::IMultiBitmapProvider)
-	virtual const iprm::IOptionsList* GetBitmapSelectionContraints() const;
+	// reimplemented (iimg::IMultiBitmapProvider)
+	virtual const iprm::IOptionsList* GetBitmapListInfo() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 

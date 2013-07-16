@@ -13,7 +13,7 @@
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
@@ -29,7 +29,7 @@ namespace iqtcam
 class CBitmapSupplierGuiComp:
 			public ilog::TLoggerCompWrap<
 						iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp> >,
-			virtual public iipr::IBitmapProvider
+			virtual public iimg::IBitmapProvider
 {
 	Q_OBJECT
 
@@ -38,14 +38,14 @@ public:
 				iqtinsp::TSupplierGuiCompBase<Ui::CBitmapSupplierGuiComp> > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapSupplierGuiComp);
-		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
 		I_ASSIGN(m_snapIntervalAttrPtr, "SnapInterval", "Snap interval in ms", true, 40);
 	I_END_COMPONENT;
 
 	CBitmapSupplierGuiComp();
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 protected Q_SLOTS:

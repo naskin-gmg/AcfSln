@@ -10,8 +10,8 @@
 #include "iproc/IProcessor.h"
 #include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iipr/IBitmapProvider.h"
-#include "iipr/IMultiBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
+#include "iimg/IMultiBitmapProvider.h"
 
 
 namespace iipr
@@ -22,13 +22,13 @@ namespace iipr
 */
 class CBitmapJoinerSupplierComp:
 			public iproc::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iipr::IBitmapProvider
+			virtual public iimg::IBitmapProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< QPair<i2d::ITransformation2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapJoinerSupplierComp);
-		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapsProviderCompPtr, "BitmapListSupplier", "Provide list of the input images", true, "BitmapListSupplier");
 		I_ASSIGN_TO(m_bitmapsSupplierCompPtr, m_bitmapsProviderCompPtr, false);
@@ -39,7 +39,7 @@ public:
 protected:
 	bool EnsureBitmapCreated(ProductType& result) const;
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 	virtual const i2d::ITransformation2d* GetLogTransform() const;	
 
@@ -52,7 +52,7 @@ protected:
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
-	I_REF(iipr::IMultiBitmapProvider, m_bitmapsProviderCompPtr);
+	I_REF(iimg::IMultiBitmapProvider, m_bitmapsProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapsSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapsProviderModelCompPtr);
 

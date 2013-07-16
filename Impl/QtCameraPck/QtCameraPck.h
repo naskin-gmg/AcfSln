@@ -7,7 +7,6 @@
 #include "iqtcam/CExposureParamsGuiComp.h"
 #include "iqtcam/CBitmapSupplierGuiComp.h"
 #include "iqtcam/CMultiBitmapSupplierGuiComp.h"
-#include "iqtcam/CMultiBitmapViewComp.h"
 #include "iqtcam/CScaleCalibrationEditorComp.h"
 #include "iqtcam/CCameraInfoGuiComp.h"
 
@@ -24,7 +23,6 @@ typedef iqtcam::CSnapImageGuiComp SnapImageGui;
 typedef iqtcam::CExposureParamsGuiComp ExposureParamsGui;
 typedef iqtcam::CBitmapSupplierGuiComp SnapBitmapSupplierGui;
 typedef iqtcam::CMultiBitmapSupplierGuiComp SnapMultiBitmapSupplierGui;
-typedef iqtcam::CMultiBitmapViewComp MultiBitmapView;
 typedef iqtcam::CScaleCalibrationEditorComp ScaleCalibrationEditor;
 typedef iqtcam::CCameraInfoGuiComp CameraInfoGui;
 

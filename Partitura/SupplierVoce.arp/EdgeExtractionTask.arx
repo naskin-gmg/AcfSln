@@ -1295,7 +1295,7 @@
           </Interface>
           <Interface>
             <InterfaceId>
-              iipr::IBitmapProvider
+              iimg::IBitmapProvider
             </InterfaceId>
             <ComponentId>
               GrayImageSupplier
@@ -1986,7 +1986,7 @@
           </Interface>
           <Interface>
             <InterfaceId>
-              iipr::IBitmapProvider
+              iimg::IBitmapProvider
             </InterfaceId>
             <ComponentId>
               SmoothedImageSupplier

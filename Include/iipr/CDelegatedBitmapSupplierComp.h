@@ -13,7 +13,7 @@
 #include "iproc/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr
@@ -27,7 +27,7 @@ class CDelegatedBitmapSupplierComp:
 			public ilog::CLoggerComponentBase,
 			virtual public iproc::ISupplier,
 			virtual public istd::IChangeable,
-			virtual public IBitmapProvider,
+			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider,
 			protected imod::CMultiModelBridgeBase
 {
@@ -37,7 +37,7 @@ public:
 
 	I_BEGIN_COMPONENT(CDelegatedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iproc::ISupplier);
-		I_REGISTER_INTERFACE(IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompPtr, "BitmapObject", "Bitmap object used if no slave supplier is provided", false, "BitmapObject");
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, false);
@@ -50,7 +50,7 @@ public:
 	I_END_COMPONENT;
 
 protected:
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -76,7 +76,7 @@ private:
 	I_REF(i2d::ICalibration2d, m_calibrationCompPtr);
 	I_REF(imod::IModel, m_calibrationModelCompPtr);
 
-	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);

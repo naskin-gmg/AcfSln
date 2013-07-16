@@ -6,7 +6,7 @@
 #include "istd/ILogger.h"
 
 // ACF-Solutions includes
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr

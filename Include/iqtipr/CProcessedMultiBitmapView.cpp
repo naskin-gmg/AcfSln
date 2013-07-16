@@ -4,7 +4,6 @@
 // Qt includes
 #include <QtGui/QVBoxLayout>
 
-
 // ACF includes
 #include "iqtipr/CProcessedBitmapView.h"
 
@@ -22,7 +21,7 @@ CProcessedMultiBitmapView::CProcessedMultiBitmapView(QWidget* parent): QWidget(p
 }
 
 
-void CProcessedMultiBitmapView::Update(const iipr::IMultiBitmapProvider* bitmapProviderPtr)
+void CProcessedMultiBitmapView::Update(const iimg::IMultiBitmapProvider* bitmapProviderPtr)
 {
 	for (int i = 0; i < m_views.count(); i++){
 		m_views.at(i)->hide();
@@ -39,7 +38,7 @@ void CProcessedMultiBitmapView::Update(const iipr::IMultiBitmapProvider* bitmapP
 		m_views.append(viewPtr);
 	}
 
-	const iprm::IOptionsList* constraintsPtr = bitmapProviderPtr->GetBitmapSelectionContraints();
+	const iprm::IOptionsList* constraintsPtr = bitmapProviderPtr->GetBitmapListInfo();
 
 	for (int i = 0; i < bitmapCount; i++){
 		CProcessedBitmapView* viewPtr = m_views.at(i);

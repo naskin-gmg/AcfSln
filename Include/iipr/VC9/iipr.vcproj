@@ -631,10 +631,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IBitmapProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\ICaliperParams.h"
 				>
 			</File>
@@ -684,10 +680,6 @@
 			</File>
 			<File
 				RelativePath="..\ILineProjectionProcessor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IMultiBitmapProvider.h"
 				>
 			</File>
 			<File

@@ -15,7 +15,7 @@
 #include "imeas/TDiscreteDataSequence.h"
 
 #include "iipr/IPatternController.h"
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr
@@ -25,7 +25,7 @@ namespace iipr
 class CColorPatternControllerComp:
 			virtual public ilog::CLoggerComponentBase,
 			virtual public IPatternController,
-			virtual public iipr::IBitmapProvider,
+			virtual public iimg::IBitmapProvider,
 			virtual public imeas::IDataSequenceProvider,
 			virtual public iser::ISerializable
 
@@ -35,7 +35,7 @@ public:
 
 	I_BEGIN_COMPONENT(CColorPatternControllerComp);
 		I_REGISTER_INTERFACE(IPatternController);
-		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_patternBitmapProviderCompPtr, "PatternBitmapProvider", "Provider of the bitmap pattern data used for teaching", true, "PatternBitmapProvider");
@@ -49,7 +49,7 @@ public:
 	virtual bool IsPatternValid() const;
 	const iser::ISerializable* GetPatternObject() const;
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (imeas::IDataSequenceProvider)
@@ -65,7 +65,7 @@ private:
 	imod::TModelWrap<iimg::CGeneralBitmap> m_patternBitmap;
 	imod::TModelWrap<imeas::CSimpleSamplesSequence32> m_histogram;
 
-	I_REF(iipr::IBitmapProvider, m_patternBitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_patternBitmapProviderCompPtr);
 	I_REF(i2d::IObject2d, m_bitmapRegionCompPtr);
 	I_REF(iproc::IProcessor, m_histogramProgressorCompPtr);
 };

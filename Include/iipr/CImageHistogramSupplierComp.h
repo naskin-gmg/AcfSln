@@ -15,7 +15,7 @@
 #include "iproc/TSupplierCompWrap.h"
 #include "imeas/TDiscreteDataSequence.h"
 #include "imeas/IDataSequenceProvider.h"
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr
@@ -49,7 +49,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_histogramProcessorCompPtr);

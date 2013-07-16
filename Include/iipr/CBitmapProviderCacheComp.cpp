@@ -5,7 +5,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IBitmapProvider)
+// reimplemented (iimg::IBitmapProvider)
 
 const iimg::IBitmap* CBitmapProviderCacheComp::GetBitmap() const
 {
@@ -25,7 +25,7 @@ const i2d::ICalibration2d* CBitmapProviderCacheComp::GetCalibration() const
 
 bool CBitmapProviderCacheComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
-	const IBitmapProvider* providerPtr = dynamic_cast<const IBitmapProvider*>(&object);
+	const iimg::IBitmapProvider* providerPtr = dynamic_cast<const iimg::IBitmapProvider*>(&object);
 	if (providerPtr != NULL){
 		m_bitmapPtr.Reset();
 		const iimg::IBitmap* bitmapPtr = providerPtr->GetBitmap();

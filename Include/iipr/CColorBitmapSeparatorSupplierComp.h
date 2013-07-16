@@ -10,8 +10,8 @@
 #include "iproc/IProcessor.h"
 #include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iipr/IBitmapProvider.h"
-#include "iipr/IMultiBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
+#include "iimg/IMultiBitmapProvider.h"
 
 
 namespace iipr
@@ -22,14 +22,14 @@ namespace iipr
 */
 class CColorBitmapSeparatorSupplierComp:
 			public iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> >,
-			virtual public iipr::IMultiBitmapProvider,
+			virtual public iimg::IMultiBitmapProvider,
 			virtual protected iprm::IOptionsList
 {
 public:
 	typedef iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CColorBitmapSeparatorSupplierComp);
-		I_REGISTER_INTERFACE(iipr::IMultiBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
@@ -37,8 +37,8 @@ public:
 		I_ASSIGN(m_useAlphaChannelAttrPtr, "UseAlphaChannel", "If enabled and image format of bitmap is RGBA, create bitmap for alpha chanel", true, false);		
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IMultiBitmapProvider)
-	virtual const iprm::IOptionsList* GetBitmapSelectionContraints() const;
+	// reimplemented (iimg::IMultiBitmapProvider)
+	virtual const iprm::IOptionsList* GetBitmapListInfo() const;
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
@@ -62,7 +62,7 @@ protected:
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
-	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 

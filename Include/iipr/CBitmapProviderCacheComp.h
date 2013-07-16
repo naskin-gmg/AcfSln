@@ -8,7 +8,7 @@
 #include "i2d/ICalibrationProvider.h"
 
 // ACF-Solutions includes
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr
@@ -22,18 +22,18 @@ namespace iipr
 */
 class CBitmapProviderCacheComp:
 			public icomp::CComponentBase,
-			virtual public IBitmapProvider,
+			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapProviderCacheComp);
-		I_REGISTER_INTERFACE(IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_REGISTER_INTERFACE(ICalibrationProvider);
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)

@@ -5,9 +5,9 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IMultiBitmapProvider)
+// reimplemented (iimg::IMultiBitmapProvider)
 
-const iprm::IOptionsList* CColorBitmapSeparatorSupplierComp::GetBitmapSelectionContraints() const
+const iprm::IOptionsList* CColorBitmapSeparatorSupplierComp::GetBitmapListInfo() const
 {
 	return this;
 }

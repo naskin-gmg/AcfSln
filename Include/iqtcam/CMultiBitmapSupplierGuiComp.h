@@ -9,7 +9,7 @@
 #include "iimg/CBitmap.h"
 
 // ACF-Solutions includes
-#include "iipr/IMultiBitmapProvider.h"
+#include "iimg/IMultiBitmapProvider.h"
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
 #include "iqtcam/Generated/ui_CMultiBitmapSupplierGuiComp.h"

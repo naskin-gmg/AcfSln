@@ -8,7 +8,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IBitmapProvider)
+// reimplemented (iimg::IBitmapProvider)
 
 const iimg::IBitmap* CBitmapJoinerSupplierComp::GetBitmap() const
 {

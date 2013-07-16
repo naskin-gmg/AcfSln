@@ -179,12 +179,12 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 	IconsView->clear();
 	m_icons.clear();
 
-	iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*>(GetObjectPtr());
+	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObjectPtr());
 	if (providerPtr == NULL){
 		return;
 	}
 
-	const iprm::IOptionsList* selectionConstraintsPtr = providerPtr->GetBitmapSelectionContraints();
+	const iprm::IOptionsList* selectionConstraintsPtr = providerPtr->GetBitmapListInfo();
 
 	int bitmapsCount = providerPtr->GetBitmapsCount();
 
@@ -236,7 +236,7 @@ void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
-	iipr::IMultiBitmapProvider* providerPtr = dynamic_cast<iipr::IMultiBitmapProvider*>(GetObjectPtr());
+	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObjectPtr());
 	if (providerPtr != NULL){
 		bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
 	}

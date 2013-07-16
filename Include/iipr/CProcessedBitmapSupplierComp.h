@@ -9,7 +9,7 @@
 #include "iproc/IProcessor.h"
 #include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 
 
 namespace iipr
@@ -21,14 +21,14 @@ namespace iipr
 */
 class CProcessedBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< QPair<const i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iipr::IBitmapProvider,
+			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< QPair<const i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
-		I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
@@ -41,7 +41,7 @@ public:
 protected:
 	bool EnsureBitmapCreated(ProductType& result) const;
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -56,7 +56,7 @@ protected:
 private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
-	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);

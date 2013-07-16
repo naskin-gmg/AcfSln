@@ -14,7 +14,7 @@
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 #include <imeas/INumericConstraints.h>
 #include <imeas/CSimpleNumericValue.h>
 
@@ -28,14 +28,14 @@ namespace icam
  */
 class CSnapBitmapSupplierComp:
 			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iipr::IBitmapProvider,
+			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
-	I_REGISTER_INTERFACE(iipr::IBitmapProvider);
+	I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 	I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 	I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 	I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
@@ -46,7 +46,7 @@ public:
 	I_REGISTER_SUBELEMENT(ScaleConstraints);
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IBitmapProvider)
+	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
 	// reimplemented (i2d::ICalibrationProvider)

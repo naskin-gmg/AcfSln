@@ -244,7 +244,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iipr::IBitmapProvider
+        iimg::IBitmapProvider
       </InterfaceId>
       <ComponentId>
         ImageTaskGui

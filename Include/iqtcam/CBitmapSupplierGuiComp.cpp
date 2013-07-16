@@ -22,7 +22,7 @@ CBitmapSupplierGuiComp::CBitmapSupplierGuiComp()
 }
 
 
-// reimplemented (iipr::IBitmapProvider)
+// reimplemented (iimg::IBitmapProvider)
 
 const iimg::IBitmap* CBitmapSupplierGuiComp::GetBitmap() const
 {
@@ -181,7 +181,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
-	iipr::IBitmapProvider* providerPtr = dynamic_cast<iipr::IBitmapProvider*>(GetObjectPtr());
+	iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(GetObjectPtr());
 	if (providerPtr != NULL){
 		bitmapPtr = providerPtr->GetBitmap();
 	}

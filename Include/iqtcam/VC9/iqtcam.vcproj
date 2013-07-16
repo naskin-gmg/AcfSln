@@ -194,10 +194,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiBitmapViewComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CScaleCalibrationEditorComp.cpp"
 				>
 			</File>
@@ -233,10 +229,6 @@
 			</File>
 			<File
 				RelativePath="..\CMultiBitmapSupplierGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiBitmapViewComp.h"
 				>
 			</File>
 			<File

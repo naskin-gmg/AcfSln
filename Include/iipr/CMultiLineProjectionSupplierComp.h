@@ -5,7 +5,7 @@
 // ACF-Solutions includes
 #include "iproc/ISupplier.h"
 #include "iproc/TSupplierCompWrap.h"
-#include "iipr/IBitmapProvider.h"
+#include "iimg/IBitmapProvider.h"
 #include "iipr/ILineProjectionProcessor.h"
 #include "imeas/IMultiDataSequenceProvider.h"
 #include "imeas/INumericValueProvider.h"
@@ -49,7 +49,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(iipr::IBitmapProvider, m_bitmapProviderCompPtr);
+	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(imeas::INumericValueProvider, m_linesProviderCompPtr);

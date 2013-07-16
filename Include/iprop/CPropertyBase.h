@@ -23,6 +23,8 @@ class CPropertyBase: public iser::TCopySerializedWrap<IProperty>
 {
 public:
 	CPropertyBase();
+
+protected:
 	CPropertyBase(
 				IPropertiesManager* propertyOwnerPtr,
 				const QByteArray& propertyId,
