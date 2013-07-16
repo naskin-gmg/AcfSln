@@ -16,7 +16,8 @@ namespace DocumentProcessingPck
 {
 
 
-typedef idocproc::CRenderedDocumentPreviewGeneratorComp RenderedDocumentPreviewGenerator;
+typedef icomp::TModelCompWrap<
+			idocproc::CRenderedDocumentPreviewGeneratorComp> RenderedDocumentPreviewGenerator;
 
 
 } // namespace DocumentProcessingPck

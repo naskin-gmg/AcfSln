@@ -183,6 +183,10 @@
 				RelativePath="..\CRenderedDocumentPreviewGeneratorComp.h"
 				>
 			</File>
+			<File
+				RelativePath="..\idocproc.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Moc Files"
