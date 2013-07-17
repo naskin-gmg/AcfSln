@@ -1,4 +1,4 @@
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
-include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
+include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 
 TARGET = idocproc
