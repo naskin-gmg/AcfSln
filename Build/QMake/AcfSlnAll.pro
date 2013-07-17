@@ -83,6 +83,9 @@ iedgegui.file = ../../Include/iedgegui/QMake/iedgegui.pro
 SUBDIRS += icmpstr
 icmpstr.file = ../../Include/icmpstr/QMake/icmpstr.pro
 
+SUBDIRS += idocproc
+idocproc.file = ../../Include/idocproc/QMake/idocproc.pro
+
 
 # Translation
 
@@ -160,6 +163,9 @@ ProcessingGuiPck.file = ../../Impl/ProcessingGuiPck/QMake/ProcessingGuiPck.pro
 
 SUBDIRS += CompositorPck
 CompositorPck.file = ../../Impl/CompositorPck/QMake/CompositorPck.pro
+
+SUBDIRS += DocumentProcessingPck
+DocumentProcessingPck.file = ../../Impl/DocumentProcessingPck/QMake/DocumentProcessingPck.pro
 
 
 #Tool
