@@ -40,6 +40,23 @@ const iimg::IBitmap* CRenderedDocumentPreviewGeneratorComp::GetBitmap(int bitmap
 
 // protected methods
 
+// reimplemented (imod::IObserver)
+
+bool CRenderedDocumentPreviewGeneratorComp::OnDetached(imod::IModel* modelPtr)
+{
+	if (BaseClass2::OnDetached(modelPtr)){
+
+		istd::CChangeNotifier changePtr(this);
+
+		m_previewBitmaps.Reset();
+
+		return true;
+	}
+
+	return false;
+}
+
+
 // reimplemented (imod::CSingleModelObserverBase)
 
 void CRenderedDocumentPreviewGeneratorComp::OnUpdate(int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)

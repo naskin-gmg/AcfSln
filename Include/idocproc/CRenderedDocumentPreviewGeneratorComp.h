@@ -40,6 +40,9 @@ public:
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
 protected:
+	// reimplemented (imod::IObserver)
+	virtual bool OnDetached(imod::IModel* modelPtr);
+
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
