@@ -35,15 +35,15 @@ public:
 	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
-	I_REGISTER_INTERFACE(iimg::IBitmapProvider);
-	I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
-	I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
-	I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
-	I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
-	I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID ´of resolution parameter in parameter set (type imeas::INumericValue, unit: pixel/mm)", false, "ScaleParamId");
-	I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
-	I_ASSIGN(m_calibratedUnitInfoCompPtr, "CalibratedUnit", "Describe unit of result calibration", false, "CalibratedUnit");
-	I_REGISTER_SUBELEMENT(ScaleConstraints);
+		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
+		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
+		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
+		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
+		I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID ´of resolution parameter in parameter set (type imeas::INumericValue, unit: pixel/mm)", false, "ScaleParamId");
+		I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
+		I_ASSIGN(m_calibratedUnitInfoCompPtr, "CalibratedUnit", "Describe unit of result calibration", false, "CalibratedUnit");
+		I_REGISTER_SUBELEMENT(ScaleConstraints);		
 	I_END_COMPONENT;
 
 	// reimplemented (iimg::IBitmapProvider)

@@ -202,13 +202,13 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 						nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
 					}
 
-					istd::IInformationProvider::InformationCategory searchResult = (featuresCount < nominalModelsCount) ? istd::IInformationProvider::IC_ERROR : istd::IInformationProvider::IC_INFO;
-					QString searchResultText = (searchResult == istd::IInformationProvider::IC_INFO) ? 
+					m_defaultInformationCategory = (featuresCount < nominalModelsCount) ? istd::IInformationProvider::IC_ERROR : istd::IInformationProvider::IC_INFO;
+					QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO) ? 
 						"Search model was found" : 
 						"Search model was not found"; 
 
 					ilog::CMessage* message = new ilog::CMessage(
-								searchResult,
+								m_defaultInformationCategory,
 								MT_SEARCH_RESULT,
 								searchResultText,
 								multiSearchParamsManagerPtr->GetParamsSetName(searchIndex));

@@ -50,6 +50,7 @@ public:
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
+	void on_SnapBackImageButton_clicked();
 	void on_LiveImageButton_toggled(bool checked);
 	void on_SaveImageButton_clicked();
 	void on_LoadParamsButton_clicked();
@@ -57,6 +58,8 @@ protected Q_SLOTS:
 	void OnTimerReady();
 
 protected:
+	void DoSnap(bool noGui = false);
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiHidden();

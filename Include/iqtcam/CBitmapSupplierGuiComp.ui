@@ -36,12 +36,41 @@
        <number>9</number>
       </property>
       <item>
-       <widget class="QPushButton" name="SnapImageButton">
+       <widget class="QToolButton" name="SnapBackImageButton">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Snap previous image (if allowed)</string>
+        </property>
+        <property name="text">
+         <string>Snap Back</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+          <normaloff>:/Icons/PlayBack</normaloff>:/Icons/PlayBack</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="SnapImageButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Snap next image</string>
         </property>
         <property name="text">
          <string>Snap</string>
@@ -65,6 +94,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Snap in loop</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -114,6 +146,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Save current image...</string>
         </property>
         <property name="text">
          <string/>
@@ -206,6 +241,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>SnapBackImageButton</tabstop>
   <tabstop>SnapImageButton</tabstop>
   <tabstop>LiveImageButton</tabstop>
   <tabstop>SaveImageButton</tabstop>

@@ -241,6 +241,10 @@
 				RelativePath="..\IExposureParams.h"
 				>
 			</File>
+			<File
+				RelativePath="..\ISnapControl.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
