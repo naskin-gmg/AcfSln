@@ -12,10 +12,10 @@
 #include "ifile/IFileNameParam.h"
 #include "ilog/TLoggerCompWrap.h"
 #include "iproc/TSyncProcessorWrap.h"
-#include "icam/ISnapControl.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
+#include "icam/ISnapControl.h"
 
 #include "iqtcam/iqtcam.h"
 
@@ -44,7 +44,6 @@ public:
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
 		I_ASSIGN(m_lastFileNameParamIdAttrPtr, "LastFileNameParamId", "Id used to get processed file name parameter (ifile::IFileNameParam)", true, "lastFileNameParamId");
-		I_ASSIGN(m_snapControlCompPtr, "SnapController", "Provides snap control options (i.e. snapping in another direction (backwards) etc)", false, "SnapController");
 	I_END_COMPONENT;
 
 	CFileAcquisitionComp();
@@ -87,8 +86,6 @@ private:
 
 	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
 	I_ATTR(QByteArray, m_lastFileNameParamIdAttrPtr);
-
-	I_REF(icam::ISnapControl, m_snapControlCompPtr);
 };
 
 

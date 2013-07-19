@@ -16,7 +16,8 @@ public:
 	enum SnapDirection
 	{
 		SD_FORWARD,
-		SD_BACK
+		SD_BACK,
+		SD_HOLD
 	};
 
 	virtual void SetSnapDirection(int snapDirection) = 0;

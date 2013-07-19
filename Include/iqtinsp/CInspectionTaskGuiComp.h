@@ -32,14 +32,37 @@ namespace iqtinsp
 {
 
 
+class CInspectionTaskGuiCompBase: public iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>
+{
+public:
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CInspectionTaskGuiCompBase);
+		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
+		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
+		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
+		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - buttons\n* 1 - tool box\n* 2 - tab", true, 1);
+		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, true);
+	I_END_COMPONENT;
+
+protected:
+	I_MULTIATTR(QString, m_namesAttrPtr);
+	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
+	I_ATTR(int, m_tabOrientationAttrPtr);
+	I_ATTR(int, m_designTypeAttrPtr);
+	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
+	I_ATTR(int, m_inspectionTaskIndexAttrPtr);
+};
+
+
 class CInspectionTaskGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>,
+			public CInspectionTaskGuiCompBase,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
+	typedef CInspectionTaskGuiCompBase BaseClass;
 
 	enum DataRole
 	{
@@ -62,11 +85,6 @@ public:
 		I_ASSIGN(m_generalParamsGuiCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
 		I_ASSIGN_TO(m_generalParamsObserverCompPtr, m_generalParamsGuiCompPtr, false);
 		I_ASSIGN_TO(m_generalParamsEditorCompPtr, m_generalParamsGuiCompPtr, false);
-		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
-		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
-		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
-		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - buttons\n* 1 - tool box\n* 2 - tab", true, 1);
-		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, true);
 	I_END_COMPONENT;
 
 	CInspectionTaskGuiComp();
@@ -93,8 +111,9 @@ protected:
 
 protected Q_SLOTS:
 	void OnEditorChanged(int index);
-	void OnAutoTest();
+	void OnAutoTest(bool forward = true);
 	void on_TestAllButton_clicked();
+	void on_TestBackButton_clicked();
 	void on_AutoTestButton_clicked();
 	void OnLoadParams();
 	void OnSaveParams();
@@ -132,15 +151,10 @@ private:
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);
 	I_MULTIREF(iqt2d::IViewProvider, m_previewSceneProvidersCompPtr);
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
-	I_MULTIATTR(QString, m_namesAttrPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
 	I_REF(imod::IModelEditor, m_generalParamsEditorCompPtr);
-	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
-	I_ATTR(int, m_tabOrientationAttrPtr);
-	I_ATTR(int, m_designTypeAttrPtr);
-	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 
 	int m_currentGuiIndex;
 	bool m_testStarted;

@@ -30,7 +30,7 @@ CFileAcquisitionComp::CFileAcquisitionComp()
 
 int CFileAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
-			const istd::IPolymorphic* /*inputPtr*/,
+			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
@@ -52,9 +52,14 @@ int CFileAcquisitionComp::DoProcessing(
 		inputPath = pathParamsPtr->GetPath();
 	}
 
+	// check if snap control is active
 	bool backSnapDirection = false;
-	if (m_snapControlCompPtr.IsValid()){
-		backSnapDirection = (m_snapControlCompPtr->GetSnapDirection() == icam::ISnapControl::SD_BACK);
+	const icam::ISnapControl* snapControlPtr = dynamic_cast<const icam::ISnapControl*>(inputPtr);
+	if (snapControlPtr != NULL){
+		if (snapControlPtr->GetSnapDirection() == icam::ISnapControl::SD_HOLD){
+			return TS_NONE;
+		}
+		backSnapDirection = (snapControlPtr->GetSnapDirection() == icam::ISnapControl::SD_BACK);
 	}
 
 	QString imageFileName;

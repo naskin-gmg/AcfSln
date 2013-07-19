@@ -15,6 +15,7 @@
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
 #include "iimg/IBitmapProvider.h"
+#include "icam/ISnapControl.h"
 #include <imeas/INumericConstraints.h>
 #include <imeas/CSimpleNumericValue.h>
 
@@ -43,6 +44,7 @@ public:
 		I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID ´of resolution parameter in parameter set (type imeas::INumericValue, unit: pixel/mm)", false, "ScaleParamId");
 		I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
 		I_ASSIGN(m_calibratedUnitInfoCompPtr, "CalibratedUnit", "Describe unit of result calibration", false, "CalibratedUnit");
+		I_ASSIGN(m_snapControlCompPtr, "SnapController", "Provides snap control options (i.e. snapping in another direction (backwards) etc)", false, "SnapController");
 		I_REGISTER_SUBELEMENT(ScaleConstraints);		
 	I_END_COMPONENT;
 
@@ -65,6 +67,8 @@ private:
 	I_ATTR(QByteArray, m_scaleParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultScaleValueCompPtr);
 	I_REF(imath::IUnitInfo, m_calibratedUnitInfoCompPtr);
+
+	I_REF(icam::ISnapControl, m_snapControlCompPtr);
 };
 
 

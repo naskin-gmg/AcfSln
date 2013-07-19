@@ -26,7 +26,7 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Point</string>
+      <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -34,9 +34,6 @@
       </property>
       <property name="leftMargin">
        <number>9</number>
-      </property>
-      <property name="topMargin">
-       <number>3</number>
       </property>
       <property name="rightMargin">
        <number>9</number>

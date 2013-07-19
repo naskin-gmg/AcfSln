@@ -127,7 +127,7 @@ QToolButton#LiveImageButton:hover:enabled:on
           </item>
           <item>
            <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
+            <item row="0" column="2">
              <widget class="QPushButton" name="TestAllButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -159,7 +159,7 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
              </widget>
             </item>
-            <item row="0" column="1" colspan="2">
+            <item row="0" column="3" colspan="2">
              <widget class="QToolButton" name="AutoTestButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -188,7 +188,7 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
+            <item row="0" column="5">
              <widget class="QToolButton" name="MenuButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -211,6 +211,55 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
               <property name="popupMode">
                <enum>QToolButton::InstantPopup</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QToolButton" name="TestBackButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snap back if allowed by the current camera&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+                <normaloff>:/Icons/PlayBack</normaloff>:/Icons/PlayBack</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QToolButton" name="HoldSnapButton">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not advance to the next image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
+                <normaloff>:/Icons/Pause.svg</normaloff>:/Icons/Pause.svg</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

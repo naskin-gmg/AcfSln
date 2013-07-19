@@ -13,6 +13,7 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
+#include "icam/ISnapControl.h"
 #include "iview/IShapeView.h"
 #include "iview/IInteractiveShape.h"
 #include "iview/CShapeBase.h"
@@ -512,6 +513,10 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		GeneralParamsFrame->hide();
 	}
 
+	icam::ISnapControl* snapControlPtr = CompCastPtr<icam::ISnapControl>(GetObjectPtr());
+	TestBackButton->setVisible(snapControlPtr != NULL);
+	HoldSnapButton->setVisible(snapControlPtr != NULL);
+
 	CreateMenu();
 
 	UpdateTaskMessages();
@@ -616,12 +621,21 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 }
 
 
-void CInspectionTaskGuiComp::OnAutoTest()
+void CInspectionTaskGuiComp::OnAutoTest(bool forward)
 {
 	m_testStarted = true;
 
 	MessageList->clear();
 	m_resultShapesMap.clear();
+
+	icam::ISnapControl* snapControlPtr = CompCastPtr<icam::ISnapControl>(GetObjectPtr());
+	if (snapControlPtr != NULL){
+		if (HoldSnapButton->isChecked()){
+			snapControlPtr->SetSnapDirection(icam::ISnapControl::SD_HOLD);
+		} else {
+			snapControlPtr->SetSnapDirection(forward ? icam::ISnapControl::SD_FORWARD : icam::ISnapControl::SD_BACK);
+		}
+	}
 
 	iproc::ISupplier* supplierPtr = dynamic_cast<iproc::ISupplier*>(GetObjectPtr());
 	if (supplierPtr != NULL){
@@ -649,6 +663,16 @@ void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 	}
 
 	OnAutoTest();
+}
+
+
+void CInspectionTaskGuiComp::on_TestBackButton_clicked()
+{
+	if (m_generalParamsEditorCompPtr.IsValid()){
+		m_generalParamsEditorCompPtr->UpdateModel();
+	}
+
+	OnAutoTest(false);
 }
 
 
