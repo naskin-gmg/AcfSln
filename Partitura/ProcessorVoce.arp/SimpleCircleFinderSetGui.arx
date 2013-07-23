@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3038
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          977
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               DefaultUnitInfo
@@ -65,6 +65,22 @@
             </Type>
             <ExportId>
               UnitInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShapeColorSchema
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ShapeColorSchema
             </ExportId>
             <Data>
               <IsEnabled>

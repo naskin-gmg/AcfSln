@@ -104,7 +104,7 @@ QString CColorPatternComparatorComp::GetInformationDescription() const
 
 QString CColorPatternComparatorComp::GetInformationSource() const
 {
-	return QObject::tr("Color Check");
+	return *m_defaultSourceAttrPtr;
 }
 
 

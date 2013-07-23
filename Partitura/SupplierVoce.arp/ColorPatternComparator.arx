@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3038
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          977
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               AdditionalTriggerInputs
@@ -89,6 +89,22 @@
               <Value>
                 HistogramStatisticsProcessor
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DefaultSource
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              InformationSource
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

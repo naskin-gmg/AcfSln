@@ -31,7 +31,7 @@ public:
 	typedef iqtinsp::TSupplierGuiCompBase<Ui::CValueSupplierGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CValueSupplierGuiComp);
-		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integreted in group 'Intermediate Results'", false, "IntermediateResultsGui");
+		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
 
 protected Q_SLOTS:
@@ -64,6 +64,9 @@ private:
 
 	typedef imod::TModelWrap<i2d::CCircle> FoundModel;
 	FoundModel m_foundModel;
+
+	typedef imod::TModelWrap<i2d::CPosition2d> PositionModel;
+	istd::TPointerVector<PositionModel> m_positionModels;
 };
 
 

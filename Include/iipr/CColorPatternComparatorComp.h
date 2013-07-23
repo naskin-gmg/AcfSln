@@ -44,6 +44,7 @@ public:
 		I_ASSIGN_TO(m_teachedPatternProviderModelCompPtr, m_teachedPatternProviderCompPtr, false);
 		I_ASSIGN_TO(m_teachedPatternSupplierCompPtr, m_teachedPatternProviderCompPtr, false);
 		I_ASSIGN(m_dataStatisticsProcessorCompPtr, "DataStatisticsProcessor", "Processor used for calculation of the histogram statistics", true, "DataStatisticsProcessor");
+		I_ASSIGN(m_defaultSourceAttrPtr, "DefaultSource", "Default source of information.", true, "Color Check");
 	I_END_COMPONENT;
 
 	CColorPatternComparatorComp();
@@ -82,6 +83,8 @@ private:
 	I_REF(iproc::ISupplier, m_teachedPatternSupplierCompPtr);
 
 	I_REF(imeas::IDataSequenceStatisticsProcessor, m_dataStatisticsProcessorCompPtr);
+
+	I_ATTR(QString, m_defaultSourceAttrPtr);
 
 	mutable QDateTime m_resultTimeStamp;
 

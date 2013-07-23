@@ -15,6 +15,7 @@
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
 #include "iimg/IBitmapProvider.h"
+#include "iipr/ISimpleResultsProvider.h"
 
 
 namespace iipr
@@ -30,7 +31,8 @@ namespace iipr
 class CPositionFromImageSupplierComp:
 			public iproc::TSupplierCompWrap<imath::CVarVector>,
 			virtual public imeas::INumericValueProvider,
-			virtual public i2d::ICalibrationProvider
+			virtual public i2d::ICalibrationProvider,
+			virtual public iipr::ISimpleResultsProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap<imath::CVarVector> BaseClass;
@@ -38,12 +40,17 @@ public:
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
+		I_REGISTER_INTERFACE(iipr::ISimpleResultsProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provide 2D-calibration object", false, "CalibrationProvider");
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
+		I_ASSIGN(m_introspectionOnAttrPtr, "EnableIntrospection", "If enabled, intermediate results (i.e. images from processors) will be collected", true, false);
 	I_END_COMPONENT;
+
+	// reimplemented (iipr::ISimpleResultsProvider)
+	virtual CSimpleResultsContainer* GetResults() const;
 
 	// reimplemented (imeas::INumericValueProvider)
 	virtual int GetValuesCount() const;
@@ -65,6 +72,7 @@ private:
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
+	I_ATTR(bool, m_introspectionOnAttrPtr);
 
 	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;
 
@@ -77,6 +85,8 @@ private:
 	};
 
 	mutable Position m_position;
+
+	mutable iipr::CSimpleResultsContainer m_intermediateResults;
 };
 
 

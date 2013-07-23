@@ -711,6 +711,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ISimpleResultsProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TImageParamProcessorCompBase.h"
 				>
 			</File>

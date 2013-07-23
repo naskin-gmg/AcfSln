@@ -6,6 +6,8 @@
 #include "iview/CCircleShape.h"
 #include "iview/CPinShape.h"
 
+#include "iipr/ISimpleResultsProvider.h"
+
 
 namespace iqtipr
 {
@@ -76,6 +78,33 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 		m_foundModel.AttachObserver(posShapePtr);
 
 		result.PushBack(posShapePtr);
+	}
+
+	// intermediate results as well
+	m_positionModels.Reset();
+
+	iipr::ISimpleResultsProvider* providerPtr = dynamic_cast<iipr::ISimpleResultsProvider*>(GetObjectPtr());
+	if (providerPtr != NULL){
+		const iipr::CSimpleResultsContainer* containerPtr = providerPtr->GetResults();
+		if (containerPtr != NULL){
+			for (int i = 0; i < containerPtr->size(); i++){
+				const QVariant& item = containerPtr->at(i);
+				if (item.type() == QVariant::Point){
+					QPoint point = item.toPoint();
+
+					imod::TModelWrap<i2d::CPosition2d>* posModelPtr = new imod::TModelWrap<i2d::CPosition2d>();
+					m_positionModels.PushBack(posModelPtr);
+
+					iview::CPinShape* posShapePtr = new iview::CPinShape();
+					posShapePtr->SetEditablePosition(false);
+
+					posModelPtr->AttachObserver(posShapePtr);
+					posModelPtr->SetPosition(i2d::CVector2d(point.x(), point.y()));
+
+					result.PushBack(posShapePtr);
+				}
+			}
+		}
 	}
 }
 

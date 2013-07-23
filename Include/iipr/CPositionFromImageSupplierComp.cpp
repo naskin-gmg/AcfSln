@@ -13,6 +13,14 @@ namespace iipr
 {
 
 
+// reimplemented (iipr::ISimpleResultsProvider)
+
+CSimpleResultsContainer* CPositionFromImageSupplierComp::GetResults() const
+{
+	return &m_intermediateResults;
+}
+
+
 // reimplemented (imeas::INumericValueProvider)
 
 int CPositionFromImageSupplierComp::GetValuesCount() const
@@ -26,7 +34,7 @@ int CPositionFromImageSupplierComp::GetValuesCount() const
 }
 
 
-const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int I_IF_DEBUG(index)) const
+const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int index) const
 {
 	Q_ASSERT(index == 0);
 
@@ -58,6 +66,7 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) const
 {
 	m_outputCalibrationPtr.Reset();
+	m_intermediateResults.Reset();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_processorCompPtr.IsValid()){
@@ -72,6 +81,13 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 							paramsSetPtr,
 							bitmapPtr,
 							&consumer);
+
+			if (*m_introspectionOnAttrPtr){
+				iipr::CSimpleResultsContainer* intermediateResultsPtr = dynamic_cast<iipr::CSimpleResultsContainer*>(m_processorCompPtr.GetPtr());
+				if (intermediateResultsPtr != NULL){
+					m_intermediateResults = *intermediateResultsPtr;
+				}
+			}
 
 			if (positionState != iproc::IProcessor::TS_OK){
 				return WS_ERROR;

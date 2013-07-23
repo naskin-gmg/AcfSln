@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3010
+          3038
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          968
+          977
         </Number>
         <Description>
           ACF-Solutions
@@ -170,7 +170,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -207,6 +207,22 @@
               <Value>
                 CircleFinderParams
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableIntrospection
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableIntrospection
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -553,7 +569,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               AdditionalTriggerInputs
@@ -611,6 +627,22 @@
             </Type>
             <ExportId>
               DiagnosticName
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableIntrospection
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableIntrospection
             </ExportId>
             <Data>
               <IsEnabled>
