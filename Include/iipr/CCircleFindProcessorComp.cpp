@@ -440,7 +440,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		if (ray.points.count() > 0){
 			const i2d::CVector2d& pointVector = ray.points.at(ray.usedIndex).position;
 
-			append(QPoint(pointVector.GetX(), pointVector.GetY()));
+			append(QPointF(pointVector.GetX(), pointVector.GetY()));
 		}
 	}
 }

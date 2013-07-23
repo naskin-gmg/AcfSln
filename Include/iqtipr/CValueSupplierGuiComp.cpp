@@ -89,8 +89,8 @@ void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 		if (containerPtr != NULL){
 			for (int i = 0; i < containerPtr->size(); i++){
 				const QVariant& item = containerPtr->at(i);
-				if (item.type() == QVariant::Point){
-					QPoint point = item.toPoint();
+				if (item.type() == QVariant::Point || item.type() == QVariant::PointF){
+					QPointF point = item.toPointF();
 
 					imod::TModelWrap<i2d::CPosition2d>* posModelPtr = new imod::TModelWrap<i2d::CPosition2d>();
 					m_positionModels.PushBack(posModelPtr);
