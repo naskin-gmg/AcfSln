@@ -1024,11 +1024,11 @@ void CInspectionTaskGuiComp::CreateMenu()
 	QMenu* actionsMenuPtr = new QMenu(MenuButton);
 	MenuButton->setMenu(actionsMenuPtr);
 
+	m_copyAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy all"), this, SLOT(OnCopyAll()));
+	m_pasteAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste all"), this, SLOT(OnPasteAll()));
+	actionsMenuPtr->addSeparator();
 	m_copyCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy current task"), this, SLOT(OnCopyCurrent()));
 	m_pasteCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste current task"), this, SLOT(OnPasteCurrent()));
-	actionsMenuPtr->addSeparator();
-	m_copyAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy all tasks"), this, SLOT(OnCopyAll()));
-	m_pasteAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste all tasks"), this, SLOT(OnPasteAll()));
 
 	if (m_paramsLoaderCompPtr.IsValid()){
 		actionsMenuPtr->addSeparator();

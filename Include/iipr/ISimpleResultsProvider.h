@@ -25,6 +25,13 @@ public:
 };
 
 
+class ISimpleResultsConsumer: public istd::IPolymorphic
+{
+public:
+	virtual void SetResultsBuffer(CSimpleResultsContainer* bufferPtr) = 0;
+};
+
+
 class ISimpleResultsProvider: public istd::IPolymorphic
 {
 public:

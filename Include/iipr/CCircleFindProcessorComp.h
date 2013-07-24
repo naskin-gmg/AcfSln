@@ -27,12 +27,12 @@ namespace iipr
 	This is realized as processor, as input the image, as output consumer of features must be given.
 	It uses set of 1D caliper lines to find the position and radius of circle.
 	It takes area of interests (AOI) from parameter set. As AOI can be used annulus, segment of annulus, rectangle and set of segments of annulus.
-	Collects introspection results and delivers them via iipr::CSimpleResultsContainer if EnableIntrospection = true.
+	To collect introspection results, call SetResultsBuffer with the valid buffer pointer as parameter.
 */
 class CCircleFindProcessorComp:
 			public icomp::CComponentBase,
 			public iproc::TSyncProcessorWrap<IImageToFeatureProcessor>,
-			virtual public iipr::CSimpleResultsContainer
+			virtual public iipr::ISimpleResultsConsumer
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -47,8 +47,9 @@ public:
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
 		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
-		I_ASSIGN(m_introspectionOnAttrPtr, "EnableIntrospection", "If enabled, intermediate results (i.e. images from processors) will be collected", true, false);
 	I_END_COMPONENT;
+
+	CCircleFindProcessorComp();
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
 	virtual int DoExtractFeatures(
@@ -62,6 +63,9 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
+
+	// reimplemented (iipr::ISimpleResultsConsumer)
+	virtual void SetResultsBuffer(CSimpleResultsContainer* bufferPtr);
 
 protected:
 	typedef TWeightedFeatureWrap<i2d::CCircle> CircleFeature;
@@ -112,7 +116,8 @@ private:
 	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
 	I_ATTR(QByteArray, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
-	I_ATTR(bool, m_introspectionOnAttrPtr);
+
+	CSimpleResultsContainer* m_intermediateResultsBufferPtr;
 };
 
 
