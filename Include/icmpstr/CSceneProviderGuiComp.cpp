@@ -284,7 +284,9 @@ bool CSceneProviderGuiComp::OnMouseDoubleClickEvent(QEvent* eventPtr)
 {
 	QGraphicsSceneMouseEvent* sceneEventPtr = dynamic_cast<QGraphicsSceneMouseEvent*>(eventPtr);
 	if (sceneEventPtr != NULL){
-		QGraphicsItem* mouseItemPtr = m_scenePtr->itemAt(sceneEventPtr->scenePos(), SceneView->transform());
+		QList<QGraphicsItem *> itemsAtPoint = m_scenePtr->items(sceneEventPtr->scenePos());
+
+		QGraphicsItem* mouseItemPtr = itemsAtPoint.isEmpty() ? 0 : itemsAtPoint.first();
 		if (mouseItemPtr != NULL){
 			m_scenePtr->sendEvent(mouseItemPtr, eventPtr);
 		}

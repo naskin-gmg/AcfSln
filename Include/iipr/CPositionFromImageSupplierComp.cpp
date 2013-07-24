@@ -34,7 +34,7 @@ int CPositionFromImageSupplierComp::GetValuesCount() const
 }
 
 
-const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int index) const
+const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int I_IF_DEBUG(index)) const
 {
 	Q_ASSERT(index == 0);
 
