@@ -5,14 +5,16 @@
 // Qt includes
 #include <QtCore/QDir>
 #include <QtCore/QMimeData>
-#include <QtGui/QTreeWidget>
 #include <QtGui/QDrag>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTreeWidget>
+#else
+#include <QtGui/QTreeWidget>
+#endif
 
 // ACF includes
 #include "istd/TDelPtr.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
-
 #include "Generated/ui_CHotfolderContainerGuiComp.h"
 
 

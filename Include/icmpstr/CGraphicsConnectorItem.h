@@ -4,9 +4,13 @@
 
 // Qt includes
 #include <QtCore/QObject>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGraphicsItem>
+#else
 #include <QtGui/QGraphicsItem>
+#endif
 
-// ACF includes
+// ACF-Solutions includes
 #include "icmpstr/ISceneProvider.h"
 
 

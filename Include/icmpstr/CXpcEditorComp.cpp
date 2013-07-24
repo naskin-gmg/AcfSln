@@ -2,9 +2,16 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtCore/QStringListModel>
+#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QFileDialog>
+#else
 #include <QtGui/QStringListModel>
 #include <QtGui/QItemDelegate>
 #include <QtGui/QFileDialog>
+#endif
 
 // ACF includes
 #include "istd/CSystem.h"

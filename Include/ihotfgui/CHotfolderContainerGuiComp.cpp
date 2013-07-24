@@ -2,23 +2,29 @@
 
 
 // Qt includes
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QMenu>
+#else
 #include <QtGui/QVBoxLayout>
-#include <QtGui/QMouseEvent>
 #include <QtGui/QApplication>
 #include <QtGui/QHeaderView>
 #include <QtGui/QItemDelegate>
-#include <QtGui/QBitmap>
 #include <QtGui/QPushButton>
-#include <QtGui/QPainter>
 #include <QtGui/QMenu>
-
+#endif
+#include <QtGui/QMouseEvent>
+#include <QtGui/QBitmap>
+#include <QtGui/QPainter>
 
 // ACF includes
 #include <QtCore/QString>
-
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
-
 #include "iqt/CSignalBlocker.h"
 
 

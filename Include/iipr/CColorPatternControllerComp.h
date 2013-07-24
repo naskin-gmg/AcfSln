@@ -10,10 +10,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-
 #include "imeas/IDataSequenceProvider.h"
 #include "imeas/TDiscreteDataSequence.h"
-
 #include "iipr/IPatternController.h"
 #include "iimg/IBitmapProvider.h"
 

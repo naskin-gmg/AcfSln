@@ -3,14 +3,16 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QApplication>
+#else
 #include <QtGui/QApplication>
+#endif
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
 #include "istd/TChangeNotifier.h"
-
 #include "ifile/IFileNameParam.h"
-
 #include "iproc/IProcessor.h"
 
 

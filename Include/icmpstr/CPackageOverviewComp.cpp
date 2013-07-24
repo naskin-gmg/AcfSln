@@ -4,24 +4,32 @@
 // Qt includes
 #include <QtCore/QString>
 #include <QtCore/QMimeData>
-#include <QtGui/QVBoxLayout>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QBitmap>
+#include <QtGui/QPainter>
+#include <QtGui/QDrag>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QMenu>
+#else
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QApplication>
 #include <QtGui/QHeaderView>
 #include <QtGui/QItemDelegate>
-#include <QtGui/QBitmap>
 #include <QtGui/QPushButton>
-#include <QtGui/QPainter>
 #include <QtGui/QMenu>
-#include <QtGui/QDrag>
+#endif
 
 // ACF includes
-#include "iser/CXmlStringWriteArchive.h"
-
-#include "icomp/CComponentMetaDescriptionEncoder.h"
-
-#include "iqt/CSignalBlocker.h"
 #include "istd/CSystem.h"
+#include "iser/CXmlStringWriteArchive.h"
+#include "icomp/CComponentMetaDescriptionEncoder.h"
+#include "iqt/CSignalBlocker.h"
 
 
 namespace icmpstr

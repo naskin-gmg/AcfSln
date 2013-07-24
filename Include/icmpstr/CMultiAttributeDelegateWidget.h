@@ -3,12 +3,16 @@
 
 
 // Qt includes
-#include <QtGui/QWidget>
 #include <QtGui/QIcon>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QItemDelegate>
+#else
+#include <QtGui/QWidget>
 #include <QtGui/QItemDelegate>
+#endif
 
-
-// ACF includes
+// ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
 
 

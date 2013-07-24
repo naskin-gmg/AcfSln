@@ -2,13 +2,22 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#include <QtCore/QMimeData>
+#include <QtGui/QClipboard>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QMenu>
+#else
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QGroupBox>
 #include <QtGui/QMenu>
-#include <QtGui/QClipboard>
-#include <QtCore/QMimeData>
+#endif
 
 // ACF includes
 #include "imod/IModel.h"
@@ -19,7 +28,6 @@
 #include "iview/CShapeBase.h"
 #include "iser/CXmlStringReadArchive.h"
 #include "iser/CXmlStringWriteArchive.h"
-
 #include "iqtgui/CFlowLayout.h"
 
 

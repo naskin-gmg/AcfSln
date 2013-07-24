@@ -3,10 +3,17 @@
 
 
 // Qt includes
+#include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGraphicsItem>
+#else
 #include <QtGui/QGraphicsItem>
+#endif
 
+// ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
+// ACF-Solutions includes
 #include "icmpstr/TObjectShapeBase.h"
 #include "icmpstr/CVisualRegistryElement.h"
 

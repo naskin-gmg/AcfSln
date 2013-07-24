@@ -1,18 +1,16 @@
-/* 
- * File:   CScaleCalibrationEditorComp.h
- * Author: SOL
- *
- * Created on 29 listopad 2012, 13:50
- */
-
 #ifndef iqtcam_CScaleCalibrationEditorComp_included
 #define	iqtcam_CScaleCalibrationEditorComp_included
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
+#else
 #include <QtGui/QFrame>
 #include <QtGui/QGroupBox>
-
+#endif
 
 // Acf includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -20,26 +18,25 @@
 
 // AcfSln includes
 #include <imeas/INumericValueProvider.h>
-
-
 #include "Generated/ui_CScaleCalibrationEditorComp.h"
+
 
 namespace iqtcam
 {
 
 
 class CScaleCalibrationEditorComp:
-public iqtgui::TDesignerGuiObserverCompBase<
-Ui::CScaleCalibrationEditorComp, imeas::INumericValue>
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CScaleCalibrationEditorComp, imeas::INumericValue>
 {
+	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-	Ui::CScaleCalibrationEditorComp, imeas::INumericValue> BaseClass;
+				Ui::CScaleCalibrationEditorComp, imeas::INumericValue> BaseClass;
 
 	I_BEGIN_COMPONENT(CScaleCalibrationEditorComp);
-	I_ASSIGN(m_circleProviderPtr, "CircleProvider", "External circle provider providing radius used for scale calibration\n"
-			"The provider must provide a numeric value of type VTI_RADIUS", false, "CircleProvider");
-	I_REGISTER_INTERFACE(imod::IModelEditor);
+		I_ASSIGN(m_circleProviderPtr, "CircleProvider", "External circle provider providing radius used for scale calibration\nThe provider must provide a numeric value of type VTI_RADIUS", false, "CircleProvider");
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 	I_END_COMPONENT;
 
 protected:
@@ -52,8 +49,7 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int changeFlags);
 
-	Q_OBJECT
-	private Q_SLOTS:
+private Q_SLOTS:
 	void OnValueChanged(double);
 	void on_CalibrateButton_clicked();
 	void on_NominalRadiusSpinBox_valueChanged(double d);
@@ -66,5 +62,6 @@ private:
 } // namespace iqtcam
 
 
-#endif	/* iqtcam_CScaleCalibrationEditorComp_included */
+#endif	// !iqtcam_CScaleCalibrationEditorComp_included
+
 

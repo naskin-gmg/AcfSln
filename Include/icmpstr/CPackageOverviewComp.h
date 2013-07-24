@@ -4,28 +4,27 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTreeWidget>
+#else
 #include <QtGui/QTreeWidget>
+#endif
 
 // ACF includes
 #include "istd/TDelPtr.h"
-
 #include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CComponentAddress.h"
-
 #include "ibase/ICommandsProvider.h"
-
 #include "ifile/IFileNameParam.h"
-
 #include "idoc/IHelpViewer.h"
 #include "idoc/IDocumentManager.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
+// ACF-Solutions includes
 #include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/IAttributeSelectionObserver.h"
 #include "icmpstr/IElementSelectionInfo.h"
-
 #include "Generated/ui_CPackageOverviewComp.h"
 
 

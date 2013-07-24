@@ -3,7 +3,12 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QMessageBox>
+#else
 #include <QtGui/QMessageBox>
+#endif
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -16,6 +21,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqt2d/TViewExtenderCompBase.h"
 
+// ACF-Solutions includes
 #include "iqtinsp/iqtinsp.h"
 
 

@@ -2,11 +2,15 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHeaderView>
+#else
 #include <QtGui/QHeaderView>
+#endif
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "iqt/CSignalBlocker.h"
 
 

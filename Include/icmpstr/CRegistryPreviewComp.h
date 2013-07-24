@@ -4,12 +4,19 @@
 
 // Qt includes
 #include <QtCore/QProcess>
+#include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QLabel>
+#else
 #include <QtGui/QLabel>
+#endif
 
 // ACF includes
 #include "icomp/IComponentEnvironmentManager.h"
 #include "ilog/TLoggerCompWrap.h"
 #include "ifile/IFileNameParam.h"
+
+// ACF-Solutions includes
 #include "icmpstr/IRegistryPreview.h"
 
 

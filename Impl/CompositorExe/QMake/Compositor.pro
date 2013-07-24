@@ -18,6 +18,7 @@ win32-msvc*{
 }
 
 QT += xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 mac{
 	ICON += ../Mac/Compositor.icns

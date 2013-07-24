@@ -4,18 +4,18 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QLabel>
+#else
 #include <QtGui/QLabel>
-
+#endif
 
 // ACF includes
 #include "imod/CMultiModelObserverBase.h"
 #include "imod/CModelProxy.h"
-
 #include "ibase/ICommandsProvider.h"
-
 #include "iprm/IParamsManager.h"
 #include "ifile/IFileNameParam.h"
-
 #include "iqtgui/IIconProvider.h"
 #include "iqtgui/IDialog.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -23,12 +23,10 @@
 #include "iqtgui/CGuiComponentDialog.h"
 #include "iqtgui/CExtLineEdit.h"
 
-
 // AcfSln includes
 #include "ihotf/IHotfolderProcessingInfo.h"
 #include "ihotf/IHotfolderProcessingItem.h"
 #include "ihotf/IHotfolderStatistics.h"
-
 #include "ihotfgui/Generated/ui_CHotfolderGuiComp.h"
 
 

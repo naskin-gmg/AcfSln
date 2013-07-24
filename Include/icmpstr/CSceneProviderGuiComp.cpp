@@ -5,14 +5,19 @@
 #include <QtCore/qmath.h>
 #include <QtCore/QVarLengthArray>
 #include <QtGui/QKeyEvent>
+#if QT_VERSION >= 0x050000
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport//QPrintDialog>
+#include <QtWidgets/QGraphicsItem>
+#else
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QGraphicsItem>
+#endif
 
 // ACF includes
-#include "iqtdoc/CMainWindowGuiComp.h"
-
 #include "iqt/CSignalBlocker.h"
+#include "iqtdoc/CMainWindowGuiComp.h"
 
 
 namespace icmpstr
@@ -279,7 +284,7 @@ bool CSceneProviderGuiComp::OnMouseDoubleClickEvent(QEvent* eventPtr)
 {
 	QGraphicsSceneMouseEvent* sceneEventPtr = dynamic_cast<QGraphicsSceneMouseEvent*>(eventPtr);
 	if (sceneEventPtr != NULL){
-		QGraphicsItem* mouseItemPtr = m_scenePtr->itemAt(sceneEventPtr->scenePos());
+		QGraphicsItem* mouseItemPtr = m_scenePtr->itemAt(sceneEventPtr->scenePos(), SceneView->transform());
 		if (mouseItemPtr != NULL){
 			m_scenePtr->sendEvent(mouseItemPtr, eventPtr);
 		}

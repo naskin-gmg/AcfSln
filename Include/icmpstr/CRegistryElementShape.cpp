@@ -5,11 +5,19 @@
 #include <QtGui/QPainter>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QStyleOptionGraphicsItem>
+#include <QtWidgets/QGraphicsScene>
+#else
 #include <QtGui/QStyleOptionGraphicsItem>
 #include <QtGui/QGraphicsScene>
+#endif
 
 // ACF includes
 #include "istd/CIdManipBase.h"
+
+// ACF-Solutions includes
 #include "icmpstr/CVisualRegistryEditorComp.h"
 #include "icmpstr/CRegistryElementShape.h"
 #include "icmpstr/IRegistryConsistInfo.h"

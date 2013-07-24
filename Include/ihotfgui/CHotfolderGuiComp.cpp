@@ -2,17 +2,23 @@
 
 
 // Qt includes
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMenu>
+#else
 #include <QtGui/QHeaderView>
 #include <QtGui/QProgressBar>
 #include <QtGui/QLabel>
 #include <QtGui/QMenu>
+#endif
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iprm/IOptionsList.h"
 #include "iproc/IProcessor.h"
 #include "iqt/CSignalBlocker.h"
-
 
 // ACF-Solutions includes
 #include "ihotfgui/CDirectoryItemGuiComp.h"

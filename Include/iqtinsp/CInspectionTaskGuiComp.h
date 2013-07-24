@@ -6,8 +6,14 @@
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QSet>
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QToolBox>
+#include <QtWidgets/QTabWidget>
+#else
 #include <QtGui/QToolBox>
 #include <QtGui/QTabWidget>
+#endif
 
 // ACF includes
 #include "istd/TPointerVector.h"
@@ -23,8 +29,6 @@
 
 // ACF-Solutions includes
 #include "iinsp/IInspectionTask.h"
-
-#include "iqtinsp/iqtinsp.h"
 #include "iqtinsp/Generated/ui_CInspectionTaskGuiComp.h"
 
 

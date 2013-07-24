@@ -2,22 +2,24 @@
 
 
 // Qt includes
+#include <QtGui/QFocusEvent>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#else
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
-#include <QtGui/QFocusEvent>
+#endif
 
-
-// ACF includes
+// ACF-Solutions includes
 #include "icmpstr/CMultiAttributeEditor.h"
 
-
-// public methods
 	
 namespace icmpstr
 {
 
 
-// public methods of embedded class CMultiAttributeDelegateWidget
+// public methods
 
 CMultiAttributeDelegateWidget::CMultiAttributeDelegateWidget(
 			QItemDelegate& itemDelegate,

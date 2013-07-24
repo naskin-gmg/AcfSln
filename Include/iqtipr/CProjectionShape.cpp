@@ -2,7 +2,11 @@
 
 
 // Qt includes
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QStyleOptionGraphicsItem>
+#else
 #include <QtGui/QStyleOptionGraphicsItem>
+#endif
 #include <QtGui/QPainter>
 
 // ACF-Solutions includes

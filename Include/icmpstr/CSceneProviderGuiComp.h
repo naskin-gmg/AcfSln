@@ -3,20 +3,27 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGraphicsScene>
+#include <QtWidgets/QGraphicsSceneResizeEvent>
+#include <QtWidgets/QGraphicsSceneWheelEvent>
+#else
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
 #include <QtGui/QGraphicsSceneResizeEvent>
 #include <QtGui/QGraphicsSceneWheelEvent>
+#endif
 
 // ACF includes
 #include "i2d/ISceneController.h"
-
 #include "ibase/ICommandsProvider.h"
-
 #include "iqtgui/IDropConsumer.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
+// ACF-Solutions includes
 #include "icmpstr/ISceneProvider.h"
 #include "icmpstr/Generated/ui_CSceneProviderGuiComp.h"
 

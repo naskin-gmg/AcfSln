@@ -2,16 +2,23 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QLineEdit>
+#else
 #include <QtGui/QHeaderView>
 #include <QtGui/QComboBox>
 #include <QtGui/QLineEdit>
+#endif
 
-
-// public methods
 	
 namespace icmpstr
 {
 
+
+// public methods
 
 CMultiAttributeEditor::CMultiAttributeEditor(
 			const CElementSelectionInfoManagerBase& elementSelectionInfoManager,

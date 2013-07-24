@@ -3,15 +3,19 @@
 
 
 // Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGraphicsSceneMouseEvent>
+#else
 #include <QtGui/QGraphicsSceneMouseEvent>
+#endif
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "imod/TSingleModelObserverBase.h"
-
 #include "i2d/IObject2d.h"
 
+// ACF-Solutions includes
 #include "icmpstr/TShapeBase.h"
 
 

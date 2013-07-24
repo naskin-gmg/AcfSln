@@ -6,13 +6,10 @@
 #include "iprm/IParamsManager.h"
 #include "ifile/IFileNameParam.h"
 #include "iprm/ISelectionParam.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 
 // AcfSln includes
 #include "ihotf/IHotfolderStatistics.h"
-
 #include "ihotfgui/Generated/ui_CDirectoryItemGuiComp.h"
 
 

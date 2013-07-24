@@ -2,7 +2,13 @@
 
 
 // Qt includes
+// Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QMessageBox>
+#else
 #include <QtGui/QMessageBox>
+#endif
 
 // ACF includes
 #include "istd/TDelPtr.h"

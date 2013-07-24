@@ -3,12 +3,16 @@
 
 
 // Qt inclueds
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QDialog>
+#else
 #include <QtGui/QDialog>
+#endif
 
 // ACF-Solutions includes
 #include "iauth/IUsersManager.h"
 #include "iauth/CUser.h"
-
 #include "Generated/ui_CChangePasswordDialog.h"
 
 

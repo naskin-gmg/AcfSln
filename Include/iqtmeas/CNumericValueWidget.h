@@ -3,11 +3,14 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
 #include <QtGui/QWidget>
-
+#endif
 
 #include "imath/IUnitInfo.h"
-
 #include "Generated/ui_CNumericValueWidget.h"
 
 

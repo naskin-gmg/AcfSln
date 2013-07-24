@@ -3,21 +3,24 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtPrintSupport/QPrinter>
+#include <QtWidgets/QTextBrowser>
+#else
 #include <QtGui/QPrinter>
 #include <QtGui/QTextBrowser>
+#endif
 
 // ACF includes
 #include "icomp/IMetaInfoManager.h"
-
 #include "ifile/IFileNameParam.h"
-
 #include "idoc/IHelpViewer.h"
 #include "idoc/IHelpFileProvider.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
 
+// ACF-Solutions includes
 #include "icmpstr/IExternalMetaInfoManager.h"
-
 #include "Generated/ui_CQuickHelpGuiComp.h"
 
 

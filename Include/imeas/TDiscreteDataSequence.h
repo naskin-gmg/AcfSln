@@ -120,8 +120,8 @@ bool TDiscreteDataSequence<Element>::CreateDiscreteSequence(
 	m_allocatedElementsCount = 0;
 	m_samplesCount = samplesCount;
 	m_channelsCount = channelsCount;
-	m_sampleDiff = (sampleDiff != 0)? sampleDiff: channelsCount * sizeof(Element);
-	m_channelDiff = (channelDiff != 0)? channelDiff: sizeof(Element);
+	m_sampleDiff = (sampleDiff != 0) ? sampleDiff : int(channelsCount * sizeof(Element));
+	m_channelDiff = (channelDiff != 0) ? channelDiff: sizeof(Element);
 
 	return true;
 }

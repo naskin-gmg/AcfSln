@@ -2,14 +2,11 @@
 #define icmpstr_CMultiAttributeEditor_included
 
 
-// Qt includes
-#include <QtGui/QTreeWidget>
-
-
 // ACF includes
 #include "iqtgui/CTreeWidgetFilter.h"
 #include "iqtgui/CItemDelegate.h"
 
+// ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
 #include "icmpstr/Generated/ui_CMultiAttributeEditor.h"
 

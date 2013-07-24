@@ -3,13 +3,15 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHeaderView>
+#else
 #include <QtGui/QHeaderView>
+#endif
 
 // ACF includes
 #include "icomp/CCompositeComponentStaticInfo.h"
-
 #include "ilog/CMessageContainer.h"
-
 #include "iqtgui/CItemDelegate.h"
 
 

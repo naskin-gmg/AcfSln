@@ -2,16 +2,22 @@
 #define icmpstr_CXpcEditorComp_included
 
 
-// QT includes
-#include <QtGui/QStringListModel>
+// Qt includes
 #include <QtCore/QDir>
+#if QT_VERSION >= 0x050000
+#include <QtCore/QStringListModel>
+#include <QtWidgets/QMenu>
+#else
+#include <QtGui/QStringListModel>
 #include <QtGui/QMenu>
+#endif
 
 // ACF includes
 #include "idoc/IDocumentManager.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "icomp/CXpcModel.h"
 
+// ACF-Solutions includes
 #include "Generated/ui_CXpcEditorComp.h"
 
 

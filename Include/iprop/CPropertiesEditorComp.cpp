@@ -1,14 +1,24 @@
+#include "iprop/CPropertiesEditorComp.h"
+
+
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QTreeWidgetItemIterator>
+#else
 #include <QtGui/QHeaderView>
 #include <QtGui/QToolButton>
 #include <QtGui/QTreeWidgetItemIterator>
+#endif
+
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 // ACF-Solutions includes
 #include "iprop/TProperty.h"
-#include "iprop/CPropertiesEditorComp.h"
 
 
 namespace iprop
@@ -48,8 +58,12 @@ void CPropertiesEditorComp::OnGuiCreated()
 
 	PropertyTree->setSelectionMode(QAbstractItemView::SingleSelection);
 	PropertyTree->setRootIsDecorated(false);
-	PropertyTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 
+#if QT_VERSION >= 0x050000
+	PropertyTree->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+	PropertyTree->header()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 	PropertyTree->setItemDelegate(new EditorDelegate(*this));
 }
 

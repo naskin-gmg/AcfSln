@@ -3,7 +3,6 @@
 
 
 // Qt includes
-#include <QtGui/QWidget>
 #include <QtGui/QStandardItemModel>
 
 // ACF includes

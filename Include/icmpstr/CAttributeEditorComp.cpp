@@ -2,31 +2,33 @@
 
 
 // Qt includes
-#include <QtGui/QHeaderView>
-#include <QtGui/QListWidget>
-#include <QtGui/QLineEdit>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QLineEdit>
+#else
 #include <QtGui/QComboBox>
-#include <QtGui/QToolButton>
-#include <QtGui/QPushButton>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QLineEdit>
+#endif
 
 // ACF includes
 #include "istd/TOptDelPtr.h"
 #include "istd/TChangeNotifier.h"
-
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
 #include "icomp/CComponentMetaDescriptionEncoder.h"
-
 #include "iqt/CSignalBlocker.h"
 
+// ACF-Solutions includes
 #include "icmpstr/CMultiAttributeDelegateWidget.h"
 
 
-// public methods
 
 namespace icmpstr
 {
 
+// public methods
 
 CAttributeEditorComp::CAttributeEditorComp()
 :	m_attributeItemDelegate(this),

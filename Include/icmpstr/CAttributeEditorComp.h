@@ -3,20 +3,23 @@
 
 
 // Qt includes
-#include <QtGui/QWidget>
 #include <QtGui/QIcon>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QItemDelegate>
+#else
+#include <QtGui/QWidget>
 #include <QtGui/QItemDelegate>
-
+#endif
 
 // ACF includes
 #include "istd/CClassInfo.h"
-
 #include "idoc/IHelpViewer.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CTreeWidgetFilter.h"
 #include "iqtgui/CItemDelegate.h"
 
+// ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
 #include "icmpstr/CMultiAttributeEditor.h"
 #include "icmpstr/Generated/ui_CAttributeEditorComp.h"

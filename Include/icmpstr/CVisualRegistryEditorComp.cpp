@@ -3,14 +3,24 @@
 
 // Qt includes
 #include <QtCore/QMimeData>
+#include <QtGui/QClipboard>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QInputDialog>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QDesktopWidget>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QPushButton>
+#else
 #include <QtGui/QInputDialog>
 #include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
 #include <QtGui/QApplication>
-#include <QtGui/QClipboard>
 #include <QtGui/QDesktopWidget>
 #include <QtGui/QToolButton>
 #include <QtGui/QPushButton>
+#endif
 
 // ACF includes
 #include "istd/TChangeNotifier.h"

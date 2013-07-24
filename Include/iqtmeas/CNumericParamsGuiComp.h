@@ -3,21 +3,22 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
+#else
 #include <QtGui/QFrame>
 #include <QtGui/QGroupBox>
-
+#endif
 
 // ACF includes
 #include "istd/TPointerVector.h"
-
 #include "imod/TModelWrap.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 
 // ACF-Solutions includes
 #include "imeas/INumericValue.h"
-
 #include "iqtmeas/CNumericValueWidget.h"
 
 

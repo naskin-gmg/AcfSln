@@ -2,12 +2,16 @@
 #define iqtsig_CSampleContainerView_included
 
 
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
 #include <QtGui/QWidget>
+#endif
 
+// ACF includes
 #include "istd/TRange.h"
-
 #include "imod/TSingleModelObserverBase.h"
-
 #include "imeas/IDataSequence.h"
 
 

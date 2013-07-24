@@ -3,8 +3,12 @@
 
 // Qt includes
 #include <QtCore/QDir>
-#include <QtGui/QApplication>
 #include <QtCore/QMutexLocker>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QApplication>
+#else
+#include <QtGui/QApplication>
+#endif
 
 // ACF includes
 #include "istd/TChangeDelegator.h"

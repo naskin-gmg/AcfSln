@@ -3,8 +3,14 @@
 
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QRadioButton>
+#else
 #include <QtGui/QComboBox>
 #include <QtGui/QRadioButton>
+#endif
 
 // ACF includes
 #include "istd/TPointerVector.h"

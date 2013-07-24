@@ -1,7 +1,19 @@
-#include "CScaleCalibrationEditorComp.h"
+#include "iqtcam/CScaleCalibrationEditorComp.h"
+
+
+// STL includes
 #include <iostream>
+
+// Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QMessageBox>
+#else
+#include <QtGui/QMessageBox>
+#endif
+
+// ACF includes
 #include <imath/CVarVector.h>
-#include <QtGui/qmessagebox.h>
 
 
 namespace iqtcam

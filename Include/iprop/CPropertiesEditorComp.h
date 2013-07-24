@@ -2,9 +2,6 @@
 #define iprop_CPropertiesEditorComp_included
 
 
-// Qt includes
-#include <QtGui/QTreeWidget>
-
 // ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CItemDelegate.h"

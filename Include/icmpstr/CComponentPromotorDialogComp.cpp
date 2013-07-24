@@ -5,11 +5,18 @@
 #include <set>
 
 // Qt includes
+#include<QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QPushButton>
+#else
 #include <QtGui/QPushButton>
+#endif
 
 // ACF includes
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
+
+// ACF-Solutions includes
 #include "icmpstr/CVisualRegistryElement.h"
 
 
