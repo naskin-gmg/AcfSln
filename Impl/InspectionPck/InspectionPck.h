@@ -9,10 +9,11 @@
 #include "iinsp/CInspectionTaskComp.h"
 #include "iinsp/CInformationProviderCacheComp.h"
 #include "iinsp/CIdProviderCacheComp.h"
+#include "iinsp/CComposedInformationProviderComp.h"
 
 
 /**
-	Base system-undependent general package.
+	General inspection-related package.
 */
 namespace InspectionPck
 {
@@ -21,6 +22,7 @@ namespace InspectionPck
 typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
 typedef icomp::TModelCompWrap<iinsp::CInformationProviderCacheComp> InformationProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CIdProviderCacheComp> IdProviderCache;
+typedef icomp::TModelCompWrap<iinsp::CComposedInformationProviderComp> ComposedInformationProvider;
 
 
 } // namespace InspectionPck

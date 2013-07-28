@@ -178,6 +178,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CComposedInformationProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CIdProviderCacheComp.cpp"
 				>
 			</File>
@@ -194,6 +198,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CComposedInformationProviderComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CIdProviderCacheComp.h"
 				>
