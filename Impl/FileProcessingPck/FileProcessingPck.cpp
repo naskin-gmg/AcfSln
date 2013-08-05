@@ -78,6 +78,11 @@ I_EXPORT_COMPONENT(
 			"Copy application transforming files",
 			"Copy Compile Transform Application" IM_CATEGORY(I_DATA_PROCESSING I_APPLICATION) IM_TAG("File"));
 
+I_EXPORT_COMPONENT(
+			RenderedObjectFileLoader,
+			"Loader of the rendered preview for an object",
+			"File Loader Preview");
+
 
 } // namespace FileProcessingPck
 
