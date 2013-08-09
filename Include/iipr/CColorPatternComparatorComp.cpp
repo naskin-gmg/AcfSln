@@ -277,6 +277,11 @@ void CColorPatternComparatorComp::OnComponentCreated()
 	if (m_teachedPatternProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_teachedPatternProviderModelCompPtr.GetPtr(), m_teachedPatternSupplierCompPtr.GetPtr());
 	}
+
+	// Force components initialization
+	m_workingPatternProviderCompPtr.IsValid();
+	m_teachedPatternProviderCompPtr.IsValid();
+	m_dataStatisticsProcessorCompPtr.IsValid();
 }
 
 

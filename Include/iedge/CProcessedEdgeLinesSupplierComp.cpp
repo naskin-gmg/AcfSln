@@ -49,6 +49,10 @@ void CProcessedEdgeLinesSupplierComp::OnComponentCreated()
 	if (m_edgeLinesProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_edgeLinesProviderModelCompPtr.GetPtr(), m_edgeLinesSupplierCompPtr.GetPtr());
 	}
+
+	// Force components initialization
+	m_edgeLinesProviderCompPtr.IsValid();
+	m_edgesProcessorCompPtr.IsValid();
 }
 
 

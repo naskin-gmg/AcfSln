@@ -66,6 +66,10 @@ void CExtractedEdgeLinesSupplierComp::OnComponentCreated()
 	if (m_calibrationProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_calibrationProviderModelCompPtr.GetPtr(), m_calibrationSupplierCompPtr.GetPtr());
 	}
+
+	// Force components initialization
+	m_bitmapProviderCompPtr.IsValid();
+	m_edgesExtractorCompPtr.IsValid();
 }
 
 

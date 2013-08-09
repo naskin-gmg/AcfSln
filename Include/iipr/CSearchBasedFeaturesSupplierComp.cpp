@@ -323,6 +323,9 @@ void CSearchBasedFeaturesSupplierComp::OnComponentCreated()
 	if (m_bitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
+
+	// Force initialization to avoid crash in multithreading
+	m_searchProcessorCompPtr.IsValid();
 }
 
 
