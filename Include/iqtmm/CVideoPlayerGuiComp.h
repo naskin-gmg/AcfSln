@@ -2,16 +2,16 @@
 #define iqtmm_CVideoPlayerGuiComp_included
 
 
+// ACF includes
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
-
 #include "ifile/IFileNameParam.h"
-
-#include "imm/IMediaController.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "Generated/ui_CVideoPlayerGuiComp.h"
+// ACF-Solutions includes
+#include "imm/IMediaController.h"
+
+#include "iqtmm/Generated/ui_CVideoPlayerGuiComp.h"
 
 
 namespace iqtmm

@@ -7,13 +7,12 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
+#include "iprm/ISelectionParam.h"
+#include "iprm/IOptionsList.h"
 
 // ACF-Solutions includes
 #include "isig/ITriggerConstraints.h"
 #include "isig/ITriggerParams.h"
-
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsList.h"
 
 
 namespace isig
@@ -23,8 +22,8 @@ namespace isig
 /**
 	Implementation of standard trigger parameters set.
 */
-class CTriggerParamsComp: 
-			public icomp::CComponentBase, 
+class CTriggerParamsComp:
+			public icomp::CComponentBase,
 			virtual public isig::ITriggerParams,
 			virtual public iprm::ISelectionParam,
 			virtual protected iprm::IOptionsList

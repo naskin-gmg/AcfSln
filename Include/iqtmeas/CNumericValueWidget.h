@@ -10,8 +10,10 @@
 #include <QtGui/QWidget>
 #endif
 
+// ACF includes
 #include "imath/IUnitInfo.h"
-#include "Generated/ui_CNumericValueWidget.h"
+
+#include "iqtmeas/Generated/ui_CNumericValueWidget.h"
 
 
 namespace iqtmeas

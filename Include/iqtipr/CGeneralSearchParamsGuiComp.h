@@ -9,7 +9,7 @@
 #include "iipr/ISearchParams.h"
 
 // Generated
-#include "Generated/ui_CGeneralSearchParamsGuiComp.h"
+#include "iqtipr/Generated/ui_CGeneralSearchParamsGuiComp.h"
 
 
 namespace iqtipr
@@ -18,13 +18,13 @@ namespace iqtipr
 
 class CGeneralSearchParamsGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CGeneralSearchParamsGuiComp, 
+						Ui::CGeneralSearchParamsGuiComp,
 						iipr::ISearchParams>
 {
 	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CGeneralSearchParamsGuiComp, 
+				Ui::CGeneralSearchParamsGuiComp,
 				iipr::ISearchParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CGeneralSearchParamsGuiComp);

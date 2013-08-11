@@ -6,10 +6,11 @@
 #include "iprm/ISelectionParam.h"
 
 // ACF-Solutions includes
-#include "iqtinsp/TSupplierGuiCompBase.h"
 #include "imeas/IMultiDataSequenceProvider.h"
 #include "imeas/CGeneralDataSequence.h"
-#include "Generated/ui_CMultiLineProjectionSupplierGuiComp.h"
+#include "iqtinsp/TSupplierGuiCompBase.h"
+
+#include "iqtipr/Generated/ui_CMultiLineProjectionSupplierGuiComp.h"
 
 
 namespace iqtipr

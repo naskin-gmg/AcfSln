@@ -12,13 +12,14 @@
 #include <QtGui/QGroupBox>
 #endif
 
-// Acf includes
+// ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include <istd/TPointerVector.h>
+#include "istd/TPointerVector.h"
 
-// AcfSln includes
-#include <imeas/INumericValueProvider.h>
-#include "Generated/ui_CScaleCalibrationEditorComp.h"
+// ACF-Solutions includes
+#include "imeas/INumericValueProvider.h"
+
+#include "iqtcam/Generated/ui_CScaleCalibrationEditorComp.h"
 
 
 namespace iqtcam

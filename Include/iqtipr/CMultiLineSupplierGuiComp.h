@@ -4,20 +4,21 @@
 
 // ACF includes
 #include "i2d/CPolyline.h"
-#include "iqtinsp/TSupplierGuiCompBase.h"
 #include "imeas/CSimpleNumericValueProvider.h"
 #include "iprm/ISelectionParam.h"
 #include "imod/CMultiModelDispatcherBase.h"
 
 // ACF-Solutions includes
-#include "Generated/ui_CMultiLineSupplierGuiComp.h"
+#include "iqtinsp/TSupplierGuiCompBase.h"
+
+#include "iqtipr/Generated/ui_CMultiLineSupplierGuiComp.h"
 
 
 namespace iqtipr
 {
 
 
-class CMultiLineSupplierGuiComp: 
+class CMultiLineSupplierGuiComp:
 			public iqtinsp::TSupplierGuiCompBase<
 						Ui::CMultiLineSupplierGuiComp,
 						imeas::INumericValueProvider>
@@ -72,7 +73,7 @@ protected:
 		int m_selectedLineIndex;
 	};
 
-	class CShape: 
+	class CShape:
 				public iview::CShapeBase,
 				protected imod::CMultiModelDispatcherBase
 	{

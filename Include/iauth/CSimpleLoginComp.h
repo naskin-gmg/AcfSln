@@ -4,13 +4,11 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-
+#include "imod/TModelWrap.h"
 #include "iser/ISerializable.h"
 #include "iser/CArchiveTag.h"
 
-
 // ACF-Solutions includes
-#include "imod/TModelWrap.h"
 #include "iauth/ILogin.h"
 #include "iauth/IRightsProvider.h"
 #include "iauth/CUser.h"

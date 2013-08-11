@@ -25,7 +25,8 @@
 #include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/IAttributeSelectionObserver.h"
 #include "icmpstr/IElementSelectionInfo.h"
-#include "Generated/ui_CPackageOverviewComp.h"
+
+#include "icmpstr/Generated/ui_CPackageOverviewComp.h"
 
 
 namespace icmpstr

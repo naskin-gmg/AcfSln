@@ -15,7 +15,8 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
-#include "Generated/ui_CHotfolderContainerGuiComp.h"
+
+#include "ihotfgui/Generated/ui_CHotfolderContainerGuiComp.h"
 
 
 namespace ihotfgui
@@ -29,7 +30,7 @@ class CHotfolderContainerGuiComp:
 
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CHotfolderContainerGuiComp> BaseClass;
-	
+
 	I_BEGIN_COMPONENT(CHotfolderContainerGuiComp);
 		I_ASSIGN_MULTI_0(m_hotoflderFactoryIdsAttrPtr, "HotfolderFactoryIds", "List of factory IDs for hotfolder creation", true);
 	I_END_COMPONENT;

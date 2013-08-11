@@ -8,8 +8,11 @@
 // ACF includes
 #include "imod/CMultiModelDispatcherBase.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+// ACF-Solutions includes
 #include "icmpstr/IElementSelectionInfo.h"
-#include "Generated/ui_CComponentNoteEditorComp.h"
+
+#include "icmpstr/Generated/ui_CComponentNoteEditorComp.h"
 
 
 namespace icmpstr

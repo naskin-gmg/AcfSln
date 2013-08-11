@@ -19,6 +19,7 @@
 // ACF-Solutions includes
 #include "iauth/ILogin.h"
 #include "iauth/IUsersManager.h"
+
 #include "iqtauth/Generated/ui_CUserManagerDialog.h"
 
 
@@ -27,13 +28,13 @@ namespace iqtauth
 
 
 class CUserManagerDialog:
-			public QDialog, 
+			public QDialog,
 			public Ui::CUserManagerDialog
 {
 	Q_OBJECT
 public:
 	CUserManagerDialog(const iauth::ILogin& login, iauth::IUsersManager& manager);
-	
+
 	void SaveCurUsername(const QString& Username);
 	int GetUserGroupSize();
 
@@ -78,7 +79,7 @@ private:
 	void UpdateUserList();
 
 	QString m_curUserName;
-	
+
 	void* userManagerMemBufferPtr;
 	int userManagerMemBufferSize;
 

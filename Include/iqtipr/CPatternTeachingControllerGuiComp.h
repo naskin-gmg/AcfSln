@@ -8,7 +8,7 @@
 // ACF-Solutions includes
 #include "iipr/IPatternController.h"
 
-#include "Generated/ui_CPatternTeachingControllerGuiComp.h"
+#include "iqtipr/Generated/ui_CPatternTeachingControllerGuiComp.h"
 
 
 namespace iqtipr

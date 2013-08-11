@@ -12,15 +12,15 @@
 
 
 // Local includes
-#include "Generated/ui_CProcessedBitmapView.h"
+#include "iqtipr/Generated/ui_CProcessedBitmapView.h"
 
 
 namespace iqtipr
 {
 
 
-class CProcessedBitmapView: 
-			public QWidget/*, 
+class CProcessedBitmapView:
+			public QWidget/*,
 			public iview::IShapeStatusInfo*/
 {
 	Q_OBJECT

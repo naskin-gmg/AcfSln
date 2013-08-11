@@ -13,12 +13,12 @@
 #endif
 
 // ACF includes
+#include "icomp/CXpcModel.h"
 #include "idoc/IDocumentManager.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "icomp/CXpcModel.h"
 
 // ACF-Solutions includes
-#include "Generated/ui_CXpcEditorComp.h"
+#include "icmpstr/Generated/ui_CXpcEditorComp.h"
 
 
 namespace icmpstr
@@ -40,7 +40,7 @@ public:
 		I_ASSIGN(m_docMgrPtr, "DocumentManager", "An object to provide current document file name, to handle relative paths", true, "DocumentManager");
 		I_ASSIGN(m_configFileTypeInfo, "ConfigFileType", "File type description for filtering configuration files, ie. XPC", false, "ConfigFileType");
 		I_ASSIGN(m_packageFileTypeInfo, "PackageFileType", "File type description for filtering package files, ie. ARP", false, "PackageFileType");
-		I_ASSIGN(m_registryFileTypeInfo, "RegistryFileType", "File type description for filtering registry files, ie. ARX", false, "RegistryFileType");	
+		I_ASSIGN(m_registryFileTypeInfo, "RegistryFileType", "File type description for filtering registry files, ie. ARX", false, "RegistryFileType");
 	I_END_COMPONENT;
 
 	CXpcEditorComp();
@@ -154,10 +154,10 @@ private:
 
 	/**
 		Fills m_variablesMenu with variable names depending on cursor position
-		If a variable is an absolute path, it can only be inserted at the 
-		beginning, ie. before a relative path or instead of part of an absolute 
-		path (which requires a selection). If a variable is a relative path, 
-		it can be inserted after an absolute path. Some environment variables 
+		If a variable is an absolute path, it can only be inserted at the
+		beginning, ie. before a relative path or instead of part of an absolute
+		path (which requires a selection). If a variable is a relative path,
+		it can be inserted after an absolute path. Some environment variables
 		cannot be used whatsoever because of invalid characters.
 	*/
 	void SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& menu);

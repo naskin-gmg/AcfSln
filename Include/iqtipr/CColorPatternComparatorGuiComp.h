@@ -6,12 +6,11 @@
 #include "istd/IInformationProvider.h"
 
 // ACF-Solutions includes
-#include "iqtinsp/TSupplierGuiCompBase.h"
-
 #include "imeas/CGeneralDataSequence.h"
 #include "imeas/INumericValueProvider.h"
+#include "iqtinsp/TSupplierGuiCompBase.h"
 
-#include "Generated/ui_CColorPatternComparatorGuiComp.h"
+#include "iqtipr/Generated/ui_CColorPatternComparatorGuiComp.h"
 
 
 namespace iqtipr
