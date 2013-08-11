@@ -8,7 +8,7 @@ INCLUDEPATH += ../../../Impl
 
 RESOURCES += ../*.qrc
 
-LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr
+LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lAcfSlnLoc
 LIBS += -lAcfLoc
 
 HEADERS -= ../*.h
