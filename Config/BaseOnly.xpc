@@ -41,7 +41,7 @@
       ../Partitura/FileProcessingVoce.arp
     </FilePath>
     <FilePath>
-      ../Bin/$(ConfigurationName)/FileProcessingPck.arp
+      ../Bin/$(ConfigurationDir)FileProcessingPck.arp
     </FilePath>
   </PackageFiles>
   <RegistryFiles count="0">

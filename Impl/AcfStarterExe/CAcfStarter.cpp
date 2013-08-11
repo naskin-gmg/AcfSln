@@ -99,7 +99,7 @@ void CAcfStarter::RunACF()
 {
 	QProcess*myProcess = new QProcess(this);
 	QStringList arguments;
-	QString pathAcf = "/Bin/$(ConfigurationName)/Acf.exe";
+	QString pathAcf = "/Bin/$(ConfigurationDir)Acf";
 
 	pathAcf = acfDir + pathAcf;
 	pathAcf = istd::CSystem::GetNormalizedPath(pathAcf);	

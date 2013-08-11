@@ -33,7 +33,7 @@
   </ConfigFiles>
   <PackageDirs count="2">
     <Dir>
-      ../Bin/$(ConfigurationName)
+      ../Bin/$(ConfigurationDir)
     </Dir>
     <Dir>
       ../Partitura
