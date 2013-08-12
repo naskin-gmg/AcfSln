@@ -20,12 +20,11 @@ namespace iipr
 	Image supplier providing processed image from some other input image supplier.
 */
 class CProcessedBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<const i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iimg::IBitmapProvider,
-			virtual public i2d::ICalibrationProvider
+			public iproc::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> >,
+			virtual public iimg::IBitmapProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<const i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iproc::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -34,7 +33,6 @@ public:
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
-		I_ASSIGN_TO(m_calibrationProviderCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
 	I_END_COMPONENT;
 
@@ -43,9 +41,6 @@ protected:
 
 	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
-
-	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
@@ -58,7 +53,6 @@ private:
 
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
 	I_REF(i2d::ITransformation2d, m_defaultCalibrationCompPtr);

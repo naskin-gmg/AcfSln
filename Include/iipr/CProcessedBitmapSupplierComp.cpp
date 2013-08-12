@@ -11,24 +11,10 @@ const iimg::IBitmap* CProcessedBitmapSupplierComp::GetBitmap() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->second.GetPtr();
+		return productPtr->GetPtr();
 	}
 
 	return NULL;
-}
-
-
-// reimplemented (i2d::ICalibrationProvider)
-
-const i2d::ICalibration2d* CProcessedBitmapSupplierComp::GetCalibration() const
-{
-	const ProductType* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		return productPtr->first;
-	}
-	else{
-		return NULL;
-	}
 }
 
 
@@ -40,11 +26,11 @@ bool CProcessedBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) cons
 		return false;
 	}
 
-	if (!result.second.IsValid()){
-		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
+	if (!result.IsValid()){
+		result.SetPtr(m_bitmapCompFact.CreateInstance());
 	}
 
-	return result.second.IsValid();
+	return result.IsValid();
 }
 
 
@@ -59,9 +45,7 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (!EnsureBitmapCreated(result)){
 		return WS_CRITICAL;
 	}
-	Q_ASSERT(result.second.IsValid());
-
-	result.first = NULL;
+	Q_ASSERT(result.IsValid());
 
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
@@ -70,18 +54,9 @@ int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	Timer performanceTimer(this, "Bitmap processing");
 
-	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.second.GetPtr());
+	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.GetPtr());
 	switch (status){
 		case iproc::IProcessor::TS_OK:
-			{
-				const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(bitmapPtr);
-				if (calibrationProviderPtr != NULL){
-					result.first = calibrationProviderPtr->GetCalibration();
-				}
-				else{
-					result.first = m_calibrationProviderCompPtr->GetCalibration();
-				}
-			}
 			return WS_OK;
 
 		case iproc::IProcessor::TS_CANCELED:

@@ -5,22 +5,20 @@ namespace iedge
 {
 
 
-// reimplemented (i2d::CObject2dBase)
+// reimplemented (i2d::IObject2d)
 
-void CEdgeLineContainer::SetCalibration(const i2d::ICalibration2d* calibrationPtr)
+void CEdgeLineContainer::SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag)
 {
-	BaseClass2::SetCalibration(calibrationPtr);
+	BaseClass2::SetCalibration(calibrationPtr, releaseFlag);
 
 	int contoursCount = BaseClass::GetItemsCount();
 	for (int i = 0; i < contoursCount; ++i){
 		CEdgeLine& edgeLine = GetAt(i);
 
-		edgeLine.SetCalibration(calibrationPtr);
+		edgeLine.SetCalibration(calibrationPtr, false);
 	}
 }
 
-
-// reimplemented (i2d::IObject2d)
 
 i2d::CVector2d CEdgeLineContainer::GetCenter() const
 {

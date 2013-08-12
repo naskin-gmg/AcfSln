@@ -23,7 +23,7 @@ public:
 	typedef i2d::CObject2dBase BaseClass2;
 
 	// reimplemented (i2d::CObject2dBase)
-	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr);
+	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag = false);
 
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
