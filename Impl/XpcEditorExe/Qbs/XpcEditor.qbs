@@ -7,6 +7,7 @@ ApplicationProduct{
 	files: ["../*.cpp", "../*.qrc", "../*.arx"]
 
 	acf.acfConfigurationFile: "../../../Config/Full.xpc"
+	cpp.includePaths: product.buildDirectory + "/" + product.name
 
 	Depends{ name: "Arxc" }
 

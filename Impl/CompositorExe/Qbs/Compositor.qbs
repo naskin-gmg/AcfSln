@@ -1,43 +1,30 @@
 import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 
-Project{
-	Product{
-		name: "Compositor-Preconditions"
-		type: "other"
-		files: []
+ApplicationProduct{
+	name: "Compositor"
 
-		Depends{ name: "CompositorPck" }
-		Depends{ name: "QtGuiPck" }
-		Depends{ name: "QtPck" }
-		Depends{ name: "FilePck" }
-		Depends{ name: "BasePck" }
-		Depends{ name: "PackagePck" }
-	}
+	files: ["../*.cpp", "../*.qrc", "../*.arx"]
 
-	ApplicationProduct{
-		name: "Compositor"
+	acf.acfConfigurationFile: "../../../Config/Full.xpc"
+	cpp.includePaths: product.buildDirectory + "/" + product.name
 
-		acf.acfConfigurationFile: "../../../Config/Full.xpc"
+	Depends{ name: "Arxc" }
 
-		files: ["../*.cpp", "../*.qrc", "../*.arx"]
+	Depends{ name: "AcfSlnLoc" }
+	Depends{ name: "AcfLoc" }
 
-		Depends{ name: "Compositor-Preconditions" }
-		Depends{ name: "AcfSlnLoc" }
-		Depends{ name: "AcfLoc" }
+	Depends{ name: "CompositorPck" }
+	Depends{ name: "QtGuiPck" }
+	Depends{ name: "QtPck" }
+	Depends{ name: "FilePck" }
+	Depends{ name: "BasePck" }
+	Depends{ name: "PackagePck" }
 
-		Depends{ name: "CompositorPck" }
-		Depends{ name: "QtGuiPck" }
-		Depends{ name: "QtPck" }
-		Depends{ name: "FilePck" }
-		Depends{ name: "BasePck" }
-		Depends{ name: "PackagePck" }
+	Depends{ name: "ibase" }
+	Depends{ name: "ipackage" }
 
-		Depends{ name: "ibase" }
-		Depends{ name: "ipackage" }
-
-		Depends{ name: "acf" }
-		Depends{ name: "Qt.widgets" }
-		Depends{ name: "Qt.gui" }
-	}
+	Depends{ name: "acf" }
+	Depends{ name: "Qt.widgets" }
+	Depends{ name: "Qt.gui" }
 }
