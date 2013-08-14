@@ -10,6 +10,8 @@ StaticProduct{
 	Depends{ name: "iqtgui" }
 	Depends{ name: "i2d" }
 	Depends{ name: "ipackage" }
+	Depends{ name: "Qt.gui" }
+	Depends{ name: "Qt.printsupport" }
 	Depends{ name: "Qt.widgets" }
 
 	Export{
@@ -17,6 +19,8 @@ StaticProduct{
 		Depends{ name: "iqtgui" }
 		Depends{ name: "i2d" }
 		Depends{ name: "ipackage" }
+		Depends{ name: "Qt.gui" }
+		Depends{ name: "Qt.printsupport" }
 		Depends{ name: "Qt.widgets" }
 	}
 }
