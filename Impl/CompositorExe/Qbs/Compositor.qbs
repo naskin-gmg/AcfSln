@@ -19,8 +19,6 @@ Project{
 		Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
 
-		Depends{ name: "acf" }
-
 		Export{
 			cpp.includePaths: product.buildDirectory + "/" + product.name
 		}
