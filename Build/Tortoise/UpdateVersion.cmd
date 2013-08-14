@@ -1,1 +1,1 @@
-SubWCRev %ACFSLNDIR% %ACFSLNDIR%\Partitura\AcfSlnVoce.arp\VersionInfo.arx.xtrsvn %ACFSLNDIR%\Partitura\AcfSlnVoce.arp\VersionInfo.arx
+SubWCRev ..\.. ..\..\Partitura\AcfSlnVoce.arp\VersionInfo.arx.xtrsvn ..\..\Partitura\AcfSlnVoce.arp\VersionInfo.arx

@@ -1,30 +1,47 @@
 import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
+import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 
-ApplicationProduct{
-	name: "XpcEditor"
+Project{
+	StaticProduct{
+		name: "_XpcEditor"
 
-	files: ["../*.cpp", "../*.qrc", "../*.arx"]
+		files: ["../*.arx", "../*.qrc"]
 
-	acf.acfConfigurationFile: "../../../Config/Full.xpc"
-	cpp.includePaths: product.buildDirectory + "/" + product.name
+		acf.acfConfigurationFile: "../../../Config/Full.xpc"
 
-	Depends{ name: "Arxc" }
+		Depends{ name: "Arxc" }
 
-	Depends{ name: "AcfSlnLoc" }
-	Depends{ name: "AcfLoc" }
+		Depends{ name: "CompositorPck" }
+		Depends{ name: "QtGuiPck" }
+		Depends{ name: "QtPck" }
+		Depends{ name: "FilePck" }
+		Depends{ name: "BasePck" }
+		Depends{ name: "PackagePck" }
 
-	Depends{ name: "CompositorPck" }
-	Depends{ name: "QtGuiPck" }
-	Depends{ name: "QtPck" }
-	Depends{ name: "FilePck" }
-	Depends{ name: "BasePck" }
-	Depends{ name: "PackagePck" }
+		Depends{ name: "acf" }
 
-	Depends{ name: "ibase" }
-	Depends{ name: "ipackage" }
+		Export{
+			cpp.includePaths: product.buildDirectory + "/" + product.name
+		}
+	}
 
-	Depends{ name: "acf" }
-	Depends{ name: "Qt.widgets" }
-	Depends{ name: "Qt.gui" }
+	ApplicationProduct{
+		name: "XpcEditor"
+
+		files: ["../*.cpp"]
+
+		Depends{ name: "_XpcEditor" }
+
+		Depends{ name: "AcfSlnLoc" }
+		Depends{ name: "AcfLoc" }
+
+		Depends{ name: "icmpstr" }
+		Depends{ name: "iqtgui" }
+		Depends{ name: "ifile" }
+		Depends{ name: "ipackage" }
+
+		Depends{ name: "Qt.widgets" }
+		Depends{ name: "Qt.gui" }
+	}
 }
