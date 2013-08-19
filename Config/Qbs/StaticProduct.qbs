@@ -7,8 +7,10 @@ StaticLibrary{
 	destinationDirectory: "Lib"
 
 	Depends{ name: "acf" }
-	Depends{ name: "cpp" }
 	Depends{ name: "Qt.core" }
+	Depends{ name: "cpp" }
+
+	acf.projectRoot: path + "/../../.."
 
 	cpp.defines: ['I_QBS']
 	cpp.includePaths: ["../..", product.buildDirectory]

@@ -1,7 +1,7 @@
 import qbs.base 1.0
 
 Project{
-	name: "AcfSlnAll"
+	name: "ACF-Solutions"
 
 	Project{
 		name: "ACF-Solutions-Static"

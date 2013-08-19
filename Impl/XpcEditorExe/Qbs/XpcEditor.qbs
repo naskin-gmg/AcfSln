@@ -5,6 +5,7 @@ import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 Project{
 	StaticProduct{
 		name: "_XpcEditor"
+		type: ["staticlibrary"]
 
 		files: ["../*.arx", "../*.qrc"]
 
