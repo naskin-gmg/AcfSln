@@ -9,10 +9,11 @@ Project{
 
 		files: ["../*.arx", "../*.qrc"]
 
-		acf.acfConfigurationFile: "../../../Config/Full.xpc"
+//		acf.acfConfigurationFile: "../../../Config/Full.xpc"
 
 		Depends{ name: "Arxc" }
 
+		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "CompositorPck" }
 		Depends{ name: "QtGuiPck" }
 		Depends{ name: "QtPck" }

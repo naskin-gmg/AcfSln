@@ -78,4 +78,40 @@ Project{
 			"../../Impl/XpcEditorExe/Qbs/XpcEditor.qbs"
 		]
 	}
+
+	Product{
+		name: "AcfSlnConfig"
+		type: ["xpc", "acf_share"]
+
+		files: ["../../Config/PartituraOnly.xpc"]
+
+		destinationDirectory: "Config"
+
+		Depends{ name: "AuthorizationPck" }
+		Depends{ name: "ProcessingPck" }
+		Depends{ name: "FileProcessingPck" }
+		Depends{ name: "CameraPck" }
+		Depends{ name: "EdgePck" }
+		Depends{ name: "HotfolderPck" }
+		Depends{ name: "InspectionPck" }
+		Depends{ name: "IprPck" }
+		Depends{ name: "MeasPck" }
+		Depends{ name: "PropPck" }
+		Depends{ name: "WizardPck" }
+		Depends{ name: "QtAuthorizationPck" }
+		Depends{ name: "QtCameraPck" }
+		Depends{ name: "QtExPck" }
+		Depends{ name: "QtInspectionPck" }
+		Depends{ name: "QtIprPck" }
+		Depends{ name: "QtMeasPck" }
+		Depends{ name: "QtMmPck" }
+		Depends{ name: "QtSignalPck" }
+		Depends{ name: "WizardGuiPck" }
+		Depends{ name: "HotfolderGuiPck" }
+		Depends{ name: "ProcessingGuiPck" }
+		Depends{ name: "CompositorPck" }
+		Depends{ name: "DocumentProcessingPck" }
+		Depends{ name: "AcfCoreConfig" }
+		Depends{ name: "acf" }
+	}
 }
