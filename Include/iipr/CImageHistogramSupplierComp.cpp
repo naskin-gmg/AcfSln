@@ -11,6 +11,8 @@ namespace iipr
 
 const imeas::IDataSequence* CImageHistogramSupplierComp::GetDataSequence() const
 {
+	(const_cast<CImageHistogramSupplierComp*>(this))->EnsureWorkInitialized();
+
 	return GetWorkProduct();
 }
 
