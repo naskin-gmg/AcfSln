@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3038
+          3125
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          977
+          993
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          264192
         </Number>
         <Description>
           Qt Framework
@@ -411,7 +411,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -456,22 +456,6 @@
             </Type>
             <ExportId>
               Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegionCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              AoiCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>
