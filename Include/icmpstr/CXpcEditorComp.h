@@ -18,7 +18,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 // ACF-Solutions includes
-#include "icmpstr/Generated/ui_CXpcEditorComp.h"
+#include "GeneratedFiles/icmpstr/ui_CXpcEditorComp.h"
 
 
 namespace icmpstr

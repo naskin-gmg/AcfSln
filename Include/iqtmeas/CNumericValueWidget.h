@@ -13,7 +13,7 @@
 // ACF includes
 #include "imath/IUnitInfo.h"
 
-#include "iqtmeas/Generated/ui_CNumericValueWidget.h"
+#include "GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h"
 
 
 namespace iqtmeas

@@ -12,7 +12,7 @@
 #include "iimg/IMultiBitmapProvider.h"
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
-#include "iqtcam/Generated/ui_CMultiBitmapSupplierGuiComp.h"
+#include "GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h"
 
 
 namespace iqtcam

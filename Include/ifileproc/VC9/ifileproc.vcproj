@@ -352,7 +352,7 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\Generated\moc_CExternalFileConverterComp.cpp"
+				RelativePath="..\..\GeneratedFiles\ifileproc\moc_CExternalFileConverterComp.cpp"
 				>
 			</File>
 		</Filter>

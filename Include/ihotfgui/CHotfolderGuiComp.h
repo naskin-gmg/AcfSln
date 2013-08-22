@@ -27,7 +27,7 @@
 #include "ihotf/IHotfolderProcessingInfo.h"
 #include "ihotf/IHotfolderProcessingItem.h"
 #include "ihotf/IHotfolderStatistics.h"
-#include "ihotfgui/Generated/ui_CHotfolderGuiComp.h"
+#include "GeneratedFiles/ihotfgui/ui_CHotfolderGuiComp.h"
 
 
 namespace ihotfgui

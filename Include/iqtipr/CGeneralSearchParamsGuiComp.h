@@ -9,7 +9,7 @@
 #include "iipr/ISearchParams.h"
 
 // Generated
-#include "iqtipr/Generated/ui_CGeneralSearchParamsGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h"
 
 
 namespace iqtipr

@@ -25,7 +25,7 @@
 
 // ACF-Solutions includes
 #include "icmpstr/ISceneProvider.h"
-#include "icmpstr/Generated/ui_CSceneProviderGuiComp.h"
+#include "GeneratedFiles/icmpstr/ui_CSceneProviderGuiComp.h"
 
 
 namespace icmpstr

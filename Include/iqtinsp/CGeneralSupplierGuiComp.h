@@ -8,7 +8,7 @@
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
-#include "iqtinsp/Generated/ui_CGeneralSupplierGuiComp.h"
+#include "GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h"
 
 
 namespace iqtinsp

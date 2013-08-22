@@ -7,7 +7,7 @@
 
 #include "icam/IExposureParams.h"
 
-#include "iqtcam/Generated/ui_CExposureParamsGuiComp.h"
+#include "GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h"
 
 
 namespace iqtcam

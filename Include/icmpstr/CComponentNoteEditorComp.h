@@ -12,7 +12,7 @@
 // ACF-Solutions includes
 #include "icmpstr/IElementSelectionInfo.h"
 
-#include "icmpstr/Generated/ui_CComponentNoteEditorComp.h"
+#include "GeneratedFiles/icmpstr/ui_CComponentNoteEditorComp.h"
 
 
 namespace icmpstr

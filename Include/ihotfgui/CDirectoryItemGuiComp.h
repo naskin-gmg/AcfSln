@@ -10,7 +10,7 @@
 
 // AcfSln includes
 #include "ihotf/IHotfolderStatistics.h"
-#include "ihotfgui/Generated/ui_CDirectoryItemGuiComp.h"
+#include "GeneratedFiles/ihotfgui/ui_CDirectoryItemGuiComp.h"
 
 
 namespace ihotfgui

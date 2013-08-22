@@ -212,39 +212,39 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Generated"
+			Name="Generated Files"
 			Filter="*.cxx"
 			>
 			<File
-				RelativePath="..\Generated\moc_CChangePasswordDialog.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CChangePasswordDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CLoginBarGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CLoginBarGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CUserGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CUserGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CUserManagerDialog.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CUserManagerDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CChangePasswordDialog.h"
+				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CChangePasswordDialog.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CLoginBarGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CLoginBarGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CUserGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CUserGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CUserManagerDialog.h"
+				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CUserManagerDialog.h"
 				>
 			</File>
 		</Filter>

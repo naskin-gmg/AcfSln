@@ -259,11 +259,11 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\generated\moc_CPropertiesEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iprop\moc_CPropertiesEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CPropertiesEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\iprop\ui_CPropertiesEditorComp.h"
 				>
 			</File>
 		</Filter>

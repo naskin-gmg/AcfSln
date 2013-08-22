@@ -343,7 +343,7 @@
               </IsEnabled>
               <Values count="4">
                 <Value>
-                  Generated
+                  GeneratedFiles
                 </Value>
                 <Value>
                   generated
@@ -373,7 +373,7 @@
               </IsEnabled>
               <Values count="4">
                 <Value>
-                  Generated
+                  GeneratedFiles
                 </Value>
                 <Value>
                   generated

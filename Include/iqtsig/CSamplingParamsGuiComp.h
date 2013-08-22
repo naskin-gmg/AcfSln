@@ -8,7 +8,7 @@
 
 #include "iqtsig/iqtsig.h"
 
-#include "iqtsig/Generated/ui_CSamplingParamsGuiComp.h"
+#include "GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h"
 
 
 namespace iqtsig

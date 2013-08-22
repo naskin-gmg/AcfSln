@@ -9,7 +9,7 @@
 // ACF-Solutions includes
 #include "icam/ICameraInfo.h"
 
-#include "iqtcam/Generated/ui_CCameraInfoGuiComp.h"
+#include "GeneratedFiles/iqtcam/ui_CCameraInfoGuiComp.h"
 
 
 namespace iqtcam

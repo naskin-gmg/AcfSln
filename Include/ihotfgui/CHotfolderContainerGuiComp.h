@@ -16,7 +16,7 @@
 #include "istd/TDelPtr.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "ihotfgui/Generated/ui_CHotfolderContainerGuiComp.h"
+#include "GeneratedFiles/ihotfgui/ui_CHotfolderContainerGuiComp.h"
 
 
 namespace ihotfgui

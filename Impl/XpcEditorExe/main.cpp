@@ -9,7 +9,7 @@
 // ACF includes
 #include "ibase/IApplication.h"
 
-#include "Generated/CXpcEditor.h"
+#include "GeneratedFiles/XpcEditor/CXpcEditor.h"
 
 
 int main(int argc, char *argv[])

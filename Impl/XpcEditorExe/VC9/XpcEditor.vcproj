@@ -41,9 +41,9 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="..\..\..\Partitura\AcfInfoCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				ConfigFile="../../../Config/BaseOnly.xpc"
+				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -135,7 +135,7 @@
 				Name="FileConvertCopy"
 				RegistryFile="..\..\..\Partitura\AcfInfoCopyApp.arx"
 				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -269,19 +269,19 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\Generated\CXpcEditor.cpp"
+				RelativePath="..\..\GeneratedFiles\XpcEditor\CXpcEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\CXpcEditor.h"
+				RelativePath="..\..\GeneratedFiles\XpcEditor\CXpcEditor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\qrc_XpcEditor.cpp"
+				RelativePath="..\..\GeneratedFiles\XpcEditor\qrc_XpcEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\XpcEditor.rc"
+				RelativePath="..\..\GeneratedFiles\XpcEditor\XpcEditor.rc"
 				>
 			</File>
 		</Filter>

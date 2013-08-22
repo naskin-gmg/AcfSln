@@ -11,7 +11,7 @@
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
-#include "iqtipr/Generated/ui_CMultiLineSupplierGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h"
 
 
 namespace iqtipr

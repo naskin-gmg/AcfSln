@@ -257,51 +257,51 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CBitmapSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CCameraInfoGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CCameraInfoGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CExposureParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CExposureParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CMultiBitmapSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CMultiBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CScaleCalibrationEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CScaleCalibrationEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CSnapImageGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CBitmapSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CCameraInfoGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CCameraInfoGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CExposureParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CExposureParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CMultiBitmapSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CMultiBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CScaleCalibrationEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CScaleCalibrationEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSnapImageGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CSnapImageGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -350,7 +350,7 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value="$(InputDir)\Generated"
+			Value="$(InputDir)\GeneratedFiles"
 		/>
 		<Global
 			Name="QtVersion"
@@ -358,7 +358,7 @@
 		/>
 		<Global
 			Name="UicDir"
-			Value="$(InputDir)\Generated"
+			Value="$(InputDir)\GeneratedFiles"
 		/>
 	</Globals>
 </VisualStudioProject>

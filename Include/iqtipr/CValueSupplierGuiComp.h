@@ -16,7 +16,7 @@
 
 #include "iqtipr/iqtipr.h"
 
-#include "iqtipr/Generated/ui_CValueSupplierGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h"
 
 
 namespace iqtipr

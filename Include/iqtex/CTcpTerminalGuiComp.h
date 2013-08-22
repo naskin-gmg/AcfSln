@@ -12,7 +12,7 @@
 #include "ifile/IFileNameParam.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "iqtex/Generated/ui_CTcpTerminalGuiComp.h"
+#include "GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h"
 
 
 namespace iqtex

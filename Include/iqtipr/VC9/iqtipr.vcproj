@@ -343,99 +343,99 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CCaliperParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CCaliperParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CCircleFinderParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CCircleFinderParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CColorPatternComparatorGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CColorPatternComparatorGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CConvolution2dParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CGeneralSearchParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CGeneralSearchParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CLineProjectionSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CMultiLineProjectionSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CMultiLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CMultiLineSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CMultiLineSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CPatternTeachingControllerGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CPatternTeachingControllerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CProcessedBitmapView.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CProcessedBitmapView.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CValueSupplierGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtipr\moc_CValueSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CCaliperParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CCaliperParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CCircleFinderParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CCircleFinderParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CColorPatternComparatorGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CColorPatternComparatorGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CConvolution2dParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CConvolution2dParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CGeneralSearchParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CGeneralSearchParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CLineProjectionSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CMultiLineProjectionSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CMultiLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CMultiLineSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CMultiLineSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CPatternTeachingControllerGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CPatternTeachingControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CProcessedBitmapView.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CProcessedBitmapView.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CSearchBasedFeaturesSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CSearchBasedFeaturesSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CValueSupplierGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtipr\ui_CValueSupplierGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -495,7 +495,7 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value="$(InputDir)\Generated"
+			Value="$(InputDir)\GeneratedFiles"
 		/>
 		<Global
 			Name="QtVersion"
@@ -503,7 +503,7 @@
 		/>
 		<Global
 			Name="UicDir"
-			Value="$(InputDir)\Generated"
+			Value="$(InputDir)\GeneratedFiles"
 		/>
 	</Globals>
 </VisualStudioProject>

@@ -10,7 +10,7 @@
 #include "imeas/INumericValueProvider.h"
 #include "iqtinsp/TSupplierGuiCompBase.h"
 
-#include "iqtipr/Generated/ui_CColorPatternComparatorGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h"
 
 
 namespace iqtipr

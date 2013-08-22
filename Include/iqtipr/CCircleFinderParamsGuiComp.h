@@ -6,7 +6,7 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtipr/Generated/ui_CCircleFinderParamsGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h"
 
 
 namespace iqtipr

@@ -8,7 +8,7 @@
 
 // ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
-#include "icmpstr/Generated/ui_CMultiAttributeEditor.h"
+#include "GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h"
 
 
 namespace icmpstr

@@ -43,7 +43,7 @@
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
 				ConfigFile="../../../Config/BaseOnly.xpc"
-				OutputDir="$(InputDir)/../Generated"
+				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -135,7 +135,7 @@
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
 				ConfigFile="../../../Config/BaseOnly.xpc"
-				OutputDir="$(InputDir)/../Generated"
+				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -269,19 +269,19 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\Generated\CCompositor.cpp"
+				RelativePath="..\..\GeneratedFiles\Compositor\CCompositor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\CCompositor.h"
+				RelativePath="..\..\GeneratedFiles\Compositor\CCompositor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\Compositor.rc"
+				RelativePath="..\..\GeneratedFiles\Compositor\Compositor.rc"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\qrc_Compositor.cpp"
+				RelativePath="..\..\GeneratedFiles\Compositor\qrc_Compositor.cpp"
 				>
 			</File>
 		</Filter>

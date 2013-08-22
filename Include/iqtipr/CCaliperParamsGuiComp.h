@@ -6,7 +6,7 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtipr/Generated/ui_CCaliperParamsGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h"
 
 
 namespace iqtipr

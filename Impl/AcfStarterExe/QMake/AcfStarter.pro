@@ -5,4 +5,7 @@ TARGET = AcfStarter
 
 INCLUDEPATH += ../../../Include
 
+FORMS += ../*.ui
+UI_DIR = ../../GeneratedFiles/AcfStarter
+
 LIBS += -liqtgui

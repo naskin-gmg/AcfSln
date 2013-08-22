@@ -7,7 +7,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 // ACF-Solutions includes
-#include "iqtipr/Generated/ui_CConvolution2dParamsGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h"
 
 
 namespace iqtipr

@@ -13,7 +13,7 @@
 #include "iauth/IUsersManager.h"
 #include "iauth/IPasswordChanger.h"
 
-#include "iqtauth/Generated/ui_CUserGuiComp.h"
+#include "GeneratedFiles/iqtauth/ui_CUserGuiComp.h"
 
 
 namespace iqtauth

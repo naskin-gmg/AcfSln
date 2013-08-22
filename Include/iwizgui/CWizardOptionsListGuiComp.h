@@ -19,7 +19,7 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iwizgui/Generated/ui_CWizardOptionsListGuiComp.h"
+#include "GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h"
 
 
 namespace iwizgui

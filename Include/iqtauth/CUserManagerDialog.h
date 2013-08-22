@@ -20,7 +20,7 @@
 #include "iauth/ILogin.h"
 #include "iauth/IUsersManager.h"
 
-#include "iqtauth/Generated/ui_CUserManagerDialog.h"
+#include "GeneratedFiles/iqtauth/ui_CUserManagerDialog.h"
 
 
 namespace iqtauth

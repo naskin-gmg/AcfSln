@@ -10,7 +10,7 @@
 
 #include "iqtsig/iqtsig.h"
 
-#include "iqtsig/Generated/ui_CPulseParamsGuiComp.h"
+#include "GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h"
 
 
 namespace iqtsig

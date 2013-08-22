@@ -194,14 +194,14 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Generated"
+			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\Generated\moc_CEdgeLinesTestGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\edgetest\moc_CEdgeLinesTestGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CEdgeLinesTestGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\edgetest\ui_CEdgeLinesTestGuiComp.h"
 				>
 			</File>
 		</Filter>

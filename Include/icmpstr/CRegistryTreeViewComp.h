@@ -23,7 +23,7 @@
 
 #include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/IElementSelectionInfo.h"
-#include "icmpstr/Generated/ui_CRegistryTreeViewComp.h"
+#include "GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h"
 
 
 namespace icmpstr

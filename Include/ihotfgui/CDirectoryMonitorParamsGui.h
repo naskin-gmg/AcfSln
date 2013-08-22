@@ -9,7 +9,7 @@
 // AcfSln includes
 #include "ihotf/IDirectoryMonitorParams.h"
 
-#include "ihotfgui/Generated/ui_CDirectoryMonitorParamsGui.h"
+#include "GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h"
 
 
 namespace ihotfgui

@@ -395,107 +395,107 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CAttributeEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CAttributeEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CComponentNoteEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CComponentNoteEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CComponentPromotorDialogComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CComponentPromotorDialogComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CGraphicsConnectorItem.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CMultiAttributeDelegateWidget.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CMultiAttributeDelegateWidget.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CMultiAttributeEditor.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CMultiAttributeEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CPackageOverviewComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CPackageOverviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CQuickHelpGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CQuickHelpGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CRegistryElementShape.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryElementShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CRegistryPreviewComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryPreviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CRegistryPropEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryPropEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CRegistryTreeViewComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryTreeViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSceneProviderGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CSceneProviderGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CVisualRegistryEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CVisualRegistryEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CXpcEditorComp.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CXpcEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\qrc_icmpstr.cpp"
+				RelativePath="..\..\GeneratedFiles\icmpstr\qrc_icmpstr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CAttributeEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CAttributeEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CComponentNoteEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CComponentNoteEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CMultiAttributeEditor.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CMultiAttributeEditor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CPackageOverviewComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CPackageOverviewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CQuickHelpGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CQuickHelpGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CRegistryPropEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CRegistryPropEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CRegistryTreeViewComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CRegistryTreeViewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSceneProviderGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CSceneProviderGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CVisualRegistryEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CVisualRegistryEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CXpcEditorComp.h"
+				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CXpcEditorComp.h"
 				>
 			</File>
 		</Filter>

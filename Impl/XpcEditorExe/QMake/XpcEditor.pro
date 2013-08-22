@@ -21,6 +21,7 @@ QT += xml
 
 ARXC_CONFIG = ../../../Config/Core.xpc
 ARXC_FILES += ../*.arx
+ARXC_OUTDIR = ../../GeneratedFiles/XpcEditor
 
 mac{
 	ICON += ../Mac/XpcEditor.icns

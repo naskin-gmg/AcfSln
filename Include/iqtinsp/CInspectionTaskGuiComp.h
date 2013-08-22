@@ -29,7 +29,7 @@
 
 // ACF-Solutions includes
 #include "iinsp/IInspectionTask.h"
-#include "iqtinsp/Generated/ui_CInspectionTaskGuiComp.h"
+#include "GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h"
 
 
 namespace iqtinsp

@@ -15,7 +15,7 @@
 
 #include "iqtipr/iqtipr.h"
 
-#include "iqtipr/Generated/ui_CSearchBasedFeaturesSupplierGuiComp.h"
+#include "GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h"
 
 
 namespace iqtipr

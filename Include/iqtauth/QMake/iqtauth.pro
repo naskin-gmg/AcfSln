@@ -5,3 +5,5 @@ TARGET = iqtauth
 
 INCLUDEPATH += ../..
 
+FORMS += ../*.ui
+UI_DIR = ../../GeneratedFiles/iqtauth

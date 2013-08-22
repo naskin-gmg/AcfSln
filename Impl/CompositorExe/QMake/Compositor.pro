@@ -31,15 +31,16 @@ mac{
 # ARX compiler
 ARXC_CONFIG = ../../../Config/Core.xpc
 ARXC_FILES += ../*.arx
+ARXC_OUTDIR = ../../GeneratedFiles/Compositor
 
 win*{
 	# File transformation
 	ACF_CONVERT_FILES = ../VC/*.rc.xtracf
-	ACF_CONVERT_OUTDIR = ../Generated
+	ACF_CONVERT_OUTDIR = ../../GeneratedFiles/Compositor
 	ACF_CONVERT_REGISTRY = ../../../Partitura/AcfInfoCopyApp.arx
 	ACF_CONVERT_CONFIG = ../../../Config/BaseOnly.xpc
 
-	RC_FILE = ../Generated/Compositor.rc
+	RC_FILE = ../../GeneratedFiles/Compositor/Compositor.rc
 }
 
 

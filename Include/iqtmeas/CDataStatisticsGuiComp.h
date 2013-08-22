@@ -9,7 +9,7 @@
 // ACF-Solutions includes
 #include "imeas/IDataStatistics.h"
 
-#include "iqtmeas/Generated/ui_CDataStatisticsGuiComp.h"
+#include "GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h"
 
 
 namespace iqtmeas

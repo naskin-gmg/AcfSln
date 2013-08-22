@@ -249,35 +249,35 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CPulseParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CPulseParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSampleAcquisitionGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CSampleAcquisitionGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSamplingParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CSamplingParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CTriggerParamsGuiComp.cpp"
+				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CTriggerParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CPulseParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CPulseParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CSampleAcquisitionGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CSampleAcquisitionGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CSamplingParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CSamplingParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CTriggerParamsGuiComp.h"
+				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CTriggerParamsGuiComp.h"
 				>
 			</File>
 		</Filter>
