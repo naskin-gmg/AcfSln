@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3108
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          994
         </Number>
         <Description>
           ACF-Solutions
@@ -222,7 +222,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="9">
+              <Values count="10">
                 <Value>
                   *.xpc
                 </Value>
@@ -237,6 +237,9 @@
                 </Value>
                 <Value>
                   *.pro
+                </Value>
+                <Value>
+                  *.qbs
                 </Value>
                 <Value>
                   empty
