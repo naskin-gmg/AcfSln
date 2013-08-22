@@ -62,7 +62,7 @@ bool CColorPatternControllerComp::TeachPattern(const istd::IChangeable* /*source
 
 	imeas::CSimpleSamplesSequence32 histogram;
 
-	if (!m_histogramProgressorCompPtr->DoProcessing(NULL, &patternBitmap, &histogram)){
+	if (!m_histogramProgressorCompPtr->DoProcessing(m_paramsSetCompPtr.GetPtr(), bitmapPtr, &histogram)){
 		SendErrorMessage(0, "Histogram calculation failed");
 
 		return false;

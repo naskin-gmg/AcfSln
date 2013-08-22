@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3105
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          997
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -37,7 +37,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         Region
@@ -47,6 +47,20 @@
       </X>
       <X>
         400
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HistogramView
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <X>
+        525
       </X>
       <Note>
         

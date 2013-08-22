@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3125
+          3105
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          993
+          997
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -958,7 +958,7 @@
               <Flags>
                 0
               </Flags>
-              <AttributeInfoMap count="5">
+              <AttributeInfoMap count="6">
                 <AttributeInfo>
                   <Id>
                     EnableVerbose
@@ -1021,6 +1021,25 @@
                     <IsEnabled>
                       false
                     </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    ProcessorParams
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      PatternComparatorParams
+                    </Value>
                   </Data>
                 </AttributeInfo>
                 <AttributeInfo>

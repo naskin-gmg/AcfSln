@@ -95,6 +95,18 @@ void CPatternTeachingControllerGuiComp::UpdateGui(int /*updateFlags*/)
 		PatternInfoLabel->setText(tr("Reference pattern defined"));		
 		PatternInfoLabel->setStyleSheet("color: darkgreen;");
 	}
+
+	// view
+	if (m_patternViewObserverCompPtr.IsValid()){
+		imod::IModel* patternModelPtr = const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(objectPtr->GetPatternObject()));
+		if (patternModelPtr != NULL){
+			if (!patternModelPtr->IsAttached(m_patternViewObserverCompPtr.GetPtr())){
+				patternModelPtr->AttachObserver(m_patternViewObserverCompPtr.GetPtr());
+			}
+
+			istd::CChangeNotifier updateModelPtr(dynamic_cast<istd::IChangeable*>(patternModelPtr));
+		}
+	}
 }
 
 
@@ -111,6 +123,23 @@ void CPatternTeachingControllerGuiComp::OnGuiCreated()
 	if (!m_patternEditorCompPtr.IsValid()){
 		EditButton->setVisible(false);
 	}
+
+	if (m_patternViewCompPtr.IsValid()){
+		m_patternViewCompPtr->CreateGui(PatternFrame);
+	}
+	else{
+		PatternFrame->hide();
+	}
+}
+
+
+void CPatternTeachingControllerGuiComp::OnGuiDestroyed()
+{
+	if (m_patternViewCompPtr.IsValid()){
+		m_patternViewCompPtr->DestroyGui();
+	}
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

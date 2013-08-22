@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3105
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          997
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -37,7 +37,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         ColorPatternComparatorGui
@@ -87,6 +87,27 @@
       </PackageId>
       <ComponentId>
         NumericParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        HistogramView
+      </Id>
+      <PackageId>
+        QwtPck
+      </PackageId>
+      <ComponentId>
+        HistogramView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -256,7 +277,45 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              PatternObserver
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HistogramView
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PatternView
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HistogramView
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

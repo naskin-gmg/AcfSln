@@ -26,7 +26,6 @@ class CColorPatternControllerComp:
 			virtual public iimg::IBitmapProvider,
 			virtual public imeas::IDataSequenceProvider,
 			virtual public iser::ISerializable
-
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
@@ -39,6 +38,7 @@ public:
 		I_ASSIGN(m_patternBitmapProviderCompPtr, "PatternBitmapProvider", "Provider of the bitmap pattern data used for teaching", true, "PatternBitmapProvider");
 		I_ASSIGN(m_bitmapRegionCompPtr, "TeachingRegion", "Bitmap region used for teaching", true, "TeachingRegion");
 		I_ASSIGN(m_histogramProgressorCompPtr, "HistogramProcessor", "Processor used for histogram calculation", true, "HistogramProcessor");
+		I_ASSIGN(m_paramsSetCompPtr, "ProcessorParams", "Params set used by histogram processor", true, "ProcessorParams");
 	I_END_COMPONENT;
 
 	// reimplemented (IPatternController)
@@ -66,6 +66,7 @@ private:
 	I_REF(iimg::IBitmapProvider, m_patternBitmapProviderCompPtr);
 	I_REF(i2d::IObject2d, m_bitmapRegionCompPtr);
 	I_REF(iproc::IProcessor, m_histogramProgressorCompPtr);
+	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 };
 
 
