@@ -8,7 +8,7 @@
 #include "iqt2d/IViewExtender.h"
 #include "iedge/CEdgeLineContainer.h"
 
-#include "GeneratedFiles/CEdgeLinesTestGuiComp/ui_CEdgeLinesTestGuiComp.h" 
+#include "GeneratedFiles/edgetest/ui_CEdgeLinesTestGuiComp.h" 
  
 
 namespace edgetest
