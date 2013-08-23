@@ -6,9 +6,11 @@ Project{
 	StaticLibrary{
 		name: "_XpcEditor"
 
-		destinationDirectory: "GeneratedFiles"
+		destinationDirectory: "GeneratedFiles/XpcEditor"
 
 		files: ["../*.arx", "../*.qrc"]
+
+		acf.generatedOutputDir: "GeneratedFiles/XpcEditor"
 
 		Depends{ name: "Arxc" }
 
@@ -29,6 +31,7 @@ Project{
 
 		Depends{ name: "_XpcEditor" }
 
+		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "AcfSlnLoc" }
 		Depends{ name: "AcfLoc" }
 
@@ -39,5 +42,16 @@ Project{
 
 		Depends{ name: "Qt.widgets" }
 		Depends{ name: "Qt.gui" }
+
+		Group{
+			name: "VC-Resources"
+			condition: qbs.toolchain.contains("msvc")
+
+			files: ["../VC/*.rc.xtracf"]
+			fileTags: ["xtracf"]
+
+			acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
+			acf.trOutputType: ["rc"]
+		}
 	}
 }
