@@ -3,13 +3,12 @@ import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 
 Project{
-	StaticProduct{
+	StaticLibrary{
 		name: "_Compositor"
-		type: ["staticlibrary"]
+
+		destinationDirectory: "GeneratedFiles"
 
 		files: ["../*.arx", "../*.qrc"]
-
-//		acf.acfConfigurationFile: "../../../Config/Full.xpc"
 
 		Depends{ name: "Arxc" }
 
@@ -20,10 +19,7 @@ Project{
 		Depends{ name: "FilePck" }
 		Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
-
-		Export{
-			cpp.includePaths: product.buildDirectory + "/" + product.name
-		}
+		Depends{ name: "acf" }
 	}
 
 	ApplicationProduct{
