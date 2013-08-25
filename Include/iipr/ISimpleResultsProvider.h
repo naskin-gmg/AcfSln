@@ -25,14 +25,14 @@ public:
 };
 
 
-class ISimpleResultsConsumer: public istd::IPolymorphic
+class ISimpleResultsConsumer: virtual public istd::IPolymorphic
 {
 public:
 	virtual void SetResultsBuffer(CSimpleResultsContainer* bufferPtr) = 0;
 };
 
 
-class ISimpleResultsProvider: public istd::IPolymorphic
+class ISimpleResultsProvider: virtual public istd::IPolymorphic
 {
 public:
 	virtual CSimpleResultsContainer* GetResults() const = 0;
