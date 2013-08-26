@@ -35,7 +35,7 @@ public:
 	virtual ihotf::IHotfolderWorkflowItem* AddHotfolder(const QString& hotfolderName, const QString& hotfolderId = QString()) = 0;
 
 	/**	
-		Remove a hotfolder with the name \hotfolderName from the workflow.
+		Remove a hotfolder with the name \c hotfolderName from the workflow.
 	*/
 	virtual bool RemoveHotfolder(const QString& hotfolderName) = 0;
 
