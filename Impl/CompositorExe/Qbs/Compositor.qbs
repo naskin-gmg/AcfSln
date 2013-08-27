@@ -27,6 +27,8 @@ Project{
 	ApplicationProduct{
 		name: "Compositor"
 
+		consoleApplication: false
+
 		files: ["../*.cpp"]
 
 		Depends{ name: "_Compositor" }

@@ -27,6 +27,8 @@ Project{
 	ApplicationProduct{
 		name: "XpcEditor"
 
+		consoleApplication: false
+
 		files: ["../*.cpp"]
 
 		Depends{ name: "_XpcEditor" }
