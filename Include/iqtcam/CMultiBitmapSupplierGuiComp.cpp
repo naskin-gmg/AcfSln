@@ -202,11 +202,11 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 			QPixmap iconPixmap;
 
 #if QT_VERSION >= 0x040700
-            iconPixmap.convertFromImage(image);
+			iconPixmap.convertFromImage(image);
 #else
-            iconPixmap.fromImage(image);
+			iconPixmap.fromImage(image);
 #endif
-            m_icons.push_back(QIcon(iconPixmap.scaled(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr, Qt::KeepAspectRatio)));
+			m_icons.push_back(QIcon(iconPixmap.scaled(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr, Qt::KeepAspectRatio)));
 
 			QString iconText = QObject::tr("Channel %1").arg(bitmapIndex + 1);
 			if ((selectionConstraintsPtr != NULL) && (bitmapIndex < selectionConstraintsPtr->GetOptionsCount())){

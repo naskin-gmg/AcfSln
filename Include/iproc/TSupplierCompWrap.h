@@ -71,7 +71,7 @@ protected:
 		~Timer();
 
 	private:
-        istd::CGeneralTimeStamp m_timer;
+		istd::CGeneralTimeStamp m_timer;
 		const TSupplierCompWrap* m_parentPtr;
 		QString m_measuredFeatureName;
 	};
@@ -431,7 +431,7 @@ TSupplierCompWrap<Product>::Timer::~Timer()
 		MessagePtr messagePtr(new ilog::CMessage(
 					istd::IInformationProvider::IC_INFO,
 					0,
-                    QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
+					QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
 					*m_parentPtr->m_diagnosticNameAttrPtr));
 		m_parentPtr->m_messageContainer.AddMessage(messagePtr);
 	}

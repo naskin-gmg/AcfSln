@@ -106,14 +106,14 @@ void CDirectoryMonitorComp::run()
     istd::CGeneralTimeStamp measurementTimer;
 
 	while (!m_finishThread){
-        bool needStateUpdate = updateTimer.GetElapsed() > m_poolingFrequency;
+		bool needStateUpdate = updateTimer.GetElapsed() > m_poolingFrequency;
 		if (!needStateUpdate || m_lockChanges){
 			msleep(100);
 
 			continue;
 		}
 
-        measurementTimer.Start();
+		measurementTimer.Start();
 
 		QFileInfo currentDirectoryInfo(m_currentDirectory.absolutePath());
 		if (!currentDirectoryInfo.exists()){
@@ -278,10 +278,10 @@ void CDirectoryMonitorComp::run()
 		}
 
 		Q_EMIT FolderChanged(changeFlags);
-        updateTimer.Start();
+		updateTimer.Start();
 
 		I_IF_DEBUG(
-            double processingTime = measurementTimer.GetElapsed();
+			double processingTime = measurementTimer.GetElapsed();
 
 			SendInfoMessage(0,
 				QString("Folder monitoring of ") +
