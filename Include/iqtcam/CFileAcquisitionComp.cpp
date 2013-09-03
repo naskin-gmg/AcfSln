@@ -175,6 +175,19 @@ istd::CIndex2d CFileAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* /*par
 }
 
 
+// reimplemented (ilog::CLoggerComponentBase)
+
+void CFileAcquisitionComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	// preinitialize components
+	m_bitmapLoaderCompPtr.IsValid();
+	m_defaultDirParamCompPtr.IsValid();
+	m_lastFileNameCompPtr.IsValid();
+}
+
+
 // public methods of embedded class ParamsInfo
 
 CFileAcquisitionComp::ParamsInfo::ParamsInfo()

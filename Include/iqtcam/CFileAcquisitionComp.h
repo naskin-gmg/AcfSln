@@ -58,6 +58,9 @@ public:
 	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
+	// reimplemented (ilog::CLoggerComponentBase)
+	virtual void OnComponentCreated();
+
 protected:
 	struct ParamsInfo
 	{
