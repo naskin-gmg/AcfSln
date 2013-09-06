@@ -623,7 +623,7 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 		PreviewStack->setCurrentIndex(stackIndex);
 
 		if (AutoTestButton->isChecked()){
-			DoAutoTest();
+			emit DoAutoTest();
 		}
 	}
 }

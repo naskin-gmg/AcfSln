@@ -9,7 +9,19 @@ namespace iqtinsp
 {
 
 
+CGeneralSupplierGuiComp::CGeneralSupplierGuiComp()
+{
+	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
+}
+
+
 // protected slots
+
+void CGeneralSupplierGuiComp::OnAutoTest()
+{
+	DoTest();
+}
+
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()
 {
@@ -60,7 +72,7 @@ QWidget* CGeneralSupplierGuiComp::GetParamsWidget() const
 void CGeneralSupplierGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoTestButton->isChecked()){
-		DoTest();
+		emit DoAutoTest();
 	}
 }
 
