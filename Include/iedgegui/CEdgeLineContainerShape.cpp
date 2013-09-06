@@ -145,6 +145,8 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 	const iview::CScreenTransform& transform = GetViewToScreenTransform();
 	double scale = qSqrt(transform.GetDeformMatrix().GetApproxScale());
 
+	i2d::CVector2d logPosition = GetLogPosition(position);
+
 	int bestLineIndex = -1;	// index of the nearest found edge line
 	double bestLineStrength = 0;	// strength (weight) of the nearest found edge line
 	double bestLinePosition = 0;	// position of the nearest found edge line
@@ -154,6 +156,12 @@ QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) 
 
 		int nodesCount = line.GetNodesCount();
 		if (nodesCount > 1){
+			i2d::CRectangle lineBoundingBox = line.GetBoundingBox();
+
+			if (lineBoundingBox.IsEmpty() || !lineBoundingBox.GetExpanded(i2d::CRectangle(-4, -4, 4, 4)).Contains(logPosition)){
+				continue;
+			}
+
 			double segmentPosition = 0;
 
 			int segmentsCount = line.GetSegmentsCount();

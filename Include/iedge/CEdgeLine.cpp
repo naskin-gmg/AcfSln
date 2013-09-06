@@ -19,9 +19,10 @@ CEdgeLine::CEdgeLine()
 
 void CEdgeLine::Clear()
 {
+	istd::CChangeNotifier notifier(this);
+
 	m_nodes.clear();
 	m_isClosed = false;
-	m_areVolatileValid = true;
 	m_center.Reset();
 	m_totalLength = 0;
 	m_minWeight = 0;
@@ -43,27 +44,27 @@ CEdgeNode& CEdgeLine::GetNodeRef(int index)
 
 void CEdgeLine::SetNode(int index, const CEdgeNode& node)
 {
-	m_nodes[index] = node;
+	istd::CChangeNotifier notifier(this);
 
-	m_areVolatileValid = false;
+	m_nodes[index] = node;
 }
 
 
 void CEdgeLine::SetClosed(bool state)
 {
 	if (state != m_isClosed){
-		m_isClosed = state;
+		istd::CChangeNotifier notifier(this);
 
-		m_areVolatileValid = false;
+		m_isClosed = state;
 	}
 }
 
 
 bool CEdgeLine::InsertNode(const CEdgeNode& node)
 {
-	m_nodes.push_back(node);
+	istd::CChangeNotifier notifier(this);
 
-	m_areVolatileValid = false;
+	m_nodes.push_back(node);
 
 	return true;
 }
@@ -71,12 +72,13 @@ bool CEdgeLine::InsertNode(const CEdgeNode& node)
 
 void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, const i2d::CAffine2d* transformPtr)
 {
+	istd::CChangeNotifier notifier(this);
+
 	int size = polyline.GetNodesCount();
 
 	if (size <= 1){
 		m_nodes.clear();
 		m_isClosed = false;
-		m_areVolatileValid = false;
 
 		return;
 	}
@@ -117,8 +119,6 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 			prevPosition = position;
 		}
 	}
-
-	m_areVolatileValid = false;
 }
 
 
@@ -153,9 +153,7 @@ void CEdgeLine::CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* t
 
 i2d::CVector2d CEdgeLine::GetCenter() const
 {
-	if (!m_areVolatileValid){
-		CalcVolatile();
-	}
+	EnsureVolatileValid();
 
 	return m_center;
 }
@@ -163,9 +161,9 @@ i2d::CVector2d CEdgeLine::GetCenter() const
 
 void CEdgeLine::MoveCenterTo(const i2d::CVector2d& position)
 {
-	if (!m_areVolatileValid){
-		CalcVolatile();
-	}
+	EnsureVolatileValid();
+
+	istd::CChangeNotifier notifier(this);
 
 	i2d::CVector2d diffVector = position - m_center;
 
@@ -181,11 +179,9 @@ void CEdgeLine::MoveCenterTo(const i2d::CVector2d& position)
 
 i2d::CRectangle CEdgeLine::GetBoundingBox() const
 {
-	// TODO: implement bounding box of edge line better
-	i2d::CPolyline tempPolyline;
-	CopyToPolyline(tempPolyline);
+	EnsureVolatileValid();
 
-	return tempPolyline.GetBoundingBox();
+	return m_boundingBox;
 }
 
 
@@ -194,6 +190,8 @@ bool CEdgeLine::Transform(
 			i2d::ITransformation2d::ExactnessMode /*mode*/,
 			double* errorFactorPtr)
 {
+	istd::CChangeNotifier notifier(this);
+
 	int transFlag = transformation.GetTransformationFlags();
 	if ((transFlag & i2d::ITransformation2d::TF_AFFINE) != 0){
 		i2d::CAffine2d localTransform;
@@ -229,8 +227,6 @@ bool CEdgeLine::Transform(
 		*errorFactorPtr = 0;
 	}
 
-	m_areVolatileValid = false;
-
 	return true;
 }
 
@@ -240,6 +236,8 @@ bool CEdgeLine::InvTransform(
 			i2d::ITransformation2d::ExactnessMode /*mode*/,
 			double* errorFactorPtr)
 {
+	istd::CChangeNotifier notifier(this);
+
 	int transFlag = transformation.GetTransformationFlags();
 	if ((transFlag & i2d::ITransformation2d::TF_AFFINE) != 0){
 		i2d::CAffine2d localInvTransform;
@@ -273,8 +271,6 @@ bool CEdgeLine::InvTransform(
 	if (errorFactorPtr != NULL){
 		*errorFactorPtr = 0;
 	}
-
-	m_areVolatileValid = false;
 
 	return true;
 }
@@ -442,6 +438,10 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 		}
 
 		retVal = retVal && archive.EndTag(nodesTag);
+
+		retVal = retVal && archive.BeginTag(isClosedTag);
+		retVal = retVal && archive.Process(m_isClosed);
+		retVal = retVal && archive.EndTag(isClosedTag);
 	}
 	else{
 		int nodesCount = 0;
@@ -450,6 +450,8 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 		if (!retVal){
 			return false;
 		}
+
+		istd::CChangeNotifier notifier(this);
 
 #if QT_VERSION >= 0x040700
 		m_nodes.reserve(nodesCount);
@@ -465,12 +467,10 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.EndTag(nodesTag);
 
-		m_areVolatileValid = false;
+		retVal = retVal && archive.BeginTag(isClosedTag);
+		retVal = retVal && archive.Process(m_isClosed);
+		retVal = retVal && archive.EndTag(isClosedTag);
 	}
-
-	retVal = retVal && archive.BeginTag(isClosedTag);
-	retVal = retVal && archive.Process(m_isClosed);
-	retVal = retVal && archive.EndTag(isClosedTag);
 
 	return retVal;
 }
@@ -544,7 +544,19 @@ void CEdgeLine::CalcVolatile() const
 		m_maxWeight = 0;
 	}
 
-	m_areVolatileValid = true;
+	// TODO: implement bounding box of edge line better
+	i2d::CPolyline tempPolyline;
+	CopyToPolyline(tempPolyline);
+
+	m_boundingBox = tempPolyline.GetBoundingBox();
+}
+
+
+// reimplemented (istd::IChangeable)
+
+void CEdgeLine::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+{
+	m_areVolatileValid = false;
 }
 
 

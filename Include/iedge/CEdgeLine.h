@@ -98,7 +98,15 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	/**
+		Make sure, that all volatile values are calculated and valid.
+	*/
+	void EnsureVolatileValid() const;
+
 	virtual void CalcVolatile() const;
+
+	// reimplemented (istd::IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 private:
 	typedef QList<CEdgeNode> Nodes;
@@ -112,6 +120,7 @@ private:
 	mutable i2d::CVector2d m_center;
 	mutable double m_minWeight;
 	mutable double m_maxWeight;
+	mutable i2d::CRectangle m_boundingBox;
 };
 
 
@@ -131,9 +140,7 @@ inline int CEdgeLine::GetSegmentsCount() const
 
 inline double CEdgeLine::GetTotalLength() const
 {
-	if (!m_areVolatileValid){
-		CalcVolatile();
-	}
+	EnsureVolatileValid();
 
 	return m_totalLength;
 }
@@ -141,9 +148,7 @@ inline double CEdgeLine::GetTotalLength() const
 
 inline double CEdgeLine::GetMinWeight() const
 {
-	if (!m_areVolatileValid){
-		CalcVolatile();
-	}
+	EnsureVolatileValid();
 
 	return m_minWeight;
 }
@@ -151,9 +156,7 @@ inline double CEdgeLine::GetMinWeight() const
 
 inline double CEdgeLine::GetMaxWeight() const
 {
-	if (!m_areVolatileValid){
-		CalcVolatile();
-	}
+	EnsureVolatileValid();
 
 	return m_maxWeight;
 }
@@ -162,6 +165,18 @@ inline double CEdgeLine::GetMaxWeight() const
 inline bool CEdgeLine::IsClosed() const
 {
 	return m_isClosed;
+}
+
+
+// protected methods
+
+inline void CEdgeLine::EnsureVolatileValid() const
+{
+	if (!m_areVolatileValid){
+		CalcVolatile();
+
+		m_areVolatileValid = true;
+	}
 }
 
 
