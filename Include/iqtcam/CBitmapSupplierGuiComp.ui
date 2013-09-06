@@ -36,26 +36,6 @@
        <number>9</number>
       </property>
       <item>
-       <widget class="QToolButton" name="SnapBackImageButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="toolTip">
-         <string>Snap previous image (if allowed)</string>
-        </property>
-        <property name="text">
-         <string>Snap Back</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-          <normaloff>:/Icons/PlayBack</normaloff>:/Icons/PlayBack</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="SnapImageButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -241,7 +221,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>SnapBackImageButton</tabstop>
   <tabstop>SnapImageButton</tabstop>
   <tabstop>LiveImageButton</tabstop>
   <tabstop>SaveImageButton</tabstop>

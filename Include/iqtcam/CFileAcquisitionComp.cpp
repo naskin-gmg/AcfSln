@@ -52,16 +52,6 @@ int CFileAcquisitionComp::DoProcessing(
 		inputPath = pathParamsPtr->GetPath();
 	}
 
-	// check if snap control is active
-	bool backSnapDirection = false;
-	const icam::ISnapControl* snapControlPtr = dynamic_cast<const icam::ISnapControl*>(inputPtr);
-	if (snapControlPtr != NULL){
-		if (snapControlPtr->GetSnapDirection() == icam::ISnapControl::SD_HOLD){
-			return TS_NONE;
-		}
-		backSnapDirection = (snapControlPtr->GetSnapDirection() == icam::ISnapControl::SD_BACK);
-	}
-
 	QString imageFileName;
 
 	QFileInfo inputPathInfo(inputPath);
@@ -73,8 +63,7 @@ int CFileAcquisitionComp::DoProcessing(
 
 		ParamsInfo& info = m_dirInfos[inputPath];
 
-		if (		(backSnapDirection && info.filesIter == info.files.begin())
-				|| (!backSnapDirection && info.filesIter == info.files.end())){
+		if (info.filesIter == info.files.end()){
 			QStringList nameFilters;
 
 			if (!extensions.isEmpty()){
@@ -96,16 +85,9 @@ int CFileAcquisitionComp::DoProcessing(
 
 		info.idStamp = ++m_lastIdStamp;
 
-		if (backSnapDirection){
-			if (info.filesIter == info.files.begin()){
-				info.filesIter = info.files.end();
-			}
-			info.filesIter--;
-		} else {
-			info.filesIter++;
-			if (info.filesIter >= info.files.end()){
-				info.filesIter = info.files.begin();
-			}
+		info.filesIter++;
+		if (info.filesIter >= info.files.end()){
+			info.filesIter = info.files.begin();
 		}
 
 		if (info.filesIter != info.files.end()){

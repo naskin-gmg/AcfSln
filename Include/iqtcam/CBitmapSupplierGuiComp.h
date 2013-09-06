@@ -50,7 +50,6 @@ public:
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
-	void on_SnapBackImageButton_clicked();
 	void on_LiveImageButton_toggled(bool checked);
 	void on_SaveImageButton_clicked();
 	void on_LoadParamsButton_clicked();

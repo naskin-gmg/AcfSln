@@ -15,7 +15,6 @@
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
-#include "icam/ISnapControl.h"
 
 #include "iqtcam/iqtcam.h"
 

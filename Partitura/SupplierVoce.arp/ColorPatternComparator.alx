@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3150
+          3138
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1017
+          1014
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -43,7 +43,7 @@
         ComparatorParams
       </ComponentName>
       <X>
-        625
+        900
       </X>
       <X>
         500
@@ -57,7 +57,7 @@
         ImageHistogramSupplier
       </ComponentName>
       <X>
-        625
+        600
       </X>
       <X>
         375
@@ -71,10 +71,10 @@
         HistogramStatisticsProcessor
       </ComponentName>
       <X>
-        1000
+        600
       </X>
       <X>
-        625
+        750
       </X>
       <Note>
         
@@ -85,7 +85,7 @@
         ColorPatternComparator
       </ComponentName>
       <X>
-        625
+        600
       </X>
       <X>
         625
@@ -99,7 +99,7 @@
         ImageHistogramProcessor
       </ComponentName>
       <X>
-        1000
+        1050
       </X>
       <X>
         375
@@ -113,7 +113,7 @@
         InspectionTask
       </ComponentName>
       <X>
-        225
+        275
       </X>
       <X>
         500

@@ -57,7 +57,7 @@ void CColorPatternComparatorGuiComp::UpdateGui(int updateFlags)
 
 	Q_ASSERT(IsGuiCreated());
 
-	const imeas::INumericValueProvider* numericValueProviderPtr = dynamic_cast<const imeas::INumericValueProvider*>(GetObjectPtr());
+	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObjectPtr());
 	if (numericValueProviderPtr != NULL){
 		int valuesCount = numericValueProviderPtr->GetValuesCount();
 		if (valuesCount > 0){

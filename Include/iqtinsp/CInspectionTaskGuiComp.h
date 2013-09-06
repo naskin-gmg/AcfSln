@@ -45,7 +45,7 @@ public:
 		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
-		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - buttons\n* 1 - tool box\n* 2 - tab", true, 1);
+		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 1 - tool box\n* 2 - tab", true, 1);
 		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, true);
 	I_END_COMPONENT;
 
@@ -115,9 +115,8 @@ protected:
 
 protected Q_SLOTS:
 	void OnEditorChanged(int index);
-	void OnAutoTest(bool forward = true);
+	void OnAutoTest();
 	void on_TestAllButton_clicked();
-	void on_TestBackButton_clicked();
 	void on_AutoTestButton_clicked();
 	void OnLoadParams();
 	void OnSaveParams();

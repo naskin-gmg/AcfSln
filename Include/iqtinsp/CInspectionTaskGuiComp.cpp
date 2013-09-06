@@ -22,13 +22,11 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
-#include "icam/ISnapControl.h"
 #include "iview/IShapeView.h"
 #include "iview/IInteractiveShape.h"
 #include "iview/CShapeBase.h"
 #include "iser/CXmlStringReadArchive.h"
 #include "iser/CXmlStringWriteArchive.h"
-#include "iqtgui/CFlowLayout.h"
 
 
 namespace iqtinsp
@@ -306,87 +304,6 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
 
 	switch (*m_designTypeAttrPtr){
-		case 0:	// floating buttons
-		{
-			QVBoxLayout* mainLayout = new QVBoxLayout();
-			((QBoxLayout*)layoutPtr)->addLayout(mainLayout);
-
-			QFrame* buttonsFrame = new QFrame(ParamsFrame);
-			buttonsFrame->setFrameStyle(QFrame::StyledPanel);
-			mainLayout->addWidget(buttonsFrame);
-
-			iqtgui::CFlowLayout* buttonsLayout = new iqtgui::CFlowLayout(6, 3, 3);
-			buttonsFrame->setLayout(buttonsLayout);
-	
-			m_stackedWidgetPtr = new QStackedWidget(ParamsFrame);
-			mainLayout->addWidget(m_stackedWidgetPtr);
-
-			m_buttonGroupPtr = new QButtonGroup(ParamsFrame);
-			m_buttonGroupPtr->setExclusive(true);
-
-			int subtasksCount = m_editorGuisCompPtr.GetCount();
-			for (int i = 0; i < subtasksCount; ++i){
-				iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
-
-				if (guiPtr != NULL){
-					QWidget* panelPtr = new QWidget(m_stackedWidgetPtr);
-					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-					panelLayoutPtr->setContentsMargins(0,0,0,0);
-
-					QString name = QString::number(i+1) + ". ";
-					if (i < m_namesAttrPtr.GetCount()){
-						name += m_namesAttrPtr[i];
-					}
-
-					guiPtr->CreateGui(panelPtr);
-
-					int tabIndex = m_stackedWidgetPtr->addWidget(panelPtr);
-					QPushButton* buttonPtr = new QPushButton(name, panelPtr);
-					buttonPtr->setCheckable(true);
-					//buttonPtr->setFlat(true);
-					buttonPtr->setMinimumWidth(32);
-
-					buttonPtr->setStyleSheet(
-						"QPushButton{border:1px solid transparent; padding:4px;}"
-
-						"QPushButton:enabled{color:#000;}"
-						"QPushButton:enabled:hover:!checked{color:#31688a; border-color:#ccc;}"
-						"QPushButton:checked{color:#fff; border-color:#666; background-color:#888;}"
-						);
-
-						//"QPushButton{padding:5px;border-radius:4px;border:1px solid #ccc;}"
-						//"QPushButton:enabled{color:#31688a;background-color:#fff;}"
-						//"QPushButton:checked{color:#fff;background-color:#31688a;}");
-
-					if (i == 0){
-						buttonPtr->setChecked(true);
-					}
-
-					buttonsLayout->addWidget(buttonPtr);
-					m_buttonGroupPtr->addButton(buttonPtr, i);
-
-					if (useSpacer){
-						QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-						panelLayoutPtr->addItem(spacerPtr);
-					}
-
-					m_tabToGuiIndexMap[tabIndex] = i;
-
-					if (i < m_editorVisualModelsCompPtr.GetCount()){
-						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
-						if (modelPtr != NULL){
-							RegisterModel(modelPtr, i);
-						}
-					}
-				}
-			}
-
-			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), this, SLOT(OnEditorChanged(int)));
-			QObject::connect(m_buttonGroupPtr, SIGNAL(buttonClicked(int)), m_stackedWidgetPtr, SLOT(setCurrentIndex(int)));
-		}
-		break;
-
 		case 1: // toolbox
 		{
 			m_toolBoxPtr = new QToolBox(ParamsFrame);
@@ -521,10 +438,6 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		GeneralParamsFrame->hide();
 	}
 
-	icam::ISnapControl* snapControlPtr = CompCastPtr<icam::ISnapControl>(GetObjectPtr());
-	TestBackButton->setVisible(snapControlPtr != NULL);
-	HoldSnapButton->setVisible(snapControlPtr != NULL);
-
 	CreateMenu();
 
 	UpdateTaskMessages();
@@ -629,21 +542,12 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 }
 
 
-void CInspectionTaskGuiComp::OnAutoTest(bool forward)
+void CInspectionTaskGuiComp::OnAutoTest()
 {
 	m_testStarted = true;
 
 	MessageList->clear();
 	m_resultShapesMap.clear();
-
-	icam::ISnapControl* snapControlPtr = CompCastPtr<icam::ISnapControl>(GetObjectPtr());
-	if (snapControlPtr != NULL){
-		if (HoldSnapButton->isChecked()){
-			snapControlPtr->SetSnapDirection(icam::ISnapControl::SD_HOLD);
-		} else {
-			snapControlPtr->SetSnapDirection(forward ? icam::ISnapControl::SD_FORWARD : icam::ISnapControl::SD_BACK);
-		}
-	}
 
 	iproc::ISupplier* supplierPtr = dynamic_cast<iproc::ISupplier*>(GetObjectPtr());
 	if (supplierPtr != NULL){
@@ -671,16 +575,6 @@ void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 	}
 
 	OnAutoTest();
-}
-
-
-void CInspectionTaskGuiComp::on_TestBackButton_clicked()
-{
-	if (m_generalParamsEditorCompPtr.IsValid()){
-		m_generalParamsEditorCompPtr->UpdateModel();
-	}
-
-	OnAutoTest(false);
 }
 
 
