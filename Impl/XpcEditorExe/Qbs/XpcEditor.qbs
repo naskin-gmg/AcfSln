@@ -12,7 +12,7 @@ Project{
 
 		acf.generatedOutputDir: "GeneratedFiles/XpcEditor"
 
-		Depends{ name: "Arxc" }
+        Depends{ name: "ArxcExe" }
 
 		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "CompositorPck" }
