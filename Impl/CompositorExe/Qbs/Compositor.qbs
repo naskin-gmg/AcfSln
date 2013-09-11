@@ -12,15 +12,17 @@ Project{
 
 		acf.generatedOutputDir: "GeneratedFiles/Compositor"
 
-        Depends{ name: "ArxcExe" }
+		Depends{ name: "ArxcExe" }
 
 		Depends{ name: "AcfSlnConfig" }
+
 		Depends{ name: "CompositorPck" }
 		Depends{ name: "QtGuiPck" }
 		Depends{ name: "QtPck" }
 		Depends{ name: "FilePck" }
 		Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
+
 		Depends{ name: "acf" }
 	}
 
