@@ -25,12 +25,12 @@ bool ProjectionFunction(
 			const quint8* firstPixelAddress,
 			const istd::CIndex2d axisSizes,
 			const istd::CIndex2d addressDiffs,
-			const i2d::CLine2d& projectionLine,
+			const i2d::CLine2d& bitmapLine,
 			const i2d::CLine2d& clippedLine,
 			const PixelConversion& conversion,
 			imeas::IDataSequence& results)
 {
-	Q_ASSERT(projectionLine.GetPoint1().GetX() <= projectionLine.GetPoint2().GetX());
+	Q_ASSERT(bitmapLine.GetPoint1().GetX() <= bitmapLine.GetPoint2().GetX());
 	Q_ASSERT(clippedLine.GetPoint1().GetX() <= clippedLine.GetPoint2().GetX());
 	Q_ASSERT(axisSizes[0] != 0);
 	Q_ASSERT(axisSizes[1] != 0);
@@ -50,7 +50,7 @@ bool ProjectionFunction(
 	istd::CChangeNotifier projectionNotifier(&results);
 
 	int projectionSize = axis1End - axis1Begin;
-	istd::CRange axis1CutLineRange(projectionLine.GetPoint1().GetX(), projectionLine.GetPoint2().GetX());
+	istd::CRange axis1CutLineRange(bitmapLine.GetPoint1().GetX(), bitmapLine.GetPoint2().GetX());
 	istd::CRange resultProportionRange(
 				axis1CutLineRange.GetAlphaFromValue(axis1Begin),
 				axis1CutLineRange.GetAlphaFromValue(axis1End));
@@ -101,7 +101,7 @@ bool ProjectionFunction(
 
 bool CLineProjectionProcessorComp::DoAutosizeProjection(
 			const iimg::IBitmap& bitmap,
-			const i2d::CLine2d& projectionLine,
+			const i2d::CLine2d& bitmapLine,
 			imeas::IDataSequence& results) const
 {
 	istd::CIndex2d axisSizes = bitmap.GetImageSize();
@@ -116,8 +116,8 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 
 	istd::CIndex2d addressDiffs(bytesPerPixel, bitmap.GetLinesDifference());
 	const quint8* firstPixelAddress = (const quint8*)bitmap.GetLinePtr(0);
-	i2d::CLine2d transformedLine = projectionLine;
-	i2d::CVector2d diffVector = projectionLine.GetDiffVector();
+	i2d::CLine2d transformedLine = bitmapLine;
+	i2d::CVector2d diffVector = bitmapLine.GetDiffVector();
 
 	if (qAbs(diffVector.GetY()) > qAbs(diffVector.GetX())){	// switch X and Y axis
 		axisSizes = istd::CIndex2d(axisSizes[1], axisSizes[0]);
@@ -188,7 +188,11 @@ bool CLineProjectionProcessorComp::DoProjection(
 			const IProjectionParams* /*paramsPtr*/,
 			imeas::IDataSequence& results)
 {
-	return DoAutosizeProjection(bitmap, projectionLine, results);
+	i2d::CLine2d bitmapLine;
+	bitmapLine.SetCalibration(bitmap.GetCalibration());
+	bitmapLine.CopyFrom(projectionLine, istd::IChangeable::CM_CONVERT);
+
+	return DoAutosizeProjection(bitmap, bitmapLine, results);
 }
 
 
@@ -218,7 +222,7 @@ int CLineProjectionProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return DoAutosizeProjection(*bitmapPtr, *linePtr, *projectionPtr)? TS_OK: TS_INVALID;
+	return DoProjection(*bitmapPtr, *linePtr, NULL, *projectionPtr)? TS_OK: TS_INVALID;
 }
 
 

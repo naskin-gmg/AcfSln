@@ -41,7 +41,7 @@ public:
 	*/
 	bool DoAutosizeProjection(
 				const iimg::IBitmap& bitmap,
-				const i2d::CLine2d& projectionLine,
+				const i2d::CLine2d& bitmapLine,
 				imeas::IDataSequence& results) const;
 
 	// reimplemented (iipr::IFeatureToImageMapper)

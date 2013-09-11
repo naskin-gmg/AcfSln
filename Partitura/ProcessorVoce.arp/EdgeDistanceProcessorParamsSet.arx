@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3159
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1027
         </Number>
         <Description>
           ACF-Solutions
@@ -252,7 +252,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              Calibration
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Calibration
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               InnerRadius

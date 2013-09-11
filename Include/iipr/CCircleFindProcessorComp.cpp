@@ -157,26 +157,10 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 		return (aoisCount > 0);
 	}
 
-	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
-	const i2d::IObject2d* calibratedAoiPtr = dynamic_cast<const i2d::IObject2d*>(&aoiObject);
-
-	if (m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ICalibration2d* logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
-		if (logToPhysicalTransformPtr != NULL){
-			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiObject.CloneMe());
-
-			if (transformedRegionPtr.IsValid()){
-				if (!transformedRegionPtr->Transform(*logToPhysicalTransformPtr)){
-					return false;
-				}
-
-				calibratedAoiPtr = transformedRegionPtr.GetPtr();
-			}
-		}
-	}
-
-	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(calibratedAoiPtr);
+	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(&aoiObject);
 	if (annulusAoiPtr != NULL){
+		projectionLine.SetCalibration(annulusAoiPtr->GetCalibration());
+
 		double beginAngle = 0;
 		double endAngle = 2 * I_PI;
 		const i2d::CAnnulusSegment* segmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(annulusAoiPtr);
@@ -217,8 +201,8 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			i2d::CVector2d directionVector;
 			directionVector.Init(angle);
 
-			projectionLine.SetPoint1(center + directionVector * annulusAoiPtr->GetInnerRadius());
-			projectionLine.SetPoint2(center + directionVector * annulusAoiPtr->GetOuterRadius());
+			projectionLine.SetPoint1(center + directionVector * maxRadius);
+			projectionLine.SetPoint2(center + directionVector * maxRadius);
 
 			caliperFeaturesConsumerPtr->ResetFeatures();
 			m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesConsumerPtr);

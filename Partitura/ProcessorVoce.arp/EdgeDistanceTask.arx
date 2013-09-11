@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3159
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1027
         </Number>
         <Description>
           ACF-Solutions
@@ -37,7 +37,44 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
+    <Element>
+      <Id>
+        Calibration2dProxy
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Calibration2dProxy
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              CalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              RegionCalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         Caliper
@@ -133,7 +170,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -170,22 +207,6 @@
               <Value>
                 Caliper
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegionCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              RegionCalibrationProvider
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -385,7 +406,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Calibration
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Calibration2dProxy
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               FilterConstraints
@@ -445,31 +485,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="3">
-    <Component>
-      <ExportedId>
-        AnnulusSegment
-      </ExportedId>
-      <ComponentId>
-        ParamsSet/AnnulusSegment
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        CaliperParams
-      </ExportedId>
-      <ComponentId>
-        ParamsSet/CaliperParams
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        Line
-      </ExportedId>
-      <ComponentId>
-        LineCaliperParamsSet/Line
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Edge distance calculation based on caliper

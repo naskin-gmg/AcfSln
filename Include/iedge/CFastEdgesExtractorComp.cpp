@@ -67,6 +67,8 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	iimg::CScanlineMask mask;
 	if (aoiObjectPtr.IsValid()){
+		mask.SetCalibration(bitmap.GetCalibration());
+
 		i2d::CRect clipArea(size);
 		if (mask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &clipArea)){
 			maskPtr = &mask;

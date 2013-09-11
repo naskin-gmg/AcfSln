@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3038
+          3159
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          977
+          1027
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -170,7 +170,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -211,22 +211,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              EnableIntrospection
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              EnableIntrospection
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               FeaturesMapper
             </Id>
             <Type>
@@ -242,22 +226,6 @@
               <Value>
                 Caliper
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegionCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              RegionCalibrationProvider
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -610,7 +578,7 @@
               Reference
             </Type>
             <ExportId>
-              InputCalibrationSupplier
+              InputCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>

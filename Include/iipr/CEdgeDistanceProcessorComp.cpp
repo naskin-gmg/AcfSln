@@ -120,33 +120,16 @@ bool CEdgeDistanceProcessorComp::CalculateCaliperLines(
 		return (aoisCount > 0);
 	}
 
-	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
-	const i2d::IObject2d* calibratedAoiPtr = dynamic_cast<const i2d::IObject2d*>(&aoiObject);
-
-	if (m_regionCalibrationProviderCompPtr.IsValid()){
-		const i2d::ICalibration2d* logToPhysicalTransformPtr = m_regionCalibrationProviderCompPtr->GetCalibration();
-		if (logToPhysicalTransformPtr != NULL){
-			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiObject.CloneMe());
-
-			if (transformedRegionPtr.IsValid()){
-				if (!transformedRegionPtr->Transform(*logToPhysicalTransformPtr)){
-					return false;
-				}
-
-				calibratedAoiPtr = transformedRegionPtr.GetPtr();
-			}
-		}
-	}
-
 	iipr::CCaliperParams workingCaliperParams;
 	iprm::CParamsSet workingCaliperParamsSet;
 	workingCaliperParamsSet.SetEditableParameter(*m_slaveCaliperParamsIdAttrPtr, &workingCaliperParams);
 	workingCaliperParamsSet.SetSlaveSet(&params);
 
-	const i2d::CLine2d* lineAoiPtr = dynamic_cast<const i2d::CLine2d*>(calibratedAoiPtr);
+	const i2d::CLine2d* lineAoiPtr = dynamic_cast<const i2d::CLine2d*>(&aoiObject);
 	if (lineAoiPtr != NULL){
 		// Set projection line for caliper calculation:
-		projectionLine = *lineAoiPtr;
+		projectionLine.CopyFrom(*lineAoiPtr);
+		projectionLine.SetCalibration(lineAoiPtr->GetCalibration());
 
 		CaliperLine caliperLine;
 
@@ -165,8 +148,10 @@ bool CEdgeDistanceProcessorComp::CalculateCaliperLines(
 		return true;
 	}
 
-	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(calibratedAoiPtr);
+	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(&aoiObject);
 	if (annulusAoiPtr != NULL){
+		projectionLine.SetCalibration(annulusAoiPtr->GetCalibration());
+
 		double beginAngle = 0;
 		double endAngle = 2 * I_PI;
 		const i2d::CAnnulusSegment* segmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(annulusAoiPtr);
@@ -190,8 +175,8 @@ bool CEdgeDistanceProcessorComp::CalculateCaliperLines(
 			i2d::CVector2d directionVector;
 			directionVector.Init(angle);
 
-			projectionLine.SetPoint1(center + directionVector * annulusAoiPtr->GetInnerRadius());
-			projectionLine.SetPoint2(center + directionVector * annulusAoiPtr->GetOuterRadius());
+			projectionLine.SetPoint1(center + directionVector * minRadius);
+			projectionLine.SetPoint2(center + directionVector * maxRadius);
 
 			// Do caliper calculation in backward direction:
 			if (!CalculateCaliper(workingCaliperParamsSet, workingCaliperParams, ICaliperParams::DM_BACKWARD, image, caliperLine)){

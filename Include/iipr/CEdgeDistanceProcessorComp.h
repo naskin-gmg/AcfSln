@@ -38,7 +38,6 @@ public:
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", true, "AoiParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "Line");
 		I_ASSIGN(m_slaveCaliperParamsIdAttrPtr, "SlaveCaliperParamsId", "ID of calipera parameters added by this processor to parameter set for slave edge processor", true, "Caliper");
-		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IImageToFeatureProcessor)
@@ -98,7 +97,6 @@ protected:
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_regionCalibrationProviderCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
 	I_ATTR(QByteArray, m_slaveCaliperParamsIdAttrPtr);

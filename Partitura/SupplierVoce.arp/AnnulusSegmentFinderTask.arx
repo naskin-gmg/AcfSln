@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3159
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1027
         </Number>
         <Description>
           ACF-Solutions
@@ -37,7 +37,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="10">
+  <ElementsList count="11">
     <Element>
       <Id>
         Aoi
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               BeginAngle
@@ -70,6 +70,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Calibration
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Calibration2dProxy
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -162,6 +181,43 @@
               <Value>
                 300
               </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Calibration2dProxy
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Calibration2dProxy
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              CalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              RegionCalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -443,7 +499,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -499,22 +555,6 @@
               <Value>
                 Caliper
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegionCalibrationProvider
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              RegionCalibrationProvider
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -755,7 +795,7 @@
               Reference
             </Type>
             <ExportId>
-              InputCalibrationSupplier
+              InputCalibrationProvider
             </ExportId>
             <Data>
               <IsEnabled>

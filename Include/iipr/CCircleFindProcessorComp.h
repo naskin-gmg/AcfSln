@@ -46,7 +46,6 @@ public:
 		I_ASSIGN(m_circleFinderParamsIdAttrPtr, "CircleFinderParamsId", "ID cirlcie finder parameters in parameter set", true, "CircleFinderParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
-		I_ASSIGN(m_regionCalibrationProviderCompPtr, "RegionCalibrationProvider", "Calibration object used for tranformation of region parameters from logical to pixel coordinates", false, "RegionCalibrationProvider");
 	I_END_COMPONENT;
 
 	CCircleFindProcessorComp();
@@ -111,7 +110,6 @@ protected:
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_regionCalibrationProviderCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
 	I_ATTR(QByteArray, m_circleFinderParamsIdAttrPtr);
