@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3161
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1029
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -271,7 +271,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               BitmapProvider
@@ -307,6 +307,25 @@
               </IsEnabled>
               <Value>
                 Framework/LogDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegionCalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapTask
               </Value>
             </Data>
           </AttributeInfo>
