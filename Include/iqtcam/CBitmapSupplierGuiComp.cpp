@@ -20,7 +20,7 @@ namespace iqtcam
 {
 
 
-// protected slots
+// public methods
 
 CBitmapSupplierGuiComp::CBitmapSupplierGuiComp()
 {
@@ -198,7 +198,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 		bitmapPtr = providerPtr->GetBitmap();
 	}
 
-	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
+	if ((bitmapPtr == NULL) || ((bitmapPtr != NULL) && !m_bitmap.CopyFrom(*bitmapPtr))){
 		m_bitmap.ResetImage();
 	}
 
