@@ -30,7 +30,7 @@ CFileAcquisitionComp::CFileAcquisitionComp()
 
 int CFileAcquisitionComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
-			const istd::IPolymorphic* inputPtr,
+			const istd::IPolymorphic* /*inputPtr*/,
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {

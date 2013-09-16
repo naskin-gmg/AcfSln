@@ -554,7 +554,7 @@ void CEdgeLine::CalcVolatile() const
 
 // reimplemented (istd::IChangeable)
 
-void CEdgeLine::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+void CEdgeLine::OnEndChanges(int /*changeFlags*/, istd::IPolymorphic* /*changeParamsPtr*/)
 {
 	m_areVolatileValid = false;
 }
