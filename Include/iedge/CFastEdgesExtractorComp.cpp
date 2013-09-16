@@ -9,6 +9,7 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
+#include "istd/TDelPtr.h"
 #include "imath/CGeneralUnitInfo.h"
 #include "i2d/CPolypoint.h"
 #include "i2d/CVector2d.h"
@@ -119,6 +120,18 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 	}
 
 	container.ExtractLines(weightScale, result, *m_keepSingletonsAttrPtr);
+
+	// copy calibration from bitmap
+	const i2d::ICalibration2d* bitmapCalibrationPtr = bitmap.GetCalibration();
+	if (bitmapCalibrationPtr != NULL){
+		istd::TDelPtr<i2d::ICalibration2d> newCalibration;
+		newCalibration.SetCastedOrRemove(bitmapCalibrationPtr->CloneMe());
+
+		result.SetCalibration(newCalibration.PopPtr(), true);
+	}
+	else{
+		result.SetCalibration(NULL);
+	}
 
 	if (container.IsContainerFull()){
 		SendErrorMessage(0, "Container of nodes is full");

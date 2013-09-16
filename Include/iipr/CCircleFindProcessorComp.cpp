@@ -201,7 +201,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			i2d::CVector2d directionVector;
 			directionVector.Init(angle);
 
-			projectionLine.SetPoint1(center + directionVector * maxRadius);
+			projectionLine.SetPoint1(center + directionVector * minRadius);
 			projectionLine.SetPoint2(center + directionVector * maxRadius);
 
 			caliperFeaturesConsumerPtr->ResetFeatures();
