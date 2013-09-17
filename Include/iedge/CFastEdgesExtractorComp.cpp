@@ -32,6 +32,8 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 			const iimg::IBitmap& bitmap,
 			CEdgeLineContainer& result) const
 {
+	istd::CChangeNotifier notifier(&result);
+
 	result.Reset();
 
 	ibase::CSize size = bitmap.GetImageSize();
@@ -80,34 +82,66 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	int width = size.GetX();
 
-	const quint8* sourceLinePtr = (const quint8*)bitmap.GetLinePtr(0);
-	int sourceLineDiff = bitmap.GetLinesDifference();
-
-	QVector<PixelDescriptor> destLine1(width - 1);
-	QVector<PixelDescriptor> destLine2(width - 1);
-	QVector<PixelDescriptor> destLine3(width - 1);
+	QVector<PixelDescriptor> destLine1(width);
+	QVector<PixelDescriptor> destLine2(width);
+	QVector<PixelDescriptor> destLine3(width);
 
 	PixelDescriptor* destLine1Ptr = &destLine1[0];
 	PixelDescriptor* destLine2Ptr = &destLine2[0];
 	PixelDescriptor* destLine3Ptr = &destLine3[0];
 
-	memset(destLine1Ptr, 0, (width - 1) * sizeof(PixelDescriptor));
-	memset(destLine2Ptr, 0, (width - 1) * sizeof(PixelDescriptor));
-	memset(destLine3Ptr, 0, (width - 1) * sizeof(PixelDescriptor));
+	memset(destLine1Ptr, 0, width * sizeof(PixelDescriptor));
+	memset(destLine2Ptr, 0, width * sizeof(PixelDescriptor));
+	memset(destLine3Ptr, 0, width * sizeof(PixelDescriptor));
 
 	InternalContainer container(*m_maxNodesCountAttrPtr);
 
 	if (maskPtr != NULL){
-		return false;
-	}
-	else{
-		CalcFullDerivativeLine(sourceLinePtr, sourceLinePtr + sourceLineDiff, destLine1Ptr, width);
-		sourceLinePtr += sourceLineDiff;
-		CalcFullDerivativeLine(sourceLinePtr, sourceLinePtr + sourceLineDiff, destLine2Ptr, width);
-		sourceLinePtr += sourceLineDiff;
+		iimg::CScanlineMask resultMask = *maskPtr;
+		resultMask.Intersection(resultMask.GetTranslated(1, 0));
+		resultMask.Intersection(resultMask.GetTranslated(2, 0));
+		resultMask.Intersection(resultMask.GetTranslated(0, 1));
+		resultMask.Intersection(resultMask.GetTranslated(0, 2));
 
-		for (int y = 1; y < size.GetY() - 2; ++y){
-			CalcLine(sourceLinePtr, sourceLinePtr + sourceLineDiff, destLine1Ptr, destLine2Ptr, destLine3Ptr, y, width, threshold2Factor, container);
+		const quint8* prevSourceLinePtr = (const quint8*)bitmap.GetLinePtr(0);
+		const quint8* sourceLinePtr = (const quint8*)bitmap.GetLinePtr(1);
+
+		istd::CIntRange imageRangeH(0, size.GetX());
+
+		for (int y = 0; y < size.GetY(); ++y){
+			sourceLinePtr = (const quint8*)bitmap.GetLinePtr(y);
+
+			const istd::CIntRanges* inputRangesPtr = maskPtr->GetPixelRanges(y);
+			if (inputRangesPtr != NULL){
+				istd::CIntRanges::RangeList rangeList;
+				inputRangesPtr->GetAsList(imageRangeH, rangeList);
+
+				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+							iter != rangeList.constEnd();
+							++iter){
+					const istd::CIntRange& rangeH = *iter;
+
+					CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, rangeH.GetMinValue(), rangeH.GetMaxValue(), destLine3Ptr);
+				}
+			}
+
+			const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
+			if (outputRangesPtr != NULL){
+				Q_ASSERT(y >= 3);
+
+				istd::CIntRanges::RangeList rangeList;
+				outputRangesPtr->GetAsList(imageRangeH, rangeList);
+
+				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+							iter != rangeList.constEnd();
+							++iter){
+					const istd::CIntRange& rangeH = *iter;
+					Q_ASSERT(rangeH.GetMinValue() >= 3);
+					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
+
+					CalcOutputLine(rangeH.GetMinValue(), rangeH.GetMaxValue(), y, threshold2Factor, destLine1Ptr, destLine2Ptr, destLine3Ptr, container);
+				}
+			}
 
 			// move line address in rolling line buffer
 			PixelDescriptor* storedDestLine1Ptr = destLine1Ptr;
@@ -115,7 +149,32 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 			destLine2Ptr = destLine3Ptr;
 			destLine3Ptr = storedDestLine1Ptr;
 
-			sourceLinePtr += sourceLineDiff;
+			prevSourceLinePtr = sourceLinePtr;
+		}
+	}
+	else{
+		const quint8* prevSourceLinePtr = (const quint8*)bitmap.GetLinePtr(0);
+		const quint8* sourceLinePtr = (const quint8*)bitmap.GetLinePtr(1);
+		CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine1Ptr);
+
+		prevSourceLinePtr = sourceLinePtr;
+		sourceLinePtr = (const quint8*)bitmap.GetLinePtr(2);
+		CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine1Ptr);
+
+		prevSourceLinePtr = sourceLinePtr;
+		for (int y = 3; y < size.GetY(); ++y){
+			sourceLinePtr = (const quint8*)bitmap.GetLinePtr(y);
+
+			CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine3Ptr);
+			CalcOutputLine(3, width, y, threshold2Factor, destLine1Ptr, destLine2Ptr, destLine3Ptr, container);
+
+			// move line address in rolling line buffer
+			PixelDescriptor* storedDestLine1Ptr = destLine1Ptr;
+			destLine1Ptr = destLine2Ptr;
+			destLine2Ptr = destLine3Ptr;
+			destLine3Ptr = storedDestLine1Ptr;
+
+			prevSourceLinePtr = sourceLinePtr;
 		}
 	}
 
@@ -236,15 +295,10 @@ inline void CFastEdgesExtractorComp::TryConnectElements(
 	i2d::CVector2d displacement = elementPosition - nodePtr->position;
 
 	double derivativeDotProduct = nodePtr->derivative.GetDotProduct(neightborNodePtr->derivative);
-
 	if (derivativeDotProduct > 0){
-		double derivativeAngleCos = derivativeDotProduct / (nodePtr->derivative.GetLength() * neightborNodePtr->derivative.GetLength());
-
-		double coherenceFactor = (nodePtr->isHorizontal == neightborNodePtr->isHorizontal)? 1: 0.7;
-
 		double orientationFactor = (nodePtr->derivative + neightborNodePtr->derivative).GetCrossProductZ(displacement) / displacement.GetLength2();
 		if (orientationFactor >= 0){
-			double connectionWeight = orientationFactor * derivativeAngleCos * coherenceFactor;
+			double connectionWeight = orientationFactor * derivativeDotProduct * nodePtr->rawWeight * neightborNodePtr->rawWeight;
 			if (			(connectionWeight > nodePtr->nextWeight) &&
 							((neightborNodePtr->prevPtr == NULL) || (neightborNodePtr->prevWeight < connectionWeight))){
 				// disconnect neighbor from previous connection
@@ -268,7 +322,7 @@ inline void CFastEdgesExtractorComp::TryConnectElements(
 			}
 		}
 		else{
-			double connectionWeight = -orientationFactor * derivativeAngleCos * coherenceFactor;
+			double connectionWeight = -orientationFactor * derivativeDotProduct * nodePtr->rawWeight * neightborNodePtr->rawWeight;
 			if (			(connectionWeight > nodePtr->prevWeight) &&
 							((neightborNodePtr->nextPtr == NULL) || (neightborNodePtr->nextWeight < connectionWeight))){
 				// disconnect neighbor from previous connection
@@ -295,176 +349,160 @@ inline void CFastEdgesExtractorComp::TryConnectElements(
 }
 
 
-inline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::AddPointToContour(
-			double posX,
-			double posY,
-			double rawWeight,
-			bool isHorizontal,
-			PixelDescriptor* destLine1,
-			PixelDescriptor* destLine2,
+inline void CFastEdgesExtractorComp::CalcDerivative(
+			const quint8* prevSourceLine,
+			const quint8* sourceLine,
 			int x,
-			int /*y*/,
-			InternalContainer& container)
-{
-	ExtNode* nodePtr = container.AddElementToList();
-	if (nodePtr != NULL){
-		PixelDescriptor& pixelDescriptor = destLine2[x];
+			PixelDescriptor& pixelDescriptor){
+	Q_ASSERT(x > 0);
 
-		nodePtr->position = i2d::CVector2d(posX, posY);
-		nodePtr->derivative = i2d::CVector2d(double(pixelDescriptor.dx) / THRESHOLD_FACTOR, double(pixelDescriptor.dy) / THRESHOLD_FACTOR);
-		nodePtr->rawWeight = rawWeight;
-		nodePtr->prevPtr = NULL;
-		nodePtr->nextPtr = NULL;
-		nodePtr->prevWeight = 0;
-		nodePtr->nextWeight = 0;
-		nodePtr->isHorizontal = isHorizontal;
-
-		pixelDescriptor.listReference = nodePtr;
-
-		// try connects with all already calculated neighbours
-		TryConnectElements(destLine1[x - 1], pixelDescriptor);
-		TryConnectElements(destLine1[x], pixelDescriptor);
-		TryConnectElements(destLine1[x + 1], pixelDescriptor);
-		TryConnectElements(destLine2[x - 1], pixelDescriptor);
-	}
-
-	return nodePtr;
-}
-
-
-inline void CFastEdgesExtractorComp::CalcFullDerivative(
-			const quint8* sourceLine1,
-			const quint8* sourceLine2,
-			PixelDescriptor* destLine,
-			int x){
-	int pixel11 = sourceLine1[x];
-	int pixel21 = sourceLine1[x + 1];
-	int pixel12 = sourceLine2[x];
-	int pixel22 = sourceLine2[x + 1];
+	int pixel11 = prevSourceLine[x - 1];
+	int pixel21 = prevSourceLine[x];
+	int pixel12 = sourceLine[x - 1];
+	int pixel22 = sourceLine[x];
 
 	int dx = pixel11 + pixel12 - pixel21 - pixel22;
 	int dy = pixel11 + pixel21 - pixel12 - pixel22;
 
-	PixelDescriptor& pixelDescr = destLine[x];
-
-	pixelDescr.brightness = qint16(pixel11 + pixel21 + pixel12 + pixel22);
-	pixelDescr.dx = qint16(dx);
-	pixelDescr.dy = qint16(dy);
-	pixelDescr.dirLength2 = quint32(dx * dx + dy * dy);
-	pixelDescr.listReference = NULL;
+	pixelDescriptor.brightness = qint16(pixel11 + pixel21 + pixel12 + pixel22);
+	pixelDescriptor.dx = qint16(dx);
+	pixelDescriptor.dy = qint16(dy);
+	pixelDescriptor.dirLength2 = quint32(dx * dx + dy * dy);
+	pixelDescriptor.listReference = NULL;
 }
 
 
-inline void CFastEdgesExtractorComp::CalcFullDerivativeLine(
-			const quint8* sourceLine1,
-			const quint8* sourceLine2,
-			PixelDescriptor* destLine,
-			int sourceWidth){
-	for (int x = 0; x < sourceWidth - 1; ++x){
-		CalcFullDerivative(sourceLine1, sourceLine2, destLine, x);
+inline void CFastEdgesExtractorComp::CalcDerivativeLine(
+			const quint8* prevSourceLine,
+			const quint8* sourceLine,
+			int inputBeginX,
+			int inputEndX,
+			PixelDescriptor* destLine){
+	for (int x = inputBeginX + 1; x < inputEndX; ++x){
+		PixelDescriptor& pixelDescriptor = destLine[x];
+
+		CalcDerivative(prevSourceLine, sourceLine, x, pixelDescriptor);
 	}
 }
 
 
 inline void CFastEdgesExtractorComp::CalcPoint(
-			const quint8* sourceLine1,
-			const quint8* sourceLine2,
-			PixelDescriptor* destLine1,
-			PixelDescriptor* destLine2,
-			PixelDescriptor* destLine3,
 			int x,
 			int y,
 			quint32 threshold2Factor,
+			PixelDescriptor* prevPrevDestLine,
+			PixelDescriptor* prevDestLine,
+			PixelDescriptor* destLine,
 			InternalContainer& container)
 {
-	CalcFullDerivative(sourceLine1, sourceLine2, destLine3, x + 1);	// shift 1 line
+	Q_ASSERT(x >= 3);
+	Q_ASSERT(y >= 3);
 
-	PixelDescriptor& pixelDescriptor = destLine2[x];
+	PixelDescriptor& centralDescriptor = prevDestLine[x - 1];
 
-	quint32 dirLength2 = pixelDescriptor.dirLength2;
+	quint32 dirLength2 = centralDescriptor.dirLength2;
 
-	if (dirLength2 > threshold2Factor){
-		const PixelDescriptor& leftDescriptor = destLine2[x - 1];
-		const PixelDescriptor& rightDescriptor = destLine2[x + 1];
-		const PixelDescriptor& topDescriptor = destLine1[x];
-		const PixelDescriptor& bottomDescriptor = destLine3[x];
-
-		int left2Diff = dirLength2 - leftDescriptor.dirLength2;
-		int right2Diff = dirLength2 - rightDescriptor.dirLength2;
-		int top2Diff = dirLength2 - topDescriptor.dirLength2;
-		int bottom2Diff = dirLength2 - bottomDescriptor.dirLength2;
-
-		if (((left2Diff >= 0) && (right2Diff > 0)) || ((top2Diff >= 0) && (bottom2Diff > 0))){
-			double horizStrength = 0;
-			if ((left2Diff >= 0) && (right2Diff > 0)){
-				horizStrength = left2Diff + right2Diff;
-			}
-
-			double vertStrength = 0;
-			if ((top2Diff >= 0) && (bottom2Diff > 0)){
-				vertStrength = top2Diff + bottom2Diff;
-			}
-
-			if (horizStrength + vertStrength > threshold2Factor){
-				double dirLength = qSqrt(dirLength2);
-				double rawWeight = qSqrt(horizStrength + vertStrength);
-
-				if (horizStrength > vertStrength){
-//					if (qAbs(pixelDescriptor.dx) * 2 > qAbs(pixelDescriptor.dy)){
-						double leftDiff = qSqrt(dirLength) - qSqrt(qSqrt(leftDescriptor.dirLength2));
-						Q_ASSERT(leftDiff >= 0);
-						double rightDiff = qSqrt(dirLength) - qSqrt(qSqrt(rightDescriptor.dirLength2));
-						Q_ASSERT(rightDiff >= 0);
-
-						double shift = leftDiff / (leftDiff + rightDiff);
-
-						AddPointToContour(
-									x + 0.5 + shift, y + 1,
-									rawWeight,
-									true,
-									destLine1, destLine2,
-									x, y,
-									container);
-//					}
-				}
-				else{
-//					if (qAbs(pixelDescriptor.dy) * 2 > qAbs(pixelDescriptor.dx)){
-						double topDiff = qSqrt(dirLength) - qSqrt(qSqrt(topDescriptor.dirLength2));
-						Q_ASSERT(topDiff >= 0);
-						double bottomDiff = qSqrt(dirLength) - qSqrt(qSqrt(bottomDescriptor.dirLength2));
-						Q_ASSERT(bottomDiff >= 0);
-
-						double shift = topDiff / (topDiff + bottomDiff);
-
-						AddPointToContour(
-									x + 1, y + 0.5 + shift,
-									rawWeight,
-									false,
-									destLine1, destLine2,
-									x, y,
-									container);
-//					}
-				}
-			}
-		}
+	if (dirLength2 <= threshold2Factor){
+		return;	// edge to weak
 	}
+
+	const PixelDescriptor& leftDescriptor = prevDestLine[x - 2];
+	const PixelDescriptor& rightDescriptor = prevDestLine[x];
+	const PixelDescriptor& topDescriptor = prevPrevDestLine[x - 1];
+	const PixelDescriptor& bottomDescriptor = destLine[x - 1];
+
+	int left2Diff = dirLength2 - leftDescriptor.dirLength2;
+	int right2Diff = dirLength2 - rightDescriptor.dirLength2;
+	int top2Diff = dirLength2 - topDescriptor.dirLength2;
+	int bottom2Diff = dirLength2 - bottomDescriptor.dirLength2;
+
+	if (((left2Diff < 0) || (right2Diff <= 0)) && ((top2Diff < 0) || (bottom2Diff <= 0))){
+		return;	// it is not local maximum
+	}
+	double horizStrength2 = 0;
+	if ((left2Diff >= 0) && (right2Diff > 0)){
+		horizStrength2 = left2Diff + right2Diff;
+	}
+
+	double vertStrength2 = 0;
+	if ((top2Diff >= 0) && (bottom2Diff > 0)){
+		vertStrength2 = top2Diff + bottom2Diff;
+	}
+/*
+	if (horizStrength2 + vertStrength2 <= threshold2Factor){
+		return;	// not enough strong compared to noise
+	}
+*/
+	ExtNode* nodePtr = container.AddElementToList();
+	if (nodePtr == NULL){
+		return;	// edge cannot be allocated
+	}
+
+	bool isHorizontal = (horizStrength2 > vertStrength2);
+
+	// calculate new point values
+	double dirLength = qSqrt(dirLength2);
+	nodePtr->derivative = i2d::CVector2d(double(centralDescriptor.dx) / THRESHOLD_FACTOR, double(centralDescriptor.dy) / THRESHOLD_FACTOR);
+	nodePtr->rawWeight = qSqrt(horizStrength2 + vertStrength2);
+	nodePtr->prevPtr = NULL;
+	nodePtr->nextPtr = NULL;
+	nodePtr->prevWeight = 0;
+	nodePtr->nextWeight = 0;
+	nodePtr->isHorizontal = isHorizontal;
+
+	if (isHorizontal){
+		double leftDiff = qSqrt(dirLength) - qSqrt(qSqrt(leftDescriptor.dirLength2));
+		Q_ASSERT(leftDiff >= 0);
+		double rightDiff = qSqrt(dirLength) - qSqrt(qSqrt(rightDescriptor.dirLength2));
+		Q_ASSERT(rightDiff >= 0);
+
+		double shift = leftDiff / (leftDiff + rightDiff);
+
+		nodePtr->position.SetX(x - 1.5 + shift);
+		nodePtr->position.SetY(y - 1);
+	}
+	else{
+		double topDiff = qSqrt(dirLength) - qSqrt(qSqrt(topDescriptor.dirLength2));
+		Q_ASSERT(topDiff >= 0);
+		double bottomDiff = qSqrt(dirLength) - qSqrt(qSqrt(bottomDescriptor.dirLength2));
+		Q_ASSERT(bottomDiff >= 0);
+
+		double shift = topDiff / (topDiff + bottomDiff);
+
+		nodePtr->position.SetX(x - 1);
+		nodePtr->position.SetY(y - 1.5 + shift);
+	}
+
+	PixelDescriptor& pixelDescriptor = destLine[x - 1];
+	pixelDescriptor.listReference = nodePtr;
+
+	// try connects with all already calculated neighbours
+//	TryConnectElements(prevPrevDestLine[x - 1], pixelDescriptor);
+
+	TryConnectElements(prevDestLine[x - 2], pixelDescriptor);
+	TryConnectElements(prevDestLine[x - 1], pixelDescriptor);
+	TryConnectElements(prevDestLine[x], pixelDescriptor);
+
+//	TryConnectElements(destLine[x - 3], pixelDescriptor);
+	TryConnectElements(destLine[x - 2], pixelDescriptor);
 }
 
 
-inline void CFastEdgesExtractorComp::CalcLine(
-			const quint8* sourceLine1,
-			const quint8* sourceLine2,
-			PixelDescriptor* destLine1,
-			PixelDescriptor* destLine2,
-			PixelDescriptor* destLine3,
+inline void CFastEdgesExtractorComp::CalcOutputLine(
+			int outputBeginX,
+			int outputEndX,
 			int y,
-			int sourceWidth,
 			quint32 threshold2Factor,
-			InternalContainer& container){
-	CalcFullDerivative(sourceLine1, sourceLine2, destLine3, 0);	// no shift
-	CalcFullDerivative(sourceLine1, sourceLine2, destLine3, 1);	// no shift
-	for (int x = 1; x < sourceWidth - 2; x++){
-		CalcPoint(sourceLine1, sourceLine2, destLine1, destLine2, destLine3, x, y, threshold2Factor, container);	// no shift
+			PixelDescriptor* prevPrevDestLine,
+			PixelDescriptor* prevDestLine,
+			PixelDescriptor* destLine,
+			InternalContainer& container)
+{
+	Q_ASSERT(outputBeginX >= 3);
+	Q_ASSERT(outputBeginX <= outputEndX);
+
+	for (int x = outputBeginX; x < outputEndX; x++){
+		CalcPoint(x, y, threshold2Factor, prevPrevDestLine, prevDestLine, destLine, container);
 	}
 }
 

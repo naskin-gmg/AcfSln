@@ -108,53 +108,36 @@ private:
 	};
 
 	// static methods
-	static void TryConnectElements(
-					PixelDescriptor& neightborPixel,
-					PixelDescriptor& pixel);
-
-	static ExtNode* AddPointToContour(
-				double posX,
-				double posY,
-				double rawWeight,
-				bool isHorizontal,
-				PixelDescriptor* destLine1,
-				PixelDescriptor* destLine2,
+	static void CFastEdgesExtractorComp::TryConnectElements(
+				PixelDescriptor& neightborPixel,
+				PixelDescriptor& pixel);
+	static void CFastEdgesExtractorComp::CalcDerivative(
+				const quint8* prevSourceLine,
+				const quint8* sourceLine,
 				int x,
-				int /*y*/,
-				InternalContainer& container);
-
-	static void CalcFullDerivative(
-				const quint8* sourceLine1,
-				const quint8* sourceLine2,
-				PixelDescriptor* destLine,
-				int x);
-
-	static void CalcFullDerivativeLine(
-				const quint8* sourceLine1,
-				const quint8* sourceLine2,
-				PixelDescriptor* destLine,
-				int sourceWidth);
-
-	static void CalcPoint(
-				const quint8* sourceLine1,
-				const quint8* sourceLine2,
-				PixelDescriptor* destLine1,
-				PixelDescriptor* destLine2,
-				PixelDescriptor* destLine3,
+				PixelDescriptor& pixelDescriptor);
+	static void CFastEdgesExtractorComp::CalcDerivativeLine(
+				const quint8* prevSourceLine,
+				const quint8* sourceLine,
+				int inputBeginX,
+				int inputEndX,
+				PixelDescriptor* destLine);
+	static void CFastEdgesExtractorComp::CalcPoint(
 				int x,
 				int y,
 				quint32 threshold2Factor,
+				PixelDescriptor* prevPrevDestLine,
+				PixelDescriptor* prevDestLine,
+				PixelDescriptor* destLine,
 				InternalContainer& container);
-
-	static void CalcLine(
-				const quint8* sourceLine1,
-				const quint8* sourceLine2,
-				PixelDescriptor* destLine1,
-				PixelDescriptor* destLine2,
-				PixelDescriptor* destLine3,
+	static void CFastEdgesExtractorComp::CalcOutputLine(
+				int outputBeginX,
+				int outputEndX,
 				int y,
-				int sourceWidth,
 				quint32 threshold2Factor,
+				PixelDescriptor* prevPrevDestLine,
+				PixelDescriptor* prevDestLine,
+				PixelDescriptor* destLine,
 				InternalContainer& container);
 
 	I_REF(imeas::INumericValue, m_defaultThresholdParamCompPtr);
