@@ -109,7 +109,7 @@ private:
 
 	// static methods
 	static void CFastEdgesExtractorComp::TryConnectElements(
-				PixelDescriptor& neightborPixel,
+				const PixelDescriptor& neightborPixel,
 				PixelDescriptor& pixel);
 	static void CFastEdgesExtractorComp::CalcDerivative(
 				const quint8* prevSourceLine,

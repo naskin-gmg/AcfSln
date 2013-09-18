@@ -280,7 +280,7 @@ const imath::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int ind
 // private static methods
 
 inline void CFastEdgesExtractorComp::TryConnectElements(
-			PixelDescriptor& neightborPixel,
+			const PixelDescriptor& neightborPixel,
 			PixelDescriptor& pixel)
 {
 	ExtNode* neightborNodePtr = neightborPixel.listReference;
@@ -291,58 +291,25 @@ inline void CFastEdgesExtractorComp::TryConnectElements(
 	ExtNode* nodePtr = pixel.listReference;
 	Q_ASSERT(nodePtr != NULL);
 
-	const i2d::CVector2d& elementPosition = neightborNodePtr->position;
-	i2d::CVector2d displacement = elementPosition - nodePtr->position;
+	i2d::CVector2d displacement = neightborNodePtr->position - nodePtr->position;
 
 	double derivativeDotProduct = nodePtr->derivative.GetDotProduct(neightborNodePtr->derivative);
 	if (derivativeDotProduct > 0){
 		double orientationFactor = (nodePtr->derivative + neightborNodePtr->derivative).GetCrossProductZ(displacement) / displacement.GetLength2();
 		if (orientationFactor >= 0){
 			double connectionWeight = orientationFactor * derivativeDotProduct * nodePtr->rawWeight * neightborNodePtr->rawWeight;
-			if (			(connectionWeight > nodePtr->nextWeight) &&
-							((neightborNodePtr->prevPtr == NULL) || (neightborNodePtr->prevWeight < connectionWeight))){
-				// disconnect neighbor from previous connection
-				if (neightborNodePtr->prevPtr != NULL){
-					Q_ASSERT(neightborNodePtr->prevPtr->nextPtr == neightborNodePtr);
-
-					neightborNodePtr->prevPtr->nextPtr = NULL;
-				}
-
-				if (nodePtr->nextPtr != NULL){
-					Q_ASSERT(nodePtr->nextPtr->prevPtr == nodePtr);
-
-					nodePtr->nextPtr->prevPtr = NULL;
-				}
-
-				// connect both nodes
+			if (connectionWeight > nodePtr->nextWeight){
+				// connect as next
 				nodePtr->nextPtr = neightborNodePtr;
 				nodePtr->nextWeight = connectionWeight;
-				neightborNodePtr->prevPtr = nodePtr;
-				neightborNodePtr->prevWeight = connectionWeight;
 			}
 		}
 		else{
 			double connectionWeight = -orientationFactor * derivativeDotProduct * nodePtr->rawWeight * neightborNodePtr->rawWeight;
-			if (			(connectionWeight > nodePtr->prevWeight) &&
-							((neightborNodePtr->nextPtr == NULL) || (neightborNodePtr->nextWeight < connectionWeight))){
-				// disconnect neighbor from previous connection
-				if (neightborNodePtr->nextPtr != NULL){
-					Q_ASSERT(neightborNodePtr->nextPtr->prevPtr == neightborNodePtr);
-
-					neightborNodePtr->nextPtr->prevPtr = NULL;
-				}
-
-				if (nodePtr->prevPtr != NULL){
-					Q_ASSERT(nodePtr->prevPtr->nextPtr == nodePtr);
-
-					nodePtr->prevPtr->nextPtr = NULL;
-				}
-
-				// connect both nodes
+			if (connectionWeight > nodePtr->prevWeight){
+				// connect as previous
 				nodePtr->prevPtr = neightborNodePtr;
 				nodePtr->prevWeight = connectionWeight;
-				neightborNodePtr->nextPtr = nodePtr;
-				neightborNodePtr->nextWeight = connectionWeight;
 			}
 		}
 	}
@@ -477,13 +444,13 @@ inline void CFastEdgesExtractorComp::CalcPoint(
 	pixelDescriptor.listReference = nodePtr;
 
 	// try connects with all already calculated neighbours
-//	TryConnectElements(prevPrevDestLine[x - 1], pixelDescriptor);
+	TryConnectElements(prevPrevDestLine[x - 1], pixelDescriptor);
 
 	TryConnectElements(prevDestLine[x - 2], pixelDescriptor);
 	TryConnectElements(prevDestLine[x - 1], pixelDescriptor);
 	TryConnectElements(prevDestLine[x], pixelDescriptor);
 
-//	TryConnectElements(destLine[x - 3], pixelDescriptor);
+	TryConnectElements(destLine[x - 3], pixelDescriptor);
 	TryConnectElements(destLine[x - 2], pixelDescriptor);
 }
 
@@ -543,10 +510,92 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 			CEdgeLineContainer& result,
 			bool keepSingletons)
 {
-	// mark all as not extracted
+	// mark all as not extracted and make connections symmetric
 	for (int i = 0; i < m_freeIndex; ++i){
 		ExtNode& node = m_buffer[i];
 		node.isExtracted = false;
+
+		if (node.nextWeight > node.prevWeight){
+			if (node.nextPtr != NULL){
+				Q_ASSERT(node.nextPtr < &node);	// only connections to earlier elements should be generated!
+
+				if (node.nextPtr->prevWeight < node.nextWeight){
+					if (node.nextPtr->prevPtr != NULL){
+						Q_ASSERT(node.nextPtr->prevPtr->nextPtr == node.nextPtr);	// all earlier connections are already symmetric
+
+						node.nextPtr->prevPtr->nextPtr = NULL;
+						node.nextPtr->prevPtr->nextWeight = 0;
+					}
+
+					node.nextPtr->prevPtr = &node;
+					node.nextPtr->prevWeight = node.nextWeight;
+				}
+				else{
+					node.nextPtr = NULL;
+					node.nextWeight = 0;
+				}
+			}
+
+			if (node.prevPtr != NULL){
+				Q_ASSERT(node.prevPtr < &node);	// only connections to earlier elements should be generated!
+
+				if (node.prevPtr->nextWeight < node.prevWeight){
+					if (node.prevPtr->nextPtr != NULL){
+						Q_ASSERT(node.prevPtr->nextPtr->prevPtr == node.prevPtr);	// all earlier connections are already symmetric
+
+						node.prevPtr->nextPtr->prevPtr = NULL;
+						node.prevPtr->nextPtr->prevWeight = 0;
+					}
+
+					node.prevPtr->nextPtr = &node;
+					node.prevPtr->nextWeight = node.prevWeight;
+				}
+				else{
+					node.prevPtr = NULL;
+					node.prevWeight = 0;
+				}
+			}
+		}
+		else{
+			if (node.prevPtr != NULL){
+				Q_ASSERT(node.prevPtr < &node);	// only connections to earlier elements should be generated!
+
+				if (node.prevPtr->nextWeight < node.prevWeight){
+					if (node.prevPtr->nextPtr != NULL){
+						Q_ASSERT(node.prevPtr->nextPtr->prevPtr == node.prevPtr);	// all earlier connections are already symmetric
+
+						node.prevPtr->nextPtr->prevPtr = NULL;
+						node.prevPtr->nextPtr->prevWeight = 0;
+					}
+
+					node.prevPtr->nextPtr = &node;
+					node.prevPtr->nextWeight = node.prevWeight;
+				}
+				else{
+					node.prevPtr = NULL;
+					node.prevWeight = 0;
+				}
+			}
+			if (node.nextPtr != NULL){
+				Q_ASSERT(node.nextPtr < &node);	// only connections to earlier elements should be generated!
+
+				if (node.nextPtr->prevWeight < node.nextWeight){
+					if (node.nextPtr->prevPtr != NULL){
+						Q_ASSERT(node.nextPtr->prevPtr->nextPtr == node.nextPtr);	// all earlier connections are already symmetric
+
+						node.nextPtr->prevPtr->nextPtr = NULL;
+						node.nextPtr->prevPtr->nextWeight = 0;
+					}
+
+					node.nextPtr->prevPtr = &node;
+					node.nextPtr->prevWeight = node.nextWeight;
+				}
+				else{
+					node.nextPtr = NULL;
+					node.nextWeight = 0;
+				}
+			}
+		}
 	}
 
 	// looking for opened edges
