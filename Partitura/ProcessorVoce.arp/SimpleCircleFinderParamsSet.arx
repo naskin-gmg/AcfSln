@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3010
+          3174
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          968
+          1038
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -494,7 +494,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        Aoi
+      </ExportedId>
+      <ComponentId>
+        AOI
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         CaliperParams
