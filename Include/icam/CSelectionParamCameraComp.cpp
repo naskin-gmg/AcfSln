@@ -131,19 +131,16 @@ const iprm::IParamsSet* CSelectionParamCameraComp::CreateParamsSet(const iprm::I
 {
 	const iprm::IParamsSet* selectedParamsPtr = NULL;
 
-	if (m_paramsManagerCompPtr.IsValid()){
-		int selectedIndex = -1;
+	int selectedIndex = *m_defaultIndexAttrPtr;
+	iprm::TParamsPtr<iprm::ISelectionParam> selectionPtr(paramsPtr, m_selectionIdAttrPtr, m_defaultSelectionCompPtr, false);
+	if (selectionPtr.IsValid()){
+		selectedIndex = selectionPtr->GetSelectedOptionIndex();
+	}
 
-		iprm::TParamsPtr<iprm::ISelectionParam> selectionPtr(paramsPtr, *m_selectionIdAttrPtr, false);
-		if (selectionPtr.IsValid()){
-			selectedIndex = selectionPtr->GetSelectedOptionIndex();
-		}
-		else{
-			selectedIndex = *m_defaultIndexAttrPtr;
-		}
-
-		if ((selectedIndex >= 0) && selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount()){
-			selectedParamsPtr = m_paramsManagerCompPtr->GetParamsSet(selectedIndex);
+	iprm::TParamsPtr<iprm::IParamsManager> managerPtr(paramsPtr, m_paramsManagerIdAttrPtr, m_defaultParamsManagerCompPtr, true);
+	if (managerPtr.IsValid()){
+		if ((selectedIndex >= 0) && selectedIndex < managerPtr->GetParamsSetsCount()){
+			selectedParamsPtr = managerPtr->GetParamsSet(selectedIndex);
 		}
 	}
 

@@ -24,9 +24,11 @@ public:
 	typedef CCameraDelegatorComp BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectionParamCameraComp);
-		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input");
+		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", false, "CameraIndex");
 		I_ASSIGN(m_defaultIndexAttrPtr, "DefaultIndex", "Default selected index, if negative no selected parameter ID will be used", true, 0);
-		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager");
+		I_ASSIGN(m_paramsManagerIdAttrPtr, "ParamsManagerId", "ID of parameters manager in parameter set", false, "ParamsManager");
+		I_ASSIGN(m_defaultSelectionCompPtr, "DefaultSelection", "Selection used if no selection ID defined", false, "Input");
+		I_ASSIGN(m_defaultParamsManagerCompPtr, "DefaultParamsManager", "Manager of parameter set used to realize selection if no manager ID defined", false, "ParamsManager");
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
@@ -79,7 +81,9 @@ protected:
 private:
 	I_ATTR(QByteArray, m_selectionIdAttrPtr);
 	I_ATTR(int, m_defaultIndexAttrPtr);
-	I_REF(iprm::IParamsManager, m_paramsManagerCompPtr);
+	I_ATTR(QByteArray, m_paramsManagerIdAttrPtr);
+	I_REF(iprm::ISelectionParam, m_defaultSelectionCompPtr);
+	I_REF(iprm::IParamsManager, m_defaultParamsManagerCompPtr);
 
 	typedef istd::TDelPtr<const iprm::IParamsSet> ParamSetPtr;
 	/**
