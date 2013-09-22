@@ -1,6 +1,6 @@
 import qbs.base 1.0
-import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
-import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
+import "../../../Config/Qbs/AcfApplication.qbs" as AcfApplication
+import "../../../Config/Qbs/AcfStaticLibrary.qbs" as AcfStaticLibrary
 
 Project{
 	StaticLibrary{
@@ -26,7 +26,7 @@ Project{
 		Depends{ name: "acf" }
 	}
 
-	ApplicationProduct{
+	AcfApplication{
 		name: "CompositorExe"
 		targetName: "Compositor"
 
