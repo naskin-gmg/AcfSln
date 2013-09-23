@@ -196,7 +196,7 @@ bool CUsersManagerComp::Serialize(iser::IArchive& archive)
 
 void CUsersManagerComp::OnComponentCreated()
 {
-	icomp::CComponentBase::OnComponentCreated();
+	BaseClass::OnComponentCreated();
 
 	Reset();
 
