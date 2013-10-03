@@ -9,6 +9,24 @@ namespace iipr
 {
 
 
+void CFeaturesContainer::RemoveFeature(int featureIndex)
+{
+	m_featuresList.RemoveAt(featureIndex);
+}
+
+
+imeas::INumericValue& CFeaturesContainer::GetFeatureRef(int index)
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
+
+	imeas::INumericValue* featurePtr = m_featuresList.GetAt(index);
+	Q_ASSERT(featurePtr != NULL);
+
+	return *featurePtr;
+}
+
+
 // reimplemented (iipr::IFeaturesConsumer)
 
 void CFeaturesContainer::ResetFeatures()
@@ -47,7 +65,10 @@ const imeas::INumericValue& CFeaturesContainer::GetNumericValue(int index) const
 	Q_ASSERT(index >= 0);
 	Q_ASSERT(index < GetValuesCount());
 
-	return *m_featuresList.GetAt(index);
+	const imeas::INumericValue* featurePtr = m_featuresList.GetAt(index);
+	Q_ASSERT(featurePtr != NULL);
+
+	return *featurePtr;
 }
 
 

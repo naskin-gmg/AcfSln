@@ -10,6 +10,7 @@
 #include "iedge/CFastEdgesExtractorComp.h"
 #include "iedge/CExtractedEdgeLinesSupplierComp.h"
 #include "iedge/CProcessedEdgeLinesSupplierComp.h"
+#include "iedge/CEdgeBasedFeaturesSupplierComp.h"
 
 #include "iedgegui/CEdgeLinesSupplierGuiComp.h"
 
@@ -26,6 +27,7 @@ typedef iedge::CEdgesReductorComp EdgesReductor;
 typedef iedge::CFastEdgesExtractorComp FastEdgesExtractor;
 typedef icomp::TModelCompWrap<iedge::CExtractedEdgeLinesSupplierComp> ExtractedEdgeLinesSupplier;
 typedef icomp::TModelCompWrap<iedge::CProcessedEdgeLinesSupplierComp> ProcessedEdgeLinesSupplier;
+typedef icomp::TModelCompWrap<iedge::CEdgeBasedFeaturesSupplierComp> EdgeBasedFeaturesSupplier;
 typedef iedgegui::CEdgeLinesSupplierGuiComp EdgeLinesSupplierGui;
 
 

@@ -58,7 +58,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib ifile.lib QtGui4.lib QtSvg4.lib phonon4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib QtGui4.lib QtSvg4.lib phonon4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
@@ -128,7 +128,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib ifile.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtSvgd4.lib phonond4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib QtGuid4.lib QtSvgd4.lib phonond4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"

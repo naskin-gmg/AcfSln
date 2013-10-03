@@ -36,7 +36,12 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			ProcessedEdgeLinesSupplier,
 			"Edge line supplier provide edges from another edge supplier",
-			"Contours Edges Borders Lines Polylines Supplier Delegated Converted Transformed" IM_CATEGORY(I_GUI) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+			"Contours Edges Borders Lines Polylines Supplier Delegated Converted Transformed" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
+			EdgeBasedFeaturesSupplier,
+			"Features supplier (search) using edge lines and external processor",
+			"Contours Edges Borders Lines Supplier Search Position Orientation" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			EdgeLinesSupplierGui,

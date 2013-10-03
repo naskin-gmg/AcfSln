@@ -20,6 +20,16 @@ class CFeaturesContainer:
 			virtual public imeas::INumericValueProvider
 {
 public:
+	/**
+		Remove feature at selected index.
+		The following elements will be shift, size of this container will be decreased.
+	*/
+	void RemoveFeature(int featureIndex);
+	/**
+		Get access to stored feature.
+	*/
+	imeas::INumericValue& GetFeatureRef(int index);
+
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
 	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
