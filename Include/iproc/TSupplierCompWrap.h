@@ -46,6 +46,9 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 		I_REGISTER_INTERFACE(ISupplier);
+		I_REGISTER_SUBELEMENT(TaskLog);
+		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, ilog::IMessageConsumer, ExtractTaskLog);
+		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, istd::IPolymorphic, ExtractTaskLog);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -161,6 +164,13 @@ private:
 
 		TSupplierCompWrap<Product>& m_parent;
 	};
+
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractTaskLog(TSupplierCompWrap& component)
+	{
+		return &component;
+	}
 
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
