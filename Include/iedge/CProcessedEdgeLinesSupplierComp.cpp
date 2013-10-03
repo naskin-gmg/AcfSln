@@ -61,8 +61,8 @@ void CProcessedEdgeLinesSupplierComp::OnComponentCreated()
 	}
 
 	// Force components initialization
-	m_edgeLinesProviderCompPtr.IsValid();
-	m_edgesProcessorCompPtr.IsValid();
+	m_edgeLinesProviderCompPtr.EnsureInitialized();
+	m_edgesProcessorCompPtr.EnsureInitialized();
 }
 
 

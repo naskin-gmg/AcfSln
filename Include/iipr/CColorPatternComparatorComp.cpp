@@ -279,9 +279,9 @@ void CColorPatternComparatorComp::OnComponentCreated()
 	}
 
 	// Force components initialization
-	m_workingPatternProviderCompPtr.IsValid();
-	m_teachedPatternProviderCompPtr.IsValid();
-	m_dataStatisticsProcessorCompPtr.IsValid();
+	m_workingPatternProviderCompPtr.EnsureInitialized();
+	m_teachedPatternProviderCompPtr.EnsureInitialized();
+	m_dataStatisticsProcessorCompPtr.EnsureInitialized();
 }
 
 

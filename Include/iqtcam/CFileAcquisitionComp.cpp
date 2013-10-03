@@ -168,9 +168,9 @@ void CFileAcquisitionComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	// preinitialize components
-	m_bitmapLoaderCompPtr.IsValid();
-	m_defaultDirParamCompPtr.IsValid();
-	m_lastFileNameCompPtr.IsValid();
+	m_bitmapLoaderCompPtr.EnsureInitialized();
+	m_defaultDirParamCompPtr.EnsureInitialized();
+	m_lastFileNameCompPtr.EnsureInitialized();
 }
 
 

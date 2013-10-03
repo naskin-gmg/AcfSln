@@ -325,7 +325,7 @@ void CSearchBasedFeaturesSupplierComp::OnComponentCreated()
 	}
 
 	// Force initialization to avoid crash in multithreading
-	m_searchProcessorCompPtr.IsValid();
+	m_searchProcessorCompPtr.EnsureInitialized();
 }
 
 

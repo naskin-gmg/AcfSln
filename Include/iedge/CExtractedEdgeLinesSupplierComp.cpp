@@ -68,8 +68,8 @@ void CExtractedEdgeLinesSupplierComp::OnComponentCreated()
 	}
 
 	// Force components initialization
-	m_bitmapProviderCompPtr.IsValid();
-	m_edgesExtractorCompPtr.IsValid();
+	m_bitmapProviderCompPtr.EnsureInitialized();
+	m_edgesExtractorCompPtr.EnsureInitialized();
 }
 
 
