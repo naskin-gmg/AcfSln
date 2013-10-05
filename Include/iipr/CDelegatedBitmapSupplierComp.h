@@ -62,7 +62,7 @@ protected:
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages() const;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 	// reimplemented (icomp::CComponentBase)

@@ -13,14 +13,6 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::ISimpleResultsProvider)
-
-CSimpleResultsContainer* CPositionFromImageSupplierComp::GetResults() const
-{
-	return &m_intermediateResults;
-}
-
-
 // reimplemented (imeas::INumericValueProvider)
 
 int CPositionFromImageSupplierComp::GetValuesCount() const
@@ -66,22 +58,12 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) const
 {
 	m_outputCalibrationPtr.Reset();
-	m_intermediateResults.Reset();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_processorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (bitmapPtr != NULL){
 			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
-
-			if (*m_introspectionOnAttrPtr){
-				iipr::ISimpleResultsConsumer* intermediateResultsProviderPtr = 
-					dynamic_cast<iipr::ISimpleResultsConsumer*>(m_processorCompPtr.GetPtr());
-
-				if (intermediateResultsProviderPtr != NULL){
-					intermediateResultsProviderPtr->SetResultsBuffer(&m_intermediateResults);
-				}				
-			}
 
 			Timer performanceTimer(this, "Calculation of position");
 

@@ -808,7 +808,7 @@ void CInspectionTaskGuiComp::UpdateTaskMessages()
 		for (int subTaskIndex = 0; subTaskIndex < subtasksCount; subTaskIndex++){
 			iproc::ISupplier* subTaskPtr = taskPtr->GetSubtask(subTaskIndex);
 			if (subTaskPtr != NULL){
-				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages();
+				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages(iproc::ISupplier::WMT_RESULTS);
 				if (messageContainerPtr != NULL){
 					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex);
 				}

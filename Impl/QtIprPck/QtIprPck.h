@@ -2,10 +2,6 @@
 #define QtIprPck_included
 
 
-// ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
-
 // ACF-Solutions
 #include "iqtipr/CValueSupplierGuiComp.h"
 #include "iqtipr/CCaliperParamsGuiComp.h"
@@ -34,7 +30,7 @@ typedef iqtipr::CCircleFinderParamsGuiComp CircleFinderParamsGui;
 typedef iqtipr::CSearchBasedFeaturesSupplierGuiComp SearchBasedFeaturesSupplierGui;
 typedef iqtipr::CGeneralSearchParamsGuiComp GeneralSearchParamsGui;
 typedef iqtipr::CConvolution2dParamsGuiComp Convolution2dParamsGui;
-typedef imod::TModelWrap<iqtipr::CMultiLineSupplierGuiComp> MultiLineSupplierGui;
+typedef iqtipr::CMultiLineSupplierGuiComp MultiLineSupplierGui;
 typedef iqtipr::CMultiLineProjectionSupplierGuiComp MultiLineProjectionSupplierGui;
 typedef iqtipr::CPatternTeachingControllerGuiComp PatternTeachingControllerGui;
 typedef iqtipr::CColorPatternComparatorGuiComp ColorPatternComparatorGui;

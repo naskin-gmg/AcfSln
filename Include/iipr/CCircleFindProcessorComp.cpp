@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "imath/CVarMatrix.h"
+#include "ilog/TExtMessage.h"
 #include "i2d/CAnnulusSegment.h"
 #include "iprm/CParamsSet.h"
 #include "iprm/TParamsPtr.h"
@@ -18,7 +19,6 @@ namespace iipr
 
 
 CCircleFindProcessorComp::CCircleFindProcessorComp()
-:	m_intermediateResultsBufferPtr(NULL)
 {
 }
 
@@ -60,33 +60,34 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	if (*m_searchForAnnulusAttrPtr){
 		istd::TDelPtr<AnnulusFeature> featurePtr(new AnnulusFeature());
-		if (CalculateAnnulus(center, inRays, outRays, *featurePtr)){
-			results.AddFeature(featurePtr.PopPtr());
+		bool isOk = CalculateAnnulus(center, inRays, outRays, *featurePtr);
+		AddIntermediateResults(inRays);
+		AddIntermediateResults(outRays);
 
-			AddIntermediateResults(outRays);
+		if (isOk){
+			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
 		}
-
-		AddIntermediateResults(outRays);
 	}
 	else{
 		istd::TDelPtr<CircleFeature> featurePtr(new CircleFeature());
 		Rays& usedRays = (inRays.size() >= outRays.size())? inRays: outRays;
-		if (		CalculateCircle(
+
+		bool isOk = CalculateCircle(
 								center,
 								circleFinderParamsPtr->IsOutlierEliminationEnabled(),
 								circleFinderParamsPtr->GetMinOutlierDistance(),
 								usedRays,
-								*featurePtr)){
-			results.AddFeature(featurePtr.PopPtr());
+								*featurePtr);
 
-			AddIntermediateResults(usedRays);
+		AddIntermediateResults(usedRays);
+
+		if (isOk){
+			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
 		}
-
-		AddIntermediateResults(usedRays);
 	}
 
 	return TS_INVALID;
@@ -114,14 +115,6 @@ int CCircleFindProcessorComp::DoProcessing(
 	}
 
 	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr);
-}
-
-
-// reimplemented (iipr::ISimpleResultsConsumer)
-
-void CCircleFindProcessorComp::SetResultsBuffer(CSimpleResultsContainer* bufferPtr)
-{
-	m_intermediateResultsBufferPtr = bufferPtr;
 }
 
 
@@ -159,7 +152,8 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 
 	const i2d::CAnnulus* annulusAoiPtr = dynamic_cast<const i2d::CAnnulus*>(&aoiObject);
 	if (annulusAoiPtr != NULL){
-		projectionLine.SetCalibration(annulusAoiPtr->GetCalibration());
+		const i2d::ICalibration2d* calibrationPtr = annulusAoiPtr->GetCalibration();
+		projectionLine.SetCalibration(calibrationPtr);
 
 		double beginAngle = 0;
 		double endAngle = 2 * I_PI;
@@ -207,7 +201,7 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			caliperFeaturesConsumerPtr->ResetFeatures();
 			m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesConsumerPtr);
 
-			AddProjectionResultsToRays(params, *caliperFeaturesProviderPtr, inRays, outRays);
+			AddProjectionResultsToRays(projectionLine, params, *caliperFeaturesProviderPtr, inRays, outRays, calibrationPtr);
 		}
 
 		return true;
@@ -225,68 +219,86 @@ bool CCircleFindProcessorComp::CalculateCircle(
 			CircleFeature& result)
 {
 	int raysCount = int(rays.size());
-	if (raysCount < 3){
-		return false;	// at least 3 points needed to define circle
-	}
 
 	imath::CVarMatrix matrix;
 	imath::CVarMatrix destVector;
 	matrix.SetSizes(istd::CIndex2d(3, raysCount));
 	destVector.SetSizes(istd::CIndex2d(1, raysCount));
 
-	double weightSum = 0;
+	bool doAgain;
+	do{
+		doAgain = false;
 
-	for (int i = 0; i < raysCount; ++i){
-		Ray& ray = rays[i];
-		Q_ASSERT(!ray.points.isEmpty());
-		Q_ASSERT(ray.usedIndex >= 0);
-		Q_ASSERT(ray.usedIndex < int(ray.points.size()));
+		double weightSum = 0;
 
-		i2d::CVector2d point = ray.points[ray.usedIndex].position - center;
-
-		matrix.SetAt(istd::CIndex2d(0, i), point.GetX() * 2.0);
-		matrix.SetAt(istd::CIndex2d(1, i), point.GetY() * 2.0);
-		matrix.SetAt(istd::CIndex2d(2, i), -1);
-
-		destVector.SetAt(istd::CIndex2d(0, i), point.GetLength2());
-
-		weightSum += ray.points[ray.usedIndex].weight;
-	}
-
-	imath::CVarMatrix resultMatrix;
-	if (!matrix.GetSolvedLSP(destVector, resultMatrix)){
-		return false;
-	}
-
-	double relX = resultMatrix.GetAt(istd::CIndex2d(0, 0));
-	double relY = resultMatrix.GetAt(istd::CIndex2d(0, 1));
-	i2d::CVector2d position(relX + center[0], relY + center[1]);
-	result.SetPosition(position);
-	double relPosNorm = relX * relX + relY * relY;
-	result.SetRadius(sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2))));
-
-	result.SetWeight(weightSum / raysCount);
-
-	if (removeOutliers){
-		Rays optimizedRays;
+		int usedRaysCount = 0;
 
 		for (int i = 0; i < raysCount; ++i){
 			Ray& ray = rays[i];
-			i2d::CVector2d point = ray.points[ray.usedIndex].position - result.GetPosition();
+			Q_ASSERT(!ray.points.isEmpty());
+			Q_ASSERT(ray.usedIndex < int(ray.points.size()));
 
-			double currentRadius = sqrt(point.GetX() * point.GetX() + point.GetY()* point.GetY());
+			if (ray.usedIndex >= 0){
+				const Point& rayPoint = ray.points[ray.usedIndex];
 
-			double foundRadius = result.GetRadius();
+				i2d::CVector2d position = rayPoint.position - center;
 
-			if (qAbs(currentRadius - foundRadius) < minOutliersDistance){
-				optimizedRays.push_back(ray);
+				matrix.SetAt(istd::CIndex2d(0, i), position.GetX() * 2.0);
+				matrix.SetAt(istd::CIndex2d(1, i), position.GetY() * 2.0);
+				matrix.SetAt(istd::CIndex2d(2, i), -1);
+
+				destVector.SetAt(istd::CIndex2d(0, i), position.GetLength2());
+
+				weightSum += rayPoint.weight;
+
+				++usedRaysCount;
+			}
+			else{
+				matrix.SetAt(istd::CIndex2d(0, i), 0);
+				matrix.SetAt(istd::CIndex2d(1, i), 0);
+				matrix.SetAt(istd::CIndex2d(2, i), 0);
+				destVector.SetAt(istd::CIndex2d(0, i), 0);
 			}
 		}
 
-		if (optimizedRays.size() != rays.size() && optimizedRays.size() >= 3){
-			return CalculateCircle(center, removeOutliers, minOutliersDistance, optimizedRays, result);
+		if (usedRaysCount < 3){
+			return false;	// at least 3 points needed to define circle
 		}
-	}
+
+		imath::CVarMatrix resultMatrix;
+		if (!matrix.GetSolvedLSP(destVector, resultMatrix)){
+			return false;
+		}
+
+		double relX = resultMatrix.GetAt(istd::CIndex2d(0, 0));
+		double relY = resultMatrix.GetAt(istd::CIndex2d(0, 1));
+		i2d::CVector2d position(relX + center[0], relY + center[1]);
+		result.SetPosition(position);
+		double relPosNorm = relX * relX + relY * relY;
+		result.SetRadius(sqrt(relPosNorm - resultMatrix.GetAt(istd::CIndex2d(0, 2))));
+
+		result.SetWeight(weightSum / raysCount);
+
+		if (removeOutliers){
+			double foundRadius = result.GetRadius();
+
+			for (int i = 0; i < raysCount; ++i){
+				Ray& ray = rays[i];
+
+				if (ray.usedIndex >= 0){
+					Point& rayPoint = ray.points[ray.usedIndex];
+
+					double currentRadius = rayPoint.position.GetDistance(result.GetPosition());
+
+					if (qAbs(currentRadius - foundRadius) > minOutliersDistance){
+						ray.usedIndex = -1;
+
+						doAgain = true;
+					}
+				}
+			}
+		}
+	} while (doAgain);
 
 	return true;
 }
@@ -374,10 +386,12 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 
 void CCircleFindProcessorComp::AddProjectionResultsToRays(
+			const i2d::CLine2d& projectionLine,
 			const iprm::IParamsSet& params,
 			const imeas::INumericValueProvider& container,
 			Rays& inRays,
-			Rays& outRays)
+			Rays& outRays,
+			const i2d::ICalibration2d* calibrationPtr)
 {
 	Q_ASSERT(m_featuresMapperCompPtr.IsValid());	// validity of features mapper should be checked on the beginning
 
@@ -414,10 +428,14 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 	}
 
 	if (inRay.usedIndex >= 0){
+		inRay.projectionLine.SetCalibration(calibrationPtr);
+		inRay.projectionLine.CopyFrom(projectionLine);
 		inRays.push_back(inRay);
 	}
 
 	if (outRay.usedIndex >= 0){
+		inRay.projectionLine.SetCalibration(calibrationPtr);
+		inRay.projectionLine.CopyFrom(projectionLine);
 		outRays.push_back(outRay);
 	}
 }
@@ -425,16 +443,47 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 
 void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 {
-	if (m_intermediateResultsBufferPtr == NULL){
+	if (!m_tempConsumerCompPtr.IsValid()){
 		return;
 	}
 
 	for (int rayIndex = 0; rayIndex < outRays.count(); rayIndex++){
 		const Ray& ray = outRays.at(rayIndex);
-		if (ray.points.count() > 0){
-			const i2d::CVector2d& pointVector = ray.points.at(ray.usedIndex).position;
 
-			m_intermediateResultsBufferPtr->PushBack(QPointF(pointVector.GetX(), pointVector.GetY()));
+		if (*m_sendUsedPointsToTempAttrPtr){
+			int pointsCount = ray.points.count();
+			for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
+				const Point& rayPoint = ray.points[pointIndex];
+
+				const i2d::CVector2d& position = rayPoint.position;
+
+				ilog::TExtMessage<i2d::CPosition2d>* pointMessagePtr = new ilog::TExtMessage<i2d::CPosition2d>(
+							(rayIndex >= 0)?
+										istd::IInformationProvider::IC_INFO:
+										istd::IInformationProvider::IC_WARNING,
+							MI_INTERMEDIATE,
+							(rayIndex >= 0)?
+										QString("Point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()):
+										QString("Unused point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()),
+							"CircleFinder");
+				pointMessagePtr->SetPosition(position);
+				pointMessagePtr->SetCalibration(ray.projectionLine.GetCalibration());
+
+				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
+			}
+		}
+
+		if (*m_sendLinesToTempAttrPtr){
+			ilog::TExtMessage<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessage<i2d::CLine2d>(
+						istd::IInformationProvider::IC_INFO,
+						MI_INTERMEDIATE,
+						QString("Line %1").arg(rayIndex),
+						"CircleFinder");
+			pointMessagePtr->SetPoint1(ray.projectionLine.GetPoint1());
+			pointMessagePtr->SetPoint2(ray.projectionLine.GetPoint2());
+			pointMessagePtr->SetCalibration(ray.projectionLine.GetCalibration());
+
+			m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 		}
 	}
 }

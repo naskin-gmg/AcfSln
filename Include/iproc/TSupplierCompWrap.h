@@ -49,6 +49,9 @@ public:
 		I_REGISTER_SUBELEMENT(TaskLog);
 		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, ilog::IMessageConsumer, ExtractTaskLog);
 		I_REGISTER_SUBELEMENT_INTERFACE(TaskLog, istd::IPolymorphic, ExtractTaskLog);
+		I_REGISTER_SUBELEMENT(TempMessages);
+		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, ilog::IMessageConsumer, ExtractTempMessages);
+		I_REGISTER_SUBELEMENT_INTERFACE(TempMessages, istd::IPolymorphic, ExtractTempMessages);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -63,7 +66,7 @@ public:
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages() const;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:
@@ -171,6 +174,12 @@ private:
 	{
 		return &component;
 	}
+	template <class InterfaceType>
+
+	static InterfaceType* ExtractTempMessages(TSupplierCompWrap& component)
+	{
+		return &component.m_tempMessageContainer;
+	}
 
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
@@ -185,6 +194,7 @@ private:
 	typedef QMap<imod::IModel*, ISupplier*> InputSuppliersMap;
 	InputSuppliersMap m_inputSuppliersMap;
 
+	imod::TModelWrap<ilog::CMessageContainer> m_tempMessageContainer;
 	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
 
 	bool m_areParametersValid;
@@ -228,6 +238,7 @@ template <class Product>
 void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 {
 	if (m_workStatus < WS_INIT){
+		m_tempMessageContainer.ClearMessages();
 		m_messageContainer.ClearMessages();
 
 		// distribute initializing to input...
@@ -284,6 +295,7 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 
 	m_workStatus = WS_INVALID;
 	
+	m_tempMessageContainer.ClearMessages();
 	m_messageContainer.ClearMessages();
 
 	m_productPtr.Reset();
@@ -293,9 +305,18 @@ void TSupplierCompWrap<Product>::ClearWorkResults()
 
 
 template <class Product>
-const ilog::IMessageContainer* TSupplierCompWrap<Product>::GetWorkMessages() const
+const ilog::IMessageContainer* TSupplierCompWrap<Product>::GetWorkMessages(int messageType) const
 {
-	return &m_messageContainer;
+	switch (messageType){
+	case WMT_TEMP:
+		return &m_tempMessageContainer;
+
+	case WMT_RESULTS:
+		return &m_messageContainer;
+
+	default:
+		return NULL;
+	}
 }
 
 

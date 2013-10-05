@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3138
+          3196
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1014
+          1048
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -387,8 +387,11 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                ColorPatternComparator/TaskLog
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -455,12 +458,15 @@
               Reference
             </Type>
             <ExportId>
-              Log
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                ImageHistogramSupplier/TaskLog
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

@@ -64,9 +64,6 @@ private:
 
 	typedef imod::TModelWrap<i2d::CCircle> FoundModel;
 	FoundModel m_foundModel;
-
-	typedef imod::TModelWrap<i2d::CPosition2d> PositionModel;
-	istd::TPointerVector<PositionModel> m_positionModels;
 };
 
 

@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "ilog/IMessageConsumer.h"
 #include "i2d/CCircle.h"
 #include "i2d/CAnnulus.h"
 #include "i2d/CPolypoint.h"
@@ -15,7 +16,6 @@
 #include "iipr/IFeatureToImageMapper.h"
 #include "iipr/ICircleFinderParams.h"
 #include "iipr/TWeightedFeatureWrap.h"
-#include "iipr/ISimpleResultsProvider.h"
 
 
 namespace iipr
@@ -27,15 +27,18 @@ namespace iipr
 	This is realized as processor, as input the image, as output consumer of features must be given.
 	It uses set of 1D caliper lines to find the position and radius of circle.
 	It takes area of interests (AOI) from parameter set. As AOI can be used annulus, segment of annulus, rectangle and set of segments of annulus.
-	To collect introspection results, call SetResultsBuffer with the valid buffer pointer as parameter.
 */
 class CCircleFindProcessorComp:
 			public icomp::CComponentBase,
-			public iproc::TSyncProcessorWrap<IImageToFeatureProcessor>,
-			virtual public iipr::ISimpleResultsConsumer
+			public iproc::TSyncProcessorWrap<IImageToFeatureProcessor>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+
+	enum MessageId
+	{
+		MI_INTERMEDIATE = 0x26723
+	};
 
 	I_BEGIN_COMPONENT(CCircleFindProcessorComp);
 		I_REGISTER_INTERFACE(IImageToFeatureProcessor);
@@ -46,6 +49,9 @@ public:
 		I_ASSIGN(m_circleFinderParamsIdAttrPtr, "CircleFinderParamsId", "ID cirlcie finder parameters in parameter set", true, "CircleFinderParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
+		I_ASSIGN(m_sendUsedPointsToTempAttrPtr, "SendUsedPointsToTemp", "If true, the used point positions will be send to temporary results", true, false);
+		I_ASSIGN(m_sendLinesToTempAttrPtr, "SendLinesToTemp", "If true, the caliper lines will be send to temporary results", true, false);
+		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages", false, "TempResultsConsumer");
 	I_END_COMPONENT;
 
 	CCircleFindProcessorComp();
@@ -63,9 +69,6 @@ public:
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (iipr::ISimpleResultsConsumer)
-	virtual void SetResultsBuffer(CSimpleResultsContainer* bufferPtr);
-
 protected:
 	typedef TWeightedFeatureWrap<i2d::CCircle> CircleFeature;
 	typedef TWeightedFeatureWrap<i2d::CAnnulus> AnnulusFeature;
@@ -80,7 +83,13 @@ protected:
 
 	struct Ray
 	{
-		Ray(){usedIndex = -1;};
+		Ray()
+		{
+			usedIndex = -1;
+		}
+
+		i2d::CLine2d projectionLine;
+
 		Points points;
 		int usedIndex;
 	};
@@ -100,10 +109,12 @@ protected:
 	bool CalculateAnnulus(const i2d::CVector2d& center, Rays& inRays, Rays& outRays, AnnulusFeature& result);
 
 	void AddProjectionResultsToRays(
+				const i2d::CLine2d& projectionLine,
 				const iprm::IParamsSet& params,
 				const imeas::INumericValueProvider& container,
 				Rays& inRays,
-				Rays& outRays);
+				Rays& outRays,
+				const i2d::ICalibration2d* calibrationPtr);
 
 	void AddIntermediateResults(Rays& outRays);
 
@@ -114,8 +125,9 @@ private:
 	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
 	I_ATTR(QByteArray, m_circleFinderParamsIdAttrPtr);
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
-
-	CSimpleResultsContainer* m_intermediateResultsBufferPtr;
+	I_ATTR(bool, m_sendUsedPointsToTempAttrPtr);
+	I_ATTR(bool, m_sendLinesToTempAttrPtr);
+	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 };
 
 

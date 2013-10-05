@@ -75,48 +75,48 @@ int CSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.second.GetPtr());
 		switch (status){
 			case iproc::IProcessor::TS_OK:
-			{
-				istd::CIndex2d bitmapSize = result.second->GetImageSize();
-				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
+				{
+					istd::CIndex2d bitmapSize = result.second->GetImageSize();
+					i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
 
-				i2d::CVector2d scale(1, 1);
+					i2d::CVector2d scale(1, 1);
 
-				const imeas::INumericValue *scalePtr = NULL;
+					const imeas::INumericValue *scalePtr = NULL;
 
-				iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
-							GetModelParametersSet(),
-							m_scaleParamIdAttrPtr,
-							m_defaultScaleValueCompPtr,
-							false);
-				if (scaleParamPtr.IsValid()){
-					imath::CVarVector scaleValues = scalePtr->GetValues();
-					if (scaleValues.GetElementsCount() >= 2){
-						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
+					iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
+								GetModelParametersSet(),
+								m_scaleParamIdAttrPtr,
+								m_defaultScaleValueCompPtr,
+								false);
+					if (scaleParamPtr.IsValid()){
+						imath::CVarVector scaleValues = scalePtr->GetValues();
+						if (scaleValues.GetElementsCount() >= 2){
+							scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
+						}
+						else if (scaleValues.GetElementsCount() >= 1){
+							scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+						}
 					}
-					else if (scaleValues.GetElementsCount() >= 1){
-						scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+
+					if (m_calibrationCompPtr.IsValid()){
+						i2d::CAffineTransformation2d calibration;
+						calibration.Reset(center, 0, scale);
+						if (m_calibratedUnitInfoCompPtr.IsValid()){
+							calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+						}
+
+						result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
+					}
+					else{
+						i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+						calibrationPtr->Reset(center, 0, scale);
+						if (m_calibratedUnitInfoCompPtr.IsValid()){
+							calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+						}
+
+						result.first.SetPtr(calibrationPtr);
 					}
 				}
-
-				if (m_calibrationCompPtr.IsValid()){
-					i2d::CAffineTransformation2d calibration;
-					calibration.Reset(center, 0, scale);
-					if (m_calibratedUnitInfoCompPtr.IsValid()){
-						calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-					}
-
-					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
-				}
-				else{
-					i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
-					calibrationPtr->Reset(center, 0, scale);
-					if (m_calibratedUnitInfoCompPtr.IsValid()){
-						calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-					}
-
-					result.first.SetPtr(calibrationPtr);
-				}
-			}
 				return WS_OK;
 
 			case iproc::IProcessor::TS_CANCELED:

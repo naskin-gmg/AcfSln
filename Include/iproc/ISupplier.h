@@ -62,6 +62,12 @@ public:
 		CF_SUPPLIER_RESULTS = 1 << 22
 	};
 
+	enum WorkMessageType
+	{
+		WMT_TEMP,
+		WMT_RESULTS
+	};
+
 	/**
 		Get status of last work.
 		Please note, that this status is not a part of supplier model and can be changed without any notification.
@@ -97,8 +103,9 @@ public:
 		Get messages outputted by this work.
 		The pointed object will not be relocated - no reconnect is needed if it is observed.
 		If the supplier doesn't support list of messages, it returns NULL.
+		\param	messageType	type of message, \sa WorkMessageType.
 	*/
-	virtual const ilog::IMessageContainer* GetWorkMessages() const = 0;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const = 0;
 
 	/**
 		Get parameter set using by this supplier.

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3159
+          3196
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1027
+          1048
         </Number>
         <Description>
           ACF-Solutions
@@ -170,7 +170,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -230,6 +230,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SendLinesToTemp
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableIntrospection
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SendUsedPointsToTemp
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableIntrospection
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SlaveEdgeProcessor
             </Id>
             <Type>
@@ -263,6 +295,25 @@
               </IsEnabled>
               <Value>
                 Line
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TempConsumer
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PositionTask/TempMessages
               </Value>
             </Data>
           </AttributeInfo>
@@ -537,7 +588,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AdditionalTriggerInputs
@@ -595,22 +646,6 @@
             </Type>
             <ExportId>
               DiagnosticName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              EnableIntrospection
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              EnableIntrospection
             </ExportId>
             <Data>
               <IsEnabled>
