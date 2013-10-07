@@ -32,7 +32,7 @@ const iprm::IOptionsList* CEdgeBasedFeaturesSupplierComp::GetCalibrationSelectio
 
 int CEdgeBasedFeaturesSupplierComp::GetCalibrationsCount() const
 {
-	const QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >* productPtr = GetWorkProduct();
+	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return productPtr->second.count();
 	}
@@ -43,10 +43,26 @@ int CEdgeBasedFeaturesSupplierComp::GetCalibrationsCount() const
 
 const i2d::ICalibration2d* CEdgeBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
 {
-	const QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >* productPtr = GetWorkProduct();
+	Q_ASSERT(calibrationIndex >= 0);
+
+	const ProductType* productPtr = GetWorkProduct();
 	Q_ASSERT(productPtr != NULL);
+	Q_ASSERT(calibrationIndex < productPtr->second.size());
 
 	return &productPtr->second.at(calibrationIndex);
+}
+
+
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ICalibration2d* CEdgeBasedFeaturesSupplierComp::GetCalibration() const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if ((productPtr != NULL) && !productPtr->second.isEmpty()){
+		return &productPtr->second.first();
+	}
+
+	return NULL;
 }
 
 
@@ -54,7 +70,7 @@ const i2d::ICalibration2d* CEdgeBasedFeaturesSupplierComp::GetCalibration(int ca
 
 int CEdgeBasedFeaturesSupplierComp::GetValuesCount() const
 {
-	const QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >* productPtr = GetWorkProduct();
+	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return productPtr->first.GetValuesCount();
 	}
@@ -65,7 +81,7 @@ int CEdgeBasedFeaturesSupplierComp::GetValuesCount() const
 
 const imeas::INumericValue& CEdgeBasedFeaturesSupplierComp::GetNumericValue(int index) const
 {
-	const QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >* productPtr = GetWorkProduct();
+	const ProductType* productPtr = GetWorkProduct();
 	Q_ASSERT (productPtr != NULL);
 
 	return productPtr->first.GetNumericValue(index);
@@ -152,7 +168,7 @@ bool CEdgeBasedFeaturesSupplierComp::InitializeWork()
 }
 
 
-int CEdgeBasedFeaturesSupplierComp::ProduceObject(QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >& result) const
+int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (		m_edgeLinesProviderCompPtr.IsValid() &&
 				m_searchProcessorCompPtr.IsValid()){

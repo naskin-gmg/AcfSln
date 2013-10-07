@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3201
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1049
         </Number>
         <Description>
           ACF-Solutions
@@ -233,15 +233,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="9">
-    <Interface>
-      <InterfaceId>
-        i2d::ICalibrationProvider
-      </InterfaceId>
-      <ComponentId>
-        ImageTaskGui
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         iimg::IBitmapProvider

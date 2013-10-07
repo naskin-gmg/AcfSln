@@ -12,6 +12,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/TOptDelPtr.h"
 #include "ifile/IFilePersistence.h"
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
@@ -164,6 +165,7 @@ private:
 	I_ATTR(int, m_viewCalibrationModeAttrPtr);
 
 	bool m_areParamsEditable;
+	istd::TOptDelPtr<i2d::ICalibration2d> m_storedCalibrationPtr;
 };
 
 
@@ -188,7 +190,11 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider*
 			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
-				viewPtr->SetDisplayCalibration(calibrationProviderPtr->GetCalibration());
+				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
+				if (calibrationPtr != NULL){
+					m_storedCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe(), true);
+					viewPtr->SetDisplayCalibration(m_storedCalibrationPtr.GetPtr());
+				}
 			}
 		}
 	}

@@ -7,6 +7,7 @@
 
 // ACF includes
 #include "i2d/IMultiCalibrationProvider.h"
+#include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
 #include "i2d/CAffineTransformation2d.h"
 #include "iprm/IParamsSet.h"
@@ -29,6 +30,7 @@ class CEdgeBasedFeaturesSupplierComp:
 			public iproc::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::IMultiCalibrationProvider,
+			virtual public i2d::ICalibrationProvider,
 			virtual public istd::IInformationProvider
 {
 public:
@@ -37,6 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CEdgeBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
 		I_REGISTER_INTERFACE(i2d::IMultiCalibrationProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provide input calibration", true, "EdgeLinesProvider");
 		I_ASSIGN_TO(m_calibrationSupplierCompPtr, m_calibrationProviderCompPtr, false);
@@ -62,6 +65,9 @@ public:
 	virtual int GetCalibrationsCount() const;
 	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ICalibration2d* GetCalibration() const;
+
 	// reimplemented (imeas::INumericValueProvider)
 	virtual int GetValuesCount() const;
 	virtual const imeas::INumericValue& GetNumericValue(int index) const;
@@ -77,7 +83,7 @@ public:
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
 	virtual bool InitializeWork();
-	virtual int ProduceObject(QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> >& result) const;
+	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

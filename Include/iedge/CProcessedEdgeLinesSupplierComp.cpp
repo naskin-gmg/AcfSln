@@ -26,17 +26,15 @@ int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 			Timer performanceTimer(this, "Edge processing");
 
 			if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
+				istd::TDelPtr<i2d::ICalibration2d> newCalibration;
+
 				// copy calibration from original
 				const i2d::ICalibration2d* calibrationPtr = containerPtr->GetCalibration();
 				if (calibrationPtr != NULL){
-					istd::TDelPtr<i2d::ICalibration2d> newCalibration;
 					newCalibration.SetCastedOrRemove(calibrationPtr->CloneMe());
+				}
 
-					result.SetCalibration(newCalibration.PopPtr(), true);
-				}
-				else{
-					result.SetCalibration(NULL);
-				}
+				result.SetCalibration(newCalibration.PopPtr(), true);
 
 				return WS_OK;
 			}

@@ -36,8 +36,13 @@ int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 					const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
 					if (calibrationPtr != NULL){
-						result.InvTransform(*calibrationPtr);
-						result.SetCalibration(calibrationPtr);
+						istd::TDelPtr<i2d::ICalibration2d> calibCopyPtr;
+						calibCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+
+						if (calibCopyPtr.IsValid()){
+							result.InvTransform(*calibrationPtr);
+							result.SetCalibration(calibCopyPtr.PopPtr(), true);
+						}
 					}
 				}
 
