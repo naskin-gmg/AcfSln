@@ -112,6 +112,11 @@ protected:
 	virtual void UnregisterSupplierInput(imod::IModel* modelPtr);
 
 	/**
+		Get supplier name used for diagnostic reasons.
+	*/
+	virtual QString GetDiagnosticName() const;
+
+	/**
 		Add ilog::CMessage to the internal message container (also from const functions).
 	*/
 	virtual void AddMessage(const ilog::CMessage* messagePtr) const;
@@ -382,11 +387,23 @@ void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 
 
 template <class Product>
+QString TSupplierCompWrap<Product>::GetDiagnosticName() const
+{
+	if (m_diagnosticNameAttrPtr.IsValid()){
+		return *m_diagnosticNameAttrPtr;
+	}
+	else{
+		return "";
+	}
+}
+
+
+template <class Product>
 void TSupplierCompWrap<Product>::AddMessage(const ilog::CMessage* messagePtr) const
 {
 	Q_ASSERT(messagePtr != NULL);
 
-	m_messageContainer.AddMessage((const istd::TSmartPtr<const istd::IInformationProvider>)messagePtr);
+	m_messageContainer.AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(messagePtr));
 }
 
 
@@ -458,13 +475,16 @@ TSupplierCompWrap<Product>::Timer::Timer(const TSupplierCompWrap* parentPtr, con
 template <class Product>
 TSupplierCompWrap<Product>::Timer::~Timer()
 {
-	if ((m_parentPtr != NULL) && (m_parentPtr->m_diagnosticNameAttrPtr.IsValid())){
-		MessagePtr messagePtr(new ilog::CMessage(
-					istd::IInformationProvider::IC_INFO,
-					0,
-					QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
-					*m_parentPtr->m_diagnosticNameAttrPtr));
-		m_parentPtr->m_messageContainer.AddMessage(messagePtr);
+	if (m_parentPtr != NULL){
+		QString diagnosticName = m_parentPtr->GetDiagnosticName();
+		if (!diagnosticName.isEmpty()){
+			MessagePtr messagePtr(new ilog::CMessage(
+						istd::IInformationProvider::IC_INFO,
+						0,
+						QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
+						diagnosticName));
+			m_parentPtr->m_messageContainer.AddMessage(messagePtr);
+		}
 	}
 }
 

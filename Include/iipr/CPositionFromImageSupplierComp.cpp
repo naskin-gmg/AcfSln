@@ -17,7 +17,7 @@ namespace iipr
 
 int CPositionFromImageSupplierComp::GetValuesCount() const
 {
-	const imath::CVarVector* productPtr = GetWorkProduct();
+	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
 		return 1;
 	}
@@ -30,16 +30,15 @@ const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int 
 {
 	Q_ASSERT(index == 0);
 
-	const imath::CVarVector* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		m_position.SetValues(*productPtr);
+	const ProductType* productPtr = GetWorkProduct();
+	if ((productPtr != NULL) && productPtr->IsValid()){
+		return **productPtr;
 	}
 	else{
-		// set wrong position (-1,-1) here
-		m_position.SetValues(imath::CVarVector(2, -1));		
-	}
+		static Position nonePosition;
 
-	return m_position;
+		return nonePosition;
+	}
 }
 
 
@@ -55,8 +54,10 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) const
+int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 {
+	result.Reset();
+
 	m_outputCalibrationPtr.Reset();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
@@ -77,9 +78,9 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 				return WS_ERROR;
 			}
 
-			const i2d::ICalibration2d* logicalTransformPtr = NULL;	
+			const i2d::ICalibration2d* inputCalibrationPtr = NULL;
 			if (m_calibrationProviderCompPtr.IsValid()){
-				logicalTransformPtr = m_calibrationProviderCompPtr->GetCalibration();
+				inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 			}
 
 			if (consumer.GetValuesCount() < 1){
@@ -91,56 +92,44 @@ int CPositionFromImageSupplierComp::ProduceObject(imath::CVarVector& result) con
 				return WS_ERROR;
 			}
 
-			if (logicalTransformPtr != NULL){
-				i2d::CPosition2d transformedPosition = *positionPtr;
-				if (!transformedPosition.Transform(*logicalTransformPtr)){
-					return WS_ERROR;
-				}
-	
-				result = transformedPosition.GetPosition();
-			}
-			else{
-				result = positionPtr->GetPosition();
-			}
+			imath::CVarVector resultVector;
 
 			const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
 			if (circlePtr != NULL){
-				result.SetElementsCount(3);
-				result[2] = circlePtr->GetRadius();
-
-				if (logicalTransformPtr != NULL){
-					i2d::CVector2d input = positionPtr->GetPosition();
-					input.SetX(input.GetX() + circlePtr->GetRadius());
-
-					if (!logicalTransformPtr->GetPositionAt(input, input)){
-						return WS_ERROR;
-					}
-
-					result[2] = i2d::CVector2d(result[0], result[1]).GetDistance(input);
-				}
-			}
-
-			m_position.SetValues(result);
-			const i2d::ICalibration2d* inputCalibrationPtr = NULL;
-			if (m_calibrationProviderCompPtr.IsValid()){
-				inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
-			}
-
-			imath::CVarVector position = m_position.GetComponentValue(imeas::INumericValue::VTI_POSITION);
-			if (position.GetElementsCount() >= 2){
-				i2d::CVector2d originalZeroPos(0, 0);
-				if (inputCalibrationPtr != NULL){
-					originalZeroPos = inputCalibrationPtr->GetValueAt(i2d::CVector2d(0, 0));
+				i2d::CCircle transformedCircle;
+				if (!transformedCircle.CopyFrom(*circlePtr, istd::IChangeable::CM_CONVERT)){
+					return WS_ERROR;
 				}
 
-				i2d::CAffineTransformation2d* outputTransformPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
-				outputTransformPtr->Reset(i2d::CVector2d(position[0] - originalZeroPos[0], position[1] - originalZeroPos[1]));
-				m_outputCalibrationPtr.SetPtr(outputTransformPtr);
-
-				if (inputCalibrationPtr != NULL){
-					m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedCalibration(*inputCalibrationPtr));
-				}
+				resultVector.SetElementsCount(3);
+				resultVector[0] = transformedCircle.GetPosition().GetX();
+				resultVector[1] = transformedCircle.GetPosition().GetY();
+				resultVector[2] = transformedCircle.GetRadius();
 			}
+			else{
+				i2d::CPosition2d transformedPosition;
+				if (!transformedPosition.CopyFrom(*positionPtr, istd::IChangeable::CM_CONVERT)){
+					return WS_ERROR;
+				}
+
+				resultVector = transformedPosition.GetPosition();
+			}
+			Q_ASSERT(resultVector.GetElementsCount() >= 2);
+
+			i2d::CVector2d originalZeroPos(0, 0);
+			if (inputCalibrationPtr != NULL){
+				originalZeroPos = inputCalibrationPtr->GetValueAt(i2d::CVector2d(0, 0));
+			}
+
+			i2d::CAffineTransformation2d* outputTransformPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+			outputTransformPtr->Reset(i2d::CVector2d(resultVector[0] - originalZeroPos[0], resultVector[1] - originalZeroPos[1]));
+			m_outputCalibrationPtr.SetPtr(outputTransformPtr);
+
+			if (inputCalibrationPtr != NULL){
+				m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedCalibration(*inputCalibrationPtr));
+			}
+
+			result.SetPtr(new Position(resultVector));
 
 			return WS_OK;
 		}
@@ -163,6 +152,12 @@ void CPositionFromImageSupplierComp::OnComponentCreated()
 
 
 // public methods of the embedded class Position
+
+CPositionFromImageSupplierComp::Position::Position(const imath::CVarVector& positionVector)
+{
+	SetValues(positionVector);
+}
+
 
 // reimplemented (imeas::INumericValue)
 

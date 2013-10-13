@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3202
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1050
         </Number>
         <Description>
           ACF-Solutions
@@ -261,7 +261,7 @@
               NormalPenColor
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               
@@ -280,7 +280,7 @@
               SelectedPenColor
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               

@@ -28,12 +28,12 @@ namespace iipr
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
 class CPositionFromImageSupplierComp:
-			public iproc::TSupplierCompWrap<imath::CVarVector>,
+			public iproc::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<imath::CVarVector> BaseClass;
+	typedef iproc::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -54,7 +54,7 @@ public:
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(imath::CVarVector& result) const;
+	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -71,12 +71,13 @@ private:
 	class Position: public imeas::CSimpleNumericValue
 	{
 	public:
+		Position(){}
+		Position(const imath::CVarVector& positionVector);
+
 		// reimplemented (imeas::INumericValue)
 		virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
 		virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
 	};
-
-	mutable Position m_position;
 };
 
 

@@ -45,6 +45,7 @@ public:
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_slaveProcessorCompPtr, "SlaveEdgeProcessor", "Slave edge finder processor converting image to list of found edges", true, "SlaveEdgeProcessor");
 		I_ASSIGN(m_featuresMapperCompPtr, "FeaturesMapper", "Calculate position from caliper extracted features", true, "FeaturesMapper");
+		I_ASSIGN(m_resultCalibrationCompPtr, "ResultCalibration", "Calibration should be used for result", false, "ResultCalibration");
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", true, "AoiParams");
 		I_ASSIGN(m_circleFinderParamsIdAttrPtr, "CircleFinderParamsId", "ID cirlcie finder parameters in parameter set", true, "CircleFinderParams");
 		I_ASSIGN(m_slaveLineIdAttrPtr, "SlaveLineId", "ID of line parameter added by this processor to parameter set for slave edge processor", true, "LineParam");
@@ -113,14 +114,14 @@ protected:
 				const iprm::IParamsSet& params,
 				const imeas::INumericValueProvider& container,
 				Rays& inRays,
-				Rays& outRays,
-				const i2d::ICalibration2d* calibrationPtr);
+				Rays& outRays);
 
 	void AddIntermediateResults(Rays& outRays);
 
 private:
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 	I_REF(iipr::IFeatureToImageMapper, m_featuresMapperCompPtr);
+	I_REF(i2d::ICalibration2d, m_resultCalibrationCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_ATTR(QByteArray, m_slaveLineIdAttrPtr);
 	I_ATTR(QByteArray, m_circleFinderParamsIdAttrPtr);
