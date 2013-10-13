@@ -22,6 +22,7 @@ public:
 	typedef i2d::CObject2dBase BaseClass;
 
 	CEdgeLine();
+	CEdgeLine(const CEdgeLine& edgeLine);
 
 	void Clear();
 
