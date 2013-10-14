@@ -44,9 +44,8 @@ bool DoConvolution(
 	int imageHeight = imageSize.GetY();
 	int imageWidth = imageSize.GetX();
 
-#ifdef _OPENMP
 	#pragma omp parallel for
-#endif
+
 	for (int y = 1; y < imageHeight - 1; ++y){
 		const quint8* inputPtr = inputLines[y - 1];
 		quint8* outputPtr = outputLines[y - 1];
