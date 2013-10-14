@@ -469,7 +469,7 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 	}
 
 	if (outRay.usedIndex >= 0){
-		inRay.projectionLine.CopyFrom(projectionLine);
+		outRay.projectionLine.CopyFrom(projectionLine);
 		outRays.push_back(outRay);
 	}
 }
