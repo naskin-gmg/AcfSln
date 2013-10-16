@@ -116,16 +116,13 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 
 	i2d::CVector2d position;
 
+	// copy, transform and remove the consequent duplicates
 	if (transformPtr != NULL){
-		i2d::CVector2d prevPosition = transformPtr->GetApply(m_isClosed?
-					polyline.GetNode(size - 1):
-					polyline.GetNode(0));
+		i2d::CVector2d prevPosition = transformPtr->GetApply(polyline.GetNode(size - 1));
 
-		m_nodes.push_back(CEdgeNode(prevPosition, weight));
-
-		for (int i = 1; i < size; ++i){
+		for (int i = 0; i < size; ++i){
 			const i2d::CVector2d& position = transformPtr->GetApply(polyline.GetNode(i));
-			if (position != prevPosition){
+			if ((position != prevPosition) || (!m_isClosed && (i == 0))){
 				m_nodes.push_back(CEdgeNode(position, weight));
 			}
 
@@ -133,15 +130,11 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 		}
 	}
 	else{
-		i2d::CVector2d prevPosition = m_isClosed?
-					polyline.GetNode(size - 1):
-					polyline.GetNode(0);
+		i2d::CVector2d prevPosition = polyline.GetNode(size - 1);
 
-		m_nodes.push_back(CEdgeNode(prevPosition, weight));
-
-		for (int i = 1; i < size; ++i){
+		for (int i = 0; i < size; ++i){
 			const i2d::CVector2d& position = polyline.GetNode(i);
-			if (position != prevPosition){
+			if ((position != prevPosition) || (!m_isClosed && (i == 0))){
 				m_nodes.push_back(CEdgeNode(position, weight));
 			}
 
