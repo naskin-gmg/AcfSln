@@ -14,9 +14,9 @@ namespace iproc
 
 CSupplierCompBase::CSupplierCompBase()
 :	m_workStatus(WS_INVALID),
+	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
 	m_inputsObserver(this),
 	m_paramsObserver(this),
-	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
 	m_areParametersValid(false)
 {
 }
