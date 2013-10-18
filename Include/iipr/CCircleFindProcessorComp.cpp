@@ -491,7 +491,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 
 				const i2d::CVector2d& position = rayPoint.position;
 
-				ilog::TExtMessage<i2d::CPosition2d>* pointMessagePtr = new ilog::TExtMessage<i2d::CPosition2d>(
+				ilog::TExtMessageModel<i2d::CPosition2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
 							(rayIndex >= 0)?
 										istd::IInformationProvider::IC_INFO:
 										istd::IInformationProvider::IC_WARNING,
@@ -508,7 +508,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		}
 
 		if (*m_sendLinesToTempAttrPtr){
-			ilog::TExtMessage<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessage<i2d::CLine2d>(
+			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
 						istd::IInformationProvider::IC_INFO,
 						MI_INTERMEDIATE,
 						QString("Line %1").arg(rayIndex),
