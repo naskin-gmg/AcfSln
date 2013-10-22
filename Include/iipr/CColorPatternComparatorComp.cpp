@@ -313,9 +313,9 @@ bool CColorPatternComparatorComp::GetHsvColorValue(const imeas::IDataSequenceSta
 	Q_ASSERT(greenStatisticsPtr != NULL);
 	Q_ASSERT(blueStatisticsPtr != NULL);
 
-	double redMedian = redStatisticsPtr->GetMedian();
-	double greenMedian = greenStatisticsPtr->GetMedian(); 
-	double blueMedian = blueStatisticsPtr->GetMedian();
+	double redMedian = redStatisticsPtr->GetAverage();
+	double greenMedian = greenStatisticsPtr->GetAverage(); 
+	double blueMedian = blueStatisticsPtr->GetAverage();
 
 	icmm::CRgbToHsvTranformation rgbToHsv;
 	icmm::CRgb rgbMedian(redMedian, greenMedian, blueMedian);
