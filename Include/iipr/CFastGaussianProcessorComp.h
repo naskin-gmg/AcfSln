@@ -2,7 +2,7 @@
 #define iipr_CFastGaussianProcessorComp_included
 
 
-#include "iipr/CImageProcessorCompBase.h"
+#include "iipr/CImageRegionProcessorCompBase.h"
 
 
 namespace iipr
@@ -12,10 +12,10 @@ namespace iipr
 /**
 	Implementation of fast Gaussian filtering with static defined filter kernels.
 */
-class CFastGaussianProcessorComp: public iipr::CImageProcessorCompBase
+class CFastGaussianProcessorComp: public iipr::CImageRegionProcessorCompBase
 {
 public:
-	typedef iipr::CImageProcessorCompBase BaseClass;
+	typedef iipr::CImageRegionProcessorCompBase BaseClass;
 
 	enum KernelTypes
 	{
@@ -28,11 +28,12 @@ public:
 	I_END_COMPONENT;
 
 protected:
-	// reimplemented (iipr::CImageProcessorCompBase)
-	virtual bool ProcessImage(
-		const iprm::IParamsSet* paramsPtr, 
-		const iimg::IBitmap& inputImage,
-		iimg::IBitmap& outputImage);
+	// reimplemented (iipr::CImageRegionProcessorCompBase)
+	virtual bool ProcessImageRegion(
+				const iimg::IBitmap& inputBitmap,
+				const iprm::IParamsSet* paramsPtr,
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr) const;
 
 private:
 	I_ATTR(int, m_kernelTypeAttrPtr);

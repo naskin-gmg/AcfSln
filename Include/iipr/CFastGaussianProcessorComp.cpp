@@ -4,6 +4,10 @@
 // Qt includes
 #include <QtCore/QVector>
 
+// ACF includes
+#include "iimg/IBitmap.h"
+#include "iimg/CScanlineMask.h"
+
 
 namespace iipr
 {
@@ -23,22 +27,22 @@ template <	typename PixelType,
 			int AlphaIndex,
 			int ValueShift>
 bool DoConvolution(
-			const iimg::IBitmap& inputImage,
+			const iimg::IBitmap& inputBitmap,
 			KernelElement fastAccessElements[9],
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputBitmap)
 {
-	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	istd::CIndex2d imageSize = inputBitmap.GetImageSize();
 	if (imageSize.IsSizeEmpty()){
 		return false;
 	}
 
-	Q_ASSERT(imageSize == outputImage.GetImageSize());
+	Q_ASSERT(imageSize == outputBitmap.GetImageSize());
 	QVector<const quint8*> inputLines;
 	QVector<quint8*> outputLines;
 
 	for (int y = 1; y < imageSize.GetY() - 1; ++y){
-		inputLines.push_back(static_cast<const quint8*>(inputImage.GetLinePtr(y)));
-		outputLines.push_back(static_cast<quint8*>(outputImage.GetLinePtr(y)));
+		inputLines.push_back(static_cast<const quint8*>(inputBitmap.GetLinePtr(y)));
+		outputLines.push_back(static_cast<quint8*>(outputBitmap.GetLinePtr(y)));
 	}
 
 	int imageHeight = imageSize.GetY();
@@ -92,49 +96,75 @@ bool DoConvolution(
 
 
 bool DoGrayConvolution(
-			const iimg::IBitmap& inputImage,
-			KernelElement fastAccessElements[9],
-			iimg::IBitmap& outputImage)
+			const iimg::IBitmap& inputBitmap,
+			const i2d::IObject2d* aoiPtr,
+			iimg::IBitmap& outputBitmap)
 {
-	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	istd::CIndex2d imageSize = inputBitmap.GetImageSize();
 	if (imageSize.IsSizeEmpty()){
 		return false;
 	}
+	Q_ASSERT(imageSize == outputBitmap.GetImageSize());
 
-	Q_ASSERT(imageSize == outputImage.GetImageSize());
-
-	QVector<const quint8*> inputLines;
-	QVector<quint8*> outputLines;
-	for (int y = 1; y < imageSize.GetY() - 1; ++y){
-		inputLines.push_back(static_cast<const quint8*>(inputImage.GetLinePtr(y)));
-		outputLines.push_back(static_cast<quint8*>(outputImage.GetLinePtr(y)));
+	i2d::CRect regionRect(imageSize);
+	iimg::CScanlineMask bitmapRegion;
+	if (aoiPtr != NULL){
+		i2d::CRect clipArea(imageSize);
+		if (!bitmapRegion.CreateFromGeometry(*aoiPtr, &clipArea)){
+			return false;
+		}
+		
+		regionRect = bitmapRegion.GetBoundingBox();
 	}
 
-	int imageHeight = imageSize.GetY();
-	int imageWidth = imageSize.GetX();
+	int regionLeft = qMax(regionRect.GetLeft(), 1);
+	int regionRight = qMin(regionRect.GetRight(), imageSize.GetX() - 1);
+	int regionTop = qMax(regionRect.GetTop(), 1);
+	int regionBottom = qMin(regionRect.GetBottom(), imageSize.GetY() - 1);
 
-	#pragma omp parallel for
+	if ((regionRight <= regionLeft) || (regionBottom <= regionTop)){
+		outputBitmap.ResetImage();
 
-	for (int y = 1; y < imageHeight - 1; ++y){
-		const quint8* inputPtr = inputLines[y - 1];
-		quint8* outputPtr = outputLines[y - 1];
+		return true;
+	}
 
-		for (int x = 1; x < imageWidth - 1; ++x){
-			int sums = 0;
-			for (int i = 0; i < 9; ++i){
-				const KernelElement& kernelElement = fastAccessElements[i];
+	int linesDifference = inputBitmap.GetLinesDifference();
+	int pixelsDifference = inputBitmap.GetPixelsDifference();
 
-				const quint8* inputPixelPtr = (const quint8*)(inputPtr + kernelElement.offset);
-				int inputValue = *inputPixelPtr;
+//	#pragma omp parallel for
 
-				sums += (inputValue << kernelElement.shift);
-			}
+	for (int y = regionTop; y < regionBottom; ++y){
+		const quint8* inputPtr = ((const quint8*)inputBitmap.GetLinePtr(y)) + regionLeft * pixelsDifference;
+		quint8* outputPtr = ((quint8*)outputBitmap.GetLinePtr(y)) + regionLeft * pixelsDifference;
 
-			int outputValue = (sums >> 4);
+		const quint8* inputBuffer1 = (const quint8*)(inputPtr - pixelsDifference - linesDifference);
+		const quint8* inputBuffer2 = (const quint8*)(inputPtr - linesDifference);
+		const quint8* inputBuffer3 = (const quint8*)(inputPtr + pixelsDifference - linesDifference);
 
-			*outputPtr = quint8(outputValue);
+		const quint8* inputBuffer4 = (const quint8*)(inputPtr - pixelsDifference);
+		const quint8* inputBuffer5 = (const quint8*)(inputPtr);
+		const quint8* inputBuffer6 = (const quint8*)(inputPtr  + pixelsDifference);
 
-			inputPtr++;
+		const quint8* inputBuffer7 = (const quint8*)(inputPtr - pixelsDifference + linesDifference);
+		const quint8* inputBuffer8 = (const quint8*)(inputPtr + linesDifference);
+		const quint8* inputBuffer9 = (const quint8*)(inputPtr + pixelsDifference + linesDifference);
+
+		for (int x = regionLeft; x < regionRight; ++x){
+			int sums = *inputBuffer1;
+			sums += (*inputBuffer2) * 2;
+			sums += *inputBuffer3;
+
+			sums += (*inputBuffer4) * 2;
+			sums += (*inputBuffer5) * 4;
+			sums += (*inputBuffer6) * 2;
+
+			sums += *inputBuffer7;
+			sums += (*inputBuffer8) * 2;
+			sums += *inputBuffer9;
+
+			*outputPtr = quint8(sums >> 4);
+
+			++inputBuffer1, ++inputBuffer2, ++inputBuffer3, ++inputBuffer4, ++inputBuffer5, ++inputBuffer6, ++inputBuffer7, ++inputBuffer8, ++inputBuffer9;
 			outputPtr++;
 		}
 	}
@@ -145,22 +175,30 @@ bool DoGrayConvolution(
 
 // reimplemented (iipr::CImageProcessorCompBase)
 
-bool CFastGaussianProcessorComp::ProcessImage(
-			const iprm::IParamsSet* /*paramsPtr*/, 
-			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+bool CFastGaussianProcessorComp::ProcessImageRegion(
+				const iimg::IBitmap& inputBitmap,
+				const iprm::IParamsSet* /*paramsPtr*/,
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr) const
 {
-	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	if (inputImageSize != outputImage.GetImageSize()){
-		if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImageSize)){
+	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if (outputBitmapPtr == NULL){
+		SendCriticalMessage(0, "Expected interface for the output object is not supported");
+
+		return false;
+	}
+
+	istd::CIndex2d inputBitmapSize = inputBitmap.GetImageSize();
+	if (inputBitmapSize != outputBitmapPtr->GetImageSize()){
+		if (!outputBitmapPtr->CreateBitmap(inputBitmap.GetPixelFormat(), inputBitmapSize)){
 			SendErrorMessage(0, "Output image could not be created");		
 
 			return false;
 		}
 	}
 
-	int linesDifference = inputImage.GetLinesDifference();
-	int pixelsDifference = inputImage.GetPixelsDifference();
+	int linesDifference = inputBitmap.GetLinesDifference();
+	int pixelsDifference = inputBitmap.GetPixelsDifference();
 
 	switch (*m_kernelTypeAttrPtr){
 		case KT_3x3:
@@ -170,7 +208,7 @@ bool CFastGaussianProcessorComp::ProcessImage(
 			return false;
 	}
 
-	int pixelFormat = inputImage.GetPixelFormat();
+	int pixelFormat = inputBitmap.GetPixelFormat();
 
 	KernelElement fastAccessElements[9];
 
@@ -200,19 +238,19 @@ bool CFastGaussianProcessorComp::ProcessImage(
 
 	switch (pixelFormat){
 		case iimg::IBitmap::PF_GRAY:
-			return DoGrayConvolution(inputImage, fastAccessElements, outputImage);
+			return DoGrayConvolution(inputBitmap, aoiPtr, *outputBitmapPtr);
 
 		case iimg::IBitmap::PF_RGB:
-			return DoConvolution<quint8, qint32, 4, 4, -1, 4>(inputImage, fastAccessElements, outputImage);
+			return DoConvolution<quint8, qint32, 4, 4, -1, 4>(inputBitmap, fastAccessElements, *outputBitmapPtr);
 
 		case iimg::IBitmap::PF_RGBA:
-			return DoConvolution<quint8, qint32, 4, 4, 3, 4>(inputImage, fastAccessElements, outputImage);
+			return DoConvolution<quint8, qint32, 4, 4, 3, 4>(inputBitmap, fastAccessElements, *outputBitmapPtr);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoConvolution<quint16, qint32, 1, 1, -1, 4>(inputImage, fastAccessElements, outputImage);
+			return DoConvolution<quint16, qint32, 1, 1, -1, 4>(inputBitmap, fastAccessElements, *outputBitmapPtr);
 
 		case iimg::IBitmap::PF_GRAY32:
-			return DoConvolution<quint32, qint64, 1, 1, -1, 4>(inputImage, fastAccessElements, outputImage);
+			return DoConvolution<quint32, qint64, 1, 1, -1, 4>(inputBitmap, fastAccessElements, *outputBitmapPtr);
 
 		default:
 			SendErrorMessage(0, "Unsupported image format");
