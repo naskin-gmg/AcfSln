@@ -4,8 +4,6 @@
 // ACF includes
 #include "i2d/CAffineTransformation2d.h"
 
-#include "istd/CGeneralTimeStamp.h"
-
 
 namespace icam
 {
