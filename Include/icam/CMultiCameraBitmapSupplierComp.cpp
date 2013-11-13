@@ -76,9 +76,6 @@ bool CMultiCameraBitmapSupplierComp::InitializeWork()
 
 int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
-	istd::CGeneralTimeStamp timer;
-	timer.Start();
-
 	if (!m_bitmapCompFact.IsValid()){
 		return WS_CRITICAL;
 	}
@@ -101,7 +98,7 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 			if (cameraBitmapPtr.IsValid() && (m_bitmapAcquisitionCompPtr.IsValid())){
 				int status = m_bitmapAcquisitionCompPtr->DoProcessing(
 					m_cameraParamsManagerCompPtr->GetParamsSet(cameraIndex), 
-					&timer, 
+					NULL, 
 					cameraBitmapPtr.GetPtr());
 
 				switch (status){
