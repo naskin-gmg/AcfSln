@@ -54,7 +54,7 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 		RegisterModel(m_documentManagerModelCompPtr.GetPtr());
 	}
 	
-	QString menuName = tr("Processing");
+	QString menuName;
 
 	if (m_menuNameAttrPtr.IsValid()){
 		menuName = *m_menuNameAttrPtr;
@@ -63,9 +63,21 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 	if (m_commandNameAttrPtr.IsValid() && !(*m_commandNameAttrPtr).isEmpty()){
 		QString commandName = *m_commandNameAttrPtr;
 
-		m_processingCommand.SetVisuals(commandName, commandName, commandName);
-		m_rootCommands.SetVisuals(menuName, menuName, tr("Document processing actions"));
+		QIcon commandIcon;
 
+		if (m_commandIconPathAttrPtr.IsValid()){
+			commandIcon = QIcon(*m_commandIconPathAttrPtr);
+		}
+		
+		if (*m_commandShowInToolBarAttrPtr){
+			m_processingCommand.SetStaticFlags(m_processingCommand.GetStaticFlags() | ibase::ICommand::CF_TOOLBAR);
+		}
+
+		m_processingCommand.SetGroupId(*m_commandGroupIdAttrPtr);
+	
+		m_processingCommand.SetVisuals(commandName, commandName, commandName, commandIcon);
+
+		m_rootCommands.SetVisuals(menuName, menuName, tr("Document processing actions"));
 		m_rootCommands.InsertChild(&m_processingCommand);
 		m_processingMenu.InsertChild(&m_rootCommands);
 

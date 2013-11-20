@@ -38,9 +38,13 @@ public:
 		I_ASSIGN(m_paramsSetCompPtr, "ProcessingParamsSet", "Processing parameters", false, "ProcessingParameters");
 		I_ASSIGN(m_paramsGuiCompPtr, "ProcessingParamsGui", "UI for processing parameters", false, "ProcessingParamsGui");
 		I_ASSIGN(m_commandNameAttrPtr, "ProcessingCommandName", "Name of the processing action in menu", true, "");
-		I_ASSIGN(m_menuNameAttrPtr, "ProcessingMenuName", "Name of the processing menu", true, "Processing");
+		I_ASSIGN(m_menuNameAttrPtr, "ProcessingMenuName", "Name of the processing menu", false, "Processing");
 		I_ASSIGN(m_inputDocumentRequiredAttrPtr, "InputDocumentRequired", "If enabled, the input document is required for processing", false, true);
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "Document type ID used for document creation", false, "Default");
+		I_ASSIGN(m_commandGroupIdAttrPtr, "CommandGroup", "Specify the command group ID", true, 0);
+		I_ASSIGN(m_commandShowInToolBarAttrPtr, "ShowInToolsBar", "If enabled the command button will be shown also in the tool bar", true, false);
+		I_ASSIGN(m_commandIconPathAttrPtr, "CommandIconPath", "Path to the icon resource used for the command", false, "CommandIconPath");
+
 	I_END_COMPONENT;
 
 	CDocumentProcessingManagerCompBase();
@@ -83,6 +87,9 @@ protected:
 	I_ATTR(QString, m_menuNameAttrPtr);
 	I_ATTR(bool, m_inputDocumentRequiredAttrPtr);
 	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
+	I_ATTR(int, m_commandGroupIdAttrPtr);
+	I_ATTR(bool, m_commandShowInToolBarAttrPtr);
+	I_ATTR(QString, m_commandIconPathAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_processingMenu;
 	iqtgui::CHierarchicalCommand m_rootCommands;
