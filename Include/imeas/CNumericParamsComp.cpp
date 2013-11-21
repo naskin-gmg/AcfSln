@@ -55,6 +55,18 @@ void CNumericParamsComp::OnComponentCreated()
 			m_values[i] = lastValue;
 		}
 	}
+
+	if (m_constraintsModelCompPtr.IsValid()){
+		m_constraintsModelCompPtr->AttachObserver(this);
+	}
+}
+
+
+void CNumericParamsComp::OnComponentDestroyed()
+{
+	EnsureModelsDetached();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
