@@ -232,7 +232,7 @@ CSupplierCompBase::Timer::~Timer()
 		if (!diagnosticName.isEmpty()){
 			MessagePtr messagePtr(new ilog::CMessage(
 						istd::IInformationProvider::IC_INFO,
-						0,
+						MI_DURATION_TIME,
 						QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
 						diagnosticName));
 			m_parentPtr->m_messageContainer.AddMessage(messagePtr);

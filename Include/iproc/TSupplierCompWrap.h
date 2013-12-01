@@ -21,11 +21,6 @@ public:
 	typedef CSupplierCompBase BaseClass;
 	typedef Product ProductType;
 
-	enum MessageId
-	{
-		MI_DURATION_TIME = 0x077a1b
-	};
-
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 	I_END_COMPONENT;
 

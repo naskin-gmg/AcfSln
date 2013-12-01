@@ -30,6 +30,20 @@ class CSupplierCompBase:
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
+	enum MessageId
+	{
+		/**
+			The message contains product calculation time.
+		*/
+		MI_DURATION_TIME = 0x077a1b,
+
+		/**
+			The message describes status of the supplier results.
+			\sa istd::IInformationProvider
+		*/
+		MI_SUPPLIER_RESULTS_STATUS
+	};
+
 	I_BEGIN_BASE_COMPONENT(CSupplierCompBase);
 		I_REGISTER_INTERFACE(ISupplier);
 		I_REGISTER_SUBELEMENT(TaskLog);

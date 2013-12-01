@@ -53,11 +53,6 @@ public:
 		I_ASSIGN(m_searchParamsIdAttrPtr, "SearchParamsId", "ID of standard search parameters", true, "SearchParamsId");
 	I_END_COMPONENT;
 
-	enum MessageType
-	{
-		MT_SEARCH_RESULT = 0x2561
-	};
-
 	CEdgeBasedFeaturesSupplierComp();
 
 	// reimplemented (i2d::IMultiCalibrationProvider)

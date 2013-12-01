@@ -252,7 +252,7 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 
 					ilog::CMessage* message = new ilog::CMessage(
 								m_defaultInformationCategory,
-								MT_SEARCH_RESULT,
+								MI_SUPPLIER_RESULTS_STATUS,
 								searchResultText,
 								multiSearchParamsManagerPtr->GetParamsSetName(searchIndex));
 					AddMessage(message);
@@ -305,7 +305,7 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 
 				ilog::CMessage* message = new ilog::CMessage(
 							m_defaultInformationCategory,
-							MT_SEARCH_RESULT,
+							MI_SUPPLIER_RESULTS_STATUS,
 							searchResultText,
 							"SearchResult");
 				AddMessage(message);
