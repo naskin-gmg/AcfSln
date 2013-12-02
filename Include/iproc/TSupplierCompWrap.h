@@ -12,7 +12,7 @@ namespace iproc
 
 /**
 	Standard implementation of interface iproc::ISupplier with preparation for component implementation.
-	During component initialization you should call \c RegisterSupplierInput for all suppliers used by this component as a input.
+	During component initialization you should call \c RegisterSupplierInput for all suppliers used by this component as an input.
 */
 template <class Product>
 class TSupplierCompWrap: public CSupplierCompBase
