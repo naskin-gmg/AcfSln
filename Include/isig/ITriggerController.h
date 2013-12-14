@@ -7,6 +7,8 @@
 #include "istd/ITimeStamp.h"
 #include "istd/TDelPtr.h"
 
+#include "iprm/IParamsSet.h"
+
 
 namespace isig
 {
@@ -26,7 +28,7 @@ public:
 		Send software trigger to device.
 		\param	timeStampPtr	optional pointer to time stamp object, if it is not \c NULL, will be filled with trigger time stamp.
 	*/
-	virtual bool SendSoftwareTrigger(TimeStampPtr* timeStampPtrPtr = NULL) = 0;
+	virtual bool SendSoftwareTrigger(TimeStampPtr* timeStampPtrPtr = NULL, const iprm::IParamsSet* paramsPtr = NULL) = 0;
 };
 
 
