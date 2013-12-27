@@ -198,7 +198,6 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 
 	// Input image is RGB. Differences between teached and working images are done in HSV color space:
 	if (channelsCount == 3){
-		
 		icmm::CHsv teachedHsvColor;
 		if (!GetHsvColorValue(teachedStatistics, teachedHsvColor)){
 			return WS_ERROR;
@@ -236,7 +235,6 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 					(saturationDifference <= maxSaturationDifference) && 
 					(valueDifference <= maxValueDifference);
 	}
-
 	else if(channelsCount == 1){
 		const imeas::IDataStatistics* teachedStatisticsPtr = teachedStatistics.GetChannelStatistics(0);
 		Q_ASSERT(teachedStatisticsPtr != NULL);
@@ -259,6 +257,14 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	else{
 		I_CRITICAL();
 	}
+
+	ilog::CMessage* message = new ilog::CMessage(
+				GetInformationCategory(),
+				MI_SUPPLIER_RESULTS_STATUS,
+				GetInformationDescription(),
+				GetDiagnosticName());
+		
+	AddMessage(message);		
 
 	return WS_OK;
 }

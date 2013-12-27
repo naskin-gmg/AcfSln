@@ -206,7 +206,13 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 								&localFeatures);
 
 					if (searchState != iproc::IProcessor::TS_OK){
-						SendErrorMessage(0, QObject::tr("Search was not successful"));
+						ilog::CMessage* message = new ilog::CMessage(
+									istd::IInformationProvider::IC_NONE,
+									MI_SUPPLIER_RESULTS_STATUS,
+									QObject::tr("Search not successfull"),
+									multiSearchParamsManagerPtr->GetParamsSetName(searchIndex));
+						AddMessage(message);
+
 						return WS_ERROR;
 					}
 
@@ -247,6 +253,7 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 
 					if ((nominalModelsCount > 0) && (featuresCount < nominalModelsCount)){
 						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+						
 						searchResultText = QObject::tr("Search model was not found");
 					}
 
@@ -265,7 +272,14 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 								&result.first);
 
 				if (searchState != iproc::IProcessor::TS_OK){
-					SendErrorMessage(0, QObject::tr("Search was not successful"));
+					ilog::CMessage* message = new ilog::CMessage(
+								istd::IInformationProvider::IC_NONE,
+								MI_SUPPLIER_RESULTS_STATUS,
+								QObject::tr("Search not successfull"),
+								GetDiagnosticName());
+					
+					AddMessage(message);
+					
 					return WS_ERROR;
 				}
 
@@ -303,11 +317,16 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 					searchResultText = QObject::tr("Search model was not found");
 				}
 
+				QString sourceName = GetDiagnosticName();
+				if (sourceName.isEmpty()){
+					sourceName = "SearchResult";
+				}
+
 				ilog::CMessage* message = new ilog::CMessage(
 							m_defaultInformationCategory,
 							MI_SUPPLIER_RESULTS_STATUS,
 							searchResultText,
-							"SearchResult");
+							sourceName);
 				AddMessage(message);
 			}
 
