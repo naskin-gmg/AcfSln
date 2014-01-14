@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3159
+          3252
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1027
+          1067
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -742,7 +742,7 @@
         PositionTask
       </Id>
       <PackageId>
-        QStdPck
+        QInspectionPck
       </PackageId>
       <ComponentId>
         CircleFinderSupplier
@@ -1123,7 +1123,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
         i2d::ICalibrationProvider
@@ -1159,6 +1159,22 @@
     <Interface>
       <InterfaceId>
         istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IInformationProvider
+      </InterfaceId>
+      <ComponentId>
+        PositionTask
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
       </InterfaceId>
       <ComponentId>
         PositionTask
