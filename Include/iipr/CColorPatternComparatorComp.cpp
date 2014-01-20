@@ -259,7 +259,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	}
 
 	ilog::CMessage* message = new ilog::CMessage(
-				GetInformationCategory(),
+				m_isColorPatternMatched ? IC_INFO : IC_ERROR,
 				MI_SUPPLIER_RESULTS_STATUS,
 				GetInformationDescription(),
 				GetDiagnosticName());
