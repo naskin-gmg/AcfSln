@@ -1218,26 +1218,20 @@ void CVisualRegistryEditorComp::OnExecutionTimerTick()
 void CVisualRegistryEditorComp::OnShowRegistryTopology()
 {
 	if (m_registryTopologyGuiCompPtr.IsValid()){
-		iqtgui::CGuiComponentDialog dialog(m_registryTopologyGuiCompPtr.GetPtr());
+		iqtgui::CGuiComponentDialog dialog(m_registryTopologyGuiCompPtr.GetPtr(), QDialogButtonBox::Close);
 		dialog.setWindowIcon(m_showRegistryTopologyCommand.icon());
 		dialog.setWindowTitle(tr("Registry Topology"));
 
 		// find button box and disable default button to ignore Enter presses
-		const QDialogButtonBox* box = dialog.GetButtonBoxPtr();
-		if (box){
-			QPushButton* button = dynamic_cast<QPushButton*>(box->button(QDialogButtonBox::Close));
-			if (button){
-				button->setAutoDefault(false);
+		const QDialogButtonBox* buttonBoxPtr = dialog.GetButtonBoxPtr();
+		if (buttonBoxPtr != NULL){
+			QPushButton* closeButtonPtr = dynamic_cast<QPushButton*>(buttonBoxPtr->button(QDialogButtonBox::Close));
+			if (closeButtonPtr != NULL){
+				closeButtonPtr->setAutoDefault(false);
 			}
 		}
 
-
-		const QDesktopWidget* desktopPtr = QApplication::desktop();
-		Q_ASSERT(desktopPtr != NULL);
-
-		QRect screenRect = desktopPtr->screenGeometry();
-
-		dialog.resize(int(screenRect.width() * 0.7), int(screenRect.height() * 0.7));
+		dialog.SetDialogGeometry(0.7);
 
 		dialog.exec();
 	}
