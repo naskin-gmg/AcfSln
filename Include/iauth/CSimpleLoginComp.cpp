@@ -3,7 +3,6 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "iser/IArchive.h"
 
 
@@ -79,7 +78,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 		CUser& user = GetUser(userIndex);
 
 		if (user.CheckPassword(password)){
-			istd::TChangeNotifier<IRightsProvider> updatePtr(this);
+			istd::CChangeNotifier changePtr(this, CF_LOGIN | CF_MODEL);
 
 			m_loggedUserIndex = userIndex;
 
@@ -94,7 +93,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 bool CSimpleLoginComp::Logout()
 {
 	if (m_loggedUserIndex >= 0){
-		istd::TChangeNotifier<IRightsProvider> updatePtr(this);
+		istd::CChangeNotifier changePtr(this, CF_LOGOUT | CF_MODEL);
 
 		m_loggedUserIndex = -1;
 
