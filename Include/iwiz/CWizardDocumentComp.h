@@ -47,6 +47,8 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	virtual bool SerializeParamSets(iser::IArchive& archive);
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
