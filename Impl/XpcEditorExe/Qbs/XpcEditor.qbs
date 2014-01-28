@@ -1,6 +1,6 @@
 import qbs.base 1.0
-import "../../../Config/Qbs/AcfApplication.qbs" as AcfApplication
-import "../../../Config/Qbs/AcfStaticLibrary.qbs" as AcfStaticLibrary
+import AcfApplication as AcfApplication
+import AcfStaticLibrary as AcfStaticLibrary
 
 Project{
 	StaticLibrary{

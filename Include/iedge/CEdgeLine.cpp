@@ -22,6 +22,7 @@ CEdgeLine::CEdgeLine()
 
 
 CEdgeLine::CEdgeLine(const CEdgeLine& edgeLine)
+:	BaseClass(edgeLine)
 {
 	m_nodes = edgeLine.m_nodes;
 	m_isClosed = edgeLine.m_isClosed;
