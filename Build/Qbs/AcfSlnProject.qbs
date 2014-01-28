@@ -87,6 +87,7 @@ Project{
 
 		destinationDirectory: "Config"
 
+		Depends{ name: "acf" }
 		Depends{ name: "AuthorizationPck" }
 		Depends{ name: "ProcessingPck" }
 		Depends{ name: "FileProcessingPck" }
@@ -112,6 +113,5 @@ Project{
 		Depends{ name: "CompositorPck" }
 		Depends{ name: "DocumentProcessingPck" }
 		Depends{ name: "AcfCoreConfig" }
-		Depends{ name: "acf" }
 	}
 }

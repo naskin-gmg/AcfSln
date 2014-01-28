@@ -10,7 +10,7 @@ Project{
 
 		files: ["../*.arx", "../*.qrc"]
 
-		acf.generatedOutputDir: "GeneratedFiles/XpcEditor"
+		Depends{ name: "acf" }
 
         Depends{ name: "ArxcExe" }
 
@@ -21,7 +21,8 @@ Project{
 		Depends{ name: "FilePck" }
 		Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
-		Depends{ name: "acf" }
+
+		acf.generatedOutputDir: "GeneratedFiles/XpcEditor"
 	}
 
 	AcfApplication{
