@@ -54,6 +54,11 @@ I_EXPORT_COMPONENT(
 			"Single bitmap supplier from a mutli bitmap provider", 
 			"Image Bitmap Camera Snap Acquisition Supplier Multi Selection Single Manager");
 
+I_EXPORT_COMPONENT(
+			MultiLayerBitmapSupplier, 
+		   "Multi layer bitmap supplier", 
+		   "Image Bitmap Camera Snap Acquisition Supplier Multi");
+
 
 } // namespace CameraPck
 

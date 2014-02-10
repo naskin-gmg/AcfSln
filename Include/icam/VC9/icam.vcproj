@@ -173,6 +173,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLayerBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableBitmapSupplierComp.cpp"
 				>
 			</File>
@@ -207,6 +211,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiCameraBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiLayerBitmapSupplierComp.h"
 				>
 			</File>
 			<File
