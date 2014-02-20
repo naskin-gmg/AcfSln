@@ -21,13 +21,15 @@ namespace iipr
 */
 class CMultiLineProjectionSupplierComp:
 			public iproc::TSupplierCompWrap< QVector<imeas::CGeneralDataSequence> >,
-			virtual public imeas::IMultiDataSequenceProvider
+			virtual public imeas::IMultiDataSequenceProvider,
+			virtual public imeas::IDataSequenceProvider
 {
 public:
 	typedef iproc::TSupplierCompWrap< QVector<imeas::CGeneralDataSequence> > BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IMultiDataSequenceProvider);
+		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provides image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
@@ -40,6 +42,9 @@ public:
 	// reimplemented (imeas::IMultiDataSequenceProvider)
 	virtual int GetSequencesCount() const;
 	virtual const imeas::IDataSequence* GetDataSequence(int index) const;
+
+	// reimplemented (imeas::IDataSequenceProvider)
+	virtual const imeas::IDataSequence* GetDataSequence() const;
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)

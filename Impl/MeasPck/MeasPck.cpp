@@ -83,6 +83,16 @@ I_EXPORT_COMPONENT(
 			"Calculate the cross correlation of two data sequences",
 			"Correlation Processor Comparsion" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			ProcessedDataSequenceSupplier,
+			"Data sequence supplier providing processed data sequence from another one",
+			"Supplier Data Sequence Processing Processor" IM_AUTHOR("\"Alexander Duda\""));
+
+I_EXPORT_COMPONENT(
+			DataSequenceJoinerSupplier,
+			"Data sequence joiner from a (multi-)datasequence-provider",
+			"Data Sequence Supplier Provider Join" IM_AUTHOR("\"Alexander Duda\""));
+
 
 } // namespace MeasPck
 
