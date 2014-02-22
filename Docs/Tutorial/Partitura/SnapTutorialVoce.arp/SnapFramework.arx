@@ -83,7 +83,7 @@
         ImageDialogLoader
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader
