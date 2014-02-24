@@ -39,11 +39,7 @@ int CDataSequenceJoinerSupplierComp::ProduceObject(ProductType& result) const
 		int endChannelsCount = 0;
 		for (int providerIndex = 0; providerIndex < providerCount; ++providerIndex){
 			imeas::IDataSequenceProvider* provider = m_dataSequenceProviderCompPtr[providerIndex];
-			iproc::ISupplier* supplier = m_dataSequenceSupplierCompPtr[providerIndex];
-			if ((provider != NULL) && (supplier != NULL)){
-				supplier->InvalidateSupplier();
-				supplier->EnsureWorkInitialized();
-				supplier->EnsureWorkFinished();
+			if ((provider != NULL)){
 				const imeas::IDataSequence* sequence = provider->GetDataSequence();
 				if (sequence != NULL){
 					int samplesCount = sequence->GetSamplesCount();
