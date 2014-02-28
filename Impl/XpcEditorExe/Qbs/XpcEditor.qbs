@@ -18,8 +18,9 @@ Project{
 		Depends{ name: "CompositorPck" }
 		Depends{ name: "QtGuiPck" }
 		Depends{ name: "QtPck" }
-		Depends{ name: "FilePck" }
-		Depends{ name: "BasePck" }
+        Depends{ name: "FilePck" }
+        Depends{ name: "FileGuiPck" }
+        Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
 
 		acf.generatedOutputDir: "GeneratedFiles/XpcEditor"

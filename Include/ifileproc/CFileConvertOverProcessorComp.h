@@ -59,8 +59,6 @@ private:
 	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iprm::IParamsSet, m_processingParamsSetCompPtr);
 
-	int m_progressSessionId;
-
 	mutable QMutex m_mutex;
 };
 

@@ -64,7 +64,7 @@ void CPropertiesEditorComp::OnGuiCreated()
 #else
 	PropertyTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 #endif
-	PropertyTree->setItemDelegate(new EditorDelegate(*this));
+	PropertyTree->setItemDelegate(new EditorDelegate());
 }
 
 
@@ -147,12 +147,6 @@ void CPropertiesEditorComp::SetDataToEditor(const IProperty& objectProperty, QTr
 	if (idPropertyPtr != NULL){
 		propertyItem.setText(CT_VALUE, idPropertyPtr->GetValue());
 	}
-}
-
-
-CPropertiesEditorComp::EditorDelegate::EditorDelegate(CPropertiesEditorComp& parent)
-	:m_parent(parent)
-{
 }
 
 

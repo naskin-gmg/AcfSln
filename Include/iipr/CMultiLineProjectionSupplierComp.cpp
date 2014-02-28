@@ -125,7 +125,6 @@ const imeas::IDataSequence* CMultiLineProjectionSupplierComp::GetDataSequence() 
 				
 		int sequenceCount = resultPtr->count();
 		int endChannelsCount = 0;
-		int endSamplesCount = 0;
 		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex) {
 			const imeas::CGeneralDataSequence singleSequence = resultPtr->at(sequenceIndex);
 			int channelsCount = singleSequence.GetChannelsCount();

@@ -137,10 +137,10 @@ void CUserManagerDialog::UpdateUserList()
 			if (user.GetUserGroup() < loggedUserLevel){
 				QTreeWidgetItem* itemPtr;
 				itemPtr = new QTreeWidgetItem(QTreeWidgetItem::Type);
-				itemPtr->setText(LC_NAME, user.GetUserName());
+                itemPtr->setText(LC_NAME_COLUMN, user.GetUserName());
 				itemPtr->setText(LC_GROUP, m_manager.GetUserGroupName(user.GetUserGroup()));
 				itemPtr->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable);
-				itemPtr->setData(LC_NAME, Qt::UserRole, i);
+                itemPtr->setData(LC_NAME_COLUMN, Qt::UserRole, i);
 				itemPtr->setData(LC_GROUP, Qt::UserRole, i);
 
 				TreeUserList->addTopLevelItem(itemPtr);
@@ -172,7 +172,7 @@ QWidget* CUserManagerDialog::CUserManagerItemDelegate::createEditor(
 				const QModelIndex& index) const
 {
 	switch (index.column()){
-	case LC_NAME:
+    case LC_NAME_COLUMN:
 		{
 			QString text = index.data().toString();
 			QLineEdit* lineEditPtr = new QLineEdit(parent);
@@ -207,7 +207,7 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 				const QModelIndex& index) const
 {
 	switch (index.column()){
-	case LC_NAME:
+    case LC_NAME_COLUMN:
 		{
 			QLineEdit* lineEditPtr = dynamic_cast<QLineEdit*>(editor);
 			Q_ASSERT(lineEditPtr != NULL);	// was created by createEditor(...)

@@ -20,7 +20,8 @@ Project{
 		Depends{ name: "QtGuiPck" }
 		Depends{ name: "QtPck" }
 		Depends{ name: "FilePck" }
-		Depends{ name: "BasePck" }
+        Depends{ name: "FileGuiPck" }
+        Depends{ name: "BasePck" }
 		Depends{ name: "PackagePck" }
 
 		acf.generatedOutputDir: "GeneratedFiles/Compositor"

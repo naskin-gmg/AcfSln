@@ -69,7 +69,6 @@ private:
 	mutable bool m_isCacheValid;
 
 	// cached values
-	mutable bool m_isStateEnabled;
 	mutable bool m_isEnterAllowed;
 	mutable bool m_isLeaveAllowed;
 };
