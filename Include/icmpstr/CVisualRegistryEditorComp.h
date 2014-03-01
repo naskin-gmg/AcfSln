@@ -244,7 +244,7 @@ private:
 	I_REF(IRegistryConsistInfo, m_consistencyInfoCompPtr);
 	I_REF(iqtgui::IGuiObject, m_registryTopologyGuiCompPtr);
 	I_REF(imod::IObserver, m_registryObserverCompPtr);
-	I_REF(iqtgui::IVisualStatusProvider, m_registryValidationStatusCompPtr);
+	I_REF(iqtgui::IVisualStatus, m_registryValidationStatusCompPtr);
 	I_REF(imod::IModel, m_registryValidationStatusModelCompPtr);
 	I_REF(ISceneProvider, m_sceneProviderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_sceneProviderGuiCompPtr);

@@ -148,7 +148,7 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_editorGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_editorObserversCompPtr);
 	I_MULTIREF(iqt2d::IViewExtender, m_editorViewExtendersCompPtr);
-	I_MULTIREF(iqtgui::IVisualStatusProvider, m_editorVisualInfosCompPtr);
+	I_MULTIREF(iqtgui::IVisualStatus, m_editorVisualInfosCompPtr);
 	I_MULTIREF(imod::IModel, m_editorVisualModelsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);

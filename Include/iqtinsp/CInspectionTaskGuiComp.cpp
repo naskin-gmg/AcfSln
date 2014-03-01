@@ -253,7 +253,7 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 		QString toolTip;
 
 		if (guiIndex < visualProvidersCount){
-			const iqtgui::IVisualStatusProvider* visualProviderPtr = m_editorVisualInfosCompPtr[guiIndex];
+			const iqtgui::IVisualStatus* visualProviderPtr = m_editorVisualInfosCompPtr[guiIndex];
 			if (visualProviderPtr != NULL){
 				tabIcon = visualProviderPtr->GetStatusIcon();
 				toolTip = visualProviderPtr->GetStatusText();
