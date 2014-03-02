@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3296
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -246,7 +246,7 @@
         OutputData
       </Id>
       <PackageId>
-        QtPck
+        BitmapPck
       </PackageId>
       <ComponentId>
         Bitmap
@@ -275,23 +275,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
-    <Component>
-      <ExportedId>
-        HotfolderSettings
-      </ExportedId>
-      <ComponentId>
-        Hotfolder/HotfolderSettings
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HotfolderState
-      </ExportedId>
-      <ComponentId>
-        Hotfolder/HotfolderState
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Image-To-Image file converter
