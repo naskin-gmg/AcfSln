@@ -49,6 +49,14 @@ Project{
 		Depends{ name: "Qt.widgets" }
 		Depends{ name: "Qt.gui" }
 
+        Group{
+            name: "MAC-Resources"
+            condition: qbs.targetOS.contains("osx")
+
+            cpp.infoPlistFile: "../Mac/Info.plist"
+            cpp.infoPlistFormat: "xml1"
+        }
+
 		Group{
 			name: "VC-Resources"
 			condition: qbs.toolchain.contains("msvc")
