@@ -193,14 +193,14 @@ bool CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
 				SetFittedScale(m_fitMode != FM_NONE? m_fitMode: FM_ISOTROPIC);
 			}
 			else{
+				SceneView->showNormal();
+
 				if (m_savedParentWidgetPtr != NULL){
 					SceneView->setParent(m_savedParentWidgetPtr);
 					m_savedParentWidgetPtr->layout()->addWidget(SceneView);
 				}
 
 				m_savedParentWidgetPtr = NULL;
-
-				SceneView->showNormal();
 
 				SceneView->setMatrix(m_savedViewTransform);
 			}
