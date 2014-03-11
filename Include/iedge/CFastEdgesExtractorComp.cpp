@@ -621,7 +621,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				CEdgeNode node(
 							nodeElementPtr->position,
-							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
+							nodeElementPtr->derivative.GetLength() * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);
 			}
@@ -652,7 +652,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 
 				CEdgeNode node(
 							nodeElementPtr->position,
-							nodeElementPtr->rawWeight * weightScale / THRESHOLD_FACTOR);
+							nodeElementPtr->derivative.GetLength() * weightScale / THRESHOLD_FACTOR);
 
 				resultLine.InsertNode(node);
 
