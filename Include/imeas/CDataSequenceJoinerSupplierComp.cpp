@@ -33,6 +33,8 @@ int CDataSequenceJoinerSupplierComp::ProduceObject(ProductType& result) const
 
 	istd::CChangeNotifier updater(&result);
 
+	result.ResetSequence();
+
 	if (m_dataSequenceProviderCompPtr.IsValid()){
 		int providerCount = m_dataSequenceProviderCompPtr.GetCount();
 		int endSamplesCount = 0;
