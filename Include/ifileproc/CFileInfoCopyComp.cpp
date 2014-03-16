@@ -77,7 +77,7 @@ bool CFileInfoCopyComp::ConvertFiles(
 				if (endIndex < 0){
 					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is incomplete").arg(inputFileName).arg(lineCounter));
 
-					return false;
+					break;
 				}
 				QString substitutionTag = line.mid(beginIndex + 1, endIndex - beginIndex - 1);
 				QString substituted;
@@ -88,9 +88,9 @@ bool CFileInfoCopyComp::ConvertFiles(
 					endIndex += substituted.length() - (endIndex - beginIndex + 1);
 				}
 				else{
-					SendErrorMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
 
-					return false;
+					break;
 				}
 			}
 		}
