@@ -66,27 +66,29 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 
 	int inputPixelComponentCount = inputBitmap.GetComponentsCount();
 
-	for (int y = 0; y < imageSize.GetY(); ++y){
-		quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
-		quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+    // the loops are optimized for efficient SIMD vectorization
+	if (inputFormat == iimg::IBitmap::PF_RGBA){       
+        for (int y = 0; y < imageSize.GetY(); ++y){
+			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
+			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 
-		for (int x = 0; x < imageSize.GetX(); ++x){
-			quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
+            for (int x = 0; x < imageSize.GetX(); ++x){
+				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-			quint8 r = pixelPtr[0];
-			quint8 g = pixelPtr[1];
-			quint8 b = pixelPtr[2];
+                outputImageLinePtr[x] = pixelPtr[3] * (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 16;
+            }
+		}
+	}
+	else{
+        for (int y = 0; y < imageSize.GetY(); ++y){
+			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
+			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 
-			if (inputFormat == iimg::IBitmap::PF_RGBA){
-				double alpha = pixelPtr[3] / 255.0;
+            for (int x = 0; x < imageSize.GetX(); ++x){
+				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-				r = quint8(r * alpha);
-				g = quint8(g * alpha);
-				b = quint8(b * alpha);
+                outputImageLinePtr[x] = (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 8;
 			}
-
-			outputImageLinePtr[x] = (77 * r + 151 * g + 28 * b) >> 8;
-
 		}
 	}
 
