@@ -238,16 +238,6 @@ bool CPropertiesManager::ReadProperties(
 				}
 			}
 
-			iser::IObject* propertyPtr = NULL;
-			if (isToSerialize && (existingPropertyPtr != NULL)){
-				Q_ASSERT(existingPropertyPtr->objectPtr.IsValid());
-				propertyPtr = existingPropertyPtr->objectPtr.GetPtr();
-			}
-			else{
-				newObjectPtr.SetPtr(GetPropertyFactory().CreateInstance(propertyTypeId));
-				propertyPtr = newObjectPtr.GetPtr();
-			}
-
 			// Support for old property type format:
 			QMap<QByteArray, QByteArray> oldPropertyTypeMap;
 
@@ -267,10 +257,33 @@ bool CPropertiesManager::ReadProperties(
 				propertyTypeId = oldPropertyTypeMap.value(propertyTypeId);
 			}
 
+			iser::IObject* propertyPtr = NULL;
+			if (isToSerialize && (existingPropertyPtr != NULL)){
+				Q_ASSERT(existingPropertyPtr->objectPtr.IsValid());
+				propertyPtr = existingPropertyPtr->objectPtr.GetPtr();
+			}
+			else{
+				newObjectPtr.SetPtr(GetPropertyFactory().CreateInstance(propertyTypeId));
+				propertyPtr = newObjectPtr.GetPtr();
+			}
+
+
+			if (propertyPtr == NULL){
+				qDebug("Property could not be restored from the media");
+
+				return false;
+			}
+		
 			static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object");
-			retVal = retVal && archive.BeginTag(propertyObjectTag);
+
+			if (versionNumber > 931){
+				retVal = retVal && archive.BeginTag(propertyObjectTag);
+			}
 			retVal = retVal && propertyPtr->Serialize(archive);
-			retVal = retVal && archive.EndTag(propertyObjectTag);
+
+			if (versionNumber > 931){
+				retVal = retVal && archive.EndTag(propertyObjectTag);
+			}
 
 			if (isToSerialize){
 				if (retVal && newObjectPtr.IsValid()){
@@ -374,6 +387,29 @@ bool CPropertiesManager::AreIdsEqual(QByteArray firstId, QByteArray secondId) co
 
 	firstId.replace(QByteArray(" "), QByteArray(""));
 	secondId.replace(QByteArray(" "), QByteArray(""));
+
+	if (firstId == secondId){
+		return true;
+	}
+
+	// Support for old property type format:
+	QMap<QByteArray, QByteArray> oldPropertyTypeMap;
+
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<int> >()] = TProperty<int>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<double> >()] = TProperty<double>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<bool> >()] = TProperty<bool>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QString> >()] = TProperty<QString>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TProperty<QByteArray> >()] = TProperty<QByteArray>::GetTypeName();
+
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<int> >()] = TMultiProperty<int>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<double> >()] = TMultiProperty<double>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<bool> >()] = TMultiProperty<bool>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QString> >()] = TMultiProperty<QString>::GetTypeName();
+	oldPropertyTypeMap[istd::CClassInfo::GetName<TMultiProperty<QByteArray> >()] = TMultiProperty<QByteArray>::GetTypeName();
+
+	if (oldPropertyTypeMap.contains(firstId)){
+		firstId = oldPropertyTypeMap.value(firstId);
+	}
 
 	return (firstId == secondId);
 }
