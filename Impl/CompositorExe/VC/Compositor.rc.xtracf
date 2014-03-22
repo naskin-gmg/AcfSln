@@ -50,7 +50,7 @@ BEGIN
             VALUE "FileDescription", "ACF Compositor"
             VALUE "FileVersion", "$AcfVersion:1$"
             VALUE "InternalName", "Compositor"
-            VALUE "LegalCopyright", "Copyright (C) 2009-2011 Witold Gantzke and Kirill Lepskiy"
+            VALUE "LegalCopyright", "Copyright (C) 2009-2014 Witold Gantzke and Kirill Lepskiy"
             VALUE "OriginalFilename", "Compositor.exe"
             VALUE "ProductName", "ACF Compositor"
             VALUE "ProductVersion", "$AcfVersion:1$"
