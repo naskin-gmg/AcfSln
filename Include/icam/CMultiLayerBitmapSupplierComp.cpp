@@ -45,6 +45,19 @@ const iprm::IOptionsList* CMultiLayerBitmapSupplierComp::GetBitmapListInfo() con
 }
 
 
+// reimplemented (idoc::IMultiPageDocumentProvider)
+
+const idoc::IMultiPageDocument* CMultiLayerBitmapSupplierComp::GetDocument() const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if (productPtr != NULL){
+		return dynamic_cast<const idoc::IMultiPageDocument*>(productPtr->GetPtr());
+	}
+
+	return NULL;
+}
+
+
 // protected methods
 
 // reimplemented (iproc::TSupplierCompWrap)
