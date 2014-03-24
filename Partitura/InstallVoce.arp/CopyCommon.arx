@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3157
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1024
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -452,7 +452,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="13">
+              <Values count="15">
                 <Value>
                   *.htm
                 </Value>
@@ -491,6 +491,12 @@
                 </Value>
                 <Value>
                   *.tag
+                </Value>
+                <Value>
+                  *.qhc
+                </Value>
+                <Value>
+                  *.chm
                 </Value>
               </Values>
             </Data>
