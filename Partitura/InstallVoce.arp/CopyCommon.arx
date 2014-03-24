@@ -493,7 +493,7 @@
                   *.tag
                 </Value>
                 <Value>
-                  *.qhc
+                  *.qch
                 </Value>
                 <Value>
                   *.chm
