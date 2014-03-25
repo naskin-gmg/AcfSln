@@ -16,7 +16,10 @@ namespace iqtex
 {
 
 
-int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
+int CXslSerializerComp::LoadFromFile(
+			istd::IChangeable& data,
+			const QString& filePath,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		CXslTransformationReadArchive archive(filePath, m_xslReadFilePath->GetPath());
@@ -41,7 +44,10 @@ int CXslSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& fil
 }
 
 
-int CXslSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
+int CXslSerializerComp::SaveToFile(
+			const istd::IChangeable& data,
+			const QString& filePath,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), this);

@@ -33,7 +33,10 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 }
 
 
-int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
+int CRenderedObjectFileLoaderComp::LoadFromFile(
+			istd::IChangeable& data,
+			const QString& filePath,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(&data);
 	if (bitmapPtr == NULL){
@@ -89,7 +92,10 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const Q
 }
 
 
-int CRenderedObjectFileLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
+int CRenderedObjectFileLoaderComp::SaveToFile(
+			const istd::IChangeable& data,
+			const QString& filePath,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
 		return m_fileLoaderCompPtr->SaveToFile(data, filePath);
