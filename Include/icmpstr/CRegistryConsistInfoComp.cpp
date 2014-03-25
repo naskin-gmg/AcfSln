@@ -388,8 +388,8 @@ QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress&
 				if (packageDir.exists("Image.png")){
 					icon = QIcon(packageDir.filePath("Image.png"));
 				}
-				else if (packageDir.exists("Image.svg")){
-					icon = QIcon(packageDir.filePath("Image.svg"));
+				else if (packageDir.exists("Image")){
+					icon = QIcon(packageDir.filePath("Image"));
 				}
 
 				return icon;

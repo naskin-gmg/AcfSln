@@ -24,7 +24,7 @@
      </property>
      <property name="icon">
       <iconset resource="../iqtgui/iqtgui.qrc">
-       <normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
+       <normaloff>:/Icons/Play</normaloff>:/Icons/Play</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -107,7 +107,7 @@
      </property>
      <property name="icon">
       <iconset resource="../iqtgui/iqtgui.qrc">
-       <normaloff>:/Icons/Reload.svg</normaloff>:/Icons/Reload.svg</iconset>
+       <normaloff>:/Icons/Reload</normaloff>:/Icons/Reload</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>

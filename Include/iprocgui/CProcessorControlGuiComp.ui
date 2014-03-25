@@ -66,7 +66,7 @@
           </property>
           <property name="icon">
            <iconset resource="../iqtgui/iqtgui.qrc">
-            <normaloff>:/Icons/AutoUpdate.svg</normaloff>:/Icons/AutoUpdate.svg</iconset>
+            <normaloff>:/Icons/AutoUpdate</normaloff>:/Icons/AutoUpdate</iconset>
           </property>
           <property name="checkable">
            <bool>true</bool>

@@ -42,7 +42,7 @@
        </property>
        <property name="icon">
         <iconset resource="../iqtgui/iqtgui.qrc">
-         <normaloff>:/Icons/Add.svg</normaloff>:/Icons/Add.svg</iconset>
+         <normaloff>:/Icons/Add</normaloff>:/Icons/Add</iconset>
        </property>
       </widget>
      </item>
@@ -53,7 +53,7 @@
        </property>
        <property name="icon">
         <iconset resource="../iqtgui/iqtgui.qrc">
-         <normaloff>:/Icons/Delete.svg</normaloff>:/Icons/Delete.svg</iconset>
+         <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
        </property>
       </widget>
      </item>
@@ -80,7 +80,7 @@
        </property>
        <property name="icon">
         <iconset resource="../iqtgui/iqtgui.qrc">
-         <normaloff>:/Icons/Up.svg</normaloff>:/Icons/Up.svg</iconset>
+         <normaloff>:/Icons/Up</normaloff>:/Icons/Up</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>
@@ -94,7 +94,7 @@
        </property>
        <property name="icon">
         <iconset resource="../iqtgui/iqtgui.qrc">
-         <normaloff>:/Icons/Down.svg</normaloff>:/Icons/Down.svg</iconset>
+         <normaloff>:/Icons/Down</normaloff>:/Icons/Down</iconset>
        </property>
        <property name="autoRepeat">
         <bool>true</bool>

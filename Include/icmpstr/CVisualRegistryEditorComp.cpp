@@ -539,7 +539,7 @@ void CVisualRegistryEditorComp::DoRetranslate()
 				tr("&Remove"), 
 				tr("Remove"), 
 				tr("Remove the selected element from the registry"),
-				QIcon(":/Icons/Delete.svg"));
+				QIcon(":/Icons/Delete"));
 	m_renameComponentCommand.SetVisuals(
 				tr("&Rename Component"), 
 				tr("Rename"), 
@@ -556,27 +556,27 @@ void CVisualRegistryEditorComp::DoRetranslate()
 				tr("To &Embedded Composition"), 
 				tr("To Embedded"), 
 				tr("Make embedded component composition from selected elements.\nIt allows to group set of components and manage it as single one"),
-				QIcon(":/Icons/ToEmbeddedComponent.svg"));
+				QIcon(":/Icons/ToEmbeddedComponent"));
 	m_removeEmbeddedRegistryCommand.SetVisuals(
 				tr("Remove Embedded Composition"), 
 				tr("Remove Embedded"), 
 				tr("Remove active embedded component composition"),
-				QIcon(":/Icons/Delete.svg"));
+				QIcon(":/Icons/Delete"));
 	m_exportToCodeCommand.SetVisuals(
 				tr("&Export To Code..."),
 				tr("Export"),
 				tr("Generates C++ code according to this registry"),
-				QIcon(":/Icons/ExportToCode.svg"));
+				QIcon(":/Icons/ExportToCode"));
 	m_executeRegistryCommand.SetVisuals(
 				tr("&Execute Registry"), 
 				tr("&Execute Registry"), 
 				tr("Start registry execution"),
-				QIcon(":/Icons/Play.svg"));
+				QIcon(":/Icons/Play"));
 	m_abortRegistryCommand.SetVisuals(
 				tr("&Abort Registry"), 
 				tr("&Abort Registry"), 
 				tr("Abort registry execution"),
-				QIcon(":/Icons/Stop.svg"));
+				QIcon(":/Icons/Stop"));
 	m_showRegistryTopologyCommand.SetVisuals(
 			tr("&Show Component Topology..."),
 				tr("&Show Component Topology"), 

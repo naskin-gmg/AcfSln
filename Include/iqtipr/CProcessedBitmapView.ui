@@ -96,7 +96,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-            <normaloff>:/Icons/Open.svg</normaloff>:/Icons/Open.svg</iconset>
+            <normaloff>:/Icons/Open</normaloff>:/Icons/Open</iconset>
           </property>
           <property name="toolButtonStyle">
            <enum>Qt::ToolButtonTextBesideIcon</enum>

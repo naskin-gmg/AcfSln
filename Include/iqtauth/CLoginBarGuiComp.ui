@@ -136,7 +136,7 @@
      </property>
      <property name="icon">
       <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-       <normaloff>:/Icons/Shutdown.svg</normaloff>:/Icons/Shutdown.svg</iconset>
+       <normaloff>:/Icons/Shutdown</normaloff>:/Icons/Shutdown</iconset>
      </property>
     </widget>
    </item>

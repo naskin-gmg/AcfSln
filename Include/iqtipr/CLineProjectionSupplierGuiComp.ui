@@ -42,7 +42,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-          <normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
+          <normaloff>:/Icons/Play</normaloff>:/Icons/Play</iconset>
         </property>
        </widget>
       </item>

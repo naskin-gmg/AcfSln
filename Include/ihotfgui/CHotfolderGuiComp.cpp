@@ -134,27 +134,27 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_runCommand.SetGroupId(1);
 	m_runCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_runCommand.SetVisuals(tr("&Run"), "Run", tr("Start/Continue the execution of the hotfolder"), QIcon(":/Icons/Play.svg"));
+	m_runCommand.SetVisuals(tr("&Run"), "Run", tr("Start/Continue the execution of the hotfolder"), QIcon(":/Icons/Play"));
 	connect(&m_runCommand, SIGNAL(triggered()), this, SLOT(OnRun()));
 	hotfolderMenuPtr->InsertChild(&m_runCommand, false);
 
 	m_holdCommand.SetGroupId(1);
 	m_holdCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_holdCommand.SetVisuals(tr("&Hold"), "Hold", tr("Hold the execution of the hotfolder"), QIcon(":/Icons/Pause.svg"));
+	m_holdCommand.SetVisuals(tr("&Hold"), "Hold", tr("Hold the execution of the hotfolder"), QIcon(":/Icons/Pause"));
 	m_holdCommand.setDisabled(true);
 	connect(&m_holdCommand, SIGNAL(triggered()), this, SLOT(OnHold()));
 	hotfolderMenuPtr->InsertChild(&m_holdCommand, false);
 
 	m_restartItemCommand.SetGroupId(2);
 	m_restartItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart Job", tr("Restart selected job(s)"), QIcon(":/Icons/Reload.svg"));
+	m_restartItemCommand.SetVisuals(tr("&Restart"), "Restart Job", tr("Restart selected job(s)"), QIcon(":/Icons/Reload"));
 	m_restartItemCommand.setShortcut(Qt::CTRL + Qt::Key_R);
 	connect(&m_restartItemCommand, SIGNAL(triggered()), this, SLOT(OnRestart()));
 	hotfolderMenuPtr->InsertChild(&m_restartItemCommand, false);
 
 	m_removeItemCommand.SetGroupId(2);
 	m_removeItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_removeItemCommand.SetVisuals(tr("&Remove Job"), "Remove Job", tr("Remove processing item"), QIcon(":/Icons/Delete.svg"));
+	m_removeItemCommand.SetVisuals(tr("&Remove Job"), "Remove Job", tr("Remove processing item"), QIcon(":/Icons/Delete"));
 	m_removeItemCommand.setDisabled(true);
 	m_removeItemCommand.setShortcut(Qt::Key_Delete);
 	connect(&m_removeItemCommand, SIGNAL(triggered()), this, SLOT(OnItemRemove()));
@@ -162,7 +162,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 
 	m_cancelItemCommand.SetGroupId(2);
 	m_cancelItemCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-	m_cancelItemCommand.SetVisuals(tr("&Cancel Job"), "Cancel Job", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel.svg"));
+	m_cancelItemCommand.SetVisuals(tr("&Cancel Job"), "Cancel Job", tr("Cancel processing of the selected item"), QIcon(":/Icons/Cancel"));
 	m_cancelItemCommand.setDisabled(true);
 	connect(&m_cancelItemCommand, SIGNAL(triggered()), this, SLOT(OnItemCancel()));
 	hotfolderMenuPtr->InsertChild(&m_cancelItemCommand, false);
@@ -170,7 +170,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 	if (m_processingParamsDialogCompPtr.IsValid()){
 		m_showProcessingDialogCommand.SetGroupId(3);
 		m_showProcessingDialogCommand.SetStaticFlags(iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU | iqtgui::CHierarchicalCommand::CF_TOOLBAR);
-		m_showProcessingDialogCommand.SetVisuals(tr("&Processing Parameters..."), "Processing Parameters", tr("Define parameters for the hotfolder processing"), QIcon(":/Icons/HotfolderSettings.svg"));
+		m_showProcessingDialogCommand.SetVisuals(tr("&Processing Parameters..."), "Processing Parameters", tr("Define parameters for the hotfolder processing"), QIcon(":/Icons/HotfolderSettings"));
 		connect(&m_showProcessingDialogCommand, SIGNAL(triggered()), this, SLOT(OnShowProcessingParamsDialog()));
 		hotfolderMenuPtr->InsertChild(&m_showProcessingDialogCommand, false);
 	}

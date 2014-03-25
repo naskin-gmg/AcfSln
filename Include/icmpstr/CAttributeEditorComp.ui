@@ -396,7 +396,7 @@
          </property>
          <property name="icon">
           <iconset resource="icmpstr.qrc">
-           <normaloff>:/Icons/AutoInit.svg</normaloff>:/Icons/AutoInit.svg</iconset>
+           <normaloff>:/Icons/AutoInit</normaloff>:/Icons/AutoInit</iconset>
          </property>
         </widget>
        </item>

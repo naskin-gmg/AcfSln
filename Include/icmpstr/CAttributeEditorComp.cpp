@@ -1668,10 +1668,10 @@ void CAttributeEditorComp::OnGuiCreated()
 	AttributeTree->setItemDelegate(&m_attributeItemDelegate);
 	ComponentsTree->setItemDelegate(&m_attributeItemDelegate);
 
-	m_invalidIcon.addFile(":/Icons/StateInvalid.svg");
-	m_warningIcon.addFile(":/Icons/Warning.svg");
-	m_exportIcon.addFile(":/Icons/Export.svg");
-	m_importIcon.addFile(":/Icons/Import.svg");
+	m_invalidIcon.addFile(":/Icons/StateInvalid");
+	m_warningIcon.addFile(":/Icons/Warning");
+	m_exportIcon.addFile(":/Icons/Export");
+	m_importIcon.addFile(":/Icons/Import");
 
 	if (m_registryPropGuiCompPtr.IsValid()){
 		m_registryPropGuiCompPtr->CreateGui(RegistryPropertiesFrame);

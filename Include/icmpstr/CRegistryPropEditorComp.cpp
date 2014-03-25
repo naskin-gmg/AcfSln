@@ -27,7 +27,7 @@ void CRegistryPropEditorComp::CreateOverview()
 	// create overview infos:
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		static QIcon warningIcon(":/Icons/Warning.svg");
+		static QIcon warningIcon(":/Icons/Warning");
 	
 		const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = registryPtr->GetExportedInterfacesMap();
 		if (!exportedInterfaces.isEmpty()){

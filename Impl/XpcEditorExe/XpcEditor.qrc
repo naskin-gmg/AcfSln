@@ -3,6 +3,6 @@
 	<file alias="XpcEditorSplashScreen">Resources/Images/XpcEditorSplashScreen.png</file>
   </qresource>
   <qresource prefix="Icons/" >
-	<file alias="XpcEditorIcon.svg">Resources/Icons/XpcEditorIcon.svg</file>
+	<file alias="XpcEditorIcon">Resources/Icons/XpcEditorIcon.svg</file>
   </qresource>
 </RCC>

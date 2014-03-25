@@ -191,38 +191,38 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 			if (infoProviderPtr != NULL){
 				switch (infoProviderPtr->GetInformationCategory()){
 					case istd::IInformationProvider::IC_NONE:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown"));
 						break;
 
 					case istd::IInformationProvider::IC_WARNING:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateWarning.svg"));
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateWarning"));
 						break;
 
 					case istd::IInformationProvider::IC_ERROR:
 					case istd::IInformationProvider::IC_CRITICAL:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid"));
 						break;
 
 					default:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+						StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk"));
 						break;
 				}
 			}
 			else{
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk.svg"));
+				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk"));
 			}
 			break;
 
 		case iproc::ISupplier::WS_ERROR:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid.svg"));
+			StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid"));
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/Error.svg"));
+			StateIconLabel->setPixmap(QPixmap(":/Icons/Error"));
 			break;
 
 		default:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown.svg"));
+			StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown"));
 			break;
 	}
 }
@@ -1006,9 +1006,9 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category)
 {
 	static QIcon logIcon(":/Icons/Log");
-	static QIcon infoIcon(":/Icons/Info.svg");
-	static QIcon warningIcon(":/Icons/Warning.svg");
-	static QIcon errorIcon(":/Icons/Error.svg");
+	static QIcon infoIcon(":/Icons/Info");
+	static QIcon warningIcon(":/Icons/Warning");
+	static QIcon errorIcon(":/Icons/Error");
 
 	switch (category){
 	case istd::IInformationProvider::IC_INFO:

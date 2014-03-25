@@ -32,9 +32,9 @@ CRegistryElementShape::CRegistryElementShape(
 			const icmpstr::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
-	m_exportIcon(":/Icons/Export.svg"),
-	m_noteAttachedIcon(":/Icons/NoteAttached.svg"),
-	m_autoInitIcon(":/Icons/AutoInit.svg"),
+	m_exportIcon(":/Icons/Export"),
+	m_noteAttachedIcon(":/Icons/NoteAttached"),
+	m_autoInitIcon(":/Icons/AutoInit"),
 	m_isConsistent(false),
 	m_componentType(0)
 {
@@ -305,7 +305,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	}
 	else{
 		m_addressString = tr("Embedded: %1").arg(QString(address.GetComponentId()));
-		m_icon = QIcon(":/Icons/EmbeddedComponent.svg");
+		m_icon = QIcon(":/Icons/EmbeddedComponent");
 
 		m_backgroundColor = QColor(200, 220, 255, 255);
 		m_backgroundSelectedColor = QColor(10, 126, 242, 255);

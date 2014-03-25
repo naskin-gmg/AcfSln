@@ -375,7 +375,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelAttached()
 		paramsWidget->setEnabled(areParamsAttachedToEditor);
 	}
 
-	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown.svg"));
+	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
 }
 
 
@@ -426,7 +426,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 	}
 
 	QString statusText = "";
-	QIcon statusIcon = QIcon(":/Icons/StateUnknown.svg");
+	QIcon statusIcon = QIcon(":/Icons/StateUnknown");
 
 	QString description;
 
@@ -448,17 +448,17 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 			switch (category){
 				case istd::IInformationProvider::IC_WARNING:
 					statusText = QObject::tr("Processing completed with warnings");
-					statusIcon = QIcon(":/Icons/StateWarning.svg");
+					statusIcon = QIcon(":/Icons/StateWarning");
 					break;
 
 				case istd::IInformationProvider::IC_ERROR:
 					statusText = QObject::tr("Processing completed with errors");
-					statusIcon = QIcon(":/Icons/StateInvalid.svg");
+					statusIcon = QIcon(":/Icons/StateInvalid");
 					break;
 
 				default:
 					statusText = QObject::tr("Processing completed without errors");
-					statusIcon = QIcon(":/Icons/StateOk.svg");
+					statusIcon = QIcon(":/Icons/StateOk");
 					break;
 				}
 			break;
@@ -469,12 +469,12 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 		case iproc::ISupplier::WS_ERROR:
 			statusText = QObject::tr("Processing not possible");
-			statusIcon = QIcon(":/Icons/StateInvalid.svg");
+			statusIcon = QIcon(":/Icons/StateInvalid");
 			break;
 
 		case iproc::ISupplier::WS_CRITICAL:
 			statusText = QObject::tr("Critical error occurred, application problem");
-			statusIcon = QIcon(":/Icons/Error.svg");
+			statusIcon = QIcon(":/Icons/Error");
 			break;
 
 		default:

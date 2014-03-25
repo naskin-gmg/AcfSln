@@ -53,7 +53,7 @@ public:
 		m_componentNameFont.setBold(true);
 		m_componentDescriptionFont = qApp->font();
 
-		m_defaultComponentIcon = QIcon(":/Icons/CompositorIcon.svg").pixmap(QSize(64, 64), QIcon::Disabled);
+		m_defaultComponentIcon = QIcon(":/Icons/CompositorIcon").pixmap(QSize(64, 64), QIcon::Disabled);
 	}
 
 	void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -1027,10 +1027,10 @@ void CPackageOverviewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_realComponentIcon = QIcon(":/Icons/RealComponent.svg");
-	m_compositeComponentIcon = QIcon(":/Icons/CompositeComponent.svg");
-	m_mixedComponentIcon = QIcon(":/Icons/MixedComponent.svg");
-	m_embeddedComponentIcon = QIcon(":/Icons/EmbeddedComponent.svg");
+	m_realComponentIcon = QIcon(":/Icons/RealComponent");
+	m_compositeComponentIcon = QIcon(":/Icons/CompositeComponent");
+	m_mixedComponentIcon = QIcon(":/Icons/MixedComponent");
+	m_embeddedComponentIcon = QIcon(":/Icons/EmbeddedComponent");
 
 	// set up the tree view:
 	PackagesList->setColumnCount(1);
@@ -1069,7 +1069,7 @@ void CPackageOverviewComp::OnRetranslate()
 	BaseClass::OnRetranslate();
 
 	m_packagesCommand.SetVisuals(tr("&Packages"), tr("Packages"), tr("Menu for packages"));
-	m_reloadCommand.SetVisuals(tr("&Reload All Packages"), tr("Reload"), tr("Reloads all packages form configuration file"), QIcon(":/Icons/Reload.svg"));
+	m_reloadCommand.SetVisuals(tr("&Reload All Packages"), tr("Reload"), tr("Reloads all packages form configuration file"), QIcon(":/Icons/Reload"));
 }
 
 

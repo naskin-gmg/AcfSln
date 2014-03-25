@@ -272,7 +272,7 @@
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>:/Icons/ZoomIn.svg</normaloff>:/Icons/ZoomIn.svg</iconset>
+                <normaloff>:/Icons/ZoomIn</normaloff>:/Icons/ZoomIn</iconset>
               </property>
              </widget>
             </item>
@@ -286,7 +286,7 @@
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>:/Icons/ZoomOut.svg</normaloff>:/Icons/ZoomOut.svg</iconset>
+                <normaloff>:/Icons/ZoomOut</normaloff>:/Icons/ZoomOut</iconset>
               </property>
              </widget>
             </item>

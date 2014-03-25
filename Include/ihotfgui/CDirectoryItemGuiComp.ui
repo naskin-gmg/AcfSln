@@ -54,7 +54,7 @@ background: transparent;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="ihotfgui.qrc">:/Icons/Hotfolder.svg</pixmap>
+      <pixmap resource="ihotfgui.qrc">:/Icons/Hotfolder</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>

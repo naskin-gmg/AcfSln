@@ -118,7 +118,7 @@ QToolButton#LiveImageButton:hover:enabled:on
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="../../../Acf/Include/iqtgui/iqtgui.qrc">:/Icons/StateUnknown.svg</pixmap>
+             <pixmap resource="../../../Acf/Include/iqtgui/iqtgui.qrc">:/Icons/StateUnknown</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -143,7 +143,7 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
               <property name="icon">
                <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-                <normaloff>:/Icons/Play.svg</normaloff>:/Icons/Play.svg</iconset>
+                <normaloff>:/Icons/Play</normaloff>:/Icons/Play</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -175,7 +175,7 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
               <property name="icon">
                <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-                <normaloff>:/Icons/AutoUpdate.svg</normaloff>:/Icons/AutoUpdate.svg</iconset>
+                <normaloff>:/Icons/AutoUpdate</normaloff>:/Icons/AutoUpdate</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -201,7 +201,7 @@ QToolButton#LiveImageButton:hover:enabled:on
               </property>
               <property name="icon">
                <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-                <normaloff>:/Icons/Tools.svg</normaloff>:/Icons/Tools.svg</iconset>
+                <normaloff>:/Icons/Tools</normaloff>:/Icons/Tools</iconset>
               </property>
               <property name="iconSize">
                <size>

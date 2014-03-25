@@ -57,7 +57,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-          <normaloff>:/Icons/Camera.svg</normaloff>:/Icons/Camera.svg</iconset>
+          <normaloff>:/Icons/Camera</normaloff>:/Icons/Camera</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -83,7 +83,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-          <normaloff>:/Icons/AutoUpdate.svg</normaloff>:/Icons/AutoUpdate.svg</iconset>
+          <normaloff>:/Icons/AutoUpdate</normaloff>:/Icons/AutoUpdate</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -135,7 +135,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
-          <normaloff>:/Icons/Save.svg</normaloff>:/Icons/Save.svg</iconset>
+          <normaloff>:/Icons/Save</normaloff>:/Icons/Save</iconset>
         </property>
         <property name="iconSize">
          <size>
