@@ -275,19 +275,19 @@
               </IsEnabled>
               <Values count="5">
                 <Value>
-                  StateUnknown.svg
+                  StateUnknown
                 </Value>
                 <Value>
-                  Play.svg
+                  Play
                 </Value>
                 <Value>
-                  StateOk.svg
+                  StateOk
                 </Value>
                 <Value>
-                  Cancel.svg
+                  Cancel
                 </Value>
                 <Value>
-                  StateInvalid.svg
+                  StateInvalid
                 </Value>
               </Values>
             </Data>

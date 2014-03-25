@@ -90,7 +90,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/Hotfolder.svg
+                :/Icons/Hotfolder
               </Value>
             </Data>
           </AttributeInfo>

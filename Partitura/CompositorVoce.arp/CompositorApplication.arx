@@ -182,7 +182,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/CompositorIcon.svg
+                :/Icons/CompositorIcon
               </Value>
             </Data>
           </AttributeInfo>
@@ -296,7 +296,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Images/CompositorLogo.svg
+                :/Images/CompositorLogo
               </Value>
             </Data>
           </AttributeInfo>

@@ -341,7 +341,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/Settings.svg
+                :/Icons/Settings
               </Value>
             </Data>
           </AttributeInfo>

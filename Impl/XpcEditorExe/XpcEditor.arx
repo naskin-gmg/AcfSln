@@ -168,7 +168,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/XpcEditorIcon.svg
+                :/Icons/XpcEditorIcon
               </Value>
             </Data>
           </AttributeInfo>
@@ -282,7 +282,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Images/XpcEditorIcon.svg
+                :/Images/XpcEditorIcon
               </Value>
             </Data>
           </AttributeInfo>

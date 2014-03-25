@@ -124,7 +124,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/HotfolderSettings.svg
+                :/Icons/HotfolderSettings
               </Value>
             </Data>
           </AttributeInfo>
