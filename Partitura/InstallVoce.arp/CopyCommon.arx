@@ -452,43 +452,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="15">
-                <Value>
-                  *.htm
-                </Value>
-                <Value>
-                  *.html
-                </Value>
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.odt
-                </Value>
-                <Value>
-                  *.otp
-                </Value>
-                <Value>
-                  *.odp
-                </Value>
-                <Value>
-                  *.pdf
-                </Value>
-                <Value>
-                  *.css
-                </Value>
-                <Value>
-                  *.svg
-                </Value>
-                <Value>
-                  *.ico
-                </Value>
+              <Values count="3">
                 <Value>
                   *.tag
                 </Value>
