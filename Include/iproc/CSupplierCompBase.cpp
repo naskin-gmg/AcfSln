@@ -231,7 +231,7 @@ CSupplierCompBase::Timer::~Timer()
 		QString diagnosticName = m_parentPtr->GetDiagnosticName();
 		if (!diagnosticName.isEmpty()){
 			MessagePtr messagePtr(new ilog::CMessage(
-						istd::IInformationProvider::IC_INFO,
+						istd::IInformationProvider::IC_NONE,
 						MI_DURATION_TIME,
 						QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
 						diagnosticName));

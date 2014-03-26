@@ -200,7 +200,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 
 	if (m_diagnosticNameAttrPtr.IsValid()){
 		istd::TSmartPtr<const istd::IInformationProvider> messagePtr(new ilog::CMessage(
-				istd::IInformationProvider::IC_INFO,
+				istd::IInformationProvider::IC_NONE,
 				0,
 				QObject::tr("Processing took %1 ms").arg(timer.GetElapsed() * 1000),
 				*m_diagnosticNameAttrPtr));
