@@ -19,11 +19,6 @@ I_EXPORT_COMPONENT(
 			"Processing Parameter Directory Monitoring" IM_TAG("File Model"));
 
 I_EXPORT_COMPONENT(
-			HotfolderLoader,
-			"Hotfolder loader",
-			"File Processing Parameter Directory Hotfolder" IM_TAG("Loader"));
-
-I_EXPORT_COMPONENT(
 			HotfolderProcessingInfo,
 			"Hotfolder's state",
 			"File Processing Hotfolder" IM_TAG("Model"));
@@ -42,16 +37,6 @@ I_EXPORT_COMPONENT(
 			AttributedDirectoryMonitorParams,
 			"Default parameter for directory monitoring",
 			"File Processing Hotfolder Directory Monitoring");
-
-I_EXPORT_COMPONENT(
-			HotfolderWorkflow,
-			"Hotfolder workflow",
-			"File Processing Hotfolder Workflow");
-
-I_EXPORT_COMPONENT(
-			VisualHotfolderWorkflow,
-			"Visualization model of a hotfolder workflow",
-			"File Processing Hotfolder Workflow");
 
 I_EXPORT_COMPONENT(
 			FileSystemChangeStorage,

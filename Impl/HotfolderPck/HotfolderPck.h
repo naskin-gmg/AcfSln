@@ -9,10 +9,7 @@
 #include "ihotf/CHotfolderProcessingInfo.h"
 #include "ihotf/CMonitoringSessionsManager.h"
 #include "ihotf/CHotfolderStatistics.h"
-#include "ihotf/CHotfolderLoaderComp.h"
 #include "ihotf/CDirectoryMonitorParamsComp.h"
-#include "ihotf/CHotfolderWorkflowComp.h"
-#include "ihotf/CVisualHotfolderWorkflowComp.h"
 #include "ihotf/CFileSystemChangeStorage.h"
 
 
@@ -38,13 +35,9 @@ typedef icomp::TModelCompWrap<
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						ihotf::CHotfolderStatistics, iser::ISerializable, imod::IObserver, ihotf::IHotfolderStatistics> > HotfolderStatistics;
-typedef ihotf::CHotfolderLoaderComp HotfolderLoader;
 
-typedef icomp::TModelCompWrap<ihotf::CDirectoryMonitorParamsComp> AttributedDirectoryMonitorParams;
-
-typedef icomp::TModelCompWrap<ihotf::CHotfolderWorkflowComp> HotfolderWorkflow;
-
-typedef icomp::TModelCompWrap<ihotf::CVisualHotfolderWorkflowComp> VisualHotfolderWorkflow;
+typedef icomp::TModelCompWrap<
+			ihotf::CDirectoryMonitorParamsComp> AttributedDirectoryMonitorParams;
 
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
