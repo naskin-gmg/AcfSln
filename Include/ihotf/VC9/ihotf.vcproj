@@ -191,10 +191,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderLoaderComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderProcessingInfo.cpp"
 				>
 			</File>
@@ -207,27 +203,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderWorkflowComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowItem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CMonitoringSessionsManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CVisualHotfolderWorkflowComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CVisualHotfolderWorkflowItem.cpp"
 				>
 			</File>
 		</Filter>
@@ -264,27 +244,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderWorkflowComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderWorkflowItem.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CMonitoringSession.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CMonitoringSessionsManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CVisualHotfolderWorkflowComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CVisualHotfolderWorkflowItem.h"
 				>
 			</File>
 			<File
@@ -321,14 +285,6 @@
 			</File>
 			<File
 				RelativePath="..\IHotfolderTaskManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderWorkflow.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderWorkflowItem.h"
 				>
 			</File>
 			<File
