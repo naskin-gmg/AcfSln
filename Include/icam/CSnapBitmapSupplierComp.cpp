@@ -40,7 +40,7 @@ const i2d::ICalibration2d* CSnapBitmapSupplierComp::GetCalibration() const
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 bool CSnapBitmapSupplierComp::InitializeWork()
 {

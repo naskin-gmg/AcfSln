@@ -92,7 +92,7 @@ bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, is
 	retVal = retVal && archive.Process(workStatus);
 	retVal = retVal && archive.EndTag(workStatusTag);
 
-	if (workStatus == iproc::ISupplier::WS_OK){
+	if (workStatus == iinsp::ISupplier::WS_OK){
 		retVal = retVal && archive.BeginTag(outputDataTag);
 		retVal = retVal && m_outputSupplierSerializerCompPtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(outputDataTag);

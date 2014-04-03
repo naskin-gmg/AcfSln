@@ -55,11 +55,11 @@ QWidget* CMultiLineSupplierGuiComp::GetParamsWidget() const
 
 void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	iproc::ISupplier* objectPtr = GetObjectPtr();
+	iinsp::ISupplier* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
-	if (objectPtr->GetWorkStatus() != iproc::ISupplier::WS_OK){
+	if (objectPtr->GetWorkStatus() != iinsp::ISupplier::WS_OK){
 		return;
 	}
 

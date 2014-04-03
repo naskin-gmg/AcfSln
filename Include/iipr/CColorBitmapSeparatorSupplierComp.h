@@ -8,8 +8,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "iimg/IBitmapProvider.h"
 #include "iimg/IMultiBitmapProvider.h"
 
@@ -21,12 +21,12 @@ namespace iipr
 	Supplier of bitmap's vector built on bitmap 
 */
 class CColorBitmapSeparatorSupplierComp:
-			public iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> >,
+			public iinsp::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> >,
 			virtual public iimg::IMultiBitmapProvider,
 			virtual protected iprm::IOptionsList
 {
 public:
-	typedef iproc::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TPointerVector<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CColorBitmapSeparatorSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
@@ -53,7 +53,7 @@ protected:
 	virtual QByteArray GetOptionId(int index) const;
 	virtual bool IsOptionEnabled(int index) const;
 
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -63,7 +63,7 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 
 	I_ATTR(bool, m_useAlphaChannelAttrPtr);

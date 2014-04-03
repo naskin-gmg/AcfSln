@@ -5,7 +5,7 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 {

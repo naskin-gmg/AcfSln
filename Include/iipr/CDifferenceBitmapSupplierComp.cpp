@@ -48,7 +48,7 @@ bool CDifferenceBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) con
 }
 
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 {

@@ -1396,7 +1396,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iproc::ISupplier
+        iinsp::ISupplier
       </InterfaceId>
       <ComponentId>
         InspectionTask

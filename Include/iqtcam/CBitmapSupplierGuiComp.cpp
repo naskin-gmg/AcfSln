@@ -11,7 +11,7 @@
 #endif
 
 // ACF includes
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 #include "iview/CImageShape.h"
 #include "iview/CViewBase.h"
 
@@ -94,13 +94,13 @@ void CBitmapSupplierGuiComp::OnTimerReady()
 
 void CBitmapSupplierGuiComp::DoSnap(bool noGui)
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
 			if (noGui){
 				SendCriticalMessage(0, QObject::tr("Snap Error"));
 			} else {

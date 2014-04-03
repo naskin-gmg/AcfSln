@@ -25,13 +25,13 @@ void CGeneralSupplierGuiComp::OnAutoTest()
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
 			QMessageBox::warning(
 						GetQtWidget(),
 						QObject::tr("Error"),
@@ -108,26 +108,26 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 
 	QString description;
 
-	const iproc::ISupplier* supplierPtr = GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
-		case iproc::ISupplier::WS_INVALID:
+		case iinsp::ISupplier::WS_INVALID:
 			statusLabelText = tr("None");
 			break;
 
-		case iproc::ISupplier::WS_INIT:
+		case iinsp::ISupplier::WS_INIT:
 			statusLabelText = tr("Init");
 			break;
 
-		case iproc::ISupplier::WS_LOCKED:
+		case iinsp::ISupplier::WS_LOCKED:
 			statusLabelText = tr("Locked");
 			break;
 
-		case iproc::ISupplier::WS_OK:
+		case iinsp::ISupplier::WS_OK:
 			if (infoProviderPtr != NULL){
 				switch (infoProviderPtr->GetInformationCategory()){
 				case istd::IInformationProvider::IC_WARNING:
@@ -149,15 +149,15 @@ void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
 
 			break;
 
-		case iproc::ISupplier::WS_CANCELED:
+		case iinsp::ISupplier::WS_CANCELED:
 			statusLabelText = tr("Canceled");
 			break;
 
-		case iproc::ISupplier::WS_ERROR:
+		case iinsp::ISupplier::WS_ERROR:
 			statusLabelText = tr("Not processed");
 			break;
 
-		case iproc::ISupplier::WS_CRITICAL:
+		case iinsp::ISupplier::WS_CRITICAL:
 			statusLabelText = tr("Critical");
 			break;
 		}

@@ -17,7 +17,7 @@
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
 #include "i2d/ICalibrationProvider.h"
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqt2d/TViewExtenderCompBase.h"
@@ -33,11 +33,11 @@ namespace iqtinsp
 template <class UI, class WidgetType = QWidget>
 class TSupplierGuiCompBase:
 			public iqt2d::TViewExtenderCompBase<
-						iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> >
+						iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier> >
 {
 public:
 	typedef iqt2d::TViewExtenderCompBase<
-					iqtgui::TDesignerGuiObserverCompBase<UI, iproc::ISupplier> > BaseClass;
+					iqtgui::TDesignerGuiObserverCompBase<UI, iinsp::ISupplier> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierGuiCompBase);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
@@ -232,7 +232,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::AreParamsEditable() const
 template <class UI, class WidgetType>
 bool TSupplierGuiCompBase<UI, WidgetType>::IsLoadParamsSupported() const
 {
-	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -252,7 +252,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::IsLoadParamsSupported() const
 template <class UI, class WidgetType>
 bool TSupplierGuiCompBase<UI, WidgetType>::IsSaveParamsSupported() const
 {
-	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -272,7 +272,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::IsSaveParamsSupported() const
 template <class UI, class WidgetType>
 bool TSupplierGuiCompBase<UI, WidgetType>::LoadParams()
 {
-	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -295,7 +295,7 @@ bool TSupplierGuiCompBase<UI, WidgetType>::LoadParams()
 template <class UI, class WidgetType>
 bool TSupplierGuiCompBase<UI, WidgetType>::SaveParams()
 {
-	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
 		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
@@ -318,13 +318,13 @@ bool TSupplierGuiCompBase<UI, WidgetType>::SaveParams()
 template <class UI, class WidgetType>
 bool TSupplierGuiCompBase<UI, WidgetType>::DoTest()
 {
-	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		return supplierPtr->GetWorkStatus() < iproc::ISupplier::WS_ERROR;
+		return supplierPtr->GetWorkStatus() < iinsp::ISupplier::WS_ERROR;
 	}
 
 	return false;
@@ -344,7 +344,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	Q_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
@@ -382,7 +382,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelAttached()
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::OnGuiModelDetached()
 {
-	iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	Q_ASSERT(supplierPtr != NULL);	// model must be attached
 
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
@@ -430,7 +430,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 
 	QString description;
 
-	const iproc::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 		int category = infoProviderPtr == NULL ? 
@@ -440,11 +440,11 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 		int workStatus = supplierPtr->GetWorkStatus();
 
 		switch (workStatus){
-		case iproc::ISupplier::WS_LOCKED:
+		case iinsp::ISupplier::WS_LOCKED:
 			statusText = QObject::tr("Locked");
 			break;
 
-		case iproc::ISupplier::WS_OK:
+		case iinsp::ISupplier::WS_OK:
 			switch (category){
 				case istd::IInformationProvider::IC_WARNING:
 					statusText = QObject::tr("Processing completed with warnings");
@@ -463,16 +463,16 @@ void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, i
 				}
 			break;
 
-		case iproc::ISupplier::WS_CANCELED:
+		case iinsp::ISupplier::WS_CANCELED:
 			statusText = QObject::tr("Processing canceled by user");
 			break;
 
-		case iproc::ISupplier::WS_ERROR:
+		case iinsp::ISupplier::WS_ERROR:
 			statusText = QObject::tr("Processing not possible");
 			statusIcon = QIcon(":/Icons/StateInvalid");
 			break;
 
-		case iproc::ISupplier::WS_CRITICAL:
+		case iinsp::ISupplier::WS_CRITICAL:
 			statusText = QObject::tr("Critical error occurred, application problem");
 			statusIcon = QIcon(":/Icons/Error");
 			break;

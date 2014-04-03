@@ -52,7 +52,7 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 {

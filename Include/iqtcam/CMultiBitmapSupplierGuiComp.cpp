@@ -29,13 +29,13 @@ CMultiBitmapSupplierGuiComp::CMultiBitmapSupplierGuiComp()
 
 void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iproc::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
 			SizeLabel->setText("Snap Error");
 		}
 	}

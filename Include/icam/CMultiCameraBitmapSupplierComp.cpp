@@ -52,7 +52,7 @@ const i2d::ICalibration2d* CMultiCameraBitmapSupplierComp::GetCalibration() cons
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 bool CMultiCameraBitmapSupplierComp::InitializeWork()
 {

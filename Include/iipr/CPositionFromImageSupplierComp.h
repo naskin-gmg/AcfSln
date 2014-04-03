@@ -10,8 +10,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
 #include "iimg/IBitmapProvider.h"
@@ -28,12 +28,12 @@ namespace iipr
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
 class CPositionFromImageSupplierComp:
-			public iproc::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
+			public iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -53,7 +53,7 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -61,7 +61,7 @@ protected:
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);

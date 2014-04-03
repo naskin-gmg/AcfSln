@@ -15,7 +15,7 @@ const CEdgeLineContainer* CExtractedEdgeLinesSupplierComp::GetEdgesContainer() c
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {

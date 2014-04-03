@@ -14,8 +14,8 @@
 #include "iprm/ISelectionParam.h"
 
 // ACF-Solutions includes
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "iimg/IBitmapProvider.h"
 #include "iimg/IMultiBitmapProvider.h"
 
@@ -28,12 +28,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
 */
 class CSelectableBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectableBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -55,7 +55,7 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -68,7 +68,7 @@ private:
 	I_REF(iimg::IMultiBitmapProvider, m_multiBitmapProviderCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_multiBitmapCalibCompPtr);
 	I_REF(i2d::IMultiCalibrationProvider, m_multiBitmapMultiCalibCompPtr);
-	I_REF(iproc::ISupplier, m_multiBitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_multiBitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_multiBitmapProviderModelCompPtr);
 
 	I_REF(iprm::ISelectionParam, m_bitmapSelectionCompPtr);

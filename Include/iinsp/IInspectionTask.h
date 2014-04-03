@@ -5,7 +5,7 @@
 // ACF includes
 #include "iser/ISerializable.h"
 #include "iprm/IParamsSet.h"
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 
 
 namespace iinsp
@@ -27,7 +27,7 @@ public:
 	/**
 		Get single inspection steps (subtasks).
 	*/
-	virtual iproc::ISupplier* GetSubtask(int subtaskIndex) const = 0;
+	virtual iinsp::ISupplier* GetSubtask(int subtaskIndex) const = 0;
 
 	/**
 		Get general parameters additionaly stored next to parameters stored in suppliers.

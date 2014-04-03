@@ -8,8 +8,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/IDataSequenceProvider.h"
 #include "imeas/CGeneralDataSequence.h"
 
@@ -22,11 +22,11 @@ namespace iipr
 
 
 class CLineProjectionSupplierComp:
-			public iproc::TSupplierCompWrap<imeas::CGeneralDataSequence>,
+			public iinsp::TSupplierCompWrap<imeas::CGeneralDataSequence>,
 			virtual public imeas::IDataSequenceProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<imeas::CGeneralDataSequence> BaseClass;
+	typedef iinsp::TSupplierCompWrap<imeas::CGeneralDataSequence> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
@@ -40,7 +40,7 @@ public:
 	virtual const imeas::IDataSequence* GetDataSequence() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(imeas::CGeneralDataSequence& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -48,7 +48,7 @@ protected:
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);
 };

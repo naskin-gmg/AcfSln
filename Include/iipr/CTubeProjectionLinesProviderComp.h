@@ -41,7 +41,7 @@ private:
 	I_ATTR(QByteArray, m_tubeParamsIdAttrPtr);
 	I_ATTR(QByteArray, m_linesCountParamsIdAttrPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
-	I_REF(iproc::ISupplier, m_calibrationSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_calibrationSupplierCompPtr);
 	I_REF(imod::IModel, m_calibrationSupplierModelCompPtr);
 };
 

@@ -5,7 +5,7 @@
 // ACF includes
 #include "i2d/CPolyline.h"
 #include "iprm/IParamsSet.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
 #include "imeas/INumericValueProvider.h"
@@ -16,11 +16,11 @@ namespace iipr
 
 
 class CMultiLineSupplierCompBase:
-			public iproc::TSupplierCompWrap< QVector<i2d::CLine2d> >,
+			public iinsp::TSupplierCompWrap< QVector<i2d::CLine2d> >,
 			virtual public imeas::INumericValueProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QVector<i2d::CLine2d> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QVector<i2d::CLine2d> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CMultiLineSupplierCompBase);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);

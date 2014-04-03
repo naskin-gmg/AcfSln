@@ -1,5 +1,5 @@
-#ifndef iproc_CSupplierCompBase_included
-#define iproc_CSupplierCompBase_included
+#ifndef iinsp_CSupplierCompBase_included
+#define iinsp_CSupplierCompBase_included
 
 
 // ACF includes
@@ -12,15 +12,15 @@
 #include "ilog/CMessageContainer.h"
 
 // ACF-Solutions includes
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 
 
-namespace iproc
+namespace iinsp
 {
 
 
 /**
-	Base implementation of interface iproc::ISupplier for iproc::TSupplierCompWrap.
+	Base implementation of interface iinsp::ISupplier for iinsp::TSupplierCompWrap.
 */
 class CSupplierCompBase:
 			public ilog::CLoggerComponentBase,
@@ -60,7 +60,7 @@ public:
 
 	CSupplierCompBase();
 
-	// reimplemented (iproc::ISupplier)
+	// reimplemented (iinsp::ISupplier)
 	virtual int GetWorkStatus() const;
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
@@ -191,9 +191,9 @@ private:
 };
 
 
-} // namespace iproc
+} // namespace iinsp
 
 
-#endif // !iproc_CSupplierCompBase_included
+#endif // !iinsp_CSupplierCompBase_included
 
 

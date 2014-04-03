@@ -20,7 +20,7 @@ const imeas::IDataSequence* CLineProjectionSupplierComp::GetDataSequence() const
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CLineProjectionSupplierComp::ProduceObject(imeas::CGeneralDataSequence& result) const
 {

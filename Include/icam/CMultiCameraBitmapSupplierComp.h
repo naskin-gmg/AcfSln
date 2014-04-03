@@ -12,7 +12,7 @@
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
 #include "iprm/IParamsManager.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -29,12 +29,12 @@ namespace icam
 	The number of output bitmaps is equal the number of parameter sets in the parameter manager.
 */
 class CMultiCameraBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> >,
+			public iinsp::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> >,
 			virtual public iimg::IMultiBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TPointerVector<const iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiCameraBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
@@ -54,7 +54,7 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
 

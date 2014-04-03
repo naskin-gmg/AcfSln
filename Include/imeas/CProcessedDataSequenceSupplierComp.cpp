@@ -18,7 +18,7 @@ const imeas::IDataSequence* CProcessedDataSequenceSupplierComp::GetDataSequence(
 }
 
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CProcessedDataSequenceSupplierComp::ProduceObject(ProductType& result) const
 {

@@ -30,7 +30,7 @@ int CInspectionTaskComp::GetSubtasksCount() const
 }
 
 
-iproc::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
+iinsp::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
 {
 	return m_subtasks[subtaskIndex];
 }
@@ -66,7 +66,7 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 		for (int i = 0; i < subtasksCount; ++i){
 			retVal = retVal && archive.BeginTag(taskTag);
 
-			iproc::ISupplier* taskPtr = m_subtasksCompPtr[i];
+			iinsp::ISupplier* taskPtr = m_subtasksCompPtr[i];
 			if (taskPtr == NULL){
 				SendCriticalMessage(MI_NO_SUBTASK, "No subtask connected");
 				return false;
@@ -95,14 +95,14 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (iproc::ISupplier)
+// reimplemented (iinsp::ISupplier)
 
 int CInspectionTaskComp::GetWorkStatus() const
 {
 	int retVal = WS_INVALID;
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
-		const iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		const iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			int workStatus = supplierPtr->GetWorkStatus();
 			if (workStatus > retVal){
@@ -119,7 +119,7 @@ void CInspectionTaskComp::InvalidateSupplier()
 {
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->InvalidateSupplier();
 		}
@@ -128,7 +128,7 @@ void CInspectionTaskComp::InvalidateSupplier()
 	// additional suppliers
 	int addSuppliersCount = m_additionalSupppliersCompPtr.GetCount();
 	for (int i = 0; i < addSuppliersCount; ++i){
-		iproc::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->InvalidateSupplier();
 		}
@@ -144,7 +144,7 @@ void CInspectionTaskComp::EnsureWorkInitialized()
 
 	// set change notifier for each input supplier
 	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			m_subtaskNotifiers[supplierPtr].SetPtr(supplierPtr);
 		}
@@ -153,7 +153,7 @@ void CInspectionTaskComp::EnsureWorkInitialized()
 	// set change notifier for additional suppliers
 	int addSuppliersCount = m_additionalSupppliersCompPtr.GetCount();
 	for (int i = 0; i < addSuppliersCount; ++i){
-		iproc::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			m_subtaskNotifiers[supplierPtr].SetPtr(supplierPtr);
 		}
@@ -161,7 +161,7 @@ void CInspectionTaskComp::EnsureWorkInitialized()
 
 	// delegate the work initialization to each supplier
 	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkInitialized();
 		}
@@ -169,7 +169,7 @@ void CInspectionTaskComp::EnsureWorkInitialized()
 
 	// additional suppliers
 	for (int i = 0; i < addSuppliersCount; ++i){
-		iproc::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkInitialized();
 		}
@@ -183,7 +183,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkFinished();
 		}
@@ -192,7 +192,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 	// additional suppliers
 	int addSuppliersCount = m_additionalSupppliersCompPtr.GetCount();
 	for (int i = 0; i < addSuppliersCount; ++i){
-		iproc::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkInitialized();
 		}
@@ -217,7 +217,7 @@ void CInspectionTaskComp::ClearWorkResults()
 {
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < inspectionsCount; ++i){
-		iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->ClearWorkResults();
 		}
@@ -226,7 +226,7 @@ void CInspectionTaskComp::ClearWorkResults()
 	// additional suppliers
 	int addSuppliersCount = m_additionalSupppliersCompPtr.GetCount();
 	for (int i = 0; i < addSuppliersCount; ++i){
-		iproc::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->ClearWorkResults();
 		}
@@ -308,7 +308,7 @@ void CInspectionTaskComp::EnsureStatusKnown()
 		int infoSubtasksCount = m_subtasksCompPtr.GetCount();
 		int subtasksCount = m_subtasksCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
-			const iproc::ISupplier* supplierPtr = m_subtasksCompPtr[i];
+			const iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 			if (supplierPtr != NULL){
 				int workStatus = supplierPtr->GetWorkStatus();
 
@@ -369,7 +369,7 @@ void CInspectionTaskComp::OnComponentCreated()
 				if (inspectionTaskPtr != NULL){
 					int childTasksCount = inspectionTaskPtr->GetSubtasksCount();
 					for (int childIndex = 0; childIndex < childTasksCount; ++childIndex){
-						iproc::ISupplier* taskPtr = inspectionTaskPtr->GetSubtask(childIndex);
+						iinsp::ISupplier* taskPtr = inspectionTaskPtr->GetSubtask(childIndex);
 
 						m_subtasks.push_back(taskPtr);
 					}
@@ -378,7 +378,7 @@ void CInspectionTaskComp::OnComponentCreated()
 			}
 		}
 
-		iproc::ISupplier* taskPtr = m_subtasksCompPtr[i];
+		iinsp::ISupplier* taskPtr = m_subtasksCompPtr[i];
 
 		m_subtasks.push_back(taskPtr);
 	}
@@ -435,7 +435,7 @@ ilog::IMessageContainer::Messages CInspectionTaskComp::MessageContainer::GetMess
 
 	int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < subtasksCount; ++i){
-		const iproc::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
+		const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(WMT_RESULTS);
 
@@ -467,7 +467,7 @@ bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
 
 	int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 	for (int i = 0; i < subtasksCount; ++i){
-		iproc::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
+		iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			ilog::IMessageContainer* containerPtr = const_cast<ilog::IMessageContainer*>(supplierPtr->GetWorkMessages(WMT_RESULTS));
 
@@ -508,7 +508,7 @@ void CInspectionTaskComp::Parameters::SetParent(CInspectionTaskComp* parentPtr)
 			if (*m_parentPtr->m_serializeSuppliersAttrPtr){
 				int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 				for (int i = 0; i < subtasksCount; ++i){
-					const iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
+					const iinsp::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
 					if (subtaskPtr != NULL){
 						imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(subtaskPtr->GetModelParametersSet());
 						if (modelPtr != NULL && !modelPtr->IsAttached(this)){
@@ -536,7 +536,7 @@ iprm::IParamsSet::Ids CInspectionTaskComp::Parameters::GetParamIds(bool editable
 		if (*m_parentPtr->m_serializeSuppliersAttrPtr){
 			int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 			for (int i = 0; i < subtasksCount; ++i){
-				const iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
+				const iinsp::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
 				if (subtaskPtr != NULL){
 					iprm::IParamsSet* paramsSetPtr = subtaskPtr->GetModelParametersSet();
 					if (paramsSetPtr != NULL){
@@ -564,7 +564,7 @@ const iser::ISerializable* CInspectionTaskComp::Parameters::GetParameter(const Q
 		if (*m_parentPtr->m_serializeSuppliersAttrPtr){
 			int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 			for (int i = 0; i < subtasksCount; ++i){
-				const iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
+				const iinsp::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
 				if (subtaskPtr != NULL){
 					iprm::IParamsSet* paramsSetPtr = subtaskPtr->GetModelParametersSet();
 					if (paramsSetPtr != NULL){
@@ -595,7 +595,7 @@ iser::ISerializable* CInspectionTaskComp::Parameters::GetEditableParameter(const
 		if (*m_parentPtr->m_serializeSuppliersAttrPtr){
 			int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
 			for (int i = 0; i < subtasksCount; ++i){
-				iproc::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
+				iinsp::ISupplier* subtaskPtr = m_parentPtr->m_subtasksCompPtr[i];
 				if (subtaskPtr != NULL){
 					iprm::IParamsSet* paramsSetPtr = subtaskPtr->GetModelParametersSet();
 					if (paramsSetPtr != NULL){

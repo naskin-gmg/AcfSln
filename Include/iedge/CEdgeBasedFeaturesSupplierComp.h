@@ -15,8 +15,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "iipr/CFeaturesContainer.h"
 #include "iedge/IEdgeLinesProvider.h"
@@ -27,14 +27,14 @@ namespace iedge
 
 
 class CEdgeBasedFeaturesSupplierComp:
-			public iproc::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > >,
+			public iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public i2d::ICalibrationProvider,
 			virtual public istd::IInformationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -76,7 +76,7 @@ public:
 	virtual int GetInformationFlags() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
 
@@ -86,10 +86,10 @@ protected:
 
 private:
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
-	I_REF(iproc::ISupplier, m_calibrationSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_calibrationSupplierCompPtr);
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);
 	I_REF(IEdgeLinesProvider, m_edgeLinesProviderCompPtr);
-	I_REF(iproc::ISupplier, m_edgeLinesSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_edgeLinesSupplierCompPtr);
 	I_REF(imod::IModel, m_edgeLinesProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 	I_REF(istd::IInformationProvider, m_slaveInformationProviderCompPtr);

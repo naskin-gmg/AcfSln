@@ -5,7 +5,7 @@
 // ACF includes
 #include "i2d/ICalibrationProvider.h"
 #include "iproc/IProcessor.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
 #include "iimg/IBitmapProvider.h"
@@ -19,12 +19,12 @@ namespace iipr
 	Supplier of bitmap built on difference of two images.
 */
 class CDifferenceBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<i2d::ICalibration2d*,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CDifferenceBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -47,7 +47,7 @@ protected:
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -62,11 +62,11 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iimg::IBitmapProvider, m_firstBitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_firstBitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_firstBitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_firstBitmapProviderModelCompPtr);
 
 	I_REF(iimg::IBitmapProvider, m_secondBitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_secondBitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_secondBitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_secondBitmapProviderModelCompPtr);
 };
 

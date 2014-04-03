@@ -37,7 +37,7 @@ const i2d::ICalibration2d* CDelegatedBitmapSupplierComp::GetCalibration() const
 }
 
 
-// reimplemented (iproc::ISupplier)
+// reimplemented (iinsp::ISupplier)
 
 int CDelegatedBitmapSupplierComp::GetWorkStatus() const
 {

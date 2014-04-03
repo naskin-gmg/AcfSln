@@ -19,7 +19,7 @@ const imeas::IDataSequence* CImageHistogramSupplierComp::GetDataSequence() const
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CImageHistogramSupplierComp::ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const
 {

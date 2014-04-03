@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "istd/IInformationProvider.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "icmm/CHsv.h"
 
 // ACF-Solutions includes
@@ -27,12 +27,12 @@ namespace iipr
 	2. istd::IInformationProvider - Comparison status provider.
 */
 class CColorPatternComparatorComp:
-			public iproc::TSupplierCompWrap<imeas::CSimpleNumericValue>,
+			public iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue>,
 			virtual public imeas::INumericValueProvider,
 			virtual public istd::IInformationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<imeas::CSimpleNumericValue> BaseClass;
+	typedef iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue> BaseClass;
 
 	I_BEGIN_COMPONENT(CColorPatternComparatorComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -62,7 +62,7 @@ public:
 	virtual int GetInformationFlags() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -76,11 +76,11 @@ private:
 	I_ATTR(QByteArray, m_patternCompareThresholdParamIdAttrPtr);
 	I_REF(imeas::IDataSequenceProvider, m_workingPatternProviderCompPtr);
 	I_REF(imod::IModel, m_workingPatternProviderModelCompPtr);
-	I_REF(iproc::ISupplier, m_workingPatternSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_workingPatternSupplierCompPtr);
 
 	I_REF(imeas::IDataSequenceProvider, m_teachedPatternProviderCompPtr);
 	I_REF(imod::IModel, m_teachedPatternProviderModelCompPtr);
-	I_REF(iproc::ISupplier, m_teachedPatternSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_teachedPatternSupplierCompPtr);
 
 	I_REF(imeas::IDataSequenceStatisticsProcessor, m_dataStatisticsProcessorCompPtr);
 

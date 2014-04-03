@@ -174,10 +174,6 @@
 				RelativePath="..\CModelBasedProcessingTriggerComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CSupplierCompBase.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -196,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSupplierCompBase.h"
-				>
-			</File>
-			<File
 				RelativePath="..\iproc.h"
 				>
 			</File>
@@ -209,10 +201,6 @@
 			</File>
 			<File
 				RelativePath="..\IStateController.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISupplier.h"
 				>
 			</File>
 			<File
@@ -229,10 +217,6 @@
 			</File>
 			<File
 				RelativePath="..\TMorphLockedProducerBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSupplierCompWrap.h"
 				>
 			</File>
 			<File

@@ -152,7 +152,7 @@ int CEdgeBasedFeaturesSupplierComp::GetInformationFlags() const
 
 // protected methods
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 bool CEdgeBasedFeaturesSupplierComp::InitializeWork()
 {

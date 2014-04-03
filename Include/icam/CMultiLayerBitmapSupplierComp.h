@@ -11,7 +11,7 @@
 #include "idoc/IMultiPageDocumentProvider.h"
 
 // ACF-Solutions includes
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "icam/IBitmapAcquisition.h"
 #include <imeas/INumericConstraints.h>
 #include <imeas/CSimpleNumericValue.h>
@@ -25,12 +25,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
 */
 class CMultiLayerBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> >,
+			public iinsp::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> >,
 			virtual public iimg::IMultiBitmapProvider,
 			virtual public idoc::IMultiPageDocumentProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<iimg::IMultiBitmapProvider> > BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiLayerBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
@@ -49,7 +49,7 @@ public:
 	virtual const idoc::IMultiPageDocument* GetDocument() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
 

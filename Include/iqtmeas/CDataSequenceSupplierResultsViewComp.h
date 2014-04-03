@@ -12,7 +12,7 @@
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 #include "iqtgui/TGuiObserverWrap.h"
 #include "iqtgui/TGuiComponentBase.h"
 

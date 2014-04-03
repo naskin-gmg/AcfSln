@@ -10,7 +10,7 @@
 #include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
 #include "icam/IBitmapAcquisition.h"
@@ -27,12 +27,12 @@ namespace icam
 	Implementation of bitmap supplier based on image acquisition.
  */
 class CSnapBitmapSupplierComp:
-			public iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
+			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
 			virtual public iimg::IBitmapProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>,  istd::TDelPtr<iimg::IBitmap> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CSnapBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -53,7 +53,7 @@ public:
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(ProductType& result) const;
 

@@ -11,8 +11,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/TDiscreteDataSequence.h"
 #include "imeas/IDataSequenceProvider.h"
 #include "iimg/IBitmapProvider.h"
@@ -23,11 +23,11 @@ namespace iipr
 
 
 class CImageHistogramSupplierComp:
-			public iproc::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> >,
+			public iinsp::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> >,
 			virtual public imeas::IDataSequenceProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< imod::TModelWrap<imeas::CSimpleSamplesSequence32> > BaseClass;
 
 	I_BEGIN_COMPONENT(CImageHistogramSupplierComp);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
@@ -41,7 +41,7 @@ public:
 	virtual const imeas::IDataSequence* GetDataSequence() const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(imod::TModelWrap<imeas::CSimpleSamplesSequence32>& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -50,7 +50,7 @@ protected:
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_histogramProcessorCompPtr);
 };

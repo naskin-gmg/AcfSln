@@ -8,8 +8,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
 #include "iimg/IBitmapProvider.h"
@@ -23,11 +23,11 @@ namespace iipr
 
 
 class CEdgeDistancesSupplierComp:
-			public iproc::TSupplierCompWrap<CFeaturesContainer>,
+			public iinsp::TSupplierCompWrap<CFeaturesContainer>,
 			virtual public imeas::INumericValueProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<CFeaturesContainer> BaseClass;
+	typedef iinsp::TSupplierCompWrap<CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeDistancesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -42,7 +42,7 @@ public:
 	virtual const imeas::INumericValue& GetNumericValue(int index) const;
 
 protected:
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -50,7 +50,7 @@ protected:
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 };

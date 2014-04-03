@@ -7,8 +7,8 @@
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
-#include "iproc/ISupplier.h"
-#include "iproc/TSupplierCompWrap.h"
+#include "iinsp/ISupplier.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "iimg/IBitmapProvider.h"
 
 
@@ -20,11 +20,11 @@ namespace iipr
 	Image supplier providing processed image from some other input image supplier.
 */
 class CProcessedBitmapSupplierComp:
-			public iproc::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> >,
+			public iinsp::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> >,
 			virtual public iimg::IBitmapProvider
 {
 public:
-	typedef iproc::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> > BaseClass;
+	typedef iinsp::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessedBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
@@ -42,7 +42,7 @@ protected:
 	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
 
-	// reimplemented (iproc::TSupplierCompWrap)
+	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -52,7 +52,7 @@ private:
 	I_FACT(iimg::IBitmap, m_bitmapCompFact);
 
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
-	I_REF(iproc::ISupplier, m_bitmapSupplierCompPtr);
+	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
 	I_REF(i2d::ITransformation2d, m_defaultCalibrationCompPtr);

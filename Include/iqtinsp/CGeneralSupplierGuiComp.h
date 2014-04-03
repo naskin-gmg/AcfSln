@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iproc/ISupplier.h"
+#include "iinsp/ISupplier.h"
 
 // ACF-Solutions includes
 #include "iqtinsp/TSupplierGuiCompBase.h"
@@ -16,12 +16,12 @@ namespace iqtinsp
 
 
 class CGeneralSupplierGuiComp:
-			public TSupplierGuiCompBase<Ui::CGeneralSupplierGuiComp, iproc::ISupplier>
+			public TSupplierGuiCompBase<Ui::CGeneralSupplierGuiComp, iinsp::ISupplier>
 {
 	Q_OBJECT
 
 public:
-	typedef TSupplierGuiCompBase<Ui::CGeneralSupplierGuiComp, iproc::ISupplier> BaseClass;
+	typedef TSupplierGuiCompBase<Ui::CGeneralSupplierGuiComp, iinsp::ISupplier> BaseClass;
 
 	I_BEGIN_COMPONENT(CGeneralSupplierGuiComp);
 	I_END_COMPONENT;

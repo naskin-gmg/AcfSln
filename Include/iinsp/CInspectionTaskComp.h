@@ -29,7 +29,7 @@ namespace iinsp
 class CInspectionTaskComp:
 			public ilog::CLoggerComponentBase,
 			virtual public IInspectionTask,
-			virtual public iproc::ISupplier,
+			virtual public iinsp::ISupplier,
 			virtual public istd::IInformationProvider,
 			protected imod::CMultiModelBridgeBase
 {
@@ -46,7 +46,7 @@ public:
 	I_BEGIN_COMPONENT(CInspectionTaskComp);
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_REGISTER_INTERFACE(iproc::ISupplier);
+		I_REGISTER_INTERFACE(iinsp::ISupplier);
 		I_REGISTER_INTERFACE(ilog::IMessageContainer);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_SUBELEMENT(Parameters);
@@ -70,13 +70,13 @@ public:
 
 	// reimplemented (iinsp::IInspectionTask)
 	virtual int GetSubtasksCount() const;
-	virtual iproc::ISupplier* GetSubtask(int subtaskIndex) const;
+	virtual iinsp::ISupplier* GetSubtask(int subtaskIndex) const;
 	virtual iprm::IParamsSet* GetGeneralParameters() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	// reimplemented (iproc::ISupplier)
+	// reimplemented (iinsp::ISupplier)
 	virtual int GetWorkStatus() const;
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
@@ -144,18 +144,18 @@ private:
 		CInspectionTaskComp* m_parentPtr;
 	};
 
-	I_MULTIREF(iproc::ISupplier, m_subtasksCompPtr);
+	I_MULTIREF(iinsp::ISupplier, m_subtasksCompPtr);
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
 	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
 	I_MULTIREF(istd::IInformationProvider, m_subtaskInfoProviderCompPtr);
-	I_MULTIREF(iproc::ISupplier, m_additionalSupppliersCompPtr);
+	I_MULTIREF(iinsp::ISupplier, m_additionalSupppliersCompPtr);
 	I_ATTR(bool, m_serializeSuppliersAttrPtr);
 	I_ATTR(bool, m_reduceHierarchyAttrPtr);
 	I_REF(iprm::IParamsSet, m_generalParamsCompPtr);
 	I_REF(imod::IModel, m_generalParamsModelCompPtr);
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 
-	typedef QVector<iproc::ISupplier*> Suppliers;
+	typedef QVector<iinsp::ISupplier*> Suppliers;
 	Suppliers m_subtasks;
 
 	typedef imod::TModelWrap<Parameters> ParametersModel;
@@ -177,7 +177,7 @@ private:
 
 	istd::CChangeNotifier m_productChangeNotifier;
 
-	typedef QMap<iproc::ISupplier*, istd::CChangeNotifier> SubtaskNotifiers;
+	typedef QMap<iinsp::ISupplier*, istd::CChangeNotifier> SubtaskNotifiers;
 	SubtaskNotifiers m_subtaskNotifiers;
 };
 

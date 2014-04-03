@@ -193,6 +193,10 @@
 				RelativePath="..\CInspectionTaskComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSupplierCompBase.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -215,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSupplierCompBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IIdProvider.h"
 				>
 			</File>
@@ -227,7 +235,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ISupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ITimeStampProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TSupplierCompWrap.h"
 				>
 			</File>
 		</Filter>

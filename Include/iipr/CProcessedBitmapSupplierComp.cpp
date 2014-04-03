@@ -34,7 +34,7 @@ bool CProcessedBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) cons
 }
 
 
-// reimplemented (iproc::TSupplierCompWrap)
+// reimplemented (iinsp::TSupplierCompWrap)
 
 int CProcessedBitmapSupplierComp::ProduceObject(ProductType& result) const
 {

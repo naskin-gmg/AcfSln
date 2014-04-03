@@ -91,7 +91,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	Q_ASSERT(IsGuiCreated());
 
-	if ((updateFlags & iproc::ISupplier::CF_SUPPLIER_RESULTS) == 0){
+	if ((updateFlags & iinsp::ISupplier::CF_SUPPLIER_RESULTS) == 0){
 		return;
 	}
 
@@ -105,7 +105,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
 
 	double maxScoreRadius = 50;
 
-	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
 		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
 		if (providerPtr != NULL){
