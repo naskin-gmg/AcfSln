@@ -14,7 +14,9 @@ namespace ifileproc
 
 // reimplemented (ifileproc::IFileNaming)
 
-QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
+QString CFileNamingComp::CalculateFileName(
+			const QString& inputFilePath,
+			const ifileproc::IFileNamingParams* fileNamingParamsPtr) const
 {
 	if (!m_directoryPathCompPtr.IsValid()){
 		return QString();
@@ -24,12 +26,16 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 	QString baseFileName = inputFileInfo.completeBaseName();
 	QString outputExtension = inputFileInfo.suffix();
 
+	if (fileNamingParamsPtr == NULL){
+		fileNamingParamsPtr = m_fileNamingParamsCompPtr.GetPtr();
+	}
+
 	// Remove patterns to be ingnored:
 
 	// Calculate the base file name:
-	if (m_fileNamingParamsCompPtr.IsValid()){
-		baseFileName = m_fileNamingParamsCompPtr->GetPrefix() + baseFileName;
-		baseFileName += m_fileNamingParamsCompPtr->GetSuffix();
+	if (fileNamingParamsPtr != NULL){
+		baseFileName = fileNamingParamsPtr->GetPrefix() + baseFileName;
+		baseFileName += fileNamingParamsPtr->GetSuffix();
 	}
 
 	// Calculate the new extension:
@@ -61,8 +67,8 @@ QString CFileNamingComp::GetFilePath(const QString& inputFilePath) const
 
 		QString outputFilePath = outputDirectory.absoluteFilePath(newFileName);
 
-		if (m_fileNamingParamsCompPtr.IsValid()){
-			if (m_fileNamingParamsCompPtr->GetOverwriteStrategy() == ifileproc::IFileNamingParams::RM_OVERWRITE){
+		if (fileNamingParamsPtr != NULL){
+			if (fileNamingParamsPtr->GetOverwriteStrategy() == ifileproc::IFileNamingParams::RM_OVERWRITE){
 				return outputFilePath;
 			}
 			else{

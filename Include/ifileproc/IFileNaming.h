@@ -10,6 +10,9 @@ namespace ifileproc
 {
 
 
+class IFileNamingParams;
+
+
 /**
 	Interface for calculation of the new file path for an existing file.
 */
@@ -17,9 +20,11 @@ class IFileNaming: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Get the new file path for a given input file name.
+		Calculate the new file path for a given input file name.
 	*/
-	virtual QString GetFilePath(const QString& inputFileName) const = 0;
+	virtual QString CalculateFileName(
+				const QString& inputFileName,
+				const ifileproc::IFileNamingParams* fileNamingParamsPtr) const = 0;
 };
 
 

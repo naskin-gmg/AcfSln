@@ -38,7 +38,9 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifileproc::IFileNaming)
-	virtual QString GetFilePath(const QString& inputFileName) const;
+	virtual QString CalculateFileName(
+				const QString& inputFileName,
+				const ifileproc::IFileNamingParams* fileNamingParamsPtr) const;
 
 private:
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoCompPtr);
