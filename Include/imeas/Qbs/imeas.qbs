@@ -10,11 +10,13 @@ AcfStaticLibrary{
 	Depends{ name: "iimg" }
 	Depends{ name: "icomp" }
 	Depends{ name: "imath" }
+	Depends{ name: "iinsp" }
 
 	Export{
 		Depends{ name: "iproc" }
 		Depends{ name: "iimg" }
 		Depends{ name: "icomp" }
 		Depends{ name: "imath" }
+		Depends{ name: "iinsp" }
 	}
 }
