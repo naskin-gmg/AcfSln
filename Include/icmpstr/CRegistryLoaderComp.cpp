@@ -22,7 +22,7 @@ namespace icmpstr
 int CRegistryLoaderComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
-			ibase::IProgressManager* progressManagerPtr) const
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	istd::CChangeNotifier notifier(&data);
 
