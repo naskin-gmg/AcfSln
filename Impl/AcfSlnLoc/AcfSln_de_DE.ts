@@ -5,359 +5,367 @@
     <name>Attribute</name>
     <message>
         <source>0.2.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.3.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.3.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.3.2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.4.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.4.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.4.2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.4.3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.4.4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.5.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.5.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.6.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF-Solutions</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Compositor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ImagingTools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:/Images/CompositorLogo.svg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About Compositor</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Compositor</translation>
     </message>
     <message>
         <source>:/Images/CompositorSplashScreen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF Registry Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:/Icons/CompositorIcon.svg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remember open documents on exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:/Icons/Settings.svg</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuletzt geöffnete Dokumente beim nächsten Start öffnen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>exe</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>bat</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Windows executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows Ausführungsdatei</translation>
     </message>
     <message>
         <source>Script file</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriptdatei</translation>
     </message>
     <message>
         <source>Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurationsdatei</translation>
     </message>
     <message>
         <source>ACF Command Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad to ACF Applikation</translation>
     </message>
     <message>
         <source>HTML Browser</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>HTML Editor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>Document Persistence</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>../../Config/Full.xpc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Acf</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>xpc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF component configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Komponentenkonfiguration</translation>
     </message>
     <message>
         <source>ACF Registry</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fenster</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenster</translation>
     </message>
     <message>
         <source>List of document windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste of Dokumentansichten</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Quick Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellhilfe</translation>
     </message>
     <message>
         <source>Selected component</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Komponente</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokoll</translation>
     </message>
     <message>
         <source>xlog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Log XML file</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokoll XML datei</translation>
     </message>
     <message>
         <source>:/Translations</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>0.9.9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.1.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.2.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.3.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.4.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.4.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.5.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.5.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.5.2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.5.3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.5.4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>1.6.5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF Package Configuration Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:/Images/XpcEditorIcon.svg</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Package Konfigurationseditor</translation>
     </message>
     <message>
         <source>About XPC Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:/Icons/XpcEditorIcon.svg</source>
-        <translation type="unfinished"></translation>
+        <translation>Über XPC Editor</translation>
     </message>
     <message>
         <source>arx</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF Registry File</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Registry Datei</translation>
     </message>
     <message>
         <source>arp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF Component Package</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ACF Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Konfigurationsfile</translation>
     </message>
     <message>
         <source>ACF Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Konfiguration</translation>
+    </message>
+    <message>
+        <source>0.6.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>:/Images/CompositorLogo</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>:/Icons/CompositorIcon</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>:/Icons/Settings</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>1.7.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>:/Images/XpcEditorIcon</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>:/Icons/XpcEditorIcon</source>
+        <translation></translation>
     </message>
     <message>
         <source>� 2013 Witold Gantzke &amp; Kirill Lepskiy
@@ -365,7 +373,7 @@ All rights reserved
 
 This tool is a part of ACF project
 See &apos;License.txt&apos; for license information</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -394,10 +402,6 @@ See &apos;License.txt&apos; for license information</source>
         <translation>Eigenschafteneditor</translation>
     </message>
     <message>
-        <source>Info</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
@@ -410,16 +414,8 @@ See &apos;License.txt&apos; for license information</source>
         <translation>Projekt:</translation>
     </message>
     <message>
-        <source>Author:</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Category:</source>
         <translation>Kategorie:</translation>
-    </message>
-    <message>
-        <source>Tags:</source>
-        <translation></translation>
     </message>
     <message>
         <source>Keywords:</source>
@@ -442,10 +438,6 @@ See &apos;License.txt&apos; for license information</source>
         <translation>Schnittstelle exportieren</translation>
     </message>
     <message>
-        <source>Flags</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Automatically create instance</source>
         <translation>Instanz der Komponente automatisch erzeugen</translation>
     </message>
@@ -460,6 +452,22 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <source>Export alias</source>
         <translation>Exportieren als</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation>Authot:</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Flags</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -495,6 +503,18 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <source>Form</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Snap next image</source>
+        <translation>Nächstes Bild aufnehmen</translation>
+    </message>
+    <message>
+        <source>Snap in loop</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Save current image...</source>
+        <translation>Aktuelles Bild speichern</translation>
     </message>
     <message>
         <source>Ctrl+R</source>
@@ -557,6 +577,13 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>%</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>CCameraInfoGuiComp</name>
+    <message>
+        <source>Form</source>
         <translation></translation>
     </message>
 </context>
@@ -644,6 +671,10 @@ See &apos;License.txt&apos; for license information</source>
         <source>Form</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Difference (%)</source>
+        <translation>Differenz (%)</translation>
+    </message>
 </context>
 <context>
     <name>CComponentNoteEditorComp</name>
@@ -656,7 +687,7 @@ See &apos;License.txt&apos; for license information</source>
     <name>CComponentPromotorDialogComp</name>
     <message>
         <source>Promote to another component</source>
-        <translation>In eine andere Komponente umwandeln</translation>
+        <translation type="unfinished">In eine andere Komponente umwandeln</translation>
     </message>
     <message>
         <source>Compatibility to source component</source>
@@ -706,39 +737,39 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CConvolution2dParamsGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Kernel Width</source>
-        <translation>Kernelbreite</translation>
+        <translation type="unfinished">Kernelbreite</translation>
     </message>
     <message>
         <source>Kernel Height</source>
-        <translation>Kernelhöhe</translation>
+        <translation type="unfinished">Kernelhöhe</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CDataSequenceViewComp</name>
     <message>
         <source>Scale</source>
-        <translation>Skalierung</translation>
-    </message>
-    <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Max</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Min</source>
-        <translation></translation>
+        <translation type="unfinished">Skalierung</translation>
     </message>
     <message>
         <source>Time Span</source>
-        <translation>Zeitspanne</translation>
+        <translation type="unfinished">Zeitspanne</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move time span left</source>
@@ -780,74 +811,74 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CDataStatisticsGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Minimum</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Average</source>
-        <translation>Mittelwert</translation>
-    </message>
-    <message>
-        <source>Median</source>
-        <translation></translation>
+        <translation type="unfinished">Mittelwert</translation>
     </message>
     <message>
         <source>Standard Deviation</source>
-        <translation>Standardabweichung</translation>
+        <translation type="unfinished">Standardabweichung</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Median</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CDirectoryItemGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>DirectoryLabel</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Files:</source>
-        <translation>Dateien:</translation>
-    </message>
-    <message>
-        <source>FilesCount</source>
-        <translation></translation>
+        <translation type="unfinished">Dateien:</translation>
     </message>
     <message>
         <source>Errors:</source>
-        <translation>Fehler:</translation>
-    </message>
-    <message>
-        <source>ErrorsCountLabel</source>
-        <translation></translation>
+        <translation type="unfinished">Fehler:</translation>
     </message>
     <message>
         <source>Processed:</source>
-        <translation>Verarbeitet:</translation>
+        <translation type="unfinished">Verarbeitet:</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DirectoryLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FilesCount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ErrorsCountLabel</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ProcessedFileCoun</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CDirectoryMonitorParamsGui</name>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished">...</translation>
     </message>
     <message>
         <source>Directory Monitor Parameters</source>
@@ -895,7 +926,7 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>Attributes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Attributen</translation>
     </message>
     <message>
         <source>Accept Filters</source>
@@ -1005,7 +1036,7 @@ See &apos;License.txt&apos; for license information</source>
         <source>Rotation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message utf8="both">
         <source>°</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1064,7 +1095,7 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei</translation>
     </message>
     <message>
         <source>Item Filter</source>
@@ -1079,19 +1110,19 @@ See &apos;License.txt&apos; for license information</source>
     <name>CInspectionTaskGuiComp</name>
     <message>
         <source>Inspection</source>
-        <translation>Inspektion</translation>
+        <translation type="unfinished">Inspektion</translation>
     </message>
     <message>
         <source>Recalculate all processing steps</source>
-        <translation>Alle Verarbeitungsschritte wiederholen</translation>
+        <translation type="unfinished">Alle Verarbeitungsschritte wiederholen</translation>
     </message>
     <message>
         <source>Test All</source>
-        <translation>Alles testen</translation>
+        <translation type="unfinished">Alles testen</translation>
     </message>
     <message>
         <source>Do processing steps automatically</source>
-        <translation>Verarbeitungsschritte automatisch ausführen</translation>
+        <translation type="unfinished">Verarbeitungsschritte automatisch ausführen</translation>
     </message>
     <message>
         <source>Load inspection data</source>
@@ -1111,73 +1142,73 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>Source</source>
-        <translation>Quelle</translation>
+        <translation type="unfinished">Quelle</translation>
     </message>
     <message>
         <source>Messages</source>
-        <translation>Meldungen</translation>
+        <translation type="unfinished">Meldungen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Additional clipboard and IO operations</source>
+        <translation type="unfinished">Zwischenablage</translation>
     </message>
     <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Additional clipboard and IO operations</source>
-        <translation>Zwischenablage</translation>
     </message>
 </context>
 <context>
     <name>CLineProjectionSupplierGuiComp</name>
     <message>
         <source>Processing</source>
-        <translation>Verarbeitung</translation>
+        <translation type="unfinished">Verarbeitung</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation>Test</translation>
+        <translation type="unfinished">Test</translation>
     </message>
     <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
     <message>
         <source>Projection</source>
-        <translation>Projektion</translation>
+        <translation type="unfinished">Projektion</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CLoginBarGuiComp</name>
     <message>
         <source>User</source>
-        <translation>Benutzer</translation>
+        <translation type="unfinished">Benutzer</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation type="unfinished">Passwort</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Einloggen</translation>
+        <translation type="unfinished">Einloggen</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Ausloggen</translation>
+        <translation type="unfinished">Ausloggen</translation>
     </message>
 </context>
 <context>
@@ -1290,6 +1321,14 @@ See &apos;License.txt&apos; for license information</source>
         <source>[unit]</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CPackageOverviewComp</name>
@@ -1341,16 +1380,24 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CPatternTeachingControllerGuiComp</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Pattern not present</source>
-        <translation>Muster nicht vorhanden</translation>
+        <translation type="unfinished">Muster nicht vorhanden</translation>
     </message>
     <message>
         <source>Teach</source>
-        <translation>Einlernen</translation>
+        <translation type="obsolete">Einlernen</translation>
+    </message>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Learn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1374,6 +1421,33 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <source>0</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CProcessedBitmapView</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GroupBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished">Speichern...</translation>
     </message>
 </context>
 <context>
@@ -1458,7 +1532,7 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>Property</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eigenschaft</translation>
     </message>
 </context>
 <context>
@@ -1858,53 +1932,53 @@ See &apos;License.txt&apos; for license information</source>
     <name>CUserGuiComp</name>
     <message>
         <source>Change Password</source>
-        <translation>Passwort ändern</translation>
+        <translation type="unfinished">Passwort ändern</translation>
     </message>
     <message>
         <source>User Manager</source>
-        <translation>Benutzermanager</translation>
+        <translation type="unfinished">Benutzermanager</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CUserManagerDialog</name>
     <message>
         <source>User Manager (User %1, Group %2)</source>
-        <translation>Benutzermanagement (Benutzer %1, Gruppe %2)</translation>
+        <translation type="unfinished">Benutzermanagement (Benutzer %1, Gruppe %2)</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>Benutzer</translation>
+        <translation type="unfinished">Benutzer</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation>Gruppe</translation>
+        <translation type="unfinished">Gruppe</translation>
     </message>
     <message>
         <source>Add User</source>
-        <translation>Benutzer hinzufügen</translation>
+        <translation type="unfinished">Benutzer hinzufügen</translation>
     </message>
     <message>
         <source>Reset Password</source>
-        <translation>Passwort zurücksetzen</translation>
+        <translation type="unfinished">Passwort zurücksetzen</translation>
     </message>
     <message>
         <source>Remove User</source>
-        <translation>Benutzer entfernen</translation>
+        <translation type="unfinished">Benutzer entfernen</translation>
     </message>
 </context>
 <context>
     <name>CValueSupplierGuiComp</name>
     <message>
         <source>Point</source>
-        <translation>Position</translation>
+        <translation type="unfinished">Position</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation>Test</translation>
+        <translation type="unfinished">Test</translation>
     </message>
     <message>
         <source>Found Position</source>
@@ -1912,48 +1986,48 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>Parameters</source>
-        <translation>Parameter</translation>
+        <translation type="unfinished">Parameter</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
     </message>
     <message>
         <source>Intermediate Results</source>
-        <translation>Temporäre Ergebnisse</translation>
+        <translation type="unfinished">Temporäre Ergebnisse</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CVideoPlayerGuiComp</name>
     <message>
         <source>Current Frame</source>
-        <translation>Aktuelles Frame</translation>
+        <translation type="unfinished">Aktuelles Frame</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CVisualRegistryEditorComp</name>
     <message>
         <source>&lt;&lt; root &gt;&gt;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CWizardOptionsListGuiComp</name>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation type="unfinished">Optionen</translation>
     </message>
 </context>
 <context>
@@ -1996,48 +2070,68 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>ACF Starter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei &apos;%1&apos; existiert nicht</translation>
     </message>
     <message>
         <source>Invalid file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiformat ist invalid</translation>
     </message>
     <message>
         <source>Scale</source>
         <comment>Contour scale factor</comment>
-        <translation type="unfinished">Skalierung</translation>
+        <translation>Skalierung</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished">Rot</translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished">Grün</translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished">Blau</translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation type="unfinished">Transparenz</translation>
+        <translation>Transparenz</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Skalierung</translation>
+        <translation>Skalierung</translation>
+    </message>
+    <message>
+        <source>Search not successfull</source>
+        <translation>Modelsuche nicht erfolgreich</translation>
+    </message>
+    <message>
+        <source>Models OK</source>
+        <translation>Modelsuche erfolgreich</translation>
+    </message>
+    <message>
+        <source>Wrong result type</source>
+        <translation>Fehlerhafter Ergebnistyp</translation>
+    </message>
+    <message>
+        <source>Not allowed model found: &apos;%1&apos;</source>
+        <translation>Nicht zugelassene Modelle gefunden: &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Search model was not found</source>
+        <translation>Suchmodel wurde nicht gefunden</translation>
     </message>
     <message>
         <source>Weight tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewichttoleranz</translation>
     </message>
     <message>
         <source>Position tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Positionstoleranz</translation>
     </message>
     <message>
         <source>Tolerance of weight for edge node reduction</source>
@@ -2116,6 +2210,10 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Directory %1 not exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>File %1 was removed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2132,7 +2230,15 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Processing took %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Inspection task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 took %2 ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2160,11 +2266,11 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color pattern comparison status</source>
+        <source>Color Check OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color pattern comparison component</source>
+        <source>Color Check NOT OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2201,7 +2307,7 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <source>Channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kanal %1</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -2216,19 +2322,15 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 took %2 ms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Processing time: %1 ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Snap Error</source>
+        <source>Cannot save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot save image</source>
+        <source>Snap Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2653,43 +2755,43 @@ Interfaces:</source>
     <name>icmpstr::CSceneProviderGuiComp</name>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>File menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateimenu</translation>
     </message>
     <message>
         <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Drucken...</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken</translation>
     </message>
     <message>
         <source>Prints current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckt den aktuellen Dokument</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ansicht</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>View menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansichtmenu</translation>
     </message>
     <message>
         <source>&amp;Auto Fit</source>
@@ -2756,7 +2858,7 @@ Interfaces:</source>
     <name>icmpstr::CVisualRegistryEditorComp</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Factory of &apos;%1&apos;</source>
@@ -2768,27 +2870,27 @@ Interfaces:</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschneiden</translation>
     </message>
     <message>
         <source>Move selected elements into clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Elemente in die Zwischenablage verschieben</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Copy selected elements into clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Elemente in die Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Copy selected elements from clipboard into current document</source>
@@ -2796,11 +2898,11 @@ Interfaces:</source>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Entfernen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Remove the selected element from the registry</source>
@@ -2808,11 +2910,11 @@ Interfaces:</source>
     </message>
     <message>
         <source>&amp;Rename Component</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Komponente umbenennen</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen</translation>
     </message>
     <message>
         <source>Allow to assign new name to selected component</source>
@@ -3057,7 +3159,7 @@ It allows to group set of components and manage it as single one</source>
     <name>iprocgui::CDocumentProcessingManagerCompBase</name>
     <message>
         <source>Processing</source>
-        <translation type="unfinished">Verarbeitung</translation>
+        <translation type="obsolete">Verarbeitung</translation>
     </message>
     <message>
         <source>Document processing actions</source>
@@ -3098,27 +3200,27 @@ It allows to group set of components and manage it as single one</source>
     <name>iqtauth::CChangePasswordDialog</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>The new password is not entered correctly the second time.
 Please correct the new passwords.</source>
-        <translation>Das neue Passwort wurde zum zweiten Mal nicht richtig eingegeben.</translation>
+        <translation type="unfinished">Das neue Passwort wurde zum zweiten Mal nicht richtig eingegeben.</translation>
     </message>
     <message>
         <source>The old password and the new password are similar!
 Use another password.</source>
-        <translation>Das alte und das neue Passwörter sind zu ähnlich! Bitte ein anderes Passwort benutzen.</translation>
+        <translation type="unfinished">Das alte und das neue Passwörter sind zu ähnlich! Bitte ein anderes Passwort benutzen.</translation>
     </message>
     <message>
         <source>The old password is not correct.
 Reenter the passwords.</source>
-        <translation>Das alte Passwort ist nicht korrekt. Bitte Passwort erneut eingeben.</translation>
+        <translation type="unfinished">Das alte Passwort ist nicht korrekt. Bitte Passwort erneut eingeben.</translation>
     </message>
     <message>
         <source>The new password is not conform with guide lines.
 Use other password.</source>
-        <translation>Das neue Passwort erfüllt nicht die Sicherheitkriterien.
+        <translation type="unfinished">Das neue Passwort erfüllt nicht die Sicherheitkriterien.
 Bitte ein anderes Passwort verwenden.</translation>
     </message>
 </context>
@@ -3126,200 +3228,277 @@ Bitte ein anderes Passwort verwenden.</translation>
     <name>iqtauth::CLoginBarGuiComp</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation>Falsches Passwort</translation>
+        <translation type="unfinished">Falsches Passwort</translation>
     </message>
 </context>
 <context>
     <name>iqtauth::CUserManagerDialog</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>User_%1</source>
-        <translation>Benutzer_%1</translation>
+        <translation type="unfinished">Benutzer_%1</translation>
     </message>
     <message>
         <source>The user could not be removed.</source>
-        <translation>Der Benutzer konnte nicht entfernt werden.</translation>
+        <translation type="unfinished">Der Benutzer konnte nicht entfernt werden.</translation>
     </message>
     <message>
         <source>Cannot restore user list.</source>
-        <translation>Benutzerliste konnte nicht wiederhergestellt werden.</translation>
+        <translation type="unfinished">Benutzerliste konnte nicht wiederhergestellt werden.</translation>
     </message>
 </context>
 <context>
     <name>iqtcam::CBitmapSupplierGuiComp</name>
     <message>
         <source>(%1 x %2)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtcam::CCameraInfoGuiComp</name>
+    <message>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MAC address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sensor width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sensor height</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtcam::CMultiBitmapSupplierGuiComp</name>
     <message>
         <source>No image</source>
-        <translation>Kein Bild</translation>
+        <translation type="unfinished">Kein Bild</translation>
     </message>
     <message>
         <source>(%1 x %2)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtex::WriteArchiveMessageHandler</name>
     <message>
         <source>Transformation message: </source>
-        <translation>Transformationsnachricht:</translation>
+        <translation type="unfinished">Transformationsnachricht:</translation>
     </message>
 </context>
 <context>
     <name>iqtinsp::CGeneralSupplierGuiComp</name>
     <message>
         <source>None</source>
-        <translation>Keine</translation>
+        <translation type="unfinished">Keine</translation>
     </message>
     <message>
         <source>Locked</source>
-        <translation>Gesperrt</translation>
+        <translation type="unfinished">Gesperrt</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Warnung</translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Canceled</source>
-        <translation>Abgebrochen</translation>
+        <translation type="unfinished">Abgebrochen</translation>
     </message>
     <message>
         <source>Not processed</source>
-        <translation>Nicht verarbeitet</translation>
+        <translation type="unfinished">Nicht verarbeitet</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation>Kritisch</translation>
+        <translation type="unfinished">Kritisch</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Unbekannt</translation>
+        <translation type="unfinished">Unbekannt</translation>
     </message>
     <message>
         <source>Init</source>
-        <translation>Initialisierung</translation>
+        <translation type="unfinished">Initialisierung</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtinsp::CInspectionTaskGuiComp</name>
     <message>
         <source>Copy current task</source>
-        <translation>Parameter des ausgewählten Tasks kopieren</translation>
+        <translation type="unfinished">Parameter des ausgewählten Tasks kopieren</translation>
     </message>
     <message>
         <source>Paste current task</source>
-        <translation>Parameter des ausgewählten Tasks einfügen</translation>
+        <translation type="unfinished">Parameter des ausgewählten Tasks einfügen</translation>
     </message>
     <message>
         <source>Copy all tasks</source>
-        <translation>Alle Parameter kopieren</translation>
+        <translation type="obsolete">Alle Parameter kopieren</translation>
     </message>
     <message>
         <source>Paste all tasks</source>
-        <translation>Alle Parameter einfügen</translation>
+        <translation type="obsolete">Alle Parameter einfügen</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Laden...</translation>
+        <translation type="unfinished">Laden...</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Speichern...</translation>
+        <translation type="unfinished">Speichern...</translation>
+    </message>
+    <message>
+        <source>Copy all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtipr::CColorPatternComparatorGuiComp</name>
     <message>
         <source>Grayvalue</source>
-        <translation>Grauwert</translation>
+        <translation type="unfinished">Grauwert</translation>
     </message>
     <message>
         <source>Hue</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished">Farbe</translation>
     </message>
     <message>
         <source>Saturation</source>
-        <translation>Sättigung</translation>
+        <translation type="unfinished">Sättigung</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Helligkeit</translation>
+        <translation type="unfinished">Helligkeit</translation>
     </message>
 </context>
 <context>
     <name>iqtipr::CPatternTeachingControllerGuiComp</name>
     <message>
         <source>Replace pattern</source>
-        <translation>Muster ersetzen</translation>
+        <translation type="unfinished">Muster ersetzen</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>The pattern data exists already. Do you want to replace them?</source>
-        <translation>Möchten Sie ein vorhandenes Muster ersetzen?</translation>
+        <translation type="unfinished">Möchten Sie ein vorhandenes Muster ersetzen?</translation>
     </message>
     <message>
         <source>Cannot learn pattern</source>
-        <translation>Muster kann nicht eingelernt werden</translation>
+        <translation type="unfinished">Muster kann nicht eingelernt werden</translation>
     </message>
     <message>
         <source>Reference pattern not defined</source>
-        <translation>Referenzmuster ist nicht definiert</translation>
+        <translation type="unfinished">Referenzmuster ist nicht definiert</translation>
     </message>
     <message>
         <source>Reference pattern defined</source>
-        <translation>Referenzmuster ist definiert</translation>
+        <translation type="unfinished">Referenzmuster ist definiert</translation>
+    </message>
+</context>
+<context>
+    <name>iqtipr::CProcessedBitmapView</name>
+    <message>
+        <source>Save Image As...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtipr::CValueSupplierGuiComp</name>
     <message>
-        <source>(%1, %2)</source>
-        <translation></translation>
+        <source>No position</source>
+        <translation type="unfinished">Keine Position gefunden</translation>
     </message>
     <message>
-        <source>No position</source>
-        <translation>Keine Position gefunden</translation>
+        <source>(%1, %2)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtmeas::CDataSequenceViewComp</name>
     <message>
         <source>All channels</source>
-        <translation>Alle Kanäle</translation>
+        <translation type="unfinished">Alle Kanäle</translation>
     </message>
     <message>
         <source>Channel %1</source>
-        <translation>Kanal %1</translation>
+        <translation type="unfinished">Kanal %1</translation>
+    </message>
+</context>
+<context>
+    <name>iqtmeas::CNumericValueWidget</name>
+    <message>
+        <source>Range: %1 - %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>iqtmm::CMediaLoaderComp</name>
     <message>
         <source>Object is not a valid</source>
-        <translation>Objekt ist nicht valid</translation>
+        <translation type="unfinished">Objekt ist nicht valid</translation>
     </message>
     <message>
         <source>Bad multimedia file extension %1</source>
@@ -3342,7 +3521,7 @@ Bitte ein anderes Passwort verwenden.</translation>
     <name>iqtmm::CSvgBitmapLoaderComp</name>
     <message>
         <source>Object is not a valid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Objekt ist nicht valid</translation>
     </message>
     <message>
         <source>Bad SVG file extension %1</source>
