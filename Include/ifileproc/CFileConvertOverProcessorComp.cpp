@@ -16,12 +16,13 @@ CFileConvertOverProcessorComp::CFileConvertOverProcessorComp()
 }
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CFileConvertOverProcessorComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* /*paramsSetPtr*/) const
+			const iprm::IParamsSet* paramsSetPtr,
+			ibase::IProgressManager* progressManagerPtr) const
 {
 	QMutexLocker blocker(&m_mutex);
 
@@ -43,7 +44,10 @@ bool CFileConvertOverProcessorComp::ConvertFiles(
 		return false;
 	}
 
-	if (!m_inputFileLoaderCompPtr->IsOperationSupported(m_inputDataCompPtr.GetPtr(), &inputPath, ifile::IFilePersistence::QF_LOAD | ifile::IFilePersistence::QF_FILE)){
+	if (!m_inputFileLoaderCompPtr->IsOperationSupported(
+					m_inputDataCompPtr.GetPtr(),
+					&inputPath,
+					ifile::IFilePersistence::QF_LOAD | ifile::IFilePersistence::QF_FILE)){
 		SendErrorMessage(0, "File could not be loaded", "File processing component");
 		
 		return false;
@@ -61,11 +65,14 @@ bool CFileConvertOverProcessorComp::ConvertFiles(
 		return false;
 	}
 
+	const iprm::IParamsSet* processingParamsPtr = (paramsSetPtr != NULL) ? paramsSetPtr : m_processingParamsSetCompPtr.GetPtr();
+	ibase::IProgressManager* processingProgressManagerPtr = (progressManagerPtr != NULL) ? progressManagerPtr : m_progressManagerCompPtr.GetPtr();
+
 	int processingResult = m_processorCompPtr->DoProcessing(
-				m_processingParamsSetCompPtr.GetPtr(),
+				paramsSetPtr,
 				m_inputDataCompPtr.GetPtr(),
 				m_outputDataCompPtr.GetPtr(),
-				m_progressManagerCompPtr.GetPtr());
+				processingProgressManagerPtr);
 	if (processingResult != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "File conversion failed", "File processing component");
 

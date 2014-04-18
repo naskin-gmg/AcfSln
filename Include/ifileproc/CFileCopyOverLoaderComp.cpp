@@ -10,12 +10,13 @@ namespace ifileproc
 {
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CFileCopyOverLoaderComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* /*paramsSetPtr*/) const
+			const iprm::IParamsSet* /*paramsSetPtr*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (!m_inputLoaderCompPtr.IsValid()){
 		SendErrorMessage(0, "Input data loader is not defined", "FileCopyOverLoader");

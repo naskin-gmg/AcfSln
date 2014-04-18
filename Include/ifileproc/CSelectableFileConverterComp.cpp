@@ -21,12 +21,13 @@ CSelectableFileConverterComp::CSelectableFileConverterComp()
 }
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CSelectableFileConverterComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* /*paramsPtr*/) const
+			const iprm::IParamsSet* /*paramsPtr*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (m_selectedOptionIndex >= 0){
 		return m_slaveConvertersCompPtr[m_selectedOptionIndex]->ConvertFiles(inputPath, outputPath);

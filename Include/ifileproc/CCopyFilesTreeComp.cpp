@@ -13,12 +13,13 @@ namespace ifileproc
 {
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CCopyFilesTreeComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* paramsPtr) const
+			const iprm::IParamsSet* paramsPtr,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (!m_fileCopyCompPtr.IsValid()){
 		SendErrorMessage(MI_END_STATUS, tr("File copy provider is not present"));

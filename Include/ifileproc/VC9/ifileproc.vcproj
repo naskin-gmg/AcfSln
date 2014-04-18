@@ -323,7 +323,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFileConvertCopy.h"
+				RelativePath="..\IFileConversion.h"
 				>
 			</File>
 			<File

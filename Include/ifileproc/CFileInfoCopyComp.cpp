@@ -15,12 +15,13 @@ namespace ifileproc
 {
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CFileInfoCopyComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* /*paramsSetPtr*/) const
+			const iprm::IParamsSet* /*paramsSetPtr*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	QString inputFileName = inputPath;
 	QString outputFileName = outputPath;

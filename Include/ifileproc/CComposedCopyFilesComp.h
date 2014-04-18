@@ -7,7 +7,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 #include "ilog/TLoggerCompWrap.h"
 
 
@@ -21,7 +21,7 @@ namespace ifileproc
 class CComposedCopyFilesComp:
 			public QObject,
 			public ilog::CLoggerComponentBase,
-			virtual public ifileproc::IFileConvertCopy
+			virtual public ifileproc::IFileConversion
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
@@ -32,18 +32,19 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CComposedCopyFilesComp);
-		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 		I_ASSIGN_MULTI_0(m_fileCopiersCompPtr, "FileCopiers", "Set of copiers will be used for input and output path", true);
 	I_END_COMPONENT;
 
-	// reimplemented (ifileproc::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConversion)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
-				const iprm::IParamsSet* paramsPtr = NULL) const;
+				const iprm::IParamsSet* paramsPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 private:
-	I_MULTIREF(ifileproc::IFileConvertCopy, m_fileCopiersCompPtr);
+	I_MULTIREF(ifileproc::IFileConversion, m_fileCopiersCompPtr);
 };
 
 

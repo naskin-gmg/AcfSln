@@ -28,12 +28,13 @@ namespace
 }
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CProcessingResultsReviewComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* /*paramsPtr*/) const
+			const iprm::IParamsSet* /*paramsPtr*/,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (		!m_currentProcessedFilePathCompPtr.IsValid() ||
 				!m_outputSupplierCompPtr.IsValid() ||

@@ -15,12 +15,13 @@ namespace ifileproc
 {
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CExternalFileConverterComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* paramsSetPtr) const
+			const iprm::IParamsSet* paramsSetPtr,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (!m_executablePathCompPtr.IsValid()){
 		SendErrorMessage(0, "Path for an executable was not set");

@@ -12,7 +12,7 @@
 #include "ilog/TLoggerCompWrap.h"
 
 // ACF-Solutions include
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 
 
 namespace ifileproc
@@ -21,7 +21,7 @@ namespace ifileproc
 
 /**
 	General file transformation application.
-	This implementation uses some slave ifileproc::IFileConvertCopy implementation to provide copy operation.
+	This implementation uses some slave ifileproc::IFileConversion implementation to provide copy operation.
 	It implements ibase::IApplication and can be used as standalone application.
 */
 class CCopyAppComp:
@@ -45,7 +45,7 @@ public:
 	virtual QStringList GetApplicationArguments() const;
 
 private:
-	I_REF(IFileConvertCopy, m_fileCopyCompPtr);
+	I_REF(IFileConversion, m_fileCopyCompPtr);
 	I_ATTR(bool, m_needExplicitInputAttrPtr);
 
 	QStringList m_applicationArguments;

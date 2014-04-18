@@ -10,7 +10,7 @@
 
 #include "ifile/IFilePersistence.h"
 
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 #include "ilog/TLoggerCompWrap.h"
 
 #include "ibase/IProgressManager.h"
@@ -26,7 +26,7 @@ namespace ifileproc
 */
 class CFileConvertOverProcessorComp:
 			public ilog::CLoggerComponentBase,
-			virtual public ifileproc::IFileConvertCopy
+			virtual public ifileproc::IFileConversion
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
@@ -34,7 +34,7 @@ public:
 	CFileConvertOverProcessorComp();
 
 	I_BEGIN_COMPONENT(CFileConvertOverProcessorComp);
-		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 		I_ASSIGN(m_inputFileLoaderCompPtr, "InputFileLoader", "Loader for the input file", true, "InputFileLoader");
 		I_ASSIGN(m_outputFileLoaderCompPtr, "OutputFileLoader", "Persistence for the output file. If not set, the input file loader will be used", false, "OutputFileLoader");
 		I_ASSIGN(m_processorCompPtr, "DataProcessor", "Processor for the file", true, "FileProcessor");
@@ -44,11 +44,12 @@ public:
 		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
 	I_END_COMPONENT;
 
-	// reimplemented (ifileproc::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConversion)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
-				const iprm::IParamsSet* paramsPtr = NULL) const;
+				const iprm::IParamsSet* paramsPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 private:
 	I_REF(ifile::IFilePersistence, m_inputFileLoaderCompPtr);

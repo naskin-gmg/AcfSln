@@ -11,7 +11,7 @@
 
 #include "ibase/IApplicationInfo.h"
 #include "ilog/TLoggerCompWrap.h"
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 
 #include "ifileproc/ifileproc.h"
 
@@ -39,7 +39,7 @@ namespace ifileproc
 class CFileInfoCopyComp:
 			public QObject,
 			public ilog::CLoggerComponentBase,
-			virtual public ifileproc::IFileConvertCopy
+			virtual public ifileproc::IFileConversion
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
@@ -54,7 +54,7 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CFileInfoCopyComp);
-		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Provide information about versions for substitution", false, "VersionInfo");
 		I_ASSIGN(m_licensePathAttrPtr, "LicensePath", "Path of license file will be included at begin of copied file", false, "License.txt");
@@ -63,11 +63,12 @@ public:
 		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags", false);
 	I_END_COMPONENT;
 
-	// reimplemented (ifileproc::IFileConvertCopy)
+	// reimplemented (ifileproc::IFileConversion)
 	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
-				const iprm::IParamsSet* paramsPtr = NULL) const;
+				const iprm::IParamsSet* paramsPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 protected:
 	bool ProcessSubstitutionTag(const QString& tag, QString& result) const;

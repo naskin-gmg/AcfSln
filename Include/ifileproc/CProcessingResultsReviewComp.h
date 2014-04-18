@@ -6,7 +6,7 @@
 #include "ifile/IFileTypeInfo.h"
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFilePersistence.h"
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 #include "ilog/TLoggerCompWrap.h"
 
 // ACF-Solutions includes
@@ -18,13 +18,13 @@ namespace ifileproc
 
 class CProcessingResultsReviewComp:
 			public ilog::CLoggerComponentBase,
-			virtual public ifileproc::IFileConvertCopy			
+			virtual public ifileproc::IFileConversion
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CProcessingResultsReviewComp);
-		I_REGISTER_INTERFACE(ifileproc::IFileConvertCopy);
+		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 		I_ASSIGN(m_inputPathCompPtr, "InputPathObject", "Optional storage of current processed input (file or directory)", false, "InputPathObject");
 		I_ASSIGN(m_currentProcessedFilePathCompPtr, "CurrentProcessedFilePath", "Full path to currently processed file, should be used by supplier as input file path", true, "ProcessingInputFilePath");
 		I_ASSIGN(m_outputSupplierCompPtr, "OutputSupplier", "Supplier to process files", true, "OutputSupplier");
@@ -33,11 +33,12 @@ public:
 		I_ASSIGN(m_inputFileTypeInfoCompPtr, "InputFilesTypeInfo", "Optional input files type information used if user specified directory", false, "InputFilesTypeInfo");
 	I_END_COMPONENT;
 
-	// reimplemented (ifileproc::IFileConvertCopy)
-	virtual bool ConvertFiles(				
+	// reimplemented (ifileproc::IFileConversion)
+	virtual bool ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
-				const iprm::IParamsSet* paramsPtr = NULL) const;
+				const iprm::IParamsSet* paramsPtr = NULL,
+				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 protected:
 	/**

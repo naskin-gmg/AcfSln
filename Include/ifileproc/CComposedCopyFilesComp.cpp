@@ -13,18 +13,19 @@ namespace ifileproc
 {
 
 
-// reimplemented (ifileproc::IFileConvertCopy)
+// reimplemented (ifileproc::IFileConversion)
 
 bool CComposedCopyFilesComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
-			const iprm::IParamsSet* paramsPtr) const
+			const iprm::IParamsSet* paramsPtr,
+			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	bool retVal = true;
 
 	int copiersCount = m_fileCopiersCompPtr.GetCount();
 	for (int i = 0; i < copiersCount; ++i){
-		ifileproc::IFileConvertCopy* copierPtr = m_fileCopiersCompPtr[i];
+		ifileproc::IFileConversion* copierPtr = m_fileCopiersCompPtr[i];
 		if (copierPtr != NULL){
 			retVal = copierPtr->ConvertFiles(inputPath, outputPath, paramsPtr) && retVal;
 		}

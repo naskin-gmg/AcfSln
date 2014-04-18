@@ -6,7 +6,7 @@
 #include "istd/TPointerVector.h"
 #include "iproc/TSyncProcessorCompBase.h"
 #include "ifile/IFileListProvider.h"
-#include "ifileproc/IFileConvertCopy.h"
+#include "ifileproc/IFileConversion.h"
 
 // ACF-Solutions includes
 #include "ifileproc/IFileNaming.h"
@@ -35,7 +35,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
 private:
-	I_REF(ifileproc::IFileConvertCopy, m_fileConvertCompPtr);
+	I_REF(ifileproc::IFileConversion, m_fileConvertCompPtr);
 	I_REF(IFileNaming, m_outputFileNameCompPtr);
 	I_ATTR(bool, m_inputFilesRemovingEnabledAttrPtr);
 };
