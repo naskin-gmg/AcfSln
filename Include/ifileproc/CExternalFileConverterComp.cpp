@@ -17,7 +17,7 @@ namespace ifileproc
 
 // reimplemented (ifileproc::IFileConversion)
 
-bool CExternalFileConverterComp::ConvertFiles(
+int CExternalFileConverterComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
 			const iprm::IParamsSet* paramsSetPtr,
@@ -26,13 +26,13 @@ bool CExternalFileConverterComp::ConvertFiles(
 	if (!m_executablePathCompPtr.IsValid()){
 		SendErrorMessage(0, "Path for an executable was not set");
 
-		return false;
+		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (m_executablePathCompPtr->GetPathType() != ifile::IFileNameParam::PT_FILE){
 		SendErrorMessage(0, "Wrong executable path type. Must be path to a file.");
 
-		return false;
+		return iproc::IProcessor::TS_INVALID;
 	}
 
 	QStringList arguments;
@@ -105,10 +105,10 @@ bool CExternalFileConverterComp::ConvertFiles(
 	m_conversionProcess.waitForFinished(-1);
 
 	if (m_conversionProcess.error() != QProcess::UnknownError){
-		return false;
+		return iproc::IProcessor::TS_INVALID;
 	}
 
-	return (m_conversionProcess.exitCode() == 0);
+	return (m_conversionProcess.exitCode() == 0) ? iproc::IProcessor::TS_OK : iproc::IProcessor::TS_INVALID;
 }
 
 

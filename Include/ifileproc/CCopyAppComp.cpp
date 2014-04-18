@@ -72,7 +72,7 @@ int CCopyAppComp::Execute(int argc, char** argv)
 		SendWarningMessage(0, QString("Input file doesn't exist: %1").arg(inputFilePath));;
 	}
 
-	if (!m_fileCopyCompPtr->ConvertFiles(inputFilePath, outputFilePath)){
+	if (m_fileCopyCompPtr->ConvertFiles(inputFilePath, outputFilePath) != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, QObject::tr("Copy of %1 to %2 failed").arg(inputFilePath).arg(outputFilePath));
 
 		return 20;

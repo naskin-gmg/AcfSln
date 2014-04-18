@@ -17,7 +17,7 @@ namespace ifileproc
 
 // reimplemented (ifileproc::IFileConversion)
 
-bool CFileInfoCopyComp::ConvertFiles(
+int CFileInfoCopyComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsSetPtr*/,
@@ -30,7 +30,8 @@ bool CFileInfoCopyComp::ConvertFiles(
 
 	if (!*m_useSubstitutionAttrPtr && !m_licensePathAttrPtr.IsValid()){
 		QFile::remove(outputFileName);
-		return QFile::copy(inputFileName, outputFileName);
+
+		return QFile::copy(inputFileName, outputFileName) ? iproc::IProcessor::TS_OK : iproc::IProcessor::TS_INVALID;
 	}
 
 	QFile inputFile(inputFileName);
@@ -38,13 +39,13 @@ bool CFileInfoCopyComp::ConvertFiles(
 	if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
 		SendWarningMessage(MI_INPUT_OPEN, QObject::tr("Opening input file failed (%1)").arg(inputFileName));
 
-		return false;
+		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (!outputFile.open(QIODevice::WriteOnly  | QIODevice::Text)){
 		SendWarningMessage(MI_OUTPUT_OPEN, QObject::tr("Opening output file failed (%1)").arg(outputFileName));
 
-		return false;
+		return iproc::IProcessor::TS_INVALID;
 	}
 
 	QTextStream inputStream(&inputFile);
@@ -57,7 +58,7 @@ bool CFileInfoCopyComp::ConvertFiles(
 		if (!licenseFile.open(QIODevice::ReadOnly | QIODevice::Text)){
 			SendWarningMessage(MI_LICENSE_OPEN, QObject::tr("Opening license file failed (%1)").arg(licenseFileName));
 
-			return false;
+			return iproc::IProcessor::TS_INVALID;
 		}
 
 		QTextStream licenseStream(&licenseFile);
@@ -99,7 +100,7 @@ bool CFileInfoCopyComp::ConvertFiles(
 		outputStream << line << endl;
 	}
 
-	return true;
+	return iproc::IProcessor::TS_OK;
 }
 
 

@@ -8,6 +8,7 @@
 // ACF includes
 #include "iprm/IParamsSet.h"
 #include "ibase/IProgressManager.h"
+#include "iproc/IProcessor.h"
 
 
 namespace ifileproc
@@ -43,9 +44,9 @@ public:
 		\param paramsPtr	File conversion parameters
 		\param progressManagerPtr	Progress manager used for getting information about file conversion progress state and canceling.
 
-		\return \c true if the file conversion was successful or \c false otherwise.
+		\return Status of conversion operation. \sa iproc::IProcessor::ProcessorState
 	*/
-	virtual bool ConvertFiles(
+	virtual int ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL,

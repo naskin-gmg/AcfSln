@@ -15,24 +15,24 @@ namespace ifileproc
 
 // reimplemented (ifileproc::IFileConversion)
 
-bool CComposedCopyFilesComp::ConvertFiles(
+int CComposedCopyFilesComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
 			const iprm::IParamsSet* paramsPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	bool retVal = true;
+	int retVal = iproc::IProcessor::TS_NONE;
 
 	int copiersCount = m_fileCopiersCompPtr.GetCount();
 	for (int i = 0; i < copiersCount; ++i){
 		ifileproc::IFileConversion* copierPtr = m_fileCopiersCompPtr[i];
 		if (copierPtr != NULL){
-			retVal = copierPtr->ConvertFiles(inputPath, outputPath, paramsPtr) && retVal;
+			retVal = qMax(retVal, copierPtr->ConvertFiles(inputPath, outputPath, paramsPtr));
 		}
 		else{
 			SendErrorMessage(MI_CRITICAL, tr("File copy provider is not present"));
 
-			return false;
+			return iproc::IProcessor::TS_INVALID;
 		}
 	}
 

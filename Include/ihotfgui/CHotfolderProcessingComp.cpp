@@ -284,13 +284,9 @@ void CHotfolderProcessingComp::ItemProcessor::run()
 
     istd::CGeneralTimeStamp timer;
 
-	if (!m_parent.m_fileConvertCompPtr->ConvertFiles(m_inputFilePath, m_outputFilePath)){
+	m_processingState = m_parent.m_fileConvertCompPtr->ConvertFiles(m_inputFilePath, m_outputFilePath);
+	if (m_processingState == iproc::IProcessor::TS_INVALID){
 		m_parent.SendErrorMessage(0, QObject::tr("Processing of  %1 failed").arg(m_inputFilePath), "Hotfolder");
-
-		m_processingState = iproc::IProcessor::TS_INVALID;
-	}
-	else{
-		m_processingState = iproc::IProcessor::TS_OK;
 	}
 
     m_processingTime = timer.GetElapsed();

@@ -31,8 +31,6 @@ class CFileConvertOverProcessorComp:
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
-	CFileConvertOverProcessorComp();
-
 	I_BEGIN_COMPONENT(CFileConvertOverProcessorComp);
 		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 		I_ASSIGN(m_inputFileLoaderCompPtr, "InputFileLoader", "Loader for the input file", true, "InputFileLoader");
@@ -45,7 +43,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifileproc::IFileConversion)
-	virtual bool ConvertFiles(
+	virtual int ConvertFiles(
 				const QString& inputPath,
 				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL,
