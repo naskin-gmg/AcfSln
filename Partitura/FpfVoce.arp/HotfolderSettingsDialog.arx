@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3389
+          3451
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1087
+          1120
         </Number>
         <Description>
           ACF-Solutions
@@ -97,7 +97,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               DialogIconPath
@@ -114,6 +114,25 @@
               </IsEnabled>
               <Value>
                 :/Icons/HotfolderSettings
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DialogSize
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0.5
               </Value>
             </Data>
           </AttributeInfo>
@@ -157,6 +176,44 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              MenuDescription
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Start hotfolder settings dialog
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MenuName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Show Hotfoder Settings...
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Model
             </Id>
             <Type>
@@ -169,6 +226,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RootMenu
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                &amp;Tools
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -196,7 +272,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        ibase::ICommandsProvider
+      </InterfaceId>
+      <ComponentId>
+        SettingsDialog
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iqtgui::IDialog
