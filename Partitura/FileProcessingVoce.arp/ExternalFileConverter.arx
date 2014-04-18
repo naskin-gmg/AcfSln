@@ -220,7 +220,7 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        ifileproc::IFileConvertCopy
+        ifileproc::IFileConversion
       </InterfaceId>
       <ComponentId>
         Converter

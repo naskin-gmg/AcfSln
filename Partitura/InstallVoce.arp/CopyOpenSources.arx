@@ -1798,7 +1798,7 @@
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        ifileproc::IFileConvertCopy
+        ifileproc::IFileConversion
       </InterfaceId>
       <ComponentId>
         CopyAllFiles
