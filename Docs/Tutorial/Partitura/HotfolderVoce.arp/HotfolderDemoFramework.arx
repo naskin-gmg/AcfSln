@@ -646,15 +646,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
-    <Component>
-      <ExportedId>
-        HotfolderGui
-      </ExportedId>
-      <ComponentId>
-        HotfolderDemoGui/HotfolderGui
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Simple demonstration of hotfolder processing

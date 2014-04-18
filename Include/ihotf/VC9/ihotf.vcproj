@@ -228,10 +228,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderLoaderComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CHotfolderProcessingInfo.h"
 				>
 			</File>
