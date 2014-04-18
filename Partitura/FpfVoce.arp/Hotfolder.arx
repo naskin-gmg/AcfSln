@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -55,7 +55,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="11">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               FileConverter
@@ -215,41 +215,6 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParams
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ProcessingParams
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SessionManager
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                HotfolderProcessingInfo/MonitoringSessionsManager
-              </Value>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -291,7 +256,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               AcceptPatterns
@@ -317,38 +282,6 @@
             </Type>
             <ExportId>
               IgnorePatterns
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameterIds
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              ProcessingParameterIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameters
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              ProcessingParameters
             </ExportId>
             <Data>
               <IsEnabled>

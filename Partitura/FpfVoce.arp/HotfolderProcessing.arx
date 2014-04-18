@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -404,7 +404,7 @@
         OutputFileRenaming
       </Id>
       <PackageId>
-        HotfolderGuiPck
+        FileProcessingPck
       </PackageId>
       <ComponentId>
         FileNaming
@@ -489,15 +489,7 @@
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="1">
-    <Component>
-      <ExportedId>
-        HotfolderState
-      </ExportedId>
-      <ComponentId>
-        HotfolderProcessingInfo/HotfolderState
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Basic definition of a hotfolder

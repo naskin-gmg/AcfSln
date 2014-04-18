@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -192,7 +192,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AcceptPatterns
@@ -218,22 +218,6 @@
             </Type>
             <ExportId>
               FileConverter
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FilePreviewGenerator
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              FilePreviewGenerator
             </ExportId>
             <Data>
               <IsEnabled>
@@ -317,22 +301,6 @@
             </Type>
             <ExportId>
               OutputPreview
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              PreviewGenerator
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              PreviewGenerator
             </ExportId>
             <Data>
               <IsEnabled>

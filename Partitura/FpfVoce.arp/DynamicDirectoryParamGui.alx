@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -43,7 +43,7 @@
         FileNameParamGui
       </ComponentName>
       <X>
-        900
+        625
       </X>
       <X>
         375
@@ -71,10 +71,10 @@
         ParamsManagerGui
       </ComponentName>
       <X>
-        250
+        625
       </X>
       <X>
-        250
+        125
       </X>
       <Note>
         

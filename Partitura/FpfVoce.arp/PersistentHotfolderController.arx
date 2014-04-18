@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -76,7 +76,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               AcceptPatterns
@@ -169,38 +169,6 @@
             </Type>
             <ExportId>
               OutputFileInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameterIds
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              ProcessingParameterIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameters
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              ProcessingParameters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -364,7 +332,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               HotfolderSettings
@@ -382,38 +350,6 @@
               <Value>
                 Hotfolder/HotfolderSettings
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingEditors
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              ProcessingEditors
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProcessingParameters
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              ProcessingParameters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -908,15 +844,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
-    <Component>
-      <ExportedId>
-        HotfolderGui
-      </ExportedId>
-      <ComponentId>
-        HotfolderGui/HofolderGui
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="1">
     <Component>
       <ExportedId>
         HotfolderSettingsDialog
