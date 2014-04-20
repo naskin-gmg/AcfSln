@@ -25,6 +25,7 @@ public:
 	// reimplemented (ihotf::IMonitoringSessionManager)
 	virtual void ResetSessions();
 	virtual ihotf::IMonitoringSession* GetSession(const QString& directoryPath) const;
+	virtual void RemoveSession(const QString& directoryPath);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
