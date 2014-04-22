@@ -39,6 +39,11 @@ public:
 		Set the file list.
 	*/
 	virtual void SetFileInfoList(const FileItems& fileList) = 0;
+
+	/**
+		Remove file item from the session.
+	*/
+	virtual void RemoveFile(const QString& filePath) = 0;
 };
 
 

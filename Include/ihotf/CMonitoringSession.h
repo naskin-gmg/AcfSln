@@ -19,6 +19,7 @@ public:
 	// reimplemented (ihotf::IMonitoringSession)
 	virtual const FileItems& GetFileInfoList() const;
 	virtual void SetFileInfoList(const FileItems& fileList);
+	virtual void RemoveFile(const QString& filePath);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

@@ -32,6 +32,16 @@ void CMonitoringSession::SetFileInfoList(const FileItems& fileList)
 }
 
 
+void CMonitoringSession::RemoveFile(const QString& filePath)
+{
+	if (m_sessionFiles.contains(filePath)){
+		istd::CChangeNotifier changePtr(this);
+
+		m_sessionFiles.remove(filePath);
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CMonitoringSession::Serialize(iser::IArchive& archive)
