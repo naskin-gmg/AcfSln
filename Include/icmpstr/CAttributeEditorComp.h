@@ -16,8 +16,8 @@
 #include "istd/CClassInfo.h"
 #include "idoc/IHelpViewer.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CTreeWidgetFilter.h"
-#include "iqtgui/CItemDelegate.h"
+#include "iwidgets/CTreeWidgetFilter.h"
+#include "iwidgets/CItemDelegate.h"
 
 // ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
@@ -178,10 +178,10 @@ protected:
 	static QString EncodeToEdit(const QString& text);
 
 private:
-	class AttributeItemDelegate: public iqtgui::CItemDelegate
+	class AttributeItemDelegate: public iwidgets::CItemDelegate
 	{
 	public:
-		typedef iqtgui::CItemDelegate BaseClass;
+		typedef iwidgets::CItemDelegate BaseClass;
 
 		AttributeItemDelegate(CAttributeEditorComp* parentPtr);
 
@@ -233,9 +233,9 @@ private:
 
 	AttrInfosMap m_attrInfosMap;	// all current displayed attributes
 
-	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_attributesTreeFilter;
-	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_interfacesTreeFilter;
-	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_subcomponentsTreeFilter;
+	istd::TDelPtr<iwidgets::CTreeWidgetFilter> m_attributesTreeFilter;
+	istd::TDelPtr<iwidgets::CTreeWidgetFilter> m_interfacesTreeFilter;
+	istd::TDelPtr<iwidgets::CTreeWidgetFilter> m_subcomponentsTreeFilter;
 
 	imod::IModel* m_lastRegistryModelPtr;
 

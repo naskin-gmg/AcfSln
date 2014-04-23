@@ -1661,9 +1661,9 @@ void CAttributeEditorComp::OnGuiCreated()
 	ElementInfoTab->setVisible(false);
 	RegistryPropertiesFrame->setVisible(false);
 
-	m_attributesTreeFilter.SetPtr(new iqtgui::CTreeWidgetFilter(AttributeTree));
-	m_interfacesTreeFilter.SetPtr(new iqtgui::CTreeWidgetFilter(InterfacesTree));
-	m_subcomponentsTreeFilter.SetPtr(new iqtgui::CTreeWidgetFilter(ComponentsTree));
+	m_attributesTreeFilter.SetPtr(new iwidgets::CTreeWidgetFilter(AttributeTree));
+	m_interfacesTreeFilter.SetPtr(new iwidgets::CTreeWidgetFilter(InterfacesTree));
+	m_subcomponentsTreeFilter.SetPtr(new iwidgets::CTreeWidgetFilter(ComponentsTree));
 
 	AttributeTree->setItemDelegate(&m_attributeItemDelegate);
 	ComponentsTree->setItemDelegate(&m_attributeItemDelegate);

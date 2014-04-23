@@ -12,7 +12,7 @@
 // ACF includes
 #include "icomp/CCompositeComponentStaticInfo.h"
 #include "ilog/CMessageContainer.h"
-#include "iqtgui/CItemDelegate.h"
+#include "iwidgets/CItemDelegate.h"
 
 
 namespace icmpstr

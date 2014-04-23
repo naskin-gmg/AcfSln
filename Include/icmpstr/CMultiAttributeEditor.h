@@ -3,8 +3,7 @@
 
 
 // ACF includes
-#include "iqtgui/CTreeWidgetFilter.h"
-#include "iqtgui/CItemDelegate.h"
+#include "iwidgets/CItemDelegate.h"
 
 // ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
@@ -45,10 +44,10 @@ protected:
 	void CreateValuesTree(const QStringList& values);
 
 private:
-	class ValueItemDelegate: public iqtgui::CItemDelegate
+	class ValueItemDelegate: public iwidgets::CItemDelegate
 	{
 	public:
-		typedef iqtgui::CItemDelegate BaseClass;
+		typedef iwidgets::CItemDelegate BaseClass;
 
 		ValueItemDelegate(const CMultiAttributeEditor& parent);
 		

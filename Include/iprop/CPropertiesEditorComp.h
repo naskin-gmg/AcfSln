@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CItemDelegate.h"
+#include "iwidgets/CItemDelegate.h"
 
 // ACF-Solutions includes
 #include "iprop/IPropertiesManager.h"
@@ -50,10 +50,10 @@ protected:
 	virtual void OnGuiCreated();
 
 private:
-	class EditorDelegate: public iqtgui::CItemDelegate
+	class EditorDelegate: public iwidgets::CItemDelegate
 	{
 	public:
-		typedef iqtgui::CItemDelegate BaseClass;
+		typedef iwidgets::CItemDelegate BaseClass;
 
 		// reimplemented (QItemDelegate)
 		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& /*option*/, const QModelIndex& index) const;

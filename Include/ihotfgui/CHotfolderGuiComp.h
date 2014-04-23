@@ -21,7 +21,7 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 #include "iqtgui/CGuiComponentDialog.h"
-#include "iqtgui/CExtLineEdit.h"
+#include "iwidgets/CExtLineEdit.h"
 
 // AcfSln includes
 #include "ihotf/IHotfolderProcessingInfo.h"
@@ -179,7 +179,7 @@ private:
 
 	typedef QMap<int, QIcon> StateIconsMap;
 
-	iqtgui::CExtLineEdit* m_filterEditor;
+	iwidgets::CExtLineEdit* m_filterEditor;
 	StateIconsMap m_stateIconsMap;
 
 	imod::CModelProxy m_itemModelProxy;

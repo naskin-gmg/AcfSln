@@ -203,7 +203,7 @@ void CHotfolderGuiComp::OnGuiCreated()
 				SLOT(OnContextMenuRequested(const QPoint&)));
 
 	// Create item filter:
-	m_filterEditor = new iqtgui::CExtLineEdit("<Filter>", 2, TextFilterFrame);
+	m_filterEditor = new iwidgets::CExtLineEdit("<Filter>", 2, TextFilterFrame);
 	QLayout* layoutPtr = TextFilterFrame->layout();
 	if (layoutPtr != NULL){
 		layoutPtr->addWidget(m_filterEditor);

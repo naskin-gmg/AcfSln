@@ -7,7 +7,6 @@
 #include "icomp/IComponentEnvironmentManager.h"
 #include "ilog/IMessageConsumer.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CCheckableComboBox.h"
 
 // ACF-Solutions includes
 #include "icmpstr/IRegistryConsistInfo.h"
@@ -94,8 +93,6 @@ private:
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(imod::IModel, m_envManagerModelCompPtr);
-
-	iqtgui::CCheckableComboBox* m_categoryComboBox;
 };
 
 

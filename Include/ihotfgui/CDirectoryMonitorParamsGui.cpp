@@ -11,7 +11,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iqt/CSignalBlocker.h"
-#include "iqtgui/CItemDelegate.h"
+#include "iwidgets/CItemDelegate.h"
 
 
 namespace ihotfgui
@@ -129,11 +129,11 @@ void CDirectoryMonitorParamsGui::OnGuiCreated()
 
 	AcceptPatternsList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
 
-	AcceptPatternsList->setItemDelegate(new iqtgui::CItemDelegate(20, AcceptPatternsList));
+	AcceptPatternsList->setItemDelegate(new iwidgets::CItemDelegate(20, AcceptPatternsList));
 
 	IgnorePatternsList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
 
-	IgnorePatternsList->setItemDelegate(new iqtgui::CItemDelegate(20, AcceptPatternsList));
+	IgnorePatternsList->setItemDelegate(new iwidgets::CItemDelegate(20, AcceptPatternsList));
 }
 
 
