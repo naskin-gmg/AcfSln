@@ -64,7 +64,7 @@ int CFileConvertOverProcessorComp::ConvertFiles(
 	ibase::IProgressManager* processingProgressManagerPtr = (progressManagerPtr != NULL) ? progressManagerPtr : m_progressManagerCompPtr.GetPtr();
 
 	int processingResult = m_processorCompPtr->DoProcessing(
-				paramsSetPtr,
+				processingParamsPtr,
 				m_inputDataCompPtr.GetPtr(),
 				m_outputDataCompPtr.GetPtr(),
 				processingProgressManagerPtr);
