@@ -522,6 +522,8 @@ void CVisualRegistryEditorComp::UpdateComponentSelection()
 
 void CVisualRegistryEditorComp::DoRetranslate()
 {
+	istd::CChangeNotifier changePtr(this, ibase::ICommandsProvider::CF_COMMANDS);
+
 	m_editMenu.SetName(tr("&Edit"));
 	m_cutCommand.SetVisuals(
 				tr("Cut"),
@@ -718,6 +720,16 @@ bool CVisualRegistryEditorComp::OnDetached(imod::IModel* modelPtr)
 	}
 
 	return false;
+}
+
+
+// reimplemented (icomp::CGuiComponentBase)
+
+void CVisualRegistryEditorComp::OnRetranslate()
+{
+	BaseClass::OnRetranslate();
+
+	DoRetranslate();
 }
 
 

@@ -1068,6 +1068,8 @@ void CPackageOverviewComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
+	istd::CChangeNotifier changePtr(this, CF_COMMANDS);
+
 	m_packagesCommand.SetVisuals(tr("&Packages"), tr("Packages"), tr("Menu for packages"));
 	m_reloadCommand.SetVisuals(tr("&Reload All Packages"), tr("Reload"), tr("Reloads all packages form configuration file"), QIcon(":/Icons/Reload"));
 }

@@ -174,6 +174,9 @@ protected:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
+	// reimplemented (icomp::CGuiComponentBase)
+	virtual void OnRetranslate();
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();

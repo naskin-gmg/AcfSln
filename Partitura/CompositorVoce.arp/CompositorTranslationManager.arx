@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -43,10 +43,10 @@
         CompositorTranslationManager
       </Id>
       <PackageId>
-        AcfVoce
+        AcfSlnVoce
       </PackageId>
       <ComponentId>
-        AcfLocalization
+        AcfSolutionsLocalization
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -78,7 +78,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="4">
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        CompositorTranslationManager
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iprm::IOptionsList
@@ -90,6 +98,14 @@
     <Interface>
       <InterfaceId>
         iqt::ITranslationManager
+      </InterfaceId>
+      <ComponentId>
+        CompositorTranslationManager
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
       </InterfaceId>
       <ComponentId>
         CompositorTranslationManager
