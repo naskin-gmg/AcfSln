@@ -3,11 +3,8 @@
 
 
 // Qt includes
-#include <QtCore/QVector>
+#include <QtCore/QList>
 #include <QtCore/QMutex>
-
-// ACF includes
-#include "istd/TSmartPtr.h"
 
 // AcfSln includes
 #include "ihotf/IFileSystemChangeStorage.h"
@@ -29,6 +26,7 @@ public:
 	virtual QString GetItemPath(int fileIndex) const;
 	virtual int GetItemState(int fileIndex) const;
 	virtual void UpdateStorageItem(const QString& path, int itemFlags);
+	virtual void RemoveStorageItem(int itemIndex);
 	virtual void ResetStorage();
 
 private:
@@ -37,11 +35,16 @@ private:
 private:
 	struct FileItem
 	{
+		FileItem()
+			:state(0)
+		{	
+		}
+		
 		QString path;
 		int state;
 	};
 
-	typedef QVector<FileItem> FileItems;
+	typedef QList<FileItem> FileItems;
 	FileItems m_storageItems;
 
 	mutable QMutex m_mutex;

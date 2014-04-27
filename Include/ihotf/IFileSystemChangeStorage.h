@@ -71,6 +71,11 @@ public:
 	virtual void UpdateStorageItem(const QString& path, int itemFlags) = 0;
 
 	/**
+		Remove the item from the storage.
+	*/
+	virtual void RemoveStorageItem(int itemIndex) = 0;
+
+	/**
 		Reset the storage.
 	*/
 	virtual void ResetStorage() = 0;

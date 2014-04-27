@@ -71,6 +71,17 @@ void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int itemFl
 }
 
 
+
+void CFileSystemChangeStorage::RemoveStorageItem(int itemIndex)
+{
+	QMutexLocker locker(&m_mutex);
+
+	istd::CChangeNotifier changePtr(this);
+
+	m_storageItems.removeAt(itemIndex);
+}
+
+
 void CFileSystemChangeStorage::ResetStorage()
 {
 	QMutexLocker locker(&m_mutex);
