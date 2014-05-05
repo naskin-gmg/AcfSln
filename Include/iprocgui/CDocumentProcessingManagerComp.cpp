@@ -30,8 +30,11 @@ void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeabl
 void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId)
 {
 	istd::IChangeable* outputDocumentPtr = NULL;
-	if (!m_documentManagerCompPtr->InsertNewDocument(documentTypeId, false, "", &outputDocumentPtr)){
-		SendErrorMessage(0, "Output document could not be created", "Document processing manager");
+	bool ignoredFlag = false;
+	if (!m_documentManagerCompPtr->InsertNewDocument(documentTypeId, false, "", &outputDocumentPtr, true, &ignoredFlag)){
+		if (!ignoredFlag){
+			SendErrorMessage(0, "Output document could not be created", "Document processing manager");
+		}
 
 		return;
 	}
