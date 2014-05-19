@@ -38,7 +38,7 @@ iinsp::ISupplier* CInspectionTaskComp::GetSubtask(int subtaskIndex) const
 
 iprm::IParamsSet* CInspectionTaskComp::GetGeneralParameters() const
 {
-	return 	m_generalParamsCompPtr.GetPtr();
+	return m_generalParamsCompPtr.GetPtr();
 }
 
 
@@ -199,9 +199,9 @@ void CInspectionTaskComp::EnsureWorkFinished()
 	}
 
 	if (m_diagnosticNameAttrPtr.IsValid()){
-		istd::TSmartPtr<const istd::IInformationProvider> messagePtr(new ilog::CMessage(
+		ilog::IMessageConsumer::MessagePtr messagePtr(new ilog::CMessage(
 				istd::IInformationProvider::IC_NONE,
-				0,
+				MI_LOCAL,
 				QObject::tr("Processing took %1 ms").arg(timer.GetElapsed() * 1000),
 				*m_diagnosticNameAttrPtr));
 		

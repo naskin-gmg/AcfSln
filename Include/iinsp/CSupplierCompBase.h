@@ -41,7 +41,12 @@ public:
 			The message describes status of the supplier results.
 			\sa istd::IInformationProvider
 		*/
-		MI_SUPPLIER_RESULTS_STATUS
+		MI_SUPPLIER_RESULTS_STATUS,
+
+		/**
+			Id for intermediate results
+		*/ 
+		MI_INTERMEDIATE
 	};
 
 	I_BEGIN_BASE_COMPONENT(CSupplierCompBase);

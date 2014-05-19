@@ -8,10 +8,11 @@
 #include "iprm/CParamsSet.h"
 #include "iprm/TParamsPtr.h"
 
-// IACF includes
+// ACF Solutions includes
 #include "iipr/CCaliperFeature.h"
 #include "iipr/CFeaturesContainer.h"
 #include "iipr/CSingleFeatureConsumer.h"
+#include "iinsp/CSupplierCompBase.h"
 
 
 namespace iipr
@@ -495,7 +496,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 							(rayIndex >= 0)?
 										istd::IInformationProvider::IC_INFO:
 										istd::IInformationProvider::IC_WARNING,
-							MI_INTERMEDIATE,
+							iinsp::CSupplierCompBase::MI_INTERMEDIATE,
 							(rayIndex >= 0)?
 										QString("Point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()):
 										QString("Unused point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()),
@@ -510,7 +511,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		if (*m_sendLinesToTempAttrPtr){
 			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
 						istd::IInformationProvider::IC_INFO,
-						MI_INTERMEDIATE,
+						iinsp::CSupplierCompBase::MI_INTERMEDIATE,
 						QString("Line %1").arg(rayIndex),
 						"CircleFinder");
 			pointMessagePtr->SetPoint1(ray.projectionLine.GetPoint1());

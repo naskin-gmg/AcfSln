@@ -35,11 +35,6 @@ class CCircleFindProcessorComp:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	enum MessageId
-	{
-		MI_INTERMEDIATE = 0x26723
-	};
-
 	I_BEGIN_COMPONENT(CCircleFindProcessorComp);
 		I_REGISTER_INTERFACE(IImageToFeatureProcessor);
 		I_REGISTER_INTERFACE(iproc::IProcessor);

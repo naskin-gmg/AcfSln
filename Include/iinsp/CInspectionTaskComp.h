@@ -40,7 +40,8 @@ public:
 	enum MessageId
 	{
 		MI_BAD_PARAMS_COUNT = 0x5af30,
-		MI_NO_SUBTASK
+		MI_NO_SUBTASK,
+		MI_LOCAL
 	};
 
 	I_BEGIN_COMPONENT(CInspectionTaskComp);
