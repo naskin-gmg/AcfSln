@@ -51,7 +51,7 @@ void CNumericParamsGuiComp::OnGuiDestroyed()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CNumericParamsGuiComp::UpdateGui(int /*changeFlags*/)
+void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

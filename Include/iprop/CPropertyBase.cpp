@@ -11,8 +11,8 @@ namespace iprop
 // public methods
 
 CPropertyBase::CPropertyBase()
-	:m_propertyOwnerPtr(NULL),
-	m_changeFlags(0)
+:	m_propertyOwnerPtr(NULL),
+	m_changeFlag(0)
 {
 }
 
@@ -22,9 +22,9 @@ CPropertyBase::CPropertyBase(
 			const QByteArray& propertyId,
 			const QByteArray& propertyDescription,
 			int propertyFlags,
-			int changeFlags)
-	:m_propertyOwnerPtr(propertyOwnerPtr),
-	m_changeFlags(changeFlags)
+			int changeFlag)
+:	m_propertyOwnerPtr(propertyOwnerPtr),
+	m_changeFlag(changeFlag)
 {
 	if (propertyOwnerPtr != NULL){
 		propertyOwnerPtr->InsertProperty(this, propertyId, propertyDescription, propertyFlags, false);

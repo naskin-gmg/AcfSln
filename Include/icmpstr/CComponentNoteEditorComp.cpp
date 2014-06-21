@@ -24,7 +24,7 @@ CComponentNoteEditorComp::CComponentNoteEditorComp()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
+void CComponentNoteEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
@@ -134,9 +134,9 @@ void CComponentNoteEditorComp::OnGuiCreated()
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CComponentNoteEditorComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CComponentNoteEditorComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& changeSet)
 {
-	UpdateEditor(istd::IChangeable::CF_MODEL);
+	UpdateEditor(changeSet);
 }
 
 

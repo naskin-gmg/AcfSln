@@ -55,8 +55,8 @@ protected:
 	void OnComponentDestroyed();
 
 	// reimplemented (imod::IObserver)
-	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void BeforeUpdate(imod::IModel* modelPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	I_MULTIREF(iproc::IStateController, m_enterDependenciesCompPtr);

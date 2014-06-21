@@ -19,10 +19,19 @@ class IMediaController:
 			virtual public ifile::IFileTypeInfo
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_STATUS = 1 << 28,
-		CF_MEDIA_POSITION = 1 << 29,
+		/**
+			Status (start/stop) changed.
+		*/
+		CF_STATUS = 0xc72a266,
+		/**
+			Current position changed.
+		*/
+		CF_MEDIA_POSITION
 	};
 
 	enum SupportedFeatures

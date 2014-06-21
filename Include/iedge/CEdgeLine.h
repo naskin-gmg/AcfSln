@@ -107,7 +107,7 @@ protected:
 	virtual void CalcVolatile() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+	virtual void OnEndChanges(const ChangeSet& changeSet);
 
 private:
 	typedef QList<CEdgeNode> Nodes;

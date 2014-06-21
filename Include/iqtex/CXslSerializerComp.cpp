@@ -5,7 +5,7 @@
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 // ACF-Solutions includes
 #include "iqtex/CXslTransformationReadArchive.h"
@@ -29,11 +29,7 @@ int CXslSerializerComp::LoadFromFile(
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		Q_ASSERT(serializablePtr != NULL);
 
-		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
-
 		if (serializablePtr->Serialize(archive)){
-			changePtr.SetPtr(&data);
-
 			return OS_OK;
 		}
 		else{

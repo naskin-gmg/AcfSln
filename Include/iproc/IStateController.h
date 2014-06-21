@@ -15,12 +15,15 @@ namespace iproc
 class IStateController: virtual public istd::IChangeable
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_STATE_ENTERED = 0x100000,
-		CF_STATE_LEAVED = 0x200000,
-		CF_GRAPH_CHANGED = 0x400000,
-		CF_STATE_ENABLED = 0x800000
+		CF_STATE_ENTERED = 0x826710,
+		CF_STATE_LEAVED,
+		CF_GRAPH_CHANGED,
+		CF_STATE_ENABLED
 	};
 
 	/**

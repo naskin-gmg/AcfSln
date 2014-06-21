@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 #include "iqt/CSignalBlocker.h"
 
@@ -15,7 +15,7 @@ namespace iqtmm
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CPlaybackControllerGuiComp::UpdateGui(int updateFlags)
+void CPlaybackControllerGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -31,7 +31,7 @@ void CPlaybackControllerGuiComp::UpdateGui(int updateFlags)
 
 		bool isSeekEnabled = ((supportedFeatures & imm::IMediaController::SF_SEEK) != 0);
 
-		if ((updateFlags & (imm::IMediaController::CF_STATUS | CF_INIT_EDITOR)) != 0){
+		if (changeSet.Contains(imm::IMediaController::CF_STATUS) || changeSet.Contains(CF_INIT_EDITOR)){
 			iqt::CSignalBlocker block1(PositionSlider, true);
 			iqt::CSignalBlocker block2(FrameIndexSB, true);
 			iqt::CSignalBlocker block3(TimeEdit, true);
@@ -58,7 +58,7 @@ void CPlaybackControllerGuiComp::UpdateGui(int updateFlags)
 		TimeEdit->setEnabled(isSeekEnabled);
 		FrameIndexSB->setEnabled(isSeekEnabled);
 
-		if ((updateFlags & (imm::IMediaController::CF_MEDIA_POSITION | CF_INIT_EDITOR)) != 0){
+		if (changeSet.Contains(imm::IMediaController::CF_MEDIA_POSITION) || changeSet.Contains(CF_INIT_EDITOR)){
 			iqt::CSignalBlocker block1(PositionSlider, true);
 			iqt::CSignalBlocker block2(FrameIndexSB, true);
 			iqt::CSignalBlocker block3(TimeEdit, true);

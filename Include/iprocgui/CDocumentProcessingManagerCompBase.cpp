@@ -98,7 +98,7 @@ void CDocumentProcessingManagerCompBase::OnComponentDestroyed()
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CDocumentProcessingManagerCompBase::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CDocumentProcessingManagerCompBase::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	idoc::IDocumentManager* objectPtr = GetObjectAt<idoc::IDocumentManager>(modelId);
 	Q_ASSERT(objectPtr != NULL);

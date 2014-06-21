@@ -53,7 +53,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 	// reimplemented (imod::TSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	/**

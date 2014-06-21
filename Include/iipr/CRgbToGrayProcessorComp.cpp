@@ -5,7 +5,7 @@
 #include <QtCore/QObject>
 
  // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "ibase/CSize.h"
 
 // IACF includes

@@ -5,7 +5,7 @@
 #include <cstring>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "istd/TDelPtr.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -260,11 +260,9 @@ bool CGeneralDataSequence::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(NULL);
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
 	if (!isStoring){
-		notifier.SetPtr(this);
-
 		if ((samplesCount < 0) || (channelsCount < 0) || !CreateSequence(samplesCount, channelsCount)){
 			return false;
 		}

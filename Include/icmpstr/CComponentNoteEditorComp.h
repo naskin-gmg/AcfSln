@@ -37,7 +37,7 @@ public:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 	virtual void UpdateModel() const;
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
@@ -49,7 +49,7 @@ protected:
 	virtual void OnGuiCreated();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 protected Q_SLOTS:
 	void on_NoteEditor_textChanged();

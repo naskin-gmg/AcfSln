@@ -30,7 +30,7 @@ public:
 	void SetDisplayedRange(const istd::CRange& range);
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (QWidget)
 	virtual void paintEvent(QPaintEvent* event);

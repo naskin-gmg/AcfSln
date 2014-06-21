@@ -63,7 +63,7 @@ void CVideoPlayerGuiComp::OnGuiDestroyed()
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CVideoPlayerGuiComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CVideoPlayerGuiComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	if (m_mediaControllerCompPtr.IsValid() && m_urlParamCompPtr.IsValid()){
 		m_mediaControllerCompPtr->OpenMediumUrl(m_urlParamCompPtr->GetPath(), false);

@@ -7,7 +7,7 @@ namespace iqtcam
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CCameraInfoGuiComp::UpdateGui(int /*updateFlags*/)
+void CCameraInfoGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	iprm::ISelectionParam* paramPtr = GetObjectPtr();
 

@@ -20,10 +20,12 @@ namespace ihotf
 class IHotfolderProcessingItem: virtual public iser::ISerializable
 {
 public:
-
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_STATE_CHANGED = 0x1000000
+		CF_STATE_CHANGED = 0x734632b
 	};
 
 	/**

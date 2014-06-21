@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/CClassInfo.h"
 #include "istd/TDelPtr.h"
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -36,7 +36,7 @@ public:
 				const QByteArray& propertyName,
 				const QByteArray& propertyDescription,
 				int propertyFlags,
-				int changeFlags = 0,
+				int changeFlag = 0,
 				const ValueType& defaultValue = ValueType());
 
 	const Value& GetValue() const;
@@ -77,7 +77,7 @@ TObjectProperty<Value>::TObjectProperty(
 			const QByteArray& propertyName,
 			const QByteArray& propertyDescription,
 			int propertyFlags,
-			int changeFlags,
+			int changeFlag,
 			const ValueType& defaultValue)
 	:BaseClass(propertyOwnerPtr, propertyName, propertyDescription, propertyFlags, changeFlags)
 {

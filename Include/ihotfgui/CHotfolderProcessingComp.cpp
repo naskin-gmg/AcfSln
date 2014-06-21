@@ -12,7 +12,7 @@
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "istd/CGeneralTimeStamp.h"
 #include "ifile/IFileNameParam.h"
 #include "iproc/IProcessor.h"
@@ -197,16 +197,17 @@ CHotfolderProcessingComp::StateObserver::StateObserver(CHotfolderProcessingComp&
 }
 
 
-void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CHotfolderProcessingComp::StateObserver::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
-	if ((updateFlags & ihotf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0){
+/*
+	if (changeSet.Contains(ihotf::IHotfolderProcessingItem::CF_STATE_CHANGED)){
 		ihotf::IHotfolderProcessingItem* processingItemPtr = dynamic_cast<ihotf::IHotfolderProcessingItem*>(updateParamsPtr);
 		if (processingItemPtr != NULL && processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_CANCELED){
 			m_parent.OnCancelProcessingItem(processingItemPtr);
 		}
 	}
-
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+*/
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 

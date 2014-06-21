@@ -64,7 +64,7 @@ void CInspectionTaskGuiComp::UpdateModel() const
 }
 
 
-void CInspectionTaskGuiComp::UpdateEditor(int /*updateFlags*/)
+void CInspectionTaskGuiComp::UpdateEditor(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -78,11 +78,11 @@ void CInspectionTaskGuiComp::UpdateEditor(int /*updateFlags*/)
 
 // reimplemented (imod::IObserver)
 
-bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
+bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
 {
 	m_editorsList.clear();
 
-	if (!BaseClass::OnAttached(modelPtr)){
+	if (!BaseClass::OnModelAttached(modelPtr, changeMask)){
 		return false;
 	}
 
@@ -131,7 +131,7 @@ bool CInspectionTaskGuiComp::OnAttached(imod::IModel* modelPtr)
 }
 
 
-bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
+bool CInspectionTaskGuiComp::OnModelDetached(imod::IModel* modelPtr)
 {
 	m_editorsList.clear();
 
@@ -169,7 +169,7 @@ bool CInspectionTaskGuiComp::OnDetached(imod::IModel* modelPtr)
 		}
 	}
 
-	return BaseClass::OnDetached(modelPtr);
+	return BaseClass::OnModelDetached(modelPtr);
 }
 
 
@@ -512,7 +512,7 @@ void CInspectionTaskGuiComp::OnGuiHidden()
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CInspectionTaskGuiComp::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CInspectionTaskGuiComp::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	if (modelId == m_currentGuiIndex && !m_testStarted){
 		UpdateVisualElements();
@@ -863,7 +863,7 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 		if (taskIndex < editorsCount){
 			imod::IModelEditor* editorPtr = m_editorsCompPtr[taskIndex];
 			if (editorPtr != NULL){
-				editorPtr->UpdateEditor();
+				editorPtr->UpdateEditor(istd::IChangeable::GetAnyChange());
 			}
 		}
 	}
@@ -981,7 +981,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 		if (mimeDataPtr->hasFormat(mimeType)){
 			iser::CXmlStringReadArchive archive(mimeDataPtr->data(mimeType));
 			if (objectPtr->Serialize(archive)){
-				UpdateGui(0);
+				UpdateGui(istd::IChangeable::GetAllChanges());
 
 				return true;
 			}
@@ -992,7 +992,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 	QByteArray dataToPaste(clipboardPtr->text().toUtf8());
 	iser::CXmlStringReadArchive archive(dataToPaste);
 	if (objectPtr->Serialize(archive)){
-		UpdateGui(0);
+		UpdateGui(istd::IChangeable::GetAllChanges());
 
 		return true;
 	}

@@ -27,9 +27,9 @@ void CMultiLineSupplierGuiComp::on_TestButton_clicked()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CMultiLineSupplierGuiComp::UpdateGui(int updateFlags)
+void CMultiLineSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(updateFlags);
+	BaseClass::UpdateGui(changeSet);
 }
 
 
@@ -190,7 +190,7 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CMultiLineSupplierGuiComp::CShape::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CMultiLineSupplierGuiComp::CShape::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Invalidate();
 }

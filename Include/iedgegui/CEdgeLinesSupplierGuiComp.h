@@ -53,7 +53,9 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
-	virtual void UpdateGui(int updateFlags = 0);
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
@@ -61,7 +63,7 @@ protected:
 	virtual void OnGuiHidden();
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	I_REF(iview::IColorSchema, m_contoursColorSchemaCompPtr);

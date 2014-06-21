@@ -11,7 +11,8 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeGroup.h"
+#include "istd/TDelPtr.h"
 #include "imod/TSingleModelObserverBase.h"
 #include "i2d/IObject2d.h"
 
@@ -46,18 +47,17 @@ protected:
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr);
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	// abstract methods
 	virtual void UpdateGraphicsItem(const ObjectClass& object) = 0;
 
 private:
 	QPointF m_lastPosition;
-	bool m_isObjectMoved;
 
 	bool m_isShapeUpdateBlocked;
 
-	istd::CChangeNotifier m_mousePressingNotifier;
+	istd::TDelPtr<istd::CChangeGroup> m_dragNotifierPtr;
 };
 
 
@@ -66,8 +66,7 @@ private:
 template <class GraphicsItemClass, class ObjectClass>
 TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, const ISceneProvider* providerPtr)
 :	BaseClass(isEditable, providerPtr),
-	m_isShapeUpdateBlocked(false),
-	m_mousePressingNotifier(NULL, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL)
+	m_isShapeUpdateBlocked(false)
 {
 	BaseClass::SetPen(BaseClass::InactiveColor, QPen(Qt::darkGreen, 0));
 	BaseClass::SetPen(BaseClass::EditableColor, QPen(Qt::green, 0));
@@ -116,7 +115,6 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnPositionChanged(const Q
 		objectPtr->MoveCenterTo(i2d::CVector2d(offset) + objectPtr->GetCenter());
 
 		m_lastPosition = position;
-		m_isObjectMoved = true;
 	}
 
 	BaseClass::OnPositionChanged(position);
@@ -141,9 +139,9 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mousePressEvent(QGraphics
 
 	if (BaseClass::IsEditable() && (eventPtr->button() == Qt::LeftButton)){
 		m_lastPosition = BaseClass::pos();
-		m_isObjectMoved = false;
 
-		m_mousePressingNotifier.SetPtr(BaseClass2::GetObjectPtr());
+		static istd::IChangeable::ChangeSet dragChangeSet(i2d::IObject2d::CF_OBJECT_POSITION);
+		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObjectPtr(), dragChangeSet));
 	}
 }
 
@@ -153,12 +151,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mouseReleaseEvent(QGraphi
 {
 	BaseClass::mouseReleaseEvent(eventPtr);
 
-	if (m_isObjectMoved){
-		m_mousePressingNotifier.Reset();
-	}
-	else{
-		m_mousePressingNotifier.Abort();
-	}
+	m_dragNotifierPtr.Reset();
 }
 
 
@@ -167,14 +160,14 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mouseDoubleClickEvent(QGr
 {
 	BaseClass::mouseDoubleClickEvent(eventPtr);
 
-	m_mousePressingNotifier.Reset();
+	m_dragNotifierPtr.Reset();
 }
 
 
 // reimplemented (imod::IObserver)
 
 template <class GraphicsItemClass, class ObjectClass>
-void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(!m_isShapeUpdateBlocked);
 

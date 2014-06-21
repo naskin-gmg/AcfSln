@@ -10,7 +10,7 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iqt/CSignalBlocker.h"
 
 
@@ -55,7 +55,7 @@ void CWizardOptionsListGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CWizardOptionsListGuiComp::UpdateGui(int /*updateFlags*/)
+void CWizardOptionsListGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

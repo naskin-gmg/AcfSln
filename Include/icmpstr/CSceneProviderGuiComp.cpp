@@ -495,7 +495,8 @@ void CSceneProviderGuiComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
-	istd::CChangeNotifier changePtr(this, ibase::ICommandsProvider::CF_COMMANDS);
+	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
 
 	m_fileMenu.SetVisuals(tr("&File"), tr("File"), tr("File menu"));
 	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), QIcon(":/Icons/Print"));

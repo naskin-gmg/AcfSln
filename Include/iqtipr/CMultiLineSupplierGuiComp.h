@@ -42,7 +42,7 @@ protected Q_SLOTS:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual void OnSupplierParamsChanged();
@@ -88,7 +88,7 @@ protected:
 		virtual void Draw(QPainter& drawContext) const;
 
 		// reimplemented (imod::CMultiModelDispatcherBase)
-		virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 	protected:
 		// reimplemented (iview::CShapeBase)

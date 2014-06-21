@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iimg/CBitmap.h"
 #include "iprm/CParamsSet.h"
 #include "iprm/CSelectionParam.h"
@@ -42,9 +42,9 @@ const iimg::IBitmap* CRenderedDocumentPreviewGeneratorComp::GetBitmap(int bitmap
 
 // reimplemented (imod::IObserver)
 
-bool CRenderedDocumentPreviewGeneratorComp::OnDetached(imod::IModel* modelPtr)
+bool CRenderedDocumentPreviewGeneratorComp::OnModelDetached(imod::IModel* modelPtr)
 {
-	if (BaseClass2::OnDetached(modelPtr)){
+	if (BaseClass2::OnModelDetached(modelPtr)){
 
 		istd::CChangeNotifier changePtr(this);
 
@@ -59,7 +59,7 @@ bool CRenderedDocumentPreviewGeneratorComp::OnDetached(imod::IModel* modelPtr)
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CRenderedDocumentPreviewGeneratorComp::OnUpdate(int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CRenderedDocumentPreviewGeneratorComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	EnsurePreviewGenerated();
 }

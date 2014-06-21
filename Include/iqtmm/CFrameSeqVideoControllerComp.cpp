@@ -6,7 +6,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace iqtmm
@@ -76,7 +76,8 @@ QString CFrameSeqVideoControllerComp::GetOpenedMediumUrl() const
 
 bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPlay)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS | CF_MEDIA_POSITION);
+	static ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	m_mediumUrl = url;
 
@@ -103,7 +104,8 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPl
 
 void CFrameSeqVideoControllerComp::CloseMedium()
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
+	static ChangeSet changeSet(CF_STATUS);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	SetPlaying(false);
 }
@@ -117,7 +119,8 @@ bool CFrameSeqVideoControllerComp::IsPlaying() const
 
 bool CFrameSeqVideoControllerComp::SetPlaying(bool state)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_STATUS);
+	static ChangeSet changeSet(CF_STATUS);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	if (m_isPlaying != state){
 		m_isPlaying = state;
@@ -188,7 +191,8 @@ int CFrameSeqVideoControllerComp::GetCurrentFrame() const
 bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 {
 	if (frameIndex != m_currentFrameIndex){
-		istd::CChangeNotifier notifier(this, CF_MODEL | CF_MEDIA_POSITION);
+		static ChangeSet changeSet(CF_MEDIA_POSITION);
+		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_currentFrameIndex = frameIndex;
 

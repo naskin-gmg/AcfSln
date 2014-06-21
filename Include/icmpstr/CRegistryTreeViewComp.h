@@ -83,7 +83,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CRegistryTreeViewComp& m_parent;
@@ -116,14 +116,14 @@ protected:
 	void UpdateTreeItemsVisibility();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 	virtual void OnGuiModelDetached();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

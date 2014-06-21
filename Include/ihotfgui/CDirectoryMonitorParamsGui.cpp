@@ -9,7 +9,7 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iqt/CSignalBlocker.h"
 #include "iwidgets/CItemDelegate.h"
 
@@ -87,7 +87,7 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	
 // reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CDirectoryMonitorParamsGui::UpdateGui(int /*updateFlags*/)
+void CDirectoryMonitorParamsGui::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

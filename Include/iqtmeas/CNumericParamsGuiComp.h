@@ -56,7 +56,7 @@ protected:
 	virtual void OnGuiDestroyed();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int changeFlags);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 public Q_SLOTS:
 	void OnValueChanged();

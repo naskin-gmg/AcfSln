@@ -27,12 +27,12 @@ public:
 		/**
 			The property manager was initialized
 		*/
-		CF_RESET = 1 << 15,
+		CF_RESET = 0xb812936,
 
 		/**
 			A new property was added to the manager
 		*/
-		CF_ADD_PROPERTY = 1 << 16
+		CF_ADD_PROPERTY
 	};
 
 	/**

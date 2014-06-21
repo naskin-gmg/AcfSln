@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace iqtinsp
@@ -98,9 +98,9 @@ void CGeneralSupplierGuiComp::OnGuiHidden()
 }
 
 
-void CGeneralSupplierGuiComp::UpdateGui(int updateFlags)
+void CGeneralSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(updateFlags);
+	BaseClass::UpdateGui(changeSet);
 
 	Q_ASSERT(IsGuiCreated());
 

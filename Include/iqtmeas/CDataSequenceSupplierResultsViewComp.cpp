@@ -9,9 +9,9 @@ namespace iqtmeas
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CDataSequenceSupplierResultsViewComp::UpdateGui(int updateFlags)
+void CDataSequenceSupplierResultsViewComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	if (updateFlags & iinsp::ISupplier::CF_SUPPLIER_RESULTS){
+	if (changeSet.Contains(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
 		imeas::IDataSequenceProvider* providerPtr = dynamic_cast<imeas::IDataSequenceProvider*>(GetModelPtr());
 		if (providerPtr != NULL){
 			const imod::IModel* productModelPtr = dynamic_cast<const imod::IModel*>(providerPtr->GetDataSequence());

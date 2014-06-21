@@ -33,7 +33,7 @@ public:
 	virtual i2d::CRect CalcBoundingBox() const;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 protected:
 	void UpdateFigure() const;

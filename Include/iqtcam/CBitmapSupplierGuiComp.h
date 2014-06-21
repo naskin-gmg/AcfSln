@@ -71,10 +71,10 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);

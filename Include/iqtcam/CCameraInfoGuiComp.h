@@ -31,7 +31,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	void AddItem(int cameraIndex, icam::ICameraInfo::CameraAttribute attr, const QString& attrName);

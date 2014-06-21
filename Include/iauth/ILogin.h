@@ -19,10 +19,13 @@ namespace iauth
 class ILogin: virtual public istd::IChangeable
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_LOGIN = 1 << 23,
-		CF_LOGOUT = 1 << 24
+		CF_LOGIN = 0x36e7b62,
+		CF_LOGOUT
 	};
 
 	/**

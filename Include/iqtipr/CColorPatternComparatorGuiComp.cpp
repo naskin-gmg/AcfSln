@@ -47,9 +47,9 @@ void CColorPatternComparatorGuiComp::OnGuiModelDetached()
 }
 
 
-void CColorPatternComparatorGuiComp::UpdateGui(int updateFlags)
+void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(updateFlags);
+	BaseClass::UpdateGui(changeSet);
 
 	while (ColorTable->rowCount()){
 		ColorTable->removeRow(0);

@@ -53,7 +53,7 @@ public:
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr);
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnAttached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
 
 Q_SIGNALS:
 	void RectChanged(QRectF rect);

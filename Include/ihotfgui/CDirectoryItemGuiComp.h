@@ -46,7 +46,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	void UpdateProgressBar(const ihotf::IHotfolderStatistics& statistics);

@@ -95,11 +95,11 @@ void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 
 // reimplemented (imod::IObserver)
 
-bool CEdgeLineContainerShape::OnAttached(imod::IModel* modelPtr)
+bool CEdgeLineContainerShape::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
 {
 	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(modelPtr);
 	if (containerPtr != NULL){
-		return BaseClass::OnAttached(modelPtr);
+		return BaseClass::OnModelAttached(modelPtr, changeMask);
 	}
 
 	return false;

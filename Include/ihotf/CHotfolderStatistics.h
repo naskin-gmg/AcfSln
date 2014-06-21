@@ -38,10 +38,10 @@ public:
 	virtual double GetProcessingTime(const QString& directoryPath = QString()) const;
 
 	// reimplemented (imod::TSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnAttached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

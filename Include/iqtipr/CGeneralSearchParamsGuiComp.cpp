@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iqt/CSignalBlocker.h"
 #include "iipr/ISearchConstraints.h"
 
@@ -61,7 +61,7 @@ void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
 }
 
 
-void CGeneralSearchParamsGuiComp::UpdateGui(int /*updateFlags*/)
+void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

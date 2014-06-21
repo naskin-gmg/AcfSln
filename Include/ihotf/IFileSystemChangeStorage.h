@@ -25,27 +25,22 @@ public:
 		/**
 			File(s) were added.
 		*/
-		CF_NEW = 0x1000000,
+		CF_NEW = 0x2363d50,
 
 		/**
 			File(s) were removed.
 		*/
-		CF_REMOVED = 0x2000000,
+		CF_REMOVED,
 
 		/**
 			File(s) were modified.
 		*/
-		CF_MODIFIED = 0x4000000,
+		CF_MODIFIED,
 
 		/**
 			File's attributes were changed.
 		*/
-		CF_ATTRIBUTE_CHANGED = 0x8000000,
-
-		/**
-			All possible changes
-		*/
-		CF_SOME_CHANGES = CF_NEW | CF_REMOVED | CF_MODIFIED | CF_ATTRIBUTE_CHANGED
+		CF_ATTRIBUTE_CHANGED
 	};
 
 	/**

@@ -22,12 +22,15 @@ namespace ihotf
 class IHotfolderProcessingInfo: virtual public iser::ISerializable
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_FILE_ADDED = 0x100000,
-		CF_FILE_REMOVED = 0x200000,
-		CF_WORKING_STATE_CHANGED = 0x400000,
-		CF_CREATE = 0x800000
+		CF_FILE_ADDED = 0xd729a03,
+		CF_FILE_REMOVED,
+		CF_WORKING_STATE_CHANGED,
+		CF_CREATE
 	};
 
 	/**

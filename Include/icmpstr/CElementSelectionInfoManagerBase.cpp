@@ -152,11 +152,11 @@ void CElementSelectionInfoManagerBase::UpdateAddressToMetaInfoMap()
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CElementSelectionInfoManagerBase::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CElementSelectionInfoManagerBase::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
 	UpdateAddressToMetaInfoMap();
 
-	BaseClass::OnUpdate(updateFlags, updateParamsPtr);
+	BaseClass::OnUpdate(changeSet);
 }
 
 

@@ -5,7 +5,7 @@
 #include <QtCore/QUuid>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "iser/CPrimitiveTypesSerializer.h"
@@ -45,7 +45,8 @@ int CHotfolderProcessingItem::GetProcessingState() const
 void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
 	if (m_processingState != processingState){
-		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_STATE_CHANGED, this);
+		static ChangeSet changeSet(CF_STATE_CHANGED);
+		istd::CChangeNotifier changePtr(this, changeSet);
 
 		m_processingState = processingState;
 	}

@@ -95,7 +95,7 @@ protected:
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -168,7 +168,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CPackageOverviewComp& m_parent;
@@ -181,7 +181,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CPackageOverviewComp& m_parent;

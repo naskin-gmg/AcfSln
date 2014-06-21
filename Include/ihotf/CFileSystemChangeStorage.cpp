@@ -5,7 +5,7 @@
 #include <QtCore/QMutexLocker>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace ihotf
@@ -50,23 +50,25 @@ int CFileSystemChangeStorage::GetItemState(int fileIndex) const
 }
 
 
-void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int itemFlags)
+void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int changeFlag)
 {
 	QMutexLocker locker(&m_mutex);
 
-	istd::CChangeNotifier changePtr(this, itemFlags);
+	ChangeSet changeSet;
+	changeSet += changeFlag;
+	istd::CChangeNotifier changePtr(this, changeSet);
 
 	int itemIndex = GetFileIndexFromPath(path);
 	if (itemIndex < 0){
 		m_storageItems.push_back(FileItem());
 
 		m_storageItems.back().path = path;
-		m_storageItems.back().state = itemFlags;
+		m_storageItems.back().state = changeFlag;
 	}
 	else{
 		FileItem& item = m_storageItems[itemIndex];
 
-		item.state = itemFlags;
+		item.state = changeFlag;
 	}
 }
 

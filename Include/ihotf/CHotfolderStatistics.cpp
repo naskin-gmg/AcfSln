@@ -5,12 +5,9 @@
 #include <QtCore/QFileInfo>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
-#include "istd/CChangeDelegator.h"
-
+#include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
 #include "iproc/IProcessor.h"
 
 
@@ -93,7 +90,7 @@ double CHotfolderStatistics::GetProcessingTime(const QString& directoryPath) con
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderStatistics::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderStatistics::OnUpdate(const ChangeSet& /*changeSet*/)
 {
 	RebuildStatistics();
 }
@@ -101,9 +98,9 @@ void CHotfolderStatistics::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*u
 
 // reimplemented (imod::IObserver)
 
-bool CHotfolderStatistics::OnAttached(imod::IModel* modelPtr)
+bool CHotfolderStatistics::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
 {
-	if (BaseClass::OnAttached(modelPtr)){
+	if (BaseClass::OnModelAttached(modelPtr, changeMask)){
 		RebuildStatistics();
 
 		return true;

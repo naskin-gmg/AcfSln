@@ -42,7 +42,7 @@ protected:
 	void UpdateAddressToMetaInfoMap();
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 protected:
 	typedef QMap<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;

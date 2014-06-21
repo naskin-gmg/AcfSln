@@ -6,7 +6,7 @@
 #include <QtCore/QMetaType>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "ifile/CXmlFileWriteArchive.h"
 #include "istd/CSystem.h"
 

@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 #include "iproc/IProcessor.h"
 
@@ -22,7 +22,7 @@ namespace ihotfgui
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CProcessingItemPreviewGuiComp::UpdateGui(int updateFlags)
+void CProcessingItemPreviewGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -76,7 +76,7 @@ void CProcessingItemPreviewGuiComp::UpdateGui(int updateFlags)
 		InputFileSizeLabel->setText(QString("%1 KBytes").arg(inputFileSize, 1, 'f', 1));
 		OutputFileSizeLabel->setText(QString("%1 KBytes").arg(outputFileSize, 1, 'f', 1));
 
-		if ((updateFlags & ihotf::IHotfolderProcessingItem::CF_STATE_CHANGED) != 0 && m_outputFileNameParamCompPtr.IsValid()){
+		if (changeSet.Contains(ihotf::IHotfolderProcessingItem::CF_STATE_CHANGED) && m_outputFileNameParamCompPtr.IsValid()){
 			if (objectPtr->GetProcessingState() == iproc::IProcessor::TS_OK){
 				istd::CChangeNotifier changePtr(m_outputFileNameParamCompPtr.GetPtr());
 

@@ -24,9 +24,9 @@ void CSampleContainerView::SetDisplayedRange(const istd::CRange& range)
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CSampleContainerView::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CSampleContainerView::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass2::OnUpdate(updateFlags, updateParamsPtr);
+	BaseClass2::OnUpdate(changeSet);
 
 	emit repaint();
 }

@@ -65,7 +65,7 @@ void CRightsBasedEnablerComp::OnComponentDestroyed()
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CRightsBasedEnablerComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CRightsBasedEnablerComp::OnUpdate(const ChangeSet& /*changeSet*/)
 {
 	bool retVal = m_isEnabled;
 

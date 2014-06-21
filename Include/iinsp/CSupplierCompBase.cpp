@@ -5,7 +5,7 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace iinsp
@@ -14,7 +14,6 @@ namespace iinsp
 
 CSupplierCompBase::CSupplierCompBase()
 :	m_workStatus(WS_INVALID),
-	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
 	m_inputsObserver(this),
 	m_paramsObserver(this),
 	m_areParametersValid(false)
@@ -33,7 +32,8 @@ int CSupplierCompBase::GetWorkStatus() const
 void CSupplierCompBase::InvalidateSupplier()
 {
 	if (m_workStatus >= WS_OK){
-		m_productChangeNotifier.SetPtr(this);
+		static ChangeSet changeSet(CF_SUPPLIER_RESULTS);
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, changeSet));
 
 		m_workStatus = WS_INVALID;
 	}
@@ -55,7 +55,8 @@ void CSupplierCompBase::EnsureWorkInitialized()
 			supplierPtr->EnsureWorkInitialized();
 		}
 
-		m_productChangeNotifier.SetPtr(this);
+		static ChangeSet changeSet(CF_SUPPLIER_RESULTS);
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, changeSet));
 
 		if (!m_areParametersValid){
 			OnParametersChanged();
@@ -84,7 +85,7 @@ void CSupplierCompBase::ClearWorkResults()
 	m_tempMessageContainer.ClearMessages();
 	m_messageContainer.ClearMessages();
 
-	m_productChangeNotifier.Reset();
+	m_productChangeNotifierPtr.Reset();
 }
 
 
@@ -187,7 +188,7 @@ void CSupplierCompBase::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	m_productChangeNotifier.Reset();
+	m_productChangeNotifierPtr.Reset();
 
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
@@ -210,7 +211,10 @@ void CSupplierCompBase::OnComponentDestroyed()
 	m_inputsObserver.EnsureModelsDetached();
 	m_paramsObserver.EnsureModelsDetached();
 
-	m_productChangeNotifier.Abort();
+	if (m_productChangeNotifierPtr.IsValid()){
+		m_productChangeNotifierPtr->Abort();
+	}
+	m_productChangeNotifierPtr.Reset();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -254,7 +258,7 @@ CSupplierCompBase::InputsObserver::InputsObserver(CSupplierCompBase* parentPtr)
 
 // reimplemented (imod::CMultiModelObserverBase)
 
-void CSupplierCompBase::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CSupplierCompBase::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/)
 {
 	m_parent.InvalidateSupplier();
 }
@@ -273,13 +277,13 @@ CSupplierCompBase::ParamsObserver::ParamsObserver(CSupplierCompBase* parentPtr)
 
 // reimplemented (imod::CMultiModelObserverBase)
 
-void CSupplierCompBase::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CSupplierCompBase::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/)
 {
 	m_parent.InvalidateSupplier();
 }
 
 
-void CSupplierCompBase::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CSupplierCompBase::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, const ChangeSet& /*changeSet*/)
 {
 	m_parent.m_areParametersValid = false;
 }

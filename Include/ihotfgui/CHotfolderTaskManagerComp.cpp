@@ -11,7 +11,8 @@
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
+#include "istd/CChangeGroup.h"
 #include "ifile/IFileNameParam.h"
 #include "iproc/IProcessor.h"
 
@@ -102,8 +103,8 @@ void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const QStringList& fil
 	Q_ASSERT(!files.isEmpty());
 
 	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
-
-		istd::CChangeNotifier changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr(), ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED);
+		static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED);
+		istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), changeSet);
 
 		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
 			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(files[fileIndex]);
@@ -121,12 +122,13 @@ void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const QStringList
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(NULL, ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+	istd::CChangeGroup changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr());
 
 	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
 		ihotf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(files[fileIndex]);
 		if (processingItemPtr != NULL){
-			changePtr.SetPtr(m_hotfolderProcessingInfoCompPtr.GetPtr());
+			static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+			istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), changeSet);
 
 			m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
 		}
@@ -399,7 +401,7 @@ CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::FileSystemChangeStor
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	ihotf::IFileSystemChangeStorage* storagePtr = dynamic_cast<ihotf::IFileSystemChangeStorage*>(modelPtr);
 	Q_ASSERT(storagePtr != NULL);
@@ -409,15 +411,15 @@ void CHotfolderTaskManagerComp::FileSystemChangeStorageObserver::AfterUpdate(imo
 		return;
 	}
 
-	if ((updateFlags & ihotf::IFileSystemChangeStorage::CF_NEW) != 0){
+	if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_NEW)){
 		m_parent.OnFilesAddedEvent(*storagePtr);
 	}
 
-	if ((updateFlags & ihotf::IFileSystemChangeStorage::CF_REMOVED) != 0){
+	if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_REMOVED)){
 		m_parent.OnFilesRemovedEvent(*storagePtr);
 	}
 
-	if ((updateFlags & ihotf::IFileSystemChangeStorage::CF_MODIFIED) != 0){
+	if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_MODIFIED)){
 		m_parent.OnFilesModifiedEvent(*storagePtr);
 	}
 }
@@ -433,7 +435,7 @@ CHotfolderTaskManagerComp::ParametersObserver::ParametersObserver(CHotfolderTask
 
 // reimplemented (imod::IObserver)
 	
-void CHotfolderTaskManagerComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderTaskManagerComp::ParametersObserver::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	m_parent.SynchronizeWithModel();
 }

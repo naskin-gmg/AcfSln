@@ -85,13 +85,13 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(int updateFlags)
+void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(updateFlags);
+	BaseClass::UpdateGui(changeSet);
 
 	Q_ASSERT(IsGuiCreated());
 
-	if ((updateFlags & iinsp::ISupplier::CF_SUPPLIER_RESULTS) == 0){
+	if (!changeSet.Contains(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
 		return;
 	}
 

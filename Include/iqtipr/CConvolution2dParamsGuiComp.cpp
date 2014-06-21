@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 
 namespace iqtipr
@@ -23,7 +23,7 @@ void CConvolution2dParamsGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CConvolution2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
+void CConvolution2dParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -69,7 +69,7 @@ void CConvolution2dParamsGuiComp::on_KernelWidthSpin_valueChanged(int /*value*/)
 {
 	DoUpdateModel();
 
-	UpdateGui();
+	UpdateGui(istd::IChangeable::GetAllChanges());
 }
 
 
@@ -77,7 +77,7 @@ void CConvolution2dParamsGuiComp::on_KernelHeightSpin_valueChanged(int /*value*/
 {
 	DoUpdateModel();
 
-	UpdateGui();
+	UpdateGui(istd::IChangeable::GetAllChanges());
 }
 
 

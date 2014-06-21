@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "i2d/CRectangle.h"
 #include "icomp/CRegistryElement.h"
 
@@ -60,7 +60,8 @@ i2d::CVector2d CVisualRegistryElement::GetCenter() const
 void CVisualRegistryElement::MoveCenterTo(const i2d::CVector2d& position)
 {
 	if (position != m_center){
-		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | CF_MODEL);
+		static ChangeSet changeSet(CF_OBJECT_POSITION);
+		istd::CChangeNotifier notifier(this, changeSet);
 
 		m_center = position;
 	}

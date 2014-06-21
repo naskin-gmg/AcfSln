@@ -48,7 +48,7 @@ protected:
 	virtual void OnGuiCreated();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int changeFlags);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 private Q_SLOTS:
 	void OnValueChanged(double);

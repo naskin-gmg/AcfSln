@@ -11,8 +11,9 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iqtgui/CCommandTools.h"
+#include "iview/IDisplay.h"
 
 
 namespace iqtipr
@@ -63,10 +64,12 @@ void CProcessedBitmapView::SetBitmap(const iimg::IBitmap* bitmapPtr)
 		m_sourceImageModel.CopyFrom(*bitmapPtr);
 	}
 
-	istd::TChangeNotifier<iimg::CBitmap> updatePtr(&m_sourceImageModel);
+	istd::CChangeNotifier bitmapNotifier(&m_sourceImageModel);
 
 	iview::CViewport& view = m_ui.ImageView->GetViewRef();
-	view.UpdateAllShapes(iview::CF_TRANSFORM);
+
+	static istd::IChangeable::ChangeSet changeSet(iview::IDisplay::CF_TRANSFORM);
+	view.UpdateAllShapes(changeSet);
 }
 
 

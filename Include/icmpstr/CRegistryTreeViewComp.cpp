@@ -253,7 +253,7 @@ void CRegistryTreeViewComp::UpdateTreeItemsVisibility()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CRegistryTreeViewComp::UpdateGui(int /*updateFlags*/)
+void CRegistryTreeViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	RegistryTree->clear();
 
@@ -306,11 +306,11 @@ void CRegistryTreeViewComp::OnGuiCreated()
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CRegistryTreeViewComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CRegistryTreeViewComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	UpdateRegistryStatus();
 	
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 
@@ -424,12 +424,12 @@ CRegistryTreeViewComp::EnvironmentObserver::EnvironmentObserver(CRegistryTreeVie
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CRegistryTreeViewComp::EnvironmentObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CRegistryTreeViewComp::EnvironmentObserver::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
 	m_parent.UpdateRegistryStatus();
 
 	if (m_parent.IsGuiCreated()){
-		m_parent.UpdateGui(updateFlags);
+		m_parent.UpdateGui(changeSet);
 	}
 }
 

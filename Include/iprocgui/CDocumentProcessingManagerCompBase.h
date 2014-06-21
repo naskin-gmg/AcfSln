@@ -75,7 +75,7 @@ public:
 
 protected:
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(imod::IModel, m_documentManagerModelCompPtr);

@@ -1,7 +1,7 @@
 #include "iqtcam/CExposureParamsGuiComp.h"
 
 
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeGroup.h"
 
 #include "icam/IExposureConstraints.h"
 
@@ -70,7 +70,7 @@ void CExposureParamsGuiComp::OnGuiModelDetached()
 }
 
 
-void CExposureParamsGuiComp::UpdateGui(int /*updateFlags*/)
+void CExposureParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -109,23 +109,20 @@ void CExposureParamsGuiComp::UpdateModel() const
 
 	double tolerance = 0.9e-6;
 
-	istd::CChangeNotifier notifier(NULL);
+	istd::CChangeGroup notifier(objectPtr);
 
 	double shutterTime = ShutterTimeSB->value() * 0.001;
 	if (ShutterTimeSB->isVisible() && (qAbs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){
-		notifier.SetPtr(objectPtr);
 		objectPtr->SetShutterTime(shutterTime);
 	}
 
 	double delayTime = DelayTimeSB->value() * 0.001;
 	if (DelayTimeSB->isVisible() && (qAbs(objectPtr->GetDelayTime() - delayTime) > tolerance)){
-		notifier.SetPtr(objectPtr);
 		objectPtr->SetDelayTime(delayTime);
 	}
 
 	double eenDelayTime = EenDelayTimeSB->value() * 0.001;
 	if (EenDelayTimeSB->isVisible() && (qAbs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
-		notifier.SetPtr(objectPtr);
 		objectPtr->SetEenDelay(eenDelayTime);
 	}
 }

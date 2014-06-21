@@ -12,7 +12,16 @@ namespace iipr
 class IPatternController: virtual public istd::IChangeable
 {
 public:
-	static const int CF_PATTERN_LEARNED = (1 << 20);
+	/**
+		Data model change notification flags.
+	*/
+	enum ChangeFlags
+	{
+		/**
+			Supplier result changed.
+		*/
+		CF_PATTERN_LEARNED = 0x456d447
+	};
 
 	/**
 		Do teaching of the pattern.

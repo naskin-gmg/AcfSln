@@ -43,7 +43,7 @@ public:
 	CDataSequenceViewComp();
 
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 protected:
 	class DiagramWidget: public QWidget

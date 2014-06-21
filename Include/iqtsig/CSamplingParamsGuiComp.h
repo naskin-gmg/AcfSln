@@ -31,7 +31,7 @@ public:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 protected Q_SLOTS:
 	void on_IntervalSB_valueChanged(double value);

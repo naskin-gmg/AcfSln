@@ -5,7 +5,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "istd/TChangeDelegator.h"
 #include "istd/CClassInfo.h"
 
@@ -197,7 +197,8 @@ void CVisualRegistry::SetComponentNote(const QByteArray& componentName, const QS
 
 	CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
 	if ((elementPtr != NULL) && (elementPtr->GetNote() != componentNote)){
-		istd::CChangeNotifier changePtr(this, CF_NOTE_CHANGED | CF_MODEL);
+		static ChangeSet changeSet(CF_NOTE_CHANGED);
+		istd::CChangeNotifier notifier(this, changeSet);
 
 		elementPtr->SetNote(componentNote);
 	}
@@ -235,7 +236,8 @@ bool CVisualRegistry::RenameElement(const QByteArray& oldElementId, const QByteA
 		}
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_ELEMENT_RENAMED);
+	static ChangeSet changeSet(CF_ELEMENT_RENAMED);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	if (BaseClass::RenameElement(oldElementId, newElementId)){
 		const ElementInfo* newElementInfoPtr = GetElementInfo(newElementId);
@@ -249,7 +251,7 @@ bool CVisualRegistry::RenameElement(const QByteArray& oldElementId, const QByteA
 		return true;
 	}
 	else{
-		changePtr.Abort();
+		notifier.Abort();
 	}
 
 	return false;

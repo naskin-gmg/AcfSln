@@ -8,7 +8,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "istd/CClassInfo.h"
 #include "iser/IArchive.h"
 #include "iser/IObject.h"
@@ -153,7 +153,11 @@ template <typename Value, class Container>
 template <class ContainerImpl>
 void TMultiProperty<Value, Container>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
 {
-	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
+	istd::IChangeable::ChangeSet changeSet;
+	if (m_changeFlag != 0){
+		changeSet += m_changeFlag;
+	}
+	istd::CChangeNotifier notifier(m_propertyOwnerPtr, changeSet);
 
 	ResetValues();
 
@@ -196,7 +200,11 @@ void TMultiProperty<Value, Container>::SetValueAt(int index, const Value& value)
 	Q_ASSERT(index < GetValuesCount());
 
 	if (m_values[index] != value){
-		istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
+		istd::IChangeable::ChangeSet changeSet;
+		if (m_changeFlag != 0){
+			changeSet += m_changeFlag;
+		}
+		istd::CChangeNotifier notifier(m_propertyOwnerPtr, changeSet);
 
 		m_values[index] = value;
 	}
@@ -213,7 +221,11 @@ void TMultiProperty<Value, Container>::InsertValue(const Value& value)
 template <typename Value, class Container>
 void TMultiProperty<Value, Container>::ResetValues()
 {
-	istd::CChangeNotifier changePtr(m_propertyOwnerPtr, m_changeFlags);
+	istd::IChangeable::ChangeSet changeSet;
+	if (m_changeFlag != 0){
+		changeSet += m_changeFlag;
+	}
+	istd::CChangeNotifier notifier(m_propertyOwnerPtr, changeSet);
 
 	m_values.clear();
 }

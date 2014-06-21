@@ -19,9 +19,12 @@ namespace icmpstr
 class IComponentNoteController: virtual public istd::IChangeable
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_NOTE_CHANGED = 1 << 29
+		CF_NOTE_CHANGED = 0xb6f0c34
 	};
 
 	/**

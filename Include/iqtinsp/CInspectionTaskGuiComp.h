@@ -95,11 +95,11 @@ public:
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor(int updateFlags = 0);
+	virtual void UpdateEditor(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnAttached(imod::IModel* modelPtr);
-	virtual bool OnDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
+	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
 protected:
 	void UpdateProcessingState();
@@ -111,7 +111,7 @@ protected:
 	virtual void OnGuiHidden();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 protected Q_SLOTS:
 	void OnEditorChanged(int index);

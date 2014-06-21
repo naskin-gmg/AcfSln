@@ -15,7 +15,7 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iprm/IOptionsList.h"
 #include "iproc/IProcessor.h"
 #include "iqt/CSignalBlocker.h"
@@ -47,27 +47,27 @@ const ibase::IHierarchicalCommand* CHotfolderGuiComp::GetCommands() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CHotfolderGuiComp::UpdateGui(int updateFlags)
+void CHotfolderGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
 
 	ihotf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		if ((updateFlags & ihotf::IHotfolderProcessingInfo::CF_CREATE) != 0){
+		if (changeSet.Contains(ihotf::IHotfolderProcessingInfo::CF_CREATE)){
 			RebuildItemList();
 
 			UpdateItemCommands();
 		}
 
-		if ((updateFlags & ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED) != 0){
+		if (changeSet.Contains(ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED)){
 			UpdateAddedItemList();
 		}
 
-		if ((updateFlags & ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED) != 0){
+		if (changeSet.Contains(ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED)){
 			UpdateRemovedItemList();
 		}
 
-		if ((updateFlags & ihotf::IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED) != 0){
+		if (changeSet.Contains(ihotf::IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED)){
 			UpdateProcessingCommands();
 		}
 
@@ -84,7 +84,8 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 
 	UpdateProcessingCommands();
 
-	UpdateGui(ihotf::IHotfolderProcessingInfo::CF_CREATE);
+	static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_CREATE);
+	UpdateGui(changeSet);
 
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){
 		imod::IModel* hotfolderModelPtr = GetModelPtr();
@@ -463,11 +464,12 @@ void CHotfolderGuiComp::OnItemRemove()
 {
 	UpdateBlocker updateBlocker(this);
 
-	ProcessingItems processingItems = GetSelectedProcessingItems();
-	istd::TChangeNotifier<ihotf::IHotfolderProcessingInfo> changePtr(GetObjectPtr());
-	if (changePtr.IsValid()){
+	ihotf::IHotfolderProcessingInfo* processingInfoPtr = GetObjectPtr();
+	if (processingInfoPtr != NULL){
+		istd::CChangeNotifier notifier(processingInfoPtr);
 		FileList->clearSelection();
 	
+		ProcessingItems processingItems = GetSelectedProcessingItems();
 		for (int itemIndex = 0; itemIndex < int(processingItems.size()); itemIndex++){
 			ProcessingItem* processingItemPtr = processingItems[itemIndex];
 
@@ -486,7 +488,7 @@ void CHotfolderGuiComp::OnItemRemove()
 				delete FileList->takeTopLevelItem(FileList->indexOfTopLevelItem(parentItem));
 			}
 
-			changePtr->RemoveProcessingItem(itemPtr);
+			processingInfoPtr->RemoveProcessingItem(itemPtr);
 		}
 	}
 }
@@ -617,7 +619,7 @@ CHotfolderGuiComp::ProcessingItem::ProcessingItem(CHotfolderGuiComp& parent, QTr
 		 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderGuiComp::ProcessingItem::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderGuiComp::ProcessingItem::OnUpdate(const ChangeSet& /*changeSet*/)
 {
 	ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -710,7 +712,7 @@ CHotfolderGuiComp::InputDirectoriesObserver::InputDirectoriesObserver(CHotfolder
 
 // reimplemented (imod::TSingleModelObserverBase)
 
-void CHotfolderGuiComp::InputDirectoriesObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CHotfolderGuiComp::InputDirectoriesObserver::OnUpdate(const ChangeSet& /*changeSet*/)
 {
 	iprm::IParamsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "idoc/ITextDocument.h"
 #include "ibase/IProgressManager.h"
 #include "iprm/TParamsPtr.h"
@@ -62,10 +62,12 @@ int CScriptDataProcessorComp::DoProcessing(
 
 	m_scriptEngine.evaluate(functionScript);
 
-	istd::TChangeNotifier<imeas::IDataSequence> containerPtr(dynamic_cast<imeas::IDataSequence*>(outputPtr));
-	if (!containerPtr.IsValid()){
+	imeas::IDataSequence* containerPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
+	if (containerPtr == NULL){
 		return TS_INVALID;
 	}
+
+	istd::CChangeNotifier notifier(containerPtr);
 
 	int samplesCount = m_samplesCountAttrPtr.IsValid()?
 				*m_samplesCountAttrPtr:

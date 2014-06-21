@@ -15,7 +15,7 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 // ACF-Solutions includes
 #include "iprop/TProperty.h"
@@ -27,7 +27,7 @@ namespace iprop
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CPropertiesEditorComp::UpdateGui(int /*updateFlags*/)
+void CPropertiesEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

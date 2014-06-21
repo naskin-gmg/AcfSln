@@ -41,10 +41,10 @@ public:
 
 protected:
 	// reimplemented (imod::IObserver)
-	virtual bool OnDetached(imod::IModel* modelPtr);
+	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	void EnsurePreviewGenerated();

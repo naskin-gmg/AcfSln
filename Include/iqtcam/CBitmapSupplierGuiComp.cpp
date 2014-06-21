@@ -170,9 +170,9 @@ void CBitmapSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CBitmapSupplierGuiComp::UpdateGui(int updateFlags)
+void CBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(updateFlags);
+	BaseClass::UpdateGui(changeSet);
 
 	Q_ASSERT(IsGuiCreated());
 
@@ -189,7 +189,7 @@ void CBitmapSupplierGuiComp::UpdateGui(int updateFlags)
 
 // reimplemented (imod::IObserver)
 
-void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
@@ -219,7 +219,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 		}
 	}
 
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 

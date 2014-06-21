@@ -5,7 +5,7 @@
 #include <QtCore/QMutexLocker>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "istd/CGeneralTimeStamp.h"
 #include "imod/IModel.h"
 
@@ -77,7 +77,7 @@ void CDirectoryMonitorComp::OnComponentCreated()
 
 	BaseClass::OnComponentCreated();
 
-	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
+	connect(this, SIGNAL(FolderChanged(istd::IChangeable::ChangeSet)), this, SLOT(OnFolderChanged(istd::IChangeable::ChangeSet)), Qt::QueuedConnection);
 
 	if (m_autoStartAttrPtr.IsValid() && *m_autoStartAttrPtr){
 		StartObserving();
@@ -259,25 +259,25 @@ void CDirectoryMonitorComp::run()
 		m_folderChanges.modifiedFiles = modifiedFiles;
 		m_folderChanges.attributeChangedFiles = attributeChangedFiles;
 
-		int changeFlags = istd::IChangeable::CF_MODEL;
+		istd::IChangeable::ChangeSet changeSet;
 
 		if (!addedFiles.isEmpty()){
-			changeFlags |= ihotf::IFileSystemChangeStorage::CF_NEW;
+			changeSet += ihotf::IFileSystemChangeStorage::CF_NEW;
 		}
 
 		if (!removedFiles.isEmpty()){
-			changeFlags |= ihotf::IFileSystemChangeStorage::CF_REMOVED;
+			changeSet += ihotf::IFileSystemChangeStorage::CF_REMOVED;
 		}
 
 		if (!modifiedFiles.isEmpty()){
-			changeFlags |= ihotf::IFileSystemChangeStorage::CF_MODIFIED;
+			changeSet += ihotf::IFileSystemChangeStorage::CF_MODIFIED;
 		}
 
 		if (!attributeChangedFiles.isEmpty()){
-			changeFlags |= ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED;
+			changeSet += ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED;
 		}
 
-		Q_EMIT FolderChanged(changeFlags);
+		Q_EMIT FolderChanged(changeSet);
 		updateTimer.Start();
 
 		I_IF_DEBUG(
@@ -295,38 +295,42 @@ void CDirectoryMonitorComp::run()
 
 // private slots
 
-void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
+void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& changeSet)
 {
 	QMutexLocker locker(&m_mutex);
 
 	Q_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
 	if (m_fileSystemChangeStorageCompPtr.IsValid()){
-		if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_NEW) != 0){
-			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ihotf::IFileSystemChangeStorage::CF_NEW);
+		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_NEW)){
+			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_NEW);
+			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.addedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.addedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_NEW);
 			}
 		}
 
-		if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_REMOVED) != 0){
-			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ihotf::IFileSystemChangeStorage::CF_REMOVED);
+		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_REMOVED)){
+			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_REMOVED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.removedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.removedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_REMOVED);
 			}
 		}
 
-		if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_MODIFIED) != 0){
-			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ihotf::IFileSystemChangeStorage::CF_MODIFIED);
+		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_MODIFIED)){
+			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_MODIFIED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.modifiedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.modifiedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_MODIFIED);
 			}
 		}
 
-		if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED) != 0){
-			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
+		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED)){
+			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.attributeChangedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.attributeChangedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_MODIFIED);
@@ -334,7 +338,7 @@ void CDirectoryMonitorComp::OnFolderChanged(int changeFlags)
 		}
 	}
 
-	if ((changeFlags & ihotf::IFileSystemChangeStorage::CF_SOME_CHANGES) != 0){
+	if (!changeSet.IsEmpty()){
 		UpdateMonitoringSession();
 	}
 
@@ -477,7 +481,7 @@ CDirectoryMonitorComp::MonitoringParamsObserver::MonitoringParamsObserver(CDirec
 
 // reimplemented (imod::IObserver)
 
-void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
@@ -493,7 +497,7 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 		}
 	}
 
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 
@@ -507,7 +511,7 @@ CDirectoryMonitorComp::DirectoryParamsObserver::DirectoryParamsObserver(CDirecto
 
 // reimplemented (imod::IObserver)
 
-void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(modelPtr != NULL);
 	if (modelPtr != NULL){
@@ -531,7 +535,7 @@ void CDirectoryMonitorComp::DirectoryParamsObserver::AfterUpdate(imod::IModel* m
 		}
 	}
 
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 

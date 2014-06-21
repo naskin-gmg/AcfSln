@@ -2,7 +2,7 @@
 
 
  // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "ibase/CSize.h"
 #include "i2d/CAnnulusSegment.h"
 #include "iimg/IBitmap.h"

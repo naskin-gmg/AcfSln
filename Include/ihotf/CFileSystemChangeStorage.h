@@ -25,7 +25,7 @@ public:
 	virtual int	 GetStorageItemsCount() const;
 	virtual QString GetItemPath(int fileIndex) const;
 	virtual int GetItemState(int fileIndex) const;
-	virtual void UpdateStorageItem(const QString& path, int itemFlags);
+	virtual void UpdateStorageItem(const QString& path, int changeFlag);
 	virtual void RemoveStorageItem(int itemIndex);
 	virtual void ResetStorage();
 

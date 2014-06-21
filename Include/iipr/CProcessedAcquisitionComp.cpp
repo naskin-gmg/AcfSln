@@ -1,6 +1,6 @@
 #include "iipr/CProcessedAcquisitionComp.h"
 
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 #include "iimg/CGeneralBitmap.h"
 
@@ -33,19 +33,20 @@ int CProcessedAcquisitionComp::DoProcessing(
 		return TS_OK;
 	}
 
-	istd::TChangeNotifier<iimg::IBitmap> outputBitmapPtr(dynamic_cast<iimg::IBitmap*>(outputPtr));
-
-	if (!outputBitmapPtr.IsValid() || !m_slaveAcquisitionCompPtr.IsValid()){
+	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if ((outputBitmapPtr == NULL) || !m_slaveAcquisitionCompPtr.IsValid()){
 		return TS_INVALID;
 	}
 
+	istd::CChangeNotifier outputNotifier(outputBitmapPtr);
+
 	int retVal = TS_INVALID;
 
-	retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr.GetPtr());
+	retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
 	if (retVal == TS_OK){
 		if (m_processorCompPtr.IsValid()){
 			iimg::CGeneralBitmap bufferBitmap;
-			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr.GetPtr(), &bufferBitmap);
+			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr, &bufferBitmap);
 			if (retVal == TS_OK){
 				if (!outputBitmapPtr->CopyFrom(bufferBitmap)){
 					retVal = TS_INVALID;

@@ -224,14 +224,14 @@ void CRegistryElementShape::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* even
 
 // reimplemented (imod::IObserver)
 
-bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
+bool CRegistryElementShape::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
 {
 	const CVisualRegistryElement* objectPtr = dynamic_cast<const CVisualRegistryElement*>(modelPtr);
 	if (objectPtr == NULL){
 		return false;
 	}
 
-	return BaseClass::OnAttached(modelPtr);
+	return BaseClass::OnModelAttached(modelPtr, changeMask);
 }
 
 

@@ -49,7 +49,7 @@ void CTcpTerminalGuiComp::OnGuiCreated()
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CTcpTerminalGuiComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CTcpTerminalGuiComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	m_socket.disconnectFromHost();
 	m_socket.waitForDisconnected();
@@ -70,7 +70,7 @@ void CTcpTerminalGuiComp::OnComponentCreated()
 		m_urlParamModelCompPtr->AttachObserver(this);
 	}
 	else{
-		OnUpdate(0, NULL);
+		OnUpdate(istd::IChangeable::GetNoChanges());
 	}
 }
 

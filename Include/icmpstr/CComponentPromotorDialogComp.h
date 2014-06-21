@@ -78,7 +78,7 @@ protected:
 	void DoRetranslate();
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 protected Q_SLOTS:
 	void on_InterfacesPolicyCB_currentIndexChanged(int index);

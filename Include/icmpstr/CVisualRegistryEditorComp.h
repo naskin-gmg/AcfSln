@@ -43,7 +43,7 @@ class CVisualRegistryEditorComp:
 	Q_OBJECT
 
 public:
-	iqtgui::TDesignerGuiObserverCompBase<Ui::CVisualRegistryEditorComp, icomp::IRegistry> BaseClass2;
+	iqtgui::TDesignerGuiObserverCompBase<Ui::CVisualRegistryEditorComp, icomp::IRegistry> BaseClass;
 
 	I_BEGIN_COMPONENT(CVisualRegistryEditorComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
@@ -115,7 +115,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CVisualRegistryEditorComp& m_parent;
@@ -162,17 +162,17 @@ protected:
 	void DoRetranslate();
 
 	virtual bool OnDropObject(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
-	virtual void UpdateScene(int updateFlags);
+	virtual void UpdateScene();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual bool OnAttached(imod::IModel* modelPtr);
-	virtual bool OnDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
+	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
 	// reimplemented (icomp::CGuiComponentBase)
 	virtual void OnRetranslate();

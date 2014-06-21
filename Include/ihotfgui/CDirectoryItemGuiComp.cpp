@@ -70,7 +70,7 @@ bool CDirectoryItemGuiComp::Serialize(iser::IArchive& /*archive*/)
 
 // reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CDirectoryItemGuiComp::UpdateGui(int /*updateFlags*/)
+void CDirectoryItemGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

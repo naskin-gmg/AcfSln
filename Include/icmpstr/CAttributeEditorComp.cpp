@@ -14,7 +14,7 @@
 
 // ACF includes
 #include "istd/TOptDelPtr.h"
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
 #include "icomp/CComponentMetaDescriptionEncoder.h"
@@ -134,7 +134,8 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 	int attributeStatMeaning = item->data(AC_VALUE, AttributeMining).toInt();
 
 	if (column == AC_NAME){
-		istd::CChangeNotifier registryNotifier(registryPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
 
 		IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 		for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
@@ -148,7 +149,8 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 				continue;
 			}
 
-			istd::CChangeNotifier elementNotifier(elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+			static istd::IChangeable::ChangeSet attributeChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+			istd::CChangeNotifier elementNotifier(elementPtr, attributeChangeSet);
 
 			if (item->checkState(AC_NAME) == Qt::Unchecked){
 				icomp::IRegistryElement::AttributeInfo* attributeInfoPtr =
@@ -202,12 +204,13 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 			return;
 		}
 
-		istd::TChangeNotifier<icomp::IRegistry> registryPtr(
-					selectionInfoPtr->GetSelectedRegistry(),
-					istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-		if (!registryPtr.IsValid()){
+		icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+		if (registryPtr == NULL){
 			return;
 		}
+
+		static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
 
 		QString interfaceName = item->data(0, InterfaceName).toString();
 		QByteArray elementName = item->data(0, ElementId).toString().toLocal8Bit();
@@ -238,7 +241,8 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 		return;
 	}
 
-	istd::CChangeNotifier registryNotifier(registryPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_FLAGS_CHANGED);
+	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_FLAGS_CHANGED);
+	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
 
 	IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 	for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
@@ -247,19 +251,20 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 		Q_ASSERT(selectedInfoPtr != NULL);
 
-		istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(selectedInfoPtr->elementPtr.GetPtr(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-
-		if (!elementPtr.IsValid()){
+		if (!selectedInfoPtr->elementPtr.IsValid()){
 			continue;
 		}
 
-		quint32 flags = elementPtr->GetElementFlags();
+		static istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), elementChangeSet);
+
+		quint32 flags = selectedInfoPtr->elementPtr->GetElementFlags();
 
 		flags = checked?
 					(flags | icomp::IRegistryElement::EF_AUTO_INSTANCE):
 					(flags & ~icomp::IRegistryElement::EF_AUTO_INSTANCE);
 
-		elementPtr->SetElementFlags(flags);
+		selectedInfoPtr->elementPtr->SetElementFlags(flags);
 	}
 }
 
@@ -1588,11 +1593,11 @@ void CAttributeEditorComp::OnGuiModelDetached()
 }
 
 
-void CAttributeEditorComp::UpdateGui(int updateFlags)
+void CAttributeEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
 
-	if ((updateFlags & IElementSelectionInfo::CF_SELECTION) != 0){
+	if (changeSet.Contains(IElementSelectionInfo::CF_SELECTION)){
 		AttributeTree->reset();
 	}
 
@@ -2088,60 +2093,66 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 
 bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteArray& attributeId, int propertyMining, const QString& value) const
 {
+	icomp::IRegistry* registryPtr = m_parent.GetRegistry();
+	if (registryPtr == NULL){
+		return false;
+	}
+
+	AttrInfosMap::ConstIterator attributeInfoMapIter = m_parent.m_attrInfosMap.constFind(attributeId);
+	if (attributeInfoMapIter == m_parent.m_attrInfosMap.constEnd()){
+		return false;
+	}
+
+	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+
 	bool retVal = false;
 
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(m_parent.GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-	if (registryPtr.IsValid()){
-		AttrInfosMap::ConstIterator attributeInfoMapIter = m_parent.m_attrInfosMap.constFind(attributeId);
-		if (attributeInfoMapIter == m_parent.m_attrInfosMap.constEnd()){
-			return false;
+	const ElementIdToAttrInfoMap& elementsMap = attributeInfoMapIter.value();
+	for (		ElementIdToAttrInfoMap::ConstIterator elemIter = elementsMap.constBegin();
+				elemIter != elementsMap.constEnd();
+				++elemIter){
+		const AttrInfo& attributeInfo = elemIter.value();
+
+		icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = attributeInfo.infoPtr;
+		if (attributeInfo.elementPtr != NULL){
+			continue;
 		}
 
-		const ElementIdToAttrInfoMap& elementsMap = attributeInfoMapIter.value();
-		for (		ElementIdToAttrInfoMap::ConstIterator elemIter = elementsMap.constBegin();
-					elemIter != elementsMap.constEnd();
-					++elemIter){
-			const AttrInfo& attributeInfo = elemIter.value();
+		static istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier elementNotifier(attributeInfo.elementPtr, elementChangeSet);
 
-			icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = attributeInfo.infoPtr;
+		if ((attributeInfoPtr == NULL) && !value.isEmpty()){
+			Q_ASSERT(attributeInfo.staticInfoPtr != NULL);	// attributeInfo.infoPtr or attributeInfo.staticInfoPtr must be valid for attribute!
 
-			istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(attributeInfo.elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-			if (!elementPtr.IsValid()){
-				continue;
+			QByteArray attributeValueTypeId = attributeInfo.staticInfoPtr->GetAttributeTypeName();
+
+			attributeInfoPtr = attributeInfo.elementPtr->InsertAttributeInfo(attributeId, attributeValueTypeId);
+		}
+
+		if (attributeInfoPtr != NULL){
+			if (propertyMining == AM_EXPORTED_ATTR){
+				attributeInfoPtr->exportId = value.toLocal8Bit();
+
+				retVal = true;
 			}
-
-			if ((attributeInfoPtr == NULL) && !value.isEmpty()){
-				Q_ASSERT(attributeInfo.staticInfoPtr != NULL);	// attributeInfo.infoPtr or attributeInfo.staticInfoPtr must be valid for attribute!
-
-				QByteArray attributeValueTypeId = attributeInfo.staticInfoPtr->GetAttributeTypeName();
-
-				attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId, attributeValueTypeId);
-			}
-
-			if (attributeInfoPtr != NULL){
-				if (propertyMining == AM_EXPORTED_ATTR){
-					attributeInfoPtr->exportId = value.toLocal8Bit();
-
-					retVal = true;
+			else{
+				if (!attributeInfoPtr->attributePtr.IsValid()){
+					attributeInfoPtr->attributePtr.SetPtr(attributeInfo.elementPtr->CreateAttribute(attributeInfoPtr->attributeTypeName));
 				}
-				else{
-					if (!attributeInfoPtr->attributePtr.IsValid()){
-						attributeInfoPtr->attributePtr.SetPtr(elementPtr->CreateAttribute(attributeInfoPtr->attributeTypeName));
-					}
 
-					if (attributeInfoPtr->attributePtr.IsValid()){
-						retVal = m_parent.EncodeAttribute(value, propertyMining, *attributeInfoPtr->attributePtr) || retVal;
-					}
+				if (attributeInfoPtr->attributePtr.IsValid()){
+					retVal = m_parent.EncodeAttribute(value, propertyMining, *attributeInfoPtr->attributePtr) || retVal;
 				}
-			}
-
-			if ((attributeInfoPtr != NULL) && !attributeInfoPtr->attributePtr.IsValid() && attributeInfoPtr->exportId.isEmpty()){
-				elementPtr->RemoveAttribute(attributeId);
 			}
 		}
 
-		Q_EMIT m_parent.AfterAttributesChange();
+		if ((attributeInfoPtr != NULL) && !attributeInfoPtr->attributePtr.IsValid() && attributeInfoPtr->exportId.isEmpty()){
+			attributeInfo.elementPtr->RemoveAttribute(attributeId);
+		}
 	}
+
+	Q_EMIT m_parent.AfterAttributesChange();
 
 	return retVal;
 }
@@ -2149,23 +2160,28 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 
 bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const QByteArray& attributeId, const QString& value) const
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(m_parent.GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_ELEMENT_EXPORTED);
-	if (registryPtr.IsValid()){
-		icomp::IRegistry::ExportedElementsMap exportedMap = registryPtr->GetExportedElementsMap();
-		for (icomp::IRegistry::ExportedElementsMap::ConstIterator iter = exportedMap.constBegin();
-					iter != exportedMap.constEnd();
-					++iter){
-			if (iter.value() == attributeId){
-				registryPtr->SetElementExported(iter.key(), "");
-			}
-		}
-
-		if (!value.isEmpty()){
-			registryPtr->SetElementExported(value.toLocal8Bit(), attributeId);
-		}
-
-		Q_EMIT m_parent.AfterSubcomponentsChange();
+	icomp::IRegistry* registryPtr = m_parent.GetRegistry();
+	if (registryPtr == NULL){
+		return false;
 	}
+
+	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_EXPORTED);
+	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+
+	icomp::IRegistry::ExportedElementsMap exportedMap = registryPtr->GetExportedElementsMap();
+	for (icomp::IRegistry::ExportedElementsMap::ConstIterator iter = exportedMap.constBegin();
+				iter != exportedMap.constEnd();
+				++iter){
+		if (iter.value() == attributeId){
+			registryPtr->SetElementExported(iter.key(), "");
+		}
+	}
+
+	if (!value.isEmpty()){
+		registryPtr->SetElementExported(value.toLocal8Bit(), attributeId);
+	}
+
+	Q_EMIT m_parent.AfterSubcomponentsChange();
 
 	return true;
 }
@@ -2184,10 +2200,10 @@ CAttributeEditorComp::RegistryObserver::RegistryObserver(CAttributeEditorComp* p
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CAttributeEditorComp::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+void CAttributeEditorComp::RegistryObserver::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
-	if ((updateFlags & istd::IChangeable::CF_MODEL) != 0){
-		m_parent.UpdateEditor(updateFlags);
+	if (!changeSet.IsEmpty()){
+		m_parent.UpdateEditor(changeSet);
 	}
 }
 

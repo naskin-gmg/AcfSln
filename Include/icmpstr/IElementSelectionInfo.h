@@ -27,9 +27,12 @@ namespace icmpstr
 class IElementSelectionInfo: virtual public istd::IChangeable
 {
 public:
+	/**
+		Data model change notification flags.
+	*/
 	enum ChangeFlags
 	{
-		CF_SELECTION = 1 << 31
+		CF_SELECTION = 0x282ce27
 	};
 
 	typedef QMap<QByteArray, const icomp::IRegistry::ElementInfo*> Elements;

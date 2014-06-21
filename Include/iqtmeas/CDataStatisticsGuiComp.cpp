@@ -7,7 +7,7 @@ namespace iqtmeas
 
 // reimplemenented (iqtgui::TGuiObserverWrap)
 
-void CDataStatisticsGuiComp::UpdateGui(int /*updateFlags*/)
+void CDataStatisticsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

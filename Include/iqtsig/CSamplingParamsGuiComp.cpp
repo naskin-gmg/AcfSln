@@ -1,7 +1,7 @@
 #include "iqtsig/CSamplingParamsGuiComp.h"
 
 
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 
 #include "isig/ISamplingConstraints.h"
 
@@ -30,7 +30,7 @@ void CSamplingParamsGuiComp::OnGuiModelAttached()
 }
 
 
-void CSamplingParamsGuiComp::UpdateGui(int /*updateFlags*/)
+void CSamplingParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

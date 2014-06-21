@@ -42,7 +42,7 @@ public:
 
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	void DoProcessing();
@@ -54,7 +54,7 @@ private:
 		ParamsObserver(CModelBasedProcessingTriggerComp* parentPtr);
 
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CModelBasedProcessingTriggerComp& m_parent;

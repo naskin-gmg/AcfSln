@@ -70,7 +70,7 @@ private Q_SLOTS:
 	/**
 		Delegate folder change event via istd::CChangeNotifier from main thread.
 	*/
-	void OnFolderChanged(int changeFlags);
+	void OnFolderChanged(const istd::IChangeable::ChangeSet& changeSet);
 
 	/**
 		Notification about changes in a given directory.
@@ -81,7 +81,7 @@ Q_SIGNALS:
 	/**
 		Signal is emitted from observing thread to notifiy the main thread about changes in a directory.
 	*/
-	void FolderChanged(int changeFlags);
+	void FolderChanged(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	void SetFolderPath(const QString& folderPath);
@@ -109,7 +109,7 @@ private:
 		MonitoringParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CDirectoryMonitorComp& m_parent;
@@ -123,7 +123,7 @@ private:
 		DirectoryParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	private:
 		CDirectoryMonitorComp& m_parent;

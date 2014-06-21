@@ -49,7 +49,7 @@ protected:
 	void UpdateAllMembers();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

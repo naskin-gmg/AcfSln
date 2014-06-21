@@ -8,7 +8,7 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iprm/IParamsSet.h"
 #include "iimg/IRasterImage.h"
 #include "iimg/IQImageProvider.h"

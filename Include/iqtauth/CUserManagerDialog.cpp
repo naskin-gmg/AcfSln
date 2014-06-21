@@ -14,7 +14,7 @@
 #endif
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iser/CMemoryReadArchive.h"
 #include "iqt/iqt.h"
 
@@ -216,10 +216,10 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 			QString userName = lineEditPtr->text();
 			model->setData(index, userName);
 
-			istd::TChangeNotifier<iauth::IUsersManager> managerPtr(&m_parent.m_manager);
+			istd::CChangeNotifier notifier(&m_parent.m_manager);
 
 			int userIndex = model->data(index, Qt::UserRole).toInt();
-			managerPtr->RenameUser(userIndex, userName);
+			m_parent.m_manager.RenameUser(userIndex, userName);
 
 			return;
 		}
@@ -233,10 +233,10 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 			QString groupName = m_parent.m_manager.GetUserGroupName(groupIndex);
 			model->setData(index, groupName);
 
-			istd::TChangeNotifier<iauth::IUsersManager> managerPtr(&m_parent.m_manager);
+			istd::CChangeNotifier notifier(&m_parent.m_manager);
 
 			int userIndex = model->data(index, Qt::UserRole).toInt();
-			iauth::CUser& user = managerPtr->GetUserRef(userIndex);
+			iauth::CUser& user = m_parent.m_manager.GetUserRef(userIndex);
 
 			user.SetUserGroup(groupIndex);
 

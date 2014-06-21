@@ -53,7 +53,7 @@ void CScaleCalibrationEditorComp::OnGuiCreated()
 }
 
 
-void CScaleCalibrationEditorComp::UpdateGui(int)
+void CScaleCalibrationEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetModelPtr());
 	if (model == NULL){

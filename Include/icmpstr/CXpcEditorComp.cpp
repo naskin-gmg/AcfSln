@@ -77,12 +77,12 @@ void CXpcEditorComp::UpdateModel() const
 	icomp::CXpcModel* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 
-	istd::TChangeNotifier<icomp::CXpcModel> changePtr(objectPtr);
+	istd::CChangeNotifier notifier(objectPtr);
 
-	changePtr->SetConfFilesList(GetStringList(S_CONFIG_PATH));
-	changePtr->SetPackageDirsList(GetStringList(S_PACKAGE_DIR));
-	changePtr->SetPackagesList(GetStringList(S_PACKAGE_PATH));
-	changePtr->SetRegistryFilesList(GetStringList(S_REGISTRY_PATH));
+	objectPtr->SetConfFilesList(GetStringList(S_CONFIG_PATH));
+	objectPtr->SetPackageDirsList(GetStringList(S_PACKAGE_DIR));
+	objectPtr->SetPackagesList(GetStringList(S_PACKAGE_PATH));
+	objectPtr->SetRegistryFilesList(GetStringList(S_REGISTRY_PATH));
 }
 
 
@@ -92,7 +92,7 @@ void CXpcEditorComp::SetStringList(int tableIdx, QStringList list)
 }
 
 
-void CXpcEditorComp::UpdateGui(int /*updateFlags*/)
+void CXpcEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 

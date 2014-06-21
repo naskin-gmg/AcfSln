@@ -42,7 +42,8 @@ CPropertiesManager::PropertyInfo* CPropertiesManager::GetPropertyInfo(const QByt
 void CPropertiesManager::ResetProperties()
 {
 	if (!m_propertiesList.IsEmpty()){
-		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET);
+		static ChangeSet changeSet(CF_RESET);
+		istd::CChangeNotifier notifier(this, changeSet);
 
 		int propertiesCount = m_propertiesList.GetCount();
 
@@ -113,7 +114,8 @@ void CPropertiesManager::InsertProperty(
 			int propertyFlags,
 			bool releaseFlag)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_ADD_PROPERTY);
+	static ChangeSet changeSet(CF_ADD_PROPERTY);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	PropertyInfo* infoPtr = GetPropertyInfo(propertyId);
 	if ((objectPtr != NULL) && (infoPtr == NULL)){
@@ -175,7 +177,8 @@ bool CPropertiesManager::ReadProperties(
 			const iser::CArchiveTag& propertiesTag,
 			const iser::CArchiveTag& propertyTag)
 {
-	istd::CChangeNotifier notifier(this, CF_MODEL | CF_RESET);
+	static ChangeSet changeSet(CF_RESET);
+	istd::CChangeNotifier notifier(this, changeSet);
 
 	bool retVal = true;
 

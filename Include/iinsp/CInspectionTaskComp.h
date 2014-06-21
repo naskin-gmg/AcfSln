@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/IInformationProvider.h"
-#include "istd/TChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "imod/IModel.h"
 #include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
@@ -102,7 +102,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 private:
 	class MessageContainer: virtual public ilog::CMessageContainer
@@ -176,9 +176,10 @@ private:
 
 	MessageContainer m_messageContainer;
 
-	istd::CChangeNotifier m_productChangeNotifier;
+	typedef istd::TDelPtr<istd::CChangeNotifier> NotifierPtr;
+	NotifierPtr m_productChangeNotifierPtr;
 
-	typedef QMap<iinsp::ISupplier*, istd::CChangeNotifier> SubtaskNotifiers;
+	typedef QMap<iinsp::ISupplier*, NotifierPtr> SubtaskNotifiers;
 	SubtaskNotifiers m_subtaskNotifiers;
 };
 
