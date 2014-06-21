@@ -243,6 +243,16 @@ I_EXPORT_COMPONENT(
 			"Histogram based automatic image normalization",
 			"Histogram Normalization Contrast Enhancing Equalization" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			ArcProjectionProcessor,
+			"Arc projection implementation for single arc width",
+			"Projection Arc Processor" IM_TAG("Processor") IM_AUTHOR("\"Alexander Duda\""));
+
+I_EXPORT_COMPONENT(
+			ArcProjectionSupplier,
+			"Supplier implementation returning image projection data",
+		 	"Supplier Projection Data Image Bitmap Model" IM_AUTHOR("\"Alexander Duda\""));
+
 
 } // namespace IprPck
 

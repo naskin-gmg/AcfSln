@@ -154,6 +154,14 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CArcProjectionProcessorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CArcProjectionSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CAutoImageNormalizeProcessorComp.cpp"
 				>
 			</File>
@@ -395,6 +403,14 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CArcProjectionProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CArcProjectionSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CAutoImageNormalizeProcessorComp.h"
 				>
 			</File>
@@ -628,6 +644,10 @@
 			</File>
 			<File
 				RelativePath="..\CTubeProjectionsGenerator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IArcProjectionProcessor.h"
 				>
 			</File>
 			<File
