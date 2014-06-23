@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3389
+          3506
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1087
+          1144
         </Number>
         <Description>
           ACF-Solutions
@@ -647,37 +647,13 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
-    <Interface>
-      <InterfaceId>
-        ibase::ICommandsProvider
-      </InterfaceId>
-      <ComponentId>
-        SettingsDialog/Command
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        SettingsDialog/Command
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
         iqtgui::IDialog
       </InterfaceId>
       <ComponentId>
         SettingsDialog
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        SettingsDialog/Command
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
