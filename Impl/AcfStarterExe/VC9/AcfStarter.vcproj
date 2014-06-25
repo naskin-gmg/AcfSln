@@ -68,7 +68,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="true"
-				AdditionalDependencies="QtGui4.lib AcfStd.lib AcfQt.lib AcfLoc.lib"
+				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="2"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtGuid4.lib AcfStd.lib AcfQt.lib AcfLoc.lib"
+				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="0"

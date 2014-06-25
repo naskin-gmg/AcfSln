@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
 	Q_INIT_RESOURCE(AcfSlnLoc);
 	Q_INIT_RESOURCE(Compositor);
 
-	QApplication::setStyle("plastique");
-
 	CCompositor instance;
 
 	ibase::IApplication* applicationPtr = instance.GetInterface<ibase::IApplication>();

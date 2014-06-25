@@ -5,10 +5,16 @@
 #include <iostream>
 
 // Qt includes
-#include <QtGui/QFileDialog> 
-#include <QtGui/QMessageBox>
 #include <QtCore/QProcess>
 #include <QtCore/QTimer>
+
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QFileDialog> 
+#include <QtWidgets/QMessageBox>
+#else
+#include <QtGui/QFileDialog> 
+#include <QtGui/QMessageBox>
+#endif
 
 // ACF includes
 #include "ifile/CXmlFileReadArchive.h"

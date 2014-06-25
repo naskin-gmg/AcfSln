@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtGui4.lib QtXml4.lib QtScript4.lib AcfStd.lib AcfQt.lib"
+				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5Script.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
@@ -112,7 +112,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtGuid4.lib QtXmld4.lib QtScriptd4.lib AcfStd.lib AcfQt.lib"
+				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5Scriptd.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
