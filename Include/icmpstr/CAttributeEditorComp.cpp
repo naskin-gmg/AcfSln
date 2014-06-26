@@ -2115,12 +2115,13 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 		const AttrInfo& attributeInfo = elemIter.value();
 
 		icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = attributeInfo.infoPtr;
-		if (attributeInfo.elementPtr != NULL){
+		if (attributeInfo.elementPtr == NULL){
 			continue;
 		}
 
 		static istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 		istd::CChangeNotifier elementNotifier(attributeInfo.elementPtr, elementChangeSet);
+		Q_UNUSED(elementNotifier);
 
 		if ((attributeInfoPtr == NULL) && !value.isEmpty()){
 			Q_ASSERT(attributeInfo.staticInfoPtr != NULL);	// attributeInfo.infoPtr or attributeInfo.staticInfoPtr must be valid for attribute!
