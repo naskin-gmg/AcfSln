@@ -672,7 +672,6 @@ void CVisualRegistryEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& ch
 	ChangeSet ignoreFilter(
 				istd::IChangeable::CF_ACF_INTERNAL,
 				i2d::IObject2d::CF_OBJECT_POSITION,
-				istd::IChangeable::CF_DELEGATED,
 				icomp::IRegistryElement::CF_FLAGS_CHANGED);
 	istd::IChangeable::ChangeSet filteredChangeSet = changeSet;
 	filteredChangeSet.MaskOut(ignoreFilter);
