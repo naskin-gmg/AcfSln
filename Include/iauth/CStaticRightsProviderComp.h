@@ -32,7 +32,7 @@ public:
 		I_ASSIGN_MULTI_0(m_rightsOffAttrPtr, "RightsOff", "List of disabled rights", false);
 	I_END_COMPONENT;
 
-	// reimeplemented (IRightsProvider)
+	// reimplemented (iauth::IRightsProvider)
 	virtual bool HasRight(
 					const QByteArray& operationId,
 					bool beQuiet = false) const;

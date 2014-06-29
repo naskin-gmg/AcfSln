@@ -5,7 +5,7 @@ namespace iauth
 {
 
 
-// reimeplemented (IRightsProvider)
+// reimplemented (iauth::IRightsProvider)
 
 bool CStaticRightsProviderComp::HasRight(
 			const QByteArray& operationId,

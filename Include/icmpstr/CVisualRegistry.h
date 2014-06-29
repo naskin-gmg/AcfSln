@@ -36,7 +36,7 @@ public:
 	virtual bool SerializeRegistry(iser::IArchive& archive);
 	virtual bool SerializeUserData(iser::IArchive& archive);
 
-	// reimplemented (IComponentNoteController)
+	// reimplemented (icmpstr::IComponentNoteController)
 	virtual QString GetComponentNote(const QByteArray& componentName);
 	virtual void SetComponentNote(const QByteArray& componentName, const QString& componentNote);
 

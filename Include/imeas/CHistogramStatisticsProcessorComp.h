@@ -37,7 +37,7 @@ public:
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
-	// reimplemented (IDataSequenceStatisticsProcessor)
+	// reimplemented (imeas::IDataSequenceStatisticsProcessor)
 	virtual int CalculateDataStatistics(
 				const imeas::IDataSequence& dataSequence,
 				imeas::IDataSequenceStatistics& dataStatistics) const;

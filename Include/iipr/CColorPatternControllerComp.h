@@ -41,7 +41,7 @@ public:
 		I_ASSIGN(m_paramsSetCompPtr, "ProcessorParams", "Params set used by histogram processor", true, "ProcessorParams");
 	I_END_COMPONENT;
 
-	// reimplemented (IPatternController)
+	// reimplemented (iipr::IPatternController)
 	virtual bool TeachPattern(const istd::IChangeable* sourceObjectPtr = NULL);
 	virtual void ResetPattern();
 	virtual bool IsPatternValid() const;
