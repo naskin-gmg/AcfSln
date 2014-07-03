@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
 	Q_INIT_RESOURCE(AcfSlnLoc);
 	Q_INIT_RESOURCE(XpcEditor);
 
-	QApplication::setStyle("plastique");
-
 	CXpcEditor instance;
 
 	ibase::IApplication* applicationPtr = instance.GetInterface<ibase::IApplication>();
