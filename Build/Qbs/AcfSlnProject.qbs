@@ -3,6 +3,9 @@ import qbs.base 1.0
 Project{
 	name: "ACF-Solutions"
 
+	property string projectName: "ACF-Solutions"
+	property string projectRoot: path + "/../../.."
+
 	Project{
 		name: "ACF-Solutions-Static"
 
