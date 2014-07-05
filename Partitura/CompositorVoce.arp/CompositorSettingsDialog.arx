@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3506
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1144
+          1154
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3534
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -637,7 +637,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationSettings
+                ApplicationSettings/$(ConfigurationName)
               </Value>
             </Data>
           </AttributeInfo>
