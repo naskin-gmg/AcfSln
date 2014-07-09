@@ -79,7 +79,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	}
 
 	const i2d::CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(realAoiPtr);
-	if (annulusPtr != NULL){
+	if (annulusSegmentPtr != NULL){
 		r1 = int(qCeil(annulusSegmentPtr->GetInnerRadius()));
 		r2 = int(qFloor(annulusSegmentPtr->GetOuterRadius()));
 		radius = (r2 - r1);
