@@ -30,10 +30,10 @@ public:
 
 	TImagePixelInterpolator(const iimg::IBitmap& image, int interpolationMode);
 
-	PixelComponentType GetInterpolatedValue(double x, double y, int componentIndex) const;
+	PixelComponentType GetInterpolatedValue(float x, float y, int componentIndex) const;
 
 private:
-	PixelComponentType GetBilinearInterpolated(double x, double y, int componentIndex) const;
+	PixelComponentType GetBilinearInterpolated(float x, float y, int componentIndex) const;
 	PixelComponentType GetBitmapPixelValue(int x, int y, int componentIndex) const;
 
 private:
@@ -63,7 +63,7 @@ TImagePixelInterpolator<PixelComponentType>::TImagePixelInterpolator(const iimg:
 
 
 template <typename PixelComponentType>
-typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetInterpolatedValue(double x, double y, int componentIndex) const
+typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetInterpolatedValue(float x, float y, int componentIndex) const
 {
 	switch (m_interpolationMode){
 		case iipr::IImageInterpolationParams::IM_NO_INTERPOLATION:
@@ -83,21 +83,26 @@ typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixel
 // private methods
 	
 template <typename PixelComponentType>
-typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetBilinearInterpolated(double x, double y, int componentIndex) const
+typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetBilinearInterpolated(float x, float y, int componentIndex) const
 {
-	int cx = int(qCeil(x));
-	int cy = int(qCeil(y));
+	int px = qFloor(x);
+	int py = qFloor(y);
 
-	int fx = int(qFloor(x));
-	int fy = int(qFloor(y));
+	// Calculate the weights for each pixel:
+	float fx = x - px;
+	float fy = y - py;
+	float fx1 = 1.0f - fx;
+	float fy1 = 1.0f - fy;
 
-	double dx = cx - x;
-	double dy = cy - y;
+	float w1 = fx1 * fy1;
+	float w2 = fx * fy1;
+	float w3 = fx1 * fy;
+	float w4 = fx * fy;
 
-	double v1 = (1.0 - dx) * (1.0 - dy) * GetBitmapPixelValue(fx, fy, componentIndex);
-	double v2 = (dx) * (1.0 - dy) * GetBitmapPixelValue(cx, fy, componentIndex);
-	double v3 = (dy) * (1.0 - dx) * GetBitmapPixelValue(fx, cy, componentIndex);
-	double v4 = (dy) * (dx) * GetBitmapPixelValue(cx, cy, componentIndex);
+	double v1 = w1 * GetBitmapPixelValue(px, py, componentIndex);
+	double v2 = w2 * GetBitmapPixelValue(px + 1, py, componentIndex);
+	double v3 = w3 * GetBitmapPixelValue(px, py + 1, componentIndex);
+	double v4 = w4 * GetBitmapPixelValue(px + 1, py + 1, componentIndex);
 
 	double retVal = v1 + v2 + v3 + v4;
 	if (retVal > m_maxValue){

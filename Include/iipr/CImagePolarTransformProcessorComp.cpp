@@ -56,7 +56,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	i2d::CRect regionRect = bitmapRegion.GetBoundingBox();
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - i2d::CVector2d(regionRect.GetLeftTop());
-	int radius = int(qCeil(diffVector.GetLength()));
+	int radius = qCeil(diffVector.GetLength());
 	int angleDimension = int(radius * I_PI + 0.5);
 	double startAngle = 0;
 	double angleRange = I_2PI;
@@ -66,8 +66,8 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(realAoiPtr);
 	if (annulusPtr != NULL){
-		r1 = int(qCeil(annulusPtr->GetInnerRadius()));
-		r2 = int(qFloor(annulusPtr->GetOuterRadius()));
+		r1 = qCeil(annulusPtr->GetInnerRadius());
+		r2 = qFloor(annulusPtr->GetOuterRadius());
 		radius = (r2 - r1);
 	}
 
@@ -80,11 +80,11 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 
 	const i2d::CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(realAoiPtr);
 	if (annulusSegmentPtr != NULL){
-		r1 = int(qCeil(annulusSegmentPtr->GetInnerRadius()));
-		r2 = int(qFloor(annulusSegmentPtr->GetOuterRadius()));
+		r1 = qCeil(annulusSegmentPtr->GetInnerRadius());
+		r2 = qFloor(annulusSegmentPtr->GetOuterRadius());
 		radius = (r2 - r1);
 
-		int length = int(qCeil(diffVector.GetLength()));
+		int length = qCeil(diffVector.GetLength());
 
 		angleRange = fabs(annulusSegmentPtr->GetEndAngle() - annulusSegmentPtr->GetBeginAngle());
 
@@ -97,7 +97,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, iipr::IImageInterpolationParams::IM_BILINEAR);
 	int pixelComponentsCount = inputBitmap.GetComponentsCount();
 
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){

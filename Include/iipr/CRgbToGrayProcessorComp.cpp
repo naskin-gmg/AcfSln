@@ -8,9 +8,6 @@
 #include "istd/CChangeNotifier.h"
 #include "ibase/CSize.h"
 
-// IACF includes
-#include "iipr/TImagePixelInterpolator.h"
-
 
 namespace iipr
 {
