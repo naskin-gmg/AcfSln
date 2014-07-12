@@ -5,10 +5,10 @@
 #include "istd/CChangeNotifier.h"
 #include "ibase/CSize.h"
 #include "i2d/CAnnulusSegment.h"
+#include "iprm/TParamsPtr.h"
 #include "iimg/IBitmap.h"
 #include "iimg/CScanlineMask.h"
-
-// IACF includes
+#include "imeas/INumericValue.h"
 #include "iipr/TImagePixelInterpolator.h"
 
 
@@ -22,7 +22,7 @@ namespace iipr
 
 bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 			const iimg::IBitmap& inputBitmap,
-			const iprm::IParamsSet* /*paramsPtr*/,
+			const iprm::IParamsSet* paramsPtr,
 			const i2d::IObject2d* aoiPtr,
 			istd::IChangeable* outputPtr) const
 {
@@ -30,6 +30,28 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		return true;
 	}
 
+	double angleResolution = 1.0;
+	
+	if (m_angleResolutionParamIdAttrPtr.IsValid()){
+		iprm::TParamsPtr<imeas::INumericValue> angleResolutionParamPtr(paramsPtr, *m_angleResolutionParamIdAttrPtr);
+	
+		if (angleResolutionParamPtr.IsValid()){
+			imath::CVarVector values = angleResolutionParamPtr->GetValues();
+			if (!values.IsEmpty()){
+				angleResolution = values[0];
+			}
+		}
+	}
+
+	int interpolationMode = iipr::IImageInterpolationParams::IM_NO_INTERPOLATION;
+	if (m_interpolationParamIdAttrPtr.IsValid()){
+		iprm::TParamsPtr<iipr::IImageInterpolationParams> interpolationParamPtr(paramsPtr, *m_interpolationParamIdAttrPtr);
+	
+		if (interpolationParamPtr.IsValid()){
+			interpolationMode = interpolationParamPtr->GetInterpolationMode();
+		}
+	}
+	
 	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (outputBitmapPtr == NULL){
 		return false;
@@ -57,7 +79,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - i2d::CVector2d(regionRect.GetLeftTop());
 	int radius = qCeil(diffVector.GetLength());
-	int angleDimension = int(radius * I_PI + 0.5);
+	int angleDimension = int(radius * I_PI + 0.5) / angleResolution;
 	double startAngle = 0;
 	double angleRange = I_2PI;
 
@@ -74,7 +96,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(realAoiPtr);
 	if (circlePtr != NULL){
 		r1 = 0;
-		r2 = int(qFloor(circlePtr->GetRadius()));
+		r2 = qFloor(circlePtr->GetRadius());
 		radius = r2;
 	}
 
@@ -88,7 +110,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 
 		angleRange = fabs(annulusSegmentPtr->GetEndAngle() - annulusSegmentPtr->GetBeginAngle());
 
-		angleDimension = int(0.5 * length * angleRange + 0.5);
+		angleDimension = int(0.5 * length * angleRange + 0.5) / angleResolution;
 
 		startAngle = annulusSegmentPtr->GetBeginAngle();
 	}
@@ -97,7 +119,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		return false;
 	}
 
-	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, iipr::IImageInterpolationParams::IM_BILINEAR);
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, interpolationMode);
 	int pixelComponentsCount = inputBitmap.GetComponentsCount();
 
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
@@ -105,7 +127,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 			quint8* outputImageBeginPtr = (quint8*)outputBitmapPtr->GetLinePtr(r);
 		
 			for (int alpha = 0; alpha < angleDimension; alpha++){
-				double angle = alpha / double(angleDimension) * angleRange;
+				double angle = alpha / double(angleDimension) * angleRange * angleResolution;
 				angle += startAngle;
 		
 				double x = (r + r1) * qCos(angle); 			

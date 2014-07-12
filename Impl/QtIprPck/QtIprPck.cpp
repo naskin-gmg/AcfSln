@@ -73,6 +73,12 @@ I_EXPORT_COMPONENT(
 			"Editor for color pattern comparator",
 			"Color Pattern Comparator Compare Match Matching");
 
+I_EXPORT_COMPONENT(
+			ImageInterpolationParamsGui, 
+			"Editor for the image interpolation parameters",
+			"Color Image Interpolation Parameters");
+
+
 } // namespace QtIprPck
 
 

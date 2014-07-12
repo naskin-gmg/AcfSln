@@ -19,33 +19,7 @@ void CColorPatternComparatorGuiComp::on_TestButton_clicked()
 
 // protected methods
 
-// reimplemented (iqtgui::IGuiObject)
-
-void CColorPatternComparatorGuiComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-}
-
-
-void CColorPatternComparatorGuiComp::OnGuiDestroyed()
-{
-	BaseClass::OnGuiDestroyed();
-}
-
-
 // reimplemented (iqtgui::TGuiObserverWrap)
-
-void CColorPatternComparatorGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-}
-
-
-void CColorPatternComparatorGuiComp::OnGuiModelDetached()
-{
-	BaseClass::OnGuiModelDetached();
-}
-
 
 void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
