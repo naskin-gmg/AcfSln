@@ -79,11 +79,6 @@ I_EXPORT_COMPONENT(
 			"Model Pattern Search Processing Supplier" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			ProjectionSupplier,
-			"Supplier implementation returning image projection data",
-			"Supplier Projection Data Image Bitmap Model" IM_AUTHOR("\"Witold Gantzke\""));
-
-I_EXPORT_COMPONENT(
 			RectDerivativeProcessor,
 			"Calculate derivative of projection using rectangular kernel",
 			"Projection Derivative Processor Filter Rectangular Kernel" IM_AUTHOR("\"Witold Gantzke\""));
@@ -92,11 +87,6 @@ I_EXPORT_COMPONENT(
 			ImageHistogramProcessor,
 			"Calculate image histogram",
 			"Processor Histogram" IM_AUTHOR("\"Kirill Lepskiy\""));
-
-//I_EXPORT_COMPONENT(
-//			ImageAffineTransformProcessor,
-//			"Performs affine transformation of the image",
-//			"Processor Affine Transformation" IM_AUTHOR("\"Arseniy Masyuk\""));
 
 I_EXPORT_COMPONENT(
 			CircleFinderParams,
@@ -249,9 +239,9 @@ I_EXPORT_COMPONENT(
 			"Projection Arc Processor" IM_TAG("Processor") IM_AUTHOR("\"Alexander Duda\""));
 
 I_EXPORT_COMPONENT(
-			ArcProjectionSupplier,
+			ProjectionSupplier,
 			"Supplier implementation returning image projection data",
-		 	"Supplier Projection Data Image Bitmap Model" IM_AUTHOR("\"Alexander Duda\""));
+		 	"Supplier Projection Data Image Bitmap Model");
 
 
 } // namespace IprPck

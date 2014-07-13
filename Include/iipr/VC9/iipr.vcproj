@@ -158,10 +158,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CArcProjectionSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CAutoImageNormalizeProcessorComp.cpp"
 				>
 			</File>
@@ -310,10 +306,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLineProjectionSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CMorphologicalProcessorComp.cpp"
 				>
 			</File>
@@ -339,6 +331,10 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProjectionSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -404,10 +400,6 @@
 			>
 			<File
 				RelativePath="..\CArcProjectionProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CArcProjectionSupplierComp.h"
 				>
 			</File>
 			<File
@@ -559,10 +551,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLineProjectionSupplierComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CMorphologicalProcessorComp.h"
 				>
 			</File>
@@ -588,6 +576,10 @@
 			</File>
 			<File
 				RelativePath="..\CProcessedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CProjectionSupplierComp.h"
 				>
 			</File>
 			<File
