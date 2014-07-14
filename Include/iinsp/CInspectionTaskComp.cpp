@@ -200,7 +200,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 	for (int i = 0; i < addSuppliersCount; ++i){
 		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
-			supplierPtr->EnsureWorkInitialized();
+			supplierPtr->EnsureWorkFinished();
 		}
 	}
 
