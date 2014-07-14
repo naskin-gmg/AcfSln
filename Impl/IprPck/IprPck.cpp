@@ -39,6 +39,11 @@ I_EXPORT_COMPONENT(
 			"Caliper Extremum Minimum Maximum Projection Processor" IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			ExtremumCaliperSupplier,
+			"Caliper implementation extracting projection extremums",
+			"Caliper Extremum Minimum Maximum Projection Processor" IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
 			LineProjectionProcessor,
 			"Line projection implementation for single line width",
 			"Projection Line Processor" IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));

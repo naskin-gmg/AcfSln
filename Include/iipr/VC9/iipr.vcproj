@@ -250,6 +250,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtremumCaliperSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFastGaussianProcessorComp.cpp"
 				>
 			</File>
@@ -492,6 +496,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtremumCaliperProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtremumCaliperSupplierComp.h"
 				>
 			</File>
 			<File

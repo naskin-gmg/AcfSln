@@ -37,7 +37,7 @@ int CProjectionSupplierComp::ProduceObject(ProductType& result) const
 		}
 	}
 
-	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or projecttion processor were not set");
+	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or projection processor were not set");
 	
 	return WS_CRITICAL;
 }

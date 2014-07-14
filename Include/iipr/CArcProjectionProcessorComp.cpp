@@ -5,7 +5,6 @@
 #include <QtCore/QLineF>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
 #include "istd/TSmartPtr.h"
 #include "i2d/CRectangle.h"
 #include "iimg/TPixelConversion.h"
@@ -14,6 +13,8 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
+#include "imeas/CSamplesInfo.h"
+#include "imeas/INumericValue.h"
 
 
 namespace iipr
@@ -32,28 +33,30 @@ bool CArcProjectionProcessorComp::DoProjection(
 	bitmapArc.SetCalibration(bitmap.GetCalibration());
 	bitmapArc.CopyFrom(projectionLine, istd::IChangeable::CM_CONVERT);
 
-	int arcLength = M_PI * bitmapArc.GetRadius() * ((bitmapArc.GetEndAngle() - bitmapArc.GetStartAngle()) / 180);
+	double angleWidth = bitmapArc.GetEndAngle() - bitmapArc.GetStartAngle();
 
-	if (arcLength == 0){
+	int arcLength = M_PI * bitmapArc.GetRadius() * (angleWidth / 180);
+
+	if (arcLength == 0) {
 		return false;
 	}
-	else if (arcLength < 0){
+	else if (arcLength < 0) {
 		arcLength *= -1;
 	}
 
 	results.CreateSequence(arcLength);
 
-	double angleDiff = (bitmapArc.GetEndAngle() - bitmapArc.GetStartAngle()) / arcLength;
+	double angleDiff = angleWidth / arcLength;
 
-	double startAngle = bitmapArc.GetStartAngle();
-	double angleWidth = bitmapArc.GetEndAngle() - startAngle;
+	double angleStart = bitmapArc.GetStartAngle();
 	double radius = bitmapArc.GetRadius();
 	i2d::CVector2d center = bitmapArc.GetPosition();
+	i2d::CVector2d rotationPoint = center + i2d::CVector2d(radius, 0);
 
 	double angle;
 	int i;
 
-    for (angle = startAngle, i = 0; (angle < startAngle + angleWidth) && (i < arcLength); angle += angleDiff, ++i){
+	for (angle = angleStart, i = 0; angle < (angleStart + angleWidth), i < arcLength; angle += angleDiff, i++) {
 		i2d::CVector2d line(0,0);
 		line.Init(imath::GetRadianFromDegree(-angle), radius);
 		line += center;
@@ -71,10 +74,9 @@ bool CArcProjectionProcessorComp::DoProjection(
 		double deltaYNeg = 1-deltaY;
 
 		quint8 grayAll = 0, grayCenter, grayVertical = 0, grayHorizontal = 0, grayScew = 0;
-		quint8* linePtr = (quint8*)bitmap.GetLinePtr((int)y);
-		grayCenter = ((quint8*)linePtr)[(int)x];
+		grayCenter = ((quint8*)bitmap.GetLinePtr((int)y))[(int)x];
 
-		if (deltaX == 0 && deltaY == 0){
+		if (deltaX == 0 && deltaY == 0) {
 			grayAll = grayCenter;
 		}
 		else if(deltaX == 0){
@@ -102,13 +104,36 @@ bool CArcProjectionProcessorComp::DoProjection(
 }
 
 
+// reimplemented (iipr::IFeatureToImageMapper)
+
+bool CArcProjectionProcessorComp::GetImagePosition(
+			const imeas::INumericValue& feature,
+			const iprm::IParamsSet* paramsPtr,
+			i2d::CVector2d& result) const
+{
+	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL)){
+		iprm::TParamsPtr<i2d::CArc> arcPtr(paramsPtr, *m_arcParamIdAttrPtr);
+		double position;
+		if (		(arcPtr.IsValid()) &&
+			m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
+				// TODO: correct exactness of this mapping: DoAutosizeProjection return rough line exactness!
+				result = arcPtr->GetPositionFromAlpha(position);
+
+				return true;
+		}
+	}
+
+	return false;
+}
+
+
 // reimplemented (iproc::IProcessor)
 
 int CArcProjectionProcessorComp::DoProcessing(
-			const iprm::IParamsSet* paramsPtr,
-			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+	const iprm::IParamsSet* paramsPtr,
+	const istd::IPolymorphic* inputPtr,
+	istd::IChangeable* outputPtr,
+	ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
@@ -118,8 +143,8 @@ int CArcProjectionProcessorComp::DoProcessing(
 	imeas::IDataSequence* projectionPtr = dynamic_cast<imeas::IDataSequence*>(outputPtr);
 
 	if (		(bitmapPtr == NULL) ||
-				(projectionPtr == NULL) ||
-				(paramsPtr == NULL)){
+		(projectionPtr == NULL) ||
+		(paramsPtr == NULL)){
 			return TS_INVALID;
 	}
 
@@ -133,4 +158,5 @@ int CArcProjectionProcessorComp::DoProcessing(
 
 
 } // namespace iipr
+
 
