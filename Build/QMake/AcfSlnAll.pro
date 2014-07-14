@@ -125,6 +125,9 @@ MeasPck.file = ../../Impl/MeasPck/QMake/MeasPck.pro
 SUBDIRS += PropPck
 PropPck.file = ../../Impl/PropPck/QMake/PropPck.pro
 
+SUBDIRS += SignalPck
+SignalPck.file = ../../Impl/SignalPck/QMake/SignalPck.pro
+
 SUBDIRS += WizardPck
 WizardPck.file = ../../Impl/WizardPck/QMake/WizardPck.pro
 
