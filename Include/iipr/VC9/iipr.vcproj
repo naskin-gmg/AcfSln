@@ -647,10 +647,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IArcProjectionProcessor.h"
-				>
-			</File>
-			<File
 				RelativePath="..\ICaliperParams.h"
 				>
 			</File>
