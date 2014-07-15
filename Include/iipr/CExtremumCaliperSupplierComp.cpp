@@ -1,8 +1,42 @@
 #include "iipr/CExtremumCaliperSupplierComp.h"
 
 
+// ACF-Solutions includes
+#include <imeas/CSimpleNumericValue.h>
+
+
 namespace iipr
 {
+
+
+// public methods
+
+// reimplemented (imeas::INumericValueProvider)
+
+int CExtremumCaliperSupplierComp::GetValuesCount() const
+{
+	const ProductType* productPtr = GetWorkProduct();
+	if (productPtr != NULL)
+	{
+		return productPtr->GetValuesCount();
+	}
+
+	return 0;
+}
+
+
+const imeas::INumericValue& CExtremumCaliperSupplierComp::GetNumericValue(int index) const
+{
+	static imeas::CSimpleNumericValue emptyValue;
+
+	const ProductType* productPtr = GetWorkProduct();
+	if (productPtr != NULL)
+	{
+		return productPtr->GetNumericValue(index);
+	}
+
+	return emptyValue;
+}
 
 
 // protected methods
