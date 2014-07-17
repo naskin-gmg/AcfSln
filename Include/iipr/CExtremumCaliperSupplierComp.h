@@ -18,7 +18,7 @@ class CExtremumCaliperSupplierComp:
 			virtual public imeas::INumericValueProvider
 {
 public:
-	typedef public iinsp::TSupplierCompWrap<iipr::CFeaturesContainer> BaseClass;
+	typedef iinsp::TSupplierCompWrap<iipr::CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CExtremumCaliperSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
