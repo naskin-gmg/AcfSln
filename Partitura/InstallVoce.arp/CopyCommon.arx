@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3389
+          3534
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          1087
+          328449
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264197
+          1154
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -1717,7 +1717,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="5">
                 <Value>
                   Install
                 </Value>
@@ -1728,19 +1728,10 @@
                   Tortoise
                 </Value>
                 <Value>
-                  VC7
+                  Bin
                 </Value>
                 <Value>
-                  VC8
-                </Value>
-                <Value>
-                  VC9
-                </Value>
-                <Value>
-                  Xcd
-                </Value>
-                <Value>
-                  QMake
+                  Lib
                 </Value>
               </Values>
             </Data>
@@ -1903,7 +1894,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="15">
+              <Values count="16">
                 <Value>
                   *.ui
                 </Value>
@@ -1924,6 +1915,9 @@
                 </Value>
                 <Value>
                   *.pri
+                </Value>
+                <Value>
+                  *.qbs
                 </Value>
                 <Value>
                   *.arx
