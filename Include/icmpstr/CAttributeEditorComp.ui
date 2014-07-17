@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>628</height>
+    <width>229</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,7 +106,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>0</width>
-           <height>10</height>
+           <height>0</height>
           </size>
          </property>
         </spacer>
@@ -114,7 +114,7 @@
        <item>
         <widget class="QFrame" name="MetaInfoFrame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -275,7 +275,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>343</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -352,7 +352,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>343</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -503,8 +503,8 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>215</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
         </spacer>
