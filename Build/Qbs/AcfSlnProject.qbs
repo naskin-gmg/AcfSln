@@ -3,7 +3,6 @@ import qbs.base 1.0
 Project{
 	name: "ACF-Solutions"
 
-	property string projectSubDir: "AcfSln"
 	property string projectRoot: path + "/../../.."
 
 	Project{
