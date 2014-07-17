@@ -56,8 +56,8 @@ public:
 		TI_GENERAL,
 		TI_ATTRIBUTES,
 		TI_INTERFACES,
-		TI_FLAGS,
-		TI_EXPORTS
+		TI_EXPORTS,
+		TI_FLAGS
 	};
 
 	enum AttrMeaning

@@ -70,7 +70,7 @@ public:
 		CPackageOverviewComp::PackageItem* packageItemPtr = dynamic_cast<CPackageOverviewComp::PackageItem*>(selectedItemPtr);
 
 		QRect mainRect = option.rect;
-		mainRect.adjust(2 * SIDE_OFFSET, SIDE_OFFSET, 2 * -SIDE_OFFSET, -1);
+		mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -1);
 
 		if (packageItemPtr != NULL){
 			if (((option.state & QStyle::State_Selected) != 0) || ((option.state & QStyle::State_HasFocus) != 0)){
