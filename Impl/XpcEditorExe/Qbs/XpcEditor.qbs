@@ -52,11 +52,11 @@ Project{
 		Depends{ name: "AcfExe" }
 		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
 		acf.trOutputType: "rc"
-		cpp.systemIncludePaths: path
+		cpp.includePaths: path
 
 		Group{
-			name: "VC-Resources"
-			condition: qbs.toolchain.contains("msvc")
+			name: "Windows-Resources"
+			condition: qbs.targetOS.contains("windows")
 
 			files: ["../VC/*.rc.xtracf"]
 			fileTags: ["xtracf"]
