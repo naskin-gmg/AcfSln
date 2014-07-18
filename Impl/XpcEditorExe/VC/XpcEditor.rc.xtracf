@@ -1,6 +1,6 @@
 #define APSTUDIO_READONLY_SYMBOLS
 #include <windows.h>
-#define IDC_STATIC (-1)
+#define IDC_STATIC (-1) 
 #undef APSTUDIO_READONLY_SYMBOLS
 
 #ifdef _WIN32
@@ -27,11 +27,11 @@ BEGIN
         BEGIN
             VALUE "Comments", "Internal build version ($AcfRawVersion:1$), based on ACF $AcfVersion:1$ ($AcfRawVersion:1$) and QT $AcfVersion:1023$, build on $AcfTimestamp$ ($CompilerName$)"
             VALUE "CompanyName", "Witold Gantzke and Kirill Lepskiy"
-            VALUE "FileDescription", "ACF component topology editor"
+            VALUE "FileDescription", "ACF configuration files editor"
             VALUE "FileVersion", "$AcfVersion:1$"
-            VALUE "InternalName", "Compositor"
-            VALUE "LegalCopyright", "Copyright (C) 2009-2014 Witold Gantzke and Kirill Lepskiy"
-            VALUE "OriginalFilename", "Compositor.exe"
+            VALUE "InternalName", "XpcEditor"
+            VALUE "LegalCopyright", "Copyright (C) 2012-2014 Witold Gantzke and Kirill Lepskiy"
+            VALUE "OriginalFilename", "XpcEditor.exe"
             VALUE "ProductName", "ACF-Solutions"
             VALUE "ProductVersion", "$AcfVersion:1$"
         END
