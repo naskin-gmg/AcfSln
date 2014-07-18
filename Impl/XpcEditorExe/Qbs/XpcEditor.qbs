@@ -48,15 +48,18 @@ Project{
 		Depends{ name: "Qt.widgets" }
 		Depends{ name: "Qt.gui" }
 
+		// Resource file on Windows
+		Depends{ name: "AcfExe" }
+		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
+		acf.trOutputType: "rc"
+		cpp.systemIncludePaths: path
+
 		Group{
 			name: "VC-Resources"
 			condition: qbs.toolchain.contains("msvc")
 
 			files: ["../VC/*.rc.xtracf"]
 			fileTags: ["xtracf"]
-
-			acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
-			acf.trOutputType: ["rc"]
 		}
 	}
 }

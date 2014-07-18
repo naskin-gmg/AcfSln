@@ -49,7 +49,8 @@ Project{
 		Depends{ name: "Qt.widgets" }
 		Depends{ name: "Qt.gui" }
 
-        Group{
+		// Resource file on MAC
+		Group{
             name: "MAC-Resources"
             condition: qbs.targetOS.contains("osx")
 
@@ -57,15 +58,18 @@ Project{
             cpp.infoPlistFormat: "xml1"
         }
 
+		// Resource file on Windows
+		Depends{ name: "AcfExe" }
+		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
+		acf.trOutputType: "rc"
+		cpp.systemIncludePaths: path
+
 		Group{
 			name: "VC-Resources"
 			condition: qbs.toolchain.contains("msvc")
 
 			files: ["../VC/*.rc.xtracf"]
 			fileTags: ["xtracf"]
-
-			acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
-			acf.trOutputType: ["rc"]
 		}
 	}
 }
