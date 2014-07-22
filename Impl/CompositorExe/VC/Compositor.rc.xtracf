@@ -42,4 +42,4 @@ BEGIN
     END
 END
 
-IDI_ICON1               ICON                    "..\\VC\\Logo.ico"
+IDI_ICON1               ICON                    "..\\..\\CompositorExe\\VC\\Logo.ico"
