@@ -26,9 +26,8 @@ CEdgeNode::CEdgeNode(const i2d::CVector2d& position, double weight)
 
 bool CEdgeNode::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag positionTag("Position", "Position of edge node");
-	static iser::CArchiveTag derivativeTag("Derivative", "Gradient (derivative) of edge node");
-	static iser::CArchiveTag weightTag("Weight", "Weight of edge node");
+	static iser::CArchiveTag positionTag("Position", "Position of edge node", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag weightTag("Weight", "Weight of edge node", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 

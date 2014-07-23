@@ -147,7 +147,7 @@ QByteArray TProperty<Value>::GetFactoryId() const
 template <typename Value>
 bool TProperty<Value>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valueTag("Value", "Property value");
+	static iser::CArchiveTag valueTag("Value", "Property value", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 

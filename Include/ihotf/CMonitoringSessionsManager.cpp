@@ -53,9 +53,9 @@ bool CMonitoringSessionsManager::Serialize(iser::IArchive& archive)
 {	
 	bool retVal = true;
 
-	static iser::CArchiveTag monitoringSessionsTag("MonitoringSessionsManager", "Session list");
-	static iser::CArchiveTag monitoringSessionTag("MonitoringSession", "Single session");
-	static iser::CArchiveTag directoryPathTag("MonitoringDirectory", "Monitoring directory path");
+	static iser::CArchiveTag monitoringSessionsTag("MonitoringSessionsManager", "Session list", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag monitoringSessionTag("MonitoringSession", "Single session", iser::CArchiveTag::TT_GROUP, &monitoringSessionsTag);
+	static iser::CArchiveTag directoryPathTag("MonitoringDirectory", "Monitoring directory path", iser::CArchiveTag::TT_LEAF);
 
 	int sessionsCount = m_monitorSessionsMap.size();
 	retVal = retVal && archive.BeginMultiTag(monitoringSessionsTag, monitoringSessionTag, sessionsCount);

@@ -131,11 +131,11 @@ QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* extensi
 
 bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache");
-	static iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache");
-	static iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
-	static iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
-	static iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
+	static iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache", iser::CArchiveTag::TT_GROUP, &previewCacheTag);
+	static iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file", iser::CArchiveTag::TT_LEAF, &previewCacheElementTag);
+	static iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update", iser::CArchiveTag::TT_GROUP, &previewCacheElementTag);
+	static iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap", iser::CArchiveTag::TT_GROUP, &previewCacheElementTag);
 
 	int cacheSize = m_previewCache.size();
 
@@ -164,6 +164,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	}
 	else{
 		istd::CChangeNotifier notifier(this);
+		Q_UNUSED(notifier);
 
 		for (int elementIndex = 0; elementIndex < cacheSize; elementIndex++){
 			FileInfo fileInfo;

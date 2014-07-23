@@ -79,11 +79,12 @@ void CUser::ResetPassword()
 
 bool CUser::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag nameTag("Name", "Name of User");
-	static iser::CArchiveTag passwordTag("Password", "Password");
-	static iser::CArchiveTag groupIdTag("GroupID", "ID of group");
+	static iser::CArchiveTag nameTag("Name", "Name of User", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag passwordTag("Password", "Password", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag groupIdTag("GroupID", "ID of group", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

@@ -74,11 +74,12 @@ void CCaliperParams::SetDirectionMode(int mode)
 
 bool CCaliperParams::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag weightThresholdTag("WeightThreshold", "Threshold describing of minimal weight acceptace");
-	static iser::CArchiveTag polarityModeTag("PolarityMode", "Polarity mode code");
-	static iser::CArchiveTag directionModeTag("DirectionMode", "Direction mode code");
+	static iser::CArchiveTag weightThresholdTag("WeightThreshold", "Threshold describing of minimal weight acceptace", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag polarityModeTag("PolarityMode", "Polarity mode code", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag directionModeTag("DirectionMode", "Direction mode code", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

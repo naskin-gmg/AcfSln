@@ -31,9 +31,10 @@ const imeas::INumericValue& CSimpleNumericValueProvider::GetNumericValue(int ind
 bool CSimpleNumericValueProvider::Serialize(iser::IArchive& archive)
 {
 	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
+	Q_UNUSED(notifier);
 
-	static iser::CArchiveTag valuesTag("Values", "List of numeric values");
-	static iser::CArchiveTag valueTag("Value", "Single value");
+	static iser::CArchiveTag valuesTag("Values", "List of numeric values", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag valueTag("Value", "Single value", iser::CArchiveTag::TT_LEAF, &valuesTag);
 
 	int valuesCount = m_values.count();
 
@@ -44,7 +45,9 @@ bool CSimpleNumericValueProvider::Serialize(iser::IArchive& archive)
 	}
 
 	for (int valueIndex = 0; valueIndex < valuesCount; valueIndex++){
+		retVal = retVal && archive.BeginTag(valueTag);
 		retVal = retVal && m_values[valueIndex].Serialize(archive);
+		retVal = retVal && archive.EndTag(valueTag);
 	}
 
 	return retVal;

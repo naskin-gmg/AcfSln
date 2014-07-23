@@ -1387,11 +1387,11 @@ void CVisualRegistryEditorComp::OnGuiDestroyed()
 
 // static attributes
 
-iser::CArchiveTag CVisualRegistryEditorComp::s_elementsListTag("ElementsList", "List of elements");
-iser::CArchiveTag CVisualRegistryEditorComp::s_elementTag("Element", "Single element", true);
-iser::CArchiveTag CVisualRegistryEditorComp::s_elementIdTag("Id", "Id of element");
-iser::CArchiveTag CVisualRegistryEditorComp::s_elementAddressTag("Address", "Address of component");
-iser::CArchiveTag CVisualRegistryEditorComp::s_elementCenterTag("Center", "Center position of element");
+iser::CArchiveTag CVisualRegistryEditorComp::s_elementsListTag("ElementsList", "List of elements", iser::CArchiveTag::TT_MULTIPLE);
+iser::CArchiveTag CVisualRegistryEditorComp::s_elementTag("Element", "Single element", iser::CArchiveTag::TT_GROUP, &s_elementsListTag, true);
+iser::CArchiveTag CVisualRegistryEditorComp::s_elementIdTag("Id", "Id of element", iser::CArchiveTag::TT_LEAF, &s_elementTag);
+iser::CArchiveTag CVisualRegistryEditorComp::s_elementAddressTag("Address", "Address of component", iser::CArchiveTag::TT_GROUP, &s_elementTag);
+iser::CArchiveTag CVisualRegistryEditorComp::s_elementCenterTag("Center", "Center position of element", iser::CArchiveTag::TT_GROUP, &s_elementTag);
 
 
 // public methods of embedded class EnvironmentObserver

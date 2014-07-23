@@ -109,13 +109,13 @@ void CDirectoryMonitorParams::SetIgnorePatterns(const QStringList& ignorePattern
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {		
-	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos");
-	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed");
-	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed");
-	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns");
-	static iser::CArchiveTag acceptPatternTag("AcceptPattern", "Single accepted file name pattern");
-	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns");
-	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern");
+	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag acceptPatternTag("AcceptPattern", "Single accepted file name pattern", iser::CArchiveTag::TT_LEAF, &acceptPatternsTag);
+	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern", iser::CArchiveTag::TT_LEAF, &ignorePatternsTag);
 
 	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
 

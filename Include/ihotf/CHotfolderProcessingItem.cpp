@@ -121,34 +121,38 @@ void CHotfolderProcessingItem::SetStartTime(const QDateTime& startTime)
 
 bool CHotfolderProcessingItem::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag itemIdTag("Uuid", "Processing item identifier", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag processingStateTag("ProcessingState", "Current processing state", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag inputFileTag("InputFilePath", "Input file path", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag outputFileTag("OutputFilePath", "Output file path", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag processingTimeTag("ProcessingTime", "Processing time", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag startTimeTag("StartTime", "Start time of the processing", iser::CArchiveTag::TT_LEAF);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag itemIdTag("Uuid", "Processing item identifier");
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
+
 	retVal = retVal && archive.BeginTag(itemIdTag);
 	retVal = retVal && archive.Process(m_itemId);
 	retVal = retVal && archive.EndTag(itemIdTag);
 
-	static iser::CArchiveTag processingStateTag("ProcessingState", "Current processing state");
 	retVal = retVal && archive.BeginTag(processingStateTag);
 	retVal = retVal && archive.Process(m_processingState);
 	retVal = retVal && archive.EndTag(processingStateTag);
 
-	static iser::CArchiveTag inputFileTag("InputFilePath", "Input file path");
 	retVal = retVal && archive.BeginTag(inputFileTag);
 	retVal = retVal && archive.Process(m_inputFile);
 	retVal = retVal && archive.EndTag(inputFileTag);
 
-	static iser::CArchiveTag outputFileTag("OutputFilePath", "Output file path");
 	retVal = retVal && archive.BeginTag(outputFileTag);
 	retVal = retVal && archive.Process(m_outputFile);
 	retVal = retVal && archive.EndTag(outputFileTag);
 
-	static iser::CArchiveTag processingTimeTag("ProcessingTime", "Processing time");
 	retVal = retVal && archive.BeginTag(processingTimeTag);
 	retVal = retVal && archive.Process(m_processingTime);
 	retVal = retVal && archive.EndTag(processingTimeTag);
 
-	static iser::CArchiveTag startTimeTag("StartTime", "Start time of the processing");
 	retVal = retVal && archive.BeginTag(startTimeTag);
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, m_startTime);
 	retVal = retVal && archive.EndTag(startTimeTag);

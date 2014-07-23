@@ -156,11 +156,12 @@ const QString& CUsersManagerComp::GetUserGroupName(int groupIndex) const
 
 bool CUsersManagerComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag usersTag("Users", "List of users");
-	static iser::CArchiveTag userTag("User", "User");
+	static iser::CArchiveTag usersTag("Users", "List of users", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag userTag("User", "User", iser::CArchiveTag::TT_GROUP, &usersTag);
 
 	bool isStoring = archive.IsStoring();
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	Q_UNUSED(notifier);
 
 	int usersCount = GetUsersCount();
 

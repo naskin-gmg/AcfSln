@@ -20,11 +20,11 @@ namespace ifileproc
 
 namespace
 {
-	static iser::CArchiveTag processedFilesTag("ProcessedFiles", "ProcessedFiles");
-	static iser::CArchiveTag fileTag("File", "File");
-	static iser::CArchiveTag filePathTag("FilePath", "FilePath");
-	static iser::CArchiveTag workStatusTag("WorkStatus", "WorkStatus");
-	static iser::CArchiveTag outputDataTag("OutputData", "OutputData");
+	static iser::CArchiveTag processedFilesTag("ProcessedFiles", "ProcessedFiles", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag fileTag("File", "File", iser::CArchiveTag::TT_GROUP, &processedFilesTag);
+	static iser::CArchiveTag filePathTag("FilePath", "FilePath", iser::CArchiveTag::TT_LEAF, &processedFilesTag);
+	static iser::CArchiveTag workStatusTag("WorkStatus", "WorkStatus", iser::CArchiveTag::TT_LEAF, &processedFilesTag);
+	static iser::CArchiveTag outputDataTag("OutputData", "OutputData", iser::CArchiveTag::TT_GROUP, &processedFilesTag);
 }
 
 

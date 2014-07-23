@@ -181,27 +181,28 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag angleTag("Angle", "Angle of found model");
+	static iser::CArchiveTag angleTag("Angle", "Angle of found model", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag scaleTag("Scale", "Scale of found model", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag indexTag("Index", "Index of found model", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag idTag("Id", "Id of found model", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag negativeModelTag("NegativeModelEnabled", "Is negative model enabled", iser::CArchiveTag::TT_LEAF);
+
 	retVal = retVal && archive.BeginTag(angleTag);
 	retVal = retVal && archive.Process(m_angle);
 	retVal = retVal && archive.EndTag(angleTag);
 
-	static iser::CArchiveTag scaleTag("Scale", "Scale of found model");
 	retVal = retVal && archive.BeginTag(scaleTag);
 	retVal = retVal && m_scale.Serialize(archive);
 	retVal = retVal && archive.EndTag(scaleTag);
 
-	static iser::CArchiveTag indexTag("Index", "Index of found model");
 	retVal = retVal && archive.BeginTag(indexTag);
 	retVal = retVal && archive.Process(m_index);
 	retVal = retVal && archive.EndTag(indexTag);
 
-	static iser::CArchiveTag idTag("Id", "Id of found model");
 	retVal = retVal && archive.BeginTag(idTag);
 	retVal = retVal && archive.Process(m_id);
 	retVal = retVal && archive.EndTag(idTag);
 
-	static iser::CArchiveTag negativeModelTag("NegativeModelEnabled", "Is negative model enabled");
 	retVal = retVal && archive.BeginTag(negativeModelTag);
 	retVal = retVal && archive.Process(m_isNegativeModelEnabled);
 	retVal = retVal && archive.EndTag(negativeModelTag);

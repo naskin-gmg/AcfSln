@@ -60,10 +60,11 @@ void CRingPatternGeneratorParamsComp::SetWaveLength(double waveLength)
 
 bool CRingPatternGeneratorParamsComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag patternModeTag("PatternMode", "Mode for pattern generation");
-	static iser::CArchiveTag waveLengthTag("WaveLength", "Pattern wave length");
+	static iser::CArchiveTag patternModeTag("PatternMode", "Mode for pattern generation", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag waveLengthTag("WaveLength", "Pattern wave length", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

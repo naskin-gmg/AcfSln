@@ -48,10 +48,10 @@ bool CMonitoringSession::Serialize(iser::IArchive& archive)
 {	
 	bool retVal = true;
 
-	static iser::CArchiveTag directorySnapShotTag("DirectorySnapshot", "List of already monitored files");
-	static iser::CArchiveTag monitoredFileTag("MonitoredFile", "Already monitored file");
-	static iser::CArchiveTag filePathTag("FilePath", "File path");
-	static iser::CArchiveTag fileTimeStampTag("ModificationTime", "Time stamp of the last file modification");
+	static iser::CArchiveTag directorySnapShotTag("DirectorySnapshot", "List of already monitored files", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag monitoredFileTag("MonitoredFile", "Already monitored file", iser::CArchiveTag::TT_GROUP, &directorySnapShotTag);
+	static iser::CArchiveTag filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &monitoredFileTag);
+	static iser::CArchiveTag fileTimeStampTag("ModificationTime", "Time stamp of the last file modification", iser::CArchiveTag::TT_LEAF, &monitoredFileTag);
 
 	int filesCount = m_sessionFiles.size();
 	retVal = retVal && archive.BeginMultiTag(directorySnapShotTag, monitoredFileTag, filesCount);

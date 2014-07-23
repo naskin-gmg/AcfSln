@@ -143,13 +143,13 @@ bool CHotfolderProcessingInfo::Serialize(iser::IArchive& archive)
 		SetWorking(false);
 	}
 
-	static iser::CArchiveTag isWorkingTag("Working", "Hotfolder is in running state");
+	static iser::CArchiveTag isWorkingTag("Working", "Hotfolder is in running state", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag processingItemsTag("ProcessingItems", "List of processing items", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag processingItemTag("ProcessingItem", "Single processing item", iser::CArchiveTag::TT_GROUP, &processingItemsTag);
+
 	retVal = retVal && archive.BeginTag(isWorkingTag);
 	retVal = retVal && archive.Process(m_isWorking);
 	retVal = retVal && archive.EndTag(isWorkingTag);
-	
-	static iser::CArchiveTag processingItemsTag("ProcessingItems", "List of processing items");
-	static iser::CArchiveTag processingItemTag("ProcessingItem", "Single processing item");
 
 	int processingItemsCount = m_processingItems.GetCount();
 	retVal = retVal && archive.BeginMultiTag(processingItemsTag, processingItemTag, processingItemsCount);

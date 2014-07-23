@@ -115,14 +115,15 @@ const imeas::IDataSequence* CColorPatternControllerComp::GetDataSequence() const
 
 bool CColorPatternControllerComp::Serialize(iser::IArchive& archive)
 {
-	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
+	static iser::CArchiveTag patternBitmapTag("PatternBitmap", "Bitmap used as pattern", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag histogramTag("Histogram", "Histogram of the pattern bitmap", iser::CArchiveTag::TT_GROUP);
 
-	static iser::CArchiveTag patternBitmapTag("PatternBitmap", "Bitmap used as pattern");
-	static iser::CArchiveTag histogramTag("Histogram", "Histogram of the pattern bitmap");
+	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(patternBitmapTag);		
+	retVal = retVal && archive.BeginTag(patternBitmapTag);
 	retVal = retVal && m_patternBitmap.Serialize(archive);
 	retVal = retVal && archive.EndTag(patternBitmapTag);		
 

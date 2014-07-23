@@ -440,9 +440,9 @@ bool CEdgeLine::GetInvTransformed(
 
 bool CEdgeLine::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag nodesTag("Nodes", "List of edge nodes");
-	static iser::CArchiveTag nodeTag("Node", "Single edge node");
-	static iser::CArchiveTag isClosedTag("IsClosed", "Flag indicating if edge is closed");
+	static iser::CArchiveTag nodesTag("Nodes", "List of edge nodes", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag nodeTag("Node", "Single edge node", iser::CArchiveTag::TT_GROUP, &nodesTag);
+	static iser::CArchiveTag isClosedTag("IsClosed", "Flag indicating if edge is closed", iser::CArchiveTag::TT_LEAF, &nodesTag);
 
 	bool retVal = true;
 

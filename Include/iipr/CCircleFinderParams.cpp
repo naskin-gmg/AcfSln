@@ -91,12 +91,13 @@ void CCircleFinderParams::SetRaysCount(int raysCount)
 
 bool CCircleFinderParams::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag caliperModeTag("CaliperMode", "Caliper mode");
-	static iser::CArchiveTag isOutlierEliminationEnabledTag("OutlierEliminationEnabled", "Outliers elimination is enabled");
-	static iser::CArchiveTag minOutlierDistanceTag("MinOutlierDistance", "Minimal outliers distance");
-	static iser::CArchiveTag raysCountTag("RaysCount", "Number of projection rays");
+	static iser::CArchiveTag caliperModeTag("CaliperMode", "Caliper mode", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag isOutlierEliminationEnabledTag("OutlierEliminationEnabled", "Outliers elimination is enabled", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag minOutlierDistanceTag("MinOutlierDistance", "Minimal outliers distance", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag raysCountTag("RaysCount", "Number of projection rays", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

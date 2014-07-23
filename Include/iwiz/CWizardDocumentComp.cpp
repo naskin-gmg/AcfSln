@@ -191,13 +191,11 @@ bool CWizardDocumentComp::Serialize(iser::IArchive& archive)
 	}
 
 	bool retVal = true;
-	if (m_additionalObjectsCompPtr.IsValid())
-	{
-		static iser::CArchiveTag additionalObjectsTag("AdditionalObjects", "Additional persistent objects");
+	if (m_additionalObjectsCompPtr.IsValid()){
+		static iser::CArchiveTag additionalObjectsTag("AdditionalObjects", "Additional persistent objects", iser::CArchiveTag::TT_GROUP);
 		retVal = retVal && archive.BeginTag(additionalObjectsTag);
 		int count = m_additionalObjectsCompPtr.GetCount();
-		for (int index = 0; retVal && (index < count); ++index)
-		{
+		for (int index = 0; retVal && (index < count); ++index){
 			retVal = retVal && m_additionalObjectsCompPtr[index]->Serialize(archive);
 		}
 		retVal = retVal && archive.EndTag(additionalObjectsTag);

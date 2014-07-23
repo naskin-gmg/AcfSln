@@ -275,12 +275,13 @@ QByteArray TMultiProperty<Value, Container>::GetFactoryId() const
 template <typename Value, class Container>
 bool TMultiProperty<Value, Container>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valuesTag("Values", "List of property values");
-	static iser::CArchiveTag valueTag("Value", "Single Value");
+	static iser::CArchiveTag valuesTag("Values", "List of property values", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag valueTag("Value", "Single Value", iser::CArchiveTag::TT_LEAF, &valuesTag);
 
 	bool isStoring = archive.IsStoring();
 
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

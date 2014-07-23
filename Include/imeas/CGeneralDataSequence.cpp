@@ -240,18 +240,19 @@ CGeneralDataSequence::ResultType CGeneralDataSequence::GetValueAt(const Argument
 
 bool CGeneralDataSequence::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag channelsCountTag("ChannelsCount", "Number of channels", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag channelsTag("Channels", "List of sample values", iser::CArchiveTag::TT_LEAF, &samplesListTag);
+
 	bool retVal = true;
 
 	int channelsCount = GetChannelsCount();
-	static iser::CArchiveTag channelsCountTag("ChannelsCount", "Number of channels");
 	retVal = retVal && archive.BeginTag(channelsCountTag);
 	retVal = retVal && archive.Process(channelsCount);
 	retVal = retVal && archive.EndTag(channelsCountTag);
 
 	int samplesCount = GetSamplesCount();
 
-	static iser::CArchiveTag samplesListTag("SampleList", "List of sample values");
-	static iser::CArchiveTag channelsTag("Channels", "List of sample values");
 	retVal = retVal && archive.BeginMultiTag(samplesListTag, channelsTag, samplesCount);
 
 	if (!retVal){

@@ -85,11 +85,11 @@ double CDataStatistics::GetMedian() const
 
 bool CDataStatistics::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag averageTag("Average", "Data average");
-	static iser::CArchiveTag medianTag("Median", "Data median");
-	static iser::CArchiveTag standardDeviationTag("StandardDeviation", "Data's standard deviation");
-	static iser::CArchiveTag minValueTag("MinValue", "Minimal data value");
-	static iser::CArchiveTag maxValueTag("maxValue", "Maximal data value");
+	static iser::CArchiveTag averageTag("Average", "Data average", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag medianTag("Median", "Data median", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag standardDeviationTag("StandardDeviation", "Data's standard deviation", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag minValueTag("MinValue", "Minimal data value", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag maxValueTag("maxValue", "Maximal data value", iser::CArchiveTag::TT_LEAF);
 
 	bool isStoring = archive.IsStoring();
 

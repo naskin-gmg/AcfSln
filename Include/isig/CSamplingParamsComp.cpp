@@ -72,8 +72,8 @@ bool CSamplingParamsComp::SetSamplingMode(int mode)
 
 bool CSamplingParamsComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag intervalTag("Interval", "Interval [s] of simple sample");
-	static iser::CArchiveTag samplingModeTag("SamplingMode", "Sampling mode (isig::ISamplingParams::SamplingMode)");
+	static iser::CArchiveTag intervalTag("Interval", "Interval [s] of simple sample", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag samplingModeTag("SamplingMode", "Sampling mode (isig::ISamplingParams::SamplingMode)", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 
@@ -89,6 +89,7 @@ bool CSamplingParamsComp::Serialize(iser::IArchive& archive)
 
 	if (!archive.IsStoring()){
 		istd::CChangeNotifier notifier(this);
+		Q_UNUSED(notifier);
 
 		SetInterval(interval);
 		SetSamplingMode(samplingMode);

@@ -45,14 +45,16 @@ iprm::IParamsSet* CInspectionTaskComp::GetGeneralParameters() const
 
 bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag taskTag("Subtask", "Single subtask", iser::CArchiveTag::TT_GROUP, &taskListTag);
+	static iser::CArchiveTag generalParamsTag("GeneralParams", "General inspection parameters", iser::CArchiveTag::TT_GROUP);
+
 	bool retVal = true;
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	if (*m_serializeSuppliersAttrPtr){
-		static iser::CArchiveTag taskListTag("SubtaskList", "List of inspection subtasks");
-		static iser::CArchiveTag taskTag("Subtask", "Single subtask");
-
 		int subtasksCount = m_subtasksCompPtr.GetCount();
 
 		retVal = retVal && archive.BeginMultiTag(taskListTag, taskTag, subtasksCount);
@@ -83,8 +85,6 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 	}
 
 	if (m_generalParamsCompPtr.IsValid()){
-		static iser::CArchiveTag generalParamsTag("GeneralParams", "General inspection parameters");
-
 		retVal = retVal && archive.BeginTag(generalParamsTag);
 		retVal = retVal && m_generalParamsCompPtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(generalParamsTag);

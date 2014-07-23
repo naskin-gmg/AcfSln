@@ -93,13 +93,14 @@ imath::CVarVector CCaliperFeature::GetComponentValue(ValueTypeId valueTypeId) co
 
 bool CCaliperFeature::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valueTag("Position", "Position on projection");
-	static iser::CArchiveTag edgeModeTag("EdgeMode", "Edge mode");
-	static iser::CArchiveTag weightModeTag("Weight", "Caliper weight");
+	static iser::CArchiveTag valueTag("Position", "Position on projection", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag edgeModeTag("EdgeMode", "Edge mode", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag weightModeTag("Weight", "Caliper weight", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	retVal = retVal && BaseClass::Serialize(archive);
 

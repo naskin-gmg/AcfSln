@@ -129,14 +129,15 @@ void CSearchParams::SetScaleEnabled(bool isScaleEnabled)
 
 bool CSearchParams::Serialize(iser::IArchive & archive)
 {
-	static iser::CArchiveTag angleRangeTag("AngleRange", "Search angle range");
-	static iser::CArchiveTag scaleRangeTag("ScaleRange", "Search scale range");
-	static iser::CArchiveTag minScoreTag("MinScore", "Minimum match score");
-	static iser::CArchiveTag isRotationEnabledTag("RotationEnabled", "Is angle range enabled");
-	static iser::CArchiveTag isScaleEnabledTag("ScaleEnabledTag", "Is scale range enabled");
-	static iser::CArchiveTag nominalModelsCountTag("NominalModelsCount", "Minimum model matches count");
+	static iser::CArchiveTag angleRangeTag("AngleRange", "Search angle range", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag scaleRangeTag("ScaleRange", "Search scale range", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag minScoreTag("MinScore", "Minimum match score", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag isRotationEnabledTag("RotationEnabled", "Is angle range enabled", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag isScaleEnabledTag("ScaleEnabledTag", "Is scale range enabled", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag nominalModelsCountTag("NominalModelsCount", "Minimum model matches count", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(angleRangeTag);
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeRange(archive, m_angleRange);

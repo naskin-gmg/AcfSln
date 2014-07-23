@@ -73,7 +73,7 @@ bool CSimpleNumericValue::SetValues(const imath::CVarVector& values)
 
 bool CSimpleNumericValue::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valuesTag("Values", "List of numeric values");
+	static iser::CArchiveTag valuesTag("Values", "List of numeric values", iser::CArchiveTag::TT_GROUP);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 

@@ -88,9 +88,9 @@ void CFileNamingParamsComp::SetPatternsToRemove(const QStringList& patternsToRem
 
 bool CFileNamingParamsComp::Serialize(iser::IArchive& archive)
 {		
-	static iser::CArchiveTag overwriteStrategyTag("OverwriteStrategy", "Strategy for overwriting of existing files");
-	static iser::CArchiveTag prefixTag("FilePrefix", "Prefix for the output file name");
-	static iser::CArchiveTag suffixTag("FileSuffix", "Suffix for the output file name");
+	static iser::CArchiveTag overwriteStrategyTag("OverwriteStrategy", "Strategy for overwriting of existing files", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag prefixTag("FilePrefix", "Prefix for the output file name", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag suffixTag("FileSuffix", "Suffix for the output file name", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier changePtr(!archive.IsStoring()? this : NULL);
 

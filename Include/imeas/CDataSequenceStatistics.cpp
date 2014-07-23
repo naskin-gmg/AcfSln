@@ -75,8 +75,8 @@ const imeas::IDataStatistics* CDataSequenceStatistics::GetChannelStatistics(int 
 
 bool CDataSequenceStatistics::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag statisticsTag("DataStatistics", "Data sequence statistics");
-	static iser::CArchiveTag statisticsChannelTag("StatisticsChannel", "Single statistics channel");
+	static iser::CArchiveTag statisticsTag("DataStatistics", "Data sequence statistics", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag statisticsChannelTag("StatisticsChannel", "Single statistics channel", iser::CArchiveTag::TT_GROUP, &statisticsTag);
 
 	bool isStoring = archive.IsStoring();
 

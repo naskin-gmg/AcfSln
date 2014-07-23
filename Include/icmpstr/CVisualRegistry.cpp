@@ -27,11 +27,11 @@ CVisualRegistry::CVisualRegistry()
 
 bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 {
-	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
-	static iser::CArchiveTag elementTag("Element", "Map element");
-	static iser::CArchiveTag embeddedRegistriesTag("EmbeddedRegistries", "List of embedded registries for recursive layout loading");
-	static iser::CArchiveTag embeddedRegistryTag("EmbededRegistry", "Layout information of embedded registry");
-	static iser::CArchiveTag embeddedRegistryIdTag("Id", "ID of embedded registry");
+	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag elementTag("Element", "Map element", iser::CArchiveTag::TT_GROUP, &positionMapTag);
+	static iser::CArchiveTag embeddedRegistriesTag("EmbeddedRegistries", "List of embedded registries for recursive layout loading", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag embeddedRegistryTag("EmbededRegistry", "Layout information of embedded registry", iser::CArchiveTag::TT_GROUP, &positionMapTag);
+	static iser::CArchiveTag embeddedRegistryIdTag("Id", "ID of embedded registry", iser::CArchiveTag::TT_LEAF, &embeddedRegistryTag);
 
 	bool retVal = true;
 
@@ -44,7 +44,11 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 		return false;
 	}
 
-	if (archive.IsStoring()){
+	bool isStoring = archive.IsStoring();
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	Q_UNUSED(notifier);
+
+	if (isStoring){
 		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
 			QByteArray elementId = *iter;
 
@@ -69,6 +73,7 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 	}
 	else{
 		istd::CChangeNotifier notifier(this);
+		Q_UNUSED(notifier);
 
 		for (int i = 0; i < positionsCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
@@ -112,7 +117,7 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 			return false;
 		}
 
-		if (archive.IsStoring()){
+		if (isStoring){
 			for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); iter++){
 				QByteArray id = *iter;
 				CVisualRegistry* embeddedRegPtr = dynamic_cast<CVisualRegistry*> (GetEmbeddedRegistry(id));
@@ -280,10 +285,11 @@ bool CVisualRegistry::SerializeComponentInfo(
 			i2d::CVector2d& position,
 			QString& componentNote)
 {
-	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
-	static iser::CArchiveTag positionXTag("X", "X position of component");
-	static iser::CArchiveTag positionYTag("Y", "Y position of component");
-	
+	static iser::CArchiveTag nameTag("ComponentName", "Name of component", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag positionXTag("X", "X position of component", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag positionYTag("Y", "Y position of component", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag componentNoteTag("Note", "Component note", iser::CArchiveTag::TT_LEAF);
+
 	bool retVal = archive.BeginTag(nameTag);
 	retVal = retVal && archive.Process(componentRole);
 	retVal = retVal && archive.EndTag(nameTag);
@@ -292,16 +298,23 @@ bool CVisualRegistry::SerializeComponentInfo(
 	retVal = retVal && archive.Process(position[0]);
 	retVal = retVal && archive.EndTag(positionXTag);
 
-	retVal = retVal && archive.BeginTag(positionXTag);
-	retVal = retVal && archive.Process(position[1]);
-	retVal = retVal && archive.EndTag(positionXTag);
-
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	quint32 frameworkVersion = 0;
-	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
-	
-	if (frameworkVersion >= 2246 || archive.IsStoring()){
-		static iser::CArchiveTag componentNoteTag("Note", "Component note");	
+
+	quint32 libraryVersion = 0xffffffff;
+	versionInfo.GetVersionNumber(1, libraryVersion);
+	if (libraryVersion > 1177){
+		retVal = retVal && archive.BeginTag(positionYTag);
+		retVal = retVal && archive.Process(position[1]);
+		retVal = retVal && archive.EndTag(positionYTag);
+	}
+	else{	// work-around for tag mistake in old files
+			// TODO: remove it when compatibility with old ACF *.alx files is no more important.
+		retVal = retVal && archive.BeginTag(positionXTag);
+		retVal = retVal && archive.Process(position[1]);
+		retVal = retVal && archive.EndTag(positionXTag);
+	}
+
+	if (libraryVersion >= 495){
 		retVal = retVal && archive.BeginTag(componentNoteTag);
 		retVal = retVal && archive.Process(componentNote);
 		retVal = retVal && archive.EndTag(componentNoteTag);

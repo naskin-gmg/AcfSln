@@ -69,14 +69,16 @@ void TWeightedFeatureWrap<BaseObject>::SetWeight(double weight)
 template <class BaseObject>
 bool TWeightedFeatureWrap<BaseObject>::Serialize(iser::IArchive& archive)
 {
+	iser::CArchiveTag weightTag("Weight", "Weight", iser::CArchiveTag::TT_LEAF);
+
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
 	retVal = retVal && BaseClass::Serialize(archive);
 	retVal = retVal && BaseClass2::Serialize(archive);
 
-	iser::CArchiveTag weightTag("Weight", "Weight");
 	retVal = retVal && archive.BeginTag(weightTag);
 	retVal = retVal && archive.Process(m_weight);
 	retVal = retVal && archive.EndTag(weightTag);

@@ -75,9 +75,10 @@ iprm::ISelectionParam* CSelectableFileConverterComp::GetSubselection(int /*index
 
 bool CSelectableFileConverterComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedOptionIndexTag("SelectedIndex", "Selected option index");
+	static iser::CArchiveTag selectedOptionIndexTag("SelectedIndex", "Selected option index", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

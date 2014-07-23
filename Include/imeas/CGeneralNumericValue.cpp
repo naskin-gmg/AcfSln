@@ -65,13 +65,19 @@ bool CGeneralNumericValue::SetValues(const imath::CVarVector& /*values*/)
 
 bool CGeneralNumericValue::Serialize(iser::IArchive &archive)
 {
-	static iser::CArchiveTag supportTag("Supported", "List of supported values");
-	static iser::CArchiveTag supportValueTag("SupportedValues", "supported value");
+	static iser::CArchiveTag supportTag("Supported", "List of supported values", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag supportValueTag("SupportedValues", "supported value", iser::CArchiveTag::TT_GROUP, &supportTag);
+	static iser::CArchiveTag idTag("ID", "ID of this component", iser::CArchiveTag::TT_LEAF, &supportValueTag);
 
 	bool retVal = true;
 
 	int count = m_supportMap.size();
 	retVal = retVal && archive.BeginMultiTag(supportTag, supportValueTag, count);
+
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+
+	quint32 libraryVersion = 0xffffffff;
+	versionInfo.GetVersionNumber(1, libraryVersion);
 
 	if (archive.IsStoring()){
 		for (SupportMap::const_iterator it = m_supportMap.begin(); it != m_supportMap.end(); ++it){
@@ -79,8 +85,18 @@ bool CGeneralNumericValue::Serialize(iser::IArchive &archive)
 			imath::CVarVector vector = it.value();
 
 			retVal = retVal && archive.BeginTag(supportValueTag);
-			retVal = retVal && archive.Process(id);
+
+			if (libraryVersion > 1177){
+				retVal = retVal && archive.BeginTag(idTag);
+				retVal = retVal && archive.Process(id);
+				retVal = retVal && archive.EndTag(idTag);
+			}
+			else{
+				retVal = retVal && archive.Process(id);
+			}
+
 			retVal = retVal && vector.Serialize(archive);
+
 			retVal = retVal && archive.EndTag(supportValueTag);
 		}
 	}
@@ -92,8 +108,18 @@ bool CGeneralNumericValue::Serialize(iser::IArchive &archive)
 			imath::CVarVector value;
 
 			retVal = retVal && archive.BeginTag(supportValueTag);
-			retVal = retVal && archive.Process((qint8&)id);
+
+			if (libraryVersion > 1177){
+				retVal = retVal && archive.BeginTag(idTag);
+				retVal = retVal && archive.Process((qint8&)id);
+				retVal = retVal && archive.EndTag(idTag);
+			}
+			else{
+				retVal = retVal && archive.Process((qint8&)id);
+			}
+
 			retVal = retVal && value.Serialize(archive);
+
 			retVal = retVal && archive.EndTag(supportValueTag);
 
 			m_supportMap.insert(id, value);

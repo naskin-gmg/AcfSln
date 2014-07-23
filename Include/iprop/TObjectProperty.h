@@ -139,9 +139,10 @@ QByteArray TObjectProperty<Value>::GetFactoryId() const
 template <typename Value>
 bool TObjectProperty<Value>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valueTag("Value", "Property value");
+	static iser::CArchiveTag valueTag("Value", "Property value", iser::CArchiveTag::TT_GROUP);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
