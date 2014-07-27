@@ -54,7 +54,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				WarningLevel="4"
 				DebugInformationFormat="0"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				DebugInformationFormat="3"
@@ -284,55 +284,55 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CDirectoryItemGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CDirectoryItemGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CDirectoryMonitorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CDirectoryMonitorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CDirectoryMonitorParamsGui.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CDirectoryMonitorParamsGui.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CHotfolderContainerGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderContainerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CHotfolderGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CHotfolderProcessingComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderProcessingComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\moc_CProcessingItemPreviewGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CProcessingItemPreviewGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\qrc_ihotfgui.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\qrc_ihotfgui.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\ui_CDirectoryItemGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CDirectoryItemGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\ui_CDirectoryMonitorParamsGui.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CDirectoryMonitorParamsGui.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\ui_CHotfolderContainerGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CHotfolderContainerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\ui_CHotfolderGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CHotfolderGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\ihotfgui\ui_CProcessingItemPreviewGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CProcessingItemPreviewGuiComp.h"
 				>
 			</File>
 		</Filter>

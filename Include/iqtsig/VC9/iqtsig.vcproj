@@ -54,7 +54,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				RuntimeTypeInfo="true"
 				DebugInformationFormat="0"
 			/>
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				StringPooling="true"
 				DebugInformationFormat="3"
 			/>
@@ -249,35 +249,35 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CPulseParamsGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\moc_CPulseParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CSampleAcquisitionGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\moc_CSampleAcquisitionGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CSamplingParamsGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\moc_CSamplingParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\moc_CTriggerParamsGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\moc_CTriggerParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CPulseParamsGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\ui_CPulseParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CSampleAcquisitionGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\ui_CSampleAcquisitionGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CSamplingParamsGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\ui_CSamplingParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtsig\ui_CTriggerParamsGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtsig\ui_CTriggerParamsGuiComp.h"
 				>
 			</File>
 		</Filter>

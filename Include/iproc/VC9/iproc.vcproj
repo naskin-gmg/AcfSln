@@ -47,7 +47,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -117,7 +117,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

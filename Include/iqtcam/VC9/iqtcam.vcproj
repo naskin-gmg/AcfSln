@@ -54,7 +54,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				RuntimeTypeInfo="true"
 				DebugInformationFormat="0"
 			/>
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				StringPooling="true"
 				DebugInformationFormat="3"
 			/>
@@ -257,51 +257,51 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CBitmapSupplierGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CCameraInfoGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CCameraInfoGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CExposureParamsGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CExposureParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CMultiBitmapSupplierGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CMultiBitmapSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CScaleCalibrationEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CScaleCalibrationEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\moc_CSnapImageGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\moc_CSnapImageGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CBitmapSupplierGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CCameraInfoGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CCameraInfoGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CExposureParamsGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CExposureParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CMultiBitmapSupplierGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CMultiBitmapSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CScaleCalibrationEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CScaleCalibrationEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtcam\ui_CSnapImageGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtcam\ui_CSnapImageGuiComp.h"
 				>
 			</File>
 		</Filter>

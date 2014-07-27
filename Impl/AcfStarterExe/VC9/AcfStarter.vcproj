@@ -54,7 +54,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;../../../Include"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -67,9 +67,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="true"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="2"
 			/>
@@ -131,8 +129,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;../../../Include"
-				RuntimeLibrary="3"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -146,7 +143,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				SubSystem="0"
 			/>
@@ -217,11 +213,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\AcfStarter\moc_CAcfStarter.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\AcfStarter\moc_CAcfStarter.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\AcfStarter\ui_CAcfStarter.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\AcfStarter\ui_CAcfStarter.h"
 				>
 			</File>
 		</Filter>

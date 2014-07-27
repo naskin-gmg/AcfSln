@@ -59,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -141,7 +141,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				PrecompiledHeaderFile=""
 				DebugInformationFormat="4"
@@ -259,11 +259,11 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iprop\moc_CPropertiesEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iprop\moc_CPropertiesEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iprop\ui_CPropertiesEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iprop\ui_CPropertiesEditorComp.h"
 				>
 			</File>
 		</Filter>

@@ -54,7 +54,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -126,7 +126,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)\Include&quot;;&quot;$(ACFSLNDIR)\Include&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				DebugInformationFormat="3"
@@ -197,11 +197,11 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\edgetest\moc_CEdgeLinesTestGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\edgetest\moc_CEdgeLinesTestGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\edgetest\ui_CEdgeLinesTestGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\edgetest\ui_CEdgeLinesTestGuiComp.h"
 				>
 			</File>
 		</Filter>

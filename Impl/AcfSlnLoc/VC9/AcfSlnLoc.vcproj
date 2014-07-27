@@ -38,6 +38,7 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
+				IsGenerated="true"
 			/>
 			<Tool
 				Name="QT Designer Form"
@@ -136,6 +137,7 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
+				IsGenerated="true"
 			/>
 			<Tool
 				Name="QT Designer Form"
@@ -222,7 +224,7 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\AcfSlnLoc\qrc_AcfSlnLoc.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\AcfSlnLoc\qrc_AcfSlnLoc.cpp"
 				>
 			</File>
 		</Filter>
@@ -237,7 +239,7 @@
 					>
 					<Tool
 						Name="QT Resources"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\..\GeneratedFiles\AcfSlLoc\AcfSln_en_US.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_de_DE.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_ru_RU.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_pl_PL.qm"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_en_US.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_de_DE.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_ru_RU.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_pl_PL.qm"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -245,7 +247,7 @@
 					>
 					<Tool
 						Name="QT Resources"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\..\GeneratedFiles\AcfSlLoc\AcfSln_en_US.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_de_DE.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_ru_RU.qm;..\..\GeneratedFiles\AcfSlLoc\AcfSln_pl_PL.qm"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_en_US.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_de_DE.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_ru_RU.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_pl_PL.qm"
 					/>
 				</FileConfiguration>
 			</File>

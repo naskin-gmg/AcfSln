@@ -54,7 +54,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				RuntimeTypeInfo="true"
 				DebugInformationFormat="0"
 			/>
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				StringPooling="true"
 				DebugInformationFormat="3"
 			/>
@@ -213,19 +213,19 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtinsp\moc_CGeneralSupplierGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtinsp\moc_CGeneralSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtinsp\moc_CInspectionTaskGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtinsp\moc_CInspectionTaskGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtinsp\ui_CGeneralSupplierGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtinsp\ui_CGeneralSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtinsp\ui_CInspectionTaskGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtinsp\ui_CInspectionTaskGuiComp.h"
 				>
 			</File>
 		</Filter>

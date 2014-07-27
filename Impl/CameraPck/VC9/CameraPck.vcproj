@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				AdditionalUsingDirectories=""
 			/>
 			<Tool
@@ -99,7 +99,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

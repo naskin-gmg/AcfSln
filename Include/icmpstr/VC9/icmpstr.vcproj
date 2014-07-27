@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -116,7 +116,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -395,107 +395,107 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CAttributeEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CAttributeEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CComponentNoteEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CComponentNoteEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CComponentPromotorDialogComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CComponentPromotorDialogComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CGraphicsConnectorItem.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CMultiAttributeDelegateWidget.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CMultiAttributeDelegateWidget.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CMultiAttributeEditor.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CMultiAttributeEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CPackageOverviewComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CPackageOverviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CQuickHelpGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CQuickHelpGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryElementShape.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CRegistryElementShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryPreviewComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CRegistryPreviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryPropEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CRegistryPropEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CRegistryTreeViewComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CRegistryTreeViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CSceneProviderGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CSceneProviderGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CVisualRegistryEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CVisualRegistryEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\moc_CXpcEditorComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\moc_CXpcEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\qrc_icmpstr.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\qrc_icmpstr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CAttributeEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CAttributeEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CComponentNoteEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CComponentNoteEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CMultiAttributeEditor.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CMultiAttributeEditor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CPackageOverviewComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CPackageOverviewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CQuickHelpGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CQuickHelpGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CRegistryPropEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CRegistryPropEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CRegistryTreeViewComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CRegistryTreeViewComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CSceneProviderGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CSceneProviderGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CVisualRegistryEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CVisualRegistryEditorComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\icmpstr\ui_CXpcEditorComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\icmpstr\ui_CXpcEditorComp.h"
 				>
 			</File>
 		</Filter>

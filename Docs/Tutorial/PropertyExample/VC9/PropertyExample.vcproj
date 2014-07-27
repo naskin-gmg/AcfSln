@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;_DEBUG"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFSLNDIR)/Include&quot;"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="THREAD_SAFE_PDFL;WIN_PLATFORM;PRODUCT=\&quot;HFTLibrary.h\&quot;;WIN_ENV;UNICODE;PI_ACROCOLOR_VERSION=0x00060000;WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
@@ -205,7 +205,7 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value=".\GeneratedFiles\$(ConfigurationName)"
+			Value=".\..\AuxInclude/Qt5/GeneratedFiles\$(ConfigurationName)"
 		/>
 		<Global
 			Name="QtVersion"

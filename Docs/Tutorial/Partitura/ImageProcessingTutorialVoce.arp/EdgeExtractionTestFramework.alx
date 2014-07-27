@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          2934
+          3571
         </Number>
         <Description>
           ACF
@@ -18,82 +29,15 @@
           1
         </Id>
         <Number>
-          920
+          1177
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="6">
-    <Element>
-      <ComponentName>
-        EdgeExtractionTaskGui
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        475
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapTaskGui
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        475
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        EdgeExtractionTask
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Framework
-      </ComponentName>
-      <X>
-        550
-      </X>
-      <X>
-        350
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         SnapTask
@@ -117,6 +61,62 @@
       </X>
       <X>
         350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Framework
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SnapTaskGui
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        EdgeExtractionTaskGui
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        EdgeExtractionTask
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        225
       </X>
       <Note>
         

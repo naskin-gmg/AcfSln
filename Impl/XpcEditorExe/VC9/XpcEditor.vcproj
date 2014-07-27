@@ -43,7 +43,7 @@
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
 				ConfigFile="../../../Config/BaseOnly.xpc"
-				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
+				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -71,7 +71,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../../../Include"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Impl&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 			/>
 			<Tool
@@ -135,7 +135,7 @@
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
 				ConfigFile="../../../Config/BaseOnly.xpc"
-				OutputDir="$(InputDir)/../../GeneratedFiles/$(ProjectName)"
+				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -165,7 +165,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../../../Include"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Impl&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 			/>
 			<Tool
@@ -269,19 +269,19 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\XpcEditor\CXpcEditor.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\XpcEditor\CXpcEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\XpcEditor\CXpcEditor.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\XpcEditor\CXpcEditor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\XpcEditor\qrc_XpcEditor.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\XpcEditor\qrc_XpcEditor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\XpcEditor\XpcEditor.rc"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\XpcEditor\XpcEditor.rc"
 				>
 			</File>
 		</Filter>

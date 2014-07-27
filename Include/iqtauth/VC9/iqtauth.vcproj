@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_LIB;QT_DLL;QT_THREAD_SUPPORT;_DLL"
 				EnableFunctionLevelLinking="false"
 				RuntimeTypeInfo="true"
@@ -131,7 +131,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
-				AdditionalIncludeDirectories="$(ACFDIR)/Include"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_LIB;QT_DLL;QT_THREAD_SUPPORT;QT_ACCESSIBILITY_SUPPORT;QT_TABLET_SUPPORT"
 				SuppressStartupBanner="true"
 			/>
@@ -216,35 +216,35 @@
 			Filter="*.cxx"
 			>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CChangePasswordDialog.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\moc_CChangePasswordDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CLoginBarGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\moc_CLoginBarGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CUserGuiComp.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\moc_CUserGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\moc_CUserManagerDialog.cpp"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\moc_CUserManagerDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CChangePasswordDialog.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\ui_CChangePasswordDialog.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CLoginBarGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\ui_CLoginBarGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CUserGuiComp.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\ui_CUserGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtauth\ui_CUserManagerDialog.h"
+				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtauth\ui_CUserManagerDialog.h"
 				>
 			</File>
 		</Filter>

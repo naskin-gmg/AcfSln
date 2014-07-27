@@ -39,7 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/../AcfSln/include&quot;;&quot;$(ACFDIR)/include&quot;"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -52,7 +52,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib QtGuid4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib Qt5Guid.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 			/>
 			<Tool
@@ -103,7 +103,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR)/../AcfSln/include&quot;;&quot;$(ACFDIR)/include&quot;"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFSLNDIR)/Include&quot;;&quot;$(ACFSLNDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
 				EnableFunctionLevelLinking="true"
 			/>
 			<Tool
@@ -117,7 +117,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib QtGui4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib Qt5Gui.lib"
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
