@@ -7,6 +7,7 @@
 #include "i2d/CAnnulusSegment.h"
 #include "iprm/CParamsSet.h"
 #include "iprm/TParamsPtr.h"
+#include "iprm/IVariableParam.h"
 
 // ACF Solutions includes
 #include "iipr/CCaliperFeature.h"
@@ -40,11 +41,27 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	iprm::TParamsPtr<istd::IChangeable> aoiObjectPtr(paramsPtr, *m_aoiParamIdAttrPtr);
 	if (!aoiObjectPtr.IsValid()){
+		SendErrorMessage(0, "Search region for the circle was not defined");
+
+		return TS_INVALID;
+	}
+
+	const istd::IChangeable* aoiPtr = aoiObjectPtr.GetPtr();
+	const iprm::IVariableParam* variableAoiPtr = dynamic_cast<const iprm::IVariableParam*>(aoiPtr);
+	if (variableAoiPtr != NULL){
+		aoiPtr = variableAoiPtr->GetParameter();
+	}
+
+	if (aoiPtr == NULL){
+		SendErrorMessage(0, "Search region for the circle was not defined");
+
 		return TS_INVALID;
 	}
 
 	iprm::TParamsPtr<iipr::ICircleFinderParams> circleFinderParamsPtr(paramsPtr, *m_circleFinderParamsIdAttrPtr);
 	if (!circleFinderParamsPtr.IsValid()){
+		SendErrorMessage(0, "Circle finder parameters were not set");
+
 		return TS_INVALID;
 	}
 
@@ -57,7 +74,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	i2d::CVector2d center;
 
-	if (!AddAoiToRays(*aoiObjectPtr, extendedParamsSet, image, *circleFinderParamsPtr, inRays, outRays, projectionLine, center)){
+	if (!AddAoiToRays(*aoiPtr, extendedParamsSet, image, *circleFinderParamsPtr, inRays, outRays, projectionLine, center)){
 		return TS_INVALID;
 	}
 

@@ -8,9 +8,8 @@
 #include "i2d/CAnnulus.h"
 #include "i2d/CPolypoint.h"
 #include "i2d/ICalibrationProvider.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
 
+#include "iproc/TSyncProcessorCompBase.h"
 #include "iipr/IImageToFeatureProcessor.h"
 #include "imeas/INumericValueProvider.h"
 #include "iipr/IFeatureToImageMapper.h"
@@ -28,12 +27,10 @@ namespace iipr
 	It uses set of 1D caliper lines to find the position and radius of circle.
 	It takes area of interests (AOI) from parameter set. As AOI can be used annulus, segment of annulus, rectangle and set of segments of annulus.
 */
-class CCircleFindProcessorComp:
-			public icomp::CComponentBase,
-			public iproc::TSyncProcessorWrap<IImageToFeatureProcessor>
+class CCircleFindProcessorComp: public iproc::TSyncProcessorCompBase<IImageToFeatureProcessor>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iproc::TSyncProcessorCompBase<IImageToFeatureProcessor> BaseClass;
 
 	I_BEGIN_COMPONENT(CCircleFindProcessorComp);
 		I_REGISTER_INTERFACE(IImageToFeatureProcessor);
