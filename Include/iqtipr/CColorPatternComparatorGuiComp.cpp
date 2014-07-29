@@ -1,8 +1,9 @@
 #include "iqtipr/CColorPatternComparatorGuiComp.h"
 
-
 // ACF includes
 #include "imeas/IDataSequenceProvider.h"
+#include "iprm/IEnableableParam.h"
+#include "iprm/TParamsPtr.h"
 
 
 namespace iqtipr
@@ -17,9 +18,38 @@ void CColorPatternComparatorGuiComp::on_TestButton_clicked()
 }
 
 
+void CColorPatternComparatorGuiComp::on_TaskEnabledCB_toggled(bool)
+{
+	UpdateModel();
+}
+
+
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
+
+void CColorPatternComparatorGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	TaskEnabledCB->hide();
+}
+
+
+void CColorPatternComparatorGuiComp::UpdateModel()
+{
+	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObjectPtr());
+	if (numericValueProviderPtr != NULL){
+		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
+		if (supplierPtr != NULL){
+			iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(supplierPtr->GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
+			if (checkEnabledPtr.IsValid()){
+				(const_cast<iprm::IEnableableParam*>(checkEnabledPtr.GetPtr()))->SetEnabled(TaskEnabledCB->isChecked());
+			}
+		}
+	}
+}
+
 
 void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
@@ -33,6 +63,19 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObjectPtr());
 	if (numericValueProviderPtr != NULL){
+		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
+		if (supplierPtr != NULL){
+			// if the task is disabled: no check in this case
+			iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(supplierPtr->GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
+			if (checkEnabledPtr.IsValid()){
+				TaskEnabledCB->show();
+				TaskEnabledCB->setChecked(checkEnabledPtr->IsEnabled());
+				if (!checkEnabledPtr->IsEnabled()){
+					return;
+				}
+			}
+		}
+
 		int valuesCount = numericValueProviderPtr->GetValuesCount();
 		if (valuesCount > 0){
 			const imeas::INumericValue& value = numericValueProviderPtr->GetNumericValue(0);
@@ -101,6 +144,9 @@ void CColorPatternComparatorGuiComp::OnSupplierParamsChanged()
 		if (AutoUpdateButton->isChecked()){
 			on_TestButton_clicked();
 		}
+
+		istd::IChangeable::ChangeSet changeSet;
+		UpdateGui(changeSet);
 	}
 }
 
@@ -109,7 +155,7 @@ QWidget* CColorPatternComparatorGuiComp::GetParamsWidget() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	return ParamsFrame;
+	return ParametersFrame;
 }
 
 

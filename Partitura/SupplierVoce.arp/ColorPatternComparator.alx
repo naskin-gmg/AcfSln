@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3196
+          3574
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          1048
+          1156
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -68,13 +68,13 @@
     </Element>
     <Element>
       <ComponentName>
-        HistogramStatisticsProcessor
+        InspectionTask
       </ComponentName>
       <X>
-        600
+        275
       </X>
       <X>
-        750
+        500
       </X>
       <Note>
         
@@ -96,6 +96,20 @@
     </Element>
     <Element>
       <ComponentName>
+        HistogramStatisticsProcessor
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        750
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         ImageHistogramProcessor
       </ComponentName>
       <X>
@@ -108,78 +122,22 @@
         
       </Note>
     </Element>
-    <Element>
-      <ComponentName>
-        InspectionTask
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
   </PositionMap>
   <EmbeddedRegistries count="1">
     <EmbededRegistry>
       <Id>
         ComparatorParams
       </Id>
-      <PositionMap count="6">
+      <PositionMap count="7">
         <Element>
           <ComponentName>
-            PatternComparatorParams
+            NumericConstraints
           </ComponentName>
           <X>
-            700
+            1025
           </X>
           <X>
-            375
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
-            Region
-          </ComponentName>
-          <X>
-            425
-          </X>
-          <X>
-            500
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
-            Calibration2dProxy
-          </ComponentName>
-          <X>
-            425
-          </X>
-          <X>
-            600
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
-            PatternController
-          </ComponentName>
-          <X>
-            200
-          </X>
-          <X>
-            375
+            475
           </X>
           <Note>
             
@@ -201,13 +159,69 @@
         </Element>
         <Element>
           <ComponentName>
-            NumericConstraints
+            PatternComparatorParams
           </ComponentName>
           <X>
-            1025
+            700
           </X>
           <X>
-            475
+            375
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            CheckEnabled
+          </ComponentName>
+          <X>
+            725
+          </X>
+          <X>
+            500
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            PatternController
+          </ComponentName>
+          <X>
+            200
+          </X>
+          <X>
+            375
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            Calibration2dProxy
+          </ComponentName>
+          <X>
+            425
+          </X>
+          <X>
+            600
+          </X>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            Region
+          </ComponentName>
+          <X>
+            425
+          </X>
+          <X>
+            500
           </X>
           <Note>
             

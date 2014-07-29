@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "i2d/CDirection2d.h"
+#include "iprm/IEnableableParam.h"
 #include "iprm/TParamsPtr.h"
 #include "icmm/CVarColor.h"
 #include "icmm/CRgbToHsvTranformation.h"
@@ -24,6 +25,7 @@ CColorPatternComparatorComp::CColorPatternComparatorComp()
 	:m_isColorPatternMatched(false)
 {
 }
+
 
 // reimplemented (imeas::INumericValueProvider)
 
@@ -95,10 +97,10 @@ int CColorPatternComparatorComp::GetInformationId() const
 QString CColorPatternComparatorComp::GetInformationDescription() const
 {
 	if (m_isColorPatternMatched){
-		return QObject::tr("Color Check OK");
+		return QObject::tr("Color Check Successful");
 	}
 	
-	return QObject::tr("Color Check NOT OK");
+	return QObject::tr("Color Check Failed");
 }
 
 
@@ -123,6 +125,24 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	result.SetValues(imath::CVarVector());
 
 	m_resultTimeStamp = QDateTime::currentDateTime();
+
+	// if the task is disabled: no check in this case
+	iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
+	if (checkEnabledPtr.IsValid()){
+		if (!checkEnabledPtr->IsEnabled()){
+			m_isColorPatternMatched = true;
+
+			ilog::CMessage* message = new ilog::CMessage(
+				IC_INFO,
+				MI_SUPPLIER_RESULTS_STATUS,
+				GetInformationDescription(),
+				GetDiagnosticName());
+
+			AddMessage(message);	
+
+			return WS_OK;
+		}
+	}
 
 	if (!m_workingPatternProviderCompPtr.IsValid() || !m_teachedPatternProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'WorkingPatternProvider' or 'TeachedPatternProvider' component references are not set");
