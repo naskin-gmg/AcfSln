@@ -16,6 +16,12 @@
 namespace ifileproc
 {
 
+
+/**
+	Component for creating single file with results of processing single input file or all files in some directory.
+	It needs some input object storing current processed file path and supplier chain based on this path.
+	The results will be stored in single serialization process.
+*/
 class CProcessingResultsReviewComp:
 			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileConversion
@@ -55,14 +61,18 @@ private:
 		*/
 		ProcessSerializer(
 					const CProcessingResultsReviewComp* parentPtr,
-					const QString& path);
+					const QString& path,
+					ibase::IProgressManager* progressManagerPtr);
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
 
+		bool isCanceled;
+
 	private:
 		const CProcessingResultsReviewComp& m_parent;
 		QString m_path;
+		ibase::IProgressManager* m_progressManagerPtr;
 	};
 
 	I_REF(ifile::IFileNameParam, m_inputPathCompPtr);

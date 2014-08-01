@@ -34,7 +34,7 @@ int CProcessingResultsReviewComp::ConvertFiles(
 			const QString& inputPath,
 			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsPtr*/,
-			ibase::IProgressManager* /*progressManagerPtr*/) const
+			ibase::IProgressManager* progressManagerPtr) const
 {
 	if (		!m_currentProcessedFilePathCompPtr.IsValid() ||
 				!m_outputSupplierCompPtr.IsValid() ||
@@ -53,10 +53,10 @@ int CProcessingResultsReviewComp::ConvertFiles(
 		SendVerboseMessage(QObject::tr("Processing input '%1' to output '%2'").arg(inputPath).arg(outputPath));
 	}
 
-	ProcessSerializer processSerializer(this, inputPath);
+	ProcessSerializer processSerializer(this, inputPath, progressManagerPtr);
 
-	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath) == ifile::IFilePersistence::OS_OK){
-		return iproc::IProcessor::TS_OK;
+	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath, progressManagerPtr) == ifile::IFilePersistence::OS_OK){
+		return processSerializer.isCanceled? iproc::IProcessor::TS_CANCELED: iproc::IProcessor::TS_OK;
 	}
 
 	return iproc::IProcessor::TS_INVALID;
@@ -109,11 +109,15 @@ bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, is
 
 CProcessingResultsReviewComp::ProcessSerializer::ProcessSerializer(
 			const CProcessingResultsReviewComp* parentPtr,
-			const QString& path)
+			const QString& path,
+			ibase::IProgressManager* progressManagerPtr)
 :	m_parent(*parentPtr),
-	m_path(path)
+	m_path(path),
+	m_progressManagerPtr(progressManagerPtr)
 {
 	Q_ASSERT(parentPtr != NULL);
+
+	isCanceled = false;
 }
 
 
@@ -182,21 +186,45 @@ bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& 
 
 		int count = fileList.count();
 
+		int progressSessionId = -1;
+		if (m_progressManagerPtr != NULL){
+			progressSessionId = m_progressManagerPtr->BeginProgressSession("FileProcessing", QObject::tr("Processing files"), true);
+		}
+
 		retVal = archive.BeginMultiTag(processedFilesTag, fileTag, count);
 
+		int progressIndex = 0;
 		for(		QStringList::const_iterator iter = fileList.constBegin();
 					iter != fileList.constEnd();
 					++iter){
+			if (progressSessionId >= 0){
+				Q_ASSERT(m_progressManagerPtr != NULL);
+
+				m_progressManagerPtr->OnProgress(progressSessionId, progressIndex++ / count + 0.1);
+
+				if (m_progressManagerPtr->IsCanceled(progressSessionId)){
+					isCanceled = true;
+
+					break;
+				}
+			}
+
 			QString filePath = dir.filePath(*iter);
 
 			if (!retVal){
-				return false;
+				break;
 			}
 
 			retVal = retVal && const_cast<CProcessingResultsReviewComp&>(m_parent).ProcessSingleFile(filePath, archive);
 		}
 
 		retVal = retVal && archive.EndTag(processedFilesTag);
+
+		if (progressSessionId >= 0){
+			Q_ASSERT(m_progressManagerPtr != NULL);
+
+			m_progressManagerPtr->EndProgressSession(progressSessionId);
+		}
 
 		return retVal;		
 	}
