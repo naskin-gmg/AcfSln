@@ -36,7 +36,7 @@ namespace icmpstr
 {
 
 
-class CItemDelegate: public QItemDelegate
+class CPackageItemDelegate: public QItemDelegate
 {
 public:
 	typedef QItemDelegate BaseClass;
@@ -46,7 +46,7 @@ public:
 		SIDE_OFFSET = 4
 	};
 
-	CItemDelegate()
+	CPackageItemDelegate()
 	{
 		m_componentNameFont = qApp->font();
 		m_componentNameFont.setPointSize(m_componentNameFont.pointSize() + 2);
@@ -1034,7 +1034,7 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	// set up the tree view:
 	PackagesList->setColumnCount(1);
-	PackagesList->setItemDelegate(new CItemDelegate());
+	PackagesList->setItemDelegate(new CPackageItemDelegate());
 
 #if QT_VERSION < 0x050000
 	PackagesList->header()->setResizeMode(0, QHeaderView::Stretch);

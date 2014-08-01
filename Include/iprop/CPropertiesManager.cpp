@@ -132,23 +132,23 @@ void CPropertiesManager::InsertProperty(
 }
 
 
-static iser::CArchiveTag propertiesTag("Properties", "List of object properties", iser::CArchiveTag::TT_MULTIPLE);
-static iser::CArchiveTag propertyTag("Property", "Object property", iser::CArchiveTag::TT_GROUP, &propertiesTag);
-static iser::CArchiveTag propertyTypeIdTag("PropertyTypeId", "ID of the property object", iser::CArchiveTag::TT_LEAF, &propertyTag);
-static iser::CArchiveTag propertyIdTag("PropertyId", "Name of the property object", iser::CArchiveTag::TT_LEAF, &propertyTag);
-static iser::CArchiveTag propertyFlagsTag("PropertyFlags", "Property flags", iser::CArchiveTag::TT_LEAF, &propertyTag);
-static iser::CArchiveTag propertyDescriptionTag("PropertyDescription", "Property description", iser::CArchiveTag::TT_LEAF, &propertyTag);
-static iser::CArchiveTag propertyObjectTag("PropertyObject", "Property object", iser::CArchiveTag::TT_GROUP, &propertyTag);
+static iser::CArchiveTag s_propertiesTag("Properties", "List of object properties", iser::CArchiveTag::TT_MULTIPLE);
+static iser::CArchiveTag s_propertyTag("Property", "Object property", iser::CArchiveTag::TT_GROUP, &s_propertiesTag);
+static iser::CArchiveTag s_propertyTypeIdTag("PropertyTypeId", "ID of the property object", iser::CArchiveTag::TT_LEAF, &s_propertyTag);
+static iser::CArchiveTag s_propertyIdTag("PropertyId", "Name of the property object", iser::CArchiveTag::TT_LEAF, &s_propertyTag);
+static iser::CArchiveTag s_propertyFlagsTag("PropertyFlags", "Property flags", iser::CArchiveTag::TT_LEAF, &s_propertyTag);
+static iser::CArchiveTag s_propertyDescriptionTag("PropertyDescription", "Property description", iser::CArchiveTag::TT_LEAF, &s_propertyTag);
+static iser::CArchiveTag s_propertyObjectTag("PropertyObject", "Property object", iser::CArchiveTag::TT_GROUP, &s_propertyTag);
 
 // reimplemented (iser::ISerializable)
 
 bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {
 	if (archive.IsStoring()){
-		return WriteProperties(archive, propertiesTag, propertyTag);
+		return WriteProperties(archive, s_propertiesTag, s_propertyTag);
 	}
 
-	return ReadProperties(archive, propertiesTag, propertyTag);
+	return ReadProperties(archive, s_propertiesTag, s_propertyTag);
 }
 
 
@@ -200,25 +200,25 @@ bool CPropertiesManager::ReadProperties(
 		int propertyFlags = 0;
 		QByteArray propertyDescription;
 
-		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
+		retVal = retVal && archive.BeginTag(s_propertyTypeIdTag);
 		retVal = retVal && archive.Process(propertyTypeId);
-		retVal = retVal && archive.EndTag(propertyTypeIdTag);
+		retVal = retVal && archive.EndTag(s_propertyTypeIdTag);
 
-		retVal = retVal && archive.BeginTag(propertyIdTag);
+		retVal = retVal && archive.BeginTag(s_propertyIdTag);
 		retVal = retVal && archive.Process(propertyId);
-		retVal = retVal && archive.EndTag(propertyIdTag);
+		retVal = retVal && archive.EndTag(s_propertyIdTag);
 
 		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 
 		quint32 versionNumber = 0;
 		if (!versionInfo.GetVersionNumber(1, versionNumber) || (versionNumber > 931)){
-			retVal = retVal && archive.BeginTag(propertyFlagsTag);
+			retVal = retVal && archive.BeginTag(s_propertyFlagsTag);
 			retVal = retVal && archive.Process(propertyFlags);
-			retVal = retVal && archive.EndTag(propertyFlagsTag);
+			retVal = retVal && archive.EndTag(s_propertyFlagsTag);
 
-			retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+			retVal = retVal && archive.BeginTag(s_propertyDescriptionTag);
 			retVal = retVal && archive.Process(propertyDescription);
-			retVal = retVal && archive.EndTag(propertyDescriptionTag);
+			retVal = retVal && archive.EndTag(s_propertyDescriptionTag);
 		}
 
 		if (retVal){
@@ -280,12 +280,12 @@ bool CPropertiesManager::ReadProperties(
 			}
 		
 			if (versionNumber > 931){
-				retVal = retVal && archive.BeginTag(propertyObjectTag);
+				retVal = retVal && archive.BeginTag(s_propertyObjectTag);
 			}
 			retVal = retVal && propertyPtr->Serialize(archive);
 
 			if (versionNumber > 931){
-				retVal = retVal && archive.EndTag(propertyObjectTag);
+				retVal = retVal && archive.EndTag(s_propertyObjectTag);
 			}
 
 			if (isToSerialize){
@@ -341,30 +341,30 @@ bool CPropertiesManager::WriteProperties(
 
 		retVal = retVal && archive.BeginTag(propertyTag);
 
-		retVal = retVal && archive.BeginTag(propertyTypeIdTag);
+		retVal = retVal && archive.BeginTag(s_propertyTypeIdTag);
 		retVal = retVal && archive.Process(propertyTypeId);
-		retVal = retVal && archive.EndTag(propertyTypeIdTag);
+		retVal = retVal && archive.EndTag(s_propertyTypeIdTag);
 
-		retVal = retVal && archive.BeginTag(propertyIdTag);
+		retVal = retVal && archive.BeginTag(s_propertyIdTag);
 		retVal = retVal && archive.Process(propertyId);
-		retVal = retVal && archive.EndTag(propertyIdTag);
+		retVal = retVal && archive.EndTag(s_propertyIdTag);
 
 		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 
 		quint32 versionNumber = 0;
 		if (!versionInfo.GetVersionNumber(1, versionNumber) || (versionNumber > 931)){
-			retVal = retVal && archive.BeginTag(propertyFlagsTag);
+			retVal = retVal && archive.BeginTag(s_propertyFlagsTag);
 			retVal = retVal && archive.Process(propertyFlags);
-			retVal = retVal && archive.EndTag(propertyFlagsTag);
+			retVal = retVal && archive.EndTag(s_propertyFlagsTag);
 
-			retVal = retVal && archive.BeginTag(propertyDescriptionTag);
+			retVal = retVal && archive.BeginTag(s_propertyDescriptionTag);
 			retVal = retVal && archive.Process(propertyDescription);
-			retVal = retVal && archive.EndTag(propertyDescriptionTag);
+			retVal = retVal && archive.EndTag(s_propertyDescriptionTag);
 		}
 
-		retVal = retVal && archive.BeginTag(propertyObjectTag);
+		retVal = retVal && archive.BeginTag(s_propertyObjectTag);
 		retVal = retVal && objectPtr->Serialize(archive);
-		retVal = retVal && archive.EndTag(propertyObjectTag);
+		retVal = retVal && archive.EndTag(s_propertyObjectTag);
 
 		retVal = retVal && archive.EndTag(propertyTag);
 	}

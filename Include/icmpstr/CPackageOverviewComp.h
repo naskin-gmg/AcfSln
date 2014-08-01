@@ -228,7 +228,7 @@ private:
 	bool m_startDrag;
 	QPoint m_starDragPosition;
 
-	friend class CItemDelegate;
+	friend class CPackageItemDelegate;
 };
 
 

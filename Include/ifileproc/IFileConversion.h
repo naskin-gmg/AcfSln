@@ -43,8 +43,7 @@ public:
 		\param outputPath	Path to the output file or directory.
 		\param paramsPtr	File conversion parameters
 		\param progressManagerPtr	Progress manager used for getting information about file conversion progress state and canceling.
-
-		\return Status of conversion operation. \sa iproc::IProcessor::ProcessorState
+		\return Status of conversion operation. \sa iproc::IProcessor::TaskState
 	*/
 	virtual int ConvertFiles(
 				const QString& inputPath,

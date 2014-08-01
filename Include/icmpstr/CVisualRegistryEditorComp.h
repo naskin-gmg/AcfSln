@@ -286,13 +286,6 @@ private:
 
 	istd::TPointerVector<QToolButton> m_embeddedButtons;
 	QSpacerItem* m_buttonSpacerPtr;
-
-	// static attributes
-	static iser::CArchiveTag s_elementsListTag;
-	static iser::CArchiveTag s_elementTag;
-	static iser::CArchiveTag s_elementIdTag;
-	static iser::CArchiveTag s_elementAddressTag;
-	static iser::CArchiveTag s_elementCenterTag;
 };
 
 
