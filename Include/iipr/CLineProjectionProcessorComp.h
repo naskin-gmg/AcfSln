@@ -2,11 +2,14 @@
 #define iipr_CLineProjectionProcessorComp_included
 
 
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
 
+// ACF includes
+#include "icomp/CComponentBase.h"
+
+// ACF-Solutions includes
+#include "iproc/TSyncProcessorCompBase.h"
 #include "iipr/ILineProjectionProcessor.h"
 #include "iipr/IProjectionConstraints.h"
 #include "iipr/IFeatureToImageMapper.h"
@@ -18,18 +21,14 @@ namespace iipr
 
 
 class CLineProjectionProcessorComp:
-			public icomp::CComponentBase,
-			public iproc::TSyncProcessorWrap<ILineProjectionProcessor>,
+			public iproc::TSyncProcessorCompBase<ILineProjectionProcessor>,
 			virtual public IFeatureToImageMapper,
 			virtual public IProjectionConstraints
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-	typedef iproc::TSyncProcessorWrap<ILineProjectionProcessor> BaseClass2;
+	typedef iproc::TSyncProcessorCompBase<ILineProjectionProcessor> BaseClass;
 
 	I_BEGIN_COMPONENT(CLineProjectionProcessorComp);
-		I_REGISTER_INTERFACE(iproc::IProcessor);
-		I_REGISTER_INTERFACE(ILineProjectionProcessor);
 		I_REGISTER_INTERFACE(IProjectionConstraints);
 		I_REGISTER_INTERFACE(IFeatureToImageMapper);
 		I_ASSIGN(m_lineParamIdAttrPtr, "LineParamId", "ID of line parameter in parameter set", true, "LineParam");

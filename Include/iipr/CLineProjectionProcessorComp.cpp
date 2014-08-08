@@ -219,6 +219,8 @@ int CLineProjectionProcessorComp::DoProcessing(
 
 	iprm::TParamsPtr<i2d::CLine2d> linePtr(paramsPtr, *m_lineParamIdAttrPtr);
 	if (!linePtr.IsValid()){
+		SendErrorMessage(0, QString("Projection line parameter (Parameter ID = %1) is not defined inside of parameter set").arg((*m_lineParamIdAttrPtr).constData()));
+
 		return TS_INVALID;
 	}
 

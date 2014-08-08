@@ -93,7 +93,7 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 		int count = providerPtr->GetSequencesCount();
 
 		if (count != ProjectionSlider->maximum()){
-			ProjectionSlider->setMaximum(count - 1);
+			ProjectionSlider->setMaximum(count - 1);	
 			ProjectionSpin->setMaximum(count - 1);
 		}
 

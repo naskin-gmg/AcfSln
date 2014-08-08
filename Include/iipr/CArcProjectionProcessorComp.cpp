@@ -114,11 +114,10 @@ bool CArcProjectionProcessorComp::GetImagePosition(
 		iprm::TParamsPtr<i2d::CArc> arcPtr(paramsPtr, *m_arcParamIdAttrPtr);
 		double position;
 		if (		(arcPtr.IsValid()) &&
-			m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
-				// TODO: correct exactness of this mapping: DoAutosizeProjection return rough line exactness!
-				result = arcPtr->GetPositionFromAlpha(position);
+					m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
+			result = arcPtr->GetPositionFromAlpha(position);
 
-				return true;
+			return true;
 		}
 	}
 

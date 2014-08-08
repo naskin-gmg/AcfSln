@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          328449
+          3516
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
       <Version>
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3516
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -170,7 +170,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               AoiParamId
@@ -226,6 +226,22 @@
               <Value>
                 Caliper
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

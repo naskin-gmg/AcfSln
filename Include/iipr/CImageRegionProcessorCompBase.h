@@ -55,8 +55,10 @@ protected:
 				const i2d::IObject2d* aoiPtr,
 				istd::IChangeable* outputPtr) const = 0;
 
-private:
+protected:
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+
+private:
 	I_ATTR(bool, m_allowEmptyRegionAttrPtr);
 };
 

@@ -96,11 +96,11 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 		Rays& usedRays = (inRays.size() >= outRays.size())? inRays: outRays;
 
 		bool isOk = CalculateCircle(
-								center,
-								circleFinderParamsPtr->IsOutlierEliminationEnabled(),
-								circleFinderParamsPtr->GetMinOutlierDistance(),
-								usedRays,
-								*featurePtr);
+					center,
+					circleFinderParamsPtr->IsOutlierEliminationEnabled(),
+					circleFinderParamsPtr->GetMinOutlierDistance(),
+					usedRays,
+					*featurePtr);
 
 		AddIntermediateResults(usedRays);
 
@@ -539,7 +539,6 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		}
 	}
 }
-
 
 
 } // namespace iipr
