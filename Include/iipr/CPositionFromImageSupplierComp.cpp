@@ -1,3 +1,25 @@
+/********************************************************************************
+**
+**	Copyright (c) 2007-2014 Witold Gantzke & Kirill Lepskiy
+**
+**	This file is part of the ACF-Solutions Toolkit.
+**
+**	This file may be used under the terms of the GNU Lesser
+**	General Public License version 2.1 as published by the Free Software
+**	Foundation and appearing in the file LicenseLGPL.txt included in the
+**	packaging of this file.  Please review the following information to
+**	ensure the GNU Lesser General Public License version 2.1 requirements
+**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+**	If you are unsure which license is appropriate for your use, please
+**	contact us at info@imagingtools.de.
+**
+** 	See http://www.ilena.org, write info@imagingtools.de or contact
+**	by Skype to ACF_infoline for further information about the ACF-Solutions.
+**
+********************************************************************************/
+
+
 #include "iipr/CPositionFromImageSupplierComp.h"
 
 
@@ -87,7 +109,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				return WS_ERROR;
 			}
 
-			const i2d::CPosition2d* positionPtr = dynamic_cast<const i2d::CPosition2d*>(&consumer.GetNumericValue(0));
+			const i2d::CObject2dBase* positionPtr = dynamic_cast<const i2d::CObject2dBase*>(&consumer.GetNumericValue(0));
 			if (positionPtr == NULL){
 				return WS_ERROR;
 			}
@@ -95,6 +117,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			imath::CVarVector resultVector;
 
 			const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
+			const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(positionPtr);
 			if (circlePtr != NULL){
 				i2d::CCircle transformedCircle;
 				if (!transformedCircle.CopyFrom(*circlePtr, istd::IChangeable::CM_CONVERT)){
@@ -105,6 +128,18 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				resultVector[0] = transformedCircle.GetPosition().GetX();
 				resultVector[1] = transformedCircle.GetPosition().GetY();
 				resultVector[2] = transformedCircle.GetRadius();
+			}
+			else if (linePtr != NULL){
+				i2d::CLine2d transformedLine;
+				if (!transformedLine.CopyFrom(*linePtr, istd::IChangeable::CM_CONVERT)){
+					return WS_ERROR;
+				}
+
+				resultVector.SetElementsCount(4);
+				resultVector[0] = transformedLine.GetPoint1Ref().GetX();
+				resultVector[1] = transformedLine.GetPoint1Ref().GetY();
+				resultVector[2] = transformedLine.GetPoint2Ref().GetX();
+				resultVector[3] = transformedLine.GetPoint2Ref().GetY();
 			}
 			else{
 				i2d::CPosition2d transformedPosition;
@@ -172,6 +207,9 @@ bool CPositionFromImageSupplierComp::Position::IsValueTypeSupported(ValueTypeId 
 
 		case VTI_RADIUS:
 			return (m_values.GetElementsCount() >= 3);
+
+		case VTI_2D_LINE:
+			return (m_values.GetElementsCount() >= 4);
 		default:
 			break;
 	}
@@ -194,6 +232,11 @@ imath::CVarVector CPositionFromImageSupplierComp::Position::GetComponentValue(Va
 		case VTI_RADIUS:
 			if (m_values.GetElementsCount() >= 3){
 				return imath::CVarVector(1, m_values.GetElement(2));
+			}
+
+		case VTI_2D_LINE:
+			if (m_values.GetElementsCount() >= 4){
+				return m_values;
 			}
 		default:
 			break;	

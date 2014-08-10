@@ -16,6 +16,8 @@
 #include "imeas/CSamplesInfo.h"
 #include "imeas/INumericValue.h"
 
+#include "iipr/TImagePixelInterpolator.h"
+
 
 namespace iipr
 {
@@ -35,7 +37,7 @@ bool CArcProjectionProcessorComp::DoProjection(
 
 	double angleWidth = bitmapArc.GetEndAngle() - bitmapArc.GetStartAngle();
 
-	int arcLength = M_PI * bitmapArc.GetRadius() * (angleWidth / 180);
+	int arcLength = qCeil(M_PI * bitmapArc.GetRadius() * (angleWidth / 180));
 
 	if (arcLength == 0) {
 		return false;
@@ -51,52 +53,25 @@ bool CArcProjectionProcessorComp::DoProjection(
 	double angleStart = bitmapArc.GetStartAngle();
 	double radius = bitmapArc.GetRadius();
 	i2d::CVector2d center = bitmapArc.GetPosition();
+	i2d::CVector2d rotationPoint = center + i2d::CVector2d(radius, 0);
 
 	double angle;
 	int i;
 
-	for (angle = angleStart, i = 0; angle < (angleStart + angleWidth) && (i < arcLength); angle += angleDiff, i++) {
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(bitmap, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
+
+	for (angle = angleStart, i = 0; i < arcLength; angle += angleDiff, i++) {
 		i2d::CVector2d line(0,0);
-		line.Init(imath::GetRadianFromDegree(-angle), radius);
+		line.Init(imath::GetRadianFromDegree(angle), radius);
+		line.SetY(-line.GetY());
 		line += center;
 
 		double x = line.GetX();
 		double y = line.GetY();
 
-		Q_ASSERT(x > 0);
-		Q_ASSERT(y > 0);
+		quint8 pixelValue = pixelInterpolator.GetInterpolatedValue(x, y, 0);
 
-		double dummy;
-		double deltaX = modf(x, &dummy);
-		double deltaXNeg = 1-deltaX;
-		double deltaY = modf(y, &dummy);
-		double deltaYNeg = 1-deltaY;
-
-		quint8 grayAll = 0, grayCenter, grayVertical = 0, grayHorizontal = 0, grayScew = 0;
-		grayCenter = ((quint8*)bitmap.GetLinePtr((int)y))[(int)x];
-
-		if (deltaX == 0 && deltaY == 0) {
-			grayAll = grayCenter;
-		}
-		else if(deltaX == 0){
-			grayHorizontal = ((quint8*)bitmap.GetLinePtr((int)y+(deltaY > 0 ? 1 : -1)))[(int)x];
-
-			grayAll = (grayCenter * deltaY) + (grayHorizontal * deltaYNeg);
-		}
-		else if(deltaY == 0){
-			grayVertical = ((quint8*)bitmap.GetLinePtr((int)y))[(int)x+(deltaX > 0 ? 1 : -1)];
-
-			grayAll = (grayCenter * deltaX) + (grayVertical * deltaXNeg);
-		}
-		else{
-			grayVertical = ((quint8*)bitmap.GetLinePtr((int)y))[(int)x+(deltaX > 0 ? 1 : -1)];
-			grayHorizontal = ((quint8*)bitmap.GetLinePtr((int)y+(deltaY > 0 ? 1 : -1)))[(int)x];
-			grayScew = ((quint8*)bitmap.GetLinePtr((int)y+(deltaY > 0 ? 1 : -1)))[(int)x+(deltaX > 0 ? 1 : -1)];
-
-			grayAll = (grayCenter * deltaX * deltaY) + (grayVertical * deltaXNeg * deltaY) + (grayHorizontal * deltaX * deltaYNeg) + (grayScew * deltaXNeg * deltaYNeg);
-		}
-
-		results.SetSample(i, 0, grayAll);
+		results.SetSample(i, 0, pixelValue / 255.0);
 	}
 
 	return true;
@@ -114,10 +89,11 @@ bool CArcProjectionProcessorComp::GetImagePosition(
 		iprm::TParamsPtr<i2d::CArc> arcPtr(paramsPtr, *m_arcParamIdAttrPtr);
 		double position;
 		if (		(arcPtr.IsValid()) &&
-					m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
-			result = arcPtr->GetPositionFromAlpha(position);
+			m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
+				// TODO: correct exactness of this mapping: DoAutosizeProjection return rough line exactness!
+				result = arcPtr->GetPositionFromAlpha(position);
 
-			return true;
+				return true;
 		}
 	}
 

@@ -56,27 +56,42 @@ void CValueSupplierGuiComp::OnSupplierParamsChanged()
 
 void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	m_foundModel.DetachAllObservers();
+	m_foundCircleModel.DetachAllObservers();
+	m_foundLineModel.DetachAllObservers();
 
-	iview::CCircleShape* circleShapePtr = new iview::CCircleShape();
-	if (circleShapePtr != NULL){
-		circleShapePtr->SetVisible(false);
-		circleShapePtr->SetEditablePosition(false);
-		circleShapePtr->SetEditableRadius(false);
+	if (m_isLineActive) {
+		iview::CLineShape* lineShapePtr = new iview::CLineShape();
+		if (lineShapePtr != NULL) {
+			lineShapePtr->SetVisible(false);
+			lineShapePtr->SetEditablePosition(false);
 
-		m_foundModel.AttachObserver(circleShapePtr);
+			m_foundLineModel.AttachObserver(lineShapePtr);
 
-		result.PushBack(circleShapePtr);
+			result.PushBack(lineShapePtr);
+		}
 	}
 
-	iview::CPinShape* posShapePtr = new iview::CPinShape();
-	if (posShapePtr != NULL){
-		posShapePtr->SetVisible(false);
-		posShapePtr->SetEditablePosition(false);
+	if (m_isCircleActive) {
+		iview::CCircleShape* circleShapePtr = new iview::CCircleShape();
+		if (circleShapePtr != NULL){
+			circleShapePtr->SetVisible(false);
+			circleShapePtr->SetEditablePosition(false);
+			circleShapePtr->SetEditableRadius(false);
 
-		m_foundModel.AttachObserver(posShapePtr);
+			m_foundCircleModel.AttachObserver(circleShapePtr);
 
-		result.PushBack(posShapePtr);
+			result.PushBack(circleShapePtr);
+		}
+
+		iview::CPinShape* posShapePtr = new iview::CPinShape();
+		if (posShapePtr != NULL){
+			posShapePtr->SetVisible(false);
+			posShapePtr->SetEditablePosition(false);
+
+			m_foundCircleModel.AttachObserver(posShapePtr);
+
+			result.PushBack(posShapePtr);
+		}
 	}
 }
 
@@ -101,6 +116,7 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 
 	imath::CVarVector position;
 	imath::CVarVector radius;
+	imath::CVarVector line;
 
 	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
@@ -110,6 +126,7 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 
 			position = resultValue.GetComponentValue(imeas::INumericValue::VTI_POSITION);
 			radius = resultValue.GetComponentValue(imeas::INumericValue::VTI_RADIUS);
+			line = resultValue.GetComponentValue(imeas::INumericValue::VTI_2D_LINE);
 		}
 
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(supplierPtr->GetModelParametersSet());
@@ -123,33 +140,62 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 	}
 
 	bool isResultVisible = false;
-	if (position.GetElementsCount() >= 2){
-		m_foundModel.SetPosition(i2d::CVector2d(position[0], position[1]));
+	m_isCircleActive = false;
+	m_isLineActive = false;
+
+	if (line.GetElementsCount() >= 4){
+		m_isLineActive = true;
+		m_foundCircleModel.ResetData();
+		m_foundLineModel.SetPoint1(i2d::CVector2d(line.GetElement(0),line.GetElement(1)));
+		m_foundLineModel.SetPoint2(i2d::CVector2d(line.GetElement(2),line.GetElement(3)));
 
 		isResultVisible = true;
 
 		if (IsGuiCreated()){
-			PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+			PositionLabel->setText(tr("(%1, %2)(%3, %4)").arg(line.GetElement(0)).arg(line.GetElement(1)).arg(line.GetElement(2)).arg(line.GetElement(3)));
 		}
 	}
 	else{
-		m_foundModel.SetPosition(i2d::CVector2d(0, 0));
+		m_isCircleActive = true;
+		m_foundLineModel.ResetData();
+		if (position.GetElementsCount() >= 2){
+			m_foundCircleModel.SetPosition(i2d::CVector2d(position[0], position[1]));
 
-		if (IsGuiCreated()){
-			PositionLabel->setText(tr("No position"));
+			isResultVisible = true;
+
+			if (IsGuiCreated()){
+				PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
+			}
+		}
+		else{
+			m_foundCircleModel.SetPosition(i2d::CVector2d(0, 0));
+
+			if (IsGuiCreated()){
+				PositionLabel->setText(tr("No position"));
+			}
+		}
+
+		if (radius.GetElementsCount() >= 1){
+			m_foundCircleModel.SetRadius(radius[0]);
+		}
+		else{
+			m_foundCircleModel.SetRadius(0);
 		}
 	}
 
-	if (radius.GetElementsCount() >= 1){
-		m_foundModel.SetRadius(radius[0]);
-	}
-	else{
-		m_foundModel.SetRadius(0);
+	FoundCircleModel::Observers circleObservers = m_foundCircleModel.GetObservers();
+	for (		FoundCircleModel::Observers::ConstIterator observerIter = circleObservers.constBegin();
+				observerIter != circleObservers.constEnd();
+				++observerIter){
+		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(*observerIter);
+		if (shapePtr != NULL){
+			shapePtr->SetVisible(isResultVisible);
+		}
 	}
 
-	FoundModel::Observers observers = m_foundModel.GetObservers();
-	for (		FoundModel::Observers::ConstIterator observerIter = observers.constBegin();
-				observerIter != observers.constEnd();
+	FoundLineModel::Observers lineObservers = m_foundLineModel.GetObservers();
+	for (		FoundLineModel::Observers::ConstIterator observerIter = lineObservers.constBegin();
+				observerIter != lineObservers.constEnd();
 				++observerIter){
 		iview::CShapeBase* shapePtr = dynamic_cast<iview::CShapeBase*>(*observerIter);
 		if (shapePtr != NULL){

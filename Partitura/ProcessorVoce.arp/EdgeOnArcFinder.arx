@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3493
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1140
+          1166
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3557
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -38,6 +38,62 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="6">
+    <Element>
+      <Id>
+        ArcProjection
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        ArcProjectionProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ArcParamId
+            </Id>
+            <Type>
+              Id
+            </Type>
+            <ExportId>
+              ArcParamId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FeatureMapper
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Caliper
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         Caliper
@@ -133,7 +189,7 @@
               </IsEnabled>
               <Values count="3">
                 <Value>
-                  LineProjection
+                  ArcProjection
                 </Value>
                 <Value>
                   DerivativeProcessor
@@ -207,62 +263,6 @@
     </Element>
     <Element>
       <Id>
-        LineProjection
-      </Id>
-      <PackageId>
-        IprPck
-      </PackageId>
-      <ComponentId>
-        ArcProjectionProcessor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ArcParamId
-            </Id>
-            <Type>
-              Id
-            </Type>
-            <ExportId>
-              ArcParamId
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FeatureMapper
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Caliper
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         Projection
       </Id>
       <PackageId>
@@ -285,7 +285,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="3">
+    <Interface>
+      <InterfaceId>
+        iipr::IFeatureToImageMapper
+      </InterfaceId>
+      <ComponentId>
+        ArcProjection
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         imeas::INumericConstraints

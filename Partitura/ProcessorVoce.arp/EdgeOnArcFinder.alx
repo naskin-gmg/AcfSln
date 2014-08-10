@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3493
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1140
+          1166
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3557
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -40,7 +40,7 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        LineProjection
+        ArcProjection
       </ComponentName>
       <X>
         225
@@ -50,34 +50,6 @@
       </X>
       <Note>
         
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Projection
-      </ComponentName>
-      <X>
-        425
-      </X>
-      <X>
-        300
-      </X>
-      <Note>
-        Image projection along a line
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Caliper
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        425
-      </X>
-      <Note>
-        Calculate extremums of the projection derivative
       </Note>
     </Element>
     <Element>
@@ -96,16 +68,16 @@
     </Element>
     <Element>
       <ComponentName>
-        DerivativeProcessor
+        Projection
       </ComponentName>
       <X>
-        575
+        425
       </X>
       <X>
-        375
+        300
       </X>
       <Note>
-        Calculate the derivative of the projection data
+        Image projection along a line
       </Note>
     </Element>
     <Element>
@@ -120,6 +92,34 @@
       </X>
       <Note>
         Processing chain for caliper calculation.&#10;1. Calculate the pixel data along a line given as parameter in the input parameter set&#10;2. Calculate the derivative of projection data&#10;3. Find and cumulate extremum points of the derivative data.
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Caliper
+      </ComponentName>
+      <X>
+        900
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        Calculate extremums of the projection derivative
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DerivativeProcessor
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        Calculate the derivative of the projection data
       </Note>
     </Element>
   </PositionMap>

@@ -62,8 +62,13 @@ protected:
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
 
-	typedef imod::TModelWrap<i2d::CCircle> FoundModel;
-	FoundModel m_foundModel;
+	typedef imod::TModelWrap<i2d::CCircle> FoundCircleModel;
+	typedef imod::TModelWrap<i2d::CLine2d> FoundLineModel;
+	FoundCircleModel m_foundCircleModel;
+	FoundLineModel m_foundLineModel;
+
+	bool m_isCircleActive;
+	bool m_isLineActive;
 };
 
 

@@ -53,6 +53,7 @@ bool CCaliperFeature::IsValueTypeSupported(ValueTypeId valueTypeId) const
 {
 	switch (valueTypeId){
 		case VTI_AUTO:
+		case VTI_ALPHA:
 		case VTI_WEIGHT:
 			return true;
 		default:
