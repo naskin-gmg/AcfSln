@@ -78,12 +78,13 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const QString& url, bool autoPl
 {
 	static ChangeSet changeSet(CF_STATUS, CF_MEDIA_POSITION);
 	istd::CChangeNotifier notifier(this, changeSet);
+	Q_UNUSED(notifier);
 
 	m_mediumUrl = url;
 
 	QStringList fileExtensions;
 	
-	m_frameLoaderCompPtr->GetFileExtensions(fileExtensions);
+	m_frameLoaderCompPtr->GetFileExtensions(fileExtensions, m_frameDataCompPtr.GetPtr(), ifile::IFileTypeInfo::QF_LOAD);
 
 	QStringList fileFilter;
 	for (int fileExtensionIndex = 0; fileExtensionIndex < int(fileExtensions.size()); fileExtensionIndex++){
@@ -205,7 +206,7 @@ bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CFrameSeqVideoControllerComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CFrameSeqVideoControllerComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

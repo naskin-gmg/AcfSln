@@ -170,7 +170,7 @@ int CWavSamplesLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CWavSamplesLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CWavSamplesLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

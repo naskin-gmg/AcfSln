@@ -167,12 +167,12 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mouseDoubleClickEvent(QGr
 // reimplemented (imod::IObserver)
 
 template <class GraphicsItemClass, class ObjectClass>
-void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
+void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel* /*modelPtr*/, const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(!m_isShapeUpdateBlocked);
 
 	ObjectClass* objectPtr = BaseClass2::GetObjectPtr();
-	if (objectPtr != NULL){
+	if ((objectPtr != NULL) && !changeSet.Contains(istd::IChangeable::CF_DESTROYING)){
 		m_isShapeUpdateBlocked = true;
 
 		UpdateGraphicsItem(*objectPtr);

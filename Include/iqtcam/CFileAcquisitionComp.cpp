@@ -59,7 +59,7 @@ int CFileAcquisitionComp::DoProcessing(
 		QDir directory(inputPath);
 
 		QStringList extensions;
-		m_bitmapLoaderCompPtr->GetFileExtensions(extensions, ifile::IFilePersistence::QF_LOAD);
+		m_bitmapLoaderCompPtr->GetFileExtensions(extensions, outputPtr, ifile::IFilePersistence::QF_LOAD);
 
 		ParamsInfo& info = m_dirInfos[inputPath];
 

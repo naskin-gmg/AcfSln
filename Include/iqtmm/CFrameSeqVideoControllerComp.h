@@ -80,7 +80,7 @@ public:
 	virtual bool SetCurrentFrame(int frameIndex);
 
 	// reimplemented (ifile::IFileTypeInfo)
-	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 protected:

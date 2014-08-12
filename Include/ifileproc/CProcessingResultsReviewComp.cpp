@@ -151,7 +151,7 @@ bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& 
 
 			if (m_parent.m_inputFileTypeInfoCompPtr.IsValid()){
 				QStringList extensions;
-				m_parent.m_inputFileTypeInfoCompPtr->GetFileExtensions(extensions);
+				m_parent.m_inputFileTypeInfoCompPtr->GetFileExtensions(extensions, NULL, ifile::IFileTypeInfo::QF_LOAD);
 
 				for (		QStringList::ConstIterator extensionIter = extensions.begin();
 							extensionIter != extensions.begin();

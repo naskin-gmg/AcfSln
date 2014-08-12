@@ -100,9 +100,9 @@ int CRegistryLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CRegistryLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CRegistryLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
-	if (!BaseClass::GetFileExtensions(result, flags, doAppend)){
+	if (!BaseClass::GetFileExtensions(result, dataObjectPtr, flags, doAppend)){
 		if (!doAppend){
 			result.clear();
 		}

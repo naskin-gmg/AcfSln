@@ -40,7 +40,7 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 
 	if (usedOutputPath.isEmpty()){
 		QStringList extensions;
-		m_outputLoaderCompPtr->GetFileExtensions(extensions);
+		m_outputLoaderCompPtr->GetFileExtensions(extensions, m_objectCompPtr.GetPtr(), ifile::IFileTypeInfo::QF_SAVE);
 
 		if (extensions.isEmpty()){
 			SendErrorMessage(0, "File extension list is empty", "FileCopyOverLoader");

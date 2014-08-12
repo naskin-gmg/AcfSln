@@ -36,7 +36,7 @@ bool CMediaLoaderComp::IsOperationSupported(
 		QFileInfo info(*filePathPtr);
 
 		QStringList extensions;
-		if (GetFileExtensions(extensions, flags)){
+		if (GetFileExtensions(extensions, dataObjectPtr, flags)){
 			QStringList extensionsList = (extensions);
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
@@ -88,7 +88,7 @@ int CMediaLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CMediaLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CMediaLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

@@ -107,10 +107,10 @@ int CRenderedObjectFileLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
-		return m_fileLoaderCompPtr->GetFileExtensions(result, flags, doAppend);
+		return m_fileLoaderCompPtr->GetFileExtensions(result, dataObjectPtr, flags, doAppend);
 	}
 
 	return false;
