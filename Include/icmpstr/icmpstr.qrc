@@ -1,14 +1,14 @@
 <RCC>
-	<qresource prefix="Icons/" >
-	<file alias="Export">Resources/Icons/Export.svg</file>
-	<file alias="Import">Resources/Icons/Import.svg</file>
-	<file alias="AutoInit">Resources/Icons/Anchor.svg</file>
-	<file alias="NoteAttached">Resources/Icons/NoteAttached.svg</file>
-	<file alias="ExportToCode">Resources/Icons/ExportToCode.svg</file>
-		<file alias="RealComponent">Resources/Icons/RealComponent.svg</file>
-		<file alias="CompositeComponent">Resources/Icons/CompositeComponent.svg</file>
-		<file alias="MixedComponent">Resources/Icons/MixedComponent.svg</file>
-		<file alias="EmbeddedComponent">Resources/Icons/EmbeddedComponent.svg</file>
-	<file alias="ToEmbeddedComponent">Resources/Icons/ToEmbeddedComponent.svg</file>
-  </qresource>
+    <qresource prefix="/Icons">
+        <file alias="Export">Resources/Icons/Export.svg</file>
+        <file alias="Import">Resources/Icons/Import.svg</file>
+        <file alias="AutoInit">Resources/Icons/Anchor.svg</file>
+        <file alias="NoteAttached">Resources/Icons/NoteAttached.svg</file>
+        <file alias="ExportToCode">Resources/Icons/ExportToCode.svg</file>
+        <file alias="RealComponent">Resources/Icons/RealComponent.svg</file>
+        <file alias="CompositeComponent">Resources/Icons/CompositeComponent.svg</file>
+        <file alias="MixedComponent">Resources/Icons/MixedComponent.svg</file>
+        <file alias="EmbeddedComponent">Resources/Icons/EmbeddedComponent.svg</file>
+        <file alias="ToEmbeddedComponent">Resources/Icons/ToEmbeddedComponent.svg</file>
+    </qresource>
 </RCC>
