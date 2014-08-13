@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3574
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1180
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -598,7 +598,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -636,7 +636,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MetaInfoManager
+              EnvironmentManager
             </Id>
             <Type>
               Reference
@@ -651,6 +651,22 @@
               <Value>
                 PackagesLoaderExt
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -729,61 +745,13 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="8">
-    <Interface>
-      <InterfaceId>
-        icmpstr::IExternalMetaInfoManager
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         icmpstr::IRegistryConsistInfo
       </InterfaceId>
       <ComponentId>
         RegistryConsistInfo
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        icomp::IComponentEnvironmentManager
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        icomp::IComponentStaticInfo
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        icomp::IMetaInfoManager
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        icomp::IRegistriesManager
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        icomp::IRegistryLoader
-      </InterfaceId>
-      <ComponentId>
-        PackagesLoaderExt
       </ComponentId>
     </Interface>
     <Interface>
@@ -795,7 +763,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        PackagesLoader
+      </ExportedId>
+      <ComponentId>
+        PackagesLoaderExt
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Document template for Compositor

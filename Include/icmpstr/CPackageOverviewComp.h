@@ -14,6 +14,7 @@
 #include "istd/TDelPtr.h"
 #include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CComponentAddress.h"
+#include "icomp/CComponentStaticInfoBase.h"
 #include "ibase/ICommandsProvider.h"
 #include "ifile/IFileNameParam.h"
 #include "idoc/IHelpViewer.h"
@@ -46,6 +47,11 @@ public:
 	I_BEGIN_COMPONENT(CPackageOverviewComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_REGISTER_INTERFACE(IAttributeSelectionObserver);
+		I_REGISTER_SUBELEMENT(LocalMetaInfoManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(LocalMetaInfoManager, icomp::IMetaInfoManager, ExtractLocalMetaInfoManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(LocalMetaInfoManager, imod::IModel, ExtractLocalMetaInfoManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(LocalMetaInfoManager, istd::IChangeable, ExtractLocalMetaInfoManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(LocalMetaInfoManager, istd::IPolymorphic, ExtractLocalMetaInfoManager);
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Packages manager used to provide icon paths", true, "PackagesManager");
 		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and access to buffered icons", false, "ConsistencyInfo");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Show help of selected component using its address", false, "HelpViewer");
@@ -187,6 +193,32 @@ private:
 		CPackageOverviewComp& m_parent;
 	};
 
+	class MetaInfoManager:
+				virtual public icomp::IMetaInfoManager,
+				public icomp::CComponentStaticInfoBase
+	{
+	public:
+		MetaInfoManager();
+
+		void UpdateLocalMetaInfoMap();
+
+		// reimplemented (icomp::IMetaInfoManager)
+		virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
+		virtual const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const;
+		virtual const icomp::IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const;
+
+		// reimplemented (icomp::IElementStaticInfo)
+		virtual Ids GetMetaIds(int metaGroupId) const;
+		virtual const icomp::IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
+
+		CPackageOverviewComp* parentPtr;
+
+	private:
+		typedef QMap<QByteArray, istd::TDelPtr<const icomp::IComponentStaticInfo> > IdToInfoMap;
+
+		IdToInfoMap m_idToInfoMap;
+	};
+
 	enum GruppingMode
 	{
 		GM_NONE,
@@ -223,6 +255,14 @@ private:
 	CategoryWidgetsMap m_categoryWidgetsMap;
 
 	icomp::IMetaInfoManager::ComponentAddresses m_shownAddresses;
+
+	imod::TModelWrap<MetaInfoManager> m_localMetaInfoManager;
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractLocalMetaInfoManager(CPackageOverviewComp& component)
+	{
+		return &component.m_localMetaInfoManager;
+	}
 
 	int m_currentPackageGroupIndex;
 	bool m_startDrag;

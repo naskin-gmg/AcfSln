@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3574
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1180
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -45,9 +45,9 @@
       <X>
         900
       </X>
-      <X>
+      <Y>
         675
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -59,9 +59,9 @@
       <X>
         618
       </X>
-      <X>
+      <Y>
         550
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,9 +73,9 @@
       <X>
         600
       </X>
-      <X>
+      <Y>
         675
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +87,9 @@
       <X>
         1000
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -101,9 +101,9 @@
       <X>
         1000
       </X>
-      <X>
+      <Y>
         125
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -115,9 +115,9 @@
       <X>
         200
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>

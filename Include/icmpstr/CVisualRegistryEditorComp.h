@@ -11,7 +11,8 @@
 #include "ifile/IFilePersistence.h"
 #include "imod/CMultiModelDispatcherBase.h"
 #include "icomp/IRegistry.h"
-#include "icomp/IComponentEnvironmentManager.h"
+#include "icomp/IMetaInfoManager.h"
+#include "icomp/IPackagesManager.h"
 #include "ibase/ICommandsProvider.h"
 #include "idoc/IHelpViewer.h"
 #include "idoc/IDocumentManager.h"
@@ -34,7 +35,7 @@ class CVisualRegistryElement;
 class CVisualRegistry;
 
 
-class CVisualRegistryEditorComp:
+class CVisualRegistryEditorCompBase:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CVisualRegistryEditorComp, icomp::IRegistry>,
 			virtual public iqtgui::IDropConsumer,
 			virtual public ibase::ICommandsProvider,
@@ -43,7 +44,49 @@ class CVisualRegistryEditorComp:
 	Q_OBJECT
 
 public:
-	iqtgui::TDesignerGuiObserverCompBase<Ui::CVisualRegistryEditorComp, icomp::IRegistry> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CVisualRegistryEditorComp, icomp::IRegistry> BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CVisualRegistryEditorCompBase);
+		I_ASSIGN(m_sceneProviderCompPtr, "SceneProvider", "Display view where graphical objects will be shown", true, "SceneProvider");
+		I_ASSIGN_TO(m_sceneProviderGuiCompPtr, m_sceneProviderCompPtr, true);
+		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
+		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
+		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
+		I_ASSIGN_TO(m_metaInfoManagerModelCompPtr, m_metaInfoManagerCompPtr, false);
+		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Access to information about package files", false, "PackagesManager");
+		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Show help of selected component using its address", false, "QuickHelpGui");
+		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
+		I_ASSIGN(m_consistencyInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
+		I_ASSIGN(m_registryTopologyGuiCompPtr, "RegistryTopologyGui", "GUI for showing the registry component topology", false, "RegistryTopologyGui");
+		I_ASSIGN_TO(m_registryObserverCompPtr, m_registryTopologyGuiCompPtr, false);
+		I_ASSIGN(m_registryValidationStatusCompPtr, "RegistryValidationStatus", "Visual status of registry validation", false, "RegistryValidationStatus");
+		I_ASSIGN_TO(m_registryValidationStatusModelCompPtr, m_registryValidationStatusCompPtr, false);
+	I_END_COMPONENT;
+
+protected:
+	I_REF(ifile::IFilePersistence, m_registryCodeSaverCompPtr);
+	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
+	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
+	I_REF(imod::IModel, m_metaInfoManagerModelCompPtr);
+	I_REF(icomp::IPackagesManager, m_packagesManagerCompPtr);
+	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
+	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistencyInfoCompPtr);
+	I_REF(iqtgui::IGuiObject, m_registryTopologyGuiCompPtr);
+	I_REF(imod::IObserver, m_registryObserverCompPtr);
+	I_REF(iqtgui::IVisualStatus, m_registryValidationStatusCompPtr);
+	I_REF(imod::IModel, m_registryValidationStatusModelCompPtr);
+	I_REF(ISceneProvider, m_sceneProviderCompPtr);
+	I_REF(iqtgui::IGuiObject, m_sceneProviderGuiCompPtr);
+};
+
+
+class CVisualRegistryEditorComp: public CVisualRegistryEditorCompBase
+{
+	Q_OBJECT
+
+public:
+	typedef CVisualRegistryEditorCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CVisualRegistryEditorComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
@@ -54,19 +97,6 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInfo);
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInfo);
 		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInfo);
-		I_ASSIGN(m_sceneProviderCompPtr, "SceneProvider", "Display view where graphical objects will be shown", true, "SceneProvider");
-		I_ASSIGN_TO(m_sceneProviderGuiCompPtr, m_sceneProviderCompPtr, true);
-		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
-		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
-		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
-		I_ASSIGN_TO(m_envManagerModelCompPtr, m_envManagerCompPtr, false);
-		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Show help of selected component using its address", false, "QuickHelpGui");
-		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
-		I_ASSIGN(m_consistencyInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
-		I_ASSIGN(m_registryTopologyGuiCompPtr, "RegistryTopologyGui", "GUI for showing the registry component topology", false, "RegistryTopologyGui");
-		I_ASSIGN_TO(m_registryObserverCompPtr, m_registryTopologyGuiCompPtr, false);
-		I_ASSIGN(m_registryValidationStatusCompPtr, "RegistryValidationStatus", "Visual status of registry validation", false, "RegistryValidationStatus");
-		I_ASSIGN_TO(m_registryValidationStatusModelCompPtr, m_registryValidationStatusCompPtr, false);
 	I_END_COMPONENT;
 
 	CVisualRegistryEditorComp();
@@ -75,7 +105,7 @@ public:
 	const QFont& GetElementNameFont() const;
 	const QFont& GetElementDetailFont() const;
 
-	const icomp::IComponentEnvironmentManager* GetEnvironmentManager() const;
+	const icomp::IMetaInfoManager* GetMetaInfoManager() const;
 	const IRegistryConsistInfo* GetRegistryConsistInfo() const;
 
 	/**
@@ -108,7 +138,7 @@ protected:
 		GI_TOOLS
 	};
 
-	class EnvironmentObserver: public imod::TSingleModelObserverBase<icomp::IComponentEnvironmentManager>
+	class EnvironmentObserver: public imod::TSingleModelObserverBase<icomp::IMetaInfoManager>
 	{
 	public:
 		EnvironmentObserver(CVisualRegistryEditorComp* parentPtr);
@@ -238,20 +268,6 @@ private:
 		return &component.m_selectionInfo;
 	}
 
-	I_REF(ifile::IFilePersistence, m_registryCodeSaverCompPtr);
-	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
-	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
-	I_REF(imod::IModel, m_envManagerModelCompPtr);
-	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
-	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
-	I_REF(IRegistryConsistInfo, m_consistencyInfoCompPtr);
-	I_REF(iqtgui::IGuiObject, m_registryTopologyGuiCompPtr);
-	I_REF(imod::IObserver, m_registryObserverCompPtr);
-	I_REF(iqtgui::IVisualStatus, m_registryValidationStatusCompPtr);
-	I_REF(imod::IModel, m_registryValidationStatusModelCompPtr);
-	I_REF(ISceneProvider, m_sceneProviderCompPtr);
-	I_REF(iqtgui::IGuiObject, m_sceneProviderGuiCompPtr);
-
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;
 	iqtgui::CHierarchicalCommand m_editMenu;
 	iqtgui::CHierarchicalCommand m_cutCommand;
@@ -291,9 +307,9 @@ private:
 
 // inline methods
 
-inline const icomp::IComponentEnvironmentManager* CVisualRegistryEditorComp::GetEnvironmentManager() const
+inline const icomp::IMetaInfoManager* CVisualRegistryEditorComp::GetMetaInfoManager() const
 {
-	return m_envManagerCompPtr.GetPtr();
+	return m_metaInfoManagerCompPtr.GetPtr();
 }
 
 

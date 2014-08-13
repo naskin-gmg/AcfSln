@@ -172,7 +172,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 	Q_ASSERT(!m_isShapeUpdateBlocked);
 
 	ObjectClass* objectPtr = BaseClass2::GetObjectPtr();
-	if ((objectPtr != NULL) && !changeSet.Contains(istd::IChangeable::CF_DESTROYING)){
+	if ((objectPtr != NULL) && !changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
 		m_isShapeUpdateBlocked = true;
 
 		UpdateGraphicsItem(*objectPtr);

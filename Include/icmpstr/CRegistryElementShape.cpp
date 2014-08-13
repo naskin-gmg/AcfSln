@@ -284,7 +284,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 			m_icon = constistInfoPtr->GetComponentIcon(address);
 		}
 
-		const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
+		const icomp::IMetaInfoManager* managerPtr = m_registryView.GetMetaInfoManager();
 		if (managerPtr != NULL){
 			const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(element.GetAddress());
 			if (metaInfoPtr != NULL){

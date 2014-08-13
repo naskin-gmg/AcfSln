@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3574
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1180
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -152,7 +152,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               DocumentManager
@@ -188,6 +188,25 @@
               </IsEnabled>
               <Value>
                 MainWindowComponents/LogDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                MainWindowComponents/LocalMetaInfoManager
               </Value>
             </Data>
           </AttributeInfo>
@@ -406,7 +425,7 @@
                 true
               </IsEnabled>
               <Value>
-                CompositorTemplate
+                CompositorTemplate/PackagesLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -425,7 +444,7 @@
                 true
               </IsEnabled>
               <Value>
-                CompositorTemplate
+                CompositorTemplate/PackagesLoader
               </Value>
             </Data>
           </AttributeInfo>

@@ -137,29 +137,31 @@ const QFont& CVisualRegistryEditorComp::GetElementDetailFont() const
 
 bool CVisualRegistryEditorComp::TryOpenComponent(const CVisualRegistryElement& registryElement)
 {
-	const icomp::IComponentEnvironmentManager* managerPtr = GetEnvironmentManager();
+	const icomp::IMetaInfoManager* managerPtr = GetMetaInfoManager();
 	if ((managerPtr != NULL) && m_documentManagerCompPtr.IsValid()){
-		
-		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(registryElement.GetAddress());
+		const icomp::CComponentAddress& elementAddress = registryElement.GetAddress();
 
-		Q_ASSERT(registryElement.GetRegistry() != NULL);
+		const QByteArray& componentId = elementAddress.GetComponentId();
 
-		icomp::CComponentAddress componentAddress = registryElement.GetAddress();
-		QByteArray componentId = componentAddress.GetComponentId();
+		if (!elementAddress.GetPackageId().isEmpty()){
+			if (m_packagesManagerCompPtr.IsValid()){
+				const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(elementAddress);
 
-		if (metaInfoPtr != NULL){
-			if (metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE){
-				QDir packageDir(managerPtr->GetPackagePath(componentAddress.GetPackageId()));
+				Q_ASSERT(registryElement.GetRegistry() != NULL);
 
-				QString filePath = packageDir.absoluteFilePath(componentId + ".arx");
+				if ((metaInfoPtr != NULL) && (metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+					QDir packageDir(m_packagesManagerCompPtr->GetPackagePath(elementAddress.GetPackageId()));
 
-				m_documentManagerCompPtr->OpenDocument(NULL, &filePath);
+					QString filePath = packageDir.absoluteFilePath(componentId + ".arx");
 
-				return true;
+					return m_documentManagerCompPtr->OpenDocument(NULL, &filePath);
+				}
 			}
 		}
 		else if (registryElement.GetRegistry()->GetEmbeddedRegistry(componentId) != NULL){
 			UpdateEmbeddedRegistryView(componentId);
+
+			return true;
 		}
 	}
 
@@ -431,7 +433,7 @@ void CVisualRegistryEditorComp::ConnectReferences(const QByteArray& componentRol
 		Q_ASSERT(elementInfoPtr != NULL);
 		Q_ASSERT(elementInfoPtr->elementPtr.IsValid());
 
-		const icomp::IComponentStaticInfo* compMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+		const icomp::IComponentStaticInfo* compMetaInfoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
 		if (compMetaInfoPtr == NULL){
 			continue;
 		}
@@ -631,6 +633,8 @@ bool CVisualRegistryEditorComp::OnDropObject(const QMimeData& mimeData, QGraphic
 
 void CVisualRegistryEditorComp::UpdateScene()
 {
+	UpdateBlocker blocker(this);
+
 	QList<QGraphicsItem*> itemsToRemove = m_scenePtr->items();
 
 	foreach (QGraphicsItem* itemPtr, itemsToRemove){
@@ -698,6 +702,11 @@ void CVisualRegistryEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& ch
 
 	if (!embeddedIds.contains(m_embeddedRegistryId)){
 		m_embeddedRegistryId = "";
+	}
+
+	if (changeSet.Contains(CF_ALL_DATA)){
+		istd::CChangeNotifier selectionNotifier(&m_selectionInfo, changeSet);
+		Q_UNUSED(selectionNotifier);
 	}
 
 	UpdateScene();
@@ -797,8 +806,8 @@ void CVisualRegistryEditorComp::OnComponentCreated()
 	m_elementDetailFont = qApp->font();
 	m_elementDetailFont.setPointSize(8);
 
-	if (m_envManagerModelCompPtr.IsValid()){
-		m_envManagerModelCompPtr->AttachObserver(&m_environmentObserver);
+	if (m_metaInfoManagerModelCompPtr.IsValid()){
+		m_metaInfoManagerModelCompPtr->AttachObserver(&m_environmentObserver);
 	}
 
 	if (m_registryValidationStatusModelCompPtr.IsValid()){
@@ -811,8 +820,8 @@ void CVisualRegistryEditorComp::OnComponentCreated()
 
 void CVisualRegistryEditorComp::OnComponentDestroyed()
 {
-	if (m_envManagerModelCompPtr.IsValid() && m_envManagerModelCompPtr->IsAttached(&m_environmentObserver)){
-		m_envManagerModelCompPtr->DetachObserver(&m_environmentObserver);
+	if (m_metaInfoManagerModelCompPtr.IsValid() && m_metaInfoManagerModelCompPtr->IsAttached(&m_environmentObserver)){
+		m_metaInfoManagerModelCompPtr->DetachObserver(&m_environmentObserver);
 	}
 
 	UnregisterAllModels();
@@ -834,6 +843,8 @@ void CVisualRegistryEditorComp::OnSelectionChanged()
 	if (IsUpdateBlocked()){
 		return;
 	}
+
+	UpdateBlocker blocker(this);
 
 	QList<QGraphicsItem*> selectedItems = m_scenePtr->selectedItems();
 	CVisualRegistryElement* elementPtr = NULL;
@@ -858,6 +869,7 @@ void CVisualRegistryEditorComp::OnSelectionChanged()
 	if (m_selectedElementIds != elementIds){
 		static ChangeSet selectionChangeSet(IElementSelectionInfo::CF_SELECTION);
 		istd::CChangeNotifier selectionNotifier(&m_selectionInfo, selectionChangeSet);
+		Q_UNUSED(selectionNotifier);
 
 		m_selectedElementIds = elementIds;
 

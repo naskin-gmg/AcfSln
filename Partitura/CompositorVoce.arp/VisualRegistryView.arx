@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3574
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1180
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -194,13 +194,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MetaInfoManager
+              EnvironmentManager
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              MetaInfoManager
+              EnvironmentManager
             </ExportId>
             <Data>
               <IsEnabled>
@@ -475,7 +475,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -517,6 +517,22 @@
             </Type>
             <ExportId>
               MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PackagesManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              EnvironmentManager
             </ExportId>
             <Data>
               <IsEnabled>

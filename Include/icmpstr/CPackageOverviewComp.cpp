@@ -26,8 +26,10 @@
 #endif
 
 // ACF includes
+#include "istd/CChangeNotifier.h"
 #include "istd/CSystem.h"
 #include "iser/CXmlStringWriteArchive.h"
+#include "icomp/CCompositeComponentStaticInfo.h"
 #include "icomp/CComponentMetaDescriptionEncoder.h"
 #include "iqt/CSignalBlocker.h"
 
@@ -239,6 +241,8 @@ CPackageOverviewComp::CPackageOverviewComp()
 	m_startDrag(false),
 	m_starDragPosition(0, 0)
 {
+	m_localMetaInfoManager.parentPtr = this;
+
 	connect(&m_reloadCommand, SIGNAL(triggered()), this, SLOT(OnReloadPackages()));
 	m_packagesCommand.InsertChild(&m_reloadCommand);
 	m_commands.InsertChild(&m_packagesCommand);
@@ -520,6 +524,8 @@ void CPackageOverviewComp::UpdateInterfaceList()
 
 void CPackageOverviewComp::UpdateAllLists()
 {
+	m_localMetaInfoManager.UpdateLocalMetaInfoMap();
+
 	UpdateInterfaceList();
 
 	UpdateComponentGroups();
@@ -1070,6 +1076,7 @@ void CPackageOverviewComp::OnRetranslate()
 
 	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
 	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
+	Q_UNUSED(commandsNotifier);
 
 	m_packagesCommand.SetVisuals(tr("&Packages"), tr("Packages"), tr("Menu for packages"));
 	m_reloadCommand.SetVisuals(tr("&Reload All Packages"), tr("Reload"), tr("Reloads all packages form configuration file"), QIcon(":/Icons/Reload"));
@@ -1191,6 +1198,7 @@ void CPackageOverviewComp::RegistryObserver::OnUpdate(const istd::IChangeable::C
 
 		UpdateBlocker blocker(&m_parent);
 
+		m_parent.m_localMetaInfoManager.UpdateLocalMetaInfoMap();
 		m_parent.GenerateComponentTree(false);
 	}
 }
@@ -1224,6 +1232,151 @@ void CPackageOverviewComp::ConfigObserver::OnUpdate(const ChangeSet& /*changeSet
 		m_parent.m_envManagerCompPtr->LoadPackages(istd::CSystem::GetNormalizedPath(configFilePath));
 		m_parent.UpdateAllLists();
 	}
+}
+
+
+// public methods of embedded class MetaInfoManager
+
+CPackageOverviewComp::MetaInfoManager::MetaInfoManager()
+{
+	parentPtr = NULL;
+}
+
+
+void CPackageOverviewComp::MetaInfoManager::UpdateLocalMetaInfoMap()
+{
+	Q_ASSERT(parentPtr != NULL);
+
+	istd::CChangeNotifier notifier(this);
+	Q_UNUSED(notifier);
+
+	m_idToInfoMap.clear();
+
+	if (!parentPtr->m_envManagerCompPtr.IsValid()){
+		return;
+	}
+
+	const IElementSelectionInfo* objectPtr = parentPtr->GetObjectPtr();
+	if (objectPtr == NULL){
+		return;
+	}
+
+	const icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	icomp::IRegistry::Ids embeddedIds = registryPtr->GetEmbeddedRegistryIds();
+
+	for (		icomp::IRegistry::Ids::ConstIterator iter = embeddedIds.constBegin();
+				iter != embeddedIds.constEnd();
+				++iter){
+		const QByteArray& id = *iter;
+
+		icomp::IRegistry* embeddedRegistryPtr = registryPtr->GetEmbeddedRegistry(id);
+		Q_ASSERT(embeddedRegistryPtr != NULL);	// ID was taken from registry, it must be valid!
+
+		istd::TDelPtr<const icomp::IComponentStaticInfo>& infoPtr = m_idToInfoMap[id];
+
+		infoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*embeddedRegistryPtr, *parentPtr->m_envManagerCompPtr));
+	}
+}
+
+
+// reimplemented (icomp::IMetaInfoManager)
+
+icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::MetaInfoManager::GetComponentAddresses(int typeFlag) const
+{
+	Q_ASSERT(parentPtr != NULL);
+
+	ComponentAddresses retVal;
+
+	if (parentPtr->m_envManagerCompPtr.IsValid()){
+		retVal += parentPtr->m_envManagerCompPtr->GetComponentAddresses(typeFlag);
+	}
+
+	for (		IdToInfoMap::ConstIterator iter = m_idToInfoMap.constBegin();
+				iter != m_idToInfoMap.constEnd();
+				++iter){
+		const icomp::IComponentStaticInfo* infoPtr = iter.value().GetPtr();
+		Q_ASSERT(infoPtr != NULL);
+
+		if ((typeFlag & (1 << infoPtr->GetComponentType())) != 0){
+			const QByteArray& id = iter.key();
+
+			retVal += icomp::CComponentAddress("", id);
+		}
+	}
+
+	return retVal;
+}
+
+
+const icomp::IComponentStaticInfo* CPackageOverviewComp::MetaInfoManager::GetComponentMetaInfo(const icomp::CComponentAddress& address) const
+{
+	Q_ASSERT(parentPtr != NULL);
+
+	if (address.GetPackageId().isEmpty()){
+		IdToInfoMap::ConstIterator foundInfoIter = m_idToInfoMap.constFind(address.GetComponentId());
+		if (foundInfoIter != m_idToInfoMap.constEnd()){
+			return foundInfoIter.value().GetPtr();
+		}
+	}
+
+	if (parentPtr->m_envManagerCompPtr.IsValid()){
+		return parentPtr->m_envManagerCompPtr->GetComponentMetaInfo(address);
+	}
+
+	return NULL;
+}
+
+
+const icomp::IComponentStaticInfo* CPackageOverviewComp::MetaInfoManager::GetPackageMetaInfo(const QByteArray& packageId) const
+{
+	Q_ASSERT(parentPtr != NULL);
+
+	if (packageId.isEmpty()){
+		return this;
+	}
+
+	if (parentPtr->m_envManagerCompPtr.IsValid()){
+		return parentPtr->m_envManagerCompPtr->GetPackageMetaInfo(packageId);
+	}
+
+	return NULL;
+}
+
+
+// reimplemented (icomp::IElementStaticInfo)
+
+icomp::IComponentStaticInfo::Ids CPackageOverviewComp::MetaInfoManager::GetMetaIds(int metaGroupId) const
+{
+	Q_ASSERT(parentPtr != NULL);
+
+	Ids retVal;
+
+	if (metaGroupId == MGI_EMBEDDED_COMPONENTS){
+		for (		IdToInfoMap::ConstIterator iter = m_idToInfoMap.constBegin();
+					iter != m_idToInfoMap.constEnd();
+					++iter){
+			const QByteArray& id = iter.key();
+
+			retVal += id;
+		}
+	}
+
+	return retVal;
+}
+
+
+const icomp::IComponentStaticInfo* CPackageOverviewComp::MetaInfoManager::GetEmbeddedComponentInfo(const QByteArray& embeddedId) const
+{
+	IdToInfoMap::ConstIterator foundInfoIter = m_idToInfoMap.constFind(embeddedId);
+	if (foundInfoIter != m_idToInfoMap.constEnd()){
+		return foundInfoIter.value().GetPtr();
+	}
+
+	return NULL;
 }
 
 

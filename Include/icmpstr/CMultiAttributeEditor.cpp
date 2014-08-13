@@ -207,11 +207,6 @@ QWidget* CMultiAttributeEditor::ValueItemDelegate::createEditor(QWidget* parent,
 
 void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
-	const icomp::IMetaInfoManager* metaInfoManagerPtr = m_parent.m_elementSelectionInfoManager.GetMetaInfoManagerPtr();
-	if (metaInfoManagerPtr == NULL){
-		return;
-	}
-
 	const IElementSelectionInfo* selectionInfoPtr = m_parent.m_elementSelectionInfoManager.GetObjectPtr();
 	if (selectionInfoPtr == NULL){
 		return;

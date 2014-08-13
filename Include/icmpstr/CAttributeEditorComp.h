@@ -93,7 +93,7 @@ public:
 	CAttributeEditorComp();
 
 	// reimplemented (CElementSelectionInfoManagerBase)
-	virtual const icomp::IComponentEnvironmentManager* GetMetaInfoManagerPtr() const;
+	virtual const icomp::IMetaInfoManager* GetMetaInfoManagerPtr() const;
 	virtual const icmpstr::IRegistryConsistInfo* GetConsistencyInfoPtr() const;
 
 protected Q_SLOTS:
@@ -218,7 +218,7 @@ private:
 		CAttributeEditorComp& m_parent;
 	};
 
-	I_REF(icomp::IComponentEnvironmentManager, m_metaInfoManagerCompPtr);
+	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
 	I_REF(IAttributeSelectionObserver, m_attributeSelectionObserverCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);

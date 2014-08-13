@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3574
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1180
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -99,12 +99,15 @@
               Reference
             </Type>
             <ExportId>
-              MetaInfoManager
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                PackageOverviewDock/LocalMetaInfoManager
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -494,7 +497,7 @@
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="6">
+  <ExportedComponents count="7">
     <Component>
       <ExportedId>
         AttributeEditorDock
@@ -509,6 +512,14 @@
       </ExportedId>
       <ComponentId>
         ComponentNoteEditorDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        LocalMetaInfoManager
+      </ExportedId>
+      <ComponentId>
+        PackageOverviewDock/LocalMetaInfoManager
       </ComponentId>
     </Component>
     <Component>

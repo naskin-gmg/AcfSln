@@ -4,12 +4,11 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-#include "istd/TOptDelPtr.h"
 #include "istd/CClassInfo.h"
 
 #include "imod/TSingleModelObserverBase.h"
 
-#include "icomp/IComponentEnvironmentManager.h"
+#include "icomp/IMetaInfoManager.h"
 #include "icomp/IRegistryElement.h"
 
 #include "icmpstr/IAttributeSelectionObserver.h"
@@ -21,7 +20,11 @@ namespace icmpstr
 {
 
 
-class CElementSelectionInfoManagerBase: public imod::TSingleModelObserverBase<IElementSelectionInfo>
+/**
+	Base class for all components depending of meta information in current selected registry context.
+*/
+class CElementSelectionInfoManagerBase:
+				public imod::TSingleModelObserverBase<IElementSelectionInfo>
 {
 public:
 	typedef imod::TSingleModelObserverBase<IElementSelectionInfo> BaseClass;
@@ -30,24 +33,12 @@ public:
 
 	icomp::IRegistry* GetRegistry() const;
 	QStringList GetExportAliases(const QByteArray& attributeName) const;
-	const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const;
 	const iser::IObject* GetAttributeObject(const QByteArray& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
 	const icomp::IAttributeStaticInfo* GetAttributeStaticInfo(const QByteArray& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
 
 	// abstract methods
-	virtual const icomp::IComponentEnvironmentManager* GetMetaInfoManagerPtr() const = 0;
+	virtual const icomp::IMetaInfoManager* GetMetaInfoManagerPtr() const = 0;
 	virtual const icmpstr::IRegistryConsistInfo* GetConsistencyInfoPtr() const = 0;
-
-protected:
-	void UpdateAddressToMetaInfoMap();
-
-	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
-
-protected:
-	typedef QMap<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;
-
-	AddressToInfoMap m_adressToMetaInfoMap;
 };
 
 

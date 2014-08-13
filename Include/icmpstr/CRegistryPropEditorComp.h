@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "icomp/IRegistry.h"
-#include "icomp/IComponentEnvironmentManager.h"
+#include "icomp/IMetaInfoManager.h"
 #include "ilog/IMessageConsumer.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -91,7 +91,7 @@ private:
 
 private:
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
-	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
+	I_REF(icomp::IMetaInfoManager, m_envManagerCompPtr);
 	I_REF(imod::IModel, m_envManagerModelCompPtr);
 };
 

@@ -171,8 +171,8 @@ private:
 	{
 		return &component;
 	}
-	template <class InterfaceType>
 
+	template <class InterfaceType>
 	static InterfaceType* ExtractTempMessages(CSupplierCompBase& component)
 	{
 		return &component.m_tempMessageContainer;

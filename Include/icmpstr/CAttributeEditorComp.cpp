@@ -59,7 +59,7 @@ CAttributeEditorComp::CAttributeEditorComp()
 
 // reimplemented (CElementSelectionInfoManagerBase)
 
-const icomp::IComponentEnvironmentManager* CAttributeEditorComp::GetMetaInfoManagerPtr() const
+const icomp::IMetaInfoManager* CAttributeEditorComp::GetMetaInfoManagerPtr() const
 {
 	return m_metaInfoManagerCompPtr.GetPtr();
 }
@@ -94,7 +94,7 @@ void CAttributeEditorComp::on_AttributeTree_itemSelectionChanged()
 					const icomp::IRegistry::ElementInfo* firstElementInfo = selectedElements.begin().value();
 					Q_ASSERT(firstElementInfo != NULL);
 
-					const icomp::IComponentStaticInfo* componentInfoPtr = GetComponentMetaInfo(firstElementInfo->address);
+					const icomp::IComponentStaticInfo* componentInfoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(firstElementInfo->address);
 					if (componentInfoPtr != NULL){
 						attributeStaticInfoPtr = componentInfoPtr->GetAttributeInfo(attributeId);
 					}
@@ -282,6 +282,16 @@ void CAttributeEditorComp::UpdateGeneralView()
 	}
 
 	QString names;
+	QString description;
+	QStringList companyInfoList;
+	QStringList projectInfoList;
+	QStringList authorInfoList;
+	QStringList categoryInfoList;
+	QStringList tagInfoList;
+	QStringList keywordInfoList;
+
+	icomp::CComponentAddress commonAddress;
+	bool isMultiType = false;
 
 	IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 	for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
@@ -299,43 +309,31 @@ void CAttributeEditorComp::UpdateGeneralView()
 			}
 			names += elementId;
 		}
-	}
 
-	QString description;
-	QStringList companyInfoList;
-	QStringList projectInfoList;
-	QStringList authorInfoList;
-	QStringList categoryInfoList;
-	QStringList tagInfoList;
-	QStringList keywordInfoList;
+		const icomp::CComponentAddress& address = selectedInfoPtr->address;
 
-	icomp::CComponentAddress commonAddress;
-	bool isMultiType = false;
+		if (m_metaInfoManagerCompPtr.IsValid()){
+			const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(address);
+			if (infoPtr != NULL){
+				description = infoPtr->GetDescription();
 
-	for (		AddressToInfoMap::ConstIterator infoIter = m_adressToMetaInfoMap.constBegin();
-				infoIter != m_adressToMetaInfoMap.constEnd();
-				++infoIter){
-		const icomp::CComponentAddress& address = infoIter.key();
-		const icomp::IComponentStaticInfo* infoPtr = infoIter.value().GetPtr();
-		if (infoPtr != NULL){
-			description = infoPtr->GetDescription();
+				icomp::CComponentMetaDescriptionEncoder encoder(infoPtr->GetKeywords());
 
-			icomp::CComponentMetaDescriptionEncoder encoder(infoPtr->GetKeywords());
-
-			companyInfoList += (encoder.GetValues("Company"));
-			projectInfoList += (encoder.GetValues("Project"));
-			authorInfoList += (encoder.GetValues("Author"));
-			categoryInfoList += (encoder.GetValues("Category"));
-			tagInfoList += (encoder.GetValues("Tag"));
-			keywordInfoList += (encoder.GetUnassignedKeywords());
-		}
-		else{
-			companyInfoList += tr("<unknown>");
-			projectInfoList += tr("<unknown>");
-			authorInfoList += tr("<unknown>");
-			categoryInfoList += tr("<unknown>");
-			tagInfoList += tr("<unknown>");
-			keywordInfoList += tr("<unknown>");
+				companyInfoList += (encoder.GetValues("Company"));
+				projectInfoList += (encoder.GetValues("Project"));
+				authorInfoList += (encoder.GetValues("Author"));
+				categoryInfoList += (encoder.GetValues("Category"));
+				tagInfoList += (encoder.GetValues("Tag"));
+				keywordInfoList += (encoder.GetUnassignedKeywords());
+			}
+			else{
+				companyInfoList += tr("<unknown>");
+				projectInfoList += tr("<unknown>");
+				authorInfoList += tr("<unknown>");
+				categoryInfoList += tr("<unknown>");
+				tagInfoList += tr("<unknown>");
+				keywordInfoList += tr("<unknown>");
+			}
 		}
 
 		if (!commonAddress.IsValid()){
@@ -394,7 +392,7 @@ void CAttributeEditorComp::UpdateGeneralView()
 
 	NameLabel->setText(names);
 
-	MetaInfoFrame->setVisible(!m_adressToMetaInfoMap.isEmpty());
+	MetaInfoFrame->setVisible(!selectedElements.isEmpty());
 }
 
 
@@ -454,19 +452,21 @@ void CAttributeEditorComp::UpdateAttributesView()
 				}
 
 				// creating map of attributes based on static meta info
-				const icomp::IComponentStaticInfo* infoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
-				if (infoPtr != NULL){
-					icomp::IElementStaticInfo::Ids attributeIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
-					for (		icomp::IElementStaticInfo::Ids::ConstIterator attrIter = attributeIds.constBegin();
-								attrIter != attributeIds.constEnd();
-								++attrIter){
-						const QByteArray& attributeId = *attrIter;
+				if (m_metaInfoManagerCompPtr.IsValid()){
+					const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(selectedInfoPtr->address);
+					if (infoPtr != NULL){
+						icomp::IElementStaticInfo::Ids attributeIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+						for (		icomp::IElementStaticInfo::Ids::ConstIterator attrIter = attributeIds.constBegin();
+									attrIter != attributeIds.constEnd();
+									++attrIter){
+							const QByteArray& attributeId = *attrIter;
 
-						AttrInfo& attrInfo = m_attrInfosMap[attributeId][elementId];
+							AttrInfo& attrInfo = m_attrInfosMap[attributeId][elementId];
 
-						Q_ASSERT(!((attrInfo.elementPtr != NULL) && (elementPtr == NULL)));	// check if we dont reset existing element pointer, it shouldn't happen
-						attrInfo.elementPtr = elementPtr;
-						attrInfo.staticInfoPtr = infoPtr->GetAttributeInfo(attributeId);
+							Q_ASSERT(!((attrInfo.elementPtr != NULL) && (elementPtr == NULL)));	// check if we dont reset existing element pointer, it shouldn't happen
+							attrInfo.elementPtr = elementPtr;
+							attrInfo.staticInfoPtr = infoPtr->GetAttributeInfo(attributeId);
+						}
 					}
 				}
 			}
@@ -568,20 +568,22 @@ void CAttributeEditorComp::UpdateInterfacesView()
 					itemPtr->setText(0, elementId);
 				}
 
-				const icomp::IComponentStaticInfo* staticInfoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
+				if (m_metaInfoManagerCompPtr.IsValid()){
+					const icomp::IComponentStaticInfo* staticInfoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(selectedInfoPtr->address);
 
-				bool warningFlag = false;
-				bool exportFlag = false;
-				CreateInterfacesTree(
-							elementId,
-							staticInfoPtr,
-							registryInterfaces,
-							itemPtr,
-							warningFlag,
-							exportFlag,
-							true);
-				hasWarning = hasWarning || warningFlag;
-				hasExport = hasExport || exportFlag;
+					bool warningFlag = false;
+					bool exportFlag = false;
+					CreateInterfacesTree(
+								elementId,
+								staticInfoPtr,
+								registryInterfaces,
+								itemPtr,
+								warningFlag,
+								exportFlag,
+								true);
+					hasWarning = hasWarning || warningFlag;
+					hasExport = hasExport || exportFlag;
+				}
 			}
 
 			if (selectedElements.size() != 1){
@@ -694,13 +696,15 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 					}
 					Q_ASSERT(componentRootPtr != NULL);
 
-					const icomp::IComponentStaticInfo* infoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
+					if (m_metaInfoManagerCompPtr.IsValid()){
+						const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(selectedInfoPtr->address);
 
-					bool warningFlag = false;
-					bool exportFlag = false;
-					CreateExportedComponentsTree(elementId, elementId, infoPtr, *componentRootPtr, warningFlag, exportFlag);
-					hasWarning = hasWarning || warningFlag;
-					hasExport = hasExport || exportFlag;
+						bool warningFlag = false;
+						bool exportFlag = false;
+						CreateExportedComponentsTree(elementId, elementId, infoPtr, *componentRootPtr, warningFlag, exportFlag);
+						hasWarning = hasWarning || warningFlag;
+						hasExport = hasExport || exportFlag;
+					}
 
 					++itemIndex;
 				}
@@ -1601,8 +1605,6 @@ void CAttributeEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& changeS
 	if (changeSet.Contains(IElementSelectionInfo::CF_SELECTION)){
 		AttributeTree->reset();
 	}
-
-	UpdateAddressToMetaInfoMap();
 
 	const IElementSelectionInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

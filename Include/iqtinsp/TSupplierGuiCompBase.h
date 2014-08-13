@@ -419,7 +419,7 @@ void TSupplierGuiCompBase<UI, WidgetType>::CreateShapes(int /*sceneId*/, Shapes&
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
-	if (!BaseClass::IsGuiCreated() || changeSet.Contains(istd::IChangeable::CF_DESTROYING)){
+	if (!BaseClass::IsGuiCreated() || changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
 		BaseClass::AfterUpdate(modelPtr, changeSet);
 
 		return;
