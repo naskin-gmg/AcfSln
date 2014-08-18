@@ -122,16 +122,24 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(inputBitmap, interpolationMode);
 	int pixelComponentsCount = inputBitmap.GetComponentsCount();
 
+	float* cosTable = new float[angleDimension];
+	float* sinTable = new float[angleDimension];
+
+	for (int alpha = 0; alpha < angleDimension; alpha++){
+		double angle = alpha / double(angleDimension) * angleRange * angleResolution;
+		angle += startAngle;
+	
+		cosTable[alpha] = qCos(angle);
+		sinTable[alpha] = qSin(angle);
+	}
+		
 	for (int componentIndex = 0; componentIndex < pixelComponentsCount; componentIndex++){
 		for (int r = 0; r < radius; r++){
 			quint8* outputImageBeginPtr = (quint8*)outputBitmapPtr->GetLinePtr(r);
 		
-			for (int alpha = 0; alpha < angleDimension; alpha++){
-				double angle = alpha / double(angleDimension) * angleRange * angleResolution;
-				angle += startAngle;
-		
-				double x = (r + r1) * qCos(angle); 			
-				double y = (r + r1) * qSin(angle);
+			for (int alpha = 0; alpha < angleDimension; alpha++){		
+				float x = (r + r1) * cosTable[alpha]; 			
+				float y = (r + r1) * sinTable[alpha];
 
 				x += aoiCenter.GetX();
 				y += aoiCenter.GetY();
@@ -140,6 +148,9 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 			}
 		}
 	}
+
+	delete [] cosTable;
+	delete [] sinTable;
 
 	return true;
 }

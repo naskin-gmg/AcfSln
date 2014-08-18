@@ -70,6 +70,7 @@ public:
 	CRegistryTreeViewComp();
 	
 	void AddSubcomponents(
+				const icomp::IRegistry& registry,
 				const icomp::CComponentAddress& address,
 				QTreeWidgetItem* registryElementItemPtr);
 

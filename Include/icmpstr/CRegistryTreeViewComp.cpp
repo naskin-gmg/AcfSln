@@ -27,19 +27,29 @@ CRegistryTreeViewComp::CRegistryTreeViewComp()
 
 
 void CRegistryTreeViewComp::AddSubcomponents(
+			const icomp::IRegistry& registry,
 			const icomp::CComponentAddress& address,
 			QTreeWidgetItem* registryElementItemPtr)
 {
 	if (m_envManagerCompPtr.IsValid()){
-		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
+		const icomp::IRegistry* componentRegistryPtr = NULL;
 
-		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			const icomp::CCompositeComponentStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(metaInfoPtr);
-			if (compositeMetaInfoPtr != NULL){
-				const icomp::IRegistry& registry = compositeMetaInfoPtr->GetRegistry();
+		if (!address.GetPackageId().isEmpty()){
+			const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
-				CreateRegistryTree(registry, registryElementItemPtr);
+			if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+				const icomp::CCompositeComponentStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(metaInfoPtr);
+				if (compositeMetaInfoPtr != NULL){
+					componentRegistryPtr = &compositeMetaInfoPtr->GetRegistry();
+				}
 			}
+		}
+		else{
+			componentRegistryPtr = registry.GetEmbeddedRegistry(address.GetComponentId());
+		}
+
+		if (componentRegistryPtr != NULL){
+			CreateRegistryTree(*componentRegistryPtr, registryElementItemPtr);
 		}
 	}
 }
@@ -54,13 +64,7 @@ void CRegistryTreeViewComp::CreateRegistryTree(const icomp::IRegistry& registry,
 		const QByteArray& elementId = *iter;
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 		if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
-			QTreeWidgetItem* elementItem = AddRegistryElementItem(registry, elementInfoPtr, elementId, registryRootItemPtr);
-			
-			// fill a subtree for an embedded composition
-			icomp::IRegistry* embeddedRegistry = registry.GetEmbeddedRegistry(elementId);
-			if (embeddedRegistry != NULL && elementItem != NULL){
-				CreateRegistryTree(*embeddedRegistry, elementItem);
-			}
+			AddRegistryElementItem(registry, elementInfoPtr, elementId, registryRootItemPtr);
 		}
 	}
 }
@@ -134,7 +138,7 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 			}
 		}
 
-		AddSubcomponents(elementPtr->address, elementItemPtr);
+		AddSubcomponents(registry, elementPtr->address, elementItemPtr);
 
 		return elementItemPtr;
 	}
@@ -180,7 +184,6 @@ bool CRegistryTreeViewComp::IsRegistryValid(const icomp::IRegistry& registry) co
 							const icomp::IRegistry& registry = compositeMetaInfoPtr->GetRegistry();
 
 							retVal = retVal && IsRegistryValid(registry);
-
 						}
 					}
 				}

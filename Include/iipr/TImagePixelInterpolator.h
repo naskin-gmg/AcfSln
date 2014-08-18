@@ -99,12 +99,12 @@ typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixel
 	float w3 = fx1 * fy;
 	float w4 = fx * fy;
 
-	double v1 = w1 * GetBitmapPixelValue(px, py, componentIndex);
-	double v2 = w2 * GetBitmapPixelValue(px + 1, py, componentIndex);
-	double v3 = w3 * GetBitmapPixelValue(px, py + 1, componentIndex);
-	double v4 = w4 * GetBitmapPixelValue(px + 1, py + 1, componentIndex);
+	float v1 = w1 * GetBitmapPixelValue(px, py, componentIndex);
+	float v2 = w2 * GetBitmapPixelValue(px + 1, py, componentIndex);
+	float v3 = w3 * GetBitmapPixelValue(px, py + 1, componentIndex);
+	float v4 = w4 * GetBitmapPixelValue(px + 1, py + 1, componentIndex);
 
-	double retVal = v1 + v2 + v3 + v4;
+	float retVal = v1 + v2 + v3 + v4;
 	if (retVal > m_maxValue){
 		retVal = m_maxValue;
 	}
