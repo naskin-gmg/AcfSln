@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3574
+          3588
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1180
+          1188
         </Number>
         <Description>
           ACF-Solutions
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               DocumentTemplates
@@ -98,6 +98,33 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              MainWindowCompTypeIds
+            </Id>
+            <Type>
+              Id[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  Registry
+                </Value>
+                <Value>
+                  Registry
+                </Value>
+                <Value>
+                  Registry
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               MainWindowsComponents
             </Id>
             <Type>
@@ -115,16 +142,16 @@
                   MainWindowComponents/AttributeEditorDock
                 </Value>
                 <Value>
-                  MainWindowComponents/LogDock
+                  MainWindowComponents/QuickHelpDock
+                </Value>
+                <Value>
+                  MainWindowComponents/ComponentNoteEditorDock
                 </Value>
                 <Value>
                   MainWindowComponents/PackageOverviewDock
                 </Value>
                 <Value>
-                  MainWindowComponents/QuickHelpDock
-                </Value>
-                <Value>
-                  MainWindowComponents/ComponentNoteEditorDock
+                  MainWindowComponents/LogDock
                 </Value>
                 <Value>
                   MainWindowComponents/WindowsListCommands

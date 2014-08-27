@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3588
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1188
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="25">
+        <AttributeInfoMap count="26">
           <AttributeInfo>
             <Id>
               AboutDialogTitle
@@ -72,6 +72,25 @@
               </IsEnabled>
               <Value>
                 About Compositor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AboutLogoPath
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Images/CompositorLogo
               </Value>
             </Data>
           </AttributeInfo>
@@ -283,25 +302,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              AboutLogoPath
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                :/Images/CompositorLogo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               MainVersionId
             </Id>
             <Type>
@@ -317,6 +317,22 @@
               <Value>
                 1
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowCompTypeIds
+            </Id>
+            <Type>
+              Id[]
+            </Type>
+            <ExportId>
+              MainWindowCompTypeIds
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
