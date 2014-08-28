@@ -110,7 +110,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
+                <Value>
+                  Registry
+                </Value>
                 <Value>
                   Registry
                 </Value>
@@ -179,7 +182,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               DocumentManager
@@ -289,15 +292,33 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="2">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
                 </Value>
                 <Value>
-                  MainWindowComponents/PackageOverviewDock
-                </Value>
-                <Value>
                   MainWindowComponents/ComponentNoteEditorDock
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SelectedRegistryObservers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  MainWindowComponents/PackageOverviewDock
                 </Value>
               </Values>
             </Data>

@@ -236,7 +236,6 @@ private:
 CPackageOverviewComp::CPackageOverviewComp()
 :	m_packagesCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU),
 	m_reloadCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
-	m_registryObserver(this),
 	m_configObserver(this),
 	m_startDrag(false),
 	m_starDragPosition(0, 0)
@@ -606,72 +605,69 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			filteredComponentAdresses.insert(address);
 	}
 
-	const IElementSelectionInfo* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		const icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
-		if (registryPtr != NULL){
-			icomp::IRegistry::Ids embeddedIds = registryPtr->GetEmbeddedRegistryIds();
-			for (		icomp::IRegistry::Ids::const_iterator embeddedIter = embeddedIds.begin();
-						embeddedIter != embeddedIds.end();
-						++embeddedIter){
-				const QByteArray& embeddedId = *embeddedIter;
+	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		icomp::IRegistry::Ids embeddedIds = registryPtr->GetEmbeddedRegistryIds();
+		for (		icomp::IRegistry::Ids::const_iterator embeddedIter = embeddedIds.begin();
+					embeddedIter != embeddedIds.end();
+					++embeddedIter){
+			const QByteArray& embeddedId = *embeddedIter;
 
-				const icomp::IRegistry* embeddedRegistryPtr = registryPtr->GetEmbeddedRegistry(embeddedId);
-				if (embeddedRegistryPtr == NULL){
-					continue;
+			const icomp::IRegistry* embeddedRegistryPtr = registryPtr->GetEmbeddedRegistry(embeddedId);
+			if (embeddedRegistryPtr == NULL){
+				continue;
+			}
+
+			QStringList keywords;
+			keywords << embeddedId;
+
+			icomp::CComponentMetaDescriptionEncoder encoder(embeddedRegistryPtr->GetKeywords());
+			keywords << (encoder.GetValues());
+
+			if (FilterGB->isChecked()){
+				bool isFilterMatched = true;
+
+				const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = embeddedRegistryPtr->GetExportedInterfacesMap();
+
+				for (		InterfaceFilter::const_iterator iterfaceIter = m_interfaceFilter.begin();
+							iterfaceIter != m_interfaceFilter.end();
+							++iterfaceIter){
+					const QByteArray& filteredInterfaceName = *iterfaceIter;
+					if (exportedInterfaces.find(filteredInterfaceName) == exportedInterfaces.end()){
+						isFilterMatched = false;
+						break;
+					}
 				}
 
-				QStringList keywords;
-				keywords << embeddedId;
+				for (		QStringList::const_iterator filterIter = m_keywordsFilter.begin();
+							filterIter != m_keywordsFilter.end();
+							++filterIter){
+					const QString& filter = *filterIter;
 
-				icomp::CComponentMetaDescriptionEncoder encoder(embeddedRegistryPtr->GetKeywords());
-				keywords << (encoder.GetValues());
+					bool filterFound = false;
+					for (		QStringList::const_iterator keywordIter = keywords.begin();
+								keywordIter != keywords.end();
+								++keywordIter){
+						const QString& keyword = *keywordIter;
 
-				if (FilterGB->isChecked()){
-					bool isFilterMatched = true;
+						if (keyword.contains(filter, Qt::CaseInsensitive)){
+							filterFound = true;
+							break;
+							}
+						}
 
-					const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = embeddedRegistryPtr->GetExportedInterfacesMap();
-
-					for (		InterfaceFilter::const_iterator iterfaceIter = m_interfaceFilter.begin();
-								iterfaceIter != m_interfaceFilter.end();
-								++iterfaceIter){
-						const QByteArray& filteredInterfaceName = *iterfaceIter;
-						if (exportedInterfaces.find(filteredInterfaceName) == exportedInterfaces.end()){
+						if (!filterFound){
 							isFilterMatched = false;
 							break;
 						}
 					}
 
-					for (		QStringList::const_iterator filterIter = m_keywordsFilter.begin();
-								filterIter != m_keywordsFilter.end();
-								++filterIter){
-						const QString& filter = *filterIter;
-
-						bool filterFound = false;
-						for (		QStringList::const_iterator keywordIter = keywords.begin();
-									keywordIter != keywords.end();
-									++keywordIter){
-							const QString& keyword = *keywordIter;
-
-							if (keyword.contains(filter, Qt::CaseInsensitive)){
-								filterFound = true;
-								break;
-								}
-							}
-
-							if (!filterFound){
-								isFilterMatched = false;
-								break;
-							}
-						}
-
-						if (!isFilterMatched){
-							continue;
-						}
+					if (!isFilterMatched){
+						continue;
 					}
-
-					filteredComponentAdresses.insert(icomp::CComponentAddress("", embeddedId));
 				}
+
+				filteredComponentAdresses.insert(icomp::CComponentAddress("", embeddedId));
 			}
 		}
 
@@ -1002,28 +998,15 @@ void CPackageOverviewComp::UpdateGui(const istd::IChangeable::ChangeSet& changeS
 {
 	Q_ASSERT(IsGuiCreated());
 
-	const IElementSelectionInfo* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
-
-		imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
-		if (!m_registryObserver.IsModelAttached(registryModelPtr)){
-			m_registryObserver.EnsureModelDetached();
-
-			if (registryModelPtr != NULL){
-				registryModelPtr->AttachObserver(&m_registryObserver);
-			}
-		}
-
-		if (!changeSet.Contains(IElementSelectionInfo::CF_SELECTION)){	// ignore selection only changes
+	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		if (changeSet.Contains(icomp::IRegistry::CF_EMBEDDED) || changeSet.Contains(CF_INIT_EDITOR)){	// ignore selection only changes
 			m_localMetaInfoManager.UpdateLocalMetaInfoMap();
 
 			GenerateComponentTree(false);
 		}
 	}
 	else{
-		m_registryObserver.EnsureModelDetached();
-
 		m_localMetaInfoManager.UpdateLocalMetaInfoMap();
 
 		GenerateComponentTree(false);
@@ -1180,35 +1163,7 @@ CPackageOverviewComp::PackageItem::PackageItem(
 }
 
 
-// public methods of embedded class RegistryObserver
-
-CPackageOverviewComp::RegistryObserver::RegistryObserver(CPackageOverviewComp* parentPtr)
-:	m_parent(*parentPtr)
-{
-	Q_ASSERT(parentPtr != NULL);
-}
-
-
-// protected methods of embedded class RegistryObserver
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CPackageOverviewComp::RegistryObserver::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
-{
-	if (changeSet.Contains(icomp::IRegistry::CF_EMBEDDED)){
-		if (m_parent.IsUpdateBlocked()){
-			return;
-		}
-
-		UpdateBlocker blocker(&m_parent);
-
-		m_parent.m_localMetaInfoManager.UpdateLocalMetaInfoMap();
-		m_parent.GenerateComponentTree(false);
-	}
-}
-
-
-// public methods of embedded class RegistryObserver
+// public methods of embedded class ConfigObserver
 
 CPackageOverviewComp::ConfigObserver::ConfigObserver(CPackageOverviewComp* parentPtr)
 :	m_parent(*parentPtr)
@@ -1217,7 +1172,7 @@ CPackageOverviewComp::ConfigObserver::ConfigObserver(CPackageOverviewComp* paren
 }
 
 
-// protected methods of embedded class RegistryObserver
+// protected methods of embedded class ConfigObserver
 
 // reimplemented (imod::CSingleModelObserverBase)
 
@@ -1260,12 +1215,7 @@ void CPackageOverviewComp::MetaInfoManager::UpdateLocalMetaInfoMap()
 		return;
 	}
 
-	const IElementSelectionInfo* objectPtr = parentPtr->GetObjectPtr();
-	if (objectPtr == NULL){
-		return;
-	}
-
-	const icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
+	const icomp::IRegistry* registryPtr = parentPtr->GetObjectPtr();
 	if (registryPtr == NULL){
 		return;
 	}

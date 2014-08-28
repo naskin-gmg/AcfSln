@@ -35,14 +35,14 @@ namespace icmpstr
 
 
 class CPackageOverviewComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CPackageOverviewComp, IElementSelectionInfo>,
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CPackageOverviewComp, icomp::IRegistry>,
 			virtual public ibase::ICommandsProvider,
 			virtual public IAttributeSelectionObserver
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CPackageOverviewComp, IElementSelectionInfo> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CPackageOverviewComp, icomp::IRegistry> BaseClass;
 
 	I_BEGIN_COMPONENT(CPackageOverviewComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
@@ -167,19 +167,6 @@ private:
 					const QIcon& icon = QIcon());
 	};
 
-	class RegistryObserver: public imod::CSingleModelObserverBase
-	{
-	public:
-		RegistryObserver(CPackageOverviewComp* parentPtr);
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
-
-	private:
-		CPackageOverviewComp& m_parent;
-	};
-
 	class ConfigObserver: public imod::CSingleModelObserverBase
 	{
 	public:
@@ -215,7 +202,6 @@ private:
 
 	private:
 		typedef QMap<QByteArray, istd::TDelPtr<const icomp::IComponentStaticInfo> > IdToInfoMap;
-
 		IdToInfoMap m_idToInfoMap;
 	};
 
@@ -239,7 +225,6 @@ private:
 	typedef QMap<QByteArray, RootInfo> RootInfos;
 	RootInfos m_roots;
 
-	RegistryObserver m_registryObserver;
 	ConfigObserver m_configObserver;
 
 	typedef QSet<QByteArray> InterfaceFilter;

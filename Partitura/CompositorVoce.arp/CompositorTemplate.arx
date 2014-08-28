@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3574
+          3588
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1180
+          1188
         </Number>
         <Description>
           ACF-Solutions
@@ -38,6 +38,59 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="9">
+    <Element>
+      <Id>
+        Document
+      </Id>
+      <PackageId>
+        
+      </PackageId>
+      <ComponentId>
+        Document
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              DocumentManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              DocumentManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SelectedRegistryObservers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              SelectedRegistryObservers
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         DocumentTemplate
@@ -71,7 +124,7 @@
                 true
               </IsEnabled>
               <Value>
-                VisualRegistry
+                Document
               </Value>
             </Data>
           </AttributeInfo>
@@ -562,27 +615,6 @@
     </Element>
     <Element>
       <Id>
-        VisualRegistry
-      </Id>
-      <PackageId>
-        CompositorPck
-      </PackageId>
-      <ComponentId>
-        VisualRegistry
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         VisualRegistryView
       </Id>
       <PackageId>
@@ -743,7 +775,188 @@
       </Data>
     </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="0">
+  <EmbeddedRegistriesList count="1">
+    <EmbeddedRegistry>
+      <Id>
+        Document
+      </Id>
+      <Data>
+        <ElementsList count="2">
+          <Element>
+            <Id>
+              SelectedDocModelBinder
+            </Id>
+            <PackageId>
+              BasePck
+            </PackageId>
+            <ComponentId>
+              SelectedDocModelBinder
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                1
+              </Flags>
+              <AttributeInfoMap count="4">
+                <AttributeInfo>
+                  <Id>
+                    ActivationObject
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      VisualRegistry
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    DocumentManager
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    DocumentManager
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Model
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      VisualRegistry
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Observers
+                  </Id>
+                  <Type>
+                    Reference[]
+                  </Type>
+                  <ExportId>
+                    SelectedRegistryObservers
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              VisualRegistry
+            </Id>
+            <PackageId>
+              CompositorPck
+            </PackageId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="0">
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+        </ElementsList>
+        <EmbeddedRegistriesList count="0">
+        </EmbeddedRegistriesList>
+        <ExportedInterfaces count="6">
+          <Interface>
+            <InterfaceId>
+              icmpstr::IComponentNoteController
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              icomp::IRegistry
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              imod::IModel
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              iser::ISerializable
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IChangeable
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IPolymorphic
+            </InterfaceId>
+            <ComponentId>
+              VisualRegistry
+            </ComponentId>
+          </Interface>
+        </ExportedInterfaces>
+        <ExportedComponents count="0">
+        </ExportedComponents>
+        <Description>
+          
+        </Description>
+        <Keywords>
+          
+        </Keywords>
+      </Data>
+    </EmbeddedRegistry>
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="2">
     <Interface>
