@@ -33,6 +33,8 @@ public:
 	I_BEGIN_COMPONENT(CValueSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated in group 'Intermediate Results'", false, "IntermediateResultsGui");
 	I_END_COMPONENT;
+	
+	CValueSupplierGuiComp();
 
 protected Q_SLOTS:
 	void on_TestButton_clicked();

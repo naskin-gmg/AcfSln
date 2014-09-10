@@ -12,6 +12,13 @@ namespace iqtipr
 {
 
 
+CValueSupplierGuiComp::CValueSupplierGuiComp()
+:	m_isCircleActive(false),
+	m_isLineActive(false)
+{
+}
+
+
 // protected slots
 
 void CValueSupplierGuiComp::on_TestButton_clicked()

@@ -140,6 +140,8 @@ private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
 	{
 	public:
+		SelectionInfoImpl(): m_parentPtr(NULL) {}
+		
 		void SetParent(CRegistryTreeViewComp* parentPtr);
 
 		// reimplemented (icmpstr::IElementSelectionInfo)
