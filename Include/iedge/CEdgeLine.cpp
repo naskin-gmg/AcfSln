@@ -47,7 +47,7 @@ CEdgeLine::CEdgeLine(const CEdgeLine& edgeLine)
 
 void CEdgeLine::Clear()
 {
-	istd::CChangeNotifier notifier(this);
+	BeginChanges(GetAnyChange());
 
 	m_nodes.clear();
 	m_isClosed = false;
@@ -57,6 +57,8 @@ void CEdgeLine::Clear()
 	m_maxWeight = 0;
 
 	SetCalibration(NULL);
+
+	EndChanges(GetAnyChange());
 }
 
 
@@ -74,27 +76,33 @@ CEdgeNode& CEdgeLine::GetNodeRef(int index)
 
 void CEdgeLine::SetNode(int index, const CEdgeNode& node)
 {
-	istd::CChangeNotifier notifier(this);
+	BeginChanges(GetAnyChange());
 
 	m_nodes[index] = node;
+
+	EndChanges(GetAnyChange());
 }
 
 
 void CEdgeLine::SetClosed(bool state)
 {
 	if (state != m_isClosed){
-		istd::CChangeNotifier notifier(this);
+		BeginChanges(GetAnyChange());
 
 		m_isClosed = state;
+
+		EndChanges(GetAnyChange());
 	}
 }
 
 
 bool CEdgeLine::InsertNode(const CEdgeNode& node)
 {
-	istd::CChangeNotifier notifier(this);
+	BeginChanges(GetAnyChange());
 
 	m_nodes.push_back(node);
+
+	EndChanges(GetAnyChange());
 
 	return true;
 }
