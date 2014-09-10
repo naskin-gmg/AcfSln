@@ -25,6 +25,7 @@ namespace iedge
 {
 
 
+
 //	reimplemented (iedge::IEdgesExtractor)
 
 bool CFastEdgesExtractorComp::DoContourExtraction(
@@ -478,7 +479,7 @@ inline void CFastEdgesExtractorComp::CalcOutputLine(
 
 inline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::InternalContainer::AddElementToList()
 {
-	if (m_freeIndex < m_buffer.size()){
+	if (m_freeIndex < m_bufferSize){
 		return &m_buffer[m_freeIndex++];
 	}
 	else{
@@ -492,10 +493,24 @@ inline CFastEdgesExtractorComp::ExtNode* CFastEdgesExtractorComp::InternalContai
 // public methods of embedded class InternalContainer
 
 CFastEdgesExtractorComp::InternalContainer::InternalContainer(int size)
-:	m_buffer(size),
-	m_freeIndex(0),
+:	m_freeIndex(0),
 	m_isContainerFull(false)
 {
+	m_buffer = (ExtNode*)(s_memoryManager.GetMemory(size * sizeof(ExtNode)));
+	m_bufferSize = size;
+
+	if (m_buffer == NULL){	// cannot allocate more memory there
+		m_isContainerFull = true;
+		m_bufferSize = 0;
+	}
+}
+
+
+CFastEdgesExtractorComp::InternalContainer::~InternalContainer()
+{
+	if (m_buffer != NULL){
+		s_memoryManager.ReleaseMemory(m_buffer);
+	}
 }
 
 
@@ -660,6 +675,94 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 			} while (nodeElementPtr != &node);
 		}
 	}
+}
+
+// private static members
+
+CFastEdgesExtractorComp::MemoryPoolManager CFastEdgesExtractorComp::InternalContainer::s_memoryManager;
+
+
+// public methods of the embedded class CMemoryPoolManager
+
+CFastEdgesExtractorComp::MemoryPoolManager::~MemoryPoolManager()
+{
+	Dispose();
+}
+
+
+void* CFastEdgesExtractorComp::MemoryPoolManager::GetMemory(int bytes)
+{
+	if (bytes <= 0){
+		return NULL;
+	}
+
+	QMutexLocker lock(&m_lock);
+
+	// Look for available chunk:
+	for (int i = 0; i < m_freeList.size(); i++){
+		const ChunkInfo& chunk = m_freeList.at(i);
+		if (chunk.bytes == bytes){
+			ChunkInfo usedChunk = m_freeList.takeAt(i);
+
+			m_usedList.append(usedChunk);
+
+			return usedChunk.ptr;
+		}
+	}
+
+	// No free chunks found -> try to allocate a new one:
+	ChunkInfo usedChunk;
+	usedChunk.ptr = malloc(bytes);
+	if (usedChunk.ptr == NULL){
+		// Cannot allocate more memory:
+		return NULL;
+	}
+
+	usedChunk.bytes = bytes;
+	m_usedList.append(usedChunk);
+
+	return usedChunk.ptr;
+}
+
+
+bool CFastEdgesExtractorComp::MemoryPoolManager::ReleaseMemory(void* ptr)
+{
+	QMutexLocker lock(&m_lock);
+
+	for (int i = 0; i < m_usedList.size(); i++){
+		const ChunkInfo& chunk = m_usedList.at(i);
+		if (chunk.ptr == ptr){
+			ChunkInfo freeChunk = m_usedList.takeAt(i);
+
+			m_freeList.append(freeChunk);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+// this must be called at the very end of the program
+
+void CFastEdgesExtractorComp::MemoryPoolManager::Dispose()
+{
+	for (int i = 0; i < m_freeList.size(); i++){
+		const ChunkInfo& chunk = m_freeList.at(i);
+
+		free(chunk.ptr);
+	}
+
+	m_freeList.clear();
+
+	for (int i = 0; i < m_usedList.size(); i++){
+		const ChunkInfo& chunk = m_usedList.at(i);
+
+		free(chunk.ptr);
+	}
+
+	m_usedList.clear();
 }
 
 

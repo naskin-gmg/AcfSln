@@ -86,10 +86,35 @@ private:
 		ExtNode* listReference;
 	};
 
+	class MemoryPoolManager
+	{
+	public:
+		~MemoryPoolManager();
+
+		void* GetMemory(int bytes);
+		bool ReleaseMemory(void* ptr);
+
+	private:
+		void Dispose();
+
+		struct ChunkInfo
+		{
+			int bytes;
+			void* ptr;
+		};
+
+		typedef QList<ChunkInfo> ChunkList;
+		ChunkList m_freeList;
+		ChunkList m_usedList;
+
+		QMutex m_lock;
+	};
+
 	class InternalContainer
 	{
 	public:
 		InternalContainer(int size);
+		~InternalContainer();
 
 		bool IsContainerFull() const;
 
@@ -101,10 +126,13 @@ private:
 		ExtNode* AddElementToList();
 
 	private:
-		QVector<ExtNode> m_buffer;
+		ExtNode* m_buffer;
+		int m_bufferSize;
 		int m_freeIndex;
 
 		bool m_isContainerFull;
+
+		static MemoryPoolManager s_memoryManager;
 	};
 
 	// static methods
