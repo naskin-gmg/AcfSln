@@ -228,16 +228,20 @@ imath::CVarVector CPositionFromImageSupplierComp::Position::GetComponentValue(Va
 			if (m_values.GetElementsCount() >= 2){
 				return i2d::CVector2d(m_values.GetElement(0), m_values.GetElement(1));
 			}
+			break;
 
 		case VTI_RADIUS:
 			if (m_values.GetElementsCount() >= 3){
 				return imath::CVarVector(1, m_values.GetElement(2));
 			}
+			break;
 
 		case VTI_2D_LINE:
 			if (m_values.GetElementsCount() >= 4){
 				return m_values;
 			}
+			break;
+
 		default:
 			break;	
 	}

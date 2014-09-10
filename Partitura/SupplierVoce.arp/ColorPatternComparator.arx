@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          328449
+          1188
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           0
         </Id>
         <Number>
-          3574
+          3585
         </Number>
         <Description>
           ACF
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          1156
+          328449
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -615,7 +615,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               AdditionalSuppliers
@@ -635,6 +635,25 @@
                   ImageHistogramSupplier
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DiagnosticName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Color Check
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

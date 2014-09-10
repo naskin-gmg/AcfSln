@@ -4,6 +4,28 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1
+        </Id>
+        <Number>
+          1188
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3585
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
@@ -13,45 +35,9 @@
           Qt Framework
         </Description>
       </Version>
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          3574
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1156
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="6">
-    <Element>
-      <ComponentName>
-        ComparatorParams
-      </ComponentName>
-      <X>
-        900
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         ImageHistogramSupplier
@@ -59,9 +45,9 @@
       <X>
         600
       </X>
-      <X>
+      <Y>
         375
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,9 +59,23 @@
       <X>
         275
       </X>
-      <X>
+      <Y>
         500
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComparatorParams
+      </ComponentName>
+      <X>
+        900
       </X>
+      <Y>
+        500
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +87,9 @@
       <X>
         600
       </X>
-      <X>
+      <Y>
         625
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -101,9 +101,9 @@
       <X>
         600
       </X>
-      <X>
+      <Y>
         750
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -115,9 +115,9 @@
       <X>
         1050
       </X>
-      <X>
+      <Y>
         375
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -131,56 +131,14 @@
       <PositionMap count="7">
         <Element>
           <ComponentName>
-            NumericConstraints
-          </ComponentName>
-          <X>
-            1025
-          </X>
-          <X>
-            475
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
-            ComparisonThreshold
-          </ComponentName>
-          <X>
-            1025
-          </X>
-          <X>
-            375
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
             PatternComparatorParams
           </ComponentName>
           <X>
             700
           </X>
-          <X>
+          <Y>
             375
-          </X>
-          <Note>
-            
-          </Note>
-        </Element>
-        <Element>
-          <ComponentName>
-            CheckEnabled
-          </ComponentName>
-          <X>
-            725
-          </X>
-          <X>
-            500
-          </X>
+          </Y>
           <Note>
             
           </Note>
@@ -192,9 +150,9 @@
           <X>
             200
           </X>
-          <X>
+          <Y>
             375
-          </X>
+          </Y>
           <Note>
             
           </Note>
@@ -206,9 +164,9 @@
           <X>
             425
           </X>
-          <X>
+          <Y>
             600
-          </X>
+          </Y>
           <Note>
             
           </Note>
@@ -220,9 +178,51 @@
           <X>
             425
           </X>
-          <X>
+          <Y>
             500
+          </Y>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            NumericConstraints
+          </ComponentName>
+          <X>
+            1025
           </X>
+          <Y>
+            475
+          </Y>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            CheckEnabled
+          </ComponentName>
+          <X>
+            725
+          </X>
+          <Y>
+            500
+          </Y>
+          <Note>
+            
+          </Note>
+        </Element>
+        <Element>
+          <ComponentName>
+            ComparisonThreshold
+          </ComponentName>
+          <X>
+            1025
+          </X>
+          <Y>
+            375
+          </Y>
           <Note>
             
           </Note>

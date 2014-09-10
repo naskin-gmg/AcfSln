@@ -25,7 +25,9 @@ CGraphicsConnectorItem::CGraphicsConnectorItem(
 			QGraphicsItem* parent)
 :	BaseClass(parent),
 	m_sceneProvider(sceneProvider),
-	m_connectFlags(connectFlags)
+	m_connectFlags(connectFlags),
+	m_isSourceSelected(false),
+	m_isDestSelected(false)
 {
 	setAcceptedMouseButtons(0);
 #if QT_VERSION >= 0x050000

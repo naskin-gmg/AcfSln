@@ -222,7 +222,8 @@ CHotfolderProcessingComp::ItemProcessor::ItemProcessor(
 	m_inputFilePath(inputFilePath),
 	m_outputFilePath(outputFilePath),
 	m_itemUuid(itemUuid),
-	m_processingState(iproc::IProcessor::TS_INVALID)
+	m_processingState(iproc::IProcessor::TS_INVALID),
+	m_processingTime(0)
 {
 	start(QThread::LowPriority);
 }

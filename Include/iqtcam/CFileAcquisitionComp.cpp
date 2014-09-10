@@ -177,6 +177,7 @@ void CFileAcquisitionComp::OnComponentCreated()
 // public methods of embedded class ParamsInfo
 
 CFileAcquisitionComp::ParamsInfo::ParamsInfo()
+:	idStamp(0)
 {
 	filesIter = files.end();
 }

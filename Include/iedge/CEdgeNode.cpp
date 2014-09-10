@@ -11,6 +11,7 @@ namespace iedge
 
 
 CEdgeNode::CEdgeNode()
+:	m_weight(0)
 {
 }
 

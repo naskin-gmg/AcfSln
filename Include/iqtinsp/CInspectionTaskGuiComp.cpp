@@ -39,9 +39,17 @@ static const char SupplierTaskMimeType[] = "acf/iinsp::ISupplier";
 
 CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 :	m_currentGuiIndex(-1),
+ 	m_testStarted(false),
 	m_toolBoxPtr(NULL),
 	m_tabWidgetPtr(NULL),
-	m_stackedWidgetPtr(NULL)
+	m_stackedWidgetPtr(NULL),
+	m_buttonGroupPtr(NULL),
+	m_copyAllActionPtr(NULL),
+	m_pasteAllActionPtr(NULL),
+	m_loadAllActionPtr(NULL),
+	m_saveAllActionPtr(NULL),
+	m_copyCurrentTaskActionPtr(NULL),
+	m_pasteCurrentTaskActionPtr(NULL)
 {
 	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
 }

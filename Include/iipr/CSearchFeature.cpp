@@ -17,7 +17,8 @@ CSearchFeature::CSearchFeature()
 	:BaseClass(0.0),
 	m_scale(i2d::CVector2d()),
 	m_angle(0.0),
-	m_index(0)
+	m_index(0),
+	m_isNegativeModelEnabled(false)
 {
 }
 

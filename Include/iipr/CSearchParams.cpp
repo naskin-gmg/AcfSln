@@ -16,7 +16,9 @@ CSearchParams::CSearchParams()
 	:m_angleRange(-180.0, 180.0),
 	m_scaleRange(0.5, 2.0),
 	m_nominalModelsCount(1),
-	m_minScore(0.6)
+	m_minScore(0.6),
+	m_isRotationEnabled(false),
+	m_isScaleEnabled(false)
 {
 }
 
