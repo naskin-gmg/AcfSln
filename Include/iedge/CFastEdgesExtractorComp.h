@@ -2,6 +2,9 @@
 #define iedge_CFastEdgesExtractorComp_included
 
 
+// Qt includes
+#include <QtCore/QMutex>
+
 // ACF includes
 #include "iimg/IBitmap.h"
 #include "iimg/CScanlineMask.h"

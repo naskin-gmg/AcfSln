@@ -7,6 +7,7 @@
 // QT includes
 #include <QtCore/QVector>
 #include <QtCore/qmath.h>
+#include <QtCore/QMutexLocker>
 
 // ACF includes
 #include "istd/TDelPtr.h"
