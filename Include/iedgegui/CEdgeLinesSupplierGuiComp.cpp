@@ -1,5 +1,7 @@
 #include "CEdgeLinesSupplierGuiComp.h"
 
+// Qt includes
+#include <QtCore/QTimer>
 
 // ACF includes
 #include "imath/CVarVector.h"
@@ -7,7 +9,6 @@
 // ACF-Solutions includes
 #include "iedge/IEdgeLinesProvider.h"
 #include "iedge/CEdgeLineContainer.h"
-
 #include "iedgegui/CEdgeLineContainerShape.h"
 
 
@@ -56,7 +57,7 @@ QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
 void CEdgeLinesSupplierGuiComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		DoTest();
+		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
 	}
 }
 

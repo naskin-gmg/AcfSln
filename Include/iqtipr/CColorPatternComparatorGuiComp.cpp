@@ -1,5 +1,8 @@
 #include "iqtipr/CColorPatternComparatorGuiComp.h"
 
+// Qt includes
+#include <QtCore/QTimer>
+
 // ACF includes
 #include "imeas/IDataSequenceProvider.h"
 #include "iprm/IEnableableParam.h"
@@ -140,13 +143,8 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 void CColorPatternComparatorGuiComp::OnSupplierParamsChanged()
 {
-	if (IsGuiCreated()){
-		if (AutoUpdateButton->isChecked()){
-			on_TestButton_clicked();
-		}
-
-		istd::IChangeable::ChangeSet changeSet;
-		UpdateGui(changeSet);
+	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
+		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
 	}
 }
 

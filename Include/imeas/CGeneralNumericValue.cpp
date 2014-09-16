@@ -12,9 +12,11 @@ namespace imeas
 
 void CGeneralNumericValue::SetComponentValue(imeas::INumericValue::ValueTypeId valueTypeId, imath::CVarVector value)
 {
-	istd::CChangeNotifier changeNotifier(this);
+	BeginChanges(GetAnyChange());
 
 	m_supportMap[valueTypeId] = value;
+
+	EndChanges(GetAnyChange());
 }
 
 
@@ -137,9 +139,11 @@ bool CGeneralNumericValue::CopyFrom(const istd::IChangeable& object, Compatibili
 	const imeas::CGeneralNumericValue* sourcePtr = dynamic_cast<const imeas::CGeneralNumericValue*>(&object);
 
 	if (sourcePtr != NULL){
-		istd::CChangeNotifier notifier(this);
+		BeginChanges(GetAnyChange());
 
 		m_supportMap = sourcePtr->m_supportMap;
+
+		EndChanges(GetAnyChange());
 
 		return true;
 	}
