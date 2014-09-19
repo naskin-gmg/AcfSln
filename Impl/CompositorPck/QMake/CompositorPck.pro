@@ -1,7 +1,7 @@
+TARGET = CompositorPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = CompositorPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr
 

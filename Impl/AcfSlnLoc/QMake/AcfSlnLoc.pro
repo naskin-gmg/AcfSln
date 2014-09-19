@@ -1,7 +1,7 @@
+TARGET = AcfSlnLoc
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
-
-TARGET = AcfSlnLoc
 
 HEADERS =
 SOURCES =

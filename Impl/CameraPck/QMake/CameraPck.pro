@@ -1,7 +1,7 @@
+TARGET = CameraPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = CameraPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -licam -liproc -liinsp
 

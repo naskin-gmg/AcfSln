@@ -1,3 +1,4 @@
+TARGET = imeas
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
-TARGET = imeas

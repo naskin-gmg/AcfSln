@@ -1,6 +1,6 @@
-include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
-
 TARGET = HotfolderPck
+
+include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -lihotf -lifileproc -liproc
 

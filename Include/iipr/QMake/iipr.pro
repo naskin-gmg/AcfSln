@@ -1,4 +1,4 @@
+TARGET = iipr
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 
-
-TARGET = iipr

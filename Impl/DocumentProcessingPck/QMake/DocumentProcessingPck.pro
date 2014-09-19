@@ -1,7 +1,7 @@
+TARGET = DocumentProcessingPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = DocumentProcessingPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -lidocproc
 

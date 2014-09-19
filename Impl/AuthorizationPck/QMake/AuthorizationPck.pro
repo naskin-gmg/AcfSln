@@ -1,7 +1,7 @@
+TARGET = AuthorizationPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = AuthorizationPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liauth
 

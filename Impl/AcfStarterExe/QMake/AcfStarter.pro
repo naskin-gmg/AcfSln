@@ -1,7 +1,7 @@
+TARGET = AcfStarter
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
-
-TARGET = AcfStarter
 
 INCLUDEPATH += ../../../Include
 

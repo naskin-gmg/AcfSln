@@ -1,7 +1,7 @@
+TARGET = Compositor
+
 include($(ACFCONFIGDIR)/QMake/ApplicationConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = Compositor
 
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl

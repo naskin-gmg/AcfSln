@@ -1,7 +1,7 @@
+TARGET = iqtauth
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
-
-TARGET = iqtauth
 
 INCLUDEPATH += ../..
 

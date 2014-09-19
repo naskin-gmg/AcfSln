@@ -26,7 +26,6 @@ namespace iedge
 {
 
 
-
 //	reimplemented (iedge::IEdgesExtractor)
 
 bool CFastEdgesExtractorComp::DoContourExtraction(

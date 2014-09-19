@@ -1,7 +1,7 @@
+TARGET = icmpstr
+
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
-
-TARGET = icmpstr
 
 RESOURCES += ../*.qrc
 FORMS += ../*.ui

@@ -2,6 +2,10 @@
 #define i2d_CTubeProjectionsGenerator_included
 
 
+// Qt includes
+#include <QVector>
+
+// ACF includes
 #include "i2d/CTubePolyline.h"
 
 
