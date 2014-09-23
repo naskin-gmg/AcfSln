@@ -65,6 +65,9 @@ public:
 protected:
 	typedef QVector<bool> NodesToRemove;
 
+	// cache of the nodes to avoid constant reallocations
+	mutable NodesToRemove m_nodesToRemove;
+
 	/**
 		Mark points to remove.
 		\return	number of removed points.
