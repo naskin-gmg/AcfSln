@@ -2,7 +2,7 @@
 #define iipr_CImageInterpolationParams_included
 
 
-// IACF includes
+// ACF-Solutions includes
 #include "iipr/IImageInterpolationParams.h"
 
 
