@@ -290,6 +290,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CImageInterpolationParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageNormalizeProcessorComp.cpp"
 				>
 			</File>
@@ -536,6 +540,10 @@
 			</File>
 			<File
 				RelativePath="..\CImageInterpolationParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CImageInterpolationParamsComp.h"
 				>
 			</File>
 			<File

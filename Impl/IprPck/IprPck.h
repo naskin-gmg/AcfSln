@@ -28,7 +28,7 @@
 #include "iipr/CCircleFinderParamsComp.h"
 #include "iipr/CImagePolarTransformProcessorComp.h"
 #include "iipr/CImageCropProcessorComp.h"
-#include "iipr/CImageInterpolationParams.h"
+#include "iipr/CImageInterpolationParamsComp.h"
 #include "iipr/CRingPatternGeneratorComp.h"
 #include "iipr/CRingPatternGeneratorParamsComp.h"
 #include "iipr/CRgbToGrayProcessorComp.h"
@@ -94,12 +94,7 @@ typedef iipr::CImagePolarTransformProcessorComp ImagePolarTransformProcessor;
 typedef iipr::CImageCropProcessorComp ImageCropProcessor;
 typedef iipr::CRingPatternGeneratorComp RingPatternGenerator;
 
-typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<iipr::CImageInterpolationParams>,
-			iipr::IImageInterpolationParams,
-			iser::ISerializable,
-			istd::IChangeable,
-			imod::IModel> ImageInterpolationParams;
+typedef icomp::TModelCompWrap<iipr::CImageInterpolationParamsComp> ImageInterpolationParams;
 
 typedef icomp::TModelCompWrap<iipr::CRingPatternGeneratorParamsComp> RingPatternGeneratorParams;
 typedef iipr::CRgbToGrayProcessorComp RgbToGrayProcessor;
