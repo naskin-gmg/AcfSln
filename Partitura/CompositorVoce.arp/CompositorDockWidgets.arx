@@ -406,7 +406,7 @@
         QtGuiPck
       </PackageId>
       <ComponentId>
-        SelectableCommandsProvider
+        CommandBasedSelectionController
       </ComponentId>
       <Data>
         <IsEnabled>
