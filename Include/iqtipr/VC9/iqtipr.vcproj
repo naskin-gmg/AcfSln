@@ -355,103 +355,107 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CCaliperParamsGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CCaliperParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CCircleFinderParamsGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CCircleFinderParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CColorPatternComparatorGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CColorPatternComparatorGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CConvolution2dParamsGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CConvolution2dParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CGeneralSearchParamsGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CGeneralSearchParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CImageInterpolationParamsGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CImageInterpolationParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CLineProjectionSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CMultiLineProjectionSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CMultiLineProjectionSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CMultiLineSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CMultiLineSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CPatternTeachingControllerGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CPatternTeachingControllerGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CProcessedBitmapView.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CProcessedBitmapView.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CSearchBasedFeaturesSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\moc_CValueSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\moc_CValueSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CCaliperParamsGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CCaliperParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CCircleFinderParamsGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CCircleFinderParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CColorPatternComparatorGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CColorPatternComparatorGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CConvolution2dParamsGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CConvolution2dParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CGeneralSearchParamsGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CGeneralSearchParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CLineProjectionSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CImageInterpolationParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CMultiLineProjectionSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CMultiLineSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CMultiLineProjectionSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CPatternTeachingControllerGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CMultiLineSupplierGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CProcessedBitmapView.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CPatternTeachingControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CSearchBasedFeaturesSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CProcessedBitmapView.h"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtipr\ui_CValueSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CSearchBasedFeaturesSupplierGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtipr\ui_CValueSupplierGuiComp.h"
 				>
 			</File>
 		</Filter>

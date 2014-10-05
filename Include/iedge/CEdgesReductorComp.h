@@ -2,6 +2,8 @@
 #define iedge_CEdgesReductorComp_included
 
 
+#include <QtCore/QBitArray>
+
 // ACF includes
 #include "istd/TSmartPtr.h"
 #include "iproc/TSyncProcessorCompBase.h"
@@ -37,6 +39,7 @@ public:
 				double positionTolerance,
 				double weightTolerance,
 				CEdgeLine& result) const;
+
 	void GetReducedLines(
 				const CEdgeLineContainer& edgeLines,
 				double positionTolerance,
@@ -63,7 +66,7 @@ public:
 	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
 protected:
-	typedef QVector<bool> NodesToRemove;
+	typedef QBitArray NodesToRemove;
 
 	// cache of the nodes to avoid constant reallocations
 	mutable NodesToRemove m_nodesToRemove;

@@ -42,6 +42,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated into group 'Intermediate Results'", false, "IntermediateResultsGui");
+		I_ASSIGN(m_showResultShapesAttrPtr, "ShowResultShapes", "Show result shapes in the image as circles", true, true);
 	I_END_COMPONENT;
 
 	CSearchBasedFeaturesSupplierGuiComp();
@@ -77,6 +78,7 @@ private:
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
+	I_ATTR(bool, m_showResultShapesAttrPtr);
 
 	// result shapes
 	typedef iview::TCircleVisualObject<> VisualObject;

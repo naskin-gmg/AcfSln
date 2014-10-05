@@ -129,14 +129,15 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 						modelItemPtr->setBackground(CT_SCALE, QBrush(Qt::red));
 					}
 
-
 					ResultsList->addTopLevelItem(modelItemPtr);
 
 					// add shape
-					VisualObject* visualObject = new VisualObject(false);
-					visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
-					visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
-					m_visualPositions.PushBack(visualObject);
+					if (*m_showResultShapesAttrPtr){
+						VisualObject* visualObject = new VisualObject(false);
+						visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
+						visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+						m_visualPositions.PushBack(visualObject);
+					}
 				}
 			}
 		}
@@ -168,12 +169,20 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiCreated()
 #else
 	ResultsList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 #endif
+
+	if (m_intermediateResultsGuiCompPtr.IsValid()){
+		m_intermediateResultsGuiCompPtr->CreateGui(IntermediateWidget);
+	}
 }
 
 
 void CSearchBasedFeaturesSupplierGuiComp::OnGuiHidden()
 {
 	AutoTestButton->setChecked(false);
+
+	if (m_intermediateResultsGuiCompPtr.IsValid()){
+		m_intermediateResultsGuiCompPtr->DestroyGui();
+	}
 
 	BaseClass::OnGuiHidden();
 }

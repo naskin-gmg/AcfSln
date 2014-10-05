@@ -37,11 +37,13 @@ public:
 	I_BEGIN_COMPONENT(CUserGuiComp);
 		I_REGISTER_INTERFACE(iauth::IPasswordChanger);
 		I_ASSIGN(m_rightsProviderIfPtr, "RightsProvider", "RightsProvider", false, "RightsProvider");
-		I_ASSIGN(m_rightsModelIfPtr, "RightsProvider", "RightsProvider", true, "RightsProvider");
-		I_ASSIGN(m_userLoginIfPtr, "RightsProvider", "RightsProvider", true, "RightsProvider");
+		I_ASSIGN_TO(m_rightsModelIfPtr, m_rightsProviderIfPtr, true);
+		I_ASSIGN_TO(m_userLoginIfPtr, m_rightsProviderIfPtr, true);
 		I_ASSIGN(m_usersManagerRightIdAttrPtr, "UsersManagerRightId", "Right ID for user manager", false, "");
 		I_ASSIGN(m_changePasswordRightIdAttrPtr, "ChangePasswordRightsId", "Right ID for changing password", false, "");
 	I_END_COMPONENT;
+
+	CUserGuiComp();
 
 	// reimplemented (iauth::IPasswordChanger)
 	virtual bool TryChangePassword(iauth::CUser& user) const;
@@ -70,6 +72,9 @@ private:
 
 	I_ATTR(QByteArray, m_usersManagerRightIdAttrPtr);
 	I_ATTR(QByteArray, m_changePasswordRightIdAttrPtr);
+
+	mutable class CUserManagerDialog* m_userManagerDialogPtr;
+	mutable class CChangePasswordDialog* m_passwordDialogPtr;
 };
 
 } // namespace iqtauth
