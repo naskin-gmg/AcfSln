@@ -58,6 +58,7 @@ public:
 	virtual QByteArray GetPropertyId(int propertyIndex) const;
 	virtual QString GetPropertyDescription(int propertyIndex) const;
 	virtual IProperty::PropertyFlags GetPropertyFlags(int propertyIndex) const;
+	virtual int FindPropertyIndex(const QByteArray& propertyId) const;
 	virtual void InsertProperty(
 				iser::IObject* objectPtr,
 				const QByteArray& propertyId,

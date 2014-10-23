@@ -107,6 +107,23 @@ IProperty::PropertyFlags CPropertiesManager::GetPropertyFlags(int propertyIndex)
 }
 
 
+int CPropertiesManager::FindPropertyIndex(const QByteArray& propertyId) const
+{
+	int propertiesCount = m_propertiesList.GetCount();
+
+	for (int propertyIndex = 0; propertyIndex < propertiesCount; propertyIndex++){
+		CPropertiesManager::PropertyInfo* propertyInfoPtr = m_propertiesList.GetAt(propertyIndex);
+		Q_ASSERT(propertyInfoPtr != NULL);
+
+		if (propertyInfoPtr->propertyId == propertyId){
+			return propertyIndex;
+		}
+	}
+
+	return -1;
+}
+
+
 void CPropertiesManager::InsertProperty(
 			iser::IObject* objectPtr,
 			const QByteArray& propertyId,

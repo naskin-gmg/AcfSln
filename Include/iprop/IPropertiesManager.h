@@ -70,13 +70,20 @@ public:
 	virtual IProperty::PropertyFlags GetPropertyFlags(int propertyIndex) const = 0;
 
 	/**
+		Find index of some property based on its ID.
+		\param	propertyId	unique ID of the property in the properties repository.
+		\return				index of property or negative value if there is no property with given ID.
+	*/
+	virtual int FindPropertyIndex(const QByteArray& propertyId) const = 0;
+
+	/**
 		Insert an property into the object.
-		\param objectPtr	Property data object.
-		\param propertyId	Unique ID of the property in the properties repository.
-		\param propertyDescription	Human readable description of the property.
-		\param propertyFlags	Property flags. \sa IProperty::PropertyFlags.
-		\param releaseFlag	Indicate who control the property's memory.
-		If \c releaseFlag is \c true, the control over the \c objectPtr will be overtaken by this object.
+		\param	objectPtr		property data object.
+		\param	propertyId		unique ID of the property in the properties repository.
+		\param	propertyDescription	human readable description of the property.
+		\param	propertyFlags	Property flags. \sa IProperty::PropertyFlags.
+		\param	releaseFlag		indicate who control the property's memory.
+								If it equals \c true, the control over the \c objectPtr will be overtaken by manager.
 	*/
 	virtual void InsertProperty(
 				iser::IObject* objectPtr,
