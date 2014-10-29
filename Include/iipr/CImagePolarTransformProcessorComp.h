@@ -19,8 +19,9 @@ public:
 	typedef CImageRegionProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CImagePolarTransformProcessorComp);
-		I_ASSIGN(m_angleResolutionParamIdAttrPtr, "AngleResolutionParamId", "ID of the angle resolution parameter in the parameter set", false, "AngleResolutionParamId");
-		I_ASSIGN(m_interpolationParamIdAttrPtr, "InterpolationParamId", "ID of the interpolation parameter in the parameter set", false, "InterpolationParamId");
+		I_ASSIGN(m_angleResolutionParamIdAttrPtr, "AngleResolutionParamId", "ID of the angle resolution parameter in the parameter set", true, "AngleResolution");
+		I_ASSIGN(m_interpolationParamIdAttrPtr, "InterpolationParamId", "ID of the interpolation parameter in the parameter set", true, "Interpolation");
+		I_ASSIGN(m_extraUnrollingAttrPtr, "ExtraUnrollingParamId", "ID of the extra unrolling value parameter in the parameter set", true, "ExtraUnrolling");
 	I_END_COMPONENT;
 
 protected:
@@ -34,6 +35,7 @@ protected:
 private:
 	I_ATTR(QByteArray, m_angleResolutionParamIdAttrPtr);
 	I_ATTR(QByteArray, m_interpolationParamIdAttrPtr);
+	I_ATTR(QByteArray, m_extraUnrollingAttrPtr);
 };
 
 

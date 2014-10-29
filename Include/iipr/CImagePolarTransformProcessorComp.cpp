@@ -86,11 +86,24 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	int r1 = 0;
 	int r2 = radius;
 
+	double extraUnrolling = 1.0;
+	iprm::TParamsPtr<imeas::INumericValue> extraUnrollingParamPtr(paramsPtr, *m_extraUnrollingAttrPtr);
+	if (extraUnrollingParamPtr.IsValid()){
+		imath::CVarVector values = extraUnrollingParamPtr->GetValues();
+		Q_ASSERT(!values.IsEmpty());
+		if (!values.IsEmpty()){
+			extraUnrolling = values[0];
+		}
+	}
+
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(realAoiPtr);
 	if (annulusPtr != NULL){
 		r1 = qCeil(annulusPtr->GetInnerRadius());
 		r2 = qFloor(annulusPtr->GetOuterRadius());
 		radius = (r2 - r1);
+
+		angleDimension *= extraUnrolling;
+		angleRange *= extraUnrolling;
 	}
 
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(realAoiPtr);
@@ -98,6 +111,9 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 		r1 = 0;
 		r2 = qFloor(circlePtr->GetRadius());
 		radius = r2;
+
+		angleDimension *= extraUnrolling;
+		angleRange *= extraUnrolling;
 	}
 
 	const i2d::CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const i2d::CAnnulusSegment*>(realAoiPtr);
