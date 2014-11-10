@@ -541,6 +541,20 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 }
 
 
+// reimplemented (icomp::CComponentBase)
+
+void CCircleFindProcessorComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	// Init components for using in multithreading context:
+	m_slaveProcessorCompPtr.IsValid();
+	m_featuresMapperCompPtr.IsValid();
+	m_resultCalibrationCompPtr.IsValid();
+	m_tempConsumerCompPtr.IsValid();
+}
+
+
 } // namespace iipr
 
 
