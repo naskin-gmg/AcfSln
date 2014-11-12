@@ -263,7 +263,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 	InterfaceFilter filter;
 
 	if (attributeStaticInfoPtr != NULL){
-		const QByteArray attributeType = attributeStaticInfoPtr->GetAttributeTypeName();
+		const QByteArray attributeType = attributeStaticInfoPtr->GetAttributeTypeId();
 		bool isReference = (attributeType == icomp::CReferenceAttribute::GetTypeName());
 		bool isMultiReference = (attributeType == icomp::CMultiReferenceAttribute::GetTypeName());
 		bool isFactory = (attributeType == icomp::CFactoryAttribute::GetTypeName());

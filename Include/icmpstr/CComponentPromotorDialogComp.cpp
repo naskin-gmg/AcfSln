@@ -70,7 +70,7 @@ void CComponentPromotorDialogComp::InsertElementToFilters(
 	if (staticInfoPtr != NULL){
 		elementInterfaces = staticInfoPtr->GetMetaIds(icomp::IElementStaticInfo::MGI_INTERFACES);
 		m_supportedFilter.interfaces |= elementInterfaces;
-		m_supportedFilter.attributes |= staticInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		m_supportedFilter.attributes |= staticInfoPtr->GetAttributeMetaIds();
 		m_supportedFilter.subcomponents |= staticInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
 
 		m_supportedFilter.elements.insert(elementName);
@@ -107,20 +107,18 @@ void CComponentPromotorDialogComp::InsertElementToFilters(
 
 			const icomp::IComponentStaticInfo* checkedStaticInfoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(checkedInfoPtr->address);
 			if (checkedStaticInfoPtr != NULL){
-				icomp::IRegistryElement::Ids checkedAttributes = checkedInfoPtr->elementPtr->GetAttributeIds();
-				for (		icomp::IRegistryElement::Ids::ConstIterator checkedAttributeIter = checkedAttributes.constBegin();
+				iattr::IAttributesProvider::AttributeIds checkedAttributes = checkedInfoPtr->elementPtr->GetAttributeIds();
+				for (		iattr::IAttributesProvider::AttributeIds::ConstIterator checkedAttributeIter = checkedAttributes.constBegin();
 							checkedAttributeIter != checkedAttributes.constEnd();
 							++checkedAttributeIter){
 					const QByteArray& checkedAttributeId = *checkedAttributeIter;
 
-					const icomp::IRegistryElement::AttributeInfo* checkedAttrInfoPtr = checkedInfoPtr->elementPtr->GetAttributeInfo(checkedAttributeId);
-					Q_ASSERT(checkedAttrInfoPtr != NULL);
-
+					const iser::IObject* checkedAttributePtr = checkedInfoPtr->elementPtr->GetAttribute(checkedAttributeId);
 					const icomp::IAttributeStaticInfo* checkedAttrStaticInfoPtr = checkedStaticInfoPtr->GetAttributeInfo(checkedAttributeId);
-					if (checkedAttrStaticInfoPtr != NULL){
+					if ((checkedAttributePtr != NULL) && (checkedAttrStaticInfoPtr != NULL)){
 						icomp::IElementStaticInfo::Ids attrRelatedInterfaces = checkedAttrStaticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);
 
-						const icomp::CIdAttribute* referenceAttrPtr = dynamic_cast<const icomp::CIdAttribute*>(checkedAttrInfoPtr->attributePtr.GetPtr());
+						const iattr::CIdAttribute* referenceAttrPtr = dynamic_cast<const iattr::CIdAttribute*>(checkedAttributePtr);
 						if (referenceAttrPtr != NULL){
 							const QByteArray connectedElementName = referenceAttrPtr->GetValue();
 							QByteArray baseId;
@@ -136,7 +134,7 @@ void CComponentPromotorDialogComp::InsertElementToFilters(
 							}
 						}
 
-						const icomp::CIdListAttribute* multiReferenceAttrPtr = dynamic_cast<const icomp::CIdListAttribute*>(checkedAttrInfoPtr->attributePtr.GetPtr());
+						const iattr::CIdListAttribute* multiReferenceAttrPtr = dynamic_cast<const iattr::CIdListAttribute*>(checkedAttributePtr);
 						if (multiReferenceAttrPtr != NULL){
 							int referencesCount = multiReferenceAttrPtr->GetValuesCount();
 							for (int i = 0; i < referencesCount; ++i){
@@ -285,7 +283,7 @@ void CComponentPromotorDialogComp::CalcFilteredComponents()
 			}
 
 			if (AttributesPolicyCB->isEnabled() && (AttributesPolicyCB->currentIndex() > FT_IGNORED)){
-				icomp::IElementStaticInfo::Ids attributes = staticInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+				iattr::IAttributesProvider::AttributeIds attributes = staticInfoPtr->GetAttributeMetaIds();
 
 				switch (AttributesPolicyCB->currentIndex()){
 				case FT_USED:

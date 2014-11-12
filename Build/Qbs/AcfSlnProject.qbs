@@ -17,7 +17,6 @@ Project{
 			"../../Include/iqtex/Qbs/iqtex.qbs",
 			"../../Include/imm/Qbs/imm.qbs",
 			"../../Include/iqtmm/Qbs/iqtmm.qbs",
-			"../../Include/iprop/Qbs/iprop.qbs",
 			"../../Include/icam/Qbs/icam.qbs",
 			"../../Include/iqtauth/Qbs/iqtauth.qbs",
 			"../../Include/iqtcam/Qbs/iqtcam.qbs",
@@ -53,7 +52,6 @@ Project{
 			"../../Impl/InspectionPck/Qbs/InspectionPck.qbs",
 			"../../Impl/IprPck/Qbs/IprPck.qbs",
 			"../../Impl/MeasPck/Qbs/MeasPck.qbs",
-			"../../Impl/PropPck/Qbs/PropPck.qbs",
 			"../../Impl/WizardPck/Qbs/WizardPck.qbs",
 			"../../Impl/QtAuthorizationPck/Qbs/QtAuthorizationPck.qbs",
 			"../../Impl/QtCameraPck/Qbs/QtCameraPck.qbs",
@@ -99,7 +97,7 @@ Project{
 		Depends{ name: "InspectionPck" }
 		Depends{ name: "IprPck" }
 		Depends{ name: "MeasPck" }
-		Depends{ name: "PropPck" }
+//		Depends{ name: "PropPck" }
 		Depends{ name: "WizardPck" }
 		Depends{ name: "QtAuthorizationPck" }
 		Depends{ name: "QtCameraPck" }

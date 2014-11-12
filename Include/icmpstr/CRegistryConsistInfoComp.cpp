@@ -191,7 +191,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	bool retVal = true;
 
 	if (metaInfoPtr != NULL){
-		icomp::IElementStaticInfo::Ids attributeIds = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		iattr::IAttributesProvider::AttributeIds attributeIds = metaInfoPtr->GetAttributeMetaIds();
 		for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
 					++attrIter){
@@ -226,10 +226,9 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	const icomp::IRegistryElement* elementPtr = elementInfo.elementPtr.GetPtr();
 	if (elementPtr != NULL){
 		if (metaInfoPtr == NULL){	// if no meta info, we try to check attributes from existing attributes list
-			icomp::IRegistryElement::Ids ids = elementPtr->GetAttributeIds();
-
-			for (		icomp::IRegistryElement::Ids::const_iterator iter = ids.begin();
-						iter != ids.end();
+			iattr::IAttributesProvider::AttributeIds ids = elementPtr->GetAttributeIds();
+			for (		iattr::IAttributesProvider::AttributeIds::ConstIterator iter = ids.constBegin();
+						iter != ids.constEnd();
 						++iter){
 				const QByteArray& attributeId = *iter;
 
@@ -278,7 +277,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			if (attrMetaInfoPtr != NULL){
 				const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = infoPtr->elementPtr->GetAttributeInfo(attributeName);
 				if (attrInfoPtr != NULL){
-					if (attrMetaInfoPtr->GetAttributeTypeName() != attrInfoPtr->attributeTypeName){
+					if (attrMetaInfoPtr->GetAttributeTypeId() != attrInfoPtr->attributeTypeName){
 						if (reasonConsumerPtr != NULL){
 							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
@@ -286,7 +285,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 										tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
 													.arg(QString(attributeName))
 													.arg(QString(elementName))
-													.arg(QString(attrMetaInfoPtr->GetAttributeTypeName()))
+													.arg(QString(attrMetaInfoPtr->GetAttributeTypeId()))
 													.arg(QString(attrInfoPtr->attributeTypeName)),
 										tr("Attribute Consistency Check"),
 										0)));

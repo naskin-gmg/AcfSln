@@ -100,7 +100,7 @@ private:
 	{
 		icomp::IElementStaticInfo::Ids elements;
 		icomp::IElementStaticInfo::Ids interfaces;
-		icomp::IElementStaticInfo::Ids attributes;
+		iattr::IAttributesProvider::AttributeIds attributes;
 		icomp::IElementStaticInfo::Ids subcomponents;
 	};
 

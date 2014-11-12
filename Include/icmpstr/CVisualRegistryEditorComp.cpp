@@ -260,19 +260,13 @@ void CVisualRegistryEditorComp::AddConnectorsToScene()
 			continue;
 		}
 
-		icomp::IRegistryElement::Ids attributeIds = elementPtr->GetAttributeIds();
-
-		for (		icomp::IRegistryElement::Ids::const_iterator iter = attributeIds.begin(); 
+		iattr::IAttributesProvider::AttributeIds attributeIds = elementPtr->GetAttributeIds();
+		for (		iattr::IAttributesProvider::AttributeIds::const_iterator iter = attributeIds.begin();
 					iter != attributeIds.end(); 
 					iter++){
 			QByteArray attributeId = *iter;
 
-			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
-			if (attributeInfoPtr == NULL){
-				continue;
-			}
-
-			iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
+			iser::IObject* attributePtr = elementPtr->GetAttribute(attributeId);
 			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
 			if (referenceAttributePtr != NULL){		
 				const QByteArray& componentId = referenceAttributePtr->GetValue();
@@ -438,7 +432,7 @@ void CVisualRegistryEditorComp::ConnectReferences(const QByteArray& componentRol
 			continue;
 		}
 
-		icomp::IElementStaticInfo::Ids attributeIds = compMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		iattr::IAttributesProvider::AttributeIds attributeIds = compMetaInfoPtr->GetAttributeMetaIds();
 		icomp::IElementStaticInfo::Ids::const_iterator attrIter;
 		for (attrIter = attributeIds.begin(); attrIter != attributeIds.end(); ++attrIter){
 
@@ -483,8 +477,8 @@ void CVisualRegistryEditorComp::ConnectReferences(const QByteArray& componentRol
 
 			icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
-			if (attributeInfoPtr == NULL && createAttribute){
-				QByteArray attrType = staticAttributeInfoPtr->GetAttributeTypeName();
+			if ((attributeInfoPtr == NULL) && createAttribute){
+				QByteArray attrType = staticAttributeInfoPtr->GetAttributeTypeId();
 				icomp::IRegistryElement::AttributeInfo* newAttributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId, attrType);
 				if (newAttributeInfoPtr != NULL){
 					newAttributeInfoPtr->attributePtr.SetPtr(registryElementPtr->CreateAttribute(attrType));
