@@ -104,7 +104,7 @@ protected:
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
-private:
+protected:
 	class MessageContainer: virtual public ilog::CMessageContainer
 	{
 	public:
