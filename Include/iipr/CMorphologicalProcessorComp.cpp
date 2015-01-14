@@ -219,16 +219,17 @@ static void ProcessImage(
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
 
-			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 			break;
 		}
+
 		case CMorphologicalProcessorComp::PM_CLOSING:{
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
 
-			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 			break;
 		}
 	}
