@@ -30,6 +30,10 @@ public:
 	double GetWeight() const;
 	void SetWeight(double weight);
 
+	// reimplemented (imeas::INumericValue)
+	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
+	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -61,6 +65,30 @@ template <class BaseObject>
 void TWeightedFeatureWrap<BaseObject>::SetWeight(double weight)
 {
 	m_weight = weight;
+}
+
+
+// reimplemented (imeas::INumericValue)
+
+template <class BaseObject>
+bool TWeightedFeatureWrap<BaseObject>::IsValueTypeSupported(ValueTypeId valueTypeId) const
+{
+	return (valueTypeId == VTI_AUTO || valueTypeId == VTI_WEIGHT);
+}
+
+
+template <class BaseObject>
+imath::CVarVector TWeightedFeatureWrap<BaseObject>::GetComponentValue(ValueTypeId valueTypeId) const
+{
+	if (valueTypeId == VTI_AUTO){
+		return m_values;
+	}
+
+	if (valueTypeId == VTI_WEIGHT){
+		return imath::CVarVector(1, m_weight);
+	}
+
+	return imath::CVarVector();
 }
 
 
