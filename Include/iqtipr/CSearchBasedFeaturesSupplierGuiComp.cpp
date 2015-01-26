@@ -115,11 +115,11 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
 				if (searchFeaturePtr != NULL){
 					QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
-					modelItemPtr->setText(CT_ID, searchFeaturePtr->GetId());
+					modelItemPtr->setText(CT_ID, searchFeaturePtr->GetObjectId());
 					modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100, 'f', 2));
 					modelItemPtr->setText(CT_POSITION, QString::number(searchFeaturePtr->GetPosition().GetX(), 'f', 2)+","+QString::number(searchFeaturePtr->GetPosition().GetY(), 'f', 2));
 					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle()), 'f', 2));
-					modelItemPtr->setText(CT_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2)+","+QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
+					modelItemPtr->setText(CT_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
 
 					if (searchFeaturePtr->IsNegativeModelEnabled()){
 						modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));

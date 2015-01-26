@@ -1,6 +1,10 @@
 #pragma once
 
 
+// ACF includes
+#include "i2d/CPosition2d.h"
+#include "i2d/CAffineTransformation2d.h"
+
 // ACF-Solutions includes
 #include "iipr/CObjectFeature.h"
 
@@ -10,27 +14,21 @@ namespace iipr
 
 
 /**
-	Implementation of the pattern search feature.
+	Implementation of the blob-based feature.
 */
-class CSearchFeature: public CObjectFeature
+class CBlobFeature: public iipr::CObjectFeature
 {
 public:
-	typedef CObjectFeature BaseClass;
+	typedef iipr::CObjectFeature BaseClass;
 
-	CSearchFeature();
-
-	CSearchFeature(
-				double weight,
+	CBlobFeature();
+	CBlobFeature(
+				int pixelCount,
+				int perimeter,
 				const i2d::CVector2d& position,
-				double angle,
-				const i2d::CVector2d& scale,
-				bool negativeModel = false,
-				int index = -1,
-				const QByteArray& objectId = QByteArray());
+				double angle = 0.0);
 
-	int GetIndex() const;
-	bool IsNegativeModelEnabled() const;
-	void SetNegativeModelEnabled(bool enable);
+	double GetCircularity() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -40,8 +38,8 @@ public:
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
-	int m_index;
-	bool m_isNegativeModelEnabled;
+	int m_pixelCount;
+	int m_perimeter;
 };
 
 

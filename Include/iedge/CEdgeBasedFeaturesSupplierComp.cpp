@@ -238,8 +238,8 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 							return WS_CRITICAL;
 						}
 
-						QString modelId = multiSearchParamsManagerPtr->GetParamsSetName(searchIndex) + "/" + clonedFeaturePtr->GetId();
-						clonedFeaturePtr->SetId(modelId);
+						QString modelId = multiSearchParamsManagerPtr->GetParamsSetName(searchIndex) + "/" + clonedFeaturePtr->GetObjectId();
+						clonedFeaturePtr->SetObjectId(modelId.toUtf8());
 
 						if (		(m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR) &&
 									clonedFeaturePtr->IsNegativeModelEnabled()){
@@ -303,7 +303,7 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 						return WS_CRITICAL;
 					}
 
-					QString modelId = searchFeaturePtr->GetId();
+					QString modelId = searchFeaturePtr->GetObjectId();
 
 					if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled()){
 						searchResultText = QObject::tr("Not allowed model found: '%1'").arg(modelId);

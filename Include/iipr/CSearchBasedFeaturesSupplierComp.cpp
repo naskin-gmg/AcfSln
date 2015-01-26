@@ -227,18 +227,27 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					}
 
 					for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-						const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&searchResults.GetNumericValue(featureIndex));
+						const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetNumericValue(featureIndex));
+						if (objectFeaturePtr == NULL){
+							return WS_CRITICAL;
+
+						}
+						const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(objectFeaturePtr);
 						if (searchFeaturePtr == NULL){
 							return WS_CRITICAL;
 						}
 
-						if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled()){
+						if (		m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && 
+									((searchFeaturePtr != NULL) && searchFeaturePtr->IsNegativeModelEnabled())){
 							m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 						}
 
-						const_cast<iipr::CSearchFeature*>(searchFeaturePtr)->SetId(multiSearchParamsManagerPtr->GetParamsSetName(searchIndex)+"/"+searchFeaturePtr->GetId());
 
-						istd::IChangeable* featurePtr = searchFeaturePtr->CloneMe();
+						QString objectId = multiSearchParamsManagerPtr->GetParamsSetName(searchIndex) + "/" + objectFeaturePtr->GetObjectId();
+
+						const_cast<iipr::CObjectFeature*>(objectFeaturePtr)->SetObjectId(objectId.toUtf8());
+
+						istd::IChangeable* featurePtr = objectFeaturePtr->CloneMe();
 						if (featurePtr == NULL){
 							return WS_CRITICAL;
 						}
@@ -288,8 +297,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 				for (int featureIndex = 0; featureIndex < modelsCount; featureIndex++){
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
-
-					if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled()){
+					if ((searchFeaturePtr != NULL) && (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled())){
 						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 					}
 				}				
@@ -317,10 +325,10 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 				i2d::CAffineTransformation2d transform;
 
-				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
-				Q_ASSERT(searchFeaturePtr != NULL);
+				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetNumericValue(featureIndex));
+				Q_ASSERT(objectFeaturePtr != NULL);
 
-				transform.Reset(searchFeaturePtr->GetPosition(), -searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());
+				transform.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
 
 				m_transformationList.push_back(transform);
 			}
