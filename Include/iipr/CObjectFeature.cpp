@@ -154,7 +154,7 @@ bool CObjectFeature::Serialize(iser::IArchive& archive)
 
 	static iser::CArchiveTag angleTag("Angle", "Angle of found model", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag scaleTag("Scale", "Scale of found model", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag objectIdTag("ObjectId", "ID of the fond object", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag objectIdTag("ObjectId", "ID of the found object", iser::CArchiveTag::TT_LEAF);
 
 	retVal = retVal && archive.BeginTag(angleTag);
 	retVal = retVal && archive.Process(m_angle);

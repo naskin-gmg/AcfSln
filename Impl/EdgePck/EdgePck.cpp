@@ -10,7 +10,7 @@ namespace EdgePck
 
 I_EXPORT_PACKAGE(
 			"AcfSln/EdgePck",
-			"Edge extraction and processing processing package",
+			"Edge extraction and processing package",
 			"Edge Outline Contour Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Edge Processing\"") IM_COMPANY("ImagingTools"));
 
 I_EXPORT_COMPONENT(

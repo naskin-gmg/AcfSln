@@ -9,7 +9,7 @@
 #include "iipr/CObjectFeature.h"
 
 
-namespace iipr
+namespace iblob
 {
 
 
@@ -23,12 +23,14 @@ public:
 
 	CBlobFeature();
 	CBlobFeature(
-				int pixelCount,
-				int perimeter,
+				double area,
+				double perimeter,
 				const i2d::CVector2d& position,
 				double angle = 0.0);
 
 	double GetCircularity() const;
+	double GetPerimeter() const;
+	double GetArea() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -38,11 +40,11 @@ public:
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
-	int m_pixelCount;
-	int m_perimeter;
+	double m_area;
+	double m_perimeter;
 };
 
 
-} // namespace iipr
+} // namespace iblob
 
 

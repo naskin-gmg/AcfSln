@@ -1,4 +1,4 @@
-#include "iipr/CBlobFeature.h"
+#include "iblob/CBlobFeature.h"
 
 
 // ACF includes
@@ -8,26 +8,26 @@
 #include "iser/CArchiveTag.h"
 
 
-namespace iipr
+namespace iblob
 {
 
 
 // public methods
 
 CBlobFeature::CBlobFeature()
-	:m_pixelCount(0),
-	m_perimeter(0)
+	:m_area(0.0),
+	m_perimeter(0.0)
 {
 }
 
 
 CBlobFeature::CBlobFeature(
-			int pixelCount,
-			int perimeter,
+			double area,
+			double perimeter,
 			const i2d::CVector2d& position,
 			double angle)
 	:BaseClass(1.0, position, angle),
-	m_pixelCount(pixelCount),
+	m_area(area),
 	m_perimeter(perimeter)
 {
 }
@@ -40,7 +40,19 @@ double CBlobFeature::GetCircularity() const
 		return 0.0;
 	}
 
-	return 4 * I_PI * m_pixelCount / double((m_perimeter * m_perimeter));
+	return 4 * I_PI * m_area / (m_perimeter * m_perimeter);
+}
+
+
+double CBlobFeature::GetPerimeter() const
+{
+	return m_perimeter;
+}
+
+
+double CBlobFeature::GetArea() const
+{
+	return m_area;
 }
 
 
@@ -52,12 +64,12 @@ bool CBlobFeature::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag pixelCountTag("PixelCount", "Number of blob's pixels", iser::CArchiveTag::TT_LEAF);
-	retVal = retVal && archive.BeginTag(pixelCountTag);
-	retVal = retVal && archive.Process(m_pixelCount);
-	retVal = retVal && archive.EndTag(pixelCountTag);
+	static iser::CArchiveTag areaTag("Area", "Area of the found blob", iser::CArchiveTag::TT_LEAF);
+	retVal = retVal && archive.BeginTag(areaTag);
+	retVal = retVal && archive.Process(m_area);
+	retVal = retVal && archive.EndTag(areaTag);
 
-	static iser::CArchiveTag perimeterTag("Perimeter", "Number of pixels that surround object", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag perimeterTag("Perimeter", "Length of the object's contour", iser::CArchiveTag::TT_LEAF);
 	retVal = retVal && archive.BeginTag(perimeterTag);
 	retVal = retVal && archive.Process(m_perimeter);
 	retVal = retVal && archive.EndTag(perimeterTag);
@@ -74,7 +86,7 @@ bool CBlobFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	if (objectPtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		m_pixelCount = objectPtr->m_pixelCount;
+		m_area = objectPtr->m_area;
 		m_perimeter = objectPtr->m_perimeter;
 
 		BaseClass::CopyFrom(object, mode);
@@ -98,6 +110,6 @@ istd::IChangeable* CBlobFeature::CloneMe(CompatibilityMode mode) const
 }
 
 
-} // namespace iipr
+} // namespace iblob
 
 
