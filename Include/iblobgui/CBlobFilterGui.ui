@@ -14,7 +14,16 @@
    <string>Form</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -119,7 +128,7 @@
    <item>
     <widget class="QToolButton" name="RemoveButton">
      <property name="icon">
-      <iconset resource="../../../../AcfPublic/Acf/Include/iqtgui/iqtgui.qrc">
+      <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
        <normaloff>:/Icons/Delete</normaloff>:/Icons/Delete</iconset>
      </property>
     </widget>
@@ -134,7 +143,7 @@
   <tabstop>RemoveButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../AcfPublic/Acf/Include/iqtgui/iqtgui.qrc"/>
+  <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>
  <connections/>
 </ui>
