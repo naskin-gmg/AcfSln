@@ -174,10 +174,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBlobFeature.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CCaliperDistanceFeature.cpp"
 				>
 			</File>
@@ -432,10 +428,6 @@
 			</File>
 			<File
 				RelativePath="..\CBitmapProviderCacheComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CBlobFeature.h"
 				>
 			</File>
 			<File
