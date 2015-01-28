@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3196
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1048
+          1213
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3653
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -139,14 +139,14 @@
               String
             </Type>
             <ExportId>
-              
+              DiagnosticName
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                GrayImage
+                Grayscale Image
               </Value>
             </Data>
           </AttributeInfo>
@@ -263,7 +263,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IModel
+        iinsp::ISupplier
       </InterfaceId>
       <ComponentId>
         GrayImageSupplier
@@ -271,7 +271,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iinsp::ISupplier
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         GrayImageSupplier

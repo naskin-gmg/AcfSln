@@ -72,7 +72,7 @@ bool CImageBinarizeProcessorComp::ConvertImage(
 		return false;
 	}
 
-	double threshold = values[0];
+	double threshold = values[0] * 255;
 
 	for (int y = 0; y < imageHeight; ++y){
 		quint8* outputImageBufferPtr = (quint8*)outputBitmap.GetLinePtr(y);

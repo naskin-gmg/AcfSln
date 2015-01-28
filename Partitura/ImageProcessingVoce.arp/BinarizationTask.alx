@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3196
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1048
+          1213
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3653
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -40,42 +40,42 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        CurrentGrayImage
+        Bitmap
       </ComponentName>
       <X>
         825
       </X>
-      <X>
+      <Y>
         325
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        RgbToGrayProcessor
+        ImageBinarizeProcessor
       </ComponentName>
       <X>
         500
       </X>
-      <X>
-        525
-      </X>
+      <Y>
+        475
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        GrayImageSupplier
+        BinaryImageSupplier
       </ComponentName>
       <X>
         500
       </X>
-      <X>
+      <Y>
         325
-      </X>
+      </Y>
       <Note>
         
       </Note>

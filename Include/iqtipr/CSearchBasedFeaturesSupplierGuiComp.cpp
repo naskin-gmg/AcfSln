@@ -112,16 +112,17 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 			int featuresCount = providerPtr->GetValuesCount();
 
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
-				if (searchFeaturePtr != NULL){
+				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&providerPtr->GetNumericValue(featureIndex));
+				if (objectFeaturePtr != NULL){
 					QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
-					modelItemPtr->setText(CT_ID, searchFeaturePtr->GetObjectId());
-					modelItemPtr->setText(CT_SCORE, QString::number(searchFeaturePtr->GetWeight() * 100, 'f', 2));
-					modelItemPtr->setText(CT_POSITION, QString::number(searchFeaturePtr->GetPosition().GetX(), 'f', 2)+","+QString::number(searchFeaturePtr->GetPosition().GetY(), 'f', 2));
-					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(searchFeaturePtr->GetAngle()), 'f', 2));
-					modelItemPtr->setText(CT_SCALE, QString::number(searchFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(searchFeaturePtr->GetScale().GetY(), 'f', 2));
+					modelItemPtr->setText(CT_ID, objectFeaturePtr->GetObjectId());
+					modelItemPtr->setText(CT_SCORE, QString::number(objectFeaturePtr->GetWeight() * 100, 'f', 2));
+					modelItemPtr->setText(CT_POSITION, QString::number(objectFeaturePtr->GetPosition().GetX(), 'f', 2)+","+QString::number(objectFeaturePtr->GetPosition().GetY(), 'f', 2));
+					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(objectFeaturePtr->GetAngle()), 'f', 2));
+					modelItemPtr->setText(CT_SCALE, QString::number(objectFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(objectFeaturePtr->GetScale().GetY(), 'f', 2));
 
-					if (searchFeaturePtr->IsNegativeModelEnabled()){
+					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
+					if ((searchFeaturePtr != NULL) && searchFeaturePtr->IsNegativeModelEnabled()){
 						modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));
 						modelItemPtr->setBackground(CT_SCORE, QBrush(Qt::red));
 						modelItemPtr->setBackground(CT_POSITION, QBrush(Qt::red));
@@ -134,8 +135,8 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 					// add shape
 					if (*m_showResultShapesAttrPtr){
 						VisualObject* visualObject = new VisualObject(false);
-						visualObject->model->SetPosition(searchFeaturePtr->GetPosition());
-						visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * searchFeaturePtr->GetWeight()));
+						visualObject->model->SetPosition(objectFeaturePtr->GetPosition());
+						visualObject->model->SetRadius(qMax(5.0, maxScoreRadius * objectFeaturePtr->GetWeight()));
 						m_visualPositions.PushBack(visualObject);
 					}
 				}
