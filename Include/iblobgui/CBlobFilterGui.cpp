@@ -44,10 +44,12 @@ void CBlobFilterGui::retranslateUi(QWidget *widgetPtr)
 
 void CBlobFilterGui::SetFilterInfo(const iblob::IBlobFilterParams::Filter& info)
 {
-	int paramIndex = ParameterCombo->findData(info.operation);
+	int paramIndex = ParameterCombo->findData(info.blobDescriptorType);
 	ParameterCombo->setCurrentIndex(paramIndex);
+
 	int conditionIndex = ConditionCombo->findData(info.condition);
 	ConditionCombo->setCurrentIndex(conditionIndex);
+
 	Value1SpinBox->setValue(info.valueRange.GetMinValue());
 	Value2SpinBox->setValue(info.valueRange.GetMaxValue());
 
@@ -59,8 +61,9 @@ iblob::IBlobFilterParams::Filter CBlobFilterGui::GetFilterInfo() const
 {
 	iblob::IBlobFilterParams::Filter info;
 
-	info.operation = iblob::IBlobFilterParams::FilterOperation(ParameterCombo->itemData(ParameterCombo->currentIndex()).toInt());
+	info.blobDescriptorType = ParameterCombo->itemData(ParameterCombo->currentIndex()).toInt();
 	info.condition = iblob::IBlobFilterParams::FilterCondition(ConditionCombo->itemData(ConditionCombo->currentIndex()).toInt());
+	info.operation = iblob::IBlobFilterParams::FO_INCLUDE;
 	info.valueRange.SetMinValue(Value1SpinBox->value());
 	info.valueRange.SetMaxValue(Value2SpinBox->value());
 
