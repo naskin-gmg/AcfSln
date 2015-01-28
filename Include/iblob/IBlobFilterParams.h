@@ -78,6 +78,7 @@ public:
 		istd::CRange valueRange;
 	};
 
+	virtual const BlobDescriptorInfoList* GetSupportedDescriptorsList() const = 0;
 	virtual bool IsFiltersEnabled() const = 0;
 	virtual void SetFiltersEnabled(bool enabled = true) = 0;
 	virtual int GetFiltersCount() const = 0;

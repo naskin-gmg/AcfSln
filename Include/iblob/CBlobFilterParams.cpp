@@ -12,6 +12,12 @@ namespace iblob
 {
 
 
+static BlobDescriptorInfoList s_defaultDescriptorsList = BlobDescriptorInfoList()
+			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_AREA, "Area", "Area", "Blob area")
+			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_CIRCULARITY, "Circularity", "Circularity", "Circularity factor of the blob")
+			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_PERIMETER, "Perimeter", "Perimeter", "Total length of edges in a blob (including the edges of any holes)");
+
+
 CBlobFilterParams::CBlobFilterParams()
 	:m_filtersEnabled(false)
 {
@@ -19,6 +25,12 @@ CBlobFilterParams::CBlobFilterParams()
 
 
 // reimplemented (IBlobFilterParams)
+
+const BlobDescriptorInfoList* CBlobFilterParams::GetSupportedDescriptorsList() const
+{
+	return &s_defaultDescriptorsList;
+}
+
 
 bool CBlobFilterParams::IsFiltersEnabled() const
 {

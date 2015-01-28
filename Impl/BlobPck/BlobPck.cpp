@@ -15,9 +15,13 @@ I_EXPORT_PACKAGE(
 
 I_EXPORT_COMPONENT(
 			BlobFilterParams,
-			"Parameter for the blob filtering",
+			"Parameters for the blob filtering",
 			"Blob Filter Parameters Search" IM_CATEGORY(I_DATA_MODEL));
 
+I_EXPORT_COMPONENT(
+			BlobFilterParamsGui,
+			"Editor for the blob filter parameters",
+			"Blob Filter Parameters Editor UI GUI");
 
 
 } // namespace BlobPck
