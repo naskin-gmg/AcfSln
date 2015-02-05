@@ -11,13 +11,14 @@ namespace iedge
 
 
 CEdgeNode::CEdgeNode()
-:	m_weight(0)
+	:m_position(0.0, 0.0),
+	m_weight(0)
 {
 }
 
 
 CEdgeNode::CEdgeNode(const i2d::CVector2d& position, double weight)
-:	m_position(position),
+	:m_position(position),
 	m_weight(weight)
 {
 }

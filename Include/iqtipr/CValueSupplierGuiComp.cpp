@@ -129,7 +129,7 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 
 	iinsp::ISupplier* supplierPtr = GetObjectPtr();
 	if (supplierPtr != NULL){
-		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
+		imeas::INumericValueProvider* providerPtr = CompCastPtr<imeas::INumericValueProvider>(supplierPtr);
 		if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){
 			const imeas::INumericValue& resultValue = providerPtr->GetNumericValue(0);
 

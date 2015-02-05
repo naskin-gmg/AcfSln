@@ -15,8 +15,21 @@ namespace iipr
 // public methods
 
 CObjectFeature::CObjectFeature()
-	:m_angle(0.0)
+	:m_angle(0.0),
+	m_scale(1.0, 1.0)
 {
+	BaseClass2::SetPosition(i2d::CVector2d(0.0, 0.0));
+
+	imath::CVarVector values(6, 0.0);
+
+	values[0] = 0;
+	values[1] = 0.0;
+	values[2] = 0.0;
+	values[3] = 1.0;
+	values[4] = 1.0;
+	values[5] = 0.0;
+
+	SetValues(values);
 }
 
 
@@ -26,7 +39,8 @@ CObjectFeature::CObjectFeature(
 			double angle,
 			const i2d::CVector2d& scale)
 	:BaseClass(weight),
-	m_angle(angle)
+	m_angle(angle),
+	m_scale(scale)
 {
 	BaseClass2::SetPosition(position);
 

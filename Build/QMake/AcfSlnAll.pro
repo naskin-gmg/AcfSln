@@ -29,9 +29,6 @@ iqtex.file = ../../Include/iqtex/QMake/iqtex.pro
 SUBDIRS += iqtmm
 iqtmm.file = ../../Include/iqtmm/QMake/iqtmm.pro
 
-SUBDIRS += iprop
-iprop.file = ../../Include/iprop/QMake/iprop.pro
-
 SUBDIRS += icam
 icam.file = ../../Include/icam/QMake/icam.pro
 
@@ -86,6 +83,12 @@ icmpstr.file = ../../Include/icmpstr/QMake/icmpstr.pro
 SUBDIRS += idocproc
 idocproc.file = ../../Include/idocproc/QMake/idocproc.pro
 
+SUBDIRS += iblob
+iblob.file = ../../Include/iblob/QMake/iblob.pro
+
+SUBDIRS += iblobgui
+iblobgui.file = ../../Include/iblobgui/QMake/iblobgui.pro
+
 
 # Translation
 
@@ -121,9 +124,6 @@ IprPck.file = ../../Impl/IprPck/QMake/IprPck.pro
 
 SUBDIRS += MeasPck
 MeasPck.file = ../../Impl/MeasPck/QMake/MeasPck.pro
-
-SUBDIRS += PropPck
-PropPck.file = ../../Impl/PropPck/QMake/PropPck.pro
 
 SUBDIRS += SignalPck
 SignalPck.file = ../../Impl/SignalPck/QMake/SignalPck.pro

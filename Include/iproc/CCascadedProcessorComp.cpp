@@ -147,6 +147,31 @@ void CCascadedProcessorComp::InitProcessor(const iprm::IParamsSet* paramsPtr)
 }
 
 
+// reimplemented (icomp::CComponentBase)
+
+void CCascadedProcessorComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	// initialize components:
+	if (m_processorsCompPtr.IsValid()){
+		int processorsCount = m_processorsCompPtr.GetCount();
+		for (int i = 0; i < processorsCount; ++i){
+			iproc::IProcessor* processorPtr = m_processorsCompPtr[i];
+			Q_ASSERT(processorPtr != NULL);
+		}
+	}
+
+	if (m_buffersCompPtr.IsValid()){
+		int buffersCount = m_buffersCompPtr.GetCount();
+		for (int i = 0; i < buffersCount; ++i){
+			istd::IChangeable* bufferPtr = m_buffersCompPtr[i];
+			Q_ASSERT(bufferPtr != NULL);
+		}
+	}
+}
+
+
 } // namespace iproc
 
 

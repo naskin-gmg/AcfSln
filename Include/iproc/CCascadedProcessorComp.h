@@ -46,6 +46,10 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL);
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_MULTIREF(iproc::IProcessor, m_processorsCompPtr);
 	I_MULTIREF(istd::IChangeable, m_buffersCompPtr);
