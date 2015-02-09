@@ -269,11 +269,11 @@
 			Name="Generated Files"
 			>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\Compositor\CCompositor.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\Compositor\CCompositor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\Compositor\CCompositor.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\Compositor\CCompositor.h"
 				>
 			</File>
 			<File

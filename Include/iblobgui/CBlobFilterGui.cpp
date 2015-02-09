@@ -12,6 +12,8 @@ namespace iblobgui
 {
 
 
+// public methods
+
 CBlobFilterGui::CBlobFilterGui(QWidget* /*parentPtr*/)
 {
 	setupUi(this);
@@ -85,7 +87,7 @@ void CBlobFilterGui::SetFeatures(const iblob::BlobDescriptorInfoList& features)
 }
 
 
-// protected
+// protected methods
 
 void CBlobFilterGui::UpdateComboBoxes()
 {
