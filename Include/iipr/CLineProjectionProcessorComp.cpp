@@ -1,6 +1,5 @@
 #include "iipr/CLineProjectionProcessorComp.h"
 
-
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "istd/TSmartPtr.h"
@@ -30,6 +29,8 @@ bool ProjectionFunction(
 			const PixelConversion& conversion,
 			imeas::IDataSequence& results)
 {
+	Q_ASSERT(firstPixelAddress != NULL);
+
 	Q_ASSERT(bitmapLine.GetPoint1().GetX() <= bitmapLine.GetPoint2().GetX());
 	Q_ASSERT(clippedLine.GetPoint1().GetX() <= clippedLine.GetPoint2().GetX());
 	Q_ASSERT(axisSizes[0] != 0);
@@ -54,15 +55,29 @@ bool ProjectionFunction(
 	istd::CRange resultProportionRange(
 				axis1CutLineRange.GetAlphaFromValue(axis1Begin),
 				axis1CutLineRange.GetAlphaFromValue(axis1End));
+
 	if (results.CreateSequenceWithInfo(
 				istd::TSmartPtr<const imeas::IDataSequenceInfo>(new imeas::CSamplesInfo(resultProportionRange)),
-				projectionSize)){
-		double axis2Delta = delta.GetY() / delta.GetX();
+				projectionSize))
+	{
+		// special case: 1-pixel sized projection
+		if (projectionSize == 1){
+			const quint8* firstLinePixelAddress = firstPixelAddress + (axis1Begin * addressDiffs[0]);
+			Q_ASSERT(firstLinePixelAddress != NULL);
+
+			typename PixelConversion::CalcPixelType value;
+			value = conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(firstLinePixelAddress));
+			results.SetSample(0, 0, value);
+			return true;
+		}
+
+		double axis2Delta = delta.GetX() ? delta.GetY() / delta.GetX() : 0;
 		double axis2Position = axis2Delta * (axis1Begin - beginPoint.GetX() + 0.5) + beginPoint.GetY() + 0.5;
 
 		int sampleIndex = 0;
 		for (int axis1Index = axis1Begin; axis1Index < axis1End; ++axis1Index, axis2Position += axis2Delta, ++sampleIndex){
 			const quint8* firstLinePixelAddress = firstPixelAddress + (axis1Index * addressDiffs[0]);
+			Q_ASSERT(firstLinePixelAddress != NULL);
 
 			int axis2Index = int(axis2Position);
 			typename PixelConversion::CalcPixelType value;
@@ -114,8 +129,12 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 		return false;
 	}
 
-	istd::CIndex2d addressDiffs(bytesPerPixel, bitmap.GetLinesDifference());
 	const quint8* firstPixelAddress = (const quint8*)bitmap.GetLinePtr(0);
+	if (firstPixelAddress == NULL){
+		return false;
+	}
+
+	istd::CIndex2d addressDiffs(bytesPerPixel, bitmap.GetLinesDifference());
 	i2d::CLine2d transformedLine = bitmapLine;
 	i2d::CVector2d diffVector = bitmapLine.GetDiffVector();
 
@@ -251,6 +270,18 @@ int CLineProjectionProcessorComp::GetMaxProjectionSize() const
 bool CLineProjectionProcessorComp::IsAutoProjectionSizeSupported() const
 {
 	return true;
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CLineProjectionProcessorComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_featureMapperCompPtr.EnsureInitialized();
 }
 
 

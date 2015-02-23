@@ -69,6 +69,10 @@ public:
 	virtual int GetMaxProjectionSize() const;
 	virtual bool IsAutoProjectionSizeSupported() const;
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_ATTR(QByteArray, m_lineParamIdAttrPtr);
 	I_REF(IFeatureToProjectionMapper, m_featureMapperCompPtr);
