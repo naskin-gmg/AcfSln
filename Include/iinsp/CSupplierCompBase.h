@@ -193,6 +193,9 @@ private:
 	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
 
 	bool m_areParametersValid;
+
+	// statics
+	static ChangeSet s_supplierResultsSet;
 };
 
 

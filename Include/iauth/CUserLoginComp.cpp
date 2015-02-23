@@ -37,7 +37,7 @@ bool CUserLoginComp::Login(const QString& userName, const QString& password)
 					}
 				}
 
-				static ChangeSet changeSet(CF_LOGIN);
+				ChangeSet changeSet(CF_LOGIN);
 				istd::CChangeNotifier changePtr(this, changeSet);
 
 				m_loggedUserName = userName;
@@ -55,7 +55,7 @@ bool CUserLoginComp::Logout()
 {
 	if (m_usersManagerIfPtr.IsValid()){
 		if (!m_loggedUserName.isEmpty()){
-			static ChangeSet changeSet(CF_LOGOUT);
+			ChangeSet changeSet(CF_LOGOUT);
 			istd::CChangeNotifier changePtr(this, changeSet);
 
 			m_loggedUserName.clear();

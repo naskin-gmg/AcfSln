@@ -12,6 +12,9 @@ namespace iinsp
 {
 
 
+istd::IChangeable::ChangeSet CSupplierCompBase::s_supplierResultsSet(CF_SUPPLIER_RESULTS);
+
+
 CSupplierCompBase::CSupplierCompBase()
 :	m_workStatus(WS_INVALID),
 	m_inputsObserver(this),
@@ -31,9 +34,8 @@ int CSupplierCompBase::GetWorkStatus() const
 
 void CSupplierCompBase::InvalidateSupplier()
 {
-	if (m_workStatus >= WS_OK){
-		static ChangeSet changeSet(CF_SUPPLIER_RESULTS);
-		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, changeSet));
+	if (m_workStatus >= WS_OK){	
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, s_supplierResultsSet));
 
 		m_workStatus = WS_INVALID;
 	}
@@ -55,8 +57,7 @@ void CSupplierCompBase::EnsureWorkInitialized()
 			supplierPtr->EnsureWorkInitialized();
 		}
 
-		static ChangeSet changeSet(CF_SUPPLIER_RESULTS);
-		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, changeSet));
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, s_supplierResultsSet));
 
 		if (!m_areParametersValid){
 			OnParametersChanged();
@@ -190,7 +191,7 @@ void CSupplierCompBase::OnComponentCreated()
 
 	m_productChangeNotifierPtr.Reset();
 
-	if (m_paramsSetModelCompPtr.IsValid()){
+	if (m_paramsSetCompPtr.IsValid() && m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
 	}
 

@@ -188,6 +188,10 @@
 				RelativePath="..\CSnapBitmapSupplierComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSnapBitmapSupplierCompBase.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -230,6 +234,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSnapBitmapSupplierCompBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IBitmapAcquisition.h"
 				>
 			</File>
@@ -251,6 +259,10 @@
 			</File>
 			<File
 				RelativePath="..\ISnapControl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TSnapBitmapSupplierComp.h"
 				>
 			</File>
 		</Filter>

@@ -10,19 +10,14 @@ namespace CameraPck
 
 I_EXPORT_PACKAGE(
 			"AcfSln/CameraPck",
-			"General, system-independent image processing package",
-			"Standard Base Imaging Tools" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			"General, system- and hardware-independent camera package",
+			"Standard Base Imaging Camera" IM_PROJECT("ACF-Solutions") IM_TAG("\"Image Processing\"") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 
 I_EXPORT_COMPONENT(
 			ExposureParams,
 			"Parameters for exposure parameter control",
 			"Exposure Shutter Delay Time EEN Image Bitmap Acquisition Snap Parameters");
-
-I_EXPORT_COMPONENT(
-			SnapBitmapSupplier,
-			"Implementation of bitmap supplier getting image from camera",
-			"Image Bitmap Acquisition Snap Supplier Parameters");
 
 I_EXPORT_COMPONENT(
 			MemoryAcquisition,
@@ -56,8 +51,19 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			MultiLayerBitmapSupplier, 
-		   "Multi layer bitmap supplier", 
-		   "Image Bitmap Camera Snap Acquisition Supplier Multi");
+			"Multi layer bitmap supplier", 
+			"Image Bitmap Camera Snap Acquisition Supplier Multi");
+
+
+I_EXPORT_COMPONENT(
+			SnapBitmapSupplier,
+			"Implementation of factory-based bitmap supplier getting image from camera",
+			"Image Bitmap Acquisition Snap Supplier");
+
+I_EXPORT_COMPONENT(
+			StandardQtBitmapSnapSupplier,
+			"Implementation of Qt-bitmap based supplier getting image from camera",
+			"Image Standard Bitmap Snap Supplier");
 
 
 } // namespace CameraPck

@@ -56,6 +56,11 @@ public:
 
 	bool InsertNode(const CEdgeNode& node);
 
+	// Following "quiet" methods are intended to directly change data without change notification (for performance reasons)
+	void InsertNodeQuiet(const CEdgeNode& node);
+	void SetNodeQuiet(int index, const CEdgeNode& node);
+	void SetNodesCountQuiet(int count);
+
 	/**
 		Create this line using polyline object.
 		Please note, that no calibration will be copied.
@@ -110,7 +115,9 @@ protected:
 	virtual void OnEndChanges(const ChangeSet& changeSet);
 
 private:
-	typedef QList<CEdgeNode> Nodes;
+	// std::vector used instead of QList/QVector because it is generally faster
+	// (up to 300% for MSVC)
+	typedef std::vector<CEdgeNode> Nodes;
 
 	Nodes m_nodes;
 
@@ -166,6 +173,24 @@ inline double CEdgeLine::GetMaxWeight() const
 inline bool CEdgeLine::IsClosed() const
 {
 	return m_isClosed;
+}
+
+
+inline void CEdgeLine::InsertNodeQuiet(const CEdgeNode& node)
+{
+	m_nodes.push_back(node);
+}
+
+
+inline void CEdgeLine::SetNodeQuiet(int index, const CEdgeNode& node)
+{
+	m_nodes[index] = node;
+}
+
+
+inline void CEdgeLine::SetNodesCountQuiet(int count)
+{
+	m_nodes.resize(count);
 }
 
 

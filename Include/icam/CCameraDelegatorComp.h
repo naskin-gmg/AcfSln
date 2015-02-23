@@ -59,6 +59,9 @@ public:
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 	I_REF(IBitmapAcquisition, m_slaveCameraCompPtr);
 };
 
