@@ -56,6 +56,7 @@
 #include "iipr/CAutoImageNormalizeProcessorComp.h"
 #include "iipr/CArcProjectionProcessorComp.h"
 #include "iipr/CProjectionSupplierComp.h"
+#include "iipr/CAdaptiveImageBinarizeProcessorComp.h"
 
 
 /**
@@ -126,6 +127,7 @@ typedef iipr::CFastGaussianProcessorComp FastGaussianProcessor;
 typedef iipr::CAutoImageNormalizeProcessorComp AutoImageNormalizeProcessor;
 typedef iipr::CArcProjectionProcessorComp ArcProjectionProcessor;
 typedef icomp::TModelCompWrap<iipr::CProjectionSupplierComp> ProjectionSupplier;
+typedef iipr::CAdaptiveImageBinarizeProcessorComp AdaptiveImageBinarizeProcessor;
 
 
 } // namespace IprPck

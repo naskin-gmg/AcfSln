@@ -248,6 +248,10 @@ I_EXPORT_COMPONENT(
 			"Supplier implementation returning image projection data",
 		 	"Supplier Projection Data Image Bitmap Model");
 
+I_EXPORT_COMPONENT(
+			AdaptiveImageBinarizeProcessor,
+			"Adpative image binarization",
+		 	"Image Bitmap Binarization Threshold Adaptive");
 
 } // namespace IprPck
 

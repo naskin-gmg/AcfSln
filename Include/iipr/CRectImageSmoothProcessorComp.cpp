@@ -3,13 +3,192 @@
 
 // ACF includes
 #include "imath/CFixedPointManip.h"
-
 #include "iimg/CGeneralBitmap.h"
 
 
 namespace iipr
 {
 
+
+// public static methods
+
+bool CRectImageSmoothProcessorComp::DoImageFilter(
+			const iimg::IBitmap& inputImage,
+			iimg::IBitmap& outputImage,
+			int kernelMaxWidth,
+			int kernelMaxHeight,
+			BorderMode borderMode)
+{
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+
+	int imageWidth = imageSize.GetX();
+	int imageHeight = imageSize.GetY();
+
+	istd::CIndex2d outputImageSize = imageSize;
+	if (borderMode != BM_STRETCH_KERNEL){
+		outputImageSize[0] -= kernelMaxWidth - 1;
+		outputImageSize[1] -= kernelMaxHeight - 1;
+	}
+
+	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), outputImageSize)){
+		return false;	// cannot create output image
+	}
+
+	iimg::IBitmap* firstPassOutputImagePtr = &outputImage;
+	const iimg::IBitmap* secondPassInputImagePtr = &inputImage;
+	int outputImageWidth = outputImageSize.GetX();
+
+	iimg::CGeneralBitmap tempBitmap;
+	if ((kernelMaxWidth > 1) && (kernelMaxHeight > 1)){
+		tempBitmap.CreateBitmap(inputImage.GetPixelFormat(), istd::CIndex2d(outputImageWidth, imageHeight));
+
+		firstPassOutputImagePtr = &tempBitmap;
+		secondPassInputImagePtr = &tempBitmap;
+	}
+	else if ((kernelMaxWidth <= 1) && (kernelMaxHeight <= 1)){
+		return outputImage.CopyFrom(inputImage);
+	}
+
+	int componentsCount = inputImage.GetComponentsCount();
+
+	if (kernelMaxWidth > 1){
+		Q_ASSERT(firstPassOutputImagePtr != NULL);
+
+
+		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+			for (int y = 0; y < imageHeight; ++y){
+				quint8* outputPtr = (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
+
+				const quint8* inputLinePtr = (const quint8*)inputImage.GetLinePtr(y);
+
+				int meanValue = 0;
+
+				int kernelWidth = 0;
+				while (kernelWidth < kernelMaxWidth){
+					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
+
+					if (kernelWidth >= kernelMaxWidth){
+						break;
+					}
+
+					if (borderMode == BM_STRETCH_KERNEL){
+						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
+
+						outputPtr += componentsCount;
+					}
+
+					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
+				}
+
+				int headX = kernelWidth;
+				int tailX = 0;
+				while (headX < imageWidth){
+					*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
+
+					outputPtr += componentsCount;
+
+					meanValue += inputLinePtr[componentIndex + componentsCount * headX++];
+
+					Q_ASSERT(tailX < imageWidth);
+					meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+				}
+
+				if (borderMode == BM_STRETCH_KERNEL){
+					while (kernelWidth > 0){
+						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
+
+						outputPtr += componentsCount;
+
+						Q_ASSERT(tailX < imageWidth);
+						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+						kernelWidth--;
+
+						if  (kernelWidth <= 0){
+							break;
+						}
+
+						Q_ASSERT(tailX < imageWidth);
+						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
+						kernelWidth--;
+					}
+				}
+
+				Q_ASSERT(outputPtr <= (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
+			}
+		}
+	}
+
+	if (kernelMaxHeight > 1){
+		Q_ASSERT(secondPassInputImagePtr != NULL);
+
+		int inputLinesDifference = secondPassInputImagePtr->GetLinesDifference();
+		int outputLinesDifference = outputImage.GetLinesDifference();
+
+		for (int x = 0; x < outputImageWidth * componentsCount; ++x){	
+			double meanValue = 0;
+			const quint8* inputHeadPixelPtr = ((const quint8*)secondPassInputImagePtr->GetLinePtr(0)) + x;
+			const quint8* inputTailPixelPtr = inputHeadPixelPtr;
+			quint8* outputPixelPtr = (quint8*)(outputImage.GetLinePtr(0)) + x;
+
+			int kernelHeight = 0;
+			while (kernelHeight < kernelMaxHeight){
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
+				kernelHeight++;
+
+				if (kernelHeight >= kernelMaxHeight){
+					break;
+				}
+
+				if (borderMode == BM_STRETCH_KERNEL){
+					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
+					outputPixelPtr += outputLinesDifference;
+				}
+
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
+				kernelHeight++;
+			}
+
+			int headY = kernelHeight;
+
+			for (;headY < imageHeight; ++headY){
+				*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
+				outputPixelPtr += outputLinesDifference;
+
+				meanValue += *inputHeadPixelPtr;
+				inputHeadPixelPtr += inputLinesDifference;
+
+				meanValue -= *inputTailPixelPtr;
+				inputTailPixelPtr += inputLinesDifference;
+			}
+
+			if (borderMode == BM_STRETCH_KERNEL){
+				while (kernelHeight > 0){
+					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
+					outputPixelPtr += outputLinesDifference;
+
+					meanValue -= *inputTailPixelPtr;
+					inputTailPixelPtr += inputLinesDifference;
+					--kernelHeight;
+
+					if  (kernelHeight <= 0){
+						break;
+					}
+
+					meanValue -= *inputTailPixelPtr;
+					inputTailPixelPtr += inputLinesDifference;
+					--kernelHeight;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
+// public methods
 
 // reimplemented (imeas::INumericConstraints)
 
@@ -70,6 +249,8 @@ const imath::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(i
 }
 
 
+// protected methods
+
 // reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
@@ -127,165 +308,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	Q_ASSERT(kernelMaxWidth >= 1);
 	Q_ASSERT(kernelMaxHeight >= 1);
 
-	istd::CIndex2d outputImageSize = imageSize;
-	if (*m_borderModeAttrPtr != BM_STRETCH_KERNEL){
-		outputImageSize[0] -= kernelMaxWidth - 1;
-		outputImageSize[1] -= kernelMaxHeight - 1;
-	}
-
-	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), outputImageSize)){
-		return false;	// cannot create output image
-	}
-
-	iimg::IBitmap* firstPassOutputImagePtr = &outputImage;
-	const iimg::IBitmap* secondPassInputImagePtr = &inputImage;
-	int outputImageWidth = outputImageSize.GetX();
-
-	iimg::CGeneralBitmap tempBitmap;
-	if ((kernelMaxWidth > 1) && (kernelMaxHeight > 1)){
-		tempBitmap.CreateBitmap(inputImage.GetPixelFormat(), istd::CIndex2d(outputImageWidth, imageHeight));
-
-		firstPassOutputImagePtr = &tempBitmap;
-		secondPassInputImagePtr = &tempBitmap;
-	}
-	else if ((kernelMaxWidth <= 1) && (kernelMaxHeight <= 1)){
-		return outputImage.CopyFrom(inputImage);
-	}
-
-	if (kernelMaxWidth > 1){
-		Q_ASSERT(firstPassOutputImagePtr != NULL);
-
-
-		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-			for (int y = 0; y < imageHeight; ++y){
-				quint8* outputPtr = (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
-
-				const quint8* inputLinePtr = (const quint8*)inputImage.GetLinePtr(y);
-
-				int meanValue = 0;
-
-				int kernelWidth = 0;
-				while (kernelWidth < kernelMaxWidth){
-					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
-
-					if (kernelWidth >= kernelMaxWidth){
-						break;
-					}
-
-					if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-						outputPtr += componentsCount;
-					}
-
-					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
-				}
-
-				int headX = kernelWidth;
-				int tailX = 0;
-				while (headX < imageWidth){
-					*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-					outputPtr += componentsCount;
-
-					meanValue += inputLinePtr[componentIndex + componentsCount * headX++];
-
-					Q_ASSERT(tailX < imageWidth);
-					meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-				}
-
-				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-					while (kernelWidth > 0){
-						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-						outputPtr += componentsCount;
-
-						Q_ASSERT(tailX < imageWidth);
-						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-						kernelWidth--;
-
-						if  (kernelWidth <= 0){
-							break;
-						}
-
-						Q_ASSERT(tailX < imageWidth);
-						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-						kernelWidth--;
-					}
-				}
-
-				Q_ASSERT(outputPtr <= (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
-			}
-		}
-	}
-
-	if (kernelMaxHeight > 1){
-		Q_ASSERT(secondPassInputImagePtr != NULL);
-
-		int inputLinesDifference = secondPassInputImagePtr->GetLinesDifference();
-		int outputLinesDifference = outputImage.GetLinesDifference();
-
-		for (int x = 0; x < outputImageWidth * componentsCount; ++x){	
-			double meanValue = 0;
-			const quint8* inputHeadPixelPtr = ((const quint8*)secondPassInputImagePtr->GetLinePtr(0)) + x;
-			const quint8* inputTailPixelPtr = inputHeadPixelPtr;
-			quint8* outputPixelPtr = (quint8*)(outputImage.GetLinePtr(0)) + x;
-
-			int kernelHeight = 0;
-			while (kernelHeight < kernelMaxHeight){
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
-				kernelHeight++;
-
-				if (kernelHeight >= kernelMaxHeight){
-					break;
-				}
-
-				if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-					outputPixelPtr += outputLinesDifference;
-				}
-
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
-				kernelHeight++;
-			}
-
-			int headY = kernelHeight;
-
-			for (;headY < imageHeight; ++headY){
-				*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-				outputPixelPtr += outputLinesDifference;
-
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
-
-				meanValue -= *inputTailPixelPtr;
-				inputTailPixelPtr += inputLinesDifference;
-			}
-
-			if (*m_borderModeAttrPtr == BM_STRETCH_KERNEL){
-				while (kernelHeight > 0){
-					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-					outputPixelPtr += outputLinesDifference;
-
-					meanValue -= *inputTailPixelPtr;
-					inputTailPixelPtr += inputLinesDifference;
-					--kernelHeight;
-
-					if  (kernelHeight <= 0){
-						break;
-					}
-
-					meanValue -= *inputTailPixelPtr;
-					inputTailPixelPtr += inputLinesDifference;
-					--kernelHeight;
-				}
-			}
-		}
-	}
-
-	return true;
+	return DoImageFilter(inputImage, outputImage, kernelMaxWidth, kernelMaxHeight, BorderMode(*m_borderModeAttrPtr));
 }
 
 

@@ -6,7 +6,6 @@
 #include "imath/IUnitInfo.h"
 #include "imeas/INumericValue.h"
 #include "imeas/INumericConstraints.h"
-
 #include "iipr/TImageParamProcessorCompBase.h"
 
 
@@ -41,9 +40,16 @@ public:
 
 	I_BEGIN_COMPONENT(CRectImageSmoothProcessorComp);
 		I_REGISTER_INTERFACE(imeas::INumericConstraints);
-		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units:\n\t0 - Pixels\n\t1 - Percent of width and height\n\t2 - Percent of diagonal", true, 0);
+		I_ASSIGN(m_unitModeAttrPtr, "UnitMode", "Define used units for filter kernel definition:\n\t0 - Pixels\n\t1 - Percent of width and height\n\t2 - Percent of diagonal", true, 0);
 		I_ASSIGN(m_borderModeAttrPtr, "BorderMode", "Define used mode for border area:\n\t0 - Kernel will be stretched, original image size will be outputed\n\t1 - Border area removed, output image will be smaller", true, 0);
 	I_END_COMPONENT;
+
+	static bool DoImageFilter(
+				const iimg::IBitmap& inputBitmap,
+				iimg::IBitmap& outputBitmap,
+				int filterWidth,
+				int filterHeight,
+				BorderMode borderMode);
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetNumericValuesCount() const;

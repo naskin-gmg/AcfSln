@@ -154,6 +154,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CAdaptiveImageBinarizeProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CArcProjectionProcessorComp.cpp"
 				>
 			</File>
@@ -410,6 +414,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CAdaptiveImageBinarizeProcessorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CArcProjectionProcessorComp.h"
 				>
