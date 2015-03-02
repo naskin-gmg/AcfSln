@@ -166,19 +166,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmapSupplierGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CCameraInfoGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CExposureParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CExposureParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -190,19 +182,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiBitmapSupplierGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CScaleCalibrationEditorComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CSnapImageGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSnapImageGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -243,13 +227,6 @@
 				RelativePath="..\iqtcam.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -338,11 +315,27 @@
 			Name="Moc Files"
 			>
 			<File
+				RelativePath="..\CBitmapSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CCameraInfoGuiComp.moc"
 				>
 			</File>
 			<File
+				RelativePath="..\CExposureParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiBitmapSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CScaleCalibrationEditorComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSnapImageGuiComp.moc"
 				>
 			</File>
 		</Filter>
