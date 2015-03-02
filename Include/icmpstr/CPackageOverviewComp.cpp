@@ -154,7 +154,11 @@ public:
 		if (selectedItemPtr == NULL){
 			QSize size = QItemDelegate::sizeHint(option, index);
 
-			size.setHeight(25);
+			QFontMetrics fontMetrics(option.font);
+
+			int height = qMax(25, fontMetrics.height());
+
+			size.setHeight(height);
 
 			return size;
 		}

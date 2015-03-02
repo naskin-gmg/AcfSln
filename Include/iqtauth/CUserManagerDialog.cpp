@@ -250,8 +250,10 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 
 QSize CUserManagerDialog::CUserManagerItemDelegate::sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+	QFontMetrics fontMetrics(option.font);
+
 	QSize size = QItemDelegate::sizeHint(option, index);
-	size.setHeight(25);
+	size.setHeight(qMax(fontMetrics.height(), 25));
 
 	return size;
 }
