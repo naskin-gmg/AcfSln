@@ -89,6 +89,7 @@ private:
 	{
 		quint32 dirLength2;
 		qint16 dx, dy;
+		qint16 brightness;
 
 		ExtNode* listReference;
 	};
