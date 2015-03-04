@@ -71,7 +71,7 @@ protected:
 		Point points[2];
 	};
 
-	typedef QVector<CaliperLine> CaliperLines;
+	typedef std::vector<CaliperLine> CaliperLines;
 
 	bool CalculateCaliperLines(
 				const istd::IChangeable& aoiObject,

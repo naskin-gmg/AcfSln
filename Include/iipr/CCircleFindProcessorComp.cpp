@@ -255,7 +255,7 @@ bool CCircleFindProcessorComp::CalculateCircle(
 
 	for (int i = 0; i < raysCount; ++i){
 		Ray& ray = rays[i];
-		Q_ASSERT(!ray.points.isEmpty());
+		Q_ASSERT(!ray.points.empty());
 		Q_ASSERT(ray.usedIndex < int(ray.points.size()));
 
 		if (ray.usedIndex >= 0){
@@ -383,7 +383,7 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 	for (int i = 0; i < inRaysCount; ++i){
 		Ray& ray = inRays[i];
-		Q_ASSERT(!ray.points.isEmpty());
+		Q_ASSERT(!ray.points.empty());
 		Q_ASSERT(ray.usedIndex >= 0);
 		Q_ASSERT(ray.usedIndex < int(ray.points.size()));
 
@@ -401,7 +401,7 @@ bool CCircleFindProcessorComp::CalculateAnnulus(const i2d::CVector2d& center, Ra
 
 	for (int i = 0; i < outRaysCount; ++i){
 		Ray& ray = outRays[i];
-		Q_ASSERT(!ray.points.isEmpty());
+		Q_ASSERT(!ray.points.empty());
 		Q_ASSERT(ray.usedIndex >= 0);
 		Q_ASSERT(ray.usedIndex < int(ray.points.size()));
 
@@ -499,11 +499,11 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		return;
 	}
 
-	for (int rayIndex = 0; rayIndex < outRays.count(); rayIndex++){
+	for (uint rayIndex = 0; rayIndex < outRays.size(); rayIndex++){
 		const Ray& ray = outRays.at(rayIndex);
 
 		if (*m_sendUsedPointsToTempAttrPtr){
-			int pointsCount = ray.points.count();
+			int pointsCount = ray.points.size();
 			for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
 				const Point& rayPoint = ray.points[pointIndex];
 

@@ -59,6 +59,10 @@ public:
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_ATTR(QByteArray, m_arcParamIdAttrPtr);
 	I_REF(IFeatureToProjectionMapper, m_featureMapperCompPtr);

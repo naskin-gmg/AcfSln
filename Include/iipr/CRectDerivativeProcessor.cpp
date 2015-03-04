@@ -44,6 +44,7 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 
 	int sumOffset = int(halfRealLength);
 	double sumLastAlpha = halfRealLength - sumOffset;
+	double sumLastAlphaInv = 1 - sumLastAlpha;
 
 	int projectionWidth = samplesCount - 1;
 
@@ -58,32 +59,42 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 		return false;
 	}
 
+	// buffer to speed up data access (brings ca. 10%)
+	std::vector<double> channelData(samplesCount);
+
 	if (projectionWidth > 0){
 		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
+			for (int i = 0; i < samplesCount; ++i){
+				channelData[i] = source.GetSample(i, channelIndex);
+			}
+
 			double leftSum = 0.0;
 			double leftWeight = 0.0;
-			double rightSum = source.GetSample(0, channelIndex) * sumLastAlpha;
+			double rightSum = channelData[0] * sumLastAlpha;
 			double rightWeight = sumLastAlpha;
 			for (int x = -sumOffset; x < projectionWidth; ++x){
 				if (x <= projectionWidth - sumOffset){
 					if (x < projectionWidth - sumOffset){
-						rightSum +=	source.GetSample(x + sumOffset + 1, channelIndex) * sumLastAlpha +
-									source.GetSample(x + sumOffset, channelIndex) * (1 - sumLastAlpha);
+						rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha +
+									channelData[x + sumOffset]		* sumLastAlphaInv;
+
 						rightWeight += 1;
 					}
 					else{
-						rightSum += source.GetSample(x + sumOffset, channelIndex) * (1 - sumLastAlpha);
-						rightWeight += (1 - sumLastAlpha);
+						rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
+						rightWeight += sumLastAlphaInv;
 					}
 				}
 
 				if (x >= 0){
-					leftSum += source.GetSample(x, channelIndex);
+					double diff = channelData[x];
+					leftSum += diff;
+
 					if (x >= sumOffset){
-						leftSum -= source.GetSample(x - sumOffset, channelIndex) * (1 - sumLastAlpha);
+						leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
 
 						if (x > sumOffset){
-							leftSum -= source.GetSample(x - sumOffset - 1, channelIndex) * sumLastAlpha;
+							leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
 						}
 						else{
 							leftWeight += sumLastAlpha;
@@ -93,7 +104,7 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 						leftWeight += 1;
 					}
 
-					rightSum -= source.GetSample(x, channelIndex);
+					rightSum -= diff;
 					rightWeight -= 1;
 
 					results.SetSample(x, channelIndex, rightSum / rightWeight - leftSum / leftWeight);

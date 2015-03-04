@@ -57,6 +57,10 @@ public:
 	virtual QString GetNumericValueDescription(int index) const;
 	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	enum
 	{
@@ -68,26 +72,27 @@ private:
 	{
 		i2d::CVector2d position;
 		i2d::CVector2d derivative;
-		double rawWeight;
-		bool isHorizontal;
 
 		ExtNode* prevPtr;
 		ExtNode* nextPtr;
 
+		double rawWeight;
 		double prevWeight;
 		double nextWeight;
 
+		bool isHorizontal;
 		mutable bool isExtracted;
 	};
 
+
 	struct PixelDescriptor
 	{
-		qint16 brightness;
-		qint16 dx;
-		qint16 dy;
 		quint32 dirLength2;
+		qint16 dx, dy;
+
 		ExtNode* listReference;
 	};
+
 
 	class MemoryPoolManager
 	{

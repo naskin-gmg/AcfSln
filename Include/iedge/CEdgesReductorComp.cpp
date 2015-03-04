@@ -78,13 +78,13 @@ void CEdgesReductorComp::GetReducedLines(
 			double weightTolerance,
 			CEdgeLineContainer& result) const
 {
-	result.Reset();
-
 	int linesCount = edgeLines.GetItemsCount();
+
+	CEdgeLineContainer::Resize(result, linesCount);
+
 	for (int i = 0; i < linesCount; ++i){
 		const CEdgeLine& edgeLine = edgeLines.GetAt(i);
-
-		CEdgeLine& resultLine = result.PushBack(CEdgeLine());
+		CEdgeLine& resultLine = result.GetAt(i);
 
 		GetReducedLine(edgeLine, positionTolerance, weightTolerance, resultLine);
 	}
@@ -306,6 +306,18 @@ int CEdgesReductorComp::ReduceNodes(
 	}
 
 	return removedPoints;
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CEdgesReductorComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	// Force components initialization
+	m_defaultToleranceParamsCompPtr.EnsureInitialized();
+	m_distanceUnitInfoCompPtr.EnsureInitialized();
 }
 
 

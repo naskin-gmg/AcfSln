@@ -85,6 +85,9 @@ protected:
 				int& firstInsideIndex,
 				int& lastInsideIndex) const;
 
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_REF(imeas::INumericValue, m_defaultToleranceParamsCompPtr);
 	I_ATTR(QByteArray, m_toleranceParamsIdAttrPtr);

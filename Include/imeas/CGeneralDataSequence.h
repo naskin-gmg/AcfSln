@@ -65,7 +65,7 @@ public:
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
-	typedef QVector<double> Samples;
+	typedef std::vector<double> Samples;
 	Samples m_samples;
 
 	int m_channelsCount;
@@ -91,6 +91,32 @@ inline double* CGeneralDataSequence::GetSamplesBuffer()
 inline int CGeneralDataSequence::GetSamplesBufferSize() const
 {
 	return int(m_samples.size());
+}
+
+
+inline int CGeneralDataSequence::GetChannelsCount() const
+{
+	return m_channelsCount;
+}
+
+
+inline double CGeneralDataSequence::GetSample(int index, int channel) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+
+	return m_samples[index * m_channelsCount + channel];
+}
+
+
+inline void CGeneralDataSequence::SetSample(int index, int channel, double value)
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+	Q_ASSERT(channel >= 0);
+	Q_ASSERT(channel < m_channelsCount);
+
+	m_samples[index * m_channelsCount + channel] = value;
 }
 
 

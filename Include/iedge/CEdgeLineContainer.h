@@ -15,11 +15,11 @@ namespace iedge
 
 
 class CEdgeLineContainer:
-			public ibase::TSerializableContainer<CEdgeLine>,
+			public ibase::TSerializableContainer<CEdgeLine, std::vector<CEdgeLine> >,
 			public i2d::CObject2dBase
 {
 public:
-	typedef ibase::TSerializableContainer<CEdgeLine> BaseClass;
+	typedef ibase::TSerializableContainer<CEdgeLine, std::vector<CEdgeLine> > BaseClass;
 	typedef i2d::CObject2dBase BaseClass2;
 
 	// reimplemented (i2d::CObject2dBase)

@@ -3,9 +3,9 @@
 
 // STL includes
 #include <cmath>
+#include <vector>
 
 // QT includes
-#include <QtCore/QVector>
 #include <QtCore/qmath.h>
 #include <QtCore/QMutexLocker>
 
@@ -83,9 +83,9 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	int width = size.GetX();
 
-	QVector<PixelDescriptor> destLine1(width);
-	QVector<PixelDescriptor> destLine2(width);
-	QVector<PixelDescriptor> destLine3(width);
+	std::vector<PixelDescriptor> destLine1(width);
+	std::vector<PixelDescriptor> destLine2(width);
+	std::vector<PixelDescriptor> destLine3(width);
 
 	PixelDescriptor* destLine1Ptr = &destLine1[0];
 	PixelDescriptor* destLine2Ptr = &destLine2[0];
@@ -278,6 +278,18 @@ const imath::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int ind
 }
 
 
+// reimplemented (icomp::CComponentBase)
+
+void CFastEdgesExtractorComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	// Force components initialization
+	m_defaultThresholdParamCompPtr.EnsureInitialized();
+	m_defaultAoiCompPtr.EnsureInitialized();
+}
+
+
 // private static methods
 
 inline void CFastEdgesExtractorComp::TryConnectElements(
@@ -321,7 +333,8 @@ inline void CFastEdgesExtractorComp::CalcDerivative(
 			const quint8* prevSourceLine,
 			const quint8* sourceLine,
 			int x,
-			PixelDescriptor& pixelDescriptor){
+			PixelDescriptor& pixelDescriptor)
+{
 	Q_ASSERT(x > 0);
 
 	int pixel11 = prevSourceLine[x - 1];
@@ -345,7 +358,8 @@ inline void CFastEdgesExtractorComp::CalcDerivativeLine(
 			const quint8* sourceLine,
 			int inputBeginX,
 			int inputEndX,
-			PixelDescriptor* destLine){
+			PixelDescriptor* destLine)
+{
 	for (int x = inputBeginX + 1; x < inputEndX; ++x){
 		PixelDescriptor& pixelDescriptor = destLine[x];
 
@@ -525,6 +539,8 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 			CEdgeLineContainer& result,
 			bool keepSingletons)
 {
+	CEdgeLineContainer::Reserve(result, m_freeIndex);
+
 	// mark all as not extracted and make connections symmetric
 	for (int i = 0; i < m_freeIndex; ++i){
 		ExtNode& node = m_buffer[i];
