@@ -74,6 +74,11 @@ I_EXPORT_COMPONENT(
 			"Supplier Image Bitmap Processing Processor" IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			ProcessedQtBitmapSupplier,
+			"Implementation of Qt-bitmap based processed bitmap supplier",
+			"Image Standard Bitmap Processing Supplier");
+
+I_EXPORT_COMPONENT(
 			PositionFromImageSupplier,
 			"Supplier implementation returning position found using caliper tool",
 			"Model Caliper Position Processing Supplier" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));

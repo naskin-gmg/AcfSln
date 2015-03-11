@@ -3,6 +3,9 @@
 
 
 // ACF includes
+#include "iimg/CBitmap.h"
+#include "iimg/CGeneralBitmap.h"
+
 #include "imod/TModelWrap.h"
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
@@ -18,6 +21,7 @@
 #include "iipr/CCircleFindProcessorComp.h"
 #include "iipr/CDelegatedBitmapSupplierComp.h"
 #include "iipr/CProcessedBitmapSupplierComp.h"
+#include "iipr/TProcessedBitmapSupplierComp.h"
 #include "iipr/CPositionFromImageSupplierComp.h"
 #include "iipr/CRectDerivativeProcessorComp.h"
 #include "iipr/CFeaturesContainer.h"
@@ -85,9 +89,10 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> FeaturesContainer;
 typedef iipr::CFeatureToImageMapperProcessorComp FeatureToImageMapperProcessor;
 typedef icomp::TModelCompWrap<iipr::CDelegatedBitmapSupplierComp> DelegatedBitmapSupplier;
-typedef icomp::TModelCompWrap<iipr::CProcessedBitmapSupplierComp> ProcessedBitmapSupplier;
 typedef icomp::TModelCompWrap<iipr::CPositionFromImageSupplierComp> PositionFromImageSupplier;
 typedef icomp::TModelCompWrap<iipr::CSearchBasedFeaturesSupplierComp> SearchBasedFeaturesSupplier;
+typedef icomp::TModelCompWrap<iipr::CProcessedBitmapSupplierComp> ProcessedBitmapSupplier;
+typedef icomp::TModelCompWrap<iipr::TProcessedBitmapSupplierComp<iimg::CBitmap> > ProcessedQtBitmapSupplier;
 
 typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;

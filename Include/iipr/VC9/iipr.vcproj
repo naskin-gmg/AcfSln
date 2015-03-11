@@ -759,6 +759,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TProcessedBitmapSupplierComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TUnaryTransformProcessorComp.h"
 				>
 			</File>

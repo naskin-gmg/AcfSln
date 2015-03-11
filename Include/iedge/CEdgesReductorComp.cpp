@@ -80,7 +80,7 @@ void CEdgesReductorComp::GetReducedLines(
 {
 	int linesCount = edgeLines.GetItemsCount();
 
-	CEdgeLineContainer::Resize(result, linesCount);
+	result.Resize(linesCount);
 
 	for (int i = 0; i < linesCount; ++i){
 		const CEdgeLine& edgeLine = edgeLines.GetAt(i);

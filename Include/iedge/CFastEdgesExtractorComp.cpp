@@ -539,7 +539,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 			CEdgeLineContainer& result,
 			bool keepSingletons)
 {
-	CEdgeLineContainer::Reserve(result, m_freeIndex);
+	result.Reserve(m_freeIndex);
 
 	// mark all as not extracted and make connections symmetric
 	for (int i = 0; i < m_freeIndex; ++i){

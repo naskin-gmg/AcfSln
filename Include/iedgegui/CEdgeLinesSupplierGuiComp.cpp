@@ -146,12 +146,14 @@ void CEdgeLinesSupplierGuiComp::OnGuiHidden()
 
 void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
+	m_edgeLineContainer.Reset();
+
 	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObjectPtr());
 	if (providerPtr != NULL ){
 		const iedge::CEdgeLineContainer* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
-		if ((resultContainerPtr == NULL) || !m_edgeLineContainer.CopyFrom(*resultContainerPtr, istd::IChangeable::CM_CONVERT)){
-			m_edgeLineContainer.Reset();
+		if (resultContainerPtr != NULL){
+			m_edgeLineContainer.CopyFrom(*resultContainerPtr, istd::IChangeable::CM_CONVERT);
 		}
 	}
 

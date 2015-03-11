@@ -22,6 +22,10 @@ public:
 	typedef ibase::TSerializableContainer<CEdgeLine, std::vector<CEdgeLine> > BaseClass;
 	typedef i2d::CObject2dBase BaseClass2;
 
+	// reimplemented (ibase::TContainer)
+	virtual void Reserve(int count);
+	virtual void Resize(int count);
+
 	// reimplemented (i2d::CObject2dBase)
 	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag = false);
 

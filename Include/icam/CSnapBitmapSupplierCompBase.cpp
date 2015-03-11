@@ -59,6 +59,10 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 {
 	result.first.Reset();
 
+	if (!m_bitmapAcquisitionCompPtr.IsValid()){
+		return WS_CRITICAL;
+	}
+
 	if (!result.second.IsValid()){
 		result.second.SetPtr(CreateBitmap());
 		if (!result.second.IsValid()){
@@ -66,62 +70,60 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 		}
 	}
 
-	if (result.second.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
-		Timer performanceTimer(this, "Image acquisition");
+	Timer performanceTimer(this, "Image acquisition");
 
-		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.second.GetPtr());
-		switch (status){
-			case iproc::IProcessor::TS_OK:
-				{
-					istd::CIndex2d bitmapSize = result.second->GetImageSize();
-					i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
+	int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.second.GetPtr());
+	switch (status){
+		case iproc::IProcessor::TS_OK:
+			{
+				istd::CIndex2d bitmapSize = result.second->GetImageSize();
+				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
 
-					i2d::CVector2d scale(1, 1);
+				i2d::CVector2d scale(1, 1);
 
-					const imeas::INumericValue *scalePtr = NULL;
+				const imeas::INumericValue *scalePtr = NULL;
 
-					iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
-								GetModelParametersSet(),
-								m_scaleParamIdAttrPtr,
-								m_defaultScaleValueCompPtr,
-								false);
-					if (scaleParamPtr.IsValid()){
-						imath::CVarVector scaleValues = scalePtr->GetValues();
-						if (scaleValues.GetElementsCount() >= 2){
-							scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
-						}
-						else if (scaleValues.GetElementsCount() >= 1){
-							scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
-						}
+				iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
+							GetModelParametersSet(),
+							m_scaleParamIdAttrPtr,
+							m_defaultScaleValueCompPtr,
+							false);
+				if (scaleParamPtr.IsValid()){
+					imath::CVarVector scaleValues = scalePtr->GetValues();
+					if (scaleValues.GetElementsCount() >= 2){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
 					}
-
-					if (m_calibrationCompPtr.IsValid()){
-						i2d::CAffineTransformation2d calibration;
-						calibration.Reset(center, 0, scale);
-						if (m_calibratedUnitInfoCompPtr.IsValid()){
-							calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-						}
-
-						result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
-					}
-					else{
-						i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
-						calibrationPtr->Reset(center, 0, scale);
-						if (m_calibratedUnitInfoCompPtr.IsValid()){
-							calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-						}
-
-						result.first.SetPtr(calibrationPtr);
+					else if (scaleValues.GetElementsCount() >= 1){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
 					}
 				}
-				return WS_OK;
 
-			case iproc::IProcessor::TS_CANCELED:
-				return WS_CANCELED;
+				if (m_calibrationCompPtr.IsValid()){
+					i2d::CAffineTransformation2d calibration;
+					calibration.Reset(center, 0, scale);
+					if (m_calibratedUnitInfoCompPtr.IsValid()){
+						calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+					}
 
-			default:
-				return WS_ERROR;
-		}
+					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
+				}
+				else{
+					i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+					calibrationPtr->Reset(center, 0, scale);
+					if (m_calibratedUnitInfoCompPtr.IsValid()){
+						calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
+					}
+
+					result.first.SetPtr(calibrationPtr);
+				}
+			}
+			return WS_OK;
+
+		case iproc::IProcessor::TS_CANCELED:
+			return WS_CANCELED;
+
+		default:
+			return WS_ERROR;
 	}
 
 	return WS_CRITICAL;
