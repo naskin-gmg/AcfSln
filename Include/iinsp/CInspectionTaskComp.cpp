@@ -12,7 +12,8 @@ namespace iinsp
 
 
 CInspectionTaskComp::CInspectionTaskComp()
-:	m_isStatusKnown(false),
+:	BaseClass2(this),
+	m_isStatusKnown(false),
 	m_resultCategory(IC_NONE),
 	m_messageContainer(this)
 {
@@ -495,7 +496,8 @@ bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
 // public methods of embedded class Parameters
 
 CInspectionTaskComp::Parameters::Parameters()
-:	m_parentPtr(NULL)
+:	imod::CMultiModelBridgeBase(this),
+	m_parentPtr(NULL)
 {
 }
 

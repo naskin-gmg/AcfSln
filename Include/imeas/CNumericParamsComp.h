@@ -44,6 +44,8 @@ public:
 		I_ASSIGN_TO(m_constraintsModelCompPtr, m_constraintsCompPtr, false);
 	I_END_COMPONENT;
 
+	CNumericParamsComp();
+
 	// reimplemented (imeas::INumericValue)
 	virtual const INumericConstraints* GetNumericConstraints() const;
 

@@ -13,6 +13,12 @@ namespace imeas
 {
 
 
+CNumericParamsComp::CNumericParamsComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
+
 // reimplemented (imeas::INumericValue)
 
 const INumericConstraints* CNumericParamsComp::GetNumericConstraints() const

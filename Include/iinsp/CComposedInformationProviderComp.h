@@ -33,6 +33,8 @@ public:
 		I_ASSIGN_TO(m_slaveInformationProviderModelsCompPtr, m_slaveInformationProvidersCompPtr, false);
 	I_END_COMPONENT;
 
+	CComposedInformationProviderComp();
+
 	// reimplemented (iinsp::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;
 	virtual InformationCategory GetInformationCategory() const;

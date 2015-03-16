@@ -125,8 +125,8 @@ protected:
 	};
 
 	class Parameters:
-				public imod::CMultiModelBridgeBase,
-				virtual public iprm::IParamsSet
+			virtual public iprm::IParamsSet,
+			public imod::CMultiModelBridgeBase
 	{
 	public:
 		Parameters();

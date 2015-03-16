@@ -7,6 +7,12 @@ namespace iinsp
 
 // public methods
 
+CComposedInformationProviderComp::CComposedInformationProviderComp()
+:	imod::CMultiModelBridgeBase(this)
+{
+}
+
+
 // reimplemented (iinsp::IInformationProvider)
 
 QDateTime CComposedInformationProviderComp::GetInformationTimeStamp() const
