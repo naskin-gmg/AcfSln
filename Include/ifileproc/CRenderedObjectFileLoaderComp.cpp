@@ -6,9 +6,12 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
+#include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "iser/CPrimitiveTypesSerializer.h"
+#include "iprm/CParamsSet.h"
+#include "i2d/CRectangle.h"
 
 
 namespace ifileproc
@@ -43,7 +46,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 		return OS_FAILED;
 	}
 
-	if (m_fileLoaderCompPtr.IsValid() && m_fileDataCompPtr.IsValid() && m_objectSnapCompPtr.IsValid()){
+	if (m_fileLoaderCompPtr.IsValid() && m_fileDataCompPtr.IsValid() && m_previewGenerationProcessorCompPtr.IsValid()){
 		QFileInfo fileInfo(filePath);
 		if (fileInfo.exists()){
 			QDateTime fileTimeStamp = fileInfo.lastModified();
@@ -66,7 +69,12 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 			if (loadResult == OS_OK){
 				istd::CChangeNotifier changePtr(bitmapPtr);
 
-				if (m_objectSnapCompPtr->GetSnap(*m_fileDataCompPtr.GetPtr(), *bitmapPtr, istd::CIndex2d(*m_widthAttrPtr, *m_heightAttrPtr))){
+				iprm::CParamsSet previewGenerationParams;
+				i2d::CRectangle previewRect(0, 0, *m_widthAttrPtr, *m_heightAttrPtr);
+
+				previewGenerationParams.SetEditableParameter("PreviewRect", &previewRect);
+
+				if (m_previewGenerationProcessorCompPtr->DoProcessing(&previewGenerationParams, m_fileDataCompPtr.GetPtr(), bitmapPtr)){
 					FileInfo fileInfo;
 					fileInfo.fileTimeStamp = fileTimeStamp;
 

@@ -32,7 +32,7 @@ int CAdaptiveImageBinarizeProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return ConvertImage(*inputBitmapPtr, *outputBitmapPtr) ? TS_OK : TS_INVALID;
+	return ConvertImage(*inputBitmapPtr, 0.05, *outputBitmapPtr) ? TS_OK : TS_INVALID;
 }
 
 
@@ -40,6 +40,7 @@ int CAdaptiveImageBinarizeProcessorComp::DoProcessing(
 
 bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 			const iimg::IBitmap& inputBitmap,
+			double minContrast,
 			iimg::IBitmap& outputBitmap) const
 {
 	if (inputBitmap.IsEmpty()){
@@ -62,18 +63,38 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 	double threshold = 0.0;
 	int pixelCount = 0;
 
-	int minContrast = 0.05 * 255; // TODO: Use parameterization!
+	struct TileInfo
+	{
+		TileInfo()
+			:thresholdSum(0),
+			pixelCount(0)
+		{
+		}
+
+		int thresholdSum;
+		int pixelCount;
+	};
+
+	QMap<int, TileInfo> tileThresholds;
+
+	int minContrastNorm = minContrast * 255;
 
 	for (int y = 0; y < imageHeight; ++y){
 		quint8* inputImageBufferPtr = (quint8*)inputBitmap.GetLinePtr(y);
 		quint8* smoothedImageBufferPtr = (quint8*)smoothedBitmap.GetLinePtr(y);
 
 		for (int x = 0; x < imageWidth; ++x){
+			int tileIndex = GetTileIndex(x, y, -1);
+
+			if (!tileThresholds.contains(tileIndex)){
+				tileThresholds[tileIndex] = TileInfo();
+			}
+
 			int diff = labs(*inputImageBufferPtr - *smoothedImageBufferPtr);
-			if (diff >= minContrast)
+			if (diff >= minContrastNorm)
 			{
-				threshold += *inputImageBufferPtr;
-				++pixelCount;
+				tileThresholds[tileIndex].thresholdSum += *inputImageBufferPtr;
+				tileThresholds[tileIndex].pixelCount++;
 			}
 
 			++inputImageBufferPtr, ++smoothedImageBufferPtr;
@@ -97,6 +118,16 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 	}
 
 	return true;
+}
+
+
+int CAdaptiveImageBinarizeProcessorComp::GetTileIndex(int x, int y, int tileSize)
+{
+	if (tileSize < 0){
+		return 0;
+	}
+
+	return -1;
 }
 
 

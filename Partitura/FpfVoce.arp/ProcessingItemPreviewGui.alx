@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2934
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1213
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3653
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -40,28 +40,28 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        InputFileName
+        OutputFileName
       </ComponentName>
       <X>
-        275
+        875
       </X>
-      <X>
+      <Y>
         375
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        OutputFileName
+        InputFileName
       </ComponentName>
       <X>
-        875
+        275
       </X>
-      <X>
+      <Y>
         375
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,9 +73,9 @@
       <X>
         575
       </X>
-      <X>
+      <Y>
         375
-      </X>
+      </Y>
       <Note>
         
       </Note>

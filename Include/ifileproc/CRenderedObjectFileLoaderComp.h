@@ -9,9 +9,9 @@
 #include "istd/TSmartPtr.h"
 #include "iser/ISerializable.h"
 #include "icomp/CComponentBase.h"
-#include "ibase/IObjectSnap.h"
 #include "ifile/IFilePersistence.h"
 #include "iimg/CBitmap.h"
+#include "iproc/IProcessor.h"
 
 
 namespace ifileproc
@@ -32,7 +32,7 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader, which will used to open the input file", true, "FileLoader");
 		I_ASSIGN(m_fileDataCompPtr, "FileData", "Data component for the loader", true, "FileData");
-		I_ASSIGN(m_objectSnapCompPtr, "ObjectSnap", "Component for bitmap snap of a concrete object", true, "ObjectSnap");
+		I_ASSIGN(m_previewGenerationProcessorCompPtr, "PreviewGenerationProcessor", "Processor used for generation of the preview bitmap", true, "PreviewGenerationProcessor");
 		I_ASSIGN(m_widthAttrPtr, "BitmapWidth", "Width of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_heightAttrPtr, "BitmapHeight", "Height of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_maxCacheSizeAttrPtr, "MaxCacheSize", "Maximal number of bitmaps in cache", false, 100);
@@ -63,7 +63,7 @@ public:
 private:
 	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
 	I_REF(istd::IChangeable, m_fileDataCompPtr);
-	I_REF(ibase::IObjectSnap, m_objectSnapCompPtr);
+	I_REF(iproc::IProcessor, m_previewGenerationProcessorCompPtr);
 	I_ATTR(int, m_widthAttrPtr);
 	I_ATTR(int, m_heightAttrPtr);
 	I_ATTR(int, m_maxCacheSizeAttrPtr);

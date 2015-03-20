@@ -36,7 +36,10 @@ public:
 private:
 	bool ConvertImage(
 				const iimg::IBitmap& inputBitmap,
+				double minContrast,
 				iimg::IBitmap& outputBitmap) const;
+
+	static int GetTileIndex(int x, int y, int tileSize);
 
 private:
 	I_ATTR(QByteArray, m_binarizationParamsIdAttrPtr);
