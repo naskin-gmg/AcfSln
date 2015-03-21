@@ -206,6 +206,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CBitmapPreviewGeneratorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedCopyFilesComp.cpp"
 				>
 			</File>
@@ -266,6 +270,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CBitmapPreviewGeneratorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CComposedCopyFilesComp.h"
 				>

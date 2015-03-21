@@ -83,6 +83,11 @@ I_EXPORT_COMPONENT(
 			"Loader of the rendered preview for an object",
 			"File Loader Preview");
 
+I_EXPORT_COMPONENT(
+			BitmapPreviewGenerator,
+			"Generator of the bitmap preview",
+			"File Preview Generator Bitmap");
+
 
 } // namespace FileProcessingPck
 
