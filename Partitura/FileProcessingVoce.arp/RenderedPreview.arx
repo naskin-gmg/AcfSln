@@ -4,17 +4,6 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
@@ -33,6 +22,17 @@
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -473,13 +473,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FileData
+              DataObjects
             </Id>
             <Type>
-              Reference
+              Reference[]
             </Type>
             <ExportId>
-              Object
+              DataObjects
             </ExportId>
             <Data>
               <IsEnabled>
@@ -489,13 +489,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FileLoader
+              FileLoaders
             </Id>
             <Type>
-              Reference
+              Reference[]
             </Type>
             <ExportId>
-              ObjectLoader
+              FileLoaders
             </ExportId>
             <Data>
               <IsEnabled>
@@ -524,13 +524,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              PreviewGenerationProcessor
+              PreviewGenerationProcessors
             </Id>
             <Type>
-              Reference
+              Reference[]
             </Type>
             <ExportId>
-              PreviewGenerationProcessor
+              PreviewGenerationProcessors
             </ExportId>
             <Data>
               <IsEnabled>

@@ -4,17 +4,6 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
@@ -35,32 +24,29 @@
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        AutoPersistence
+        BinaryFileSerializer
       </ComponentName>
       <X>
-        600
+        875
       </X>
       <Y>
         475
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        300
-      </X>
-      <Y>
-        175
       </Y>
       <Note>
         
@@ -96,24 +82,10 @@
     </Element>
     <Element>
       <ComponentName>
-        BinaryFileSerializer
+        ImageView
       </ComponentName>
       <X>
-        875
-      </X>
-      <Y>
-        475
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePreviewGui
-      </ComponentName>
-      <X>
-        600
+        300
       </X>
       <Y>
         175
@@ -131,6 +103,34 @@
       </X>
       <Y>
         350
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        AutoPersistence
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePreviewGui
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <Y>
+        175
       </Y>
       <Note>
         

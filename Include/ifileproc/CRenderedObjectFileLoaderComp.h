@@ -30,9 +30,9 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader, which will used to open the input file", true, "FileLoader");
-		I_ASSIGN(m_fileDataCompPtr, "FileData", "Data component for the loader", true, "FileData");
-		I_ASSIGN(m_previewGenerationProcessorCompPtr, "PreviewGenerationProcessor", "Processor used for generation of the preview bitmap", true, "PreviewGenerationProcessor");
+		I_ASSIGN_MULTI_0(m_fileLoadersCompPtr, "FileLoaders", "List of the supported file loaders, which will be used to open the input file", true);
+		I_ASSIGN_MULTI_0(m_objectsListCompPtr, "DataObjects", "List of data object which will be loaded for preview generation", true);
+		I_ASSIGN_MULTI_0(m_previewGenerationProcessorsCompPtr, "PreviewGenerationProcessors", "Processor used for generation of the preview bitmap", true);
 		I_ASSIGN(m_widthAttrPtr, "BitmapWidth", "Width of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_heightAttrPtr, "BitmapHeight", "Height of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_maxCacheSizeAttrPtr, "MaxCacheSize", "Maximal number of bitmaps in cache", false, 100);
@@ -61,9 +61,14 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
-	I_REF(istd::IChangeable, m_fileDataCompPtr);
-	I_REF(iproc::IProcessor, m_previewGenerationProcessorCompPtr);
+	ifile::IFilePersistence* GetLoaderForFile(const QString& filePath) const;
+	istd::IChangeable* GetDataObjectForFile(const QString& filePath) const;
+	iproc::IProcessor* GetPreviewGeneratorForFile(const QString& filePath) const;
+
+private:
+	I_MULTIREF(ifile::IFilePersistence, m_fileLoadersCompPtr);
+	I_MULTIREF(istd::IChangeable, m_objectsListCompPtr);
+	I_MULTIREF(iproc::IProcessor, m_previewGenerationProcessorsCompPtr);
 	I_ATTR(int, m_widthAttrPtr);
 	I_ATTR(int, m_heightAttrPtr);
 	I_ATTR(int, m_maxCacheSizeAttrPtr);

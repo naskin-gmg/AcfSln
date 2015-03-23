@@ -28,8 +28,18 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 				int flags,
 				bool beQuiet) const
 {
-	if (m_fileLoaderCompPtr.IsValid()){
-		return m_fileLoaderCompPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet);
+	if (flags & QF_SAVE){
+		return false;
+	}
+
+	int loadersCount = m_fileLoadersCompPtr.GetCount();
+	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (loaderPtr != NULL){
+			if (loaderPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet)){
+				return true;
+			}
+		}
 	}
 
 	return false;
@@ -46,7 +56,22 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 		return OS_FAILED;
 	}
 
-	if (m_fileLoaderCompPtr.IsValid() && m_fileDataCompPtr.IsValid() && m_previewGenerationProcessorCompPtr.IsValid()){
+	ifile::IFilePersistence* fileLoaderPtr = GetLoaderForFile(filePath);
+	if (fileLoaderPtr == NULL){
+		return OS_FAILED;
+	}
+
+	istd::IChangeable* dataObjectPtr = GetDataObjectForFile(filePath);
+	if (dataObjectPtr == NULL){
+		return OS_FAILED;
+	}
+
+	iproc::IProcessor* previewGeneratorPtr = GetPreviewGeneratorForFile(filePath);
+	if (previewGeneratorPtr == NULL){
+		return OS_FAILED;
+	}
+
+	if ((dataObjectPtr != NULL) && (fileLoaderPtr != NULL) && (previewGeneratorPtr != NULL)){
 		QFileInfo fileInfo(filePath);
 		if (fileInfo.exists()){
 			QDateTime fileTimeStamp = fileInfo.lastModified();
@@ -65,7 +90,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 				}
 			}
 
-			int loadResult = m_fileLoaderCompPtr->LoadFromFile(*m_fileDataCompPtr.GetPtr(), filePath);
+			int loadResult = fileLoaderPtr->LoadFromFile(*dataObjectPtr, filePath);
 			if (loadResult == OS_OK){
 				istd::CChangeNotifier changePtr(bitmapPtr);
 
@@ -74,7 +99,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 
 				previewGenerationParams.SetEditableParameter("PreviewRect", &previewRect);
 
-				if (m_previewGenerationProcessorCompPtr->DoProcessing(&previewGenerationParams, m_fileDataCompPtr.GetPtr(), bitmapPtr)){
+				if (previewGeneratorPtr->DoProcessing(&previewGenerationParams, dataObjectPtr, bitmapPtr)){
 					FileInfo fileInfo;
 					fileInfo.fileTimeStamp = fileTimeStamp;
 
@@ -105,10 +130,6 @@ int CRenderedObjectFileLoaderComp::SaveToFile(
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
-	if (m_fileLoaderCompPtr.IsValid()){
-		return m_fileLoaderCompPtr->SaveToFile(data, filePath);
-	}
-
 	return ifile::IFilePersistence::OS_FAILED;
 }
 
@@ -117,20 +138,20 @@ int CRenderedObjectFileLoaderComp::SaveToFile(
 
 bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
-	if (m_fileLoaderCompPtr.IsValid()){
-		return m_fileLoaderCompPtr->GetFileExtensions(result, dataObjectPtr, flags, doAppend);
+	int loadersCount = m_fileLoadersCompPtr.GetCount();
+	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (loaderPtr != NULL){
+			loaderPtr->GetFileExtensions(result, dataObjectPtr, flags, true);
+		}
 	}
 
-	return false;
+	return true;
 }
 
 
-QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* extensionPtr) const
+QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
-	if (m_fileLoaderCompPtr.IsValid()){
-		return m_fileLoaderCompPtr->GetTypeDescription(extensionPtr);
-	}
-
 	return QString();
 }
 
@@ -205,6 +226,71 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(previewCacheTag);
 
 	return retVal;
+}
+
+
+// private methods
+
+ifile::IFilePersistence* CRenderedObjectFileLoaderComp::GetLoaderForFile(const QString& filePath) const
+{
+	QString fileExtension = QFileInfo(filePath).suffix();
+
+	int loadersCount = m_fileLoadersCompPtr.GetCount();
+	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (loaderPtr != NULL){
+			QStringList extensions;
+			if (loaderPtr->GetFileExtensions(extensions)){
+				if (extensions.contains(fileExtension, Qt::CaseInsensitive)){
+					if (loaderPtr->IsOperationSupported(NULL, &filePath, QF_FILE | QF_LOAD, true)){
+						return loaderPtr;
+					}				
+				}
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+istd::IChangeable* CRenderedObjectFileLoaderComp::GetDataObjectForFile(const QString& filePath) const
+{
+	int objectTypesCount = m_objectsListCompPtr.GetCount();
+
+	ifile::IFilePersistence* loaderPtr = GetLoaderForFile(filePath);
+	if (loaderPtr != NULL){
+		int loadersCount = m_fileLoadersCompPtr.GetCount();
+		for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+			if (m_fileLoadersCompPtr[loaderIndex] == loaderPtr){
+				if (loaderIndex < objectTypesCount){
+					return m_objectsListCompPtr[loaderIndex];
+				}
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+iproc::IProcessor* CRenderedObjectFileLoaderComp::GetPreviewGeneratorForFile(const QString& filePath) const
+{
+	int processorsCount = m_previewGenerationProcessorsCompPtr.GetCount();
+
+	ifile::IFilePersistence* loaderPtr = GetLoaderForFile(filePath);
+	if (loaderPtr != NULL){
+		int loadersCount = m_fileLoadersCompPtr.GetCount();
+		for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+			if (m_fileLoadersCompPtr[loaderIndex] == loaderPtr){
+				if (loaderIndex < processorsCount){
+					return m_previewGenerationProcessorsCompPtr[loaderIndex];
+				}
+			}
+		}
+	}
+
+	return NULL;
 }
 
 
