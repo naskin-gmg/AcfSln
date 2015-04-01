@@ -28,17 +28,16 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 				int flags,
 				bool beQuiet) const
 {
-	if (flags & QF_SAVE){
+	if ((flags & QF_SAVE) != 0){
 		return false;
 	}
 
 	int loadersCount = m_fileLoadersCompPtr.GetCount();
 	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
-		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
-		if (loaderPtr != NULL){
-			if (loaderPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet)){
-				return true;
-			}
+		const ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (		(loaderPtr != NULL) &&
+					loaderPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet)){
+			return true;
 		}
 	}
 
@@ -138,6 +137,10 @@ int CRenderedObjectFileLoaderComp::SaveToFile(
 
 bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
+	if (!doAppend){
+		result.clear();
+	}
+
 	int loadersCount = m_fileLoadersCompPtr.GetCount();
 	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
 		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
@@ -150,9 +153,26 @@ bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, const
 }
 
 
-QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* /*extensionPtr*/) const
+QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
-	return QString();
+	QString retVal;
+
+	int loadersCount = m_fileLoadersCompPtr.GetCount();
+	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (loaderPtr != NULL){
+			QString description = loaderPtr->GetTypeDescription(extensionPtr);
+			if (!description.isEmpty()){
+				if (!retVal.isEmpty() && (description != retVal)){	// check if got the different descriptions
+					return QString();
+				}
+
+				retVal = description;
+			}
+		}
+	}
+
+	return retVal;
 }
 
 	
