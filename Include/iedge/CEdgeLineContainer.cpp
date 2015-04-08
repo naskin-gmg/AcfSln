@@ -5,24 +5,6 @@ namespace iedge
 {
 
 
-// public methods
-	
-void CEdgeLineContainer::Reserve(int count)
-{
-	if (count >= 0){
-		m_items.reserve(count);
-	}
-}
-
-
-void CEdgeLineContainer::Resize(int count)
-{
-	if (count >= 0){
-		m_items.resize(count);
-	}
-}
-
-
 // reimplemented (i2d::IObject2d)
 
 void CEdgeLineContainer::SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag)

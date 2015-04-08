@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1
         </Id>
         <Number>
-          1188
+          1242
         </Number>
         <Description>
           ACF-Solutions
@@ -18,21 +29,10 @@
           0
         </Id>
         <Number>
-          3585
+          3692
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               AdditionalTriggerInputs
@@ -135,6 +135,38 @@
             </Type>
             <ExportId>
               EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ErrorClassId
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ErrorClassId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ErrorGroupId
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ErrorGroupId
             </ExportId>
             <Data>
               <IsEnabled>

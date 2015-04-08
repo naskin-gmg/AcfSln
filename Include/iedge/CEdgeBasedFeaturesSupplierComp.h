@@ -16,7 +16,7 @@
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
 #include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
+#include "iinsp/TInspectionSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "iipr/CFeaturesContainer.h"
 #include "iedge/IEdgeLinesProvider.h"
@@ -27,14 +27,14 @@ namespace iedge
 
 
 class CEdgeBasedFeaturesSupplierComp:
-			public iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > >,
+	public iinsp::TInspectionSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineTransformation2d> > >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public i2d::ICalibrationProvider,
 			virtual public istd::IInformationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, QVector<i2d::CAffineTransformation2d> > > BaseClass;
+	typedef iinsp::TInspectionSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineTransformation2d> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
@@ -95,7 +95,7 @@ private:
 	I_REF(istd::IInformationProvider, m_slaveInformationProviderCompPtr);
 	I_ATTR(QByteArray, m_searchParamsManagerParamIdAttrPtr);
 	I_ATTR(QByteArray, m_searchParamsIdAttrPtr);
-	
+
 	mutable istd::IInformationProvider::InformationCategory m_defaultInformationCategory;
 };
 

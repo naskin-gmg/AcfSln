@@ -243,6 +243,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TInspectionSupplierCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TSupplierCompWrap.h"
 				>
 			</File>

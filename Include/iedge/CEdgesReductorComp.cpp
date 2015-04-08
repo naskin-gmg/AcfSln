@@ -85,6 +85,7 @@ void CEdgesReductorComp::GetReducedLines(
 	for (int i = 0; i < linesCount; ++i){
 		const CEdgeLine& edgeLine = edgeLines.GetAt(i);
 		CEdgeLine& resultLine = result.GetAt(i);
+		resultLine.Clear();
 
 		GetReducedLine(edgeLine, positionTolerance, weightTolerance, resultLine);
 	}

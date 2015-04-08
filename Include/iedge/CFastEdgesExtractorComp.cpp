@@ -8,6 +8,7 @@
 // QT includes
 #include <QtCore/qmath.h>
 #include <QtCore/QMutexLocker>
+#include <QtCore/QDebug>
 
 // ACF includes
 #include "istd/TDelPtr.h"
@@ -195,6 +196,8 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 
 	if (container.IsContainerFull()){
 		SendErrorMessage(0, "Container of nodes is full");
+
+		return false;
 	}
 
 	return true;
@@ -523,6 +526,8 @@ CFastEdgesExtractorComp::InternalContainer::InternalContainer(int size)
 CFastEdgesExtractorComp::InternalContainer::~InternalContainer()
 {
 	if (m_buffer != NULL){
+		//qDebug() << "Contour buffer size used: " << m_freeIndex;
+
 		s_memoryManager.ReleaseMemory(m_buffer);
 	}
 }

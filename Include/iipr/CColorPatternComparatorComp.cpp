@@ -278,13 +278,19 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		I_CRITICAL();
 	}
 
+	// add result message
 	ilog::CMessage* message = new ilog::CMessage(
 				m_isColorPatternMatched ? IC_INFO : IC_ERROR,
 				MI_SUPPLIER_RESULTS_STATUS,
 				GetInformationDescription(),
 				GetDiagnosticName());
 		
-	AddMessage(message);		
+	AddMessage(message);	
+
+	// add group error message
+	if (!m_isColorPatternMatched){
+		AddGroupError();
+	}
 
 	return WS_OK;
 }
