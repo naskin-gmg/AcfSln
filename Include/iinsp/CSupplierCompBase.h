@@ -117,6 +117,7 @@ protected:
 
 	/**
 		Add ilog::CMessage to the internal message container (also from const functions).
+		\param	messagePtr	pointer to the new message object. It cannot be NULL.
 	*/
 	virtual void AddMessage(const ilog::CMessage* messagePtr) const;
 

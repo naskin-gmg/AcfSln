@@ -11,7 +11,7 @@
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"
 #include "iinsp/ISupplier.h"
-#include "iinsp/TInspectionSupplierCompWrap.h"
+#include "iinsp/TSupplierCompWrap.h"
 #include "imeas/INumericValueProvider.h"
 #include "imeas/CSimpleNumericValue.h"
 #include "iimg/IBitmapProvider.h"
@@ -28,12 +28,12 @@ namespace iipr
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
 class CPositionFromImageSupplierComp:
-			public iinsp::TInspectionSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
+			public iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TInspectionSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
+	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
