@@ -1,6 +1,10 @@
 #include "imeas/CMeasurementRange.h"
 
 
+// Qt includes
+#include <QtCore/QtGlobal>
+
+
 namespace imeas
 {
 
