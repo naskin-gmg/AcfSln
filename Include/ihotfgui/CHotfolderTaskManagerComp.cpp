@@ -47,7 +47,7 @@ ihotf::IHotfolderProcessingItem* CHotfolderTaskManagerComp::GetNextProcessingTas
 
 		if (processingItemPtr->GetProcessingState() == iproc::IProcessor::TS_NONE){
 			if (m_fileNamingCompPtr.IsValid()){
-				QString outputFilePath = m_fileNamingCompPtr->CalculateFileName(processingItemPtr->GetInputFile(), NULL);
+				QString outputFilePath = m_fileNamingCompPtr->CalculateFileName(processingItemPtr->GetInputFile(), QString(), NULL);
 
 				processingItemPtr->SetOutputFile(outputFilePath);
 			}
