@@ -33,7 +33,7 @@ public:
 	I_BEGIN_COMPONENT(CFileNamingComp);
 		I_REGISTER_INTERFACE(ifileproc::IFileNaming);
 		I_ASSIGN(m_fileTypeInfoCompPtr, "OutputFileInfo", "Output file info, which will be used for file name calculation", false, "OutputFileInfo");
-		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPath", "Output directory", true, "DirectoryPath"); 
+		I_ASSIGN(m_directoryPathCompPtr, "DirectoryPath", "Default output directory path", false, "DirectoryPath"); 
 		I_ASSIGN(m_fileNamingParamsCompPtr, "FileNamingParams", "Rules for the file naming", false, "FileNamingParams"); 
 	I_END_COMPONENT;
 
