@@ -40,17 +40,18 @@ bool CArcProjectionProcessorComp::DoProjection(
 	double radius = bitmapArc.GetRadius();
 	i2d::CVector2d center = bitmapArc.GetPosition();
 
-	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(bitmap, iipr::IImageInterpolationParams::IM_NO_INTERPOLATION);
+	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(bitmap, iipr::IImageInterpolationParams::IM_BILINEAR);
 
 	std::vector<int> xPoints, yPoints;
 	i2d::CArcPointsCalculator::GetArcPoints(
-		center.GetX(), center.GetY(), 
-		radius,
-		bitmapArc.GetStartAngle(), bitmapArc.GetEndAngle(), 
-		xPoints, yPoints);
+				center.GetX(),
+				center.GetY(), 
+				radius,
+				bitmapArc.GetStartAngle(), bitmapArc.GetEndAngle(), 
+				xPoints,
+				yPoints);
 
 	results.CreateSequence(xPoints.size());
-
 
 	for (uint i = 0; i < xPoints.size(); ++i){
 		quint8 pixelValue = pixelInterpolator.GetInterpolatedValue(xPoints[i], yPoints[i], 0);
