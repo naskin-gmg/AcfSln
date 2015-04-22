@@ -44,7 +44,9 @@ bool CArcProjectionProcessorComp::DoProjection(
 
 	std::vector<int> xPoints, yPoints;
 	i2d::CArcPointsCalculator::GetArcPoints(
-		center.GetX(), center.GetY(), bitmapArc.GetStartAngle(), bitmapArc.GetEndAngle(), radius,
+		center.GetX(), center.GetY(), 
+		radius,
+		bitmapArc.GetStartAngle(), bitmapArc.GetEndAngle(), 
 		xPoints, yPoints);
 
 	results.CreateSequence(xPoints.size());

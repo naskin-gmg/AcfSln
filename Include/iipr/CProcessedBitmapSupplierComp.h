@@ -28,7 +28,6 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(CProcessedBitmapSupplierBase);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
-		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
@@ -55,7 +54,6 @@ private:
 	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
-	I_REF(i2d::ITransformation2d, m_defaultCalibrationCompPtr);
 };
 
 

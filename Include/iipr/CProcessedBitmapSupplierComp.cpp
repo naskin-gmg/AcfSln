@@ -76,7 +76,6 @@ void CProcessedBitmapSupplierBase::OnComponentCreated()
 
 	m_bitmapProviderCompPtr.EnsureInitialized();
 	m_imageProcessorCompPtr.EnsureInitialized();
-	m_defaultCalibrationCompPtr.EnsureInitialized();
 }
 
 
