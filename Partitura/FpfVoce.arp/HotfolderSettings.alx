@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3451
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1120
+          1134
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           1023
         </Id>
         <Number>
-          264197
+          328450
         </Number>
         <Description>
           Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3464
+        </Number>
+        <Description>
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -40,55 +40,13 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        FileNamingParams
-      </ComponentName>
-      <X>
-        275
-      </X>
-      <X>
-        625
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderId
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        625
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettings
+        InputDirectories
       </ComponentName>
       <X>
         575
       </X>
       <X>
-        450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        OutputDirectory
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <X>
-        425
+        200
       </X>
       <Note>
         
@@ -110,13 +68,55 @@
     </Element>
     <Element>
       <ComponentName>
-        InputDirectories
+        FileNamingParams
       </ComponentName>
       <X>
         550
       </X>
       <X>
-        225
+        650
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderSettings
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HotfolderId
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        OutputDirectory
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        450
       </X>
       <Note>
         

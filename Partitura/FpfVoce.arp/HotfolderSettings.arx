@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3451
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1120
+          1134
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           1023
         </Id>
         <Number>
-          264197
+          328450
         </Number>
         <Description>
           Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3464
+        </Number>
+        <Description>
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -117,10 +117,10 @@
         HotfolderId
       </Id>
       <PackageId>
-        FpfVoce
+        BasePck
       </PackageId>
       <ComponentId>
-        HotfolderId
+        Uuid
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -198,7 +198,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="6">
+              <Values count="5">
                 <Value>
                   InputDirectories
                 </Value>
@@ -213,9 +213,6 @@
                 </Value>
                 <Value>
                   FileNamingParams
-                </Value>
-                <Value>
-                  
                 </Value>
               </Values>
             </Data>
