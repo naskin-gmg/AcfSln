@@ -140,8 +140,8 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mousePressEvent(QGraphics
 	if (BaseClass::IsEditable() && (eventPtr->button() == Qt::LeftButton)){
 		m_lastPosition = BaseClass::pos();
 
-		static istd::IChangeable::ChangeSet dragChangeSet(i2d::IObject2d::CF_OBJECT_POSITION);
-		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObjectPtr(), dragChangeSet));
+		static const istd::IChangeable::ChangeSet dragChangeSet(i2d::IObject2d::CF_OBJECT_POSITION, "Drag object");
+		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObjectPtr(), &dragChangeSet));
 	}
 }
 

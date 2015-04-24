@@ -426,8 +426,9 @@ void CComponentPromotorDialogComp::OnPromoteCommand()
 					PackageNameCB->currentText().toLatin1(),
 					ComponentNameCB->currentText().toLatin1());
 
-		static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_ELEMENT_ADDED);
-		istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+		static const istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_ELEMENT_ADDED, "Promote component");
+		istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
+		Q_UNUSED(registryNotifier);
 
 		for (		IElementSelectionInfo::Elements::Iterator iter = elements.begin();
 					iter != elements.end();

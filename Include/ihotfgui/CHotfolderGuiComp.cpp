@@ -84,7 +84,7 @@ void CHotfolderGuiComp::OnGuiModelAttached()
 
 	UpdateProcessingCommands();
 
-	static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_CREATE);
+	static const istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_CREATE);
 	UpdateGui(changeSet);
 
 	if (m_statisticsHotfolderObserverCompPtr.IsValid()){

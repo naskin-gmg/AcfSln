@@ -29,6 +29,7 @@ void CDataStatistics::CreateStatistics(
 			const istd::CRange& dataBoundaries)
 {
 	istd::CChangeGroup changeGroup(this);
+	Q_UNUSED(changeGroup);
 
 	if (dataBoundaries != m_dataBoundaries){
 		istd::CChangeNotifier notifier(this);

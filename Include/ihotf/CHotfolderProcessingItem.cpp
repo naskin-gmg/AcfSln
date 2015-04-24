@@ -45,8 +45,9 @@ int CHotfolderProcessingItem::GetProcessingState() const
 void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
 	if (m_processingState != processingState){
-		ChangeSet changeSet(CF_STATE_CHANGED);
-		istd::CChangeNotifier changePtr(this, changeSet);
+		static const ChangeSet changeSet(CF_STATE_CHANGED);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_processingState = processingState;
 	}

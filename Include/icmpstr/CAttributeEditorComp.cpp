@@ -134,8 +134,9 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 	int attributeStatMeaning = item->data(AC_VALUE, AttributeMining).toInt();
 
 	if (column == AC_NAME){
-		static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-		istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+		static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Change attribute");
+		istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+		Q_UNUSED(registryNotifier);
 
 		IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 		for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
@@ -149,8 +150,8 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 				continue;
 			}
 
-			static istd::IChangeable::ChangeSet attributeChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-			istd::CChangeNotifier elementNotifier(elementPtr, attributeChangeSet);
+			istd::CChangeNotifier elementNotifier(elementPtr, &changeSet);
+			Q_UNUSED(elementNotifier);
 
 			if (item->checkState(AC_NAME) == Qt::Unchecked){
 				icomp::IRegistryElement::AttributeInfo* attributeInfoPtr =
@@ -209,8 +210,9 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 			return;
 		}
 
-		static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-		istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+		static const istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Import/export interface");
+		istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
+		Q_UNUSED(registryNotifier);
 
 		QString interfaceName = item->data(0, InterfaceName).toString();
 		QByteArray elementName = item->data(0, ElementId).toString().toLocal8Bit();
@@ -241,8 +243,9 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 		return;
 	}
 
-	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_FLAGS_CHANGED);
-	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_FLAGS_CHANGED, "Change flag");
+	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	Q_UNUSED(registryNotifier);
 
 	IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 	for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
@@ -255,8 +258,8 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 			continue;
 		}
 
-		static istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), elementChangeSet);
+		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), &changeSet);
+		Q_UNUSED(elementNotifier);
 
 		quint32 flags = selectedInfoPtr->elementPtr->GetElementFlags();
 
@@ -2094,7 +2097,10 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 }
 
 
-bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteArray& attributeId, int propertyMining, const QString& value) const
+bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(
+			const QByteArray& attributeId,
+			int propertyMining,
+			const QString& value) const
 {
 	icomp::IRegistry* registryPtr = m_parent.GetRegistry();
 	if (registryPtr == NULL){
@@ -2106,8 +2112,9 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 		return false;
 	}
 
-	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Set attribute value");
+	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	Q_UNUSED(registryNotifier);
 
 	bool retVal = false;
 
@@ -2122,8 +2129,8 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 			continue;
 		}
 
-		static istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
-		istd::CChangeNotifier elementNotifier(attributeInfo.elementPtr, elementChangeSet);
+		static const istd::IChangeable::ChangeSet elementChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier elementNotifier(attributeInfo.elementPtr, &elementChangeSet);
 		Q_UNUSED(elementNotifier);
 
 		if ((attributeInfoPtr == NULL) && !value.isEmpty()){
@@ -2154,7 +2161,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(const QByteA
 		if ((attributeInfoPtr != NULL) && !attributeInfoPtr->attributePtr.IsValid() && attributeInfoPtr->exportId.isEmpty()){
 			attributeInfo.elementPtr->RemoveAttribute(attributeId);
 		}
-	}
+ 	}
 
 	Q_EMIT m_parent.AfterAttributesChange();
 
@@ -2169,8 +2176,9 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const Q
 		return false;
 	}
 
-	static istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_EXPORTED);
-	istd::CChangeNotifier registryNotifier(registryPtr, registryChangeSet);
+	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistry::CF_ELEMENT_EXPORTED, "Set export name");
+	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	Q_UNUSED(registryNotifier);
 
 	icomp::IRegistry::ExportedElementsMap exportedMap = registryPtr->GetExportedElementsMap();
 	for (icomp::IRegistry::ExportedElementsMap::ConstIterator iter = exportedMap.constBegin();

@@ -109,7 +109,8 @@ void CExposureParamsGuiComp::UpdateModel() const
 
 	double tolerance = 0.9e-6;
 
-	istd::CChangeGroup notifier(objectPtr);
+	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	double shutterTime = ShutterTimeSB->value() * 0.001;
 	if (ShutterTimeSB->isVisible() && (qAbs(objectPtr->GetShutterTime() - shutterTime) > tolerance)){

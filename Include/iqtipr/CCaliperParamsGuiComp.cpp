@@ -18,7 +18,8 @@ void CCaliperParamsGuiComp::UpdateModel() const
 	iipr::ICaliperParams* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 
-	istd::CChangeGroup notifier(objectPtr);
+	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
 
 	double threshold = ThresholdSB->value() * 0.01;
 	if (qAbs(objectPtr->GetWeightThreshold() - threshold) > I_BIG_EPSILON){

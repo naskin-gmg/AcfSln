@@ -302,8 +302,9 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 	Q_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
 	if (m_fileSystemChangeStorageCompPtr.IsValid()){
 		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_NEW)){
-			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_NEW);
-			istd::CChangeNotifier changePtr(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_NEW);
+			istd::CChangeNotifier notifier(m_fileSystemChangeStorageCompPtr.GetPtr(), &changeSet);
+			Q_UNUSED(notifier);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.addedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.addedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_NEW);
@@ -311,8 +312,9 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 		}
 
 		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_REMOVED)){
-			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_REMOVED);
-			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_REMOVED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), &changeSet);
+			Q_UNUSED(storageNotifier);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.removedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.removedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_REMOVED);
@@ -320,8 +322,9 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 		}
 
 		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_MODIFIED)){
-			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_MODIFIED);
-			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_MODIFIED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), &changeSet);
+			Q_UNUSED(storageNotifier);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.modifiedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.modifiedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_MODIFIED);
@@ -329,8 +332,9 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 		}
 
 		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED)){
-			static istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
-			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
+			istd::CChangeNotifier storageNotifier(m_fileSystemChangeStorageCompPtr.GetPtr(), &changeSet);
+			Q_UNUSED(storageNotifier);
 
 			for (int fileIndex = 0; fileIndex < m_folderChanges.attributeChangedFiles.size(); fileIndex++){
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.attributeChangedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_MODIFIED);

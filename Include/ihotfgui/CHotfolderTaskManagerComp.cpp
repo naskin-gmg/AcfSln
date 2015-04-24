@@ -103,8 +103,9 @@ void CHotfolderTaskManagerComp::AddFilesToProcessingQueue(const QStringList& fil
 	Q_ASSERT(!files.isEmpty());
 
 	if (m_hotfolderProcessingInfoCompPtr.IsValid()){
-		static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED);
-		istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), changeSet);
+		static const istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_ADDED);
+		istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), &changeSet);
+		Q_UNUSED(hotfolderNotifier);
 
 		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
 			m_hotfolderProcessingInfoCompPtr->AddProcessingItem(files[fileIndex]);
@@ -122,13 +123,15 @@ void CHotfolderTaskManagerComp::RemoveFilesFromProcessingQueue(const QStringList
 		return;
 	}
 
-	istd::CChangeGroup changePtr(m_hotfolderProcessingInfoCompPtr.GetPtr());
+	istd::CChangeGroup changeGroup(m_hotfolderProcessingInfoCompPtr.GetPtr());
+	Q_UNUSED(changeGroup);
 
 	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
 		ihotf::IHotfolderProcessingItem* processingItemPtr = FindProcessingItem(files[fileIndex]);
 		if (processingItemPtr != NULL){
-			static istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
-			istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), changeSet);
+			static const istd::IChangeable::ChangeSet changeSet(ihotf::IHotfolderProcessingInfo::CF_FILE_REMOVED);
+			istd::CChangeNotifier hotfolderNotifier(m_hotfolderProcessingInfoCompPtr.GetPtr(), &changeSet);
+			Q_UNUSED(hotfolderNotifier);
 
 			m_hotfolderProcessingInfoCompPtr->RemoveProcessingItem(processingItemPtr);
 		}

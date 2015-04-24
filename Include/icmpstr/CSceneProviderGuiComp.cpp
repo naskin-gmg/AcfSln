@@ -495,8 +495,9 @@ void CSceneProviderGuiComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
-	static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
-	istd::CChangeNotifier commandsNotifier(this, commandsChangeSet);
+	static const istd::IChangeable::ChangeSet changeSet(ibase::ICommandsProvider::CF_COMMANDS);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	m_fileMenu.SetVisuals(tr("&File"), tr("File"), tr("File menu"));
 	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), QIcon(":/Icons/Print"));

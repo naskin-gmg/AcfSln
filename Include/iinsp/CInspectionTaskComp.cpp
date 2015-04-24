@@ -138,7 +138,8 @@ void CInspectionTaskComp::InvalidateSupplier()
 
 void CInspectionTaskComp::EnsureWorkInitialized()
 {
-	m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, ChangeSet(CF_SUPPLIER_RESULTS)));
+	static const istd::IChangeable::ChangeSet changeSet(CF_SUPPLIER_RESULTS);
+	m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &changeSet));
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 

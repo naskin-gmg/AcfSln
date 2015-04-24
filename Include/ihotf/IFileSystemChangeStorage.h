@@ -63,7 +63,7 @@ public:
 		If the item is marked as "removed" it will not deleted from the storage.
 		Use RemoveItemStorage, if you want permanently remove the item from the storage.
 	*/
-	virtual void UpdateStorageItem(const QString& path, int itemFlags) = 0;
+	virtual void UpdateStorageItem(const QString& path, int changeFlag) = 0;
 
 	/**
 		Remove the item from the storage.

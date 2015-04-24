@@ -54,9 +54,9 @@ void CFileSystemChangeStorage::UpdateStorageItem(const QString& path, int change
 {
 	QMutexLocker locker(&m_mutex);
 
-	ChangeSet changeSet;
-	changeSet += changeFlag;
-	istd::CChangeNotifier changePtr(this, changeSet);
+	ChangeSet changeSet(changeFlag);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	int itemIndex = GetFileIndexFromPath(path);
 	if (itemIndex < 0){

@@ -96,8 +96,9 @@ bool CComposedStateControllerComp::TryEnterState(bool isActionAllowed, const ISt
 		}
 	}
 
-	ChangeSet changeSet(CF_STATE_ENTERED);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_STATE_ENTERED);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	m_isStateActive = true;
 
@@ -119,8 +120,9 @@ bool CComposedStateControllerComp::TryLeaveState(bool isActionAllowed, const ISt
 		}
 	}
 
-	ChangeSet changeSet(CF_STATE_LEAVED);
-	istd::CChangeNotifier notifier(this, changeSet);
+	static const ChangeSet changeSet(CF_STATE_LEAVED);
+	istd::CChangeNotifier notifier(this, &changeSet);
+	Q_UNUSED(notifier);
 
 	m_isStateActive = false;
 
@@ -160,8 +162,9 @@ void CComposedStateControllerComp::UpdateAllMembers()
 	}
 
 	if (m_isStateEnabled != isEnabled){
-		ChangeSet changeSet(CF_STATE_ENABLED);
-		istd::CChangeNotifier notifier(this, changeSet);
+		static const ChangeSet changeSet(CF_STATE_ENABLED);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		m_isStateEnabled = isEnabled;
 	}
@@ -176,7 +179,8 @@ void CComposedStateControllerComp::OnModelChanged(int /*modelId*/, const ChangeS
 				changeSet.Contains(CF_STATE_LEAVED) ||
 				changeSet.Contains(CF_GRAPH_CHANGED) ||
 				changeSet.Contains(CF_STATE_ENABLED)){
-		istd::CChangeNotifier notifier(this, changeSet);
+		istd::CChangeNotifier notifier(this, &changeSet);
+		Q_UNUSED(notifier);
 
 		UpdateAllMembers();
 	}

@@ -136,6 +136,9 @@ protected:
 	int m_workStatus;
 	istd::TDelPtr<istd::CChangeNotifier> m_productChangeNotifierPtr;
 
+	// statics
+	static const ChangeSet s_supplierResultsSet;
+
 private:
 	class InputsObserver: public imod::CMultiModelObserverBase
 	{
@@ -194,9 +197,6 @@ private:
 	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
 
 	bool m_areParametersValid;
-
-	// statics
-	static ChangeSet s_supplierResultsSet;
 };
 
 

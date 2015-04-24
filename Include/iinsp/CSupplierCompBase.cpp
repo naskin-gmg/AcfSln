@@ -12,7 +12,7 @@ namespace iinsp
 {
 
 
-istd::IChangeable::ChangeSet CSupplierCompBase::s_supplierResultsSet(CF_SUPPLIER_RESULTS);
+const istd::IChangeable::ChangeSet CSupplierCompBase::s_supplierResultsSet(CF_SUPPLIER_RESULTS);
 
 
 CSupplierCompBase::CSupplierCompBase()
@@ -35,7 +35,7 @@ int CSupplierCompBase::GetWorkStatus() const
 void CSupplierCompBase::InvalidateSupplier()
 {
 	if (m_workStatus >= WS_OK){	
-		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, s_supplierResultsSet));
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
 
 		m_workStatus = WS_INVALID;
 	}
@@ -57,7 +57,7 @@ void CSupplierCompBase::EnsureWorkInitialized()
 			supplierPtr->EnsureWorkInitialized();
 		}
 
-		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, s_supplierResultsSet));
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
 
 		if (!m_areParametersValid){
 			OnParametersChanged();
