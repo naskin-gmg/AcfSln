@@ -47,7 +47,7 @@ protected:
 template <class UI>
 void TGeneralSupplierGuiComp<UI>::Test()
 {
-	iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
@@ -55,12 +55,12 @@ void TGeneralSupplierGuiComp<UI>::Test()
 
 		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
 			QMessageBox::warning(
-				GetQtWidget(),
+				BaseClass::GetQtWidget(),
 				QObject::tr("Error"),
 				QObject::tr("Processing Error"));
 
-			if (AutoTestButton->isChecked()){
-				AutoTestButton->setChecked(false);
+			if (BaseClass::AutoTestButton->isChecked()){
+				BaseClass::AutoTestButton->setChecked(false);
 			}
 		}
 	}
@@ -72,16 +72,16 @@ void TGeneralSupplierGuiComp<UI>::Test()
 template <class UI>
 QWidget* TGeneralSupplierGuiComp<UI>::GetParamsWidget() const
 {
-	Q_ASSERT(IsGuiCreated());
+	Q_ASSERT(BaseClass::IsGuiCreated());
 
-	return ParamsFrame;
+	return BaseClass::ParamsFrame;
 }
 
 
 template <class UI>
 void TGeneralSupplierGuiComp<UI>::OnSupplierParamsChanged()
 {
-	if (IsGuiCreated() && AutoTestButton->isChecked()){
+	if (BaseClass::IsGuiCreated() && BaseClass::AutoTestButton->isChecked()){
 		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
 	}
 }
@@ -94,17 +94,21 @@ void TGeneralSupplierGuiComp<UI>::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	ParamsGB->setVisible(AreParamsEditable() || IsLoadParamsSupported());
+	bool isLoadSupported = BaseClass::IsLoadParamsSupported();
+	bool isSaveSupported = BaseClass::IsSaveParamsSupported();
+	bool isEditSupported = BaseClass::AreParamsEditable();
 
-	LoadParamsButton->setVisible(IsLoadParamsSupported());
-	SaveParamsButton->setVisible(IsSaveParamsSupported());
+	BaseClass::ParamsGB->setVisible(isEditSupported || isLoadSupported);
+
+	BaseClass::LoadParamsButton->setVisible(isLoadSupported);
+	BaseClass::SaveParamsButton->setVisible(isSaveSupported);
 }
 
 
 template <class UI>
 void TGeneralSupplierGuiComp<UI>::OnGuiHidden()
 {
-	AutoTestButton->setChecked(false);
+	BaseClass::AutoTestButton->setChecked(false);
 
 	BaseClass::OnGuiHidden();
 }
@@ -115,13 +119,13 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 {
 	BaseClass::UpdateGui(changeSet);
 
-	Q_ASSERT(IsGuiCreated());
+	Q_ASSERT(BaseClass::IsGuiCreated());
 
-	QString statusLabelText = tr("Unknown");
+	QString statusLabelText = BaseClass::tr("Unknown");
 
 	QString description;
 
-	const iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 
@@ -129,49 +133,49 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 		switch (workStatus){
 			case iinsp::ISupplier::WS_INVALID:
-				statusLabelText = tr("None");
+				statusLabelText = BaseClass::tr("None");
 				break;
 
 			case iinsp::ISupplier::WS_INIT:
-				statusLabelText = tr("Init");
+				statusLabelText = BaseClass::tr("Init");
 				break;
 
 			case iinsp::ISupplier::WS_LOCKED:
-				statusLabelText = tr("Locked");
+				statusLabelText = BaseClass::tr("Locked");
 				break;
 
 			case iinsp::ISupplier::WS_OK:
 				if (infoProviderPtr != NULL){
 					switch (infoProviderPtr->GetInformationCategory()){
 			case istd::IInformationProvider::IC_WARNING:
-				statusLabelText = tr("Warning");
+				statusLabelText = BaseClass::tr("Warning");
 				break;
 
 			case istd::IInformationProvider::IC_ERROR:
-				statusLabelText = tr("Error");
+				statusLabelText = BaseClass::tr("Error");
 				break;
 
 			default:
-				statusLabelText = tr("OK");
+				statusLabelText = BaseClass::tr("OK");
 				break;
 		}
 	}
 	else{
-		statusLabelText = tr("OK");
+		statusLabelText = BaseClass::tr("OK");
 	}
 
 	break;
 
 		case iinsp::ISupplier::WS_CANCELED:
-			statusLabelText = tr("Canceled");
+			statusLabelText = BaseClass::tr("Canceled");
 			break;
 
 		case iinsp::ISupplier::WS_ERROR:
-			statusLabelText = tr("Not processed");
+			statusLabelText = BaseClass::tr("Not processed");
 			break;
 
 		case iinsp::ISupplier::WS_CRITICAL:
-			statusLabelText = tr("Critical");
+			statusLabelText = BaseClass::tr("Critical");
 			break;
 		}
 
@@ -179,16 +183,16 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 			description = infoProviderPtr->GetInformationDescription();
 		}
 
-		UpdateAllViews();
+		BaseClass::UpdateAllViews();
 	}
 
-	StatusLabel->setText(statusLabelText);
+	BaseClass::StatusLabel->setText(statusLabelText);
 	if (!description.isEmpty()){
-		DescriptionLabel->setText(description);
-		DescriptionLabel->setVisible(true);
+		BaseClass::DescriptionLabel->setText(description);
+		BaseClass::DescriptionLabel->setVisible(true);
 	}
 	else{
-		DescriptionLabel->setVisible(false);
+		BaseClass::DescriptionLabel->setVisible(false);
 	}
 }
 
