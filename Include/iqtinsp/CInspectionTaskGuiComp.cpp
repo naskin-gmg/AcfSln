@@ -763,7 +763,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 			if (m_resultShapeFactoryCompPtr.IsValid()){
 				const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
 				if (object2dPtr != NULL){
-					iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(*object2dPtr, true);
+					iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
 					if (shapePtr != NULL){
 						iview::CShapeBase* shapeBasePtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
 						if (shapeBasePtr != NULL){
