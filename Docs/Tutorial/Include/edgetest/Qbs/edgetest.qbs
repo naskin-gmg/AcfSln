@@ -4,13 +4,15 @@ import AcfStaticLibrary as AcfStaticLibrary
 AcfStaticLibrary{
 	name: "edgetest"
 
-	files: ["../*.h", "../*.cpp"]
+    files: ["../*.h", "../*.cpp", "../*.ui"]
 
 	Depends{ name: "iedge" }
 	Depends{ name: "iedgegui" }
+    Depends{ name: "Qt.widgets" }
 
 	Export{
 		Depends{ name: "iedge" }
 		Depends{ name: "iedgegui" }
-	}
+        Depends{ name: "Qt.widgets" }
+    }
 }
