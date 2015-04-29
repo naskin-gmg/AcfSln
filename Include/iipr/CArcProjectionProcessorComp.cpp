@@ -3,8 +3,6 @@
 
 // Qt includes
 #include <QtCore/QLineF>
-#include <QtCore/QElapsedTimer>
-#include <QtCore/QDebug>
 
 // ACF includes
 #include "istd/TSmartPtr.h"
@@ -12,12 +10,12 @@
 #include "iimg/TPixelConversion.h"
 #include "iprm/TParamsPtr.h"
 #include "i2d/CVector2d.h"
-#include "i2d/CArcPointsCalculator.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
 #include "imeas/CSamplesInfo.h"
 #include "imeas/INumericValue.h"
+
 #include "iipr/TImagePixelInterpolator.h"
 
 
@@ -37,24 +35,41 @@ bool CArcProjectionProcessorComp::DoProjection(
 	bitmapArc.SetCalibration(bitmap.GetCalibration());
 	bitmapArc.CopyFrom(projectionLine, istd::IChangeable::CM_CONVERT);
 
+	double angleWidth = bitmapArc.GetEndAngle() - bitmapArc.GetStartAngle();
+
+	int arcLength = qCeil(M_PI * bitmapArc.GetRadius() * (angleWidth / 180));
+
+	if (arcLength == 0) {
+		return false;
+	}
+	else if (arcLength < 0) {
+		arcLength *= -1;
+	}
+
+	results.CreateSequence(arcLength);
+
+	double angleDiff = angleWidth / arcLength;
+
+	double angleStart = bitmapArc.GetStartAngle();
 	double radius = bitmapArc.GetRadius();
 	i2d::CVector2d center = bitmapArc.GetPosition();
+	i2d::CVector2d rotationPoint = center + i2d::CVector2d(radius, 0);
+
+	double angle;
+	int i;
 
 	iipr::TImagePixelInterpolator<quint8> pixelInterpolator(bitmap, iipr::IImageInterpolationParams::IM_BILINEAR);
 
-	std::vector<int> xPoints, yPoints;
-	i2d::CArcPointsCalculator::GetArcPoints(
-				center.GetX(),
-				center.GetY(), 
-				radius,
-				bitmapArc.GetStartAngle(), bitmapArc.GetEndAngle(), 
-				xPoints,
-				yPoints);
+	for (angle = angleStart, i = 0; i < arcLength; angle += angleDiff, i++) {
+		i2d::CVector2d line(0,0);
+		line.Init(imath::GetRadianFromDegree(angle), radius);
+		line.SetY(-line.GetY());
+		line += center;
 
-	results.CreateSequence(xPoints.size());
+		double x = line.GetX();
+		double y = line.GetY();
 
-	for (uint i = 0; i < xPoints.size(); ++i){
-		quint8 pixelValue = pixelInterpolator.GetInterpolatedValue(xPoints[i], yPoints[i], 0);
+		quint8 pixelValue = pixelInterpolator.GetInterpolatedValue(x, y, 0);
 
 		results.SetSample(i, 0, pixelValue / 255.0);
 	}
@@ -71,14 +86,13 @@ bool CArcProjectionProcessorComp::GetImagePosition(
 			i2d::CVector2d& result) const
 {
 	if (m_featureMapperCompPtr.IsValid() && (paramsPtr != NULL)){
-		iprm::TParamsPtr<i2d::CArc> arcPtr(paramsPtr, *m_arcParamIdAttrPtr);
-		double position;
-		if (		(arcPtr.IsValid()) &&
-			m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
-				// TODO: correct exactness of this mapping: DoAutosizeProjection return rough line exactness!
-				result = arcPtr->GetPositionFromAlpha(position);
+		iprm::TParamsPtr<i2d::CArc> arcParamPtr(paramsPtr, *m_arcParamIdAttrPtr);
+		double position = 0.0;
 
-				return true;
+		if ((arcParamPtr.IsValid()) && m_featureMapperCompPtr->GetProjectionPosition(feature, paramsPtr, position)){
+			result = arcParamPtr->GetPositionFromAlpha(position);
+
+			return true;
 		}
 	}
 
