@@ -510,11 +510,11 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 				const i2d::CVector2d& position = rayPoint.position;
 
 				ilog::TExtMessageModel<i2d::CPosition2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
-							(rayIndex >= 0)?
+							(pointIndex != ray.usedIndex)?
 										istd::IInformationProvider::IC_INFO:
 										istd::IInformationProvider::IC_WARNING,
 							iinsp::CSupplierCompBase::MI_INTERMEDIATE,
-							(rayIndex >= 0)?
+							(pointIndex != ray.usedIndex)?
 										QString("Point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()):
 										QString("Unused point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()),
 							"CircleFinder");
