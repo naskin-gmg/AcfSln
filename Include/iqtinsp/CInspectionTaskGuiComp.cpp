@@ -46,10 +46,10 @@ CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 	m_buttonGroupPtr(NULL),
 	m_copyAllActionPtr(NULL),
 	m_pasteAllActionPtr(NULL),
-	m_loadAllActionPtr(NULL),
-	m_saveAllActionPtr(NULL),
 	m_copyCurrentTaskActionPtr(NULL),
-	m_pasteCurrentTaskActionPtr(NULL)
+	m_pasteCurrentTaskActionPtr(NULL),
+	m_loadAllActionPtr(NULL),
+	m_saveAllActionPtr(NULL)
 {
 	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
 }
