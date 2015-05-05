@@ -34,6 +34,8 @@ public:
 	double GetValue() const;
 	void SetValue(double value);
 
+	void SetupValueEditor(int editPrecision, double stepValue);
+
 Q_SIGNALS:
 	/**
 		Will be emitted when user changed value.

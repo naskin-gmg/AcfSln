@@ -95,6 +95,16 @@ void CNumericValueWidget::SetValue(double value)
 }
 
 
+void CNumericValueWidget::SetupValueEditor(int editPrecision, double stepValue)
+{
+	if (editPrecision >= 0){
+		ValueSB->setDecimals(editPrecision);
+	}
+
+	ValueSB->setSingleStep(stepValue);
+}
+
+
 // protected slots
 
 void CNumericValueWidget::on_ValueSB_valueChanged(double value)
@@ -137,6 +147,7 @@ void CNumericValueWidget::on_MaxButton_clicked()
 	ValueSB->setValue(ValueSB->maximum());
 	ValueSlider->setValue(ValueSlider->maximum());
 }
+
 
 
 } // namespace iqtmeas

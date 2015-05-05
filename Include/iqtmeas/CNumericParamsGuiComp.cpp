@@ -58,12 +58,16 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 	QWidget* panelPtr = GetQtWidget();
 	Q_ASSERT(panelPtr != NULL);	// called inside UpdateGui(), widget must be defined.
 
-	QLayout* layoutPtr = panelPtr->layout();
-	if (layoutPtr == NULL){
+	QLayout* layoutPtr = NULL;
+	if (*m_verticalLayoutAttrPtr){
 		layoutPtr = new QVBoxLayout;
-		layoutPtr->setMargin(0);
-		panelPtr->setLayout(layoutPtr);
 	}
+	else{
+		layoutPtr = new QHBoxLayout;
+	}
+
+	layoutPtr->setMargin(0);
+	panelPtr->setLayout(layoutPtr);
 
 	imeas::INumericValue* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -105,6 +109,8 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 							constraintsPtr->GetNumericValueName(i),
 							constraintsPtr->GetNumericValueUnitInfo(i));
 			}
+
+			valueWidgetPtr->SetupValueEditor(*m_editorPrecisionAttrPtr, *m_editorStepValueAttrPtr);
 
 			if (i < values.GetElementsCount()){
 				valueWidgetPtr->SetValue(values.GetElement(i));
