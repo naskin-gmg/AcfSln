@@ -48,7 +48,6 @@ public:
 		I_REGISTER_INTERFACE(IInspectionTask);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(iinsp::ISupplier);
-		I_REGISTER_INTERFACE(ilog::IMessageContainer);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_SUBELEMENT(Parameters);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(Parameters, iprm::IParamsSet, ExtractParameters);
