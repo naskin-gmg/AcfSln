@@ -197,7 +197,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 					++attrIter){
 			const QByteArray& attributeId = *attrIter;
 
-			retVal = IsAttributeValid(attributeId, elementName, registry, ignoreUndef, allReasons, reasonConsumerPtr) && retVal;
+			retVal = IsAttributeValid(attributeId, elementName, registry, ignoreUndef, allReasons, reasonConsumerPtr, metaInfoPtr) && retVal;
 
 			if (!retVal && !allReasons){
 				return false;
@@ -263,12 +263,13 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			const icomp::IRegistry& registry,
 			bool ignoreUndef,
 			bool allReasons,
-			ilog::IMessageConsumer* reasonConsumerPtr) const
+			ilog::IMessageConsumer* reasonConsumerPtr,
+			const icomp::IComponentStaticInfo* componentMetaInfoPtr) const
 {
 	const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementName);
 	if (infoPtr != NULL){
-		const icomp::IComponentStaticInfo* compInfoPtr = NULL;
-		if (m_envManagerCompPtr.IsValid()){
+		const icomp::IComponentStaticInfo* compInfoPtr = componentMetaInfoPtr;
+		if ((compInfoPtr == NULL) && m_envManagerCompPtr.IsValid()){
 			compInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(infoPtr->address);
 		}
 

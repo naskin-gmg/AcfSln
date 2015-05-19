@@ -73,7 +73,8 @@ public:
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
-				ilog::IMessageConsumer* reasonConsumerPtr) const;
+				ilog::IMessageConsumer* reasonConsumerPtr,
+				const icomp::IComponentStaticInfo* componentMetaInfoPtr = NULL) const;
 	virtual QIcon GetComponentIcon(const icomp::CComponentAddress& address) const;
 
 protected:

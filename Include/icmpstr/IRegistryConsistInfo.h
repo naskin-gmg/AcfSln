@@ -78,12 +78,13 @@ public:
 
 	/**
 		Check if attribute is valid.
-		\param	attributeName		name of attribute in specified registry element.
-		\param	attributeName		name of registry element in specified registry.
-		\param	registry			registry object.
-		\param	ignoreUndef			if true, undefined elements will be ignored.
-		\param	allReasons			if true, all reasons will be explained.
-		\param	reasonConsumerPtr	optional consumer of messages explaining reason of calculated result.
+		\param	attributeName			name of attribute in specified registry element.
+		\param	attributeName			name of registry element in specified registry.
+		\param	registry				registry object.
+		\param	ignoreUndef				if true, undefined elements will be ignored.
+		\param	allReasons				if true, all reasons will be explained.
+		\param	reasonConsumerPtr		optional consumer of messages explaining reason of calculated result.
+		\param	componentMetaInfoPtr	optional component meta info (e.g used for providing meta info of embedded components).
 	*/
 	virtual bool IsAttributeValid(
 				const QByteArray& attributeName,
@@ -91,7 +92,8 @@ public:
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
-				ilog::IMessageConsumer* reasonConsumerPtr) const = 0;
+				ilog::IMessageConsumer* reasonConsumerPtr,
+				const icomp::IComponentStaticInfo* componentMetaInfoPtr = NULL) const = 0;
 	/**
 		Get icon of component.
 	*/

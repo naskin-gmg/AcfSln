@@ -469,6 +469,7 @@ void CAttributeEditorComp::UpdateAttributesView()
 							Q_ASSERT(!((attrInfo.elementPtr != NULL) && (elementPtr == NULL)));	// check if we dont reset existing element pointer, it shouldn't happen
 							attrInfo.elementPtr = elementPtr;
 							attrInfo.staticInfoPtr = infoPtr->GetAttributeInfo(attributeId);
+							attrInfo.componentStaticInfoPtr = infoPtr;
 						}
 					}
 				}
@@ -782,7 +783,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 						registry,
 						true,
 						false,
-						NULL)){
+						NULL,
+						attrInfo.componentStaticInfoPtr)){
 			isAttributeError = true;
 		}
 
