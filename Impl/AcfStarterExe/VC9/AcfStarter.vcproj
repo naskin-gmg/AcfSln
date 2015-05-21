@@ -20,9 +20,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\General.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Application.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			UseOfMFC="0"
 			>
 			<Tool
@@ -95,9 +94,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Static.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Application.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			UseOfMFC="0"
 			>
 			<Tool
