@@ -28,7 +28,7 @@ public:
 	virtual int GetObservedItemTypes() const;
 	virtual void SetObservedItemTypes(int observedItemTypes);
 	virtual int GetObservedChanges() const;
-	virtual void SetObservedChanges(int ovservedChanges);
+	virtual void SetObservedChanges(int observedChanges);
 	virtual QStringList GetAcceptPatterns() const;
 	virtual void SetAcceptPatterns(const QStringList& acceptPatterns);
 	virtual QStringList GetIgnorePatterns() const;

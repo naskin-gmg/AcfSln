@@ -62,12 +62,12 @@ int CDirectoryMonitorParams::GetObservedChanges() const
 }
 
 
-void CDirectoryMonitorParams::SetObservedChanges(int ovservedChanges)
+void CDirectoryMonitorParams::SetObservedChanges(int observedChanges)
 {
-	if (m_observedChanges != ovservedChanges){
+	if (m_observedChanges != observedChanges){
 		istd::CChangeNotifier changePtr(this);
 
-		m_observedChanges = ovservedChanges;
+		m_observedChanges = observedChanges;
 	}
 }
 

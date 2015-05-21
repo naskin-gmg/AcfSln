@@ -24,6 +24,8 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false)
 {
+	qRegisterMetaType<istd::IChangeable::ChangeSet>("istd::IChangeable::ChangeSet");
+
 	connect(&m_directoryWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChangeNotification(const QString&)));
 }
 
@@ -54,7 +56,7 @@ bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 		return true;
 	}
 
-	SendVerboseMessage("Directory monitoring parameters could not be set");
+	SendErrorMessage(0, "Directory monitoring parameters could not be set", "Folder monitor");
 
 	return false;
 }
@@ -103,8 +105,6 @@ void CDirectoryMonitorComp::run()
 {
     istd::CGeneralTimeStamp updateTimer;
 
-    istd::CGeneralTimeStamp measurementTimer;
-
 	while (!m_finishThread){
 		bool needStateUpdate = updateTimer.GetElapsed() > m_poolingFrequency;
 		if (!needStateUpdate || m_lockChanges){
@@ -112,8 +112,6 @@ void CDirectoryMonitorComp::run()
 
 			continue;
 		}
-
-		measurementTimer.Start();
 
 		QFileInfo currentDirectoryInfo(m_currentDirectory.absolutePath());
 		if (!currentDirectoryInfo.exists()){
@@ -279,16 +277,6 @@ void CDirectoryMonitorComp::run()
 
 		Q_EMIT FolderChanged(changeSet);
 		updateTimer.Start();
-
-		I_IF_DEBUG(
-			double processingTime = measurementTimer.GetElapsed();
-
-			SendVerboseMessage(
-						QString("Folder monitoring of ") +
-						m_currentDirectory.absolutePath() +
-						QString(": ") +
-						QString().setNum(processingTime) + " seconds");
-		)
 	}
 }
 

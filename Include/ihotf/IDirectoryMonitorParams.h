@@ -61,7 +61,7 @@ public:
 	/**
 		Set the changes to be observed.
 	*/
-	virtual void SetObservedChanges(int ovservedChanges) = 0;
+	virtual void SetObservedChanges(int observedChanges) = 0;
 
 	/**
 		Get accept file filters, given as the list of regular expressions.
