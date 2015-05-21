@@ -155,7 +155,7 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 
 void CEdgeLine::CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* transformPtr) const
 {
-	polyline.SetNodesCountQuiet(m_nodes.size());
+	polyline.SetNodesCountQuiet(int(m_nodes.size()));
 	int index = 0;
 
 	if (transformPtr != NULL){
@@ -316,7 +316,7 @@ bool CEdgeLine::GetTransformed(
 {
 	CEdgeLine* resultEdgeLinePtr = dynamic_cast<CEdgeLine*>(&result);
 	if (resultEdgeLinePtr != NULL){
-		resultEdgeLinePtr->SetNodesCountQuiet(m_nodes.size());
+		resultEdgeLinePtr->SetNodesCountQuiet(int(m_nodes.size()));
 
 		int transFlag = transformation.GetTransformationFlags();
 		if ((transFlag & i2d::ITransformation2d::TF_AFFINE) != 0){
@@ -395,7 +395,7 @@ bool CEdgeLine::GetInvTransformed(
 {
 	CEdgeLine* resultEdgeLinePtr = dynamic_cast<CEdgeLine*>(&result);
 	if (resultEdgeLinePtr != NULL){
-		resultEdgeLinePtr->SetNodesCountQuiet(m_nodes.size());
+		resultEdgeLinePtr->SetNodesCountQuiet(int(m_nodes.size()));
 
 		int transFlag = transformation.GetTransformationFlags();
 		if ((transFlag & i2d::ITransformation2d::TF_AFFINE) != 0){
@@ -460,7 +460,7 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 
 	if (archive.IsStoring()){
-		int nodesCount = m_nodes.size();
+		int nodesCount = int(m_nodes.size());
 
 		retVal = retVal && archive.BeginMultiTag(nodesTag, nodeTag, nodesCount);
 		for (		Nodes::iterator iter = m_nodes.begin();
@@ -520,7 +520,7 @@ void CEdgeLine::CalcVolatile() const
 {
 	m_totalLength = 0;
 
-	int nodesCount = m_nodes.size();
+	int nodesCount = int(m_nodes.size());
 	if (nodesCount > 0){
 		const CEdgeNode& firstNode = m_nodes[0];
 		double prevWeight = firstNode.GetWeight();

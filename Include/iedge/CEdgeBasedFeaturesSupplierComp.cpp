@@ -34,7 +34,7 @@ int CEdgeBasedFeaturesSupplierComp::GetCalibrationsCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->second.size();
+		return int(productPtr->second.size());
 	}
 
 	return 0;

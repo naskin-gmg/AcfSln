@@ -136,13 +136,13 @@ private:
 
 inline int CEdgeLine::GetNodesCount() const
 {
-	return m_nodes.size();
+	return int(m_nodes.size());
 }
 
 
 inline int CEdgeLine::GetSegmentsCount() const
 {
-	return m_isClosed? m_nodes.size(): m_nodes.size() - 1;
+	return m_isClosed? int(m_nodes.size()): int(m_nodes.size() - 1);
 }
 
 
