@@ -11,6 +11,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
@@ -165,6 +168,182 @@
 				BasicRuntimeChecks="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1031"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Win64.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="3"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
+				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1031"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="DeployCopy"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="3"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;"
+				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				BasicRuntimeChecks="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -354,6 +533,20 @@
 			<File
 				RelativePath="..\CExternalFileConverterComp.moc"
 				>
+				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="QT Moc Metafile"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="QT Moc Metafile"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter

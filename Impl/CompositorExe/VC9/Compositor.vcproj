@@ -11,6 +11,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
@@ -89,6 +92,99 @@
 				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				SubSystem="2"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Application.vsprops;$(ACFCONFIGDIR)\VC9\Win64.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				ConfigFile="../../../Config/BaseOnly.xpc"
+				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
+			/>
+			<Tool
+				Name="DeployCopy"
+				OutputDir=""
+				InputDir="..\..\..\Bin\info"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="Arxc"
+				ConfigFile="../../../Config/Core.xpc"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Impl&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib Qt5PrintSupport.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
+				SubSystem="2"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -204,6 +300,100 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Application.vsprops;$(ACFCONFIGDIR)\VC9\Win64.vsprops"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				ConfigFile="../../../Config/BaseOnly.xpc"
+				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
+			/>
+			<Tool
+				Name="DeployCopy"
+				OutputDir=""
+				InputDir="..\..\..\Bin\info"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
+			/>
+			<Tool
+				Name="Arxc"
+				AdditionalOptions=""
+				ConfigFile="../../../Config/Core.xpc"
+				Verbose="true"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../../Include;../../../AuxInclude/Qt5;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/AuxInclude/Qt5&quot;;&quot;$(ACFDIR)/Impl&quot;"
+				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib Qt5PrintSupport.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -243,6 +433,14 @@
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
+					>
+					<Tool
+						Name="Arxc"
+						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
 					>
 					<Tool
 						Name="Arxc"
