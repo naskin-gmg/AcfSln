@@ -7,7 +7,6 @@
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "istd/CGeneralTimeStamp.h"
-#include "imod/IModel.h"
 
 
 namespace ihotfgui
@@ -20,6 +19,7 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_poolingFrequency(5.0),
 	m_observingItemTypes(ihotf::IDirectoryMonitorParams::OI_ALL),
 	m_observingChanges(ihotf::IDirectoryMonitorParams::OC_ALL),
+	m_lastModificationMinDifference(30),
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false)
@@ -196,14 +196,23 @@ void CDirectoryMonitorComp::run()
 				const QString& currentFilePath = *currentFileIter;
 
 				if (!m_directoryFiles.contains(currentFilePath)){
-					QFile file(currentFilePath);
-					bool hasAccess = file.open(QIODevice::ReadOnly);
-					if (hasAccess){
-						addedFiles.push_back(currentFilePath);
+					QDateTime currentDateTime = QDateTime::currentDateTime();
+					QDateTime lastModifiedAt = QFileInfo(currentFilePath).lastModified();
 
-						m_directoryFiles[currentFilePath] = QFileInfo(file).lastModified();
+					int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
+					if (modificationTimeDiff > m_lastModificationMinDifference){
+						QFile file(currentFilePath);
+						bool hasAccess = file.open(QIODevice::ReadOnly);
+						if (hasAccess){
+							addedFiles.push_back(currentFilePath);
 
-						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
+							m_directoryFiles[currentFilePath] = lastModifiedAt;
+
+							I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
+						}
+						else{
+							m_nonAccessedFiles.insert(currentFilePath);
+						}
 					}
 					else{
 						m_nonAccessedFiles.insert(currentFilePath);

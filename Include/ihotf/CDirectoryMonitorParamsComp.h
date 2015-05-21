@@ -30,6 +30,7 @@ public:
 		I_ASSIGN(m_poolingIntervallAttrPtr, "PoolingIntervall", "Intervall for checking of directory changes in seconds", false, 5);
 		I_ASSIGN(m_observedItemTypesAttrPtr, "ObservedItems", "Items to be observed.\n1 - Directories\n2 - Files\n4 - Drives", false, OI_FILES);
 		I_ASSIGN(m_observedChangesAttrPtr, "ObservedChanges", "Item changes to be observed.\n1 - Add\n2 - Remove\n4 - Modified\n8 - Attributes changed", false, OC_ADD);
+		I_ASSIGN(m_minLastModificationTimeDifferenceAttrPtr, "MinLastModificationTimeDifference", "Second since last modification time of the file before operating on it", false, 30);
 		I_ASSIGN_MULTI_0(m_acceptPatternsAttrPtr, "AcceptPatterns", "File name patterns for accepting of the file items", false);
 		I_ASSIGN_MULTI_0(m_ignorePatternsAttrPtr, "IgnorePatterns", "File name patterns for ignoring of the file items", false);
 	I_END_COMPONENT;
@@ -42,6 +43,7 @@ private:
 	I_ATTR(double, m_poolingIntervallAttrPtr);
 	I_ATTR(int, m_observedItemTypesAttrPtr);
 	I_ATTR(int, m_observedChangesAttrPtr);
+	I_ATTR(int, m_minLastModificationTimeDifferenceAttrPtr);
 	I_MULTIATTR(QString, m_acceptPatternsAttrPtr);
 	I_MULTIATTR(QString, m_ignorePatternsAttrPtr);
 };

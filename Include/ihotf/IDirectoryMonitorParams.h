@@ -44,6 +44,16 @@ public:
 	virtual void SetPoolingIntervall(double poolingIntervall) = 0;
 
 	/**
+		Get the minimal time to wait since last modification of the file before operating with this (e.g. to add the file to the list of observed files).
+	*/
+	virtual int GetMinLastModificationTimeDifference() const = 0;
+
+	/**
+		Set the minimal time to wait since last modification of the file before operating with this.
+	*/
+	virtual void SetMinLastModificationTimeDifference(int minLastModificationTimeDifference) = 0;
+	
+	/**
 		Get the group of items to be observed.
 	*/
 	virtual int GetObservedItemTypes() const = 0;

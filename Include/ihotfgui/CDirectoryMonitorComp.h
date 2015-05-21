@@ -150,6 +150,7 @@ private:
 	QStringList m_fileFilterExpressions;
 	int m_observingItemTypes;
 	int m_observingChanges;
+	int m_lastModificationMinDifference;
 
 	MonitoringParamsObserver m_monitoringParamsObserver;
 	DirectoryParamsObserver m_directoryParamsObserver;
