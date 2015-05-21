@@ -161,10 +161,7 @@ void CDirectoryMonitorComp::run()
 		for (FilesSet::iterator fileIter = m_nonAccessedFiles.begin(); fileIter != m_nonAccessedFiles.end(); fileIter++){
 			const QString& filePath = *fileIter;
 
-			QFile file(filePath);
-
-			bool hasAccess = file.open(QIODevice::ReadOnly);
-			if (hasAccess){
+			if (HasFileAccess(filePath)){
 				QFileInfo fileInfo(filePath);
 
 				m_directoryFiles[filePath] = fileInfo.lastModified();
@@ -196,23 +193,12 @@ void CDirectoryMonitorComp::run()
 				const QString& currentFilePath = *currentFileIter;
 
 				if (!m_directoryFiles.contains(currentFilePath)){
-					QDateTime currentDateTime = QDateTime::currentDateTime();
-					QDateTime lastModifiedAt = QFileInfo(currentFilePath).lastModified();
+					if (HasFileAccess(currentFilePath)){
+						addedFiles.push_back(currentFilePath);
 
-					int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
-					if (modificationTimeDiff > m_lastModificationMinDifference){
-						QFile file(currentFilePath);
-						bool hasAccess = file.open(QIODevice::ReadOnly);
-						if (hasAccess){
-							addedFiles.push_back(currentFilePath);
+						m_directoryFiles[currentFilePath] = QFileInfo(currentFilePath).lastModified();
 
-							m_directoryFiles[currentFilePath] = lastModifiedAt;
-
-							I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
-						}
-						else{
-							m_nonAccessedFiles.insert(currentFilePath);
-						}
+						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
 					}
 					else{
 						m_nonAccessedFiles.insert(currentFilePath);
@@ -242,7 +228,7 @@ void CDirectoryMonitorComp::run()
 
 						previousModifiedTime = currentModifiedTime;
 
-						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File % 1 was modified").arg(filePath)));
+						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was modified").arg(filePath)));
 					}
 				}
 /*
@@ -469,6 +455,22 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 			sessionPtr->SetFileInfoList(m_directoryFiles);
 		}
 	}
+}
+
+
+bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath) const
+{
+	QDateTime currentDateTime = QDateTime::currentDateTime();
+	QDateTime lastModifiedAt = QFileInfo(filePath).lastModified();
+
+	int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
+	if (modificationTimeDiff > m_lastModificationMinDifference){
+		QFile file(filePath);
+		
+		return file.open(QIODevice::ReadOnly);
+	}
+
+	return false;
 }
 
 

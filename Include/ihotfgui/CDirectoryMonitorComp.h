@@ -91,6 +91,7 @@ private:
 	bool ConnectToParameterModel(const iprm::IParamsSet& paramsSet);
 	void DisconnectFromParameterModel();
 	void UpdateMonitoringSession() const;
+	bool HasFileAccess(const QString& filePath) const;
 
 private:
 	struct FileSystemChanges
