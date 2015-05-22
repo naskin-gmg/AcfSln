@@ -503,7 +503,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 		const Ray& ray = outRays.at(rayIndex);
 
 		if (*m_sendUsedPointsToTempAttrPtr){
-			int pointsCount = ray.points.size();
+			int pointsCount = int(ray.points.size());
 			for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
 				const Point& rayPoint = ray.points[pointIndex];
 
