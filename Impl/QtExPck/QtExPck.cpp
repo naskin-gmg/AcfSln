@@ -20,10 +20,16 @@ I_EXPORT_COMPONENT(
 			TcpTerminalGui,
 			"Tcp client terminal",
 			"TCP Client Terminal Input Output Test" IM_TAG("GUI"));
+
 I_EXPORT_COMPONENT(
-		   XslFileSerializer,
-		   "File loader serializing objects using simplified XML format using Qt, provides XSLT",
-		   "Save Serializer Archive Format XSLT" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+			XslFileSerializer,
+			"File loader serializing objects using simplified XML format using Qt, provides XSLT",
+			"Save Serializer Archive Format XSLT" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+
+I_EXPORT_COMPONENT(
+			ServiceApplication,
+			"An application as service/daemon",
+			"Service Daemon" IM_TAG("Application"));
 
 
 } // namespace QtExPck
