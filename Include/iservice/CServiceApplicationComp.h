@@ -15,8 +15,10 @@
 #include "ilog/TLoggerCompWrap.h"
 #include "icomp/CComponentBase.h"
 
+#ifndef Q_OS_MAC
 // ACF-Solutions includes
 #include "iservice/QtService.h"
+#endif
 
 
 namespace iservice
@@ -34,6 +36,7 @@ class CServiceApplicationComp:
 	Q_OBJECT
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
+	typedef QObject BaseClass2;
 
 	I_BEGIN_COMPONENT(CServiceApplicationComp);
 		I_REGISTER_INTERFACE(ibase::IApplication);
@@ -56,6 +59,8 @@ public:
 
 protected Q_SLOTS:
 	void OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+
+#ifndef Q_OS_MAC
 
 protected:
 	class CService: public QtServiceBase
@@ -87,13 +92,14 @@ protected:
 		QStringList m_applicationArguments;
 	};
 
+	istd::TDelPtr<CService> m_servicePtr;
+#endif // Q_OS_MAC
+
 private:
 	I_REF(ibase::IApplication, m_applicationCompPtr);
 	I_ATTR(QString, m_serviceDescriptionAttrPtr);
 	I_ATTR(QString, m_serviceNameAttrPtr);
 	I_ATTR(bool, m_manualStartupAttrPtr);
-
-	istd::TDelPtr<CService> m_servicePtr;
 };
 
 
