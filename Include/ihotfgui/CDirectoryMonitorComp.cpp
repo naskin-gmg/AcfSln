@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QMutexLocker>
+#include <QtCore/QMetaType>
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
