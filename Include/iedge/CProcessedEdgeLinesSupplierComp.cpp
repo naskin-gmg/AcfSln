@@ -42,9 +42,10 @@ int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 
 		return WS_ERROR;
 	}
-	else{
-		return WS_CRITICAL;
-	}
+
+	SendCriticalMessage(0, "Bad component architecture, 'EdgeLinesProvider' or 'EdgesProcessor' component references are not set");
+
+	return WS_CRITICAL;
 }
 
 

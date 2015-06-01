@@ -1,10 +1,6 @@
 #include "icam/CSelectableBitmapSupplierComp.h"
 
 
-// ACF includes
-#include "i2d/CAffineTransformation2d.h"
-
-
 namespace icam
 {
 
@@ -43,21 +39,37 @@ const i2d::ICalibration2d* CSelectableBitmapSupplierComp::GetCalibration() const
 
 int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
+	result.first.Reset();
+	result.second.Reset();
+
 	if (!m_bitmapCompFact.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
+
 		return WS_CRITICAL;
 	}
 
-	result.first.Reset();
-	result.second.Reset();
+	if (!m_multiBitmapProviderCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'MultiBitmapProvider' component reference is not set");
+
+		return WS_CRITICAL;
+	}
+
+	if (!m_bitmapSelectionCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapSelection' component reference is not set");
+
+		return WS_CRITICAL;
+	}
 
 	if (!result.second.IsValid()){
 		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
 		if (!result.second.IsValid()){
-			return WS_CRITICAL;
+			SendErrorMessage(0, "Bitmap instance could not be created");
+
+			return WS_ERROR;
 		}
 	}
 
-	if (result.second.IsValid() && m_multiBitmapProviderCompPtr.IsValid() && m_bitmapSelectionCompPtr.IsValid()){
+	if (result.second.IsValid()){
 		int selectedIndex = m_bitmapSelectionCompPtr->GetSelectedOptionIndex();
 		if (selectedIndex < 0){
 			SendVerboseMessage("Bitmap selection index invalid");

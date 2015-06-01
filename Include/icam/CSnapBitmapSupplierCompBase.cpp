@@ -60,13 +60,17 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 	result.first.Reset();
 
 	if (!m_bitmapAcquisitionCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapAcquisition' component reference is not set");
+
 		return WS_CRITICAL;
 	}
 
 	if (!result.second.IsValid()){
 		result.second.SetPtr(CreateBitmap());
 		if (!result.second.IsValid()){
-			return WS_CRITICAL;
+			SendErrorMessage(0, "Bitmap instance could not be created");
+
+			return WS_ERROR;
 		}
 	}
 

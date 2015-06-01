@@ -1,11 +1,6 @@
 #include "icam/CMultiLayerBitmapSupplierComp.h"
 
 
-// ACF includes
-#include "imod/TModelWrap.h"
-#include "iprm/TParamsPtr.h"
-
-
 namespace icam
 {
 
@@ -76,20 +71,30 @@ bool CMultiLayerBitmapSupplierComp::InitializeWork()
 
 int CMultiLayerBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
+	result.Reset();
+
 	if (!m_bitmapCompFact.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
+
 		return WS_CRITICAL;
 	}
 
-	result.Reset();
+	if (!m_bitmapAcquisitionCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapAcquisition' component reference is not set");
+
+		return WS_CRITICAL;
+	}
 
 	if (!result.IsValid()){
 		result.SetPtr(m_bitmapCompFact.CreateInstance());
 		if (!result.IsValid()){
-			return WS_CRITICAL;
+			SendErrorMessage(0, "Bitmap instance could not be created");
+
+			return WS_ERROR;
 		}
 	}
 
-	if (result.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
+	if (result.IsValid()){
 		Timer performanceTimer(this, "Image acquisition");
 
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.GetPtr());

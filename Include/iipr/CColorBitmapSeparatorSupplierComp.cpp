@@ -145,6 +145,8 @@ bool CColorBitmapSeparatorSupplierComp::IsOptionEnabled(int /*index*/) const
 int CColorBitmapSeparatorSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapProviderCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapProvider' component reference are not set");
+
 		return WS_CRITICAL;
 	}
 

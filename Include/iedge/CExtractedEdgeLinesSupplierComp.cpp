@@ -52,9 +52,8 @@ int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 
 		return WS_ERROR;
 	}
-	else{
-		return WS_CRITICAL;
-	}
+
+	return WS_CRITICAL;
 }
 
 
