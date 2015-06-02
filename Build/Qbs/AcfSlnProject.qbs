@@ -34,8 +34,9 @@ Project{
 			"../../Include/iedge/Qbs/iedge.qbs",
 			"../../Include/iedgegui/Qbs/iedgegui.qbs",
 			"../../Include/icmpstr/Qbs/icmpstr.qbs",
-			"../../Include/idocproc/Qbs/idocproc.qbs",
-			"../../Impl/AcfSlnLoc/Qbs/AcfSlnLoc.qbs"
+            "../../Include/idocproc/Qbs/idocproc.qbs",
+            "../../Include/iservice/Qbs/iservice.qbs",
+            "../../Impl/AcfSlnLoc/Qbs/AcfSlnLoc.qbs"
 		]
 	}
 

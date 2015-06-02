@@ -7,8 +7,10 @@ AcfPackage{
 	files: ["../*.h", "../*.cpp", "../*.ui"]
 
 	Depends{ name: "iqtex" }
+    Depends{ name: "iservice" }
 
 	Export{
 		Depends{ name: "iqtex" }
-	}
+        Depends{ name: "iservice" }
+    }
 }
