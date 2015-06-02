@@ -19,33 +19,39 @@ const CEdgeLineContainer* CProcessedEdgeLinesSupplierComp::GetEdgesContainer() c
 
 int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) const
 {
-	if (m_edgeLinesProviderCompPtr.IsValid() && m_edgesProcessorCompPtr.IsValid()){
-		const CEdgeLineContainer* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
+	if (!m_edgeLinesProviderCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'EdgeLinesProvider' component reference is not set");
 
-		if (containerPtr != NULL){
-			Timer performanceTimer(this, "Edge processing");
-
-			if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
-				istd::TDelPtr<i2d::ICalibration2d> newCalibration;
-
-				// copy calibration from original
-				const i2d::ICalibration2d* calibrationPtr = containerPtr->GetCalibration();
-				if (calibrationPtr != NULL){
-					newCalibration.SetCastedOrRemove(calibrationPtr->CloneMe());
-				}
-
-				result.SetCalibration(newCalibration.PopPtr(), true);
-
-				return WS_OK;
-			}
-		}
-
-		return WS_ERROR;
+		return WS_CRITICAL;
 	}
 
-	SendCriticalMessage(0, "Bad component architecture, 'EdgeLinesProvider' or 'EdgesProcessor' component references are not set");
+	if (!m_edgesProcessorCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'EdgesProcessor' component reference is not set");
 
-	return WS_CRITICAL;
+		return WS_CRITICAL;
+	}
+
+	const CEdgeLineContainer* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
+	if (containerPtr != NULL){
+		Timer performanceTimer(this, "Edge processing");
+		Q_UNUSED(performanceTimer);
+
+		if (m_edgesProcessorCompPtr->DoLinesProcessing(GetModelParametersSet(), *containerPtr, result)){
+			istd::TDelPtr<i2d::ICalibration2d> newCalibration;
+
+			// copy calibration from original
+			const i2d::ICalibration2d* calibrationPtr = containerPtr->GetCalibration();
+			if (calibrationPtr != NULL){
+				newCalibration.SetCastedOrRemove(calibrationPtr->CloneMe());
+			}
+
+			result.SetCalibration(newCalibration.PopPtr(), true);
+
+			return WS_OK;
+		}
+	}
+
+	return WS_ERROR;
 }
 
 

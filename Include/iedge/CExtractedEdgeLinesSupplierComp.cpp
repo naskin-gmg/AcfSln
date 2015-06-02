@@ -21,39 +21,48 @@ int CExtractedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 {
 	result.Reset();
 
-	if (m_bitmapProviderCompPtr.IsValid() && m_edgesExtractorCompPtr.IsValid()){
-		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
-		if (bitmapPtr != NULL){
-			Timer performanceTimer(this, "Edge extraction");
+	if (!m_bitmapProviderCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'BitmapProvider' component reference is not set");
 
-			if (m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
-				const i2d::ICalibration2d* bitmapCalibrationPtr = bitmapPtr->GetCalibration();
-				if (bitmapCalibrationPtr != NULL){
-					result.Transform(*bitmapCalibrationPtr);	// move to global coordinates
-				}
-
-				if (m_calibrationProviderCompPtr.IsValid()){
-					const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
-
-					if (calibrationPtr != NULL){
-						istd::TDelPtr<i2d::ICalibration2d> calibCopyPtr;
-						calibCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
-
-						if (calibCopyPtr.IsValid()){
-							result.InvTransform(*calibrationPtr);
-							result.SetCalibration(calibCopyPtr.PopPtr(), true);
-						}
-					}
-				}
-
-				return WS_OK;
-			}
-		}
-
-		return WS_ERROR;
+		return WS_CRITICAL;
 	}
 
-	return WS_CRITICAL;
+	if (!m_edgesExtractorCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component architecture, 'EdgesExtractor' component reference is not set");
+
+		return WS_CRITICAL;
+	}
+
+	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
+	if (bitmapPtr != NULL){
+		Timer performanceTimer(this, "Edge extraction");
+		Q_UNUSED(performanceTimer);
+
+		if (m_edgesExtractorCompPtr->DoContourExtraction(GetModelParametersSet(), *bitmapPtr, result)){
+			const i2d::ICalibration2d* bitmapCalibrationPtr = bitmapPtr->GetCalibration();
+			if (bitmapCalibrationPtr != NULL){
+				result.Transform(*bitmapCalibrationPtr);	// move to global coordinates
+			}
+
+			if (m_calibrationProviderCompPtr.IsValid()){
+				const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+
+				if (calibrationPtr != NULL){
+					istd::TDelPtr<i2d::ICalibration2d> calibCopyPtr;
+					calibCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+
+					if (calibCopyPtr.IsValid()){
+						result.InvTransform(*calibrationPtr);
+						result.SetCalibration(calibCopyPtr.PopPtr(), true);
+					}
+				}
+			}
+
+			return WS_OK;
+		}
+	}
+
+	return WS_ERROR;
 }
 
 
