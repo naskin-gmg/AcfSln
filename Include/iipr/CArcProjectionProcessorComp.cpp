@@ -53,7 +53,6 @@ bool CArcProjectionProcessorComp::DoProjection(
 	double angleStart = bitmapArc.GetStartAngle();
 	double radius = bitmapArc.GetRadius();
 	i2d::CVector2d center = bitmapArc.GetPosition();
-	i2d::CVector2d rotationPoint = center + i2d::CVector2d(radius, 0);
 
 	double angle;
 	int i;

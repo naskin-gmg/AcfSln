@@ -40,8 +40,7 @@ protected Q_SLOTS:
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiCreated();
-
-	virtual void UpdateModel();
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)

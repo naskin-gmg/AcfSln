@@ -71,7 +71,7 @@ protected:
 	virtual iimg::IBitmap* CreateBitmap() const
 	{
 		if (!m_bitmapCompFact.IsValid()){
-			return false;
+			return NULL;
 		}
 
 		return m_bitmapCompFact.CreateInstance();
