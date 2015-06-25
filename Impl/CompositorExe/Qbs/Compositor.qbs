@@ -25,6 +25,11 @@ Project{
 		Depends{ name: "PackagePck" }
 
 		acf.generatedOutputDir: "GeneratedFiles/Compositor"
+
+		Export{
+			Depends{ name: "cpp" }
+			cpp.includePaths: [product.buildDirectory]
+		}
 	}
 
 	AcfApplication{
