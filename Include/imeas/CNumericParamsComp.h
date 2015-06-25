@@ -24,9 +24,7 @@ namespace imeas
 class CNumericParamsComp:
 			public icomp::CComponentBase,
 			public CSimpleNumericValue,
-			protected imod::CMultiModelBridgeBase,
-			virtual protected INumericConstraints,
-			virtual protected imath::IUnitInfo
+			protected imod::CMultiModelBridgeBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -36,9 +34,6 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(INumericValue);
-		I_ASSIGN(m_dimensionsCountAttrPtr, "ValuesCount", "Default number of numeric values (will be used if no constraints set)", true, 1);
-		I_ASSIGN(m_minValueAttrPtr, "MinValues", "Minimal value (will be used if no constraints set)", true, 1);
-		I_ASSIGN(m_maxValueAttrPtr, "MaxValues", "Maximal value (will be used if no constraints set)", true, 10);
 		I_ASSIGN_MULTI_0(m_defaultValuesAttrPtr, "Values", "Default values", false);
 		I_ASSIGN(m_constraintsCompPtr, "Constraints", "Constraints object describing possible parameter values", false, "Constraints");
 		I_ASSIGN_TO(m_constraintsModelCompPtr, m_constraintsCompPtr, false);
@@ -54,23 +49,7 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
-
-	// reimplemented (imath::IUnitInfo)
-	virtual int GetUnitType() const;
-	virtual QString GetUnitName() const;
-	virtual double GetDisplayMultiplicationFactor() const;
-	virtual istd::CRange GetValueRange() const;
-	virtual const imath::IDoubleManip& GetValueManip() const;
-
 private:
-	I_ATTR(int, m_dimensionsCountAttrPtr);
-	I_ATTR(double, m_minValueAttrPtr);
-	I_ATTR(double, m_maxValueAttrPtr);
 	I_MULTIATTR(double, m_defaultValuesAttrPtr);
 	I_REF(INumericConstraints, m_constraintsCompPtr);
 	I_REF(imod::IModel, m_constraintsModelCompPtr);

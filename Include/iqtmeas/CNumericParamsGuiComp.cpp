@@ -51,6 +51,28 @@ void CNumericParamsGuiComp::OnGuiDestroyed()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
+void CNumericParamsGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	imeas::INumericValue* objectPtr = GetObjectPtr();
+	Q_ASSERT(objectPtr != NULL);
+
+	imod::IModel* contraintsModelPtr = dynamic_cast<imod::IModel*>(const_cast<imeas::INumericConstraints*>(objectPtr->GetNumericConstraints()));
+	if (contraintsModelPtr != NULL){
+		BaseClass2::RegisterModel(contraintsModelPtr);
+	}
+}
+
+
+void CNumericParamsGuiComp::OnGuiModelDetached()
+{
+	BaseClass2::UnregisterAllModels();
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
 void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
@@ -120,6 +142,14 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 			}
 		}
 	}
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CNumericParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& changeSet)
+{
+	UpdateGui(changeSet);
 }
 
 
