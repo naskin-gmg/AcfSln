@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328450
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1
         </Id>
         <Number>
-          1154
+          1163
         </Number>
         <Description>
           ACF-Solutions
@@ -18,21 +29,10 @@
           0
         </Id>
         <Number>
-          3534
+          3556
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -219,10 +219,52 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              FileExtensions
+              FileExtensionsMac
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileExtensionsUnx
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileExtensionsWin
             </Id>
             <Type>
               String[]
@@ -246,7 +288,49 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              TypeDescriptions
+              TypeDescriptionsMac
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  MAC executable file
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeDescriptionsUnx
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  Executable file
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TypeDescriptionsWin
             </Id>
             <Type>
               String[]

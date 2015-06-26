@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328450
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1
         </Id>
         <Number>
-          1154
+          1163
         </Number>
         <Description>
           ACF-Solutions
@@ -18,40 +29,15 @@
           0
         </Id>
         <Number>
-          3534
+          3556
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="11">
-    <Element>
-      <ComponentName>
-        HtmlBrowserFileGui
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         SettingsDialog
@@ -68,13 +54,69 @@
     </Element>
     <Element>
       <ComponentName>
-        SettingsPersistence
+        PreviewCommandFileInfo
       </ComponentName>
       <X>
-        800
+        775
+      </X>
+      <X>
+        175
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        LanguageSelectionGui
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        275
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Settings
+      </ComponentName>
+      <X>
+        500
       </X>
       <X>
         675
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HtmlBrowserFileGui
+      </ComponentName>
+      <X>
+        500
+      </X>
+      <X>
+        500
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DocumentPersistenceGui
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <X>
+        500
       </X>
       <Note>
         
@@ -110,13 +152,13 @@
     </Element>
     <Element>
       <ComponentName>
-        LanguageSelectionGui
+        SettingsPersistence
       </ComponentName>
       <X>
-        1050
+        800
       </X>
       <X>
-        275
+        675
       </X>
       <Note>
         
@@ -138,34 +180,6 @@
     </Element>
     <Element>
       <ComponentName>
-        PreviewCommandFileInfo
-      </ComponentName>
-      <X>
-        775
-      </X>
-      <X>
-        175
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Settings
-      </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        675
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         SettingsGui
       </ComponentName>
       <X>
@@ -173,20 +187,6 @@
       </X>
       <X>
         400
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentPersistenceGui
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        500
       </X>
       <Note>
         
