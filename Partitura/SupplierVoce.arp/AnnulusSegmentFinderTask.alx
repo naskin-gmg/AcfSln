@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3252
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1067
+          1278
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3731
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -40,98 +40,28 @@
   <PositionMap count="11">
     <Element>
       <ComponentName>
-        CaliperParamsSet
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        525
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        PositionTask
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        175
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CircleFinderParams
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        725
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParams
-      </ComponentName>
-      <X>
-        1100
-      </X>
-      <X>
-        725
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RadiusConstraints
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        525
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RadiusParams
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <X>
-        525
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         Aoi
       </ComponentName>
       <X>
         525
       </X>
-      <X>
+      <Y>
         725
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParamsSet
+      </ComponentName>
+      <X>
+        825
       </X>
+      <Y>
+        525
+      </Y>
       <Note>
         
       </Note>
@@ -143,23 +73,9 @@
       <X>
         350
       </X>
-      <X>
+      <Y>
         375
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Calibration2dProxy
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        725
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -171,9 +87,37 @@
       <X>
         675
       </X>
-      <X>
+      <Y>
         375
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Calibration2dProxy
+      </ComponentName>
+      <X>
+        175
       </X>
+      <Y>
+        725
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        PositionTask
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <Y>
+        175
+      </Y>
       <Note>
         
       </Note>
@@ -185,9 +129,65 @@
       <X>
         350
       </X>
+      <Y>
+        175
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParams
+      </ComponentName>
+      <X>
+        1100
+      </X>
+      <Y>
+        725
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CircleFinderParams
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <Y>
+        725
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RadiusParams
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <Y>
+        525
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RadiusConstraints
+      </ComponentName>
       <X>
         175
       </X>
+      <Y>
+        525
+      </Y>
       <Note>
         
       </Note>
