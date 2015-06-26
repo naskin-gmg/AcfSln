@@ -40,19 +40,20 @@ bool DoConvolution(
 	QVector<const quint8*> inputLines;
 	QVector<quint8*> outputLines;
 
-	for (int y = 1; y < imageSize.GetY() - 1; ++y){
+	int imageHeight = imageSize.GetY();
+
+	for (int y = 1; y < imageHeight - 1; ++y){
 		inputLines.push_back(static_cast<const quint8*>(inputBitmap.GetLinePtr(y)));
 		outputLines.push_back(static_cast<quint8*>(outputBitmap.GetLinePtr(y)));
 	}
 
-	int imageHeight = imageSize.GetY();
 	int imageWidth = imageSize.GetX();
 
 	#pragma omp parallel for
 
-	for (int y = 1; y < imageHeight - 1; ++y){
-		const quint8* inputPtr = inputLines[y - 1];
-		quint8* outputPtr = outputLines[y - 1];
+	for (int y = 0; y < inputLines.count(); ++y){
+		const quint8* inputPtr = inputLines[y] + PixelSize;
+		quint8* outputPtr = outputLines[y] + PixelSize;
 
 		for (int x = 1; x < imageWidth - 1; ++x){
 			WorkingType sums[ChannelsCount] = {0};
