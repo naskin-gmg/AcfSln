@@ -630,6 +630,10 @@ bool CVisualRegistryEditorComp::OnDropObject(const QMimeData& mimeData, QGraphic
 
 void CVisualRegistryEditorComp::UpdateScene()
 {
+	if (!m_sceneProviderCompPtr.IsValid()){
+		return;
+	}
+
 	UpdateBlocker blocker(this);
 
 	QList<QGraphicsItem*> itemsToRemove = m_scenePtr->items();
