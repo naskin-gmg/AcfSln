@@ -38,26 +38,7 @@
 **
 ****************************************************************************/
 
-#include "qtservice.h"
-#include "qtservice_p.h"
-#include "qtunixsocket.h"
-#include "qtunixserversocket.h"
-#include <QCoreApplication>
-#include <QStringList>
-#include <QFile>
-#include <QTimer>
-#include <QDir>
-#include <pwd.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <syslog.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <QMap>
-#include <QSettings>
-#include <QProcess>
+#include "qtservice_unix.h"
 
 static QString encodeName(const QString &name, bool allowUpper = false)
 {
@@ -269,29 +250,6 @@ bool QtServiceController::isRunning() const
 
 ///////////////////////////////////
 
-class QtServiceSysPrivate : public QtUnixServerSocket
-{
-    Q_OBJECT
-public:
-    QtServiceSysPrivate();
-    ~QtServiceSysPrivate();
-
-    char *ident;
-
-    QtServiceBase::ServiceFlags serviceFlags;
-
-protected:
-    void incomingConnection(int socketDescriptor);
-
-private slots:
-    void slotReady();
-    void slotClosed();
-
-private:
-    QString getCommand(const QTcpSocket *socket);
-    QMap<const QTcpSocket *, QString> cache;
-};
-
 QtServiceSysPrivate::QtServiceSysPrivate()
     : QtUnixServerSocket(), ident(0), serviceFlags(0)
 {
@@ -368,8 +326,6 @@ QString QtServiceSysPrivate::getCommand(const QTcpSocket *socket)
     }
     return "";
 }
-
-#include "qtservice_unix.moc"
 
 bool QtServiceBasePrivate::sysInit()
 {

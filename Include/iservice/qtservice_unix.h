@@ -38,27 +38,52 @@
 **
 ****************************************************************************/
 
-#include <iservice/QtServiceStarter.h>
-#include <iservice/qtservice_p.h>
+#ifndef QTSERVICE_UNIX_INCLUDED
+#define QTSERVICE_UNIX_INCLUDED
 
+#include "qtservice.h"
+#include "qtservice_p.h"
+#include "qtunixsocket.h"
+#include "qtunixserversocket.h"
+#include <QCoreApplication>
+#include <QStringList>
+#include <QFile>
+#include <QTimer>
+#include <QDir>
+#include <pwd.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <syslog.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <QMap>
+#include <QSettings>
+#include <QProcess>
 
-
-// public methods
-
-QtServiceStarter::QtServiceStarter(QtServiceBasePrivate* service)
-	:QObject(),
-	d_ptr(service)
+class QtServiceSysPrivate : public QtUnixServerSocket
 {
-}
+	Q_OBJECT
+public:
+	QtServiceSysPrivate();
+	~QtServiceSysPrivate();
 
+	char *ident;
 
-// public slots
+	QtServiceBase::ServiceFlags serviceFlags;
 
-void QtServiceStarter::slotStart()
-{
-	d_ptr->startService();
-}
+protected:
+	void incomingConnection(int socketDescriptor);
 
+private slots:
+	void slotReady();
+	void slotClosed();
 
+private:
+	QString getCommand(const QTcpSocket *socket);
+	QMap<const QTcpSocket *, QString> cache;
+};
 
+#endif
 
