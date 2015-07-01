@@ -175,6 +175,7 @@ protected:
 
 	MessageContainer m_messageContainer;
 
+	istd::IChangeable::ChangeSet m_supplierResultsChangeSet;
 	typedef istd::TDelPtr<istd::CChangeNotifier> NotifierPtr;
 	NotifierPtr m_productChangeNotifierPtr;
 

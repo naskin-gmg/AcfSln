@@ -15,7 +15,8 @@ CInspectionTaskComp::CInspectionTaskComp()
 :	BaseClass2(this),
 	m_isStatusKnown(false),
 	m_resultCategory(IC_NONE),
-	m_messageContainer(this)
+	m_messageContainer(this),
+	m_supplierResultsChangeSet(CF_SUPPLIER_RESULTS)
 {
 	// Only processing time message allowed:
 	m_messageContainer.SetMaxMessageCount(1);
@@ -138,8 +139,7 @@ void CInspectionTaskComp::InvalidateSupplier()
 
 void CInspectionTaskComp::EnsureWorkInitialized()
 {
-	static const istd::IChangeable::ChangeSet changeSet(CF_SUPPLIER_RESULTS);
-	m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &changeSet));
+	m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &m_supplierResultsChangeSet));
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
 
