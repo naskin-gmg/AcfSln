@@ -74,7 +74,7 @@ public:
 	QtServiceBase::ServiceFlags serviceFlags;
 
 protected:
-	void incomingConnection(int socketDescriptor);
+	void incomingConnection(qintptr socketDescriptor);
 
 private slots:
 	void slotReady();
