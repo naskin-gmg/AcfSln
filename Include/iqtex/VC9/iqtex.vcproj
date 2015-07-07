@@ -330,10 +330,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTcpTerminalGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CXslSerializerComp.h"
 				>
 			</File>
@@ -377,6 +373,14 @@
 			</File>
 			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtex\ui_CTcpTerminalGuiComp.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CTcpTerminalGuiComp.moc"
 				>
 			</File>
 		</Filter>

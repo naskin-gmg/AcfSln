@@ -531,6 +531,14 @@
 			Filter="*.moc"
 			>
 			<File
+				RelativePath="..\CComposedCopyFilesComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CCopyFilesTreeComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CExternalFileConverterComp.moc"
 				>
 			</File>
@@ -538,6 +546,14 @@
 		<Filter
 			Name="Generated Files"
 			>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\ifileproc\moc_CComposedCopyFilesComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\ifileproc\moc_CCopyFilesTreeComp.cpp"
+				>
+			</File>
 			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ifileproc\moc_CExternalFileConverterComp.cpp"
 				>

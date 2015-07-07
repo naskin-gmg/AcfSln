@@ -357,19 +357,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFrameSeqVideoControllerComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CMediaLoaderComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CPlaybackControllerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CPlaybackControllerGuiComp.moc"
 				>
 			</File>
 			<File
@@ -428,7 +420,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtmm\moc_CMediaLoaderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iqtmm\moc_CPlaybackControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iqtmm\moc_CSvgBitmapLoaderComp.cpp"
 				>
 			</File>
 			<File
@@ -450,6 +450,26 @@
 			</File>
 			<File
 				RelativePath="..\CVideoPlayerGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CFrameSeqVideoControllerComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMediaLoaderComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSvgBitmapLoaderComp.moc"
 				>
 			</File>
 		</Filter>

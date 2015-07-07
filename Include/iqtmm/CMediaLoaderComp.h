@@ -20,6 +20,8 @@ class CMediaLoaderComp:
 			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFilePersistence
 {
+	Q_OBJECT
+
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
