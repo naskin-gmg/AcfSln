@@ -1143,7 +1143,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqtipr/CColorPatternComparatorGuiComp.ui" line="152"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="163"/>
         <location filename="../../Include/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="163"/>
-        <source>Teached</source>
+        <source>Taught</source>
         <translation>Eingelernt</translation>
     </message>
     <message>

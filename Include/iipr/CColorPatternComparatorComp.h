@@ -38,10 +38,10 @@ public:
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");
 		I_ASSIGN(m_patternCompareThresholdParamIdAttrPtr, "PatternCompareThresholdParamId", "ID of the threshold parameter for pattern comparison", true, "PatternCompareThresholdParamId");
-		I_ASSIGN(m_workingPatternProviderCompPtr, "WorkingPatternProvider", "Provider of the working pattern to be compared with the teached one", true, "WorkingPatternProvider");
-		I_ASSIGN(m_teachedPatternProviderCompPtr, "TeachedPatternProvider", "Provider of the learned pattern", true, "TeachedPatternProvider");
-		I_ASSIGN_TO(m_teachedPatternProviderModelCompPtr, m_teachedPatternProviderCompPtr, false);
-		I_ASSIGN_TO(m_teachedPatternSupplierCompPtr, m_teachedPatternProviderCompPtr, false);
+		I_ASSIGN(m_workingPatternProviderCompPtr, "WorkingPatternProvider", "Provider of the working pattern to be compared with the taught one", true, "WorkingPatternProvider");
+		I_ASSIGN(m_taughtPatternProviderCompPtr, "TaughtPatternProvider", "Provider of the learned pattern", true, "TaughtPatternProvider");
+		I_ASSIGN_TO(m_taughtPatternProviderModelCompPtr, m_taughtPatternProviderCompPtr, false);
+		I_ASSIGN_TO(m_taughtPatternSupplierCompPtr, m_taughtPatternProviderCompPtr, false);
 		I_ASSIGN(m_dataStatisticsProcessorCompPtr, "DataStatisticsProcessor", "Processor used for calculation of the histogram statistics", true, "DataStatisticsProcessor");
 		I_ASSIGN(m_defaultSourceAttrPtr, "DefaultSource", "Default source of information", true, "Color Check");
 	I_END_COMPONENT;
@@ -79,9 +79,9 @@ private:
 	I_REF(imod::IModel, m_workingPatternProviderModelCompPtr);
 	I_REF(iinsp::ISupplier, m_workingPatternSupplierCompPtr);
 
-	I_REF(imeas::IDataSequenceProvider, m_teachedPatternProviderCompPtr);
-	I_REF(imod::IModel, m_teachedPatternProviderModelCompPtr);
-	I_REF(iinsp::ISupplier, m_teachedPatternSupplierCompPtr);
+	I_REF(imeas::IDataSequenceProvider, m_taughtPatternProviderCompPtr);
+	I_REF(imod::IModel, m_taughtPatternProviderModelCompPtr);
+	I_REF(iinsp::ISupplier, m_taughtPatternSupplierCompPtr);
 
 	I_REF(imeas::IDataSequenceStatisticsProcessor, m_dataStatisticsProcessorCompPtr);
 

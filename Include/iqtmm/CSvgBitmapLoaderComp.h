@@ -8,7 +8,7 @@
 
 #include "ilog/TLoggerCompWrap.h"
 
-#include "iimg/CBitmap.h"
+#include "iimg/CBitmap.h"%
 
 #include "iqtmm/iqtmm.h"
 

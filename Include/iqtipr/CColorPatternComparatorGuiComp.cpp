@@ -88,9 +88,9 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 			if (colorValuesCount == 2){
 				QTableWidgetItem* workingColorItem = new QTableWidgetItem(QString::number(colorValues[0]));
-				QTableWidgetItem* teachedColorItem = new QTableWidgetItem(QString::number(colorValues[1]));
+				QTableWidgetItem* taughtColorItem = new QTableWidgetItem(QString::number(colorValues[1]));
 				workingColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-				teachedColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+				taughtColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
 				double delta = colorValues[1] - colorValues[0];
 				double deltaRel = abs(delta) / 255;
@@ -98,7 +98,7 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 				ColorTable->setRowCount(1);
 				ColorTable->setItem(0, 0, workingColorItem);
-				ColorTable->setItem(0, 1, teachedColorItem);
+				ColorTable->setItem(0, 1, taughtColorItem);
 				ColorTable->setItem(0, 2, diffItem);
 
 				ColorTable->verticalHeaderItem(0)->setText(tr("Grayvalue"));
@@ -118,19 +118,19 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 				for (int i = 0; i < 3; i++){
 					double currentValue = colorValues[i];
-					double teachedValue = colorValues[i + 3];
+					double taughtValue = colorValues[i + 3];
 
 					QTableWidgetItem* workingColorItem = new QTableWidgetItem(QString::number(currentValue));
-					QTableWidgetItem* teachedColorItem = new QTableWidgetItem(QString::number(teachedValue));
+					QTableWidgetItem* taughtColorItem = new QTableWidgetItem(QString::number(taughtValue));
 					workingColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-					teachedColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+					taughtColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-					double delta = teachedValue - currentValue;
+					double delta = taughtValue - currentValue;
 					double deltaRel = abs(delta) / 255;
 					QTableWidgetItem* diffItem = new QTableWidgetItem(QString("%1 (%2%)").arg(delta).arg(deltaRel*100, 0, 'g', 2));
 
 					ColorTable->setItem(i, 0, workingColorItem);
-					ColorTable->setItem(i, 1, teachedColorItem);
+					ColorTable->setItem(i, 1, taughtColorItem);
 					ColorTable->setItem(i, 2, diffItem);
 				}
 			}

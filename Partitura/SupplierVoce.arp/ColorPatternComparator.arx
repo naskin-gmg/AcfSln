@@ -230,7 +230,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              TeachedPatternProvider
+              TaughtPatternProvider
             </Id>
             <Type>
               Reference
