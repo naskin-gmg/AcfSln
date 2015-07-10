@@ -429,7 +429,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 				typeName = "unknown";
 			}
 
-			QString toolTip = tr("Group containing components of %2 type").arg(typeName);
+			QString toolTip = tr("Group containing components of %1 type").arg(typeName);
 			info.itemPtr->setToolTip(0, toolTip);
 		}
 	}
@@ -1131,7 +1131,7 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 		toolTip = tr("Component %1").arg(address.ToString());
 	}
 	else{
-		toolTip = tr("Local composite component %2").arg(QString(address.GetComponentId()));
+		toolTip = tr("Local composite component %1").arg(QString(address.GetComponentId()));
 	}
 
 	if (!m_description.isEmpty()){
