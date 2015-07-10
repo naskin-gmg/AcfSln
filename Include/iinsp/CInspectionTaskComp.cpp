@@ -193,6 +193,8 @@ void CInspectionTaskComp::EnsureWorkFinished()
 		iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkFinished();
+
+			m_subtaskNotifiers[supplierPtr].Reset();
 		}
 	}
 
@@ -202,6 +204,8 @@ void CInspectionTaskComp::EnsureWorkFinished()
 		iinsp::ISupplier* supplierPtr = m_additionalSupppliersCompPtr[i];
 		if (supplierPtr != NULL){
 			supplierPtr->EnsureWorkFinished();
+
+			m_subtaskNotifiers[supplierPtr].Reset();
 		}
 	}
 
