@@ -16,9 +16,6 @@
     <height>40</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true">QProgressBar
 {
