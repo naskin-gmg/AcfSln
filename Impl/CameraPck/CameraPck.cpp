@@ -65,6 +65,11 @@ I_EXPORT_COMPONENT(
 			"Implementation of Qt-bitmap based supplier getting image from camera",
 			"Image Standard Bitmap Snap Supplier");
 
+I_EXPORT_COMPONENT(
+			CalibratedCamera,
+			"Camera wrapper providing bitmaps with embedded resolution information",
+			"Camera Calibration Resolution Image Bitmap Snap");
+
 
 } // namespace CameraPck
 

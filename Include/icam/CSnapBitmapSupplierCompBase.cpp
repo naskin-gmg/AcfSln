@@ -7,6 +7,10 @@
 #include "iprm/TParamsPtr.h"
 
 
+// ACF-Solutions includes
+#include "icam/CCalibratedCameraComp.h"
+
+
 namespace icam
 {
 
@@ -85,20 +89,26 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 
 				i2d::CVector2d scale(1, 1);
 
-				const imeas::INumericValue *scalePtr = NULL;
+				double bitmapResolution = 0.0;
 
-				iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
-							GetModelParametersSet(),
-							m_scaleParamIdAttrPtr,
-							m_defaultScaleValueCompPtr,
-							false);
-				if (scaleParamPtr.IsValid()){
-					imath::CVarVector scaleValues = scalePtr->GetValues();
-					if (scaleValues.GetElementsCount() >= 2){
-						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
-					}
-					else if (scaleValues.GetElementsCount() >= 1){
-						scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+				// Try to get the image resolution from the bitmap:
+				if (CCalibratedCameraComp::ReadImageResolution(*result.second.GetPtr(), bitmapResolution)){
+					scale = i2d::CVector2d(bitmapResolution, bitmapResolution);
+				}
+				else{
+					iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
+								GetModelParametersSet(),
+								m_scaleParamIdAttrPtr,
+								m_defaultScaleValueCompPtr,
+								false);
+					if (scaleParamPtr.IsValid()){
+						imath::CVarVector scaleValues = scaleParamPtr->GetValues();
+						if (scaleValues.GetElementsCount() >= 2){
+							scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
+						}
+						else if (scaleValues.GetElementsCount() >= 1){
+							scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+						}
 					}
 				}
 
