@@ -59,14 +59,15 @@ protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
+protected:
+	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;
+
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
-
-	mutable istd::TDelPtr<const i2d::ICalibration2d> m_outputCalibrationPtr;
 
 	class Position: public imeas::CSimpleNumericValue
 	{
