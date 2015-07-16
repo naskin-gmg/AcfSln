@@ -73,32 +73,27 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 			double rightSum = channelData[0] * sumLastAlpha;
 			double rightWeight = sumLastAlpha;
 			for (int x = -sumOffset; x < projectionWidth; ++x){
-				if (x <= projectionWidth - sumOffset){
-					if (x < projectionWidth - sumOffset){
-						rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha +
-									channelData[x + sumOffset]		* sumLastAlphaInv;
+				if (x < projectionWidth - sumOffset){
+					rightSum +=	channelData[x + sumOffset + 1] * sumLastAlpha + channelData[x + sumOffset] * sumLastAlphaInv;
 
-						rightWeight += 1;
-					}
-					else{
-						rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
-						rightWeight += sumLastAlphaInv;
-					}
+					rightWeight += 1;
+				}
+				else if (x == projectionWidth - sumOffset){
+					rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
+					rightWeight += sumLastAlphaInv;
 				}
 
 				if (x >= 0){
 					double diff = channelData[x];
 					leftSum += diff;
 
-					if (x >= sumOffset){
+					if (x > sumOffset){
 						leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
-
-						if (x > sumOffset){
-							leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
-						}
-						else{
-							leftWeight += sumLastAlpha;
-						}
+						leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
+					}
+					else if (x == sumOffset){
+						leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
+						leftWeight += sumLastAlpha;
 					}
 					else{
 						leftWeight += 1;
