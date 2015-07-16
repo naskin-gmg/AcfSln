@@ -88,7 +88,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 						*this,
 						*m_applicationCompPtr.GetPtr(),
 						argc + 3,
-						char**)instalArguments.data(),
+						(char**)instalArguments.data(),
 						serviceName));
 			
 			m_servicePtr->setServiceDescription(*m_serviceDescriptionAttrPtr);
