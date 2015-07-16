@@ -89,6 +89,9 @@ iblob.file = ../../Include/iblob/QMake/iblob.pro
 SUBDIRS += iblobgui
 iblobgui.file = ../../Include/iblobgui/QMake/iblobgui.pro
 
+SUBDIRS += iservice
+iservice.file = ../../Include/iservice/QMake/iservice.pro
+
 
 # Translation
 

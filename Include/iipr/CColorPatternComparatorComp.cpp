@@ -42,7 +42,7 @@ int CColorPatternComparatorComp::GetValuesCount() const
 
 const imeas::INumericValue& CColorPatternComparatorComp::GetNumericValue(int I_IF_DEBUG(index)) const
 {
-	Q_ASSERT(index == 0);
+	I_IF_DEBUG(Q_ASSERT(index == 0));
 
 	static imeas::CSimpleNumericValue emptyValue;
 

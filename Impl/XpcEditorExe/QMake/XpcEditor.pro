@@ -1,10 +1,12 @@
+TARGET = XpcEditor
+
 include($(ACFCONFIGDIR)/QMake/ApplicationConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 
-TARGET = XpcEditor
-
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl
+
+INCLUDEPATH += $$AUXINCLUDEPATH
 
 RESOURCES += ../*.qrc
 

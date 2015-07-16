@@ -65,7 +65,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 		if (!controller.isInstalled()){
 			// for installation we need 3 additional arguments: -i for install, account and password (last both we leave always empty)
 			// standard Qt mechanisms don't allow definition of a service with command line parameters, so we need some workaround:
-			QVector<char*> instalArguments(argc + 3); 
+			QVector<const char*> instalArguments(argc + 3);
 			QList<QByteArray> argvData;
 			for (int i = 0; i < argc; ++i){
 				argvData.append(argv[i]);
@@ -88,7 +88,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 						*this,
 						*m_applicationCompPtr.GetPtr(),
 						argc + 3,
-						instalArguments.data(),
+						char**)instalArguments.data(),
 						serviceName));
 			
 			m_servicePtr->setServiceDescription(*m_serviceDescriptionAttrPtr);
