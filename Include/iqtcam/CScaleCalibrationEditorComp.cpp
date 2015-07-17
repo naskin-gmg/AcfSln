@@ -14,6 +14,7 @@
 
 // ACF includes
 #include <imath/CVarVector.h>
+#include <iinsp/ISupplier.h>
 
 
 namespace iqtcam
@@ -85,6 +86,13 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 	double nominalRadius = NominalRadiusSpinBox->value();
 	if (nominalRadius == 0){
 		return; // avoid division by zero
+	}
+
+	iinsp::ISupplier* supplierPtr = dynamic_cast<iinsp::ISupplier*>(m_circleProviderPtr.GetPtr());
+	if (supplierPtr != NULL){
+		supplierPtr->InvalidateSupplier();
+		supplierPtr->EnsureWorkInitialized();
+		supplierPtr->EnsureWorkFinished();
 	}
 
 	for (int i = 0; i < m_circleProviderPtr->GetValuesCount(); i++){
