@@ -24,10 +24,12 @@ class CRectDerivativeProcessor:
 			virtual protected imath::IUnitInfo
 {
 public:
+	static bool DoDerivativeProcessing(const double* channelData, int samplesCount, double filterLength, double* results);
+
 	/**
 		Do extremum features analyze.
 	*/
-	virtual bool DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results);
+	static bool DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results);
 
 	/**
 		Get parameter ID used to extract caliper parameter object from parameter set.

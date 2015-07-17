@@ -12,12 +12,70 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
+#include "imeas/CGeneralDataSequence.h"
 #include "imeas/INumericValue.h"
 #include "imeas/CSamplesInfo.h"
 
 
 namespace iipr
 {
+
+
+bool CRectDerivativeProcessor::DoDerivativeProcessing(const double* channelData, int samplesCount, double filterLength, double* results)
+{
+	if (samplesCount < 2){
+		return false;
+	}
+
+	double halfRealLength = qMax(1.0, filterLength * 0.5);
+
+	int sumOffset = int(halfRealLength);
+	double sumLastAlpha = halfRealLength - sumOffset;
+	double sumLastAlphaInv = 1 - sumLastAlpha;
+
+	int projectionWidth = samplesCount - 1;
+
+	double leftSum = 0.0;
+	double leftWeight = 0.0;
+	double rightSum = channelData[0] * sumLastAlpha;
+	double rightWeight = sumLastAlpha;
+	for (int x = -sumOffset; x < projectionWidth; ++x){
+		if (x < projectionWidth - sumOffset){
+			rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha +
+				channelData[x + sumOffset]		* sumLastAlphaInv;
+
+			rightWeight += 1;
+		}
+		else if (x == projectionWidth - sumOffset){
+			rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
+			rightWeight += sumLastAlphaInv;
+		}
+
+		if (x >= 0){
+			double diff = channelData[x];
+			leftSum += diff;
+
+			if (x > sumOffset){
+				leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
+				leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
+			}
+			else if (x == sumOffset){
+				leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
+				leftWeight += sumLastAlpha;
+			}
+			else{
+				leftWeight += 1;
+			}
+
+			rightSum -= diff;
+			rightWeight -= 1;
+
+			results[x] = rightSum / rightWeight - leftSum / leftWeight;
+		}
+	}
+
+	return true;
+}
 
 
 bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results)
@@ -59,10 +117,23 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 		return false;
 	}
 
-	// buffer to speed up data access (brings ca. 10%)
-	std::vector<double> channelData(samplesCount);
-
 	if (projectionWidth > 0){
+		// special case for imeas::CGeneralDataSequence gives up to 25% performance gain
+		const imeas::CGeneralDataSequence* inputSequencePtr = dynamic_cast<const imeas::CGeneralDataSequence*>(&source);
+		imeas::CGeneralDataSequence* resultsSequencePtr = dynamic_cast<imeas::CGeneralDataSequence*>(&results);
+
+		if ((channelsCount == 1) && (inputSequencePtr != NULL) && (resultsSequencePtr != NULL)){
+			const double* channelData = inputSequencePtr->GetSamplesBuffer();
+			double* resultsData = resultsSequencePtr->GetSamplesBuffer();
+
+			return DoDerivativeProcessing(channelData, samplesCount, filterLength, resultsData);
+		}
+
+		// Default samples processing:
+
+		// Buffer to speed up data access (brings ca. 10%):
+		std::vector<double> channelData(samplesCount);
+
 		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 			for (int i = 0; i < samplesCount; ++i){
 				channelData[i] = source.GetSample(i, channelIndex);
@@ -74,7 +145,7 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 			double rightWeight = sumLastAlpha;
 			for (int x = -sumOffset; x < projectionWidth; ++x){
 				if (x < projectionWidth - sumOffset){
-					rightSum +=	channelData[x + sumOffset + 1] * sumLastAlpha + channelData[x + sumOffset] * sumLastAlphaInv;
+					rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha + channelData[x + sumOffset] * sumLastAlphaInv;
 
 					rightWeight += 1;
 				}
