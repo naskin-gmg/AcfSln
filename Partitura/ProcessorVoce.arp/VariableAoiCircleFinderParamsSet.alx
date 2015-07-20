@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1156
+          1278
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3516
+          3731
         </Number>
         <Description>
           ACF
@@ -40,42 +40,14 @@
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        VariableAoi
+        CircleFinderParams
       </ComponentName>
       <X>
-        350
+        500
       </X>
-      <X>
-        450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParams
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParamsSet
-      </ComponentName>
-      <X>
-        725
-      </X>
-      <X>
-        250
-      </X>
+      <Y>
+        300
+      </Y>
       <Note>
         
       </Note>
@@ -85,39 +57,39 @@
         AnnulusSegment
       </ComponentName>
       <X>
-        550
+        475
       </X>
-      <X>
+      <Y>
         600
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        CircleFinderParams
+        CaliperParams
       </ComponentName>
       <X>
-        650
+        1000
       </X>
+      <Y>
+        300
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        VariableAoi
+      </ComponentName>
       <X>
+        250
+      </X>
+      <Y>
         450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Annulus
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <X>
-        600
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -127,11 +99,39 @@
         FilterLength
       </ComponentName>
       <X>
-        850
+        750
       </X>
+      <Y>
+        300
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CaliperParamsSet
+      </ComponentName>
       <X>
-        450
+        650
       </X>
+      <Y>
+        125
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Annulus
+      </ComponentName>
+      <X>
+        75
+      </X>
+      <Y>
+        600
+      </Y>
       <Note>
         
       </Note>

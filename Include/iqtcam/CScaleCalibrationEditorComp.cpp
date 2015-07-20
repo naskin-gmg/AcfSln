@@ -44,7 +44,7 @@ void CScaleCalibrationEditorComp::OnGuiCreated()
 	connect(ScaleXSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
 	connect(ScaleYSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
 
-	if (!m_circleProviderPtr.IsValid()){
+	if (!m_circleProviderCompPtr.IsValid()){
 		CalibrationGroupBox->setVisible(false);
 	}
 
@@ -79,7 +79,7 @@ void CScaleCalibrationEditorComp::OnValueChanged(double)
 
 void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 {
-	if (!m_circleProviderPtr.IsValid()){
+	if (!m_circleProviderCompPtr.IsValid()){
 		return;
 	}
 
@@ -88,15 +88,26 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 		return; // avoid division by zero
 	}
 
-	iinsp::ISupplier* supplierPtr = dynamic_cast<iinsp::ISupplier*>(m_circleProviderPtr.GetPtr());
+	if (m_calibrationDialogCompPtr.IsValid()){
+		int retVal = m_calibrationDialogCompPtr->ExecuteDialog(this);
+		if (retVal == QDialog::Rejected){
+			return;
+		}
+	}
+
+	iinsp::ISupplier* supplierPtr = dynamic_cast<iinsp::ISupplier*>(m_circleProviderCompPtr.GetPtr());
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
+
+		if (supplierPtr->GetWorkStatus() != iinsp::ISupplier::WS_OK){
+			return;
+		}
 	}
 
-	for (int i = 0; i < m_circleProviderPtr->GetValuesCount(); i++){
-		const imeas::INumericValue& value = m_circleProviderPtr->GetNumericValue(i);
+	for (int i = 0; i < m_circleProviderCompPtr->GetValuesCount(); i++){
+		const imeas::INumericValue& value = m_circleProviderCompPtr->GetNumericValue(i);
 		if (!value.IsValueTypeSupported(imeas::INumericValue::VTI_RADIUS)){
 			continue;
 		}
@@ -122,7 +133,7 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 
 void CScaleCalibrationEditorComp::on_NominalRadiusSpinBox_valueChanged(double d)
 {
-	CalibrateButton->setDisabled(d == 0 || !m_circleProviderPtr.IsValid());
+	CalibrateButton->setDisabled(d == 0 || !m_circleProviderCompPtr.IsValid());
 }
 
 } // namespace iqtcam

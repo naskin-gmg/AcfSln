@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1156
+          1278
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3516
+          3731
         </Number>
         <Description>
           ACF
@@ -40,14 +40,14 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        XmlFileSerializer
+        FileDialogLoader
       </ComponentName>
       <X>
         325
       </X>
-      <X>
-        550
-      </X>
+      <Y>
+        425
+      </Y>
       <Note>
         
       </Note>
@@ -59,23 +59,9 @@
       <X>
         725
       </X>
-      <X>
+      <Y>
         300
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        425
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +73,23 @@
       <X>
         325
       </X>
-      <X>
+      <Y>
         300
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        XmlFileSerializer
+      </ComponentName>
+      <X>
+        325
       </X>
+      <Y>
+        550
+      </Y>
       <Note>
         
       </Note>

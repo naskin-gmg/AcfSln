@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1156
+          1278
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3516
+          3731
         </Number>
         <Description>
           ACF
@@ -40,42 +40,14 @@
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        FilterParams
+        CircleFinderParams
       </ComponentName>
       <X>
-        525
+        175
       </X>
-      <X>
-        650
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        VariableAoi
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <X>
-        300
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CaliperParams
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        550
-      </X>
+      <Y>
+        700
+      </Y>
       <Note>
         
       </Note>
@@ -85,39 +57,39 @@
         AnnulusSegment
       </ComponentName>
       <X>
-        875
+        825
       </X>
-      <X>
+      <Y>
         525
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        CircleFinderParams
+        CaliperParams
       </ComponentName>
       <X>
+        550
+      </X>
+      <Y>
+        400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        VariableAoi
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <Y>
         300
-      </X>
-      <X>
-        700
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Annulus
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        425
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -129,9 +101,37 @@
       <X>
         275
       </X>
-      <X>
+      <Y>
         175
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilterParams
+      </ComponentName>
+      <X>
+        450
       </X>
+      <Y>
+        650
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Annulus
+      </ComponentName>
+      <X>
+        1025
+      </X>
+      <Y>
+        425
+      </Y>
       <Note>
         
       </Note>
