@@ -15,6 +15,8 @@ void CRectDerivativeProcessorComp::OnComponentCreated()
 
 	Q_ASSERT(m_filterParamsIdAttrPtr.IsValid());	// isObligatory was set to 'true'
 	SetFilterParamsId(*m_filterParamsIdAttrPtr);
+
+	UseDoublePrecision(*m_doublePrecisionAttrPtr);
 }
 
 

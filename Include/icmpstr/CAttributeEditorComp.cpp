@@ -401,6 +401,10 @@ void CAttributeEditorComp::UpdateGeneralView()
 
 void CAttributeEditorComp::UpdateAttributesView()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	iqt::CSignalBlocker signalBlocker(AttributeTree);
 
 	m_attrInfosMap.clear();
@@ -534,6 +538,10 @@ void CAttributeEditorComp::UpdateAttributesView()
 
 void CAttributeEditorComp::UpdateInterfacesView()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	iqt::CSignalBlocker signalBlocker(InterfacesTree);
 
 	bool hasWarning = false;
@@ -670,6 +678,10 @@ void CAttributeEditorComp::UpdateFlagsView()
 
 void CAttributeEditorComp::UpdateSubcomponentsView()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	iqt::CSignalBlocker signalBlocker(ComponentsTree);
 
 	bool hasWarning = false;

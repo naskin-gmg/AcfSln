@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3201
+          3757
         </Number>
         <Description>
           ACF
@@ -15,57 +15,29 @@
       </Version>
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1049
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1023
         </Id>
         <Number>
-          264194
+          328449
         </Number>
         <Description>
           Qt Framework
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1308
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        FileDialogLoader
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        425
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        XmlFileSerializer
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        550
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         ParamsGui
@@ -73,9 +45,9 @@
       <X>
         725
       </X>
-      <X>
+      <Y>
         300
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -87,9 +59,9 @@
       <X>
         325
       </X>
-      <X>
+      <Y>
         300
-      </X>
+      </Y>
       <Note>
         
       </Note>

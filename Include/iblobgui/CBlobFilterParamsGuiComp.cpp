@@ -141,6 +141,10 @@ void CBlobFilterParamsGuiComp::on_RemoveAllButton_clicked()
 
 void CBlobFilterParamsGuiComp::OnRemoveFilter(QWidget* filterGui)
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
 	if (paramsPtr == NULL){
 		return;

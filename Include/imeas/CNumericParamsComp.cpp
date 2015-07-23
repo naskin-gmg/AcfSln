@@ -60,6 +60,9 @@ void CNumericParamsComp::OnComponentCreated()
 				m_values[i] = lastValue;
 			}
 		}
+		else{
+			m_values[i] = lastValue;
+		}
 	}
 }
 

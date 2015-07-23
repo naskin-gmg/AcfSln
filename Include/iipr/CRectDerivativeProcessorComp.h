@@ -14,7 +14,7 @@ namespace iipr
 
 
 /**
-	Component implemnetation of derivative processor using rectangular filter kernel.
+	Component implementation of derivative processor using rectangular filter kernel.
 */
 class CRectDerivativeProcessorComp: public icomp::CComponentBase, public CRectDerivativeProcessor
 {
@@ -26,6 +26,7 @@ public:
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_REGISTER_INTERFACE(INumericConstraints);
 		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of filter parameters in parameter set", true, "FilterParams");
+		I_ASSIGN(m_doublePrecisionAttrPtr, "DoublePrecision", "If set double precision will be used during the calculation", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -34,6 +35,7 @@ protected:
 
 private:
 	I_ATTR(QByteArray, m_filterParamsIdAttrPtr);
+	I_ATTR(bool, m_doublePrecisionAttrPtr);
 };
 
 

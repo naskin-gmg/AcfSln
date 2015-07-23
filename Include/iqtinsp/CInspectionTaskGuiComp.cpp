@@ -552,6 +552,10 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 
 void CInspectionTaskGuiComp::OnAutoTest()
 {
+	if (!IsGuiCreated()){
+		return;
+	}
+
 	m_testStarted = true;
 
 	MessageList->clear();

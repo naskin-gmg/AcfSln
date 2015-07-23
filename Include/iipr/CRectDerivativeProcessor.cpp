@@ -21,64 +21,17 @@ namespace iipr
 {
 
 
-bool CRectDerivativeProcessor::DoDerivativeProcessing(const double* channelData, int samplesCount, double filterLength, double* results)
+// public
+
+CRectDerivativeProcessor::CRectDerivativeProcessor()
+:	m_doublePrecision(false)
 {
-	if (samplesCount < 2){
-		return false;
-	}
-
-	double halfRealLength = qMax(1.0, filterLength * 0.5);
-
-	int sumOffset = int(halfRealLength);
-	double sumLastAlpha = halfRealLength - sumOffset;
-	double sumLastAlphaInv = 1 - sumLastAlpha;
-
-	int projectionWidth = samplesCount - 1;
-
-	double leftSum = 0.0;
-	double leftWeight = 0.0;
-	double rightSum = channelData[0] * sumLastAlpha;
-	double rightWeight = sumLastAlpha;
-	for (int x = -sumOffset; x < projectionWidth; ++x){
-		if (x < projectionWidth - sumOffset){
-			rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha +
-				channelData[x + sumOffset]		* sumLastAlphaInv;
-
-			rightWeight += 1;
-		}
-		else if (x == projectionWidth - sumOffset){
-			rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
-			rightWeight += sumLastAlphaInv;
-		}
-
-		if (x >= 0){
-			double diff = channelData[x];
-			leftSum += diff;
-
-			if (x > sumOffset){
-				leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
-				leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
-			}
-			else if (x == sumOffset){
-				leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
-				leftWeight += sumLastAlpha;
-			}
-			else{
-				leftWeight += 1;
-			}
-
-			rightSum -= diff;
-			rightWeight -= 1;
-
-			results[x] = rightSum / rightWeight - leftSum / leftWeight;
-		}
-	}
-
-	return true;
 }
 
 
-bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results)
+
+
+bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence& source, double filterLength, imeas::IDataSequence& results, bool doublePrecision)
 {
 	int samplesCount = source.GetSamplesCount();
 	int channelsCount = source.GetChannelsCount();
@@ -97,12 +50,6 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 			sourceProportionRange = logicalRange;
 		}
 	}
-
-	double halfRealLength = qMax(1.0, filterLength * 0.5);
-
-	int sumOffset = int(halfRealLength);
-	double sumLastAlpha = halfRealLength - sumOffset;
-	double sumLastAlphaInv = 1 - sumLastAlpha;
 
 	int projectionWidth = samplesCount - 1;
 
@@ -126,56 +73,20 @@ bool CRectDerivativeProcessor::DoDerivativeProcessing(const imeas::IDataSequence
 			const double* channelData = inputSequencePtr->GetSamplesBuffer();
 			double* resultsData = resultsSequencePtr->GetSamplesBuffer();
 
-			return DoDerivativeProcessing(channelData, samplesCount, filterLength, resultsData);
+			if (doublePrecision){
+				return CalculateDerivative<double, double, double>(channelData, samplesCount, filterLength, resultsData);
+			}
+			else{
+				return CalculateDerivative<double, double, float>(channelData, samplesCount, filterLength, resultsData);
+			}
 		}
 
-		// Default samples processing:
-
-		// Buffer to speed up data access (brings ca. 10%):
-		std::vector<double> channelData(samplesCount);
-
-		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-			for (int i = 0; i < samplesCount; ++i){
-				channelData[i] = source.GetSample(i, channelIndex);
-			}
-
-			double leftSum = 0.0;
-			double leftWeight = 0.0;
-			double rightSum = channelData[0] * sumLastAlpha;
-			double rightWeight = sumLastAlpha;
-			for (int x = -sumOffset; x < projectionWidth; ++x){
-				if (x < projectionWidth - sumOffset){
-					rightSum +=	channelData[x + sumOffset + 1]	* sumLastAlpha + channelData[x + sumOffset] * sumLastAlphaInv;
-
-					rightWeight += 1;
-				}
-				else if (x == projectionWidth - sumOffset){
-					rightSum += channelData[x + sumOffset] * sumLastAlphaInv;
-					rightWeight += sumLastAlphaInv;
-				}
-
-				if (x >= 0){
-					double diff = channelData[x];
-					leftSum += diff;
-
-					if (x > sumOffset){
-						leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
-						leftSum -= channelData[x - sumOffset - 1] * sumLastAlpha;
-					}
-					else if (x == sumOffset){
-						leftSum -= channelData[x - sumOffset] * sumLastAlphaInv;
-						leftWeight += sumLastAlpha;
-					}
-					else{
-						leftWeight += 1;
-					}
-
-					rightSum -= diff;
-					rightWeight -= 1;
-
-					results.SetSample(x, channelIndex, rightSum / rightWeight - leftSum / leftWeight);
-				}
-			}
+		// Default samples processing
+		if (doublePrecision){
+			return CalculateDerivative<double>(source, filterLength, results);
+		}
+		else{
+			return CalculateDerivative<float>(source, filterLength, results);
 		}
 	}
 
@@ -205,7 +116,7 @@ int CRectDerivativeProcessor::DoProcessing(
 		}
 	}
 
-	return DoDerivativeProcessing(*inputProjectionPtr, filterLength, *outputProjectionPtr)?
+	return DoDerivativeProcessing(*inputProjectionPtr, filterLength, *outputProjectionPtr, m_doublePrecision)?
 				TS_OK:
 				TS_INVALID;
 }
