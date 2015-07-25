@@ -63,7 +63,7 @@ protected:
 	virtual int GetNumericValuesCount() const;
 	virtual QString GetNumericValueName(int index) const;
 	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imath::IUnitInfo& GetNumericValueUnitInfo(int index) const;
+	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

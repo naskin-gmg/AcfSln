@@ -183,21 +183,21 @@ QString CEdgesReductorComp::GetNumericValueDescription(int index) const
 }
 
 
-const imath::IUnitInfo& CEdgesReductorComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo* CEdgesReductorComp::GetNumericValueUnitInfo(int index) const
 {
 	static imath::CGeneralUnitInfo positionUnitInfo(imath::IUnitInfo::UT_RELATIVE, "px", 1, istd::CRange(0, 10));
 	static imath::CGeneralUnitInfo weightUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.00, 1));
 
 	switch (index){
 	case 1:
-		return weightUnitInfo;
+		return &weightUnitInfo;
 
 	default:
 		if (m_distanceUnitInfoCompPtr.IsValid()){
-			return *m_distanceUnitInfoCompPtr;
+			return m_distanceUnitInfoCompPtr.GetPtr();
 		}
 		else{
-			return positionUnitInfo;
+			return &positionUnitInfo;
 		}
 	}
 }

@@ -4,9 +4,6 @@
 // Qt includes
 #include <QtCore/QObject>
 
-// ACF includes
-#include "imath/CGeneralUnitInfo.h"
-
 
 namespace imeas
 {
@@ -58,11 +55,9 @@ QString CDataSequenceInfoBase::GetNumericValueDescription(int /*index*/) const
 }
 
 
-const imath::IUnitInfo& CDataSequenceInfoBase::GetNumericValueUnitInfo(int /*index*/) const
+const imath::IUnitInfo* CDataSequenceInfoBase::GetNumericValueUnitInfo(int /*index*/) const
 {
-	static imath::CGeneralUnitInfo realNumberInfo;
-
-	return realNumberInfo;
+	return NULL;
 }
 
 

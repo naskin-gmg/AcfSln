@@ -5,6 +5,14 @@ namespace iipr
 {
 
 
+// reimplemented (iipr::ICircleFinderParams)
+
+const imath::IUnitInfo* CCircleFinderParamsComp::GetDistanceUnitInfo() const
+{
+	return m_distanceUnitInfoCompPtr.GetPtr();
+}
+
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)

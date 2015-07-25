@@ -43,30 +43,32 @@ CNumericValueWidget::CNumericValueWidget(
 }
 
 
-void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo)
+void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::IUnitInfo* unitInfoPtr)
 {
 	DescriptionLabel->setVisible(!description.isEmpty());
 	DescriptionLabel->setText(description);
 
-	const QString& unitName = unitInfo.GetUnitName();
-	if (!unitName.isEmpty()){
-		UnitLabel->setText(unitName);
-	}
-	else{
-		UnitLabel->setFixedWidth(0);
+	QString unitName;
+	m_unitMultiplicationFactor = 1;
+	int precision = 2;
+	istd::CRange valueRange(0, 100);
+	
+	if (unitInfoPtr != NULL){
+		unitName = unitInfoPtr->GetUnitName();
+		m_unitMultiplicationFactor = unitInfoPtr->GetDisplayMultiplicationFactor();
+		precision = unitInfoPtr->GetValueManip().GetPrecision();
+
+		istd::CRange range = unitInfoPtr->GetValueRange();
+		if (!range.IsEmpty()){
+			valueRange = range;
+		}
 	}
 
-	m_unitMultiplicationFactor = unitInfo.GetDisplayMultiplicationFactor();
-	const imath::IDoubleManip& valueManip = unitInfo.GetValueManip();
+	UnitLabel->setText(unitName);
+	UnitLabel->setVisible(!unitName.isEmpty());
 
-	int precision = valueManip.GetPrecision();
 	m_unitPrecisionFactor = qPow(10.0, double(qMin(precision, 2)));
 	int displayPrecision = qMin(2, qMax(0, precision - int(log10(m_unitMultiplicationFactor) + 0.5)));
-
-	istd::CRange valueRange = unitInfo.GetValueRange();
-	if (valueRange.IsEmpty()){
-		valueRange = istd::CRange(0, 100);
-	}
 
 	double minValue = valueRange.GetMinValue() * m_unitMultiplicationFactor;
 	double maxValue = valueRange.GetMaxValue() * m_unitMultiplicationFactor;

@@ -21,6 +21,7 @@ public:
 	virtual void SetOutlierEliminationEnabled(bool isOutlierEliminationEnabled = true);
 	virtual double GetMinOutlierDistance() const;
 	virtual void SetMinOutlierDistance(double minOutlierDistance);
+	virtual const imath::IUnitInfo* GetDistanceUnitInfo() const;
 	virtual int GetRaysCount() const;
 	virtual void SetRaysCount(int raysCount);
 

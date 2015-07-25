@@ -266,17 +266,20 @@ QString CFastEdgesExtractorComp::GetNumericValueDescription(int index) const
 }
 
 
-const imath::IUnitInfo& CFastEdgesExtractorComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo* CFastEdgesExtractorComp::GetNumericValueUnitInfo(int index) const
 {
 	static imath::CGeneralUnitInfo thresholdUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.01, 1));
 	static imath::CGeneralUnitInfo scaleUnitInfo(imath::IUnitInfo::UT_RELATIVE, "dB", 1, istd::CRange(-10, 10));
 
 	switch (index){
 	case 0:
-		return thresholdUnitInfo;
+		return &thresholdUnitInfo;
+
+	case 1:
+		return &scaleUnitInfo;
 
 	default:
-		return scaleUnitInfo;
+		return NULL;
 	}
 }
 

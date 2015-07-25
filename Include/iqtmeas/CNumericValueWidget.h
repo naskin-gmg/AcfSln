@@ -29,7 +29,7 @@ class CNumericValueWidget:
 public:
 	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, bool showButtons = true, int inputPolicy = 0);
 
-	void SetUnitInfo(const QString& description, const imath::IUnitInfo& unitInfo);
+	void SetUnitInfo(const QString& description, const imath::IUnitInfo* unitInfoPtr);
 
 	double GetValue() const;
 	void SetValue(double value);

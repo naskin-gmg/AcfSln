@@ -177,14 +177,17 @@ QString CLinearAdjustParamsComp::GetNumericValueDescription(int index) const
 }
 
 
-const imath::IUnitInfo& CLinearAdjustParamsComp::GetNumericValueUnitInfo(int index) const
+const imath::IUnitInfo* CLinearAdjustParamsComp::GetNumericValueUnitInfo(int index) const
 {
 	switch (index){
 	case 0:
-		return m_offsetUnitInfo;
+		return &m_offsetUnitInfo;
+
+	case 1:
+		return &m_scaleUnitInfo;
 
 	default:
-		return m_scaleUnitInfo;
+		return NULL;
 	}
 }
 

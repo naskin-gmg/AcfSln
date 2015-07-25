@@ -243,9 +243,9 @@ QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) con
 }
 
 
-const imath::IUnitInfo& CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
+const imath::IUnitInfo* CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
 {
-	return *this;
+	return this;
 }
 
 

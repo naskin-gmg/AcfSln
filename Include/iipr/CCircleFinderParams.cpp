@@ -1,11 +1,11 @@
 #include "iipr/CCircleFinderParams.h"
 
 
+// ACF includes
+#include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
-
-
-#include "istd/CChangeNotifier.h"
+#include "imath/CGeneralUnitInfo.h"
 
 
 namespace iipr
@@ -68,6 +68,12 @@ void CCircleFinderParams::SetMinOutlierDistance(double minOutlierDistance)
 
 		m_minOutlierDistance = minOutlierDistance;
 	}
+}
+
+
+const imath::IUnitInfo* CCircleFinderParams::GetDistanceUnitInfo() const
+{
+	return NULL;
 }
 
 

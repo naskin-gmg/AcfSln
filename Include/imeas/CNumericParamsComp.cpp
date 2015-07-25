@@ -52,9 +52,9 @@ void CNumericParamsComp::OnComponentCreated()
 
 		if (constraintsPtr != NULL){
 			// correct the value according to the constraints
-			const imath::IUnitInfo& unitInfo = constraintsPtr->GetNumericValueUnitInfo(i);
-			if (unitInfo.GetValueRange().IsValid()){
-				m_values[i] = unitInfo.GetValueRange().GetClipped(lastValue);
+			const imath::IUnitInfo* unitInfoPtr = constraintsPtr->GetNumericValueUnitInfo(i);
+			if ((unitInfoPtr != NULL) && unitInfoPtr->GetValueRange().IsValid()){
+				m_values[i] = unitInfoPtr->GetValueRange().GetClipped(lastValue);
 			}
 			else{
 				m_values[i] = lastValue;

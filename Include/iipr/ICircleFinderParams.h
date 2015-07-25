@@ -2,9 +2,9 @@
 #define iipr_ICircleFinderParams_included
 
 
+// ACF includes
 #include "iser/ISerializable.h"
-
-#include "iipr/iipr.h"
+#include "imath/IUnitInfo.h"
 
 
 namespace iipr
@@ -63,9 +63,14 @@ public:
 	virtual double GetMinOutlierDistance() const = 0;
 
 	/**
-		Set minimal outlier distance
+		Set minimal outlier distance.
 	*/
 	virtual void SetMinOutlierDistance(double minOutlierDistance) = 0;
+
+	/**
+		Get information about distance unit.
+	*/
+	virtual const imath::IUnitInfo* GetDistanceUnitInfo() const = 0;
 
 	/**
 		Get the number of projection rays using for the find the circle points.
