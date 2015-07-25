@@ -59,7 +59,7 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::I
 		precision = unitInfoPtr->GetValueManip().GetPrecision();
 
 		istd::CRange range = unitInfoPtr->GetValueRange();
-		if (!range.IsValid()){
+		if (range.IsValid()){
 			valueRange = range;
 		}
 	}
@@ -132,7 +132,11 @@ void CNumericValueWidget::on_ValueSlider_valueChanged(int value)
 	m_ignoreEvents = true;
 	SetValue(value / m_unitPrecisionFactor);
 	m_ignoreEvents = false;
+}
 
+
+void CNumericValueWidget::on_ValueSlider_sliderReleased()
+{
 	Q_EMIT ValueChanged();
 }
 

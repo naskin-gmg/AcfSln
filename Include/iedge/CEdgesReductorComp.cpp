@@ -3,12 +3,16 @@
 
 // ACF includes
 #include "istd/istd.h"
-#include "imath/CGeneralUnitInfo.h"
 #include "iprm/TParamsPtr.h"
 
 
 namespace iedge
 {
+
+CEdgesReductorComp::CEdgesReductorComp()
+:	m_distanceUnitInfo(imath::IUnitInfo::UT_RELATIVE, "px", 1, istd::CRange(0, 10))
+{
+}
 
 
 void CEdgesReductorComp::GetReducedLine(
@@ -185,20 +189,16 @@ QString CEdgesReductorComp::GetNumericValueDescription(int index) const
 
 const imath::IUnitInfo* CEdgesReductorComp::GetNumericValueUnitInfo(int index) const
 {
-	static imath::CGeneralUnitInfo positionUnitInfo(imath::IUnitInfo::UT_RELATIVE, "px", 1, istd::CRange(0, 10));
 	static imath::CGeneralUnitInfo weightUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0.00, 1));
 
 	switch (index){
+	case 0:
+			return &m_distanceUnitInfo;
 	case 1:
 		return &weightUnitInfo;
 
 	default:
-		if (m_distanceUnitInfoCompPtr.IsValid()){
-			return m_distanceUnitInfoCompPtr.GetPtr();
-		}
-		else{
-			return &positionUnitInfo;
-		}
+		return NULL;
 	}
 }
 
@@ -319,6 +319,13 @@ void CEdgesReductorComp::OnComponentCreated()
 	// Force components initialization
 	m_defaultToleranceParamsCompPtr.EnsureInitialized();
 	m_distanceUnitInfoCompPtr.EnsureInitialized();
+
+	if (m_distanceUnitInfoCompPtr.IsValid()){
+		m_distanceUnitInfo.SetUnitType(m_distanceUnitInfoCompPtr->GetUnitType());
+		m_distanceUnitInfo.SetUnitName(m_distanceUnitInfoCompPtr->GetUnitName());
+		m_distanceUnitInfo.SetDisplayMultiplicationFactor(m_distanceUnitInfoCompPtr->GetDisplayMultiplicationFactor());
+		m_distanceUnitInfo.SetValueRange(istd::CRange(0, 1));
+	}
 }
 
 
