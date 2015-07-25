@@ -20,7 +20,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="..\..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Tutorial"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIG)\VC9\Win32.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			UseOfATL="2"
 			CharacterSet="1"
 			>
@@ -99,7 +99,7 @@
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Tutorial"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIG)\VC9\Win32.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\General.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
