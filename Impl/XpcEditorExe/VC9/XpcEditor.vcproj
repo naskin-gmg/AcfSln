@@ -89,7 +89,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				SubSystem="2"
 			/>
@@ -181,7 +181,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				SubSystem="2"
 				TargetMachine="17"
@@ -275,7 +275,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 			/>
 			<Tool
@@ -368,7 +368,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				TargetMachine="17"
 			/>

@@ -20,8 +20,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -90,8 +91,9 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Static.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>

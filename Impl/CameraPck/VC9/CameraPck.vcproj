@@ -56,7 +56,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -118,7 +118,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -179,7 +179,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -240,7 +240,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				TargetMachine="17"
 			/>
 			<Tool

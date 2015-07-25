@@ -17,9 +17,10 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\..\..\Bin\$(ConfigurationName)VC9\Tutorial"
+			OutputDirectory="..\..\..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Tutorial"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Debug.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -53,7 +54,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib Qt5Guid.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -79,9 +80,10 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\..\..\Bin\$(ConfigurationName)VC9\Tutorial"
+			OutputDirectory="..\..\..\..\..\Bin\$(ConfigurationName)$(CompilerCode)\Tutorial"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops"
+			InheritedPropertySheets="$(ACFCONFIGDIR)\VC9\Component.vsprops;$(ACFCONFIGDIR)\VC9\Release.vsprops;$(ACFCONFIGDIR)\VC9\Win32.vsprops"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
@@ -118,7 +120,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib iqt2d.lib iedge.lib iedgegui.lib Qt5Gui.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)VC9&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\..\AcfSln\Lib\$(ConfigurationName)$(CompilerCode)&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 			/>

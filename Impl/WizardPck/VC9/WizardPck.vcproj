@@ -58,7 +58,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
@@ -124,7 +124,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 				TargetMachine="17"
@@ -194,7 +194,7 @@
 				AdditionalDependencies=" AcfStd.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
@@ -264,7 +264,7 @@
 				AdditionalDependencies=" AcfStd.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="17"

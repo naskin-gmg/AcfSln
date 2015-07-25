@@ -61,7 +61,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5PrintSupport.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -128,7 +128,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5PrintSupport.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -196,7 +196,7 @@
 				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5PrintSupportd.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
@@ -266,7 +266,7 @@
 				AdditionalDependencies=" AcfStd.lib AcfQt.lib Qt5PrintSupportd.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)$(CompilerCode)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="17"

@@ -70,7 +70,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				SubSystem="2"
 			/>
 			<Tool
@@ -145,7 +145,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				SubSystem="2"
 				TargetMachine="17"
 			/>
@@ -220,7 +220,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				SubSystem="0"
 			/>
 			<Tool
@@ -295,7 +295,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfQt.lib AcfStd.lib AcfLoc.lib"
-				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)VC9_64&quot;"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)/Lib/$(ConfigurationName)$(CompilerCode)&quot;"
 				SubSystem="0"
 				TargetMachine="17"
 			/>
