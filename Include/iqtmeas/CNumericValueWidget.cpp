@@ -59,7 +59,7 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::I
 		precision = unitInfoPtr->GetValueManip().GetPrecision();
 
 		istd::CRange range = unitInfoPtr->GetValueRange();
-		if (!range.IsEmpty()){
+		if (!range.IsValid()){
 			valueRange = range;
 		}
 	}
