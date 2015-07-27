@@ -291,10 +291,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CArcProjectionProcessorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CAutoImageNormalizeProcessorComp.cpp"
 				>
 			</File>
@@ -340,10 +336,6 @@
 			</File>
 			<File
 				RelativePath="..\CCircleFindProcessorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CColorBitmapSeparatorSupplierComp.cpp"
 				>
 			</File>
 			<File
@@ -552,10 +544,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CArcProjectionProcessorComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CAutoImageNormalizeProcessorComp.h"
 				>
 			</File>
@@ -601,10 +589,6 @@
 			</File>
 			<File
 				RelativePath="..\CCircleFindProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CColorBitmapSeparatorSupplierComp.h"
 				>
 			</File>
 			<File
@@ -844,10 +828,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IInterpolationParams.h"
-				>
-			</File>
-			<File
 				RelativePath="..\iipr.h"
 				>
 			</File>
@@ -873,10 +853,6 @@
 			</File>
 			<File
 				RelativePath="..\ISearchConstraints.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISearchModel.h"
 				>
 			</File>
 			<File

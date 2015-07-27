@@ -42,7 +42,6 @@
 #include "iipr/CDifferenceBitmapSupplierComp.h"
 #include "iipr/CConvolutionProcessorComp.h"
 #include "iipr/CConvolutionKernel2dComp.h"
-#include "iipr/CColorBitmapSeparatorSupplierComp.h"
 #include "iipr/CBitmapJoinerSupplierComp.h"
 #include "iipr/CMultiBitmapCacheComp.h"
 #include "iipr/CEdgeDistanceProcessorComp.h"
@@ -58,7 +57,6 @@
 #include "iipr/CImageHistogramSupplierComp.h"
 #include "iipr/CFastGaussianProcessorComp.h"
 #include "iipr/CAutoImageNormalizeProcessorComp.h"
-#include "iipr/CArcProjectionProcessorComp.h"
 #include "iipr/CProjectionSupplierComp.h"
 #include "iipr/CAdaptiveImageBinarizeProcessorComp.h"
 
@@ -113,7 +111,6 @@ typedef icomp::TModelCompWrap<iipr::CSearchParamsComp> SearchParams;
 typedef icomp::TModelCompWrap<iipr::CDifferenceBitmapSupplierComp> DifferenceBitmapSupplier;
 typedef iipr::CConvolutionProcessorComp ConvolutionProcessor;
 typedef icomp::TModelCompWrap<iipr::CConvolutionKernel2dComp> ConvolutionKernel2d;
-typedef icomp::TModelCompWrap<iipr::CColorBitmapSeparatorSupplierComp> ColorBitmapSeparatorSupplier;
 typedef icomp::TModelCompWrap<iipr::CBitmapJoinerSupplierComp> BitmapJoinerSupplier;
 typedef iipr::CEdgeDistanceProcessorComp EdgeDistanceProcessor;
 typedef icomp::TModelCompWrap<iipr::CEdgeDistancesSupplierComp> EdgeDistancesSupplier;
@@ -130,7 +127,6 @@ typedef icomp::TModelCompWrap<iipr::CColorPatternComparatorComp> ColorPatternCom
 typedef icomp::TModelCompWrap<iipr::CImageHistogramSupplierComp> ImageHistogramSupplier;
 typedef iipr::CFastGaussianProcessorComp FastGaussianProcessor;
 typedef iipr::CAutoImageNormalizeProcessorComp AutoImageNormalizeProcessor;
-typedef iipr::CArcProjectionProcessorComp ArcProjectionProcessor;
 typedef icomp::TModelCompWrap<iipr::CProjectionSupplierComp> ProjectionSupplier;
 typedef iipr::CAdaptiveImageBinarizeProcessorComp AdaptiveImageBinarizeProcessor;
 

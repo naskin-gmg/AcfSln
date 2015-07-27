@@ -44,9 +44,9 @@ I_EXPORT_COMPONENT(
 			"Contours Edges Borders Lines Supplier Search Position Orientation" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			EdgeLinesSupplierGui,
-			"GUI for edge line supplier",
-			"Contours Edges Borders Lines Polylines Supplier GUI" IM_CATEGORY(I_GUI) IM_TAG("Supplier GUI") IM_AUTHOR("\"Krzysztof Srodon\" \"Ryszard Mroczka\""));
+			EdgeLinesSupplierEditor,
+			"Editor for supplier of edge lines",
+			"Edges Lines Contour Polyline GUI Supplier" IM_CATEGORY(I_DATA_VISUALIZATION) IM_TAG("Supplier Editor") IM_AUTHOR("\"Witold Gantzke\""));
 
 
 } // namespace EdgePck

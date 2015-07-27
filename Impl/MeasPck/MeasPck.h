@@ -19,8 +19,6 @@
 #include "imeas/CLinearAdjustParamsComp.h"
 #include "imeas/CNumericValuesJoinerComp.h"
 #include "imeas/CCrossCorrelationProcessorComp.h"
-#include "imeas/CProcessedDataSequenceSupplierComp.h"
-#include "imeas/CDataSequenceJoinerSupplierComp.h"
 
 
 /**
@@ -75,8 +73,7 @@ typedef imeas::CNumericConstraintsComp NumericConstraints;
 typedef icomp::TModelCompWrap<imeas::CLinearAdjustParamsComp> LinearAdjustParams;
 typedef imeas::CNumericValuesJoinerComp NumericValuesJoiner;
 typedef imeas::CCrossCorrelationProcessorComp CrossCorrelationProcessor;
-typedef icomp::TModelCompWrap<imeas::CProcessedDataSequenceSupplierComp> ProcessedDataSequenceSupplier;
-typedef icomp::TModelCompWrap<imeas::CDataSequenceJoinerSupplierComp> DataSequenceJoinerSupplier;
+
 
 } // namespace MeasPck
 

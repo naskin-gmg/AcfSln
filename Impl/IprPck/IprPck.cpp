@@ -169,11 +169,6 @@ I_EXPORT_COMPONENT(
 			"Convolution Kerlnel Filter" IM_AUTHOR("\"Kirill Lepskiy\"" "\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			ColorBitmapSeparatorSupplier,
-			"Bitmap supplier convert bitmap chanels into new bitmaps",
-			"Bitmap Color Separator Supplier Provider" IM_AUTHOR("\"Krzysztof Srodon\" \"Ryszard Mroczka\""));
-
-I_EXPORT_COMPONENT(
 			BitmapJoinerSupplier,
 			"Bitmap joiner from a multi-bitmap-provider",
 			"Bitmap Supplier Provider Join" IM_AUTHOR("\"Kirill Lepskiy\""));
@@ -242,11 +237,6 @@ I_EXPORT_COMPONENT(
 			AutoImageNormalizeProcessor,
 			"Histogram based automatic image normalization",
 			"Histogram Normalization Contrast Enhancing Equalization" IM_AUTHOR("\"Kirill Lepskiy\""));
-
-I_EXPORT_COMPONENT(
-			ArcProjectionProcessor,
-			"Arc projection implementation for single arc width",
-			"Projection Arc Processor" IM_TAG("Processor") IM_AUTHOR("\"Alexander Duda\""));
 
 I_EXPORT_COMPONENT(
 			ProjectionSupplier,

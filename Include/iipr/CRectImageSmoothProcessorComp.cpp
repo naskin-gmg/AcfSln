@@ -266,8 +266,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		return false;	// Bad input image format
 	}
 
-	int componentsCount = inputImage.GetComponentsCount();
-	Q_ASSERT(inputImage.GetPixelBitsCount() == componentsCount * 8);
+	Q_ASSERT(inputImage.GetPixelBitsCount() == inputImage.GetComponentsCount() * 8);
 
 	istd::CIndex2d imageSize = inputImage.GetImageSize();
 	if (imageSize.IsSizeEmpty()){

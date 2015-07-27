@@ -308,7 +308,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CEdgeLinesSupplierGuiComp.cpp"
+				RelativePath="..\CEdgeLinesSupplierEditorComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -322,16 +322,9 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CEdgeLinesSupplierGuiComp.h"
+				RelativePath="..\CEdgeLinesSupplierEditorComp.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -339,11 +332,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iedgegui\moc_CEdgeLinesSupplierGuiComp.cpp"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iedgegui\moc_CEdgeLinesSupplierEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\iedgegui\ui_CEdgeLinesSupplierGuiComp.h"
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\iedgegui\ui_CEdgeLinesSupplierEditorComp.h"
 				>
 			</File>
 		</Filter>
@@ -352,7 +345,7 @@
 			Filter="ui"
 			>
 			<File
-				RelativePath="..\CEdgeLinesSupplierGuiComp.ui"
+				RelativePath="..\CEdgeLinesSupplierEditorComp.ui"
 				>
 			</File>
 		</Filter>
@@ -360,7 +353,7 @@
 			Name="MOC"
 			>
 			<File
-				RelativePath="..\CEdgeLinesSupplierGuiComp.moc"
+				RelativePath="..\CEdgeLinesSupplierEditorComp.moc"
 				>
 			</File>
 		</Filter>

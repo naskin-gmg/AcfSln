@@ -180,13 +180,13 @@
     </Element>
     <Element>
       <Id>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </Id>
       <PackageId>
         EdgePck
       </PackageId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -198,13 +198,13 @@
         <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
-              ContourColorSchema
+              EdgeLineColorSchema
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              ContourColorSchema
+              EdgeLineColorSchema
             </ExportId>
             <Data>
               <IsEnabled>
@@ -386,7 +386,7 @@
         i2d::ICalibrationProvider
       </InterfaceId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
     </Interface>
     <Interface>
@@ -394,7 +394,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
     </Interface>
     <Interface>
@@ -402,7 +402,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
     </Interface>
     <Interface>
@@ -410,7 +410,7 @@
         iqt2d::IViewExtender
       </InterfaceId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
     </Interface>
     <Interface>
@@ -418,7 +418,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        EdgeLinesSupplierGui
+        EdgeLinesSupplierEditor
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
@@ -428,7 +428,7 @@
         VisualStatus
       </ExportedId>
       <ComponentId>
-        EdgeLinesSupplierGui/VisualStatus
+        EdgeLinesSupplierEditor/VisualStatus
       </ComponentId>
     </Component>
   </ExportedComponents>

@@ -1,5 +1,5 @@
-#ifndef iedgegui_CEdgeLinesSupplierGuiComp_included
-#define iedgegui_CEdgeLinesSupplierGuiComp_included
+#ifndef iedgegui_CEdgeLinesSupplierEditorComp_included
+#define iedgegui_CEdgeLinesSupplierEditorComp_included
 
 
 // ACF includes
@@ -16,7 +16,7 @@
 #include "iqtinsp/TSupplierGuiCompBase.h"
 #include "iqtipr/iqtipr.h"
 
-#include "GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h"
+#include "GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h"
 
 
 
@@ -24,24 +24,19 @@ namespace iedgegui
 {
 
 
-class CEdgeLinesSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierGuiComp>
+class CEdgeLinesSupplierEditorComp: public iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierEditorComp>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierGuiComp> BaseClass;
+	typedef iqtinsp::TSupplierGuiCompBase<Ui::CEdgeLinesSupplierEditorComp> BaseClass;
 
-	I_BEGIN_COMPONENT(CEdgeLinesSupplierGuiComp);
-		I_ASSIGN(m_contoursColorSchemaCompPtr, "ContourColorSchema", "Color schema for contour visualization", false, "ContourColorSchema");
-		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated in group 'Intermediate Results'", false, "IntermediateResultsGui");
+	I_BEGIN_COMPONENT(CEdgeLinesSupplierEditorComp);
+		I_ASSIGN(m_resultsSaverCompPtr, "ResultsSaver", "Saves found edge lines", false, "ResultsSaver");
+		I_ASSIGN(m_contoursColorSchemaCompPtr, "EdgeLineColorSchema", "Defines colors for edge lines on view", false, "EdgeLineColorSchema");
 	I_END_COMPONENT;
 
-	CEdgeLinesSupplierGuiComp();
-
-protected Q_SLOTS:
-	void on_TestButton_clicked();
-	void on_LoadParamsButton_clicked();
-	void on_SaveParamsButton_clicked();
+	CEdgeLinesSupplierEditorComp();
 
 protected:
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
@@ -53,31 +48,34 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
-
-	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 	virtual void OnGuiHidden();
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
-private:
-	I_REF(iview::IColorSchema, m_contoursColorSchemaCompPtr);
-	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
+protected Q_SLOTS:
+	void on_ProcessButton_clicked();
+	void on_SaveDataButton_clicked();
+	void on_LoadParamsButton_clicked();
+	void on_SaveParamsButton_clicked();
 
-	imod::TModelWrap<iedge::CEdgeLineContainer> m_edgeLineContainer;
+private:
+	I_REF(ifile::IFilePersistence, m_resultsSaverCompPtr);
+	I_REF(iview::IColorSchema, m_contoursColorSchemaCompPtr);
+
+	imod::TModelWrap<iedge::CEdgeLineContainer> m_container;
 
 	iview::CColorSchema m_edgesColorSchema;
 };
 
+
 }//namespace iedgegui
 
 
-
-#endif // !iedgegui_CEdgeLinesSupplierGuiComp_included
+#endif // !iedgegui_CEdgeLinesSupplierEditorComp_included
 
 

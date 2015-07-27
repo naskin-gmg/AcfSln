@@ -291,10 +291,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDataSequenceJoinerSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDataSequenceStatistics.cpp"
 				>
 			</File>
@@ -335,10 +331,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProcessedDataSequenceSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSamplesInfo.cpp"
 				>
 			</File>
@@ -365,10 +357,6 @@
 			</File>
 			<File
 				RelativePath="..\CDataSequenceInfoBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataSequenceJoinerSupplierComp.h"
 				>
 			</File>
 			<File
@@ -409,10 +397,6 @@
 			</File>
 			<File
 				RelativePath="..\CNumericValuesJoinerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessedDataSequenceSupplierComp.h"
 				>
 			</File>
 			<File

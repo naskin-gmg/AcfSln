@@ -1,4 +1,4 @@
-#include "CEdgeLinesSupplierGuiComp.h"
+#include "CEdgeLinesSupplierEditorComp.h"
 
 // Qt includes
 #include <QtCore/QTimer>
@@ -16,29 +16,9 @@ namespace iedgegui
 {
 
 
-CEdgeLinesSupplierGuiComp::CEdgeLinesSupplierGuiComp()
+CEdgeLinesSupplierEditorComp::CEdgeLinesSupplierEditorComp()
 {
 	m_edgesColorSchema.SetPen(iview::IColorSchema::SP_NORMAL, QPen(Qt::blue));
-}
-
-
-// protected slots
-
-void CEdgeLinesSupplierGuiComp::on_TestButton_clicked()
-{
-	DoTest();
-}
-
-
-void CEdgeLinesSupplierGuiComp::on_LoadParamsButton_clicked()
-{
-	LoadParams();
-}
-
-
-void CEdgeLinesSupplierGuiComp::on_SaveParamsButton_clicked()
-{
-	SaveParams();
 }
 
 
@@ -46,7 +26,7 @@ void CEdgeLinesSupplierGuiComp::on_SaveParamsButton_clicked()
 
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
 
-QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
+QWidget* CEdgeLinesSupplierEditorComp::GetParamsWidget() const
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -54,17 +34,17 @@ QWidget* CEdgeLinesSupplierGuiComp::GetParamsWidget() const
 }
 
 
-void CEdgeLinesSupplierGuiComp::OnSupplierParamsChanged()
+void CEdgeLinesSupplierEditorComp::OnSupplierParamsChanged()
 {
 	if (IsGuiCreated() && AutoUpdateButton->isChecked()){
-		QTimer::singleShot(1, this, SLOT(on_TestButton_clicked()));
+		QTimer::singleShot(1, this, SLOT(on_ProcessButton_clicked()));
 	}
 }
 
 
 // reimplemented (iqt2d::TViewExtenderCompBase)
 
-void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
+void CEdgeLinesSupplierEditorComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	iedgegui::CEdgeLineContainerShape* shapePtr = new iedgegui::CEdgeLineContainerShape(); 
 
@@ -78,7 +58,7 @@ void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 
 		shapePtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 
-		m_edgeLineContainer.AttachObserver(shapePtr);
+		m_container.AttachObserver(shapePtr);
 
 		result.PushBack(shapePtr);
 	}	
@@ -87,7 +67,7 @@ void CEdgeLinesSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CEdgeLinesSupplierGuiComp::OnGuiModelAttached()
+void CEdgeLinesSupplierEditorComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
@@ -97,11 +77,11 @@ void CEdgeLinesSupplierGuiComp::OnGuiModelAttached()
 }
 
 
-void CEdgeLinesSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
+void CEdgeLinesSupplierEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::UpdateGui(changeSet);
-
 	Q_ASSERT(IsGuiCreated());
+
+	BaseClass::UpdateGui(changeSet);
 
 	UpdateAllViews();
 }
@@ -109,32 +89,15 @@ void CEdgeLinesSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& ch
 
 // reimplemented (iqtgui::IGuiObject)
 
-void CEdgeLinesSupplierGuiComp::OnGuiCreated()
+void CEdgeLinesSupplierEditorComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	if (m_intermediateResultsGuiCompPtr.IsValid()){
-		m_intermediateResultsGuiCompPtr->CreateGui(IntResultsFrame);
-
-		IntResultsFrame->setVisible(true);
-	}
-	else{
-		IntResultsFrame->setVisible(false);
-	}
+	SaveDataButton->setVisible(m_resultsSaverCompPtr.IsValid());
 }
 
 
-void CEdgeLinesSupplierGuiComp::OnGuiDestroyed()
-{
-	if (m_intermediateResultsGuiCompPtr.IsValid()){
-		m_intermediateResultsGuiCompPtr->DestroyGui();
-	}
-	
-	BaseClass::OnGuiDestroyed();
-}
-
-
-void CEdgeLinesSupplierGuiComp::OnGuiHidden()
+void CEdgeLinesSupplierEditorComp::OnGuiHidden()
 {
 	AutoUpdateButton->setChecked(false);
 
@@ -144,20 +107,51 @@ void CEdgeLinesSupplierGuiComp::OnGuiHidden()
 
 // reimplemented (imod::IObserver)
 
-void CEdgeLinesSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
+void CEdgeLinesSupplierEditorComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
 {
-	m_edgeLineContainer.Reset();
+	m_container.Reset();
 
 	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObjectPtr());
 	if (providerPtr != NULL ){
 		const iedge::CEdgeLineContainer* resultContainerPtr = providerPtr->GetEdgesContainer();	
 
 		if (resultContainerPtr != NULL){
-			m_edgeLineContainer.CopyFrom(*resultContainerPtr, istd::IChangeable::CM_CONVERT);
+			m_container.CopyFrom(*resultContainerPtr, istd::IChangeable::CM_CONVERT);
 		}
 	}
 
 	BaseClass::AfterUpdate(modelPtr, changeSet);
+}
+
+
+// protected slots
+
+void CEdgeLinesSupplierEditorComp::on_ProcessButton_clicked()
+{
+	DoTest();
+}
+
+
+void CEdgeLinesSupplierEditorComp::on_SaveDataButton_clicked()
+{
+	if (m_resultsSaverCompPtr->SaveToFile(m_container, "") == ifile::IFilePersistence::OS_FAILED){
+		QMessageBox::warning(
+					BaseClass::GetQtWidget(),
+					QObject::tr("Error"),
+					QObject::tr("Cannot save edge lines"));
+	}
+}
+
+
+void CEdgeLinesSupplierEditorComp::on_LoadParamsButton_clicked()
+{
+	LoadParams();
+}
+
+
+void CEdgeLinesSupplierEditorComp::on_SaveParamsButton_clicked()
+{
+	SaveParams();
 }
 
 
