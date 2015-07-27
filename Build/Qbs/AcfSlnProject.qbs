@@ -74,7 +74,6 @@ Project{
 		name: "ACF-Solutions-Tool"
 
 		references: [
-//			"../../Impl/AcfStarterExe/Qbs/AcfStarter.qbs",
 			"../../Impl/CompositorExe/Qbs/Compositor.qbs",
 			"../../Impl/XpcEditorExe/Qbs/XpcEditor.qbs"
 		]

@@ -182,6 +182,3 @@ Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
 SUBDIRS += XpcEditor
 XpcEditor.file = ../../Impl/XpcEditorExe/QMake/XpcEditor.pro
 
-SUBDIRS += AcfStarter
-AcfStarter.file = ../../Impl/AcfStarterExe/QMake/AcfStarter.pro
-
