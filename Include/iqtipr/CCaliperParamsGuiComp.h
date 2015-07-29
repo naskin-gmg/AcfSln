@@ -25,6 +25,8 @@ public:
 				iipr::ICaliperParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CCaliperParamsGuiComp);
+		I_ASSIGN(m_hideEdgePolarityAttrPtr, "HideEdgePolarityParameterEditor", "If enabled, edge polarity selection editor will be hidden", true, false);
+		I_ASSIGN(m_hideDirectionAttrPtr, "HideDirectionParameterEditor", "If enabled, edge search direction editor will be hidden", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -34,10 +36,17 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
 protected Q_SLOTS:
 	void on_ThresholdSB_valueChanged(int value);
 	void on_EdgePolarityCB_currentIndexChanged(int index);
 	void on_DirectionCB_currentIndexChanged(int index);
+
+private:
+	I_ATTR(bool, m_hideEdgePolarityAttrPtr);
+	I_ATTR(bool, m_hideDirectionAttrPtr);
 };
 
 

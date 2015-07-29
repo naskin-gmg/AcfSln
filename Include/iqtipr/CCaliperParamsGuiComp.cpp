@@ -60,6 +60,20 @@ void CCaliperParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 }
 
 
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CCaliperParamsGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	EdgePolarityCB->setHidden(*m_hideEdgePolarityAttrPtr);
+	EdgePolarityLabel->setHidden(*m_hideEdgePolarityAttrPtr);
+
+	DirectionCB->setHidden(*m_hideDirectionAttrPtr);
+	DirectionLabel->setHidden(*m_hideDirectionAttrPtr);
+}
+
+
 // protected slots
 
 void CCaliperParamsGuiComp::on_ThresholdSB_valueChanged(int /*value*/)

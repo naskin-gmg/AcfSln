@@ -22,7 +22,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 			qint32& bitmapPattern = (qint32&)rawData[0];
 			double& value = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
 
-			if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value)){
+			if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
 				resolution = value;
 
 				return true;
