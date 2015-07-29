@@ -35,20 +35,20 @@ CAttributeEditorComp::CAttributeEditorComp()
 	m_registryObserver(this),
 	m_lastRegistryModelPtr(NULL)
 {
-	m_attributeTypesMap[iattr::CIntegerAttribute::GetTypeName()] = tr("Integer number");
-	m_attributeTypesMap[iattr::CRealAttribute::GetTypeName()] = tr("Real number");
-	m_attributeTypesMap[iattr::CBooleanAttribute::GetTypeName()] = tr("Boolean value");
-	m_attributeTypesMap[iattr::CStringAttribute::GetTypeName()] = tr("String");
-	m_attributeTypesMap[iattr::CIdAttribute::GetTypeName()] = tr("ID");
-	m_attributeTypesMap[iattr::CIntegerListAttribute::GetTypeName()] = tr("List of integer numbers");
-	m_attributeTypesMap[iattr::CRealListAttribute::GetTypeName()] = tr("List of real numbers");
-	m_attributeTypesMap[iattr::CBooleanListAttribute::GetTypeName()] = tr("List of boolean values");
-	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = tr("List of strings");
-	m_attributeTypesMap[iattr::CIdListAttribute::GetTypeName()] = tr("List of ID's");
-	m_attributeTypesMap[icomp::CReferenceAttribute::GetTypeName()] = tr("Component reference");
-	m_attributeTypesMap[icomp::CMultiReferenceAttribute::GetTypeName()] = tr("List of component reference");
-	m_attributeTypesMap[icomp::CFactoryAttribute::GetTypeName()] = tr("Component factory");
-	m_attributeTypesMap[icomp::CMultiFactoryAttribute::GetTypeName()] = tr("List of component factory");
+	m_attributeTypesMap[iattr::CIntegerAttribute::GetTypeName()] = TypeDescr(tr("Integer number"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CRealAttribute::GetTypeName()] = TypeDescr(tr("Real number"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CBooleanAttribute::GetTypeName()] = TypeDescr(tr("Boolean value"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CStringAttribute::GetTypeName()] = TypeDescr(tr("String"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CIdAttribute::GetTypeName()] = TypeDescr(tr("ID"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CIntegerListAttribute::GetTypeName()] = TypeDescr(tr("List of integer numbers"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CRealListAttribute::GetTypeName()] = TypeDescr(tr("List of real numbers"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CBooleanListAttribute::GetTypeName()] = TypeDescr(tr("List of boolean values"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = TypeDescr(tr("List of strings"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CIdListAttribute::GetTypeName()] = TypeDescr(tr("List of ID's"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[icomp::CReferenceAttribute::GetTypeName()] = TypeDescr(tr("Component reference"), AGT_REFERENCE);
+	m_attributeTypesMap[icomp::CMultiReferenceAttribute::GetTypeName()] = TypeDescr(tr("List of component reference"), AGT_REFERENCE);
+	m_attributeTypesMap[icomp::CFactoryAttribute::GetTypeName()] = TypeDescr(tr("Component factory"), AGT_FACTORY);
+	m_attributeTypesMap[icomp::CMultiFactoryAttribute::GetTypeName()] = TypeDescr(tr("List of component factory"), AGT_FACTORY);
 
 	QObject::connect(this, SIGNAL(AfterAttributesChange()), this, SLOT(UpdateAttributesView()), Qt::QueuedConnection);
 	QObject::connect(this, SIGNAL(AfterInterfacesChange()), this, SLOT(UpdateInterfacesView()), Qt::QueuedConnection);
@@ -479,27 +479,19 @@ void CAttributeEditorComp::UpdateAttributesView()
 				}
 			}
 
-			for (		AttrInfosMap::ConstIterator treeIter = m_attrInfosMap.constBegin();
-						treeIter != m_attrInfosMap.constEnd();
-						++treeIter, ++itemIndex){
-				const QByteArray& attributeId = treeIter.key();
-				const ElementIdToAttrInfoMap& attrInfos = treeIter.value();
+			for (int groupType = 0; groupType <= AGT_LAST; ++groupType){
+				for (		AttrInfosMap::ConstIterator treeIter = m_attrInfosMap.constBegin();
+							treeIter != m_attrInfosMap.constEnd();
+							++treeIter){
+					const QByteArray& attributeId = treeIter.key();
+					const ElementIdToAttrInfoMap& attrInfos = treeIter.value();
 
-				QTreeWidgetItem* attributeItemPtr = NULL;
-				if (itemIndex < AttributeTree->topLevelItemCount()){
-					attributeItemPtr = AttributeTree->topLevelItem(itemIndex);
-				}
-				else{
-					attributeItemPtr = new QTreeWidgetItem();
-					AttributeTree->addTopLevelItem(attributeItemPtr);
-				}
-
-				if (attributeItemPtr != NULL){
 					bool errorFlag = false;
 					bool warningFlag = false;
 					bool exportFlag = false;
 					SetAttributeToItem(
-								*attributeItemPtr,
+								AttributeGroupType(groupType),
+								itemIndex,
 								*registryPtr,
 								attributeId,
 								attrInfos,
@@ -749,7 +741,8 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 // protected methods
 
 bool CAttributeEditorComp::SetAttributeToItem(
-			QTreeWidgetItem& attributeItem,
+			AttributeGroupType groupType,
+			int& itemIndex,
 			const icomp::IRegistry& registry,
 			const QByteArray& attributeId,
 			const ElementIdToAttrInfoMap& infos,
@@ -757,14 +750,6 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			bool& hasWarning,
 			bool& hasExport) const
 {
-	QTreeWidgetItem* importItemPtr = NULL;
-	if (attributeItem.childCount() < 1){
-		importItemPtr = new QTreeWidgetItem(&attributeItem);
-	}
-	else{
-		importItemPtr = attributeItem.child(0);
-	}
-
 	bool isAttributeEditable = true;
 	bool isAttributeEnabled = false;
 	bool isAttributeObligatory = false;
@@ -788,17 +773,6 @@ bool CAttributeEditorComp::SetAttributeToItem(
 				++attrsIter){
 		const QByteArray& elementId = attrsIter.key();
 		const AttrInfo& attrInfo = attrsIter.value();
-
-		if (m_consistInfoCompPtr.IsValid() && !m_consistInfoCompPtr->IsAttributeValid(
-						attributeId,
-						elementId,
-						registry,
-						true,
-						false,
-						NULL,
-						attrInfo.componentStaticInfoPtr)){
-			isAttributeError = true;
-		}
 
 		if (attrInfo.infoPtr != NULL){
 			if (!attributeExportValue.isEmpty() && (attrInfo.infoPtr->exportId != attributeExportValue)){
@@ -938,20 +912,46 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		isAttributeError = true;
 	}
 
+	AttributeGroupType elementGroupType = AGT_ATTRIBUTE;
+	QString attributeTypeDescription;
+	AttributeTypesMap::ConstIterator foundTypeNameIter = m_attributeTypesMap.constFind(attributeStatTypeId);
+	if (foundTypeNameIter != m_attributeTypesMap.constEnd()){
+		attributeTypeDescription = foundTypeNameIter.value().first;
+		elementGroupType = foundTypeNameIter.value().second;
+	}
+	else{
+		attributeTypeDescription = tr("unsupported attribute of type '%1'").arg(QString(attributeStatTypeId));
+	}
+
+	if (elementGroupType != groupType){
+		return false;
+	}
+
+	if (m_consistInfoCompPtr.IsValid()){
+		for (		ElementIdToAttrInfoMap::ConstIterator attrsIter = infos.constBegin();
+					attrsIter != infos.constEnd();
+					++attrsIter){
+			const QByteArray& elementId = attrsIter.key();
+			const AttrInfo& attrInfo = attrsIter.value();
+
+			if (!m_consistInfoCompPtr->IsAttributeValid(
+							attributeId,
+							elementId,
+							registry,
+							true,
+							false,
+							NULL,
+							attrInfo.componentStaticInfoPtr)){
+				isAttributeError = true;
+			}
+		}
+	}
+
+	if (!isAttributeObligatory){
+		attributeTypeDescription = tr("Optional %1").arg(attributeTypeDescription);
+	}
+
 	if (attributeValueTip.isEmpty()){
-		QString attributeTypeDescription;
-		AttributeTypesMap::ConstIterator foundTypeNameIter = m_attributeTypesMap.constFind(attributeStatTypeId);
-		if (foundTypeNameIter != m_attributeTypesMap.constEnd()){
-			attributeTypeDescription = foundTypeNameIter.value();
-		}
-		else{
-			attributeTypeDescription = tr("unsupported attribute of type '%1'").arg(QString(attributeStatTypeId));
-		}
-
-		if (!isAttributeObligatory){
-			attributeTypeDescription = tr("Optional %1").arg(attributeTypeDescription);
-		}
-
 		attributeValueTip = (attributeTypeDescription.isEmpty() || attributeDescription.isEmpty())?
 					attributeDescription + attributeTypeDescription:
 					tr("%1\nType: %2").arg(attributeDescription, attributeTypeDescription);
@@ -971,43 +971,69 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		}
 	}
 
-	QString attributeName = attributeId;
-	attributeItem.setText(AC_NAME, attributeId);
-	attributeItem.setData(AC_VALUE, AttributeId, attributeName);
+	QTreeWidgetItem* attributeItemPtr = NULL;
+	if (itemIndex < AttributeTree->topLevelItemCount()){
+		attributeItemPtr = AttributeTree->topLevelItem(itemIndex);
+	}
+	else{
+		attributeItemPtr = new QTreeWidgetItem();
+		AttributeTree->addTopLevelItem(attributeItemPtr);
+	}
 
-	attributeItem.setText(AC_VALUE, attributeValueText);
-	attributeItem.setData(AC_VALUE, AttributeTypeId, attributeStatTypeId);
-	attributeItem.setData(AC_VALUE, AttributeMining, attributeStatMeaning);
+	attributeItemPtr->setText(AC_NAME, attributeId);
+	attributeItemPtr->setData(AC_VALUE, AttributeId, attributeId);
 
-	attributeItem.setToolTip(AC_NAME, attributeValueTip);
-	attributeItem.setToolTip(AC_VALUE, attributeValueTip);
+	attributeItemPtr->setText(AC_VALUE, attributeValueText);
+	attributeItemPtr->setData(AC_VALUE, AttributeTypeId, attributeStatTypeId);
+	attributeItemPtr->setData(AC_VALUE, AttributeMining, attributeStatMeaning);
 
-	attributeItem.setFlags(Qt::ItemIsSelectable);
-	attributeItem.setData(AC_NAME, Qt::CheckStateRole, QVariant());
+	attributeItemPtr->setToolTip(AC_NAME, attributeValueTip);
+	attributeItemPtr->setToolTip(AC_VALUE, attributeValueTip);
+
+	attributeItemPtr->setFlags(Qt::ItemIsSelectable);
+	attributeItemPtr->setData(AC_NAME, Qt::CheckStateRole, QVariant());
 	if (isAttributeEditable){
-		attributeItem.setFlags(attributeItem.flags() | Qt::ItemIsEnabled | Qt::ItemIsEditable);
+		attributeItemPtr->setFlags(attributeItemPtr->flags() | Qt::ItemIsEnabled | Qt::ItemIsEditable);
 	}
 
 	if (isAttributeEnabled){
-		attributeItem.setFlags(attributeItem.flags() | Qt::ItemIsUserCheckable);
-		attributeItem.setCheckState(AC_NAME, Qt::Checked);
+		attributeItemPtr->setFlags(attributeItemPtr->flags() | Qt::ItemIsUserCheckable);
+		attributeItemPtr->setCheckState(AC_NAME, Qt::Checked);
 	}
 
+	QColor backgroundColor = Qt::white;
+	if (groupType == AGT_REFERENCE){
+		backgroundColor = QColor(240, 240, 255);
+	}
+	else if (groupType == AGT_FACTORY){
+		backgroundColor = QColor(255, 255, 240);
+	}
+
+	attributeItemPtr->setBackgroundColor(AC_NAME, backgroundColor);
+
 	if (isAttributeError){
-		attributeItem.setBackgroundColor(AC_VALUE, Qt::red);
+		attributeItemPtr->setBackgroundColor(AC_VALUE, Qt::red);
 		hasError = true;
 	}
 	else if (isAttributeWarning){
-		attributeItem.setBackgroundColor(AC_VALUE, Qt::yellow);
+		attributeItemPtr->setBackgroundColor(AC_VALUE, Qt::yellow);
 		hasWarning = true;
 	}
 	else{
-		attributeItem.setBackgroundColor(AC_VALUE, Qt::transparent);
+		attributeItemPtr->setBackgroundColor(AC_VALUE, backgroundColor);
 	}
 
-	importItemPtr->setText(AC_NAME, tr("<import>"));
-	importItemPtr->setData(AC_VALUE, AttributeMining, AM_EXPORTED_ATTR);
-	importItemPtr->setData(AC_VALUE, AttributeId, attributeName);
+	QTreeWidgetItem* importItemPtr = NULL;
+	if (attributeItemPtr->childCount() < 1){
+		importItemPtr = new QTreeWidgetItem(attributeItemPtr);
+		importItemPtr->setText(AC_NAME, tr("<import>"));
+		importItemPtr->setData(AC_VALUE, AttributeMining, AM_EXPORTED_ATTR);
+	}
+	else{
+		importItemPtr = attributeItemPtr->child(0);
+	}
+
+	importItemPtr->setData(AC_VALUE, AttributeId, attributeId);
 	importItemPtr->setData(AC_VALUE, AttributeTypeId, attributeValueTypeId);
 	importItemPtr->setText(AC_VALUE, attributeImportText);
 	importItemPtr->setData(AC_VALUE, AttributeValue, attributeExportValue);
@@ -1016,17 +1042,19 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		importItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
 		importItemPtr->setCheckState(AC_NAME, Qt::Checked);
 
-		attributeItem.setIcon(AC_NAME, m_importIcon);
+		attributeItemPtr->setIcon(AC_NAME, m_importIcon);
 
 		hasExport = true;
 	}
 	else{
 		importItemPtr->setData(AC_NAME, Qt::CheckStateRole, QVariant());
 		importItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-		attributeItem.setIcon(AC_NAME, QIcon());
+		attributeItemPtr->setIcon(AC_NAME, QIcon());
 	}
 
 	importItemPtr->setHidden(false);
+
+	++itemIndex;
 
 	return true;
 }

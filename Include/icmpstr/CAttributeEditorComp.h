@@ -73,6 +73,14 @@ public:
 		AM_MULTI
 	};
 
+	enum AttributeGroupType
+	{
+		AGT_ATTRIBUTE,
+		AGT_REFERENCE,
+		AGT_FACTORY,
+		AGT_LAST = AGT_FACTORY
+	};
+
 	enum AttributeColumns
 	{
 		AC_NAME = 0,
@@ -126,7 +134,8 @@ protected:
 	typedef QMap<QByteArray, ElementIdToAttrInfoMap> AttrInfosMap;
 
 	bool SetAttributeToItem(
-				QTreeWidgetItem& attributeItem,
+				AttributeGroupType groupType,
+				int& itemIndex,
 				const icomp::IRegistry& registry,
 				const QByteArray& attributeId,
 				const ElementIdToAttrInfoMap& infos,
@@ -229,7 +238,8 @@ private:
 	AttributeItemDelegate m_attributeItemDelegate;
 	RegistryObserver m_registryObserver;
 
-	typedef QMap<QByteArray, QString> AttributeTypesMap;
+	typedef QPair<QString, AttributeGroupType> TypeDescr;
+	typedef QMap<QByteArray, TypeDescr> AttributeTypesMap;
 	AttributeTypesMap m_attributeTypesMap;
 
 	AttrInfosMap m_attrInfosMap;	// all current displayed attributes
