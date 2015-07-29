@@ -954,7 +954,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 
 		attributeValueTip = (attributeTypeDescription.isEmpty() || attributeDescription.isEmpty())?
 					attributeDescription + attributeTypeDescription:
-					tr("%1\nType: %2").arg(attributeDescription).arg(attributeTypeDescription);
+					tr("%1\nType: %2").arg(attributeDescription, attributeTypeDescription);
 
 		if (!obligatoryInterfaces.isEmpty() || !optionalInterfaces.isEmpty()){
 			attributeValueTip += tr("\nInterfaces:");
