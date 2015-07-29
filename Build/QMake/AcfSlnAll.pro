@@ -178,7 +178,9 @@ DocumentProcessingPck.file = ../../Impl/DocumentProcessingPck/QMake/DocumentProc
 
 SUBDIRS += Compositor
 Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
+Compositor.depends = CompositorPck
 
 SUBDIRS += XpcEditor
 XpcEditor.file = ../../Impl/XpcEditorExe/QMake/XpcEditor.pro
+XpcEditor.depends = CompositorPck
 
