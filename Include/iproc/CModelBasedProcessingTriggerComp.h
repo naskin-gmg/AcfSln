@@ -48,6 +48,10 @@ private:
 	void DoProcessing();
 
 private:
+	/**
+		\internal
+		Observes changes of directory to force update if it has changed.
+	*/
 	class ParamsObserver: public imod::TSingleModelObserverBase<iprm::IParamsSet>
 	{
 	public:

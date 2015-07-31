@@ -77,6 +77,10 @@ public:
 	void CreateRegistryTree(const icomp::IRegistry& registry, QTreeWidgetItem* registryRootItemPtr);
 
 protected:
+	/**
+		\internal
+		Observes changes of component environment to force update if it has changed.
+	*/
 	class EnvironmentObserver: public imod::TSingleModelObserverBase<icomp::IComponentEnvironmentManager>
 	{
 	public:

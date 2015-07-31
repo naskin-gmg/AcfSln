@@ -26,6 +26,9 @@ namespace icmpstr
 {
 
 
+/**
+	\internal
+*/
 class CComponentPromotorDialogCompBase:
 			public icomp::CComponentBase,
 			public imod::TSingleModelObserverBase<IElementSelectionInfo>

@@ -102,6 +102,9 @@ private:
 		QStringList attributeChangedFiles;
 	};
 
+	/**
+		\internal
+	*/
 	class MonitoringParamsObserver: public imod::TSingleModelObserverBase<ihotf::IDirectoryMonitorParams>
 	{
 	public:
@@ -116,6 +119,9 @@ private:
 		CDirectoryMonitorComp& m_parent;
 	};
 
+	/**
+		\internal
+	*/
 	class DirectoryParamsObserver: public imod::TSingleModelObserverBase<ifile::IFileNameParam>
 	{
 	public:
