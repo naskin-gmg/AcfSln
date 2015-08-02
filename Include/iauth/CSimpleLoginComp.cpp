@@ -78,7 +78,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 		CUser& user = GetUser(userIndex);
 
 		if (user.CheckPassword(password)){
-			static const ChangeSet changeSet(CF_LOGIN, "Login");
+			ChangeSet changeSet(CF_LOGIN, "Login");
 			istd::CChangeNotifier notifier(this, &changeSet);
 			Q_UNUSED(notifier);
 
@@ -95,7 +95,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 bool CSimpleLoginComp::Logout()
 {
 	if (m_loggedUserIndex >= 0){
-		static const ChangeSet changeSet(CF_LOGOUT, "Logout");
+		ChangeSet changeSet(CF_LOGOUT, "Logout");
 		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 

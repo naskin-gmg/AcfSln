@@ -370,7 +370,7 @@ icomp::IRegistryElement* CVisualRegistryEditorComp::TryCreateComponent(
 		return NULL;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Add component");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Add component");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -603,7 +603,7 @@ bool CVisualRegistryEditorComp::OnDropObject(const QMimeData& mimeData, QGraphic
 		return false;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Drop object");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Drop object");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -868,7 +868,7 @@ void CVisualRegistryEditorComp::OnSelectionChanged()
 	}
 
 	if (m_selectedElementIds != elementIds){
-		static const ChangeSet selectionChangeSet(IElementSelectionInfo::CF_SELECTION);
+		const ChangeSet selectionChangeSet(IElementSelectionInfo::CF_SELECTION);
 		istd::CChangeNotifier selectionNotifier(&m_selectionInfo, &selectionChangeSet);
 		Q_UNUSED(selectionNotifier);
 
@@ -962,7 +962,7 @@ void CVisualRegistryEditorComp::OnPasteCommand()
 		return;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Paste components");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, "Paste components");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -1017,7 +1017,7 @@ void CVisualRegistryEditorComp::OnRemoveComponent()
 		return;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, "Remove component");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, "Remove component");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -1068,7 +1068,7 @@ void CVisualRegistryEditorComp::NewEmbeddedComponent()
 		return;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, icomp::IRegistry::CF_EMBEDDED, "Add embedded registry");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, icomp::IRegistry::CF_EMBEDDED, "Add embedded registry");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -1099,7 +1099,7 @@ void CVisualRegistryEditorComp::ToEmbeddedComponent()
 		return;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_EMBEDDED, "To embedded registry");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_ADDED, icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_EMBEDDED, "To embedded registry");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -1205,7 +1205,7 @@ void CVisualRegistryEditorComp::RemoveEmbeddedComponent()
 		return;
 	}
 
-	static const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_EMBEDDED, "Remove embedded registry");
+	const ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_EMBEDDED, "Remove embedded registry");
 	istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
 	Q_UNUSED(registryNotifier);
 
@@ -1378,7 +1378,7 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 void CVisualRegistryEditorComp::UpdateEmbeddedRegistryView(const QByteArray& id)
 {
 	if (id != m_embeddedRegistryId){
-		static const ChangeSet selectionChangeSet(IElementSelectionInfo::CF_SELECTION);
+		const ChangeSet selectionChangeSet(IElementSelectionInfo::CF_SELECTION);
 		istd::CChangeNotifier selectionNotifier(&m_selectionInfo, &selectionChangeSet);
 		Q_UNUSED(selectionNotifier);
 

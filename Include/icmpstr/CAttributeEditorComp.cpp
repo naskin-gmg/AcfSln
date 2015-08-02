@@ -771,7 +771,6 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	for (		ElementIdToAttrInfoMap::ConstIterator attrsIter = infos.constBegin();
 				attrsIter != infos.constEnd();
 				++attrsIter){
-		const QByteArray& elementId = attrsIter.key();
 		const AttrInfo& attrInfo = attrsIter.value();
 
 		if (attrInfo.infoPtr != NULL){

@@ -203,7 +203,7 @@ void CVisualRegistry::SetComponentNote(const QByteArray& componentName, const QS
 
 	CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
 	if ((elementPtr != NULL) && (elementPtr->GetNote() != componentNote)){
-		static const ChangeSet changeSet(CF_NOTE_CHANGED, "Change note");
+		ChangeSet changeSet(CF_NOTE_CHANGED, "Change note");
 		istd::CChangeNotifier notifier(this, &changeSet);
 		Q_UNUSED(notifier);
 
@@ -243,7 +243,7 @@ bool CVisualRegistry::RenameElement(const QByteArray& oldElementId, const QByteA
 		}
 	}
 
-	static const ChangeSet changeSet(CF_ELEMENT_RENAMED, "Rename element");
+	ChangeSet changeSet(CF_ELEMENT_RENAMED, "Rename element");
 	istd::CChangeNotifier notifier(this, &changeSet);
 	Q_UNUSED(notifier);
 
