@@ -14,18 +14,48 @@ namespace icam
 
 bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, double& resolution)
 {
+	iimg::IBitmap::PixelFormat pixelFormat = bitmap.GetPixelFormat();
+
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
 		if (imageSize.GetX() >= sizeof(double) + sizeof(RESOLUTION_PATTERN)){
-			const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
-			Q_ASSERT(rawData != NULL);	// Becouse bitmap is not empty.
-			qint32& bitmapPattern = (qint32&)rawData[0];
-			double& value = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
+			if (pixelFormat != iimg::IBitmap::PF_RGB){
+				const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
+				Q_ASSERT(rawData != NULL);
+				qint32& bitmapPattern = (qint32&)rawData[0];
+				double& value = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
 
-			if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
-				resolution = value;
+				if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
+					resolution = value;
 
-				return true;
+					return true;
+				}
+			}
+			else{
+				const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
+				qint32 bitmapPattern = rawData[1] << 24; 
+				bitmapPattern |= (rawData[2] & 0xff) << 16; 
+				bitmapPattern |= (rawData[5] & 0xff) << 8; 
+				bitmapPattern |= rawData[6] & 0xff;
+
+				qint8 resolutionData[8] = {0};
+								
+				resolutionData[0]= rawData[9];
+				resolutionData[1]= rawData[10];
+				resolutionData[2]= rawData[13];
+				resolutionData[3]= rawData[14];
+				resolutionData[4]= rawData[17];
+				resolutionData[5]= rawData[18];
+				resolutionData[6]= rawData[21];
+				resolutionData[7]= rawData[22];
+
+				double& value = (double&)resolutionData;
+
+				if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
+					resolution = value;
+
+					return true;
+				}
 			}
 		}
 	}
@@ -36,18 +66,42 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 
 bool CCalibratedCameraComp::WriteImageResolution(iimg::IBitmap& bitmap, double resolution)
 {
+	iimg::IBitmap::PixelFormat pixelFormat = bitmap.GetPixelFormat();
+
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
 		if (imageSize.GetX() >= sizeof(double) + sizeof(RESOLUTION_PATTERN)){
-			const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
-			Q_ASSERT(rawData != NULL);	// Becouse bitmap is not empty.
-			qint32& bitmapPattern = (qint32&)rawData[0];
-			double& bitmapCalib = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
+			qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
+			Q_ASSERT(rawData != NULL);
 
-			bitmapPattern = qint32(RESOLUTION_PATTERN);
-			bitmapCalib = resolution;
+			if (pixelFormat != iimg::IBitmap::PF_RGB){
+				qint32& bitmapPattern = (qint32&)rawData[0];
+				double& bitmapCalib = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
 
-			return true;
+				bitmapPattern = qint32(RESOLUTION_PATTERN);
+				bitmapCalib = resolution;
+
+				return true;
+			}
+			else{
+				rawData[1] = 0xff; 
+				rawData[2] = 0x00; 
+				rawData[5] = 0xff; 
+				rawData[6] = 0x00;
+
+				qint8* resolutionData = (qint8*)&resolution;
+
+				rawData[9] = resolutionData[0];
+				rawData[10] = resolutionData[1];
+				rawData[13] = resolutionData[2];
+				rawData[14] = resolutionData[3];
+				rawData[17] = resolutionData[4];
+				rawData[18] = resolutionData[5];
+				rawData[21] = resolutionData[6];
+				rawData[22] = resolutionData[7];
+
+				return true;
+			}
 		}
 	}
 
