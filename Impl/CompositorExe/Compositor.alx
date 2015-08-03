@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3591
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1191
+          1322
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264197
+          3785
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -54,10 +54,10 @@
     </Element>
     <Element>
       <ComponentName>
-        CompositorTemplate
+        MainWindowComponents
       </ComponentName>
       <X>
-        225
+        1025
       </X>
       <Y>
         275
@@ -68,10 +68,10 @@
     </Element>
     <Element>
       <ComponentName>
-        MainWindowComponents
+        CompositorTemplate
       </ComponentName>
       <X>
-        1025
+        225
       </X>
       <Y>
         275

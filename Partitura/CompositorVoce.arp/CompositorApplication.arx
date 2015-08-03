@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3588
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1188
+          1322
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264197
+          3785
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -55,7 +55,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="26">
+        <AttributeInfoMap count="25">
           <AttributeInfo>
             <Id>
               AboutDialogTitle
@@ -129,25 +129,6 @@
               </IsEnabled>
               <Value>
                 Compositor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationSubname
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF Registry Editor
               </Value>
             </Data>
           </AttributeInfo>
@@ -296,7 +277,7 @@
                 true
               </IsEnabled>
               <Value>
-				&#169; 2015 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF project&#10;See 'License.txt' for license information
+                &#169; 2015 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
