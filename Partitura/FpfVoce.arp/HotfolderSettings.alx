@@ -4,17 +4,6 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1134
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1023
         </Id>
         <Number>
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          1
+        </Id>
+        <Number>
+          1134
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3464
+          3696
         </Number>
         <Description>
           ACF
@@ -40,27 +40,13 @@
   <PositionMap count="6">
     <Element>
       <ComponentName>
-        InputDirectories
+        OutputDirectory
       </ComponentName>
       <X>
-        575
+        150
       </X>
       <X>
-        200
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryMonitorParams
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        325
+        450
       </X>
       <Note>
         
@@ -71,24 +57,10 @@
         FileNamingParams
       </ComponentName>
       <X>
-        550
-      </X>
-      <X>
-        650
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        HotfolderSettings
-      </ComponentName>
-      <X>
         575
       </X>
       <X>
-        450
+        600
       </X>
       <Note>
         
@@ -110,13 +82,41 @@
     </Element>
     <Element>
       <ComponentName>
-        OutputDirectory
+        HotfolderSettings
       </ComponentName>
       <X>
-        150
+        575
       </X>
       <X>
         450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DirectoryMonitorParams
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        325
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InputDirectories
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        200
       </X>
       <Note>
         

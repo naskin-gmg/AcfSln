@@ -33,6 +33,12 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 
 // reimplemented (ihotf::IDirectoryMonitor)
 
+bool CDirectoryMonitorComp::IsRunning() const
+{
+	return BaseClass2::isRunning();
+}
+
+
 bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 {
 	bool wasRunning = BaseClass2::isRunning();
@@ -95,6 +101,8 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 	DisconnectFromParameterModel();
 
 	UpdateMonitoringSession();
+
+	Q_ASSERT(m_finishThread);
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -159,8 +167,9 @@ void CDirectoryMonitorComp::run()
 		}
 
 		// check previously not accessed files:
-		for (FilesSet::iterator fileIter = m_nonAccessedFiles.begin(); fileIter != m_nonAccessedFiles.end(); fileIter++){
-			const QString& filePath = *fileIter;
+		QMutableSetIterator<QString> nonAccessedFilesIter(m_nonAccessedFiles);
+		while (nonAccessedFilesIter.hasNext()){
+			QString filePath = nonAccessedFilesIter.next();
 
 			if (HasFileAccess(filePath)){
 				QFileInfo fileInfo(filePath);
@@ -169,7 +178,7 @@ void CDirectoryMonitorComp::run()
 
 				addedFiles.push_back(filePath);
 
-				fileIter = m_nonAccessedFiles.erase(fileIter);
+				nonAccessedFilesIter.remove();
 			}
 		}
 
@@ -211,8 +220,8 @@ void CDirectoryMonitorComp::run()
 		if (		((observingChanges & ihotf::IDirectoryMonitorParams::OC_MODIFIED) != 0) ||
 					((observingChanges & ihotf::IDirectoryMonitorParams::OC_ATTR_CHANGED) != 0)){
 			
-			for (		ihotf::IMonitoringSession::FileItems::ConstIterator fileIter = m_directoryFiles.constBegin();
-						fileIter != m_directoryFiles.constEnd();
+			for (		ihotf::IMonitoringSession::FileItems::Iterator fileIter = m_directoryFiles.begin();
+						fileIter != m_directoryFiles.end();
 						fileIter++){
 				const QString& filePath = fileIter.key();
 				QFileInfo fileInfo(filePath);
@@ -222,7 +231,7 @@ void CDirectoryMonitorComp::run()
 
 				if ((observingChanges & ihotf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
 					QDateTime currentModifiedTime = fileInfo.lastModified();
-					QDateTime previousModifiedTime = fileIter.value();
+					QDateTime& previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
 						QString filePath = fileInfo.canonicalFilePath();
 						modifiedFiles.push_back(filePath);
@@ -283,6 +292,16 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 {
 	QMutexLocker locker(&m_mutex);
 
+	istd::IChangeable::ChangeSet possibleChanges(
+				ihotf::IFileSystemChangeStorage::CF_NEW,
+				ihotf::IFileSystemChangeStorage::CF_REMOVED,
+				ihotf::IFileSystemChangeStorage::CF_MODIFIED,
+				ihotf::IFileSystemChangeStorage::CF_ATTRIBUTE_CHANGED);
+
+	if (changeSet.ContainsAny(possibleChanges)){
+		UpdateMonitoringSession();
+	}
+
 	Q_ASSERT(m_fileSystemChangeStorageCompPtr.IsValid());
 	if (m_fileSystemChangeStorageCompPtr.IsValid()){
 		if (changeSet.Contains(ihotf::IFileSystemChangeStorage::CF_NEW)){
@@ -324,10 +343,6 @@ void CDirectoryMonitorComp::OnFolderChanged(const istd::IChangeable::ChangeSet& 
 				m_fileSystemChangeStorageCompPtr->UpdateStorageItem(m_folderChanges.attributeChangedFiles[fileIndex], ihotf::IFileSystemChangeStorage::CF_MODIFIED);
 			}
 		}
-	}
-
-	if (!changeSet.IsEmpty()){
-		UpdateMonitoringSession();
 	}
 
 	m_lockChanges = false;
@@ -396,9 +411,9 @@ void CDirectoryMonitorComp::StopObserverThread()
 {
 	m_finishThread = true;
 
-	// wait for 30 seconds for finishing of thread:
-    istd::CGeneralTimeStamp timer;
-    while ((timer.GetElapsed() < 30) && BaseClass2::isRunning());
+	SendVerboseMessage(QString("Stop observing of: ") + m_currentDirectory.absolutePath(), "DirectoryMonitor");
+
+	BaseClass2::wait();
 
 	if (BaseClass2::isRunning()){
 		BaseClass2::terminate();
@@ -434,9 +449,8 @@ bool CDirectoryMonitorComp::ConnectToParameterModel(const iprm::IParamsSet& para
 		return		pathModelPtr->AttachObserver(&m_directoryParamsObserver) &&
 					monitorParamsModelPtr->AttachObserver(&m_monitoringParamsObserver);
 	}
-	else{
-		return false;
-	}
+
+	return false;
 }
 
 

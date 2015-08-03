@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3451
+          328193
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1120
+          1134
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264197
+          3464
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -243,7 +243,7 @@
                 true
               </IsEnabled>
               <Value>
-                &amp;Tools
+                &amp;Hotfolder
               </Value>
             </Data>
           </AttributeInfo>
@@ -275,7 +275,7 @@
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        ibase::ICommandsProvider
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
         SettingsDialog
@@ -290,7 +290,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        Command
+      </ExportedId>
+      <ComponentId>
+        SettingsDialog/Command
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Hotfolder settings dialog

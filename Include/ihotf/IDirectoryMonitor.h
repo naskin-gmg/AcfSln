@@ -2,10 +2,10 @@
 #define ihotf_IDirectoryMonitor_included
 
 
-// ACF includes
-#include "istd/IPolymorphic.h"
+// Qt includes
 #include <QtCore/QString>
 
+// ACF includes
 #include "iprm/IParamsSet.h"
 
 
@@ -21,6 +21,11 @@ namespace ihotf
 class IDirectoryMonitor: virtual public istd::IPolymorphic
 {
 public:
+	/**
+		Checks if the folder monitoring is active.
+	*/
+	virtual bool IsRunning() const = 0;
+
 	/**
 		Start observing process.
 		If the \c paramsSetPtr is not equal NULL, the observing parameter are get from this params set,
