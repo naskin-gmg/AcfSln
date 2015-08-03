@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QtCore/QRegExp>
+#include <QtCore/QObject>
 
 // ACF includes
 #include "istd/CSystem.h"
@@ -21,7 +21,7 @@ int CCopyFilesTreeComp::ConvertFiles(
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (!m_fileCopyCompPtr.IsValid()){
-		SendErrorMessage(MI_END_STATUS, tr("File copy provider is not present"));
+		SendErrorMessage(MI_END_STATUS, QObject::tr("File copy provider is not present"));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
@@ -61,12 +61,12 @@ int CCopyFilesTreeComp::ConvertFiles(
 				excludeFilters,
 				*m_recursionDepthAttrPtr,
 				counter)){
-		SendInfoMessage(MI_END_STATUS, tr("Success: %1 files copied").arg(counter));
+		SendInfoMessage(MI_END_STATUS, QObject::tr("Success: %1 files copied").arg(counter));
 
 		return iproc::IProcessor::TS_OK;
 	}
 	else{
-		SendErrorMessage(MI_END_STATUS, tr("Failed: %1 files copied").arg(counter));
+		SendErrorMessage(MI_END_STATUS, QObject::tr("Failed: %1 files copied").arg(counter));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
@@ -127,14 +127,14 @@ bool CCopyFilesTreeComp::CopyFileTree(
 			int& counter) const
 {
 	if (!inputDir.exists()){
-		SendWarningMessage(MI_NO_INPUT, tr("No input directory %1").arg(inputDir.absolutePath()));
+		SendWarningMessage(MI_NO_INPUT, QObject::tr("No input directory %1").arg(inputDir.absolutePath()));
 
 		return false;
 	}
 
 	outputDir.mkpath(outputDir.absolutePath());
 	if (!outputDir.exists()){
-		SendWarningMessage(MI_NO_OUTPUT, tr("No output directory %1").arg(outputDir.absolutePath()));
+		SendWarningMessage(MI_NO_OUTPUT, QObject::tr("No output directory %1").arg(outputDir.absolutePath()));
 
 		return false;
 	}

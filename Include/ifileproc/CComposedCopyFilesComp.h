@@ -4,11 +4,12 @@
 
 // Qt includes
 #include <QtCore/QString>
-#include <QtCore/QDir>
 
 // ACF includes
-#include "ifileproc/IFileConversion.h"
 #include "ilog/TLoggerCompWrap.h"
+
+// ACF-Solutions includes
+#include "ifileproc/IFileConversion.h"
 
 
 namespace ifileproc
@@ -19,7 +20,6 @@ namespace ifileproc
 	Composed files copy.
 */
 class CComposedCopyFilesComp:
-			public QObject,
 			public ilog::CLoggerComponentBase,
 			virtual public ifileproc::IFileConversion
 {

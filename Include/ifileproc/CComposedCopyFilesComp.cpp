@@ -1,6 +1,10 @@
 #include "ifileproc/CComposedCopyFilesComp.h"
 
 
+// Qt includes
+#include <QtCore/QObject>
+
+
 namespace ifileproc
 {
 
@@ -22,7 +26,7 @@ int CComposedCopyFilesComp::ConvertFiles(
 			retVal = qMax(retVal, copierPtr->ConvertFiles(inputPath, outputPath, paramsPtr));
 		}
 		else{
-			SendErrorMessage(MI_CRITICAL, tr("File copy provider is not present"));
+			SendErrorMessage(MI_CRITICAL, QObject::tr("File copy provider is not present"));
 
 			return iproc::IProcessor::TS_INVALID;
 		}
