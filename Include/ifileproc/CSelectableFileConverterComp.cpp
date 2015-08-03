@@ -25,7 +25,7 @@ CSelectableFileConverterComp::CSelectableFileConverterComp()
 
 int CSelectableFileConverterComp::ConvertFiles(
 			const QString& inputPath,
-			const QString& outputPath,
+			QString& outputPath,
 			const iprm::IParamsSet* /*paramsPtr*/,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {

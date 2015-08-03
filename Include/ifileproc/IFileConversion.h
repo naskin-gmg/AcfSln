@@ -40,14 +40,14 @@ public:
 		Copy a file or files from \c inputPath to destination \c outputPath.
 
 		\param inputPath	Path to the input file or directory.
-		\param outputPath	Path to the output file or directory.
+		\param outputPath	Path to the output file or directory. Output file path can be calculated or modified inside of ConvertFiles method.
 		\param paramsPtr	File conversion parameters
 		\param progressManagerPtr	Progress manager used for getting information about file conversion progress state and canceling.
 		\return Status of conversion operation. \sa iproc::IProcessor::TaskState
 	*/
 	virtual int ConvertFiles(
 				const QString& inputPath,
-				const QString& outputPath,
+				QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL,
 				ibase::IProgressManager* progressManagerPtr = NULL) const = 0;
 };

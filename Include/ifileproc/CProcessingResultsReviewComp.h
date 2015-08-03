@@ -42,7 +42,7 @@ public:
 	// reimplemented (ifileproc::IFileConversion)
 	virtual int ConvertFiles(
 				const QString& inputPath,
-				const QString& outputPath,
+				QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL,
 				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
