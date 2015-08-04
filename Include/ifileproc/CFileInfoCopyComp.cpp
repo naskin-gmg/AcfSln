@@ -102,6 +102,10 @@ int CFileInfoCopyComp::ConvertFiles(
 				QString substitutionTag = line.mid(beginIndex + tagOffset, endIndex - beginIndex - tagOffset);
 				QString substituted;
 
+				if (substitutionTag.isEmpty()){
+					continue;
+				}
+
 				if (ProcessSubstitutionTag(substitutionTag, rawTag, substituted)){
 					line.replace(beginIndex, endIndex - beginIndex + 1, substituted);
 
@@ -137,11 +141,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, const QString
 	static const QString acfRcVersionTag("AcfRcVersion");
 	static const QString acfTimestampTag("AcfTimestamp");
 
-	if (tag.isEmpty()){
-		result = "$";
-
-		return true;
-	}
+	Q_ASSERT(!tag.isEmpty());
 
 	int separatorIndex = tag.indexOf(":");
 
