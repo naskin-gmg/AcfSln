@@ -75,16 +75,34 @@ int CFileInfoCopyComp::ConvertFiles(
 		int endIndex = -1;
 		if (*m_useSubstitutionAttrPtr){
 			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
-				endIndex = line.indexOf("$", beginIndex + 1);
-				if (endIndex < 0){
-					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is incomplete").arg(inputFileName).arg(lineCounter));
+				int tagOffset = 1;
 
-					break;
+				// Environment variable in form $(variable)
+				int varIndex = line.indexOf("$(", endIndex + 1);
+				if (varIndex >= 0){
+					tagOffset = 2;
+					endIndex = line.indexOf(")", beginIndex + 2);
+					if (endIndex < 0){
+						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Variable tag is incomplete").arg(inputFileName).arg(lineCounter));
+
+						break;
+					}
 				}
-				QString substitutionTag = line.mid(beginIndex + 1, endIndex - beginIndex - 1);
+				// Check ACF variable format $variable$
+				else{
+					endIndex = line.indexOf("$", beginIndex + 1);
+					if (endIndex < 0){
+						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is incomplete").arg(inputFileName).arg(lineCounter));
+
+						break;
+					}
+				}
+
+				QString rawTag = line.mid(beginIndex, endIndex - beginIndex + 1);
+				QString substitutionTag = line.mid(beginIndex + tagOffset, endIndex - beginIndex - tagOffset);
 				QString substituted;
 
-				if (ProcessSubstitutionTag(substitutionTag, substituted)){
+				if (ProcessSubstitutionTag(substitutionTag, rawTag, substituted)){
 					line.replace(beginIndex, endIndex - beginIndex + 1, substituted);
 
 					endIndex += substituted.length() - (endIndex - beginIndex + 1);
@@ -106,7 +124,7 @@ int CFileInfoCopyComp::ConvertFiles(
 
 // protected methods
 
-bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& result) const
+bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, const QString& rawTag, QString& result) const
 {
 	static const QString acfCompanyNameTag("AcfCompanyName");
 	static const QString acfProductNameTag("AcfProductName");
@@ -226,7 +244,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 
 		int userTagsCount = qMin(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
 		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
-			if (tag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
+			if (rawTag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
 				result = m_userSubstitutionValuesAttrPtr[userTagIndex];
 
 				return true;
