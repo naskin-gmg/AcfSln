@@ -1,7 +1,7 @@
-rem echo off
+@echo off
 
-set COMPILER_EXT=VC10
-set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc2010
+set COMPILER_EXT=VC12
+set QMAKESPEC=%QTDIR%\mkspecs\win32-msvc2013
 set path=%path%;%QTDIR%\bin
 
 cd %~dp0\..\..
@@ -14,4 +14,4 @@ cd %~dp0\..\..
 call %ACFDIR%\Config\QMake\CopyVCProjToSubdir.js %COMPILER_EXT%
 
 
-cd Build\%COMPILER_EXT%
+cd %~dp0\
