@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3534
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1023
         </Id>
         <Number>
-          328449
+          328706
         </Number>
         <Description>
           Qt Framework
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3796
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1
         </Id>
         <Number>
-          1154
+          1336
         </Number>
         <Description>
           ACF-Solutions
@@ -37,7 +37,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="12">
+  <ElementsList count="13">
     <Element>
       <Id>
         CopyAllFiles
@@ -86,7 +86,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="11">
+              <Values count="12">
                 <Value>
                   CopyRoot
                 </Value>
@@ -107,6 +107,9 @@
                 </Value>
                 <Value>
                   CopyTutorialSources
+                </Value>
+                <Value>
+                  CopyTutorialProjects
                 </Value>
                 <Value>
                   CopyTutorialOther
@@ -159,7 +162,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -261,6 +264,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IgnoreUnknownTags
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               InputSubDir
             </Id>
             <Type>
@@ -334,13 +356,29 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SubstitutionTagExpr
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionTagExpr
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               UserSubstitutionTags
             </Id>
             <Type>
               String[]
             </Type>
             <ExportId>
-              InstallScriptTags
+              ProjectsSubstitutionTags
             </ExportId>
             <Data>
               <IsEnabled>
@@ -356,7 +394,7 @@
               String[]
             </Type>
             <ExportId>
-              InstallScriptValues
+              ProjectsSubstitutionValues
             </ExportId>
             <Data>
               <IsEnabled>
@@ -384,7 +422,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -538,38 +576,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -590,7 +596,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="11">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -749,38 +755,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -801,7 +775,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="11">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -963,38 +937,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1015,7 +957,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1125,10 +1067,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseSubstitution
+              SubstitutionTagExpr
             </Id>
             <Type>
-              Boolean
+              String
             </Type>
             <ExportId>
               
@@ -1138,40 +1080,8 @@
                 true
               </IsEnabled>
               <Value>
-                true
+                \$(.+)\$
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -1194,7 +1104,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1283,38 +1193,6 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1335,7 +1213,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1480,38 +1358,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1532,7 +1378,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1618,38 +1464,6 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1670,7 +1484,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1795,38 +1609,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1847,7 +1629,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1894,7 +1676,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="16">
+              <Values count="11">
                 <Value>
                   *.ui
                 </Value>
@@ -1903,21 +1685,6 @@
                 </Value>
                 <Value>
                   *.moc
-                </Value>
-                <Value>
-                  *.vcproj
-                </Value>
-                <Value>
-                  *.sln
-                </Value>
-                <Value>
-                  *.pro
-                </Value>
-                <Value>
-                  *.pri
-                </Value>
-                <Value>
-                  *.qbs
                 </Value>
                 <Value>
                   *.arx
@@ -2019,6 +1786,233 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CopyTutorialProjects
+      </Id>
+      <PackageId>
+        InstallVoce
+      </PackageId>
+      <ComponentId>
+        CopyInfoProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="11">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="16">
+                <Value>
+                  *.ui
+                </Value>
+                <Value>
+                  *.qrc
+                </Value>
+                <Value>
+                  *.moc
+                </Value>
+                <Value>
+                  *.vcproj
+                </Value>
+                <Value>
+                  *.sln
+                </Value>
+                <Value>
+                  *.pro
+                </Value>
+                <Value>
+                  *.pri
+                </Value>
+                <Value>
+                  *.qbs
+                </Value>
+                <Value>
+                  *.arx
+                </Value>
+                <Value>
+                  *.alx
+                </Value>
+                <Value>
+                  *.xml
+                </Value>
+                <Value>
+                  *.png
+                </Value>
+                <Value>
+                  *.svg
+                </Value>
+                <Value>
+                  *.txt
+                </Value>
+                <Value>
+                  *.html
+                </Value>
+                <Value>
+                  *.htm
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IgnoreUnknownTags
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Docs/Tutorial
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Docs/Tutorial
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RecursionDepth
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SubstitutionTagExpr
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionTagExpr
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               UserSubstitutionTags
@@ -2027,7 +2021,7 @@
               String[]
             </Type>
             <ExportId>
-              InstallScriptTags
+              ProjectsSubstitutionTags
             </ExportId>
             <Data>
               <IsEnabled>
@@ -2043,7 +2037,7 @@
               String[]
             </Type>
             <ExportId>
-              InstallScriptValues
+              ProjectsSubstitutionValues
             </ExportId>
             <Data>
               <IsEnabled>
@@ -2071,7 +2065,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="11">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -2234,38 +2228,6 @@
               <Value>
                 10
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

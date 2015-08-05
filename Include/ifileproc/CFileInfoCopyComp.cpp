@@ -5,6 +5,8 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QDateTime>
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QRegExp>
 
 // ACF includes
 #include "iser/IVersionInfo.h"
@@ -28,7 +30,7 @@ int CFileInfoCopyComp::ConvertFiles(
 
 	SendInfoMessage(MI_FILE_INFO, QObject::tr("Processing file %1 to %2").arg(inputFileName).arg(outputFileName));
 
-	if (!*m_useSubstitutionAttrPtr && !m_licensePathAttrPtr.IsValid()){
+	if (!m_substitutionTagExprAttrPtr.IsValid() && !m_licensePathAttrPtr.IsValid()){
 		QFile::remove(outputFileName);
 
 		return QFile::copy(inputFileName, outputFileName) ? iproc::IProcessor::TS_OK : iproc::IProcessor::TS_INVALID;
@@ -36,6 +38,10 @@ int CFileInfoCopyComp::ConvertFiles(
 
 	QFile inputFile(inputFileName);
 	QFile outputFile(outputFileName);
+
+	QDir inputDir = QFileInfo(inputFileName).absoluteDir();
+	QDir outputDir = QFileInfo(inputFileName).absoluteDir();
+
 	if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
 		SendWarningMessage(MI_INPUT_OPEN, QObject::tr("Opening input file failed (%1)").arg(inputFileName));
 
@@ -69,53 +75,45 @@ int CFileInfoCopyComp::ConvertFiles(
 		}
 	}
 
+	QRegExp tagsExpression;
+	if (m_substitutionTagExprAttrPtr.IsValid()){
+		tagsExpression = QRegExp(*m_substitutionTagExprAttrPtr);
+		tagsExpression.setMinimal(true);
+	}
+
 	for (int lineCounter = 1; !inputStream.atEnd(); ++lineCounter) {
 		QString line = inputStream.readLine();
 
-		int endIndex = -1;
-		if (*m_useSubstitutionAttrPtr){
-			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
-				int tagOffset = 1;
+		if (m_substitutionTagExprAttrPtr.IsValid()){
+			QString outputLine;
+			int pos = 0;
+			int endPos = 0;
+			while ((pos = tagsExpression.indexIn(line, endPos)) != -1){
+				outputLine += line.mid(endPos, pos - endPos);
 
-				// Environment variable in form $(variable)
-				int varIndex = line.indexOf("$(", endIndex + 1);
-				if (varIndex >= 0){
-					tagOffset = 2;
-					endIndex = line.indexOf(")", beginIndex + 2);
-					if (endIndex < 0){
-						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Variable tag is incomplete").arg(inputFileName).arg(lineCounter));
+				endPos = pos + tagsExpression.matchedLength();
 
-						break;
+				QString substitutionTag = tagsExpression.cap(1);
+
+				if (!substitutionTag.isEmpty()){
+					QString substituted;
+					if (ProcessSubstitutionTag(inputDir, outputDir, substitutionTag, substituted)) {
+						outputLine += substituted;
+					}
+					else if (!*m_ignoreUnknownTagsAttrPtr){
+						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+
+						outputLine += line.mid(pos, endPos - pos);
 					}
 				}
-				// Check ACF variable format $variable$
 				else{
-					endIndex = line.indexOf("$", beginIndex + 1);
-					if (endIndex < 0){
-						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is incomplete").arg(inputFileName).arg(lineCounter));
-
-						break;
-					}
-				}
-
-				QString substitutionTag = line.mid(beginIndex + tagOffset, endIndex - beginIndex - tagOffset);
-				QString substituted;
-
-				if (substitutionTag.isEmpty()){
-					continue;
-				}
-
-				if (ProcessSubstitutionTag(substitutionTag, substituted)){
-					line.replace(beginIndex, endIndex - beginIndex + 1, substituted);
-
-					endIndex += substituted.length() - (endIndex - beginIndex + 1);
-				}
-				else{
-					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
-
-					break;
+					outputLine += line.mid(pos, endPos - pos);
 				}
 			}
+
+			outputLine += line.mid(endPos);
+
+			line = outputLine;
 		}
 
 		outputStream << line << endl;
@@ -127,7 +125,11 @@ int CFileInfoCopyComp::ConvertFiles(
 
 // protected methods
 
-bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& result) const
+bool CFileInfoCopyComp::ProcessSubstitutionTag(
+			const QDir& inputDir,
+			const QDir& outputDir,
+			const QString& tag,
+			QString& result) const
 {
 	static const QString acfCompanyNameTag("AcfCompanyName");
 	static const QString acfProductNameTag("AcfProductName");
@@ -244,7 +246,27 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 		int userTagsCount = qMin(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
 		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
 			if (tag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
-				result = m_userSubstitutionValuesAttrPtr[userTagIndex];
+				QString replacedText = m_userSubstitutionValuesAttrPtr[userTagIndex];
+
+				static const QString relativeInputPrefix = "$RelativeToInputFile:";
+				static const QString relativeOutputPrefix = "$RelativeToOutputFile:";
+				static const QString absoluteInputPrefix = "$AbsoluteToInputFile:";
+				static const QString absoluteOutputPrefix = "$AbsoluteToInputFile:";
+
+				if (replacedText.startsWith(relativeInputPrefix)){
+					replacedText = inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputPrefix.size())));
+				}
+				else if (replacedText.startsWith(relativeOutputPrefix)){
+					replacedText = outputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeOutputPrefix.size())));
+				}
+				else if (replacedText.startsWith(absoluteInputPrefix)){
+					replacedText = inputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteInputPrefix.size())));
+				}
+				else if (replacedText.startsWith(absoluteOutputPrefix)){
+					replacedText = outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputPrefix.size())));
+				}
+
+				result = replacedText;
 
 				return true;
 			}

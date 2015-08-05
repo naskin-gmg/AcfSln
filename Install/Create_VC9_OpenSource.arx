@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          2934
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          920
+          1336
         </Number>
         <Description>
           ACF-Solutions
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3796
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          264194
+          328706
         </Number>
         <Description>
           Qt Framework
@@ -211,7 +211,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -245,48 +245,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LicensePath
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ../LGPL/LicenseLGPL.txt
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -341,18 +299,85 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="2">
                 <Value>
                   GeneratedFiles
                 </Value>
                 <Value>
                   generated
                 </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionTagExpr
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                \$\((.+)\)
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
                 <Value>
-                  Xcd
+                  ACFDIR
                 </Value>
                 <Value>
-                  VC8
+                  ACFCONFIGDIR
+                </Value>
+                <Value>
+                  ACFSLNDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)/Config
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFSLNDIR)
                 </Value>
               </Values>
             </Data>
@@ -371,18 +396,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="2">
                 <Value>
                   GeneratedFiles
                 </Value>
                 <Value>
                   generated
-                </Value>
-                <Value>
-                  Xcd
-                </Value>
-                <Value>
-                  VC8
                 </Value>
               </Values>
             </Data>

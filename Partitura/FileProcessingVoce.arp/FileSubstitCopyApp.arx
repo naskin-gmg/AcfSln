@@ -323,20 +323,20 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseSubstitution
+              SubstitutionTagExpr
             </Id>
             <Type>
-              Boolean
+              String
             </Type>
             <ExportId>
-              UseSubstitution
+              SubstitutionTagExpr
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
               <Value>
-                true
+                \$(.+)\$
               </Value>
             </Data>
           </AttributeInfo>
