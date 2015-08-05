@@ -6,7 +6,6 @@ include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl
 
-INCLUDEPATH += $$AUXINCLUDEPATH
 
 RESOURCES += ../*.qrc
 
@@ -23,7 +22,7 @@ QT += xml
 
 ARXC_CONFIG = ../../../Config/Core.xpc
 ARXC_FILES += ../*.arx
-ARXC_OUTDIR = ../../GeneratedFiles/XpcEditor
+ARXC_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
 mac{
 	ICON += ../Mac/XpcEditor.icns
