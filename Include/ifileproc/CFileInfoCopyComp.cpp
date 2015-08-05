@@ -98,7 +98,6 @@ int CFileInfoCopyComp::ConvertFiles(
 					}
 				}
 
-				QString rawTag = line.mid(beginIndex, endIndex - beginIndex + 1);
 				QString substitutionTag = line.mid(beginIndex + tagOffset, endIndex - beginIndex - tagOffset);
 				QString substituted;
 
@@ -106,7 +105,7 @@ int CFileInfoCopyComp::ConvertFiles(
 					continue;
 				}
 
-				if (ProcessSubstitutionTag(substitutionTag, rawTag, substituted)){
+				if (ProcessSubstitutionTag(substitutionTag, substituted)){
 					line.replace(beginIndex, endIndex - beginIndex + 1, substituted);
 
 					endIndex += substituted.length() - (endIndex - beginIndex + 1);
@@ -128,7 +127,7 @@ int CFileInfoCopyComp::ConvertFiles(
 
 // protected methods
 
-bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, const QString& rawTag, QString& result) const
+bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& result) const
 {
 	static const QString acfCompanyNameTag("AcfCompanyName");
 	static const QString acfProductNameTag("AcfProductName");
@@ -244,7 +243,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, const QString
 
 		int userTagsCount = qMin(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
 		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
-			if (rawTag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
+			if (tag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
 				result = m_userSubstitutionValuesAttrPtr[userTagIndex];
 
 				return true;

@@ -68,7 +68,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 protected:
-	bool ProcessSubstitutionTag(const QString& tag, const QString& rawTag, QString& result) const;
+	bool ProcessSubstitutionTag(const QString& tag, QString& result) const;
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);

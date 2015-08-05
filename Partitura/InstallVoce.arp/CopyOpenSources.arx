@@ -4,17 +4,6 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
@@ -33,6 +22,17 @@
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -899,7 +899,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  $(ACFCONFIGDIR)
+                  ACFCONFIGDIR
                 </Value>
               </Values>
             </Data>
@@ -1781,7 +1781,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  $(ACFCONFIGDIR)
+                  ACFCONFIGDIR
                 </Value>
               </Values>
             </Data>
