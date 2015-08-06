@@ -8,9 +8,11 @@ AcfLibrary{
 
 	Depends{ name: "iprm" }
 	Depends{ name: "icomp" }
+	Depends{ name: "ibase" }
 
 	Export{
 		Depends{ name: "iprm" }
 		Depends{ name: "icomp" }
+		Depends{ name: "ibase" }
 	}
 }
