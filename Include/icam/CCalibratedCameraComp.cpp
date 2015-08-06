@@ -48,7 +48,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 				bitmapPattern |= rawData[6] & 0xff;
 
 				qint8 resolutionData[8] = {0};
-								
+
 				resolutionData[0]= rawData[9];
 				resolutionData[1]= rawData[10];
 				resolutionData[2]= rawData[13];
