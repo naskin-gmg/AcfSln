@@ -1,6 +1,9 @@
 #include "icam/CCalibratedCameraComp.h"
 
 
+// STD includes
+#include <cmath>
+
 // ACF includes
 #include "iprm/TParamsPtr.h"
 #include "imeas/INumericValue.h"
@@ -18,14 +21,14 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
-		if (imageSize.GetX() >= sizeof(double) + sizeof(RESOLUTION_PATTERN)){
+		if (imageSize.GetX() >= int(sizeof(double) + sizeof(RESOLUTION_PATTERN))){
 			if (pixelFormat != iimg::IBitmap::PF_RGB){
 				const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
 				Q_ASSERT(rawData != NULL);
-				qint32& bitmapPattern = (qint32&)rawData[0];
+				quint32& bitmapPattern = (quint32&)rawData[0];
 				double& value = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
 
-				if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
+				if (bitmapPattern == RESOLUTION_PATTERN && !isnan(value) && (value > 0)){
 					resolution = value;
 
 					return true;
@@ -51,7 +54,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 
 				double& value = (double&)resolutionData;
 
-				if (bitmapPattern == RESOLUTION_PATTERN && !_isnan(value) && (value > 0)){
+				if ((bitmapPattern == RESOLUTION_PATTERN) && !isnan(value) && (value > 0)){
 					resolution = value;
 
 					return true;
@@ -70,7 +73,7 @@ bool CCalibratedCameraComp::WriteImageResolution(iimg::IBitmap& bitmap, double r
 
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
-		if (imageSize.GetX() >= sizeof(double) + sizeof(RESOLUTION_PATTERN)){
+		if (imageSize.GetX() >= int(sizeof(double) + sizeof(RESOLUTION_PATTERN))){
 			quint8* rawData = (quint8*)bitmap.GetLinePtr(0);
 			Q_ASSERT(rawData != NULL);
 

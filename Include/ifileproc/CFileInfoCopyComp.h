@@ -59,7 +59,7 @@ public:
 		I_ASSIGN(m_replaceEnvironmentVariablesAttrPtr, "ReplaceEnvironmentVariables", "If enabled, environment variables will be replaced", true, false);
 		I_ASSIGN(m_replaceEmbeddedVariablesAttrPtr, "ReplaceEmbeddedVariables", "If enabled, embedded variables will be replaced e.g.:\n\tConfigurationName for current compiler configuration (VC9)\n\tConfigurationDir for e.g. VC9_64", true, false);
 		I_ASSIGN_MULTI_0(m_userSubstitutionTagsAttrPtr, "UserSubstitutionTags", "List of user defined substitution tags will be replaced with specified values", false);
-		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags, it can contains special values:\n\t$RelativeToInputFile:<base file name>\n\$RelativeToOutputFile:<base file name>\n\$AbsoluteToInputFile:<base file name>\n\$AbsoluteToInputFile:<base file name>", false);
+		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags, it can contains special values:\n\t$RelativeToInputFile:<base file name>\n\t$RelativeToOutputFile:<base file name>\n\t$AbsoluteToInputFile:<base file name>\n\t$AbsoluteToInputFile:<base file name>", false);
 		I_ASSIGN(m_ignoreUnknownTagsAttrPtr, "IgnoreUnknownTags", "When enabled the unknown tags will not produce warning messages", true, false);
 	I_END_COMPONENT;
 
