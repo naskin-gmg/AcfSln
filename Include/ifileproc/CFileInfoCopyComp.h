@@ -57,8 +57,9 @@ public:
 		I_ASSIGN(m_licensePathAttrPtr, "LicensePath", "Path of license file will be included at begin of copied file", false, "License.txt");
 		I_ASSIGN(m_substitutionTagExprAttrPtr, "SubstitutionTagExpr", "Define tag used for substitution as QT regular expression", false, "\\$(\\s*)\\$");
 		I_ASSIGN(m_replaceEnvironmentVariablesAttrPtr, "ReplaceEnvironmentVariables", "If enabled, environment variables will be replaced", true, false);
+		I_ASSIGN(m_replaceEmbeddedVariablesAttrPtr, "ReplaceEmbeddedVariables", "If enabled, embedded variables will be replaced e.g.:\n\tConfigurationName for current compiler configuration (VC9)\n\tConfigurationDir for e.g. VC9_64", true, false);
 		I_ASSIGN_MULTI_0(m_userSubstitutionTagsAttrPtr, "UserSubstitutionTags", "List of user defined substitution tags will be replaced with specified values", false);
-		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags", false);
+		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags, it can contains special values:\n\t$RelativeToInputFile:<base file name>\n\$RelativeToOutputFile:<base file name>\n\$AbsoluteToInputFile:<base file name>\n\$AbsoluteToInputFile:<base file name>", false);
 		I_ASSIGN(m_ignoreUnknownTagsAttrPtr, "IgnoreUnknownTags", "When enabled the unknown tags will not produce warning messages", true, false);
 	I_END_COMPONENT;
 
@@ -82,6 +83,7 @@ private:
 	I_ATTR(QString, m_licensePathAttrPtr);
 	I_ATTR(QString, m_substitutionTagExprAttrPtr);
 	I_ATTR(bool, m_replaceEnvironmentVariablesAttrPtr);
+	I_ATTR(bool, m_replaceEmbeddedVariablesAttrPtr);
 	I_MULTIATTR(QString, m_userSubstitutionTagsAttrPtr);
 	I_MULTIATTR(QString, m_userSubstitutionValuesAttrPtr);
 	I_ATTR(bool, m_ignoreUnknownTagsAttrPtr);

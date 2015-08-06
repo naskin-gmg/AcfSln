@@ -4,6 +4,17 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1
+        </Id>
+        <Number>
+          1336
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
@@ -22,17 +33,6 @@
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1336
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -210,7 +210,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -296,13 +296,32 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ReplaceEmbeddedVariables
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ReplaceEmbeddedVariables
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               ReplaceEnvironmentVariables
             </Id>
             <Type>
               Boolean
             </Type>
             <ExportId>
-              
+              ReplaceEnvironmentVariables
             </ExportId>
             <Data>
               <IsEnabled>

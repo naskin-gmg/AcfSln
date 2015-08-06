@@ -100,8 +100,10 @@ int CFileInfoCopyComp::ConvertFiles(
 					if (ProcessSubstitutionTag(inputDir, outputDir, substitutionTag, substituted)) {
 						outputLine += substituted;
 					}
-					else if (!*m_ignoreUnknownTagsAttrPtr){
-						SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+					else{
+						if (!*m_ignoreUnknownTagsAttrPtr){
+							SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
+						}
 
 						outputLine += line.mid(pos, endPos - pos);
 					}
@@ -272,8 +274,8 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 			}
 		}
 
-		if (*m_replaceEnvironmentVariablesAttrPtr){
-			QString variable = istd::CSystem::FindVariableValue(tag);
+		if (*m_replaceEnvironmentVariablesAttrPtr || *m_replaceEmbeddedVariablesAttrPtr){
+			QString variable = istd::CSystem::FindVariableValue(tag, *m_replaceEnvironmentVariablesAttrPtr, *m_replaceEmbeddedVariablesAttrPtr);
 			if (!variable.isEmpty()){
 				result = variable;
 
