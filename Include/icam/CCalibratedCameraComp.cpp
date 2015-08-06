@@ -4,6 +4,12 @@
 // STD includes
 #include <cmath>
 
+#if defined(_MSC_VER)
+	#ifndef isnan
+		#define isnan(x) _isnan(x)
+	#endif
+#endif
+
 // ACF includes
 #include "iprm/TParamsPtr.h"
 #include "imeas/INumericValue.h"
