@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3379
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1097
+          1347
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264197
+          3808
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -43,11 +43,11 @@
         FileSubstitCopyApp
       </ComponentName>
       <X>
-        625
+        525
       </X>
-      <X>
-        350
-      </X>
+      <Y>
+        300
+      </Y>
       <Note>
         
       </Note>
