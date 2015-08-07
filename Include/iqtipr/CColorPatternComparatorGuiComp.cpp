@@ -4,6 +4,7 @@
 #include <QtCore/QTimer>
 
 // ACF includes
+#include "i2d/CDirection2d.h"
 #include "imeas/IDataSequenceProvider.h"
 #include "iprm/IEnableableParam.h"
 #include "iprm/TParamsPtr.h"
@@ -120,13 +121,21 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 					double currentValue = colorValues[i];
 					double taughtValue = colorValues[i + 3];
 
+					double delta = taughtValue - currentValue;
+					double deltaRel = abs(delta) / 255;
+
+					if (i == 0){ // Hue difference
+						i2d::CDirection2d taughtHue = i2d::CDirection2d::FromDegree(taughtValue);
+						i2d::CDirection2d workingHue = i2d::CDirection2d::FromDegree(currentValue);
+
+						deltaRel = workingHue.DistInDegree(taughtHue) / 360.0;
+					}
+
 					QTableWidgetItem* workingColorItem = new QTableWidgetItem(QString::number(currentValue));
 					QTableWidgetItem* taughtColorItem = new QTableWidgetItem(QString::number(taughtValue));
 					workingColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 					taughtColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-					double delta = taughtValue - currentValue;
-					double deltaRel = abs(delta) / 255;
 					QTableWidgetItem* diffItem = new QTableWidgetItem(QString("%1 (%2%)").arg(delta).arg(deltaRel*100, 0, 'g', 2));
 
 					ColorTable->setItem(i, 0, workingColorItem);
