@@ -131,12 +131,12 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 						deltaRel = workingHue.DistInDegree(taughtHue) / 360.0;
 					}
 
-					QTableWidgetItem* workingColorItem = new QTableWidgetItem(QString::number(currentValue));
-					QTableWidgetItem* taughtColorItem = new QTableWidgetItem(QString::number(taughtValue));
+					QTableWidgetItem* workingColorItem = new QTableWidgetItem(QString::number(currentValue, 'f', 2));
+					QTableWidgetItem* taughtColorItem = new QTableWidgetItem(QString::number(taughtValue, 'f', 2));
 					workingColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 					taughtColorItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
-					QTableWidgetItem* diffItem = new QTableWidgetItem(QString("%1 (%2%)").arg(delta).arg(deltaRel*100, 0, 'g', 2));
+					QTableWidgetItem* diffItem = new QTableWidgetItem(QString("%1 (%2%)").arg(delta, 2, 'f', 2).arg(deltaRel * 100, 2, 'f', 2));
 
 					ColorTable->setItem(i, 0, workingColorItem);
 					ColorTable->setItem(i, 1, taughtColorItem);
