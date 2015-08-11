@@ -1,6 +1,6 @@
 
-#ifndef imeas_CNumericConstraintsComp_included
-#define imeas_CNumericConstraintsComp_included
+#ifndef imeas_CGeneralNumericConstraints_included
+#define imeas_CGeneralNumericConstraints_included
 
 
 // ACF includes
@@ -59,6 +59,6 @@ private:
 } // namespace imeas
 
 
-#endif // !imeas_CNumericConstraintsComp_included
+#endif // !imeas_CGeneralNumericConstraints_included
 
 
