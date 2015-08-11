@@ -113,7 +113,7 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 						panelPtr, 
 						*m_isSliderVisibleAttrPtr, 
 						*m_isButtonsVisibleAttrPtr,
-						*m_inputPolicyAttrPtr);
+						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1);
 			
 			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
 

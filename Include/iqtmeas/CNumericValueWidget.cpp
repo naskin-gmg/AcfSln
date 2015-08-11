@@ -36,7 +36,7 @@ CNumericValueWidget::CNumericValueWidget(
 			ValueSB->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 			break;
 
-		default:
+		case 0:
 			ValueSB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 			break;
 	}
