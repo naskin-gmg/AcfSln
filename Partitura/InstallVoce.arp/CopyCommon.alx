@@ -4,6 +4,17 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          0
+        </Id>
+        <Number>
+          3814
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
@@ -24,43 +35,18 @@
           ACF-Solutions
         </Description>
       </Version>
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          3814
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="14">
     <Element>
       <ComponentName>
-        CopyRoot
+        CopyDocs
       </ComponentName>
       <X>
-        350
+        800
       </X>
       <Y>
         650
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorialProjects
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <Y>
-        100
       </Y>
       <Note>
         
@@ -82,62 +68,6 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyInstallInfo
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <Y>
-        200
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyDocs
-      </ComponentName>
-      <X>
-        800
-      </X>
-      <Y>
-        650
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyPartitura
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <Y>
-        400
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyVSConfig
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <Y>
-        475
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CopyTexts
       </ComponentName>
       <X>
@@ -145,48 +75,6 @@
       </X>
       <Y>
         775
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorialOther
-      </ComponentName>
-      <X>
-        450
-      </X>
-      <Y>
-        200
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorialSources
-      </ComponentName>
-      <X>
-        950
-      </X>
-      <Y>
-        525
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyConfig
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <Y>
-        100
       </Y>
       <Note>
         
@@ -208,13 +96,83 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyAllFiles
+        CopyInstallInfo
       </ComponentName>
       <X>
-        150
+        825
       </X>
       <Y>
-        300
+        200
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyPartitura
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <Y>
+        400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyConfig
+      </ComponentName>
+      <X>
+        1050
+      </X>
+      <Y>
+        100
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyVSConfig
+      </ComponentName>
+      <X>
+        125
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyRoot
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <Y>
+        650
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyTutorialOther
+      </ComponentName>
+      <X>
+        450
+      </X>
+      <Y>
+        200
       </Y>
       <Note>
         
@@ -229,6 +187,48 @@
       </X>
       <Y>
         525
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyTutorialProjects
+      </ComponentName>
+      <X>
+        200
+      </X>
+      <Y>
+        100
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyTutorialSources
+      </ComponentName>
+      <X>
+        950
+      </X>
+      <Y>
+        525
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyAllFiles
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <Y>
+        300
       </Y>
       <Note>
         
