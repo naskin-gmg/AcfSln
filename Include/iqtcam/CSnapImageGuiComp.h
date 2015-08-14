@@ -40,7 +40,8 @@ public:
 		I_ASSIGN_TO(m_bitmapModelCompPtr, m_bitmapCompPtr, true);
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision obje for image snap", false, "BitmapAcquisition");
 		I_ASSIGN(m_lookupTableCompPtr, "LookupTable", "Lookup table for pseudo colors in the image view", false, "LookupTable");
-		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
+		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves or loads bitmap to/from file", false, "BitmapLoader");
+		I_ASSIGN(m_allowBitmapLoadAttrPtr, "AllowBitmapLoad", "If true loading of images is allowed", true, false);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -73,6 +74,7 @@ protected:
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
 	void on_LiveImageButton_toggled(bool checked);
+	void on_LoadImageButton_clicked();
 	void on_SaveImageButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
@@ -85,6 +87,7 @@ private:
 	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);
 
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
+	I_ATTR(bool, m_allowBitmapLoadAttrPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);

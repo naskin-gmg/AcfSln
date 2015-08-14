@@ -93,6 +93,7 @@ void CSnapImageGuiComp::OnGuiCreated()
 
 	SnapImageButton->setVisible(hasBitmap && hasSnap);
 	LiveImageButton->setVisible(hasBitmap && hasSnap);
+	LoadImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid() && *m_allowBitmapLoadAttrPtr);
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 
@@ -164,6 +165,19 @@ void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
 	}
 	else{
 		m_timer.stop();
+	}
+}
+
+
+void CSnapImageGuiComp::on_LoadImageButton_clicked()
+{
+	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
+		if (m_bitmapLoaderCompPtr->LoadFromFile(*m_bitmapCompPtr, "") == ifile::IFilePersistence::OS_FAILED){
+			QMessageBox::warning(
+						GetQtWidget(),
+						QObject::tr("Error"),
+						QObject::tr("Cannot load image"));
+		}
 	}
 }
 
