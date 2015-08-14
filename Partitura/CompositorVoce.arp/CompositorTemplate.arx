@@ -1,40 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="3">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          3588
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1188
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264197
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="9">
@@ -544,10 +511,10 @@
         RegistryLoader
       </Id>
       <PackageId>
-        CompositorPck
+        
       </PackageId>
       <ComponentId>
-        RegistryLoader
+        Loader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -775,7 +742,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="1">
+  <EmbeddedRegistriesList count="2">
     <EmbeddedRegistry>
       <Id>
         Document
@@ -944,6 +911,303 @@
             </InterfaceId>
             <ComponentId>
               VisualRegistry
+            </ComponentId>
+          </Interface>
+        </ExportedInterfaces>
+        <ExportedComponents count="0">
+        </ExportedComponents>
+        <Description>
+          
+        </Description>
+        <Keywords>
+          
+        </Keywords>
+      </Data>
+    </EmbeddedRegistry>
+    <EmbeddedRegistry>
+      <Id>
+        Loader
+      </Id>
+      <Data>
+        <ElementsList count="3">
+          <Element>
+            <Id>
+              CompactXmlFileSerializer
+            </Id>
+            <PackageId>
+              QtPck
+            </PackageId>
+            <ComponentId>
+              CompactXmlFileSerializer
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="5">
+                <AttributeInfo>
+                  <Id>
+                    EnableVerbose
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    EnableVerbose
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    FileExtensions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        carx
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    TypeDescriptions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        Compact ACF Registry
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    VersionInfo
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    VersionInfo
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              ComposedLoader
+            </Id>
+            <PackageId>
+              BasePck
+            </PackageId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="2">
+                <AttributeInfo>
+                  <Id>
+                    CommonDescription
+                  </Id>
+                  <Type>
+                    String
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      ACF registry
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    SlaveLoaders
+                  </Id>
+                  <Type>
+                    Reference[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="2">
+                      <Value>
+                        RegistryLoader
+                      </Value>
+                      <Value>
+                        CompactXmlFileSerializer
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              RegistryLoader
+            </Id>
+            <PackageId>
+              CompositorPck
+            </PackageId>
+            <ComponentId>
+              RegistryLoader
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="3">
+                <AttributeInfo>
+                  <Id>
+                    EnableVerbose
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    EnableVerbose
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    VersionInfo
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    VersionInfo
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+        </ElementsList>
+        <EmbeddedRegistriesList count="0">
+        </EmbeddedRegistriesList>
+        <ExportedInterfaces count="4">
+          <Interface>
+            <InterfaceId>
+              ifile::IFilePersistence
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              ifile::IFilePersistenceInfo
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              ifile::IFileTypeInfo
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IPolymorphic
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
             </ComponentId>
           </Interface>
         </ExportedInterfaces>
