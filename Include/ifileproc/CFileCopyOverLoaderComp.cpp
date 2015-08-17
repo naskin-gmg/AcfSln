@@ -19,19 +19,19 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (!m_inputLoaderCompPtr.IsValid()){
-		SendErrorMessage(0, "Input data loader is not defined", "FileCopyOverLoader");
+		SendErrorMessage(0, QObject::tr("Input data loader is not defined"), "FileCopyOverLoader");
 
 		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (!m_outputLoaderCompPtr.IsValid()){
-		SendErrorMessage(0, "Output data loader is not defined", "FileCopyOverLoader");
+		SendErrorMessage(0, QObject::tr("Output data loader is not defined"), "FileCopyOverLoader");
 
 		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (!m_objectCompPtr.IsValid()){
-		SendErrorMessage(0, "Data object for copy operaration is not set", "FileCopyOverLoader");
+		SendErrorMessage(0, QObject::tr("Data object for copy operaration is not set"));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
@@ -43,7 +43,7 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 		m_outputLoaderCompPtr->GetFileExtensions(extensions);
 
 		if (extensions.isEmpty()){
-			SendErrorMessage(0, "File extension list is empty", "FileCopyOverLoader");
+			SendErrorMessage(0, QObject::tr("File extension list is empty"));
 	
 			return iproc::IProcessor::TS_INVALID;
 		}
@@ -59,21 +59,25 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 
 	QFileInfo inputFileInfo(inputPath);
 	if (!inputFileInfo.exists()){
-		SendWarningMessage(0, QString("Input file %1 doesn't exist").arg(inputPath));
+		SendWarningMessage(0, QObject::tr("Input file %1 doesn't exist").arg(inputPath));
 	}
 
 	int loadState = m_inputLoaderCompPtr->LoadFromFile(*m_objectCompPtr, inputPath);
 	if (loadState != ifile::IFilePersistence::OS_OK){
-		SendErrorMessage(0, "Data could not be loaded", "FileCopyOverLoader");
+		SendErrorMessage(0, QObject::tr("Data could not be loaded from %1").arg(inputPath));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
 
 	int saveState = m_outputLoaderCompPtr->SaveToFile(*m_objectCompPtr, usedOutputPath);
 	if (saveState != ifile::IFilePersistence::OS_OK){
-		SendErrorMessage(0, "Data could not be saved", "FileCopyOverLoader");
+		SendErrorMessage(0, QObject::tr("Data could not be saved to %1").arg(usedOutputPath));
 
 		return iproc::IProcessor::TS_INVALID;
+	}
+
+	if (IsVerboseEnabled()){
+		SendVerboseMessage(QObject::tr("Converted %1 to %2").arg(inputPath).arg(usedOutputPath));
 	}
 
 	return iproc::IProcessor::TS_OK;
