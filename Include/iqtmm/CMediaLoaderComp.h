@@ -31,13 +31,6 @@ public:
 		I_ASSIGN(m_autoPlayAttrPtr, "AutoPlay", "If enabled, movie will be automatically played after loading", true, true);
 	I_END_COMPONENT;
 
-	enum MessageId
-	{
-		MI_BAD_EXTENSION = 0xa7e0,
-		MI_FILE_NOT_EXIST,
-		MI_BAD_FORMAT
-	};
-
 	// reimplemented (ifile::IFilePersistence)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,

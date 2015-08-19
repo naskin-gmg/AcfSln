@@ -5,12 +5,9 @@
 // Qt includes
 #include <QtCore/QObject>
 
-
 // ACF includes
-#include "ifile/CXmlFileReadArchive.h"
-#include "ifile/CXmlFileWriteArchive.h"
-
-#include "ifile/TFileSerializerComp.h"
+#include "ifile/IFilePersistence.h"
+#include "ilog/TLoggerCompWrap.h"
 
 
 namespace icmpstr
@@ -21,15 +18,19 @@ namespace icmpstr
 	Special registry loader supporting of loading layout data.
 */
 class CRegistryLoaderComp:
-	public QObject,
-	public ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>
+			public QObject,
+			public ilog::CLoggerComponentBase,
+			virtual public ifile::IFilePersistence
 {
 	Q_OBJECT
 
 public:
-	typedef ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive> BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CRegistryLoaderComp);
+		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
+		I_REGISTER_INTERFACE(ifile::IFilePersistence);
+		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -39,6 +40,11 @@ public:
 	};
 
 	// reimplemented (ifile::IFilePersistence)
+	virtual bool IsOperationSupported(
+				const istd::IChangeable* dataObjectPtr,
+				const QString* filePathPtr,
+				int flags,
+				bool beQuiet) const;
 	virtual int LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
@@ -55,13 +61,10 @@ public:
 protected:
 	QString GetLayoutPath(const QString& registryPath) const;
 
-	// reimplemented (ifile::TFileSerializerComp)
-	virtual void OnReadError(
-				const ifile::CXmlFileReadArchive& archive,
-				const istd::IChangeable& data,
-				const QString& filePath) const;
-
 	using QObject::tr;
+
+private:
+	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };
 
 

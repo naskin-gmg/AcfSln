@@ -38,10 +38,7 @@ public:
 
 	enum MessageId
 	{
-		MI_BAD_EXTENSION = 0xa7e0,
-		MI_FILE_NOT_EXIST,
-		MI_BAD_FORMAT,
-		MI_BITMAP_TYPE
+		MI_BITMAP_TYPE = 0x5f7e0
 	};
 
 	// reimplemented (ifile::IFilePersistence)
