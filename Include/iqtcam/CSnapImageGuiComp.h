@@ -104,7 +104,7 @@ protected Q_SLOTS:
 	void OnTimerReady();
 
 private:
-	I_REF(istd::IChangeable, m_bitmapCompPtr);
+	I_REF(iimg::IBitmap, m_bitmapCompPtr);
 	I_REF(imod::IModel, m_bitmapModelCompPtr);
 	I_REF(icam::IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_REF(icmm::IColorTransformation, m_lookupTableCompPtr);

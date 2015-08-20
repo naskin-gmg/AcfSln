@@ -83,6 +83,24 @@ void CSnapImageGuiComp::UpdateButtonsState()
 		LoadImageButton->setEnabled(m_bitmapLoaderCompPtr->IsOperationSupported(m_bitmapCompPtr.GetPtr(), NULL, ifile::IFileTypeInfo::QF_LOAD | ifile::IFileTypeInfo::QF_FILE));
 		SaveImageButton->setEnabled(m_bitmapLoaderCompPtr->IsOperationSupported(m_bitmapCompPtr.GetPtr(), NULL, ifile::IFileTypeInfo::QF_SAVE | ifile::IFileTypeInfo::QF_FILE));
 	}
+
+	if (m_bitmapCompPtr.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
+		istd::CIndex2d bitmapSize = m_bitmapCompPtr->GetImageSize();
+
+		if (bitmapSize.IsValid() && !bitmapSize.IsZero()){
+			const BaseClass::ShapesMap& shapesMap = BaseClass::GetShapesMap();
+
+			for (BaseClass::ShapesMap::ConstIterator iter = shapesMap.constBegin(); iter != shapesMap.constEnd(); ++iter){
+				const iqt2d::IViewProvider* providerPtr = iter.key();
+				if (providerPtr != NULL){
+					iview::IShapeView* viewPtr = providerPtr->GetView();
+					if (viewPtr != NULL){
+						viewPtr->SetFitArea(i2d::CRectangle(0, 0, bitmapSize.GetX(), bitmapSize.GetY()));
+					}
+				}
+			}
+		}
+	}
 }
 
 
