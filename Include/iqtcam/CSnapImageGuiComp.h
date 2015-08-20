@@ -4,6 +4,13 @@
 
 // Qt includes
 #include <QtCore/QTimer>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QAction>
+#include <QtWidgets/QMenu>
+#else
+#include <QtGui/QAction>
+#include <QtGui/QMenu>
+#endif
 
 // ACF includes
 #include "ifile/IFilePersistence.h"
@@ -58,12 +65,27 @@ public:
 	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
+	class ParamsObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		ParamsObserver(CSnapImageGuiComp* parentPtr);
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+
+	private:
+		CSnapImageGuiComp& m_parent;
+	};
+
 	bool SnapImage();
+	void UpdateButtonsState();
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiRetranslate();
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiHidden();
@@ -73,11 +95,12 @@ protected:
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
-	void on_LiveImageButton_toggled(bool checked);
 	void on_LoadImageButton_clicked();
 	void on_SaveImageButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
+	void OnIntervalSnap(bool checked);
+	void OnSnapOnChanges(bool checked);
 	void OnTimerReady();
 
 private:
@@ -99,6 +122,12 @@ private:
 	I_ATTR(double, m_liveIntervalAttrPtr);
 
 	QTimer m_timer;
+
+	ParamsObserver m_paramsObserver;
+
+	QAction m_intervalSnapAction;
+	QAction m_snapOnChangesAction;
+	QMenu m_snapButtonMenu;
 };
 
 

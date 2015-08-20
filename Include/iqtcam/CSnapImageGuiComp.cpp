@@ -19,7 +19,18 @@ namespace iqtcam
 
 
 CSnapImageGuiComp::CSnapImageGuiComp()
+:	m_intervalSnapAction(QIcon(":/Icons/AutoUpdate"), "", NULL),
+	m_paramsObserver(this),
+	m_snapOnChangesAction(QIcon(":/Icons/Reload"), "", NULL),
+	m_snapButtonMenu(NULL)
 {
+	m_intervalSnapAction.setCheckable(true);
+	QObject::connect(&m_intervalSnapAction, SIGNAL(triggered(bool)), this, SLOT(OnIntervalSnap(bool)));
+	m_snapOnChangesAction.setCheckable(true);
+	QObject::connect(&m_snapOnChangesAction, SIGNAL(triggered(bool)), this, SLOT(OnSnapOnChanges(bool)));
+	m_snapButtonMenu.addAction(&m_intervalSnapAction);
+	m_snapButtonMenu.addAction(&m_snapOnChangesAction);
+
 	m_timer.setInterval(40);
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
 }
@@ -51,14 +62,27 @@ void CSnapImageGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 
 bool CSnapImageGuiComp::SnapImage()
 {
+	bool retVal = false;
+
 	if (m_bitmapAcquisitionCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
 		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
 		if (taskId >= 0){
-			return m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
+			retVal = m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
 		}
 	}
 
-	return false;
+	UpdateButtonsState();
+
+	return retVal;
+}
+
+
+void CSnapImageGuiComp::UpdateButtonsState()
+{
+	if (m_bitmapCompPtr.IsValid() && m_bitmapLoaderCompPtr.IsValid()){
+		LoadImageButton->setEnabled(m_bitmapLoaderCompPtr->IsOperationSupported(m_bitmapCompPtr.GetPtr(), NULL, ifile::IFileTypeInfo::QF_LOAD | ifile::IFileTypeInfo::QF_FILE));
+		SaveImageButton->setEnabled(m_bitmapLoaderCompPtr->IsOperationSupported(m_bitmapCompPtr.GetPtr(), NULL, ifile::IFileTypeInfo::QF_SAVE | ifile::IFileTypeInfo::QF_FILE));
+	}
 }
 
 
@@ -86,22 +110,35 @@ void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
+void CSnapImageGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	m_intervalSnapAction.setText(tr("Interval snap"));
+	m_snapOnChangesAction.setText(tr("Snap on parameter changes"));
+}
+
+
 void CSnapImageGuiComp::OnGuiCreated()
 {
 	bool hasBitmap = m_bitmapCompPtr.IsValid();
 	bool hasSnap = m_bitmapAcquisitionCompPtr.IsValid();
 
+	SnapImageButton->setMenu(&m_snapButtonMenu);
+
 	SnapImageButton->setVisible(hasBitmap && hasSnap);
-	LiveImageButton->setVisible(hasBitmap && hasSnap);
 	LoadImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid() && *m_allowBitmapLoadAttrPtr);
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
+	SaveImageButton->setEnabled(false);
 
 	if (m_paramsSetGuiCompPtr.IsValid()){
 		m_paramsSetGuiCompPtr->CreateGui(ParamsFrame);
 
 		if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
 			m_paramsSetModelCompPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
+
+			m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
 		}
 
 		ParamsFrame->setVisible(true);
@@ -134,7 +171,9 @@ void CSnapImageGuiComp::OnGuiDestroyed()
 
 void CSnapImageGuiComp::OnGuiHidden()
 {
-	LiveImageButton->setChecked(false);
+	m_timer.stop();
+	m_intervalSnapAction.setChecked(false);
+	m_snapOnChangesAction.setChecked(false);
 
 	BaseClass::OnGuiHidden();
 }
@@ -152,19 +191,16 @@ void CSnapImageGuiComp::OnComponentCreated()
 
 void CSnapImageGuiComp::on_SnapImageButton_clicked()
 {
-	LiveImageButton->setChecked(false);
+	m_timer.stop();
+	m_intervalSnapAction.setChecked(false);
+	m_snapOnChangesAction.setChecked(false);
 
-	SnapImage();
-}
-
-
-void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
-{
-	if (checked){
-		m_timer.start();
+	if (SnapImageButton->isCheckable()){
+		SnapImageButton->setChecked(false);
+		SnapImageButton->setCheckable(false);
 	}
 	else{
-		m_timer.stop();
+		SnapImage();
 	}
 }
 
@@ -179,6 +215,8 @@ void CSnapImageGuiComp::on_LoadImageButton_clicked()
 						QObject::tr("Cannot load image"));
 		}
 	}
+
+	UpdateButtonsState();
 }
 
 
@@ -221,9 +259,66 @@ void CSnapImageGuiComp::on_SaveParamsButton_clicked()
 }
 
 
+void CSnapImageGuiComp::OnIntervalSnap(bool checked)
+{
+	m_snapOnChangesAction.setChecked(false);
+
+	if (checked){
+		SnapImageButton->setCheckable(true);
+		SnapImageButton->setChecked(true);
+
+		m_timer.start();
+	}
+	else{
+		m_timer.stop();
+
+		SnapImageButton->setChecked(false);
+		SnapImageButton->setCheckable(false);
+	}
+}
+
+
+void CSnapImageGuiComp::OnSnapOnChanges(bool checked)
+{
+	if (checked){
+		m_timer.stop();
+
+		SnapImageButton->setCheckable(true);
+		SnapImageButton->setChecked(true);
+	}
+	else{
+		SnapImageButton->setChecked(false);
+		SnapImageButton->setCheckable(false);
+	}
+
+	m_intervalSnapAction.setChecked(false);
+}
+
+
 void CSnapImageGuiComp::OnTimerReady()
 {
 	SnapImage();
+}
+
+
+// public methods of embedded class ParamsObserver
+
+CSnapImageGuiComp::ParamsObserver::ParamsObserver(CSnapImageGuiComp* parentPtr)
+:	m_parent(*parentPtr)
+{
+	Q_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class ParamsObserver
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CSnapImageGuiComp::ParamsObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	if (m_parent.m_snapOnChangesAction.isChecked()){
+		m_parent.SnapImage();
+	}
 }
 
 
