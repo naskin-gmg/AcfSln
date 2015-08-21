@@ -4,6 +4,7 @@
 // Qt includes
 #include <QtCore/QStringList>
 #include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 
 namespace ifileproc
@@ -36,13 +37,11 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 		return iproc::IProcessor::TS_INVALID;
 	}
 
-	QString usedOutputPath = outputPath;
+	QStringList outputExtensions;
+	m_outputLoaderCompPtr->GetFileExtensions(outputExtensions);
 
-	if (usedOutputPath.isEmpty()){
-		QStringList extensions;
-		m_outputLoaderCompPtr->GetFileExtensions(extensions);
-
-		if (extensions.isEmpty()){
+	if (outputPath.isEmpty()){
+		if (outputExtensions.isEmpty()){
 			SendErrorMessage(0, QObject::tr("File extension list is empty"));
 	
 			return iproc::IProcessor::TS_INVALID;
@@ -50,10 +49,18 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 
 		int pointPos = inputPath.lastIndexOf(".");
 		if (pointPos != -1){
-			usedOutputPath = inputPath.left(pointPos + 1) + extensions.front();
+			outputPath = inputPath.left(pointPos + 1) + outputExtensions.front();
 		}
 		else{
-			usedOutputPath = inputPath + extensions.front();
+			outputPath = inputPath + outputExtensions.front();
+		}
+	}
+	else if (!outputExtensions.isEmpty()){
+		QFileInfo outputFileInfo(outputPath);
+		QString currentExtension = outputFileInfo.suffix();
+
+		if (currentExtension.isEmpty() || !outputExtensions.contains(currentExtension)){
+			outputPath = outputFileInfo.absoluteDir().absoluteFilePath(outputFileInfo.baseName() + "." + outputExtensions.front());
 		}
 	}
 
@@ -69,15 +76,15 @@ int CFileCopyOverLoaderComp::ConvertFiles(
 		return iproc::IProcessor::TS_INVALID;
 	}
 
-	int saveState = m_outputLoaderCompPtr->SaveToFile(*m_objectCompPtr, usedOutputPath);
+	int saveState = m_outputLoaderCompPtr->SaveToFile(*m_objectCompPtr, outputPath);
 	if (saveState != ifile::IFilePersistence::OS_OK){
-		SendErrorMessage(0, QObject::tr("Data could not be saved to %1").arg(usedOutputPath));
+		SendErrorMessage(0, QObject::tr("Data could not be saved to %1").arg(outputPath));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (IsVerboseEnabled()){
-		SendVerboseMessage(QObject::tr("Converted %1 to %2").arg(inputPath).arg(usedOutputPath));
+		SendVerboseMessage(QObject::tr("Converted %1 to %2").arg(inputPath).arg(outputPath));
 	}
 
 	return iproc::IProcessor::TS_OK;
