@@ -27,14 +27,12 @@ class CNumericValueWidget:
 	Q_OBJECT
 
 public:
-	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, bool showButtons = true, int inputPolicy = 0);
+	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, bool showButtons = true, int inputPolicy = 0, int maxPrecision = 2);
 
 	void SetUnitInfo(const QString& description, const imath::IUnitInfo* unitInfoPtr);
 
 	double GetValue() const;
 	void SetValue(double value);
-
-	void SetupValueEditor(int editPrecision, double stepValue);
 
 Q_SIGNALS:
 	/**
@@ -52,7 +50,8 @@ protected Q_SLOTS:
 private:
 	bool m_ignoreEvents;
 	double m_unitMultiplicationFactor;
-	double m_unitPrecisionFactor;
+	double m_sliderScaleFactor;
+	int m_maxEditPrecision;
 };
 
 

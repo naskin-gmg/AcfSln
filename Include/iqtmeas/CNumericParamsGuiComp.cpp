@@ -113,7 +113,8 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 						panelPtr, 
 						*m_isSliderVisibleAttrPtr, 
 						*m_isButtonsVisibleAttrPtr,
-						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1);
+						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1,
+						*m_editorPrecisionAttrPtr);
 			
 			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
 
@@ -131,8 +132,6 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 							constraintsPtr->GetNumericValueName(i),
 							constraintsPtr->GetNumericValueUnitInfo(i));
 			}
-
-			valueWidgetPtr->SetupValueEditor(*m_editorPrecisionAttrPtr, *m_editorStepValueAttrPtr);
 
 			if (i < values.GetElementsCount()){
 				valueWidgetPtr->SetValue(values.GetElement(i));

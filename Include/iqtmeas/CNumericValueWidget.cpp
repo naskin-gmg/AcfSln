@@ -13,10 +13,12 @@ CNumericValueWidget::CNumericValueWidget(
 			QWidget* parentPtr,
 			bool showSlilder,
 			bool showButtons,
-			int inputPolicy)
+			int inputPolicy,
+			int maxPrecision)
 :	QWidget(parentPtr),
 	m_unitMultiplicationFactor(1),
-	m_unitPrecisionFactor(100)
+	m_sliderScaleFactor(100),
+	m_maxEditPrecision(maxPrecision)
 {
 	m_ignoreEvents = false;
 
@@ -67,15 +69,17 @@ void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::I
 	UnitLabel->setText(unitName);
 	UnitLabel->setVisible(!unitName.isEmpty());
 
-	m_unitPrecisionFactor = qPow(10.0, double(qMin(precision, 2)));
-	int displayPrecision = qMin(2, qMax(0, precision - int(log10(m_unitMultiplicationFactor) + 0.5)));
+	int multiplicationPrecision = int(log10(m_unitMultiplicationFactor) + 0.5);
+	int displayPrecision = qMin(m_maxEditPrecision, qMax(0, precision - multiplicationPrecision));
+	m_sliderScaleFactor = qPow(10.0, double(displayPrecision + multiplicationPrecision));
 
 	double minValue = valueRange.GetMinValue() * m_unitMultiplicationFactor;
 	double maxValue = valueRange.GetMaxValue() * m_unitMultiplicationFactor;
 
 	ValueSB->setDecimals(displayPrecision);
 	ValueSB->setRange(minValue, maxValue);
-	ValueSlider->setRange(valueRange.GetMinValue() * m_unitPrecisionFactor, valueRange.GetMaxValue() * m_unitPrecisionFactor);
+	ValueSlider->setRange(valueRange.GetMinValue() * m_sliderScaleFactor, valueRange.GetMaxValue() * m_sliderScaleFactor);
+	ValueSlider->setPageStep(10);
 	MinButton->setText(QString::number(minValue));
 	MaxButton->setText(QString::number(maxValue));
 	ValueSB->setToolTip(tr("Range: %1 - %2").arg(minValue).arg(maxValue));
@@ -92,18 +96,8 @@ void CNumericValueWidget::SetValue(double value)
 {
 	m_ignoreEvents = true;
 	ValueSB->setValue(value * m_unitMultiplicationFactor);
-	ValueSlider->setValue(value * m_unitPrecisionFactor);
+	ValueSlider->setValue(value * m_sliderScaleFactor);
 	m_ignoreEvents = false;
-}
-
-
-void CNumericValueWidget::SetupValueEditor(int editPrecision, double stepValue)
-{
-	if (editPrecision >= 0){
-		ValueSB->setDecimals(editPrecision);
-	}
-
-	ValueSB->setSingleStep(stepValue);
 }
 
 
@@ -130,7 +124,7 @@ void CNumericValueWidget::on_ValueSlider_valueChanged(int value)
 	}
 
 	m_ignoreEvents = true;
-	SetValue(value / m_unitPrecisionFactor);
+	SetValue(value / m_sliderScaleFactor);
 	m_ignoreEvents = false;
 }
 
