@@ -1,19 +1,80 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="3">
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1371
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3847
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="9">
     <Element>
       <ComponentName>
-        VisualRegistryView
+        Preview
+      </ComponentName>
+      <X>
+        634
+      </X>
+      <Y>
+        375
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DocumentTemplate
       </ComponentName>
       <X>
         1000
       </X>
       <Y>
-        600
+        200
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistryCodeSaver
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <Y>
+        475
       </Y>
       <Note>
         
@@ -35,13 +96,13 @@
     </Element>
     <Element>
       <ComponentName>
-        DocumentTemplate
+        VisualRegistryView
       </ComponentName>
       <X>
         1000
       </X>
       <Y>
-        200
+        600
       </Y>
       <Note>
         
@@ -77,20 +138,6 @@
     </Element>
     <Element>
       <ComponentName>
-        Preview
-      </ComponentName>
-      <X>
-        634
-      </X>
-      <Y>
-        375
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         RegistryConsistInfo
       </ComponentName>
       <X>
@@ -98,20 +145,6 @@
       </X>
       <Y>
         700
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryCodeSaver
-      </ComponentName>
-      <X>
-        400
-      </X>
-      <Y>
-        475
       </Y>
       <Note>
         
