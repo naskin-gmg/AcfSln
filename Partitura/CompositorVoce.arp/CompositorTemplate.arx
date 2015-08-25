@@ -1013,7 +1013,7 @@
                     </IsEnabled>
                     <Values count="1">
                       <Value>
-                        xar
+                        acc
                       </Value>
                     </Values>
                   </Data>
@@ -1050,7 +1050,7 @@
                     </IsEnabled>
                     <Values count="1">
                       <Value>
-                        Compact ACF Registry
+                        ACF Composed Component
                       </Value>
                     </Values>
                   </Data>

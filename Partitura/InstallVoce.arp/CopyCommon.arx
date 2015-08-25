@@ -228,9 +228,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   *.xpc
+                </Value>
+                <Value>
+                  *.awc
                 </Value>
                 <Value>
                   *.pri

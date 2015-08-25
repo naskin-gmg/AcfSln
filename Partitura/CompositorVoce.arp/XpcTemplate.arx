@@ -648,7 +648,7 @@
                     </IsEnabled>
                     <Values count="1">
                       <Value>
-                        xac
+                        awc
                       </Value>
                     </Values>
                   </Data>
@@ -685,7 +685,7 @@
                     </IsEnabled>
                     <Values count="1">
                       <Value>
-                        XML ACF Configuration File
+                        ACF Workspace Configuration File
                       </Value>
                     </Values>
                   </Data>
@@ -757,7 +757,7 @@
                     <IsEnabled>
                       true
                     </IsEnabled>
-                    <Values count="1">
+                    <Values count="2">
                       <Value>
                         xpc
                       </Value>

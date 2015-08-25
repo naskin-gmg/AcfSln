@@ -761,12 +761,9 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 	if (m_documentManagerCompPtr.IsValid() && m_envManagerCompPtr.IsValid() && (itemPtr != NULL)){
 		const icomp::CComponentAddress& address = itemPtr->GetAddress();
 
-		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
+		QString filePath = m_envManagerCompPtr->GetRegistryPath(address);
 
-		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(m_envManagerCompPtr->GetPackagePath(address.GetPackageId()));
-			QString filePath = packageDir.absoluteFilePath(QString(address.GetComponentId()) + ".arx");
-
+		if (!filePath.isEmpty()){
 			m_documentManagerCompPtr->OpenDocument(NULL, &filePath);
 		}
 	}
