@@ -757,7 +757,7 @@
                     <IsEnabled>
                       true
                     </IsEnabled>
-                    <Values count="2">
+                    <Values count="1">
                       <Value>
                         xpc
                       </Value>
