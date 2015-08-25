@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          2934
+          3841
         </Number>
         <Description>
           ACF
@@ -18,21 +29,10 @@
           1
         </Id>
         <Number>
-          920
+          1368
         </Number>
         <Description>
           ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -173,7 +173,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
+                <Value>
+                  xac
+                </Value>
                 <Value>
                   xpc
                 </Value>
@@ -273,55 +276,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="6">
-    <Component>
-      <ExportedId>
-        ConfigFile
-      </ExportedId>
-      <ComponentId>
-        Settings/ConfigFile
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HtmlBrowserFile
-      </ExportedId>
-      <ComponentId>
-        Settings/HtmlBrowserFile
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        HtmlEditorFile
-      </ExportedId>
-      <ComponentId>
-        Settings/HtmlEditorFile
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        LanguageSelection
-      </ExportedId>
-      <ComponentId>
-        Settings/LanguageSelection
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        PreviewCommandFile
-      </ExportedId>
-      <ComponentId>
-        Settings/PreviewCommandFile
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        TranslationManager
-      </ExportedId>
-      <ComponentId>
-        Settings/TranslationManager
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     Dialog displaying and managing compositor settings

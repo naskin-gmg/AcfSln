@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3841
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          920
+          328706
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264194
+          1368
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -90,7 +90,7 @@
                 true
               </IsEnabled>
               <Value>
-                XmlFileSerializer
+                XpcLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -360,117 +360,6 @@
     </Element>
     <Element>
       <Id>
-        XmlFileSerializer
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        XmlFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              EnableVerbose
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              EnableVerbose
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  xpc
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TypeDescriptions
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ACF Configuration File
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         XpcEditorGui
       </Id>
       <PackageId>
@@ -502,7 +391,7 @@
                 true
               </IsEnabled>
               <Value>
-                XmlFileSerializer
+                XpcLoader
               </Value>
             </Data>
           </AttributeInfo>
@@ -565,6 +454,59 @@
     </Element>
     <Element>
       <Id>
+        XpcLoader
+      </Id>
+      <PackageId>
+        
+      </PackageId>
+      <ComponentId>
+        XpcLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         XpcModel
       </Id>
       <PackageId>
@@ -585,7 +527,346 @@
       </Data>
     </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="0">
+  <EmbeddedRegistriesList count="1">
+    <EmbeddedRegistry>
+      <Id>
+        XpcLoader
+      </Id>
+      <Data>
+        <ElementsList count="3">
+          <Element>
+            <Id>
+              ComposedLoader
+            </Id>
+            <PackageId>
+              BasePck
+            </PackageId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="2">
+                <AttributeInfo>
+                  <Id>
+                    CommonDescription
+                  </Id>
+                  <Type>
+                    String
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      ACF Configuration File
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    SlaveLoaders
+                  </Id>
+                  <Type>
+                    Reference[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="2">
+                      <Value>
+                        NewFormatSerializer
+                      </Value>
+                      <Value>
+                        OldFormatSerializer
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              NewFormatSerializer
+            </Id>
+            <PackageId>
+              QtPck
+            </PackageId>
+            <ComponentId>
+              CompactXmlFileSerializer
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="5">
+                <AttributeInfo>
+                  <Id>
+                    EnableVerbose
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    EnableVerbose
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    FileExtensions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        xac
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    TypeDescriptions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        XML ACF Configuration File
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    VersionInfo
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    VersionInfo
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              OldFormatSerializer
+            </Id>
+            <PackageId>
+              BasePck
+            </PackageId>
+            <ComponentId>
+              XmlFileSerializer
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="5">
+                <AttributeInfo>
+                  <Id>
+                    EnableVerbose
+                  </Id>
+                  <Type>
+                    Boolean
+                  </Type>
+                  <ExportId>
+                    EnableVerbose
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    FileExtensions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        xpc
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    TypeDescriptions
+                  </Id>
+                  <Type>
+                    String[]
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Values count="1">
+                      <Value>
+                        Old ACF Configuration File
+                      </Value>
+                    </Values>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    VersionInfo
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    VersionInfo
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+        </ElementsList>
+        <EmbeddedRegistriesList count="0">
+        </EmbeddedRegistriesList>
+        <ExportedInterfaces count="4">
+          <Interface>
+            <InterfaceId>
+              ifile::IFilePersistence
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              ifile::IFilePersistenceInfo
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              ifile::IFileTypeInfo
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IPolymorphic
+            </InterfaceId>
+            <ComponentId>
+              ComposedLoader
+            </ComponentId>
+          </Interface>
+        </ExportedInterfaces>
+        <ExportedComponents count="0">
+        </ExportedComponents>
+        <Description>
+          
+        </Description>
+        <Keywords>
+          
+        </Keywords>
+      </Data>
+    </EmbeddedRegistry>
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
