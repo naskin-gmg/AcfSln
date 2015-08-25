@@ -276,7 +276,11 @@ bool CVisualRegistry::Serialize(iser::IArchive& archive)
 	bool retVal = SerializeRegistry(archive);
 
 	if (m_serializeUserData){
+		static iser::CArchiveTag userDataTag("UserData", "User specific part of registry", iser::CArchiveTag::TT_GROUP);
+
+		retVal = retVal && archive.BeginTag(userDataTag);
 		retVal = retVal && SerializeUserData(archive);
+		retVal = retVal && archive.EndTag(userDataTag);
 	}
 
 	return retVal;
