@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/istd.h"
 #include "iser/ISerializable.h"
 
 
@@ -25,8 +26,10 @@ public:
 		IM_NO_INTERPOLATION,
 		IM_BILINEAR,
 		IM_BICUBIC,
-		IM_NEAREST_NEIGHBOR
+		IM_NEAREST_NEIGHBOUR
 	};
+
+	I_DECLARE_ENUM(InterpolationMode, IM_NO_INTERPOLATION, IM_BILINEAR, IM_BICUBIC, IM_NEAREST_NEIGHBOUR);
 
 	/**
 		Get used interpolation mode.

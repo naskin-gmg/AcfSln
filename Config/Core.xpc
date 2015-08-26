@@ -31,9 +31,12 @@
       $(ACFDIR)/Config/Core.xpc
     </FilePath>
   </ConfigFiles>
-  <PackageDirs count="2">
+  <PackageDirs count="3">
     <Dir>
       ../Bin/$(ConfigurationDir)
+    </Dir>
+    <Dir>
+		$(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)
     </Dir>
     <Dir>
       ../Partitura
