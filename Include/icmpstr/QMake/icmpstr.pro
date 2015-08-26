@@ -3,8 +3,8 @@ TARGET = icmpstr
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
 
-RESOURCES += ../*.qrc
-FORMS += ../*.ui
+RESOURCES += $$_PRO_FILE_PWD_/../*.qrc
+FORMS += $$_PRO_FILE_PWD_/../*.ui
 
 LIBS += -licomp
 LIBS += -liqtgui

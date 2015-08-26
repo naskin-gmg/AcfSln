@@ -6,13 +6,12 @@ include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl
 
-
-RESOURCES += ../*.qrc
+RESOURCES += $$_PRO_FILE_PWD_/../*.qrc
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lAcfSlnLoc
 LIBS += -lAcfLoc
 
-HEADERS -= ../*.h
+HEADERS =
 
 win32-msvc*{
 	QMAKE_CXXFLAGS += /wd4264

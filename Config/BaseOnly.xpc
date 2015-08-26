@@ -33,7 +33,7 @@
   </ConfigFiles>
   <PackageDirs count="0">
   </PackageDirs>
-  <PackageFiles count="3">
+  <PackageFiles count="4">
     <FilePath>
       ../Partitura/AcfSlnVoce.arp
     </FilePath>
@@ -43,6 +43,9 @@
     <FilePath>
       ../Bin/$(ConfigurationDir)FileProcessingPck.arp
     </FilePath>
+	  <FilePath>
+		  $(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)FileProcessingPck.arp
+	  </FilePath>
   </PackageFiles>
   <RegistryFiles count="0">
   </RegistryFiles>
