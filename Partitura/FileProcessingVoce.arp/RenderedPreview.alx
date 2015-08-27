@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3653
+          328450
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1213
+          1377
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          328449
+          3856
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -40,13 +40,13 @@
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        BinaryFileSerializer
+        RenderedObjectFileLoader
       </ComponentName>
       <X>
-        875
+        600
       </X>
       <Y>
-        475
+        375
       </Y>
       <Note>
         
@@ -54,27 +54,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Bitmap
+        FilePreviewGui
       </ComponentName>
       <X>
-        875
+        600
       </X>
       <Y>
         175
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        File
-      </ComponentName>
-      <X>
-        375
-      </X>
-      <Y>
-        475
       </Y>
       <Note>
         
@@ -96,13 +82,13 @@
     </Element>
     <Element>
       <ComponentName>
-        RenderedObjectFileLoader
+        AutoPersistence
       </ComponentName>
       <X>
         600
       </X>
       <Y>
-        350
+        650
       </Y>
       <Note>
         
@@ -110,10 +96,10 @@
     </Element>
     <Element>
       <ComponentName>
-        AutoPersistence
+        File
       </ComponentName>
       <X>
-        600
+        225
       </X>
       <Y>
         475
@@ -124,10 +110,24 @@
     </Element>
     <Element>
       <ComponentName>
-        FilePreviewGui
+        BinaryFileSerializer
       </ComponentName>
       <X>
-        600
+        1000
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Bitmap
+      </ComponentName>
+      <X>
+        875
       </X>
       <Y>
         175
