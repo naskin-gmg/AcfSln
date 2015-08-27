@@ -45,7 +45,6 @@ win*{
 	RC_INCLUDEPATH = $$_PRO_FILE_PWD_
 }
 
-
 include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
 include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)

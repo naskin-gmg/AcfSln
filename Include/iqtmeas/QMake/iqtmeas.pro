@@ -3,4 +3,4 @@ TARGET = iqtmeas
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
 
-FORMS += ../*.ui
+FORMS += $$_PRO_FILE_PWD_/../*.ui
