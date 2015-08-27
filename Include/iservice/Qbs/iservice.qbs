@@ -2,8 +2,6 @@ import qbs.base 1.0
 import AcfLibrary as AcfLibrary
 
 AcfLibrary{
-	name: "iservice"
-
     files: [
         "../C*.h", "../C*.cpp",
         "../qtservice.h", "../qtservice.cpp",

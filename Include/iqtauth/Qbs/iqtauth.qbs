@@ -2,8 +2,6 @@ import qbs.base 1.0
 import AcfLibrary as AcfLibrary
 
 AcfLibrary{
-	name: "iqtauth"
-
 	files: ["../*.h", "../*.cpp", "../*.ui"]
 
 	Depends{ name: "iauth" }
