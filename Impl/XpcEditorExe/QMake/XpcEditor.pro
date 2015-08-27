@@ -19,16 +19,31 @@ win32-msvc*{
 
 QT += xml
 
-ARXC_CONFIG = ../../../Config/Core.xpc
-ARXC_FILES += ../*.arx
-ARXC_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
-
 mac{
-	ICON += ../Mac/XpcEditor.icns
-	QMAKE_INFO_PLIST = ../Mac/Info.plist
+	ICON += $$PWD/../Mac/$$TARGET.icns
+	QMAKE_INFO_PLIST = $$PWD/../Mac/Info.plist
 }
 
 
-include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
-include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
-include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+# configuration of custom builds
+
+# ARX compiler
+ARXC_CONFIG = $$PWD/../../../Config/Core.xpc
+ARXC_FILES += $$PWD/../*.arx
+ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
+
+win*{
+	# File transformation
+	ACF_CONVERT_FILES = $$PWD/../VC/*.rc.xtracf
+	ACF_CONVERT_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
+	ACF_CONVERT_REGISTRY = $$PWD/../../../Partitura/AcfInfoCopyApp.arx
+	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.xpc
+
+	RC_FILE = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET/XpcEditor.rc
+	RC_INCLUDEPATH = $$_PRO_FILE_PWD_
+}
+
+
+include(../../../../Acf/Config/QMake/CustomBuild.pri)
+include(../../../../Acf/Config/QMake/AcfQt.pri)
+include(../../../../Acf/Config/QMake/AcfStd.pri)
