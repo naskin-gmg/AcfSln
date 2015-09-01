@@ -250,6 +250,34 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 }
 
 
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CRenderedObjectFileLoaderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	int loadersCount = m_fileLoadersCompPtr.GetCount();
+	for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
+		ifile::IFilePersistence* loaderPtr = m_fileLoadersCompPtr[loaderIndex];
+		if (loaderPtr != NULL){
+			if ((loaderIndex < m_previewGenerationProcessorsCompPtr.GetCount()) && (loaderIndex < m_dataObjectFactCompPtr.GetCount())){
+				Configuration configuration;
+
+				configuration.filePersistencePtr = loaderPtr;
+				configuration.dataObjectPtr.SetPtr(m_dataObjectFactCompPtr.CreateInstance(loaderIndex));
+				configuration.previewGenerationProcessorPtr = m_previewGenerationProcessorsCompPtr[loaderIndex];
+
+				if (configuration.IsValid()){
+					m_workingConfigurations.push_back(configuration);
+				}
+			}
+		}
+	}
+}
+
+
 // private methods
 
 ifile::IFilePersistence* CRenderedObjectFileLoaderComp::GetLoaderForFile(const QString& filePath) const
@@ -277,17 +305,12 @@ ifile::IFilePersistence* CRenderedObjectFileLoaderComp::GetLoaderForFile(const Q
 
 istd::IChangeable* CRenderedObjectFileLoaderComp::GetDataObjectForFile(const QString& filePath) const
 {
-	int objectTypesCount = m_objectsListCompPtr.GetCount();
-
 	ifile::IFilePersistence* loaderPtr = GetLoaderForFile(filePath);
-	if (loaderPtr != NULL){
-		int loadersCount = m_fileLoadersCompPtr.GetCount();
-		for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
-			if (m_fileLoadersCompPtr[loaderIndex] == loaderPtr){
-				if (loaderIndex < objectTypesCount){
-					return m_objectsListCompPtr[loaderIndex];
-				}
-			}
+	for (int configIndex = 0; configIndex < m_workingConfigurations.count(); ++configIndex){
+		if (m_workingConfigurations[configIndex].filePersistencePtr == loaderPtr){
+			Q_ASSERT(m_workingConfigurations[configIndex].IsValid());
+
+			return m_workingConfigurations[configIndex].dataObjectPtr.GetPtr();
 		}
 	}
 
@@ -297,17 +320,12 @@ istd::IChangeable* CRenderedObjectFileLoaderComp::GetDataObjectForFile(const QSt
 
 iproc::IProcessor* CRenderedObjectFileLoaderComp::GetPreviewGeneratorForFile(const QString& filePath) const
 {
-	int processorsCount = m_previewGenerationProcessorsCompPtr.GetCount();
-
 	ifile::IFilePersistence* loaderPtr = GetLoaderForFile(filePath);
-	if (loaderPtr != NULL){
-		int loadersCount = m_fileLoadersCompPtr.GetCount();
-		for (int loaderIndex = 0; loaderIndex < loadersCount; ++loaderIndex){
-			if (m_fileLoadersCompPtr[loaderIndex] == loaderPtr){
-				if (loaderIndex < processorsCount){
-					return m_previewGenerationProcessorsCompPtr[loaderIndex];
-				}
-			}
+	for (int configIndex = 0; configIndex < m_workingConfigurations.count(); ++configIndex){
+		if (m_workingConfigurations[configIndex].filePersistencePtr == loaderPtr){
+			Q_ASSERT(m_workingConfigurations[configIndex].IsValid());
+
+			return m_workingConfigurations[configIndex].previewGenerationProcessorPtr;
 		}
 	}
 

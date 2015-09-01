@@ -31,7 +31,7 @@ public:
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_fileLoadersCompPtr, "FileLoaders", "List of the supported file loaders, which will be used to open the input file", true);
-		I_ASSIGN_MULTI_0(m_objectsListCompPtr, "DataObjects", "List of data object which will be loaded for preview generation", true);
+		I_ASSIGN_MULTI_0(m_dataObjectFactCompPtr, "DataObjectFactories", "List of factories used for creation of preview's data model", true);
 		I_ASSIGN_MULTI_0(m_previewGenerationProcessorsCompPtr, "PreviewGenerationProcessors", "Processor used for generation of the preview bitmap", true);
 		I_ASSIGN(m_widthAttrPtr, "BitmapWidth", "Width of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_heightAttrPtr, "BitmapHeight", "Height of the generated preview bitmap", true, 128);
@@ -60,6 +60,10 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	ifile::IFilePersistence* GetLoaderForFile(const QString& filePath) const;
 	istd::IChangeable* GetDataObjectForFile(const QString& filePath) const;
@@ -67,11 +71,31 @@ private:
 
 private:
 	I_MULTIREF(ifile::IFilePersistence, m_fileLoadersCompPtr);
-	I_MULTIREF(istd::IChangeable, m_objectsListCompPtr);
+	I_MULTIFACT(istd::IChangeable, m_dataObjectFactCompPtr);
 	I_MULTIREF(iproc::IProcessor, m_previewGenerationProcessorsCompPtr);
 	I_ATTR(int, m_widthAttrPtr);
 	I_ATTR(int, m_heightAttrPtr);
 	I_ATTR(int, m_maxCacheSizeAttrPtr);
+
+	struct Configuration
+	{
+		Configuration()
+			:filePersistencePtr(NULL),
+			previewGenerationProcessorPtr(NULL)
+		{
+		}
+
+		bool IsValid() const
+		{
+			return (filePersistencePtr != NULL) && dataObjectPtr.IsValid() && (previewGenerationProcessorPtr != NULL);
+		}
+
+		ifile::IFilePersistence* filePersistencePtr;
+		istd::TSmartPtr<istd::IChangeable> dataObjectPtr;
+		iproc::IProcessor* previewGenerationProcessorPtr;
+	};
+
+	typedef QList<Configuration> Configurations;
 
 	struct FileInfo
 	{
@@ -82,6 +106,8 @@ private:
 	typedef QMap<QString, FileInfo> PreviewCache;
 
 	mutable PreviewCache m_previewCache;
+
+	mutable Configurations m_workingConfigurations;
 };
 
 
