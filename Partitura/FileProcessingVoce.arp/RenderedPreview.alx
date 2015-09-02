@@ -40,27 +40,13 @@
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <Y>
-        175
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        FilePreviewGui
+        RenderedObjectFileLoader
       </ComponentName>
       <X>
         600
       </X>
       <Y>
-        175
+        375
       </Y>
       <Note>
         
@@ -68,10 +54,10 @@
     </Element>
     <Element>
       <ComponentName>
-        ImageView
+        Bitmap
       </ComponentName>
       <X>
-        300
+        875
       </X>
       <Y>
         175
@@ -96,20 +82,6 @@
     </Element>
     <Element>
       <ComponentName>
-        AutoPersistence
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <Y>
-        650
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         File
       </ComponentName>
       <X>
@@ -124,13 +96,41 @@
     </Element>
     <Element>
       <ComponentName>
-        RenderedObjectFileLoader
+        AutoPersistence
       </ComponentName>
       <X>
         600
       </X>
       <Y>
-        375
+        650
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageView
+      </ComponentName>
+      <X>
+        300
+      </X>
+      <Y>
+        175
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        FilePreviewGui
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <Y>
+        175
       </Y>
       <Note>
         

@@ -272,7 +272,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              AsynchronPreviewGenerationEnabled
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              AsynchronPreviewGenerationEnabled
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               FileLoader
@@ -350,7 +366,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               BackgroundMode
@@ -384,6 +400,22 @@
               <Value>
                 1
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FullScreenModeSupported
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              FullScreenModeSupported
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
