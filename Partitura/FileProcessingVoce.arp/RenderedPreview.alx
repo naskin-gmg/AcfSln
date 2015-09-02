@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328450
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1377
+          1382
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           0
         </Id>
         <Number>
-          3856
+          3865
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328450
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -40,13 +40,13 @@
   <PositionMap count="7">
     <Element>
       <ComponentName>
-        RenderedObjectFileLoader
+        Bitmap
       </ComponentName>
       <X>
-        600
+        875
       </X>
       <Y>
-        375
+        175
       </Y>
       <Note>
         
@@ -82,6 +82,20 @@
     </Element>
     <Element>
       <ComponentName>
+        BinaryFileSerializer
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         AutoPersistence
       </ComponentName>
       <X>
@@ -110,27 +124,13 @@
     </Element>
     <Element>
       <ComponentName>
-        BinaryFileSerializer
+        RenderedObjectFileLoader
       </ComponentName>
       <X>
-        1000
+        600
       </X>
       <Y>
-        475
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <Y>
-        175
+        375
       </Y>
       <Note>
         

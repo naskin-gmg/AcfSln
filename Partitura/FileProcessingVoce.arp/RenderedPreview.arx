@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328450
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1377
+          1382
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           0
         </Id>
         <Number>
-          3856
+          3865
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328450
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -473,13 +473,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DataObjects
+              DataObjectFactories
             </Id>
             <Type>
-              Reference[]
+              Factory[]
             </Type>
             <ExportId>
-              DataObjects
+              DataObjectFactories
             </ExportId>
             <Data>
               <IsEnabled>
