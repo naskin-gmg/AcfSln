@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3202
+          3868
         </Number>
         <Description>
           ACF
@@ -18,26 +29,15 @@
           1
         </Id>
         <Number>
-          1050
+          1385
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="10">
     <Element>
       <Id>
         AboutDialog
@@ -422,10 +422,10 @@
         InspectionTask
       </Id>
       <PackageId>
-        InspectionPck
+        
       </PackageId>
       <ComponentId>
-        InspectionTask
+        Inspection
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -434,7 +434,42 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                StandaloneApp/ApplicationInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Inspections
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              Inspections
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Log
@@ -452,22 +487,6 @@
               <Value>
                 LogDock
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Subtasks
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              Inspections
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -706,103 +725,6 @@
               </IsEnabled>
               <Value>
                 VersionInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SettingsPersistence
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        SettingsPersistence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                StandaloneApp/ApplicationInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LogDock
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Object
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                InspectionTask
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RootKey
-            </Id>
-            <Type>
-              Id
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LastParameters
               </Value>
             </Data>
           </AttributeInfo>
@@ -1347,7 +1269,236 @@
       </Data>
     </Element>
   </ElementsList>
-  <EmbeddedRegistriesList count="0">
+  <EmbeddedRegistriesList count="1">
+    <EmbeddedRegistry>
+      <Id>
+        Inspection
+      </Id>
+      <Data>
+        <ElementsList count="2">
+          <Element>
+            <Id>
+              InspectionTask
+            </Id>
+            <PackageId>
+              InspectionPck
+            </PackageId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                0
+              </Flags>
+              <AttributeInfoMap count="2">
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Subtasks
+                  </Id>
+                  <Type>
+                    Reference[]
+                  </Type>
+                  <ExportId>
+                    Inspections
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+          <Element>
+            <Id>
+              SettingsPersistence
+            </Id>
+            <PackageId>
+              AcfGuiVoce
+            </PackageId>
+            <ComponentId>
+              SettingsPersistence
+            </ComponentId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Flags>
+                1
+              </Flags>
+              <AttributeInfoMap count="4">
+                <AttributeInfo>
+                  <Id>
+                    ApplicationInfo
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    ApplicationInfo
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Log
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    Log
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      false
+                    </IsEnabled>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    Object
+                  </Id>
+                  <Type>
+                    Reference
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      InspectionTask
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+                <AttributeInfo>
+                  <Id>
+                    RootKey
+                  </Id>
+                  <Type>
+                    Id
+                  </Type>
+                  <ExportId>
+                    
+                  </ExportId>
+                  <Data>
+                    <IsEnabled>
+                      true
+                    </IsEnabled>
+                    <Value>
+                      LastParameters
+                    </Value>
+                  </Data>
+                </AttributeInfo>
+              </AttributeInfoMap>
+            </Data>
+          </Element>
+        </ElementsList>
+        <EmbeddedRegistriesList count="0">
+        </EmbeddedRegistriesList>
+        <ExportedInterfaces count="7">
+          <Interface>
+            <InterfaceId>
+              iinsp::IInspectionTask
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              iinsp::ISupplier
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              imod::IModel
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              iser::ISerializable
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IChangeable
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IInformationProvider
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+          <Interface>
+            <InterfaceId>
+              istd::IPolymorphic
+            </InterfaceId>
+            <ComponentId>
+              InspectionTask
+            </ComponentId>
+          </Interface>
+        </ExportedInterfaces>
+        <ExportedComponents count="1">
+          <Component>
+            <ExportedId>
+              Parameters
+            </ExportedId>
+            <ComponentId>
+              InspectionTask/Parameters
+            </ComponentId>
+          </Component>
+        </ExportedComponents>
+        <Description>
+          
+        </Description>
+        <Keywords>
+          
+        </Keywords>
+      </Data>
+    </EmbeddedRegistry>
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
