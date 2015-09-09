@@ -23,7 +23,7 @@ namespace iqtcam
 
 void CScaleCalibrationEditorComp::UpdateModel() const
 {
-	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetModelPtr());
+	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetObservedModel());
 	if (model == NULL){
 		return;
 	}
@@ -56,7 +56,7 @@ void CScaleCalibrationEditorComp::OnGuiCreated()
 
 void CScaleCalibrationEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetModelPtr());
+	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetObservedModel());
 	if (model == NULL){
 		return;
 	}

@@ -74,7 +74,7 @@ void CDirectoryItemGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 {
 	Q_ASSERT(IsGuiCreated());
 
-	ihotf::IHotfolderStatistics* objectPtr = GetObjectPtr();
+	ihotf::IHotfolderStatistics* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		DirectoryLabel->setVisible(!m_directoryPath.isEmpty());
 		DirectoryLabel->setText(m_directoryPath);

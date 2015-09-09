@@ -26,7 +26,7 @@ void CProcessingItemPreviewGuiComp::UpdateGui(const istd::IChangeable::ChangeSet
 {
 	Q_ASSERT(IsGuiCreated());
 
-	ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
+	ihotf::IHotfolderProcessingItem* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		int processingState = objectPtr->GetProcessingState();
 		switch (processingState){
@@ -103,7 +103,7 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 	Q_ASSERT(m_outputFileNameParamModelCompPtr.IsValid());
 
 	if (m_inputPreviewObserverCompPtr.IsValid() && m_inputFileNameParamModelCompPtr.IsValid()){
-		ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
+		ihotf::IHotfolderProcessingItem* objectPtr = GetObservedObject();
 		if (objectPtr != NULL && m_inputFileNameParamCompPtr.IsValid()){
 			m_inputFileNameParamCompPtr->SetPath(objectPtr->GetInputFile());
 		
@@ -112,7 +112,7 @@ void CProcessingItemPreviewGuiComp::OnGuiModelAttached()
 	}
 
 	if (m_outputPreviewObserverCompPtr.IsValid() && m_outputFileNameParamModelCompPtr.IsValid()){
-		ihotf::IHotfolderProcessingItem* objectPtr = GetObjectPtr();
+		ihotf::IHotfolderProcessingItem* objectPtr = GetObservedObject();
 		if (objectPtr != NULL && m_outputFileNameParamCompPtr.IsValid()){
 
 			if (QFile::exists(objectPtr->GetOutputFile())){

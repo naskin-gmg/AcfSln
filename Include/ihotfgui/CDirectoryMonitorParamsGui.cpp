@@ -24,7 +24,7 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	ihotf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
+	ihotf::IDirectoryMonitorParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	objectPtr->SetPoolingIntervall(PoolingIntervallSpin->value());
@@ -91,7 +91,7 @@ void CDirectoryMonitorParamsGui::UpdateGui(const istd::IChangeable::ChangeSet& /
 {
 	Q_ASSERT(IsGuiCreated());
 
-	ihotf::IDirectoryMonitorParams* objectPtr = GetObjectPtr();
+	ihotf::IDirectoryMonitorParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		ResetEditor();
 

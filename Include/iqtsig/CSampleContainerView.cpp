@@ -36,7 +36,7 @@ void CSampleContainerView::OnUpdate(const istd::IChangeable::ChangeSet& changeSe
 
 void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 {
-	const imeas::IDataSequence* samplesPtr = GetObjectPtr();
+	const imeas::IDataSequence* samplesPtr = GetObservedObject();
 	if (samplesPtr != NULL){
 		QPainter painter(this);
 

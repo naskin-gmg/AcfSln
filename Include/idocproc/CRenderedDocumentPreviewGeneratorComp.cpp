@@ -73,7 +73,7 @@ void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 
 	m_previewBitmaps.Reset();
 
-	idoc::IMultiPageDocument* documentPtr = GetObjectPtr();
+	idoc::IMultiPageDocument* documentPtr = GetObservedObject();
 	if ((documentPtr != NULL) && m_renderingProcessorCompPtr.IsValid()){
 		int pageCount = documentPtr->GetPagesCount();
 

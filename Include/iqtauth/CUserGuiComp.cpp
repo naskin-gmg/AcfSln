@@ -25,7 +25,7 @@ CUserGuiComp::CUserGuiComp()
 
 bool CUserGuiComp::TryChangePassword(iauth::CUser& user) const
 {
-	iauth::IUsersManager* managerPtr = GetObjectPtr();
+	iauth::IUsersManager* managerPtr = GetObservedObject();
 	if (managerPtr != NULL){
 		istd::CChangeNotifier notifier(managerPtr);
 
@@ -132,7 +132,7 @@ void CUserGuiComp::on_PushChangePassword_clicked()
 void CUserGuiComp::on_PushOpenUserManager_clicked()
 {
 	if (m_userLoginIfPtr.IsValid()){
-		iauth::IUsersManager* managerPtr = GetObjectPtr();
+		iauth::IUsersManager* managerPtr = GetObservedObject();
 		if (managerPtr != NULL){
 			istd::CChangeNotifier notifier(managerPtr);
 

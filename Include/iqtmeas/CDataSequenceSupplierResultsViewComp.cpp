@@ -12,7 +12,7 @@ namespace iqtmeas
 void CDataSequenceSupplierResultsViewComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	if (changeSet.Contains(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
-		imeas::IDataSequenceProvider* providerPtr = dynamic_cast<imeas::IDataSequenceProvider*>(GetModelPtr());
+		imeas::IDataSequenceProvider* providerPtr = dynamic_cast<imeas::IDataSequenceProvider*>(GetObservedModel());
 		if (providerPtr != NULL){
 			const imod::IModel* productModelPtr = dynamic_cast<const imod::IModel*>(providerPtr->GetDataSequence());
 			if ((productModelPtr != NULL) && m_resultsObserverCompPtr.IsValid()){

@@ -15,7 +15,7 @@ void CCircleFinderParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::ICircleFinderParams* objectPtr = GetObjectPtr();
+	iipr::ICircleFinderParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	objectPtr->SetOutlierEliminationEnabled(EnableOutliersElimination->isChecked());
@@ -49,7 +49,7 @@ void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 
 	bool isUnitKnown = false;
 
-	iipr::ICircleFinderParams* objectPtr = GetObjectPtr();
+	iipr::ICircleFinderParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		EnableOutliersElimination->setChecked(objectPtr->IsOutlierEliminationEnabled());
 

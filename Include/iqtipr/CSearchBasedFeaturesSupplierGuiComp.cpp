@@ -105,7 +105,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 
 	double maxScoreRadius = 50;
 
-	iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
 		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
 		if (providerPtr != NULL){

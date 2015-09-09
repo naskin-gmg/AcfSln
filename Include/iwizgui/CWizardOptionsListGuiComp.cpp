@@ -24,7 +24,7 @@ void CWizardOptionsListGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iprm::ISelectionParam* objectPtr = GetObjectPtr();
+	iprm::ISelectionParam* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	QList<QTreeWidgetItem*> selectedItems = OptionsList->selectedItems();
@@ -61,7 +61,7 @@ void CWizardOptionsListGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*
 
 	OptionsList->clear();
 	
-	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
+	iwiz::IParamsManagerWizard* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		CreateOptionsTree(objectPtr);
 	}

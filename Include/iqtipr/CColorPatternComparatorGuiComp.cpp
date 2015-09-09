@@ -42,7 +42,7 @@ void CColorPatternComparatorGuiComp::OnGuiCreated()
 
 void CColorPatternComparatorGuiComp::UpdateModel() const
 {
-	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObjectPtr());
+	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObservedObject());
 	if (numericValueProviderPtr != NULL){
 		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
 		if (supplierPtr != NULL){
@@ -65,7 +65,7 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 	Q_ASSERT(IsGuiCreated());
 
-	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObjectPtr());
+	const imeas::INumericValueProvider* numericValueProviderPtr = CompCastPtr<const imeas::INumericValueProvider>(GetObservedObject());
 	if (numericValueProviderPtr != NULL){
 		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
 		if (supplierPtr != NULL){

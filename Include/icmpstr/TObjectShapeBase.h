@@ -108,7 +108,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnSelectionChanged(bool i
 template <class GraphicsItemClass, class ObjectClass>
 void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnPositionChanged(const QPointF& position)
 {
-	i2d::IObject2d* objectPtr = BaseClass2::GetObjectPtr();
+	i2d::IObject2d* objectPtr = BaseClass2::GetObservedObject();
 	if (objectPtr != NULL){
 		QPointF offset = position - m_lastPosition;
 
@@ -141,7 +141,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mousePressEvent(QGraphics
 		m_lastPosition = BaseClass::pos();
 
 		static const istd::IChangeable::ChangeSet dragChangeSet(i2d::IObject2d::CF_OBJECT_POSITION, "Drag object");
-		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObjectPtr(), &dragChangeSet));
+		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObservedObject(), &dragChangeSet));
 	}
 }
 
@@ -171,7 +171,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 {
 	Q_ASSERT(!m_isShapeUpdateBlocked);
 
-	ObjectClass* objectPtr = BaseClass2::GetObjectPtr();
+	ObjectClass* objectPtr = BaseClass2::GetObservedObject();
 	if ((objectPtr != NULL) && !changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
 		m_isShapeUpdateBlocked = true;
 

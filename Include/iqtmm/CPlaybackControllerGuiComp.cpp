@@ -19,7 +19,7 @@ void CPlaybackControllerGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& c
 {
 	Q_ASSERT(IsGuiCreated());
 
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		int supportedFeatures = objectPtr->GetSupportedFeatures();
 		bool isPlayable = ((supportedFeatures & imm::IMediaController::SF_PLAY) != 0);
@@ -109,7 +109,7 @@ void CPlaybackControllerGuiComp::OnGuiDestroyed()
 
 void CPlaybackControllerGuiComp::on_PlayButton_toggled(bool isToggled)
 {
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		UpdateBlocker updateBlocker(this);
 
@@ -141,7 +141,7 @@ void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int frameIndex)
 
 	Q_ASSERT(frameIndex > 0);
 
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		objectPtr->SetCurrentFrame(frameIndex - 1);
 
@@ -161,7 +161,7 @@ void CPlaybackControllerGuiComp::on_FrameIndexSB_valueChanged(int frameIndex)
 
 	UpdateBlocker blocker(this);
 
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		objectPtr->SetCurrentFrame(frameIndex - 1);
 
@@ -181,7 +181,7 @@ void CPlaybackControllerGuiComp::on_TimeEdit_editingFinished()
 
 	UpdateBlocker blocker(this);
 
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		QTime time = TimeEdit->time();
 		double t = (time.hour() * 60.0 + time.minute()) * 60 + time.second() + time.msec() * 0.001;
@@ -198,7 +198,7 @@ void CPlaybackControllerGuiComp::on_TimeEdit_editingFinished()
 
 void CPlaybackControllerGuiComp::OnTimerTick()
 {
-	imm::IVideoController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		int framesCount = objectPtr->GetFramesCount();
 		if (framesCount > 0){

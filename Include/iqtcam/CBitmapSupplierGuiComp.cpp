@@ -94,7 +94,7 @@ void CBitmapSupplierGuiComp::OnTimerReady()
 
 void CBitmapSupplierGuiComp::DoSnap(bool noGui)
 {
-	iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
@@ -193,7 +193,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
-	iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(GetObjectPtr());
+	iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(GetObservedObject());
 	if (providerPtr != NULL){
 		bitmapPtr = providerPtr->GetBitmap();
 	}

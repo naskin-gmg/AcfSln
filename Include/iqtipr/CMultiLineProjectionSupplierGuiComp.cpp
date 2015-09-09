@@ -91,7 +91,7 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 	istd::CChangeNotifier changePtr(&m_projectionData);
 	m_projectionData.ResetSequence();
 
-	const imeas::IMultiDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IMultiDataSequenceProvider*>(GetObjectPtr());
+	const imeas::IMultiDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IMultiDataSequenceProvider*>(GetObservedObject());
 	if (providerPtr != NULL){
 		int count = providerPtr->GetSequencesCount();
 

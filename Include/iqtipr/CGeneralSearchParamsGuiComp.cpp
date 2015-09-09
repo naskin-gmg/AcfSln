@@ -17,7 +17,7 @@ void CGeneralSearchParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::ISearchParams* objectPtr = GetObjectPtr();
+	iipr::ISearchParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(objectPtr);
@@ -65,7 +65,7 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::ISearchParams* objectPtr = GetObjectPtr();
+	iipr::ISearchParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		MinScoreSB->setValue(objectPtr->GetMinScore() * 100);
 		ModelOccurenceSB->setValue(objectPtr->GetNominalModelsCount());
@@ -110,7 +110,7 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 void CGeneralSearchParamsGuiComp::OnParamsChanged()
 {
-	if (!IsUpdateBlocked() && GetModelPtr() != NULL){
+	if (!IsUpdateBlocked() && GetObservedModel() != NULL){
 		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();

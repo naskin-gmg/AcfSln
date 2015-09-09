@@ -20,7 +20,7 @@ namespace iedgegui
 
 void CEdgeLineContainerShape::Draw(QPainter& drawContext) const
 {
-	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetObservedModel());
 	if (IsDisplayConnected() && containerPtr != NULL){
 		int numLines = containerPtr->GetItemsCount();
 
@@ -114,7 +114,7 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 
 	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 
-	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetObservedModel());
 	if (containerPtr != NULL){
 		for (int lineIndex = 0; lineIndex < containerPtr->GetItemsCount(); lineIndex++){
 			const iedge::CEdgeLine& line = containerPtr->GetAt(lineIndex);
@@ -136,7 +136,7 @@ i2d::CRect CEdgeLineContainerShape::CalcBoundingBox() const
 
 QString CEdgeLineContainerShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 {
-	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetModelPtr());
+	const iedge::CEdgeLineContainer* containerPtr = dynamic_cast<const iedge::CEdgeLineContainer*>(GetObservedModel());
 	if (containerPtr == NULL){
 		return "";
 	}

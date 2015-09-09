@@ -203,7 +203,7 @@ void CVisualRegistryEditorComp::OnDropFinished(const QMimeData& mimeData, QEvent
 
 icomp::IRegistry* CVisualRegistryEditorComp::GetSelectedRegistry() const
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if ((registryPtr != NULL) && !m_embeddedRegistryId.isEmpty()){
 		return registryPtr->GetEmbeddedRegistry(m_embeddedRegistryId);
 	}
@@ -255,7 +255,7 @@ void CVisualRegistryEditorComp::AddConnectorsToScene()
 		if (sourceShapePtr == NULL){
 			continue;
 		}
-		CVisualRegistryElement* elementPtr = sourceShapePtr->GetObjectPtr();
+		CVisualRegistryElement* elementPtr = sourceShapePtr->GetObservedObject();
 		if (elementPtr == NULL){
 			continue;
 		}
@@ -328,7 +328,7 @@ void CVisualRegistryEditorComp::AddConnector(
 		if (destShapePtr == NULL){
 			continue;
 		}
-		CVisualRegistryElement* destElementPtr = destShapePtr->GetObjectPtr();
+		CVisualRegistryElement* destElementPtr = destShapePtr->GetObservedObject();
 		if ((destElementPtr == NULL) || (destElementPtr->GetName() != baseId)){
 			continue;
 		}
@@ -415,7 +415,7 @@ icomp::IRegistryElement* CVisualRegistryEditorComp::TryCreateComponent(
 
 void CVisualRegistryEditorComp::ConnectReferences(const QByteArray& componentRole)
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr == NULL){
 		return;
 	}
@@ -494,7 +494,7 @@ void CVisualRegistryEditorComp::UpdateComponentSelection()
 {
 	bool isElementSelected = !m_selectedElementIds.isEmpty();
 
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){
 		// update component selection and related menu actions:
 		if (m_quickHelpViewerCompPtr.IsValid()){
@@ -696,7 +696,7 @@ void CVisualRegistryEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& ch
 
 	// check if current edited embedded ID still exists
 	icomp::IRegistry::Ids embeddedIds;
-	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	const icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){
 		embeddedIds = registryPtr->GetEmbeddedRegistryIds();
 	}
@@ -720,7 +720,7 @@ bool CVisualRegistryEditorComp::OnModelAttached(imod::IModel* modelPtr, istd::IC
 {
 	if (BaseClass::OnModelAttached(modelPtr, changeMask)){
 		if (m_registryObserverCompPtr.IsValid()){
-			imod::IModel* registryModelPtr = GetModelPtr();
+			imod::IModel* registryModelPtr = GetObservedModel();
 			if (registryModelPtr != NULL && !registryModelPtr->IsAttached(m_registryObserverCompPtr.GetPtr())){
 				registryModelPtr->AttachObserver(m_registryObserverCompPtr.GetPtr());
 			}
@@ -737,7 +737,7 @@ bool CVisualRegistryEditorComp::OnModelDetached(imod::IModel* modelPtr)
 {
 	if (BaseClass::OnModelDetached(modelPtr)){
 		if (m_registryObserverCompPtr.IsValid()){
-			imod::IModel* registryModelPtr = GetModelPtr();
+			imod::IModel* registryModelPtr = GetObservedModel();
 			if (registryModelPtr != NULL && registryModelPtr->IsAttached(m_registryObserverCompPtr.GetPtr())){
 				registryModelPtr->DetachObserver(m_registryObserverCompPtr.GetPtr());
 			}
@@ -861,7 +861,7 @@ void CVisualRegistryEditorComp::OnSelectionChanged()
 			continue;
 		}
 
-		elementPtr = selectedShapePtr->GetObjectPtr();
+		elementPtr = selectedShapePtr->GetObservedObject();
 		if (elementPtr != NULL){
 			elementIds.insert(elementPtr->GetName());
 		}	
@@ -1063,7 +1063,7 @@ void CVisualRegistryEditorComp::OnRenameComponent()
 
 void CVisualRegistryEditorComp::NewEmbeddedComponent()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr == NULL){
 		return;
 	}
@@ -1094,7 +1094,7 @@ void CVisualRegistryEditorComp::NewEmbeddedComponent()
 
 void CVisualRegistryEditorComp::ToEmbeddedComponent()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr == NULL){
 		return;
 	}
@@ -1200,7 +1200,7 @@ void CVisualRegistryEditorComp::ToEmbeddedComponent()
 
 void CVisualRegistryEditorComp::RemoveEmbeddedComponent()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr == NULL){
 		return;
 	}
@@ -1217,7 +1217,7 @@ void CVisualRegistryEditorComp::RemoveEmbeddedComponent()
 
 void CVisualRegistryEditorComp::OnExportToCode()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (		(registryPtr != NULL) &&
 				m_registryCodeSaverCompPtr.IsValid()){
 		QString filter = tr("C++ code file (*.cpp)");
@@ -1233,7 +1233,7 @@ void CVisualRegistryEditorComp::OnExportToCode()
 
 void CVisualRegistryEditorComp::OnExecute()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (		(registryPtr != NULL) &&
 				m_registryPreviewCompPtr.IsValid()){
 		bool retVal = m_registryPreviewCompPtr->StartRegistry(*registryPtr);
@@ -1248,7 +1248,7 @@ void CVisualRegistryEditorComp::OnExecute()
 
 void CVisualRegistryEditorComp::OnAbort()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (		(registryPtr != NULL) &&
 				m_registryPreviewCompPtr.IsValid()){
 		m_registryPreviewCompPtr->AbortRegistry();
@@ -1268,7 +1268,7 @@ void CVisualRegistryEditorComp::OnExecutionTimerTick()
 	if (m_registryPreviewCompPtr.IsValid()){
 		isRunning = m_registryPreviewCompPtr->IsRunning();
 
-		icomp::IRegistry* registryPtr = GetObjectPtr();
+		icomp::IRegistry* registryPtr = GetObservedObject();
 		if (registryPtr != NULL){
 			const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
 			isExecutable = (interfacesMap.find(istd::CClassInfo::GetName<ibase::IApplication>()) != interfacesMap.end());
@@ -1324,7 +1324,7 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 	}
 
 	// add embedded registries to the list below the scene
-	icomp::IRegistry* rootRegistryPtr = GetObjectPtr();
+	icomp::IRegistry* rootRegistryPtr = GetObservedObject();
 	if (rootRegistryPtr == NULL){
 		return;
 	}

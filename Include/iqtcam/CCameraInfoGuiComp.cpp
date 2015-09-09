@@ -9,7 +9,7 @@ namespace iqtcam
 
 void CCameraInfoGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	iprm::ISelectionParam* paramPtr = GetObjectPtr();
+	iprm::ISelectionParam* paramPtr = GetObservedObject();
 
 	if (paramPtr != NULL && m_cameraInfoProviderComp.IsValid()){
 		int cameraIndex = paramPtr->GetSelectedOptionIndex();

@@ -127,7 +127,7 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 	imath::CVarVector radius;
 	imath::CVarVector line;
 
-	iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
 		imeas::INumericValueProvider* providerPtr = CompCastPtr<imeas::INumericValueProvider>(supplierPtr);
 		if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){

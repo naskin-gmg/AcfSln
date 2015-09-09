@@ -57,7 +57,7 @@ QWidget* CMultiLineSupplierGuiComp::GetParamsWidget() const
 
 void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	iinsp::ISupplier* objectPtr = GetObjectPtr();
+	iinsp::ISupplier* objectPtr = GetObservedObject();
 	if (objectPtr == NULL){
 		return;
 	}
@@ -68,7 +68,7 @@ void CMultiLineSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 	CShape* shapePtr = new CShape(m_lineSelection);
 	shapePtr->SetTransformMode(iview::CShapeBase::STM_SHAPE);
 
-	imod::IModel* modelPtr = GetModelPtr();
+	imod::IModel* modelPtr = GetObservedModel();
 	if (modelPtr != NULL){
 		if (modelPtr->IsAttached(shapePtr)){
 			modelPtr->DetachObserver(shapePtr);
@@ -162,7 +162,7 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 	static QPen normalPen(QColor(10, 255, 116), 1, Qt::SolidLine, Qt::RoundCap);
 	static QPen selectionPen(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap);
 
-	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetModelPtr());
+	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObservedModel());
 	Q_ASSERT(objectPtr != NULL);
 
 	drawContext.setPen(normalPen);
@@ -206,7 +206,7 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetModelPtr());
+	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObservedModel());
 	if (objectPtr != NULL){
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 

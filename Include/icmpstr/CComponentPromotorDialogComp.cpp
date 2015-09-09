@@ -343,7 +343,7 @@ void CComponentPromotorDialogComp::OnUpdate(const istd::IChangeable::ChangeSet& 
 {
 	BaseClass::OnUpdate(changeSet);
 
-	const IElementSelectionInfo* objectPtr = GetObjectPtr();
+	const IElementSelectionInfo* objectPtr = GetObservedObject();
 
 	m_promoteComponentCommand.SetEnabled(
 				(objectPtr != NULL) &&
@@ -388,7 +388,7 @@ void CComponentPromotorDialogComp::on_ComponentNameCB_currentIndexChanged(int in
 
 void CComponentPromotorDialogComp::OnPromoteCommand()
 {
-	IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	IElementSelectionInfo* selectionInfoPtr = GetObservedObject();
 	if (!m_metaInfoManagerCompPtr.IsValid() || (selectionInfoPtr == NULL)){
 		return;
 	}

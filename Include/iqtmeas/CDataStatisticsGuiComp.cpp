@@ -11,7 +11,7 @@ void CDataStatisticsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*cha
 {
 	Q_ASSERT(IsGuiCreated());
 
-	imeas::IDataStatistics* objectPtr = GetObjectPtr();
+	imeas::IDataStatistics* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		AverageLabel->setText(QString("%1").arg(objectPtr->GetAverage(), 4, 'f', 4));
 		MedianLabel->setText(QString("%1").arg(objectPtr->GetMedian(), 4, 'f', 4));

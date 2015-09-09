@@ -134,7 +134,7 @@ void CHotfolderStatistics::ResetStatistics()
 
 void CHotfolderStatistics::RebuildStatistics()
 {
-	ihotf::IHotfolderProcessingInfo* objectPtr = GetObjectPtr();
+	ihotf::IHotfolderProcessingInfo* objectPtr = GetObservedObject();
 	if (objectPtr == NULL){
 		return;
 	}

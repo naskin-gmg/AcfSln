@@ -32,7 +32,7 @@ CMultiBitmapSupplierGuiComp::CMultiBitmapSupplierGuiComp()
 
 void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
-	iinsp::ISupplier* supplierPtr = GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
@@ -42,7 +42,7 @@ void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 			SizeLabel->setText("Snap Error");
 		}
 
-		iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObjectPtr());
+		iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObservedObject());
 		if (providerPtr != NULL){
 			m_bitmapDocument.CopyFrom(*providerPtr);
 		}
@@ -201,7 +201,7 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 	BitmapPreview->clear();
 	m_icons.clear();
 
-	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObjectPtr());
+	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObservedObject());
 	if (providerPtr == NULL){
 		return;
 	}
@@ -260,7 +260,7 @@ void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
-	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObjectPtr());
+	iimg::IMultiBitmapProvider* providerPtr = dynamic_cast<iimg::IMultiBitmapProvider*>(GetObservedObject());
 	if (providerPtr != NULL){
 		bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
 	}

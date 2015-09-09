@@ -609,7 +609,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			filteredComponentAdresses.insert(address);
 	}
 
-	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	const icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){
 		icomp::IRegistry::Ids embeddedIds = registryPtr->GetEmbeddedRegistryIds();
 		for (		icomp::IRegistry::Ids::const_iterator embeddedIter = embeddedIds.begin();
@@ -999,7 +999,7 @@ void CPackageOverviewComp::UpdateGui(const istd::IChangeable::ChangeSet& changeS
 {
 	Q_ASSERT(IsGuiCreated());
 
-	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	const icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){
 		if (changeSet.Contains(icomp::IRegistry::CF_EMBEDDED) || changeSet.Contains(CF_INIT_EDITOR)){	// ignore selection only changes
 			m_localMetaInfoManager.UpdateLocalMetaInfoMap();
@@ -1216,7 +1216,7 @@ void CPackageOverviewComp::MetaInfoManager::UpdateLocalMetaInfoMap()
 		return;
 	}
 
-	const icomp::IRegistry* registryPtr = parentPtr->GetObjectPtr();
+	const icomp::IRegistry* registryPtr = parentPtr->GetObservedObject();
 	if (registryPtr == NULL){
 		return;
 	}

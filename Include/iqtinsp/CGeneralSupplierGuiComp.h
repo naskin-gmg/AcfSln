@@ -47,7 +47,7 @@ protected:
 template <class UI>
 void TGeneralSupplierGuiComp<UI>::Test()
 {
-	iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
 	if (supplierPtr != NULL){
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
@@ -125,7 +125,7 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 	QString description;
 
-	const iinsp::ISupplier* supplierPtr = BaseClass::GetObjectPtr();
+	const iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
 

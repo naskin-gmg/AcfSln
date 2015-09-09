@@ -74,7 +74,7 @@ QStringList CXpcEditorComp::GetStringList(int tableIdx) const
 
 void CXpcEditorComp::UpdateModel() const
 {
-	icomp::CXpcModel* objectPtr = GetObjectPtr();
+	icomp::CXpcModel* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(objectPtr);
@@ -96,7 +96,7 @@ void CXpcEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/
 {
 	Q_ASSERT(IsGuiCreated());
 
-	icomp::CXpcModel* objectPtr = GetObjectPtr();
+	icomp::CXpcModel* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		SetStringList(S_CONFIG_PATH, objectPtr->GetConfFilesList());
 		SetStringList(S_PACKAGE_DIR, objectPtr->GetPackageDirsList());

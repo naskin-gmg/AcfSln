@@ -28,7 +28,7 @@ CProjectionShape::CProjectionShape()
 
 void CProjectionShape::Draw(QPainter& drawContext) const
 {
-	const imeas::IDataSequence* projectionPtr = dynamic_cast<const imeas::IDataSequence*>(GetModelPtr());
+	const imeas::IDataSequence* projectionPtr = dynamic_cast<const imeas::IDataSequence*>(GetObservedModel());
 	if (projectionPtr != NULL){
 
 		drawContext.save();
@@ -74,7 +74,7 @@ void CProjectionShape::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeab
 
 void CProjectionShape::UpdateFigure() const
 {
-	const imeas::IDataSequence* projectionPtr = dynamic_cast<const imeas::IDataSequence*>(GetModelPtr());
+	const imeas::IDataSequence* projectionPtr = dynamic_cast<const imeas::IDataSequence*>(GetObservedModel());
 	if (projectionPtr == NULL){
 		m_transform.reset();
 		return;

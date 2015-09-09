@@ -15,7 +15,7 @@ void CImageInterpolationParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::IImageInterpolationParams* objectPtr = GetObjectPtr();
+	iipr::IImageInterpolationParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		istd::CChangeGroup changeGroup(objectPtr);
 		Q_UNUSED(changeGroup);
@@ -35,7 +35,7 @@ void CImageInterpolationParamsGuiComp::UpdateGui(const istd::IChangeable::Change
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::IImageInterpolationParams* objectPtr = GetObjectPtr();
+	iipr::IImageInterpolationParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		int mode = objectPtr->GetInterpolationMode();
 		switch (mode)

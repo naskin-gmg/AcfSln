@@ -27,7 +27,7 @@ void CBlobFilterParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	Q_ASSERT(paramsPtr != NULL);
 
 	istd::CChangeNotifier notifier(paramsPtr);
@@ -52,7 +52,7 @@ void CBlobFilterParamsGuiComp::UpdateModel() const
 
 void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -84,7 +84,7 @@ void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChan
 
 void CBlobFilterParamsGuiComp::OnFilterParameterChanged()
 {
-	if (!IsUpdateBlocked() && GetModelPtr() != NULL){
+	if (!IsUpdateBlocked() && GetObservedModel() != NULL){
 		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
@@ -94,7 +94,7 @@ void CBlobFilterParamsGuiComp::OnFilterParameterChanged()
 
 void CBlobFilterParamsGuiComp::on_ActivateFilterCheckBox_toggled(bool on)
 {
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -111,7 +111,7 @@ void CBlobFilterParamsGuiComp::on_ActivateFilterCheckBox_toggled(bool on)
 
 void CBlobFilterParamsGuiComp::on_AddFilterButton_clicked()
 {
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -124,7 +124,7 @@ void CBlobFilterParamsGuiComp::on_AddFilterButton_clicked()
 
 void CBlobFilterParamsGuiComp::on_RemoveAllButton_clicked()
 {
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -145,7 +145,7 @@ void CBlobFilterParamsGuiComp::OnRemoveFilter(QWidget* filterGui)
 		return;
 	}
 
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -174,7 +174,7 @@ void CBlobFilterParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr == NULL){
 		return;
 	}
@@ -240,7 +240,7 @@ void CBlobFilterParamsGuiComp::CreateFilter()
 
 	FilterHolder->layout()->addWidget(filterGui);
 
-	iblob::IBlobFilterParams* paramsPtr = GetObjectPtr();
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr != NULL){
 		const iblob::BlobDescriptorInfoList* descriptorsListPtr = paramsPtr->GetSupportedDescriptorsList();
 		if (descriptorsListPtr != NULL){

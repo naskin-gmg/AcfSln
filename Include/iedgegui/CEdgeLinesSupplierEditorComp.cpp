@@ -111,7 +111,7 @@ void CEdgeLinesSupplierEditorComp::AfterUpdate(imod::IModel* modelPtr, const ist
 {
 	m_container.Reset();
 
-	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObjectPtr());
+	iedge::IEdgeLinesProvider* providerPtr = CompCastPtr<iedge::IEdgeLinesProvider>(GetObservedObject());
 	if (providerPtr != NULL ){
 		const iedge::CEdgeLineContainer* resultContainerPtr = providerPtr->GetEdgesContainer();	
 

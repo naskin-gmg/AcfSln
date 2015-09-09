@@ -15,7 +15,7 @@ void CCaliperParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::ICaliperParams* objectPtr = GetObjectPtr();
+	iipr::ICaliperParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeGroup changeGroup(objectPtr);
@@ -46,7 +46,7 @@ void CCaliperParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 {
 	Q_ASSERT(IsGuiCreated());
 
-	iipr::ICaliperParams* objectPtr = GetObjectPtr();
+	iipr::ICaliperParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		double threshold = objectPtr->GetWeightThreshold();
 		ThresholdSB->setValue(int(threshold * 100 + 0.5));

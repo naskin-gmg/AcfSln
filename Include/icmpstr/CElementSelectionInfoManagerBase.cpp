@@ -15,7 +15,7 @@ CElementSelectionInfoManagerBase::CElementSelectionInfoManagerBase()
 
 icomp::IRegistry* CElementSelectionInfoManagerBase::GetRegistry() const
 {
-	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	const IElementSelectionInfo* selectionInfoPtr = GetObservedObject();
 	if (selectionInfoPtr == NULL){
 		return NULL;
 	}
@@ -26,7 +26,7 @@ icomp::IRegistry* CElementSelectionInfoManagerBase::GetRegistry() const
 
 QStringList CElementSelectionInfoManagerBase::GetExportAliases(const QByteArray& attributeName) const
 {
-	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	const IElementSelectionInfo* selectionInfoPtr = GetObservedObject();
 	if (selectionInfoPtr == NULL){
 		return QStringList();
 	}

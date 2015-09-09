@@ -197,7 +197,7 @@ bool CRegistryTreeViewComp::IsRegistryValid(const icomp::IRegistry& registry) co
 
 void CRegistryTreeViewComp::UpdateRegistryStatus()
 {
-	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	const icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){		
 		bool isValid = IsRegistryValid(*registryPtr);
 			
@@ -271,7 +271,7 @@ void CRegistryTreeViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 
 	RegistryTree->addTopLevelItem(rootItem);
 
-	icomp::IRegistry* registryPtr = GetObjectPtr();
+	icomp::IRegistry* registryPtr = GetObservedObject();
 	if (registryPtr != NULL){
 		CreateRegistryTree(*registryPtr, rootItem);
 	}
@@ -461,7 +461,7 @@ IElementSelectionInfo::Elements CRegistryTreeViewComp::SelectionInfoImpl::GetSel
 
 	IElementSelectionInfo::Elements retVal;
 
-	icomp::IRegistry* registryPtr = m_parentPtr->GetObjectPtr();
+	icomp::IRegistry* registryPtr = m_parentPtr->GetObservedObject();
 	if (registryPtr != NULL){
 		for (		ElementIds::const_iterator iter = m_parentPtr->m_selectedElements.selectedElementIds.begin();
 					iter != m_parentPtr->m_selectedElements.selectedElementIds.end();

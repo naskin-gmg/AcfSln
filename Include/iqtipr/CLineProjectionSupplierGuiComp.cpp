@@ -84,7 +84,7 @@ void CLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 	const imeas::IDataSequence* projectionPtr = NULL;
 
-	const imeas::IDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IDataSequenceProvider*>(GetObjectPtr());
+	const imeas::IDataSequenceProvider* providerPtr = dynamic_cast<const imeas::IDataSequenceProvider*>(GetObservedObject());
 	if (providerPtr != NULL){
 		projectionPtr = providerPtr->GetDataSequence();
 	}

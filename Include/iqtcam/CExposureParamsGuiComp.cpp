@@ -24,7 +24,7 @@ void CExposureParamsGuiComp::OnGuiModelAttached()
 	bool isDelayTimeSupported = false;
 	bool isEenDelayTimeSupported = false;
 
-	const icam::IExposureParams* objectPtr = GetObjectPtr();
+	const icam::IExposureParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		const icam::IExposureConstraints* constraintsPtr = objectPtr->GetExposureConstraints();
 		if (constraintsPtr != NULL){
@@ -74,7 +74,7 @@ void CExposureParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*cha
 {
 	Q_ASSERT(IsGuiCreated());
 
-	icam::IExposureParams* objectPtr = GetObjectPtr();
+	icam::IExposureParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
 		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
@@ -104,7 +104,7 @@ void CExposureParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	icam::IExposureParams* objectPtr = GetObjectPtr();
+	icam::IExposureParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
 	double tolerance = 0.9e-6;
