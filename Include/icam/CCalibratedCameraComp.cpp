@@ -15,6 +15,9 @@
 #include "imeas/INumericValue.h"
 
 
+using namespace std;
+
+
 namespace icam
 {
 
