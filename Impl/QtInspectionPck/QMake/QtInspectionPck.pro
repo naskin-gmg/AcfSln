@@ -1,7 +1,7 @@
+TARGET = QtInspectionPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = QtInspectionPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqtinsp
 

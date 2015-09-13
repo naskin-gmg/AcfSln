@@ -1,7 +1,7 @@
+TARGET = QtExPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = QtExPck
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -liqtex -liservice
 
