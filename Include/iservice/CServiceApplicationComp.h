@@ -60,7 +60,7 @@ public:
 protected Q_SLOTS:
 	void OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
-#ifndef Q_OS_MAC
+#ifdef Q_OS_WIN
 
 protected:
 	class CService: public QtServiceBase
@@ -93,7 +93,7 @@ protected:
 	};
 
 	istd::TDelPtr<CService> m_servicePtr;
-#endif // Q_OS_MAC
+#endif // Q_OS_WIN
 
 private:
 	I_REF(ibase::IApplication, m_applicationCompPtr);

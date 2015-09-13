@@ -45,7 +45,7 @@ bool CServiceApplicationComp::InitializeApplication(int/* argc*/, char** /* argv
 
 int CServiceApplicationComp::Execute(int argc, char** argv)
 {
-#ifdef Q_OS_MAC
+#ifndef Q_OS_WIN
 	if (m_applicationCompPtr.IsValid()){
 		return m_applicationCompPtr->Execute(argc, argv);
 	}
@@ -131,7 +131,7 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 
 		return m_servicePtr->exec();
 	}
-#endif
+#endif // Q_OS_WIN
 
 	return -1;
 }
@@ -162,7 +162,7 @@ QStringList CServiceApplicationComp::GetApplicationArguments() const
 	
 bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-#ifndef Q_OS_MAC
+#ifdef Q_OS_WIN
 	Q_ASSERT(m_applicationCompPtr.IsValid());
 	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_applicationCompPtr.GetPtr());
 	if (guiAppPtr != NULL){
@@ -183,7 +183,7 @@ bool CServiceApplicationComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 	}
 #else
 	return BaseClass2::eventFilter(sourcePtr, eventPtr);
-#endif
+#endif // Q_OS_WIN
 
 	return false;
 }
@@ -215,7 +215,7 @@ void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationRea
 }
 
 
-#ifndef Q_OS_MAC
+#ifdef Q_OS_WIN
 
 
 // public methods of embedded class CService
@@ -322,7 +322,7 @@ QVector<char*> CServiceApplicationComp::CService::GetApplicationArguments() cons
 	return argv;
 }
 
-#endif // #ifndef Q_OS_MAC
+#endif // Q_OS_WIN
 
 
 } // namespace iservice
