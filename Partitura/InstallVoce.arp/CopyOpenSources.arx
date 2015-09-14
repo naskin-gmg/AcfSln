@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1336
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1023
         </Id>
         <Number>
-          328706
+          328450
         </Number>
         <Description>
           Qt Framework
@@ -29,10 +18,21 @@
           0
         </Id>
         <Number>
-          3796
+          3867
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1384
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -1109,7 +1109,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="9">
+              <Values count="10">
                 <Value>
                   *.png
                 </Value>
@@ -1136,6 +1136,9 @@
                 </Value>
                 <Value>
                   *.ts
+                </Value>
+                <Value>
+                  *.plist
                 </Value>
               </Values>
             </Data>
