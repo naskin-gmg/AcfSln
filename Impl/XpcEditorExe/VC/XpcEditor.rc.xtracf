@@ -25,7 +25,7 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "Internal build version ($AcfRawVersion:1$), based on ACF $AcfVersion:1$ ($AcfRawVersion:1$) and QT $AcfVersion:1023$, build on $AcfTimestamp$ ($CompilerName$)"
+            VALUE "Comments", "Internal build version ($AcfRawVersion:1$), based on ACF $AcfVersion:1$ ($AcfRawVersion:1$) and Qt $AcfVersion:1023$, build on $AcfTimestamp$ ($CompilerName$)"
             VALUE "CompanyName", "Witold Gantzke and Kirill Lepskiy"
             VALUE "FileDescription", "ACF configuration files editor"
             VALUE "FileVersion", "$AcfVersion:1$"
