@@ -5,7 +5,7 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
-// ACF-Solutions incldues
+// ACF-Solutions includes
 #include "imath/IUnitInfo.h"
 #include "imeas/INumericConstraints.h"
 #include "imeas/CSimpleNumericValue.h"

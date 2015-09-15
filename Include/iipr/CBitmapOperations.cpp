@@ -1,7 +1,7 @@
 #include "iipr/CBitmapOperations.h"
 
 
-// STL incldues
+// STL includes
 #include <cstring>
 
 // ACF includes
