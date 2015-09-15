@@ -44,13 +44,13 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 				}
 			}
 			else{
-				const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
-				qint32 bitmapPattern = rawData[1] << 24; 
+				const quint8* rawData = (quint8*)bitmap.GetLinePtr(0);
+				quint32 bitmapPattern = rawData[1] << 24;
 				bitmapPattern |= (rawData[2] & 0xff) << 16; 
 				bitmapPattern |= (rawData[5] & 0xff) << 8; 
 				bitmapPattern |= rawData[6] & 0xff;
 
-				qint8 resolutionData[8] = {0};
+				quint8 resolutionData[8] = {0};
 
 				resolutionData[0]= rawData[9];
 				resolutionData[1]= rawData[10];
