@@ -85,8 +85,6 @@ typedef BOOL(WINAPI*PReportEvent)(HANDLE,WORD,WORD,DWORD,PSID,WORD,DWORD,LPCTSTR
 static PReportEvent pReportEvent = 0;
 typedef HANDLE(WINAPI*PRegisterEventSource)(LPCTSTR,LPCTSTR);
 static PRegisterEventSource pRegisterEventSource = 0;
-typedef DWORD(WINAPI*PRegisterServiceProcess)(DWORD,DWORD);
-static PRegisterServiceProcess pRegisterServiceProcess = 0;
 typedef BOOL(WINAPI*PQueryServiceConfig)(SC_HANDLE,LPQUERY_SERVICE_CONFIG,DWORD,LPDWORD);
 static PQueryServiceConfig pQueryServiceConfig = 0;
 typedef BOOL(WINAPI*PQueryServiceConfig2)(SC_HANDLE,DWORD,LPBYTE,DWORD,LPDWORD);
@@ -634,7 +632,7 @@ class HandlerThread : public QThread
 {
 public:
 	HandlerThread()
-		: success(true), console(false), QThread()
+		: QThread(), success(true), console(false)
 	{}
 
 	bool calledOk() { return success; }
