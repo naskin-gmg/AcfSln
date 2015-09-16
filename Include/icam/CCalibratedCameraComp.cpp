@@ -50,23 +50,27 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 				bitmapPattern |= (rawData[5] & 0xff) << 8; 
 				bitmapPattern |= rawData[6] & 0xff;
 
-				quint8 resolutionData[8] = {0};
+				if (bitmapPattern == RESOLUTION_PATTERN){
+					union{
+						quint8 data[8];
+						double value;
+					} res;
+					res.value = 0;
 
-				resolutionData[0]= rawData[9];
-				resolutionData[1]= rawData[10];
-				resolutionData[2]= rawData[13];
-				resolutionData[3]= rawData[14];
-				resolutionData[4]= rawData[17];
-				resolutionData[5]= rawData[18];
-				resolutionData[6]= rawData[21];
-				resolutionData[7]= rawData[22];
+					res.data[0]= rawData[9];
+					res.data[1]= rawData[10];
+					res.data[2]= rawData[13];
+					res.data[3]= rawData[14];
+					res.data[4]= rawData[17];
+					res.data[5]= rawData[18];
+					res.data[6]= rawData[21];
+					res.data[7]= rawData[22];
 
-				double& value = (double&)resolutionData;
+					if (!isnan(res.value) && (res.value > 0)){
+						resolution = res.value;
 
-				if ((bitmapPattern == RESOLUTION_PATTERN) && !isnan(value) && (value > 0)){
-					resolution = value;
-
-					return true;
+						return true;
+					}
 				}
 			}
 		}
