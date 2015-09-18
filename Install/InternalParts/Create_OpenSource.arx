@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3887
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          920
+          328706
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264194
+          1400
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -55,7 +55,64 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF-Solutions
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationType
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                OpenSource
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               FileCopiers
@@ -70,14 +127,68 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="1">
                 <Value>
-                  CopyCompositorVC
-                </Value>
-                <Value>
-                  CopyCompositorGenerated
+                  CopyAll
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF-Solutions
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -85,22 +196,22 @@
     </Element>
     <Element>
       <Id>
-        CopyCompositorGenerated
+        CopyAll
       </Id>
       <PackageId>
         InstallVoce
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        CopyOpenSources
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -122,31 +233,23 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Filters
+              EnableVerbose
             </Id>
             <Type>
-              String[]
+              Boolean
             </Type>
             <ExportId>
-              
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Compositor.*
-                </Value>
-                <Value>
-                  CCompositor.*
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputSubDir
+              LicensePath
             </Id>
             <Type>
               String
@@ -159,7 +262,7 @@
                 true
               </IsEnabled>
               <Value>
-                Impl/GeneratedFiles/Compositor
+                Install/LGPL/Header.txt
               </Value>
             </Data>
           </AttributeInfo>
@@ -184,7 +287,31 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputSubDir
+              OtherExcludeFilters
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  GeneratedFiles
+                </Value>
+                <Value>
+                  generated
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionTagExpr
             </Id>
             <Type>
               String
@@ -197,16 +324,16 @@
                 true
               </IsEnabled>
               <Value>
-                Impl/GeneratedFiles/Compositor
+                \$\((.+)\)
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              RecursionDepth
+              ProjectsSubstitutionTags
             </Id>
             <Type>
-              Integer
+              String[]
             </Type>
             <ExportId>
               
@@ -215,9 +342,68 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                0
-              </Value>
+              <Values count="3">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+                <Value>
+                  ACFSLNDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)/Config
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFSLNDIR)
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SourceExcludeFilters
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  GeneratedFiles
+                </Value>
+                <Value>
+                  generated
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -225,13 +411,13 @@
     </Element>
     <Element>
       <Id>
-        CopyCompositorVC
+        VersionInfo
       </Id>
       <PackageId>
-        InstallVoce
+        AcfSlnVoce
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -240,13 +426,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              IsExtensionUsed
             </Id>
             <Type>
-              Reference
+              Boolean
             </Type>
             <ExportId>
               
@@ -256,125 +442,7 @@
                 true
               </IsEnabled>
               <Value>
-                Application/ApplicationInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ExcludeFilters
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  *.xtracf
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Filters
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  *
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputSubDir
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Impl/CompositorExe/VC
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application/Log
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputSubDir
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Impl/CompositorExe
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RecursionDepth
-            </Id>
-            <Type>
-              Integer
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0
+                false
               </Value>
             </Data>
           </AttributeInfo>

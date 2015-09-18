@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3887
         </Number>
         <Description>
           ACF
@@ -15,24 +15,24 @@
       </Version>
       <Version>
         <Id>
-          1
+          1023
         </Id>
         <Number>
-          920
+          328706
         </Number>
         <Description>
-          ACF-Solutions
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          1
         </Id>
         <Number>
-          264194
+          1400
         </Number>
         <Description>
-          Qt Framework
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -40,42 +40,42 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
+        CopyAll
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <Y>
+        500
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         Application
       </ComponentName>
       <X>
-        275
-      </X>
-      <X>
         375
       </X>
+      <Y>
+        325
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        CopyCompositorVC
+        VersionInfo
       </ComponentName>
       <X>
-        675
+        925
       </X>
-      <X>
-        275
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyCompositorGenerated
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        475
-      </X>
+      <Y>
+        325
+      </Y>
       <Note>
         
       </Note>
