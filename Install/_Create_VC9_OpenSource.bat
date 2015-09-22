@@ -11,6 +11,8 @@ call %~dp0\..\Build\VC12\_CreateVCProjectsFromQMake.bat
 
 cd %~dp0\..
 
+set COMPILER_EXT=VC9
+
 call %ACFDIR%\Install\InternalParts\CreateTempDirs.bat
 
 call %ACFDIR%\Install\InternalParts\CreateScripts.bat
