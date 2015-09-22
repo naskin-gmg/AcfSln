@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          3201
+          328449
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1049
+          1402
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3890
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -45,37 +45,9 @@
       <X>
         575
       </X>
-      <X>
+      <Y>
         400
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        HistogramView
-      </ComponentName>
-      <X>
-        175
-      </X>
-      <X>
-        525
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSetGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        275
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -87,23 +59,23 @@
       <X>
         175
       </X>
-      <X>
+      <Y>
         400
-      </X>
+      </Y>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        ComparisonThreshold
+        ParamsSetGui
       </ComponentName>
       <X>
-        975
+        575
       </X>
-      <X>
-        400
-      </X>
+      <Y>
+        275
+      </Y>
       <Note>
         
       </Note>
@@ -115,9 +87,37 @@
       <X>
         575
       </X>
-      <X>
+      <Y>
         150
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComparisonThreshold
+      </ComponentName>
+      <X>
+        975
       </X>
+      <Y>
+        400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        HistogramView
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <Y>
+        525
+      </Y>
       <Note>
         
       </Note>

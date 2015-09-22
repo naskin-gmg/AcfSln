@@ -79,14 +79,14 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	i2d::CVector2d aoiCenter = regionRect.GetCenter();
 	i2d::CVector2d diffVector = aoiCenter - i2d::CVector2d(regionRect.GetLeftTop());
 	int radius = qCeil(diffVector.GetLength());
-	int angleDimension = int(radius * I_PI + 0.5) / angleResolution;
-	double startAngle = 0;
-	double angleRange = I_2PI;
+	int angleDimension = int(radius * I_PI + 0.5f) / angleResolution;
+	float startAngle = 0.0f;
+	float angleRange = I_2PI;
 
 	int r1 = 0;
 	int r2 = radius;
 
-	double extraUnrolling = 1.0;
+	float extraUnrolling = 1.0f;
 	iprm::TParamsPtr<imeas::INumericValue> extraUnrollingParamPtr(paramsPtr, *m_extraUnrollingAttrPtr);
 	if (extraUnrollingParamPtr.IsValid()){
 		imath::CVarVector values = extraUnrollingParamPtr->GetValues();
@@ -142,7 +142,7 @@ bool CImagePolarTransformProcessorComp::ProcessImageRegion(
 	float* sinTable = new float[angleDimension];
 
 	for (int alpha = 0; alpha < angleDimension; alpha++){
-		double angle = alpha / double(angleDimension) * angleRange * angleResolution;
+		float angle = alpha / float(angleDimension) * angleRange * angleResolution;
 		angle += startAngle;
 	
 		cosTable[alpha] = qCos(angle);

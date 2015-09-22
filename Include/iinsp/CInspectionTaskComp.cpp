@@ -643,6 +643,25 @@ bool CInspectionTaskComp::Parameters::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CInspectionTaskComp::Parameters::ResetData(CompatibilityMode mode)
+{
+	Ids parameterIds = GetParamIds();
+
+	bool retVal = true;
+
+	for (Ids::Iterator iter = parameterIds.begin(); iter != parameterIds.end(); ++iter){
+		iser::ISerializable* paramPtr = GetEditableParameter(*iter);
+		Q_ASSERT(paramPtr != NULL);
+
+		retVal = paramPtr->ResetData(mode) && retVal;
+	}
+
+	return retVal;
+}
+
+
 } // namespace iinsp
 
 
