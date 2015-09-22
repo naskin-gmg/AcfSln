@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328450
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3867
+          3850
         </Number>
         <Description>
           ACF
@@ -29,29 +18,26 @@
           1
         </Id>
         <Number>
-          1384
+          1374
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="11">
-    <Element>
-      <ComponentName>
-        CopyImplSources
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <Y>
-        125
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         CopyAllFiles
@@ -61,6 +47,20 @@
       </X>
       <Y>
         350
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyCommon
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <Y>
+        525
       </Y>
       <Note>
         
@@ -89,6 +89,20 @@
       </X>
       <Y>
         650
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyImplSources
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <Y>
+        125
       </Y>
       <Note>
         
@@ -138,34 +152,6 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyIncludeResources
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <Y>
-        625
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyCommon
-      </ComponentName>
-      <X>
-        150
-      </X>
-      <Y>
-        525
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CopyImplOther
       </ComponentName>
       <X>
@@ -187,6 +173,20 @@
       </X>
       <Y>
         475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyIncludeResources
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <Y>
+        625
       </Y>
       <Note>
         

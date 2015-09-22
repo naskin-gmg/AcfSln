@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328450
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3867
+          3850
         </Number>
         <Description>
           ACF
@@ -29,10 +18,21 @@
           1
         </Id>
         <Number>
-          1384
+          1374
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328449
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -219,9 +219,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   *.vcproj
+                </Value>
+                <Value>
+                  *.vcxproj
                 </Value>
                 <Value>
                   *.sln
@@ -829,9 +832,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   *.vcproj
+                </Value>
+                <Value>
+                  *.vcxproj
                 </Value>
                 <Value>
                   *.sln
@@ -1662,9 +1668,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   *.vcproj
+                </Value>
+                <Value>
+                  *.vcxproj
                 </Value>
                 <Value>
                   *.sln

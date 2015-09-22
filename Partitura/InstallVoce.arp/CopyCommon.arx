@@ -1885,7 +1885,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="16">
+              <Values count="17">
                 <Value>
                   *.ui
                 </Value>
@@ -1897,6 +1897,9 @@
                 </Value>
                 <Value>
                   *.vcproj
+                </Value>
+                <Value>
+                  *.vcxproj
                 </Value>
                 <Value>
                   *.sln
