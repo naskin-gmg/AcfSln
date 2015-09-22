@@ -10,7 +10,9 @@ cd %~dp0/..
 
 call %ACFDIR%\Install\InternalParts\CreateTempDirs.bat
 
-call %ACFDIR%\Install\InternalParts\Rebuild.bat
+echo Compiling...
+vcbuild /r %~dp0\..\Build\%COMPILER_EXT%\AcfSlnAll.sln $All
+echo Compiling done
 
 call %ACFDIR%\Install\InternalParts\CopyDlls.bat
 

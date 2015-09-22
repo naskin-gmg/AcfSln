@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2934
+          328706
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1402
         </Number>
         <Description>
           ACF-Solutions
@@ -26,13 +26,13 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3889
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -211,7 +211,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -233,33 +233,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              BinaryExcludeFilters
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  *Xcd
-                </Value>
-                <Value>
-                  *QMake
-                </Value>
-                <Value>
-                  *VC9
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               LicensePath
             </Id>
             <Type>
@@ -273,7 +246,7 @@
                 true
               </IsEnabled>
               <Value>
-                LGPL/Header.txt
+                Install/LGPL/Header.txt
               </Value>
             </Data>
           </AttributeInfo>
@@ -310,7 +283,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="7">
                 <Value>
                   GeneratedFiles
                 </Value>
@@ -318,13 +291,19 @@
                   generated
                 </Value>
                 <Value>
-                  Xcd
-                </Value>
-                <Value>
                   QMake
                 </Value>
                 <Value>
+                  QBS
+                </Value>
+                <Value>
                   VC9
+                </Value>
+                <Value>
+                  VC10
+                </Value>
+                <Value>
+                  VC12
                 </Value>
               </Values>
             </Data>
@@ -343,7 +322,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="7">
                 <Value>
                   GeneratedFiles
                 </Value>
@@ -351,13 +330,19 @@
                   generated
                 </Value>
                 <Value>
-                  Xcd
-                </Value>
-                <Value>
                   QMake
                 </Value>
                 <Value>
-                  VC8
+                  QBS
+                </Value>
+                <Value>
+                  VC9
+                </Value>
+                <Value>
+                  VC10
+                </Value>
+                <Value>
+                  VC12
                 </Value>
               </Values>
             </Data>

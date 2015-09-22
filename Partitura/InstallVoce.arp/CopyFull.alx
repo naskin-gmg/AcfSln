@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2934
+          328706
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1402
         </Number>
         <Description>
           ACF-Solutions
@@ -26,18 +26,32 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3889
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
+    <Element>
+      <ComponentName>
+        CopyBins
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <Y>
+        500
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         CopyOpenSources
@@ -45,9 +59,23 @@
       <X>
         250
       </X>
-      <X>
+      <Y>
         500
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyAuxIncludes
+      </ComponentName>
+      <X>
+        525
       </X>
+      <Y>
+        500
+      </Y>
       <Note>
         
       </Note>
@@ -59,9 +87,9 @@
       <X>
         250
       </X>
-      <X>
+      <Y>
         325
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -73,23 +101,9 @@
       <X>
         850
       </X>
-      <X>
+      <Y>
         250
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyBins
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <X>
-        500
-      </X>
+      </Y>
       <Note>
         
       </Note>

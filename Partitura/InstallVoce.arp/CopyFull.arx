@@ -4,13 +4,13 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2934
+          328706
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1402
         </Number>
         <Description>
           ACF-Solutions
@@ -26,18 +26,18 @@
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3889
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         CopyAllFiles
@@ -86,7 +86,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
                   CopyLibs
                 </Value>
@@ -95,6 +95,9 @@
                 </Value>
                 <Value>
                   CopyOpenSources
+                </Value>
+                <Value>
+                  CopyAuxIncludes
                 </Value>
               </Values>
             </Data>
@@ -113,6 +116,134 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CopyAuxIncludes
+      </Id>
+      <PackageId>
+        InstallVoce
+      </PackageId>
+      <ComponentId>
+        CopyInfoProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  *.h
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                AuxInclude
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                AuxInclude
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

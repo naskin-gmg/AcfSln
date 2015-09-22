@@ -4,7 +4,7 @@
 AppVerName=$AcfProductName$ $AcfVersion:1$
 AppVersion=$AcfVersion:1$
 AppPublisher=Witold Gantzke & Kirill Lepskiy
-AppPublisherURL=http://www.imagingtools.de/
+AppPublisherURL=http://www.ilena.org/
 AppName=ACF-Solutions
 OutputBaseFilename=Setup_$AcfProductName$_$LICENSE_TYPE$_v$AcfVersion:1$_$CompilerName$
 
@@ -20,17 +20,45 @@ UninstallDisplayName=$AcfProductName$ $AcfVersion:1$
 OutputDir=..\Setup
 LicenseFile=$LICENSE_INSTALL_PATH$
 VersionInfoDescription=$AcfProductName$ v. $AcfVersion:1$ ($AcfRawVersion:1$) by $AcfCompanyName$
-AppComments=Compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$), see www.imagingtools.de to find out more about ACF-Solutions
-AppCopyright=Copyright (C) 2007-2014 Witold Gantzke and Kirill Lepskiy
+AppComments=Compiled using $CompilerName$, based on ACF v. $AcfVersion:0$ ($AcfRawVersion:0$) and QT $AcfVersion:1023$, see www.ilena.org to find out more about ACF-Solutions
+AppCopyright=Copyright (C) 2007-2015 Witold Gantzke and Kirill Lepskiy
 VersionInfoVersion=$AcfVersion:1$
 ChangesEnvironment=yes
 
 [Files]
-Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfSlnComp
-Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: acfSlnComp
-Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: acfSlnComp
-Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: acfSlnComp
-Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: acfSlnComp
+Source: ..\Temp\Bin\*; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Lib\*; DestDir: {app}\Lib; Flags: recursesubdirs; Components: binaryComp
+
+Source: ..\Temp\Config\*; DestDir: {app}\Config; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\Partitura\*; DestDir: {app}\Partitura; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\*; DestDir: {app}; Components: standardComp
+Source: ..\Temp\Docs\*.txt; DestDir: {app}\Docs; Components: standardComp
+Source: ..\Temp\Include\*; Excludes: "*.cpp,*.qrc,*.ui,\Resources\*"; DestDir: {app}\Include\*; Flags: recursesubdirs; Components: standardComp
+Source: ..\Temp\Impl\*; Excludes: "*.cpp"; DestDir: {app}\Impl\*; Flags: recursesubdirs; Components: standardComp
+
+Source: ..\Temp\Docs\*; DestDir: {app}\Docs; Flags: recursesubdirs; Components: docuComp
+
+Source: ..\Temp\Include\*; DestDir: {app}\Include\*; Flags: recursesubdirs; Components: sourceComp
+Source: ..\Temp\Impl\*; DestDir: {app}\Impl\*; Flags: recursesubdirs; Components: sourceComp
+
+Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?PrintSupport.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?PrintSupport.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: qtBinaryComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl
@@ -38,9 +66,9 @@ Name: de; MessagesFile: compiler:Languages\German.isl
 Name: pl; MessagesFile: compiler:Languages\Polish.isl
 
 [CustomMessages]
-en.MinimalType=Minimal installation
-de.MinimalType=Minimale Installation
-pl.MinimalType=Instalacja minimalna
+en.StandardType=Typical installation
+de.StandardType=Standardinstallation
+pl.StandardType=Instalacja standardowa
 
 en.FullType=Full installation
 de.FullType=Komplete Installation
@@ -50,39 +78,59 @@ en.CustomType=Custom installation
 de.CustomType=Ausgewählte Komponenten
 pl.CustomType=Wybrane komponenty
 
+en.Binaries=Compilated binaries
+de.Binaries=Kompilierte binäre Dateien
+pl.Binaries=Skompilowane pliki binarne
+
+en.Documentation=Documentation
+de.Documentation=Dokumentation
+pl.Documentation=Dokumentacja
+
+en.Sources=Source files
+de.Sources=Source-Dateien
+pl.Sources=Pliki zródlowe
+
 en.QtBinaries=Qt binaries
-de.QtBinaries=Qt binäre Datei
+de.QtBinaries=Qt binäre Dateien
 pl.QtBinaries=Pliki binarne Qt
 
-en.AddExtPath=Add external binaries path to the system PATH
-de.AddExtPath=Pfad für externe Bibliotheken zum Systempfad hinzufügen
-pl.AddExtPath=Dodaj sciezke zewnetrznych bibliotek do sciezki systemowej
+en.AddExtPath=Set ACFSLNDIR to environmental variables
+de.AddExtPath=Die Umgebungsvariable ACFSLNDIR setzten
+pl.AddExtPath=Ustaw ACFSLNDIR w zmiennych systemowych
 
-en.AddAcfSlnPath=Add ACF-Solutions tools path to the system PATH
-de.AddAcfSlnPath=Pfad für ACF-Solutions-Tools zum Systempfad hinzufügen
-pl.AddAcfSlnPath=Dodaj sciezke narzedzi ACF-Solutions do sciezki systemowej
+en.RegisterExtensions=Register ACF file extensions
+de.RegisterExtensions=Die ACF-Dateiereiterungen registrieren
+pl.RegisterExtensions=Zarejestruj rozszerzenia plików ACF
 
 [Types]
-Name: minimalType; Description: {cm:MinimalType}
+Name: standardType; Description: {cm:StandardType}
 Name: fullType; Description: {cm:FullType}
 Name: customType; Description: {cm:CustomType}; Flags: iscustom
 
 [Components]
-Name: acfSlnComp; Description: ACF-Solutions; Types: minimalType fullType customType
-Name: xercesComp; Description: Xerces; Types: fullType customType
-Name: xalanComp; Description: Xalan; Types: fullType customType
-Name: zlibComp; Description: ZLib; Types: fullType customType
-Name: cbiosComp; Description: CBios; Types: fullType customType
-Name: ffmpegComp; Description: FFmpeg; Types: fullType customType
-Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
+Name: standardComp; Description: ACF-Solutions; Types: standardType fullType customType
+Name: binaryComp; Description: {cm:Binaries}; Types: standardType fullType customType
+Name: docuComp; Description: {cm:Documentation}; Types: standardType fullType customType
+Name: sourceComp; Description: {cm:Sources}; Types: fullType
+Name: qtBinaryComp; Description: {cm:QtBinaries}; Types: standardType fullType customType
 
 [Icons]
-Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfSlnComp
+Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; Components: binaryComp
 
 [Tasks]
-Name: AddExtPath; Description: {cm:AddExtPath}; Flags: checkedonce; Components: xercesComp xalanComp zlibComp cbiosComp ffmpegComp
-Name: AddAcfSlnPath; Description: {cm:AddAcfSlnPath}; Flags: checkedonce; Components: acfSlnComp
+Name: AddExtPath; Description: {cm:AddExtPath}; Flags: checkedonce; Components: standardComp
+Name: RegisterExtensions; Description: {cm:RegisterExtensions}; Flags: checkedonce; Components: binaryComp
 
 [Registry]
-Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\ExtLib\Bin"; Flags: createvalueifdoesntexist; Tasks: AddExtPath
-Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\Bin\Release$CompilerName$"; Flags: createvalueifdoesntexist; Tasks: AddAcfSlnPath
+Root: HKCU; Subkey: "Environment"; ValueName: "ACFSLNDIR"; ValueData: "{app}"; ValueType: string; Flags: uninsdeletevalue; Tasks: AddExtPath
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\.arx"; ValueType: string; ValueData: arx_auto_file; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueData: "ACF Registry"; ValueType: string; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\shell\\edit\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\.xpc"; ValueType: string; ValueData: xpc_auto_file; Tasks: AddExtPath
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueData: "ACF Configuration"; ValueType: string; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Tasks: RegisterExtensions
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\xpc_auto_file\\shell\\edit\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Tasks: RegisterExtensions
