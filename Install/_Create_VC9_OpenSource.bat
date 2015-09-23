@@ -1,6 +1,5 @@
 echo off
 
-set COMPILER_EXT=VC9
 set LICENSE_TYPE=OpenSource
 set LICENSE_DIR=Install/LGPL
 set LICENSE_INSTALL_PATH=../LGPL/License.txt
@@ -12,7 +11,6 @@ call %~dp0\..\Build\VC12\_CreateVCProjectsFromQMake.bat
 cd %~dp0\..
 
 set COMPILER_EXT=VC9
-
 call %ACFDIR%\Install\InternalParts\CreateTempDirs.bat
 
 call %ACFDIR%\Install\InternalParts\CreateScripts.bat

@@ -1,6 +1,5 @@
 echo off
 
-set COMPILER_EXT=VC12
 set LICENSE_TYPE=LGPL
 set LICENSE_DIR=Install/LGPL
 set LICENSE_INSTALL_PATH=../LGPL/License.txt
@@ -8,8 +7,9 @@ set ACF_CONFIG_FILE=%~dp0/../Config/Core.xpc
 
 call %~dp0\..\Build\VC12\_CreateVCProjectsFromQMake.bat
 
-cd %~dp0/..
+cd %~dp0\..
 
+set COMPILER_EXT=VC12
 call %ACFDIR%\Install\InternalParts\CreateTempDirs.bat
 
 echo Compiling...
