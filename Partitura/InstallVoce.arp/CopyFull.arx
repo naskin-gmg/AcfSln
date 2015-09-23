@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1402
+          1408
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3889
+          3897
         </Number>
         <Description>
           ACF
@@ -138,7 +138,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -243,6 +243,25 @@
               </IsEnabled>
               <Value>
                 AuxInclude
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RecursionDepth
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                -1
               </Value>
             </Data>
           </AttributeInfo>

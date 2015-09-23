@@ -41,24 +41,26 @@ Source: ..\Temp\Docs\*; DestDir: {app}\Docs; Flags: recursesubdirs; Components: 
 Source: ..\Temp\Include\*; DestDir: {app}\Include; Flags: recursesubdirs; Components: sourceComp
 Source: ..\Temp\Impl\*; DestDir: {app}\Impl; Flags: recursesubdirs; Components: sourceComp
 
-Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\icu*.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Core.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Gui.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Widgets.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Xml.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?Svg.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?PrintSupport.dll; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
+Source: {#QTDIR}\bin\Qt?PrintSupport.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
 Source: {#QTDIR}\bin\Qt?PrintSupport.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\imageformats\qsvgd.*; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
 Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\iconengines\qsvgicond.*; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: qtBinaryComp
 Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\platforms\qwindowsd.*; DestDir: {app}\Bin\Debug$CompilerName$\platforms; Components: qtBinaryComp
+Source: {#QTDIR}\plugins\platforms\qwindows.dll; DestDir: {app}\Bin\Release$CompilerName$\platforms; Components: qtBinaryComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl

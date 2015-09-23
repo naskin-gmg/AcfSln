@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
 	Q_INIT_RESOURCE(AcfSlnLoc);
 	Q_INIT_RESOURCE(Compositor);
 
+	QApplication::addLibraryPath("./");
+
 	QApplication::setStyle("fusion");
 
 	CCompositor instance;
