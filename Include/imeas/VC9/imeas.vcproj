@@ -331,6 +331,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRelativeUnitSelectorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSamplesInfo.cpp"
 				>
 			</File>
@@ -397,6 +401,10 @@
 			</File>
 			<File
 				RelativePath="..\CNumericValuesJoinerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRelativeUnitSelectorComp.h"
 				>
 			</File>
 			<File

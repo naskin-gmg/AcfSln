@@ -83,6 +83,11 @@ I_EXPORT_COMPONENT(
 			"Calculate the cross correlation of two data sequences",
 			"Correlation Processor Comparsion" IM_AUTHOR("\"Kirill Lepskiy\""));
 
+I_EXPORT_COMPONENT(
+			RelativeUnitSelector,
+			"Selector of unit info for relative values",
+			"Correlation Processor Comparsion" IM_AUTHOR("\"Kirill Lepskiy\""));
+
 
 } // namespace MeasPck
 
