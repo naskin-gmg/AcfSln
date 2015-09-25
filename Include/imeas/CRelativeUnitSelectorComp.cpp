@@ -135,7 +135,7 @@ QString CRelativeUnitSelectorComp::GetUnitName() const
 		case DM_PERCENT:
 			return "%";
 		case DM_PERMILLE:
-			return QChar(2030);
+			return QChar(0x2030);
 		default:
 			return QString();
 	}
@@ -148,7 +148,7 @@ double CRelativeUnitSelectorComp::GetDisplayMultiplicationFactor() const
 		case DM_PERCENT:
 			return 100.0;
 		case DM_PERMILLE:
-			return 10.0;
+			return 1000.0;
 	}
 
 	return 1.0;
