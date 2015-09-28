@@ -7,10 +7,21 @@
           0
         </Id>
         <Number>
-          3887
+          3907
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1412
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
@@ -22,17 +33,6 @@
         </Number>
         <Description>
           Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1400
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -49,15 +49,15 @@
         500
       </Y>
       <Note>
-        
+        This copy operation removes using of ACFDIR environmental variable from all projects.&#10;
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        Application
+        VersionInfo
       </ComponentName>
       <X>
-        375
+        925
       </X>
       <Y>
         325
@@ -68,10 +68,10 @@
     </Element>
     <Element>
       <ComponentName>
-        VersionInfo
+        Application
       </ComponentName>
       <X>
-        925
+        375
       </X>
       <Y>
         325

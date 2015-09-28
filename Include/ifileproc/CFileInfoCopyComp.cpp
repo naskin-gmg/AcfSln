@@ -254,6 +254,10 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 				static const QString relativeOutputPrefix = "$RelativeToOutputFile:";
 				static const QString absoluteInputPrefix = "$AbsoluteToInputFile:";
 				static const QString absoluteOutputPrefix = "$AbsoluteToInputFile:";
+				static const QString relativeInputOsPrefix = "$RelativeToInputFileOS:";
+				static const QString relativeOutputOsPrefix = "$RelativeToOutputFileOS:";
+				static const QString absoluteInputOsPrefix = "$AbsoluteToInputFileOS:";
+				static const QString absoluteOutputOsPrefix = "$AbsoluteToInputFileOS:";
 
 				if (replacedText.startsWith(relativeInputPrefix)){
 					replacedText = inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputPrefix.size())));
@@ -266,6 +270,18 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 				}
 				else if (replacedText.startsWith(absoluteOutputPrefix)){
 					replacedText = outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputPrefix.size())));
+				}
+				if (replacedText.startsWith(relativeInputOsPrefix)){
+					replacedText = QDir::toNativeSeparators(inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputOsPrefix.size()))));
+				}
+				else if (replacedText.startsWith(relativeOutputOsPrefix)){
+					replacedText = QDir::toNativeSeparators(outputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeOutputOsPrefix.size()))));
+				}
+				else if (replacedText.startsWith(absoluteInputOsPrefix)){
+					replacedText = QDir::toNativeSeparators(inputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteInputOsPrefix.size()))));
+				}
+				else if (replacedText.startsWith(absoluteOutputOsPrefix)){
+					replacedText = QDir::toNativeSeparators(outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputOsPrefix.size()))));
 				}
 
 				result = replacedText;

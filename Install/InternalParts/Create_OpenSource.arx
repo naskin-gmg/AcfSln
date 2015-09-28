@@ -7,10 +7,21 @@
           0
         </Id>
         <Number>
-          3887
+          3907
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1412
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
@@ -22,17 +33,6 @@
         </Number>
         <Description>
           Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          1400
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -371,13 +371,13 @@
               </IsEnabled>
               <Values count="3">
                 <Value>
-                  $RelativeToInputFile:$(ACFDIR)
+                  $RelativeToInputFileOS:$(ACFDIR)
                 </Value>
                 <Value>
-                  $RelativeToInputFile:$(ACFDIR)/Config
+                  $RelativeToInputFileOS:$(ACFDIR)/Config
                 </Value>
                 <Value>
-                  $RelativeToInputFile:$(ACFSLNDIR)
+                  $RelativeToInputFileOS:$(ACFSLNDIR)
                 </Value>
               </Values>
             </Data>
