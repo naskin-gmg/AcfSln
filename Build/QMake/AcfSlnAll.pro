@@ -1,10 +1,7 @@
 # Root of ACF-Solutions project
 
 
-include ($(ACFCONFIGDIR)/QMake/GeneralConfig.pri)
-
-TEMPLATE = subdirs
-CONFIG += ordered
+include ($(ACFCONFIGDIR)/QMake/Solution.pri)
 
 
 # Static libraries
