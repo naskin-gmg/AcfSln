@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1408
+          1412
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3897
+          3907
         </Number>
         <Description>
           ACF
@@ -38,6 +38,48 @@
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="5">
+    <Element>
+      <ComponentName>
+        CopyAllFiles
+      </ComponentName>
+      <X>
+        250
+      </X>
+      <Y>
+        325
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyBins
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <Y>
+        425
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyLibs
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <Y>
+        225
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         CopyOpenSources
@@ -54,20 +96,6 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyLibs
-      </ComponentName>
-      <X>
-        850
-      </X>
-      <Y>
-        250
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CopyAuxIncludes
       </ComponentName>
       <X>
@@ -75,34 +103,6 @@
       </X>
       <Y>
         500
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyBins
-      </ComponentName>
-      <X>
-        825
-      </X>
-      <Y>
-        500
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyAllFiles
-      </ComponentName>
-      <X>
-        250
-      </X>
-      <Y>
-        325
       </Y>
       <Note>
         
