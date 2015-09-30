@@ -15,29 +15,29 @@
       </Version>
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3887
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1400
+          1412
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3907
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         ColorPatternComparatorGui
@@ -171,7 +171,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
+                <Value>
+                  Region
+                </Value>
                 <Value>
                   ComparisonThreshold
                 </Value>
@@ -195,7 +198,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
+                <Value>
+                  Region
+                </Value>
                 <Value>
                   ComparisonThreshold
                 </Value>
@@ -219,7 +225,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
+                <Value>
+                  Region
+                </Value>
                 <Value>
                   Comparison Threshold
                 </Value>
@@ -337,6 +346,94 @@
               <Value>
                 HistogramView
               </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Region
+      </Id>
+      <PackageId>
+        QtViewPck
+      </PackageId>
+      <ComponentId>
+        PolygonParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              DefaultUnitInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              UnitInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              NodeListSize
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShapeColorSchema
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              AoiShapeColorSchema
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveSceneExtender
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              SlaveSceneExtender
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

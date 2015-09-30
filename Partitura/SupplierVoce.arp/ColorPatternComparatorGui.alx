@@ -15,29 +15,43 @@
       </Version>
       <Version>
         <Id>
-          0
-        </Id>
-        <Number>
-          3887
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1400
+          1412
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          3907
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
+    <Element>
+      <ComponentName>
+        HistogramView
+      </ComponentName>
+      <X>
+        175
+      </X>
+      <Y>
+        525
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         ParamsSetGui
@@ -54,10 +68,10 @@
     </Element>
     <Element>
       <ComponentName>
-        PatternController
+        Region
       </ComponentName>
       <X>
-        175
+        575
       </X>
       <Y>
         400
@@ -96,13 +110,13 @@
     </Element>
     <Element>
       <ComponentName>
-        HistogramView
+        PatternController
       </ComponentName>
       <X>
         175
       </X>
       <Y>
-        525
+        400
       </Y>
       <Note>
         
