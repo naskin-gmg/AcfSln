@@ -4,10 +4,21 @@
     <VersionInfos count="3">
       <Version>
         <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           0
         </Id>
         <Number>
-          3850
+          3909
         </Number>
         <Description>
           ACF
@@ -18,26 +29,71 @@
           1
         </Id>
         <Number>
-          1374
+          1415
         </Number>
         <Description>
           ACF-Solutions
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="11">
+    <Element>
+      <ComponentName>
+        CopyIncludeSources
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyImplSources
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <Y>
+        125
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyImplResources
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <Y>
+        225
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyIncludeProjects
+      </ComponentName>
+      <X>
+        775
+      </X>
+      <Y>
+        475
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         CopyAllFiles
@@ -68,13 +124,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyImplResources
+        CopyImplOther
       </ComponentName>
       <X>
-        650
+        225
       </X>
       <Y>
-        225
+        750
       </Y>
       <Note>
         
@@ -96,27 +152,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyImplSources
+        CopyBuildProjects
       </ComponentName>
       <X>
-        475
+        975
       </X>
       <Y>
-        125
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyIncludeSources
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <Y>
-        475
+        600
       </Y>
       <Note>
         
@@ -127,52 +169,10 @@
         CopyImplProjects
       </ComponentName>
       <X>
-        950
+        850
       </X>
       <Y>
-        300
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyBuildProjects
-      </ComponentName>
-      <X>
-        950
-      </X>
-      <Y>
-        400
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImplOther
-      </ComponentName>
-      <X>
-        225
-      </X>
-      <Y>
-        750
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyIncludeProjects
-      </ComponentName>
-      <X>
-        775
-      </X>
-      <Y>
-        475
+        125
       </Y>
       <Note>
         
@@ -186,7 +186,7 @@
         650
       </X>
       <Y>
-        625
+        600
       </Y>
       <Note>
         

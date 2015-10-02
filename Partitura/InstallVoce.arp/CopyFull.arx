@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328706
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           1
         </Id>
         <Number>
-          1412
+          1415
         </Number>
         <Description>
           ACF-Solutions
@@ -29,10 +18,21 @@
           0
         </Id>
         <Number>
-          3907
+          3909
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          328706
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -623,7 +623,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -706,6 +706,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SourceExcludeFilters
             </Id>
             <Type>
@@ -713,6 +745,38 @@
             </Type>
             <ExportId>
               SourceExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              WinProjectsSubstitutionTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              WinProjectsSubstitutionValues
             </ExportId>
             <Data>
               <IsEnabled>

@@ -7,7 +7,7 @@
           1023
         </Id>
         <Number>
-          328706
+          328960
         </Number>
         <Description>
           Qt Framework
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1412
+          1423
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3907
+          3915
         </Number>
         <Description>
           ACF
@@ -165,7 +165,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="14">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -345,44 +345,6 @@
               </IsEnabled>
               <Value>
                 10
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ReplaceEmbeddedVariables
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ReplaceEnvironmentVariables
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -989,7 +951,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1094,6 +1056,44 @@
               </IsEnabled>
               <Value>
                 Docs
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ReplaceEmbeddedVariables
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ReplaceEnvironmentVariables
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -1829,7 +1829,7 @@
         InstallVoce
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        CopyProjectsProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -1838,7 +1838,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="11">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1869,94 +1869,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Filters
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="17">
-                <Value>
-                  *.ui
-                </Value>
-                <Value>
-                  *.qrc
-                </Value>
-                <Value>
-                  *.moc
-                </Value>
-                <Value>
-                  *.vcproj
-                </Value>
-                <Value>
-                  *.vcxproj
-                </Value>
-                <Value>
-                  *.sln
-                </Value>
-                <Value>
-                  *.pro
-                </Value>
-                <Value>
-                  *.pri
-                </Value>
-                <Value>
-                  *.qbs
-                </Value>
-                <Value>
-                  *.arx
-                </Value>
-                <Value>
-                  *.alx
-                </Value>
-                <Value>
-                  *.xml
-                </Value>
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.svg
-                </Value>
-                <Value>
-                  *.txt
-                </Value>
-                <Value>
-                  *.html
-                </Value>
-                <Value>
-                  *.htm
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IgnoreUnknownTags
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -2015,6 +1927,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              ProjectsSubstitutionValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               RecursionDepth
             </Id>
             <Type>
@@ -2034,13 +1978,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SubstitutionTagExpr
+              WinProjectsSubstitutionTags
             </Id>
             <Type>
-              String
+              String[]
             </Type>
             <ExportId>
-              ProjectsSubstitutionTagExpr
+              WinProjectsSubstitutionTags
             </ExportId>
             <Data>
               <IsEnabled>
@@ -2050,29 +1994,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UserSubstitutionTags
+              WinProjectsSubstitutionValues
             </Id>
             <Type>
               String[]
             </Type>
             <ExportId>
-              ProjectsSubstitutionTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UserSubstitutionValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              ProjectsSubstitutionValues
+              WinProjectsSubstitutionValues
             </ExportId>
             <Data>
               <IsEnabled>
@@ -2285,7 +2213,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="14">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -2458,44 +2386,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ReplaceEmbeddedVariables
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ReplaceEnvironmentVariables
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               SubstitutionTagExpr
             </Id>
             <Type>
@@ -2521,23 +2411,12 @@
               String[]
             </Type>
             <ExportId>
-              
+              WinProjectsSubstitutionTags
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="3">
-                <Value>
-                  ACFDIR
-                </Value>
-                <Value>
-                  ACFCONFIGDIR
-                </Value>
-                <Value>
-                  ACFSLNDIR
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -2548,23 +2427,12 @@
               String[]
             </Type>
             <ExportId>
-              
+              WinProjectsSubstitutionValues
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="3">
-                <Value>
-                  ..\..\..\..\Acf
-                </Value>
-                <Value>
-                  ..\..\..\..\Acf\Config
-                </Value>
-                <Value>
-                  ..\..\..\..\AcfSln
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

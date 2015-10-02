@@ -4,24 +4,24 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          0
+          1
         </Id>
         <Number>
-          3907
+          1415
         </Number>
         <Description>
-          ACF
+          ACF-Solutions
         </Description>
       </Version>
       <Version>
         <Id>
-          1
+          0
         </Id>
         <Number>
-          1412
+          3909
         </Number>
         <Description>
-          ACF-Solutions
+          ACF
         </Description>
       </Version>
       <Version>
@@ -211,7 +211,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -310,6 +310,60 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+                <Value>
+                  ACFSLNDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFDIR)/Config
+                </Value>
+                <Value>
+                  $RelativeToInputFile:$(ACFSLNDIR)
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SourceExcludeFilters
             </Id>
             <Type>
@@ -343,6 +397,60 @@
                 </Value>
                 <Value>
                   VC12
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  ACFDIR
+                </Value>
+                <Value>
+                  ACFCONFIGDIR
+                </Value>
+                <Value>
+                  ACFSLNDIR
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WinProjectsSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFDIR)/Config
+                </Value>
+                <Value>
+                  $RelativeToInputFileWin:$(ACFSLNDIR)
                 </Value>
               </Values>
             </Data>
