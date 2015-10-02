@@ -258,6 +258,10 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 				static const QString relativeOutputOsPrefix = "$RelativeToOutputFileOS:";
 				static const QString absoluteInputOsPrefix = "$AbsoluteToInputFileOS:";
 				static const QString absoluteOutputOsPrefix = "$AbsoluteToInputFileOS:";
+				static const QString relativeInputWinPrefix = "$RelativeToInputFileWin:";
+				static const QString relativeOutputWinPrefix = "$RelativeToOutputFileWin:";
+				static const QString absoluteInputWinPrefix = "$AbsoluteToInputFileWin:";
+				static const QString absoluteOutputWinPrefix = "$AbsoluteToInputFileWin:";
 
 				if (replacedText.startsWith(relativeInputPrefix)){
 					replacedText = inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputPrefix.size())));
@@ -271,7 +275,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 				else if (replacedText.startsWith(absoluteOutputPrefix)){
 					replacedText = outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputPrefix.size())));
 				}
-				if (replacedText.startsWith(relativeInputOsPrefix)){
+				else if (replacedText.startsWith(relativeInputOsPrefix)){
 					replacedText = QDir::toNativeSeparators(inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputOsPrefix.size()))));
 				}
 				else if (replacedText.startsWith(relativeOutputOsPrefix)){
@@ -282,6 +286,18 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 				}
 				else if (replacedText.startsWith(absoluteOutputOsPrefix)){
 					replacedText = QDir::toNativeSeparators(outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputOsPrefix.size()))));
+				}
+				else if (replacedText.startsWith(relativeInputWinPrefix)){
+					replacedText = inputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeInputWinPrefix.size()))).replace('/', '\\');
+				}
+				else if (replacedText.startsWith(relativeOutputWinPrefix)){
+					replacedText = outputDir.relativeFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(relativeOutputWinPrefix.size()))).replace('/', '\\');
+				}
+				else if (replacedText.startsWith(absoluteInputWinPrefix)){
+					replacedText = inputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteInputWinPrefix.size()))).replace('/', '\\');
+				}
+				else if (replacedText.startsWith(absoluteOutputWinPrefix)){
+					replacedText = outputDir.absoluteFilePath(istd::CSystem::GetEnrolledPath(replacedText.mid(absoluteOutputWinPrefix.size()))).replace('/', '\\');
 				}
 
 				result = replacedText;
