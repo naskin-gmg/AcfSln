@@ -201,11 +201,11 @@ DocumentProcessingPck.depends = iproc idocproc
 
 
 # Tools
-SUBDIRS += Compositor
-Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
-Compositor.depends = CompositorPck
-
 SUBDIRS += XpcEditor
 XpcEditor.file = ../../Impl/XpcEditorExe/QMake/XpcEditor.pro
 XpcEditor.depends = CompositorPck
+
+SUBDIRS += Compositor
+Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
+Compositor.depends = CompositorPck XpcEditor
 
