@@ -113,7 +113,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)$(CompilerCode)"
+				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
 			/>
 		</Configuration>
 		<Configuration
@@ -207,7 +207,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)$(CompilerCode)"
+				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
 			/>
 		</Configuration>
 		<Configuration
@@ -300,7 +300,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)$(CompilerCode)"
+				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
 			/>
 		</Configuration>
 		<Configuration
@@ -395,7 +395,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(QTDIR)\bin\*.dll ..\..\..\bin\$(ConfigurationName)$(CompilerCode)"
+				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
 			/>
 		</Configuration>
 	</Configurations>
