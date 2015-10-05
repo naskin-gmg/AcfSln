@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1415
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3909
+          3922
         </Number>
         <Description>
           ACF
@@ -26,10 +15,21 @@
       </Version>
       <Version>
         <Id>
+          1
+        </Id>
+        <Number>
+          1429
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
           1023
         </Id>
         <Number>
-          328706
+          328960
         </Number>
         <Description>
           Qt Framework
@@ -40,20 +40,6 @@
   <PositionMap count="3">
     <Element>
       <ComponentName>
-        CopyPublic
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <Y>
-        500
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         Application
       </ComponentName>
       <X>
@@ -61,6 +47,20 @@
       </X>
       <Y>
         325
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyPublic
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <Y>
+        500
       </Y>
       <Note>
         
