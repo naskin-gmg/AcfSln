@@ -84,9 +84,6 @@ private:
 	// shadows
 	QString m_addressString;
 	QIcon m_icon;
-	QIcon m_exportIcon;
-	QIcon m_noteAttachedIcon;
-	QIcon m_autoInitIcon;
 	QColor m_backgroundColor;
 	QColor m_backgroundSelectedColor;
 	bool m_isConsistent;
