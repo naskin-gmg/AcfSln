@@ -26,8 +26,11 @@ VersionInfoVersion=$AcfVersion:1$
 ChangesEnvironment=yes
 
 [Files]
-Source: ..\Temp\Bin\*; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
-Source: ..\Temp\Lib\*; DestDir: {app}\Lib; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Bin\*.exe; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Bin\*.arp; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Bin\*.pdb; DestDir: {app}\Bin; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Lib\*.lib; DestDir: {app}\Lib; Flags: recursesubdirs; Components: binaryComp
+Source: ..\Temp\Lib\*.pdb; DestDir: {app}\Lib; Flags: recursesubdirs; Components: binaryComp
 
 Source: ..\Temp\Config\*; DestDir: {app}\Config; Flags: recursesubdirs; Components: standardComp
 Source: ..\Temp\Partitura\*; DestDir: {app}\Partitura; Flags: recursesubdirs; Components: standardComp
@@ -41,30 +44,7 @@ Source: ..\Temp\Docs\*; DestDir: {app}\Docs; Flags: recursesubdirs; Components: 
 Source: ..\Temp\Include\*; DestDir: {app}\Include; Flags: recursesubdirs; Components: sourceComp
 Source: ..\Temp\Impl\*; DestDir: {app}\Impl; Flags: recursesubdirs; Components: sourceComp
 
-Source: {#QTDIR}\bin\icu*.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\icu*.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Cored.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Core.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Guid.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Gui.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Widgetsd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Widgets.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Xmld.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Xml.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Svgd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Svg.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?PrintSupportd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?PrintSupport.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?XmlPatternsd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?XmlPatterns.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Networkd.*; DestDir: {app}\Bin\Debug$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\bin\Qt?Network.dll; DestDir: {app}\Bin\Release$CompilerName$; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\imageformats\qsvgd.*; DestDir: {app}\Bin\Debug$CompilerName$\imageformats; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\imageformats\qsvg.dll; DestDir: {app}\Bin\Release$CompilerName$\imageformats; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\iconengines\qsvgicond.*; DestDir: {app}\Bin\Debug$CompilerName$\iconengines; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\iconengines\qsvgicon.dll; DestDir: {app}\Bin\Release$CompilerName$\iconengines; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\platforms\qwindowsd.*; DestDir: {app}\Bin\Debug$CompilerName$\platforms; Components: qtBinaryComp
-Source: {#QTDIR}\plugins\platforms\qwindows.dll; DestDir: {app}\Bin\Release$CompilerName$\platforms; Components: qtBinaryComp
+Source: ..\Temp\Bin\*.dll; DestDir: {app}\Lib; Flags: recursesubdirs; Components: qtBinaryComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl
