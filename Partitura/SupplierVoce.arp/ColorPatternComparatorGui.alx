@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1412
+          1423
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           0
         </Id>
         <Number>
-          3907
+          3915
         </Number>
         <Description>
           ACF
@@ -47,48 +47,6 @@
       </X>
       <Y>
         525
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsSetGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <Y>
-        275
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Region
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <Y>
-        400
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ColorPatternComparatorGui
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <Y>
-        150
       </Y>
       <Note>
         
@@ -117,6 +75,48 @@
       </X>
       <Y>
         400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ColorPatternComparatorGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <Y>
+        150
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Region
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <Y>
+        400
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <Y>
+        275
       </Y>
       <Note>
         
