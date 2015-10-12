@@ -95,7 +95,8 @@ CUser* CUsersManagerComp::AddUser(const QString& userName)
 		return NULL;
 	}
 
-	istd::CChangeNotifier changePtr(this);
+	ChangeSet changeSet(CF_USER_ADDED, QString("User '%1' added").arg(userName));
+	istd::CChangeNotifier changePtr(this, &changeSet);
 
 	m_users.push_back(CUser(userName));
 
@@ -107,7 +108,8 @@ bool CUsersManagerComp::DeleteUser(const QString& userName)
 {
 	for (Users::iterator iter = m_users.begin(); iter != m_users.end(); iter++){
 		if (iter->GetUserName() == userName){
-			istd::CChangeNotifier changePtr(this);
+			ChangeSet changeSet(CF_USER_REMOVED, QString("User '%1' removed").arg(userName));
+			istd::CChangeNotifier changePtr(this, &changeSet);
 			
 			m_users.erase(iter);
 
@@ -124,10 +126,13 @@ bool CUsersManagerComp::RenameUser(int userIndex, const QString& userName)
 	Q_ASSERT(userIndex >= 0);
 	Q_ASSERT(userIndex < int(m_users.size()));
 
-	//checking if the new user name does not exist a second time
+	// checking if the new user name does not exist a second time
 	if (FindUserIndex(userName) >= 0){
 		return false;
 	}
+
+	ChangeSet changeSet(CF_USER_RENAMED, QString("User '%1' renamed to '%2'").arg(m_users[userIndex].GetUserName(), userName));
+	istd::CChangeNotifier changePtr(this, &changeSet);
 
 	return m_users[userIndex].SetUserName(userName);
 }
