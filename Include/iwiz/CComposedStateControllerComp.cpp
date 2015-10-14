@@ -9,6 +9,11 @@ namespace iwiz
 {
 
 
+const istd::IChangeable::ChangeSet s_enterStateChangeSet(iproc::IStateController::CF_STATE_ENTERED);
+const istd::IChangeable::ChangeSet s_leaveStateChangeSet(iproc::IStateController::CF_STATE_LEAVED);
+const istd::IChangeable::ChangeSet s_enableStateChangeSet(iproc::IStateController::CF_STATE_ENABLED);
+
+
 // public methods
 
 CComposedStateControllerComp::CComposedStateControllerComp()
@@ -96,8 +101,7 @@ bool CComposedStateControllerComp::TryEnterState(bool isActionAllowed, const ISt
 		}
 	}
 
-	ChangeSet changeSet(CF_STATE_ENTERED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_enterStateChangeSet);
 	Q_UNUSED(notifier);
 
 	m_isStateActive = true;
@@ -120,8 +124,7 @@ bool CComposedStateControllerComp::TryLeaveState(bool isActionAllowed, const ISt
 		}
 	}
 
-	ChangeSet changeSet(CF_STATE_LEAVED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_leaveStateChangeSet);
 	Q_UNUSED(notifier);
 
 	m_isStateActive = false;
@@ -162,8 +165,7 @@ void CComposedStateControllerComp::UpdateAllMembers()
 	}
 
 	if (m_isStateEnabled != isEnabled){
-		ChangeSet changeSet(CF_STATE_ENABLED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_enableStateChangeSet);
 		Q_UNUSED(notifier);
 
 		m_isStateEnabled = isEnabled;

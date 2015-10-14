@@ -16,6 +16,9 @@ namespace ihotf
 {
 
 
+const istd::IChangeable::ChangeSet s_processingStateChangeSet(IHotfolderProcessingItem::CF_STATE_CHANGED);
+
+
 CHotfolderProcessingItem::CHotfolderProcessingItem()
 	:m_processingState(iproc::IProcessor::TS_NONE),
 	m_processingTime(0.0)
@@ -45,8 +48,7 @@ int CHotfolderProcessingItem::GetProcessingState() const
 void CHotfolderProcessingItem::SetProcessingState(int processingState)
 {
 	if (m_processingState != processingState){
-		ChangeSet changeSet(CF_STATE_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_processingStateChangeSet);
 		Q_UNUSED(notifier);
 
 		m_processingState = processingState;

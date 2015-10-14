@@ -15,7 +15,11 @@ namespace ihotf
 {
 
 
-// public methods
+const istd::IChangeable::ChangeSet s_addFileChangeSet(IHotfolderProcessingInfo::CF_FILE_ADDED);
+const istd::IChangeable::ChangeSet s_removeItemChangeSet(IHotfolderProcessingInfo::CF_FILE_REMOVED);
+const istd::IChangeable::ChangeSet s_itemStateChangeSet(IHotfolderProcessingInfo::CF_WORKING_STATE_CHANGED);
+
+
 
 CHotfolderProcessingInfo::CHotfolderProcessingInfo()
 :	m_isWorking(false)
@@ -59,8 +63,7 @@ const ihotf::IHotfolderProcessingItem* CHotfolderProcessingInfo::AddProcessingIt
 		return foundItemPtr;
 	}
 
-	ChangeSet changeSet(CF_FILE_ADDED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_addFileChangeSet);
 	Q_UNUSED(notifier);
 
 	ProcessingItem* itemPtr = new ProcessingItem;
@@ -86,8 +89,7 @@ void CHotfolderProcessingInfo::RemoveProcessingItem(ihotf::IHotfolderProcessingI
 		return;
 	}
 
-	ChangeSet changeSet(CF_FILE_REMOVED);
-	istd::CChangeNotifier notifier(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_removeItemChangeSet);
 
 	if (!m_processingItems.Remove(fileItemPtr)){
 		notifier.Abort();
@@ -120,8 +122,7 @@ bool CHotfolderProcessingInfo::IsWorking() const
 void CHotfolderProcessingInfo::SetWorking(bool working)
 {
 	if (working != m_isWorking){
-		ChangeSet changeSet(CF_WORKING_STATE_CHANGED);
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_itemStateChangeSet);
 		Q_UNUSED(notifier);
 
 		m_isWorking = working;
