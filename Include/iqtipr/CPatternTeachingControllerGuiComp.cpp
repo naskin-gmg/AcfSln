@@ -46,6 +46,17 @@ void CPatternTeachingControllerGuiComp::on_LearnButton_clicked()
 }
 
 
+void CPatternTeachingControllerGuiComp::on_ResetButton_clicked()
+{
+	iipr::IPatternController* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	if (objectPtr != NULL){
+		objectPtr->ResetPattern();
+	}
+}
+
+
 void CPatternTeachingControllerGuiComp::on_EditButton_clicked()
 {
 	iipr::IPatternController* objectPtr = GetObservedObject();
