@@ -301,7 +301,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComponentPromotorDialogComp.cpp"
+				RelativePath="..\CConvertComponentCommandComp.cpp"
 				>
 			</File>
 			<File
@@ -395,7 +395,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComponentPromotorDialogComp.h"
+				RelativePath="..\CConvertComponentCommandComp.h"
 				>
 			</File>
 			<File
@@ -657,7 +657,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComponentPromotorDialogComp.ui"
+				RelativePath="..\CConvertComponentCommandComp.ui"
 				>
 			</File>
 			<File
@@ -706,7 +706,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComponentPromotorDialogComp.moc"
+				RelativePath="..\CConvertComponentCommandComp.moc"
 				>
 			</File>
 			<File

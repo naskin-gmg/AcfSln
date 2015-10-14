@@ -1,5 +1,5 @@
-#ifndef icmpstr_CComponentPromotorDialogComp_included
-#define icmpstr_CComponentPromotorDialogComp_included
+#ifndef icmpstr_CConvertComponentCommandComp_included
+#define icmpstr_CConvertComponentCommandComp_included
 
 
 // Qt includes
@@ -19,7 +19,7 @@
 #include "iqtgui/CHierarchicalCommand.h"
 #include "icmpstr/IElementSelectionInfo.h"
 
-#include "GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h"
+#include "GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h"
 
 
 namespace icmpstr
@@ -29,7 +29,7 @@ namespace icmpstr
 /**
 	\internal
 */
-class CComponentPromotorDialogCompBase:
+class CConvertComponentCommandCompBase:
 			public icomp::CComponentBase,
 			public imod::TSingleModelObserverBase<IElementSelectionInfo>
 {
@@ -37,26 +37,26 @@ public:
 };
 
 
-class CComponentPromotorDialogComp:
+class CConvertComponentCommandComp:
 			public QDialog,
-			public Ui::CComponentPromotorDialogComp,
-			public ibase::TModelObserverCompWrap<CComponentPromotorDialogCompBase>,
+			public Ui::CConvertComponentCommandComp,
+			public ibase::TModelObserverCompWrap<CConvertComponentCommandCompBase>,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef ibase::TModelObserverCompWrap<CComponentPromotorDialogCompBase> BaseClass;
+	typedef ibase::TModelObserverCompWrap<CConvertComponentCommandCompBase> BaseClass;
 	typedef imod::TSingleModelObserverBase<IElementSelectionInfo> BaseClass2;
 	typedef QDialog BaseClass3;
 
-	I_BEGIN_COMPONENT(CComponentPromotorDialogComp);
+	I_BEGIN_COMPONENT(CConvertComponentCommandComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Access to manager of components meta information", true, "MetaInfoManager");
 	I_END_COMPONENT;
 
 public:
-	CComponentPromotorDialogComp();
+	CConvertComponentCommandComp();
 
 	// reimpemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -116,13 +116,13 @@ private:
 
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;
 	iqtgui::CHierarchicalCommand m_registryMenu;
-	iqtgui::CHierarchicalCommand m_promoteComponentCommand;
+	iqtgui::CHierarchicalCommand m_convertComponentCommand;
 };
 
 
 } // namespace icmpstr
 
 
-#endif // !icmpstr_CComponentPromotorDialogComp_included
+#endif // !icmpstr_CConvertComponentCommandComp_included
 
 

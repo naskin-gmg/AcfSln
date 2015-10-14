@@ -93,7 +93,7 @@ I_EXPORT_COMPONENT(
 			"Scene Provider Extender Display Console" IM_TAG("Deprecated"));
 
 I_EXPORT_COMPONENT(
-			ComponentPromotorDialog,
+			ConvertComponentCommand,
 			"Provide commands to promote selected components to another component type",
 			"Component Promote Promotor Change Address Commands Dialog" IM_TAG("GUI"));
 

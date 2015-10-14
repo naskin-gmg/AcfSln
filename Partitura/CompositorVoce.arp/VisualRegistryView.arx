@@ -78,7 +78,7 @@
                   SceneProvider
                 </Value>
                 <Value>
-                  ComponentPromotorDialog
+                  ConvertComponentCommand
                 </Value>
               </Values>
             </Data>
@@ -88,13 +88,13 @@
     </Element>
     <Element>
       <Id>
-        ComponentPromotorDialog
+        ConvertComponentCommand
       </Id>
       <PackageId>
         CompositorPck
       </PackageId>
       <ComponentId>
-        ComponentPromotorDialog
+        ConvertComponentCommand
       </ComponentId>
       <Data>
         <IsEnabled>
