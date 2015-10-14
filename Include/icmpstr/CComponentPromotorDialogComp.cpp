@@ -24,6 +24,9 @@ namespace icmpstr
 {
 
 
+const istd::IChangeable::ChangeSet s_morphElementChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_ELEMENT_ADDED, QObject::tr("Morph component"));
+
+
 CComponentPromotorDialogComp::CComponentPromotorDialogComp()
 {
 	setupUi(this);
@@ -426,8 +429,7 @@ void CComponentPromotorDialogComp::OnPromoteCommand()
 					PackageNameCB->currentText().toLatin1(),
 					ComponentNameCB->currentText().toLatin1());
 
-		static const istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistry::CF_ELEMENT_REMOVED, icomp::IRegistry::CF_ELEMENT_ADDED, "Promote component");
-		istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
+		istd::CChangeNotifier registryNotifier(registryPtr, &s_morphElementChangeSet);
 		Q_UNUSED(registryNotifier);
 
 		for (		IElementSelectionInfo::Elements::Iterator iter = elements.begin();

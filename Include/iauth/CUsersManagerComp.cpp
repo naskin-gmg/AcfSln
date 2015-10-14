@@ -10,6 +10,11 @@ namespace iauth
 {
 
 
+const istd::IChangeable::ChangeSet s_addUserChangeSet(iauth::IUsersManager::CF_USER_ADDED, QObject::tr("Add user"));
+const istd::IChangeable::ChangeSet s_removeUserChangeSet(iauth::IUsersManager::CF_USER_REMOVED, QObject::tr("User remove"));
+const istd::IChangeable::ChangeSet s_renameUserChangeSet(iauth::IUsersManager::CF_USER_RENAMED, QObject::tr("User renamed"));
+
+
 // reimplemented (iauth::IUsersManager)
 
 int CUsersManagerComp::GetUsersCount() const
@@ -95,8 +100,7 @@ CUser* CUsersManagerComp::AddUser(const QString& userName)
 		return NULL;
 	}
 
-	ChangeSet changeSet(CF_USER_ADDED, QString("User '%1' added").arg(userName));
-	istd::CChangeNotifier changePtr(this, &changeSet);
+	istd::CChangeNotifier changePtr(this, &s_addUserChangeSet);
 
 	m_users.push_back(CUser(userName));
 
@@ -108,8 +112,7 @@ bool CUsersManagerComp::DeleteUser(const QString& userName)
 {
 	for (Users::iterator iter = m_users.begin(); iter != m_users.end(); iter++){
 		if (iter->GetUserName() == userName){
-			ChangeSet changeSet(CF_USER_REMOVED, QString("User '%1' removed").arg(userName));
-			istd::CChangeNotifier changePtr(this, &changeSet);
+			istd::CChangeNotifier changePtr(this, &s_removeUserChangeSet);
 			
 			m_users.erase(iter);
 
@@ -131,8 +134,8 @@ bool CUsersManagerComp::RenameUser(int userIndex, const QString& userName)
 		return false;
 	}
 
-	ChangeSet changeSet(CF_USER_RENAMED, QString("User '%1' renamed to '%2'").arg(m_users[userIndex].GetUserName(), userName));
-	istd::CChangeNotifier changePtr(this, &changeSet);
+	istd::CChangeNotifier notifier(this, &s_renameUserChangeSet);
+	Q_UNUSED(notifier);
 
 	return m_users[userIndex].SetUserName(userName);
 }

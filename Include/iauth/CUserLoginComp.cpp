@@ -9,6 +9,10 @@ namespace iauth
 {
 
 
+const istd::IChangeable::ChangeSet s_loginChangeSet(iauth::ILogin::CF_LOGIN, QObject::tr("Login"));
+const istd::IChangeable::ChangeSet s_logoutChangeSet(iauth::ILogin::CF_LOGOUT, QObject::tr("Logout"));
+
+
 // reimplemented (iauth::ILogin)
 
 CUser* CUserLoginComp::GetLoggedUser() const
@@ -37,8 +41,7 @@ bool CUserLoginComp::Login(const QString& userName, const QString& password)
 					}
 				}
 
-				ChangeSet changeSet(CF_LOGIN, "Login");
-				istd::CChangeNotifier notifier(this, &changeSet);
+				istd::CChangeNotifier notifier(this, &s_loginChangeSet);
 				Q_UNUSED(notifier);
 
 				m_loggedUserName = userName;
@@ -56,8 +59,7 @@ bool CUserLoginComp::Logout()
 {
 	if (m_usersManagerIfPtr.IsValid()){
 		if (!m_loggedUserName.isEmpty()){
-			ChangeSet changeSet(CF_LOGOUT, "Logout");
-			istd::CChangeNotifier notifier(this, &changeSet);
+			istd::CChangeNotifier notifier(this, &s_logoutChangeSet);
 			Q_UNUSED(notifier);
 
 			m_loggedUserName.clear();

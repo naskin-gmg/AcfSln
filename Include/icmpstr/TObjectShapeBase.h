@@ -58,6 +58,8 @@ private:
 	bool m_isShapeUpdateBlocked;
 
 	istd::TDelPtr<istd::CChangeGroup> m_dragNotifierPtr;
+
+	static const istd::IChangeable::ChangeSet s_dragObjectChangeSet;
 };
 
 
@@ -140,8 +142,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mousePressEvent(QGraphics
 	if (BaseClass::IsEditable() && (eventPtr->button() == Qt::LeftButton)){
 		m_lastPosition = BaseClass::pos();
 
-		static const istd::IChangeable::ChangeSet dragChangeSet(i2d::IObject2d::CF_OBJECT_POSITION, "Drag object");
-		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObservedObject(), &dragChangeSet));
+		m_dragNotifierPtr.SetPtr(new istd::CChangeGroup(BaseClass2::GetObservedObject(), &s_dragObjectChangeSet));
 	}
 }
 
@@ -182,6 +183,12 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 		BaseClass::update();
 	}
 }
+
+
+// static attributes
+
+template <class GraphicsItemClass, class ObjectClass>
+const istd::IChangeable::ChangeSet TObjectShapeBase<GraphicsItemClass, ObjectClass>::s_dragObjectChangeSet(i2d::IObject2d::CF_OBJECT_POSITION, QObject::tr("Drag object"));
 
 
 } // namespace icmpstr

@@ -28,6 +28,14 @@
 namespace icmpstr
 {
 
+
+const istd::IChangeable::ChangeSet s_changeAttributeChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, QObject::tr("Change attribute"));
+const istd::IChangeable::ChangeSet s_importChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, QObject::tr("Import/export interface"));
+const istd::IChangeable::ChangeSet s_changeFlagChangeSet(icomp::IRegistryElement::CF_FLAGS_CHANGED, QObject::tr("Change flag"));
+const istd::IChangeable::ChangeSet s_setAttributeChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, QObject::tr("Set attribute value"));
+const istd::IChangeable::ChangeSet s_setExportChangeSet(icomp::IRegistry::CF_ELEMENT_EXPORTED, QObject::tr("Set export name"));
+
+
 // public methods
 
 CAttributeEditorComp::CAttributeEditorComp()
@@ -134,8 +142,7 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 	int attributeStatMeaning = item->data(AC_VALUE, AttributeMining).toInt();
 
 	if (column == AC_NAME){
-		static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Change attribute");
-		istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+		istd::CChangeNotifier registryNotifier(registryPtr, &s_changeAttributeChangeSet);
 		Q_UNUSED(registryNotifier);
 
 		IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
@@ -150,7 +157,7 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 				continue;
 			}
 
-			istd::CChangeNotifier elementNotifier(elementPtr, &changeSet);
+			istd::CChangeNotifier elementNotifier(elementPtr, &s_changeAttributeChangeSet);
 			Q_UNUSED(elementNotifier);
 
 			if (item->checkState(AC_NAME) == Qt::Unchecked){
@@ -210,8 +217,7 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 			return;
 		}
 
-		static const istd::IChangeable::ChangeSet registryChangeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Import/export interface");
-		istd::CChangeNotifier registryNotifier(registryPtr, &registryChangeSet);
+		istd::CChangeNotifier registryNotifier(registryPtr, &s_importChangeSet);
 		Q_UNUSED(registryNotifier);
 
 		QString interfaceName = item->data(0, InterfaceName).toString();
@@ -243,8 +249,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 		return;
 	}
 
-	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_FLAGS_CHANGED, "Change flag");
-	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	istd::CChangeNotifier registryNotifier(registryPtr, &s_changeFlagChangeSet);
 	Q_UNUSED(registryNotifier);
 
 	IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
@@ -258,7 +263,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 			continue;
 		}
 
-		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), &changeSet);
+		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), &s_changeFlagChangeSet);
 		Q_UNUSED(elementNotifier);
 
 		quint32 flags = selectedInfoPtr->elementPtr->GetElementFlags();
@@ -2153,8 +2158,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentValue(
 		return false;
 	}
 
-	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED, "Set attribute value");
-	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	istd::CChangeNotifier registryNotifier(registryPtr, &s_setAttributeChangeSet);
 	Q_UNUSED(registryNotifier);
 
 	bool retVal = false;
@@ -2217,8 +2221,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const Q
 		return false;
 	}
 
-	static const istd::IChangeable::ChangeSet changeSet(icomp::IRegistry::CF_ELEMENT_EXPORTED, "Set export name");
-	istd::CChangeNotifier registryNotifier(registryPtr, &changeSet);
+	istd::CChangeNotifier registryNotifier(registryPtr, &s_setExportChangeSet);
 	Q_UNUSED(registryNotifier);
 
 	icomp::IRegistry::ExportedElementsMap exportedMap = registryPtr->GetExportedElementsMap();

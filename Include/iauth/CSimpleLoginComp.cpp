@@ -10,6 +10,10 @@ namespace iauth
 {
 
 
+const istd::IChangeable::ChangeSet s_loginChangeSet(iauth::ILogin::CF_LOGIN, QObject::tr("Login"));
+const istd::IChangeable::ChangeSet s_logoutChangeSet(iauth::ILogin::CF_LOGOUT, QObject::tr("Logout"));
+
+
 CSimpleLoginComp::CSimpleLoginComp()
 :	m_loggedUserIndex(-1)
 {
@@ -78,8 +82,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 		CUser& user = GetUser(userIndex);
 
 		if (user.CheckPassword(password)){
-			ChangeSet changeSet(CF_LOGIN, "Login");
-			istd::CChangeNotifier notifier(this, &changeSet);
+			istd::CChangeNotifier notifier(this, &s_loginChangeSet);
 			Q_UNUSED(notifier);
 
 			m_loggedUserIndex = userIndex;
@@ -95,8 +98,7 @@ bool CSimpleLoginComp::Login(const QString& userName, const QString& password)
 bool CSimpleLoginComp::Logout()
 {
 	if (m_loggedUserIndex >= 0){
-		ChangeSet changeSet(CF_LOGOUT, "Logout");
-		istd::CChangeNotifier notifier(this, &changeSet);
+		istd::CChangeNotifier notifier(this, &s_logoutChangeSet);
 		Q_UNUSED(notifier);
 
 		m_loggedUserIndex = -1;
