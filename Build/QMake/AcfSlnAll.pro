@@ -203,9 +203,8 @@ DocumentProcessingPck.depends = iproc idocproc
 # Tools
 SUBDIRS += XpcEditor
 XpcEditor.file = ../../Impl/XpcEditorExe/QMake/XpcEditor.pro
-XpcEditor.depends = CompositorPck
+XpcEditor.depends = AuthorizationPck BlobPck ProcessingPck FileProcessingPck CameraPck EdgePck HotfolderPck InspectionPck IprPck MeasPck SignalPck WizardPck QtAuthorizationPck QtCameraPck QtExPck QtInspectionPck QtIprPck QtMeasPck QtMmPck QtSignalPck WizardGuiPck HotfolderGuiPck ProcessingGuiPck CompositorPck DocumentProcessingPck
 
 SUBDIRS += Compositor
 Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
-Compositor.depends = CompositorPck XpcEditor
-
+Compositor.depends = AuthorizationPck BlobPck ProcessingPck FileProcessingPck CameraPck EdgePck HotfolderPck InspectionPck IprPck MeasPck SignalPck WizardPck QtAuthorizationPck QtCameraPck QtExPck QtInspectionPck QtIprPck QtMeasPck QtMmPck QtSignalPck WizardGuiPck HotfolderGuiPck ProcessingGuiPck CompositorPck DocumentProcessingPck XpcEditor
