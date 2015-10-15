@@ -55,7 +55,7 @@ public:
 		I_REGISTER_INTERFACE(ifileproc::IFileConversion);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Provide information about versions for substitution", false, "VersionInfo");
 		I_ASSIGN(m_licensePathAttrPtr, "LicensePath", "Path of license file will be included at begin of copied file", false, "License.txt");
-		I_ASSIGN(m_substitutionTagExprAttrPtr, "SubstitutionTagExpr", "Define tag used for substitution as QT regular expression", false, "\\$(\\s*)\\$");
+		I_ASSIGN(m_substitutionTagExprAttrPtr, "SubstitutionTagExpr", "Define tag used for substitution as QT regular expression", false, "\\$(\\S+)\\$");
 		I_ASSIGN(m_replaceEnvironmentVariablesAttrPtr, "ReplaceEnvironmentVariables", "If enabled, environment variables will be replaced", true, false);
 		I_ASSIGN(m_replaceEmbeddedVariablesAttrPtr, "ReplaceEmbeddedVariables", "If enabled, embedded variables will be replaced e.g.:\n\tCompileMode for current compile mode (Debug or Release)\n\tCompilerName for current compiler name (VC9)\n\tConfigurationDir for e.g. VC9_64", true, false);
 		I_ASSIGN_MULTI_0(m_userSubstitutionTagsAttrPtr, "UserSubstitutionTags", "List of user defined substitution tags will be replaced with specified values", false);
