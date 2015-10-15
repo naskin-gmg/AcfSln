@@ -45,10 +45,12 @@ CNumericValueWidget::CNumericValueWidget(
 }
 
 
-void CNumericValueWidget::SetUnitInfo(const QString& description, const imath::IUnitInfo* unitInfoPtr)
+void CNumericValueWidget::SetUnitInfo(const QString& name, const QString& description, const imath::IUnitInfo* unitInfoPtr)
 {
-	DescriptionLabel->setVisible(!description.isEmpty());
-	DescriptionLabel->setText(description);
+	DescriptionLabel->setVisible(!name.isEmpty());
+	DescriptionLabel->setText(name);
+
+	setToolTip(description);
 
 	QString unitName;
 	m_unitMultiplicationFactor = 1;

@@ -130,6 +130,7 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 			if (constraintsPtr != NULL){
 				valueWidgetPtr->SetUnitInfo(
 							constraintsPtr->GetNumericValueName(i),
+							constraintsPtr->GetNumericValueDescription(i),
 							constraintsPtr->GetNumericValueUnitInfo(i));
 			}
 
