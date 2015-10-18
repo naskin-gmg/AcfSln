@@ -4,17 +4,17 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/Compositor/CCompositor.cpp" line="+607"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/Compositor/CCompositor.cpp" line="+573"/>
         <source>ACF Registry</source>
         <translation>Rejestr ACF</translation>
     </message>
     <message>
-        <location line="-74"/>
+        <location line="+8"/>
         <source>List of document windows</source>
         <translation>Lista okien dokumentów</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="+2"/>
         <source>Windows</source>
         <translation>Okna</translation>
     </message>
@@ -24,7 +24,7 @@
         <translation>&amp;Okna</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+2"/>
         <source>Quick Help</source>
         <translation>Skrótowa pomoc</translation>
     </message>
@@ -44,34 +44,33 @@
         <translation>Wybrany komponent</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>:/Icons/CompositorIcon</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+41"/>
+        <location line="+8"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+49"/>
         <source>:/Images/CompositorSplashScreen</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-14"/>
         <source>Compositor</source>
         <translation>Compositor</translation>
     </message>
     <message>
-        <location line="-4"/>
         <source>ACF Registry Editor</source>
-        <translation>Edytor rejestrów ACF</translation>
+        <translation type="vanished">Edytor rejestrów ACF</translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="+4"/>
         <source>About Compositor</source>
         <translation>O programie Compositor</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>ImagingTools</source>
         <translation></translation>
     </message>
@@ -89,10 +88,10 @@ Ta aplikacja jest częścią projektu ACF
 Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
-        <location line="-24"/>
-        <location line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+12"/>
-        <location line="+483"/>
+        <location line="-34"/>
+        <location line="+36"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location line="+437"/>
         <source>ACF</source>
         <translation></translation>
     </message>
@@ -102,22 +101,22 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+42"/>
         <source>Remember open documents on exit</source>
         <translation>Zapamiętaj otwarte dokumenty</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+2"/>
         <source>:/Icons/Settings</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+2"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="-6"/>
         <source>Executable file</source>
         <translation>Plik uruchamialny</translation>
     </message>
@@ -147,12 +146,11 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation></translation>
     </message>
     <message>
-        <location line="-24"/>
         <source>Configuration Files</source>
-        <translation>Pliki konfiguracji</translation>
+        <translation type="vanished">Pliki konfiguracji</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-22"/>
         <source>ACF Command Path</source>
         <translation>Ścieżka komendy ACF</translation>
     </message>
@@ -177,13 +175,13 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation>Zapamiętanie stanu dokumentów</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+28"/>
         <source>ACF component configuration</source>
         <translation>Konfiguracja komponentów ACF</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-70"/>
+        <location line="-2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-22"/>
         <source>xpc</source>
         <translation></translation>
     </message>
@@ -193,307 +191,341 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation></translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+2"/>
         <source>../../Config/Full.xpc</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-182"/>
+        <location line="+34"/>
         <location line="+2"/>
-        <location line="+42"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-10"/>
-        <location line="+16"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+20"/>
+        <location line="+66"/>
         <location line="+2"/>
         <source>:/Translations</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location line="-28"/>
+        <location line="-34"/>
         <source>0.2.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.2.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.3.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.3.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.3.1</source>
-        <translation type="unfinished"></translation>
+        <translation>0.3.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.3.2</source>
-        <translation type="unfinished"></translation>
+        <translation>0.3.2</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.4.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.4.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.4.1</source>
-        <translation type="unfinished"></translation>
+        <translation>0.4.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.4.2</source>
-        <translation type="unfinished"></translation>
+        <translation>0.4.2</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.4.3</source>
-        <translation type="unfinished"></translation>
+        <translation>0.4.3</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.4.4</source>
-        <translation type="unfinished"></translation>
+        <translation>0.4.4</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.5.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.5.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.5.1</source>
-        <translation type="unfinished"></translation>
+        <translation>0.5.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.6.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.6.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>0.6.1</source>
-        <translation type="unfinished"></translation>
+        <translation>0.6.1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>ACF-Solutions</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+66"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <source>1.9.0</source>
+        <translation>1.9.0</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>acc</source>
+        <translation></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>ACF-Solutions</source>
-        <translation type="unfinished"></translation>
+        <source>ACF Composed Component</source>
+        <translation>Komponent złożonyACF</translation>
     </message>
     <message>
-        <location line="-34"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+66"/>
+        <location line="+2"/>
+        <source>ACF registry</source>
+        <translation>Rejestr ACF</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Configuration File</source>
+        <translation>Plik konfiguracji</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-80"/>
+        <source>awc</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+12"/>
         <source>Log XML file</source>
         <translation>Plik log w formacie XML</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="-2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>xlog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location line="-2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Log</source>
         <translation>Log</translation>
     </message>
     <message>
-        <location line="-6"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location line="-2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-6"/>
         <source>:/Icons/Info</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>About</source>
         <translation>O programie</translation>
     </message>
     <message>
-        <location line="-150"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-70"/>
+        <location line="-154"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+14"/>
         <source>0.9.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.1</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.2</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.2</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.3</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.3</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.4</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.4</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.5</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.5</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.6</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.6</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.7</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.7</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.8</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.8</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.9</source>
-        <translation type="unfinished"></translation>
+        <translation>0.9.9</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.0.0</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-30"/>
+        <location line="+32"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>1.0.1</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-30"/>
+        <location line="+32"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.1.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.1.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.2.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.2.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.3.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.3.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.4.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.4.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.4.1</source>
-        <translation type="unfinished"></translation>
+        <translation>1.4.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.1</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.2</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5.2</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.3</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5.3</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.4</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5.4</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.1</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.1</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.2</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.2</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.3</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.3</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.4</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.4</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.5</source>
-        <translation type="unfinished"></translation>
+        <translation>1.6.5</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.7.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.7.0</translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.8.0</source>
-        <translation type="unfinished"></translation>
+        <translation>1.8.0</translation>
     </message>
     <message>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-483"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-509"/>
         <source>About XPC Editor</source>
         <translation>O edytorze plików XPC</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+6"/>
         <source>� 2013 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
@@ -506,24 +538,34 @@ Ta aplikacja jest częścią projektu ACF
 Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-4"/>
         <source>ACF Package Configuration Editor</source>
         <translation>Edytor plików konfiguracyjnych ACF</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-4"/>
         <source>:/Images/XpcEditorIcon</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location line="-6"/>
+        <location line="+6"/>
         <source>:/Icons/XpcEditorIcon</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location line="+419"/>
+        <location line="+417"/>
         <source>ACF Configuration</source>
         <translation>Konfiguracja ACF</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Old ACF Configuration File</source>
+        <translation>Stary format konfiguracji ACF</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>ACF Workspace Configuration File</source>
+        <translation>Plik konfiguracji ACF</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -531,22 +573,22 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation>Plik konfiguracji ACF</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="-18"/>
         <source>arp</source>
         <translation>arp</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+2"/>
         <source>ACF Component Package</source>
         <translation>Pakiet komponentów ACF</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+4"/>
         <source>arx</source>
         <translation>arx</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+2"/>
         <source>ACF Registry File</source>
         <translation>Plik rejestru ACF</translation>
     </message>
@@ -608,22 +650,16 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CAcfStarter</name>
     <message>
-        <location filename="../AcfStarterExe/CAcfStarter.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/AcfStarter/ui_CAcfStarter.h" line="+102"/>
         <source>ACF Starter</source>
-        <translation>Starter ACF</translation>
+        <translation type="vanished">Starter ACF</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/AcfStarter/ui_CAcfStarter.h" line="+1"/>
         <source>File</source>
-        <translation>Plik</translation>
+        <translation type="vanished">Plik</translation>
     </message>
     <message>
-        <location line="+17"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/AcfStarter/ui_CAcfStarter.h" line="+1"/>
         <source>Browse..</source>
-        <translation>Wybierz...</translation>
+        <translation type="vanished">Wybierz...</translation>
     </message>
 </context>
 <context>
@@ -830,19 +866,19 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CCaliperParamsGuiComp</name>
     <message>
-        <location filename="../../Include/iqtipr/CCaliperParamsGuiComp.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+111"/>
+        <location filename="../../Include/iqtipr/CCaliperParamsGuiComp.ui" line="+35"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+118"/>
         <source>Threshold</source>
         <translation>Wartość min.</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+25"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+15"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>Edge polarity</source>
         <translation>Polaryzacja</translation>
@@ -915,43 +951,41 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CCircleFinderParamsGuiComp</name>
     <message>
         <location filename="../../Include/iqtipr/CCircleFinderParamsGuiComp.ui" line="+20"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+133"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+121"/>
         <source>Enable Outlier Elimination</source>
         <translation>Włącz eliminację extremów</translation>
     </message>
     <message>
-        <location line="+17"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location line="+26"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
         <source>Minimal Outlier Distance</source>
         <translation>Dystans minimalny extremów</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location line="-13"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
         <source>Maximal Ray Count</source>
         <translation>Maksymalna liczba promieni</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location line="+55"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+3"/>
         <source>Caliper Mode</source>
         <translation>Tryb detekcji</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
         <source> pixels</source>
-        <translation>piksele</translation>
+        <translation type="vanished">piksele</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location line="-22"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
         <source>Automatic</source>
         <translation>Automatycznie</translation>
     </message>
     <message>
-        <location line="+17"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+3"/>
+        <location line="+30"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+4"/>
         <source>First</source>
         <translation>Pierwszy</translation>
     </message>
@@ -960,6 +994,12 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
         <source>Best</source>
         <translation>Najlepszy</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
+        <source>px</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1010,76 +1050,139 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CComponentPromotorDialogComp</name>
     <message>
-        <location filename="../../Include/icmpstr/CComponentPromotorDialogComp.ui" line="+14"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+115"/>
         <source>Promote to another component</source>
         <translation>Przemianuj na inny komponent</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Compatibility to source component</source>
+        <translation>Zgodność z komponentem źródłowym</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Don&apos;t care about interfaces</source>
+        <translation>Interfejsy są nieistotne</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Implementing used interfaces</source>
+        <translation>Implementujący użyte interfejsy</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Implementing all interfaces</source>
+        <translation>Implementujący wszystkie interfejsy</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Don&apos;t care about attributes</source>
+        <translation>Atrybuty są nieistotne</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Containing used attributes</source>
+        <translation>Zawierający użyte atrybuty</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Containing all attributes</source>
+        <translation>Zawierający wszystkie atrybuty</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Don&apos;t care about subcomponents</source>
+        <translation>Podkomponenty są nieistotne</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Containing used subcomponents</source>
+        <translation>Zawierający użyte podkomponenty</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Containing all subcomponents</source>
+        <translation>Zawierający wszystkie podkomponenty</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Convert to component</source>
+        <translation>Konwertuj do komponentu</translation>
+    </message>
+</context>
+<context>
+    <name>CConvertComponentCommandComp</name>
+    <message>
+        <location filename="../../Include/icmpstr/CConvertComponentCommandComp.ui" line="+14"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+115"/>
+        <source>Convert component</source>
+        <translation>Konwersja komponentu</translation>
+    </message>
+    <message>
         <location line="+6"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Compatibility to source component</source>
         <translation>Zgodność z komponentem źródłowym</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+3"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+3"/>
         <source>Don&apos;t care about interfaces</source>
         <translation>Interfejsy są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Implementing used interfaces</source>
         <translation>Implementujący użyte interfejsy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Implementing all interfaces</source>
         <translation>Implementujący wszystkie interfejsy</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+4"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
         <source>Don&apos;t care about attributes</source>
         <translation>Atrybuty są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing used attributes</source>
         <translation>Zawierający użyte atrybuty</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing all attributes</source>
         <translation>Zawierający wszystkie atrybuty</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+4"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
         <source>Don&apos;t care about subcomponents</source>
         <translation>Podkomponenty są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing used subcomponents</source>
         <translation>Zawierający użyte podkomponenty</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing all subcomponents</source>
         <translation>Zawierający wszystkie podkomponenty</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CComponentPromotorDialogComp.h" line="+2"/>
-        <source>Convert to component</source>
-        <translation>Konwertuj do komponentu</translation>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+2"/>
+        <source>Destination component</source>
+        <translation>Docelowy komponent</translation>
     </message>
 </context>
 <context>
@@ -1223,7 +1326,7 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+13"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryItemGuiComp.h" line="+1"/>
         <source>DirectoryLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+54"/>
@@ -1235,7 +1338,7 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+13"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryItemGuiComp.h" line="+1"/>
         <source>FilesCount</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1247,7 +1350,7 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+13"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryItemGuiComp.h" line="+1"/>
         <source>ErrorsCountLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1259,7 +1362,7 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+13"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryItemGuiComp.h" line="+1"/>
         <source>ProcessedFileCoun</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1362,44 +1465,78 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
 </context>
 <context>
-    <name>CEdgeLinesSupplierGuiComp</name>
+    <name>CEdgeLinesSupplierEditorComp</name>
     <message>
-        <location filename="../../Include/iedgegui/CEdgeLinesSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h" line="+148"/>
-        <source>Test</source>
-        <translation>Test</translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h" line="+2"/>
+        <location filename="../../Include/iedgegui/CEdgeLinesSupplierEditorComp.ui" line="+23"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+134"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+38"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h" line="+1"/>
+        <location line="+36"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h" line="+1"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierGuiComp.h" line="+1"/>
+        <location line="+16"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <source>Save Result...</source>
+        <translation>Zapisz wynik...</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <source>Do single processing step</source>
+        <translation>Wykonaj pojedynczy krok przetwarzania</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <source>Process</source>
+        <translation>Przetwórz</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <source>Enable/disable continuous processing</source>
+        <translation>Włącz lub wyłącz przetwarzanie w trybie ciągłym</translation>
+    </message>
+</context>
+<context>
+    <name>CEdgeLinesSupplierGuiComp</name>
+    <message>
+        <source>Test</source>
+        <translation type="vanished">Test</translation>
+    </message>
+    <message>
+        <source>Parameters</source>
+        <translation type="vanished">Parametry</translation>
+    </message>
+    <message>
+        <source>Load...</source>
+        <translation type="vanished">Wczytaj...</translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="vanished">Zapisz...</translation>
+    </message>
+    <message>
         <source>Intermediate Results</source>
-        <translation>Wyniki pośrednie</translation>
+        <translation type="vanished">Wyniki pośrednie</translation>
     </message>
 </context>
 <context>
     <name>CEdgeLinesTestGuiComp</name>
     <message>
-        <location filename="../../Docs/Tutorial/Include/edgetest/CEdgeLinesTestGuiComp.ui" line="+20"/>
         <source>Create</source>
-        <translation>Utwórz</translation>
+        <translation type="vanished">Utwórz</translation>
     </message>
 </context>
 <context>
@@ -1586,7 +1723,7 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation>Zapisz...</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+18"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Results</source>
         <translation>Wyniki</translation>
@@ -1712,8 +1849,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CLineProjectionSupplierGuiComp</name>
     <message>
-        <location filename="../../Include/iqtipr/CLineProjectionSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+145"/>
+        <location filename="../../Include/iqtipr/CLineProjectionSupplierGuiComp.ui" line="+35"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+133"/>
         <source>Processing</source>
         <translation>Przetwarzanie</translation>
     </message>
@@ -1730,13 +1867,13 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation>Projekcja</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+8"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+41"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
@@ -1778,26 +1915,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CMultiAttributeEditor</name>
     <message>
-        <location filename="../../Include/icmpstr/CMultiAttributeEditor.ui" line="+17"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h" line="+122"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <location line="+11"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h" line="+1"/>
-        <location line="+1"/>
         <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <location line="+14"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h" line="+1"/>
-        <location line="+1"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">...</translation>
     </message>
 </context>
 <context>
@@ -1874,25 +1993,25 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CMultiLineProjectionSupplierGuiComp</name>
     <message>
-        <location filename="../../Include/iqtipr/CMultiLineProjectionSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+144"/>
+        <location filename="../../Include/iqtipr/CMultiLineProjectionSupplierGuiComp.ui" line="+129"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+148"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
-        <location line="+17"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location line="-94"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="-4"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+2"/>
+        <location line="+8"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Results</source>
         <translation>Wyniki</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+38"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Current Projection</source>
         <translation>Aktualna projekcja</translation>
@@ -1916,31 +2035,25 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CNumericValueWidget</name>
     <message>
-        <location filename="../../Include/iqtmeas/CNumericValueWidget.ui" line="+14"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+111"/>
-        <source>This is lighthead circuit.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+40"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+3"/>
+        <location filename="../../Include/iqtmeas/CNumericValueWidget.ui" line="+45"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+110"/>
         <source>[unit]</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-16"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="-1"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+27"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+2"/>
         <source>Min</source>
         <translation>Min.</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+23"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+1"/>
         <source>Max</source>
         <translation>Maks.</translation>
@@ -2014,8 +2127,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CPatternTeachingControllerGuiComp</name>
     <message>
-        <location filename="../../Include/iqtipr/CPatternTeachingControllerGuiComp.ui" line="+28"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+90"/>
+        <location filename="../../Include/iqtipr/CPatternTeachingControllerGuiComp.ui" line="+37"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+96"/>
         <source>Pattern not present</source>
         <translation>Brak wzorca</translation>
     </message>
@@ -2024,6 +2137,12 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
         <source>Learn</source>
         <translation>Naucz</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <source>Reset</source>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2062,34 +2181,20 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CProcessedBitmapView</name>
     <message>
-        <location filename="../../Include/iqtipr/CProcessedBitmapView.ui" line="+20"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+132"/>
-        <source>GroupBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
+        <location filename="../../Include/iqtipr/CProcessedBitmapView.ui" line="+46"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+134"/>
         <source>Width</source>
         <translation>Szerokość</translation>
     </message>
     <message>
-        <location line="+7"/>
         <location line="+14"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
-        <location line="+2"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="-1"/>
         <source>Height</source>
         <translation>Wysokość</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+2"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
@@ -2138,14 +2243,12 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CProcessorControlGuiComp</name>
     <message>
-        <location filename="../../Include/iprocgui/CProcessorControlGuiComp.ui" line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+163"/>
         <source>Processing</source>
-        <translation>Przetwarzanie</translation>
+        <translation type="vanished">Przetwarzanie</translation>
     </message>
     <message>
-        <location line="+20"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../Include/iprocgui/CProcessorControlGuiComp.ui" line="+29"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+135"/>
         <source>Do single processing step</source>
         <translation>Wykonaj pojedynczy krok przetwarzania</translation>
     </message>
@@ -2162,19 +2265,19 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation>Włącz lub wyłącz przetwarzanie w trybie ciągłym</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+20"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
         <source>Save Result...</source>
         <translation>Zapisz wynik...</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+7"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+36"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
@@ -2559,40 +2662,40 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CSnapImageGuiComp</name>
     <message>
-        <location filename="../../Include/iqtcam/CSnapImageGuiComp.ui" line="+53"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+186"/>
+        <location filename="../../Include/iqtcam/CSnapImageGuiComp.ui" line="+71"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+175"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message>
-        <location line="+26"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+1"/>
+        <location line="+58"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+3"/>
         <source>Snap</source>
         <translation>Zdjęcie</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+1"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
-        <location line="+22"/>
-        <location line="+61"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+1"/>
-        <location line="+3"/>
+        <location line="-34"/>
+        <location line="+120"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location line="+5"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
-        <location line="-51"/>
+        <location line="-60"/>
         <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+38"/>
-        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+1"/>
+        <location line="-43"/>
+        <location line="+90"/>
+        <location filename="../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location line="+3"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
@@ -2843,7 +2946,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Include/iedge/CEdgesReductorComp.cpp" line="+166"/>
+        <location filename="../../Include/iedge/CEdgesReductorComp.cpp" line="+170"/>
         <source>Weight tolerance</source>
         <translation>Tolerancja wagi</translation>
     </message>
@@ -2905,12 +3008,12 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Plik do przetwarzania %1</translation>
     </message>
     <message>
-        <location filename="../../Include/ihotfgui/CDirectoryMonitorComp.cpp" line="+152"/>
+        <location filename="../../Include/ihotfgui/CDirectoryMonitorComp.cpp" line="+160"/>
         <source>File %1 was removed</source>
         <translation>Plik %1 został usunięty</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+51"/>
         <source>File %1 was added</source>
         <translation>Plik %1 został dodany</translation>
     </message>
@@ -2920,62 +3023,52 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Przetwarzanie %1 się nie powiodło</translation>
     </message>
     <message>
-        <location filename="../../Include/iinsp/CInspectionTaskComp.cpp" line="+297"/>
+        <location filename="../../Include/iinsp/CInspectionTaskComp.cpp" line="+301"/>
         <source>Inspection task</source>
         <translation>Inspekcja</translation>
     </message>
     <message>
-        <location filename="../../Include/iipr/CColorBitmapSeparatorSupplierComp.cpp" line="+74"/>
         <source>Red</source>
-        <translation>Czerwony</translation>
+        <translation type="vanished">Czerwony</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Green</source>
-        <translation>Zielony</translation>
+        <translation type="vanished">Zielony</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Blue</source>
-        <translation>Niebieski</translation>
+        <translation type="vanished">Niebieski</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Alpha</source>
-        <translation>Alfa</translation>
+        <translation type="vanished">Alfa</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Original</source>
-        <translation>Oryginał</translation>
+        <translation type="vanished">Oryginał</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Red color channel</source>
-        <translation>Kanał czerwonego koloru</translation>
+        <translation type="vanished">Kanał czerwonego koloru</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Green color channel</source>
-        <translation>Kanał zielonego koloru</translation>
+        <translation type="vanished">Kanał zielonego koloru</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Blue color channel</source>
-        <translation>Kanał niebieskigo koloru</translation>
+        <translation type="vanished">Kanał niebieskigo koloru</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Alpha (transparency) channel</source>
-        <translation>Kanał przezroczystości (alfa)</translation>
+        <translation type="vanished">Kanał przezroczystości (alfa)</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Original gray value channel</source>
-        <translation>Kanał oryginalego odciania szarości</translation>
+        <translation type="vanished">Kanał oryginalego odciania szarości</translation>
     </message>
     <message>
-        <location filename="../../Include/iipr/CRectDerivativeProcessor.cpp" line="+158"/>
+        <location filename="../../Include/iipr/CRectDerivativeProcessor.cpp" line="+135"/>
         <location filename="../../Include/iipr/CRectImageSmoothProcessorComp.cpp" line="+209"/>
         <source>Filter</source>
         <translation>Filtr</translation>
@@ -3016,7 +3109,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Format obrazu musi być RGB(A)</translation>
     </message>
     <message>
-        <location filename="../../Include/imeas/CDataSequenceInfoBase.cpp" line="+51"/>
+        <location filename="../../Include/imeas/CDataSequenceInfoBase.cpp" line="+48"/>
         <location filename="../../Include/iqtcam/CMultiBitmapSupplierGuiComp.cpp" line="+229"/>
         <source>Channel %1</source>
         <translation>Kanał %1</translation>
@@ -3054,9 +3147,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Czas przetwarzania: %1 ms</translation>
     </message>
     <message>
+        <location filename="../../Include/iedgegui/CEdgeLinesSupplierEditorComp.cpp" line="+140"/>
         <location filename="../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+69"/>
         <location line="+40"/>
-        <location filename="../../Include/iqtcam/CSnapImageGuiComp.cpp" line="+177"/>
+        <location filename="../../Include/iqtcam/CSnapImageGuiComp.cpp" line="+232"/>
+        <location line="+15"/>
         <location line="+13"/>
         <location line="+13"/>
         <location filename="../../Include/iqtinsp/CGeneralSupplierGuiComp.h" line="-119"/>
@@ -3069,7 +3164,12 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="+1"/>
+        <source>Cannot save edge lines</source>
+        <translation>Nie mogę zapisać  kontorów</translation>
+    </message>
+    <message>
+        <location filename="../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="-4"/>
         <location line="+5"/>
         <source>Snap Error</source>
         <translation>Błąd zdjęcia</translation>
@@ -3081,7 +3181,12 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Nie można zapisać obrazu</translation>
     </message>
     <message>
-        <location filename="../../Include/iqtcam/CSnapImageGuiComp.cpp" line="+13"/>
+        <location filename="../../Include/iqtcam/CSnapImageGuiComp.cpp" line="-15"/>
+        <source>Cannot load image</source>
+        <translation>Nie można wczytać obrazu</translation>
+    </message>
+    <message>
+        <location line="+28"/>
         <location filename="../../Include/iqtinsp/TSupplierGuiCompBase.h" line="-22"/>
         <location filename="../../Include/iqtsig/CSampleAcquisitionGuiComp.cpp" line="-12"/>
         <source>Cannot load parameters</source>
@@ -3165,20 +3270,16 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Błąd skryptu w lini %1</translation>
     </message>
     <message>
-        <location filename="../AcfStarterExe/main.cpp" line="+26"/>
-        <location line="+16"/>
         <source>ACF Starter</source>
-        <translation>Starter ACF</translation>
+        <translation type="vanished">Starter ACF</translation>
     </message>
     <message>
-        <location line="-15"/>
         <source>File &apos;%1&apos; does not exist</source>
-        <translation>Plik &apos;%1&apos; nie isnieje</translation>
+        <translation type="vanished">Plik &apos;%1&apos; nie isnieje</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Invalid file format</source>
-        <translation>Niepoprawny format pliku</translation>
+        <translation type="vanished">Niepoprawny format pliku</translation>
     </message>
     <message>
         <location filename="../../Include/iedge/CEdgeBasedFeaturesSupplierComp.cpp" line="+212"/>
@@ -3231,12 +3332,12 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Błąd kopiowania %1 do %2</translation>
     </message>
     <message>
-        <location filename="../../Include/ifileproc/CFileInfoCopyComp.cpp" line="+29"/>
+        <location filename="../../Include/ifileproc/CFileInfoCopyComp.cpp" line="+31"/>
         <source>Processing file %1 to %2</source>
         <translation>Przetwarzanie pliku %1 do %2</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+15"/>
         <source>Opening input file failed (%1)</source>
         <translation>Otwarcie pliku wejściowego %1 nie powiodło się</translation>
     </message>
@@ -3251,12 +3352,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Otwarcie pliku licencji %1 nie powiodło się</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>%1(%2) : Substitution tag is incomplete</source>
-        <translation>%1(%2) : Podstawiany tag jest niekompletny</translation>
+        <translation type="vanished">%1(%2) : Podstawiany tag jest niekompletny</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+40"/>
         <source>%1(%2) : Cannot process tag &apos;%3&apos;</source>
         <translation>%1(%2) : Nie mogę przetworzyć taga %3</translation>
     </message>
@@ -3300,6 +3400,185 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="+79"/>
         <source>Search not successfull</source>
         <translation>Szukanie się nie powiodło</translation>
+    </message>
+    <message>
+        <location filename="../../Include/iauth/CSimpleLoginComp.cpp" line="+13"/>
+        <location filename="../../Include/iauth/CUserLoginComp.cpp" line="+12"/>
+        <source>Login</source>
+        <translation>Zaloguj</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location filename="../../Include/iauth/CUserLoginComp.cpp" line="+1"/>
+        <source>Logout</source>
+        <translation>Wyloguj</translation>
+    </message>
+    <message>
+        <location filename="../../Include/iauth/CUsersManagerComp.cpp" line="+13"/>
+        <source>Add user</source>
+        <translation>Dodaj użytkownika</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>User remove</source>
+        <translation>Usuń użytkownika</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>User renamed</source>
+        <translation>Zmiana nazwy użytkownika</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="+32"/>
+        <source>Change attribute</source>
+        <translation>Zmiena atrybutu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Import/export interface</source>
+        <translation>Eksport interfejsu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Change flag</source>
+        <translation>Zmiana flagi</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set attribute value</source>
+        <translation>Zmiana wartości atrybutu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set export name</source>
+        <translation>Eksport</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CConvertComponentCommandComp.cpp" line="+27"/>
+        <source>Morph component</source>
+        <translation>Zamiana komponentu</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CRegistryLoaderComp.cpp" line="+35"/>
+        <source>Only ACF registries can be serialized</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>File extension is not supported</source>
+        <translation>Niepoprawne rozszerzenie pliku</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CVisualRegistry.cpp" line="+23"/>
+        <source>Change note</source>
+        <translation>Zmiana notatki</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CVisualRegistryEditorComp.cpp" line="+57"/>
+        <source>Add component</source>
+        <translation>Dodanie komponentu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove component</source>
+        <translation>Usunięcie komponentu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add embedded registry</source>
+        <translation>Dodanie rejestru zagnieżdżonego</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>To embedded registry</source>
+        <translation>Do rejestru zagnieżdżonego</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Remove embedded registry</source>
+        <translation>Usuń rejestr zagnieżdżony</translation>
+    </message>
+    <message>
+        <location filename="../../Include/icmpstr/CVisualRegistryElement.cpp" line="+16"/>
+        <location filename="../../Include/icmpstr/TObjectShapeBase.h" line="+191"/>
+        <source>Move component</source>
+        <translation>Przesunięcie komponentu</translation>
+    </message>
+    <message>
+        <location filename="../../Include/ifileproc/CComposedCopyFilesComp.cpp" line="+29"/>
+        <location filename="../../Include/ifileproc/CCopyFilesTreeComp.cpp" line="+24"/>
+        <source>File copy provider is not present</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../Include/ifileproc/CCopyFilesTreeComp.cpp" line="+40"/>
+        <source>Success: %1 files copied</source>
+        <translation>Liczba skopiowanych plików: %1</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Failed: %1 files copied</source>
+        <translation>Błąd! Liczba skopiowanych plików: %1</translation>
+    </message>
+    <message>
+        <location line="+61"/>
+        <source>No input directory %1</source>
+        <translation>Nie znaleziono katalogu wejściowego %1</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>No output directory %1</source>
+        <translation>Nie znaleziono katalogu wyjściowego %1</translation>
+    </message>
+    <message>
+        <location filename="../../Include/ifileproc/CFileCopyOverLoaderComp.cpp" line="+23"/>
+        <source>Input data loader is not defined</source>
+        <translation>Nie zdefiniowany wejściowy katalog danych</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Output data loader is not defined</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Data object for copy operaration is not set</source>
+        <translation>Brak obiektu do kopiowania</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>File extension list is empty</source>
+        <translation>Pusta lista rozszerzeń plików</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Input file %1 doesn&apos;t exist</source>
+        <translation>Plik wej. %1 nie istnieje</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Data could not be loaded from %1</source>
+        <translation>Nie można wczytać danych z %1</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Data could not be saved to %1</source>
+        <translation>Nie można zapisać danych do %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Converted %1 to %2</source>
+        <translation>Przetworzono %1 do %2</translation>
+    </message>
+    <message>
+        <location filename="../../Include/imeas/CRelativeUnitSelectorComp.cpp" line="+12"/>
+        <source>Change units</source>
+        <translation>Zmiana jednostek</translation>
+    </message>
+    <message>
+        <location line="+73"/>
+        <source>None</source>
+        <translation>Bezwymiarowa</translation>
     </message>
 </context>
 <context>
@@ -3412,7 +3691,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
 <context>
     <name>icmpstr::CAttributeEditorComp</name>
     <message>
-        <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="+38"/>
+        <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="+10"/>
         <source>Integer number</source>
         <translation>Liczba całkowita</translation>
     </message>
@@ -3482,7 +3761,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Zbiór fabryk komponentów</translation>
     </message>
     <message>
-        <location line="+282"/>
+        <location line="+279"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -3497,7 +3776,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>&lt;wiele typów komponentów&gt;</translation>
     </message>
     <message>
-        <location line="+432"/>
+        <location line="+417"/>
         <location line="+101"/>
         <source>&lt;multi selection&gt;</source>
         <translation>&lt;wielokrotna selekcja&gt;</translation>
@@ -3518,17 +3797,17 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Typ atrybutu w pakiecie różny od typu w rejestrze</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>unsupported attribute of type &apos;%1&apos;</source>
         <translation>Typ atrybutu &apos;%1&apos; nie jest wspierany</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+28"/>
         <source>Optional %1</source>
         <translation>Opcjonalny %1</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>%1
 Type: %2</source>
         <translation>%1
@@ -3555,12 +3834,12 @@ Interfaces:</source>
  - %1 (opcjonalny)</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+60"/>
         <source>&lt;import&gt;</source>
         <translation>&lt;import&gt;</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+63"/>
         <source>Interface doesn&apos;t implemented by this element (was removed?)</source>
         <translation>Interfejs nie jest implementowany przez element, czyżby został usunięty?</translation>
     </message>
@@ -3568,7 +3847,34 @@ Interfaces:</source>
 <context>
     <name>icmpstr::CComponentPromotorDialogComp</name>
     <message>
-        <location filename="../../Include/icmpstr/CComponentPromotorDialogComp.cpp" line="+330"/>
+        <source>&amp;Registry</source>
+        <translation type="vanished">&amp;Rejestr</translation>
+    </message>
+    <message>
+        <source>Registry</source>
+        <translation type="vanished">Rejestr</translation>
+    </message>
+    <message>
+        <source>Set of commands manipulating registry</source>
+        <translation type="vanished">Zbiór poleceń związanych z rejestrem</translation>
+    </message>
+    <message>
+        <source>&amp;Promote component</source>
+        <translation type="vanished">&amp;Przemianuj komponent</translation>
+    </message>
+    <message>
+        <source>Promote</source>
+        <translation type="vanished">Przemianuj</translation>
+    </message>
+    <message>
+        <source>Promote component to another one</source>
+        <translation type="vanished">Pzemianuj ten komponent na inny</translation>
+    </message>
+</context>
+<context>
+    <name>icmpstr::CConvertComponentCommandComp</name>
+    <message>
+        <location filename="../../Include/icmpstr/CConvertComponentCommandComp.cpp" line="+306"/>
         <source>&amp;Registry</source>
         <translation>&amp;Rejestr</translation>
     </message>
@@ -3580,22 +3886,22 @@ Interfaces:</source>
     <message>
         <location line="+1"/>
         <source>Set of commands manipulating registry</source>
-        <translation>Zbiór poleceń związanych z rejestrem</translation>
+        <translation>Zbiór poleceń zarządzających rejestrem</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>&amp;Promote component</source>
-        <translation>&amp;Przemianuj komponent</translation>
+        <source>&amp;Convert component</source>
+        <translation>&amp;Konwertuj komponent</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Promote</source>
-        <translation>Przemianuj</translation>
+        <source>Convert</source>
+        <translation>Konwertuj</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Promote component to another one</source>
-        <translation>Pzemianuj ten komponent na inny</translation>
+        <source>Convert component to another one</source>
+        <translation>Konweruje komponent do innego typu</translation>
     </message>
 </context>
 <context>
@@ -3607,8 +3913,8 @@ Interfaces:</source>
     </message>
     <message>
         <location line="+87"/>
-        <source>Group containing components of %2 type</source>
-        <translation type="unfinished"></translation>
+        <source>Group containing components of %1 type</source>
+        <translation>Grupa zawierająca komponenty typu %1</translation>
     </message>
     <message>
         <location line="+77"/>
@@ -3616,7 +3922,7 @@ Interfaces:</source>
         <translation>Dowolny</translation>
     </message>
     <message>
-        <location line="+563"/>
+        <location line="+560"/>
         <source>&amp;Packages</source>
         <translation>&amp;Pakiety</translation>
     </message>
@@ -3652,8 +3958,8 @@ Interfaces:</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>Local composite component %2</source>
-        <translation></translation>
+        <source>Local composite component %1</source>
+        <translation>Lokalny komponent złożony %1</translation>
     </message>
 </context>
 <context>
@@ -3764,7 +4070,7 @@ Interfaces:</source>
 <context>
     <name>icmpstr::CRegistryElementShape</name>
     <message>
-        <location filename="../../Include/icmpstr/CRegistryElementShape.cpp" line="+299"/>
+        <location filename="../../Include/icmpstr/CRegistryElementShape.cpp" line="+300"/>
         <source>Package or component not found</source>
         <translation>Pakiet lub komponent nie znaleziony</translation>
     </message>
@@ -3777,29 +4083,39 @@ Interfaces:</source>
 <context>
     <name>icmpstr::CRegistryLoaderComp</name>
     <message>
-        <location filename="../../Include/icmpstr/CRegistryLoaderComp.cpp" line="+50"/>
+        <location filename="../../Include/icmpstr/CRegistryLoaderComp.cpp" line="+45"/>
         <source>Layout information cannot be loaded (%1)</source>
         <translation>Nie mogę wczytać danych geometrycznych</translation>
     </message>
     <message>
-        <location line="+30"/>
         <source>Cannot store to file %1</source>
-        <translation>Nie mogę zapisać do pliku %1</translation>
+        <translation type="vanished">Nie mogę zapisać do pliku %1</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-13"/>
+        <location line="+22"/>
+        <source>%1(%2) : Cannot load registry file</source>
+        <translation>%1(%2): Nie mogę wczytać rejestru</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <location line="+20"/>
+        <source>Cannot store registry to file %1</source>
+        <translation>Nie mogę zapisać rejestru do pliku %1</translation>
+    </message>
+    <message>
+        <location line="-9"/>
         <source>Layout information cannot be stored (%1)</source>
         <translation>Nie mogę zapisać danych geometrycznych</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+39"/>
         <source>ACF registry file</source>
         <translation>Plik rejestru ACF</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>%1(%2) : Cannot load file</source>
-        <translation>%1(%2) : Nie można wczytać pliku</translation>
+        <translation type="vanished">%1(%2) : Nie można wczytać pliku</translation>
     </message>
 </context>
 <context>
@@ -3946,7 +4262,7 @@ Interfaces:</source>
 <context>
     <name>icmpstr::CVisualRegistryEditorComp</name>
     <message>
-        <location filename="../../Include/icmpstr/CVisualRegistryEditorComp.cpp" line="+347"/>
+        <location filename="../../Include/icmpstr/CVisualRegistryEditorComp.cpp" line="+293"/>
         <source>Factory of &apos;%1&apos;</source>
         <translation>Fabryka elementów typu &apos;%1&apos;</translation>
     </message>
@@ -3956,7 +4272,7 @@ Interfaces:</source>
         <translation>Referencja do elementów typu &apos;%1&apos;</translation>
     </message>
     <message>
-        <location line="+184"/>
+        <location line="+183"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edycja</translation>
     </message>
@@ -4138,52 +4454,52 @@ To pozwala na grupowanie wielu komponentów i używanie takiej grupy jak pojedzn
         <translation>Pokazuje topologię komponentów dla aktualnego rejestru</translation>
     </message>
     <message>
-        <location line="+33"/>
-        <location line="+385"/>
-        <location line="+81"/>
-        <location line="+31"/>
-        <location line="+75"/>
         <location line="+32"/>
+        <location line="+384"/>
+        <location line="+79"/>
+        <location line="+30"/>
+        <location line="+75"/>
+        <location line="+31"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location line="-604"/>
-        <location line="+572"/>
+        <location line="-599"/>
+        <location line="+568"/>
         <source>Component could not be added</source>
         <translation>Komponent nie mógł zostać dodany</translation>
     </message>
     <message>
-        <location line="-187"/>
+        <location line="-184"/>
         <source>Some components could not be added</source>
         <translation>Niektóre komponenty nie mogły zostać dodane</translation>
     </message>
     <message>
-        <location line="+43"/>
-        <location line="+27"/>
-        <location line="+31"/>
+        <location line="+42"/>
+        <location line="+26"/>
+        <location line="+30"/>
         <source>ACF Compositor</source>
         <translation>ACF Compositor</translation>
     </message>
     <message>
-        <location line="-57"/>
+        <location line="-55"/>
         <source>New component name</source>
         <translation>Nowa nazwa komponentu</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <location line="+31"/>
+        <location line="+26"/>
+        <location line="+30"/>
         <source>New embedded component name</source>
-        <translation type="unfinished">Nowa nazwa zagnieżdżonego komponentu</translation>
+        <translation>Nowa nazwa zagnieżdżonego komponentu</translation>
     </message>
     <message>
-        <location line="-21"/>
-        <location line="+31"/>
+        <location line="-20"/>
+        <location line="+30"/>
         <source>Embedded component could not be created!</source>
         <translation>Zagniżdżony komponent nie mógł zostać utworzony!</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+102"/>
         <source>C++ code file (*.cpp)</source>
         <translation>Plik kodu C++ (*.cpp)</translation>
     </message>
@@ -4202,43 +4518,26 @@ To pozwala na grupowanie wielu komponentów i używanie takiej grupy jak pojedzn
     <message>
         <location line="+61"/>
         <source>Registry Topology</source>
-        <translation type="unfinished">Topologia rejestru</translation>
-    </message>
-</context>
-<context>
-    <name>ifileproc::CComposedCopyFilesComp</name>
-    <message>
-        <location filename="../../Include/ifileproc/CComposedCopyFilesComp.cpp" line="+33"/>
-        <source>File copy provider is not present</source>
-        <translation type="unfinished"></translation>
+        <translation>Topologia rejestru</translation>
     </message>
 </context>
 <context>
     <name>ifileproc::CCopyFilesTreeComp</name>
     <message>
-        <location filename="../../Include/ifileproc/CCopyFilesTreeComp.cpp" line="+25"/>
-        <source>File copy provider is not present</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+40"/>
         <source>Success: %1 files copied</source>
-        <translation>Liczba skopiowanych plików: %1</translation>
+        <translation type="vanished">Liczba skopiowanych plików: %1</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Failed: %1 files copied</source>
-        <translation>Błąd! Liczba skopiowanych plików: %1</translation>
+        <translation type="vanished">Błąd! Liczba skopiowanych plików: %1</translation>
     </message>
     <message>
-        <location line="+61"/>
         <source>No input directory %1</source>
-        <translation>Nie znaleziono katalogu wejściowego %1</translation>
+        <translation type="vanished">Nie znaleziono katalogu wejściowego %1</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>No output directory %1</source>
-        <translation>Nie znaleziono katalogu wyjściowego %1</translation>
+        <translation type="vanished">Nie znaleziono katalogu wyjściowego %1</translation>
     </message>
 </context>
 <context>
@@ -4538,6 +4837,19 @@ Proszę zmienić nowe hasło.</translation>
     </message>
 </context>
 <context>
+    <name>iqtcam::CSnapImageGuiComp</name>
+    <message>
+        <location filename="../../Include/iqtcam/CSnapImageGuiComp.cpp" line="-139"/>
+        <source>Interval snap</source>
+        <translation>Tryb powtarzania</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Snap on parameter changes</source>
+        <translation>Ujęcie po zmianie parametrów</translation>
+    </message>
+</context>
+<context>
     <name>iqtex::WriteArchiveMessageHandler</name>
     <message>
         <location filename="../../Include/iqtex/CXslTransformationWriteArchive.cpp" line="+41"/>
@@ -4548,7 +4860,7 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtinsp::CInspectionTaskGuiComp</name>
     <message>
-        <location filename="../../Include/iqtinsp/CInspectionTaskGuiComp.cpp" line="+929"/>
+        <location filename="../../Include/iqtinsp/CInspectionTaskGuiComp.cpp" line="+933"/>
         <source>Copy all</source>
         <translation>Kopiuj wszystko</translation>
     </message>
@@ -4581,7 +4893,7 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtipr::CColorPatternComparatorGuiComp</name>
     <message>
-        <location filename="../../Include/iqtipr/CColorPatternComparatorGuiComp.cpp" line="+104"/>
+        <location filename="../../Include/iqtipr/CColorPatternComparatorGuiComp.cpp" line="+105"/>
         <source>Grayvalue</source>
         <translation>Jasność</translation>
     </message>
@@ -4624,7 +4936,7 @@ Proszę zmienić nowe hasło.</translation>
         <translation>Nie można nauczyć się wzorca</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+60"/>
         <source>Reference pattern not defined</source>
         <translation>Wzór referencyjny niezdefiniowany</translation>
     </message>
@@ -4676,7 +4988,7 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtmeas::CNumericValueWidget</name>
     <message>
-        <location filename="../../Include/iqtmeas/CNumericValueWidget.cpp" line="+79"/>
+        <location filename="../../Include/iqtmeas/CNumericValueWidget.cpp" line="+87"/>
         <source>Range: %1 - %2</source>
         <translation>Przedział: %1 - %2</translation>
     </message>
