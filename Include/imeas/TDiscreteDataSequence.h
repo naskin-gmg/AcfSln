@@ -243,6 +243,7 @@ bool TDiscreteDataSequence<Element>::IsEmpty() const
 template <typename Element>
 void TDiscreteDataSequence<Element>::ResetSequence()
 {
+	m_allocatedElementsCount = 0;
 	m_sampleBuffer.Reset();
 	m_samplesCount = 0;
 	m_channelsCount = 0;
@@ -361,7 +362,6 @@ bool TDiscreteDataSequence<Element>::CopyFrom(const istd::IChangeable& object, C
 			m_sampleDiff = sizeof(Element) * m_channelsCount;
 			m_channelDiff = sizeof(Element);
 
-			m_allocatedElementsCount = 0;
 			m_allocatedElementsCount = m_samplesCount * m_channelsCount;
 			if (m_allocatedElementsCount > 0){
 				m_sampleBuffer.SetPtr(new Element[m_allocatedElementsCount], true);
