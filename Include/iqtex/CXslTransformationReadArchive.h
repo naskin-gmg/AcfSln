@@ -11,7 +11,7 @@
 #include "istd/ILogger.h"
 
 #include "iser/CXmlDocumentInfoBase.h"
-#include "iser/CReadArchiveBase.h"
+#include "iser/CTextReadArchiveBase.h"
 
 #include "iqtex/iqtex.h"
 
@@ -25,7 +25,7 @@ namespace iqtex
 
 	\ingroup Persistence
 */
-class CXslTransformationReadArchive: public iser::CReadArchiveBase, public iser::CXmlDocumentInfoBase
+class CXslTransformationReadArchive: public iser::CTextReadArchiveBase, public iser::CXmlDocumentInfoBase
 {
 public:
 	CXslTransformationReadArchive(
@@ -41,27 +41,13 @@ public:
 	virtual bool BeginTag(const iser::CArchiveTag& tag);
 	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count);
 	virtual bool EndTag(const iser::CArchiveTag& tag);
-	virtual bool Process(bool& value);
-	virtual bool Process(char& value);
-	virtual bool Process(quint8& value);
-	virtual bool Process(qint8& value);
-	virtual bool Process(quint16& value);
-	virtual bool Process(qint16& value);
-	virtual bool Process(quint32& value);
-	virtual bool Process(qint32& value);
-	virtual bool Process(quint64& value);
-	virtual bool Process(qint64& value);
-	virtual bool Process(float& value);
-	virtual bool Process(double& value);
-	virtual bool Process(QByteArray& value);
 	virtual bool Process(QString& value);
-	virtual bool ProcessData(void* dataPtr, int size);
 
 protected:
-	/**
-		Find the next text node and move the current node to the next sibling.
-	*/
-	QString PullTextNode();
+	bool ReadStringNode(QString& text);
+
+	// reimplemented (iser::CTextReadArchiveBase)
+	virtual bool ReadTextNode(QByteArray& text);
 
 private:
 	QDomDocument m_document;

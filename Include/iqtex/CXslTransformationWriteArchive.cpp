@@ -174,101 +174,15 @@ bool CXslTransformationWriteArchive::EndTag(const iser::CArchiveTag& /*tag*/)
 }
 
 
-bool CXslTransformationWriteArchive::Process(bool& value)
-{
-	return PushTextNode(value? "true": "false");
-}
-
-
-bool CXslTransformationWriteArchive::Process(char& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(quint8& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(qint8& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(quint16& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(qint16& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(quint32& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(qint32& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(quint64& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(qint64& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(float& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(double& value)
-{
-	return PushTextNode(QString::number(value));
-}
-
-
-bool CXslTransformationWriteArchive::Process(QByteArray& value)
-{
-	return PushTextNode(value);
-}
-
-
 bool CXslTransformationWriteArchive::Process(QString& value)
 {
-	return PushTextNode(value);
-}
-
-
-bool CXslTransformationWriteArchive::ProcessData(void* dataPtr, int size)
-{
-	QByteArray encodedString = QByteArray((const char*)dataPtr, size).toBase64();
-
-	return PushTextNode(encodedString);
+	return WriteStringNode(value);
 }
 
 
 // protected methods
 
-bool CXslTransformationWriteArchive::PushTextNode(const QString& text)
+bool CXslTransformationWriteArchive::WriteStringNode(const QString& text)
 {
 	if (m_isSeparatorNeeded){
 		QDomElement separator = m_document.createElement(GetElementSeparator());
@@ -281,6 +195,14 @@ bool CXslTransformationWriteArchive::PushTextNode(const QString& text)
 	m_isSeparatorNeeded = true;
 
 	return true;
+}
+
+
+// reimplemented (iser::CTextWriteArchiveBase)
+
+bool CXslTransformationWriteArchive::WriteTextNode(const QByteArray& text)
+{
+	return WriteStringNode(text);
 }
 
 
