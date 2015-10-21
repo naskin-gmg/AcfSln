@@ -21,7 +21,7 @@
     <message>
         <location line="+2"/>
         <source>&amp;Window</source>
-        <translation>&amp;Okna</translation>
+        <translation>&amp;Okno</translation>
     </message>
     <message>
         <location line="+2"/>
