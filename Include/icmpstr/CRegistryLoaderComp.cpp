@@ -12,6 +12,8 @@
 #include "ifile/TFileSerializerComp.h"
 #include "ifile/CXmlFileReadArchive.h"
 #include "ifile/CXmlFileWriteArchive.h"
+#include "iqt/CCompactXmlFileReadArchive.h"
+#include "iqt/CCompactXmlFileWriteArchive.h"
 
 // ACF-Solutions includes
 #include "icmpstr/CVisualRegistry.h"
@@ -66,7 +68,7 @@ bool CRegistryLoaderComp::IsOperationSupported(
 			}
 		}
 
-		if (fileInfo.suffix().compare("arx", Qt::CaseInsensitive) != 0){
+		if ((fileInfo.suffix().compare("arx", Qt::CaseInsensitive) != 0) && (fileInfo.suffix().compare("acc", Qt::CaseInsensitive) != 0)){
 			if (!beQuiet){
 				SendInfoMessage(MI_BAD_EXTENSION, QObject::tr("File extension is not supported"));
 			}
@@ -91,45 +93,68 @@ int CRegistryLoaderComp::LoadFromFile(
 	}
 
 	icomp::CRegistry* registryPtr = dynamic_cast<icomp::CRegistry*>(&data);
+	CVisualRegistry* geometricalRegistryPtr = dynamic_cast<CVisualRegistry*>(registryPtr);
+
 	if (registryPtr != NULL){
-		ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
-		Q_ASSERT(!registryArchive.IsStoring());
+		if (QFileInfo(filePath).suffix().compare("arx", Qt::CaseInsensitive) == 0){
+			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
+			Q_ASSERT(!registryArchive.IsStoring());
 
-		CVisualRegistry* geometricalRegistryPtr = dynamic_cast<CVisualRegistry*>(registryPtr);
-		if (geometricalRegistryPtr != NULL){
-			if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
-				int lastReadLine = registryArchive.GetLastReadLine();
+			if (geometricalRegistryPtr != NULL){
+				if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot load registry file", "RegistryLoader");
 
-				QString message = tr("%1(%2) : Cannot load registry file").arg(filePath).arg(lastReadLine);
+					return OS_FAILED;
+				}
 
-				SendErrorMessage(MI_CANNOT_LOAD, message);
+				ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, true), this);
+				Q_ASSERT(!layoutArchive.IsStoring());
 
-				return OS_FAILED;
+				if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
+					layoutArchive.SendLogMessage(istd::IInformationProvider::IC_INFO, MI_CANNOT_LOAD, "Layout information cannot be loaded", "RegistryLoader");
+				}
+
+				return OS_OK;
 			}
+			else{
+				if (!registryPtr->Serialize(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot load registry file", "RegistryLoader");
 
-			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath), this);
-			Q_ASSERT(!layoutArchive.IsStoring());
+					return OS_FAILED;
+				}
 
-			if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
-				SendInfoMessage(
-							MI_CANNOT_READ_LAYOUT,
-							tr("Layout information cannot be loaded (%1)").arg(filePath));
+				return OS_OK;
 			}
-
-			return OS_OK;
 		}
 		else{
-			if (!registryPtr->Serialize(registryArchive)){
-				int lastReadLine = registryArchive.GetLastReadLine();
+			ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
+			Q_ASSERT(!registryArchive.IsStoring());
 
-				QString message = tr("%1(%2) : Cannot load registry file").arg(filePath).arg(lastReadLine);
+			if (geometricalRegistryPtr != NULL){
+				if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot load registry file", "RegistryLoader");
 
-				SendErrorMessage(MI_CANNOT_LOAD, message);
+					return OS_FAILED;
+				}
 
-				return OS_FAILED;
+				ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, false), this);
+				Q_ASSERT(!layoutArchive.IsStoring());
+
+				if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
+					layoutArchive.SendLogMessage(istd::IInformationProvider::IC_INFO, MI_CANNOT_LOAD, "Layout information cannot be loaded", "RegistryLoader");
+				}
+
+				return OS_OK;
 			}
+			else{
+				if (!registryPtr->Serialize(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot load registry file", "RegistryLoader");
 
-			return OS_OK;
+					return OS_FAILED;
+				}
+
+				return OS_OK;
+			}
 		}
 	}
 
@@ -147,41 +172,68 @@ int CRegistryLoaderComp::SaveToFile(
 	}
 
 	const icomp::CRegistry* registryPtr = dynamic_cast<const icomp::CRegistry*>(&data);
+	const CVisualRegistry* geometricalRegistryPtr = dynamic_cast<const CVisualRegistry*>(registryPtr);
+
 	if (registryPtr != NULL){
-		ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
-		Q_ASSERT(registryArchive.IsStoring());
+		if (QFileInfo(filePath).suffix().compare("arx", Qt::CaseInsensitive) == 0){
+			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
+			Q_ASSERT(registryArchive.IsStoring());
 
-		const CVisualRegistry* geometricalRegistryPtr = dynamic_cast<const CVisualRegistry*>(registryPtr);
-		if (geometricalRegistryPtr != NULL){
-			if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
-				SendErrorMessage(
-							MI_LOAD_ERROR,
-							tr("Cannot store registry to file %1").arg(filePath));
+			if (geometricalRegistryPtr != NULL){
+				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot store registry to file", "RegistryLoader");
 
-				return OS_FAILED;
+					return OS_FAILED;
+				}
+
+				ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, true), m_versionInfoCompPtr.GetPtr(), this);
+				Q_ASSERT(layoutArchive.IsStoring());
+
+				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
+					layoutArchive.SendLogMessage(istd::IInformationProvider::IC_INFO, MI_CANNOT_LOAD, "Layout information cannot be stored", "RegistryLoader");
+				}
+
+				return OS_OK;
 			}
+			else{
+				if (!const_cast<icomp::CRegistry*>(registryPtr)->Serialize(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot store registry to file", "RegistryLoader");
 
-			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath), m_versionInfoCompPtr.GetPtr(), this);
-			Q_ASSERT(layoutArchive.IsStoring());
+					return OS_FAILED;
+				}
 
-			if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
-				SendInfoMessage(
-							MI_CANNOT_READ_LAYOUT,
-							tr("Layout information cannot be stored (%1)").arg(filePath));
+				return OS_OK;
 			}
-
-			return OS_OK;
 		}
 		else{
-			if (!const_cast<icomp::CRegistry*>(registryPtr)->Serialize(registryArchive)){
-				SendErrorMessage(
-							MI_LOAD_ERROR,
-							tr("Cannot store registry to file %1").arg(filePath));
+			ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
+			Q_ASSERT(registryArchive.IsStoring());
 
-				return OS_FAILED;
+			if (geometricalRegistryPtr != NULL){
+				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot store registry to file", "RegistryLoader");
+
+					return OS_FAILED;
+				}
+
+				ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, false), m_versionInfoCompPtr.GetPtr(), this);
+				Q_ASSERT(layoutArchive.IsStoring());
+
+				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
+					layoutArchive.SendLogMessage(istd::IInformationProvider::IC_INFO, MI_CANNOT_LOAD, "Layout information cannot be stored", "RegistryLoader");
+				}
+
+				return OS_OK;
 			}
+			else{
+				if (!const_cast<icomp::CRegistry*>(registryPtr)->Serialize(registryArchive)){
+					registryArchive.SendLogMessage(istd::IInformationProvider::IC_ERROR, MI_CANNOT_LOAD, "Cannot store registry to file", "RegistryLoader");
 
-			return OS_OK;
+					return OS_FAILED;
+				}
+
+				return OS_OK;
+			}
 		}
 	}
 
@@ -197,6 +249,7 @@ bool CRegistryLoaderComp::GetFileExtensions(QStringList& result, const istd::ICh
 		result.clear();
 	}
 
+	result.push_back("acc");
 	result.push_back("arx");
 
 	return true;
@@ -205,8 +258,11 @@ bool CRegistryLoaderComp::GetFileExtensions(QStringList& result, const istd::ICh
 
 QString CRegistryLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
-	if ((extensionPtr == NULL) || (extensionPtr->compare("arx", Qt::CaseInsensitive) == 0)){
-		return tr("ACF registry file");
+	if ((extensionPtr == NULL) || (extensionPtr->compare("acc", Qt::CaseInsensitive) == 0)){
+		return tr("ACF composed component");
+	}
+	else if (extensionPtr->compare("arx", Qt::CaseInsensitive) == 0){
+		return tr("Old ACF registry file");
 	}
 
 	return "";
@@ -215,12 +271,15 @@ QString CRegistryLoaderComp::GetTypeDescription(const QString* extensionPtr) con
 
 // protected methods
 
-QString CRegistryLoaderComp::GetLayoutPath(const QString& registryPath) const
+QString CRegistryLoaderComp::GetLayoutPath(const QString& registryPath, bool oldFormat) const
 {
 	QFileInfo fileInfo(registryPath);
-	QString layoutPath = fileInfo.dir().absoluteFilePath(fileInfo.completeBaseName() + ".alx");
-
-	return layoutPath;
+	if (oldFormat){
+		return fileInfo.dir().absoluteFilePath(fileInfo.completeBaseName() + ".alx");
+	}
+	else{
+		return fileInfo.dir().absoluteFilePath(fileInfo.completeBaseName() + ".accl");
+	}
 }
 
 

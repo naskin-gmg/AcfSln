@@ -25,8 +25,8 @@
 #include "iview/IShapeView.h"
 #include "iview/IInteractiveShape.h"
 #include "iview/CShapeBase.h"
-#include "iser/CXmlStringReadArchive.h"
-#include "iser/CXmlStringWriteArchive.h"
+#include "iqt/CCompactXmlMemReadArchive.h"
+#include "iqt/CCompactXmlMemWriteArchive.h"
 
 
 namespace iqtinsp
@@ -967,7 +967,7 @@ bool CInspectionTaskGuiComp::CopyTaskParametersToClipboard(iser::ISerializable* 
 	Q_ASSERT(clipboardPtr != NULL);
 	Q_ASSERT(objectPtr != NULL);
 
-	iser::CXmlStringWriteArchive archive;
+	iqt::CCompactXmlMemWriteArchive archive;
 	if (objectPtr->Serialize(archive)){
 		QMimeData* mimeDataPtr = new QMimeData;
 		mimeDataPtr->setData(mimeType, archive.GetString());
@@ -991,7 +991,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 	const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
 	if (mimeDataPtr != NULL && mimeType != NULL){
 		if (mimeDataPtr->hasFormat(mimeType)){
-			iser::CXmlStringReadArchive archive(mimeDataPtr->data(mimeType));
+			iqt::CCompactXmlMemReadArchive archive(mimeDataPtr->data(mimeType));
 			if (objectPtr->Serialize(archive)){
 				UpdateGui(istd::IChangeable::GetAllChanges());
 
@@ -1002,7 +1002,7 @@ bool CInspectionTaskGuiComp::ReadTaskParametersFromClipboard(iser::ISerializable
 
 	// else try via plain text
 	QByteArray dataToPaste(clipboardPtr->text().toUtf8());
-	iser::CXmlStringReadArchive archive(dataToPaste);
+	iqt::CCompactXmlMemReadArchive archive(dataToPaste);
 	if (objectPtr->Serialize(archive)){
 		UpdateGui(istd::IChangeable::GetAllChanges());
 
