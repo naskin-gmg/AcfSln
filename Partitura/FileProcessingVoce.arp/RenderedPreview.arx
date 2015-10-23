@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1382
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3865
+          3955
         </Number>
         <Description>
           ACF
@@ -33,6 +22,17 @@
         </Number>
         <Description>
           Qt Framework
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1448
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -366,7 +366,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               BackgroundMode
@@ -376,6 +376,22 @@
             </Type>
             <ExportId>
               BackgroundMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ColorSchema
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ColorSchema
             </ExportId>
             <Data>
               <IsEnabled>

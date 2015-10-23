@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1
-        </Id>
-        <Number>
-          1382
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3865
+          3955
         </Number>
         <Description>
           ACF
@@ -35,51 +24,20 @@
           Qt Framework
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          1448
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="7">
-    <Element>
-      <ComponentName>
-        RenderedObjectFileLoader
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <Y>
-        375
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        875
-      </X>
-      <Y>
-        175
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        BinaryFileSerializer
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <Y>
-        475
-      </Y>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         File
@@ -110,13 +68,41 @@
     </Element>
     <Element>
       <ComponentName>
-        ImageView
+        Bitmap
       </ComponentName>
       <X>
-        300
+        875
       </X>
       <Y>
         175
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        RenderedObjectFileLoader
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <Y>
+        375
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        BinaryFileSerializer
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <Y>
+        475
       </Y>
       <Note>
         
@@ -128,6 +114,20 @@
       </ComponentName>
       <X>
         600
+      </X>
+      <Y>
+        175
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ImageView
+      </ComponentName>
+      <X>
+        300
       </X>
       <Y>
         175
