@@ -97,108 +97,109 @@ SUBDIRS += AcfSlnLoc
 AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 
 
-# Component packages
+# Component packages (build only for desktop platforms)
+!macx-ios-clang*{
 
-SUBDIRS += AuthorizationPck
-AuthorizationPck.file = ../../Impl/AuthorizationPck/QMake/AuthorizationPck.pro
-AuthorizationPck.depends = iauth
+	SUBDIRS += AuthorizationPck
+	AuthorizationPck.file = ../../Impl/AuthorizationPck/QMake/AuthorizationPck.pro
+	AuthorizationPck.depends = iauth
 
-SUBDIRS += BlobPck
-BlobPck.file = ../../Impl/BlobPck/QMake/BlobPck.pro
-BlobPck.depends = iblob
+	SUBDIRS += BlobPck
+	BlobPck.file = ../../Impl/BlobPck/QMake/BlobPck.pro
+	BlobPck.depends = iblob
 
-SUBDIRS += ProcessingPck
-ProcessingPck.file = ../../Impl/ProcessingPck/QMake/ProcessingPck.pro
-ProcessingPck.depends = iproc
+	SUBDIRS += ProcessingPck
+	ProcessingPck.file = ../../Impl/ProcessingPck/QMake/ProcessingPck.pro
+	ProcessingPck.depends = iproc
 
-SUBDIRS += FileProcessingPck
-FileProcessingPck.file = ../../Impl/FileProcessingPck/QMake/FileProcessingPck.pro
-FileProcessingPck.depends = iproc ifileproc
+	SUBDIRS += FileProcessingPck
+	FileProcessingPck.file = ../../Impl/FileProcessingPck/QMake/FileProcessingPck.pro
+	FileProcessingPck.depends = iproc ifileproc
 
-SUBDIRS += CameraPck
-CameraPck.file = ../../Impl/CameraPck/QMake/CameraPck.pro
-CameraPck.depends = icam iproc
+	SUBDIRS += CameraPck
+	CameraPck.file = ../../Impl/CameraPck/QMake/CameraPck.pro
+	CameraPck.depends = icam iproc
 
-SUBDIRS += EdgePck
-EdgePck.file = ../../Impl/EdgePck/QMake/EdgePck.pro
-EdgePck.depends = iedge iproc
+	SUBDIRS += EdgePck
+	EdgePck.file = ../../Impl/EdgePck/QMake/EdgePck.pro
+	EdgePck.depends = iedge iproc
 
-SUBDIRS += HotfolderPck
-HotfolderPck.file = ../../Impl/HotfolderPck/QMake/HotfolderPck.pro
-HotfolderPck.depends = ihotf ifileproc
+	SUBDIRS += HotfolderPck
+	HotfolderPck.file = ../../Impl/HotfolderPck/QMake/HotfolderPck.pro
+	HotfolderPck.depends = ihotf ifileproc
 
-SUBDIRS += InspectionPck
-InspectionPck.file = ../../Impl/InspectionPck/QMake/InspectionPck.pro
-InspectionPck.depends = iinsp iproc
+	SUBDIRS += InspectionPck
+	InspectionPck.file = ../../Impl/InspectionPck/QMake/InspectionPck.pro
+	InspectionPck.depends = iinsp iproc
 
-SUBDIRS += IprPck
-IprPck.file = ../../Impl/IprPck/QMake/IprPck.pro
-IprPck.depends = iipr iproc imeas
+	SUBDIRS += IprPck
+	IprPck.file = ../../Impl/IprPck/QMake/IprPck.pro
+	IprPck.depends = iipr iproc imeas
 
-SUBDIRS += MeasPck
-MeasPck.file = ../../Impl/MeasPck/QMake/MeasPck.pro
-MeasPck.depends = iproc
+	SUBDIRS += MeasPck
+	MeasPck.file = ../../Impl/MeasPck/QMake/MeasPck.pro
+	MeasPck.depends = iproc
 
-SUBDIRS += SignalPck
-SignalPck.file = ../../Impl/SignalPck/QMake/SignalPck.pro
-SignalPck.depends = isig
+	SUBDIRS += SignalPck
+	SignalPck.file = ../../Impl/SignalPck/QMake/SignalPck.pro
+	SignalPck.depends = isig
 
-SUBDIRS += WizardPck
-WizardPck.file = ../../Impl/WizardPck/QMake/WizardPck.pro
-WizardPck.depends = iwiz iproc
+	SUBDIRS += WizardPck
+	WizardPck.file = ../../Impl/WizardPck/QMake/WizardPck.pro
+	WizardPck.depends = iwiz iproc
 
-SUBDIRS += QtAuthorizationPck
-QtAuthorizationPck.file = ../../Impl/QtAuthorizationPck/QMake/QtAuthorizationPck.pro
-QtAuthorizationPck.depends = iauth iqtauth
+	SUBDIRS += QtAuthorizationPck
+	QtAuthorizationPck.file = ../../Impl/QtAuthorizationPck/QMake/QtAuthorizationPck.pro
+	QtAuthorizationPck.depends = iauth iqtauth
 
-SUBDIRS += QtCameraPck
-QtCameraPck.file = ../../Impl/QtCameraPck/QMake/QtCameraPck.pro
-QtCameraPck.depends = icam iqtcam
+	SUBDIRS += QtCameraPck
+	QtCameraPck.file = ../../Impl/QtCameraPck/QMake/QtCameraPck.pro
+	QtCameraPck.depends = icam iqtcam
 
-SUBDIRS += QtExPck
-QtExPck.file = ../../Impl/QtExPck/QMake/QtExPck.pro
-QtExPck.depends = iqtext
+	SUBDIRS += QtExPck
+	QtExPck.file = ../../Impl/QtExPck/QMake/QtExPck.pro
+	QtExPck.depends = iqtext
 
-SUBDIRS += QtInspectionPck
-QtInspectionPck.file = ../../Impl/QtInspectionPck/QMake/QtInspectionPck.pro
-QtInspectionPck.depends = iinsp iqtinsp
+	SUBDIRS += QtInspectionPck
+	QtInspectionPck.file = ../../Impl/QtInspectionPck/QMake/QtInspectionPck.pro
+	QtInspectionPck.depends = iinsp iqtinsp
 
-SUBDIRS += QtIprPck
-QtIprPck.file = ../../Impl/QtIprPck/QMake/QtIprPck.pro
-QtIprPck.depends = iipr iqtipr
+	SUBDIRS += QtIprPck
+	QtIprPck.file = ../../Impl/QtIprPck/QMake/QtIprPck.pro
+	QtIprPck.depends = iipr iqtipr
 
-SUBDIRS += QtMeasPck
-QtMeasPck.file = ../../Impl/QtMeasPck/QMake/QtMeasPck.pro
-QtMeasPck.depends = imeas iqtmeas
+	SUBDIRS += QtMeasPck
+	QtMeasPck.file = ../../Impl/QtMeasPck/QMake/QtMeasPck.pro
+	QtMeasPck.depends = imeas iqtmeas
 
-SUBDIRS += QtMmPck
-QtMmPck.file = ../../Impl/QtMmPck/QMake/QtMmPck.pro
-QtMmPck.depends = imm
+	SUBDIRS += QtMmPck
+	QtMmPck.file = ../../Impl/QtMmPck/QMake/QtMmPck.pro
+	QtMmPck.depends = imm
 
-SUBDIRS += QtSignalPck
-QtSignalPck.file = ../../Impl/QtSignalPck/QMake/QtSignalPck.pro
-QtSignalPck.depends = isig iqtsig
+	SUBDIRS += QtSignalPck
+	QtSignalPck.file = ../../Impl/QtSignalPck/QMake/QtSignalPck.pro
+	QtSignalPck.depends = isig iqtsig
 
-SUBDIRS += WizardGuiPck
-WizardGuiPck.file = ../../Impl/WizardGuiPck/QMake/WizardGuiPck.pro
-WizardGuiPck.depends = iwiz iwizgui
+	SUBDIRS += WizardGuiPck
+	WizardGuiPck.file = ../../Impl/WizardGuiPck/QMake/WizardGuiPck.pro
+	WizardGuiPck.depends = iwiz iwizgui
 
-SUBDIRS += HotfolderGuiPck
-HotfolderGuiPck.file = ../../Impl/HotfolderGuiPck/QMake/HotfolderGuiPck.pro
-HotfolderGuiPck.depends = ihotf ihotfgui
+	SUBDIRS += HotfolderGuiPck
+	HotfolderGuiPck.file = ../../Impl/HotfolderGuiPck/QMake/HotfolderGuiPck.pro
+	HotfolderGuiPck.depends = ihotf ihotfgui
 
-SUBDIRS += ProcessingGuiPck
-ProcessingGuiPck.file = ../../Impl/ProcessingGuiPck/QMake/ProcessingGuiPck.pro
-ProcessingGuiPck.depends = iproc iprocgui
+	SUBDIRS += ProcessingGuiPck
+	ProcessingGuiPck.file = ../../Impl/ProcessingGuiPck/QMake/ProcessingGuiPck.pro
+	ProcessingGuiPck.depends = iproc iprocgui
 
-SUBDIRS += CompositorPck
-CompositorPck.file = ../../Impl/CompositorPck/QMake/CompositorPck.pro
-CompositorPck.depends = icmpstr
+	SUBDIRS += CompositorPck
+	CompositorPck.file = ../../Impl/CompositorPck/QMake/CompositorPck.pro
+	CompositorPck.depends = icmpstr
 
-SUBDIRS += DocumentProcessingPck
-DocumentProcessingPck.file = ../../Impl/DocumentProcessingPck/QMake/DocumentProcessingPck.pro
-DocumentProcessingPck.depends = iproc idocproc
-
+	SUBDIRS += DocumentProcessingPck
+	DocumentProcessingPck.file = ../../Impl/DocumentProcessingPck/QMake/DocumentProcessingPck.pro
+	DocumentProcessingPck.depends = iproc idocproc
+}
 
 # Tools
 SUBDIRS += XpcEditor

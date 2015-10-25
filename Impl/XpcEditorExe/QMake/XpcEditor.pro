@@ -44,6 +44,30 @@ win*{
 }
 
 
+# get build output directory of shadow build
+ACFSLNDIRBUILD = $$(ACFSLNDIR_BUILD)
+!isEmpty(ACFSLNDIRBUILD){
+	INCLUDEPATH += $$(ACFSLNDIR_BUILD)/$$AUXINCLUDEDIR
+}
+
 include(../../../../Acf/Config/QMake/CustomBuild.pri)
 include(../../../../Acf/Config/QMake/AcfQt.pri)
 include(../../../../Acf/Config/QMake/AcfStd.pri)
+
+
+# For iOS build generates qmake a XCode project without applying of enivronment variables.
+# This causes build problems in case of shadow build. Following solution is a workaround for this problem.
+# We create the output of the ARX-compiler before the build of the XCode project will be started.
+# Need to be removed after fix in Qt.
+
+macx-ios*
+{
+	GenerateXpcEditorCpp.name = GenerateXpcEditorCpp
+	GenerateXpcEditorCpp.CONFIG += no_link target_predeps
+	GenerateXpcEditorCpp.commands = $$ARXCBIN $$PWD/../XpcEditor.arx -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/XpcEditor/CXpcEditor.cpp -config $$PWD/../../../Config/Core.xpc -v
+	QMAKE_EXTRA_COMPILERS += GenerateXpcEditorCpp
+	QMAKE_EXTRA_TARGETS += GenerateXpcEditorCpp
+	PRE_TARGETDEPS += GenerateXpcEditorCpp
+}
+
+

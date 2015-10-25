@@ -165,7 +165,9 @@ void CQuickHelpGuiComp::on_EditButton_clicked()
 	QStringList parameters;
 	parameters << m_descrFilePath;
 
+#ifndef QT_NO_PROCESS
 	QProcess::startDetached(editorPath, parameters);
+#endif
 }
 
 
@@ -190,7 +192,9 @@ void CQuickHelpGuiComp::on_ShowTechButton_clicked()
 	QStringList parameters;
 	parameters << "file://" + m_techFilePath;
 
+#ifndef QT_NO_PROCESS
 	QProcess::startDetached(editorPath, parameters);
+#endif
 }
 
 

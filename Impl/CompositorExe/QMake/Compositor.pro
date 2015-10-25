@@ -14,6 +14,10 @@ LIBS += -lAcfLoc
 
 HEADERS =
 
+QT += xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
+
+# Set OS-specific build options:
 win32-msvc*{
 	QMAKE_CXXFLAGS += /wd4264
 
@@ -21,22 +25,20 @@ win32-msvc*{
 	greaterThan(QT_MAJOR_VERSION, 4): QMAKE_POST_LINK = set path=$(QTDIR)\bin;%path% && $(QTDIR)\bin\windeployqt $$DESTDIR
 }
 
-QT += xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
-
-mac{
-	ICON += $$PWD/../Mac/Compositor.icns
-	QMAKE_INFO_PLIST = $$PWD/../Mac/Info.plist
+!macx-ios*{
+	mac{
+		ICON += $$PWD/../Mac/Compositor.icns
+		QMAKE_INFO_PLIST = $$PWD/../Mac/Info.plist
+	}
 }
 
-
-# configuration of custom builds
-
-# ARX compiler
+# Set configuration of custom builds:
+# ARX Compiler:
 ARXC_CONFIG = $$PWD/../../../Config/Core.xpc
 ARXC_FILES += $$PWD/../*.arx
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
+# Conversion of resource templates:
 win*{
 	# File transformation
 	ACF_CONVERT_FILES = $$PWD/../VC/*.rc.xtracf
@@ -48,6 +50,28 @@ win*{
 	RC_INCLUDEPATH = $$_PRO_FILE_PWD_
 }
 
-include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
-include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
-include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+# Get build output directory of shadow build:
+ACFSLNDIRBUILD = $$(ACFSLNDIR_BUILD)
+!isEmpty(ACFSLNDIRBUILD){
+	INCLUDEPATH += $$(ACFSLNDIR_BUILD)/$$AUXINCLUDEDIR
+}
+
+include(../../../../Acf/Config/QMake/AcfQt.pri)
+include(../../../../Acf/Config/QMake/AcfStd.pri)
+include(../../../../Acf/Config/QMake/CustomBuild.pri)
+
+# For iOS build generates qmake a XCode project without applying of enivronment variables.
+# This causes build problems in case of shadow build. Following solution is a workaround for this problem.
+# We create the output of the ARX-compiler before the build of the XCode project will be started.
+# Need to be removed after fix in Qt.
+macx-ios*
+{
+	GenerateCompositorCpp.name = GenerateCompositor
+	GenerateCompositorCpp.CONFIG += no_link target_predeps
+	GenerateCompositorCpp.commands = $$ARXCBIN $$PWD/../Compositor.arx -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/Compositor/CCompositor.cpp -config $$PWD/../../../Config/Core.xpc -v
+	QMAKE_EXTRA_COMPILERS += GenerateCompositorCpp
+	QMAKE_EXTRA_TARGETS += GenerateCompositorCpp
+	PRE_TARGETDEPS += GenerateCompositorCpp
+}
+
+

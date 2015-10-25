@@ -11,8 +11,9 @@
 #include "istd/CSystem.h"
 
 
-Q_DECLARE_METATYPE(QProcess::ProcessState);
-
+#ifndef QT_NO_PROCESS
+	Q_DECLARE_METATYPE(QProcess::ProcessState);
+#endif
 
 namespace icmpstr
 {
@@ -30,6 +31,7 @@ CRegistryPreviewComp::CRegistryPreviewComp()
 
 bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 {
+#ifndef QT_NO_PROCESS
 	if (IsRunning() || m_tempFileName.isEmpty() || !m_commandFileNameCompPtr.IsValid()){
 		return false;
 	}
@@ -67,6 +69,9 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		SendErrorMessage(0, QString("Unfortunately, ACF process could not be started. Check your ACF command path!"));
 	}
 	return result;
+#endif
+
+	return false;
 }
 
 
@@ -78,10 +83,12 @@ bool CRegistryPreviewComp::IsRunning() const
 
 void CRegistryPreviewComp::AbortRegistry()
 {
+#ifndef QT_NO_PROCESS
 	m_process.terminate();
 	if (!m_process.waitForFinished(5000)){
 		m_process.kill();
 	}
+#endif
 }
 
 
@@ -91,10 +98,11 @@ void CRegistryPreviewComp::AbortRegistry()
 
 void CRegistryPreviewComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
+#ifndef QT_NO_PROCESS
 	qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
 	qRegisterMetaType<QProcess::ProcessState>();
-
-	BaseClass::OnComponentCreated();
 
 	m_tempFileName.clear();
 
@@ -113,11 +121,13 @@ void CRegistryPreviewComp::OnComponentCreated()
 
 	connect(&m_process, SIGNAL(readyReadStandardError()), this, SLOT(OnReadyReadStandardError()));
 	connect(&m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(OnReadyReadStandardOutput()));
+#endif
 }
 
 
 void CRegistryPreviewComp::OnComponentDestroyed()
 {
+#ifndef QT_NO_PROCESS
 	if (IsRunning()){
 		m_process.kill();
 
@@ -125,38 +135,46 @@ void CRegistryPreviewComp::OnComponentDestroyed()
 	}
 
 	QFile::remove(m_tempFileName);
-
+#endif
 	BaseClass::OnComponentDestroyed();
 }
 
 
 // protected slots
 
-void CRegistryPreviewComp::OnStateChanged(QProcess::ProcessState state)
+void CRegistryPreviewComp::OnStateChanged(ProcessState state)
 {
+	Q_UNUSED(state);
+
+#ifndef QT_NO_PROCESS
 	istd::CChangeNotifier notifier(this);
 
 	m_isRunning = (state == QProcess::Running);
+#endif
 }
 
 
 void CRegistryPreviewComp::OnReadyReadStandardError()
 {
+#ifndef QT_NO_PROCESS
 	QString errorOutput = m_process.readAllStandardError();
 	
 	errorOutput = errorOutput.simplified();
 
 	SendErrorMessage(0, errorOutput);
+#endif
 }
 
 
 void CRegistryPreviewComp::OnReadyReadStandardOutput()
 {
+#ifndef QT_NO_PROCESS
 	QString standardOutput = m_process.readAllStandardOutput();
 
 	standardOutput = standardOutput.simplified();
 
 	SendInfoMessage(0, standardOutput);
+#endif
 }
 
 

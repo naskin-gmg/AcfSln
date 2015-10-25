@@ -76,7 +76,9 @@ private:
 	I_ATTR(QByteArray, m_processArgumentsParamsIdAttrPtr);
 	I_MULTIREF(iprm::INameParam, m_additionalArgumentsCompPtr);
 
+#ifndef QT_NO_PROCESS
 	mutable QProcess m_conversionProcess;
+#endif
 };
 
 

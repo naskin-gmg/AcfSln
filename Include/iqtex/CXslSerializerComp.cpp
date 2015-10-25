@@ -46,7 +46,7 @@ int CXslSerializerComp::SaveToFile(
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
-		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), this);
+		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), true);
 		Q_ASSERT(archive.IsStoring());
 
 		const iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);

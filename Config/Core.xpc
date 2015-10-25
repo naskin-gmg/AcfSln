@@ -4,39 +4,42 @@
     <VersionInfos count="2">
       <Version>
         <Id>
-          0
+          1023
         </Id>
         <Number>
-          2484
+          328961
         </Number>
         <Description>
-          ACF
+          Qt Framework
         </Description>
       </Version>
       <Version>
         <Id>
-          1023
+          0
         </Id>
         <Number>
-          264194
+          3973
         </Number>
         <Description>
-          Qt Framework
+          ACF
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
   <ConfigFiles count="1">
     <FilePath>
-      $(ACFDIR)/Config/Core.xpc
+      ../../Acf/Config/Core.xpc
     </FilePath>
   </ConfigFiles>
-  <PackageDirs count="3">
+  <PackageDirs count="4">
     <Dir>
       ../Bin/$(ConfigurationDir)
     </Dir>
     <Dir>
-		$(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)
+      $(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)
+    </Dir>
+    <Dir>
+      $(ACFSLN_PACKAGES)
     </Dir>
     <Dir>
       ../Partitura
