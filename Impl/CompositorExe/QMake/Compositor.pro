@@ -64,8 +64,7 @@ include(../../../../Acf/Config/QMake/CustomBuild.pri)
 # This causes build problems in case of shadow build. Following solution is a workaround for this problem.
 # We create the output of the ARX-compiler before the build of the XCode project will be started.
 # Need to be removed after fix in Qt.
-macx-ios*
-{
+macx-ios*{
 	GenerateCompositorCpp.name = GenerateCompositor
 	GenerateCompositorCpp.CONFIG += no_link target_predeps
 	GenerateCompositorCpp.commands = $$ARXCBIN $$PWD/../Compositor.arx -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/Compositor/CCompositor.cpp -config $$PWD/../../../Config/Core.xpc -v

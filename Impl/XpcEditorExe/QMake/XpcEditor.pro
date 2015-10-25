@@ -60,8 +60,7 @@ include(../../../../Acf/Config/QMake/AcfStd.pri)
 # We create the output of the ARX-compiler before the build of the XCode project will be started.
 # Need to be removed after fix in Qt.
 
-macx-ios*
-{
+macx-ios*{
 	GenerateXpcEditorCpp.name = GenerateXpcEditorCpp
 	GenerateXpcEditorCpp.CONFIG += no_link target_predeps
 	GenerateXpcEditorCpp.commands = $$ARXCBIN $$PWD/../XpcEditor.arx -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/XpcEditor/CXpcEditor.cpp -config $$PWD/../../../Config/Core.xpc -v
