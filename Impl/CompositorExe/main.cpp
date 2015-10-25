@@ -22,7 +22,9 @@ int main(int argc, char *argv[])
 
 	QApplication::addLibraryPath("./");
 
+#ifdef Q_OS_WIN
 	QApplication::setStyle("fusion");
+#endif
 
 	CCompositor instance;
 
