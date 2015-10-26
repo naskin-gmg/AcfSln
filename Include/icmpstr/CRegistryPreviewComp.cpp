@@ -142,40 +142,37 @@ void CRegistryPreviewComp::OnComponentDestroyed()
 
 // protected slots
 
-void CRegistryPreviewComp::OnStateChanged(ProcessState state)
+#ifndef QT_NO_PROCESS
+void CRegistryPreviewComp::OnStateChanged(QProcess::ProcessState state)
 {
 	Q_UNUSED(state);
 
-#ifndef QT_NO_PROCESS
 	istd::CChangeNotifier notifier(this);
 
 	m_isRunning = (state == QProcess::Running);
-#endif
 }
 
 
 void CRegistryPreviewComp::OnReadyReadStandardError()
 {
-#ifndef QT_NO_PROCESS
 	QString errorOutput = m_process.readAllStandardError();
 	
 	errorOutput = errorOutput.simplified();
 
 	SendErrorMessage(0, errorOutput);
-#endif
 }
 
 
 void CRegistryPreviewComp::OnReadyReadStandardOutput()
 {
-#ifndef QT_NO_PROCESS
 	QString standardOutput = m_process.readAllStandardOutput();
 
 	standardOutput = standardOutput.simplified();
 
 	SendInfoMessage(0, standardOutput);
-#endif
 }
+
+#endif // QT_NO_PROCESS
 
 
 } // namespace icmpstr

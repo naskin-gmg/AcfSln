@@ -33,12 +33,6 @@ class CRegistryPreviewComp:
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
-#ifndef QT_NO_PROCESS
-	typedef QProcess::ProcessState ProcessState;
-#else
-	typedef int ProcessState;
-#endif
-
 	I_BEGIN_COMPONENT(CRegistryPreviewComp);
 		I_REGISTER_INTERFACE(icmpstr::IRegistryPreview);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Version info used to serialize temporary registry file", false, "VersionInfo");
@@ -59,11 +53,15 @@ protected:
 	virtual void OnComponentDestroyed();
 
 protected Q_SLOTS:
-	void OnStateChanged(ProcessState state);
+#ifndef QT_NO_PROCESS
+	void OnStateChanged(QProcess::ProcessState state);
 	void OnReadyReadStandardError();
 	void OnReadyReadStandardOutput();
+#endif
+
 private:
 	QString m_tempFileName;
+
 #ifndef QT_NO_PROCESS
 	QProcess m_process;
 #endif
