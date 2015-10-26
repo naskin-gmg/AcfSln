@@ -394,7 +394,15 @@ void CRegistryTreeViewComp::on_RegistryTree_itemDoubleClicked(QTreeWidgetItem* i
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 			QDir packageDir(m_envManagerCompPtr->GetPackagePath(componentAddress.GetPackageId()));
 		
+			QByteArray componentId = componentAddress.GetComponentId();
+
 			QString filePath = packageDir.absoluteFilePath(componentAddress.GetComponentId() + ".acc");
+			QString filePathOld = packageDir.absoluteFilePath(componentId + ".arx");
+			if (!QFileInfo(filePath).exists()){
+				if (QFileInfo(filePathOld).exists()){
+					filePath = filePathOld;	
+				}
+			}
 
 			m_documentManagerCompPtr->OpenDocument(NULL, &filePath);
 		}
