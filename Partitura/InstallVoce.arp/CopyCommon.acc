@@ -277,6 +277,8 @@
                     <AttributeInfo Id="Filters" ExportId="" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
+                                <Value>*.acc</Value>
+                                <Value>*.accl</Value>
                                 <Value>*.arx</Value>
                                 <Value>*.alx</Value>
                                 <Value>*.xml</Value>
@@ -379,6 +381,8 @@
                                 <Value>*.ui</Value>
                                 <Value>*.qrc</Value>
                                 <Value>*.moc</Value>
+                                <Value>*.acc</Value>
+                                <Value>*.accl</Value>
                                 <Value>*.arx</Value>
                                 <Value>*.alx</Value>
                                 <Value>*.xml</Value>

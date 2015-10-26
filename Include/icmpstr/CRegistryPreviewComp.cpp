@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-#include "ifile/CXmlFileWriteArchive.h"
+#include "iqt/CCompactXmlFileWriteArchive.h"
 #include "istd/CSystem.h"
 
 
@@ -36,7 +36,7 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		return false;
 	}
 
-	ifile::CXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
+	iqt::CCompactXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
 
 	if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
 		return false;
@@ -108,7 +108,7 @@ void CRegistryPreviewComp::OnComponentCreated()
 
 	QDir tempDir = QDir::temp();
 	if (tempDir.exists()){
-		m_tempFileName = QDir::toNativeSeparators(tempDir.absoluteFilePath("registry_preview.arx"));
+		m_tempFileName = QDir::toNativeSeparators(tempDir.absoluteFilePath("registry_preview.acc"));
 	}
 
 	m_isRunning = false;

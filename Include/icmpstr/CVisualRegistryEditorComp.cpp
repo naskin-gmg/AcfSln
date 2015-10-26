@@ -159,7 +159,7 @@ bool CVisualRegistryEditorComp::TryOpenComponent(const CVisualRegistryElement& r
 				if ((metaInfoPtr != NULL) && (metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 					QDir packageDir(m_packagesManagerCompPtr->GetPackagePath(elementAddress.GetPackageId()));
 
-					QString filePath = packageDir.absoluteFilePath(componentId + ".arx");
+					QString filePath = packageDir.absoluteFilePath(componentId + ".acc");
 
 					return m_documentManagerCompPtr->OpenDocument(NULL, &filePath);
 				}

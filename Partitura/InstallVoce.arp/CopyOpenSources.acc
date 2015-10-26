@@ -136,6 +136,8 @@
                                 <Value>*.ui</Value>
                                 <Value>*.qrc</Value>
                                 <Value>*.moc</Value>
+                                <Value>*.acc</Value>
+                                <Value>*.accl</Value>
                                 <Value>*.arx</Value>
                                 <Value>*.alx</Value>
                                 <Value>*.xtracf</Value>
@@ -296,6 +298,8 @@
                                 <Value>*.ui</Value>
                                 <Value>*.qrc</Value>
                                 <Value>*.moc</Value>
+                                <Value>*.acc</Value>
+                                <Value>*.accl</Value>
                                 <Value>*.arx</Value>
                                 <Value>*.alx</Value>
                                 <Value>*.xtracf</Value>
