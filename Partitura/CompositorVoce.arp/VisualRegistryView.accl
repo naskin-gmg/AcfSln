@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="925" Y="625" ComponentName="RegistryTreeView"/>
+        <Element Note="" X="0" Y="0" ComponentName="ConvertComponentCommand"/>
+        <Element Note="" X="700" Y="475" ComponentName="VisualRegistryScenographer"/>
+        <Element Note="" X="375" Y="225" ComponentName="SceneProvider"/>
+        <Element Note="" X="225" Y="600" ComponentName="CommandsBinder"/>
+        <Element Note="" X="925" Y="225" ComponentName="SelectedDocModelBinder"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

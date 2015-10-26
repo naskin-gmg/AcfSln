@@ -1,0 +1,10 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="575" Y="325" ComponentName="ComponentNoteDock"/>
+        <Element Note="" X="575" Y="475" ComponentName="ComponentNoteEditor"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

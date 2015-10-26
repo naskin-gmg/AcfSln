@@ -1,0 +1,36 @@
+<Acf Keywords="Directory Parameter Hotfolder File" Description="Parameter for dynamic directory list">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="FpfVoce" Id="DirectoryParam" ComponentId="DirectoryParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="DirectoryParamsManager" ComponentId="ParamsManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultSetName" ExportId="DefaultDirectoryItemName" Type="String">
+                        <Data IsEnabled="true" Value="HotfolderPath"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="DirectoryParam"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="DirectoryParamsManager"/>
+        <Interface InterfaceId="iprm::IParamsManager" ComponentId="DirectoryParamsManager"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="DirectoryParamsManager"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="DirectoryParamsManager"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

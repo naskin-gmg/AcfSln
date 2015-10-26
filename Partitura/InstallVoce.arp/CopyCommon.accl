@@ -1,0 +1,23 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="800" Y="650" ComponentName="CopyDocs"/>
+        <Element Note="" X="700" Y="775" ComponentName="CopyTexts"/>
+        <Element Note="" X="300" Y="75" ComponentName="CopyTutorialProjects"/>
+        <Element Note="" X="925" Y="525" ComponentName="CopyLicenses"/>
+        <Element Note="" X="475" Y="200" ComponentName="CopyTutorialOther"/>
+        <Element Note="" X="550" Y="400" ComponentName="CopyImpl"/>
+        <Element Note="" X="125" Y="450" ComponentName="CopyVSConfig"/>
+        <Element Note="" X="825" Y="200" ComponentName="CopyInstallInfo"/>
+        <Element Note="Temporary workaround for problems with resolving of BIN-pathes for ACF tools." X="100" Y="175" ComponentName="CopyVSRules"/>
+        <Element Note="" X="675" Y="75" ComponentName="CopyTutorialSources"/>
+        <Element Note="" X="350" Y="650" ComponentName="CopyRoot"/>
+        <Element Note="" X="1050" Y="100" ComponentName="CopyConfig"/>
+        <Element Note="" X="450" Y="525" ComponentName="CopyIncludes"/>
+        <Element Note="" X="150" Y="300" ComponentName="CopyAllFiles"/>
+        <Element Note="" X="1050" Y="400" ComponentName="CopyPartitura"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

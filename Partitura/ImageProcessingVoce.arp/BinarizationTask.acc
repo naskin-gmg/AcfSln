@@ -1,0 +1,66 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="IprPck" Id="BinaryImageSupplier" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ImageBinarizeProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
+                        <Data IsEnabled="true" Value="Image Binarization"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" ExportId="ParamsSet" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="ImageBinarizeProcessor" ComponentId="ImageBinarizeProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BinarizationParameterId" ExportId="BinarizationParameterId" Type="Id">
+                        <Data IsEnabled="true" Value="Threshold"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="BinaryImageSupplier"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="BinaryImageSupplier"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
+    </ExportedComponents>
+</Acf>

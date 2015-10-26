@@ -1,0 +1,115 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="IprPck" Id="AverageFilter" ComponentId="RectImageSmoothProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="AverageParams"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="MeasPck" Id="BufferBitmap" ComponentId="GeneralBitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="GaussianFilter" ComponentId="GaussianFilter">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="GaussianParams"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="InvertProcessor" ComponentId="InvertOperator">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="ProcessingPck" Id="IterativeProcessor" ComponentId="IterativeProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BufferObject" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BufferBitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IterationParamId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="IterationParams"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MaxIterations" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="5"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveProcessor" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="AverageFilter"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="MaxOperator" ComponentId="MorphoMaxOperator">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="AverageParams"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="MinOperator" ComponentId="MorphoMinOperator">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="AverageParams"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="ProcessedCamera" ComponentId="ProcessedCamera">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ImageProcessor" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="IterativeProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveCamera" ExportId="SlaveCamera" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
+        <Interface InterfaceId="ibase::IApplicationInfo" ComponentId="Framework"/>
+        <Interface InterfaceId="icam::IBitmapAcquisition" ComponentId="ProcessedCamera"/>
+        <Interface InterfaceId="iprm::IOptionsList" ComponentId="IterativeProcessor"/>
+        <Interface InterfaceId="iproc::IProcessor" ComponentId="ProcessedCamera"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="Framework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

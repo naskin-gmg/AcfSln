@@ -1,0 +1,54 @@
+<Acf Keywords="Registry Overview Topology" Description="Topology overview of the current registry">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtGuiPck" Id="Dialog" ComponentId="DialogGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DialogSize" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="0.5"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DialogTitle" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Component Topology"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Gui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryTreeView"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MenuDescription" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Shows component topology of the currently opened registry"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MenuName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Show Registry Overview..."/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RootMenu" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="&amp;Tools"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="RegistryTreeView" ComponentId="RegistryTreeView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="ConsistencyInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="Dialog"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="RegistryTreeView"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="RegistryTreeView"/>
+        <Interface InterfaceId="iqtgui::IDialog" ComponentId="Dialog"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

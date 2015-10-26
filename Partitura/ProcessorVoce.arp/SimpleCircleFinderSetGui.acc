@@ -1,0 +1,87 @@
+<Acf Keywords="Circle Finder Parameters GUI" Description="Gui for for circle finder parameter set using as AOI annulus segment">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtViewPck" Id="AOI" ComponentId="AnnulusParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultUnitInfo" ExportId="UnitInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShapeColorSchema" ExportId="ShapeColorSchema" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="CaliperParams" ComponentId="CaliperParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="CaliperParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DesignType" ExportId="DesignType" Type="Integer">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>AOI</Value>
+                                <Value>CaliperParams</Value>
+                                <Value>FilterParams</Value>
+                                <Value>CircleFinderParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>CircleFinderAoi</Value>
+                                <Value>Caliper</Value>
+                                <Value>Filter</Value>
+                                <Value>CircleFinderParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Geometry</Value>
+                                <Value>Edge Detection</Value>
+                                <Value>Filter</Value>
+                                <Value>Circle Finder</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseVerticalSpacer" ExportId="UseVerticalSpacer" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="CircleFinderParams" ComponentId="CircleFinderParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="FilterParams" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="CaliperParamsSetGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="CaliperParamsSetGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="CaliperParamsSetGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="CaliperParamsSetGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

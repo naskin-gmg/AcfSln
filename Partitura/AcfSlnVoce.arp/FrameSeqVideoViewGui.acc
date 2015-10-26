@@ -1,0 +1,76 @@
+<Acf Keywords="" Description="Video sequence controller to play bitmaps from a given directory">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="AcfGuiVoce" Id="BitmapView" ComponentId="BitmapView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BackgroundMode" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FitMode" ExportId="FitMode" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseAntialiasing" ExportId="UseAntialiasing" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseGridCommands" ExportId="UseGridCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseScrollBarCommands" ExportId="UseScrollBarCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseShapeEditCommands" ExportId="UseShapeEditCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="ZoomToFitEnabled" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMmPck" Id="FrameSeqVideoController" ComponentId="FrameSeqVideoController">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FrameData" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapView/Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FrameLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FramesPerSecond" ExportId="FramesPerSecond" Type="Real">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="BitmapView"/>
+        <Interface InterfaceId="imm::IMediaController" ComponentId="FrameSeqVideoController"/>
+        <Interface InterfaceId="imm::IVideoController" ComponentId="FrameSeqVideoController"/>
+        <Interface InterfaceId="imm::IVideoInfo" ComponentId="FrameSeqVideoController"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="FrameSeqVideoController"/>
+        <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="BitmapView"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="BitmapView"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="FrameSeqVideoController"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Bitmap" ComponentId="BitmapView"/>
+        <Component ExportedId="BitmapLoader" ComponentId="BitmapLoader"/>
+    </ExportedComponents>
+</Acf>

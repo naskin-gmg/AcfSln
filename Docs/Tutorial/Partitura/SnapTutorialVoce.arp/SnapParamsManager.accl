@@ -1,0 +1,18 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="175" Y="375" ComponentName="SnapParamsGray"/>
+        <Element Note="" X="1050" Y="175" ComponentName="BitmapLoader"/>
+        <Element Note="" X="825" Y="350" ComponentName="SelectionParamGui"/>
+        <Element Note="" X="450" Y="175" ComponentName="SnapApplication"/>
+        <Element Note="" X="775" Y="50" ComponentName="BitmapAcquisition"/>
+        <Element Note="" X="175" Y="575" ComponentName="SnapParamsColor"/>
+        <Element Note="" X="450" Y="475" ComponentName="ParamsManager"/>
+        <Element Note="" X="450" Y="350" ComponentName="SelectableParameter"/>
+        <Element Note="" X="850" Y="475" ComponentName="ParamsManagerGui"/>
+        <Element Note="" X="850" Y="600" ComponentName="SnapParamsGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="225" Y="275" ComponentName="CompositorTemplate"/>
+        <Element Note="" X="625" Y="525" ComponentName="Application"/>
+        <Element Note="" X="1025" Y="275" ComponentName="MainWindowComponents"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

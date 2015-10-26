@@ -1,0 +1,17 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="225" Y="175" ComponentName="FilterParams"/>
+        <Element Note="" X="450" Y="175" ComponentName="FilterParamsSet"/>
+        <Element Note="" X="450" Y="625" ComponentName="FilterParamsGui"/>
+        <Element Note="" X="150" Y="350" ComponentName="ModelDialogGui"/>
+        <Element Note="" X="800" Y="175" ComponentName="BitmapFileProcessing"/>
+        <Element Note="" X="450" Y="500" ComponentName="FilterParamsSetGui"/>
+        <Element Note="" X="800" Y="300" ComponentName="RectImageSmoothProcessor"/>
+        <Element Note="" X="725" Y="50" ComponentName="File"/>
+        <Element Note="" X="400" Y="50" ComponentName="ProcessingParamsPersistence"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

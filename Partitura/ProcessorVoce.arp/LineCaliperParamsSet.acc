@@ -1,0 +1,94 @@
+<Acf Keywords="Caliper Line Parameters Tag='&quot;Image Processing&quot;'" Description="Caliper parameters">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="IprPck" Id="CaliperParams" ComponentId="CaliperParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="CaliperParamsSet" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Line</Value>
+                                <Value>CaliperParams</Value>
+                                <Value>SmoothFilterParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Line</Value>
+                                <Value>Caliper</Value>
+                                <Value>SmoothFilter</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeId" ExportId="TypeId" Type="Id">
+                        <Data IsEnabled="true" Value="Caliper"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="Line" ComponentId="Line">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="X1" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="X2" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Y1" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Y2" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="MeasPck" Id="SmoothFilterParams" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" ExportId="SmoothFilterConstraints" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MaxValues" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="50"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" ExportId="" Type="Real[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>5</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValuesCount" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
+        <Component ExportedId="Line" ComponentId="Line"/>
+    </ExportedComponents>
+</Acf>

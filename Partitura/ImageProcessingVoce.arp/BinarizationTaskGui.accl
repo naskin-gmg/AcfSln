@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="875" Y="375" ComponentName="Threshold"/>
+        <Element Note="" X="525" Y="50" ComponentName="BinarizationTaskGui"/>
+        <Element Note="" X="200" Y="200" ComponentName="MultiObserverBinder"/>
+        <Element Note="" X="875" Y="225" ComponentName="ParamsGui"/>
+        <Element Note="" X="200" Y="400" ComponentName="SnapBitmapSupplierGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

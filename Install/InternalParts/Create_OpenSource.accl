@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="925" Y="325" ComponentName="VersionInfo"/>
+        <Element Note="" X="375" Y="325" ComponentName="Application"/>
+        <Element Note="This copy operation removes using of ACFDIR environmental variable from all projects.&#xa;" X="675" Y="500" ComponentName="CopyAll"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

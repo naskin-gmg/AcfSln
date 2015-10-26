@@ -1,0 +1,58 @@
+<Acf Keywords="Image Processing File Converter" Description="Image-To-Image file converter">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FileProcessingPck" Id="FileConvertOverProcessor" ComponentId="FileConvertOverProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DataProcessor" ExportId="ImageProcessor" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputData" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="InputData"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputFileLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputData" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="OutputData"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputFileLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingParams" ExportId="ProcessingParams" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="InputData" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="OutputData" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ifileproc::IFileConversion" ComponentId="FileConvertOverProcessor"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

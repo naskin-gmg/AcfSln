@@ -1,0 +1,9 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="525" Y="300" ComponentName="FileSubstitCopyApp"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

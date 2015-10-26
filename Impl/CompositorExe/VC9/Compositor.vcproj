@@ -43,7 +43,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -135,7 +135,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -322,7 +322,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -429,11 +429,7 @@
 			ParseFiles="false"
 			>
 			<File
-				RelativePath="..\Compositor.alx"
-				>
-			</File>
-			<File
-				RelativePath="..\Compositor.arx"
+				RelativePath="..\Compositor.acc"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -451,6 +447,10 @@
 						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Compositor.alx"
+				>
 			</File>
 			<File
 				RelativePath="..\Compositor.qrc"

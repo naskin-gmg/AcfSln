@@ -1,0 +1,21 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="700" Y="75" ComponentName="GaussianParams"/>
+        <Element Note="" X="375" Y="300" ComponentName="ProcessedCamera"/>
+        <Element Note="" X="300" Y="600" ComponentName="IterationParamGui"/>
+        <Element Note="" X="1050" Y="200" ComponentName="AverageParams"/>
+        <Element Note="" X="1050" Y="325" ComponentName="FileSnapParam"/>
+        <Element Note="" X="675" Y="750" ComponentName="AverageParamsGui"/>
+        <Element Note="" X="175" Y="500" ComponentName="BitmapLoader"/>
+        <Element Note="" X="750" Y="225" ComponentName="SnapParams"/>
+        <Element Note="" X="125" Y="400" ComponentName="FileAcquisition"/>
+        <Element Note="" X="425" Y="125" ComponentName="IterationParams"/>
+        <Element Note="" X="650" Y="475" ComponentName="Framework"/>
+        <Element Note="" X="1075" Y="475" ComponentName="FileSnapParamGui"/>
+        <Element Note="" X="750" Y="600" ComponentName="SnapParamsGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

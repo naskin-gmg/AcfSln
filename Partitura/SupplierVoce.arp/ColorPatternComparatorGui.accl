@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="175" Y="525" ComponentName="HistogramView"/>
+        <Element Note="" X="575" Y="150" ComponentName="ColorPatternComparatorGui"/>
+        <Element Note="" X="575" Y="275" ComponentName="ParamsSetGui"/>
+        <Element Note="" X="975" Y="400" ComponentName="ComparisonThreshold"/>
+        <Element Note="" X="175" Y="400" ComponentName="PatternController"/>
+        <Element Note="" X="575" Y="400" ComponentName="Region"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

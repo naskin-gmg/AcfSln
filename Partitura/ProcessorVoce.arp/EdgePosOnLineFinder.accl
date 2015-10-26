@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="1000" Y="375" ComponentName="FeatureToImageMapperProcessor"/>
+        <Element Note="" X="625" Y="125" ComponentName="CascadedProcessor"/>
+        <Element Note="" X="625" Y="275" ComponentName="FeaturesContainer"/>
+        <Element Note="" X="300" Y="375" ComponentName="EdgeOnLineFinder"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

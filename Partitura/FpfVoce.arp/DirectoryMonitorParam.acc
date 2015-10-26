@@ -1,0 +1,59 @@
+<Acf Keywords="Hotfolder Directory" Description="Parameter for directory monitoring">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BasePck" Id="DirectoryMonitorParam" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryMonitorParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryMonitorParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeId" ExportId="TypeId" Type="Id">
+                        <Data IsEnabled="true" Value="DirectoryMonitor"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderPck" Id="DirectoryMonitorParams" ComponentId="AttributedDirectoryMonitorParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptPatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnorePatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ObservedChanges" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="7"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ObservedItems" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PoolingIntervall" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="5"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="DirectoryMonitorParam"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="DirectoryMonitorParam"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="DirectoryMonitorParam"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="DirectoryMonitorParam"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

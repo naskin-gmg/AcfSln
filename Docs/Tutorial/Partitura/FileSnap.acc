@@ -1,0 +1,41 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="ProcessorVoce" Id="FileCamera" ComponentId="FileCamera">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultDir" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="C://"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Framework"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="SnapTutorialVoce" Id="Framework" ComponentId="SnapFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
+        <Interface InterfaceId="ibase::IApplicationInfo" ComponentId="Framework"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="Framework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

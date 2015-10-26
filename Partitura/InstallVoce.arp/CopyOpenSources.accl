@@ -1,0 +1,19 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="225" Y="750" ComponentName="CopyImplOther"/>
+        <Element Note="" X="650" Y="600" ComponentName="CopyIncludeResources"/>
+        <Element Note="" X="200" Y="650" ComponentName="CopyIncludeOther"/>
+        <Element Note="" X="650" Y="225" ComponentName="CopyImplResources"/>
+        <Element Note="" X="475" Y="125" ComponentName="CopyImplSources"/>
+        <Element Note="" X="850" Y="125" ComponentName="CopyImplProjects"/>
+        <Element Note="" X="475" Y="475" ComponentName="CopyIncludeSources"/>
+        <Element Note="" X="975" Y="600" ComponentName="CopyBuildProjects"/>
+        <Element Note="" X="150" Y="525" ComponentName="CopyCommon"/>
+        <Element Note="" X="775" Y="475" ComponentName="CopyIncludeProjects"/>
+        <Element Note="" X="150" Y="350" ComponentName="CopyAllFiles"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

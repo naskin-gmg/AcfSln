@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="175" ComponentName="CircleFindProcessor"/>
+        <Element Note="" X="350" Y="550" ComponentName="Caliper"/>
+        <Element Note="" X="950" Y="550" ComponentName="ParamsSet"/>
+        <Element Note="" X="950" Y="175" ComponentName="PositionTask"/>
+        <Element Note="" X="650" Y="350" ComponentName="Calibration2dProxy"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

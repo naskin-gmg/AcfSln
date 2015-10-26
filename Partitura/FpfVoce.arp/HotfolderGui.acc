@@ -1,0 +1,77 @@
+<Acf Keywords="Hotfolder Tag='GUI'" Description="Hotfolder UI definition">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="HotfolderGuiPck" Id="DirectoryItemGui" ComponentId="DirectoryItemGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="InputDirectoriesManager" ExportId="InputDirectoriesManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderGuiPck" Id="HotfolderGui" ComponentId="HotfolderGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DirectoryItemGui" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="DirectoryItemGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="HotfolderStatistics" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HotfolderStatistics"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputDirectoriesManager" ExportId="InputDirectoriesManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingItemPreview" ExportId="ProcessingItemPreview" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingParamsDialog" ExportId="ProcessingParamsDialog" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProgressManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ProgressManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StateIcons" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="StateIcons"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderPck" Id="HotfolderStatistics" ComponentId="HotfolderStatistics">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="StateIcons" ComponentId="IconProvider">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IconFiles" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>StateUnknown</Value>
+                                <Value>Play</Value>
+                                <Value>StateOk</Value>
+                                <Value>Cancel</Value>
+                                <Value>StateInvalid</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IconsPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Icons"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="HotfolderGui"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="HotfolderGui"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="HotfolderGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="HotfolderGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="HotfolderGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

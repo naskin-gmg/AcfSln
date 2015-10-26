@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="525" Y="150" ComponentName="ConfigFileInfo"/>
+        <Element Note="" X="525" Y="400" ComponentName="ComposedParamsSetGui"/>
+        <Element Note="" X="525" Y="525" ComponentName="ParamsManagerGui"/>
+        <Element Note="" X="525" Y="275" ComponentName="ConfigFileGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

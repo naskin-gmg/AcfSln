@@ -1,0 +1,144 @@
+<Acf Keywords="Diagram View Scene Tag='GUI'" Description="Component diagram view">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtGuiPck" Id="CommandsBinder" ComponentId="CommandsBinder">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CommandProviders" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>VisualRegistryScenographer</Value>
+                                <Value>SceneProvider</Value>
+                                <Value>ConvertComponentCommand</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="ConvertComponentCommand" ComponentId="ConvertComponentCommand">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VisualRegistryScenographer/SelectionInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="RegistryTreeView" ComponentId="RegistryTreeView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="ConsistencyInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="EnvironmentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="SceneProvider" ComponentId="SceneProvider">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowSelectAll" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BackgroundMode" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DropConsumers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>VisualRegistryScenographer</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="GridSize" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="25"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsAlignmentEnabled" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneHeight" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="841"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneWidth" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="1189"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="SelectedDocModelBinder" ComponentId="SelectedDocModelBinder">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ActivationObject" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VisualRegistryScenographer"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VisualRegistryScenographer/SelectionInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Observers" ExportId="RegistrySelectionObservers" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="VisualRegistryScenographer" ComponentId="VisualRegistryScenographer">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="ConsistencyInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PackagesManager" ExportId="EnvironmentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="QuickHelpGui" ExportId="QuickHelpGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryCodeSaver" ExportId="RegistryCodeSaver" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryPreview" ExportId="RegistryPreview" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryTopologyGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryTreeView"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryValidationStatus" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryTreeView/VisualStatus"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneProvider" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="SceneProvider"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ISceneController" ComponentId="SceneProvider"/>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="CommandsBinder"/>
+        <Interface InterfaceId="icmpstr::ISceneProvider" ComponentId="SceneProvider"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="VisualRegistryScenographer"/>
+        <Interface InterfaceId="iqtgui::IDropConsumer" ComponentId="VisualRegistryScenographer"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="VisualRegistryScenographer"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

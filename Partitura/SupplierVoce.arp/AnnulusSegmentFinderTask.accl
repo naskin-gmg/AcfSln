@@ -1,0 +1,19 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="825" Y="725" ComponentName="CircleFinderParams"/>
+        <Element Note="" X="350" Y="175" ComponentName="CircleFindProcessor"/>
+        <Element Note="" X="400" Y="525" ComponentName="RadiusParams"/>
+        <Element Note="" X="525" Y="725" ComponentName="Aoi"/>
+        <Element Note="" X="350" Y="375" ComponentName="Caliper"/>
+        <Element Note="" X="825" Y="525" ComponentName="CaliperParamsSet"/>
+        <Element Note="" X="175" Y="525" ComponentName="RadiusConstraints"/>
+        <Element Note="" X="675" Y="375" ComponentName="FilterLength"/>
+        <Element Note="" X="825" Y="175" ComponentName="PositionTask"/>
+        <Element Note="" X="175" Y="725" ComponentName="Calibration2dProxy"/>
+        <Element Note="" X="1100" Y="725" ComponentName="CaliperParams"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

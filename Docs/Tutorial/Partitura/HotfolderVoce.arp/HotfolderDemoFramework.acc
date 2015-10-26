@@ -1,0 +1,127 @@
+<Acf Keywords="Hotfoder Demo Tutorial Processing" Description="Simple demonstration of hotfolder processing">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BasePck" Id="ApplicationInfo" ComponentId="ApplicationInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Hotfolder Demo Application"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtPck" Id="ApplicationSettingsProvider" ComponentId="ApplicationSettingsProvider">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FpfVoce" Id="HotfolderDemoGui" ComponentId="PersistentHotfolderController">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptFilePatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileConverter" ExportId="FileConverter" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnoreFilePatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputFilePreview" ExportId="InputPreview" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="LogDock"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputFileInfo" ExportId="OutputFileInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputFilePreview" ExportId="OutputPreview" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingParamsDialog" ExportId="ProcessingParamsDialog" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="AcfGuiVoce" Id="LogDock" ComponentId="LogDock">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="SimpleMainGui" ComponentId="SimpleMainGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IconSize" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="32"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsMenuVisible" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsNestingEnabled" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsToolbarVisible" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainWindowComponents" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>LogDock</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SettingsDialog" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HotfolderDemoGui/HotfolderSettingsDialog"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ApplicationSettingsProvider"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseIconText" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Workspace" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HotfolderDemoGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplicationInfo" ComponentId="ApplicationInfo"/>
+        <Interface InterfaceId="ilog::IMessageConsumer" ComponentId="LogDock"/>
+        <Interface InterfaceId="ilog::IMessageContainer" ComponentId="LogDock"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="SimpleMainGui"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="VersionInfo"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

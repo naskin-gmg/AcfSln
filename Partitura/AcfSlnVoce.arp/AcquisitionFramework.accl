@@ -1,0 +1,17 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="800" Y="250" ComponentName="LogTab"/>
+        <Element Note="" X="600" Y="650" ComponentName="ProcessorControlGui"/>
+        <Element Note="" X="450" Y="250" ComponentName="Tabs"/>
+        <Element Note="" X="1050" Y="475" ComponentName="ImageDialogLoader"/>
+        <Element Note="" X="175" Y="250" ComponentName="Application"/>
+        <Element Note="" X="1100" Y="275" ComponentName="BitmapLoader"/>
+        <Element Note="" X="175" Y="125" ComponentName="Info"/>
+        <Element Note="" X="550" Y="375" ComponentName="SnapTab"/>
+        <Element Note="" X="224" Y="519" ComponentName="BitmapView"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

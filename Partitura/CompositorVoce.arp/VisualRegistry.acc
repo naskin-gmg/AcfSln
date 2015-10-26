@@ -1,0 +1,45 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BasePck" Id="RegistryModelBinder" ComponentId="SelectedDocModelBinder">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ActivationObject" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VisualRegistry"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VisualRegistry"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Observers" ExportId="RegistryObservers" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="VisualRegistry" ComponentId="VisualRegistry">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="icmpstr::IComponentNoteController" ComponentId="VisualRegistry"/>
+        <Interface InterfaceId="icomp::IRegistry" ComponentId="VisualRegistry"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="VisualRegistry"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="VisualRegistry"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

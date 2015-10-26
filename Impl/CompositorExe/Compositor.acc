@@ -1,0 +1,124 @@
+<Acf Keywords="ACF Editor ARX Company='ImagingTools' Project='ACF-Solutions' Author='&quot;Witold Gantzke&quot; &quot;Kirill Lepskiy&quot;' Category='Tool' Tag='Compositor'" Description="Compositor tool - graphical editor for ACF registry files">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="CompositorVoce" Id="Application" ComponentId="CompositorApplication">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentTemplates" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>CompositorTemplate</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LogDock"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainWindowCompTypeIds" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Registry</Value>
+                                <Value>Registry</Value>
+                                <Value>Registry</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainWindowsComponents" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>MainWindowComponents/AttributeEditorDock</Value>
+                                <Value>MainWindowComponents/QuickHelpDock</Value>
+                                <Value>MainWindowComponents/ComponentNoteEditorDock</Value>
+                                <Value>MainWindowComponents/PackageOverviewDock</Value>
+                                <Value>MainWindowComponents/LogDock</Value>
+                                <Value>MainWindowComponents/WindowsListCommands</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="CompositorTemplate" ComponentId="CompositorTemplate">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/DocumentManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LogDock"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LocalMetaInfoManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PreviewCommandFile" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/PreviewCommandFile"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="QuickHelpGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="MainWindowComponents/QuickHelpDock"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistrySelectionObservers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>MainWindowComponents/AttributeEditorDock</Value>
+                                <Value>MainWindowComponents/ComponentNoteEditorDock</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectedRegistryObservers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>MainWindowComponents/PackageOverviewDock</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="MainWindowComponents" ComponentId="CompositorDockWidgets">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ConfigFilePath" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/ConfigFile"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="CompositorTemplate"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocuEditorFileParam" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/HtmlEditorFile"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/DocumentManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="CompositorTemplate/PackagesLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="CompositorTemplate/PackagesLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TechDocuViewerFileParam" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/HtmlBrowserFile"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WindowsList" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application/DocumentSelection"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Application"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

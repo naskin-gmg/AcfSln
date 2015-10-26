@@ -1,0 +1,59 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtCameraPck" Id="BitmapAcquisition" ComponentId="FileAcquisition">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="SnapApplication"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="SnapTutorialVoce" Id="SnapApplication" ComponentId="SnapFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapAcquisition"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="SnapParams"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="SnapParamsGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="SnapTutorialVoce" Id="SnapParams" ComponentId="FileSnapParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AcquisitionDir" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="C:\Work\TestImages\Gray"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="SnapTutorialVoce" Id="SnapParamsGui" ComponentId="FileSnapParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="SnapApplication"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

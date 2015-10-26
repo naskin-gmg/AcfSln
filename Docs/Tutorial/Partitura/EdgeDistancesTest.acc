@@ -1,0 +1,36 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="ImageProcessingTutorialVoce" Id="EdgeDistanceTestFramework" ComponentId="EdgeDistanceTestFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Camera" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="ProcessorVoce" Id="FileCamera" ComponentId="FileCamera">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="EdgeDistanceTestFramework"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="EdgeDistanceTestFramework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

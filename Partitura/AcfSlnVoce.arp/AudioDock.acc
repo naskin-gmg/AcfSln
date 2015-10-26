@@ -1,0 +1,81 @@
+<Acf Keywords="Audio Sample View" Description="Dock window with audio samples view">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="MeasPck" Id="Audio" ComponentId="GeneralDataSequence">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="DataSequenceView" ComponentId="DataSequenceView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="IsChannelPanelVisible" ExportId="IsChannelPanelVisible" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsScalePanelVisible" ExportId="IsScalePanelVisible" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsScaledValue" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsTimeSpanPanelVisible" ExportId="IsTimeSpanPanelVisible" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="-1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="DockWidgetGui" ComponentId="DockWidgetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowedDockAreas" ExportId="AllowedDockAreas" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockArea" ExportId="DockArea" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockFeatures" ExportId="DockFeatures" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Audio Sample"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="DataSequenceView"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="ViewBinder" ComponentId="ModelBinder">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Audio"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Observers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DataSequenceView</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imath::TISampledFunction&lt;2,1>" ComponentId="Audio"/>
+        <Interface InterfaceId="imeas::IDataSequence" ComponentId="Audio"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="Audio"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="DataSequenceView"/>
+        <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="DockWidgetGui"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="Audio"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Audio"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

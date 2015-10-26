@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="1000" Y="300" ComponentName="BitmapLoader"/>
+        <Element Note="" X="300" Y="450" ComponentName="SnapParams"/>
+        <Element Note="" X="350" Y="300" ComponentName="SnapApplication"/>
+        <Element Note="" X="700" Y="225" ComponentName="BitmapAcquisition"/>
+        <Element Note="" X="600" Y="450" ComponentName="SnapParamsGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="600" Y="400" ComponentName="QuickHelpGui"/>
+        <Element Note="" X="600" Y="250" ComponentName="QuickHelpDock"/>
+        <Element Note="" X="600" Y="550" ComponentName="ComponentHelpFileProvider"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

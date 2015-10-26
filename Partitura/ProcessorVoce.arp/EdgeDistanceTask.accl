@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="525" ComponentName="Caliper"/>
+        <Element Note="" X="375" Y="175" ComponentName="EdgeDistanceProcessor"/>
+        <Element Note="" X="925" Y="175" ComponentName="EdgeDistancesSupplier"/>
+        <Element Note="" X="950" Y="525" ComponentName="ProcessingParams"/>
+        <Element Note="" X="650" Y="350" ComponentName="Calibration2dProxy"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

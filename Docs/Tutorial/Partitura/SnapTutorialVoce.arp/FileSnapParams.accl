@@ -1,0 +1,10 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="650" Y="150" ComponentName="ParamsSet"/>
+        <Element Note="" X="650" Y="275" ComponentName="FileSnapParams"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,67 @@
+<Acf Keywords="Edge Position 2D Finder Processor Caliper Tool" Description="Search for ege image position using 1 pixel wide projection">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="ProcessingPck" Id="CascadedProcessor" ComponentId="CascadedProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Buffers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FeaturesContainer</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Processors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>EdgeOnLineFinder</Value>
+                                <Value>FeatureToImageMapperProcessor</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="ProcessorVoce" Id="EdgeOnLineFinder" ComponentId="EdgeOnLineFinder">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CaliperParamId" ExportId="CaliperParamId" Type="Id">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterParamsId" ExportId="FilterParamsId" Type="Id">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LineParamId" ExportId="LineParamId" Type="Id">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="FeatureToImageMapperProcessor" ComponentId="FeatureToImageMapperProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FeaturesMapper" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="EdgeOnLineFinder"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="FeaturesContainer" ComponentId="FeaturesContainer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iipr::IProjectionConstraints" ComponentId="EdgeOnLineFinder"/>
+        <Interface InterfaceId="imeas::INumericConstraints" ComponentId="EdgeOnLineFinder"/>
+        <Interface InterfaceId="iproc::IProcessor" ComponentId="CascadedProcessor"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Derivative" ComponentId="EdgeOnLineFinder/Derivative"/>
+        <Component ExportedId="Projection" ComponentId="EdgeOnLineFinder/Projection"/>
+    </ExportedComponents>
+</Acf>

@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="0" Y="0" ComponentName="EdgeLinesSupplierEditor"/>
+        <Element Note="" X="900" Y="650" ComponentName="EdgesReductionParamsGui"/>
+        <Element Note="" X="200" Y="650" ComponentName="SmoothParamsGui"/>
+        <Element Note="" X="550" Y="650" ComponentName="EdgesExtractionParamGui"/>
+        <Element Note="" X="550" Y="475" ComponentName="EdgeExtractorParamsGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

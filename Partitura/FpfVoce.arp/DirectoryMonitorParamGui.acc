@@ -1,0 +1,39 @@
+<Acf Keywords="Parameter Directory Monitoring File Observer Tag='GUI'" Description="Directory monitoring parameter GUI">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtGuiPck" Id="ComposedParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryMonitorParamsGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryMonitorParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderGuiPck" Id="DirectoryMonitorParamsGui" ComponentId="DirectoryMonitorParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ComposedParamsSetGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ComposedParamsSetGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ComposedParamsSetGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

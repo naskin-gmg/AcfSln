@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="625" Y="175" ComponentName="ViewBinder"/>
+        <Element Note="" X="375" Y="300" ComponentName="DataSequenceView"/>
+        <Element Note="" X="925" Y="325" ComponentName="Audio"/>
+        <Element Note="" X="375" Y="475" ComponentName="DockWidgetGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

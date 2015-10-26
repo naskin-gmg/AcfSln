@@ -1,0 +1,60 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtGuiPck" Id="ComposedParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryParamsGui</Value>
+                                <Value>DirectoryMonitorParamsGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>DirectoryPath</Value>
+                                <Value>DirectoryMonitorParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Monitoring Directory</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderGuiPck" Id="DirectoryMonitorParamsGui" ComponentId="DirectoryMonitorParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="DirectoryParamsGui" ComponentId="FileNameParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="PathLabel" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=""/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StartHint" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="&lt;Enter the path of the directory>"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ComposedParamsSetGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ComposedParamsSetGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ComposedParamsSetGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

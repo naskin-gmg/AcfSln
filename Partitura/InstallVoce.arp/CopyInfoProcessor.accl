@@ -1,0 +1,10 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="550" Y="350" ComponentName="FileCopy"/>
+        <Element Note="" X="550" Y="475" ComponentName="CopyFilesTree"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

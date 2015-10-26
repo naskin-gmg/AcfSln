@@ -1,0 +1,102 @@
+<Acf Keywords="Polar Transformation Processing Bitmap Image Supplier Tag='GUI &quot;Image Processing&quot;'" Description="Binarization image supplier GUI">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtInspectionPck" Id="BinarizationTaskGui" ComponentId="GeneralSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultStatusIcon" ExportId="DefaultStatusIcon" Type="String">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" ExportId="DefaultStatusText" Type="String">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsLoader" ExportId="ParamsLoader" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="MultiObserverBinder" ComponentId="MultiObserverBinder">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveObservers" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>BinarizationTaskGui</Value>
+                                <Value>SnapBitmapSupplierGui</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ParamsGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EditorReadOnly" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Threshold</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Threshold</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>Interpolation</Value>
+                                <Value>Extra Unrolling</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtCameraPck" Id="SnapBitmapSupplierGui" ComponentId="SnapBitmapSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="Threshold" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="BinarizationTaskGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="BinarizationTaskGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="BinarizationSupplierGui" ComponentId="SnapBitmapSupplierGui"/>
+        <Component ExportedId="VisualStatus" ComponentId="BinarizationTaskGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

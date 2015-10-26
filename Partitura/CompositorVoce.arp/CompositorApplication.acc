@@ -1,0 +1,136 @@
+<Acf Keywords="" Description="Compositor application component">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="AcfGuiVoce" Id="Application" ComponentId="MultiDocApp">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AboutDialogTitle" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="About Compositor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AboutLogoPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Images/CompositorLogo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AllowViewRepeating" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Compositor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentTemplates" ExportId="DocumentTemplates" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IconPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Icons/CompositorIcon"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IconSize" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="32"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsCopyPathVisible" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsOpenContainingFolderVisible" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsTabbedDockAllowed" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LegalCopyright" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="© 2015 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF project&#xa;See 'License.txt' for license information"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainVersionId" ExportId="MainVersionId" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainWindowCompTypeIds" ExportId="MainWindowCompTypeIds" Type="Id[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainWindowComponents" ExportId="MainWindowsComponents" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MaxRecentFiles" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="20"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProductName" ExportId="ProductName" Type="String">
+                        <Data IsEnabled="true" Value="ACF"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RememberOpenDocumentsOnExit" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Settings/EnableDocumentPersistence"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SettingsDialog" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Settings"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowAboutProductName" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowSplashApplicationName" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowSplashProductName" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SplashScreenImage" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Images/CompositorSplashScreen"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TranslationManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="TranslationManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="Settings" ComponentId="CompositorSettingsDialog">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Application"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LanguageSelectionConstraints" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="TranslationManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="TranslationManager" ComponentId="CompositorTranslationManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="LanguageSelection" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Settings/LanguageSelection"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Application"/>
+        <Interface InterfaceId="ibase::IApplicationInfo" ComponentId="Application"/>
+        <Interface InterfaceId="iser::IVersionInfo" ComponentId="VersionInfo"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="ConfigFile" ComponentId="Settings/ConfigFile"/>
+        <Component ExportedId="DocumentManager" ComponentId="Application/Workspace"/>
+        <Component ExportedId="DocumentSelection" ComponentId="Application/DocumentSelection"/>
+        <Component ExportedId="EnableDocumentPersistence" ComponentId="Settings/EnableDocumentPersistence"/>
+        <Component ExportedId="HtmlBrowserFile" ComponentId="Settings/HtmlBrowserFile"/>
+        <Component ExportedId="HtmlEditorFile" ComponentId="Settings/HtmlEditorFile"/>
+        <Component ExportedId="PreviewCommandFile" ComponentId="Settings/PreviewCommandFile"/>
+    </ExportedComponents>
+</Acf>

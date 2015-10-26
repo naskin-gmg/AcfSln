@@ -1,0 +1,27 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="600" Y="375" ComponentName="ImageHistogramSupplier"/>
+        <Element Note="" X="600" Y="625" ComponentName="ColorPatternComparator"/>
+        <Element Note="" X="275" Y="500" ComponentName="InspectionTask"/>
+        <Element Note="" X="900" Y="500" ComponentName="ComparatorParams"/>
+        <Element Note="" X="1050" Y="375" ComponentName="ImageHistogramProcessor"/>
+        <Element Note="" X="600" Y="750" ComponentName="HistogramStatisticsProcessor"/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="ComparatorParams">
+            <PositionMap>
+                <Element Note="" X="1025" Y="475" ComponentName="NumericConstraints"/>
+                <Element Note="" X="725" Y="500" ComponentName="CheckEnabled"/>
+                <Element Note="" X="1025" Y="375" ComponentName="ComparisonThreshold"/>
+                <Element Note="" X="700" Y="375" ComponentName="PatternComparatorParams"/>
+                <Element Note="" X="200" Y="375" ComponentName="PatternController"/>
+                <Element Note="" X="425" Y="600" ComponentName="Calibration2dProxy"/>
+                <Element Note="" X="425" Y="500" ComponentName="Region"/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

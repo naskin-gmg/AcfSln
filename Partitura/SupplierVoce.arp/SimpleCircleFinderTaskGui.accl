@@ -1,0 +1,10 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="725" Y="300" ComponentName="ParamsGui"/>
+        <Element Note="" X="325" Y="300" ComponentName="ValueSupplierGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

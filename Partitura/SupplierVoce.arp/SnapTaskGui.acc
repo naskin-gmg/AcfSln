@@ -1,0 +1,60 @@
+<Acf Keywords="Task Image Acquisition Camera GUI" Description="Image acquisition GUI for image acquisition task">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="AcfGuiVoce" Id="BitmapDialogLoader" ComponentId="BitmapDialogLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtCameraPck" Id="ImageTaskGui" ComponentId="SnapBitmapSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapDialogLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ConnectParametersToEditor" ExportId="ConnectParametersToEditor" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultModel" ExportId="DefaultModel" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="CameraParamsSetGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewCalibrationMode" ExportId="ViewCalibrationMode" Type="Integer">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="ImageTaskGui"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="ImageTaskGui/VisualStatus"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ImageTaskGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ImageTaskGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="ImageTaskGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ImageTaskGui"/>
+        <Interface InterfaceId="iqtgui::IVisualStatus" ComponentId="ImageTaskGui/VisualStatus"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTaskGui/VisualStatus"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="VisualStatus" ComponentId="ImageTaskGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

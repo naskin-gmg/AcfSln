@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="825" Y="325" ComponentName="Bitmap"/>
+        <Element Note="" X="500" Y="475" ComponentName="ImageBinarizeProcessor"/>
+        <Element Note="" X="500" Y="325" ComponentName="BinaryImageSupplier"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,13 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="925" Y="475" ComponentName="OutputFileRenaming"/>
+        <Element Note="" X="175" Y="350" ComponentName="DirectoryMonitor"/>
+        <Element Note="" X="600" Y="350" ComponentName="FileSystemChangeStorage"/>
+        <Element Note="" X="600" Y="600" ComponentName="HotfolderProcessor"/>
+        <Element Note="" X="600" Y="475" ComponentName="HotfolderTaskManager"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,15 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="700" Y="600" ComponentName="FilterParams"/>
+        <Element Note="" X="550" Y="675" ComponentName="CircleFinderParams"/>
+        <Element Note="" X="675" Y="150" ComponentName="RadiusParams"/>
+        <Element Note="" X="1025" Y="425" ComponentName="Aoi"/>
+        <Element Note="" X="675" Y="300" ComponentName="ParamsGui"/>
+        <Element Note="" X="325" Y="300" ComponentName="ValueSupplierGui"/>
+        <Element Note="" X="800" Y="525" ComponentName="CaliperParams"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

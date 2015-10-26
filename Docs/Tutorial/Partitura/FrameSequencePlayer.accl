@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="550" Y="350" ComponentName="DirParamGui"/>
+        <Element Note="" X="550" Y="500" ComponentName="DirParam"/>
+        <Element Note="" X="875" Y="425" ComponentName="FrameSequenceViewer"/>
+        <Element Note="" X="875" Y="200" ComponentName="GuiApplication"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,53 @@
+<Acf Keywords="" Description="State model of the hotfolder">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="HotfolderPck" Id="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderPck" Id="HotfolderStatistics" ComponentId="HotfolderStatistics">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="StateModel" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>HotfolderProcessingInfo</Value>
+                                <Value>HotfolderStatistics</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>HotfolderProcessingInfo</Value>
+                                <Value>HotfolderStatistics</Value>
+                                <Value></Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="ProcessingInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="StateModel"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="StateModel"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="StateModel"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="StateModel"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="HotfolderState" ComponentId="HotfolderProcessingInfo"/>
+    </ExportedComponents>
+</Acf>

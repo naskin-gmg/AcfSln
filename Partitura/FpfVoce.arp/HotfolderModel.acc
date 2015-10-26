@@ -1,0 +1,60 @@
+<Acf Keywords="Hotfolder File Processing Directory Monitoring" Description="Basic definition of a hotfolder">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BasePck" Id="HotfolderModel" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>HotfolderProcessingInfo</Value>
+                                <Value>HotfolderSettings</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>HotfolderProcessingInfo</Value>
+                                <Value>HotfolderSettings</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FpfVoce" Id="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="FpfVoce" Id="HotfolderSettings" ComponentId="HotfolderSettings">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptPatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnorePatterns" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="HotfolderModel"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="HotfolderModel"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="HotfolderModel"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="HotfolderModel"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo/HotfolderProcessingInfo"/>
+        <Component ExportedId="HotfolderSettings" ComponentId="HotfolderSettings"/>
+    </ExportedComponents>
+</Acf>

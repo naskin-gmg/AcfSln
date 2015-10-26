@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="675" Y="325" ComponentName="ParamsSet"/>
+        <Element Note="" X="325" Y="125" ComponentName="CaliperProcessor"/>
+        <Element Note="" X="675" Y="125" ComponentName="PositionTask"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

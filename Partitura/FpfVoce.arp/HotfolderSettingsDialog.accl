@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="900" Y="425" ComponentName="HotfolderSettingsGui"/>
+        <Element Note="" X="575" Y="225" ComponentName="SettingsDialog"/>
+        <Element Note="" X="250" Y="425" ComponentName="HotfolderSettingsFactory"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

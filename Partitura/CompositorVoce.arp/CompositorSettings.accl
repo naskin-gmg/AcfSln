@@ -1,0 +1,18 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="200" Y="75" ComponentName="ConfigDataShadow"/>
+        <Element Note="" X="725" Y="300" ComponentName="PreviewCommandFile"/>
+        <Element Note="" X="475" Y="300" ComponentName="ConfigsManager"/>
+        <Element Note="" X="500" Y="500" ComponentName="HtmlBrowserFile"/>
+        <Element Note="" X="725" Y="500" ComponentName="HtmlEditorFile"/>
+        <Element Note="" X="975" Y="500" ComponentName="EnableDocumentPersistence"/>
+        <Element Note="" X="200" Y="225" ComponentName="ConfigFileShadower"/>
+        <Element Note="" X="975" Y="300" ComponentName="LanguageSelection"/>
+        <Element Note="" X="475" Y="125" ComponentName="SelectableConfigData"/>
+        <Element Note="" X="200" Y="400" ComponentName="Settings"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

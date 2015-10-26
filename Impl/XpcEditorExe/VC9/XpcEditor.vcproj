@@ -43,7 +43,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -134,7 +134,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -227,7 +227,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -319,7 +319,7 @@
 			/>
 			<Tool
 				Name="FileConvertCopy"
-				RegistryFile="../../../Partitura/AcfInfoCopyApp.arx"
+				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
 				ConfigFile="../../../Config/BaseOnly.xpc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
@@ -429,11 +429,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\XpcEditor.alx"
-				>
-			</File>
-			<File
-				RelativePath="..\XpcEditor.arx"
+				RelativePath="..\XpcEditor.acc"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -451,6 +447,10 @@
 						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\XpcEditor.alx"
+				>
 			</File>
 			<File
 				RelativePath="..\XpcEditor.qrc"

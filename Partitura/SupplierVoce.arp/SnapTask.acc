@@ -1,0 +1,39 @@
+<Acf Keywords="Task Image Acquisition Camera" Description="Image acquisition task using camera to retrive image">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="CameraPck" Id="ImageTask" ComponentId="SnapBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapAcquisition" ExportId="Camera" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" ExportId="CameraParamsSet" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="ImageTask"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="ImageTask"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="ImageTask"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="ImageTask"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTask"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

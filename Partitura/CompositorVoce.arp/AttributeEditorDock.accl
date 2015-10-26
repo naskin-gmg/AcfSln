@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="675" Y="450" ComponentName="AttributeEditor"/>
+        <Element Note="" X="300" Y="450" ComponentName="RegistryPropEditor"/>
+        <Element Note="" X="675" Y="250" ComponentName="AttributeDock"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

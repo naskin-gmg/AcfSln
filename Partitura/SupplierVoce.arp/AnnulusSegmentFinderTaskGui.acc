@@ -1,0 +1,109 @@
+<Acf Keywords="Circle Finder Task Annulus GUI" Description="GUI for rivet referencing task for SIM rivet station">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtViewPck" Id="Aoi" ComponentId="AnnulusSegmentParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="CaliperParams" ComponentId="CaliperParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="CircleFinderParams" ComponentId="CircleFinderParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="FilterParams" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ParamsGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DesignType" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Aoi</Value>
+                                <Value>CaliperParams</Value>
+                                <Value>FilterParams</Value>
+                                <Value>CircleFinderParams</Value>
+                                <Value>RadiusParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Aoi</Value>
+                                <Value>Caliper</Value>
+                                <Value>Filter</Value>
+                                <Value>CircleFinderParams</Value>
+                                <Value>RadiusParams</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Geometry</Value>
+                                <Value>Edge Detection</Value>
+                                <Value>Filter</Value>
+                                <Value>Circle Finder</Value>
+                                <Value>Tolerance</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseVerticalSpacer" ExportId="UseVerticalSpacer" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="RadiusParams" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="ValueSupplierGui" ComponentId="ValueSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" ExportId="DefaultModel" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneIdFilters" ExportId="SceneIdFilters" Type="Integer[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="ValueSupplierGui"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ValueSupplierGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ValueSupplierGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="ValueSupplierGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ValueSupplierGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="VisualStatus" ComponentId="ValueSupplierGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

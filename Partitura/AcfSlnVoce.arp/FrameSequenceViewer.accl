@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="975" Y="400" ComponentName="VideoPlayerGui"/>
+        <Element Note="" X="650" Y="575" ComponentName="VideoViewGui"/>
+        <Element Note="" X="650" Y="200" ComponentName="PlaybackControllerGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

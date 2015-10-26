@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="200" Y="400" ComponentName="PackageOverviewDock"/>
+        <Element Note="" X="600" Y="675" ComponentName="LogDock"/>
+        <Element Note="" X="1000" Y="125" ComponentName="AttributeEditorDock"/>
+        <Element Note="" X="1000" Y="400" ComponentName="QuickHelpDock"/>
+        <Element Note="" X="618" Y="550" ComponentName="ComponentNoteEditorDock"/>
+        <Element Note="" X="900" Y="675" ComponentName="WindowsListCommands"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

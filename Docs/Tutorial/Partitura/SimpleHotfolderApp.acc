@@ -1,0 +1,70 @@
+<Acf Keywords="Hotfoder Demo Tutorial Processing" Description="Simple demonstration of hotfolder processing.\n Image files will be copied from the observed input location to the output folder.">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtGuiPck" Id="App" ComponentId="GuiApplication">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IconPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Icons/Hotfolder"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StyleSheet" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value=":/Style/Asc.ass"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TitleFormat" ExportId="TitleFormat" Type="String">
+                        <Data IsEnabled="true" Value="$(AppName) by $(CompanyName)"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="FileProcessingPck" Id="ImageCopy" ComponentId="FileCopyOverLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="InputLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderVoce" Id="ImageProcessingHotfolderFramework" ComponentId="ImageProcessingHotfolderFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ImageConverter" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ImageCopy"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="App"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

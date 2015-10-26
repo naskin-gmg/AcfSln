@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="250" Y="475" ComponentName="Line"/>
+        <Element Note="" X="575" Y="350" ComponentName="CaliperParamsSet"/>
+        <Element Note="" X="600" Y="475" ComponentName="SmoothFilterParams"/>
+        <Element Note="" X="900" Y="475" ComponentName="CaliperParams"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

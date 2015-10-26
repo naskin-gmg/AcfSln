@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="675" Y="50" ComponentName="VersionInfo"/>
+        <Element Note="" X="675" Y="525" ComponentName="TranslationManager"/>
+        <Element Note="" X="675" Y="325" ComponentName="Application"/>
+        <Element Note="" X="975" Y="175" ComponentName="LogDock"/>
+        <Element Note="" X="350" Y="175" ComponentName="XpcTemplate"/>
+        <Element Note="" X="975" Y="525" ComponentName="RememberDocumentList"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

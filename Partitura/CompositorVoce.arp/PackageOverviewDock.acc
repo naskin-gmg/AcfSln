@@ -1,0 +1,52 @@
+<Acf Keywords="Package View Tag='GUI'" Description="Package overview docking widget">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="CompositorPck" Id="PackageOverview" ComponentId="PackageOverview">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ConfigFilePath" ExportId="ConfigFilePath" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="ConsistencyInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="EnvironmentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="QuickHelpGui" ExportId="QuickHelpGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="PackageOverviewDock" ComponentId="DockWidgetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Packages"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackageOverview"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="PackageOverview"/>
+        <Interface InterfaceId="icmpstr::IAttributeSelectionObserver" ComponentId="PackageOverview"/>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="PackageOverview"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="PackageOverview"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="PackageOverview"/>
+        <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="PackageOverviewDock"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="LocalMetaInfoManager" ComponentId="PackageOverview/LocalMetaInfoManager"/>
+    </ExportedComponents>
+</Acf>

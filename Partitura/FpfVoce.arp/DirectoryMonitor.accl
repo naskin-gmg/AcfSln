@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="375" ComponentName="DirectoryMonitorParamsGui"/>
+        <Element Note="" X="675" Y="550" ComponentName="DirectoryMonitor"/>
+        <Element Note="" X="625" Y="175" ComponentName="ModelBinder"/>
+        <Element Note="" X="950" Y="325" ComponentName="DirectoryMonitorParams"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

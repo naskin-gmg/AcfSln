@@ -1,0 +1,115 @@
+<Acf Keywords="Color Matching" Description="GUI for the color matching supplier">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtIprPck" Id="ColorPatternComparatorGui" ComponentId="ColorPatternComparatorGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMeasPck" Id="ComparisonThreshold" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QwtPck" Id="HistogramView" ComponentId="HistogramView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DesignType" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>ComparisonThreshold</Value>
+                                <Value>PatternController</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>ComparisonThreshold</Value>
+                                <Value>PatternController</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>Comparison Threshold</Value>
+                                <Value>Color Pattern</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtIprPck" Id="PatternController" ComponentId="PatternTeachingControllerGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ErrorColor" ExportId="ErrorColor" Type="Id">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OkColor" ExportId="OkColor" Type="Id">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PatternObserver" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HistogramView"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PatternView" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HistogramView"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtViewPck" Id="Region" ComponentId="PolygonParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultUnitInfo" ExportId="UnitInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="NodeListSize" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShapeColorSchema" ExportId="AoiShapeColorSchema" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ToolBarGui" ExportId="ToolBarGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="ColorPatternComparatorGui"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="ColorPatternComparatorGui"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="ColorPatternComparatorGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ColorPatternComparatorGui"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="ColorPatternComparatorGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="VisualStatus" ComponentId="ColorPatternComparatorGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

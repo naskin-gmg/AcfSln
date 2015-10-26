@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="550" Y="300" ComponentName="OutputData"/>
+        <Element Note="" X="300" Y="425" ComponentName="BitmapLoader"/>
+        <Element Note="" X="800" Y="425" ComponentName="InputData"/>
+        <Element Note="" X="550" Y="425" ComponentName="FileConvertOverProcessor"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

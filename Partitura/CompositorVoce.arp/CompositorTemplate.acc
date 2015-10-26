@@ -1,0 +1,204 @@
+<Acf Keywords="" Description="Document template for Compositor">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="" Id="Document" ComponentId="Document">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectedRegistryObservers" ExportId="SelectedRegistryObservers" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtGuiPck" Id="DocumentTemplate" ComponentId="ExtendedDocumentTemplate">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DocumentFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="Document"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentTypeId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="Registry"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentTypeName" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="ACF Registry"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsEditSupported" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="IsNewSupported" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UndoManager" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="UndoManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="VisualRegistryView"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="PackagesLoaderExt" ComponentId="PackagesLoaderExt">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryLoader" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryLoader"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="Preview" ComponentId="RegistryPreview">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CommandFileName" ExportId="PreviewCommandFile" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackagesLoaderExt"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="PackagePck" Id="RegistryCodeSaver" ComponentId="RegistryCodeSaver">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PackagesManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackagesLoaderExt"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistriesManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackagesLoaderExt"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="RegistryConsistInfo" ComponentId="RegistryConsistInfo">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackagesLoaderExt"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorPck" Id="RegistryLoader" ComponentId="RegistryLoader">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="UndoManager" ComponentId="SerializedUndoManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="VisualRegistryView" ComponentId="VisualRegistryView">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ConsistencyInfo" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryConsistInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnvironmentManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PackagesLoaderExt"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="QuickHelpGui" ExportId="QuickHelpGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryCodeSaver" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RegistryCodeSaver"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistryPreview" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="Preview"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RegistrySelectionObservers" ExportId="RegistrySelectionObservers" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="Document">
+            <Data Keywords="" Description="">
+                <ElementsList>
+                    <Element PackageId="BasePck" Id="SelectedDocModelBinder" ComponentId="SelectedDocModelBinder">
+                        <Data IsEnabled="true" Flags="1">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ActivationObject" ExportId="" Type="Reference">
+                                    <Data IsEnabled="true" Value="VisualRegistry"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Model" ExportId="" Type="Reference">
+                                    <Data IsEnabled="true" Value="VisualRegistry"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Observers" ExportId="SelectedRegistryObservers" Type="Reference[]">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element PackageId="CompositorPck" Id="VisualRegistry" ComponentId="VisualRegistry">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="icmpstr::IComponentNoteController" ComponentId="VisualRegistry"/>
+                    <Interface InterfaceId="icomp::IRegistry" ComponentId="VisualRegistry"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="VisualRegistry"/>
+                    <Interface InterfaceId="iser::ISerializable" ComponentId="VisualRegistry"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="VisualRegistry"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="VisualRegistry"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
+    <ExportedInterfaces>
+        <Interface InterfaceId="icmpstr::IRegistryConsistInfo" ComponentId="RegistryConsistInfo"/>
+        <Interface InterfaceId="idoc::IDocumentTemplate" ComponentId="DocumentTemplate"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="PackagesLoader" ComponentId="PackagesLoaderExt"/>
+    </ExportedComponents>
+</Acf>

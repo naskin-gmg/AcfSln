@@ -1,0 +1,15 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="600" Y="450" ComponentName="FilterParams"/>
+        <Element Note="" X="225" Y="600" ComponentName="XmlFileSerializer"/>
+        <Element Note="" X="225" Y="475" ComponentName="FileDialogLoader"/>
+        <Element Note="" X="525" Y="325" ComponentName="CaliperParamsSetGui"/>
+        <Element Note="" X="800" Y="525" ComponentName="CaliperParams"/>
+        <Element Note="" X="225" Y="325" ComponentName="GeneralSupplierGui"/>
+        <Element Note="" X="1000" Y="600" ComponentName="Region"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

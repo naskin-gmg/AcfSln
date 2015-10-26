@@ -1,0 +1,12 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="550" Y="150" ComponentName="VersionInfo"/>
+        <Element Note="" X="850" Y="700" ComponentName="TranslationManager"/>
+        <Element Note="" X="550" Y="300" ComponentName="Application"/>
+        <Element Note="" X="250" Y="475" ComponentName="Settings"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

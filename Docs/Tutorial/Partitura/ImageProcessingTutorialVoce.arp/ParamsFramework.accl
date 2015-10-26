@@ -1,0 +1,17 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="825" Y="200" ComponentName="LogTab"/>
+        <Element Note="" X="600" Y="200" ComponentName="Tabs"/>
+        <Element Note="" X="875" Y="425" ComponentName="ParamsSetGui"/>
+        <Element Note="" X="318" Y="195" ComponentName="Application"/>
+        <Element Note="" X="325" Y="325" ComponentName="Info"/>
+        <Element Note="" X="1000" Y="325" ComponentName="ParamsEditorGui"/>
+        <Element Note="" X="1100" Y="425" ComponentName="ParamsSet"/>
+        <Element Note="" X="600" Y="325" ComponentName="ParamsTab"/>
+        <Element Note="" X="600" Y="425" ComponentName="ViewProvider"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

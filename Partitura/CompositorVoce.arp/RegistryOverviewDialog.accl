@@ -1,0 +1,10 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="550" Y="350" ComponentName="RegistryTreeView"/>
+        <Element Note="" X="550" Y="225" ComponentName="Dialog"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

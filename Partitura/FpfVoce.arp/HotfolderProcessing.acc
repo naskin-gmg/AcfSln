@@ -1,0 +1,99 @@
+<Acf Keywords="Hotfolder File Processing Directory Monitoring" Description="Basic definition of a hotfolder">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="HotfolderGuiPck" Id="DirectoryMonitor" ComponentId="DirectoryMonitor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DirParamId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="DirectoryPath"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DirectoryMonitorParamsId" ExportId="" Type="Id">
+                        <Data IsEnabled="true" Value="DirectoryMonitorParams"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileSystemChangeStorage" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileSystemChangeStorage"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SessionManager" ExportId="MonitoringSessionManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderPck" Id="FileSystemChangeStorage" ComponentId="FileSystemChangeStorage">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderGuiPck" Id="HotfolderProcessor" ComponentId="HotfolderProcessor">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FileConverter" ExportId="FileConverter" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="HotfolderProcessingInfo" ExportId="HotfolderProcessingInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TaskManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="HotfolderTaskManager"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="HotfolderGuiPck" Id="HotfolderTaskManager" ComponentId="HotfolderTaskManager">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DirectoryMontorFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="DirectoryMonitor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileNamingStrategy" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="OutputFileRenaming"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileSystemChangeStorage" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="FileSystemChangeStorage"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="HotfolderProcessingInfo" ExportId="HotfolderProcessingInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="HotfolderSettingsModel" ExportId="HotfolderSettings" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputDirectoriesManager" ExportId="InputDirectoriesManager" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FileProcessingPck" Id="OutputFileRenaming" ComponentId="FileNaming">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DirectoryPath" ExportId="HotfolderOutputDirectory" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FileNamingParams" ExportId="FileNamingParams" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputFileInfo" ExportId="OutputFileInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces/>
+    <ExportedComponents/>
+</Acf>

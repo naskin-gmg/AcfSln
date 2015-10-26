@@ -1,0 +1,11 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="425" ComponentName="BitmapLoader"/>
+        <Element Note="" X="950" Y="425" ComponentName="BitmapView"/>
+        <Element Note="" X="650" Y="250" ComponentName="FrameSeqVideoController"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

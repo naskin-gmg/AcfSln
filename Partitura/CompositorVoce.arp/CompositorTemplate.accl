@@ -1,0 +1,25 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="625" Y="400" ComponentName="Preview"/>
+        <Element Note="" X="1000" Y="600" ComponentName="VisualRegistryView"/>
+        <Element Note="" X="625" Y="300" ComponentName="Document"/>
+        <Element Note="" X="1000" Y="700" ComponentName="RegistryConsistInfo"/>
+        <Element Note="" X="625" Y="100" ComponentName="RegistryLoader"/>
+        <Element Note="" X="1000" Y="75" ComponentName="UndoManager"/>
+        <Element Note="" X="200" Y="100" ComponentName="PackagesLoaderExt"/>
+        <Element Note="" X="1000" Y="200" ComponentName="DocumentTemplate"/>
+        <Element Note="" X="400" Y="475" ComponentName="RegistryCodeSaver"/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="Document">
+            <PositionMap>
+                <Element Note="" X="600" Y="250" ComponentName="VisualRegistry"/>
+                <Element Note="" X="600" Y="400" ComponentName="SelectedDocModelBinder"/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

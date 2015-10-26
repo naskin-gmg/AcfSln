@@ -31,6 +31,7 @@ public:
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
+		I_ASSIGN(m_supportOldFormatAttrPtr, "SupportOldFormat", "If enabled old format of registries (ARX) wil be supported", true, true);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -65,6 +66,7 @@ protected:
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
+	I_ATTR(bool, m_supportOldFormatAttrPtr);
 };
 
 

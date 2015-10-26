@@ -1,0 +1,95 @@
+<Acf Keywords="" Description="Video player displaying image sequence form some directory">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="QtMmPck" Id="PlaybackControllerGui" ComponentId="PlaybackControllerGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowFrameIndex" ExportId="ShowFrameIndex" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowPlayButton" ExportId="ShowPlayButton" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowPositionSlider" ExportId="ShowPositionSlider" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowRepeatButton" ExportId="ShowRepeatButton" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowTimePosition" ExportId="ShowTimePosition" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="QtMmPck" Id="VideoPlayerGui" ComponentId="VideoPlayerGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ControllerBarGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="PlaybackControllerGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MediaController" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UrlGui" ExportId="DirectoryGui" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UrlParams" ExportId="DirectoryParam" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="VideoGui" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="AcfSlnVoce" Id="VideoViewGui" ComponentId="FrameSeqVideoViewGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FitMode" ExportId="FitMode" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FramesPerSecond" ExportId="FramesPerSecond" Type="Real">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseAntialiasing" ExportId="UseAntialiasing" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseGridCommands" ExportId="UseGridCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseScrollBarCommands" ExportId="UseScrollBarCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseShapeEditCommands" ExportId="UseShapeEditCommands" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="ZoomToFitEnabled" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imm::IMediaController" ComponentId="VideoViewGui"/>
+        <Interface InterfaceId="imm::IVideoController" ComponentId="VideoViewGui"/>
+        <Interface InterfaceId="imm::IVideoInfo" ComponentId="VideoViewGui"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="VideoViewGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="VideoPlayerGui"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="VideoViewGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="Bitmap" ComponentId="VideoViewGui/Bitmap"/>
+        <Component ExportedId="BitmapLoader" ComponentId="VideoViewGui/BitmapLoader"/>
+    </ExportedComponents>
+</Acf>

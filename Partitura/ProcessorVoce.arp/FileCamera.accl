@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="250" Y="200" ComponentName="ParamsSetGui"/>
+        <Element Note="" X="575" Y="100" ComponentName="BitmapLoader"/>
+        <Element Note="" X="250" Y="100" ComponentName="FileCamera"/>
+        <Element Note="" X="575" Y="300" ComponentName="FilePathParam"/>
+        <Element Note="" X="250" Y="300" ComponentName="ComposedParamsSet"/>
+        <Element Note="" X="575" Y="200" ComponentName="FilePathParamGui"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

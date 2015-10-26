@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualStudioToolFile
 	Name="ACF Rules"
-	Version="9,00"
+	Version="8,00"
 	>
 	<Rules>
 		<CustomBuildRule
@@ -10,7 +10,7 @@
 			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Arxc.exe &quot;$(InputPath)&quot; -o &quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot; [AllOptions] [AdditionalOptions]"
 			Outputs="&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).cpp&quot;;&quot;$(InputDir)\..\..\AuxInclude\Qt5\GeneratedFiles\$(ProjectName)\C$(InputName).h&quot;"
 			AdditionalDependencies="&quot;$(ACFDIR)\Bin\$(ConfigurationName)VC9\Arxc.exe&quot;"
-			FileExtensions="*.arx"
+			FileExtensions="*.acc;*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
 			>
 			<Properties>

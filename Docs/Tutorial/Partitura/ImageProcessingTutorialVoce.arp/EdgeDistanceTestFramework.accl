@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="975" Y="575" ComponentName="EdgeDistanceTaskGui"/>
+        <Element Note="" X="225" Y="225" ComponentName="SnapTask"/>
+        <Element Note="" X="225" Y="575" ComponentName="SnapTaskGui"/>
+        <Element Note="" X="975" Y="225" ComponentName="EdgeDistanceTask"/>
+        <Element Note="" X="125" Y="400" ComponentName="ImageView"/>
+        <Element Note="" X="600" Y="400" ComponentName="Framework"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

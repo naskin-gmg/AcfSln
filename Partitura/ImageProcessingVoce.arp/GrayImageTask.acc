@@ -1,0 +1,60 @@
+<Acf Keywords="" Description="">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="BitmapPck" Id="CurrentGrayImage" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="GrayImageSupplier" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="CurrentGrayImage"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="RgbToGrayProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
+                        <Data IsEnabled="true" Value="Grayscale Image"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="IprPck" Id="RgbToGrayProcessor" ComponentId="RgbToGrayProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="GrayImageSupplier/TaskLog"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="GrayImageSupplier"/>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="GrayImageSupplier"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="GrayImageSupplier"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="GrayImageSupplier"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="GrayImageSupplier"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="GrayImageSupplier"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CurrentGrayImage" ComponentId="CurrentGrayImage"/>
+    </ExportedComponents>
+</Acf>

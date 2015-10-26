@@ -1,0 +1,15 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="675" Y="625" ComponentName="FileCopyOverLoader"/>
+        <Element Note="" X="675" Y="725" ComponentName="Registry"/>
+        <Element Note="" X="1000" Y="225" ComponentName="VersionInfo"/>
+        <Element Note="" X="350" Y="400" ComponentName="RegistryLoader"/>
+        <Element Note="" X="675" Y="225" ComponentName="ComplexCopyApplication"/>
+        <Element Note="" X="775" Y="475" ComponentName="CopyFilesTree"/>
+        <Element Note="" X="1000" Y="400" ComponentName="RegistrySaver"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

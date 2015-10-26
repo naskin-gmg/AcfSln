@@ -1,0 +1,21 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="675" Y="350" ComponentName="Hotfolder"/>
+        <Element Note="" X="675" Y="625" ComponentName="HotfolderSettingsDialog"/>
+        <Element Note="" X="1050" Y="450" ComponentName="HotfolderStateFilePath"/>
+        <Element Note="" X="150" Y="750" ComponentName="MonitoringCachePersistence"/>
+        <Element Note="" X="150" Y="50" ComponentName="Instantiator"/>
+        <Element Note="" X="400" Y="450" ComponentName="HotfolderGui"/>
+        <Element Note="" X="875" Y="125" ComponentName="HotfolderSettingsFilePath"/>
+        <Element Note="" X="450" Y="700" ComponentName="MonitorCacheFile"/>
+        <Element Note="" X="400" Y="350" ComponentName="HotfolderGuiBinder"/>
+        <Element Note="" X="575" Y="125" ComponentName="HotfolderSettingsPersistence"/>
+        <Element Note="" X="1050" Y="350" ComponentName="HotfolderStatePersistence"/>
+        <Element Note="" X="400" Y="550" ComponentName="ProcessingItemPreview"/>
+        <Element Note="" X="875" Y="750" ComponentName="DirectoryMonitorCache"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

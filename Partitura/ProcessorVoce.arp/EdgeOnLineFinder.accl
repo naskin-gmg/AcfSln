@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="Calculate the image projection along a line" X="225" Y="425" ComponentName="LineProjection"/>
+        <Element Note="Derivative of the image projection" X="725" Y="300" ComponentName="Derivative"/>
+        <Element Note="Calculate extremums of the projection derivative" X="900" Y="425" ComponentName="Caliper"/>
+        <Element Note="Processing chain for caliper calculation.&#xa;1. Calculate the pixel data along a line given as parameter in the input parameter set&#xa;2. Calculate the derivative of projection data&#xa;3. Find and cumulate extremum points of the derivative data." X="575" Y="175" ComponentName="Casade"/>
+        <Element Note="Calculate the derivative of the projection data" X="575" Y="375" ComponentName="DerivativeProcessor"/>
+        <Element Note="Image projection along a line" X="425" Y="300" ComponentName="Projection"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

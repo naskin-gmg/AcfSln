@@ -1,0 +1,24 @@
+<Acf Keywords="" Description="Compositor's localization manager">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="AcfSlnVoce" Id="CompositorTranslationManager" ComponentId="AcfSolutionsLocalization">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="LanguageSelection" ExportId="LanguageSelection" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="CompositorTranslationManager"/>
+        <Interface InterfaceId="iprm::IOptionsList" ComponentId="CompositorTranslationManager"/>
+        <Interface InterfaceId="iqt::ITranslationManager" ComponentId="CompositorTranslationManager"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="CompositorTranslationManager"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

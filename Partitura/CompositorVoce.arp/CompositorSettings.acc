@@ -1,0 +1,138 @@
+<Acf Keywords="Compositor Settings Model Parameter" Description="Compositor settings">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="CompositorVoce" Id="ConfigDataShadow" ComponentId="SelectableConfigData">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="../../Config/Full.xpc"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="ConfigFileShadower" ComponentId="ManagerParamsSetShadower">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsManager" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ConfigsManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectionParam" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ConfigsManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShadowParamsSet" ExportId="" Type="Reference">
+                        <Data IsEnabled="true" Value="ConfigDataShadow"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="ConfigsManager" ComponentId="ParamsManager">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSetFactory" ExportId="" Type="Factory">
+                        <Data IsEnabled="true" Value="SelectableConfigData"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="EnableDocumentPersistence" ComponentId="EnableableParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultEnabled" ExportId="" Type="Boolean">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FilePck" Id="HtmlBrowserFile" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FilePck" Id="HtmlEditorFile" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="LanguageSelection" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" ExportId="LanguageSelectionConstraints" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="FilePck" Id="PreviewCommandFile" ComponentId="FileNameParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultPath" ExportId="" Type="String">
+                        <Data IsEnabled="true" Value="Acf"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="CompositorVoce" Id="SelectableConfigData" ComponentId="SelectableConfigData">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="Settings" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ConfigsManager</Value>
+                                <Value>PreviewCommandFile</Value>
+                                <Value>HtmlBrowserFile</Value>
+                                <Value>HtmlEditorFile</Value>
+                                <Value>LanguageSelection</Value>
+                                <Value>EnableDocumentPersistence</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>ConfigFile</Value>
+                                <Value>PreviewCommandFile</Value>
+                                <Value>HtmlBrowserFile</Value>
+                                <Value>HtmlEditorFile</Value>
+                                <Value>LanguageSelection</Value>
+                                <Value>EnableDocumentPersistence</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="Settings"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="Settings"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="Settings"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Settings"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="ConfigFile" ComponentId="ConfigDataShadow/ConfigFile"/>
+        <Component ExportedId="EnableDocumentPersistence" ComponentId="EnableDocumentPersistence"/>
+        <Component ExportedId="HtmlBrowserFile" ComponentId="HtmlBrowserFile"/>
+        <Component ExportedId="HtmlEditorFile" ComponentId="HtmlEditorFile"/>
+        <Component ExportedId="LanguageSelection" ComponentId="LanguageSelection"/>
+        <Component ExportedId="PreviewCommandFile" ComponentId="PreviewCommandFile"/>
+    </ExportedComponents>
+</Acf>

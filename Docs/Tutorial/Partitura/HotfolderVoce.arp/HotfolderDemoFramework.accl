@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="150" Y="175" ComponentName="VersionInfo"/>
+        <Element Note="" X="750" Y="325" ComponentName="SimpleMainGui"/>
+        <Element Note="" X="425" Y="175" ComponentName="ApplicationInfo"/>
+        <Element Note="" X="275" Y="325" ComponentName="LogDock"/>
+        <Element Note="" X="750" Y="500" ComponentName="HotfolderDemoGui"/>
+        <Element Note="" X="750" Y="175" ComponentName="ApplicationSettingsProvider"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,26 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="350" Y="425" ComponentName="VersionInfo"/>
+        <Element Note="" X="150" Y="100" ComponentName="XmlFileSerializer"/>
+        <Element Note="" X="475" Y="250" ComponentName="AboutDialog"/>
+        <Element Note="" X="1050" Y="600" ComponentName="InspectionTask"/>
+        <Element Note="" X="1050" Y="100" ComponentName="ErrorShapeFactory"/>
+        <Element Note="" X="1050" Y="225" ComponentName="InspectionTaskEditor"/>
+        <Element Note="" X="175" Y="600" ComponentName="LogDock"/>
+        <Element Note="" X="775" Y="100" ComponentName="ErrorColorSchema"/>
+        <Element Note="" X="825" Y="425" ComponentName="StandaloneApp"/>
+        <Element Note="" X="525" Y="125" ComponentName="FileDialogLoader"/>
+    </PositionMap>
+    <EmbeddedRegistries>
+        <EmbededRegistry Id="Inspection">
+            <PositionMap>
+                <Element Note="" X="561.984565688" Y="306.83857941" ComponentName="InspectionTask"/>
+                <Element Note="" X="550" Y="425" ComponentName="SettingsPersistence"/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+    </EmbeddedRegistries>
+</Acf>

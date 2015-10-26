@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="250" Y="225" ComponentName="SnapTask"/>
+        <Element Note="" X="925" Y="225" ComponentName="LineCaliperTask"/>
+        <Element Note="" X="250" Y="475" ComponentName="SnapTaskGui"/>
+        <Element Note="" X="150" Y="350" ComponentName="ImageView"/>
+        <Element Note="" X="925" Y="475" ComponentName="LineCaliperTaskGui"/>
+        <Element Note="" X="550" Y="350" ComponentName="Framework"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

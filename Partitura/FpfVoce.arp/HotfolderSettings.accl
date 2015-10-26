@@ -1,0 +1,14 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <PositionMap>
+        <Element Note="" X="925" Y="600" ComponentName="HotfolderId"/>
+        <Element Note="" X="575" Y="200" ComponentName="InputDirectories"/>
+        <Element Note="" X="925" Y="325" ComponentName="DirectoryMonitorParams"/>
+        <Element Note="" X="575" Y="600" ComponentName="FileNamingParams"/>
+        <Element Note="" X="575" Y="450" ComponentName="HotfolderSettings"/>
+        <Element Note="" X="150" Y="450" ComponentName="OutputDirectory"/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

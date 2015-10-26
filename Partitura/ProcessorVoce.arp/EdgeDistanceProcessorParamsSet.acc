@@ -1,0 +1,90 @@
+<Acf Keywords="Circle Finder Parameters" Description="Parameter set for circle finder using as AOI annulus segment">
+    <AcfHeader>
+        <VersionInfos/>
+    </AcfHeader>
+    <ElementsList>
+        <Element PackageId="IprPck" Id="CaliperParams" ComponentId="CaliperParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="PolarityMode" ExportId="PolarityMode" Type="Integer">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WeightThreshold" ExportId="WeightThreshold" Type="Real">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="CaliperParamsSet" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>CaliperParams</Value>
+                                <Value>FilterLength</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Region</Value>
+                                <Value>Caliper</Value>
+                                <Value>Filter</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="MeasPck" Id="FilterLength" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" ExportId="FilterConstraints" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" ExportId="FilterLegthValues" Type="Real[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element PackageId="BasePck" Id="Region" ComponentId="AnnulusSegment">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Calibration" ExportId="Calibration" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InnerRadius" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="50"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OuterRadius" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="X" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Y" ExportId="" Type="Real">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModel" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="iprm::IParamsSet" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="iser::ISerializable" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
+    </ExportedComponents>
+</Acf>
