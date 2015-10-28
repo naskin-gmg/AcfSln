@@ -449,10 +449,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Compositor.alx"
-				>
-			</File>
-			<File
 				RelativePath="..\Compositor.qrc"
 				>
 			</File>

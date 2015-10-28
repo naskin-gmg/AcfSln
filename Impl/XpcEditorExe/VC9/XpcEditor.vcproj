@@ -449,10 +449,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\XpcEditor.alx"
-				>
-			</File>
-			<File
 				RelativePath="..\XpcEditor.qrc"
 				>
 			</File>
