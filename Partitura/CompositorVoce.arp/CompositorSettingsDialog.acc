@@ -41,7 +41,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="PreviewCommandFileInfo" ComponentId="FileTypeInfo">
+        <Element PackageId="FilePck" Id="PreviewCommandFileInfo" ComponentId="FileTypeInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="FileExtensionsMac" ExportId="" Type="String[]">

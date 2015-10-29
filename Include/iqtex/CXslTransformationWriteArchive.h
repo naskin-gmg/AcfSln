@@ -22,7 +22,7 @@ namespace iqtex
 
 /**
 	Qt-based implementation of archive for writing in XML format.
-	Please note that it doesn't create \c counter attribute needed by \c ifile::CXmlFileReadArchive.
+	Please note that it doesn't create \c counter attribute needed by \c ifile::CSimpleXmlFileReadArchive.
 
 	\ingroup Persistence
 */

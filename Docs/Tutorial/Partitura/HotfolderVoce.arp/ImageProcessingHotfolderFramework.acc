@@ -42,7 +42,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="OutputFileInfo" ComponentId="FileTypeInfo">
+        <Element PackageId="FilePck" Id="OutputFileInfo" ComponentId="FileTypeInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">

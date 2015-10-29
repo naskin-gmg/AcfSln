@@ -25,17 +25,13 @@
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "istd/CIdManipBase.h"
-
 #include "iser/CArchiveTag.h"
-#include "iqt/CCompactXmlMemReadArchive.h"
-#include "iqt/CCompactXmlMemWriteArchive.h"
-
+#include "iser/CCompactXmlMemReadArchive.h"
+#include "iser/CCompactXmlMemWriteArchive.h"
 #include "ibase/IApplication.h"
-
 #include "iqtgui/IDropConsumer.h"
 #include "iqtgui/TDesignerBasicGui.h"
 #include "iqtgui/CGuiComponentDialog.h"
-
 #include "icmpstr/CRegistryElementShape.h"
 #include "icmpstr/CGraphicsConnectorItem.h"
 #include "icmpstr/CVisualRegistryElement.h"
@@ -623,7 +619,7 @@ bool CVisualRegistryEditorComp::OnDropObject(const QMimeData& mimeData, QGraphic
 		position = i2d::CVector2d(eventPtr->scenePos());
 	}
 
-	iqt::CCompactXmlMemReadArchive archive(mimeData.text().toLocal8Bit(), false);
+	iser::CCompactXmlMemReadArchive archive(mimeData.text().toLocal8Bit(), false);
 	icomp::CComponentAddress address;
 
 	if (address.Serialize(archive)){
@@ -907,7 +903,7 @@ void CVisualRegistryEditorComp::OnCopyCommand()
 
 	QClipboard* clipboardPtr = QApplication::clipboard();
 	if (clipboardPtr != NULL){
-		iqt::CCompactXmlMemWriteArchive archive(NULL, false);
+		iser::CCompactXmlMemWriteArchive archive(NULL, false);
 
 		int elementsCount = int(m_selectedElementIds.size());
 
@@ -976,7 +972,7 @@ void CVisualRegistryEditorComp::OnPasteCommand()
 	istd::CChangeNotifier registryNotifier(registryPtr, &s_addElementChangeSet);
 	Q_UNUSED(registryNotifier);
 
-	iqt::CCompactXmlMemReadArchive archive(mimeDataPtr->text().toLocal8Bit(), false);
+	iser::CCompactXmlMemReadArchive archive(mimeDataPtr->text().toLocal8Bit(), false);
 
 	int elementsCount = 0;
 

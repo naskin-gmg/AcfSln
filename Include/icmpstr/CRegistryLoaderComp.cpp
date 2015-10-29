@@ -10,10 +10,10 @@
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "ifile/TFileSerializerComp.h"
-#include "ifile/CXmlFileReadArchive.h"
-#include "ifile/CXmlFileWriteArchive.h"
-#include "iqt/CCompactXmlFileReadArchive.h"
-#include "iqt/CCompactXmlFileWriteArchive.h"
+#include "ifile/CSimpleXmlFileReadArchive.h"
+#include "ifile/CSimpleXmlFileWriteArchive.h"
+#include "ifile/CCompactXmlFileReadArchive.h"
+#include "ifile/CCompactXmlFileWriteArchive.h"
 
 // ACF-Solutions includes
 #include "icmpstr/CVisualRegistry.h"
@@ -98,7 +98,7 @@ int CRegistryLoaderComp::LoadFromFile(
 
 	if (registryPtr != NULL){
 		if (QFileInfo(filePath).suffix().compare("acc", Qt::CaseInsensitive) == 0){
-			ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
+			ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
 			Q_ASSERT(!registryArchive.IsStoring());
 
 			if (geometricalRegistryPtr != NULL){
@@ -108,7 +108,7 @@ int CRegistryLoaderComp::LoadFromFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, false), this);
+				ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, false), this);
 				Q_ASSERT(!layoutArchive.IsStoring());
 
 				if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
@@ -128,7 +128,7 @@ int CRegistryLoaderComp::LoadFromFile(
 			}
 		}
 		else if (*m_supportOldFormatAttrPtr && (QFileInfo(filePath).suffix().compare("arx", Qt::CaseInsensitive) == 0)){
-			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
+			ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::ReadArchiveEx registryArchive(filePath, this);
 			Q_ASSERT(!registryArchive.IsStoring());
 
 			if (geometricalRegistryPtr != NULL){
@@ -138,7 +138,7 @@ int CRegistryLoaderComp::LoadFromFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, true), this);
+				ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::ReadArchiveEx layoutArchive(GetLayoutPath(filePath, true), this);
 				Q_ASSERT(!layoutArchive.IsStoring());
 
 				if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
@@ -177,7 +177,7 @@ int CRegistryLoaderComp::SaveToFile(
 
 	if (registryPtr != NULL){
 		if (QFileInfo(filePath).suffix().compare("arx", Qt::CaseInsensitive) == 0){
-			ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
+			ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
 			Q_ASSERT(registryArchive.IsStoring());
 
 			if (geometricalRegistryPtr != NULL){
@@ -187,7 +187,7 @@ int CRegistryLoaderComp::SaveToFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<ifile::CXmlFileReadArchive, ifile::CXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, true), m_versionInfoCompPtr.GetPtr(), this);
+				ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, true), m_versionInfoCompPtr.GetPtr(), this);
 				Q_ASSERT(layoutArchive.IsStoring());
 
 				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
@@ -207,7 +207,7 @@ int CRegistryLoaderComp::SaveToFile(
 			}
 		}
 		else{
-			ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
+			ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::WriteArchiveEx registryArchive(filePath, m_versionInfoCompPtr.GetPtr(), this);
 			Q_ASSERT(registryArchive.IsStoring());
 
 			if (geometricalRegistryPtr != NULL){
@@ -217,7 +217,7 @@ int CRegistryLoaderComp::SaveToFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<iqt::CCompactXmlFileReadArchive, iqt::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, false), m_versionInfoCompPtr.GetPtr(), this);
+				ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, false), m_versionInfoCompPtr.GetPtr(), this);
 				Q_ASSERT(layoutArchive.IsStoring());
 
 				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){

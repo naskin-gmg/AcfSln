@@ -24,7 +24,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="BinaryFileSerializer" ComponentId="BinaryFileSerializer">
+        <Element PackageId="FilePck" Id="BinaryFileSerializer" ComponentId="BinaryFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

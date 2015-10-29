@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-#include "iqt/CCompactXmlFileWriteArchive.h"
+#include "ifile/CCompactXmlFileWriteArchive.h"
 #include "istd/CSystem.h"
 
 
@@ -36,7 +36,7 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		return false;
 	}
 
-	iqt::CCompactXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
+	ifile::CCompactXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
 
 	if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
 		return false;
