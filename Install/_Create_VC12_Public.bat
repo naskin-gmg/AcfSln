@@ -26,5 +26,3 @@ call %ACFDIR%\Install\InternalParts\Create_TechnicalDoc.bat
 call %ACFDIR%\Install\InternalParts\CopyTempFiles.bat
 
 echo Installation done
-
-pause
