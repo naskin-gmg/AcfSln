@@ -1,9 +1,13 @@
-<Acf Keywords="" Description="">
+<Acf Description="" Keywords="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="328706" Description="Qt Framework" Id="1023"/>
+            <Version Number="1474" Description="ACF-Solutions" Id="1"/>
+            <Version Number="4005" Description="ACF" Id="0"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="InstallVoce" Id="Application" ComponentId="ComplexCopyApplication">
+        <Element ComponentId="ComplexCopyApplication" Id="Application" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
@@ -34,7 +38,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyPublic" ComponentId="CopyPublic">
+        <Element ComponentId="CopyPublic" Id="CopyPublic" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
@@ -51,9 +55,6 @@
                             <Values>
                                 <Value>GeneratedFiles</Value>
                                 <Value>generated</Value>
-                                <Value>VC9</Value>
-                                <Value>VC10</Value>
-                                <Value>VC12</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -109,7 +110,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="IsExtensionUsed" ExportId="" Type="Boolean">
