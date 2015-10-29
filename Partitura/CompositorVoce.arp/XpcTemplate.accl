@@ -1,22 +1,26 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="328449" Id="1023" Description="Qt Framework"/>
+            <Version Number="4004" Id="0" Description="ACF"/>
+            <Version Number="1472" Id="1" Description="ACF-Solutions"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="800" Y="525" ComponentName="XpcEditorGui"/>
-        <Element Note="" X="800" Y="650" ComponentName="PackageFileTypeInfo"/>
-        <Element Note="" X="525" Y="225" ComponentName="UndoManager"/>
-        <Element Note="" X="1025" Y="375" ComponentName="XpcLoader"/>
-        <Element Note="" X="275" Y="525" ComponentName="XpcModel"/>
-        <Element Note="" X="525" Y="375" ComponentName="DocumentTemplate"/>
-        <Element Note="" X="1025" Y="650" ComponentName="RegistryFileTypeInfo"/>
+        <Element ComponentName="XpcModel" Note="" X="275" Y="525"/>
+        <Element ComponentName="PackageFileTypeInfo" Note="" X="800" Y="650"/>
+        <Element ComponentName="XpcEditorGui" Note="" X="800" Y="525"/>
+        <Element ComponentName="UndoManager" Note="" X="525" Y="225"/>
+        <Element ComponentName="RegistryFileTypeInfo" Note="" X="1025" Y="650"/>
+        <Element ComponentName="DocumentTemplate" Note="" X="525" Y="375"/>
+        <Element ComponentName="XpcLoader" Note="" X="1025" Y="375"/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="XpcLoader">
             <PositionMap>
-                <Element Note="" X="350" Y="500" ComponentName="OldFormatSerializer"/>
-                <Element Note="" X="850" Y="500" ComponentName="NewFormatSerializer"/>
-                <Element Note="" X="600" Y="275" ComponentName="ComposedLoader"/>
+                <Element ComponentName="OldFormatSerializer" Note="" X="350" Y="500"/>
+                <Element ComponentName="NewFormatSerializer" Note="" X="850" Y="500"/>
+                <Element ComponentName="Composed" Note="" X="625" Y="325"/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
