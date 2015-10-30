@@ -7,7 +7,7 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultPath" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="../../Config/Full.xpc"/>
+                        <Data IsEnabled="true" Value="../../Docs/Tutorial/Config/AcfSlnTutorialConfig.awc"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

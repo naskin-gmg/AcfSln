@@ -44,7 +44,7 @@
 			<Tool
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
-				ConfigFile="../../../Config/BaseOnly.xpc"
+				ConfigFile="../../../Config/BaseOnly.awc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="../../../Config/Core.xpc"
+				ConfigFile="../../../Config/AcfSlnConfig.awc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -135,7 +135,7 @@
 			<Tool
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
-				ConfigFile="../../../Config/BaseOnly.xpc"
+				ConfigFile="../../../Config/BaseOnly.awc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
@@ -151,7 +151,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="../../../Config/Core.xpc"
+				ConfigFile="../../../Config/AcfSlnConfig.awc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -228,7 +228,7 @@
 			<Tool
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
-				ConfigFile="../../../Config/BaseOnly.xpc"
+				ConfigFile="../../../Config/BaseOnly.awc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
@@ -245,7 +245,7 @@
 			<Tool
 				Name="Arxc"
 				AdditionalOptions=""
-				ConfigFile="../../../Config/Core.xpc"
+				ConfigFile="../../../Config/AcfSlnConfig.awc"
 				Verbose="true"
 			/>
 			<Tool
@@ -320,7 +320,7 @@
 			<Tool
 				Name="FileConvertCopy"
 				RegistryFile="../../../Partitura/AcfInfoCopyApp.acc"
-				ConfigFile="../../../Config/BaseOnly.xpc"
+				ConfigFile="../../../Config/BaseOnly.awc"
 				OutputDir="$(InputDir)/../../../AuxInclude/Qt5/GeneratedFiles/$(ProjectName)"
 			/>
 			<Tool
@@ -337,7 +337,7 @@
 			<Tool
 				Name="Arxc"
 				AdditionalOptions=""
-				ConfigFile="../../../Config/Core.xpc"
+				ConfigFile="../../../Config/AcfSlnConfig.awc"
 				Verbose="true"
 			/>
 			<Tool
@@ -436,7 +436,7 @@
 					>
 					<Tool
 						Name="Arxc"
-						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
+						ConfigFile="../../../Config/AcfSlnConfig.awc;$(NOINHERIT)"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -444,7 +444,7 @@
 					>
 					<Tool
 						Name="Arxc"
-						ConfigFile="../../../Config/Full.xpc;$(NOINHERIT)"
+						ConfigFile="../../../Config/AcfSlnConfig.awc;$(NOINHERIT)"
 					/>
 				</FileConfiguration>
 			</File>

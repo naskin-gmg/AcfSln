@@ -1,0 +1,19 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Number="4005" Id="0" Description="ACF"/>
+            <Version Number="328706" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles>
+        <FilePath>$(ACFDIR)/Config/BaseOnly.awc</FilePath>
+    </ConfigFiles>
+    <PackageDirs/>
+    <PackageFiles>
+        <FilePath>../Partitura/AcfSlnVoce.arp</FilePath>
+        <FilePath>../Partitura/FileProcessingVoce.arp</FilePath>
+        <FilePath>../Bin/$(ConfigurationDir)FileProcessingPck.arp</FilePath>
+        <FilePath>$(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)FileProcessingPck.arp</FilePath>
+    </PackageFiles>
+    <RegistryFiles/>
+</Acf>

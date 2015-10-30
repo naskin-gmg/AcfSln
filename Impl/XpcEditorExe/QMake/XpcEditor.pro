@@ -28,7 +28,7 @@ mac{
 # configuration of custom builds
 
 # ARX compiler
-ARXC_CONFIG = $$PWD/../../../Config/Core.xpc
+ARXC_CONFIG = $$PWD/../../../Config/AcfSlnConfig.awc
 ARXC_FILES += $$PWD/../*.acc
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
@@ -37,7 +37,7 @@ win*{
 	ACF_CONVERT_FILES = $$PWD/../VC/*.rc.xtracf
 	ACF_CONVERT_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 	ACF_CONVERT_REGISTRY = $$PWD/../../../Partitura/AcfInfoCopyApp.acc
-	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.xpc
+	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.awc
 
 	RC_FILE = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET/XpcEditor.rc
 	RC_INCLUDEPATH = $$_PRO_FILE_PWD_
@@ -63,7 +63,7 @@ include(../../../../Acf/Config/QMake/AcfStd.pri)
 macx-ios*{
 	GenerateXpcEditorCpp.name = GenerateXpcEditorCpp
 	GenerateXpcEditorCpp.CONFIG += no_link target_predeps
-	GenerateXpcEditorCpp.commands = $$ARXCBIN $$PWD/../XpcEditor.acc -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/XpcEditor/CXpcEditor.cpp -config $$PWD/../../../Config/Core.xpc -v
+	GenerateXpcEditorCpp.commands = $$ARXCBIN $$PWD/../XpcEditor.acc -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/XpcEditor/CXpcEditor.cpp -config $$PWD/../../../Config/AcfSlnConfig.awc -v
 	QMAKE_EXTRA_COMPILERS += GenerateXpcEditorCpp
 	QMAKE_EXTRA_TARGETS += GenerateXpcEditorCpp
 	PRE_TARGETDEPS += GenerateXpcEditorCpp

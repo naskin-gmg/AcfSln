@@ -1,0 +1,23 @@
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4006" Description="ACF"/>
+        </VersionInfos>
+    </AcfHeader>
+    <ConfigFiles>
+        <FilePath>$(ACFDIR)/Docs/Tutorial/Config/AcfTutorialConfig.awc</FilePath>
+        <FilePath>../../../Config/AcfSlnConfig.awc</FilePath>
+    </ConfigFiles>
+    <PackageDirs>
+        <Dir>../Partitura</Dir>
+    </PackageDirs>
+    <PackageFiles/>
+    <RegistryFiles>
+        <FilePath>../Partitura/CaliperTest.acc</FilePath>
+        <FilePath>../Partitura/CircleFinderTest.acc</FilePath>
+        <FilePath>../Partitura/ColorImagesSeparator.acc</FilePath>
+        <FilePath>../Partitura/EdgeExtractionTest.acc</FilePath>
+        <FilePath>../Partitura/EdgeLinesTest.acc</FilePath>
+    </RegistryFiles>
+</Acf>

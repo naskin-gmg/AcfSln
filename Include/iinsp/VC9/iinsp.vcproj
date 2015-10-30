@@ -39,7 +39,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				ConfigFile="..\..\..\Config\BaseOnly.awc"
 			/>
 			<Tool
 				Name="FileConvertCopy"
@@ -115,7 +115,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				ConfigFile="..\..\..\Config\BaseOnly.awc"
 			/>
 			<Tool
 				Name="FileConvertCopy"
@@ -191,7 +191,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				ConfigFile="..\..\..\Config\BaseOnly.awc"
 			/>
 			<Tool
 				Name="FileConvertCopy"
@@ -266,7 +266,7 @@
 			/>
 			<Tool
 				Name="Arxc"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				ConfigFile="..\..\..\Config\BaseOnly.awc"
 			/>
 			<Tool
 				Name="FileConvertCopy"

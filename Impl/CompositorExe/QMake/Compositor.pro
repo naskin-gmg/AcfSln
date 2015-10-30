@@ -34,7 +34,7 @@ win32-msvc*{
 
 # Set configuration of custom builds:
 # ARX Compiler:
-ARXC_CONFIG = $$PWD/../../../Config/Core.xpc
+ARXC_CONFIG = $$PWD/../../../Config/AcfSlnConfig.awc
 ARXC_FILES += $$PWD/../*.acc
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
@@ -44,7 +44,7 @@ win*{
 	ACF_CONVERT_FILES = $$PWD/../VC/*.rc.xtracf
 	ACF_CONVERT_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 	ACF_CONVERT_REGISTRY = $$PWD/../../../Partitura/AcfInfoCopyApp.acc
-	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.xpc
+	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.awc
 
 	RC_FILE = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET/Compositor.rc
 	RC_INCLUDEPATH = $$_PRO_FILE_PWD_
@@ -67,7 +67,7 @@ include(../../../../Acf/Config/QMake/CustomBuild.pri)
 macx-ios*{
 	GenerateCompositorCpp.name = GenerateCompositor
 	GenerateCompositorCpp.CONFIG += no_link target_predeps
-	GenerateCompositorCpp.commands = $$ARXCBIN $$PWD/../Compositor.acc -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/Compositor/CCompositor.cpp -config $$PWD/../../../Config/Core.xpc -v
+	GenerateCompositorCpp.commands = $$ARXCBIN $$PWD/../Compositor.acc -o $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/Compositor/CCompositor.cpp -config $$PWD/../../../Config/AcfSlnConfig.awc -v
 	QMAKE_EXTRA_COMPILERS += GenerateCompositorCpp
 	QMAKE_EXTRA_TARGETS += GenerateCompositorCpp
 	PRE_TARGETDEPS += GenerateCompositorCpp
