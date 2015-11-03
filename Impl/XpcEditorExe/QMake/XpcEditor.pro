@@ -20,7 +20,7 @@ win32-msvc*{
 QT += xml
 
 mac{
-	ICON += $$PWD/../Mac/$$TARGET.icns
+	ICON += $$PWD/../Mac/XpcEditor.icns
 	QMAKE_INFO_PLIST = $$PWD/../Mac/Info.plist
 }
 
