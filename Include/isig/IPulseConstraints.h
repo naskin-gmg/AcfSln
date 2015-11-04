@@ -19,6 +19,7 @@ class IPulseConstraints: virtual public istd::IChangeable
 public:
 	/**
 		List of flags for supported options.
+		This flags can be binary combined.
 	*/
 	enum PulseSupportedFlags
 	{
