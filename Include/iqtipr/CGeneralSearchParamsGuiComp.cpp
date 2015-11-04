@@ -76,30 +76,31 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 		const iipr::ISearchConstraints* constraintsPtr = objectPtr->GetSearchConstraints();
 		if (constraintsPtr != NULL){
-			if (!constraintsPtr->IsRotationRangeSupported()){
-				RotationCB->setEnabled(false);
-				MinRotationSB->setEnabled(false);
-				MaxRotationSB->setEnabled(false);
-			}
-			else{
+			int supportedFlags = constraintsPtr->GetSearchSupportedFlags();
+			if ((supportedFlags & iipr::ISearchConstraints::SSF_ROTATION) != 0){
 				const istd::CRange& range = constraintsPtr->GetRotationRangeConstraints();
 				MinRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
 				MaxRotationSB->setRange(range.GetMinValue(), range.GetMaxValue());
 
 				RotationCB->setChecked(!objectPtr->GetRotationRange().IsEmpty());
 			}
-
-			if (!constraintsPtr->IsScaleRangeSupported()){
-				ScalingCB->setEnabled(false);
-				MinScaleSB->setEnabled(false);
-				MaxScaleSB->setEnabled(false);
-			}
 			else{
+				RotationCB->setEnabled(false);
+				MinRotationSB->setEnabled(false);
+				MaxRotationSB->setEnabled(false);
+			}
+
+			if ((supportedFlags & iipr::ISearchConstraints::SSF_SCALING) != 0){
 				const istd::CRange& range = constraintsPtr->GetScaleRangeConstraints();
 				MinScaleSB->setRange(range.GetMinValue(), range.GetMaxValue());
 				MaxScaleSB->setRange(range.GetMinValue(), range.GetMaxValue());
 
 				ScalingCB->setChecked(!objectPtr->GetScaleRange().IsEmpty());
+			}
+			else{
+				ScalingCB->setEnabled(false);
+				MinScaleSB->setEnabled(false);
+				MaxScaleSB->setEnabled(false);
 			}
 		}
 	}
