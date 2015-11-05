@@ -41,7 +41,6 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
-				IsGenerated="true"
 			/>
 			<Tool
 				Name="QT Designer Form"
@@ -141,7 +140,6 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
-				IsGenerated="true"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -237,7 +235,6 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
-				IsGenerated="true"
 			/>
 			<Tool
 				Name="QT Designer Form"
@@ -335,7 +332,6 @@
 			<Tool
 				Name="QT Resources"
 				ExecutionBucket="4"
-				IsGenerated="true"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -461,26 +457,6 @@
 						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_en_US.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_de_DE.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_ru_RU.qm;../../../AuxInclude/Qt5/GeneratedFiles\AcfSlLoc\AcfSln_pl_PL.qm"
 					/>
 				</FileConfiguration>
-			</File>
-		</Filter>
-		<Filter
-			Name="Translations"
-			>
-			<File
-				RelativePath="..\AcfSln_de_DE.ts"
-				>
-			</File>
-			<File
-				RelativePath="..\AcfSln_en_US.ts"
-				>
-			</File>
-			<File
-				RelativePath="..\AcfSln_pl_PL.ts"
-				>
-			</File>
-			<File
-				RelativePath="..\AcfSln_ru_RU.ts"
-				>
 			</File>
 		</Filter>
 	</Files>

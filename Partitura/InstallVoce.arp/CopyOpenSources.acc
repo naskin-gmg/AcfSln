@@ -223,6 +223,7 @@
                                 <Value>*.aps</Value>
                                 <Value>*.svg</Value>
                                 <Value>*.ts</Value>
+                                <Value>*.qm</Value>
                                 <Value>*.plist</Value>
                             </Values>
                         </Data>
@@ -385,6 +386,7 @@
                                 <Value>*.aps</Value>
                                 <Value>*.svg</Value>
                                 <Value>*.ts</Value>
+                                <Value>*.qm</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
