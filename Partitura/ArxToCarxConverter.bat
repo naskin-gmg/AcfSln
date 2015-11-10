@@ -1,1 +1,0 @@
-%ACFDIR%\Bin\ReleaseVC9\Acf.exe %~dp0\ArxToCarxConverter.acc -config %ACFSLNDIR%\Config\AcfSlnConfig.awc -input . -output .

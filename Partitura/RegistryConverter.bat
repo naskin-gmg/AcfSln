@@ -1,0 +1,1 @@
+%ACFDIR%\Bin\ReleaseVC9\Acf.exe %~dp0\RegistryConverter.acc -config %ACFSLNDIR%\Config\AcfSlnConfig.awc -input . -output .
