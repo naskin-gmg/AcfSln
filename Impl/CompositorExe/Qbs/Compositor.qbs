@@ -8,7 +8,7 @@ Project{
 
 		destinationDirectory: "GeneratedFiles/Compositor"
 
-		files: ["../*.arx", "../*.qrc"]
+		files: ["../*.acc", "../*.qrc"]
 
 		Depends{ name: "acf" }
 
@@ -65,7 +65,7 @@ Project{
 
 		// Resource file on Windows
 		Depends{ name: "AcfExe" }
-		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.arx"
+		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.acc"
 		acf.trOutputType: "rc"
 		cpp.includePaths: path
 
