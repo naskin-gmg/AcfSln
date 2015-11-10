@@ -1,50 +1,54 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="IprPck" Id="BinaryImageSupplier" ComponentId="ProcessedBitmapSupplier">
+        <Element ComponentId="ProcessedBitmapSupplier" Id="BinaryImageSupplier" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageBinarizeProcessor"/>
+                    <AttributeInfo ExportId="" Id="BitmapProcessor" Type="Reference">
+                        <Data Value="ImageBinarizeProcessor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
-                        <Data IsEnabled="true" Value="Image Binarization"/>
+                    <AttributeInfo ExportId="DiagnosticName" Id="DiagnosticName" Type="String">
+                        <Data Value="Image Binarization" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="ParamsSet" Type="Reference">
+                    <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="ImageBinarizeProcessor" ComponentId="ImageBinarizeProcessor">
+        <Element ComponentId="ImageBinarizeProcessor" Id="ImageBinarizeProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BinarizationParameterId" ExportId="BinarizationParameterId" Type="Id">
-                        <Data IsEnabled="true" Value="Threshold"/>
+                    <AttributeInfo ExportId="BinarizationParameterId" Id="BinarizationParameterId" Type="Id">
+                        <Data Value="Threshold" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -61,6 +65,6 @@
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="BinaryImageSupplier"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
+        <Component ComponentId="Bitmap" ExportedId="CurrentGrayImage"/>
     </ExportedComponents>
 </Acf>

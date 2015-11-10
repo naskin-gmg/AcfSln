@@ -1,15 +1,19 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="600" Y="450" ComponentName="FilterParams"/>
-        <Element Note="" X="225" Y="600" ComponentName="XmlFileSerializer"/>
-        <Element Note="" X="225" Y="475" ComponentName="FileDialogLoader"/>
-        <Element Note="" X="525" Y="325" ComponentName="CaliperParamsSetGui"/>
-        <Element Note="" X="800" Y="525" ComponentName="CaliperParams"/>
-        <Element Note="" X="225" Y="325" ComponentName="GeneralSupplierGui"/>
-        <Element Note="" X="1000" Y="600" ComponentName="Region"/>
+        <Element X="225" ComponentName="GeneralSupplierGui" Y="325" Note=""/>
+        <Element X="1000" ComponentName="Region" Y="600" Note=""/>
+        <Element X="225" ComponentName="XmlFileSerializer" Y="600" Note=""/>
+        <Element X="600" ComponentName="FilterParams" Y="450" Note=""/>
+        <Element X="800" ComponentName="CaliperParams" Y="525" Note=""/>
+        <Element X="225" ComponentName="FileDialogLoader" Y="475" Note=""/>
+        <Element X="525" ComponentName="CaliperParamsSetGui" Y="325" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

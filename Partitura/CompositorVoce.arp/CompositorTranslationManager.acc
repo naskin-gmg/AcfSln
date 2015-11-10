@@ -1,12 +1,16 @@
 <Acf Keywords="" Description="Compositor's localization manager">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="AcfSlnVoce" Id="CompositorTranslationManager" ComponentId="AcfSolutionsLocalization">
+        <Element ComponentId="AcfSolutionsLocalization" Id="CompositorTranslationManager" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="LanguageSelection" ExportId="LanguageSelection" Type="Reference">
+                    <AttributeInfo ExportId="LanguageSelection" Id="LanguageSelection" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

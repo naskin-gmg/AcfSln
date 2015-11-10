@@ -1,11 +1,15 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="350" Y="425" ComponentName="BitmapLoader"/>
-        <Element Note="" X="950" Y="425" ComponentName="BitmapView"/>
-        <Element Note="" X="650" Y="250" ComponentName="FrameSeqVideoController"/>
+        <Element X="350" ComponentName="BitmapLoader" Y="425" Note=""/>
+        <Element X="950" ComponentName="BitmapView" Y="425" Note=""/>
+        <Element X="650" ComponentName="FrameSeqVideoController" Y="250" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="1000" Y="300" ComponentName="BitmapLoader"/>
-        <Element Note="" X="300" Y="450" ComponentName="SnapParams"/>
-        <Element Note="" X="350" Y="300" ComponentName="SnapApplication"/>
-        <Element Note="" X="700" Y="225" ComponentName="BitmapAcquisition"/>
-        <Element Note="" X="600" Y="450" ComponentName="SnapParamsGui"/>
+        <Element X="1000" ComponentName="BitmapLoader" Y="300" Note=""/>
+        <Element X="600" ComponentName="SnapParamsGui" Y="450" Note=""/>
+        <Element X="700" ComponentName="BitmapAcquisition" Y="225" Note=""/>
+        <Element X="350" ComponentName="SnapApplication" Y="300" Note=""/>
+        <Element X="300" ComponentName="SnapParams" Y="450" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,24 +1,28 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="350" Y="425" ComponentName="VersionInfo"/>
-        <Element Note="" X="150" Y="100" ComponentName="XmlFileSerializer"/>
-        <Element Note="" X="475" Y="250" ComponentName="AboutDialog"/>
-        <Element Note="" X="1050" Y="600" ComponentName="InspectionTask"/>
-        <Element Note="" X="1050" Y="100" ComponentName="ErrorShapeFactory"/>
-        <Element Note="" X="1050" Y="225" ComponentName="InspectionTaskEditor"/>
-        <Element Note="" X="175" Y="600" ComponentName="LogDock"/>
-        <Element Note="" X="775" Y="100" ComponentName="ErrorColorSchema"/>
-        <Element Note="" X="825" Y="425" ComponentName="StandaloneApp"/>
-        <Element Note="" X="525" Y="125" ComponentName="FileDialogLoader"/>
+        <Element X="1050" ComponentName="InspectionTask" Y="600" Note=""/>
+        <Element X="150" ComponentName="XmlFileSerializer" Y="100" Note=""/>
+        <Element X="1050" ComponentName="ErrorShapeFactory" Y="100" Note=""/>
+        <Element X="1050" ComponentName="InspectionTaskEditor" Y="225" Note=""/>
+        <Element X="350" ComponentName="VersionInfo" Y="425" Note=""/>
+        <Element X="775" ComponentName="ErrorColorSchema" Y="100" Note=""/>
+        <Element X="825" ComponentName="StandaloneApp" Y="425" Note=""/>
+        <Element X="475" ComponentName="AboutDialog" Y="250" Note=""/>
+        <Element X="525" ComponentName="FileDialogLoader" Y="125" Note=""/>
+        <Element X="175" ComponentName="LogDock" Y="600" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="Inspection">
             <PositionMap>
-                <Element Note="" X="561.984565688" Y="306.83857941" ComponentName="InspectionTask"/>
-                <Element Note="" X="550" Y="425" ComponentName="SettingsPersistence"/>
+                <Element X="561.984565688" ComponentName="InspectionTask" Y="306.83857941" Note=""/>
+                <Element X="550" ComponentName="SettingsPersistence" Y="425" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

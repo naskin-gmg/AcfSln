@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="550" Y="325" ComponentName="ImageCopy"/>
-        <Element Note="" X="575" Y="200" ComponentName="ImageProcessingHotfolderFramework"/>
-        <Element Note="" X="800" Y="475" ComponentName="BitmapLoader"/>
-        <Element Note="" X="550" Y="75" ComponentName="App"/>
-        <Element Note="" X="300" Y="475" ComponentName="Bitmap"/>
+        <Element X="575" ComponentName="ImageProcessingHotfolderFramework" Y="200" Note=""/>
+        <Element X="800" ComponentName="BitmapLoader" Y="475" Note=""/>
+        <Element X="550" ComponentName="ImageCopy" Y="325" Note=""/>
+        <Element X="550" ComponentName="App" Y="75" Note=""/>
+        <Element X="300" ComponentName="Bitmap" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

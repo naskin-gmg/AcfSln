@@ -1,23 +1,27 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="800" Y="650" ComponentName="CopyDocs"/>
-        <Element Note="" X="700" Y="775" ComponentName="CopyTexts"/>
-        <Element Note="" X="300" Y="75" ComponentName="CopyTutorialProjects"/>
-        <Element Note="" X="925" Y="525" ComponentName="CopyLicenses"/>
-        <Element Note="" X="475" Y="200" ComponentName="CopyTutorialOther"/>
-        <Element Note="" X="550" Y="400" ComponentName="CopyImpl"/>
-        <Element Note="" X="125" Y="450" ComponentName="CopyVSConfig"/>
-        <Element Note="" X="825" Y="200" ComponentName="CopyInstallInfo"/>
-        <Element Note="Temporary workaround for problems with resolving of BIN-pathes for ACF tools." X="100" Y="175" ComponentName="CopyVSRules"/>
-        <Element Note="" X="675" Y="75" ComponentName="CopyTutorialSources"/>
-        <Element Note="" X="350" Y="650" ComponentName="CopyRoot"/>
-        <Element Note="" X="1050" Y="100" ComponentName="CopyConfig"/>
-        <Element Note="" X="450" Y="525" ComponentName="CopyIncludes"/>
-        <Element Note="" X="150" Y="300" ComponentName="CopyAllFiles"/>
-        <Element Note="" X="1050" Y="400" ComponentName="CopyPartitura"/>
+        <Element X="800" ComponentName="CopyDocs" Y="650" Note=""/>
+        <Element X="1050" ComponentName="CopyConfig" Y="100" Note=""/>
+        <Element X="675" ComponentName="CopyTutorialSources" Y="75" Note=""/>
+        <Element X="925" ComponentName="CopyLicenses" Y="525" Note=""/>
+        <Element X="475" ComponentName="CopyTutorialOther" Y="200" Note=""/>
+        <Element X="150" ComponentName="CopyAllFiles" Y="300" Note=""/>
+        <Element X="825" ComponentName="CopyInstallInfo" Y="200" Note=""/>
+        <Element X="1050" ComponentName="CopyPartitura" Y="400" Note=""/>
+        <Element X="125" ComponentName="CopyVSConfig" Y="450" Note=""/>
+        <Element X="550" ComponentName="CopyImpl" Y="400" Note=""/>
+        <Element X="450" ComponentName="CopyIncludes" Y="525" Note=""/>
+        <Element X="300" ComponentName="CopyTutorialProjects" Y="75" Note=""/>
+        <Element X="350" ComponentName="CopyRoot" Y="650" Note=""/>
+        <Element X="100" ComponentName="CopyVSRules" Y="175" Note="Temporary workaround for problems with resolving of BIN-pathes for ACF tools."/>
+        <Element X="700" ComponentName="CopyTexts" Y="775" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,32 +1,36 @@
 <Acf Keywords="Circle Finder Parameters GUI" Description="Gui for for circle finder parameter set using as AOI annulus segment">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtViewPck" Id="AOI" ComponentId="AnnulusParamsGui">
+        <Element ComponentId="AnnulusParamsGui" Id="AOI" PackageId="QtViewPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultUnitInfo" ExportId="UnitInfo" Type="Reference">
+                    <AttributeInfo ExportId="UnitInfo" Id="DefaultUnitInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShapeColorSchema" ExportId="ShapeColorSchema" Type="Reference">
+                    <AttributeInfo ExportId="ShapeColorSchema" Id="ShapeColorSchema" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtIprPck" Id="CaliperParams" ComponentId="CaliperParamsGui">
+        <Element ComponentId="CaliperParamsGui" Id="CaliperParams" PackageId="QtIprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="CaliperParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="CaliperParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" ExportId="DesignType" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="DesignType" Id="DesignType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>AOI</Value>
@@ -36,7 +40,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CircleFinderAoi</Value>
@@ -46,7 +50,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Geometry</Value>
@@ -56,21 +60,21 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ShowAllShapes" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseVerticalSpacer" ExportId="UseVerticalSpacer" Type="Boolean">
+                    <AttributeInfo ExportId="UseVerticalSpacer" Id="UseVerticalSpacer" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtIprPck" Id="CircleFinderParams" ComponentId="CircleFinderParamsGui">
+        <Element ComponentId="CircleFinderParamsGui" Id="CircleFinderParams" PackageId="QtIprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="FilterParams" ComponentId="NumericParamsGui">
+        <Element ComponentId="NumericParamsGui" Id="FilterParams" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

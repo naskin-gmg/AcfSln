@@ -1,38 +1,42 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FilePck" Id="FileSnapParams" ComponentId="FileNameParam">
+        <Element ComponentId="FileNameParam" Id="FileSnapParams" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="AcquisitionDir" Type="String">
+                    <AttributeInfo ExportId="AcquisitionDir" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ParamsSet" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="ParamsSet" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileSnapParams</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileBitmapAcquisition</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSets" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values/>
                         </Data>

@@ -1,15 +1,19 @@
 <Acf Keywords="&quot;Supplier Edge Contour Extraction Processing Task GUI&quot;" Description="GUI for edge extraction task">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="EdgeExtractorParamsGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="EdgeExtractorParamsGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" ExportId="DesignType" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="DesignType" Id="DesignType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SmoothParamsGui</Value>
@@ -18,7 +22,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SmoothFilter</Value>
@@ -27,7 +31,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Preprocessing</Value>
@@ -36,50 +40,50 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseVerticalSpacer" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="UseVerticalSpacer" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="EdgePck" Id="EdgeLinesSupplierEditor" ComponentId="EdgeLinesSupplierEditor">
+        <Element ComponentId="EdgeLinesSupplierEditor" Id="EdgeLinesSupplierEditor" PackageId="EdgePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="DefaultModel" Type="Reference">
+                    <AttributeInfo ExportId="DefaultModel" Id="DefaultModel" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusIcon" ExportId="DefaultStatusIcon" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusIcon" Id="DefaultStatusIcon" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusText" ExportId="DefaultStatusText" Type="String">
+                    <AttributeInfo ExportId="DefaultStatusText" Id="DefaultStatusText" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EdgeLineColorSchema" ExportId="EdgeLineColorSchema" Type="Reference">
+                    <AttributeInfo ExportId="EdgeLineColorSchema" Id="EdgeLineColorSchema" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="EdgeExtractorParamsGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
+                        <Data Value="EdgeExtractorParamsGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SceneIdFilters" ExportId="SceneIdFilters" Type="Integer[]">
+                    <AttributeInfo ExportId="SceneIdFilters" Id="SceneIdFilters" Type="Integer[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="EdgesExtractionParamGui" ComponentId="NumericParamsGui">
+        <Element ComponentId="NumericParamsGui" Id="EdgesExtractionParamGui" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="EdgesReductionParamsGui" ComponentId="NumericParamsGui">
+        <Element ComponentId="NumericParamsGui" Id="EdgesReductionParamsGui" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="SmoothParamsGui" ComponentId="NumericParamsGui">
+        <Element ComponentId="NumericParamsGui" Id="SmoothParamsGui" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
@@ -94,6 +98,6 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="EdgeLinesSupplierEditor"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="VisualStatus" ComponentId="EdgeLinesSupplierEditor/VisualStatus"/>
+        <Component ComponentId="EdgeLinesSupplierEditor/VisualStatus" ExportedId="VisualStatus"/>
     </ExportedComponents>
 </Acf>

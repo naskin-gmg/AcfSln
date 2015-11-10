@@ -1,40 +1,44 @@
 <Acf Keywords="File Convert" Description="File conversion using an external application">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FileProcessingPck" Id="Converter" ComponentId="ExternalFileConverter">
+        <Element ComponentId="ExternalFileConverter" Id="Converter" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalArguments" ExportId="AdditionalArguments" Type="Reference[]">
+                    <AttributeInfo ExportId="AdditionalArguments" Id="AdditionalArguments" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultProcessArguments" ExportId="DefaultProcessArguments" Type="String">
+                    <AttributeInfo ExportId="DefaultProcessArguments" Id="DefaultProcessArguments" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExecutablePath" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ExecutablePath"/>
+                    <AttributeInfo ExportId="" Id="ExecutablePath" Type="Reference">
+                        <Data Value="ExecutablePath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProcessArgumentsParamsId" ExportId="ProcessArgumentsParamsId" Type="Id">
+                    <AttributeInfo ExportId="ProcessArgumentsParamsId" Id="ProcessArgumentsParamsId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="ExecutablePath" ComponentId="FileNameParam">
+        <Element ComponentId="FileNameParam" Id="ExecutablePath" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="ExternalApplicationPath" Type="String">
+                    <AttributeInfo ExportId="ExternalApplicationPath" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

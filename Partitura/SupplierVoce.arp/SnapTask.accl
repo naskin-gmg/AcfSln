@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="575" Y="400" ComponentName="ImageTask"/>
-        <Element Note="" X="575" Y="275" ComponentName="Bitmap"/>
+        <Element X="575" ComponentName="Bitmap" Y="275" Note=""/>
+        <Element X="575" ComponentName="ImageTask" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

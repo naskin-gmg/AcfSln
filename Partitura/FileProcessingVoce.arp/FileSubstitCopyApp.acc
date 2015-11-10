@@ -1,93 +1,97 @@
 <Acf Keywords="Substituition Copy File Text" Description="Replacer for marked text file content">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="ApplicationInfo" ComponentId="ApplicationInfo">
+        <Element ComponentId="ApplicationInfo" Id="ApplicationInfo" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="ApplicationName" Type="String">
+                    <AttributeInfo ExportId="ApplicationName" Id="ApplicationName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationSubname" ExportId="ApplicationSubname" Type="String">
+                    <AttributeInfo ExportId="ApplicationSubname" Id="ApplicationSubname" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationType" ExportId="ApplicationType" Type="String">
+                    <AttributeInfo ExportId="ApplicationType" Id="ApplicationType" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="CompanyName" Type="String">
+                    <AttributeInfo ExportId="CompanyName" Id="CompanyName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="LegalCopyright" Type="String">
+                    <AttributeInfo ExportId="LegalCopyright" Id="LegalCopyright" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="MainVersionId" Type="Integer">
+                    <AttributeInfo ExportId="MainVersionId" Id="MainVersionId" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="ProductName" Type="String">
+                    <AttributeInfo ExportId="ProductName" Id="ProductName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="VersionInfo" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FileProcessingPck" Id="CopyApp" ComponentId="CopyApp">
+        <Element ComponentId="CopyApp" Id="CopyApp" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileCopy" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileInfoCopy"/>
+                    <AttributeInfo ExportId="" Id="FileCopy" Type="Reference">
+                        <Data Value="FileInfoCopy" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="NeedExplicitInput" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="NeedExplicitInput" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FileProcessingPck" Id="FileInfoCopy" ComponentId="FileInfoCopy">
+        <Element ComponentId="FileInfoCopy" Id="FileInfoCopy" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" ExportId="LicensePath" Type="String">
+                    <AttributeInfo ExportId="LicensePath" Id="LicensePath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Log"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ReplaceEmbeddedVariables" ExportId="ReplaceEmbeddedVariables" Type="Boolean">
+                    <AttributeInfo ExportId="ReplaceEmbeddedVariables" Id="ReplaceEmbeddedVariables" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ReplaceEnvironmentVariables" ExportId="ReplaceEnvironmentVariables" Type="Boolean">
+                    <AttributeInfo ExportId="ReplaceEnvironmentVariables" Id="ReplaceEnvironmentVariables" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SubstitutionTagExpr" ExportId="SubstitutionTagExpr" Type="String">
-                        <Data IsEnabled="true" Value="\$(.+)\$"/>
+                    <AttributeInfo ExportId="SubstitutionTagExpr" Id="SubstitutionTagExpr" Type="String">
+                        <Data Value="\$(.+)\$" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="Log" ComponentId="ConsoleLog">
+        <Element ComponentId="ConsoleLog" Id="Log" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="MinCategory" ExportId="LogMinCategory" Type="Integer">
+                    <AttributeInfo ExportId="LogMinCategory" Id="MinCategory" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowDots" ExportId="LogShowDots" Type="Boolean">
+                    <AttributeInfo ExportId="LogShowDots" Id="ShowDots" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseTimeStamp" ExportId="LogTimeStamp" Type="Boolean">
+                    <AttributeInfo ExportId="LogTimeStamp" Id="UseTimeStamp" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="SlaveVersionInfo" ExportId="SlaveVersionInfo" Type="Reference">
+                    <AttributeInfo ExportId="SlaveVersionInfo" Id="SlaveVersionInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

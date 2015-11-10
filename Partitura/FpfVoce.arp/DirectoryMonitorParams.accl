@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="775" Y="250" ComponentName="XmlFileSerializer"/>
-        <Element Note="" X="475" Y="250" ComponentName="AutoPersistence"/>
-        <Element Note="" X="350" Y="594" ComponentName="DirectoryMonitorParams"/>
-        <Element Note="" X="602" Y="591" ComponentName="DirectoryPath"/>
-        <Element Note="" X="500" Y="400" ComponentName="ComposedParamsSet"/>
-        <Element Note="" X="475" Y="150" ComponentName="File"/>
+        <Element X="475" ComponentName="AutoPersistence" Y="250" Note=""/>
+        <Element X="775" ComponentName="XmlFileSerializer" Y="250" Note=""/>
+        <Element X="602" ComponentName="DirectoryPath" Y="591" Note=""/>
+        <Element X="475" ComponentName="File" Y="150" Note=""/>
+        <Element X="500" ComponentName="ComposedParamsSet" Y="400" Note=""/>
+        <Element X="350" ComponentName="DirectoryMonitorParams" Y="594" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,75 +1,79 @@
 <Acf Keywords="Circle Finder Parameters" Description="Parameter set for circle finder using as AOI annulus segment">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="Annulus" ComponentId="Annulus">
+        <Element ComponentId="Annulus" Id="Annulus" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Calibration" ExportId="AoiCalibration" Type="Reference">
+                    <AttributeInfo ExportId="AoiCalibration" Id="Calibration" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InnerRadius" ExportId="AoiInnerRadius" Type="Real">
-                        <Data IsEnabled="true" Value="50"/>
+                    <AttributeInfo ExportId="AoiInnerRadius" Id="InnerRadius" Type="Real">
+                        <Data Value="50" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OuterRadius" ExportId="AoiOuterRadius" Type="Real">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo ExportId="AoiOuterRadius" Id="OuterRadius" Type="Real">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="X" ExportId="AoiX" Type="Real">
+                    <AttributeInfo ExportId="AoiX" Id="X" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Y" ExportId="AoiY" Type="Real">
+                    <AttributeInfo ExportId="AoiY" Id="Y" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="AnnulusSegment" ComponentId="AnnulusSegment">
+        <Element ComponentId="AnnulusSegment" Id="AnnulusSegment" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BeginAngle" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="90"/>
+                    <AttributeInfo ExportId="" Id="BeginAngle" Type="Real">
+                        <Data Value="90" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Calibration" ExportId="AoiCalibration" Type="Reference">
+                    <AttributeInfo ExportId="AoiCalibration" Id="Calibration" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EndAngle" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="180"/>
+                    <AttributeInfo ExportId="" Id="EndAngle" Type="Real">
+                        <Data Value="180" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InnerRadius" ExportId="AoiInnerRadius" Type="Real">
-                        <Data IsEnabled="true" Value="50"/>
+                    <AttributeInfo ExportId="AoiInnerRadius" Id="InnerRadius" Type="Real">
+                        <Data Value="50" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OuterRadius" ExportId="AoiOuterRadius" Type="Real">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo ExportId="AoiOuterRadius" Id="OuterRadius" Type="Real">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="X" ExportId="AoiX" Type="Real">
+                    <AttributeInfo ExportId="AoiX" Id="X" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Y" ExportId="AoiY" Type="Real">
+                    <AttributeInfo ExportId="AoiY" Id="Y" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="CaliperParams" ComponentId="CaliperParams">
+        <Element ComponentId="CaliperParams" Id="CaliperParams" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DirectionMode" ExportId="DirectionMode" Type="Integer">
+                    <AttributeInfo ExportId="DirectionMode" Id="DirectionMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PolarityMode" ExportId="PolarityMode" Type="Integer">
+                    <AttributeInfo ExportId="PolarityMode" Id="PolarityMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WeightThreshold" ExportId="WeightThreshold" Type="Real">
+                    <AttributeInfo ExportId="WeightThreshold" Id="WeightThreshold" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="CaliperParamsSet" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="CaliperParamsSet" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>VariableAoi</Value>
@@ -79,7 +83,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CircleFinderAoi</Value>
@@ -89,46 +93,46 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="CircleFinderParams" ComponentId="CircleFinderParams">
+        <Element ComponentId="CircleFinderParams" Id="CircleFinderParams" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperMode" ExportId="CaliperMode" Type="Integer">
+                    <AttributeInfo ExportId="CaliperMode" Id="CaliperMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MinOutlierDistance" ExportId="MinOutlierDistance" Type="Real">
+                    <AttributeInfo ExportId="MinOutlierDistance" Id="MinOutlierDistance" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutlierEliminationEnabled" ExportId="OutlierEliminationEnabled" Type="Boolean">
+                    <AttributeInfo ExportId="OutlierEliminationEnabled" Id="OutlierEliminationEnabled" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RaysCount" ExportId="RaysCount" Type="Integer">
+                    <AttributeInfo ExportId="RaysCount" Id="RaysCount" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="FilterLength" ComponentId="NumericParams">
+        <Element ComponentId="NumericParams" Id="FilterLength" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Constraints" ExportId="FilterConstraints" Type="Reference">
+                    <AttributeInfo ExportId="FilterConstraints" Id="Constraints" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Values" ExportId="FilterLegthValues" Type="Real[]">
+                    <AttributeInfo ExportId="FilterLegthValues" Id="Values" Type="Real[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="VariableAoi" ComponentId="VariableParam">
+        <Element ComponentId="VariableParam" Id="VariableAoi" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Factories" ExportId="" Type="Factory[]">
+                    <AttributeInfo ExportId="" Id="Factories" Type="Factory[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>
@@ -136,7 +140,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeIds" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="TypeIds" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>
@@ -157,7 +161,7 @@
         <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Aoi" ComponentId="Annulus"/>
-        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
+        <Component ComponentId="Annulus" ExportedId="Aoi"/>
+        <Component ComponentId="CaliperParams" ExportedId="CaliperParams"/>
     </ExportedComponents>
 </Acf>

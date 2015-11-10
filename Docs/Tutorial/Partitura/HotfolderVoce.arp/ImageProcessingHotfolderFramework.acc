@@ -1,12 +1,16 @@
 <Acf Keywords="Hotfoder Demo Tutorial Processing" Description="Simple demonstration of hotfolder processing.Image files will be copied from the observed input location to the output folder.">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="HotfolderVoce" Id="HotfolderDemoFramework" ComponentId="HotfolderDemoFramework">
+        <Element ComponentId="HotfolderDemoFramework" Id="HotfolderDemoFramework" PackageId="HotfolderVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcceptFilePatterns" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="AcceptFilePatterns" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.bmp</Value>
@@ -15,37 +19,37 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileConverter" ExportId="ImageConverter" Type="Reference">
+                    <AttributeInfo ExportId="ImageConverter" Id="FileConverter" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputPreview" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="InputPreview"/>
+                    <AttributeInfo ExportId="" Id="InputPreview" Type="Reference">
+                        <Data Value="InputPreview" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputFileInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="OutputFileInfo"/>
+                    <AttributeInfo ExportId="" Id="OutputFileInfo" Type="Reference">
+                        <Data Value="OutputFileInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputPreview" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="OutputPreview"/>
+                    <AttributeInfo ExportId="" Id="OutputPreview" Type="Reference">
+                        <Data Value="OutputPreview" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProcessingParamsDialog" ExportId="ProcessingParamsDialog" Type="Reference">
+                    <AttributeInfo ExportId="ProcessingParamsDialog" Id="ProcessingParamsDialog" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="InputPreview" ComponentId="BitmapPreview">
+        <Element ComponentId="BitmapPreview" Id="InputPreview" PackageId="AcfGuiVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ZoomToFitEnabled" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="OutputFileInfo" ComponentId="FileTypeInfo">
+        <Element ComponentId="FileTypeInfo" Id="OutputFileInfo" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>bmp</Value>
@@ -55,11 +59,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="OutputPreview" ComponentId="BitmapPreview">
+        <Element ComponentId="BitmapPreview" Id="OutputPreview" PackageId="AcfGuiVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ZoomToFitEnabled" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

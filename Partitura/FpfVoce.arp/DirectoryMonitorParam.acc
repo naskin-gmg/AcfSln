@@ -1,48 +1,52 @@
 <Acf Keywords="Hotfolder Directory" Description="Parameter for directory monitoring">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="DirectoryMonitorParam" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="DirectoryMonitorParam" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParams</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParams</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeId" ExportId="TypeId" Type="Id">
-                        <Data IsEnabled="true" Value="DirectoryMonitor"/>
+                    <AttributeInfo ExportId="TypeId" Id="TypeId" Type="Id">
+                        <Data Value="DirectoryMonitor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="HotfolderPck" Id="DirectoryMonitorParams" ComponentId="AttributedDirectoryMonitorParams">
+        <Element ComponentId="AttributedDirectoryMonitorParams" Id="DirectoryMonitorParams" PackageId="HotfolderPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptPatterns" Type="String[]">
+                    <AttributeInfo ExportId="AcceptPatterns" Id="AcceptPatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnorePatterns" Type="String[]">
+                    <AttributeInfo ExportId="IgnorePatterns" Id="IgnorePatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ObservedChanges" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="7"/>
+                    <AttributeInfo ExportId="" Id="ObservedChanges" Type="Integer">
+                        <Data Value="7" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ObservedItems" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="ObservedItems" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PoolingIntervall" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="5"/>
+                    <AttributeInfo ExportId="" Id="PoolingIntervall" Type="Real">
+                        <Data Value="5" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

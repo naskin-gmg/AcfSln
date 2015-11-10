@@ -1,19 +1,23 @@
 <Acf Keywords="Edge Position 2D Finder Processor Caliper Tool" Description="Search for ege image position using 1 pixel wide projection">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="ProcessingPck" Id="CascadedProcessor" ComponentId="CascadedProcessor">
+        <Element ComponentId="CascadedProcessor" Id="CascadedProcessor" PackageId="ProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Buffers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Buffers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FeaturesContainer</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Processors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>EdgeOnLineFinder</Value>
@@ -24,31 +28,31 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="EdgeOnLineFinder" ComponentId="EdgeOnLineFinder">
+        <Element ComponentId="EdgeOnLineFinder" Id="EdgeOnLineFinder" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperParamId" ExportId="CaliperParamId" Type="Id">
+                    <AttributeInfo ExportId="CaliperParamId" Id="CaliperParamId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterParamsId" ExportId="FilterParamsId" Type="Id">
+                    <AttributeInfo ExportId="FilterParamsId" Id="FilterParamsId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LineParamId" ExportId="LineParamId" Type="Id">
+                    <AttributeInfo ExportId="LineParamId" Id="LineParamId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="FeatureToImageMapperProcessor" ComponentId="FeatureToImageMapperProcessor">
+        <Element ComponentId="FeatureToImageMapperProcessor" Id="FeatureToImageMapperProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FeaturesMapper" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="EdgeOnLineFinder"/>
+                    <AttributeInfo ExportId="" Id="FeaturesMapper" Type="Reference">
+                        <Data Value="EdgeOnLineFinder" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="FeaturesContainer" ComponentId="FeaturesContainer">
+        <Element ComponentId="FeaturesContainer" Id="FeaturesContainer" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
@@ -61,7 +65,7 @@
         <Interface InterfaceId="iproc::IProcessor" ComponentId="CascadedProcessor"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Derivative" ComponentId="EdgeOnLineFinder/Derivative"/>
-        <Component ExportedId="Projection" ComponentId="EdgeOnLineFinder/Projection"/>
+        <Component ComponentId="EdgeOnLineFinder/Derivative" ExportedId="Derivative"/>
+        <Component ComponentId="EdgeOnLineFinder/Projection" ExportedId="Projection"/>
     </ExportedComponents>
 </Acf>

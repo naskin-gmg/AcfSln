@@ -1,57 +1,61 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="Application" ComponentId="GuiApplication">
+        <Element ComponentId="GuiApplication" Id="Application" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="MainGui"/>
+                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
+                        <Data Value="MainGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtCameraPck" Id="FileAcquisition" ComponentId="FileAcquisition">
+        <Element ComponentId="FileAcquisition" Id="FileAcquisition" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DirParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="FileBitmapAcquisition"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element PackageId="FilePck" Id="FileSnapParam" ComponentId="FileNameParam">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="DirParamId" Type="Id">
+                        <Data Value="FileBitmapAcquisition" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="FileSnapParamGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParam" Id="FileSnapParam" PackageId="FilePck">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element ComponentId="FileNameParamGui" Id="FileSnapParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FileGuiPck" Id="ImageDialogLoader" ComponentId="FileDialogLoader">
+        <Element ComponentId="FileDialogLoader" Id="ImageDialogLoader" PackageId="FileGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>BitmapLoader</Value>
@@ -61,50 +65,50 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="MainGui" ComponentId="SceneConnector">
+        <Element ComponentId="SceneConnector" Id="MainGui" PackageId="QtViewPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ExtenderGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SnapGui"/>
+                    <AttributeInfo ExportId="" Id="ExtenderGui" Type="Reference">
+                        <Data Value="SnapGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SceneGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ViewProvider"/>
+                    <AttributeInfo ExportId="" Id="SceneGui" Type="Reference">
+                        <Data Value="ViewProvider" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtCameraPck" Id="SnapGui" ComponentId="SnapImageGui">
+        <Element ComponentId="SnapImageGui" Id="SnapGui" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Bitmap" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="Bitmap" Type="Reference">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileAcquisition"/>
+                    <AttributeInfo ExportId="" Id="BitmapAcquisition" Type="Reference">
+                        <Data Value="FileAcquisition" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageDialogLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="ImageDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SnapParams"/>
+                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
+                        <Data Value="SnapParams" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SnapParamsGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
+                        <Data Value="SnapParamsGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="SnapParams" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="SnapParams" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileSnapParam</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileBitmapAcquisition</Value>
@@ -114,17 +118,17 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SnapParamsGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="SnapParamsGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileSnapParamGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileBitmapAcquisition</Value>
@@ -134,7 +138,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="ViewProvider" ComponentId="ViewProvider">
+        <Element ComponentId="ViewProvider" Id="ViewProvider" PackageId="QtViewPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

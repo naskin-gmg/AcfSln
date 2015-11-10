@@ -1,42 +1,46 @@
 <Acf Keywords="Registry Overview Topology" Description="Topology overview of the current registry">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="Dialog" ComponentId="DialogGui">
+        <Element ComponentId="DialogGui" Id="Dialog" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DialogSize" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0.5"/>
+                    <AttributeInfo ExportId="" Id="DialogSize" Type="Real">
+                        <Data Value="0.5" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Component Topology"/>
+                    <AttributeInfo ExportId="" Id="DialogTitle" Type="String">
+                        <Data Value="Component Topology" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Gui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="RegistryTreeView"/>
+                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
+                        <Data Value="RegistryTreeView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuDescription" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Shows component topology of the currently opened registry"/>
+                    <AttributeInfo ExportId="" Id="MenuDescription" Type="String">
+                        <Data Value="Shows component topology of the currently opened registry" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Show Registry Overview..."/>
+                    <AttributeInfo ExportId="" Id="MenuName" Type="String">
+                        <Data Value="Show Registry Overview..." IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RootMenu" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="&amp;Tools"/>
+                    <AttributeInfo ExportId="" Id="RootMenu" Type="String">
+                        <Data Value="&amp;Tools" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="CompositorPck" Id="RegistryTreeView" ComponentId="RegistryTreeView">
+        <Element ComponentId="RegistryTreeView" Id="RegistryTreeView" PackageId="CompositorPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ConsistencyInfo" ExportId="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentManager" ExportId="DocumentManager" Type="Reference">
+                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MetaInfoManager" ExportId="MetaInfoManager" Type="Reference">
+                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

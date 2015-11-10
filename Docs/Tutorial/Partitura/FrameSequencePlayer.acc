@@ -1,46 +1,50 @@
 <Acf Keywords="Tutorial Application Player Video Images Sequence" Description="Simple player using sequence of images in directory as video">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FilePck" Id="DirParam" ComponentId="FileNameParam">
+        <Element ComponentId="FileNameParam" Id="DirParam" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="DirParamGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParamGui" Id="DirParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DirParam"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="DirParam" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfSlnVoce" Id="FrameSequenceViewer" ComponentId="FrameSequenceViewer">
+        <Element ComponentId="FrameSequenceViewer" Id="FrameSequenceViewer" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DirectoryGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DirParamGui"/>
+                    <AttributeInfo ExportId="" Id="DirectoryGui" Type="Reference">
+                        <Data Value="DirParamGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DirectoryParam" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DirParam"/>
+                    <AttributeInfo ExportId="" Id="DirectoryParam" Type="Reference">
+                        <Data Value="DirParam" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="GuiApplication" ComponentId="GuiApplication">
+        <Element ComponentId="GuiApplication" Id="GuiApplication" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FrameSpaceSize" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="9"/>
+                    <AttributeInfo ExportId="" Id="FrameSpaceSize" Type="Integer">
+                        <Data Value="9" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FrameSequenceViewer"/>
+                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
+                        <Data Value="FrameSequenceViewer" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

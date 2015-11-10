@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="175" Y="525" ComponentName="HistogramView"/>
-        <Element Note="" X="575" Y="150" ComponentName="ColorPatternComparatorGui"/>
-        <Element Note="" X="575" Y="275" ComponentName="ParamsSetGui"/>
-        <Element Note="" X="975" Y="400" ComponentName="ComparisonThreshold"/>
-        <Element Note="" X="175" Y="400" ComponentName="PatternController"/>
-        <Element Note="" X="575" Y="400" ComponentName="Region"/>
+        <Element X="575" ComponentName="ParamsSetGui" Y="275" Note=""/>
+        <Element X="575" ComponentName="Region" Y="400" Note=""/>
+        <Element X="575" ComponentName="ColorPatternComparatorGui" Y="150" Note=""/>
+        <Element X="175" ComponentName="HistogramView" Y="525" Note=""/>
+        <Element X="175" ComponentName="PatternController" Y="400" Note=""/>
+        <Element X="975" ComponentName="ComparisonThreshold" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

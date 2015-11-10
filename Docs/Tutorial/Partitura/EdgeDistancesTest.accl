@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="725" Y="350" ComponentName="EdgeDistanceTestFramework"/>
-        <Element Note="" X="375" Y="225" ComponentName="FileCamera"/>
+        <Element X="725" ComponentName="EdgeDistanceTestFramework" Y="350" Note=""/>
+        <Element X="375" ComponentName="FileCamera" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

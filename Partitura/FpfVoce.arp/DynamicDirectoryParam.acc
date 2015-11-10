@@ -1,25 +1,29 @@
 <Acf Keywords="Directory Parameter Hotfolder File" Description="Parameter for dynamic directory list">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FpfVoce" Id="DirectoryParam" ComponentId="DirectoryParam">
+        <Element ComponentId="DirectoryParam" Id="DirectoryParam" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="DirectoryParamsManager" ComponentId="ParamsManager">
+        <Element ComponentId="ParamsManager" Id="DirectoryParamsManager" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultSetName" ExportId="DefaultDirectoryItemName" Type="String">
-                        <Data IsEnabled="true" Value="HotfolderPath"/>
+                    <AttributeInfo ExportId="DefaultDirectoryItemName" Id="DefaultSetName" Type="String">
+                        <Data Value="HotfolderPath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="DirectoryParam"/>
+                    <AttributeInfo ExportId="" Id="ParamsSetFactory" Type="Factory">
+                        <Data Value="DirectoryParam" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

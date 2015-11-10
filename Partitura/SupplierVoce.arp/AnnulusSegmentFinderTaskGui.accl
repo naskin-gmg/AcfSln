@@ -1,15 +1,19 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="700" Y="600" ComponentName="FilterParams"/>
-        <Element Note="" X="550" Y="675" ComponentName="CircleFinderParams"/>
-        <Element Note="" X="675" Y="150" ComponentName="RadiusParams"/>
-        <Element Note="" X="1025" Y="425" ComponentName="Aoi"/>
-        <Element Note="" X="675" Y="300" ComponentName="ParamsGui"/>
-        <Element Note="" X="325" Y="300" ComponentName="ValueSupplierGui"/>
-        <Element Note="" X="800" Y="525" ComponentName="CaliperParams"/>
+        <Element X="550" ComponentName="CircleFinderParams" Y="675" Note=""/>
+        <Element X="675" ComponentName="RadiusParams" Y="150" Note=""/>
+        <Element X="700" ComponentName="FilterParams" Y="600" Note=""/>
+        <Element X="1025" ComponentName="Aoi" Y="425" Note=""/>
+        <Element X="800" ComponentName="CaliperParams" Y="525" Note=""/>
+        <Element X="325" ComponentName="ValueSupplierGui" Y="300" Note=""/>
+        <Element X="675" ComponentName="ParamsGui" Y="300" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

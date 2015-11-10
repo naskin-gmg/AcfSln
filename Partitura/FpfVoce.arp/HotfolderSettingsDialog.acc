@@ -1,47 +1,51 @@
 <Acf Keywords="Hotfolder Settings" Description="Hotfolder settings dialog">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FpfVoce" Id="HotfolderSettingsFactory" ComponentId="HotfolderSettings">
+        <Element ComponentId="HotfolderSettings" Id="HotfolderSettingsFactory" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FpfVoce" Id="HotfolderSettingsGui" ComponentId="HotfolderSettingsGui">
+        <Element ComponentId="HotfolderSettingsGui" Id="HotfolderSettingsGui" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SettingsDialog" ComponentId="ModelDialogGui">
+        <Element ComponentId="ModelDialogGui" Id="SettingsDialog" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DialogIconPath" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value=":/Icons/HotfolderSettings"/>
+                    <AttributeInfo ExportId="" Id="DialogIconPath" Type="String">
+                        <Data Value=":/Icons/HotfolderSettings" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogSize" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0.5"/>
+                    <AttributeInfo ExportId="" Id="DialogSize" Type="Real">
+                        <Data Value="0.5" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Hotfolder Settings"/>
+                    <AttributeInfo ExportId="" Id="DialogTitle" Type="String">
+                        <Data Value="Hotfolder Settings" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Gui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HotfolderSettingsGui"/>
+                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
+                        <Data Value="HotfolderSettingsGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuDescription" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Start hotfolder settings dialog"/>
+                    <AttributeInfo ExportId="" Id="MenuDescription" Type="String">
+                        <Data Value="Start hotfolder settings dialog" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Show Hotfoder Settings..."/>
+                    <AttributeInfo ExportId="" Id="MenuName" Type="String">
+                        <Data Value="Show Hotfoder Settings..." IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Model" ExportId="HotfolderSettings" Type="Reference">
+                    <AttributeInfo ExportId="HotfolderSettings" Id="Model" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RootMenu" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="&amp;Hotfolder"/>
+                    <AttributeInfo ExportId="" Id="RootMenu" Type="String">
+                        <Data Value="&amp;Hotfolder" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WorkingDataFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="HotfolderSettingsFactory"/>
+                    <AttributeInfo ExportId="" Id="WorkingDataFactory" Type="Factory">
+                        <Data Value="HotfolderSettingsFactory" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -53,6 +57,6 @@
         <Interface InterfaceId="iqtgui::IDialog" ComponentId="SettingsDialog"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Command" ComponentId="SettingsDialog/Command"/>
+        <Component ComponentId="SettingsDialog/Command" ExportedId="Command"/>
     </ExportedComponents>
 </Acf>

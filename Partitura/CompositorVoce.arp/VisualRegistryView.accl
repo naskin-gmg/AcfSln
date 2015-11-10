@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="925" Y="625" ComponentName="RegistryTreeView"/>
-        <Element Note="" X="0" Y="0" ComponentName="ConvertComponentCommand"/>
-        <Element Note="" X="700" Y="475" ComponentName="VisualRegistryScenographer"/>
-        <Element Note="" X="375" Y="225" ComponentName="SceneProvider"/>
-        <Element Note="" X="225" Y="600" ComponentName="CommandsBinder"/>
-        <Element Note="" X="925" Y="225" ComponentName="SelectedDocModelBinder"/>
+        <Element X="375" ComponentName="SceneProvider" Y="225" Note=""/>
+        <Element X="0" ComponentName="ConvertComponentCommand" Y="0" Note=""/>
+        <Element X="925" ComponentName="RegistryTreeView" Y="625" Note=""/>
+        <Element X="700" ComponentName="VisualRegistryScenographer" Y="475" Note=""/>
+        <Element X="925" ComponentName="SelectedDocModelBinder" Y="225" Note=""/>
+        <Element X="225" ComponentName="CommandsBinder" Y="600" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

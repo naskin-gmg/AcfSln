@@ -1,62 +1,66 @@
 <Acf Keywords="Audio Sample View" Description="Dock window with audio samples view">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="MeasPck" Id="Audio" ComponentId="GeneralDataSequence">
+        <Element ComponentId="GeneralDataSequence" Id="Audio" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="DataSequenceView" ComponentId="DataSequenceView">
+        <Element ComponentId="DataSequenceView" Id="DataSequenceView" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="IsChannelPanelVisible" ExportId="IsChannelPanelVisible" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="IsChannelPanelVisible" Id="IsChannelPanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsScalePanelVisible" ExportId="IsScalePanelVisible" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="IsScalePanelVisible" Id="IsScalePanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsScaledValue" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsScaledValue" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsTimeSpanPanelVisible" ExportId="IsTimeSpanPanelVisible" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="IsTimeSpanPanelVisible" Id="IsTimeSpanPanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MinValue" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="-1"/>
+                    <AttributeInfo ExportId="" Id="MinValue" Type="Real">
+                        <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="DockWidgetGui" ComponentId="DockWidgetGui">
+        <Element ComponentId="DockWidgetGui" Id="DockWidgetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AllowedDockAreas" ExportId="AllowedDockAreas" Type="Integer">
+                    <AttributeInfo ExportId="AllowedDockAreas" Id="AllowedDockAreas" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockArea" ExportId="DockArea" Type="Integer">
+                    <AttributeInfo ExportId="DockArea" Id="DockArea" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockFeatures" ExportId="DockFeatures" Type="Integer">
+                    <AttributeInfo ExportId="DockFeatures" Id="DockFeatures" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Audio Sample"/>
+                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
+                        <Data Value="Audio Sample" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="DataSequenceView"/>
+                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
+                        <Data Value="DataSequenceView" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ViewBinder" ComponentId="ModelBinder">
+        <Element ComponentId="ModelBinder" Id="ViewBinder" PackageId="BasePck">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Audio"/>
+                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
+                        <Data Value="Audio" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Observers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DataSequenceView</Value>

@@ -1,12 +1,16 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="550" Y="300" ComponentName="OutputData"/>
-        <Element Note="" X="300" Y="425" ComponentName="BitmapLoader"/>
-        <Element Note="" X="800" Y="425" ComponentName="InputData"/>
-        <Element Note="" X="550" Y="425" ComponentName="FileConvertOverProcessor"/>
+        <Element X="300" ComponentName="BitmapLoader" Y="425" Note=""/>
+        <Element X="800" ComponentName="InputData" Y="425" Note=""/>
+        <Element X="550" ComponentName="OutputData" Y="300" Note=""/>
+        <Element X="550" ComponentName="FileConvertOverProcessor" Y="425" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

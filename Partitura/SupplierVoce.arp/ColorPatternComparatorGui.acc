@@ -1,34 +1,38 @@
 <Acf Keywords="Color Matching" Description="GUI for the color matching supplier">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtIprPck" Id="ColorPatternComparatorGui" ComponentId="ColorPatternComparatorGui">
+        <Element ComponentId="ColorPatternComparatorGui" Id="ColorPatternComparatorGui" PackageId="QtIprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
+                        <Data Value="ParamsSetGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtMeasPck" Id="ComparisonThreshold" ComponentId="NumericParamsGui">
+        <Element ComponentId="NumericParamsGui" Id="ComparisonThreshold" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QwtPck" Id="HistogramView" ComponentId="HistogramView">
+        <Element ComponentId="HistogramView" Id="HistogramView" PackageId="QwtPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="ParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -37,7 +41,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -46,7 +50,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -55,46 +59,46 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowAllShapes" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="ShowAllShapes" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtIprPck" Id="PatternController" ComponentId="PatternTeachingControllerGui">
+        <Element ComponentId="PatternTeachingControllerGui" Id="PatternController" PackageId="QtIprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ErrorColor" ExportId="ErrorColor" Type="Id">
+                    <AttributeInfo ExportId="ErrorColor" Id="ErrorColor" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OkColor" ExportId="OkColor" Type="Id">
+                    <AttributeInfo ExportId="OkColor" Id="OkColor" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PatternObserver" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HistogramView"/>
+                    <AttributeInfo ExportId="" Id="PatternObserver" Type="Reference">
+                        <Data Value="HistogramView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PatternView" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HistogramView"/>
+                    <AttributeInfo ExportId="" Id="PatternView" Type="Reference">
+                        <Data Value="HistogramView" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="Region" ComponentId="PolygonParamsGui">
+        <Element ComponentId="PolygonParamsGui" Id="Region" PackageId="QtViewPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultUnitInfo" ExportId="UnitInfo" Type="Reference">
+                    <AttributeInfo ExportId="UnitInfo" Id="DefaultUnitInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="NodeListSize" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="NodeListSize" Type="Integer">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShapeColorSchema" ExportId="AoiShapeColorSchema" Type="Reference">
+                    <AttributeInfo ExportId="AoiShapeColorSchema" Id="ShapeColorSchema" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ToolBarGui" ExportId="ToolBarGui" Type="Reference">
+                    <AttributeInfo ExportId="ToolBarGui" Id="ToolBarGui" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -110,6 +114,6 @@
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="ColorPatternComparatorGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="VisualStatus" ComponentId="ColorPatternComparatorGui/VisualStatus"/>
+        <Component ComponentId="ColorPatternComparatorGui/VisualStatus" ExportedId="VisualStatus"/>
     </ExportedComponents>
 </Acf>

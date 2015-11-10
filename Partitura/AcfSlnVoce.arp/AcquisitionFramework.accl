@@ -1,17 +1,21 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="800" Y="250" ComponentName="LogTab"/>
-        <Element Note="" X="600" Y="650" ComponentName="ProcessorControlGui"/>
-        <Element Note="" X="450" Y="250" ComponentName="Tabs"/>
-        <Element Note="" X="1050" Y="475" ComponentName="ImageDialogLoader"/>
-        <Element Note="" X="175" Y="250" ComponentName="Application"/>
-        <Element Note="" X="1100" Y="275" ComponentName="BitmapLoader"/>
-        <Element Note="" X="175" Y="125" ComponentName="Info"/>
-        <Element Note="" X="550" Y="375" ComponentName="SnapTab"/>
-        <Element Note="" X="224" Y="519" ComponentName="BitmapView"/>
+        <Element X="1100" ComponentName="BitmapLoader" Y="275" Note=""/>
+        <Element X="550" ComponentName="SnapTab" Y="375" Note=""/>
+        <Element X="224" ComponentName="BitmapView" Y="519" Note=""/>
+        <Element X="175" ComponentName="Application" Y="250" Note=""/>
+        <Element X="800" ComponentName="LogTab" Y="250" Note=""/>
+        <Element X="600" ComponentName="ProcessorControlGui" Y="650" Note=""/>
+        <Element X="1050" ComponentName="ImageDialogLoader" Y="475" Note=""/>
+        <Element X="175" ComponentName="Info" Y="125" Note=""/>
+        <Element X="450" ComponentName="Tabs" Y="250" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

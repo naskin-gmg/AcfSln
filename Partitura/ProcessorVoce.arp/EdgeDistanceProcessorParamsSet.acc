@@ -1,24 +1,28 @@
 <Acf Keywords="Circle Finder Parameters" Description="Parameter set for circle finder using as AOI annulus segment">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="IprPck" Id="CaliperParams" ComponentId="CaliperParams">
+        <Element ComponentId="CaliperParams" Id="CaliperParams" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PolarityMode" ExportId="PolarityMode" Type="Integer">
+                    <AttributeInfo ExportId="PolarityMode" Id="PolarityMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WeightThreshold" ExportId="WeightThreshold" Type="Real">
+                    <AttributeInfo ExportId="WeightThreshold" Id="WeightThreshold" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="CaliperParamsSet" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="CaliperParamsSet" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -27,7 +31,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -36,41 +40,41 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="FilterLength" ComponentId="NumericParams">
+        <Element ComponentId="NumericParams" Id="FilterLength" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Constraints" ExportId="FilterConstraints" Type="Reference">
+                    <AttributeInfo ExportId="FilterConstraints" Id="Constraints" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Values" ExportId="FilterLegthValues" Type="Real[]">
+                    <AttributeInfo ExportId="FilterLegthValues" Id="Values" Type="Real[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="Region" ComponentId="AnnulusSegment">
+        <Element ComponentId="AnnulusSegment" Id="Region" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Calibration" ExportId="Calibration" Type="Reference">
+                    <AttributeInfo ExportId="Calibration" Id="Calibration" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InnerRadius" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="50"/>
+                    <AttributeInfo ExportId="" Id="InnerRadius" Type="Real">
+                        <Data Value="50" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OuterRadius" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo ExportId="" Id="OuterRadius" Type="Real">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="X" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="X" Type="Real">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Y" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="Y" Type="Real">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -85,6 +89,6 @@
         <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
+        <Component ComponentId="CaliperParams" ExportedId="CaliperParams"/>
     </ExportedComponents>
 </Acf>

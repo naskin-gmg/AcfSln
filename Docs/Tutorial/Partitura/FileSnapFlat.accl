@@ -1,20 +1,24 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="100" Y="200" ComponentName="FileSnapParam"/>
-        <Element Note="" X="950" Y="400" ComponentName="ImageDialogLoader"/>
-        <Element Note="" X="250" Y="75" ComponentName="Application"/>
-        <Element Note="" X="1072.17" Y="299.088" ComponentName="BitmapLoader"/>
-        <Element Note="" X="400" Y="200" ComponentName="SnapParams"/>
-        <Element Note="" X="700" Y="400" ComponentName="Bitmap"/>
-        <Element Note="" X="950" Y="200" ComponentName="FileAcquisition"/>
-        <Element Note="" X="550" Y="75" ComponentName="MainGui"/>
-        <Element Note="" X="675" Y="300" ComponentName="SnapGui"/>
-        <Element Note="" X="782" Y="77" ComponentName="ViewProvider"/>
-        <Element Note="" X="125" Y="400" ComponentName="FileSnapParamGui"/>
-        <Element Note="" X="400" Y="400" ComponentName="SnapParamsGui"/>
+        <Element X="1072.17" ComponentName="BitmapLoader" Y="299.088" Note=""/>
+        <Element X="100" ComponentName="FileSnapParam" Y="200" Note=""/>
+        <Element X="400" ComponentName="SnapParamsGui" Y="400" Note=""/>
+        <Element X="250" ComponentName="Application" Y="75" Note=""/>
+        <Element X="550" ComponentName="MainGui" Y="75" Note=""/>
+        <Element X="675" ComponentName="SnapGui" Y="300" Note=""/>
+        <Element X="950" ComponentName="FileAcquisition" Y="200" Note=""/>
+        <Element X="950" ComponentName="ImageDialogLoader" Y="400" Note=""/>
+        <Element X="125" ComponentName="FileSnapParamGui" Y="400" Note=""/>
+        <Element X="700" ComponentName="Bitmap" Y="400" Note=""/>
+        <Element X="782" ComponentName="ViewProvider" Y="77" Note=""/>
+        <Element X="400" ComponentName="SnapParams" Y="200" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

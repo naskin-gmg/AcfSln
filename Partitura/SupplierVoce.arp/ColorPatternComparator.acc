@@ -1,148 +1,152 @@
 <Acf Keywords="Color Matching Comparator" Description="Color matching component based on histogram evaluation in HSV color space">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="IprPck" Id="ColorPatternComparator" ComponentId="ColorPatternComparator">
+        <Element ComponentId="ColorPatternComparator" Id="ColorPatternComparator" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalTriggerInputs" ExportId="AdditionalTriggerInputs" Type="Reference[]">
+                    <AttributeInfo ExportId="AdditionalTriggerInputs" Id="AdditionalTriggerInputs" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DataStatisticsProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HistogramStatisticsProcessor"/>
+                    <AttributeInfo ExportId="" Id="DataStatisticsProcessor" Type="Reference">
+                        <Data Value="HistogramStatisticsProcessor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultSource" ExportId="InformationSource" Type="String">
+                    <AttributeInfo ExportId="InformationSource" Id="DefaultSource" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
-                        <Data IsEnabled="true" Value="Color Pattern Comparator"/>
+                    <AttributeInfo ExportId="DiagnosticName" Id="DiagnosticName" Type="String">
+                        <Data Value="Color Pattern Comparator" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ErrorClassId" ExportId="ErrorClassId" Type="String">
+                    <AttributeInfo ExportId="ErrorClassId" Id="ErrorClassId" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ErrorGroupId" ExportId="ErrorGroupId" Type="String">
+                    <AttributeInfo ExportId="ErrorGroupId" Id="ErrorGroupId" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComparatorParams"/>
+                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
+                        <Data Value="ComparatorParams" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PatternCompareThresholdParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="ComparisonThreshold"/>
+                    <AttributeInfo ExportId="" Id="PatternCompareThresholdParamId" Type="Id">
+                        <Data Value="ComparisonThreshold" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TaughtPatternProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComparatorParams/PatternController"/>
+                    <AttributeInfo ExportId="" Id="TaughtPatternProvider" Type="Reference">
+                        <Data Value="ComparatorParams/PatternController" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WorkingPatternProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageHistogramSupplier"/>
+                    <AttributeInfo ExportId="" Id="WorkingPatternProvider" Type="Reference">
+                        <Data Value="ImageHistogramSupplier" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="" Id="ComparatorParams" ComponentId="ComparatorParams">
+        <Element ComponentId="ComparatorParams" Id="ComparatorParams" PackageId="">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AoiCalibrationProvider" ExportId="AoiCalibrationProvider" Type="Reference">
+                    <AttributeInfo ExportId="AoiCalibrationProvider" Id="AoiCalibrationProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="HistogramProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageHistogramProcessor"/>
+                    <AttributeInfo ExportId="" Id="HistogramProcessor" Type="Reference">
+                        <Data Value="ImageHistogramProcessor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PatternBitmapProvider" ExportId="PatternBitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="PatternBitmapProvider" Id="PatternBitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="HistogramStatisticsProcessor" ComponentId="HistogramStatisticsProcessor">
+        <Element ComponentId="HistogramStatisticsProcessor" Id="HistogramStatisticsProcessor" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
-                        <Data IsEnabled="true" Value="ColorPatternComparator/TaskLog"/>
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                        <Data Value="ColorPatternComparator/TaskLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="ImageHistogramProcessor" ComponentId="ImageHistogramProcessor">
+        <Element ComponentId="ImageHistogramProcessor" Id="ImageHistogramProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AoiParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Region"/>
+                    <AttributeInfo ExportId="" Id="AoiParamId" Type="Id">
+                        <Data Value="Region" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageHistogramSupplier/TaskLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ImageHistogramSupplier/TaskLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="ImageHistogramSupplier" ComponentId="ImageHistogramSupplier">
+        <Element ComponentId="ImageHistogramSupplier" Id="ImageHistogramSupplier" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Image Histogram"/>
+                    <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
+                        <Data Value="Image Histogram" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="HistogramProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageHistogramProcessor"/>
+                    <AttributeInfo ExportId="" Id="HistogramProcessor" Type="Reference">
+                        <Data Value="ImageHistogramProcessor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComparatorParams"/>
+                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
+                        <Data Value="ComparatorParams" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InspectionPck" Id="InspectionTask" ComponentId="InspectionTask">
+        <Element ComponentId="InspectionTask" Id="InspectionTask" PackageId="InspectionPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalSuppliers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="AdditionalSuppliers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ImageHistogramSupplier</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Color Check"/>
+                    <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
+                        <Data Value="Color Check" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="GeneralParams" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComparatorParams"/>
+                    <AttributeInfo ExportId="" Id="GeneralParams" Type="Reference">
+                        <Data Value="ComparatorParams" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SerializeSuppliers" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="SerializeSuppliers" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Subtasks" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Subtasks" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ColorPatternComparator</Value>
@@ -157,31 +161,31 @@
         <EmbeddedRegistry Id="ComparatorParams">
             <Data Keywords="" Description="">
                 <ElementsList>
-                    <Element PackageId="BasePck" Id="Calibration2dProxy" ComponentId="Calibration2dProxy">
+                    <Element ComponentId="Calibration2dProxy" Id="Calibration2dProxy" PackageId="BasePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="CalibrationProvider" ExportId="AoiCalibrationProvider" Type="Reference">
+                                <AttributeInfo ExportId="AoiCalibrationProvider" Id="CalibrationProvider" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="BasePck" Id="CheckEnabled" ComponentId="EnableableParam">
+                    <Element ComponentId="EnableableParam" Id="CheckEnabled" PackageId="BasePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="DefaultEnabled" ExportId="" Type="Boolean">
-                                    <Data IsEnabled="true" Value="true"/>
+                                <AttributeInfo ExportId="" Id="DefaultEnabled" Type="Boolean">
+                                    <Data Value="true" IsEnabled="true"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="MeasPck" Id="ComparisonThreshold" ComponentId="NumericParams">
+                    <Element ComponentId="NumericParams" Id="ComparisonThreshold" PackageId="MeasPck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="Constraints" ExportId="" Type="Reference">
-                                    <Data IsEnabled="true" Value="NumericConstraints"/>
+                                <AttributeInfo ExportId="" Id="Constraints" Type="Reference">
+                                    <Data Value="NumericConstraints" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Values" ExportId="" Type="Real[]">
+                                <AttributeInfo ExportId="" Id="Values" Type="Real[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>0.05</Value>
@@ -190,28 +194,28 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValuesCount" ExportId="" Type="Integer">
-                                    <Data IsEnabled="true" Value="3"/>
+                                <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
+                                    <Data Value="3" IsEnabled="true"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="MeasPck" Id="NumericConstraints" ComponentId="NumericConstraints">
+                    <Element ComponentId="NumericConstraints" Id="NumericConstraints" PackageId="MeasPck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="DisplayMultFactor" ExportId="" Type="Real">
-                                    <Data IsEnabled="true" Value="100"/>
+                                <AttributeInfo ExportId="" Id="DisplayMultFactor" Type="Real">
+                                    <Data Value="100" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Precision" ExportId="" Type="Integer">
-                                    <Data IsEnabled="true" Value="10"/>
+                                <AttributeInfo ExportId="" Id="Precision" Type="Integer">
+                                    <Data Value="10" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="UnitName" ExportId="" Type="String">
-                                    <Data IsEnabled="true" Value="%"/>
+                                <AttributeInfo ExportId="" Id="UnitName" Type="String">
+                                    <Data Value="%" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="UnitType" ExportId="" Type="Integer">
-                                    <Data IsEnabled="true" Value="3"/>
+                                <AttributeInfo ExportId="" Id="UnitType" Type="Integer">
+                                    <Data Value="3" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValueName" ExportId="" Type="String[]">
+                                <AttributeInfo ExportId="" Id="ValueName" Type="String[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Hue</Value>
@@ -220,16 +224,16 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValuesCount" ExportId="" Type="Integer">
-                                    <Data IsEnabled="true" Value="3"/>
+                                <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
+                                    <Data Value="3" IsEnabled="true"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="BasePck" Id="PatternComparatorParams" ComponentId="ComposedParamsSet">
+                    <Element ComponentId="ComposedParamsSet" Id="PatternComparatorParams" PackageId="BasePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                                <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Region</Value>
@@ -239,7 +243,7 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                                <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Region</Value>
@@ -252,37 +256,37 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="IprPck" Id="PatternController" ComponentId="ColorPatternController">
+                    <Element ComponentId="ColorPatternController" Id="PatternController" PackageId="IprPck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="HistogramProcessor" ExportId="HistogramProcessor" Type="Reference">
+                                <AttributeInfo ExportId="HistogramProcessor" Id="HistogramProcessor" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="PatternBitmapProvider" ExportId="PatternBitmapProvider" Type="Reference">
+                                <AttributeInfo ExportId="PatternBitmapProvider" Id="PatternBitmapProvider" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ProcessorParams" ExportId="" Type="Reference">
-                                    <Data IsEnabled="true" Value="PatternComparatorParams"/>
+                                <AttributeInfo ExportId="" Id="ProcessorParams" Type="Reference">
+                                    <Data Value="PatternComparatorParams" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="TeachingRegion" ExportId="" Type="Reference">
-                                    <Data IsEnabled="true" Value="Region"/>
+                                <AttributeInfo ExportId="" Id="TeachingRegion" Type="Reference">
+                                    <Data Value="Region" IsEnabled="true"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="BasePck" Id="Region" ComponentId="Polygon">
+                    <Element ComponentId="Polygon" Id="Region" PackageId="BasePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="Calibration" ExportId="" Type="Reference">
-                                    <Data IsEnabled="true" Value="Calibration2dProxy"/>
+                                <AttributeInfo ExportId="" Id="Calibration" Type="Reference">
+                                    <Data Value="Calibration2dProxy" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="X" ExportId="" Type="Real[]">
+                                <AttributeInfo ExportId="" Id="X" Type="Real[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>0</Value>
@@ -291,7 +295,7 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Y" ExportId="" Type="Real[]">
+                                <AttributeInfo ExportId="" Id="Y" Type="Real[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>0</Value>
@@ -313,8 +317,8 @@
                     <Interface InterfaceId="istd::IPolymorphic" ComponentId="PatternComparatorParams"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ExportedId="PatternController" ComponentId="PatternController"/>
-                    <Component ExportedId="Region" ComponentId="Region"/>
+                    <Component ComponentId="PatternController" ExportedId="PatternController"/>
+                    <Component ComponentId="Region" ExportedId="Region"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>
@@ -329,7 +333,7 @@
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="ColorPatternComparator"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="ImageHistogramSupplier" ComponentId="ImageHistogramSupplier"/>
-        <Component ExportedId="Parameters" ComponentId="InspectionTask/Parameters"/>
+        <Component ComponentId="ImageHistogramSupplier" ExportedId="ImageHistogramSupplier"/>
+        <Component ComponentId="InspectionTask/Parameters" ExportedId="Parameters"/>
     </ExportedComponents>
 </Acf>

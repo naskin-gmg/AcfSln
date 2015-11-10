@@ -1,19 +1,23 @@
 <Acf Keywords="" Description="Dialog displaying and managing compositor settings">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ComposedParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="ComposedParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ConfigFileGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ConfigFile</Value>
@@ -23,19 +27,19 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ConfigFileGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParamGui" Id="ConfigFileGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileTypeInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConfigFileInfo"/>
+                    <AttributeInfo ExportId="" Id="FileTypeInfo" Type="Reference">
+                        <Data Value="ConfigFileInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="ConfigFileInfo" ComponentId="FileTypeInfo">
+        <Element ComponentId="FileTypeInfo" Id="ConfigFileInfo" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>awc</Value>
@@ -43,7 +47,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACF component configuration</Value>
@@ -53,11 +57,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ParamsManagerGui" ComponentId="ParamsManagerGui">
+        <Element ComponentId="ParamsManagerGui" Id="ParamsManagerGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ParamsGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComposedParamsSetGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsGui" Type="Reference">
+                        <Data Value="ComposedParamsSetGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

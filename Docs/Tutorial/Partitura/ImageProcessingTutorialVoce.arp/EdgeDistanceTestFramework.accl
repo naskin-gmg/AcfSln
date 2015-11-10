@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="975" Y="575" ComponentName="EdgeDistanceTaskGui"/>
-        <Element Note="" X="225" Y="225" ComponentName="SnapTask"/>
-        <Element Note="" X="225" Y="575" ComponentName="SnapTaskGui"/>
-        <Element Note="" X="975" Y="225" ComponentName="EdgeDistanceTask"/>
-        <Element Note="" X="125" Y="400" ComponentName="ImageView"/>
-        <Element Note="" X="600" Y="400" ComponentName="Framework"/>
+        <Element X="975" ComponentName="EdgeDistanceTaskGui" Y="575" Note=""/>
+        <Element X="225" ComponentName="SnapTaskGui" Y="575" Note=""/>
+        <Element X="975" ComponentName="EdgeDistanceTask" Y="225" Note=""/>
+        <Element X="225" ComponentName="SnapTask" Y="225" Note=""/>
+        <Element X="600" ComponentName="Framework" Y="400" Note=""/>
+        <Element X="125" ComponentName="ImageView" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,103 +1,107 @@
 <Acf Keywords="Image Processing Data Acquisition" Description="Framework for basic image acquisition">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="Application" ComponentId="GuiApplication">
+        <Element ComponentId="GuiApplication" Id="Application" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
-                        <Data IsEnabled="true" Value="Info"/>
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="Info" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Tabs"/>
+                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
+                        <Data Value="Tabs" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogTab"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="LogTab" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="BitmapView" ComponentId="BitmapView">
+        <Element ComponentId="BitmapView" Id="BitmapView" PackageId="AcfGuiVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FileGuiPck" Id="ImageDialogLoader" ComponentId="FileDialogLoader">
+        <Element ComponentId="FileDialogLoader" Id="ImageDialogLoader" PackageId="FileGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Loaders" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>BitmapLoader</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogTab"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="LogTab" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IacfVoce" Id="Info" ComponentId="VersionInfo">
+        <Element ComponentId="VersionInfo" Id="Info" PackageId="IacfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="LogTab" ComponentId="LogGui">
+        <Element ComponentId="LogGui" Id="LogTab" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="ProcessingGuiPck" Id="ProcessorControlGui" ComponentId="ProcessorControlGui">
+        <Element ComponentId="ProcessorControlGui" Id="ProcessorControlGui" PackageId="ProcessingGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="LiveInterval" ExportId="LiveInterval" Type="Real">
+                    <AttributeInfo ExportId="LiveInterval" Id="LiveInterval" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputData" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapView"/>
+                    <AttributeInfo ExportId="" Id="OutputData" Type="Reference">
+                        <Data Value="BitmapView" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputDataLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ImageDialogLoader"/>
+                    <AttributeInfo ExportId="" Id="OutputDataLoader" Type="Reference">
+                        <Data Value="ImageDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsLoader" ExportId="ParamsLoader" Type="Reference">
+                    <AttributeInfo ExportId="ParamsLoader" Id="ParamsLoader" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="ParamsSet" Type="Reference">
+                    <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="ParamsSetGui" Type="Reference">
+                    <AttributeInfo ExportId="ParamsSetGui" Id="ParamsSetGui" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processor" ExportId="AcquisitionProcessor" Type="Reference">
+                    <AttributeInfo ExportId="AcquisitionProcessor" Id="Processor" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtViewPck" Id="SnapTab" ComponentId="SceneConnector">
+        <Element ComponentId="SceneConnector" Id="SnapTab" PackageId="QtViewPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ExtenderGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ProcessorControlGui"/>
+                    <AttributeInfo ExportId="" Id="ExtenderGui" Type="Reference">
+                        <Data Value="ProcessorControlGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SceneGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapView"/>
+                    <AttributeInfo ExportId="" Id="SceneGui" Type="Reference">
+                        <Data Value="BitmapView" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="Tabs" ComponentId="TabContainer">
+        <Element ComponentId="TabContainer" Id="Tabs" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Guis" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Guis" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SnapTab</Value>
@@ -105,7 +109,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Snap</Value>

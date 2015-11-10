@@ -1,45 +1,49 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="CurrentGrayImage" ComponentId="Bitmap">
+        <Element ComponentId="Bitmap" Id="CurrentGrayImage" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="GrayImageSupplier" ComponentId="ProcessedBitmapSupplier">
+        <Element ComponentId="ProcessedBitmapSupplier" Id="GrayImageSupplier" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="CurrentGrayImage"/>
+                    <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
+                        <Data Value="CurrentGrayImage" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="RgbToGrayProcessor"/>
+                    <AttributeInfo ExportId="" Id="BitmapProcessor" Type="Reference">
+                        <Data Value="RgbToGrayProcessor" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
-                        <Data IsEnabled="true" Value="Grayscale Image"/>
+                    <AttributeInfo ExportId="DiagnosticName" Id="DiagnosticName" Type="String">
+                        <Data Value="Grayscale Image" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="RgbToGrayProcessor" ComponentId="RgbToGrayProcessor">
+        <Element ComponentId="RgbToGrayProcessor" Id="RgbToGrayProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="GrayImageSupplier/TaskLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="GrayImageSupplier/TaskLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -55,6 +59,6 @@
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="GrayImageSupplier"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CurrentGrayImage" ComponentId="CurrentGrayImage"/>
+        <Component ComponentId="CurrentGrayImage" ExportedId="CurrentGrayImage"/>
     </ExportedComponents>
 </Acf>

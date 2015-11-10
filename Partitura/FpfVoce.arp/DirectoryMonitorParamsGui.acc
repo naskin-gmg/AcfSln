@@ -1,12 +1,16 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ComposedParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="ComposedParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryParamsGui</Value>
@@ -14,7 +18,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryPath</Value>
@@ -22,7 +26,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Monitoring Directory</Value>
@@ -32,19 +36,19 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="HotfolderGuiPck" Id="DirectoryMonitorParamsGui" ComponentId="DirectoryMonitorParamsGui">
+        <Element ComponentId="DirectoryMonitorParamsGui" Id="DirectoryMonitorParamsGui" PackageId="HotfolderGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="DirectoryParamsGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParamGui" Id="DirectoryParamsGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PathLabel" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value=""/>
+                    <AttributeInfo ExportId="" Id="PathLabel" Type="String">
+                        <Data Value="" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StartHint" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="&lt;Enter the path of the directory>"/>
+                    <AttributeInfo ExportId="" Id="StartHint" Type="String">
+                        <Data Value="&lt;Enter the path of the directory>" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

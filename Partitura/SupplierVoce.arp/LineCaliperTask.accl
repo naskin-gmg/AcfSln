@@ -1,11 +1,15 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="675" Y="325" ComponentName="ParamsSet"/>
-        <Element Note="" X="325" Y="125" ComponentName="CaliperProcessor"/>
-        <Element Note="" X="675" Y="125" ComponentName="PositionTask"/>
+        <Element X="675" ComponentName="PositionTask" Y="125" Note=""/>
+        <Element X="325" ComponentName="CaliperProcessor" Y="125" Note=""/>
+        <Element X="675" ComponentName="ParamsSet" Y="325" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

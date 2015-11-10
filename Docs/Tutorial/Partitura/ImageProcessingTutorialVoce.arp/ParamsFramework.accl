@@ -1,17 +1,21 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="825" Y="200" ComponentName="LogTab"/>
-        <Element Note="" X="600" Y="200" ComponentName="Tabs"/>
-        <Element Note="" X="875" Y="425" ComponentName="ParamsSetGui"/>
-        <Element Note="" X="318" Y="195" ComponentName="Application"/>
-        <Element Note="" X="325" Y="325" ComponentName="Info"/>
-        <Element Note="" X="1000" Y="325" ComponentName="ParamsEditorGui"/>
-        <Element Note="" X="1100" Y="425" ComponentName="ParamsSet"/>
-        <Element Note="" X="600" Y="325" ComponentName="ParamsTab"/>
-        <Element Note="" X="600" Y="425" ComponentName="ViewProvider"/>
+        <Element X="875" ComponentName="ParamsSetGui" Y="425" Note=""/>
+        <Element X="600" ComponentName="ParamsTab" Y="325" Note=""/>
+        <Element X="1000" ComponentName="ParamsEditorGui" Y="325" Note=""/>
+        <Element X="318" ComponentName="Application" Y="195" Note=""/>
+        <Element X="825" ComponentName="LogTab" Y="200" Note=""/>
+        <Element X="325" ComponentName="Info" Y="325" Note=""/>
+        <Element X="1100" ComponentName="ParamsSet" Y="425" Note=""/>
+        <Element X="600" ComponentName="Tabs" Y="200" Note=""/>
+        <Element X="600" ComponentName="ViewProvider" Y="425" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

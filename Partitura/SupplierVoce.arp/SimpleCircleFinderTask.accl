@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="350" Y="175" ComponentName="CircleFindProcessor"/>
-        <Element Note="" X="350" Y="550" ComponentName="Caliper"/>
-        <Element Note="" X="950" Y="550" ComponentName="ParamsSet"/>
-        <Element Note="" X="950" Y="175" ComponentName="PositionTask"/>
-        <Element Note="" X="650" Y="350" ComponentName="Calibration2dProxy"/>
+        <Element X="650" ComponentName="Calibration2dProxy" Y="350" Note=""/>
+        <Element X="950" ComponentName="PositionTask" Y="175" Note=""/>
+        <Element X="350" ComponentName="CircleFindProcessor" Y="175" Note=""/>
+        <Element X="350" ComponentName="Caliper" Y="550" Note=""/>
+        <Element X="950" ComponentName="ParamsSet" Y="550" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

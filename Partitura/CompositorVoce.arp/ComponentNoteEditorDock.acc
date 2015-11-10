@@ -1,24 +1,28 @@
 <Acf Keywords="Note Reference Tag='Help Compositor'" Description="Dock widget for hosting the component note editor">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ComponentNoteDock" ComponentId="DockWidgetGui">
+        <Element ComponentId="DockWidgetGui" Id="ComponentNoteDock" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DockArea" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="DockArea" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Notes"/>
+                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
+                        <Data Value="Notes" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ComponentNoteEditor"/>
+                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
+                        <Data Value="ComponentNoteEditor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="CompositorPck" Id="ComponentNoteEditor" ComponentId="ComponentNoteEditor">
+        <Element ComponentId="ComponentNoteEditor" Id="ComponentNoteEditor" PackageId="CompositorPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

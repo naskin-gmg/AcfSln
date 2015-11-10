@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="675" Y="50" ComponentName="VersionInfo"/>
-        <Element Note="" X="675" Y="525" ComponentName="TranslationManager"/>
-        <Element Note="" X="675" Y="325" ComponentName="Application"/>
-        <Element Note="" X="975" Y="175" ComponentName="LogDock"/>
-        <Element Note="" X="350" Y="175" ComponentName="XpcTemplate"/>
-        <Element Note="" X="975" Y="525" ComponentName="RememberDocumentList"/>
+        <Element X="350" ComponentName="XpcTemplate" Y="175" Note=""/>
+        <Element X="975" ComponentName="RememberDocumentList" Y="525" Note=""/>
+        <Element X="675" ComponentName="TranslationManager" Y="525" Note=""/>
+        <Element X="675" ComponentName="VersionInfo" Y="50" Note=""/>
+        <Element X="675" ComponentName="Application" Y="325" Note=""/>
+        <Element X="975" ComponentName="LogDock" Y="175" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

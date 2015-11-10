@@ -1,115 +1,119 @@
 <Acf Keywords="Hotfoder Demo Tutorial Processing" Description="Simple demonstration of hotfolder processing">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="ApplicationInfo" ComponentId="ApplicationInfo">
+        <Element ComponentId="ApplicationInfo" Id="ApplicationInfo" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Hotfolder Demo Application"/>
+                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
+                        <Data Value="Hotfolder Demo Application" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="ImagingTools"/>
+                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
+                        <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="MainVersionId" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtPck" Id="ApplicationSettingsProvider" ComponentId="ApplicationSettingsProvider">
+        <Element ComponentId="ApplicationSettingsProvider" Id="ApplicationSettingsProvider" PackageId="QtPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FpfVoce" Id="HotfolderDemoGui" ComponentId="PersistentHotfolderController">
+        <Element ComponentId="PersistentHotfolderController" Id="HotfolderDemoGui" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptFilePatterns" Type="String[]">
+                    <AttributeInfo ExportId="AcceptFilePatterns" Id="AcceptPatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileConverter" ExportId="FileConverter" Type="Reference">
+                    <AttributeInfo ExportId="FileConverter" Id="FileConverter" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnoreFilePatterns" Type="String[]">
+                    <AttributeInfo ExportId="IgnoreFilePatterns" Id="IgnorePatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputFilePreview" ExportId="InputPreview" Type="Reference">
+                    <AttributeInfo ExportId="InputPreview" Id="InputFilePreview" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="LogDock"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="LogDock" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputFileInfo" ExportId="OutputFileInfo" Type="Reference">
+                    <AttributeInfo ExportId="OutputFileInfo" Id="OutputFileInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputFilePreview" ExportId="OutputPreview" Type="Reference">
+                    <AttributeInfo ExportId="OutputPreview" Id="OutputFilePreview" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProcessingParamsDialog" ExportId="ProcessingParamsDialog" Type="Reference">
+                    <AttributeInfo ExportId="ProcessingParamsDialog" Id="ProcessingParamsDialog" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfGuiVoce" Id="LogDock" ComponentId="LogDock">
+        <Element ComponentId="LogDock" Id="LogDock" PackageId="AcfGuiVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationInfo"/>
+                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
+                        <Data Value="ApplicationInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VersionInfo"/>
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
+                        <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SimpleMainGui" ComponentId="SimpleMainGui">
+        <Element ComponentId="SimpleMainGui" Id="SimpleMainGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="IconSize" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="32"/>
+                    <AttributeInfo ExportId="" Id="IconSize" Type="Integer">
+                        <Data Value="32" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsMenuVisible" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="IsMenuVisible" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsNestingEnabled" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsNestingEnabled" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsToolbarVisible" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="IsToolbarVisible" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainWindowComponents" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="MainWindowComponents" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>LogDock</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsDialog" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HotfolderDemoGui/HotfolderSettingsDialog"/>
+                    <AttributeInfo ExportId="" Id="SettingsDialog" Type="Reference">
+                        <Data Value="HotfolderDemoGui/HotfolderSettingsDialog" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SettingsProvider" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ApplicationSettingsProvider"/>
+                    <AttributeInfo ExportId="" Id="SettingsProvider" Type="Reference">
+                        <Data Value="ApplicationSettingsProvider" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseIconText" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="UseIconText" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Workspace" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="HotfolderDemoGui"/>
+                    <AttributeInfo ExportId="" Id="Workspace" Type="Reference">
+                        <Data Value="HotfolderDemoGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfSlnVoce" Id="VersionInfo" ComponentId="VersionInfo">
+        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

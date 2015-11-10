@@ -1,85 +1,89 @@
 <Acf Keywords="Caliper Edge Distance" Description="Edge distance calculation based on caliper">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="Calibration2dProxy" ComponentId="Calibration2dProxy">
+        <Element ComponentId="Calibration2dProxy" Id="Calibration2dProxy" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CalibrationProvider" ExportId="RegionCalibrationProvider" Type="Reference">
+                    <AttributeInfo ExportId="RegionCalibrationProvider" Id="CalibrationProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="Caliper" ComponentId="EdgeOnLineFinder">
+        <Element ComponentId="EdgeOnLineFinder" Id="Caliper" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="CaliperParamId" Type="Id">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterParamsId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Filter"/>
+                    <AttributeInfo ExportId="" Id="FilterParamsId" Type="Id">
+                        <Data Value="Filter" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LineParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Line"/>
+                    <AttributeInfo ExportId="" Id="LineParamId" Type="Id">
+                        <Data Value="Line" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="EdgeDistanceProcessor" ComponentId="EdgeDistanceProcessor">
+        <Element ComponentId="EdgeDistanceProcessor" Id="EdgeDistanceProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AoiParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Region"/>
+                    <AttributeInfo ExportId="" Id="AoiParamId" Type="Id">
+                        <Data Value="Region" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FeaturesMapper" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="FeaturesMapper" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveEdgeProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="SlaveEdgeProcessor" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveLineId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Line"/>
+                    <AttributeInfo ExportId="" Id="SlaveLineId" Type="Id">
+                        <Data Value="Line" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="EdgeDistancesSupplier" ComponentId="EdgeDistancesSupplier">
+        <Element ComponentId="EdgeDistancesSupplier" Id="EdgeDistancesSupplier" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalTriggerInputs" ExportId="AdditionalTriggerInputs" Type="Reference[]">
+                    <AttributeInfo ExportId="AdditionalTriggerInputs" Id="AdditionalTriggerInputs" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
+                    <AttributeInfo ExportId="DiagnosticName" Id="DiagnosticName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ProcessingParams"/>
+                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
+                        <Data Value="ProcessingParams" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="EdgeDistanceProcessor"/>
+                    <AttributeInfo ExportId="" Id="Processor" Type="Reference">
+                        <Data Value="EdgeDistanceProcessor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="ProcessingParams" ComponentId="EdgeDistanceProcessorParamsSet">
+        <Element ComponentId="EdgeDistanceProcessorParamsSet" Id="ProcessingParams" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Calibration" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Calibration2dProxy"/>
+                    <AttributeInfo ExportId="" Id="Calibration" Type="Reference">
+                        <Data Value="Calibration2dProxy" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterConstraints" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="FilterConstraints" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

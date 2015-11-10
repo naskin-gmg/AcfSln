@@ -1,21 +1,25 @@
 <Acf Keywords="Edge Finder Processor Caliper Tool" Description="Search for ege on the line position using 1 pixel wide projection">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="IprPck" Id="Caliper" ComponentId="ExtremumCaliperProcessor">
+        <Element ComponentId="ExtremumCaliperProcessor" Id="Caliper" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperParamsId" ExportId="CaliperParamId" Type="Id">
+                    <AttributeInfo ExportId="CaliperParamId" Id="CaliperParamsId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessingPck" Id="Casade" ComponentId="CascadedProcessor">
+        <Element ComponentId="CascadedProcessor" Id="Casade" PackageId="ProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Buffers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Buffers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Projection</Value>
@@ -23,7 +27,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Processors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>LineProjection</Value>
@@ -35,33 +39,33 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="Derivative" ComponentId="GeneralDataSequence">
+        <Element ComponentId="GeneralDataSequence" Id="Derivative" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="DerivativeProcessor" ComponentId="RectDerivativeProcessor">
+        <Element ComponentId="RectDerivativeProcessor" Id="DerivativeProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FilterParamsId" ExportId="FilterParamsId" Type="Id">
+                    <AttributeInfo ExportId="FilterParamsId" Id="FilterParamsId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="LineProjection" ComponentId="LineProjectionProcessor">
+        <Element ComponentId="LineProjectionProcessor" Id="LineProjection" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FeatureMapper" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="FeatureMapper" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LineParamId" ExportId="LineParamId" Type="Id">
+                    <AttributeInfo ExportId="LineParamId" Id="LineParamId" Type="Id">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="Projection" ComponentId="GeneralDataSequence">
+        <Element ComponentId="GeneralDataSequence" Id="Projection" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
@@ -75,7 +79,7 @@
         <Interface InterfaceId="iproc::IProcessor" ComponentId="Casade"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Derivative" ComponentId="Derivative"/>
-        <Component ExportedId="Projection" ComponentId="Projection"/>
+        <Component ComponentId="Derivative" ExportedId="Derivative"/>
+        <Component ComponentId="Projection" ExportedId="Projection"/>
     </ExportedComponents>
 </Acf>

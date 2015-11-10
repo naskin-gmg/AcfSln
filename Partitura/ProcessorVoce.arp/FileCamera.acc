@@ -1,28 +1,32 @@
 <Acf Keywords="File Camera" Description="File camera definition">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ComposedParamsSet" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="ComposedParamsSet" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilePathParam</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileBitmapAcquisition</Value>
@@ -32,59 +36,59 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtCameraPck" Id="FileCamera" ComponentId="FileAcquisition">
+        <Element ComponentId="FileAcquisition" Id="FileCamera" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultDir" ExportId="DefaultDir" Type="String">
+                    <AttributeInfo ExportId="DefaultDir" Id="DefaultDir" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultPathParam" ExportId="DefaultPathParam" Type="Reference">
+                    <AttributeInfo ExportId="DefaultPathParam" Id="DefaultPathParam" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DirParamId" ExportId="ImageDirParamId" Type="Id">
-                        <Data IsEnabled="true" Value="FileBitmapAcquisition"/>
+                    <AttributeInfo ExportId="ImageDirParamId" Id="DirParamId" Type="Id">
+                        <Data Value="FileBitmapAcquisition" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MaxCachedDirs" ExportId="MaxCachedDirs" Type="Integer">
+                    <AttributeInfo ExportId="MaxCachedDirs" Id="MaxCachedDirs" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="FilePathParam" ComponentId="FileNameParam">
+        <Element ComponentId="FileNameParam" Id="FilePathParam" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" ExportId="DefaultDir" Type="String">
+                    <AttributeInfo ExportId="DefaultDir" Id="DefaultPath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PathType" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="FilePathParamGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParamGui" Id="FilePathParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PathLabel" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Directory"/>
+                    <AttributeInfo ExportId="" Id="PathLabel" Type="String">
+                        <Data Value="Directory" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="ParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilePathParamGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileBitmapAcquisition</Value>
@@ -105,9 +109,9 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="ComposedParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="BitmapLoader" ComponentId="BitmapLoader"/>
-        <Component ExportedId="Gui" ComponentId="FilePathParamGui"/>
-        <Component ExportedId="Parameter" ComponentId="FilePathParam"/>
-        <Component ExportedId="SetGui" ComponentId="ParamsSetGui"/>
+        <Component ComponentId="BitmapLoader" ExportedId="BitmapLoader"/>
+        <Component ComponentId="FilePathParamGui" ExportedId="Gui"/>
+        <Component ComponentId="FilePathParam" ExportedId="Parameter"/>
+        <Component ComponentId="ParamsSetGui" ExportedId="SetGui"/>
     </ExportedComponents>
 </Acf>

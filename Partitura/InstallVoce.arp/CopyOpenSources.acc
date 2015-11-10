@@ -1,15 +1,19 @@
 <Acf Keywords="Copy Sources Install" Description="Copy all source files (without compiled binaries) for installation during component instantiation">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="FileProcessingPck" Id="CopyAllFiles" ComponentId="ComposedCopyFiles">
+        <Element ComponentId="ComposedCopyFiles" Id="CopyAllFiles" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileCopiers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="FileCopiers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CopyCommon</Value>
@@ -25,25 +29,25 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyBuildProjects" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyBuildProjects" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.vcproj</Value>
@@ -55,82 +59,82 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="IgnoreUnknownTags" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="IgnoreUnknownTags" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Build"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Build" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Build"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Build" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="-1"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SubstitutionTagExpr" ExportId="ProjectsSubstitutionTagExpr" Type="String">
+                    <AttributeInfo ExportId="ProjectsSubstitutionTagExpr" Id="SubstitutionTagExpr" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UserSubstitutionTags" ExportId="ProjectsSubstitutionTags" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionTags" Id="UserSubstitutionTags" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UserSubstitutionValues" ExportId="ProjectsSubstitutionValues" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element PackageId="InstallVoce" Id="CopyCommon" ComponentId="CopyCommon">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" ExportId="LicensePath" Type="String">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="OtherExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTagExpr" ExportId="ProjectsSubstitutionTagExpr" Type="String">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" ExportId="ProjectsSubstitutionTags" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" ExportId="ProjectsSubstitutionValues" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="SourceExcludeFilters" ExportId="SourceExcludeFilters" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" ExportId="WinProjectsSubstitutionTags" Type="String[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" ExportId="WinProjectsSubstitutionValues" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionValues" Id="UserSubstitutionValues" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyImplOther" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyCommon" Id="CopyCommon" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="LicensePath" Id="LicensePath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="OtherExcludeFilters" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="ProjectsSubstitutionTagExpr" Id="ProjectsSubstitutionTagExpr" Type="String">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="ProjectsSubstitutionTags" Id="ProjectsSubstitutionTags" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="ProjectsSubstitutionValues" Id="ProjectsSubstitutionValues" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="SourceExcludeFilters" Id="SourceExcludeFilters" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="WinProjectsSubstitutionTags" Id="WinProjectsSubstitutionTags" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="WinProjectsSubstitutionValues" Id="WinProjectsSubstitutionValues" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element ComponentId="CopyInfoProcessor" Id="CopyImplOther" PackageId="InstallVoce">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.ui</Value>
@@ -145,73 +149,73 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyImplProjects" ComponentId="CopyProjectsProcessor">
+        <Element ComponentId="CopyProjectsProcessor" Id="CopyImplProjects" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" ExportId="ProjectsSubstitutionTags" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionTags" Id="ProjectsSubstitutionTags" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" ExportId="ProjectsSubstitutionValues" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionValues" Id="ProjectsSubstitutionValues" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="-1"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" ExportId="WinProjectsSubstitutionTags" Type="String[]">
+                    <AttributeInfo ExportId="WinProjectsSubstitutionTags" Id="WinProjectsSubstitutionTags" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" ExportId="WinProjectsSubstitutionValues" Type="String[]">
+                    <AttributeInfo ExportId="WinProjectsSubstitutionValues" Id="WinProjectsSubstitutionValues" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyImplResources" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyImplResources" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.png</Value>
@@ -228,34 +232,34 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyImplSources" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyImplSources" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="SourceExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="SourceExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.h</Value>
@@ -263,37 +267,37 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" ExportId="LicensePath" Type="String">
+                    <AttributeInfo ExportId="LicensePath" Id="LicensePath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Impl"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Impl" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyIncludeOther" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyIncludeOther" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.ui</Value>
@@ -308,73 +312,73 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyIncludeProjects" ComponentId="CopyProjectsProcessor">
+        <Element ComponentId="CopyProjectsProcessor" Id="CopyIncludeProjects" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" ExportId="ProjectsSubstitutionTags" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionTags" Id="ProjectsSubstitutionTags" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" ExportId="ProjectsSubstitutionValues" Type="String[]">
+                    <AttributeInfo ExportId="ProjectsSubstitutionValues" Id="ProjectsSubstitutionValues" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="-1"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" ExportId="WinProjectsSubstitutionTags" Type="String[]">
+                    <AttributeInfo ExportId="WinProjectsSubstitutionTags" Id="WinProjectsSubstitutionTags" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" ExportId="WinProjectsSubstitutionValues" Type="String[]">
+                    <AttributeInfo ExportId="WinProjectsSubstitutionValues" Id="WinProjectsSubstitutionValues" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyIncludeResources" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyIncludeResources" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="OtherExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="OtherExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.png</Value>
@@ -390,54 +394,54 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="3"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="3" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="InstallVoce" Id="CopyIncludeSources" ComponentId="CopyInfoProcessor">
+        <Element ComponentId="CopyInfoProcessor" Id="CopyIncludeSources" PackageId="InstallVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationInfo" ExportId="ApplicationInfo" Type="Reference">
+                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" ExportId="SourceExcludeFilters" Type="String[]">
+                    <AttributeInfo ExportId="SourceExcludeFilters" Id="ExcludeFilters" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.cpp</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" ExportId="LicensePath" Type="String">
+                    <AttributeInfo ExportId="LicensePath" Id="LicensePath" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="Include"/>
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
+                        <Data Value="Include" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="550" Y="350" ComponentName="RegistryTreeView"/>
-        <Element Note="" X="550" Y="225" ComponentName="Dialog"/>
+        <Element X="550" ComponentName="RegistryTreeView" Y="350" Note=""/>
+        <Element X="550" ComponentName="Dialog" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

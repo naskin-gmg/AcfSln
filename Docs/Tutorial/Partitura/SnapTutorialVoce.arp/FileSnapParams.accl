@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="650" Y="150" ComponentName="ParamsSet"/>
-        <Element Note="" X="650" Y="275" ComponentName="FileSnapParams"/>
+        <Element X="650" ComponentName="FileSnapParams" Y="275" Note=""/>
+        <Element X="650" ComponentName="ParamsSet" Y="150" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

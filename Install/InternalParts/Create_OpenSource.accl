@@ -1,11 +1,15 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="925" Y="325" ComponentName="VersionInfo"/>
-        <Element Note="" X="375" Y="325" ComponentName="Application"/>
-        <Element Note="This copy operation removes using of ACFDIR environmental variable from all projects.&#xa;" X="675" Y="500" ComponentName="CopyAll"/>
+        <Element X="925" ComponentName="VersionInfo" Y="325" Note=""/>
+        <Element X="375" ComponentName="Application" Y="325" Note=""/>
+        <Element X="675" ComponentName="CopyAll" Y="500" Note="This copy operation removes using of ACFDIR environmental variable from all projects.&#xa;"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

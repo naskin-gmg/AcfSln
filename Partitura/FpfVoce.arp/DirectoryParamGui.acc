@@ -1,36 +1,40 @@
 <Acf Keywords="" Description="Parameter for the hotfolder input directories. Dynamic part of this model includes only the path of the observing directory. Directory observering paramets are static and identical for all input pathes in the hotfolder component">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="DirectoryParamGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="DirectoryParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FileNameParamGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryPath</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" ExportId="DirectoryLabel" Type="String[]">
+                    <AttributeInfo ExportId="DirectoryLabel" Id="Names" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="FileNameParamGui" ComponentId="FileNameParamGui">
+        <Element ComponentId="FileNameParamGui" Id="FileNameParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="StartHint" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="&lt;Enter path of the directory to be observed>"/>
+                    <AttributeInfo ExportId="" Id="StartHint" Type="String">
+                        <Data Value="&lt;Enter path of the directory to be observed>" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -43,6 +47,6 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="DirectoryParamGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="DirectoryMonitorGui" ComponentId="DirectoryMonitoringGui"/>
+        <Component ComponentId="DirectoryMonitoringGui" ExportedId="DirectoryMonitorGui"/>
     </ExportedComponents>
 </Acf>

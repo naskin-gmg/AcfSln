@@ -1,46 +1,50 @@
 <Acf Keywords="Line Processing Task Supplier Edge Caliper" Description="Search of edge on image along some specified line">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="ProcessorVoce" Id="CaliperProcessor" ComponentId="EdgePosOnLineFinder">
+        <Element ComponentId="EdgePosOnLineFinder" Id="CaliperProcessor" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="CaliperParamId" Type="Id">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterParamsId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="SmoothFilter"/>
+                    <AttributeInfo ExportId="" Id="FilterParamsId" Type="Id">
+                        <Data Value="SmoothFilter" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LineParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Line"/>
+                    <AttributeInfo ExportId="" Id="LineParamId" Type="Id">
+                        <Data Value="Line" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="ParamsSet" ComponentId="LineCaliperParamsSet">
+        <Element ComponentId="LineCaliperParamsSet" Id="ParamsSet" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="SmoothFilterConstraints" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="CaliperProcessor"/>
+                    <AttributeInfo ExportId="" Id="SmoothFilterConstraints" Type="Reference">
+                        <Data Value="CaliperProcessor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="PositionTask" ComponentId="PositionFromImageSupplier">
+        <Element ComponentId="PositionFromImageSupplier" Id="PositionTask" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="ParamsSet" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsSet"/>
+                    <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
+                        <Data Value="ParamsSet" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="CaliperProcessor"/>
+                    <AttributeInfo ExportId="" Id="Processor" Type="Reference">
+                        <Data Value="CaliperProcessor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -56,8 +60,8 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="PositionTask"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CaliperParams" ComponentId="ParamsSet/CaliperParams"/>
-        <Component ExportedId="Line" ComponentId="ParamsSet/Line"/>
-        <Component ExportedId="ParamsSet" ComponentId="ParamsSet"/>
+        <Component ComponentId="ParamsSet/CaliperParams" ExportedId="CaliperParams"/>
+        <Component ComponentId="ParamsSet/Line" ExportedId="Line"/>
+        <Component ComponentId="ParamsSet" ExportedId="ParamsSet"/>
     </ExportedComponents>
 </Acf>

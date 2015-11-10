@@ -1,10 +1,14 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="800" Y="300" ComponentName="RegistryModelBinder"/>
-        <Element Note="" X="450" Y="300" ComponentName="VisualRegistry"/>
+        <Element X="800" ComponentName="RegistryModelBinder" Y="300" Note=""/>
+        <Element X="450" ComponentName="VisualRegistry" Y="300" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

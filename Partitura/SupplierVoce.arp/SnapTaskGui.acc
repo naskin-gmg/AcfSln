@@ -1,43 +1,47 @@
 <Acf Keywords="Task Image Acquisition Camera GUI" Description="Image acquisition GUI for image acquisition task">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="AcfGuiVoce" Id="BitmapDialogLoader" ComponentId="BitmapDialogLoader">
+        <Element ComponentId="BitmapDialogLoader" Id="BitmapDialogLoader" PackageId="AcfGuiVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtCameraPck" Id="ImageTaskGui" ComponentId="SnapBitmapSupplierGui">
+        <Element ComponentId="SnapBitmapSupplierGui" Id="ImageTaskGui" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapDialogLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="BitmapDialogLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ConnectParametersToEditor" ExportId="ConnectParametersToEditor" Type="Boolean">
+                    <AttributeInfo ExportId="ConnectParametersToEditor" Id="ConnectParametersToEditor" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultModel" ExportId="DefaultModel" Type="Reference">
+                    <AttributeInfo ExportId="DefaultModel" Id="DefaultModel" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="CameraParamsSetGui" Type="Reference">
+                    <AttributeInfo ExportId="CameraParamsSetGui" Id="ParamsSetGui" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" ExportId="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ViewCalibrationMode" ExportId="ViewCalibrationMode" Type="Integer">
-                        <Data IsEnabled="true" Value="2"/>
+                    <AttributeInfo ExportId="ViewCalibrationMode" Id="ViewCalibrationMode" Type="Integer">
+                        <Data Value="2" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -55,6 +59,6 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTaskGui/VisualStatus"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="VisualStatus" ComponentId="ImageTaskGui/VisualStatus"/>
+        <Component ComponentId="ImageTaskGui/VisualStatus" ExportedId="VisualStatus"/>
     </ExportedComponents>
 </Acf>

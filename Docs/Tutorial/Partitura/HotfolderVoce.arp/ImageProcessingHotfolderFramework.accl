@@ -1,12 +1,16 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="325" Y="375" ComponentName="InputPreview"/>
-        <Element Note="" X="625" Y="500" ComponentName="OutputFileInfo"/>
-        <Element Note="" X="925" Y="375" ComponentName="OutputPreview"/>
-        <Element Note="" X="625" Y="375" ComponentName="HotfolderDemoFramework"/>
+        <Element X="325" ComponentName="InputPreview" Y="375" Note=""/>
+        <Element X="625" ComponentName="HotfolderDemoFramework" Y="375" Note=""/>
+        <Element X="925" ComponentName="OutputPreview" Y="375" Note=""/>
+        <Element X="625" ComponentName="OutputFileInfo" Y="500" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

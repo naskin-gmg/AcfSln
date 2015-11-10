@@ -1,12 +1,16 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="625" Y="175" ComponentName="ViewBinder"/>
-        <Element Note="" X="375" Y="300" ComponentName="DataSequenceView"/>
-        <Element Note="" X="925" Y="325" ComponentName="Audio"/>
-        <Element Note="" X="375" Y="475" ComponentName="DockWidgetGui"/>
+        <Element X="375" ComponentName="DataSequenceView" Y="300" Note=""/>
+        <Element X="925" ComponentName="Audio" Y="325" Note=""/>
+        <Element X="625" ComponentName="ViewBinder" Y="175" Note=""/>
+        <Element X="375" ComponentName="DockWidgetGui" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

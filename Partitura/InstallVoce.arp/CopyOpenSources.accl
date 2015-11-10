@@ -1,19 +1,23 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="225" Y="750" ComponentName="CopyImplOther"/>
-        <Element Note="" X="650" Y="600" ComponentName="CopyIncludeResources"/>
-        <Element Note="" X="200" Y="650" ComponentName="CopyIncludeOther"/>
-        <Element Note="" X="650" Y="225" ComponentName="CopyImplResources"/>
-        <Element Note="" X="475" Y="125" ComponentName="CopyImplSources"/>
-        <Element Note="" X="850" Y="125" ComponentName="CopyImplProjects"/>
-        <Element Note="" X="475" Y="475" ComponentName="CopyIncludeSources"/>
-        <Element Note="" X="975" Y="600" ComponentName="CopyBuildProjects"/>
-        <Element Note="" X="150" Y="525" ComponentName="CopyCommon"/>
-        <Element Note="" X="775" Y="475" ComponentName="CopyIncludeProjects"/>
-        <Element Note="" X="150" Y="350" ComponentName="CopyAllFiles"/>
+        <Element X="975" ComponentName="CopyBuildProjects" Y="600" Note=""/>
+        <Element X="475" ComponentName="CopyImplSources" Y="125" Note=""/>
+        <Element X="650" ComponentName="CopyIncludeResources" Y="600" Note=""/>
+        <Element X="225" ComponentName="CopyImplOther" Y="750" Note=""/>
+        <Element X="650" ComponentName="CopyImplResources" Y="225" Note=""/>
+        <Element X="150" ComponentName="CopyAllFiles" Y="350" Note=""/>
+        <Element X="475" ComponentName="CopyIncludeSources" Y="475" Note=""/>
+        <Element X="150" ComponentName="CopyCommon" Y="525" Note=""/>
+        <Element X="850" ComponentName="CopyImplProjects" Y="125" Note=""/>
+        <Element X="200" ComponentName="CopyIncludeOther" Y="650" Note=""/>
+        <Element X="775" ComponentName="CopyIncludeProjects" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

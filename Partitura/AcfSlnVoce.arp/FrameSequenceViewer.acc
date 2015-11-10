@@ -1,78 +1,82 @@
 <Acf Keywords="" Description="Video player displaying image sequence form some directory">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtMmPck" Id="PlaybackControllerGui" ComponentId="PlaybackControllerGui">
+        <Element ComponentId="PlaybackControllerGui" Id="PlaybackControllerGui" PackageId="QtMmPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultModel" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
+                        <Data Value="VideoViewGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowFrameIndex" ExportId="ShowFrameIndex" Type="Boolean">
+                    <AttributeInfo ExportId="ShowFrameIndex" Id="ShowFrameIndex" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowPlayButton" ExportId="ShowPlayButton" Type="Boolean">
+                    <AttributeInfo ExportId="ShowPlayButton" Id="ShowPlayButton" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowPositionSlider" ExportId="ShowPositionSlider" Type="Boolean">
+                    <AttributeInfo ExportId="ShowPositionSlider" Id="ShowPositionSlider" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowRepeatButton" ExportId="ShowRepeatButton" Type="Boolean">
+                    <AttributeInfo ExportId="ShowRepeatButton" Id="ShowRepeatButton" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ShowTimePosition" ExportId="ShowTimePosition" Type="Boolean">
+                    <AttributeInfo ExportId="ShowTimePosition" Id="ShowTimePosition" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtMmPck" Id="VideoPlayerGui" ComponentId="VideoPlayerGui">
+        <Element ComponentId="VideoPlayerGui" Id="VideoPlayerGui" PackageId="QtMmPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ControllerBarGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="PlaybackControllerGui"/>
+                    <AttributeInfo ExportId="" Id="ControllerBarGui" Type="Reference">
+                        <Data Value="PlaybackControllerGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MediaController" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    <AttributeInfo ExportId="" Id="MediaController" Type="Reference">
+                        <Data Value="VideoViewGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UrlGui" ExportId="DirectoryGui" Type="Reference">
+                    <AttributeInfo ExportId="DirectoryGui" Id="UrlGui" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UrlParams" ExportId="DirectoryParam" Type="Reference">
+                    <AttributeInfo ExportId="DirectoryParam" Id="UrlParams" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VideoGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="VideoViewGui"/>
+                    <AttributeInfo ExportId="" Id="VideoGui" Type="Reference">
+                        <Data Value="VideoViewGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="AcfSlnVoce" Id="VideoViewGui" ComponentId="FrameSeqVideoViewGui">
+        <Element ComponentId="FrameSeqVideoViewGui" Id="VideoViewGui" PackageId="AcfSlnVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FitMode" ExportId="FitMode" Type="Integer">
+                    <AttributeInfo ExportId="FitMode" Id="FitMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FramesPerSecond" ExportId="FramesPerSecond" Type="Real">
+                    <AttributeInfo ExportId="FramesPerSecond" Id="FramesPerSecond" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseAntialiasing" ExportId="UseAntialiasing" Type="Boolean">
+                    <AttributeInfo ExportId="UseAntialiasing" Id="UseAntialiasing" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseGridCommands" ExportId="UseGridCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseGridCommands" Id="UseGridCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseScrollBarCommands" ExportId="UseScrollBarCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseScrollBarCommands" Id="UseScrollBarCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseShapeEditCommands" ExportId="UseShapeEditCommands" Type="Boolean">
+                    <AttributeInfo ExportId="UseShapeEditCommands" Id="UseShapeEditCommands" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ZoomToFitEnabled" ExportId="ZoomToFitEnabled" Type="Boolean">
+                    <AttributeInfo ExportId="ZoomToFitEnabled" Id="ZoomToFitEnabled" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -89,7 +93,7 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="VideoViewGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="Bitmap" ComponentId="VideoViewGui/Bitmap"/>
-        <Component ExportedId="BitmapLoader" ComponentId="VideoViewGui/BitmapLoader"/>
+        <Component ComponentId="VideoViewGui/Bitmap" ExportedId="Bitmap"/>
+        <Component ComponentId="VideoViewGui/BitmapLoader" ExportedId="BitmapLoader"/>
     </ExportedComponents>
 </Acf>

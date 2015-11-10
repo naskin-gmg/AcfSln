@@ -1,30 +1,34 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtCameraPck" Id="BitmapAcquisition" ComponentId="FileAcquisition">
+        <Element ComponentId="FileAcquisition" Id="BitmapAcquisition" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SnapApplication"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="SnapApplication" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ParamsManager" ComponentId="ParamsManager">
+        <Element ComponentId="ParamsManager" Id="ParamsManager" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FixedParamSets" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="FixedParamSets" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SnapParamsGray</Value>
@@ -32,7 +36,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="FixedSetNames" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="FixedSetNames" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Gray</Value>
@@ -43,66 +47,66 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="ParamsManagerGui" ComponentId="ParamsManagerGui">
+        <Element ComponentId="ParamsManagerGui" Id="ParamsManagerGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ParamsGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SnapParamsGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsGui" Type="Reference">
+                        <Data Value="SnapParamsGui" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsManager" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsManager"/>
+                    <AttributeInfo ExportId="" Id="ParamsManager" Type="Reference">
+                        <Data Value="ParamsManager" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="SelectableParameter" ComponentId="SelectableParamsSet">
+        <Element ComponentId="SelectableParamsSet" Id="SelectableParameter" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ParamsManager" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsManager"/>
+                    <AttributeInfo ExportId="" Id="ParamsManager" Type="Reference">
+                        <Data Value="ParamsManager" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtGuiPck" Id="SelectionParamGui" ComponentId="SelectionParamGui">
+        <Element ComponentId="SelectionParamGui" Id="SelectionParamGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="SnapTutorialVoce" Id="SnapApplication" ComponentId="SnapFramework">
+        <Element ComponentId="SnapFramework" Id="SnapApplication" PackageId="SnapTutorialVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapAcquisition"/>
+                    <AttributeInfo ExportId="" Id="BitmapAcquisition" Type="Reference">
+                        <Data Value="BitmapAcquisition" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SelectableParameter"/>
+                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
+                        <Data Value="SelectableParameter" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="SelectionParamGui"/>
+                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
+                        <Data Value="SelectionParamGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="SnapTutorialVoce" Id="SnapParamsColor" ComponentId="FileSnapParams">
+        <Element ComponentId="FileSnapParams" Id="SnapParamsColor" PackageId="SnapTutorialVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcquisitionDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="C:\Work\TestImages\ProfileEditor"/>
+                    <AttributeInfo ExportId="" Id="AcquisitionDir" Type="String">
+                        <Data Value="C:\Work\TestImages\ProfileEditor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="SnapTutorialVoce" Id="SnapParamsGray" ComponentId="FileSnapParams">
+        <Element ComponentId="FileSnapParams" Id="SnapParamsGray" PackageId="SnapTutorialVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcquisitionDir" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value="C:\Work\TestImages\Gray"/>
+                    <AttributeInfo ExportId="" Id="AcquisitionDir" Type="String">
+                        <Data Value="C:\Work\TestImages\Gray" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="SnapTutorialVoce" Id="SnapParamsGui" ComponentId="FileSnapParamsGui">
+        <Element ComponentId="FileSnapParamsGui" Id="SnapParamsGui" PackageId="SnapTutorialVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

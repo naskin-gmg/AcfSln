@@ -1,13 +1,17 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="0" Y="0" ComponentName="EdgeLinesSupplierEditor"/>
-        <Element Note="" X="900" Y="650" ComponentName="EdgesReductionParamsGui"/>
-        <Element Note="" X="200" Y="650" ComponentName="SmoothParamsGui"/>
-        <Element Note="" X="550" Y="650" ComponentName="EdgesExtractionParamGui"/>
-        <Element Note="" X="550" Y="475" ComponentName="EdgeExtractorParamsGui"/>
+        <Element X="550" ComponentName="EdgesExtractionParamGui" Y="650" Note=""/>
+        <Element X="200" ComponentName="SmoothParamsGui" Y="650" Note=""/>
+        <Element X="550" ComponentName="EdgeExtractorParamsGui" Y="475" Note=""/>
+        <Element X="0" ComponentName="EdgeLinesSupplierEditor" Y="0" Note=""/>
+        <Element X="900" ComponentName="EdgesReductionParamsGui" Y="650" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

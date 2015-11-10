@@ -1,44 +1,48 @@
 <Acf Keywords="View Sample Sequence" Description="View for a samle sequence">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtMeasPck" Id="DataSequenceView" ComponentId="DataSequenceView">
+        <Element ComponentId="DataSequenceView" Id="DataSequenceView" PackageId="QtMeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="IsChannelPanelVisible" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsChannelPanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsScalePanelVisible" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsScalePanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsScaledValue" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsScaledValue" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsTimeSpanPanelVisible" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="false"/>
+                    <AttributeInfo ExportId="" Id="IsTimeSpanPanelVisible" Type="Boolean">
+                        <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MaxValue" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="MaxValue" Type="Real">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MinValue" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="-1"/>
+                    <AttributeInfo ExportId="" Id="MinValue" Type="Real">
+                        <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="GeneralDataSequence" ComponentId="GeneralDataSequence">
+        <Element ComponentId="GeneralDataSequence" Id="GeneralDataSequence" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ModelBinder" ComponentId="ModelBinder">
+        <Element ComponentId="ModelBinder" Id="ModelBinder" PackageId="BasePck">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Model" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="GeneralDataSequence"/>
+                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
+                        <Data Value="GeneralDataSequence" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Observers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DataSequenceView</Value>

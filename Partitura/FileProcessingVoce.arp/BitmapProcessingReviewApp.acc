@@ -1,103 +1,107 @@
 <Acf Keywords="" Description="Application base used to create review of bitmap processing result">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BitmapPck" Id="Bitmap" ComponentId="Bitmap">
+        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BitmapPck" Id="BitmapLoader" ComponentId="BitmapLoader">
+        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ConsoleLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="ConsoleLog" ComponentId="ConsoleLog">
+        <Element ComponentId="ConsoleLog" Id="ConsoleLog" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FileProcessingPck" Id="CopyApp" ComponentId="CopyApp">
+        <Element ComponentId="CopyApp" Id="CopyApp" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileCopy" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ProcessingResultsReview"/>
+                    <AttributeInfo ExportId="" Id="FileCopy" Type="Reference">
+                        <Data Value="ProcessingResultsReview" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ConsoleLog" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="NeedExplicitInput" ExportId="" Type="Boolean">
-                        <Data IsEnabled="true" Value="true"/>
+                    <AttributeInfo ExportId="" Id="NeedExplicitInput" Type="Boolean">
+                        <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtCameraPck" Id="FileCamera" ComponentId="FileAcquisition">
+        <Element ComponentId="FileAcquisition" Id="FileCamera" PackageId="QtCameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapLoader" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="BitmapLoader"/>
+                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
+                        <Data Value="BitmapLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultPathParam" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ProcessedFilePath"/>
+                    <AttributeInfo ExportId="" Id="DefaultPathParam" Type="Reference">
+                        <Data Value="ProcessedFilePath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ConsoleLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="ProcessedFilePath" ComponentId="FileNameParam">
+        <Element ComponentId="FileNameParam" Id="ProcessedFilePath" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FileProcessingPck" Id="ProcessingResultsReview" ComponentId="ProcessingResultsReview">
+        <Element ComponentId="ProcessingResultsReview" Id="ProcessingResultsReview" PackageId="FileProcessingPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CurrentProcessedFilePath" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ProcessedFilePath"/>
+                    <AttributeInfo ExportId="" Id="CurrentProcessedFilePath" Type="Reference">
+                        <Data Value="ProcessedFilePath" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ConsoleLog" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputFileSerializer" ExportId="OutputFileSerializer" Type="Reference">
+                    <AttributeInfo ExportId="OutputFileSerializer" Id="OutputFileSerializer" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSupplier" ExportId="OutputSupplier" Type="Reference">
+                    <AttributeInfo ExportId="OutputSupplier" Id="OutputSupplier" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="CameraPck" Id="SnapBitmapSupplier" ComponentId="SnapBitmapSupplier">
+        <Element ComponentId="SnapBitmapSupplier" Id="SnapBitmapSupplier" PackageId="CameraPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="BitmapAcquisition" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="FileCamera"/>
+                    <AttributeInfo ExportId="" Id="BitmapAcquisition" Type="Reference">
+                        <Data Value="FileCamera" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapFactory" ExportId="" Type="Factory">
-                        <Data IsEnabled="true" Value="Bitmap"/>
+                    <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
+                        <Data Value="Bitmap" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
+                        <Data Value="ConsoleLog" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -108,7 +112,7 @@
         <Interface InterfaceId="ibase::IApplication" ComponentId="CopyApp"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="BitmapSupplier" ComponentId="SnapBitmapSupplier"/>
-        <Component ExportedId="Log" ComponentId="ConsoleLog"/>
+        <Component ComponentId="SnapBitmapSupplier" ExportedId="BitmapSupplier"/>
+        <Component ComponentId="ConsoleLog" ExportedId="Log"/>
     </ExportedComponents>
 </Acf>

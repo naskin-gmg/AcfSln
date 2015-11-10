@@ -1,19 +1,23 @@
 <Acf Keywords="Parameter Directory Monitoring File Observer Tag='GUI'" Description="Directory monitoring parameter GUI">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="ComposedParamsSetGui" ComponentId="ComposedParamsSetGui">
+        <Element ComponentId="ComposedParamsSetGui" Id="ComposedParamsSetGui" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Editors" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParamsGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Ids" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParams</Value>
@@ -23,7 +27,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="HotfolderGuiPck" Id="DirectoryMonitorParamsGui" ComponentId="DirectoryMonitorParamsGui">
+        <Element ComponentId="DirectoryMonitorParamsGui" Id="DirectoryMonitorParamsGui" PackageId="HotfolderGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

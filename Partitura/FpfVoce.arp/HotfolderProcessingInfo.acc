@@ -1,22 +1,26 @@
 <Acf Keywords="" Description="State model of the hotfolder">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="HotfolderPck" Id="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo">
+        <Element ComponentId="HotfolderProcessingInfo" Id="HotfolderProcessingInfo" PackageId="HotfolderPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="HotfolderPck" Id="HotfolderStatistics" ComponentId="HotfolderStatistics">
+        <Element ComponentId="HotfolderStatistics" Id="HotfolderStatistics" PackageId="HotfolderPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="StateModel" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="StateModel" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>HotfolderProcessingInfo</Value>
@@ -24,7 +28,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>HotfolderProcessingInfo</Value>
@@ -33,8 +37,8 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="ProcessingInfo"/>
+                    <AttributeInfo ExportId="" Id="TypeId" Type="Id">
+                        <Data Value="ProcessingInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -48,6 +52,6 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="StateModel"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="HotfolderState" ComponentId="HotfolderProcessingInfo"/>
+        <Component ComponentId="HotfolderProcessingInfo" ExportedId="HotfolderState"/>
     </ExportedComponents>
 </Acf>

@@ -1,136 +1,140 @@
 <Acf Keywords="Circle Finder Task Annulus Position" Description="Circle finder task using annulus segment to speciffy AOI">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="Calibration2dProxy" ComponentId="Calibration2dProxy">
+        <Element ComponentId="Calibration2dProxy" Id="Calibration2dProxy" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CalibrationProvider" ExportId="RegionCalibrationProvider" Type="Reference">
+                    <AttributeInfo ExportId="RegionCalibrationProvider" Id="CalibrationProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="Caliper" ComponentId="EdgeOnLineFinder">
+        <Element ComponentId="EdgeOnLineFinder" Id="Caliper" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CaliperParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="CaliperParamId" Type="Id">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterParamsId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Filter"/>
+                    <AttributeInfo ExportId="" Id="FilterParamsId" Type="Id">
+                        <Data Value="Filter" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LineParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Line"/>
+                    <AttributeInfo ExportId="" Id="LineParamId" Type="Id">
+                        <Data Value="Line" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="CircleFindProcessor" ComponentId="CircleFindProcessor">
+        <Element ComponentId="CircleFindProcessor" Id="CircleFindProcessor" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AoiParamId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="CircleFinderAoi"/>
+                    <AttributeInfo ExportId="" Id="AoiParamId" Type="Id">
+                        <Data Value="CircleFinderAoi" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CircleFinderParamsId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="CircleFinderParams"/>
+                    <AttributeInfo ExportId="" Id="CircleFinderParamsId" Type="Id">
+                        <Data Value="CircleFinderParams" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FeaturesMapper" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="FeaturesMapper" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SendLinesToTemp" ExportId="EnableIntrospection" Type="Boolean">
+                    <AttributeInfo ExportId="EnableIntrospection" Id="SendLinesToTemp" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SendUsedPointsToTemp" ExportId="EnableIntrospection" Type="Boolean">
+                    <AttributeInfo ExportId="EnableIntrospection" Id="SendUsedPointsToTemp" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveEdgeProcessor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="SlaveEdgeProcessor" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveLineId" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="Line"/>
+                    <AttributeInfo ExportId="" Id="SlaveLineId" Type="Id">
+                        <Data Value="Line" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TempConsumer" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="PositionTask/TempMessages"/>
+                    <AttributeInfo ExportId="" Id="TempConsumer" Type="Reference">
+                        <Data Value="PositionTask/TempMessages" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="ProcessorVoce" Id="ParamsSet" ComponentId="SimpleCircleFinderParamsSet">
+        <Element ComponentId="SimpleCircleFinderParamsSet" Id="ParamsSet" PackageId="ProcessorVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AoiCalibration" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Calibration2dProxy"/>
+                    <AttributeInfo ExportId="" Id="AoiCalibration" Type="Reference">
+                        <Data Value="Calibration2dProxy" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="AoiInnerRadius" ExportId="DefaultAoiInnerRadius" Type="Real">
+                    <AttributeInfo ExportId="DefaultAoiInnerRadius" Id="AoiInnerRadius" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="AoiOuterRadius" ExportId="DefaultAoiOuterRadius" Type="Real">
+                    <AttributeInfo ExportId="DefaultAoiOuterRadius" Id="AoiOuterRadius" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="AoiX" ExportId="DefaultAoiX" Type="Real">
+                    <AttributeInfo ExportId="DefaultAoiX" Id="AoiX" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="AoiY" ExportId="DefaultAoiY" Type="Real">
+                    <AttributeInfo ExportId="DefaultAoiY" Id="AoiY" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CaliperMode" ExportId="DefaultCaliperMode" Type="Integer">
+                    <AttributeInfo ExportId="DefaultCaliperMode" Id="CaliperMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DirectionMode" ExportId="DefaultDirectionMode" Type="Integer">
+                    <AttributeInfo ExportId="DefaultDirectionMode" Id="DirectionMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterConstraints" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="" Id="FilterConstraints" Type="Reference">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterLegthValues" ExportId="DefaultFilterLegthValues" Type="Real[]">
+                    <AttributeInfo ExportId="DefaultFilterLegthValues" Id="FilterLegthValues" Type="Real[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MinOutlierDistance" ExportId="DefaultMinOutlierDistance" Type="Real">
+                    <AttributeInfo ExportId="DefaultMinOutlierDistance" Id="MinOutlierDistance" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutlierEliminationEnabled" ExportId="DefaultOutlierEliminationEnabled" Type="Boolean">
+                    <AttributeInfo ExportId="DefaultOutlierEliminationEnabled" Id="OutlierEliminationEnabled" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PolarityMode" ExportId="DefaultPolarityMode" Type="Integer">
+                    <AttributeInfo ExportId="DefaultPolarityMode" Id="PolarityMode" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RaysCount" ExportId="DefaultRaysCount" Type="Integer">
+                    <AttributeInfo ExportId="DefaultRaysCount" Id="RaysCount" Type="Integer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WeightThreshold" ExportId="DefaultWeightThreshold" Type="Real">
+                    <AttributeInfo ExportId="DefaultWeightThreshold" Id="WeightThreshold" Type="Real">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="IprPck" Id="PositionTask" ComponentId="PositionFromImageSupplier">
+        <Element ComponentId="PositionFromImageSupplier" Id="PositionTask" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AdditionalTriggerInputs" ExportId="AdditionalTriggerInputs" Type="Reference[]">
+                    <AttributeInfo ExportId="AdditionalTriggerInputs" Id="AdditionalTriggerInputs" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapProvider" ExportId="BitmapProvider" Type="Reference">
+                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CalibrationProvider" ExportId="InputCalibrationProvider" Type="Reference">
+                    <AttributeInfo ExportId="InputCalibrationProvider" Id="CalibrationProvider" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" ExportId="DiagnosticName" Type="String">
+                    <AttributeInfo ExportId="DiagnosticName" Id="DiagnosticName" Type="String">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="EnableVerbose" Type="Boolean">
+                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" ExportId="ParamsSet" Type="Reference">
-                        <Data IsEnabled="true" Value="ParamsSet"/>
+                    <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
+                        <Data Value="ParamsSet" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Processor" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="CircleFindProcessor"/>
+                    <AttributeInfo ExportId="" Id="Processor" Type="Reference">
+                        <Data Value="CircleFindProcessor" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -145,7 +149,7 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="PositionTask"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CaliperParams" ComponentId="ParamsSet/CaliperParams"/>
-        <Component ExportedId="ParamsSet" ComponentId="ParamsSet"/>
+        <Component ComponentId="ParamsSet/CaliperParams" ExportedId="CaliperParams"/>
+        <Component ComponentId="ParamsSet" ExportedId="ParamsSet"/>
     </ExportedComponents>
 </Acf>

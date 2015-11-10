@@ -1,30 +1,34 @@
 <Acf Keywords="Translation Tag='Localization'" Description="ACF-Solutions strings localization">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="AcfVoce" Id="AcfLocalization" ComponentId="AcfLocalization">
+        <Element ComponentId="AcfLocalization" Id="AcfLocalization" PackageId="AcfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="LanguageIds" ExportId="LanguageIds" Type="Id[]">
+                    <AttributeInfo ExportId="LanguageIds" Id="LanguageIds" Type="Id[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LanguageSelection" ExportId="LanguageSelection" Type="Reference">
+                    <AttributeInfo ExportId="LanguageSelection" Id="LanguageSelection" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveTranslationManager" ExportId="SlaveTranslationManager" Type="Reference">
+                    <AttributeInfo ExportId="SlaveTranslationManager" Id="SlaveTranslationManager" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="QtPck" Id="AcfSolutionsLocalization" ComponentId="TranslationManager">
+        <Element ComponentId="TranslationManager" Id="AcfSolutionsLocalization" PackageId="QtPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="LanguageIds" ExportId="LanguageIds" Type="Id[]">
+                    <AttributeInfo ExportId="LanguageIds" Id="LanguageIds" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>en_US</Value>
@@ -34,20 +38,20 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="LanguageSelection" ExportId="LanguageSelection" Type="Reference">
+                    <AttributeInfo ExportId="LanguageSelection" Id="LanguageSelection" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="Log" Type="Reference">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveTranslationManager" ExportId="" Type="Reference">
-                        <Data IsEnabled="true" Value="AcfLocalization"/>
+                    <AttributeInfo ExportId="" Id="SlaveTranslationManager" Type="Reference">
+                        <Data Value="AcfLocalization" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TranslationFilePath" ExportId="" Type="String">
-                        <Data IsEnabled="true" Value=":/Translations"/>
+                    <AttributeInfo ExportId="" Id="TranslationFilePath" Type="String">
+                        <Data Value=":/Translations" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TranslationFilePrefix" ExportId="" Type="Id">
-                        <Data IsEnabled="true" Value="AcfSln"/>
+                    <AttributeInfo ExportId="" Id="TranslationFilePrefix" Type="Id">
+                        <Data Value="AcfSln" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

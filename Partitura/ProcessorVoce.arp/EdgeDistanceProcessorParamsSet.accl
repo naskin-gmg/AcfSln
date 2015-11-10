@@ -1,12 +1,16 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="525" Y="250" ComponentName="CaliperParamsSet"/>
-        <Element Note="" X="525" Y="450" ComponentName="FilterLength"/>
-        <Element Note="" X="850" Y="450" ComponentName="CaliperParams"/>
-        <Element Note="" X="225" Y="450" ComponentName="Region"/>
+        <Element X="225" ComponentName="Region" Y="450" Note=""/>
+        <Element X="850" ComponentName="CaliperParams" Y="450" Note=""/>
+        <Element X="525" ComponentName="CaliperParamsSet" Y="250" Note=""/>
+        <Element X="525" ComponentName="FilterLength" Y="450" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

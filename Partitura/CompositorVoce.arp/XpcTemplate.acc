@@ -1,53 +1,53 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
         <VersionInfos>
-            <Version Number="328449" Id="1023" Description="Qt Framework"/>
-            <Version Number="4004" Id="0" Description="ACF"/>
-            <Version Number="1472" Id="1" Description="ACF-Solutions"/>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="QtGuiPck" Id="DocumentTemplate" ComponentId="ExtendedDocumentTemplate">
+        <Element ComponentId="ExtendedDocumentTemplate" Id="DocumentTemplate" PackageId="QtGuiPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DocumentFactory" Type="Factory" ExportId="">
+                    <AttributeInfo ExportId="" Id="DocumentFactory" Type="Factory">
                         <Data Value="XpcModel" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentLoader" Type="Reference" ExportId="">
+                    <AttributeInfo ExportId="" Id="DocumentLoader" Type="Reference">
                         <Data Value="XpcLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
+                    <AttributeInfo ExportId="" Id="DocumentTypeId" Type="Id">
                         <Data Value="Configuration" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTypeName" Type="String" ExportId="">
+                    <AttributeInfo ExportId="" Id="DocumentTypeName" Type="String">
                         <Data Value="ACF Configuration" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
+                    <AttributeInfo ExportId="" Id="IsEditSupported" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IsNewSupported" Type="Boolean" ExportId="">
+                    <AttributeInfo ExportId="" Id="IsNewSupported" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UndoManager" Type="Factory" ExportId="">
+                    <AttributeInfo ExportId="" Id="UndoManager" Type="Factory">
                         <Data Value="UndoManager" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ViewFactory" Type="Factory" ExportId="">
+                    <AttributeInfo ExportId="" Id="ViewFactory" Type="Factory">
                         <Data Value="XpcEditorGui" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="PackageFileTypeInfo" ComponentId="FileTypeInfo">
+        <Element ComponentId="FileTypeInfo" Id="PackageFileTypeInfo" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>arp</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACF Component Package</Value>
@@ -57,10 +57,10 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FilePck" Id="RegistryFileTypeInfo" ComponentId="FileTypeInfo">
+        <Element ComponentId="FileTypeInfo" Id="RegistryFileTypeInfo" PackageId="FilePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>acc</Value>
@@ -68,7 +68,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACF Registry File</Value>
@@ -78,42 +78,42 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="UndoManager" ComponentId="SerializedUndoManager">
+        <Element ComponentId="SerializedUndoManager" Id="UndoManager" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="CompositorPck" Id="XpcEditorGui" ComponentId="XpcEditorGui">
+        <Element ComponentId="XpcEditorGui" Id="XpcEditorGui" PackageId="CompositorPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ConfigFileType" Type="Reference" ExportId="">
+                    <AttributeInfo ExportId="" Id="ConfigFileType" Type="Reference">
                         <Data Value="XpcLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
+                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PackageFileType" Type="Reference" ExportId="">
+                    <AttributeInfo ExportId="" Id="PackageFileType" Type="Reference">
                         <Data Value="PackageFileTypeInfo" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RegistryFileType" Type="Reference" ExportId="">
+                    <AttributeInfo ExportId="" Id="RegistryFileType" Type="Reference">
                         <Data Value="RegistryFileTypeInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="" Id="XpcLoader" ComponentId="XpcLoader">
+        <Element ComponentId="XpcLoader" Id="XpcLoader" PackageId="">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="PackagePck" Id="XpcModel" ComponentId="XpcModel">
+        <Element ComponentId="XpcModel" Id="XpcModel" PackageId="PackagePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
@@ -123,13 +123,13 @@
         <EmbeddedRegistry Id="XpcLoader">
             <Data Keywords="" Description="">
                 <ElementsList>
-                    <Element PackageId="FilePck" Id="Composed" ComponentId="ComposedFilePersistence">
+                    <Element ComponentId="ComposedFilePersistence" Id="Composed" PackageId="FilePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="CommonDescription" Type="String" ExportId="">
+                                <AttributeInfo ExportId="" Id="CommonDescription" Type="String">
                                     <Data Value="ACF Configuration File" IsEnabled="true"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="SlaveLoaders" Type="Reference[]" ExportId="">
+                                <AttributeInfo ExportId="" Id="SlaveLoaders" Type="Reference[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>NewFormatSerializer</Value>
@@ -140,59 +140,59 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="FilePck" Id="NewFormatSerializer" ComponentId="CompactXmlFileSerializer">
+                    <Element ComponentId="CompactXmlFileSerializer" Id="NewFormatSerializer" PackageId="FilePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                                <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>awc</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                                <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>ACF Workspace Configuration File</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element PackageId="FilePck" Id="OldFormatSerializer" ComponentId="SimpleXmlFileSerializer">
+                    <Element ComponentId="SimpleXmlFileSerializer" Id="OldFormatSerializer" PackageId="FilePck">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
+                                <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>xpc</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                                <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Old ACF Configuration File</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                                <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>

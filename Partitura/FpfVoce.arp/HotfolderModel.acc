@@ -1,12 +1,16 @@
 <Acf Keywords="Hotfolder File Processing Directory Monitoring" Description="Basic definition of a hotfolder">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="BasePck" Id="HotfolderModel" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="HotfolderModel" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>HotfolderProcessingInfo</Value>
@@ -14,7 +18,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>HotfolderProcessingInfo</Value>
@@ -22,24 +26,24 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="FpfVoce" Id="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo">
+        <Element ComponentId="HotfolderProcessingInfo" Id="HotfolderProcessingInfo" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="FpfVoce" Id="HotfolderSettings" ComponentId="HotfolderSettings">
+        <Element ComponentId="HotfolderSettings" Id="HotfolderSettings" PackageId="FpfVoce">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="AcceptPatterns" ExportId="AcceptPatterns" Type="String[]">
+                    <AttributeInfo ExportId="AcceptPatterns" Id="AcceptPatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="IgnorePatterns" ExportId="IgnorePatterns" Type="String[]">
+                    <AttributeInfo ExportId="IgnorePatterns" Id="IgnorePatterns" Type="String[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -54,7 +58,7 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="HotfolderModel"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo/HotfolderProcessingInfo"/>
-        <Component ExportedId="HotfolderSettings" ComponentId="HotfolderSettings"/>
+        <Component ComponentId="HotfolderProcessingInfo/HotfolderProcessingInfo" ExportedId="HotfolderProcessingInfo"/>
+        <Component ComponentId="HotfolderSettings" ExportedId="HotfolderSettings"/>
     </ExportedComponents>
 </Acf>

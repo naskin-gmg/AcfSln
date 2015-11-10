@@ -1,21 +1,25 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="700" Y="75" ComponentName="GaussianParams"/>
-        <Element Note="" X="375" Y="300" ComponentName="ProcessedCamera"/>
-        <Element Note="" X="300" Y="600" ComponentName="IterationParamGui"/>
-        <Element Note="" X="1050" Y="200" ComponentName="AverageParams"/>
-        <Element Note="" X="1050" Y="325" ComponentName="FileSnapParam"/>
-        <Element Note="" X="675" Y="750" ComponentName="AverageParamsGui"/>
-        <Element Note="" X="175" Y="500" ComponentName="BitmapLoader"/>
-        <Element Note="" X="750" Y="225" ComponentName="SnapParams"/>
-        <Element Note="" X="125" Y="400" ComponentName="FileAcquisition"/>
-        <Element Note="" X="425" Y="125" ComponentName="IterationParams"/>
-        <Element Note="" X="650" Y="475" ComponentName="Framework"/>
-        <Element Note="" X="1075" Y="475" ComponentName="FileSnapParamGui"/>
-        <Element Note="" X="750" Y="600" ComponentName="SnapParamsGui"/>
+        <Element X="1050" ComponentName="AverageParams" Y="200" Note=""/>
+        <Element X="675" ComponentName="AverageParamsGui" Y="750" Note=""/>
+        <Element X="175" ComponentName="BitmapLoader" Y="500" Note=""/>
+        <Element X="425" ComponentName="IterationParams" Y="125" Note=""/>
+        <Element X="1050" ComponentName="FileSnapParam" Y="325" Note=""/>
+        <Element X="750" ComponentName="SnapParamsGui" Y="600" Note=""/>
+        <Element X="300" ComponentName="IterationParamGui" Y="600" Note=""/>
+        <Element X="375" ComponentName="ProcessedCamera" Y="300" Note=""/>
+        <Element X="125" ComponentName="FileAcquisition" Y="400" Note=""/>
+        <Element X="650" ComponentName="Framework" Y="475" Note=""/>
+        <Element X="1075" ComponentName="FileSnapParamGui" Y="475" Note=""/>
+        <Element X="700" ComponentName="GaussianParams" Y="75" Note=""/>
+        <Element X="750" ComponentName="SnapParams" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

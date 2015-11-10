@@ -1,14 +1,18 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="525" Y="775" ComponentName="Registry"/>
-        <Element Note="" X="200" Y="325" ComponentName="VersionInfo"/>
-        <Element Note="" X="250" Y="775" ComponentName="Loader"/>
-        <Element Note="" X="525" Y="325" ComponentName="ComplexCopyApplication"/>
-        <Element Note="" X="525" Y="650" ComponentName="UpdateRegistryLoader"/>
-        <Element Note="" X="525" Y="500" ComponentName="CopyFilesTree"/>
+        <Element X="525" ComponentName="Registry" Y="775" Note=""/>
+        <Element X="525" ComponentName="CopyFilesTree" Y="500" Note=""/>
+        <Element X="525" ComponentName="UpdateRegistryLoader" Y="650" Note=""/>
+        <Element X="200" ComponentName="VersionInfo" Y="325" Note=""/>
+        <Element X="250" ComponentName="Loader" Y="775" Note=""/>
+        <Element X="525" ComponentName="ComplexCopyApplication" Y="325" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

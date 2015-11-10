@@ -1,17 +1,21 @@
 <Acf Keywords="Caliper Line Parameters Tag='&quot;Image Processing&quot;'" Description="Caliper parameters">
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element PackageId="IprPck" Id="CaliperParams" ComponentId="CaliperParams">
+        <Element ComponentId="CaliperParams" Id="CaliperParams" PackageId="IprPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="CaliperParamsSet" ComponentId="ComposedParamsSet">
+        <Element ComponentId="ComposedParamsSet" Id="CaliperParamsSet" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Parameters" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line</Value>
@@ -20,7 +24,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParametersId" ExportId="" Type="Id[]">
+                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line</Value>
@@ -29,51 +33,51 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSets" ExportId="SlaveSets" Type="Reference[]">
+                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeId" ExportId="TypeId" Type="Id">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo ExportId="TypeId" Id="TypeId" Type="Id">
+                        <Data Value="Caliper" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="BasePck" Id="Line" ComponentId="Line">
+        <Element ComponentId="Line" Id="Line" PackageId="BasePck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="X1" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="X1" Type="Real">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="X2" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo ExportId="" Id="X2" Type="Real">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Y1" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="0"/>
+                    <AttributeInfo ExportId="" Id="Y1" Type="Real">
+                        <Data Value="0" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Y2" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="100"/>
+                    <AttributeInfo ExportId="" Id="Y2" Type="Real">
+                        <Data Value="100" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element PackageId="MeasPck" Id="SmoothFilterParams" ComponentId="NumericParams">
+        <Element ComponentId="NumericParams" Id="SmoothFilterParams" PackageId="MeasPck">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="Constraints" ExportId="SmoothFilterConstraints" Type="Reference">
+                    <AttributeInfo ExportId="SmoothFilterConstraints" Id="Constraints" Type="Reference">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MaxValues" ExportId="" Type="Real">
-                        <Data IsEnabled="true" Value="50"/>
+                    <AttributeInfo ExportId="" Id="MaxValues" Type="Real">
+                        <Data Value="50" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Values" ExportId="" Type="Real[]">
+                    <AttributeInfo ExportId="" Id="Values" Type="Real[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>5</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ValuesCount" ExportId="" Type="Integer">
-                        <Data IsEnabled="true" Value="1"/>
+                    <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
+                        <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -88,7 +92,7 @@
         <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
-        <Component ExportedId="Line" ComponentId="Line"/>
+        <Component ComponentId="CaliperParams" ExportedId="CaliperParams"/>
+        <Component ComponentId="Line" ExportedId="Line"/>
     </ExportedComponents>
 </Acf>

@@ -1,19 +1,23 @@
 <Acf>
     <AcfHeader>
-        <VersionInfos/>
+        <VersionInfos>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+        </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element Note="" X="775" Y="500" ComponentName="HtmlEditorFileGui"/>
-        <Element Note="" X="800" Y="675" ComponentName="SettingsPersistence"/>
-        <Element Note="" X="500" Y="500" ComponentName="HtmlBrowserFileGui"/>
-        <Element Note="" X="450" Y="275" ComponentName="ConfigEditor"/>
-        <Element Note="" X="1050" Y="275" ComponentName="LanguageSelectionGui"/>
-        <Element Note="" X="775" Y="175" ComponentName="PreviewCommandFileInfo"/>
-        <Element Note="" X="175" Y="400" ComponentName="SettingsGui"/>
-        <Element Note="" X="200" Y="675" ComponentName="SettingsDialog"/>
-        <Element Note="" X="1050" Y="500" ComponentName="DocumentPersistenceGui"/>
-        <Element Note="" X="775" Y="275" ComponentName="PreviewCommandFileGui"/>
-        <Element Note="" X="500" Y="675" ComponentName="Settings"/>
+        <Element X="775" ComponentName="PreviewCommandFileGui" Y="275" Note=""/>
+        <Element X="200" ComponentName="SettingsDialog" Y="675" Note=""/>
+        <Element X="800" ComponentName="SettingsPersistence" Y="675" Note=""/>
+        <Element X="450" ComponentName="ConfigEditor" Y="275" Note=""/>
+        <Element X="1050" ComponentName="DocumentPersistenceGui" Y="500" Note=""/>
+        <Element X="500" ComponentName="HtmlBrowserFileGui" Y="500" Note=""/>
+        <Element X="775" ComponentName="HtmlEditorFileGui" Y="500" Note=""/>
+        <Element X="1050" ComponentName="LanguageSelectionGui" Y="275" Note=""/>
+        <Element X="500" ComponentName="Settings" Y="675" Note=""/>
+        <Element X="175" ComponentName="SettingsGui" Y="400" Note=""/>
+        <Element X="775" ComponentName="PreviewCommandFileInfo" Y="175" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

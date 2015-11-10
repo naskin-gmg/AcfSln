@@ -1,53 +1,53 @@
 <Acf Keywords="" Description="">
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Description="ACF" Number="4020"/>
-            <Version Id="1" Description="ACF-Solutions" Number="1483"/>
-            <Version Id="1023" Description="Qt Framework" Number="328706"/>
+            <Version Number="4020" Id="0" Description="ACF"/>
+            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
+            <Version Number="328961" Id="1023" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element Id="ComplexCopyApplication" PackageId="InstallVoce" ComponentId="ComplexCopyApplication">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="ComplexCopyApplication" Id="ComplexCopyApplication" PackageId="InstallVoce">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CompanyName" ExportId="" Type="String">
+                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
                         <Data Value="ImagingTools" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="EnableVerbose" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="EnableVerbose" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileCopiers" ExportId="" Type="Reference[]">
+                    <AttributeInfo ExportId="" Id="FileCopiers" Type="Reference[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CopyFilesTree</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" ExportId="" Type="String">
+                    <AttributeInfo ExportId="" Id="LegalCopyright" Type="String">
                         <Data Value="(C) 2015 Witold Gantzke &amp; Kirill Lepskiy" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MainVersionId" ExportId="" Type="Integer">
+                    <AttributeInfo ExportId="" Id="MainVersionId" Type="Integer">
                         <Data Value="1" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" ExportId="" Type="String">
+                    <AttributeInfo ExportId="" Id="ProductName" Type="String">
                         <Data Value="ArxToCarxConverter" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
                         <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="CopyFilesTree" PackageId="FileProcessingPck" ComponentId="CopyFilesTree">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="CopyFilesTree" Id="CopyFilesTree" PackageId="FileProcessingPck">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="EnableVerbose" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileCopy" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="FileCopy" Type="Reference">
                         <Data Value="FileCopyOverLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" ExportId="" Type="String[]">
+                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.arx</Value>
@@ -55,85 +55,85 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" ExportId="" Type="String">
+                    <AttributeInfo ExportId="" Id="InputSubDir" Type="String">
                         <Data Value="." IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
                         <Data Value="ComplexCopyApplication/Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" ExportId="" Type="String">
+                    <AttributeInfo ExportId="" Id="OutputSubDir" Type="String">
                         <Data Value="." IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RecursionDepth" ExportId="" Type="Integer">
+                    <AttributeInfo ExportId="" Id="RecursionDepth" Type="Integer">
                         <Data Value="-1" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="FileCopyOverLoader" PackageId="FileProcessingPck" ComponentId="FileCopyOverLoader">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="FileCopyOverLoader" Id="FileCopyOverLoader" PackageId="FileProcessingPck">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="EnableVerbose" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputLoader" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="InputLoader" Type="Reference">
                         <Data Value="RegistryLoader" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
                         <Data Value="ComplexCopyApplication/Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Object" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
                         <Data Value="Registry" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputLoader" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="OutputLoader" Type="Reference">
                         <Data Value="RegistrySaver" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="Registry" PackageId="CompositorPck" ComponentId="VisualRegistry">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="VisualRegistry" Id="Registry" PackageId="CompositorPck">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element Id="RegistryLoader" PackageId="CompositorPck" ComponentId="RegistryLoader">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="RegistryLoader" Id="RegistryLoader" PackageId="CompositorPck">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="EnableVerbose" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
                         <Data Value="ComplexCopyApplication/Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SupportOldFormat" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="SupportOldFormat" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
                         <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="RegistrySaver" PackageId="CompositorPck" ComponentId="RegistryLoader">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="RegistryLoader" Id="RegistrySaver" PackageId="CompositorPck">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="EnableVerbose" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="EnableVerbose" Type="Boolean">
                         <Data Value="true" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Log" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
                         <Data Value="ComplexCopyApplication/Log" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SupportOldFormat" ExportId="" Type="Boolean">
+                    <AttributeInfo ExportId="" Id="SupportOldFormat" Type="Boolean">
                         <Data Value="false" IsEnabled="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionInfo" ExportId="" Type="Reference">
+                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
                         <Data Value="VersionInfo" IsEnabled="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
-            <Data Flags="0" IsEnabled="true">
+        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
+            <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
