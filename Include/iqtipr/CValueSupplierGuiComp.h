@@ -69,8 +69,7 @@ private:
 	FoundCircleModel m_foundCircleModel;
 	FoundLineModel m_foundLineModel;
 
-	bool m_isCircleActive;
-	bool m_isLineActive;
+	bool m_isResultVisible;
 };
 
 
