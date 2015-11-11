@@ -159,7 +159,7 @@ void CPositionFromImageSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_bitmapProviderCompPtr.IsValid() && m_bitmapProviderModelCompPtr.IsValid()){
-		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
+		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 
 	// Initialize components
