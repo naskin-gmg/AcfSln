@@ -11,8 +11,7 @@ namespace iqtmeas
 
 CNumericValueWidget::CNumericValueWidget(
 			QWidget* parentPtr,
-			bool showSlilder,
-			bool showButtons,
+			int sliderFlags,
 			int inputPolicy,
 			int maxPrecision)
 :	QWidget(parentPtr),
@@ -24,9 +23,15 @@ CNumericValueWidget::CNumericValueWidget(
 
 	setupUi(this);
 
-	ValueSlider->setVisible(showSlilder);
-	MinButton->setVisible(showSlilder && showButtons);
-	MaxButton->setVisible(showSlilder && showButtons);
+	if (sliderFlags & SF_SINGLE_ROW){
+		ValueLayout->addWidget(MinButton);
+		ValueLayout->addWidget(ValueSlider);
+		ValueLayout->addWidget(MaxButton);
+	}
+
+	ValueSlider->setVisible(sliderFlags != SF_NONE);
+	MinButton->setVisible(sliderFlags & SF_SLIDER_BUTTONS);
+	MaxButton->setVisible(sliderFlags & SF_SLIDER_BUTTONS);
 
 	switch (inputPolicy){
 		case 2:
@@ -80,8 +85,9 @@ void CNumericValueWidget::SetUnitInfo(const QString& name, const QString& descri
 
 	ValueSB->setDecimals(displayPrecision);
 	ValueSB->setRange(minValue, maxValue);
+	ValueSB->setSingleStep(displayPrecision > 0 ? qPow(0.1, displayPrecision) : 1);
 	ValueSlider->setRange(valueRange.GetMinValue() * m_sliderScaleFactor, valueRange.GetMaxValue() * m_sliderScaleFactor);
-	ValueSlider->setPageStep(10);
+	ValueSlider->setPageStep(10 * ValueSlider->singleStep());
 	MinButton->setText(QString::number(minValue));
 	MaxButton->setText(QString::number(maxValue));
 	ValueSB->setToolTip(tr("Range: %1 - %2").arg(minValue).arg(maxValue));
@@ -112,7 +118,7 @@ void CNumericValueWidget::on_ValueSB_valueChanged(double value)
 	}
 
 	m_ignoreEvents = true;
-	SetValue(value / m_unitMultiplicationFactor);
+	ValueSlider->setValue(value * m_sliderScaleFactor / m_unitMultiplicationFactor );
 	m_ignoreEvents = false;
 
 	Q_EMIT ValueChanged();

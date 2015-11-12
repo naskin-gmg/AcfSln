@@ -108,11 +108,24 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 		}
 
 		m_valueWidgets.SetCount(valuesCount);
+
+		int sliderFlags = 0;
+		if (*m_isSliderVisibleAttrPtr){
+			sliderFlags = CNumericValueWidget::SF_SLIDER_ONLY;
+
+			if (*m_isButtonsVisibleAttrPtr){
+				sliderFlags = CNumericValueWidget::SF_SLIDER_BUTTONS;
+			}
+
+			if (*m_isSingleRowAttrPtr){
+				sliderFlags |= CNumericValueWidget::SF_SINGLE_ROW;
+			}
+		}
+
 		for (int i = widgetsCount; i < valuesCount; i++){
 			CNumericValueWidget* valueWidgetPtr = new CNumericValueWidget(
 						panelPtr, 
-						*m_isSliderVisibleAttrPtr, 
-						*m_isButtonsVisibleAttrPtr,
+						sliderFlags,
 						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1,
 						*m_editorPrecisionAttrPtr);
 			

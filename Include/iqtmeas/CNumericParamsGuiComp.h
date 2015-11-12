@@ -46,6 +46,7 @@ public:
 		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
 		I_ASSIGN(m_isButtonsVisibleAttrPtr, "ButtonsVisible", "Enables min/max buttons", true, true);
+		I_ASSIGN(m_isSingleRowAttrPtr, "SingleRow", "Single row layout", true, false);
 		I_ASSIGN(m_inputPolicyAttrPtr, "InputSizePolicy", "0 - minimal width (default)\n1 - expanding input \n2 - label and input have same width", false, 0);
 		I_ASSIGN(m_verticalLayoutAttrPtr, "VerticalLayout", "Vertical or horizontal layout for multiple widgets", true, true);
 		I_ASSIGN(m_editorPrecisionAttrPtr, "EditorPrecision", "Precision of the spin editor (-1 - don't change, 0 - integer, 1 - one decimal etc.)", true, 2);
@@ -74,6 +75,7 @@ public Q_SLOTS:
 private:
 	I_ATTR(bool, m_isSliderVisibleAttrPtr);
 	I_ATTR(bool, m_isButtonsVisibleAttrPtr);
+	I_ATTR(bool, m_isSingleRowAttrPtr);
 	I_ATTR(int, m_inputPolicyAttrPtr);
 	I_ATTR(bool, m_verticalLayoutAttrPtr);
 	I_ATTR(int, m_editorPrecisionAttrPtr);

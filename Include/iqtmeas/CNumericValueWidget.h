@@ -27,7 +27,15 @@ class CNumericValueWidget:
 	Q_OBJECT
 
 public:
-	CNumericValueWidget(QWidget* parentPtr = NULL, bool showSlilder = true, bool showButtons = true, int inputPolicy = 0, int maxPrecision = 2);
+	enum SliderFlags
+	{
+		SF_NONE = 0,
+		SF_SLIDER_ONLY = 1,
+		SF_SLIDER_BUTTONS = 2,
+		SF_SINGLE_ROW = 8	// can be ORed
+	};
+
+	CNumericValueWidget(QWidget* parentPtr = NULL, int sliderFlags = SF_SLIDER_BUTTONS, int inputPolicy = 0, int maxPrecision = 2);
 
 	void SetUnitInfo(const QString& name, const QString& description, const imath::IUnitInfo* unitInfoPtr);
 

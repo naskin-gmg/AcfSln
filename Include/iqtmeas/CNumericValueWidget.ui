@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>CNumericValueWidget</class>
  <widget class="QWidget" name="CNumericValueWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>160</width>
+    <height>49</height>
+   </rect>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -16,7 +24,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="ValueLayout">
      <item>
       <widget class="QLabel" name="DescriptionLabel">
        <property name="sizePolicy">
