@@ -12,6 +12,14 @@ namespace ihotf
 {
 
 
+// public methods
+
+CFileSystemChangeStorage::CFileSystemChangeStorage()
+	:m_mutex(QMutex::Recursive)
+{
+}
+
+
 // reimplemented (ihotf::IFileSystemChangeStorage)
 
 int CFileSystemChangeStorage::GetStorageItemsCount() const
@@ -88,7 +96,9 @@ void CFileSystemChangeStorage::ResetStorage()
 {
 	QMutexLocker locker(&m_mutex);
 
-	istd::CChangeNotifier changePtr(this);
+	const istd::IChangeable::ChangeSet updateItemChangeSet(CF_DATA_RESET);
+	istd::CChangeNotifier notifier(this, &updateItemChangeSet);
+	Q_UNUSED(notifier);
 
 	m_storageItems.clear();
 }

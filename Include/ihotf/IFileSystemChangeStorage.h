@@ -40,7 +40,12 @@ public:
 		/**
 			File's attributes were changed.
 		*/
-		CF_ATTRIBUTE_CHANGED
+		CF_ATTRIBUTE_CHANGED,
+
+		/**
+			All data was clear.
+		*/
+		CF_DATA_RESET
 	};
 
 	/**

@@ -21,6 +21,8 @@ namespace ihotf
 class CFileSystemChangeStorage: virtual public ihotf::IFileSystemChangeStorage
 {
 public:
+	CFileSystemChangeStorage();
+
 	// reimplemented (ihotf::IFileSystemChangeStorage)
 	virtual int	 GetStorageItemsCount() const;
 	virtual QString GetItemPath(int fileIndex) const;
