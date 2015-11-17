@@ -187,7 +187,10 @@ int CRegistryLoaderComp::SaveToFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, true), m_versionInfoCompPtr.GetPtr(), this);
+				QString layoutFilePath = GetLayoutPath(filePath, true);
+				QFile(layoutFilePath).setPermissions(QFileDevice::WriteUser);
+
+				ifile::TFileSerializerComp<ifile::CSimpleXmlFileReadArchive, ifile::CSimpleXmlFileWriteArchive>::WriteArchiveEx layoutArchive(layoutFilePath, m_versionInfoCompPtr.GetPtr(), this);
 				Q_ASSERT(layoutArchive.IsStoring());
 
 				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
@@ -217,7 +220,10 @@ int CRegistryLoaderComp::SaveToFile(
 					return OS_FAILED;
 				}
 
-				ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(GetLayoutPath(filePath, false), m_versionInfoCompPtr.GetPtr(), this);
+				QString layoutFilePath = GetLayoutPath(filePath, false);
+				QFile(layoutFilePath).setPermissions(QFileDevice::WriteUser);
+
+				ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(layoutFilePath, m_versionInfoCompPtr.GetPtr(), this);
 				Q_ASSERT(layoutArchive.IsStoring());
 
 				if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
