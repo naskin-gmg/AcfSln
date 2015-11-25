@@ -19,6 +19,7 @@ CSupplierCompBase::CSupplierCompBase()
 :	m_workStatus(WS_INVALID),
 	m_inputsObserver(this),
 	m_paramsObserver(this),
+	m_paramsSetPtr(NULL),
 	m_areParametersValid(false)
 {
 }
@@ -107,7 +108,7 @@ const ilog::IMessageContainer* CSupplierCompBase::GetWorkMessages(int messageTyp
 
 iprm::IParamsSet* CSupplierCompBase::GetModelParametersSet() const
 {
-	return m_paramsSetCompPtr.GetPtr();
+	return m_paramsSetPtr;
 }
 
 
@@ -191,7 +192,9 @@ void CSupplierCompBase::OnComponentCreated()
 
 	m_productChangeNotifierPtr.Reset();
 
-	if (m_paramsSetCompPtr.IsValid() && m_paramsSetModelCompPtr.IsValid()){
+	m_paramsSetPtr = m_paramsSetCompPtr.GetPtr();
+
+	if ((m_paramsSetPtr != NULL) && m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
 	}
 
@@ -216,6 +219,8 @@ void CSupplierCompBase::OnComponentDestroyed()
 		m_productChangeNotifierPtr->Abort();
 	}
 	m_productChangeNotifierPtr.Reset();
+
+	m_paramsSetPtr = NULL;
 
 	BaseClass::OnComponentDestroyed();
 }

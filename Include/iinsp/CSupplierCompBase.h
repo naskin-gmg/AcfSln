@@ -196,6 +196,8 @@ private:
 	imod::TModelWrap<ilog::CMessageContainer> m_tempMessageContainer;
 	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
 
+	iprm::IParamsSet* m_paramsSetPtr;
+
 	bool m_areParametersValid;
 };
 
