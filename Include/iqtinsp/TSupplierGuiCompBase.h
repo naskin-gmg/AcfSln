@@ -4,6 +4,7 @@
 
 // Qt includes
 #include<QtCore/QtGlobal>
+#include<QtCore/QMap>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QMessageBox>
 #else
@@ -12,7 +13,7 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-#include "istd/TOptDelPtr.h"
+#include "istd/TDelPtr.h"
 #include "ifile/IFilePersistence.h"
 #include "imod/IObserver.h"
 #include "iprm/IParamsSet.h"
@@ -165,7 +166,8 @@ private:
 	I_ATTR(int, m_viewCalibrationModeAttrPtr);
 
 	bool m_areParamsEditable;
-	istd::TOptDelPtr<i2d::ICalibration2d> m_storedCalibrationPtr;
+	typedef QMap<const iqt2d::IViewProvider*, istd::TDelPtr<i2d::ICalibration2d> > ProviderToCalibrationMap;
+	ProviderToCalibrationMap m_providerToCalibrationMap;
 };
 
 
@@ -194,8 +196,8 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider*
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
 				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
 				if (calibrationPtr != NULL){
-					m_storedCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe(), true);
-					viewPtr->SetDisplayCalibration(m_storedCalibrationPtr.GetPtr());
+					m_providerToCalibrationMap[providerPtr].SetCastedOrRemove(calibrationPtr->CloneMe());
+					viewPtr->SetDisplayCalibration(m_providerToCalibrationMap[providerPtr].GetPtr());
 				}
 			}
 		}
@@ -214,6 +216,19 @@ void TSupplierGuiCompBase<UI, WidgetType>::AddItemsToScene(iqt2d::IViewProvider*
 template <class UI, class WidgetType>
 void TSupplierGuiCompBase<UI, WidgetType>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
+	if (		m_providerToCalibrationMap.contains(providerPtr) &&
+				(*m_viewCalibrationModeAttrPtr > VCM_NONE) &&
+				(*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS)){
+		iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
+		const i2d::ICalibration2d* calibrationPtr = m_providerToCalibrationMap[providerPtr].GetPtr();
+
+		if ((viewPtr != NULL) && (calibrationPtr != NULL) && (viewPtr->GetCalibration() == calibrationPtr)){
+			viewPtr->SetDisplayCalibration(NULL);
+		}
+	}
+
+	m_providerToCalibrationMap.remove(providerPtr);
+
 	if (m_paramsSetExtenderCompPtr.IsValid()){
 		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);
 	}
