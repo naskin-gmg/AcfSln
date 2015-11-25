@@ -193,9 +193,12 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 {
 	const iimg::IBitmap* bitmapPtr = NULL;
 
-	iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(GetObservedObject());
-	if (providerPtr != NULL){
-		bitmapPtr = providerPtr->GetBitmap();
+	iinsp::ISupplier* supplierPtr = GetObservedObject();
+	if ((supplierPtr != NULL) && (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_OK)){
+		iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(supplierPtr);
+		if (providerPtr != NULL){
+			bitmapPtr = providerPtr->GetBitmap();
+		}
 	}
 
 	if ((bitmapPtr == NULL) || ((bitmapPtr != NULL) && !m_bitmap.CopyFrom(*bitmapPtr))){
