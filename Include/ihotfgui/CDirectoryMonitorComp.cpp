@@ -404,6 +404,9 @@ void CDirectoryMonitorComp::StartObserverThread()
 
 		BaseClass2::start(QThread::LowPriority);
 	}
+	else{
+		SendWarningMessage(0, QString("Start observing of '%1' failed. Folder doesn't exist").arg(m_currentDirectory.absolutePath()), "DirectoryMonitor");
+	}
 }
 
 
