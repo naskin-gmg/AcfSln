@@ -39,6 +39,8 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 	ifile::CCompactXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
 
 	if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
+		SendErrorMessage(0, QString(tr("Working registry could not be saved into %1. ACF runtime execution canceled")).arg(m_tempFileName));
+
 		return false;
 	}
 
