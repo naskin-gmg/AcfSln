@@ -12,7 +12,7 @@ namespace iinsp
 {
 
 
-const istd::IChangeable::ChangeSet CSupplierCompBase::s_supplierResultsSet(CF_SUPPLIER_RESULTS);
+static const istd::IChangeable::ChangeSet s_supplierResultsSet(iinsp::ISupplier::CF_SUPPLIER_RESULTS);
 
 
 CSupplierCompBase::CSupplierCompBase()
