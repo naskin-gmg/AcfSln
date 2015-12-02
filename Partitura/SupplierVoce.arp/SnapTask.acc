@@ -1,30 +1,33 @@
 <Acf Keywords="Task Image Acquisition Camera" Description="Image acquisition task using camera to retrive image">
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Number="4041" Description="ACF" Id="0"/>
+            <Version Number="1500" Description="ACF-Solutions" Id="1"/>
+            <Version Number="328706" Description="Qt Framework" Id="1023"/>
         </VersionInfos>
     </AcfHeader>
     <ElementsList>
-        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
+        <Element PackageId="BitmapPck" ComponentId="Bitmap" Id="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="SnapBitmapSupplier" Id="ImageTask" PackageId="CameraPck">
+        <Element PackageId="CameraPck" ComponentId="SnapBitmapSupplier" Id="ImageTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Camera" Id="BitmapAcquisition" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="Camera" Id="BitmapAcquisition">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
-                        <Data Value="Bitmap" IsEnabled="true"/>
+                    <AttributeInfo Type="Factory" ExportId="" Id="BitmapFactory">
+                        <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Type="Boolean" ExportId="EnableVerbose" Id="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="CameraParamsSet" Id="ParamsSet" Type="Reference">
+                    <AttributeInfo Type="Reference" ExportId="Log" Id="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Type="Reference" ExportId="CameraParamsSet" Id="ParamsSet">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
