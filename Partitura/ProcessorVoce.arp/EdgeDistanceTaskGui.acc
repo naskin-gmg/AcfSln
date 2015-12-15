@@ -1,24 +1,27 @@
-<Acf Keywords="Circle Finder Parameters GUI" Description="Gui for for circle finder parameter set using as AOI annulus segment">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Gui for for circle finder parameter set using as AOI annulus segment</Description>
+    <Keywords>Circle Finder Parameters GUI</Keywords>
     <ElementsList>
-        <Element ComponentId="CaliperParamsGui" Id="CaliperParams" PackageId="QtIprPck">
+        <Element Id="CaliperParams" PackageId="QtIprPck" ComponentId="CaliperParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="CaliperParamsSetGui" PackageId="QtGuiPck">
+        <Element Id="CaliperParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="0" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -27,7 +30,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Region</Value>
@@ -36,7 +39,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Geometry</Value>
@@ -46,70 +49,70 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowAllShapes" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowAllShapes" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileDialogLoader" Id="FileDialogLoader" PackageId="FileGuiPck">
+        <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XmlFileSerializer</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="NumericParamsGui" Id="FilterParams" PackageId="QtMeasPck">
+        <Element Id="FilterParams" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="GeneralSupplierGui" Id="GeneralSupplierGui" PackageId="QtInspectionPck">
+        <Element Id="GeneralSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ParamsLoader" Type="Reference">
-                        <Data Value="FileDialogLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
-                        <Data Value="CaliperParamsSetGui" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CaliperParamsSetGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ViewCalibrationProvider" Id="ViewCalibrationProvider" Type="Reference">
+                    <AttributeInfo Id="ViewCalibrationProvider" Type="Reference" ExportId="ViewCalibrationProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="AnnulusSegmentParamsGui" Id="Region" PackageId="QtViewPck">
+        <Element Id="Region" PackageId="QtViewPck" ComponentId="AnnulusSegmentParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="SimpleXmlFileSerializer" Id="XmlFileSerializer" PackageId="FilePck">
+        <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>cifix.gz</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
+                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Circle finder compressed parameters</Value>
@@ -117,7 +120,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -133,7 +136,7 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="GeneralSupplierGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="CaliperParamsSetGui" ExportedId="TaskParamsGui"/>
-        <Component ComponentId="GeneralSupplierGui/VisualStatus" ExportedId="VisualStatus"/>
+        <Component ExportedId="TaskParamsGui" ComponentId="CaliperParamsSetGui"/>
+        <Component ExportedId="VisualStatus" ComponentId="GeneralSupplierGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>

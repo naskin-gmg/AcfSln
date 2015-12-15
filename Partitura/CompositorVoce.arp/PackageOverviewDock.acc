@@ -1,41 +1,44 @@
-<Acf Keywords="Package View Tag='GUI'" Description="Package overview docking widget">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Package overview docking widget</Description>
+    <Keywords>Package View Tag='GUI'</Keywords>
     <ElementsList>
-        <Element ComponentId="PackageOverview" Id="PackageOverview" PackageId="CompositorPck">
+        <Element Id="PackageOverview" PackageId="CompositorPck" ComponentId="PackageOverview">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ConfigFilePath" Id="ConfigFilePath" Type="Reference">
+                    <AttributeInfo Id="ConfigFilePath" Type="Reference" ExportId="ConfigFilePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnvironmentManager" Id="EnvironmentManager" Type="Reference">
+                    <AttributeInfo Id="EnvironmentManager" Type="Reference" ExportId="EnvironmentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="QuickHelpGui" Id="QuickHelpGui" Type="Reference">
+                    <AttributeInfo Id="QuickHelpGui" Type="Reference" ExportId="QuickHelpGui">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DockWidgetGui" Id="PackageOverviewDock" PackageId="QtGuiPck">
+        <Element Id="PackageOverviewDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
-                        <Data Value="Packages" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Packages"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="PackageOverview" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="PackageOverview"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -51,6 +54,6 @@
         <Interface InterfaceId="iqtgui::IMainWindowComponent" ComponentId="PackageOverviewDock"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="PackageOverview/LocalMetaInfoManager" ExportedId="LocalMetaInfoManager"/>
+        <Component ExportedId="LocalMetaInfoManager" ComponentId="PackageOverview/LocalMetaInfoManager"/>
     </ExportedComponents>
 </Acf>

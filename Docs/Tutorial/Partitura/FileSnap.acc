@@ -1,35 +1,38 @@
-<Acf Keywords="" Description="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="FileCamera" Id="FileCamera" PackageId="ProcessorVoce">
+        <Element Id="FileCamera" PackageId="ProcessorVoce" ComponentId="FileCamera">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultDir" Type="String">
-                        <Data Value="C://" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="C://"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Framework" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SnapFramework" Id="Framework" PackageId="SnapTutorialVoce">
+        <Element Id="Framework" PackageId="SnapTutorialVoce" ComponentId="SnapFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="BitmapAcquisition" Type="Reference">
-                        <Data Value="FileCamera" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapAcquisition" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
-                        <Data Value="FileCamera" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
-                        <Data Value="FileCamera/SetGui" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

@@ -1,43 +1,46 @@
-<Acf Keywords="Hotfolder GUI Processing" Description="Processing item preview GUI component">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Processing item preview GUI component</Description>
+    <Keywords>Hotfolder GUI Processing</Keywords>
     <ElementsList>
-        <Element ComponentId="FileNameParam" Id="InputFileName" PackageId="FilePck">
+        <Element Id="InputFileName" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="OutputFileName" PackageId="FilePck">
+        <Element Id="OutputFileName" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ProcessingItemPreviewGui" Id="ProcessingItemPreviewGui" PackageId="HotfolderGuiPck">
+        <Element Id="ProcessingItemPreviewGui" PackageId="HotfolderGuiPck" ComponentId="ProcessingItemPreviewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="InputFileName" Type="Reference">
-                        <Data Value="InputFileName" IsEnabled="true"/>
+                    <AttributeInfo Id="InputFileName" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InputFileName"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InputFilePreview" Id="InputPreview" Type="Reference">
+                    <AttributeInfo Id="InputPreview" Type="Reference" ExportId="InputFilePreview">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="OutputFileName" Type="Reference">
-                        <Data Value="OutputFileName" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputFileName" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OutputFileName"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="OutputFilePreview" Id="OutputPreview" Type="Reference">
+                    <AttributeInfo Id="OutputPreview" Type="Reference" ExportId="OutputFilePreview">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

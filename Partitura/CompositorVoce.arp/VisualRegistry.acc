@@ -1,37 +1,40 @@
-<Acf Keywords="" Description="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="SelectedDocModelBinder" Id="RegistryModelBinder" PackageId="BasePck">
+        <Element Id="RegistryModelBinder" PackageId="BasePck" ComponentId="SelectedDocModelBinder">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ActivationObject" Type="Reference">
-                        <Data Value="VisualRegistry" IsEnabled="true"/>
+                    <AttributeInfo Id="ActivationObject" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VisualRegistry"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="VisualRegistry" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VisualRegistry"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="RegistryObservers" Id="Observers" Type="Reference[]">
+                    <AttributeInfo Id="Observers" Type="Reference[]" ExportId="RegistryObservers">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="VisualRegistry" Id="VisualRegistry" PackageId="CompositorPck">
+        <Element Id="VisualRegistry" PackageId="CompositorPck" ComponentId="VisualRegistry">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

@@ -1,24 +1,27 @@
-<Acf Keywords="Hotfolder GUI" Description="Hotfolder parmeter UI">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Hotfolder parmeter UI</Description>
+    <Keywords>Hotfolder GUI</Keywords>
     <ElementsList>
-        <Element ComponentId="DirectoryMonitorParamGui" Id="DirectoryMonitorParams" PackageId="FpfVoce">
+        <Element Id="DirectoryMonitorParams" PackageId="FpfVoce" ComponentId="DirectoryMonitorParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="HotfolderSettingsGui" PackageId="QtGuiPck">
+        <Element Id="HotfolderSettingsGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>InputDirectories</Value>
@@ -27,7 +30,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>InputDirectories</Value>
@@ -37,7 +40,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Input</Value>
@@ -50,19 +53,19 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DynamicDirectoryParamGui" Id="InputDirectories" PackageId="FpfVoce">
+        <Element Id="InputDirectories" PackageId="FpfVoce" ComponentId="DynamicDirectoryParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParamGui" Id="OutputDirectory" PackageId="QtGuiPck">
+        <Element Id="OutputDirectory" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathLabel" Type="String">
-                        <Data Value="Output Directory" IsEnabled="true"/>
+                    <AttributeInfo Id="PathLabel" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Output Directory"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StartHint" Type="String">
-                        <Data Value="&lt;Enter the path of the hotfolder's output directory>" IsEnabled="true"/>
+                    <AttributeInfo Id="StartHint" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="&lt;Enter the path of the hotfolder's output directory&gt;"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

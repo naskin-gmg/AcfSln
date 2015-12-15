@@ -1,43 +1,46 @@
-<Acf Keywords="Smooth Processor" Description="Rectangular smoothing filter definition with parameter control">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Rectangular smoothing filter definition with parameter control</Description>
+    <Keywords>Smooth Processor</Keywords>
     <ElementsList>
-        <Element ComponentId="BitmapFileProcessing" Id="BitmapFileProcessing" PackageId="FpfVoce">
+        <Element Id="BitmapFileProcessing" PackageId="FpfVoce" ComponentId="BitmapFileProcessing">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ImageProcessor" Type="Reference">
-                        <Data Value="RectImageSmoothProcessor" IsEnabled="true"/>
+                    <AttributeInfo Id="ImageProcessor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="RectImageSmoothProcessor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ProcessingParams" Type="Reference">
-                        <Data Value="FilterParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="ProcessingParams" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParamsSet"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="File" PackageId="FilePck">
+        <Element Id="File" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultPath" Type="String">
-                        <Data Value="HotfolderProcessingParams.xml" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderProcessingParams.xml"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="NumericParams" Id="FilterParams" PackageId="MeasPck">
+        <Element Id="FilterParams" PackageId="MeasPck" ComponentId="NumericParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Values" Type="Real[]">
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>15</Value>
@@ -48,22 +51,22 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="NumericParamsGui" Id="FilterParamsGui" PackageId="QtMeasPck">
+        <Element Id="FilterParamsGui" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSet" Id="FilterParamsSet" PackageId="BasePck">
+        <Element Id="FilterParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterParams</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterParams</Value>
@@ -73,17 +76,17 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="FilterParamsSetGui" PackageId="QtGuiPck">
+        <Element Id="FilterParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterParamsGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>FilterParams</Value>
@@ -93,47 +96,47 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ModelDialogGui" Id="ModelDialogGui" PackageId="QtGuiPck">
+        <Element Id="ModelDialogGui" PackageId="QtGuiPck" ComponentId="ModelDialogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DialogTitle" Type="String">
-                        <Data Value="Filter Parameters" IsEnabled="true"/>
+                    <AttributeInfo Id="DialogTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Filter Parameters"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
-                        <Data Value="FilterParamsSetGui" IsEnabled="true"/>
+                    <AttributeInfo Id="Gui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParamsSetGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="FilterParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParamsSet"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="WorkingDataFactory" Type="Factory">
-                        <Data Value="FilterParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="WorkingDataFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParamsSet"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="XmlFilePersistence" Id="ProcessingParamsPersistence" PackageId="AcfVoce">
+        <Element Id="ProcessingParamsPersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="File" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="File"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="FilterParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParamsSet"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="RectImageSmoothProcessor" Id="RectImageSmoothProcessor" PackageId="IprPck">
+        <Element Id="RectImageSmoothProcessor" PackageId="IprPck" ComponentId="RectImageSmoothProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsId" Type="Id">
-                        <Data Value="FilterParams" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -145,6 +148,6 @@
         <Interface InterfaceId="iqtgui::IDialog" ComponentId="ModelDialogGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="FilterParamsSet" ExportedId="FilterParams"/>
+        <Component ExportedId="FilterParams" ComponentId="FilterParamsSet"/>
     </ExportedComponents>
 </Acf>

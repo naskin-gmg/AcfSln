@@ -1,20 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="1050" ComponentName="BitmapLoader" Y="650" Note=""/>
-        <Element X="625" ComponentName="ProcessedFilePath" Y="550" Note=""/>
-        <Element X="550" ComponentName="ProcessingResultsReview" Y="375" Note=""/>
-        <Element X="550" ComponentName="CopyApp" Y="225" Note=""/>
-        <Element X="1075" ComponentName="SnapBitmapSupplier" Y="275" Note=""/>
-        <Element X="1050" ComponentName="FileCamera" Y="525" Note=""/>
-        <Element X="1075" ComponentName="Bitmap" Y="125" Note=""/>
-        <Element X="225" ComponentName="ConsoleLog" Y="375" Note=""/>
+        <Element ComponentName="Bitmap" X="1075" Y="125" Note=""/>
+        <Element ComponentName="ProcessedFilePath" X="625" Y="550" Note=""/>
+        <Element ComponentName="SnapBitmapSupplier" X="1075" Y="275" Note=""/>
+        <Element ComponentName="ProcessingResultsReview" X="550" Y="375" Note=""/>
+        <Element ComponentName="CopyApp" X="550" Y="225" Note=""/>
+        <Element ComponentName="FileCamera" X="1050" Y="525" Note=""/>
+        <Element ComponentName="BitmapLoader" X="1050" Y="650" Note=""/>
+        <Element ComponentName="ConsoleLog" X="225" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

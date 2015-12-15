@@ -1,70 +1,73 @@
-<Acf Keywords="Supplier Edge Contour Extraction Processing Get Provider Task Category='&quot;Data Processing&quot;'" Description="Extracts edges from image">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Extracts edges from image</Description>
+    <Keywords>Supplier Edge Contour Extraction Processing Get Provider Task Category='&quot;Data Processing&quot;'</Keywords>
     <ElementsList>
-        <Element ComponentId="EdgeExtractor" Id="EdgeExtractor" PackageId="">
+        <Element Id="EdgeExtractor" PackageId="" ComponentId="EdgeExtractor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="BitmapProvider" Type="Reference">
-                        <Data Value="SmoothedImageSupplier" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SmoothedImageSupplier"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="CalibrationProvider" Id="CalibrationProvider" Type="Reference">
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="KeepSingletons" Id="KeepSingletons" Type="Boolean">
+                    <AttributeInfo Id="KeepSingletons" Type="Boolean" ExportId="KeepSingletons">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MaxNodesCount" Id="MaxNodesCount" Type="Integer">
+                    <AttributeInfo Id="MaxNodesCount" Type="Integer" ExportId="MaxNodesCount">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
-                        <Data Value="ProcessingParams" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="GrayImageSupplier" Id="GrayImageSupplier" PackageId="">
+        <Element Id="GrayImageSupplier" PackageId="" ComponentId="GrayImageSupplier">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="InspectionTask" Id="InspectionTask" PackageId="InspectionPck">
+        <Element Id="InspectionTask" PackageId="InspectionPck" ComponentId="InspectionTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="GeneralParams" Type="Reference">
-                        <Data Value="ProcessingParams" IsEnabled="true"/>
+                    <AttributeInfo Id="GeneralParams" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SerializeSuppliers" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="SerializeSuppliers" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Subtasks" Type="Reference[]">
+                    <AttributeInfo Id="Subtasks" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>GrayImageSupplier</Value>
@@ -77,35 +80,35 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ProcessingParams" Id="ProcessingParams" PackageId="">
+        <Element Id="ProcessingParams" PackageId="" ComponentId="ProcessingParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="EdgeExtractionConstraints" Type="Reference">
-                        <Data Value="EdgeExtractor/FastEdgesExtractor" IsEnabled="true"/>
+                    <AttributeInfo Id="EdgeExtractionConstraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="EdgeExtractor/FastEdgesExtractor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="EdgeReductionConstraints" Type="Reference">
-                        <Data Value="EdgeExtractor/EdgesReductor" IsEnabled="true"/>
+                    <AttributeInfo Id="EdgeReductionConstraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="EdgeExtractor/EdgesReductor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SmoothFilterConstraints" Type="Reference">
-                        <Data Value="SmoothedImageSupplier/RectImageSmoothProcessor" IsEnabled="true"/>
+                    <AttributeInfo Id="SmoothFilterConstraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SmoothedImageSupplier/RectImageSmoothProcessor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SmoothedImageSupplier" Id="SmoothedImageSupplier" PackageId="">
+        <Element Id="SmoothedImageSupplier" PackageId="" ComponentId="SmoothedImageSupplier">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="BitmapProvider" Type="Reference">
-                        <Data Value="GrayImageSupplier" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GrayImageSupplier"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
-                        <Data Value="ProcessingParams" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -113,93 +116,93 @@
     </ElementsList>
     <EmbeddedRegistriesList>
         <EmbeddedRegistry Id="EdgeExtractor">
-            <Data Keywords="" Description="">
+            <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element ComponentId="EdgesReductor" Id="EdgesReductor" PackageId="EdgePck">
+                    <Element Id="EdgesReductor" PackageId="EdgePck" ComponentId="EdgesReductor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ToleranceParamsId" Type="Id">
-                                    <Data Value="ReductionThreshold" IsEnabled="true"/>
+                                <AttributeInfo Id="ToleranceParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="ReductionThreshold"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="ExtractedEdgeLinesSupplier" Id="ExtractedEdgesSupplier" PackageId="EdgePck">
+                    <Element Id="ExtractedEdgesSupplier" PackageId="EdgePck" ComponentId="ExtractedEdgeLinesSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="AdditionalTriggerInputs" Id="AdditionalTriggerInputs" Type="Reference[]">
+                                <AttributeInfo Id="AdditionalTriggerInputs" Type="Reference[]" ExportId="AdditionalTriggerInputs">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="CalibrationProvider" Id="CalibrationProvider" Type="Reference">
+                                <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
-                                    <Data Value="EdgeExtractor" IsEnabled="true"/>
+                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="EdgeExtractor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="EdgesExtractor" Type="Reference">
-                                    <Data Value="FastEdgesExtractor" IsEnabled="true"/>
+                                <AttributeInfo Id="EdgesExtractor" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="FastEdgesExtractor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="FastEdgesExtractor" Id="FastEdgesExtractor" PackageId="EdgePck">
+                    <Element Id="FastEdgesExtractor" PackageId="EdgePck" ComponentId="FastEdgesExtractor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="KeepSingletons" Id="KeepSingletons" Type="Boolean">
+                                <AttributeInfo Id="KeepSingletons" Type="Boolean" ExportId="KeepSingletons">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="MaxNodesCount" Id="MaxNodesCount" Type="Integer">
-                                    <Data Value="500000" IsEnabled="true"/>
+                                <AttributeInfo Id="MaxNodesCount" Type="Integer" ExportId="MaxNodesCount">
+                                    <Data IsEnabled="true" Value="500000"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ThresholdParamId" Type="Id">
-                                    <Data Value="EdgeThreshold" IsEnabled="true"/>
+                                <AttributeInfo Id="ThresholdParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="EdgeThreshold"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="ProcessedEdgeLinesSupplier" Id="ReducedEdgesSupplier" PackageId="EdgePck">
+                    <Element Id="ReducedEdgesSupplier" PackageId="EdgePck" ComponentId="ProcessedEdgeLinesSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
-                                    <Data Value="EdgeReductor" IsEnabled="true"/>
+                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="EdgeReductor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="EdgeLinesProvider" Type="Reference">
-                                    <Data Value="ExtractedEdgesSupplier" IsEnabled="true"/>
+                                <AttributeInfo Id="EdgeLinesProvider" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ExtractedEdgesSupplier"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="EdgesProcessor" Type="Reference">
-                                    <Data Value="EdgesReductor" IsEnabled="true"/>
+                                <AttributeInfo Id="EdgesProcessor" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="EdgesReductor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
@@ -213,52 +216,52 @@
                     <Interface InterfaceId="istd::IChangeable" ComponentId="ReducedEdgesSupplier"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ComponentId="EdgesReductor" ExportedId="EdgesReductor"/>
-                    <Component ComponentId="ExtractedEdgesSupplier" ExportedId="ExtractedEdgesSupplier"/>
-                    <Component ComponentId="FastEdgesExtractor" ExportedId="FastEdgesExtractor"/>
-                    <Component ComponentId="ReducedEdgesSupplier" ExportedId="ReducedEdgesSupplier"/>
+                    <Component ExportedId="EdgesReductor" ComponentId="EdgesReductor"/>
+                    <Component ExportedId="ExtractedEdgesSupplier" ComponentId="ExtractedEdgesSupplier"/>
+                    <Component ExportedId="FastEdgesExtractor" ComponentId="FastEdgesExtractor"/>
+                    <Component ExportedId="ReducedEdgesSupplier" ComponentId="ReducedEdgesSupplier"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>
         <EmbeddedRegistry Id="GrayImageSupplier">
-            <Data Keywords="" Description="">
+            <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element ComponentId="Bitmap" Id="BitmapGray" PackageId="BitmapPck">
+                    <Element Id="BitmapGray" PackageId="BitmapPck" ComponentId="Bitmap">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
-                    <Element ComponentId="ProcessedBitmapSupplier" Id="GrayImageSupplier" PackageId="IprPck">
+                    <Element Id="GrayImageSupplier" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
-                                    <Data Value="BitmapGray" IsEnabled="true"/>
+                                <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                                    <Data IsEnabled="true" Value="BitmapGray"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="BitmapProcessor" Type="Reference">
-                                    <Data Value="RgbToGrayProcessor" IsEnabled="true"/>
+                                <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="RgbToGrayProcessor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
-                                    <Data Value="GrayImage" IsEnabled="true"/>
+                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="GrayImage"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="RgbToGrayProcessor" Id="RgbToGrayProcessor" PackageId="IprPck">
+                    <Element Id="RgbToGrayProcessor" PackageId="IprPck" ComponentId="RgbToGrayProcessor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
@@ -277,15 +280,15 @@
             </Data>
         </EmbeddedRegistry>
         <EmbeddedRegistry Id="ProcessingParams">
-            <Data Keywords="" Description="">
+            <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element ComponentId="NumericParams" Id="EdgeExtractionParams" PackageId="MeasPck">
+                    <Element Id="EdgeExtractionParams" PackageId="MeasPck" ComponentId="NumericParams">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EdgeExtractionConstraints" Id="Constraints" Type="Reference">
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="EdgeExtractionConstraints">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="Values" Type="Real[]">
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>0.1</Value>
@@ -293,19 +296,19 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
-                                    <Data Value="2" IsEnabled="true"/>
+                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="NumericParams" Id="EdgeReductionParams" PackageId="MeasPck">
+                    <Element Id="EdgeReductionParams" PackageId="MeasPck" ComponentId="NumericParams">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EdgeReductionConstraints" Id="Constraints" Type="Reference">
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="EdgeReductionConstraints">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="Values" Type="Real[]">
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>0.5</Value>
@@ -313,16 +316,16 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
-                                    <Data Value="2" IsEnabled="true"/>
+                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="ComposedParamsSet" Id="ProcessingParams" PackageId="BasePck">
+                    <Element Id="ProcessingParams" PackageId="BasePck" ComponentId="ComposedParamsSet">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>SmoothParams</Value>
@@ -331,7 +334,7 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>SmoothFilter</Value>
@@ -340,19 +343,19 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="TypeId" Type="Id">
-                                    <Data Value="ContourExtraction" IsEnabled="true"/>
+                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="ContourExtraction"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="NumericParams" Id="SmoothParams" PackageId="MeasPck">
+                    <Element Id="SmoothParams" PackageId="MeasPck" ComponentId="NumericParams">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="SmoothFilterConstraints" Id="Constraints" Type="Reference">
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="SmoothFilterConstraints">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="Values" Type="Real[]">
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>3</Value>
@@ -360,8 +363,8 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
-                                    <Data Value="2" IsEnabled="true"/>
+                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -375,55 +378,55 @@
                     <Interface InterfaceId="istd::IChangeable" ComponentId="ProcessingParams"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ComponentId="EdgeExtractionParams" ExportedId="ThresholdParam"/>
+                    <Component ExportedId="ThresholdParam" ComponentId="EdgeExtractionParams"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>
         <EmbeddedRegistry Id="SmoothedImageSupplier">
-            <Data Keywords="" Description="">
+            <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element ComponentId="Bitmap" Id="BitmapSmooth" PackageId="BitmapPck">
+                    <Element Id="BitmapSmooth" PackageId="BitmapPck" ComponentId="Bitmap">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
-                    <Element ComponentId="RectImageSmoothProcessor" Id="RectImageSmoothProcessor" PackageId="IprPck">
+                    <Element Id="RectImageSmoothProcessor" PackageId="IprPck" ComponentId="RectImageSmoothProcessor">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="ParamsId" Type="Id">
-                                    <Data Value="SmoothFilter" IsEnabled="true"/>
+                                <AttributeInfo Id="ParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="SmoothFilter"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="ProcessedBitmapSupplier" Id="SmoothedImageSupplier" PackageId="IprPck">
+                    <Element Id="SmoothedImageSupplier" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="" Id="BitmapFactory" Type="Factory">
-                                    <Data Value="BitmapSmooth" IsEnabled="true"/>
+                                <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                                    <Data IsEnabled="true" Value="BitmapSmooth"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="BitmapProcessor" Type="Reference">
-                                    <Data Value="RectImageSmoothProcessor" IsEnabled="true"/>
+                                <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="BitmapProvider" Id="BitmapProvider" Type="Reference">
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="DiagnosticName" Type="String">
-                                    <Data Value="SmoothedImage" IsEnabled="true"/>
+                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                    <Data IsEnabled="true" Value="SmoothedImage"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="ParamsSet" Id="ParamsSet" Type="Reference">
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
@@ -439,7 +442,7 @@
                     <Interface InterfaceId="istd::IChangeable" ComponentId="SmoothedImageSupplier"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ComponentId="RectImageSmoothProcessor" ExportedId="RectImageSmoothProcessor"/>
+                    <Component ExportedId="RectImageSmoothProcessor" ComponentId="RectImageSmoothProcessor"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>
@@ -455,6 +458,6 @@
         <Interface InterfaceId="istd::IInformationProvider" ComponentId="InspectionTask"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="InspectionTask/Parameters" ExportedId="Parameters"/>
+        <Component ExportedId="Parameters" ComponentId="InspectionTask/Parameters"/>
     </ExportedComponents>
 </Acf>

@@ -1,26 +1,29 @@
-<Acf Keywords="ACF Editor ARX Company='ImagingTools' Project='ACF-Solutions' Author='&quot;Witold Gantzke&quot; &quot;Kirill Lepskiy&quot;' Category='Tool' Tag='Compositor'" Description="Compositor tool - graphical editor for ACF registry files">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Compositor tool - graphical editor for ACF registry files</Description>
+    <Keywords>ACF Editor ARX Company='ImagingTools' Project='ACF-Solutions' Author='&quot;Witold Gantzke&quot; &quot;Kirill Lepskiy&quot;' Category='Tool' Tag='Compositor'</Keywords>
     <ElementsList>
-        <Element ComponentId="CompositorApplication" Id="Application" PackageId="CompositorVoce">
+        <Element Id="Application" PackageId="CompositorVoce" ComponentId="CompositorApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DocumentTemplates" Type="Reference[]">
+                    <AttributeInfo Id="DocumentTemplates" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CompositorTemplate</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="MainWindowComponents/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainWindowCompTypeIds" Type="Id[]">
+                    <AttributeInfo Id="MainWindowCompTypeIds" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Registry</Value>
@@ -29,7 +32,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainWindowsComponents" Type="Reference[]">
+                    <AttributeInfo Id="MainWindowsComponents" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MainWindowComponents/AttributeEditorDock</Value>
@@ -44,25 +47,25 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CompositorTemplate" Id="CompositorTemplate" PackageId="CompositorVoce">
+        <Element Id="CompositorTemplate" PackageId="CompositorVoce" ComponentId="CompositorTemplate">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DocumentManager" Type="Reference">
-                        <Data Value="Application/DocumentManager" IsEnabled="true"/>
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/DocumentManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="MainWindowComponents/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MetaInfoManager" Type="Reference">
-                        <Data Value="MainWindowComponents/LocalMetaInfoManager" IsEnabled="true"/>
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainWindowComponents/LocalMetaInfoManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PreviewCommandFile" Type="Reference">
-                        <Data Value="Application/PreviewCommandFile" IsEnabled="true"/>
+                    <AttributeInfo Id="PreviewCommandFile" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/PreviewCommandFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="QuickHelpGui" Type="Reference">
-                        <Data Value="MainWindowComponents/QuickHelpDock" IsEnabled="true"/>
+                    <AttributeInfo Id="QuickHelpGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MainWindowComponents/QuickHelpDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RegistrySelectionObservers" Type="Reference[]">
+                    <AttributeInfo Id="RegistrySelectionObservers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MainWindowComponents/AttributeEditorDock</Value>
@@ -70,51 +73,51 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SelectedRegistryObservers" Type="Reference[]">
+                    <AttributeInfo Id="SelectedRegistryObservers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MainWindowComponents/PackageOverviewDock</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
-                        <Data Value="Application" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CompositorDockWidgets" Id="MainWindowComponents" PackageId="CompositorVoce">
+        <Element Id="MainWindowComponents" PackageId="CompositorVoce" ComponentId="CompositorDockWidgets">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="Application" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ConfigFilePath" Type="Reference">
-                        <Data Value="Application/ConfigFile" IsEnabled="true"/>
+                    <AttributeInfo Id="ConfigFilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/ConfigFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ConsistencyInfo" Type="Reference">
-                        <Data Value="CompositorTemplate" IsEnabled="true"/>
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CompositorTemplate"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DocuEditorFileParam" Type="Reference">
-                        <Data Value="Application/HtmlEditorFile" IsEnabled="true"/>
+                    <AttributeInfo Id="DocuEditorFileParam" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/HtmlEditorFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DocumentManager" Type="Reference">
-                        <Data Value="Application/DocumentManager" IsEnabled="true"/>
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/DocumentManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="EnvironmentManager" Type="Reference">
-                        <Data Value="CompositorTemplate/PackagesLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="EnvironmentManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CompositorTemplate/PackagesLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MetaInfoManager" Type="Reference">
-                        <Data Value="CompositorTemplate/PackagesLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CompositorTemplate/PackagesLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TechDocuViewerFileParam" Type="Reference">
-                        <Data Value="Application/HtmlBrowserFile" IsEnabled="true"/>
+                    <AttributeInfo Id="TechDocuViewerFileParam" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/HtmlBrowserFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
-                        <Data Value="Application" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="WindowsList" Type="Reference">
-                        <Data Value="Application/DocumentSelection" IsEnabled="true"/>
+                    <AttributeInfo Id="WindowsList" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/DocumentSelection"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

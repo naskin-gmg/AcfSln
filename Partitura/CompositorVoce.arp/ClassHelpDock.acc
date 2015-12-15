@@ -1,49 +1,52 @@
-<Acf Keywords="" Description="Docking window with compositor &quot;Quick Help&quot;">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Docking window with compositor &quot;Quick Help&quot;</Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="ComponentHelpFileProvider" Id="ComponentHelpFileProvider" PackageId="CompositorPck">
+        <Element Id="ComponentHelpFileProvider" PackageId="CompositorPck" ComponentId="ComponentHelpFileProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DockWidgetGui" Id="QuickHelpDock" PackageId="QtGuiPck">
+        <Element Id="QuickHelpDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DockArea" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
-                        <Data Value="Quick Help" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Quick Help"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="QuickHelpGui" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="QuickHelpGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="QuickHelpGui" Id="QuickHelpGui" PackageId="CompositorPck">
+        <Element Id="QuickHelpGui" PackageId="CompositorPck" ComponentId="QuickHelpGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DocuEditorFileParam" Id="DocuEditorFileParam" Type="Reference">
+                    <AttributeInfo Id="DocuEditorFileParam" Type="Reference" ExportId="DocuEditorFileParam">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="HelpFileProvider" Type="Reference">
-                        <Data Value="ComponentHelpFileProvider" IsEnabled="true"/>
+                    <AttributeInfo Id="HelpFileProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ComponentHelpFileProvider"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TechDocuViewerFileParam" Id="TechDocuViewerParam" Type="Reference">
+                    <AttributeInfo Id="TechDocuViewerParam" Type="Reference" ExportId="TechDocuViewerFileParam">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

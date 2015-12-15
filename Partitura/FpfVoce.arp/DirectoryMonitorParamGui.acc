@@ -1,23 +1,26 @@
-<Acf Keywords="Parameter Directory Monitoring File Observer Tag='GUI'" Description="Directory monitoring parameter GUI">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Directory monitoring parameter GUI</Description>
+    <Keywords>Parameter Directory Monitoring File Observer Tag='GUI'</Keywords>
     <ElementsList>
-        <Element ComponentId="ComposedParamsSetGui" Id="ComposedParamsSetGui" PackageId="QtGuiPck">
+        <Element Id="ComposedParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParamsGui</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParams</Value>
@@ -27,7 +30,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DirectoryMonitorParamsGui" Id="DirectoryMonitorParamsGui" PackageId="HotfolderGuiPck">
+        <Element Id="DirectoryMonitorParamsGui" PackageId="HotfolderGuiPck" ComponentId="DirectoryMonitorParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

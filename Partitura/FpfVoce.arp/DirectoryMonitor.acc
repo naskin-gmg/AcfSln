@@ -1,51 +1,54 @@
-<Acf Keywords="Directory Observer Monitoring Dispatcher File" Description="Directory monitoring component">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Directory monitoring component</Description>
+    <Keywords>Directory Observer Monitoring Dispatcher File</Keywords>
     <ElementsList>
-        <Element ComponentId="DirectoryMonitor" Id="DirectoryMonitor" PackageId="HotfolderGuiPck">
+        <Element Id="DirectoryMonitor" PackageId="HotfolderGuiPck" ComponentId="DirectoryMonitor">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DirParamId" Type="Id">
-                        <Data Value="DirectoryPath" IsEnabled="true"/>
+                    <AttributeInfo Id="DirParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryPath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DirectoryMonitorParamsId" Type="Id">
-                        <Data Value="DirectoryMonitorParams" IsEnabled="true"/>
+                    <AttributeInfo Id="DirectoryMonitorParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorParams"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSet" Type="Reference">
-                        <Data Value="DirectoryMonitorParams" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorParams"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DirectoryMonitorParams" Id="DirectoryMonitorParams" PackageId="FpfVoce">
+        <Element Id="DirectoryMonitorParams" PackageId="FpfVoce" ComponentId="DirectoryMonitorParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DirectoryMonitorParamsGui" Id="DirectoryMonitorParamsGui" PackageId="FpfVoce">
+        <Element Id="DirectoryMonitorParamsGui" PackageId="FpfVoce" ComponentId="DirectoryMonitorParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ModelBinder" Id="ModelBinder" PackageId="BasePck">
+        <Element Id="ModelBinder" PackageId="BasePck" ComponentId="ModelBinder">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="DirectoryMonitorParams" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorParams"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
+                    <AttributeInfo Id="Observers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParamsGui</Value>

@@ -1,32 +1,35 @@
-<Acf Keywords="" Description="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="EdgeDistanceTestFramework" Id="EdgeDistanceTestFramework" PackageId="ImageProcessingTutorialVoce">
+        <Element Id="EdgeDistanceTestFramework" PackageId="ImageProcessingTutorialVoce" ComponentId="EdgeDistanceTestFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Camera" Type="Reference">
-                        <Data Value="FileCamera" IsEnabled="true"/>
+                    <AttributeInfo Id="Camera" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="CameraParamsSet" Type="Reference">
-                        <Data Value="FileCamera" IsEnabled="true"/>
+                    <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="CameraParamsSetGui" Type="Reference">
-                        <Data Value="FileCamera/SetGui" IsEnabled="true"/>
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileCamera" Id="FileCamera" PackageId="ProcessorVoce">
+        <Element Id="FileCamera" PackageId="ProcessorVoce" ComponentId="FileCamera">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="EdgeDistanceTestFramework" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="EdgeDistanceTestFramework"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

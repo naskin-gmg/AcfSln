@@ -1,50 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="150" ComponentName="InspectionTask" Y="50" Note=""/>
-        <Element X="650" ComponentName="SmoothedImageSupplier" Y="375" Note=""/>
-        <Element X="1000" ComponentName="EdgeExtractor" Y="600" Note=""/>
-        <Element X="350" ComponentName="GrayImageSupplier" Y="225" Note=""/>
-        <Element X="200" ComponentName="ProcessingParams" Y="600" Note=""/>
+        <Element ComponentName="ProcessingParams" X="200" Y="600" Note=""/>
+        <Element ComponentName="EdgeExtractor" X="1000" Y="600" Note=""/>
+        <Element ComponentName="InspectionTask" X="150" Y="50" Note=""/>
+        <Element ComponentName="SmoothedImageSupplier" X="650" Y="375" Note=""/>
+        <Element ComponentName="GrayImageSupplier" X="350" Y="225" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
-        <EmbededRegistry Id="SmoothedImageSupplier">
+        <EmbededRegistry Id="ProcessingParams">
             <PositionMap>
-                <Element X="550" ComponentName="SmoothedImageSupplier" Y="225" Note=""/>
-                <Element X="550" ComponentName="RectImageSmoothProcessor" Y="400" Note=""/>
-                <Element X="200" ComponentName="BitmapSmooth" Y="225" Note=""/>
+                <Element ComponentName="ProcessingParams" X="525" Y="200" Note=""/>
+                <Element ComponentName="EdgeExtractionParams" X="500" Y="450" Note=""/>
+                <Element ComponentName="EdgeReductionParams" X="825" Y="450" Note=""/>
+                <Element ComponentName="SmoothParams" X="175" Y="450" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
         <EmbededRegistry Id="EdgeExtractor">
             <PositionMap>
-                <Element X="275" ComponentName="ExtractedEdgesSupplier" Y="225" Note=""/>
-                <Element X="725" ComponentName="EdgesReductor" Y="325" Note=""/>
-                <Element X="275" ComponentName="FastEdgesExtractor" Y="325" Note=""/>
-                <Element X="725" ComponentName="ReducedEdgesSupplier" Y="225" Note=""/>
+                <Element ComponentName="ExtractedEdgesSupplier" X="275" Y="225" Note=""/>
+                <Element ComponentName="ReducedEdgesSupplier" X="725" Y="225" Note=""/>
+                <Element ComponentName="FastEdgesExtractor" X="275" Y="325" Note=""/>
+                <Element ComponentName="EdgesReductor" X="725" Y="325" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="SmoothedImageSupplier">
+            <PositionMap>
+                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
+                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
+                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
         <EmbededRegistry Id="GrayImageSupplier">
             <PositionMap>
-                <Element X="825" ComponentName="BitmapGray" Y="125" Note=""/>
-                <Element X="500" ComponentName="RgbToGrayProcessor" Y="275" Note=""/>
-                <Element X="500" ComponentName="GrayImageSupplier" Y="125" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
-        <EmbededRegistry Id="ProcessingParams">
-            <PositionMap>
-                <Element X="500" ComponentName="EdgeExtractionParams" Y="450" Note=""/>
-                <Element X="825" ComponentName="EdgeReductionParams" Y="450" Note=""/>
-                <Element X="175" ComponentName="SmoothParams" Y="450" Note=""/>
-                <Element X="525" ComponentName="ProcessingParams" Y="200" Note=""/>
+                <Element ComponentName="BitmapGray" X="825" Y="125" Note=""/>
+                <Element ComponentName="RgbToGrayProcessor" X="500" Y="275" Note=""/>
+                <Element ComponentName="GrayImageSupplier" X="500" Y="125" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

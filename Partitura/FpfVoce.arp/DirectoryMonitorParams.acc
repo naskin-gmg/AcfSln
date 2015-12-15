@@ -1,37 +1,40 @@
-<Acf Keywords="Parameter Directory Monitoring File Observer" Description="Directory monitoring parameters">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Directory monitoring parameters</Description>
+    <Keywords>Parameter Directory Monitoring File Observer</Keywords>
     <ElementsList>
-        <Element ComponentId="AutoPersistence" Id="AutoPersistence" PackageId="FilePck">
+        <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FileLoader" Type="Reference">
-                        <Data Value="XmlFileSerializer" IsEnabled="true"/>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="XmlFileSerializer"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="File" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="File"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="ComposedParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ComposedParamsSet"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RestoreOnBegin" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="RestoreOnBegin" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StoreOnEnd" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="StoreOnEnd" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSet" Id="ComposedParamsSet" PackageId="BasePck">
+        <Element Id="ComposedParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryPath</Value>
@@ -39,7 +42,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryPath</Value>
@@ -47,42 +50,42 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TypeId" Id="TypeId" Type="Id">
-                        <Data Value="MonitorFiles" IsEnabled="true"/>
+                    <AttributeInfo Id="TypeId" Type="Id" ExportId="TypeId">
+                        <Data IsEnabled="true" Value="MonitorFiles"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DirectoryMonitorParams" Id="DirectoryMonitorParams" PackageId="HotfolderPck">
+        <Element Id="DirectoryMonitorParams" PackageId="HotfolderPck" ComponentId="DirectoryMonitorParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="DirectoryPath" PackageId="FilePck">
+        <Element Id="DirectoryPath" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="File" PackageId="FilePck">
+        <Element Id="File" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultPath" Type="String">
-                        <Data Value="FolderMonitorParams" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="FolderMonitorParams"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SimpleXmlFileSerializer" Id="XmlFileSerializer" PackageId="FilePck">
+        <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -97,7 +100,7 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="ComposedParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="DirectoryMonitorParams" ExportedId="DirectoryMonitorParams"/>
-        <Component ComponentId="DirectoryPath" ExportedId="DirectoryPath"/>
+        <Component ExportedId="DirectoryMonitorParams" ComponentId="DirectoryMonitorParams"/>
+        <Component ExportedId="DirectoryPath" ComponentId="DirectoryPath"/>
     </ExportedComponents>
 </Acf>

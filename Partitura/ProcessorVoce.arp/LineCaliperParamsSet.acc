@@ -1,21 +1,24 @@
-<Acf Keywords="Caliper Line Parameters Tag='&quot;Image Processing&quot;'" Description="Caliper parameters">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Caliper parameters</Description>
+    <Keywords>Caliper Line Parameters Tag='&quot;Image Processing&quot;'</Keywords>
     <ElementsList>
-        <Element ComponentId="CaliperParams" Id="CaliperParams" PackageId="IprPck">
+        <Element Id="CaliperParams" PackageId="IprPck" ComponentId="CaliperParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSet" Id="CaliperParamsSet" PackageId="BasePck">
+        <Element Id="CaliperParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line</Value>
@@ -24,7 +27,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line</Value>
@@ -33,51 +36,51 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SlaveSets" Id="SlaveSets" Type="Reference[]">
+                    <AttributeInfo Id="SlaveSets" Type="Reference[]" ExportId="SlaveSets">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TypeId" Id="TypeId" Type="Id">
-                        <Data Value="Caliper" IsEnabled="true"/>
+                    <AttributeInfo Id="TypeId" Type="Id" ExportId="TypeId">
+                        <Data IsEnabled="true" Value="Caliper"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Line" Id="Line" PackageId="BasePck">
+        <Element Id="Line" PackageId="BasePck" ComponentId="Line">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="X1" Type="Real">
-                        <Data Value="0" IsEnabled="true"/>
+                    <AttributeInfo Id="X1" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="X2" Type="Real">
-                        <Data Value="100" IsEnabled="true"/>
+                    <AttributeInfo Id="X2" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Y1" Type="Real">
-                        <Data Value="0" IsEnabled="true"/>
+                    <AttributeInfo Id="Y1" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Y2" Type="Real">
-                        <Data Value="100" IsEnabled="true"/>
+                    <AttributeInfo Id="Y2" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="NumericParams" Id="SmoothFilterParams" PackageId="MeasPck">
+        <Element Id="SmoothFilterParams" PackageId="MeasPck" ComponentId="NumericParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="SmoothFilterConstraints" Id="Constraints" Type="Reference">
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="SmoothFilterConstraints">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MaxValues" Type="Real">
-                        <Data Value="50" IsEnabled="true"/>
+                    <AttributeInfo Id="MaxValues" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="50"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Values" Type="Real[]">
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>5</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ValuesCount" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -89,10 +92,10 @@
         <Interface InterfaceId="iprm::IParamsSet" ComponentId="CaliperParamsSet"/>
         <Interface InterfaceId="iser::ISerializable" ComponentId="CaliperParamsSet"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="CaliperParamsSet"/>
-        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="CaliperParamsSet"/>
+        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic&gt;" ComponentId="CaliperParamsSet"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="CaliperParams" ExportedId="CaliperParams"/>
-        <Component ComponentId="Line" ExportedId="Line"/>
+        <Component ExportedId="CaliperParams" ComponentId="CaliperParams"/>
+        <Component ExportedId="Line" ComponentId="Line"/>
     </ExportedComponents>
 </Acf>

@@ -1,22 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="725" ComponentName="HtmlEditorFile" Y="500" Note=""/>
-        <Element X="975" ComponentName="LanguageSelection" Y="300" Note=""/>
-        <Element X="475" ComponentName="SelectableConfigData" Y="125" Note=""/>
-        <Element X="200" ComponentName="ConfigFileShadower" Y="225" Note=""/>
-        <Element X="725" ComponentName="PreviewCommandFile" Y="300" Note=""/>
-        <Element X="500" ComponentName="HtmlBrowserFile" Y="500" Note=""/>
-        <Element X="200" ComponentName="ConfigDataShadow" Y="75" Note=""/>
-        <Element X="975" ComponentName="EnableDocumentPersistence" Y="500" Note=""/>
-        <Element X="200" ComponentName="Settings" Y="400" Note=""/>
-        <Element X="475" ComponentName="ConfigsManager" Y="300" Note=""/>
+        <Element ComponentName="EnableDocumentPersistence" X="975" Y="500" Note=""/>
+        <Element ComponentName="PreviewCommandFile" X="725" Y="300" Note=""/>
+        <Element ComponentName="HtmlEditorFile" X="725" Y="500" Note=""/>
+        <Element ComponentName="HtmlBrowserFile" X="500" Y="500" Note=""/>
+        <Element ComponentName="ConfigsManager" X="475" Y="300" Note=""/>
+        <Element ComponentName="SelectableConfigData" X="475" Y="125" Note=""/>
+        <Element ComponentName="LanguageSelection" X="975" Y="300" Note=""/>
+        <Element ComponentName="ConfigDataShadow" X="200" Y="75" Note=""/>
+        <Element ComponentName="ConfigFileShadower" X="200" Y="225" Note=""/>
+        <Element ComponentName="Settings" X="200" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,33 +1,36 @@
-<Acf Keywords="Caliper Line Parameter Editor Tag='GUI &quot;Image Processing&quot;'" Description="Caliper parameters GUI">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Caliper parameters GUI</Description>
+    <Keywords>Caliper Line Parameter Editor Tag='GUI &quot;Image Processing&quot;'</Keywords>
     <ElementsList>
-        <Element ComponentId="Line2dParamsGui" Id="CaliperLineGui" PackageId="QtViewPck">
+        <Element Id="CaliperLineGui" PackageId="QtViewPck" ComponentId="Line2dParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DisplayArrow" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="DisplayArrow" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CaliperParamsGui" Id="CaliperParamsGui" PackageId="QtIprPck">
+        <Element Id="CaliperParamsGui" PackageId="QtIprPck" ComponentId="CaliperParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="CaliperParamsSetGui" PackageId="QtGuiPck">
+        <Element Id="CaliperParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CaliperLineGui</Value>
@@ -36,7 +39,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line</Value>
@@ -45,7 +48,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Geometry</Value>
@@ -54,13 +57,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowAllShapes" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowAllShapes" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="NumericParamsGui" Id="SmoothFilterParamsGui" PackageId="QtMeasPck">
+        <Element Id="SmoothFilterParamsGui" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

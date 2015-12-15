@@ -1,27 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="1000" ComponentName="VisualRegistryView" Y="600" Note=""/>
-        <Element X="625" ComponentName="RegistryLoader" Y="100" Note=""/>
-        <Element X="1000" ComponentName="UndoManager" Y="75" Note=""/>
-        <Element X="1000" ComponentName="DocumentTemplate" Y="200" Note=""/>
-        <Element X="400" ComponentName="RegistryCodeSaver" Y="475" Note=""/>
-        <Element X="200" ComponentName="PackagesLoaderExt" Y="100" Note=""/>
-        <Element X="625" ComponentName="Document" Y="300" Note=""/>
-        <Element X="625" ComponentName="Preview" Y="400" Note=""/>
-        <Element X="1000" ComponentName="RegistryConsistInfo" Y="700" Note=""/>
+        <Element ComponentName="RegistryCodeSaver" X="400" Y="475" Note=""/>
+        <Element ComponentName="RegistryLoader" X="625" Y="100" Note=""/>
+        <Element ComponentName="RegistryConsistInfo" X="1000" Y="700" Note=""/>
+        <Element ComponentName="Document" X="625" Y="300" Note=""/>
+        <Element ComponentName="DocumentTemplate" X="1000" Y="200" Note=""/>
+        <Element ComponentName="UndoManager" X="1000" Y="75" Note=""/>
+        <Element ComponentName="Preview" X="625" Y="400" Note=""/>
+        <Element ComponentName="PackagesLoaderExt" X="200" Y="100" Note=""/>
+        <Element ComponentName="VisualRegistryView" X="1000" Y="600" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="Document">
             <PositionMap>
-                <Element X="600" ComponentName="SelectedDocModelBinder" Y="400" Note=""/>
-                <Element X="600" ComponentName="VisualRegistry" Y="250" Note=""/>
+                <Element ComponentName="SelectedDocModelBinder" X="600" Y="400" Note=""/>
+                <Element ComponentName="VisualRegistry" X="600" Y="250" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

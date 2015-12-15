@@ -1,23 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="975" ComponentName="CopyBuildProjects" Y="600" Note=""/>
-        <Element X="475" ComponentName="CopyImplSources" Y="125" Note=""/>
-        <Element X="650" ComponentName="CopyIncludeResources" Y="600" Note=""/>
-        <Element X="225" ComponentName="CopyImplOther" Y="750" Note=""/>
-        <Element X="650" ComponentName="CopyImplResources" Y="225" Note=""/>
-        <Element X="150" ComponentName="CopyAllFiles" Y="350" Note=""/>
-        <Element X="475" ComponentName="CopyIncludeSources" Y="475" Note=""/>
-        <Element X="150" ComponentName="CopyCommon" Y="525" Note=""/>
-        <Element X="850" ComponentName="CopyImplProjects" Y="125" Note=""/>
-        <Element X="200" ComponentName="CopyIncludeOther" Y="650" Note=""/>
-        <Element X="775" ComponentName="CopyIncludeProjects" Y="475" Note=""/>
+        <Element ComponentName="CopyCommon" X="150" Y="525" Note=""/>
+        <Element ComponentName="CopyImplProjects" X="850" Y="125" Note=""/>
+        <Element ComponentName="CopyImplResources" X="650" Y="225" Note=""/>
+        <Element ComponentName="CopyImplOther" X="225" Y="750" Note=""/>
+        <Element ComponentName="CopyIncludeOther" X="200" Y="650" Note=""/>
+        <Element ComponentName="CopyImplSources" X="475" Y="125" Note=""/>
+        <Element ComponentName="CopyIncludeProjects" X="775" Y="475" Note=""/>
+        <Element ComponentName="CopyIncludeResources" X="650" Y="600" Note=""/>
+        <Element ComponentName="CopyBuildProjects" X="975" Y="600" Note=""/>
+        <Element ComponentName="CopyAllFiles" X="150" Y="350" Note=""/>
+        <Element ComponentName="CopyIncludeSources" X="475" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

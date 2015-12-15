@@ -1,22 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="450" ComponentName="SelectableParameter" Y="350" Note=""/>
-        <Element X="1050" ComponentName="BitmapLoader" Y="175" Note=""/>
-        <Element X="175" ComponentName="SnapParamsColor" Y="575" Note=""/>
-        <Element X="175" ComponentName="SnapParamsGray" Y="375" Note=""/>
-        <Element X="850" ComponentName="ParamsManagerGui" Y="475" Note=""/>
-        <Element X="825" ComponentName="SelectionParamGui" Y="350" Note=""/>
-        <Element X="850" ComponentName="SnapParamsGui" Y="600" Note=""/>
-        <Element X="775" ComponentName="BitmapAcquisition" Y="50" Note=""/>
-        <Element X="450" ComponentName="ParamsManager" Y="475" Note=""/>
-        <Element X="450" ComponentName="SnapApplication" Y="175" Note=""/>
+        <Element ComponentName="BitmapAcquisition" X="775" Y="50" Note=""/>
+        <Element ComponentName="SelectionParamGui" X="825" Y="350" Note=""/>
+        <Element ComponentName="SnapParamsColor" X="175" Y="575" Note=""/>
+        <Element ComponentName="SnapParamsGui" X="850" Y="600" Note=""/>
+        <Element ComponentName="SnapApplication" X="450" Y="175" Note=""/>
+        <Element ComponentName="ParamsManagerGui" X="850" Y="475" Note=""/>
+        <Element ComponentName="SelectableParameter" X="450" Y="350" Note=""/>
+        <Element ComponentName="SnapParamsGray" X="175" Y="375" Note=""/>
+        <Element ComponentName="BitmapLoader" X="1050" Y="175" Note=""/>
+        <Element ComponentName="ParamsManager" X="450" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

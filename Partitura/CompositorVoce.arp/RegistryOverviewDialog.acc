@@ -1,46 +1,49 @@
-<Acf Keywords="Registry Overview Topology" Description="Topology overview of the current registry">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Topology overview of the current registry</Description>
+    <Keywords>Registry Overview Topology</Keywords>
     <ElementsList>
-        <Element ComponentId="DialogGui" Id="Dialog" PackageId="QtGuiPck">
+        <Element Id="Dialog" PackageId="QtGuiPck" ComponentId="DialogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DialogSize" Type="Real">
-                        <Data Value="0.5" IsEnabled="true"/>
+                    <AttributeInfo Id="DialogSize" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="0.5"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DialogTitle" Type="String">
-                        <Data Value="Component Topology" IsEnabled="true"/>
+                    <AttributeInfo Id="DialogTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Component Topology"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
-                        <Data Value="RegistryTreeView" IsEnabled="true"/>
+                    <AttributeInfo Id="Gui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="RegistryTreeView"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MenuDescription" Type="String">
-                        <Data Value="Shows component topology of the currently opened registry" IsEnabled="true"/>
+                    <AttributeInfo Id="MenuDescription" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Shows component topology of the currently opened registry"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MenuName" Type="String">
-                        <Data Value="Show Registry Overview..." IsEnabled="true"/>
+                    <AttributeInfo Id="MenuName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Show Registry Overview..."/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RootMenu" Type="String">
-                        <Data Value="&amp;Tools" IsEnabled="true"/>
+                    <AttributeInfo Id="RootMenu" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="&amp;Tools"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="RegistryTreeView" Id="RegistryTreeView" PackageId="CompositorPck">
+        <Element Id="RegistryTreeView" PackageId="CompositorPck" ComponentId="RegistryTreeView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

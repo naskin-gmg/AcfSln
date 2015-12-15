@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="700" ComponentName="CaliperParamsGui" Y="300" Note=""/>
-        <Element X="687" ComponentName="SmoothFilterParamsGui" Y="432" Note=""/>
-        <Element X="700" ComponentName="CaliperLineGui" Y="125" Note=""/>
-        <Element X="300" ComponentName="CaliperParamsSetGui" Y="300" Note=""/>
+        <Element ComponentName="CaliperParamsGui" X="700" Y="300" Note=""/>
+        <Element ComponentName="CaliperLineGui" X="700" Y="125" Note=""/>
+        <Element ComponentName="SmoothFilterParamsGui" X="687" Y="432" Note=""/>
+        <Element ComponentName="CaliperParamsSetGui" X="300" Y="300" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

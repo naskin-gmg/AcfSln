@@ -1,55 +1,58 @@
-<Acf Keywords="Compositor Attributes Editor Dock Main Window" Description="Compositor attributes editor as docking window">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Compositor attributes editor as docking window</Description>
+    <Keywords>Compositor Attributes Editor Dock Main Window</Keywords>
     <ElementsList>
-        <Element ComponentId="DockWidgetGui" Id="AttributeDock" PackageId="QtGuiPck">
+        <Element Id="AttributeDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DockArea" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
-                        <Data Value="Selected component" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Selected component"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="AttributeEditor" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AttributeEditor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="AttributeEditor" Id="AttributeEditor" PackageId="CompositorPck">
+        <Element Id="AttributeEditor" PackageId="CompositorPck" ComponentId="AttributeEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AttributeSelectionObserver" Id="AttributeSelectionObserver" Type="Reference">
+                    <AttributeInfo Id="AttributeSelectionObserver" Type="Reference" ExportId="AttributeSelectionObserver">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="QuickHelpGui" Id="QuickHelpGui" Type="Reference">
+                    <AttributeInfo Id="QuickHelpGui" Type="Reference" ExportId="QuickHelpGui">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RegistryPropGui" Type="Reference">
-                        <Data Value="RegistryPropEditor" IsEnabled="true"/>
+                    <AttributeInfo Id="RegistryPropGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="RegistryPropEditor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="RegistryPropEditor" Id="RegistryPropEditor" PackageId="CompositorPck">
+        <Element Id="RegistryPropEditor" PackageId="CompositorPck" ComponentId="RegistryPropEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

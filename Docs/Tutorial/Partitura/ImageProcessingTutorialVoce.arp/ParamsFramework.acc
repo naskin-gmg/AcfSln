@@ -1,92 +1,95 @@
-<Acf Keywords="" Description="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="GuiApplication" Id="Application" PackageId="QtGuiPck">
+        <Element Id="Application" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="Info" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Info"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
-                        <Data Value="Tabs" IsEnabled="true"/>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Tabs"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="VersionInfo" Id="Info" PackageId="IacfVoce">
+        <Element Id="Info" PackageId="IacfVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="LogDock" Id="LogTab" PackageId="AcfGuiVoce">
+        <Element Id="LogTab" PackageId="AcfGuiVoce" ComponentId="LogDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="SceneModelGui" Id="ParamsEditorGui" PackageId="AcfGuiVoce">
+        <Element Id="ParamsEditorGui" PackageId="AcfGuiVoce" ComponentId="SceneModelGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Gui" Type="Reference">
-                        <Data Value="ParamsSetGui" IsEnabled="true"/>
+                    <AttributeInfo Id="Gui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsSetGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="ParamsSet" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsSet"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSet" Id="ParamsSet" PackageId="BasePck">
+        <Element Id="ParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Parameters" Id="Parameters" Type="Reference[]">
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="Parameters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Ids" Id="ParametersId" Type="Id[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="ParamsSetGui" PackageId="QtGuiPck">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
-                    </AttributeInfo>
-                    <AttributeInfo ExportId="Editors" Id="Editors" Type="Reference[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo ExportId="Ids" Id="Ids" Type="Id[]">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo ExportId="Names" Id="Names" Type="String[]">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="Ids">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SceneConnector" Id="ParamsTab" PackageId="QtViewPck">
+        <Element Id="ParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ExtenderGui" Type="Reference">
-                        <Data Value="ParamsEditorGui" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SceneGui" Type="Reference">
-                        <Data Value="ViewProvider" IsEnabled="true"/>
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="Editors">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="Ids">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="Names">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="TabContainer" Id="Tabs" PackageId="QtGuiPck">
+        <Element Id="ParamsTab" PackageId="QtViewPck" ComponentId="SceneConnector">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Guis" Type="Reference[]">
+                    <AttributeInfo Id="ExtenderGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsEditorGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SceneGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ViewProvider"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Tabs" PackageId="QtGuiPck" ComponentId="TabContainer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Guis" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ParamsTab</Value>
@@ -94,7 +97,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Snap</Value>
@@ -105,11 +108,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ViewProvider" Id="ViewProvider" PackageId="QtViewPck">
+        <Element Id="ViewProvider" PackageId="QtViewPck" ComponentId="ViewProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="UseAntialiasing" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="UseAntialiasing" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

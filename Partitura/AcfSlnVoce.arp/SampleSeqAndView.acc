@@ -1,48 +1,51 @@
-<Acf Keywords="View Sample Sequence" Description="View for a samle sequence">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>View for a samle sequence</Description>
+    <Keywords>View Sample Sequence</Keywords>
     <ElementsList>
-        <Element ComponentId="DataSequenceView" Id="DataSequenceView" PackageId="QtMeasPck">
+        <Element Id="DataSequenceView" PackageId="QtMeasPck" ComponentId="DataSequenceView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="IsChannelPanelVisible" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsChannelPanelVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsScalePanelVisible" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsScalePanelVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsScaledValue" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsScaledValue" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsTimeSpanPanelVisible" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="IsTimeSpanPanelVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MaxValue" Type="Real">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MinValue" Type="Real">
-                        <Data Value="-1" IsEnabled="true"/>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="-1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="GeneralDataSequence" Id="GeneralDataSequence" PackageId="MeasPck">
+        <Element Id="GeneralDataSequence" PackageId="MeasPck" ComponentId="GeneralDataSequence">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ModelBinder" Id="ModelBinder" PackageId="BasePck">
+        <Element Id="ModelBinder" PackageId="BasePck" ComponentId="ModelBinder">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="GeneralDataSequence" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="GeneralDataSequence"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
+                    <AttributeInfo Id="Observers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DataSequenceView</Value>
@@ -55,7 +58,7 @@
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces>
-        <Interface InterfaceId="imath::TISampledFunction&lt;2,1>" ComponentId="GeneralDataSequence"/>
+        <Interface InterfaceId="imath::TISampledFunction&lt;2,1&gt;" ComponentId="GeneralDataSequence"/>
         <Interface InterfaceId="imeas::IDataSequence" ComponentId="GeneralDataSequence"/>
         <Interface InterfaceId="imod::IModel" ComponentId="GeneralDataSequence"/>
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="DataSequenceView"/>

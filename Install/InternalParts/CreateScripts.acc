@@ -1,41 +1,44 @@
-<Acf Keywords="" Description="">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="ComplexCopyApplication" Id="Application" PackageId="InstallVoce">
+        <Element Id="Application" PackageId="InstallVoce" ComponentId="ComplexCopyApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
-                        <Data Value="ACF-Solutions" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ACF-Solutions"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FileCopiers" Type="Reference[]">
+                    <AttributeInfo Id="FileCopiers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CopyScriptFiles</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ProductName" Type="String">
-                        <Data Value="ACF-Solutions" IsEnabled="true"/>
+                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ACF-Solutions"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CopyInfoProcessor" Id="CopyScriptFiles" PackageId="InstallVoce">
+        <Element Id="CopyScriptFiles" PackageId="InstallVoce" ComponentId="CopyInfoProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="Application/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Filters" Type="String[]">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Doxyfile</Value>
@@ -44,22 +47,22 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Application/Log" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application/Log"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ReplaceEmbeddedVariables" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ReplaceEmbeddedVariables" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ReplaceEnvironmentVariables" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ReplaceEnvironmentVariables" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SubstitutionTagExpr" Type="String">
-                        <Data Value="\$(.+)\$" IsEnabled="true"/>
+                    <AttributeInfo Id="SubstitutionTagExpr" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="\$(.+)\$"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
+        <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

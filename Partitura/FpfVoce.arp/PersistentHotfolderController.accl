@@ -1,25 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="675" ComponentName="Hotfolder" Y="350" Note=""/>
-        <Element X="450" ComponentName="MonitorCacheFile" Y="700" Note=""/>
-        <Element X="1050" ComponentName="HotfolderStatePersistence" Y="350" Note=""/>
-        <Element X="875" ComponentName="DirectoryMonitorCache" Y="750" Note=""/>
-        <Element X="400" ComponentName="HotfolderGui" Y="450" Note=""/>
-        <Element X="400" ComponentName="ProcessingItemPreview" Y="550" Note=""/>
-        <Element X="575" ComponentName="HotfolderSettingsPersistence" Y="125" Note=""/>
-        <Element X="1050" ComponentName="HotfolderStateFilePath" Y="450" Note=""/>
-        <Element X="150" ComponentName="Instantiator" Y="50" Note=""/>
-        <Element X="400" ComponentName="HotfolderGuiBinder" Y="350" Note=""/>
-        <Element X="150" ComponentName="MonitoringCachePersistence" Y="750" Note=""/>
-        <Element X="875" ComponentName="HotfolderSettingsFilePath" Y="125" Note=""/>
-        <Element X="675" ComponentName="HotfolderSettingsDialog" Y="625" Note=""/>
+        <Element ComponentName="Hotfolder" X="675" Y="350" Note=""/>
+        <Element ComponentName="HotfolderSettingsFilePath" X="875" Y="125" Note=""/>
+        <Element ComponentName="HotfolderSettingsPersistence" X="575" Y="125" Note=""/>
+        <Element ComponentName="ProcessingItemPreview" X="400" Y="550" Note=""/>
+        <Element ComponentName="HotfolderStatePersistence" X="1050" Y="350" Note=""/>
+        <Element ComponentName="MonitoringCachePersistence" X="150" Y="750" Note=""/>
+        <Element ComponentName="HotfolderSettingsDialog" X="675" Y="625" Note=""/>
+        <Element ComponentName="HotfolderStateFilePath" X="1050" Y="450" Note=""/>
+        <Element ComponentName="HotfolderGuiBinder" X="400" Y="350" Note=""/>
+        <Element ComponentName="Instantiator" X="150" Y="50" Note=""/>
+        <Element ComponentName="MonitorCacheFile" X="450" Y="700" Note=""/>
+        <Element ComponentName="DirectoryMonitorCache" X="875" Y="750" Note=""/>
+        <Element ComponentName="HotfolderGui" X="400" Y="450" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="600" ComponentName="FileSystemChangeStorage" Y="350" Note=""/>
-        <Element X="600" ComponentName="HotfolderTaskManager" Y="475" Note=""/>
-        <Element X="175" ComponentName="DirectoryMonitor" Y="350" Note=""/>
-        <Element X="600" ComponentName="HotfolderProcessor" Y="600" Note=""/>
-        <Element X="925" ComponentName="OutputFileRenaming" Y="475" Note=""/>
+        <Element ComponentName="DirectoryMonitor" X="175" Y="350" Note=""/>
+        <Element ComponentName="OutputFileRenaming" X="925" Y="475" Note=""/>
+        <Element ComponentName="HotfolderTaskManager" X="600" Y="475" Note=""/>
+        <Element ComponentName="FileSystemChangeStorage" X="600" Y="350" Note=""/>
+        <Element ComponentName="HotfolderProcessor" X="600" Y="600" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

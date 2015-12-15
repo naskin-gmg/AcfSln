@@ -1,73 +1,76 @@
-<Acf Keywords="" Description="Copy files processor with some text document conversions (tag replacement, adding header)">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Copy files processor with some text document conversions (tag replacement, adding header)</Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="CopyFilesTree" Id="CopyFilesTree" PackageId="FileProcessingPck">
+        <Element Id="CopyFilesTree" PackageId="FileProcessingPck" ComponentId="CopyFilesTree">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ExcludeFilters" Id="ExcludeFilters" Type="String[]">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="ExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FileCopy" Type="Reference">
-                        <Data Value="FileCopy" IsEnabled="true"/>
+                    <AttributeInfo Id="FileCopy" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCopy"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Filters" Id="Filters" Type="String[]">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="Filters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InputSubDir" Id="InputSubDir" Type="String">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="InputSubDir">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="OutputSubDir" Id="OutputSubDir" Type="String">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="OutputSubDir">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="RecursionDepth" Id="RecursionDepth" Type="Integer">
+                    <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="RecursionDepth">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileInfoCopy" Id="FileCopy" PackageId="FileProcessingPck">
+        <Element Id="FileCopy" PackageId="FileProcessingPck" ComponentId="FileInfoCopy">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IgnoreUnknownTags" Id="IgnoreUnknownTags" Type="Boolean">
+                    <AttributeInfo Id="IgnoreUnknownTags" Type="Boolean" ExportId="IgnoreUnknownTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LicensePath" Id="LicensePath" Type="String">
+                    <AttributeInfo Id="LicensePath" Type="String" ExportId="LicensePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ReplaceEmbeddedVariables" Id="ReplaceEmbeddedVariables" Type="Boolean">
+                    <AttributeInfo Id="ReplaceEmbeddedVariables" Type="Boolean" ExportId="ReplaceEmbeddedVariables">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ReplaceEnvironmentVariables" Id="ReplaceEnvironmentVariables" Type="Boolean">
+                    <AttributeInfo Id="ReplaceEnvironmentVariables" Type="Boolean" ExportId="ReplaceEnvironmentVariables">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SubstitutionTagExpr" Id="SubstitutionTagExpr" Type="String">
+                    <AttributeInfo Id="SubstitutionTagExpr" Type="String" ExportId="SubstitutionTagExpr">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UserSubstitutionTags" Id="UserSubstitutionTags" Type="String[]">
+                    <AttributeInfo Id="UserSubstitutionTags" Type="String[]" ExportId="UserSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UserSubstitutionValues" Id="UserSubstitutionValues" Type="String[]">
+                    <AttributeInfo Id="UserSubstitutionValues" Type="String[]" ExportId="UserSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

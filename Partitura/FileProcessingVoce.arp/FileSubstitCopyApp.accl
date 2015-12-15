@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="625" ComponentName="FileInfoCopy" Y="400" Note=""/>
-        <Element X="625" ComponentName="VersionInfo" Y="150" Note=""/>
-        <Element X="625" ComponentName="ApplicationInfo" Y="275" Note=""/>
-        <Element X="375" ComponentName="CopyApp" Y="400" Note=""/>
-        <Element X="625" ComponentName="Log" Y="525" Note=""/>
+        <Element ComponentName="Log" X="625" Y="525" Note=""/>
+        <Element ComponentName="FileInfoCopy" X="625" Y="400" Note=""/>
+        <Element ComponentName="ApplicationInfo" X="625" Y="275" Note=""/>
+        <Element ComponentName="CopyApp" X="375" Y="400" Note=""/>
+        <Element ComponentName="VersionInfo" X="625" Y="150" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

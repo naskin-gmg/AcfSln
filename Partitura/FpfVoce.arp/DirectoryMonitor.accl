@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="350" ComponentName="DirectoryMonitorParamsGui" Y="375" Note=""/>
-        <Element X="675" ComponentName="DirectoryMonitor" Y="550" Note=""/>
-        <Element X="950" ComponentName="DirectoryMonitorParams" Y="325" Note=""/>
-        <Element X="625" ComponentName="ModelBinder" Y="175" Note=""/>
+        <Element ComponentName="DirectoryMonitor" X="675" Y="550" Note=""/>
+        <Element ComponentName="DirectoryMonitorParams" X="950" Y="325" Note=""/>
+        <Element ComponentName="ModelBinder" X="625" Y="175" Note=""/>
+        <Element ComponentName="DirectoryMonitorParamsGui" X="350" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

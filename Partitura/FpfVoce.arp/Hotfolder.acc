@@ -1,57 +1,60 @@
-<Acf Keywords="Hotfolder File Processing Directory Monitoring" Description="Basic definition of a hotfolder">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Basic definition of a hotfolder</Description>
+    <Keywords>Hotfolder File Processing Directory Monitoring</Keywords>
     <ElementsList>
-        <Element ComponentId="HotfolderProcessing" Id="HotfolderProcessing" PackageId="FpfVoce">
+        <Element Id="HotfolderProcessing" PackageId="FpfVoce" ComponentId="HotfolderProcessing">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="FileConverter" Id="FileConverter" Type="Reference">
+                    <AttributeInfo Id="FileConverter" Type="Reference" ExportId="FileConverter">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FileNamingParams" Type="Reference">
-                        <Data Value="HotfolderSettings/FileNamingParams" IsEnabled="true"/>
+                    <AttributeInfo Id="FileNamingParams" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderSettings/FileNamingParams"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="HotfolderOutputDirectory" Type="Reference">
-                        <Data Value="HotfolderSettings/OutputDirectory" IsEnabled="true"/>
+                    <AttributeInfo Id="HotfolderOutputDirectory" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderSettings/OutputDirectory"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="HotfolderProcessingInfo" Type="Reference">
-                        <Data Value="HotfolderProcessingInfo/HotfolderState" IsEnabled="true"/>
+                    <AttributeInfo Id="HotfolderProcessingInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderProcessingInfo/HotfolderState"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="HotfolderSettings" Type="Reference">
-                        <Data Value="HotfolderSettings" IsEnabled="true"/>
+                    <AttributeInfo Id="HotfolderSettings" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderSettings"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InputDirectoriesManager" Type="Reference">
-                        <Data Value="HotfolderSettings/InputDirectories" IsEnabled="true"/>
+                    <AttributeInfo Id="InputDirectoriesManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderSettings/InputDirectories"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MonitoringSessionManager" Id="MonitoringSessionManager" Type="Reference">
+                    <AttributeInfo Id="MonitoringSessionManager" Type="Reference" ExportId="MonitoringSessionManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="OutputFileInfo" Id="OutputFileInfo" Type="Reference">
+                    <AttributeInfo Id="OutputFileInfo" Type="Reference" ExportId="OutputFileInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderProcessingInfo" Id="HotfolderProcessingInfo" PackageId="FpfVoce">
+        <Element Id="HotfolderProcessingInfo" PackageId="FpfVoce" ComponentId="HotfolderProcessingInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderSettings" Id="HotfolderSettings" PackageId="FpfVoce">
+        <Element Id="HotfolderSettings" PackageId="FpfVoce" ComponentId="HotfolderSettings">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AcceptPatterns" Id="AcceptPatterns" Type="String[]">
+                    <AttributeInfo Id="AcceptPatterns" Type="String[]" ExportId="AcceptPatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IgnorePatterns" Id="IgnorePatterns" Type="String[]">
+                    <AttributeInfo Id="IgnorePatterns" Type="String[]" ExportId="IgnorePatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -61,9 +64,9 @@
     <EmbeddedRegistriesList/>
     <ExportedInterfaces/>
     <ExportedComponents>
-        <Component ComponentId="HotfolderProcessingInfo/HotfolderState" ExportedId="HotfolderItems"/>
-        <Component ComponentId="HotfolderProcessingInfo" ExportedId="HotfolderProcessingInfo"/>
-        <Component ComponentId="HotfolderSettings" ExportedId="HotfolderSettings"/>
-        <Component ComponentId="HotfolderSettings/InputDirectories" ExportedId="InputDirectories"/>
+        <Component ExportedId="HotfolderItems" ComponentId="HotfolderProcessingInfo/HotfolderState"/>
+        <Component ExportedId="HotfolderProcessingInfo" ComponentId="HotfolderProcessingInfo"/>
+        <Component ExportedId="HotfolderSettings" ComponentId="HotfolderSettings"/>
+        <Component ExportedId="InputDirectories" ComponentId="HotfolderSettings/InputDirectories"/>
     </ExportedComponents>
 </Acf>

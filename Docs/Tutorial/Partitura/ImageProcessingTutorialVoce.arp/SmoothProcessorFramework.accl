@@ -1,21 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="450" ComponentName="FilterParamsSet" Y="175" Note=""/>
-        <Element X="400" ComponentName="ProcessingParamsPersistence" Y="50" Note=""/>
-        <Element X="225" ComponentName="FilterParams" Y="175" Note=""/>
-        <Element X="725" ComponentName="File" Y="50" Note=""/>
-        <Element X="800" ComponentName="RectImageSmoothProcessor" Y="300" Note=""/>
-        <Element X="450" ComponentName="FilterParamsGui" Y="625" Note=""/>
-        <Element X="800" ComponentName="BitmapFileProcessing" Y="175" Note=""/>
-        <Element X="150" ComponentName="ModelDialogGui" Y="350" Note=""/>
-        <Element X="450" ComponentName="FilterParamsSetGui" Y="500" Note=""/>
+        <Element ComponentName="File" X="725" Y="50" Note=""/>
+        <Element ComponentName="RectImageSmoothProcessor" X="800" Y="300" Note=""/>
+        <Element ComponentName="ProcessingParamsPersistence" X="400" Y="50" Note=""/>
+        <Element ComponentName="FilterParamsSet" X="450" Y="175" Note=""/>
+        <Element ComponentName="FilterParamsSetGui" X="450" Y="500" Note=""/>
+        <Element ComponentName="FilterParamsGui" X="450" Y="625" Note=""/>
+        <Element ComponentName="BitmapFileProcessing" X="800" Y="175" Note=""/>
+        <Element ComponentName="ModelDialogGui" X="150" Y="350" Note=""/>
+        <Element ComponentName="FilterParams" X="225" Y="175" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

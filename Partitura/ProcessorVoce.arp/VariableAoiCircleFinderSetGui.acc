@@ -1,48 +1,51 @@
-<Acf Keywords="Circle Finder Parameters GUI" Description="Gui for for circle finder parameter set using as AOI annulus segment">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Gui for for circle finder parameter set using as AOI annulus segment</Description>
+    <Keywords>Circle Finder Parameters GUI</Keywords>
     <ElementsList>
-        <Element ComponentId="AnnulusParamsGui" Id="Annulus" PackageId="QtViewPck">
+        <Element Id="Annulus" PackageId="QtViewPck" ComponentId="AnnulusParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="UnitInfo" Id="DefaultUnitInfo" Type="Reference">
+                    <AttributeInfo Id="DefaultUnitInfo" Type="Reference" ExportId="UnitInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShapeColorSchema" Id="ShapeColorSchema" Type="Reference">
+                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="ShapeColorSchema">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="AnnulusSegmentParamsGui" Id="AnnulusSegment" PackageId="QtViewPck">
+        <Element Id="AnnulusSegment" PackageId="QtViewPck" ComponentId="AnnulusSegmentParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="UnitInfo" Id="DefaultUnitInfo" Type="Reference">
+                    <AttributeInfo Id="DefaultUnitInfo" Type="Reference" ExportId="UnitInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShapeColorSchema" Id="ShapeColorSchema" Type="Reference">
+                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="ShapeColorSchema">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CaliperParamsGui" Id="CaliperParams" PackageId="QtIprPck">
+        <Element Id="CaliperParams" PackageId="QtIprPck" ComponentId="CaliperParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSetGui" Id="CaliperParamsSetGui" PackageId="QtGuiPck">
+        <Element Id="CaliperParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DesignType" Id="DesignType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="DesignType">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>VariableAoi</Value>
@@ -52,7 +55,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Ids" Type="Id[]">
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>CircleFinderAoi</Value>
@@ -62,7 +65,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Geometry</Value>
@@ -72,29 +75,29 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowAllShapes" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowAllShapes" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UseVerticalSpacer" Id="UseVerticalSpacer" Type="Boolean">
+                    <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="UseVerticalSpacer">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CircleFinderParamsGui" Id="CircleFinderParams" PackageId="QtIprPck">
+        <Element Id="CircleFinderParams" PackageId="QtIprPck" ComponentId="CircleFinderParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="NumericParamsGui" Id="FilterParams" PackageId="QtMeasPck">
+        <Element Id="FilterParams" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="VariableParamGui" Id="VariableAoi" PackageId="QtGuiPck">
+        <Element Id="VariableAoi" PackageId="QtGuiPck" ComponentId="VariableParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>
@@ -102,7 +105,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TypeIds" Type="String[]">
+                    <AttributeInfo Id="TypeIds" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>
@@ -110,7 +113,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TypeNames" Type="String[]">
+                    <AttributeInfo Id="TypeNames" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>

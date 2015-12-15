@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="525" ComponentName="ParamsManagerGui" Y="525" Note=""/>
-        <Element X="525" ComponentName="ConfigFileInfo" Y="150" Note=""/>
-        <Element X="525" ComponentName="ComposedParamsSetGui" Y="400" Note=""/>
-        <Element X="525" ComponentName="ConfigFileGui" Y="275" Note=""/>
+        <Element ComponentName="ConfigFileInfo" X="525" Y="150" Note=""/>
+        <Element ComponentName="ParamsManagerGui" X="525" Y="525" Note=""/>
+        <Element ComponentName="ComposedParamsSetGui" X="525" Y="400" Note=""/>
+        <Element ComponentName="ConfigFileGui" X="525" Y="275" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

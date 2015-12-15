@@ -1,18 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="750" ComponentName="SimpleMainGui" Y="325" Note=""/>
-        <Element X="750" ComponentName="HotfolderDemoGui" Y="500" Note=""/>
-        <Element X="150" ComponentName="VersionInfo" Y="175" Note=""/>
-        <Element X="425" ComponentName="ApplicationInfo" Y="175" Note=""/>
-        <Element X="275" ComponentName="LogDock" Y="325" Note=""/>
-        <Element X="750" ComponentName="ApplicationSettingsProvider" Y="175" Note=""/>
+        <Element ComponentName="ApplicationInfo" X="425" Y="175" Note=""/>
+        <Element ComponentName="SimpleMainGui" X="750" Y="325" Note=""/>
+        <Element ComponentName="HotfolderDemoGui" X="750" Y="500" Note=""/>
+        <Element ComponentName="VersionInfo" X="150" Y="175" Note=""/>
+        <Element ComponentName="LogDock" X="275" Y="325" Note=""/>
+        <Element ComponentName="ApplicationSettingsProvider" X="750" Y="175" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

@@ -1,25 +1,28 @@
-<Acf Keywords="Product Framework Task Image Circle Caliper GUI Application" Description="Test framework for demonstration of the circle finder">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Test framework for demonstration of the circle finder</Description>
+    <Keywords>Product Framework Task Image Circle Caliper GUI Application</Keywords>
     <ElementsList>
-        <Element ComponentId="SimpleProductFramework" Id="Framework" PackageId="ImageProcessingTutorialVoce">
+        <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="SimpleProductFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
-                        <Data Value="Circle Finder" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Circle Finder"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ApplicationSubname" Id="ApplicationSubname" Type="String">
+                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
-                        <Data Value="Witold Gantzke &amp; Kirill Lepskiy" IsEnabled="true"/>
+                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Witold Gantzke &amp; Kirill Lepskiy"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InspectionGuis" Type="Reference[]">
+                    <AttributeInfo Id="InspectionGuis" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SnapTaskGui</Value>
@@ -27,7 +30,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InspectionNames" Type="String[]">
+                    <AttributeInfo Id="InspectionNames" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Image</Value>
@@ -35,7 +38,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InspectionPreviews" Type="Reference[]">
+                    <AttributeInfo Id="InspectionPreviews" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ImageView</Value>
@@ -43,7 +46,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Inspections" Type="Reference[]">
+                    <AttributeInfo Id="Inspections" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SnapTask</Value>
@@ -51,10 +54,10 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsToolbarVisible" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsToolbarVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainWindowComponents" Type="Reference[]">
+                    <AttributeInfo Id="MainWindowComponents" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Framework/LogDock</Value>
@@ -65,67 +68,67 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ViewProvider" Id="ImageView" PackageId="QtViewPck">
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ViewProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="SimpleCircleFinderTask" Id="SimpleCircleFinderTask" PackageId="SupplierVoce">
+        <Element Id="SimpleCircleFinderTask" PackageId="SupplierVoce" ComponentId="SimpleCircleFinderTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="BitmapProvider" Type="Reference">
-                        <Data Value="SnapTask" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTask"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InputCalibrationProvider" Type="Reference">
-                        <Data Value="SnapTask" IsEnabled="true"/>
+                    <AttributeInfo Id="InputCalibrationProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTask"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Framework/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RegionCalibrationProvider" Type="Reference">
-                        <Data Value="SnapTask" IsEnabled="true"/>
+                    <AttributeInfo Id="RegionCalibrationProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTask"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SimpleCircleFinderTaskGui" Id="SimpleCircleFinderTaskGui" PackageId="SupplierVoce">
+        <Element Id="SimpleCircleFinderTaskGui" PackageId="SupplierVoce" ComponentId="SimpleCircleFinderTaskGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Framework/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveSceneExtender" Type="Reference">
-                        <Data Value="SnapTaskGui" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTaskGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
-                        <Data Value="Framework/VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SnapTask" Id="SnapTask" PackageId="SupplierVoce">
+        <Element Id="SnapTask" PackageId="SupplierVoce" ComponentId="SnapTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Camera" Id="Camera" Type="Reference">
+                    <AttributeInfo Id="Camera" Type="Reference" ExportId="Camera">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="CameraParamsSet" Id="CameraParamsSet" Type="Reference">
+                    <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="CameraParamsSet">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Framework/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SnapTaskGui" Id="SnapTaskGui" PackageId="SupplierVoce">
+        <Element Id="SnapTaskGui" PackageId="SupplierVoce" ComponentId="SnapTaskGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="CameraParamsSetGui" Id="CameraParamsSetGui" Type="Reference">
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="CameraParamsSetGui">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="Framework/LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -136,9 +139,9 @@
         <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="Framework/ApplicationInfo" ExportedId="ApplicationInfo"/>
-        <Component ComponentId="Framework/LogDock" ExportedId="LogDock"/>
-        <Component ComponentId="Framework/Parameters" ExportedId="Parameters"/>
-        <Component ComponentId="Framework/VersionInfo" ExportedId="VersionInfo"/>
+        <Component ExportedId="ApplicationInfo" ComponentId="Framework/ApplicationInfo"/>
+        <Component ExportedId="LogDock" ComponentId="Framework/LogDock"/>
+        <Component ExportedId="Parameters" ComponentId="Framework/Parameters"/>
+        <Component ExportedId="VersionInfo" ComponentId="Framework/VersionInfo"/>
     </ExportedComponents>
 </Acf>

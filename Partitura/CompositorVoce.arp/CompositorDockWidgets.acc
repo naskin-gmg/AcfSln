@@ -1,100 +1,103 @@
-<Acf Keywords="ACF Compositor Editor ARX UI Dock" Description="Main UI components of the Compositor">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Main UI components of the Compositor</Description>
+    <Keywords>ACF Compositor Editor ARX UI Dock</Keywords>
     <ElementsList>
-        <Element ComponentId="AttributeEditorDock" Id="AttributeEditorDock" PackageId="CompositorVoce">
+        <Element Id="AttributeEditorDock" PackageId="CompositorVoce" ComponentId="AttributeEditorDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="AttributeSelectionObserver" Type="Reference">
-                        <Data Value="PackageOverviewDock" IsEnabled="true"/>
+                    <AttributeInfo Id="AttributeSelectionObserver" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="PackageOverviewDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MetaInfoManager" Type="Reference">
-                        <Data Value="PackageOverviewDock/LocalMetaInfoManager" IsEnabled="true"/>
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="PackageOverviewDock/LocalMetaInfoManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="QuickHelpGui" Type="Reference">
-                        <Data Value="QuickHelpDock" IsEnabled="true"/>
+                    <AttributeInfo Id="QuickHelpGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="QuickHelpDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ComponentNoteEditorDock" Id="ComponentNoteEditorDock" PackageId="CompositorVoce">
+        <Element Id="ComponentNoteEditorDock" PackageId="CompositorVoce" ComponentId="ComponentNoteEditorDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="LogDock" Id="LogDock" PackageId="AcfGuiVoce">
+        <Element Id="LogDock" PackageId="AcfGuiVoce" ComponentId="LogDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="AllowedDockAreas" Type="Integer">
-                        <Data Value="15" IsEnabled="true"/>
+                    <AttributeInfo Id="AllowedDockAreas" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="15"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="PackageOverviewDock" Id="PackageOverviewDock" PackageId="CompositorVoce">
+        <Element Id="PackageOverviewDock" PackageId="CompositorVoce" ComponentId="PackageOverviewDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ConfigFilePath" Id="ConfigFilePath" Type="Reference">
+                    <AttributeInfo Id="ConfigFilePath" Type="Reference" ExportId="ConfigFilePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ConsistencyInfo" Id="ConsistencyInfo" Type="Reference">
+                    <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="ConsistencyInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DocumentManager" Id="DocumentManager" Type="Reference">
+                    <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnvironmentManager" Id="EnvironmentManager" Type="Reference">
+                    <AttributeInfo Id="EnvironmentManager" Type="Reference" ExportId="EnvironmentManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="QuickHelpGui" Type="Reference">
-                        <Data Value="QuickHelpDock" IsEnabled="true"/>
+                    <AttributeInfo Id="QuickHelpGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="QuickHelpDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ClassHelpDock" Id="QuickHelpDock" PackageId="CompositorVoce">
+        <Element Id="QuickHelpDock" PackageId="CompositorVoce" ComponentId="ClassHelpDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="DocuEditorFileParam" Id="DocuEditorFileParam" Type="Reference">
+                    <AttributeInfo Id="DocuEditorFileParam" Type="Reference" ExportId="DocuEditorFileParam">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MetaInfoManager" Id="MetaInfoManager" Type="Reference">
+                    <AttributeInfo Id="MetaInfoManager" Type="Reference" ExportId="MetaInfoManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TechDocuViewerFileParam" Id="TechDocuViewerFileParam" Type="Reference">
+                    <AttributeInfo Id="TechDocuViewerFileParam" Type="Reference" ExportId="TechDocuViewerFileParam">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CommandBasedSelectionController" Id="WindowsListCommands" PackageId="QtGuiPck">
+        <Element Id="WindowsListCommands" PackageId="QtGuiPck" ComponentId="CommandBasedSelectionController">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="WindowsList" Id="CommandsSelection" Type="Reference">
+                    <AttributeInfo Id="CommandsSelection" Type="Reference" ExportId="WindowsList">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MenuDescription" Type="String">
-                        <Data Value="List of document windows" IsEnabled="true"/>
+                    <AttributeInfo Id="MenuDescription" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="List of document windows"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MenuName" Type="String">
-                        <Data Value="Windows" IsEnabled="true"/>
+                    <AttributeInfo Id="MenuName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Windows"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RootMenu" Type="String">
-                        <Data Value="&amp;Window" IsEnabled="true"/>
+                    <AttributeInfo Id="RootMenu" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="&amp;Window"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -103,12 +106,12 @@
     <EmbeddedRegistriesList/>
     <ExportedInterfaces/>
     <ExportedComponents>
-        <Component ComponentId="AttributeEditorDock" ExportedId="AttributeEditorDock"/>
-        <Component ComponentId="ComponentNoteEditorDock" ExportedId="ComponentNoteEditorDock"/>
-        <Component ComponentId="PackageOverviewDock/LocalMetaInfoManager" ExportedId="LocalMetaInfoManager"/>
-        <Component ComponentId="LogDock" ExportedId="LogDock"/>
-        <Component ComponentId="PackageOverviewDock" ExportedId="PackageOverviewDock"/>
-        <Component ComponentId="QuickHelpDock" ExportedId="QuickHelpDock"/>
-        <Component ComponentId="WindowsListCommands" ExportedId="WindowsListCommands"/>
+        <Component ExportedId="AttributeEditorDock" ComponentId="AttributeEditorDock"/>
+        <Component ExportedId="ComponentNoteEditorDock" ComponentId="ComponentNoteEditorDock"/>
+        <Component ExportedId="LocalMetaInfoManager" ComponentId="PackageOverviewDock/LocalMetaInfoManager"/>
+        <Component ExportedId="LogDock" ComponentId="LogDock"/>
+        <Component ExportedId="PackageOverviewDock" ComponentId="PackageOverviewDock"/>
+        <Component ExportedId="QuickHelpDock" ComponentId="QuickHelpDock"/>
+        <Component ExportedId="WindowsListCommands" ComponentId="WindowsListCommands"/>
     </ExportedComponents>
 </Acf>

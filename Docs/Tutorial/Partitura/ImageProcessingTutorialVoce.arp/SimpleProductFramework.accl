@@ -1,28 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="1050" ComponentName="InspectionTask" Y="600" Note=""/>
-        <Element X="150" ComponentName="XmlFileSerializer" Y="100" Note=""/>
-        <Element X="1050" ComponentName="ErrorShapeFactory" Y="100" Note=""/>
-        <Element X="1050" ComponentName="InspectionTaskEditor" Y="225" Note=""/>
-        <Element X="350" ComponentName="VersionInfo" Y="425" Note=""/>
-        <Element X="775" ComponentName="ErrorColorSchema" Y="100" Note=""/>
-        <Element X="825" ComponentName="StandaloneApp" Y="425" Note=""/>
-        <Element X="475" ComponentName="AboutDialog" Y="250" Note=""/>
-        <Element X="525" ComponentName="FileDialogLoader" Y="125" Note=""/>
-        <Element X="175" ComponentName="LogDock" Y="600" Note=""/>
+        <Element ComponentName="InspectionTaskEditor" X="1050" Y="225" Note=""/>
+        <Element ComponentName="FileDialogLoader" X="525" Y="125" Note=""/>
+        <Element ComponentName="ErrorShapeFactory" X="1050" Y="100" Note=""/>
+        <Element ComponentName="InspectionTask" X="1050" Y="600" Note=""/>
+        <Element ComponentName="StandaloneApp" X="825" Y="425" Note=""/>
+        <Element ComponentName="VersionInfo" X="350" Y="425" Note=""/>
+        <Element ComponentName="LogDock" X="175" Y="600" Note=""/>
+        <Element ComponentName="AboutDialog" X="475" Y="250" Note=""/>
+        <Element ComponentName="ErrorColorSchema" X="775" Y="100" Note=""/>
+        <Element ComponentName="XmlFileSerializer" X="150" Y="100" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="Inspection">
             <PositionMap>
-                <Element X="561.984565688" ComponentName="InspectionTask" Y="306.83857941" Note=""/>
-                <Element X="550" ComponentName="SettingsPersistence" Y="425" Note=""/>
+                <Element ComponentName="SettingsPersistence" X="550" Y="425" Note=""/>
+                <Element ComponentName="InspectionTask" X="561.984565688" Y="306.83857941" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

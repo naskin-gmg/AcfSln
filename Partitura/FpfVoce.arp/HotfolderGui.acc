@@ -1,57 +1,60 @@
-<Acf Keywords="Hotfolder Tag='GUI'" Description="Hotfolder UI definition">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Hotfolder UI definition</Description>
+    <Keywords>Hotfolder Tag='GUI'</Keywords>
     <ElementsList>
-        <Element ComponentId="DirectoryItemGui" Id="DirectoryItemGui" PackageId="HotfolderGuiPck">
+        <Element Id="DirectoryItemGui" PackageId="HotfolderGuiPck" ComponentId="DirectoryItemGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="InputDirectoriesManager" Id="InputDirectoriesManager" Type="Reference">
+                    <AttributeInfo Id="InputDirectoriesManager" Type="Reference" ExportId="InputDirectoriesManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderGui" Id="HotfolderGui" PackageId="HotfolderGuiPck">
+        <Element Id="HotfolderGui" PackageId="HotfolderGuiPck" ComponentId="HotfolderGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DirectoryItemGui" Type="Factory">
-                        <Data Value="DirectoryItemGui" IsEnabled="true"/>
+                    <AttributeInfo Id="DirectoryItemGui" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryItemGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="HotfolderStatistics" Type="Reference">
-                        <Data Value="HotfolderStatistics" IsEnabled="true"/>
+                    <AttributeInfo Id="HotfolderStatistics" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderStatistics"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InputDirectoriesManager" Id="InputDirectoriesManager" Type="Reference">
+                    <AttributeInfo Id="InputDirectoriesManager" Type="Reference" ExportId="InputDirectoriesManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProcessingItemPreview" Id="ProcessingItemPreview" Type="Reference">
+                    <AttributeInfo Id="ProcessingItemPreview" Type="Reference" ExportId="ProcessingItemPreview">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProcessingParamsDialog" Id="ProcessingParamsDialog" Type="Reference">
+                    <AttributeInfo Id="ProcessingParamsDialog" Type="Reference" ExportId="ProcessingParamsDialog">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ProgressManager" Type="Reference">
-                        <Data Value="ProgressManager" IsEnabled="true"/>
+                    <AttributeInfo Id="ProgressManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProgressManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StateIcons" Type="Reference">
-                        <Data Value="StateIcons" IsEnabled="true"/>
+                    <AttributeInfo Id="StateIcons" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StateIcons"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderStatistics" Id="HotfolderStatistics" PackageId="HotfolderPck">
+        <Element Id="HotfolderStatistics" PackageId="HotfolderPck" ComponentId="HotfolderStatistics">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="IconProvider" Id="StateIcons" PackageId="QtGuiPck">
+        <Element Id="StateIcons" PackageId="QtGuiPck" ComponentId="IconProvider">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="IconFiles" Type="String[]">
+                    <AttributeInfo Id="IconFiles" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>StateUnknown</Value>
@@ -62,8 +65,8 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IconsPath" Type="String">
-                        <Data Value=":/Icons" IsEnabled="true"/>
+                    <AttributeInfo Id="IconsPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Icons"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

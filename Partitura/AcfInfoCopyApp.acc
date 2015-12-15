@@ -1,29 +1,32 @@
-<Acf Keywords="Substituition Copy File Text" Description="Copy application replacing ACF specific tags with current ACF information">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Copy application replacing ACF specific tags with current ACF information</Description>
+    <Keywords>Substituition Copy File Text</Keywords>
     <ElementsList>
-        <Element ComponentId="FileSubstitCopyApp" Id="FileSubstitCopyApp" PackageId="FileProcessingVoce">
+        <Element Id="FileSubstitCopyApp" PackageId="FileProcessingVoce" ComponentId="FileSubstitCopyApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
-                        <Data Value="ACF" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ACF"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
-                        <Data Value="ImagingTools" IsEnabled="true"/>
+                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="LegalCopyright" Type="String">
-                        <Data Value="© 2015 Witold Gantzke and Kirill Lepskiy" IsEnabled="true"/>
+                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="© 2015 Witold Gantzke and Kirill Lepskiy"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ProductName" Type="String">
-                        <Data Value="ACF" IsEnabled="true"/>
+                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ACF"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ReplaceEmbeddedVariables" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="ReplaceEmbeddedVariables" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

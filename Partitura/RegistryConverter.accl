@@ -1,19 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="1000" ComponentName="RegistrySaver" Y="400" Note=""/>
-        <Element X="350" ComponentName="RegistryLoader" Y="400" Note=""/>
-        <Element X="675" ComponentName="Registry" Y="725" Note=""/>
-        <Element X="775" ComponentName="CopyFilesTree" Y="475" Note=""/>
-        <Element X="1000" ComponentName="VersionInfo" Y="225" Note=""/>
-        <Element X="675" ComponentName="ComplexCopyApplication" Y="225" Note=""/>
-        <Element X="675" ComponentName="FileCopyOverLoader" Y="625" Note=""/>
+        <Element ComponentName="RegistrySaver" X="1000" Y="400" Note=""/>
+        <Element ComponentName="ComplexCopyApplication" X="675" Y="225" Note=""/>
+        <Element ComponentName="RegistryLoader" X="350" Y="400" Note=""/>
+        <Element ComponentName="Registry" X="675" Y="725" Note=""/>
+        <Element ComponentName="VersionInfo" X="1000" Y="225" Note=""/>
+        <Element ComponentName="CopyFilesTree" X="775" Y="475" Note=""/>
+        <Element ComponentName="FileCopyOverLoader" X="675" Y="625" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

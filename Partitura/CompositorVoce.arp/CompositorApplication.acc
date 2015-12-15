@@ -1,121 +1,124 @@
-<Acf Keywords="" Description="Compositor application component">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Compositor application component</Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="MultiDocApp" Id="Application" PackageId="AcfGuiVoce">
+        <Element Id="Application" PackageId="AcfGuiVoce" ComponentId="MultiDocApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="AboutDialogTitle" Type="String">
-                        <Data Value="About Compositor" IsEnabled="true"/>
+                    <AttributeInfo Id="AboutDialogTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="About Compositor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="AboutLogoPath" Type="String">
-                        <Data Value=":/Images/CompositorLogo" IsEnabled="true"/>
+                    <AttributeInfo Id="AboutLogoPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Images/CompositorLogo"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="AllowViewRepeating" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="AllowViewRepeating" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ApplicationName" Type="String">
-                        <Data Value="Compositor" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Compositor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="CompanyName" Type="String">
-                        <Data Value="ImagingTools" IsEnabled="true"/>
+                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DocumentTemplates" Id="DocumentTemplates" Type="Reference[]">
+                    <AttributeInfo Id="DocumentTemplates" Type="Reference[]" ExportId="DocumentTemplates">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IconPath" Type="String">
-                        <Data Value=":/Icons/CompositorIcon" IsEnabled="true"/>
+                    <AttributeInfo Id="IconPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Icons/CompositorIcon"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IconSize" Type="Integer">
-                        <Data Value="32" IsEnabled="true"/>
+                    <AttributeInfo Id="IconSize" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="32"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsCopyPathVisible" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsCopyPathVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsOpenContainingFolderVisible" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsOpenContainingFolderVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsTabbedDockAllowed" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsTabbedDockAllowed" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="LegalCopyright" Type="String">
-                        <Data Value="© 2015 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of ACF project&#xa;See 'License.txt' for license information" IsEnabled="true"/>
+                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="© 2015 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF project&#10;See 'License.txt' for license information"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MainVersionId" Id="MainVersionId" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="MainVersionId">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MainWindowCompTypeIds" Id="MainWindowCompTypeIds" Type="Id[]">
+                    <AttributeInfo Id="MainWindowCompTypeIds" Type="Id[]" ExportId="MainWindowCompTypeIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MainWindowsComponents" Id="MainWindowComponents" Type="Reference[]">
+                    <AttributeInfo Id="MainWindowComponents" Type="Reference[]" ExportId="MainWindowsComponents">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MaxRecentFiles" Type="Integer">
-                        <Data Value="20" IsEnabled="true"/>
+                    <AttributeInfo Id="MaxRecentFiles" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="20"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProductName" Id="ProductName" Type="String">
-                        <Data Value="ACF" IsEnabled="true"/>
+                    <AttributeInfo Id="ProductName" Type="String" ExportId="ProductName">
+                        <Data IsEnabled="true" Value="ACF"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RememberOpenDocumentsOnExit" Type="Reference">
-                        <Data Value="Settings/EnableDocumentPersistence" IsEnabled="true"/>
+                    <AttributeInfo Id="RememberOpenDocumentsOnExit" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Settings/EnableDocumentPersistence"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SettingsDialog" Type="Reference">
-                        <Data Value="Settings" IsEnabled="true"/>
+                    <AttributeInfo Id="SettingsDialog" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Settings"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowAboutProductName" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowAboutProductName" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowSplashApplicationName" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowSplashApplicationName" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ShowSplashProductName" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="ShowSplashProductName" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SplashScreenImage" Type="String">
-                        <Data Value=":/Images/CompositorSplashScreen" IsEnabled="true"/>
+                    <AttributeInfo Id="SplashScreenImage" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Images/CompositorSplashScreen"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TranslationManager" Type="Reference">
-                        <Data Value="TranslationManager" IsEnabled="true"/>
+                    <AttributeInfo Id="TranslationManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="TranslationManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="VersionInfo" Type="Reference">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CompositorSettingsDialog" Id="Settings" PackageId="CompositorVoce">
+        <Element Id="Settings" PackageId="CompositorVoce" ComponentId="CompositorSettingsDialog">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="Application" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Application"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="LanguageSelectionConstraints" Type="Reference">
-                        <Data Value="TranslationManager" IsEnabled="true"/>
+                    <AttributeInfo Id="LanguageSelectionConstraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="TranslationManager"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="CompositorTranslationManager" Id="TranslationManager" PackageId="CompositorVoce">
+        <Element Id="TranslationManager" PackageId="CompositorVoce" ComponentId="CompositorTranslationManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="LanguageSelection" Type="Reference">
-                        <Data Value="Settings/LanguageSelection" IsEnabled="true"/>
+                    <AttributeInfo Id="LanguageSelection" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Settings/LanguageSelection"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
+        <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -129,12 +132,12 @@
         <Interface InterfaceId="iser::IVersionInfo" ComponentId="VersionInfo"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="Settings/ConfigFile" ExportedId="ConfigFile"/>
-        <Component ComponentId="Application/Workspace" ExportedId="DocumentManager"/>
-        <Component ComponentId="Application/DocumentSelection" ExportedId="DocumentSelection"/>
-        <Component ComponentId="Settings/EnableDocumentPersistence" ExportedId="EnableDocumentPersistence"/>
-        <Component ComponentId="Settings/HtmlBrowserFile" ExportedId="HtmlBrowserFile"/>
-        <Component ComponentId="Settings/HtmlEditorFile" ExportedId="HtmlEditorFile"/>
-        <Component ComponentId="Settings/PreviewCommandFile" ExportedId="PreviewCommandFile"/>
+        <Component ExportedId="ConfigFile" ComponentId="Settings/ConfigFile"/>
+        <Component ExportedId="DocumentManager" ComponentId="Application/Workspace"/>
+        <Component ExportedId="DocumentSelection" ComponentId="Application/DocumentSelection"/>
+        <Component ExportedId="EnableDocumentPersistence" ComponentId="Settings/EnableDocumentPersistence"/>
+        <Component ExportedId="HtmlBrowserFile" ComponentId="Settings/HtmlBrowserFile"/>
+        <Component ExportedId="HtmlEditorFile" ComponentId="Settings/HtmlEditorFile"/>
+        <Component ExportedId="PreviewCommandFile" ComponentId="Settings/PreviewCommandFile"/>
     </ExportedComponents>
 </Acf>

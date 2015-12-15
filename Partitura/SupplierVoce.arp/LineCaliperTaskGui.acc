@@ -1,72 +1,75 @@
-<Acf Keywords="Line Processing Task Supplier Edge Caliper" Description="GUI for edge search tool">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>GUI for edge search tool</Description>
+    <Keywords>Line Processing Task Supplier Edge Caliper</Keywords>
     <ElementsList>
-        <Element ComponentId="FileDialogLoader" Id="FileDialogLoader" PackageId="FileGuiPck">
+        <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XmlFileSerializer</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="LineCaliperSetGui" Id="ParamsGui" PackageId="ProcessorVoce">
+        <Element Id="ParamsGui" PackageId="ProcessorVoce" ComponentId="LineCaliperSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ValueSupplierGui" Id="ValueSupplierGui" PackageId="QtIprPck">
+        <Element Id="ValueSupplierGui" PackageId="QtIprPck" ComponentId="ValueSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ParamsLoader" Type="Reference">
-                        <Data Value="FileDialogLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsSetGui" Type="Reference">
-                        <Data Value="ParamsGui" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SceneIdFilters" Id="SceneIdFilters" Type="Integer[]">
+                    <AttributeInfo Id="SceneIdFilters" Type="Integer[]" ExportId="SceneIdFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SimpleXmlFileSerializer" Id="XmlFileSerializer" PackageId="FilePck">
+        <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FileExtensions" Type="String[]">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>licax.xml</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TypeDescriptions" Type="String[]">
+                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Line caliper XML parameters</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -81,6 +84,6 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ValueSupplierGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="ParamsGui" ExportedId="ParamsGui"/>
+        <Component ExportedId="ParamsGui" ComponentId="ParamsGui"/>
     </ExportedComponents>
 </Acf>

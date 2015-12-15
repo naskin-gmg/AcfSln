@@ -1,54 +1,57 @@
-<Acf Keywords="Image Processing File Converter" Description="Image-To-Image file converter">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Image-To-Image file converter</Description>
+    <Keywords>Image Processing File Converter</Keywords>
     <ElementsList>
-        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileConvertOverProcessor" Id="FileConvertOverProcessor" PackageId="FileProcessingPck">
+        <Element Id="FileConvertOverProcessor" PackageId="FileProcessingPck" ComponentId="FileConvertOverProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="ImageProcessor" Id="DataProcessor" Type="Reference">
+                    <AttributeInfo Id="DataProcessor" Type="Reference" ExportId="ImageProcessor">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InputData" Type="Reference">
-                        <Data Value="InputData" IsEnabled="true"/>
+                    <AttributeInfo Id="InputData" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InputData"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="InputFileLoader" Type="Reference">
-                        <Data Value="BitmapLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="InputFileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="OutputData" Type="Reference">
-                        <Data Value="OutputData" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputData" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OutputData"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="OutputFileLoader" Type="Reference">
-                        <Data Value="BitmapLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputFileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProcessingParams" Id="ProcessingParams" Type="Reference">
+                    <AttributeInfo Id="ProcessingParams" Type="Reference" ExportId="ProcessingParams">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Bitmap" Id="InputData" PackageId="BitmapPck">
+        <Element Id="InputData" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="Bitmap" Id="OutputData" PackageId="BitmapPck">
+        <Element Id="OutputData" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

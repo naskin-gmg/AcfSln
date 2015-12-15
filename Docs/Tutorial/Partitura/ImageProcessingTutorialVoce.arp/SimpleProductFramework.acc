@@ -1,257 +1,260 @@
-<Acf Keywords="Product Test Framework Tutorial" Description="Simple framework allowing to test tasks">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Simple framework allowing to test tasks</Description>
+    <Keywords>Product Test Framework Tutorial</Keywords>
     <ElementsList>
-        <Element ComponentId="AboutDialog" Id="AboutDialog" PackageId="AcfGuiVoce">
+        <Element Id="AboutDialog" PackageId="AcfGuiVoce" ComponentId="AboutDialog">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="AboutDialogIconPath" Id="DialogIconPath" Type="String">
+                    <AttributeInfo Id="DialogIconPath" Type="String" ExportId="AboutDialogIconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="AboutDialogTitle" Id="DialogTitle" Type="String">
+                    <AttributeInfo Id="DialogTitle" Type="String" ExportId="AboutDialogTitle">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="AboutLogoPath" Id="LogoPath" Type="String">
+                    <AttributeInfo Id="LogoPath" Type="String" ExportId="AboutLogoPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowApplicationName" Id="ShowApplicationName" Type="Boolean">
+                    <AttributeInfo Id="ShowApplicationName" Type="Boolean" ExportId="ShowApplicationName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowApplicationSubName" Id="ShowApplicationSubName" Type="Boolean">
+                    <AttributeInfo Id="ShowApplicationSubName" Type="Boolean" ExportId="ShowApplicationSubName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowLegalCopyright" Id="ShowLegalCopyright" Type="Boolean">
+                    <AttributeInfo Id="ShowLegalCopyright" Type="Boolean" ExportId="ShowLegalCopyright">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowProductName" Id="ShowProductName" Type="Boolean">
+                    <AttributeInfo Id="ShowProductName" Type="Boolean" ExportId="ShowProductName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ShowProductType" Id="ShowProductType" Type="Boolean">
+                    <AttributeInfo Id="ShowProductType" Type="Boolean" ExportId="ShowProductType">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="AboutVersionIds" Id="VersionIds" Type="Integer[]">
+                    <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="AboutVersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="AboutVersionNames" Id="VersionNames" Type="String[]">
+                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="AboutVersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ColorSchema" Id="ErrorColorSchema" PackageId="QtViewPck">
+        <Element Id="ErrorColorSchema" PackageId="QtViewPck" ComponentId="ColorSchema">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="NormalPenColor" Type="Id">
-                        <Data Value="red" IsEnabled="true"/>
+                    <AttributeInfo Id="NormalPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="red"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SelectedPenColor" Type="Id">
-                        <Data Value="magenta" IsEnabled="true"/>
+                    <AttributeInfo Id="SelectedPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="magenta"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SimpleShapeFactory" Id="ErrorShapeFactory" PackageId="QtViewPck">
+        <Element Id="ErrorShapeFactory" PackageId="QtViewPck" ComponentId="SimpleShapeFactory">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ShapeColorSchema" Type="Reference">
-                        <Data Value="ErrorColorSchema" IsEnabled="true"/>
+                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ErrorColorSchema"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="UseInteractiveShapes" Type="Boolean">
-                        <Data Value="false" IsEnabled="true"/>
+                    <AttributeInfo Id="UseInteractiveShapes" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileDialogLoader" Id="FileDialogLoader" PackageId="FileGuiPck">
+        <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Loaders" Type="Reference[]">
+                    <AttributeInfo Id="Loaders" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>XmlFileSerializer</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LogDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Inspection" Id="InspectionTask" PackageId="">
+        <Element Id="InspectionTask" PackageId="" ComponentId="Inspection">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Inspections" Id="Inspections" Type="Reference[]">
+                    <AttributeInfo Id="Inspections" Type="Reference[]" ExportId="Inspections">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LogDock"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="InspectionTaskGui" Id="InspectionTaskEditor" PackageId="QtInspectionPck">
+        <Element Id="InspectionTaskEditor" PackageId="QtInspectionPck" ComponentId="InspectionTaskGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
-                        <Data Value="InspectionTask" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InspectionTask"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DesignType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EditorVisualInfos" Id="EditorVisualInfos" Type="Reference[]">
+                    <AttributeInfo Id="EditorVisualInfos" Type="Reference[]" ExportId="EditorVisualInfos">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InspectionGuis" Id="Editors" Type="Reference[]">
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="InspectionGuis">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InspectionNames" Id="Names" Type="String[]">
+                    <AttributeInfo Id="Names" Type="String[]" ExportId="InspectionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParamsLoader" Type="Reference">
-                        <Data Value="FileDialogLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="InspectionPreviews" Id="PreviewGuis" Type="Reference[]">
+                    <AttributeInfo Id="PreviewGuis" Type="Reference[]" ExportId="InspectionPreviews">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ResultShapeFactory" Type="Reference">
-                        <Data Value="ErrorShapeFactory" IsEnabled="true"/>
+                    <AttributeInfo Id="ResultShapeFactory" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ErrorShapeFactory"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="TabBarOrientation" Type="Integer">
-                        <Data Value="3" IsEnabled="true"/>
+                    <AttributeInfo Id="TabBarOrientation" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="LogDock" Id="LogDock" PackageId="AcfGuiVoce">
+        <Element Id="LogDock" PackageId="AcfGuiVoce" ComponentId="LogDock">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="StandaloneApp/ApplicationInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="StandaloneApp/ApplicationInfo"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="StandaloneApp" Id="StandaloneApp" PackageId="AcfGuiVoce">
+        <Element Id="StandaloneApp" PackageId="AcfGuiVoce" ComponentId="StandaloneApp">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="AboutDialog" Type="Reference">
-                        <Data Value="AboutDialog" IsEnabled="true"/>
+                    <AttributeInfo Id="AboutDialog" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="AboutDialog"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ApplicationName" Id="ApplicationName" Type="String">
-                        <Data Value="ACF Application" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="ApplicationName">
+                        <Data IsEnabled="true" Value="ACF Application"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ApplicationSubname" Id="ApplicationSubname" Type="String">
+                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ApplicationType" Id="ApplicationType" Type="String">
+                    <AttributeInfo Id="ApplicationType" Type="String" ExportId="ApplicationType">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="CompanyName" Id="CompanyName" Type="String">
-                        <Data Value="ImagingTools" IsEnabled="true"/>
+                    <AttributeInfo Id="CompanyName" Type="String" ExportId="CompanyName">
+                        <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FrameSpaceSize" Id="FrameSpaceSize" Type="Integer">
+                    <AttributeInfo Id="FrameSpaceSize" Type="Integer" ExportId="FrameSpaceSize">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IconPath" Id="IconPath" Type="String">
+                    <AttributeInfo Id="IconPath" Type="String" ExportId="IconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IsMenuVisible" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="IsMenuVisible" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IsToolbarVisible" Id="IsToolbarVisible" Type="Boolean">
+                    <AttributeInfo Id="IsToolbarVisible" Type="Boolean" ExportId="IsToolbarVisible">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="LegalCopyright" Id="LegalCopyright" Type="String">
-                        <Data Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#xa;All rights reserved&#xa;&#xa;This tool is a part of IACF project&#xa;See 'License.txt' for license information" IsEnabled="true"/>
+                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="LegalCopyright">
+                        <Data IsEnabled="true" Value="© 2013 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of IACF project&#10;See 'License.txt' for license information"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MainVersionId" Id="MainVersionId" Type="Integer">
+                    <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="MainVersionId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainView" Type="Reference">
-                        <Data Value="InspectionTaskEditor" IsEnabled="true"/>
+                    <AttributeInfo Id="MainView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="InspectionTaskEditor"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="MainWindowComponents" Id="MainWindowComponents" Type="Reference[]">
+                    <AttributeInfo Id="MainWindowComponents" Type="Reference[]" ExportId="MainWindowComponents">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>LogDock</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProductName" Id="ProductName" Type="String">
+                    <AttributeInfo Id="ProductName" Type="String" ExportId="ProductName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SplashScreen" Id="SplashScreen" Type="Reference">
+                    <AttributeInfo Id="SplashScreen" Type="Reference" ExportId="SplashScreen">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SplashTime" Id="SplashTime" Type="Real">
+                    <AttributeInfo Id="SplashTime" Type="Real" ExportId="SplashTime">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="StyleSheet" Id="StyleSheet" Type="String">
+                    <AttributeInfo Id="StyleSheet" Type="String" ExportId="StyleSheet">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TitleFormat" Id="TitleFormat" Type="String">
+                    <AttributeInfo Id="TitleFormat" Type="String" ExportId="TitleFormat">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TranslationManager" Id="TranslationManager" Type="Reference">
+                    <AttributeInfo Id="TranslationManager" Type="Reference" ExportId="TranslationManager">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UiStartMode" Id="UiStartMode" Type="Integer">
+                    <AttributeInfo Id="UiStartMode" Type="Integer" ExportId="UiStartMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UseIconText" Id="UseIconText" Type="Boolean">
+                    <AttributeInfo Id="UseIconText" Type="Boolean" ExportId="UseIconText">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="VersionInfo" Id="VersionInfo" PackageId="AcfSlnVoce">
+        <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="SimpleXmlFileSerializer" Id="XmlFileSerializer" PackageId="FilePck">
+        <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="XmlFileExtensions" Id="FileExtensions" Type="String[]">
+                    <AttributeInfo Id="FileExtensions" Type="String[]" ExportId="XmlFileExtensions">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>xml</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="LogDock" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="XmlTypeDescriptions" Id="TypeDescriptions" Type="String[]">
+                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="XmlTypeDescriptions">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Inspection parameters</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="VersionInfo" Id="VersionInfo" Type="Reference">
-                        <Data Value="VersionInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
+                        <Data IsEnabled="true" Value="VersionInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -259,34 +262,34 @@
     </ElementsList>
     <EmbeddedRegistriesList>
         <EmbeddedRegistry Id="Inspection">
-            <Data Keywords="" Description="">
+            <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element ComponentId="InspectionTask" Id="InspectionTask" PackageId="InspectionPck">
+                    <Element Id="InspectionTask" PackageId="InspectionPck" ComponentId="InspectionTask">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Inspections" Id="Subtasks" Type="Reference[]">
+                                <AttributeInfo Id="Subtasks" Type="Reference[]" ExportId="Inspections">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element ComponentId="SettingsPersistence" Id="SettingsPersistence" PackageId="AcfGuiVoce">
+                    <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
                         <Data IsEnabled="true" Flags="1">
                             <AttributeInfoMap>
-                                <AttributeInfo ExportId="ApplicationInfo" Id="ApplicationInfo" Type="Reference">
+                                <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                                    <Data Value="InspectionTask" IsEnabled="true"/>
+                                <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="InspectionTask"/>
                                 </AttributeInfo>
-                                <AttributeInfo ExportId="" Id="RootKey" Type="Id">
-                                    <Data Value="LastParameters" IsEnabled="true"/>
+                                <AttributeInfo Id="RootKey" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="LastParameters"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -303,7 +306,7 @@
                     <Interface InterfaceId="istd::IPolymorphic" ComponentId="InspectionTask"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ComponentId="InspectionTask/Parameters" ExportedId="Parameters"/>
+                    <Component ExportedId="Parameters" ComponentId="InspectionTask/Parameters"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>
@@ -312,9 +315,9 @@
         <Interface InterfaceId="ibase::IApplication" ComponentId="StandaloneApp"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="StandaloneApp/ApplicationInfo" ExportedId="ApplicationInfo"/>
-        <Component ComponentId="LogDock" ExportedId="LogDock"/>
-        <Component ComponentId="InspectionTask/Parameters" ExportedId="Parameters"/>
-        <Component ComponentId="VersionInfo" ExportedId="VersionInfo"/>
+        <Component ExportedId="ApplicationInfo" ComponentId="StandaloneApp/ApplicationInfo"/>
+        <Component ExportedId="LogDock" ComponentId="LogDock"/>
+        <Component ExportedId="Parameters" ComponentId="InspectionTask/Parameters"/>
+        <Component ExportedId="VersionInfo" ComponentId="VersionInfo"/>
     </ExportedComponents>
 </Acf>

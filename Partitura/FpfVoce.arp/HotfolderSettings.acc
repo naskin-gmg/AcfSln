@@ -1,42 +1,45 @@
-<Acf Keywords="Hotfolder Parameter" Description="Hotfolder's processing parameters">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Hotfolder's processing parameters</Description>
+    <Keywords>Hotfolder Parameter</Keywords>
     <ElementsList>
-        <Element ComponentId="DirectoryMonitorParam" Id="DirectoryMonitorParams" PackageId="FpfVoce">
+        <Element Id="DirectoryMonitorParams" PackageId="FpfVoce" ComponentId="DirectoryMonitorParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AcceptPatterns" Id="AcceptPatterns" Type="String[]">
+                    <AttributeInfo Id="AcceptPatterns" Type="String[]" ExportId="AcceptPatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IgnorePatterns" Id="IgnorePatterns" Type="String[]">
+                    <AttributeInfo Id="IgnorePatterns" Type="String[]" ExportId="IgnorePatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNamingParams" Id="FileNamingParams" PackageId="FileProcessingPck">
+        <Element Id="FileNamingParams" PackageId="FileProcessingPck" ComponentId="FileNamingParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="OverwriteStrategy" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="OverwriteStrategy" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Uuid" Id="HotfolderId" PackageId="BasePck">
+        <Element Id="HotfolderId" PackageId="BasePck" ComponentId="Uuid">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="ComposedParamsSet" Id="HotfolderSettings" PackageId="BasePck">
+        <Element Id="HotfolderSettings" PackageId="BasePck" ComponentId="ComposedParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Parameters" Type="Reference[]">
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>InputDirectories</Value>
@@ -47,7 +50,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ParametersId" Type="Id[]">
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>InputDirectories</Value>
@@ -61,10 +64,10 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="DynamicDirectoryParam" Id="InputDirectories" PackageId="FpfVoce">
+        <Element Id="InputDirectories" PackageId="FpfVoce" ComponentId="DynamicDirectoryParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="SlaveSets" Type="Reference[]">
+                    <AttributeInfo Id="SlaveSets" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>DirectoryMonitorParams</Value>
@@ -74,11 +77,11 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="OutputDirectory" PackageId="FilePck">
+        <Element Id="OutputDirectory" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -91,11 +94,11 @@
         <Interface InterfaceId="iser::ISerializable" ComponentId="HotfolderSettings"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="HotfolderSettings"/>
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="HotfolderSettings"/>
-        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic>" ComponentId="HotfolderSettings"/>
+        <Interface InterfaceId="istd::TIHierarchical&lt;istd::IPolymorphic&gt;" ComponentId="HotfolderSettings"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="FileNamingParams" ExportedId="FileNamingParams"/>
-        <Component ComponentId="InputDirectories" ExportedId="InputDirectories"/>
-        <Component ComponentId="OutputDirectory" ExportedId="OutputDirectory"/>
+        <Component ExportedId="FileNamingParams" ComponentId="FileNamingParams"/>
+        <Component ExportedId="InputDirectories" ComponentId="InputDirectories"/>
+        <Component ExportedId="OutputDirectory" ComponentId="OutputDirectory"/>
     </ExportedComponents>
 </Acf>

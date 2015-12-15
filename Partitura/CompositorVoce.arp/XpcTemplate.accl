@@ -1,26 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="525" ComponentName="UndoManager" Y="225" Note=""/>
-        <Element X="800" ComponentName="XpcEditorGui" Y="525" Note=""/>
-        <Element X="525" ComponentName="DocumentTemplate" Y="375" Note=""/>
-        <Element X="800" ComponentName="PackageFileTypeInfo" Y="650" Note=""/>
-        <Element X="275" ComponentName="XpcModel" Y="525" Note=""/>
-        <Element X="1025" ComponentName="XpcLoader" Y="375" Note=""/>
-        <Element X="1025" ComponentName="RegistryFileTypeInfo" Y="650" Note=""/>
+        <Element ComponentName="XpcModel" X="275" Y="525" Note=""/>
+        <Element ComponentName="RegistryFileTypeInfo" X="1025" Y="650" Note=""/>
+        <Element ComponentName="XpcEditorGui" X="800" Y="525" Note=""/>
+        <Element ComponentName="DocumentTemplate" X="525" Y="375" Note=""/>
+        <Element ComponentName="UndoManager" X="525" Y="225" Note=""/>
+        <Element ComponentName="PackageFileTypeInfo" X="800" Y="650" Note=""/>
+        <Element ComponentName="XpcLoader" X="1025" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="XpcLoader">
             <PositionMap>
-                <Element X="850" ComponentName="NewFormatSerializer" Y="500" Note=""/>
-                <Element X="625" ComponentName="Composed" Y="325" Note=""/>
-                <Element X="350" ComponentName="OldFormatSerializer" Y="500" Note=""/>
+                <Element ComponentName="Composed" X="625" Y="325" Note=""/>
+                <Element ComponentName="OldFormatSerializer" X="350" Y="500" Note=""/>
+                <Element ComponentName="NewFormatSerializer" X="850" Y="500" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

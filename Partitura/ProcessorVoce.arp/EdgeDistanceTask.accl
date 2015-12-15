@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="650" ComponentName="Calibration2dProxy" Y="350" Note=""/>
-        <Element X="925" ComponentName="EdgeDistancesSupplier" Y="175" Note=""/>
-        <Element X="375" ComponentName="EdgeDistanceProcessor" Y="175" Note=""/>
-        <Element X="950" ComponentName="ProcessingParams" Y="525" Note=""/>
-        <Element X="350" ComponentName="Caliper" Y="525" Note=""/>
+        <Element ComponentName="ProcessingParams" X="950" Y="525" Note=""/>
+        <Element ComponentName="Caliper" X="350" Y="525" Note=""/>
+        <Element ComponentName="EdgeDistancesSupplier" X="925" Y="175" Note=""/>
+        <Element ComponentName="EdgeDistanceProcessor" X="375" Y="175" Note=""/>
+        <Element ComponentName="Calibration2dProxy" X="650" Y="350" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

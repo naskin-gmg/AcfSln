@@ -1,47 +1,50 @@
-<Acf Keywords="Task Image Acquisition Camera GUI" Description="Image acquisition GUI for image acquisition task">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Image acquisition GUI for image acquisition task</Description>
+    <Keywords>Task Image Acquisition Camera GUI</Keywords>
     <ElementsList>
-        <Element ComponentId="BitmapDialogLoader" Id="BitmapDialogLoader" PackageId="AcfGuiVoce">
+        <Element Id="BitmapDialogLoader" PackageId="AcfGuiVoce" ComponentId="BitmapDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="SnapBitmapSupplierGui" Id="ImageTaskGui" PackageId="QtCameraPck">
+        <Element Id="ImageTaskGui" PackageId="QtCameraPck" ComponentId="SnapBitmapSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="BitmapLoader" Type="Reference">
-                        <Data Value="BitmapDialogLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="BitmapLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ConnectParametersToEditor" Id="ConnectParametersToEditor" Type="Boolean">
+                    <AttributeInfo Id="ConnectParametersToEditor" Type="Boolean" ExportId="ConnectParametersToEditor">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DefaultModel" Id="DefaultModel" Type="Reference">
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultModel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="EnableVerbose" Id="EnableVerbose" Type="Boolean">
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="CameraParamsSetGui" Id="ParamsSetGui" Type="Reference">
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="CameraParamsSetGui">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="SlaveSceneExtender" Id="SlaveSceneExtender" Type="Reference">
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ViewCalibrationMode" Id="ViewCalibrationMode" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="ViewCalibrationMode" Type="Integer" ExportId="ViewCalibrationMode">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -59,6 +62,6 @@
         <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTaskGui/VisualStatus"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="ImageTaskGui/VisualStatus" ExportedId="VisualStatus"/>
+        <Component ExportedId="VisualStatus" ComponentId="ImageTaskGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>

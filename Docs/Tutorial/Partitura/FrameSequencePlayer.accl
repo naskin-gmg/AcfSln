@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="875" ComponentName="GuiApplication" Y="200" Note=""/>
-        <Element X="550" ComponentName="DirParam" Y="500" Note=""/>
-        <Element X="550" ComponentName="DirParamGui" Y="350" Note=""/>
-        <Element X="875" ComponentName="FrameSequenceViewer" Y="425" Note=""/>
+        <Element ComponentName="FrameSequenceViewer" X="875" Y="425" Note=""/>
+        <Element ComponentName="DirParam" X="550" Y="500" Note=""/>
+        <Element ComponentName="GuiApplication" X="875" Y="200" Note=""/>
+        <Element ComponentName="DirParamGui" X="550" Y="350" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

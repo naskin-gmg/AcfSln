@@ -1,63 +1,66 @@
-<Acf Keywords="Hotfolder Processing" Description="GUI and data component for hotfolder processing with settings and state persistence">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>GUI and data component for hotfolder processing with settings and state persistence</Description>
+    <Keywords>Hotfolder Processing</Keywords>
     <ElementsList>
-        <Element ComponentId="MonitoringSessionsManager" Id="DirectoryMonitorCache" PackageId="HotfolderPck">
+        <Element Id="DirectoryMonitorCache" PackageId="HotfolderPck" ComponentId="MonitoringSessionsManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="Hotfolder" Id="Hotfolder" PackageId="FpfVoce">
+        <Element Id="Hotfolder" PackageId="FpfVoce" ComponentId="Hotfolder">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AcceptPatterns" Id="AcceptPatterns" Type="String[]">
+                    <AttributeInfo Id="AcceptPatterns" Type="String[]" ExportId="AcceptPatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FileConverter" Id="FileConverter" Type="Reference">
+                    <AttributeInfo Id="FileConverter" Type="Reference" ExportId="FileConverter">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="IgnorePatterns" Id="IgnorePatterns" Type="String[]">
+                    <AttributeInfo Id="IgnorePatterns" Type="String[]" ExportId="IgnorePatterns">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MonitoringSessionManager" Type="Reference">
-                        <Data Value="DirectoryMonitorCache" IsEnabled="true"/>
+                    <AttributeInfo Id="MonitoringSessionManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorCache"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="OutputFileInfo" Id="OutputFileInfo" Type="Reference">
+                    <AttributeInfo Id="OutputFileInfo" Type="Reference" ExportId="OutputFileInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderGui" Id="HotfolderGui" PackageId="FpfVoce">
+        <Element Id="HotfolderGui" PackageId="FpfVoce" ComponentId="HotfolderGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="InputDirectoriesManager" Type="Reference">
-                        <Data Value="Hotfolder/InputDirectories" IsEnabled="true"/>
+                    <AttributeInfo Id="InputDirectoriesManager" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Hotfolder/InputDirectories"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ProcessingItemPreview" Type="Reference">
-                        <Data Value="ProcessingItemPreview" IsEnabled="true"/>
+                    <AttributeInfo Id="ProcessingItemPreview" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingItemPreview"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ProcessingParamsDialog" Id="ProcessingParamsDialog" Type="Reference">
+                    <AttributeInfo Id="ProcessingParamsDialog" Type="Reference" ExportId="ProcessingParamsDialog">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ModelBinder" Id="HotfolderGuiBinder" PackageId="BasePck">
+        <Element Id="HotfolderGuiBinder" PackageId="BasePck" ComponentId="ModelBinder">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Model" Type="Reference">
-                        <Data Value="Hotfolder/HotfolderItems" IsEnabled="true"/>
+                    <AttributeInfo Id="Model" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Hotfolder/HotfolderItems"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Observers" Type="Reference[]">
+                    <AttributeInfo Id="Observers" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>HotfolderGui</Value>
@@ -67,70 +70,70 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="HotfolderSettingsDialog" Id="HotfolderSettingsDialog" PackageId="FpfVoce">
+        <Element Id="HotfolderSettingsDialog" PackageId="FpfVoce" ComponentId="HotfolderSettingsDialog">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="HotfolderSettings" Type="Reference">
-                        <Data Value="Hotfolder/HotfolderSettings" IsEnabled="true"/>
+                    <AttributeInfo Id="HotfolderSettings" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Hotfolder/HotfolderSettings"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="HotfolderSettingsFilePath" PackageId="FilePck">
+        <Element Id="HotfolderSettingsFilePath" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="HotfolderSettingsFilePath" Id="DefaultPath" Type="String">
-                        <Data Value="HotfolderSettings.xml" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="HotfolderSettingsFilePath">
+                        <Data IsEnabled="true" Value="HotfolderSettings.xml"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="XmlFilePersistence" Id="HotfolderSettingsPersistence" PackageId="AcfVoce">
+        <Element Id="HotfolderSettingsPersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="HotfolderSettingsFilePath" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderSettingsFilePath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="Hotfolder/HotfolderSettings" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Hotfolder/HotfolderSettings"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="HotfolderStateFilePath" PackageId="FilePck">
+        <Element Id="HotfolderStateFilePath" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="HotfolderStateFilePath" Id="DefaultPath" Type="String">
-                        <Data Value="HotfolderState.xml" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="HotfolderStateFilePath">
+                        <Data IsEnabled="true" Value="HotfolderState.xml"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="XmlFilePersistence" Id="HotfolderStatePersistence" PackageId="AcfVoce">
+        <Element Id="HotfolderStatePersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="HotfolderStateFilePath" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="HotfolderStateFilePath"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="Hotfolder/HotfolderProcessingInfo" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Hotfolder/HotfolderProcessingInfo"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Instantiator" Id="Instantiator" PackageId="BasePck">
+        <Element Id="Instantiator" PackageId="BasePck" ComponentId="Instantiator">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="Instances" Type="Reference[]">
+                    <AttributeInfo Id="Instances" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>MonitoringCachePersistence</Value>
@@ -143,37 +146,37 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="MonitorCacheFile" PackageId="FilePck">
+        <Element Id="MonitorCacheFile" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultPath" Type="String">
-                        <Data Value="DirectoryMonitorCache.xml" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorCache.xml"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="XmlFilePersistence" Id="MonitoringCachePersistence" PackageId="AcfVoce">
+        <Element Id="MonitoringCachePersistence" PackageId="AcfVoce" ComponentId="XmlFilePersistence">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="MonitorCacheFile" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MonitorCacheFile"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="Log" Id="Log" Type="Reference">
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="DirectoryMonitorCache" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirectoryMonitorCache"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ProcessingItemPreviewGui" Id="ProcessingItemPreview" PackageId="FpfVoce">
+        <Element Id="ProcessingItemPreview" PackageId="FpfVoce" ComponentId="ProcessingItemPreviewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="InputFilePreview" Id="InputFilePreview" Type="Reference">
+                    <AttributeInfo Id="InputFilePreview" Type="Reference" ExportId="InputFilePreview">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="OutputFilePreview" Id="OutputFilePreview" Type="Reference">
+                    <AttributeInfo Id="OutputFilePreview" Type="Reference" ExportId="OutputFilePreview">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -186,6 +189,6 @@
         <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="HotfolderGui"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ComponentId="HotfolderSettingsDialog" ExportedId="HotfolderSettingsDialog"/>
+        <Component ExportedId="HotfolderSettingsDialog" ComponentId="HotfolderSettingsDialog"/>
     </ExportedComponents>
 </Acf>

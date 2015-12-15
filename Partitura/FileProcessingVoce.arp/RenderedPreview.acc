@@ -1,116 +1,119 @@
-<Acf Keywords="" Description="Preview compositum for bitmaps">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Preview compositum for bitmaps</Description>
+    <Keywords></Keywords>
     <ElementsList>
-        <Element ComponentId="AutoPersistence" Id="AutoPersistence" PackageId="FilePck">
+        <Element Id="AutoPersistence" PackageId="FilePck" ComponentId="AutoPersistence">
             <Data IsEnabled="true" Flags="1">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FileLoader" Type="Reference">
-                        <Data Value="BinaryFileSerializer" IsEnabled="true"/>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BinaryFileSerializer"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FilePath" Type="Reference">
-                        <Data Value="File" IsEnabled="true"/>
+                    <AttributeInfo Id="FilePath" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="File"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="RenderedObjectFileLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="RenderedObjectFileLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="RestoreOnBegin" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="RestoreOnBegin" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StoreOnEnd" Type="Boolean">
-                        <Data Value="true" IsEnabled="true"/>
+                    <AttributeInfo Id="StoreOnEnd" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="BinaryFileSerializer" Id="BinaryFileSerializer" PackageId="FilePck">
+        <Element Id="BinaryFileSerializer" PackageId="FilePck" ComponentId="BinaryFileSerializer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParam" Id="File" PackageId="FilePck">
+        <Element Id="File" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="RenderingPreviewCacheFilePath" Id="DefaultPath" Type="String">
-                        <Data Value="RenderedPreviewCache.bin" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="RenderingPreviewCacheFilePath">
+                        <Data IsEnabled="true" Value="RenderedPreviewCache.bin"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FilePreviewGui" Id="FilePreviewGui" PackageId="FileGuiPck">
+        <Element Id="FilePreviewGui" PackageId="FileGuiPck" ComponentId="FilePreviewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="AsynchronPreviewGenerationEnabled" Id="AsynchronPreviewGenerationEnabled" Type="Boolean">
+                    <AttributeInfo Id="AsynchronPreviewGenerationEnabled" Type="Boolean" ExportId="AsynchronPreviewGenerationEnabled">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="FileLoader" Type="Reference">
-                        <Data Value="RenderedObjectFileLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="RenderedObjectFileLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ObjectFactory" Type="Factory">
-                        <Data Value="Bitmap" IsEnabled="true"/>
+                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="ObjectView" Type="Reference">
-                        <Data Value="ImageView" IsEnabled="true"/>
+                    <AttributeInfo Id="ObjectView" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageView"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ImageView" Id="ImageView" PackageId="QtViewPck">
+        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="BackgroundMode" Id="BackgroundMode" Type="Integer">
+                    <AttributeInfo Id="BackgroundMode" Type="Integer" ExportId="BackgroundMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ColorSchema" Id="ColorSchema" Type="Reference">
+                    <AttributeInfo Id="ColorSchema" Type="Reference" ExportId="ColorSchema">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FitMode" Id="FitMode" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="FitMode" Type="Integer" ExportId="FitMode">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FullScreenModeSupported" Id="FullScreenModeSupported" Type="Boolean">
+                    <AttributeInfo Id="FullScreenModeSupported" Type="Boolean" ExportId="FullScreenModeSupported">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="UseAntialiasing" Id="UseAntialiasing" Type="Boolean">
+                    <AttributeInfo Id="UseAntialiasing" Type="Boolean" ExportId="UseAntialiasing">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="ZoomToFitEnabled" Id="ZoomToFitEnabled" Type="Boolean">
+                    <AttributeInfo Id="ZoomToFitEnabled" Type="Boolean" ExportId="ZoomToFitEnabled">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="RenderedObjectFileLoader" Id="RenderedObjectFileLoader" PackageId="FileProcessingPck">
+        <Element Id="RenderedObjectFileLoader" PackageId="FileProcessingPck" ComponentId="RenderedObjectFileLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="BitmapHeight" Id="BitmapHeight" Type="Integer">
+                    <AttributeInfo Id="BitmapHeight" Type="Integer" ExportId="BitmapHeight">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="BitmapWidth" Id="BitmapWidth" Type="Integer">
+                    <AttributeInfo Id="BitmapWidth" Type="Integer" ExportId="BitmapWidth">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="DataObjectFactories" Id="DataObjectFactories" Type="Factory[]">
+                    <AttributeInfo Id="DataObjectFactories" Type="Factory[]" ExportId="DataObjectFactories">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="FileLoaders" Id="FileLoaders" Type="Reference[]">
+                    <AttributeInfo Id="FileLoaders" Type="Reference[]" ExportId="FileLoaders">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MaxCacheSize" Type="Integer">
-                        <Data Value="10" IsEnabled="true"/>
+                    <AttributeInfo Id="MaxCacheSize" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="10"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="PreviewGenerationProcessors" Id="PreviewGenerationProcessors" Type="Reference[]">
+                    <AttributeInfo Id="PreviewGenerationProcessors" Type="Reference[]" ExportId="PreviewGenerationProcessors">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

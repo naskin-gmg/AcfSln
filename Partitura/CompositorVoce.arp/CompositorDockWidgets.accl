@@ -1,18 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="200" ComponentName="PackageOverviewDock" Y="400" Note=""/>
-        <Element X="1000" ComponentName="AttributeEditorDock" Y="125" Note=""/>
-        <Element X="618" ComponentName="ComponentNoteEditorDock" Y="550" Note=""/>
-        <Element X="900" ComponentName="WindowsListCommands" Y="675" Note=""/>
-        <Element X="600" ComponentName="LogDock" Y="675" Note=""/>
-        <Element X="1000" ComponentName="QuickHelpDock" Y="400" Note=""/>
+        <Element ComponentName="PackageOverviewDock" X="200" Y="400" Note=""/>
+        <Element ComponentName="WindowsListCommands" X="900" Y="675" Note=""/>
+        <Element ComponentName="QuickHelpDock" X="1000" Y="400" Note=""/>
+        <Element ComponentName="AttributeEditorDock" X="1000" Y="125" Note=""/>
+        <Element ComponentName="LogDock" X="600" Y="675" Note=""/>
+        <Element ComponentName="ComponentNoteEditorDock" X="618" Y="550" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

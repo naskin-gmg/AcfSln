@@ -1,50 +1,53 @@
-<Acf Keywords="Tutorial Application Player Video Images Sequence" Description="Simple player using sequence of images in directory as video">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Simple player using sequence of images in directory as video</Description>
+    <Keywords>Tutorial Application Player Video Images Sequence</Keywords>
     <ElementsList>
-        <Element ComponentId="FileNameParam" Id="DirParam" PackageId="FilePck">
+        <Element Id="DirParam" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="PathType" Type="Integer">
-                        <Data Value="2" IsEnabled="true"/>
+                    <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FileNameParamGui" Id="DirParamGui" PackageId="QtGuiPck">
+        <Element Id="DirParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DefaultModel" Type="Reference">
-                        <Data Value="DirParam" IsEnabled="true"/>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirParam"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="FrameSequenceViewer" Id="FrameSequenceViewer" PackageId="AcfSlnVoce">
+        <Element Id="FrameSequenceViewer" PackageId="AcfSlnVoce" ComponentId="FrameSequenceViewer">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DirectoryGui" Type="Reference">
-                        <Data Value="DirParamGui" IsEnabled="true"/>
+                    <AttributeInfo Id="DirectoryGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirParamGui"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DirectoryParam" Type="Reference">
-                        <Data Value="DirParam" IsEnabled="true"/>
+                    <AttributeInfo Id="DirectoryParam" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="DirParam"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="GuiApplication" Id="GuiApplication" PackageId="QtGuiPck">
+        <Element Id="GuiApplication" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="FrameSpaceSize" Type="Integer">
-                        <Data Value="9" IsEnabled="true"/>
+                    <AttributeInfo Id="FrameSpaceSize" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="9"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
-                        <Data Value="FrameSequenceViewer" IsEnabled="true"/>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FrameSequenceViewer"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

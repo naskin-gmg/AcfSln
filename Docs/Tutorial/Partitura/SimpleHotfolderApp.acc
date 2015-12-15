@@ -1,66 +1,69 @@
-<Acf Keywords="Hotfoder Demo Tutorial Processing" Description="Simple demonstration of hotfolder processing.\n Image files will be copied from the observed input location to the output folder.">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Simple demonstration of hotfolder processing.\n Image files will be copied from the observed input location to the output folder.</Description>
+    <Keywords>Hotfoder Demo Tutorial Processing</Keywords>
     <ElementsList>
-        <Element ComponentId="GuiApplication" Id="App" PackageId="QtGuiPck">
+        <Element Id="App" PackageId="QtGuiPck" ComponentId="GuiApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ApplicationInfo" Type="Reference">
-                        <Data Value="ImageProcessingHotfolderFramework" IsEnabled="true"/>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="IconPath" Type="String">
-                        <Data Value=":/Icons/Hotfolder" IsEnabled="true"/>
+                    <AttributeInfo Id="IconPath" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Icons/Hotfolder"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="MainGui" Type="Reference">
-                        <Data Value="ImageProcessingHotfolderFramework" IsEnabled="true"/>
+                    <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="StyleSheet" Type="String">
-                        <Data Value=":/Style/Asc.ass" IsEnabled="true"/>
+                    <AttributeInfo Id="StyleSheet" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value=":/Style/Asc.ass"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="TitleFormat" Id="TitleFormat" Type="String">
-                        <Data Value="$(AppName) by $(CompanyName)" IsEnabled="true"/>
+                    <AttributeInfo Id="TitleFormat" Type="String" ExportId="TitleFormat">
+                        <Data IsEnabled="true" Value="$(AppName) by $(CompanyName)"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="Bitmap" Id="Bitmap" PackageId="BitmapPck">
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="BitmapLoader" Id="BitmapLoader" PackageId="BitmapPck">
+        <Element Id="BitmapLoader" PackageId="BitmapPck" ComponentId="BitmapLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
         </Element>
-        <Element ComponentId="FileCopyOverLoader" Id="ImageCopy" PackageId="FileProcessingPck">
+        <Element Id="ImageCopy" PackageId="FileProcessingPck" ComponentId="FileCopyOverLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="InputLoader" Type="Reference">
-                        <Data Value="BitmapLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="InputLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Log" Type="Reference">
-                        <Data Value="ImageProcessingHotfolderFramework" IsEnabled="true"/>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageProcessingHotfolderFramework"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="Object" Type="Reference">
-                        <Data Value="Bitmap" IsEnabled="true"/>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="OutputLoader" Type="Reference">
-                        <Data Value="BitmapLoader" IsEnabled="true"/>
+                    <AttributeInfo Id="OutputLoader" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="BitmapLoader"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ImageProcessingHotfolderFramework" Id="ImageProcessingHotfolderFramework" PackageId="HotfolderVoce">
+        <Element Id="ImageProcessingHotfolderFramework" PackageId="HotfolderVoce" ComponentId="ImageProcessingHotfolderFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="ImageConverter" Type="Reference">
-                        <Data Value="ImageCopy" IsEnabled="true"/>
+                    <AttributeInfo Id="ImageConverter" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ImageCopy"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

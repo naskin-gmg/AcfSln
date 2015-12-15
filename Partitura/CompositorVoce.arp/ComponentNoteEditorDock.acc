@@ -1,28 +1,31 @@
-<Acf Keywords="Note Reference Tag='Help Compositor'" Description="Dock widget for hosting the component note editor">
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
+    <Description>Dock widget for hosting the component note editor</Description>
+    <Keywords>Note Reference Tag='Help Compositor'</Keywords>
     <ElementsList>
-        <Element ComponentId="DockWidgetGui" Id="ComponentNoteDock" PackageId="QtGuiPck">
+        <Element Id="ComponentNoteDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo ExportId="" Id="DockArea" Type="Integer">
-                        <Data Value="1" IsEnabled="true"/>
+                    <AttributeInfo Id="DockArea" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="DockTitle" Type="String">
-                        <Data Value="Notes" IsEnabled="true"/>
+                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Notes"/>
                     </AttributeInfo>
-                    <AttributeInfo ExportId="" Id="SlaveGui" Type="Reference">
-                        <Data Value="ComponentNoteEditor" IsEnabled="true"/>
+                    <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ComponentNoteEditor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element ComponentId="ComponentNoteEditor" Id="ComponentNoteEditor" PackageId="CompositorPck">
+        <Element Id="ComponentNoteEditor" PackageId="CompositorPck" ComponentId="ComponentNoteEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>

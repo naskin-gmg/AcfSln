@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="575" ComponentName="ComponentNoteDock" Y="325" Note=""/>
-        <Element X="575" ComponentName="ComponentNoteEditor" Y="475" Note=""/>
+        <Element ComponentName="ComponentNoteDock" X="575" Y="325" Note=""/>
+        <Element ComponentName="ComponentNoteEditor" X="575" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

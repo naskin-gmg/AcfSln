@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Number="4020" Id="0" Description="ACF"/>
-            <Version Number="1483" Id="1" Description="ACF-Solutions"/>
-            <Version Number="328961" Id="1023" Description="Qt Framework"/>
+            <Version Id="0" Number="4054" Description="ACF"/>
+            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element X="325" ComponentName="XmlFileSerializer" Y="550" Note=""/>
-        <Element X="325" ComponentName="ValueSupplierGui" Y="300" Note=""/>
-        <Element X="625" ComponentName="ParamsGui" Y="300" Note=""/>
-        <Element X="325" ComponentName="FileDialogLoader" Y="425" Note=""/>
+        <Element ComponentName="FileDialogLoader" X="325" Y="425" Note=""/>
+        <Element ComponentName="ParamsGui" X="625" Y="300" Note=""/>
+        <Element ComponentName="XmlFileSerializer" X="325" Y="550" Note=""/>
+        <Element ComponentName="ValueSupplierGui" X="325" Y="300" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>
