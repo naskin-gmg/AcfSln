@@ -33,7 +33,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="DirectoryMonitorParams" PackageId="HotfolderPck" ComponentId="AttributedDirectoryMonitorParams">
+        <Element Id="DirectoryMonitorParams" PackageId="HotfolderPck" ComponentId="DirectoryMonitorParams">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="AcceptPatterns" Type="String[]" ExportId="AcceptPatterns">
