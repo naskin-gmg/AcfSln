@@ -304,10 +304,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CDirectoryItemGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDirectoryMonitorComp.cpp"
 				>
 			</File>
@@ -321,10 +317,6 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\CDirectoryItemGuiComp.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorComp.h"
 				>
@@ -354,10 +346,6 @@
 			Filter="ui"
 			>
 			<File
-				RelativePath="..\CDirectoryItemGuiComp.ui"
-				>
-			</File>
-			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.ui"
 				>
 			</File>
@@ -367,10 +355,6 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CDirectoryItemGuiComp.cpp"
-				>
-			</File>
 			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CDirectoryMonitorComp.cpp"
 				>
@@ -391,10 +375,6 @@
 		<Filter
 			Name="Moc Files"
 			>
-			<File
-				RelativePath="..\CDirectoryItemGuiComp.moc"
-				>
-			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorComp.moc"
 				>
