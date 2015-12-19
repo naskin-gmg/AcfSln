@@ -2,9 +2,11 @@
 #define ihotf_IFileSystemChangeStorage_included
 
 
+// Qt includes 
+#include <QtCore/QString>
+
 // ACF includes
 #include "istd/IChangeable.h"
-#include <QtCore/QString>
 
 
 namespace ihotf

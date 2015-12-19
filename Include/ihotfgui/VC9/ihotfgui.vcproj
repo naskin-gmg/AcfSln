@@ -319,22 +319,6 @@
 				RelativePath="..\CHotfolderContainerGuiComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderProcessingComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderTaskManagerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -351,30 +335,6 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderContainerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderProcessingComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderTaskManagerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemInfoGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGuiComp.h"
 				>
 			</File>
 			<File
@@ -403,18 +363,6 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderContainerGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGuiComp.ui"
 				>
 			</File>
 		</Filter>
@@ -489,22 +437,6 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderContainerGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderProcessingComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessingItemPreviewGuiComp.moc"
 				>
 			</File>
 		</Filter>

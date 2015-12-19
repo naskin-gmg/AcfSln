@@ -346,18 +346,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderProcessingInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderProcessingItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderStatistics.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CMonitoringSession.cpp"
 				>
 			</File>
@@ -383,18 +371,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHotfolderProcessingInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderProcessingItem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CHotfolderStatistics.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CMonitoringSession.h"
 				>
 			</File>
@@ -416,26 +392,6 @@
 			</File>
 			<File
 				RelativePath="..\ihotf.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderInfoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderProcessingInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderProcessingItem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderStatistics.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IHotfolderTaskManager.h"
 				>
 			</File>
 			<File
