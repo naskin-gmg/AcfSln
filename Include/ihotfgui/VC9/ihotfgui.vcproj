@@ -315,10 +315,6 @@
 				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CHotfolderContainerGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -384,43 +380,11 @@
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderContainerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CHotfolderProcessingComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\moc_CProcessingItemPreviewGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\qrc_ihotfgui.cpp"
 				>
 			</File>
 			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CDirectoryItemGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CDirectoryMonitorParamsGui.h"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CHotfolderContainerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CHotfolderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CProcessingItemPreviewGuiComp.h"
 				>
 			</File>
 		</Filter>
