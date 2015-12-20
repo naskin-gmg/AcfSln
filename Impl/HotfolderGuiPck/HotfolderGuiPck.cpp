@@ -27,6 +27,11 @@ I_EXPORT_COMPONENT(
 			"Editor for directory monitor parameters",
 			"File Dir Filter Observer Editor Monitor" IM_TAG("GUI"));
 
+I_EXPORT_COMPONENT(
+			FileNamingParamsGui,
+			"Editor for file naming parameters",
+			"File Dir Name" IM_TAG("GUI"));
+
 
 } // namespace HotfolderGuiPck
 

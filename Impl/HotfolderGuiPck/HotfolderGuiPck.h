@@ -6,6 +6,7 @@
 
 #include "ihotfgui/CDirectoryMonitorComp.h"
 #include "ihotfgui/CDirectoryMonitorParamsGui.h"
+#include "ihotfgui/CFileNamingParamsGuiComp.h"
 
 
 /**
@@ -17,6 +18,7 @@ namespace HotfolderGuiPck
 
 typedef ihotfgui::CDirectoryMonitorComp DirectoryMonitor;
 typedef ihotfgui::CDirectoryMonitorParamsGui DirectoryMonitorParamsGui;
+typedef ihotfgui::CFileNamingParamsGuiComp FileNamingParamsGui;
 
 
 } // namespace HotfolderGuiPck

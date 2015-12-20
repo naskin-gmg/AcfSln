@@ -311,6 +311,10 @@
 				RelativePath="..\CDirectoryMonitorParamsGui.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CFileNamingParamsGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -323,6 +327,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNamingParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -349,6 +357,10 @@
 				RelativePath="..\CDirectoryMonitorParamsGui.ui"
 				>
 			</File>
+			<File
+				RelativePath="..\CFileNamingParamsGuiComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -364,11 +376,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\ihotfgui\moc_CFileNamingParamsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\qrc_ihotfgui.cpp"
 				>
 			</File>
 			<File
 				RelativePath="../../../AuxInclude/Qt5/GeneratedFiles\ihotfgui\ui_CDirectoryMonitorParamsGui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\AuxInclude\Qt5\GeneratedFiles\ihotfgui\ui_CFileNamingParamsGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -381,6 +401,10 @@
 			</File>
 			<File
 				RelativePath="..\CDirectoryMonitorParamsGui.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNamingParamsGuiComp.moc"
 				>
 			</File>
 		</Filter>
