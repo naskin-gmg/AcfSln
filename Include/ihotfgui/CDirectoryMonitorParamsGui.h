@@ -55,12 +55,12 @@ protected Q_SLOTS:
 	void on_RemoveIgnorePatternButton_clicked();
 	void on_IgnorePatternsList_itemSelectionChanged();
 	void on_IgnorePatternsList_itemChanged(QTreeWidgetItem* item, int column);
+	void OnModelUpdate();
 
 private:
 	void AddPattern(const QString& filter, QTreeWidget* treeView);
 	void RemoveSelectedPatterns(QTreeWidget* treeView);
 	void ResetEditor();
-	void OnModelUpdate();
 };
 
 

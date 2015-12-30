@@ -92,6 +92,18 @@ public:
 		Set the ignore file filters. The file system items, that match the specified filters will be ignored.
 	*/
 	virtual void SetIgnorePatterns(const QStringList& acceptPatterns) = 0;
+
+	/**
+		Get depth of the folder monitoring. This value defines the depth of the folder tree to be monitored.
+		A negative value means no limitation, 0 - defined root folder only and any other positive number - Number of sub-folders to be traversed.
+	*/
+	virtual int GetFolderDepth() const = 0;
+
+	/**
+		Set depth of the folder monitoring.
+		\sa GetFolderDepth
+	*/
+	virtual void SetFolderDepth(int folderDepth) = 0;
 };
 
 

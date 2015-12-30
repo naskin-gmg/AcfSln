@@ -46,6 +46,10 @@ void CDirectoryMonitorParamsComp::OnComponentCreated()
 	if (m_minLastModificationTimeDifferenceAttrPtr.IsValid()){
 		SetMinLastModificationTimeDifference(*m_minLastModificationTimeDifferenceAttrPtr);
 	}
+
+	if (m_folderDepthAttrPtr.IsValid()){
+		SetFolderDepth(*m_folderDepthAttrPtr);
+	}
 }
 
 

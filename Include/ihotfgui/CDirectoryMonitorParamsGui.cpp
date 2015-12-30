@@ -82,6 +82,8 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	}
 
 	objectPtr->SetIgnorePatterns(ignorePatterns);
+
+	objectPtr->SetFolderDepth(FolderDepthSpin->value());
 }
 
 	
@@ -117,6 +119,8 @@ void CDirectoryMonitorParamsGui::UpdateGui(const istd::IChangeable::ChangeSet& /
 		for (int patternIndex = 0; patternIndex < int(ignorePatterns.size()); patternIndex++){
 			AddPattern(ignorePatterns[patternIndex], IgnorePatternsList);
 		}
+
+		FolderDepthSpin->setValue(objectPtr->GetFolderDepth());
 	}
 }
 
@@ -134,6 +138,8 @@ void CDirectoryMonitorParamsGui::OnGuiCreated()
 	IgnorePatternsList->setEditTriggers(QAbstractItemView::DoubleClicked |  QAbstractItemView::EditKeyPressed);
 
 	IgnorePatternsList->setItemDelegate(new iwidgets::CItemDelegate(20, AcceptPatternsList));
+
+	connect(FolderDepthSpin, SIGNAL(valueChanged(int)), this, SLOT(OnModelUpdate()));
 }
 
 

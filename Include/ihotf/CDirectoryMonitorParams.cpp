@@ -16,7 +16,8 @@ namespace ihotf
 CDirectoryMonitorParams::CDirectoryMonitorParams()
 	:m_poolingIntervall(5),
 	m_observedItemTypes(OI_ALL),
-	m_observedChanges(OC_ALL)
+	m_observedChanges(OC_ALL),
+	m_folderDepth(0)
 {
 }
 
@@ -112,7 +113,7 @@ QStringList CDirectoryMonitorParams::GetIgnorePatterns() const
 
 void CDirectoryMonitorParams::SetIgnorePatterns(const QStringList& ignorePatterns)
 {
-	if (ignorePatterns != m_acceptPatterns){
+	if (ignorePatterns != m_ignorePatterns){
 		istd::CChangeNotifier changeNotifier(this);
 
 		m_ignorePatterns = ignorePatterns;
@@ -120,10 +121,26 @@ void CDirectoryMonitorParams::SetIgnorePatterns(const QStringList& ignorePattern
 }
 
 
+int CDirectoryMonitorParams::GetFolderDepth() const
+{
+	return m_folderDepth;
+}
+
+
+void CDirectoryMonitorParams::SetFolderDepth(int folderDepth)
+{
+	if (folderDepth != m_folderDepth){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_folderDepth = folderDepth;
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
-{		
+{
 	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed", iser::CArchiveTag::TT_LEAF);
@@ -132,6 +149,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag ignorePatternsTag("IgnorePatterns", "List of ingored file name patterns", iser::CArchiveTag::TT_MULTIPLE);
 	static iser::CArchiveTag ignorePatternTag("IgnorePattern", "Single ignored file name pattern", iser::CArchiveTag::TT_LEAF, &ignorePatternsTag);
 	static iser::CArchiveTag minLastModificationTimeDifferenceTag("MinLastModificationTimeDifference", "Minimal last modification time diffrence for operating on the file", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag folderDepthTag("FolderDepth", "Depth of the monitored folder tree", iser::CArchiveTag::TT_LEAF);
 
 	istd::CChangeNotifier changeNotifier(!archive.IsStoring()? this : NULL);
 
@@ -200,10 +218,14 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 			if (retVal){
 				m_ignorePatterns.push_back(ignorePattern);
 			}
-		}	
+		}
 	}
 
 	retVal = retVal && archive.EndTag(ignorePatternsTag);
+
+	retVal = retVal && archive.BeginTag(folderDepthTag);
+	retVal = retVal && archive.Process(m_folderDepth);
+	retVal = retVal && archive.EndTag(folderDepthTag);
 
 	return retVal;
 }
