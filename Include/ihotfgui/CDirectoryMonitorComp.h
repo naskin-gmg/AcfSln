@@ -159,6 +159,7 @@ private:
 	int m_observingItemTypes;
 	int m_observingChanges;
 	int m_lastModificationMinDifference;
+	int m_folderDepth;
 
 	MonitoringParamsObserver m_monitoringParamsObserver;
 	DirectoryParamsObserver m_directoryParamsObserver;
