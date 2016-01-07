@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4063" Description="ACF"/>
+            <Version Id="1" Number="1514" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -392,6 +392,7 @@
                                 <Value>*.accl</Value>
                                 <Value>*.arx</Value>
                                 <Value>*.alx</Value>
+                                <Value>*.awc</Value>
                                 <Value>*.xml</Value>
                                 <Value>*.png</Value>
                                 <Value>*.svg</Value>
