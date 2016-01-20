@@ -64,10 +64,11 @@ public:
 		CF_SUPPLIER_RESULTS = 0x6326415
 	};
 
-	enum WorkMessageType
+	enum MessageContainerType
 	{
-		WMT_TEMP,
-		WMT_RESULTS
+		MCT_RESULTS,
+		MCT_TEMP,
+		MTC_LAST = MCT_TEMP
 	};
 
 	/**
@@ -105,9 +106,9 @@ public:
 		Get messages outputted by this work.
 		The pointed object will not be relocated - no reconnect is needed if it is observed.
 		If the supplier doesn't support list of messages, it returns NULL.
-		\param	messageType	type of message, \sa WorkMessageType.
+		\param	containerType	type of message container, \sa MessageContainerType.
 	*/
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const = 0;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const = 0;
 
 	/**
 		Get parameter set using by this supplier.

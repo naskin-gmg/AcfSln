@@ -24,8 +24,7 @@ namespace iinsp
 */
 class CSupplierCompBase:
 			public ilog::CLoggerComponentBase,
-			virtual public ISupplier,
-			virtual protected ilog::IMessageConsumer
+			virtual public ISupplier
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
@@ -79,7 +78,7 @@ public:
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
 	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:
@@ -125,17 +124,17 @@ protected:
 	virtual QString GetDiagnosticName() const;
 
 	/**
-		Add ilog::CMessage to the internal message container (also from const functions).
-		\param	messagePtr	pointer to the new message object. It cannot be NULL.
+		Check if message container is supported.
+		\param	containerType	type of message container, \sa iinsp::ISupplier::MessageContainerType.
 	*/
-	virtual void AddMessage(const ilog::CMessage* messagePtr) const;
-
-	// reimplemented (ilog::IMessageConsumer)
-	virtual bool IsMessageSupported(
-				int messageCategory = -1,
-				int messageId = -1,
-				const istd::IInformationProvider* messagePtr = NULL) const;
-	virtual void AddMessage(const MessagePtr& messagePtr);
+	virtual bool IsMessageContainerSupported(int containerType) const;
+	/**
+		Add ilog::CMessage to the internal message container (also from const functions).
+		\param	messagePtr		pointer to the new message object. It cannot be NULL.
+		\param	containerType	type of message container, \sa iinsp::ISupplier::MessageContainerType.
+								If this container is not supported, message object will be deleted.
+	*/
+	virtual void AddMessage(const ilog::CMessage* messagePtr, int containerType = MCT_RESULTS) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -179,13 +178,13 @@ private:
 	template <class InterfaceType>
 	static InterfaceType* ExtractTaskLog(CSupplierCompBase& component)
 	{
-		return &component;
+		return &component.m_messageContainers[MCT_RESULTS];
 	}
 
 	template <class InterfaceType>
 	static InterfaceType* ExtractTempMessages(CSupplierCompBase& component)
 	{
-		return &component.m_tempMessageContainer;
+		return &component.m_messageContainers[MCT_TEMP];
 	}
 
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
@@ -199,8 +198,9 @@ private:
 	typedef QMap<imod::IModel*, ISupplier*> InputSuppliersMap;
 	InputSuppliersMap m_inputSuppliersMap;
 
-	imod::TModelWrap<ilog::CMessageContainer> m_tempMessageContainer;
-	mutable imod::TModelWrap<ilog::CMessageContainer> m_messageContainer;
+	typedef imod::TModelWrap<ilog::CMessageContainer> MessageContainer;
+	typedef QMap<int, MessageContainer> MessageContainerMap;
+	mutable MessageContainer m_messageContainers[MTC_LAST + 1];
 
 	iprm::IParamsSet* m_paramsSetPtr;
 

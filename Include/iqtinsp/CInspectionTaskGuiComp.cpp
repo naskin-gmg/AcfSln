@@ -820,7 +820,7 @@ void CInspectionTaskGuiComp::UpdateTaskMessages()
 		for (int subTaskIndex = 0; subTaskIndex < subtasksCount; subTaskIndex++){
 			iinsp::ISupplier* subTaskPtr = taskPtr->GetSubtask(subTaskIndex);
 			if (subTaskPtr != NULL){
-				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages(iinsp::ISupplier::WMT_RESULTS);
+				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages(iinsp::ISupplier::MCT_RESULTS);
 				if (messageContainerPtr != NULL){
 					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex);
 				}

@@ -91,10 +91,10 @@ void CDelegatedBitmapSupplierComp::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages(int messageType) const
+const ilog::IMessageContainer* CDelegatedBitmapSupplierComp::GetWorkMessages(int containerType) const
 {
 	if (m_bitmapSupplierCompPtr.IsValid()){
-		return m_bitmapSupplierCompPtr->GetWorkMessages(messageType);
+		return m_bitmapSupplierCompPtr->GetWorkMessages(containerType);
 	}
 
 	return NULL;

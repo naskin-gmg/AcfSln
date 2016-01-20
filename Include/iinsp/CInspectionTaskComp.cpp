@@ -248,9 +248,9 @@ void CInspectionTaskComp::ClearWorkResults()
 }
 
 
-const ilog::IMessageContainer* CInspectionTaskComp::GetWorkMessages(int messageType) const
+const ilog::IMessageContainer* CInspectionTaskComp::GetWorkMessages(int containerType) const
 {
-	if (messageType == WMT_RESULTS){
+	if (containerType == MCT_RESULTS){
 		return &m_messageContainer;
 	}
 
@@ -454,7 +454,7 @@ ilog::IMessageContainer::Messages CInspectionTaskComp::MessageContainer::GetMess
 	for (int i = 0; i < subtasksCount; ++i){
 		const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
-			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(WMT_RESULTS);
+			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(MCT_RESULTS);
 
 			if (containerPtr != NULL){
 				retVal += containerPtr->GetMessages();
@@ -486,7 +486,7 @@ bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
 	for (int i = 0; i < subtasksCount; ++i){
 		iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
-			ilog::IMessageContainer* containerPtr = const_cast<ilog::IMessageContainer*>(supplierPtr->GetWorkMessages(WMT_RESULTS));
+			ilog::IMessageContainer* containerPtr = const_cast<ilog::IMessageContainer*>(supplierPtr->GetWorkMessages(MCT_RESULTS));
 
 			if (containerPtr != NULL){
 				retVal = containerPtr->Serialize(archive) && retVal;

@@ -63,7 +63,7 @@ public:
 	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:

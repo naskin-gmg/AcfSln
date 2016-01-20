@@ -50,8 +50,9 @@ void CSupplierCompBase::EnsureWorkInitialized()
 	if (m_workStatus < WS_INIT){
 		m_workStatus = WS_LOCKED;
 
-		m_tempMessageContainer.ClearMessages();
-		m_messageContainer.ClearMessages();
+		for (int i = 0; i <= MTC_LAST; ++i){
+			m_messageContainers[i].ClearMessages();
+		}
 
 		// distribute initializing to input...
 		for (		InputSuppliersMap::ConstIterator inputSupplierIter = m_inputSuppliersMap.constBegin();
@@ -88,23 +89,20 @@ void CSupplierCompBase::ClearWorkResults()
 
 	m_workStatus = WS_INVALID;
 	
-	m_tempMessageContainer.ClearMessages();
-	m_messageContainer.ClearMessages();
+	for (int i = 0; i <= MTC_LAST; ++i){
+		m_messageContainers[i].ClearMessages();
+	}
 
 	m_productChangeNotifierPtr.Reset();
 }
 
 
-const ilog::IMessageContainer* CSupplierCompBase::GetWorkMessages(int messageType) const
+const ilog::IMessageContainer* CSupplierCompBase::GetWorkMessages(int containerType) const
 {
-	switch (messageType){
-	case WMT_TEMP:
-		return &m_tempMessageContainer;
-
-	case WMT_RESULTS:
-		return &m_messageContainer;
-
-	default:
+	if (CSupplierCompBase::IsMessageContainerSupported(containerType)){
+		return &m_messageContainers[containerType];
+	}
+	else{
 		return NULL;
 	}
 }
@@ -163,28 +161,22 @@ QString CSupplierCompBase::GetDiagnosticName() const
 }
 
 
-void CSupplierCompBase::AddMessage(const ilog::CMessage* messagePtr) const
+bool CSupplierCompBase::IsMessageContainerSupported(int containerType) const
+{
+	return (containerType >= 0) && (containerType <= MTC_LAST);
+}
+
+
+void CSupplierCompBase::AddMessage(const ilog::CMessage* messagePtr, int containerType) const
 {
 	Q_ASSERT(messagePtr != NULL);
 
-	m_messageContainer.AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(messagePtr));
-}
-
-
-// reimplemented (ilog::IMessageConsumer)
-
-bool CSupplierCompBase::IsMessageSupported(
-			int messageCategory,
-			int messageId,
-			const istd::IInformationProvider* messagePtr) const
-{
-	return m_messageContainer.IsMessageSupported(messageCategory, messageId, messagePtr);
-}
-
-
-void CSupplierCompBase::AddMessage(const MessagePtr& messagePtr)
-{
-	m_messageContainer.AddMessage(messagePtr);
+	if (IsMessageContainerSupported(containerType)){
+		m_messageContainers[containerType].AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(messagePtr));
+	}
+	else{
+		delete messagePtr;
+	}
 }
 
 
@@ -244,12 +236,12 @@ CSupplierCompBase::Timer::~Timer()
 	if (m_parentPtr != NULL){
 		QString diagnosticName = m_parentPtr->GetDiagnosticName();
 		if (!diagnosticName.isEmpty()){
-			MessagePtr messagePtr(new ilog::CMessage(
+			ilog::CMessage* messagePtr = new ilog::CMessage(
 						istd::IInformationProvider::IC_NONE,
 						MI_DURATION_TIME,
 						QObject::tr("%1 took %2 ms").arg(m_measuredFeatureName).arg(m_timer.GetElapsed() * 1000),
-						diagnosticName));
-			m_parentPtr->m_messageContainer.AddMessage(messagePtr);
+						diagnosticName);
+			m_parentPtr->AddMessage(messagePtr, MCT_RESULTS);
 		}
 	}
 }
