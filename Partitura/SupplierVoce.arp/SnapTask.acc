@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4075" Description="ACF"/>
+            <Version Id="1" Number="1518" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -23,6 +23,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
                         <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="String" ExportId="DiagnosticName">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>

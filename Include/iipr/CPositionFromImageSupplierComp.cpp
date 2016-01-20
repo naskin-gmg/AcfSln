@@ -4,6 +4,7 @@
 // ACF includes
 #include "imod/TModelWrap.h"
 #include "i2d/CCircle.h"
+#include "ilog/TExtMessage.h"
 
 // ACF-Solutions includes
 #include "iipr/CSingleFeatureConsumer.h"
@@ -106,6 +107,14 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				resultVector[0] = transformedCircle.GetPosition().GetX();
 				resultVector[1] = transformedCircle.GetPosition().GetY();
 				resultVector[2] = transformedCircle.GetRadius();
+
+				ilog::TExtMessageModel<i2d::CCircle>* messagePtr = new ilog::TExtMessageModel<i2d::CCircle>(
+							istd::IInformationProvider::IC_INFO,
+							iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
+							QString("Radius: %3, Pos.: (%1, %2)").arg(circlePtr->GetPosition().GetX()).arg(circlePtr->GetPosition().GetY()).arg(circlePtr->GetRadius()),
+							"PositionFinder");
+				messagePtr->i2d::CCircle::CopyFrom(*circlePtr, istd::IChangeable::CM_CONVERT);
+				AddMessage(messagePtr);
 			}
 			else if (linePtr != NULL){
 				i2d::CLine2d transformedLine;
@@ -118,6 +127,14 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				resultVector[1] = transformedLine.GetPoint1Ref().GetY();
 				resultVector[2] = transformedLine.GetPoint2Ref().GetX();
 				resultVector[3] = transformedLine.GetPoint2Ref().GetY();
+
+				ilog::TExtMessageModel<i2d::CLine2d>* messagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+							istd::IInformationProvider::IC_INFO,
+							iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
+							QString("Line: (%1, %2)->(%1, %2)").arg(linePtr->GetPoint1().GetX()).arg(linePtr->GetPoint1().GetY()).arg(linePtr->GetPoint2().GetX()).arg(linePtr->GetPoint2().GetY()),
+							"PositionFinder");
+				messagePtr->i2d::CLine2d::CopyFrom(*linePtr, istd::IChangeable::CM_CONVERT);
+				AddMessage(messagePtr);
 			}
 			else{
 				i2d::CPosition2d transformedPosition;
@@ -126,6 +143,14 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				}
 
 				resultVector = transformedPosition.GetPosition();
+
+				ilog::TExtMessageModel<i2d::CPosition2d>* messagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
+							istd::IInformationProvider::IC_INFO,
+							iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
+							QString("R: %3, Pos.: (%1, %2)").arg(positionPtr->GetCenter().GetX()).arg(positionPtr->GetCenter().GetY()),
+							"PositionFinder");
+				messagePtr->i2d::CPosition2d::CopyFrom(*positionPtr, istd::IChangeable::CM_CONVERT);
+				AddMessage(messagePtr);
 			}
 			Q_ASSERT(resultVector.GetElementsCount() >= 2);
 
