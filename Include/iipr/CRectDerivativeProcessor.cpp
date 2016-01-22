@@ -7,7 +7,6 @@
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "istd/TSmartPtr.h"
-#include "imath/CDoubleManip.h"
 #include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
@@ -119,66 +118,6 @@ int CRectDerivativeProcessor::DoProcessing(
 	return DoDerivativeProcessing(*inputProjectionPtr, filterLength, *outputProjectionPtr, m_doublePrecision)?
 				TS_OK:
 				TS_INVALID;
-}
-
-
-// reimplemented (imeas::INumericConstraints)
-
-int CRectDerivativeProcessor::GetNumericValuesCount() const
-{
-	return 1;
-}
-
-
-QString CRectDerivativeProcessor::GetNumericValueName(int /*dimension*/) const
-{
-	return QObject::tr("Filter");
-}
-
-
-QString CRectDerivativeProcessor::GetNumericValueDescription(int /*index*/) const
-{
-	return QObject::tr("Smoothing filter length, higher value makes insensible to data noise");
-}
-
-
-const imath::IUnitInfo* CRectDerivativeProcessor::GetNumericValueUnitInfo(int /*dimension*/) const
-{
-	return this;
-}
-
-
-// reimplemented (imath::IUnitInfo)
-
-int CRectDerivativeProcessor::GetUnitType() const
-{
-	return UT_TECHNICAL;
-}
-
-
-QString CRectDerivativeProcessor::GetUnitName() const
-{
-	return "px";
-}
-
-
-double CRectDerivativeProcessor::GetDisplayMultiplicationFactor() const
-{
-	return 1;
-}
-
-
-istd::CRange CRectDerivativeProcessor::GetValueRange() const
-{
-	return istd::CRange(1, 100);
-}
-
-
-const imath::IDoubleManip& CRectDerivativeProcessor::GetValueManip() const
-{
-	static imath::CDoubleManip manip;
-
-	return manip;
 }
 
 

@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4078" Description="ACF"/>
+            <Version Id="1" Number="1520" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -78,7 +78,6 @@
     <ExportedInterfaces>
         <Interface InterfaceId="iipr::IFeatureToImageMapper" ComponentId="LineProjection"/>
         <Interface InterfaceId="iipr::IProjectionConstraints" ComponentId="LineProjection"/>
-        <Interface InterfaceId="imeas::INumericConstraints" ComponentId="DerivativeProcessor"/>
         <Interface InterfaceId="iproc::IProcessor" ComponentId="Casade"/>
     </ExportedInterfaces>
     <ExportedComponents>

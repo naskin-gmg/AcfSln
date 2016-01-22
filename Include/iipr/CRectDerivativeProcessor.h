@@ -10,8 +10,6 @@
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
-#include "imath/IUnitInfo.h"
-#include "imeas/INumericConstraints.h"
 
 
 namespace iipr
@@ -21,10 +19,7 @@ namespace iipr
 /**
 	Calculate derivative of projection using rectangular filter kernel.
 */
-class CRectDerivativeProcessor:
-			public iproc::CSyncProcessorBase,
-			virtual public imeas::INumericConstraints,
-			virtual protected imath::IUnitInfo
+class CRectDerivativeProcessor: public iproc::CSyncProcessorBase
 {
 public:
 	CRectDerivativeProcessor();
@@ -62,19 +57,6 @@ public:
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
-
-	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
-	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
-
-	// reimplemented (imath::IUnitInfo)
-	virtual int GetUnitType() const;
-	virtual QString GetUnitName() const;
-	virtual double GetDisplayMultiplicationFactor() const;
-	virtual istd::CRange GetValueRange() const;
-	virtual const imath::IDoubleManip& GetValueManip() const;
 
 private:
 	QByteArray m_filterParamsId;

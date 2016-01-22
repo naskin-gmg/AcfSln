@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4078" Description="ACF"/>
+            <Version Id="1" Number="1520" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328706" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -64,6 +64,51 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
+        <Element Id="FilterConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="20"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="px"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueDescriptions" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Length of filter, use smaller values for better accuracy and bigger values to suppress the noise</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueIds" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueName" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="ParamsSet" PackageId="ProcessorVoce" ComponentId="SimpleCircleFinderParamsSet">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -88,8 +133,8 @@
                     <AttributeInfo Id="DirectionMode" Type="Integer" ExportId="DefaultDirectionMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterConstraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="Caliper"/>
+                    <AttributeInfo Id="FilterConstraints" Type="Reference" ExportId="FilterConstraints">
+                        <Data IsEnabled="true" Value="FilterConstraints"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FilterLegthValues" Type="Real[]" ExportId="DefaultFilterLegthValues">
                         <Data IsEnabled="false"/>
