@@ -1,4 +1,3 @@
-// AcfSln includes
 #include "ifileproc/CFileNamingParamsComp.h"
 
 
@@ -12,10 +11,13 @@ namespace ifileproc
 {
 
 
+// public methods
+
 CFileNamingParamsComp::CFileNamingParamsComp()
 	:m_overwriteStrategy(RM_NUMBERING)
 {
 }
+
 
 // reimplemented (ifileproc::IFileNamingParams)
 
