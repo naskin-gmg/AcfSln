@@ -8,8 +8,8 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
-// AcfSln includes
-#include "ifileproc/IFileNamingParams.h"
+// ACF-Solutions includes
+#include "ifileproc/CFileNamingParams.h"
 
 
 namespace ifileproc
@@ -18,12 +18,11 @@ namespace ifileproc
 
 class CFileNamingParamsComp:
 			public icomp::CComponentBase,
-			virtual public ifileproc::IFileNamingParams
+			public ifileproc::CFileNamingParams
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-
-	CFileNamingParamsComp();
+	typedef ifileproc::CFileNamingParams BaseClass2;
 
 	I_BEGIN_COMPONENT(ifileproc::CFileNamingParamsComp);
 		I_REGISTER_INTERFACE(iser::ISerializable);
@@ -34,29 +33,11 @@ public:
 		I_ASSIGN_MULTI_0(m_patternsToRemoveAttrPtr, "PatternsToRemove", "List of patterns that will be removed from the output file name", false);
 	I_END_COMPONENT;
 
-	// reimplemented (ifileproc::IFileNamingParams)
-	virtual OverwriteStrategy GetOverwriteStrategy() const;
-	virtual void SetOverwriteStrategy(OverwriteStrategy overwriteStrategy);
-	virtual QString GetPrefix() const;
-	virtual void SetPrefix(const QString& prefix);
-	virtual QString GetSuffix() const;
-	virtual void SetSuffix(const QString& suffix);
-	virtual QStringList GetPatternsToRemove() const;
-	virtual void SetPatternsToRemove(const QStringList& patternsToRemove);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
 private:
-	OverwriteStrategy m_overwriteStrategy;
-	QString m_suffix;
-	QString m_prefix;
-	QStringList m_patternsToRemove;
-
 	I_ATTR(QString, m_prefixAttrPtr);
 	I_ATTR(QString, m_suffixAttrPtr);
 	I_ATTR(int, m_overwriteStrategyAttrPtr);
