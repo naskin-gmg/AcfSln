@@ -451,6 +451,9 @@ void CConvertComponentCommandComp::OnPromoteCommand()
 				storedPosition = prevVisualElementPtr->GetCenter();
 			}
 
+			icomp::IRegistry::ExportedInterfacesMap exportedInterfacesMap = registryPtr->GetExportedInterfacesMap();
+			icomp::IRegistry::ExportedElementsMap exportedElementsMap = registryPtr->GetExportedElementsMap();
+
 			registryPtr->RemoveElementInfo(elementId);
 			icomp::IRegistry::ElementInfo* newElementInfoPtr = registryPtr->InsertElementInfo(elementId, newAddress, true);
 			if ((newElementInfoPtr == NULL) || !newElementInfoPtr->elementPtr.IsValid()){
@@ -460,6 +463,32 @@ void CConvertComponentCommandComp::OnPromoteCommand()
 			iser::CMemoryReadArchive stateRestoreArchive(stateStoreArchive);
 
 			newElementInfoPtr->elementPtr->Serialize(stateRestoreArchive);
+
+			// reconstruzct interfaces
+			for (		icomp::IRegistry::ExportedInterfacesMap::ConstIterator interfaceIter = exportedInterfacesMap.constBegin();
+						interfaceIter != exportedInterfacesMap.constEnd();
+						++interfaceIter){
+				QByteArray exportedElementId;
+				QByteArray restId;
+				istd::CIdManipBase::SplitId(interfaceIter.value(), exportedElementId, restId);
+
+				if (!exportedElementId.isEmpty() && (exportedElementId == elementId)){
+					registryPtr->SetElementInterfaceExported(interfaceIter.value(), interfaceIter.key());
+				}
+			}
+
+			// reconstruzct subelements
+			for (		icomp::IRegistry::ExportedInterfacesMap::ConstIterator elementIter = exportedElementsMap.constBegin();
+						elementIter != exportedElementsMap.constEnd();
+						++elementIter){
+				QByteArray exportedElementId;
+				QByteArray restId;
+				istd::CIdManipBase::SplitId(elementIter.value(), exportedElementId, restId);
+
+				if (!exportedElementId.isEmpty() && (exportedElementId == elementId)){
+					registryPtr->SetElementExported(elementIter.key(), elementIter.value());
+				}
+			}
 
 			icmpstr::CVisualRegistryElement* newVisualElementPtr = dynamic_cast<icmpstr::CVisualRegistryElement*>(newElementInfoPtr->elementPtr.GetPtr());
 			if ((newVisualElementPtr != NULL) && !storedPosition.IsNull()){
