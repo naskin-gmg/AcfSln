@@ -116,6 +116,8 @@ void CDirectoryMonitorComp::run()
 {
 	istd::CGeneralTimeStamp updateTimer;
 
+	m_lockChanges = false;
+
 	while (!m_finishThread){
 		bool needStateUpdate = updateTimer.GetElapsed() > m_poolingFrequency;
 		if (!needStateUpdate || m_lockChanges){
@@ -439,10 +441,6 @@ void CDirectoryMonitorComp::StopObserverThread()
 	SendVerboseMessage(QString("Stop observing of: ") + m_currentDirectory.absolutePath(), "DirectoryMonitor");
 
 	BaseClass2::wait();
-
-	if (BaseClass2::isRunning()){
-		BaseClass2::terminate();
-	}
 }
 
 
