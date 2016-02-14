@@ -50,12 +50,6 @@ I_EXPORT_COMPONENT(
 			"Image Bitmap Camera Snap Acquisition Supplier Multi Selection Single Manager");
 
 I_EXPORT_COMPONENT(
-			MultiLayerBitmapSupplier, 
-			"Multi layer bitmap supplier", 
-			"Image Bitmap Camera Snap Acquisition Supplier Multi");
-
-
-I_EXPORT_COMPONENT(
 			SnapBitmapSupplier,
 			"Implementation of factory-based bitmap supplier getting image from camera",
 			"Image Bitmap Acquisition Snap Supplier");

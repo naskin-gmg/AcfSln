@@ -1,5 +1,5 @@
-#ifndef IacfBasePck_included
-#define IacfBasePck_included
+#ifndef CameraPck_included
+#define CameraPck_included
 
 
 // ACF includes
@@ -17,7 +17,6 @@
 #include "icam/CCameraDelegatorComp.h"
 #include "icam/CMultiCameraBitmapSupplierComp.h"
 #include "icam/CSelectableBitmapSupplierComp.h"
-#include "icam/CMultiLayerBitmapSupplierComp.h"
 #include "icam/CSnapBitmapSupplierComp.h"
 #include "icam/CCalibratedCameraComp.h"
 
@@ -36,7 +35,6 @@ typedef icam::CSelectionParamCameraComp SelectionParamCamera;
 typedef icam::CCameraDelegatorComp CameraDelegator;
 typedef icomp::TModelCompWrap<icam::CMultiCameraBitmapSupplierComp> MultiCameraBitmapSupplier;
 typedef icomp::TModelCompWrap<icam::CSelectableBitmapSupplierComp> SelectableBitmapSupplier;
-typedef icomp::TModelCompWrap<icam::CMultiLayerBitmapSupplierComp> MultiLayerBitmapSupplier;
 
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
 typedef icomp::TModelCompWrap<icam::TSnapBitmapSupplierComp<iimg::CBitmap> > StandardQtBitmapSnapSupplier;
@@ -46,6 +44,6 @@ typedef icam::CCalibratedCameraComp CalibratedCamera;
 } // namespace CameraPck
 
 
-#endif // !IacfBasePck_included
+#endif // !CameraPck_included
 
 
