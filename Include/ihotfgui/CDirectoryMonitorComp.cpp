@@ -186,7 +186,7 @@ void CDirectoryMonitorComp::run()
 			}
 		}
 
-		if ((observingChanges & ihotf::IDirectoryMonitorParams::OC_ADD) != 0 && (m_folderDepth != 0) || (pendingChangesCounter > 0)){
+		if ((((observingChanges & ihotf::IDirectoryMonitorParams::OC_ADD) != 0) && (m_folderDepth != 0)) || (pendingChangesCounter > 0)){
 			QFileInfoList currentFileInfos;
 			if (observingItemTypes & QDir::Files){
 				ifile::CFileListProviderComp::CreateFileList(
