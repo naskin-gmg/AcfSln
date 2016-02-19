@@ -12,8 +12,6 @@ Project{
 
 		Depends{ name: "acf" }
 
-        Depends{ name: "ArxcExe" }
-
 		Depends{ name: "AcfSlnConfig" }
 		Depends{ name: "CompositorPck" }
 		Depends{ name: "QtGuiPck" }
@@ -54,7 +52,6 @@ Project{
 		Depends{ name: "Qt.gui" }
 
 		// Resource file on Windows
-		Depends{ name: "AcfExe" }
 		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.acc"
 		acf.trOutputType: "rc"
 		cpp.includePaths: path
