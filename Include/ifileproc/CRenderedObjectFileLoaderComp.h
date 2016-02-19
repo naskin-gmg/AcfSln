@@ -36,6 +36,7 @@ public:
 		I_ASSIGN(m_widthAttrPtr, "BitmapWidth", "Width of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_heightAttrPtr, "BitmapHeight", "Height of the generated preview bitmap", true, 128);
 		I_ASSIGN(m_maxCacheSizeAttrPtr, "MaxCacheSize", "Maximal number of bitmaps in cache", false, 100);
+		I_ASSIGN(m_useTempFileAttrPtr, "UseTempFile", "If enabled, the temporary copy of the input file will be created and used for rendering", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFilePersistence)
@@ -76,6 +77,7 @@ private:
 	I_ATTR(int, m_widthAttrPtr);
 	I_ATTR(int, m_heightAttrPtr);
 	I_ATTR(int, m_maxCacheSizeAttrPtr);
+	I_ATTR(bool, m_useTempFileAttrPtr);
 
 	struct Configuration
 	{

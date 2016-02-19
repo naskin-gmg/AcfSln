@@ -4,9 +4,15 @@
 // Qt includes
 #include <QtCore/QString>
 #include <QtCore/QFileInfo>
+#include <QtCore/QUuid>
+#if QT_VERSION >= 0x050000
+#include <QtCore/QStandardPaths>
+#else
+#include <QtGui/QDesktopServices>
+#endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include "istd/CSystem.h"
 #include "istd/CChangeNotifier.h"
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -90,7 +96,21 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(
 				}
 			}
 
-			int loadResult = fileLoaderPtr->LoadFromFile(*dataObjectPtr, filePath);
+			QString renderingFilePath = filePath;
+			if (*m_useTempFileAttrPtr){
+				QString tempPath;
+
+#if QT_VERSION < 0x050000
+				tempPath = QDesktopServices::storageLocation(QDesktopServices::TempLocation);
+#else
+				tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+#endif
+				renderingFilePath = tempPath + "/" + QUuid::createUuid().toString() + "_" + QFileInfo(filePath).fileName();
+
+				istd::CSystem::FileCopy(filePath, renderingFilePath);
+			}
+
+			int loadResult = fileLoaderPtr->LoadFromFile(*dataObjectPtr, renderingFilePath);
 			if (loadResult == OS_OK){
 				istd::CChangeNotifier changePtr(bitmapPtr);
 
