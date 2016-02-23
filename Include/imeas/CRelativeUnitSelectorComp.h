@@ -56,6 +56,8 @@ public:
 		I_REGISTER_INTERFACE(iprm::ISelectionParam);
 		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_REGISTER_INTERFACE(imath::IUnitInfo);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_precisionAttrPtr, "Precision", "Typical values: 0 - integer, 15 - double", true, 15);
 	I_END_COMPONENT;
 
