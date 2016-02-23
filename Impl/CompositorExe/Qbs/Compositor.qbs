@@ -12,6 +12,11 @@ Project{
 
 		Depends{ name: "acf" }
 
+		Depends{
+			name: "ArxcExe"
+			condition: acf.acfToolsBin == null
+		}
+
 		Depends{ name: "AcfSlnConfig" }
 
 		Depends{ name: "CompositorPck" }
@@ -65,6 +70,11 @@ Project{
 		acf.trRegFile: "../../../Partitura/AcfInfoCopyApp.acc"
 		acf.trOutputType: "rc"
 		cpp.includePaths: path
+
+		Depends{
+			name: "AcfExe"
+			condition: acf.acfToolsBin == null
+		}
 
 		Group{
 			name: "Windows-Resources"
