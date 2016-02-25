@@ -34,8 +34,8 @@ public:
 
 	// reimplemented (iauth::IRightsProvider)
 	virtual bool HasRight(
-					const QByteArray& operationId,
-					bool beQuiet = false) const;
+				const QByteArray& operationId,
+				bool beQuiet = false) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -54,9 +54,7 @@ private:
 };
 
 
-
 } // namespace iauth
-
 
 
 #endif // !iauth_CStaticRightsProviderComp_included

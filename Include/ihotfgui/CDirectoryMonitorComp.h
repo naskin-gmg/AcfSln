@@ -141,7 +141,7 @@ private:
 	typedef QSet<QString> FilesSet;
 
 	ihotf::IMonitoringSession::FileItems m_directoryFiles;
-	FilesSet m_nonAccessedFiles;
+	FilesSet m_nonAccessedAddedFiles;
 
 	bool m_finishThread;
 

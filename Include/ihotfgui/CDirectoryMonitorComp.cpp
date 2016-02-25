@@ -171,7 +171,7 @@ void CDirectoryMonitorComp::run()
 		}
 
 		// check previously not accessed files:
-		QMutableSetIterator<QString> nonAccessedFilesIter(m_nonAccessedFiles);
+		QMutableSetIterator<QString> nonAccessedFilesIter(m_nonAccessedAddedFiles);
 		while (nonAccessedFilesIter.hasNext()){
 			QString filePath = nonAccessedFilesIter.next();
 
@@ -235,7 +235,7 @@ void CDirectoryMonitorComp::run()
 						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
 					}
 					else{
-						m_nonAccessedFiles.insert(currentFilePath);
+						m_nonAccessedAddedFiles.insert(currentFilePath);
 					}
 				}
 			}
