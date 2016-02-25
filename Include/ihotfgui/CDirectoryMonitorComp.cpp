@@ -498,14 +498,18 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 
 bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath) const
 {
+	QFileInfo fileInfo(filePath);
+
 	QDateTime currentDateTime = QDateTime::currentDateTime();
-	QDateTime lastModifiedAt = QFileInfo(filePath).lastModified();
+	QDateTime lastModifiedAt = fileInfo.lastModified();
 
 	int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
 	if (modificationTimeDiff > m_lastModificationMinDifference){
 		QFile file(filePath);
 		
-		return file.open(QIODevice::ReadOnly);
+		bool isWritable = fileInfo.isWritable();
+
+		return file.open(isWritable ? QIODevice::ReadWrite : QIODevice::ReadOnly);
 	}
 
 	return false;
