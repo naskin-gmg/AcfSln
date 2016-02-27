@@ -28,6 +28,7 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_observingChanges(ihotf::IDirectoryMonitorParams::OC_ALL),
 	m_lastModificationMinDifference(30),
 	m_folderDepth(0),
+	m_timestampMode(ihotf::IDirectoryMonitorParams::FTM_MODIFIED),
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false)
@@ -515,7 +516,21 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInf
 	QFileInfo fileInfo(filePath);
 
 	QDateTime currentDateTime = QDateTime::currentDateTime();
-	QDateTime lastModifiedAt = fileInfo.lastModified();
+	QDateTime lastModifiedAt;
+	
+	switch (m_timestampMode){
+	case ihotf::IDirectoryMonitorParams::FTM_MODIFIED:
+		lastModifiedAt = fileInfo.lastModified();
+			break;
+	case ihotf::IDirectoryMonitorParams::FTM_CREATED:
+		lastModifiedAt = fileInfo.created();
+			break;
+
+	default:
+		I_CRITICAL();
+
+		return false;
+	}
 
 	int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
 	if (modificationTimeDiff > m_lastModificationMinDifference){
@@ -590,6 +605,7 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 			m_parent.m_observingChanges = directoryMonitorParamsPtr->GetObservedChanges();
 			m_parent.m_fileFilterExpressions = directoryMonitorParamsPtr->GetAcceptPatterns();
 			m_parent.m_folderDepth = directoryMonitorParamsPtr->GetFolderDepth();
+			m_parent.m_timestampMode = directoryMonitorParamsPtr->GetFileTimestampMode();
 		}
 	}
 

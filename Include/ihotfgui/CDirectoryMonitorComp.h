@@ -173,6 +173,7 @@ private:
 	int m_observingChanges;
 	int m_lastModificationMinDifference;
 	int m_folderDepth;
+	int m_timestampMode;
 
 	MonitoringParamsObserver m_monitoringParamsObserver;
 	DirectoryParamsObserver m_directoryParamsObserver;

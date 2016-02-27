@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "istd/istd.h"
 #include "iser/ISerializable.h"
 
 
@@ -32,6 +33,21 @@ public:
 		OC_ATTR_CHANGED = 0x8,
 		OC_ALL = OC_ADD | OC_REMOVE | OC_MODIFIED | OC_ATTR_CHANGED
 	};
+
+	enum FileTimestampMode
+	{
+		/**
+			File modification time will be get from 'Last Modified'-attribute.
+		*/
+		FTM_MODIFIED,
+
+		/**
+			File modification time will be get from 'Created'-attribute.
+		*/
+		FTM_CREATED
+	};
+
+	I_DECLARE_ENUM(FileTimestampMode, FTM_MODIFIED, FTM_CREATED);
 
 	/**
 		Get pooling intervall for directory changes in seconds.	
@@ -104,6 +120,18 @@ public:
 		\sa GetFolderDepth
 	*/
 	virtual void SetFolderDepth(int folderDepth) = 0;
+
+	/**
+		Get timestamp mode used for file detection and access check.
+		\sa FileTimestampMode
+	*/
+	virtual int GetFileTimestampMode() const = 0;
+
+	/**
+		Set timestamp mode used for file detection and access check.
+		\sa FileTimestampMode
+	*/
+	virtual void SetFileTimestampMode(int fileTimestampMode) = 0;
 };
 
 
