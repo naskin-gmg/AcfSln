@@ -11,6 +11,11 @@
 #include "ifile/CFileListProviderComp.h"
 
 
+#ifdef Q_OS_WIN
+	extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+#endif
+
+
 namespace ihotfgui
 {
 
@@ -27,6 +32,9 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false)
 {
+#ifdef Q_OS_WIN
+	++qt_ntfs_permission_lookup;
+#endif
 	qRegisterMetaType<istd::IChangeable::ChangeSet>("istd::IChangeable::ChangeSet");
 
 	connect(&m_directoryWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChangeNotification(const QString&)));
@@ -171,11 +179,13 @@ void CDirectoryMonitorComp::run()
 		}
 
 		// check previously not accessed files:
-		QMutableSetIterator<QString> nonAccessedFilesIter(m_nonAccessedAddedFiles);
+		QMutableMapIterator<QString, FileAccessInfo> nonAccessedFilesIter(m_nonAccessedAddedFiles);
 		while (nonAccessedFilesIter.hasNext()){
-			QString filePath = nonAccessedFilesIter.next();
+			FileAccessMap::Iterator fileAccessIter = nonAccessedFilesIter.next();
 
-			if (HasFileAccess(filePath)){
+			QString filePath = fileAccessIter.key();
+
+			if (HasFileAccess(filePath, &fileAccessIter.value())){
 				QFileInfo fileInfo(filePath);
 
 				m_directoryFiles[filePath] = fileInfo.lastModified();
@@ -213,20 +223,24 @@ void CDirectoryMonitorComp::run()
 				currentFileInfos += directoriesList;
 			}
 
-			FilesSet currentFileItems;
+			FileAccessMap currentFileItems;
 			for (int fileIndex = 0; fileIndex < currentFileInfos.count(); fileIndex++){
-				currentFileItems.insert(currentFileInfos[fileIndex].canonicalFilePath());
+				FileAccessInfo accessInfo;
+
+				accessInfo.fileSize = currentFileInfos[fileIndex].size();
+				accessInfo.accessTimeStamp = QDateTime::currentDateTime();
+				currentFileItems[currentFileInfos[fileIndex].canonicalFilePath()] = accessInfo;
 			}
 
-			for (FilesSet::Iterator currentFileIter = currentFileItems.begin(); currentFileIter != currentFileItems.end(); ++currentFileIter){
+			for (FileAccessMap::Iterator currentFileIter = currentFileItems.begin(); currentFileIter != currentFileItems.end(); ++currentFileIter){
 				// abort processing, if the thread must be finished:
 				if (m_finishThread){
 					return;
 				}
 
-				const QString& currentFilePath = *currentFileIter;
+				const QString& currentFilePath = currentFileIter.key();
 
-				if (!m_directoryFiles.contains(currentFilePath)){
+				if (!m_directoryFiles.contains(currentFilePath) && !m_nonAccessedAddedFiles.contains(currentFilePath)){
 					if (HasFileAccess(currentFilePath)){
 						addedFiles.push_back(currentFilePath);
 
@@ -235,7 +249,7 @@ void CDirectoryMonitorComp::run()
 						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
 					}
 					else{
-						m_nonAccessedAddedFiles.insert(currentFilePath);
+						m_nonAccessedAddedFiles[currentFilePath] = currentFileIter.value();
 					}
 				}
 			}
@@ -496,7 +510,7 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 }
 
 
-bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath) const
+bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInfo* lastFileAccessInfoPtr) const
 {
 	QFileInfo fileInfo(filePath);
 
@@ -505,14 +519,50 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath) const
 
 	int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
 	if (modificationTimeDiff > m_lastModificationMinDifference){
-		QFile file(filePath);
-		
-		bool isWritable = fileInfo.isWritable();
+		return CheckFileAccess(filePath);
+	}
+	else if (modificationTimeDiff < 0){
+		if (lastFileAccessInfoPtr != NULL){
+			int checkTimeDiff = lastFileAccessInfoPtr->accessTimeStamp.secsTo(currentDateTime);
+			if (checkTimeDiff > m_lastModificationMinDifference){
+				if (fileInfo.size() == lastFileAccessInfoPtr->fileSize){
+					return CheckFileAccess(filePath);
+				}
+				else{
+					lastFileAccessInfoPtr->fileSize = fileInfo.size();
+					lastFileAccessInfoPtr->accessTimeStamp = QDateTime::currentDateTime();
 
-		return file.open(isWritable ? QIODevice::ReadWrite : QIODevice::ReadOnly);
+					return false;
+				}
+			}
+		}
 	}
 
 	return false;
+}
+
+
+
+bool CDirectoryMonitorComp::CheckFileAccess(const QString& filePath) const
+{
+	QFile file(filePath);
+
+	QFile::Permissions filePermissions = file.permissions();
+
+	// Remove write-protection:
+	if (!QFile::setPermissions(filePath, QFile::WriteUser))
+	{
+		return false;
+	}
+
+	// Try to access the file:
+	bool retVal = file.open(QIODevice::ReadWrite);
+
+	// Close file and restore original permissions:
+	file.close();
+	file.setPermissions(filePermissions);
+
+	return retVal;
 }
 
 
