@@ -310,27 +310,13 @@ bool CVisualRegistry::SerializeComponentInfo(
 	retVal = retVal && archive.Process(position[0]);
 	retVal = retVal && archive.EndTag(positionXTag);
 
-	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	retVal = retVal && archive.BeginTag(positionYTag);
+	retVal = retVal && archive.Process(position[1]);
+	retVal = retVal && archive.EndTag(positionYTag);
 
-	quint32 libraryVersion = 0xffffffff;
-	versionInfo.GetVersionNumber(1, libraryVersion);
-	if (libraryVersion > 1177){
-		retVal = retVal && archive.BeginTag(positionYTag);
-		retVal = retVal && archive.Process(position[1]);
-		retVal = retVal && archive.EndTag(positionYTag);
-	}
-	else{	// work-around for tag mistake in old files
-			// TODO: remove it when compatibility with old ACF *.alx files is no more important.
-		retVal = retVal && archive.BeginTag(positionXTag);
-		retVal = retVal && archive.Process(position[1]);
-		retVal = retVal && archive.EndTag(positionXTag);
-	}
-
-	if (libraryVersion >= 495){
-		retVal = retVal && archive.BeginTag(componentNoteTag);
-		retVal = retVal && archive.Process(componentNote);
-		retVal = retVal && archive.EndTag(componentNoteTag);
-	}
+	retVal = retVal && archive.BeginTag(componentNoteTag);
+	retVal = retVal && archive.Process(componentNote);
+	retVal = retVal && archive.EndTag(componentNoteTag);
 
 	return retVal;
 }
