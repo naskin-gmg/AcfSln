@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4104" Description="ACF"/>
+            <Version Id="1" Number="1540" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328450" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>GUI for the color matching supplier</Description>
@@ -21,7 +21,11 @@
         </Element>
         <Element Id="ComparisonThreshold" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap/>
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SingleRow" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
             </Data>
         </Element>
         <Element Id="HistogramView" PackageId="QwtPck" ComponentId="HistogramView">
@@ -32,9 +36,6 @@
         <Element Id="ParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="2"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
@@ -50,6 +51,7 @@
                                 <Value>Region</Value>
                                 <Value>ComparisonThreshold</Value>
                                 <Value>PatternController</Value>
+                                <Value>InspectionId</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -59,6 +61,7 @@
                                 <Value>Region</Value>
                                 <Value>Comparison Threshold</Value>
                                 <Value>Color Pattern</Value>
+                                <Value>Error Class</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -71,12 +74,6 @@
         <Element Id="PatternController" PackageId="QtIprPck" ComponentId="PatternTeachingControllerGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ErrorColor" Type="Id" ExportId="ErrorColor">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="OkColor" Type="Id" ExportId="OkColor">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="PatternObserver" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="HistogramView"/>
                     </AttributeInfo>

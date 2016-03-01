@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4096" Description="ACF"/>
+            <Version Id="1" Number="1535" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328449" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Image acquisition GUI for image acquisition task</Description>
@@ -13,7 +13,17 @@
         <Element Id="BitmapDialogLoader" PackageId="AcfGuiVoce" ComponentId="BitmapDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="ExtensionFilter" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>bmp</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="StartupDirectory" Type="Reference" ExportId="DefaultImageStoreDirectory">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
