@@ -100,12 +100,16 @@ void CPatternTeachingControllerGuiComp::UpdateGui(const istd::IChangeable::Chang
 
 	if (!objectPtr->IsPatternValid()){
 		PatternInfoLabel->setText(tr("Reference pattern not defined"));
-		PatternInfoLabel->setStyleSheet("color: " + *m_errorColorAttr + ";");
+		PatternInfoLabel->setProperty("Status", "Error");
 	}
 	else{
 		PatternInfoLabel->setText(tr("Reference pattern defined"));		
-		PatternInfoLabel->setStyleSheet("color: " + *m_okColorAttr + ";");
+		PatternInfoLabel->setProperty("Status", "Ok");
 	}
+
+	// reapply style sheet
+	PatternInfoLabel->style()->polish(PatternInfoLabel);
+	PatternInfoLabel->update();	
 
 	// view
 	if (m_patternViewObserverCompPtr.IsValid()){
