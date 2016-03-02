@@ -18,6 +18,7 @@ CDirectoryMonitorParams::CDirectoryMonitorParams()
 	:m_poolingIntervall(5),
 	m_observedItemTypes(OI_ALL),
 	m_observedChanges(OC_ALL),
+	m_minLastModificationTimeDifference(30),
 	m_folderDepth(0),
 	m_fileTimestampMode(FTM_MODIFIED)
 {
