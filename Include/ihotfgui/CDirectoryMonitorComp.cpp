@@ -11,11 +11,6 @@
 #include "ifile/CFileListProviderComp.h"
 
 
-#ifdef Q_OS_WIN
-	extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-#endif
-
-
 namespace ihotfgui
 {
 
@@ -33,9 +28,6 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false)
 {
-#ifdef Q_OS_WIN
-	++qt_ntfs_permission_lookup;
-#endif
 	qRegisterMetaType<istd::IChangeable::ChangeSet>("istd::IChangeable::ChangeSet");
 
 	connect(&m_directoryWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChangeNotification(const QString&)));
@@ -186,14 +178,16 @@ void CDirectoryMonitorComp::run()
 
 			QString filePath = fileAccessIter.key();
 
-			if (HasFileAccess(filePath, &fileAccessIter.value())){
+			if (HasFileAccess(filePath, fileAccessIter.value())){
 				QFileInfo fileInfo(filePath);
 
-				m_directoryFiles[filePath] = fileInfo.lastModified();
+				m_directoryFiles[filePath] = GetLastAccessTime(fileInfo);
 
 				addedFiles.push_back(filePath);
 
 				nonAccessedFilesIter.remove();
+
+				I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(filePath)));
 			}
 		}
 
@@ -229,7 +223,8 @@ void CDirectoryMonitorComp::run()
 				FileAccessInfo accessInfo;
 
 				accessInfo.fileSize = currentFileInfos[fileIndex].size();
-				accessInfo.accessTimeStamp = QDateTime::currentDateTime();
+				accessInfo.checkTimeStamp = QDateTime::currentDateTime();
+				accessInfo.lastAccessTimeStamp = GetLastAccessTime(currentFileInfos[fileIndex]);
 				currentFileItems[currentFileInfos[fileIndex].canonicalFilePath()] = accessInfo;
 			}
 
@@ -242,16 +237,7 @@ void CDirectoryMonitorComp::run()
 				const QString& currentFilePath = currentFileIter.key();
 
 				if (!m_directoryFiles.contains(currentFilePath) && !m_nonAccessedAddedFiles.contains(currentFilePath)){
-					if (HasFileAccess(currentFilePath)){
-						addedFiles.push_back(currentFilePath);
-
-						m_directoryFiles[currentFilePath] = QFileInfo(currentFilePath).lastModified();
-
-						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(currentFilePath)));
-					}
-					else{
-						m_nonAccessedAddedFiles[currentFilePath] = currentFileIter.value();
-					}
+					m_nonAccessedAddedFiles[currentFilePath] = currentFileIter.value();
 				}
 			}
 		}
@@ -511,44 +497,27 @@ void CDirectoryMonitorComp::UpdateMonitoringSession() const
 }
 
 
-bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInfo* lastFileAccessInfoPtr) const
+bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInfo& lastFileAccessInfo) const
 {
 	QFileInfo fileInfo(filePath);
 
 	QDateTime currentDateTime = QDateTime::currentDateTime();
-	QDateTime lastModifiedAt;
+	QDateTime lastModifiedAt = GetLastAccessTime(fileInfo);
 	
-	switch (m_timestampMode){
-	case ihotf::IDirectoryMonitorParams::FTM_MODIFIED:
-		lastModifiedAt = fileInfo.lastModified();
-			break;
-	case ihotf::IDirectoryMonitorParams::FTM_CREATED:
-		lastModifiedAt = fileInfo.created();
-			break;
+	int checkTimeDiff = lastFileAccessInfo.checkTimeStamp.secsTo(currentDateTime);
+	if (checkTimeDiff > m_lastModificationMinDifference){
+		int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
+		if ((modificationTimeDiff > m_lastModificationMinDifference) || (modificationTimeDiff < 0)){
+			qint64 currentFileSize = fileInfo.size();
+			if ((lastModifiedAt == lastFileAccessInfo.lastAccessTimeStamp) && (currentFileSize == lastFileAccessInfo.fileSize)){
+				return CheckFileAccess(filePath);
+			}
+			else{
+				lastFileAccessInfo.lastAccessTimeStamp = lastModifiedAt;
+				lastFileAccessInfo.fileSize = currentFileSize;
+				lastFileAccessInfo.checkTimeStamp = QDateTime::currentDateTime();
 
-	default:
-		I_CRITICAL();
-
-		return false;
-	}
-
-	int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
-	if (modificationTimeDiff > m_lastModificationMinDifference){
-		return CheckFileAccess(filePath);
-	}
-	else if (modificationTimeDiff < 0){
-		if (lastFileAccessInfoPtr != NULL){
-			int checkTimeDiff = lastFileAccessInfoPtr->accessTimeStamp.secsTo(currentDateTime);
-			if (checkTimeDiff > m_lastModificationMinDifference){
-				if (fileInfo.size() == lastFileAccessInfoPtr->fileSize){
-					return CheckFileAccess(filePath);
-				}
-				else{
-					lastFileAccessInfoPtr->fileSize = fileInfo.size();
-					lastFileAccessInfoPtr->accessTimeStamp = QDateTime::currentDateTime();
-
-					return false;
-				}
+				return false;
 			}
 		}
 	}
@@ -562,22 +531,29 @@ bool CDirectoryMonitorComp::CheckFileAccess(const QString& filePath) const
 {
 	QFile file(filePath);
 
-	QFile::Permissions filePermissions = file.permissions();
-
-	// Remove write-protection:
-	if (!QFile::setPermissions(filePath, QFile::WriteUser))
-	{
-		return false;
-	}
-
 	// Try to access the file:
-	bool retVal = file.open(QIODevice::ReadWrite);
+	bool retVal = file.open(QIODevice::ReadOnly);
 
 	// Close file and restore original permissions:
 	file.close();
-	file.setPermissions(filePermissions);
 
 	return retVal;
+}
+
+
+QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) const
+{
+	switch (m_timestampMode){
+	case ihotf::IDirectoryMonitorParams::FTM_MODIFIED:
+		return fileInfo.lastModified();
+
+	case ihotf::IDirectoryMonitorParams::FTM_CREATED:
+		return fileInfo.created();
+	default:
+		I_CRITICAL();
+
+		return QDateTime();
+	}
 }
 
 
