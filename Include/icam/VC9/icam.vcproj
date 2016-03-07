@@ -309,6 +309,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSnapMultiPageBitmapSupplierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableBitmapSupplierComp.cpp"
 				>
 			</File>
@@ -351,6 +355,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiCameraBitmapSupplierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSnapMultiPageBitmapSupplierComp.h"
 				>
 			</File>
 			<File
