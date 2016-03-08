@@ -65,10 +65,8 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 		return TS_INVALID;
 	}
 
-	i2d::CLine2d projectionLine;
-	projectionLine.SetCalibration(m_resultCalibrationCompPtr.GetPtr());
-
 	iprm::CParamsSet extendedParamsSet;
+	i2d::CLine2d projectionLine;
 	extendedParamsSet.SetEditableParameter(*m_slaveLineIdAttrPtr, &projectionLine);
 	extendedParamsSet.SetSlaveSet(paramsPtr);
 
@@ -461,7 +459,17 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 		if (featurePtr != NULL){
 			Point point;
 			point.weight = featurePtr->GetWeight();
-			m_featuresMapperCompPtr->GetImagePosition(*featurePtr, &params, point.position);
+			i2d::CVector2d bitmapPosition;
+			m_featuresMapperCompPtr->GetImagePosition(*featurePtr, &params, bitmapPosition);
+
+			if (m_resultCalibrationCompPtr.IsValid()){
+				if (!m_resultCalibrationCompPtr->GetInvPositionAt(bitmapPosition, point.position)){
+					continue;
+				}
+			}
+			else{
+				point.position = bitmapPosition;
+			}
 
 			int edgeType = featurePtr->GetEdgeMode();
 			if (edgeType == CCaliperFeature::EM_FALLING){
@@ -533,7 +541,6 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 						"CircleFinder");
 			pointMessagePtr->SetPoint1(ray.projectionLine.GetPoint1());
 			pointMessagePtr->SetPoint2(ray.projectionLine.GetPoint2());
-			pointMessagePtr->SetCalibration(m_resultCalibrationCompPtr.GetPtr());
 
 			m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 		}
