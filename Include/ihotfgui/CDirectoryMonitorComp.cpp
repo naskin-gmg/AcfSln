@@ -255,7 +255,7 @@ void CDirectoryMonitorComp::run()
 				}
 
 				if ((observingChanges & ihotf::IDirectoryMonitorParams::OC_MODIFIED) != 0){
-					QDateTime currentModifiedTime = fileInfo.lastModified();
+					QDateTime currentModifiedTime = GetLastAccessTime(fileInfo);
 					QDateTime& previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
 						QString filePath = fileInfo.canonicalFilePath();
