@@ -113,7 +113,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 							iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
 							QString("Radius: %3, Pos.: (%1, %2)").arg(circlePtr->GetPosition().GetX()).arg(circlePtr->GetPosition().GetY()).arg(circlePtr->GetRadius()),
 							"PositionFinder");
-				messagePtr->i2d::CCircle::CopyFrom(*circlePtr, istd::IChangeable::CM_CONVERT);
+				messagePtr->i2d::CCircle::CopyFrom(*circlePtr, istd::IChangeable::CM_WITH_REFS);
 				AddMessage(messagePtr);
 			}
 			else if (linePtr != NULL){
