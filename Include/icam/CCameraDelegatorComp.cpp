@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "istd/CIndex2d.h"
+#include "iprm/CParamsSet.h"
 
 
 namespace icam
@@ -13,8 +14,10 @@ namespace icam
 
 istd::CIndex2d CCameraDelegatorComp::GetBitmapSize(const iprm::IParamsSet* paramsPtr) const
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		return m_slaveCameraCompPtr->GetBitmapSize(paramsPtr);
+		return m_slaveCameraCompPtr->GetBitmapSize(workingParamsPtr);
 	}
 
 	return istd::CIndex2d(0, 0);
@@ -25,8 +28,10 @@ istd::CIndex2d CCameraDelegatorComp::GetBitmapSize(const iprm::IParamsSet* param
 
 int CCameraDelegatorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr) const
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		return m_slaveCameraCompPtr->GetProcessorState(paramsPtr);
+		return m_slaveCameraCompPtr->GetProcessorState(workingParamsPtr);
 	}
 
 	return PS_UNKNOWN;
@@ -38,8 +43,10 @@ bool CCameraDelegatorComp::AreParamsAccepted(
 			const istd::IPolymorphic* inputPtr,
 			const istd::IChangeable* outputPtr) const
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		return m_slaveCameraCompPtr->AreParamsAccepted(paramsPtr, inputPtr, outputPtr);
+		return m_slaveCameraCompPtr->AreParamsAccepted(workingParamsPtr, inputPtr, outputPtr);
 	}
 
 	return false;
@@ -52,8 +59,10 @@ int CCameraDelegatorComp::DoProcessing(
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* progressManagerPtr)
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		return m_slaveCameraCompPtr->DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
+		return m_slaveCameraCompPtr->DoProcessing(workingParamsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
 	return TS_INVALID;
@@ -66,8 +75,10 @@ int CCameraDelegatorComp::BeginTask(
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* progressManagerPtr)
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		return m_slaveCameraCompPtr->BeginTask(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
+		return m_slaveCameraCompPtr->BeginTask(workingParamsPtr, inputPtr, outputPtr, progressManagerPtr);
 	}
 
 	return -1;
@@ -117,9 +128,28 @@ int CCameraDelegatorComp::GetTaskState(int taskId) const
 
 void CCameraDelegatorComp::InitProcessor(const iprm::IParamsSet* paramsPtr)
 {
+	const iprm::IParamsSet* workingParamsPtr = GetWorkingParamsSet(paramsPtr);
+
 	if (m_slaveCameraCompPtr.IsValid()){
-		m_slaveCameraCompPtr->InitProcessor(paramsPtr);
+		m_slaveCameraCompPtr->InitProcessor(workingParamsPtr);
 	}
+}
+
+
+// protected methods
+
+const iprm::IParamsSet* CCameraDelegatorComp::GetWorkingParamsSet(const iprm::IParamsSet* inputParamsPtr) const
+{
+	if (m_parameterSetCompPtr.IsValid()){
+		iprm::CParamsSet* paramsSetImplPtr = dynamic_cast<iprm::CParamsSet*>(m_parameterSetCompPtr.GetPtr());
+		if (paramsSetImplPtr != NULL){
+			paramsSetImplPtr->SetSlaveSet(inputParamsPtr);
+		}
+
+		return m_parameterSetCompPtr.GetPtr();
+	}
+
+	return inputParamsPtr;
 }
 
 
