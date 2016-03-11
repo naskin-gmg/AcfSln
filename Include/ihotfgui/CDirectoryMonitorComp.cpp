@@ -258,12 +258,20 @@ void CDirectoryMonitorComp::run()
 					QDateTime currentModifiedTime = GetLastAccessTime(fileInfo);
 					QDateTime& previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
-						QString filePath = fileInfo.canonicalFilePath();
-						modifiedFiles.push_back(filePath);
 
-						previousModifiedTime = currentModifiedTime;
+						// Check if the file was just added now:
+						if (!addedFiles.contains(filePath)){
+							QString filePath = fileInfo.canonicalFilePath();
+							modifiedFiles.push_back(filePath);
 
-						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was modified").arg(filePath)));
+							previousModifiedTime = currentModifiedTime;
+
+							I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was modified").arg(filePath)));
+						}
+						// File was just added but already changed its modification time, also update modification time:
+						else{
+							m_directoryFiles[filePath] = currentModifiedTime;
+						}
 					}
 				}
 /*
