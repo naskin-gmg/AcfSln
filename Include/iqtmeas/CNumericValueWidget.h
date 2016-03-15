@@ -51,6 +51,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
 	void on_ValueSB_valueChanged(double value);
 	void on_ValueSlider_valueChanged(int value);
+	void on_ValueSlider_sliderMoved(int value);
 	void on_ValueSlider_sliderReleased();
 	void on_MinButton_clicked();
 	void on_MaxButton_clicked();

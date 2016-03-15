@@ -23,6 +23,8 @@ CNumericValueWidget::CNumericValueWidget(
 
 	setupUi(this);
 
+	ValueSlider->setTracking(false);
+
 	if (sliderFlags & SF_SINGLE_ROW){
 		ValueLayout->addWidget(MinButton);
 		ValueLayout->addWidget(ValueSlider);
@@ -35,17 +37,17 @@ CNumericValueWidget::CNumericValueWidget(
 
 	switch (inputPolicy){
 		case 2:
-			ValueSB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-			DescriptionLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-			break;
+		ValueSB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+		DescriptionLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+		break;
 
-		case 1:
-			ValueSB->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
-			break;
+	case 1:
+		ValueSB->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+		break;
 
-		case 0:
-			ValueSB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-			break;
+	case 0:
+		ValueSB->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+		break;
 	}
 }
 
@@ -126,6 +128,20 @@ void CNumericValueWidget::on_ValueSB_valueChanged(double value)
 
 
 void CNumericValueWidget::on_ValueSlider_valueChanged(int value)
+{
+	if (m_ignoreEvents){
+		return;
+	}
+
+	m_ignoreEvents = true;
+	SetValue(value / m_sliderScaleFactor);
+	m_ignoreEvents = false;
+
+	Q_EMIT ValueChanged();
+}
+
+
+void CNumericValueWidget::on_ValueSlider_sliderMoved(int value)
 {
 	if (m_ignoreEvents){
 		return;

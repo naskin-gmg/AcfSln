@@ -59,6 +59,7 @@ public:
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)

@@ -41,6 +41,26 @@ void CNumericParamsGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
+void CNumericParamsGuiComp::OnGuiCreated()
+{
+	QWidget* panelPtr = GetQtWidget();
+	Q_ASSERT(panelPtr != NULL);	// called inside OnGuiCreated(), widget must be defined.
+
+	QLayout* layoutPtr = NULL;
+	if (*m_verticalLayoutAttrPtr){
+		layoutPtr = new QVBoxLayout;
+	}
+	else{
+		layoutPtr = new QHBoxLayout;
+	}
+
+	layoutPtr->setMargin(0);
+	panelPtr->setLayout(layoutPtr);
+
+	BaseClass::OnGuiCreated();
+}
+
+
 void CNumericParamsGuiComp::OnGuiDestroyed()
 {
 	m_valueWidgets.Reset();
@@ -78,18 +98,19 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 	Q_ASSERT(IsGuiCreated());
 
 	QWidget* panelPtr = GetQtWidget();
-	Q_ASSERT(panelPtr != NULL);	// called inside UpdateGui(), widget must be defined.
+	Q_ASSERT(panelPtr != NULL);	// called inside OnGuiCreated(), widget must be defined.
 
-	QLayout* layoutPtr = NULL;
-	if (*m_verticalLayoutAttrPtr){
-		layoutPtr = new QVBoxLayout;
-	}
-	else{
-		layoutPtr = new QHBoxLayout;
-	}
+	QLayout* layoutPtr = panelPtr->layout();
+	Q_ASSERT(layoutPtr != NULL); // layout is allways set in OnGuiCreated()
 
-	layoutPtr->setMargin(0);
-	panelPtr->setLayout(layoutPtr);
+	QObjectList children = layoutPtr->children();
+	for (		QObjectList::ConstIterator iter = children.constBegin();
+				iter != children.constEnd();
+				++iter){
+		QObject* childPtr = *iter;
+
+		delete childPtr;
+	}
 
 	imeas::INumericValue* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
