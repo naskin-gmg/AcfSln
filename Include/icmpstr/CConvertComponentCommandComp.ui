@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>234</height>
+    <height>276</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,6 +85,18 @@
          </property>
         </item>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Filter</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLineEdit" name="FilterEdit"/>
       </item>
      </layout>
     </widget>

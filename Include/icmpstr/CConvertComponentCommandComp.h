@@ -87,6 +87,7 @@ protected Q_SLOTS:
 	void on_InterfacesPolicyCB_currentIndexChanged(int index);
 	void on_AttributesPolicyCB_currentIndexChanged(int index);
 	void on_SubcomponentsPolicyCB_currentIndexChanged(int index);
+	void on_FilterEdit_textChanged(const QString& text);
 	void on_PackageNameCB_currentIndexChanged(int index);
 	void on_ComponentNameCB_currentIndexChanged(int index);
 	void OnPromoteCommand();
