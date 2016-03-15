@@ -559,7 +559,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 		if (metaInfoPtr != NULL){
 			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
 
-			keywords << (encoder.GetValues());
+			keywords << encoder.GetValues();
 		}
 
 		if (FilterGB->isChecked()){
@@ -592,21 +592,21 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 					if (keyword.contains(filter, Qt::CaseInsensitive)){
 						filterFound = true;
 						break;
-						}
-					}
-
-					if (!filterFound){
-						isFilterMatched = false;
-						break;
 					}
 				}
 
-				if (!isFilterMatched){
-					continue;
+				if (!filterFound){
+					isFilterMatched = false;
+					break;
 				}
 			}
 
-			filteredComponentAdresses.insert(address);
+			if (!isFilterMatched){
+				continue;
+			}
+		}
+
+		filteredComponentAdresses.insert(address);
 	}
 
 	const icomp::IRegistry* registryPtr = GetObservedObject();
