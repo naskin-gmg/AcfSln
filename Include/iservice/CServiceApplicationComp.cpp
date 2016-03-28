@@ -265,7 +265,6 @@ void CServiceApplicationComp::CService::start()
 
 void CServiceApplicationComp::CService::stop()
 {
-	qApp->exit();
 }
 
 
@@ -296,6 +295,16 @@ void CServiceApplicationComp::CService::resume()
 void CServiceApplicationComp::CService::createApplication(int&/*argc*/, char** /* argv*/)
 {
 	QVector<char*> argv = GetApplicationArguments();
+
+	int argCount = argv.count();
+
+	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
+	if (guiAppPtr != NULL){
+		new QApplication(argCount, argv.data());	
+	}
+	else{
+		new QCoreApplication(argCount, argv.data());
+	}
 
 	m_application.InitializeApplication(argv.count(), argv.data());
 }
