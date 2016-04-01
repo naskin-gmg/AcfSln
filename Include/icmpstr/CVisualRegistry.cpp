@@ -54,7 +54,10 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 	Q_UNUSED(notifier);
 
 	if (isStoring){
-		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
+		QList<QByteArray> sortedIds = ids.toList();
+		qSort(sortedIds);
+
+		for (QList<QByteArray>::const_iterator iter = sortedIds.begin(); iter != sortedIds.end(); ++iter){
 			QByteArray elementId = *iter;
 
 			i2d::CVector2d position(0, 0);
