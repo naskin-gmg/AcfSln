@@ -419,6 +419,10 @@ void CAttributeEditorComp::UpdateAttributesView()
 	bool hasImport = false;
 	int itemIndex = 0;
 
+	QFont normalFont = AttributeTree->font();
+	QFont importantFont = normalFont;
+	importantFont.setBold(true);
+
 	const IElementSelectionInfo* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		const icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
@@ -500,9 +504,8 @@ void CAttributeEditorComp::UpdateAttributesView()
 								*registryPtr,
 								attributeId,
 								attrInfos,
-								errorFlag,
-								warningFlag,
-								exportFlag);
+								normalFont, importantFont,
+								errorFlag, warningFlag, exportFlag);
 
 					hasError = hasError || errorFlag;
 					hasWarning = hasWarning || warningFlag;
@@ -751,6 +754,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			const icomp::IRegistry& registry,
 			const QByteArray& attributeId,
 			const ElementIdToAttrInfoMap& infos,
+			const QFont& normalFont,
+			const QFont& importantFont,
 			bool& hasError,
 			bool& hasWarning,
 			bool& hasExport) const
@@ -758,6 +763,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	bool isAttributeEditable = true;
 	bool isAttributeEnabled = false;
 	bool isAttributeObligatory = false;
+	bool isAttributeUsed = false;
 	bool isAttributeWarning = false;
 	bool isAttributeError = false;
 	QString attributeValueText;
@@ -791,6 +797,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		const iser::IObject* attributePtr = NULL;
 		if ((attrInfo.infoPtr != NULL) && attrInfo.infoPtr->attributePtr.IsValid()){
 			isAttributeEnabled = true;
+			isAttributeUsed = true;
+
 			attributePtr = attrInfo.infoPtr->attributePtr.GetPtr();
 		}
 		else if (attrInfo.staticInfoPtr != NULL){
@@ -857,6 +865,10 @@ bool CAttributeEditorComp::SetAttributeToItem(
 
 			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_OBLIGATORY) != 0){
 				isAttributeObligatory = true;
+
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_NULLABLE) != 0){
+					isAttributeUsed = true;
+				}
 			}
 			QString description = attrInfo.staticInfoPtr->GetAttributeDescription();
 			if (!description.isEmpty()){
@@ -1014,6 +1026,9 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	}
 
 	attributeItemPtr->setBackgroundColor(AC_NAME, backgroundColor);
+
+	attributeItemPtr->setFont(AC_NAME, isAttributeEnabled? importantFont: normalFont);
+	attributeItemPtr->setFont(AC_VALUE, isAttributeUsed? importantFont: normalFont);
 
 	if (isAttributeError){
 		attributeItemPtr->setBackgroundColor(AC_VALUE, Qt::red);
@@ -1177,7 +1192,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		text.clear();
 
 		for (int index = 0; index < stringListAttribute->GetValuesCount(); index++){
-			if (!text.isEmpty()){
+			if (index != 0){
 				text += ";";
 			}
 
@@ -1194,7 +1209,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		text.clear();
 
 		for (int index = 0; index < intListAttribute->GetValuesCount(); index++){
-			if (!text.isEmpty()){
+			if (index != 0){
 				text += ";";
 			}
 
@@ -1211,7 +1226,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		text.clear();
 
 		for (int index = 0; index < doubleListAttribute->GetValuesCount(); index++){
-			if (!text.isEmpty()){
+			if (index != 0){
 				text += ";";
 			}
 
@@ -1228,7 +1243,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		text.clear();
 
 		for (int index = 0; index < boolListAttribute->GetValuesCount(); index++){
-			if (!text.isEmpty()){
+			if (index != 0){
 				text += ";";
 			}
 
@@ -1244,13 +1259,12 @@ bool CAttributeEditorComp::DecodeAttribute(
 	if (multiIdPtr != NULL){
 		QString dependecyString;
 
-		int idsCount = multiIdPtr->GetValuesCount();
-		for (int idIndex = 0; idIndex < idsCount; idIndex++){
-			if (!text.isEmpty()){
+		for (int index = 0; index < multiIdPtr->GetValuesCount(); index++){
+			if (index != 0){
 				text += ";";
 			}
 
-			QString componentId = multiIdPtr->GetValueAt(idIndex);
+			QString componentId = multiIdPtr->GetValueAt(index);
 
 			text += EncodeToEdit(componentId);
 		}
@@ -1285,7 +1299,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 	}
 	// set multiple reference data
 	else if (attributeStatMeaning == AM_MULTI_REFERENCE){
-		QStringList references = text.split(';',QString::SkipEmptyParts);
+		QStringList references = text.split(';', QString::SkipEmptyParts);
 
 		iattr::TMultiAttribute<QByteArray>* multiReferenceAttributePtr = dynamic_cast<iattr::TMultiAttribute<QByteArray>*>(&result);
 
@@ -2061,7 +2075,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if (intListAttributePtr != NULL){
 				QString outputValue;
 				for (int index = 0; index < intListAttributePtr->GetValuesCount(); index++){
-					if (!outputValue.isEmpty()){
+					if (index != 0){
 						outputValue += ";";
 					}
 
@@ -2077,7 +2091,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if (doubleListAttributePtr != NULL){
 				QString outputValue;
 				for (int index = 0; index < doubleListAttributePtr->GetValuesCount(); index++){
-					if (!outputValue.isEmpty()){
+					if (index != 0){
 						outputValue += ";";
 					}
 
@@ -2093,7 +2107,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if (boolListAttributePtr != NULL){
 				QString outputValue;
 				for (int index = 0; index < boolListAttributePtr->GetValuesCount(); index++){
-					if (!outputValue.isEmpty()){
+					if (index != 0){
 						outputValue += ";";
 					}
 
@@ -2109,7 +2123,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if (stringListAttributePtr != NULL){
 				QString outputValue;
 				for (int index = 0; index < stringListAttributePtr->GetValuesCount(); index++){
-					if (!outputValue.isEmpty()){
+					if (index != 0){
 						outputValue += ";";
 					}
 
@@ -2125,7 +2139,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if (idListAttributePtr != NULL){
 				QString outputValue;
 				for (int index = 0; index < idListAttributePtr->GetValuesCount(); index++){
-					if (!outputValue.isEmpty()){
+					if (index != 0){
 						outputValue += ";";
 					}
 
