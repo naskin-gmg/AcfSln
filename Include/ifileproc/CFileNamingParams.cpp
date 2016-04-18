@@ -119,6 +119,67 @@ bool CFileNamingParams::Serialize(iser::IArchive& archive)
 }
 
 
+int CFileNamingParams::GetSupportedOperations() const
+{
+	return SO_COPY | SO_COMPARE | SO_CLONE;
+}
+
+
+bool CFileNamingParams::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode)
+{
+	const CFileNamingParams* sourcePtr = dynamic_cast<const CFileNamingParams*>(&object);
+	if (sourcePtr != NULL){
+		m_overwriteStrategy = sourcePtr->m_overwriteStrategy;
+		m_suffix = sourcePtr->m_suffix;
+		m_prefix = sourcePtr->m_prefix;
+		m_patternsToRemove = sourcePtr->m_patternsToRemove;
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CFileNamingParams::IsEqual(const istd::IChangeable& object) const
+{
+	const CFileNamingParams* sourcePtr = dynamic_cast<const CFileNamingParams*>(&object);
+	if (sourcePtr != NULL){
+		return
+					(m_overwriteStrategy == sourcePtr->m_overwriteStrategy) &&
+					(m_suffix == sourcePtr->m_suffix) &&
+					(m_prefix == sourcePtr->m_prefix) &&
+					(m_patternsToRemove == sourcePtr->m_patternsToRemove);
+	}
+
+	return false;
+}
+
+
+istd::IChangeable* CFileNamingParams::CloneMe(istd::IChangeable::CompatibilityMode mode) const
+{
+	istd::TDelPtr<CFileNamingParams> objectPtr(new CFileNamingParams);
+	if (objectPtr->CopyFrom(*this)){
+		return objectPtr.PopPtr();
+	}
+
+	return NULL;
+}
+
+
+bool CFileNamingParams::ResetData(CompatibilityMode /*mode*/)
+{
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_overwriteStrategy = RM_NUMBERING;
+	m_prefix.clear();
+	m_suffix.clear();
+	m_patternsToRemove.clear();
+
+	return true;
+}
+
+
 } // namespace ifileproc
 
 
