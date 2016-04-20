@@ -125,7 +125,7 @@ int CFileNamingParams::GetSupportedOperations() const
 }
 
 
-bool CFileNamingParams::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode)
+bool CFileNamingParams::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode /*mode*/)
 {
 	const CFileNamingParams* sourcePtr = dynamic_cast<const CFileNamingParams*>(&object);
 	if (sourcePtr != NULL){
@@ -159,7 +159,7 @@ bool CFileNamingParams::IsEqual(const istd::IChangeable& object) const
 istd::IChangeable* CFileNamingParams::CloneMe(istd::IChangeable::CompatibilityMode mode) const
 {
 	istd::TDelPtr<CFileNamingParams> objectPtr(new CFileNamingParams);
-	if (objectPtr->CopyFrom(*this)){
+	if (objectPtr->CopyFrom(*this, mode)){
 		return objectPtr.PopPtr();
 	}
 
