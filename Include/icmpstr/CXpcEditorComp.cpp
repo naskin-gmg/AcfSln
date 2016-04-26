@@ -446,7 +446,7 @@ void CXpcEditorComp::SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& m
 		for (int i = 0; i < 2; i++){
 			QAction* newAction = menu.addAction(specialVariables[i]);
 			newAction->setData(sectionIndex);
-			newAction->setStatusTip(istd::CSystem::FindVariableValue(specialVariables[i]));
+			newAction->setStatusTip(istd::CSystem::GetVariableValue(specialVariables[i]));
 		}
 	}
 }

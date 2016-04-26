@@ -307,7 +307,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 		}
 
 		if (*m_replaceEnvironmentVariablesAttrPtr || *m_replaceEmbeddedVariablesAttrPtr){
-			QString variable = istd::CSystem::FindVariableValue(tag, *m_replaceEnvironmentVariablesAttrPtr, *m_replaceEmbeddedVariablesAttrPtr);
+			QString variable = istd::CSystem::GetVariableValue(tag, *m_replaceEnvironmentVariablesAttrPtr, *m_replaceEmbeddedVariablesAttrPtr);
 			if (!variable.isEmpty()){
 				result = variable;
 
