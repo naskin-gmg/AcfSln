@@ -34,20 +34,20 @@ public:
 		OC_ALL = OC_ADD | OC_REMOVE | OC_MODIFIED | OC_ATTR_CHANGED
 	};
 
-	enum FileTimestampMode
+	enum FileTimeStampMode
 	{
 		/**
 			File modification time will be get from 'Last Modified'-attribute.
 		*/
-		FTM_MODIFIED,
+		FTM_MODIFIED = 0x1,
 
 		/**
 			File modification time will be get from 'Created'-attribute.
 		*/
-		FTM_CREATED
+		FTM_CREATED = 0x2
 	};
 
-	I_DECLARE_ENUM(FileTimestampMode, FTM_MODIFIED, FTM_CREATED);
+	I_DECLARE_FLAGS(FileTimeStampMode, FTM_MODIFIED, FTM_CREATED);
 
 	/**
 		Get pooling intervall for directory changes in seconds.	
@@ -125,13 +125,13 @@ public:
 		Get timestamp mode used for file detection and access check.
 		\sa FileTimestampMode
 	*/
-	virtual int GetFileTimestampMode() const = 0;
+	virtual int GetFileTimeStampMode() const = 0;
 
 	/**
 		Set timestamp mode used for file detection and access check.
 		\sa FileTimestampMode
 	*/
-	virtual void SetFileTimestampMode(int fileTimestampMode) = 0;
+	virtual void SetFileTimeStampMode(int fileTimeStampMode) = 0;
 };
 
 

@@ -551,17 +551,17 @@ bool CDirectoryMonitorComp::CheckFileAccess(const QString& filePath) const
 
 QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) const
 {
-	switch (m_timestampMode){
-	case ihotf::IDirectoryMonitorParams::FTM_MODIFIED:
-		return fileInfo.lastModified();
+	QDateTime lastAccessTime = QDateTime::fromMSecsSinceEpoch(0);
 
-	case ihotf::IDirectoryMonitorParams::FTM_CREATED:
-		return fileInfo.created();
-	default:
-		I_CRITICAL();
-
-		return QDateTime();
+	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_MODIFIED){
+		lastAccessTime = fileInfo.lastModified();
 	}
+
+	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_MODIFIED){
+		lastAccessTime = qMax(fileInfo.lastModified(), lastAccessTime);
+	}
+
+	return lastAccessTime;
 }
 
 
@@ -589,7 +589,8 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 			m_parent.m_observingChanges = directoryMonitorParamsPtr->GetObservedChanges();
 			m_parent.m_fileFilterExpressions = directoryMonitorParamsPtr->GetAcceptPatterns();
 			m_parent.m_folderDepth = directoryMonitorParamsPtr->GetFolderDepth();
-			m_parent.m_timestampMode = directoryMonitorParamsPtr->GetFileTimestampMode();
+			m_parent.m_timestampMode = directoryMonitorParamsPtr->GetFileTimeStampMode();
+			m_parent.m_lastModificationMinDifference = directoryMonitorParamsPtr->GetMinLastModificationTimeDifference();
 		}
 	}
 
