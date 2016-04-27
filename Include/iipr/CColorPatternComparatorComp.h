@@ -21,7 +21,7 @@ namespace iipr
 	Color comparator based on histogram statistics.
 
 	Implemented interfaces have following meaning:
-	1. imeas::INumericValueProvider - Get the measured color
+	1. imeas::INumericValueProvider - Get the measured color.
 	2. istd::IInformationProvider - Comparison status provider.
 */
 class CColorPatternComparatorComp:

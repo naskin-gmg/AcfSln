@@ -122,12 +122,16 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 					modelItemPtr->setText(CT_SCALE, QString::number(objectFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(objectFeaturePtr->GetScale().GetY(), 'f', 2));
 
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
-					if ((searchFeaturePtr != NULL) && searchFeaturePtr->IsNegativeModelEnabled()){
-						modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));
-						modelItemPtr->setBackground(CT_SCORE, QBrush(Qt::red));
-						modelItemPtr->setBackground(CT_POSITION, QBrush(Qt::red));
-						modelItemPtr->setBackground(CT_ANGLE, QBrush(Qt::red));
-						modelItemPtr->setBackground(CT_SCALE, QBrush(Qt::red));
+					if (searchFeaturePtr != NULL){
+						modelItemPtr->setText(CT_ID, QString("%1 (%2)").arg(QString(objectFeaturePtr->GetObjectId())).arg(searchFeaturePtr->GetIndex()));
+					
+						if (searchFeaturePtr->IsNegativeModelEnabled()){
+							modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));
+							modelItemPtr->setBackground(CT_SCORE, QBrush(Qt::red));
+							modelItemPtr->setBackground(CT_POSITION, QBrush(Qt::red));
+							modelItemPtr->setBackground(CT_ANGLE, QBrush(Qt::red));
+							modelItemPtr->setBackground(CT_SCALE, QBrush(Qt::red));
+						}
 					}
 
 					ResultsList->addTopLevelItem(modelItemPtr);
