@@ -557,8 +557,8 @@ QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) co
 		lastAccessTime = fileInfo.lastModified();
 	}
 
-	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_MODIFIED){
-		lastAccessTime = qMax(fileInfo.lastModified(), lastAccessTime);
+	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_CREATED){
+		lastAccessTime = qMax(fileInfo.created(), lastAccessTime);
 	}
 
 	return lastAccessTime;
