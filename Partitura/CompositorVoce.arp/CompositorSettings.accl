@@ -2,21 +2,21 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4154" Description="ACF"/>
+            <Version Id="1" Number="1570" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="EnableDocumentPersistence" X="975" Y="500" Note=""/>
-        <Element ComponentName="PreviewCommandFile" X="725" Y="300" Note=""/>
-        <Element ComponentName="HtmlEditorFile" X="725" Y="500" Note=""/>
-        <Element ComponentName="HtmlBrowserFile" X="500" Y="500" Note=""/>
-        <Element ComponentName="ConfigsManager" X="475" Y="300" Note=""/>
-        <Element ComponentName="SelectableConfigData" X="475" Y="125" Note=""/>
-        <Element ComponentName="LanguageSelection" X="975" Y="300" Note=""/>
         <Element ComponentName="ConfigDataShadow" X="200" Y="75" Note=""/>
         <Element ComponentName="ConfigFileShadower" X="200" Y="225" Note=""/>
+        <Element ComponentName="ConfigsManager" X="475" Y="300" Note=""/>
+        <Element ComponentName="EnableDocumentPersistence" X="975" Y="500" Note=""/>
+        <Element ComponentName="HtmlBrowserFile" X="500" Y="500" Note=""/>
+        <Element ComponentName="HtmlEditorFile" X="725" Y="500" Note=""/>
+        <Element ComponentName="LanguageSelection" X="975" Y="300" Note=""/>
+        <Element ComponentName="PreviewCommandFile" X="725" Y="300" Note=""/>
+        <Element ComponentName="SelectableConfigData" X="475" Y="125" Note=""/>
         <Element ComponentName="Settings" X="200" Y="400" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>

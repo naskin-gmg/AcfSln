@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4154" Description="ACF"/>
+            <Version Id="1" Number="1570" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Compositor settings</Description>
@@ -37,6 +37,9 @@
         <Element Id="ConfigsManager" PackageId="BasePck" ComponentId="ParamsManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultSetName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Config %1"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="ParamsSetFactory" Type="Factory" ExportId="">
                         <Data IsEnabled="true" Value="SelectableConfigData"/>
                     </AttributeInfo>
