@@ -1,5 +1,5 @@
-#ifndef IacfBasePck_included
-#define IacfBasePck_included
+#ifndef CameraPck_included
+#define CameraPck_included
 
 
 // ACF includes
@@ -39,13 +39,16 @@ typedef icomp::TModelCompWrap<icam::CSelectableBitmapSupplierComp> SelectableBit
 typedef icomp::TModelCompWrap<icam::CSnapMultiPageBitmapSupplierComp> SnapMultiPageBitmapSupplier;
 
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
-typedef icomp::TModelCompWrap<icam::TSnapBitmapSupplierComp<iimg::CBitmap> > StandardQtBitmapSnapSupplier;
+typedef icomp::TModelCompWrap<
+			icam::TSnapBitmapSupplierComp<iimg::CBitmap> > StandardQtBitmapSnapSupplier;
+typedef icomp::TModelCompWrap<
+			icam::TSnapBitmapSupplierComp<iimg::CGeneralBitmap> > StandardBitmapSnapSupplier;
 typedef icam::CCalibratedCameraComp CalibratedCamera;
 
 
 } // namespace CameraPck
 
 
-#endif // !IacfBasePck_included
+#endif // !CameraPck_included
 
 

@@ -62,7 +62,12 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			StandardQtBitmapSnapSupplier,
 			"Implementation of Qt-bitmap based supplier getting image from camera",
-			"Image Standard Bitmap Snap Supplier");
+			"Image Bitmap QImage Snap Supplier");
+
+I_EXPORT_COMPONENT(
+			StandardBitmapSnapSupplier,
+			"Implementation of the bitmap supplier getting image from camera using standard bitmap implementation",
+			"Image Bitmap Snap Supplier");
 
 I_EXPORT_COMPONENT(
 			CalibratedCamera,
