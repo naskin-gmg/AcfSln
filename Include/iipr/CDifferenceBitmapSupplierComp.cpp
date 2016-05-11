@@ -65,20 +65,20 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	const iimg::IBitmap* firstBitmapPtr = m_firstBitmapProviderCompPtr->GetBitmap();
 	if (firstBitmapPtr == NULL){
-		SendErrorMessage(0, "First input image could not be provided", "DifferenceBitmapSupplier");
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("First input image could not be provided"), "DifferenceBitmapSupplier"));
 
 		return WS_ERROR;
 	}
 
 	const iimg::IBitmap* secondBitmapPtr = m_secondBitmapProviderCompPtr->GetBitmap();
 	if (secondBitmapPtr == NULL){
-		SendErrorMessage(0, "Second input image could not be provided", "DifferenceBitmapSupplier");
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Second input image could not be provided"), "DifferenceBitmapSupplier"));
 
 		return WS_ERROR;
 	}
 
 	if (firstBitmapPtr->GetPixelFormat() != secondBitmapPtr->GetPixelFormat()){
-		SendErrorMessage(0, "Input bitmaps have different formats. Difference bitmap calculation canceled", "DifferenceBitmapSupplier");
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Format of input images differs"), "DifferenceBitmapSupplier"));
 
 		return WS_ERROR;
 	}

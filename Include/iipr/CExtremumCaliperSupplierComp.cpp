@@ -52,12 +52,14 @@ int CExtremumCaliperSupplierComp::ProduceObject(ProductType& result) const
 
 		int processingState = m_extremumProcessorCompPtr->DoProcessing(GetModelParametersSet(), sequencePtr, &result);
 		switch (processingState){
-			case iproc::IProcessor::TS_OK:
-				return WS_OK;
-			case iproc::IProcessor::TS_CANCELED:
-				return WS_CANCELED;
-			default:
-				return WS_ERROR;
+		case iproc::IProcessor::TS_OK:
+			return WS_OK;
+
+		case iproc::IProcessor::TS_CANCELED:
+			return WS_CANCELED;
+
+		default:
+			return WS_ERROR;
 		}
 	}
 

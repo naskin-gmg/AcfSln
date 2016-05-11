@@ -41,26 +41,30 @@ int CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_processorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
-		if (bitmapPtr != NULL){
-			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
+		if (bitmapPtr == NULL){
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "EdgeDistances"));
 
-			Timer performanceTimer(this, "Distance calculation");
-
-			int processorState = m_processorCompPtr->DoProcessing(
-							paramsSetPtr,
-							bitmapPtr,
-							&result);
-
-			if (processorState != iproc::IProcessor::TS_OK){
-				return WS_ERROR;
-			}
-
-			if (result.GetValuesCount() < 1){
-				return WS_ERROR;
-			}
-
-			return WS_OK;
+			return WS_ERROR;
 		}
+
+		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
+
+		Timer performanceTimer(this, "Distance calculation");
+
+		int processorState = m_processorCompPtr->DoProcessing(
+						paramsSetPtr,
+						bitmapPtr,
+						&result);
+
+		if (processorState != iproc::IProcessor::TS_OK){
+			return WS_ERROR;
+		}
+
+		if (result.GetValuesCount() < 1){
+			return WS_ERROR;
+		}
+
+		return WS_OK;
 	}
 
 	return WS_CRITICAL;

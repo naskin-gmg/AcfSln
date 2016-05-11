@@ -45,6 +45,8 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "BitmapProcessing"));
+
 		return WS_ERROR;
 	}
 

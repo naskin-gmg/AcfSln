@@ -26,21 +26,26 @@ int CImageHistogramSupplierComp::ProduceObject(imod::TModelWrap<imeas::CSimpleSa
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_histogramProcessorCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
-		if (bitmapPtr != NULL){
-			iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
+		if (bitmapPtr == NULL){
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "ImageHistogram"));
 
-			Timer performanceTimer(this, "Histogram calculation");
-
-			int processingState = m_histogramProcessorCompPtr->DoProcessing(
-							paramsSetPtr,
-							bitmapPtr,
-							&result);
-
-			if (processingState != iproc::IProcessor::TS_OK){
-				return WS_ERROR;
-			}
-			return WS_OK;
+			return WS_ERROR;
 		}
+
+		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
+
+		Timer performanceTimer(this, "Histogram calculation");
+
+		int processingState = m_histogramProcessorCompPtr->DoProcessing(
+						GetModelParametersSet(),
+						bitmapPtr,
+						&result);
+
+		if (processingState != iproc::IProcessor::TS_OK){
+			return WS_ERROR;
+		}
+
+		return WS_OK;
 	}
 
 	return WS_CRITICAL;

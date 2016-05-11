@@ -12,37 +12,48 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_linesProviderCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
-		int projectionCount = m_linesProviderCompPtr->GetValuesCount();
+		if (bitmapPtr == NULL){
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "MultiLineProjection"));
 
-		if (bitmapPtr != NULL && projectionCount > 0){
-			result.resize(projectionCount);
-
-			Timer performanceTimer(this, "Extraction of projections");
-
-			for (int i = 0; i < projectionCount; i++){
-				imeas::CGeneralDataSequence& lineResult = result[i];
-
-				imath::CVarVector varVector = m_linesProviderCompPtr->GetNumericValue(i).GetComponentValue(imeas::INumericValue::VTI_2D_LINE);
-				if (varVector.GetElementsCount() < 4){
-					return WS_ERROR;
-				}
-
-				i2d::CLine2d line(
-					varVector.GetElement(0), 
-					varVector.GetElement(1), 
-					varVector.GetElement(2), 
-					varVector.GetElement(3));
-
-				bool isOk = m_projectionProcessorCompPtr->DoProjection(*bitmapPtr, line, NULL, lineResult);
-				if (!isOk){
-					return WS_ERROR;
-				}
-			}
-
-			return WS_OK;
+			return WS_ERROR;
 		}
 
-		return WS_ERROR;
+		int projectionCount = m_linesProviderCompPtr->GetValuesCount();
+		if (projectionCount <= 0){
+			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No projection lines found"), "MultiLineProjection"));
+
+			return WS_ERROR;
+		}
+
+		result.resize(projectionCount);
+
+		Timer performanceTimer(this, "Extraction of projections");
+
+		for (int i = 0; i < projectionCount; i++){
+			imeas::CGeneralDataSequence& lineResult = result[i];
+
+			imath::CVarVector varVector = m_linesProviderCompPtr->GetNumericValue(i).GetComponentValue(imeas::INumericValue::VTI_2D_LINE);
+			if (varVector.GetElementsCount() < 4){
+				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No line at projection %1 found").arg(i + 1), "MultiLineProjection"));
+
+				return WS_ERROR;
+			}
+
+			i2d::CLine2d line(
+						varVector.GetElement(0), 
+						varVector.GetElement(1), 
+						varVector.GetElement(2), 
+						varVector.GetElement(3));
+
+			bool isOk = m_projectionProcessorCompPtr->DoProjection(*bitmapPtr, line, NULL, lineResult);
+			if (!isOk){
+				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Calculation of projection %1 failed").arg(i + 1), "MultiLineProjection"));
+
+				return WS_ERROR;
+			}
+		}
+
+		return WS_OK;
 	}
 
 	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or lines provider were not set");

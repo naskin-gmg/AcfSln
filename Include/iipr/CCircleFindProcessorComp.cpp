@@ -88,6 +88,9 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 			return TS_OK;
 		}
+		else{
+			SendErrorMessage(0, "Not enought points found");
+		}
 	}
 	else{
 		istd::TDelPtr<CircleFeature> featurePtr(new CircleFeature());
@@ -106,6 +109,9 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
+		}
+		else{
+			SendErrorMessage(0, "Not enought points found");
 		}
 	}
 
