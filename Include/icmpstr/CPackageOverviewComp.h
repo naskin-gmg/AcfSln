@@ -78,9 +78,11 @@ protected:
 		bool hasCompositeComponents;
 	};
 
+	typedef QSet<QString> MetaInfoFilter;
+
 	void GenerateComponentTree(bool forceUpdate);
-	void UpdateComponentGroups();
-	void UpdateInterfaceList();
+	void UpdateAllMetaInfoLists();
+	void UpdateSingleMetaInfoList(const MetaInfoFilter& filter, QComboBox& result);
 	void UpdateAllLists();
 
 	/**
@@ -116,11 +118,17 @@ protected Q_SLOTS:
 	void on_PackagesList_itemExpanded(QTreeWidgetItem* item);
 	void on_PackagesList_itemClicked(QTreeWidgetItem* item, int column);
 	void on_PackagesList_itemDoubleClicked(QTreeWidgetItem* item, int column);
-	void on_FilterGB_toggled(bool on);
+	void on_EnableFiltersButton_toggled(bool on);
 	void on_InterfaceCB_currentIndexChanged(int index);
 	void OnReloadPackages();
-	void on_KeywordClearButton_clicked();
 	void on_InterfaceClearButton_clicked();
+	void on_CompanyClearButton_clicked();
+	void on_ProjectClearButton_clicked();
+	void on_AuthorClearButton_clicked();
+	void on_CategoryClearButton_clicked();
+	void on_TagClearButton_clicked();
+	void on_KeywordClearButton_clicked();
+	void OnMetaInfoSelectorChanged();
 
 private:
 	class PackageItemBase: public QTreeWidgetItem

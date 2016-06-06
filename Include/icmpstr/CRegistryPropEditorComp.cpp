@@ -142,12 +142,12 @@ void CRegistryPropEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*ch
 
 	icomp::CComponentMetaDescriptionEncoder metaDescriptionEncoder(registryPtr->GetKeywords());
 
-	QStringList companyList = (metaDescriptionEncoder.GetValues("Company"));
-	QStringList projectsList = (metaDescriptionEncoder.GetValues("Project"));
-	QStringList authorsList = (metaDescriptionEncoder.GetValues("Author"));
-	QStringList categoriesList = (metaDescriptionEncoder.GetValues("Category"));
-	QStringList tagsList = (metaDescriptionEncoder.GetValues("Tag"));
-	QStringList keywords = (metaDescriptionEncoder.GetUnassignedKeywords());
+	QStringList companyList = metaDescriptionEncoder.GetValues("Company");
+	QStringList projectsList = metaDescriptionEncoder.GetValues("Project");
+	QStringList authorsList = metaDescriptionEncoder.GetValues("Author");
+	QStringList categoriesList = metaDescriptionEncoder.GetValues("Category");
+	QStringList tagsList = metaDescriptionEncoder.GetValues("Tag");
+	QStringList keywords = metaDescriptionEncoder.GetUnassignedKeywords();
 
 	CompanyEdit->setText(companyList.join(","));
 	CategoryEdit->setText(categoriesList.join(","));

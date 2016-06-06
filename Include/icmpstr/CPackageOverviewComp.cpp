@@ -304,7 +304,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 			InterfaceCB->setCurrentIndex(0);
 		}
 
-		if (FilterGB->isChecked()){
+		if (EnableFiltersButton->isChecked()){
 			GenerateComponentTree(false);
 		}
 	}
@@ -323,8 +323,6 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 	PackagesList->clear();
 	m_roots.clear();
 
-	QString currentKey = GroupByCB->currentText();
-
 	for (		icomp::IMetaInfoManager::ComponentAddresses::const_iterator addressIter = addresses.begin();
 				addressIter != addresses.end();
 				++addressIter){
@@ -332,42 +330,19 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 
 		const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
 
-		QByteArray elementName;
 		QStringList groupIds;
 		if (!address.GetPackageId().isEmpty()){
-			elementName = address.GetPackageId() + "/";
 			if (m_envManagerCompPtr.IsValid()){
 				metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 			}
 
+			groupIds.push_back(address.GetPackageId());
 		}
 		else{
 			groupIds.push_back(tr("<< Local >>"));
 		}
 
-		elementName += address.GetComponentId();
-
-		switch (GroupByCB->currentIndex()){
-			case GM_NONE:
-				groupIds.push_back("");
-				break;
-
-			case GM_PACKAGE:
-				if (!address.GetPackageId().isEmpty()){
-					groupIds.push_back(address.GetPackageId());
-				}
-
-				elementName = address.GetComponentId();
-				break;
-
-			default:{
-				if (metaInfoPtr != NULL){
-					icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
-
-					groupIds = encoder.GetValues(currentKey);
-				}
-			}
-		}
+		QByteArray elementName = address.GetComponentId();
 
 		QIcon icon;
 		if (m_consistInfoCompPtr.IsValid()){
@@ -445,40 +420,15 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 }
 
 
-void CPackageOverviewComp::UpdateComponentGroups()
-{
-	if (!m_envManagerCompPtr.IsValid()){
-		return;
-	}
-
-	QSet<QString> categories;
-
-	icomp::IMetaInfoManager::ComponentAddresses addresses = m_envManagerCompPtr->GetComponentAddresses();
-
-	for (		icomp::IMetaInfoManager::ComponentAddresses::const_iterator addressIter = addresses.begin();
-				addressIter != addresses.end();
-				++addressIter){
-		const icomp::CComponentAddress& address = *addressIter;
-		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
-
-		if (metaInfoPtr != NULL){
-			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
-
-			QStringList categoryList = (encoder.GetMetaKeys());
-
-			for (int index = 0; index < categoryList.count(); index++){
-				categories.insert(categoryList[index]);
-			}
-		}
-	}
-
-	GroupByCB->addItems(categories.toList());
-}
-
-
-void CPackageOverviewComp::UpdateInterfaceList()
+void CPackageOverviewComp::UpdateAllMetaInfoLists()
 {
 	InterfaceFilter knownInterfaces;
+	MetaInfoFilter knownCompanies;
+	MetaInfoFilter knownProjects;
+	MetaInfoFilter knownAuthors;
+	MetaInfoFilter knownCategories;
+	MetaInfoFilter knownTags;
+
 	if (m_envManagerCompPtr.IsValid()){
 		icomp::IMetaInfoManager::ComponentAddresses addresses = m_envManagerCompPtr->GetComponentAddresses();
 
@@ -489,13 +439,15 @@ void CPackageOverviewComp::UpdateInterfaceList()
 
 			const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 			if (metaInfoPtr != NULL){
-				const icomp::IElementStaticInfo::Ids& interfaceNames = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+				knownInterfaces += metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
 
-				for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
-							interfaceIter != interfaceNames.end();
-							++interfaceIter){
-					knownInterfaces.insert(*interfaceIter);
-				}
+				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
+
+				knownCompanies += encoder.GetValues("Company").toSet();
+				knownProjects += encoder.GetValues("Project").toSet();
+				knownAuthors += encoder.GetValues("Author").toSet();
+				knownCategories += encoder.GetValues("Category").toSet();
+				knownTags += encoder.GetValues("Tag").toSet();
 			}
 		}
 
@@ -503,8 +455,7 @@ void CPackageOverviewComp::UpdateInterfaceList()
 
 		qSort(knownInterfacesList);
 
-		InterfaceCB->setMaxCount(0);
-		InterfaceCB->setMaxCount(int(knownInterfacesList.size()));
+		InterfaceCB->clear();
 
 		InterfaceCB->addItem(tr("Any"));
 		for (		QList<QByteArray>::ConstIterator iterfaceIter = knownInterfacesList.constBegin();
@@ -517,6 +468,12 @@ void CPackageOverviewComp::UpdateInterfaceList()
 
 		InterfaceLabel->setVisible(true);
 		InterfaceCB->setVisible(true);
+
+		UpdateSingleMetaInfoList(knownCompanies, *CompanyCB);
+		UpdateSingleMetaInfoList(knownProjects, *ProjectCB);
+		UpdateSingleMetaInfoList(knownAuthors, *AuthorCB);
+		UpdateSingleMetaInfoList(knownCategories, *CategoryCB);
+		UpdateSingleMetaInfoList(knownTags, *TagCB);
 	}
 	else{
 		InterfaceLabel->setVisible(false);
@@ -525,13 +482,30 @@ void CPackageOverviewComp::UpdateInterfaceList()
 }
 
 
+void CPackageOverviewComp::UpdateSingleMetaInfoList(const MetaInfoFilter& filter, QComboBox& result)
+{
+	iqt::CSignalBlocker blocker(&result);
+
+	QStringList sortedList = filter.toList();
+
+	qSort(sortedList);
+
+	result.clear();
+
+	result.addItem(tr("Any"));
+	for (		QStringList::ConstIterator iter = sortedList.constBegin();
+				iter != sortedList.constEnd();
+				++iter){
+		result.addItem(*iter);
+	}
+}
+
+
 void CPackageOverviewComp::UpdateAllLists()
 {
 	m_localMetaInfoManager.UpdateLocalMetaInfoMap();
 
-	UpdateInterfaceList();
-
-	UpdateComponentGroups();
+	UpdateAllMetaInfoLists();
 
 	GenerateComponentTree(true);
 }
@@ -553,16 +527,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 		const icomp::CComponentAddress& address = *addressIter;
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
-		QStringList keywords;
-		keywords << address.GetComponentId();
-
-		if (metaInfoPtr != NULL){
-			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
-
-			keywords << encoder.GetValues();
-		}
-
-		if (FilterGB->isChecked()){
+		if (EnableFiltersButton->isChecked()){
 			bool isFilterMatched = true;
 
 			if (metaInfoPtr != NULL){
@@ -578,6 +543,15 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 				}
 			}
 
+			QStringList keywords;
+
+			if (metaInfoPtr != NULL){
+				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
+
+				keywords << encoder.GetValues();
+			}
+
+			keywords << address.GetComponentId();
 			for (		QStringList::const_iterator filterIter = m_keywordsFilter.begin();
 						filterIter != m_keywordsFilter.end();
 						++filterIter){
@@ -604,6 +578,45 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			if (!isFilterMatched){
 				continue;
 			}
+
+			if (metaInfoPtr != NULL){
+				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
+
+				if (CompanyCB->currentIndex() > 0){
+					QStringList companyList = encoder.GetValues("Company");
+					if (!companyList.contains(CompanyCB->currentText())){
+						continue;
+					}
+				}
+
+				if (ProjectCB->currentIndex() > 0){
+					QStringList projectsList = encoder.GetValues("Project");
+					if (!projectsList.contains(ProjectCB->currentText())){
+						continue;
+					}
+				}
+
+				if (AuthorCB->currentIndex() > 0){
+					QStringList authorsList = encoder.GetValues("Author");
+					if (!authorsList.contains(AuthorCB->currentText())){
+						continue;
+					}
+				}
+
+				if (CategoryCB->currentIndex() > 0){
+					QStringList categoriesList = encoder.GetValues("Category");
+					if (!categoriesList.contains(CategoryCB->currentText())){
+						continue;
+					}
+				}
+
+				if (TagCB->currentIndex() > 0){
+					QStringList tagsList = encoder.GetValues("Tag");
+					if (!tagsList.contains(TagCB->currentText())){
+						continue;
+					}
+				}
+			}
 		}
 
 		filteredComponentAdresses.insert(address);
@@ -628,7 +641,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			icomp::CComponentMetaDescriptionEncoder encoder(embeddedRegistryPtr->GetKeywords());
 			keywords << (encoder.GetValues());
 
-			if (FilterGB->isChecked()){
+			if (EnableFiltersButton->isChecked()){
 				bool isFilterMatched = true;
 
 				const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = embeddedRegistryPtr->GetExportedInterfacesMap();
@@ -694,7 +707,7 @@ void CPackageOverviewComp::on_FilterEdit_editingFinished()
 	if (keywordsFilter != m_keywordsFilter){
 		m_keywordsFilter = keywordsFilter;
 
-		if (FilterGB->isChecked()){
+		if (EnableFiltersButton->isChecked()){
 			GenerateComponentTree(false);
 		}
 	}
@@ -770,9 +783,15 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 }
 
 
-void CPackageOverviewComp::on_FilterGB_toggled(bool /*on*/)
+void CPackageOverviewComp::on_EnableFiltersButton_toggled(bool /*on*/)
 {
-	if (!m_interfaceFilter.isEmpty() || !m_keywordsFilter.isEmpty()){
+	if (		!m_interfaceFilter.isEmpty() ||
+				!m_keywordsFilter.isEmpty() ||
+				(CompanyCB->currentIndex() > 0) ||
+				(ProjectCB->currentIndex() > 0) ||
+				(AuthorCB->currentIndex() > 0) ||
+				(CategoryCB->currentIndex() > 0) ||
+				(TagCB->currentIndex() > 0)){
 		GenerateComponentTree(false);
 	}
 }
@@ -789,7 +808,7 @@ void CPackageOverviewComp::on_InterfaceCB_currentIndexChanged(int index)
 	if (filter != m_interfaceFilter){
 		m_interfaceFilter = filter;
 
-		if (FilterGB->isChecked()){
+		if (EnableFiltersButton->isChecked()){
 			GenerateComponentTree(false);
 		}
 	}
@@ -813,6 +832,42 @@ void CPackageOverviewComp::OnReloadPackages()
 }
 
 
+void CPackageOverviewComp::on_InterfaceClearButton_clicked()
+{
+	InterfaceCB->setCurrentIndex(0);
+}
+
+
+void CPackageOverviewComp::on_CompanyClearButton_clicked()
+{
+	CompanyCB->setCurrentIndex(0);
+}
+
+
+void CPackageOverviewComp::on_ProjectClearButton_clicked()
+{
+	ProjectCB->setCurrentIndex(0);
+}
+
+
+void CPackageOverviewComp::on_AuthorClearButton_clicked()
+{
+	AuthorCB->setCurrentIndex(0);
+}
+
+
+void CPackageOverviewComp::on_CategoryClearButton_clicked()
+{
+	CategoryCB->setCurrentIndex(0);
+}
+
+
+void CPackageOverviewComp::on_TagClearButton_clicked()
+{
+	TagCB->setCurrentIndex(0);
+}
+
+
 void CPackageOverviewComp::on_KeywordClearButton_clicked()
 {
 	FilterEdit->clear();
@@ -821,9 +876,9 @@ void CPackageOverviewComp::on_KeywordClearButton_clicked()
 }
 
 
-void CPackageOverviewComp::on_InterfaceClearButton_clicked()
+void CPackageOverviewComp::OnMetaInfoSelectorChanged()
 {
-	InterfaceCB->setCurrentIndex(0);
+	GenerateComponentTree(false);
 }
 
 
@@ -898,7 +953,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const QByteArra
 			Q_ASSERT(groupRoot.itemPtr != NULL);
 
 			QString packageDescription;
-			if ((GroupByCB->currentIndex() == GM_PACKAGE) && m_envManagerCompPtr.IsValid()){
+			if (m_envManagerCompPtr.IsValid()){
 				const icomp::IComponentStaticInfo* packageInfoPtr = m_envManagerCompPtr->GetPackageMetaInfo(address.GetPackageId());
 				if (packageInfoPtr != NULL){
 					packageDescription = packageInfoPtr->GetDescription();
@@ -1045,6 +1100,14 @@ void CPackageOverviewComp::OnGuiCreated()
 	PackagesList->setStyleSheet("QTreeView::branch {background: palette(base);}");
 
 	PackagesList->viewport()->installEventFilter(this);
+
+	connect(CompanyCB, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMetaInfoSelectorChanged()));
+	connect(ProjectCB, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMetaInfoSelectorChanged()));
+	connect(AuthorCB, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMetaInfoSelectorChanged()));
+	connect(CategoryCB, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMetaInfoSelectorChanged()));
+	connect(TagCB, SIGNAL(currentIndexChanged(int)), this, SLOT(OnMetaInfoSelectorChanged()));
+
+	FilterFrame->setVisible(false);
 }
 
 
@@ -1075,17 +1138,11 @@ void CPackageOverviewComp::OnGuiRetranslate()
 {
 	UpdateBlocker blocker(this);
 
-	int currentGroupIndex = GroupByCB->currentIndex();
-
 	BaseClass::OnGuiRetranslate();
 
-	// Work around a Qt bug: By retranslation of the UI the combo boxes will be reset and lose their previous model:
-	GroupByCB->setCurrentIndex(currentGroupIndex);
-
 	if (m_configFilePathModelCompPtr.IsValid()){
-		if (		!m_configFilePathModelCompPtr->IsAttached(&m_configObserver) &&
-			!m_configFilePathModelCompPtr->AttachObserver(&m_configObserver)){
-				UpdateAllLists();
+		if (!m_configFilePathModelCompPtr->IsAttached(&m_configObserver) && !m_configFilePathModelCompPtr->AttachObserver(&m_configObserver)){
+			UpdateAllLists();
 		}
 	}
 	else{
