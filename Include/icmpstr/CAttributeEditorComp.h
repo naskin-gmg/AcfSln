@@ -21,7 +21,6 @@
 
 // ACF-Solutions includes
 #include "icmpstr/CElementSelectionInfoManagerBase.h"
-#include "icmpstr/CMultiAttributeEditor.h"
 #include "GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h"
 
 

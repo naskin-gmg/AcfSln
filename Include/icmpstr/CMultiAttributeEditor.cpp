@@ -235,8 +235,8 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 			continue;
 		}
 
-		QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
-		if (m_parent.m_attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE){
+		if ((m_parent.m_attributeFlags & (icomp::IAttributeStaticInfo::AF_REFERENCE | icomp::IAttributeStaticInfo::AF_FACTORY)) != 0){
+			QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
 			if (comboEditor == NULL){
 				return;
 			}
@@ -244,6 +244,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 			const icomp::IRegistry* registryPtr = m_parent.m_elementSelectionInfoManager.GetRegistry();
 			const icomp::IAttributeStaticInfo* staticInfoPtr = m_parent.m_elementSelectionInfoManager.GetAttributeStaticInfo(attributeId, *elementInfoPtr);
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && (consistInfoPtr != NULL)){
+				// prepare queryFlags
 				int queryFlags = IRegistryConsistInfo::QF_NONE;
 				icomp::IElementStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
@@ -253,6 +254,10 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
 					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
+				if ((staticInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
+					queryFlags = IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
+				}
+
 				icomp::IRegistry::Ids compatIds = consistInfoPtr->GetCompatibleElements(
 							obligatoryInterfaces,
 							*registryPtr,

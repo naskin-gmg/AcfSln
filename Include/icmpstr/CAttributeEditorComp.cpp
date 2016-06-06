@@ -1983,6 +1983,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			const icomp::IRegistry* registryPtr = m_parent.GetRegistry();
 			const icomp::IAttributeStaticInfo* staticInfoPtr = m_parent.GetAttributeStaticInfo(id, *elementInfoPtr);
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && m_parent.m_consistInfoCompPtr.IsValid()){
+				// prepare queryFlags
 				int queryFlags = IRegistryConsistInfo::QF_NONE;
 				icomp::IElementStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
@@ -1992,6 +1993,10 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
 					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
+				if ((staticInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
+					queryFlags = IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
+				}
+
 				icomp::IRegistry::Ids compatIds = m_parent.m_consistInfoCompPtr->GetCompatibleElements(
 							obligatoryInterfaces,
 							*registryPtr,

@@ -33,6 +33,10 @@ public:
 			If active, all undefined (without available meta information) elements will be also included.
 		*/
 		QF_INCLUDE_UNDEFINED = 1 << 1,
+		/**
+			If active, subelements will be also considered.
+		*/
+		QF_INCLUDE_SUBELEMENTS = 1 << 2
 	};
 
 	/**

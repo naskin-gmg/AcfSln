@@ -102,6 +102,7 @@ protected:
 				bool allReasons,
 				ilog::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementCompatibility(
+				const icomp::IAttributeStaticInfo& attributeMetaInfo,
 				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
