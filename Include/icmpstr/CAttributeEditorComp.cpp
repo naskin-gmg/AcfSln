@@ -1467,8 +1467,11 @@ void CAttributeEditorComp::CreateInterfacesTree(
 
 		if (includeSubelement){
 			const icomp::IElementStaticInfo::Ids subcomponentIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
-			for (		icomp::IElementStaticInfo::Ids::ConstIterator subIter = subcomponentIds.constBegin();
-						subIter != subcomponentIds.constEnd();
+			QList<QByteArray> sortedSubcomponentIds = subcomponentIds.toList();
+			qSort(sortedSubcomponentIds);
+
+			for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
+						subIter != sortedSubcomponentIds.constEnd();
 						++subIter){
 				const QByteArray& sublementId = *subIter;
 
@@ -1590,9 +1593,11 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 
 	if (elementMetaInfoPtr != NULL){
 		const icomp::IElementStaticInfo::Ids subcomponentIds = elementMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
+		QList<QByteArray> sortedSubcomponentIds = subcomponentIds.toList();
+		qSort(sortedSubcomponentIds);
 
-		for (		icomp::IElementStaticInfo::Ids::ConstIterator subIter = subcomponentIds.constBegin();
-					subIter != subcomponentIds.constEnd();
+		for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
+					subIter != sortedSubcomponentIds.constEnd();
 					++subIter, ++itemIndex){
 			const QByteArray& sublementId = *subIter;
 

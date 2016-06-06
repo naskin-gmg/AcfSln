@@ -1336,6 +1336,8 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 	EmbeddedComponentsLayout->removeItem(m_buttonSpacerPtr);
 
 	icomp::IRegistry::Ids embeddedIds = rootRegistryPtr->GetEmbeddedRegistryIds();
+	QList<QByteArray> sortedEmbeddedIds = embeddedIds.toList();
+	qSort(sortedEmbeddedIds);
 
 	EmbeddedComponentsFrame->setVisible(!embeddedIds.isEmpty());
 	m_removeEmbeddedRegistryCommand.SetEnabled(!embeddedIds.isEmpty() && !m_embeddedRegistryId.isEmpty());
@@ -1343,7 +1345,9 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 	RootButton->setChecked(m_embeddedRegistryId.isEmpty());
 
 	int buttonIndex = 0;
-	for (icomp::IRegistry::Ids::iterator iter = embeddedIds.begin(); iter != embeddedIds.end(); ++iter, ++buttonIndex){
+	for (		QList<QByteArray>::ConstIterator iter = sortedEmbeddedIds.constBegin();
+				iter != sortedEmbeddedIds.constEnd();
+				++iter, ++buttonIndex){
 		const QByteArray& elementId = *iter;
 
 		QToolButton* newButtonPtr = NULL;
