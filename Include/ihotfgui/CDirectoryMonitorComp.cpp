@@ -171,25 +171,11 @@ void CDirectoryMonitorComp::run()
 			}
 		}
 
-		// check previously not accessed files:
-		QMutableMapIterator<QString, FileAccessInfo> nonAccessedFilesIter(m_nonAccessedAddedFiles);
-		while (nonAccessedFilesIter.hasNext()){
-			FileAccessMap::Iterator fileAccessIter = nonAccessedFilesIter.next();
+		// Check access for previously added files:
+		UpdateNonAccessedFiles(m_nonAccessedAddedFiles, addedFiles);
 
-			QString filePath = fileAccessIter.key();
-
-			if (HasFileAccess(filePath, fileAccessIter.value())){
-				QFileInfo fileInfo(filePath);
-
-				m_directoryFiles[filePath] = GetLastAccessTime(fileInfo);
-
-				addedFiles.push_back(filePath);
-
-				nonAccessedFilesIter.remove();
-
-				I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was added").arg(filePath)));
-			}
-		}
+		// Check access for previously modified files:
+		UpdateNonAccessedFiles(m_nonAccessedModifiedFiles, modifiedFiles);
 
 		if ((((observingChanges & ihotf::IDirectoryMonitorParams::OC_ADD) != 0) && (m_folderDepth != 0)) || (pendingChangesCounter > 0)){
 			QFileInfoList currentFileInfos;
@@ -258,15 +244,16 @@ void CDirectoryMonitorComp::run()
 					QDateTime currentModifiedTime = GetLastAccessTime(fileInfo);
 					QDateTime& previousModifiedTime = fileIter.value();
 					if (previousModifiedTime != currentModifiedTime){
-
 						// Check if the file was just added now:
-						if (!addedFiles.contains(filePath)){
-							QString filePath = fileInfo.canonicalFilePath();
-							modifiedFiles.push_back(filePath);
+						if (!addedFiles.contains(filePath) && !m_nonAccessedModifiedFiles.contains(filePath)){
+							FileAccessInfo accessInfo;
 
-							previousModifiedTime = currentModifiedTime;
+							QFileInfo fileInfo(filePath);
+							accessInfo.fileSize = fileInfo.size();
+							accessInfo.checkTimeStamp = QDateTime::currentDateTime();
+							accessInfo.lastAccessTimeStamp = GetLastAccessTime(fileInfo);
 
-							I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was modified").arg(filePath)));
+							m_nonAccessedModifiedFiles[filePath] = accessInfo;
 						}
 						// File was just added but already changed its modification time, also update modification time:
 						else{
@@ -562,6 +549,27 @@ QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) co
 	}
 
 	return lastAccessTime;
+}
+
+
+void CDirectoryMonitorComp::UpdateNonAccessedFiles(FileAccessMap& accessMap, QStringList& fileList)
+{
+	QMutableMapIterator<QString, FileAccessInfo> nonAccessedFilesIter(accessMap);
+	while (nonAccessedFilesIter.hasNext()){
+		FileAccessMap::Iterator fileAccessIter = nonAccessedFilesIter.next();
+
+		QString filePath = fileAccessIter.key();
+
+		if (HasFileAccess(filePath, fileAccessIter.value())){
+			QFileInfo fileInfo(filePath);
+
+			m_directoryFiles[filePath] = GetLastAccessTime(fileInfo);
+
+			fileList.push_back(filePath);
+
+			nonAccessedFilesIter.remove();
+		}
+	}
 }
 
 

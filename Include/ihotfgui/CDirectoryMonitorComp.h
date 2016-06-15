@@ -85,7 +85,20 @@ Q_SIGNALS:
 	void FolderChanged(const istd::IChangeable::ChangeSet& changeSet);
 
 private:
-	struct FileAccessInfo;
+	struct FileAccessInfo
+	{
+		FileAccessInfo()
+			:fileSize(0)
+		{
+		}
+
+		QDateTime checkTimeStamp;
+		QDateTime lastAccessTimeStamp;
+		qint64 fileSize;
+	};
+
+	typedef QMap<QString, FileAccessInfo> FileAccessMap;
+
 
 	void SetFolderPath(const QString& folderPath);
 	void StartObserverThread();
@@ -97,6 +110,7 @@ private:
 	bool HasFileAccess(const QString& filePath, FileAccessInfo& lastFileAccessInfo) const;
 	bool CheckFileAccess(const QString& filePath) const;
 	QDateTime GetLastAccessTime(const QFileInfo& fileInfo) const;
+	void UpdateNonAccessedFiles(FileAccessMap& accessMap, QStringList& fileList);
 
 private:
 	struct FileSystemChanges
@@ -141,22 +155,9 @@ private:
 		CDirectoryMonitorComp& m_parent;
 	};
 
-	struct FileAccessInfo
-	{
-		FileAccessInfo()
-			:fileSize(0)
-		{
-		}
-
-		QDateTime checkTimeStamp;
-		QDateTime lastAccessTimeStamp;
-		qint64 fileSize;
-	};
-
-	typedef QMap<QString, FileAccessInfo> FileAccessMap;
-
 	ihotf::IMonitoringSession::FileItems m_directoryFiles;
 	FileAccessMap m_nonAccessedAddedFiles;
+	FileAccessMap m_nonAccessedModifiedFiles;
 
 	bool m_finishThread;
 
