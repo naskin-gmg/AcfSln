@@ -16,7 +16,7 @@ bool CTubeProjectionsGenerator::GenerateProjections(const i2d::CTubePolyline& tu
 	double tubeLength = tube.GetLength();
 
 	double step = tubeLength / projectionsCount;
-	i2d::CVector2d prevNode = tube.GetNode(0);
+	i2d::CVector2d prevNode = tube.GetNodePos(0);
 	i2d::CVector2d kneeVector = tube.GetKneeVector(0);
 	const i2d::CTubeNode* tubeNodePtr = dynamic_cast<const i2d::CTubeNode*>(&tube.GetNodeData(0));
 	if (tubeNodePtr == NULL){
@@ -39,7 +39,7 @@ bool CTubeProjectionsGenerator::GenerateProjections(const i2d::CTubePolyline& tu
 		double lengthPos = step * (profileIndex + 1 - I_BIG_EPSILON);
 		while (lengthPos > lengthRange.GetMaxValue()){
 			nextNodeInex = (nextNodeInex + 1) % nodesCount;
-			const i2d::CVector2d& nextNode = tube.GetNode(nextNodeInex);
+			const i2d::CVector2d& nextNode = tube.GetNodePos(nextNodeInex);
 			const i2d::CTubeNode* nextTubeDataPtr = dynamic_cast<const i2d::CTubeNode*>(&tube.GetNodeData(nextNodeInex));
 			if (nextTubeDataPtr == NULL){
 				return false;

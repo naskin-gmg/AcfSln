@@ -27,6 +27,20 @@ public:
 	void Clear();
 
 	/**
+		Get number of nodes.
+	*/
+	int GetNodesCount() const;
+	/**
+		Get number of segments.
+	*/
+	int GetSegmentsCount() const;
+
+	/**
+		Set number of nodes in container without initializing it.
+	*/
+	void SetNodesCount(int count);
+
+	/**
 		Return node at specified index.
 		\param	index	an index in node table.
 	*/
@@ -47,19 +61,11 @@ public:
 	bool IsClosed() const;
 	void SetClosed(bool state = true);
 
-	int GetNodesCount() const;
-	int GetSegmentsCount() const;
-
 	double GetTotalLength() const;
 	double GetMinWeight() const;
 	double GetMaxWeight() const;
 
 	bool InsertNode(const CEdgeNode& node);
-
-	// Following "quiet" methods are intended to directly change data without change notification (for performance reasons)
-	void InsertNodeQuiet(const CEdgeNode& node);
-	void SetNodeQuiet(int index, const CEdgeNode& node);
-	void SetNodesCountQuiet(int count);
 
 	/**
 		Create this line using polyline object.
@@ -146,6 +152,18 @@ inline int CEdgeLine::GetSegmentsCount() const
 }
 
 
+inline const CEdgeNode& CEdgeLine::GetNode(int index) const
+{
+	return m_nodes[index];
+}
+
+
+inline CEdgeNode& CEdgeLine::GetNodeRef(int index)
+{
+	return m_nodes[index];
+}
+
+
 inline double CEdgeLine::GetTotalLength() const
 {
 	EnsureVolatileValid();
@@ -173,24 +191,6 @@ inline double CEdgeLine::GetMaxWeight() const
 inline bool CEdgeLine::IsClosed() const
 {
 	return m_isClosed;
-}
-
-
-inline void CEdgeLine::InsertNodeQuiet(const CEdgeNode& node)
-{
-	m_nodes.push_back(node);
-}
-
-
-inline void CEdgeLine::SetNodeQuiet(int index, const CEdgeNode& node)
-{
-	m_nodes[index] = node;
-}
-
-
-inline void CEdgeLine::SetNodesCountQuiet(int count)
-{
-	m_nodes.resize(count);
 }
 
 

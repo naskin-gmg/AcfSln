@@ -656,7 +656,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 				nodesCount++;
 			}
 
-			resultLine.SetNodesCountQuiet(nodesCount);
+			resultLine.SetNodesCount(nodesCount);
 
 			int index = 0;
 			for (		const ExtNode* nodeElementPtr = &node;
@@ -671,7 +671,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative.GetLength() * weightScale);
 
-				resultLine.SetNodeQuiet(index++, node);
+				resultLine.GetNodeRef(index++) = node;
 			}
 		}
 	}
@@ -697,7 +697,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 				nodesCount++;
 			} while (nodeElementPtr != &node);
 
-			resultLine.SetNodesCountQuiet(nodesCount);
+			resultLine.SetNodesCount(nodesCount);
 
 			nodeElementPtr = &node;
 			int index = 0;
@@ -713,7 +713,7 @@ void CFastEdgesExtractorComp::InternalContainer::ExtractLines(
 							nodeElementPtr->position,
 							nodeElementPtr->derivative.GetLength() * weightScale);
 
-				resultLine.SetNodeQuiet(index++, node);
+				resultLine.GetNodeRef(index++) = node;
 
 				nodeElementPtr = nodeElementPtr->nextPtr;
 			} while (nodeElementPtr != &node);
