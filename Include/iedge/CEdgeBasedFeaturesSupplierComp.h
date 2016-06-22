@@ -9,7 +9,7 @@
 #include "i2d/IMultiCalibrationProvider.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
-#include "i2d/CAffineTransformation2d.h"
+#include "i2d/CAffineCalibration2d.h"
 #include "iprm/IParamsSet.h"
 #include "istd/IInformationProvider.h"
 
@@ -27,14 +27,14 @@ namespace iedge
 
 
 class CEdgeBasedFeaturesSupplierComp:
-	public iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineTransformation2d> > >,
+	public iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineCalibration2d> > >,
 			virtual public imeas::INumericValueProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public i2d::ICalibrationProvider,
 			virtual public istd::IInformationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineTransformation2d> > > BaseClass;
+	typedef iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineCalibration2d> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeBasedFeaturesSupplierComp);
 		I_REGISTER_INTERFACE(imeas::INumericValueProvider);

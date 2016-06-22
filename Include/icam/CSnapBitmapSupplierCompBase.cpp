@@ -3,7 +3,7 @@
 // ACF includes
 #include "imod/TModelWrap.h"
 #include "imath/CGeneralUnitInfo.h"
-#include "i2d/CAffineTransformation2d.h"
+#include "i2d/CAffineCalibration2d.h"
 #include "iprm/TParamsPtr.h"
 
 
@@ -113,16 +113,13 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 				}
 
 				if (m_calibrationCompPtr.IsValid()){
-					i2d::CAffineTransformation2d calibration;
-					calibration.Reset(center, 0, scale);
-					if (m_calibratedUnitInfoCompPtr.IsValid()){
-						calibration.SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-					}
+					i2d::CAffineTransformation2d transformation;
+					transformation.Reset(center, 0, scale);
 
-					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(calibration));
+					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transformation));
 				}
 				else{
-					i2d::CAffineTransformation2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineTransformation2d>();
+					i2d::CAffineCalibration2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineCalibration2d>();
 					calibrationPtr->Reset(center, 0, scale);
 					if (m_calibratedUnitInfoCompPtr.IsValid()){
 						calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());

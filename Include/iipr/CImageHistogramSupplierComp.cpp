@@ -32,9 +32,8 @@ int CImageHistogramSupplierComp::ProduceObject(imod::TModelWrap<imeas::CSimpleSa
 			return WS_ERROR;
 		}
 
-		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
-
 		Timer performanceTimer(this, "Histogram calculation");
+		Q_UNUSED(performanceTimer);
 
 		int processingState = m_histogramProcessorCompPtr->DoProcessing(
 						GetModelParametersSet(),

@@ -6,7 +6,6 @@
 #include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CVector2d.h"
-#include "i2d/CAffineTransformation2d.h"
 
 // ACF-Solutions includes
 #include "iproc/IProcessor.h"

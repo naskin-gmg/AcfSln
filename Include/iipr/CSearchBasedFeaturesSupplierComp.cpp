@@ -32,16 +32,16 @@ const iprm::IOptionsList* CSearchBasedFeaturesSupplierComp::GetCalibrationSelect
 
 int CSearchBasedFeaturesSupplierComp::GetCalibrationsCount() const
 {
-	return m_transformationList.count();
+	return m_calibrationList.count();
 }
 
 
 const i2d::ICalibration2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
 {
 	Q_ASSERT(calibrationIndex >= 0);
-	Q_ASSERT(calibrationIndex < m_transformationList.count());
+	Q_ASSERT(calibrationIndex < m_calibrationList.count());
 
-	return &m_transformationList.at(calibrationIndex);
+	return &m_calibrationList.at(calibrationIndex);
 }
 
 
@@ -149,7 +149,7 @@ bool CSearchBasedFeaturesSupplierComp::InitializeWork()
 
 int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) const
 {
-	m_transformationList.clear();
+	m_calibrationList.clear();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_searchProcessorCompPtr.IsValid()){
@@ -328,14 +328,14 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		// Update calibration list
 		int featuresCount = result.GetValuesCount();
 		for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-			i2d::CAffineTransformation2d transform;
+			i2d::CAffineCalibration2d calibration;
 
 			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetNumericValue(featureIndex));
 			Q_ASSERT(objectFeaturePtr != NULL);
 
-			transform.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+			calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
 
-			m_transformationList.push_back(transform);
+			m_calibrationList.push_back(calibration);
 		}
 
 		return WS_OK;
