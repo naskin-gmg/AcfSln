@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="Compositor"
 	ProjectGUID="{00BD2AB5-993C-4B0D-B117-D98F7307E947}"
 	RootNamespace="Compositor"
@@ -113,7 +113,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
+				Description="Deploying Qt libraries..."
+				CommandLine="$(QTDIR)\bin\windeployqt $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -207,7 +208,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
+				Description="Deploying Qt libraries..."
+				CommandLine="$(QTDIR)\bin\windeployqt $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -300,7 +302,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
+				Description="Deploying Qt libraries..."
+				CommandLine="$(QTDIR)\bin\windeployqt $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -395,7 +398,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="$(QTDIR)\bin\windeployqt ..\..\..\Bin\$(ConfigurationName)$(CompilerCode)"
+				Description="Deploying Qt libraries..."
+				CommandLine="$(QTDIR)\bin\windeployqt $(OutDir)"
 			/>
 		</Configuration>
 	</Configurations>
