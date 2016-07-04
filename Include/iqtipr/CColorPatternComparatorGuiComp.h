@@ -17,17 +17,12 @@ namespace iqtipr
 {
 
 
-class CColorPatternComparatorGuiComp:
-			public iqtinsp::TSupplierGuiCompBase<
-						Ui::CColorPatternComparatorGuiComp,
-						istd::IInformationProvider>
+class CColorPatternComparatorGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CColorPatternComparatorGuiComp>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtinsp::TSupplierGuiCompBase<
-				Ui::CColorPatternComparatorGuiComp,
-				istd::IInformationProvider> BaseClass;
+	typedef iqtinsp::TSupplierGuiCompBase<Ui::CColorPatternComparatorGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CColorPatternComparatorGuiComp);
 		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");

@@ -17,16 +17,12 @@ namespace iqtipr
 {
 
 
-class CMultiLineProjectionSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<
-			Ui::CMultiLineProjectionSupplierGuiComp,
-			imeas::IMultiDataSequenceProvider>
+class CMultiLineProjectionSupplierGuiComp: public iqtinsp::TSupplierGuiCompBase<Ui::CMultiLineProjectionSupplierGuiComp>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtinsp::TSupplierGuiCompBase<
-				Ui::CMultiLineProjectionSupplierGuiComp,
-				imeas::IMultiDataSequenceProvider> BaseClass;
+	typedef iqtinsp::TSupplierGuiCompBase<Ui::CMultiLineProjectionSupplierGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiLineProjectionSupplierGuiComp);
 		I_ASSIGN(m_projectionObserverCompPtr, "ProjectionObserver", "Observer for the generated line projections", false, "ProjectionObserver");
