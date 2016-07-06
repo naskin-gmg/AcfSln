@@ -14,6 +14,7 @@
         <FilePath>../Partitura/FileProcessingVoce.arp</FilePath>
         <FilePath>../Bin/$(ConfigurationDir)FileProcessingPck.arp</FilePath>
         <FilePath>$(ACFSLNDIR_BUILD)/Bin/$(ConfigurationDir)FileProcessingPck.arp</FilePath>
+        <FilePath>$(ApplicationDir)/FileProcessingPck.arp</FilePath>
     </PackageFiles>
     <RegistryFiles/>
 </Acf>
