@@ -63,7 +63,7 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 
 			progressManagerPtr->OnProgress(progressSessionId, double(lineIndex) / foundLinesCount);
 
-			if (progressManagerPtr->IsCanceled()){
+			if (progressManagerPtr->IsCanceled(progressSessionId)){
 				return TS_CANCELED;
 			}
 		}
