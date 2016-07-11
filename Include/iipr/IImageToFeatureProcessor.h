@@ -27,7 +27,8 @@ public:
 	virtual int DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& image,
-				IFeaturesConsumer& results) = 0;
+				IFeaturesConsumer& results,
+				ibase::IProgressManager* progressManagerPtr = NULL) = 0;
 };
 
 

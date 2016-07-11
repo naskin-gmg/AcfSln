@@ -23,7 +23,8 @@ namespace iipr
 int CEdgeDistanceProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
-			IFeaturesConsumer& results)
+			IFeaturesConsumer& results,
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (!m_featuresMapperCompPtr.IsValid() || (paramsPtr == NULL)){
 		return TS_INVALID;
@@ -51,7 +52,22 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 
 	int foundLinesCount = int(caliperLines.size());
 
+	int progressSessionId = -1;
+	if (progressManagerPtr != NULL){
+		progressManagerPtr->BeginProgressSession("EdgeDistance", "Edge Distance", true);
+	}
+
 	for (int lineIndex = 0; lineIndex < foundLinesCount; lineIndex++){
+		if (progressSessionId >= 0){
+			Q_ASSERT(progressManagerPtr != NULL);
+
+			progressManagerPtr->OnProgress(progressSessionId, double(lineIndex) / foundLinesCount);
+
+			if (progressManagerPtr->IsCanceled()){
+				return TS_CANCELED;
+			}
+		}
+
 		CaliperLine& caliperLine = caliperLines[lineIndex];
 
 		// Min. weight of both caliper points is taken as weight of the found distance:
@@ -60,6 +76,12 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 		CCaliperDistanceFeature* caliperDistanceFeature = new CCaliperDistanceFeature(i2d::CLine2d(caliperLine.points[0].position, caliperLine.points[1].position), featureWeight);
 
 		results.AddFeature(caliperDistanceFeature);
+	}
+
+	if (progressSessionId >= 0){
+		Q_ASSERT(progressManagerPtr != NULL);
+
+		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return TS_OK;
@@ -72,7 +94,7 @@ int CEdgeDistanceProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
@@ -86,7 +108,7 @@ int CEdgeDistanceProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr);
+	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr, progressManagerPtr);
 }
 
 

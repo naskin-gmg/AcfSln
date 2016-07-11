@@ -30,7 +30,8 @@ CCircleFindProcessorComp::CCircleFindProcessorComp()
 int CCircleFindProcessorComp::DoExtractFeatures(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& image,
-			IFeaturesConsumer& results)
+			IFeaturesConsumer& results,
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	if (!m_featuresMapperCompPtr.IsValid() || (paramsPtr == NULL)){
 		return TS_INVALID;
@@ -125,7 +126,7 @@ int CCircleFindProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* /*progressManagerPtr*/)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
@@ -139,7 +140,7 @@ int CCircleFindProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr);
+	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr, progressManagerPtr);
 }
 
 

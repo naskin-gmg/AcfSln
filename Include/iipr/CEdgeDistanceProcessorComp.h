@@ -44,7 +44,8 @@ public:
 	virtual int DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& image,
-				IFeaturesConsumer& results);
+				IFeaturesConsumer& results,
+				ibase::IProgressManager* progressManagerPtr = NULL);
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
