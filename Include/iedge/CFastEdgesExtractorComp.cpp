@@ -60,17 +60,12 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 	double scaleFactor = (thresholdValues.GetElementsCount() > 1)? thresholdValues.GetElement(1): 0;
 	double weightScale = qPow(10, scaleFactor * 0.1);
 
-	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr;
-	if ((paramsPtr != NULL) && m_aoiParamIdAttrPtr.IsValid()){
-		aoiObjectPtr.Init(paramsPtr, *m_aoiParamIdAttrPtr);
-	}
-	else if (m_defaultAoiCompPtr.IsValid()){
-		aoiObjectPtr.SetPtr(m_defaultAoiCompPtr.GetPtr());
-	}
 
 	const iimg::CScanlineMask* maskPtr = NULL;
 
 	iimg::CScanlineMask mask;
+
+	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiObjectPtr.IsValid()){
 		mask.SetCalibration(bitmap.GetCalibration());
 
