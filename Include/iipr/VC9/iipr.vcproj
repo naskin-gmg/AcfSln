@@ -395,6 +395,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHoughLineFinderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageBinarizeProcessorComp.cpp"
 				>
 			</File>
@@ -649,6 +653,10 @@
 			</File>
 			<File
 				RelativePath="..\CFeatureToImageMapperProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHoughLineFinderComp.h"
 				>
 			</File>
 			<File

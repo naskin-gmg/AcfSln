@@ -1,0 +1,95 @@
+#ifndef iipr_CHoughLineFinderComp_included
+#define iipr_CHoughLineFinderComp_included
+
+
+// ACF includes
+#include "icomp/CComponentBase.h"
+#include "iimg/CGeneralBitmap.h"
+#include "ilog/IMessageConsumer.h"
+#include "ilog/TLoggerCompWrap.h"
+#include "i2d/CLine2d.h"
+
+// ACF-Solutions includes
+#include "iproc/TSyncProcessorWrap.h"
+#include "iipr/IImageToFeatureProcessor.h"
+#include "iipr/TWeightedFeatureWrap.h"
+
+
+namespace iipr
+{
+
+
+/**
+	Processor using Hough transformation to find the lines on the image.
+*/
+class CHoughLineFinderComp:
+			public ilog::CLoggerComponentBase,
+			public iproc::TSyncProcessorWrap<IImageToFeatureProcessor>
+{
+public:
+	typedef ilog::CLoggerComponentBase BaseClass;
+
+	enum MessageId
+	{
+		FOUND_LINE = 0x934d740
+	};
+
+	I_BEGIN_COMPONENT(CHoughLineFinderComp);
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of AOI in parameter set", false, "DistanceUnitInfo");
+		I_ASSIGN(m_defaultAngleResAttrPtr, "DefaultAngleResulution", "Resolution of angle grid", true, 180);
+		I_ASSIGN(m_defaultRadiusResAttrPtr, "DefaultRadiusResulution", "Resolution of radius grid", true, 200);
+		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 20);
+		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
+		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
+		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
+	I_END_COMPONENT;
+
+	// reimplemented (iproc::IProcessor)
+	virtual int DoProcessing(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr,
+				ibase::IProgressManager* progressManagerPtr = NULL);
+
+	// reimplemented (iipr::IImageToFeatureProcessor)
+	virtual int DoExtractFeatures(
+				const iprm::IParamsSet* paramsPtr,
+				const iimg::IBitmap& image,
+				IFeaturesConsumer& results,
+				ibase::IProgressManager* progressManagerPtr = NULL);
+
+protected:
+	typedef QMultiMap<double, i2d::CVector2d> WeightToHoughPosMap;
+
+	bool CreateHoughSpace();
+	void UpdateHoughSpace(const i2d::CVector2d& position, const i2d::CVector2d& direction);
+	void SmoothHoughSpace(int iterations);
+	void AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoughPosMap& result);
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+private:
+	typedef TWeightedFeatureWrap<i2d::CLine2d> LineFeature;
+
+	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_ATTR(int, m_defaultAngleResAttrPtr);
+	I_ATTR(int, m_defaultRadiusResAttrPtr);
+	I_ATTR(int, m_defaultMaxLinesAttrPtr);
+	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
+	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
+	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
+
+	iimg::CGeneralBitmap m_houghSpace;
+
+	typedef QVector<i2d::CVector2d> AngleVectors;
+	AngleVectors m_angleVectors;
+};
+
+
+} // namespace iipr
+
+
+#endif // !iipr_CHoughLineFinderComp_included
+
+
