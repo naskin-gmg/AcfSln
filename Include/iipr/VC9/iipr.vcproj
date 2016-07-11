@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="iipr"
 	ProjectGUID="{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}"
 	RootNamespace="iipr"
@@ -463,6 +463,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPerspCalibFinder.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPositionFromImageSupplierComp.cpp"
 				>
 			</File>
@@ -713,6 +717,10 @@
 			</File>
 			<File
 				RelativePath="..\CObjectFeature.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPerspCalibFinder.h"
 				>
 			</File>
 			<File
