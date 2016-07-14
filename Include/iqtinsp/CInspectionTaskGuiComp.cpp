@@ -99,7 +99,13 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 
 	int subtasksCount = inspectionTaskPtr->GetSubtasksCount();
 	for (int i = 0; i < subtasksCount; ++i){
-		imod::IModel* parameterModelPtr = CompCastPtr<imod::IModel>(inspectionTaskPtr->GetSubtask(i));
+		iinsp::ISupplier* subTaskPtr = inspectionTaskPtr->GetSubtask(i);
+
+		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(subTaskPtr);
+		if (parameterModelPtr == NULL){
+			parameterModelPtr = CompCastPtr<imod::IModel>(subTaskPtr);
+		}
+
 		if (parameterModelPtr == NULL){
 			continue;
 		}
