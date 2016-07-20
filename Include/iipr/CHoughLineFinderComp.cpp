@@ -85,7 +85,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 	const quint8* prevLinePtr = (const quint8*)image.GetLinePtr(0);
 	const quint8* linePtr = (const quint8*)image.GetLinePtr(1);
-	for (int y = 2; y < size.GetY(); ++y){
+	for (int y = 1; y < size.GetY() - 1; ++y){
 		const quint8* nextLinePtr = (const quint8*)image.GetLinePtr(y + 1);
 
 		const istd::CIntRanges* inputRangesPtr = mask.GetPixelRanges(y);
@@ -211,8 +211,8 @@ void CHoughLineFinderComp::UpdateHoughSpace(const i2d::CVector2d& position, cons
 	istd::CIndex2d spaceSize = m_houghSpace.GetImageSize();
 
 	double directionAngle = direction.GetAngle();
-	int firstAngleIndex = int(directionAngle * spaceSize.GetY() + 1 + I_PI * 3.5) % spaceSize.GetY();
-	int lastAngleIndex = int(directionAngle * spaceSize.GetY() + I_PI * 4.5) % spaceSize.GetY();
+	int firstAngleIndex = int((directionAngle / I_2PI + 1.75) * spaceSize.GetY() + 1) % spaceSize.GetY();
+	int lastAngleIndex = int((directionAngle / I_2PI + 2.25) * spaceSize.GetY()) % spaceSize.GetY();
 
 	for (int angleIndex = firstAngleIndex; angleIndex != lastAngleIndex; ++angleIndex){
 		quint32* angleLinePtr = (quint32*)m_houghSpace.GetLinePtr(angleIndex);
@@ -269,8 +269,8 @@ void CHoughLineFinderComp::AnalyseHoughSpace(int maxPoints, int minWeight, Weigh
 				int diffRight = value - angleLinePtr[nextRadiusIndex];
 				int diffTop = value - prevAngleLinePtr[radiusIndex];
 				int diffBottom = value - nextAngleLinePtr[radiusIndex];
-				double correctionX = diffLeft / (diffLeft + diffRight);
-				double correctionY = diffTop / (diffTop + diffBottom);
+				double correctionX = double(diffLeft) / (diffLeft + diffRight);
+				double correctionY = double(diffTop) / (diffTop + diffBottom);
 
 				i2d::CVector2d resultPos(radiusIndex + correctionX, angleIndex + correctionY);
 

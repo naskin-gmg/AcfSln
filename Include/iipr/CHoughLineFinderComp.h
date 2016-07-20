@@ -35,7 +35,9 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CHoughLineFinderComp);
-		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of AOI in parameter set", false, "DistanceUnitInfo");
+		I_REGISTER_INTERFACE(iproc::IProcessor);
+		I_REGISTER_INTERFACE(IImageToFeatureProcessor);
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of AOI in parameter set", false, "Aoi");
 		I_ASSIGN(m_defaultAngleResAttrPtr, "DefaultAngleResulution", "Resolution of angle grid", true, 180);
 		I_ASSIGN(m_defaultRadiusResAttrPtr, "DefaultRadiusResulution", "Resolution of radius grid", true, 200);
 		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 20);

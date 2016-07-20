@@ -241,12 +241,18 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			ProjectionSupplier,
 			"Supplier implementation returning image projection data",
-		 	"Supplier Projection Data Image Bitmap Model");
+		 	"Supplier Projection Data Image Bitmap Model" IM_TAG("2D"));
 
 I_EXPORT_COMPONENT(
 			AdaptiveImageBinarizeProcessor,
-			"Adpative image binarization",
+			"Adapative image binarization",
 		 	"Image Bitmap Binarization Threshold Adaptive");
+
+I_EXPORT_COMPONENT(
+			HoughLineFinder,
+			"Line finder using Hough transformation",
+			"Image Bitmap Line Finder Straight Hough Transformation Detection" IM_TAG("2D") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 

@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4226" Description="ACF"/>
+            <Version Id="1" Number="1608" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="CalibratorSupplier" PackageId="" ComponentId="CalibratorSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTask"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="CalibratorSupplierEditor" PackageId="" ComponentId="CalibratorSupplierEditor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTaskGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Console" PackageId="" ComponentId="Console">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CalibratorSupplier"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="FileCamera" PackageId="ProcessorVoce" ComponentId="FileCamera">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="SimpleProductFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Edge Finder"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionGuis" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>SnapTaskGui</Value>
+                                <Value>CalibratorSupplierEditor</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionNames" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Image</Value>
+                                <Value>Caliper</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionPreviews" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Console</Value>
+                                <Value>Console</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Inspections" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>SnapTask</Value>
+                                <Value>CalibratorSupplier</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/Parameters"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RootKey" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="CalibratorSupplier"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SnapTask" PackageId="SupplierVoce" ComponentId="SnapTask">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Camera" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SnapTaskGui" PackageId="SupplierVoce" ComponentId="SnapTaskGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="CalibratorSupplier">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="CalibAoi" PackageId="BasePck" ComponentId="Rectangle">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Calibration" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="Calibration"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Height" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="200"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Width" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="200"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="-100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="-100"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Calibration" PackageId="BasePck" ComponentId="PerspectiveCalibration2d">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ArgumentArea" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="CalibAoi"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="CheckboardCalibSupplier" PackageId="InspectionPck" ComponentId="CheckboardCalibSupplier">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="BitmapSupplier">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="LineFinder" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="HoughLineFinder"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ParamsSet"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="Directory" PackageId="FilePck" ComponentId="FileNameParam">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="PathType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="HoughLineFinder" PackageId="IprPck" ComponentId="HoughLineFinder">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="SearchAoi"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ResultConsumer" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/TaskLog"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TempConsumer" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/TempMessages"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Directory</Value>
+                                            <Value>Calibration</Value>
+                                            <Value>CalibAoi</Value>
+                                            <Value>SearchAoi</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FileBitmapAcquisition</Value>
+                                            <Value>Calibration</Value>
+                                            <Value>CalibrationAoi</Value>
+                                            <Value>SearchAoi</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="CameraParams"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchAoi" PackageId="BasePck" ComponentId="Rectangle">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Height" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="1000"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Width" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="1000"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="CheckboardCalibSupplier"/>
+                    <Interface InterfaceId="iinsp::ISupplier" ComponentId="CheckboardCalibSupplier"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="CheckboardCalibSupplier"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="CheckboardCalibSupplier"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="CheckboardCalibSupplier"/>
+                </ExportedInterfaces>
+                <ExportedComponents>
+                    <Component ExportedId="Calibration" ComponentId="Calibration"/>
+                </ExportedComponents>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="CalibratorSupplierEditor">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="CalibAoiEditor" PackageId="QtViewPck" ComponentId="RectangleParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="FileNameParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="GeneralSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultModel">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ParamsSetGui"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FileNameParamGui</Value>
+                                            <Value>PerspectiveCalibEditor</Value>
+                                            <Value>CalibAoiEditor</Value>
+                                            <Value>SearchAoiEditor</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FileBitmapAcquisition</Value>
+                                            <Value>Calibration</Value>
+                                            <Value>CalibrationAoi</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="String[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Path</Value>
+                                            <Value>Calibration</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="PerspectiveCalibEditor" PackageId="QtViewPck" ComponentId="PerspectiveCalibEditor">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchAoiEditor" PackageId="QtViewPck" ComponentId="RectangleParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModelEditor" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="imod::IObserver" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="GeneralSupplierGui"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="Console">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="ImageView" PackageId="AcfGuiVoce" ComponentId="Console">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="CalibrationShape" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PerspectiveCalibrationShape"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseGridCommands" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="PerspectiveCalibrationShape" PackageId="QtViewPck" ComponentId="PerspectiveCalibrationShape">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="ImageView"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="ImageView"/>
+                    <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="ImageView"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ImageView"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>

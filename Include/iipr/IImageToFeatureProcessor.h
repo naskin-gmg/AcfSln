@@ -22,7 +22,7 @@ class IImageToFeatureProcessor: virtual public iproc::IProcessor
 public:
 	/**
 		Specialization of processing interface for extraction of features from image.
-		\return				state of this processor \sa iproc::IProcessor::ProcessorState.
+		\return				state of this processor task \sa iproc::IProcessor::TaskState.
 	*/
 	virtual int DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
