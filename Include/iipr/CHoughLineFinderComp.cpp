@@ -93,7 +93,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 			istd::CIntRanges::RangeList rangeList;
 			inputRangesPtr->GetAsList(clipArea.GetHorizontalRange(), rangeList);
 
-			for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+			for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
 						iter != rangeList.constEnd();
 						++iter){
 				const istd::CIntRange& rangeH = *iter;
@@ -138,8 +138,11 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, posMap);
 
 	if (!posMap.isEmpty()){
+#if QT_VERSION >= 0x050200
 		double bestWeight = posMap.firstKey();
-
+#else
+		double bestWeight = posMap.keys().first();
+#endif
 		int lineIndex = 0;
 		for (WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin(); resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
 			const i2d::CVector2d& houghPos = resultIter.value();
