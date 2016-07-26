@@ -399,6 +399,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHoughSpace2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CImageBinarizeProcessorComp.cpp"
 				>
 			</File>
@@ -657,6 +661,10 @@
 			</File>
 			<File
 				RelativePath="..\CHoughLineFinderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHoughSpace2d.h"
 				>
 			</File>
 			<File

@@ -131,11 +131,10 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		}
 	}
 
-	SmoothHoughSpace(3);
+	m_houghSpace.SmoothHoughSpace(3);
 
-	WeightToHoughPosMap posMap;
-
-	AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, posMap);
+	CHoughSpace2d::WeightToHoughPosMap posMap;
+	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, posMap);
 
 	if (!posMap.isEmpty()){
 #if QT_VERSION >= 0x050200
@@ -144,7 +143,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		double bestWeight = posMap.keys().first();
 #endif
 		int lineIndex = 0;
-		for (WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin(); resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
+		for (CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin(); resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
 			const i2d::CVector2d& houghPos = resultIter.value();
 
 			LineFeature* featurePtr = new LineFeature();
@@ -190,7 +189,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 bool CHoughLineFinderComp::CreateHoughSpace()
 {
 	int angleSize = *m_defaultAngleResAttrPtr;
-	if (m_houghSpace.CreateBitmap(iimg::IBitmap::PF_GRAY32, istd::CIndex2d(*m_defaultRadiusResAttrPtr, angleSize))){
+	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(*m_defaultRadiusResAttrPtr, angleSize))){
 		m_angleVectors.resize(angleSize);
 
 		for (int i = 0; i < angleSize; ++i){
@@ -235,61 +234,6 @@ void CHoughLineFinderComp::UpdateHoughSpace(const i2d::CVector2d& position, cons
 
 				angleLinePtr[radiusIndex] += int(weight);
 			}
-		}
-	}
-}
-
-
-void CHoughLineFinderComp::SmoothHoughSpace(int /*iterations*/)
-{
-	// TODO: implement it
-}
-
-
-void CHoughLineFinderComp::AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoughPosMap& result)
-{
-	istd::CIndex2d spaceSize = m_houghSpace.GetImageSize();
-
-	for (int angleIndex = 0; angleIndex < spaceSize.GetY(); ++angleIndex){
-		const quint32* angleLinePtr = (const quint32*)m_houghSpace.GetLinePtr((angleIndex + spaceSize.GetY() - 1) % spaceSize.GetY());
-		const quint32* prevAngleLinePtr = (const quint32*)m_houghSpace.GetLinePtr(angleIndex);
-		const quint32* nextAngleLinePtr = (const quint32*)m_houghSpace.GetLinePtr((angleIndex + 1) % spaceSize.GetY());
-
-		int prevRadiusIndex = 0;
-		int radiusIndex = 0;
-		for (int nextRadiusIndex = 0; nextRadiusIndex < spaceSize.GetX(); ++nextRadiusIndex){
-			quint32 value = angleLinePtr[radiusIndex];
-			if (		(value >= quint32(minWeight)) &&
-						(value >= prevAngleLinePtr[prevRadiusIndex]) &&
-						(value > prevAngleLinePtr[radiusIndex]) &&
-						(value > prevAngleLinePtr[nextRadiusIndex]) &&
-						(value >= angleLinePtr[prevRadiusIndex]) &&
-						(value > angleLinePtr[nextRadiusIndex]) &&
-						(value >= nextAngleLinePtr[prevRadiusIndex]) &&
-						(value >= nextAngleLinePtr[radiusIndex]) &&
-						(value > nextAngleLinePtr[nextRadiusIndex])){
-				int diffLeft = value - angleLinePtr[prevRadiusIndex];
-				int diffRight = value - angleLinePtr[nextRadiusIndex];
-				int diffTop = value - prevAngleLinePtr[radiusIndex];
-				int diffBottom = value - nextAngleLinePtr[radiusIndex];
-				double correctionX = double(diffLeft) / (diffLeft + diffRight);
-				double correctionY = double(diffTop) / (diffTop + diffBottom);
-
-				i2d::CVector2d resultPos(radiusIndex + correctionX, angleIndex + correctionY);
-
-				result.insert(value, resultPos);
-
-				if (result.size() > maxPoints){
-					WeightToHoughPosMap::Iterator lastIter = result.end()--;
-
-					minWeight = lastIter.key();
-
-					result.erase(lastIter);	// remove the weekest element
-				}
-			}
-
-			prevRadiusIndex = radiusIndex;
-			radiusIndex = nextRadiusIndex;
 		}
 	}
 }
