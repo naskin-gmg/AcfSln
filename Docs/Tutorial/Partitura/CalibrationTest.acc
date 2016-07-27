@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4226" Description="ACF"/>
-            <Version Id="1" Number="1608" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4230" Description="ACF"/>
+            <Version Id="1" Number="1610" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -86,6 +86,9 @@
                                 <Value>CalibratorSupplier</Value>
                             </Values>
                         </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UseInteractiveOverlayShapes" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -182,20 +185,14 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="Directory" PackageId="FilePck" ComponentId="FileNameParam">
-                        <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap>
-                                <AttributeInfo Id="PathType" Type="Integer" ExportId="">
-                                    <Data IsEnabled="true" Value="2"/>
-                                </AttributeInfo>
-                            </AttributeInfoMap>
-                        </Data>
-                    </Element>
                     <Element Id="HoughLineFinder" PackageId="IprPck" ComponentId="HoughLineFinder">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="SearchAoi"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DefaultRadiusResulution" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="1000"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
@@ -215,7 +212,6 @@
                                 <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>Directory</Value>
                                             <Value>Calibration</Value>
                                             <Value>CalibAoi</Value>
                                             <Value>SearchAoi</Value>
@@ -225,7 +221,6 @@
                                 <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>FileBitmapAcquisition</Value>
                                             <Value>Calibration</Value>
                                             <Value>CalibrationAoi</Value>
                                             <Value>SearchAoi</Value>
@@ -275,11 +270,6 @@
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
-                    <Element Id="FileNameParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
-                        <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap/>
-                        </Data>
-                    </Element>
                     <Element Id="GeneralSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -301,7 +291,6 @@
                                 <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>FileNameParamGui</Value>
                                             <Value>PerspectiveCalibEditor</Value>
                                             <Value>CalibAoiEditor</Value>
                                             <Value>SearchAoiEditor</Value>
@@ -311,17 +300,18 @@
                                 <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>FileBitmapAcquisition</Value>
                                             <Value>Calibration</Value>
                                             <Value>CalibrationAoi</Value>
+                                            <Value>SearchAoi</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Names" Type="String[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>Path</Value>
                                             <Value>Calibration</Value>
+                                            <Value>Calibration Area</Value>
+                                            <Value>Search AOI</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>

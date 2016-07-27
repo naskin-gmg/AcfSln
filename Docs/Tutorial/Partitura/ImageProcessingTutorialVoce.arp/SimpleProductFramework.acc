@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4230" Description="ACF"/>
+            <Version Id="1" Number="1610" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Simple framework allowing to test tasks</Description>
@@ -67,7 +67,7 @@
                     <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ErrorColorSchema"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UseInteractiveShapes" Type="Boolean" ExportId="">
+                    <AttributeInfo Id="UseInteractiveShapes" Type="Boolean" ExportId="UseInteractiveOverlayShapes">
                         <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

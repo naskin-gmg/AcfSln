@@ -37,6 +37,20 @@ public:
 		Analyse this Hough space to find set of local maximums.
 	*/
 	void AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoughPosMap& result);
+
+	/**
+		Extract this Hough space to some gray scale bitmap.
+	*/
+	bool ExtractToBitmap(iimg::IBitmap& bitmap);
+
+	/**
+		Calculate minimum of all pixels in this space.
+	*/
+	void CalcMin(const CHoughSpace2d& space);
+	/**
+		Calculate maximum of all pixels in this space.
+	*/
+	void CalcMax(const CHoughSpace2d& space);
 };
 
 

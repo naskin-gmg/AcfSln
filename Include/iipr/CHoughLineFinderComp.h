@@ -31,7 +31,8 @@ public:
 
 	enum MessageId
 	{
-		FOUND_LINE = 0x934d740
+		FOUND_LINE = 0x934d740,
+		HOUGH_SPACE
 	};
 
 	I_BEGIN_COMPONENT(CHoughLineFinderComp);
@@ -62,7 +63,7 @@ public:
 
 protected:
 	bool CreateHoughSpace();
-	void UpdateHoughSpace(const i2d::CVector2d& position, const i2d::CVector2d& direction);
+	void UpdateHoughSpace(const i2d::CVector2d& position, const i2d::CVector2d& direction, double radiusOffset);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
