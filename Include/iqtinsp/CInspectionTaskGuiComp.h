@@ -131,7 +131,7 @@ Q_SIGNALS:
 	void DoAutoTest();
 
 private:
-	void AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex);
+	void AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex, bool isAuxiliary);
 	void UpdateTaskMessages();
 	void DoUpdateEditor(int taskIndex);
 	void ActivateTaskShapes(int taskIndex);

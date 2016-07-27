@@ -36,7 +36,7 @@ void CHoughSpace2d::SmoothHoughSpace(int iterations)
 			for (int nextX = 2; nextX < spaceSize.GetX(); ++nextX){
 				int nextValue = spaceLinePtr[nextX];
 
-				spaceLinePtr[nextX - 1] = value * 2 + prevValue + nextValue;
+				spaceLinePtr[nextX - 1] = (value * 2 + prevValue + nextValue) >> 2;
 
 				prevValue = value;
 				value = nextValue;
@@ -46,9 +46,12 @@ void CHoughSpace2d::SmoothHoughSpace(int iterations)
 }
 
 
-void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoughPosMap& result)
+void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, double minMaxRatio, double minDistance, WeightToHoughPosMap& result)
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
+
+	quint32 maxValue = 0;
+	quint32 minValue = quint32(minWeight);
 
 	for (int y = 0; y < spaceSize.GetY(); ++y){
 		const quint32* prevSpaceLinePtr = (const quint32*)BaseClass::GetLinePtr((y + spaceSize.GetY() - 1) % spaceSize.GetY());
@@ -59,7 +62,7 @@ void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoug
 		int x = 0;
 		for (int nextX = 0; nextX < spaceSize.GetX(); ++nextX){
 			quint32 value = spaceLinePtr[x];
-			if (		(value >= quint32(minWeight)) &&
+			if (		(value >= minValue) &&
 						(value >= prevSpaceLinePtr[prevX]) &&
 						(value > prevSpaceLinePtr[x]) &&
 						(value > prevSpaceLinePtr[nextX]) &&
@@ -79,18 +82,61 @@ void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, WeightToHoug
 
 				result.insert(value, resultPos);
 
-				if (result.size() > maxPoints){
-					WeightToHoughPosMap::Iterator lastIter = result.begin();
+				if (value > maxValue){
+					maxValue = value;
+					quint32 propValue = quint32(value * minMaxRatio);
+					if (minValue < propValue){
+						minValue = propValue;
 
-					minWeight = lastIter.key();
+						// remove elements weeker than new calculated minValue
+						while (!result.isEmpty() && result.firstKey() < minValue){
+							WeightToHoughPosMap::Iterator lastIter = result.begin();
 
-					result.erase(lastIter);	// remove the weekest element
+							result.erase(lastIter);
+						}
+					}
 				}
 			}
 
 			prevX = x;
 			x = nextX;
 		}
+	}
+
+	// remove elements beeing to close to each other
+	for (		WeightToHoughPosMap::Iterator point1Iter = result.begin();
+				point1Iter != result.end();){
+		const i2d::CVector2d& point1 = point1Iter.value();
+
+		bool isToClose = false;
+		WeightToHoughPosMap::Iterator foundIter = result.end();
+
+		for (		WeightToHoughPosMap::Iterator point2Iter = point1Iter + 1;
+					point2Iter != result.end();
+					++point2Iter){
+			const i2d::CVector2d& point2 = point2Iter.value();
+
+			double dist = point1.GetDistance(point2);
+			if (dist <= minDistance){
+				isToClose = true;
+
+				break;
+			}
+		}
+
+		if (isToClose){
+			point1Iter = result.erase(point1Iter);
+		}
+		else{
+			++point1Iter;
+		}
+	}
+
+	// cut this list to user defined maximal size
+	while (result.size() > maxPoints){
+		WeightToHoughPosMap::Iterator lastIter = result.begin();
+
+		result.erase(lastIter);	// remove the weekest element
 	}
 }
 

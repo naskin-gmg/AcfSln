@@ -736,7 +736,7 @@ void CInspectionTaskGuiComp::on_MessageList_itemDoubleClicked(QTreeWidgetItem* i
 
 // private methods
 
-void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex)
+void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex, bool isAuxiliary)
 {
 	m_resultMessagesMap[taskIndex].CopyFrom(messageContainer, istd::IChangeable::CM_CONVERT);
 
@@ -775,10 +775,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 				if (object2dPtr != NULL){
 					iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
 					if (shapePtr != NULL){
-						iview::CShapeBase* shapeBasePtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
-						if (shapeBasePtr != NULL){
-							shapeBasePtr->SetVisible(false);
-						}
+						shapePtr->SetVisible(false);
 
 						shapeIndex = resultShapes.GetCount();
 						resultShapes.PushBack(shapePtr);
@@ -789,23 +786,25 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 			}
 		}
 
-		QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
+		if (!isAuxiliary){
+			QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
 
-		messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
-		messageItemPtr->setData(0, DR_SHAPE_INDEX, shapeIndex);
+			messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
+			messageItemPtr->setData(0, DR_SHAPE_INDEX, shapeIndex);
 
-		QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
-		messageItemPtr->setIcon(0, messageIcon);
+			QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
+			messageItemPtr->setIcon(0, messageIcon);
 
-		QString sourceName = messagePtr->GetInformationSource();
-		if (sourceName.isEmpty()){
-			sourceName = tabName;
+			QString sourceName = messagePtr->GetInformationSource();
+			if (sourceName.isEmpty()){
+				sourceName = tabName;
+			}
+
+			messageItemPtr->setText(0, sourceName);
+			messageItemPtr->setText(1, messagePtr->GetInformationDescription());
+
+			MessageList->addTopLevelItem(messageItemPtr);
 		}
-
-		messageItemPtr->setText(0, sourceName);
-		messageItemPtr->setText(1, messagePtr->GetInformationDescription());
-
-		MessageList->addTopLevelItem(messageItemPtr);
 	}
 }
 
@@ -828,7 +827,12 @@ void CInspectionTaskGuiComp::UpdateTaskMessages()
 			if (subTaskPtr != NULL){
 				const ilog::IMessageContainer* messageContainerPtr = subTaskPtr->GetWorkMessages(iinsp::ISupplier::MCT_RESULTS);
 				if (messageContainerPtr != NULL){
-					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex);
+					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex, false);
+				}
+
+				messageContainerPtr = subTaskPtr->GetWorkMessages(iinsp::ISupplier::MCT_TEMP);
+				if (messageContainerPtr != NULL){
+					AddTaskMessagesToLog(*messageContainerPtr, subTaskIndex, true);
 				}
 			}
 		}
@@ -912,10 +916,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex)
 			iview::IShape* shapePtr = resultShapes.GetAt(i);
 			Q_ASSERT(shapePtr != NULL);	// only correct instances should be added to container
 
-			iview::CShapeBase* shapeBasePtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
-			if (shapeBasePtr != NULL){
-				shapeBasePtr->SetVisible(taskIndex == shapeTaskIndex);
-			}
+			shapePtr->SetVisible(taskIndex == shapeTaskIndex);
 		}
 	}
 	

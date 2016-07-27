@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4230" Description="ACF"/>
-            <Version Id="1" Number="1610" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4234" Description="ACF"/>
+            <Version Id="1" Number="1614" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -86,9 +86,6 @@
                                 <Value>CalibratorSupplier</Value>
                             </Values>
                         </Data>
-                    </AttributeInfo>
-                    <AttributeInfo Id="UseInteractiveOverlayShapes" Type="Boolean" ExportId="">
-                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

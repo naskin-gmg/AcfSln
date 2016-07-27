@@ -133,11 +133,10 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		}
 	}
 
-	m_houghSpace.SmoothHoughSpace(3);
+	m_houghSpace.SmoothHoughSpace(10);
 
 	CHoughSpace2d::WeightToHoughPosMap posMap;
-	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, posMap);
-//	m_houghSpace.AnalyseHoughSpace(1, 1, posMap);
+	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, 0.5, 5.0, posMap);
 
 	if (m_tempConsumerCompPtr.IsValid()){
 		ilog::TExtMessageModel<iimg::CBitmap>* spaceMessagePtr = new ilog::TExtMessageModel<iimg::CBitmap>(
@@ -148,7 +147,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 		m_houghSpace.ExtractToBitmap(*spaceMessagePtr);
 
-		m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(spaceMessagePtr));
+		m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(spaceMessagePtr));
 	}
 
 	if (!posMap.isEmpty()){
@@ -256,7 +255,6 @@ void CHoughLineFinderComp::UpdateHoughSpace(const i2d::CVector2d& position, cons
 				double weight = angleVector.GetDotProduct(direction);
 				Q_ASSERT(weight >= 0);
 
-//				angleLinePtr[radiusIndex] += 1;
 				angleLinePtr[radiusIndex] += int(weight);
 			}
 		}
