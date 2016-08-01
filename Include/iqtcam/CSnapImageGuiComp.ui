@@ -226,6 +226,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>SnapImageButton</tabstop>
+  <tabstop>LoadImageButton</tabstop>
+  <tabstop>SaveImageButton</tabstop>
+  <tabstop>LoadParamsButton</tabstop>
+  <tabstop>SaveParamsButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>

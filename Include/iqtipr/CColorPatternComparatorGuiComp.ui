@@ -186,6 +186,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>TestButton</tabstop>
+  <tabstop>TaskEnabledCB</tabstop>
+  <tabstop>AutoUpdateButton</tabstop>
+  <tabstop>ColorTable</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>

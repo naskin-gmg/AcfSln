@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -98,7 +107,16 @@
         <enum>QFrame::Sunken</enum>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
        </layout>
@@ -107,7 +125,16 @@
      <item>
       <widget class="QWidget" name="ScaleFrame" native="true">
        <layout class="QVBoxLayout" name="verticalLayout">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -180,13 +207,31 @@
    <item>
     <widget class="QWidget" name="BottomFrame" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
        <widget class="QWidget" name="TimeSpanFrame" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -202,7 +247,16 @@
          <item>
           <widget class="QWidget" name="TimeSpanControlFrame" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
@@ -296,7 +350,16 @@
       <item>
        <widget class="QWidget" name="ChannelsFrame" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -332,7 +395,16 @@
       <item>
        <widget class="QWidget" name="ScaleControlFrame" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -366,6 +438,19 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>ValueMaxSB</tabstop>
+  <tabstop>ValueMinSB</tabstop>
+  <tabstop>TimeSpanCB</tabstop>
+  <tabstop>PrevButton</tabstop>
+  <tabstop>NextButton</tabstop>
+  <tabstop>TimeBeginSB</tabstop>
+  <tabstop>TimeEndSB</tabstop>
+  <tabstop>ZoomInButton</tabstop>
+  <tabstop>ZoomOutButton</tabstop>
+  <tabstop>ChannelSelectorCB</tabstop>
+  <tabstop>ScaleCB</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

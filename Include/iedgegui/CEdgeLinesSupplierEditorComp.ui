@@ -11,10 +11,19 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <property name="horizontalSpacing">
+   <property name="leftMargin">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="horizontalSpacing">
     <number>0</number>
    </property>
    <item row="3" column="0" colspan="3">
@@ -41,7 +50,16 @@
          <property name="spacing">
           <number>6</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
         </layout>
@@ -140,6 +158,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>ProcessButton</tabstop>
+  <tabstop>AutoUpdateButton</tabstop>
+  <tabstop>SaveDataButton</tabstop>
+  <tabstop>LoadParamsButton</tabstop>
+  <tabstop>SaveParamsButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>

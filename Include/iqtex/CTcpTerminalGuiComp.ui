@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -19,7 +28,7 @@
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTreeWidget" name="SentList">
@@ -32,9 +41,6 @@
          <property name="wordWrap">
           <bool>true</bool>
          </property>
-         <attribute name="headerVisible">
-          <bool>true</bool>
-         </attribute>
          <attribute name="headerVisible">
           <bool>true</bool>
          </attribute>
@@ -85,7 +91,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QTreeWidget" name="ReceivedList">
@@ -121,6 +127,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>SentList</tabstop>
+  <tabstop>ClearSentListButton</tabstop>
+  <tabstop>CommandCB</tabstop>
+  <tabstop>SendButton</tabstop>
+  <tabstop>ReceivedList</tabstop>
+  <tabstop>ClearReceivedListButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -350,6 +350,24 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>PackagesList</tabstop>
+  <tabstop>InterfaceCB</tabstop>
+  <tabstop>InterfaceClearButton</tabstop>
+  <tabstop>CompanyCB</tabstop>
+  <tabstop>CompanyClearButton</tabstop>
+  <tabstop>ProjectCB</tabstop>
+  <tabstop>ProjectClearButton</tabstop>
+  <tabstop>AuthorCB</tabstop>
+  <tabstop>AuthorClearButton</tabstop>
+  <tabstop>CategoryCB</tabstop>
+  <tabstop>CategoryClearButton</tabstop>
+  <tabstop>TagCB</tabstop>
+  <tabstop>TagClearButton</tabstop>
+  <tabstop>FilterEdit</tabstop>
+  <tabstop>KeywordClearButton</tabstop>
+  <tabstop>EnableFiltersButton</tabstop>
+ </tabstops>
  <resources>
   <include location="icmpstr.qrc"/>
   <include location="../iqtgui/iqtgui.qrc"/>

@@ -136,6 +136,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>ThresholdSB</tabstop>
+  <tabstop>EdgePolarityCB</tabstop>
+  <tabstop>DirectionCB</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

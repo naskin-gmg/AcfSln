@@ -215,6 +215,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>TestButton</tabstop>
+  <tabstop>AutoTestButton</tabstop>
+  <tabstop>LoadParamsButton</tabstop>
+  <tabstop>SaveParamsButton</tabstop>
+  <tabstop>ResultsList</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../Acf/Include/iqtgui/iqtgui.qrc"/>
  </resources>

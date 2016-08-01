@@ -321,6 +321,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>DescriptionEdit</tabstop>
+  <tabstop>CompanyEdit</tabstop>
+  <tabstop>ProjectEdit</tabstop>
+  <tabstop>AuthorEdit</tabstop>
+  <tabstop>CategoryEdit</tabstop>
+  <tabstop>TagsEdit</tabstop>
+  <tabstop>KeywordsEdit</tabstop>
+  <tabstop>ErrorsFrame</tabstop>
+ </tabstops>
  <resources>
   <include location="../iqtgui/iqtgui.qrc"/>
  </resources>

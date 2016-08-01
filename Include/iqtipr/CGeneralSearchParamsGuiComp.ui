@@ -7,11 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>80</height>
+    <height>89</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -263,6 +272,7 @@
  </widget>
  <tabstops>
   <tabstop>MinScoreSB</tabstop>
+  <tabstop>ModelOccurenceSB</tabstop>
   <tabstop>RotationCB</tabstop>
   <tabstop>MinRotationSB</tabstop>
   <tabstop>MaxRotationSB</tabstop>

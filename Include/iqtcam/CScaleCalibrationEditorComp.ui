@@ -172,6 +172,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>ScaleXSpinBox</tabstop>
+  <tabstop>ScaleYSpinBox</tabstop>
+  <tabstop>NominalRadiusSpinBox</tabstop>
+  <tabstop>CalibrateButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
