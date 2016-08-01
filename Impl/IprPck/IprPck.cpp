@@ -253,6 +253,11 @@ I_EXPORT_COMPONENT(
 			"Line finder using Hough transformation",
 			"Image Bitmap Line Finder Straight Hough Transformation Detection" IM_TAG("2D") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			CheckboardCalibSupplier,
+			"Calculate calibration based on checkboard pattern",
+			"Checkboard Chessboard Pattern Calibrator Calibration Perspective" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 

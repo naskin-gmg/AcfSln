@@ -176,7 +176,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="CheckboardCalibSupplier" PackageId="InspectionPck" ComponentId="CheckboardCalibSupplier">
+                    <Element Id="CheckboardCalibSupplier" PackageId="IprPck" ComponentId="CheckboardCalibSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="BitmapSupplier">

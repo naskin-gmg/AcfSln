@@ -60,6 +60,7 @@
 #include "iipr/CProjectionSupplierComp.h"
 #include "iipr/CAdaptiveImageBinarizeProcessorComp.h"
 #include "iipr/CHoughLineFinderComp.h"
+#include "iipr/CCheckboardCalibSupplierComp.h"
 
 
 /**
@@ -131,6 +132,7 @@ typedef iipr::CAutoImageNormalizeProcessorComp AutoImageNormalizeProcessor;
 typedef icomp::TModelCompWrap<iipr::CProjectionSupplierComp> ProjectionSupplier;
 typedef iipr::CAdaptiveImageBinarizeProcessorComp AdaptiveImageBinarizeProcessor;
 typedef iipr::CHoughLineFinderComp HoughLineFinder;
+typedef icomp::TModelCompWrap<iipr::CCheckboardCalibSupplierComp> CheckboardCalibSupplier;
 
 
 } // namespace IprPck

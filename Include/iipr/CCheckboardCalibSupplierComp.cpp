@@ -1,4 +1,4 @@
-#include "iinsp/CCheckboardCalibSupplierComp.h"
+#include "iipr/CCheckboardCalibSupplierComp.h"
 
 
 // ACF include
@@ -14,7 +14,7 @@
 #include "iimg/CBitmap.h"
 
 
-namespace iinsp
+namespace iipr
 {
 
 
@@ -453,6 +453,6 @@ imath::CFixedPointManip CCheckboardCalibSupplierComp::s_gridSizeValueManip(0);
 imath::CGeneralUnitInfo CCheckboardCalibSupplierComp::s_gridSizeUnit(imath::IUnitInfo::UT_COUNTER, "", 1.0, istd::CRange(1, 30), &s_gridSizeValueManip);
 
 
-} // namespace iinsp
+} // namespace iipr
 
 

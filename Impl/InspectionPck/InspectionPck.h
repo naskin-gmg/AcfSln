@@ -10,7 +10,6 @@
 #include "iinsp/CInformationProviderCacheComp.h"
 #include "iinsp/CIdProviderCacheComp.h"
 #include "iinsp/CComposedInformationProviderComp.h"
-#include "iinsp/CCheckboardCalibSupplierComp.h"
 
 
 /**
@@ -24,7 +23,6 @@ typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
 typedef icomp::TModelCompWrap<iinsp::CInformationProviderCacheComp> InformationProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CIdProviderCacheComp> IdProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CComposedInformationProviderComp> ComposedInformationProvider;
-typedef icomp::TModelCompWrap<iinsp::CCheckboardCalibSupplierComp> CheckboardCalibSupplier;
 
 
 } // namespace InspectionPck

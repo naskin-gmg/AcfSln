@@ -1,5 +1,5 @@
-#ifndef iinsp_CCheckboardCalibSupplierComp_included
-#define iinsp_CCheckboardCalibSupplierComp_included
+#ifndef iipr_CCheckboardCalibSupplierComp_included
+#define iipr_CCheckboardCalibSupplierComp_included
 
 
 // ACF includes
@@ -17,7 +17,7 @@
 #include "iinsp/TSupplierCompWrap.h"
 
 
-namespace iinsp
+namespace iipr
 {
 
 
@@ -120,9 +120,9 @@ private:
 };
 
 
-} // namespace iinsp
+} // namespace iipr
 
 
-#endif // !iinsp_CCheckboardCalibSupplierComp_included
+#endif // !iipr_CCheckboardCalibSupplierComp_included
 
 

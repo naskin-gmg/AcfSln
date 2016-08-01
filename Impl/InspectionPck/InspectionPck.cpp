@@ -33,11 +33,6 @@ I_EXPORT_COMPONENT(
 			"Provider of the combined information state based on the list of underlaying information providers",
 			"Provider Results Composition State Information" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Inspection Model") IM_AUTHOR("\"Kirill Lepskiy\""));
 
-I_EXPORT_COMPONENT(
-			CheckboardCalibSupplier,
-			"Calculate calibration based on checkboard pattern",
-			"Checkboard Chessboard Pattern Calibrator Calibration Perspective" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
-
 
 } // namespace InspectionPck
 
