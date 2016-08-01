@@ -182,8 +182,6 @@ int CHoughLineFinderComp::DoExtractFeatures(
 			featurePtr->SetPoint2(imageCenter + centralPoint + direction.GetOrthogonal() * 100);
 			featurePtr->SetWeight(weight);
 
-			results.AddFeature(featurePtr);
-
 			if (m_resultConsumerCompPtr.IsValid()){
 				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
 					istd::IInformationProvider::IC_INFO,
@@ -207,6 +205,8 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 			}
+
+			results.AddFeature(featurePtr);
 		}
 	}
 

@@ -1,6 +1,9 @@
 #include "iipr/CHoughSpace2d.h"
 
 
+// STL includes
+#include <cmath>
+
 // ACF includes
 #include "istd/CChangeNotifier.h"
 
@@ -295,7 +298,25 @@ bool CHoughSpace2d::ExtractToBitmap(iimg::IBitmap& bitmap)
 }
 
 
-void CHoughSpace2d::CalcMin(const CHoughSpace2d& space)
+bool CHoughSpace2d::GetSpacePosition(const i2d::CVector2d& position, i2d::CVector2d& result) const
+{
+	istd::CIndex2d size = BaseClass::GetImageSize();
+
+	result = position;
+
+	if (m_isWrappedX){	// correct the position if is wrapped
+		result.SetX(fmod(result.GetX() + size.GetX(), size.GetX()));
+	}
+
+	if (m_isWrappedY){	// correct the position if is wrapped
+		result.SetY(fmod(result.GetY() + size.GetY(), size.GetY()));
+	}
+
+	return ((result.GetX() >= 0) && (result.GetX() < size.GetX()) && (result.GetY() >= 0) && (result.GetY() < size.GetY()));
+}
+
+
+void CHoughSpace2d::CalcSpaceMin(const CHoughSpace2d& space)
 {
 	istd::CIndex2d size = BaseClass::GetImageSize();
 	istd::CIndex2d spaceSize = space.GetImageSize();
@@ -311,7 +332,7 @@ void CHoughSpace2d::CalcMin(const CHoughSpace2d& space)
 }
 
 
-void CHoughSpace2d::CalcMax(const CHoughSpace2d& space)
+void CHoughSpace2d::CalcSpaceMax(const CHoughSpace2d& space)
 {
 	istd::CIndex2d size = BaseClass::GetImageSize();
 	istd::CIndex2d spaceSize = space.GetImageSize();

@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4234" Description="ACF"/>
-            <Version Id="1" Number="1614" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4239" Description="ACF"/>
+            <Version Id="1" Number="1616" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -36,6 +36,9 @@
                 <AttributeInfoMap>
                     <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="CalibratorSupplier"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="PerspectiveCalibration" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CalibratorSupplier/Calibration"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -167,6 +170,9 @@
                                 <AttributeInfo Id="ArgumentArea" Type="Reference" ExportId="">
                                     <Data IsEnabled="true" Value="CalibAoi"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="ArgumentUnitInfo" Type="Reference" ExportId="DistanceUnitInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
@@ -176,11 +182,37 @@
                                 <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="BitmapSupplier">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="CheckboardParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="CheckboardParams"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DistanceUnitInfo" Type="Reference" ExportId="DistanceUnitInfo">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="LineFinder" Type="Reference" ExportId="">
                                     <Data IsEnabled="true" Value="HoughLineFinder"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
                                     <Data IsEnabled="true" Value="ParamsSet"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="CheckboardParams" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/CheckboardParamContraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>8</Value>
+                                            <Value>10</Value>
+                                        </Values>
+                                    </Data>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -200,6 +232,9 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="ResultConsumer" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/TempMessages"/>
+                                </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
@@ -212,6 +247,7 @@
                                             <Value>Calibration</Value>
                                             <Value>CalibAoi</Value>
                                             <Value>SearchAoi</Value>
+                                            <Value>CheckboardParams</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -221,6 +257,7 @@
                                             <Value>Calibration</Value>
                                             <Value>CalibrationAoi</Value>
                                             <Value>SearchAoi</Value>
+                                            <Value>CheckboardParams</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -267,6 +304,11 @@
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
+                    <Element Id="CheckboardParamsEditor" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
                     <Element Id="GeneralSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -291,6 +333,7 @@
                                             <Value>PerspectiveCalibEditor</Value>
                                             <Value>CalibAoiEditor</Value>
                                             <Value>SearchAoiEditor</Value>
+                                            <Value>CheckboardParamsEditor</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -300,6 +343,7 @@
                                             <Value>Calibration</Value>
                                             <Value>CalibrationAoi</Value>
                                             <Value>SearchAoi</Value>
+                                            <Value>CheckboardParams</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -309,6 +353,7 @@
                                             <Value>Calibration</Value>
                                             <Value>Calibration Area</Value>
                                             <Value>Search AOI</Value>
+                                            <Value>Checkboard Parameters</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -364,7 +409,11 @@
                     </Element>
                     <Element Id="PerspectiveCalibrationShape" PackageId="QtViewPck" ComponentId="PerspectiveCalibrationShape">
                         <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap/>
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="PerspectiveCalibration">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                 </ElementsList>

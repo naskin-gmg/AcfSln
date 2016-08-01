@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4234" Description="ACF"/>
-            <Version Id="1" Number="1614" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4239" Description="ACF"/>
+            <Version Id="1" Number="1616" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
@@ -18,20 +18,10 @@
         <Element ComponentName="SnapTaskGui" X="300" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
-        <EmbededRegistry Id="CalibratorSupplier">
-            <PositionMap>
-                <Element ComponentName="CalibAoi" X="675" Y="475" Note=""/>
-                <Element ComponentName="Calibration" X="375" Y="475" Note=""/>
-                <Element ComponentName="CheckboardCalibSupplier" X="675" Y="100" Note=""/>
-                <Element ComponentName="HoughLineFinder" X="325" Y="100" Note=""/>
-                <Element ComponentName="ParamsSet" X="675" Y="200" Note=""/>
-                <Element ComponentName="SearchAoi" X="1000" Y="475" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="CalibratorSupplierEditor">
             <PositionMap>
                 <Element ComponentName="CalibAoiEditor" X="600" Y="475" Note=""/>
+                <Element ComponentName="CheckboardParamsEditor" X="994.192134348" Y="277.185858225" Note=""/>
                 <Element ComponentName="GeneralSupplierGui" X="600" Y="150" Note=""/>
                 <Element ComponentName="ParamsSetGui" X="600" Y="275" Note=""/>
                 <Element ComponentName="PerspectiveCalibEditor" X="300" Y="475" Note=""/>
@@ -43,6 +33,18 @@
             <PositionMap>
                 <Element ComponentName="ImageView" X="650" Y="300" Note=""/>
                 <Element ComponentName="PerspectiveCalibrationShape" X="650" Y="475" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="CalibratorSupplier">
+            <PositionMap>
+                <Element ComponentName="CalibAoi" X="200" Y="575" Note=""/>
+                <Element ComponentName="Calibration" X="200" Y="475" Note=""/>
+                <Element ComponentName="CheckboardCalibSupplier" X="575" Y="225" Note=""/>
+                <Element ComponentName="CheckboardParams" X="975" Y="300" Note=""/>
+                <Element ComponentName="HoughLineFinder" X="200" Y="225" Note=""/>
+                <Element ComponentName="ParamsSet" X="575" Y="375" Note=""/>
+                <Element ComponentName="SearchAoi" X="575" Y="575" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

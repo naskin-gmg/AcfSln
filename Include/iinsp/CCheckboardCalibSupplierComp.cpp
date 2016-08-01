@@ -5,6 +5,8 @@
 #include "ilog/TExtMessage.h"
 #include "i2d/CLine2d.h"
 #include "i2d/CPosition2d.h"
+#include "i2d/CPolypoint.h"
+#include "iprm/TParamsPtr.h"
 
 // ACF-Solutions includes
 #include "iipr/CHoughSpace2d.h"
@@ -14,6 +16,12 @@
 
 namespace iinsp
 {
+
+
+CCheckboardCalibSupplierComp::CCheckboardCalibSupplierComp()
+:	m_checkboardParamContraints(this)
+{
+}
 
 
 // reimplemented (i2d::ICalibrationProvider)
@@ -28,7 +36,21 @@ const i2d::ICalibration2d* CCheckboardCalibSupplierComp::GetCalibration() const
 
 bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& image, i2d::CPerspectiveCalibration2d& result) const
 {
-	int gridSize = 7;
+	int gridSize = *m_defaultGridSizeAttrPtr;
+	double cellSize = *m_defaultCellSizeAttrPtr;
+	const iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
+	iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsSetPtr, m_checkboardParamsId, m_defaultCheckboardParamsCompPtr);
+	if (checkboardParamsPtr.IsValid()){
+		imath::CVarVector params = checkboardParamsPtr->GetValues();
+		if (params.GetElementsCount() >= 1){
+			gridSize = int(params.GetElement(0));
+		}
+		if (params.GetElementsCount() >= 2){
+			cellSize = params.GetElement(1);
+		}
+	}
+
+	int linesPerVanPoint = gridSize - 1;	// number of bidirectional lines per vanishing point
 
 	result.Reset();
 
@@ -71,7 +93,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 		}
 	}
 
-	if (filteredLines.size() < gridSize * 2){
+	if (filteredLines.size() < linesPerVanPoint * 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No enough lines found"), "CheckboardCalibSupplier"));
 
 		return false;
@@ -161,13 +183,22 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 				i2d::CVector2d vanishingPoint;
 				if (line1.GetExtendedIntersection(line2, vanishingPoint)){
 					i2d::CVector2d diffVector = vanishingPoint - imageCenter;
+					i2d::CVector2d  rawPosition(
+								vanSpaceSize.GetX() * (diffVector.GetAngle() / I_2PI + 1),
+								vanDistOffset + vanDistScale / diffVector.GetLength());
 
-					vanSpacePos.SetX(vanSpaceSize.GetX() * (diffVector.GetAngle() / I_2PI + 1));
-					vanSpacePos.SetY(vanDistOffset + vanDistScale / diffVector.GetLength());
+					if (!vanishingSpace.GetSpacePosition(rawPosition, vanSpacePos)){
+						continue;
+					}
 				}
 				else{
-					vanSpacePos.SetX(vanSpaceSize.GetX() * (line2.GetDiffVector().GetAngle() / I_2PI + 1));
-					vanSpacePos.SetY(vanDistOffset);
+					i2d::CVector2d  rawPosition(
+								vanSpaceSize.GetX() * (line2.GetDiffVector().GetAngle() / I_2PI + 1),
+								vanDistOffset);
+
+					if (!vanishingSpace.GetSpacePosition(rawPosition, vanSpacePos)){
+						continue;
+					}
 				}
 
 				if (vanSpacePos.GetDistance(foundVanSpacePos) < 5){
@@ -211,26 +242,32 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 						istd::IInformationProvider::IC_INFO,
 						0,
 						QString("Vanishing point %1, line %1").arg(vanishingPointIndex + 1).arg(lineIndex + 1),
-						"CheckboardCaliabrator");
+						"CheckboardCalibrator");
 			pointMessagePtr->SetPoint1(vanPoint);
 			pointMessagePtr->SetPoint2(line.GetCenter());
 
 			AddMessage(pointMessagePtr, MCT_TEMP);
 		}
 
-		if (sortedVanLines[vanishingPointIndex].size() != gridSize){
+		if (sortedVanLines[vanishingPointIndex].size() != linesPerVanPoint){
 			AddMessage(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						0,
-						QObject::tr("Expected %1 lines for vanishing point %2, but found %3").arg(sortedVanLines[vanishingPointIndex].size()).arg(vanishingPointIndex + 1).arg(gridSize),
+						QObject::tr("Expected %1 lines for vanishing point %2, but found %3").arg(linesPerVanPoint).arg(vanishingPointIndex + 1).arg(sortedVanLines[vanishingPointIndex].size()),
 						"CheckboardCalibSupplier"));
 
 			return false;
 		}
 	}
 
-	QVector<i2d::CVector2d> crossPositions(gridSize * gridSize);
-	QVector<i2d::CVector2d> nominalPositions(gridSize * gridSize);
+	QVector<i2d::CVector2d> crossPositions(linesPerVanPoint * linesPerVanPoint);
+	QVector<i2d::CVector2d> nominalPositions(linesPerVanPoint * linesPerVanPoint);
+
+	ilog::TExtMessageModel<i2d::CPolypoint>* crossPointsMessagePtr = new ilog::TExtMessageModel<i2d::CPolypoint>(
+				istd::IInformationProvider::IC_INFO,
+				0,
+				"",
+				"CheckboardCalibrator");
 
 	int line1Index = 0;
 	for (		QMap<double, i2d::CLine2d>::ConstIterator iter1 = sortedVanLines[0].constBegin();
@@ -244,18 +281,30 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 					++iter2, ++line2Index){
 			const i2d::CLine2d& line2 = iter2.value();
 
-			line1.GetExtendedIntersection(line2, crossPositions[line2Index * gridSize + line1Index]);
+			i2d::CVector2d crossPoint;
+			line1.GetExtendedIntersection(line2, crossPoint);
+			crossPositions[line2Index * linesPerVanPoint + line1Index] = crossPoint;
 
-			i2d::CVector2d normalPos((line1Index - (gridSize - 1) * 0.5) * 20, (line2Index - (gridSize - 1) * 0.5) * 20);
+			i2d::CVector2d normalPos((line1Index - (linesPerVanPoint - 1) * 0.5) * cellSize, (line2Index - (linesPerVanPoint - 1) * 0.5) * cellSize);
+			nominalPositions[line2Index * linesPerVanPoint + line1Index] = normalPos;
 
-			nominalPositions[line2Index * gridSize + line1Index] = normalPos;
+			crossPointsMessagePtr->InsertNode(crossPoint);
 		}
 	}
 
 	iipr::CPerspCalibFinder calibFinder;
-	calibFinder.FindPerspCalib(nominalPositions.constData(), crossPositions.constData(), gridSize * gridSize, result);
+	bool retVal = calibFinder.FindPerspCalib(nominalPositions.constData(), crossPositions.constData(), linesPerVanPoint * linesPerVanPoint, result);
 
-	return true;
+	if (retVal){
+		crossPointsMessagePtr->SetText(QObject::tr("Calibration successfull found"));
+	}
+	else{
+		crossPointsMessagePtr->SetText(QObject::tr("Calibration not found"));
+	}
+
+	AddMessage(crossPointsMessagePtr, MCT_RESULTS);
+
+	return retVal;
 }
 
 
@@ -340,6 +389,68 @@ bool CCheckboardCalibSupplierComp::LinesConsumer::AddFeature(const imeas::INumer
 	return true;
 }
 
+
+// public methods of embedded class ChessboardParamsContraints
+
+CCheckboardCalibSupplierComp::ChessboardParamsContraints::ChessboardParamsContraints(const CCheckboardCalibSupplierComp* parentPtr)
+:	m_parentPtr(parentPtr),
+	m_cellSizeUnit(imath::IUnitInfo::UT_PHYSICAL, "", 1, istd::CRange(0, 100))
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	if (m_parentPtr->m_distanceUnitInfoCompPtr.IsValid()){
+		m_cellSizeUnit.SetUnitName(m_parentPtr->m_distanceUnitInfoCompPtr->GetUnitName());
+		m_cellSizeUnit.SetUnitType(m_parentPtr->m_distanceUnitInfoCompPtr->GetUnitType());
+		m_cellSizeUnit.SetDisplayMultiplicationFactor(m_parentPtr->m_distanceUnitInfoCompPtr->GetDisplayMultiplicationFactor());
+	}
+}
+
+
+// reimplemented (imeas::INumericConstraints)
+
+int CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValuesCount() const
+{
+	return 2;
+}
+
+
+QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValueName(int index) const
+{
+	if (index != 0){
+		return QObject::tr("Cell Size");
+	}
+	else{
+		return QObject::tr("Grid Size");
+	}
+}
+
+
+QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValueDescription(int index) const
+{
+	if (index != 0){
+		return QObject::tr("Size of single cell");
+	}
+	else{
+		return QObject::tr("Number of grid cells in each checkboard row and column");
+	}
+}
+
+
+const imath::IUnitInfo* CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValueUnitInfo(int index) const
+{
+	if (index != 0){
+		return &m_cellSizeUnit;
+	}
+	else{
+		return &s_gridSizeUnit;
+	}
+}
+
+
+// static private attributes
+
+imath::CFixedPointManip CCheckboardCalibSupplierComp::s_gridSizeValueManip(0);
+imath::CGeneralUnitInfo CCheckboardCalibSupplierComp::s_gridSizeUnit(imath::IUnitInfo::UT_COUNTER, "", 1.0, istd::CRange(1, 30), &s_gridSizeValueManip);
 
 
 } // namespace iinsp

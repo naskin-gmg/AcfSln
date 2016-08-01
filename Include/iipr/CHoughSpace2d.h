@@ -83,13 +83,20 @@ public:
 	bool ExtractToBitmap(iimg::IBitmap& bitmap);
 
 	/**
+		Get position in space for some input.
+		It consides the wrapping of space.
+		\return	true, if this position is representable in the space.
+	*/
+	bool GetSpacePosition(const i2d::CVector2d& position, i2d::CVector2d& result) const;
+
+	/**
 		Calculate minimum of all pixels in this space.
 	*/
-	void CalcMin(const CHoughSpace2d& space);
+	void CalcSpaceMin(const CHoughSpace2d& space);
 	/**
 		Calculate maximum of all pixels in this space.
 	*/
-	void CalcMax(const CHoughSpace2d& space);
+	void CalcSpaceMax(const CHoughSpace2d& space);
 
 private:
 	bool m_isWrappedX;
