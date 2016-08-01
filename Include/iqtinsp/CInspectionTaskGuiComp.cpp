@@ -974,6 +974,9 @@ void CInspectionTaskGuiComp::CreateMenu()
 
 void CInspectionTaskGuiComp::UpdateMenu()
 {
+	Q_ASSERT(m_pasteCurrentTaskActionPtr != NULL);
+	Q_ASSERT(m_pasteAllActionPtr != NULL);
+
 	QClipboard* clipboardPtr = QApplication::clipboard();
 	const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
 	if (mimeDataPtr != NULL){
