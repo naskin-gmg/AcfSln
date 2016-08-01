@@ -36,6 +36,14 @@ public:
 	I_END_COMPONENT;
 
 protected:
+	struct LineInfo
+	{
+		double weight;
+		i2d::CLine2d line;
+	};
+
+	typedef QList<LineInfo> Lines;
+
 	class LinesConsumer: virtual public iipr::IFeaturesConsumer
 	{
 	public:
@@ -43,13 +51,6 @@ protected:
 		virtual void ResetFeatures();
 		virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
 	
-		struct LineInfo
-		{
-			double weight;
-			i2d::CLine2d line;
-		};
-
-		typedef QList<LineInfo> Lines;
 		Lines lines;
 	};
 

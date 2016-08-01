@@ -134,7 +134,7 @@ private:
 	void AddTaskMessagesToLog(const ilog::IMessageContainer& messageContainer, int taskIndex, bool isAuxiliary);
 	void UpdateTaskMessages();
 	void DoUpdateEditor(int taskIndex);
-	void ActivateTaskShapes(int taskIndex);
+	void ActivateTaskShapes(int taskIndex, int shapeIndex);
 	void CreateMenu();
 	void UpdateMenu();
 	bool CopyTaskParametersToClipboard(iser::ISerializable* objectPtr, const char* mimeType) const;
@@ -169,9 +169,11 @@ private:
 
 	typedef QMap<int, ilog::CMessageContainer> ResultMessagesMap;
 	ResultMessagesMap m_resultMessagesMap;
+	ResultMessagesMap m_tempMessagesMap;
 
 	typedef QMap<int, istd::TPointerVector<iview::IShape> > ResultShapesMap;	// Map GUI index to list of result shapes
 	ResultShapesMap m_resultShapesMap;
+	ResultShapesMap m_tempShapesMap;
 
 	typedef QSet<imod::IModelEditor*> EditorsList;
 	EditorsList m_editorsList;

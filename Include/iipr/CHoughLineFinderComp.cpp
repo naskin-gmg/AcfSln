@@ -136,7 +136,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	m_houghSpace.SmoothHoughSpace(10);
 
 	CHoughSpace2d::WeightToHoughPosMap posMap;
-	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, 0.5, 5.0, posMap);
+	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, 0.5, 10.0, 0.2, posMap);
 
 	if (m_tempConsumerCompPtr.IsValid()){
 		ilog::TExtMessageModel<iimg::CBitmap>* spaceMessagePtr = new ilog::TExtMessageModel<iimg::CBitmap>(
@@ -186,17 +186,27 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 			if (m_resultConsumerCompPtr.IsValid()){
 				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
-							istd::IInformationProvider::IC_INFO,
-							FOUND_LINE,
-							QString("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
-							"LineFinder");
+					istd::IInformationProvider::IC_INFO,
+					FOUND_LINE,
+					QString("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
+					"LineFinder");
 				pointMessagePtr->SetPoint1(featurePtr->GetPoint1());
 				pointMessagePtr->SetPoint2(featurePtr->GetPoint2());
 
 				m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 			}
 
-			results.AddFeature(featurePtr);
+			if (m_tempConsumerCompPtr.IsValid()){
+				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+					istd::IInformationProvider::IC_INFO,
+					FOUND_LINE,
+					QString("Auxiliary line %1").arg(lineIndex + 1),
+					"LineFinder");
+				pointMessagePtr->SetPoint1(featurePtr->GetCenter());
+				pointMessagePtr->SetPoint2(imageCenter);
+
+				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
+			}
 		}
 	}
 
@@ -206,7 +216,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		progressManagerPtr->EndProgressSession(progressSessionIndex);
 	}
 
-	return TS_INVALID;
+	return TS_OK;
 }
 
 
@@ -215,7 +225,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 bool CHoughLineFinderComp::CreateHoughSpace()
 {
 	int angleSize = *m_defaultAngleResAttrPtr;
-	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(*m_defaultRadiusResAttrPtr, angleSize))){
+	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(*m_defaultRadiusResAttrPtr, angleSize), false, true)){
 		m_angleVectors.resize(angleSize);
 
 		for (int i = 0; i < angleSize; ++i){
@@ -239,8 +249,8 @@ void CHoughLineFinderComp::UpdateHoughSpace(const i2d::CVector2d& position, cons
 	istd::CIndex2d spaceSize = m_houghSpace.GetImageSize();
 
 	double directionAngle = direction.GetAngle();
-	int firstAngleIndex = int((directionAngle / I_2PI + 1.75) * spaceSize.GetY() + 1) % spaceSize.GetY();
-	int lastAngleIndex = int((directionAngle / I_2PI + 2.25) * spaceSize.GetY()) % spaceSize.GetY();
+	int firstAngleIndex = int((directionAngle / I_2PI + 1.95) * spaceSize.GetY() + 1) % spaceSize.GetY();
+	int lastAngleIndex = int((directionAngle / I_2PI + 2.05) * spaceSize.GetY()) % spaceSize.GetY();
 
 	for (int angleIndex = firstAngleIndex; angleIndex != lastAngleIndex; angleIndex = (angleIndex + 1) % spaceSize.GetY()){
 		quint32* angleLinePtr = (quint32*)m_houghSpace.GetLinePtr(angleIndex);
@@ -249,7 +259,7 @@ void CHoughLineFinderComp::UpdateHoughSpace(const i2d::CVector2d& position, cons
 
 		double radius = angleVector.GetDotProduct(position);
 
-		int radiusIndex = qFloor(radius + radiusOffset + 0.5);
+		int radiusIndex = qFloor(radius + radiusOffset);
 		if ((radiusIndex >= 0) && (radiusIndex < spaceSize.GetX())){
 			if (radiusIndex < spaceSize.GetX()){
 				double weight = angleVector.GetDotProduct(direction);

@@ -18,16 +18,6 @@
         <Element ComponentName="SnapTaskGui" X="300" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
-        <EmbededRegistry Id="CalibratorSupplierEditor">
-            <PositionMap>
-                <Element ComponentName="CalibAoiEditor" X="600" Y="475" Note=""/>
-                <Element ComponentName="GeneralSupplierGui" X="600" Y="150" Note=""/>
-                <Element ComponentName="ParamsSetGui" X="600" Y="275" Note=""/>
-                <Element ComponentName="PerspectiveCalibEditor" X="300" Y="475" Note=""/>
-                <Element ComponentName="SearchAoiEditor" X="900" Y="475" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="CalibratorSupplier">
             <PositionMap>
                 <Element ComponentName="CalibAoi" X="675" Y="475" Note=""/>
@@ -36,6 +26,16 @@
                 <Element ComponentName="HoughLineFinder" X="325" Y="100" Note=""/>
                 <Element ComponentName="ParamsSet" X="675" Y="200" Note=""/>
                 <Element ComponentName="SearchAoi" X="1000" Y="475" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="CalibratorSupplierEditor">
+            <PositionMap>
+                <Element ComponentName="CalibAoiEditor" X="600" Y="475" Note=""/>
+                <Element ComponentName="GeneralSupplierGui" X="600" Y="150" Note=""/>
+                <Element ComponentName="ParamsSetGui" X="600" Y="275" Note=""/>
+                <Element ComponentName="PerspectiveCalibEditor" X="300" Y="475" Note=""/>
+                <Element ComponentName="SearchAoiEditor" X="900" Y="475" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

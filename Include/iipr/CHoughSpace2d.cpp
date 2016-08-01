@@ -1,13 +1,32 @@
 #include "iipr/CHoughSpace2d.h"
 
 
+// ACF includes
+#include "istd/CChangeNotifier.h"
+
 
 namespace iipr
 {
 
 
-bool CHoughSpace2d::CreateHoughSpace(const istd::CIndex2d& size)
+CHoughSpace2d::CHoughSpace2d()
 {
+}
+
+
+CHoughSpace2d::CHoughSpace2d(const istd::CIndex2d& size, double isWrappedX, double isWrappedY)
+{
+	CHoughSpace2d::CreateHoughSpace(size, isWrappedX, isWrappedY);
+}
+
+
+bool CHoughSpace2d::CreateHoughSpace(const istd::CIndex2d& size, double isWrappedX, double isWrappedY)
+{
+	istd::CChangeNotifier notifier(this);
+
+	m_isWrappedX = isWrappedX;
+	m_isWrappedY = isWrappedY;
+
 	if (BaseClass::CreateBitmap(iimg::IBitmap::PF_GRAY32, size)){
 		BaseClass::ClearImage();
 
@@ -18,11 +37,65 @@ bool CHoughSpace2d::CreateHoughSpace(const istd::CIndex2d& size)
 }
 
 
+bool CHoughSpace2d::IsWrappedX() const
+{
+	return m_isWrappedX;
+}
+
+
+void CHoughSpace2d::SetWrappedX(bool state)
+{
+	if (state != m_isWrappedX){
+		istd::CChangeNotifier notifier(this);
+
+		m_isWrappedX = state;
+	}
+}
+
+
+bool CHoughSpace2d::IsWrappedY() const
+{
+	return m_isWrappedY;
+}
+
+
+void CHoughSpace2d::SetWrappedY(bool state)
+{
+	if (state != m_isWrappedY){
+		istd::CChangeNotifier notifier(this);
+
+		m_isWrappedY = state;
+	}
+}
+
+
+void CHoughSpace2d::IncreaseValueAt(const i2d::CVector2d& position, double value)
+{
+	istd::CIndex2d size = BaseClass::GetImageSize();
+
+	int posX = int(position.GetX());
+	if (m_isWrappedX){	// correct the position if is wrapped
+		posX = (posX + size.GetX()) % size.GetX();
+	}
+
+	int posY = int(position.GetY());
+	if (m_isWrappedY){	// correct the position if is wrapped
+		posY = (posY + size.GetY()) % size.GetY();
+	}
+
+	if ((posX >= 0) && (posX < size.GetX()) && (posY >= 0) && (posY < size.GetY())){
+		quint32* linePtr = (quint32*)BaseClass::GetLinePtr(posY);
+
+		linePtr[posX] += quint32(value);
+	}
+}
+
+
 void CHoughSpace2d::SmoothHoughSpace(int iterations)
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
 
-	if (spaceSize.GetX() < 2){
+	if (spaceSize.GetX() < 3){
 		return;
 	}
 
@@ -30,10 +103,21 @@ void CHoughSpace2d::SmoothHoughSpace(int iterations)
 		for (int y = 0; y < spaceSize.GetY(); ++y){
 			quint32* spaceLinePtr = (quint32*)BaseClass::GetLinePtr(y);
 
-			int prevValue = spaceLinePtr[0];
-			int value = spaceLinePtr[1];
+			int nextX;
+			quint32 prevValue;
+			quint32 value;
+			if (m_isWrappedX){
+				nextX = 1;
+				prevValue = spaceLinePtr[spaceSize.GetX() - 1];
+				value = spaceLinePtr[0];
+			}
+			else{
+				nextX = 2;
+				prevValue = spaceLinePtr[0];
+				value = spaceLinePtr[1];
+			}
 
-			for (int nextX = 2; nextX < spaceSize.GetX(); ++nextX){
+			for (; nextX < spaceSize.GetX(); ++nextX){
 				int nextValue = spaceLinePtr[nextX];
 
 				spaceLinePtr[nextX - 1] = (value * 2 + prevValue + nextValue) >> 2;
@@ -41,14 +125,28 @@ void CHoughSpace2d::SmoothHoughSpace(int iterations)
 				prevValue = value;
 				value = nextValue;
 			}
+
+			if (m_isWrappedX){
+				spaceLinePtr[nextX - 1] = (value * 2 + prevValue + spaceLinePtr[0]) >> 2;
+			}
 		}
 	}
 }
 
 
-void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, double minMaxRatio, double minDistance, WeightToHoughPosMap& result)
+void CHoughSpace2d::AnalyseHoughSpace(
+			int maxPoints,
+			int minWeight,
+			double minMaxRatio,
+			double minDistance,
+			double minLocalDynamic,
+			WeightToHoughPosMap& result)
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
+
+	if (spaceSize.GetX() < 3){
+		return;
+	}
 
 	quint32 maxValue = 0;
 	quint32 minValue = quint32(minWeight);
@@ -58,9 +156,21 @@ void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, double minMa
 		const quint32* spaceLinePtr = (const quint32*)BaseClass::GetLinePtr(y);
 		const quint32* nextSpaceLinePtr = (const quint32*)BaseClass::GetLinePtr((y + 1) % spaceSize.GetY());
 
-		int prevX = 0;
-		int x = 0;
-		for (int nextX = 0; nextX < spaceSize.GetX(); ++nextX){
+		int prevX;
+		int x;
+		int nextX;
+		if (m_isWrappedX){
+			prevX = spaceSize.GetX() - 2;
+			x = spaceSize.GetX() - 1;
+			nextX = 0;
+		}
+		else{
+			prevX = 0;
+			x = 1;
+			nextX = 2;
+		}
+
+		for (; nextX < spaceSize.GetX(); ++nextX){
 			quint32 value = spaceLinePtr[x];
 			if (		(value >= minValue) &&
 						(value >= prevSpaceLinePtr[prevX]) &&
@@ -75,24 +185,27 @@ void CHoughSpace2d::AnalyseHoughSpace(int maxPoints, int minWeight, double minMa
 				int diffRight = value - spaceLinePtr[nextX];
 				int diffTop = value - prevSpaceLinePtr[x];
 				int diffBottom = value - nextSpaceLinePtr[x];
-				double correctionX = double(diffLeft) / (diffLeft + diffRight);
-				double correctionY = double(diffTop) / (diffTop + diffBottom);
 
-				i2d::CVector2d resultPos(x + correctionX, y + correctionY);
+				if ((diffLeft + diffRight + diffTop + diffBottom) > value * minLocalDynamic){
+					double correctionX = double(diffLeft) / (diffLeft + diffRight);
+					double correctionY = double(diffTop) / (diffTop + diffBottom);
 
-				result.insert(value, resultPos);
+					i2d::CVector2d resultPos(x + correctionX, y + correctionY);
 
-				if (value > maxValue){
-					maxValue = value;
-					quint32 propValue = quint32(value * minMaxRatio);
-					if (minValue < propValue){
-						minValue = propValue;
+					result.insert(value, resultPos);
 
-						// remove elements weeker than new calculated minValue
-						while (!result.isEmpty() && result.firstKey() < minValue){
-							WeightToHoughPosMap::Iterator lastIter = result.begin();
+					if (value > maxValue){
+						maxValue = value;
+						quint32 propValue = quint32(value * minMaxRatio);
+						if (minValue < propValue){
+							minValue = propValue;
 
-							result.erase(lastIter);
+							// remove elements weeker than new calculated minValue
+							while (!result.isEmpty() && result.firstKey() < minValue){
+								WeightToHoughPosMap::Iterator lastIter = result.begin();
+
+								result.erase(lastIter);
+							}
 						}
 					}
 				}

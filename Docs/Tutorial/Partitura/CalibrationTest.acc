@@ -22,6 +22,9 @@
         <Element Id="CalibratorSupplierEditor" PackageId="" ComponentId="CalibratorSupplierEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="CalibratorSupplier"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapTaskGui"/>
                     </AttributeInfo>
@@ -50,7 +53,7 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
-                        <Data IsEnabled="true" Value="Edge Finder"/>
+                        <Data IsEnabled="true" Value="Checkboard Calibration Finder"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
@@ -188,17 +191,14 @@
                                 <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="SearchAoi"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="DefaultAngleResulution" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="720"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="DefaultRadiusResulution" Type="Integer" ExportId="">
                                     <Data IsEnabled="true" Value="1000"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="ResultConsumer" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/TaskLog"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="TempConsumer" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="CheckboardCalibSupplier/TempMessages"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>

@@ -1,6 +1,17 @@
 #include "iinsp/CCheckboardCalibSupplierComp.h"
 
 
+// ACF include
+#include "ilog/TExtMessage.h"
+#include "i2d/CLine2d.h"
+#include "i2d/CPosition2d.h"
+
+// ACF-Solutions includes
+#include "iipr/CHoughSpace2d.h"
+#include "iipr/CPerspCalibFinder.h"
+#include "iimg/CBitmap.h"
+
+
 namespace iinsp
 {
 
@@ -17,6 +28,8 @@ const i2d::ICalibration2d* CCheckboardCalibSupplierComp::GetCalibration() const
 
 bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& image, i2d::CPerspectiveCalibration2d& result) const
 {
+	int gridSize = 7;
+
 	result.Reset();
 
 	if (!m_lineFinderCompPtr.IsValid()){
@@ -32,13 +45,215 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 		return false;
 	}
 
-	if (processedLines.lines.size() >= 28){
+	QMultiMap<double, i2d::CLine2d> filteredLines;
+	for (		Lines::ConstIterator iter1 = processedLines.lines.constBegin();
+				iter1 != processedLines.lines.constEnd();
+				++iter1){
+		const i2d::CLine2d& line1 = iter1->line;
+
+		for (		Lines::ConstIterator iter2 = iter1 + 1;
+					iter2 != processedLines.lines.constEnd();
+					++iter2){
+			const i2d::CLine2d& line2 = iter2->line;
+
+			double distance =
+						line1.GetExtendedDistance(line2.GetPoint1()) +
+						line1.GetExtendedDistance(line2.GetPoint2()) +
+						line2.GetExtendedDistance(line1.GetPoint1()) +
+						line2.GetExtendedDistance(line1.GetPoint2());
+
+			if (distance < 10){
+				i2d::CLine2d commonLine((line1.GetPoint1() + line2.GetPoint2()) * 0.5, (line1.GetPoint2() + line2.GetPoint1()) * 0.5);
+				double commonWeight = iter1->weight * iter2->weight;
+
+				filteredLines.insert(commonWeight, commonLine);
+			}
+		}
+	}
+
+	if (filteredLines.size() < gridSize * 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No enough lines found"), "CheckboardCalibSupplier"));
 
 		return false;
 	}
 
-	result.Reset();
+	// search for vanishing points
+	istd::CIndex2d vanSpaceSize(100, 100);
+	double vanDistOffset = vanSpaceSize.GetY() * 0.5;
+	double vanDistScale = 40000;
+
+	iipr::CHoughSpace2d vanishingSpace;
+	vanishingSpace.CreateHoughSpace(vanSpaceSize, true, false);
+
+	i2d::CVector2d imageCenter = image.GetCenter();
+
+	for (		QMultiMap<double, i2d::CLine2d>::ConstIterator iter1 = filteredLines.constBegin();
+				iter1 != filteredLines.constEnd();
+				++iter1){
+		const i2d::CLine2d& line1 = iter1.value();
+
+		for (		QMultiMap<double, i2d::CLine2d>::ConstIterator iter2 = iter1 + 1;
+					iter2 != filteredLines.constEnd();
+					++iter2){
+			const i2d::CLine2d& line2 = iter2.value();
+
+			i2d::CVector2d vanSpacePos;
+			i2d::CVector2d vanishingPoint;
+			if (line1.GetExtendedIntersection(line2, vanishingPoint)){
+				i2d::CVector2d diffVector = vanishingPoint - imageCenter;
+
+				vanSpacePos.SetX(vanSpaceSize.GetX() * (diffVector.GetAngle() / I_2PI + 1));
+				vanSpacePos.SetY(vanDistOffset + vanDistScale / diffVector.GetLength());
+			}
+			else{
+				vanSpacePos.SetX(vanSpaceSize.GetX() * (line2.GetDiffVector().GetAngle() / I_2PI + 1));
+				vanSpacePos.SetY(vanDistOffset);
+			}
+
+			vanishingSpace.IncreaseValueAt(vanSpacePos, 1);
+		}
+	}
+/*
+	{
+		ilog::TExtMessageModel<iimg::CBitmap>* spaceMessagePtr = new ilog::TExtMessageModel<iimg::CBitmap>(
+					istd::IInformationProvider::IC_INFO,
+					0,
+					QString("Vanishing Hough space"),
+					"LineFinder");
+
+		vanishingSpace.ExtractToBitmap(*spaceMessagePtr);
+
+		AddMessage(spaceMessagePtr, MCT_TEMP);
+	}
+*/
+	iipr::CHoughSpace2d::WeightToHoughPosMap foundVanPoints;
+	vanishingSpace.AnalyseHoughSpace(2, 2, 0.2, 2, 0.1, foundVanPoints);
+	Q_ASSERT(foundVanPoints.size() <= 2);
+	if (foundVanPoints.size() < 2){
+		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No vanishing points found"), "CheckboardCalibSupplier"));
+
+		return false;
+	}
+
+	QMap<double, i2d::CLine2d> sortedVanLines[2];
+
+	int vanishingPointIndex = 0;
+	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanPoints.constBegin();
+				foundVanIter != foundVanPoints.constEnd();
+				++foundVanIter, ++vanishingPointIndex){
+		const i2d::CVector2d& foundVanSpacePos = foundVanIter.value();
+
+		QSet<i2d::CLine2d> vanLines;
+		i2d::CVector2d exactVanCummPos(0, 0);
+		int exactCummPosCount = 0;
+		
+		for (		QMultiMap<double, i2d::CLine2d>::ConstIterator iter1 = filteredLines.constBegin();
+					iter1 != filteredLines.constEnd();
+					++iter1){
+			const i2d::CLine2d& line1 = iter1.value();
+
+			for (		QMultiMap<double, i2d::CLine2d>::ConstIterator iter2 = iter1 + 1;
+						iter2 != filteredLines.constEnd();
+						++iter2){
+				const i2d::CLine2d& line2 = iter2.value();
+
+				i2d::CVector2d vanSpacePos;
+				i2d::CVector2d vanishingPoint;
+				if (line1.GetExtendedIntersection(line2, vanishingPoint)){
+					i2d::CVector2d diffVector = vanishingPoint - imageCenter;
+
+					vanSpacePos.SetX(vanSpaceSize.GetX() * (diffVector.GetAngle() / I_2PI + 1));
+					vanSpacePos.SetY(vanDistOffset + vanDistScale / diffVector.GetLength());
+				}
+				else{
+					vanSpacePos.SetX(vanSpaceSize.GetX() * (line2.GetDiffVector().GetAngle() / I_2PI + 1));
+					vanSpacePos.SetY(vanDistOffset);
+				}
+
+				if (vanSpacePos.GetDistance(foundVanSpacePos) < 5){
+					vanLines.insert(line1);
+					vanLines.insert(line2);
+
+					exactVanCummPos += vanSpacePos;
+					++exactCummPosCount;
+				}
+			}
+		}
+
+		i2d::CVector2d exactVanPos = exactVanCummPos / exactCummPosCount;
+
+		i2d::CVector2d vanVector;
+		vanVector.Init(exactVanPos.GetX() * I_2PI / vanSpaceSize.GetX(), vanDistScale / (exactVanPos.GetY() - vanDistOffset));
+
+		i2d::CVector2d vanPoint = imageCenter + vanVector;
+
+		for (		QSet<i2d::CLine2d>::ConstIterator iter = vanLines.constBegin();
+					iter != vanLines.constEnd();
+					++iter){
+			const i2d::CLine2d& line = *iter;
+
+			i2d::CVector2d diff = line.GetDiffVector();
+			double projection1Value = diff.GetCrossProductZ(line.GetPoint1()) / diff.GetLength();
+			if (diff.GetDotProduct(vanVector) < 0){
+				projection1Value = -projection1Value;
+			}
+
+			sortedVanLines[vanishingPointIndex][projection1Value] = line;
+		}
+
+		int lineIndex = 0;
+		for (		QMap<double, i2d::CLine2d>::ConstIterator iter = sortedVanLines[vanishingPointIndex].constBegin();
+					iter != sortedVanLines[vanishingPointIndex].constEnd();
+					++iter, ++lineIndex){
+			const i2d::CLine2d& line = iter.value();
+
+			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+						istd::IInformationProvider::IC_INFO,
+						0,
+						QString("Vanishing point %1, line %1").arg(vanishingPointIndex + 1).arg(lineIndex + 1),
+						"CheckboardCaliabrator");
+			pointMessagePtr->SetPoint1(vanPoint);
+			pointMessagePtr->SetPoint2(line.GetCenter());
+
+			AddMessage(pointMessagePtr, MCT_TEMP);
+		}
+
+		if (sortedVanLines[vanishingPointIndex].size() != gridSize){
+			AddMessage(new ilog::CMessage(
+						istd::IInformationProvider::IC_ERROR,
+						0,
+						QObject::tr("Expected %1 lines for vanishing point %2, but found %3").arg(sortedVanLines[vanishingPointIndex].size()).arg(vanishingPointIndex + 1).arg(gridSize),
+						"CheckboardCalibSupplier"));
+
+			return false;
+		}
+	}
+
+	QVector<i2d::CVector2d> crossPositions(gridSize * gridSize);
+	QVector<i2d::CVector2d> nominalPositions(gridSize * gridSize);
+
+	int line1Index = 0;
+	for (		QMap<double, i2d::CLine2d>::ConstIterator iter1 = sortedVanLines[0].constBegin();
+				iter1 != sortedVanLines[0].constEnd();
+				++iter1, ++line1Index){
+		const i2d::CLine2d& line1 = iter1.value();
+
+		int line2Index = 0;
+		for (		QMap<double, i2d::CLine2d>::ConstIterator iter2 = sortedVanLines[1].constBegin();
+					iter2 != sortedVanLines[1].constEnd();
+					++iter2, ++line2Index){
+			const i2d::CLine2d& line2 = iter2.value();
+
+			line1.GetExtendedIntersection(line2, crossPositions[line2Index * gridSize + line1Index]);
+
+			i2d::CVector2d normalPos((line1Index - (gridSize - 1) * 0.5) * 20, (line2Index - (gridSize - 1) * 0.5) * 20);
+
+			nominalPositions[line2Index * gridSize + line1Index] = normalPos;
+		}
+	}
+
+	iipr::CPerspCalibFinder calibFinder;
+	calibFinder.FindPerspCalib(nominalPositions.constData(), crossPositions.constData(), gridSize * gridSize, result);
 
 	return true;
 }
@@ -94,6 +309,16 @@ void CCheckboardCalibSupplierComp::LinesConsumer::ResetFeatures()
 bool CCheckboardCalibSupplierComp::LinesConsumer::AddFeature(const imeas::INumericValue* featurePtr, bool* /*isFullPtr*/)
 {
 	if (featurePtr != NULL){
+		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(featurePtr);
+		if (linePtr != NULL){
+			LineInfo info;
+
+			info.line = *linePtr;
+			info.weight = 1;
+
+			lines.push_back(info);
+		}
+
 		imath::CVarVector vector = featurePtr->GetValues();
 		if (vector.GetElementsCount() >= 4){
 			LineInfo info;
@@ -105,8 +330,12 @@ bool CCheckboardCalibSupplierComp::LinesConsumer::AddFeature(const imeas::INumer
 			else{
 				info.weight = 1;
 			}
+
+			lines.push_back(info);
 		}
 	}
+
+	delete featurePtr;
 
 	return true;
 }
