@@ -29,12 +29,13 @@ bool DoConvolution(
 			const iimg::IBitmap& inputImage,
 			const istd::CIndex2d& kernelSize,
 			QVector<KernelElement> fastAccessElements,
+			double offsetValue,
 			iimg::IBitmap& outputImage)
 {
 	Q_ASSERT(kernelSize.GetX() > 0);
 	Q_ASSERT(kernelSize.GetY() > 0);
 
-	static const WorkingType maxClipValue = (WorkingType(1) << (sizeof(PixelType) * 8 + ValueShift)) - 1;
+	static const WorkingType maxClipValue = (WorkingType(1) << (sizeof(PixelType) * 8)) - 1;
 
 	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
 	istd::CIndex2d outputImageSize = inputImageSize;//(inputImageSize.GetX() - kernelSize.GetX() + 1, inputImageSize.GetY() - kernelSize.GetY() + 1);
@@ -48,12 +49,21 @@ bool DoConvolution(
 
 	int kernelElementsCount = int(fastAccessElements.size());
 
+	WorkingType initialSums[ChannelsCount];
+	for (int channelIndex = 0; channelIndex < ChannelsCount; ++channelIndex){
+		initialSums[channelIndex] = WorkingType(offsetValue * maxClipValue * (1 << ValueShift));
+	}
+
 	for (int y = halfKernelHeight; y < outputImageSize.GetY() - halfKernelHeight; ++y){
 		const quint8* inputPtr = static_cast<const quint8*>(inputImage.GetLinePtr(y));
 		quint8* outputPtr = static_cast<quint8*>(outputImage.GetLinePtr(y));
 
 		for (int x = halfKernelWidth; x < outputImageSize.GetX() - halfKernelWidth; ++x){
-			WorkingType sums[ChannelsCount] = {0};
+			WorkingType sums[ChannelsCount];
+			for (int channelIndex = 0; channelIndex < ChannelsCount; ++channelIndex){
+				sums[channelIndex] = initialSums[channelIndex];
+			}
+
 			WorkingType alphaSum = 0;
 			for (int i = 0; i < kernelElementsCount; ++i){
 				const KernelElement& kernelElement = fastAccessElements[i];
@@ -73,7 +83,7 @@ bool DoConvolution(
 			}
 
 			for (int channelIndex = 0; channelIndex < ChannelsCount; ++channelIndex){
-				WorkingType outputValue = (sums[channelIndex] >> ValueShift);
+				WorkingType outputValue = sums[channelIndex] >> ValueShift;
 				if (UseClipMin){
 					if (outputValue < 0){
 						outputValue = 0;
@@ -147,9 +157,12 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	istd::CIndex2d index;
 	double kernelSum = 0.0;
-	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			kernelSum += paramsPtr->GetKernelElement(index);
+
+	if (*m_normalizeKernelAttrPtr){
+		for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
+			for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
+				kernelSum += qFabs(paramsPtr->GetKernelElement(index));
+			}
 		}
 	}
 
@@ -202,21 +215,23 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		}
 	}
 
+	double offsetValue = paramsPtr->GetOffsetValue();
+
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		return DoConvolution<quint8, qint32, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 1, 1, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, offsetValue, outputImage);
 
 	case iimg::IBitmap::PF_RGB:
-		return DoConvolution<quint8, qint32, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, -1, 22, true, true>(inputImage, kernelSize, fastAccessElements, offsetValue, outputImage);
 
 	case iimg::IBitmap::PF_RGBA:
-		return DoConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, kernelSize, fastAccessElements, offsetValue, outputImage);
 
 	case iimg::IBitmap::PF_GRAY16:
-		return DoConvolution<quint16, qint32, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint16, qint32, 1, 1, -1, 14, true, true>(inputImage, kernelSize, fastAccessElements, offsetValue, outputImage);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, outputImage);
+		return DoConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, kernelSize, fastAccessElements, offsetValue, outputImage);
 
 	default:
 		return false;

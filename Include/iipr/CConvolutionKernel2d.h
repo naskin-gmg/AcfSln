@@ -26,6 +26,7 @@ public:
 	typedef imath::CSampledFunction2d BaseClass;
 
 	CConvolutionKernel2d();
+	CConvolutionKernel2d(const CConvolutionKernel2d& kernel);
 	CConvolutionKernel2d(const imath::ISampledFunction2d& function2d);
 
 	// reimplemented (iipr::IConvolutionKernel2d)
@@ -33,10 +34,15 @@ public:
 	virtual void SetKernelSize(const istd::CIndex2d& kernelSize);
 	virtual double GetKernelElement(const istd::CIndex2d& index) const;
 	virtual bool SetKernelElement(const istd::CIndex2d& index, double value);
+	virtual double GetOffsetValue() const;
+	virtual void SetOffsetValue(double offset);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 	virtual quint32 GetMinimalVersion(int versionId) const;
+
+private:
+	double m_valueOffset;
 };
 
 

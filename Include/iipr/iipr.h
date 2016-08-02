@@ -20,7 +20,7 @@ namespace iipr
 {
 	enum VersionId
 	{
-		IacfVersionId = 10
+		AcfSlnVersionId = 1
 	};
 } // namespace iipr
 

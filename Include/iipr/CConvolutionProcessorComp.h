@@ -20,6 +20,7 @@ public:
 	typedef iipr::TImageParamProcessorCompBase<IConvolutionKernel2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CConvolutionProcessorComp);
+		I_ASSIGN(m_normalizeKernelAttrPtr, "NormalizeKernel", "If true then kernel will be automatically normalized", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -28,6 +29,9 @@ protected:
 				const IConvolutionKernel2d* paramsPtr,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
+
+private:
+	I_ATTR(bool, m_normalizeKernelAttrPtr);
 };
 
 

@@ -15,13 +15,30 @@ namespace iipr
 {
 
 
+// static constants
+static const iser::CArchiveTag sizeTag("KernelSize", "Size of convolution kernel", iser::CArchiveTag::TT_GROUP);
+static const iser::CArchiveTag widthTag("Width", "Width", iser::CArchiveTag::TT_LEAF, &sizeTag);
+static const iser::CArchiveTag heightTag("Height", "Height", iser::CArchiveTag::TT_LEAF, &sizeTag);
+static const iser::CArchiveTag valuesTag("Values", "values of convolution kernel", iser::CArchiveTag::TT_GROUP);
+static const iser::CArchiveTag offsetValueTag("Offset", "Offset value", iser::CArchiveTag::TT_LEAF);
+
+
 CConvolutionKernel2d::CConvolutionKernel2d()
+:	m_valueOffset(0)
+{
+}
+
+
+CConvolutionKernel2d::CConvolutionKernel2d(const CConvolutionKernel2d& kernel)
+:	BaseClass(kernel),
+	m_valueOffset(kernel.m_valueOffset)
 {
 }
 
 
 CConvolutionKernel2d::CConvolutionKernel2d(const imath::ISampledFunction2d& function2d)
-:	BaseClass(function2d)
+:	BaseClass(function2d),
+	m_valueOffset(0)
 {
 }
 
@@ -54,18 +71,34 @@ bool CConvolutionKernel2d::SetKernelElement(const istd::CIndex2d& index, double 
 }
 
 
+double CConvolutionKernel2d::GetOffsetValue() const
+{
+	return m_valueOffset;
+}
+
+
+void CConvolutionKernel2d::SetOffsetValue(double offset)
+{
+	if (offset != m_valueOffset){
+		istd::CChangeNotifier notifier(this);
+		Q_UNUSED(notifier);
+
+		m_valueOffset = offset;
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag sizeTag("KernelSize", "Size of convolution kernel", iser::CArchiveTag::TT_GROUP);
-	static iser::CArchiveTag widthTag("Width", "Width", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag heightTag("Height", "Height", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag valuesTag("Values", "values of convolution kernel", iser::CArchiveTag::TT_GROUP);
-
 	bool retVal = true;
 
-	if (archive.IsStoring()){
+	bool isStoring = archive.IsStoring();
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	Q_UNUSED(notifier);
+
+	if (isStoring){
 		istd::CIndex2d size = GetGridSize2d();
 
 		retVal = retVal && archive.BeginTag(sizeTag);
@@ -93,9 +126,6 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(valuesTag);
 	}
 	else{
-		istd::CChangeNotifier notifier(this);
-		Q_UNUSED(notifier);
-
 		istd::CIndex2d size(0, 0);
 
 		retVal = retVal && archive.BeginTag(sizeTag);
@@ -132,14 +162,26 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(valuesTag);
 	}
 
+	quint32 versionNumber = 0;
+	if (!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber) || (versionNumber >= 1621)){
+		retVal = retVal && archive.BeginTag(offsetValueTag);
+		retVal = retVal && archive.Process(m_valueOffset);
+		retVal = retVal && archive.EndTag(offsetValueTag);
+	}
+	else if (!isStoring){
+		m_valueOffset = 0;
+	}
+
 	return retVal;
 }
 
 
 quint32 CConvolutionKernel2d::GetMinimalVersion(int versionId) const
 {
-	if (versionId == IacfVersionId){
-		return 405;
+	if (versionId == AcfSlnVersionId){
+		if (m_valueOffset != 0){
+			return 1621;
+		}
 	}
 
 	return 0;

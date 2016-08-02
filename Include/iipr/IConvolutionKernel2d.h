@@ -37,6 +37,15 @@ public:
 		The method returns \c true, if the value could be set and \c false otherwise.
 	*/
 	virtual bool SetKernelElement(const istd::CIndex2d& index, double value) = 0;
+
+	/**
+		Get offset value will be added to convolution result.
+	*/
+	virtual double GetOffsetValue() const = 0;
+	/**
+		Set offset value will be added to convolution result.
+	*/
+	virtual void SetOffsetValue(double offset) = 0;
 };
 
 
