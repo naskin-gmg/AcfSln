@@ -196,10 +196,10 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 			if (m_tempConsumerCompPtr.IsValid()){
 				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
-					istd::IInformationProvider::IC_INFO,
-					FOUND_LINE,
-					QString("Auxiliary line %1").arg(lineIndex + 1),
-					"LineFinder");
+							istd::IInformationProvider::IC_INFO,
+							FOUND_LINE,
+							QString("Auxiliary line %1").arg(lineIndex + 1),
+							"LineFinder");
 				pointMessagePtr->SetPoint1(featurePtr->GetCenter());
 				pointMessagePtr->SetPoint2(imageCenter);
 
