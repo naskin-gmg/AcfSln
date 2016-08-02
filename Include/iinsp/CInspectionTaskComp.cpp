@@ -15,11 +15,12 @@ CInspectionTaskComp::CInspectionTaskComp()
 :	BaseClass2(this),
 	m_isStatusKnown(false),
 	m_resultCategory(IC_NONE),
-	m_messageContainer(this),
+	m_resultMessages(this, ISupplier::MCT_RESULTS),
+	m_tempContainer(this, ISupplier::MCT_TEMP),
 	m_supplierResultsChangeSet(CF_SUPPLIER_RESULTS)
 {
 	// Only processing time message allowed:
-	m_messageContainer.SetMaxMessageCount(1);
+	m_resultMessages.SetMaxMessageCount(1);
 }
 
 
@@ -216,7 +217,7 @@ void CInspectionTaskComp::EnsureWorkFinished()
 				QObject::tr("Processing took %1 ms").arg(timer.GetElapsed() * 1000),
 				*m_diagnosticNameAttrPtr));
 		
-		m_messageContainer.AddMessage(messagePtr);
+		m_resultMessages.AddMessage(messagePtr);
 	}
 
 	m_subtaskNotifiers.clear();
@@ -251,7 +252,10 @@ void CInspectionTaskComp::ClearWorkResults()
 const ilog::IMessageContainer* CInspectionTaskComp::GetWorkMessages(int containerType) const
 {
 	if (containerType == MCT_RESULTS){
-		return &m_messageContainer;
+		return &m_resultMessages;
+	}
+	else if (*m_supportTempMessagesAttrPtr && (containerType == MCT_TEMP)){
+		return &m_tempContainer;
 	}
 
 	return NULL;
@@ -430,8 +434,11 @@ void CInspectionTaskComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChang
 
 // public methods of embedded class MessageContainer
 
-CInspectionTaskComp::MessageContainer::MessageContainer(CInspectionTaskComp* parentPtr)
-:	m_parentPtr(parentPtr)
+CInspectionTaskComp::MessageContainer::MessageContainer(
+			CInspectionTaskComp* parentPtr,
+			iinsp::ISupplier::MessageContainerType containerType)
+:	m_parentPtr(parentPtr),
+	m_containerType(containerType)
 {
 }
 
@@ -440,9 +447,32 @@ CInspectionTaskComp::MessageContainer::MessageContainer(CInspectionTaskComp* par
 
 int CInspectionTaskComp::MessageContainer::GetWorstCategory() const
 {
-	m_parentPtr->EnsureStatusKnown();
+	if (m_containerType == MCT_RESULTS){
+		m_parentPtr->EnsureStatusKnown();
 
-	return m_parentPtr->m_resultCategory;
+		return m_parentPtr->m_resultCategory;
+	}
+	else{
+		int retVal = istd::IInformationProvider::IC_NONE;
+
+		int subtasksCount = m_parentPtr->m_subtasksCompPtr.GetCount();
+		for (int i = 0; i < subtasksCount; ++i){
+			const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
+			if (supplierPtr != NULL){
+				const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(m_containerType);
+
+				if (containerPtr != NULL){
+					int category = containerPtr->GetWorstCategory();
+
+					if (category > retVal){
+						retVal = category;
+					}
+				}
+			}
+		}
+
+		return retVal;
+	}
 }
 
 
@@ -454,7 +484,7 @@ ilog::IMessageContainer::Messages CInspectionTaskComp::MessageContainer::GetMess
 	for (int i = 0; i < subtasksCount; ++i){
 		const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
-			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(MCT_RESULTS);
+			const ilog::IMessageContainer* containerPtr = supplierPtr->GetWorkMessages(m_containerType);
 
 			if (containerPtr != NULL){
 				retVal += containerPtr->GetMessages();
@@ -486,7 +516,7 @@ bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
 	for (int i = 0; i < subtasksCount; ++i){
 		iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
 		if (supplierPtr != NULL){
-			ilog::IMessageContainer* containerPtr = const_cast<ilog::IMessageContainer*>(supplierPtr->GetWorkMessages(MCT_RESULTS));
+			ilog::IMessageContainer* containerPtr = const_cast<ilog::IMessageContainer*>(supplierPtr->GetWorkMessages(m_containerType));
 
 			if (containerPtr != NULL){
 				retVal = containerPtr->Serialize(archive) && retVal;
