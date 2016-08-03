@@ -332,10 +332,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CCheckboardCalibSupplierComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CComposedInformationProviderComp.cpp"
 				>
 			</File>
@@ -360,10 +356,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CCheckboardCalibSupplierComp.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CComposedInformationProviderComp.h"
 				>
