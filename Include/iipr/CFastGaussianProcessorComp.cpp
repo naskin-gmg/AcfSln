@@ -174,6 +174,72 @@ bool DoGrayConvolution(
 }
 
 
+template <	typename PixelType,
+			typename WorkingType>
+bool DoFloatConvolution(
+			const iimg::IBitmap& inputBitmap,
+			const i2d::IObject2d* aoiPtr,
+			iimg::IBitmap& outputBitmap)
+{
+	istd::CIndex2d imageSize = inputBitmap.GetImageSize();
+	if (imageSize.IsSizeEmpty()){
+		return false;
+	}
+	Q_ASSERT(imageSize == outputBitmap.GetImageSize());
+
+	i2d::CRect regionRect(imageSize);
+	iimg::CScanlineMask bitmapRegion;
+	if (aoiPtr != NULL){
+		i2d::CRect clipArea(imageSize);
+		if (!bitmapRegion.CreateFromGeometry(*aoiPtr, &clipArea)){
+			return false;
+		}
+		
+		regionRect = bitmapRegion.GetBoundingBox();
+	}
+
+	int regionLeft = qMax(regionRect.GetLeft(), 1);
+	int regionRight = qMin(regionRect.GetRight(), imageSize.GetX() - 1);
+	int regionTop = qMax(regionRect.GetTop(), 1);
+	int regionBottom = qMin(regionRect.GetBottom(), imageSize.GetY() - 1);
+
+	if ((regionRight <= regionLeft) || (regionBottom <= regionTop)){
+		outputBitmap.ResetImage();
+
+		return true;
+	}
+
+	const PixelType* inputPrevLinePtr = (const PixelType*)(inputBitmap.GetLinePtr(regionTop - 1));
+	const PixelType* inputLinePtr = (const PixelType*)(inputBitmap.GetLinePtr(regionTop));
+
+#pragma omp parallel for
+
+	for (int y = regionTop; y < regionBottom; ++y){
+		const PixelType* inputNextLinePtr = (const PixelType*)(inputBitmap.GetLinePtr(y + 1));
+
+		PixelType* outputPtr = ((PixelType*)outputBitmap.GetLinePtr(y));
+
+		for (int x = regionLeft; x < regionRight; ++x){
+			WorkingType valueSum = inputPrevLinePtr[x - 1];
+			valueSum += inputPrevLinePtr[x] * 2;
+			valueSum += inputPrevLinePtr[x + 1];
+
+			valueSum += inputLinePtr[x - 1] * 2;
+			valueSum += inputLinePtr[x] * 4;
+			valueSum += inputLinePtr[x + 1] * 2;
+
+			valueSum += inputNextLinePtr[x - 1];
+			valueSum += inputNextLinePtr[x] * 2;
+			valueSum += inputNextLinePtr[x + 1];
+
+			outputPtr[x] = PixelType(valueSum / 16);
+		}
+	}
+
+	return true;
+}
+
+
 // reimplemented (iipr::CImageProcessorCompBase)
 
 bool CFastGaussianProcessorComp::ProcessImageRegion(
@@ -252,6 +318,12 @@ bool CFastGaussianProcessorComp::ProcessImageRegion(
 
 		case iimg::IBitmap::PF_GRAY32:
 			return DoConvolution<quint32, qint64, 1, 1, -1, 4>(inputBitmap, fastAccessElements, *outputBitmapPtr);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoFloatConvolution<float, double>(inputBitmap, aoiPtr, *outputBitmapPtr);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoFloatConvolution<double, double>(inputBitmap, aoiPtr, *outputBitmapPtr);
 
 		default:
 			SendErrorMessage(0, "Unsupported image format");

@@ -265,7 +265,7 @@ void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 		bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
 	}
 
-	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr)){
+	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT)){
 		m_bitmap.ResetImage();
 	}
 
