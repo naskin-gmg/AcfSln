@@ -159,6 +159,23 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 
 	QMap<double, i2d::CLine2d> sortedVanLines[2];
 
+	i2d::CVector2d axisXTemplate(1, 0);
+	i2d::CVector2d axisYTemplate(0, 1);
+
+	iprm::TParamsPtr<i2d::CLine2d> axisXParamsPtr(paramsSetPtr, m_axisXParamIdAttrPtr, m_defaultAxisXParamCompPtr, false);
+	if (axisXParamsPtr.IsValid()){
+		axisXTemplate = axisXParamsPtr->GetDiffVector();
+		axisYTemplate = axisXTemplate.GetOrthogonal();
+	}
+
+	iprm::TParamsPtr<i2d::CLine2d> axisYParamsPtr(paramsSetPtr, m_axisYParamIdAttrPtr, m_defaultAxisYParamCompPtr, false);
+	if (axisXParamsPtr.IsValid()){
+		axisYTemplate = axisYParamsPtr->GetDiffVector();
+	}
+
+	double axisXCoeffs[2];
+	double axisYCoeffs[2];
+
 	int vanishingPointIndex = 0;
 	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanPoints.constBegin();
 				foundVanIter != foundVanPoints.constEnd();
@@ -216,21 +233,26 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 		i2d::CVector2d vanVector;
 		vanVector.Init(exactVanPos.GetX() * I_2PI / vanSpaceSize.GetX(), vanDistScale / (exactVanPos.GetY() - vanDistOffset));
 
-		i2d::CVector2d vanPoint = imageCenter + vanVector;
+		axisXCoeffs[vanishingPointIndex] = axisXTemplate.GetDotProduct(vanVector);
+		axisYCoeffs[vanishingPointIndex] = axisYTemplate.GetDotProduct(vanVector);
 
+		// sort lines pointing at single vanishing point using its angle
 		for (		QSet<i2d::CLine2d>::ConstIterator iter = vanLines.constBegin();
 					iter != vanLines.constEnd();
 					++iter){
-			const i2d::CLine2d& line = *iter;
+			i2d::CLine2d line = *iter;
 
 			i2d::CVector2d diff = line.GetDiffVector();
-			double projection1Value = diff.GetCrossProductZ(line.GetPoint1()) / diff.GetLength();
+			double projection1Value = diff.GetCrossProductZ(line.GetCenter()) / diff.GetLength();
 			if (diff.GetDotProduct(vanVector) < 0){
 				projection1Value = -projection1Value;
+				line = line.GetSwapped();
 			}
 
 			sortedVanLines[vanishingPointIndex][projection1Value] = line;
 		}
+
+		i2d::CVector2d vanPoint = imageCenter + vanVector;
 
 		int lineIndex = 0;
 		for (		QMap<double, i2d::CLine2d>::ConstIterator iter = sortedVanLines[vanishingPointIndex].constBegin();
@@ -241,7 +263,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
 						istd::IInformationProvider::IC_INFO,
 						0,
-						QString("Vanishing point %1, line %1").arg(vanishingPointIndex + 1).arg(lineIndex + 1),
+						QString("Vanishing point %1, line %2").arg(vanishingPointIndex + 1).arg(lineIndex + 1),
 						"CheckboardCalibrator");
 			pointMessagePtr->SetPoint1(vanPoint);
 			pointMessagePtr->SetPoint2(line.GetCenter());
@@ -269,24 +291,41 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 				"",
 				"CheckboardCalibrator");
 
-	int line1Index = 0;
-	for (		QMap<double, i2d::CLine2d>::ConstIterator iter1 = sortedVanLines[0].constBegin();
-				iter1 != sortedVanLines[0].constEnd();
-				++iter1, ++line1Index){
-		const i2d::CLine2d& line1 = iter1.value();
+	int axisXVanIndex = 0;
+	int axisYVanIndex = 1;
+	if (qFabs(axisXCoeffs[1]) * qFabs(axisYCoeffs[0]) > qFabs(axisXCoeffs[0]) * qFabs(axisYCoeffs[1])){
+		axisXVanIndex = 1;
+		axisYVanIndex = 0;
+	}
 
-		int line2Index = 0;
-		for (		QMap<double, i2d::CLine2d>::ConstIterator iter2 = sortedVanLines[1].constBegin();
-					iter2 != sortedVanLines[1].constEnd();
-					++iter2, ++line2Index){
-			const i2d::CLine2d& line2 = iter2.value();
+	double axisXSign = 1;
+	if (axisXTemplate.GetDotProduct(sortedVanLines[axisXVanIndex].constBegin().value().GetDiffVector()) < 0){
+		axisXSign = -1;
+	}
+
+	double axisYSign = 1;
+	if (axisYTemplate.GetDotProduct(sortedVanLines[axisYVanIndex].constBegin().value().GetDiffVector()) < 0){
+		axisYSign = -1;
+	}
+
+	int axisYLineIndex = 0;
+	for (		QMap<double, i2d::CLine2d>::ConstIterator iter1 = sortedVanLines[axisYVanIndex].constBegin();
+				iter1 != sortedVanLines[axisYVanIndex].constEnd();
+				++iter1, ++axisYLineIndex){
+		const i2d::CLine2d& axisYLine = iter1.value();
+
+		int axisXLineIndex = 0;
+		for (		QMap<double, i2d::CLine2d>::ConstIterator iter2 = sortedVanLines[axisXVanIndex].constBegin();
+					iter2 != sortedVanLines[axisXVanIndex].constEnd();
+					++iter2, ++axisXLineIndex){
+			const i2d::CLine2d& axisXLine = iter2.value();
 
 			i2d::CVector2d crossPoint;
-			line1.GetExtendedIntersection(line2, crossPoint);
-			crossPositions[line2Index * linesPerVanPoint + line1Index] = crossPoint;
+			axisYLine.GetExtendedIntersection(axisXLine, crossPoint);
+			crossPositions[axisXLineIndex * linesPerVanPoint + axisYLineIndex] = crossPoint;
 
-			i2d::CVector2d normalPos((line1Index - (linesPerVanPoint - 1) * 0.5) * cellSize, (line2Index - (linesPerVanPoint - 1) * 0.5) * cellSize);
-			nominalPositions[line2Index * linesPerVanPoint + line1Index] = normalPos;
+			i2d::CVector2d normalPos(axisXSign * (axisYLineIndex - (linesPerVanPoint - 1) * 0.5) * cellSize, axisYSign * (axisXLineIndex - (linesPerVanPoint - 1) * 0.5) * cellSize);
+			nominalPositions[axisXLineIndex * linesPerVanPoint + axisYLineIndex] = normalPos;
 
 			crossPointsMessagePtr->InsertNode(crossPoint);
 		}

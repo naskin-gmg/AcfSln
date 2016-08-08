@@ -42,6 +42,10 @@ public:
 		I_ASSIGN(m_lineFinderCompPtr, "LineFinder", "Finder of lines on image", true, "LineFinder");
 		I_ASSIGN(m_checkboardParamsId, "CheckboardParamsId", "ID of checkboard parameters in parameter set (type imeas::INumericValue):\n1\t1. grid size\n\t2. cell size in logical units", false, "CheckboardParams");
 		I_ASSIGN(m_defaultCheckboardParamsCompPtr, "DefaultCheckboardParams", "Default parameter controlling size of single checkboard cell when it is not defined in parameter set:\n1\t1. grid size\n\t2. cell size in logical units", false, "DefaultCheckboardParams");
+		I_ASSIGN(m_axisXParamIdAttrPtr, "AxisXParamId", "ID of axis X template in parameter set (type i2d::CLine2d), it is used to coarse knowing direction of X axis", false, "AxisX");
+		I_ASSIGN(m_defaultAxisXParamCompPtr, "DefaultAxisXParam", "Default parameter controlling axis X template, it is used to coarse knowing direction of X axis", false, "DefaultAxisXParam");
+		I_ASSIGN(m_axisYParamIdAttrPtr, "AxisYParamId", "ID of axis Y template in parameter set (type i2d::CLine2d), it is used to coarse knowing direction of Y axis", false, "AxisY");
+		I_ASSIGN(m_defaultAxisYParamCompPtr, "DefaultAxisYParam", "Default parameter controlling axis Y template, it is used to coarse knowing direction of Y axis", false, "DefaultAxisYParam");
 		I_ASSIGN(m_distanceUnitInfoCompPtr, "DistanceUnitInfo", "Information about used distance units", false, "DistanceUnitInfo");
 		I_ASSIGN(m_defaultGridSizeAttrPtr, "DefaultGridSize", "Default size of grid if no checkboard parameters specified", true, 8);
 		I_ASSIGN(m_defaultCellSizeAttrPtr, "DefaultCellSize", "Default size of single cell (in logical units) if no checkboard parameters specified", true, 10);
@@ -102,6 +106,10 @@ private:
 	I_REF(iipr::IImageToFeatureProcessor, m_lineFinderCompPtr);
 	I_ATTR(QByteArray, m_checkboardParamsId);
 	I_REF(imeas::INumericValue, m_defaultCheckboardParamsCompPtr);
+	I_ATTR(QByteArray, m_axisXParamIdAttrPtr);
+	I_REF(i2d::CLine2d, m_defaultAxisXParamCompPtr);
+	I_ATTR(QByteArray, m_axisYParamIdAttrPtr);
+	I_REF(i2d::CLine2d, m_defaultAxisYParamCompPtr);
 	I_REF(imath::IUnitInfo, m_distanceUnitInfoCompPtr);
 	I_ATTR(int, m_defaultGridSizeAttrPtr);
 	I_ATTR(double, m_defaultCellSizeAttrPtr);

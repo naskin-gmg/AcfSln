@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4239" Description="ACF"/>
-            <Version Id="1" Number="1616" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4243" Description="ACF"/>
+            <Version Id="1" Number="1620" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -143,6 +143,42 @@
         <EmbeddedRegistry Id="CalibratorSupplier">
             <Data Description="" Keywords="">
                 <ElementsList>
+                    <Element Id="AxisXTemplate" PackageId="BasePck" ComponentId="Line">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="X1" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X2" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="200"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y1" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y2" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="AxisYTemplate" PackageId="BasePck" ComponentId="Line">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="X1" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X2" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y1" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="100"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Y2" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="200"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
                     <Element Id="CalibAoi" PackageId="BasePck" ComponentId="Rectangle">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -179,6 +215,12 @@
                     <Element Id="CheckboardCalibSupplier" PackageId="IprPck" ComponentId="CheckboardCalibSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
+                                <AttributeInfo Id="AxisXParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="AxisXTemplate"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="AxisYParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="AxisYTemplate"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="BitmapSupplier">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
@@ -248,6 +290,8 @@
                                             <Value>CalibAoi</Value>
                                             <Value>SearchAoi</Value>
                                             <Value>CheckboardParams</Value>
+                                            <Value>AxisXTemplate</Value>
+                                            <Value>AxisYTemplate</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -258,6 +302,8 @@
                                             <Value>CalibrationAoi</Value>
                                             <Value>SearchAoi</Value>
                                             <Value>CheckboardParams</Value>
+                                            <Value>AxisXTemplate</Value>
+                                            <Value>AxisYTemplate</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -299,6 +345,24 @@
         <EmbeddedRegistry Id="CalibratorSupplierEditor">
             <Data Description="" Keywords="">
                 <ElementsList>
+                    <Element Id="AxisXTemplateEditor" PackageId="QtViewPck" ComponentId="Line2dParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DisplayArrow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="AxisYTemplateEditor" PackageId="QtViewPck" ComponentId="Line2dParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DisplayArrow" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
                     <Element Id="CalibAoiEditor" PackageId="QtViewPck" ComponentId="RectangleParamsGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
@@ -334,6 +398,8 @@
                                             <Value>CalibAoiEditor</Value>
                                             <Value>SearchAoiEditor</Value>
                                             <Value>CheckboardParamsEditor</Value>
+                                            <Value>AxisXTemplateEditor</Value>
+                                            <Value>AxisYTemplateEditor</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -344,6 +410,8 @@
                                             <Value>CalibrationAoi</Value>
                                             <Value>SearchAoi</Value>
                                             <Value>CheckboardParams</Value>
+                                            <Value>AxisXTemplate</Value>
+                                            <Value>AxisYTemplate</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -354,6 +422,8 @@
                                             <Value>Calibration Area</Value>
                                             <Value>Search AOI</Value>
                                             <Value>Checkboard Parameters</Value>
+                                            <Value>Axis X</Value>
+                                            <Value>Axis Y</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
