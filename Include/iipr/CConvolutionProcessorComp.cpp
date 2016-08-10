@@ -9,6 +9,7 @@
 
 // ACF-Solutions includes
 #include "iipr/CPixelManip.h"
+#include "iipr/CConvolutionKernel2d.h"
 
 
 namespace iipr
@@ -37,34 +38,20 @@ template <	typename PixelType,
 bool DoComplexConvolution(
 			const iimg::IBitmap& inputImage,
 			const IConvolutionKernel2d& kernel,
-			bool normalizeKernel,
 			iimg::IBitmap& outputImage)
 {
 	istd::CIndex2d kernelSize = kernel.GetKernelSize();
-	if (kernelSize.IsSizeEmpty()){
-		return false;
-	}
+	Q_ASSERT(!kernelSize.IsSizeEmpty());
 
 	int linesDifference = inputImage.GetLinesDifference();
 	int pixelsDifference = inputImage.GetPixelsDifference();
-
-	istd::CIndex2d index;
-	double kernelSum = 0.0;
-
-	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			kernelSum += qFabs(kernel.GetKernelElement(index));
-		}
-	}
-
-	if (!normalizeKernel || (kernelSum <= I_EPSILON)){
-		kernelSum = 1.0;
-	}
 
 	QVector<KernelElement> fastAccessElements;
 
 	int halfKernelWidth = kernelSize.GetX() / 2;
 	int halfKernelHeight = kernelSize.GetY() / 2;
+
+	istd::CIndex2d index;
 
 	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
 		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
@@ -73,7 +60,7 @@ bool DoComplexConvolution(
 			KernelElement element;
 			element.offset = (index[0] - halfKernelWidth) * pixelsDifference + (index[1] - halfKernelHeight) * linesDifference;
 
-			element.factor = int((1 << ValueShift) * value / kernelSum);
+			element.factor = int((1 << ValueShift) * value);
 
 			element.alphaFactor = qAbs(element.factor);
 
@@ -199,42 +186,27 @@ template <	typename InputPixelType,
 bool DoFastConvolution(
 			const iimg::IBitmap& inputImage,
 			const IConvolutionKernel2d& kernel,
-			bool normalizeKernel,
 			iimg::IBitmap& outputImage)
 {
 	istd::CIndex2d kernelSize = kernel.GetKernelSize();
-	if (kernelSize.IsSizeEmpty()){
-		return false;
-	}
+	Q_ASSERT(!kernelSize.IsSizeEmpty());
 
 	int linesDifference = inputImage.GetLinesDifference();
 	int pixelsDifference = inputImage.GetPixelsDifference();
-
-	istd::CIndex2d index;
-	double kernelSum = 0.0;
-
-	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			kernelSum += qFabs(kernel.GetKernelElement(index));
-		}
-	}
-
-	if (!normalizeKernel || (kernelSum <= I_EPSILON)){
-		kernelSum = 1.0;
-	}
 
 	QVector< QPair<int, WorkingType> > fastAccessElements;
 
 	int halfKernelWidth = kernelSize.GetX() / 2;
 	int halfKernelHeight = kernelSize.GetY() / 2;
 
+	istd::CIndex2d index;
 	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
 		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
 			double value = kernel.GetKernelElement(index);
 
 			QPair<int, WorkingType> element;
 			element.first = (index[0] - halfKernelWidth) * pixelsDifference + (index[1] - halfKernelHeight) * linesDifference;
-			element.second = value / kernelSum;
+			element.second = value;
 
 			if (element.second != 0){
 				fastAccessElements.push_back(element);
@@ -327,27 +299,77 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		}
 	}
 
+	istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
+	if (kernelSize.IsSizeEmpty()){
+		return false;
+	}
+
+	double kernelPosSum = 0.0;
+	double kernelSum = 0.0;
+
+	istd::CIndex2d index;
+	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
+		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
+			double kernelElement = procParamPtr->GetKernelElement(index);
+
+			kernelSum += kernelElement;
+			kernelPosSum += qFabs(kernelElement);
+		}
+	}
+
+	iipr::CConvolutionKernel2d normalizedKernel;
+	if (*m_normalizeKernelAttrPtr && (kernelPosSum > I_EPSILON)){
+		normalizedKernel.SetKernelSize(kernelSize);
+
+		for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
+			for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
+				double kernelElement = procParamPtr->GetKernelElement(index);
+
+				normalizedKernel.SetKernelElement(index, kernelElement / kernelPosSum);
+			}
+		}
+
+		procParamPtr = &normalizedKernel;
+	}
+
+	bool hasNegativeKernel = kernelSum != kernelPosSum;
+
 	switch (inputPixelFormat){
 	case iimg::IBitmap::PF_GRAY:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY:
-			return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<16> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			if (hasNegativeKernel){
+				if (kernelPosSum > 1){
+					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, true, false> >(inputImage, *procParamPtr, outputImage);
+				}
+				else{
+					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 23, true, false> >(inputImage, *procParamPtr, outputImage);
+				}
+			}
+			else{
+				if (kernelPosSum > 1){
+					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, false, true> >(inputImage, *procParamPtr, outputImage);
+				}
+				else{
+					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<quint32, 24, false, false> >(inputImage, *procParamPtr, outputImage);
+				}
+			}
 
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
-			return DoFastConvolution<quint8, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<16> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint8, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 16, true, true> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<quint8, quint16, iipr::CPixelManip::GrayCropAccum32<8> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint8, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, false> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_GRAY32:
-			return DoFastConvolution<quint8, quint32, iipr::CPixelManip::GrayCropAccum32<8> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint8, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint8, float, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint8, float, double>(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint8, double, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint8, double, double>(inputImage, *procParamPtr, outputImage);
 
 		default:
 			break;
@@ -357,14 +379,14 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_RGB:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, quint8, iipr::CPixelManip::RgbCropAccum32<22> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<iipr::CPixelManip::Rgba, quint8, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<22> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, quint16, iipr::CPixelManip::RgbCropAccum32<14> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<iipr::CPixelManip::Rgba, quint16, iipr::CPixelManip::RgbCropAccum32<qint32, 14, true, false> >(inputImage, *procParamPtr, outputImage);
 
 		default:
 			break;
@@ -373,23 +395,26 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	case iimg::IBitmap::PF_RGBA:
 		if (outputPixelFormat == iimg::IBitmap::PF_RGBA){
-			return DoComplexConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoComplexConvolution<quint8, qint32, 4, 4, 3, 22, true, true>(inputImage, *procParamPtr, outputImage);
 		}
 		break;
 
 	case iimg::IBitmap::PF_GRAY16:
 		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY:
+			return DoFastConvolution<quint16, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(inputImage, *procParamPtr, outputImage);
+
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<quint16, quint16, iipr::CPixelManip::GrayCropAccum32<8> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint16, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_GRAY32:
-			return DoFastConvolution<quint16, quint32, iipr::CPixelManip::GrayCropAccum32<8> >(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint16, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint16, float, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint16, float, double>(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint16, double, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint16, double, double>(inputImage, *procParamPtr, outputImage);
 
 		default:
 			break;
@@ -399,13 +424,13 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_GRAY32:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY32:
-			return DoComplexConvolution<quint32, qint64, 1, 1, -1, 30, true, true>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint32, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, true>>(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint32, float, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint32, float, double>(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint32, double, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<quint32, double, double>(inputImage, *procParamPtr, outputImage);
 
 		default:
 			break;
@@ -415,10 +440,10 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_FLOAT32:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<float, float, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<float, float, double>(inputImage, *procParamPtr, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<float, double, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+			return DoFastConvolution<float, double, double>(inputImage, *procParamPtr, outputImage);
 
 		default:
 			break;
@@ -426,7 +451,7 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		break;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoFastConvolution<double, double, double>(inputImage, *procParamPtr, *m_normalizeKernelAttrPtr, outputImage);
+		return DoFastConvolution<double, double, double>(inputImage, *procParamPtr, outputImage);
 
 	default:
 		SendErrorMessage(0, QObject::tr("Input image format '%1' not supported").arg(m_formatList.GetOptionName(inputPixelFormat)));

@@ -37,7 +37,7 @@ public:
 		quint8 m_a;
 	};
 
-	template <int Shift>
+	template <typename IntType, int Shift, bool DoCropMin = true, bool DoCropMax = true>
 	class GrayCropAccum32
 	{
 	public:
@@ -51,12 +51,32 @@ public:
 		}
 
 		GrayCropAccum32(int value)
-		:	m_gray(qint32(value) << Shift)
+		:	m_gray(IntType(value) << Shift)
+		{
+		}
+
+		GrayCropAccum32(quint8 value)
+		:	m_gray(IntType(value) << Shift)
+		{
+		}
+
+		GrayCropAccum32(quint16 value)
+		:	m_gray(IntType(value) << Shift)
+		{
+		}
+
+		GrayCropAccum32(quint32 value)
+		:	m_gray(IntType(value) << Shift)
+		{
+		}
+
+		GrayCropAccum32(quint64 value)
+		:	m_gray(IntType(value) << Shift)
 		{
 		}
 
 		GrayCropAccum32(double value)
-		:	m_gray(qint32(value * (1 << Shift)))
+		:	m_gray(IntType(value * (1 << Shift)))
 		{
 		}
 
@@ -67,12 +87,12 @@ public:
 
 		bool operator==(int value)
 		{
-			return m_gray == (qint32(value) << Shift);
+			return m_gray == (IntType(value) << Shift);
 		}
 
 		bool operator==(double value)
 		{
-			return m_gray == qint32(value * (1 << Shift));
+			return m_gray == IntType(value * (1 << Shift));
 		}
 
 		bool operator!=(const GrayCropAccum32& value)
@@ -82,12 +102,12 @@ public:
 
 		bool operator!=(int value)
 		{
-			return m_gray != (qint32(value) << Shift);
+			return m_gray != (IntType(value) << Shift);
 		}
 
 		bool operator!=(double value)
 		{
-			return m_gray != qint32(value * (1 << Shift));
+			return m_gray != IntType(value * (1 << Shift));
 		}
 
 		GrayCropAccum32& operator=(const GrayCropAccum32& value)
@@ -96,21 +116,28 @@ public:
 
 			return *this;
 		}
-
-		GrayCropAccum32& operator=(int value)
+/*
+		GrayCropAccum32& operator=(unsigned long long value)
 		{
-			m_gray = qint32(value) << Shift;
+			m_gray = IntType(value) << Shift;
+
+			return *this;
+		}
+
+		GrayCropAccum32& operator=(unsigned int value)
+		{
+			m_gray = IntType(value) << Shift;
 
 			return *this;
 		}
 
 		GrayCropAccum32& operator=(double value)
 		{
-			m_gray = qint32(value * (1 << Shift));
+			m_gray = IntType(value * (1 << Shift));
 
 			return *this;
 		}
-
+*/
 		GrayCropAccum32& operator+=(const GrayCropAccum32& value)
 		{
 			m_gray += value.m_gray;
@@ -118,16 +145,16 @@ public:
 			return *this;
 		}
 
-		GrayCropAccum32& operator+=(qint32 value)
+		GrayCropAccum32& operator+=(unsigned int value)
 		{
-			m_gray += qint32(value) << Shift;
+			m_gray += IntType(value) << Shift;
 
 			return *this;
 		}
 
 		GrayCropAccum32& operator+=(double value)
 		{
-			m_gray += qint32(value * (1 << Shift));
+			m_gray += IntType(value * (1 << Shift));
 
 			return *this;
 		}
@@ -139,42 +166,42 @@ public:
 			return *this;
 		}
 
-		GrayCropAccum32& operator-=(qint32 value)
+		GrayCropAccum32& operator-=(unsigned int value)
 		{
-			m_gray -= qint32(value) << Shift;
+			m_gray -= IntType(value) << Shift;
 
 			return *this;
 		}
 
 		GrayCropAccum32& operator-=(double value)
 		{
-			m_gray -= qint32(value * (1 << Shift));
+			m_gray -= IntType(value * (1 << Shift));
 
 			return *this;
 		}
 
 		GrayCropAccum32& operator*=(const GrayCropAccum32& value)
 		{
-			m_gray = qint32((quint64(m_gray) * quint64(value.m_gray)) >> Shift);
+			m_gray = IntType((quint64(m_gray) * quint64(value.m_gray)) >> Shift);
 
 			return *this;
 		}
 
-		GrayCropAccum32& operator*=(qint32 value)
+		GrayCropAccum32& operator*=(unsigned int value)
 		{
-			m_gray *= qint32(value);
+			m_gray *= IntType(value);
 
 			return *this;
 		}
 
 		GrayCropAccum32& operator*=(double value)
 		{
-			m_gray = qint32(m_gray * value);
+			m_gray = IntType(m_gray * value);
 
 			return *this;
 		}
 
-		GrayCropAccum32 operator/(qint32 value)
+		GrayCropAccum32 operator/(int value)
 		{
 			GrayCropAccum32 retVal;
 
@@ -187,17 +214,18 @@ public:
 		{
 			GrayCropAccum32 retVal;
 
-			retVal.m_gray = qint32(m_gray / value);
+			retVal.m_gray = IntType(m_gray / value);
 
 			return retVal;
 		}
 
 		operator quint8()
 		{
-			if (m_gray < 0){
+
+			if (DoCropMin && (m_gray < 0)){
 				return 0;
 			}
-			if (m_gray > (0xff << Shift)){
+			if (DoCropMax && (m_gray > (0xff << Shift))){
 				return 0xff;
 			}
 
@@ -206,10 +234,10 @@ public:
 
 		operator quint16()
 		{
-			if (m_gray < 0){
+			if (DoCropMin && (m_gray < 0)){
 				return 0;
 			}
-			if (m_gray > (0xffff << Shift)){
+			if (DoCropMin && (m_gray > (0xffff << Shift))){
 				return 0xffff;
 			}
 
@@ -218,7 +246,7 @@ public:
 
 		operator quint32()
 		{
-			if (m_gray < 0){
+			if (DoCropMin && (m_gray < 0)){
 				return 0;
 			}
 
@@ -227,23 +255,26 @@ public:
 
 		operator Rgba()
 		{
-			if (m_gray < 0){
-				return 0;
-			}
-			if (m_gray > (0xffff << Shift)){
-				return 0xffff;
-			}
+			quint8 grayValue;
 
-			quint8 grayValue = quint16(m_gray >> Shift);
+			if (DoCropMin && (m_gray < 0)){
+				grayValue = 0;
+			}
+			else if (DoCropMin && (m_gray > (0xff << Shift))){
+				grayValue = 0xff;
+			}
+			else{
+				grayValue = quint8(m_gray >> Shift);
+			}
 
 			return Rgba(grayValue, grayValue, grayValue);
 		}
 
 	private:
-		qint32 m_gray;
+		IntType m_gray;
 	};
 
-	template <int Shift>
+	template <typename IntType, int Shift, bool DoCropMin = true, bool DoCropMax = true>
 	class RgbCropAccum32
 	{
 	public:
@@ -257,17 +288,37 @@ public:
 		}
 
 		RgbCropAccum32(const Rgba& value)
-		:	m_r(qint32(value.m_r) << Shift), m_g(qint32(value.m_g) << Shift), m_b(qint32(value.m_b) << Shift)
+		:	m_r(IntType(value.m_r) << Shift), m_g(IntType(value.m_g) << Shift), m_b(IntType(value.m_b) << Shift)
 		{
 		}
 
 		RgbCropAccum32(int value)
-		:	m_r(qint32(value) << Shift), m_g(qint32(value) << Shift), m_b(qint32(value) << Shift)
+		:	m_r(IntType(value) << Shift), m_g(IntType(value) << Shift), m_b(IntType(value) << Shift)
+		{
+		}
+
+		RgbCropAccum32(quint8 value)
+		:	m_r(IntType(value) << Shift), m_g(IntType(value) << Shift), m_b(IntType(value) << Shift)
+		{
+		}
+
+		RgbCropAccum32(quint16 value)
+		:	m_r(IntType(value) << Shift), m_g(IntType(value) << Shift), m_b(IntType(value) << Shift)
+		{
+		}
+
+		RgbCropAccum32(quint32 value)
+		:	m_r(IntType(value) << Shift), m_g(IntType(value) << Shift), m_b(IntType(value) << Shift)
+		{
+		}
+
+		RgbCropAccum32(quint64 value)
+		:	m_r(IntType(value) << Shift), m_g(IntType(value) << Shift), m_b(IntType(value) << Shift)
 		{
 		}
 
 		RgbCropAccum32(double value)
-		:	m_r(qint32(value * (1 << Shift))), m_g(qint32(value * (1 << Shift))), m_b(qint32(value * (1 << Shift)))
+		:	m_r(IntType(value * (1 << Shift))), m_g(IntType(value * (1 << Shift))), m_b(IntType(value * (1 << Shift)))
 		{
 		}
 
@@ -278,14 +329,14 @@ public:
 
 		bool operator==(int value)
 		{
-			qint32 gray = (qint32(value) << Shift);
+			IntType gray = (IntType(value) << Shift);
 
 			return (m_r == gray) && (m_g == gray) && (m_b == gray);
 		}
 
 		bool operator==(double value)
 		{
-			qint32 gray = qint32(value * (1 << Shift));
+			IntType gray = IntType(value * (1 << Shift));
 
 			return (m_r == gray) && (m_g == gray) && (m_b == gray);
 		}
@@ -297,14 +348,14 @@ public:
 
 		bool operator!=(int value)
 		{
-			qint32 gray = (qint32(value) << Shift);
+			IntType gray = (IntType(value) << Shift);
 
 			return (m_r != gray) || (m_g != gray) || (m_b != gray);
 		}
 
 		bool operator!=(double value)
 		{
-			qint32 gray = qint32(value * (1 << Shift));
+			IntType gray = IntType(value * (1 << Shift));
 
 			return (m_r != gray) || (m_g != gray) || (m_b != gray);
 		}
@@ -317,19 +368,28 @@ public:
 
 			return *this;
 		}
-
+/*
 		RgbCropAccum32& operator=(const Rgba& value)
 		{
-			m_r = qint32(value.m_r) << Shift;
-			m_g = qint32(value.m_g) << Shift;
-			m_b = qint32(value.m_b) << Shift;
+			m_r = IntType(value.m_r) << Shift;
+			m_g = IntType(value.m_g) << Shift;
+			m_b = IntType(value.m_b) << Shift;
 
 			return *this;
 		}
 
-		RgbCropAccum32& operator=(int value)
+		RgbCropAccum32& operator=(unsigned int value)
 		{
-			m_r = qint32(value) << Shift;
+			m_r = IntType(value) << Shift;
+			m_g = m_r;
+			m_b = m_r;
+
+			return *this;
+		}
+
+		RgbCropAccum32& operator=(unsigned long long value)
+		{
+			m_r = IntType(value) << Shift;
 			m_g = m_r;
 			m_b = m_r;
 
@@ -338,13 +398,13 @@ public:
 
 		RgbCropAccum32& operator=(double value)
 		{
-			m_r = qint32(value * (1 << Shift));
+			m_r = IntType(value * (1 << Shift));
 			m_g = m_r;
 			m_b = m_r;
 
 			return *this;
 		}
-
+*/
 		RgbCropAccum32& operator+=(const RgbCropAccum32& value)
 		{
 			m_r += value.m_r;
@@ -356,16 +416,16 @@ public:
 
 		RgbCropAccum32& operator+=(const Rgba& value)
 		{
-			m_r += qint32(value.m_r) << Shift;
-			m_g += qint32(value.m_g) << Shift;
-			m_b += qint32(value.m_b) << Shift;
+			m_r += IntType(value.m_r) << Shift;
+			m_g += IntType(value.m_g) << Shift;
+			m_b += IntType(value.m_b) << Shift;
 
 			return *this;
 		}
 
-		RgbCropAccum32& operator+=(qint32 value)
+		RgbCropAccum32& operator+=(unsigned int value)
 		{
-			qint32 gray = qint32(value) << Shift;
+			IntType gray = IntType(value) << Shift;
 			m_r += gray;
 			m_g += gray;
 			m_b += gray;
@@ -375,7 +435,7 @@ public:
 
 		RgbCropAccum32& operator+=(double value)
 		{
-			qint32 gray = qint32(value * (1 << Shift));
+			IntType gray = IntType(value * (1 << Shift));
 			m_r += gray;
 			m_g += gray;
 			m_b += gray;
@@ -394,16 +454,16 @@ public:
 
 		RgbCropAccum32& operator-=(const Rgba& value)
 		{
-			m_r -= qint32(value.m_r) << Shift;
-			m_g -= qint32(value.m_g) << Shift;
-			m_b -= qint32(value.m_b) << Shift;
+			m_r -= IntType(value.m_r) << Shift;
+			m_g -= IntType(value.m_g) << Shift;
+			m_b -= IntType(value.m_b) << Shift;
 
 			return *this;
 		}
 
-		RgbCropAccum32& operator-=(qint32 value)
+		RgbCropAccum32& operator-=(quint32 value)
 		{
-			qint32 gray = qint32(value) << Shift;
+			IntType gray = IntType(value) << Shift;
 			m_r -= gray;
 			m_g -= gray;
 			m_b -= gray;
@@ -413,7 +473,7 @@ public:
 
 		RgbCropAccum32& operator-=(double value)
 		{
-			qint32 gray = qint32(value * (1 << Shift));
+			IntType = IntType(value * (1 << Shift));
 			m_r -= gray;
 			m_g -= gray;
 			m_b -= gray;
@@ -423,32 +483,32 @@ public:
 
 		RgbCropAccum32& operator*=(const RgbCropAccum32& value)
 		{
-			m_r = qint32(quint64(m_r) * quint64(value.m_r) >> Shift);;
-			m_g = qint32(quint64(m_g) * quint64(value.m_g) >> Shift);;
-			m_b = qint32(quint64(m_b) * quint64(value.m_b) >> Shift);;
+			m_r = IntType(quint64(m_r) * quint64(value.m_r) >> Shift);;
+			m_g = IntType(quint64(m_g) * quint64(value.m_g) >> Shift);;
+			m_b = IntType(quint64(m_b) * quint64(value.m_b) >> Shift);;
 
 			return *this;
 		}
 
-		RgbCropAccum32& operator*=(qint32 value)
+		RgbCropAccum32& operator*=(int value)
 		{
-			m_r *= qint32(value);
-			m_g *= qint32(value);
-			m_b *= qint32(value);
+			m_r *= IntType(value);
+			m_g *= IntType(value);
+			m_b *= IntType(value);
 
 			return *this;
 		}
 
 		RgbCropAccum32& operator*=(double value)
 		{
-			m_r = qint32(m_r * value);
-			m_g = qint32(m_g * value);
-			m_b = qint32(m_b * value);
+			m_r = IntType(m_r * value);
+			m_g = IntType(m_g * value);
+			m_b = IntType(m_b * value);
 
 			return *this;
 		}
 
-		RgbCropAccum32 operator/(qint32 value)
+		RgbCropAccum32 operator/(int value)
 		{
 			RgbCropAccum32 retVal;
 
@@ -463,9 +523,9 @@ public:
 		{
 			RgbCropAccum32 retVal;
 
-			retVal.m_r = qint32(m_r / value);
-			retVal.m_g = qint32(m_g / value);
-			retVal.m_b = qint32(m_b / value);
+			retVal.m_r = IntType(m_r / value);
+			retVal.m_g = IntType(m_g / value);
+			retVal.m_b = IntType(m_b / value);
 
 			return retVal;
 		}
@@ -474,10 +534,10 @@ public:
 		{
 			quint64 grayValue = (quint64(m_r) + quint64(m_g) + quint64(m_b)) / 3;
 
-			if (grayValue < 0){
+			if (DoCropMin && (grayValue < 0)){
 				return 0;
 			}
-			if (grayValue > (0xff << Shift)){
+			if (DoCropMin && (grayValue > (0xff << Shift))){
 				return 0xff;
 			}
 
@@ -488,10 +548,10 @@ public:
 		{
 			quint64 grayValue = (quint64(m_r) + quint64(m_g) + quint64(m_b)) / 3;
 
-			if (grayValue < 0){
+			if (DoCropMin && (grayValue < 0)){
 				return 0;
 			}
-			if (grayValue > (0xffff << Shift)){
+			if (DoCropMin && (grayValue > (0xffff << Shift))){
 				return 0xffff;
 			}
 
@@ -502,7 +562,7 @@ public:
 		{
 			quint64 grayValue = (quint64(m_r) + quint64(m_g) + quint64(m_b)) / 3;
 
-			if (grayValue < 0){
+			if (DoCropMin && (grayValue < 0)){
 				return 0;
 			}
 
@@ -521,27 +581,27 @@ public:
 
 		operator Rgba()
 		{
-			qint32 red = m_r;
-			if (red < 0){
+			IntType red = m_r;
+			if (DoCropMin && (red < 0)){
 				red = 0;
 			}
-			else if (red > (0xff << Shift)){
+			else if (DoCropMin && (red > (0xff << Shift))){
 				red = 0xff;
 			}
 
-			qint32 green = m_g;
-			if (green < 0){
+			IntType green = m_g;
+			if (DoCropMin && (green < 0)){
 				green = 0;
 			}
-			else if (green > (0xff << Shift)){
+			else if (DoCropMin && (green > (0xff << Shift))){
 				green = 0xff;
 			}
 
-			qint32 blue = m_b;
-			if (blue < 0){
+			IntType blue = m_b;
+			if (DoCropMin && (blue < 0)){
 				blue = 0;
 			}
-			else if (blue > (0xff << Shift)){
+			else if (DoCropMin && (blue > (0xff << Shift))){
 				blue = 0xff;
 			}
 
@@ -549,9 +609,9 @@ public:
 		}
 
 	private:
-		qint32 m_r;
-		qint32 m_g;
-		qint32 m_b;
+		IntType m_r;
+		IntType m_g;
+		IntType m_b;
 	};
 };
 
