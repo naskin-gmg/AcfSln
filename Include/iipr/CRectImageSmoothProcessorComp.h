@@ -44,12 +44,25 @@ public:
 		I_ASSIGN(m_borderModeAttrPtr, "BorderMode", "Define used mode for border area:\n\t0 - Kernel will be stretched, original image size will be outputed\n\t1 - Border area removed, output image will be smaller", true, 0);
 	I_END_COMPONENT;
 
-	static bool DoImageFilter(
-				const iimg::IBitmap& inputBitmap,
-				iimg::IBitmap& outputBitmap,
+	static bool DoRectFilter(
 				int filterWidth,
 				int filterHeight,
-				BorderMode borderMode);
+				iimg::IBitmap::PixelFormat outputPixelFormat,
+				const iimg::IBitmap& inputBitmap,
+				iimg::IBitmap& outputBitmap,
+				BorderMode borderMode = BM_STRETCH_KERNEL);
+	static bool DoRectFilterHorizontal(
+				int filterWidth,
+				iimg::IBitmap::PixelFormat outputPixelFormat,
+				const iimg::IBitmap& inputBitmap,
+				iimg::IBitmap& outputBitmap,
+				BorderMode borderMode = BM_STRETCH_KERNEL);
+	static bool DoRectFilterVertical(
+				int filterHeight,
+				iimg::IBitmap::PixelFormat outputPixelFormat,
+				const iimg::IBitmap& inputBitmap,
+				iimg::IBitmap& outputBitmap,
+				BorderMode borderMode = BM_STRETCH_KERNEL);
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetNumericValuesCount() const;
@@ -60,7 +73,9 @@ public:
 protected:
 	// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
 	virtual bool ParamProcessImage(
-				const imeas::INumericValue* paramsPtr,
+				const iprm::IParamsSet* paramsPtr,
+				const imeas::INumericValue* procParamPtr,
+				iimg::IBitmap::PixelFormat outputPixelFormat,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 

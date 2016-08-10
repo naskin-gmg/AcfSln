@@ -48,11 +48,17 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 		return false;
 	}
 
+	if (inputBitmap.GetPixelFormat() != iimg::IBitmap::PF_GRAY){
+		SendWarningMessage(0, "Input bitmap is empty.");
+
+		return false;
+	}
+
 	iimg::CGeneralBitmap smoothedBitmap;
 
-	CRectImageSmoothProcessorComp::DoImageFilter(inputBitmap, smoothedBitmap, 3, 3, iipr::CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL);
+	CRectImageSmoothProcessorComp::DoRectFilter(3, 3, iimg::IBitmap::PF_GRAY, inputBitmap, smoothedBitmap, iipr::CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL);
 
-	if (!outputBitmap.CreateBitmap(smoothedBitmap.GetPixelFormat(), smoothedBitmap.GetImageSize())){
+	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, smoothedBitmap.GetImageSize())){
 		return false;
 	}
 

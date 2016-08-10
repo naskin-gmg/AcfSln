@@ -5,186 +5,438 @@
 #include "imath/CFixedPointManip.h"
 #include "iimg/CGeneralBitmap.h"
 
+// ACF-Solutions includes
+#include "iipr/CPixelManip.h"
+
 
 namespace iipr
 {
 
 
-// public static methods
+// templete function for several image modes
 
-bool CRectImageSmoothProcessorComp::DoImageFilter(
+template <	typename InputPixelType,
+			typename OutputPixelType,
+			typename WorkingType,
+			typename CounterType>
+bool DoSimpleFilterHor(
+			int kernelMaxWidth,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage,
-			int kernelMaxWidth,
-			int kernelMaxHeight,
-			BorderMode borderMode)
+			CRectImageSmoothProcessorComp::BorderMode borderMode)
 {
+	Q_ASSERT(kernelMaxWidth >= 1);
+
 	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	istd::CIndex2d outputImageSize = outputImage.GetImageSize();
 
 	int imageWidth = imageSize.GetX();
 	int imageHeight = imageSize.GetY();
+	int outputImageWidth = (borderMode == CRectImageSmoothProcessorComp::BM_REDUCE_OUTPUT)? imageWidth - (kernelMaxWidth - 1): imageWidth;
 
-	istd::CIndex2d outputImageSize = imageSize;
-	if (borderMode != BM_STRETCH_KERNEL){
-		outputImageSize[0] -= kernelMaxWidth - 1;
-		outputImageSize[1] -= kernelMaxHeight - 1;
+	if (!outputImage.CreateBitmap(outputPixelFormat, istd::CIndex2d(outputImageWidth, imageHeight))){
+		return false;
 	}
 
-	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), outputImageSize)){
-		return false;	// cannot create output image
-	}
+	for (int y = 0; y < imageHeight; ++y){
+		OutputPixelType* outputPtr = (OutputPixelType*)outputImage.GetLinePtr(y);
 
-	iimg::IBitmap* firstPassOutputImagePtr = &outputImage;
-	const iimg::IBitmap* secondPassInputImagePtr = &inputImage;
-	int outputImageWidth = outputImageSize.GetX();
+		const InputPixelType* inputLinePtr = (const InputPixelType*)inputImage.GetLinePtr(y);
 
-	iimg::CGeneralBitmap tempBitmap;
-	if ((kernelMaxWidth > 1) && (kernelMaxHeight > 1)){
-		tempBitmap.CreateBitmap(inputImage.GetPixelFormat(), istd::CIndex2d(outputImageWidth, imageHeight));
+		WorkingType meanValue(0);
+		CounterType kernelWidth(0);
+		while (kernelWidth < CounterType(kernelMaxWidth)){
+			meanValue += inputLinePtr[kernelWidth++];
 
-		firstPassOutputImagePtr = &tempBitmap;
-		secondPassInputImagePtr = &tempBitmap;
-	}
-	else if ((kernelMaxWidth <= 1) && (kernelMaxHeight <= 1)){
-		return outputImage.CopyFrom(inputImage);
-	}
-
-	int componentsCount = inputImage.GetComponentsCount();
-
-	if (kernelMaxWidth > 1){
-		Q_ASSERT(firstPassOutputImagePtr != NULL);
-
-
-		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-			for (int y = 0; y < imageHeight; ++y){
-				quint8* outputPtr = (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex;
-
-				const quint8* inputLinePtr = (const quint8*)inputImage.GetLinePtr(y);
-
-				int meanValue = 0;
-
-				int kernelWidth = 0;
-				while (kernelWidth < kernelMaxWidth){
-					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
-
-					if (kernelWidth >= kernelMaxWidth){
-						break;
-					}
-
-					if (borderMode == BM_STRETCH_KERNEL){
-						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-						outputPtr += componentsCount;
-					}
-
-					meanValue += inputLinePtr[componentIndex + componentsCount * kernelWidth++];
-				}
-
-				int headX = kernelWidth;
-				int tailX = 0;
-				while (headX < imageWidth){
-					*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-					outputPtr += componentsCount;
-
-					meanValue += inputLinePtr[componentIndex + componentsCount * headX++];
-
-					Q_ASSERT(tailX < imageWidth);
-					meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-				}
-
-				if (borderMode == BM_STRETCH_KERNEL){
-					while (kernelWidth > 0){
-						*outputPtr = quint8((meanValue + 0.5) / kernelWidth);
-
-						outputPtr += componentsCount;
-
-						Q_ASSERT(tailX < imageWidth);
-						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-						kernelWidth--;
-
-						if  (kernelWidth <= 0){
-							break;
-						}
-
-						Q_ASSERT(tailX < imageWidth);
-						meanValue -= inputLinePtr[componentIndex + componentsCount * tailX++];
-						kernelWidth--;
-					}
-				}
-
-				Q_ASSERT(outputPtr <= (quint8*)firstPassOutputImagePtr->GetLinePtr(y) + componentIndex + outputImageWidth * componentsCount);
+			if (kernelWidth >= CounterType(kernelMaxWidth)){
+				break;
 			}
+
+			if (borderMode == CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL){
+				*outputPtr = OutputPixelType(meanValue / kernelWidth);
+
+				outputPtr++;
+			}
+
+			meanValue += inputLinePtr[kernelWidth++];
 		}
-	}
 
-	if (kernelMaxHeight > 1){
-		Q_ASSERT(secondPassInputImagePtr != NULL);
+		int headX = int(kernelWidth);
+		int tailX = 0;
+		while (headX < imageWidth){
+			*(outputPtr++) = OutputPixelType(meanValue / kernelWidth);
 
-		int inputLinesDifference = secondPassInputImagePtr->GetLinesDifference();
-		int outputLinesDifference = outputImage.GetLinesDifference();
+			meanValue += inputLinePtr[headX++];
 
-		for (int x = 0; x < outputImageWidth * componentsCount; ++x){	
-			double meanValue = 0;
-			const quint8* inputHeadPixelPtr = ((const quint8*)secondPassInputImagePtr->GetLinePtr(0)) + x;
-			const quint8* inputTailPixelPtr = inputHeadPixelPtr;
-			quint8* outputPixelPtr = (quint8*)(outputImage.GetLinePtr(0)) + x;
+			Q_ASSERT(tailX < imageWidth);
+			meanValue -= inputLinePtr[tailX++];
+		}
 
-			int kernelHeight = 0;
-			while (kernelHeight < kernelMaxHeight){
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
-				kernelHeight++;
+		if (borderMode == CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL){
+			while (kernelWidth > 0){
+				*(outputPtr++) = OutputPixelType(meanValue / kernelWidth);
 
-				if (kernelHeight >= kernelMaxHeight){
+				Q_ASSERT(tailX < imageWidth);
+				meanValue -= inputLinePtr[tailX++];
+				kernelWidth--;
+
+				if  (kernelWidth <= 0){
 					break;
 				}
 
-				if (borderMode == BM_STRETCH_KERNEL){
-					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-					outputPixelPtr += outputLinesDifference;
-				}
+				Q_ASSERT(tailX < imageWidth);
+				meanValue -= inputLinePtr[tailX++];
+				kernelWidth--;
+			}
+		}
 
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
-				kernelHeight++;
+		Q_ASSERT(outputPtr <= (OutputPixelType*)outputImage.GetLinePtr(y) + outputImageWidth);
+	}
+
+	return true;
+}
+
+
+template <	typename InputPixelType,
+			typename OutputPixelType,
+			typename WorkingType,
+			typename CounterType>
+bool DoSimpleFilterVer(
+			int kernelMaxHeight,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
+			const iimg::IBitmap& inputImage,
+			iimg::IBitmap& outputImage,
+			CRectImageSmoothProcessorComp::BorderMode borderMode)
+{
+	Q_ASSERT(kernelMaxHeight >= 1);
+
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	istd::CIndex2d outputImageSize = outputImage.GetImageSize();
+
+	int imageWidth = imageSize.GetX();
+	int imageHeight = imageSize.GetY();
+	int outputImageHeight = (borderMode == CRectImageSmoothProcessorComp::BM_REDUCE_OUTPUT)? imageHeight - (kernelMaxHeight - 1): imageHeight;
+
+	if (!outputImage.CreateBitmap(outputPixelFormat, istd::CIndex2d(imageWidth, outputImageHeight))){
+		return false;
+	}
+
+	int inputLinesDifference = inputImage.GetLinesDifference();
+	int outputLinesDifference = outputImage.GetLinesDifference();
+
+	for (int x = 0; x < imageWidth; ++x){	
+		const InputPixelType* inputHeadPixelPtr = ((const InputPixelType*)inputImage.GetLinePtr(0)) + x;
+		const InputPixelType* inputTailPixelPtr = inputHeadPixelPtr;
+		OutputPixelType* outputPixelPtr = (OutputPixelType*)(outputImage.GetLinePtr(0)) + x;
+
+		WorkingType meanValue(0);
+		CounterType kernelHeight(0);
+		while (kernelHeight < CounterType(kernelMaxHeight)){
+			meanValue += *inputHeadPixelPtr;
+			inputHeadPixelPtr = (const InputPixelType*)((const quint8*)inputHeadPixelPtr + inputLinesDifference);
+			kernelHeight++;
+
+			if (kernelHeight >= CounterType(kernelMaxHeight)){
+				break;
 			}
 
-			int headY = kernelHeight;
+			if (borderMode == CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL){
+				*outputPixelPtr = OutputPixelType(meanValue / kernelHeight);
+				outputPixelPtr = (OutputPixelType*)((quint8*)outputPixelPtr + outputLinesDifference);
+			}
 
-			for (;headY < imageHeight; ++headY){
-				*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-				outputPixelPtr += outputLinesDifference;
+			meanValue += *inputHeadPixelPtr;
+			inputHeadPixelPtr = (const InputPixelType*)((const quint8*)inputHeadPixelPtr + inputLinesDifference);
+			kernelHeight++;
+		}
 
-				meanValue += *inputHeadPixelPtr;
-				inputHeadPixelPtr += inputLinesDifference;
+		int headY = int(kernelHeight);
+
+		for (;headY < imageHeight; ++headY){
+			*outputPixelPtr = OutputPixelType(meanValue / kernelHeight);
+				outputPixelPtr = (OutputPixelType*)((quint8*)outputPixelPtr + outputLinesDifference);
+
+			meanValue += *inputHeadPixelPtr;
+			inputHeadPixelPtr = (const InputPixelType*)((const quint8*)inputHeadPixelPtr + inputLinesDifference);
+
+			meanValue -= *inputTailPixelPtr;
+			inputTailPixelPtr = (const InputPixelType*)((const quint8*)inputTailPixelPtr + inputLinesDifference);
+		}
+
+		if (borderMode == CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL){
+			while (kernelHeight > 0){
+				*outputPixelPtr = OutputPixelType(meanValue / kernelHeight);
+				outputPixelPtr = (OutputPixelType*)((quint8*)outputPixelPtr + outputLinesDifference);
 
 				meanValue -= *inputTailPixelPtr;
-				inputTailPixelPtr += inputLinesDifference;
-			}
+				inputTailPixelPtr = (const InputPixelType*)((const quint8*)inputTailPixelPtr + inputLinesDifference);
+				--kernelHeight;
 
-			if (borderMode == BM_STRETCH_KERNEL){
-				while (kernelHeight > 0){
-					*outputPixelPtr = quint8((meanValue + 0.5) / kernelHeight);
-					outputPixelPtr += outputLinesDifference;
-
-					meanValue -= *inputTailPixelPtr;
-					inputTailPixelPtr += inputLinesDifference;
-					--kernelHeight;
-
-					if  (kernelHeight <= 0){
-						break;
-					}
-
-					meanValue -= *inputTailPixelPtr;
-					inputTailPixelPtr += inputLinesDifference;
-					--kernelHeight;
+				if  (kernelHeight <= 0){
+					break;
 				}
+
+				meanValue -= *inputTailPixelPtr;
+				inputTailPixelPtr = (const InputPixelType*)((const quint8*)inputTailPixelPtr + inputLinesDifference);
+				--kernelHeight;
 			}
 		}
 	}
 
 	return true;
+}
+
+
+// public static methods
+
+bool CRectImageSmoothProcessorComp::DoRectFilter(
+			int kernelMaxWidth,
+			int kernelMaxHeight,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
+			const iimg::IBitmap& inputImage,
+			iimg::IBitmap& outputImage,
+			BorderMode borderMode)
+{
+	if (kernelMaxWidth > 1){
+		if (kernelMaxHeight > 1){
+			iimg::CGeneralBitmap tempBitmap;
+
+			return DoRectFilterHorizontal(kernelMaxWidth, outputPixelFormat, inputImage, tempBitmap, borderMode) && DoRectFilterVertical(kernelMaxHeight, outputPixelFormat, inputImage, tempBitmap, borderMode);
+		}
+		else{
+			return DoRectFilterHorizontal(kernelMaxWidth, outputPixelFormat, inputImage, outputImage, borderMode);
+		}
+	}
+	else{
+		return DoRectFilterVertical(kernelMaxHeight, outputPixelFormat, inputImage, outputImage, borderMode);
+	}
+}
+
+
+bool CRectImageSmoothProcessorComp::DoRectFilterHorizontal(
+			int filterWidth,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
+			const iimg::IBitmap& inputBitmap,
+			iimg::IBitmap& outputBitmap,
+			BorderMode borderMode)
+{
+	iimg::IBitmap::PixelFormat inputFormat = inputBitmap.GetPixelFormat();
+	switch (inputFormat){
+	case iimg::IBitmap::PF_GRAY:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY:
+			return DoSimpleFilterHor<quint8, quint8, quint32, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY16:
+			return DoSimpleFilterHor<quint8, quint16, quint32, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterHor<quint8, quint32, quint32, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<quint8, float, float, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<quint8, double, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_RGB:
+	case iimg::IBitmap::PF_RGBA:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY:
+			return DoSimpleFilterHor<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_RGB:
+			return DoSimpleFilterHor<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY16:
+			return DoSimpleFilterHor<CPixelManip::Rgba, quint16, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterHor<CPixelManip::Rgba, quint32, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<CPixelManip::Rgba, float, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<CPixelManip::Rgba, double, CPixelManip::RgbCropAccum32<0>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_GRAY16:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY16:
+			return DoSimpleFilterHor<quint16, quint16, quint32, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterHor<quint16, quint32, quint32, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<quint16, float, float, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<quint16, double, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_GRAY32:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterHor<quint32, quint32, quint64, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<quint32, float, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<quint32, double, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_FLOAT32:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<float, float, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<float, double, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_FLOAT64:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterHor<double, float, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterHor<double, double, double, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	return false;
+}
+
+
+bool CRectImageSmoothProcessorComp::DoRectFilterVertical(
+			int filterHeight,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
+			const iimg::IBitmap& inputBitmap,
+			iimg::IBitmap& outputBitmap,
+			BorderMode borderMode)
+{
+	iimg::IBitmap::PixelFormat inputFormat = inputBitmap.GetPixelFormat();
+	switch (inputFormat){
+	case iimg::IBitmap::PF_GRAY:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY:
+			return DoSimpleFilterVer<quint8, quint8, quint32, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY16:
+			return DoSimpleFilterVer<quint8, quint16, quint32, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterVer<quint8, quint32, quint32, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterVer<quint8, float, float, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterVer<quint8, double, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_GRAY16:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY16:
+			return DoSimpleFilterVer<quint16, quint16, quint32, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterVer<quint16, quint32, quint32, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterVer<quint16, float, float, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterVer<quint16, double, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_GRAY32:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_GRAY32:
+			return DoSimpleFilterVer<quint32, quint32, quint64, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterVer<quint32, float, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterVer<quint32, double, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_FLOAT32:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterVer<float, float, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterVer<float, double, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	case iimg::IBitmap::PF_FLOAT64:
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoSimpleFilterVer<double, float, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoSimpleFilterVer<double, double, double, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+
+		default:
+			break;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	return false;
 }
 
 
@@ -254,11 +506,13 @@ const imath::IUnitInfo* CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(i
 // reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
-			const imeas::INumericValue* paramsPtr,
+			const iprm::IParamsSet* /*paramsPtr*/,
+			const imeas::INumericValue* procParamPtr,
+			iimg::IBitmap::PixelFormat outputPixelFormat,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	if (paramsPtr == NULL){
+	if (procParamPtr == NULL){
 		return false;
 	}
 
@@ -273,7 +527,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 		return false;
 	}
 
-	imath::CVarVector filterLengths = paramsPtr->GetValues();
+	imath::CVarVector filterLengths = procParamPtr->GetValues();
 	int filterDimensionsCount = filterLengths.GetElementsCount();
 	if (filterDimensionsCount < 1){
 		return false;
@@ -307,7 +561,7 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	Q_ASSERT(kernelMaxWidth >= 1);
 	Q_ASSERT(kernelMaxHeight >= 1);
 
-	return DoImageFilter(inputImage, outputImage, kernelMaxWidth, kernelMaxHeight, BorderMode(*m_borderModeAttrPtr));
+	return DoRectFilter(kernelMaxWidth, kernelMaxHeight, outputPixelFormat, inputImage, outputImage, BorderMode(*m_borderModeAttrPtr));
 }
 
 

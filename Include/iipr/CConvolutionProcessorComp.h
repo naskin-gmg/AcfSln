@@ -2,8 +2,8 @@
 #define iipr_CConvolutionProcessorComp_included
 
 
+// ACF-Solutions includes
 #include "iipr/TImageParamProcessorCompBase.h"
-
 #include "iipr/IConvolutionKernel2d.h"
 
 
@@ -26,7 +26,9 @@ public:
 protected:
 	// reimplemented (iipr::TImageParamProcessorCompBase)
 	virtual bool ParamProcessImage(
-				const IConvolutionKernel2d* paramsPtr,
+				const iprm::IParamsSet* paramsPtr,
+				const IConvolutionKernel2d* procParamPtr,
+				iimg::IBitmap::PixelFormat outputPixelFormat,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 
