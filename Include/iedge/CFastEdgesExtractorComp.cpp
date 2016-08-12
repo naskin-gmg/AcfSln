@@ -61,118 +61,92 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 	double weightScale = qPow(10, scaleFactor * 0.1);
 
 
-	const iimg::CScanlineMask* maskPtr = NULL;
+	i2d::CRect clipArea(size);
 
+	// create image mask
 	iimg::CScanlineMask mask;
-
 	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiObjectPtr.IsValid()){
 		mask.SetCalibration(bitmap.GetCalibration());
 
-		i2d::CRect clipArea(size);
-		if (mask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &clipArea)){
-			maskPtr = &mask;
+		if (!mask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &clipArea)){
+			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
 		}
+	}
+	else{
+		mask.CreateFilled(clipArea);
 	}
 
 	const quint32 threshold2Factor = quint32(threshold * threshold * THRESHOLD_FACTOR * THRESHOLD_FACTOR / (weightScale * weightScale));
 
-	int width = size.GetX();
+	int imageWidth = size.GetX();
 
-	std::vector<PixelDescriptor> destLine1(width);
-	std::vector<PixelDescriptor> destLine2(width);
-	std::vector<PixelDescriptor> destLine3(width);
-
+	std::vector<PixelDescriptor> destLine1(imageWidth);
 	PixelDescriptor* destLine1Ptr = &destLine1[0];
-	PixelDescriptor* destLine2Ptr = &destLine2[0];
-	PixelDescriptor* destLine3Ptr = &destLine3[0];
+	memset(destLine1Ptr, 0, imageWidth * sizeof(PixelDescriptor));
 
-	memset(destLine1Ptr, 0, width * sizeof(PixelDescriptor));
-	memset(destLine2Ptr, 0, width * sizeof(PixelDescriptor));
-	memset(destLine3Ptr, 0, width * sizeof(PixelDescriptor));
+	std::vector<PixelDescriptor> destLine2(imageWidth);
+	PixelDescriptor* destLine2Ptr = &destLine2[0];
+	memset(destLine2Ptr, 0, imageWidth * sizeof(PixelDescriptor));
+
+	std::vector<PixelDescriptor> destLine3(imageWidth);
+	PixelDescriptor* destLine3Ptr = &destLine3[0];
+	memset(destLine3Ptr, 0, imageWidth * sizeof(PixelDescriptor));
 
 	InternalContainer container(*m_maxNodesCountAttrPtr);
 
-	if (maskPtr != NULL){
-		iimg::CScanlineMask resultMask = *maskPtr;
-		resultMask.Intersection(resultMask.GetTranslated(1, 0));
-		resultMask.Intersection(resultMask.GetTranslated(2, 0));
-		resultMask.Intersection(resultMask.GetTranslated(0, 1));
-		resultMask.Intersection(resultMask.GetTranslated(0, 2));
+	i2d::CRect boundingRect = mask.GetBoundingRect();
 
-		const quint8* prevSourceLinePtr = (const quint8*)bitmap.GetLinePtr(0);
-		const quint8* sourceLinePtr = (const quint8*)bitmap.GetLinePtr(1);
+	iimg::CScanlineMask resultMask = mask;
+	resultMask.Erode(3, 0, 3, 0);
 
-		istd::CIntRange imageRangeH(0, size.GetX());
+	const quint8* prevSourceLinePtr = (const quint8*)bitmap.GetLinePtr(boundingRect.GetTop());
+	const quint8* sourceLinePtr = NULL;
 
-		for (int y = 0; y < size.GetY(); ++y){
-			sourceLinePtr = (const quint8*)bitmap.GetLinePtr(y);
+	istd::CIntRange imageRangeH(0, size.GetX());
 
-			const istd::CIntRanges* inputRangesPtr = maskPtr->GetPixelRanges(y);
-			if (inputRangesPtr != NULL){
-				istd::CIntRanges::RangeList rangeList;
-				inputRangesPtr->GetAsList(imageRangeH, rangeList);
+	for (int y = boundingRect.GetTop() + 1; y < boundingRect.GetBottom(); ++y){
+		sourceLinePtr = (const quint8*)bitmap.GetLinePtr(y);
 
-				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-							iter != rangeList.constEnd();
-							++iter){
-					const istd::CIntRange& rangeH = *iter;
+		const istd::CIntRanges* inputRangesPtr = mask.GetPixelRanges(y);
+		if (inputRangesPtr != NULL){
+			istd::CIntRanges::RangeList rangeList;
+			inputRangesPtr->GetAsList(imageRangeH, rangeList);
 
-					CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, rangeH.GetMinValue(), rangeH.GetMaxValue(), destLine3Ptr);
-				}
+			for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+						iter != rangeList.constEnd();
+						++iter){
+				const istd::CIntRange& rangeH = *iter;
+
+				CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, rangeH.GetMinValue(), rangeH.GetMaxValue(), destLine3Ptr);
 			}
-
-			const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
-			if (outputRangesPtr != NULL){
-				Q_ASSERT(y >= 3);
-
-				istd::CIntRanges::RangeList rangeList;
-				outputRangesPtr->GetAsList(imageRangeH, rangeList);
-
-				for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
-							iter != rangeList.constEnd();
-							++iter){
-					const istd::CIntRange& rangeH = *iter;
-					Q_ASSERT(rangeH.GetMinValue() >= 3);
-					Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
-
-					CalcOutputLine(rangeH.GetMinValue(), rangeH.GetMaxValue(), y, threshold2Factor, destLine1Ptr, destLine2Ptr, destLine3Ptr, container);
-				}
-			}
-
-			// move line address in rolling line buffer
-			PixelDescriptor* storedDestLine1Ptr = destLine1Ptr;
-			destLine1Ptr = destLine2Ptr;
-			destLine2Ptr = destLine3Ptr;
-			destLine3Ptr = storedDestLine1Ptr;
-
-			prevSourceLinePtr = sourceLinePtr;
 		}
-	}
-	else{
-		const quint8* prevSourceLinePtr = (const quint8*)bitmap.GetLinePtr(0);
-		const quint8* sourceLinePtr = (const quint8*)bitmap.GetLinePtr(1);
-		CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine1Ptr);
+
+		const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
+		if (outputRangesPtr != NULL){
+			Q_ASSERT(y >= 3);
+
+			istd::CIntRanges::RangeList rangeList;
+			outputRangesPtr->GetAsList(imageRangeH, rangeList);
+
+			for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+						iter != rangeList.constEnd();
+						++iter){
+				const istd::CIntRange& rangeH = *iter;
+				Q_ASSERT(rangeH.GetMinValue() >= 3);
+				Q_ASSERT(rangeH.GetMaxValue() <= size.GetX());
+
+				CalcOutputLine(rangeH.GetMinValue(), rangeH.GetMaxValue(), y, threshold2Factor, destLine1Ptr, destLine2Ptr, destLine3Ptr, container);
+			}
+		}
+
+		// move line address in rolling line buffer
+		PixelDescriptor* storedDestLine1Ptr = destLine1Ptr;
+		destLine1Ptr = destLine2Ptr;
+		destLine2Ptr = destLine3Ptr;
+		destLine3Ptr = storedDestLine1Ptr;
 
 		prevSourceLinePtr = sourceLinePtr;
-		sourceLinePtr = (const quint8*)bitmap.GetLinePtr(2);
-		CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine1Ptr);
-
-		prevSourceLinePtr = sourceLinePtr;
-		for (int y = 3; y < size.GetY(); ++y){
-			sourceLinePtr = (const quint8*)bitmap.GetLinePtr(y);
-
-			CalcDerivativeLine(prevSourceLinePtr, sourceLinePtr, 0, width, destLine3Ptr);
-			CalcOutputLine(3, width, y, threshold2Factor, destLine1Ptr, destLine2Ptr, destLine3Ptr, container);
-
-			// move line address in rolling line buffer
-			PixelDescriptor* storedDestLine1Ptr = destLine1Ptr;
-			destLine1Ptr = destLine2Ptr;
-			destLine2Ptr = destLine3Ptr;
-			destLine3Ptr = storedDestLine1Ptr;
-
-			prevSourceLinePtr = sourceLinePtr;
-		}
 	}
 
 	container.ExtractLines(weightScale, result, *m_keepSingletonsAttrPtr);
