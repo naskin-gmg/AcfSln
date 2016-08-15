@@ -437,7 +437,7 @@ public:
 
 		RgbCropAccum32& operator-=(double value)
 		{
-			IntType = IntType(value * (1 << Shift));
+			IntType gray = IntType(value * (1 << Shift));
 			m_r -= gray;
 			m_g -= gray;
 			m_b -= gray;
