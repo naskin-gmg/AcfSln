@@ -12,9 +12,9 @@
 #include "i2d/ICalibrationProvider.h"
 #include "iimg/IBitmap.h"
 #include "iprm/IParamsManager.h"
-#include "iinsp/TSupplierCompWrap.h"
 
 // ACF-Solutions includes
+#include "iinsp/TSupplierCompWrap.h"
 #include "icam/IBitmapAcquisition.h"
 #include "iimg/IMultiBitmapProvider.h"
 
