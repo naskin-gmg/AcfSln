@@ -2,23 +2,25 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4261" Description="ACF"/>
+            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="HtmlEditorFileGui" X="775" Y="500" Note=""/>
-        <Element ComponentName="PreviewCommandFileGui" X="775" Y="275" Note=""/>
-        <Element ComponentName="SettingsGui" X="175" Y="400" Note=""/>
-        <Element ComponentName="SettingsPersistence" X="800" Y="675" Note=""/>
-        <Element ComponentName="DocumentPersistenceGui" X="1050" Y="500" Note=""/>
         <Element ComponentName="ConfigEditor" X="450" Y="275" Note=""/>
-        <Element ComponentName="SettingsDialog" X="200" Y="675" Note=""/>
-        <Element ComponentName="HtmlBrowserFileGui" X="500" Y="500" Note=""/>
+        <Element ComponentName="ConfigSelectorGui" X="500" Y="750" Note=""/>
+        <Element ComponentName="ConfigSelectorToolbar" X="775" Y="750" Note=""/>
+        <Element ComponentName="DocumentPersistenceGui" X="1050" Y="525" Note=""/>
+        <Element ComponentName="HtmlBrowserFileGui" X="500" Y="525" Note=""/>
+        <Element ComponentName="HtmlEditorFileGui" X="775" Y="525" Note=""/>
         <Element ComponentName="LanguageSelectionGui" X="1050" Y="275" Note=""/>
+        <Element ComponentName="PreviewCommandFileGui" X="775" Y="275" Note=""/>
         <Element ComponentName="PreviewCommandFileInfo" X="775" Y="175" Note=""/>
-        <Element ComponentName="Settings" X="500" Y="675" Note=""/>
+        <Element ComponentName="Settings" X="500" Y="625" Note=""/>
+        <Element ComponentName="SettingsDialog" X="200" Y="625" Note=""/>
+        <Element ComponentName="SettingsGui" X="175" Y="400" Note=""/>
+        <Element ComponentName="SettingsPersistence" X="775" Y="625" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

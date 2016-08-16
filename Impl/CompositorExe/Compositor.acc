@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4261" Description="ACF"/>
+            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Compositor tool - graphical editor for ACF registry files</Description>
@@ -41,6 +41,7 @@
                                 <Value>MainWindowComponents/PackageOverviewDock</Value>
                                 <Value>MainWindowComponents/LogDock</Value>
                                 <Value>MainWindowComponents/WindowsListCommands</Value>
+                                <Value>Application/ConfigSelectorToolbar</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>

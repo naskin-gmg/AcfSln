@@ -2,15 +2,15 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4261" Description="ACF"/>
+            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
         <Element ComponentName="Application" X="625" Y="525" Note=""/>
-        <Element ComponentName="MainWindowComponents" X="1025" Y="275" Note=""/>
         <Element ComponentName="CompositorTemplate" X="225" Y="275" Note=""/>
+        <Element ComponentName="MainWindowComponents" X="1025" Y="275" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

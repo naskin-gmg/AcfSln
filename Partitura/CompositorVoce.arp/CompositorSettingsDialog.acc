@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4261" Description="ACF"/>
+            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Dialog displaying and managing compositor settings</Description>
@@ -13,6 +13,36 @@
         <Element Id="ConfigEditor" PackageId="CompositorVoce" ComponentId="SelectableConfigDataEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="ConfigSelectorGui" PackageId="QtGuiPck" ComponentId="SelectionParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Settings/ConfigsManager"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LabelAlignment" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="LabelPosition" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OptionsLabel" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Configuration"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ConfigSelectorToolbar" PackageId="QtGuiPck" ComponentId="ToolBarWidgetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ToolBarWidget" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ConfigSelectorGui"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
             </Data>
         </Element>
         <Element Id="DocumentPersistenceGui" PackageId="QtGuiPck" ComponentId="EnableableParamGui">
@@ -195,6 +225,7 @@
     </ExportedInterfaces>
     <ExportedComponents>
         <Component ExportedId="ConfigFile" ComponentId="Settings/ConfigFile"/>
+        <Component ExportedId="ConfigSelectorToolbar" ComponentId="ConfigSelectorToolbar"/>
         <Component ExportedId="EnableDocumentPersistence" ComponentId="Settings/EnableDocumentPersistence"/>
         <Component ExportedId="HtmlBrowserFile" ComponentId="Settings/HtmlBrowserFile"/>
         <Component ExportedId="HtmlEditorFile" ComponentId="Settings/HtmlEditorFile"/>
