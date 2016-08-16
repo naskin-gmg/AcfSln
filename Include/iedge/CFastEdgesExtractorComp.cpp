@@ -111,7 +111,7 @@ bool CFastEdgesExtractorComp::DoContourExtraction(
 			istd::CIntRanges::RangeList rangeList;
 			inputRangesPtr->GetAsList(imageRangeH, rangeList);
 
-			for (istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
+			for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
 						iter != rangeList.constEnd();
 						++iter){
 				const istd::CIntRange& rangeH = *iter;

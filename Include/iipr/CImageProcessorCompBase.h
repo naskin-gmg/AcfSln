@@ -20,6 +20,22 @@ class CImageProcessorCompBase: public iproc::CSyncProcessorCompBase
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
+	/**
+		Describes modes of AOI interpretation.
+		It is placed here to allow the same value interpretation for all image processors.
+	*/
+	enum AoiMode
+	{
+		/**
+			AOI mask contains the input bitmap pixels.
+		*/
+		AM_INPUT_PIXELS,
+		/**
+			AOI mask contains the output bitmap pixels.
+		*/
+		AM_OUTPUT_PIXELS
+	};
+
 	I_BEGIN_BASE_COMPONENT(CImageProcessorCompBase);
 	I_END_COMPONENT;
 
