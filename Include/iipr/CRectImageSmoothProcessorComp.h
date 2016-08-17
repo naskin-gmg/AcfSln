@@ -75,7 +75,6 @@ protected:
 	virtual bool ParamProcessImage(
 				const iprm::IParamsSet* paramsPtr,
 				const imeas::INumericValue* procParamPtr,
-				iimg::IBitmap::PixelFormat outputPixelFormat,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 

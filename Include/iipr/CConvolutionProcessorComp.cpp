@@ -6,7 +6,7 @@
 
 // ACF includes
 #include "iprm/TParamsPtr.h"
-#include "iimg/CScanlineMask.h"
+#include "iimg/CPixelFormatList.h"
 
 // ACF-Solutions includes
 #include "iipr/CPixelManip.h"
@@ -18,14 +18,15 @@ namespace iipr
 
 
 /**
-	Template convolution funtion.
+	Template filter funtion.
 */
 template <	typename InputPixelType,
 			typename OutputPixelType,
 			typename WorkingType>
-bool DoFastConvolution(
-			const iimg::IBitmap& inputImage,
+bool DoConvolutionTemplate(
 			const IConvolutionKernel2d& kernel,
+			int backgroundMode,
+			const iimg::IBitmap& inputImage,
 			const iimg::CScanlineMask& resultMask,
 			iimg::IBitmap& outputImage)
 {
@@ -68,28 +69,38 @@ bool DoFastConvolution(
 
 	int kernelElementsCount = int(fastAccessElements.size());
 
-	istd::CIntRange outputRangeH(halfKernelWidth, outputImageSize.GetX() - halfKernelWidth);
+	i2d::CRect outputMaxRect(halfKernelWidth, halfKernelHeight, outputImageSize.GetX() - halfKernelWidth, outputImageSize.GetY() - halfKernelHeight);
 
 	#pragma omp parallel for
 
 	for (int y = 0; y < outputImageSize.GetY(); ++y){
-		OutputPixelType* outputPtr = static_cast<OutputPixelType*>(outputImage.GetLinePtr(y));
+		OutputPixelType* outputLinePtr = static_cast<OutputPixelType*>(outputImage.GetLinePtr(y));
 
-		const istd::CIntRanges* outputRangesPtr = ((y >= halfKernelHeight) && (y < outputImageSize.GetY()))? resultMask.GetPixelRanges(y): NULL;
+		const istd::CIntRanges* outputRangesPtr = outputMaxRect.GetVerticalRange().Contains(y)? resultMask.GetPixelRanges(y): NULL;
 		if (outputRangesPtr != NULL){
-			const InputPixelType* inputPtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
+			const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
 
 			istd::CIntRanges::RangeList rangeList;
-			outputRangesPtr->GetAsList(outputRangeH, rangeList);
+			outputRangesPtr->GetAsList(outputMaxRect.GetHorizontalRange(), rangeList);
 
 			int x = 0;
 			for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
 						iter != rangeList.constEnd();
 						++iter){
 				const istd::CIntRange& rangeH = *iter;
+				Q_ASSERT(rangeH.GetMinValue() >= halfKernelWidth);
+				Q_ASSERT(rangeH.GetMaxValue() <= outputImageSize.GetX() - halfKernelWidth);
 
 				if (rangeH.GetMinValue() > x){
-					std::memset(outputPtr + x, 0, (rangeH.GetMinValue() - x) * sizeof(OutputPixelType));
+					if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
+						std::memset(outputLinePtr + x, 0, (rangeH.GetMinValue() - x) * sizeof(OutputPixelType));
+					}
+					else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
+						for (; x < rangeH.GetMinValue(); ++x){
+							WorkingType inputValue = inputLinePtr[x];
+							outputLinePtr[x] = inputValue;
+						}
+					}
 
 					x = rangeH.GetMinValue();
 				}
@@ -100,22 +111,40 @@ bool DoFastConvolution(
 					for (int i = 0; i < kernelElementsCount; ++i){
 						const QPair<int, WorkingType>& kernelElement = fastAccessElements[i];
 
-						WorkingType inputValue = *(const InputPixelType*)((quint8*)&inputPtr[x] + kernelElement.first);
+						WorkingType inputValue = *(const InputPixelType*)((quint8*)&inputLinePtr[x] + kernelElement.first);
 						inputValue *= kernelElement.second;
 
 						sum += inputValue;
 					}
 
-					outputPtr[x] = sum;
+					outputLinePtr[x] = sum;
 				}
 			}
 
 			if (outputImageSize.GetX() > x){
-				std::memset(outputPtr + x, 0, (outputImageSize.GetX() - x) * sizeof(OutputPixelType));
+				if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
+					std::memset(outputLinePtr + x, 0, (outputImageSize.GetX() - x) * sizeof(OutputPixelType));
+				}
+				else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
+					for (; x < outputImageSize.GetX(); ++x){
+						WorkingType inputValue = inputLinePtr[x];
+						outputLinePtr[x] = inputValue;
+					}
+				}
 			}
 		}
 		else{
-			std::memset(outputPtr, 0, outputImageSize.GetX() * sizeof(OutputPixelType));
+			if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
+				std::memset(outputLinePtr, 0, outputImageSize.GetX() * sizeof(OutputPixelType));
+			}
+			else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
+				const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
+
+				for (int x = 0; x < outputImageSize.GetX(); ++x){
+					WorkingType inputValue = inputLinePtr[x];
+					outputLinePtr[x] = inputValue;
+				}
+			}
 		}
 	}
 
@@ -123,21 +152,17 @@ bool DoFastConvolution(
 }
 
 
-// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
+// static public methods
 
-bool CConvolutionProcessorComp::ParamProcessImage(
-			const iprm::IParamsSet* paramsPtr,
-			const IConvolutionKernel2d* procParamPtr,
+bool CConvolutionProcessorComp::DoConvolutionFilter(
+			const IConvolutionKernel2d& kernel,
+			int backgroundMode,
 			iimg::IBitmap::PixelFormat outputPixelFormat,
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			const iimg::CScanlineMask& resultMask,
+			iimg::IBitmap& outputImage,
+			istd::ILogger* loggerPtr)
 {
-	if (procParamPtr == NULL){
-		SendErrorMessage(0, "Processing parameters are not set");		
-		
-		return false;
-	}
-
 	iimg::IBitmap::PixelFormat inputPixelFormat = inputImage.GetPixelFormat();
 	if (outputPixelFormat <= iimg::IBitmap::PF_UNKNOWN){
 		outputPixelFormat = inputPixelFormat;
@@ -146,44 +171,41 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
 	if (inputImageSize != outputImage.GetImageSize() || outputPixelFormat != outputImage.GetPixelFormat()){
 		if (!outputImage.CreateBitmap(iimg::IBitmap::PixelFormat(outputPixelFormat), inputImageSize)){
-			SendErrorMessage(0, "Output image could not be created");
+			if (loggerPtr != NULL){
+				loggerPtr->SendLogMessage(
+							istd::IInformationProvider::IC_ERROR,
+							0,
+							QObject::tr("Output image could not be created"),
+							QObject::tr("ConvolutionProcessor"));
+			}
 
 			return false;
 		}
 	}
 
-	istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
+	istd::CIndex2d kernelSize = kernel.GetKernelSize();
 	if (kernelSize.IsSizeEmpty()){
-		SendErrorMessage(0, "Kernel size to small");
+		if (loggerPtr != NULL){
+			loggerPtr->SendLogMessage(
+						istd::IInformationProvider::IC_ERROR,
+						0,
+						QObject::tr("Kernel size to small"),
+						QObject::tr("ConvolutionProcessor"));
+		}
 
 		return false;
 	}
 
 	if (inputImageSize.IsInside(kernelSize)){
-		SendErrorMessage(0, "Kernel size to big");
+		if (loggerPtr != NULL){
+			loggerPtr->SendLogMessage(
+						istd::IInformationProvider::IC_ERROR,
+						0,
+						QObject::tr("Kernel size to big"),
+						QObject::tr("ConvolutionProcessor"));
+		}
 
 		return false;
-	}
-
-	// create output image mask
-	i2d::CRect inputClipArea(inputImageSize);
-	i2d::CRect resultClipArea(kernelSize.GetX() / 2, kernelSize.GetY() / 2, inputImageSize.GetX() - kernelSize.GetX() / 2, inputImageSize.GetY() - kernelSize.GetY() / 2);
-
-	iimg::CScanlineMask resultMask;
-	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
-	if (aoiObjectPtr.IsValid()){
-		resultMask.SetCalibration(inputImage.GetCalibration());
-
-		if (!resultMask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), (*m_aoiModeAttrPtr == AM_INPUT_PIXELS)? &inputClipArea: &resultClipArea)){
-			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
-		}
-
-		if (*m_aoiModeAttrPtr == AM_INPUT_PIXELS){
-			resultMask.Erode(kernelSize.GetX() / 2, kernelSize.GetX() / 2, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
-		}
-	}
-	else{
-		resultMask.CreateFilled(resultClipArea);
 	}
 
 	double kernelPosSum = 0.0;
@@ -192,26 +214,11 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	istd::CIndex2d index;
 	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
 		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			double kernelElement = procParamPtr->GetKernelElement(index);
+			double kernelElement = kernel.GetKernelElement(index);
 
 			kernelSum += kernelElement;
 			kernelPosSum += qFabs(kernelElement);
 		}
-	}
-
-	iipr::CConvolutionKernel2d normalizedKernel;
-	if (*m_normalizeKernelAttrPtr && (kernelPosSum > I_EPSILON)){
-		normalizedKernel.SetKernelSize(kernelSize);
-
-		for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-			for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-				double kernelElement = procParamPtr->GetKernelElement(index);
-
-				normalizedKernel.SetKernelElement(index, kernelElement / kernelPosSum);
-			}
-		}
-
-		procParamPtr = &normalizedKernel;
 	}
 
 	bool hasNegativeKernel = kernelSum != kernelPosSum;
@@ -222,36 +229,36 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		case iimg::IBitmap::PF_GRAY:
 			if (hasNegativeKernel){
 				if (kernelPosSum > 1){
-					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+					return DoConvolutionTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 				}
 				else{
-					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 23, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+					return DoConvolutionTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 23, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 				}
 			}
 			else{
 				if (kernelPosSum > 1){
-					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, false, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+					return DoConvolutionTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, false, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 				}
 				else{
-					return DoFastConvolution<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<quint32, 24, false, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+					return DoConvolutionTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<quint32, 24, false, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 				}
 			}
 
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
-			return DoFastConvolution<quint8, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 16, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint8, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 16, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<quint8, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint8, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY32:
-			return DoFastConvolution<quint8, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint8, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint8, float, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint8, float, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint8, double, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint8, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		default:
 			break;
@@ -261,14 +268,14 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_RGB:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, quint8, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<iipr::CPixelManip::Rgba, quint8, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<iipr::CPixelManip::Rgba, quint16, iipr::CPixelManip::RgbCropAccum32<qint32, 14, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<iipr::CPixelManip::Rgba, quint16, iipr::CPixelManip::RgbCropAccum32<qint32, 14, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		default:
 			break;
@@ -277,26 +284,26 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 
 	case iimg::IBitmap::PF_RGBA:
 		if (outputPixelFormat == iimg::IBitmap::PF_RGBA){
-			return DoFastConvolution<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbaCropAccum32<qint32, 22, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<iipr::CPixelManip::Rgba, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbaCropAccum32<qint32, 22, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 		}
 		break;
 
 	case iimg::IBitmap::PF_GRAY16:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY:
-			return DoFastConvolution<quint16, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint16, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
-			return DoFastConvolution<quint16, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint16, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, true> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY32:
-			return DoFastConvolution<quint16, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint16, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, false> >(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint16, float, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint16, float, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint16, double, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint16, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		default:
 			break;
@@ -306,13 +313,13 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_GRAY32:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY32:
-			return DoFastConvolution<quint32, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, true>>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint32, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, true>>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<quint32, float, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint32, float, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<quint32, double, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<quint32, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		default:
 			break;
@@ -322,10 +329,10 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	case iimg::IBitmap::PF_FLOAT32:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_FLOAT32:
-			return DoFastConvolution<float, float, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<float, float, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT64:
-			return DoFastConvolution<float, double, double>(inputImage, *procParamPtr, resultMask, outputImage);
+			return DoConvolutionTemplate<float, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 		default:
 			break;
@@ -333,20 +340,85 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		break;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoFastConvolution<double, double, double>(inputImage, *procParamPtr, resultMask, outputImage);
+		return DoConvolutionTemplate<double, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
 
 	default:
-		SendErrorMessage(0, QObject::tr("Input image format '%1' not supported").arg(m_formatList.GetOptionName(inputPixelFormat)));
-
+		if (loggerPtr != NULL){
+			loggerPtr->SendLogMessage(
+						istd::IInformationProvider::IC_ERROR,
+						0,
+						QObject::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(inputPixelFormat)),
+						QObject::tr("ConvolutionProcessor"));
+		}
 		return false;
 	}
 
-	SendErrorMessage(0, QObject::tr("Cannot produce output image in format '%1' from input format '%2'").arg(m_formatList.GetOptionName(outputPixelFormat)).arg(m_formatList.GetOptionName(inputPixelFormat)));
+	if (loggerPtr != NULL){
+		const iimg::CPixelFormatList& formatList = iimg::CPixelFormatList::GetInstance();
+		loggerPtr->SendLogMessage(
+					istd::IInformationProvider::IC_ERROR,
+					0,
+					QObject::tr("Cannot produce output image in format '%1' from input format '%2'").arg(formatList.GetOptionName(outputPixelFormat)).arg(formatList.GetOptionName(inputPixelFormat)),
+					QObject::tr("ConvolutionProcessor"));
+	}
 
 	return false;
+}
+
+
+// protected methods
+
+// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
+
+bool CConvolutionProcessorComp::ParamProcessImage(
+			const iprm::IParamsSet* paramsPtr,
+			const IConvolutionKernel2d* procParamPtr,
+			const iimg::IBitmap& inputImage,
+			iimg::IBitmap& outputImage)
+{
+	if (procParamPtr == NULL){
+		SendErrorMessage(0, "Processing parameters are not set");		
+		
+		return false;
+	}
+
+	// create output image mask
+	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
+	i2d::CRect inputClipArea(inputImageSize);
+
+	iimg::CScanlineMask resultMask;
+	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
+	if (aoiObjectPtr.IsValid()){
+		resultMask.SetCalibration(inputImage.GetCalibration());
+
+		if (!resultMask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &inputClipArea)){
+			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
+
+			return false;
+		}
+
+		AoiMode aoiMode = GetAoiMode(paramsPtr);
+		if (aoiMode == AM_INPUT_PIXELS){
+			istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
+			resultMask.Erode(kernelSize.GetX() / 2, kernelSize.GetX() / 2, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
+		}
+	}
+	else{
+		resultMask.CreateFilled(inputClipArea);
+	}
+
+	return DoConvolutionFilter(
+				*procParamPtr,
+				GetBackgroundMode(paramsPtr),
+				GetOutputPixelFormat(paramsPtr),
+				inputImage,
+				resultMask,
+				outputImage,
+				this);
 }
 
 
 } // namespace iipr
 
 
+ 

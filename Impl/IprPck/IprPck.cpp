@@ -234,9 +234,9 @@ I_EXPORT_COMPONENT(
 			"Filter Smoothing Convolution Gaussian Blur" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			AutoImageNormalizeProcessor,
-			"Histogram based automatic image normalization",
-			"Histogram Normalization Contrast Enhancing Equalization" IM_AUTHOR("\"Kirill Lepskiy\""));
+			ImageNormalizeProcessor,
+			"Image adjustment with optional histogram based automatic image normalization",
+			"Image Adjustment Histogram Normalization Brightness Contrast Enhancing Equalization Linear Scale" IM_AUTHOR("\"Kirill Lepskiy\" \"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			ProjectionSupplier,

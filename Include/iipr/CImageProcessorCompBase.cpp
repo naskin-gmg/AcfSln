@@ -2,8 +2,10 @@
 
 
 // ACF includes
+#include "iprm/TParamsPtr.h"
 #include "iimg/CGeneralBitmap.h"
 
+// ACF-Solutions includes
 #include "iipr/CImageProcessorCompBase.h"
 
 
@@ -11,13 +13,32 @@ namespace iipr
 {
 
 
-// public methods
+// protected methods
 
-CImageProcessorCompBase::CImageProcessorCompBase()
+int CImageProcessorCompBase::GetBackgroundMode(const iprm::IParamsSet* /*paramsPtr*/) const
 {
+	return *m_backgroundModeAttrPtr;
 }
 
 
+iimg::IBitmap::PixelFormat CImageProcessorCompBase::GetOutputPixelFormat(const iprm::IParamsSet* paramsPtr) const
+{
+	iimg::IBitmap::PixelFormat outputPixelFormat = iimg::IBitmap::PixelFormat(*m_outputPixelTypeAttrPtr);
+	iprm::TParamsPtr<iprm::ISelectionParam> outputFormatParamPtr(paramsPtr, m_outputPixelTypeIdAttrPtr, m_defaultOutputPixelTypeParamCompPtr, false);
+	if (outputFormatParamPtr.IsValid()){
+		outputPixelFormat = iimg::IBitmap::PixelFormat(outputFormatParamPtr->GetSelectedOptionIndex());
+	}
+
+	return outputPixelFormat;
+}
+
+
+CImageProcessorCompBase::AoiMode CImageProcessorCompBase::GetAoiMode(const iprm::IParamsSet* /*paramsPtr*/) const
+{
+	return AoiMode(*m_aoiModeAttrPtr);
+}
+
+	
 // reimplemented (iproc::IProcessor)
 
 int CImageProcessorCompBase::DoProcessing(

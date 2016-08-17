@@ -3,9 +3,7 @@
 
 
 // ACF includes
-#include "iprm/ISelectionParam.h"
 #include "iprm/TParamsPtr.h"
-#include "iimg/CPixelFormatList.h"
 
 // ACF-Solutions includes
 #include "iipr/CImageProcessorCompBase.h"
@@ -26,9 +24,6 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(TImageParamProcessorCompBase);
 		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameters in the parameter set", false, "ParamsId");
-		I_ASSIGN(m_outputPixelTypeAttrPtr, "OutputPixelType", "Type of output pixel if not defined over parameters:\n\t0 - As input\n\t1 - Mono\n\t2 - Grayscale\n\t3 - RGB\n\t4 - RGBA\n\t5 - Grayscale 16\n\t6 - Grayscale 32\n\t7 - Float 32\n\t8 - Float 64", true, 0);
-		I_ASSIGN(m_outputPixelTypeIdAttrPtr, "OutputPixelTypeId", "ID of output pixel type in parameter set (type iprm::ISelectionParam)", false, "OutputPixelType");
-		I_ASSIGN(m_defaultOutputPixelTypeParamCompPtr, "DefaultOutputPixelType", "Default output pixel type if not defined in parameter set", false, "DefaultOutputPixelType");
 	I_END_COMPONENT;
 
 protected:
@@ -50,18 +45,11 @@ protected:
 	virtual bool ParamProcessImage(
 				const iprm::IParamsSet* paramsPtr,
 				const ParameterType* procParamPtr,
-				iimg::IBitmap::PixelFormat outputPixelFormat,
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage) = 0;
 
-protected:
-	iimg::CPixelFormatList m_formatList;
-
 private:
 	I_ATTR(QByteArray, m_paramsIdAttrPtr);
-	I_ATTR(int, m_outputPixelTypeAttrPtr);
-	I_ATTR(QByteArray, m_outputPixelTypeIdAttrPtr);
-	I_REF(iprm::ISelectionParam, m_defaultOutputPixelTypeParamCompPtr);
 };
 
 
@@ -80,14 +68,8 @@ bool TImageParamProcessorCompBase<ParameterType>::ProcessImage(
 		processorParamsPtr.Init(paramsPtr, *m_paramsIdAttrPtr);
 	}
 	
-	int outputPixelFormat = *m_outputPixelTypeAttrPtr;
-	iprm::TParamsPtr<iprm::ISelectionParam> outputFormatParamPtr(paramsPtr, m_outputPixelTypeIdAttrPtr, m_defaultOutputPixelTypeParamCompPtr, false);
-	if (outputFormatParamPtr.IsValid()){
-		outputPixelFormat = outputFormatParamPtr->GetSelectedOptionIndex();
-	}
-
 	// do image processing:
-	return ParamProcessImage(paramsPtr, processorParamsPtr.GetPtr(), iimg::IBitmap::PixelFormat(outputPixelFormat), inputImage, outputImage);
+	return ParamProcessImage(paramsPtr, processorParamsPtr.GetPtr(), inputImage, outputImage);
 }
 
 

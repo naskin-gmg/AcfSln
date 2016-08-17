@@ -56,7 +56,7 @@
 #include "iipr/CColorPatternComparatorComp.h"
 #include "iipr/CImageHistogramSupplierComp.h"
 #include "iipr/CFastGaussianProcessorComp.h"
-#include "iipr/CAutoImageNormalizeProcessorComp.h"
+#include "iipr/CImageNormalizeProcessorComp.h"
 #include "iipr/CProjectionSupplierComp.h"
 #include "iipr/CAdaptiveImageBinarizeProcessorComp.h"
 #include "iipr/CHoughLineFinderComp.h"
@@ -128,7 +128,7 @@ typedef icomp::TModelCompWrap<iipr::CColorPatternControllerComp> ColorPatternCon
 typedef icomp::TModelCompWrap<iipr::CColorPatternComparatorComp> ColorPatternComparator;
 typedef icomp::TModelCompWrap<iipr::CImageHistogramSupplierComp> ImageHistogramSupplier;
 typedef iipr::CFastGaussianProcessorComp FastGaussianProcessor;
-typedef iipr::CAutoImageNormalizeProcessorComp AutoImageNormalizeProcessor;
+typedef iipr::CImageNormalizeProcessorComp ImageNormalizeProcessor;
 typedef icomp::TModelCompWrap<iipr::CProjectionSupplierComp> ProjectionSupplier;
 typedef iipr::CAdaptiveImageBinarizeProcessorComp AdaptiveImageBinarizeProcessor;
 typedef iipr::CHoughLineFinderComp HoughLineFinder;

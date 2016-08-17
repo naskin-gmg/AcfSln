@@ -540,9 +540,8 @@ const imath::IUnitInfo* CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(i
 // reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
 
 bool CRectImageSmoothProcessorComp::ParamProcessImage(
-			const iprm::IParamsSet* /*paramsPtr*/,
+			const iprm::IParamsSet* paramsPtr,
 			const imeas::INumericValue* procParamPtr,
-			iimg::IBitmap::PixelFormat outputPixelFormat,
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
@@ -595,7 +594,13 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 	Q_ASSERT(kernelMaxWidth >= 1);
 	Q_ASSERT(kernelMaxHeight >= 1);
 
-	return DoRectFilter(kernelMaxWidth, kernelMaxHeight, outputPixelFormat, inputImage, outputImage, BorderMode(*m_borderModeAttrPtr));
+	return DoRectFilter(
+				kernelMaxWidth,
+				kernelMaxHeight,
+				GetOutputPixelFormat(paramsPtr),
+				inputImage,
+				outputImage,
+				BorderMode(*m_borderModeAttrPtr));
 }
 
 
