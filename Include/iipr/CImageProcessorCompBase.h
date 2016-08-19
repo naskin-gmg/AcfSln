@@ -81,7 +81,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
 protected:
-	int GetBackgroundMode(const iprm::IParamsSet* paramsPtr) const;
+	BackgroundFillMode GetBackgroundMode(const iprm::IParamsSet* paramsPtr) const;
 	iimg::IBitmap::PixelFormat GetOutputPixelFormat(const iprm::IParamsSet* paramsPtr) const;
 	AoiMode GetAoiMode(const iprm::IParamsSet* paramsPtr) const;
 

@@ -45,14 +45,14 @@ bool DoAdjustTemplate(
 	for (int y = 0; y < outputImageSize.GetY(); ++y){
 		OutputPixelType* outputLinePtr = static_cast<OutputPixelType*>(outputImage.GetLinePtr(y));
 
+		int x = 0;
+
 		const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
 		if (outputRangesPtr != NULL){
 			const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
 
 			istd::CIntRanges::RangeList rangeList;
 			outputRangesPtr->GetAsList(lineRange, rangeList);
-
-			int x = 0;
 			for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
 						iter != rangeList.constEnd();
 						++iter){
@@ -80,27 +80,16 @@ bool DoAdjustTemplate(
 					outputLinePtr[x] = pixelValue;
 				}
 			}
-
-			if (outputImageSize.GetX() > x){
-				if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
-					std::memset(outputLinePtr + x, 0, (outputImageSize.GetX() - x) * sizeof(OutputPixelType));
-				}
-				else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
-					for (; x < outputImageSize.GetX(); ++x){
-						WorkingType inputValue = inputLinePtr[x];
-						outputLinePtr[x] = inputValue;
-					}
-				}
-			}
 		}
-		else{
+
+		if (outputImageSize.GetX() > x){
 			if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
-				std::memset(outputLinePtr, 0, outputImageSize.GetX() * sizeof(OutputPixelType));
+				std::memset(outputLinePtr + x, 0, (outputImageSize.GetX() - x) * sizeof(OutputPixelType));
 			}
 			else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
 				const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
 
-				for (int x = 0; x < outputImageSize.GetX(); ++x){
+				for (; x < outputImageSize.GetX(); ++x){
 					WorkingType inputValue = inputLinePtr[x];
 					outputLinePtr[x] = inputValue;
 				}
@@ -257,7 +246,17 @@ bool CImageNormalizeProcessorComp::DoAdjustFilter(
 		break;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoAdjustTemplate<double, double, double>(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoAdjustTemplate<double, float, double>(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoAdjustTemplate<double, double, double>(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+
+		default:
+			break;
+		}
+		break;
 
 	default:
 		if (loggerPtr != NULL){

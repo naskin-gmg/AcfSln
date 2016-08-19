@@ -7,10 +7,12 @@
 // ACF includes
 #include "iprm/TParamsPtr.h"
 #include "iimg/CPixelFormatList.h"
+#include "iimg/CGeneralBitmap.h"
 
 // ACF-Solutions includes
 #include "iipr/CPixelManip.h"
 #include "iipr/CConvolutionKernel2d.h"
+#include "iipr/CImageCopyProcessorComp.h"
 
 
 namespace iipr
@@ -30,6 +32,11 @@ bool DoConvolutionTemplate(
 			const iimg::CScanlineMask& resultMask,
 			iimg::IBitmap& outputImage)
 {
+	istd::CIndex2d imageSize = inputImage.GetImageSize();
+	if (imageSize.IsSizeEmpty()){
+		return false;
+	}
+
 	istd::CIndex2d kernelSize = kernel.GetKernelSize();
 	Q_ASSERT(!kernelSize.IsSizeEmpty());
 
@@ -41,13 +48,13 @@ bool DoConvolutionTemplate(
 	int halfKernelWidth = kernelSize.GetX() / 2;
 	int halfKernelHeight = kernelSize.GetY() / 2;
 
-	istd::CIndex2d index;
-	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			double value = kernel.GetKernelElement(index);
+	istd::CIndex2d kernelIndex;
+	for (kernelIndex[1] = 0; kernelIndex[1] < kernelSize[1]; ++kernelIndex[1]){
+		for (kernelIndex[0] = 0; kernelIndex[0] < kernelSize[0]; ++kernelIndex[0]){
+			double value = kernel.GetKernelElement(kernelIndex);
 
 			QPair<int, WorkingType> element;
-			element.first = (index[0] - halfKernelWidth) * pixelsDifference + (index[1] - halfKernelHeight) * linesDifference;
+			element.first = (kernelIndex[0] - halfKernelWidth) * pixelsDifference + (kernelIndex[1] - halfKernelHeight) * linesDifference;
 			element.second = value;
 
 			if (element.second != 0){
@@ -56,50 +63,46 @@ bool DoConvolutionTemplate(
 		}
 	}
 
-	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
-	istd::CIndex2d outputImageSize = inputImageSize;
-
-	if (outputImageSize.IsSizeEmpty()){
-		return false;
-	}
-
 	double offsetValue = kernel.GetOffsetValue();
 
 	WorkingType initialSum = WorkingType(offsetValue);
 
 	int kernelElementsCount = int(fastAccessElements.size());
 
-	i2d::CRect outputMaxRect(halfKernelWidth, halfKernelHeight, outputImageSize.GetX() - halfKernelWidth, outputImageSize.GetY() - halfKernelHeight);
+	istd::CIntRange lineRange(halfKernelWidth, imageSize.GetX() - halfKernelWidth);
 
 	#pragma omp parallel for
 
-	for (int y = 0; y < outputImageSize.GetY(); ++y){
+	for (int y = 0; y < imageSize.GetY(); ++y){
 		OutputPixelType* outputLinePtr = static_cast<OutputPixelType*>(outputImage.GetLinePtr(y));
 
-		const istd::CIntRanges* outputRangesPtr = outputMaxRect.GetVerticalRange().Contains(y)? resultMask.GetPixelRanges(y): NULL;
+		int x = 0;
+
+		const istd::CIntRanges* outputRangesPtr = resultMask.GetPixelRanges(y);
 		if (outputRangesPtr != NULL){
+			Q_ASSERT(y >= halfKernelHeight);
+			Q_ASSERT(y < imageSize.GetY() - halfKernelHeight);
+
 			const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
 
 			istd::CIntRanges::RangeList rangeList;
-			outputRangesPtr->GetAsList(outputMaxRect.GetHorizontalRange(), rangeList);
-
-			int x = 0;
+			outputRangesPtr->GetAsList(lineRange, rangeList);
 			for (		istd::CIntRanges::RangeList::ConstIterator iter = rangeList.constBegin();
 						iter != rangeList.constEnd();
 						++iter){
 				const istd::CIntRange& rangeH = *iter;
 				Q_ASSERT(rangeH.GetMinValue() >= halfKernelWidth);
-				Q_ASSERT(rangeH.GetMaxValue() <= outputImageSize.GetX() - halfKernelWidth);
+				Q_ASSERT(rangeH.GetMaxValue() <= imageSize.GetX() - halfKernelWidth);
 
 				if (rangeH.GetMinValue() > x){
-					if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
-						std::memset(outputLinePtr + x, 0, (rangeH.GetMinValue() - x) * sizeof(OutputPixelType));
-					}
-					else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
+					if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
 						for (; x < rangeH.GetMinValue(); ++x){
 							WorkingType inputValue = inputLinePtr[x];
 							outputLinePtr[x] = inputValue;
 						}
+					}
+					else if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
+						std::memset(outputLinePtr + x, 0, (rangeH.GetMinValue() - x) * sizeof(OutputPixelType));
 					}
 
 					x = rangeH.GetMinValue();
@@ -121,29 +124,19 @@ bool DoConvolutionTemplate(
 				}
 			}
 
-			if (outputImageSize.GetX() > x){
-				if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
-					std::memset(outputLinePtr + x, 0, (outputImageSize.GetX() - x) * sizeof(OutputPixelType));
-				}
-				else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
-					for (; x < outputImageSize.GetX(); ++x){
-						WorkingType inputValue = inputLinePtr[x];
-						outputLinePtr[x] = inputValue;
-					}
-				}
-			}
 		}
-		else{
-			if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
-				std::memset(outputLinePtr, 0, outputImageSize.GetX() * sizeof(OutputPixelType));
-			}
-			else if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
+
+		if (imageSize.GetX() > x){
+			if (backgroundMode == CImageProcessorCompBase::BFM_INPUT){
 				const InputPixelType* inputLinePtr = static_cast<const InputPixelType*>(inputImage.GetLinePtr(y));
 
-				for (int x = 0; x < outputImageSize.GetX(); ++x){
+				for (; x < imageSize.GetX(); ++x){
 					WorkingType inputValue = inputLinePtr[x];
 					outputLinePtr[x] = inputValue;
 				}
+			}
+			else if (backgroundMode == CImageProcessorCompBase::BFM_RESET){
+				std::memset(outputLinePtr + x, 0, (imageSize.GetX() - x) * sizeof(OutputPixelType));
 			}
 		}
 	}
@@ -156,7 +149,7 @@ bool DoConvolutionTemplate(
 
 bool CConvolutionProcessorComp::DoConvolutionFilter(
 			const IConvolutionKernel2d& kernel,
-			int backgroundMode,
+			BackgroundFillMode backgroundMode,
 			iimg::IBitmap::PixelFormat outputPixelFormat,
 			const iimg::IBitmap& inputImage,
 			const iimg::CScanlineMask& resultMask,
@@ -211,10 +204,10 @@ bool CConvolutionProcessorComp::DoConvolutionFilter(
 	double kernelPosSum = 0.0;
 	double kernelSum = 0.0;
 
-	istd::CIndex2d index;
-	for (index[1] = 0; index[1] < kernelSize[1]; ++index[1]){
-		for (index[0] = 0; index[0] < kernelSize[0]; ++index[0]){
-			double kernelElement = kernel.GetKernelElement(index);
+	istd::CIndex2d kernelIndex;
+	for (kernelIndex[1] = 0; kernelIndex[1] < kernelSize[1]; ++kernelIndex[1]){
+		for (kernelIndex[0] = 0; kernelIndex[0] < kernelSize[0]; ++kernelIndex[0]){
+			double kernelElement = kernel.GetKernelElement(kernelIndex);
 
 			kernelSum += kernelElement;
 			kernelPosSum += qFabs(kernelElement);
@@ -340,7 +333,17 @@ bool CConvolutionProcessorComp::DoConvolutionFilter(
 		break;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoConvolutionTemplate<double, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
+		switch (outputPixelFormat){
+		case iimg::IBitmap::PF_FLOAT32:
+			return DoConvolutionTemplate<double, float, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
+
+		case iimg::IBitmap::PF_FLOAT64:
+			return DoConvolutionTemplate<double, double, double>(kernel, backgroundMode, inputImage, resultMask, outputImage);
+
+		default:
+			break;
+		}
+		break;
 
 	default:
 		if (loggerPtr != NULL){
@@ -377,40 +380,101 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 			iimg::IBitmap& outputImage)
 {
 	if (procParamPtr == NULL){
-		SendErrorMessage(0, "Processing parameters are not set");		
+		SendErrorMessage(0, QObject::tr("Kernel of convolution not found"));		
 		
 		return false;
 	}
 
+	istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
+	AoiMode aoiMode = GetAoiMode(paramsPtr);
+
 	// create output image mask
 	istd::CIndex2d inputImageSize = inputImage.GetImageSize();
 	i2d::CRect inputClipArea(inputImageSize);
+	i2d::CRect resultClipArea(kernelSize.GetX() / 2, kernelSize.GetY() / 2, inputImageSize.GetX() - kernelSize.GetX() / 2, inputImageSize.GetY() - kernelSize.GetY() / 2);
 
 	iimg::CScanlineMask resultMask;
 	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiObjectPtr.IsValid()){
 		resultMask.SetCalibration(inputImage.GetCalibration());
 
-		if (!resultMask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &inputClipArea)){
+		bool maskCreated = false;
+
+		if (aoiMode == AM_INPUT_PIXELS){
+			maskCreated = resultMask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &inputClipArea);
+
+			resultMask.Erode(kernelSize.GetX() / 2, kernelSize.GetX() / 2, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
+		}
+		else{
+			maskCreated = resultMask.CreateFromGeometry(*aoiObjectPtr.GetPtr(), &resultClipArea);
+		}
+
+		if (!maskCreated){
 			SendErrorMessage(0, QObject::tr("AOI type is not supported"));
 
 			return false;
 		}
-
-		AoiMode aoiMode = GetAoiMode(paramsPtr);
-		if (aoiMode == AM_INPUT_PIXELS){
-			istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
-			resultMask.Erode(kernelSize.GetX() / 2, kernelSize.GetX() / 2, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
-		}
 	}
 	else{
-		resultMask.CreateFilled(inputClipArea);
+		resultMask.CreateFilled(resultClipArea);
+	}
+
+	iimg::IBitmap::PixelFormat outputPixelFormat = GetOutputPixelFormat(paramsPtr);
+
+	if (*m_trySeparateKernelAttrPtr){
+		iipr::CConvolutionKernel2d kernelX;
+		iipr::CConvolutionKernel2d kernelY;
+
+		if (		procParamPtr->TrySeparateKernels(kernelX, kernelY, IConvolutionKernel2d::ST_HOR_VERT) &&
+					(kernelX.GetGridSize(0) > 1) &&
+					(kernelY.GetGridSize(1) > 1)){
+			iimg::CScanlineMask tempMask = resultMask;
+			tempMask.Dilate(0, 0, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
+
+			iimg::CGeneralBitmap tempImage;
+			if (!DoConvolutionFilter(
+						kernelX,
+						BFM_NONE,
+						outputPixelFormat,
+						inputImage,
+						tempMask,
+						tempImage,
+						this)){
+				return false;
+			}
+
+			BackgroundFillMode bkgFillMode = GetBackgroundMode(paramsPtr);
+
+			if (!DoConvolutionFilter(
+						kernelY,
+						(bkgFillMode == BFM_INPUT)? BFM_NONE: bkgFillMode,
+						outputPixelFormat,
+						tempImage,
+						resultMask,
+						outputImage,
+						this)){
+				return false;
+			}
+
+			if (bkgFillMode == BFM_INPUT){	// reconstruct background pixels
+				iimg::CScanlineMask backgroundMask;
+				resultMask.GetInverted(inputClipArea, backgroundMask);
+				CImageCopyProcessorComp::DoImageCopy(outputImage.GetPixelFormat(), inputImage, backgroundMask, outputImage);
+			}
+
+			return true;
+		}
+	}
+
+	// correct output image mask, depending on mask mode
+	if (aoiMode == AM_INPUT_PIXELS){
+		resultMask.Erode(kernelSize.GetX() / 2, kernelSize.GetX() / 2, kernelSize.GetY() / 2, kernelSize.GetY() / 2);
 	}
 
 	return DoConvolutionFilter(
 				*procParamPtr,
 				GetBackgroundMode(paramsPtr),
-				GetOutputPixelFormat(paramsPtr),
+				outputPixelFormat,
 				inputImage,
 				resultMask,
 				outputImage,

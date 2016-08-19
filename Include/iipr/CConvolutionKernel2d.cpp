@@ -1,6 +1,9 @@
 #include "iipr/CConvolutionKernel2d.h"
 
 
+// Qt includes
+#include <QtCore/QVector>
+
 // ACF includes
 #include "istd/CChangeNotifier.h"
 
@@ -43,6 +46,42 @@ CConvolutionKernel2d::CConvolutionKernel2d(const imath::ISampledFunction2d& func
 }
 
 
+CConvolutionKernel2d::CConvolutionKernel2d(const istd::CIndex2d& kernelSize, double value)
+:	BaseClass(kernelSize, value),
+	m_valueOffset(0)
+{
+}
+
+
+double CConvolutionKernel2d::GetKernelDistance(const IConvolutionKernel2d& kernel) const
+{
+	double norm2 = 0;
+
+	istd::CIndex2d size = GetKernelSize();
+	istd::CIndex2d kernelSize = kernel.GetKernelSize();
+	istd::CIndex2d commonSize(qMax(size.GetX(), kernelSize.GetX()), qMax(size.GetY(), kernelSize.GetY()));
+
+	istd::CIndex2d index = istd::CIndex2d::GetZero();
+	if (index.IsInside(commonSize)){
+		do{
+			double element = 0;
+			if (index.IsInside(size)){
+				element = GetKernelElement(index);
+			}
+
+			double kernelElement = 0;
+			if (index.IsInside(kernelSize)){
+				kernelElement = kernel.GetKernelElement(index);
+			}
+
+			norm2 += (element - kernelElement) * (element - kernelElement);
+		} while (index.Increase(commonSize));
+	}
+
+	return qSqrt(norm2);
+}
+
+
 // reimplemented (iipr::IConvolutionKernel2d)
 
 istd::CIndex2d CConvolutionKernel2d::GetKernelSize() const
@@ -51,9 +90,9 @@ istd::CIndex2d CConvolutionKernel2d::GetKernelSize() const
 }
 
 
-void CConvolutionKernel2d::SetKernelSize(const istd::CIndex2d& kernelSize)
+void CConvolutionKernel2d::SetKernelSize(const istd::CIndex2d& kernelSize, double value)
 {
-	CreateGrid2d(kernelSize, 1.0);
+	CreateGrid2d(kernelSize, value);
 }
 
 
@@ -77,7 +116,7 @@ double CConvolutionKernel2d::GetOffsetValue() const
 }
 
 
-void CConvolutionKernel2d::SetOffsetValue(double offset)
+bool CConvolutionKernel2d::SetOffsetValue(double offset)
 {
 	if (offset != m_valueOffset){
 		istd::CChangeNotifier notifier(this);
@@ -85,9 +124,135 @@ void CConvolutionKernel2d::SetOffsetValue(double offset)
 
 		m_valueOffset = offset;
 	}
+
+	return true;
 }
 
 
+bool CConvolutionKernel2d::GetCombinedKernel(const IConvolutionKernel2d& kernel, IConvolutionKernel2d& result) const
+{
+	istd::CIndex2d size = GetKernelSize();
+	if (size.IsSizeEmpty()){
+		result = kernel;
+		return true;
+	}
+
+	istd::CIndex2d kernelSize = kernel.GetKernelSize();
+	if (kernelSize.IsSizeEmpty()){
+		result = *this;
+		return true;
+	}
+
+	istd::CIndex2d resultSize(size.GetX() + kernelSize.GetX() - 1, size.GetY() + kernelSize.GetY() - 1);
+	result.SetKernelSize(resultSize, 0);
+
+	istd::CIndex2d index = istd::CIndex2d::GetZero();
+	Q_ASSERT(index.IsInside(size));
+	Q_ASSERT(index.IsInside(kernelSize));
+
+	do{
+		double element = GetKernelElement(index);
+		if (element != 0){
+			istd::CIndex2d kernelIndex = istd::CIndex2d::GetZero();
+			do{
+				double kernelElement = kernel.GetKernelElement(kernelIndex);
+				istd::CIndex2d resultIndex = index + kernelIndex;
+
+				result.SetKernelElement(resultIndex, result.GetKernelElement(resultIndex) + element * kernelElement);
+			} while (kernelIndex.Increase(kernelSize));
+		}
+	} while (index.Increase(size));
+
+	result.SetOffsetValue(GetOffsetValue() + kernel.GetOffsetValue());
+
+	return true;
+}
+
+
+bool CConvolutionKernel2d::TrySeparateKernels(IConvolutionKernel2d& result1, IConvolutionKernel2d& result2, int separationType, double tolerance) const
+{
+	if ((separationType != ST_AUTO) && (separationType != ST_HOR_VERT)){
+		return false;
+	}
+
+	istd::CIndex2d kernelSize = GetKernelSize();
+
+	QVector<double> squaresX(kernelSize.GetX(), 0);
+	QVector<double> squaresY(kernelSize.GetY(), 0);
+	double norm2 = 0;
+
+	istd::CIndex2d kernelIndex;
+	for (kernelIndex[1] = 0; kernelIndex[1] < kernelSize.GetY(); ++kernelIndex[1]){
+		for (kernelIndex[0] = 0; kernelIndex[0] < kernelSize.GetX(); ++kernelIndex[0]){
+			double kernelElement = GetKernelElement(kernelIndex);
+
+			double elementSquare = kernelElement * kernelElement;
+
+			squaresX[kernelIndex[0]] += elementSquare;
+			squaresY[kernelIndex[1]] += elementSquare;
+			norm2 += elementSquare;
+		}
+	}
+
+	// find maximal X and Y
+	double maxX = 0;
+	int maxXIndex = -1;
+	for (int i = 0; i < kernelSize.GetX(); ++i){
+		double value = squaresX[i];
+		if (value > maxX){
+			maxXIndex = i;
+			maxX = value;
+		}
+	}
+	double maxY = 0;
+	int maxYIndex = -1;
+	for (int i = 0; i < kernelSize.GetY(); ++i){
+		double value = squaresY[i];
+		if (value > maxY){
+			maxYIndex = i;
+			maxY = value;
+		}
+	}
+
+	result1.SetKernelSize(istd::CIndex2d(kernelSize.GetX(), 1), 0);
+	result1.SetOffsetValue(0);
+
+	result2.SetKernelSize(istd::CIndex2d(1, kernelSize.GetY()), 0);
+	result2.SetOffsetValue(m_valueOffset);
+
+	if ((maxXIndex < 0) || (maxYIndex < 0)){
+		return true;	// nothing to do, kernel contains only zeroes
+	}
+
+	double divideFactorX = qSqrt(qSqrt(norm2));
+
+	for (kernelIndex = istd::CIndex2d::GetZero(); kernelIndex[0] < kernelSize.GetX(); ++kernelIndex[0]){
+		double value = qSqrt(squaresX[kernelIndex[0]]) / divideFactorX;
+
+		if (GetKernelElement(istd::CIndex2d(kernelIndex[0], maxYIndex)) < 0){
+			value = -value;
+		}
+
+		result1.SetKernelElement(kernelIndex, value);
+	}
+
+	double divideFactorY = (GetKernelElement(istd::CIndex2d(maxXIndex, maxYIndex)) > 0)? divideFactorX: -divideFactorX;
+	for (kernelIndex = istd::CIndex2d::GetZero(); kernelIndex[1] < kernelSize.GetY(); ++kernelIndex[1]){
+		double value = qSqrt(squaresY[kernelIndex[1]]) / divideFactorY;
+
+		if (GetKernelElement(istd::CIndex2d(maxXIndex, kernelIndex[1])) < 0){
+			value = -value;
+		}
+
+		result2.SetKernelElement(kernelIndex, value);
+	}
+
+	CConvolutionKernel2d reconstructed;
+
+	return result1.GetCombinedKernel(result2, reconstructed) && (qFabs(GetKernelDistance(reconstructed)) < tolerance);
+}
+
+	
 // reimplemented (iser::ISerializable)
 
 bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)

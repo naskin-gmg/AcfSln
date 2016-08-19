@@ -15,9 +15,9 @@ namespace iipr
 
 // protected methods
 
-int CImageProcessorCompBase::GetBackgroundMode(const iprm::IParamsSet* /*paramsPtr*/) const
+CImageProcessorCompBase::BackgroundFillMode CImageProcessorCompBase::GetBackgroundMode(const iprm::IParamsSet* /*paramsPtr*/) const
 {
-	return *m_backgroundModeAttrPtr;
+	return BackgroundFillMode(*m_backgroundModeAttrPtr);
 }
 
 
