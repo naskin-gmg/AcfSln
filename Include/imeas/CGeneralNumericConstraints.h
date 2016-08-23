@@ -1,4 +1,3 @@
-
 #ifndef imeas_CGeneralNumericConstraints_included
 #define imeas_CGeneralNumericConstraints_included
 
@@ -23,8 +22,6 @@ namespace imeas
 class CGeneralNumericConstraints: virtual public INumericConstraints
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-
 	/**
 		Removes all value informations.
 	*/
