@@ -1,6 +1,11 @@
 #include "iipr/CMultiLineProjectionSupplierComp.h"
 
 
+// ACF includes
+#include "ilog/IMessageConsumer.h"
+#include "ilog/TExtMessage.h"
+
+
 namespace iipr
 {
 
@@ -9,14 +14,20 @@ namespace iipr
 
 int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 {
-	if (		m_bitmapProviderCompPtr.IsValid() &&
-				m_linesProviderCompPtr.IsValid()){
+	int retVal = WS_OK;
+
+	if (m_bitmapProviderCompPtr.IsValid() &&
+		m_linesProviderCompPtr.IsValid()){
 		const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 		if (bitmapPtr == NULL){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "MultiLineProjection"));
 
 			return WS_ERROR;
 		}
+
+		m_linesSupplierCompPtr->InvalidateSupplier();
+		m_linesSupplierCompPtr->EnsureWorkInitialized();
+		m_linesSupplierCompPtr->EnsureWorkFinished();
 
 		int projectionCount = m_linesProviderCompPtr->GetValuesCount();
 		if (projectionCount <= 0){
@@ -40,24 +51,34 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 			}
 
 			i2d::CLine2d line(
-						varVector.GetElement(0), 
-						varVector.GetElement(1), 
-						varVector.GetElement(2), 
-						varVector.GetElement(3));
+				varVector.GetElement(0),
+				varVector.GetElement(1),
+				varVector.GetElement(2),
+				varVector.GetElement(3));
 
 			bool isOk = m_projectionProcessorCompPtr->DoProjection(*bitmapPtr, line, NULL, lineResult);
 			if (!isOk){
 				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Calculation of projection %1 failed").arg(i + 1), "MultiLineProjection"));
 
-				return WS_ERROR;
+				retVal = WS_ERROR;
 			}
+
+			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+				isOk ? istd::IInformationProvider::IC_INFO : istd::IInformationProvider::IC_ERROR,
+				iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+				QString("Line %1").arg(i),
+				"Projection generator");
+			pointMessagePtr->SetPoint1(line.GetPoint1());
+			pointMessagePtr->SetPoint2(line.GetPoint2());
+
+			AddMessage(pointMessagePtr, MCT_TEMP);
 		}
 
-		return WS_OK;
+		return retVal;
 	}
 
 	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or lines provider were not set");
-	
+
 	return WS_CRITICAL;
 }
 
@@ -111,7 +132,7 @@ const imeas::IDataSequence* CMultiLineProjectionSupplierComp::GetDataSequence() 
 	const ProductType* resultPtr = GetWorkProduct();
 	if (resultPtr != NULL){
 		imeas::CGeneralDataSequence* averageDataSequence = new imeas::CGeneralDataSequence;
-				
+
 		int sequenceCount = resultPtr->count();
 		int endChannelsCount = 0;
 		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex) {

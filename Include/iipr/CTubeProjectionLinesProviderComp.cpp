@@ -3,6 +3,8 @@
 
 // ACF includes
 #include "iprm/TParamsPtr.h"
+#include "ilog/IMessageConsumer.h"
+#include "ilog/TExtMessage.h"
 #include "imeas/INumericValue.h"
 #include "iipr/CTubeProjectionsGenerator.h"
 
@@ -62,6 +64,16 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 
 							return WS_ERROR;
 						}
+
+						ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+									istd::IInformationProvider::IC_INFO,
+									iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+									QString("Line %1").arg(lineIndex),
+									"Tube projection generator");
+						pointMessagePtr->SetPoint1(line.GetPoint1());
+						pointMessagePtr->SetPoint2(line.GetPoint2());
+
+						AddMessage(pointMessagePtr, MCT_TEMP);
 					}
 				}
 			}
