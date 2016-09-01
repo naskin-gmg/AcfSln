@@ -38,6 +38,7 @@ public:
 	/**
 		Do projection along specified line with variable projection size.
 	*/
+	template <typename InputPixelType, typename DestPixel, typename CalcPixel>
 	bool DoAutosizeProjection(
 				const iimg::IBitmap& bitmap,
 				const i2d::CLine2d& bitmapLine,

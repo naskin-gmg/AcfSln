@@ -1,11 +1,13 @@
 #include "iipr/CLineProjectionProcessorComp.h"
 
+
 // ACF includes
 #include "istd/CChangeNotifier.h"
 #include "istd/TSmartPtr.h"
 #include "i2d/CRectangle.h"
 #include "iimg/TPixelConversion.h"
 #include "iprm/TParamsPtr.h"
+#include "iimg/IBitmap.h"
 
 // ACF-Solutions includes
 #include "imeas/IDataSequence.h"
@@ -16,8 +18,6 @@
 namespace iipr
 {
 
-
-// local functions
 
 template <class PixelConversion>
 bool ProjectionFunction(
@@ -114,6 +114,7 @@ bool ProjectionFunction(
 
 // public methods
 
+template <typename InputPixelType, typename DestPixel, typename CalcPixel>
 bool CLineProjectionProcessorComp::DoAutosizeProjection(
 			const iimg::IBitmap& bitmap,
 			const i2d::CLine2d& bitmapLine,
@@ -164,7 +165,8 @@ bool CLineProjectionProcessorComp::DoAutosizeProjection(
 
 	i2d::CLine2d clippedLine = transformedLine.GetClipped(i2d::CRectangle(axisSizes));
 
-	iimg::CGrayFloatPixelConversion conversion;
+	iimg::TPixelConversion<InputPixelType, DestPixel, CalcPixel> conversion;
+
 	return ProjectionFunction(
 				firstPixelAddress,
 				axisSizes,
@@ -211,7 +213,35 @@ bool CLineProjectionProcessorComp::DoProjection(
 	bitmapLine.SetCalibration(bitmap.GetCalibration());
 	bitmapLine.CopyFrom(projectionLine, istd::IChangeable::CM_CONVERT);
 
-	return DoAutosizeProjection(bitmap, bitmapLine, results);
+	int retVal;
+
+	switch (bitmap.GetPixelFormat()){
+		case  iimg::IBitmap::PF_FLOAT32:
+			retVal = DoAutosizeProjection<float, float, float>(bitmap, bitmapLine, results);
+			break;
+
+		case iimg::IBitmap::PF_FLOAT64:
+			retVal = DoAutosizeProjection<float, double, double>(bitmap, bitmapLine, results);
+			break;
+
+		case iimg::IBitmap::PF_GRAY:
+			retVal = DoAutosizeProjection<quint8, float, float>(bitmap, bitmapLine, results);
+			break;
+
+		case iimg::IBitmap::PF_GRAY16:
+			retVal = DoAutosizeProjection<quint16, float, float>(bitmap, bitmapLine, results);
+			break;
+
+		case iimg::IBitmap::PF_GRAY32:
+			retVal = DoAutosizeProjection<quint32, float, float>(bitmap, bitmapLine, results);
+			break;
+
+		default:
+			retVal = false;
+			break;
+	}
+
+	return retVal;
 }
 
 
@@ -286,4 +316,5 @@ void CLineProjectionProcessorComp::OnComponentCreated()
 
 
 } // namespace iipr
+
 
