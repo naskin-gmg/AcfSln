@@ -27,8 +27,8 @@ public:
 
 	CConvolutionKernel2d();
 	CConvolutionKernel2d(const CConvolutionKernel2d& kernel);
-	CConvolutionKernel2d(const imath::ISampledFunction2d& function2d);
-	CConvolutionKernel2d(const istd::CIndex2d& kernelSize, double value = 0);
+	explicit CConvolutionKernel2d(const imath::ISampledFunction2d& function2d);
+	explicit CConvolutionKernel2d(const istd::CIndex2d& kernelSize, double value = 0);
 
 	double GetKernelDistance(const IConvolutionKernel2d& kernel) const;
 
