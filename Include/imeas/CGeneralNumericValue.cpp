@@ -59,9 +59,11 @@ imath::CVarVector CGeneralNumericValue::GetValues() const
 }
 
 
-bool CGeneralNumericValue::SetValues(const imath::CVarVector& /*values*/)
+bool CGeneralNumericValue::SetValues(const imath::CVarVector& values)
 {
-	return false;
+	SetComponentValue(VTI_AUTO, values);
+
+	return true;
 }
 
 

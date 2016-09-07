@@ -1,5 +1,6 @@
 #include "iqtipr/CMultiLineProjectionSupplierGuiComp.h"
 
+
 // Qt includes
 #include <QtCore/QTimer>
 
@@ -19,12 +20,16 @@ void CMultiLineProjectionSupplierGuiComp::on_TestButton_clicked()
 void CMultiLineProjectionSupplierGuiComp::on_ProjectionSpin_valueChanged(int index)
 {
 	OnProjectionIndexChanged(index);
+
+	UpdateGui(istd::IChangeable::GetAllChanges());
 }
 
 
 void CMultiLineProjectionSupplierGuiComp::on_ProjectionSlider_valueChanged(int index)
 {
 	OnProjectionIndexChanged(index);
+
+	UpdateGui(istd::IChangeable::GetAllChanges());
 }
 
 
@@ -95,9 +100,13 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 	if (providerPtr != NULL){
 		int count = providerPtr->GetSequencesCount();
 
-		if (count != ProjectionSlider->maximum()){
-			ProjectionSlider->setMaximum(count - 1);	
+		if (count != ProjectionSlider->maximum() && (count > 0)){
+			ProjectionSlider->setMaximum(count - 1);
 			ProjectionSpin->setMaximum(count - 1);
+		}
+		else if (count == 0) {
+			ProjectionSlider->setMaximum(0);
+			ProjectionSpin->setMaximum(0);
 		}
 
 		int currentIndex = ProjectionSlider->value();
@@ -136,8 +145,6 @@ QWidget* CMultiLineProjectionSupplierGuiComp::GetParamsWidget() const
 void CMultiLineProjectionSupplierGuiComp::OnProjectionIndexChanged(int index)
 {
 	if (m_projectionSelectorCompPtr.IsValid() && (m_projectionSelectorCompPtr->GetSelectedOptionIndex() != index)){
-		UpdateGui(istd::IChangeable::GetAllChanges());
-	
 		m_projectionSelectorCompPtr->SetSelectedOptionIndex(index);
 	}
 }

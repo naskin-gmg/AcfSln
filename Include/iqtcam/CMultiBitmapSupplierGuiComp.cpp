@@ -214,13 +214,25 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 	// create bitmap thumbnails
 	for (int bitmapIndex = 0; bitmapIndex < bitmapsCount; bitmapIndex++){
-		const iimg::CBitmap* bitmapPtr = dynamic_cast<const iimg::CBitmap*> (providerPtr->GetBitmap(bitmapIndex));
+		const iimg::IBitmap* bitmapPtr = providerPtr->GetBitmap(bitmapIndex);
 		if (bitmapPtr != NULL){
-			const QImage& image = bitmapPtr->GetQImage();
+			QImage previewImage;
+			const iimg::CBitmap* qtBitmapPtr = dynamic_cast<const iimg::CBitmap*>(bitmapPtr);
+			if (qtBitmapPtr != NULL){
+				previewImage = qtBitmapPtr->GetQImage();
+			}
+			else{
+				iimg::CBitmap bitmap;
+
+				bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT);
+
+				previewImage = bitmap.GetQImage();
+			}
+			
 			QPixmap iconPixmap;
 
 #if QT_VERSION >= 0x040700
-			iconPixmap.convertFromImage(image);
+			iconPixmap.convertFromImage(previewImage);
 #else
 			iconPixmap.fromImage(image);
 #endif
