@@ -1,6 +1,9 @@
 #include "iipr/CConvolutionProcessorComp.h"
 
 
+// STL includes
+#include <cstring>
+
 // Qt includes
 #include <QtCore/QVector>
 
