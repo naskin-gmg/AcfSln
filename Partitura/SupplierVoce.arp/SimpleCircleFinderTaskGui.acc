@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4285" Description="ACF"/>
+            <Version Id="1" Number="1650" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>GUI for circle finder using annulus segment to speciffy AOI</Description>
@@ -28,7 +28,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="ValueSupplierGui" PackageId="QtIprPck" ComponentId="ValueSupplierGui">
+        <Element Id="ValueSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultModel">

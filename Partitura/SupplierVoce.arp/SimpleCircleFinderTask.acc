@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4078" Description="ACF"/>
-            <Version Id="1" Number="1520" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4285" Description="ACF"/>
+            <Version Id="1" Number="1650" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Circle finder task using annulus segment to speciffy AOI</Description>
@@ -45,6 +45,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="FeaturesMapper" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Caliper"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ResultCalibration" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Calibration2dProxy"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SendLinesToTemp" Type="Boolean" ExportId="EnableIntrospection">
                         <Data IsEnabled="false"/>
