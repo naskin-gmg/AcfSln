@@ -1,4 +1,4 @@
-#include "iqtipr/CProcessedBitmapView.h"
+#include <iqtipr/CProcessedBitmapView.h>
 
 
 // Qt includes
@@ -11,9 +11,9 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iqtgui/CCommandTools.h"
-#include "iview/IDisplay.h"
+#include <istd/CChangeNotifier.h>
+#include <iqtgui/CCommandTools.h>
+#include <iview/IDisplay.h>
 
 
 namespace iqtipr

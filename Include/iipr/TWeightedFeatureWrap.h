@@ -2,10 +2,10 @@
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 // ACF-Solutions includes
-#include "imeas/CSimpleNumericValue.h"
+#include <imeas/CSimpleNumericValue.h>
 
 
 namespace iipr

@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "ibase/TSerializableContainer.h"
-#include "i2d/CObject2dBase.h"
+#include <ibase/TSerializableContainer.h>
+#include <i2d/CObject2dBase.h>
 
 // ACF-Solutions includes
-#include "iedge/CEdgeLine.h"
+#include <iedge/CEdgeLine.h>
 
 
 namespace iedge

@@ -5,15 +5,15 @@
 #include <QtCore/QBitArray>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "imath/CGeneralUnitInfo.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <istd/TSmartPtr.h>
+#include <imath/CGeneralUnitInfo.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
-#include "imeas/INumericConstraints.h"
+#include <imeas/INumericValue.h>
+#include <imeas/INumericConstraints.h>
 
-#include "iedge/IEdgeLinesProcessor.h"
+#include <iedge/IEdgeLinesProcessor.h>
 
 
 namespace iedge

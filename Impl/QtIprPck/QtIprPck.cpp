@@ -5,7 +5,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace QtIprPck

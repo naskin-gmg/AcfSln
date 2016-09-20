@@ -2,13 +2,13 @@
 #define iqtmm_CMediaLoaderComp_included
 
 
-#include "ifile/IFilePersistence.h"
+#include <ifile/IFilePersistence.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "ilog/TLoggerCompWrap.h"
+#include <ilog/TLoggerCompWrap.h>
 
-#include "iqtmm/iqtmm.h"
+#include <iqtmm/iqtmm.h>
 
 
 namespace iqtmm

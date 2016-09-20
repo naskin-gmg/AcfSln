@@ -6,13 +6,13 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "i2d/CRectangle.h"
-#include "iimg/CScanlineMask.h"
+#include <i2d/CRectangle.h>
+#include <iimg/CScanlineMask.h>
 
 // ACF-Solutions includes
-#include "imeas/ILinearAdjustParams.h"
-#include "imeas/INumericValue.h"
-#include "iipr/CImageProcessorCompBase.h"
+#include <imeas/ILinearAdjustParams.h>
+#include <imeas/INumericValue.h>
+#include <iipr/CImageProcessorCompBase.h>
 
 
 namespace iipr

@@ -1,4 +1,4 @@
-#include "ifileproc/CProcessingResultsReviewComp.h"
+#include <ifileproc/CProcessingResultsReviewComp.h>
 
 
 // Qt includes
@@ -8,10 +8,10 @@
 #include <QFileInfo>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace ifileproc

@@ -1,12 +1,12 @@
-#include "iipr/CRingPatternGeneratorParamsComp.h"
+#include <iipr/CRingPatternGeneratorParamsComp.h>
 
 
 // ACF includes
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iipr

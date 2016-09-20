@@ -2,11 +2,11 @@
 #define iqtipr_CCaliperParamsGuiComp_included
 
 
-#include "iipr/ICaliperParams.h"
+#include <iipr/ICaliperParams.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h>
 
 
 namespace iqtipr

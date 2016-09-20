@@ -1,8 +1,8 @@
-#include "icam/CAcquisitionConstraintsComp.h"
+#include <icam/CAcquisitionConstraintsComp.h>
 
 
 // IACF includes
-#include "isig/ITriggerParams.h"
+#include <isig/ITriggerParams.h>
 
 
 namespace icam

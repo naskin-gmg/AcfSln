@@ -6,15 +6,15 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iimg/CScanlineMask.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iimg/IBitmap.h>
+#include <iimg/CScanlineMask.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
-#include "imeas/INumericConstraints.h"
+#include <imeas/INumericValue.h>
+#include <imeas/INumericConstraints.h>
 
-#include "iedge/IEdgesExtractor.h"
+#include <iedge/IEdgesExtractor.h>
 
 
 namespace iedge

@@ -1,4 +1,4 @@
-#include "ifileproc/CComposedCopyFilesComp.h"
+#include <ifileproc/CComposedCopyFilesComp.h>
 
 
 // Qt includes

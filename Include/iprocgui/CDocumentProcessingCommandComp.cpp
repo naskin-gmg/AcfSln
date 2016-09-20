@@ -1,11 +1,11 @@
-#include "iprocgui/CDocumentProcessingCommandComp.h"
+#include <iprocgui/CDocumentProcessingCommandComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CGeneralTimeStamp.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CGeneralTimeStamp.h>
 
-#include "iqtgui/CGuiComponentDialog.h"
+#include <iqtgui/CGuiComponentDialog.h>
 
 
 namespace iprocgui

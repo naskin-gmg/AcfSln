@@ -1,4 +1,4 @@
-#include "icam/CSnapBitmapSupplierComp.h"
+#include <icam/CSnapBitmapSupplierComp.h>
 
 
 namespace icam

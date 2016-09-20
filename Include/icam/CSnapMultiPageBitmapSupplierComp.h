@@ -6,13 +6,13 @@
 #include <QtCore/QPair>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "iimg/CMultiPageBitmapBase.h"
-#include "idoc/IMultiPageDocumentProvider.h"
+#include <istd/TDelPtr.h>
+#include <iimg/CMultiPageBitmapBase.h>
+#include <idoc/IMultiPageDocumentProvider.h>
 
 // ACF-Solutions includes
-#include "iinsp/TSupplierCompWrap.h"
-#include "icam/IBitmapAcquisition.h"
+#include <iinsp/TSupplierCompWrap.h>
+#include <icam/IBitmapAcquisition.h>
 #include <imeas/INumericConstraints.h>
 #include <imeas/CSimpleNumericValue.h>
 

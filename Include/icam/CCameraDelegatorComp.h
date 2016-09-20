@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "ilog/TLoggerCompWrap.h"
-#include "iprm/IParamsSet.h"
+#include <ilog/TLoggerCompWrap.h>
+#include <iprm/IParamsSet.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
 
 
 namespace icam

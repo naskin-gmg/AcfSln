@@ -13,14 +13,14 @@
 #endif
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/IDialog.h"
-#include "istd/TPointerVector.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/IDialog.h>
+#include <istd/TPointerVector.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValueProvider.h"
+#include <imeas/INumericValueProvider.h>
 
-#include "GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h"
+#include <GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h>
 
 
 namespace iqtcam

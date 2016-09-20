@@ -1,4 +1,4 @@
-#include "iprocgui/CProcessorCommandComp.h"
+#include <iprocgui/CProcessorCommandComp.h>
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #endif
 
 // ACF includes
-#include "iprm/IOptionsList.h"
+#include <iprm/IOptionsList.h>
 
 
 namespace iprocgui

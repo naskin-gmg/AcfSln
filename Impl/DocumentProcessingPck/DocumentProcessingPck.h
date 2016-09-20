@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "idocproc/CRenderedDocumentPreviewGeneratorComp.h"
+#include <idocproc/CRenderedDocumentPreviewGeneratorComp.h>
 
 
 /**

@@ -1,7 +1,7 @@
 #include "MeasPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace MeasPck

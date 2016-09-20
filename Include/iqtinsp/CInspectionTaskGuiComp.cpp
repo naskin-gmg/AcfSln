@@ -1,4 +1,4 @@
-#include "iqtinsp/CInspectionTaskGuiComp.h"
+#include <iqtinsp/CInspectionTaskGuiComp.h>
 
 
 // Qt includes
@@ -20,14 +20,14 @@
 #endif
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
-#include "iser/CCompactXmlMemReadArchive.h"
-#include "iser/CCompactXmlMemWriteArchive.h"
-#include "iview/IShapeView.h"
-#include "iview/IInteractiveShape.h"
-#include "iview/CShapeBase.h"
-#include "iview/CImageShape.h"
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
+#include <iser/CCompactXmlMemReadArchive.h>
+#include <iser/CCompactXmlMemWriteArchive.h>
+#include <iview/IShapeView.h>
+#include <iview/IInteractiveShape.h>
+#include <iview/CShapeBase.h>
+#include <iview/CImageShape.h>
 
 
 namespace iqtinsp

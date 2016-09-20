@@ -1,4 +1,4 @@
-#include "icmpstr/CConvertComponentCommandComp.h"
+#include <icmpstr/CConvertComponentCommandComp.h>
 
 
 // STL includes
@@ -13,12 +13,12 @@
 #endif
 
 // ACF includes
-#include "iser/CMemoryReadArchive.h"
-#include "iser/CMemoryWriteArchive.h"
-#include "icomp/CComponentMetaDescriptionEncoder.h"
+#include <iser/CMemoryReadArchive.h>
+#include <iser/CMemoryWriteArchive.h>
+#include <icomp/CComponentMetaDescriptionEncoder.h>
 
 // ACF-Solutions includes
-#include "icmpstr/CVisualRegistryElement.h"
+#include <icmpstr/CVisualRegistryElement.h>
 
 
 namespace icmpstr

@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CPolyline.h"
-#include "iprm/IParamsSet.h"
-#include "iinsp/TSupplierCompWrap.h"
+#include <i2d/CPolyline.h>
+#include <iprm/IParamsSet.h>
+#include <iinsp/TSupplierCompWrap.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValueProvider.h"
+#include <imeas/INumericValueProvider.h>
 
 
 namespace iipr

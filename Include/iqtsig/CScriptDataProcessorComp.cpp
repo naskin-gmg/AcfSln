@@ -1,14 +1,14 @@
-#include "iqtsig/CScriptDataProcessorComp.h"
+#include <iqtsig/CScriptDataProcessorComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "idoc/ITextDocument.h"
-#include "ibase/IProgressManager.h"
-#include "iprm/TParamsPtr.h"
+#include <istd/CChangeNotifier.h>
+#include <idoc/ITextDocument.h>
+#include <ibase/IProgressManager.h>
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solution includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
 
 namespace iqtsig

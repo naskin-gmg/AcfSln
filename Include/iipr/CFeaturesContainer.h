@@ -2,10 +2,10 @@
 #define iipr_CFeaturesContainer_included
 
 
-#include "istd/TPointerVector.h"
+#include <istd/TPointerVector.h>
 
-#include "iipr/IFeaturesConsumer.h"
-#include "imeas/INumericValueProvider.h"
+#include <iipr/IFeaturesConsumer.h>
+#include <imeas/INumericValueProvider.h>
 
 
 namespace iipr

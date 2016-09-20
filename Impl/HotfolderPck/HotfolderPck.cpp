@@ -1,7 +1,7 @@
 #include "HotfolderPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace HotfolderPck

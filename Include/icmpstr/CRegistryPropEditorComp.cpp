@@ -1,11 +1,11 @@
-#include "icmpstr/CRegistryPropEditorComp.h"
+#include <icmpstr/CRegistryPropEditorComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "icomp/CComponentMetaDescriptionEncoder.h"
-#include "icomp/CCompositeComponentStaticInfo.h"
+#include <icomp/CComponentMetaDescriptionEncoder.h>
+#include <icomp/CCompositeComponentStaticInfo.h>
 
 // public methods
 	

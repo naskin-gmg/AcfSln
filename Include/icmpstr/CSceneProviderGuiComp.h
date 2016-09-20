@@ -17,15 +17,15 @@
 #endif
 
 // ACF includes
-#include "i2d/ISceneController.h"
-#include "ibase/ICommandsProvider.h"
-#include "iqtgui/IDropConsumer.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <i2d/ISceneController.h>
+#include <ibase/ICommandsProvider.h>
+#include <iqtgui/IDropConsumer.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 // ACF-Solutions includes
-#include "icmpstr/ISceneProvider.h"
-#include "GeneratedFiles/icmpstr/ui_CSceneProviderGuiComp.h"
+#include <icmpstr/ISceneProvider.h>
+#include <GeneratedFiles/icmpstr/ui_CSceneProviderGuiComp.h>
 
 
 namespace icmpstr

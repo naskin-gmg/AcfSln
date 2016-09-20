@@ -1,11 +1,11 @@
-#include "icmpstr/CComponentHelpFileProviderComp.h"
+#include <icmpstr/CComponentHelpFileProviderComp.h>
 
 
 // Qt includes
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 namespace icmpstr

@@ -1,4 +1,4 @@
-#include "iqtipr/CPatternTeachingControllerGuiComp.h"
+#include <iqtipr/CPatternTeachingControllerGuiComp.h>
 
 
 // Qt includes
@@ -9,7 +9,7 @@
 #endif
 
 // ACF includes
-#include "iqtgui/CGuiComponentDialog.h"
+#include <iqtgui/CGuiComponentDialog.h>
 
 
 namespace iqtipr

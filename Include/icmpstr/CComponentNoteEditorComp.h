@@ -6,13 +6,13 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "imod/CMultiModelDispatcherBase.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <imod/CMultiModelDispatcherBase.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "icmpstr/IElementSelectionInfo.h"
+#include <icmpstr/IElementSelectionInfo.h>
 
-#include "GeneratedFiles/icmpstr/ui_CComponentNoteEditorComp.h"
+#include <GeneratedFiles/icmpstr/ui_CComponentNoteEditorComp.h>
 
 
 namespace icmpstr

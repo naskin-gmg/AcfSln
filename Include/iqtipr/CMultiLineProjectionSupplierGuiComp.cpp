@@ -1,4 +1,4 @@
-#include "iqtipr/CMultiLineProjectionSupplierGuiComp.h"
+#include <iqtipr/CMultiLineProjectionSupplierGuiComp.h>
 
 
 // Qt includes

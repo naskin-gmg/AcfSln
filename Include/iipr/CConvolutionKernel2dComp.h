@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iipr/CConvolutionKernel2d.h"
+#include <iipr/CConvolutionKernel2d.h>
 
 
 namespace iipr

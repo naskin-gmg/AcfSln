@@ -6,12 +6,12 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 #include <QtCore/QString>
-#include "iprm/IParamsManager.h"
+#include <iprm/IParamsManager.h>
 
 // ACF-Solutions include
-#include "icam/CCameraDelegatorComp.h"
+#include <icam/CCameraDelegatorComp.h>
 
 
 namespace icam

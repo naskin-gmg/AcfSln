@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 
 // ACF-Solutions includes
-#include "imeas/IDataStatistics.h"
+#include <imeas/IDataStatistics.h>
 
-#include "GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h"
+#include <GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h>
 
 
 namespace iqtmeas

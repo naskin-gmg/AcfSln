@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "iprm/ISelectionParam.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iprm/ISelectionParam.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "icam/ICameraInfo.h"
+#include <icam/ICameraInfo.h>
 
-#include "GeneratedFiles/iqtcam/ui_CCameraInfoGuiComp.h"
+#include <GeneratedFiles/iqtcam/ui_CCameraInfoGuiComp.h>
 
 
 namespace iqtcam

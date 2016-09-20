@@ -16,20 +16,20 @@
 #endif
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "imod/CMultiModelObserverBase.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "ifile/IFilePersistence.h"
-#include "ilog/CMessageContainer.h"
-#include "iview/IShape.h"
-#include "iview/IShapeFactory.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqt2d/IViewExtender.h"
-#include "iqt2d/IViewProvider.h"
+#include <istd/TPointerVector.h>
+#include <imod/CMultiModelObserverBase.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <ifile/IFilePersistence.h>
+#include <ilog/CMessageContainer.h>
+#include <iview/IShape.h>
+#include <iview/IShapeFactory.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqt2d/IViewExtender.h>
+#include <iqt2d/IViewProvider.h>
 
 // ACF-Solutions includes
-#include "iinsp/IInspectionTask.h"
-#include "GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h"
+#include <iinsp/IInspectionTask.h>
+#include <GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h>
 
 
 namespace iqtinsp

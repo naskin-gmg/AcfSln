@@ -1,15 +1,16 @@
-#include "CEdgeLinesSupplierEditorComp.h"
+#include <iedgegui/CEdgeLinesSupplierEditorComp.h>
+
 
 // Qt includes
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "imath/CVarVector.h"
+#include <imath/CVarVector.h>
 
 // ACF-Solutions includes
-#include "iedge/IEdgeLinesProvider.h"
-#include "iedge/CEdgeLineContainer.h"
-#include "iedgegui/CEdgeLineContainerShape.h"
+#include <iedge/IEdgeLinesProvider.h>
+#include <iedge/CEdgeLineContainer.h>
+#include <iedgegui/CEdgeLineContainerShape.h>
 
 
 namespace iedgegui

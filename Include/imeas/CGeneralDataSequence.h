@@ -6,11 +6,11 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "istd/TOptDelPtr.h"
-#include "imath/TISampledFunction.h"
+#include <istd/TSmartPtr.h>
+#include <istd/TOptDelPtr.h>
+#include <imath/TISampledFunction.h>
 
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
 
 namespace imeas

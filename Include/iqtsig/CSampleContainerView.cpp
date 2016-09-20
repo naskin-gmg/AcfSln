@@ -1,4 +1,4 @@
-#include "iqtsig/CSampleContainerView.h"
+#include <iqtsig/CSampleContainerView.h>
 
 
 // Qt includes

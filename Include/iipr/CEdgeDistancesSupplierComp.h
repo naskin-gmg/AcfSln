@@ -3,19 +3,19 @@
 
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "i2d/CVector2d.h"
+#include <istd/TPointerVector.h>
+#include <i2d/CVector2d.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "imeas/INumericValueProvider.h"
-#include "imeas/CSimpleNumericValue.h"
-#include "iimg/IBitmapProvider.h"
-#include "iipr/IImageToFeatureProcessor.h"
-#include "iipr/CCaliperDistanceFeature.h"
-#include "iipr/CFeaturesContainer.h"
+#include <iproc/IProcessor.h>
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <imeas/INumericValueProvider.h>
+#include <imeas/CSimpleNumericValue.h>
+#include <iimg/IBitmapProvider.h>
+#include <iipr/IImageToFeatureProcessor.h>
+#include <iipr/CCaliperDistanceFeature.h>
+#include <iipr/CFeaturesContainer.h>
 
 
 namespace iipr

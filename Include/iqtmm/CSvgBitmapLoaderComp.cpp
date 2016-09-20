@@ -1,4 +1,4 @@
-#include "iqtmm/CSvgBitmapLoaderComp.h"
+#include <iqtmm/CSvgBitmapLoaderComp.h>
 
 
 // Qt includes
@@ -8,8 +8,8 @@
 
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iimg/IQImageProvider.h"
+#include <iimg/IBitmap.h>
+#include <iimg/IQImageProvider.h>
 
 
 namespace iqtmm

@@ -6,8 +6,8 @@
 #include <QtCore/QList>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "iproc/TILockedProducer.h"
+#include <istd/TDelPtr.h>
+#include <iproc/TILockedProducer.h>
 
 
 namespace iproc

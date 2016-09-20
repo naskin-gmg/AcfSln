@@ -13,15 +13,15 @@
 #endif
 
 // ACF includes
-#include "istd/CClassInfo.h"
-#include "idoc/IHelpViewer.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iwidgets/CTreeWidgetFilter.h"
-#include "iwidgets/CItemDelegate.h"
+#include <istd/CClassInfo.h>
+#include <idoc/IHelpViewer.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iwidgets/CTreeWidgetFilter.h>
+#include <iwidgets/CItemDelegate.h>
 
 // ACF-Solutions includes
-#include "icmpstr/CElementSelectionInfoManagerBase.h"
-#include "GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h"
+#include <icmpstr/CElementSelectionInfoManagerBase.h>
+#include <GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h>
 
 
 namespace icmpstr

@@ -1,14 +1,14 @@
-#include "icam/CSnapBitmapSupplierCompBase.h"
+#include <icam/CSnapBitmapSupplierCompBase.h>
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "imath/CGeneralUnitInfo.h"
-#include "i2d/CAffineCalibration2d.h"
-#include "iprm/TParamsPtr.h"
+#include <imod/TModelWrap.h>
+#include <imath/CGeneralUnitInfo.h>
+#include <i2d/CAffineCalibration2d.h>
+#include <iprm/TParamsPtr.h>
 
 
 // ACF-Solutions includes
-#include "icam/CCalibratedCameraComp.h"
+#include <icam/CCalibratedCameraComp.h>
 
 
 namespace icam

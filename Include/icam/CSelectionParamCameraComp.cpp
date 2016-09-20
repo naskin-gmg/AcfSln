@@ -1,8 +1,8 @@
-#include "icam/CSelectionParamCameraComp.h"
+#include <icam/CSelectionParamCameraComp.h>
 
 
 // ACF includes
-#include "iprm/TParamsPtr.h"
+#include <iprm/TParamsPtr.h>
 
 
 namespace icam

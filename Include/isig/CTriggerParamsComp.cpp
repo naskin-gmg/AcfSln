@@ -1,10 +1,10 @@
-#include "isig/CTriggerParamsComp.h"
+#include <isig/CTriggerParamsComp.h>
 
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace isig

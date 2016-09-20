@@ -1,4 +1,4 @@
-#include "iqtsig/CSampleAcquisitionGuiComp.h"
+#include <iqtsig/CSampleAcquisitionGuiComp.h>
 
 
 // Qt includes

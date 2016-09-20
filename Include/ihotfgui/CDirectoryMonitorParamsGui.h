@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 
 // AcfSln includes
-#include "ihotf/IDirectoryMonitorParams.h"
-#include "GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h"
+#include <ihotf/IDirectoryMonitorParams.h>
+#include <GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h>
 
 
 namespace ihotfgui

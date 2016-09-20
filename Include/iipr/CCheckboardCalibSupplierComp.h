@@ -3,18 +3,18 @@
 
 
 // ACF includes
-#include "imath/CFixedPointManip.h"
-#include "imath/CGeneralUnitInfo.h"
-#include "i2d/ICalibrationProvider.h"
-#include "i2d/CPerspectiveCalibration2d.h"
-#include "iimg/IBitmapProvider.h"
+#include <imath/CFixedPointManip.h>
+#include <imath/CGeneralUnitInfo.h>
+#include <i2d/ICalibrationProvider.h>
+#include <i2d/CPerspectiveCalibration2d.h>
+#include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
-#include "imeas/CGeneralNumericConstraints.h"
-#include "iproc/IProcessor.h"
-#include "iipr/IImageToFeatureProcessor.h"
-#include "iinsp/TSupplierCompWrap.h"
+#include <imeas/INumericValue.h>
+#include <imeas/CGeneralNumericConstraints.h>
+#include <iproc/IProcessor.h>
+#include <iipr/IImageToFeatureProcessor.h>
+#include <iinsp/TSupplierCompWrap.h>
 
 
 namespace iipr

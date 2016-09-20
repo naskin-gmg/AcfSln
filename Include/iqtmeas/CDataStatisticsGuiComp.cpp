@@ -1,4 +1,4 @@
-#include "iqtmeas/CDataStatisticsGuiComp.h"
+#include <iqtmeas/CDataStatisticsGuiComp.h>
 
 
 namespace iqtmeas

@@ -3,20 +3,20 @@
 
 
 // ACF includes
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "ifile/IFilePersistence.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <ifile/IFilePersistence.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValueProvider.h"
-#include "iedge/CEdgeLineContainer.h"
-#include "iqtinsp/TSupplierGuiCompBase.h"
-#include "iqtipr/iqtipr.h"
+#include <imeas/INumericValueProvider.h>
+#include <iedge/CEdgeLineContainer.h>
+#include <iqtinsp/TSupplierGuiCompBase.h>
+#include <iqtipr/iqtipr.h>
 
-#include "GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h"
+#include <GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h>
 
 
 

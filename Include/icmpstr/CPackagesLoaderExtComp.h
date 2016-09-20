@@ -7,8 +7,8 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "icmpstr/IExternalMetaInfoManager.h"
-#include "ipackage/CPackagesLoaderComp.h"
+#include <icmpstr/IExternalMetaInfoManager.h>
+#include <ipackage/CPackagesLoaderComp.h>
 
 
 namespace icmpstr

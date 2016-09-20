@@ -1,4 +1,4 @@
-#include "iqtcam/CBitmapSupplierGuiComp.h"
+#include <iqtcam/CBitmapSupplierGuiComp.h>
 
 
 // Qt includes
@@ -11,9 +11,9 @@
 #endif
 
 // ACF includes
-#include "iinsp/ISupplier.h"
-#include "iview/CImageShape.h"
-#include "iview/CViewBase.h"
+#include <iinsp/ISupplier.h>
+#include <iview/CImageShape.h>
+#include <iview/CViewBase.h>
 
 
 namespace iqtcam

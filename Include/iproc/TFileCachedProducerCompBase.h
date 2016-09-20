@@ -8,10 +8,10 @@
 #include <QtCore/QList>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "icomp/CComponentBase.h"
+#include <ifile/IFilePersistence.h>
+#include <icomp/CComponentBase.h>
 
-#include "iproc/TILockedProducer.h"
+#include <iproc/TILockedProducer.h>
 
 
 namespace iproc

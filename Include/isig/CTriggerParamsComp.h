@@ -6,13 +6,13 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsList.h"
+#include <icomp/CComponentBase.h>
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsList.h>
 
 // ACF-Solutions includes
-#include "isig/ITriggerConstraints.h"
-#include "isig/ITriggerParams.h"
+#include <isig/ITriggerConstraints.h>
+#include <isig/ITriggerParams.h>
 
 
 namespace isig

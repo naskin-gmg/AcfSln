@@ -2,11 +2,11 @@
 
 
 // ACF includes
-#include "i2d/CPosition2d.h"
-#include "i2d/CAffineTransformation2d.h"
+#include <i2d/CPosition2d.h>
+#include <i2d/CAffineTransformation2d.h>
 
 // ACF-Solutions includes
-#include "iipr/CObjectFeature.h"
+#include <iipr/CObjectFeature.h>
 
 
 namespace iblob

@@ -6,12 +6,12 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/TDesignerGuiCompBase.h>
 
 // ACF-Solutions includes
-#include "iauth/ILogin.h"
+#include <iauth/ILogin.h>
 
-#include "GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h"
+#include <GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h>
 
 
 namespace iqtauth

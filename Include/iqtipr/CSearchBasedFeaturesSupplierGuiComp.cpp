@@ -1,14 +1,14 @@
-#include "iqtipr/CSearchBasedFeaturesSupplierGuiComp.h"
+#include <iqtipr/CSearchBasedFeaturesSupplierGuiComp.h>
 
 // Qt includes
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "imath/CVarVector.h"
+#include <imath/CVarVector.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValueProvider.h"
-#include "iipr/CSearchFeature.h"
+#include <imeas/INumericValueProvider.h>
+#include <iipr/CSearchFeature.h>
 
 
 namespace iqtipr

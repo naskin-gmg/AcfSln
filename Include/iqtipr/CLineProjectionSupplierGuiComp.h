@@ -3,23 +3,23 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
-#include "i2d/CPosition2d.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
+#include <i2d/CPosition2d.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValueProvider.h"
-#include "imeas/IDataSequenceProvider.h"
-#include "imeas/CGeneralDataSequence.h"
+#include <imeas/INumericValueProvider.h>
+#include <imeas/IDataSequenceProvider.h>
+#include <imeas/CGeneralDataSequence.h>
 
-#include "iqtinsp/TSupplierGuiCompBase.h"
+#include <iqtinsp/TSupplierGuiCompBase.h>
 
-#include "iqtipr/iqtipr.h"
+#include <iqtipr/iqtipr.h>
 
-#include "GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h>
 
 
 namespace iqtipr

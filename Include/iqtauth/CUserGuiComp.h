@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "imod/CMultiModelDispatcherBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <imod/CMultiModelDispatcherBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "iauth/IRightsProvider.h"
-#include "iauth/ILogin.h"
-#include "iauth/IUsersManager.h"
-#include "iauth/IPasswordChanger.h"
+#include <iauth/IRightsProvider.h>
+#include <iauth/ILogin.h>
+#include <iauth/IUsersManager.h>
+#include <iauth/IPasswordChanger.h>
 
-#include "GeneratedFiles/iqtauth/ui_CUserGuiComp.h"
+#include <GeneratedFiles/iqtauth/ui_CUserGuiComp.h>
 
 
 namespace iqtauth

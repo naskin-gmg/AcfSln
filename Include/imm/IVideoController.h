@@ -2,10 +2,10 @@
 #define imm_IVideoController_included
 
 
-#include "iimg/IBitmap.h"
+#include <iimg/IBitmap.h>
 
-#include "imm/IMediaController.h"
-#include "imm/IVideoInfo.h"
+#include <imm/IMediaController.h>
+#include <imm/IVideoInfo.h>
 
 
 namespace imm

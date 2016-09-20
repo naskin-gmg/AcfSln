@@ -1,18 +1,18 @@
-#include "iipr/CLineProjectionProcessorComp.h"
+#include <iipr/CLineProjectionProcessorComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TSmartPtr.h"
-#include "i2d/CRectangle.h"
-#include "iimg/TPixelConversion.h"
-#include "iprm/TParamsPtr.h"
-#include "iimg/IBitmap.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TSmartPtr.h>
+#include <i2d/CRectangle.h>
+#include <iimg/TPixelConversion.h>
+#include <iprm/TParamsPtr.h>
+#include <iimg/IBitmap.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
-#include "imeas/CSamplesInfo.h"
-#include "imeas/INumericValue.h"
+#include <imeas/IDataSequence.h>
+#include <imeas/CSamplesInfo.h>
+#include <imeas/INumericValue.h>
 
 
 namespace iipr

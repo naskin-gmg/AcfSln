@@ -11,10 +11,10 @@
 #endif
 
 // ACF includes
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 
 // ACF-Solutons includes
-#include "icmpstr/icmpstr.h"
+#include <icmpstr/icmpstr.h>
 
 
 namespace icmpstr

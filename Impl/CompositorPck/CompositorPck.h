@@ -2,25 +2,25 @@
 #define CompositorPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "icmpstr/CAttributeEditorComp.h"
-#include "icmpstr/CPackageOverviewComp.h"
-#include "icmpstr/CRegistryLoaderComp.h"
-#include "icmpstr/CRegistryPreviewComp.h"
-#include "icmpstr/CComponentHelpFileProviderComp.h"
-#include "icmpstr/CVisualRegistry.h"
-#include "icmpstr/CVisualRegistryEditorComp.h"
-#include "icmpstr/CRegistryConsistInfoComp.h"
-#include "icmpstr/CRegistryPropEditorComp.h"
-#include "icmpstr/CQuickHelpGuiComp.h"
-#include "icmpstr/CPackagesLoaderExtComp.h"
-#include "icmpstr/CComponentNoteEditorComp.h"
-#include "icmpstr/CSceneProviderGuiComp.h"
-#include "icmpstr/CXpcEditorComp.h"
-#include "icmpstr/CRegistryTreeViewComp.h"
-#include "icmpstr/CConvertComponentCommandComp.h"
+#include <icmpstr/CAttributeEditorComp.h>
+#include <icmpstr/CPackageOverviewComp.h>
+#include <icmpstr/CRegistryLoaderComp.h>
+#include <icmpstr/CRegistryPreviewComp.h>
+#include <icmpstr/CComponentHelpFileProviderComp.h>
+#include <icmpstr/CVisualRegistry.h>
+#include <icmpstr/CVisualRegistryEditorComp.h>
+#include <icmpstr/CRegistryConsistInfoComp.h>
+#include <icmpstr/CRegistryPropEditorComp.h>
+#include <icmpstr/CQuickHelpGuiComp.h>
+#include <icmpstr/CPackagesLoaderExtComp.h>
+#include <icmpstr/CComponentNoteEditorComp.h>
+#include <icmpstr/CSceneProviderGuiComp.h>
+#include <icmpstr/CXpcEditorComp.h>
+#include <icmpstr/CRegistryTreeViewComp.h>
+#include <icmpstr/CConvertComponentCommandComp.h>
 
 
 /**

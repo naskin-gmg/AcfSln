@@ -53,7 +53,7 @@
 #if defined(QTSERVICE_DEBUG)
 #include <QDebug>
 #endif
-#include "iservice/qtservice_win.h"
+#include <iservice/qtservice_win.h>
 
 typedef SERVICE_STATUS_HANDLE(WINAPI*PRegisterServiceCtrlHandler)(const wchar_t*,LPHANDLER_FUNCTION);
 static PRegisterServiceCtrlHandler pRegisterServiceCtrlHandler = 0;

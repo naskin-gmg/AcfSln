@@ -3,15 +3,15 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iedge/CEdgesReductorComp.h"
-#include "iedge/CFastEdgesExtractorComp.h"
-#include "iedge/CExtractedEdgeLinesSupplierComp.h"
-#include "iedge/CProcessedEdgeLinesSupplierComp.h"
-#include "iedge/CEdgeBasedFeaturesSupplierComp.h"
-#include "iedgegui/CEdgeLinesSupplierEditorComp.h"
+#include <iedge/CEdgesReductorComp.h>
+#include <iedge/CFastEdgesExtractorComp.h>
+#include <iedge/CExtractedEdgeLinesSupplierComp.h>
+#include <iedge/CProcessedEdgeLinesSupplierComp.h>
+#include <iedge/CEdgeBasedFeaturesSupplierComp.h>
+#include <iedgegui/CEdgeLinesSupplierEditorComp.h>
 
 
 /**

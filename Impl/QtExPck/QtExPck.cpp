@@ -1,7 +1,7 @@
 #include "QtExPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 I_REGISTER_QT_RESOURCE(iqtgui);

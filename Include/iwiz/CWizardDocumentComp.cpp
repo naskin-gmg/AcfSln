@@ -1,10 +1,10 @@
-#include "iwiz/CWizardDocumentComp.h"
+#include <iwiz/CWizardDocumentComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iproc/IStateController.h"
+#include <iproc/IStateController.h>
 
 
 namespace iwiz

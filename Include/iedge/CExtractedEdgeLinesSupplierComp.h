@@ -3,16 +3,16 @@
 
 
 // ACF includes
-#include "i2d/ICalibrationProvider.h"
+#include <i2d/ICalibrationProvider.h>
 
 // ACF-Solutions includes
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "iimg/IBitmapProvider.h"
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <iimg/IBitmapProvider.h>
 
-#include "iedge/IEdgeLinesProvider.h"
-#include "iedge/IEdgesExtractor.h"
-#include "iedge/CEdgeLineContainer.h"
+#include <iedge/IEdgeLinesProvider.h>
+#include <iedge/IEdgesExtractor.h>
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedge

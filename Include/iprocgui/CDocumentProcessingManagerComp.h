@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iprocgui/CDocumentProcessingManagerCompBase.h"
+#include <iprocgui/CDocumentProcessingManagerCompBase.h>
 
 
 namespace iprocgui

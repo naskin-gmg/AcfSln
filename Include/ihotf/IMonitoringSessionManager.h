@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "ihotf/IMonitoringSession.h"
+#include <istd/IChangeable.h>
+#include <ihotf/IMonitoringSession.h>
 
 
 namespace ihotf

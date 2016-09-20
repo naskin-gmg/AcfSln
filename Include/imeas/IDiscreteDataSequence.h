@@ -2,7 +2,7 @@
 #define imeas_IDiscreteDataSequence_included
 
 
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
 
 namespace imeas

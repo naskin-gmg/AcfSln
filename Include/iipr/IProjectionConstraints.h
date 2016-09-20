@@ -2,8 +2,8 @@
 #define iipr_IProjectionConstraints_included
 
 
-#include "istd/IPolymorphic.h"
-#include "istd/TRange.h"
+#include <istd/IPolymorphic.h>
+#include <istd/TRange.h>
 
 
 namespace iipr

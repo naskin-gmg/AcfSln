@@ -1,18 +1,18 @@
-#include "iipr/CColorPatternComparatorComp.h"
+#include <iipr/CColorPatternComparatorComp.h>
 
 
 // ACF includes
-#include "i2d/CDirection2d.h"
-#include "iprm/IEnableableParam.h"
-#include "iprm/TParamsPtr.h"
-#include "icmm/CVarColor.h"
-#include "icmm/CRgbToHsvTranformation.h"
-#include "icmm/CRgb.h"
+#include <i2d/CDirection2d.h>
+#include <iprm/IEnableableParam.h>
+#include <iprm/TParamsPtr.h>
+#include <icmm/CVarColor.h>
+#include <icmm/CRgbToHsvTranformation.h>
+#include <icmm/CRgb.h>
 
 // ACF-Solutions includes
-#include "imeas/CDataSequenceStatistics.h"
+#include <imeas/CDataSequenceStatistics.h>
 
-#include "iipr/IPatternController.h"
+#include <iipr/IPatternController.h>
 
 
 namespace iipr

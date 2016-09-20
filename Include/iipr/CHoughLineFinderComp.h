@@ -3,16 +3,16 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ilog/IMessageConsumer.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "i2d/CLine2d.h"
+#include <icomp/CComponentBase.h>
+#include <ilog/IMessageConsumer.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <i2d/CLine2d.h>
 
 // ACF-Solutions includes
-#include "iproc/TSyncProcessorWrap.h"
-#include "iipr/IImageToFeatureProcessor.h"
-#include "iipr/TWeightedFeatureWrap.h"
-#include "iipr/CHoughSpace2d.h"
+#include <iproc/TSyncProcessorWrap.h>
+#include <iipr/IImageToFeatureProcessor.h>
+#include <iipr/TWeightedFeatureWrap.h>
+#include <iipr/CHoughSpace2d.h>
 
 
 namespace iipr

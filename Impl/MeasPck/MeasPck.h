@@ -3,23 +3,23 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
-#include "iimg/CGeneralBitmap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
+#include <iimg/CGeneralBitmap.h>
 
 // ACF-Solutions includes
-#include "imeas/TDiscreteDataSequence.h"
-#include "imeas/CGeneralDataSequence.h"
-#include "imeas/CWavSamplesLoaderComp.h"
-#include "imeas/CDataStatistics.h"
-#include "imeas/CDataSequenceStatistics.h"
-#include "imeas/CHistogramStatisticsProcessorComp.h"
-#include "imeas/CNumericParamsComp.h"
-#include "imeas/CNumericConstraintsComp.h"
-#include "imeas/CLinearAdjustParamsComp.h"
-#include "imeas/CNumericValuesJoinerComp.h"
-#include "imeas/CCrossCorrelationProcessorComp.h"
-#include "imeas/CRelativeUnitSelectorComp.h"
+#include <imeas/TDiscreteDataSequence.h>
+#include <imeas/CGeneralDataSequence.h>
+#include <imeas/CWavSamplesLoaderComp.h>
+#include <imeas/CDataStatistics.h>
+#include <imeas/CDataSequenceStatistics.h>
+#include <imeas/CHistogramStatisticsProcessorComp.h>
+#include <imeas/CNumericParamsComp.h>
+#include <imeas/CNumericConstraintsComp.h>
+#include <imeas/CLinearAdjustParamsComp.h>
+#include <imeas/CNumericValuesJoinerComp.h>
+#include <imeas/CCrossCorrelationProcessorComp.h>
+#include <imeas/CRelativeUnitSelectorComp.h>
 
 
 /**

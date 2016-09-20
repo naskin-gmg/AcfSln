@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
 // ACF-Solutions includes
-#include "iblob/CBlobFilterParams.h"
+#include <iblob/CBlobFilterParams.h>
 
-#include "iblobgui/CBlobFilterParamsGuiComp.h"
+#include <iblobgui/CBlobFilterParamsGuiComp.h>
 
 
 /**

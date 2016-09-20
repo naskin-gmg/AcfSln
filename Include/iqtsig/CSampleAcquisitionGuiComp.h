@@ -5,24 +5,24 @@
 // Qt includes
 #include <QtCore/QTimer>
 
-#include "ifile/IFilePersistence.h"
+#include <ifile/IFilePersistence.h>
 
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
 
-#include "iprm/IParamsSet.h"
+#include <iprm/IParamsSet.h>
 
-#include "iproc/IProcessor.h"
+#include <iproc/IProcessor.h>
 
-#include "imeas/CGeneralDataSequence.h"
+#include <imeas/CGeneralDataSequence.h>
 
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "iqtsig/CSampleContainerView.h"
+#include <iqtsig/CSampleContainerView.h>
 
-#include "GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h"
+#include <GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h>
 
 
 namespace iqtsig

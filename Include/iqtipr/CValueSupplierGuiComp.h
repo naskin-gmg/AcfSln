@@ -3,20 +3,20 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "i2d/CCircle.h"
-#include "imeas/INumericValueProvider.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <i2d/CCircle.h>
+#include <imeas/INumericValueProvider.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iqtinsp/TSupplierGuiCompBase.h"
+#include <iqtinsp/TSupplierGuiCompBase.h>
 
-#include "iqtipr/iqtipr.h"
+#include <iqtipr/iqtipr.h>
 
-#include "GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h>
 
 
 namespace iqtipr

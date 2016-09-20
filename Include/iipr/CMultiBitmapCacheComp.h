@@ -6,13 +6,13 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "icomp/CComponentBase.h"
-#include "i2d/ICalibration2d.h"
-#include "i2d/IMultiCalibrationProvider.h"
+#include <istd/TPointerVector.h>
+#include <icomp/CComponentBase.h>
+#include <i2d/ICalibration2d.h>
+#include <i2d/IMultiCalibrationProvider.h>
 
 // ACF-Solutions includes
-#include "iimg/IMultiBitmapProvider.h"
+#include <iimg/IMultiBitmapProvider.h>
 
 
 namespace iipr

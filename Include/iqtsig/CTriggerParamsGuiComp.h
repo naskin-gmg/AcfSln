@@ -2,13 +2,13 @@
 #define iqtsig_CTriggerParamsGuiComp_included
 
 
-#include "isig/ITriggerParams.h"
+#include <isig/ITriggerParams.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iqtsig/iqtsig.h"
+#include <iqtsig/iqtsig.h>
 
-#include "GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h"
+#include <GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h>
 
 
 namespace iqtsig

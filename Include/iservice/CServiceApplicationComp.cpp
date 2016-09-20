@@ -1,4 +1,4 @@
-#include "iservice/CServiceApplicationComp.h"
+#include <iservice/CServiceApplicationComp.h>
 
 
 // Qt includes
@@ -14,7 +14,7 @@
 #endif
 
 // ACF includes
-#include "iqtgui/IGuiApplication.h"
+#include <iqtgui/IGuiApplication.h>
 
 
 namespace iservice

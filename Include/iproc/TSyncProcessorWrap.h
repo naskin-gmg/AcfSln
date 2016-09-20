@@ -6,8 +6,8 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "iprm/IParamsSet.h"
-#include "iproc/IProcessor.h"
+#include <iprm/IParamsSet.h>
+#include <iproc/IProcessor.h>
 
 
 namespace iproc

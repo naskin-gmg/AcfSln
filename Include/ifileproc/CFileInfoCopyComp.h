@@ -7,11 +7,11 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "ibase/IApplicationInfo.h"
-#include "ilog/TLoggerCompWrap.h"
+#include <ibase/IApplicationInfo.h>
+#include <ilog/TLoggerCompWrap.h>
 
 // ACF-Solutions includes
-#include "ifileproc/IFileConversion.h"
+#include <ifileproc/IFileConversion.h>
 
 
 namespace ifileproc

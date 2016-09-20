@@ -2,10 +2,10 @@
 #define icmpstr_IExternalMetaInfoManager_included
 
 
-#include "istd/IPolymorphic.h"
+#include <istd/IPolymorphic.h>
 #include <QtCore/QString>
 
-#include "icomp/CComponentAddress.h"
+#include <icomp/CComponentAddress.h>
 
 
 namespace icmpstr

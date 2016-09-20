@@ -1,4 +1,4 @@
-#include "icam/CMultiCameraBitmapSupplierComp.h"
+#include <icam/CMultiCameraBitmapSupplierComp.h>
 
 
 namespace icam

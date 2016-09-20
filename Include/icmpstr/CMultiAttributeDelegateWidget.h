@@ -13,7 +13,7 @@
 #endif
 
 // ACF-Solutions includes
-#include "icmpstr/CElementSelectionInfoManagerBase.h"
+#include <icmpstr/CElementSelectionInfoManagerBase.h>
 
 
 namespace icmpstr

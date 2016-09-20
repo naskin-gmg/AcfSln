@@ -2,11 +2,11 @@
 #define icmpstr_IRegistryPreview_included
 
 
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "icomp/IRegistry.h"
+#include <icomp/IRegistry.h>
 
-#include "icmpstr/icmpstr.h"
+#include <icmpstr/icmpstr.h>
 
 
 namespace icmpstr

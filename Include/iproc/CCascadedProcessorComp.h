@@ -2,11 +2,11 @@
 #define iproc_CCascadedProcessorComp_included
 
 
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iproc/TSyncProcessorWrap.h"
+#include <iproc/TSyncProcessorWrap.h>
 
 
 namespace iproc

@@ -11,23 +11,23 @@
 #endif
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CComponentAddress.h"
-#include "icomp/CComponentStaticInfoBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "ifile/IFileNameParam.h"
-#include "idoc/IHelpViewer.h"
-#include "idoc/IDocumentManager.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <istd/TDelPtr.h>
+#include <icomp/IComponentEnvironmentManager.h>
+#include <icomp/CComponentAddress.h>
+#include <icomp/CComponentStaticInfoBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <ifile/IFileNameParam.h>
+#include <idoc/IHelpViewer.h>
+#include <idoc/IDocumentManager.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 // ACF-Solutions includes
-#include "icmpstr/IRegistryConsistInfo.h"
-#include "icmpstr/IAttributeSelectionObserver.h"
-#include "icmpstr/IElementSelectionInfo.h"
+#include <icmpstr/IRegistryConsistInfo.h>
+#include <icmpstr/IAttributeSelectionObserver.h>
+#include <icmpstr/IElementSelectionInfo.h>
 
-#include "GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h"
+#include <GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h>
 
 
 namespace icmpstr

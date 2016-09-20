@@ -3,15 +3,15 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
 // ACF-Solutions includes
-#include "iauth/CStaticRightsProviderComp.h"
-#include "iauth/CUserLoginComp.h"
-#include "iauth/CSimpleLoginComp.h"
-#include "iauth/CUsersManagerComp.h"
-#include "iauth/CRightsBasedEnablerComp.h"
+#include <iauth/CStaticRightsProviderComp.h>
+#include <iauth/CUserLoginComp.h>
+#include <iauth/CSimpleLoginComp.h>
+#include <iauth/CUsersManagerComp.h>
+#include <iauth/CRightsBasedEnablerComp.h>
 
 /**
 	Package for security and authorization components.

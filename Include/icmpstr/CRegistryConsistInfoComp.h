@@ -6,11 +6,11 @@
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
 
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CComponentBase.h"
+#include <icomp/IComponentEnvironmentManager.h>
+#include <icomp/CComponentBase.h>
 
-#include "icmpstr/IRegistryConsistInfo.h"
-#include "icmpstr/IExternalMetaInfoManager.h"
+#include <icmpstr/IRegistryConsistInfo.h>
+#include <icmpstr/IExternalMetaInfoManager.h>
 
 
 namespace icmpstr

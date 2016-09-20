@@ -1,4 +1,4 @@
-#include "iqtex/CTcpTerminalGuiComp.h"
+#include <iqtex/CTcpTerminalGuiComp.h>
 
 
 // Qt includes

@@ -9,8 +9,8 @@
 #include <QtCore/QDateTime>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "iser/ISerializable.h"
+#include <istd/IChangeable.h>
+#include <iser/ISerializable.h>
 
 
 namespace ihotf

@@ -13,12 +13,12 @@
 #endif
 
 // ACF includes
-#include "icomp/CXpcModel.h"
-#include "idoc/IDocumentManager.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <icomp/CXpcModel.h>
+#include <idoc/IDocumentManager.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "GeneratedFiles/icmpstr/ui_CXpcEditorComp.h"
+#include <GeneratedFiles/icmpstr/ui_CXpcEditorComp.h>
 
 
 namespace icmpstr

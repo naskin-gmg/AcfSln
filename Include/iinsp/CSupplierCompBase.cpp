@@ -1,11 +1,11 @@
-#include "iinsp/CSupplierCompBase.h"
+#include <iinsp/CSupplierCompBase.h>
 
 
 // Qt includes
 #include <QtCore/QSet>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iinsp

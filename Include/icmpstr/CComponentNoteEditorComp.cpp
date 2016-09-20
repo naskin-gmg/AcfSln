@@ -1,13 +1,13 @@
-#include "icmpstr/CComponentNoteEditorComp.h"
+#include <icmpstr/CComponentNoteEditorComp.h>
 
 
 // Qt includes
 #include <QtGui/QTextDocument>
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
+#include <iqt/CSignalBlocker.h>
 
-#include "icmpstr/IComponentNoteController.h"
+#include <icmpstr/IComponentNoteController.h>
 
 
 namespace icmpstr

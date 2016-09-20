@@ -6,10 +6,10 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
 // ACF-Solutions includes
-#include "iauth/CUser.h"
+#include <iauth/CUser.h>
 
 
 namespace iauth

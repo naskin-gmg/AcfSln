@@ -2,7 +2,7 @@
 
 
 // ACF-Solutions includes
-#include "icam/CSnapBitmapSupplierCompBase.h"
+#include <icam/CSnapBitmapSupplierCompBase.h>
 
 
 namespace icam

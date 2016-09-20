@@ -1,9 +1,9 @@
-#include "iqtcam/CExposureParamsGuiComp.h"
+#include <iqtcam/CExposureParamsGuiComp.h>
 
 
-#include "istd/CChangeGroup.h"
+#include <istd/CChangeGroup.h>
 
-#include "icam/IExposureConstraints.h"
+#include <icam/IExposureConstraints.h>
 
 
 namespace iqtcam

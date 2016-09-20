@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "i2d/CLine2d.h"
+#include <i2d/CLine2d.h>
 
 // ACF-Solutions includes
 #include <iipr/TWeightedFeatureWrap.h>

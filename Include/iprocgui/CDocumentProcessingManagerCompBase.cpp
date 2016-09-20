@@ -1,8 +1,8 @@
-#include "iprocgui/CDocumentProcessingManagerCompBase.h"
+#include <iprocgui/CDocumentProcessingManagerCompBase.h>
 
 
 // ACF includes
-#include "iqtgui/CGuiComponentDialog.h"
+#include <iqtgui/CGuiComponentDialog.h>
 
 
 namespace iprocgui

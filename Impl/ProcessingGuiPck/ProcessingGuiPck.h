@@ -2,13 +2,13 @@
 #define ProcessingGuiPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iprocgui/CProcessorControlGuiComp.h"
-#include "iprocgui/CDocumentProcessingManagerComp.h"
-#include "iprocgui/CDocumentProcessingCommandComp.h"
-#include "iprocgui/CProcessorCommandComp.h"
+#include <iprocgui/CProcessorControlGuiComp.h>
+#include <iprocgui/CDocumentProcessingManagerComp.h>
+#include <iprocgui/CDocumentProcessingCommandComp.h>
+#include <iprocgui/CProcessorCommandComp.h>
 
 
 /**

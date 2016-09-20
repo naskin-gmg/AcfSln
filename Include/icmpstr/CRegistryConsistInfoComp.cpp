@@ -1,4 +1,4 @@
-#include "icmpstr/CRegistryConsistInfoComp.h"
+#include <icmpstr/CRegistryConsistInfoComp.h>
 
 
 // Qt includes
@@ -6,9 +6,9 @@
 
 
 // ACF includes
-#include "icomp/CCompositeComponentStaticInfo.h"
+#include <icomp/CCompositeComponentStaticInfo.h>
 
-#include "ilog/CMessage.h"
+#include <ilog/CMessage.h>
 
 
 namespace icmpstr

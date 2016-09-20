@@ -1,9 +1,9 @@
-#include "icam/CMemoryAcquisitionComp.h"
+#include <icam/CMemoryAcquisitionComp.h>
 
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iprm/IParamsSet.h"
+#include <iprm/IParamsSet.h>
 
 
 

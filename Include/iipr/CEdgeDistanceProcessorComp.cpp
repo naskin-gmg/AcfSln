@@ -1,17 +1,17 @@
-#include "iipr/CEdgeDistanceProcessorComp.h"
+#include <iipr/CEdgeDistanceProcessorComp.h>
 
 
 // ACF includes
-#include "i2d/CAnnulusSegment.h"
-#include "iprm/CParamsSet.h"
-#include "iprm/TParamsPtr.h"
+#include <i2d/CAnnulusSegment.h>
+#include <iprm/CParamsSet.h>
+#include <iprm/TParamsPtr.h>
 
 // IACF includes
-#include "iipr/CCaliperFeature.h"
-#include "iipr/CCaliperParams.h"
-#include "iipr/CFeaturesContainer.h"
-#include "iipr/CSingleFeatureConsumer.h"
-#include "iipr/CCaliperDistanceFeature.h"
+#include <iipr/CCaliperFeature.h>
+#include <iipr/CCaliperParams.h>
+#include <iipr/CFeaturesContainer.h>
+#include <iipr/CSingleFeatureConsumer.h>
+#include <iipr/CCaliperDistanceFeature.h>
 
 
 namespace iipr

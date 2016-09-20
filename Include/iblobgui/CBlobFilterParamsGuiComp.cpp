@@ -1,4 +1,4 @@
-#include "iblobgui/CBlobFilterParamsGuiComp.h"
+#include <iblobgui/CBlobFilterParamsGuiComp.h>
 
 
 // Qt includes
@@ -10,11 +10,11 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iqt/CSignalBlocker.h"
+#include <istd/CChangeNotifier.h>
+#include <iqt/CSignalBlocker.h>
 
 // QSF includes
-#include "iblobgui/CBlobFilterGui.h"
+#include <iblobgui/CBlobFilterGui.h>
 
 
 namespace iblobgui

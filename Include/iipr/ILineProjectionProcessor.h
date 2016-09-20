@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/CLine2d.h"
-#include "iimg/IBitmap.h"
+#include <i2d/CLine2d.h>
+#include <iimg/IBitmap.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "imeas/IDataSequence.h"
+#include <iproc/IProcessor.h>
+#include <imeas/IDataSequence.h>
 
 
 namespace iipr

@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 
 // AcfSln includes
-#include "ihotf/CDirectoryMonitorParams.h"
+#include <ihotf/CDirectoryMonitorParams.h>
 
 
 namespace ihotf

@@ -6,18 +6,18 @@
 #include <QtCore/QPair>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "i2d/ICalibration2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "i2d/IMultiCalibrationProvider.h"
-#include "iimg/IBitmap.h"
-#include "iprm/ISelectionParam.h"
+#include <istd/TDelPtr.h>
+#include <i2d/ICalibration2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <i2d/IMultiCalibrationProvider.h>
+#include <iimg/IBitmap.h>
+#include <iprm/ISelectionParam.h>
 
 // ACF-Solutions includes
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "iimg/IBitmapProvider.h"
-#include "iimg/IMultiBitmapProvider.h"
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <iimg/IBitmapProvider.h>
+#include <iimg/IMultiBitmapProvider.h>
 
 
 namespace icam

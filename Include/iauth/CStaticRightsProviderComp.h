@@ -7,10 +7,10 @@
 #include <QtCore/QSet>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iauth/IRightsProvider.h"
+#include <iauth/IRightsProvider.h>
 
 
 namespace iauth

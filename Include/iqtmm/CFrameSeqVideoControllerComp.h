@@ -8,14 +8,14 @@
 #include <QtCore/QFileInfoList>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
-#include "imm/IVideoController.h"
+#include <icam/IBitmapAcquisition.h>
+#include <imm/IVideoController.h>
 
 
 namespace iqtmm

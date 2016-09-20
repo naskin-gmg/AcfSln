@@ -6,10 +6,10 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // AcfSln includes
-#include "ifileproc/IFileNamingParams.h"
+#include <ifileproc/IFileNamingParams.h>
 
 
 namespace ifileproc

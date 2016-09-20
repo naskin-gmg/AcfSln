@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iview/TVisualObjects.h"
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iview/TVisualObjects.h>
 
 // ACF-Solutions includes
-#include "iqtinsp/TSupplierGuiCompBase.h"
-#include "iqtipr/iqtipr.h"
-#include "GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h"
+#include <iqtinsp/TSupplierGuiCompBase.h>
+#include <iqtipr/iqtipr.h>
+#include <GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h>
 
 
 namespace iqtipr

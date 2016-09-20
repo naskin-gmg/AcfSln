@@ -11,14 +11,14 @@
 #endif
 
 // ACF includes
-#include "ibase/IApplication.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "icomp/CComponentBase.h"
+#include <ibase/IApplication.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <icomp/CComponentBase.h>
 
 #ifndef Q_OS_MAC
 #ifndef Q_OS_LINUX
 // ACF-Solutions includes
-#include "iservice/QtService.h"
+#include <iservice/QtService.h>
 #endif
 #endif
 

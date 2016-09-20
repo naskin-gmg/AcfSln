@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "iproc/IProcessor.h"
+#include <iproc/IProcessor.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
-#include "iipr/IFeaturesConsumer.h"
+#include <iipr/IFeaturesConsumer.h>
 
 
 namespace iipr

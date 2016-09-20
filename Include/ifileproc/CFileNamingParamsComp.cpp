@@ -1,4 +1,4 @@
-#include "ifileproc/CFileNamingParamsComp.h"
+#include <ifileproc/CFileNamingParamsComp.h>
 
 
 namespace ifileproc

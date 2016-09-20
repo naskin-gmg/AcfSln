@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "isig/IPulseParams.h"
+#include <isig/IPulseParams.h>
 
-#include "iqtsig/iqtsig.h"
+#include <iqtsig/iqtsig.h>
 
-#include "GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h"
+#include <GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h>
 
 
 namespace iqtsig

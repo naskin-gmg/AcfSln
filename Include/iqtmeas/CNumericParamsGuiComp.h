@@ -13,14 +13,14 @@
 #endif
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "imod/TModelWrap.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <istd/TPointerVector.h>
+#include <imod/TModelWrap.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
-#include "iqtmeas/CNumericValueWidget.h"
+#include <imeas/INumericValue.h>
+#include <iqtmeas/CNumericValueWidget.h>
 
 
 namespace iqtmeas

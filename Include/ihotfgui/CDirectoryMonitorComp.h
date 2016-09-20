@@ -10,17 +10,17 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iprm/IParamsSet.h"
-#include "ifile/IFileNameParam.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iprm/IParamsSet.h>
+#include <ifile/IFileNameParam.h>
 
 // AcfSln includes
-#include "ihotf/IFileSystemChangeStorage.h"
-#include "ihotf/IDirectoryMonitor.h"
-#include "ihotf/IDirectoryMonitorParams.h"
-#include "ihotf/IMonitoringSessionManager.h"
+#include <ihotf/IFileSystemChangeStorage.h>
+#include <ihotf/IDirectoryMonitor.h>
+#include <ihotf/IDirectoryMonitorParams.h>
+#include <ihotf/IMonitoringSessionManager.h>
 
 
 namespace ihotfgui

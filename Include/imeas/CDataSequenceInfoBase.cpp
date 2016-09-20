@@ -1,4 +1,4 @@
-#include "imeas/CDataSequenceInfoBase.h"
+#include <imeas/CDataSequenceInfoBase.h>
 
 
 // Qt includes

@@ -1,4 +1,4 @@
-#include "ifileproc/CCopyAppComp.h"
+#include <ifileproc/CCopyAppComp.h>
 
 
 // Qt includes

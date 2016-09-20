@@ -2,12 +2,12 @@
 #define HotfolderPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "ihotf/CMonitoringSessionsManager.h"
-#include "ihotf/CDirectoryMonitorParamsComp.h"
-#include "ihotf/CFileSystemChangeStorage.h"
+#include <ihotf/CMonitoringSessionsManager.h>
+#include <ihotf/CDirectoryMonitorParamsComp.h>
+#include <ihotf/CFileSystemChangeStorage.h>
 
 
 /**

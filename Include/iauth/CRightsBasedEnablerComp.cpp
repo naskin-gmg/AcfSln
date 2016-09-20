@@ -1,4 +1,4 @@
-#include "iauth/CRightsBasedEnablerComp.h"
+#include <iauth/CRightsBasedEnablerComp.h>
 
 
 namespace iauth

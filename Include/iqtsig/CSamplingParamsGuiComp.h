@@ -2,13 +2,13 @@
 #define iqtsig_CSamplingParamsGuiComp_included
 
 
-#include "isig/ISamplingParams.h"
+#include <isig/ISamplingParams.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iqtsig/iqtsig.h"
+#include <iqtsig/iqtsig.h>
 
-#include "GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h"
+#include <GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h>
 
 
 namespace iqtsig

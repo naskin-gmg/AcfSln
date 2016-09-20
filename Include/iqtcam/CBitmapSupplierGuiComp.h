@@ -6,20 +6,20 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "imod/IObserver.h"
-#include "imod/TModelWrap.h"
-#include "iimg/CBitmap.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <imod/IObserver.h>
+#include <imod/TModelWrap.h>
+#include <iimg/CBitmap.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "iimg/IBitmapProvider.h"
+#include <iimg/IBitmapProvider.h>
 
-#include "iqtinsp/TSupplierGuiCompBase.h"
+#include <iqtinsp/TSupplierGuiCompBase.h>
 
-#include "iqtcam/iqtcam.h"
+#include <iqtcam/iqtcam.h>
 
-#include "GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h"
+#include <GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h>
 
 
 namespace iqtcam

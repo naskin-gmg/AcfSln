@@ -7,12 +7,12 @@
 #include <QtGui/QTransform>
 
 // ACF includes
-#include "iview/CShapeBase.h"
+#include <iview/CShapeBase.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
-#include "iqtipr/iqtipr.h"
+#include <iqtipr/iqtipr.h>
 
 
 namespace iqtipr

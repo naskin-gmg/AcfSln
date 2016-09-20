@@ -2,12 +2,12 @@
 #define ProcessingPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iproc/CCascadedProcessorComp.h"
-#include "iproc/CIterativeProcessorComp.h"
-#include "iproc/CModelBasedProcessingTriggerComp.h"
+#include <iproc/CCascadedProcessorComp.h>
+#include <iproc/CIterativeProcessorComp.h>
+#include <iproc/CModelBasedProcessingTriggerComp.h>
 
 
 /**

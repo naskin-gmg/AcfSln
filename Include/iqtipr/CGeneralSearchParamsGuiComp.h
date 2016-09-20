@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions
-#include "iipr/ISearchParams.h"
+#include <iipr/ISearchParams.h>
 
 // Generated
-#include "GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h>
 
 
 namespace iqtipr

@@ -2,12 +2,12 @@
 #define iwiz_CComposedStateControllerComp_included
 
 
-#include "imod/CMultiModelDispatcherBase.h"
+#include <imod/CMultiModelDispatcherBase.h>
 
-#include "iprm/CComposedParamsSetComp.h"
+#include <iprm/CComposedParamsSetComp.h>
 
-#include "iproc/IStateController.h"
-#include "iproc/IProcessor.h"
+#include <iproc/IStateController.h>
+#include <iproc/IProcessor.h>
 
 
 namespace iwiz

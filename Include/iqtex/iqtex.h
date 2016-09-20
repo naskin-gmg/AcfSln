@@ -2,7 +2,7 @@
 #define iqtex_included
 
 
-#include "iqt/iqt.h"
+#include <iqt/iqt.h>
 
 
 /**

@@ -2,7 +2,7 @@
 #define iipr_CFastGaussianProcessorComp_included
 
 
-#include "iipr/CImageRegionProcessorCompBase.h"
+#include <iipr/CImageRegionProcessorCompBase.h>
 
 
 namespace iipr

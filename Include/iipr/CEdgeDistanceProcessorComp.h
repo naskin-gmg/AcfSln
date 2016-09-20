@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "i2d/CCircle.h"
-#include "i2d/CAnnulus.h"
-#include "i2d/ICalibrationProvider.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <i2d/CCircle.h>
+#include <i2d/CAnnulus.h>
+#include <i2d/ICalibrationProvider.h>
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorWrap.h>
 
-#include "iipr/IImageToFeatureProcessor.h"
-#include "imeas/INumericValueProvider.h"
-#include "iipr/IFeatureToImageMapper.h"
-#include "iipr/ICaliperParams.h"
-#include "iipr/TWeightedFeatureWrap.h"
+#include <iipr/IImageToFeatureProcessor.h>
+#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeatureToImageMapper.h>
+#include <iipr/ICaliperParams.h>
+#include <iipr/TWeightedFeatureWrap.h>
 
 
 namespace iipr

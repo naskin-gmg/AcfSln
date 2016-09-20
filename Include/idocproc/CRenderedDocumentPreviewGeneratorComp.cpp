@@ -1,12 +1,12 @@
-#include "idocproc/CRenderedDocumentPreviewGeneratorComp.h"
+#include <idocproc/CRenderedDocumentPreviewGeneratorComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iimg/CBitmap.h"
-#include "iprm/CParamsSet.h"
-#include "iprm/CSelectionParam.h"
-#include "imod/TModelWrap.h"
+#include <istd/CChangeNotifier.h>
+#include <iimg/CBitmap.h>
+#include <iprm/CParamsSet.h>
+#include <iprm/CSelectionParam.h>
+#include <imod/TModelWrap.h>
 
 
 namespace idocproc

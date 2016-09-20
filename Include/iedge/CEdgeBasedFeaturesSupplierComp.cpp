@@ -1,13 +1,13 @@
-#include "iedge/CEdgeBasedFeaturesSupplierComp.h"
+#include <iedge/CEdgeBasedFeaturesSupplierComp.h>
 
 
 // ACF includes
-#include "iprm/IParamsManager.h"
-#include "iprm/TParamsPtr.h"
+#include <iprm/IParamsManager.h>
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include "iipr/CSearchFeature.h"
-#include "iipr/ISearchParams.h"
+#include <iipr/CSearchFeature.h>
+#include <iipr/ISearchParams.h>
 
 
 namespace iedge

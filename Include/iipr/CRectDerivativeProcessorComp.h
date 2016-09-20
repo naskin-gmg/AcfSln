@@ -4,9 +4,9 @@
 
 #include <QtCore/QString>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iipr/CRectDerivativeProcessor.h"
+#include <iipr/CRectDerivativeProcessor.h>
 
 
 namespace iipr

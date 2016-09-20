@@ -1,12 +1,12 @@
-#include "iipr/CRingPatternGeneratorComp.h"
+#include <iipr/CRingPatternGeneratorComp.h>
 
 
 // ACF includes
-#include "istd/CIndex2d.h"
+#include <istd/CIndex2d.h>
 
 
 // IACF includes
-#include "iipr/IRingPatternGeneratorParams.h"
+#include <iipr/IRingPatternGeneratorParams.h>
 
 
 namespace iipr

@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "icomp/CComponentBase.h"
-#include "i2d/ICalibrationProvider.h"
+#include <istd/TDelPtr.h>
+#include <icomp/CComponentBase.h>
+#include <i2d/ICalibrationProvider.h>
 
 // ACF-Solutions includes
-#include "iimg/IBitmapProvider.h"
+#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr

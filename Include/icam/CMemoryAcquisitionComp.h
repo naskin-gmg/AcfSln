@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "icomp/CComponentBase.h"
-#include "ifile/IFileNameParam.h"
-#include "iimg/CGeneralBitmap.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <ifile/IFilePersistence.h>
+#include <icomp/CComponentBase.h>
+#include <ifile/IFileNameParam.h>
+#include <iimg/CGeneralBitmap.h>
+#include <iproc/TSyncProcessorWrap.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
 
 
 namespace icam

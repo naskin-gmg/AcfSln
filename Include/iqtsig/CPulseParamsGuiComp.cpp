@@ -1,11 +1,11 @@
-#include "iqtsig/CPulseParamsGuiComp.h"
+#include <iqtsig/CPulseParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 // ACF-Solutions includes
-#include "isig/IPulseConstraints.h"
+#include <isig/IPulseConstraints.h>
 
 
 namespace iqtsig

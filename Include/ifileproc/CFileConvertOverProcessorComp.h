@@ -6,14 +6,14 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "ifile/IFilePersistence.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ibase/IProgressManager.h"
+#include <istd/TSmartPtr.h>
+#include <ifile/IFilePersistence.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ibase/IProgressManager.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "ifileproc/IFileConversion.h"
+#include <iproc/IProcessor.h>
+#include <ifileproc/IFileConversion.h>
 
 
 namespace ifileproc

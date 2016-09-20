@@ -14,13 +14,13 @@
 #endif
 
 // ACF includes
-#include "iser/CMemoryWriteArchive.h"
+#include <iser/CMemoryWriteArchive.h>
 
 // ACF-Solutions includes
-#include "iauth/ILogin.h"
-#include "iauth/IUsersManager.h"
+#include <iauth/ILogin.h>
+#include <iauth/IUsersManager.h>
 
-#include "GeneratedFiles/iqtauth/ui_CUserManagerDialog.h"
+#include <GeneratedFiles/iqtauth/ui_CUserManagerDialog.h>
 
 
 namespace iqtauth

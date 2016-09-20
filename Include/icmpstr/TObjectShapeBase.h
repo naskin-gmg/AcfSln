@@ -11,13 +11,13 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeGroup.h"
-#include "istd/TDelPtr.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "i2d/IObject2d.h"
+#include <istd/CChangeGroup.h>
+#include <istd/TDelPtr.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <i2d/IObject2d.h>
 
 // ACF-Solutions includes
-#include "icmpstr/TShapeBase.h"
+#include <icmpstr/TShapeBase.h>
 
 
 namespace icmpstr

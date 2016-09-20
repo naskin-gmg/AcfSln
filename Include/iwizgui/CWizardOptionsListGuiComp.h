@@ -13,13 +13,13 @@
 #endif
 
 // ACF includes
-#include "istd/TPointerVector.h"
+#include <istd/TPointerVector.h>
 
-#include "iwiz/IParamsManagerWizard.h"
+#include <iwiz/IParamsManagerWizard.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h"
+#include <GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h>
 
 
 namespace iwizgui

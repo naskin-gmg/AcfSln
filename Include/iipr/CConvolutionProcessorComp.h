@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iimg/CScanlineMask.h"
+#include <iimg/CScanlineMask.h>
 
 // ACF-Solutions includes
-#include "iipr/TImageParamProcessorCompBase.h"
-#include "iipr/IConvolutionKernel2d.h"
+#include <iipr/TImageParamProcessorCompBase.h>
+#include <iipr/IConvolutionKernel2d.h>
 
 
 namespace iipr

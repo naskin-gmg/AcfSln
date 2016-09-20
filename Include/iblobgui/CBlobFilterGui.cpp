@@ -1,11 +1,11 @@
-#include "iblobgui/CBlobFilterGui.h"
+#include <iblobgui/CBlobFilterGui.h>
 
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
+#include <iqt/CSignalBlocker.h>
 
 // ACF-Solutions includes
-#include "iblob/CBlobDescriptorInfo.h"
+#include <iblob/CBlobDescriptorInfo.h>
 
 
 namespace iblobgui

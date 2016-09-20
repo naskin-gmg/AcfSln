@@ -6,17 +6,17 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "istd/TPointerVector.h"
-#include "i2d/ITransformation2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "iimg/IBitmap.h"
-#include "iprm/IParamsManager.h"
+#include <istd/TDelPtr.h>
+#include <istd/TPointerVector.h>
+#include <i2d/ITransformation2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iimg/IBitmap.h>
+#include <iprm/IParamsManager.h>
 
 // ACF-Solutions includes
-#include "iinsp/TSupplierCompWrap.h"
-#include "icam/IBitmapAcquisition.h"
-#include "iimg/IMultiBitmapProvider.h"
+#include <iinsp/TSupplierCompWrap.h>
+#include <icam/IBitmapAcquisition.h>
+#include <iimg/IMultiBitmapProvider.h>
 
 
 namespace icam

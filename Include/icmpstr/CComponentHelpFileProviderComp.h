@@ -2,15 +2,15 @@
 #define icmpstr_CComponentHelpFileProviderComp_included
 
 
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/IRegistriesManager.h"
-#include "icomp/IMetaInfoManager.h"
-#include "icomp/CComponentBase.h"
-#include "icomp/CComponentAddress.h"
+#include <icomp/IComponentStaticInfo.h>
+#include <icomp/IRegistriesManager.h>
+#include <icomp/IMetaInfoManager.h>
+#include <icomp/CComponentBase.h>
+#include <icomp/CComponentAddress.h>
 
-#include "idoc/IHelpFileProvider.h"
+#include <idoc/IHelpFileProvider.h>
 
-#include "icmpstr/IExternalMetaInfoManager.h"
+#include <icmpstr/IExternalMetaInfoManager.h>
 
 
 namespace icmpstr

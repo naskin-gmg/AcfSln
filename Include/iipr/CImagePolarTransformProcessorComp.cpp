@@ -1,15 +1,15 @@
-#include "iipr/CImagePolarTransformProcessorComp.h"
+#include <iipr/CImagePolarTransformProcessorComp.h>
 
 
  // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "ibase/CSize.h"
-#include "i2d/CAnnulusSegment.h"
-#include "iprm/TParamsPtr.h"
-#include "iimg/IBitmap.h"
-#include "iimg/CScanlineMask.h"
-#include "imeas/INumericValue.h"
-#include "iipr/TImagePixelInterpolator.h"
+#include <istd/CChangeNotifier.h>
+#include <ibase/CSize.h>
+#include <i2d/CAnnulusSegment.h>
+#include <iprm/TParamsPtr.h>
+#include <iimg/IBitmap.h>
+#include <iimg/CScanlineMask.h>
+#include <imeas/INumericValue.h>
+#include <iipr/TImagePixelInterpolator.h>
 
 
 namespace iipr

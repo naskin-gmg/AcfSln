@@ -6,12 +6,12 @@
 #include <QtCore/QByteArray>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "iprm/IEnableableParam.h"
+#include <icomp/CComponentBase.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <iprm/IEnableableParam.h>
 
 // ACF-Solutions includes
-#include "iauth/IRightsProvider.h"
+#include <iauth/IRightsProvider.h>
 
 
 namespace iauth

@@ -2,9 +2,9 @@
 #define iipr_CCircleFinderParamsComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iipr/CCircleFinderParams.h"
+#include <iipr/CCircleFinderParams.h>
 
 
 namespace iipr

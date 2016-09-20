@@ -11,7 +11,7 @@
 #endif
 
 // ACF-Solutions includes
-#include "icmpstr/ISceneProvider.h"
+#include <icmpstr/ISceneProvider.h>
 
 
 namespace icmpstr

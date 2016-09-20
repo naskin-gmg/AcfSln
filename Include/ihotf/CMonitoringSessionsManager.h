@@ -6,11 +6,11 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 
 // AcfSln includes
-#include "ihotf/IMonitoringSessionManager.h"
-#include "ihotf/CMonitoringSession.h"
+#include <ihotf/IMonitoringSessionManager.h>
+#include <ihotf/CMonitoringSession.h>
 
 
 namespace ihotf

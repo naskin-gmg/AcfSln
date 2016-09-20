@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "iipr/IPatternController.h"
+#include <iipr/IPatternController.h>
 
-#include "GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h>
 
 
 namespace iqtipr

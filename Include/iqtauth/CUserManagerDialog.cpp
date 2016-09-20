@@ -1,4 +1,4 @@
-#include "iqtauth/CUserManagerDialog.h"
+#include <iqtauth/CUserManagerDialog.h>
 
 
 // Qt includes
@@ -14,9 +14,9 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iser/CMemoryReadArchive.h"
-#include "iqt/iqt.h"
+#include <istd/CChangeNotifier.h>
+#include <iser/CMemoryReadArchive.h>
+#include <iqt/iqt.h>
 
 
 namespace iqtauth

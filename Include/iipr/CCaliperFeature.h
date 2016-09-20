@@ -2,7 +2,7 @@
 #define iipr_CCaliperFeature_included
 
 
-#include "imeas/CSimpleNumericValue.h"
+#include <imeas/CSimpleNumericValue.h>
 
 
 namespace iipr

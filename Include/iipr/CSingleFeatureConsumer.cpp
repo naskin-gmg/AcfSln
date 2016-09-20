@@ -1,8 +1,8 @@
-#include "iipr/CSingleFeatureConsumer.h"
+#include <iipr/CSingleFeatureConsumer.h>
 
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
+#include <imeas/INumericValue.h>
 
 
 namespace iipr

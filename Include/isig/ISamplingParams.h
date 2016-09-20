@@ -2,11 +2,11 @@
 #define isig_ISamplingParams_included
 
 
-#include "istd/TRange.h"
+#include <istd/TRange.h>
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "isig/isig.h"
+#include <isig/isig.h>
 
 
 namespace isig

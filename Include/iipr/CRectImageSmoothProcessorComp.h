@@ -3,10 +3,10 @@
 
 
 // ACF-Solutions includes
-#include "imath/IUnitInfo.h"
-#include "imeas/INumericValue.h"
-#include "imeas/INumericConstraints.h"
-#include "iipr/TImageParamProcessorCompBase.h"
+#include <imath/IUnitInfo.h>
+#include <imeas/INumericValue.h>
+#include <imeas/INumericConstraints.h>
+#include <iipr/TImageParamProcessorCompBase.h>
 
 
 namespace iipr

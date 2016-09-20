@@ -2,7 +2,7 @@
 #define iproc_included
 
 
-#include "ibase/ibase.h"
+#include <ibase/ibase.h>
 
 
 /**

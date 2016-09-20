@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
 
 
 namespace iipr

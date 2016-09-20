@@ -2,10 +2,10 @@
 #define imeas_ILinearAdjustConstraints_included
 
 
-#include "istd/IChangeable.h"
-#include "istd/TRange.h"
+#include <istd/IChangeable.h>
+#include <istd/TRange.h>
 
-#include "imeas/imeas.h"
+#include <imeas/imeas.h>
 
 
 namespace imeas

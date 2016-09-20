@@ -2,12 +2,12 @@
 #define iwiz_CWizardDocumentComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iprm/CParamsManagerComp.h"
+#include <iprm/CParamsManagerComp.h>
 
-#include "iwiz/IWizardNavigationController.h"
-#include "iwiz/IParamsManagerWizard.h"
+#include <iwiz/IWizardNavigationController.h>
+#include <iwiz/IParamsManagerWizard.h>
 
 
 namespace iwiz

@@ -3,18 +3,18 @@
 
 
 // ACF-Solutions
-#include "iqtipr/CValueSupplierGuiComp.h"
-#include "iqtipr/CCaliperParamsGuiComp.h"
-#include "iqtipr/CLineProjectionSupplierGuiComp.h"
-#include "iqtipr/CCircleFinderParamsGuiComp.h"
-#include "iqtipr/CSearchBasedFeaturesSupplierGuiComp.h"
-#include "iqtipr/CGeneralSearchParamsGuiComp.h"
-#include "iqtipr/CConvolution2dParamsGuiComp.h"
-#include "iqtipr/CMultiLineSupplierGuiComp.h"
-#include "iqtipr/CMultiLineProjectionSupplierGuiComp.h"
-#include "iqtipr/CColorPatternComparatorGuiComp.h"
-#include "iqtipr/CPatternTeachingControllerGuiComp.h"
-#include "iqtipr/CImageInterpolationParamsGuiComp.h"
+#include <iqtipr/CValueSupplierGuiComp.h>
+#include <iqtipr/CCaliperParamsGuiComp.h>
+#include <iqtipr/CLineProjectionSupplierGuiComp.h>
+#include <iqtipr/CCircleFinderParamsGuiComp.h>
+#include <iqtipr/CSearchBasedFeaturesSupplierGuiComp.h>
+#include <iqtipr/CGeneralSearchParamsGuiComp.h>
+#include <iqtipr/CConvolution2dParamsGuiComp.h>
+#include <iqtipr/CMultiLineSupplierGuiComp.h>
+#include <iqtipr/CMultiLineProjectionSupplierGuiComp.h>
+#include <iqtipr/CColorPatternComparatorGuiComp.h>
+#include <iqtipr/CPatternTeachingControllerGuiComp.h>
+#include <iqtipr/CImageInterpolationParamsGuiComp.h>
 
 
 /**

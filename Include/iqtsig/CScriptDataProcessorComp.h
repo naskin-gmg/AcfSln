@@ -6,11 +6,11 @@
 #include <QtScript/QtScript>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iproc/TSyncProcessorWrap.h>
 
-#include "iqtsig/iqtsig.h"
+#include <iqtsig/iqtsig.h>
 
 
 namespace iqtsig

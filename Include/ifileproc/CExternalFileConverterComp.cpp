@@ -1,4 +1,4 @@
-#include "ifileproc/CExternalFileConverterComp.h"
+#include <ifileproc/CExternalFileConverterComp.h>
 
 
 // Qt includes
@@ -8,7 +8,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "iprm/TParamsPtr.h"
+#include <iprm/TParamsPtr.h>
 
 
 namespace ifileproc

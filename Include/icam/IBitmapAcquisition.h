@@ -3,8 +3,8 @@
 
 
 // ACF includes
-#include "istd/CIndex2d.h"
-#include "iproc/IProcessor.h"
+#include <istd/CIndex2d.h>
+#include <iproc/IProcessor.h>
 
 
 namespace icam

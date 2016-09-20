@@ -1,11 +1,11 @@
-#include "iipr/CHoughSpace2d.h"
+#include <iipr/CHoughSpace2d.h>
 
 
 // STL includes
 #include <cmath>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iipr

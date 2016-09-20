@@ -1,4 +1,4 @@
-#include "iqtauth/CChangePasswordDialog.h"
+#include <iqtauth/CChangePasswordDialog.h>
 
 
 // Qt includes
@@ -10,8 +10,8 @@
 #endif
 
 // ACF includes
-#include "iqt/iqt.h"
-#include "istd/CChangeNotifier.h"
+#include <iqt/iqt.h>
+#include <istd/CChangeNotifier.h>
 
 
 namespace iqtauth

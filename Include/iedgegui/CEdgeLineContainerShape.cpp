@@ -1,15 +1,15 @@
-#include "iedgegui/CEdgeLineContainerShape.h"
+#include <iedgegui/CEdgeLineContainerShape.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "imod/IModel.h"
-#include "iview/IColorSchema.h"
-#include "iview/CScreenTransform.h"
-#include "iedge/CEdgeLine.h"
-#include "iedge/CEdgeLineContainer.h"
+#include <imod/IModel.h>
+#include <iview/IColorSchema.h>
+#include <iview/CScreenTransform.h>
+#include <iedge/CEdgeLine.h>
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedgegui

@@ -3,16 +3,16 @@
 
 
 // ACF includes
-#include "iview/IShapeStatusInfo.h"
-#include "iview/CImageShape.h"
-#include "imod/TModelWrap.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "iimg/CBitmap.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iview/IShapeStatusInfo.h>
+#include <iview/CImageShape.h>
+#include <imod/TModelWrap.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <iimg/CBitmap.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
 
 // Local includes
-#include "GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h"
+#include <GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h>
 
 
 namespace iqtipr

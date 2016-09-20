@@ -7,24 +7,24 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "ifile/IFilePersistence.h"
-#include "imod/CMultiModelDispatcherBase.h"
-#include "icomp/IRegistry.h"
-#include "icomp/IMetaInfoManager.h"
-#include "icomp/IPackagesManager.h"
-#include "ibase/ICommandsProvider.h"
-#include "idoc/IHelpViewer.h"
-#include "idoc/IDocumentManager.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CHierarchicalCommand.h"
-#include "iqtgui/IDropConsumer.h"
-#include "icmpstr/IRegistryPreview.h"
-#include "icmpstr/IRegistryConsistInfo.h"
-#include "icmpstr/IElementSelectionInfo.h"
-#include "icmpstr/ISceneProvider.h"
+#include <istd/TPointerVector.h>
+#include <ifile/IFilePersistence.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <icomp/IRegistry.h>
+#include <icomp/IMetaInfoManager.h>
+#include <icomp/IPackagesManager.h>
+#include <ibase/ICommandsProvider.h>
+#include <idoc/IHelpViewer.h>
+#include <idoc/IDocumentManager.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/CHierarchicalCommand.h>
+#include <iqtgui/IDropConsumer.h>
+#include <icmpstr/IRegistryPreview.h>
+#include <icmpstr/IRegistryConsistInfo.h>
+#include <icmpstr/IElementSelectionInfo.h>
+#include <icmpstr/ISceneProvider.h>
 
-#include "GeneratedFiles/icmpstr/ui_CVisualRegistryEditorComp.h"
+#include <GeneratedFiles/icmpstr/ui_CVisualRegistryEditorComp.h>
 
 
 namespace icmpstr

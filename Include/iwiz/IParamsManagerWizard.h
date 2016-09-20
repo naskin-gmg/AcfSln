@@ -2,9 +2,9 @@
 #define iwiz_IParamsManagerWizard_included
 
 
-#include "iprm/IParamsManager.h"
+#include <iprm/IParamsManager.h>
 
-#include "iwiz/IWizardNavigationController.h"
+#include <iwiz/IWizardNavigationController.h>
 
 
 namespace iwiz

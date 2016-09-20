@@ -1,17 +1,17 @@
-#include "imeas/CGeneralDataSequence.h"
+#include <imeas/CGeneralDataSequence.h>
 
 
 // STL includes
 #include <cstring>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TDelPtr.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TDelPtr.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 // ACF-Solutions
-#include "imeas/CSamplesInfo.h"
+#include <imeas/CSamplesInfo.h>
 
 
 namespace imeas

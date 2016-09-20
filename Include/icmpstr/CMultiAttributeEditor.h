@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iwidgets/CItemDelegate.h"
+#include <iwidgets/CItemDelegate.h>
 
 // ACF-Solutions includes
-#include "icmpstr/CElementSelectionInfoManagerBase.h"
-#include "GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h"
+#include <icmpstr/CElementSelectionInfoManagerBase.h>
+#include <GeneratedFiles/icmpstr/ui_CMultiAttributeEditor.h>
 
 
 namespace icmpstr

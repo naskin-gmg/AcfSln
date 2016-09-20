@@ -1,13 +1,13 @@
-#include "iipr/CImageRegionProcessorCompBase.h"
+#include <iipr/CImageRegionProcessorCompBase.h>
 
 
  // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "ibase/CSize.h"
-#include "i2d/IObject2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "iimg/IBitmap.h"
-#include "iprm/TParamsPtr.h"
+#include <istd/CChangeNotifier.h>
+#include <ibase/CSize.h>
+#include <i2d/IObject2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iimg/IBitmap.h>
+#include <iprm/TParamsPtr.h>
 
 
 namespace iipr

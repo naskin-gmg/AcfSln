@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "i2d/ICalibration2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "i2d/CVector2d.h"
+#include <i2d/ICalibration2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <i2d/CVector2d.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "imeas/INumericValueProvider.h"
-#include "imeas/CSimpleNumericValue.h"
-#include "iimg/IBitmapProvider.h"
+#include <iproc/IProcessor.h>
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <imeas/INumericValueProvider.h>
+#include <imeas/CSimpleNumericValue.h>
+#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr

@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "icomp/IRegistry.h"
-#include "icomp/IMetaInfoManager.h"
-#include "ilog/IMessageConsumer.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <icomp/IRegistry.h>
+#include <icomp/IMetaInfoManager.h>
+#include <ilog/IMessageConsumer.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "icmpstr/IRegistryConsistInfo.h"
-#include "GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h"
+#include <icmpstr/IRegistryConsistInfo.h>
+#include <GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h>
 
 
 namespace icmpstr

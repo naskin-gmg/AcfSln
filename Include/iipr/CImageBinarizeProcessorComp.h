@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iimg/IBitmap.h>
+#include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
-#include "imeas/INumericValue.h"
+#include <imeas/INumericValue.h>
 
 
 namespace iipr

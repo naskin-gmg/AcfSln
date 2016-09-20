@@ -1,7 +1,7 @@
 #include "WizardPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace WizardPck

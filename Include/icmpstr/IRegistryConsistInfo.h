@@ -7,12 +7,12 @@
 #include <QtGui/QIcon>
 
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "icomp/IRegistry.h"
-#include "ilog/IMessageConsumer.h"
+#include <istd/IPolymorphic.h>
+#include <icomp/IRegistry.h>
+#include <ilog/IMessageConsumer.h>
 
 // ACF-Solutions includes
-#include "icmpstr/icmpstr.h"
+#include <icmpstr/icmpstr.h>
 
 
 namespace icmpstr

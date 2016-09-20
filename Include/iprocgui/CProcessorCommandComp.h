@@ -3,16 +3,16 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
+#include <imod/TSingleModelObserverBase.h>
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "ibase/ICommandsProvider.h"
+#include <ibase/ICommandsProvider.h>
 
-#include "iqtgui/IIconProvider.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/IIconProvider.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
-#include "iproc/IProcessor.h"
+#include <iproc/IProcessor.h>
 
 
 namespace iprocgui

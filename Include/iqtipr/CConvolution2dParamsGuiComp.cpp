@@ -1,8 +1,8 @@
-#include "iqtipr/CConvolution2dParamsGuiComp.h"
+#include <iqtipr/CConvolution2dParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iqtipr

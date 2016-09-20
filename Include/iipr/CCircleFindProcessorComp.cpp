@@ -1,19 +1,19 @@
-#include "iipr/CCircleFindProcessorComp.h"
+#include <iipr/CCircleFindProcessorComp.h>
 
 
 // ACF includes
-#include "imath/CVarMatrix.h"
-#include "ilog/TExtMessage.h"
-#include "i2d/CAnnulusSegment.h"
-#include "iprm/CParamsSet.h"
-#include "iprm/TParamsPtr.h"
-#include "iprm/IVariableParam.h"
+#include <imath/CVarMatrix.h>
+#include <ilog/TExtMessage.h>
+#include <i2d/CAnnulusSegment.h>
+#include <iprm/CParamsSet.h>
+#include <iprm/TParamsPtr.h>
+#include <iprm/IVariableParam.h>
 
 // ACF Solutions includes
-#include "iipr/CCaliperFeature.h"
-#include "iipr/CFeaturesContainer.h"
-#include "iipr/CSingleFeatureConsumer.h"
-#include "iinsp/CSupplierCompBase.h"
+#include <iipr/CCaliperFeature.h>
+#include <iipr/CFeaturesContainer.h>
+#include <iipr/CSingleFeatureConsumer.h>
+#include <iinsp/CSupplierCompBase.h>
 
 
 namespace iipr

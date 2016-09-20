@@ -7,12 +7,12 @@
 #include <QtNetwork/QTcpSocket>
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "ifile/IFileNameParam.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <imod/IModel.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <ifile/IFileNameParam.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h"
+#include <GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h>
 
 
 namespace iqtex

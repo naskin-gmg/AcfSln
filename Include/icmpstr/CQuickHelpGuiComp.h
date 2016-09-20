@@ -13,16 +13,16 @@
 #endif
 
 // ACF includes
-#include "icomp/IMetaInfoManager.h"
-#include "ifile/IFileNameParam.h"
-#include "idoc/IHelpViewer.h"
-#include "idoc/IHelpFileProvider.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <icomp/IMetaInfoManager.h>
+#include <ifile/IFileNameParam.h>
+#include <idoc/IHelpViewer.h>
+#include <idoc/IHelpFileProvider.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
 // ACF-Solutions includes
-#include "icmpstr/IExternalMetaInfoManager.h"
+#include <icmpstr/IExternalMetaInfoManager.h>
 
-#include "GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h"
+#include <GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h>
 
 
 namespace icmpstr

@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "imath/CSampledFunction2d.h"
+#include <imath/CSampledFunction2d.h>
 
 // IACF includes
-#include "iipr/IConvolutionKernel2d.h"
+#include <iipr/IConvolutionKernel2d.h>
 
 
 namespace iipr

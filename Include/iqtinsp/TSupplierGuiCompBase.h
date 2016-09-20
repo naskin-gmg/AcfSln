@@ -12,19 +12,19 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TDelPtr.h"
-#include "ifile/IFilePersistence.h"
-#include "imod/IObserver.h"
-#include "iprm/IParamsSet.h"
-#include "i2d/ICalibrationProvider.h"
-#include "iinsp/ISupplier.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqt2d/TViewExtenderCompBase.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TDelPtr.h>
+#include <ifile/IFilePersistence.h>
+#include <imod/IObserver.h>
+#include <iprm/IParamsSet.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iinsp/ISupplier.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqt2d/TViewExtenderCompBase.h>
 
 // ACF-Solutions includes
-#include "iqtinsp/iqtinsp.h"
+#include <iqtinsp/iqtinsp.h>
 
 
 namespace iqtinsp

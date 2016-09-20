@@ -6,10 +6,10 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "istd/istd.h"
+#include <istd/istd.h>
 
 // IACF includes
-#include "iipr/IImageInterpolationParams.h"
+#include <iipr/IImageInterpolationParams.h>
 
 
 namespace iimg

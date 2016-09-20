@@ -1,16 +1,16 @@
-#include "imeas/CHistogramStatisticsProcessorComp.h"
+#include <imeas/CHistogramStatisticsProcessorComp.h>
 
 
 // Qt includes
 #include <QtCore/qmath.h>
 
  // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
-#include "imeas/IDataSequenceStatistics.h"
-#include "imeas/CDataStatistics.h"
+#include <imeas/IDataSequence.h>
+#include <imeas/IDataSequenceStatistics.h>
+#include <imeas/CDataStatistics.h>
 
 
 namespace imeas

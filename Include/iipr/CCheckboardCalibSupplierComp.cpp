@@ -1,17 +1,17 @@
-#include "iipr/CCheckboardCalibSupplierComp.h"
+#include <iipr/CCheckboardCalibSupplierComp.h>
 
 
 // ACF include
-#include "ilog/TExtMessage.h"
-#include "i2d/CLine2d.h"
-#include "i2d/CPosition2d.h"
-#include "i2d/CPolypoint.h"
-#include "iprm/TParamsPtr.h"
+#include <ilog/TExtMessage.h>
+#include <i2d/CLine2d.h>
+#include <i2d/CPosition2d.h>
+#include <i2d/CPolypoint.h>
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include "iipr/CHoughSpace2d.h"
-#include "iipr/CPerspCalibFinder.h"
-#include "iimg/CBitmap.h"
+#include <iipr/CHoughSpace2d.h>
+#include <iipr/CPerspCalibFinder.h>
+#include <iimg/CBitmap.h>
 
 
 namespace iipr

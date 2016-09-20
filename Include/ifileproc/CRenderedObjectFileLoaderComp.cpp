@@ -1,4 +1,4 @@
-#include "ifileproc/CRenderedObjectFileLoaderComp.h"
+#include <ifileproc/CRenderedObjectFileLoaderComp.h>
 
 
 // Qt includes
@@ -12,13 +12,13 @@
 #endif
 
 // ACF includes
-#include "istd/CSystem.h"
-#include "istd/CChangeNotifier.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
-#include "iser/CPrimitiveTypesSerializer.h"
-#include "iprm/CParamsSet.h"
-#include "i2d/CRectangle.h"
+#include <istd/CSystem.h>
+#include <istd/CChangeNotifier.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
+#include <iser/CPrimitiveTypesSerializer.h>
+#include <iprm/CParamsSet.h>
+#include <i2d/CRectangle.h>
 
 
 namespace ifileproc

@@ -10,9 +10,9 @@
 #endif
 
 // ACF includes
-#include "istd/TRange.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "imeas/IDataSequence.h"
+#include <istd/TRange.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <imeas/IDataSequence.h>
 
 
 namespace iqtsig

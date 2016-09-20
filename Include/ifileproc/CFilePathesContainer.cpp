@@ -1,11 +1,11 @@
-#include "ifileproc/CFilePathesContainer.h"
+#include <ifileproc/CFilePathesContainer.h>
 
 
 // Qt includes
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace ifileproc

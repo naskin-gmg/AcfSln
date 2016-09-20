@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "imod/TModelWrap.h"
+#include <istd/TPointerVector.h>
+#include <imod/TModelWrap.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequenceStatistics.h"
-#include "imeas/CDataStatistics.h"
+#include <imeas/IDataSequenceStatistics.h>
+#include <imeas/CDataStatistics.h>
 
 
 namespace imeas

@@ -1,4 +1,4 @@
-#include "icmpstr/CRegistryElementShape.h"
+#include <icmpstr/CRegistryElementShape.h>
 
 
 // Qt includes
@@ -15,12 +15,12 @@
 #endif
 
 // ACF includes
-#include "istd/CIdManipBase.h"
+#include <istd/CIdManipBase.h>
 
 // ACF-Solutions includes
-#include "icmpstr/CVisualRegistryEditorComp.h"
-#include "icmpstr/CRegistryElementShape.h"
-#include "icmpstr/IRegistryConsistInfo.h"
+#include <icmpstr/CVisualRegistryEditorComp.h>
+#include <icmpstr/CRegistryElementShape.h>
+#include <icmpstr/IRegistryConsistInfo.h>
 
 
 namespace icmpstr

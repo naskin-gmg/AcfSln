@@ -5,13 +5,13 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iimg/CBitmap.h"
-#include "iimg/TMultiPageBitmap.h"
+#include <iimg/CBitmap.h>
+#include <iimg/TMultiPageBitmap.h>
 
 // ACF-Solutions includes
-#include "iimg/IMultiBitmapProvider.h"
-#include "iqtinsp/TSupplierGuiCompBase.h"
-#include "GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h"
+#include <iimg/IMultiBitmapProvider.h>
+#include <iqtinsp/TSupplierGuiCompBase.h>
+#include <GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h>
 
 
 namespace iqtcam

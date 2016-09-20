@@ -6,12 +6,12 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "imm/IVideoController.h"
+#include <imm/IVideoController.h>
 
-#include "GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h"
+#include <GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h>
 
 
 namespace iqtmm

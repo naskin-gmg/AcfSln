@@ -1,8 +1,8 @@
-#include "iipr/CProcessedAcquisitionComp.h"
+#include <iipr/CProcessedAcquisitionComp.h>
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iimg/CGeneralBitmap.h"
+#include <iimg/CGeneralBitmap.h>
 
 
 namespace iipr

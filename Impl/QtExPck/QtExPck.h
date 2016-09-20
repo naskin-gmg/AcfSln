@@ -2,13 +2,13 @@
 #define QtExPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iqtex/CTcpTerminalGuiComp.h"
-#include "iqtex/CXslSerializerComp.h"
+#include <iqtex/CTcpTerminalGuiComp.h>
+#include <iqtex/CXslSerializerComp.h>
 
-#include "iservice/CServiceApplicationComp.h"
+#include <iservice/CServiceApplicationComp.h>
 
 
 /**

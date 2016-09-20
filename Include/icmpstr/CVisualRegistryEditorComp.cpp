@@ -1,4 +1,4 @@
-#include "icmpstr/CVisualRegistryEditorComp.h"
+#include <icmpstr/CVisualRegistryEditorComp.h>
 
 
 // Qt includes
@@ -23,19 +23,19 @@
 #endif
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CIdManipBase.h"
-#include "iser/CArchiveTag.h"
-#include "iser/CCompactXmlMemReadArchive.h"
-#include "iser/CCompactXmlMemWriteArchive.h"
-#include "ibase/IApplication.h"
-#include "iqtgui/IDropConsumer.h"
-#include "iqtgui/TDesignerBasicGui.h"
-#include "iqtgui/CGuiComponentDialog.h"
-#include "icmpstr/CRegistryElementShape.h"
-#include "icmpstr/CGraphicsConnectorItem.h"
-#include "icmpstr/CVisualRegistryElement.h"
-#include "icmpstr/CVisualRegistry.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CIdManipBase.h>
+#include <iser/CArchiveTag.h>
+#include <iser/CCompactXmlMemReadArchive.h>
+#include <iser/CCompactXmlMemWriteArchive.h>
+#include <ibase/IApplication.h>
+#include <iqtgui/IDropConsumer.h>
+#include <iqtgui/TDesignerBasicGui.h>
+#include <iqtgui/CGuiComponentDialog.h>
+#include <icmpstr/CRegistryElementShape.h>
+#include <icmpstr/CGraphicsConnectorItem.h>
+#include <icmpstr/CVisualRegistryElement.h>
+#include <icmpstr/CVisualRegistry.h>
 
 
 namespace icmpstr

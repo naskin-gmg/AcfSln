@@ -1,4 +1,4 @@
-#include "iedge/CFastEdgesExtractorComp.h"
+#include <iedge/CFastEdgesExtractorComp.h>
 
 
 // STL includes
@@ -11,16 +11,16 @@
 #include <QtCore/QDebug>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "imath/CGeneralUnitInfo.h"
-#include "i2d/CPolypoint.h"
-#include "i2d/CVector2d.h"
-#include "iprm/TParamsPtr.h"
+#include <istd/TDelPtr.h>
+#include <imath/CGeneralUnitInfo.h>
+#include <i2d/CPolypoint.h>
+#include <i2d/CVector2d.h>
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include "iedge/CEdgeNode.h"
-#include "iedge/CEdgeLine.h"
-#include "iedge/CEdgeLineContainer.h"
+#include <iedge/CEdgeNode.h>
+#include <iedge/CEdgeLine.h>
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedge

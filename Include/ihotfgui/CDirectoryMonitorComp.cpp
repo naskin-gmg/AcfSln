@@ -1,4 +1,4 @@
-#include "ihotfgui/CDirectoryMonitorComp.h"
+#include <ihotfgui/CDirectoryMonitorComp.h>
 
 
 // Qt includes
@@ -6,9 +6,9 @@
 #include <QtCore/QMetaType>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CGeneralTimeStamp.h"
-#include "ifile/CFileListProviderComp.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CGeneralTimeStamp.h>
+#include <ifile/CFileListProviderComp.h>
 
 
 namespace ihotfgui

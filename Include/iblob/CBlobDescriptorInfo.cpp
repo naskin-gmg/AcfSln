@@ -1,4 +1,4 @@
-#include "iblob/CBlobDescriptorInfo.h"
+#include <iblob/CBlobDescriptorInfo.h>
 
 
 namespace iblob

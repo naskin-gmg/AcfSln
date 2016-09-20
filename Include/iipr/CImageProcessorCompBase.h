@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "iprm/ISelectionParam.h"
-#include "iimg/IBitmap.h"
+#include <istd/TSmartPtr.h>
+#include <iprm/ISelectionParam.h>
+#include <iimg/IBitmap.h>
 
 // ACF-Solutions includes
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iproc/TSyncProcessorCompBase.h>
 
 
 namespace iipr

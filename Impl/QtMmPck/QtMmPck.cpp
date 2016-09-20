@@ -1,7 +1,7 @@
 #include "QtMmPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace QtMmPck

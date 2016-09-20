@@ -2,13 +2,13 @@
 #define QtCameraPck_included
 
 
-#include "iqtcam/CFileAcquisitionComp.h"
-#include "iqtcam/CSnapImageGuiComp.h"
-#include "iqtcam/CExposureParamsGuiComp.h"
-#include "iqtcam/CBitmapSupplierGuiComp.h"
-#include "iqtcam/CMultiBitmapSupplierGuiComp.h"
-#include "iqtcam/CScaleCalibrationEditorComp.h"
-#include "iqtcam/CCameraInfoGuiComp.h"
+#include <iqtcam/CFileAcquisitionComp.h>
+#include <iqtcam/CSnapImageGuiComp.h>
+#include <iqtcam/CExposureParamsGuiComp.h>
+#include <iqtcam/CBitmapSupplierGuiComp.h>
+#include <iqtcam/CMultiBitmapSupplierGuiComp.h>
+#include <iqtcam/CScaleCalibrationEditorComp.h>
+#include <iqtcam/CCameraInfoGuiComp.h>
 
 
 /**

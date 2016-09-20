@@ -1,11 +1,11 @@
-#include "iipr/CColorPatternControllerComp.h"
+#include <iipr/CColorPatternControllerComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 // ACF-Solutions includes
-#include "iipr/CBitmapOperations.h"
+#include <iipr/CBitmapOperations.h>
 
 
 namespace iipr

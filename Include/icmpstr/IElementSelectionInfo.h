@@ -7,14 +7,14 @@
 #include <QtGui/QIcon>
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "icomp/IRegistry.h"
-#include "icomp/CComponentAddress.h"
+#include <icomp/IRegistry.h>
+#include <icomp/CComponentAddress.h>
 
-#include "icmpstr/icmpstr.h"
+#include <icmpstr/icmpstr.h>
 
 
 namespace icmpstr

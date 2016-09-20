@@ -1,11 +1,11 @@
-#include "ihotf/CFileSystemChangeStorage.h"
+#include <ihotf/CFileSystemChangeStorage.h>
 
 
 // Qt includes
 #include <QtCore/QMutexLocker>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace ihotf

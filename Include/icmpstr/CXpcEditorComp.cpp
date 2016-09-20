@@ -1,4 +1,4 @@
-#include "CXpcEditorComp.h"
+#include <icmpstr/CXpcEditorComp.h>
 
 
 // Qt includes
@@ -14,7 +14,7 @@
 #endif
 
 // ACF includes
-#include "istd/CSystem.h"
+#include <istd/CSystem.h>
 
 
 namespace

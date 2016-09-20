@@ -2,9 +2,9 @@
 #define icmpstr_IComponentNoteController_included
 
 
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "icmpstr/icmpstr.h"
+#include <icmpstr/icmpstr.h>
 
 
 namespace icmpstr

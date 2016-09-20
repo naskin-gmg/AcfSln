@@ -1,4 +1,4 @@
-#include "iipr/CBitmapProviderCacheComp.h"
+#include <iipr/CBitmapProviderCacheComp.h>
 
 
 namespace iipr

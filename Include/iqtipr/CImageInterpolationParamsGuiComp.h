@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "iipr/IImageInterpolationParams.h"
-#include "GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h"
+#include <iipr/IImageInterpolationParams.h>
+#include <GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h>
 
 
 namespace iqtipr

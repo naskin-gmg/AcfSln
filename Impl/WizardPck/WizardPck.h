@@ -2,12 +2,12 @@
 #define WizardPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
 
-#include "iwiz/CWizardDocumentComp.h"
-#include "iwiz/CComposedStateControllerComp.h"
-#include "iwiz/CSelectionConsistencyControllerComp.h"
+#include <iwiz/CWizardDocumentComp.h>
+#include <iwiz/CComposedStateControllerComp.h>
+#include <iwiz/CSelectionConsistencyControllerComp.h>
 
 
 /**

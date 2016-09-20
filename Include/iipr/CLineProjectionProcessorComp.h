@@ -6,14 +6,14 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iproc/TSyncProcessorCompBase.h"
-#include "iipr/ILineProjectionProcessor.h"
-#include "iipr/IProjectionConstraints.h"
-#include "iipr/IFeatureToImageMapper.h"
-#include "iipr/IFeatureToProjectionMapper.h"
+#include <iproc/TSyncProcessorCompBase.h>
+#include <iipr/ILineProjectionProcessor.h>
+#include <iipr/IProjectionConstraints.h>
+#include <iipr/IFeatureToImageMapper.h>
+#include <iipr/IFeatureToProjectionMapper.h>
 
 
 namespace iipr

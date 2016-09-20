@@ -1,13 +1,13 @@
-#include "isig/CSamplingParamsComp.h"
+#include <isig/CSamplingParamsComp.h>
 
 
 // Qt includes
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "isig/ISamplingConstraints.h"
+#include <isig/ISamplingConstraints.h>
 
 
 namespace isig

@@ -1,14 +1,14 @@
-#include "iipr/CImageCropProcessorComp.h"
+#include <iipr/CImageCropProcessorComp.h>
 
 
 // STL includes
 #include <cstring>
 
  // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "ibase/CSize.h"
-#include "iimg/IBitmap.h"
-#include "iimg/CScanlineMask.h"
+#include <istd/CChangeNotifier.h>
+#include <ibase/CSize.h>
+#include <iimg/IBitmap.h>
+#include <iimg/CScanlineMask.h>
 
 
 namespace iipr

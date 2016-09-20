@@ -1,17 +1,17 @@
-#include "iipr/CConvolutionKernel2d.h"
+#include <iipr/CConvolutionKernel2d.h>
 
 
 // Qt includes
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 // IACF includes
-#include "iipr/iipr.h"
+#include <iipr/iipr.h>
 
 
 namespace iipr

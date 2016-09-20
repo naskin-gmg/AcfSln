@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "iser/ISerializable.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "imeas/CSimpleNumericValue.h"
+#include <iser/ISerializable.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <imeas/CSimpleNumericValue.h>
 
 // QSF includes
-#include "imeas/INumericValueProvider.h"
+#include <imeas/INumericValueProvider.h>
 
 
 namespace imeas

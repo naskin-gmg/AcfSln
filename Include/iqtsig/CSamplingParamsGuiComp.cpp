@@ -1,9 +1,9 @@
-#include "iqtsig/CSamplingParamsGuiComp.h"
+#include <iqtsig/CSamplingParamsGuiComp.h>
 
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "isig/ISamplingConstraints.h"
+#include <isig/ISamplingConstraints.h>
 
 
 namespace iqtsig

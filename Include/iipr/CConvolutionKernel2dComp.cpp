@@ -1,14 +1,14 @@
-#include "iipr/CConvolutionKernel2dComp.h"
+#include <iipr/CConvolutionKernel2dComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
 // IACF includes
-#include "iipr/iipr.h"
+#include <iipr/iipr.h>
 
 
 namespace iipr

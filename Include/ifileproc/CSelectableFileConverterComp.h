@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iprm/ISelectionParam.h"
-#include "iprm/IOptionsList.h"
+#include <iprm/ISelectionParam.h>
+#include <iprm/IOptionsList.h>
 
-#include "ifileproc/IFileConversion.h"
+#include <ifileproc/IFileConversion.h>
 
 
 namespace ifileproc

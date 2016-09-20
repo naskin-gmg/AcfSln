@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "i2d/ICalibrationProvider.h"
-#include "iproc/IProcessor.h"
-#include "iinsp/TSupplierCompWrap.h"
+#include <i2d/ICalibrationProvider.h>
+#include <iproc/IProcessor.h>
+#include <iinsp/TSupplierCompWrap.h>
 
 // ACF-Solutions includes
-#include "iimg/IBitmapProvider.h"
+#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr

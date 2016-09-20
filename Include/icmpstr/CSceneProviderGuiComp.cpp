@@ -1,4 +1,4 @@
-#include "icmpstr/CSceneProviderGuiComp.h"
+#include <icmpstr/CSceneProviderGuiComp.h>
 
 
 // Qt includes
@@ -16,8 +16,8 @@
 #endif
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
-#include "iqtdoc/CMainWindowGuiComp.h"
+#include <iqt/CSignalBlocker.h>
+#include <iqtdoc/CMainWindowGuiComp.h>
 
 
 namespace icmpstr

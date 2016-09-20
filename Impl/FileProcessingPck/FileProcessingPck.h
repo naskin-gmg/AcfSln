@@ -2,24 +2,24 @@
 #define FileProcessingPck_included
 
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "ifileproc/CFileNamingComp.h"
-#include "ifileproc/CFileNamingParamsComp.h"
-#include "ifileproc/CFileListConverterComp.h"
-#include "ifileproc/CFilePathesContainer.h"
-#include "ifileproc/CSelectableFileConverterComp.h"
-#include "ifileproc/CFileConvertOverProcessorComp.h"
-#include "ifileproc/CExternalFileConverterComp.h"
-#include "ifileproc/CCopyFilesTreeComp.h"
-#include "ifileproc/CComposedCopyFilesComp.h"
-#include "ifileproc/CProcessingResultsReviewComp.h"
-#include "ifileproc/CFileInfoCopyComp.h"
-#include "ifileproc/CFileCopyOverLoaderComp.h"
-#include "ifileproc/CCopyAppComp.h"
-#include "ifileproc/CRenderedObjectFileLoaderComp.h"
-#include "ifileproc/CBitmapPreviewGeneratorComp.h"
+#include <ifileproc/CFileNamingComp.h>
+#include <ifileproc/CFileNamingParamsComp.h>
+#include <ifileproc/CFileListConverterComp.h>
+#include <ifileproc/CFilePathesContainer.h>
+#include <ifileproc/CSelectableFileConverterComp.h>
+#include <ifileproc/CFileConvertOverProcessorComp.h>
+#include <ifileproc/CExternalFileConverterComp.h>
+#include <ifileproc/CCopyFilesTreeComp.h>
+#include <ifileproc/CComposedCopyFilesComp.h>
+#include <ifileproc/CProcessingResultsReviewComp.h>
+#include <ifileproc/CFileInfoCopyComp.h>
+#include <ifileproc/CFileCopyOverLoaderComp.h>
+#include <ifileproc/CCopyAppComp.h>
+#include <ifileproc/CRenderedObjectFileLoaderComp.h>
+#include <ifileproc/CBitmapPreviewGeneratorComp.h>
 
 
 /**

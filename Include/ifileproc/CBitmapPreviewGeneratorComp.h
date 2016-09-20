@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "iproc/TSyncProcessorCompBase.h"
-#include "iimg/IBitmap.h"
+#include <istd/TSmartPtr.h>
+#include <iproc/TSyncProcessorCompBase.h>
+#include <iimg/IBitmap.h>
 
 
 namespace ifileproc

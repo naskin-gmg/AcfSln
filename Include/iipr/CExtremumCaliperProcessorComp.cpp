@@ -1,17 +1,17 @@
-#include "iipr/CExtremumCaliperProcessorComp.h"
+#include <iipr/CExtremumCaliperProcessorComp.h>
 
 
 // ACF includes
-#include "iprm/TParamsPtr.h"
+#include <iprm/TParamsPtr.h>
 
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
-#include "imeas/CSamplesInfo.h"
+#include <imeas/IDataSequence.h>
+#include <imeas/CSamplesInfo.h>
 
-#include "iipr/ICaliperParams.h"
-#include "iipr/IFeaturesConsumer.h"
-#include "iipr/CCaliperFeature.h"
+#include <iipr/ICaliperParams.h>
+#include <iipr/IFeaturesConsumer.h>
+#include <iipr/CCaliperFeature.h>
 
 
 namespace iipr

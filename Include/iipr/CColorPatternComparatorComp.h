@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "icmm/CHsv.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "imeas/IDataSequenceProvider.h"
-#include "imeas/IDataSequenceStatisticsProcessor.h"
-#include "imeas/INumericValueProvider.h"
-#include "imeas/CSimpleNumericValue.h"
-#include "imeas/CGeneralDataSequence.h"
+#include <istd/IInformationProvider.h>
+#include <icmm/CHsv.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <imeas/IDataSequenceProvider.h>
+#include <imeas/IDataSequenceStatisticsProcessor.h>
+#include <imeas/INumericValueProvider.h>
+#include <imeas/CSimpleNumericValue.h>
+#include <imeas/CGeneralDataSequence.h>
 
 
 namespace iipr

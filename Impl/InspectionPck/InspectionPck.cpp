@@ -1,7 +1,7 @@
 #include "InspectionPck.h"
 
 
-#include "icomp/export.h"
+#include <icomp/export.h>
 
 
 namespace InspectionPck

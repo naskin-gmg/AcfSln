@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iprm/TParamsPtr.h"
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include "iipr/CImageProcessorCompBase.h"
+#include <iipr/CImageProcessorCompBase.h>
 
 
 namespace iipr

@@ -1,15 +1,15 @@
-#include "imeas/CCrossCorrelationProcessorComp.h"
+#include <imeas/CCrossCorrelationProcessorComp.h>
 
 
 // Qt includes
 #include <QtCore/qmath.h>
 
  // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 // ACF-Solutions includes
-#include "imeas/IMultiDataSequenceProvider.h"
-#include "imeas/IDataSequence.h"
+#include <imeas/IMultiDataSequenceProvider.h>
+#include <imeas/IDataSequence.h>
 
 
 namespace imeas

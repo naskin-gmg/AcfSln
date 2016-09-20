@@ -6,16 +6,16 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/IInformationProvider.h"
-#include "istd/CChangeNotifier.h"
-#include "imod/IModel.h"
-#include "imod/TModelWrap.h"
-#include "imod/CMultiModelBridgeBase.h"
-#include "ilog/CMessageContainer.h"
-#include "ilog/TLoggerCompWrap.h"
+#include <istd/IInformationProvider.h>
+#include <istd/CChangeNotifier.h>
+#include <imod/IModel.h>
+#include <imod/TModelWrap.h>
+#include <imod/CMultiModelBridgeBase.h>
+#include <ilog/CMessageContainer.h>
+#include <ilog/TLoggerCompWrap.h>
 
 // ACF-Solutions includes
-#include "iinsp/IInspectionTask.h"
+#include <iinsp/IInspectionTask.h>
 
 
 namespace iinsp

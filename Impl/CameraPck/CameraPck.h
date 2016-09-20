@@ -3,23 +3,23 @@
 
 
 // ACF includes
-#include "iimg/CBitmap.h"
-#include "iimg/CGeneralBitmap.h"
+#include <iimg/CBitmap.h>
+#include <iimg/CGeneralBitmap.h>
 
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "icam/TSnapBitmapSupplierComp.h"
-#include "icam/CExposureParamsComp.h"
-#include "icam/CMemoryAcquisitionComp.h"
-#include "icam/CAcquisitionConstraintsComp.h"
-#include "icam/CSelectionParamCameraComp.h"
-#include "icam/CCameraDelegatorComp.h"
-#include "icam/CMultiCameraBitmapSupplierComp.h"
-#include "icam/CSelectableBitmapSupplierComp.h"
-#include "icam/CSnapMultiPageBitmapSupplierComp.h"
-#include "icam/CSnapBitmapSupplierComp.h"
-#include "icam/CCalibratedCameraComp.h"
+#include <icam/TSnapBitmapSupplierComp.h>
+#include <icam/CExposureParamsComp.h>
+#include <icam/CMemoryAcquisitionComp.h>
+#include <icam/CAcquisitionConstraintsComp.h>
+#include <icam/CSelectionParamCameraComp.h>
+#include <icam/CCameraDelegatorComp.h>
+#include <icam/CMultiCameraBitmapSupplierComp.h>
+#include <icam/CSelectableBitmapSupplierComp.h>
+#include <icam/CSnapMultiPageBitmapSupplierComp.h>
+#include <icam/CSnapBitmapSupplierComp.h>
+#include <icam/CCalibratedCameraComp.h>
 
 
 /**

@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "iedge/IEdgeLinesProvider.h"
-#include "iedge/IEdgeLinesProcessor.h"
-#include "iedge/CEdgeLineContainer.h"
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <iedge/IEdgeLinesProvider.h>
+#include <iedge/IEdgeLinesProcessor.h>
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedge

@@ -3,13 +3,13 @@
 
 
 // ACF-Solutions includes
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "iimg/IBitmapProvider.h"
-#include "iipr/ILineProjectionProcessor.h"
-#include "imeas/IMultiDataSequenceProvider.h"
-#include "imeas/INumericValueProvider.h"
-#include "imeas/CGeneralDataSequence.h"
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <iimg/IBitmapProvider.h>
+#include <iipr/ILineProjectionProcessor.h>
+#include <imeas/IMultiDataSequenceProvider.h>
+#include <imeas/INumericValueProvider.h>
+#include <imeas/CGeneralDataSequence.h>
 
 
 namespace iipr

@@ -2,7 +2,7 @@
 #define iipr_CCaliperParams_included
 
 
-#include "iipr/ICaliperParams.h"
+#include <iipr/ICaliperParams.h>
 
 
 namespace iipr

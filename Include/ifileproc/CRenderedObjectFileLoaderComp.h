@@ -6,12 +6,12 @@
 #include <QtCore/QDateTime>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-#include "iser/ISerializable.h"
-#include "icomp/CComponentBase.h"
-#include "ifile/IFilePersistence.h"
-#include "iimg/CBitmap.h"
-#include "iproc/IProcessor.h"
+#include <istd/TSmartPtr.h>
+#include <iser/ISerializable.h>
+#include <icomp/CComponentBase.h>
+#include <ifile/IFilePersistence.h>
+#include <iimg/CBitmap.h>
+#include <iproc/IProcessor.h>
 
 
 namespace ifileproc

@@ -1,8 +1,8 @@
-#include "iipr/CCheckerboardPatternGeneratorComp.h"
+#include <iipr/CCheckerboardPatternGeneratorComp.h>
 
 
 // ACF includes
-#include "istd/CIndex2d.h"
+#include <istd/CIndex2d.h>
 
 
 namespace iipr

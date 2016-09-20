@@ -12,12 +12,12 @@
 #endif
 
 // ACF includes
-#include "icomp/IComponentEnvironmentManager.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFileNameParam.h"
+#include <icomp/IComponentEnvironmentManager.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFileNameParam.h>
 
 // ACF-Solutions includes
-#include "icmpstr/IRegistryPreview.h"
+#include <icmpstr/IRegistryPreview.h>
 
 
 namespace icmpstr

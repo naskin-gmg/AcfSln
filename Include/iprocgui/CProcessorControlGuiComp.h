@@ -6,19 +6,19 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
+#include <ifile/IFilePersistence.h>
 
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
 
-#include "iprm/IParamsSet.h"
+#include <iprm/IParamsSet.h>
 
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
-#include "iproc/IProcessor.h"
+#include <iproc/IProcessor.h>
 
-#include "GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h"
+#include <GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h>
 
 
 namespace iprocgui

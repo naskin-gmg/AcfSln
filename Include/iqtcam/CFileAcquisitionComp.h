@@ -8,15 +8,15 @@
 #include <QtCore/QMutex>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "ifile/IFileNameParam.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <ifile/IFilePersistence.h>
+#include <ifile/IFileNameParam.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iproc/TSyncProcessorWrap.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
 
-#include "iqtcam/iqtcam.h"
+#include <iqtcam/iqtcam.h>
 
 
 namespace iqtcam

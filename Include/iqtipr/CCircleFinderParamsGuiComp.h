@@ -2,11 +2,11 @@
 #define iqtipr_CCircleFinderParamsGuiComp_included
 
 
-#include "iipr/ICircleFinderParams.h"
+#include <iipr/ICircleFinderParams.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h>
 
 
 namespace iqtipr

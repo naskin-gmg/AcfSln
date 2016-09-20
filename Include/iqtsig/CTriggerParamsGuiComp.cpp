@@ -1,9 +1,9 @@
-#include "iqtsig/CTriggerParamsGuiComp.h"
+#include <iqtsig/CTriggerParamsGuiComp.h>
 
 
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
-#include "isig/ITriggerConstraints.h"
+#include <isig/ITriggerConstraints.h>
 
 
 namespace iqtsig

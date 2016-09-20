@@ -1,4 +1,4 @@
-#include "ifileproc/CFileInfoCopyComp.h"
+#include <ifileproc/CFileInfoCopyComp.h>
 
 
 // Qt includes
@@ -9,8 +9,8 @@
 #include <QtCore/QRegExp>
 
 // ACF includes
-#include "iser/IVersionInfo.h"
-#include "istd/CSystem.h"
+#include <iser/IVersionInfo.h>
+#include <istd/CSystem.h>
 
 
 namespace ifileproc

@@ -1,13 +1,13 @@
-#include "iqtipr/CValueSupplierGuiComp.h"
+#include <iqtipr/CValueSupplierGuiComp.h>
 
 // Qt includes
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "imath/CVarVector.h"
-#include "iview/CCircleShape.h"
-#include "iview/CPinShape.h"
-#include "iview/CLineShape.h"
+#include <imath/CVarVector.h>
+#include <iview/CCircleShape.h>
+#include <iview/CPinShape.h>
+#include <iview/CLineShape.h>
 
 
 namespace iqtipr

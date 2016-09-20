@@ -6,13 +6,13 @@
 #include <QtCore/QStringList>
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "ibase/IApplication.h"
-#include "ifile/IFilePersistence.h"
-#include "ilog/TLoggerCompWrap.h"
+#include <istd/IChangeable.h>
+#include <ibase/IApplication.h>
+#include <ifile/IFilePersistence.h>
+#include <ilog/TLoggerCompWrap.h>
 
 // ACF-Solutions include
-#include "ifileproc/IFileConversion.h"
+#include <ifileproc/IFileConversion.h>
 
 
 namespace ifileproc

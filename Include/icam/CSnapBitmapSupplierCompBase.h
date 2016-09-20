@@ -5,15 +5,15 @@
 #include <QtCore/QPair>
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "i2d/ICalibration2d.h"
-#include "i2d/ICalibrationProvider.h"
-#include "iimg/IBitmap.h"
-#include "iinsp/TSupplierCompWrap.h"
+#include <istd/TDelPtr.h>
+#include <i2d/ICalibration2d.h>
+#include <i2d/ICalibrationProvider.h>
+#include <iimg/IBitmap.h>
+#include <iinsp/TSupplierCompWrap.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
-#include "iimg/IBitmapProvider.h"
+#include <icam/IBitmapAcquisition.h>
+#include <iimg/IBitmapProvider.h>
 #include <imeas/INumericConstraints.h>
 #include <imeas/CSimpleNumericValue.h>
 

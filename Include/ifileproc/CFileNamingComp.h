@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ifile/IFileNameParam.h"
+#include <ifile/IFilePersistence.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFileNameParam.h>
 
 // ACF-Solutions includes
-#include "ifileproc/IFileNaming.h"
-#include "ifileproc/IFileNamingParams.h"
+#include <ifileproc/IFileNaming.h>
+#include <ifileproc/IFileNamingParams.h>
 
 
 namespace ifileproc

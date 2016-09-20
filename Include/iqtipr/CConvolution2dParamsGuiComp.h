@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iipr/IConvolutionKernel2d.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iipr/IConvolutionKernel2d.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h"
+#include <GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h>
 
 
 namespace iqtipr

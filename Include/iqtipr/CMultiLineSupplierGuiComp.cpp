@@ -1,11 +1,11 @@
-#include "iqtipr/CMultiLineSupplierGuiComp.h"
+#include <iqtipr/CMultiLineSupplierGuiComp.h>
 
 // Qt includes
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "iview/CPolylineShape.h"
-#include "iprm/TParamsPtr.h"
+#include <iview/CPolylineShape.h>
+#include <iprm/TParamsPtr.h>
 
 
 namespace iqtipr

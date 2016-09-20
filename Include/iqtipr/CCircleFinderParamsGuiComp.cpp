@@ -1,8 +1,8 @@
-#include "iqtipr/CCircleFinderParamsGuiComp.h"
+#include <iqtipr/CCircleFinderParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iqtipr

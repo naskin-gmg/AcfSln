@@ -1,9 +1,9 @@
-#include "iedge/CEdgesReductorComp.h"
+#include <iedge/CEdgesReductorComp.h>
 
 
 // ACF includes
-#include "istd/istd.h"
-#include "iprm/TParamsPtr.h"
+#include <istd/istd.h>
+#include <iprm/TParamsPtr.h>
 
 
 namespace iedge

@@ -1,19 +1,19 @@
-#include "iipr/CRectDerivativeProcessor.h"
+#include <iipr/CRectDerivativeProcessor.h>
 
 
 // Qt includes
 #include <QtCore/QObject>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TSmartPtr.h"
-#include "iprm/TParamsPtr.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TSmartPtr.h>
+#include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
-#include "imeas/CGeneralDataSequence.h"
-#include "imeas/INumericValue.h"
-#include "imeas/CSamplesInfo.h"
+#include <imeas/IDataSequence.h>
+#include <imeas/CGeneralDataSequence.h>
+#include <imeas/INumericValue.h>
+#include <imeas/CSamplesInfo.h>
 
 
 namespace iipr

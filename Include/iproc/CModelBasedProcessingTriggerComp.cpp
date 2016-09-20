@@ -1,10 +1,10 @@
-#include "iproc/CModelBasedProcessingTriggerComp.h"
+#include <iproc/CModelBasedProcessingTriggerComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "imod/IModel.h"
-#include "ibase/IProgressManager.h"
+#include <istd/CChangeNotifier.h>
+#include <imod/IModel.h>
+#include <ibase/IProgressManager.h>
 
 
 namespace iproc

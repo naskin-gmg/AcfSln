@@ -1,4 +1,4 @@
-#include "iqtinsp/CGeneralSupplierGuiComp.h"
+#include <iqtinsp/CGeneralSupplierGuiComp.h>
 
 
 namespace iqtinsp

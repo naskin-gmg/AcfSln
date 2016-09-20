@@ -1,16 +1,16 @@
-#include "icmpstr/CVisualRegistry.h"
+#include <icmpstr/CVisualRegistry.h>
 
 
 // Qt includes
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/CChangeGroup.h"
-#include "istd/TChangeDelegator.h"
-#include "istd/CClassInfo.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/CChangeGroup.h>
+#include <istd/TChangeDelegator.h>
+#include <istd/CClassInfo.h>
 
-#include "icomp/CInterfaceManipBase.h"
+#include <icomp/CInterfaceManipBase.h>
 
 
 // public methods

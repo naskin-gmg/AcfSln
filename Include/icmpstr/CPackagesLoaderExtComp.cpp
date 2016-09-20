@@ -1,4 +1,4 @@
-#include "icmpstr/CPackagesLoaderExtComp.h"
+#include <icmpstr/CPackagesLoaderExtComp.h>
 
 
 namespace icmpstr

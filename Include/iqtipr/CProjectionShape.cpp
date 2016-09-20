@@ -1,4 +1,4 @@
-#include "iqtipr/CProjectionShape.h"
+#include <iqtipr/CProjectionShape.h>
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include <QtGui/QPainter>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
 
 namespace iqtipr

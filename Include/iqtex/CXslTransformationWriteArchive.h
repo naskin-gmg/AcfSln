@@ -9,11 +9,11 @@
 #include <QtXml/QDomNode>
 
 // ACF includes
-#include "iser/CTextWriteArchiveBase.h"
-#include "ifile/CFileArchiveInfo.h"
-#include "iser/CXmlDocumentInfoBase.h"
+#include <iser/CTextWriteArchiveBase.h>
+#include <ifile/CFileArchiveInfo.h>
+#include <iser/CXmlDocumentInfoBase.h>
 
-#include "iqtex/iqtex.h"
+#include <iqtex/iqtex.h>
 
 
 namespace iqtex

@@ -1,4 +1,4 @@
-#include "icmpstr/CAttributeEditorComp.h"
+#include <icmpstr/CAttributeEditorComp.h>
 
 
 // Qt includes
@@ -13,15 +13,15 @@
 #endif
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
-#include "istd/CChangeNotifier.h"
-#include "icomp/CInterfaceManipBase.h"
-#include "icomp/CCompositeComponentStaticInfo.h"
-#include "icomp/CComponentMetaDescriptionEncoder.h"
-#include "iqt/CSignalBlocker.h"
+#include <istd/TOptDelPtr.h>
+#include <istd/CChangeNotifier.h>
+#include <icomp/CInterfaceManipBase.h>
+#include <icomp/CCompositeComponentStaticInfo.h>
+#include <icomp/CComponentMetaDescriptionEncoder.h>
+#include <iqt/CSignalBlocker.h>
 
 // ACF-Solutions includes
-#include "icmpstr/CMultiAttributeDelegateWidget.h"
+#include <icmpstr/CMultiAttributeDelegateWidget.h>
 
 
 

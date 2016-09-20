@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "iproc/IProcessor.h"
+#include <iproc/IProcessor.h>
 
 // ACF-Solutions includes
-#include "iedge/CEdgeLineContainer.h"
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedge

@@ -3,16 +3,16 @@
 
 
 // ACF includes
-#include "istd/CGeneralTimeStamp.h"
-#include "imod/IModel.h"
-#include "imod/TModelWrap.h"
-#include "imod/CMultiModelObserverBase.h"
-#include "icomp/CComponentBase.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "ilog/CMessageContainer.h"
+#include <istd/CGeneralTimeStamp.h>
+#include <imod/IModel.h>
+#include <imod/TModelWrap.h>
+#include <imod/CMultiModelObserverBase.h>
+#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ilog/CMessageContainer.h>
 
 // ACF-Solutions includes
-#include "iinsp/ISupplier.h"
+#include <iinsp/ISupplier.h>
 
 
 namespace iinsp

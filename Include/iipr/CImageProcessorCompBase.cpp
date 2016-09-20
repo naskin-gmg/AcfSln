@@ -1,12 +1,12 @@
-#include "iipr/CImageProcessorCompBase.h"
+#include <iipr/CImageProcessorCompBase.h>
 
 
 // ACF includes
-#include "iprm/TParamsPtr.h"
-#include "iimg/CGeneralBitmap.h"
+#include <iprm/TParamsPtr.h>
+#include <iimg/CGeneralBitmap.h>
 
 // ACF-Solutions includes
-#include "iipr/CImageProcessorCompBase.h"
+#include <iipr/CImageProcessorCompBase.h>
 
 
 namespace iipr

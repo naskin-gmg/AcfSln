@@ -11,9 +11,9 @@
 #endif
 
 // ACF includes
-#include "imath/IUnitInfo.h"
+#include <imath/IUnitInfo.h>
 
-#include "GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h"
+#include <GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h>
 
 
 namespace iqtmeas

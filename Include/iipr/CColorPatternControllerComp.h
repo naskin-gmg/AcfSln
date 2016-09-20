@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "iser/ISerializable.h"
-#include "imod/TModelWrap.h"
-#include "ilog/TLoggerCompWrap.h"
-#include "iimg/CGeneralBitmap.h"
+#include <iser/ISerializable.h>
+#include <imod/TModelWrap.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <iimg/CGeneralBitmap.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "imeas/IDataSequenceProvider.h"
-#include "imeas/TDiscreteDataSequence.h"
-#include "iipr/IPatternController.h"
-#include "iimg/IBitmapProvider.h"
+#include <iproc/IProcessor.h>
+#include <imeas/IDataSequenceProvider.h>
+#include <imeas/TDiscreteDataSequence.h>
+#include <iipr/IPatternController.h>
+#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr

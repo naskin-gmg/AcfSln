@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iipr/CImageInterpolationParams.h"
+#include <iipr/CImageInterpolationParams.h>
 
 
 namespace iipr

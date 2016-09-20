@@ -6,7 +6,7 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "iauth/CUser.h"
+#include <iauth/CUser.h>
 
 
 namespace iauth

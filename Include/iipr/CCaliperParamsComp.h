@@ -2,9 +2,9 @@
 #define iipr_CCaliperParamsComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "iipr/CCaliperParams.h"
+#include <iipr/CCaliperParams.h>
 
 
 namespace iipr

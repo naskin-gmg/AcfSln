@@ -2,10 +2,10 @@
 #define iqtmm_included
 
 
-#include "istd/istd.h"
-#include "ibase/ibase.h"
-#include "iqt/iqt.h"
-#include "iqtgui/iqtgui.h"
+#include <istd/istd.h>
+#include <ibase/ibase.h>
+#include <iqt/iqt.h>
+#include <iqtgui/iqtgui.h>
 
 
 /**

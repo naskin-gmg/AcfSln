@@ -3,15 +3,15 @@
 
 
 // ACF includes
-#include "imath/CGeneralUnitInfo.h"
-#include "iser/ISerializable.h"
-#include "icomp/CComponentBase.h"
+#include <imath/CGeneralUnitInfo.h>
+#include <iser/ISerializable.h>
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "imeas/ILinearAdjustParams.h"
-#include "imeas/ILinearAdjustConstraints.h"
-#include "imeas/INumericValue.h"
-#include "imeas/INumericConstraints.h"
+#include <imeas/ILinearAdjustParams.h>
+#include <imeas/ILinearAdjustConstraints.h>
+#include <imeas/INumericValue.h>
+#include <imeas/INumericConstraints.h>
 
 
 namespace imeas

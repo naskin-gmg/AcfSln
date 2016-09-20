@@ -6,8 +6,8 @@
 #include <QtCore/QObject>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "ilog/TLoggerCompWrap.h"
+#include <ifile/IFilePersistence.h>
+#include <ilog/TLoggerCompWrap.h>
 
 
 namespace icmpstr

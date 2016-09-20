@@ -2,9 +2,9 @@
 #define iipr_IFeaturesConsumer_included
 
 
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
-#include "imeas/INumericValue.h"
+#include <imeas/INumericValue.h>
 
 
 namespace iipr

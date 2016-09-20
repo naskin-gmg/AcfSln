@@ -1,10 +1,10 @@
-#include "iqtipr/CGeneralSearchParamsGuiComp.h"
+#include <iqtipr/CGeneralSearchParamsGuiComp.h>
 
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iqt/CSignalBlocker.h"
-#include "iipr/ISearchConstraints.h"
+#include <istd/CChangeNotifier.h>
+#include <iqt/CSignalBlocker.h>
+#include <iipr/ISearchConstraints.h>
 
 
 namespace iqtipr

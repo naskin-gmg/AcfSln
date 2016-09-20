@@ -3,19 +3,19 @@
 
 
 // ACF includes
-#include "i2d/IMultiCalibrationProvider.h"
-#include "i2d/CVector2d.h"
-#include "i2d/CAffineTransformation2d.h"
-#include "iprm/IParamsSet.h"
-#include "istd/IInformationProvider.h"
+#include <i2d/IMultiCalibrationProvider.h>
+#include <i2d/CVector2d.h>
+#include <i2d/CAffineTransformation2d.h>
+#include <iprm/IParamsSet.h>
+#include <istd/IInformationProvider.h>
 
 // ACF-Solutions includes
-#include "iproc/IProcessor.h"
-#include "iinsp/ISupplier.h"
-#include "iinsp/TSupplierCompWrap.h"
-#include "imeas/TDiscreteDataSequence.h"
-#include "imeas/IDataSequenceProvider.h"
-#include "iimg/IBitmapProvider.h"
+#include <iproc/IProcessor.h>
+#include <iinsp/ISupplier.h>
+#include <iinsp/TSupplierCompWrap.h>
+#include <imeas/TDiscreteDataSequence.h>
+#include <imeas/IDataSequenceProvider.h>
+#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr

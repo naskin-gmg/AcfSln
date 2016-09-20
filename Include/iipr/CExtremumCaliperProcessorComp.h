@@ -4,11 +4,11 @@
 
 // ACF includes
 #include <QtCore/QString>
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorWrap.h>
 
-#include "iipr/ICaliperProcessor.h"
-#include "iipr/IFeatureToProjectionMapper.h"
+#include <iipr/ICaliperProcessor.h>
+#include <iipr/IFeatureToProjectionMapper.h>
 
 
 namespace iipr

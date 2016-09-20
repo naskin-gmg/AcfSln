@@ -7,23 +7,23 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "iser/CArchiveTag.h"
+#include <ifile/IFilePersistence.h>
+#include <iser/CArchiveTag.h>
 
-#include "imod/TModelWrap.h"
+#include <imod/TModelWrap.h>
 
-#include "icomp/IRegistry.h"
-#include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CRegistryElement.h"
+#include <icomp/IRegistry.h>
+#include <icomp/IComponentEnvironmentManager.h>
+#include <icomp/CRegistryElement.h>
 
-#include "idoc/IDocumentManager.h"
+#include <idoc/IDocumentManager.h>
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CHierarchicalCommand.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/CHierarchicalCommand.h>
 
-#include "icmpstr/IRegistryConsistInfo.h"
-#include "icmpstr/IElementSelectionInfo.h"
-#include "GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h"
+#include <icmpstr/IRegistryConsistInfo.h>
+#include <icmpstr/IElementSelectionInfo.h>
+#include <GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h>
 
 
 namespace icmpstr

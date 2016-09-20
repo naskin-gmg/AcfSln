@@ -3,9 +3,9 @@
 
 
 // ACF includes
-#include "iproc/TSyncProcessorCompBase.h"
+#include <iproc/TSyncProcessorCompBase.h>
 
-#include "iimg/IBitmap.h"
+#include <iimg/IBitmap.h>
 
 
 namespace iipr

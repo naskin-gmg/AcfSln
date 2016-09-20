@@ -9,13 +9,13 @@
 #include <QtCore/qmath.h>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "istd/TOptDelPtr.h"
-#include "istd/TSmartPtr.h"
-#include "iser/IArchive.h"
-#include "iser/CArchiveTag.h"
+#include <istd/CChangeNotifier.h>
+#include <istd/TOptDelPtr.h>
+#include <istd/TSmartPtr.h>
+#include <iser/IArchive.h>
+#include <iser/CArchiveTag.h>
 
-#include "imeas/IDiscreteDataSequence.h"
+#include <imeas/IDiscreteDataSequence.h>
 
 
 namespace imeas

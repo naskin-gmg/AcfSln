@@ -3,15 +3,15 @@
 
 
 // ACF includes
-#include "imod/IModel.h"
-#include "imod/CSingleModelObserverBase.h"
-#include "ifile/IFileNameParam.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include <imod/IModel.h>
+#include <imod/CSingleModelObserverBase.h>
+#include <ifile/IFileNameParam.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
 
 // ACF-Solutions includes
-#include "imm/IMediaController.h"
+#include <imm/IMediaController.h>
 
-#include "GeneratedFiles/iqtmm/ui_CVideoPlayerGuiComp.h"
+#include <GeneratedFiles/iqtmm/ui_CVideoPlayerGuiComp.h>
 
 
 namespace iqtmm

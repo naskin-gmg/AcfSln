@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iqtinsp/CInspectionTaskGuiComp.h"
-#include "iqtinsp/CGeneralSupplierGuiComp.h"
+#include <iqtinsp/CInspectionTaskGuiComp.h>
+#include <iqtinsp/CGeneralSupplierGuiComp.h>
 
 
 /**

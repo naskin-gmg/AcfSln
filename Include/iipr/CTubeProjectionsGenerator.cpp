@@ -1,4 +1,4 @@
-#include "iipr/CTubeProjectionsGenerator.h"
+#include <iipr/CTubeProjectionsGenerator.h>
 
 
 namespace iipr

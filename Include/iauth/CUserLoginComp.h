@@ -3,14 +3,14 @@
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "icomp/CComponentBase.h"
+#include <imod/TModelWrap.h>
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "iauth/IRightsProvider.h"
-#include "iauth/ILogin.h"
-#include "iauth/IUsersManager.h"
-#include "iauth/IPasswordChanger.h"
+#include <iauth/IRightsProvider.h>
+#include <iauth/ILogin.h>
+#include <iauth/IUsersManager.h>
+#include <iauth/IPasswordChanger.h>
 
 
 namespace iauth

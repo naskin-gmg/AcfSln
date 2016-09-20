@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include "ifileproc/IFileNamingParams.h"
-#include "GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h"
+#include <ifileproc/IFileNamingParams.h>
+#include <GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h>
 
 
 namespace ihotfgui

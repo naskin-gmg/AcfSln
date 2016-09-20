@@ -2,7 +2,7 @@
 #define imeas_CDataStatistics_included
 
 
-#include "imeas/IDataStatistics.h"
+#include <imeas/IDataStatistics.h>
 
 
 namespace imeas

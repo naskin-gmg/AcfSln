@@ -1,4 +1,4 @@
-#include "icam/CSelectableBitmapSupplierComp.h"
+#include <icam/CSelectableBitmapSupplierComp.h>
 
 
 namespace icam

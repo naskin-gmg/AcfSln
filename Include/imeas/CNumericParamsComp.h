@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
-#include "imath/IUnitInfo.h"
-#include "imeas/INumericConstraints.h"
-#include "imeas/CSimpleNumericValue.h"
+#include <imath/IUnitInfo.h>
+#include <imeas/INumericConstraints.h>
+#include <imeas/CSimpleNumericValue.h>
 
 
 namespace imeas

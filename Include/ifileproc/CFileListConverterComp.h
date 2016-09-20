@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "istd/TPointerVector.h"
-#include "iproc/TSyncProcessorCompBase.h"
-#include "ifile/IFileListProvider.h"
-#include "ifileproc/IFileConversion.h"
+#include <istd/TPointerVector.h>
+#include <iproc/TSyncProcessorCompBase.h>
+#include <ifile/IFileListProvider.h>
+#include <ifileproc/IFileConversion.h>
 
 // ACF-Solutions includes
-#include "ifileproc/IFileNaming.h"
+#include <ifileproc/IFileNaming.h>
 
 
 namespace ifileproc

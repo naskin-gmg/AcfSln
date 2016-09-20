@@ -3,17 +3,17 @@
 
 
 // ACF includes
-#include "istd/TDelPtr.h"
-#include "istd/CClassInfo.h"
+#include <istd/TDelPtr.h>
+#include <istd/CClassInfo.h>
 
-#include "imod/TSingleModelObserverBase.h"
+#include <imod/TSingleModelObserverBase.h>
 
-#include "icomp/IMetaInfoManager.h"
-#include "icomp/IRegistryElement.h"
+#include <icomp/IMetaInfoManager.h>
+#include <icomp/IRegistryElement.h>
 
-#include "icmpstr/IAttributeSelectionObserver.h"
-#include "icmpstr/IElementSelectionInfo.h"
-#include "icmpstr/IRegistryConsistInfo.h"
+#include <icmpstr/IAttributeSelectionObserver.h>
+#include <icmpstr/IElementSelectionInfo.h>
+#include <icmpstr/IRegistryConsistInfo.h>
 
 
 namespace icmpstr

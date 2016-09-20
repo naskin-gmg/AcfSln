@@ -2,9 +2,9 @@
 #define isig_ITriggerParams_included
 
 
-#include "iser/ISerializable.h"
+#include <iser/ISerializable.h>
 
-#include "isig/isig.h"
+#include <isig/isig.h>
 
 
 namespace isig

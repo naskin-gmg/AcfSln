@@ -11,10 +11,10 @@
 #endif
 
 // ACF-Solutions includes
-#include "iauth/IUsersManager.h"
-#include "iauth/CUser.h"
+#include <iauth/IUsersManager.h>
+#include <iauth/CUser.h>
 
-#include "GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h"
+#include <GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h>
 
 
 namespace iqtauth

@@ -13,22 +13,22 @@
 #endif
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
-#include "iimg/IBitmap.h"
-#include "icmm/IColorTransformation.h"
-#include "iprm/IParamsSet.h"
-#include "iqtgui/IGuiObject.h"
-#include "iqtgui/TDesignerGuiCompBase.h"
-#include "iqt2d/TViewExtenderCompBase.h"
+#include <ifile/IFilePersistence.h>
+#include <imod/IModel.h>
+#include <imod/IObserver.h>
+#include <iimg/IBitmap.h>
+#include <icmm/IColorTransformation.h>
+#include <iprm/IParamsSet.h>
+#include <iqtgui/IGuiObject.h>
+#include <iqtgui/TDesignerGuiCompBase.h>
+#include <iqt2d/TViewExtenderCompBase.h>
 
 // ACF-Solutions includes
-#include "icam/IBitmapAcquisition.h"
+#include <icam/IBitmapAcquisition.h>
 
-#include "iqtcam/iqtcam.h"
+#include <iqtcam/iqtcam.h>
 
-#include "GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h"
+#include <GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h>
 
 
 namespace iqtcam

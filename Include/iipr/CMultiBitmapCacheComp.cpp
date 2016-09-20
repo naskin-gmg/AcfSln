@@ -1,8 +1,8 @@
-#include "iipr/CMultiBitmapCacheComp.h"
+#include <iipr/CMultiBitmapCacheComp.h>
 
 
 // ACF includes
-#include "istd/TDelPtr.h"
+#include <istd/TDelPtr.h>
 
 
 namespace iipr

@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
 // ACF-Solutions includes
-#include "iqtauth/CLoginBarGuiComp.h"
-#include "iqtauth/CUserGuiComp.h"
+#include <iqtauth/CLoginBarGuiComp.h>
+#include <iqtauth/CUserGuiComp.h>
 
 
 /**

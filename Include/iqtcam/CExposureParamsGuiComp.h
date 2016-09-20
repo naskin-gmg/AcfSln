@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
 
-#include "icam/IExposureParams.h"
+#include <icam/IExposureParams.h>
 
-#include "GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h"
+#include <GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h>
 
 
 namespace iqtcam

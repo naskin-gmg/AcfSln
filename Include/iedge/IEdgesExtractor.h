@@ -3,11 +3,11 @@
 
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iproc/IProcessor.h"
+#include <iimg/IBitmap.h>
+#include <iproc/IProcessor.h>
 
 // ACF-Solutions includes
-#include "iedge/CEdgeLineContainer.h"
+#include <iedge/CEdgeLineContainer.h>
 
 
 namespace iedge

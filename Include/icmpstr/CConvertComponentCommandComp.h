@@ -11,15 +11,15 @@
 #endif
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "icomp/IMetaInfoManager.h"
-#include "icomp/CComponentBase.h"
-#include "ibase/ICommandsProvider.h"
-#include "ibase/TModelObserverCompWrap.h"
-#include "iqtgui/CHierarchicalCommand.h"
-#include "icmpstr/IElementSelectionInfo.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <icomp/IMetaInfoManager.h>
+#include <icomp/CComponentBase.h>
+#include <ibase/ICommandsProvider.h>
+#include <ibase/TModelObserverCompWrap.h>
+#include <iqtgui/CHierarchicalCommand.h>
+#include <icmpstr/IElementSelectionInfo.h>
 
-#include "GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h"
+#include <GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h>
 
 
 namespace icmpstr

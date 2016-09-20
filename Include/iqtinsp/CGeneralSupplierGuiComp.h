@@ -6,12 +6,12 @@
 #include <QtCore/QTimer>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
-#include "iinsp/ISupplier.h"
+#include <istd/CChangeNotifier.h>
+#include <iinsp/ISupplier.h>
 
 // ACF-Solutions includes
-#include "iqtinsp/TSupplierGuiCompBase.h"
-#include "GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h"
+#include <iqtinsp/TSupplierGuiCompBase.h>
+#include <GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h>
 
 
 namespace iqtinsp

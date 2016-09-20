@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "i2d/CPosition2d.h"
-#include "icomp/CComponentBase.h"
-#include "iproc/TSyncProcessorWrap.h"
+#include <i2d/CPosition2d.h>
+#include <icomp/CComponentBase.h>
+#include <iproc/TSyncProcessorWrap.h>
 
-#include "iipr/IFeatureToFeatureProcessor.h"
-#include "iipr/IFeatureToImageMapper.h"
-#include "iipr/TWeightedFeatureWrap.h"
+#include <iipr/IFeatureToFeatureProcessor.h>
+#include <iipr/IFeatureToImageMapper.h>
+#include <iipr/TWeightedFeatureWrap.h>
 
 
 namespace iipr

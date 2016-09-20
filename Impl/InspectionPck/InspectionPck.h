@@ -3,13 +3,13 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "iinsp/CInspectionTaskComp.h"
-#include "iinsp/CInformationProviderCacheComp.h"
-#include "iinsp/CIdProviderCacheComp.h"
-#include "iinsp/CComposedInformationProviderComp.h"
+#include <iinsp/CInspectionTaskComp.h>
+#include <iinsp/CInformationProviderCacheComp.h>
+#include <iinsp/CIdProviderCacheComp.h>
+#include <iinsp/CComposedInformationProviderComp.h>
 
 
 /**

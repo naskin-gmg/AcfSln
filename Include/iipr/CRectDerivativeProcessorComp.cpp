@@ -1,4 +1,4 @@
-#include "iipr/CRectDerivativeProcessorComp.h"
+#include <iipr/CRectDerivativeProcessorComp.h>
 
 
 namespace iipr

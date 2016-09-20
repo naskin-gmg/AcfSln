@@ -1,4 +1,4 @@
-#include "iqtmm/CFrameSeqVideoControllerComp.h"
+#include <iqtmm/CFrameSeqVideoControllerComp.h>
 
 
 // Qt includes
@@ -6,7 +6,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "istd/CChangeNotifier.h"
+#include <istd/CChangeNotifier.h>
 
 
 namespace iqtmm

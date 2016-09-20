@@ -2,10 +2,10 @@
 #define icam_IExposureConstraints_included
 
 
-#include "istd/IChangeable.h"
-#include "istd/TRange.h"
+#include <istd/IChangeable.h>
+#include <istd/TRange.h>
 
-#include "icam/icam.h"
+#include <icam/icam.h>
 
 
 namespace icam

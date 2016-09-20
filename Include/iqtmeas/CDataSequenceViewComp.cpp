@@ -1,13 +1,13 @@
-#include "iqtmeas/CDataSequenceViewComp.h"
+#include <iqtmeas/CDataSequenceViewComp.h>
 
 
 // Qt includes
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "iqt/CSignalBlocker.h"
+#include <iqt/CSignalBlocker.h>
 
-#include "imeas/CSamplesInfo.h"
+#include <imeas/CSamplesInfo.h>
 
 
 namespace iqtmeas

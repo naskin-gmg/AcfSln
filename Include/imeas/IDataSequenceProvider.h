@@ -3,10 +3,10 @@
 
 
 // ACF includes
-#include "istd/IChangeable.h"
+#include <istd/IChangeable.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequence.h"
+#include <imeas/IDataSequence.h>
 
 
 namespace imeas

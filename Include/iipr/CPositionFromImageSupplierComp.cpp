@@ -1,14 +1,14 @@
-#include "iipr/CPositionFromImageSupplierComp.h"
+#include <iipr/CPositionFromImageSupplierComp.h>
 
 
 // ACF includes
-#include "imod/TModelWrap.h"
-#include "ilog/TExtMessage.h"
-#include "i2d/CCircle.h"
-#include "i2d/CAffineCalibration2d.h"
+#include <imod/TModelWrap.h>
+#include <ilog/TExtMessage.h>
+#include <i2d/CCircle.h>
+#include <i2d/CAffineCalibration2d.h>
 
 // ACF-Solutions includes
-#include "iipr/CSingleFeatureConsumer.h"
+#include <iipr/CSingleFeatureConsumer.h>
 
 
 namespace iipr

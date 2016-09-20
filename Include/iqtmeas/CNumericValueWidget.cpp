@@ -1,4 +1,4 @@
-#include "iqtmeas/CNumericValueWidget.h"
+#include <iqtmeas/CNumericValueWidget.h>
 
 
 // Qt includes

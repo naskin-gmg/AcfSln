@@ -6,11 +6,11 @@
 #include <QtGui/QStandardItemModel>
 
 // ACF includes
-#include "istd/TRange.h"
-#include "imod/TSingleModelObserverBase.h"
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "imeas/IDataSequence.h"
-#include "GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h"
+#include <istd/TRange.h>
+#include <imod/TSingleModelObserverBase.h>
+#include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <imeas/IDataSequence.h>
+#include <GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h>
 
 
 namespace iqtmeas

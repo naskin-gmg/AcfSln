@@ -6,8 +6,8 @@
 #include <QtCore/QMultiMap>
 
 // ACF includes
-#include "i2d/CVector2d.h"
-#include "iimg/CGeneralBitmap.h"
+#include <i2d/CVector2d.h>
+#include <iimg/CGeneralBitmap.h>
 
 
 namespace iipr

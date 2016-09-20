@@ -2,13 +2,13 @@
 #define QtMmPck_included
 
 
-#include "icomp/TModelCompWrap.h"
+#include <icomp/TModelCompWrap.h>
 
-#include "iqtmm/CVideoPlayerGuiComp.h"
-#include "iqtmm/CMediaLoaderComp.h"
-#include "iqtmm/CPlaybackControllerGuiComp.h"
-#include "iqtmm/CFrameSeqVideoControllerComp.h"
-#include "iqtmm/CSvgBitmapLoaderComp.h"
+#include <iqtmm/CVideoPlayerGuiComp.h>
+#include <iqtmm/CMediaLoaderComp.h>
+#include <iqtmm/CPlaybackControllerGuiComp.h>
+#include <iqtmm/CFrameSeqVideoControllerComp.h>
+#include <iqtmm/CSvgBitmapLoaderComp.h>
 
 
 /**

@@ -1,4 +1,4 @@
-#include "iqtex/CXslTransformationWriteArchive.h"
+#include <iqtex/CXslTransformationWriteArchive.h>
 
 
 // Qt includes

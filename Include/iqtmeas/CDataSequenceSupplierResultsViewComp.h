@@ -11,13 +11,13 @@
 #endif
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
-#include "iinsp/ISupplier.h"
-#include "iqtgui/TGuiObserverWrap.h"
-#include "iqtgui/TGuiComponentBase.h"
+#include <imod/TSingleModelObserverBase.h>
+#include <iinsp/ISupplier.h>
+#include <iqtgui/TGuiObserverWrap.h>
+#include <iqtgui/TGuiComponentBase.h>
 
 // ACF-Solutions includes
-#include "imeas/IDataSequenceProvider.h"
+#include <imeas/IDataSequenceProvider.h>
 
 
 namespace iqtmeas

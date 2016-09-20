@@ -6,8 +6,8 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "ifile/CFileSerializerCompBase.h"
-#include "ifile/IFileNameParam.h"
+#include <ifile/CFileSerializerCompBase.h>
+#include <ifile/IFileNameParam.h>
 
 
 namespace iqtex

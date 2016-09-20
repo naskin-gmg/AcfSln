@@ -3,12 +3,12 @@
 
 
 // ACF includes
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include <icomp/TModelCompWrap.h>
+#include <icomp/TMakeComponentWrap.h>
 
-#include "isig/CSamplingParamsComp.h"
-#include "isig/CTriggerParamsComp.h"
-#include "isig/CPulseParamsComp.h"
+#include <isig/CSamplingParamsComp.h>
+#include <isig/CTriggerParamsComp.h>
+#include <isig/CPulseParamsComp.h>
 
 
 /**

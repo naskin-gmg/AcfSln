@@ -2,10 +2,10 @@
 #define icam_CExposureParamsComp_included
 
 
-#include "icomp/CComponentBase.h"
+#include <icomp/CComponentBase.h>
 
-#include "icam/IExposureParams.h"
-#include "icam/IExposureConstraints.h"
+#include <icam/IExposureParams.h>
+#include <icam/IExposureConstraints.h>
 
 
 namespace icam
