@@ -3,6 +3,7 @@
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
+#include <iser/CArchiveTag.h>
 
 // ACF-Solutions includes
 #include <imeas/CSimpleNumericValue.h>
