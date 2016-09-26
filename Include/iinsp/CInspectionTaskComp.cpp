@@ -421,7 +421,6 @@ void CInspectionTaskComp::OnComponentDestroyed()
 }
 
 
-
 // reimplemented (imod::IObserver)
 
 void CInspectionTaskComp::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
