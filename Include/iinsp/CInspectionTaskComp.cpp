@@ -321,7 +321,7 @@ void CInspectionTaskComp::EnsureStatusKnown()
 		m_resultCategory = IC_INFO;
 		m_resultDescription = "";
 
-		int infoSubtasksCount = m_subtasksCompPtr.GetCount();
+		int infoSubtasksCount = m_subtaskInfoProviderCompPtr.GetCount();
 		int subtasksCount = m_subtasksCompPtr.GetCount();
 		for (int i = 0; i < subtasksCount; ++i){
 			const iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
