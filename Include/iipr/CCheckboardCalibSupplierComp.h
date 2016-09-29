@@ -36,7 +36,7 @@ public:
 		I_REGISTER_SUBELEMENT(CheckboardParamContraints);
 		I_REGISTER_SUBELEMENT_INTERFACE(CheckboardParamContraints, imeas::INumericConstraints, ExtractCheckboardParamContraints);
 		I_REGISTER_SUBELEMENT_INTERFACE(CheckboardParamContraints, istd::IChangeable, ExtractCheckboardParamContraints);
-		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapSupplier", "Provide input image", true, "BitmapSupplier");
+		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_lineFinderCompPtr, "LineFinder", "Finder of lines on image", true, "LineFinder");
