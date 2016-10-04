@@ -249,14 +249,17 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 		}
 	}
 
+	QList<QListWidgetItem*> selectedItems = BitmapPreview->selectedItems();
+	if (!selectedItems.isEmpty()){
+		SelectBitmap(selectedItems.indexOf(0));
+	}
+	else if (bitmapsCount > 0){
+		SelectBitmap(0);
+	}
+
 	istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
-	if (bitmapsCount > 0){
-		if (BitmapPreview->selectedItems().empty()){
-			SizeLabel->setText("");
-		}
-		else{
-			SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
-		}
+	if (!bitmapSize.IsSizeEmpty()){
+		SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
 	}
 	else{
 		SizeLabel->setText(tr("No image"));
