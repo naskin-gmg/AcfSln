@@ -328,7 +328,7 @@ bool CConvolutionKernel2d::Serialize(iser::IArchive& archive)
 	}
 
 	quint32 versionNumber = 0;
-	if (!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber) || (versionNumber >= 1621)){
+	if (!archive.GetVersionInfo().GetVersionNumber(1, versionNumber) || (versionNumber >= 1621)){
 		retVal = retVal && archive.BeginTag(offsetValueTag);
 		retVal = retVal && archive.Process(m_valueOffset);
 		retVal = retVal && archive.EndTag(offsetValueTag);
