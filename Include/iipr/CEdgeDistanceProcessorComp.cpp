@@ -227,22 +227,17 @@ bool CEdgeDistanceProcessorComp::CalculateCaliper(
 			const iimg::IBitmap& image,
 			CaliperLine& caliperLine) const
 {
-	istd::TDelPtr<imeas::INumericValueProvider> caliperFeaturesProviderPtr;
-	IFeaturesConsumer* caliperFeaturesConsumerPtr;
-	CSingleFeatureConsumer* containerPtr = new CSingleFeatureConsumer(CSingleFeatureConsumer::FP_FIRST);
+	CSingleFeatureConsumer consumer(CSingleFeatureConsumer::FP_FIRST);
 
-	caliperFeaturesProviderPtr.SetPtr(containerPtr);
-	caliperFeaturesConsumerPtr = containerPtr;
-
-	caliperFeaturesConsumerPtr->ResetFeatures();
+	consumer.ResetFeatures();
 
 	workingCaliperParams.SetDirectionMode(caliperDirectionMode);
-	int caliperResult = m_slaveProcessorCompPtr->DoProcessing(&params, &image, caliperFeaturesConsumerPtr);
+	int caliperResult = m_slaveProcessorCompPtr->DoProcessing(&params, &image, &consumer);
 	if (caliperResult != TS_OK){
 		return false;
 	}
 
-	SetCaliperResults(params, *caliperFeaturesProviderPtr, caliperDirectionMode, caliperLine);
+	SetCaliperResults(params, consumer, caliperDirectionMode, caliperLine);
 
 	return true;
 }
@@ -250,17 +245,17 @@ bool CEdgeDistanceProcessorComp::CalculateCaliper(
 
 void CEdgeDistanceProcessorComp::SetCaliperResults(
 			const iprm::IParamsSet& params,
-			const imeas::INumericValueProvider& container,
+			const IFeaturesProvider& container,
 			ICaliperParams::DirectionMode caliperDirectionMode,
 			CaliperLine& caliperLine) const
 {
 	Q_ASSERT(m_featuresMapperCompPtr.IsValid());	// validíty of features mapper should be checked on the beginning
 
-	int featuresCount = container.GetValuesCount();
+	int featuresCount = container.GetFeaturesCount();
 	Q_ASSERT ((featuresCount == 0) || (featuresCount == 1));
 
 	if (featuresCount > 0){ 
-		const CCaliperFeature* featurePtr = dynamic_cast<const CCaliperFeature*>(&container.GetNumericValue(0));
+		const CCaliperFeature* featurePtr = dynamic_cast<const CCaliperFeature*>(&container.GetFeature(0));
 		if (featurePtr != NULL){
 			Point point;
 			point.weight = featurePtr->GetWeight();

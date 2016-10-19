@@ -5,9 +5,9 @@ namespace iipr
 {
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CMultiLineSupplierCompBase::GetValuesCount() const
+int CMultiLineSupplierCompBase::GetFeaturesCount() const
 {
 	const ProductType* resultPtr = GetWorkProduct();
 	if (resultPtr != NULL){
@@ -18,10 +18,8 @@ int CMultiLineSupplierCompBase::GetValuesCount() const
 }
 
 
-const imeas::INumericValue& CMultiLineSupplierCompBase::GetNumericValue(int index) const
+const imeas::INumericValue& CMultiLineSupplierCompBase::GetFeature(int index) const
 {
-	static Line emptyLine;
-
 	const ProductType* resultPtr = GetWorkProduct();
 	if (resultPtr != NULL){
 		const i2d::CLine2d& line = resultPtr->at(index);
@@ -31,6 +29,8 @@ const imeas::INumericValue& CMultiLineSupplierCompBase::GetNumericValue(int inde
 
 		return m_linesCache[index];
 	}
+
+	static Line emptyLine;
 
 	return emptyLine;
 }

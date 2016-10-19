@@ -2,29 +2,29 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4316" Description="ACF"/>
+            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
+        <Element ComponentName="ColorPatternComparator" X="600" Y="625" Note=""/>
         <Element ComponentName="ComparatorParams" X="900" Y="500" Note=""/>
         <Element ComponentName="HistogramStatisticsProcessor" X="600" Y="750" Note=""/>
-        <Element ComponentName="ColorPatternComparator" X="600" Y="625" Note=""/>
         <Element ComponentName="ImageHistogramProcessor" X="1050" Y="375" Note=""/>
-        <Element ComponentName="InspectionTask" X="275" Y="500" Note=""/>
         <Element ComponentName="ImageHistogramSupplier" X="600" Y="375" Note=""/>
+        <Element ComponentName="InspectionTask" X="275" Y="500" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="ComparatorParams">
             <PositionMap>
-                <Element ComponentName="NumericConstraints" X="1025" Y="475" Note=""/>
-                <Element ComponentName="PatternController" X="200" Y="375" Note=""/>
-                <Element ComponentName="Region" X="425" Y="500" Note=""/>
-                <Element ComponentName="ComparisonThreshold" X="1025" Y="375" Note=""/>
-                <Element ComponentName="PatternComparatorParams" X="700" Y="375" Note=""/>
                 <Element ComponentName="Calibration2dProxy" X="425" Y="600" Note=""/>
                 <Element ComponentName="CheckEnabled" X="725" Y="500" Note=""/>
+                <Element ComponentName="ComparisonThreshold" X="1025" Y="375" Note=""/>
+                <Element ComponentName="NumericConstraints" X="1025" Y="475" Note=""/>
+                <Element ComponentName="PatternComparatorParams" X="700" Y="375" Note=""/>
+                <Element ComponentName="PatternController" X="200" Y="375" Note=""/>
+                <Element ComponentName="Region" X="425" Y="500" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

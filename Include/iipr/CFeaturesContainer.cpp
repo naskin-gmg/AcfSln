@@ -18,7 +18,7 @@ void CFeaturesContainer::RemoveFeature(int featureIndex)
 imeas::INumericValue& CFeaturesContainer::GetFeatureRef(int index)
 {
 	Q_ASSERT(index >= 0);
-	Q_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index < m_featuresList.GetCount());
 
 	imeas::INumericValue* featurePtr = m_featuresList.GetAt(index);
 	Q_ASSERT(featurePtr != NULL);
@@ -52,18 +52,18 @@ bool CFeaturesContainer::AddFeature(const imeas::INumericValue* featurePtr, bool
 
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CFeaturesContainer::GetValuesCount() const
+int CFeaturesContainer::GetFeaturesCount() const
 {
 	return m_featuresList.GetCount();
 }
 
 
-const imeas::INumericValue& CFeaturesContainer::GetNumericValue(int index) const
+const imeas::INumericValue& CFeaturesContainer::GetFeature(int index) const
 {
 	Q_ASSERT(index >= 0);
-	Q_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index < m_featuresList.GetCount());
 
 	const imeas::INumericValue* featurePtr = m_featuresList.GetAt(index);
 	Q_ASSERT(featurePtr != NULL);

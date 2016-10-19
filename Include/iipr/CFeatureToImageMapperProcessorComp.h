@@ -37,7 +37,7 @@ public:
 	// reimplemented (iipr::IFeatureToFeatureProcessor)
 	virtual int DoConvertFeatures(
 				const iprm::IParamsSet* paramsPtr,
-				const imeas::INumericValueProvider& container,
+				const IFeaturesProvider& container,
 				IFeaturesConsumer& results);
 
 	// reimplemented (iproc::IProcessor)

@@ -11,7 +11,7 @@
 #include <iproc/IProcessor.h>
 #include <iinsp/ISupplier.h>
 #include <iinsp/TSupplierCompWrap.h>
-#include <imeas/INumericValueProvider.h>
+#include <iipr/CFeaturesContainer.h>
 #include <imeas/CSimpleNumericValue.h>
 #include <iimg/IBitmapProvider.h>
 
@@ -27,15 +27,15 @@ namespace iipr
 	This supplier takes the feature with the higher weight value and output it as found position value.
 */
 class CPositionFromImageSupplierComp:
-			public iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> >,
-			virtual public imeas::INumericValueProvider,
+			public iinsp::TSupplierCompWrap<CFeaturesContainer>,
+			virtual public IFeaturesProvider,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap< istd::TDelPtr<imeas::INumericValue> > BaseClass;
+	typedef iinsp::TSupplierCompWrap<CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CPositionFromImageSupplierComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(IFeaturesProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
@@ -44,9 +44,9 @@ public:
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ICalibration2d* GetCalibration() const;
@@ -67,17 +67,6 @@ private:
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
-
-	class Position: public imeas::CSimpleNumericValue
-	{
-	public:
-		Position(){}
-		Position(const imath::CVarVector& positionVector);
-
-		// reimplemented (imeas::INumericValue)
-		virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
-		virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
-	};
 };
 
 

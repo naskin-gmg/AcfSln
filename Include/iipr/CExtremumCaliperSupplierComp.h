@@ -3,9 +3,10 @@
 
 
 // Acf includes
+#include <imeas/IDataSequenceProvider.h>
 #include <iinsp/TSupplierCompWrap.h>
 #include <iipr/CFeaturesContainer.h>
-#include <imeas/IDataSequenceProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <iproc/IProcessor.h>
 
 
@@ -15,22 +16,22 @@ namespace iipr
 
 class CExtremumCaliperSupplierComp: 
 			public iinsp::TSupplierCompWrap<iipr::CFeaturesContainer>,
-			virtual public imeas::INumericValueProvider
+			virtual public IFeaturesProvider
 {
 public:
 	typedef iinsp::TSupplierCompWrap<iipr::CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CExtremumCaliperSupplierComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(IFeaturesProvider);
 		I_ASSIGN(m_sequenceProviderCompPtr, "SequenceProvider", "Provides sequence to analyse", true, "SequenceProvider");
 		I_ASSIGN_TO(m_sequenceSupplierCompPtr, m_sequenceProviderCompPtr, false);
 		I_ASSIGN_TO(m_sequenceProviderModelCompPtr, m_sequenceProviderCompPtr, false);
 		I_ASSIGN(m_extremumProcessorCompPtr, "ExtremumProcessor", "Processor for extremum calculation", true, "ExtremumProcessor");
 	I_END_COMPONENT;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)

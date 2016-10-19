@@ -14,6 +14,9 @@
 
 // ACF includes
 #include <imath/CVarVector.h>
+#include <i2d/CCircle.h>
+
+// ACF-Solutions includes
 #include <iinsp/ISupplier.h>
 
 
@@ -106,27 +109,21 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 		}
 	}
 
-	for (int i = 0; i < m_circleProviderCompPtr->GetValuesCount(); i++){
-		const imeas::INumericValue& value = m_circleProviderCompPtr->GetNumericValue(i);
-		if (!value.IsValueTypeSupported(imeas::INumericValue::VTI_RADIUS)){
+	for (int i = 0; i < m_circleProviderCompPtr->GetFeaturesCount(); i++){
+		i2d::CCircle circle;
+		if (!circle.CopyFrom(m_circleProviderCompPtr->GetFeature(i), istd::IChangeable::CM_CONVERT)){
 			continue;
 		}
 
-		imath::CVarVector vec = value.GetValues();
-		if (vec.GetElementsCount() > 0){
-			double scaleX = vec[2] / nominalRadius;
-			double scaleY = scaleX;
-			if (vec.GetElementsCount() > 3){
-				scaleX = vec[3] / nominalRadius;
-			}
+		double scaleX = circle.GetRadius() / nominalRadius;
+		double scaleY = scaleX;
 
-			ScaleXSpinBox->setValue(scaleX);
-			ScaleYSpinBox->setValue(scaleY);
+		ScaleXSpinBox->setValue(scaleX);
+		ScaleYSpinBox->setValue(scaleY);
 
-			DoUpdateModel();
+		DoUpdateModel();
 
-			break;
-		}
+		break;
 	}
 }
 

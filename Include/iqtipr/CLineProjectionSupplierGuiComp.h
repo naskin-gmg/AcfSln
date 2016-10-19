@@ -11,7 +11,6 @@
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 
 // ACF-Solutions includes
-#include <imeas/INumericValueProvider.h>
 #include <imeas/IDataSequenceProvider.h>
 #include <imeas/CGeneralDataSequence.h>
 

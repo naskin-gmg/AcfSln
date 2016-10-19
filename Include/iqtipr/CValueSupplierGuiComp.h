@@ -8,7 +8,7 @@
 #include <imod/TModelWrap.h>
 #include <imod/CSingleModelObserverBase.h>
 #include <i2d/CCircle.h>
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 

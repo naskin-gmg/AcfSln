@@ -10,7 +10,6 @@
 #include <iproc/IProcessor.h>
 #include <iinsp/ISupplier.h>
 #include <iinsp/TSupplierCompWrap.h>
-#include <imeas/INumericValueProvider.h>
 #include <imeas/CSimpleNumericValue.h>
 #include <iimg/IBitmapProvider.h>
 #include <iipr/IImageToFeatureProcessor.h>
@@ -24,22 +23,22 @@ namespace iipr
 
 class CEdgeDistancesSupplierComp:
 			public iinsp::TSupplierCompWrap<CFeaturesContainer>,
-			virtual public imeas::INumericValueProvider
+			virtual public IFeaturesProvider
 {
 public:
 	typedef iinsp::TSupplierCompWrap<CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeDistancesSupplierComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(IFeaturesProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_processorCompPtr, "Processor", "Processor calculating set of positions from image", true, "Processor");
 	I_END_COMPONENT;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 protected:
 	// reimplemented (iinsp::TSupplierCompWrap)

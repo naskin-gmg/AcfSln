@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4316" Description="ACF"/>
+            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Circle finder task using annulus segment to speciffy AOI</Description>
@@ -150,7 +150,7 @@
     <ExportedInterfaces>
         <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="PositionTask"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="PositionTask"/>
-        <Interface InterfaceId="imeas::INumericValueProvider" ComponentId="PositionTask"/>
+        <Interface InterfaceId="iipr::IFeaturesProvider" ComponentId="PositionTask"/>
         <Interface InterfaceId="imod::IModel" ComponentId="PositionTask"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="PositionTask"/>
     </ExportedInterfaces>

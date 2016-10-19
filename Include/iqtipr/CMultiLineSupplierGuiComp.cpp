@@ -7,6 +7,9 @@
 #include <iview/CPolylineShape.h>
 #include <iprm/TParamsPtr.h>
 
+// ACF includes
+#include <iipr/IFeaturesProvider.h>
+
 
 namespace iqtipr
 {
@@ -162,16 +165,16 @@ void CMultiLineSupplierGuiComp::CShape::Draw(QPainter& drawContext) const
 	static QPen normalPen(QColor(10, 255, 116), 1, Qt::SolidLine, Qt::RoundCap);
 	static QPen selectionPen(Qt::magenta, 3, Qt::SolidLine, Qt::RoundCap);
 
-	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObservedModel());
+	iipr::IFeaturesProvider* objectPtr = dynamic_cast<iipr::IFeaturesProvider*>(GetObservedModel());
 	Q_ASSERT(objectPtr != NULL);
 
 	drawContext.setPen(normalPen);
 
-	int linesCount = objectPtr->GetValuesCount();
+	int linesCount = objectPtr->GetFeaturesCount();
 	int selectedLineIndex = m_lineSelection.GetSelectedOptionIndex();
 
 	for (int i = 0; i < linesCount; i++){
-		const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
+		const imath::CVarVector& lineValues = objectPtr->GetFeature(i).GetValues();
 		Q_ASSERT(lineValues.GetElementsCount() == 4);
 
 		i2d::CVector2d startPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));
@@ -206,16 +209,16 @@ i2d::CRect CMultiLineSupplierGuiComp::CShape::CalcBoundingBox() const
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	imeas::INumericValueProvider* objectPtr = dynamic_cast<imeas::INumericValueProvider*>(GetObservedModel());
+	iipr::IFeaturesProvider* objectPtr = dynamic_cast<iipr::IFeaturesProvider*>(GetObservedModel());
 	if (objectPtr != NULL){
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
-		int linesCount = objectPtr->GetValuesCount();
+		int linesCount = objectPtr->GetFeaturesCount();
 
 		i2d::CRect boundingBox = i2d::CRect::GetEmpty();
 
 		for (int i = 0; i < linesCount; i++){
-			const imath::CVarVector& lineValues = objectPtr->GetNumericValue(i).GetValues();
+			const imath::CVarVector& lineValues = objectPtr->GetFeature(i).GetValues();
 			Q_ASSERT(lineValues.GetElementsCount() == 4);
 
 			i2d::CVector2d startPoint = GetScreenPosition(i2d::CVector2d(lineValues.GetElement(0), lineValues.GetElement(1)));

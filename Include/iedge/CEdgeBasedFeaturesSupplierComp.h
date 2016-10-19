@@ -17,7 +17,6 @@
 #include <iproc/IProcessor.h>
 #include <iinsp/ISupplier.h>
 #include <iinsp/TSupplierCompWrap.h>
-#include <imeas/INumericValueProvider.h>
 #include <iipr/CFeaturesContainer.h>
 #include <iedge/IEdgeLinesProvider.h>
 
@@ -28,7 +27,7 @@ namespace iedge
 
 class CEdgeBasedFeaturesSupplierComp:
 	public iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineCalibration2d> > >,
-			virtual public imeas::INumericValueProvider,
+			virtual public iipr::IFeaturesProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public i2d::ICalibrationProvider,
 			virtual public istd::IInformationProvider
@@ -37,7 +36,7 @@ public:
 	typedef iinsp::TSupplierCompWrap< QPair< iipr::CFeaturesContainer, std::vector<i2d::CAffineCalibration2d> > > BaseClass;
 
 	I_BEGIN_COMPONENT(CEdgeBasedFeaturesSupplierComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(iipr::IFeaturesProvider);
 		I_REGISTER_INTERFACE(i2d::IMultiCalibrationProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
@@ -63,9 +62,9 @@ public:
 	// reimplemented (i2d::ICalibrationProvider)
 	virtual const i2d::ICalibration2d* GetCalibration() const;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 	// reimplemented (istd::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;

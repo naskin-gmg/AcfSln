@@ -82,15 +82,15 @@ bool CSingleFeatureConsumer::AddFeature(const imeas::INumericValue* featurePtr, 
 }
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CSingleFeatureConsumer::GetValuesCount() const
+int CSingleFeatureConsumer::GetFeaturesCount() const
 {
-	return m_featurePtr.IsValid() ? 1 : 0;
+	return m_featurePtr.IsValid()? 1: 0;
 }
 
 
-const imeas::INumericValue& CSingleFeatureConsumer::GetNumericValue(int I_IF_DEBUG(index)) const
+const imeas::INumericValue& CSingleFeatureConsumer::GetFeature(int I_IF_DEBUG(index)) const
 {
 	Q_ASSERT(m_featurePtr.IsValid());
 	I_IF_DEBUG(Q_ASSERT(index == 0));

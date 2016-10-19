@@ -11,17 +11,17 @@ namespace iipr
 
 int CFeatureToImageMapperProcessorComp::DoConvertFeatures(
 			const iprm::IParamsSet* paramsPtr,
-			const imeas::INumericValueProvider& container,
+			const IFeaturesProvider& container,
 			IFeaturesConsumer& results)
 {
 	if (!m_featuresMapperCompPtr.IsValid()){
 		return TS_INVALID;
 	}
 
-	int featuresCount = container.GetValuesCount();
+	int featuresCount = container.GetFeaturesCount();
 
 	for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-		const imeas::INumericValue& feature = container.GetNumericValue(featureIndex);
+		const imeas::INumericValue& feature = container.GetFeature(featureIndex);
 
 		i2d::CVector2d position;
 		if (m_featuresMapperCompPtr->GetImagePosition(feature, paramsPtr, position)){
@@ -62,7 +62,7 @@ int CFeatureToImageMapperProcessorComp::DoProcessing(
 		return TS_OK;
 	}
 
-	const imeas::INumericValueProvider* containerPtr = dynamic_cast<const imeas::INumericValueProvider*>(inputPtr);
+	const IFeaturesProvider* containerPtr = dynamic_cast<const IFeaturesProvider*>(inputPtr);
 	IFeaturesConsumer* consumerPtr = dynamic_cast<IFeaturesConsumer*>(outputPtr);
 
 	if (		(containerPtr == NULL) ||

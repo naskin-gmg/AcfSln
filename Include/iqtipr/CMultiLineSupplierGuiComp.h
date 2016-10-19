@@ -4,12 +4,12 @@
 
 // ACF includes
 #include <i2d/CPolyline.h>
-#include <imeas/CSimpleNumericValueProvider.h>
 #include <iprm/ISelectionParam.h>
 #include <imod/CMultiModelDispatcherBase.h>
 
 // ACF-Solutions includes
 #include <iqtinsp/TSupplierGuiCompBase.h>
+
 #include <GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h>
 
 

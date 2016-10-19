@@ -9,6 +9,10 @@
 #include <iview/CPinShape.h>
 #include <iview/CLineShape.h>
 
+// ACF-Solutions
+#include <iipr/IFeaturesProvider.h>
+#include <iipr/IFeaturesProvider.h>
+
 
 namespace iqtipr
 {
@@ -121,9 +125,9 @@ void CValueSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
-		imeas::INumericValueProvider* providerPtr = CompCastPtr<imeas::INumericValueProvider>(supplierPtr);
-		if (providerPtr != NULL && providerPtr->GetValuesCount() > 0){
-			const imeas::INumericValue& resultValue = providerPtr->GetNumericValue(0);
+		iipr::IFeaturesProvider* featuresProviderPtr = CompCastPtr<iipr::IFeaturesProvider>(supplierPtr);
+		if ((featuresProviderPtr != NULL) && (featuresProviderPtr->GetFeaturesCount() > 0)){
+			const imeas::INumericValue& resultValue = featuresProviderPtr->GetFeature(0);
 
 			position = resultValue.GetComponentValue(imeas::INumericValue::VTI_POSITION);
 			radius = resultValue.GetComponentValue(imeas::INumericValue::VTI_RADIUS);

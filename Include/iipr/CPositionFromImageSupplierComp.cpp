@@ -15,32 +15,29 @@ namespace iipr
 {
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CPositionFromImageSupplierComp::GetValuesCount() const
+int CPositionFromImageSupplierComp::GetFeaturesCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return 1;
+		return productPtr->GetFeaturesCount();
 	}
 
 	return 0;
 }
 
 
-const imeas::INumericValue& CPositionFromImageSupplierComp::GetNumericValue(int I_IF_DEBUG(index)) const
+const imeas::INumericValue& CPositionFromImageSupplierComp::GetFeature(int index) const
 {
-	I_IF_DEBUG(Q_ASSERT(index == 0));
-
 	const ProductType* productPtr = GetWorkProduct();
-	if ((productPtr != NULL) && productPtr->IsValid()){
-		return **productPtr;
+	if (productPtr != NULL){
+		return productPtr->GetFeature(index);
 	}
-	else{
-		static Position nonePosition;
 
-		return nonePosition;
-	}
+	static imeas::CSimpleNumericValue empty;
+
+	return empty;
 }
 
 
@@ -58,7 +55,7 @@ const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() cons
 
 int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 {
-	result.Reset();
+	result.ResetFeatures();
 
 	m_outputCalibrationPtr.Reset();
 
@@ -75,11 +72,10 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 
 		Timer performanceTimer(this, "Calculation of position");
 
-		CSingleFeatureConsumer consumer(CSingleFeatureConsumer::FP_HEAVIEST);
 		int positionState = m_processorCompPtr->DoProcessing(
 						paramsSetPtr,
 						bitmapPtr,
-						&consumer);
+						&result);
 
 		if (positionState != iproc::IProcessor::TS_OK){
 			return WS_ERROR;
@@ -90,16 +86,16 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			inputCalibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 		}
 
-		if (consumer.GetValuesCount() < 1){
+		if (result.GetFeaturesCount() < 1){
 			return WS_ERROR;
 		}
 
-		const i2d::CObject2dBase* positionPtr = dynamic_cast<const i2d::CObject2dBase*>(&consumer.GetNumericValue(0));
+		const i2d::CObject2dBase* positionPtr = dynamic_cast<const i2d::CObject2dBase*>(&result.GetFeature(0));
 		if (positionPtr == NULL){
 			return WS_ERROR;
 		}
 
-		imath::CVarVector resultVector;
+		i2d::CVector2d resultVector;
 
 		const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
 		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(positionPtr);
@@ -109,10 +105,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				return WS_ERROR;
 			}
 
-			resultVector.SetElementsCount(3);
-			resultVector[0] = transformedCircle.GetPosition().GetX();
-			resultVector[1] = transformedCircle.GetPosition().GetY();
-			resultVector[2] = transformedCircle.GetRadius();
+			resultVector = transformedCircle.GetPosition();
 
 			ilog::TExtMessageModel<i2d::CCircle>* messagePtr = new ilog::TExtMessageModel<i2d::CCircle>(
 						istd::IInformationProvider::IC_INFO,
@@ -128,11 +121,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				return WS_ERROR;
 			}
 
-			resultVector.SetElementsCount(4);
-			resultVector[0] = transformedLine.GetPoint1Ref().GetX();
-			resultVector[1] = transformedLine.GetPoint1Ref().GetY();
-			resultVector[2] = transformedLine.GetPoint2Ref().GetX();
-			resultVector[3] = transformedLine.GetPoint2Ref().GetY();
+			resultVector = transformedLine.GetPoint1();
 
 			ilog::TExtMessageModel<i2d::CLine2d>* messagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
 						istd::IInformationProvider::IC_INFO,
@@ -158,7 +147,6 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			messagePtr->i2d::CPosition2d::CopyFrom(*positionPtr, istd::IChangeable::CM_CONVERT);
 			AddMessage(messagePtr);
 		}
-		Q_ASSERT(resultVector.GetElementsCount() >= 2);
 
 		i2d::CVector2d originalZeroPos(0, 0);
 		if (inputCalibrationPtr != NULL){
@@ -166,14 +154,12 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 		}
 
 		i2d::CAffineCalibration2d* outputTransformPtr = new imod::TModelWrap<i2d::CAffineCalibration2d>();
-		outputTransformPtr->Reset(i2d::CVector2d(resultVector[0] - originalZeroPos[0], resultVector[1] - originalZeroPos[1]));
+		outputTransformPtr->Reset(resultVector - originalZeroPos);
 		m_outputCalibrationPtr.SetPtr(outputTransformPtr);
 
 		if (inputCalibrationPtr != NULL){
 			m_outputCalibrationPtr.SetPtr(m_outputCalibrationPtr->CreateCombinedCalibration(*inputCalibrationPtr));
 		}
-
-		result.SetPtr(new Position(resultVector));
 
 		return WS_OK;
 	}
@@ -195,70 +181,6 @@ void CPositionFromImageSupplierComp::OnComponentCreated()
 	// Initialize components
 	m_calibrationProviderCompPtr.IsValid();
 	m_processorCompPtr.IsValid();
-}
-
-
-// public methods of the embedded class Position
-
-CPositionFromImageSupplierComp::Position::Position(const imath::CVarVector& positionVector)
-{
-	SetValues(positionVector);
-}
-
-
-// reimplemented (imeas::INumericValue)
-
-bool CPositionFromImageSupplierComp::Position::IsValueTypeSupported(ValueTypeId valueTypeId) const
-{
-	switch (valueTypeId){
-		case VTI_AUTO:
-			return true;
-
-		case VTI_POSITION:
-			return (m_values.GetElementsCount() >= 2);
-
-		case VTI_RADIUS:
-			return (m_values.GetElementsCount() >= 3);
-
-		case VTI_2D_LINE:
-			return (m_values.GetElementsCount() >= 4);
-		default:
-			break;
-	}
-
-	return false;
-}
-
-
-imath::CVarVector CPositionFromImageSupplierComp::Position::GetComponentValue(ValueTypeId valueTypeId) const
-{
-	switch (valueTypeId){
-		case VTI_AUTO:
-			return m_values;
-
-		case VTI_POSITION:
-			if (m_values.GetElementsCount() >= 2){
-				return i2d::CVector2d(m_values.GetElement(0), m_values.GetElement(1));
-			}
-			break;
-
-		case VTI_RADIUS:
-			if (m_values.GetElementsCount() >= 3){
-				return imath::CVarVector(1, m_values.GetElement(2));
-			}
-			break;
-
-		case VTI_2D_LINE:
-			if (m_values.GetElementsCount() >= 4){
-				return m_values;
-			}
-			break;
-
-		default:
-			break;	
-	}
-
-	return imath::CVarVector();
 }
 
 

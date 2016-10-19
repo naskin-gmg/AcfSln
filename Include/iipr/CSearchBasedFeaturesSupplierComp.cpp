@@ -45,25 +45,25 @@ const i2d::ICalibration2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int 
 }
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CSearchBasedFeaturesSupplierComp::GetValuesCount() const
+int CSearchBasedFeaturesSupplierComp::GetFeaturesCount() const
 {
 	const CFeaturesContainer* containerPtr = GetWorkProduct();
 	if (containerPtr != NULL){
-		return containerPtr->GetValuesCount();
+		return containerPtr->GetFeaturesCount();
 	}
 
 	return 0;
 }
 	
 
-const imeas::INumericValue& CSearchBasedFeaturesSupplierComp::GetNumericValue(int index) const
+const imeas::INumericValue& CSearchBasedFeaturesSupplierComp::GetFeature(int index) const
 {
 	const CFeaturesContainer* containerPtr = GetWorkProduct();
 	Q_ASSERT (containerPtr != NULL);
 
-	return containerPtr->GetNumericValue(index);
+	return containerPtr->GetFeature(index);
 }
 
 
@@ -205,7 +205,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					return WS_ERROR;
 				}
 
-				int featuresCount = searchResults.GetValuesCount();
+				int featuresCount = searchResults.GetFeaturesCount();
 
 				// logical backup status set to error if no models found
 				const iipr::ISearchParams* searchParamsPtr = dynamic_cast<const iipr::ISearchParams*>(paramsPtr->GetParameter(*m_searchParamsIdAttrPtr));
@@ -232,7 +232,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				}
 
 				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-					const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetNumericValue(featureIndex));
+					const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetFeature(featureIndex));
 					if (objectFeaturePtr == NULL){
 						return WS_CRITICAL;
 
@@ -285,7 +285,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			}
 
 			// check if certain amount of models was found
-			int modelsCount = result.GetValuesCount();
+			int modelsCount = result.GetFeaturesCount();
 			int nominalModelsCount = -1;
 
 			const iipr::ISearchParams* searchParamsPtr = dynamic_cast<const iipr::ISearchParams*>(paramsSetPtr->GetParameter(*m_searchParamsIdAttrPtr));
@@ -301,15 +301,15 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			}
 
 			for (int featureIndex = 0; featureIndex < modelsCount; featureIndex++){
-				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetNumericValue(featureIndex));
+				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetFeature(featureIndex));
 				if ((searchFeaturePtr != NULL) && (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled())){
 					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 				}
 			}				
 
-			QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO) ? 
-				"Search model was found" : 
-				"Search model was not found"; 
+			QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO)? 
+						QObject::tr("Search model was found"): 
+						QObject::tr("Search model was not found"); 
 
 			QString sourceName = GetDiagnosticName();
 			if (sourceName.isEmpty()){
@@ -317,20 +317,20 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			}
 
 			ilog::CMessage* message = new ilog::CMessage(
-				m_defaultInformationCategory,
-				MI_SUPPLIER_RESULTS_STATUS,
-				searchResultText,
-				sourceName);
+						m_defaultInformationCategory,
+						MI_SUPPLIER_RESULTS_STATUS,
+						searchResultText,
+						sourceName);
 
 			AddMessage(message);
 		}
 
 		// Update calibration list
-		int featuresCount = result.GetValuesCount();
+		int featuresCount = result.GetFeaturesCount();
 		for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 			i2d::CAffineCalibration2d calibration;
 
-			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetNumericValue(featureIndex));
+			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetFeature(featureIndex));
 			Q_ASSERT(objectFeaturePtr != NULL);
 
 			calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());

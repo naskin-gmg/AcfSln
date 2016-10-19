@@ -13,8 +13,8 @@
 #include <iproc/IProcessor.h>
 #include <iinsp/ISupplier.h>
 #include <iinsp/TSupplierCompWrap.h>
-#include <imeas/INumericValueProvider.h>
 #include <iimg/IBitmapProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <iipr/CFeaturesContainer.h>
 
 
@@ -24,7 +24,7 @@ namespace iipr
 
 class CSearchBasedFeaturesSupplierComp:
 			public iinsp::TSupplierCompWrap<CFeaturesContainer>,
-			virtual public imeas::INumericValueProvider,
+			virtual public IFeaturesProvider,
 			virtual public i2d::IMultiCalibrationProvider,
 			virtual public istd::IInformationProvider
 {
@@ -32,7 +32,7 @@ public:
 	typedef iinsp::TSupplierCompWrap<CFeaturesContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(iipr::IFeaturesProvider);
 		I_REGISTER_INTERFACE(i2d::IMultiCalibrationProvider);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide image to analyse", true, "BitmapProvider");
@@ -51,9 +51,9 @@ public:
 	virtual int GetCalibrationsCount() const;
 	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 	// reimplemented (istd::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;

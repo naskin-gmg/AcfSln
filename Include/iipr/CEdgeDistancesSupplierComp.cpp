@@ -6,27 +6,27 @@ namespace iipr
 {
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CEdgeDistancesSupplierComp::GetValuesCount() const
+int CEdgeDistancesSupplierComp::GetFeaturesCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->GetValuesCount();
+		return productPtr->GetFeaturesCount();
 	}
 
 	return 0;
 }
 
 
-const imeas::INumericValue& CEdgeDistancesSupplierComp::GetNumericValue(int index) const
+const imeas::INumericValue& CEdgeDistancesSupplierComp::GetFeature(int index) const
 {
 	Q_ASSERT(index == 0);
 
 	const ProductType* productPtr = GetWorkProduct();
 	Q_ASSERT(productPtr != NULL);
 
-	return productPtr->GetNumericValue(index);
+	return productPtr->GetFeature(index);
 }
 
 
@@ -60,7 +60,7 @@ int CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
 			return WS_ERROR;
 		}
 
-		if (result.GetValuesCount() < 1){
+		if (result.GetFeaturesCount() < 1){
 			return WS_ERROR;
 		}
 

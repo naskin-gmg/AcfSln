@@ -7,7 +7,6 @@
 #include <iinsp/TSupplierCompWrap.h>
 #include <iimg/IBitmapProvider.h>
 #include <imeas/IMultiDataSequenceProvider.h>
-#include <imeas/INumericValueProvider.h>
 #include <imeas/CGeneralDataSequence.h>
 #include <iproc/IProcessor.h>
 

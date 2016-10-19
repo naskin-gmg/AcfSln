@@ -10,7 +10,7 @@
 #include <iproc/TSyncProcessorWrap.h>
 
 #include <iipr/IImageToFeatureProcessor.h>
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <iipr/IFeatureToImageMapper.h>
 #include <iipr/ICaliperParams.h>
 #include <iipr/TWeightedFeatureWrap.h>
@@ -91,7 +91,7 @@ protected:
 
 	void SetCaliperResults(
 				const iprm::IParamsSet& params,
-				const imeas::INumericValueProvider& container,
+				const IFeaturesProvider& container,
 				ICaliperParams::DirectionMode caliperDirectionMode,
 				CaliperLine& ray) const;
 

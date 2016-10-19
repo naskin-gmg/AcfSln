@@ -15,10 +15,9 @@
 // ACF includes
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 #include <iqtgui/IDialog.h>
-#include <istd/TPointerVector.h>
 
 // ACF-Solutions includes
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 
 #include <GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h>
 
@@ -27,14 +26,11 @@ namespace iqtcam
 {
 
 
-class CScaleCalibrationEditorComp:
-			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CScaleCalibrationEditorComp, imeas::INumericValue>
+class CScaleCalibrationEditorComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CScaleCalibrationEditorComp, imeas::INumericValue>
 {
 	Q_OBJECT
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CScaleCalibrationEditorComp, imeas::INumericValue> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CScaleCalibrationEditorComp, imeas::INumericValue> BaseClass;
 
 	I_BEGIN_COMPONENT(CScaleCalibrationEditorComp);
 		I_ASSIGN(m_circleProviderCompPtr, "CircleProvider", "External circle provider providing radius used for scale calibration\nThe provider must provide a numeric value of type VTI_RADIUS", false, "CircleProvider");
@@ -58,7 +54,7 @@ private Q_SLOTS:
 	void on_NominalRadiusSpinBox_valueChanged(double d);
 
 private:
-	I_REF(imeas::INumericValueProvider, m_circleProviderCompPtr);
+	I_REF(iipr::IFeaturesProvider, m_circleProviderCompPtr);
 	I_REF(iqtgui::IDialog, m_calibrationDialogCompPtr);
 };
 

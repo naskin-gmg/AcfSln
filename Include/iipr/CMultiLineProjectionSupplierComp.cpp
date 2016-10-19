@@ -29,7 +29,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 		m_linesSupplierCompPtr->EnsureWorkInitialized();
 		m_linesSupplierCompPtr->EnsureWorkFinished();
 
-		int projectionCount = m_linesProviderCompPtr->GetValuesCount();
+		int projectionCount = m_linesProviderCompPtr->GetFeaturesCount();
 		if (projectionCount <= 0){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No projection lines found"), "MultiLineProjection"));
 
@@ -43,7 +43,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 		for (int i = 0; i < projectionCount; i++){
 			imeas::CGeneralDataSequence& lineResult = result[i];
 
-			imath::CVarVector varVector = m_linesProviderCompPtr->GetNumericValue(i).GetComponentValue(imeas::INumericValue::VTI_2D_LINE);
+			imath::CVarVector varVector = m_linesProviderCompPtr->GetFeature(i).GetComponentValue(imeas::INumericValue::VTI_2D_LINE);
 			if (varVector.GetElementsCount() < 4){
 				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No line at projection %1 found").arg(i + 1), "MultiLineProjection"));
 

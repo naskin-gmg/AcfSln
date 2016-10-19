@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4316" Description="ACF"/>
+            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Color matching component based on histogram evaluation in HSV color space</Description>
@@ -26,12 +26,6 @@
                         <Data IsEnabled="true" Value="Color Pattern Comparator"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ErrorClassId" Type="String" ExportId="ErrorClassId">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ErrorGroupId" Type="String" ExportId="ErrorGroupId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
@@ -329,7 +323,7 @@
     <ExportedInterfaces>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="InspectionTask"/>
         <Interface InterfaceId="imeas::IDataSequenceProvider" ComponentId="ColorPatternComparator"/>
-        <Interface InterfaceId="imeas::INumericValueProvider" ComponentId="ColorPatternComparator"/>
+        <Interface InterfaceId="iipr::IFeaturesProvider" ComponentId="ColorPatternComparator"/>
         <Interface InterfaceId="imod::IModel" ComponentId="ColorPatternComparator"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="ColorPatternComparator"/>
         <Interface InterfaceId="istd::IInformationProvider" ComponentId="ColorPatternComparator"/>

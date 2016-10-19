@@ -11,28 +11,28 @@ namespace iipr
 
 // public methods
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CExtremumCaliperSupplierComp::GetValuesCount() const
+int CExtremumCaliperSupplierComp::GetFeaturesCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL)
 	{
-		return productPtr->GetValuesCount();
+		return productPtr->GetFeaturesCount();
 	}
 
 	return 0;
 }
 
 
-const imeas::INumericValue& CExtremumCaliperSupplierComp::GetNumericValue(int index) const
+const imeas::INumericValue& CExtremumCaliperSupplierComp::GetFeature(int index) const
 {
 	static imeas::CSimpleNumericValue emptyValue;
 
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL)
 	{
-		return productPtr->GetNumericValue(index);
+		return productPtr->GetFeature(index);
 	}
 
 	return emptyValue;

@@ -8,7 +8,7 @@
 #include <iinsp/TSupplierCompWrap.h>
 
 // ACF-Solutions includes
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 
 
 namespace iipr
@@ -17,18 +17,18 @@ namespace iipr
 
 class CMultiLineSupplierCompBase:
 			public iinsp::TSupplierCompWrap< QVector<i2d::CLine2d> >,
-			virtual public imeas::INumericValueProvider
+			virtual public iipr::IFeaturesProvider
 {
 public:
 	typedef iinsp::TSupplierCompWrap< QVector<i2d::CLine2d> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CMultiLineSupplierCompBase);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(iipr::IFeaturesProvider);
 	I_END_COMPONENT;
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 private:
 	class Line: virtual public imeas::INumericValue

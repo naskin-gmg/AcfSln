@@ -8,7 +8,7 @@
 #include <iimg/IBitmapProvider.h>
 #include <iipr/ILineProjectionProcessor.h>
 #include <imeas/IMultiDataSequenceProvider.h>
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <imeas/CGeneralDataSequence.h>
 
 
@@ -57,7 +57,7 @@ private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
-	I_REF(imeas::INumericValueProvider, m_linesProviderCompPtr);
+	I_REF(iipr::IFeaturesProvider, m_linesProviderCompPtr);
 	I_REF(iinsp::ISupplier, m_linesSupplierCompPtr);
 	I_REF(imod::IModel, m_linesProviderModelCompPtr);
 	I_REF(iipr::ILineProjectionProcessor, m_projectionProcessorCompPtr);

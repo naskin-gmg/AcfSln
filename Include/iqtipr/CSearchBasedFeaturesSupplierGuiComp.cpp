@@ -7,7 +7,7 @@
 #include <imath/CVarVector.h>
 
 // ACF-Solutions includes
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <iipr/CSearchFeature.h>
 
 
@@ -107,12 +107,12 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
-		imeas::INumericValueProvider* providerPtr = dynamic_cast<imeas::INumericValueProvider*>(supplierPtr);
+		iipr::IFeaturesProvider* providerPtr = dynamic_cast<iipr::IFeaturesProvider*>(supplierPtr);
 		if (providerPtr != NULL){
-			int featuresCount = providerPtr->GetValuesCount();
+			int featuresCount = providerPtr->GetFeaturesCount();
 
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&providerPtr->GetNumericValue(featureIndex));
+				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&providerPtr->GetFeature(featureIndex));
 				if (objectFeaturePtr != NULL){
 					QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
 					modelItemPtr->setText(CT_ID, objectFeaturePtr->GetObjectId());
@@ -121,7 +121,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(objectFeaturePtr->GetAngle()), 'f', 2));
 					modelItemPtr->setText(CT_SCALE, QString::number(objectFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(objectFeaturePtr->GetScale().GetY(), 'f', 2));
 
-					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetNumericValue(featureIndex));
+					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetFeature(featureIndex));
 					if (searchFeaturePtr != NULL){
 						modelItemPtr->setText(CT_ID, QString("%1 (%2)").arg(QString(objectFeaturePtr->GetObjectId())).arg(searchFeaturePtr->GetIndex()));
 					

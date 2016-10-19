@@ -8,7 +8,7 @@
 #include <iinsp/TSupplierCompWrap.h>
 #include <imeas/IDataSequenceProvider.h>
 #include <imeas/IDataSequenceStatisticsProcessor.h>
-#include <imeas/INumericValueProvider.h>
+#include <iipr/IFeaturesProvider.h>
 #include <imeas/CSimpleNumericValue.h>
 #include <imeas/CGeneralDataSequence.h>
 
@@ -21,19 +21,19 @@ namespace iipr
 	Color comparator based on histogram statistics.
 
 	Implemented interfaces have following meaning:
-	1. imeas::INumericValueProvider - Get the measured color.
+	1. iipr::IFeaturesProvider - Get the measured color.
 	2. istd::IInformationProvider - Comparison status provider.
 */
 class CColorPatternComparatorComp:
 			public iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue>,
-			virtual public imeas::INumericValueProvider,
+			virtual public iipr::IFeaturesProvider,
 			virtual public istd::IInformationProvider
 {
 public:
 	typedef iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue> BaseClass;
 
 	I_BEGIN_COMPONENT(CColorPatternComparatorComp);
-		I_REGISTER_INTERFACE(imeas::INumericValueProvider);
+		I_REGISTER_INTERFACE(iipr::IFeaturesProvider);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
 		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");
@@ -48,9 +48,9 @@ public:
 
 	CColorPatternComparatorComp();
 
-	// reimplemented (imeas::INumericValueProvider)
-	virtual int GetValuesCount() const;
-	virtual const imeas::INumericValue& GetNumericValue(int index) const;
+	// reimplemented (iipr::IFeaturesProvider)
+	virtual int GetFeaturesCount() const;
+	virtual const imeas::INumericValue& GetFeature(int index) const;
 
 	// reimplemented (istd::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;

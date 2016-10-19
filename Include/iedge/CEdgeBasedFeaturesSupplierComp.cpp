@@ -66,25 +66,25 @@ const i2d::ICalibration2d* CEdgeBasedFeaturesSupplierComp::GetCalibration() cons
 }
 
 
-// reimplemented (imeas::INumericValueProvider)
+// reimplemented (iipr::IFeaturesProvider)
 
-int CEdgeBasedFeaturesSupplierComp::GetValuesCount() const
+int CEdgeBasedFeaturesSupplierComp::GetFeaturesCount() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		return productPtr->first.GetValuesCount();
+		return productPtr->first.GetFeaturesCount();
 	}
 
 	return 0;
 }
 	
 
-const imeas::INumericValue& CEdgeBasedFeaturesSupplierComp::GetNumericValue(int index) const
+const imeas::INumericValue& CEdgeBasedFeaturesSupplierComp::GetFeature(int index) const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	Q_ASSERT (productPtr != NULL);
 
-	return productPtr->first.GetNumericValue(index);
+	return productPtr->first.GetFeature(index);
 }
 
 
@@ -227,10 +227,10 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 					QString searchResultText = QObject::tr("Search of geometric pattern successful");
 
 					// check feature type and set correct ID
-					int featuresCount = localFeatures.GetValuesCount();
+					int featuresCount = localFeatures.GetFeaturesCount();
 					for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 						istd::TDelPtr<iipr::CSearchFeature> clonedFeaturePtr;
-						clonedFeaturePtr.SetCastedOrRemove(dynamic_cast<iipr::CSearchFeature*>(localFeatures.GetNumericValue(featureIndex).CloneMe()));
+						clonedFeaturePtr.SetCastedOrRemove(dynamic_cast<iipr::CSearchFeature*>(localFeatures.GetFeature(featureIndex).CloneMe()));
 						if (!clonedFeaturePtr.IsValid()){
 							m_defaultInformationCategory = IC_CRITICAL;
 							searchResultText = QObject::tr("Wrong result type");
@@ -293,7 +293,7 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 				m_defaultInformationCategory = IC_INFO;
 				QString searchResultText = QObject::tr("Search of geometric pattern successful");
 
-				int featuresCount = result.first.GetValuesCount();
+				int featuresCount = result.first.GetFeaturesCount();
 				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 					iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<iipr::CSearchFeature*>(&result.first.GetFeatureRef(featureIndex));
 					if (searchFeaturePtr == NULL){
@@ -331,12 +331,12 @@ int CEdgeBasedFeaturesSupplierComp::ProduceObject(ProductType& result) const
 			}
 
 			// Update calibration list
-			int featuresCount = result.first.GetValuesCount();
+			int featuresCount = result.first.GetFeaturesCount();
 			result.second.resize(featuresCount);
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 				i2d::CAffineTransformation2d& transform = result.second[featureIndex];
 
-				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.first.GetNumericValue(featureIndex));
+				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.first.GetFeature(featureIndex));
 				Q_ASSERT(searchFeaturePtr != NULL);
 
 				transform.Reset(searchFeaturePtr->GetPosition(), -searchFeaturePtr->GetAngle(), searchFeaturePtr->GetScale());

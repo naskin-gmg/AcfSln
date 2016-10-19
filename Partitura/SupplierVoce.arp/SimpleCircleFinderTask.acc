@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4285" Description="ACF"/>
-            <Version Id="1" Number="1650" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4316" Description="ACF"/>
+            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -195,7 +195,7 @@
     <ExportedInterfaces>
         <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="PositionTask"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="PositionTask"/>
-        <Interface InterfaceId="imeas::INumericValueProvider" ComponentId="PositionTask"/>
+        <Interface InterfaceId="iipr::IFeaturesProvider" ComponentId="PositionTask"/>
         <Interface InterfaceId="imod::IModel" ComponentId="PositionTask"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="PositionTask"/>
     </ExportedInterfaces>
