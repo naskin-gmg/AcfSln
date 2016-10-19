@@ -74,11 +74,6 @@ I_EXPORT_COMPONENT(
 			"Parameter Scale Offset Shift Contrast Brightness Linear Power" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Parameter") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			NumericValuesJoiner,
-			"Joins several numeric values under the single interface",
-			"Numeric Value Join" IM_AUTHOR("\"Arseniy Masyuk\""));
-
-I_EXPORT_COMPONENT(
 			CrossCorrelationProcessor,
 			"Calculate the cross correlation of two data sequences",
 			"Correlation Processor Comparsion" IM_AUTHOR("\"Kirill Lepskiy\""));
