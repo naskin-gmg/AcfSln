@@ -1247,7 +1247,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 				text += ";";
 			}
 
-			text += doubleListAttribute->GetValueAt(index)? "true": "false";
+			text += boolListAttribute->GetValueAt(index)? "true": "false";
 		}
 
 		meaning = AM_MULTI_ATTRIBUTE;
