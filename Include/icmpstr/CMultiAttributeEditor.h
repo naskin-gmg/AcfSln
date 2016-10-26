@@ -39,9 +39,11 @@ protected Q_SLOTS:
 	void OnItemMoveUp();
 	void OnItemMoveDown();
 	void UpdateButtonStates();
+	void OnItemChanged(QListWidgetItem* itemPtr);
 
 protected:
 	void CreateValuesTree(const QStringList& values);
+	void UpdateItemState(QListWidgetItem& item);
 
 private:
 	class ValueItemDelegate: public iwidgets::CItemDelegate

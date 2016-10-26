@@ -18,6 +18,7 @@
 #include <icomp/CInterfaceManipBase.h>
 #include <icomp/CCompositeComponentStaticInfo.h>
 #include <icomp/CComponentMetaDescriptionEncoder.h>
+#include <ilog/CMessageContainer.h>
 #include <iqt/CSignalBlocker.h>
 
 // ACF-Solutions includes
@@ -943,6 +944,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		return false;
 	}
 
+	QString consistencyInfoText;
+
 	if (m_consistInfoCompPtr.IsValid()){
 		for (		ElementIdToAttrInfoMap::ConstIterator attrsIter = infos.constBegin();
 					attrsIter != infos.constEnd();
@@ -950,15 +953,50 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			const QByteArray& elementId = attrsIter.key();
 			const AttrInfo& attrInfo = attrsIter.value();
 
+			ilog::CMessageContainer messageContainer;
+
 			if (!m_consistInfoCompPtr->IsAttributeValid(
 							attributeId,
 							elementId,
 							registry,
 							true,
 							false,
-							NULL,
+							&messageContainer,
 							attrInfo.componentStaticInfoPtr)){
 				isAttributeError = true;
+			}
+
+			ilog::IMessageContainer::Messages messages = messageContainer.GetMessages();
+			for (		ilog::IMessageContainer::Messages::ConstIterator messageIter = messages.constBegin();
+						messageIter != messages.constEnd();
+						++messageIter){
+				const ilog::IMessageConsumer::MessagePtr& messagePtr = *messageIter;
+				if (messagePtr.IsValid()){
+					consistencyInfoText += "\n";
+
+					switch (messagePtr->GetInformationCategory()){
+					case istd::IInformationProvider::IC_INFO:
+						consistencyInfoText += tr("Information: ");
+						break;
+
+					case istd::IInformationProvider::IC_WARNING:
+						consistencyInfoText += tr("Warning: ");
+						break;
+
+					case istd::IInformationProvider::IC_ERROR:
+						consistencyInfoText += tr("Error: ");
+						break;
+
+					case istd::IInformationProvider::IC_CRITICAL:
+						consistencyInfoText += tr("Critical error: ");
+						break;
+
+					default:
+						break;
+					}
+
+					consistencyInfoText += messagePtr->GetInformationDescription();
+				}
 			}
 		}
 	}
@@ -986,6 +1024,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			}
 		}
 	}
+
+	attributeValueTip += consistencyInfoText;
 
 	QTreeWidgetItem* attributeItemPtr = NULL;
 	if (itemIndex < AttributeTree->topLevelItemCount()){
@@ -1823,7 +1863,12 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 			attributeFlags = icomp::IAttributeStaticInfo::AF_VALUE;
 		}
 
-		return new CMultiAttributeDelegateWidget(const_cast<AttributeItemDelegate&>(*this), m_parent, parentWidget, attributeId, attributeFlags);
+		return new CMultiAttributeDelegateWidget(
+					const_cast<AttributeItemDelegate&>(*this),
+					m_parent,
+					parentWidget,
+					attributeId,
+					attributeFlags);
 	}
 
 	if (		(propertyMining == AM_REFERENCE) ||

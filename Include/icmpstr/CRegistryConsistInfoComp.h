@@ -77,6 +77,14 @@ public:
 				bool allReasons,
 				ilog::IMessageConsumer* reasonConsumerPtr,
 				const icomp::IComponentStaticInfo* componentMetaInfoPtr = NULL) const;
+	virtual bool IsAttributeValueValid(
+				int attributeFlags,
+				const QByteArray& attributeText,
+				const icomp::IElementStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
+				const icomp::IRegistry& registry,
+				bool ignoreUndef,
+				ilog::IMessageConsumer* reasonConsumerPtr) const;
 	virtual QIcon GetComponentIcon(const icomp::CComponentAddress& address) const;
 
 protected:
@@ -102,23 +110,21 @@ protected:
 				bool allReasons,
 				ilog::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementCompatibility(
-				const icomp::IAttributeStaticInfo& attributeMetaInfo,
+				int attributeFlags,
 				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
-				const QByteArray& attributeName,
-				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
+				const QString& messagePrefix,
 				ilog::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementInfoCompatibility(
 				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo* pointedMetaInfoPtr,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
-				const QByteArray& attributeName,
-				const QByteArray& elementName,
 				bool ignoreUndef,
+				const QString& messagePrefix,
 				ilog::IMessageConsumer* reasonConsumerPtr) const;
 
 private:

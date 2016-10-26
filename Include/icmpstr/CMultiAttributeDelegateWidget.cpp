@@ -12,6 +12,7 @@
 #endif
 
 // ACF-Solutions includes
+#include <icmpstr/IRegistryConsistInfo.h>
 #include <icmpstr/CMultiAttributeEditor.h>
 
 	
@@ -27,7 +28,7 @@ CMultiAttributeDelegateWidget::CMultiAttributeDelegateWidget(
 			QWidget* parentWidget,
 			const QByteArray& attributeId,
 			int attributeFlags)
-	:BaseClass(parentWidget),
+:	BaseClass(parentWidget),
 	m_itemDelegate(itemDelegate),
 	m_attributeId(attributeId),
 	m_attributeFlags(attributeFlags),
@@ -71,7 +72,10 @@ void CMultiAttributeDelegateWidget::SetText(const QString& text)
 
 void CMultiAttributeDelegateWidget::OnShowDialog()
 {
-	istd::TDelPtr<CMultiAttributeEditor> multiEditorDialogPtr(new CMultiAttributeEditor(m_elementSelectionInfoManager, m_attributeId, m_attributeFlags));
+	istd::TDelPtr<CMultiAttributeEditor> multiEditorDialogPtr(new CMultiAttributeEditor(
+				m_elementSelectionInfoManager,
+				m_attributeId,
+				m_attributeFlags));
 	multiEditorDialogPtr->setWindowTitle(m_attributeId);
 
 	multiEditorDialogPtr->SetEditorText(m_textEditor->text());

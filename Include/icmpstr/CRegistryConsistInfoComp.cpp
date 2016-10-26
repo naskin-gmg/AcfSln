@@ -372,6 +372,31 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 }
 
 
+bool CRegistryConsistInfoComp::IsAttributeValueValid(
+			int attributeFlags,
+			const QByteArray& attributeText,
+			const icomp::IElementStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
+			const icomp::IRegistry& registry,
+			bool ignoreUndef,
+			ilog::IMessageConsumer* reasonConsumerPtr) const
+{
+	if ((attributeFlags & (icomp::IAttributeStaticInfo::AF_FACTORY | icomp::IAttributeStaticInfo::AF_REFERENCE)) == 0){
+		return true;
+	}
+
+	return CheckPointedElementCompatibility(
+				attributeFlags,
+				attributeText,
+				interfaceNames,
+				optionalInterfaceNames,
+				registry,
+				ignoreUndef,
+				"",
+				reasonConsumerPtr);
+}
+
+
 QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress& address) const
 {
 	if (m_externalMetaInfoManagerCompPtr.IsValid()){
@@ -491,6 +516,10 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 			bool allReasons,
 			ilog::IMessageConsumer* reasonConsumerPtr) const
 {
+	int attributeFlags = attributeMetaInfo.GetAttributeFlags();
+
+	QString messagePrefix = tr("%1 in %2: ").arg(QString(attributeName)).arg(QString(elementName));
+
 	const icomp::CReferenceAttribute* idPtr = dynamic_cast<const icomp::CReferenceAttribute*>(&attribute);
 	if (idPtr != NULL){
 		icomp::IElementStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
@@ -504,14 +533,13 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 		const QByteArray& componentId = idPtr->GetValue();
 
 		if (!CheckPointedElementCompatibility(
-					attributeMetaInfo,
+					attributeFlags,
 					componentId,
 					interfaceNames,
 					optionalInterfaceNames,
-					attributeName,
-					elementName,
 					registry,
 					ignoreUndef,
+					messagePrefix,
 					reasonConsumerPtr)){
 			return false;
 		}
@@ -534,14 +562,13 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 			const QByteArray& componentId = multiIdPtr->GetValueAt(idIndex);
 
 			if (!CheckPointedElementCompatibility(
-						attributeMetaInfo,
+						attributeFlags,
 						componentId,
 						interfaceNames,
 						optionalInterfaceNames,
-						attributeName,
-						elementName,
 						registry,
 						ignoreUndef,
+						messagePrefix,
 						reasonConsumerPtr)){
 				if (!allReasons){
 					return false;
@@ -558,25 +585,21 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 
 
 bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
-			const icomp::IAttributeStaticInfo& attributeMetaInfo,
+			int attributeFlags,
 			const QByteArray& pointedElementName,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
 			const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
-			const QByteArray& attributeName,
-			const QByteArray& elementName,
 			const icomp::IRegistry& registry,
 			bool ignoreUndef,
+			const QString& messagePrefix,
 			ilog::IMessageConsumer* reasonConsumerPtr) const
 {
-	int attributeFlags = attributeMetaInfo.GetAttributeFlags();
 	if ((attributeFlags & (icomp::IAttributeStaticInfo::AF_FACTORY | icomp::IAttributeStaticInfo::AF_REFERENCE)) == 0){
 		if (!ignoreUndef && (reasonConsumerPtr != NULL)){
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_BAD_ATTRIBUTE_TYPE,
-						tr("Attribute '%1' in '%2' has incompatible registry entry")
-									.arg(QString(attributeName))
-									.arg(QString(elementName)),
+						messagePrefix + tr("Attribute has incompatible registry entry"),
 						tr("Attribute Consistency Check"),
 						0)));
 		}
@@ -593,10 +616,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_BAD_ATTRIBUTE_TYPE,
-						tr("Factory '%1' in '%2' try to access subcomponents '%3', which is allowed only for references")
-									.arg(QString(attributeName))
-									.arg(QString(elementName))
-									.arg(QString(pointedElementName)),
+						messagePrefix + tr("Factory try to access subcomponents '%1', which is allowed only for references").arg(QString(pointedElementName)),
 						tr("Attribute Consistency Check"),
 						0)));
 		}
@@ -614,10 +634,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
-								tr("Reference or factory '%1' in '%2' is set to %3, but it cannot be resolved")
-											.arg(QString(attributeName))
-											.arg(QString(elementName))
-											.arg(QString(pointedElementName)),
+								messagePrefix + tr("Reference or factory is set to %1, but it cannot be resolved").arg(QString(pointedElementName)),
 								tr("Attribute Consistency Check"),
 								0)));
 				}
@@ -633,10 +650,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 									istd::IInformationProvider::IC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
-									tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
-												.arg(QString(attributeName))
-												.arg(QString(elementName))
-												.arg(QString(pointedElementName)),
+									messagePrefix + tr("Reference or factory is set to %1, but its subelement cannot be found").arg(QString(pointedElementName)),
 									tr("Attribute Consistency Check"),
 									0)));
 					}
@@ -650,9 +664,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 						pointedMetaInfoPtr,
 						interfaceNames,
 						optionalInterfaceNames,
-						attributeName,
-						elementName,
 						ignoreUndef,
+						messagePrefix,
 						reasonConsumerPtr);
 		}
 		else{
@@ -670,10 +683,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
 										MI_COMPONENT_NOT_FOUND,
-										tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
-													.arg(QString(attributeName))
-													.arg(QString(elementName))
-													.arg(QString(pointedElementName)),
+										messagePrefix + tr("Reference or factory is set to %1, but its subelement cannot be found").arg(QString(pointedElementName)),
 										tr("Attribute Consistency Check"),
 										0)));
 						}
@@ -687,9 +697,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 							pointedMetaInfoPtr,
 							interfaceNames,
 							optionalInterfaceNames,
-							attributeName,
-							elementName,
 							ignoreUndef,
+							messagePrefix,
 							reasonConsumerPtr);
 			}
 			else{
@@ -697,10 +706,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
-								tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
-											.arg(QString(attributeName))
-											.arg(QString(elementName))
-											.arg(QString(pointedElementAddress.GetComponentId())),
+								messagePrefix + tr("Reference or factory uses embedded type '%1', but this type is undefined").arg(QString(pointedElementAddress.GetComponentId())),
 								tr("Attribute Consistency Check"),
 								0)));
 				}
@@ -714,10 +720,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 						istd::IInformationProvider::IC_ERROR,
 						MI_COMPONENT_NOT_FOUND,
-						tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
-									.arg(QString(attributeName))
-									.arg(QString(elementName))
-									.arg(QString(pointedElementName)),
+						messagePrefix + tr("Reference or factory contains '%1', but this element doesn't exist").arg(QString(pointedElementName)),
 						tr("Attribute Consistency Check"),
 						0)));
 		}
@@ -734,9 +737,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
 			const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
-			const QByteArray& attributeName,
-			const QByteArray& elementName,
 			bool ignoreUndef,
+			const QString& messagePrefix,
 			ilog::IMessageConsumer* reasonConsumerPtr) const
 {
 	if (pointedMetaInfoPtr != NULL){
@@ -766,9 +768,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_WRONG_INTERFACE,
-								tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement interface %4")
-											.arg(QString(attributeName))
-											.arg(QString(elementName))
+								messagePrefix + tr("Reference or factory points at '%1', but it doesn't implement interface %2")
 											.arg(QString(pointedElementName))
 											.arg(QString(interfaceName)),
 								tr("Attribute Consistency Check"),
@@ -815,10 +815,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_WRONG_INTERFACE,
-								tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement any optional interface")
-											.arg(QString(attributeName))
-											.arg(QString(elementName))
-											.arg(QString(pointedElementName)),
+								messagePrefix + tr("Reference or factory points at '%1', but it doesn't implement any optional interface").arg(QString(pointedElementName)),
 								tr("Attribute Consistency Check"),
 								0)));
 				}
@@ -832,10 +829,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 						istd::IInformationProvider::IC_WARNING,
 						MI_COMPOSITE_FOUND,
-						tr("Reference or factory '%1' in '%2' point at '%3', but it is not accessible in actual configuration")
-									.arg(QString(attributeName))
-									.arg(QString(elementName))
-									.arg(QString(pointedElementName)),
+						messagePrefix + tr("Reference or factory '%1' in '%2' points at '%3', but it is not accessible in actual configuration").arg(QString(pointedElementName)),
 						tr("Attribute Consistency Check"),
 						0)));
 		}
