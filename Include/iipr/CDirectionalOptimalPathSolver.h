@@ -11,6 +11,13 @@
 #include <iimg/CGeneralBitmap.h>
 
 
+#ifdef __clang__
+	#define __forceinline __attribute__((always_inline))
+#elif defined(__GNUC__)
+	#define __forceinline __attribute__((always_inline))
+#endif
+
+
 namespace iipr
 {
 
