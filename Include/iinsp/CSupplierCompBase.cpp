@@ -167,7 +167,7 @@ bool CSupplierCompBase::IsMessageContainerSupported(int containerType) const
 }
 
 
-void CSupplierCompBase::AddMessage(const ilog::CMessage* messagePtr, int containerType) const
+void CSupplierCompBase::AddMessage(const istd::IInformationProvider* messagePtr, int containerType) const
 {
 	Q_ASSERT(messagePtr != NULL);
 

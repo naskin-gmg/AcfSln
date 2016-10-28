@@ -131,10 +131,11 @@ protected:
 	/**
 		Add ilog::CMessage to the internal message container (also from const functions).
 		\param	messagePtr		pointer to the new message object. It cannot be NULL.
+								It takes owneship of this object.
 		\param	containerType	type of message container, \sa iinsp::ISupplier::MessageContainerType.
 								If this container is not supported, message object will be deleted.
 	*/
-	virtual void AddMessage(const ilog::CMessage* messagePtr, int containerType = MCT_RESULTS) const;
+	virtual void AddMessage(const istd::IInformationProvider* messagePtr, int containerType = MCT_RESULTS) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
