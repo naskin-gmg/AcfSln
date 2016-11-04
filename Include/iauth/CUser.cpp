@@ -51,6 +51,12 @@ bool CUser::SetPassword(const QString& password)
 }
 
 
+const QString& CUser::GetPassword() const
+{
+	return m_password;
+}
+
+
 int CUser::GetUserGroup() const
 {
 	return m_userGroup;

@@ -25,6 +25,11 @@ public:
 	const QString& GetUserName() const;
 
 	/**
+		Get user's password.
+	*/
+	const QString& GetPassword() const;
+
+	/**
 		Set name of user.
 		\return	true, if user name was accepted, or false if it is uncompatible with the user name guide lines.
 	*/
