@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4261" Description="ACF"/>
-            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4333" Description="ACF"/>
+            <Version Id="1" Number="1673" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -72,6 +72,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="ShowAboutProductName" Type="Boolean" ExportId="">
                         <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ShowFilePathAsToolTip" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ShowSplashApplicationName" Type="Boolean" ExportId="">
                         <Data IsEnabled="true" Value="false"/>
