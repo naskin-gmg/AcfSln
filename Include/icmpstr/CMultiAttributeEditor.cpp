@@ -230,8 +230,8 @@ void CMultiAttributeEditor::UpdateItemState(QListWidgetItem& item)
 			if ((m_attributeFlags & (icomp::IAttributeStaticInfo::AF_REFERENCE | icomp::IAttributeStaticInfo::AF_FACTORY)) != 0){
 				const icomp::IAttributeStaticInfo* staticInfoPtr = m_elementSelectionInfoManager.GetAttributeStaticInfo(m_attributeId, *elementInfoPtr);
 				if (staticInfoPtr != NULL){
-					obligatoryInterfaces += staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);
-					optionalInterfaces += staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, icomp::IAttributeStaticInfo::AF_NULLABLE);
+					obligatoryInterfaces += staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, icomp::IAttributeStaticInfo::AF_OBLIGATORY, icomp::IAttributeStaticInfo::AF_OBLIGATORY);
+					optionalInterfaces += staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, icomp::IAttributeStaticInfo::AF_OBLIGATORY);
 				}
 			}
 		}
