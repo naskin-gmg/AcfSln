@@ -4,58 +4,70 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/Compositor/CCompositor.cpp" line="+569"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/Compositor/CCompositor.cpp" line="+536"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+472"/>
         <source>ACF Registry</source>
         <translation>Rejestr ACF</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+68"/>
         <source>List of document windows</source>
         <translation>Lista okien dokumentów</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>Windows</source>
         <translation>Okna</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+12"/>
         <source>Quick Help</source>
         <translation>Skrótowa pomoc</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
         <source>Packages</source>
         <translation>Pakiety</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <source>Notes</source>
         <translation>Notatki</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
         <source>Selected component</source>
         <translation>Wybrany komponent</translation>
     </message>
     <message>
-        <location line="-62"/>
+        <location line="-70"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-68"/>
         <source>:/Icons/CompositorIcon</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+43"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+51"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+45"/>
         <source>:/Images/CompositorSplashScreen</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="-12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-12"/>
         <source>Compositor</source>
         <translation>Compositor</translation>
     </message>
@@ -64,18 +76,22 @@
         <translation type="vanished">Edytor rejestrów ACF</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
         <source>About Compositor</source>
         <translation>O programie Compositor</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location line="-8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>ImagingTools</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-12"/>
+        <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <source>� 2015 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
@@ -88,60 +104,74 @@ Ta aplikacja jest częścią projektu ACF
 Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+72"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
-        <location line="+437"/>
+        <location line="+10"/>
+        <location line="+80"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location line="+507"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-6"/>
+        <location line="+150"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location line="+503"/>
         <source>ACF</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-74"/>
+        <location line="-82"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-154"/>
         <source>:/Images/CompositorLogo</source>
         <translation></translation>
     </message>
     <message>
         <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+50"/>
         <source>Remember open documents on exit</source>
         <translation>Zapamiętaj otwarte dokumenty</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-30"/>
         <source>:/Icons/Settings</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="+14"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
         <source>Executable file</source>
         <translation>Plik uruchamialny</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
         <source>Windows executable</source>
         <translation>Plik uruchamialny Windows</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>Script file</source>
         <translation>Plik skryptowy</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-12"/>
         <source>MAC executable file</source>
         <translation>Plik uruchamialny Mac</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>exe</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>bat</source>
         <translation></translation>
     </message>
@@ -150,134 +180,166 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation type="vanished">Pliki konfiguracji</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+14"/>
         <source>ACF Command Path</source>
         <translation>Ścieżka komendy ACF</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>HTML Browser</source>
         <translation>Przeglądarka HTML</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>HTML Editor</source>
         <translation>Edytor HTML</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>Language</source>
         <translation>Język</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>Document Persistence</source>
         <translation>Zapamiętanie stanu dokumentów</translation>
     </message>
     <message>
         <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
         <source>ACF component configuration</source>
         <translation>Konfiguracja komponentów ACF</translation>
     </message>
     <message>
         <location line="-2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-68"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-78"/>
         <source>xpc</source>
         <translation></translation>
     </message>
     <message>
         <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-10"/>
         <source>Acf</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-58"/>
-        <location line="+148"/>
+        <location line="+100"/>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+70"/>
         <location line="+2"/>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+104"/>
         <location line="+2"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+8"/>
+        <location line="+2"/>
+        <location line="+70"/>
         <source>:/Translations</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-186"/>
+        <location line="-36"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-38"/>
         <source>0.2.0</source>
         <translation>0.2.0</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.3.0</source>
         <translation>0.3.0</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.3.1</source>
         <translation>0.3.1</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.3.2</source>
         <translation>0.3.2</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.4.0</source>
         <translation>0.4.0</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.4.1</source>
         <translation>0.4.1</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.4.2</source>
         <translation>0.4.2</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.4.3</source>
         <translation>0.4.3</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.4.4</source>
         <translation>0.4.4</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.5.0</source>
         <translation>0.5.0</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.5.1</source>
         <translation>0.5.1</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.6.0</source>
         <translation>0.6.0</translation>
     </message>
     <message>
         <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>0.6.1</source>
         <translation>0.6.1</translation>
     </message>
     <message>
         <location line="-26"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+12"/>
         <source>ACF-Solutions</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+180"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+64"/>
+        <location line="-10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-48"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-8"/>
         <source>1.9.0</source>
         <translation>1.9.0</translation>
     </message>
     <message>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-88"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-80"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-84"/>
         <source>acc</source>
         <translation></translation>
     </message>
@@ -290,264 +352,356 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <translation type="vanished">Rejestr ACF</translation>
     </message>
     <message>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/Compositor/CCompositor.cpp" line="-102"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/Compositor/CCompositor.cpp" line="-112"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-110"/>
         <source>Configuration File</source>
         <translation>Plik konfiguracji</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+16"/>
         <source>awc</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+106"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+88"/>
+        <location line="+30"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+84"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+84"/>
         <source>alog</source>
         <translation></translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>Log XML file</source>
         <translation>Plik log w formacie XML</translation>
     </message>
     <message>
-        <location line="-6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Log</source>
         <translation>Log</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-6"/>
         <source>:/Icons/Info</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>About</source>
         <translation>O programie</translation>
     </message>
     <message>
-        <location line="-70"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-74"/>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-72"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-70"/>
         <source>0.9.0</source>
         <translation>0.9.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.1</source>
         <translation>0.9.1</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.2</source>
         <translation>0.9.2</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.3</source>
         <translation>0.9.3</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.4</source>
         <translation>0.9.4</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.5</source>
         <translation>0.9.5</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.6</source>
         <translation>0.9.6</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.7</source>
         <translation>0.9.7</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.8</source>
         <translation>0.9.8</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>0.9.9</source>
         <translation>0.9.9</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.0.0</source>
         <translation>1.0.0</translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+114"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location line="+76"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="+76"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.0.1</source>
         <translation>1.0.1</translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+114"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="-74"/>
+        <location line="+76"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-74"/>
+        <location line="+76"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.1.0</source>
         <translation>1.1.0</translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+150"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+38"/>
+        <location line="-38"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+38"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-38"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+38"/>
         <source>2.0.0</source>
         <translation>2.0.0</translation>
     </message>
     <message>
-        <location line="-148"/>
-        <location line="+150"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="-38"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-38"/>
+        <location line="+40"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>2.0.1</source>
         <translation>2.0.1</translation>
     </message>
     <message>
-        <location line="-148"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <source>2.1.0</source>
         <translation>2.1.0</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="-136"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-140"/>
         <source>../../Docs/Tutorial/Config/AcfSlnTutorialConfig.awc</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-24"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-38"/>
+        <source>Configuration</source>
+        <translation>Konfiguracja</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+40"/>
         <source>Config %1</source>
         <translation>Konfiguracja %1</translation>
     </message>
     <message>
-        <location line="+46"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-38"/>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-38"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+58"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-38"/>
         <source>1.2.0</source>
         <translation>1.2.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.3.0</source>
         <translation>1.3.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.4.0</source>
         <translation>1.4.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.4.1</source>
         <translation>1.4.1</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.0</source>
         <translation>1.5.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.1</source>
         <translation>1.5.1</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.2</source>
         <translation>1.5.2</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.3</source>
         <translation>1.5.3</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.5.4</source>
         <translation>1.5.4</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.0</source>
         <translation>1.6.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.1</source>
         <translation>1.6.1</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.2</source>
         <translation>1.6.2</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.3</source>
         <translation>1.6.3</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.4</source>
         <translation>1.6.4</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.6.5</source>
         <translation>1.6.5</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.7.0</source>
         <translation>1.7.0</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>1.8.0</source>
         <translation>1.8.0</translation>
     </message>
     <message>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-503"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-493"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-503"/>
         <source>About XPC Editor</source>
         <translation>O edytorze plików XPC</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>� 2013 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
@@ -560,57 +714,68 @@ Ta aplikacja jest częścią projektu ACF
 Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+10"/>
         <source>ACF Package Configuration Editor</source>
         <translation>Edytor plików konfiguracyjnych ACF</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-12"/>
         <source>:/Images/XpcEditorIcon</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>:/Icons/XpcEditorIcon</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+423"/>
+        <location line="+427"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+427"/>
         <source>ACF Configuration</source>
         <translation>Konfiguracja ACF</translation>
     </message>
     <message>
         <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>Old ACF Configuration File</source>
         <translation>Stary format konfiguracji ACF</translation>
     </message>
     <message>
         <location line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>ACF Workspace Configuration File</source>
         <translation>Plik konfiguracji ACF</translation>
     </message>
     <message>
         <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>ACF Configuration File</source>
         <translation>Plik konfiguracji ACF</translation>
     </message>
     <message>
         <location line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-10"/>
         <source>arp</source>
         <translation>arp</translation>
     </message>
     <message>
         <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>ACF Component Package</source>
         <translation>Pakiet komponentów ACF</translation>
     </message>
     <message>
         <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>arx</source>
         <translation>arx</translation>
     </message>
     <message>
         <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>ACF Registry File</source>
         <translation>Plik rejestru ACF</translation>
     </message>
@@ -688,115 +853,134 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CAttributeEditorComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CAttributeEditorComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+358"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+358"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+358"/>
         <source>Property Editor</source>
         <translation>Edytor właściwości</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+18"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+18"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+18"/>
         <source>Info</source>
         <translation>Informacje ogólne</translation>
     </message>
     <message>
         <location line="+105"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-15"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-15"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-15"/>
         <source>Description</source>
         <translation>Opis</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Company</source>
         <translation>Firma</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Authors</source>
         <translation>Autorzy</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Category</source>
         <translation>Kategoria</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Tags</source>
         <translation>Tagi</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+2"/>
         <source>Keywords</source>
         <translation>Słowa kluczowe</translation>
     </message>
     <message>
         <location line="+121"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+7"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+7"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+7"/>
         <source>Attributes</source>
         <translation>Atrybuty</translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Property</source>
         <translation>Atrybut</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
         <source>Interfaces</source>
         <translation>Interfejsy</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Export interface</source>
         <translation>Export interfejsu</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+5"/>
         <source>Components</source>
         <translation>Komponenty</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Component</source>
         <translation>Komponent</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Export alias</source>
         <translation>Export jako</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="+4"/>
         <source>Flags</source>
         <translation>Flagi</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CAttributeEditorComp.h" line="-1"/>
         <source>Automatically create instance</source>
         <translation>Utwórz automatycznie</translation>
     </message>
@@ -805,61 +989,71 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CBitmapSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+174"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+174"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+174"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
         <source>Snap</source>
         <translation>Zrób zdjęcie</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
         <source>No Image</source>
         <translation>Brak obrazu</translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
         <location line="+55"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="-162"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="-14"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="-14"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="-14"/>
         <source>Snap next image</source>
         <translation>Następne zdjęcie</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+4"/>
         <source>Snap in loop</source>
         <translation>Rób stale zdjęcia</translation>
     </message>
     <message>
         <location line="+52"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CBitmapSupplierGuiComp.h" line="+5"/>
         <source>Save current image...</source>
         <translation>Zapisz aktualny obraz...</translation>
     </message>
@@ -868,19 +1062,22 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CBlobFilterParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iblobgui/CBlobFilterParamsGuiComp.ui" line="+37"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+129"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+129"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+129"/>
         <source>Activate Filter</source>
         <translation>Włącz filtr</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
         <source>Add New Filter</source>
         <translation>Dodaj nowy filtr</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterParamsGuiComp.h" line="+1"/>
         <source>Remove All</source>
         <translation>Usuń wszystkie</translation>
     </message>
@@ -889,55 +1086,64 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CCaliperParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CCaliperParamsGuiComp.ui" line="+35"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+118"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+120"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+120"/>
         <source>Threshold</source>
         <translation>Wartość min.</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>Edge polarity</source>
         <translation>Polaryzacja</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
         <source>White -&gt; Black</source>
         <translation>Biały -&gt; Czarny</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>Black -&gt; White</source>
         <translation>Czarny -&gt; Biały</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>Any</source>
         <translation>Dowolny</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+2"/>
         <source>Direction</source>
         <translation>Kierunek</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+3"/>
         <source>In -&gt; Out</source>
         <translation>Wew. -&gt; Zew.</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCaliperParamsGuiComp.h" line="+1"/>
         <source>Out -&gt; In</source>
         <translation>Zew. -&gt; Wew.</translation>
     </message>
@@ -946,25 +1152,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CChangePasswordDialog</name>
     <message>
         <location filename="../../../Include/iqtauth/CChangePasswordDialog.ui" line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+99"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+99"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+99"/>
         <source>Change Password (User &apos;%1&apos;)</source>
         <translation>Zmień hasło (użytkownik &apos;%1&apos;)</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
         <source>Old password:</source>
         <translation>Stare hasło:</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
         <source>New password:</source>
         <translation>Nowe hasło:</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CChangePasswordDialog.h" line="+1"/>
         <source>Reenter new password:</source>
         <translation>Powtórz hasło:</translation>
     </message>
@@ -973,25 +1183,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CCircleFinderParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CCircleFinderParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+121"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+121"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+121"/>
         <source>Enable Outlier Elimination</source>
         <translation>Włącz eliminację extremów</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
         <source>Minimal Outlier Distance</source>
         <translation>Dystans minimalny extremów</translation>
     </message>
     <message>
         <location line="-13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
         <source>Maximal Ray Count</source>
         <translation>Maksymalna liczba promieni</translation>
     </message>
     <message>
         <location line="+55"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+3"/>
         <source>Caliper Mode</source>
         <translation>Tryb detekcji</translation>
     </message>
@@ -1001,25 +1215,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="-22"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="-1"/>
         <source>Automatic</source>
         <translation>Automatycznie</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+4"/>
         <source>First</source>
         <translation>Pierwszy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+1"/>
         <source>Best</source>
         <translation>Najlepszy</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CCircleFinderParamsGuiComp.h" line="+2"/>
         <source>px</source>
         <translation></translation>
     </message>
@@ -1028,43 +1246,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CColorPatternComparatorGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CColorPatternComparatorGuiComp.ui" line="+43"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+159"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+162"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+162"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+1"/>
         <source>Task Enabled</source>
         <translation>Zadanie włączone</translation>
     </message>
     <message>
         <location line="+35"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
         <source>Results</source>
         <translation>Wyniki</translation>
     </message>
     <message>
         <location line="+66"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+4"/>
         <source>Current</source>
         <translation>Obecny</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
         <source>Difference</source>
         <translation>Różnica</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+2"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
         <location line="-15"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="-6"/>
         <source>Taught</source>
         <translation>Zapamiętany</translation>
     </message>
@@ -1074,7 +1299,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="+32"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+7"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+7"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CColorPatternComparatorGuiComp.h" line="+7"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
@@ -1134,79 +1360,92 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CConvertComponentCommandComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CConvertComponentCommandComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+131"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+131"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+131"/>
         <source>Convert component</source>
         <translation>Konwersja komponentu</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Compatibility to source component</source>
         <translation>Zgodność z komponentem źródłowym</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+3"/>
         <source>Don&apos;t care about interfaces</source>
         <translation>Interfejsy są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Implementing used interfaces</source>
         <translation>Implementujący użyte interfejsy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Implementing all interfaces</source>
         <translation>Implementujący wszystkie interfejsy</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
         <source>Don&apos;t care about attributes</source>
         <translation>Atrybuty są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing used attributes</source>
         <translation>Zawierający użyte atrybuty</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing all attributes</source>
         <translation>Zawierający wszystkie atrybuty</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+4"/>
         <source>Don&apos;t care about subcomponents</source>
         <translation>Podkomponenty są nieistotne</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing used subcomponents</source>
         <translation>Zawierający użyte podkomponenty</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Containing all subcomponents</source>
         <translation>Zawierający wszystkie podkomponenty</translation>
     </message>
     <message>
         <location line="+11"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+2"/>
         <source>Filter</source>
         <translation>Filtr</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CConvertComponentCommandComp.h" line="+1"/>
         <source>Destination component</source>
         <translation>Docelowy komponent</translation>
     </message>
@@ -1214,14 +1453,16 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CConvolution2dParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtipr/CConvolution2dParamsGuiComp.ui" line="+28"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+94"/>
+        <location filename="../../../Include/iqtipr/CConvolution2dParamsGuiComp.ui" line="+37"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+96"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+96"/>
         <source>Kernel Width</source>
         <translation>Szerokość jądra</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CConvolution2dParamsGuiComp.h" line="+1"/>
         <source>Kernel Height</source>
         <translation>Wysokość jądra</translation>
     </message>
@@ -1229,80 +1470,93 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CDataSequenceViewComp</name>
     <message>
-        <location filename="../../../Include/iqtmeas/CDataSequenceViewComp.ui" line="+135"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+282"/>
+        <location filename="../../../Include/iqtmeas/CDataSequenceViewComp.ui" line="+162"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+292"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+292"/>
         <source>Max</source>
         <translation>Maks</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
         <source>Min</source>
         <translation>Min</translation>
     </message>
     <message>
-        <location line="+40"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location line="+58"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
         <source>Time Span</source>
         <translation>Przedział</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location line="+25"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
         <source>Move time span left</source>
         <translation>Przesuń przedział czasowy w lewo</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
         <source>Move time span right</source>
         <translation>Przesuń przedział czasowy w prawo</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
         <source>Begin</source>
         <translation>Pocz.</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
         <source>End</source>
         <translation>Koniec</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+2"/>
         <source>Zoom in time span</source>
         <translation>Powiększ przedział czasowy</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+4"/>
         <source>Zoom out time span</source>
         <translation>Pomniejsz przedział czasowy</translation>
     </message>
     <message>
-        <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+3"/>
+        <location line="+48"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+3"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location line="+45"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataSequenceViewComp.h" line="+1"/>
         <source>Scale</source>
         <translation>Skala</translation>
     </message>
@@ -1311,31 +1565,36 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CDataStatisticsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtmeas/CDataStatisticsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+114"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+114"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+114"/>
         <source>Minimum</source>
         <translation>Minimum</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
         <source>Maximum</source>
         <translation>Maksimum</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
         <source>Average</source>
         <translation>Średnia</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
         <source>Median</source>
         <translation>Mediana</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CDataStatisticsGuiComp.h" line="+1"/>
         <source>Standard Deviation</source>
         <translation>Odch. std.</translation>
     </message>
@@ -1363,91 +1622,106 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CDirectoryMonitorParamsGui</name>
     <message>
         <location filename="../../../Include/ihotfgui/CDirectoryMonitorParamsGui.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+279"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+279"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+279"/>
         <source>Directory Monitor Parameters</source>
         <translation>Parametry monitoringu katalogu</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Checking Intervall</source>
         <translation>Interwał próbkowania</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source> sec</source>
         <translation></translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Items To Be Observed</source>
         <translation>Elementy monitorowane</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Files</source>
         <translation>Pliki</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Directories</source>
         <translation>Katalogi</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Drives</source>
         <translation>Napędy</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Changes To Be Observed</source>
         <translation>Zmiany monitorowane</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Modified</source>
         <translation>Zmieniony</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Added</source>
         <translation>Dodany</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Removed</source>
         <translation>Usunięty</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Attributes</source>
         <translation>Atrybuty</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Tree Depth</source>
         <translation>Głębokość</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Unlimited</source>
         <translation>Nieograniczona</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <source>Accept Filters</source>
         <translation>Filtry akceptowanych</translation>
     </message>
@@ -1456,7 +1730,11 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+14"/>
         <location line="+73"/>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
+        <location line="+1"/>
+        <location line="+2"/>
+        <location line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="+1"/>
         <location line="+1"/>
         <location line="+2"/>
         <location line="+1"/>
@@ -1465,7 +1743,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="-68"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CDirectoryMonitorParamsGui.h" line="-2"/>
         <source>Ignore Filters</source>
         <translation>Filtry ignorowanych</translation>
     </message>
@@ -1473,44 +1752,51 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CEdgeLinesSupplierEditorComp</name>
     <message>
-        <location filename="../../../Include/iedgegui/CEdgeLinesSupplierEditorComp.ui" line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+134"/>
+        <location filename="../../../Include/iedgegui/CEdgeLinesSupplierEditorComp.ui" line="+32"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+136"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+136"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location line="+45"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+1"/>
         <source>Save Result...</source>
         <translation>Zapisz wynik...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
         <source>Do single processing step</source>
         <translation>Wykonaj pojedynczy krok przetwarzania</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
         <source>Process</source>
         <translation>Przetwórz</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iedgegui/ui_CEdgeLinesSupplierEditorComp.h" line="+2"/>
         <source>Enable/disable continuous processing</source>
         <translation>Włącz lub wyłącz przetwarzanie w trybie ciągłym</translation>
     </message>
@@ -1549,7 +1835,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CExposureParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtcam/CExposureParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+117"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+117"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+117"/>
         <source>Shutter time</source>
         <translation>Czas przesłony</translation>
     </message>
@@ -1557,7 +1844,10 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+29"/>
         <location line="+36"/>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+1"/>
+        <location line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+1"/>
         <location line="+2"/>
         <location line="+2"/>
         <source>ms</source>
@@ -1565,13 +1855,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="-65"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="-3"/>
         <source>Delay Time</source>
         <translation>Opóźnienie</translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CExposureParamsGuiComp.h" line="+2"/>
         <source>EEN Delay</source>
         <translation>Opóźnienie syg. EEN</translation>
     </message>
@@ -1580,43 +1872,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CFileNamingParamsGuiComp</name>
     <message>
         <location filename="../../../Include/ihotfgui/CFileNamingParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+120"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+120"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+120"/>
         <source>File Naming Parameters</source>
         <translation>Parametry nazywania plików</translation>
     </message>
     <message>
         <location line="+24"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Existing Files</source>
         <translation>Istniejące pliki</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Auto Numbering</source>
         <translation>Autonumeracja</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Allow Overwrite</source>
         <translation>Pozwól nadpisać</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Output Name</source>
         <translation>Nazwa wyjściowa</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Prefix</source>
         <translation>Prefix</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/ihotfgui/ui_CFileNamingParamsGuiComp.h" line="+1"/>
         <source>Suffix</source>
         <translation>Suffix</translation>
     </message>
@@ -1625,55 +1924,64 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CFilterWidget</name>
     <message>
         <location filename="../../../Include/iblobgui/CBlobFilterGui.ui" line="+46"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+110"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+110"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+110"/>
         <source>Between</source>
         <translation>Pomiędzy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Outside</source>
         <translation>Poza</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Equal</source>
         <translation>Równy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Not Equal</source>
         <translation>Nie równy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Greater</source>
         <translation>Większy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Greater Or Equal</source>
         <translation>Większy równy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Less</source>
         <translation>Mniejszy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+1"/>
         <source>Less Or Equal</source>
         <translation>Mniejszy równy</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iblobgui/ui_CBlobFilterGui.h" line="+2"/>
         <source>and</source>
         <translation>i</translation>
     </message>
@@ -1681,41 +1989,49 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CGeneralSearchParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtipr/CGeneralSearchParamsGuiComp.ui" line="+22"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+208"/>
+        <location filename="../../../Include/iqtipr/CGeneralSearchParamsGuiComp.ui" line="+31"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+209"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+209"/>
         <source>Scaling</source>
         <translation>Skala</translation>
     </message>
     <message>
         <location line="+16"/>
         <location line="+198"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
         <location line="+10"/>
         <source>To</source>
         <translation>Do</translation>
     </message>
     <message>
         <location line="-185"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-9"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-9"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-9"/>
         <source>%</source>
         <translation></translation>
     </message>
     <message>
         <location line="+41"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
         <source>All</source>
         <translation>Wszystko</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
         <source>Rotation</source>
         <translation>Obrót</translation>
     </message>
     <message>
         <location line="+10"/>
         <location line="+45"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+1"/>
         <location line="+3"/>
         <source>From</source>
         <translation>Od</translation>
@@ -1723,20 +2039,24 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <message>
         <location line="-32"/>
         <location line="+45"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
         <location line="+3"/>
         <source>°</source>
         <translation></translation>
     </message>
     <message>
         <location line="-20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="-2"/>
         <source>Minimum Score</source>
         <translation>Minimalna zgodność</translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CGeneralSearchParamsGuiComp.h" line="+3"/>
         <source>Model Occurrence</source>
         <translation>Wystąpienia modelu</translation>
     </message>
@@ -1745,43 +2065,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CGeneralSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtinsp/CGeneralSupplierGuiComp.ui" line="+37"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+188"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+188"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+188"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location line="+28"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+47"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="+18"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Results</source>
         <translation>Wyniki</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
@@ -1813,25 +2140,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CImageInterpolationParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CImageInterpolationParamsGuiComp.ui" line="+28"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+75"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+75"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+75"/>
         <source>Mode</source>
         <translation>Tryb</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+3"/>
         <source>No Interpolation</source>
         <translation>Bez interpolacji</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
         <source>Bilinear</source>
         <translation>Bilinearny</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CImageInterpolationParamsGuiComp.h" line="+1"/>
         <source>Bicubic</source>
         <translation>Bikubiczny</translation>
     </message>
@@ -1840,49 +2171,57 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CInspectionTaskGuiComp</name>
     <message>
         <location filename="../../../Include/iqtinsp/CInspectionTaskGuiComp.ui" line="+70"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+225"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+225"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+225"/>
         <source>Source</source>
         <translation>Źródło</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="-1"/>
         <source>Messages</source>
         <translation>Komunikaty</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
         <source>Inspection</source>
         <translation>Inspekcja</translation>
     </message>
     <message>
         <location line="+48"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+3"/>
         <source>Recalculate all processing steps</source>
         <translation>Przelicz wszystkie kroki przetwarzania</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
         <source>Test All</source>
         <translation>Testuj wszystko</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
         <source>Do processing steps automatically</source>
         <translation>Przetwarzaj automatycznie</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h" line="+2"/>
         <source>Additional clipboard and IO operations</source>
         <translation>Dodatkowe operacje Wej./Wyj. oraz schowka</translation>
     </message>
@@ -1891,37 +2230,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CLineProjectionSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CLineProjectionSupplierGuiComp.ui" line="+35"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+133"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+133"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+133"/>
         <source>Processing</source>
         <translation>Przetwarzanie</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Projection</source>
         <translation>Projekcja</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+41"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
@@ -1929,26 +2274,30 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CLoginBarGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtauth/CLoginBarGuiComp.ui" line="+32"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+127"/>
+        <location filename="../../../Include/iqtauth/CLoginBarGuiComp.ui" line="+50"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+128"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+128"/>
         <source>User</source>
         <translation>Użytkowniik</translation>
     </message>
     <message>
-        <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location line="+34"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
         <source>Password</source>
         <translation>Hasło</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
         <source>Login</source>
         <translation>Zaloguj</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CLoginBarGuiComp.h" line="+1"/>
         <source>Logout</source>
         <translation>Wyloguj</translation>
     </message>
@@ -1964,69 +2313,81 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CMultiBitmapSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtcam/CMultiBitmapSupplierGuiComp.ui" line="+71"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+239"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+239"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+239"/>
         <source>Snap</source>
         <translation>Zdjęcie</translation>
     </message>
     <message>
         <location line="+26"/>
         <location line="+101"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location line="+16"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
         <location line="+16"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
         <source>No image selected</source>
         <translation>Nie wybrano obrazu</translation>
     </message>
     <message>
         <location line="+71"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+47"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="-258"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="-22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="-22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="-22"/>
         <source>Do continious snap, if activated</source>
         <translation>Robienie zdjęć w trybie ciągłym</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
         <source>Save the currently selected image continuously</source>
         <translation>Zapisuj aktualnie wybrany obraz w sposób ciągły</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
         <source>Export the current selected image</source>
         <translation>Eksportuj aktualnie wybrany obraz</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
         <source>Save all camera images in a document continiously</source>
         <translation>Zapisuj wszystkie obrazy w dokumencie w sposób ciągły</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CMultiBitmapSupplierGuiComp.h" line="+4"/>
         <source>Export all camera images in a document</source>
         <translation>Zapisuj wszystkie obrazy w dokumencie</translation>
     </message>
@@ -2035,25 +2396,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CMultiLineProjectionSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CMultiLineProjectionSupplierGuiComp.ui" line="+129"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+148"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+151"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+151"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="-94"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="-4"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Results</source>
         <translation>Wyniki</translation>
     </message>
     <message>
         <location line="+38"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineProjectionSupplierGuiComp.h" line="+1"/>
         <source>Current Projection</source>
         <translation>Aktualna projekcja</translation>
     </message>
@@ -2062,13 +2427,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CMultiLineSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CMultiLineSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+103"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+103"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+103"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CMultiLineSupplierGuiComp.h" line="+2"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
@@ -2077,25 +2444,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CNumericValueWidget</name>
     <message>
         <location filename="../../../Include/iqtmeas/CNumericValueWidget.ui" line="+53"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+111"/>
         <source>[unit]</source>
         <translation></translation>
     </message>
     <message>
         <location line="-16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="-1"/>
         <source>Value</source>
         <translation>Wartość</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+2"/>
         <source>Min</source>
         <translation>Min.</translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmeas/ui_CNumericValueWidget.h" line="+1"/>
         <source>Max</source>
         <translation>Maks.</translation>
     </message>
@@ -2116,13 +2487,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location filename="../../../Include/icmpstr/CPackageOverviewComp.ui" line="+32"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+246"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+261"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+261"/>
         <source>List of registered component types</source>
         <translation>Lista zarejestrowanych komponentów</translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-2"/>
         <source>Name</source>
         <translation>Nazwie</translation>
     </message>
@@ -2138,7 +2511,14 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+39"/>
         <location line="+39"/>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+9"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+9"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+9"/>
         <location line="+6"/>
         <location line="+6"/>
         <location line="+6"/>
@@ -2155,7 +2535,13 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+39"/>
         <location line="+39"/>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-34"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-34"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-34"/>
         <location line="+6"/>
         <location line="+6"/>
         <location line="+6"/>
@@ -2166,49 +2552,57 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="-209"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-33"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-33"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="-33"/>
         <source>Interface</source>
         <translation>Interfejs</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Company</source>
         <translation>Firma</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Author</source>
         <translation>Autor</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Category</source>
         <translation>Kategoria</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Tag</source>
         <translation>Tag</translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+6"/>
         <source>Keyword</source>
         <translation>Słowa klucz.</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CPackageOverviewComp.h" line="+2"/>
         <source>Enable Filters</source>
         <translation>Włącz filtry</translation>
     </message>
@@ -2217,25 +2611,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CPatternTeachingControllerGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CPatternTeachingControllerGuiComp.ui" line="+37"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+96"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+96"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+96"/>
         <source>Pattern not present</source>
         <translation>Brak wzorca</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
         <source>Learn</source>
         <translation>Naucz</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
         <source>Reset</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CPatternTeachingControllerGuiComp.h" line="+1"/>
         <source>Edit...</source>
         <translation>Edytuj...</translation>
     </message>
@@ -2244,25 +2642,29 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CPlaybackControllerGuiComp</name>
     <message>
         <location filename="../../../Include/iqtmm/CPlaybackControllerGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+124"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+124"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+124"/>
         <source>Play</source>
         <translation>Odtwórz</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
         <source>H:mm:ss.zzz</source>
         <translation>H:mm:ss.zzz</translation>
     </message>
     <message>
         <location line="+45"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
         <source>/</source>
         <translation>/</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmm/ui_CPlaybackControllerGuiComp.h" line="+1"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -2271,19 +2673,22 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CProcessedBitmapView</name>
     <message>
         <location filename="../../../Include/iqtipr/CProcessedBitmapView.ui" line="+46"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+134"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+134"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+134"/>
         <source>Width</source>
         <translation>Szerokość</translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
         <source>Height</source>
         <translation>Wysokość</translation>
     </message>
     <message>
         <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CProcessedBitmapView.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
@@ -2323,43 +2728,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location filename="../../../Include/iprocgui/CProcessorControlGuiComp.ui" line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+135"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+135"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+135"/>
         <source>Do single processing step</source>
         <translation>Wykonaj pojedynczy krok przetwarzania</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
         <source>Process</source>
         <translation>Przetwórz</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
         <source>Enable/disable continuous processing</source>
         <translation>Włącz lub wyłącz przetwarzanie w trybie ciągłym</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+2"/>
         <source>Save Result...</source>
         <translation>Zapisz wynik...</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iprocgui/ui_CProcessorControlGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
@@ -2368,7 +2780,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CPulseParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtsig/CPulseParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+111"/>
         <source>Delay time</source>
         <translation>Opóźnienie</translation>
     </message>
@@ -2376,7 +2789,10 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
         <location line="+20"/>
         <location line="+27"/>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+1"/>
+        <location line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+1"/>
         <location line="+2"/>
         <location line="+2"/>
         <source>ms</source>
@@ -2384,13 +2800,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     </message>
     <message>
         <location line="-47"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="-3"/>
         <source>Duration time</source>
         <translation>Czas trwania</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CPulseParamsGuiComp.h" line="+2"/>
         <source>Relaxing time</source>
         <translation>Czas relaksacji</translation>
     </message>
@@ -2398,26 +2816,30 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CQuickHelpGuiComp</name>
     <message>
-        <location filename="../../../Include/icmpstr/CQuickHelpGuiComp.ui" line="+50"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+125"/>
+        <location filename="../../../Include/icmpstr/CQuickHelpGuiComp.ui" line="+68"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+122"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+122"/>
         <source>There is no description available</source>
         <translation>Nie ma dostępnego opisu</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
         <source>New Description</source>
         <translation>Nowy opis</translation>
     </message>
     <message>
-        <location line="+29"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location line="+38"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
         <source>Edit Description</source>
         <translation>Edytuj opis</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CQuickHelpGuiComp.h" line="+1"/>
         <source>Show Technical Documentation</source>
         <translation>Pokaż dokumentację techniczną</translation>
     </message>
@@ -2426,73 +2848,85 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CRegistryPropEditorComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CRegistryPropEditorComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+232"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+239"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+239"/>
         <source>Properies of Registry</source>
         <translation>Właściwości rejestru</translation>
     </message>
     <message>
         <location line="+22"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Description</source>
         <translation>Opis</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Registry Info</source>
         <translation>Informacja rejestru</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Company</source>
         <translation>Firma</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
         <source>List of authors, use comma as separator</source>
         <translation>Lista autorów rozdzielona przecinkami</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+2"/>
         <source>Authors</source>
         <translation>Autorzy</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Category</source>
         <translation>Kategoria</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Tags</source>
         <translation>Tagi</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Keywords</source>
         <translation>Słowa kluczowe</translation>
     </message>
     <message>
         <location line="+148"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>Errors</source>
         <translation>Błędy</translation>
     </message>
     <message>
         <location line="+53"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryPropEditorComp.h" line="+1"/>
         <source>-</source>
         <translation>-</translation>
     </message>
@@ -2501,37 +2935,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CRegistryTreeViewComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CRegistryTreeViewComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+111"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+111"/>
         <source>Properies of Registry</source>
         <translation>Własności rejestru</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
         <source>Filter</source>
         <translation>Filtr</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+1"/>
         <source>Show Only Errors</source>
         <translation>Pokaż tylko błędy</translation>
     </message>
     <message>
         <location line="+27"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="+4"/>
         <source>Component Name</source>
         <translation>Nazwa komponentu</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
         <source>Component Type ID</source>
         <translation>ID typu komponentu</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CRegistryTreeViewComp.h" line="-1"/>
         <source>Package</source>
         <translation>Pakiet</translation>
     </message>
@@ -2540,43 +2980,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CSampleAcquisitionGuiComp</name>
     <message>
         <location filename="../../../Include/iqtsig/CSampleAcquisitionGuiComp.ui" line="+56"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+188"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+188"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+188"/>
         <source>Sampling</source>
         <translation>Próbkowanie</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Start</source>
         <translation>Start</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Save Samples...</source>
         <translation>Zapisz próbki</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSampleAcquisitionGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
@@ -2585,37 +3032,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CSamplingParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtsig/CSamplingParamsGuiComp.ui" line="+19"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+82"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+82"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+82"/>
         <source>Interval</source>
         <translation>Interwał</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
         <source>ms</source>
         <translation></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
         <source>Mode</source>
         <translation>Tryb</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+3"/>
         <source>Single</source>
         <translation>Pojedynczy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
         <source>Periodic</source>
         <translation>Okresowy</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CSamplingParamsGuiComp.h" line="+1"/>
         <source>Synchronized</source>
         <translation>Zsynchronizowany</translation>
     </message>
@@ -2624,37 +3077,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CScaleCalibrationEditorComp</name>
     <message>
         <location filename="../../../Include/iqtcam/CScaleCalibrationEditorComp.ui" line="+17"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+169"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+172"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+172"/>
         <source>Scale</source>
         <translation>Skala</translation>
     </message>
     <message>
         <location line="+22"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
         <location line="+33"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
         <source>Calibration</source>
         <translation>Kalibracja</translation>
     </message>
     <message>
         <location line="+28"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
         <source>Nominal radius</source>
         <translation>Promień nominalny</translation>
     </message>
     <message>
         <location line="+30"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CScaleCalibrationEditorComp.h" line="+1"/>
         <source>Calibrate</source>
         <translation>Kalibruj</translation>
     </message>
@@ -2663,73 +3122,85 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CSearchBasedFeaturesSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CSearchBasedFeaturesSupplierGuiComp.ui" line="+37"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+166"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+170"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+170"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+43"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+2"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+44"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="+44"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+6"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
         <source>Score</source>
         <translation>Jakość</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
         <source>Score of model [%]</source>
         <translation>Jakość modelu</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-1"/>
         <source>Position Y of found model in logical units</source>
         <translation>Wspołrzędna Y znalezionego modelu wyrażona w jednostkach logicznych</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-6"/>
         <source>Angle</source>
         <translation>Kąt</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="+5"/>
         <source>Angle of found model [°]</source>
         <translation>Kąt znalezionego modelu [°]</translation>
     </message>
     <message>
         <location line="-11"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-4"/>
         <source>Position</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CSearchBasedFeaturesSupplierGuiComp.h" line="-2"/>
         <source>Scale</source>
         <translation>Skala</translation>
     </message>
@@ -2738,13 +3209,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CSnapImageGuiComp</name>
     <message>
         <location filename="../../../Include/iqtcam/CSnapImageGuiComp.ui" line="+71"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+175"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+179"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+179"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message>
         <location line="+58"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="+3"/>
         <source>Snap</source>
         <translation>Zdjęcie</translation>
     </message>
@@ -2755,21 +3228,26 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <message>
         <location line="-34"/>
         <location line="+120"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
         <location line="+5"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="-60"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="-43"/>
         <location line="+90"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
+        <location line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtcam/ui_CSnapImageGuiComp.h" line="-2"/>
         <location line="+3"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
@@ -2778,34 +3256,40 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
 <context>
     <name>CTcpTerminalGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtex/CTcpTerminalGuiComp.ui" line="+43"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+135"/>
+        <location filename="../../../Include/iqtex/CTcpTerminalGuiComp.ui" line="+49"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+140"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+140"/>
         <source>Sent Commands</source>
         <translation>Wysłane instrukcje</translation>
     </message>
     <message>
         <location line="+8"/>
         <location line="+63"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
+        <location line="+5"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
         <location line="+5"/>
         <source>Clear</source>
         <translation>Wyczyść</translation>
     </message>
     <message>
         <location line="-54"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="-4"/>
         <source>Command</source>
         <translation>Instrukcja</translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+1"/>
         <source>Send</source>
         <translation>Wyślij</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtex/ui_CTcpTerminalGuiComp.h" line="+2"/>
         <source>Received</source>
         <translation>Otrzymane</translation>
     </message>
@@ -2814,43 +3298,50 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CTriggerParamsGuiComp</name>
     <message>
         <location filename="../../../Include/iqtsig/CTriggerParamsGuiComp.ui" line="+20"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+86"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+86"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+86"/>
         <source>No trigger</source>
         <translation>Bez impulsu</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Continuous</source>
         <translation>Tryb ciągły</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Rising edge</source>
         <translation>Narastające zbocze</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Falling edge</source>
         <translation>Opadające zbocze</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Positive level</source>
         <translation>Poziom dodatni</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Negative level</source>
         <translation>Poziom ujemny</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtsig/ui_CTriggerParamsGuiComp.h" line="+1"/>
         <source>Software</source>
         <translation>Software&apos;owy</translation>
     </message>
@@ -2859,13 +3350,15 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CUserGuiComp</name>
     <message>
         <location filename="../../../Include/iqtauth/CUserGuiComp.ui" line="+36"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+67"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+67"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+67"/>
         <source>Change Password</source>
         <translation>Zmień hasło</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserGuiComp.h" line="+1"/>
         <source>User Manager</source>
         <translation>Manager użytkowników</translation>
     </message>
@@ -2874,37 +3367,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CUserManagerDialog</name>
     <message>
         <location filename="../../../Include/iqtauth/CUserManagerDialog.ui" line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+102"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+102"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+102"/>
         <source>User Manager (User %1, Group %2)</source>
         <translation>Manager użytkowników (użytkownik %1, grupa %2)</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+3"/>
         <source>User</source>
         <translation>Użytkownik</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="-1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="-1"/>
         <source>Group</source>
         <translation>Grupa</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+2"/>
         <source>Add User</source>
         <translation>Dodaj użytkownika</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
         <source>Reset Password</source>
         <translation>Zmień hasło</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtauth/ui_CUserManagerDialog.h" line="+1"/>
         <source>Remove User</source>
         <translation>Usuń użytkownika</translation>
     </message>
@@ -2913,37 +3412,43 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CValueSupplierGuiComp</name>
     <message>
         <location filename="../../../Include/iqtipr/CValueSupplierGuiComp.ui" line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+183"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+183"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+183"/>
         <source>Point</source>
         <translation>Pozycja</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
         <source>Test</source>
         <translation>Test</translation>
     </message>
     <message>
         <location line="+64"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+3"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
         <location line="+38"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation>Wczytaj...</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
         <source>Save...</source>
         <translation>Zapisz...</translation>
     </message>
     <message>
         <location line="+18"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtipr/ui_CValueSupplierGuiComp.h" line="+1"/>
         <source>Intermediate Results</source>
         <translation>Wyniki pośrednie</translation>
     </message>
@@ -2952,7 +3457,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CVideoPlayerGuiComp</name>
     <message>
         <location filename="../../../Include/iqtmm/CVideoPlayerGuiComp.ui" line="+43"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iqtmm/ui_CVideoPlayerGuiComp.h" line="+88"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iqtmm/ui_CVideoPlayerGuiComp.h" line="+88"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iqtmm/ui_CVideoPlayerGuiComp.h" line="+88"/>
         <source>Current Frame</source>
         <translation>Aktualna ramka</translation>
     </message>
@@ -2961,7 +3467,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CVisualRegistryEditorComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CVisualRegistryEditorComp.ui" line="+50"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CVisualRegistryEditorComp.h" line="+91"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CVisualRegistryEditorComp.h" line="+91"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CVisualRegistryEditorComp.h" line="+91"/>
         <source>&lt;&lt; root &gt;&gt;</source>
         <translation>&lt;&lt; root &gt;&gt;</translation>
     </message>
@@ -2970,7 +3477,8 @@ Opis licencji w pliku &quot;License.txt&quot;</translation>
     <name>CWizardOptionsListGuiComp</name>
     <message>
         <location filename="../../../Include/iwizgui/CWizardOptionsListGuiComp.ui" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h" line="+70"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h" line="+70"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/iwizgui/ui_CWizardOptionsListGuiComp.h" line="+70"/>
         <source>Options</source>
         <translation>Opcje</translation>
     </message>
@@ -3041,7 +3549,15 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Tolerancja pozycji dla redukcji ilości punktów</translation>
     </message>
     <message>
-        <location filename="../../../Include/iedge/CFastEdgesExtractorComp.cpp" line="+238"/>
+        <location filename="../../../Include/iedge/CFastEdgesExtractorComp.cpp" line="+71"/>
+        <location filename="../../../Include/iipr/CConvolutionProcessorComp.cpp" line="+416"/>
+        <location filename="../../../Include/iipr/CImageCopyProcessorComp.cpp" line="+284"/>
+        <location filename="../../../Include/iipr/CImageNormalizeProcessorComp.cpp" line="+314"/>
+        <source>AOI type is not supported</source>
+        <translation>Typ AOI nie jest wspierany</translation>
+    </message>
+    <message>
+        <location line="+139"/>
         <source>Threshold</source>
         <comment>Contour extraction threshold</comment>
         <translation>Wartość progowa</translation>
@@ -3096,7 +3612,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation type="vanished">Przetwarzanie %1 się nie powiodło</translation>
     </message>
     <message>
-        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="+301"/>
+        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="+305"/>
         <source>Inspection task</source>
         <translation>Inspekcja</translation>
     </message>
@@ -3141,7 +3657,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation type="vanished">Kanał oryginalego odciania szarości</translation>
     </message>
     <message>
-        <location filename="../../../Include/iipr/CRectImageSmoothProcessorComp.cpp" line="+209"/>
+        <location filename="../../../Include/iipr/CRectImageSmoothProcessorComp.cpp" line="+495"/>
         <source>Filter</source>
         <translation>Filtr</translation>
     </message>
@@ -3181,7 +3697,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
     </message>
     <message>
         <location filename="../../../Include/imeas/CDataSequenceInfoBase.cpp" line="+48"/>
-        <location filename="../../../Include/iqtcam/CMultiBitmapSupplierGuiComp.cpp" line="+229"/>
+        <location filename="../../../Include/iqtcam/CMultiBitmapSupplierGuiComp.cpp" line="+241"/>
         <source>Channel %1</source>
         <translation>Kanał %1</translation>
     </message>
@@ -3218,7 +3734,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Czas przetwarzania: %1 ms</translation>
     </message>
     <message>
-        <location filename="../../../Include/iedgegui/CEdgeLinesSupplierEditorComp.cpp" line="+140"/>
+        <location filename="../../../Include/iedgegui/CEdgeLinesSupplierEditorComp.cpp" line="+141"/>
         <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+69"/>
         <location line="+40"/>
         <location filename="../../../Include/iqtcam/CSnapImageGuiComp.cpp" line="+232"/>
@@ -3379,6 +3895,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
     <message>
         <location line="-52"/>
         <location line="+60"/>
+        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="+312"/>
         <source>Search model was not found</source>
         <translation>Model nie został znaleziony</translation>
     </message>
@@ -3451,7 +3968,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation type="vanished">Plik %1 został zmieniony</translation>
     </message>
     <message>
-        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="-85"/>
+        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="-88"/>
         <source>Processing took %1 ms</source>
         <translation>Przetwarzanie trwało %1 ms</translation>
     </message>
@@ -3467,10 +3984,15 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Weryfikacja koloru się nie powiodła</translation>
     </message>
     <message>
-        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="+200"/>
+        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="-112"/>
         <location line="+79"/>
         <source>Search not successfull</source>
         <translation>Szukanie się nie powiodło</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Search model was found</source>
+        <translation>Model nieznaleziony </translation>
     </message>
     <message>
         <location filename="../../../Include/iauth/CSimpleLoginComp.cpp" line="+13"/>
@@ -3500,7 +4022,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Zmiana nazwy użytkownika</translation>
     </message>
     <message>
-        <location filename="../../../Include/icmpstr/CAttributeEditorComp.cpp" line="+32"/>
+        <location filename="../../../Include/icmpstr/CAttributeEditorComp.cpp" line="+33"/>
         <source>Change attribute</source>
         <translation>Zmiena atrybutu</translation>
     </message>
@@ -3651,7 +4173,7 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Bezwymiarowa</translation>
     </message>
     <message>
-        <location filename="../../../Include/iinsp/CCheckboardCalibSupplierComp.cpp" line="+23"/>
+        <location filename="../../../Include/iipr/CCheckboardCalibSupplierComp.cpp" line="+58"/>
         <source>No processor set</source>
         <translation>Nie ustawiono procesora</translation>
     </message>
@@ -3661,14 +4183,54 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Nie mogę wyekstrahować lini z obrazu</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+32"/>
         <source>No enough lines found</source>
         <translation>Nie znaleziono wystarczającej liczby linii</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+46"/>
+        <source>No vanishing points found</source>
+        <translation>Nie znaleziono punktu zbieżności</translation>
+    </message>
+    <message>
+        <location line="+117"/>
+        <source>Expected %1 lines for vanishing point %2, but found %3</source>
+        <translation>Oczekiwano %1 linii do punktu zbieżności %2, ale znaleziono %3</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Calibration successfull found</source>
+        <translation>Kalibracja zakończona sukcesem</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Calibration not found</source>
+        <translation>Kalibracja nie powiodła się</translation>
+    </message>
+    <message>
+        <location line="+19"/>
         <source>Input image could not be provided</source>
         <translation>Brak obrazu wejściowego</translation>
+    </message>
+    <message>
+        <location line="+99"/>
+        <source>Cell Size</source>
+        <translation>Rozmiar pola</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Grid Size</source>
+        <translation>Rozmiar siatki</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Size of single cell</source>
+        <translation>Rozmiar pojedznczego pola siatki</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Number of grid cells in each checkboard row and column</source>
+        <translation>Ilość pól siatki dla szachownicy w poziomie i pionie</translation>
     </message>
     <message>
         <location filename="../../../Include/iipr/CDifferenceBitmapSupplierComp.cpp" line="+68"/>
@@ -3688,15 +4250,15 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
     <message>
         <location filename="../../../Include/iipr/CEdgeDistancesSupplierComp.cpp" line="+45"/>
         <location filename="../../../Include/iipr/CImageHistogramSupplierComp.cpp" line="+30"/>
-        <location filename="../../../Include/iipr/CMultiLineProjectionSupplierComp.cpp" line="+16"/>
-        <location filename="../../../Include/iipr/CPositionFromImageSupplierComp.cpp" line="+69"/>
+        <location filename="../../../Include/iipr/CMultiLineProjectionSupplierComp.cpp" line="+23"/>
+        <location filename="../../../Include/iipr/CPositionFromImageSupplierComp.cpp" line="+66"/>
         <location filename="../../../Include/iipr/CProcessedBitmapSupplierComp.cpp" line="+48"/>
-        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="-121"/>
+        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="-153"/>
         <source>No input image</source>
         <translation>Brak obrazu wejściowego</translation>
     </message>
     <message>
-        <location filename="../../../Include/iipr/CMultiLineProjectionSupplierComp.cpp" line="+7"/>
+        <location filename="../../../Include/iipr/CMultiLineProjectionSupplierComp.cpp" line="+11"/>
         <source>No projection lines found</source>
         <translation>Nie znaleziono linii projekcji</translation>
     </message>
@@ -3710,20 +4272,92 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <source>Calculation of projection %1 failed</source>
         <translation>Obliczanie projekcji %1 nie powiodło się</translation>
     </message>
+    <message>
+        <location filename="../../../Include/iipr/CConvolutionProcessorComp.cpp" line="-242"/>
+        <source>Output image could not be created</source>
+        <translation>Obraz wynikowy nie mógł zostać stworzony</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+14"/>
+        <location line="+12"/>
+        <location line="+156"/>
+        <location line="+11"/>
+        <source>ConvolutionProcessor</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="-180"/>
+        <source>Kernel size to small</source>
+        <translation>Za małe jądro konwolucji</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Kernel size to big</source>
+        <translation>Za duże jądro konwolucji</translation>
+    </message>
+    <message>
+        <location line="+156"/>
+        <location filename="../../../Include/iipr/CImageCopyProcessorComp.cpp" line="-37"/>
+        <location filename="../../../Include/iipr/CImageNormalizeProcessorComp.cpp" line="-45"/>
+        <source>Input image format &apos;%1&apos; not supported</source>
+        <translation>Typ obrazu wejściowego &apos;%1&apos; nie jest wspierany</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <location filename="../../../Include/iipr/CImageCopyProcessorComp.cpp" line="+11"/>
+        <location filename="../../../Include/iipr/CImageNormalizeProcessorComp.cpp" line="+11"/>
+        <source>Cannot produce output image in format &apos;%1&apos; from input format &apos;%2&apos;</source>
+        <translation>Nie można stworzyć obrazu w formacie &apos;%1&apos; dla formatu wejściowego &apos;%2&apos;</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Kernel of convolution not found</source>
+        <translation>Brak jądra konwolucji</translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iipr/CImageCopyProcessorComp.cpp" line="-136"/>
+        <location filename="../../../Include/iipr/CImageNormalizeProcessorComp.cpp" line="-151"/>
+        <source>Could not create output image</source>
+        <translation>Nie można stworzyć obrazu wyjściowego</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+126"/>
+        <location line="+11"/>
+        <location filename="../../../Include/iipr/CImageNormalizeProcessorComp.cpp" line="+0"/>
+        <location line="+141"/>
+        <location line="+11"/>
+        <source>ImageNormalizeProcessor</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iipr/CTubeProjectionLinesProviderComp.cpp" line="+62"/>
+        <source>Projection lines</source>
+        <translation>Linie projekcji</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Line %1</source>
+        <translation>Linia %1</translation>
+    </message>
 </context>
 <context>
     <name>XpcEditorComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CXpcEditorComp.ui" line="+27"/>
         <location line="+276"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+497"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+497"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+497"/>
         <location line="+8"/>
         <source>Packages</source>
         <translation>Pakiety</translation>
     </message>
     <message>
         <location line="-270"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-24"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-24"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-24"/>
         <source>Inherited configuration files</source>
         <translation>Zawarte pliki konfiguracyjne</translation>
     </message>
@@ -3732,7 +4366,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="+134"/>
         <location line="+133"/>
         <location line="+134"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+1"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+1"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+1"/>
         <location line="+8"/>
         <location line="+8"/>
         <location line="+8"/>
@@ -3744,7 +4382,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="+134"/>
         <location line="+133"/>
         <location line="+134"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
         <location line="+8"/>
         <location line="+8"/>
         <location line="+8"/>
@@ -3756,7 +4398,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="+133"/>
         <location line="+134"/>
         <location line="+130"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
         <location line="+8"/>
         <location line="+8"/>
         <location line="+8"/>
@@ -3767,7 +4413,10 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="-390"/>
         <location line="+133"/>
         <location line="+134"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-22"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-22"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-22"/>
         <location line="+8"/>
         <location line="+8"/>
         <source>File selection</source>
@@ -3779,7 +4428,11 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <location line="+133"/>
         <location line="+134"/>
         <location line="+130"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-14"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-14"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-14"/>
         <location line="+8"/>
         <location line="+8"/>
         <location line="+8"/>
@@ -3788,19 +4441,22 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
     </message>
     <message>
         <location line="-383"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-23"/>
         <source>Package directories</source>
         <translation>Katalogi pakietów</translation>
     </message>
     <message>
         <location line="+268"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+24"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+24"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="+24"/>
         <source>Project Files</source>
         <translation>Pliki projektu</translation>
     </message>
     <message>
         <location line="+112"/>
-        <location filename="../../../AuxInclude/Qt5/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-3"/>
+        <location filename="../../../AuxInclude/Qt5_VC12_64/GeneratedFiles/icmpstr/ui_CXpcEditorComp.h" line="-3"/>
         <source>File selection</source>
         <translation>Wybór pliku</translation>
     </message>
@@ -3932,7 +4588,27 @@ Teraz można wystartować serwis z użyciem managera serwisów.</translation>
         <translation>Typ atrybutu &apos;%1&apos; nie jest wspierany</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+39"/>
+        <source>Information: </source>
+        <translation>Informacja: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Warning: </source>
+        <translation>Ostrzeżenie: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error: </source>
+        <translation>Błąd: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Critical error: </source>
+        <translation>Błąd krytyczny: </translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>Optional %1</source>
         <translation>Opcjonalny %1</translation>
     </message>
@@ -3964,7 +4640,7 @@ Interfaces:</source>
  - %1 (opcjonalny)</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+65"/>
         <source>&lt;import&gt;</source>
         <translation>&lt;import&gt;</translation>
     </message>
@@ -4032,6 +4708,29 @@ Interfaces:</source>
         <location line="+1"/>
         <source>Convert component to another one</source>
         <translation>Konweruje komponent do innego typu</translation>
+    </message>
+</context>
+<context>
+    <name>icmpstr::CMultiAttributeEditor</name>
+    <message>
+        <location filename="../../../Include/icmpstr/CMultiAttributeEditor.cpp" line="+260"/>
+        <source>Information: </source>
+        <translation>Informacja: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Warning: </source>
+        <translation>Ostreżenie: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error: </source>
+        <translation>Błąd: </translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Critical error: </source>
+        <translation>Błąd krytyczny: </translation>
     </message>
 </context>
 <context>
@@ -4134,21 +4833,21 @@ Interfaces:</source>
         <location line="+15"/>
         <location line="+15"/>
         <location line="+14"/>
-        <location line="+216"/>
-        <location line="+20"/>
-        <location line="+21"/>
-        <location line="+19"/>
-        <location line="+37"/>
-        <location line="+27"/>
+        <location line="+239"/>
         <location line="+17"/>
-        <location line="+53"/>
-        <location line="+48"/>
-        <location line="+17"/>
+        <location line="+18"/>
+        <location line="+16"/>
+        <location line="+33"/>
+        <location line="+23"/>
+        <location line="+14"/>
+        <location line="+50"/>
+        <location line="+45"/>
+        <location line="+14"/>
         <source>Attribute Consistency Check</source>
         <translation>Kontrola poprawności atrybutu</translation>
     </message>
     <message>
-        <location line="-522"/>
+        <location line="-516"/>
         <location line="+15"/>
         <source>Reference or factory %1 in %2 cannot be undefined</source>
         <translation>Referencja lub fabryka %1 w %2 nie może być niezdefiniowana</translation>
@@ -4164,50 +4863,91 @@ Interfaces:</source>
         <translation>Nie znaleziono elementu %1</translation>
     </message>
     <message>
-        <location line="+214"/>
+        <location line="+158"/>
+        <source>%1 in %2: </source>
+        <translation>%1 w %2: </translation>
+    </message>
+    <message>
+        <location line="+81"/>
+        <source>Attribute has incompatible registry entry</source>
+        <translation>Atrybut ma niezgodne wpisy w rejestrze</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Factory try to access subcomponents &apos;%1&apos;, which is allowed only for references</source>
+        <translation>Faktoryzacja podelementów komponentu &apos;%1&apos; nie jest wspierana w ACF</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Reference or factory is set to %1, but it cannot be resolved</source>
+        <translation>Nie można znaleźć wskazanego komponentu &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location line="+33"/>
+        <source>Reference or factory is set to %1, but its subelement cannot be found</source>
+        <translation>Nie można znaleźć wskazanego podkomponentu &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Reference or factory uses embedded type &apos;%1&apos;, but this type is undefined</source>
+        <translation>Typ wskazanego komponentu wewn. &apos;%1&apos; nie jest zdefiniowany</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Reference or factory contains &apos;%1&apos;, but this element doesn&apos;t exist</source>
+        <translation>Nie istnieje wskazany komponent &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>Reference or factory points at &apos;%1&apos;, but it doesn&apos;t implement interface %2</source>
+        <translation>Wskazany komponent &apos;%1&apos; nie implementuje interfejsu %2</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Reference or factory points at &apos;%1&apos;, but it doesn&apos;t implement any optional interface</source>
+        <translation>Wskazany komponent &apos;%1&apos; nie implementuje ani jednego opcjonalnego interfejsu</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; points at &apos;%3&apos;, but it is not accessible in actual configuration</source>
+        <translation>Przez |%1| w |%2| wskazany komponent &apos;%3&apos; nie jest dostępny w aktualnej konfiguracji</translation>
+    </message>
+    <message>
         <source>Attribute &apos;%1&apos; in &apos;%2&apos; has incompatible registry entry</source>
-        <translation>Atrybut &apos;%1&apos; w &apos;%2&apos; ma niezgodny typ w rejestrze</translation>
+        <translation type="vanished">Atrybut &apos;%1&apos; w &apos;%2&apos; ma niezgodny typ w rejestrze</translation>
     </message>
     <message>
-        <location line="+19"/>
         <source>Factory &apos;%1&apos; in &apos;%2&apos; try to access subcomponents &apos;%3&apos;, which is allowed only for references</source>
-        <translation>Factory &apos;%1&apos; w &apos;%2&apos; adresuje podkomponent &apos;%3&apos;, co jest dozwolone wyłącznie referencjom</translation>
+        <translation type="vanished">Factory &apos;%1&apos; w &apos;%2&apos; adresuje podkomponent &apos;%3&apos;, co jest dozwolone wyłącznie referencjom</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; is set to %3, but it cannot be resolved</source>
-        <translation>Referencja lub fabryka %1 w %2 zawiera nieistniejący %3</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 zawiera nieistniejący %3</translation>
     </message>
     <message>
-        <location line="+19"/>
-        <location line="+37"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; is set to %3, but its subelement cannot be found</source>
-        <translation>Referencja lub fabryka %1 w %2 zawiera nieistniejący podelement %3</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 zawiera nieistniejący podelement %3</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; uses embedded type &apos;%3&apos;, but this type is undefined</source>
-        <translation>Referencja lub fabryka %1 w %2 zawiera zagnieżdżony niezdefiniowany typ %3</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 zawiera zagnieżdżony niezdefiniowany typ %3</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; contains &apos;%3&apos;, but this element doesn&apos;t exist</source>
-        <translation>Referencja lub fabryka %1 w %2 zawiera nieistniejący %3</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 zawiera nieistniejący %3</translation>
     </message>
     <message>
-        <location line="+52"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it doesn&apos;t implement interface %4</source>
-        <translation>Referencja lub fabryka %1 w %2 wskazuje na %3 który nie implementuje %4</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 wskazuje na %3 który nie implementuje %4</translation>
     </message>
     <message>
-        <location line="+49"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it doesn&apos;t implement any optional interface</source>
-        <translation>Referencja lub fabryka %1 w %2 wskazuje na %3 który nie implementuje żadnego opcjonalnego interfejsu</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 wskazuje na %3 który nie implementuje żadnego opcjonalnego interfejsu</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it is not accessible in actual configuration</source>
-        <translation>Referencja lub fabryka %1 w %2 wskazuje na %3 który jest niedostęny w aktualnej konfiguracji</translation>
+        <translation type="vanished">Referencja lub fabryka %1 w %2 wskazuje na %3 który jest niedostęny w aktualnej konfiguracji</translation>
     </message>
 </context>
 <context>
@@ -4956,18 +5696,18 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtcam::CMultiBitmapSupplierGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtcam/CMultiBitmapSupplierGuiComp.cpp" line="-137"/>
-        <location line="+154"/>
+        <location filename="../../../Include/iqtcam/CMultiBitmapSupplierGuiComp.cpp" line="-149"/>
+        <location line="+170"/>
         <source>(%1 x %2)</source>
         <translation>(%1 x %2)</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>No image</source>
         <translation>Bez obrazu</translation>
     </message>
     <message>
-        <location line="-141"/>
+        <location line="-156"/>
         <location line="+13"/>
         <source>Save selected image...</source>
         <translation>Zapisz wybrany obraz...</translation>
@@ -4997,7 +5737,12 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtinsp::CInspectionTaskGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtinsp/CInspectionTaskGuiComp.cpp" line="+939"/>
+        <location filename="../../../Include/iqtinsp/CInspectionTaskGuiComp.cpp" line="+828"/>
+        <source>Auxiliary Output</source>
+        <translation>Wyniki pomocnicze</translation>
+    </message>
+    <message>
+        <location line="+159"/>
         <source>Copy all</source>
         <translation>Kopiuj wszystko</translation>
     </message>
@@ -5094,7 +5839,7 @@ Proszę zmienić nowe hasło.</translation>
 <context>
     <name>iqtipr::CValueSupplierGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtipr/CValueSupplierGuiComp.cpp" line="+164"/>
+        <location filename="../../../Include/iqtipr/CValueSupplierGuiComp.cpp" line="+168"/>
         <source>(%1, %2)</source>
         <translation>(%1, %2)</translation>
     </message>
