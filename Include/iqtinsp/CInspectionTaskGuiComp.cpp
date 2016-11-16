@@ -768,6 +768,14 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 						if (shapePtr != NULL){
 							shapePtr->SetVisible(false);
 
+							const QString& objectDescription = extMessagePtr->GetAttachedObjectDescription(i);
+							if (!objectDescription.isEmpty()){
+								shapePtr->SetDefaultDescription(objectDescription);
+							}
+							else{
+								shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
+							}
+
 							shapeIndices += QVariant(resultShapes.GetCount());
 							resultShapes.PushBack(shapePtr);
 
@@ -781,6 +789,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 						iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
 						if (shapePtr != NULL){
 							shapePtr->SetVisible(false);
+							shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
 
 							shapeIndices += QVariant(resultShapes.GetCount());
 							resultShapes.PushBack(shapePtr);
@@ -824,7 +833,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 
 		messageItemPtr->setData(0, DR_SHAPE_INDICES, shapeIndices);
 
-		messageItemPtr->setText(0, "");
+		messageItemPtr->setText(0, tabName);
 		messageItemPtr->setText(1, tr("Auxiliary Output"));
 
 		MessageList->addTopLevelItem(messageItemPtr);
