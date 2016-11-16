@@ -5,7 +5,7 @@
 #include <iimg/CScanlineMask.h>
 #include <iimg/CBitmap.h>
 #include <iprm/TParamsPtr.h>
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 
 
 namespace iipr
@@ -139,13 +139,16 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, 0.5, 10.0, 0.2, posMap);
 
 	if (m_tempConsumerCompPtr.IsValid()){
-		ilog::TExtMessageModel<iimg::CBitmap>* spaceMessagePtr = new ilog::TExtMessageModel<iimg::CBitmap>(
+		ilog::CExtMessage* spaceMessagePtr = new ilog::CExtMessage(
 					istd::IInformationProvider::IC_INFO,
 					HOUGH_SPACE,
 					QString("Hough space"),
 					"LineFinder");
 
-		m_houghSpace.ExtractToBitmap(*spaceMessagePtr);
+		iimg::CBitmap* spaceMessageObjectPtr = new imod::TModelWrap<iimg::CBitmap>();
+		spaceMessagePtr->InsertAttachedObject(spaceMessageObjectPtr);
+
+		m_houghSpace.ExtractToBitmap(*spaceMessageObjectPtr);
 
 		m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(spaceMessagePtr));
 	}
@@ -162,12 +165,14 @@ int CHoughLineFinderComp::DoExtractFeatures(
 			double weight = resultIter.key() / bestWeight;
 
 			if (m_tempConsumerCompPtr.IsValid()){
-				ilog::TExtMessageModel<i2d::CPosition2d>* houghPosMessagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
+				ilog::CExtMessage* houghPosMessagePtr = new ilog::CExtMessage(
 							istd::IInformationProvider::IC_INFO,
 							FOUND_LINE,
 							QString("Hough Position (%1, %2) with weight %3").arg(houghPos.GetX()).arg(houghPos.GetY()).arg(weight),
 							"LineFinder");
-				houghPosMessagePtr->SetPosition(houghPos);
+				i2d::CPosition2d* houghPosMessageObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
+				houghPosMessageObjectPtr->SetPosition(houghPos);
+				houghPosMessagePtr->InsertAttachedObject(houghPosMessageObjectPtr);
 
 				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(houghPosMessagePtr));
 			}
@@ -183,25 +188,29 @@ int CHoughLineFinderComp::DoExtractFeatures(
 			featurePtr->SetWeight(weight);
 
 			if (m_resultConsumerCompPtr.IsValid()){
-				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
-					istd::IInformationProvider::IC_INFO,
-					FOUND_LINE,
-					QString("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
-					"LineFinder");
-				pointMessagePtr->SetPoint1(featurePtr->GetPoint1());
-				pointMessagePtr->SetPoint2(featurePtr->GetPoint2());
+				ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
+							istd::IInformationProvider::IC_INFO,
+							FOUND_LINE,
+							QString("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
+							"LineFinder");
+				i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+				pointMessageObjectPtr->SetPoint1(featurePtr->GetPoint1());
+				pointMessageObjectPtr->SetPoint2(featurePtr->GetPoint2());
+				pointMessagePtr->InsertAttachedObject(pointMessageObjectPtr);
 
 				m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 			}
 
 			if (m_tempConsumerCompPtr.IsValid()){
-				ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+				ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
 							istd::IInformationProvider::IC_INFO,
 							FOUND_LINE,
 							QString("Auxiliary line %1").arg(lineIndex + 1),
 							"LineFinder");
-				pointMessagePtr->SetPoint1(featurePtr->GetCenter());
-				pointMessagePtr->SetPoint2(imageCenter);
+				i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+				pointMessageObjectPtr->SetPoint1(featurePtr->GetCenter());
+				pointMessageObjectPtr->SetPoint2(imageCenter);
+				pointMessagePtr->InsertAttachedObject(pointMessageObjectPtr);
 
 				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 			}

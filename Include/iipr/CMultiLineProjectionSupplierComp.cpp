@@ -3,7 +3,7 @@
 
 // ACF includes
 #include <ilog/IMessageConsumer.h>
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 
 
 namespace iipr
@@ -63,13 +63,15 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 				retVal = WS_ERROR;
 			}
 
-			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
-				isOk ? istd::IInformationProvider::IC_INFO : istd::IInformationProvider::IC_ERROR,
-				iinsp::CSupplierCompBase::MI_INTERMEDIATE,
-				QString("Line %1").arg(i),
-				"Projection generator");
-			pointMessagePtr->SetPoint1(line.GetPoint1());
-			pointMessagePtr->SetPoint2(line.GetPoint2());
+			ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
+						isOk ? istd::IInformationProvider::IC_INFO : istd::IInformationProvider::IC_ERROR,
+						iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+						QString("Line %1").arg(i),
+						"Projection generator");
+			i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+			pointMessageObjectPtr->SetPoint1(line.GetPoint1());
+			pointMessageObjectPtr->SetPoint2(line.GetPoint2());
+			pointMessagePtr->InsertAttachedObject(pointMessageObjectPtr);
 
 			AddMessage(pointMessagePtr, MCT_TEMP);
 		}

@@ -3,7 +3,7 @@
 
 // ACF includes
 #include <imod/TModelWrap.h>
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 #include <i2d/CCircle.h>
 #include <i2d/CAffineCalibration2d.h>
 
@@ -107,12 +107,16 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 
 			resultVector = transformedCircle.GetPosition();
 
-			ilog::TExtMessageModel<i2d::CCircle>* messagePtr = new ilog::TExtMessageModel<i2d::CCircle>(
+			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
 						QString("Radius: %3, Pos.: (%1, %2)").arg(circlePtr->GetPosition().GetX()).arg(circlePtr->GetPosition().GetY()).arg(circlePtr->GetRadius()),
 						"PositionFinder");
-			messagePtr->i2d::CCircle::CopyFrom(*circlePtr, istd::IChangeable::CM_WITH_REFS);
+
+			i2d::CCircle* messageObjectPtr = new imod::TModelWrap<i2d::CCircle>();
+			messageObjectPtr->i2d::CCircle::CopyFrom(*circlePtr, istd::IChangeable::CM_WITH_REFS);
+			messagePtr->InsertAttachedObject(messageObjectPtr);
+
 			AddMessage(messagePtr);
 		}
 		else if (linePtr != NULL){
@@ -123,12 +127,16 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 
 			resultVector = transformedLine.GetPoint1();
 
-			ilog::TExtMessageModel<i2d::CLine2d>* messagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
 						QString("Line: (%1, %2)->(%1, %2)").arg(linePtr->GetPoint1().GetX()).arg(linePtr->GetPoint1().GetY()).arg(linePtr->GetPoint2().GetX()).arg(linePtr->GetPoint2().GetY()),
 						"PositionFinder");
-			messagePtr->i2d::CLine2d::CopyFrom(*linePtr, istd::IChangeable::CM_CONVERT);
+
+			i2d::CLine2d* messageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+			messageObjectPtr->i2d::CLine2d::CopyFrom(*linePtr, istd::IChangeable::CM_CONVERT);
+			messagePtr->InsertAttachedObject(messageObjectPtr);
+
 			AddMessage(messagePtr);
 		}
 		else{
@@ -139,12 +147,16 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 
 			resultVector = transformedPosition.GetPosition();
 
-			ilog::TExtMessageModel<i2d::CPosition2d>* messagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
+			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
 						QString("R: %3, Pos.: (%1, %2)").arg(positionPtr->GetCenter().GetX()).arg(positionPtr->GetCenter().GetY()),
 						"PositionFinder");
-			messagePtr->i2d::CPosition2d::CopyFrom(*positionPtr, istd::IChangeable::CM_CONVERT);
+
+			i2d::CPosition2d* messageObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
+			messageObjectPtr->i2d::CPosition2d::CopyFrom(*positionPtr, istd::IChangeable::CM_CONVERT);
+			messagePtr->InsertAttachedObject(messageObjectPtr);
+
 			AddMessage(messagePtr);
 		}
 

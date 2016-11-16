@@ -24,6 +24,7 @@
 #include <imod/IObserver.h>
 #include <iser/CCompactXmlMemReadArchive.h>
 #include <iser/CCompactXmlMemWriteArchive.h>
+#include <ilog/CExtMessage.h>
 #include <iview/IShapeView.h>
 #include <iview/IInteractiveShape.h>
 #include <iview/CShapeBase.h>
@@ -687,9 +688,14 @@ void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
 	Q_ASSERT(itemPtr != NULL);
 
 	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
-	int shapeIndex = itemPtr->data(0, DR_SHAPE_INDEX).toInt();
+	QList<QVariant> indices = itemPtr->data(0, DR_SHAPE_INDICES).toList();
 
-	ActivateTaskShapes(taskIndex, shapeIndex);
+	ShapeIndices shapeIndeces;
+	for (QList<QVariant>::ConstIterator iter = indices.constBegin(); iter != indices.constEnd(); ++iter){
+		shapeIndeces += iter->toInt();
+	}
+
+	ActivateTaskShapes(taskIndex, shapeIndeces);
 }
 
 
@@ -748,21 +754,39 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 	for (int messageIndex = 0; messageIndex < messagesCount; messageIndex++){
 		ilog::IMessageConsumer::MessagePtr messagePtr = messagesList[messageIndex];
 
-		int shapeIndex = -1;
+		QList<QVariant> shapeIndices;
 
 		// add result shapes to view and internal shape list
 		if (viewPtr != NULL){
 			if (m_resultShapeFactoryCompPtr.IsValid()){
-				const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
-				if (object2dPtr != NULL){
-					iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
-					if (shapePtr != NULL){
-						shapePtr->SetVisible(false);
+				const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
+				if (extMessagePtr != NULL){
+					int objectsCount = extMessagePtr->GetAttachedObjectsCount();
+					for (int i = 0; i < objectsCount; ++i){
+						const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
+						iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(attachedObjectPtr, true);
+						if (shapePtr != NULL){
+							shapePtr->SetVisible(false);
 
-						shapeIndex = resultShapes.GetCount();
-						resultShapes.PushBack(shapePtr);
+							shapeIndices += QVariant(resultShapes.GetCount());
+							resultShapes.PushBack(shapePtr);
 
-						viewPtr->ConnectShape(shapePtr);
+							viewPtr->ConnectShape(shapePtr);
+						}
+					}
+				}
+				else{
+					const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
+					if (object2dPtr != NULL){
+						iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
+						if (shapePtr != NULL){
+							shapePtr->SetVisible(false);
+
+							shapeIndices += QVariant(resultShapes.GetCount());
+							resultShapes.PushBack(shapePtr);
+
+							viewPtr->ConnectShape(shapePtr);
+						}
 					}
 				}
 			}
@@ -772,7 +796,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 			QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
 
 			messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
-			messageItemPtr->setData(0, DR_SHAPE_INDEX, shapeIndex);
+			messageItemPtr->setData(0, DR_SHAPE_INDICES, shapeIndices);
 
 			QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
 			messageItemPtr->setIcon(0, messageIcon);
@@ -794,7 +818,11 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 		QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
 
 		messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
-		messageItemPtr->setData(0, DR_SHAPE_INDEX, -2);
+
+		QList<QVariant> shapeIndices;
+		shapeIndices += QVariant(-2);
+
+		messageItemPtr->setData(0, DR_SHAPE_INDICES, shapeIndices);
 
 		messageItemPtr->setText(0, "");
 		messageItemPtr->setText(1, tr("Auxiliary Output"));
@@ -890,7 +918,7 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 	}
 
 	// Activate task related shapes:
-	ActivateTaskShapes(taskIndex, -1);
+	ActivateTaskShapes(taskIndex, ShapeIndices());
 
 	if (viewPtr != NULL){
 		viewPtr->Update();
@@ -898,7 +926,7 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 }
 
 
-void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, int shapeIndex)
+void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndices& shapeIndices)
 {
 	if (!IsGuiCreated()){
 		return;
@@ -919,7 +947,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, int shapeIndex)
 
 			iview::IInteractiveShape* interactiveShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr);
 			if (interactiveShapePtr != NULL){
-				interactiveShapePtr->SetSelected(i == shapeIndex);
+				interactiveShapePtr->SetSelected(shapeIndices.contains(i));
 			}
 		}
 	}
@@ -935,7 +963,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, int shapeIndex)
 			iview::IShape* shapePtr = resultShapes.GetAt(i);
 			Q_ASSERT(shapePtr != NULL);	// only correct instances should be added to container
 
-			shapePtr->SetVisible((taskIndex == shapeTaskIndex) && (shapeIndex == -2));
+			shapePtr->SetVisible((taskIndex == shapeTaskIndex) && (shapeIndices.contains(-2)));
 		}
 	}
 

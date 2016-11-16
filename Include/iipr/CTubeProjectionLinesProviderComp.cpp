@@ -4,7 +4,7 @@
 // ACF includes
 #include <iprm/TParamsPtr.h>
 #include <ilog/IMessageConsumer.h>
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 #include <imeas/INumericValue.h>
 #include <iipr/CTubeProjectionsGenerator.h>
 
@@ -56,6 +56,11 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 					return WS_ERROR;
 				}
 				else{
+					ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
+								istd::IInformationProvider::IC_INFO,
+								iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+								QObject::tr("Projection lines"),
+								"Tube projection generator");
 					for (int lineIndex = 0; lineIndex < result.count(); lineIndex++){
 						i2d::CLine2d& line = result[lineIndex];
 
@@ -64,17 +69,14 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 
 							return WS_ERROR;
 						}
-
-						ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
-									istd::IInformationProvider::IC_INFO,
-									iinsp::CSupplierCompBase::MI_INTERMEDIATE,
-									QString("Line %1").arg(lineIndex),
-									"Tube projection generator");
-						pointMessagePtr->SetPoint1(line.GetPoint1());
-						pointMessagePtr->SetPoint2(line.GetPoint2());
-
-						AddMessage(pointMessagePtr, MCT_TEMP);
+						
+						i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+						pointMessageObjectPtr->SetPoint1(line.GetPoint1());
+						pointMessageObjectPtr->SetPoint2(line.GetPoint2());
+						pointMessagePtr->InsertAttachedObject(pointMessagePtr, QObject::tr("Line %1").arg(lineIndex));
 					}
+
+					AddMessage(pointMessagePtr, MCT_TEMP);
 				}
 			}
 

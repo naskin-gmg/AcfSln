@@ -3,7 +3,7 @@
 
 // ACF includes
 #include <imath/CVarMatrix.h>
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 #include <i2d/CAnnulusSegment.h>
 #include <iprm/CParamsSet.h>
 #include <iprm/TParamsPtr.h>
@@ -524,7 +524,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 
 				const i2d::CVector2d& position = rayPoint.position;
 
-				ilog::TExtMessageModel<i2d::CPosition2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CPosition2d>(
+				ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
 							(pointIndex != ray.usedIndex)?
 										istd::IInformationProvider::IC_INFO:
 										istd::IInformationProvider::IC_WARNING,
@@ -533,21 +533,25 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 										QString("Point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()):
 										QString("Unused point %1 at (%2, %3)").arg(rayIndex).arg(position.GetX()).arg(position.GetY()),
 							"CircleFinder");
-				pointMessagePtr->SetPosition(position);
-				pointMessagePtr->SetCalibration(m_resultCalibrationCompPtr.GetPtr());
+				i2d::CPosition2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
+				pointMessageObjectPtr->SetPosition(position);
+				pointMessageObjectPtr->SetCalibration(m_resultCalibrationCompPtr.GetPtr());
+				pointMessagePtr->InsertAttachedObject(pointMessageObjectPtr);
 
 				m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 			}
 		}
 
 		if (*m_sendLinesToTempAttrPtr){
-			ilog::TExtMessageModel<i2d::CLine2d>* pointMessagePtr = new ilog::TExtMessageModel<i2d::CLine2d>(
+			ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_INTERMEDIATE,
 						QString("Line %1").arg(rayIndex),
 						"CircleFinder");
-			pointMessagePtr->SetPoint1(ray.projectionLine.GetPoint1());
-			pointMessagePtr->SetPoint2(ray.projectionLine.GetPoint2());
+			i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+			pointMessageObjectPtr->SetPoint1(ray.projectionLine.GetPoint1());
+			pointMessageObjectPtr->SetPoint2(ray.projectionLine.GetPoint2());
+			pointMessagePtr->InsertAttachedObject(pointMessageObjectPtr);
 
 			m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(pointMessagePtr));
 		}

@@ -2,7 +2,7 @@
 
 
 // ACF include
-#include <ilog/TExtMessage.h>
+#include <ilog/CExtMessage.h>
 #include <i2d/CLine2d.h>
 #include <i2d/CPosition2d.h>
 #include <i2d/CPolypoint.h>
@@ -135,19 +135,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 			vanishingSpace.IncreaseValueAt(vanSpacePos, 1);
 		}
 	}
-/*
-	{
-		ilog::TExtMessageModel<iimg::CBitmap>* spaceMessagePtr = new ilog::TExtMessageModel<iimg::CBitmap>(
-					istd::IInformationProvider::IC_INFO,
-					0,
-					QString("Vanishing Hough space"),
-					"LineFinder");
 
-		vanishingSpace.ExtractToBitmap(*spaceMessagePtr);
-
-		AddMessage(spaceMessagePtr, MCT_TEMP);
-	}
-*/
 	iipr::CHoughSpace2d::WeightToHoughPosMap foundVanPoints;
 	vanishingSpace.AnalyseHoughSpace(2, 2, 0.2, 2, 0.1, foundVanPoints);
 	Q_ASSERT(foundVanPoints.size() <= 2);
@@ -279,11 +267,14 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	QVector<i2d::CVector2d> crossPositions(linesPerVanPoint * linesPerVanPoint);
 	QVector<i2d::CVector2d> nominalPositions(linesPerVanPoint * linesPerVanPoint);
 
-	ilog::TExtMessageModel<i2d::CPolypoint>* crossPointsMessagePtr = new ilog::TExtMessageModel<i2d::CPolypoint>(
+	ilog::CExtMessage* crossPointsMessagePtr = new ilog::CExtMessage(
 				istd::IInformationProvider::IC_INFO,
 				0,
 				"",
 				"CheckboardCalibrator");
+
+	i2d::CPolypoint* crossPointsMessageObjectPtr = new imod::TModelWrap<i2d::CPolypoint>();
+	crossPointsMessagePtr->InsertAttachedObject(crossPointsMessageObjectPtr);
 
 	int axisYLineIndex = 0;
 	for (		QMap<double, i2d::CLine2d>::ConstIterator iter1 = sortedVanLines[axisYVanIndex].constBegin();
@@ -304,7 +295,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 			i2d::CVector2d normalPos((axisYLineIndex - (linesPerVanPoint - 1) * 0.5) * cellSize, (axisXLineIndex - (linesPerVanPoint - 1) * 0.5) * cellSize);
 			nominalPositions[axisXLineIndex * linesPerVanPoint + axisYLineIndex] = normalPos;
 
-			crossPointsMessagePtr->InsertNode(crossPoint);
+			crossPointsMessageObjectPtr->InsertNode(crossPoint);
 		}
 	}
 
