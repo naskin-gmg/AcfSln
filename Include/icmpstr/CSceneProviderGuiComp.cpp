@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QtCore/qmath.h>
+#include <QtCore/QtMath>
 #include <QtCore/QVarLengthArray>
 #include <QtGui/QKeyEvent>
 #if QT_VERSION >= 0x050000

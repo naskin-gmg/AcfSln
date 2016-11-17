@@ -6,7 +6,7 @@
 #include <vector>
 
 // QT includes
-#include <QtCore/qmath.h>
+#include <QtCore/QtMath>
 #include <QtCore/QMutexLocker>
 #include <QtCore/QDebug>
 

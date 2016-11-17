@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QtCore/qmath.h>
+#include <QtCore/QtMath>
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
 #include <QtCore/QMap>
