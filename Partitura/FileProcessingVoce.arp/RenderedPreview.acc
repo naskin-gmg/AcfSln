@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4265" Description="ACF"/>
+            <Version Id="1" Number="1637" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Preview compositum for bitmaps</Description>
@@ -61,6 +61,12 @@
                     </AttributeInfo>
                     <AttributeInfo Id="FileLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="RenderedObjectFileLoader"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="NoAvailableIconPath" Type="Id" ExportId="NoAvailableIconPath">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="NoAvailableLabel" Type="String" ExportId="NoAvailableLabel">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="">
                         <Data IsEnabled="true" Value="Bitmap"/>
