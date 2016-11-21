@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4265" Description="ACF"/>
-            <Version Id="1" Number="1637" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4340" Description="ACF"/>
+            <Version Id="1" Number="1676" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -68,7 +68,7 @@
                     <AttributeInfo Id="NoAvailableLabel" Type="String" ExportId="NoAvailableLabel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="">
+                    <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="BitmapFactory">
                         <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ObjectView" Type="Reference" ExportId="">
