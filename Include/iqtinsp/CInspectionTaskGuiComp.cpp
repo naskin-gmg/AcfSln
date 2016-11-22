@@ -690,12 +690,12 @@ void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
 	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
 	QList<QVariant> indices = itemPtr->data(0, DR_SHAPE_INDICES).toList();
 
-	ShapeIndices shapeIndeces;
+	ShapeIndices shapeIndices;
 	for (QList<QVariant>::ConstIterator iter = indices.constBegin(); iter != indices.constEnd(); ++iter){
-		shapeIndeces += iter->toInt();
+		shapeIndices += iter->toInt();
 	}
 
-	ActivateTaskShapes(taskIndex, shapeIndeces);
+	ActivateTaskShapes(taskIndex, shapeIndices);
 }
 
 
