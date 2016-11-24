@@ -225,7 +225,7 @@ public:
 			if (DoCropMin && (m_gray < 0)){
 				return 0;
 			}
-			if (DoCropMax && (m_gray > (0xff << Shift))){
+			if (DoCropMax && (m_gray > (IntType(0xff) << Shift))){
 				return 0xff;
 			}
 
@@ -237,7 +237,7 @@ public:
 			if (DoCropMin && (m_gray < 0)){
 				return 0;
 			}
-			if (DoCropMin && (m_gray > (0xffff << Shift))){
+			if (DoCropMin && (m_gray > (IntType(0xffff) << Shift))){
 				return 0xffff;
 			}
 

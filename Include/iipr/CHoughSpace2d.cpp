@@ -225,7 +225,6 @@ void CHoughSpace2d::AnalyseHoughSpace(
 		const i2d::CVector2d& point1 = point1Iter.value();
 
 		bool isToClose = false;
-		WeightToHoughPosMap::Iterator foundIter = result.end();
 
 		for (		WeightToHoughPosMap::Iterator point2Iter = point1Iter + 1;
 					point2Iter != result.end();

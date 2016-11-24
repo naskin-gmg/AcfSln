@@ -70,8 +70,6 @@ void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChan
 		CBlobFilterGui* filterGui = dynamic_cast<CBlobFilterGui*>(itemPtr->widget());
 		Q_ASSERT(filterGui != NULL);
 
-		iblob::IBlobFilterParams::Filter filterInfo = filterGui->GetFilterInfo();
-		
 		const iblob::BlobDescriptorInfoList* descriptorsListPtr = paramsPtr->GetSupportedDescriptorsList();
 		if (descriptorsListPtr != NULL){
 			filterGui->SetFeatures(*descriptorsListPtr);

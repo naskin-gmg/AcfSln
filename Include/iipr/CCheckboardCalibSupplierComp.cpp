@@ -400,8 +400,8 @@ bool CCheckboardCalibSupplierComp::LinesConsumer::AddFeature(const imeas::INumer
 // public methods of embedded class ChessboardParamsContraints
 
 CCheckboardCalibSupplierComp::ChessboardParamsContraints::ChessboardParamsContraints(const CCheckboardCalibSupplierComp* parentPtr)
-:	m_parentPtr(parentPtr),
-	m_cellSizeUnit(imath::IUnitInfo::UT_PHYSICAL, "", 1, istd::CRange(0, 100))
+:	m_cellSizeUnit(imath::IUnitInfo::UT_PHYSICAL, "", 1, istd::CRange(0, 100)),
+	m_parentPtr(parentPtr)
 {
 	Q_ASSERT(m_parentPtr != NULL);
 
