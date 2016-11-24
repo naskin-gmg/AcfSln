@@ -530,7 +530,7 @@ bool CInspectionTaskComp::MessageContainer::Serialize(iser::IArchive& archive)
 // public methods of embedded class Parameters
 
 CInspectionTaskComp::Parameters::Parameters()
-:	imod::CMultiModelBridgeBase(this),
+:	imod::CModelUpdateBridge(this),
 	m_parentPtr(NULL)
 {
 }

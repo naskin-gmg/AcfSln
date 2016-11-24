@@ -5,7 +5,7 @@
 // ACF includes
 #include <istd/IInformationProvider.h>
 #include <icomp/CComponentBase.h>
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 
 
 namespace iinsp
@@ -19,7 +19,6 @@ namespace iinsp
 */
 class CComposedInformationProviderComp:
 			public icomp::CComponentBase,
-			protected imod::CMultiModelBridgeBase,
 			virtual public istd::IInformationProvider
 {
 public:
@@ -54,6 +53,7 @@ private:
 	I_MULTIREF(istd::IInformationProvider, m_slaveInformationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_slaveInformationProviderModelsCompPtr);
 
+	imod::CModelUpdateBridge m_updateBridge;
 };
 
 

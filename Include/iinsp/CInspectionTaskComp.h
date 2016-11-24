@@ -10,7 +10,7 @@
 #include <istd/CChangeNotifier.h>
 #include <imod/IModel.h>
 #include <imod/TModelWrap.h>
-#include <imod/CMultiModelBridgeBase.h>
+#include <imod/CModelUpdateBridge.h>
 #include <ilog/CMessageContainer.h>
 #include <ilog/TLoggerCompWrap.h>
 
@@ -31,11 +31,11 @@ class CInspectionTaskComp:
 			virtual public IInspectionTask,
 			virtual public iinsp::ISupplier,
 			virtual public istd::IInformationProvider,
-			protected imod::CMultiModelBridgeBase
+			protected imod::CModelUpdateBridge
 {
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
-	typedef imod::CMultiModelBridgeBase BaseClass2;
+	typedef imod::CModelUpdateBridge BaseClass2;
 
 	enum MessageId
 	{
@@ -127,7 +127,7 @@ protected:
 
 	class Parameters:
 			virtual public iprm::IParamsSet,
-			public imod::CMultiModelBridgeBase
+			public imod::CModelUpdateBridge
 	{
 	public:
 		Parameters();
