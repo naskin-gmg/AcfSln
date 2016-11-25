@@ -89,6 +89,7 @@ public:
 		I_ASSIGN(m_generalParamsGuiCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
 		I_ASSIGN_TO(m_generalParamsObserverCompPtr, m_generalParamsGuiCompPtr, false);
 		I_ASSIGN_TO(m_generalParamsEditorCompPtr, m_generalParamsGuiCompPtr, false);
+		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display on preview (if iqt2d::IViewProvider is used)", false, "ResultShapeFactory");
 	I_END_COMPONENT;
 
 	CInspectionTaskGuiComp();
@@ -159,6 +160,7 @@ private:
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
 	I_REF(imod::IModelEditor, m_generalParamsEditorCompPtr);
+	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 
 	int m_currentGuiIndex;
 	bool m_testStarted;

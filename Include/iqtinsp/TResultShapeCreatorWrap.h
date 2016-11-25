@@ -15,32 +15,37 @@ class TResultShapeCreatorWrap: public Base
 public:
 	typedef Base BaseClass;
 
-	I_BEGIN_COMPONENT(TResultShapeCreatorWrap);
+	I_BEGIN_BASE_COMPONENT(TResultShapeCreatorWrap);
 		I_ASSIGN(m_okColorSchemeCompPtr, "OkColorSchema", "Color schema used for ok shapes", false, "OkColorSchema");
 		I_ASSIGN(m_warningColorSchemeCompPtr, "WarningColorSchema", "Color schema used for warning shapes", false, "WarningColorSchema");
 		I_ASSIGN(m_errorColorSchemeCompPtr, "ErrorColorSchema", "Color schema used for error shapes", false, "ErrorColorSchema");
-		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display on preview (if iqt2d::IViewProvider is used)", false, "ResultShapeFactory");
 	I_END_COMPONENT;
 
 	/**
 		Create a shape for the result object and corresponding status information.
 	*/
-	virtual iview::IShape* CreateResultShape(const istd::IChangeable* objectPtr, const istd::IInformationProvider* infoPtr, bool connectToModel = true) const;
-
+	virtual iview::IShape* CreateResultShape(
+				const iview::IShapeFactory* shapeFactoryPtr, 
+				const istd::IChangeable* objectPtr,
+				const istd::IInformationProvider* infoPtr,
+				bool connectToModel = true) const;
 private:
 	I_REF(iview::IColorSchema, m_okColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_warningColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_errorColorSchemeCompPtr);
-	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 };
 
 
 // public methods
 template <class Base>
-iview::IShape* TResultShapeCreatorWrap<Base>::CreateResultShape(const istd::IChangeable* objectPtr, const istd::IInformationProvider* infoPtr, bool connectToModel) const
+iview::IShape* TResultShapeCreatorWrap<Base>::CreateResultShape(
+			const iview::IShapeFactory* shapeFactoryPtr,
+			const istd::IChangeable* objectPtr,
+			const istd::IInformationProvider* infoPtr,
+			bool connectToModel) const
 {
-	if (m_resultShapeFactoryCompPtr.IsValid()){
-		iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(objectPtr, connectToModel);
+	if (shapeFactoryPtr != NULL){
+		iview::IShape* shapePtr = shapeFactoryPtr->CreateShape(objectPtr, connectToModel);
 		if (shapePtr == NULL){
 			return NULL;
 		}

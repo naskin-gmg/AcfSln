@@ -763,7 +763,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 				int objectsCount = extMessagePtr->GetAttachedObjectsCount();
 				for (int i = 0; i < objectsCount; ++i){
 					const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
-					iview::IShape* shapePtr = CreateResultShape(attachedObjectPtr, extMessagePtr, true);
+					iview::IShape* shapePtr = CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), attachedObjectPtr, extMessagePtr, true);
 					if (shapePtr != NULL){
 						shapePtr->SetVisible(false);
 
@@ -785,7 +785,7 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 			else{
 				const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
 				if (object2dPtr != NULL){
-					iview::IShape* shapePtr = CreateResultShape(object2dPtr, messagePtr.GetPtr(), true);
+					iview::IShape* shapePtr = CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), object2dPtr, messagePtr.GetPtr(), true);
 					if (shapePtr != NULL){
 						shapePtr->SetVisible(false);
 						shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
