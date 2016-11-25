@@ -758,44 +758,42 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 
 		// add result shapes to view and internal shape list
 		if (viewPtr != NULL){
-			if (m_resultShapeFactoryCompPtr.IsValid()){
-				const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
-				if (extMessagePtr != NULL){
-					int objectsCount = extMessagePtr->GetAttachedObjectsCount();
-					for (int i = 0; i < objectsCount; ++i){
-						const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
-						iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(attachedObjectPtr, true);
-						if (shapePtr != NULL){
-							shapePtr->SetVisible(false);
+			const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
+			if (extMessagePtr != NULL){
+				int objectsCount = extMessagePtr->GetAttachedObjectsCount();
+				for (int i = 0; i < objectsCount; ++i){
+					const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
+					iview::IShape* shapePtr = CreateResultShape(attachedObjectPtr, extMessagePtr, true);
+					if (shapePtr != NULL){
+						shapePtr->SetVisible(false);
 
-							const QString& objectDescription = extMessagePtr->GetAttachedObjectDescription(i);
-							if (!objectDescription.isEmpty()){
-								shapePtr->SetDefaultDescription(objectDescription);
-							}
-							else{
-								shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
-							}
-
-							shapeIndices += QVariant(resultShapes.GetCount());
-							resultShapes.PushBack(shapePtr);
-
-							viewPtr->ConnectShape(shapePtr);
+						const QString& objectDescription = extMessagePtr->GetAttachedObjectDescription(i);
+						if (!objectDescription.isEmpty()){
+							shapePtr->SetDefaultDescription(objectDescription);
 						}
+						else{
+							shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
+						}
+
+						shapeIndices += QVariant(resultShapes.GetCount());
+						resultShapes.PushBack(shapePtr);
+
+						viewPtr->ConnectShape(shapePtr);
 					}
 				}
-				else{
-					const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
-					if (object2dPtr != NULL){
-						iview::IShape* shapePtr = m_resultShapeFactoryCompPtr->CreateShape(object2dPtr, true);
-						if (shapePtr != NULL){
-							shapePtr->SetVisible(false);
-							shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
+			}
+			else{
+				const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
+				if (object2dPtr != NULL){
+					iview::IShape* shapePtr = CreateResultShape(object2dPtr, messagePtr.GetPtr(), true);
+					if (shapePtr != NULL){
+						shapePtr->SetVisible(false);
+						shapePtr->SetDefaultDescription(messagePtr->GetInformationDescription());
 
-							shapeIndices += QVariant(resultShapes.GetCount());
-							resultShapes.PushBack(shapePtr);
+						shapeIndices += QVariant(resultShapes.GetCount());
+						resultShapes.PushBack(shapePtr);
 
-							viewPtr->ConnectShape(shapePtr);
-						}
+						viewPtr->ConnectShape(shapePtr);
 					}
 				}
 			}

@@ -29,6 +29,7 @@
 
 // ACF-Solutions includes
 #include <iinsp/IInspectionTask.h>
+#include <iqtinsp/TResultShapeCreatorWrap.h>
 #include <GeneratedFiles/iqtinsp/ui_CInspectionTaskGuiComp.h>
 
 
@@ -60,13 +61,13 @@ protected:
 
 
 class CInspectionTaskGuiComp:
-			public CInspectionTaskGuiCompBase,
+			public TResultShapeCreatorWrap<CInspectionTaskGuiCompBase>,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
-	typedef CInspectionTaskGuiCompBase BaseClass;
+	typedef TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> BaseClass;
 
 	enum DataRole
 	{
@@ -84,7 +85,6 @@ public:
 		I_ASSIGN_MULTI_0(m_previewGuisCompPtr, "PreviewGuis", "List of GUI's used as preview of  subtask results (the same GUI object can be reused many times)", true);
 		I_ASSIGN_TO(m_previewObserversCompPtr, m_previewGuisCompPtr, false);
 		I_ASSIGN_TO(m_previewSceneProvidersCompPtr, m_previewGuisCompPtr, false);
-		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display on preview (if iqt2d::IViewProvider is used)", false, "ResultShapeFactory");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
 		I_ASSIGN(m_generalParamsGuiCompPtr, "GeneralParamsGui", "Gui of general parameters", false, "GeneralParamsGui");
 		I_ASSIGN_TO(m_generalParamsObserverCompPtr, m_generalParamsGuiCompPtr, false);
@@ -155,7 +155,6 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_previewGuisCompPtr);
 	I_MULTIREF(imod::IObserver, m_previewObserversCompPtr);
 	I_MULTIREF(iqt2d::IViewProvider, m_previewSceneProvidersCompPtr);
-	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_REF(ifile::IFilePersistence, m_paramsLoaderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_generalParamsGuiCompPtr);
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
