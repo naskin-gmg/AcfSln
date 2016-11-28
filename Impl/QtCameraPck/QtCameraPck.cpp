@@ -20,7 +20,12 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			SnapImageGui,
-			"Show snapped image and allow to change snap parameters",
+			"* Deprecated * use SnapImageParamsEditor insead",
+			"View Image Bitmap Camera Snap Parameters Deprecated");
+
+I_EXPORT_COMPONENT(
+			SnapImageParamsEditor,
+			"Delegator of snap parameters with snap GUI functionality",
 			"View Image Bitmap Camera Snap Parameters");
 
 I_EXPORT_COMPONENT(
