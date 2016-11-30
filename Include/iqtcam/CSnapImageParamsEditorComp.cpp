@@ -223,6 +223,8 @@ void CSnapImageParamsEditorComp::OnGuiModelDetached()
 
 void CSnapImageParamsEditorComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
 }
 
