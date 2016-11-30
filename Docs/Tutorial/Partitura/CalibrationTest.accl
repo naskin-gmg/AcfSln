@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4243" Description="ACF"/>
-            <Version Id="1" Number="1620" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
@@ -32,13 +32,6 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="Console">
-            <PositionMap>
-                <Element ComponentName="ImageView" X="650" Y="300" Note=""/>
-                <Element ComponentName="PerspectiveCalibrationShape" X="650" Y="475" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="CalibratorSupplierEditor">
             <PositionMap>
                 <Element ComponentName="AxisXTemplateEditor" X="1050" Y="525" Note=""/>
@@ -49,6 +42,13 @@
                 <Element ComponentName="ParamsSetGui" X="600" Y="275" Note=""/>
                 <Element ComponentName="PerspectiveCalibEditor" X="300" Y="475" Note=""/>
                 <Element ComponentName="SearchAoiEditor" X="775" Y="475" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="Console">
+            <PositionMap>
+                <Element ComponentName="ImageView" X="650" Y="300" Note=""/>
+                <Element ComponentName="PerspectiveCalibrationShape" X="650" Y="475" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

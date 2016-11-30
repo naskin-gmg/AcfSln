@@ -237,6 +237,8 @@ bool CLineProjectionProcessorComp::DoProjection(
 			break;
 
 		default:
+			SendErrorMessage(0, QString("Unsupported image format"));
+
 			retVal = false;
 			break;
 	}

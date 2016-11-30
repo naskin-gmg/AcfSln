@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4316" Description="ACF"/>
-            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Search of edge on image along some specified line</Description>
@@ -21,6 +21,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="LineParamId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="Line"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="PositionTask/TaskLog"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

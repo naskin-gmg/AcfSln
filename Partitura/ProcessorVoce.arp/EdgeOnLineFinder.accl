@@ -2,18 +2,18 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4078" Description="ACF"/>
-            <Version Id="1" Number="1520" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="DerivativeProcessor" X="575" Y="375" Note="Calculate the derivative of the projection data"/>
         <Element ComponentName="Caliper" X="900" Y="425" Note="Calculate extremums of the projection derivative"/>
         <Element ComponentName="Casade" X="575" Y="175" Note="Processing chain for caliper calculation.&#10;1. Calculate the pixel data along a line given as parameter in the input parameter set&#10;2. Calculate the derivative of projection data&#10;3. Find and cumulate extremum points of the derivative data."/>
-        <Element ComponentName="Projection" X="425" Y="300" Note="Image projection along a line"/>
         <Element ComponentName="Derivative" X="725" Y="300" Note="Derivative of the image projection"/>
+        <Element ComponentName="DerivativeProcessor" X="575" Y="375" Note="Calculate the derivative of the projection data"/>
         <Element ComponentName="LineProjection" X="225" Y="425" Note="Calculate the image projection along a line"/>
+        <Element ComponentName="Projection" X="425" Y="300" Note="Image projection along a line"/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

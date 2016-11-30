@@ -2,26 +2,26 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="SnapImageGui" X="500" Y="600" Note=""/>
+        <Element ComponentName="BitmapLoader" X="1050" Y="750" Note=""/>
         <Element ComponentName="ImageDialogLoader" X="825" Y="600" Note=""/>
         <Element ComponentName="Log" X="1050" Y="100" Note=""/>
+        <Element ComponentName="SnapImageGui" X="500" Y="600" Note=""/>
         <Element ComponentName="StandaloneApp" X="575" Y="100" Note=""/>
         <Element ComponentName="VersionInfo" X="750" Y="275" Note=""/>
-        <Element ComponentName="BitmapLoader" X="1050" Y="750" Note=""/>
     </PositionMap>
     <EmbeddedRegistries>
         <EmbededRegistry Id="SnapImageGui">
             <PositionMap>
                 <Element ComponentName="Bitmap" X="775" Y="625" Note=""/>
+                <Element ComponentName="SnapGui" X="775" Y="475" Note=""/>
                 <Element ComponentName="SnapTab" X="775" Y="300" Note=""/>
                 <Element ComponentName="View" X="500" Y="300" Note=""/>
-                <Element ComponentName="SnapGui" X="775" Y="475" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

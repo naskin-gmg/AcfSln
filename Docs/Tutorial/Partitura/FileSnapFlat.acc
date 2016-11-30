@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -80,7 +80,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SnapGui" PackageId="QtCameraPck" ComponentId="SnapImageGui">
+        <Element Id="SnapGui" PackageId="QtCameraPck" ComponentId="SnapImageParamsEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="Bitmap" Type="Reference" ExportId="">
@@ -92,7 +92,7 @@
                     <AttributeInfo Id="BitmapLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ImageDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                    <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapParams"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">

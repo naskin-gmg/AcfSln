@@ -29,10 +29,10 @@
                         <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="FileCamera"/>
+                        <Data IsEnabled="true" Value="FileCamera/Params"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
+                        <Data IsEnabled="true" Value="FileCamera/ParamsEditor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

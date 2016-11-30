@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Test framework for demonstration of the circle finder</Description>
@@ -78,6 +78,9 @@
                 <AttributeInfoMap>
                     <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapTask"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableIntrospection" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
                     <AttributeInfo Id="InputCalibrationProvider" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapTask"/>

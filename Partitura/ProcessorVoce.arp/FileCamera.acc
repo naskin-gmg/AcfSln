@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>File camera definition</Description>
@@ -115,6 +115,7 @@
         <Component ExportedId="BitmapLoader" ComponentId="BitmapLoader"/>
         <Component ExportedId="Gui" ComponentId="FilePathParamGui"/>
         <Component ExportedId="Parameter" ComponentId="FilePathParam"/>
-        <Component ExportedId="SetGui" ComponentId="ParamsSetGui"/>
+        <Component ExportedId="Params" ComponentId="ComposedParamsSet"/>
+        <Component ExportedId="ParamsEditor" ComponentId="ParamsSetGui"/>
     </ExportedComponents>
 </Acf>

@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4243" Description="ACF"/>
-            <Version Id="1" Number="1620" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -118,7 +118,7 @@
                         <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
                     <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="FileCamera"/>
+                        <Data IsEnabled="true" Value="FileCamera/Params"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Framework/LogDock"/>
@@ -130,7 +130,7 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="FileCamera/SetGui"/>
+                        <Data IsEnabled="true" Value="FileCamera/ParamsEditor"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Framework/LogDock"/>
