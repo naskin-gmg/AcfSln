@@ -42,7 +42,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 
 	iprm::TParamsPtr<istd::IChangeable> aoiObjectPtr(paramsPtr, *m_aoiParamIdAttrPtr);
 	if (!aoiObjectPtr.IsValid()){
-		SendErrorMessage(0, "Search region for the circle was not defined");
+		SendErrorMessage(0, QObject::tr("Search region for the circle was not defined"));
 
 		return TS_INVALID;
 	}
@@ -54,14 +54,14 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 	}
 
 	if (aoiPtr == NULL){
-		SendErrorMessage(0, "Search region for the circle was not defined");
+		SendErrorMessage(0, QObject::tr("Search region for the circle was not defined"));
 
 		return TS_INVALID;
 	}
 
 	iprm::TParamsPtr<iipr::ICircleFinderParams> circleFinderParamsPtr(paramsPtr, *m_circleFinderParamsIdAttrPtr);
 	if (!circleFinderParamsPtr.IsValid()){
-		SendErrorMessage(0, "Circle finder parameters were not set");
+		SendErrorMessage(0, QObject::tr("Circle finder parameters were not set"));
 
 		return TS_INVALID;
 	}
@@ -90,7 +90,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 			return TS_OK;
 		}
 		else{
-			SendErrorMessage(0, "Not enought points found");
+			SendErrorMessage(0, QObject::tr("Not enought points found"));
 		}
 	}
 	else{
@@ -112,7 +112,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 			return TS_OK;
 		}
 		else{
-			SendErrorMessage(0, "Not enought points found");
+			SendErrorMessage(0, QObject::tr("Not enought points found"));
 		}
 	}
 
