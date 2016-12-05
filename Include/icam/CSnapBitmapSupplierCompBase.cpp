@@ -87,45 +87,12 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
 				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
 
-				i2d::CVector2d scale(1, 1);
-
-				double bitmapResolution = 0.0;
-
-				// Try to get the image resolution from the bitmap:
-				if (CCalibratedCameraComp::ReadImageResolution(*result.second.GetPtr(), bitmapResolution)){
-					scale = i2d::CVector2d(bitmapResolution, bitmapResolution);
+				iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(GetModelParametersSet(), m_calibrationIdAttrPtr, m_defaultCalibrationCompPtr, false);
+				if (calibrationPtr.IsValid()){
+					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
 				}
 				else{
-					iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(
-								GetModelParametersSet(),
-								m_scaleParamIdAttrPtr,
-								m_defaultScaleValueCompPtr,
-								false);
-					if (scaleParamPtr.IsValid()){
-						imath::CVarVector scaleValues = scaleParamPtr->GetValues();
-						if (scaleValues.GetElementsCount() >= 2){
-							scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
-						}
-						else if (scaleValues.GetElementsCount() >= 1){
-							scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
-						}
-					}
-				}
-
-				if (m_calibrationCompPtr.IsValid()){
-					i2d::CAffineTransformation2d transformation;
-					transformation.Reset(center, 0, scale);
-
-					result.first.SetPtr(m_calibrationCompPtr->CreateCombinedCalibration(transformation));
-				}
-				else{
-					i2d::CAffineCalibration2d* calibrationPtr = new imod::TModelWrap<i2d::CAffineCalibration2d>();
-					calibrationPtr->Reset(center, 0, scale);
-					if (m_calibratedUnitInfoCompPtr.IsValid()){
-						calibrationPtr->SetArgumentUnitInfo(m_calibratedUnitInfoCompPtr.GetPtr());
-					}
-
-					result.first.SetPtr(calibrationPtr);
+					result.first.Reset();
 				}
 			}
 			return WS_OK;
@@ -149,11 +116,10 @@ void CSnapBitmapSupplierCompBase::OnComponentCreated()
 
 	// initialize components
 	m_bitmapAcquisitionCompPtr.EnsureInitialized();
-	m_calibrationCompPtr.EnsureInitialized();
-	m_defaultScaleValueCompPtr.EnsureInitialized();
-	m_calibratedUnitInfoCompPtr.EnsureInitialized();
+	m_defaultCalibrationCompPtr.EnsureInitialized();
 }
 
 
 } // namespace icam
+
 
