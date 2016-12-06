@@ -56,7 +56,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	}
 
 	// calculate parameters
-	int directionThreshold2 = 25 * 25;
+	int directionThreshold2 = int(255 * 255 * qMin(*m_defaultMinEdgeStrengthAttrPtr, 1.0));
 	double radiusOffset = m_houghSpace.GetImageSize().GetX() * 0.5;
 
 	iimg::CScanlineMask mask;
@@ -133,7 +133,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		}
 	}
 
-	m_houghSpace.SmoothHoughSpace(10);
+	m_houghSpace.SmoothHoughSpace(*m_defaultSmoothKernelAttrPtr);
 
 	CHoughSpace2d::WeightToHoughPosMap posMap;
 	m_houghSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 100, 0.5, 10.0, 0.2, posMap);
@@ -233,12 +233,14 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 bool CHoughLineFinderComp::CreateHoughSpace()
 {
-	int angleSize = *m_defaultAngleResAttrPtr;
-	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(*m_defaultRadiusResAttrPtr, angleSize), false, true)){
-		m_angleVectors.resize(angleSize);
+	int angleGridSize = *m_defaultAngleResAttrPtr;
+	int radiusGridSize = *m_defaultRadiusResAttrPtr;
 
-		for (int i = 0; i < angleSize; ++i){
-			double angle = i * I_2PI / angleSize;
+	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(radiusGridSize, angleGridSize), false, true)){
+		m_angleVectors.resize(angleGridSize);
+
+		for (int i = 0; i < angleGridSize; ++i){
+			double angle = i * I_2PI / angleGridSize;
 
 			m_angleVectors[i].Init(angle);
 		}

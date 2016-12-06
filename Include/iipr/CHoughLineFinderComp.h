@@ -42,6 +42,8 @@ public:
 		I_ASSIGN(m_defaultAngleResAttrPtr, "DefaultAngleResulution", "Resolution of angle grid", true, 360);
 		I_ASSIGN(m_defaultRadiusResAttrPtr, "DefaultRadiusResulution", "Resolution of radius grid", true, 200);
 		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 100);
+		I_ASSIGN(m_defaultSmoothKernelAttrPtr, "DefaultSpaceSmoothKernel", "Size of kernel will be used to smooth hough space", true, 10);
+		I_ASSIGN(m_defaultMinEdgeStrengthAttrPtr, "DefaultMinEdgeStrength", "Minimal strength of edge to be considered", true, 0.01);
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
 		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
@@ -75,6 +77,8 @@ private:
 	I_ATTR(int, m_defaultAngleResAttrPtr);
 	I_ATTR(int, m_defaultRadiusResAttrPtr);
 	I_ATTR(int, m_defaultMaxLinesAttrPtr);
+	I_ATTR(int, m_defaultSmoothKernelAttrPtr);
+	I_ATTR(double, m_defaultMinEdgeStrengthAttrPtr);
 	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
