@@ -552,7 +552,7 @@ void CRectImageSmoothProcessorComp::OnComponentCreated()
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
 		{
-			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(1, 1), &percentManip);
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
 
 			m_filterConstraints.InsertValueInfo(QObject::tr("Filter width"), QObject::tr("Horizontal bluring filter length"), unitInfo);
 			m_filterConstraints.InsertValueInfo(QObject::tr("Filter height"), QObject::tr("Vertical bluring filter length"), unitInfo);
@@ -561,7 +561,7 @@ void CRectImageSmoothProcessorComp::OnComponentCreated()
 
 	case UM_PERCENT_DIAG:
 		{
-			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_TECHNICAL, "px", 1, istd::CRange(1, 100), &pixelManip);
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
 
 			m_filterConstraints.InsertValueInfo(QObject::tr("Filter"), QObject::tr("Bluring filter length"), unitInfo);
 		}
@@ -569,7 +569,7 @@ void CRectImageSmoothProcessorComp::OnComponentCreated()
 
 	default:
 		{
-			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(1, 1), &percentManip);
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_TECHNICAL, "px", 1, istd::CRange(1, 100), &pixelManip);
 
 			m_filterConstraints.InsertValueInfo(QObject::tr("Filter width"), QObject::tr("Horizontal bluring filter length"), unitInfo);
 			m_filterConstraints.InsertValueInfo(QObject::tr("Filter height"), QObject::tr("Vertical bluring filter length"), unitInfo);
