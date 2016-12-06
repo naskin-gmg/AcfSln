@@ -63,7 +63,7 @@ public:
 	*/
 	virtual bool GetCombinedKernel(const IConvolutionKernel2d& kernel, IConvolutionKernel2d& result) const = 0;
 	/**
-		Try separate this kernel into .
+		Try separate this kernel into two separated kernels.
 	*/
 	virtual bool TrySeparateKernels(IConvolutionKernel2d& result1, IConvolutionKernel2d& result2, int separationType = ST_AUTO, double tolerance = I_BIG_EPSILON) const = 0;
 };
