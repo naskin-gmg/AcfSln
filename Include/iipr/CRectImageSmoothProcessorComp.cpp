@@ -201,7 +201,7 @@ bool CRectImageSmoothProcessorComp::DoRectFilter(
 		if (kernelMaxHeight > 1){
 			iimg::CGeneralBitmap tempBitmap;
 
-			return DoRectFilterHorizontal(kernelMaxWidth, outputPixelFormat, inputImage, tempBitmap, borderMode) && DoRectFilterVertical(kernelMaxHeight, outputPixelFormat, inputImage, outputImage, borderMode);
+			return DoRectFilterHorizontal(kernelMaxWidth, outputPixelFormat, inputImage, tempBitmap, borderMode) && DoRectFilterVertical(kernelMaxHeight, outputPixelFormat, tempBitmap, outputImage, borderMode);
 		}
 		else{
 			return DoRectFilterHorizontal(kernelMaxWidth, outputPixelFormat, inputImage, outputImage, borderMode);
