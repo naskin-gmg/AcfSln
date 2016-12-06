@@ -3,6 +3,7 @@
 
 // ACF includes
 #include <imath/CFixedPointManip.h>
+#include <iprm/TParamsPtr.h>
 #include <iimg/CGeneralBitmap.h>
 
 // ACF-Solutions includes
@@ -13,7 +14,7 @@ namespace iipr
 {
 
 
-// templete function for several image modes
+// template function for several image modes
 
 template <	typename InputPixelType,
 			typename OutputPixelType,
@@ -472,95 +473,30 @@ bool CRectImageSmoothProcessorComp::DoRectFilterVertical(
 }
 
 
-// public methods
-
-// reimplemented (imeas::INumericConstraints)
-
-int CRectImageSmoothProcessorComp::GetNumericValuesCount() const
-{
-	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
-		return 1;
-	}
-	else{
-		return 2;
-	}
-}
-
-
-QString CRectImageSmoothProcessorComp::GetNumericValueName(int index) const
-{
-	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
-		return QObject::tr("Filter");
-	}
-	else{
-		switch (index){
-		case 0:
-			return QObject::tr("Filter width");
-
-		case 1:
-			return QObject::tr("Filter height");
-
-		default:
-			return "";
-		}
-	}
-}
-
-
-QString CRectImageSmoothProcessorComp::GetNumericValueDescription(int index) const
-{
-	if (*m_unitModeAttrPtr == UM_PERCENT_DIAG){
-		return QObject::tr("Bluring filter length");
-	}
-	else{
-		switch (index){
-		case 0:
-			return QObject::tr("Horizontal bluring filter length");
-
-		case 1:
-			return QObject::tr("Vertical bluring filter length");
-
-		default:
-			return "";
-		}
-	}
-}
-
-
-const imath::IUnitInfo* CRectImageSmoothProcessorComp::GetNumericValueUnitInfo(int /*index*/) const
-{
-	return this;
-}
-
-
 // protected methods
 
-// reimplemented (iipr::TImageParamProcessorCompBase<imeas::INumericValue>)
+// reimplemented (iipr::CImageProcessorCompBase)
 
-bool CRectImageSmoothProcessorComp::ParamProcessImage(
-			const iprm::IParamsSet* paramsPtr,
-			const imeas::INumericValue* procParamPtr,
+bool CRectImageSmoothProcessorComp::ProcessImage(
+			const iprm::IParamsSet* paramsPtr, 
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	if (procParamPtr == NULL){
+	iprm::TParamsPtr<imeas::INumericValue> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);	
+	if (!filterParamsPtr.IsValid()){
+		SendCriticalMessage(0, QObject::tr("No filter length for smoothing can be determined"));
+
 		return false;
 	}
 
-	if (inputImage.GetComponentBitsCount() != 8){
-		return false;	// Bad input image format
+	imath::CVarVector filterLengths = filterParamsPtr->GetValues();
+	int filterDimensionsCount = filterLengths.GetElementsCount();
+	if (filterDimensionsCount < 1){
+		return false;
 	}
-
-	Q_ASSERT(inputImage.GetPixelBitsCount() == inputImage.GetComponentsCount() * 8);
 
 	istd::CIndex2d imageSize = inputImage.GetImageSize();
 	if (imageSize.IsSizeEmpty()){
-		return false;
-	}
-
-	imath::CVarVector filterLengths = procParamPtr->GetValues();
-	int filterDimensionsCount = filterLengths.GetElementsCount();
-	if (filterDimensionsCount < 1){
 		return false;
 	}
 
@@ -602,72 +538,43 @@ bool CRectImageSmoothProcessorComp::ParamProcessImage(
 }
 
 
-// reimplemented (imath::IUnitInfo)
+// reimplemented (icomp::CComponentBase)
 
-int CRectImageSmoothProcessorComp::GetUnitType() const
+void CRectImageSmoothProcessorComp::OnComponentCreated()
 {
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return UT_RELATIVE;
+	BaseClass::OnComponentCreated();
 
-	default:
-		return UT_TECHNICAL;
-	}
-}
+	m_filterConstraints.Reset();
 
-
-QString CRectImageSmoothProcessorComp::GetUnitName() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return "%";
-
-	default:
-		return "px";
-	}
-}
-
-
-double CRectImageSmoothProcessorComp::GetDisplayMultiplicationFactor() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return 100;
-
-	default:
-		return 1;
-	}
-}
-
-
-istd::CRange CRectImageSmoothProcessorComp::GetValueRange() const
-{
-	switch (*m_unitModeAttrPtr){
-	case UM_PERCENT:
-	case UM_PERCENT_DIAG:
-		return istd::CRange(0, 1);
-
-	default:
-		return istd::CRange(1, 100);
-	}
-}
-
-
-const imath::IDoubleManip& CRectImageSmoothProcessorComp::GetValueManip() const
-{
 	static imath::CFixedPointManip pixelManip(0);
 	static imath::CFixedPointManip percentManip(3);
 
 	switch (*m_unitModeAttrPtr){
 	case UM_PERCENT:
+		{
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(1, 1), &percentManip);
+
+			m_filterConstraints.InsertValueInfo(QObject::tr("Filter width"), QObject::tr("Horizontal bluring filter length"), unitInfo);
+			m_filterConstraints.InsertValueInfo(QObject::tr("Filter height"), QObject::tr("Vertical bluring filter length"), unitInfo);
+		}
+		break;
+
 	case UM_PERCENT_DIAG:
-		return percentManip;
+		{
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_TECHNICAL, "px", 1, istd::CRange(1, 100), &pixelManip);
+
+			m_filterConstraints.InsertValueInfo(QObject::tr("Filter"), QObject::tr("Bluring filter length"), unitInfo);
+		}
+		break;
 
 	default:
-		return pixelManip;
+		{
+			imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(1, 1), &percentManip);
+
+			m_filterConstraints.InsertValueInfo(QObject::tr("Filter width"), QObject::tr("Horizontal bluring filter length"), unitInfo);
+			m_filterConstraints.InsertValueInfo(QObject::tr("Filter height"), QObject::tr("Vertical bluring filter length"), unitInfo);
+		}
+		break;
 	}
 }
 

@@ -2,20 +2,20 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="BufferBitmap" X="125" Y="275" Note=""/>
         <Element ComponentName="AverageFilter" X="925" Y="200" Note=""/>
+        <Element ComponentName="BufferBitmap" X="125" Y="275" Note=""/>
+        <Element ComponentName="GaussianFilter" X="725" Y="475" Note=""/>
+        <Element ComponentName="InvertProcessor" X="925" Y="375" Note=""/>
         <Element ComponentName="IterativeProcessor" X="450" Y="300" Note=""/>
         <Element ComponentName="MaxOperator" X="725" Y="125" Note=""/>
-        <Element ComponentName="InvertProcessor" X="925" Y="375" Note=""/>
         <Element ComponentName="MinOperator" X="-324" Y="462" Note=""/>
         <Element ComponentName="ProcessedCamera" X="425" Y="150" Note=""/>
-        <Element ComponentName="GaussianFilter" X="725" Y="475" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

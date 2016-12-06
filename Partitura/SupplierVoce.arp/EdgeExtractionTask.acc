@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4349" Description="ACF"/>
+            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Extracts edges from image</Description>
@@ -90,7 +90,7 @@
                         <Data IsEnabled="true" Value="EdgeExtractor/EdgesReductor"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SmoothFilterConstraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="SmoothedImageSupplier/RectImageSmoothProcessor"/>
+                        <Data IsEnabled="true" Value="SmoothedImageSupplier/SmoothFilterContraints"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -296,9 +296,6 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
-                                    <Data IsEnabled="true" Value="2"/>
-                                </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
@@ -315,9 +312,6 @@
                                             <Value>0.5</Value>
                                         </Values>
                                     </Data>
-                                </AttributeInfo>
-                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
-                                    <Data IsEnabled="true" Value="2"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -363,9 +357,6 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValuesCount" Type="Integer" ExportId="">
-                                    <Data IsEnabled="true" Value="2"/>
-                                </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
                     </Element>
@@ -396,11 +387,11 @@
                                 <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
+                                <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="SmoothFilter"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
-                                </AttributeInfo>
-                                <AttributeInfo Id="ParamsId" Type="Id" ExportId="">
-                                    <Data IsEnabled="true" Value="SmoothFilter"/>
                                 </AttributeInfo>
                             </AttributeInfoMap>
                         </Data>
@@ -442,7 +433,7 @@
                     <Interface InterfaceId="istd::IChangeable" ComponentId="SmoothedImageSupplier"/>
                 </ExportedInterfaces>
                 <ExportedComponents>
-                    <Component ExportedId="RectImageSmoothProcessor" ComponentId="RectImageSmoothProcessor"/>
+                    <Component ExportedId="SmoothFilterContraints" ComponentId="RectImageSmoothProcessor/FilterContraints"/>
                 </ExportedComponents>
             </Data>
         </EmbeddedRegistry>

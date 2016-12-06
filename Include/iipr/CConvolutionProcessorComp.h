@@ -6,7 +6,7 @@
 #include <iimg/CScanlineMask.h>
 
 // ACF-Solutions includes
-#include <iipr/TImageParamProcessorCompBase.h>
+#include <iipr/CImageProcessorCompBase.h>
 #include <iipr/IConvolutionKernel2d.h>
 
 
@@ -17,13 +17,15 @@ namespace iipr
 /**
 	Implementation of image processor using convolution kernel.
 */
-class CConvolutionProcessorComp: public iipr::TImageParamProcessorCompBase<IConvolutionKernel2d>
+class CConvolutionProcessorComp: public iipr::CImageProcessorCompBase
 {
 public:
-	typedef iipr::TImageParamProcessorCompBase<IConvolutionKernel2d> BaseClass;
+	typedef iipr::CImageProcessorCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CConvolutionProcessorComp);
 		I_ASSIGN(m_trySeparateKernelAttrPtr, "TrySeparateKernel", "If active, detection of kernel separation will be enabled", true, true);
+		I_ASSIGN(m_kernelParamsIdAttrPtr, "KernelParamsId", "ID of convolution kernel parameters in the parameter set (iipr::IConvolutionKernel2d)", false, "KernelParams");
+		I_ASSIGN(m_defaultKernelParamsCompPtr, "DefaultKernelParams", "Default convolution kernel parameters", false, "DefaultKernelParams");
 	I_END_COMPONENT;
 
 	// static methods
@@ -47,15 +49,16 @@ public:
 				istd::ILogger* loggerPtr = NULL);
 
 protected:
-	// reimplemented (iipr::TImageParamProcessorCompBase)
-	virtual bool ParamProcessImage(
-				const iprm::IParamsSet* paramsPtr,
-				const IConvolutionKernel2d* procParamPtr,
+	// reimplemented (iipr::CImageProcessorCompBase)
+	virtual bool ProcessImage(
+				const iprm::IParamsSet* paramsPtr, 
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage);
 
 private:
 	I_ATTR(bool, m_trySeparateKernelAttrPtr);
+	I_ATTR(QByteArray, m_kernelParamsIdAttrPtr);
+	I_REF(IConvolutionKernel2d, m_defaultKernelParamsCompPtr);
 };
 
 

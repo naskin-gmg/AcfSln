@@ -374,21 +374,21 @@ bool CConvolutionProcessorComp::DoConvolutionFilter(
 
 // protected methods
 
-// reimplemented (iipr::TImageParamProcessorCompBase<ParameterType>)
+// reimplemented (iipr::CImageProcessorCompBase)
 
-bool CConvolutionProcessorComp::ParamProcessImage(
-			const iprm::IParamsSet* paramsPtr,
-			const IConvolutionKernel2d* procParamPtr,
+bool CConvolutionProcessorComp::ProcessImage(
+			const iprm::IParamsSet* paramsPtr, 
 			const iimg::IBitmap& inputImage,
 			iimg::IBitmap& outputImage)
 {
-	if (procParamPtr == NULL){
+	iprm::TParamsPtr<IConvolutionKernel2d> filterParamsPtr(paramsPtr, m_kernelParamsIdAttrPtr, m_defaultKernelParamsCompPtr);	
+	if (!filterParamsPtr.IsValid()){
 		SendErrorMessage(0, QObject::tr("Kernel of convolution not found"));		
 		
 		return false;
 	}
 
-	istd::CIndex2d kernelSize = procParamPtr->GetKernelSize();
+	istd::CIndex2d kernelSize = filterParamsPtr->GetKernelSize();
 	AoiMode aoiMode = GetAoiMode(paramsPtr);
 
 	// create output image mask
@@ -428,7 +428,7 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 		iipr::CConvolutionKernel2d kernelX;
 		iipr::CConvolutionKernel2d kernelY;
 
-		if (		procParamPtr->TrySeparateKernels(kernelX, kernelY, IConvolutionKernel2d::ST_HOR_VERT) &&
+		if (		filterParamsPtr->TrySeparateKernels(kernelX, kernelY, IConvolutionKernel2d::ST_HOR_VERT) &&
 					(kernelX.GetGridSize(0) > 1) &&
 					(kernelY.GetGridSize(1) > 1)){
 			iimg::CScanlineMask tempMask = resultMask;
@@ -475,7 +475,7 @@ bool CConvolutionProcessorComp::ParamProcessImage(
 	}
 
 	return DoConvolutionFilter(
-				*procParamPtr,
+				*filterParamsPtr,
 				GetBackgroundMode(paramsPtr),
 				outputPixelFormat,
 				inputImage,
