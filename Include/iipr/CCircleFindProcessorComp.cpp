@@ -530,7 +530,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 	}
 
 	istd::TDelPtr<ilog::CExtMessage> projectionLinesMessagePtr;
-	if (*m_sendLinesToTempAttrPtr){
+	if (m_tempConsumerCompPtr.IsValid() && *m_sendLinesToTempAttrPtr){
 		projectionLinesMessagePtr.SetPtr(new ilog::CExtMessage(
 					istd::IInformationProvider::IC_INFO,
 					iinsp::CSupplierCompBase::MI_INTERMEDIATE,
@@ -560,7 +560,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 			}
 		}
 
-		if (m_tempConsumerCompPtr.IsValid()){
+		if (projectionLinesMessagePtr.IsValid()){
 			i2d::CLine2d* lineMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
 			lineMessageObjectPtr->SetPoint1(ray.projectionLine.GetPoint1());
 			lineMessageObjectPtr->SetPoint2(ray.projectionLine.GetPoint2());
