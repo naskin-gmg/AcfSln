@@ -6,6 +6,7 @@
 #include <iimg/CScanlineMask.h>
 
 // ACF-Solutions includes
+#include <imeas/INumericValue.h>
 #include <iblob/CBlobProcessorCompBase.h>
 
 
@@ -24,6 +25,8 @@ public:
 	I_BEGIN_COMPONENT(CPreciseBlobProcessorComp);
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
+		I_ASSIGN(m_thresholdParamIdAttrPtr, "ThresholdParamId", "ID of threshold value in parameter set (imeas::INumericValue)", false, "Threshold");
+		I_ASSIGN(m_defaultThresholdCompPtr, "DefaultThreshold", "Threshold used if not specified in parameters", false, "DefaultThreshold");
 	I_END_COMPONENT;
 
 	// static methods
@@ -36,6 +39,7 @@ public:
 		\param	loggerPtr			optional object collecting processing messages.
 	*/
 	static bool DoCalculateBlobs(
+				double threshold,
 				const iblob::IBlobFilterParams* filterParamsPtr,
 				const iimg::CScanlineMask& imageMask,
 				const iimg::IBitmap& image,
@@ -49,11 +53,12 @@ protected:
 				const iblob::IBlobFilterParams* filterParamsPtr,
 				const iimg::IBitmap& image,
 				iipr::IFeaturesConsumer& result);
-	static bool IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value);
 
 private:
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
 	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
+	I_ATTR(QByteArray, m_thresholdParamIdAttrPtr);
+	I_REF(imeas::INumericValue, m_defaultThresholdCompPtr);
 };
 
 

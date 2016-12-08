@@ -19,6 +19,11 @@ I_EXPORT_COMPONENT(
 			"Blob Filter Parameters Search" IM_CATEGORY(I_DATA_MODEL));
 
 I_EXPORT_COMPONENT(
+			PreciseBlobProcessor,
+			"Precise blob processor",
+			"Blob Filter Search Area Threshold Segmantation" IM_CATEGORY(I_DATA_MODEL) IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
 			BlobFilterParamsGui,
 			"Editor for the blob filter parameters",
 			"Blob Filter Parameters Editor UI GUI");

@@ -17,10 +17,32 @@
 #include <iipr/CPixelManip.h>
 #include <iipr/CConvolutionKernel2d.h>
 #include <iipr/CImageCopyProcessorComp.h>
+#include <iblob/CBlobFeature.h>
 
 
 namespace iblob
 {
+
+
+struct ClassDescriptor
+{
+	ClassDescriptor()
+	:	m_isActive(true),
+		m_finalClassIndex(-1),
+		m_prevDescriptorIndex(-1),
+		m_maxArea(0),
+		m_cummulatedX(0),
+		m_cummulatedY(0)
+	{
+	}
+
+	bool m_isActive;
+	int m_finalClassIndex;
+	int m_prevDescriptorIndex;
+	double m_maxArea;
+	double m_cummulatedX;
+	double m_cummulatedY;
+};
 
 
 /**
@@ -29,12 +51,14 @@ namespace iblob
 template <	typename InputPixelType,
 			typename WorkingType>
 bool DoCalculateBlobsTemplate(
-			const iblob::IBlobFilterParams* filterParamsPtr,
+			WorkingType threshold,
 			const iimg::CScanlineMask& imageMask,
 			const iimg::IBitmap& image,
-			iipr::IFeaturesConsumer& result)
+			QVector<ClassDescriptor>& classDescriptors)
 {
 	istd::CIndex2d imageSize = image.GetImageSize();
+
+	QVector<int> classIndexLine(imageSize.GetX(), -1);
 
 	istd::CIntRange lineRange(0, imageSize.GetX());
 
@@ -52,13 +76,58 @@ bool DoCalculateBlobsTemplate(
 				Q_ASSERT(rangeH.GetMinValue() >= 0);
 				Q_ASSERT(rangeH.GetMaxValue() <= imageSize.GetX());
 
-				for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
-					const InputPixelType pixel = inputLinePtr[x];
+				int currentClassIndex = -1;
 
-					// TODO: implement it!
-					Q_UNUSED(filterParamsPtr);
-					Q_UNUSED(result);
-					Q_UNUSED(pixel);
+				for (int x = rangeH.GetMinValue(); x < rangeH.GetMaxValue(); ++x){
+					const InputPixelType pixelValue = inputLinePtr[x];
+
+					int& aboveClassIndex = classIndexLine[x];
+
+					bool isIn = (pixelValue > threshold);
+
+					if (isIn){
+						if (currentClassIndex >= 0){
+							// there is class conflict, merge it!
+							int index = aboveClassIndex;
+							while (index >= 0){
+								ClassDescriptor& reducedDescriptor = classDescriptors[index];
+
+								if (reducedDescriptor.m_finalClassIndex < 0){
+									ClassDescriptor& finalDescriptor = classDescriptors[reducedDescriptor.m_finalClassIndex];
+									finalDescriptor.m_maxArea += reducedDescriptor.m_maxArea;
+									finalDescriptor.m_cummulatedX += reducedDescriptor.m_cummulatedX;
+									finalDescriptor.m_cummulatedY += reducedDescriptor.m_cummulatedY;
+								}
+								reducedDescriptor.m_maxArea = 0;
+								reducedDescriptor.m_cummulatedX = 0;
+								reducedDescriptor.m_cummulatedY = 0;
+
+								index = reducedDescriptor.m_prevDescriptorIndex;
+
+								reducedDescriptor.m_finalClassIndex = currentClassIndex;
+								reducedDescriptor.m_prevDescriptorIndex = currentClassIndex;
+							}
+						}
+						else{
+							if (aboveClassIndex >= 0){
+								currentClassIndex = aboveClassIndex;
+							}
+							else{
+								currentClassIndex = classDescriptors.size();
+								classDescriptors.push_back(ClassDescriptor());
+							}
+						}
+
+						ClassDescriptor& currentDescriptor = classDescriptors[currentClassIndex];
+						currentDescriptor.m_maxArea += 1;
+						currentDescriptor.m_cummulatedX += x;
+						currentDescriptor.m_cummulatedY += y;
+					}
+					else{
+						currentClassIndex = -1;
+					}
+
+					aboveClassIndex = currentClassIndex;
 				}
 			}
 		}
@@ -71,6 +140,7 @@ bool DoCalculateBlobsTemplate(
 // static public methods
 
 bool CPreciseBlobProcessorComp::DoCalculateBlobs(
+			double threshold,
 			const iblob::IBlobFilterParams* filterParamsPtr,
 			const iimg::CScanlineMask& imageMask,
 			const iimg::IBitmap& image,
@@ -79,27 +149,25 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 {
 	iimg::IBitmap::PixelFormat pixelFormat = image.GetPixelFormat();
 
+	QVector<ClassDescriptor> classDescriptors;
+
+	bool retVal = false;
+
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		return DoCalculateBlobsTemplate<quint8, float>(filterParamsPtr, imageMask, image, result);
-
-	case iimg::IBitmap::PF_RGB:
-		return DoCalculateBlobsTemplate<iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 22, true, true> >(filterParamsPtr, imageMask, image, result);
-
-	case iimg::IBitmap::PF_RGBA:
-		return DoCalculateBlobsTemplate<iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbaCropAccum32<qint32, 22, true, true> >(filterParamsPtr, imageMask, image, result);
+		retVal = DoCalculateBlobsTemplate<quint8, float>(threshold, imageMask, image, classDescriptors);
 
 	case iimg::IBitmap::PF_GRAY16:
-		return DoCalculateBlobsTemplate<quint16, float >(filterParamsPtr, imageMask, image, result);
+		retVal = DoCalculateBlobsTemplate<quint16, float >(threshold, imageMask, image, classDescriptors);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoCalculateBlobsTemplate<quint32, double>(filterParamsPtr, imageMask, image, result);
+		retVal = DoCalculateBlobsTemplate<quint32, double>(threshold, imageMask, image, classDescriptors);
 
 	case iimg::IBitmap::PF_FLOAT32:
-		return DoCalculateBlobsTemplate<float, float>(filterParamsPtr, imageMask, image, result);
+		retVal = DoCalculateBlobsTemplate<float, float>(threshold, imageMask, image, classDescriptors);
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoCalculateBlobsTemplate<double, double>(filterParamsPtr, imageMask, image, result);
+		retVal = DoCalculateBlobsTemplate<double, double>(threshold, imageMask, image, classDescriptors);
 
 	default:
 		if (loggerPtr != NULL){
@@ -111,6 +179,49 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 		}
 		return false;
 	}
+
+	if (retVal){
+		for (QVector<ClassDescriptor>::ConstIterator iter = classDescriptors.constBegin(); iter != classDescriptors.constEnd(); ++iter){
+			const ClassDescriptor& descriptor = *iter;
+			if (descriptor.m_finalClassIndex < 0){
+				double posX = descriptor.m_cummulatedX / descriptor.m_maxArea;
+				double posY = descriptor.m_cummulatedY / descriptor.m_maxArea;
+				double area = descriptor.m_maxArea;
+				double perimeter = descriptor.m_maxArea / I_PI;
+				double circularity = 1;
+
+				bool passedByFilter = true;
+
+				if ((filterParamsPtr != NULL) && filterParamsPtr->IsFiltersEnabled()){
+					int filtersCount = filterParamsPtr->GetFiltersCount();
+
+					for (int filterIndex = 0; filterIndex < filtersCount; ++filterIndex){
+						const iblob::IBlobFilterParams::Filter& filter = filterParamsPtr->GetFilterAt(filterIndex);
+
+						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_CIRCULARITY){
+							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, circularity);
+						}
+
+						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_AREA){
+							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, area);
+						}
+
+						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_PERIMETER){
+							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, perimeter);
+						}
+					}
+				}
+
+				if (passedByFilter){
+					iblob::CBlobFeature* blobFeaturePtr = new iblob::CBlobFeature(area, perimeter, i2d::CVector2d(posX, posY));
+
+					result.AddFeature(blobFeaturePtr);
+				}
+			}
+		}
+	}
+
+	return retVal;
 }
 
 
@@ -143,7 +254,17 @@ bool CPreciseBlobProcessorComp::CalculateBlobs(
 		imageMask.CreateFilled(clipArea);
 	}
 
+	double threshold = 128;
+	iprm::TParamsPtr<imeas::INumericValue> thresholdValuePtr(paramsPtr, m_thresholdParamIdAttrPtr, m_defaultThresholdCompPtr, false);
+	if (thresholdValuePtr.IsValid()){
+		imath::CVarVector values = thresholdValuePtr->GetValues();
+		if (values.GetElementsCount() >= 1){
+			threshold = values[0];
+		}
+	}
+
 	return DoCalculateBlobs(
+				threshold,
 				filterParamsPtr,
 				imageMask,
 				image,
