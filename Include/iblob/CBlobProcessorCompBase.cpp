@@ -23,7 +23,7 @@ int CBlobProcessorCompBase::DoExtractFeatures(
 		return TS_INVALID;
 	}
 
-	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, *m_filterParamsIdAttrPtr);
+	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);
 
 	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), image, results)? TS_OK: TS_INVALID;
 	if (!retVal){
