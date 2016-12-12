@@ -29,12 +29,6 @@ class CHoughLineFinderComp:
 public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 
-	enum MessageId
-	{
-		FOUND_LINE = 0x934d740,
-		HOUGH_SPACE
-	};
-
 	I_BEGIN_COMPONENT(CHoughLineFinderComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_REGISTER_INTERFACE(IImageToFeatureProcessor);
@@ -48,6 +42,12 @@ public:
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
 		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
 	I_END_COMPONENT;
+
+	enum MessageId
+	{
+		FOUND_LINE = 0x934d740,
+		HOUGH_SPACE
+	};
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
