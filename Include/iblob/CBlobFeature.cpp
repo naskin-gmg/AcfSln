@@ -40,7 +40,13 @@ double CBlobFeature::GetCircularity() const
 		return 0.0;
 	}
 
-	return 4 * I_PI * m_area / (m_perimeter * m_perimeter);
+	return 4 * I_PI * GetCompactness();
+}
+
+
+double CBlobFeature::GetCompactness() const
+{
+	return m_area / (m_perimeter * m_perimeter);
 }
 
 

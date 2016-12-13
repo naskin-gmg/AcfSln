@@ -530,7 +530,7 @@ void CCircleFindProcessorComp::AddIntermediateResults(Rays& outRays)
 	}
 
 	istd::TDelPtr<ilog::CExtMessage> projectionLinesMessagePtr;
-	if (m_tempConsumerCompPtr.IsValid() && *m_sendLinesToTempAttrPtr){
+	if (*m_sendLinesToTempAttrPtr){
 		projectionLinesMessagePtr.SetPtr(new ilog::CExtMessage(
 					istd::IInformationProvider::IC_INFO,
 					iinsp::CSupplierCompBase::MI_INTERMEDIATE,

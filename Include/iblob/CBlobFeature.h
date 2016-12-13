@@ -29,6 +29,7 @@ public:
 				double angle = 0.0);
 
 	double GetCircularity() const;
+	double GetCompactness() const;
 	double GetPerimeter() const;
 	double GetArea() const;
 
