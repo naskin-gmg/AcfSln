@@ -194,11 +194,16 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
+				istd::TDelPtr<i2d::ICalibration2d> calibrationCopyPtr;
+
 				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
 				if (calibrationPtr != NULL){
-					m_providerToCalibrationMap[providerPtr].SetCastedOrRemove(calibrationPtr->CloneMe());
-					viewPtr->SetDisplayCalibration(m_providerToCalibrationMap[providerPtr].GetPtr());
+					calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
 				}
+
+				viewPtr->SetDisplayCalibration(calibrationCopyPtr.GetPtr());
+
+				m_providerToCalibrationMap[providerPtr].TakeOver(calibrationCopyPtr);
 			}
 		}
 	}
@@ -217,7 +222,6 @@ template <class UI>
 void TSupplierGuiCompBase<UI>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	if (		m_providerToCalibrationMap.contains(providerPtr) &&
-				(*m_viewCalibrationModeAttrPtr > VCM_NONE) &&
 				(*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS)){
 		iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 		const i2d::ICalibration2d* calibrationPtr = m_providerToCalibrationMap[providerPtr].GetPtr();
@@ -496,6 +500,36 @@ void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::I
 
 		default:
 			break;
+		}
+	}
+
+	if (*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS){
+		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObservedObject());
+
+		for (		ProviderToCalibrationMap::Iterator viewIter = m_providerToCalibrationMap.begin();
+					viewIter != m_providerToCalibrationMap.end();
+					++viewIter){
+			const iqt2d::IViewProvider* providerPtr = viewIter.key();
+			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
+
+			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
+				istd::TDelPtr<i2d::ICalibration2d> calibrationCopyPtr;
+
+				const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
+				if (calibrationPtr != NULL){
+					const i2d::ICalibration2d* viewCalibrationPtr = viewIter.value().GetPtr();
+
+					if ((viewCalibrationPtr != NULL) && viewCalibrationPtr->IsEqual(*calibrationPtr)){
+						continue;
+					}
+
+					calibrationCopyPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+				}
+
+				viewPtr->SetDisplayCalibration(calibrationCopyPtr.GetPtr());
+
+				viewIter.value().TakeOver(calibrationCopyPtr);
+			}
 		}
 	}
 
