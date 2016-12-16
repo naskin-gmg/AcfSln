@@ -1,8 +1,59 @@
 #include <iipr/CDifferenceBitmapSupplierComp.h>
 
 
+// ACF includes
+#include <imath/CFixedPointManip.h>
+#include <iprm/TParamsPtr.h>
+#include <iimg/CPixelFormatList.h>
+
+
 namespace iipr
 {
+
+
+// template functions
+
+template <	typename FirstPixelType,
+			typename SecondPixelType,
+			typename OutputPixelType,
+			typename WorkingType>
+void CalculateDifferenceBitmap(
+			WorkingType offset,
+			const iimg::IBitmap& firstInputBitmap,
+			const iimg::IBitmap& secondInputBitmap,
+			iimg::IBitmap& result)
+{
+	istd::CIndex2d outputImageSize = result.GetImageSize();
+
+	int componentsCount = firstInputBitmap.GetComponentsCount();
+
+	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+		for (int y = 0; y < outputImageSize.GetY(); ++y){
+			const FirstPixelType* firstLinePtr = (const FirstPixelType*)firstInputBitmap.GetLinePtr(y);
+			const SecondPixelType* secondLinePtr = (const SecondPixelType*)secondInputBitmap.GetLinePtr(y);
+			OutputPixelType* outputLinePtr = (OutputPixelType*)result.GetLinePtr(y);
+
+			for (int x = 0; x < outputImageSize.GetX(); ++x){
+				int pixelComponentIndex = x * componentsCount + componentIndex;
+
+				WorkingType firstValue = firstLinePtr[pixelComponentIndex];
+				WorkingType secondValue = secondLinePtr[pixelComponentIndex];
+
+				outputLinePtr[pixelComponentIndex] = qAbs(offset + firstValue - secondValue);
+			}
+		}
+	}
+}
+
+
+CDifferenceBitmapSupplierComp::CDifferenceBitmapSupplierComp()
+{
+	static imath::CFixedPointManip percentManip(3);
+
+	imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
+
+	m_OffsetContraints.InsertValueInfo(QObject::tr("Offset"), QObject::tr("Offset added to each pixel as percentage"), unitInfo);
+}
 
 
 // reimplemented (iimg::IBitmapProvider)
@@ -77,7 +128,9 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
-	if (firstBitmapPtr->GetPixelFormat() != secondBitmapPtr->GetPixelFormat()){
+	iimg::IBitmap::PixelFormat pixelFormat = firstBitmapPtr->GetPixelFormat();
+
+	if (pixelFormat != secondBitmapPtr->GetPixelFormat()){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Format of input images differs"), "DifferenceBitmapSupplier"));
 
 		return WS_ERROR;
@@ -85,7 +138,50 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	Timer performanceTimer(this, "Image difference");
 
-	return CalculateDifferenceBitmap(*firstBitmapPtr, *secondBitmapPtr, result);
+	istd::CIndex2d firstImageSize = firstBitmapPtr->GetImageSize();
+	istd::CIndex2d secondImageSize = secondBitmapPtr->GetImageSize();
+
+	istd::CIndex2d outputImageSize = istd::CIndex2d(qMin(firstImageSize.GetX(), secondImageSize.GetX()), qMin(firstImageSize.GetY(), secondImageSize.GetY()));
+	if (result.second->CreateBitmap(pixelFormat, outputImageSize)){
+	}
+
+	double offset = 0;
+	iprm::TParamsPtr<imeas::INumericValue> thresholdValuePtr(GetModelParametersSet(), m_offsetParamIdAttrPtr, m_defaultOffsetCompPtr, false);
+	if (thresholdValuePtr.IsValid()){
+		imath::CVarVector values = thresholdValuePtr->GetValues();
+		if (values.GetElementsCount() >= 1){
+			offset = values[0];
+		}
+	}
+
+	switch (pixelFormat){
+	case iimg::IBitmap::PF_GRAY:
+		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
+		return WS_OK;
+
+	case iimg::IBitmap::PF_GRAY16:
+		CalculateDifferenceBitmap<quint16, quint16, quint16, int>(quint16(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
+		return WS_OK;
+
+	case iimg::IBitmap::PF_GRAY32:
+		CalculateDifferenceBitmap<quint32, quint32, quint32, int>(quint16(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
+		return WS_OK;
+
+	case iimg::IBitmap::PF_FLOAT32:
+		CalculateDifferenceBitmap<float, float, float, float>(float(offset), *firstBitmapPtr, *secondBitmapPtr, *result.second);
+		return WS_OK;
+
+	case iimg::IBitmap::PF_FLOAT64:
+		CalculateDifferenceBitmap<double, double, double, double>(offset, *firstBitmapPtr, *secondBitmapPtr, *result.second);
+		return WS_OK;
+
+	default:
+		SendErrorMessage(
+					iproc::IProcessor::MI_BAD_PARAMS,
+					QObject::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(pixelFormat)),
+					QObject::tr("BitmapDifference"));
+		return WS_CRITICAL;
+	}
 }
 
 
@@ -102,42 +198,6 @@ void CDifferenceBitmapSupplierComp::OnComponentCreated()
 	if (m_secondBitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_secondBitmapProviderModelCompPtr.GetPtr(), m_secondBitmapSupplierCompPtr.GetPtr());
 	}
-}
-
-
-// private methods
-
-int CDifferenceBitmapSupplierComp::CalculateDifferenceBitmap(
-			const iimg::IBitmap& firstInputBitmap,
-			const iimg::IBitmap& secondInputBitmap,
-			ProductType& result) const
-{
-	istd::CIndex2d firstImageSize = firstInputBitmap.GetImageSize();
-	istd::CIndex2d secondImageSize = secondInputBitmap.GetImageSize();
-
-	istd::CIndex2d outputImageSize = istd::CIndex2d(qMax(firstImageSize.GetX(), secondImageSize.GetX()), qMax(firstImageSize.GetY(), secondImageSize.GetY()));
-	result.second->CreateBitmap(firstInputBitmap.GetPixelFormat(), outputImageSize);
-
-	int componentsCount = firstInputBitmap.GetComponentsCount();
-
-	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-		for (int y = 0; y < outputImageSize.GetY(); ++y){
-			const quint8* firstLinePtr = (const quint8*)firstInputBitmap.GetLinePtr(y);
-			const quint8* secondLinePtr = (const quint8*)secondInputBitmap.GetLinePtr(y);
-			quint8* outputLinePtr = (quint8*)result.second->GetLinePtr(y);
-
-			for (int x = 0; x < outputImageSize.GetX(); ++x){
-				int pixelComponentIndex = x * componentsCount + componentIndex;
-
-				quint8 firstValue = firstLinePtr[pixelComponentIndex];
-				quint8 secondValue = secondLinePtr[pixelComponentIndex];
-
-				outputLinePtr[pixelComponentIndex] = qAbs(firstValue - secondValue);
-			}
-		}
-	}
-
-	return WS_OK;
 }
 
 
