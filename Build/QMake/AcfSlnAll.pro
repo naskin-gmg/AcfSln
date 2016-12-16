@@ -27,6 +27,9 @@ iqtex.file = ../../Include/iqtex/QMake/iqtex.pro
 SUBDIRS += iqtmm
 iqtmm.file = ../../Include/iqtmm/QMake/iqtmm.pro
 
+SUBDIRS += icalib
+icalib.file = ../../Include/icalib/QMake/icalib.pro
+
 SUBDIRS += icam
 icam.file = ../../Include/icam/QMake/icam.pro
 
