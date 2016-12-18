@@ -197,8 +197,10 @@ private:
 
 		void UpdateLocalMetaInfoMap();
 
-		// reimplemented (icomp::IMetaInfoManager)
+		// reimplemented (icomp::IComponentListProvider)
 		virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
+
+		// reimplemented (icomp::IMetaInfoManager)
 		virtual const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const;
 		virtual const icomp::IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const;
 
