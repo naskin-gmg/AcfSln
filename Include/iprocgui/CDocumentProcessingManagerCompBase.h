@@ -83,8 +83,8 @@ protected:
 	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(iqtgui::IGuiObject, m_paramsGuiCompPtr);
-	I_ATTR(QString, m_commandNameAttrPtr);
-	I_ATTR(QString, m_menuNameAttrPtr);
+	I_TEXTATTR(m_commandNameAttrPtr);
+	I_TEXTATTR(m_menuNameAttrPtr);
 	I_ATTR(bool, m_inputDocumentRequiredAttrPtr);
 	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
 	I_ATTR(int, m_commandGroupIdAttrPtr);

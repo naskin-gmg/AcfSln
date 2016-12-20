@@ -54,7 +54,7 @@ private:
 	I_MULTIREF(iproc::IProcessor, m_processorsCompPtr);
 	I_MULTIREF(istd::IChangeable, m_buffersCompPtr);
 	I_MULTIATTR(QByteArray, m_progressIdsAttrPtr);
-	I_MULTIATTR(QString, m_progressDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_progressDescriptionsAttrPtr);
 };
 
 

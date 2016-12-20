@@ -49,7 +49,7 @@ protected:
 
 private:
 	I_ATTR(QString, m_defaultSourceAttrPtr);
-	I_ATTR(QString, m_defaultDescriptionAttrPtr);
+	I_TEXTATTR(m_defaultDescriptionAttrPtr);
 	I_MULTIREF(istd::IInformationProvider, m_slaveInformationProvidersCompPtr);
 	I_MULTIREF(imod::IModel, m_slaveInformationProviderModelsCompPtr);
 

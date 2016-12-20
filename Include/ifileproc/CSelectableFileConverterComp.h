@@ -65,8 +65,8 @@ protected:
 
 private:
 	I_MULTIREF(ifileproc::IFileConversion, m_slaveConvertersCompPtr);
-	I_MULTIATTR(QString, m_slaveConverterNamesAttrPtr);
-	I_MULTIATTR(QString, m_slaveConverterDescriptionsAttrPtr);
+	I_MULTITEXTATTR(m_slaveConverterNamesAttrPtr);
+	I_MULTITEXTATTR(m_slaveConverterDescriptionsAttrPtr);
 
 	int m_optionsCount;
 	int m_selectedOptionIndex;

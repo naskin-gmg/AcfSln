@@ -68,11 +68,11 @@ protected:
 
 private:
 	I_ATTR(int, m_dimensionsCountAttrPtr);
-	I_MULTIATTR(QString, m_namesAttrPtr);
-	I_MULTIATTR(QString, m_descriptionsAttrPtr);
+	I_MULTITEXTATTR(m_namesAttrPtr);
+	I_MULTITEXTATTR(m_descriptionsAttrPtr);
 	I_MULTIATTR(QByteArray, m_valueIdsAttrPtr);
 	I_ATTR(int, m_unitTypeAttrPtr);
-	I_ATTR(QString, m_unitNameAttrPtr);
+	I_TEXTATTR(m_unitNameAttrPtr);
 	I_ATTR(double, m_displayMultFactorAttrPtr);
 	I_ATTR(double, m_minValueAttrPtr);
 	I_ATTR(double, m_maxValueAttrPtr);

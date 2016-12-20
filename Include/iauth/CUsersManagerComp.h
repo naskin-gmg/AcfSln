@@ -58,7 +58,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_MULTIATTR(QString, m_userLevelNamesAttrPtr);
+	I_MULTITEXTATTR(m_userLevelNamesAttrPtr);
 	I_MULTIATTR(QString, m_defaultUsersAttrPtr);
 	I_MULTIATTR(QString, m_defaultUserPasswordsAttrPtr);
 	I_MULTIATTR(int, m_defaultUserLevelsAttrPtr);

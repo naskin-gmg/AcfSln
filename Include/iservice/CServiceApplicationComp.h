@@ -99,7 +99,7 @@ protected:
 
 private:
 	I_REF(ibase::IApplication, m_applicationCompPtr);
-	I_ATTR(QString, m_serviceDescriptionAttrPtr);
+	I_TEXTATTR(m_serviceDescriptionAttrPtr);
 	I_ATTR(QString, m_serviceNameAttrPtr);
 	I_ATTR(bool, m_manualStartupAttrPtr);
 };

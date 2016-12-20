@@ -76,7 +76,7 @@ private:
 	I_REF(ifile::IFilePersistence, m_singleBitmapPersistenceCompPtr);
 	I_REF(ifile::IFilePersistence, m_multiBitmapPersistenceCompPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
-	I_ATTR(QString, m_filePathFormatAttrPtr);
+	I_TEXTATTR(m_filePathFormatAttrPtr);
 
 	imod::TModelWrap<iimg::CBitmap> m_bitmap;
 	iimg::CQImageBasedMultiPageBitmap m_bitmapDocument;

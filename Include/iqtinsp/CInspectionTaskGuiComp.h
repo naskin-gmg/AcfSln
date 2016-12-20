@@ -51,7 +51,7 @@ public:
 	I_END_COMPONENT;
 
 protected:
-	I_MULTIATTR(QString, m_namesAttrPtr);
+	I_MULTITEXTATTR(m_namesAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);

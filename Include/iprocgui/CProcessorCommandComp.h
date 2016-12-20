@@ -41,7 +41,7 @@ public:
 		I_ASSIGN(m_actionIconAttrPtr, "ActionIcon", "Icon used command menu", true, ":/Icons");
 		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
-		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "RootMenu");
+		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "Process");
 		I_ASSIGN(m_successMessageAttrPtr, "SuccessMessage", "If defined, the message will be shown at the end of a successed processing action", false, "");
 		I_ASSIGN(m_errorMessageAttrPtr, "ErrorMessage", "If defined, the message will be shown at the end of a failed processing action", false, "");
 		I_ASSIGN(m_cancelMessageAttrPtr, "CancelMessage", "If defined, the message will be shown at the end of a canceled processing action", false, "");
@@ -65,12 +65,12 @@ protected:
 	I_REF(istd::IChangeable, m_processorOutputCompPtr);
 	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_ATTR(QByteArray, m_actionIconAttrPtr);
-	I_ATTR(QString, m_menuNameAttrPtr);
-	I_ATTR(QString, m_menuDescriptionAttrPtr);
-	I_ATTR(QString, m_rootMenuNameAttrPtr);
-	I_ATTR(QString, m_successMessageAttrPtr);
-	I_ATTR(QString, m_errorMessageAttrPtr);
-	I_ATTR(QString, m_cancelMessageAttrPtr);
+	I_TEXTATTR(m_menuNameAttrPtr);
+	I_TEXTATTR(m_menuDescriptionAttrPtr);
+	I_TEXTATTR(m_rootMenuNameAttrPtr);
+	I_TEXTATTR(m_successMessageAttrPtr);
+	I_TEXTATTR(m_errorMessageAttrPtr);
+	I_TEXTATTR(m_cancelMessageAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;
 	iqtgui::CHierarchicalCommand m_mainMenuCommand;
