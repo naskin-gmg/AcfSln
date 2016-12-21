@@ -1,0 +1,133 @@
+#include <icalibgui/CSimpleLensCorrectionEditorComp.h>
+
+
+// ACF includes
+#include <istd/CChangeGroup.h>
+
+#include <iqt/CSignalBlocker.h>
+
+
+namespace icalibgui
+{
+
+
+// public methods
+
+// reimplemented (imod::IModelEditor)
+
+void CSimpleLensCorrectionEditorComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	icalib::CSimpleLensCorrection* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	i2d::CVector2d opticalCenter(CenterXSB->value(), CenterYSB->value());
+//	double scale = ScaleSB->value();
+	double distortionFactor = CorrectionFactorSB->value();
+
+	istd::CChangeGroup changeGroup(objectPtr);
+	Q_UNUSED(changeGroup);
+
+	objectPtr->SetOpticalCenter(opticalCenter);
+	objectPtr->SetDistortionFactor(distortionFactor);
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	Q_ASSERT(IsGuiCreated());
+
+	icalib::CSimpleLensCorrection* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		const i2d::CVector2d& opticalCenter = objectPtr->GetOpticalCenter();
+		double distortionFactor = objectPtr->GetDistortionFactor();
+		double zoom = 1;
+
+		iqt::CSignalBlocker block(GetWidget(), true);
+
+		CenterXSB->setValue(opticalCenter.GetX());
+		CenterYSB->setValue(opticalCenter.GetY());
+
+		CorrectionFactorSB->setValue(distortionFactor);
+		ScaleSB->setValue(zoom);
+	}
+
+	bool isEnabled = (objectPtr != NULL);
+
+	CenterXSB->setEnabled(isEnabled);
+	CenterYSB->setEnabled(isEnabled);
+	CorrectionFactorSB->setEnabled(isEnabled);
+	ScaleSB->setEnabled(isEnabled);
+}
+
+
+void CSimpleLensCorrectionEditorComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	CalibrateButton->setVisible(m_calibProviderCompPtr.IsValid());
+
+	QObject::connect(CenterXSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(CenterYSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(CorrectionFactorSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(ScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+
+	if (m_calibProviderCompPtr.IsValid() && m_calibProviderModelCompPtr.IsValid()){
+		RegisterModel(m_calibProviderModelCompPtr.GetPtr(), 0);
+	}
+}
+
+
+void CSimpleLensCorrectionEditorComp::OnGuiDestroyed()
+{
+	UnregisterAllModels();
+
+	QObject::disconnect(CenterXSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(CenterYSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(CorrectionFactorSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(ScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CSimpleLensCorrectionEditorComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	Q_ASSERT(m_calibProviderCompPtr.IsValid());
+
+	const i2d::ICalibration2d* calibrationPtr = m_calibProviderCompPtr->GetCalibration();
+	CalibrateButton->setEnabled(calibrationPtr != NULL);
+}
+
+
+// protected slots
+
+void CSimpleLensCorrectionEditorComp::on_CalibrateButton_clicked()
+{
+	Q_ASSERT(m_calibProviderCompPtr.IsValid());
+
+	const i2d::ICalibration2d* newCalibrationPtr = m_calibProviderCompPtr->GetCalibration();
+
+	icalib::CSimpleLensCorrection* objectPtr = GetObservedObject();
+	if ((objectPtr != NULL) && (newCalibrationPtr != NULL)){
+		objectPtr->CopyFrom(*newCalibrationPtr);
+	}
+}
+
+
+void CSimpleLensCorrectionEditorComp::OnParamsChanged(double /*value*/)
+{
+	DoUpdateModel();
+}
+
+
+} // namespace icalibgui
+
+

@@ -30,14 +30,17 @@ iqtmm.file = ../../Include/iqtmm/QMake/iqtmm.pro
 SUBDIRS += icalib
 icalib.file = ../../Include/icalib/QMake/icalib.pro
 
+SUBDIRS += icalibgui
+icalibgui.file = ../../Include/icalibgui/QMake/icalibgui.pro
+
 SUBDIRS += icam
 icam.file = ../../Include/icam/QMake/icam.pro
 
-SUBDIRS += iqtauth
-iqtauth.file = ../../Include/iqtauth/QMake/iqtauth.pro
-
 SUBDIRS += iqtcam
 iqtcam.file = ../../Include/iqtcam/QMake/iqtcam.pro
+
+SUBDIRS += iqtauth
+iqtauth.file = ../../Include/iqtauth/QMake/iqtauth.pro
 
 SUBDIRS += iinsp
 iinsp.file = ../../Include/iinsp/QMake/iinsp.pro
