@@ -126,6 +126,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	CameraPck.file = ../../Impl/CameraPck/QMake/CameraPck.pro
 	CameraPck.depends = icam iproc
 
+	SUBDIRS += CalibrationPck
+	CalibrationPck.file = ../../Impl/CalibrationPck/QMake/CalibrationPck.pro
+	CalibrationPck.depends = icalib
+
 	SUBDIRS += EdgePck
 	EdgePck.file = ../../Impl/EdgePck/QMake/EdgePck.pro
 	EdgePck.depends = iedge iproc
@@ -161,6 +165,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	SUBDIRS += QtCameraPck
 	QtCameraPck.file = ../../Impl/QtCameraPck/QMake/QtCameraPck.pro
 	QtCameraPck.depends = icam iqtcam
+
+	SUBDIRS += CalibrationGuiPck
+	CalibrationGuiPck.file = ../../Impl/CalibrationGuiPck/QMake/CalibrationGuiPck.pro
+	CalibrationGuiPck.depends = icalib icalibgui
 
 	SUBDIRS += QtExPck
 	QtExPck.file = ../../Impl/QtExPck/QMake/QtExPck.pro

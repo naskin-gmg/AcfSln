@@ -34,7 +34,7 @@ const i2d::ICalibration2d* CCheckboardCalibSupplierComp::GetCalibration() const
 
 //protected methods
 
-bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& image, i2d::CPerspectiveCalibration2d& result) const
+bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& image, icalib::CPerspectiveCalibration2d& result) const
 {
 	int gridSize = *m_defaultGridSizeAttrPtr;
 	double cellSize = *m_defaultCellSizeAttrPtr;

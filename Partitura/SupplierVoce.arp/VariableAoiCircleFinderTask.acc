@@ -10,7 +10,7 @@
     <Description>Circle finder task using annulus segment to speciffy AOI</Description>
     <Keywords>Circle Finder Task Annulus Position</Keywords>
     <ElementsList>
-        <Element Id="Calibration2dProxy" PackageId="BasePck" ComponentId="Calibration2dProxy">
+        <Element Id="Calibration2dProxy" PackageId="CalibrationPck" ComponentId="Calibration2dProxy">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="RegionCalibrationProvider">

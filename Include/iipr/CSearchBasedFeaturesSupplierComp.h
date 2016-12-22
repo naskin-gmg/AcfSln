@@ -5,7 +5,7 @@
 // ACF includes
 #include <i2d/IMultiCalibrationProvider.h>
 #include <i2d/CVector2d.h>
-#include <i2d/CAffineCalibration2d.h>
+#include <icalib/CAffineCalibration2d.h>
 #include <iprm/IParamsSet.h>
 #include <istd/IInformationProvider.h>
 
@@ -81,7 +81,7 @@ private:
 	I_ATTR(QByteArray, m_searchParamsManagerParamIdAttrPtr);
 	I_ATTR(QByteArray, m_searchParamsIdAttrPtr);
 	
-	typedef QVector<i2d::CAffineCalibration2d> CalibrationList;
+	typedef QVector<icalib::CAffineCalibration2d> CalibrationList;
 	
 	mutable CalibrationList m_calibrationList;
 

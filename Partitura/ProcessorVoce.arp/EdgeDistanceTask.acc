@@ -10,7 +10,7 @@
     <Description>Edge distance calculation based on caliper</Description>
     <Keywords>Caliper Edge Distance</Keywords>
     <ElementsList>
-        <Element Id="Calibration2dProxy" PackageId="BasePck" ComponentId="Calibration2dProxy">
+        <Element Id="Calibration2dProxy" PackageId="CalibrationPck" ComponentId="Calibration2dProxy">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="RegionCalibrationProvider">

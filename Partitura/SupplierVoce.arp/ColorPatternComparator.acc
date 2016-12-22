@@ -158,7 +158,7 @@
         <EmbeddedRegistry Id="ComparatorParams">
             <Data Description="" Keywords="">
                 <ElementsList>
-                    <Element Id="Calibration2dProxy" PackageId="BasePck" ComponentId="Calibration2dProxy">
+                    <Element Id="Calibration2dProxy" PackageId="CalibrationPck" ComponentId="Calibration2dProxy">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="AoiCalibrationProvider">

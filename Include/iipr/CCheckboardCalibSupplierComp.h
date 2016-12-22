@@ -6,7 +6,7 @@
 #include <imath/CFixedPointManip.h>
 #include <imath/CGeneralUnitInfo.h>
 #include <i2d/ICalibrationProvider.h>
-#include <i2d/CPerspectiveCalibration2d.h>
+#include <icalib/CPerspectiveCalibration2d.h>
 #include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
@@ -25,11 +25,11 @@ namespace iipr
 	Supplier of bitmap built on difference of two images.
 */
 class CCheckboardCalibSupplierComp:
-			public iinsp::TSupplierCompWrap< i2d::CPerspectiveCalibration2d >,
+			public iinsp::TSupplierCompWrap< icalib::CPerspectiveCalibration2d >,
 			virtual public i2d::ICalibrationProvider
 {
 public:
-	typedef iinsp::TSupplierCompWrap<i2d::CPerspectiveCalibration2d> BaseClass;
+	typedef iinsp::TSupplierCompWrap<icalib::CPerspectiveCalibration2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CCheckboardCalibSupplierComp);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
@@ -91,7 +91,7 @@ protected:
 		const CCheckboardCalibSupplierComp* m_parentPtr;
 	};
 
-	bool CalculateCalibration(const iimg::IBitmap& image, i2d::CPerspectiveCalibration2d& result) const;
+	bool CalculateCalibration(const iimg::IBitmap& image, icalib::CPerspectiveCalibration2d& result) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;

@@ -3,7 +3,7 @@
 // ACF includes
 #include <imod/TModelWrap.h>
 #include <imath/CGeneralUnitInfo.h>
-#include <i2d/CAffineCalibration2d.h>
+#include <icalib/CAffineCalibration2d.h>
 #include <iprm/TParamsPtr.h>
 
 

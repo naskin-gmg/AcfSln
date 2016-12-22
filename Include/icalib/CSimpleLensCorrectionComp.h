@@ -1,5 +1,5 @@
-#ifndef icalib_CPerspectiveCalibration2dComp_included
-#define icalib_CPerspectiveCalibration2dComp_included
+#ifndef icalib_CSimpleLensCorrectionComp_included
+#define icalib_CSimpleLensCorrectionComp_included
 
 
 // ACF includes
@@ -46,6 +46,6 @@ private:
 } // namespace icalib
 
 
-#endif // !icalib_CPerspectiveCalibration2dComp_included
+#endif // !icalib_CSimpleLensCorrectionComp_included
 
 

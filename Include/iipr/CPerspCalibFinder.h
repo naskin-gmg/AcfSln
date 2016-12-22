@@ -4,7 +4,7 @@
 
 // ACF includes
 #include <istd/IPolymorphic.h>
-#include <i2d/CPerspectiveCalibration2d.h>
+#include <icalib/CPerspectiveCalibration2d.h>
 #include <i2d/CVector2d.h>
 
 
@@ -22,7 +22,7 @@ public:
 				const i2d::CVector2d* nominalPositionsPtr,
 				const i2d::CVector2d* foundPositionsPtr,
 				int positionsCount,
-				i2d::CPerspectiveCalibration2d& results,
+				icalib::CPerspectiveCalibration2d& results,
 				bool allowPerspective = true,
 				bool allowRotation = true,
 				bool allowScale = true,

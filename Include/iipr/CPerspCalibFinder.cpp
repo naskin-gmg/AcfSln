@@ -13,7 +13,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 			const i2d::CVector2d* nominalPositionsPtr,
 			const i2d::CVector2d* foundPositionsPtr,
 			int positionsCount,
-			i2d::CPerspectiveCalibration2d& result,
+			icalib::CPerspectiveCalibration2d& result,
 			bool allowPerspective,
 			bool allowRotation,
 			bool allowScale,

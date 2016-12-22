@@ -5,7 +5,7 @@
 #include <imod/TModelWrap.h>
 #include <ilog/CExtMessage.h>
 #include <i2d/CCircle.h>
-#include <i2d/CAffineCalibration2d.h>
+#include <icalib/CAffineCalibration2d.h>
 
 // ACF-Solutions includes
 #include <iipr/CSingleFeatureConsumer.h>
@@ -165,7 +165,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			originalZeroPos = inputCalibrationPtr->GetValueAt(i2d::CVector2d(0, 0));
 		}
 
-		i2d::CAffineCalibration2d* outputTransformPtr = new imod::TModelWrap<i2d::CAffineCalibration2d>();
+		icalib::CAffineCalibration2d* outputTransformPtr = new imod::TModelWrap<icalib::CAffineCalibration2d>();
 		outputTransformPtr->Reset(resultVector - originalZeroPos);
 		m_outputCalibrationPtr.SetPtr(outputTransformPtr);
 

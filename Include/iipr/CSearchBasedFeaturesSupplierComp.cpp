@@ -328,7 +328,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		// Update calibration list
 		int featuresCount = result.GetFeaturesCount();
 		for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-			i2d::CAffineCalibration2d calibration;
+			icalib::CAffineCalibration2d calibration;
 
 			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetFeature(featureIndex));
 			Q_ASSERT(objectFeaturePtr != NULL);

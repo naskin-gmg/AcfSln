@@ -364,7 +364,7 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="PerspectiveCalibrationShape" PackageId="QtViewPck" ComponentId="PerspectiveCalibrationShape">
+                    <Element Id="PerspectiveCalibrationShape" PackageId="CalibrationGuiPck" ComponentId="PerspectiveCalibrationShape">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
                                 <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="PerspectiveCalibration">
