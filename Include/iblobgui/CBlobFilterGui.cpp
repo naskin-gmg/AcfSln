@@ -4,9 +4,6 @@
 // ACF includes
 #include <iqt/CSignalBlocker.h>
 
-// ACF-Solutions includes
-#include <iblob/CBlobDescriptorInfo.h>
-
 
 namespace iblobgui
 {
@@ -46,8 +43,8 @@ void CBlobFilterGui::retranslateUi(QWidget *widgetPtr)
 
 void CBlobFilterGui::SetFilterInfo(const iblob::IBlobFilterParams::Filter& info)
 {
-	int paramIndex = ParameterCombo->findData(info.blobDescriptorType);
-	ParameterCombo->setCurrentIndex(paramIndex);
+	int featureIndex = ParameterCombo->findData(info.featureId);
+	ParameterCombo->setCurrentIndex(featureIndex);
 
 	int conditionIndex = ConditionCombo->findData(info.condition);
 	ConditionCombo->setCurrentIndex(conditionIndex);
@@ -63,7 +60,7 @@ iblob::IBlobFilterParams::Filter CBlobFilterGui::GetFilterInfo() const
 {
 	iblob::IBlobFilterParams::Filter info;
 
-	info.blobDescriptorType = ParameterCombo->itemData(ParameterCombo->currentIndex()).toInt();
+	info.featureId = ParameterCombo->itemData(ParameterCombo->currentIndex()).toByteArray();
 	info.condition = iblob::IBlobFilterParams::FilterCondition(ConditionCombo->itemData(ConditionCombo->currentIndex()).toInt());
 	info.operation = iblob::IBlobFilterParams::FO_INCLUDE;
 	info.valueRange.SetMinValue(Value1SpinBox->value());
@@ -73,16 +70,16 @@ iblob::IBlobFilterParams::Filter CBlobFilterGui::GetFilterInfo() const
 }
 
 
-void CBlobFilterGui::SetFeatures(const iblob::BlobDescriptorInfoList& features)
+void CBlobFilterGui::SetSupportedProperties(const iprm::IOptionsList& features)
 {
 	iqt::CSignalBlocker block(ParameterCombo);
 
 	ParameterCombo->clear();
 
-	for (int i = 0; i < features.count(); i++){
-		const iblob::CBlobDescriptorInfo& info = features.at(i);
-		ParameterCombo->addItem(info.GetFullName(), (int)info.GetDescriptorType());
-		ParameterCombo->setItemData(ParameterCombo->count()-1, info.GetDescription(), Qt::ToolTipRole);
+	int featuresCount = features.GetOptionsCount();
+	for (int i = 0; i < featuresCount; ++i){
+		ParameterCombo->addItem(features.GetOptionName(i), features.GetOptionId(i));
+		ParameterCombo->setItemData(ParameterCombo->count()-1, features.GetOptionDescription(i), Qt::ToolTipRole);
 	}
 }
 
@@ -108,9 +105,9 @@ void CBlobFilterGui::UpdateFilter()
 
 	// only show value2 for BETWEEN and OUTSIDE filters
 	int condition = ConditionCombo->itemData(ConditionCombo->currentIndex()).toInt();
-	bool showValue2 = 
-		(condition == iblob::IBlobFilterParams::FC_BETWEEN) ||
-		(condition == iblob::IBlobFilterParams::FC_OUTSIDE);
+	bool showValue2 =
+				(condition == iblob::IBlobFilterParams::FC_BETWEEN) ||
+				(condition == iblob::IBlobFilterParams::FC_OUTSIDE);
 
 	AndLabel->setVisible(showValue2);
 	Value2SpinBox->setVisible(showValue2);

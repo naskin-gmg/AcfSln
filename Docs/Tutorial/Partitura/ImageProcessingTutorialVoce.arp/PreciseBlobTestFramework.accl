@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4403" Description="ACF"/>
+            <Version Id="1" Number="1717" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -21,27 +21,22 @@
     <EmbeddedRegistries>
         <EmbededRegistry Id="BlobSupplier">
             <PositionMap>
-                <Element ComponentName="BlobFilterParams" X="850" Y="600" Note=""/>
+                <Element ComponentName="BlobFilterParams" X="900" Y="600" Note=""/>
                 <Element ComponentName="ParamsSet" X="575" Y="425" Note=""/>
-                <Element ComponentName="PreciseBlobProcessor" X="225" Y="275" Note=""/>
+                <Element ComponentName="PreciseBlobProcessor" X="900" Y="275" Note=""/>
                 <Element ComponentName="SearchAoi" X="275" Y="600" Note=""/>
                 <Element ComponentName="SearchBasedFeaturesSupplier" X="575" Y="275" Note=""/>
                 <Element ComponentName="Threshold" X="575" Y="550" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="Console">
+        <EmbededRegistry Id="BlobSupplierEditor">
             <PositionMap>
-                <Element ComponentName="ImageView" X="650" Y="300" Note=""/>
-                <Element ComponentName="PerspectiveCalibrationShape" X="650" Y="475" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
-        <EmbededRegistry Id="SmoothSupplierEduitor">
-            <PositionMap>
-                <Element ComponentName="ComposedParamsSetGui" X="550" Y="375" Note=""/>
-                <Element ComponentName="ImageTaskGui" X="550" Y="225" Note=""/>
-                <Element ComponentName="NumericParamsGui" X="560" Y="536" Note=""/>
+                <Element ComponentName="BlobFilterParamsGui" X="850" Y="600" Note=""/>
+                <Element ComponentName="GeneralSupplierGui" X="575" Y="275" Note=""/>
+                <Element ComponentName="ParamsSetGui" X="575" Y="425" Note=""/>
+                <Element ComponentName="SearchAoiEditor" X="300" Y="600" Note=""/>
+                <Element ComponentName="ThresholdEditor" X="575" Y="550" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
@@ -54,13 +49,18 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="BlobSupplierEditor">
+        <EmbededRegistry Id="SmoothSupplierEduitor">
             <PositionMap>
-                <Element ComponentName="BlobFilterParamsGui" X="850" Y="600" Note=""/>
-                <Element ComponentName="GeneralSupplierGui" X="575" Y="275" Note=""/>
-                <Element ComponentName="ParamsSetGui" X="575" Y="425" Note=""/>
-                <Element ComponentName="SearchAoiEditor" X="300" Y="600" Note=""/>
-                <Element ComponentName="ThresholdEditor" X="575" Y="550" Note=""/>
+                <Element ComponentName="ComposedParamsSetGui" X="550" Y="375" Note=""/>
+                <Element ComponentName="ImageTaskGui" X="550" Y="225" Note=""/>
+                <Element ComponentName="NumericParamsGui" X="560" Y="536" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="Console">
+            <PositionMap>
+                <Element ComponentName="ImageView" X="650" Y="300" Note=""/>
+                <Element ComponentName="PerspectiveCalibrationShape" X="650" Y="475" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

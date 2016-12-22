@@ -9,7 +9,10 @@ namespace iblob
 {
 
 
-// public methods
+static QByteArray areaFeatureId("Area");
+static QByteArray perimeterFeatureId("Perimeter");
+static QByteArray circularityFeatureId("Circularity");
+
 
 // reimplemented (iipr::IImageToFeatureProcessor)
 
@@ -62,6 +65,40 @@ int CBlobProcessorCompBase::DoProcessing(
 
 // protected static methods
 
+bool CBlobProcessorCompBase::IsBlobAcceptedByFilter(const iblob::IBlobFilterParams& filterParams, double area, double perimeter, double circularity)
+{
+	if (filterParams.IsFiltersEnabled()){
+		int filtersCount = filterParams.GetFiltersCount();
+
+		for (int filterIndex = 0; filterIndex < filtersCount; ++filterIndex){
+			const iblob::IBlobFilterParams::Filter& filter = filterParams.GetFilterAt(filterIndex);
+
+			if (filter.featureId == areaFeatureId){
+				if (!IsValueAcceptedByFilter(filter, area)){
+					return false;
+				}
+			}
+
+			if (filter.featureId == perimeterFeatureId){
+				if (!IsValueAcceptedByFilter(filter, perimeter)){
+					return false;
+				}
+			}
+
+			if (filter.featureId == circularityFeatureId){
+				if (!IsValueAcceptedByFilter(filter, circularity)){
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+
+// provate static methods
+
 bool CBlobProcessorCompBase::IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value)
 {
 	bool isGreater = value > filter.valueRange.GetMinValue();
@@ -72,38 +109,48 @@ bool CBlobProcessorCompBase::IsValueAcceptedByFilter(const iblob::IBlobFilterPar
 
 	switch (filter.condition){
 	case iblob::IBlobFilterParams::FC_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isEqual : !isEqual;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isEqual: !isEqual;
 
 	case iblob::IBlobFilterParams::FC_NOT_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !isEqual : isEqual;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? !isEqual: isEqual;
 
 	case iblob::IBlobFilterParams::FC_BETWEEN:
 		{
 			bool valueInRange = filter.valueRange.Contains(value);
-			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? valueInRange : !valueInRange;
+			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? valueInRange: !valueInRange;
 		}
 
 	case iblob::IBlobFilterParams::FC_OUTSIDE:
 		{
 			bool valueInRange = filter.valueRange.Contains(value);
-			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? !valueInRange : valueInRange;
+			return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? !valueInRange: valueInRange;
 		}
 
 	case iblob::IBlobFilterParams::FC_GREATER:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreater : !isGreater;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isGreater: !isGreater;
 
 	case iblob::IBlobFilterParams::FC_GREATER_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isGreaterEqual : !isGreaterEqual;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isGreaterEqual: !isGreaterEqual;
 
 	case iblob::IBlobFilterParams::FC_LESS:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLess : !isLess;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isLess: !isLess;
 
 	case iblob::IBlobFilterParams::FC_LESS_EQUAL:
-		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE) ? isLessEqual : !isLessEqual;
+		return (filter.operation == iblob::IBlobFilterParams::FO_INCLUDE)? isLessEqual: !isLessEqual;
 
 	default:
 		return true;
 	}
+}
+
+
+// public methods of embedded class FilterFeatureList
+
+CBlobProcessorCompBase::FilterFeatureList::FilterFeatureList()
+{
+	InsertOption("Area", areaFeatureId, "Blob area");
+	InsertOption("Perimeter", perimeterFeatureId, "Total length of edges in a blob (including the edges of any holes)");
+	InsertOption("Circularity", circularityFeatureId, "Circularity factor of the blob");
 }
 
 

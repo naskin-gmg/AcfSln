@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <iprm/COptionsManager.h>
 #include <iproc/TSyncProcessorCompBase.h>
 
 // ACF-Solutions includes
@@ -20,7 +21,9 @@ public:
 	typedef iproc::TSyncProcessorCompBase<iipr::IImageToFeatureProcessor> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CBlobProcessorCompBase);
-		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set", false, "FilterParams");
+		I_REGISTER_SUBELEMENT(FilterFeatureList);
+		I_REGISTER_SUBELEMENT_INTERFACE(FilterFeatureList, iprm::IOptionsList, ExtractFilterFeatureList);
+		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set (iblob::IBlobFilterParams)", false, "FilterParams");
 		I_ASSIGN(m_defaultFilterParamsCompPtr, "DefaultFilterParams", "Default blob filter parameters", false, "DefaultFilterParams");
 	I_END_COMPONENT;
 
@@ -39,7 +42,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
 protected:
-	static bool IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value);
+	static bool IsBlobAcceptedByFilter(const iblob::IBlobFilterParams& filterParams, double area, double perimeter, double circularity);
 
 	// abstract methods
 	virtual bool CalculateBlobs(
@@ -49,8 +52,26 @@ protected:
 				iipr::IFeaturesConsumer& result) = 0;
 
 private:
+	class FilterFeatureList: public iprm::COptionsManager
+	{
+	public:
+		FilterFeatureList();
+	};
+
+	static bool IsValueAcceptedByFilter(const iblob::IBlobFilterParams::Filter& filter, double value);
+
+	// static template methods for sub-element access
+	template <class InterfaceType>
+	static InterfaceType* ExtractFilterFeatureList(CBlobProcessorCompBase& component)
+	{
+		static FilterFeatureList s_filterFeatureList;
+		return &component.m_filterFeatureList;
+	}
+
 	I_ATTR(QByteArray, m_filterParamsIdAttrPtr);
 	I_REF(iblob::IBlobFilterParams, m_defaultFilterParamsCompPtr);
+
+	FilterFeatureList m_filterFeatureList;
 };
 
 

@@ -12,23 +12,24 @@ namespace iblob
 {
 
 
-static BlobDescriptorInfoList s_defaultDescriptorsList = BlobDescriptorInfoList()
-			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_AREA, "Area", "Area", "Blob area")
-			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_CIRCULARITY, "Circularity", "Circularity", "Circularity factor of the blob")
-			<< CBlobDescriptorInfo(CBlobDescriptorInfo::BDT_PERIMETER, "Perimeter", "Perimeter", "Total length of edges in a blob (including the edges of any holes)");
-
-
 CBlobFilterParams::CBlobFilterParams()
-	:m_filtersEnabled(false)
+:	m_filtersEnabled(false),
+	m_supportedFeaturesListPtr(NULL)
 {
+}
+
+
+void CBlobFilterParams::SetSupportedProperties(const iprm::IOptionsList* featureListPtr)
+{
+	m_supportedFeaturesListPtr = featureListPtr;
 }
 
 
 // reimplemented (IBlobFilterParams)
 
-const BlobDescriptorInfoList* CBlobFilterParams::GetSupportedDescriptorsList() const
+const iprm::IOptionsList* CBlobFilterParams::GetSupportedProperties() const
 {
-	return &s_defaultDescriptorsList;
+	return m_supportedFeaturesListPtr;
 }
 
 
@@ -102,14 +103,16 @@ bool CBlobFilterParams::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag filtersTag("Filters", "Blob Filters", iser::CArchiveTag::TT_MULTIPLE, NULL);
 	static iser::CArchiveTag filterTag("Filter", "Single Blob Filter", iser::CArchiveTag::TT_GROUP, &filtersTag);
+	static iser::CArchiveTag featureIdTag("FeatureId", "ID of filtered feature", iser::CArchiveTag::TT_LEAF, &filterTag);
+	static iser::CArchiveTag filterConditionTag("FilterCondition", "Filter condition", iser::CArchiveTag::TT_LEAF, &filterTag);
+	static iser::CArchiveTag filterOperationTag("FilterOperation", "Filter operation", iser::CArchiveTag::TT_LEAF, &filterTag);
+	static iser::CArchiveTag valueRangeTag("ValueRange", "Filter's value range", iser::CArchiveTag::TT_LEAF, &filterTag);
 
 	bool retVal = true;
 
 	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
 
-
 	retVal = retVal && archive.Process(m_filtersEnabled);
-
 	
 	int filterCount = m_filters.count();
 	retVal = retVal && archive.BeginMultiTag(filtersTag, filterTag, filterCount);
@@ -127,17 +130,18 @@ bool CBlobFilterParams::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginTag(filterTag);
 
-		static iser::CArchiveTag filterConditionTag("FilterCondition", "Filter condition", iser::CArchiveTag::TT_LEAF, &filterTag);
+		retVal = retVal && archive.BeginTag(featureIdTag);
+		retVal = retVal && archive.Process(filterInfo.featureId);
+		retVal = retVal && archive.EndTag(featureIdTag);
+
 		retVal = retVal && archive.BeginTag(filterConditionTag);
 		retVal = retVal && I_SERIALIZE_ENUM(FilterCondition, archive, filterInfo.condition);
 		retVal = retVal && archive.EndTag(filterConditionTag);
 
-		static iser::CArchiveTag filterOperationTag("FilterOperation", "Filter operation", iser::CArchiveTag::TT_LEAF, &filterTag);
 		retVal = retVal && archive.BeginTag(filterOperationTag);
 		retVal = retVal && I_SERIALIZE_ENUM(FilterOperation, archive, filterInfo.operation);
 		retVal = retVal && archive.EndTag(filterOperationTag);
 
-		static iser::CArchiveTag valueRangeTag("ValueRange", "Filter's value range", iser::CArchiveTag::TT_LEAF, &filterTag);
 		retVal = retVal && archive.BeginTag(valueRangeTag);
 		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeRange(archive, filterInfo.valueRange);
 		retVal = retVal && archive.EndTag(valueRangeTag);

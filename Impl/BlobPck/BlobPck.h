@@ -7,7 +7,7 @@
 #include <icomp/TMakeComponentWrap.h>
 
 // ACF-Solutions includes
-#include <iblob/CBlobFilterParams.h>
+#include <iblob/CBlobFilterParamsComp.h>
 #include <iblob/CPreciseBlobProcessorComp.h>
 
 #include <iblobgui/CBlobFilterParamsGuiComp.h>
@@ -20,9 +20,7 @@ namespace BlobPck
 {
 
 
-typedef icomp::TModelCompWrap<
-			icomp::TMakeComponentWrap<
-						iblob::CBlobFilterParams, iblob::IBlobFilterParams, iser::ISerializable, istd::IChangeable> > BlobFilterParams;
+typedef icomp::TModelCompWrap<iblob::CBlobFilterParamsComp> BlobFilterParams;
 typedef iblob::CPreciseBlobProcessorComp PreciseBlobProcessor;
 
 typedef iblobgui::CBlobFilterParamsGuiComp BlobFilterParamsGui;

@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4403" Description="ACF"/>
+            <Version Id="1" Number="1717" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -150,7 +150,11 @@
                 <ElementsList>
                     <Element Id="BlobFilterParams" PackageId="BlobPck" ComponentId="BlobFilterParams">
                         <Data IsEnabled="true" Flags="0">
-                            <AttributeInfoMap/>
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="SupportedProperties" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PreciseBlobProcessor/FilterFeatureList"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                     <Element Id="ParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">

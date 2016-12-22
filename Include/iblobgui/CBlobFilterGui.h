@@ -23,7 +23,7 @@ public:
 	void SetFilterInfo(const iblob::IBlobFilterParams::Filter& info);
 	iblob::IBlobFilterParams::Filter GetFilterInfo() const;
 
-	void SetFeatures(const iblob::BlobDescriptorInfoList& features);
+	void SetSupportedProperties(const iprm::IOptionsList& features);
 
 Q_SIGNALS:
 	void FilterChanged();

@@ -70,9 +70,9 @@ void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChan
 		CBlobFilterGui* filterGui = dynamic_cast<CBlobFilterGui*>(itemPtr->widget());
 		Q_ASSERT(filterGui != NULL);
 
-		const iblob::BlobDescriptorInfoList* descriptorsListPtr = paramsPtr->GetSupportedDescriptorsList();
+		const iprm::IOptionsList* descriptorsListPtr = paramsPtr->GetSupportedProperties();
 		if (descriptorsListPtr != NULL){
-			filterGui->SetFeatures(*descriptorsListPtr);
+			filterGui->SetSupportedProperties(*descriptorsListPtr);
 		}
 	}
 }
@@ -240,16 +240,14 @@ void CBlobFilterParamsGuiComp::CreateFilter()
 
 	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
 	if (paramsPtr != NULL){
-		const iblob::BlobDescriptorInfoList* descriptorsListPtr = paramsPtr->GetSupportedDescriptorsList();
-		if (descriptorsListPtr != NULL){
-			filterGui->SetFeatures(*descriptorsListPtr);
+		const iprm::IOptionsList* propertiesListPtr = paramsPtr->GetSupportedProperties();
+		if (propertiesListPtr != NULL){
+			filterGui->SetSupportedProperties(*propertiesListPtr);
 		}
 	}
 
-	connect(filterGui, SIGNAL(FilterChanged()), 
-		this, SLOT(OnFilterParameterChanged()));
-	connect(filterGui, SIGNAL(RemoveFilter(QWidget*)), 
-		this, SLOT(OnRemoveFilter(QWidget*)), Qt::QueuedConnection);
+	connect(filterGui, SIGNAL(FilterChanged()), this, SLOT(OnFilterParameterChanged()));
+	connect(filterGui, SIGNAL(RemoveFilter(QWidget*)), this, SLOT(OnRemoveFilter(QWidget*)), Qt::QueuedConnection);
 }
 
 

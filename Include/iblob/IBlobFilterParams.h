@@ -8,9 +8,7 @@
 #include <istd/istd.h>
 #include <istd/TRange.h>
 #include <iser/ISerializable.h>
-
-// ACF-Solutions includes
-#include <iblob/CBlobDescriptorInfo.h>
+#include <iprm/IOptionsList.h>
 
 
 namespace iblob
@@ -64,22 +62,18 @@ public:
 	struct Filter
 	{
 		Filter()
-			:blobDescriptorType(CBlobDescriptorInfo::BDT_USER),
-			operation(FO_INCLUDE),
+			:operation(FO_INCLUDE),
 			condition(FC_BETWEEN)
 		{
 		}
 
-		/**
-			\sa CBlobDescriptorInfo::BlobDescriptorType
-		*/
-		int blobDescriptorType;
+		QByteArray featureId;
 		FilterOperation operation;
 		FilterCondition condition;
 		istd::CRange valueRange;
 	};
 
-	virtual const BlobDescriptorInfoList* GetSupportedDescriptorsList() const = 0;
+	virtual const iprm::IOptionsList* GetSupportedProperties() const = 0;
 	virtual bool IsFiltersEnabled() const = 0;
 	virtual void SetFiltersEnabled(bool enabled = true) = 0;
 	virtual int GetFiltersCount() const = 0;

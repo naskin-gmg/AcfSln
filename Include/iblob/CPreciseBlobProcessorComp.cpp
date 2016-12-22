@@ -296,24 +296,8 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 
 				bool passedByFilter = true;
 
-				if ((filterParamsPtr != NULL) && filterParamsPtr->IsFiltersEnabled()){
-					int filtersCount = filterParamsPtr->GetFiltersCount();
-
-					for (int filterIndex = 0; filterIndex < filtersCount; ++filterIndex){
-						const iblob::IBlobFilterParams::Filter& filter = filterParamsPtr->GetFilterAt(filterIndex);
-
-						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_CIRCULARITY){
-							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, circularity);
-						}
-
-						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_AREA){
-							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, area);
-						}
-
-						if (filter.blobDescriptorType == iblob::CBlobDescriptorInfo::BDT_PERIMETER){
-							passedByFilter = passedByFilter && IsValueAcceptedByFilter(filter, perimeter);
-						}
-					}
+				if (filterParamsPtr != NULL){
+					passedByFilter = IsBlobAcceptedByFilter(*filterParamsPtr, area, perimeter, circularity);
 				}
 
 				if (passedByFilter){
