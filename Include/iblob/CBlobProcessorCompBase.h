@@ -23,6 +23,7 @@ public:
 	I_BEGIN_BASE_COMPONENT(CBlobProcessorCompBase);
 		I_REGISTER_SUBELEMENT(FilterFeatureList);
 		I_REGISTER_SUBELEMENT_INTERFACE(FilterFeatureList, iprm::IOptionsList, ExtractFilterFeatureList);
+		I_REGISTER_SUBELEMENT_INTERFACE(FilterFeatureList, istd::IChangeable, ExtractFilterFeatureList);
 		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set (iblob::IBlobFilterParams)", false, "FilterParams");
 		I_ASSIGN(m_defaultFilterParamsCompPtr, "DefaultFilterParams", "Default blob filter parameters", false, "DefaultFilterParams");
 	I_END_COMPONENT;
@@ -64,7 +65,6 @@ private:
 	template <class InterfaceType>
 	static InterfaceType* ExtractFilterFeatureList(CBlobProcessorCompBase& component)
 	{
-		static FilterFeatureList s_filterFeatureList;
 		return &component.m_filterFeatureList;
 	}
 
