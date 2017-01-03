@@ -6,15 +6,15 @@
 #include <imath/CFixedPointManip.h>
 #include <imath/CGeneralUnitInfo.h>
 #include <i2d/ICalibrationProvider.h>
-#include <icalib/CPerspectiveCalibration2d.h>
 #include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
 #include <imeas/INumericValue.h>
 #include <imeas/CGeneralNumericConstraints.h>
 #include <iproc/IProcessor.h>
-#include <iipr/IImageToFeatureProcessor.h>
 #include <iinsp/TSupplierCompWrap.h>
+#include <icalib/CPerspectiveCalibration2d.h>
+#include <iipr/IImageToFeatureProcessor.h>
 
 
 namespace iipr

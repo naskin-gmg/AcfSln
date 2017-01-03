@@ -5,9 +5,9 @@
 #include <imod/TModelWrap.h>
 #include <ilog/CExtMessage.h>
 #include <i2d/CCircle.h>
-#include <icalib/CAffineCalibration2d.h>
 
 // ACF-Solutions includes
+#include <icalib/CAffineCalibration2d.h>
 #include <iipr/CSingleFeatureConsumer.h>
 
 

@@ -3,11 +3,11 @@
 // ACF includes
 #include <imod/TModelWrap.h>
 #include <imath/CGeneralUnitInfo.h>
-#include <icalib/CAffineCalibration2d.h>
 #include <iprm/TParamsPtr.h>
 
 
 // ACF-Solutions includes
+#include <icalib/CAffineCalibration2d.h>
 #include <icam/CCalibratedCameraComp.h>
 
 

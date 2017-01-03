@@ -4,8 +4,10 @@
 
 // ACF includes
 #include <istd/IPolymorphic.h>
-#include <icalib/CPerspectiveCalibration2d.h>
 #include <i2d/CVector2d.h>
+
+// ACF-Solutions includes
+#include <icalib/CPerspectiveCalibration2d.h>
 
 
 namespace iipr
