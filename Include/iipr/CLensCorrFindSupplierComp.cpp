@@ -120,14 +120,24 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		}
 
 		if (positionsOnLine.size() >= 3){
+			// calulate of position center
 			i2d::CVector2d sumPos(0, 0);
-			for (const i2d::CVector2d& pos: positionsOnLine){
+			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
+						pointIter != positionsOnLine.constEnd();
+						++pointIter){
+				const i2d::CVector2d& pos = *pointIter;
+
 				sumPos += pos;
 			}
 			i2d::CVector2d centerPos = sumPos / positionsOnLine.size();
 
+			// calulate correlation matrix
 			i2d::CMatrix2d correlationMatrix(0, 0, 0, 0);
-			for (const i2d::CVector2d& pos: positionsOnLine){
+			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
+						pointIter != positionsOnLine.constEnd();
+						++pointIter){
+				const i2d::CVector2d& pos = *pointIter;
+
 				i2d::CVector2d diff = pos - centerPos;
 				correlationMatrix.GetAtRef(0, 0) += diff.GetX() * diff.GetX();
 				correlationMatrix.GetAtRef(0, 1) += diff.GetX() * diff.GetY();
@@ -135,34 +145,50 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 			}
 			correlationMatrix.SetAt(1, 0, correlationMatrix.GetAt(1, 0));
 
+			// take first principial vector
 			i2d::CVector2d eigenVector1;
 			i2d::CVector2d eigenVector2;
 			double eigenValue1;
 			double eigenValue2;
-			if (correlationMatrix.GetEigenVectors(eigenVector1, eigenVector2, eigenValue1, eigenValue2)){
-				eigenVector1.Normalize(eigenValue1);
-				i2d::CLine2d representationLine(centerPos - eigenVector1, centerPos - eigenVector2);
+			if (!correlationMatrix.GetEigenVectors(eigenVector1, eigenVector2, eigenValue1, eigenValue2)){
+				continue;
+			}
+			eigenVector1.Normalize(eigenValue1);
 
-				i2d::CLine2d* lineObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
-				*lineObjectPtr = representationLine;
-				linesMessagePtr->InsertAttachedObject(lineObjectPtr, QObject::tr("Detected line %1").arg(allCorrectionInfos.size() + 1));
+			i2d::CLine2d representationLine(centerPos - eigenVector1, centerPos - eigenVector2);
 
-				CorrectionLineInfo lineInfo;
+			i2d::CLine2d* lineObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+			*lineObjectPtr = representationLine;
+			linesMessagePtr->InsertAttachedObject(lineObjectPtr, QObject::tr("Detected line %1").arg(allCorrectionInfos.size() + 1));
 
-				for (const i2d::CVector2d& pos: positionsOnLine){
-					CorrectionInfo info;
-					info.position = pos - opticalCenter;
-					info.diff = representationLine.GetExtendedNearestPoint(pos) - pos;
+			CorrectionLineInfo lineInfo;
+			lineInfo.orthoVector = representationLine.GetNearestPoint(i2d::CVector2d::GetZero());
 
-					lineInfo.infos.push_back(info);
+			bool isLineUsefull = true;
+			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
+						pointIter != positionsOnLine.constEnd();
+						++pointIter){
+				const i2d::CVector2d& pos = *pointIter;
 
-					allPointsCount++;
+				if (lineInfo.orthoVector.GetDotProduct(pos) < I_BIG_EPSILON){	// there are point on this line lying of the other side
+					isLineUsefull = false;
+					break;
 				}
 
-				lineInfo.orthoVector = representationLine.GetNearestPoint(i2d::CVector2d::GetZero());
+				CorrectionInfo info;
+				info.position = pos - opticalCenter;
+				info.diff = representationLine.GetExtendedNearestPoint(pos) - pos;
 
-				allCorrectionInfos.push_back(lineInfo);
+				lineInfo.infos.push_back(info);
+
+				allPointsCount++;
 			}
+
+			if (!isLineUsefull){
+				continue;
+			}
+
+			allCorrectionInfos.push_back(lineInfo);
 		}
 	}
 
