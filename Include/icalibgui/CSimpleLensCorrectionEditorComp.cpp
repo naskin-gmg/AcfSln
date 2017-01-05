@@ -23,7 +23,7 @@ void CSimpleLensCorrectionEditorComp::UpdateModel() const
 	Q_ASSERT(objectPtr != NULL);
 
 	i2d::CVector2d opticalCenter(CenterXSB->value(), CenterYSB->value());
-//	double scale = ScaleSB->value();
+	double scaleFactor = ScaleSB->value();
 	double distortionFactor = CorrectionFactorSB->value();
 
 	istd::CChangeGroup changeGroup(objectPtr);
@@ -31,6 +31,7 @@ void CSimpleLensCorrectionEditorComp::UpdateModel() const
 
 	objectPtr->SetOpticalCenter(opticalCenter);
 	objectPtr->SetDistortionFactor(distortionFactor);
+	objectPtr->SetScaleFactor(scaleFactor);
 }
 
 
@@ -46,7 +47,7 @@ void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeS
 	if (objectPtr != NULL){
 		const i2d::CVector2d& opticalCenter = objectPtr->GetOpticalCenter();
 		double distortionFactor = objectPtr->GetDistortionFactor();
-		double zoom = 1;
+		double scaleFactor = objectPtr->GetScaleFactor();
 
 		iqt::CSignalBlocker block(GetWidget(), true);
 
@@ -54,7 +55,7 @@ void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeS
 		CenterYSB->setValue(opticalCenter.GetY());
 
 		CorrectionFactorSB->setValue(distortionFactor);
-		ScaleSB->setValue(zoom);
+		ScaleSB->setValue(scaleFactor);
 	}
 
 	bool isEnabled = (objectPtr != NULL);

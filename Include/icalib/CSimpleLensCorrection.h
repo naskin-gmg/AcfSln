@@ -18,18 +18,21 @@ class CSimpleLensCorrection: virtual public i2d::ICalibration2d
 {
 public:
 	CSimpleLensCorrection();
-	explicit CSimpleLensCorrection(const i2d::CVector2d& opticalCenter, double distortionFactor = 0);
+	explicit CSimpleLensCorrection(const i2d::CVector2d& opticalCenter, double distortionFactor = 0, double scaleFactor = 1);
 
 	/**
 		Reset this calibration, set to be identity transform.
 	*/
-	void Reset(const i2d::CVector2d& opticalCenter = i2d::CVector2d::GetZero(), double distortionFactor = 0);
+	void Reset(const i2d::CVector2d& opticalCenter = i2d::CVector2d::GetZero(), double distortionFactor = 0, double scaleFactor = 1);
 
 	const i2d::CVector2d& GetOpticalCenter() const;
 	virtual void SetOpticalCenter(const i2d::CVector2d& center);
 
 	double GetDistortionFactor() const;
 	virtual void SetDistortionFactor(double factor);
+
+	double GetScaleFactor() const;
+	virtual void SetScaleFactor(double factor);
 
 	bool operator==(const CSimpleLensCorrection& calib) const;
 	bool operator!=(const CSimpleLensCorrection& calib) const;
@@ -87,6 +90,7 @@ private:
 	i2d::CVector2d m_opticalCenter;
 
 	double m_distortionFactor;
+	double m_scaleFactor;
 };
 
 
