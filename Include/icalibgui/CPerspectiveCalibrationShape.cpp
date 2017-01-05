@@ -133,18 +133,16 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					bounds = *argumentAreaPtr;
 				}
 
-				i2d::CVector2d viewLeftTop;
-				calibPtr->GetInvPositionAt(bounds.GetLeftTop(), viewLeftTop);
-				i2d::CVector2d viewLeftBottom;
-				calibPtr->GetInvPositionAt(bounds.GetLeftBottom(), viewLeftBottom);
-				i2d::CVector2d viewRightTop;
-				calibPtr->GetInvPositionAt(bounds.GetRightTop(), viewRightTop);
-				i2d::CVector2d viewRightBottom;
-				calibPtr->GetInvPositionAt(bounds.GetRightBottom(), viewRightBottom);
+				i2d::CVector2d viewLeftCenter;
+				calibPtr->GetInvPositionAt(bounds.GetLeftCenter(), viewLeftCenter);
+				i2d::CVector2d viewRightCenter;
+				calibPtr->GetInvPositionAt(bounds.GetRightCenter(), viewRightCenter);
+				i2d::CVector2d viewTopCenter;
+				calibPtr->GetInvPositionAt(bounds.GetTopCenter(), viewTopCenter);
+				i2d::CVector2d viewBottomCenter;
+				calibPtr->GetInvPositionAt(bounds.GetBottomCenter(), viewBottomCenter);
 
-				double perspScale = (
-							(viewLeftTop.GetDistance(viewRightTop) + viewLeftBottom.GetDistance(viewRightBottom)) / bounds.GetWidth() +
-							(viewLeftTop.GetDistance(viewLeftBottom) + viewRightTop.GetDistance(viewRightBottom)) / bounds.GetHeight()) * 0.25;
+				double perspScale = qMax(viewLeftCenter.GetDistance(viewRightCenter) / bounds.GetWidth(), viewTopCenter.GetDistance(viewBottomCenter) / bounds.GetHeight());
 
 				double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
