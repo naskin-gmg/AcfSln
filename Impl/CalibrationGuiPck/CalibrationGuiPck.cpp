@@ -29,6 +29,11 @@ I_EXPORT_COMPONENT(
 			"Calibration Perspective Display Observer 2D Grid Shape");
 
 I_EXPORT_COMPONENT(
+			GeneralCalibrationShape,
+			"Shows general purpose calibration grid on calibrated view",
+			"Calibration General Common Display Observer 2D Grid Shape");
+
+I_EXPORT_COMPONENT(
 			PerspectiveCalibEditor,
 			"Editor of perspective calibration parameters",
 			"Perspective Calibration Transformation Matrix Translation" IM_TAG("GUI Editor 2D"));

@@ -10,6 +10,7 @@
 #include <icalibgui/CNoneCalibrationShape.h>
 #include <icalibgui/CAffiniteCalibrationShape.h>
 #include <icalibgui/CPerspectiveCalibrationShape.h>
+#include <icalibgui/CGeneralCalibrationShape.h>
 #include <icalibgui/CPerspectiveCalibEditorComp.h>
 #include <icalibgui/CSimpleLensCorrectionEditorComp.h>
 
@@ -24,6 +25,7 @@ namespace CalibrationGuiPck
 typedef icomp::TMakeComponentWrap<icalibgui::CNoneCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> NoneCalibrationShape;
 typedef ibase::TMakeModelObserverCompWrap<icalibgui::CAffiniteCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> AffiniteCalibrationShape;
 typedef ibase::TMakeModelObserverCompWrap<icalibgui::CPerspectiveCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> PerspectiveCalibrationShape;
+typedef ibase::TMakeModelObserverCompWrap<icalibgui::CGeneralCalibrationShape, iview::IShape, imod::IObserver, iview::IVisualizable, iview::ITouchable> GeneralCalibrationShape;
 typedef icalibgui::CPerspectiveCalibEditorComp PerspectiveCalibEditor;
 typedef icalibgui::CSimpleLensCorrectionEditorComp SimpleLensCorrectionEditor;
 
