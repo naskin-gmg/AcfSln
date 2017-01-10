@@ -258,6 +258,11 @@ I_EXPORT_COMPONENT(
 			"Calculate calibration based on checkboard pattern",
 			"Checkboard Chessboard Pattern Calibrator Calibration Perspective" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			MultiPointPosCorrSupplier,
+			"Calculate position correction using list of position finders",
+			"Position Positioning Reference Calibration Correction Translation Rotation" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 
