@@ -37,7 +37,7 @@ public:
 
 	enum MessageId
 	{
-		FOUND_BLOB = 0x9354f0
+		MI_FOUND_BLOB = 0x9354f0
 	};
 
 	CPreciseBlobProcessorComp();
