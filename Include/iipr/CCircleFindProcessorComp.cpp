@@ -85,6 +85,21 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 		AddIntermediateResults(outRays);
 
 		if (isOk){
+			if (m_resultConsumerCompPtr.IsValid()){
+				i2d::CVector2d position = featurePtr->GetPosition();
+				double radius = featurePtr->GetInnerRadius();
+				double radius2 = featurePtr->GetOuterRadius();
+				ilog::CExtMessage* resultMessagePtr = new ilog::CExtMessage(
+								istd::IInformationProvider::IC_INFO,
+								iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+								QObject::tr("Found annulus at (%1, %2) with radii %3; %4").arg(position.GetX(), 0, 'g', 3).arg(position.GetY(), 0, 'g', 3).arg(radius, 0, 'g', 3).arg(radius2, 0, 'g', 3),
+								"CircleFinder");
+				i2d::CAnnulus* resultObjectPtr = new imod::TModelWrap<i2d::CAnnulus>();
+				resultObjectPtr->CopyFrom(*featurePtr, istd::IChangeable::CM_CONVERT);
+				resultMessagePtr->InsertAttachedObject(resultObjectPtr);
+				m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(resultMessagePtr));
+			}
+
 			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;
@@ -107,6 +122,20 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 		AddIntermediateResults(usedRays);
 
 		if (isOk){
+			if (m_resultConsumerCompPtr.IsValid()){
+				i2d::CVector2d position = featurePtr->GetPosition();
+				double radius = featurePtr->GetRadius();
+				ilog::CExtMessage* resultMessagePtr = new ilog::CExtMessage(
+								istd::IInformationProvider::IC_INFO,
+								iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+								QObject::tr("Found circle at (%1, %2) with radius %3").arg(position.GetX(), 0, 'g', 3).arg(position.GetY(), 0, 'g', 3).arg(radius, 0, 'g', 3),
+								"CircleFinder");
+				i2d::CCircle* resultObjectPtr = new imod::TModelWrap<i2d::CCircle>();
+				resultObjectPtr->CopyFrom(*featurePtr, istd::IChangeable::CM_CONVERT);
+				resultMessagePtr->InsertAttachedObject(resultObjectPtr);
+				m_resultConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(resultMessagePtr));
+			}
+
 			results.AddFeature(featurePtr.PopPtr());
 
 			return TS_OK;

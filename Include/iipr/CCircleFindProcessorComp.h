@@ -44,6 +44,7 @@ public:
 		I_ASSIGN(m_searchForAnnulusAttrPtr, "SearchForAnnulus", "If it is true, annulus will be searched", true, false);
 		I_ASSIGN(m_sendUsedPointsToTempAttrPtr, "SendUsedPointsToTemp", "If true, the used point positions will be send to temporary results", true, false);
 		I_ASSIGN(m_sendLinesToTempAttrPtr, "SendLinesToTemp", "If true, the caliper lines will be send to temporary results", true, false);
+		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
 		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages", false, "TempResultsConsumer");
 	I_END_COMPONENT;
 
@@ -124,6 +125,7 @@ private:
 	I_ATTR(bool, m_searchForAnnulusAttrPtr);
 	I_ATTR(bool, m_sendUsedPointsToTempAttrPtr);
 	I_ATTR(bool, m_sendLinesToTempAttrPtr);
+	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 };
 
