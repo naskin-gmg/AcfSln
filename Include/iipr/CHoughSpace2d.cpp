@@ -94,43 +94,69 @@ void CHoughSpace2d::IncreaseValueAt(const i2d::CVector2d& position, double value
 }
 
 
-void CHoughSpace2d::SmoothHoughSpace(int iterations)
+void CHoughSpace2d::SmoothHoughSpace(int iterationsX, int iterationsY)
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
 
-	if (spaceSize.GetX() < 3){
-		return;
+	if (spaceSize.GetX() >= 3){
+		for (int i = 0; i < iterationsX; ++i){
+			for (int y = 0; y < spaceSize.GetY(); ++y){
+				quint32* spaceLinePtr = (quint32*)BaseClass::GetLinePtr(y);
+
+				int nextX;
+				quint32 prevValue;
+				quint32 value;
+				if (m_isWrappedX){
+					nextX = 1;
+					prevValue = spaceLinePtr[spaceSize.GetX() - 1];
+					value = spaceLinePtr[0];
+				}
+				else{
+					nextX = 2;
+					prevValue = spaceLinePtr[0];
+					value = spaceLinePtr[1];
+				}
+
+				for (; nextX < spaceSize.GetX(); ++nextX){
+					int nextValue = spaceLinePtr[nextX];
+
+					spaceLinePtr[nextX - 1] = (value * 2 + prevValue + nextValue) >> 2;
+
+					prevValue = value;
+					value = nextValue;
+				}
+
+				if (m_isWrappedX){
+					spaceLinePtr[nextX - 1] = (value * 2 + prevValue + spaceLinePtr[0]) >> 2;
+				}
+			}
+		}
 	}
 
-	for (int i = 0; i < iterations; ++i){
-		for (int y = 0; y < spaceSize.GetY(); ++y){
-			quint32* spaceLinePtr = (quint32*)BaseClass::GetLinePtr(y);
+	if (spaceSize.GetY() >= 3){
+		for (int i = 0; i < iterationsY; ++i){
+			QVector<quint32> prevLine(spaceSize.GetX(), 0);
+		
+			quint32* spaceLinePtr = (quint32*)BaseClass::GetLinePtr(0);
 
-			int nextX;
-			quint32 prevValue;
-			quint32 value;
-			if (m_isWrappedX){
-				nextX = 1;
-				prevValue = spaceLinePtr[spaceSize.GetX() - 1];
-				value = spaceLinePtr[0];
-			}
-			else{
-				nextX = 2;
-				prevValue = spaceLinePtr[0];
-				value = spaceLinePtr[1];
-			}
+			for (int y = 0; y < spaceSize.GetY() - 1; ++y){
+				quint32* nextLinePtr = (quint32*)BaseClass::GetLinePtr(y + 1);
 
-			for (; nextX < spaceSize.GetX(); ++nextX){
-				int nextValue = spaceLinePtr[nextX];
+				for (int x = 0; x < spaceSize.GetX(); ++x){
+					int value = spaceLinePtr[x];
 
-				spaceLinePtr[nextX - 1] = (value * 2 + prevValue + nextValue) >> 2;
+					spaceLinePtr[x] = (value * 2 + prevLine[x] + nextLinePtr[x]) >> 2;
 
-				prevValue = value;
-				value = nextValue;
+					prevLine[x] = value;
+				}
+
+				spaceLinePtr = nextLinePtr;
 			}
 
-			if (m_isWrappedX){
-				spaceLinePtr[nextX - 1] = (value * 2 + prevValue + spaceLinePtr[0]) >> 2;
+			for (int x = 0; x < spaceSize.GetX(); ++x){
+				int value = spaceLinePtr[x];
+
+				spaceLinePtr[x] = (value * 2 + prevLine[x]) >> 2;
 			}
 		}
 	}

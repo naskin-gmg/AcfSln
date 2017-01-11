@@ -59,7 +59,7 @@ public:
 	/**
 		Smooth this space with specified stronness.
 	*/
-	void SmoothHoughSpace(int iterations);
+	void SmoothHoughSpace(int iterationsX, int iterationsY = 0);
 	/**
 		Analyse this Hough space to find set of local maximums.
 		\param	maxPoints		maximal number of points to find.
