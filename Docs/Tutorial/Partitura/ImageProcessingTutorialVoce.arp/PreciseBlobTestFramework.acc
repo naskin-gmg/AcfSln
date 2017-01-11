@@ -29,7 +29,7 @@
                         <Data IsEnabled="true" Value="BlobSupplier"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="SmoothSupplierEduitor"/>
+                        <Data IsEnabled="true" Value="SmoothSupplierEditor"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -52,7 +52,7 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>SnapTaskGui</Value>
-                                <Value>SmoothSupplierEduitor</Value>
+                                <Value>SmoothSupplierEditor</Value>
                                 <Value>BlobSupplierEditor</Value>
                             </Values>
                         </Data>
@@ -111,7 +111,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="SmoothSupplierEduitor" PackageId="" ComponentId="SmoothSupplierEduitor">
+        <Element Id="SmoothSupplierEditor" PackageId="" ComponentId="SmoothSupplierEditor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
             </Data>
@@ -473,7 +473,7 @@
                 <ExportedComponents/>
             </Data>
         </EmbeddedRegistry>
-        <EmbeddedRegistry Id="SmoothSupplierEduitor">
+        <EmbeddedRegistry Id="SmoothSupplierEditor">
             <Data Description="" Keywords="">
                 <ElementsList>
                     <Element Id="ComposedParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">

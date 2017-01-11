@@ -263,6 +263,11 @@ I_EXPORT_COMPONENT(
 			"Calculate position correction using list of position finders",
 			"Position Positioning Reference Calibration Correction Translation Rotation" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			LensCorrFindSupplier,
+			"Calculate lens correction using set of found feature points lying on lines",
+			"Objective Lens Correction Finder Calculator Computation Factor Calibration Correction Optical Axis" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 

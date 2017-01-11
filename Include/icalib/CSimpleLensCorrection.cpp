@@ -197,21 +197,23 @@ bool CSimpleLensCorrection::GetInvPositionAt(
 
 	double distance = normPos.GetLength();
 
-	double delta = 1 + 4 * distance * m_distortionFactor;
-	if (delta >= 0){
-		double shouldDistance = (-1 + qSqrt(delta)) * 0.5;
+	if (qFabs(m_distortionFactor) > I_BIG_EPSILON){
+		double delta = 1 + 4 * distance * m_distortionFactor;
+		if (delta >= 0){
+			double shouldDistance = (-1 + qSqrt(delta)) / (2 * m_distortionFactor);
 
-		if (shouldDistance >= I_BIG_EPSILON){
 			result = normPos.GetNormalized(shouldDistance);
+
+			return true;
 		}
-		else{
-			result = normPos;
-		}
+
+		return false;
+	}
+	else{
+		result = normPos;
 
 		return true;
 	}
-
-	return false;
 }
 
 

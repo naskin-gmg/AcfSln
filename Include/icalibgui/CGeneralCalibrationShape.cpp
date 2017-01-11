@@ -86,35 +86,27 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
-		i2d::CVector2d logCorners[4];
-		logCorners[0] = GetLogPosition(clientRect.GetLeftTop());
-		logCorners[1] = GetLogPosition(clientRect.GetRightTop());
-		logCorners[2] = GetLogPosition(clientRect.GetLeftBottom());
-		logCorners[3] = GetLogPosition(clientRect.GetRightBottom());
-
-		i2d::CRectangle bounds(-100, -100, 200, 200);
+		i2d::CRectangle bounds(-1000, -1000, 2000, 2000);
 		const i2d::CRectangle* argumentAreaPtr = calibPtr->GetArgumentArea();
 		if (argumentAreaPtr != NULL){
 			bounds = *argumentAreaPtr;
 		}
 
-		i2d::CVector2d viewLeftTop;
-		calibPtr->GetInvPositionAt(bounds.GetLeftTop(), viewLeftTop);
-		i2d::CVector2d viewLeftBottom;
-		calibPtr->GetInvPositionAt(bounds.GetLeftBottom(), viewLeftBottom);
-		i2d::CVector2d viewRightTop;
-		calibPtr->GetInvPositionAt(bounds.GetRightTop(), viewRightTop);
-		i2d::CVector2d viewRightBottom;
-		calibPtr->GetInvPositionAt(bounds.GetRightBottom(), viewRightBottom);
+		i2d::CVector2d viewLeftCenter;
+		calibPtr->GetInvPositionAt(bounds.GetLeftCenter(), viewLeftCenter);
+		i2d::CVector2d viewRightCenter;
+		calibPtr->GetInvPositionAt(bounds.GetRightCenter(), viewRightCenter);
+		i2d::CVector2d viewTopCenter;
+		calibPtr->GetInvPositionAt(bounds.GetTopCenter(), viewTopCenter);
+		i2d::CVector2d viewBottomCenter;
+		calibPtr->GetInvPositionAt(bounds.GetBottomCenter(), viewBottomCenter);
 
-		double calibScale = (
-					(viewLeftTop.GetDistance(viewRightTop) + viewLeftBottom.GetDistance(viewRightBottom)) / bounds.GetWidth() +
-					(viewLeftTop.GetDistance(viewLeftBottom) + viewRightTop.GetDistance(viewRightBottom)) / bounds.GetHeight()) * 0.25;
+		double calibScale = qMax(viewLeftCenter.GetDistance(viewRightCenter) / bounds.GetWidth(), viewTopCenter.GetDistance(viewBottomCenter) / bounds.GetHeight());
 
 		double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 		int levels[2];
-		double minGridDistance = 10 * calibInfoPtr->GetMinGridDistance() * calibScale / viewScale;
+		double minGridDistance = calibInfoPtr->GetMinGridDistance() * calibScale / viewScale;
 		double grid = qPow(10.0, qCeil(log10(minGridDistance)));
 		if (grid * 0.5 < minGridDistance){
 			levels[0] = 5;
@@ -132,10 +124,10 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 		const QPen& level1Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE2);
 		const QPen& level2Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE1);
 
-		int firstIndexY = int(qFloor(bounds.GetTop() / grid));
-		int lastIndexY = int(qCeil(bounds.GetBottom() / grid));
 		int firstIndexX = int(qFloor(bounds.GetLeft() / grid));
 		int lastIndexX = int(qCeil(bounds.GetRight() / grid));
+		int firstIndexY = int(qFloor(bounds.GetTop() / grid));
+		int lastIndexY = int(qCeil(bounds.GetBottom() / grid));
 
 		istd::TArray<QPointF, 2> gridPoints;
 		gridPoints.SetSizes(istd::CIndex2d(lastIndexX - firstIndexX + 1, lastIndexY - firstIndexY + 1));
@@ -156,43 +148,43 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 			for (int indexX = firstIndexX; indexX <= lastIndexX; ++indexX){
 				QPointF firstPoint = gridPoints.GetAt(istd::CIndex2d(indexX - firstIndexX, indexY - firstIndexY));
 
-				if (indexX < lastIndexX){
-					QPointF secondPoint = gridPoints.GetAt(istd::CIndex2d(indexX - firstIndexX + 1, indexY - firstIndexY));
+				if ((firstPoint.rx() != qInf()) && (firstPoint.ry() != qInf())){
+					if (indexX < lastIndexX){
+						QPointF secondPoint = gridPoints.GetAt(istd::CIndex2d(indexX - firstIndexX + 1, indexY - firstIndexY));
 
-					// draw horizontal line
-					if (indexX % levels[1] == 0){
-						drawContext.setPen(level2Pen);
-					}
-					else if (indexX % levels[0] == 0){
-						drawContext.setPen(level1Pen);
-					}
-					else{
-						drawContext.setPen(level0Pen);
-					}
+						if ((secondPoint.rx() != qInf()) && (secondPoint.ry() != qInf())){
+							// draw horizontal line
+							if (indexY % levels[1] == 0){
+								drawContext.setPen(level2Pen);
+							}
+							else if (indexY % levels[0] == 0){
+								drawContext.setPen(level1Pen);
+							}
+							else{
+								drawContext.setPen(level0Pen);
+							}
 
-					if (		(firstPoint.rx() != qInf()) && (firstPoint.ry() != qInf()) &&
-								(secondPoint.rx() != qInf()) && (secondPoint.ry() != qInf())){
-						drawContext.drawLine(firstPoint, secondPoint);
-					}
-				}
-
-				if (indexY < lastIndexY){
-					QPointF secondPoint = gridPoints.GetAt(istd::CIndex2d(indexX - firstIndexX, indexY - firstIndexY + 1));
-
-					// draw vertical line
-					if (indexY % levels[1] == 0){
-						drawContext.setPen(level2Pen);
-					}
-					else if (indexY % levels[0] == 0){
-						drawContext.setPen(level1Pen);
-					}
-					else{
-						drawContext.setPen(level0Pen);
+							drawContext.drawLine(firstPoint, secondPoint);
+						}
 					}
 
-					if (		(firstPoint.rx() != qInf()) && (firstPoint.ry() != qInf()) &&
-								(secondPoint.rx() != qInf()) && (secondPoint.ry() != qInf())){
-						drawContext.drawLine(firstPoint, secondPoint);
+					if (indexY < lastIndexY){
+						QPointF secondPoint = gridPoints.GetAt(istd::CIndex2d(indexX - firstIndexX, indexY - firstIndexY + 1));
+
+						if ((secondPoint.rx() != qInf()) && (secondPoint.ry() != qInf())){
+							// draw vertical line
+							if (indexX % levels[1] == 0){
+								drawContext.setPen(level2Pen);
+							}
+							else if (indexX % levels[0] == 0){
+								drawContext.setPen(level1Pen);
+							}
+							else{
+								drawContext.setPen(level0Pen);
+							}
+
+							drawContext.drawLine(firstPoint, secondPoint);
+						}
 					}
 				}
 			}

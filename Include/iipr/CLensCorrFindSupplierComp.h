@@ -80,9 +80,9 @@ protected:
 	};
 
 	bool CalculateCalibration(const iimg::IBitmap& image, icalib::CSimpleLensCorrection& result) const;
-	i2d::CVector2d CalcHoughPos(const i2d::CVector2d& point1, const i2d::CVector2d& point2, const istd::CIndex2d& spaceSize) const;
-	i2d::CLine2d CalcCorrespondingLine(const i2d::CVector2d& houghPos, const istd::CIndex2d& spaceSize) const;
-	void UpdateHoughSpace(const i2d::CVector2d& point1, const i2d::CVector2d& point2, double weight, CHoughSpace2d& space) const;
+	i2d::CVector2d CalcHoughPos(const i2d::CVector2d& point1, const i2d::CVector2d& point2, const i2d::CVector2d& imageCenter, const istd::CIndex2d& spaceSize) const;
+	i2d::CLine2d CalcCorrespondingLine(const i2d::CVector2d& houghPos, const i2d::CVector2d& imageCenter, const istd::CIndex2d& spaceSize) const;
+	void UpdateHoughSpace(const i2d::CVector2d& point1, const i2d::CVector2d& point2, double weight, const i2d::CVector2d& imageCenter, CHoughSpace2d& space) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;

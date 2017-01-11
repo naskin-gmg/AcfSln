@@ -121,12 +121,6 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 
 				const iview::IColorSchema& colorSchema = GetColorSchema();
 
-				i2d::CVector2d logCorners[4];
-				logCorners[0] = GetLogPosition(clientRect.GetLeftTop());
-				logCorners[1] = GetLogPosition(clientRect.GetRightTop());
-				logCorners[2] = GetLogPosition(clientRect.GetLeftBottom());
-				logCorners[3] = GetLogPosition(clientRect.GetRightBottom());
-
 				i2d::CRectangle bounds(-100, -100, 200, 200);
 				const i2d::CRectangle* argumentAreaPtr = calibPtr->GetArgumentArea();
 				if (argumentAreaPtr != NULL){

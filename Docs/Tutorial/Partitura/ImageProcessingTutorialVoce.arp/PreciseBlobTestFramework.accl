@@ -14,7 +14,7 @@
         <Element ComponentName="Framework" X="550" Y="350" Note=""/>
         <Element ComponentName="SettingsPersistence" X="325" Y="100" Note=""/>
         <Element ComponentName="SmoothSupplier" X="600" Y="150" Note=""/>
-        <Element ComponentName="SmoothSupplierEduitor" X="600" Y="550" Note=""/>
+        <Element ComponentName="SmoothSupplierEditor" X="600" Y="550" Note=""/>
         <Element ComponentName="SnapTask" X="300" Y="225" Note=""/>
         <Element ComponentName="SnapTaskGui" X="300" Y="475" Note=""/>
     </PositionMap>
@@ -49,7 +49,7 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="SmoothSupplierEduitor">
+        <EmbededRegistry Id="SmoothSupplierEditor">
             <PositionMap>
                 <Element ComponentName="ComposedParamsSetGui" X="550" Y="375" Note=""/>
                 <Element ComponentName="ImageTaskGui" X="550" Y="225" Note=""/>
