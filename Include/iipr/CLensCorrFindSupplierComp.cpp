@@ -65,7 +65,7 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 	}
 
 	istd::CIndex2d imageSize = image.GetImageSize();
-	i2d::CVector2d opticalCenter(imageSize.GetX() * 0.5, imageSize.GetY() * 0.5);
+	i2d::CVector2d imageCenter(imageSize.GetX() * 0.5, imageSize.GetY() * 0.5);
 
 	for (		Features::ConstIterator iter1 = consumer.features.constBegin();
 				iter1 != consumer.features.constEnd();
@@ -77,14 +77,14 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 					++iter2){
 			const FeatureInfo& feature2 = *iter2;
 
-			UpdateHoughSpace(feature1.position, feature2.position, feature1.weight * feature2.weight, opticalCenter, lineSpace);
+			UpdateHoughSpace(feature1.position, feature2.position, feature1.weight * feature2.weight, imageCenter, lineSpace);
 		}
 	}
 
 	lineSpace.SmoothHoughSpace(*m_defaultSmoothKernelAttrPtr, *m_defaultSmoothKernelAttrPtr);
 
 	iipr::CHoughSpace2d::WeightToHoughPosMap foundLines;
-	lineSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 1, 0.2, *m_defaultSmoothKernelAttrPtr, 0.01, foundLines);
+	lineSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 1, 0.25, *m_defaultSmoothKernelAttrPtr, 0.01, foundLines);
 	if (foundLines.size() < 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No lines found"), "LensCorrectionFinder"));
 
@@ -97,23 +97,19 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 				"All detected lines",
 				"LensCorrectionFinder");
 
-	istd::TDelPtr<ilog::CExtMessage> pointsMessagePtr = new ilog::CExtMessage(
-				istd::IInformationProvider::IC_INFO,
-				0,
-				"All used points",
-				"LensCorrectionFinder");
-
 	QSet<i2d::CVector2d> allUsedPoints;
 
 	QList<CorrectionLineInfo> allCorrectionInfos;
 	int allPointsCount = 0;
+
+	double linePosTolerance = imageCenter.GetLength() * *m_defaultSmoothKernelAttrPtr / lineSpaceSize.GetY();
 
 	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator houghIter = foundLines.constBegin();
 				houghIter != foundLines.constEnd();
 				++houghIter){
 		const i2d::CVector2d& foundSpacePos = houghIter.value();
 
-		i2d::CLine2d line = CalcCorrespondingLine(foundSpacePos, opticalCenter, lineSpaceSize);
+		i2d::CLine2d line = CalcCorrespondingLine(foundSpacePos, imageCenter, lineSpaceSize);
 
 		QSet<i2d::CVector2d> positionsOnLine;
 
@@ -122,82 +118,49 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 					++featureIter){
 			const FeatureInfo& feature = *featureIter;
 
-			if (line.GetExtendedDistance(feature.position) < *m_defaultSmoothKernelAttrPtr * 2){
+			if (line.GetExtendedDistance(feature.position) < linePosTolerance){
 				positionsOnLine.insert(feature.position);
 			}
 		}
 
-		if (positionsOnLine.size() >= 3){
-			// calulate of position center
-			i2d::CVector2d sumPos(0, 0);
-			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
-						pointIter != positionsOnLine.constEnd();
-						++pointIter){
-				const i2d::CVector2d& pos = *pointIter;
-
-				sumPos += pos;
-			}
-			i2d::CVector2d centerPos = sumPos / positionsOnLine.size();
-
-			// calulate correlation matrix
-			i2d::CMatrix2d correlationMatrix(0, 0, 0, 0);
-			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
-						pointIter != positionsOnLine.constEnd();
-						++pointIter){
-				const i2d::CVector2d& pos = *pointIter;
-
-				i2d::CVector2d diff = pos - centerPos;
-				correlationMatrix.GetAtRef(0, 0) += diff.GetX() * diff.GetX();
-				correlationMatrix.GetAtRef(0, 1) += diff.GetX() * diff.GetY();
-				correlationMatrix.GetAtRef(1, 1) += diff.GetY() * diff.GetY();
-			}
-			correlationMatrix.SetAt(1, 0, correlationMatrix.GetAt(0, 1));
-
-			// take first principial vector
-			i2d::CVector2d eigenVector1;
-			i2d::CVector2d eigenVector2;
-			double eigenValue1;
-			double eigenValue2;
-			if (!correlationMatrix.GetEigenVectors(eigenVector1, eigenVector2, eigenValue1, eigenValue2)){
+		if (positionsOnLine.size() >= 4){
+			i2d::CLine2d representationLine;
+			if (!representationLine.ApproxFromPoints(positionsOnLine)){
 				continue;
 			}
-
-			i2d::CVector2d diffVector = eigenVector1.GetNormalized(qSqrt(eigenValue1) * 0.5);
-
-			i2d::CLine2d representationLine(centerPos - diffVector, centerPos + diffVector);
-
-			i2d::CLine2d* lineObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
-			*lineObjectPtr = representationLine;
-			linesMessagePtr->InsertAttachedObject(lineObjectPtr, QObject::tr("Detected line %1 at Hough position (%2, %3)").arg(allCorrectionInfos.size() + 1).arg(foundSpacePos.GetX()).arg(foundSpacePos.GetY()));
 
 			CorrectionLineInfo lineInfo;
-			lineInfo.orthoVector = representationLine.GetNearestPoint(i2d::CVector2d::GetZero());
+			lineInfo.orthoVector = representationLine.GetNearestPoint(imageCenter) - imageCenter;
+			if (lineInfo.orthoVector.GetLength() < *m_defaultMinDistanceAttrPtr){
+				continue;
+			}
 
-			bool isLineUsefull = true;
 			for (		QSet<i2d::CVector2d>::ConstIterator pointIter = positionsOnLine.constBegin();
 						pointIter != positionsOnLine.constEnd();
 						++pointIter){
 				const i2d::CVector2d& pos = *pointIter;
 
-				if (lineInfo.orthoVector.GetDotProduct(pos) < I_BIG_EPSILON){	// there are points on this line lying of the other side
-					isLineUsefull = false;
-					break;
-				}
-
 				CorrectionInfo info;
-				info.position = pos - opticalCenter;
-				info.diff = representationLine.GetExtendedNearestPoint(pos) - pos;
+				info.position = pos - imageCenter;
 
-				lineInfo.infos.push_back(info);
+				if (representationLine.GetExtendedIntersection(i2d::CLine2d(imageCenter, pos), info.diff)){
+					info.diff -= pos;
 
-				allPointsCount++;
-			}
-
-			if (!isLineUsefull){
-				continue;
+					lineInfo.infos.push_back(info);
+					allPointsCount++;
+				}
 			}
 
 			allCorrectionInfos.push_back(lineInfo);
+
+
+			i2d::CLine2d* lineObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
+			*lineObjectPtr = representationLine;
+			linesMessagePtr->InsertAttachedObject(lineObjectPtr, QObject::tr("Detected line %1 using %2 points at Hough position (%3, %4)")
+						.arg(allCorrectionInfos.size() + 1)
+						.arg(positionsOnLine.size())
+						.arg(foundSpacePos.GetX())
+						.arg(foundSpacePos.GetY()));
 
 			allUsedPoints += positionsOnLine;
 		}
@@ -207,25 +170,11 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		AddMessage(linesMessagePtr.PopPtr(), MCT_TEMP);
 	}
 
-	if (!allUsedPoints.isEmpty()){
-		int pointIndex = 0;
-		for (		QSet<i2d::CVector2d>::ConstIterator pointIter = allUsedPoints.constBegin();
-					pointIter != allUsedPoints.constEnd();
-					++pointIter, ++pointIndex){
-			i2d::CPosition2d* pointObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
-			pointObjectPtr->SetPosition(*pointIter);
-
-			pointsMessagePtr->InsertAttachedObject(pointObjectPtr, QObject::tr("Used point %1").arg(pointIndex + 1));
-		}
-
-		AddMessage(pointsMessagePtr.PopPtr(), MCT_TEMP);
-	}
-
 	if (allPointsCount < 3){
 		return false;
 	}
 
-	int varCount = allCorrectionInfos.size() * 2 + 2;
+	int varCount = allCorrectionInfos.size() + 2;
 	imath::CVarMatrix solutionMatrix;
 	solutionMatrix.SetSizes(istd::CIndex2d(varCount, allPointsCount * 2));
 	solutionMatrix.Clear();
@@ -238,33 +187,33 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 				lineIter != allCorrectionInfos.constEnd();
 				++lineIter, ++lineIndex){
 		const CorrectionLineInfo& lineInfo = *lineIter;
+		double orthoLengt2 = lineInfo.orthoVector.GetLength2();
+		double weight = orthoLengt2 * orthoLengt2;
+//		i2d::CVector2d normalizedOrhoVector = lineInfo.orthoVector.GetOrthogonal();
 
 		for (		CorrectionInfos::ConstIterator pointIter = lineInfo.infos.constBegin();
 					pointIter != lineInfo.infos.constEnd();
 					++pointIter, ++pointIndex){
 			const CorrectionInfo& pointInfo = *pointIter;
 
+			i2d::CVector2d normalizedOrhoVector = pointInfo.position;
+
 			double positionDist = pointInfo.position.GetLength();
 
-			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2), pointInfo.position.GetX());
-			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2), pointInfo.position.GetX() * positionDist);
-			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex * 2, pointIndex * 2), -lineInfo.orthoVector.GetX());
-			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2), pointInfo.position.GetX() + pointInfo.diff.GetX());
+			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2), pointInfo.position.GetX() * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2), pointInfo.position.GetX() * positionDist * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex, pointIndex * 2), -normalizedOrhoVector.GetX() * weight);
+			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2), (pointInfo.position.GetX() + pointInfo.diff.GetX()) * weight);
 
-			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), pointInfo.position.GetY());
-			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2 + 1), pointInfo.position.GetY() * positionDist);
-			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex * 2 + 1, pointIndex * 2 + 1), -lineInfo.orthoVector.GetY());
-			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), pointInfo.position.GetY() + pointInfo.diff.GetY());
+			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), pointInfo.position.GetY() * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2 + 1), pointInfo.position.GetY() * positionDist * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex, pointIndex * 2 + 1), -normalizedOrhoVector.GetY() * weight);
+			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), (pointInfo.position.GetY() + pointInfo.diff.GetY()) * weight);
 		}
 	}
 
 	imath::CVarMatrix resolvedX;
 	imath::CVarMatrix::SolveRobustLSP(solutionMatrix, vectorY, resolvedX);
-	//if (!solutionMatrix.GetSolvedLSP(vectorY, resolvedX)){
-	//	AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("Cannot resolve equations"), "LensCorrectionFinder"));
-
-	//	return false;
-	//}
 
 	Q_ASSERT(resolvedX.GetSizes() == istd::CIndex2d(1, varCount));
 
@@ -272,16 +221,13 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 	double distFactor = resolvedX.GetAt(istd::CIndex2d(0, 1)) / scaleFactor;
 	result.SetScaleFactor(scaleFactor);
 	result.SetDistortionFactor(distFactor);
-	result.SetOpticalCenter(opticalCenter);
+	result.SetOpticalCenter(imageCenter);
 
 	ilog::CExtMessage* resultMessagePtr = new ilog::CExtMessage(
 				istd::IInformationProvider::IC_INFO,
 				0,
 				QObject::tr("Found lens coeeficients: dist=%1, scale=%2").arg(distFactor * 1000000).arg(scaleFactor),
 				"LensCorrectionFinder");
-//iimg::CBitmap* houghBitmapPtr = new imod::TModelWrap<iimg::CBitmap>();
-//lineSpace.ExtractToBitmap(*houghBitmapPtr);
-//resultMessagePtr->InsertAttachedObject(houghBitmapPtr);
 	AddMessage(resultMessagePtr, MCT_RESULTS);
 
 	return true;
@@ -295,13 +241,18 @@ i2d::CVector2d CLensCorrFindSupplierComp::CalcHoughPos(
 			const istd::CIndex2d& spaceSize) const
 {
 	i2d::CVector2d angleVector = (point2 - point1).GetNormalized();
-	if (angleVector.GetX() < 0){
-		angleVector = -angleVector;
-	}
 	double directionAngle = angleVector.GetAngle();
 	double distanceToCenter = angleVector.GetCrossProductZ(point1 - imageCenter);
+	if (distanceToCenter >= 0){
+		directionAngle = std::fmod(directionAngle + I_2PI, I_2PI);
+	}
+	else{
+		distanceToCenter = -distanceToCenter;
+		directionAngle = std::fmod(directionAngle + I_PI, I_2PI);
+	}
+	Q_ASSERT(directionAngle >= 0);
 
-	return i2d::CVector2d(std::fmod(directionAngle / I_PI + 10, 1) * spaceSize.GetX(), (distanceToCenter / imageCenter.GetLength() + 0.5) * spaceSize.GetY());
+	return i2d::CVector2d(directionAngle / I_2PI * spaceSize.GetX(), distanceToCenter * spaceSize.GetY() / imageCenter.GetLength());
 }
 
 
@@ -310,13 +261,13 @@ i2d::CLine2d CLensCorrFindSupplierComp::CalcCorrespondingLine(
 			const i2d::CVector2d& imageCenter,
 			const istd::CIndex2d& spaceSize) const
 {
-	double directionAngle = houghPos.GetX() * I_PI / spaceSize.GetX();
-	double distanceToCenter = (houghPos.GetY() / spaceSize.GetY() - 0.5) * imageCenter.GetLength();
+	double directionAngle = houghPos.GetX() * I_2PI / spaceSize.GetX();
+	double distanceToCenter = houghPos.GetY() * imageCenter.GetLength() / spaceSize.GetY();
 
 	i2d::CVector2d angleVector;
 	angleVector.Init(directionAngle);
 
-	i2d::CVector2d lineCenter = angleVector.GetOrthogonal() * distanceToCenter + imageCenter;
+	i2d::CVector2d lineCenter = imageCenter - angleVector.GetOrthogonal() * distanceToCenter;
 	i2d::CVector2d lineDir = angleVector * 100;
 
 	return i2d::CLine2d(lineCenter - lineDir, lineCenter + lineDir);
@@ -333,16 +284,16 @@ void CLensCorrFindSupplierComp::UpdateHoughSpace(
 	istd::CIndex2d spaceSize = space.GetImageSize();
 
 	i2d::CVector2d houghPos = CalcHoughPos(point1, point2, imageCenter, spaceSize);
-	int radiusIndex = qFloor(houghPos.GetX());
+	int radiusIndex = qMin(qFloor(houghPos.GetX()), spaceSize.GetX() - 1);
 	Q_ASSERT(radiusIndex >= 0);
-	Q_ASSERT(radiusIndex < spaceSize.GetX());
 
 	int angleIndex = qFloor(houghPos.GetY());
 
 	if ((angleIndex >= 0) && (angleIndex < spaceSize.GetY())){
 		quint32* angleLinePtr = (quint32*)space.GetLinePtr(angleIndex);
 		double kernelFactor = *m_defaultSmoothKernelAttrPtr;
-		angleLinePtr[radiusIndex] += int(weight * 1000 * kernelFactor * kernelFactor);
+		double posFactor = qSqrt(qAbs(point1.GetCrossProductZ(point2)));
+		angleLinePtr[radiusIndex] += int(weight * posFactor * kernelFactor * kernelFactor);
 	}
 }
 

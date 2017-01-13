@@ -257,8 +257,19 @@ void CHoughSpace2d::AnalyseHoughSpace(
 					++point2Iter){
 			const i2d::CVector2d& point2 = point2Iter.value();
 
-			double dist = point1.GetDistance(point2);
-			if (dist <= minDistance){
+			i2d::CVector2d diff = point2 - point1;
+			if (m_isWrappedX){
+				double offset = spaceSize.GetX() * 1.5;
+				diff.SetX(std::fmod(diff.GetX() + offset,  spaceSize.GetX()) - offset);
+			}
+
+			if (m_isWrappedY){
+				double offset = spaceSize.GetY() * 1.5;
+				diff.SetY(std::fmod(diff.GetY() + offset,  spaceSize.GetY()) - offset);
+			}
+
+			double dist = diff.GetLength2();
+			if (dist <= minDistance * minDistance){
 				isToClose = true;
 
 				break;

@@ -42,6 +42,7 @@ public:
 		I_ASSIGN(m_defaultRadiusResAttrPtr, "DefaultRadiusResulution", "Resolution of radius grid", true, 200);
 		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 100);
 		I_ASSIGN(m_defaultSmoothKernelAttrPtr, "DefaultSpaceSmoothKernel", "Size of kernel will be used to smooth hough space", true, 10);
+		I_ASSIGN(m_defaultMinDistanceAttrPtr, "DefaultMinDistance", "Default value of minimal line distance to center", true, 100);
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -99,6 +100,7 @@ private:
 	I_ATTR(int, m_defaultRadiusResAttrPtr);
 	I_ATTR(int, m_defaultMaxLinesAttrPtr);
 	I_ATTR(int, m_defaultSmoothKernelAttrPtr);
+	I_ATTR(int, m_defaultMinDistanceAttrPtr);
 };
 
 
