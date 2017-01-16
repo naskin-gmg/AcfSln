@@ -278,7 +278,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			if (attrMetaInfoPtr != NULL){
 				const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = infoPtr->elementPtr->GetAttributeInfo(attributeName);
 				if (attrInfoPtr != NULL){
-					if (attrMetaInfoPtr->GetAttributeTypeId() != attrInfoPtr->attributeTypeName){
+					if (!AreTypesCompatible(attrMetaInfoPtr->GetAttributeTypeId(), attrInfoPtr->attributeTypeName)){
 						if (reasonConsumerPtr != NULL){
 							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
 										istd::IInformationProvider::IC_ERROR,
@@ -423,6 +423,26 @@ QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress&
 	}
 
 	return QIcon();
+}
+
+
+// static methods
+
+bool CRegistryConsistInfoComp::AreTypesCompatible(const QByteArray& metaTypeId, const QByteArray& typeId)
+{
+	if (metaTypeId == typeId){
+		return true;
+	}
+
+	if ((metaTypeId == iattr::CStringAttribute::GetTypeName()) && (typeId == icomp::CTextAttribute::GetTypeName())){
+		return true;
+	}
+
+	if ((metaTypeId == iattr::CStringListAttribute::GetTypeName()) && (typeId == icomp::CMultiTextAttribute::GetTypeName())){
+		return true;
+	}
+
+	return false;
 }
 
 

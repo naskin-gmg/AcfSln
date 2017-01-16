@@ -23,6 +23,7 @@
 
 // ACF-Solutions includes
 #include <icmpstr/CMultiAttributeDelegateWidget.h>
+#include <icmpstr/CRegistryConsistInfoComp.h>
 
 
 
@@ -48,11 +49,13 @@ CAttributeEditorComp::CAttributeEditorComp()
 	m_attributeTypesMap[iattr::CRealAttribute::GetTypeName()] = TypeDescr(tr("Real number"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CBooleanAttribute::GetTypeName()] = TypeDescr(tr("Boolean value"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CStringAttribute::GetTypeName()] = TypeDescr(tr("String"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[icomp::CTextAttribute::GetTypeName()] = TypeDescr(tr("Translatable text"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CIdAttribute::GetTypeName()] = TypeDescr(tr("ID"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CIntegerListAttribute::GetTypeName()] = TypeDescr(tr("List of integer numbers"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CRealListAttribute::GetTypeName()] = TypeDescr(tr("List of real numbers"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CBooleanListAttribute::GetTypeName()] = TypeDescr(tr("List of boolean values"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = TypeDescr(tr("List of strings"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = TypeDescr(tr("List of translatable texts"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CIdListAttribute::GetTypeName()] = TypeDescr(tr("List of ID's"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[icomp::CReferenceAttribute::GetTypeName()] = TypeDescr(tr("Component reference"), AGT_REFERENCE);
 	m_attributeTypesMap[icomp::CMultiReferenceAttribute::GetTypeName()] = TypeDescr(tr("List of component reference"), AGT_REFERENCE);
@@ -924,7 +927,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	if (attributeStatTypeId.isEmpty()){
 		attributeStatTypeId = attributeValueTypeId;
 	}
-	else if (!attributeValueTypeId.isEmpty() && (attributeValueTypeId != attributeStatTypeId)){
+	else if (!attributeValueTypeId.isEmpty() && !CRegistryConsistInfoComp::AreTypesCompatible(attributeStatTypeId, attributeValueTypeId)){
 		attributeValueTip += tr("Attribute type in package differs from registry");
 		isAttributeError = true;
 	}

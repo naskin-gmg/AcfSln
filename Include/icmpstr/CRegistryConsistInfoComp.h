@@ -87,6 +87,8 @@ public:
 				ilog::IMessageConsumer* reasonConsumerPtr) const;
 	virtual QIcon GetComponentIcon(const icomp::CComponentAddress& address) const;
 
+	static bool AreTypesCompatible(const QByteArray& metaTypeId, const QByteArray& typeId);
+
 protected:
 	/**
 		Get list of compatible element ID's.
