@@ -32,6 +32,129 @@ const i2d::ICalibration2d* CLensCorrFindSupplierComp::GetCalibration() const
 
 //protected methods
 
+bool CLensCorrFindSupplierComp::CalculateCalibrationFactors(
+			const AllCorrectionInfos& allCorrectionInfos,
+			bool searchCenterFlag,
+			const icalib::CSimpleLensCorrection& inputCorrection,
+			icalib::CSimpleLensCorrection& result) const
+{
+	int allPointsCount = 0;
+	for (		AllCorrectionInfos::ConstIterator lineIter = allCorrectionInfos.constBegin();
+				lineIter != allCorrectionInfos.constEnd();
+				++lineIter){
+		const CorrectionLineInfo& lineInfo = *lineIter;
+
+		allPointsCount += lineInfo.infos.size();
+	}
+
+	int varCount = allCorrectionInfos.size() + 2;
+	int lineMatrixOffset = 2;
+	if (searchCenterFlag){
+		varCount += 2;
+		lineMatrixOffset += 2;
+	}
+
+	imath::CVarMatrix solutionMatrix;
+	solutionMatrix.SetSizes(istd::CIndex2d(varCount, allPointsCount * 2));
+	solutionMatrix.Clear();
+	imath::CVarMatrix vectorY;
+	vectorY.SetSizes(istd::CIndex2d(1, allPointsCount * 2));
+
+	int pointIndex = 0;
+	int lineIndex = 0;
+	for (		AllCorrectionInfos::ConstIterator lineIter = allCorrectionInfos.constBegin();
+				lineIter != allCorrectionInfos.constEnd();
+				++lineIter, ++lineIndex){
+		const CorrectionLineInfo& lineInfo = *lineIter;
+		double orthoLengt2 = lineInfo.orthoVector.GetLength2();
+		double weight = orthoLengt2 * orthoLengt2;
+		i2d::CVector2d normalizedOrhoVector = lineInfo.orthoVector.GetOrthogonal();
+
+		for (		CorrectionInfos::ConstIterator pointIter = lineInfo.infos.constBegin();
+					pointIter != lineInfo.infos.constEnd();
+					++pointIter, ++pointIndex){
+			const CorrectionInfo& pointInfo = *pointIter;
+
+			i2d::CVector2d destPos = inputCorrection.GetInvValueAt(pointInfo.foundPos);
+			const i2d::CVector2d& sourcePos = pointInfo.onLinePos;
+
+			double positionDist = sourcePos.GetLength();
+
+			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2), sourcePos.GetX() * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2), sourcePos.GetX() * positionDist * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(lineMatrixOffset + lineIndex, pointIndex * 2), -normalizedOrhoVector.GetX() * weight);
+			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2), destPos.GetX() * weight);
+
+			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), sourcePos.GetY() * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2 + 1), sourcePos.GetY() * positionDist * weight);
+			solutionMatrix.SetAt(istd::CIndex2d(lineMatrixOffset + lineIndex, pointIndex * 2 + 1), -normalizedOrhoVector.GetY() * weight);
+			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), destPos.GetY() * weight);
+
+			if (searchCenterFlag){
+				solutionMatrix.SetAt(istd::CIndex2d(2, pointIndex * 2), weight);
+				solutionMatrix.SetAt(istd::CIndex2d(3, pointIndex * 2), 0);
+				solutionMatrix.SetAt(istd::CIndex2d(2, pointIndex * 2 + 1), 0);
+				solutionMatrix.SetAt(istd::CIndex2d(3, pointIndex * 2 + 1), weight);
+			}
+		}
+	}
+
+	imath::CVarMatrix resolvedX;
+	imath::CVarMatrix::SolveRobustLSP(solutionMatrix, vectorY, resolvedX);
+
+	Q_ASSERT(resolvedX.GetSizes() == istd::CIndex2d(1, varCount));
+
+	double scaleFactor = resolvedX.GetAt(istd::CIndex2d(0, 0));
+	double distFactor = resolvedX.GetAt(istd::CIndex2d(0, 1)) / scaleFactor;
+	result.SetScaleFactor(scaleFactor);
+	result.SetDistortionFactor(distFactor);
+	if (searchCenterFlag){
+		i2d::CVector2d centerOffset(resolvedX.GetAt(istd::CIndex2d(0, 2)), resolvedX.GetAt(istd::CIndex2d(0, 3)));
+		result.SetOpticalCenter(centerOffset);
+	}
+	else{
+		result.SetOpticalCenter(i2d::CVector2d::GetZero());
+	}
+
+	return true;
+}
+
+
+void CLensCorrFindSupplierComp::AddCorrectPointsMessage(
+			const AllCorrectionInfos& allCorrectionInfos,
+			const icalib::CSimpleLensCorrection& inputCorrection,
+			const i2d::CVector2d& imageCenter) const
+{
+	ilog::CExtMessage* corrPointsMessagePtr = new ilog::CExtMessage(
+				istd::IInformationProvider::IC_INFO,
+				0,
+				"Corrected positions",
+				"LensCorrectionFinder");
+
+	int lineIndex = 0;
+	for (		AllCorrectionInfos::ConstIterator lineIter = allCorrectionInfos.constBegin();
+				lineIter != allCorrectionInfos.constEnd();
+				++lineIter, ++lineIndex){
+		const CorrectionLineInfo& lineInfo = *lineIter;
+
+		i2d::CPolypoint* polyPointObjectPtr = new imod::TModelWrap<i2d::CPolypoint>();
+
+		for (		CorrectionInfos::ConstIterator pointIter = lineInfo.infos.constBegin();
+					pointIter != lineInfo.infos.constEnd();
+					++pointIter){
+			const CorrectionInfo& pointInfo = *pointIter;
+
+			polyPointObjectPtr->InsertNode(inputCorrection.GetInvValueAt(pointInfo.foundPos) + imageCenter);
+		}
+
+		corrPointsMessagePtr->InsertAttachedObject(polyPointObjectPtr, QObject::tr("Corrected point of line %1").arg(lineIndex + 1));
+	}
+
+	AddMessage(corrPointsMessagePtr, MCT_RESULTS);
+
+}
+
+
 bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image, icalib::CSimpleLensCorrection& result) const
 {
 	result.Reset();
@@ -53,6 +176,14 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No enough features found"), "LensCorrectionFinder"));
 
 		return false;
+	}
+
+	const iprm::IParamsSet* paramsPtr = GetModelParametersSet();
+
+	bool searchCenterFlag = true;
+	iprm::TParamsPtr<iprm::IEnableableParam> searchCeneterParamPtr(paramsPtr, m_searchCenterParamIdAttrPtr, m_defaultSearchCenterParamCompPtr, false);
+	if (searchCeneterParamPtr.IsValid()){
+		searchCenterFlag = searchCeneterParamPtr->IsEnabled();
 	}
 
 	CHoughSpace2d lineSpace;
@@ -97,10 +228,7 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 				"All detected lines",
 				"LensCorrectionFinder");
 
-	QSet<i2d::CVector2d> allUsedPoints;
-
-	QList<CorrectionLineInfo> allCorrectionInfos;
-	int allPointsCount = 0;
+	AllCorrectionInfos allCorrectionInfos;
 
 	double linePosTolerance = imageCenter.GetLength() * *m_defaultSmoothKernelAttrPtr / lineSpaceSize.GetY();
 
@@ -140,14 +268,13 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 						++pointIter){
 				const i2d::CVector2d& pos = *pointIter;
 
-				CorrectionInfo info;
-				info.position = pos - imageCenter;
-
-				if (representationLine.GetExtendedIntersection(i2d::CLine2d(imageCenter, pos), info.diff)){
-					info.diff -= pos;
+				i2d::CVector2d posOnLine;
+				if (representationLine.GetExtendedIntersection(i2d::CLine2d(imageCenter, pos), posOnLine)){
+					CorrectionInfo info;
+					info.foundPos = pos;
+					info.onLinePos = posOnLine - imageCenter;
 
 					lineInfo.infos.push_back(info);
-					allPointsCount++;
 				}
 			}
 
@@ -161,8 +288,6 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 						.arg(positionsOnLine.size())
 						.arg(foundSpacePos.GetX())
 						.arg(foundSpacePos.GetY()));
-
-			allUsedPoints += positionsOnLine;
 		}
 	}
 
@@ -170,63 +295,25 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		AddMessage(linesMessagePtr.PopPtr(), MCT_TEMP);
 	}
 
-	if (allPointsCount < 3){
+	if (allCorrectionInfos.size() < 2){
+		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("Not enogh usable lines found"), "LensCorrectionFinder"));
+
 		return false;
 	}
 
-	int varCount = allCorrectionInfos.size() + 2;
-	imath::CVarMatrix solutionMatrix;
-	solutionMatrix.SetSizes(istd::CIndex2d(varCount, allPointsCount * 2));
-	solutionMatrix.Clear();
-	imath::CVarMatrix vectorY;
-	vectorY.SetSizes(istd::CIndex2d(1, allPointsCount * 2));
+	icalib::CSimpleLensCorrection inputCorrection;
+	inputCorrection.SetOpticalCenter(imageCenter);
 
-	int pointIndex = 0;
-	int lineIndex = 0;
-	for (		QList<CorrectionLineInfo>::ConstIterator lineIter = allCorrectionInfos.constBegin();
-				lineIter != allCorrectionInfos.constEnd();
-				++lineIter, ++lineIndex){
-		const CorrectionLineInfo& lineInfo = *lineIter;
-		double orthoLengt2 = lineInfo.orthoVector.GetLength2();
-		double weight = orthoLengt2 * orthoLengt2;
-//		i2d::CVector2d normalizedOrhoVector = lineInfo.orthoVector.GetOrthogonal();
+	CalculateCalibrationFactors(allCorrectionInfos, searchCenterFlag, inputCorrection, result);
 
-		for (		CorrectionInfos::ConstIterator pointIter = lineInfo.infos.constBegin();
-					pointIter != lineInfo.infos.constEnd();
-					++pointIter, ++pointIndex){
-			const CorrectionInfo& pointInfo = *pointIter;
+	result.SetOpticalCenter(imageCenter + result.GetOpticalCenter());
 
-			i2d::CVector2d normalizedOrhoVector = pointInfo.position;
+//	AddCorrectPointsMessage(allCorrectionInfos, result, imageCenter);
 
-			double positionDist = pointInfo.position.GetLength();
-
-			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2), pointInfo.position.GetX() * weight);
-			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2), pointInfo.position.GetX() * positionDist * weight);
-			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex, pointIndex * 2), -normalizedOrhoVector.GetX() * weight);
-			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2), (pointInfo.position.GetX() + pointInfo.diff.GetX()) * weight);
-
-			solutionMatrix.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), pointInfo.position.GetY() * weight);
-			solutionMatrix.SetAt(istd::CIndex2d(1, pointIndex * 2 + 1), pointInfo.position.GetY() * positionDist * weight);
-			solutionMatrix.SetAt(istd::CIndex2d(2 + lineIndex, pointIndex * 2 + 1), -normalizedOrhoVector.GetY() * weight);
-			vectorY.SetAt(istd::CIndex2d(0, pointIndex * 2 + 1), (pointInfo.position.GetY() + pointInfo.diff.GetY()) * weight);
-		}
-	}
-
-	imath::CVarMatrix resolvedX;
-	imath::CVarMatrix::SolveRobustLSP(solutionMatrix, vectorY, resolvedX);
-
-	Q_ASSERT(resolvedX.GetSizes() == istd::CIndex2d(1, varCount));
-
-	double scaleFactor = resolvedX.GetAt(istd::CIndex2d(0, 0));
-	double distFactor = resolvedX.GetAt(istd::CIndex2d(0, 1)) / scaleFactor;
-	result.SetScaleFactor(scaleFactor);
-	result.SetDistortionFactor(distFactor);
-	result.SetOpticalCenter(imageCenter);
-
-	ilog::CExtMessage* resultMessagePtr = new ilog::CExtMessage(
+	ilog::CMessage* resultMessagePtr = new ilog::CMessage(
 				istd::IInformationProvider::IC_INFO,
 				0,
-				QObject::tr("Found lens coeeficients: dist=%1, scale=%2").arg(distFactor * 1000000).arg(scaleFactor),
+				QObject::tr("Found lens coeeficients: dist=%1, scale=%2").arg(result.GetDistortionFactor() * 1000000).arg(result.GetScaleFactor()),
 				"LensCorrectionFinder");
 	AddMessage(resultMessagePtr, MCT_RESULTS);
 

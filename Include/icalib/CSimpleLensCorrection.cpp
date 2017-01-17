@@ -179,27 +179,16 @@ bool CSimpleLensCorrection::GetPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = origPosition / m_scaleFactor;
-
-	double distance = normPos.GetLength();
-
-	if (qFabs(m_distortionFactor) > I_BIG_EPSILON){
-		double delta = 1 + 4 * distance * m_distortionFactor;
-		if (delta >= 0){
-			double shouldDistance = (-1 + qSqrt(delta)) / (2 * m_distortionFactor);
-
-			result = normPos.GetNormalized(shouldDistance) + m_opticalCenter;
-
-			return true;
-		}
-
+	double distance = origPosition.GetLength();
+	if (distance * 2 * m_distortionFactor * m_scaleFactor < -m_scaleFactor){
 		return false;
 	}
-	else{
-		result = normPos + m_opticalCenter;
 
-		return true;
-	}
+	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
+
+	result = m_opticalCenter + origPosition * scaleFactor;
+
+	return true;
 }
 
 
@@ -208,14 +197,27 @@ bool CSimpleLensCorrection::GetInvPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d correctedPos = transfPosition - m_opticalCenter;
+	i2d::CVector2d normPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
 
-	double distance = correctedPos.GetLength();
-	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
+	double distance = normPos.GetLength();
 
-	result = correctedPos * scaleFactor;
+	if (qFabs(m_distortionFactor) > I_BIG_EPSILON){
+		double delta = 1 + 4 * distance * m_distortionFactor;
+		if (delta >= 0){
+			double shouldDistance = (-1 + qSqrt(delta)) / (2 * m_distortionFactor);
 
-	return true;
+			result = normPos.GetNormalized(shouldDistance);
+
+			return true;
+		}
+
+		return false;
+	}
+	else{
+		result = normPos;
+
+		return true;
+	}
 }
 
 
@@ -224,27 +226,17 @@ bool CSimpleLensCorrection::GetLocalTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = origPosition / m_scaleFactor;
-
-	double distance = normPos.GetLength();
-
-	double delta = 1 + 4 * distance * m_distortionFactor;
-	if (delta >= 0){
-		double shouldDistance = (-1 + qSqrt(delta)) * 0.5;
-
-		if (shouldDistance >= I_BIG_EPSILON){
-			result.SetTranslation(normPos.GetNormalized(shouldDistance) + m_opticalCenter);
-			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());	// TODO: implement it correctly
-		}
-		else{
-			result.SetTranslation(normPos + m_opticalCenter);
-			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());
-		}
-
-		return true;
+	double distance = origPosition.GetLength();
+	if (distance * 2 * m_distortionFactor * m_scaleFactor < -m_scaleFactor){
+		return false;
 	}
 
-	return false;
+	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
+
+	result.SetTranslation(m_opticalCenter + origPosition * scaleFactor);
+	result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity() * scaleFactor);	// TODO: implement it correctly, it is simple approximation only
+
+	return true;
 }
 
 
@@ -253,15 +245,27 @@ bool CSimpleLensCorrection::GetLocalInvTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d correctedPos = transfPosition - m_opticalCenter;
+	i2d::CVector2d normPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
 
-	double distance = correctedPos.GetLength();
-	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
+	double distance = normPos.GetLength();
 
-	result.SetTranslation(correctedPos * scaleFactor);
-	result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity() * scaleFactor);	// TODO: implement it correctly, it is simple approximation only
+	double delta = 1 + 4 * distance * m_distortionFactor;
+	if (delta >= 0){
+		double shouldDistance = (-1 + qSqrt(delta)) * 0.5;
 
-	return true;
+		if (shouldDistance >= I_BIG_EPSILON){
+			result.SetTranslation(normPos.GetNormalized(shouldDistance));
+			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());	// TODO: implement it correctly
+		}
+		else{
+			result.SetTranslation(normPos);
+			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 

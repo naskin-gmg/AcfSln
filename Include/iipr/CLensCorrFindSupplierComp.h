@@ -6,6 +6,7 @@
 #include <imath/CFixedPointManip.h>
 #include <imath/CGeneralUnitInfo.h>
 #include <i2d/ICalibrationProvider.h>
+#include <iprm/IEnableableParam.h>
 #include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
@@ -43,6 +44,8 @@ public:
 		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 100);
 		I_ASSIGN(m_defaultSmoothKernelAttrPtr, "DefaultSpaceSmoothKernel", "Size of kernel will be used to smooth hough space", true, 10);
 		I_ASSIGN(m_defaultMinDistanceAttrPtr, "DefaultMinDistance", "Default value of minimal line distance to center", true, 100);
+		I_ASSIGN(m_searchCenterParamIdAttrPtr, "SearchCenterParamId", "ID of parameter to enable search of center (iprm::IEnableableParam)", false, "SearchCenter");
+		I_ASSIGN(m_defaultSearchCenterParamCompPtr, "DefaultSearchCenterParam", "Default parameter enabling search of center", false, "DefaultSearchCenterParam");
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -69,8 +72,8 @@ protected:
 
 	struct CorrectionInfo
 	{
-		i2d::CVector2d position;
-		i2d::CVector2d diff;
+		i2d::CVector2d foundPos;
+		i2d::CVector2d onLinePos;
 	};
 	typedef QList<CorrectionInfo> CorrectionInfos;
 
@@ -79,6 +82,15 @@ protected:
 		CorrectionInfos infos;
 		i2d::CVector2d orthoVector;
 	};
+	typedef QList<CorrectionLineInfo> AllCorrectionInfos;
+
+	bool CalculateCalibrationFactors(
+				const AllCorrectionInfos& allCorrectionInfos,
+				bool searchCenterFlag,
+				const icalib::CSimpleLensCorrection& inputCorrection,
+				icalib::CSimpleLensCorrection& result) const;
+
+	void AddCorrectPointsMessage(const AllCorrectionInfos& allCorrectionInfos, const icalib::CSimpleLensCorrection& inputCorrection, const i2d::CVector2d& imageCenter) const;
 
 	bool CalculateCalibration(const iimg::IBitmap& image, icalib::CSimpleLensCorrection& result) const;
 	i2d::CVector2d CalcHoughPos(const i2d::CVector2d& point1, const i2d::CVector2d& point2, const i2d::CVector2d& imageCenter, const istd::CIndex2d& spaceSize) const;
@@ -101,6 +113,8 @@ private:
 	I_ATTR(int, m_defaultMaxLinesAttrPtr);
 	I_ATTR(int, m_defaultSmoothKernelAttrPtr);
 	I_ATTR(int, m_defaultMinDistanceAttrPtr);
+	I_ATTR(QByteArray, m_searchCenterParamIdAttrPtr);
+	I_REF(iprm::IEnableableParam, m_defaultSearchCenterParamCompPtr);
 };
 
 
