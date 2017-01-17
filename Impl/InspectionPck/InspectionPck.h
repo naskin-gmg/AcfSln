@@ -10,6 +10,7 @@
 #include <iinsp/CInformationProviderCacheComp.h>
 #include <iinsp/CIdProviderCacheComp.h>
 #include <iinsp/CComposedInformationProviderComp.h>
+#include <iinsp/CSupplierActivationProxyComp.h>
 
 
 /**
@@ -23,6 +24,7 @@ typedef icomp::TModelCompWrap<iinsp::CInspectionTaskComp> InspectionTask;
 typedef icomp::TModelCompWrap<iinsp::CInformationProviderCacheComp> InformationProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CIdProviderCacheComp> IdProviderCache;
 typedef icomp::TModelCompWrap<iinsp::CComposedInformationProviderComp> ComposedInformationProvider;
+typedef icomp::TModelCompWrap<iinsp::CSupplierActivationProxyComp> SupplierActivationProxy;
 
 
 } // namespace InspectionPck
