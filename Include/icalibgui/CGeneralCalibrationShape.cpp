@@ -54,8 +54,6 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 	}
 
 	if (IsDisplayConnected()){
-		i2d::CRect clientRect = GetClientRect();
-
 		iview::IVisualCalibrationInfo* calibInfoPtr = NULL;
 		iview::IDisplay* displayPtr = GetDisplayPtr();
 		while (displayPtr != NULL){
@@ -86,27 +84,60 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
-		i2d::CRectangle bounds(-1000, -1000, 2000, 2000);
+		const iview::CScreenTransform&  viewToScreenTransform = GetViewToScreenTransform();
+
+		// calculate optimal argument boundaries
+		i2d::CRect clientRect = GetClientRect();
+
+		i2d::CRectangle clientProjectedBounds = i2d::CRectangle::GetInvalid();
+		for (int y = 0; y <= 10; ++y){
+			for (int x = 0; x <= 10; ++x){
+				i2d::CVector2d screenPos(clientRect.GetLeft() + clientRect.GetWidth() * x / 10.0, clientRect.GetTop() + clientRect.GetHeight() * y / 10.0);
+
+				i2d::CVector2d logPos;
+				if (calibPtr->GetInvPositionAt(viewToScreenTransform.GetInvertedApply(screenPos), logPos)){
+					if (clientProjectedBounds.IsValid()){
+						clientProjectedBounds.Unite(logPos);
+					}
+					else{
+						clientProjectedBounds = i2d::CRectangle(logPos, logPos);
+					}
+				}
+			}
+		}
+
+		i2d::CRectangle bounds;
+
 		const i2d::CRectangle* argumentAreaPtr = calibPtr->GetArgumentArea();
 		if (argumentAreaPtr != NULL){
 			bounds = *argumentAreaPtr;
+
+			if (!clientProjectedBounds.IsEmpty()){
+				bounds.Intersect(clientProjectedBounds);
+			}
+		}
+		else if (!clientProjectedBounds.IsEmpty()){
+			bounds = clientProjectedBounds;		}
+		else{
+			bounds = i2d::CRectangle(-1000, -1000, 2000, 2000);
 		}
 
+		i2d::CRectangle smallBounds(bounds.GetLeftTop() * 0.25 + bounds.GetRightBottom() * 0.75, bounds.GetLeftTop() * 0.75 + bounds.GetRightBottom() * 0.25);
+
 		i2d::CVector2d viewLeftCenter;
-		calibPtr->GetInvPositionAt(bounds.GetLeftCenter(), viewLeftCenter);
+		calibPtr->GetPositionAt(smallBounds.GetLeftCenter(), viewLeftCenter);
 		i2d::CVector2d viewRightCenter;
-		calibPtr->GetInvPositionAt(bounds.GetRightCenter(), viewRightCenter);
+		calibPtr->GetPositionAt(smallBounds.GetRightCenter(), viewRightCenter);
 		i2d::CVector2d viewTopCenter;
-		calibPtr->GetInvPositionAt(bounds.GetTopCenter(), viewTopCenter);
+		calibPtr->GetPositionAt(smallBounds.GetTopCenter(), viewTopCenter);
 		i2d::CVector2d viewBottomCenter;
-		calibPtr->GetInvPositionAt(bounds.GetBottomCenter(), viewBottomCenter);
+		calibPtr->GetPositionAt(smallBounds.GetBottomCenter(), viewBottomCenter);
 
-		double calibScale = qMax(viewLeftCenter.GetDistance(viewRightCenter) / bounds.GetWidth(), viewTopCenter.GetDistance(viewBottomCenter) / bounds.GetHeight());
-
-		double viewScale = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+		double calibScale = qAbs(qMax(viewLeftCenter.GetDistance(viewRightCenter) / smallBounds.GetWidth(), viewTopCenter.GetDistance(viewBottomCenter) / smallBounds.GetHeight()));
+		double viewScale = qAbs(viewToScreenTransform.GetDeformMatrix().GetApproxScale());
 
 		int levels[2];
-		double minGridDistance = calibInfoPtr->GetMinGridDistance() * calibScale / viewScale;
+		double minGridDistance = calibInfoPtr->GetMinGridDistance() / (viewScale * calibScale);
 		double grid = qPow(10.0, qCeil(log10(minGridDistance)));
 		if (grid * 0.5 < minGridDistance){
 			levels[0] = 5;
