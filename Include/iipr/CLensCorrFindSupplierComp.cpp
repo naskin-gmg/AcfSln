@@ -181,14 +181,30 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 	const iprm::IParamsSet* paramsPtr = GetModelParametersSet();
 
 	bool searchCenterFlag = true;
-	iprm::TParamsPtr<iprm::IEnableableParam> searchCeneterParamPtr(paramsPtr, m_searchCenterParamIdAttrPtr, m_defaultSearchCenterParamCompPtr, false);
-	if (searchCeneterParamPtr.IsValid()){
-		searchCenterFlag = searchCeneterParamPtr->IsEnabled();
+	iprm::TParamsPtr<iprm::IEnableableParam> searchCenterParamPtr(paramsPtr, m_searchCenterParamIdAttrPtr, m_defaultSearchCenterParamCompPtr, false);
+	if (searchCenterParamPtr.IsValid()){
+		searchCenterFlag = searchCenterParamPtr->IsEnabled();
+	}
+
+	int angleGridSize = 360;
+	int radiusGridSize = 360;
+	int maxLinesCount = 20;
+	double minDistanceToLine = 100;
+	iprm::TParamsPtr<imeas::INumericValue> gridSearchParamsPtr(paramsPtr, m_gridSearchParamsIdAttrPtr, m_defaultGridSearchParamsCompPtr, false);
+	if (gridSearchParamsPtr.IsValid()){
+		imath::CVarVector values = gridSearchParamsPtr->GetValues();
+		if (values.GetElementsCount() >= 4){
+			angleGridSize = int(s_angleGridUnitInfo.GetValueRange().GetClipped(values.GetElement(0)));
+			radiusGridSize = int(s_distanceGridUnitInfo.GetValueRange().GetClipped(values.GetElement(1)));
+			maxLinesCount = int(s_maxLinesUnitInfo.GetValueRange().GetClipped(values.GetElement(2)));
+			minDistanceToLine = s_minDistanceUnitInfo.GetValueRange().GetClipped(values.GetElement(3));
+		}
+		else{
+			SendErrorMessage(iproc::IProcessor::MI_BAD_PARAMS, QObject::tr("Wrong grid search parameters"));
+		}
 	}
 
 	CHoughSpace2d lineSpace;
-	int angleGridSize = *m_defaultAngleResAttrPtr;
-	int radiusGridSize = *m_defaultRadiusResAttrPtr;
 	istd::CIndex2d lineSpaceSize(angleGridSize, radiusGridSize);
 
 	if (!lineSpace.CreateHoughSpace(lineSpaceSize, true, false)){
@@ -212,10 +228,10 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		}
 	}
 
-	lineSpace.SmoothHoughSpace(*m_defaultSmoothKernelAttrPtr, *m_defaultSmoothKernelAttrPtr);
+	lineSpace.SmoothHoughSpace(*m_smoothKernelAttrPtr, *m_smoothKernelAttrPtr);
 
 	iipr::CHoughSpace2d::WeightToHoughPosMap foundLines;
-	lineSpace.AnalyseHoughSpace(*m_defaultMaxLinesAttrPtr, 1, 0.25, *m_defaultSmoothKernelAttrPtr, 0.01, foundLines);
+	lineSpace.AnalyseHoughSpace(maxLinesCount, 1, 0.25, *m_smoothKernelAttrPtr, 0.01, foundLines);
 	if (foundLines.size() < 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No lines found"), "LensCorrectionFinder"));
 
@@ -230,7 +246,7 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 
 	AllCorrectionInfos allCorrectionInfos;
 
-	double linePosTolerance = imageCenter.GetLength() * *m_defaultSmoothKernelAttrPtr / lineSpaceSize.GetY();
+	double linePosTolerance = imageCenter.GetLength() * *m_smoothKernelAttrPtr / lineSpaceSize.GetY();
 
 	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator houghIter = foundLines.constBegin();
 				houghIter != foundLines.constEnd();
@@ -259,7 +275,7 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 
 			CorrectionLineInfo lineInfo;
 			lineInfo.orthoVector = representationLine.GetNearestPoint(imageCenter) - imageCenter;
-			if (lineInfo.orthoVector.GetLength() < *m_defaultMinDistanceAttrPtr){
+			if (lineInfo.orthoVector.GetLength() < minDistanceToLine){
 				continue;
 			}
 
@@ -378,7 +394,7 @@ void CLensCorrFindSupplierComp::UpdateHoughSpace(
 
 	if ((angleIndex >= 0) && (angleIndex < spaceSize.GetY())){
 		quint32* angleLinePtr = (quint32*)space.GetLinePtr(angleIndex);
-		double kernelFactor = *m_defaultSmoothKernelAttrPtr;
+		double kernelFactor = *m_smoothKernelAttrPtr;
 		double posFactor = qSqrt(qAbs(point1.GetCrossProductZ(point2)));
 		angleLinePtr[radiusIndex] += int(weight * posFactor * kernelFactor * kernelFactor);
 	}
@@ -415,6 +431,12 @@ int CLensCorrFindSupplierComp::ProduceObject(ProductType& result) const
 void CLensCorrFindSupplierComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
+
+	m_searchParamsContraints.Reset();
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Angle Grid"), QObject::tr("Decide how exact the angle will be calculated"), s_angleGridUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Distance Grid"), QObject::tr("Decide how exact the position of line will be calculated"), s_distanceGridUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Max lines"), QObject::tr("Maximal number of lines"), s_maxLinesUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Min distance"), QObject::tr("Minimal distance to center"), s_minDistanceUnitInfo);
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapProviderSupplierCompPtr.GetPtr());
@@ -467,6 +489,13 @@ bool CLensCorrFindSupplierComp::FeaturesConsumer::AddFeature(const imeas::INumer
 	return true;
 }
 
+
+// static attributes
+imath::CFixedPointManip CLensCorrFindSupplierComp::s_integerManip(0);
+imath::CGeneralUnitInfo CLensCorrFindSupplierComp::s_angleGridUnitInfo(imath::IUnitInfo::UT_COUNTER, "", 1, istd::CRange(10, 10000), &s_integerManip);
+imath::CGeneralUnitInfo CLensCorrFindSupplierComp::s_distanceGridUnitInfo(imath::IUnitInfo::UT_COUNTER, "", 1, istd::CRange(10, 10000), &s_integerManip);
+imath::CGeneralUnitInfo CLensCorrFindSupplierComp::s_maxLinesUnitInfo(imath::IUnitInfo::UT_COUNTER, "", 1, istd::CRange(2, 100), &s_integerManip);
+imath::CGeneralUnitInfo CLensCorrFindSupplierComp::s_minDistanceUnitInfo(imath::IUnitInfo::UT_COUNTER, QObject::tr("px"), 1, istd::CRange(1, 1000), &s_integerManip);
 
 } // namespace iipr
 

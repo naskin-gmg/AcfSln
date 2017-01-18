@@ -35,15 +35,16 @@ public:
 
 	I_BEGIN_COMPONENT(CLensCorrFindSupplierComp);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
+		I_REGISTER_SUBELEMENT(SearchParamsConstraints);
+		I_REGISTER_SUBELEMENT_INTERFACE(SearchParamsConstraints, imeas::INumericConstraints, ExtractSearchParamsConstraints);
+		I_REGISTER_SUBELEMENT_INTERFACE(SearchParamsConstraints, istd::IChangeable, ExtractSearchParamsConstraints);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_pointFinderCompPtr, "PointFinder", "Finder of points on image", true, "PointFinder");
-		I_ASSIGN(m_defaultAngleResAttrPtr, "DefaultAngleResulution", "Resolution of angle grid", true, 360);
-		I_ASSIGN(m_defaultRadiusResAttrPtr, "DefaultRadiusResulution", "Resolution of radius grid", true, 200);
-		I_ASSIGN(m_defaultMaxLinesAttrPtr, "DefaultMaxLines", "Number of maximal found lines", true, 100);
-		I_ASSIGN(m_defaultSmoothKernelAttrPtr, "DefaultSpaceSmoothKernel", "Size of kernel will be used to smooth hough space", true, 10);
-		I_ASSIGN(m_defaultMinDistanceAttrPtr, "DefaultMinDistance", "Default value of minimal line distance to center", true, 100);
+		I_ASSIGN(m_gridSearchParamsIdAttrPtr, "GridSearchParamsId", "ID of general search parameters (imeas::INumericValue)", false, "GridSearchParams");
+		I_ASSIGN(m_defaultGridSearchParamsCompPtr, "DefaultGridSearchParams", "Default search parameters as defined in subelement DefaultSearchParamsConstraints", false, "DefaultGridSearchParams");
+		I_ASSIGN(m_smoothKernelAttrPtr, "SpaceSmoothKernel", "Size of kernel will be used to smooth hough space", true, 10);
 		I_ASSIGN(m_searchCenterParamIdAttrPtr, "SearchCenterParamId", "ID of parameter to enable search of center (iprm::IEnableableParam)", false, "SearchCenter");
 		I_ASSIGN(m_defaultSearchCenterParamCompPtr, "DefaultSearchCenterParam", "Default parameter enabling search of center", false, "DefaultSearchCenterParam");
 	I_END_COMPONENT;
@@ -104,17 +105,30 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
+	// static template methods for sub element access
+	template <class InterfaceType>
+	static InterfaceType* ExtractSearchParamsConstraints(CLensCorrFindSupplierComp& component)
+	{
+		return &component.m_searchParamsContraints;
+	}
+
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iinsp::ISupplier, m_bitmapProviderSupplierCompPtr);
 	I_REF(iipr::IImageToFeatureProcessor, m_pointFinderCompPtr);
-	I_ATTR(int, m_defaultAngleResAttrPtr);
-	I_ATTR(int, m_defaultRadiusResAttrPtr);
-	I_ATTR(int, m_defaultMaxLinesAttrPtr);
-	I_ATTR(int, m_defaultSmoothKernelAttrPtr);
-	I_ATTR(int, m_defaultMinDistanceAttrPtr);
+	I_ATTR(QByteArray, m_gridSearchParamsIdAttrPtr);
+	I_REF(imeas::INumericValue, m_defaultGridSearchParamsCompPtr);
+	I_ATTR(int, m_smoothKernelAttrPtr);
 	I_ATTR(QByteArray, m_searchCenterParamIdAttrPtr);
 	I_REF(iprm::IEnableableParam, m_defaultSearchCenterParamCompPtr);
+
+	imeas::CGeneralNumericConstraints m_searchParamsContraints;
+
+	static imath::CFixedPointManip s_integerManip;
+	static imath::CGeneralUnitInfo s_angleGridUnitInfo;
+	static imath::CGeneralUnitInfo s_distanceGridUnitInfo;
+	static imath::CGeneralUnitInfo s_maxLinesUnitInfo;
+	static imath::CGeneralUnitInfo s_minDistanceUnitInfo;
 };
 
 
