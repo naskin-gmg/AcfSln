@@ -29,13 +29,6 @@ public:
 	I_BEGIN_COMPONENT(CDirectoryMonitorParamsGui);
 	I_END_COMPONENT;
 
-	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-
 protected Q_SLOTS:
 	void on_FilesCheck_toggled(bool isChecked);
 	void on_DirsCheck_toggled(bool isChecked);
@@ -54,6 +47,14 @@ protected Q_SLOTS:
 	void on_IgnorePatternsList_itemSelectionChanged();
 	void on_IgnorePatternsList_itemChanged(QTreeWidgetItem* item, int column);
 	void OnModelUpdate();
+
+protected:
+	// reimplemenented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
 
 private:
 	void AddPattern(const QString& filter, QTreeWidget* treeView);
