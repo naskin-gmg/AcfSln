@@ -36,7 +36,7 @@ bool CSupplierActivationProxyComp::IsSupplierEnabled() const
 		return m_supplierEnabledParamCompPtr->IsEnabled();
 	}
 
-	return true;
+	return false;
 }
 
 
@@ -50,12 +50,10 @@ bool CSupplierActivationProxyComp::IsStateFixed() const
 
 int CSupplierActivationProxyComp::GetWorkStatus() const
 {
-	int retVal = WS_INVALID;
+	int retVal = IsSupplierEnabled() ? WS_OK : WS_INVALID;
 
-	if (m_supplierEnabledParamCompPtr.IsValid() && m_slaveSupplierCompPtr.IsValid()){
-		if (m_supplierEnabledParamCompPtr->IsEnabled()){
-			retVal = m_slaveSupplierCompPtr->GetWorkStatus();
-		}
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
+		retVal = m_slaveSupplierCompPtr->GetWorkStatus();
 	}
 
 	return retVal;
@@ -64,40 +62,32 @@ int CSupplierActivationProxyComp::GetWorkStatus() const
 
 void CSupplierActivationProxyComp::InvalidateSupplier()
 {
-	if (m_supplierEnabledParamCompPtr.IsValid() && m_slaveSupplierCompPtr.IsValid()){
-		if (m_supplierEnabledParamCompPtr->IsEnabled()){
-			m_slaveSupplierCompPtr->InvalidateSupplier();
-		}
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
+		m_slaveSupplierCompPtr->InvalidateSupplier();
 	}
 }
 
 
 void CSupplierActivationProxyComp::EnsureWorkInitialized()
 {
-	if (m_supplierEnabledParamCompPtr.IsValid() && m_slaveSupplierCompPtr.IsValid()){
-		if (m_supplierEnabledParamCompPtr->IsEnabled()){
-			m_slaveSupplierCompPtr->EnsureWorkInitialized();
-		}
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
+		m_slaveSupplierCompPtr->EnsureWorkInitialized();
 	}
 }
 
 
 void CSupplierActivationProxyComp::EnsureWorkFinished()
 {
-	if (m_supplierEnabledParamCompPtr.IsValid() && m_slaveSupplierCompPtr.IsValid()){
-		if (m_supplierEnabledParamCompPtr->IsEnabled()){
-			m_slaveSupplierCompPtr->EnsureWorkFinished();
-		}
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
+		m_slaveSupplierCompPtr->EnsureWorkFinished();
 	}
 }
 
 
 void CSupplierActivationProxyComp::ClearWorkResults()
 {
-	if (m_supplierEnabledParamCompPtr.IsValid() && m_slaveSupplierCompPtr.IsValid()){
-		if (m_supplierEnabledParamCompPtr->IsEnabled()){
-			m_slaveSupplierCompPtr->ClearWorkResults();
-		}
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
+		m_slaveSupplierCompPtr->ClearWorkResults();
 	}
 }
 
