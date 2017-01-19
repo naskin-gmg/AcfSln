@@ -111,11 +111,7 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 void CGeneralSearchParamsGuiComp::OnParamsChanged()
 {
-	if (!IsUpdateBlocked() && GetObservedModel() != NULL){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

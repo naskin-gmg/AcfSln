@@ -24,7 +24,7 @@ void CColorPatternComparatorGuiComp::on_TestButton_clicked()
 
 void CColorPatternComparatorGuiComp::on_TaskEnabledCB_toggled(bool)
 {
-	UpdateModel();
+	DoUpdateModel();
 }
 
 

@@ -82,11 +82,7 @@ void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChan
 
 void CBlobFilterParamsGuiComp::OnFilterParameterChanged()
 {
-	if (!IsUpdateBlocked() && GetObservedModel() != NULL){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
