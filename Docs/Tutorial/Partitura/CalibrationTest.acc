@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4426" Description="ACF"/>
+            <Version Id="1" Number="1745" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -55,10 +55,10 @@
         <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="SimpleProductFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Checkboard Calibration Finder"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
+                    <AttributeInfo Id="ApplicationSubname" Type="Text" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="InspectionGuis" Type="Reference[]" ExportId="">
@@ -69,7 +69,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InspectionNames" Type="String[]" ExportId="">
+                    <AttributeInfo Id="InspectionNames" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Image</Value>
@@ -221,7 +221,7 @@
                                 <AttributeInfo Id="AxisYParamId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="AxisYTemplate"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="BitmapSupplier" Type="Reference" ExportId="BitmapSupplier">
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapSupplier">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="CheckboardParamsId" Type="Id" ExportId="">
@@ -415,7 +415,7 @@
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Names" Type="String[]" ExportId="">
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Calibration</Value>
