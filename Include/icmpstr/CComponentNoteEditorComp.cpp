@@ -24,6 +24,23 @@ CComponentNoteEditorComp::CComponentNoteEditorComp()
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
+void CComponentNoteEditorComp::UpdateModel() const
+{
+	IElementSelectionInfo* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	icmpstr::IComponentNoteController* componentNoteControllerPtr = dynamic_cast<icmpstr::IComponentNoteController*>(objectPtr->GetSelectedRegistry());
+	if (componentNoteControllerPtr != NULL){
+		IElementSelectionInfo::Elements elements = objectPtr->GetSelectedElements();
+		if (elements.size() == 1){
+			QString currentNote = NoteEditor->toPlainText();
+
+			componentNoteControllerPtr->SetComponentNote(elements.begin().key(), currentNote);
+		}
+	}
+}
+
+
 void CComponentNoteEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	IElementSelectionInfo* objectPtr = GetObservedObject();
@@ -55,23 +72,6 @@ void CComponentNoteEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 	}
 	else{
 		NoteEditor->clear();
-	}
-}
-
-
-void CComponentNoteEditorComp::UpdateModel() const
-{
-	IElementSelectionInfo* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	icmpstr::IComponentNoteController* componentNoteControllerPtr = dynamic_cast<icmpstr::IComponentNoteController*>(objectPtr->GetSelectedRegistry());
-	if (componentNoteControllerPtr != NULL){
-		IElementSelectionInfo::Elements elements = objectPtr->GetSelectedElements();
-		if (elements.size() == 1){
-			QString currentNote = NoteEditor->toPlainText();
-
-			componentNoteControllerPtr->SetComponentNote(elements.begin().key(), currentNote);
-		}
 	}
 }
 

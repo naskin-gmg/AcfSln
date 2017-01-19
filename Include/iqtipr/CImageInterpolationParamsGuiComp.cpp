@@ -9,7 +9,9 @@ namespace iqtipr
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CImageInterpolationParamsGuiComp::UpdateModel() const
 {
@@ -26,10 +28,6 @@ void CImageInterpolationParamsGuiComp::UpdateModel() const
 	}
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CImageInterpolationParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

@@ -46,10 +46,8 @@ public:
 	CXpcEditorComp();
 
 protected:
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (CGuiComponentBase)
@@ -140,18 +138,6 @@ private:
 				bool SelectDirectories = false,
 				ifile::IFileTypeInfo* typeInfo = NULL);
 
-	// static methods
-	/**
-		A hack to fix a known issue that QLineEdit clears selection when it loses focus.
-	*/
-	static void MaintainLineEditSelection(QLineEdit* lineEdit);
-
-	/** MVC models to handle data lists for tables */
-	QStringListModel* m_guiModel[S_LAST + 1];
-
-	QMenu m_startVariableMenus[S_LAST + 1];
-	QMenu m_variableMenus[S_LAST + 1];
-
 	/**
 		Fills m_variablesMenu with variable names depending on cursor position
 		If a variable is an absolute path, it can only be inserted at the
@@ -161,6 +147,16 @@ private:
 		cannot be used whatsoever because of invalid characters.
 	*/
 	void SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& menu);
+
+	// static methods
+	/**
+		A hack to fix a known issue that QLineEdit clears selection when it loses focus.
+	*/
+	static void MaintainLineEditSelection(QLineEdit* lineEdit);
+
+	QStringListModel* m_guiModel[S_LAST + 1];	// MVC models to handle data lists for tables
+	QMenu m_startVariableMenus[S_LAST + 1];
+	QMenu m_variableMenus[S_LAST + 1];
 
 	I_REF(idoc::IDocumentManager, m_docMgrPtr);
 	I_REF(ifile::IFileTypeInfo, m_configFileTypeInfo);

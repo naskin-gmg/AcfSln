@@ -18,7 +18,7 @@ namespace ihotfgui
 {
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemenented (iqtgui::TGuiObserverWrap)
 
 void CDirectoryMonitorParamsGui::UpdateModel() const
 {
@@ -86,8 +86,6 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	objectPtr->SetFolderDepth(FolderDepthSpin->value());
 }
 
-	
-// reimplemenented (iqtgui::TGuiObserverWrap)
 
 void CDirectoryMonitorParamsGui::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

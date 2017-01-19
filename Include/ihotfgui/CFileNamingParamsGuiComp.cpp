@@ -8,7 +8,9 @@ namespace ihotfgui
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemenented (iqtgui::TGuiObserverWrap)
 
 void CFileNamingParamsGuiComp::UpdateModel() const
 {
@@ -29,10 +31,6 @@ void CFileNamingParamsGuiComp::UpdateModel() const
 	objectPtr->SetSuffix(SuffixEdit->text());
 }
 
-
-// protected methods
-
-// reimplemenented (iqtgui::TGuiObserverWrap)
 
 void CFileNamingParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

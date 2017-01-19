@@ -11,9 +11,9 @@ namespace icalibgui
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSimpleLensCorrectionEditorComp::UpdateModel() const
 {
@@ -34,10 +34,6 @@ void CSimpleLensCorrectionEditorComp::UpdateModel() const
 	objectPtr->SetScaleFactor(scaleFactor);
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

@@ -11,9 +11,9 @@ namespace icalibgui
 {
 
 
-// public methods
+// protected methods
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CPerspectiveCalibEditorComp::UpdateModel() const
 {
@@ -33,10 +33,6 @@ void CPerspectiveCalibEditorComp::UpdateModel() const
 	objectPtr->SetPerspAxis(perspective);
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CPerspectiveCalibEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

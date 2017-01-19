@@ -9,7 +9,9 @@ namespace iqtipr
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCaliperParamsGuiComp::UpdateModel() const
 {
@@ -37,10 +39,6 @@ void CCaliperParamsGuiComp::UpdateModel() const
 	}
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCaliperParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

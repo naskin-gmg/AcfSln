@@ -24,6 +24,10 @@ namespace iqtcam
 {
 
 
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
 void CScaleCalibrationEditorComp::UpdateModel() const
 {
 	imeas::INumericValue* model = dynamic_cast<imeas::INumericValue*>(GetObservedModel());
@@ -37,23 +41,6 @@ void CScaleCalibrationEditorComp::UpdateModel() const
 	vec.SetElement(1, ScaleYSpinBox->value());
 
 	model->SetValues(vec);
-}
-
-
-void CScaleCalibrationEditorComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-
-	connect(ScaleXSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
-	connect(ScaleYSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
-
-	if (!m_circleProviderCompPtr.IsValid()){
-		CalibrationGroupBox->setVisible(false);
-	}
-
-	if (NominalRadiusSpinBox->value() == 0){
-		CalibrateButton->setDisabled(true);
-	}
 }
 
 
@@ -73,6 +60,27 @@ void CScaleCalibrationEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 	}
 }
 
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CScaleCalibrationEditorComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	connect(ScaleXSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
+	connect(ScaleYSpinBox, SIGNAL(valueChanged(double)), this, SLOT(OnValueChanged(double)));
+
+	if (!m_circleProviderCompPtr.IsValid()){
+		CalibrationGroupBox->setVisible(false);
+	}
+
+	if (NominalRadiusSpinBox->value() == 0){
+		CalibrateButton->setDisabled(true);
+	}
+}
+
+
+// protected slots
 
 void CScaleCalibrationEditorComp::OnValueChanged(double)
 {

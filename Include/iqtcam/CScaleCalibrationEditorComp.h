@@ -39,14 +39,12 @@ public:
 	I_END_COMPONENT;
 
 protected:
-	// reimplemented (imod::IModelEditor)
+	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateModel() const;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 private Q_SLOTS:
 	void OnValueChanged(double);

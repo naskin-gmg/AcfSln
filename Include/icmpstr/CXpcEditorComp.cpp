@@ -66,11 +66,7 @@ CXpcEditorComp::CXpcEditorComp()
 }
 
 
-QStringList CXpcEditorComp::GetStringList(int tableIdx) const
-{
-	return m_guiModel[tableIdx]->stringList();
-}
-
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CXpcEditorComp::UpdateModel() const
 {
@@ -83,12 +79,6 @@ void CXpcEditorComp::UpdateModel() const
 	objectPtr->SetPackageDirsList(GetStringList(S_PACKAGE_DIR));
 	objectPtr->SetPackagesList(GetStringList(S_PACKAGE_PATH));
 	objectPtr->SetRegistryFilesList(GetStringList(S_REGISTRY_PATH));
-}
-
-
-void CXpcEditorComp::SetStringList(int tableIdx, QStringList list)
-{
-	m_guiModel[tableIdx]->setStringList(list);
 }
 
 
@@ -182,6 +172,20 @@ void CXpcEditorComp::on_RegistryPathRemoveButton_clicked()
 		m_guiModel[S_REGISTRY_PATH]->removeRow(index.row());
 		DoUpdateModel();
 	}
+}
+
+
+// private methods
+
+QStringList CXpcEditorComp::GetStringList(int tableIdx) const
+{
+	return m_guiModel[tableIdx]->stringList();
+}
+
+
+void CXpcEditorComp::SetStringList(int tableIdx, QStringList list)
+{
+	m_guiModel[tableIdx]->setStringList(list);
 }
 
 
@@ -419,39 +423,6 @@ void CXpcEditorComp::on_RegistryPathEdit_editingFinished()
 }
 
 
-void CXpcEditorComp::SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& menu)
-{
-	menu.clear();
-
-	bool allowFilePath = (sectionIndex == S_CONFIG_PATH) || (sectionIndex == S_PACKAGE_PATH);
-
-	if (isBegin){
-		QMap<QString, QString> envVariables = istd::CSystem::GetEnvironmentVariables();
-		for (		QMap<QString, QString>::ConstIterator i = envVariables.constBegin();
-					i != envVariables.constEnd();
-					i++){
-			QString value = i.value();
-
-			QFileInfo dirInfo(value);
-			if (dirInfo.isAbsolute() && (dirInfo.isDir() || (allowFilePath && dirInfo.isFile()))){
-				QAction* newAction = menu.addAction(i.key());
-				newAction->setData(sectionIndex);
-				newAction->setStatusTip(value);
-			}
-		}
-	}
-	else{
-		// special variables are considered relative
-		static QString specialVariables[] = {"ConfigName", "CompilerName"};
-		for (int i = 0; i < 2; i++){
-			QAction* newAction = menu.addAction(specialVariables[i]);
-			newAction->setData(sectionIndex);
-			newAction->setStatusTip(istd::CSystem::GetVariableValue(specialVariables[i]));
-		}
-	}
-}
-
-
 void CXpcEditorComp::on_ConfigPathEdit_selectionChanged()
 {
 	MaintainLineEditSelection(ConfigPathEdit);
@@ -613,6 +584,39 @@ void CXpcEditorComp::OnInsertVariable(QAction* action)
 
 	default:
 		break;
+	}
+}
+
+
+void CXpcEditorComp::SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& menu)
+{
+	menu.clear();
+
+	bool allowFilePath = (sectionIndex == S_CONFIG_PATH) || (sectionIndex == S_PACKAGE_PATH);
+
+	if (isBegin){
+		QMap<QString, QString> envVariables = istd::CSystem::GetEnvironmentVariables();
+		for (		QMap<QString, QString>::ConstIterator i = envVariables.constBegin();
+					i != envVariables.constEnd();
+					i++){
+			QString value = i.value();
+
+			QFileInfo dirInfo(value);
+			if (dirInfo.isAbsolute() && (dirInfo.isDir() || (allowFilePath && dirInfo.isFile()))){
+				QAction* newAction = menu.addAction(i.key());
+				newAction->setData(sectionIndex);
+				newAction->setStatusTip(value);
+			}
+		}
+	}
+	else{
+		// special variables are considered relative
+		static QString specialVariables[] = {"ConfigName", "CompilerName"};
+		for (int i = 0; i < 2; i++){
+			QAction* newAction = menu.addAction(specialVariables[i]);
+			newAction->setData(sectionIndex);
+			newAction->setStatusTip(istd::CSystem::GetVariableValue(specialVariables[i]));
+		}
 	}
 }
 

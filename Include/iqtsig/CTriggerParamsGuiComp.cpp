@@ -10,7 +10,39 @@ namespace iqtsig
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CTriggerParamsGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	Q_ASSERT(IsGuiCreated());
+	const isig::ITriggerParams* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	const isig::ITriggerConstraints* constraintsPtr = objectPtr->GetTriggerConstraints();
+	if (constraintsPtr != NULL){
+		NoTriggerRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_NONE));
+		ContinuousRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_CONTINUOUS));
+		RisingEdgeRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_RISING_EDGE));
+		FallingEdgeRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_FALLING_EDGE));
+		PositiveLevelRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_POSITIVE_LEVEL));
+		NegativeLevelRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_NEGATIVE_LEVEL));
+		SoftwareTriggerRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_SOFTWARE));
+	}
+	else{
+		NoTriggerRB->setVisible(true);
+		ContinuousRB->setVisible(true);
+		RisingEdgeRB->setVisible(true);
+		FallingEdgeRB->setVisible(true);
+		PositiveLevelRB->setVisible(true);
+		NegativeLevelRB->setVisible(true);
+		SoftwareTriggerRB->setVisible(true);
+	}
+}
+
 
 void CTriggerParamsGuiComp::UpdateModel() const
 {
@@ -47,40 +79,6 @@ void CTriggerParamsGuiComp::UpdateModel() const
 		istd::CChangeNotifier notifier(objectPtr);
 
 		objectPtr->SetTriggerMode(triggerMode);
-	}
-}
-
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CTriggerParamsGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	Q_ASSERT(IsGuiCreated());
-	const isig::ITriggerParams* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	const isig::ITriggerConstraints* constraintsPtr = objectPtr->GetTriggerConstraints();
-	if (constraintsPtr != NULL){
-		NoTriggerRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_NONE));
-		ContinuousRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_CONTINUOUS));
-		RisingEdgeRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_RISING_EDGE));
-		FallingEdgeRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_FALLING_EDGE));
-		PositiveLevelRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_POSITIVE_LEVEL));
-		NegativeLevelRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_NEGATIVE_LEVEL));
-		SoftwareTriggerRB->setVisible(constraintsPtr->IsTriggerModeSupported(isig::ITriggerParams::TM_SOFTWARE));
-	}
-	else{
-		NoTriggerRB->setVisible(true);
-		ContinuousRB->setVisible(true);
-		RisingEdgeRB->setVisible(true);
-		FallingEdgeRB->setVisible(true);
-		PositiveLevelRB->setVisible(true);
-		NegativeLevelRB->setVisible(true);
-		SoftwareTriggerRB->setVisible(true);
 	}
 }
 

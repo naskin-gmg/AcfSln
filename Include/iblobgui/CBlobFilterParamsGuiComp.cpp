@@ -21,33 +21,6 @@ namespace iblobgui
 {
 
 
-// reimplemented (imod::IModelEditor)
-
-void CBlobFilterParamsGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated());
-
-	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
-	Q_ASSERT(paramsPtr != NULL);
-
-	istd::CChangeNotifier notifier(paramsPtr);
-
-	paramsPtr->ResetFilters();
-
-	int guiCount = FilterHolder->layout()->count();
-	for (int i = 0; i < guiCount; i++){
-		QWidgetItem* itemPtr = dynamic_cast<QWidgetItem*>(FilterHolder->layout()->itemAt(i));
-		Q_ASSERT(itemPtr != NULL);
-
-		CBlobFilterGui* filterGui = dynamic_cast<CBlobFilterGui*>(itemPtr->widget());
-		Q_ASSERT(filterGui != NULL);
-
-		iblob::IBlobFilterParams::Filter filterInfo = filterGui->GetFilterInfo();
-		paramsPtr->AddFilter(filterInfo);
-	}
-}
-
-
 // reimplemented (imod::CMultiModelDispatcherBase)
 
 void CBlobFilterParamsGuiComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
@@ -163,6 +136,31 @@ void CBlobFilterParamsGuiComp::OnRemoveFilter(QWidget* filterGui)
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
+
+void CBlobFilterParamsGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	iblob::IBlobFilterParams* paramsPtr = GetObservedObject();
+	Q_ASSERT(paramsPtr != NULL);
+
+	istd::CChangeNotifier notifier(paramsPtr);
+
+	paramsPtr->ResetFilters();
+
+	int guiCount = FilterHolder->layout()->count();
+	for (int i = 0; i < guiCount; i++){
+		QWidgetItem* itemPtr = dynamic_cast<QWidgetItem*>(FilterHolder->layout()->itemAt(i));
+		Q_ASSERT(itemPtr != NULL);
+
+		CBlobFilterGui* filterGui = dynamic_cast<CBlobFilterGui*>(itemPtr->widget());
+		Q_ASSERT(filterGui != NULL);
+
+		iblob::IBlobFilterParams::Filter filterInfo = filterGui->GetFilterInfo();
+		paramsPtr->AddFilter(filterInfo);
+	}
+}
+
 
 void CBlobFilterParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {

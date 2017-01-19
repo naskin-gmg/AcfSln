@@ -12,27 +12,6 @@ namespace iqtsig
 {
 
 
-// reimplemented (imod::IModelEditor)
-
-void CPulseParamsGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated());
-
-	isig::IPulseParams* objectPtr = GetObservedObject();
-	Q_ASSERT(objectPtr != NULL);
-
-	if (DelayTimeSB->isVisible() && (DelayTimeSB->value() / 1000.0 != objectPtr->GetDelayTime())){
-		objectPtr->SetDelayTime(DelayTimeSB->value() / 1000.0);
-	}
-	if (PulseTimeSB->isVisible() && (PulseTimeSB->value() / 1000.0 != objectPtr->GetPulseDuration())){
-		objectPtr->SetPulseDuration(PulseTimeSB->value() / 1000.0);
-	}
-	if (RelaxingTimeSB->isVisible() && (RelaxingTimeSB->value() / 1000.0 != objectPtr->GetRelaxingTime())){
-		objectPtr->SetRelaxingTime(RelaxingTimeSB->value() / 1000.0);
-	}
-}
-
-
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
@@ -84,6 +63,25 @@ void CPulseParamsGuiComp::OnGuiModelAttached()
 	if (hasRelaxingTime){
 		RelaxingTimeSB->setMinimum(relaxingTimeRange.GetMinValue() * 1000);
 		RelaxingTimeSB->setMaximum(relaxingTimeRange.GetMaxValue() * 1000);
+	}
+}
+
+
+void CPulseParamsGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated());
+
+	isig::IPulseParams* objectPtr = GetObservedObject();
+	Q_ASSERT(objectPtr != NULL);
+
+	if (DelayTimeSB->isVisible() && (DelayTimeSB->value() / 1000.0 != objectPtr->GetDelayTime())){
+		objectPtr->SetDelayTime(DelayTimeSB->value() / 1000.0);
+	}
+	if (PulseTimeSB->isVisible() && (PulseTimeSB->value() / 1000.0 != objectPtr->GetPulseDuration())){
+		objectPtr->SetPulseDuration(PulseTimeSB->value() / 1000.0);
+	}
+	if (RelaxingTimeSB->isVisible() && (RelaxingTimeSB->value() / 1000.0 != objectPtr->GetRelaxingTime())){
+		objectPtr->SetRelaxingTime(RelaxingTimeSB->value() / 1000.0);
 	}
 }
 

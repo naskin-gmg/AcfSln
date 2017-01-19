@@ -57,35 +57,6 @@ CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
-
-void CInspectionTaskGuiComp::UpdateModel() const
-{
-	Q_ASSERT(IsGuiCreated() && (GetObservedObject() != NULL));
-
-	for (		EditorsList::const_iterator iter = m_editorsList.constBegin();
-				iter != m_editorsList.constEnd();
-				++iter){
-		const imod::IModelEditor* editorPtr = *iter;
-		Q_ASSERT(editorPtr != NULL);
-		
-		editorPtr->UpdateModel();
-	}
-}
-
-
-void CInspectionTaskGuiComp::UpdateEditor(const istd::IChangeable::ChangeSet& /*changeSet*/)
-{
-	Q_ASSERT(IsGuiCreated());
-
-	UpdateMenu();
-
-	if (AutoTestButton->isChecked()){
-		emit DoAutoTest();
-	}
-}
-
-
 // reimplemented (imod::IObserver)
 
 bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask)
@@ -295,6 +266,35 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 			buttonPtr->setIcon(tabIcon);
 			buttonPtr->setToolTip(toolTip);
 		}
+	}
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CInspectionTaskGuiComp::UpdateModel() const
+{
+	Q_ASSERT(IsGuiCreated() && (GetObservedObject() != NULL));
+
+	for (		EditorsList::const_iterator iter = m_editorsList.constBegin();
+				iter != m_editorsList.constEnd();
+				++iter){
+		const imod::IModelEditor* editorPtr = *iter;
+		Q_ASSERT(editorPtr != NULL);
+		
+		editorPtr->UpdateModelFromEditor();
+	}
+}
+
+
+void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	Q_ASSERT(IsGuiCreated());
+
+	UpdateMenu();
+
+	if (AutoTestButton->isChecked()){
+		emit DoAutoTest();
 	}
 }
 
@@ -592,7 +592,7 @@ void CInspectionTaskGuiComp::OnAutoTest()
 void CInspectionTaskGuiComp::on_TestAllButton_clicked()
 {
 	if (m_generalParamsEditorCompPtr.IsValid()){
-		m_generalParamsEditorCompPtr->UpdateModel();
+		m_generalParamsEditorCompPtr->UpdateModelFromEditor();
 	}
 
 	OnAutoTest();

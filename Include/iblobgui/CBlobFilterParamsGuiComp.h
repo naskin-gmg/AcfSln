@@ -26,9 +26,6 @@ public:
 	I_BEGIN_COMPONENT(CBlobFilterParamsGuiComp);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
@@ -42,6 +39,7 @@ protected Q_SLOTS:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqt::CGuiObjectBase)

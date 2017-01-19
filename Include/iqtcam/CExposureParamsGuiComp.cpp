@@ -1,14 +1,18 @@
 #include <iqtcam/CExposureParamsGuiComp.h>
 
 
+// ACF includes
 #include <istd/CChangeGroup.h>
 
+// ACF-Solutions includes
 #include <icam/IExposureConstraints.h>
 
 
 namespace iqtcam
 {
 
+
+// protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
@@ -70,36 +74,6 @@ void CExposureParamsGuiComp::OnGuiModelDetached()
 }
 
 
-void CExposureParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
-{
-	Q_ASSERT(IsGuiCreated());
-
-	icam::IExposureParams* objectPtr = GetObservedObject();
-	if (objectPtr != NULL){
-		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
-		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
-		EenDelayTimeSB->setValue(objectPtr->GetEenDelay() * 1000.0);
-
-		const icam::IExposureConstraints* constrainsPtr = objectPtr->GetExposureConstraints();
-		if (constrainsPtr != NULL){
-			ShutterTimeSB->setMinimum(constrainsPtr->GetShutterTimeRange().GetMinValue() * 1000.0);
-			ShutterTimeSB->setMaximum(constrainsPtr->GetShutterTimeRange().GetMaxValue() * 1000.0);
-			ShutterTimeSB->setSingleStep(0.01);
-
-			DelayTimeSB->setMinimum(constrainsPtr->GetDelayTimeRange().GetMinValue() * 1000.0);
-			DelayTimeSB->setMaximum(constrainsPtr->GetDelayTimeRange().GetMaxValue() * 1000.0);
-			DelayTimeSB->setSingleStep(0.01);
-
-			EenDelayTimeSB->setMinimum(constrainsPtr->GetEenDelayRange().GetMinValue() * 1000.0);
-			EenDelayTimeSB->setMaximum(constrainsPtr->GetEenDelayRange().GetMaxValue() * 1000.0);
-			EenDelayTimeSB->setSingleStep(0.01);
-		}
-	}
-}
-
-
-// reimplemented (imod::IModelEditor)
-
 void CExposureParamsGuiComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
@@ -125,6 +99,34 @@ void CExposureParamsGuiComp::UpdateModel() const
 	double eenDelayTime = EenDelayTimeSB->value() * 0.001;
 	if (EenDelayTimeSB->isVisible() && (qAbs(objectPtr->GetEenDelay() - eenDelayTime) > tolerance)){
 		objectPtr->SetEenDelay(eenDelayTime);
+	}
+}
+
+
+void CExposureParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	Q_ASSERT(IsGuiCreated());
+
+	icam::IExposureParams* objectPtr = GetObservedObject();
+	if (objectPtr != NULL){
+		ShutterTimeSB->setValue(objectPtr->GetShutterTime() * 1000.0);
+		DelayTimeSB->setValue(objectPtr->GetDelayTime() * 1000.0);
+		EenDelayTimeSB->setValue(objectPtr->GetEenDelay() * 1000.0);
+
+		const icam::IExposureConstraints* constrainsPtr = objectPtr->GetExposureConstraints();
+		if (constrainsPtr != NULL){
+			ShutterTimeSB->setMinimum(constrainsPtr->GetShutterTimeRange().GetMinValue() * 1000.0);
+			ShutterTimeSB->setMaximum(constrainsPtr->GetShutterTimeRange().GetMaxValue() * 1000.0);
+			ShutterTimeSB->setSingleStep(0.01);
+
+			DelayTimeSB->setMinimum(constrainsPtr->GetDelayTimeRange().GetMinValue() * 1000.0);
+			DelayTimeSB->setMaximum(constrainsPtr->GetDelayTimeRange().GetMaxValue() * 1000.0);
+			DelayTimeSB->setSingleStep(0.01);
+
+			EenDelayTimeSB->setMinimum(constrainsPtr->GetEenDelayRange().GetMinValue() * 1000.0);
+			EenDelayTimeSB->setMaximum(constrainsPtr->GetEenDelayRange().GetMaxValue() * 1000.0);
+			EenDelayTimeSB->setSingleStep(0.01);
+		}
 	}
 }
 

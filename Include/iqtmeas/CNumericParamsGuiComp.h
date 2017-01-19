@@ -54,18 +54,16 @@ public:
 
 	virtual ~CNumericParamsGuiComp();
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected:
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);

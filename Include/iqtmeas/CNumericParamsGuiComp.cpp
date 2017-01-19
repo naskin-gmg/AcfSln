@@ -17,57 +17,7 @@ CNumericParamsGuiComp::~CNumericParamsGuiComp()
 }
 
 
-// reimplemented (imod::IModelEditor)
-
-void CNumericParamsGuiComp::UpdateModel() const
-{
-	imeas::INumericValue* objectPtr = GetObservedObject();
-	if ((objectPtr != NULL) && IsGuiCreated()){
-		int valuesCount = int(m_valueWidgets.GetCount());
-		imath::CVarVector values(valuesCount);
-
-		for (int i = 0; i < valuesCount; i++){
-			CNumericValueWidget* valueWidgetPtr = m_valueWidgets.GetAt(i);
-
-			values.SetElement(i, valueWidgetPtr->GetValue());
-		}
-
-		objectPtr->SetValues(values);
-	}
-}
-
-
 // protected methods
-
-// reimplemented (iqtgui::CGuiComponentBase)
-
-void CNumericParamsGuiComp::OnGuiCreated()
-{
-	QWidget* panelPtr = GetQtWidget();
-	Q_ASSERT(panelPtr != NULL);	// called inside OnGuiCreated(), widget must be defined.
-
-	QLayout* layoutPtr = NULL;
-	if (*m_verticalLayoutAttrPtr){
-		layoutPtr = new QVBoxLayout;
-	}
-	else{
-		layoutPtr = new QHBoxLayout;
-	}
-
-	layoutPtr->setMargin(0);
-	panelPtr->setLayout(layoutPtr);
-
-	BaseClass::OnGuiCreated();
-}
-
-
-void CNumericParamsGuiComp::OnGuiDestroyed()
-{
-	m_valueWidgets.Reset();
-
-	BaseClass::OnGuiDestroyed();
-}
-
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
@@ -90,6 +40,24 @@ void CNumericParamsGuiComp::OnGuiModelDetached()
 	BaseClass2::UnregisterAllModels();
 
 	BaseClass::OnGuiModelDetached();
+}
+
+
+void CNumericParamsGuiComp::UpdateModel() const
+{
+	imeas::INumericValue* objectPtr = GetObservedObject();
+	if ((objectPtr != NULL) && IsGuiCreated()){
+		int valuesCount = int(m_valueWidgets.GetCount());
+		imath::CVarVector values(valuesCount);
+
+		for (int i = 0; i < valuesCount; i++){
+			CNumericValueWidget* valueWidgetPtr = m_valueWidgets.GetAt(i);
+
+			values.SetElement(i, valueWidgetPtr->GetValue());
+		}
+
+		objectPtr->SetValues(values);
+	}
 }
 
 
@@ -176,6 +144,36 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 			}
 		}
 	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CNumericParamsGuiComp::OnGuiCreated()
+{
+	QWidget* panelPtr = GetQtWidget();
+	Q_ASSERT(panelPtr != NULL);	// called inside OnGuiCreated(), widget must be defined.
+
+	QLayout* layoutPtr = NULL;
+	if (*m_verticalLayoutAttrPtr){
+		layoutPtr = new QVBoxLayout;
+	}
+	else{
+		layoutPtr = new QHBoxLayout;
+	}
+
+	layoutPtr->setMargin(0);
+	panelPtr->setLayout(layoutPtr);
+
+	BaseClass::OnGuiCreated();
+}
+
+
+void CNumericParamsGuiComp::OnGuiDestroyed()
+{
+	m_valueWidgets.Reset();
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

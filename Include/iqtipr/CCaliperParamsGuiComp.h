@@ -29,11 +29,9 @@ public:
 		I_ASSIGN(m_hideDirectionAttrPtr, "HideDirectionParameterEditor", "If enabled, edge search direction editor will be hidden", true, false);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateModel() const;
-
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::CGuiComponentBase)

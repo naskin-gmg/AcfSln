@@ -11,7 +11,24 @@ namespace iqtipr
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	connect(MinScoreSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
+	connect(ModelOccurenceSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
+	connect(MinRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
+	connect(MaxRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
+	connect(MinScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
+	connect(MaxScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
+	connect(ScalingCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
+	connect(RotationCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
+}
+
 
 void CGeneralSearchParamsGuiComp::UpdateModel() const
 {
@@ -39,25 +56,6 @@ void CGeneralSearchParamsGuiComp::UpdateModel() const
 	else{
 		objectPtr->SetScaleRange(istd::CRange(1,1));
 	}
-}
-
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-void CGeneralSearchParamsGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	connect(MinScoreSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
-	connect(ModelOccurenceSB, SIGNAL(valueChanged(int)), this, SLOT(OnParamsChanged()));
-	connect(MinRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MaxRotationSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MinScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(MaxScaleSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged()));
-	connect(ScalingCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
-	connect(RotationCB, SIGNAL(toggled(bool)), this, SLOT(OnParamsChanged()));
 }
 
 

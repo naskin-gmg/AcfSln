@@ -9,7 +9,9 @@ namespace iqtipr
 {
 
 
-// reimplemented (imod::IModelEditor)
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCircleFinderParamsGuiComp::UpdateModel() const
 {
@@ -38,10 +40,6 @@ void CCircleFinderParamsGuiComp::UpdateModel() const
 	}
 }
 
-
-// protected methods
-
-// reimplemented (iqtgui::TGuiObserverWrap)
 
 void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
