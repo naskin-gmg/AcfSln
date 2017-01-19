@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4426" Description="ACF"/>
+            <Version Id="1" Number="1745" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="Console" PackageId="" ComponentId="Console">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ShownCalibration" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LensCorrectionSupplier/Calibration"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="SimpleProductFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="LensCorrectionTest"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ApplicationSubname" Type="Text" ExportId="ApplicationSubname">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionGuis" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>SnapTaskGui</Value>
+                                <Value>SmoothSupplierEditor</Value>
+                                <Value>LensCorrectionSupplierEditor</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionNames" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Image</Value>
+                                <Value>Smooth</Value>
+                                <Value>Caliper</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InspectionPreviews" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Console</Value>
+                                <Value>Console</Value>
+                                <Value>Console</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Inspections" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>SnapTask</Value>
+                                <Value>SmoothSupplier</Value>
+                                <Value>LensCorrectionSupplier</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="LensCorrectionSupplier" PackageId="" ComponentId="LensCorrectionSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SmoothSupplier"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="LensCorrectionSupplierEditor" PackageId="" ComponentId="LensCorrectionSupplierEditor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="FoundCalibrationProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="LensCorrectionSupplier"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SmoothSupplierEditor"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SettingsPersistence" PackageId="AcfGuiVoce" ComponentId="SettingsPersistence">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/ApplicationInfo"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Object" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/Parameters"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RootKey" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="LensCorrectionSupplier"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SmoothSupplier" PackageId="" ComponentId="SmoothSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="SnapTask"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SmoothSupplierEditor" PackageId="" ComponentId="SmoothSupplierEditor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SnapTask" PackageId="SupplierVoce" ComponentId="SnapTask">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Camera" Type="Reference" ExportId="Camera">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="CameraParamsSet">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="SnapTaskGui" PackageId="SupplierVoce" ComponentId="SnapTaskGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="CameraParamsSetGui">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList>
+        <EmbeddedRegistry Id="Console">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="ImageView" PackageId="AcfGuiVoce" ComponentId="Console">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="CalibrationShape" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PerspectiveCalibrationShape"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseGridCommands" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="PerspectiveCalibrationShape" PackageId="CalibrationGuiPck" ComponentId="GeneralCalibrationShape">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="ShownCalibration">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="ibase::ICommandsProvider" ComponentId="ImageView"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="ImageView"/>
+                    <Interface InterfaceId="iqt2d::IViewProvider" ComponentId="ImageView"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ImageView"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="LensCorrectionSupplier">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="BlobFilterParams" PackageId="BlobPck" ComponentId="BlobFilterParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="SupportedProperties" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PositionProcessor/FilterFeatureList"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="GridSearchParams" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SearchBasedFeaturesSupplier/SearchParamsConstraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>360</Value>
+                                            <Value>360</Value>
+                                            <Value>100</Value>
+                                            <Value>100</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SimpleLensCorrection</Value>
+                                            <Value>SearchAoi</Value>
+                                            <Value>Threshold</Value>
+                                            <Value>BlobFilterParams</Value>
+                                            <Value>GridSearchParams</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>LensCorrection</Value>
+                                            <Value>SearchAoi</Value>
+                                            <Value>Threshold</Value>
+                                            <Value>LensCorrectionFilterParams</Value>
+                                            <Value>GridSearch</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="LensCorrectionParams"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="PositionProcessor" PackageId="BlobPck" ComponentId="PreciseBlobProcessor">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="AoiParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="SearchAoi"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="LensCorrectionFilterParams"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ResultConsumer" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SearchBasedFeaturesSupplier/TaskLog"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="TempConsumer" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="SearchBasedFeaturesSupplier/TempMessages"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ThresholdParamId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="Threshold"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchAoi" PackageId="BasePck" ComponentId="Rectangle">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Height" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="1000"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Width" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="1000"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="X" Type="Real" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchBasedFeaturesSupplier" PackageId="IprPck" ComponentId="LensCorrFindSupplier">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="GridSearchParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="GridSearch"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ParamsSet"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="PointFinder" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PositionProcessor"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SimpleLensCorrection" PackageId="CalibrationPck" ComponentId="SimpleLensCorrection">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="Threshold" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="PositionProcessor/ThresholdContraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>0</Value>
+                                            <Value>0.5</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="SearchBasedFeaturesSupplier"/>
+                    <Interface InterfaceId="iinsp::ISupplier" ComponentId="SearchBasedFeaturesSupplier"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="SearchBasedFeaturesSupplier"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="SearchBasedFeaturesSupplier"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="SearchBasedFeaturesSupplier"/>
+                </ExportedInterfaces>
+                <ExportedComponents>
+                    <Component ExportedId="Calibration" ComponentId="SimpleLensCorrection"/>
+                </ExportedComponents>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="LensCorrectionSupplierEditor">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="BlobFilterParamsGui" PackageId="BlobPck" ComponentId="BlobFilterParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="GeneralSupplierGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultModel">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ParamsSetGui"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="GridSearchParamsEditor" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ButtonsVisible" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SliderVisible" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SimpleLensCorrectionEditor</Value>
+                                            <Value>SearchParamsSetGui</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>LensCorrection</Value>
+                                            <Value>*</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Calibration</Value>
+                                            <Value>Search</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchAoiEditor" PackageId="QtViewPck" ComponentId="RectangleParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SearchAoiEditor</Value>
+                                            <Value>ThresholdEditor</Value>
+                                            <Value>BlobFilterParamsGui</Value>
+                                            <Value>GridSearchParamsEditor</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SearchAoi</Value>
+                                            <Value>Threshold</Value>
+                                            <Value>LensCorrectionFilterParams</Value>
+                                            <Value>GridSearch</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Search AOI</Value>
+                                            <Value>Params</Value>
+                                            <Value>LensCorrection Filters</Value>
+                                            <Value>Grid Params</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="SimpleLensCorrectionEditor" PackageId="CalibrationGuiPck" ComponentId="SimpleLensCorrectionEditor">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="FoundCalibrationProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ThresholdEditor" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="imod::IModelEditor" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="imod::IObserver" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="GeneralSupplierGui"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="GeneralSupplierGui"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="SmoothSupplier">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="ComposedParamsSet" PackageId="BasePck" ComponentId="ComposedParamsSet">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterParams</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterParams</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="FilterParams" PackageId="MeasPck" ComponentId="NumericParams">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor/FilterContraints"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Values" Type="Real[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>5</Value>
+                                            <Value>5</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ProcessedQtBitmapSupplier" PackageId="IprPck" ComponentId="ProcessedQtBitmapSupplier">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="RectImageSmoothProcessor"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ComposedParamsSet"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="RectImageSmoothProcessor" PackageId="IprPck" ComponentId="RectImageSmoothProcessor">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="FilterParamsId" Type="Id" ExportId="">
+                                    <Data IsEnabled="true" Value="FilterParams"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ProcessedQtBitmapSupplier/TaskLog"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UnitMode" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="0"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="ProcessedQtBitmapSupplier"/>
+                    <Interface InterfaceId="iinsp::ISupplier" ComponentId="ProcessedQtBitmapSupplier"/>
+                    <Interface InterfaceId="imod::IModel" ComponentId="ProcessedQtBitmapSupplier"/>
+                    <Interface InterfaceId="istd::IChangeable" ComponentId="ProcessedQtBitmapSupplier"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="ProcessedQtBitmapSupplier"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+        <EmbeddedRegistry Id="SmoothSupplierEditor">
+            <Data Description="" Keywords="">
+                <ElementsList>
+                    <Element Id="ComposedParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>NumericParamsGui</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>FilterParams</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="ImageTaskGui" PackageId="QtCameraPck" ComponentId="SnapBitmapSupplierGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="ConnectParametersToEditor" Type="Boolean" ExportId="ConnectParametersToEditor">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="DefaultModel" Type="Reference" ExportId="DefaultModel">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ComposedParamsSetGui"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                                    <Data IsEnabled="false"/>
+                                </AttributeInfo>
+                                <AttributeInfo Id="ViewCalibrationMode" Type="Integer" ExportId="ViewCalibrationMode">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
+                    <Element Id="NumericParamsGui" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                </ElementsList>
+                <EmbeddedRegistriesList/>
+                <ExportedInterfaces>
+                    <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="ImageTaskGui"/>
+                    <Interface InterfaceId="imod::IModelEditor" ComponentId="ImageTaskGui"/>
+                    <Interface InterfaceId="imod::IObserver" ComponentId="ImageTaskGui"/>
+                    <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="ImageTaskGui"/>
+                    <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="ImageTaskGui"/>
+                    <Interface InterfaceId="istd::IPolymorphic" ComponentId="ImageTaskGui"/>
+                </ExportedInterfaces>
+                <ExportedComponents/>
+            </Data>
+        </EmbeddedRegistry>
+    </EmbeddedRegistriesList>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="LogDock" ComponentId="Framework/LogDock"/>
+    </ExportedComponents>
+</Acf>

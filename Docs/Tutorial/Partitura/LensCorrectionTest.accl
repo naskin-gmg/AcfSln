@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4426" Description="ACF"/>
+            <Version Id="1" Number="1745" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="FileCamera" X="300" Y="275" Note=""/>
+        <Element ComponentName="Framework" X="775" Y="475" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

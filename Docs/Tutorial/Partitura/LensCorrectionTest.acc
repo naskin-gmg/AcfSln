@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4426" Description="ACF"/>
+            <Version Id="1" Number="1745" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="FileCamera" PackageId="ProcessorVoce" ComponentId="FileCamera">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="LensCorrectionTestFramework">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationSubname" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="File Test"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Camera" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSet" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera/Params"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CameraParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera/ParamsEditor"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ibase::IApplication" ComponentId="Framework"/>
+    </ExportedInterfaces>
+    <ExportedComponents/>
+</Acf>
