@@ -191,6 +191,24 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	bool retVal = true;
 
 	if (metaInfoPtr != NULL){
+		int componentType = metaInfoPtr->GetComponentType();
+		if ((componentType != icomp::IComponentStaticInfo::CT_REAL) && (componentType != icomp::IComponentStaticInfo::CT_COMPOSITE)){
+			if (reasonConsumerPtr != NULL){
+				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+							istd::IInformationProvider::IC_WARNING,
+							MI_COMPONENT_INACTIVE,
+							tr("Element %1 uses wrong defined component %2").arg(QString(elementName)).arg(elementInfo.address.ToString()),
+							tr("Element Consistency Check"),
+							0)));
+			}
+
+			retVal = false;
+
+			if (!allReasons){
+				return false;
+			}
+		}
+
 		iattr::IAttributesProvider::AttributeIds attributeIds = metaInfoPtr->GetAttributeMetaIds();
 		for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
