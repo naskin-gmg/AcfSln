@@ -30,6 +30,7 @@ public:
 		I_REGISTER_INTERFACE(iinsp::ISupplier);
 		I_REGISTER_INTERFACE(iinsp::IEnableableSupplier);
 		I_ASSIGN(m_slaveSupplierCompPtr, "SlaveSupplier", "Source supplier to be activated/deactivated", true, "SlaveSupplier");
+		I_ASSIGN_TO(m_slaveSupplierModelCompPtr, m_slaveSupplierCompPtr, true);
 		I_ASSIGN(m_supplierEnabledParamCompPtr, "SupplierActivator", "Enabling parameter used for supplier activation", true, "SupplierActivator");
 		I_ASSIGN_TO(m_supplierEnabledParamModelCompPtr, m_supplierEnabledParamCompPtr, true);
 		I_ASSIGN(m_isStateFixedAttrPtr, "StateFixed", "If enabled, the activation state of suppler cannot be modified from outside", true, false);
@@ -58,6 +59,7 @@ protected:
 
 private:
 	I_REF(iinsp::ISupplier, m_slaveSupplierCompPtr);
+	I_REF(imod::IModel, m_slaveSupplierModelCompPtr);
 	I_REF(iprm::IEnableableParam, m_supplierEnabledParamCompPtr);
 	I_REF(imod::IModel, m_supplierEnabledParamModelCompPtr);
 	I_ATTR(bool, m_isStateFixedAttrPtr);
