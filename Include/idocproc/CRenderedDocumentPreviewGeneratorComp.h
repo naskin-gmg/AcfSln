@@ -46,8 +46,8 @@ protected:
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
-private:
-	void EnsurePreviewGenerated();
+protected:
+	virtual void EnsurePreviewGenerated();
 
 private:
 	I_FACT(iimg::IBitmap, m_bitmapFactoryCompPtr);

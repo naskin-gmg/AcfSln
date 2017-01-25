@@ -94,7 +94,7 @@ void CSupplierActivationProxyComp::ClearWorkResults()
 
 const ilog::IMessageContainer* CSupplierActivationProxyComp::GetWorkMessages(int containerType) const
 {
-	if (m_slaveSupplierCompPtr.IsValid()){
+	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
 		return m_slaveSupplierCompPtr->GetWorkMessages(containerType);
 	}
 
