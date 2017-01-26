@@ -4,8 +4,6 @@
 // ACF includes
 #include <istd/CChangeGroup.h>
 
-#include <iqt/CSignalBlocker.h>
-
 
 namespace icalibgui
 {
@@ -44,8 +42,6 @@ void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeS
 		const i2d::CVector2d& opticalCenter = objectPtr->GetOpticalCenter();
 		double distortionFactor = objectPtr->GetDistortionFactor();
 		double scaleFactor = objectPtr->GetScaleFactor();
-
-		iqt::CSignalBlocker block(GetWidget(), true);
 
 		CenterXSB->setValue(opticalCenter.GetX());
 		CenterYSB->setValue(opticalCenter.GetY());
