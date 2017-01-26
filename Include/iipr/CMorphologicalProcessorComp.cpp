@@ -174,7 +174,7 @@ static void DoFilter(
 		int componentsCount = outputImage.GetComponentsCount();
 
 		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-			for( int y = regionTop; y < regionBottom; ++y){
+			for (int y = regionTop; y < regionBottom; ++y){
 				Q_ASSERT(y >= 0);
 				Q_ASSERT(y < inputImageHeight);
 
@@ -237,7 +237,7 @@ static void DoFilter(
 
 			int inputLineDifference = tempBitmap.GetLinesDifference();
 
-			for( int y = regionTop; y < regionTop + kernelHalfHeight; ++y){
+			for (int y = regionTop; y < regionTop + kernelHalfHeight; ++y){
 				Q_ASSERT(y >= 0);
 				Q_ASSERT(y < inputImageHeight);
 
@@ -263,7 +263,7 @@ static void DoFilter(
 				}
 			}
 
-			for( int y = regionTop + kernelHalfHeight; y < regionBottom - kernelHalfHeight; ++y){
+			for (int y = regionTop + kernelHalfHeight; y < regionBottom - kernelHalfHeight; ++y){
 				Q_ASSERT(y >= 0);
 				Q_ASSERT(y < inputImageHeight);
 
@@ -285,7 +285,7 @@ static void DoFilter(
 				}
 			}
 
-			for( int y = regionBottom - kernelHalfHeight; y < regionBottom; ++y){
+			for (int y = regionBottom - kernelHalfHeight; y < regionBottom; ++y){
 				Q_ASSERT(y >= 0);
 				Q_ASSERT(y < inputImageHeight);
 
