@@ -6,6 +6,7 @@
 
  // ACF includes
 #include <istd/CChangeNotifier.h>
+#include <istd/CIndex2d.h>
 #include <ibase/CSize.h>
 #include <iimg/CGeneralBitmap.h>
 #include <iprm/TParamsPtr.h>
@@ -13,26 +14,12 @@
 
 // ACF-Solitions includes
 #include <imeas/INumericValue.h>
+#include <iipr/CConvolutionKernel2d.h>
+
 
 
 namespace iipr
 {
-
-QString ProcessingModeName(int i){
-
-	switch (i){
-	case CMorphologicalProcessorComp::PM_EROSION:
-		return QString("Erosion");
-	case CMorphologicalProcessorComp::PM_DILATATION:
-		return QString("Dilation");
-	case CMorphologicalProcessorComp::PM_OPENING:
-		return QString("Opening");
-	case CMorphologicalProcessorComp::PM_CLOSING:
-		return QString("Closing");
-	default:
-		return QString("Erosion");
-	}
-}
 
 
 template <typename PixelComponentType>
@@ -52,78 +39,103 @@ inline void MaxFunctor(PixelComponentType inputValue, PixelComponentType& output
 }
 
 
-template <typename PixelComponentType, PixelComponentType OutputInitValue, void (*CalculateOutputValue)(PixelComponentType, PixelComponentType&)>
-static void DoFilter(
+static iipr::CConvolutionKernel2d GetCircleKernel(const istd::CIndex2d& kernelSize)
+{
+	iipr::CConvolutionKernel2d output(kernelSize, 1.0);
+
+	Q_ASSERT(kernelSize.GetX() == kernelSize.GetY());
+	const istd::CIndex2d lastIndex(kernelSize[0] - 1, kernelSize[0] - 1);
+
+	int highestBorderIndex = 0;
+	if (kernelSize[0] % 2 == 0){
+		highestBorderIndex = kernelSize[0] / 2 - 1;
+	}
+	else{
+		highestBorderIndex = (kernelSize[0]-1) / 2;
+	}
+
+	int borderIndex = highestBorderIndex;
+	for (int y = 0; y < highestBorderIndex; ++y) {
+
+		for (int x = 0; x < borderIndex; ++x) {
+			istd::CIndex2d kernelIndex(x, y);
+			output.SetKernelElement(kernelIndex, 0.0);
+
+			kernelIndex = istd::CIndex2d(lastIndex[0] - x, y);
+			output.SetKernelElement(kernelIndex, 0.0);
+
+			kernelIndex = istd::CIndex2d(x, lastIndex[0] - y);
+			output.SetKernelElement(kernelIndex, 0.0);
+
+			kernelIndex = istd::CIndex2d(lastIndex[0] - x, lastIndex[0] - y);
+			output.SetKernelElement(kernelIndex, 0.0);
+		}
+		--borderIndex;
+	}
+
+	return output;
+}
+
+
+template <typename PixelComponentType, PixelComponentType OutputInitValue, void(*CalculateOutputValue)(PixelComponentType, PixelComponentType&)>
+static void DoCircleFilter(
 			int kernelWidth,
 			int kernelHeight,
 			const iimg::IBitmap& inputImage,
 			const i2d::CRect& region,
 			iimg::IBitmap& outputImage)
 {
-	int kernelHalfWidth = kernelWidth / 2.0;
-	int kernelHalfHeight = kernelHeight / 2.0;
+	int circleSize = kernelWidth;
+	if (kernelHeight != kernelWidth && kernelHeight > 0){
+		circleSize = qMax(kernelHeight, circleSize);
+	}
 
-	int regionLeft = region.GetLeft();
-	int regionRight = region.GetRight();
-	int regionTop = region.GetTop();
-	int regionBottom = region.GetBottom();
+	int linesDifference = inputImage.GetLinesDifference();
+	int pixelsDifference = inputImage.GetPixelsDifference();
 
-	int inputImageWidth = inputImage.GetImageSize().GetX();
-	int inputImageHeight = inputImage.GetImageSize().GetY();
+	istd::CIndex2d kernelSize(circleSize, circleSize);
+	int halfKernelWidth = kernelSize.GetX() / 2;
+	int halfKernelHeight = kernelSize.GetY() / 2;
+
+	iipr::CConvolutionKernel2d kernel = GetCircleKernel(kernelSize);
+
+	QVector<int> fastAccessElements;
+	istd::CIndex2d kernelIndex;
+	for (kernelIndex[1] = 0; kernelIndex[1] < kernelSize[1]; ++kernelIndex[1]){
+		for (kernelIndex[0] = 0; kernelIndex[0] < kernelSize[0]; ++kernelIndex[0]){
+			double value = kernel.GetKernelElement(kernelIndex);
+			if (value != 0){
+				int element;
+				element = (kernelIndex[0] - halfKernelWidth) * pixelsDifference + (kernelIndex[1] - halfKernelHeight) * linesDifference;
+				fastAccessElements.push_back(element);
+			}
+		}
+	}
+
+	int kernelElementsCount = int(fastAccessElements.size());
+
+	const int regionTop = qMin(region.GetTop() + halfKernelHeight, region.GetBottom() - halfKernelHeight);
+	const int regionBottom = qMax(region.GetTop() + halfKernelHeight, region.GetBottom() - halfKernelHeight);
+	const int regionLeft = qMin(region.GetLeft() + halfKernelWidth, region.GetRight() - halfKernelWidth);
+	const int regionRight = qMax(region.GetLeft() + halfKernelWidth, region.GetRight() - halfKernelWidth);
 
 	int componentsCount = outputImage.GetComponentsCount();
 
 	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-		for( int y = regionTop; y < regionBottom; ++y){
-			Q_ASSERT(y >= 0);
-			Q_ASSERT(y < inputImageHeight);
+		for (int y = regionTop; y < regionBottom; ++y){
 
 			const PixelComponentType* inputLinePtr = (PixelComponentType*)inputImage.GetLinePtr(y);
 			PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
 
-			for(int x = regionLeft; x < regionLeft + kernelHalfWidth; ++x){
+			for (int x = regionLeft; x < regionRight; ++x){
 				PixelComponentType outputValue = OutputInitValue;
 
 				int outputComponentPosition = x * componentsCount + componentIndex;
 
-				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
-					int pixelIndex = x + kernelX;
-
-					if (pixelIndex >= regionLeft && pixelIndex < inputImageWidth){
-						int componentPosition = pixelIndex * componentsCount + componentIndex;
-
-						CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
-					}
-				}
-
-				*(outputLinePtr + outputComponentPosition) = outputValue;
-			}
-
-			for(int x = regionLeft + kernelHalfWidth; x < regionRight - kernelHalfWidth; ++x){
-				PixelComponentType outputValue = OutputInitValue;
-				int outputComponentPosition = x * componentsCount + componentIndex;
-
-				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
-					int pixelIndex = (x + kernelX) * componentsCount + componentIndex;
-
-					CalculateOutputValue(inputLinePtr[pixelIndex], outputValue);
-				}
-
-				*(outputLinePtr + outputComponentPosition) = outputValue;
-			}
-
-			for(int x = regionRight - kernelHalfWidth; x < regionRight; ++x){
-				PixelComponentType outputValue = OutputInitValue;
-				int outputComponentPosition = x * componentsCount + componentIndex;
-
-				for(int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
-					int pixelIndex = x + kernelX;
-
-					if (pixelIndex >= 0 && pixelIndex < regionRight){
-						int componentPosition = pixelIndex * componentsCount + componentIndex;
-
-						CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
-					}
+				for (int i = 0; i < kernelElementsCount; ++i){
+					const int& kernelElement = fastAccessElements[i];
+					const int componentPosition = (x + kernelElement) * componentsCount + componentIndex;
+					CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
 				}
 
 				*(outputLinePtr + outputComponentPosition) = outputValue;
@@ -131,91 +143,181 @@ static void DoFilter(
 		}
 	} // componentIndex
 
-	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-		iimg::CGeneralBitmap tempBitmap;
-		tempBitmap.CopyFrom(outputImage);
+}
 
-		int inputLineDifference = tempBitmap.GetLinesDifference();
 
-		for( int y = regionTop; y < regionTop + kernelHalfHeight; ++y){
-			Q_ASSERT(y >= 0);
-			Q_ASSERT(y < inputImageHeight);
+template <typename PixelComponentType, PixelComponentType OutputInitValue, void (*CalculateOutputValue)(PixelComponentType, PixelComponentType&)>
+static void DoFilter(
+			CMorphologicalProcessorComp::KernelType type,
+			int kernelWidth,
+			int kernelHeight,
+			const iimg::IBitmap& inputImage,
+			const i2d::CRect& region,
+			iimg::IBitmap& outputImage)
+{
+	if (type == CMorphologicalProcessorComp::KT_CIRC){
+		DoCircleFilter<PixelComponentType, OutputInitValue, CalculateOutputValue>(kernelWidth, kernelHeight, inputImage, region, outputImage);
+	}
+	else {
 
-			const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
-			PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
+		int kernelHalfWidth = kernelWidth / 2.0;
+		int kernelHalfHeight = kernelHeight / 2.0;
 
-			for(int x = regionLeft; x < regionRight; ++x){
-				PixelComponentType outputValue = OutputInitValue;
+		int regionLeft = region.GetLeft();
+		int regionRight = region.GetRight();
+		int regionTop = region.GetTop();
+		int regionBottom = region.GetBottom();
 
-				int componentPosition = x * componentsCount + componentIndex;
+//		int inputImageWidth = inputImage.GetImageSize().GetX();
+		int inputImageHeight = inputImage.GetImageSize().GetY();
 
-				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
-					int imageLineIndex = y + kernelY;
+		int componentsCount = outputImage.GetComponentsCount();
 
-					if (imageLineIndex >= regionTop && imageLineIndex < inputImageHeight){
+		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+			for (int y = regionTop; y < regionBottom; ++y){
+				Q_ASSERT(y >= 0);
+				Q_ASSERT(y < inputImageHeight);
+
+				const PixelComponentType* inputLinePtr = (PixelComponentType*)inputImage.GetLinePtr(y);
+				PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
+
+				//for (int x = regionLeft; x < regionLeft + kernelHalfWidth; ++x){
+				//	PixelComponentType outputValue = OutputInitValue;
+
+				//	int outputComponentPosition = x * componentsCount + componentIndex;
+
+				//	for (int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
+				//		int pixelIndex = x + kernelX;
+
+				//		if (pixelIndex >= regionLeft && pixelIndex < inputImageWidth){
+				//			int componentPosition = pixelIndex * componentsCount + componentIndex;
+
+				//			CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
+				//		}
+				//	}
+
+				//	*(outputLinePtr + outputComponentPosition) = outputValue;
+				//}
+
+				for (int x = regionLeft; x < regionRight; ++x){
+					PixelComponentType outputValue = OutputInitValue;
+					int outputComponentPosition = x * componentsCount + componentIndex;
+
+					for (int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
+						int pixelIndex = (x + kernelX) * componentsCount + componentIndex;
+
+						CalculateOutputValue(inputLinePtr[pixelIndex], outputValue);
+					}
+
+					*(outputLinePtr + outputComponentPosition) = outputValue;
+				}
+
+				//for (int x = regionRight - kernelHalfWidth; x < regionRight; ++x){
+				//	PixelComponentType outputValue = OutputInitValue;
+				//	int outputComponentPosition = x * componentsCount + componentIndex;
+
+				//	for (int kernelX = -kernelHalfWidth; kernelX <= kernelHalfWidth; ++kernelX){
+				//		int pixelIndex = x + kernelX;
+
+				//		if (pixelIndex >= 0 && pixelIndex < regionRight){
+				//			int componentPosition = pixelIndex * componentsCount + componentIndex;
+
+				//			CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
+				//		}
+				//	}
+
+				//	*(outputLinePtr + outputComponentPosition) = outputValue;
+				//}
+			}
+		} // componentIndex
+
+		for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+			iimg::CGeneralBitmap tempBitmap;
+			tempBitmap.CopyFrom(outputImage);
+
+			int inputLineDifference = tempBitmap.GetLinesDifference();
+
+			for (int y = regionTop; y < regionTop + kernelHalfHeight; ++y){
+				Q_ASSERT(y >= 0);
+				Q_ASSERT(y < inputImageHeight);
+
+				const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
+				PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
+
+				for (int x = regionLeft; x < regionRight; ++x){
+					PixelComponentType outputValue = OutputInitValue;
+
+					int componentPosition = x * componentsCount + componentIndex;
+
+					for (int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
+						int imageLineIndex = y + kernelY;
+
+						if (imageLineIndex >= regionTop && imageLineIndex < inputImageHeight){
+							PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
+
+							CalculateOutputValue(value, outputValue);
+						}
+					}
+
+					*(outputLinePtr + componentPosition) = outputValue;
+				}
+			}
+
+			for (int y = regionTop + kernelHalfHeight; y < regionBottom - kernelHalfHeight; ++y) {
+				Q_ASSERT(y >= 0);
+				Q_ASSERT(y < inputImageHeight);
+
+				const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
+				PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
+
+				for (int x = regionLeft; x < regionRight; ++x) {
+					PixelComponentType outputValue = OutputInitValue;
+
+					int componentPosition = x * componentsCount + componentIndex;
+
+					for (int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY) {
 						PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
 
 						CalculateOutputValue(value, outputValue);
 					}
+
+					*(outputLinePtr + componentPosition) = outputValue;
 				}
-
-				*(outputLinePtr + componentPosition) = outputValue;
 			}
-		}
 
-		for( int y = regionTop + kernelHalfHeight; y < regionBottom - kernelHalfHeight; ++y){
-			Q_ASSERT(y >= 0);
-			Q_ASSERT(y < inputImageHeight);
+			for (int y = regionBottom - kernelHalfHeight; y < regionBottom; ++y) {
+				Q_ASSERT(y >= 0);
+				Q_ASSERT(y < inputImageHeight);
 
-			const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
-			PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
+				const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
+				PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
 
-			for(int x = regionLeft; x < regionRight; ++x){
-				PixelComponentType outputValue = OutputInitValue;
+				for (int x = regionLeft; x < regionRight; ++x) {
+					PixelComponentType outputValue = OutputInitValue;
+					int componentPosition = x * componentsCount + componentIndex;
 
-				int componentPosition = x * componentsCount + componentIndex;
+					for (int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY) {
+						int imageLineIndex = y + kernelY;
 
-				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
-					PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
+						if (imageLineIndex >= 0 && imageLineIndex < regionBottom) {
+							PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
 
-					CalculateOutputValue(value, outputValue);
-				}
-
-				*(outputLinePtr + componentPosition) = outputValue;
-			}
-		}
-
-		for( int y = regionBottom - kernelHalfHeight; y < regionBottom; ++y){
-			Q_ASSERT(y >= 0);
-			Q_ASSERT(y < inputImageHeight);
-
-			const PixelComponentType* inputLinePtr = (PixelComponentType*)tempBitmap.GetLinePtr(y);
-			PixelComponentType* outputLinePtr = (PixelComponentType*)outputImage.GetLinePtr(y);
-
-			for(int x = regionLeft; x < regionRight; ++x){
-				PixelComponentType outputValue = OutputInitValue;
-				int componentPosition = x * componentsCount + componentIndex;
-
-				for(int kernelY = -kernelHalfHeight; kernelY <= kernelHalfHeight; ++kernelY){
-					int imageLineIndex = y + kernelY;
-
-					if (imageLineIndex >= 0 && imageLineIndex < regionBottom){
-						PixelComponentType value = inputLinePtr[componentPosition + kernelY * inputLineDifference];
-
-						CalculateOutputValue(value, outputValue);
+							CalculateOutputValue(value, outputValue);
+						}
 					}
-				}
 
-				*(outputLinePtr + componentPosition) = outputValue;
+					*(outputLinePtr + componentPosition) = outputValue;
+				}
 			}
-		}
-	} // componentIndex
+		} // componentIndex
+	}
 }
 
 
 template <typename PixelComponentType, PixelComponentType InitMaxValue>
 static void ProcessImage(
 			CMorphologicalProcessorComp::ProcessingMode processingMode,
+			CMorphologicalProcessorComp::KernelType type,
 			int kernelWidth,
 			int kernelHeight,
 			const iimg::IBitmap& inputImage,
@@ -224,19 +326,19 @@ static void ProcessImage(
 {	
 	switch (processingMode){
 		case CMorphologicalProcessorComp::PM_EROSION:
-			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
 			break;
 				
 		case CMorphologicalProcessorComp::PM_DILATATION:
-			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
 			break;
 				
 		case CMorphologicalProcessorComp::PM_OPENING:{
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
 
-			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
-			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
 			break;
 		}
 
@@ -244,8 +346,8 @@ static void ProcessImage(
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
 
-			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
-			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
+			DoFilter<PixelComponentType, InitMaxValue, MinFunctor<PixelComponentType> >(type, kernelWidth, kernelHeight, tempBitmap, regionRect, outputImage);
 			break;
 		}
 	}
@@ -329,8 +431,10 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 
 	Q_ASSERT(kernelMaxWidth >= 1);
 	Q_ASSERT(kernelMaxHeight >= 1);
-
+	
 	int processingMode = GetProcessingMode(paramsPtr);
+
+	KernelType kernelType = GetKernelType();
 
 	int pixelFormat = inputBitmap.GetPixelFormat();
 	switch (pixelFormat){
@@ -339,6 +443,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 		case iimg::IBitmap::PF_RGBA:
 			ProcessImage<quint8, 255>(
 							CMorphologicalProcessorComp::ProcessingMode(processingMode),
+							kernelType,
 							kernelMaxWidth,
 							kernelMaxHeight,
 							inputBitmap,
@@ -349,6 +454,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 		case iimg::IBitmap::PF_GRAY16:
 			ProcessImage<quint16, (1 << 16) - 1>(
 							CMorphologicalProcessorComp::ProcessingMode(processingMode),
+							kernelType,
 							kernelMaxWidth,
 							kernelMaxHeight,
 							inputBitmap,
@@ -359,6 +465,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 		case iimg::IBitmap::PF_GRAY32:
 			ProcessImage<quint32, (quint64(1) << 32) - 1>(
 							CMorphologicalProcessorComp::ProcessingMode(processingMode),
+							kernelType,
 							kernelMaxWidth,
 							kernelMaxHeight,
 							inputBitmap,
@@ -380,9 +487,10 @@ void CMorphologicalProcessorComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	for (int i = PM_FIRST; i < PM_LAST + 1; ++i){
-		m_processingModes.InsertOption(ProcessingModeName(i), QByteArray::number(i), ProcessingModeName(i));
-	}
+	m_processingModes.InsertOption(QObject::tr("Erosion"), "Erosion");
+	m_processingModes.InsertOption(QObject::tr("Dilation"), "Dilation");
+	m_processingModes.InsertOption(QObject::tr("Opening"), "Opening");
+	m_processingModes.InsertOption(QObject::tr("Closing"), "Closing");
 }
 
 
@@ -404,6 +512,20 @@ int CMorphologicalProcessorComp::GetProcessingMode(const iprm::IParamsSet* param
 
 	return mode;
 }
+
+
+CMorphologicalProcessorComp::KernelType CMorphologicalProcessorComp::GetKernelType() const
+{
+	if (m_filterFormTypeAttrPtr.IsValid()){
+		int value = *m_filterFormTypeAttrPtr;
+		if (value >= KT_FIRST && value <= KT_LAST){
+			return KernelType(value);
+		}
+	}
+
+	return KT_RECT;
+}
+
 
 } // namespace iipr
 

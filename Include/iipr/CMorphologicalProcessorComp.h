@@ -33,14 +33,22 @@ public:
 		PM_LAST = PM_CLOSING
 	};
 	
-	I_BEGIN_COMPONENT(CMorphologicalProcessorComp);		
+	I_BEGIN_COMPONENT(CMorphologicalProcessorComp);
 		I_REGISTER_SUBELEMENT(ProcessingModes);
 		I_REGISTER_SUBELEMENT_INTERFACE(ProcessingModes, istd::IChangeable, GetProcessingModes);
 		I_REGISTER_SUBELEMENT_INTERFACE(ProcessingModes, iprm::IOptionsList, GetProcessingModes);
+		I_ASSIGN(m_filterFormTypeAttrPtr, "FilterFormType", "Type of filter form: \n0 - Rectangular([n, m])\n1 - Circular([n, n])", true, 0);
 		I_ASSIGN(m_filterSizeParamsIdAttrPtr, "FilterSizeParamsId", "ID of the filter dimension parameter set", true, "FilterSizeParamsId");
 		I_ASSIGN(m_defaultProcessingModeAttrPtr, "ProcessingMode", "Filter processing mode\n0 - Erosion\n1 - Dilatation\n2 - Opening\n3 - Closing", true, 0);
 		I_ASSIGN(m_processingModeIdAttrPtr, "ProcessingModeId", "Processing mode parameter Id in ParamsSet", true, "ProcessingMode");
 	I_END_COMPONENT;
+
+	enum KernelType {
+		KT_FIRST,
+		KT_RECT = KT_FIRST,
+		KT_CIRC,
+		KT_LAST = KT_CIRC
+	};
 
 protected:
 	// reimplemented (CImageRegionProcessorCompBase)
@@ -57,7 +65,7 @@ protected:
 private:
 
 	int GetProcessingMode(const iprm::IParamsSet* paramsPtr) const;
-
+	KernelType GetKernelType() const;
 
 	template <class InterfaceType>
 	static InterfaceType* GetProcessingModes(CMorphologicalProcessorComp& component)
@@ -68,7 +76,7 @@ private:
 private:
 
 	imod::TModelWrap<iprm::COptionsManager> m_processingModes;
-
+	I_ATTR(int, m_filterFormTypeAttrPtr);
 	I_ATTR(QByteArray, m_filterSizeParamsIdAttrPtr);
 	I_ATTR(int, m_defaultProcessingModeAttrPtr);
 	I_ATTR(QByteArray, m_processingModeIdAttrPtr);
