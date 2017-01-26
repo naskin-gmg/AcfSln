@@ -32,7 +32,8 @@ public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CImageRegionProcessorCompBase);
-		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set", true, "AoiParams");
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of the AOI region in the parameter set (i2d::IObject2d)", true, "AoiParams");
+		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_allowEmptyRegionAttrPtr, "AllowEmptyAoi", "If enabled the full image area is used of no AOI was set", true, false);
 	I_END_COMPONENT;
 
@@ -45,7 +46,6 @@ public:
 
 protected:
 	// abstract methods
-
 	/**
 		Process the defined image region.
 	*/
@@ -57,8 +57,7 @@ protected:
 
 protected:
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
-
-private:
+	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_ATTR(bool, m_allowEmptyRegionAttrPtr);
 };
 

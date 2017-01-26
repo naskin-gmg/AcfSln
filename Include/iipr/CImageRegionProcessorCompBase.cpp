@@ -33,10 +33,9 @@ int CImageRegionProcessorCompBase::DoProcessing(
 
 	i2d::CRectangle inputImageArea(inputBitmapPtr->GetImageSize());
 
-	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, *m_aoiParamIdAttrPtr);
-
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
 
+	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiPtr.IsValid()){
 		const i2d::ICalibration2d* logToPhysicalTransformPtr = aoiPtr->GetCalibration();
 
@@ -60,7 +59,7 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		}
 	}
 
-	return ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr.GetPtr(), outputPtr) ? TS_OK : TS_INVALID;
+	return ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr.GetPtr(), outputPtr)? TS_OK: TS_INVALID;
 }
 
 
