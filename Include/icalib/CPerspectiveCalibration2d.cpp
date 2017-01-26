@@ -12,7 +12,6 @@ namespace icalib
 // static constants
 static const iser::CArchiveTag s_affinePartTag("AffinePart", "Part of calibration representing affine transformation", iser::CArchiveTag::TT_GROUP);
 static const iser::CArchiveTag s_perspAxisTag("PerspAxis", "Axis of perspective deformation", iser::CArchiveTag::TT_GROUP);
-static const iser::CArchiveTag s_logicalAreaTag("LogicalArea", "Area where this calibration is valid", iser::CArchiveTag::TT_GROUP);
 static const istd::IChangeable::ChangeSet s_calibrationChangedChangeSet(i2d::ICalibration2d::CF_CALIBRATION_CHANGED, "Calibration changed");
 static const istd::IChangeable::ChangeSet s_areaChangedChangeSet(i2d::ICalibration2d::CF_AREA_CHANGED, "Calibration area changed");
 static const istd::IChangeable::ChangeSet s_unitsChangedChangeSet(i2d::ICalibration2d::CF_UNITS_CHANGED, "Calibration units changed");
