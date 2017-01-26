@@ -49,7 +49,7 @@ protected:
 protected:
 	virtual void EnsurePreviewGenerated();
 
-private:
+protected:
 	I_FACT(iimg::IBitmap, m_bitmapFactoryCompPtr);
 	I_REF(iproc::IProcessor, m_renderingProcessorCompPtr);
 	I_ATTR(int, m_imageSizeAttrPtr);
