@@ -114,6 +114,11 @@ I_EXPORT_COMPONENT(
 			"Crop Region Processor Transform AOI ROI" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
+			CalibratedImageCropProcessor,
+			"Image crop processor providing rectification",
+			"Crop Region Processor Transform AOI ROI Decalibration Calibration Rectification Equalization" IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
 			RingPatternGenerator,
 			"Generator of the ring pattern image",
 			"Generator Pattern" IM_AUTHOR("\"Kirill Lepskiy\""));
