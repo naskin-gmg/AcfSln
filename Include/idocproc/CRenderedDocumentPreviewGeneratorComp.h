@@ -40,14 +40,13 @@ public:
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
 protected:
+	virtual void EnsurePreviewGenerated();
+
 	// reimplemented (imod::IObserver)
 	virtual bool OnModelDetached(imod::IModel* modelPtr);
 
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
-
-protected:
-	virtual void EnsurePreviewGenerated();
 
 protected:
 	I_FACT(iimg::IBitmap, m_bitmapFactoryCompPtr);

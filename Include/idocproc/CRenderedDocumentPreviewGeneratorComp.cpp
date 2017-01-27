@@ -40,33 +40,6 @@ const iimg::IBitmap* CRenderedDocumentPreviewGeneratorComp::GetBitmap(int bitmap
 
 // protected methods
 
-// reimplemented (imod::IObserver)
-
-bool CRenderedDocumentPreviewGeneratorComp::OnModelDetached(imod::IModel* modelPtr)
-{
-	if (BaseClass2::OnModelDetached(modelPtr)){
-
-		istd::CChangeNotifier changePtr(this);
-
-		m_previewBitmaps.Reset();
-
-		return true;
-	}
-
-	return false;
-}
-
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CRenderedDocumentPreviewGeneratorComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
-{
-	EnsurePreviewGenerated();
-}
-
-
-// protected methods
-
 void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 {
 	istd::CChangeNotifier changePtr(this);
@@ -100,6 +73,31 @@ void CRenderedDocumentPreviewGeneratorComp::EnsurePreviewGenerated()
 			}
 		}
 	}
+}
+
+
+// reimplemented (imod::IObserver)
+
+bool CRenderedDocumentPreviewGeneratorComp::OnModelDetached(imod::IModel* modelPtr)
+{
+	if (BaseClass2::OnModelDetached(modelPtr)){
+
+		istd::CChangeNotifier changePtr(this);
+
+		m_previewBitmaps.Reset();
+
+		return true;
+	}
+
+	return false;
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CRenderedDocumentPreviewGeneratorComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	EnsurePreviewGenerated();
 }
 
 
