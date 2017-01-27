@@ -43,13 +43,13 @@ int CFileInfoCopyComp::ConvertFiles(
 	QDir outputDir = QFileInfo(inputFileName).absoluteDir();
 
 	if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-		SendWarningMessage(MI_INPUT_OPEN, QObject::tr("Opening input file failed (%1)").arg(inputFileName));
+		SendWarningMessage(MI_INPUT_OPEN, QObject::tr("Opening input file failed (%1)").arg(QFileInfo(inputFileName).absoluteFilePath()));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
 
 	if (!outputFile.open(QIODevice::WriteOnly  | QIODevice::Text)){
-		SendWarningMessage(MI_OUTPUT_OPEN, QObject::tr("Opening output file failed (%1)").arg(outputFileName));
+		SendWarningMessage(MI_OUTPUT_OPEN, QObject::tr("Opening output file failed (%1)").arg(QFileInfo(outputFileName).absoluteFilePath()));
 
 		return iproc::IProcessor::TS_INVALID;
 	}
