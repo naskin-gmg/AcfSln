@@ -32,7 +32,7 @@
 #include <iipr/CCircleFinderParamsComp.h>
 #include <iipr/CImagePolarTransformProcessorComp.h>
 #include <iipr/CImageCropProcessorComp.h>
-#include <iipr/CCalibratedImageCropProcessorComp.h>
+#include <iipr/CImageCropDecalibrateProcessorComp.h>
 #include <iipr/CImageInterpolationParamsComp.h>
 #include <iipr/CRingPatternGeneratorComp.h>
 #include <iipr/CRingPatternGeneratorParamsComp.h>
@@ -101,7 +101,7 @@ typedef iipr::CRectDerivativeProcessorComp RectDerivativeProcessor;
 typedef iipr::CImageHistogramProcessorComp ImageHistogramProcessor;
 typedef iipr::CImagePolarTransformProcessorComp ImagePolarTransformProcessor;
 typedef iipr::CImageCropProcessorComp ImageCropProcessor;
-typedef iipr::CCalibratedImageCropProcessorComp CalibratedImageCropProcessor;
+typedef iipr::CImageCropDecalibrateProcessorComp ImageCropDecalibrateProcessor;
 typedef iipr::CRingPatternGeneratorComp RingPatternGenerator;
 
 typedef icomp::TModelCompWrap<iipr::CImageInterpolationParamsComp> ImageInterpolationParams;

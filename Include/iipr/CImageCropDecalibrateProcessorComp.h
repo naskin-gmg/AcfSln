@@ -1,5 +1,5 @@
-#ifndef iipr_CCalibratedImageCropProcessorComp_included
-#define iipr_CCalibratedImageCropProcessorComp_included
+#ifndef iipr_CImageCropDecalibrateProcessorComp_included
+#define iipr_CImageCropDecalibrateProcessorComp_included
 
 
 // Qt includes
@@ -20,12 +20,12 @@ namespace iipr
 /**
 	Crop the image region and rectificate (de-calibrate) it.
 */
-class CCalibratedImageCropProcessorComp: public iproc::CSyncProcessorCompBase
+class CImageCropDecalibrateProcessorComp: public iproc::CSyncProcessorCompBase
 {
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
-	I_BEGIN_COMPONENT(CCalibratedImageCropProcessorComp);
+	I_BEGIN_COMPONENT(CImageCropDecalibrateProcessorComp);
 		I_REGISTER_INTERFACE(iproc::IProcessor);
 		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set (i2d::CRectangle)", false, "AoiParams");
 		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
@@ -52,6 +52,6 @@ private:
 } // namespace iipr
 
 
-#endif // !iipr_CCalibratedImageCropProcessorComp_included
+#endif // !iipr_CImageCropDecalibrateProcessorComp_included
 
 

@@ -114,7 +114,7 @@ I_EXPORT_COMPONENT(
 			"Crop Region Processor Transform AOI ROI" IM_AUTHOR("\"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			CalibratedImageCropProcessor,
+			ImageCropDecalibrateProcessor,
 			"Image crop processor providing rectification",
 			"Crop Region Processor Transform AOI ROI Decalibration Calibration Rectification Equalization" IM_AUTHOR("\"Witold Gantzke\""));
 
