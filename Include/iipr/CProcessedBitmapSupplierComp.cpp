@@ -75,7 +75,7 @@ void CProcessedBitmapSupplierBase::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_bitmapProviderModelCompPtr.IsValid() && m_bitmapSupplierCompPtr.IsValid()){
+	if (m_bitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 
