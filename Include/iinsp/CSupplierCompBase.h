@@ -110,6 +110,10 @@ protected:
 		Register supplier input.
 		Changes of supplier input will force this supplier invalidate.
 		All registered inputs will be unregistered during component destruction (OnComponentDestryed method).
+		\param	modelPtr	input model.
+							It cannot be \c nullptr.
+		\param	supplierPtr	optional supplier corresponding to the input model.
+							It will be automatically initialized for new work.
 	*/
 	virtual void RegisterSupplierInput(imod::IModel* modelPtr, ISupplier* supplierPtr = NULL);
 	/**
