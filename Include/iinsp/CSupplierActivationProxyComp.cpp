@@ -56,7 +56,7 @@ bool CSupplierActivationProxyComp::IsStateFixed() const
 
 int CSupplierActivationProxyComp::GetWorkStatus() const
 {
-	int retVal = IsSupplierEnabled() ? WS_OK : WS_INVALID;
+	int retVal = WS_OK;
 
 	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
 		retVal = m_slaveSupplierCompPtr->GetWorkStatus();
