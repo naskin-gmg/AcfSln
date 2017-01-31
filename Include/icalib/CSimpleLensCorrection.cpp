@@ -233,7 +233,7 @@ bool CSimpleLensCorrection::GetLocalTransform(
 
 	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
 
-	result.SetTranslation(m_opticalCenter + origPosition * scaleFactor);
+	result.SetTranslation(m_opticalCenter + origPosition * (scaleFactor - 1));
 	result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity() * scaleFactor);	// TODO: implement it correctly, it is simple approximation only
 
 	return true;
@@ -254,11 +254,11 @@ bool CSimpleLensCorrection::GetLocalInvTransform(
 		double shouldDistance = (-1 + qSqrt(delta)) * 0.5;
 
 		if (shouldDistance >= I_BIG_EPSILON){
-			result.SetTranslation(normPos.GetNormalized(shouldDistance));
+			result.SetTranslation(normPos.GetNormalized(shouldDistance) - transfPosition / m_scaleFactor);
 			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());	// TODO: implement it correctly
 		}
 		else{
-			result.SetTranslation(normPos);
+			result.SetTranslation(-m_opticalCenter / m_scaleFactor);
 			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());
 		}
 
