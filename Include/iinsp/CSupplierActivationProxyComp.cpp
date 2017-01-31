@@ -42,7 +42,13 @@ bool CSupplierActivationProxyComp::IsSupplierEnabled() const
 
 bool CSupplierActivationProxyComp::IsStateFixed() const
 {
-	return *m_isStateFixedAttrPtr;
+	bool isStateFixed = *m_isStateFixedAttrPtr;
+
+	if (m_supplierEnabledParamCompPtr.IsValid()){
+		isStateFixed = isStateFixed || !m_supplierEnabledParamCompPtr->IsEnablingAllowed();
+	}
+
+	return isStateFixed;
 }
 
 
