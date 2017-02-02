@@ -4,12 +4,12 @@
 
 // ACF includes
 #include <i2d/ICalibrationProvider.h>
+#include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
 #include <iproc/IProcessor.h>
 #include <iinsp/ISupplier.h>
 #include <iinsp/TSupplierCompWrap.h>
-#include <iimg/IBitmapProvider.h>
 
 
 namespace iipr
@@ -34,20 +34,20 @@ public:
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
 	I_END_COMPONENT;
 
-protected:
-	bool EnsureBitmapCreated(ProductType& result) const;
-
-	// abstract methods
-	virtual iimg::IBitmap* CreateBitmap() const = 0;
-
 	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
+
+protected:
+	bool EnsureBitmapCreated(ProductType& result) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+
+	// abstract methods
+	virtual iimg::IBitmap* CreateBitmap() const = 0;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
