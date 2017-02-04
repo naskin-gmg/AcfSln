@@ -56,13 +56,23 @@ bool CSupplierActivationProxyComp::IsStateFixed() const
 
 int CSupplierActivationProxyComp::GetWorkStatus() const
 {
-	int retVal = WS_OK;
+	int retVal = WS_INVALID;
 
 	if (m_slaveSupplierCompPtr.IsValid() && IsSupplierEnabled()){
 		retVal = m_slaveSupplierCompPtr->GetWorkStatus();
 	}
 
 	return retVal;
+}
+
+
+imod::IModel* CSupplierActivationProxyComp::GetWorkStatusModel() const
+{
+	if (m_slaveSupplierCompPtr.IsValid()){
+		return m_slaveSupplierCompPtr->GetWorkStatusModel();
+	}
+
+	return NULL;
 }
 
 

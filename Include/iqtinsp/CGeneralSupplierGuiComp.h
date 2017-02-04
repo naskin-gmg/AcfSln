@@ -119,72 +119,22 @@ void TGeneralSupplierGuiComp<UI>::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 	Q_ASSERT(BaseClass::IsGuiCreated());
 
+	UpdateVisualStatus();
+
 	QString statusLabelText = BaseClass::tr("Unknown");
 
 	QString description;
-
 	const iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
 	if (supplierPtr != NULL){
+		BaseClass::UpdateAllViews();
+
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
-
-		int workStatus = supplierPtr->GetWorkStatus();
-
-		switch (workStatus){
-			case iinsp::ISupplier::WS_INVALID:
-				statusLabelText = BaseClass::tr("None");
-				break;
-
-			case iinsp::ISupplier::WS_INIT:
-				statusLabelText = BaseClass::tr("Init");
-				break;
-
-			case iinsp::ISupplier::WS_LOCKED:
-				statusLabelText = BaseClass::tr("Locked");
-				break;
-
-			case iinsp::ISupplier::WS_OK:
-				if (infoProviderPtr != NULL){
-					switch (infoProviderPtr->GetInformationCategory()){
-			case istd::IInformationProvider::IC_WARNING:
-				statusLabelText = BaseClass::tr("Warning");
-				break;
-
-			case istd::IInformationProvider::IC_ERROR:
-				statusLabelText = BaseClass::tr("Error");
-				break;
-
-			default:
-				statusLabelText = BaseClass::tr("OK");
-				break;
-		}
-	}
-	else{
-		statusLabelText = BaseClass::tr("OK");
-	}
-
-	break;
-
-		case iinsp::ISupplier::WS_CANCELED:
-			statusLabelText = BaseClass::tr("Canceled");
-			break;
-
-		case iinsp::ISupplier::WS_ERROR:
-			statusLabelText = BaseClass::tr("Not processed");
-			break;
-
-		case iinsp::ISupplier::WS_CRITICAL:
-			statusLabelText = BaseClass::tr("Critical");
-			break;
-		}
-
 		if (infoProviderPtr != NULL){
 			description = infoProviderPtr->GetInformationDescription();
 		}
-
-		BaseClass::UpdateAllViews();
 	}
 
-	BaseClass::StatusLabel->setText(statusLabelText);
+	BaseClass::StatusLabel->setText(BaseClass::m_visualStatus.GetStatusText());
 	if (!description.isEmpty()){
 		BaseClass::DescriptionLabel->setText(description);
 		BaseClass::DescriptionLabel->setVisible(true);

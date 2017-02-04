@@ -53,17 +53,18 @@ protected:
 template <class Product>
 void TSupplierCompWrap<Product>::EnsureWorkFinished()
 {
-	if (m_workStatus == WS_INIT){
-		m_workStatus = WS_LOCKED;
+	if (m_workStatus.GetSupplierState() == WS_INIT){
+		m_workStatus.SetSupplierState(WS_LOCKED);
 
 		if (!m_productPtr.IsValid()){
 			m_productPtr.SetPtr(new Product());
 		}
 
-		m_workStatus = ProduceObject(*m_productPtr);
-		Q_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
+		int workState = ProduceObject(*m_productPtr);
 
-		m_productChangeNotifierPtr.Reset();
+		Q_ASSERT(workState >= WS_OK);	// No initial states are possible
+
+		m_workStatus.SetSupplierState(workState);
 	}
 }
 
@@ -71,9 +72,12 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 template <class Product>
 void TSupplierCompWrap<Product>::ClearWorkResults()
 {
-	if (m_workStatus == WS_LOCKED){
+	if (m_workStatus.GetSupplierState() == WS_LOCKED){
 		return;
 	}
+
+	ChangeSet changes(iinsp::ISupplier::CF_SUPPLIER_RESULTS);
+	istd::CChangeNotifier changeNotifier(this, &changes);
 
 	m_productPtr.Reset();
 
@@ -88,7 +92,7 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
-	if (m_workStatus <= WS_OK){
+	if (m_workStatus.GetSupplierState() <= WS_OK){
 		return m_productPtr.GetPtr();
 	}
 	else{

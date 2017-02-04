@@ -59,6 +59,16 @@ int CDelegatedBitmapSupplierComp::GetWorkStatus() const
 }
 
 
+imod::IModel* CDelegatedBitmapSupplierComp::GetWorkStatusModel() const
+{
+	if (m_bitmapSupplierCompPtr.IsValid()){
+		return m_bitmapSupplierCompPtr->GetWorkStatusModel();
+	}
+
+	return NULL;
+}
+
+
 void CDelegatedBitmapSupplierComp::InvalidateSupplier()
 {
 	if (m_bitmapSupplierCompPtr.IsValid()){

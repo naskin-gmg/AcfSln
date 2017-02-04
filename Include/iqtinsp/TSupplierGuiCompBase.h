@@ -91,6 +91,11 @@ protected:
 	bool DoTest();
 
 	/**
+		Update visual status of supplier state.
+	*/
+	virtual void UpdateVisualStatus();
+
+	/**
 		Method will be called every time if the parameter set of the supplier has been changed.
 		Default implementation does nothing.
 	*/
@@ -130,7 +135,23 @@ protected:
 		TSupplierGuiCompBase& m_parent;
 	};
 
+	class StatusObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		StatusObserver(TSupplierGuiCompBase* parentPtr);
+
+		using imod::CSingleModelObserverBase::EnsureModelDetached;
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+
+	private:
+		TSupplierGuiCompBase& m_parent;
+	};
+
 	ParamsObserver m_paramsObserver;
+	StatusObserver m_statusObserver;
 
 protected:	
 	using BaseClass::m_visualStatus;
@@ -176,6 +197,7 @@ private:
 template <class UI>
 TSupplierGuiCompBase<UI>::TSupplierGuiCompBase()
 	:m_paramsObserver(this),
+	m_statusObserver(this),
 	m_areParamsEditable(false)
 {
 	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
@@ -353,99 +375,8 @@ bool TSupplierGuiCompBase<UI>::DoTest()
 
 
 template <class UI>
-void TSupplierGuiCompBase<UI>::OnSupplierParamsChanged()
+void TSupplierGuiCompBase<UI>::UpdateVisualStatus()
 {
-}
-
-
-// reimplemented (iqtgui::TGuiObserverWrap)
-
-template <class UI>
-void TSupplierGuiCompBase<UI>::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
-	Q_ASSERT(supplierPtr != NULL);	// model must be attached
-
-	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
-	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
-
-	m_areParamsEditable = !*m_connectParametersToEditorAttrPtr;
-	bool areParamsAttachedToEditor = !*m_connectParametersToEditorAttrPtr;
-	QWidget* paramsWidget = GetParamsWidget();
-	if (paramsWidget != NULL){
-		if (m_paramsSetGuiCompPtr.IsValid()){
-			m_paramsSetGuiCompPtr->CreateGui(paramsWidget);
-		}
-
-		if (*m_connectParametersToEditorAttrPtr && (paramsModelPtr != NULL) && m_paramsSetObserverCompPtr.IsValid()){
-			areParamsAttachedToEditor = paramsModelPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
-			if (!areParamsAttachedToEditor){
-				qWarning("Supplier parameters could not be connected to the editor");
-			}
-
-			m_areParamsEditable = true;
-
-
-			// Attach internal parameter observer:
-			paramsModelPtr->AttachObserver(&m_paramsObserver);
-		}
-
-		paramsWidget->setVisible(m_areParamsEditable);
-		paramsWidget->setEnabled(areParamsAttachedToEditor);
-	}
-
-	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
-}
-
-
-template <class UI>
-void TSupplierGuiCompBase<UI>::OnGuiModelDetached()
-{
-	iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
-	Q_ASSERT(supplierPtr != NULL);	// model must be attached
-
-	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
-	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
-
-	if (		m_paramsSetObserverCompPtr.IsValid() &&
-				(paramsModelPtr != NULL) &&
-				paramsModelPtr->IsAttached(m_paramsSetObserverCompPtr.GetPtr())){
-		paramsModelPtr->DetachObserver(m_paramsSetObserverCompPtr.GetPtr());
-	}
-
-	if (m_paramsSetGuiCompPtr.IsValid() && m_paramsSetGuiCompPtr->IsGuiCreated()){
-		m_paramsSetGuiCompPtr->DestroyGui();
-	}
-
-	m_areParamsEditable = false;
-
-	m_paramsObserver.EnsureModelDetached();
-
-	BaseClass::OnGuiModelDetached();
-}
-
-
-// reimplemented (iqt2d::TViewExtenderCompBase)
-
-template <class UI>
-void TSupplierGuiCompBase<UI>::CreateShapes(int /*sceneId*/, Shapes& /*result*/)
-{
-}
-
-
-// reimplemented (imod::IObserver)
-
-template <class UI>
-void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
-{
-	if (!BaseClass::IsGuiCreated() || changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
-		BaseClass::AfterUpdate(modelPtr, changeSet);
-
-		return;
-	}
-
 	QString statusText = "";
 	QIcon statusIcon = QIcon(":/Icons/StateUnknown");
 
@@ -454,9 +385,11 @@ void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::I
 	const iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
 	if (supplierPtr != NULL){
 		const istd::IInformationProvider* infoProviderPtr = dynamic_cast<const istd::IInformationProvider*>(supplierPtr);
-		int category = infoProviderPtr == NULL ? 
-			istd::IInformationProvider::IC_INFO:
-			infoProviderPtr->GetInformationCategory();
+		if (infoProviderPtr == NULL){
+			infoProviderPtr =  CompCastPtr<const istd::IInformationProvider>(supplierPtr);
+		}
+
+		int category = (infoProviderPtr == NULL) ? istd::IInformationProvider::IC_INFO : infoProviderPtr->GetInformationCategory();
 
 		int workStatus = supplierPtr->GetWorkStatus();
 
@@ -503,6 +436,115 @@ void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::I
 		}
 	}
 
+	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
+	BaseClass::SetStatusIcon(statusIcon);
+	BaseClass::SetStatusText(statusText);
+}
+
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::OnSupplierParamsChanged()
+{
+}
+
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
+	Q_ASSERT(supplierPtr != NULL);	// model must be attached
+
+	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
+	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
+
+	m_areParamsEditable = !*m_connectParametersToEditorAttrPtr;
+	bool areParamsAttachedToEditor = !*m_connectParametersToEditorAttrPtr;
+	QWidget* paramsWidget = GetParamsWidget();
+	if (paramsWidget != NULL){
+		if (m_paramsSetGuiCompPtr.IsValid()){
+			m_paramsSetGuiCompPtr->CreateGui(paramsWidget);
+		}
+
+		if (*m_connectParametersToEditorAttrPtr && (paramsModelPtr != NULL) && m_paramsSetObserverCompPtr.IsValid()){
+			areParamsAttachedToEditor = paramsModelPtr->AttachObserver(m_paramsSetObserverCompPtr.GetPtr());
+			if (!areParamsAttachedToEditor){
+				qWarning("Supplier parameters could not be connected to the editor");
+			}
+
+			m_areParamsEditable = true;
+
+
+			// Attach internal parameter observer:
+			paramsModelPtr->AttachObserver(&m_paramsObserver);
+		}
+
+		paramsWidget->setVisible(m_areParamsEditable);
+		paramsWidget->setEnabled(areParamsAttachedToEditor);
+	}
+
+	imod::IModel* statusModelPtr = supplierPtr->GetWorkStatusModel();
+	if (statusModelPtr != NULL){
+		statusModelPtr->AttachObserver(&m_statusObserver);
+	}
+
+	BaseClass::SetStatusIcon(QIcon(":/Icons/StateUnknown"));
+}
+
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::OnGuiModelDetached()
+{
+	iinsp::ISupplier* supplierPtr = BaseClass::GetObservedObject();
+	Q_ASSERT(supplierPtr != NULL);	// model must be attached
+
+	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
+	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
+
+	if (		m_paramsSetObserverCompPtr.IsValid() &&
+				(paramsModelPtr != NULL) &&
+				paramsModelPtr->IsAttached(m_paramsSetObserverCompPtr.GetPtr())){
+		paramsModelPtr->DetachObserver(m_paramsSetObserverCompPtr.GetPtr());
+	}
+
+	if (m_paramsSetGuiCompPtr.IsValid() && m_paramsSetGuiCompPtr->IsGuiCreated()){
+		m_paramsSetGuiCompPtr->DestroyGui();
+	}
+
+	m_areParamsEditable = false;
+
+	m_paramsObserver.EnsureModelDetached();
+
+	m_statusObserver.EnsureModelDetached();
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
+// reimplemented (iqt2d::TViewExtenderCompBase)
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::CreateShapes(int /*sceneId*/, Shapes& /*result*/)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
+{
+	if (!BaseClass::IsGuiCreated() || changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
+		BaseClass::AfterUpdate(modelPtr, changeSet);
+
+		return;
+	}
+
+	UpdateVisualStatus();
+
 	if (*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS){
 		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObservedObject());
 
@@ -533,10 +575,6 @@ void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::I
 		}
 	}
 
-	istd::CChangeNotifier visualStatusNotifier(&m_visualStatus);
-	BaseClass::SetStatusIcon(statusIcon);
-	BaseClass::SetStatusText(statusText);
-
 	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
@@ -552,11 +590,32 @@ TSupplierGuiCompBase<UI>::ParamsObserver::ParamsObserver(TSupplierGuiCompBase* p
 
 
 // reimplemented (imod::CSingleModelObserverBase)
+
 template <class UI>
 void TSupplierGuiCompBase<UI>::ParamsObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	m_parent.OnSupplierParamsChanged();
 }
+
+
+// public methods of embedded class StatusObserver
+
+template <class UI>
+TSupplierGuiCompBase<UI>::StatusObserver::StatusObserver(TSupplierGuiCompBase* parentPtr)
+	:m_parent(*parentPtr)
+{
+	Q_ASSERT(parentPtr != NULL);
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+template <class UI>
+void TSupplierGuiCompBase<UI>::StatusObserver::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	m_parent.UpdateVisualStatus();
+}
+
 
 } // namespace iqtinsp
 

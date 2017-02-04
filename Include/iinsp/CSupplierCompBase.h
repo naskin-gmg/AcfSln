@@ -75,6 +75,7 @@ public:
 
 	// reimplemented (iinsp::ISupplier)
 	virtual int GetWorkStatus() const;
+	virtual imod::IModel* GetWorkStatusModel() const;
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkInitialized();
 	virtual void ClearWorkResults();
@@ -93,6 +94,20 @@ protected:
 		const CSupplierCompBase* m_parentPtr;
 		QString m_measuredFeatureName;
 	};
+
+	class Status: virtual public istd::IChangeable
+	{
+	public:
+		Status();
+
+		int GetSupplierState() const;
+		void SetSupplierState(int state);
+
+	private:
+		int m_state;
+	};
+
+	typedef imod::TModelWrap<Status> StatusModel;
 
 	/**
 		Called if the new work should be initialized.
@@ -146,8 +161,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 protected:
-	int m_workStatus;
-	istd::TDelPtr<istd::CChangeNotifier> m_productChangeNotifierPtr;
+	StatusModel m_workStatus;
 
 private:
 	class InputsObserver: public imod::CMultiModelObserverBase

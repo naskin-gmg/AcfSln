@@ -4,6 +4,7 @@
 
 // ACF includes
 #include <istd/IChangeable.h>
+#include <imod/IModel.h>
 #include <ilog/IMessageContainer.h>
 #include <iprm/IParamsSet.h>
 
@@ -73,10 +74,16 @@ public:
 
 	/**
 		Get status of last work.
-		Please note, that this status is not a part of supplier model and can be changed without any notification.
+		Please note, that this status is not a part of supplier model and can be changed without any notification. If you want to observe the status model of the supplier, please use the GetWorkStatusModel method.
 		\return	work status defined in iinsp::ISupplier::WorkStatus.
+		\sa GetWorkStatusModel
 	*/
 	virtual int GetWorkStatus() const = 0;
+
+	/**
+		Get access to the status model of the supplier.
+	*/
+	virtual imod::IModel* GetWorkStatusModel() const = 0;
 
 	/**
 		Called to signalize that this supplier is invalid.
