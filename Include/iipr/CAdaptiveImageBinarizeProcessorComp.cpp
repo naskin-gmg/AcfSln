@@ -49,7 +49,7 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 	}
 
 	if (inputBitmap.GetPixelFormat() != iimg::IBitmap::PF_GRAY){
-		SendWarningMessage(0, "Input bitmap is empty.");
+		SendWarningMessage(0, "Input bitmap is not grayscale.");
 
 		return false;
 	}

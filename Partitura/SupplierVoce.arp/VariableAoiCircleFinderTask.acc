@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4316" Description="ACF"/>
-            <Version Id="1" Number="1664" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4432" Description="ACF"/>
+            <Version Id="1" Number="1764" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Circle finder task using annulus segment to speciffy AOI</Description>
@@ -91,9 +91,6 @@
                     <AttributeInfo Id="DirectionMode" Type="Integer" ExportId="DefaultDirectionMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="FilterConstraints" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="Caliper"/>
-                    </AttributeInfo>
                     <AttributeInfo Id="FilterLegthValues" Type="Real[]" ExportId="DefaultFilterLegthValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
@@ -127,7 +124,7 @@
                     <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="InputCalibrationProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" Type="String" ExportId="DiagnosticName">
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
