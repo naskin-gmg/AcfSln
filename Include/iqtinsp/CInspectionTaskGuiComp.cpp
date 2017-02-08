@@ -287,11 +287,21 @@ void CInspectionTaskGuiComp::UpdateModel() const
 }
 
 
-void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
+void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	Q_ASSERT(IsGuiCreated());
 
 	UpdateMenu();
+
+	if (changeSet.ContainsExplicit(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
+		UpdateVisualElements();
+
+		UpdateProcessingState();
+
+		UpdateTaskMessages();
+
+		DoUpdateEditor(m_currentGuiIndex);
+	}
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
@@ -532,10 +542,6 @@ void CInspectionTaskGuiComp::OnModelChanged(int modelId, const istd::IChangeable
 {
 	if (modelId == m_currentGuiIndex && !m_testStarted){
 		UpdateVisualElements();
-
-		UpdateTaskMessages();
-
-		DoUpdateEditor(m_currentGuiIndex);
 	}
 }
 
@@ -575,14 +581,6 @@ void CInspectionTaskGuiComp::OnAutoTest()
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
-
-		UpdateVisualElements();
-
-		UpdateTaskMessages();
-
-		DoUpdateEditor(m_currentGuiIndex);
-
-		UpdateProcessingState();
 	}
 
 	m_testStarted = false;
