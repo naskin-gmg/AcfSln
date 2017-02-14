@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4082" Description="ACF"/>
-            <Version Id="1" Number="1525" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1777" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Image acquisition task using camera to retrive image</Description>
@@ -24,7 +24,7 @@
                     <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
                         <Data IsEnabled="true" Value="Bitmap"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" Type="String" ExportId="DiagnosticName">
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
@@ -34,9 +34,6 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="CameraParamsSet">
-                        <Data IsEnabled="false"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="ScaleParamId" Type="Id" ExportId="ScaleParamId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ShowComponentId" Type="Boolean" ExportId="ShowComponentId">

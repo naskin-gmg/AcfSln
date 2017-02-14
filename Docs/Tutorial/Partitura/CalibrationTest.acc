@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4426" Description="ACF"/>
-            <Version Id="1" Number="1745" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1777" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -345,6 +345,39 @@
         <EmbeddedRegistry Id="CalibratorSupplierEditor">
             <Data Description="" Keywords="">
                 <ElementsList>
+                    <Element Id="AxisParamsEditor" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>AxisXTemplateEditor</Value>
+                                            <Value>AxisYTemplateEditor</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>AxisXTemplate</Value>
+                                            <Value>AxisYTemplate</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Axis X</Value>
+                                            <Value>Axis Y</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
                     <Element Id="AxisXTemplateEditor" PackageId="QtViewPck" ComponentId="Line2dParamsGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
@@ -368,6 +401,39 @@
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
+                    <Element Id="CalibParamsEditor" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>PerspectiveCalibEditor</Value>
+                                            <Value>CalibAoiEditor</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Calibration</Value>
+                                            <Value>CalibrationAoi</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value></Value>
+                                            <Value>Calibration Area</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
+                        </Data>
+                    </Element>
                     <Element Id="CheckboardParamsEditor" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
@@ -380,7 +446,7 @@
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
-                                    <Data IsEnabled="true" Value="ParamsSetGui"/>
+                                    <Data IsEnabled="true" Value="ParamsEditor"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                                     <Data IsEnabled="false"/>
@@ -388,30 +454,27 @@
                             </AttributeInfoMap>
                         </Data>
                     </Element>
-                    <Element Id="ParamsSetGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                    <Element Id="ParamsEditor" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
+                                <AttributeInfo Id="DesignType" Type="Integer" ExportId="">
+                                    <Data IsEnabled="true" Value="2"/>
+                                </AttributeInfo>
                                 <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>PerspectiveCalibEditor</Value>
-                                            <Value>CalibAoiEditor</Value>
-                                            <Value>SearchAoiEditor</Value>
-                                            <Value>CheckboardParamsEditor</Value>
-                                            <Value>AxisXTemplateEditor</Value>
-                                            <Value>AxisYTemplateEditor</Value>
+                                            <Value>CalibParamsEditor</Value>
+                                            <Value>SearchParamsEditor</Value>
+                                            <Value>AxisParamsEditor</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
                                 <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
-                                            <Value>Calibration</Value>
-                                            <Value>CalibrationAoi</Value>
-                                            <Value>SearchAoi</Value>
-                                            <Value>CheckboardParams</Value>
-                                            <Value>AxisXTemplate</Value>
-                                            <Value>AxisYTemplate</Value>
+                                            <Value>*</Value>
+                                            <Value>*</Value>
+                                            <Value>*</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -419,11 +482,8 @@
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Calibration</Value>
-                                            <Value>Calibration Area</Value>
-                                            <Value>Search AOI</Value>
-                                            <Value>Checkboard Parameters</Value>
-                                            <Value>Axis X</Value>
-                                            <Value>Axis Y</Value>
+                                            <Value>Search</Value>
+                                            <Value>Orientation</Value>
                                         </Values>
                                     </Data>
                                 </AttributeInfo>
@@ -445,6 +505,39 @@
                     <Element Id="SearchAoiEditor" PackageId="QtViewPck" ComponentId="RectangleParamsGui">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap/>
+                        </Data>
+                    </Element>
+                    <Element Id="SearchParamsEditor" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+                        <Data IsEnabled="true" Flags="0">
+                            <AttributeInfoMap>
+                                <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SearchAoiEditor</Value>
+                                            <Value>CheckboardParamsEditor</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>SearchAoi</Value>
+                                            <Value>CheckboardParams</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                                    <Data IsEnabled="true">
+                                        <Values>
+                                            <Value>Search AOI</Value>
+                                            <Value>Checkboard Parameters</Value>
+                                        </Values>
+                                    </Data>
+                                </AttributeInfo>
+                                <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                                    <Data IsEnabled="true" Value="true"/>
+                                </AttributeInfo>
+                            </AttributeInfoMap>
                         </Data>
                     </Element>
                 </ElementsList>
