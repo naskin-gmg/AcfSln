@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -145,7 +145,7 @@
                                 <AttributeInfo Id="CalibrationProvider" Type="Reference" ExportId="CalibrationProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="EdgeExtractor"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="EdgesExtractor" Type="Reference" ExportId="">
@@ -187,7 +187,7 @@
                     <Element Id="ReducedEdgesSupplier" PackageId="EdgePck" ComponentId="ProcessedEdgeLinesSupplier">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="EdgeReductor"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="EdgeLinesProvider" Type="Reference" ExportId="">
@@ -227,7 +227,7 @@
             <Data Description="" Keywords="">
                 <ElementsList>
                     <Element Id="BitmapGray" PackageId="BitmapPck" ComponentId="Bitmap">
-                        <Data IsEnabled="true" Flags="0">
+                        <Data IsEnabled="true" Flags="2">
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
@@ -243,7 +243,7 @@
                                 <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="GrayImage"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
@@ -377,7 +377,7 @@
             <Data Description="" Keywords="">
                 <ElementsList>
                     <Element Id="BitmapSmooth" PackageId="BitmapPck" ComponentId="Bitmap">
-                        <Data IsEnabled="true" Flags="0">
+                        <Data IsEnabled="true" Flags="2">
                             <AttributeInfoMap/>
                         </Data>
                     </Element>
@@ -408,7 +408,7 @@
                                 <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="DiagnosticName" Type="String" ExportId="">
+                                <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="SmoothedImage"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">

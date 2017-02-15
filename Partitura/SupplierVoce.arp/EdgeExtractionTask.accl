@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
             <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -23,20 +23,20 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="SmoothedImageSupplier">
-            <PositionMap>
-                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
-                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
-                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="EdgeExtractor">
             <PositionMap>
                 <Element ComponentName="EdgesReductor" X="725" Y="325" Note=""/>
                 <Element ComponentName="ExtractedEdgesSupplier" X="275" Y="225" Note=""/>
                 <Element ComponentName="FastEdgesExtractor" X="275" Y="325" Note=""/>
                 <Element ComponentName="ReducedEdgesSupplier" X="725" Y="225" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="SmoothedImageSupplier">
+            <PositionMap>
+                <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
+                <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
+                <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
