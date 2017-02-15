@@ -355,6 +355,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && (consistInfoPtr != NULL)){
 				// prepare queryFlags
 				int queryFlags = IRegistryConsistInfo::QF_NONE;
+
 				icomp::IElementStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
 							0,
@@ -363,8 +364,14 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
 					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
-				if ((staticInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
+
+				int attributeFlags = staticInfoPtr->GetAttributeFlags();
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
 					queryFlags = IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
+				}
+
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
+					queryFlags = IRegistryConsistInfo::QF_DETACHED_FROM_CONTAINER;
 				}
 
 				icomp::IRegistry::Ids compatIds = consistInfoPtr->GetCompatibleElements(

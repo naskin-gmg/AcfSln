@@ -109,6 +109,7 @@ protected Q_SLOTS:
 	void on_InterfacesTree_itemSelectionChanged();
 	void on_InterfacesTree_itemChanged(QTreeWidgetItem* item, int column);
 	void on_AutoInstanceCB_toggled(bool checked);
+	void on_IsDetachedCB_toggled(bool checked);
 	void UpdateGeneralView();
 	void UpdateAttributesView();
 	void UpdateInterfacesView();
@@ -149,7 +150,8 @@ protected:
 				const QByteArray& elementId,
 				const QByteArray& interfaceName,
 				bool& hasWarning,
-				bool& hasExport) const;
+				bool& hasExport,
+				bool readOnly) const;
 	bool ResetItem(QTreeWidgetItem& item);
 	bool DecodeAttribute(
 				const iser::ISerializable& attribute,
@@ -167,14 +169,16 @@ protected:
 				QTreeWidgetItem* parentItemPtr,
 				bool& hasWarning,
 				bool& hasExport,
-				bool includeSubelement);
+				bool includeSubelement,
+				bool readOnly);
 	void CreateExportedComponentsTree(
 				const QByteArray& elementId,
 				const QByteArray& globalElementId,
 				const icomp::IElementStaticInfo* elementMetaInfoPtr,
 				QTreeWidgetItem& item,
 				bool& hasWarning,
-				bool& hasExport) const;
+				bool& hasExport,
+				bool readOnly) const;
 
 	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void OnGuiModelDetached();

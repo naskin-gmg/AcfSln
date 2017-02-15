@@ -100,8 +100,7 @@ protected:
 				const QByteArray& elementId,
 				const icomp::IElementStaticInfo& elementStaticInfo,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
-				int queryFlags,
-				bool subcomponentsFlag) const;
+				int queryFlags) const;
 	bool CheckAttributeCompatibility(
 				const iser::IObject& attribute,
 				const icomp::IAttributeStaticInfo& attributeMetaInfo,

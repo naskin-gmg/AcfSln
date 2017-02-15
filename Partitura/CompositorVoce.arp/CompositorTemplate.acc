@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Document template for Compositor</Description>
     <Keywords></Keywords>
     <ElementsList>
         <Element Id="Document" PackageId="" ComponentId="Document">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
                     <AttributeInfo Id="DocumentManager" Type="Reference" ExportId="DocumentManager">
                         <Data IsEnabled="false"/>
@@ -34,7 +34,7 @@
                     <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="Registry"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTypeName" Type="String" ExportId="">
+                    <AttributeInfo Id="DocumentTypeName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ACF Registry"/>
                     </AttributeInfo>
                     <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
@@ -125,12 +125,12 @@
             </Data>
         </Element>
         <Element Id="UndoManager" PackageId="BasePck" ComponentId="SerializedUndoManager">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
         <Element Id="VisualRegistryView" PackageId="CompositorVoce" ComponentId="VisualRegistryView">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ConsistencyInfo" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="RegistryConsistInfo"/>

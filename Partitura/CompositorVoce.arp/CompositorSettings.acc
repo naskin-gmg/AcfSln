@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4261" Description="ACF"/>
-            <Version Id="1" Number="1635" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4439" Description="ACF"/>
+            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Compositor settings</Description>
@@ -13,7 +13,7 @@
         <Element Id="ConfigDataShadow" PackageId="CompositorVoce" ComponentId="SelectableConfigData">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="../../Docs/Tutorial/Config/AcfSlnTutorialConfig.awc"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -37,7 +37,7 @@
         <Element Id="ConfigsManager" PackageId="BasePck" ComponentId="ParamsManager">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultSetName" Type="String" ExportId="">
+                    <AttributeInfo Id="DefaultSetName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Config %1"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSetFactory" Type="Factory" ExportId="">
@@ -85,7 +85,7 @@
         <Element Id="PreviewCommandFile" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="">
+                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Acf"/>
                     </AttributeInfo>
                     <AttributeInfo Id="PathType" Type="Integer" ExportId="">
@@ -95,7 +95,7 @@
             </Data>
         </Element>
         <Element Id="SelectableConfigData" PackageId="CompositorVoce" ComponentId="SelectableConfigData">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>

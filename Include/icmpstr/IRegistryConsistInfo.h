@@ -36,7 +36,11 @@ public:
 		/**
 			If active, subelements will be also considered.
 		*/
-		QF_INCLUDE_SUBELEMENTS = 1 << 2
+		QF_INCLUDE_SUBELEMENTS = 1 << 2,
+		/**
+			If active, subelements will be also considered.
+		*/
+		QF_DETACHED_FROM_CONTAINER = 1 << 3
 	};
 
 	/**

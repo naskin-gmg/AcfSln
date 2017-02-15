@@ -497,6 +497,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="IsDetachedCB">
+         <property name="toolTip">
+          <string>Indicate that this element is detached from container and can be used as factory prototype</string>
+         </property>
+         <property name="text">
+          <string>Is detached from container</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

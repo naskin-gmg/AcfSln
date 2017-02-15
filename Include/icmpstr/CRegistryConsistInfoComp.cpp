@@ -27,6 +27,8 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 	bool includeUndefined = (queryFlags & QF_INCLUDE_UNDEFINED) != 0;
 
 	if (m_envManagerCompPtr.IsValid()){
+		bool isDetachedQuery = ((queryFlags & QF_DETACHED_FROM_CONTAINER) != 0);
+
 		icomp::IRegistry::Ids elementIds = registry.GetElementIds();
 		for (		icomp::IRegistry::Ids::const_iterator index = elementIds.begin();
 					index != elementIds.end();
@@ -34,6 +36,13 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 			const QByteArray& elementId = *index;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 			Q_ASSERT(elementInfoPtr != NULL);	// element ID was taken from this registry, it must exist
+			Q_ASSERT(elementInfoPtr->elementPtr.IsValid());	// element ID was taken from this registry, it must exist
+
+			int elementFlags = elementInfoPtr->elementPtr->GetElementFlags();
+			bool isElementDetached = ((elementFlags & icomp::IRegistryElement::EF_IS_DETACHED) != 0);
+			if (isElementDetached != isDetachedQuery){
+				continue;
+			}
 
 			icomp::IRegistry::Ids subIds;
 
@@ -46,8 +55,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 								elementId,
 								*infoPtr,
 								interfaceNames,
-								queryFlags,
-								(queryFlags & QF_INCLUDE_SUBELEMENTS) != 0);
+								queryFlags);
 				}
 				else if (includeUndefined){
 					retVal.insert(elementId);
@@ -68,8 +76,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 							elementId,
 							info,
 							interfaceNames,
-							queryFlags,
-							(queryFlags & QF_INCLUDE_SUBELEMENTS) != 0);
+							queryFlags);
 			}
 
 			retVal += subIds;
@@ -470,8 +477,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 			const QByteArray& elementId,
 			const icomp::IElementStaticInfo& elementStaticInfo,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
-			int queryFlags,
-			bool subcomponentsFlag) const
+			int queryFlags) const
 {
 	icomp::IRegistry::Ids retVal;
 
@@ -518,7 +524,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 		retVal.insert(elementId);
 	}
 
-	if (subcomponentsFlag){
+	if ((queryFlags & QF_INCLUDE_SUBELEMENTS) != 0){
 		const icomp::IElementStaticInfo::Ids subcomponentIds = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
 
 		for (		icomp::IElementStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
@@ -532,8 +538,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 							istd::CIdManipBase::JoinId(elementId, subcomponentId),
 							*subcomponentInfoPtr,
 							interfaceNames,
-							queryFlags,
-							false);
+							queryFlags & ~QF_INCLUDE_SUBELEMENTS);
 
 				retVal += subIds;
 			}
@@ -664,6 +669,38 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 	const icomp::IRegistry::ElementInfo* pointedInfoPtr = registry.GetElementInfo(baseId);
 	if (pointedInfoPtr != NULL){
+		Q_ASSERT(pointedInfoPtr->elementPtr.IsValid());
+		int pointedElementFlags = pointedInfoPtr->elementPtr->GetElementFlags();
+
+		if ((pointedElementFlags & icomp::IRegistryElement::EF_IS_DETACHED) != 0){
+			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
+				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+								istd::IInformationProvider::IC_ERROR,
+								MI_BAD_ATTRIBUTE_TYPE,
+								messagePrefix + tr("Reference try to access container-detached component '%1', please attach it").arg(QString(pointedElementName)),
+								tr("Attribute Consistency Check"),
+								0)));
+				}
+
+				return false;
+			}
+		}
+		else{
+			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
+				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ilog::CMessage(
+								istd::IInformationProvider::IC_ERROR,
+								MI_BAD_ATTRIBUTE_TYPE,
+								messagePrefix + tr("Factory try to access container-attached component '%1', please detach it").arg(QString(pointedElementName)),
+								tr("Attribute Consistency Check"),
+								0)));
+				}
+
+				return false;
+			}
+		}
+
 		const icomp::CComponentAddress& pointedElementAddress = pointedInfoPtr->address;
 		if (!pointedElementAddress.GetPackageId().isEmpty()){
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);

@@ -281,6 +281,55 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 }
 
 
+void CAttributeEditorComp::on_IsDetachedCB_toggled(bool checked)
+{
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker updateBlocker(this);
+
+	const IElementSelectionInfo* objectPtr = GetObservedObject();
+	if (objectPtr == NULL){
+		return;
+	}
+
+	icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	istd::CChangeNotifier registryNotifier(registryPtr, &s_changeFlagChangeSet);
+	Q_UNUSED(registryNotifier);
+
+	IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
+	for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
+				iter != selectedElements.constEnd();
+				++iter){
+		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
+		Q_ASSERT(selectedInfoPtr != NULL);
+
+		if (!selectedInfoPtr->elementPtr.IsValid()){
+			continue;
+		}
+
+		istd::CChangeNotifier elementNotifier(selectedInfoPtr->elementPtr.GetPtr(), &s_changeFlagChangeSet);
+		Q_UNUSED(elementNotifier);
+
+		quint32 flags = selectedInfoPtr->elementPtr->GetElementFlags();
+
+		flags = checked?
+					(flags | icomp::IRegistryElement::EF_IS_DETACHED):
+					(flags & ~icomp::IRegistryElement::EF_IS_DETACHED);
+
+		selectedInfoPtr->elementPtr->SetElementFlags(flags);
+	}
+
+	UpdateInterfacesView();
+	UpdateSubcomponentsView();
+}
+
+
 void CAttributeEditorComp::UpdateGeneralView()
 {
 	const IElementSelectionInfo* objectPtr = GetObservedObject();
@@ -565,6 +614,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 						++iter){
 				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 				Q_ASSERT(selectedInfoPtr != NULL);
+				Q_ASSERT(selectedInfoPtr->elementPtr.IsValid());
 
 				const QByteArray& elementId = iter.key();
 
@@ -586,6 +636,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 
 				if (m_metaInfoManagerCompPtr.IsValid()){
 					const icomp::IComponentStaticInfo* staticInfoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(selectedInfoPtr->address);
+					bool readOnly = ((selectedInfoPtr->elementPtr->GetElementFlags() & icomp::IRegistryElement::EF_IS_DETACHED) != 0);
 
 					bool warningFlag = false;
 					bool exportFlag = false;
@@ -596,7 +647,8 @@ void CAttributeEditorComp::UpdateInterfacesView()
 								itemPtr,
 								warningFlag,
 								exportFlag,
-								true);
+								true,
+								readOnly);
 					hasWarning = hasWarning || warningFlag;
 					hasExport = hasExport || exportFlag;
 				}
@@ -638,6 +690,9 @@ void CAttributeEditorComp::UpdateFlagsView()
 	bool autoInstanceOn = false;
 	bool autoInstanceOff = false;
 
+	bool isDetachedOn = false;
+	bool isDetachedOff = false;
+
 	for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
 				iter != selectedElements.constEnd();
 				++iter){
@@ -647,11 +702,19 @@ void CAttributeEditorComp::UpdateFlagsView()
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){
 			quint32 elementFlags = elementPtr->GetElementFlags();
+
 			if ((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0){
 				autoInstanceOn = true;
 			}
 			else{
 				autoInstanceOff = true;
+			}
+
+			if ((elementFlags & icomp::IRegistryElement::EF_IS_DETACHED) != 0){
+				isDetachedOn = true;
+			}
+			else{
+				isDetachedOff = true;
 			}
 		}
 	}
@@ -675,6 +738,28 @@ void CAttributeEditorComp::UpdateFlagsView()
 		else{
 			AutoInstanceCB->setCheckState(Qt::PartiallyChecked);
 			AutoInstanceCB->setEnabled(false);
+		}
+	}
+
+	if (isDetachedOn){
+		if (isDetachedOff){
+			IsDetachedCB->setCheckState(Qt::PartiallyChecked);
+		}
+		else{
+			IsDetachedCB->setTristate(false);
+			IsDetachedCB->setCheckState(Qt::Checked);
+		}
+		IsDetachedCB->setEnabled(true);
+	}
+	else{
+		if (isDetachedOff){
+			IsDetachedCB->setTristate(false);
+			IsDetachedCB->setCheckState(Qt::Unchecked);
+			IsDetachedCB->setEnabled(true);
+		}
+		else{
+			IsDetachedCB->setCheckState(Qt::PartiallyChecked);
+			IsDetachedCB->setEnabled(false);
 		}
 	}
 }
@@ -703,6 +788,7 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 				const QByteArray& elementId = iter.key();
 				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 				Q_ASSERT(selectedInfoPtr != NULL);
+				Q_ASSERT(selectedInfoPtr->elementPtr.IsValid());
 
 				const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 				if (elementPtr != NULL){
@@ -719,9 +805,11 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 					if (m_metaInfoManagerCompPtr.IsValid()){
 						const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(selectedInfoPtr->address);
 
+						bool readOnly = ((selectedInfoPtr->elementPtr->GetElementFlags() & icomp::IRegistryElement::EF_IS_DETACHED) != 0);
+
 						bool warningFlag = false;
 						bool exportFlag = false;
-						CreateExportedComponentsTree(elementId, elementId, infoPtr, *componentRootPtr, warningFlag, exportFlag);
+						CreateExportedComponentsTree(elementId, elementId, infoPtr, *componentRootPtr, warningFlag, exportFlag, readOnly);
 						hasWarning = hasWarning || warningFlag;
 						hasExport = hasExport || exportFlag;
 					}
@@ -1127,8 +1215,9 @@ bool CAttributeEditorComp::SetInterfaceToItem(
 			icomp::IRegistry::ExportedInterfacesMap* interfacesMapPtr,
 			const QByteArray& elementId,
 			const QByteArray& interfaceName,
-			bool& /*hasWarning*/,
-			bool& hasExport) const
+			bool& hasWarning,
+			bool& hasExport,
+			bool readOnly) const
 {
 	item.setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
 
@@ -1144,9 +1233,21 @@ bool CAttributeEditorComp::SetInterfaceToItem(
 		}
 
 		item.setText(0, interfaceName);
+		item.setBackgroundColor(0, Qt::transparent);
+		if (readOnly){
+			if (hasExport){
+				item.setToolTip(0, tr("Export of interfaces from detached objects is not allowed"));
+				item.setBackgroundColor(0, Qt::yellow);
+
+				hasWarning = true;
+			}
+			else{
+				item.setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+			}
+		}
+
 		item.setCheckState(0, hasExport? Qt::Checked: Qt::Unchecked);
 		item.setToolTip(0, "");
-		item.setBackgroundColor(0, Qt::transparent);
 	}
 	else{
 		item.setText(0, elementId + ": " + interfaceName);
@@ -1458,7 +1559,8 @@ void CAttributeEditorComp::CreateInterfacesTree(
 			QTreeWidgetItem* parentItemPtr,
 			bool& hasWarning,
 			bool& hasExport,
-			bool includeSubelement)
+			bool includeSubelement,
+			bool readOnly)
 {
 	hasWarning = false;
 	hasExport = false;
@@ -1503,7 +1605,8 @@ void CAttributeEditorComp::CreateInterfacesTree(
 						elementId,
 						interfaceName,
 						warningFlag,
-						exportFlag);
+						exportFlag,
+						readOnly);
 			hasWarning = hasWarning || warningFlag;
 			hasExport = hasExport || exportFlag;
 		}
@@ -1516,9 +1619,9 @@ void CAttributeEditorComp::CreateInterfacesTree(
 			for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
 						subIter != sortedSubcomponentIds.constEnd();
 						++subIter){
-				const QByteArray& sublementId = *subIter;
+				const QByteArray& subelementId = *subIter;
 
-				QByteArray globalSublementId = istd::CIdManipBase::JoinId(elementId, sublementId);
+				QByteArray globalSubelementId = istd::CIdManipBase::JoinId(elementId, subelementId);
 
 				QTreeWidgetItem* itemPtr = NULL;
 				if (parentItemPtr != NULL){
@@ -1544,20 +1647,21 @@ void CAttributeEditorComp::CreateInterfacesTree(
 				Q_ASSERT(itemPtr != NULL);
 
 				ResetItem(*itemPtr);
-				itemPtr->setText(AC_NAME, sublementId);
+				itemPtr->setText(AC_NAME, subelementId);
 
-				const icomp::IElementStaticInfo* subelementInfoPtr = infoPtr->GetSubelementInfo(sublementId);
+				const icomp::IElementStaticInfo* subelementInfoPtr = infoPtr->GetSubelementInfo(subelementId);
 
 				bool warningFlag = false;
 				bool exportFlag = false;
 				CreateInterfacesTree(
-							globalSublementId,
+							globalSubelementId,
 							subelementInfoPtr,
 							registryInterfaces,
 							itemPtr,
 							warningFlag,
 							exportFlag,
-							false);
+							false,
+							readOnly);
 				hasWarning = hasWarning || warningFlag;
 				hasExport = hasExport || exportFlag;
 			}
@@ -1583,7 +1687,7 @@ void CAttributeEditorComp::CreateInterfacesTree(
 
 			bool warningFlag = false;
 			bool exportFlag = false;
-			SetInterfaceToItem(*itemPtr, NULL, elementId, interfaceName, warningFlag, exportFlag);
+			SetInterfaceToItem(*itemPtr, NULL, elementId, interfaceName, warningFlag, exportFlag, readOnly);
 			hasWarning = true;
 		}
 	}
@@ -1616,8 +1720,9 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			const QByteArray& globalElementId,
 			const icomp::IElementStaticInfo* elementMetaInfoPtr,
 			QTreeWidgetItem& item,
-			bool& /*hasWarning*/,
-			bool& hasExport) const
+			bool& hasWarning,
+			bool& hasExport,
+			bool readOnly) const
 {
 	int itemIndex = 0;
 
@@ -1642,11 +1747,11 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 		for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
 					subIter != sortedSubcomponentIds.constEnd();
 					++subIter, ++itemIndex){
-			const QByteArray& sublementId = *subIter;
+			const QByteArray& subelementId = *subIter;
 
-			QByteArray globalSublementId = istd::CIdManipBase::JoinId(globalElementId, sublementId);
+			QByteArray globalSubelementId = istd::CIdManipBase::JoinId(globalElementId, subelementId);
 
-			QStringList subExportedAliases = GetExportAliases(globalSublementId);
+			QStringList subExportedAliases = GetExportAliases(globalSubelementId);
 			if (!subExportedAliases.isEmpty()){
 				hasExport = true;
 			}
@@ -1660,9 +1765,19 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			}
 
 			itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-			itemPtr->setText(AC_NAME, sublementId);
-			itemPtr->setData(AC_VALUE, AttributeId, QString(globalSublementId));
-			itemPtr->setData(AC_VALUE, AttributeValue, QString(sublementId));
+			itemPtr->setBackgroundColor(AC_VALUE, Qt::transparent);
+			if (readOnly){
+				if (subExportedAliases.isEmpty()){
+					itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+				}
+				else{
+					itemPtr->setBackgroundColor(AC_VALUE, Qt::yellow);
+					hasWarning = true;
+				}
+			}
+			itemPtr->setText(AC_NAME, subelementId);
+			itemPtr->setData(AC_VALUE, AttributeId, QString(globalSubelementId));
+			itemPtr->setData(AC_VALUE, AttributeValue, QString(subelementId));
 			itemPtr->setData(AC_VALUE, AttributeMining, AM_EXPORTED_COMP);
 			itemPtr->setText(AC_VALUE, subExportedAliases.join(";"));
 			itemPtr->setExpanded(true);
@@ -1670,11 +1785,11 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 /*
 			Q_ASSERT(itemPtr != NULL);
 
-			const icomp::IElementStaticInfo* subcomponentInfoPtr = elementMetaInfoPtr->GetSubelementInfo(sublementId);
+			const icomp::IElementStaticInfo* subcomponentInfoPtr = elementMetaInfoPtr->GetSubelementInfo(subelementId);
 
 			bool warningFlag = false;
 			bool exportFlag = false;
-			CreateExportedComponentsTree(sublementId, globalSublementId, subcomponentInfoPtr, *itemPtr, &warningFlag, &exportFlag);
+			CreateExportedComponentsTree(subelementId, globalSubelementId, subcomponentInfoPtr, *itemPtr, &warningFlag, &exportFlag);
 			hasWarning = hasWarning || warningFlag;
 			hasExport = hasExport || exportFlag;
 */
@@ -2038,6 +2153,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && m_parent.m_consistInfoCompPtr.IsValid()){
 				// prepare queryFlags
 				int queryFlags = IRegistryConsistInfo::QF_NONE;
+
 				icomp::IElementStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
 							0,
@@ -2046,8 +2162,14 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
 					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
-				if ((staticInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
+
+				int attributeFlags = staticInfoPtr->GetAttributeFlags();
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
 					queryFlags = IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
+				}
+
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
+					queryFlags = IRegistryConsistInfo::QF_DETACHED_FROM_CONTAINER;
 				}
 
 				icomp::IRegistry::Ids compatIds = m_parent.m_consistInfoCompPtr->GetCompatibleElements(
