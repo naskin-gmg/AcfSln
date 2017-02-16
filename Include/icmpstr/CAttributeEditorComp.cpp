@@ -926,12 +926,20 @@ bool CAttributeEditorComp::SetAttributeToItem(
 
 			int meaning = AM_NONE;
 
-			if ((attributeFlags & (icomp::IAttributeStaticInfo::AF_REFERENCE | icomp::IAttributeStaticInfo::AF_FACTORY)) != 0){
+			if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
 				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_MULTIPLE) != 0){
 					meaning = AM_MULTI_REFERENCE;
 				}
 				else{
 					meaning = AM_REFERENCE;
+				}
+			}
+			else if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
+				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_MULTIPLE) != 0){
+					meaning = AM_MULTI_FACTORY;
+				}
+				else{
+					meaning = AM_FACTORY;
 				}
 			}
 			else{
@@ -1321,7 +1329,10 @@ bool CAttributeEditorComp::DecodeAttribute(
 	if (idPtr != NULL){
 		text = EncodeToEdit(idPtr->GetValue());
 
-		if (dynamic_cast<const icomp::CReferenceAttribute*>(idPtr) != NULL){
+		if (dynamic_cast<const icomp::CFactoryAttribute*>(idPtr) != NULL){
+			meaning = AM_FACTORY;
+		}
+		else if (dynamic_cast<const icomp::CReferenceAttribute*>(idPtr) != NULL){
 			meaning = AM_REFERENCE;
 		}
 		else{
@@ -1413,7 +1424,10 @@ bool CAttributeEditorComp::DecodeAttribute(
 			text += EncodeToEdit(componentId);
 		}
 
-		if (dynamic_cast<const icomp::CMultiReferenceAttribute*>(multiIdPtr) != NULL){
+		if (dynamic_cast<const icomp::CMultiFactoryAttribute*>(multiIdPtr) != NULL){
+			meaning = AM_MULTI_FACTORY;
+		}
+		else if (dynamic_cast<const icomp::CMultiReferenceAttribute*>(multiIdPtr) != NULL){
 			meaning = AM_MULTI_REFERENCE;
 		}
 		else{
@@ -1433,7 +1447,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 			iser::ISerializable& result) const
 {
 	// set single reference of factory data
-	if (attributeStatMeaning == AM_REFERENCE){
+	if ((attributeStatMeaning == AM_REFERENCE) || (attributeStatMeaning == AM_FACTORY)){
 		iattr::TAttribute<QByteArray>* referenceAttributePtr = dynamic_cast<iattr::TAttribute<QByteArray>*>(&result);
 		if (referenceAttributePtr != NULL){
 			referenceAttributePtr->SetValue(DecodeFromEdit(text).toLocal8Bit());
@@ -1442,7 +1456,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 		}
 	}
 	// set multiple reference data
-	else if (attributeStatMeaning == AM_MULTI_REFERENCE){
+	else if ((attributeStatMeaning == AM_MULTI_REFERENCE) || (attributeStatMeaning == AM_MULTI_FACTORY)){
 		QStringList references = text.split(';', QString::SkipEmptyParts);
 
 		iattr::TMultiAttribute<QByteArray>* multiReferenceAttributePtr = dynamic_cast<iattr::TMultiAttribute<QByteArray>*>(&result);
@@ -1969,13 +1983,17 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 
 	int propertyMining = index.data(AttributeMining).toInt();
 
-	if (		propertyMining == AM_MULTI_ATTRIBUTE ||
-				propertyMining == AM_MULTI_REFERENCE){
+	if (		(propertyMining == AM_MULTI_ATTRIBUTE) ||
+				(propertyMining == AM_MULTI_REFERENCE) ||
+				(propertyMining == AM_MULTI_FACTORY)){
 		QByteArray attributeId = index.data(AttributeId).toString().toLocal8Bit();
 
 		int attributeFlags = 0;
 		if (propertyMining == AM_MULTI_REFERENCE){
 			attributeFlags = icomp::IAttributeStaticInfo::AF_REFERENCE;
+		}
+		else if (propertyMining == AM_MULTI_FACTORY){
+			attributeFlags = icomp::IAttributeStaticInfo::AF_FACTORY;
 		}
 		else{
 			attributeFlags = icomp::IAttributeStaticInfo::AF_VALUE;
@@ -1990,6 +2008,7 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 	}
 
 	if (		(propertyMining == AM_REFERENCE) ||
+				(propertyMining == AM_FACTORY) ||
 				(propertyMining == AM_BOOL_ATTRIBUTE)){
 		QByteArray attributeType = index.data(AttributeTypeId).toString().toLocal8Bit();
 		QComboBox* comboEditor = new QComboBox(parentWidget);
@@ -2126,7 +2145,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			continue;
 		}
 
-		if (propertyMining == AM_MULTI_REFERENCE){
+		if ((propertyMining == AM_MULTI_REFERENCE) || (propertyMining == AM_MULTI_FACTORY)){
 			CMultiAttributeDelegateWidget* multiEditorPtr = dynamic_cast<CMultiAttributeDelegateWidget*>(&editor);
 			if (multiEditorPtr == NULL){
 				return false;
@@ -2143,7 +2162,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 		}
 
 		QComboBox* comboEditor = dynamic_cast<QComboBox*>(&editor);
-		if (propertyMining == AM_REFERENCE){
+		if ((propertyMining == AM_REFERENCE) || (propertyMining == AM_FACTORY)){
 			if (comboEditor == NULL){
 				return false;
 			}
