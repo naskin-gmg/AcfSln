@@ -149,16 +149,20 @@ void CGeneralCalibrationShape::Draw(QPainter& drawContext) const
 			levels[1] = 20;
 		}
 
+		int firstIndexX = int(qFloor(bounds.GetLeft() / grid));
+		int lastIndexX = int(qCeil(bounds.GetRight() / grid));
+		int firstIndexY = int(qFloor(bounds.GetTop() / grid));
+		int lastIndexY = int(qCeil(bounds.GetBottom() / grid));
+
+		if ((firstIndexX >= lastIndexX) || (firstIndexY >= lastIndexY)){
+			return;
+		}
+
 		drawContext.save();
 		drawContext.setBrush(colorSchema.GetBrush(iview::IColorSchema::SB_TRANSPARENT));
 		const QPen& level0Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE3);
 		const QPen& level1Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE2);
 		const QPen& level2Pen = colorSchema.GetPen(iview::IColorSchema::SP_GUIDELINE1);
-
-		int firstIndexX = int(qFloor(bounds.GetLeft() / grid));
-		int lastIndexX = int(qCeil(bounds.GetRight() / grid));
-		int firstIndexY = int(qFloor(bounds.GetTop() / grid));
-		int lastIndexY = int(qCeil(bounds.GetBottom() / grid));
 
 		istd::TArray<QPointF, 2> gridPoints;
 		gridPoints.SetSizes(istd::CIndex2d(lastIndexX - firstIndexX + 1, lastIndexY - firstIndexY + 1));
