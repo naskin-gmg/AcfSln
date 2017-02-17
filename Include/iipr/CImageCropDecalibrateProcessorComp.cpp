@@ -14,9 +14,12 @@ namespace iipr
 
 CImageCropDecalibrateProcessorComp::CImageCropDecalibrateProcessorComp()
 {
-	m_orientationOptions.InsertOption(QObject::tr("Simple"), "Simple");
-	m_orientationOptions.InsertOption(QObject::tr("Visual"), "Visual");
-	m_orientationOptions.InsertOption(QObject::tr("No Reflexion"), "NoReflexion");
+	m_orientationModes.InsertOption(QObject::tr("Simple"), "Simple");
+	m_orientationModes.InsertOption(QObject::tr("Visual"), "Visual");
+	m_orientationModes.InsertOption(QObject::tr("No Reflexion"), "NoReflexion");
+
+	m_interpolationModes.InsertOption(QObject::tr("Simple"), "Simple");
+	m_interpolationModes.InsertOption(QObject::tr("Linear"), "Linear");
 }
 
 
@@ -25,8 +28,11 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 			int cellSize,
 			const iimg::IBitmap& inputBitmap,
 			iimg::IBitmap& outputBitmap,
+			int interpolationMode,
 			int orientationMode)
 {
+	// TODO: implement interpolation mode using interpolationMode
+
 	if (cellSize < 2){
 		return false;
 	}
@@ -270,7 +276,13 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return CropImage(*aoiParamPtr, *m_cellSizeAttrPtr, *inputBitmapPtr, *outputBitmapPtr, orientationMode)? TS_OK: TS_INVALID;
+	int interpolationMode = IM_LINEAR;
+	iprm::TParamsPtr<iprm::ISelectionParam> interpolationModePtr(paramsPtr, m_interpolationModeParamIdAttrPtr, m_defaultInterpolationModeCompPtr, false);
+	if (interpolationModePtr.IsValid()){
+		interpolationMode = interpolationModePtr->GetSelectedOptionIndex();
+	}
+
+	return CropImage(*aoiParamPtr, *m_cellSizeAttrPtr, *inputBitmapPtr, *outputBitmapPtr, interpolationMode, orientationMode)? TS_OK: TS_INVALID;
 }
 
 
