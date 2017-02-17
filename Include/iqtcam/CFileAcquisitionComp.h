@@ -42,7 +42,7 @@ public:
 		I_ASSIGN(m_pathParamIdAttrPtr, "DirParamId", "Id used to get directory parameter (ifile::IFileNameParam)", true, "FileBitmapAcquisition");
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
-		I_ASSIGN(m_lastFileNameParamIdAttrPtr, "LastFileNameParamId", "Id used to get processed file name parameter (ifile::IFileNameParam)", true, "lastFileNameParamId");
+		I_ASSIGN(m_lastFileNameParamIdAttrPtr, "LastFileNameParamId", "Id used to get processed file name parameter (ifile::IFileNameParam)", true, "LastFileNameParam");
 	I_END_COMPONENT;
 
 	CFileAcquisitionComp();
