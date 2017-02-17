@@ -12,11 +12,20 @@ namespace iipr
 {
 
 
+CImageCropDecalibrateProcessorComp::CImageCropDecalibrateProcessorComp()
+{
+	m_orientationOptions.InsertOption(QObject::tr("Simple"), "Simple");
+	m_orientationOptions.InsertOption(QObject::tr("Visual"), "Visual");
+	m_orientationOptions.InsertOption(QObject::tr("No Reflexion"), "NoReflexion");
+}
+
+
 bool CImageCropDecalibrateProcessorComp::CropImage(
 			const i2d::CRectangle& sourceAoi,
 			int cellSize,
 			const iimg::IBitmap& inputBitmap,
-			iimg::IBitmap& outputBitmap)
+			iimg::IBitmap& outputBitmap,
+			int orientationMode)
 {
 	if (cellSize < 2){
 		return false;
@@ -32,6 +41,7 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 		return false;
 	}
 
+
 	istd::TArray<i2d::CVector2d, 2> cornerArray;
 	// MESF ACF-version compatibility
 	cornerArray.SetSizes(gridSize);
@@ -39,22 +49,49 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 
 	const i2d::ICalibration2d* calibrationPtr = sourceAoi.GetCalibration();
 
+	bool flipHorizontal = false;
+	bool flipVertical = false;
+	if ((orientationMode == OM_NO_REFLEXION) || (orientationMode == OM_VISUAL)){
+		if (calibrationPtr != NULL){
+			i2d::CAffine2d approxTransform;
+			if (calibrationPtr->GetLocalTransform(i2d::CVector2d::GetZero(), approxTransform)){
+				if (orientationMode == OM_VISUAL){
+					if (approxTransform.GetDeformMatrix().GetAxisX().GetX() < 0){
+						flipHorizontal = true;
+						flipVertical = true;
+					}
+				}
+
+				if (approxTransform.GetDeformMatrix().GetDet() < 0){
+					flipVertical = !flipVertical;
+				}
+			}
+		}
+	}
+
 	istd::CIndex2d gridIndex;
 	for (gridIndex[1] = 0; gridIndex[1] < gridSize[1]; ++gridIndex[1]){
-		for (gridIndex[0] = 0; gridIndex[0] < gridSize[0]; ++gridIndex[0]){
-			i2d::CVector2d cornerDestPos(
-						sourceAoi.GetLeft() + sourceAoi.GetWidth() * gridIndex.GetX() * cellSize / outputImageSize.GetX(),
-						sourceAoi.GetTop() + sourceAoi.GetHeight() * gridIndex.GetY() * cellSize / outputImageSize.GetY());
+		double propY = double(gridIndex.GetY() * cellSize) / outputImageSize.GetY();
+		if (flipVertical){
+			propY = 1 - propY;
+		}
+		double cornerDestY = sourceAoi.GetVerticalRange().GetValueFromAlpha(propY);
 
-			i2d::CVector2d originalPos;
+		for (gridIndex[0] = 0; gridIndex[0] < gridSize[0]; ++gridIndex[0]){
+			double propX = double(gridIndex.GetX() * cellSize) / outputImageSize.GetX();
+			if (flipHorizontal){
+				propX = 1 - propX;
+			}
+			double cornerDestX = sourceAoi.GetHorizontalRange().GetValueFromAlpha(propX);
 
 			if (calibrationPtr != NULL){
-				if (calibrationPtr->GetPositionAt(cornerDestPos, originalPos)){
+				i2d::CVector2d originalPos;
+				if (calibrationPtr->GetPositionAt(i2d::CVector2d(cornerDestX, cornerDestY), originalPos)){
 					cornerArray.SetAt(gridIndex, originalPos);
 				}
 			}
 			else{
-				cornerArray.SetAt(gridIndex, cornerDestPos);
+				cornerArray.SetAt(gridIndex, i2d::CVector2d(cornerDestX, cornerDestY));
 			}
 		}
 	}
@@ -139,7 +176,8 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 
 bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 			const i2d::CRectangle& sourceAoi,
-			icalib::CAffineCalibration2d& outputCalib)
+			icalib::CAffineCalibration2d& outputCalib,
+			int orientationMode)
 {
 	istd::CIndex2d outputImageSize;
 	if (!CalcOutputImageSize(sourceAoi, outputImageSize)){
@@ -148,10 +186,47 @@ bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 
 	double scaleX = outputImageSize.GetX() / sourceAoi.GetWidth();
 	double scaleY = outputImageSize.GetY() / sourceAoi.GetHeight();
-	i2d::CMatrix2d scaleMatrix(scaleX, 0, 0, scaleY);
+
+	bool flipHorizontal = false;
+	bool flipVertical = false;
+	if ((orientationMode == OM_NO_REFLEXION) || (orientationMode == OM_VISUAL)){
+		const i2d::ICalibration2d* calibrationPtr = sourceAoi.GetCalibration();
+		if (calibrationPtr != NULL){
+			i2d::CAffine2d approxTransform;
+			if (calibrationPtr->GetLocalTransform(i2d::CVector2d::GetZero(), approxTransform)){
+				if (orientationMode == OM_VISUAL){
+					if (approxTransform.GetDeformMatrix().GetAxisX().GetX() < 0){
+						flipHorizontal = true;
+						flipVertical = true;
+					}
+				}
+
+				if (approxTransform.GetDeformMatrix().GetDet() < 0){
+					flipVertical = !flipVertical;
+				}
+			}
+		}
+	}
+
+	i2d::CMatrix2d scaleMatrix(flipHorizontal? -scaleX: scaleX, 0, 0, flipVertical? -scaleY: scaleY);
 
 	i2d::CAffine2d transformation;
-	transformation.SetTranslation(-scaleMatrix.GetMultiplied(sourceAoi.GetLeftTop()));
+	if (flipHorizontal){
+		if (flipVertical){
+			transformation.SetTranslation(-scaleMatrix.GetMultiplied(sourceAoi.GetRightBottom()));
+		}
+		else{
+			transformation.SetTranslation(-scaleMatrix.GetMultiplied(sourceAoi.GetRightTop()));
+		}
+	}
+	else{
+		if (flipVertical){
+			transformation.SetTranslation(-scaleMatrix.GetMultiplied(sourceAoi.GetLeftBottom()));
+		}
+		else{
+			transformation.SetTranslation(-scaleMatrix.GetMultiplied(sourceAoi.GetLeftTop()));
+		}
+	}
 	transformation.SetDeformMatrix(scaleMatrix);
 
 	outputCalib.SetTransformation(transformation);
@@ -174,11 +249,17 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
+	int orientationMode = OM_SIMPLE;
+	iprm::TParamsPtr<iprm::ISelectionParam> orientationModePtr(paramsPtr, m_orientationModeParamIdAttrPtr, m_defaultOrientationModeCompPtr, false);
+	if (orientationModePtr.IsValid()){
+		orientationMode = orientationModePtr->GetSelectedOptionIndex();
+	}
+
 	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 	if (outputBitmapPtr == NULL){
 		icalib::CAffineCalibration2d* outputCalibPtr = dynamic_cast<icalib::CAffineCalibration2d*>(outputPtr);
 		if (outputCalibPtr != NULL){
-			return CalcCalibration(*aoiParamPtr, *outputCalibPtr)? TS_OK: TS_INVALID;
+			return CalcCalibration(*aoiParamPtr, *outputCalibPtr, orientationMode)? TS_OK: TS_INVALID;
 		}
 
 		return TS_INVALID;
@@ -189,7 +270,7 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	return CropImage(*aoiParamPtr, *m_cellSizeAttrPtr, *inputBitmapPtr, *outputBitmapPtr)? TS_OK: TS_INVALID;
+	return CropImage(*aoiParamPtr, *m_cellSizeAttrPtr, *inputBitmapPtr, *outputBitmapPtr, orientationMode)? TS_OK: TS_INVALID;
 }
 
 
