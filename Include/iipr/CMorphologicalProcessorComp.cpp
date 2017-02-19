@@ -51,7 +51,7 @@ static iipr::CConvolutionKernel2d GetCircleKernel(const istd::CIndex2d& kernelSi
 		highestBorderIndex = kernelSize[0] / 2 - 1;
 	}
 	else{
-		highestBorderIndex = (kernelSize[0]-1) / 2;
+		highestBorderIndex = (kernelSize[0] - 1) / 2;
 	}
 
 	int borderIndex = highestBorderIndex;

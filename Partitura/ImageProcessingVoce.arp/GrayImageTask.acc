@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4441" Description="ACF"/>
+            <Version Id="1" Number="1780" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
     <Keywords></Keywords>
     <ElementsList>
         <Element Id="CurrentGrayImage" PackageId="BitmapPck" ComponentId="Bitmap">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
@@ -27,7 +27,7 @@
                     <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DiagnosticName" Type="String" ExportId="DiagnosticName">
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
                         <Data IsEnabled="true" Value="Grayscale Image"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">

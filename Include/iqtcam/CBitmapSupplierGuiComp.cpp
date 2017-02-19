@@ -96,6 +96,8 @@ void CBitmapSupplierGuiComp::DoSnap(bool noGui)
 {
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
+		istd::CChangeGroup changeGroup(supplierPtr);
+
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
@@ -194,7 +196,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 	const iimg::IBitmap* bitmapPtr = NULL;
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
-	if ((supplierPtr != NULL) && (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_OK)){
+	if (supplierPtr != NULL){
 		iimg::IBitmapProvider* providerPtr = dynamic_cast<iimg::IBitmapProvider*>(supplierPtr);
 		if (providerPtr != NULL){
 			bitmapPtr = providerPtr->GetBitmap();

@@ -17,7 +17,8 @@ CInspectionTaskComp::CInspectionTaskComp()
 	m_resultCategory(IC_NONE),
 	m_resultMessages(this, ISupplier::MCT_RESULTS),
 	m_tempContainer(this, ISupplier::MCT_TEMP),
-	m_supplierResultsChangeSet(CF_SUPPLIER_RESULTS)
+	m_supplierResultsChangeSet(CF_SUPPLIER_RESULTS),
+	m_subTaskStatusObserver(this)
 {
 	// Only processing time message allowed:
 	m_resultMessages.SetMaxMessageCount(1);
@@ -193,6 +194,8 @@ void CInspectionTaskComp::EnsureWorkInitialized()
 
 void CInspectionTaskComp::EnsureWorkFinished()
 {
+	istd::CChangeNotifier changeNotifier(this, &m_supplierResultsChangeSet);
+
 	istd::CGeneralTimeStamp timer;
 
 	int inspectionsCount = m_subtasksCompPtr.GetCount();
@@ -405,7 +408,7 @@ void CInspectionTaskComp::OnComponentCreated()
 		if (taskPtr != NULL){
 			imod::IModel* taskStatusModelPtr = taskPtr->GetWorkStatusModel();
 			if (taskStatusModelPtr != NULL){
-				taskStatusModelPtr->AttachObserver(this);
+				taskStatusModelPtr->AttachObserver(&m_subTaskStatusObserver);
 			}
 
 			m_subtasks.push_back(taskPtr);
@@ -696,6 +699,26 @@ bool CInspectionTaskComp::Parameters::ResetData(CompatibilityMode mode)
 	}
 
 	return retVal;
+}
+
+
+// public methods of embedded class TaskStatusObserver
+
+CInspectionTaskComp::TaskStatusObserver::TaskStatusObserver(CInspectionTaskComp* parentPtr)
+	:m_parentPtr(parentPtr)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+void CInspectionTaskComp::TaskStatusObserver::AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet)
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	m_parentPtr->m_isStatusKnown = false;
+
+	BaseClass::AfterUpdate(modelPtr, changeSet);
 }
 
 

@@ -13,6 +13,7 @@
 #endif
 
 // ACF includes
+#include <istd/CChangeGroup.h>
 #include <imath/CVarVector.h>
 #include <i2d/CCircle.h>
 
@@ -108,6 +109,8 @@ void CScaleCalibrationEditorComp::on_CalibrateButton_clicked()
 
 	iinsp::ISupplier* supplierPtr = dynamic_cast<iinsp::ISupplier*>(m_circleProviderCompPtr.GetPtr());
 	if (supplierPtr != NULL){
+		istd::CChangeGroup changeGroup(supplierPtr);
+
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();

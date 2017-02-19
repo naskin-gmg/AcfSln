@@ -34,6 +34,8 @@ void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
+		istd::CChangeGroup changeGroup(supplierPtr);
+
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();

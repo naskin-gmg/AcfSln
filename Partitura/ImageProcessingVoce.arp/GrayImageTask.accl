@@ -2,15 +2,15 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4441" Description="ACF"/>
+            <Version Id="1" Number="1780" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
         <Element ComponentName="CurrentGrayImage" X="825" Y="325" Note=""/>
-        <Element ComponentName="RgbToGrayProcessor" X="500" Y="525" Note=""/>
         <Element ComponentName="GrayImageSupplier" X="500" Y="325" Note=""/>
+        <Element ComponentName="RgbToGrayProcessor" X="500" Y="525" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

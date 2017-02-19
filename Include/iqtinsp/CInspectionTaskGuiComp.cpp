@@ -20,6 +20,7 @@
 #endif
 
 // ACF includes
+#include <istd/CChangeGroup.h>
 #include <imod/IModel.h>
 #include <imod/IObserver.h>
 #include <iser/CCompactXmlMemReadArchive.h>
@@ -287,21 +288,19 @@ void CInspectionTaskGuiComp::UpdateModel() const
 }
 
 
-void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
+void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
 	UpdateMenu();
 
-	if (changeSet.ContainsExplicit(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
-		UpdateVisualElements();
+	UpdateVisualElements();
 
-		UpdateProcessingState();
+	UpdateProcessingState();
 
-		UpdateTaskMessages();
+	UpdateTaskMessages();
 
-		DoUpdateEditor(m_currentGuiIndex);
-	}
+	DoUpdateEditor(m_currentGuiIndex);
 
 	if (AutoTestButton->isChecked()){
 		emit DoAutoTest();
@@ -578,6 +577,8 @@ void CInspectionTaskGuiComp::OnAutoTest()
 
 	iinsp::ISupplier* supplierPtr = dynamic_cast<iinsp::ISupplier*>(GetObservedObject());
 	if (supplierPtr != NULL){
+		istd::CChangeGroup changeGroup(supplierPtr);
+
 		supplierPtr->InvalidateSupplier();
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
