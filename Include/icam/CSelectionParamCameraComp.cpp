@@ -199,6 +199,20 @@ iser::ISerializable* CSelectionParamCameraComp::JoinParamsSet::GetEditableParame
 }
 
 
+// reimplemented (iser::IObject)
+
+QByteArray CSelectionParamCameraComp::JoinParamsSet::GetFactoryId() const
+{
+	QByteArray retVal;
+
+	if (m_selectedParamsPtr != NULL){
+		retVal = m_selectedParamsPtr->GetFactoryId();
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CSelectionParamCameraComp::JoinParamsSet::Serialize(iser::IArchive& /*archive*/)

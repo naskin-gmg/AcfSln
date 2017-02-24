@@ -70,6 +70,9 @@ protected:
 		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
 		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
+		// reimplemented (iser::IObject)
+		virtual QByteArray GetFactoryId() const;
+
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
 
