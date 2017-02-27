@@ -171,9 +171,9 @@ void CNumericParamsGuiComp::OnGuiCreated()
 
 void CNumericParamsGuiComp::OnGuiDestroyed()
 {
-	m_valueWidgets.Reset();
-
 	BaseClass::OnGuiDestroyed();
+
+	m_valueWidgets.Reset();
 }
 
 
