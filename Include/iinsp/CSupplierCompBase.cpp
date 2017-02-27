@@ -41,6 +41,8 @@ imod::IModel* CSupplierCompBase::GetWorkStatusModel() const
 void CSupplierCompBase::InvalidateSupplier()
 {
 	if (m_workStatus.GetSupplierState() >= WS_OK){	
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
+
 		m_workStatus.SetSupplierState(WS_INVALID);
 	}
 }
@@ -64,7 +66,9 @@ void CSupplierCompBase::EnsureWorkInitialized()
 			supplierPtr->EnsureWorkInitialized();
 		}
 
-		istd::CChangeNotifier changeNotifier(this, &s_supplierResultsSet);
+		if (!m_productChangeNotifierPtr.IsValid()){
+			m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
+		}
 
 		if (!m_areParametersValid){
 			OnParametersChanged();
@@ -78,6 +82,8 @@ void CSupplierCompBase::EnsureWorkInitialized()
 		else{
 			m_workStatus.SetSupplierState(WS_CRITICAL);
 		}
+
+		m_productChangeNotifierPtr.Reset();
 	}
 }
 
@@ -88,13 +94,13 @@ void CSupplierCompBase::ClearWorkResults()
 		return;
 	}
 
-	istd::CChangeNotifier changeNotifier(this, &s_supplierResultsSet);
-
 	m_workStatus.SetSupplierState(WS_INVALID);
 	
 	for (int i = 0; i <= MTC_LAST; ++i){
 		m_messageContainers[i].ClearMessages();
 	}
+
+	m_productChangeNotifierPtr.Reset();
 }
 
 
@@ -202,6 +208,8 @@ void CSupplierCompBase::OnComponentCreated()
 	}
 
 	m_workStatus.SetSupplierState(WS_INVALID);
+
+	m_productChangeNotifierPtr.Reset();
 }
 
 
@@ -209,6 +217,11 @@ void CSupplierCompBase::OnComponentDestroyed()
 {
 	m_inputsObserver.EnsureModelsDetached();
 	m_paramsObserver.EnsureModelsDetached();
+
+	if (m_productChangeNotifierPtr.IsValid()){
+		m_productChangeNotifierPtr->Abort();
+		m_productChangeNotifierPtr.Reset();
+	}
 
 	m_paramsSetPtr = NULL;
 
