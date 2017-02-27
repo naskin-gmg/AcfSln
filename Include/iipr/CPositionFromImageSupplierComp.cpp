@@ -45,7 +45,12 @@ const imeas::INumericValue& CPositionFromImageSupplierComp::GetFeature(int index
 
 const i2d::ICalibration2d* CPositionFromImageSupplierComp::GetCalibration() const
 {
-	return m_outputCalibrationPtr.GetPtr();
+	const ProductType* productPtr = GetWorkProduct();
+	if (productPtr != NULL){
+		return m_outputCalibrationPtr.GetPtr();
+	}
+
+	return NULL;
 }
 
 
