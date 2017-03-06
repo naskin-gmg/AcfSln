@@ -154,13 +154,11 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	}
 
 	if (!posMap.isEmpty()){
-#if QT_VERSION >= 0x050200
-		double bestWeight = posMap.firstKey();
-#else
-		double bestWeight = posMap.keys().first();
-#endif
+		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin();
+		double bestWeight = resultIter.key();
+
 		int lineIndex = 0;
-		for (CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin(); resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
+		for (; resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
 			const i2d::CVector2d& houghPos = resultIter.value();
 			double weight = resultIter.key() / bestWeight;
 
