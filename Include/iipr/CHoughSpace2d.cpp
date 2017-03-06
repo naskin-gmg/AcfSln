@@ -293,7 +293,7 @@ void CHoughSpace2d::AnalyseHoughSpace(
 }
 
 
-bool CHoughSpace2d::ExtractToBitmap(iimg::IBitmap& bitmap)
+bool CHoughSpace2d::ExtractToBitmap(iimg::IBitmap& bitmap) const
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
 

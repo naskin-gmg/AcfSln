@@ -80,7 +80,7 @@ public:
 	/**
 		Extract this Hough space to some gray scale bitmap.
 	*/
-	bool ExtractToBitmap(iimg::IBitmap& bitmap);
+	bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
 
 	/**
 		Get position in space for some input.
