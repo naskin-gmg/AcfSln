@@ -49,13 +49,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="TaskEnabledCB">
-       <property name="text">
-        <string>Task Enabled</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QToolButton" name="AutoUpdateButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -102,6 +95,12 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
         </property>
         <property name="frameShape">
          <enum>QFrame::Box</enum>
@@ -188,7 +187,6 @@
  </widget>
  <tabstops>
   <tabstop>TestButton</tabstop>
-  <tabstop>TaskEnabledCB</tabstop>
   <tabstop>AutoUpdateButton</tabstop>
   <tabstop>ColorTable</tabstop>
  </tabstops>

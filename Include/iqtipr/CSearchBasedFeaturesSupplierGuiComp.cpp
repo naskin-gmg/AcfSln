@@ -107,7 +107,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){
-		iipr::IFeaturesProvider* providerPtr = dynamic_cast<iipr::IFeaturesProvider*>(supplierPtr);
+		iipr::IFeaturesProvider* providerPtr = CompCastPtr<iipr::IFeaturesProvider>(supplierPtr);
 		if (providerPtr != NULL){
 			int featuresCount = providerPtr->GetFeaturesCount();
 

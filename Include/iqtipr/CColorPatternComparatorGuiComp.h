@@ -25,25 +25,18 @@ public:
 	typedef iqtinsp::TSupplierGuiCompBase<Ui::CColorPatternComparatorGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CColorPatternComparatorGuiComp);
-		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");
 	I_END_COMPONENT;
 
 protected Q_SLOTS:
 	void on_TestButton_clicked();
-	void on_TaskEnabledCB_toggled(bool);
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiCreated();
-	virtual void UpdateModel() const;
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
 	virtual void OnSupplierParamsChanged();
 	virtual QWidget* GetParamsWidget() const;
-
-private:
-	I_ATTR(QByteArray, m_taskEnabledIdAttrPtr);
 };
 
 

@@ -22,37 +22,9 @@ void CColorPatternComparatorGuiComp::on_TestButton_clicked()
 }
 
 
-void CColorPatternComparatorGuiComp::on_TaskEnabledCB_toggled(bool)
-{
-	DoUpdateModel();
-}
-
-
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
-
-void CColorPatternComparatorGuiComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-
-	TaskEnabledCB->hide();
-}
-
-
-void CColorPatternComparatorGuiComp::UpdateModel() const
-{
-	const iipr::IFeaturesProvider* numericValueProviderPtr = CompCastPtr<const iipr::IFeaturesProvider>(GetObservedObject());
-	if (numericValueProviderPtr != NULL){
-		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
-		if (supplierPtr != NULL){
-			iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(supplierPtr->GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
-			if (checkEnabledPtr.IsValid()){
-				(const_cast<iprm::IEnableableParam*>(checkEnabledPtr.GetPtr()))->SetEnabled(TaskEnabledCB->isChecked());
-			}
-		}
-	}
-}
 
 
 void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
@@ -67,19 +39,6 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 	const iipr::IFeaturesProvider* numericValueProviderPtr = CompCastPtr<const iipr::IFeaturesProvider>(GetObservedObject());
 	if (numericValueProviderPtr != NULL){
-		const iinsp::ISupplier* supplierPtr = dynamic_cast<const iinsp::ISupplier*>(numericValueProviderPtr);
-		if (supplierPtr != NULL){
-			// if the task is disabled: no check in this case
-			iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(supplierPtr->GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
-			if (checkEnabledPtr.IsValid()){
-				TaskEnabledCB->show();
-				TaskEnabledCB->setChecked(checkEnabledPtr->IsEnabled());
-				if (!checkEnabledPtr->IsEnabled()){
-					return;
-				}
-			}
-		}
-
 		int valuesCount = numericValueProviderPtr->GetFeaturesCount();
 		if (valuesCount > 0){
 			const imeas::INumericValue& value = numericValueProviderPtr->GetFeature(0);
