@@ -5,6 +5,7 @@
 #include <istd/CGeneralTimeStamp.h>
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
+#include <iinsp/IEnableableSupplier.h>
 
 
 namespace iinsp
@@ -336,6 +337,11 @@ void CInspectionTaskComp::EnsureStatusKnown()
 				int workStatus = supplierPtr->GetWorkStatus();
 
 				if (workStatus < WS_OK){	// no result was calculated for this subtask
+					const iinsp::IEnableableSupplier* enableableSupplierPtr = dynamic_cast<const iinsp::IEnableableSupplier*>(supplierPtr);
+					if ((enableableSupplierPtr != NULL) && !enableableSupplierPtr->IsSupplierEnabled()){
+						continue;
+					}
+
 					m_resultCategory = IC_NONE;
 					continue;
 				}
