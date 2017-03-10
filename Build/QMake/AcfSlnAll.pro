@@ -112,7 +112,7 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 
 	SUBDIRS += BlobPck
 	BlobPck.file = ../../Impl/BlobPck/QMake/BlobPck.pro
-	BlobPck.depends = iblob
+	BlobPck.depends = iblob iblobgui
 
 	SUBDIRS += ProcessingPck
 	ProcessingPck.file = ../../Impl/ProcessingPck/QMake/ProcessingPck.pro
