@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4441" Description="ACF"/>
-            <Version Id="1" Number="1780" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4454" Description="ACF"/>
+            <Version Id="1" Number="1798" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -54,7 +54,6 @@
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces>
-        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="GrayImageSupplier"/>
         <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="GrayImageSupplier"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="GrayImageSupplier"/>
         <Interface InterfaceId="imod::IModel" ComponentId="GrayImageSupplier"/>
