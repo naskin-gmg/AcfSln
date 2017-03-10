@@ -54,8 +54,6 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 	}
 
 	if (IsDisplayConnected()){
-		i2d::CRect clientRect = GetClientRect();
-
 		iview::IViewRulersAccessor*  rulersAccessorPtr = NULL;
 		iview::IVisualCalibrationInfo* calibInfoPtr = NULL;
 		iview::IDisplay* displayPtr = GetDisplayPtr();

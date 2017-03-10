@@ -37,7 +37,7 @@ void CSimpleLensCorrectionEditorComp::UpdateGui(const istd::IChangeable::ChangeS
 {
 	Q_ASSERT(IsGuiCreated());
 
-	icalib::CSimpleLensCorrection* objectPtr = GetObservedObject();
+	const icalib::CSimpleLensCorrection* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
 		const i2d::CVector2d& opticalCenter = objectPtr->GetOpticalCenter();
 		double distortionFactor = objectPtr->GetDistortionFactor();

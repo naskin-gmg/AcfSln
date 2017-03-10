@@ -306,10 +306,10 @@ bool CImageCropDecalibrateProcessorComp::CalcOutputImageSize(
 		double topDist = 0;
 		double bottomDist = 0;
 		if (
-					calibrationPtr->GetDistance(sourceAoi.GetLeftTop(), sourceAoi.GetLeftBottom(), leftDist) &&
-					calibrationPtr->GetDistance(sourceAoi.GetRightTop(), sourceAoi.GetRightBottom(), rightDist) &&
-					calibrationPtr->GetDistance(sourceAoi.GetLeftTop(), sourceAoi.GetRightTop(), topDist) &&
-					calibrationPtr->GetDistance(sourceAoi.GetLeftBottom(), sourceAoi.GetRightBottom(), bottomDist)){
+					calibrationPtr->GetDistance(inputLeftTopPos, inputLeftBottomPos, leftDist) &&
+					calibrationPtr->GetDistance(inputRightTopPos, inputRightBottomPos, rightDist) &&
+					calibrationPtr->GetDistance(inputLeftTopPos, inputRightTopPos, topDist) &&
+					calibrationPtr->GetDistance(inputLeftBottomPos, inputRightBottomPos, bottomDist)){
 			pixelSize = 0.5 * (leftDist + rightDist + topDist + bottomDist) / (sourceAoi.GetWidth() + sourceAoi.GetHeight());
 		}
 	}
