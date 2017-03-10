@@ -57,34 +57,37 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 
 	ibase::CSize imageSize = inputBitmap.GetImageSize();
 
+	istd::CChangeNotifier resultNotifier(&outputBitmap);
+	Q_UNUSED(resultNotifier);
+
 	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 		return false;
 	}
 
 	int inputPixelComponentCount = inputBitmap.GetComponentsCount();
 
-    // the loops are optimized for efficient SIMD vectorization
-	if (inputFormat == iimg::IBitmap::PF_RGBA){       
-        for (int y = 0; y < imageSize.GetY(); ++y){
+	// the loops are optimized for efficient SIMD vectorization
+	if (inputFormat == iimg::IBitmap::PF_RGBA){
+		for (int y = 0; y < imageSize.GetY(); ++y){
 			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
 			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 
-            for (int x = 0; x < imageSize.GetX(); ++x){
+			for (int x = 0; x < imageSize.GetX(); ++x){
 				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-                outputImageLinePtr[x] = pixelPtr[3] * (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 16;
-            }
+				outputImageLinePtr[x] = pixelPtr[3] * (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 16;
+			}
 		}
 	}
 	else{
-        for (int y = 0; y < imageSize.GetY(); ++y){
+		for (int y = 0; y < imageSize.GetY(); ++y){
 			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
 			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
 
-            for (int x = 0; x < imageSize.GetX(); ++x){
+			for (int x = 0; x < imageSize.GetX(); ++x){
 				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-                outputImageLinePtr[x] = (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 8;
+				outputImageLinePtr[x] = (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 8;
 			}
 		}
 	}
