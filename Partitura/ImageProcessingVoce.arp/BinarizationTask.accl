@@ -2,15 +2,18 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4445" Description="ACF"/>
+            <Version Id="1" Number="1790" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="ImageBinarizeProcessor" X="500" Y="475" Note=""/>
-        <Element ComponentName="Bitmap" X="825" Y="325" Note=""/>
         <Element ComponentName="BinaryImageSupplier" X="500" Y="325" Note=""/>
+        <Element ComponentName="Bitmap" X="825" Y="325" Note=""/>
+        <Element ComponentName="ImageBinarizeProcessor" X="500" Y="475" Note=""/>
+        <Element ComponentName="Params" X="500" Y="125" Note=""/>
+        <Element ComponentName="Threshold" X="775" Y="125" Note=""/>
+        <Element ComponentName="ThresholdConstraints" X="1050" Y="125" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>
