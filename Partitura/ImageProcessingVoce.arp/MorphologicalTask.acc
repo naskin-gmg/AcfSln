@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>General morphological task</Description>
+    <Keywords>Morphology Filter Task</Keywords>
+    <ElementsList>
+        <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
+            <Data IsEnabled="true" Flags="2">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="NumericConstraints"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterValues">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>3</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="MorphologicalProcessor" PackageId="IprPck" ComponentId="MorphologicalProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AllowEmptyAoi" Type="Boolean" ExportId="AllowEmptyAoi">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="AoiParamId" Type="Id" ExportId="AoiParamId">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultAoi" Type="Reference" ExportId="DefaultAoi">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterFormType" Type="Integer" ExportId="FilterFormType">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterSize"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingMode" Type="Integer" ExportId="ProcessingMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProcessingModeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="ProcessingMode"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="NumericConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter Size</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Params" PackageId="BasePck" ComponentId="ComposedParamsSet">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Parameters" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParametersId" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ProcessingMode" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor/ProcessingModes"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="Task" PackageId="IprPck" ComponentId="ProcessedBitmapSupplier">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="">
+                        <Data IsEnabled="true" Value="Bitmap"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProcessor" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="BitmapProvider" Type="Reference" ExportId="BitmapProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DiagnosticName" Type="Text" ExportId="DiagnosticName">
+                        <Data IsEnabled="true" Value="Morphological Task"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSet" Type="Reference" ExportId="ParamsSet">
+                        <Data IsEnabled="true" Value="Params"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
+        <Interface InterfaceId="iinsp::ISupplier" ComponentId="Task"/>
+        <Interface InterfaceId="imod::IModel" ComponentId="Task"/>
+        <Interface InterfaceId="istd::IChangeable" ComponentId="Task"/>
+        <Interface InterfaceId="istd::IPolymorphic" ComponentId="Task"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
+    </ExportedComponents>
+</Acf>

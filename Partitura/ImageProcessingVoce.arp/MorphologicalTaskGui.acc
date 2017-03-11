@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description>UI of the morphological task</Description>
+    <Keywords>Morphology Filter Task Tag='GUI &quot;Image Processing&quot;'</Keywords>
+    <ElementsList>
+        <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="FilteredImageSceneExtender" PackageId="QtCameraPck" ComponentId="SnapBitmapSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="MultiObserverBinder" PackageId="BasePck" ComponentId="MultiObserverBinder">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="SlaveObservers" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>TaskGui</Value>
+                                <Value>FilteredImageSceneExtender</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ParamsGui" PackageId="QtGuiPck" ComponentId="ComposedParamsSetGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EditorReadOnly" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Editors" Type="Reference[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Ids" Type="Id[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>FilterSize</Value>
+                                <Value>ProcessingMode</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>Filter Size</Value>
+                                <Value>Processing Mode</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ProcessingMode" PackageId="QtGuiPck" ComponentId="SelectionParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="TaskGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="DefaultStatusIcon" Type="Text" ExportId="DefaultStatusIcon">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="ParamsLoader">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsGui"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                        <Data IsEnabled="true" Value="FilteredImageSceneExtender"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="imod::IModelEditor" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="imod::IObserver" ComponentId="MultiObserverBinder"/>
+        <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="TaskGui"/>
+        <Interface InterfaceId="iqtgui::IGuiObject" ComponentId="TaskGui"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="MorphlogicalImage" ComponentId="FilteredImageSceneExtender"/>
+        <Component ExportedId="VisualStatus" ComponentId="TaskGui/VisualStatus"/>
+    </ExportedComponents>
+</Acf>

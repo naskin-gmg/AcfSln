@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="Bitmap" X="800" Y="425" Note=""/>
+        <Element ComponentName="FilterSize" X="550" Y="175" Note=""/>
+        <Element ComponentName="MorphologicalProcessor" X="225" Y="425" Note=""/>
+        <Element ComponentName="NumericConstraints" X="550" Y="50" Note=""/>
+        <Element ComponentName="Params" X="550" Y="300" Note=""/>
+        <Element ComponentName="ProcessingMode" X="250" Y="175" Note=""/>
+        <Element ComponentName="Task" X="550" Y="425" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="FilterSize" X="775" Y="375" Note=""/>
+        <Element ComponentName="FilteredImageSceneExtender" X="200" Y="200" Note=""/>
+        <Element ComponentName="MultiObserverBinder" X="525" Y="200" Note=""/>
+        <Element ComponentName="ParamsGui" X="875" Y="225" Note=""/>
+        <Element ComponentName="ProcessingMode" X="1000" Y="375" Note=""/>
+        <Element ComponentName="TaskGui" X="525" Y="50" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>
