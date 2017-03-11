@@ -43,6 +43,7 @@ public:
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10);
 		I_ASSIGN(m_lastFileNameCompPtr, "LastFileName", "Stores last processed file name here if set", false, "LastFileName");
 		I_ASSIGN(m_lastFileNameParamIdAttrPtr, "LastFileNameParamId", "Id used to get processed file name parameter (ifile::IFileNameParam)", true, "LastFileNameParam");
+		I_ASSIGN(m_acceptedFileNamePatternAttrPtr, "AcceptedFileNamePattern", "Text pattern to be matched for file acceptance", false, "");
 	I_END_COMPONENT;
 
 	CFileAcquisitionComp();
@@ -88,6 +89,8 @@ private:
 
 	I_REF(ifile::IFileNameParam, m_lastFileNameCompPtr);
 	I_ATTR(QByteArray, m_lastFileNameParamIdAttrPtr);
+
+	I_ATTR(QString, m_acceptedFileNamePatternAttrPtr);
 };
 
 

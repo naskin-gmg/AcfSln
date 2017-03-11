@@ -80,6 +80,17 @@ int CFileAcquisitionComp::DoProcessing(
 			}
 
 			info.files = directory.entryList(nameFilters, QDir::Files | QDir::Readable);
+
+			if (m_acceptedFileNamePatternAttrPtr.IsValid() && !(*m_acceptedFileNamePatternAttrPtr).isEmpty()){
+				QMutableListIterator<QString> fileListIter(info.files);
+				while (fileListIter.hasNext()){
+					const QString& file = fileListIter.next();
+					if (!file.contains(QRegExp(*m_acceptedFileNamePatternAttrPtr))){
+						fileListIter.remove();
+					}
+				}
+			}
+
 			info.filesIter = info.files.end();
 		}
 
