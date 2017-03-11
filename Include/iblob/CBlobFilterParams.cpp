@@ -106,14 +106,17 @@ bool CBlobFilterParams::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag featureIdTag("FeatureId", "ID of filtered feature", iser::CArchiveTag::TT_LEAF, &filterTag);
 	static iser::CArchiveTag filterConditionTag("FilterCondition", "Filter condition", iser::CArchiveTag::TT_LEAF, &filterTag);
 	static iser::CArchiveTag filterOperationTag("FilterOperation", "Filter operation", iser::CArchiveTag::TT_LEAF, &filterTag);
-	static iser::CArchiveTag valueRangeTag("ValueRange", "Filter's value range", iser::CArchiveTag::TT_LEAF, &filterTag);
+	static iser::CArchiveTag valueRangeTag("ValueRange", "Filter's value range", iser::CArchiveTag::TT_GROUP, &filterTag);
 
 	bool retVal = true;
 
 	istd::CChangeNotifier notifier(archive.IsStoring() ? NULL : this);
 
+	static iser::CArchiveTag filterEnabledTag("BlobFilteringEnabled", "Blob filter enabled", iser::CArchiveTag::TT_LEAF);
+	retVal = retVal && archive.BeginTag(filterEnabledTag);
 	retVal = retVal && archive.Process(m_filtersEnabled);
-	
+	retVal = retVal && archive.EndTag(filterEnabledTag);
+
 	int filterCount = m_filters.count();
 	retVal = retVal && archive.BeginMultiTag(filtersTag, filterTag, filterCount);
 
