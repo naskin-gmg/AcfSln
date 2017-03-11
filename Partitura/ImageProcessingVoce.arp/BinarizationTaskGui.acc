@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4445" Description="ACF"/>
-            <Version Id="1" Number="1790" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4446" Description="ACF"/>
+            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -62,15 +62,6 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Threshold</Value>
-                            </Values>
-                        </Data>
-                    </AttributeInfo>
-                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
-                        <Data IsEnabled="true">
-                            <Values>
-                                <Value>Region</Value>
-                                <Value>Interpolation</Value>
-                                <Value>Extra Unrolling</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
