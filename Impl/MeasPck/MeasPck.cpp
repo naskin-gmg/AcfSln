@@ -44,7 +44,7 @@ I_EXPORT_COMPONENT(
 			"Audio WAV Loder Serializer Persistence Samples Sequence Measurement" IM_TAG("Loader") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			DataStatistics,
+			SimpleDataStatistics,
 			"Basic statistics of a numerical data",
 			"Data" IM_TAG("Statistics") IM_AUTHOR("\"Kirill Lepskiy\""));
 

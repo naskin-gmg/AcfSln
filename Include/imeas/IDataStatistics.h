@@ -15,18 +15,21 @@ namespace imeas
 	Common interace for simple data statistics.
 	\TODO: think about moving it to imath.
 */
-class IDataStatistics: virtual public iser::ISerializable
+class IDataStatistics: virtual public istd::IChangeable
 {
 public:
+	enum SupportedStatFeatures
+	{
+		SSF_BOUNDARIES = 1 << 0,
+		SSF_STD_DEVIATION = 1 << 1,
+		SSF_AVERAGE = 1 << 2,
+		SSF_MEDIAN = 1 << 3
+	};
 
 	/**
-		Create statistics object from the input data.
+		Get set of supported statistical features.
 	*/
-	virtual void CreateStatistics(
-				double average,
-				double median,
-				double standardDeviation,
-				const istd::CRange& dataBoundaries) = 0;
+	virtual int GetSupportedStatFeatures() const = 0;
 
 	/**
 		Get the range of values in the data sequence.

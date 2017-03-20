@@ -10,7 +10,6 @@
 // ACF-Solutions includes
 #include <imeas/IDataSequence.h>
 #include <imeas/IDataSequenceStatistics.h>
-#include <imeas/CDataStatistics.h>
 
 
 namespace imeas
@@ -64,7 +63,7 @@ int CHistogramStatisticsProcessorComp::CalculateDataStatistics(
 	bool retVal = true;
 	int channelsCount = dataSequence.GetChannelsCount();
 	for (int channelIndex = 0; channelIndex < channelsCount; channelIndex++){
-		imeas::CDataStatistics channelStatistics;
+		imeas::CSimpleDataStatistics channelStatistics;
 
 		retVal = retVal && CalculateChannelStatistics(dataSequence, channelIndex, channelStatistics);
 
@@ -78,7 +77,7 @@ int CHistogramStatisticsProcessorComp::CalculateDataStatistics(
 bool CHistogramStatisticsProcessorComp::CalculateChannelStatistics(
 			const imeas::IDataSequence& input,
 			int channelIndex,
-			imeas::IDataStatistics& dataStatistics) const
+			imeas::CSimpleDataStatistics& dataStatistics) const
 {
 	int channleSamplesCount = input.GetSamplesCount();
 

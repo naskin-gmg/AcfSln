@@ -8,7 +8,7 @@
 
 // ACF-Solutions includes
 #include <imeas/IDataSequenceStatistics.h>
-#include <imeas/CDataStatistics.h>
+#include <imeas/CSimpleDataStatistics.h>
 
 
 namespace imeas
@@ -28,7 +28,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	typedef imod::TModelWrap<imeas::CDataStatistics> ChannelStatistics;
+	typedef imod::TModelWrap<imeas::CSimpleDataStatistics> ChannelStatistics;
 	typedef istd::TPointerVector<ChannelStatistics> ChannelStatisticsList;
 
 	ChannelStatisticsList m_channelStatisticsList;
