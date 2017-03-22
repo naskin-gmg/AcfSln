@@ -32,7 +32,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 		icomp::IRegistry::Ids elementIds = registry.GetElementIds();
 		for (		icomp::IRegistry::Ids::const_iterator index = elementIds.begin();
 					index != elementIds.end();
-					index++){
+					++index){
 			const QByteArray& elementId = *index;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 			Q_ASSERT(elementInfoPtr != NULL);	// element ID was taken from this registry, it must exist

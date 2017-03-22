@@ -103,7 +103,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 
 	m_visualPositions.Reset();
 
-	double maxScoreRadius = 50;
+	const double maxScoreRadius = 50;
 
 	iinsp::ISupplier* supplierPtr = GetObservedObject();
 	if (supplierPtr != NULL){

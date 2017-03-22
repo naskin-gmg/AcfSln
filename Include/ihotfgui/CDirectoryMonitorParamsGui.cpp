@@ -266,7 +266,9 @@ void CDirectoryMonitorParamsGui::RemoveSelectedPatterns(QTreeWidget* treeView)
 	QList<QTreeWidgetItem*> selectedItems = treeView->selectedItems();
 
 	if (!selectedItems.isEmpty()){
-		for (QList<QTreeWidgetItem*>::iterator index = selectedItems.begin(); index != selectedItems.end(); index++){
+		for (		QList<QTreeWidgetItem*>::iterator index = selectedItems.begin();
+					index != selectedItems.end();
+					++index){
 			QTreeWidgetItem* itemPtr = treeView->takeTopLevelItem(AcceptPatternsList->indexOfTopLevelItem(*index));
 
 			if (itemPtr != NULL){

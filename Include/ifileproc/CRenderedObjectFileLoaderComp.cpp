@@ -212,7 +212,9 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	bool retVal = archive.BeginMultiTag(previewCacheTag, previewCacheElementTag, cacheSize);
 
 	if (archive.IsStoring()){
-		for (PreviewCache::const_iterator index = m_previewCache.begin(); index != m_previewCache.end(); index++){
+		for (		PreviewCache::const_iterator index = m_previewCache.begin();
+					index != m_previewCache.end();
+					++index){
 			retVal = retVal && archive.BeginTag(previewCacheElementTag);
 	
 			retVal = retVal && archive.BeginTag(filePathTag);

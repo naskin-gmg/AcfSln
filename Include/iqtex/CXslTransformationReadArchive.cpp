@@ -19,7 +19,7 @@ namespace
 class ReadArchiveMessageHandler: public QAbstractMessageHandler
 {
 public:
-	ReadArchiveMessageHandler(istd::ILogger* logger);
+	explicit ReadArchiveMessageHandler(istd::ILogger* logger);
 
 protected:
 	void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);

@@ -126,7 +126,7 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 		}
 
 		if (isStoring){
-			for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); iter++){
+			for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
 				QByteArray id = *iter;
 				CVisualRegistry* embeddedRegPtr = dynamic_cast<CVisualRegistry*> (GetEmbeddedRegistry(id));
 				if (embeddedRegPtr != NULL){

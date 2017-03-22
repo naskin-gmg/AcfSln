@@ -30,7 +30,7 @@ namespace iblob
 
 struct ClassDescriptor
 {
-	ClassDescriptor(int classIndex = -1)
+	explicit ClassDescriptor(int classIndex = -1)
 	:	m_finalClassIndex(classIndex),
 		m_area(0),
 		m_cummulatedX(0),

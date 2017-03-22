@@ -60,7 +60,7 @@ void CRegistryTreeViewComp::CreateRegistryTree(const icomp::IRegistry& registry,
 	icomp::IRegistry::Ids elementIds = registry.GetElementIds();
 	for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
 				iter != elementIds.end();
-				iter++){
+				++iter){
 		const QByteArray& elementId = *iter;
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 		if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
@@ -154,7 +154,7 @@ bool CRegistryTreeViewComp::IsRegistryValid(const icomp::IRegistry& registry) co
 	icomp::IRegistry::Ids elementIds = registry.GetElementIds();
 	for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
 				iter != elementIds.end();
-				iter++){
+				++iter){
 		const QByteArray& elementId = *iter;
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 		if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){

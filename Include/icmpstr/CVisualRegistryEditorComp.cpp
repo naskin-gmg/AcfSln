@@ -272,7 +272,7 @@ void CVisualRegistryEditorComp::AddConnectorsToScene()
 		iattr::IAttributesProvider::AttributeIds attributeIds = elementPtr->GetAttributeIds();
 		for (		iattr::IAttributesProvider::AttributeIds::const_iterator iter = attributeIds.begin();
 					iter != attributeIds.end(); 
-					iter++){
+					++iter){
 			QByteArray attributeId = *iter;
 
 			iser::IObject* attributePtr = elementPtr->GetAttribute(attributeId);
@@ -430,7 +430,7 @@ void CVisualRegistryEditorComp::ConnectReferences(const QByteArray& componentRol
 
 	icomp::IRegistry::Ids componentIds = registryPtr->GetElementIds();\
 	icomp::IRegistry::Ids::const_iterator iter;
-	for (iter = componentIds.begin(); iter != componentIds.end(); iter++){
+	for (iter = componentIds.begin(); iter != componentIds.end(); ++iter){
 
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(*iter);
 		Q_ASSERT(elementInfoPtr != NULL);
@@ -655,7 +655,7 @@ void CVisualRegistryEditorComp::UpdateScene()
 		icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
 		for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
 					iter != elementIds.end();
-					iter++){
+					++iter){
 			const QByteArray& elementId = *iter;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
@@ -944,10 +944,12 @@ void CVisualRegistryEditorComp::OnCopyCommand()
 		}
 		retVal = retVal && archive.EndTag(s_elementsListTag);
 
-		QMimeData* mimeDataPtr = new QMimeData;
-		mimeDataPtr->setText(archive.GetString());
+		if (retVal){
+			QMimeData* mimeDataPtr = new QMimeData;
+			mimeDataPtr->setText(archive.GetString());
 
-		clipboardPtr->setMimeData(mimeDataPtr);
+			clipboardPtr->setMimeData(mimeDataPtr);
+		}
 	}
 }
 
@@ -975,8 +977,6 @@ void CVisualRegistryEditorComp::OnPasteCommand()
 	iser::CCompactXmlMemReadArchive archive(mimeDataPtr->text().toLocal8Bit(), false);
 
 	int elementsCount = 0;
-
-	bool hasErrors = false;
 
 	bool retVal = archive.BeginMultiTag(s_elementsListTag, s_elementTag, elementsCount);
 	for (int i = 0; i < elementsCount; ++i){
@@ -1010,7 +1010,7 @@ void CVisualRegistryEditorComp::OnPasteCommand()
 	}
 	retVal = retVal && archive.EndTag(s_elementsListTag);
 
-	if (hasErrors){
+	if (!retVal){
 		QMessageBox::critical(GetQtWidget(), tr("Error"), tr("Some components could not be added")); 
 	}
 }

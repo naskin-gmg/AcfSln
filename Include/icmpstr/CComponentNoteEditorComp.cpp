@@ -56,7 +56,7 @@ void CComponentNoteEditorComp::UpdateGui(const istd::IChangeable::ChangeSet& /*c
 
 		for (		IElementSelectionInfo::Elements::const_iterator index = elements.begin();
 					index != elements.end();
-					index++){
+					++index){
 
 			QString noteText = componentNoteControllerPtr->GetComponentNote(index.key());
 			if (!noteText.isEmpty()){

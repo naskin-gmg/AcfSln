@@ -28,7 +28,7 @@ namespace
 class NonOverwritableQStringListModel: public QStringListModel
 {
 public:
-	NonOverwritableQStringListModel(QObject* object): QStringListModel(object)
+	explicit NonOverwritableQStringListModel(QObject* object): QStringListModel(object)
 	{
 	}
 

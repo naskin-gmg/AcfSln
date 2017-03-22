@@ -14,7 +14,7 @@ namespace iqtex
 class WriteArchiveMessageHandler: public QAbstractMessageHandler
 {
 public:
-	WriteArchiveMessageHandler(CXslTransformationWriteArchive* logger);
+	explicit WriteArchiveMessageHandler(CXslTransformationWriteArchive* logger);
 
 protected:
 	void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);

@@ -60,7 +60,9 @@ bool CMonitoringSessionsManager::Serialize(iser::IArchive& archive)
 	int sessionsCount = m_monitorSessionsMap.size();
 	retVal = retVal && archive.BeginMultiTag(monitoringSessionsTag, monitoringSessionTag, sessionsCount);
 	if (archive.IsStoring()){
-		for (MonitoringSessionsMap::iterator index = m_monitorSessionsMap.begin(); index != m_monitorSessionsMap.end(); index++){
+		for (		MonitoringSessionsMap::iterator index = m_monitorSessionsMap.begin();
+					index != m_monitorSessionsMap.end();
+					++index){
 			QString directoryPath = index.key();
 
 			retVal = retVal && archive.BeginTag(monitoringSessionTag);

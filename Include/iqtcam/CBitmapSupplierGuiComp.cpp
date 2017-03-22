@@ -203,7 +203,7 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 		}
 	}
 
-	if ((bitmapPtr == NULL) || ((bitmapPtr != NULL) && !m_bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT))){
+	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT)){
 		m_bitmap.ResetImage();
 	}
 

@@ -110,7 +110,7 @@ CUser* CUsersManagerComp::AddUser(const QString& userName)
 
 bool CUsersManagerComp::DeleteUser(const QString& userName)
 {
-	for (Users::iterator iter = m_users.begin(); iter != m_users.end(); iter++){
+	for (Users::iterator iter = m_users.begin(); iter != m_users.end(); ++iter){
 		if (iter->GetUserName() == userName){
 			istd::CChangeNotifier changePtr(this, &s_removeUserChangeSet);
 			

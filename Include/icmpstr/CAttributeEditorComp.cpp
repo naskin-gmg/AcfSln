@@ -480,8 +480,6 @@ void CAttributeEditorComp::UpdateAttributesView()
 	if (objectPtr != NULL){
 		const icomp::IRegistry* registryPtr = objectPtr->GetSelectedRegistry();
 		if (registryPtr != NULL){
-			bool isElementCorrect = true;
-
 			IElementSelectionInfo::Elements selectedElements = objectPtr->GetSelectedElements();
 			for (		IElementSelectionInfo::Elements::ConstIterator iter = selectedElements.constBegin();
 						iter != selectedElements.constEnd();
@@ -490,7 +488,7 @@ void CAttributeEditorComp::UpdateAttributesView()
 
 				// check general element consistency
 				if (m_consistInfoCompPtr.IsValid()){
-					isElementCorrect = isElementCorrect && m_consistInfoCompPtr->IsElementValid(
+					hasError = hasError || !m_consistInfoCompPtr->IsElementValid(
 								elementId,
 								*registryPtr,
 								true,

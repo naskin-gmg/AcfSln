@@ -40,9 +40,7 @@ int CProcessedAcquisitionComp::DoProcessing(
 
 	istd::CChangeNotifier outputNotifier(outputBitmapPtr);
 
-	int retVal = TS_INVALID;
-
-	retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
+	int retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
 	if (retVal == TS_OK){
 		if (m_processorCompPtr.IsValid()){
 			iimg::CGeneralBitmap bufferBitmap;
