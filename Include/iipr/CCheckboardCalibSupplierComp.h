@@ -6,6 +6,7 @@
 #include <imath/CFixedPointManip.h>
 #include <imath/CGeneralUnitInfo.h>
 #include <i2d/ICalibrationProvider.h>
+#include <i2d/CLine2d.h>
 #include <iimg/IBitmapProvider.h>
 
 // ACF-Solutions includes
