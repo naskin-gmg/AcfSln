@@ -143,6 +143,7 @@ bool CBitmapOperations::JoinBitmaps(
 		const iimg::IBitmap& inputSingleBitmap = *bitmapList.at(index);
 
 		int singleBitmapHeight = inputSingleBitmap.GetImageSize().GetY();
+		int singleBitmapWidth = inputSingleBitmap.GetImageSize().GetX();
 
 		// If there is a bitmap in the list with different pixel format, cancel the calculation and exit:
 		if (inputSingleBitmap.GetPixelFormat() != outputPixelFormat){
@@ -176,6 +177,8 @@ bool CBitmapOperations::JoinBitmaps(
 
 			memcpy(outputLinePtr, inputLinePtr, lineBytes);
 		}
+		//horizontal joining
+		offsetX += singleBitmapWidth;
 	}
 
 	return true;
