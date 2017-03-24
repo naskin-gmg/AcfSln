@@ -28,7 +28,7 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 			int cellSize,
 			const iimg::IBitmap& inputBitmap,
 			iimg::IBitmap& outputBitmap,
-			int interpolationMode,
+			int /*interpolationMode*/,
 			int orientationMode)
 {
 	// TODO: implement interpolation mode using interpolationMode
