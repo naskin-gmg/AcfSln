@@ -1,6 +1,9 @@
 #include <iqtmeas/CNumericValueWidget.h>
 
 
+// ACF includes
+#include <iqt/CSignalBlocker.h>
+
 // Qt includes
 #include <QtCore/QtMath>
 
@@ -54,6 +57,9 @@ CNumericValueWidget::CNumericValueWidget(
 
 void CNumericValueWidget::SetUnitInfo(const QString& name, const QString& description, const imath::IUnitInfo* unitInfoPtr)
 {
+	iqt::CSignalBlocker blocker1(ValueSB);
+	iqt::CSignalBlocker blocker2(ValueSlider);
+
 	DescriptionLabel->setVisible(!name.isEmpty());
 	DescriptionLabel->setText(name);
 
