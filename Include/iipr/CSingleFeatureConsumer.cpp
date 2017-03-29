@@ -42,43 +42,53 @@ void CSingleFeatureConsumer::ResetFeatures()
 bool CSingleFeatureConsumer::AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr)
 {
 	Q_ASSERT(featurePtr != NULL);
-	if (!m_featurePtr.IsValid() || m_featurePolicy == FP_LAST){
-		m_featurePtr.SetPtr(featurePtr);
-	}
-	else{
-		switch (m_featurePolicy){
-			case FP_FIRST:
-				delete featurePtr;
-				break;
 
-			case FP_HEAVIEST:
-				if (		m_featurePtr.IsValid() &&
-							featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT) && 
-							m_featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT)){
-				
-					double featureWeight = featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
-					double currentWeight = m_featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
-				
-					if (featureWeight > currentWeight){
-						m_featurePtr.SetPtr(featurePtr);
-						break;
-					}
-				}
-
-				delete featurePtr;
-				break;
-
-			default:
-				delete featurePtr;
-				break;
+	switch (m_featurePolicy){
+	case FP_FIRST:
+		if (isFullPtr != NULL){
+			*isFullPtr = true;
 		}
+
+		if (!m_featurePtr.IsValid()){
+			m_featurePtr.SetPtr(featurePtr);
+
+			return true;
+		}
+
+		break;
+
+	case FP_HEAVIEST:
+		if (!m_featurePtr.IsValid()){
+			m_featurePtr.SetPtr(featurePtr);
+
+			return true;
+		}
+		else if (	featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT) && 
+					m_featurePtr->IsValueTypeSupported(imeas::INumericValue::VTI_WEIGHT)){
+				
+			double featureWeight = featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
+			double currentWeight = m_featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT).GetElement(0);
+				
+			if (featureWeight > currentWeight){
+				m_featurePtr.SetPtr(featurePtr);
+
+				return true;
+			}
+		}
+		break;
+
+	case FP_LAST:
+		m_featurePtr.SetPtr(featurePtr);
+
+		return true;
+
+	default:
+		break;
 	}
 
-	if (isFullPtr != NULL){
-		*isFullPtr = false;
-	}
+	delete featurePtr;
 
-	return true;
+	return false;
 }
 
 
