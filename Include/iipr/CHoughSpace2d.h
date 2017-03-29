@@ -90,6 +90,16 @@ public:
 	bool GetSpacePosition(const i2d::CVector2d& position, i2d::CVector2d& result) const;
 
 	/**
+		Get distance between two hough space positions considering the space wrapping.
+	*/
+	double GetDistance(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const;
+
+	/**
+		Get square of distance between two hough space positions considering the space wrapping.
+	*/
+	double GetDistance2(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const;
+
+	/**
 		Calculate minimum of all pixels in this space.
 	*/
 	void CalcSpaceMin(const CHoughSpace2d& space);
@@ -102,6 +112,33 @@ private:
 	bool m_isWrappedX;
 	bool m_isWrappedY;
 };
+
+
+// inline methods
+
+inline double CHoughSpace2d::GetDistance(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const
+{
+	return qSqrt(GetDistance2(position1, position2));
+}
+
+
+inline double CHoughSpace2d::GetDistance2(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const
+{
+	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
+
+	i2d::CVector2d diff = position2 - position1;
+	if (m_isWrappedX){
+		double offset = spaceSize.GetX() * 0.5;
+		diff.SetX(std::fmod(diff.GetX() + offset + spaceSize.GetX(),  spaceSize.GetX()) - offset);
+	}
+
+	if (m_isWrappedY){
+		double offset = spaceSize.GetY() * 0.5;
+		diff.SetY(std::fmod(diff.GetY() + offset + spaceSize.GetY(),  spaceSize.GetY()) - offset);
+	}
+
+	return diff.GetLength2();
+}
 
 
 } // namespace iipr
