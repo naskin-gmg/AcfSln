@@ -49,18 +49,18 @@ public:
 		HOUGH_SPACE
 	};
 
-	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
-				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
-
 	// reimplemented (iipr::IImageToFeatureProcessor)
 	virtual int DoExtractFeatures(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& image,
 				IFeaturesConsumer& results,
+				ibase::IProgressManager* progressManagerPtr = NULL);
+
+	// reimplemented (iproc::IProcessor)
+	virtual int DoProcessing(
+				const iprm::IParamsSet* paramsPtr,
+				const istd::IPolymorphic* inputPtr,
+				istd::IChangeable* outputPtr,
 				ibase::IProgressManager* progressManagerPtr = NULL);
 
 protected:

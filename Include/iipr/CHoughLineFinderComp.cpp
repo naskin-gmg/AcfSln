@@ -12,30 +12,6 @@ namespace iipr
 {
 
 
-// reimplemented (iproc::IProcessor)
-
-int CHoughLineFinderComp::DoProcessing(
-			const iprm::IParamsSet* paramsPtr,
-			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr,
-			ibase::IProgressManager* progressManagerPtr)
-{
-	if (outputPtr == NULL){
-		return TS_OK;
-	}
-
-	const iimg::IBitmap* imagePtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	IFeaturesConsumer* consumerPtr = dynamic_cast<IFeaturesConsumer*>(outputPtr);
-
-	if (		(imagePtr == NULL) ||
-				(consumerPtr == NULL)){
-		return TS_INVALID;
-	}
-
-	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr, progressManagerPtr);
-}
-
-
 // reimplemented (iipr::IImageToFeatureProcessor)
 
 int CHoughLineFinderComp::DoExtractFeatures(
@@ -140,7 +116,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 	if (m_tempConsumerCompPtr.IsValid()){
 		ilog::CExtMessage* spaceMessagePtr = new ilog::CExtMessage(
-					istd::IInformationProvider::IC_INFO,
+					istd::IInformationProvider::IC_NONE,
 					HOUGH_SPACE,
 					QString("Hough space"),
 					"LineFinder");
@@ -224,6 +200,30 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	}
 
 	return TS_OK;
+}
+
+
+// reimplemented (iproc::IProcessor)
+
+int CHoughLineFinderComp::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const istd::IPolymorphic* inputPtr,
+			istd::IChangeable* outputPtr,
+			ibase::IProgressManager* progressManagerPtr)
+{
+	if (outputPtr == NULL){
+		return TS_OK;
+	}
+
+	const iimg::IBitmap* imagePtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
+	IFeaturesConsumer* consumerPtr = dynamic_cast<IFeaturesConsumer*>(outputPtr);
+
+	if (		(imagePtr == NULL) ||
+				(consumerPtr == NULL)){
+		return TS_INVALID;
+	}
+
+	return DoExtractFeatures(paramsPtr, *imagePtr, *consumerPtr, progressManagerPtr);
 }
 
 

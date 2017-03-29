@@ -255,8 +255,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			HoughLineFinder,
-			"Line finder using Hough transformation",
+			"Find line on the image using Hough transformation",
 			"Image Bitmap Line Finder Straight Hough Transformation Detection" IM_TAG("2D") IM_AUTHOR("\"Witold Gantzke\""));
+
+I_EXPORT_COMPONENT(
+			HoughLineFromPosFinder,
+			"Find lines in point cloud using Hough transformation",
+			"Features Points Cloud Line Finder Straight Hough Transformation Detection" IM_TAG("2D") IM_AUTHOR("\"Witold Gantzke\""));
 
 I_EXPORT_COMPONENT(
 			CheckboardCalibSupplier,
