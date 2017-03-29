@@ -62,7 +62,7 @@ public:
 	void SmoothHoughSpace(int iterationsX, int iterationsY = 0);
 	/**
 		Analyse this Hough space to find set of local maximums.
-		\param	maxPoints		maximal number of points to find.
+		\param	maxPoints		maximal number of points to find or negative value, if disabled.
 		\param	minWeight		minimal weight of point.
 		\param	minMaxRatio		maximal proportion between best and worse.
 		\param	minDistance		minimal distance between two found points.

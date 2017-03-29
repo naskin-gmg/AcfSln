@@ -274,10 +274,12 @@ void CHoughSpace2d::AnalyseHoughSpace(
 	}
 
 	// cut this list to user defined maximal size
-	while (result.size() > maxPoints){
-		WeightToHoughPosMap::Iterator lastIter = result.begin();
+	if (maxPoints >= 0){
+		while (result.size() > maxPoints){
+			WeightToHoughPosMap::Iterator lastIter = result.begin();
 
-		result.erase(lastIter);	// remove the weekest element
+			result.erase(lastIter);	// remove the weekest element
+		}
 	}
 }
 
