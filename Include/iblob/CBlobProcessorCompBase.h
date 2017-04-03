@@ -24,6 +24,8 @@ public:
 		I_REGISTER_SUBELEMENT(FilterFeatureList);
 		I_REGISTER_SUBELEMENT_INTERFACE(FilterFeatureList, iprm::IOptionsList, ExtractFilterFeatureList);
 		I_REGISTER_SUBELEMENT_INTERFACE(FilterFeatureList, istd::IChangeable, ExtractFilterFeatureList);
+		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
+		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_filterParamsIdAttrPtr, "FilterParamsId", "ID of blob filter parameters in the parameter set (iblob::IBlobFilterParams)", false, "FilterParams");
 		I_ASSIGN(m_defaultFilterParamsCompPtr, "DefaultFilterParams", "Default blob filter parameters", false, "DefaultFilterParams");
 	I_END_COMPONENT;
@@ -49,6 +51,7 @@ protected:
 	virtual bool CalculateBlobs(
 				const iprm::IParamsSet* paramsPtr,
 				const iblob::IBlobFilterParams* filterParamsPtr,
+				const i2d::IObject2d* aoiPtr,
 				const iimg::IBitmap& image,
 				iipr::IFeaturesConsumer& result) = 0;
 
@@ -67,6 +70,10 @@ private:
 	{
 		return &component.m_filterFeatureList;
 	}
+
+private:
+	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
+	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 
 	I_ATTR(QByteArray, m_filterParamsIdAttrPtr);
 	I_REF(iblob::IBlobFilterParams, m_defaultFilterParamsCompPtr);

@@ -30,11 +30,19 @@ bool CProcessedBitmapSupplierBase::EnsureBitmapCreated(ProductType& result) cons
 }
 
 
+iproc::IProcessor* CProcessedBitmapSupplierBase::GetImageProcessor() const
+{
+	return m_imageProcessorCompPtr.GetPtr();
+}
+
+
 // reimplemented (iinsp::TSupplierCompWrap)
 
 int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 {
-	if (!m_bitmapProviderCompPtr.IsValid() || !m_imageProcessorCompPtr.IsValid()){
+	iproc::IProcessor* imageProcessorPtr = GetImageProcessor();
+
+	if (!m_bitmapProviderCompPtr.IsValid() || (imageProcessorPtr == NULL)){
 		return WS_CRITICAL;
 	}
 
@@ -52,7 +60,7 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 
 	Timer performanceTimer(this, "Bitmap processing");
 
-	int status = m_imageProcessorCompPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.GetPtr());
+	int status = imageProcessorPtr->DoProcessing(GetModelParametersSet(), bitmapPtr, result.GetPtr());
 	switch (status){
 		case iproc::IProcessor::TS_OK:
 			return WS_OK;

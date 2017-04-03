@@ -40,6 +40,11 @@ public:
 protected:
 	bool EnsureBitmapCreated(ProductType& result) const;
 
+	/**
+		Get access to the image processor used for process the input bitmap.
+	*/
+	virtual iproc::IProcessor* GetImageProcessor() const;
+
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 

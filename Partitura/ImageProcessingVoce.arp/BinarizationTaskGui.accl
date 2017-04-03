@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4446" Description="ACF"/>
-            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4468" Description="ACF"/>
+            <Version Id="1" Number="1811" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
         <Element ComponentName="BinarizationTaskGui" X="525" Y="50" Note=""/>
-        <Element ComponentName="MultiObserverBinder" X="200" Y="200" Note=""/>
+        <Element ComponentName="MultiObserverBinder" X="150" Y="250" Note=""/>
         <Element ComponentName="ParamsGui" X="875" Y="225" Note=""/>
-        <Element ComponentName="SnapBitmapSupplierGui" X="200" Y="400" Note=""/>
+        <Element ComponentName="SnapBitmapSupplierGui" X="150" Y="50" Note=""/>
         <Element ComponentName="Threshold" X="875" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>

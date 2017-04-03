@@ -27,8 +27,6 @@ public:
 		I_REGISTER_SUBELEMENT(ThresholdContraints);
 		I_REGISTER_SUBELEMENT_INTERFACE(ThresholdContraints, imeas::INumericConstraints, ExtractThresholdContraints);
 		I_REGISTER_SUBELEMENT_INTERFACE(ThresholdContraints, istd::IChangeable, ExtractThresholdContraints);
-		I_ASSIGN(m_aoiParamIdAttrPtr, "AoiParamId", "ID of area of interest in parameter set", false, "AoiParams");
-		I_ASSIGN(m_defaultAoiCompPtr, "DefaultAoi", "Area of interest used if not specified in parameters", false, "DefaultAoi");
 		I_ASSIGN(m_thresholdParamIdAttrPtr, "ThresholdParamId", "ID of threshold value in parameter set (imeas::INumericValue)", false, "Threshold");
 		I_ASSIGN(m_defaultThresholdCompPtr, "DefaultThreshold", "Threshold used if not specified in parameters", false, "DefaultThreshold");
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
@@ -65,12 +63,11 @@ protected:
 	virtual bool CalculateBlobs(
 				const iprm::IParamsSet* paramsPtr,
 				const iblob::IBlobFilterParams* filterParamsPtr,
+				const i2d::IObject2d* aoiPtr,
 				const iimg::IBitmap& image,
 				iipr::IFeaturesConsumer& result);
 
 private:
-	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);
-	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_ATTR(QByteArray, m_thresholdParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultThresholdCompPtr);
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
