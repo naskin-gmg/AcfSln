@@ -37,7 +37,9 @@ bool DoCropImageTemplate(
 	int destLineDiff = outputBitmap.GetLinesDifference();
 
 	istd::CIndex2d inputImageSize = inputBitmap.GetImageSize();
-	i2d::CRectangle inputPosRectangle(I_BIG_EPSILON, I_BIG_EPSILON, inputImageSize.GetX() - 2 * I_BIG_EPSILON, inputImageSize.GetY() - 2 * I_BIG_EPSILON);
+	i2d::CRectangle inputPosRectangle = useLinearInterpolation?
+				i2d::CRectangle(I_BIG_EPSILON, I_BIG_EPSILON, inputImageSize.GetX() - 2 * I_BIG_EPSILON - 1, inputImageSize.GetY() - 2 * I_BIG_EPSILON - 1):
+				i2d::CRectangle(I_BIG_EPSILON, I_BIG_EPSILON, inputImageSize.GetX() - 2 * I_BIG_EPSILON, inputImageSize.GetY() - 2 * I_BIG_EPSILON);
 
 	istd::CIndex2d outputImageSize = outputBitmap.GetImageSize();
 
@@ -68,7 +70,7 @@ bool DoCropImageTemplate(
 
 				if (useLinearInterpolation){
 					for (int y = 0; y < maxY; ++y){
-						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
 						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
 						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
@@ -106,7 +108,7 @@ bool DoCropImageTemplate(
 				}
 				else{
 					for (int y = 0; y < maxY; ++y){
-						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
 						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
 						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
@@ -128,7 +130,7 @@ bool DoCropImageTemplate(
 
 				if (useLinearInterpolation){
 					for (int y = 0; y < maxY; ++y){
-						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
 						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
 						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
@@ -171,7 +173,7 @@ bool DoCropImageTemplate(
 				}
 				else{
 					for (int y = 0; y < maxY; ++y){
-						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
 						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
 						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
@@ -229,8 +231,10 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 		return false;
 	}
 
+	iimg::IBitmap::PixelFormat pixelFormat = inputBitmap.GetPixelFormat();
+
 	istd::CIndex2d gridSize((outputImageSize.GetX() + cellSize - 1) / cellSize + 1, (outputImageSize.GetY() + cellSize - 1) / cellSize + 1);
-	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, outputImageSize)){
+	if (!outputBitmap.CreateBitmap(pixelFormat, outputImageSize)){
 		return false;
 	}
 
@@ -288,8 +292,6 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 		}
 	}
 
-
-	iimg::IBitmap::PixelFormat pixelFormat = inputBitmap.GetPixelFormat();
 
 	bool retVal = false;
 
