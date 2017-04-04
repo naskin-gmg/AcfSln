@@ -6,10 +6,198 @@
 #include "iprm/IParamsSet.h"
 #include "iprm/TParamsPtr.h"
 #include "iimg/IBitmap.h"
+#include "iimg/CPixelFormatList.h"
+
+// ACF-Solutions includes
+#include "iipr/CPixelManip.h"
 
 
 namespace iipr
 {
+
+
+/**
+	Template filter funtion.
+*/
+template <	typename PixelType,
+			typename WorkingType>
+bool DoCropImageTemplate(
+			int cellSize,
+			bool useLinearInterpolation,
+			const istd::TArray<i2d::CVector2d, 2>& cornerArray,
+			const iimg::IBitmap& inputBitmap,
+			iimg::IBitmap& outputBitmap)
+{
+	Q_ASSERT(inputBitmap.GetPixelFormat() == outputBitmap.GetPixelFormat());
+
+	const PixelType* sourceBufferPtr = (const PixelType*)inputBitmap.GetLinePtr(0);
+	int sourceLineDiff = inputBitmap.GetLinesDifference();
+
+	PixelType* destBufferPtr = (PixelType*)outputBitmap.GetLinePtr(0);
+	int destLineDiff = outputBitmap.GetLinesDifference();
+
+	istd::CIndex2d inputImageSize = inputBitmap.GetImageSize();
+	i2d::CRectangle inputPosRectangle(I_BIG_EPSILON, I_BIG_EPSILON, inputImageSize.GetX() - 2 * I_BIG_EPSILON, inputImageSize.GetY() - 2 * I_BIG_EPSILON);
+
+	istd::CIndex2d outputImageSize = outputBitmap.GetImageSize();
+
+	istd::CIndex2d gridSize = cornerArray.GetSizes();
+
+	istd::CIndex2d gridIndex;
+	for (gridIndex[1] = 0; gridIndex[1] < gridSize[1] - 1; ++gridIndex[1]){
+		for (gridIndex[0] = 0; gridIndex[0] < gridSize[0] - 1; ++gridIndex[0]){
+			const i2d::CVector2d& posLeftTop = cornerArray.GetAt(gridIndex);
+			const i2d::CVector2d& posRightTop = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY()));
+			const i2d::CVector2d& posLeftBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX(), gridIndex.GetY() + 1));
+			const i2d::CVector2d& posRightBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY() + 1));
+
+			if ((posRightTop.GetX() == qInf()) || (posRightBottom.GetX() == qInf())){
+				++gridIndex[0];
+				continue;
+			}
+
+			if ((posLeftTop.GetX() == qInf()) || (posLeftBottom.GetX() == qInf())){
+				continue;
+			}
+
+			if (		inputPosRectangle.Contains(posLeftTop) &&
+						inputPosRectangle.Contains(posRightTop) &&
+						inputPosRectangle.Contains(posLeftBottom) &&
+						inputPosRectangle.Contains(posRightBottom)){
+				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
+
+				if (useLinearInterpolation){
+					for (int y = 0; y < maxY; ++y){
+						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+
+						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+
+						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						for (int x = 0; x < maxX; ++x){
+							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+
+							int sourceX = int(sourcePos.GetX());
+							double alphaX = sourcePos.GetX() - sourceX;
+							int sourceY = int(sourcePos.GetY());
+							double alphaY = sourcePos.GetY() - sourceY;
+
+							const PixelType* pixelPtr = (const PixelType*)((const quint8*)(sourceBufferPtr + sourceX) + sourceY * sourceLineDiff);
+
+							WorkingType pixel11Value = *pixelPtr;
+							WorkingType pixel12Value = *(pixelPtr + 1);
+							pixelPtr = (PixelType*)((quint8*)pixelPtr + sourceLineDiff);
+							WorkingType pixel21Value = *pixelPtr;
+							WorkingType pixel22Value = *(pixelPtr + 1);
+
+							pixel11Value *= (1 - alphaX);
+							pixel12Value *= alphaX;
+							pixel12Value += pixel11Value;
+							pixel12Value *= (1 - alphaY);
+							pixel21Value *= (1 - alphaX);
+							pixel22Value *= alphaX;
+							pixel22Value += pixel21Value;
+							pixel22Value *= alphaY;
+							pixel22Value += pixel12Value;
+
+							destLinePtr[x] = PixelType(pixel22Value);
+						}
+					}
+				}
+				else{
+					for (int y = 0; y < maxY; ++y){
+						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+
+						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+
+						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						for (int x = 0; x < maxX; ++x){
+							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+
+							int sourceX = int(sourcePos.GetX() + 0.5);
+							int sourceY = int(sourcePos.GetY() + 0.5);
+
+							destLinePtr[x] = PixelType(*(const PixelType*)((quint8*)(sourceBufferPtr + sourceX) + sourceY * sourceLineDiff));
+						}
+					}
+				}
+			}
+			else{
+				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
+
+				if (useLinearInterpolation){
+					for (int y = 0; y < maxY; ++y){
+						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+
+						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+
+						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						for (int x = 0; x < maxX; ++x){
+							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+
+							if (inputPosRectangle.Contains(sourcePos)){
+								int sourceX = int(sourcePos.GetX());
+								double alphaX = sourcePos.GetX() - sourceX;
+								int sourceY = int(sourcePos.GetY());
+								double alphaY = sourcePos.GetY() - sourceY;
+
+								const PixelType* pixelPtr = (const PixelType*)((quint8*)(sourceBufferPtr + sourceX) + sourceY * sourceLineDiff);
+
+								WorkingType pixel11Value = *pixelPtr;
+								WorkingType pixel12Value = *(pixelPtr + 1);
+								pixelPtr = (PixelType*)((quint8*)pixelPtr + sourceLineDiff);
+								WorkingType pixel21Value = *pixelPtr;
+								WorkingType pixel22Value = *(pixelPtr + 1);
+
+								pixel11Value *= (1 - alphaX);
+								pixel12Value *= alphaX;
+								pixel12Value += pixel11Value;
+								pixel12Value *= (1 - alphaY);
+								pixel21Value *= (1 - alphaX);
+								pixel22Value *= alphaX;
+								pixel22Value += pixel21Value;
+								pixel22Value *= alphaY;
+								pixel22Value += pixel12Value;
+
+								destLinePtr[x] = PixelType(pixel22Value);
+							}
+							else{
+								destLinePtr[x] = WorkingType(0);
+							}
+						}
+					}
+				}
+				else{
+					for (int y = 0; y < maxY; ++y){
+						PixelType* destLinePtr = (PixelType*)(((quint8*)destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
+
+						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+
+						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						for (int x = 0; x < maxX; ++x){
+							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+
+							if (inputPosRectangle.Contains(sourcePos)){
+								int sourceX = int(sourcePos.GetX() + 0.5);
+								int sourceY = int(sourcePos.GetY() + 0.5);
+
+								destLinePtr[x] = PixelType(*(const PixelType*)((quint8*)(sourceBufferPtr + sourceX) + sourceY * sourceLineDiff));
+							}
+							else{
+								destLinePtr[x] = WorkingType(0);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return true;
+}
 
 
 CImageCropDecalibrateProcessorComp::CImageCropDecalibrateProcessorComp()
@@ -28,11 +216,10 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 			int cellSize,
 			const iimg::IBitmap& inputBitmap,
 			iimg::IBitmap& outputBitmap,
-			int /*interpolationMode*/,
-			int orientationMode)
+			int interpolationMode,
+			int orientationMode,
+			ilog::IMessageConsumer* resultConsumerPtr)
 {
-	// TODO: implement interpolation mode using interpolationMode
-
 	if (cellSize < 2){
 		return false;
 	}
@@ -46,7 +233,6 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, outputImageSize)){
 		return false;
 	}
-
 
 	istd::TArray<i2d::CVector2d, 2> cornerArray;
 	// MESF ACF-version compatibility
@@ -102,81 +288,52 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 		}
 	}
 
-	const quint8* sourceBufferPtr = (const quint8*)inputBitmap.GetLinePtr(0);
-	int sourceLineDiff = inputBitmap.GetLinesDifference();
 
-	quint8* destBufferPtr = (quint8*)outputBitmap.GetLinePtr(0);
-	int destLineDiff = outputBitmap.GetLinesDifference();
+	iimg::IBitmap::PixelFormat pixelFormat = inputBitmap.GetPixelFormat();
 
-	istd::CIndex2d inputImageSize = inputBitmap.GetImageSize();
-	i2d::CRectangle inputPosRectangle(I_BIG_EPSILON, I_BIG_EPSILON, inputImageSize.GetX() - 2 * I_BIG_EPSILON, inputImageSize.GetY() - 2 * I_BIG_EPSILON);
+	bool retVal = false;
 
-	for (gridIndex[1] = 0; gridIndex[1] < gridSize[1] - 1; ++gridIndex[1]){
-		for (gridIndex[0] = 0; gridIndex[0] < gridSize[0] - 1; ++gridIndex[0]){
-			const i2d::CVector2d& posLeftTop = cornerArray.GetAt(gridIndex);
-			const i2d::CVector2d& posRightTop = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY()));
-			const i2d::CVector2d& posLeftBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX(), gridIndex.GetY() + 1));
-			const i2d::CVector2d& posRightBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY() + 1));
+	bool useLinearInterpolation = interpolationMode == IM_LINEAR;
 
-			if ((posRightTop.GetX() == qInf()) || (posRightBottom.GetX() == qInf())){
-				++gridIndex[0];
-				continue;
-			}
+	switch (pixelFormat){
+	case iimg::IBitmap::PF_GRAY:
+		retVal = DoCropImageTemplate<quint8, quint8>(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-			if ((posLeftTop.GetX() == qInf()) || (posLeftBottom.GetX() == qInf())){
-				continue;
-			}
+	case iimg::IBitmap::PF_RGB:
+	case iimg::IBitmap::PF_RGBA:
+		retVal = DoCropImageTemplate< iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 16, true, true> >(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-			if (		inputPosRectangle.Contains(posLeftTop) &&
-						inputPosRectangle.Contains(posRightTop) &&
-						inputPosRectangle.Contains(posLeftBottom) &&
-						inputPosRectangle.Contains(posRightBottom)){
-				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
-				for (int y = 0; y < maxY; ++y){
-					quint8* destLinePtr = destBufferPtr + gridIndex[0] * cellSize + (gridIndex[1] * cellSize + y) * destLineDiff;
+	case iimg::IBitmap::PF_GRAY16:
+		retVal = DoCropImageTemplate<quint16, quint16>(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-					i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-					i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+	case iimg::IBitmap::PF_GRAY32:
+		retVal = DoCropImageTemplate<quint32, quint32>(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-					int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
-					for (int x = 0; x < maxX; ++x){
-						i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+	case iimg::IBitmap::PF_FLOAT32:
+		retVal = DoCropImageTemplate<float, double>(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-						int sourceX = int(sourcePos.GetX());
-						int sourceY = int(sourcePos.GetY());
+	case iimg::IBitmap::PF_FLOAT64:
+		retVal = DoCropImageTemplate<double, double>(cellSize, useLinearInterpolation, cornerArray, inputBitmap, outputBitmap);
+		break;
 
-						destLinePtr[x] = sourceBufferPtr[sourceX + sourceY * sourceLineDiff];
-					}
-				}
-			}
-			else{
-				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
-				for (int y = 0; y < maxY; ++y){
-					quint8* destLinePtr = destBufferPtr + gridIndex[0] * cellSize + (gridIndex[1] * cellSize + y) * destLineDiff;
-
-					i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-					i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
-
-					int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
-					for (int x = 0; x < maxX; ++x){
-						i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
-
-						if (inputPosRectangle.Contains(sourcePos)){
-							int sourceX = int(sourcePos.GetX());
-							int sourceY = int(sourcePos.GetY());
-
-							destLinePtr[x] = sourceBufferPtr[sourceX + sourceY * sourceLineDiff];
-						}
-						else{
-							destLinePtr[x] = 0;
-						}
-					}
-				}
-			}
+	default:
+		if (resultConsumerPtr != NULL){
+			ilog::CMessage* messagePtr = new ilog::CMessage(
+						istd::IInformationProvider::IC_ERROR,
+						0,
+						QObject::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(pixelFormat)),
+						QObject::tr("ImageCropDecalibrateProcessor"));
+			resultConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(messagePtr));
 		}
+		return false;
 	}
 
-	return true;
+	return retVal;
 }
 
 
@@ -282,7 +439,14 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 		interpolationMode = interpolationModePtr->GetSelectedOptionIndex();
 	}
 
-	return CropImage(*aoiParamPtr, *m_cellSizeAttrPtr, *inputBitmapPtr, *outputBitmapPtr, interpolationMode, orientationMode)? TS_OK: TS_INVALID;
+	return CropImage(
+				*aoiParamPtr,
+				*m_cellSizeAttrPtr,
+				*inputBitmapPtr,
+				*outputBitmapPtr,
+				interpolationMode,
+				orientationMode,
+				GetLogPtr())? TS_OK: TS_INVALID;
 }
 
 
@@ -305,8 +469,7 @@ bool CImageCropDecalibrateProcessorComp::CalcOutputImageSize(
 		double rightDist = 0;
 		double topDist = 0;
 		double bottomDist = 0;
-		if (
-					calibrationPtr->GetDistance(inputLeftTopPos, inputLeftBottomPos, leftDist) &&
+		if (		calibrationPtr->GetDistance(inputLeftTopPos, inputLeftBottomPos, leftDist) &&
 					calibrationPtr->GetDistance(inputRightTopPos, inputRightBottomPos, rightDist) &&
 					calibrationPtr->GetDistance(inputLeftTopPos, inputRightTopPos, topDist) &&
 					calibrationPtr->GetDistance(inputLeftBottomPos, inputRightBottomPos, bottomDist)){

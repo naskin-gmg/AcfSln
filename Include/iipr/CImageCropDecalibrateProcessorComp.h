@@ -65,7 +65,8 @@ public:
 				const iimg::IBitmap& inputBitmap,
 				iimg::IBitmap& outputBitmap,
 				int interpolationMode = IM_LINEAR,
-				int orientationMode = OM_SIMPLE);
+				int orientationMode = OM_SIMPLE,
+				ilog::IMessageConsumer* resultConsumerPtr = NULL);
 
 	static bool CalcCalibration(
 				const i2d::CRectangle& sourceAoi,
