@@ -13,24 +13,24 @@ namespace imeas
 /**
 	Simple implementation of imeas::IDataSequenceInfo interface.
 */
-class CGeneralDataSequenceInfo : public CGeneralNumericConstraints,
-								virtual public IDataSequenceInfo
+class CGeneralDataSequenceInfo:
+			public CGeneralNumericConstraints,
+			virtual public IDataSequenceInfo
 {
 public:
-
 	typedef imeas::CGeneralNumericConstraints BaseClass;
 
-
-	CGeneralDataSequenceInfo(int defaultChannelsCount,
-									int defaultSamplesCount,
-									WeightMode mode = WeightMode::WM_NONE,
-									int sequenceFlags = 0);
+	CGeneralDataSequenceInfo(
+				int defaultChannelsCount,
+				int defaultSamplesCount,
+				WeightMode mode = WeightMode::WM_NONE,
+				int sequenceFlags = 0);
 
 	bool InsertValueInfo(const QString& name, const QString& description, const imath::CGeneralUnitInfo& unitInfo, int index = -1);
 
-	void SetSequenceInfoFlags(unsigned flags);
-	void SetDefaultSamplesCount(unsigned samplesCount);
-	void SetDefaultChannelsCount(unsigned channelsCount);
+	void SetSequenceInfoFlags(int flags);
+	void SetDefaultSamplesCount(int samplesCount);
+	void SetDefaultChannelsCount(int channelsCount);
 	void SetWeightMode(WeightMode mode);
 
 	// reimplemented (imeas::IDataSequenceInfo)
@@ -39,12 +39,10 @@ public:
 	virtual int GetDefaultChannelsCount() const;
 	virtual int GetWeightMode() const;
 
-
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-
 	WeightMode m_weightMode;
 	int m_sequenceInfoFlags;
 	int m_defaultSamplesCount;

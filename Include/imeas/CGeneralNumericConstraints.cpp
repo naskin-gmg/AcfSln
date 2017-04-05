@@ -43,6 +43,12 @@ void CGeneralNumericConstraints::RemoveValueInfo(int index)
 }
 
 
+const imath::CGeneralUnitInfo& CGeneralNumericConstraints::GetGeneralUnitInfo(int index) const
+{
+	return m_valueInfos[index].unitInfo;
+}
+
+
 // reimplemented (imeas::INumericConstraints)
 
 int CGeneralNumericConstraints::GetNumericValuesCount() const

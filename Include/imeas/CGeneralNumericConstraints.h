@@ -34,6 +34,10 @@ public:
 		Remove single value information.
 	*/
 	void RemoveValueInfo(int index);
+	/**
+		Get unit info stored alway in this structure.
+	*/
+	const imath::CGeneralUnitInfo& GetGeneralUnitInfo(int index) const;
 
 	// reimplemented (imeas::INumericConstraints)
 	virtual int GetNumericValuesCount() const;
