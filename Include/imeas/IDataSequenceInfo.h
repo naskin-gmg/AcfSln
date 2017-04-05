@@ -66,10 +66,12 @@ public:
 
 	/**
 		Get default number of samples.
+		If negative, the default number of samples is undefined.
 	*/
 	virtual int GetDefaultSamplesCount() const = 0;
 	/**
 		Get default number of channels.
+		If negative, the default number of channels is undefined.
 	*/
 	virtual int GetDefaultChannelsCount() const = 0;
 

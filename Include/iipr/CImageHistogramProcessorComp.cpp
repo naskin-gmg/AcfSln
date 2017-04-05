@@ -14,9 +14,17 @@
 #include <iimg/IBitmap.h>
 #include <iimg/CScanlineMask.h>
 
+// ACF-Solutions includes
+#include <imeas/CGeneralDataSequenceInfo.h>
+
 
 namespace iipr
 {
+
+
+// static attributes
+
+static const imath::CGeneralUnitInfo s_channelUnitInfo(imath::IUnitInfo::UT_TECHNICAL);
 
 
 // protected methods
@@ -149,10 +157,23 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 		histogramDataBufferPtr[histIndex] = quint32(normHist * normFactor + 0.5);
 	}
 
-	istd::CChangeNotifier changePtr(histogramPtr);
+	imeas::CGeneralDataSequenceInfo* sequenceInfoPtr = new imeas::CGeneralDataSequenceInfo(
+				channelNames.size(),
+				histogramSize,
+				imeas::IDataSequenceInfo::WM_NONE,
+				imeas::IDataSequenceInfo::SIF_CHANNELS_COUNT_FIXED);
+
+	for (QStringList::ConstIterator channelNameIter = channelNames.constBegin(); channelNameIter != channelNames.constEnd(); ++channelNameIter){
+		const QString& channelName = *channelNameIter;
+
+		sequenceInfoPtr->InsertValueInfo(channelName, channelName, s_channelUnitInfo);
+	}
+
+	istd::CChangeNotifier notifier(histogramPtr);
+	Q_UNUSED(notifier);
 
 	return histogramPtr->CreateDiscreteSequenceWithInfo(
-					istd::TSmartPtr<const imeas::IDataSequenceInfo>(new HistogramChannelInfo(channelNames)),
+					istd::TSmartPtr<const imeas::IDataSequenceInfo>(sequenceInfoPtr),
 					256,
 					histogramDataPtr.PopPtr(),
 					true,
@@ -160,37 +181,6 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 					0,
 					sizeof(quint32) * 8,
 					usedColorComponents);
-}
-
-
-// public methods of the embedded class HistogramChannelInfo
-
-CImageHistogramProcessorComp::HistogramChannelInfo::HistogramChannelInfo(const QStringList& channelNames)
-	:m_channelNames(channelNames)
-{
-}
-
-
-// reimplemented (imeas::INumericConstraints)
-
-int CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValuesCount() const
-{
-	return m_channelNames.count();
-}
-
-
-QString CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValueName(int index) const
-{
-	Q_ASSERT(index >= 0);
-	Q_ASSERT(index < m_channelNames.count());
-
-	return m_channelNames[index];
-}
-
-
-QString CImageHistogramProcessorComp::HistogramChannelInfo::GetNumericValueDescription(int index) const
-{
-	return GetNumericValueName(index);
 }
 
 

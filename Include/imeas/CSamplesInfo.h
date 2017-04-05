@@ -2,7 +2,7 @@
 #define imeas_CSamplesInfo_included
 
 
-#include <imeas/CDataSequenceInfoBase.h>
+#include <imeas/IDataSequenceInfo.h>
 
 
 namespace imeas
@@ -12,7 +12,7 @@ namespace imeas
 /**
 	Stores additional data sequence data used to interpret samples value correctly.
 */
-class CSamplesInfo: virtual public CDataSequenceInfoBase
+class CSamplesInfo: virtual public imeas::IDataSequenceInfo
 {
 public:
 	CSamplesInfo(const istd::CRange& logicalSamplesRange = istd::CRange::GetInvalid());
@@ -30,8 +30,16 @@ public:
 	void SetLogicalSamplesRange(const istd::CRange& range);
 
 	// reimplemented (imeas::IDataSequenceInfo)
+	virtual int GetSequenceInfoFlags() const;
 	virtual int GetDefaultSamplesCount() const;
 	virtual int GetDefaultChannelsCount() const;
+	virtual int GetWeightMode() const;
+
+	// reimplemented (imeas::INumericConstraints)
+	virtual int GetNumericValuesCount() const;
+	virtual QString GetNumericValueName(int index) const;
+	virtual QString GetNumericValueDescription(int index) const;
+	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

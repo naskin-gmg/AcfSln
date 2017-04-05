@@ -1,6 +1,9 @@
 #include <imeas/CSamplesInfo.h>
 
 
+// Qt includes
+#include <QtCore/QObject>
+
 // ACF includes
 #include <istd/CChangeNotifier.h>
 
@@ -32,6 +35,12 @@ void CSamplesInfo::SetLogicalSamplesRange(const istd::CRange& range)
 
 // reimplemented (imeas::IDataSequenceInfo)
 
+int CSamplesInfo::GetSequenceInfoFlags() const
+{
+	return 0;
+}
+
+
 int CSamplesInfo::GetDefaultSamplesCount() const
 {
 	return -1;
@@ -41,6 +50,38 @@ int CSamplesInfo::GetDefaultSamplesCount() const
 int CSamplesInfo::GetDefaultChannelsCount() const
 {
 	return 1;
+}
+
+
+int CSamplesInfo::GetWeightMode() const
+{
+	return WM_NONE;
+}
+
+
+// reimplemented (imeas::INumericConstraints)
+
+int CSamplesInfo::GetNumericValuesCount() const
+{
+	return qMax(0, GetDefaultChannelsCount());
+}
+
+
+QString CSamplesInfo::GetNumericValueName(int index) const
+{
+	return QObject::tr("Channel %1").arg(index + 1);
+}
+
+
+QString CSamplesInfo::GetNumericValueDescription(int /*index*/) const
+{
+	return QString();
+}
+
+
+const imath::IUnitInfo* CSamplesInfo::GetNumericValueUnitInfo(int /*index*/) const
+{
+	return NULL;
 }
 
 
