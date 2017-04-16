@@ -165,6 +165,20 @@ protected:
 		CInspectionTaskComp* m_parentPtr;
 	};
 
+	class Status: virtual public istd::IChangeable
+	{
+	public:
+		Status();
+
+		int GetSupplierState() const;
+		void SetSupplierState(int state);
+
+	private:
+		int m_state;
+	};
+
+	typedef imod::TModelWrap<Status> StatusModel;
+
 	I_MULTIREF(iinsp::ISupplier, m_subtasksCompPtr);
 	I_MULTIREF(imod::IModel, m_subtaskModelsCompPtr);
 	I_MULTIREF(IInspectionTask, m_subtaskInspectionCompPtr);
@@ -205,6 +219,8 @@ protected:
 	SubtaskNotifiers m_subtaskNotifiers;
 
 	TaskStatusObserver m_subTaskStatusObserver;
+
+	StatusModel m_workStatus;
 };
 
 

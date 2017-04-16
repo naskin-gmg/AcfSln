@@ -103,25 +103,13 @@ bool CInspectionTaskComp::Serialize(iser::IArchive& archive)
 
 int CInspectionTaskComp::GetWorkStatus() const
 {
-	int retVal = WS_INVALID;
-	int inspectionsCount = m_subtasksCompPtr.GetCount();
-	for (int i = 0; i < inspectionsCount; ++i){
-		const iinsp::ISupplier* supplierPtr = m_subtasksCompPtr[i];
-		if (supplierPtr != NULL){
-			int workStatus = supplierPtr->GetWorkStatus();
-			if (workStatus > retVal){
-				retVal = workStatus;
-			}
-		}
-	}
-
-	return retVal;
+	return m_workStatus.GetSupplierState();
 }
 
 
 imod::IModel* CInspectionTaskComp::GetWorkStatusModel() const
 {
-	return NULL;
+	return &(const_cast<CInspectionTaskComp*>(this))->m_workStatus;
 }
 
 
@@ -724,7 +712,45 @@ void CInspectionTaskComp::TaskStatusObserver::AfterUpdate(imod::IModel* modelPtr
 
 	m_parentPtr->m_isStatusKnown = false;
 
+	int supplierState = WS_INVALID;
+	int inspectionsCount = m_parentPtr->m_subtasksCompPtr.GetCount();
+	for (int i = 0; i < inspectionsCount; ++i){
+		const iinsp::ISupplier* supplierPtr = m_parentPtr->m_subtasksCompPtr[i];
+		if (supplierPtr != NULL){
+			int workStatus = supplierPtr->GetWorkStatus();
+			if (workStatus > supplierState){
+				supplierState = workStatus;
+			}
+		}
+	}
+
+	m_parentPtr->m_workStatus.SetSupplierState(supplierState);
+
 	BaseClass::AfterUpdate(modelPtr, changeSet);
+}
+
+
+// public methods of embedded class Status
+
+CInspectionTaskComp::Status::Status()
+	:m_state(ISupplier::WS_INVALID)
+{
+}
+
+
+int CInspectionTaskComp::Status::GetSupplierState() const
+{
+	return m_state;
+}
+
+
+void CInspectionTaskComp::Status::SetSupplierState(int state)
+{
+	if (m_state != state){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_state = state;
+	}
 }
 
 
