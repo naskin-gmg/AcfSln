@@ -79,10 +79,10 @@ private:
 	template <class InterfaceType>
 	static InterfaceType* ExtractOffsetContraints(CDifferenceBitmapSupplierComp& component)
 	{
-		return &component.m_OffsetContraints;
+		return &component.m_offsetContraints;
 	}
 
-	imeas::CGeneralNumericConstraints m_OffsetContraints;
+	imeas::CGeneralNumericConstraints m_offsetContraints;
 };
 
 

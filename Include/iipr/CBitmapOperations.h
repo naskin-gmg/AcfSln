@@ -4,6 +4,7 @@
 
 // ACF includes
 #include <istd/ILogger.h>
+#include <ilog/IMessageConsumer.h>
 
 // ACF-Solutions includes
 #include <iimg/IBitmapProvider.h>
@@ -87,6 +88,16 @@ public:
 				iimg::IBitmap& outputBitmap,
 				imath::CVarVector* weghtsPtr = NULL,
 				istd::ILogger* operationLogPtr = NULL);
+
+	/**
+		Calculate the difference of two bitmaps.
+	*/
+	static bool CaclulateBitmapDifference(
+				const iimg::IBitmap& inputBitmap1,
+				const iimg::IBitmap& inputBitmap2,
+				iimg::IBitmap& outputBitmap,
+				double offset = 0,
+				ilog::IMessageConsumer* messageConsumerPtr = NULL);
 };
 
 

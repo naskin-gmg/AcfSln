@@ -5,45 +5,11 @@
 #include <imath/CFixedPointManip.h>
 #include <iprm/TParamsPtr.h>
 #include <iimg/CPixelFormatList.h>
+#include <iipr/CBitmapOperations.h>
 
 
 namespace iipr
 {
-
-
-// template functions
-
-template <	typename FirstPixelType,
-			typename SecondPixelType,
-			typename OutputPixelType,
-			typename WorkingType>
-void CalculateDifferenceBitmap(
-			WorkingType offset,
-			const iimg::IBitmap& firstInputBitmap,
-			const iimg::IBitmap& secondInputBitmap,
-			iimg::IBitmap& result)
-{
-	istd::CIndex2d outputImageSize = result.GetImageSize();
-
-	int componentsCount = firstInputBitmap.GetComponentsCount();
-
-	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
-		for (int y = 0; y < outputImageSize.GetY(); ++y){
-			const FirstPixelType* firstLinePtr = (const FirstPixelType*)firstInputBitmap.GetLinePtr(y);
-			const SecondPixelType* secondLinePtr = (const SecondPixelType*)secondInputBitmap.GetLinePtr(y);
-			OutputPixelType* outputLinePtr = (OutputPixelType*)result.GetLinePtr(y);
-
-			for (int x = 0; x < outputImageSize.GetX(); ++x){
-				int pixelComponentIndex = x * componentsCount + componentIndex;
-
-				WorkingType firstValue = firstLinePtr[pixelComponentIndex];
-				WorkingType secondValue = secondLinePtr[pixelComponentIndex];
-
-				outputLinePtr[pixelComponentIndex] = qAbs(offset + firstValue - secondValue);
-			}
-		}
-	}
-}
 
 
 CDifferenceBitmapSupplierComp::CDifferenceBitmapSupplierComp()
@@ -52,7 +18,7 @@ CDifferenceBitmapSupplierComp::CDifferenceBitmapSupplierComp()
 
 	imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
 
-	m_OffsetContraints.InsertValueInfo(QObject::tr("Offset"), QObject::tr("Offset added to each pixel as percentage"), unitInfo);
+	m_offsetContraints.InsertValueInfo(QObject::tr("Offset"), QObject::tr("Offset added to each pixel as percentage"), unitInfo);
 }
 
 
@@ -136,15 +102,6 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 		return WS_ERROR;
 	}
 
-	Timer performanceTimer(this, "Image difference");
-
-	istd::CIndex2d firstImageSize = firstBitmapPtr->GetImageSize();
-	istd::CIndex2d secondImageSize = secondBitmapPtr->GetImageSize();
-
-	istd::CIndex2d outputImageSize = istd::CIndex2d(qMin(firstImageSize.GetX(), secondImageSize.GetX()), qMin(firstImageSize.GetY(), secondImageSize.GetY()));
-	if (result.second->CreateBitmap(pixelFormat, outputImageSize)){
-	}
-
 	double offset = 0;
 	iprm::TParamsPtr<imeas::INumericValue> thresholdValuePtr(GetModelParametersSet(), m_offsetParamIdAttrPtr, m_defaultOffsetCompPtr, false);
 	if (thresholdValuePtr.IsValid()){
@@ -154,34 +111,9 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 		}
 	}
 
-	switch (pixelFormat){
-	case iimg::IBitmap::PF_GRAY:
-		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
-		return WS_OK;
+	Timer performanceTimer(this, "Image difference");
 
-	case iimg::IBitmap::PF_GRAY16:
-		CalculateDifferenceBitmap<quint16, quint16, quint16, int>(quint16(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
-		return WS_OK;
-
-	case iimg::IBitmap::PF_GRAY32:
-		CalculateDifferenceBitmap<quint32, quint32, quint32, int>(quint16(offset * 255), *firstBitmapPtr, *secondBitmapPtr, *result.second);
-		return WS_OK;
-
-	case iimg::IBitmap::PF_FLOAT32:
-		CalculateDifferenceBitmap<float, float, float, float>(float(offset), *firstBitmapPtr, *secondBitmapPtr, *result.second);
-		return WS_OK;
-
-	case iimg::IBitmap::PF_FLOAT64:
-		CalculateDifferenceBitmap<double, double, double, double>(offset, *firstBitmapPtr, *secondBitmapPtr, *result.second);
-		return WS_OK;
-
-	default:
-		SendErrorMessage(
-					iproc::IProcessor::MI_BAD_PARAMS,
-					QObject::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(pixelFormat)),
-					QObject::tr("BitmapDifference"));
-		return WS_CRITICAL;
-	}
+	return iipr::CBitmapOperations::CaclulateBitmapDifference(*firstBitmapPtr, *secondBitmapPtr, *result.second, offset, GetLogPtr()) ? WS_OK : WS_ERROR;
 }
 
 

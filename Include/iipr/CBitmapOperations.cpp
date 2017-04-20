@@ -1,15 +1,55 @@
 #include <iipr/CBitmapOperations.h>
 
 
+// Qt includes
+#include <QtCore/QCoreApplication>
+
 // STL includes
 #include <cstring>
 
 // ACF includes
+#include <ilog/CMessage.h>
 #include <iimg/CScanlineMask.h>
+#include <iimg/CPixelFormatList.h>
 
 
 namespace iipr
 {
+
+
+// template functions
+
+template <	typename FirstPixelType,
+			typename SecondPixelType,
+			typename OutputPixelType,
+			typename WorkingType>
+void CalculateDifferenceBitmap(
+			WorkingType offset,
+			const iimg::IBitmap& firstInputBitmap,
+			const iimg::IBitmap& secondInputBitmap,
+			iimg::IBitmap& result)
+{
+	istd::CIndex2d outputImageSize = result.GetImageSize();
+
+	int componentsCount = firstInputBitmap.GetComponentsCount();
+
+	for (int componentIndex = 0; componentIndex < componentsCount; componentIndex++){
+		for (int y = 0; y < outputImageSize.GetY(); ++y){
+			const FirstPixelType* firstLinePtr = (const FirstPixelType*)firstInputBitmap.GetLinePtr(y);
+			const SecondPixelType* secondLinePtr = (const SecondPixelType*)secondInputBitmap.GetLinePtr(y);
+			OutputPixelType* outputLinePtr = (OutputPixelType*)result.GetLinePtr(y);
+
+			for (int x = 0; x < outputImageSize.GetX(); ++x){
+				int pixelComponentIndex = x * componentsCount + componentIndex;
+
+				WorkingType firstValue = firstLinePtr[pixelComponentIndex];
+				WorkingType secondValue = secondLinePtr[pixelComponentIndex];
+
+				outputLinePtr[pixelComponentIndex] = qAbs(offset + firstValue - secondValue);
+			}
+		}
+	}
+}
 
 
 // public static methods
@@ -301,6 +341,83 @@ bool CBitmapOperations::CombineBitmaps(
 	}
 
 	return true;
+}
+
+
+bool CBitmapOperations::CaclulateBitmapDifference(
+			const iimg::IBitmap& inputBitmap1,
+			const iimg::IBitmap& inputBitmap2,
+			iimg::IBitmap& outputBitmap,
+			double offset,
+			ilog::IMessageConsumer* messageConsumerPtr)
+{
+	iimg::IBitmap::PixelFormat pixelFormat = inputBitmap1.GetPixelFormat();
+
+	if (pixelFormat != inputBitmap2.GetPixelFormat()){
+		if (messageConsumerPtr != NULL){
+			messageConsumerPtr->AddMessage(
+						ilog::IMessageConsumer::MessagePtr(
+									new ilog::CMessage(
+												ilog::CMessage::IC_ERROR,
+												0,
+												QCoreApplication::tr("Format of input images differs"),
+												"Bitmap difference")));
+		}
+
+		return false;
+	}
+
+	istd::CIndex2d firstImageSize = inputBitmap1.GetImageSize();
+	istd::CIndex2d secondImageSize = inputBitmap2.GetImageSize();
+
+	istd::CIndex2d outputImageSize = istd::CIndex2d(qMin(firstImageSize.GetX(), secondImageSize.GetX()), qMin(firstImageSize.GetY(), secondImageSize.GetY()));
+	if (!outputBitmap.CreateBitmap(pixelFormat, outputImageSize)){
+		if (messageConsumerPtr != NULL){
+			messageConsumerPtr->AddMessage(
+						ilog::IMessageConsumer::MessagePtr(
+									new ilog::CMessage(
+												ilog::CMessage::IC_ERROR,
+												0,
+												QCoreApplication::tr("Output bitmap could not be created"), 
+												"Bitmap difference")));
+		}
+
+		return false;
+	}
+
+	switch (pixelFormat){
+	case iimg::IBitmap::PF_GRAY:
+		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
+
+	case iimg::IBitmap::PF_GRAY16:
+		CalculateDifferenceBitmap<quint16, quint16, quint16, int>(quint16(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
+
+	case iimg::IBitmap::PF_GRAY32:
+		CalculateDifferenceBitmap<quint32, quint32, quint32, int>(quint16(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
+
+	case iimg::IBitmap::PF_FLOAT32:
+		CalculateDifferenceBitmap<float, float, float, float>(float(offset), inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
+
+	case iimg::IBitmap::PF_FLOAT64:
+		CalculateDifferenceBitmap<double, double, double, double>(offset, inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
+
+	default:
+		if (messageConsumerPtr != NULL){
+			messageConsumerPtr->AddMessage(
+						ilog::IMessageConsumer::MessagePtr(
+									new ilog::CMessage(
+												istd::IInformationProvider::IC_ERROR,
+												0,
+												QCoreApplication::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(pixelFormat)),
+												QCoreApplication::tr("BitmapDifference"))));
+		}
+		return false;
+	}
 }
 
 
