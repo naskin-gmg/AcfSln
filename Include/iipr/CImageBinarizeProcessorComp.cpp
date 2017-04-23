@@ -74,12 +74,15 @@ bool CImageBinarizeProcessorComp::ConvertImage(
 
 	double threshold = values[0] * 255;
 
+	quint8 objectColor = *m_isInverseModeEnabledAttrPtr ? 0 : 255;
+	quint8 backgroundColor = 255 - objectColor;
+ 
 	for (int y = 0; y < imageHeight; ++y){
 		quint8* outputImageBufferPtr = (quint8*)outputBitmap.GetLinePtr(y);
 		quint8* inputImageBufferPtr = (quint8*)inputBitmap.GetLinePtr(y);
 
 		for (int x = 0; x < imageWidth; ++x){
-			*outputImageBufferPtr = *inputImageBufferPtr > threshold ? 255 : 0;
+			*outputImageBufferPtr = *inputImageBufferPtr > threshold ? objectColor : backgroundColor;
 
 			++outputImageBufferPtr, ++inputImageBufferPtr;
 		}

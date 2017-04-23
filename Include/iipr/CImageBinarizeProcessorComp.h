@@ -24,6 +24,7 @@ public:
 	
 	I_BEGIN_COMPONENT(CImageBinarizeProcessorComp);
 		I_ASSIGN(m_binarizationParamsIdAttrPtr, "BinarizationParameterId", "ID of binarization parameters in the parameter set", false, "BinarizationParameterId");
+		I_ASSIGN(m_isInverseModeEnabledAttrPtr, "InverseMode", "If enabled, object color will be set to 0", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (iproc::IProcessor)
@@ -41,6 +42,7 @@ private:
 
 private:
 	I_ATTR(QByteArray, m_binarizationParamsIdAttrPtr);
+	I_ATTR(bool, m_isInverseModeEnabledAttrPtr);
 };
 
 

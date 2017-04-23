@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4445" Description="ACF"/>
-            <Version Id="1" Number="1790" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4477" Description="ACF"/>
+            <Version Id="1" Number="1825" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -51,6 +51,9 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="InverseMode" Type="Boolean" ExportId="InverseMode">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
@@ -96,11 +99,20 @@
         <Element Id="ThresholdConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="DisplayMultFactor" Type="Real" ExportId="">
+                        <Data IsEnabled="true" Value="100"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
                         <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MinValue" Type="Real" ExportId="">
                         <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Precision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="UnitName" Type="Text" ExportId="">
+                        <Data IsEnabled="true" Value="%"/>
                     </AttributeInfo>
                     <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="3"/>
