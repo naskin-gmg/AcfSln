@@ -24,6 +24,7 @@
 #include <iview/IShape.h>
 #include <iview/IShapeFactory.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iqtgui/TRestorableGuiWrap.h>
 #include <iqt2d/IViewExtender.h>
 #include <iqt2d/IViewProvider.h>
 
@@ -61,13 +62,13 @@ protected:
 
 
 class CInspectionTaskGuiComp:
-			public TResultShapeCreatorWrap<CInspectionTaskGuiCompBase>,
+			public iqtgui::TRestorableGuiWrap<TResultShapeCreatorWrap<CInspectionTaskGuiCompBase>>,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
-	typedef TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> BaseClass;
+	typedef  iqtgui::TRestorableGuiWrap<TResultShapeCreatorWrap<CInspectionTaskGuiCompBase>> BaseClass;
 
 	enum DataRole
 	{
@@ -90,6 +91,7 @@ public:
 		I_ASSIGN_TO(m_generalParamsObserverCompPtr, m_generalParamsGuiCompPtr, false);
 		I_ASSIGN_TO(m_generalParamsEditorCompPtr, m_generalParamsGuiCompPtr, false);
 		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display on preview (if iqt2d::IViewProvider is used)", false, "ResultShapeFactory");
+		I_ASSIGN(m_settingsKeyAttrPtr, "SettingsKey", "Key for saving/restoring of the layout information in the registry", true, "Settings");
 	I_END_COMPONENT;
 
 	CInspectionTaskGuiComp();
@@ -101,6 +103,10 @@ public:
 protected:
 	void UpdateProcessingState();
 	void UpdateVisualElements();
+
+	// reimplemented (iqtgui::TRestorableGuiWrap)
+	virtual void OnRestoreSettings(const QSettings& settings);
+	virtual void OnSaveSettings(QSettings& settings) const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateModel() const;
@@ -143,6 +149,11 @@ private:
 	bool CopyTaskParametersToClipboard(iser::ISerializable* objectPtr, const char* mimeType) const;
 	bool ReadTaskParametersFromClipboard(iser::ISerializable* objectPtr, const char* mimeType);
 
+	/**
+		Create a key for saving/restoring of the layout information over settings provider.
+	*/
+	QString GetSettingsKey() const;
+
 	// static methods
 	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
 
@@ -161,6 +172,7 @@ private:
 	I_REF(imod::IObserver, m_generalParamsObserverCompPtr);
 	I_REF(imod::IModelEditor, m_generalParamsEditorCompPtr);
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
+	I_ATTR(QByteArray, m_settingsKeyAttrPtr);
 
 	int m_currentGuiIndex;
 	bool m_testStarted;
