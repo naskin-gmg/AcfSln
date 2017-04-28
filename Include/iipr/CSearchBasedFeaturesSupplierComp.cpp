@@ -19,29 +19,30 @@ namespace iipr
 CSearchBasedFeaturesSupplierComp::CSearchBasedFeaturesSupplierComp()
 	: m_defaultInformationCategory(istd::IInformationProvider::IC_NONE)
 {
-
+	m_calibrationList.SetParentPtr(this);
 }
+
 
 // reimplemented (i2d::IMultiCalibrationProvider)
 
 const iprm::IOptionsList* CSearchBasedFeaturesSupplierComp::GetCalibrationSelectionContraints() const
 {
-	return NULL;
+	return &m_calibrationList;
 }
 
 
 int CSearchBasedFeaturesSupplierComp::GetCalibrationsCount() const
 {
-	return m_calibrationList.count();
+	return m_calibrations.count();
 }
 
 
 const i2d::ICalibration2d* CSearchBasedFeaturesSupplierComp::GetCalibration(int calibrationIndex) const
 {
 	Q_ASSERT(calibrationIndex >= 0);
-	Q_ASSERT(calibrationIndex < m_calibrationList.count());
+	Q_ASSERT(calibrationIndex < m_calibrations.count());
 
-	return &m_calibrationList.at(calibrationIndex);
+	return &m_calibrations.at(calibrationIndex).calibration;
 }
 
 
@@ -149,7 +150,7 @@ bool CSearchBasedFeaturesSupplierComp::InitializeWork()
 
 int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) const
 {
-	m_calibrationList.clear();
+	m_calibrations.clear();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
 				m_searchProcessorCompPtr.IsValid()){
@@ -247,10 +248,20 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 					}
 
+					QByteArray featureId = objectFeaturePtr->GetObjectId();
+					QByteArray objectId;
 
-					QString objectId = multiSearchParamsManagerPtr->GetParamsSetName(searchIndex) + "/" + objectFeaturePtr->GetObjectId();
+					if (!featureId.isEmpty()){
+						objectId = multiSearchParamsManagerPtr->GetParamsSetName(searchIndex).toUtf8() + "/" + objectFeaturePtr->GetObjectId();
+					}
+					else{
+						const iprm::IOptionsList* paramListPtr = multiSearchParamsManagerPtr->GetSelectionConstraints();
+						if (paramListPtr != NULL){
+							objectId = paramListPtr->GetOptionId(searchIndex);
+						}
+					}
 
-					const_cast<iipr::CObjectFeature*>(objectFeaturePtr)->SetObjectId(objectId.toUtf8());
+					const_cast<iipr::CObjectFeature*>(objectFeaturePtr)->SetObjectId(objectId);
 
 					istd::IChangeable* featurePtr = objectFeaturePtr->CloneMe();
 					if (featurePtr == NULL){
@@ -328,14 +339,15 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		// Update calibration list
 		int featuresCount = result.GetFeaturesCount();
 		for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-			icalib::CAffineCalibration2d calibration;
+			CalibrationInfo calibrationInfo;
 
 			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetFeature(featureIndex));
 			Q_ASSERT(objectFeaturePtr != NULL);
 
-			calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+			calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+			calibrationInfo.calibrationId = objectFeaturePtr->GetObjectId();
 
-			m_calibrationList.push_back(calibration);
+			m_calibrations.push_back(calibrationInfo);
 		}
 
 		return WS_OK;
@@ -367,6 +379,64 @@ void CSearchBasedFeaturesSupplierComp::OnComponentDestroyed()
 	if (m_bitmapProviderModelCompPtr.IsValid()){
 		UnregisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr());
 	}
+}
+
+
+// public methods of the embedded class CalibrationList
+
+CSearchBasedFeaturesSupplierComp::CalibrationList::CalibrationList()
+	:m_parentPtr(NULL)
+{
+}
+
+
+void CSearchBasedFeaturesSupplierComp::CalibrationList::SetParentPtr(CSearchBasedFeaturesSupplierComp* parentPtr)
+{
+	m_parentPtr = parentPtr;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int CSearchBasedFeaturesSupplierComp::CalibrationList::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CSearchBasedFeaturesSupplierComp::CalibrationList::GetOptionsCount() const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	return m_parentPtr->m_calibrations.count();
+}
+
+
+QString CSearchBasedFeaturesSupplierComp::CalibrationList::GetOptionName(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	return m_parentPtr->m_calibrations[index].calibrationName;
+}
+
+
+QString CSearchBasedFeaturesSupplierComp::CalibrationList::GetOptionDescription(int /*index*/) const
+{
+	return QString();
+}
+
+
+QByteArray CSearchBasedFeaturesSupplierComp::CalibrationList::GetOptionId(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	return m_parentPtr->m_calibrations[index].calibrationId;
+}
+
+
+bool CSearchBasedFeaturesSupplierComp::CalibrationList::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

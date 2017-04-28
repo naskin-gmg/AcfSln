@@ -73,6 +73,27 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
+
+	class CalibrationList : virtual public iprm::IOptionsList
+	{
+	public:
+		CalibrationList();
+
+		void SetParentPtr(CSearchBasedFeaturesSupplierComp* parentPtr);
+
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
+
+	private:
+		CSearchBasedFeaturesSupplierComp* m_parentPtr;
+	};
+
+private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
@@ -81,9 +102,18 @@ private:
 	I_ATTR(QByteArray, m_searchParamsManagerParamIdAttrPtr);
 	I_ATTR(QByteArray, m_searchParamsIdAttrPtr);
 	
-	typedef QVector<icalib::CAffineCalibration2d> CalibrationList;
+	struct CalibrationInfo
+	{
+		icalib::CAffineCalibration2d calibration;
+		QByteArray calibrationId;
+		QString calibrationName;
+	};
+
+	typedef QVector<CalibrationInfo> Calibrations;
 	
-	mutable CalibrationList m_calibrationList;
+	mutable Calibrations m_calibrations;
+
+	imod::TModelWrap<CalibrationList> m_calibrationList;
 
 	mutable istd::IInformationProvider::InformationCategory m_defaultInformationCategory;
 };
