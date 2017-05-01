@@ -371,6 +371,23 @@ void CInspectionTaskComp::OnComponentCreated()
 	m_generalParamsCompPtr.EnsureInitialized();
 	m_generalParamsModelCompPtr.EnsureInitialized();
 
+	if (*m_isDocumentModeEnabledAttrPtr){
+		if (m_generalParamsModelCompPtr.IsValid()){
+			m_generalParamsModelCompPtr->AttachObserver(this);
+		}
+
+		int subtasksCount = m_subtasksCompPtr.GetCount();
+		for (int i = 0; i < subtasksCount; ++i){
+			const iinsp::ISupplier* subtaskPtr = m_subtasksCompPtr[i];
+			if (subtaskPtr != NULL){
+				imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(subtaskPtr->GetModelParametersSet());
+				if (modelPtr != NULL && !modelPtr->IsAttached(this)){
+					modelPtr->AttachObserver(this);
+				}
+			}
+		}
+	}
+
 	int modelsCount = m_subtaskModelsCompPtr.GetCount();
 	for (int i = 0; i < modelsCount; ++i){
 		imod::IModel* modelPtr = m_subtaskModelsCompPtr[i];
@@ -390,6 +407,11 @@ void CInspectionTaskComp::OnComponentCreated()
 					int childTasksCount = inspectionTaskPtr->GetSubtasksCount();
 					for (int childIndex = 0; childIndex < childTasksCount; ++childIndex){
 						iinsp::ISupplier* taskPtr = inspectionTaskPtr->GetSubtask(childIndex);
+
+						imod::IModel* taskStatusModelPtr = taskPtr->GetWorkStatusModel();
+						if (taskStatusModelPtr != NULL){
+							taskStatusModelPtr->AttachObserver(&m_subTaskStatusObserver);
+						}
 
 						m_subtasks.push_back(taskPtr);
 					}

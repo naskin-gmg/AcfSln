@@ -11,8 +11,6 @@
 #include <iprm/TParamsPtr.h>
 #include <iimg/CGeneralBitmap.h>
 #include <iimg/CScanlineMask.h>
-
-// ACF-Solitions includes
 #include <imeas/INumericValue.h>
 #include <iipr/CConvolutionKernel2d.h>
 #include <iipr/CBitmapOperations.h>
