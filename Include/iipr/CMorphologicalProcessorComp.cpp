@@ -142,7 +142,6 @@ static void DoCircleFilter(
 			}
 		}
 	} // componentIndex
-
 }
 
 
@@ -322,7 +321,7 @@ static void ProcessImage(
 			int kernelHeight,
 			const iimg::IBitmap& inputImage,
 			const i2d::CRect& regionRect,
-			iimg::IBitmap& outputImage)	
+			iimg::IBitmap& outputImage)
 {	
 	switch (processingMode){
 		case CMorphologicalProcessorComp::PM_EROSION:
@@ -332,7 +331,7 @@ static void ProcessImage(
 		case CMorphologicalProcessorComp::PM_DILATATION:
 			DoFilter<PixelComponentType, 0, MaxFunctor<PixelComponentType> >(kernelType, kernelWidth, kernelHeight, inputImage, regionRect, outputImage);
 			break;
-				
+
 		case CMorphologicalProcessorComp::PM_OPENING:{
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
@@ -342,8 +341,7 @@ static void ProcessImage(
 			break;
 		}
 
-		case CMorphologicalProcessorComp::PM_CLOSING:
-		{
+		case CMorphologicalProcessorComp::PM_CLOSING:{
 			iimg::CGeneralBitmap tempBitmap;
 			tempBitmap.CopyFrom(outputImage);
 
@@ -352,33 +350,87 @@ static void ProcessImage(
 			break;
 		}
 
-		case CMorphologicalProcessorComp::PM_WHITE_TOP_HAT:
-		{
+		case CMorphologicalProcessorComp::PM_WHITE_TOP_HAT:{
 			iimg::CGeneralBitmap tempBitmap;
-			ProcessImage<PixelComponentType, InitMaxValue>(CMorphologicalProcessorComp::PM_OPENING, kernelType, kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 
-			iipr::CBitmapOperations::CaclulateBitmapDifference(tempBitmap, inputImage, outputImage);
+			if (tempBitmap.CreateBitmap(
+						inputImage.GetPixelFormat(),
+						inputImage.GetImageSize(),
+						inputImage.GetPixelBitsCount(),
+						inputImage.GetComponentsCount())){
+
+				ProcessImage<PixelComponentType, InitMaxValue>(
+							CMorphologicalProcessorComp::PM_OPENING,
+							kernelType,
+							kernelWidth,
+							kernelHeight,
+							inputImage,
+							regionRect,
+							tempBitmap);
+
+				iipr::CBitmapOperations::CaclulateBitmapDifference(tempBitmap, inputImage, outputImage);
+			}
 
 			break;
 		}
 
-		case CMorphologicalProcessorComp::PM_BLACK_TOP_HAT:
-		{
+		case CMorphologicalProcessorComp::PM_BLACK_TOP_HAT:{
 			iimg::CGeneralBitmap tempBitmap;
-			ProcessImage<PixelComponentType, InitMaxValue>(CMorphologicalProcessorComp::PM_CLOSING, kernelType, kernelWidth, kernelHeight, inputImage, regionRect, tempBitmap);
 
-			iipr::CBitmapOperations::CaclulateBitmapDifference(tempBitmap, inputImage, outputImage);
+			if (tempBitmap.CreateBitmap(
+						inputImage.GetPixelFormat(),
+						inputImage.GetImageSize(),
+						inputImage.GetPixelBitsCount(),
+						inputImage.GetComponentsCount())){
+
+				ProcessImage<PixelComponentType, InitMaxValue>(
+							CMorphologicalProcessorComp::PM_CLOSING,
+							kernelType,
+							kernelWidth,
+							kernelHeight,
+							inputImage,
+							regionRect,
+							tempBitmap);
+
+				iipr::CBitmapOperations::CaclulateBitmapDifference(tempBitmap, inputImage, outputImage);
+			}
 
 			break;
 		}
 
-		case CMorphologicalProcessorComp::PM_MORPHO_GRADIENT:
-		{
+		case CMorphologicalProcessorComp::PM_MORPHO_GRADIENT:{
 			iimg::CGeneralBitmap dilatedBitmap;
 			iimg::CGeneralBitmap erodedBitmap;
 
-			ProcessImage<PixelComponentType, InitMaxValue>(CMorphologicalProcessorComp::PM_DILATATION, kernelType, kernelWidth, kernelHeight, inputImage, regionRect, dilatedBitmap);
-			ProcessImage<PixelComponentType, InitMaxValue>(CMorphologicalProcessorComp::PM_EROSION, kernelType, kernelWidth, kernelHeight, inputImage, regionRect, erodedBitmap);
+			if (dilatedBitmap.CreateBitmap(
+						inputImage.GetPixelFormat(),
+						inputImage.GetImageSize(),
+						inputImage.GetPixelBitsCount(),
+						inputImage.GetComponentsCount())){
+				ProcessImage<PixelComponentType, InitMaxValue>(
+							CMorphologicalProcessorComp::PM_DILATATION,
+							kernelType,
+							kernelWidth,
+							kernelHeight,
+							inputImage,
+							regionRect,
+							dilatedBitmap);
+			}
+
+			if (erodedBitmap.CreateBitmap(
+						inputImage.GetPixelFormat(),
+						inputImage.GetImageSize(),
+						inputImage.GetPixelBitsCount(),
+						inputImage.GetComponentsCount())){
+				ProcessImage<PixelComponentType, InitMaxValue>(
+							CMorphologicalProcessorComp::PM_EROSION,
+							kernelType,
+							kernelWidth,
+							kernelHeight,
+							inputImage,
+							regionRect,
+							erodedBitmap);
+			}
 
 			iipr::CBitmapOperations::CaclulateBitmapDifference(dilatedBitmap, erodedBitmap, outputImage);
 
