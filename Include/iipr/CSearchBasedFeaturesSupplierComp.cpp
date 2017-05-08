@@ -316,7 +316,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				if ((searchFeaturePtr != NULL) && (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled())){
 					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
 				}
-			}				
+			}
 
 			QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO)? 
 						QObject::tr("Search model was found"): 
