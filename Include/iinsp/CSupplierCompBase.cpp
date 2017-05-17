@@ -41,7 +41,7 @@ imod::IModel* CSupplierCompBase::GetWorkStatusModel() const
 void CSupplierCompBase::InvalidateSupplier()
 {
 	if (m_workStatus.GetSupplierState() >= WS_OK){	
-		m_productChangeNotifierPtr.Reset();
+		m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
 
 		m_workStatus.SetSupplierState(WS_INVALID);
 	}
