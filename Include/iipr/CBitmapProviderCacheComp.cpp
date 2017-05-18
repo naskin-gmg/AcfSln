@@ -50,6 +50,20 @@ bool CBitmapProviderCacheComp::CopyFrom(const IChangeable& object, Compatibility
 }
 
 
+bool CBitmapProviderCacheComp::ResetData(CompatibilityMode /*mode*/)
+{
+	if (m_bitmapPtr.IsValid()){
+		m_bitmapPtr->ResetImage();
+	}
+
+	if (m_transformPtr.IsValid()){
+		m_transformPtr->ResetData();
+	}
+
+	return true;
+}
+
+
 } // namespace iipr
 
 
