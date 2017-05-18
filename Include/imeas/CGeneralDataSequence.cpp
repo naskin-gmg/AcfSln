@@ -12,6 +12,8 @@
 
 // ACF-Solutions
 #include <imeas/CSamplesInfo.h>
+#include <imeas/CGeneralDataSequenceInfo.h>
+#include <imath/CGeneralUnitInfo.h>
 
 
 namespace imeas
@@ -275,6 +277,19 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object, Compatibili
 		if (nativeSequencePtr != NULL){
 			m_samples = nativeSequencePtr->m_samples;
 			m_channelsCount = nativeSequencePtr->m_channelsCount;
+
+			const imeas::IDataSequenceInfo* inputInfoPtr = sequencePtr->GetSequenceInfo();
+			if (inputInfoPtr != NULL){
+				const int infoCount = inputInfoPtr->GetNumericValuesCount();
+				imeas::CGeneralDataSequenceInfo sequenceInfo(infoCount, m_samples.size());
+
+				for (int i = 0; i < infoCount; ++i){
+					sequenceInfo.InsertValueInfo(inputInfoPtr->GetNumericValueName(i),
+						inputInfoPtr->GetNumericValueDescription(i),
+						imath::CGeneralUnitInfo());
+				}
+				m_sequenceInfoPtr.SetPtr(new CGeneralDataSequenceInfo(sequenceInfo));
+			}
 		}
 		else{
 			int samplesCount = sequencePtr->GetSamplesCount();
