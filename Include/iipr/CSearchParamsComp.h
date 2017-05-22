@@ -3,8 +3,9 @@
 
 
 // ACF includes
-#include <ilog/TLoggerCompWrap.h>
+#include <icomp/CComponentBase.h>
 
+// ACF-Solutions includes
 #include <iipr/ISearchConstraints.h>
 #include <iipr/CSearchParams.h>
 
@@ -14,11 +15,11 @@ namespace iipr
 
 
 class CSearchParamsComp: 
-			public ilog::CLoggerComponentBase,
+			public icomp::CComponentBase,
 			public CSearchParams
 {
 public:
-	typedef ilog::CLoggerComponentBase BaseClass;
+	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSearchParamsComp);
 		I_REGISTER_INTERFACE(iipr::ISearchParams);

@@ -3,6 +3,7 @@
 
 // ACF includes
 #include <imath/CFixedPointManip.h>
+#include <ilog/CMessage.h>
 #include <iprm/TParamsPtr.h>
 #include <iimg/CPixelFormatList.h>
 #include <iipr/CBitmapOperations.h>

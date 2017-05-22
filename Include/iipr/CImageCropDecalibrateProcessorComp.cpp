@@ -1,15 +1,16 @@
-#include "iipr/CImageCropDecalibrateProcessorComp.h"
+#include <iipr/CImageCropDecalibrateProcessorComp.h>
 
 
 // ACF includes
-#include "istd/TArray.h"
-#include "iprm/IParamsSet.h"
-#include "iprm/TParamsPtr.h"
-#include "iimg/IBitmap.h"
-#include "iimg/CPixelFormatList.h"
+#include <istd/TArray.h>
+#include <ilog/CMessage.h>
+#include <iprm/IParamsSet.h>
+#include <iprm/TParamsPtr.h>
+#include <iimg/IBitmap.h>
+#include <iimg/CPixelFormatList.h>
 
 // ACF-Solutions includes
-#include "iipr/CPixelManip.h"
+#include <iipr/CPixelManip.h>
 
 
 namespace iipr

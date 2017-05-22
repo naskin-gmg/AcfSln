@@ -5,6 +5,7 @@
 #include <istd/CGeneralTimeStamp.h>
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
+#include <ilog/CMessage.h>
 #include <iinsp/IEnableableSupplier.h>
 
 

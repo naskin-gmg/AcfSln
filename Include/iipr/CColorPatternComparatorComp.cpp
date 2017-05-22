@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include <ilog/CMessage.h>
 #include <i2d/CDirection2d.h>
 #include <iprm/IEnableableParam.h>
 #include <iprm/TParamsPtr.h>

@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4439" Description="ACF"/>
-            <Version Id="1" Number="1777" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4493" Description="ACF"/>
+            <Version Id="1" Number="1836" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -11,7 +11,7 @@
     <Keywords>Task Image Acquisition Camera</Keywords>
     <ElementsList>
         <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
