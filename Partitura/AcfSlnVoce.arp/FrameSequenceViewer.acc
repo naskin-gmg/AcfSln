@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4490" Description="ACF"/>
+            <Version Id="1" Number="1832" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Video player displaying image sequence form some directory</Description>
@@ -58,6 +58,9 @@
         <Element Id="VideoViewGui" PackageId="AcfSlnVoce" ComponentId="FrameSeqVideoViewGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="ColorSchema" Type="Reference" ExportId="ColorSchema">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="FitMode" Type="Integer" ExportId="FitMode">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
