@@ -225,7 +225,7 @@
                                 <Value>*.ico</Value>
                                 <Value>*.bmp</Value>
                                 <Value>*.icns</Value>
-                                <Value>*.ass</Value>
+                                <Value>*.qss</Value>
                                 <Value>*.rc</Value>
                                 <Value>*.aps</Value>
                                 <Value>*.svg</Value>
@@ -388,7 +388,7 @@
                                 <Value>*.ico</Value>
                                 <Value>*.bmp</Value>
                                 <Value>*.icns</Value>
-                                <Value>*.ass</Value>
+                                <Value>*.qss</Value>
                                 <Value>*.rc</Value>
                                 <Value>*.aps</Value>
                                 <Value>*.svg</Value>
