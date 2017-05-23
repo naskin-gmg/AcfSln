@@ -25,12 +25,16 @@ public:
 	typedef QMultiMap<double, i2d::CVector2d> WeightToHoughPosMap;
 
 	CHoughSpace2d();
-	CHoughSpace2d(const istd::CIndex2d& size, double isWrappedX = false, double isWrappedY = false);
+	CHoughSpace2d(const istd::CIndex2d& size, bool isWrappedX = false, bool isWrappedY = false);
 
 	/**
 		Create Hough space with specified size.
 	*/
-	bool CreateHoughSpace(const istd::CIndex2d& size, double isWrappedX = false, double isWrappedY = false);
+	bool CreateHoughSpace(
+				const istd::CIndex2d& size,
+				bool isWrappedX = false,
+				bool isWrappedY = false,
+				bool isFloatSpace = false);
 
 	/**
 		Check if this space is wrapped horizontaly, it means the the left pixel is neighbour of the right one.
@@ -107,6 +111,10 @@ public:
 		Calculate maximum of all pixels in this space.
 	*/
 	void CalcSpaceMax(const CHoughSpace2d& space);
+
+	// reimplemented (iimg::CGeneralBitmap)
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0);
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);
 
 private:
 	bool m_isWrappedX;
