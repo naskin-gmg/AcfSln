@@ -10,7 +10,7 @@ namespace isig
 
 
 /**
-	Interface for AVT camera parameters.
+	Interface for the signal trigger contstraints.
 */
 class ITriggerConstraints: virtual public istd::IPolymorphic
 {

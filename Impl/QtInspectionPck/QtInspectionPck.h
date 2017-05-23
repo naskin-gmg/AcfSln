@@ -8,10 +8,11 @@
 
 #include <iqtinsp/CInspectionTaskGuiComp.h>
 #include <iqtinsp/CGeneralSupplierGuiComp.h>
+#include <iqtinsp/CMessageBasedViewExtenderComp.h>
 
 
 /**
-	Standard Qt package.
+	Package contains UI-related components for inspection framework
 */
 namespace QtInspectionPck
 {
@@ -19,6 +20,7 @@ namespace QtInspectionPck
 
 typedef iqtinsp::CInspectionTaskGuiComp InspectionTaskGui;
 typedef iqtinsp::CGeneralSupplierGuiComp GeneralSupplierGui;
+typedef iqtinsp::CMessageBasedViewExtenderComp MessageBasedViewExtender;
 
 
 } // namespace QtInspectionPck

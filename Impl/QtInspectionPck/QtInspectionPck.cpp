@@ -27,6 +27,11 @@ I_EXPORT_COMPONENT(
 			"General GUI for supplier (usable as subtask GUI)",
 			"Task Supplier Observer Subtask" IM_TAG("Inspection GUI Editor"));
 
+I_EXPORT_COMPONENT(
+			MessageBasedViewExtender,
+			"Message-based view extender",
+			"Task Supplier Inspection Result View Shape Message" IM_TAG("Inspection GUI"));
+
 
 } // namespace QtInspectionPck
 

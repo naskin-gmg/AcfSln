@@ -39,12 +39,15 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_triggerConstraintsCompPtr, "Constraints", "Describing allowed parameter state, typically implemented in camera component", false, "Constraints");
 		I_ASSIGN(m_triggerModeAttrPtr, "TriggerMode", "Set trigger mode:\n\t0 - None\n\t1 - Continuous\n\t2 - Rising edge\n\t3 - Falling edge\n\t4 - Positive level\n\t5 - Negative level\n\t6 - Software", true, 0);
+		I_ASSIGN(m_triggersCountAttrPtr, "TriggersCount", "Set number of triggers executed in the continuous mode", true, -1);
 	I_END_COMPONENT;
 
 	// reimplemented (isig::ITriggerParams)
 	virtual const ITriggerConstraints* GetTriggerConstraints() const;
 	virtual int GetTriggerMode() const;
 	virtual void SetTriggerMode(int triggerMode);
+	virtual int GetTriggersCount() const;
+	virtual void SetTriggersCount(int triggersCount);
 
 	// reimplemented (iprm::ISelectionParam)
 	virtual const iprm::IOptionsList* GetSelectionConstraints() const;
@@ -72,6 +75,8 @@ protected:
 private:
 	int m_triggerMode;
 
+	int m_triggersCount;
+
 	struct SelectionEntry
 	{
 		QString name;
@@ -83,6 +88,7 @@ private:
 
 	I_REF(isig::ITriggerConstraints, m_triggerConstraintsCompPtr);
 	I_ATTR(int, m_triggerModeAttrPtr);
+	I_ATTR(int, m_triggersCountAttrPtr);
 };
 
 

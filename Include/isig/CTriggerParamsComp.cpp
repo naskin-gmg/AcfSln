@@ -12,7 +12,8 @@ namespace isig
 
 
 CTriggerParamsComp::CTriggerParamsComp()
-:	m_triggerMode(TM_NONE)
+:	m_triggerMode(TM_NONE),
+	m_triggersCount(-1)
 {
 }
 
@@ -39,6 +40,23 @@ void CTriggerParamsComp::SetTriggerMode(int triggerMode)
 		m_triggerMode = triggerMode;
 	}
 }
+
+
+int CTriggerParamsComp::GetTriggersCount() const
+{
+	return m_triggersCount;
+}
+
+
+void CTriggerParamsComp::SetTriggersCount(int triggersCount)
+{
+	if (m_triggersCount != triggersCount){
+		istd::CChangeNotifier changePtr(this);
+
+		m_triggersCount = triggersCount;
+	}
+}
+
 
 
 // reimplemented (iprm::ISelectionParam)
@@ -88,16 +106,20 @@ iprm::ISelectionParam* CTriggerParamsComp::GetSubselection(int /*index*/) const
 
 bool CTriggerParamsComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag bottomTag("TriggerMode", "Trigger mode", iser::CArchiveTag::TT_LEAF);
-
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
 	Q_UNUSED(notifier);
 
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(bottomTag);
+	static iser::CArchiveTag triggerModeTag("TriggerMode", "Trigger mode", iser::CArchiveTag::TT_LEAF);
+	retVal = retVal && archive.BeginTag(triggerModeTag);
 	retVal = retVal && archive.Process(m_triggerMode);
-	retVal = retVal && archive.EndTag(bottomTag);
+	retVal = retVal && archive.EndTag(triggerModeTag);
+
+	static iser::CArchiveTag triggersCountTag("TriggersCount", "Number of triggers in the continuos mode", iser::CArchiveTag::TT_LEAF);
+	retVal = retVal && archive.BeginTag(triggersCountTag);
+	retVal = retVal && archive.Process(m_triggersCount);
+	retVal = retVal && archive.EndTag(triggersCountTag);
 
 	return retVal;
 }
@@ -193,6 +215,8 @@ void CTriggerParamsComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	m_triggerMode = *m_triggerModeAttrPtr;
+
+	m_triggersCount = *m_triggersCountAttrPtr;
 
 	InitializeSelectionList();
 }

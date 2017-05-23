@@ -29,30 +29,38 @@ public:
 			There is no trigger, no signal acquisition will be done.
 		*/
 		TM_NONE,
+
 		/**
 			There is no external trigger, permanently signal acquisition will be done.
+			The number of triggers can be restricted via SetTriggersCount method
 		*/
 		TM_CONTINUOUS,
+
 		/**
 			There external trigger with rising edge.
 		*/
 		TM_RISING_EDGE,
+
 		/**
 			There external trigger with falling edge.
 		*/
 		TM_FALLING_EDGE,
+
 		/**
 			There external trigger with positive edge control.
 		*/
 		TM_POSITIVE_LEVEL,
+
 		/**
 			There external trigger with negative edge control.
 		*/
 		TM_NEGATIVE_LEVEL,
+
 		/**
 			Software trigger mode.
 		*/
 		TM_SOFTWARE,
+
 		/**
 			Last available trigger mode index.
 		*/
@@ -75,6 +83,18 @@ public:
 		Normal trigger modes are defined in \c isig::ITriggerParams::TriggerMode.
 	*/
 	virtual void SetTriggerMode(int triggerMode) = 0;
+
+	/**
+		Get the number of triggers in the \c TM_CONTINUOUS mode. A negative value means that the signal acquisition runs infinitely 
+		\sa TriggerMode
+	*/
+	virtual int GetTriggersCount() const = 0;
+
+	/**
+		Set the number of triggers in the \c TM_CONTINUOUS mode.
+		\sa TriggerMode
+	*/
+	virtual void SetTriggersCount(int triggersCount) = 0;
 };
 
 
