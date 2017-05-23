@@ -163,6 +163,9 @@ protected:
 protected:
 	StatusModel m_workStatus;
 
+	typedef imod::TModelWrap<ilog::CMessageContainer> MessageContainer;
+	mutable MessageContainer m_messageContainers[MTC_LAST + 1];
+
 private:
 	class InputsObserver: public imod::CMultiModelObserverBase
 	{
@@ -216,10 +219,6 @@ private:
 
 	typedef QMap<imod::IModel*, ISupplier*> InputSuppliersMap;
 	InputSuppliersMap m_inputSuppliersMap;
-
-	typedef imod::TModelWrap<ilog::CMessageContainer> MessageContainer;
-	typedef QMap<int, MessageContainer> MessageContainerMap;
-	mutable MessageContainer m_messageContainers[MTC_LAST + 1];
 
 	iprm::IParamsSet* m_paramsSetPtr;
 
