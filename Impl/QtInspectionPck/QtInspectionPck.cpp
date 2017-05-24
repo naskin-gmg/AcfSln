@@ -32,6 +32,11 @@ I_EXPORT_COMPONENT(
 			"Message-based view extender",
 			"Task Supplier Inspection Result View Shape Message" IM_TAG("Inspection GUI"));
 
+I_EXPORT_COMPONENT(
+			TeachableParamsDecoratorGui,
+			"Parameter set editor decorator providing teach button",
+			"Parameter Set Gui Editor Decorator Frame Container Teach Train Learn Tought Model Data" IM_TAG("GUI Editor Parameter"));
+
 
 } // namespace QtInspectionPck
 

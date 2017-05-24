@@ -9,6 +9,7 @@
 #include <iqtinsp/CInspectionTaskGuiComp.h>
 #include <iqtinsp/CGeneralSupplierGuiComp.h>
 #include <iqtinsp/CMessageBasedViewExtenderComp.h>
+#include <iqtinsp/CTeachableParamsDecoratorGuiComp.h>
 
 
 /**
@@ -21,6 +22,7 @@ namespace QtInspectionPck
 typedef iqtinsp::CInspectionTaskGuiComp InspectionTaskGui;
 typedef iqtinsp::CGeneralSupplierGuiComp GeneralSupplierGui;
 typedef iqtinsp::CMessageBasedViewExtenderComp MessageBasedViewExtender;
+typedef iqtinsp::CTeachableParamsDecoratorGuiComp TeachableParamsDecoratorGui;
 
 
 } // namespace QtInspectionPck
