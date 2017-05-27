@@ -40,6 +40,9 @@ bool CImageCropProcessorComp::DoImageCrop(
 	int regionTop = qMax(regionRect.GetTop(), 0);
 	int regionBottom = qMin(regionRect.GetBottom(), inputBitmapSize.GetY());
 
+	istd::CChangeNotifier bitmapNotifier(&outputBitmap);
+	Q_UNUSED(bitmapNotifier);
+
 	if ((regionRight <= regionLeft) || (regionBottom <= regionTop)){
 		outputBitmap.ResetImage();
 
