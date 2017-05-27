@@ -56,9 +56,9 @@ ACFSLNDIRBUILD = $$(ACFSLNDIR_BUILD)
 	INCLUDEPATH += $$(ACFSLNDIR_BUILD)/$$AUXINCLUDEDIR
 }
 
-include(../../../../Acf/Config/QMake/AcfQt.pri)
-include(../../../../Acf/Config/QMake/AcfStd.pri)
-include(../../../../Acf/Config/QMake/CustomBuild.pri)
+include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
+include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
 
 # For iOS build generates qmake a XCode project without applying of enivronment variables.
 # This causes build problems in case of shadow build. Following solution is a workaround for this problem.

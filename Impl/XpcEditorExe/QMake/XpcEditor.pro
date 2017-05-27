@@ -50,9 +50,9 @@ ACFSLNDIRBUILD = $$(ACFSLNDIR_BUILD)
 	INCLUDEPATH += $$(ACFSLNDIR_BUILD)/$$AUXINCLUDEDIR
 }
 
-include(../../../../Acf/Config/QMake/CustomBuild.pri)
-include(../../../../Acf/Config/QMake/AcfQt.pri)
-include(../../../../Acf/Config/QMake/AcfStd.pri)
+include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
+include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
+include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
 
 
 # For iOS build generates qmake a XCode project without applying of enivronment variables.
