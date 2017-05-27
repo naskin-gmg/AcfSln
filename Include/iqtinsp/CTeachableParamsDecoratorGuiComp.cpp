@@ -99,27 +99,25 @@ void CTeachableParamsDecoratorGuiComp::UpdateButtonsState()
 }
 
 
-// reimplemented (iqtgui::TGuiObserverWrap)
+// reimplemented (iqtgui::CGuiComponentBase)
 
-void CTeachableParamsDecoratorGuiComp::OnGuiModelAttached()
+void CTeachableParamsDecoratorGuiComp::OnGuiCreated()
 {
 	if (m_slaveGuiCompPtr.IsValid()){
 		m_slaveGuiCompPtr->CreateGui(ParamsFrame);
 	}
 
-	BaseClass::OnGuiModelAttached();
-
-	UpdateButtonsState();
+	BaseClass::OnGuiCreated();
 }
 
 
-void CTeachableParamsDecoratorGuiComp::OnGuiModelDetached()
+void CTeachableParamsDecoratorGuiComp::OnGuiDestroyed()
 {
 	if (m_slaveGuiCompPtr.IsValid()){
 		m_slaveGuiCompPtr->DestroyGui();
 	}
 
-	BaseClass::OnGuiModelDetached();
+	BaseClass::OnGuiDestroyed();
 }
 
 
