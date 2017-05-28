@@ -329,7 +329,7 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 		if (blobMessagePtr.IsValid()){
 			Q_ASSERT(resultConsumerPtr != NULL);
 
-			blobMessagePtr->SetText(QObject::tr("Found %1 blob(s)").arg(blobsCount)),
+			blobMessagePtr->SetText(QObject::tr("Found %1 blob(s)").arg(blobsCount));
 
 			resultConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(blobMessagePtr.PopPtr()));
 		}
@@ -337,7 +337,7 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 		if (ignoredBlobsMessagePtr.IsValid() && (ignoredBlobsMessagePtr->GetAttachedObjectsCount() > 0)){
 			Q_ASSERT(tempMessageConsumerPtr != NULL);
 
-			ignoredBlobsMessagePtr->SetText(QObject::tr("Ignored %1 blob(s)").arg(ignoredBlobsCount)),
+			ignoredBlobsMessagePtr->SetText(QObject::tr("Ignored %1 blob(s)").arg(ignoredBlobsCount));
 
 			tempMessageConsumerPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(ignoredBlobsMessagePtr.PopPtr()));
 		}

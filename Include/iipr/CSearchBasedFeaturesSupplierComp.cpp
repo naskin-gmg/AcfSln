@@ -151,6 +151,8 @@ bool CSearchBasedFeaturesSupplierComp::InitializeWork()
 
 int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) const
 {
+	result.ResetFeatures();
+
 	m_calibrations.clear();
 
 	if (		m_bitmapProviderCompPtr.IsValid() &&
@@ -180,8 +182,6 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		Timer performanceTimer(this, "Search of features");
 
 		if (multiSearchParamsManagerPtr != NULL){
-			result.ResetFeatures();
-
 			int searchCount = multiSearchParamsManagerPtr->GetParamsSetsCount();
 			m_defaultInformationCategory = istd::IInformationProvider::IC_NONE;
 			for (int searchIndex = 0; searchIndex < searchCount; searchIndex++){

@@ -29,10 +29,7 @@ int CBlobProcessorCompBase::DoExtractFeatures(
 	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
 
-	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), aoiPtr.GetPtr(), image, results)? TS_OK: TS_INVALID;
-	if (!retVal){
-		return TS_INVALID;
-	}
+	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), aoiPtr.GetPtr(), image, results);
 
 	return retVal ? TS_OK: TS_INVALID;
 }
