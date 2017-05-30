@@ -717,13 +717,14 @@ void CInspectionTaskGuiComp::on_MessageList_itemSelectionChanged()
 
 	int taskIndex = itemPtr->data(0, DR_TASK_INDEX).toInt();
 	QList<QVariant> indices = itemPtr->data(0, DR_SHAPE_INDICES).toList();
+	bool useAuxiliary = !itemPtr->data(0, DR_IS_RESULT).toBool();
 
 	ShapeIndices shapeIndices;
 	for (QList<QVariant>::ConstIterator iter = indices.constBegin(); iter != indices.constEnd(); ++iter){
 		shapeIndices += iter->toInt();
 	}
 
-	ActivateTaskShapes(taskIndex, shapeIndices);
+	ActivateTaskShapes(taskIndex, shapeIndices, useAuxiliary);
 }
 
 
@@ -779,6 +780,8 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 		}
 	}
 
+	QTreeWidgetItem* auxiliaryItemPtr = NULL;
+
 	for (int messageIndex = 0; messageIndex < messagesCount; messageIndex++){
 		ilog::IMessageConsumer::MessagePtr messagePtr = messagesList[messageIndex];
 
@@ -827,42 +830,44 @@ void CInspectionTaskGuiComp::AddTaskMessagesToLog(const ilog::IMessageContainer&
 			}
 		}
 
-		if (!isAuxiliary){
-			QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
-
-			messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
-			messageItemPtr->setData(0, DR_SHAPE_INDICES, shapeIndices);
-
-			QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
-			messageItemPtr->setIcon(0, messageIcon);
-
-			QString sourceName = messagePtr->GetInformationSource();
-			if (sourceName.isEmpty()){
-				sourceName = tabName;
-			}
-
-			messageItemPtr->setText(0, sourceName);
-			messageItemPtr->setText(1, messagePtr->GetInformationDescription());
-
-			MessageList->addTopLevelItem(messageItemPtr);
-		}
-	}
-
-
-	if (isAuxiliary){
 		QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem;
 
 		messageItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
-
-		QList<QVariant> shapeIndices;
-		shapeIndices += QVariant(-2);
-
 		messageItemPtr->setData(0, DR_SHAPE_INDICES, shapeIndices);
 
-		messageItemPtr->setText(0, tabName);
-		messageItemPtr->setText(1, tr("Auxiliary Output"));
+		QIcon messageIcon = GetCategoryIcon(messagePtr->GetInformationCategory()).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
+		messageItemPtr->setIcon(0, messageIcon);
 
-		MessageList->addTopLevelItem(messageItemPtr);
+		QString sourceName = messagePtr->GetInformationSource();
+		if (sourceName.isEmpty()){
+			sourceName = tabName;
+		}
+
+		messageItemPtr->setText(0, sourceName);
+		messageItemPtr->setText(1, messagePtr->GetInformationDescription());
+
+		if (isAuxiliary){
+			if (auxiliaryItemPtr == NULL){
+				auxiliaryItemPtr = new QTreeWidgetItem;
+
+				QList<QVariant> auxGroupIndices;
+				auxGroupIndices << -2;
+				auxiliaryItemPtr->setData(0, DR_TASK_INDEX, taskIndex);
+				auxiliaryItemPtr->setData(0, DR_SHAPE_INDICES, auxGroupIndices);
+
+				auxiliaryItemPtr->setText(0, tabName);
+				auxiliaryItemPtr->setText(1, tr("Auxiliary Output"));
+
+				MessageList->addTopLevelItem(auxiliaryItemPtr);
+			}
+
+			auxiliaryItemPtr->addChild(messageItemPtr);
+		}
+		else{
+			messageItemPtr->setData(0, DR_IS_RESULT, true);
+
+			MessageList->addTopLevelItem(messageItemPtr);
+		}
 	}
 }
 
@@ -953,7 +958,7 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 	}
 
 	// Activate task related shapes:
-	ActivateTaskShapes(taskIndex, ShapeIndices());
+	ActivateTaskShapes(taskIndex, ShapeIndices(), false);
 
 	if (viewPtr != NULL){
 		viewPtr->Update();
@@ -961,11 +966,14 @@ void CInspectionTaskGuiComp::DoUpdateEditor(int taskIndex)
 }
 
 
-void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndices& shapeIndices)
+void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndices& shapeIndices, bool useAuxiliary)
 {
 	if (!IsGuiCreated()){
 		return;
 	}
+
+	bool showAllAuxiliary = shapeIndices.contains(-2);
+	bool showResults = showAllAuxiliary || !useAuxiliary;
 
 	for (		ResultShapesMap::ConstIterator shapesContainerIter = m_resultShapesMap.constBegin();
 				shapesContainerIter != m_resultShapesMap.constEnd();
@@ -978,7 +986,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndice
 			iview::IShape* shapePtr = resultShapes.GetAt(i);
 			Q_ASSERT(shapePtr != NULL);	// only correct instances should be added to container
 
-			shapePtr->SetVisible(taskIndex == shapeTaskIndex);
+			shapePtr->SetVisible(showResults && (taskIndex == shapeTaskIndex));
 
 			iview::IInteractiveShape* interactiveShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr);
 			if (interactiveShapePtr != NULL){
@@ -998,7 +1006,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndice
 			iview::IShape* shapePtr = resultShapes.GetAt(i);
 			Q_ASSERT(shapePtr != NULL);	// only correct instances should be added to container
 
-			shapePtr->SetVisible((taskIndex == shapeTaskIndex) && (shapeIndices.contains(-2)));
+			shapePtr->SetVisible((taskIndex == shapeTaskIndex) && (showAllAuxiliary || (useAuxiliary && (shapeIndices.contains(i)))));
 		}
 	}
 
