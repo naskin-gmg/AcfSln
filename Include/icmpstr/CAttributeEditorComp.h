@@ -29,16 +29,16 @@ namespace icmpstr
 
 
 class CAttributeEditorComp:
-			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<
-									iqtgui::TDesignerGuiCompBase<Ui::CAttributeEditorComp>, CElementSelectionInfoManagerBase> >
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::TDesignerGuiCompBase<Ui::CAttributeEditorComp>,
+						CElementSelectionInfoManagerBase>
 {
 	Q_OBJECT
 
 public:
-	typedef ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							iqtgui::TDesignerGuiCompBase<Ui::CAttributeEditorComp>, CElementSelectionInfoManagerBase> > BaseClass;
+	typedef iqtgui::TGuiObserverWrap<
+				iqtgui::TDesignerGuiCompBase<Ui::CAttributeEditorComp>,
+				CElementSelectionInfoManagerBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CAttributeEditorComp);
 		I_REGISTER_INTERFACE(imod::IModelEditor);

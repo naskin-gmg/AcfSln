@@ -15,7 +15,6 @@
 #include <icomp/IMetaInfoManager.h>
 #include <icomp/CComponentBase.h>
 #include <ibase/ICommandsProvider.h>
-#include <ibase/TModelObserverCompWrap.h>
 #include <iqtgui/CHierarchicalCommand.h>
 #include <icmpstr/IElementSelectionInfo.h>
 
@@ -26,27 +25,17 @@ namespace icmpstr
 {
 
 
-/**
-	\internal
-*/
-class CConvertComponentCommandCompBase:
-			public icomp::CComponentBase,
-			public imod::TSingleModelObserverBase<IElementSelectionInfo>
-{
-public:
-};
-
-
 class CConvertComponentCommandComp:
 			public QDialog,
 			public Ui::CConvertComponentCommandComp,
-			public ibase::TModelObserverCompWrap<CConvertComponentCommandCompBase>,
+			public icomp::CComponentBase,
+			public imod::TSingleModelObserverBase<IElementSelectionInfo>,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef ibase::TModelObserverCompWrap<CConvertComponentCommandCompBase> BaseClass;
+	typedef icomp::CComponentBase BaseClass;
 	typedef imod::TSingleModelObserverBase<IElementSelectionInfo> BaseClass2;
 	typedef QDialog BaseClass3;
 

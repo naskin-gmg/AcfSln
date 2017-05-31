@@ -376,7 +376,7 @@ void CConvertComponentCommandComp::DoRetranslate()
 
 void CConvertComponentCommandComp::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
 {
-	BaseClass::OnUpdate(changeSet);
+	BaseClass2::OnUpdate(changeSet);
 
 	const IElementSelectionInfo* objectPtr = GetObservedObject();
 
@@ -391,6 +391,7 @@ void CConvertComponentCommandComp::OnUpdate(const istd::IChangeable::ChangeSet& 
 void CConvertComponentCommandComp::on_InterfacesPolicyCB_currentIndexChanged(int /*index*/)
 {
 	CalcFilteredComponents();
+
 	CreatePackagesList();
 }
 

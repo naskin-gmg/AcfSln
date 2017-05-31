@@ -28,18 +28,16 @@ namespace iqtmeas
 
 
 class CNumericParamsGuiComp:
-			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<
-									iqtgui::TGuiComponentBase<QWidget>,
-									imod::TSingleModelObserverBase<imeas::INumericValue> > >,
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::TGuiComponentBase<QWidget>,
+						imod::TSingleModelObserverBase<imeas::INumericValue> >,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 public:
-	typedef ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							iqtgui::TGuiComponentBase<QWidget>,
-							imod::TSingleModelObserverBase<imeas::INumericValue> > > BaseClass;
+	typedef iqtgui::TGuiObserverWrap<
+				iqtgui::TGuiComponentBase<QWidget>,
+				imod::TSingleModelObserverBase<imeas::INumericValue> > BaseClass;
 	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CNumericParamsGuiComp);

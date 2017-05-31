@@ -4,6 +4,7 @@
 
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
+#include <ibase/TModelObserverCompWrap.h>
 
 #include <icmpstr/CAttributeEditorComp.h>
 #include <icmpstr/CPackageOverviewComp.h>
@@ -31,7 +32,7 @@ namespace CompositorPck
 {
 
 
-typedef icmpstr::CAttributeEditorComp AttributeEditor;
+typedef ibase::TModelObserverCompWrap<icmpstr::CAttributeEditorComp> AttributeEditor;
 typedef icomp::TModelCompWrap<icmpstr::CPackageOverviewComp> PackageOverview;
 typedef icmpstr::CRegistryLoaderComp RegistryLoader;
 typedef icmpstr::CRegistryPreviewComp RegistryPreview;
@@ -52,7 +53,7 @@ typedef icmpstr::CComponentNoteEditorComp ComponentNoteEditor;
 typedef icomp::TModelCompWrap<icmpstr::CSceneProviderGuiComp> SceneProvider;
 typedef icmpstr::CXpcEditorComp XpcEditorGui;
 typedef icmpstr::CRegistryTreeViewComp RegistryTreeView;
-typedef icmpstr::CConvertComponentCommandComp ConvertComponentCommand;
+typedef ibase::TModelObserverCompWrap<icmpstr::CConvertComponentCommandComp> ConvertComponentCommand;
 
 
 } // namespace CompositorPck
