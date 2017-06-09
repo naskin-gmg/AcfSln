@@ -126,10 +126,10 @@ int CHoughLineFromPosFinderComp::FindLines(
 		}
 	}
 
-	m_houghSpace.SmoothHoughSpace(*m_defaultSmoothKernelAttrPtr);
+	m_houghSpace.SmoothHoughSpace(istd::CIndex2d(*m_defaultSmoothKernelAttrPtr, *m_defaultSmoothKernelAttrPtr));
 
-	iipr::CHoughSpace2d::WeightToHoughPosMap posMap;
-	m_houghSpace.AnalyseHoughSpace(maxLines, 10, 0.01, 20.0, 0.01, posMap);
+	iipr::CHoughSpace2d::StdConsumer posResults(maxLines, maxLines * 10, 20.0, 0.01);
+	m_houghSpace.AnalyseHoughSpace(10, posResults);
 
 	if (m_tempConsumerCompPtr.IsValid()){
 		ilog::CExtMessage* spaceMessagePtr = new ilog::CExtMessage(
@@ -146,12 +146,12 @@ int CHoughLineFromPosFinderComp::FindLines(
 		m_tempConsumerCompPtr->AddMessage(ilog::IMessageConsumer::MessagePtr(spaceMessagePtr));
 	}
 
-	if (!posMap.isEmpty()){
-		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posMap.constBegin();
+	if (!posResults.positions.isEmpty()){
+		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posResults.positions.constBegin();
 		double bestWeight = resultIter.key();
 
 		int lineIndex = 0;
-		for (; resultIter != posMap.constEnd(); ++resultIter, ++lineIndex){
+		for (; resultIter != posResults.positions.constEnd(); ++resultIter, ++lineIndex){
 			const i2d::CVector2d& houghPos = resultIter.value();
 
 			double weight = resultIter.key() / bestWeight;

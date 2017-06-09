@@ -94,125 +94,71 @@ void DoSmoothHoughSpace(
 template <	typename PixelType,
 			typename WorkingType>
 void DoAnalyseSpace(
-			int maxPoints,
-			PixelType minWeight,
-			double minMaxRatio,
-			double minDistance,
-			double minLocalDynamic,
+			double minWeight,
 			bool isWrappedX, bool /*isWrappedY*/,
 			const CHoughSpace2d& space,
-			QMultiMap<double, i2d::CVector2d>& result)
+			CHoughSpace2d::ResultsConsumer& resultProcessor)
 {
+	resultProcessor.OnProcessingBegin(space, minWeight);
+
 	istd::CIndex2d spaceSize = space.CGeneralBitmap::GetImageSize();
 
 	if (spaceSize.GetX() < 3){
 		return;
 	}
 
-	PixelType maxValue = 0;
 	PixelType minValue = minWeight;
 
-	for (int y = 0; y < spaceSize.GetY(); ++y){
-		const PixelType* prevSpaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr((y + spaceSize.GetY() - 1) % spaceSize.GetY());
-		const PixelType* spaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr(y);
-		const PixelType* nextSpaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr((y + 1) % spaceSize.GetY());
+	istd::CIndex2d position;
+	for (position.SetY(0); position.GetY() < spaceSize.GetY(); ++position[1]){
+		const PixelType* prevSpaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr((position.GetY() + spaceSize.GetY() - 1) % spaceSize.GetY());
+		const PixelType* spaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr(position.GetY());
+		const PixelType* nextSpaceLinePtr = (const PixelType*)space.CGeneralBitmap::GetLinePtr((position.GetY() + 1) % spaceSize.GetY());
 
 		int prevX;
-		int x;
 		int nextX;
 		if (isWrappedX){
 			prevX = spaceSize.GetX() - 2;
-			x = spaceSize.GetX() - 1;
+			position.SetX(spaceSize.GetX() - 1);
 			nextX = 0;
 		}
 		else{
 			prevX = 0;
-			x = 1;
+			position.SetX(1);
 			nextX = 2;
 		}
 
 		for (; nextX < spaceSize.GetX(); ++nextX){
-			PixelType value = spaceLinePtr[x];
+			PixelType value = spaceLinePtr[position.GetX()];
 			if (		(value >= minValue) &&
 						(value >= prevSpaceLinePtr[prevX]) &&
-						(value > prevSpaceLinePtr[x]) &&
+						(value > prevSpaceLinePtr[position.GetX()]) &&
 						(value > prevSpaceLinePtr[nextX]) &&
 						(value >= spaceLinePtr[prevX]) &&
 						(value > spaceLinePtr[nextX]) &&
 						(value >= nextSpaceLinePtr[prevX]) &&
-						(value >= nextSpaceLinePtr[x]) &&
+						(value >= nextSpaceLinePtr[position.GetX()]) &&
 						(value > nextSpaceLinePtr[nextX])){
-				WorkingType diffLeft = WorkingType(value) - WorkingType(spaceLinePtr[prevX]);
-				WorkingType diffRight = WorkingType(value) - WorkingType(spaceLinePtr[nextX]);
-				WorkingType diffTop = WorkingType(value) - WorkingType(prevSpaceLinePtr[x]);
-				WorkingType diffBottom = WorkingType(value) - WorkingType(nextSpaceLinePtr[x]);
+				double neighbours[] = {
+							double(spaceLinePtr[prevX]),
+							double(spaceLinePtr[nextX]),
+							double(prevSpaceLinePtr[position.GetX()]),
+							double(nextSpaceLinePtr[position.GetX()])};
 
-				if ((diffLeft + diffRight + diffTop + diffBottom) > value * minLocalDynamic){
-					double correctionX = double(diffLeft) / (diffLeft + diffRight);
-					double correctionY = double(diffTop) / (diffTop + diffBottom);
-
-					i2d::CVector2d resultPos(x + correctionX, y + correctionY);
-
-					result.insert(value, resultPos);
-
-					if (value > maxValue){
-						maxValue = value;
-						PixelType propValue = PixelType(value * minMaxRatio);
-						if (minValue < propValue){
-							minValue = propValue;
-
-							// remove elements weeker than new calculated minValue
-							while (!result.isEmpty() && result.firstKey() < minValue){
-								QMultiMap<double, i2d::CVector2d>::Iterator lastIter = result.begin();
-
-								result.erase(lastIter);
-							}
-						}
-					}
+				if (resultProcessor.OnMaximumFound(space, position, double(value), neighbours, 4, minWeight)){
+					resultProcessor.OnProcessingEnd(space);
+					return;
 				}
+
+				minValue = minWeight;
 			}
 
-			prevX = x;
-			x = nextX;
+			prevX = position.GetX();
+			position.SetX(nextX);
 		}
 	}
 
-	// remove elements beeing to close to each other
-	for (		QMultiMap<double, i2d::CVector2d>::Iterator point1Iter = result.begin();
-				point1Iter != result.end();){
-		const i2d::CVector2d& point1 = point1Iter.value();
-
-		bool isToClose = false;
-
-		for (		QMultiMap<double, i2d::CVector2d>::Iterator point2Iter = point1Iter + 1;
-					point2Iter != result.end();
-					++point2Iter){
-			const i2d::CVector2d& point2 = point2Iter.value();
-
-			double dist2 = space.GetDistance2(point1, point2);
-			if (dist2 <= minDistance * minDistance){
-				isToClose = true;
-
-				break;
-			}
-		}
-
-		if (isToClose){
-			point1Iter = result.erase(point1Iter);
-		}
-		else{
-			++point1Iter;
-		}
-	}
-
-	// cut this list to user defined maximal size
-	if (maxPoints >= 0){
-		while (result.size() > maxPoints){
-			QMultiMap<double, i2d::CVector2d>::Iterator lastIter = result.begin();
-
-			result.erase(lastIter);	// remove the weekest element
-		}
-	}
+	resultProcessor.OnProcessingEnd(space);
 }
 
 
@@ -282,8 +228,8 @@ bool CHoughSpace2d::CreateHoughSpace(
 {
 	istd::CChangeNotifier notifier(this);
 
-	m_isWrappedX = isWrappedX;
-	m_isWrappedY = isWrappedY;
+	m_isWrapped[0] = isWrappedX;
+	m_isWrapped[1] = isWrappedY;
 
 	if (BaseClass::CreateBitmap(isFloatSpace? iimg::IBitmap::PF_FLOAT32: iimg::IBitmap::PF_GRAY32, size)){
 		BaseClass::ClearImage();
@@ -295,49 +241,54 @@ bool CHoughSpace2d::CreateHoughSpace(
 }
 
 
-bool CHoughSpace2d::IsWrappedX() const
+// reimplemented (iipr::TIHoughSpace<2>)
+
+bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& /*initValue*/)
 {
-	return m_isWrappedX;
-}
+	istd::CChangeNotifier notifier(this);
 
+	m_isWrapped[0] = false;
+	m_isWrapped[1] = false;
 
-void CHoughSpace2d::SetWrappedX(bool state)
-{
-	if (state != m_isWrappedX){
-		istd::CChangeNotifier notifier(this);
+	if (BaseClass::CreateBitmap(iimg::IBitmap::PF_FLOAT32, size)){
+		BaseClass::ClearImage();
 
-		m_isWrappedX = state;
+		return true;
 	}
+
+	return false;
 }
 
 
-bool CHoughSpace2d::IsWrappedY() const
+bool CHoughSpace2d::IsDimensionWrapped(int dimensionIndex) const
 {
-	return m_isWrappedY;
+	Q_ASSERT(dimensionIndex >= 0);
+	Q_ASSERT(dimensionIndex < 2);
+
+	return m_isWrapped[dimensionIndex];
 }
 
 
-void CHoughSpace2d::SetWrappedY(bool state)
+void CHoughSpace2d::SetDimensionWrapped(int dimensionIndex, bool state)
 {
-	if (state != m_isWrappedY){
-		istd::CChangeNotifier notifier(this);
+	Q_ASSERT(dimensionIndex >= 0);
+	Q_ASSERT(dimensionIndex < 2);
 
-		m_isWrappedY = state;
-	}
+	m_isWrapped[dimensionIndex] = state;
 }
 
 
-void CHoughSpace2d::IncreaseValueAt(const i2d::CVector2d& position, double value)
+void CHoughSpace2d::IncreaseValueAt(const imath::TVector<2>& position, double value)
 {
 	istd::CIndex2d size = BaseClass::GetImageSize();
 
-	int posX = int(position.GetX());
-	if (m_isWrappedX){	// correct the position if is wrapped
+	int posX = int(position[0]);
+	if (m_isWrapped[0]){	// correct the position if is wrapped
 		posX = (posX + size.GetX()) % size.GetX();
 	}
 
-	int posY = int(position.GetY());
-	if (m_isWrappedY){	// correct the position if is wrapped
+	int posY = int(position[1]);
+	if (m_isWrapped[1]){	// correct the position if is wrapped
 		posY = (posY + size.GetY()) % size.GetY();
 	}
 
@@ -358,16 +309,16 @@ void CHoughSpace2d::IncreaseValueAt(const i2d::CVector2d& position, double value
 }
 
 
-void CHoughSpace2d::SmoothHoughSpace(int iterationsX, int iterationsY)
+void CHoughSpace2d::SmoothHoughSpace(const istd::TIndex<2>& iterations)
 {
 	switch (GetPixelFormat())
 	{
 	case PF_GRAY32:
-		DoSmoothHoughSpace<quint32, quint32>(iterationsX, iterationsY, m_isWrappedX, m_isWrappedY, *this);
+		DoSmoothHoughSpace<quint32, quint32>(iterations[0], iterations[1], m_isWrapped[0], m_isWrapped[1], *this);
 		break;
 
 	case PF_FLOAT32:
-		DoSmoothHoughSpace<float, float>(iterationsX, iterationsY, m_isWrappedX, m_isWrappedY, *this);
+		DoSmoothHoughSpace<float, float>(iterations[0], iterations[1], m_isWrapped[0], m_isWrapped[1], *this);
 		break;
 
 	default:
@@ -377,21 +328,17 @@ void CHoughSpace2d::SmoothHoughSpace(int iterationsX, int iterationsY)
 
 
 void CHoughSpace2d::AnalyseHoughSpace(
-			int maxPoints,
-			int minWeight,
-			double minMaxRatio,
-			double minDistance,
-			double minLocalDynamic,
-			WeightToHoughPosMap& result)
+			const double& minValue,
+			ResultsConsumer& resultProcessor)
 {
 	switch (GetPixelFormat())
 	{
 	case PF_GRAY32:
-		DoAnalyseSpace<quint32, qint32>(maxPoints, minWeight, minMaxRatio, minDistance, minLocalDynamic, m_isWrappedX, m_isWrappedY, *this, result);
+		DoAnalyseSpace<quint32, qint32>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
 		break;
 
 	case PF_FLOAT32:
-		DoAnalyseSpace<float, float>(maxPoints, minWeight, minMaxRatio, minDistance, minLocalDynamic, m_isWrappedX, m_isWrappedY, *this, result);
+		DoAnalyseSpace<float, float>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
 		break;
 
 	default:
@@ -416,53 +363,21 @@ bool CHoughSpace2d::ExtractToBitmap(iimg::IBitmap& bitmap) const
 }
 
 
-bool CHoughSpace2d::GetSpacePosition(const i2d::CVector2d& position, i2d::CVector2d& result) const
+bool CHoughSpace2d::GetSpacePosition(const imath::TVector<2>& position, imath::TVector<2>& result) const
 {
 	istd::CIndex2d size = BaseClass::GetImageSize();
 
 	result = position;
 
-	if (m_isWrappedX){	// correct the position if is wrapped
-		result.SetX(fmod(result.GetX() + size.GetX(), size.GetX()));
+	if (m_isWrapped[0]){	// correct the position if is wrapped
+		result[0] = fmod(result[0] + size.GetX(), size.GetX());
 	}
 
-	if (m_isWrappedY){	// correct the position if is wrapped
-		result.SetY(fmod(result.GetY() + size.GetY(), size.GetY()));
+	if (m_isWrapped[1]){	// correct the position if is wrapped
+		result[1] = (fmod(result[1] + size.GetY(), size.GetY()));
 	}
 
-	return ((result.GetX() >= 0) && (result.GetX() < size.GetX()) && (result.GetY() >= 0) && (result.GetY() < size.GetY()));
-}
-
-
-void CHoughSpace2d::CalcSpaceMin(const CHoughSpace2d& space)
-{
-	istd::CIndex2d size = BaseClass::GetImageSize();
-	istd::CIndex2d spaceSize = space.GetImageSize();
-
-	istd::CIndex2d commonSize(qMin(size.GetX(), spaceSize.GetX()), qMin(size.GetY(), spaceSize.GetY()));
-	for (int y = 0; y < commonSize.GetY(); ++y){
-		quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
-		const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
-		for (int x = 0; x < commonSize.GetX(); ++x){
-			linePtr[x] = qMin(linePtr[x], spaceLinePtr[x]);
-		}
-	}
-}
-
-
-void CHoughSpace2d::CalcSpaceMax(const CHoughSpace2d& space)
-{
-	istd::CIndex2d size = BaseClass::GetImageSize();
-	istd::CIndex2d spaceSize = space.GetImageSize();
-
-	istd::CIndex2d commonSize(qMin(size.GetX(), spaceSize.GetX()), qMin(size.GetY(), spaceSize.GetY()));
-	for (int y = 0; y < commonSize.GetY(); ++y){
-		quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
-		const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
-		for (int x = 0; x < commonSize.GetX(); ++x){
-			linePtr[x] = qMax(linePtr[x], spaceLinePtr[x]);
-		}
-	}
+	return ((result[0] >= 0) && (result[0] < size.GetX()) && (result[1] >= 0) && (result[1] < size.GetY()));
 }
 
 
@@ -485,6 +400,121 @@ bool CHoughSpace2d::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& 
 	}
 
 	return BaseClass::CreateBitmap(pixelFormat, size, dataPtr, releaseFlag, linesDifference);
+}
+
+
+// public methods of embedded class StdConsumer
+
+// reimplemented (iipr::TIHoughSpace<2>::ResultsConsumer)
+
+CHoughSpace2d::StdConsumer::StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio)
+:	m_maxPoints(maxPoints),
+	m_maxConsideredPoints(maxConsideredPoints),
+	m_minDistance(minDistance),
+	m_minMaxRatio(minMaxRatio)
+{
+}
+
+
+void CHoughSpace2d::StdConsumer::OnProcessingBegin(
+			const TIHoughSpace<2, double>& /*space*/,
+			const double& /*minValue*/)
+{
+	m_maxValue = 0;
+}
+
+
+void CHoughSpace2d::StdConsumer::OnProcessingEnd(const TIHoughSpace<2, double>& space)
+{
+	// remove elements beeing to close to each other
+	for (		QMultiMap<double, i2d::CVector2d>::Iterator point1Iter = positions.begin();
+				point1Iter != positions.end();){
+		const i2d::CVector2d& point1 = point1Iter.value();
+
+		bool isToClose = false;
+
+		for (		QMultiMap<double, i2d::CVector2d>::Iterator point2Iter = point1Iter + 1;
+					point2Iter != positions.end();
+					++point2Iter){
+			const i2d::CVector2d& point2 = point2Iter.value();
+
+			double dist2 = space.GetDistance2(point1, point2);
+			if (dist2 <= m_minDistance * m_minDistance){
+				isToClose = true;
+
+				break;
+			}
+		}
+
+		if (isToClose){
+			point1Iter = positions.erase(point1Iter);
+		}
+		else{
+			++point1Iter;
+		}
+	}
+
+	// cut this list to user defined maximal size
+	if (m_maxPoints >= 0){
+		while (positions.size() > m_maxPoints){
+			QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
+
+			positions.erase(lastIter);	// remove the weekest element
+		}
+	}
+}
+
+
+bool CHoughSpace2d::StdConsumer::OnMaximumFound(
+			const TIHoughSpace<2, double>& /*space*/,
+			const istd::TIndex<2>& position,
+			const double& value,
+			const double* neghboursPtr,
+			int neghboursCount,
+			double& minValue)
+{
+	Q_ASSERT(neghboursCount == 4);
+	Q_UNUSED(neghboursCount);
+
+	double diffLeft = value - neghboursPtr[0];
+	double diffRight = value - neghboursPtr[1];
+	double diffTop = value - neghboursPtr[2];
+	double diffBottom = value - neghboursPtr[3];
+
+	double correctionX = diffLeft / (diffLeft + diffRight);
+	double correctionY = diffTop / (diffTop + diffBottom);
+
+	i2d::CVector2d resultPos(position[0] + correctionX, position[1] + correctionY);
+
+	positions.insert(value, resultPos);
+
+	if (value > m_maxValue){
+		m_maxValue = value;
+		double propValue = value * m_minMaxRatio;
+		if (minValue < propValue){
+			minValue = propValue;
+
+			// remove elements weeker than new calculated minValue
+			while (!positions.isEmpty() && positions.firstKey() < minValue){
+				QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
+
+				positions.erase(lastIter);
+			}
+		}
+	}
+
+	// try remove the last one if we have too many points
+	if (positions.count() > m_maxConsideredPoints){
+		QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
+		double lastValue = lastIter.key();
+		positions.erase(lastIter);
+
+		if (lastValue > minValue){
+			minValue = lastValue;
+		}
+	}
+
+	return false;
 }
 
 

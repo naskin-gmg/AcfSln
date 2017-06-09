@@ -136,10 +136,10 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 		}
 	}
 
-	iipr::CHoughSpace2d::WeightToHoughPosMap foundVanPoints;
-	vanishingSpace.AnalyseHoughSpace(2, 2, 0.2, 2, 0.1, foundVanPoints);
-	Q_ASSERT(foundVanPoints.size() <= 2);
-	if (foundVanPoints.size() < 2){
+	iipr::CHoughSpace2d::StdConsumer foundVanResults(2, 20, 2, 0.2);
+	vanishingSpace.AnalyseHoughSpace(2, foundVanResults);
+	Q_ASSERT(foundVanResults.positions.size() <= 2);
+	if (foundVanResults.positions.size() < 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No vanishing points found"), "CheckboardCalibSupplier"));
 
 		return false;
@@ -165,8 +165,8 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	QSet<i2d::CLine2d> vanLines[2];
 
 	int vanishingPointIndex = 0;
-	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanPoints.constBegin();
-				foundVanIter != foundVanPoints.constEnd();
+	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanResults.positions.constBegin();
+				foundVanIter != foundVanResults.positions.constEnd();
 				++foundVanIter, ++vanishingPointIndex){
 		const i2d::CVector2d& foundVanSpacePos = foundVanIter.value();
 

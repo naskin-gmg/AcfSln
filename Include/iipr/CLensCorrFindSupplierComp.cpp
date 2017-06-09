@@ -228,11 +228,11 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 		}
 	}
 
-	lineSpace.SmoothHoughSpace(*m_smoothKernelAttrPtr, *m_smoothKernelAttrPtr);
+	lineSpace.SmoothHoughSpace(istd::CIndex2d(*m_smoothKernelAttrPtr, *m_smoothKernelAttrPtr));
 
-	iipr::CHoughSpace2d::WeightToHoughPosMap foundLines;
-	lineSpace.AnalyseHoughSpace(maxLinesCount, 1, 0.25, *m_smoothKernelAttrPtr, 0.01, foundLines);
-	if (foundLines.size() < 2){
+	iipr::CHoughSpace2d::StdConsumer foundLinesResults(maxLinesCount, maxLinesCount * 10, *m_smoothKernelAttrPtr, 0.25);
+	lineSpace.AnalyseHoughSpace(1, foundLinesResults);
+	if (foundLinesResults.positions.size() < 2){
 		AddMessage(new ilog::CMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("No lines found"), "LensCorrectionFinder"));
 
 		return false;
@@ -248,8 +248,8 @@ bool CLensCorrFindSupplierComp::CalculateCalibration(const iimg::IBitmap& image,
 
 	double linePosTolerance = imageCenter.GetLength() * *m_smoothKernelAttrPtr / lineSpaceSize.GetY();
 
-	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator houghIter = foundLines.constBegin();
-				houghIter != foundLines.constEnd();
+	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator houghIter = foundLinesResults.positions.constBegin();
+				houghIter != foundLinesResults.positions.constEnd();
 				++houghIter){
 		const i2d::CVector2d& foundSpacePos = houghIter.value();
 

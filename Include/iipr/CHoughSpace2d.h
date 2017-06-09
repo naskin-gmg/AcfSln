@@ -9,6 +9,9 @@
 #include <i2d/CVector2d.h>
 #include <iimg/CGeneralBitmap.h>
 
+// ACF-Solutions includes
+#include <iipr/TIHoughSpace.h>
+
 
 namespace iipr
 {
@@ -17,19 +20,54 @@ namespace iipr
 /**
 	Hough space used for 2d Hough transformations.
 */
-class CHoughSpace2d: public iimg::CGeneralBitmap
+class CHoughSpace2d:
+			public iimg::CGeneralBitmap,
+			virtual public TIHoughSpace<2>
 {
 public:
 	typedef iimg::CGeneralBitmap BaseClass;
 
 	typedef QMultiMap<double, i2d::CVector2d> WeightToHoughPosMap;
+	class StdConsumer: public ResultsConsumer
+	{
+	public:
+		/**
+			Construct the result processor.
+			\param	maxPoints				maximal number of points beeing in result set.
+			\param	maxConsideredPoints		maximal number of points stored internally.
+											Setting this number to smaller value speeds up the processing.
+			\param	minDistance				Minimal distance between the points.
+											Please note that the neighbourshood will be analysed at end.
+		*/
+		StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio);
+
+		// reimplemented (iipr::TIHoughSpace<2>::ResultsConsumer)
+		virtual void OnProcessingBegin(
+					const TIHoughSpace<2, double>& space,
+					const double& minValue);
+		virtual void OnProcessingEnd(const TIHoughSpace<2, double>& space);
+		virtual bool OnMaximumFound(
+					const TIHoughSpace<2, double>& space,
+					const istd::TIndex<2>& position,
+					const double& value,
+					const double* neghboursPtr,
+					int neghboursCount,
+					double& minValue);
+
+		WeightToHoughPosMap positions;
+
+	private:
+		int m_maxPoints;
+		int m_maxConsideredPoints;
+		double m_minDistance;
+		double m_minMaxRatio;
+
+		double m_maxValue;
+	};
 
 	CHoughSpace2d();
 	CHoughSpace2d(const istd::CIndex2d& size, bool isWrappedX = false, bool isWrappedY = false);
 
-	/**
-		Create Hough space with specified size.
-	*/
 	bool CreateHoughSpace(
 				const istd::CIndex2d& size,
 				bool isWrappedX = false,
@@ -37,115 +75,77 @@ public:
 				bool isFloatSpace = false);
 
 	/**
-		Check if this space is wrapped horizontaly, it means the the left pixel is neighbour of the right one.
+		Combine this space with some other space.
 	*/
-	bool IsWrappedX() const;
-	/**
-		Set if this space to be wrapped horizontaly or not.
-		Space is horizonally wrapped if the left pixel is neighbour of the right one.
-	*/
-	void SetWrappedX(bool state);
-	/**
-		Check if this space is wrapped vertically, it means the top pixel is neighbour of the bottom one.
-	*/
-	bool IsWrappedY() const;
-	/**
-		Set if this space to be wrapped verticaly or not.
-		Space is horizonally wrapped if the top pixel is neighbour of the bottom one.
-	*/
-	void SetWrappedY(bool state);
+	template <typename Operation>
+	void CombineWithSpace(const CHoughSpace2d& space, Operation operation);
 
-	/**
-		Increase the value at specified position.
-	*/
-	void IncreaseValueAt(const i2d::CVector2d& position, double value);
-
-	/**
-		Smooth this space with specified stronness.
-	*/
-	void SmoothHoughSpace(int iterationsX, int iterationsY = 0);
-	/**
-		Analyse this Hough space to find set of local maximums.
-		\param	maxPoints		maximal number of points to find or negative value, if disabled.
-		\param	minWeight		minimal weight of point.
-		\param	minMaxRatio		maximal proportion between best and worse.
-		\param	minDistance		minimal distance between two found points.
-		\param	minLocalDynamic	describes how strong must maximal point differs from its neighbourhood
-		\param	result			will be filled with list of found points.
-	*/
-	void AnalyseHoughSpace(
-				int maxPoints,
-				int minWeight,
-				double minMaxRatio,
-				double minDistance,
-				double minLocalDynamic,
-				WeightToHoughPosMap& result);
-
-	/**
-		Extract this Hough space to some gray scale bitmap.
-	*/
-	bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
-
-	/**
-		Get position in space for some input.
-		It consides the wrapping of space.
-		\return	true, if this position is representable in the space.
-	*/
-	bool GetSpacePosition(const i2d::CVector2d& position, i2d::CVector2d& result) const;
-
-	/**
-		Get distance between two hough space positions considering the space wrapping.
-	*/
-	double GetDistance(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const;
-
-	/**
-		Get square of distance between two hough space positions considering the space wrapping.
-	*/
-	double GetDistance2(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const;
-
-	/**
-		Calculate minimum of all pixels in this space.
-	*/
-	void CalcSpaceMin(const CHoughSpace2d& space);
-	/**
-		Calculate maximum of all pixels in this space.
-	*/
-	void CalcSpaceMax(const CHoughSpace2d& space);
+	// reimplemented (iipr::TIHoughSpace<2>)
+	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0);
+	virtual bool IsDimensionWrapped(int dimensionIndex) const;
+	virtual void SetDimensionWrapped(int dimensionIndex, bool state);
+	virtual void IncreaseValueAt(const imath::TVector<2>& position, double value);
+	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations);
+	virtual void AnalyseHoughSpace(
+				const double& minValue,
+				ResultsConsumer& resultProcessor);
+	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
+	virtual bool GetSpacePosition(const imath::TVector<2>& position, imath::TVector<2>& result) const;
+	virtual double GetDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
+	virtual double GetDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
 
 	// reimplemented (iimg::CGeneralBitmap)
 	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0);
 	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);
 
 private:
-	bool m_isWrappedX;
-	bool m_isWrappedY;
+	bool m_isWrapped[2];
 };
 
 
 // inline methods
 
-inline double CHoughSpace2d::GetDistance(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const
+inline double CHoughSpace2d::GetDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
 {
 	return qSqrt(GetDistance2(position1, position2));
 }
 
 
-inline double CHoughSpace2d::GetDistance2(const i2d::CVector2d& position1, const i2d::CVector2d& position2) const
+inline double CHoughSpace2d::GetDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
 
 	i2d::CVector2d diff = position2 - position1;
-	if (m_isWrappedX){
+	if (m_isWrapped[0]){
 		double offset = spaceSize.GetX() * 0.5;
 		diff.SetX(std::fmod(diff.GetX() + offset + spaceSize.GetX(),  spaceSize.GetX()) - offset);
 	}
 
-	if (m_isWrappedY){
+	if (m_isWrapped[1]){
 		double offset = spaceSize.GetY() * 0.5;
 		diff.SetY(std::fmod(diff.GetY() + offset + spaceSize.GetY(),  spaceSize.GetY()) - offset);
 	}
 
 	return diff.GetLength2();
+}
+
+
+// template methods
+
+template <typename Operation>
+void CHoughSpace2d::CombineWithSpace(const CHoughSpace2d& space, Operation operation)
+{
+	istd::CIndex2d size = BaseClass::GetImageSize();
+	istd::CIndex2d spaceSize = space.GetImageSize();
+
+	istd::CIndex2d commonSize(qMin(size.GetX(), spaceSize.GetX()), qMin(size.GetY(), spaceSize.GetY()));
+	for (int y = 0; y < commonSize.GetY(); ++y){
+		quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
+		const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
+		for (int x = 0; x < commonSize.GetX(); ++x){
+			linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
+		}
+	}
 }
 
 
