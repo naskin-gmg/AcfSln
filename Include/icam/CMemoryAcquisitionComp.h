@@ -18,7 +18,7 @@ namespace icam
 
 
 /**
-	Bitmap loader component implementing interfaces \c ifile::IFilePersistence and \c icam::IBitmapAcquisition.
+	Bitmap acquisition from memory.
 */
 class CMemoryAcquisitionComp:
 			public icomp::CComponentBase,

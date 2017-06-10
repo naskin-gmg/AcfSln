@@ -88,7 +88,7 @@ void CFileNamingParams::SetPatternsToRemove(const QStringList& patternsToRemove)
 // reimplemented (iser::ISerializable)
 
 bool CFileNamingParams::Serialize(iser::IArchive& archive)
-{		
+{
 	static iser::CArchiveTag overwriteStrategyTag("OverwriteStrategy", "Strategy for overwriting of existing files");
 	static iser::CArchiveTag prefixTag("FilePrefix", "Prefix for the output file name");
 	static iser::CArchiveTag suffixTag("FileSuffix", "Suffix for the output file name");
