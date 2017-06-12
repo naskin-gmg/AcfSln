@@ -139,6 +139,11 @@ I_EXPORT_COMPONENT(
 			"RGB Grayscale Image Colorspace" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
+			GrayToRgbProcessor,
+			"Grayscale to RGB image conversion",
+			"RGB Grayscale Image Colorspace" IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+
+I_EXPORT_COMPONENT(
 			ImageBinarizeProcessor,
 			"Image binarization processor with static threshold",
 			"Binarization Grayscale Image" IM_AUTHOR("\"Kirill Lepskiy\""));

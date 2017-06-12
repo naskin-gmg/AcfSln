@@ -37,6 +37,7 @@
 #include <iipr/CRingPatternGeneratorComp.h>
 #include <iipr/CRingPatternGeneratorParamsComp.h>
 #include <iipr/CRgbToGrayProcessorComp.h>
+#include <iipr/CGrayToRgbProcessorComp.h>
 #include <iipr/CImageBinarizeProcessorComp.h>
 #include <iipr/CBitmapProviderCacheComp.h>
 #include <iipr/CSearchParamsComp.h>
@@ -109,6 +110,7 @@ typedef icomp::TModelCompWrap<iipr::CImageInterpolationParamsComp> ImageInterpol
 
 typedef icomp::TModelCompWrap<iipr::CRingPatternGeneratorParamsComp> RingPatternGeneratorParams;
 typedef iipr::CRgbToGrayProcessorComp RgbToGrayProcessor;
+typedef iipr::CGrayToRgbProcessorComp GrayToRgbProcessor;
 typedef iipr::CImageBinarizeProcessorComp ImageBinarizeProcessor;
 
 typedef icomp::TModelCompWrap<iipr::CBitmapProviderCacheComp> BitmapProviderCache;
