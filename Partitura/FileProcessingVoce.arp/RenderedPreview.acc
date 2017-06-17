@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4340" Description="ACF"/>
-            <Version Id="1" Number="1676" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4512" Description="ACF"/>
+            <Version Id="1" Number="1847" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -37,14 +37,14 @@
             </Data>
         </Element>
         <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
             </Data>
         </Element>
         <Element Id="File" PackageId="FilePck" ComponentId="FileNameParam">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultPath" Type="String" ExportId="RenderingPreviewCacheFilePath">
+                    <AttributeInfo Id="DefaultPath" Type="Text" ExportId="RenderingPreviewCacheFilePath">
                         <Data IsEnabled="true" Value="RenderedPreviewCache.bin"/>
                     </AttributeInfo>
                     <AttributeInfo Id="PathType" Type="Integer" ExportId="">
@@ -65,7 +65,7 @@
                     <AttributeInfo Id="NoAvailableIconPath" Type="Id" ExportId="NoAvailableIconPath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="NoAvailableLabel" Type="String" ExportId="NoAvailableLabel">
+                    <AttributeInfo Id="NoAvailableLabel" Type="Text" ExportId="NoAvailableLabel">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ObjectFactory" Type="Factory" ExportId="BitmapFactory">
