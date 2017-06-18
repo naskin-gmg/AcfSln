@@ -900,7 +900,8 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 
 	componentLabel.adjustSize();
 
-	QPixmap pixmap = QPixmap::grabWidget(&componentLabel);
+	QPixmap pixmap = componentLabel.grab();
+
 	QPalette palette = componentLabel.palette();
 
 	pixmap.setMask(pixmap.createMaskFromColor(palette.color(QPalette::Window), Qt::MaskInColor));

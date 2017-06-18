@@ -5,6 +5,7 @@
 #include <imod/TModelWrap.h>
 #include <ilog/CExtMessage.h>
 #include <i2d/CCircle.h>
+#include <i2d/CPolyline.h>
 
 // ACF-Solutions includes
 #include <icalib/CAffineCalibration2d.h>
@@ -104,6 +105,8 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 
 		const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(positionPtr);
 		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(positionPtr);
+		const i2d::CPolyline* polylinePtr = dynamic_cast<const i2d::CPolyline*>(positionPtr);
+
 		if (circlePtr != NULL){
 			i2d::CCircle transformedCircle;
 			if (!transformedCircle.CopyFrom(*circlePtr, istd::IChangeable::CM_CONVERT)){
@@ -115,7 +118,10 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
-						QString("Radius: %3, Pos.: (%1, %2)").arg(circlePtr->GetPosition().GetX()).arg(circlePtr->GetPosition().GetY()).arg(circlePtr->GetRadius()),
+						QString("Radius: %3, Pos.: (%1, %2)")
+							.arg(circlePtr->GetPosition().GetX())
+							.arg(circlePtr->GetPosition().GetY())
+							.arg(circlePtr->GetRadius()),
 						"PositionFinder");
 
 			i2d::CCircle* messageObjectPtr = new imod::TModelWrap<i2d::CCircle>();
@@ -135,7 +141,9 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
-						QString("Line: (%1, %2)->(%1, %2)").arg(linePtr->GetPoint1().GetX()).arg(linePtr->GetPoint1().GetY()).arg(linePtr->GetPoint2().GetX()).arg(linePtr->GetPoint2().GetY()),
+						QString("Line: (%1, %2)->(%3, %4)")
+							.arg(linePtr->GetPoint1().GetX()).arg(linePtr->GetPoint1().GetY())
+							.arg(linePtr->GetPoint2().GetX()).arg(linePtr->GetPoint2().GetY()),
 						"PositionFinder");
 
 			i2d::CLine2d* messageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
@@ -143,6 +151,26 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			messagePtr->InsertAttachedObject(messageObjectPtr);
 
 			AddMessage(messagePtr);
+		}
+		else if (polylinePtr != NULL){
+			i2d::CPolyline transformedLine;
+			if (!transformedLine.CopyFrom(*polylinePtr, istd::IChangeable::CM_CONVERT)){
+				return WS_ERROR;
+			}
+
+			resultVector = transformedLine.GetCenter();
+
+			ilog::CExtMessage* resultMessagePtr = new ilog::CExtMessage(
+						istd::IInformationProvider::IC_INFO,
+						iinsp::CSupplierCompBase::MI_INTERMEDIATE,
+						QObject::tr("Polyline: %1 edges").arg(transformedLine.GetSegmentsCount()),
+						"PositionFinder");
+
+			i2d::CPolyline* resultObjectPtr = new imod::TModelWrap<i2d::CPolyline>();
+			resultObjectPtr->CopyFrom(*polylinePtr, istd::IChangeable::CM_CONVERT);
+			resultMessagePtr->InsertAttachedObject(resultObjectPtr);
+			
+			AddMessage(resultMessagePtr);
 		}
 		else{
 			i2d::CPosition2d transformedPosition;
@@ -155,7 +183,9 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,
 						iinsp::CSupplierCompBase::MI_GEOMETRICAL_RESULT,
-						QString("R: %3, Pos.: (%1, %2)").arg(positionPtr->GetCenter().GetX()).arg(positionPtr->GetCenter().GetY()),
+						QString("Pos.: (%1, %2)")
+							.arg(positionPtr->GetCenter().GetX())
+							.arg(positionPtr->GetCenter().GetY()),
 						"PositionFinder");
 
 			i2d::CPosition2d* messageObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
