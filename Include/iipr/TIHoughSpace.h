@@ -25,6 +25,12 @@ public:
 	{
 	public:
 		/**
+			Get list of number of neighbours supprted by this consumer.
+			For example if it works correctly with 4 and 8 neighbourshood it should return {4, 8}.
+		*/
+		virtual QList<int> GetSupportedNeghboursCount() const = 0;
+
+		/**
 			Called when processing is started.
 		*/
 		virtual void OnProcessingBegin(
@@ -36,6 +42,12 @@ public:
 		virtual void OnProcessingEnd(const TIHoughSpace<Dimensions, Element>& space) = 0;
 		/**
 			Will be called when some local maximum is reached.
+			\param	space	Hough space.
+			\param	position		element position where maximum was found.
+			\param	value			value of element at given position.
+			\param	neghboursPtr	list of nighbours.
+			\param	neghboursCount	number of neighbours in the list. Must be one of returned by \c GetSupportedNeghboursCount().
+			\param	minValue		current minimal value, it can be correctd by this function to improve search performance.
 			\return	true, if object found and no more itarations are needed.
 		*/
 		virtual bool OnMaximumFound(
@@ -76,7 +88,7 @@ public:
 		\param	minValue		minimal value of hough at point.
 		\param	resultProcessor	will be called for each maximum.
 	*/
-	virtual void AnalyseHoughSpace(
+	virtual bool AnalyseHoughSpace(
 				const Element& minValue,
 				ResultsConsumer& resultProcessor) = 0;
 

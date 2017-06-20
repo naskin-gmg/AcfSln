@@ -311,8 +311,7 @@ void CHoughSpace2d::IncreaseValueAt(const imath::TVector<2>& position, double va
 
 void CHoughSpace2d::SmoothHoughSpace(const istd::TIndex<2>& iterations)
 {
-	switch (GetPixelFormat())
-	{
+	switch (GetPixelFormat()){
 	case PF_GRAY32:
 		DoSmoothHoughSpace<quint32, quint32>(iterations[0], iterations[1], m_isWrapped[0], m_isWrapped[1], *this);
 		break;
@@ -327,23 +326,28 @@ void CHoughSpace2d::SmoothHoughSpace(const istd::TIndex<2>& iterations)
 }
 
 
-void CHoughSpace2d::AnalyseHoughSpace(
+bool CHoughSpace2d::AnalyseHoughSpace(
 			const double& minValue,
 			ResultsConsumer& resultProcessor)
 {
-	switch (GetPixelFormat())
-	{
-	case PF_GRAY32:
-		DoAnalyseSpace<quint32, qint32>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
-		break;
+	QList<int> supportedNeighboursCount = resultProcessor.GetSupportedNeghboursCount();
+	if (supportedNeighboursCount.contains(4) || supportedNeighboursCount.isEmpty()){
+		switch (GetPixelFormat())
+		{
+		case PF_GRAY32:
+			DoAnalyseSpace<quint32, qint32>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
+			return true;
 
-	case PF_FLOAT32:
-		DoAnalyseSpace<float, float>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
-		break;
+		case PF_FLOAT32:
+			DoAnalyseSpace<float, float>(minValue, m_isWrapped[0], m_isWrapped[1], *this, resultProcessor);
+			return true;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+
+	return false;
 }
 
 
@@ -413,6 +417,12 @@ CHoughSpace2d::StdConsumer::StdConsumer(int maxPoints, int maxConsideredPoints, 
 	m_minDistance(minDistance),
 	m_minMaxRatio(minMaxRatio)
 {
+}
+
+
+QList<int> CHoughSpace2d::StdConsumer::GetSupportedNeghboursCount() const
+{
+	return QList<int>() << 4;
 }
 
 

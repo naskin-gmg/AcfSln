@@ -42,6 +42,7 @@ public:
 		StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio);
 
 		// reimplemented (iipr::TIHoughSpace<2>::ResultsConsumer)
+		virtual QList<int> GetSupportedNeghboursCount() const;
 		virtual void OnProcessingBegin(
 					const TIHoughSpace<2, double>& space,
 					const double& minValue);
@@ -86,7 +87,7 @@ public:
 	virtual void SetDimensionWrapped(int dimensionIndex, bool state);
 	virtual void IncreaseValueAt(const imath::TVector<2>& position, double value);
 	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations);
-	virtual void AnalyseHoughSpace(
+	virtual bool AnalyseHoughSpace(
 				const double& minValue,
 				ResultsConsumer& resultProcessor);
 	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
