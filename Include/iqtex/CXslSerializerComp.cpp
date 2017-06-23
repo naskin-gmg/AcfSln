@@ -16,6 +16,24 @@ namespace iqtex
 {
 
 
+bool CXslSerializerComp::IsOperationSupported(
+			const istd::IChangeable* dataObjectPtr,
+			const QString* filePathPtr,
+			int flags,
+			bool beQuiet) const
+{
+	if (((flags & (QF_LOAD | QF_SAVE)) == QF_LOAD) && !m_xslReadFilePath.IsValid()){
+		return false;
+	}
+
+	if (((flags & (QF_LOAD | QF_SAVE)) == QF_SAVE) && !m_xslWriteFilePath.IsValid()){
+		return false;
+	}
+
+	return BaseClass::IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet);
+}
+
+
 int CXslSerializerComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,

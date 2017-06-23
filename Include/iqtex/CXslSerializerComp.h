@@ -23,11 +23,16 @@ public:
 	typedef ifile::CFileSerializerCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CXslSerializerComp);
-		I_ASSIGN(m_xslReadFilePath, "ReadTransformationFile", "Transformation file for reading action", true, "ReadTransformationFile");
-		I_ASSIGN(m_xslWriteFilePath, "WriteTransformationFile", "Transformation file for writing action", true, "WriteTransformationFile");
+		I_ASSIGN(m_xslReadFilePath, "ReadTransformationFile", "Transformation file for reading action", false, "ReadTransformationFile");
+		I_ASSIGN(m_xslWriteFilePath, "WriteTransformationFile", "Transformation file for writing action", false, "WriteTransformationFile");
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFilePersistence)
+	virtual bool IsOperationSupported(
+				const istd::IChangeable* dataObjectPtr,
+				const QString* filePathPtr = NULL,
+				int flags = -1,
+				bool beQuiet = true) const;
 	virtual int LoadFromFile(
 				istd::IChangeable& data,
 				const QString& filePath = QString(),
