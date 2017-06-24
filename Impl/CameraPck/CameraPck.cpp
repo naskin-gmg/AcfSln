@@ -74,6 +74,11 @@ I_EXPORT_COMPONENT(
 			"Camera wrapper providing bitmaps with embedded resolution information",
 			"Camera Calibration Resolution Image Bitmap Snap");
 
+I_EXPORT_COMPONENT(
+			MultiSourceSnapBitmapSupplier,
+			"Bitmap snap supplier based on set of registered cameras",
+			"Camera Calibration Supplier Image Bitmap Snap");
+
 
 } // namespace CameraPck
 

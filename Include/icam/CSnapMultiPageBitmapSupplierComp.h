@@ -35,7 +35,6 @@ public:
 	I_BEGIN_COMPONENT(CSnapMultiPageBitmapSupplierComp);
 		I_REGISTER_INTERFACE(iimg::IMultiBitmapProvider);
 		I_REGISTER_INTERFACE(idoc::IMultiPageDocumentProvider);
-		I_REGISTER_SUBELEMENT(ScaleConstraints);		
 		I_ASSIGN(m_bitmapCompFact, "BitmapFactory", "Use to create bitmap object", true, "BitmapFactory");
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
 	I_END_COMPONENT;

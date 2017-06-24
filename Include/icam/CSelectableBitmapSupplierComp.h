@@ -25,7 +25,7 @@ namespace icam
 
 
 /**
-	Implementation of bitmap supplier based on image acquisition.
+	Implementation of bitmap supplier based on selection of the bitmap from underlaying multi-bitmap provider.
 */
 class CSelectableBitmapSupplierComp:
 			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
