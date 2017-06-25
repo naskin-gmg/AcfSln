@@ -39,11 +39,11 @@ const i2d::ITransformation2d* CBitmapJoinerSupplierComp::GetLogTransform() const
 int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapsProviderCompPtr.IsValid()){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!EnsureBitmapCreated(result)){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 	
 	Q_ASSERT(result.second.IsValid());
@@ -53,7 +53,7 @@ int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 	int inputBitmapsCount = m_bitmapsProviderCompPtr->GetBitmapsCount();
 
 	if (inputBitmapsCount <= 0){
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	QVector<const iimg::IBitmap*> inputBitmaps;
@@ -63,7 +63,7 @@ int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 		if (bitmapPtr == NULL){
 			SendErrorMessage(0, "Input image could not be provided");
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 	
 		inputBitmaps.push_back(bitmapPtr);
@@ -75,7 +75,7 @@ int CBitmapJoinerSupplierComp::ProduceObject(ProductType& result) const
 				inputBitmaps,
 				joinMode,
 				*result.second.GetPtr(),
-				const_cast<CBitmapJoinerSupplierComp*>(this)) ? WS_OK : WS_ERROR;
+				const_cast<CBitmapJoinerSupplierComp*>(this)) ? WS_OK : WS_FAILED;
 }
 
 

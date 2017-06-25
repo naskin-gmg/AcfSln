@@ -40,7 +40,7 @@ void CMultiBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() == iinsp::ISupplier::WS_FAILED){
 			SizeLabel->setText("Snap Error");
 		}
 

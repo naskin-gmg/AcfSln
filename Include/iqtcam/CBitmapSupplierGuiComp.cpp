@@ -102,10 +102,11 @@ void CBitmapSupplierGuiComp::DoSnap(bool noGui)
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() == iinsp::ISupplier::WS_FAILED){
 			if (noGui){
 				SendCriticalMessage(0, QObject::tr("Snap Error"));
-			} else {
+			}
+			else{
 				QMessageBox::warning(
 					GetQtWidget(),
 					QObject::tr("Error"),

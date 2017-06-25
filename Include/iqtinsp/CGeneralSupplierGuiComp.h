@@ -53,7 +53,7 @@ void TGeneralSupplierGuiComp<UI>::Test()
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		if (supplierPtr->GetWorkStatus() >= iinsp::ISupplier::WS_ERROR){
+		if (supplierPtr->GetWorkStatus() == iinsp::ISupplier::WS_FAILED){
 			QMessageBox::warning(
 				BaseClass::GetQtWidget(),
 				QObject::tr("Error"),

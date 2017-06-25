@@ -76,13 +76,13 @@ int CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (!m_bitmapCompFact.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_bitmapAcquisitionCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapAcquisition' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!result.IsValid()){
@@ -90,7 +90,7 @@ int CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
 		if (!result.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 	}
 
@@ -106,11 +106,11 @@ int CSnapMultiPageBitmapSupplierComp::ProduceObject(ProductType& result) const
 				return WS_CANCELED;
 
 			default:
-				return WS_ERROR;
+				return WS_FAILED;
 		}
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

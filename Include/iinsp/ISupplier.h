@@ -44,14 +44,11 @@ public:
 			Work was canceled.
 		*/
 		WS_CANCELED,
-		/**
-			Work was done, but there were errors.
-		*/
-		WS_ERROR,
+
 		/**
 			Work cannot be done.
 		*/
-		WS_CRITICAL
+		WS_FAILED
 	};
 
 	/**

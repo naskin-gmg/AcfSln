@@ -47,11 +47,11 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 	iproc::IProcessor* imageProcessorPtr = GetImageProcessor();
 
 	if (!m_bitmapProviderCompPtr.IsValid() || (imageProcessorPtr == NULL)){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!EnsureBitmapCreated(result)){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 	Q_ASSERT(result.IsValid());
 
@@ -59,7 +59,7 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 	if (bitmapPtr == NULL){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "BitmapProcessing"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	Timer performanceTimer(this, "Bitmap processing");
@@ -73,11 +73,11 @@ int CProcessedBitmapSupplierBase::ProduceObject(ProductType& result) const
 			return WS_CANCELED;
 
 		default:
-			return WS_ERROR;
+			return WS_FAILED;
 	}
 
 	// should not get here
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

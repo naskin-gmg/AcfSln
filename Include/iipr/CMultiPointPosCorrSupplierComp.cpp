@@ -64,7 +64,7 @@ int CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
 	if (!m_featureProcessorsCompPtr.IsValid()){
 		SendCriticalMessage(0, "Wrong component topology");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	const iimg::IBitmap* inputImagePtr = NULL;
@@ -75,14 +75,14 @@ int CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
 	if (inputImagePtr == NULL){
 		SendErrorMessage(0, QObject::tr("No input image"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	iprm::TParamsPtr<iprm::IParamsManager> pointParamsManagerPtr(GetModelParametersSet(), *m_pointParamsManagerIdAttrPtr, true);
 	if (!pointParamsManagerPtr.IsValid()){
 		SendErrorMessage(0, QObject::tr("No manager of single points found"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	QVector<i2d::CVector2d> destPoints;
@@ -104,7 +104,7 @@ int CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
 				if (processorPtr == NULL){
 					SendCriticalMessage(0, QString("No processor found for %1").arg(pointParamsManagerPtr->GetParamsSetName(i)));
 
-					return WS_ERROR;
+					return WS_FAILED;
 				}
 
 				iipr::CSingleFeatureConsumer consumer(iipr::CSingleFeatureConsumer::FP_HEAVIEST);
@@ -129,7 +129,7 @@ int CMultiPointPosCorrSupplierComp::ProduceObject(ProductType& result) const
 				else{
 					SendErrorMessage(0, QObject::tr("Cannot calculate position %1").arg(pointParamsManagerPtr->GetParamsSetName(i)));
 
-					return WS_ERROR;
+					return WS_FAILED;
 				}
 			}
 		}

@@ -45,14 +45,16 @@ void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 {
 	Q_ASSERT(IsGuiCreated());
 
-	bool isUnitKnown = false;
+	bool isUnitVisible = false;
 
 	iipr::ICircleFinderParams* objectPtr = GetObservedObject();
 	if (objectPtr != NULL){
-		EnableOutliersElimination->setChecked(objectPtr->IsOutlierEliminationEnabled());
+		bool useOutlier = objectPtr->IsOutlierEliminationEnabled();
 
-		MinOutliersDistance->setVisible(objectPtr->IsOutlierEliminationEnabled());
-		MinOutliersDistanceLabel->setVisible(objectPtr->IsOutlierEliminationEnabled());
+		EnableOutliersElimination->setChecked(useOutlier);
+
+		MinOutliersDistance->setVisible(useOutlier);
+		MinOutliersDistanceLabel->setVisible(useOutlier);
 		CaliperMode->setCurrentIndex(objectPtr->GetCaliperMode());
 
 		double distanceDisplayFactor = 1;
@@ -67,7 +69,7 @@ void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 		MinOutliersDistance->setValue(objectPtr->GetMinOutlierDistance() * distanceDisplayFactor);
 
 		UnitLabel->setText(unitName);
-		isUnitKnown = !unitName.isEmpty();
+		isUnitVisible = !unitName.isEmpty() && useOutlier;
 
 		if (objectPtr->GetRaysCount() < 0){
 			MaxRaysCount->setValue(MaxRaysCount->minimum());
@@ -77,7 +79,7 @@ void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 		}
 	}
 
-	UnitLabel->setVisible(isUnitKnown);
+	UnitLabel->setVisible(isUnitVisible);
 }
 
 
@@ -86,6 +88,8 @@ void CCircleFinderParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /
 void CCircleFinderParamsGuiComp::on_EnableOutliersElimination_toggled(bool /*value*/)
 {
 	DoUpdateModel();
+
+	UpdateGui(istd::IChangeable::GetAllChanges());
 }
 
 

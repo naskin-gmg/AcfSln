@@ -45,19 +45,19 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (!m_bitmapCompFact.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_multiBitmapProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'MultiBitmapProvider' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_bitmapSelectionCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapSelection' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!result.second.IsValid()){
@@ -65,7 +65,7 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 		if (!result.second.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 	}
 
@@ -74,12 +74,12 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 		if (selectedIndex < 0){
 			SendVerboseMessage("Bitmap selection index invalid");
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		int bitmapsCount = m_multiBitmapProviderCompPtr->GetBitmapsCount();
 		if (selectedIndex >= bitmapsCount){
-			return WS_ERROR;		
+			return WS_FAILED;		
 		}
 
 		const iimg::IBitmap* outputBitmapPtr = m_multiBitmapProviderCompPtr->GetBitmap(selectedIndex);
@@ -103,11 +103,11 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 			}
 		}
 		else{
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

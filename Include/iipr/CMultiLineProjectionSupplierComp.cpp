@@ -22,7 +22,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 		if (bitmapPtr == NULL){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "MultiLineProjection"));
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		m_linesSupplierCompPtr->InvalidateSupplier();
@@ -33,7 +33,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 		if (projectionCount <= 0){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No projection lines found"), "MultiLineProjection"));
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		result.resize(projectionCount);
@@ -47,7 +47,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 			if (varVector.GetElementsCount() < 4){
 				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No line at projection %1 found").arg(i + 1), "MultiLineProjection"));
 
-				return WS_ERROR;
+				return WS_FAILED;
 			}
 
 			i2d::CLine2d line(
@@ -60,7 +60,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 			if (!isOk){
 				AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Calculation of projection %1 failed").arg(i + 1), "MultiLineProjection"));
 
-				retVal = WS_ERROR;
+				retVal = WS_FAILED;
 			}
 
 			ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
@@ -81,7 +81,7 @@ int CMultiLineProjectionSupplierComp::ProduceObject(ProductType& result) const
 
 	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or lines provider were not set");
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

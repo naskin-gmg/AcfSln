@@ -67,7 +67,6 @@ QDateTime CColorPatternComparatorComp::GetInformationTimeStamp() const
 istd::IInformationProvider::InformationCategory CColorPatternComparatorComp::GetInformationCategory() const
 {
 	int workStatus = GetWorkStatus();
-
 	switch (workStatus){
 		case WS_OK:
 			if (!m_isColorPatternMatched){
@@ -75,10 +74,7 @@ istd::IInformationProvider::InformationCategory CColorPatternComparatorComp::Get
 			}
 			return IC_INFO;
 
-		case WS_ERROR:
-			return IC_ERROR;
-
-		case WS_CRITICAL:
+		case WS_FAILED:
 			return IC_CRITICAL;
 
 		default:
@@ -169,27 +165,27 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	if (!m_workingPatternProviderCompPtr.IsValid() || !m_taughtPatternProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'WorkingPatternProvider' or 'TaughtPatternProvider' component references are not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_dataStatisticsProcessorCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'DataStatisticsProcessor' component references are not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	const imeas::IDataSequence* workingHistogramPtr = m_workingPatternProviderCompPtr->GetDataSequence();
 	if (workingHistogramPtr == NULL){
 		SendErrorMessage(0, "Working histogram not available");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	const imeas::IDataSequence* taughtHistogramPtr = m_taughtPatternProviderCompPtr->GetDataSequence();
 	if (taughtHistogramPtr == NULL){
 		SendErrorMessage(0, "Taught histogram not available");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	int workingSamplesCount = workingHistogramPtr->GetSamplesCount();
@@ -197,7 +193,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	if (workingSamplesCount != taughtSamplesCount){
 		SendErrorMessage(0, "Working and taught histograms have different dimensions");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	int channelsCount = taughtHistogramPtr->GetChannelsCount();
@@ -205,28 +201,28 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	if ((workingHistogramPtr->GetChannelsCount() != channelsCount) || ((channelsCount != 3) && (channelsCount != 1))){
 		SendErrorMessage(0, "A histogram has wrong dimension. Only histograms for gray value and RGB images are supported");
 
-		return WS_ERROR;	
+		return WS_FAILED;	
 	}
 
 	imeas::CDataSequenceStatistics workingStatistics;
 	if (m_dataStatisticsProcessorCompPtr->CalculateDataStatistics(*workingHistogramPtr, workingStatistics) != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Calculation of the histogram statistics data failed");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	imeas::CDataSequenceStatistics taughtStatistics;
 	if (m_dataStatisticsProcessorCompPtr->CalculateDataStatistics(*taughtHistogramPtr, taughtStatistics) != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Calculation of the histogram statistics data failed");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	iprm::TParamsPtr<imeas::INumericValue> comparsionThresholdPtr(GetModelParametersSet(), *m_patternCompareThresholdParamIdAttrPtr);
 	if (!comparsionThresholdPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, comparison threshold attribute is invalid");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	Q_ASSERT(taughtStatistics.GetChannelsCount() == workingStatistics.GetChannelsCount());
@@ -235,19 +231,19 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	if (thresholdValues.GetElementsCount() != channelsCount){
 		SendErrorMessage(0, "Dimension of the threshold parameter is not corresponding with the given histogram dimension");
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	// Input image is RGB. Differences between taught and working images are done in HSV color space:
 	if (channelsCount == 3){
 		icmm::CHsv taughtHsvColor;
 		if (!GetHsvColorValue(taughtStatistics, taughtHsvColor)){
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		icmm::CHsv workingHsvColor;
 		if (!GetHsvColorValue(workingStatistics, workingHsvColor)){
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		imath::CVarVector values(9);

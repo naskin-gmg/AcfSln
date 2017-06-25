@@ -201,11 +201,7 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 			}
 			break;
 
-		case iinsp::ISupplier::WS_ERROR:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid"));
-			break;
-
-		case iinsp::ISupplier::WS_CRITICAL:
+		case iinsp::ISupplier::WS_FAILED:
 			StateIconLabel->setPixmap(QPixmap(":/Icons/Error"));
 			break;
 

@@ -22,13 +22,13 @@ int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 	if (!m_edgeLinesProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'EdgeLinesProvider' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_edgesProcessorCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'EdgesProcessor' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	const CEdgeLineContainer* containerPtr = m_edgeLinesProviderCompPtr->GetEdgesContainer();
@@ -51,7 +51,7 @@ int CProcessedEdgeLinesSupplierComp::ProduceObject(CEdgeLineContainer& result) c
 		}
 	}
 
-	return WS_ERROR;
+	return WS_FAILED;
 }
 
 

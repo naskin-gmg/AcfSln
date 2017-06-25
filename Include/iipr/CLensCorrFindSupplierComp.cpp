@@ -406,20 +406,20 @@ void CLensCorrFindSupplierComp::UpdateHoughSpace(
 int CLensCorrFindSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_bitmapProviderCompPtr.IsValid()){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Input image could not be provided"), "LensCorrectionFinder"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	Timer performanceTimer(this, "Lens correction finder");
 
 	if (!CalculateCalibration(*bitmapPtr, result)){
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	return WS_OK;

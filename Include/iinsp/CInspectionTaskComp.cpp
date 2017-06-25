@@ -346,14 +346,10 @@ void CInspectionTaskComp::EnsureStatusKnown()
 					}
 				}
 
-				if (workStatus >= WS_ERROR){
-					InformationCategory supplierResult = (workStatus >= WS_CRITICAL)?
-								IC_CRITICAL:
-								IC_ERROR;
-					if (supplierResult > m_resultCategory){
-						m_resultCategory = supplierResult;
-						m_resultDescription = "";
-					}
+				if (workStatus == WS_FAILED){
+					m_resultCategory = IC_CRITICAL;
+
+					m_resultDescription = "";
 				}
 			}
 		}

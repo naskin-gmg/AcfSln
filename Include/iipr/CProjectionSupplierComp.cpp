@@ -33,13 +33,13 @@ int CProjectionSupplierComp::ProduceObject(ProductType& result) const
 			case iproc::IProcessor::TS_CANCELED:
 				return WS_CANCELED;
 			default:
-				return WS_ERROR;
+				return WS_FAILED;
 		}
 	}
 
 	SendCriticalMessage(0, "Bad component archtecture. Bitmap provider or projection processor were not set");
 	
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

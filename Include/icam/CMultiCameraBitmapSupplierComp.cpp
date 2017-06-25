@@ -75,24 +75,24 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (!m_bitmapCompFact.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_bitmapAcquisitionCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'BitmapAcquisition' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!m_cameraParamsManagerCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'CameraParamsManager' component reference is not set");
 
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	int camerasCount = m_cameraParamsManagerCompPtr->GetParamsSetsCount();
 	if (camerasCount <= 0){
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	int retVal = WS_OK;
@@ -104,7 +104,7 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 		if (!cameraBitmapPtr.IsValid()){
 			SendErrorMessage(0, "Bitmap instance could not be created");
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		int status = m_bitmapAcquisitionCompPtr->DoProcessing(
@@ -124,7 +124,7 @@ int CMultiCameraBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 				default:
 					result.Reset();
-					retVal = WS_ERROR;
+					retVal = WS_FAILED;
 					break;
 		}
 	}

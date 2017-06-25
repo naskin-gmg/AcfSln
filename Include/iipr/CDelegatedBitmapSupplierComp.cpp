@@ -55,7 +55,7 @@ int CDelegatedBitmapSupplierComp::GetWorkStatus() const
 		return WS_OK;
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

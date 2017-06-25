@@ -59,13 +59,13 @@ int CExtremumCaliperSupplierComp::ProduceObject(ProductType& result) const
 			return WS_CANCELED;
 
 		default:
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 	}
 
 	SendCriticalMessage(0, "Bad component archtecture. Data sequence provider or extremum processor were not set");
 	
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

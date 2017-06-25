@@ -71,11 +71,11 @@ bool CDifferenceBitmapSupplierComp::EnsureBitmapCreated(ProductType& result) con
 int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 {
 	if (!m_firstBitmapProviderCompPtr.IsValid() || !m_secondBitmapProviderCompPtr.IsValid()){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	if (!EnsureBitmapCreated(result)){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 	Q_ASSERT(result.second.IsValid());
 
@@ -85,14 +85,14 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (firstBitmapPtr == NULL){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("First input image could not be provided"), "DifferenceBitmapSupplier"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	const iimg::IBitmap* secondBitmapPtr = m_secondBitmapProviderCompPtr->GetBitmap();
 	if (secondBitmapPtr == NULL){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Second input image could not be provided"), "DifferenceBitmapSupplier"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	iimg::IBitmap::PixelFormat pixelFormat = firstBitmapPtr->GetPixelFormat();
@@ -100,7 +100,7 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 	if (pixelFormat != secondBitmapPtr->GetPixelFormat()){
 		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Format of input images differs"), "DifferenceBitmapSupplier"));
 
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
 	double offset = 0;
@@ -114,7 +114,7 @@ int CDifferenceBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 	Timer performanceTimer(this, "Image difference");
 
-	return iipr::CBitmapOperations::CaclulateBitmapDifference(*firstBitmapPtr, *secondBitmapPtr, *result.second, offset, GetLogPtr()) ? WS_OK : WS_ERROR;
+	return iipr::CBitmapOperations::CaclulateBitmapDifference(*firstBitmapPtr, *secondBitmapPtr, *result.second, offset, GetLogPtr()) ? WS_OK : WS_FAILED;
 }
 
 

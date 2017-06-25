@@ -370,7 +370,7 @@ bool TSupplierGuiCompBase<UI>::DoTest()
 		supplierPtr->EnsureWorkInitialized();
 		supplierPtr->EnsureWorkFinished();
 
-		return supplierPtr->GetWorkStatus() < iinsp::ISupplier::WS_ERROR;
+		return supplierPtr->GetWorkStatus() != iinsp::ISupplier::WS_FAILED;
 	}
 
 	return false;
@@ -424,13 +424,8 @@ void TSupplierGuiCompBase<UI>::UpdateVisualStatus()
 			statusText = QObject::tr("Processing canceled by user");
 			break;
 
-		case iinsp::ISupplier::WS_ERROR:
+		case iinsp::ISupplier::WS_FAILED:
 			statusText = QObject::tr("Processing not possible");
-			statusIcon = QIcon(":/Icons/StateInvalid");
-			break;
-
-		case iinsp::ISupplier::WS_CRITICAL:
-			statusText = QObject::tr("Critical error occurred, application problem");
 			statusIcon = QIcon(":/Icons/Error");
 			break;
 

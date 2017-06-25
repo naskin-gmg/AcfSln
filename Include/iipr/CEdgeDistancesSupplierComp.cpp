@@ -47,7 +47,7 @@ int CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
 		if (bitmapPtr == NULL){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "EdgeDistances"));
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
@@ -60,17 +60,17 @@ int CEdgeDistancesSupplierComp::ProduceObject(ProductType& result) const
 						&result);
 
 		if (processorState != iproc::IProcessor::TS_OK){
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		if (result.GetFeaturesCount() < 1){
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		return WS_OK;
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

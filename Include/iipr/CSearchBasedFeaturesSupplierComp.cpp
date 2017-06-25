@@ -161,7 +161,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		if (bitmapPtr == NULL){
 			AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("No input image"), "FeatureSearch"));
 
-			return WS_ERROR;
+			return WS_FAILED;
 		}
 
 		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
@@ -173,7 +173,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			if (!paramsManagerPtr.IsValid()){
 				SendErrorMessage(iproc::IProcessor::MI_BAD_PARAMS, "No inspection list found");
 
-				return WS_ERROR;
+				return WS_FAILED;
 			}
 
 			multiSearchParamsManagerPtr = paramsManagerPtr.GetPtr();
@@ -204,7 +204,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 					AddMessage(message);
 
-					return WS_ERROR;
+					return WS_FAILED;
 				}
 
 				int featuresCount = searchResults.GetFeaturesCount();
@@ -236,12 +236,12 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 					const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetFeature(featureIndex));
 					if (objectFeaturePtr == NULL){
-						return WS_CRITICAL;
+						return WS_FAILED;
 
 					}
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(objectFeaturePtr);
 					if (searchFeaturePtr == NULL){
-						return WS_CRITICAL;
+						return WS_FAILED;
 					}
 
 					if (		m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && 
@@ -266,12 +266,12 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 					istd::IChangeable* featurePtr = objectFeaturePtr->CloneMe();
 					if (featurePtr == NULL){
-						return WS_CRITICAL;
+						return WS_FAILED;
 					}
 
 					imeas::INumericValue* valuePtr = dynamic_cast<imeas::INumericValue*>(featurePtr);
 					if (valuePtr == NULL){
-						return WS_CRITICAL;
+						return WS_FAILED;
 					}
 
 					result.AddFeature(valuePtr);
@@ -293,7 +293,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					
 				AddMessage(message);
 
-				return WS_ERROR;
+				return WS_FAILED;
 			}
 
 			// check if certain amount of models was found
@@ -354,7 +354,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		return WS_OK;
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

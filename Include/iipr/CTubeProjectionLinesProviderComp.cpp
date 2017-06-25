@@ -33,7 +33,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 
 	iprm::IParamsSet* paramsPtr = GetModelParametersSet();
 	if (paramsPtr == NULL){
-		return WS_CRITICAL;
+		return WS_FAILED;
 	}
 
 	iprm::TParamsPtr<i2d::CTubePolyline> tubeRegionPtr(paramsPtr, *m_tubeParamsIdAttrPtr);
@@ -53,7 +53,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 			if (m_calibrationProviderCompPtr.IsValid()){
 				const i2d::ICalibration2d* transformPtr = m_calibrationProviderCompPtr->GetCalibration();
 				if (transformPtr == NULL){
-					return WS_ERROR;
+					return WS_FAILED;
 				}
 				else{
 					ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
@@ -67,7 +67,7 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 						if (!line.Transform(*transformPtr)){
 							result.clear();
 
-							return WS_ERROR;
+							return WS_FAILED;
 						}
 						
 						i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
@@ -83,10 +83,10 @@ int CTubeProjectionLinesProviderComp::ProduceObject(ProductType& result) const
 			return WS_OK;
 		}
 	
-		return WS_ERROR;
+		return WS_FAILED;
 	}
 
-	return WS_CRITICAL;
+	return WS_FAILED;
 }
 
 

@@ -81,7 +81,7 @@ void CSupplierCompBase::EnsureWorkInitialized()
 			m_workStatus.SetSupplierState(WS_INIT);
 		}
 		else{
-			m_workStatus.SetSupplierState(WS_CRITICAL);
+			m_workStatus.SetSupplierState(WS_FAILED);
 		}
 
 		m_productChangeNotifierPtr.Reset();
