@@ -12,7 +12,7 @@
 #include <iproc/TSyncProcessorWrap.h>
 #include <iipr/IImageToFeatureProcessor.h>
 #include <iipr/TWeightedFeatureWrap.h>
-#include <iipr/CHoughSpace2d.h>
+#include <ialgo/CHoughSpace2d.h>
 
 
 namespace iipr
@@ -83,7 +83,7 @@ private:
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 
-	CHoughSpace2d m_houghSpace;
+	ialgo::CHoughSpace2d m_houghSpace;
 
 	typedef QVector<i2d::CVector2d> AngleVectors;
 	AngleVectors m_angleVectors;

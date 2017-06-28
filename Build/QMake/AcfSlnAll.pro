@@ -6,6 +6,9 @@ include ($(ACFCONFIGDIR)/QMake/Solution.pri)
 
 # Static libraries
 
+SUBDIRS += ialgo
+ialgo.file = ../../Include/ialgo/QMake/ialgo.pro
+
 SUBDIRS += iauth
 iauth.file = ../../Include/iauth/QMake/iauth.pro
 

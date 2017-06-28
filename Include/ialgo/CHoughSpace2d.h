@@ -1,5 +1,5 @@
-#ifndef iipr_CHoughSpace2d_included
-#define iipr_CHoughSpace2d_included
+#ifndef ialgo_CHoughSpace2d_included
+#define ialgo_CHoughSpace2d_included
 
 
 // Qt includes
@@ -10,10 +10,10 @@
 #include <iimg/CGeneralBitmap.h>
 
 // ACF-Solutions includes
-#include <iipr/TIHoughSpace.h>
+#include <ialgo/TIHoughSpace.h>
 
 
-namespace iipr
+namespace ialgo
 {
 
 
@@ -41,7 +41,7 @@ public:
 		*/
 		StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio);
 
-		// reimplemented (iipr::TIHoughSpace<2>::ResultsConsumer)
+		// reimplemented (ialgo::TIHoughSpace<2>::ResultsConsumer)
 		virtual QList<int> GetSupportedNeghboursCount() const;
 		virtual void OnProcessingBegin(
 					const TIHoughSpace<2, double>& space,
@@ -81,7 +81,7 @@ public:
 	template <typename Operation>
 	void CombineWithSpace(const CHoughSpace2d& space, Operation operation);
 
-	// reimplemented (iipr::TIHoughSpace<2>)
+	// reimplemented (ialgo::TIHoughSpace<2>)
 	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0);
 	virtual bool IsDimensionWrapped(int dimensionIndex) const;
 	virtual void SetDimensionWrapped(int dimensionIndex, bool state);
@@ -150,9 +150,9 @@ void CHoughSpace2d::CombineWithSpace(const CHoughSpace2d& space, Operation opera
 }
 
 
-} // namespace iipr
+} // namespace ialgo
 
 
-#endif // !iipr_CHoughSpace2d_included
+#endif // !ialgo_CHoughSpace2d_included
 
 

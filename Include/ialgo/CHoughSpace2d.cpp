@@ -1,4 +1,4 @@
-#include <iipr/CHoughSpace2d.h>
+#include <ialgo/CHoughSpace2d.h>
 
 
 // STL includes
@@ -8,7 +8,7 @@
 #include <istd/CChangeNotifier.h>
 
 
-namespace iipr
+namespace ialgo
 {
 
 
@@ -39,7 +39,7 @@ void DoSmoothHoughSpace(
 					storedValue = value;
 				}
 				else{
-					nextX = 2;
+					nextX = 1;
 					prevValue = spaceLinePtr[0];
 					value = spaceLinePtr[1];
 				}
@@ -55,6 +55,9 @@ void DoSmoothHoughSpace(
 
 				if (isWrappedX){
 					spaceLinePtr[nextX - 1] = PixelType((WorkingType(value) * 2 + WorkingType(prevValue) + WorkingType(storedValue)) / 4);
+				}
+				else{
+					spaceLinePtr[nextX - 1] = PixelType((WorkingType(value) * 2 + WorkingType(prevValue)) / 4);
 				}
 			}
 		}
@@ -131,14 +134,10 @@ void DoAnalyseSpace(
 		for (; nextX < spaceSize.GetX(); ++nextX){
 			PixelType value = spaceLinePtr[position.GetX()];
 			if (		(value >= minValue) &&
-						(value >= prevSpaceLinePtr[prevX]) &&
 						(value > prevSpaceLinePtr[position.GetX()]) &&
-						(value > prevSpaceLinePtr[nextX]) &&
 						(value >= spaceLinePtr[prevX]) &&
 						(value > spaceLinePtr[nextX]) &&
-						(value >= nextSpaceLinePtr[prevX]) &&
-						(value >= nextSpaceLinePtr[position.GetX()]) &&
-						(value > nextSpaceLinePtr[nextX])){
+						(value >= nextSpaceLinePtr[position.GetX()])){
 				double neighbours[] = {
 							double(spaceLinePtr[prevX]),
 							double(spaceLinePtr[nextX]),
@@ -241,7 +240,7 @@ bool CHoughSpace2d::CreateHoughSpace(
 }
 
 
-// reimplemented (iipr::TIHoughSpace<2>)
+// reimplemented (ialgo::TIHoughSpace<2>)
 
 bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& /*initValue*/)
 {
@@ -409,7 +408,7 @@ bool CHoughSpace2d::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& 
 
 // public methods of embedded class StdConsumer
 
-// reimplemented (iipr::TIHoughSpace<2>::ResultsConsumer)
+// reimplemented (ialgo::TIHoughSpace<2>::ResultsConsumer)
 
 CHoughSpace2d::StdConsumer::StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio)
 :	m_maxPoints(maxPoints),
@@ -436,17 +435,20 @@ void CHoughSpace2d::StdConsumer::OnProcessingBegin(
 
 void CHoughSpace2d::StdConsumer::OnProcessingEnd(const TIHoughSpace<2, double>& space)
 {
+	QMultiMap<double, i2d::CVector2d> finalPositions;
+
 	// remove elements beeing to close to each other
-	for (		QMultiMap<double, i2d::CVector2d>::Iterator point1Iter = positions.begin();
-				point1Iter != positions.end();){
-		const i2d::CVector2d& point1 = point1Iter.value();
+	for (		QMultiMap<double, i2d::CVector2d>::ConstIterator pointIter = positions.constBegin();
+				pointIter != positions.constEnd();
+				++pointIter){
+		const i2d::CVector2d& point1 = pointIter.value();
 
 		bool isToClose = false;
 
-		for (		QMultiMap<double, i2d::CVector2d>::Iterator point2Iter = point1Iter + 1;
-					point2Iter != positions.end();
-					++point2Iter){
-			const i2d::CVector2d& point2 = point2Iter.value();
+		for (		QMultiMap<double, i2d::CVector2d>::ConstIterator searchClosedIter = finalPositions.constBegin();
+					searchClosedIter != finalPositions.constEnd();
+					++searchClosedIter){
+			const i2d::CVector2d& point2 = searchClosedIter.value();
 
 			double dist2 = space.GetDistance2(point1, point2);
 			if (dist2 <= m_minDistance * m_minDistance){
@@ -456,22 +458,16 @@ void CHoughSpace2d::StdConsumer::OnProcessingEnd(const TIHoughSpace<2, double>& 
 			}
 		}
 
-		if (isToClose){
-			point1Iter = positions.erase(point1Iter);
-		}
-		else{
-			++point1Iter;
+		if (!isToClose){
+			finalPositions.insertMulti(-pointIter.key(), point1);
+
+			if ((m_maxPoints >= 0) && (finalPositions.size() > m_maxPoints)){
+				break;
+			}
 		}
 	}
 
-	// cut this list to user defined maximal size
-	if (m_maxPoints >= 0){
-		while (positions.size() > m_maxPoints){
-			QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
-
-			positions.erase(lastIter);	// remove the weekest element
-		}
-	}
+	positions.swap(finalPositions);
 }
 
 
@@ -496,7 +492,7 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 
 	i2d::CVector2d resultPos(position[0] + correctionX, position[1] + correctionY);
 
-	positions.insert(value, resultPos);
+	positions.insert(-value, resultPos);
 
 	if (value > m_maxValue){
 		m_maxValue = value;
@@ -506,7 +502,7 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 
 			// remove elements weeker than new calculated minValue
 			while (!positions.isEmpty() && positions.firstKey() < minValue){
-				QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
+				QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
 
 				positions.erase(lastIter);
 			}
@@ -515,7 +511,7 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 
 	// try remove the last one if we have too many points
 	if (positions.count() > m_maxConsideredPoints){
-		QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.begin();
+		QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
 		double lastValue = lastIter.key();
 		positions.erase(lastIter);
 
@@ -528,6 +524,6 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 }
 
 
-} // namespace iipr
+} // namespace ialgo
 
 

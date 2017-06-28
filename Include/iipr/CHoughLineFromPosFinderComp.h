@@ -13,7 +13,7 @@
 #include <iproc/TSyncProcessorWrap.h>
 #include <iipr/IImageToFeatureProcessor.h>
 #include <iipr/TWeightedFeatureWrap.h>
-#include <iipr/CHoughSpace2d.h>
+#include <ialgo/CHoughSpace2d.h>
 #include <iipr/IFeatureToFeatureProcessor.h>
 
 
@@ -96,7 +96,7 @@ private:
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 
-	iipr::CHoughSpace2d m_houghSpace;
+	ialgo::CHoughSpace2d m_houghSpace;
 	i2d::CVector2d m_direction;
 	double m_directionAngleTolerance;
 };

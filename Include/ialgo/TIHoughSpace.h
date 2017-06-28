@@ -1,5 +1,5 @@
-#ifndef iipr_TIHoughSpace_included
-#define iipr_TIHoughSpace_included
+#ifndef ialgo_TIHoughSpace_included
+#define ialgo_TIHoughSpace_included
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include <imath/TVector.h>
 
 
-namespace iipr
+namespace ialgo
 {
 
 
@@ -116,9 +116,9 @@ public:
 };
 
 
-} // namespace iipr
+} // namespace ialgo
 
 
-#endif // !iipr_TIHoughSpace_included
+#endif // !ialgo_TIHoughSpace_included
 
 

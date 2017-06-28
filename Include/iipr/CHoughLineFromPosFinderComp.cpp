@@ -128,7 +128,7 @@ int CHoughLineFromPosFinderComp::FindLines(
 
 	m_houghSpace.SmoothHoughSpace(istd::CIndex2d(*m_defaultSmoothKernelAttrPtr, *m_defaultSmoothKernelAttrPtr));
 
-	iipr::CHoughSpace2d::StdConsumer posResults(maxLines, maxLines * 10, 20.0, 0.01);
+	ialgo::CHoughSpace2d::StdConsumer posResults(maxLines, maxLines * 10, 20.0, 0.01);
 	m_houghSpace.AnalyseHoughSpace(10, posResults);
 
 	if (m_tempConsumerCompPtr.IsValid()){
@@ -147,7 +147,7 @@ int CHoughLineFromPosFinderComp::FindLines(
 	}
 
 	if (!posResults.positions.isEmpty()){
-		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posResults.positions.constBegin();
+		ialgo::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posResults.positions.constBegin();
 		double bestWeight = resultIter.key();
 
 		int lineIndex = 0;

@@ -9,7 +9,7 @@
 #include <iprm/TParamsPtr.h>
 
 // ACF-Solutions includes
-#include <iipr/CHoughSpace2d.h>
+#include <ialgo/CHoughSpace2d.h>
 #include <iipr/CPerspCalibFinder.h>
 #include <iimg/CBitmap.h>
 
@@ -104,7 +104,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	double vanDistOffset = vanSpaceSize.GetY() * 0.5;
 	double vanDistScale = 40000;
 
-	iipr::CHoughSpace2d vanishingSpace;
+	ialgo::CHoughSpace2d vanishingSpace;
 	vanishingSpace.CreateHoughSpace(vanSpaceSize, true, false);
 
 	i2d::CVector2d imageCenter = image.GetCenter();
@@ -136,7 +136,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 		}
 	}
 
-	iipr::CHoughSpace2d::StdConsumer foundVanResults(2, 20, 2, 0.2);
+	ialgo::CHoughSpace2d::StdConsumer foundVanResults(2, 20, 2, 0.2);
 	vanishingSpace.AnalyseHoughSpace(2, foundVanResults);
 	Q_ASSERT(foundVanResults.positions.size() <= 2);
 	if (foundVanResults.positions.size() < 2){
@@ -165,7 +165,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	QSet<i2d::CLine2d> vanLines[2];
 
 	int vanishingPointIndex = 0;
-	for (		iipr::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanResults.positions.constBegin();
+	for (		ialgo::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanResults.positions.constBegin();
 				foundVanIter != foundVanResults.positions.constEnd();
 				++foundVanIter, ++vanishingPointIndex){
 		const i2d::CVector2d& foundVanSpacePos = foundVanIter.value();
