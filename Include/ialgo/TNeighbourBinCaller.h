@@ -1,5 +1,5 @@
-#ifndef ialgo_CNeighbourBinCaller_included
-#define ialgo_CNeighbourBinCaller_included
+#ifndef ialgo_TNeighbourBinCaller_included
+#define ialgo_TNeighbourBinCaller_included
 
 
 // ACF includes
@@ -13,10 +13,11 @@ namespace ialgo
 /**
 	Class providing mechanism to iterate over neighbours in some multidimensional discrete space.
 */
-class CNeighbourBinCaller
+template <int SpaceDimension>
+class TNeighbourBinCaller
 {
 public:
-	CNeighbourBinCaller();
+	TNeighbourBinCaller();
 
 	void InitForCyclicSpace(const istd::CVarIndex& spaceSizes, int leftTolerance, int rightTolerance);
 
@@ -28,15 +29,15 @@ public:
 
 		visitor.BeginVisiting();
 
-		istd::TIndex<CFastModelFinder::FEATURE_LEVELS_COUNT> imageAngleIndices = istd::TIndex<CFastModelFinder::FEATURE_LEVELS_COUNT>::GetZero();
+		istd::TIndex<SpaceDimension> imageAngleIndices = istd::TIndex<SpaceDimension>::GetZero();
 		do{
 			int imageBinIndex = imageAngleIndices.GetIterationIndex(m_spaceSizes);
 
 			if (visitor.BeginImageBin(imageBinIndex)){
 				istd::CVarIndex angleDeltaIndices(m_spaceSizes.GetDimensionsCount(), 0);
 				do{
-					istd::TIndex<CFastModelFinder::FEATURE_LEVELS_COUNT> modelAngleIndices;
-					for (int i = 0; i < CFastModelFinder::FEATURE_LEVELS_COUNT; ++i){
+					istd::TIndex<SpaceDimension> modelAngleIndices;
+					for (int i = 0; i < SpaceDimension; ++i){
 						modelAngleIndices[i] = (imageAngleIndices[i] + angleDeltaIndices[i] + m_spaceSizes[i] - m_leftTolerance) % m_spaceSizes[i];
 					}
 
@@ -59,9 +60,29 @@ private:
 };
 
 
+// public methods
+
+template <int SpaceDimension>
+TNeighbourBinCaller<SpaceDimension>::TNeighbourBinCaller()
+:	m_spaceSizes(),
+	m_leftTolerance(0),
+	m_rightTolerance(0)
+{
+}
+
+
+template <int SpaceDimension>
+void TNeighbourBinCaller<SpaceDimension>::InitForCyclicSpace(const istd::CVarIndex& spaceSizes, int leftTolerance, int rightTolerance)
+{
+	m_spaceSizes = spaceSizes;
+	m_leftTolerance = leftTolerance;
+	m_rightTolerance = rightTolerance;
+}
+
+
 } // namespace ialgo
 
 
-#endif // !ialgo_CNeighbourBinCaller_included
+#endif // !ialgo_TNeighbourBinCaller_included
 
 
