@@ -437,32 +437,34 @@ void CHoughSpace2d::StdConsumer::OnProcessingEnd(const TIHoughSpace<2, double>& 
 {
 	QMultiMap<double, i2d::CVector2d> finalPositions;
 
-	// remove elements beeing to close to each other
-	for (		QMultiMap<double, i2d::CVector2d>::ConstIterator pointIter = positions.constBegin();
-				pointIter != positions.constEnd();
-				++pointIter){
-		const i2d::CVector2d& point1 = pointIter.value();
+	if (m_maxPoints != 0){
+		// remove elements beeing to close to each other
+		for (		QMultiMap<double, i2d::CVector2d>::ConstIterator pointIter = positions.constBegin();
+					pointIter != positions.constEnd();
+					++pointIter){
+			const i2d::CVector2d& point1 = pointIter.value();
 
-		bool isToClose = false;
+			bool isToClose = false;
 
-		for (		QMultiMap<double, i2d::CVector2d>::ConstIterator searchClosedIter = finalPositions.constBegin();
-					searchClosedIter != finalPositions.constEnd();
-					++searchClosedIter){
-			const i2d::CVector2d& point2 = searchClosedIter.value();
+			for (		QMultiMap<double, i2d::CVector2d>::ConstIterator searchClosedIter = finalPositions.constBegin();
+						searchClosedIter != finalPositions.constEnd();
+						++searchClosedIter){
+				const i2d::CVector2d& point2 = searchClosedIter.value();
 
-			double dist2 = space.GetDistance2(point1, point2);
-			if (dist2 <= m_minDistance * m_minDistance){
-				isToClose = true;
+				double dist2 = space.GetDistance2(point1, point2);
+				if (dist2 <= m_minDistance * m_minDistance){
+					isToClose = true;
 
-				break;
+					break;
+				}
 			}
-		}
 
-		if (!isToClose){
-			finalPositions.insertMulti(-pointIter.key(), point1);
+			if (!isToClose){
+				finalPositions.insertMulti(-pointIter.key(), point1);
 
-			if ((m_maxPoints >= 0) && (finalPositions.size() > m_maxPoints)){
-				break;
+				if ((m_maxPoints >= 0) && (finalPositions.size() >= m_maxPoints)){
+					break;
+				}
 			}
 		}
 	}
@@ -501,7 +503,7 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 			minValue = propValue;
 
 			// remove elements weeker than new calculated minValue
-			while (!positions.isEmpty() && positions.firstKey() < minValue){
+			while (!positions.isEmpty() && (-positions.lastKey() < minValue)){
 				QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
 
 				positions.erase(lastIter);
@@ -512,7 +514,7 @@ bool CHoughSpace2d::StdConsumer::OnMaximumFound(
 	// try remove the last one if we have too many points
 	if (positions.count() > m_maxConsideredPoints){
 		QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
-		double lastValue = lastIter.key();
+		double lastValue = -lastIter.key();
 		positions.erase(lastIter);
 
 		if (lastValue > minValue){
