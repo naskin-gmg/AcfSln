@@ -21,6 +21,9 @@ namespace iservice
 {
 
 
+static int s_argc = 0;
+
+
 // public methods
 
 QStringList CServiceApplicationComp::GetApplicationArguments(int argc, char** argv) const
@@ -296,14 +299,14 @@ void CServiceApplicationComp::CService::createApplication(int&/*argc*/, char** /
 {
 	QVector<char*> argv = GetApplicationArguments();
 
-	int argCount = argv.count();
+	s_argc = argv.count();
 
 	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
 	if (guiAppPtr != NULL){
-		new QApplication(argCount, argv.data());	
+		new QApplication(s_argc, argv.data());	
 	}
 	else{
-		new QCoreApplication(argCount, argv.data());
+		new QCoreApplication(s_argc, argv.data());
 	}
 
 	m_application.InitializeApplication(argv.count(), argv.data());
