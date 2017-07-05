@@ -73,6 +73,7 @@ void CMultiAttributeDelegateWidget::SetText(const QString& text)
 void CMultiAttributeDelegateWidget::OnShowDialog()
 {
 	istd::TDelPtr<CMultiAttributeEditor> multiEditorDialogPtr(new CMultiAttributeEditor(
+				this,
 				m_elementSelectionInfoManager,
 				m_attributeId,
 				m_attributeFlags));

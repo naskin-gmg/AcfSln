@@ -19,6 +19,7 @@ class CMultiAttributeEditor: public QDialog
 	Q_OBJECT
 public:
 	CMultiAttributeEditor(
+				QWidget* parentPtr,
 				const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
 				const QByteArray& attributeId,
 				int attributeFlags);

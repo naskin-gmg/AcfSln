@@ -24,10 +24,12 @@ namespace icmpstr
 // public methods
 
 CMultiAttributeEditor::CMultiAttributeEditor(
+			QWidget* parentPtr,
 			const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
 			const QByteArray& attributeId,
 			int attributeFlags)
-:	m_elementSelectionInfoManager(elementSelectionInfoManager),
+:	QDialog(parentPtr),
+	m_elementSelectionInfoManager(elementSelectionInfoManager),
 	m_attributeId(attributeId),
 	m_attributeFlags(attributeFlags),
 	m_valueItemDelegate(*this)
