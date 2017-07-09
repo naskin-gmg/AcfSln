@@ -292,13 +292,13 @@ void CHoughSpace2d::IncreaseValueAt(const imath::TVector<2>& position, double va
 	}
 
 	if ((posX >= 0) && (posX < size.GetX()) && (posY >= 0) && (posY < size.GetY())){
-		if (GetPixelFormat() == PF_FLOAT32){
+		if (BaseClass::GetPixelFormat() == PF_FLOAT32){
 			float* linePtr = (float*)BaseClass::GetLinePtr(posY);
 
 			linePtr[posX] += float(value);
 		}
 		else{
-			Q_ASSERT(GetPixelFormat() == PF_GRAY32);
+			Q_ASSERT(BaseClass::GetPixelFormat() == PF_GRAY32);
 
 			quint32* linePtr = (quint32*)BaseClass::GetLinePtr(posY);
 

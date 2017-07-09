@@ -76,6 +76,12 @@ public:
 				bool isFloatSpace = false);
 
 	/**
+		Apply some operation to each element.
+	*/
+	template <typename Operation>
+	void ApplyOperation(Operation operation);
+
+	/**
 		Combine this space with some other space.
 	*/
 	template <typename Operation>
@@ -134,6 +140,31 @@ inline double CHoughSpace2d::GetDistance2(const imath::TVector<2>& position1, co
 // template methods
 
 template <typename Operation>
+void CHoughSpace2d::ApplyOperation(Operation operation)
+{
+
+	istd::CIndex2d size = BaseClass::GetImageSize();
+
+	for (int y = 0; y < size.GetY(); ++y){
+		if (BaseClass::GetPixelFormat() == PF_FLOAT32){
+			float* linePtr = (float*)BaseClass::GetLinePtr(y);
+			for (int x = 0; x < size.GetX(); ++x){
+				linePtr[x] = operation(linePtr[x]);
+			}
+		}
+		else{
+			Q_ASSERT(GetPixelFormat() == PF_GRAY32);
+
+			quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
+			for (int x = 0; x < size.GetX(); ++x){
+				linePtr[x] = operation(linePtr[x]);
+			}
+		}
+	}
+}
+
+
+template <typename Operation>
 void CHoughSpace2d::CombineWithSpace(const CHoughSpace2d& space, Operation operation)
 {
 	istd::CIndex2d size = BaseClass::GetImageSize();
@@ -141,10 +172,21 @@ void CHoughSpace2d::CombineWithSpace(const CHoughSpace2d& space, Operation opera
 
 	istd::CIndex2d commonSize(qMin(size.GetX(), spaceSize.GetX()), qMin(size.GetY(), spaceSize.GetY()));
 	for (int y = 0; y < commonSize.GetY(); ++y){
-		quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
-		const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
-		for (int x = 0; x < commonSize.GetX(); ++x){
-			linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
+		if (BaseClass::GetPixelFormat() == PF_FLOAT32){
+			float* linePtr = (float*)BaseClass::GetLinePtr(y);
+			const float* spaceLinePtr = (const float*)space.GetLinePtr(y);
+			for (int x = 0; x < commonSize.GetX(); ++x){
+				linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
+			}
+		}
+		else{
+			Q_ASSERT(GetPixelFormat() == PF_GRAY32);
+
+			quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
+			const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
+			for (int x = 0; x < commonSize.GetX(); ++x){
+				linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
+			}
 		}
 	}
 }
