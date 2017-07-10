@@ -283,6 +283,11 @@ I_EXPORT_COMPONENT(
 			"Calculate lens correction using set of found feature points lying on lines",
 			"Objective Lens Correction Finder Calculator Computation Factor Calibration Correction Optical Axis" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Supplier") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			ImageIntegralProcessor,
+			"Processor calculation integral image of some input image",
+			"Integral Derivative Image Processor" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
+
 
 } // namespace IprPck
 
