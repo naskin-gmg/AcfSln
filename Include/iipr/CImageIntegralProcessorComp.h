@@ -27,7 +27,7 @@ public:
 		\param	maskPtr				optional mask. Points out of mask will be not touched inside of input image and not set in output image.
 		\param	outputPixelFormat	requested format of output image or \c iimg::IBitmap::PF_UNKNOWN if it should be automatically calculated.
 	*/
-	virtual bool CalculateIntegralImage(
+	static bool CalculateIntegralImage(
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage,
 				const iimg::CScanlineMask* maskPtr = NULL,
@@ -38,7 +38,7 @@ public:
 		Calculates integral image in place.
 		\param	image	image will be converted to its integral.
 	*/
-	virtual bool MakeIntegralImage(iimg::IBitmap& image);
+	static bool MakeIntegralImage(iimg::IBitmap& image);
 
 protected:
 	// reimplemented (iipr::CImageProcessorCompBase)
