@@ -30,6 +30,7 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provider of a 2D calibration", true, "CalibrationProvider");
 		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, true);
+		I_ASSIGN(m_defaultCalibrationProviderCompPtr, "DefaultCalibrationProvider", "Provides default (fallback) calibration if the input calibration provider was failed", false, "DefaultCalibrationProvider");
 	I_END_COMPONENT;
 
 	CCalibration2dProxyComp();
@@ -90,6 +91,7 @@ private:
 private:
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_defaultCalibrationProviderCompPtr);
 
 	imod::CModelUpdateBridge m_updateBridge;
 };

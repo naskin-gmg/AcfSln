@@ -253,6 +253,8 @@ void CCalibration2dProxyComp::OnComponentCreated()
 	if (m_calibrationProviderCompPtr.IsValid() && m_calibrationProviderModelCompPtr.IsValid()){
 		m_calibrationProviderModelCompPtr->AttachObserver(&m_updateBridge);
 	}
+
+	m_defaultCalibrationProviderCompPtr.EnsureInitialized();
 }
 
 
@@ -268,11 +270,17 @@ void CCalibration2dProxyComp::OnComponentDestroyed()
 
 const i2d::ICalibration2d* CCalibration2dProxyComp::GetCalibration() const
 {
+	const i2d::ICalibration2d* resultPtr = NULL;
+
 	if (m_calibrationProviderCompPtr.IsValid()){
-		return m_calibrationProviderCompPtr->GetCalibration();
+		resultPtr = m_calibrationProviderCompPtr->GetCalibration();
 	}
 
-	return NULL;
+	if (resultPtr == NULL && m_defaultCalibrationProviderCompPtr.IsValid()){
+		resultPtr = m_defaultCalibrationProviderCompPtr->GetCalibration();
+	}
+
+	return resultPtr;
 }
 
 
