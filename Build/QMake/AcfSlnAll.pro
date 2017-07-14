@@ -12,6 +12,9 @@ ialgo.file = ../../Include/ialgo/QMake/ialgo.pro
 SUBDIRS += iauth
 iauth.file = ../../Include/iauth/QMake/iauth.pro
 
+SUBDIRS += ibarcode
+ibarcode.file = ../../Include/ibarcode/QMake/ibarcode.pro
+
 SUBDIRS += ihotf
 ihotf.file = ../../Include/ihotf/QMake/ihotf.pro
 
@@ -116,6 +119,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	SUBDIRS += BlobPck
 	BlobPck.file = ../../Impl/BlobPck/QMake/BlobPck.pro
 	BlobPck.depends = iblob iblobgui
+
+	SUBDIRS += BarcodePck
+	BarcodePck.file = ../../Impl/BarcodePck/QMake/BarcodePck.pro
+	BarcodePck.depends = ibarcode
 
 	SUBDIRS += ProcessingPck
 	ProcessingPck.file = ../../Impl/ProcessingPck/QMake/ProcessingPck.pro

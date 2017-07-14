@@ -343,12 +343,12 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 			CalibrationInfo calibrationInfo;
 
 			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetFeature(featureIndex));
-			Q_ASSERT(objectFeaturePtr != NULL);
+			if (objectFeaturePtr != NULL){
+				calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+				calibrationInfo.calibrationId = objectFeaturePtr->GetObjectId();
 
-			calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
-			calibrationInfo.calibrationId = objectFeaturePtr->GetObjectId();
-
-			m_calibrations.push_back(calibrationInfo);
+				m_calibrations.push_back(calibrationInfo);
+			}
 		}
 
 		return WS_OK;
