@@ -15,16 +15,18 @@ namespace ibarcode
 
 CBarcodeSearchFeature::CBarcodeSearchFeature(
 			BarcodeType barcodeType,
-			double weight,
 			const QString& barcodeData,
 			const i2d::CPolygon& barcodeArea,
-			bool isChecksumValid)
-	:BaseClass(weight),
+			bool isChecksumValid,
+			double weight,
+			const i2d::CVector2d& position,
+			double angle,
+			const i2d::CVector2d& scale)
+	:BaseClass(weight, position, angle, scale),
+	BaseClass2(barcodeType, barcodeData),
 	m_barcodeArea(barcodeArea),
 	m_isCheckSumValid(isChecksumValid)
 {
-	Initialize(barcodeData, barcodeType);
-
 	m_validSymbolCount = barcodeData.count();
 }
 

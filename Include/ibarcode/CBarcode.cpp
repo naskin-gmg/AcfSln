@@ -14,13 +14,7 @@ namespace ibarcode
 
 // public methods
 
-CBarcode::CBarcode(int barcodeType)
-	:m_barcodeType(barcodeType)
-{
-}
-
-
-CBarcode::CBarcode(const QString& barcodeData, int barcodeType)
+CBarcode::CBarcode(int barcodeType, const QString& barcodeData)
 	:m_barcodeData(barcodeData),
 	m_barcodeType(barcodeType)
 {
@@ -31,13 +25,6 @@ CBarcode::CBarcode(const ibarcode::CBarcode& barcode)
 {
 	m_barcodeData = barcode.m_barcodeData;
 	m_barcodeType = barcode.m_barcodeType;
-}
-
-
-void CBarcode::Initialize(const QString& data, int barcodeType)
-{
-	m_barcodeData = data;
-	m_barcodeType = barcodeType;
 }
 
 

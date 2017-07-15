@@ -16,11 +16,8 @@ namespace ibarcode
 class CBarcode: virtual public IBarcode
 {
 public:
-	CBarcode(int barcodeType = BT_UNKNOWN);
-	CBarcode(const QString& data, int barcodeType);
+	CBarcode(int barcodeType = BT_UNKNOWN, const QString& data = QString());
 	CBarcode(const ibarcode::CBarcode& barcode);
-
-	void Initialize(const QString& data, int barcodeType);
 
 	virtual CBarcode& operator=(const CBarcode& barcode);
 	virtual bool operator==(const CBarcode& barcode) const;
