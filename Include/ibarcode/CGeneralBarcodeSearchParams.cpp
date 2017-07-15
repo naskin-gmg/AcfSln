@@ -54,7 +54,9 @@ bool CGeneralBarcodeSearchParams::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
-		for (IBarcode::BarcodeType barcodeType : m_barcodeTypes){
+		for (BarcodeTypes::ConstIterator iter = m_barcodeTypes.constBegin(); iter != m_barcodeTypes.constEnd(); ++iter){
+			IBarcode::BarcodeType barcodeType = *iter;
+
 			retVal = retVal && archive.BeginTag(barcodeTypeTag);
 			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeEnum<IBarcode::BarcodeType, IBarcode::ToString, IBarcode::FromString>(archive, barcodeType);
 			retVal = retVal && archive.EndTag(barcodeTypeTag);

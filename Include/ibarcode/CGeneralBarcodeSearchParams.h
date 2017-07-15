@@ -24,7 +24,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	IGeneralBarcodeSearchParams::BarcodeTypes m_barcodeTypes;
+	BarcodeTypes m_barcodeTypes;
 };
 
 
