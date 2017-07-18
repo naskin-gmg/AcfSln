@@ -61,6 +61,8 @@ bool CImageFlipProcessorComp::ConvertImage(
 			iimg::IBitmap& outputBitmap,
 			bool mirrorX, bool mirrorY) const
 {
+	// TODO: Implement it more general and independent from QImage
+
 	// simple (but inefficient) flip via QImage
 	if (mirrorX || mirrorY){
 		QImage tempImage;
