@@ -2177,16 +2177,15 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 							icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
 				if (obligatoryInterfaces.isEmpty()){
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
-					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
+					queryFlags = queryFlags | IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
 
 				int attributeFlags = staticInfoPtr->GetAttributeFlags();
 				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_REFERENCE) != 0){
-					queryFlags = IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
+					queryFlags = queryFlags | IRegistryConsistInfo::QF_INCLUDE_SUBELEMENTS;
 				}
-
-				if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
-					queryFlags = IRegistryConsistInfo::QF_DETACHED_FROM_CONTAINER;
+				else if ((attributeFlags & icomp::IAttributeStaticInfo::AF_FACTORY) != 0){
+					queryFlags = queryFlags | IRegistryConsistInfo::QF_DETACHED_FROM_CONTAINER;
 				}
 
 				icomp::IRegistry::Ids compatIds = m_parent.m_consistInfoCompPtr->GetCompatibleElements(
