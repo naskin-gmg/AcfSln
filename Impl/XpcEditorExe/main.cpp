@@ -22,10 +22,14 @@ int main(int argc, char *argv[])
 
 	QApplication::addLibraryPath("./");
 
-	CXpcEditor instance;
+	CXpcEditor instance(NULL, true);
 
 	ibase::IApplication* applicationPtr = instance.GetInterface<ibase::IApplication>();
 	if (applicationPtr != NULL){
+		applicationPtr->InitializeApplication(argc, argv);
+
+		instance.EnsureAutoInitComponentsCreated();
+
 		return applicationPtr->Execute(argc, argv);
 	}
 

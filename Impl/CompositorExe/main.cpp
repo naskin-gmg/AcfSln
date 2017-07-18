@@ -26,10 +26,14 @@ int main(int argc, char *argv[])
 	QApplication::setStyle("fusion");
 #endif
 
-	CCompositor instance;
+	CCompositor instance(NULL, true);
 
 	ibase::IApplication* applicationPtr = instance.GetInterface<ibase::IApplication>();
 	if (applicationPtr != NULL){
+		applicationPtr->InitializeApplication(argc, argv);
+
+		instance.EnsureAutoInitComponentsCreated();
+
 		return applicationPtr->Execute(argc, argv);
 	}
 
