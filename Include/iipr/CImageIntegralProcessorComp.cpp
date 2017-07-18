@@ -125,14 +125,14 @@ bool DoIntegralFilter(
 
 
 template <typename PixelType>
-bool DoIntegralInPlace(iimg::IBitmap& image)
+bool DoIntegralInPlace(iimg::IBitmap& outputImage)
 {
-	istd::CIndex2d imageSize = image.GetImageSize();
+	istd::CIndex2d imageSize = outputImage.GetImageSize();
 	if (imageSize.GetY() < 1){
 		return true;
 	}
 
-	PixelType* prevLinePtr = (PixelType*)image.GetLinePtr(0);
+	PixelType* prevLinePtr = (PixelType*)outputImage.GetLinePtr(0);
 	PixelType lineSum = 0;
 	for (int x = 0; x < imageSize.GetX(); ++x){
 		lineSum += prevLinePtr[x];
@@ -141,13 +141,87 @@ bool DoIntegralInPlace(iimg::IBitmap& image)
 	}
 
 	for (int y = 1; y < imageSize.GetY(); ++y){
-		PixelType* linePtr = (PixelType*)image.GetLinePtr(y);
+		PixelType* linePtr = (PixelType*)outputImage.GetLinePtr(y);
 
 		PixelType lineSum = 0;
 		for (int x = 0; x < imageSize.GetX(); ++x){
 			lineSum += linePtr[x];
 
 			linePtr[x] = lineSum + prevLinePtr[x];
+		}
+	}
+
+	return true;
+}
+
+
+template <typename PixelType>
+bool DoIntegralReference(const iimg::CScanlineMask& mask, iimg::IBitmap& outputImage)
+{
+	istd::CIndex2d imageSize = outputImage.GetImageSize();
+
+	QVector<PixelType> prevLineBuffer(imageSize.GetX(), 0);
+
+	i2d::CRect commonRect = mask.GetBoundingRect().GetIntersection(i2d::CRect(imageSize));
+
+	int y = 0;
+	for (; y < commonRect.GetTop(); ++y){
+		PixelType* outputPtr = (PixelType*)outputImage.GetLinePtr(y);
+
+		for (int x = 0; x < imageSize.GetX(); ++x){
+			outputPtr[x] = prevLineBuffer[x];
+		}
+	}
+
+	for (; y < commonRect.GetBottom(); ++y){
+		const istd::CIntRanges* maskRangesPtr = mask.GetPixelRanges(y);
+		if (maskRangesPtr != NULL){
+			PixelType* outputPtr = (PixelType*)outputImage.GetLinePtr(y);
+
+			PixelType lineSum = 0;
+			int x = 0;
+
+			istd::CIntRanges::RangeList maskRangeList;
+			maskRangesPtr->GetAsList(commonRect.GetHorizontalRange(), maskRangeList);
+			for (		istd::CIntRanges::RangeList::ConstIterator rangeIter = maskRangeList.constBegin();
+						rangeIter != maskRangeList.constEnd();
+						++rangeIter){
+				const istd::CIntRange& maskRangeH = *rangeIter;
+
+				for (; x < maskRangeH.GetMinValue(); ++x){
+					outputPtr[x] = prevLineBuffer[x];
+				}
+
+				for (; x < maskRangeH.GetMaxValue(); ++x){
+					lineSum += 1;
+
+					PixelType cummulatedValue = lineSum;
+					cummulatedValue  += prevLineBuffer[x];
+
+					prevLineBuffer[x] = cummulatedValue;
+
+					outputPtr[x] = cummulatedValue;
+				}
+			}
+
+			for (; x < imageSize.GetX(); ++x){
+				outputPtr[x] = prevLineBuffer[x];
+			}
+		}
+		else{
+			PixelType* outputPtr = (PixelType*)outputImage.GetLinePtr(y);
+
+			for (int x = 0; x < imageSize.GetX(); ++x){
+				outputPtr[x] = prevLineBuffer[x];
+			}
+		}
+	}
+
+	for (; y < imageSize.GetY(); ++y){
+		PixelType* outputPtr = (PixelType*)outputImage.GetLinePtr(y);
+
+		for (int x = 0; x < imageSize.GetX(); ++x){
+			outputPtr[x] = prevLineBuffer[x];
 		}
 	}
 
@@ -311,20 +385,43 @@ bool CImageIntegralProcessorComp::CalculateIntegralImage(
 }
 
 
-bool CImageIntegralProcessorComp::MakeIntegralImage(iimg::IBitmap& image)
+bool CImageIntegralProcessorComp::MakeIntegralImage(iimg::IBitmap& outputImage)
 {
-	switch (image.GetPixelFormat()){
+	switch (outputImage.GetPixelFormat()){
 	case iimg::IBitmap::PF_GRAY16:
-		return DoIntegralInPlace<quint16>(image);
+		return DoIntegralInPlace<quint16>(outputImage);
 
 	case iimg::IBitmap::PF_GRAY32:
-		return DoIntegralInPlace<quint32>(image);
+		return DoIntegralInPlace<quint32>(outputImage);
 
 	case iimg::IBitmap::PF_FLOAT32:
-		return DoIntegralInPlace<float>(image);
+		return DoIntegralInPlace<float>(outputImage);
 
 	case iimg::IBitmap::PF_FLOAT64:
-		return DoIntegralInPlace<double>(image);
+		return DoIntegralInPlace<double>(outputImage);
+
+	default:
+		return false;
+	}
+}
+
+
+bool CImageIntegralProcessorComp::CalculateIntegralReference(
+			const iimg::CScanlineMask& mask,
+			iimg::IBitmap& outputImage)
+{
+	switch (outputImage.GetPixelFormat()){
+	case iimg::IBitmap::PF_GRAY16:
+		return DoIntegralReference<quint16>(mask, outputImage);
+
+	case iimg::IBitmap::PF_GRAY32:
+		return DoIntegralReference<quint32>(mask, outputImage);
+
+	case iimg::IBitmap::PF_FLOAT32:
+		return DoIntegralReference<float>(mask, outputImage);
+
+	case iimg::IBitmap::PF_FLOAT64:
+		return DoIntegralReference<double>(mask, outputImage);
 
 	default:
 		return false;
