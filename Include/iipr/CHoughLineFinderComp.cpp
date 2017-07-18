@@ -3,7 +3,7 @@
 
 // ACF include
 #include <iimg/CScanlineMask.h>
-#include <iimg/CBitmap.h>
+#include <iimg/CGeneralBitmap.h>
 #include <iprm/TParamsPtr.h>
 #include <ilog/CExtMessage.h>
 
@@ -121,7 +121,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 					QString("Hough space"),
 					"LineFinder");
 
-		iimg::CBitmap* spaceMessageObjectPtr = new imod::TModelWrap<iimg::CBitmap>();
+		iimg::CGeneralBitmap* spaceMessageObjectPtr = new imod::TModelWrap<iimg::CGeneralBitmap>();
 		spaceMessagePtr->InsertAttachedObject(spaceMessageObjectPtr);
 
 		m_houghSpace.ExtractToBitmap(*spaceMessageObjectPtr);

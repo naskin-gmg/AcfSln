@@ -79,7 +79,7 @@ private:
 	I_TEXTATTR(m_filePathFormatAttrPtr);
 
 	imod::TModelWrap<iimg::CBitmap> m_bitmap;
-	iimg::CQImageBasedMultiPageBitmap m_bitmapDocument;
+	iimg::TMultiPageBitmap<iimg::CBitmap> m_bitmapDocument;
 
 	QList<QIcon>m_icons;
 
