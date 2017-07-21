@@ -287,6 +287,7 @@ bool CFastEdgesExtractorComp::IsOptionEnabled(int /*index*/) const
 	return true;
 }
 
+
 // reimplemented (icomp::CComponentBase)
 
 void CFastEdgesExtractorComp::OnComponentCreated()
