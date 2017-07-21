@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4468" Description="ACF"/>
-            <Version Id="1" Number="1811" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4542" Description="ACF"/>
+            <Version Id="1" Number="1884" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -82,7 +82,11 @@
         </Element>
         <Element Id="Threshold" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap/>
+                <AttributeInfoMap>
+                    <AttributeInfo Id="EditorPrecision" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="1"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
             </Data>
         </Element>
     </ElementsList>
