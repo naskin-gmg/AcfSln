@@ -11,6 +11,7 @@
 
 // ACF-Solutions includes
 #include <ialgo/TIHoughSpace.h>
+#include <ialgo/TSimpleSpaceResultConsumer.h>
 
 
 namespace ialgo
@@ -27,53 +28,16 @@ class CHoughSpace2d:
 public:
 	typedef iimg::CGeneralBitmap BaseClass;
 
-	typedef QMultiMap<double, i2d::CVector2d> WeightToHoughPosMap;
-	class StdConsumer: public ResultsConsumer
-	{
-	public:
-		/**
-			Construct the result processor.
-			\param	maxPoints				maximal number of points beeing in result set.
-			\param	maxConsideredPoints		maximal number of points stored internally.
-											Setting this number to smaller value speeds up the processing.
-			\param	minDistance				Minimal distance between the points.
-											Please note that the neighbourshood will be analysed at end.
-		*/
-		StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio);
-
-		// reimplemented (ialgo::TIHoughSpace<2>::ResultsConsumer)
-		virtual QList<int> GetSupportedNeghboursCount() const;
-		virtual void OnProcessingBegin(
-					const TIHoughSpace<2, double>& space,
-					const double& minValue);
-		virtual void OnProcessingEnd(const TIHoughSpace<2, double>& space);
-		virtual bool OnMaximumFound(
-					const TIHoughSpace<2, double>& space,
-					const istd::TIndex<2>& position,
-					const double& value,
-					const double* neghboursPtr,
-					int neghboursCount,
-					double& minValue);
-
-		WeightToHoughPosMap positions;
-
-	private:
-		int m_maxPoints;
-		int m_maxConsideredPoints;
-		double m_minDistance;
-		double m_minMaxRatio;
-
-		double m_maxValue;
-	};
+	typedef TSimpleSpaceResultConsumer<2> StdConsumer;
 
 	CHoughSpace2d();
 	CHoughSpace2d(const istd::CIndex2d& size, bool isWrappedX = false, bool isWrappedY = false);
 
 	bool CreateHoughSpace(
 				const istd::CIndex2d& size,
-				bool isWrappedX = false,
-				bool isWrappedY = false,
-				bool isFloatSpace = false);
+				bool isWrappedX,
+				bool isWrappedY,
+				bool isFloatSpace);
 
 	/**
 		Apply some operation to each element.
@@ -88,6 +52,7 @@ public:
 	void CombineWithSpace(const CHoughSpace2d& space, Operation operation);
 
 	// reimplemented (ialgo::TIHoughSpace<2>)
+	virtual istd::TIndex<2> GetSpaceSize() const;
 	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0);
 	virtual bool IsDimensionWrapped(int dimensionIndex) const;
 	virtual void SetDimensionWrapped(int dimensionIndex, bool state);

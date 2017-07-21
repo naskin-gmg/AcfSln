@@ -215,7 +215,7 @@ CHoughSpace2d::CHoughSpace2d()
 
 CHoughSpace2d::CHoughSpace2d(const istd::CIndex2d& size, bool isWrappedX, bool isWrappedY)
 {
-	CHoughSpace2d::CreateHoughSpace(size, isWrappedX, isWrappedY);
+	CHoughSpace2d::CreateHoughSpace(size, isWrappedX, isWrappedY, false);
 }
 
 
@@ -242,7 +242,13 @@ bool CHoughSpace2d::CreateHoughSpace(
 
 // reimplemented (ialgo::TIHoughSpace<2>)
 
-bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& /*initValue*/)
+istd::TIndex<2> CHoughSpace2d::GetSpaceSize() const
+{
+	return BaseClass::GetImageSize();
+}
+
+
+bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue)
 {
 	istd::CChangeNotifier notifier(this);
 
@@ -250,7 +256,21 @@ bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& 
 	m_isWrapped[1] = false;
 
 	if (BaseClass::CreateBitmap(iimg::IBitmap::PF_FLOAT32, size)){
-		BaseClass::ClearImage();
+
+		if (initValue == 0){
+			BaseClass::ClearImage();
+		}
+		else{
+			float initValueFloat = initValue;
+
+			for (int y = 0; y < size[1]; ++y){
+				float* linePtr = (float*)BaseClass::GetLinePtr(y);
+
+				for (int x = 0; x < size[0]; ++x){
+					linePtr[x] = initValueFloat;
+				}
+			}
+		}
 
 		return true;
 	}
@@ -403,126 +423,6 @@ bool CHoughSpace2d::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& 
 	}
 
 	return BaseClass::CreateBitmap(pixelFormat, size, dataPtr, releaseFlag, linesDifference);
-}
-
-
-// public methods of embedded class StdConsumer
-
-// reimplemented (ialgo::TIHoughSpace<2>::ResultsConsumer)
-
-CHoughSpace2d::StdConsumer::StdConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio)
-:	m_maxPoints(maxPoints),
-	m_maxConsideredPoints(maxConsideredPoints),
-	m_minDistance(minDistance),
-	m_minMaxRatio(minMaxRatio)
-{
-}
-
-
-QList<int> CHoughSpace2d::StdConsumer::GetSupportedNeghboursCount() const
-{
-	return QList<int>() << 4;
-}
-
-
-void CHoughSpace2d::StdConsumer::OnProcessingBegin(
-			const TIHoughSpace<2, double>& /*space*/,
-			const double& /*minValue*/)
-{
-	m_maxValue = 0;
-}
-
-
-void CHoughSpace2d::StdConsumer::OnProcessingEnd(const TIHoughSpace<2, double>& space)
-{
-	QMultiMap<double, i2d::CVector2d> finalPositions;
-
-	if (m_maxPoints != 0){
-		// remove elements beeing to close to each other
-		for (		QMultiMap<double, i2d::CVector2d>::ConstIterator pointIter = positions.constBegin();
-					pointIter != positions.constEnd();
-					++pointIter){
-			const i2d::CVector2d& point1 = pointIter.value();
-
-			bool isToClose = false;
-
-			for (		QMultiMap<double, i2d::CVector2d>::ConstIterator searchClosedIter = finalPositions.constBegin();
-						searchClosedIter != finalPositions.constEnd();
-						++searchClosedIter){
-				const i2d::CVector2d& point2 = searchClosedIter.value();
-
-				double dist2 = space.GetDistance2(point1, point2);
-				if (dist2 <= m_minDistance * m_minDistance){
-					isToClose = true;
-
-					break;
-				}
-			}
-
-			if (!isToClose){
-				finalPositions.insertMulti(-pointIter.key(), point1);
-
-				if ((m_maxPoints >= 0) && (finalPositions.size() >= m_maxPoints)){
-					break;
-				}
-			}
-		}
-	}
-
-	positions.swap(finalPositions);
-}
-
-
-bool CHoughSpace2d::StdConsumer::OnMaximumFound(
-			const TIHoughSpace<2, double>& /*space*/,
-			const istd::TIndex<2>& position,
-			const double& value,
-			const double* neghboursPtr,
-			int neghboursCount,
-			double& minValue)
-{
-	Q_ASSERT(neghboursCount == 4);
-	Q_UNUSED(neghboursCount);
-
-	double diffLeft = value - neghboursPtr[0];
-	double diffRight = value - neghboursPtr[1];
-	double diffTop = value - neghboursPtr[2];
-	double diffBottom = value - neghboursPtr[3];
-
-	double correctionX = diffLeft / (diffLeft + diffRight);
-	double correctionY = diffTop / (diffTop + diffBottom);
-
-	i2d::CVector2d resultPos(position[0] + correctionX, position[1] + correctionY);
-
-	positions.insert(-value, resultPos);
-
-	if (value > m_maxValue){
-		m_maxValue = value;
-		double propValue = value * m_minMaxRatio;
-		if (minValue < propValue){
-			minValue = propValue;
-
-			// remove elements weeker than new calculated minValue
-			while (!positions.isEmpty() && (-positions.lastKey() < minValue)){
-				QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
-
-				positions.erase(lastIter);
-			}
-		}
-	}
-
-	// try remove the last one if we have too many points
-	if (positions.count() > m_maxConsideredPoints){
-		QMultiMap<double, i2d::CVector2d>::Iterator lastIter = positions.end() - 1;
-		double lastValue = -lastIter.key();
-		positions.erase(lastIter);
-
-		if (lastValue > minValue){
-			minValue = lastValue;
-		}
-	}
-
-	return false;
 }
 
 

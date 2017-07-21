@@ -104,7 +104,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	double vanDistScale = 40000;
 
 	ialgo::CHoughSpace2d vanishingSpace;
-	vanishingSpace.CreateHoughSpace(vanSpaceSize, true, false);
+	vanishingSpace.CreateHoughSpace(vanSpaceSize, true, false, false);
 
 	i2d::CVector2d imageCenter = image.GetCenter();
 
@@ -164,7 +164,7 @@ bool CCheckboardCalibSupplierComp::CalculateCalibration(const iimg::IBitmap& ima
 	QSet<i2d::CLine2d> vanLines[2];
 
 	int vanishingPointIndex = 0;
-	for (		ialgo::CHoughSpace2d::WeightToHoughPosMap::ConstIterator foundVanIter = foundVanResults.positions.constBegin();
+	for (		ialgo::CHoughSpace2d::StdConsumer::PosMap::ConstIterator foundVanIter = foundVanResults.positions.constBegin();
 				foundVanIter != foundVanResults.positions.constEnd();
 				++foundVanIter, ++vanishingPointIndex){
 		const i2d::CVector2d& foundVanSpacePos = foundVanIter.value();

@@ -130,7 +130,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 	}
 
 	if (!posResults.positions.isEmpty()){
-		ialgo::CHoughSpace2d::WeightToHoughPosMap::ConstIterator resultIter = posResults.positions.constBegin();
+		ialgo::CHoughSpace2d::StdConsumer::PosMap::ConstIterator resultIter = posResults.positions.constBegin();
 		double bestWeight = resultIter.key();
 
 		int lineIndex = 0;
@@ -234,7 +234,7 @@ bool CHoughLineFinderComp::CreateHoughSpace()
 	int angleGridSize = *m_defaultAngleResAttrPtr;
 	int radiusGridSize = *m_defaultRadiusResAttrPtr;
 
-	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(radiusGridSize, angleGridSize), false, true)){
+	if (m_houghSpace.CreateHoughSpace(istd::CIndex2d(radiusGridSize, angleGridSize), false, true, false)){
 		m_angleVectors.resize(angleGridSize);
 
 		for (int i = 0; i < angleGridSize; ++i){

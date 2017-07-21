@@ -60,6 +60,11 @@ public:
 	};
 
 	/**
+		Get size of this Hough space.
+	*/
+	virtual istd::TIndex<Dimensions> GetSpaceSize() const = 0;
+
+	/**
 		Create Hough space with specified size.
 	*/
 	virtual bool CreateHoughSpace(const istd::TIndex<Dimensions>& size, const Element& initValue = 0) = 0;
