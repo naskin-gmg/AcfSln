@@ -414,31 +414,9 @@ CCheckboardCalibSupplierComp::ChessboardParamsContraints::ChessboardParamsContra
 
 // reimplemented (imeas::INumericConstraints)
 
-int CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValuesCount() const
+const iprm::IOptionsList& CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetValueListInfo() const
 {
-	return 2;
-}
-
-
-QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValueName(int index) const
-{
-	if (index != 0){
-		return QObject::tr("Cell Size");
-	}
-	else{
-		return QObject::tr("Grid Size");
-	}
-}
-
-
-QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetNumericValueDescription(int index) const
-{
-	if (index != 0){
-		return QObject::tr("Size of single cell");
-	}
-	else{
-		return QObject::tr("Number of grid cells in each checkboard row and column");
-	}
+	return *this;
 }
 
 
@@ -450,6 +428,63 @@ const imath::IUnitInfo* CCheckboardCalibSupplierComp::ChessboardParamsContraints
 	else{
 		return &s_gridSizeUnit;
 	}
+}
+
+
+// protected methods of embedded class ChessboardParamsContraints
+
+// reimplemented (iprm::IOptionsList)
+
+int CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetOptionsCount() const
+{
+	return 2;
+}
+
+
+QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetOptionName(int index) const
+{
+	if (index != 0){
+		return QObject::tr("Cell Size");
+	}
+	else{
+		return QObject::tr("Grid Size");
+	}
+}
+
+
+QString CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetOptionDescription(int index) const
+{
+	if (index != 0){
+		return QObject::tr("Size of single cell");
+	}
+	else{
+		return QObject::tr("Number of grid cells in each checkboard row and column");
+	}
+}
+
+
+QByteArray CCheckboardCalibSupplierComp::ChessboardParamsContraints::GetOptionId(int index) const
+{
+	if (index != 0){
+		return "CellSize";
+	}
+	else{
+		return "GridSize";
+	}
+
+	return QByteArray();
+}
+
+
+bool CCheckboardCalibSupplierComp::ChessboardParamsContraints::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

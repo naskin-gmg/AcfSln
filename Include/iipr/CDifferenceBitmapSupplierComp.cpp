@@ -19,7 +19,7 @@ CDifferenceBitmapSupplierComp::CDifferenceBitmapSupplierComp()
 
 	imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
 
-	m_offsetContraints.InsertValueInfo(QObject::tr("Offset"), QObject::tr("Offset added to each pixel as percentage"), unitInfo);
+	m_offsetContraints.InsertValueInfo(QObject::tr("Offset"), QObject::tr("Offset added to each pixel as percentage"), "Offset", unitInfo);
 }
 
 

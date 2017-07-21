@@ -90,7 +90,9 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 
 		int valuesCount;
 		if (constraintsPtr != NULL){
-			valuesCount = constraintsPtr->GetNumericValuesCount();
+			const iprm::IOptionsList& valueListInfo = constraintsPtr->GetValueListInfo();
+
+			valuesCount = valueListInfo.GetOptionsCount();
 		}
 		else{
 			valuesCount = values.GetElementsCount();
@@ -130,9 +132,11 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 			Q_ASSERT(valueWidgetPtr != NULL);
 
 			if (constraintsPtr != NULL){
-				valueWidgetPtr->SetUnitInfo(
-							constraintsPtr->GetNumericValueName(i),
-							constraintsPtr->GetNumericValueDescription(i),
+			const iprm::IOptionsList& valueListInfo = constraintsPtr->GetValueListInfo();
+
+			valueWidgetPtr->SetUnitInfo(
+							valueListInfo.GetOptionName(i),
+							valueListInfo.GetOptionDescription(i),
 							constraintsPtr->GetNumericValueUnitInfo(i));
 			}
 

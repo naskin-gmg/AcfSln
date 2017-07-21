@@ -209,8 +209,8 @@ CPreciseBlobProcessorComp::CPreciseBlobProcessorComp()
 
 	imath::CGeneralUnitInfo unitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1), &percentManip);
 
-	m_thresholdContraints.InsertValueInfo(QObject::tr("Threshold Min"), QObject::tr("Minimal Threshold Value"), unitInfo);
-	m_thresholdContraints.InsertValueInfo(QObject::tr("Threshold Max"), QObject::tr("Maximal Threshold Value"), unitInfo);
+	m_thresholdContraints.InsertValueInfo(QObject::tr("Threshold Min"), QObject::tr("Minimal Threshold Value"), "ThresholdMin", unitInfo);
+	m_thresholdContraints.InsertValueInfo(QObject::tr("Threshold Max"), QObject::tr("Maximal Threshold Value"), "ThresholdMax", unitInfo);
 }
 
 

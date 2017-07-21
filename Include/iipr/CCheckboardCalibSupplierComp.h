@@ -76,16 +76,23 @@ protected:
 		Lines lines;
 	};
 
-	class ChessboardParamsContraints: public imeas::INumericConstraints
+	class ChessboardParamsContraints: public imeas::INumericConstraints, protected iprm::IOptionsList
 	{
 	public:
 		ChessboardParamsContraints(const CCheckboardCalibSupplierComp* supplierPtr);
 
 		// reimplemented (imeas::INumericConstraints)
-		virtual int GetNumericValuesCount() const;
-		virtual QString GetNumericValueName(int index) const;
-		virtual QString GetNumericValueDescription(int index) const;
+		virtual const iprm::IOptionsList& GetValueListInfo() const;
 		virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
+
+	protected:
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
 
 	private:
 		imath::CGeneralUnitInfo m_cellSizeUnit;

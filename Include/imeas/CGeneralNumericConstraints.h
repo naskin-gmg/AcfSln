@@ -3,8 +3,6 @@
 
 
 // ACF includes
-#include <iser/ISerializable.h>
-#include <icomp/CComponentBase.h>
 #include <imath/CGeneralUnitInfo.h>
 
 // ACF-Solutions includes
@@ -19,7 +17,9 @@ namespace imeas
 /**
 	Simple implementation of imeas::INumericConstraints interface.
 */
-class CGeneralNumericConstraints: virtual public INumericConstraints
+class CGeneralNumericConstraints:
+			virtual public INumericConstraints,
+			virtual protected iprm::IOptionsList
 {
 public:
 	/**
@@ -29,27 +29,41 @@ public:
 	/**
 		Add new value information.
 	*/
-	void InsertValueInfo(const QString& name, const QString& description, const imath::CGeneralUnitInfo& unitInfo, int index = -1);
+	virtual bool InsertValueInfo(
+				const QString& name,
+				const QString& description,
+				const QByteArray& valueId,
+				const imath::CGeneralUnitInfo& unitInfo,
+				int index = -1);
+
 	/**
 		Remove single value information.
 	*/
 	void RemoveValueInfo(int index);
+
 	/**
 		Get unit info stored alway in this structure.
 	*/
 	const imath::CGeneralUnitInfo& GetGeneralUnitInfo(int index) const;
 
 	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
+	virtual const iprm::IOptionsList& GetValueListInfo() const;
 	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
+
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
+	virtual int GetOptionsCount() const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
+	virtual bool IsOptionEnabled(int index) const;
 
 private:
 	struct Info
 	{
 		QString name;
 		QString description;
+		QByteArray id;
 		imath::CGeneralUnitInfo unitInfo;
 	};
 

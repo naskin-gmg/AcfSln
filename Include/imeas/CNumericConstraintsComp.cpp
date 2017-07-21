@@ -7,29 +7,9 @@ namespace imeas
 
 // reimplemented (imeas::INumericConstraints)
 
-int CNumericConstraintsComp::GetNumericValuesCount() const
+const iprm::IOptionsList& CNumericConstraintsComp::GetValueListInfo() const
 {
-	return *m_dimensionsCountAttrPtr;
-}
-
-
-QString CNumericConstraintsComp::GetNumericValueName(int index) const
-{
-	if (index < m_namesAttrPtr.GetCount()){
-		return m_namesAttrPtr[index];
-	}
-		
-	return QString();
-}
-
-
-QString CNumericConstraintsComp::GetNumericValueDescription(int index) const
-{
-	if (index < m_descriptionsAttrPtr.GetCount()){
-		return m_descriptionsAttrPtr[index];
-	}
-
-	return QString();
+	return *this;
 }
 
 
@@ -78,6 +58,56 @@ const imath::IDoubleManip& CNumericConstraintsComp::GetValueManip() const
 int CNumericConstraintsComp::GetPrecision() const
 {
 	return m_precision;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int CNumericConstraintsComp::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CNumericConstraintsComp::GetOptionsCount() const
+{
+	return *m_dimensionsCountAttrPtr;
+}
+
+
+QString CNumericConstraintsComp::GetOptionName(int index) const
+{
+	if (index < m_namesAttrPtr.GetCount()){
+		return m_namesAttrPtr[index];
+	}
+		
+	return QString();
+}
+
+
+QString CNumericConstraintsComp::GetOptionDescription(int index) const
+{
+	if (index < m_descriptionsAttrPtr.GetCount()){
+		return m_descriptionsAttrPtr[index];
+	}
+
+	return QString();
+}
+
+
+QByteArray CNumericConstraintsComp::GetOptionId(int index) const
+{
+	if (index < m_valueIdsAttrPtr.GetCount()){
+		return m_valueIdsAttrPtr[index];
+	}
+
+	return QByteArray();
+}
+
+
+bool CNumericConstraintsComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

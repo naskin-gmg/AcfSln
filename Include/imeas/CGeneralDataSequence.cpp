@@ -280,13 +280,18 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object, Compatibili
 
 			const imeas::IDataSequenceInfo* inputInfoPtr = sequencePtr->GetSequenceInfo();
 			if (inputInfoPtr != NULL){
-				const int infoCount = inputInfoPtr->GetNumericValuesCount();
+				const iprm::IOptionsList& valueListInfo = inputInfoPtr->GetValueListInfo();
+
+				int infoCount = valueListInfo.GetOptionsCount();
+
 				imeas::CGeneralDataSequenceInfo sequenceInfo(infoCount, m_samples.size());
 
 				for (int i = 0; i < infoCount; ++i){
-					sequenceInfo.InsertValueInfo(inputInfoPtr->GetNumericValueName(i),
-						inputInfoPtr->GetNumericValueDescription(i),
-						imath::CGeneralUnitInfo());
+					sequenceInfo.InsertValueInfo(
+								valueListInfo.GetOptionName(i),
+								valueListInfo.GetOptionDescription(i),
+								valueListInfo.GetOptionId(i),
+								imath::CGeneralUnitInfo());
 				}
 				m_sequenceInfoPtr.SetPtr(new CGeneralDataSequenceInfo(sequenceInfo));
 			}

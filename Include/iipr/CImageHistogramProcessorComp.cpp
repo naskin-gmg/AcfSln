@@ -166,7 +166,7 @@ bool CImageHistogramProcessorComp::ProcessImageRegion(
 	for (QStringList::ConstIterator channelNameIter = channelNames.constBegin(); channelNameIter != channelNames.constEnd(); ++channelNameIter){
 		const QString& channelName = *channelNameIter;
 
-		sequenceInfoPtr->InsertValueInfo(channelName, channelName, s_channelUnitInfo);
+		sequenceInfoPtr->InsertValueInfo(channelName, channelName, channelName.toUtf8(), s_channelUnitInfo);
 	}
 
 	istd::CChangeNotifier notifier(histogramPtr);

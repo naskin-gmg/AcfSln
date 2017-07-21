@@ -61,21 +61,9 @@ int CSamplesInfo::GetWeightMode() const
 
 // reimplemented (imeas::INumericConstraints)
 
-int CSamplesInfo::GetNumericValuesCount() const
+const iprm::IOptionsList& CSamplesInfo::GetValueListInfo() const
 {
-	return qMax(0, GetDefaultChannelsCount());
-}
-
-
-QString CSamplesInfo::GetNumericValueName(int index) const
-{
-	return QObject::tr("Channel %1").arg(index + 1);
-}
-
-
-QString CSamplesInfo::GetNumericValueDescription(int /*index*/) const
-{
-	return QString();
+	return *this;
 }
 
 
@@ -118,6 +106,46 @@ bool CSamplesInfo::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(logicalRangeTag);
 
 	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (iprm::IOptionsList)
+
+int CSamplesInfo::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CSamplesInfo::GetOptionsCount() const
+{
+	return qMax(0, GetDefaultChannelsCount());
+}
+
+
+QString CSamplesInfo::GetOptionName(int index) const
+{
+	return QObject::tr("Channel %1").arg(index + 1);
+}
+
+
+QString CSamplesInfo::GetOptionDescription(int /*index*/) const
+{
+	return QString();
+}
+
+
+QByteArray CSamplesInfo::GetOptionId(int index) const
+{
+	return QString("Channel%1").arg(index + 1).toUtf8();
+}
+
+
+bool CSamplesInfo::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

@@ -432,10 +432,10 @@ void CLensCorrFindSupplierComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	m_searchParamsContraints.Reset();
-	m_searchParamsContraints.InsertValueInfo(QObject::tr("Angle Grid"), QObject::tr("Decide how exact the angle will be calculated"), s_angleGridUnitInfo);
-	m_searchParamsContraints.InsertValueInfo(QObject::tr("Distance Grid"), QObject::tr("Decide how exact the position of line will be calculated"), s_distanceGridUnitInfo);
-	m_searchParamsContraints.InsertValueInfo(QObject::tr("Max lines"), QObject::tr("Maximal number of lines"), s_maxLinesUnitInfo);
-	m_searchParamsContraints.InsertValueInfo(QObject::tr("Min distance"), QObject::tr("Minimal distance to center"), s_minDistanceUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Angle Grid"), QObject::tr("Decide how exact the angle will be calculated"), "AngleGrid", s_angleGridUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Distance Grid"), QObject::tr("Decide how exact the position of line will be calculated"), "DistanceGrid", s_distanceGridUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Max lines"), QObject::tr("Maximal number of lines"), "MaxLines", s_maxLinesUnitInfo);
+	m_searchParamsContraints.InsertValueInfo(QObject::tr("Min distance"), QObject::tr("Minimal distance to center"), "MinDistance",  s_minDistanceUnitInfo);
 
 	if (m_bitmapProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapProviderSupplierCompPtr.GetPtr());

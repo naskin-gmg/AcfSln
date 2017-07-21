@@ -197,39 +197,9 @@ int CFastEdgesExtractorComp::DoProcessing(
 
 // reimplemented (imeas::INumericConstraints)
 
-int CFastEdgesExtractorComp::GetNumericValuesCount() const
+const iprm::IOptionsList& CFastEdgesExtractorComp::GetValueListInfo() const
 {
-	return 2;
-}
-
-
-QString CFastEdgesExtractorComp::GetNumericValueName(int index) const
-{
-	switch (index){
-	case 0:
-		return QObject::tr("Threshold", "Contour extraction threshold");
-
-	case 1:
-		return QObject::tr("Scale", "Contour scale factor");
-
-	default:
-		return "";
-	}
-}
-
-
-QString CFastEdgesExtractorComp::GetNumericValueDescription(int index) const
-{
-	switch (index){
-	case 0:
-		return QObject::tr("Contour extraction threshold");
-
-	case 1:
-		return QObject::tr("Contour scale factor");
-
-	default:
-		return "";
-	}
+	return *this;
 }
 
 
@@ -250,6 +220,72 @@ const imath::IUnitInfo* CFastEdgesExtractorComp::GetNumericValueUnitInfo(int ind
 	}
 }
 
+
+// protected methods
+
+// reimplemented (iprm::IOptionsList)
+
+int CFastEdgesExtractorComp::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CFastEdgesExtractorComp::GetOptionsCount() const
+{
+	return 2;
+}
+
+
+QString CFastEdgesExtractorComp::GetOptionName(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Threshold", "Contour extraction threshold");
+
+	case 1:
+		return QObject::tr("Scale", "Contour scale factor");
+
+	default:
+		return "";
+	}
+}
+
+
+QString CFastEdgesExtractorComp::GetOptionDescription(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Contour extraction threshold");
+
+	case 1:
+		return QObject::tr("Contour scale factor");
+
+	default:
+		return "";
+	}
+}
+
+
+QByteArray CFastEdgesExtractorComp::GetOptionId(int index) const
+{
+	switch (index){
+	case 0:
+		return "Threshold";
+
+	case 1:
+		return "Scale";
+
+	default:
+		return "";
+	}
+}
+
+
+bool CFastEdgesExtractorComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
+}
 
 // reimplemented (icomp::CComponentBase)
 

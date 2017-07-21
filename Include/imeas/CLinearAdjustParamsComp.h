@@ -5,6 +5,7 @@
 // ACF includes
 #include <imath/CGeneralUnitInfo.h>
 #include <iser/ISerializable.h>
+#include <iprm/COptionsManager.h>
 #include <icomp/CComponentBase.h>
 
 // ACF-Solutions includes
@@ -60,9 +61,7 @@ public:
 
 protected:
 	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
+	virtual const iprm::IOptionsList& GetValueListInfo() const;
 	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
@@ -78,6 +77,8 @@ private:
 
 	imath::CGeneralUnitInfo m_offsetUnitInfo;
 	imath::CGeneralUnitInfo m_scaleUnitInfo;
+
+	iprm::COptionsManager m_valuesInfo;
 };
 
 

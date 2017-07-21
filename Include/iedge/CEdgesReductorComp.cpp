@@ -157,33 +157,9 @@ int CEdgesReductorComp::DoProcessing(
 
 // reimplemented (imeas::INumericConstraints)
 
-int CEdgesReductorComp::GetNumericValuesCount() const
+const iprm::IOptionsList& CEdgesReductorComp::GetValueListInfo() const
 {
-	return 2;
-}
-
-
-QString CEdgesReductorComp::GetNumericValueName(int index) const
-{
-	switch (index){
-	case 1:
-		return QObject::tr("Weight tolerance");
-
-	default:
-		return QObject::tr("Position tolerance");
-	}
-}
-
-
-QString CEdgesReductorComp::GetNumericValueDescription(int index) const
-{
-	switch (index){
-	case 1:
-		return QObject::tr("Tolerance of weight for edge node reduction");
-
-	default:
-		return QObject::tr("Tolerance of position for edge node reduction");
-	}
+	return *this;
 }
 
 
@@ -307,6 +283,71 @@ int CEdgesReductorComp::ReduceNodes(
 	}
 
 	return removedPoints;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int CEdgesReductorComp::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CEdgesReductorComp::GetOptionsCount() const
+{
+	return 2;
+}
+
+
+QString CEdgesReductorComp::GetOptionName(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Position tolerance");
+
+	case 1:
+		return QObject::tr("Weight tolerance");
+
+	default:
+		return "";
+	}
+}
+
+
+QString CEdgesReductorComp::GetOptionDescription(int index) const
+{
+	switch (index){
+	case 0:
+		return QObject::tr("Tolerance of position for edge node reduction");
+
+	case 1:
+		return QObject::tr("Tolerance of weight for edge node reduction");
+
+	default:
+		return "";
+	}
+}
+
+
+QByteArray CEdgesReductorComp::GetOptionId(int index) const
+{
+	switch (index){
+	case 0:
+		return "PositionTolerance";
+
+	case 1:
+		return "WeightTolerance";
+
+	default:
+		return "";
+	}
+}
+
+
+bool CEdgesReductorComp::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

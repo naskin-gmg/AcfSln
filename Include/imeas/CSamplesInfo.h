@@ -12,7 +12,9 @@ namespace imeas
 /**
 	Stores additional data sequence data used to interpret samples value correctly.
 */
-class CSamplesInfo: virtual public imeas::IDataSequenceInfo
+class CSamplesInfo:
+			virtual public imeas::IDataSequenceInfo,
+			protected iprm::IOptionsList
 {
 public:
 	CSamplesInfo(const istd::CRange& logicalSamplesRange = istd::CRange::GetInvalid());
@@ -36,16 +38,22 @@ public:
 	virtual int GetWeightMode() const;
 
 	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
+	virtual const iprm::IOptionsList& GetValueListInfo() const;
 	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-private:
+protected:
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
+	virtual int GetOptionsCount() const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
+	virtual bool IsOptionEnabled(int index) const;
 
+private:
 	istd::CRange m_logicalSamplesRange;
 };
 

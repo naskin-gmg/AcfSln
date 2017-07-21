@@ -18,7 +18,12 @@ void CGeneralNumericConstraints::Reset()
 }
 
 
-void CGeneralNumericConstraints::InsertValueInfo(const QString& name, const QString& description, const imath::CGeneralUnitInfo& unitInfo, int index)
+bool CGeneralNumericConstraints::InsertValueInfo(
+			const QString& name,
+			const QString& description,
+			const QByteArray& valueId,
+			const imath::CGeneralUnitInfo& unitInfo,
+			int index)
 {
 	istd::CChangeNotifier notifier(this);
 	Q_UNUSED(notifier);
@@ -26,6 +31,7 @@ void CGeneralNumericConstraints::InsertValueInfo(const QString& name, const QStr
 	Info info;
 	info.name = name;
 	info.description = description;
+	info.id = valueId;
 	info.unitInfo = unitInfo;
 
 	if (index >= 0){
@@ -34,6 +40,8 @@ void CGeneralNumericConstraints::InsertValueInfo(const QString& name, const QStr
 	else{
 		m_valueInfos.append(info);
 	}
+
+	return true;
 }
 
 
@@ -51,27 +59,53 @@ const imath::CGeneralUnitInfo& CGeneralNumericConstraints::GetGeneralUnitInfo(in
 
 // reimplemented (imeas::INumericConstraints)
 
-int CGeneralNumericConstraints::GetNumericValuesCount() const
+const iprm::IOptionsList& CGeneralNumericConstraints::GetValueListInfo() const
 {
-	return m_valueInfos.size();
-}
-
-
-QString CGeneralNumericConstraints::GetNumericValueName(int index) const
-{
-	return m_valueInfos[index].name;
-}
-
-
-QString CGeneralNumericConstraints::GetNumericValueDescription(int index) const
-{
-	return m_valueInfos[index].description;
+	return *this;
 }
 
 
 const imath::IUnitInfo* CGeneralNumericConstraints::GetNumericValueUnitInfo(int index) const
 {
 	return &m_valueInfos[index].unitInfo;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int CGeneralNumericConstraints::GetOptionsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CGeneralNumericConstraints::GetOptionsCount() const
+{
+	return m_valueInfos.count();
+}
+
+
+QString CGeneralNumericConstraints::GetOptionName(int index) const
+{
+	return m_valueInfos[index].name;
+}
+
+
+QString CGeneralNumericConstraints::GetOptionDescription(int index) const
+{
+	return m_valueInfos[index].description;
+}
+
+
+QByteArray CGeneralNumericConstraints::GetOptionId(int index) const
+{
+	return m_valueInfos[index].id;
+}
+
+
+bool CGeneralNumericConstraints::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 

@@ -26,7 +26,8 @@ class CNumericConstraintsComp:
 			public icomp::CComponentBase,
 			virtual public INumericConstraints,
 			virtual public imath::IUnitInfo,
-			protected imath::CDoubleManip
+			protected imath::CDoubleManip,
+			protected iprm::IOptionsList
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -47,9 +48,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (imeas::INumericConstraints)
-	virtual int GetNumericValuesCount() const;
-	virtual QString GetNumericValueName(int index) const;
-	virtual QString GetNumericValueDescription(int index) const;
+	virtual const iprm::IOptionsList& GetValueListInfo() const;
 	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
 
 protected:
@@ -62,6 +61,14 @@ protected:
 
 	// reimplemented (imath::IDoubleManip)
 	virtual int GetPrecision() const;
+
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
+	virtual int GetOptionsCount() const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
+	virtual bool IsOptionEnabled(int index) const;
 
 	// reimplemented (ibase::CComponentBase)
 	virtual void OnComponentCreated();

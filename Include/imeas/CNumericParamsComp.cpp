@@ -36,7 +36,9 @@ void CNumericParamsComp::OnComponentCreated()
 
 	const INumericConstraints* constraintsPtr = GetNumericConstraints();
 	if (constraintsPtr != NULL){
-		count = constraintsPtr->GetNumericValuesCount();
+		const iprm::IOptionsList& valueListInfo = constraintsPtr->GetValueListInfo();
+
+		count = valueListInfo.GetOptionsCount();
 	}
 	else{
 		count = defaultValuesCount;

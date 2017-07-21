@@ -3,6 +3,7 @@
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
+#include <iser/CArchiveTag.h>
 
 
 namespace imeas
@@ -17,6 +18,7 @@ static const iser::CArchiveTag s_channelsListTag("Channels", "Number of channels
 static const iser::CArchiveTag s_channelTag("Channel", "List of channel names", iser::CArchiveTag::TT_GROUP, &s_channelsListTag);
 static const iser::CArchiveTag s_nameTag("Name", "Name of channel", iser::CArchiveTag::TT_LEAF, &s_channelTag);
 static const iser::CArchiveTag s_descriptionTag("Description", "Description of channel", iser::CArchiveTag::TT_LEAF, &s_channelTag);
+static const iser::CArchiveTag s_valueIdTag("ValueId", "ID of the value", iser::CArchiveTag::TT_LEAF, &s_channelTag);
 static const iser::CArchiveTag s_unitInfoTag("UnitInfo", "Description of channel unit", iser::CArchiveTag::TT_GROUP, &s_channelTag);
 
 
@@ -31,25 +33,6 @@ CGeneralDataSequenceInfo::CGeneralDataSequenceInfo(
 	m_defaultChannelsCount(defaultChannelsCount)
 {
 }
-
-
-bool CGeneralDataSequenceInfo::InsertValueInfo(
-			const QString& name,
-			const QString& description,
-			const imath::CGeneralUnitInfo& unitInfo,
-			int index)
-{
-	if (		((m_sequenceInfoFlags & IDataSequenceInfo::SIF_CHANNELS_COUNT_FIXED) != 0) &&
-				(GetNumericValuesCount() >= m_defaultChannelsCount)){
-		// cannot insert more than fixed
-		return false;
-	}
-
-	BaseClass::InsertValueInfo(name, description, unitInfo, index);
-
-	return true;
-}
-
 
 
 void CGeneralDataSequenceInfo::SetSequenceInfoFlags(int flags)
@@ -96,6 +79,25 @@ void CGeneralDataSequenceInfo::SetWeightMode(WeightMode mode)
 }
 
 
+// reimplemented (CGeneralNumericConstraints)
+
+bool CGeneralDataSequenceInfo::InsertValueInfo(
+			const QString& name,
+			const QString& description,
+			const QByteArray& valueId,
+			const imath::CGeneralUnitInfo& unitInfo,
+			int index)
+{
+	if (		((m_sequenceInfoFlags & IDataSequenceInfo::SIF_CHANNELS_COUNT_FIXED) != 0) &&
+				(GetOptionsCount() >= m_defaultChannelsCount)){
+		// cannot insert more than fixed
+		return false;
+	}
+
+	return BaseClass::InsertValueInfo(name, description, valueId, unitInfo, index);
+}
+
+
 // reimplemented (imeas::IDataSequenceInfo)
 
 int CGeneralDataSequenceInfo::GetSequenceInfoFlags() const
@@ -136,7 +138,7 @@ bool CGeneralDataSequenceInfo::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_defaultChannelsCount);
 	retVal = retVal && archive.EndTag(s_defaultChannelsCountTag);
 
-	int channelsCount = GetNumericValuesCount();
+	int channelsCount = GetOptionsCount();
 
 	retVal = retVal && archive.BeginMultiTag(s_channelsListTag, s_channelTag, channelsCount);
 	if (!retVal){
@@ -156,11 +158,13 @@ bool CGeneralDataSequenceInfo::Serialize(iser::IArchive& archive)
 
 		QString channelName;
 		QString channelDesciption;
+		QByteArray valueId;
 		imath::CGeneralUnitInfo unitInfo;
 
 		if (isStoring){
-			channelName = GetNumericValueName(index);
-			channelDesciption = GetNumericValueDescription(index);
+			channelName = GetOptionName(index);
+			channelDesciption = GetOptionDescription(index);
+			valueId = GetOptionId(index);
 			unitInfo = GetGeneralUnitInfo(index);
 		}
 
@@ -172,6 +176,10 @@ bool CGeneralDataSequenceInfo::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(channelDesciption);
 		retVal = retVal && archive.EndTag(s_descriptionTag);
 
+		retVal = retVal && archive.BeginTag(s_valueIdTag);
+		retVal = retVal && archive.Process(valueId);
+		retVal = retVal && archive.EndTag(s_valueIdTag);
+
 		retVal = retVal && archive.BeginTag(s_unitInfoTag);
 		retVal = retVal && unitInfo.Serialize(archive);
 		retVal = retVal && archive.EndTag(s_unitInfoTag);
@@ -179,7 +187,7 @@ bool CGeneralDataSequenceInfo::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(s_channelTag);
 
 		if (!isStoring){
-			InsertValueInfo(channelName, channelDesciption, unitInfo);
+			InsertValueInfo(channelName, channelDesciption, valueId, unitInfo);
 		}
 	}
 

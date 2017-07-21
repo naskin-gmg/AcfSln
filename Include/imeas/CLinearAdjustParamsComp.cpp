@@ -17,6 +17,8 @@ CLinearAdjustParamsComp::CLinearAdjustParamsComp()
 	m_offsetUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1)),
 	m_scaleUnitInfo(imath::IUnitInfo::UT_RELATIVE, "%", 100, istd::CRange(0, 1))
 {
+	m_valuesInfo.InsertOption(QObject::tr("Offset"), "Offset", QObject::tr("Offset value"));
+	m_valuesInfo.InsertOption(QObject::tr("Scale"), "Scale", QObject::tr("Scale value"));
 }
 
 
@@ -141,39 +143,9 @@ bool CLinearAdjustParamsComp::Serialize(iser::IArchive& archive)
 
 // reimplemented (imeas::INumericConstraints)
 
-int CLinearAdjustParamsComp::GetNumericValuesCount() const
+const iprm::IOptionsList& CLinearAdjustParamsComp::GetValueListInfo() const
 {
-	return 2;
-}
-
-
-QString CLinearAdjustParamsComp::GetNumericValueName(int index) const
-{
-	switch (index){
-	case 0:
-		return QObject::tr("Offset");
-
-	case 1:
-		return QObject::tr("Scale");
-
-	default:
-		return "";
-	}
-}
-
-
-QString CLinearAdjustParamsComp::GetNumericValueDescription(int index) const
-{
-	switch (index){
-	case 0:
-		return QObject::tr("Offset value");
-
-	case 1:
-		return QObject::tr("Scale value");
-
-	default:
-		return "";
-	}
+	return m_valuesInfo;
 }
 
 
