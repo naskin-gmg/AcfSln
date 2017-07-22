@@ -104,14 +104,14 @@ void TSimpleSpaceResultConsumer<Dimensions, Element>::OnProcessingEnd(const TIHo
 
 	if (m_maxPoints != 0){
 		// remove elements beeing to close to each other
-		for (		PosMap::ConstIterator pointIter = positions.constBegin();
+		for (		typename PosMap::ConstIterator pointIter = positions.constBegin();
 					pointIter != positions.constEnd();
 					++pointIter){
 			const PosVector& point1 = pointIter.value();
 
 			bool isToClose = false;
 
-			for (		PosMap::ConstIterator searchClosedIter = finalPositions.constBegin();
+			for (		typename PosMap::ConstIterator searchClosedIter = finalPositions.constBegin();
 						searchClosedIter != finalPositions.constEnd();
 						++searchClosedIter){
 				const PosVector& point2 = searchClosedIter.value();
