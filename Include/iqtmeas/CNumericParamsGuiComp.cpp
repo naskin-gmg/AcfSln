@@ -118,7 +118,8 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 						panelPtr, 
 						sliderFlags,
 						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1,
-						*m_editorPrecisionAttrPtr);
+						*m_editorPrecisionAttrPtr,
+						*m_postValidationEnabledAttrPtr);
 			
 			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
 

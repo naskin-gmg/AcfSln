@@ -35,7 +35,12 @@ public:
 		SF_SINGLE_ROW = 8	// can be ORed
 	};
 
-	CNumericValueWidget(QWidget* parentPtr = NULL, int sliderFlags = SF_SLIDER_BUTTONS, int inputPolicy = 0, int maxPrecision = 2);
+	CNumericValueWidget(
+				QWidget* parentPtr = NULL,
+				int sliderFlags = SF_SLIDER_BUTTONS,
+				int inputPolicy = 0,
+				int maxPrecision = 2,
+				bool isPostValidationEnabled = false);
 
 	void SetUnitInfo(const QString& name, const QString& description, const imath::IUnitInfo* unitInfoPtr);
 
@@ -50,6 +55,7 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
 	void on_ValueSB_valueChanged(double value);
+	void on_ValueSB_editingFinished();
 	void on_ValueSlider_valueChanged(int value);
 	void on_ValueSlider_sliderMoved(int value);
 	void on_ValueSlider_sliderReleased();
@@ -61,6 +67,9 @@ private:
 	double m_unitMultiplicationFactor;
 	double m_sliderScaleFactor;
 	int m_maxEditPrecision;
+	bool m_isPostValidationEnabled;
+
+	istd::CRange m_valueRange;
 };
 
 
