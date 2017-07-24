@@ -58,6 +58,9 @@ public:
 	virtual double GetSpaceDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
 	virtual double GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
 
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
 protected:
 	void SmoothSingleDimension(int dimensionIndex, int iterations);
 
@@ -78,15 +81,13 @@ inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance(const im
 template <int Dimensions, class Element>
 inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
 {
-	istd::TIndex<Dimensions> spaceSize = BaseClass::GetImageSize();
-
 	imath::TVector<Dimensions> diff = position2 - position1;
 
 	for (int i = 0; i < Dimensions; ++i){
 		if (m_isWrapped[i]){
-			double offset = spaceSize.GetX() * 0.5;
+			double offset = m_sizes[i] * 0.5;
 
-			diff[i] = std::fmod(diff[i] + offset + spaceSize[i], spaceSize[i]) - offset;
+			diff[i] = std::fmod(diff[i] + offset + m_sizes[i], m_sizes[i]) - offset;
 		}
 	}
 
@@ -193,35 +194,6 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothHoughSpace(const istd::TInde
 			SmoothSingleDimension(i, iterations[i]);
 		}
 	}
-
-	if (spaceSize.GetY() >= 3){
-		for (int i = 0; i < iterationsY; ++i){
-			QVector<PixelType> prevLine(spaceSize.GetX(), 0);
-		
-			PixelType* spaceLinePtr = (PixelType*)space.CGeneralBitmap::GetLinePtr(0);
-
-			for (int y = 0; y < spaceSize.GetY() - 1; ++y){
-				PixelType* nextLinePtr = (PixelType*)space.CGeneralBitmap::GetLinePtr(y + 1);
-
-				for (int x = 0; x < spaceSize.GetX(); ++x){
-					PixelType value = spaceLinePtr[x];
-					PixelType nextValue = nextLinePtr[x];
-
-					spaceLinePtr[x] = PixelType((WorkingType(value) * 2 + WorkingType(prevLine[x]) + WorkingType(nextValue)) / 4);
-
-					prevLine[x] = value;
-				}
-
-				spaceLinePtr = nextLinePtr;
-			}
-
-			for (int x = 0; x < spaceSize.GetX(); ++x){
-				int value = spaceLinePtr[x];
-
-				spaceLinePtr[x] = (WorkingType(value) * 2 + WorkingType(prevLine[x])) / 4;
-			}
-		}
-	}
 }
 
 
@@ -241,7 +213,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 		}
 	}
 
-	resultProcessor.OnProcessingBegin(*this, minWeight);
+	resultProcessor.OnProcessingBegin(*this, minValue);
 
 	Element neighbours[Dimensions * 2];
 
@@ -310,16 +282,17 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 				}
 
 				if (resultProcessor.OnMaximumFound(*this, index, value, neighbours, Dimensions * 2, currentMinValue)){
-					resultProcessor.OnProcessingEnd(space);
-					return;
+					resultProcessor.OnProcessingEnd(*this);
+
+					return true;
 				}
 			}
 
-		nextElement:
+		nextElement:;
 		} while (index.Increase(m_sizes));
 	}
 
-	resultProcessor.OnProcessingEnd(space);
+	resultProcessor.OnProcessingEnd(*this);
 
 	return true;
 }
@@ -328,7 +301,46 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 template <int Dimensions, class Element>
 bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bitmap) const
 {
-	return false;
+	istd::CIndex2d bitmapSize(0, 1);
+
+	for (int i = 0; i < Dimensions; ++i){
+		if (i == 0){
+			bitmapSize[i] = m_sizes[i];
+		}
+		else{
+			bitmapSize[i] *= m_sizes[i];
+		}
+	}
+
+	if (!bitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, bitmapSize)){
+		return false;
+	}
+
+	Element maxValue = 0;
+	for (Elements::const_iterator iter = m_elements.begin(); iter != m_elements.end(); ++iter){
+		Element value = *iter;
+
+		if (value > maxValue){
+			maxValue = value;
+		}
+	}
+
+	if (maxValue <= 0){
+		bitmap.ClearImage();
+	}
+
+	Elements::const_iterator iter = m_elements.begin();
+	for (int y = 0; y < bitmapSize.GetY(); ++y){
+		quint8* outputLinePtr = (quint8*)bitmap.GetLinePtr(y);
+
+		for (int x = 0; x < bitmapSize.GetX(); ++x){
+			outputLinePtr[x] = quint8(*iter * 255 / maxValue);
+
+			++iter;
+		}
+	}
+
+	return true;
 }
 
 
@@ -410,6 +422,49 @@ void TGeneralHoughSpace<Dimensions, Element>::CombineWithSpace(const TGeneralHou
 }
 
 
+// reimplemented (iser::ISerializable)
+template <int Dimensions, class Element>
+bool TGeneralHoughSpace<Dimensions, Element>::Serialize(iser::IArchive& archive)
+{
+	static iser::CArchiveTag spaceSizeTag("SpaceSize", "Size of Hough space", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag dimensionSizeTag("DimensionSize", "Size of single dimension", iser::CArchiveTag::TT_GROUP, &spaceSizeTag);
+	static iser::CArchiveTag elementsTag("Elements", "List of space elements", iser::CArchiveTag::TT_GROUP, &spaceSizeTag);
+
+	bool retVal = true;
+
+	bool isStoring = archive.IsStoring();
+
+	IndexType spaceSize = BaseClass::GetSizes();
+	int dimensionsCount = Dimensions;
+
+	retVal = retVal && archive.BeginMultiTag(spaceSizeTag, dimensionSizeTag, dimensionsCount);
+	if (dimensionsCount != Dimensions){
+		return false;
+	}
+
+	for (int dimensionIndex = 0; dimensionIndex < Dimensions; ++dimensionIndex){
+		retVal = retVal && archive.BeginTag(dimensionSizeTag);
+		retVal = retVal && archive.Process(spaceSize[dimensionIndex]);
+		retVal = retVal && archive.EndTag(dimensionSizeTag);
+	}
+	retVal = retVal && archive.EndTag(spaceSizeTag);
+
+	if (!isStoring){
+		if (!BaseClass::SetSizes(spaceSize)){
+			return false;
+		}
+	}
+
+	retVal = retVal && archive.BeginTag(elementsTag);
+	for (BaseClass::Iterator iter = BaseClass::Begin(); iter != BaseClass::End(); ++iter){
+		retVal = retVal && archive.Process(*iter);
+	}
+	retVal = retVal && archive.EndTag(elementsTag);
+
+	return retVal;
+}
+
+
 // protected methods
 
 template <int Dimensions, class Element>
@@ -437,25 +492,25 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 			for (int iterIndex = 0; iterIndex < iterations; ++iterIndex){
 				int elementOffset;
 				int nextPos;
+				Element value;
 				Element prevValue;
 				Element storedValue;
 
 				if (m_isWrapped[dimensionIndex]){
 					elementOffset = axisElementOffset;
+					value = m_elements[elementOffset];
 					nextPos = 0;
 					prevValue = m_elements[axisElementOffset + (smoothAxisSize - 1) * elementDiff];
 					storedValue = value;
 				}
 				else{
-					elementOffset = axisElementOffset +  + elementDiff;
+					elementOffset = axisElementOffset + elementDiff;
+					value = m_elements[elementOffset];
 					nextPos = 1;
 					prevValue = 0;
 					storedValue = 0;
 				}
 
-				Element value = m_elements[elementOffset];
-
-				int elementOffset = axisElementOffset + elementDiff;
 				for (; nextPos < smoothAxisSize; ++nextPos){
 					int nextElementOffset = elementOffset + elementDiff;
 
@@ -469,7 +524,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 					elementOffset = nextElementOffset;
 				}
 
-				spaceLinePtr[elementOffset] = (value * 2 + prevValue + storedValue) / 4;
+				m_elements[elementOffset] = (value * 2 + prevValue + storedValue) / 4;
 			}
 		}
 
