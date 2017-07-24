@@ -60,11 +60,11 @@ public:
 	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations);
 	virtual bool AnalyseHoughSpace(
 				const double& minValue,
-				ResultsConsumer& resultProcessor);
+				ResultsConsumer& resultProcessor) const;
 	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
 	virtual bool GetSpacePosition(const imath::TVector<2>& position, imath::TVector<2>& result) const;
-	virtual double GetDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
-	virtual double GetDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
+	virtual double GetSpaceDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
+	virtual double GetSpaceDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
 
 	// reimplemented (iimg::CGeneralBitmap)
 	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0);
@@ -77,13 +77,13 @@ private:
 
 // inline methods
 
-inline double CHoughSpace2d::GetDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
+inline double CHoughSpace2d::GetSpaceDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
 {
-	return qSqrt(GetDistance2(position1, position2));
+	return qSqrt(GetSpaceDistance2(position1, position2));
 }
 
 
-inline double CHoughSpace2d::GetDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
+inline double CHoughSpace2d::GetSpaceDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const
 {
 	istd::CIndex2d spaceSize = BaseClass::GetImageSize();
 

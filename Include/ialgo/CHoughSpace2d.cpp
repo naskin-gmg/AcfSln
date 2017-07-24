@@ -347,7 +347,7 @@ void CHoughSpace2d::SmoothHoughSpace(const istd::TIndex<2>& iterations)
 
 bool CHoughSpace2d::AnalyseHoughSpace(
 			const double& minValue,
-			ResultsConsumer& resultProcessor)
+			ResultsConsumer& resultProcessor) const
 {
 	QList<int> supportedNeighboursCount = resultProcessor.GetSupportedNeghboursCount();
 	if (supportedNeighboursCount.contains(4) || supportedNeighboursCount.isEmpty()){

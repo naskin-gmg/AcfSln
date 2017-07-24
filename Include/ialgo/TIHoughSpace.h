@@ -95,7 +95,7 @@ public:
 	*/
 	virtual bool AnalyseHoughSpace(
 				const Element& minValue,
-				ResultsConsumer& resultProcessor) = 0;
+				ResultsConsumer& resultProcessor) const = 0;
 
 	/**
 		Extract this Hough space to some gray scale bitmap.
@@ -112,12 +112,12 @@ public:
 	/**
 		Get distance between two hough space positions considering the space wrapping.
 	*/
-	virtual double GetDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const = 0;
+	virtual double GetSpaceDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const = 0;
 
 	/**
 		Get square of distance between two hough space positions considering the space wrapping.
 	*/
-	virtual double GetDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const = 0;
+	virtual double GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const = 0;
 };
 
 

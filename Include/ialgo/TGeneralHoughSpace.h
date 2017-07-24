@@ -52,11 +52,11 @@ public:
 	virtual void SmoothHoughSpace(const istd::TIndex<Dimensions>& iterations);
 	virtual bool AnalyseHoughSpace(
 				const Element& minValue,
-				ResultsConsumer& resultProcessor);
+				ResultsConsumer& resultProcessor) const;
 	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
 	virtual bool GetSpacePosition(const imath::TVector<Dimensions>& position, imath::TVector<Dimensions>& result) const;
-	virtual double GetDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
-	virtual double GetDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
+	virtual double GetSpaceDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
+	virtual double GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
 
 protected:
 	void SmoothSingleDimension(int dimensionIndex, int iterations);
@@ -69,14 +69,14 @@ private:
 // inline methods
 
 template <int Dimensions, class Element>
-inline double TGeneralHoughSpace<Dimensions, Element>::GetDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
+inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
 {
-	return qSqrt(GetDistance2(position1, position2));
+	return qSqrt(GetSpaceDistance2(position1, position2));
 }
 
 
 template <int Dimensions, class Element>
-inline double TGeneralHoughSpace<Dimensions, Element>::GetDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
+inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
 {
 	istd::TIndex<Dimensions> spaceSize = BaseClass::GetImageSize();
 
@@ -86,7 +86,7 @@ inline double TGeneralHoughSpace<Dimensions, Element>::GetDistance2(const imath:
 		if (m_isWrapped[i]){
 			double offset = spaceSize.GetX() * 0.5;
 
-			diff[i] = std::fmod(diff[i] + offset + spaceSize[i],  spaceSize[i]) - offset;
+			diff[i] = std::fmod(diff[i] + offset + spaceSize[i], spaceSize[i]) - offset;
 		}
 	}
 
@@ -228,7 +228,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothHoughSpace(const istd::TInde
 template <int Dimensions, class Element>
 bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 			const Element& minValue,
-			ResultsConsumer& resultProcessor)
+			ResultsConsumer& resultProcessor) const
 {
 	QList<int> supportedNeighboursCount = resultProcessor.GetSupportedNeghboursCount();
 	if (!supportedNeighboursCount.contains(Dimensions * 2) && !supportedNeighboursCount.isEmpty()){

@@ -116,7 +116,7 @@ void TSimpleSpaceResultConsumer<Dimensions, Element>::OnProcessingEnd(const TIHo
 						++searchClosedIter){
 				const PosVector& point2 = searchClosedIter.value();
 
-				double dist2 = space.GetDistance2(point1, point2);
+				double dist2 = space.GetSpaceDistance2(point1, point2);
 				if (dist2 <= m_minDistance * m_minDistance){
 					isToClose = true;
 
