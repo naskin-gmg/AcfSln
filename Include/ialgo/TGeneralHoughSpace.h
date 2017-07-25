@@ -305,10 +305,10 @@ bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bit
 
 	for (int i = 0; i < Dimensions; ++i){
 		if (i == 0){
-			bitmapSize[i] = m_sizes[i];
+			bitmapSize[0] = m_sizes[i];
 		}
 		else{
-			bitmapSize[i] *= m_sizes[i];
+			bitmapSize[1] *= m_sizes[i];
 		}
 	}
 
@@ -371,24 +371,10 @@ template <int Dimensions, class Element>
 template <typename Operation>
 void TGeneralHoughSpace<Dimensions, Element>::ApplyOperation(Operation operation)
 {
+	for (Iterator iter = BaseClass::Begin(); iter != BaseClass::End(); ++iter){
+		Element& value = *iter;
 
-	istd::TIndex<Dimensions> size = BaseClass::GetImageSize();
-
-	for (int y = 0; y < size.GetY(); ++y){
-		if (BaseClass::GetPixelFormat() == PF_FLOAT32){
-			float* linePtr = (float*)BaseClass::GetLinePtr(y);
-			for (int x = 0; x < size.GetX(); ++x){
-				linePtr[x] = operation(linePtr[x]);
-			}
-		}
-		else{
-			Q_ASSERT(GetPixelFormat() == PF_GRAY32);
-
-			quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
-			for (int x = 0; x < size.GetX(); ++x){
-				linePtr[x] = operation(linePtr[x]);
-			}
-		}
+		value = operation(value);
 	}
 }
 
@@ -397,27 +383,19 @@ template <int Dimensions, class Element>
 template <typename Operation>
 void TGeneralHoughSpace<Dimensions, Element>::CombineWithSpace(const TGeneralHoughSpace& space, Operation operation)
 {
-	istd::TIndex<Dimensions> size = BaseClass::GetImageSize();
-	istd::TIndex<Dimensions> spaceSize = space.GetImageSize();
+	istd::TIndex<Dimensions> commonSize;
+	for (int i = 0; i < Dimensions; ++i){
+		commonSize[i] = qMin(m_sizes[i], space.m_sizes[i]);
+	}
 
-	istd::TIndex<Dimensions> commonSize(qMin(size.GetX(), spaceSize.GetX()), qMin(size.GetY(), spaceSize.GetY()));
-	for (int y = 0; y < commonSize.GetY(); ++y){
-		if (BaseClass::GetPixelFormat() == PF_FLOAT32){
-			float* linePtr = (float*)BaseClass::GetLinePtr(y);
-			const float* spaceLinePtr = (const float*)space.GetLinePtr(y);
-			for (int x = 0; x < commonSize.GetX(); ++x){
-				linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
-			}
-		}
-		else{
-			Q_ASSERT(GetPixelFormat() == PF_GRAY32);
+	istd::TIndex<Dimensions> index = istd::TIndex<Dimensions>::GetZero();
+	if (index.IsInside(commonSize)){
+		do{
+			Element& destValue = BaseClass::GetAt(index);
+			const Element& secondValue = space.BaseClass::GetAt(index);
 
-			quint32* linePtr = (quint32*)BaseClass::GetLinePtr(y);
-			const quint32* spaceLinePtr = (const quint32*)space.GetLinePtr(y);
-			for (int x = 0; x < commonSize.GetX(); ++x){
-				linePtr[x] = operation(linePtr[x], spaceLinePtr[x]);
-			}
-		}
+			destValue = operation(destValue, secondValue);
+		} while (index.Increase(commonSize));
 	}
 }
 
@@ -511,7 +489,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 					storedValue = 0;
 				}
 
-				for (; nextPos < smoothAxisSize; ++nextPos){
+				for (; nextPos < smoothAxisSize - 1; ++nextPos){
 					int nextElementOffset = elementOffset + elementDiff;
 
 					Element nextValue = m_elements[nextElementOffset];

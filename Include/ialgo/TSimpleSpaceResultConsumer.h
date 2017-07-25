@@ -45,15 +45,15 @@ public:
 	virtual QList<int> GetSupportedNeghboursCount() const;
 	virtual void OnProcessingBegin(
 				const TIHoughSpace<Dimensions, Element>& space,
-				const double& minValue);
+				const Element& minValue);
 	virtual void OnProcessingEnd(const TIHoughSpace<Dimensions, Element>& space);
 	virtual bool OnMaximumFound(
 				const TIHoughSpace<Dimensions, Element>& space,
-				const istd::TIndex<2>& position,
-				const double& value,
-				const double* neghboursPtr,
+				const istd::TIndex<Dimensions>& position,
+				const Element& value,
+				const Element* neghboursPtr,
 				int neghboursCount,
-				double& minValue);
+				Element& minValue);
 
 	PosMap positions;
 
@@ -91,7 +91,7 @@ QList<int> TSimpleSpaceResultConsumer<Dimensions, Element>::GetSupportedNeghbour
 template <int Dimensions, class Element>
 void TSimpleSpaceResultConsumer<Dimensions, Element>::OnProcessingBegin(
 			const TIHoughSpace<Dimensions, Element>& /*space*/,
-			const double& /*minValue*/)
+			const Element& /*minValue*/)
 {
 	m_maxValue = 0;
 }
@@ -141,11 +141,11 @@ void TSimpleSpaceResultConsumer<Dimensions, Element>::OnProcessingEnd(const TIHo
 template <int Dimensions, class Element>
 bool TSimpleSpaceResultConsumer<Dimensions, Element>::OnMaximumFound(
 			const TIHoughSpace<Dimensions, Element>& /*space*/,
-			const istd::TIndex<2>& position,
-			const double& value,
-			const double* neghboursPtr,
+			const istd::TIndex<Dimensions>& position,
+			const Element& value,
+			const Element* neghboursPtr,
 			int neghboursCount,
-			double& minValue)
+			Element& minValue)
 {
 	Q_ASSERT(neghboursCount == Dimensions * 2);
 	Q_UNUSED(neghboursCount);
@@ -153,8 +153,8 @@ bool TSimpleSpaceResultConsumer<Dimensions, Element>::OnMaximumFound(
 	PosVector resultPos;
 
 	for (int dimensionIndex = 0; dimensionIndex < Dimensions; ++dimensionIndex){
-		double diffLeft = value - neghboursPtr[dimensionIndex * 2];
-		double diffRight = value - neghboursPtr[dimensionIndex * 2 + 1];
+		Element diffLeft = double(value) - double(neghboursPtr[dimensionIndex * 2]);
+		Element diffRight = double(value) - double(neghboursPtr[dimensionIndex * 2 + 1]);
 
 		double correction = diffLeft / (diffLeft + diffRight);
 
@@ -164,8 +164,8 @@ bool TSimpleSpaceResultConsumer<Dimensions, Element>::OnMaximumFound(
 	positions.insert(-value, resultPos);
 
 	if (value > m_maxValue){
-		m_maxValue = value;
-		double propValue = value * m_minMaxRatio;
+		m_maxValue = double(value);
+		Element propValue = Element(value * m_minMaxRatio);
 		if (minValue < propValue){
 			minValue = propValue;
 
