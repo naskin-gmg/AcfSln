@@ -191,7 +191,10 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothHoughSpace(const istd::TInde
 {
 	for (int i = 0; i < Dimensions; ++i){
 		if (m_sizes[i] >= 3){
-			SmoothSingleDimension(i, iterations[i]);
+			int iterCount = iterations[i];
+			if (iterCount > 0){
+				SmoothSingleDimension(i, iterCount);
+			}
 		}
 	}
 }
@@ -327,6 +330,8 @@ bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bit
 
 	if (maxValue <= 0){
 		bitmap.ClearImage();
+
+		return true;
 	}
 
 	Elements::const_iterator iter = m_elements.begin();
@@ -468,28 +473,26 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 			int axisElementOffset = outerElementOffset + internIndex;
 
 			for (int iterIndex = 0; iterIndex < iterations; ++iterIndex){
-				int elementOffset;
+				int elementOffset = axisElementOffset;
 				int nextPos;
 				Element value;
 				Element prevValue;
 				Element storedValue;
 
 				if (m_isWrapped[dimensionIndex]){
-					elementOffset = axisElementOffset;
 					value = m_elements[elementOffset];
 					nextPos = 0;
 					prevValue = m_elements[axisElementOffset + (smoothAxisSize - 1) * elementDiff];
 					storedValue = value;
 				}
 				else{
-					elementOffset = axisElementOffset + elementDiff;
 					value = m_elements[elementOffset];
 					nextPos = 1;
 					prevValue = 0;
 					storedValue = 0;
 				}
 
-				for (; nextPos < smoothAxisSize - 1; ++nextPos){
+				for (; nextPos < smoothAxisSize; ++nextPos){
 					int nextElementOffset = elementOffset + elementDiff;
 
 					Element nextValue = m_elements[nextElementOffset];

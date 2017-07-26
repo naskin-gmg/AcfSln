@@ -28,20 +28,19 @@ void DoSmoothHoughSpace(
 			for (int y = 0; y < spaceSize.GetY(); ++y){
 				PixelType* spaceLinePtr = (PixelType*)space.CGeneralBitmap::GetLinePtr(y);
 
-				int nextX;
+				int nextX = 1;
 				PixelType prevValue;
 				PixelType value;
-				PixelType storedValue = 0;
+				PixelType storedValue;
 				if (isWrappedX){
-					nextX = 1;
 					prevValue = spaceLinePtr[spaceSize.GetX() - 1];
 					value = spaceLinePtr[0];
 					storedValue = value;
 				}
 				else{
-					nextX = 1;
 					prevValue = spaceLinePtr[0];
 					value = spaceLinePtr[1];
+					storedValue = 0;
 				}
 
 				for (; nextX < spaceSize.GetX(); ++nextX){
