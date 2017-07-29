@@ -119,7 +119,7 @@
                     <AttributeInfo Id="Editors" Type="Reference[]" ExportId="InspectionGuis">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" Type="String[]" ExportId="InspectionNames">
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="InspectionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">

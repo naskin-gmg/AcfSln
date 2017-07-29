@@ -90,13 +90,13 @@
                     <AttributeInfo Id="CommandsSelection" Type="Reference" ExportId="WindowsList">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuDescription" Type="String" ExportId="">
+                    <AttributeInfo Id="MenuDescription" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="List of document windows"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MenuName" Type="String" ExportId="">
+                    <AttributeInfo Id="MenuName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Windows"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="RootMenu" Type="String" ExportId="">
+                    <AttributeInfo Id="RootMenu" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="&amp;Window"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

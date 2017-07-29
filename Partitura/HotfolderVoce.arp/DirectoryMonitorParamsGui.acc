@@ -29,7 +29,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="Names" Type="String[]" ExportId="">
+                    <AttributeInfo Id="Names" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Monitoring Directory</Value>
