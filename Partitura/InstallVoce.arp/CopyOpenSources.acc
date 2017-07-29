@@ -47,10 +47,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.vcproj</Value>
@@ -65,25 +65,25 @@
                     <AttributeInfo Id="IgnoreUnknownTags" Type="Boolean" ExportId="">
                         <Data IsEnabled="true" Value="true"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Build"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Build"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="-1"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SubstitutionTagExpr" Type="Text" ExportId="ProjectsSubstitutionTagExpr">
+                    <AttributeInfo Id="SubstitutionTagExpr" Type="String" ExportId="ProjectsSubstitutionTagExpr">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UserSubstitutionTags" Type="Text[]" ExportId="ProjectsSubstitutionTags">
+                    <AttributeInfo Id="UserSubstitutionTags" Type="String[]" ExportId="ProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="UserSubstitutionValues" Type="Text[]" ExportId="ProjectsSubstitutionValues">
+                    <AttributeInfo Id="UserSubstitutionValues" Type="String[]" ExportId="ProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -95,31 +95,31 @@
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" Type="Text" ExportId="LicensePath">
+                    <AttributeInfo Id="LicensePath" Type="String" ExportId="LicensePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OtherExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="OtherExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTagExpr" Type="Text" ExportId="ProjectsSubstitutionTagExpr">
+                    <AttributeInfo Id="ProjectsSubstitutionTagExpr" Type="String" ExportId="ProjectsSubstitutionTagExpr">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="Text[]" ExportId="ProjectsSubstitutionTags">
+                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="String[]" ExportId="ProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="Text[]" ExportId="ProjectsSubstitutionValues">
+                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="String[]" ExportId="ProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SourceExcludeFilters" Type="Text[]" ExportId="SourceExcludeFilters">
+                    <AttributeInfo Id="SourceExcludeFilters" Type="String[]" ExportId="SourceExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="Text[]" ExportId="WinProjectsSubstitutionTags">
+                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="String[]" ExportId="WinProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="Text[]" ExportId="WinProjectsSubstitutionValues">
+                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="String[]" ExportId="WinProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -134,10 +134,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.ui</Value>
@@ -152,13 +152,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
@@ -176,31 +176,31 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="Text[]" ExportId="ProjectsSubstitutionTags">
+                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="String[]" ExportId="ProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="Text[]" ExportId="ProjectsSubstitutionValues">
+                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="String[]" ExportId="ProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="-1"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="Text[]" ExportId="WinProjectsSubstitutionTags">
+                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="String[]" ExportId="WinProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="Text[]" ExportId="WinProjectsSubstitutionValues">
+                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="String[]" ExportId="WinProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -215,10 +215,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.png</Value>
@@ -235,13 +235,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
@@ -259,10 +259,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="SourceExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="SourceExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.h</Value>
@@ -270,16 +270,16 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" Type="Text" ExportId="LicensePath">
+                    <AttributeInfo Id="LicensePath" Type="String" ExportId="LicensePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Impl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
@@ -297,10 +297,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.ui</Value>
@@ -315,13 +315,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
@@ -339,31 +339,31 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="Text[]" ExportId="ProjectsSubstitutionTags">
+                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="String[]" ExportId="ProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="Text[]" ExportId="ProjectsSubstitutionValues">
+                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="String[]" ExportId="ProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="-1"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="Text[]" ExportId="WinProjectsSubstitutionTags">
+                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="String[]" ExportId="WinProjectsSubstitutionTags">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="Text[]" ExportId="WinProjectsSubstitutionValues">
+                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="String[]" ExportId="WinProjectsSubstitutionValues">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -378,10 +378,10 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="OtherExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.png</Value>
@@ -397,13 +397,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
@@ -421,26 +421,26 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ExcludeFilters" Type="Text[]" ExportId="SourceExcludeFilters">
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="SourceExcludeFilters">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="Filters" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.cpp</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="LicensePath" Type="Text" ExportId="LicensePath">
+                    <AttributeInfo Id="LicensePath" Type="String" ExportId="LicensePath">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="OutputSubDir" Type="Text" ExportId="">
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
                         <Data IsEnabled="true" Value="Include"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">

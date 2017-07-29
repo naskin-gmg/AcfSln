@@ -13,7 +13,7 @@
         <Element Id="BinarizationTaskGui" PackageId="QtInspectionPck" ComponentId="GeneralSupplierGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DefaultStatusIcon" Type="Text" ExportId="DefaultStatusIcon">
+                    <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">

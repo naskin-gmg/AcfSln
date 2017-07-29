@@ -81,21 +81,21 @@
         <Element Id="PreviewCommandFileInfo" PackageId="FilePck" ComponentId="FileTypeInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="FileExtensionsMac" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="FileExtensionsMac" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value></Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExtensionsUnx" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="FileExtensionsUnx" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value></Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="FileExtensionsWin" Type="Text[]" ExportId="">
+                    <AttributeInfo Id="FileExtensionsWin" Type="String[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>exe</Value>
@@ -140,7 +140,7 @@
         <Element Id="SettingsDialog" PackageId="QtGuiPck" ComponentId="ModelDialogGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DialogIconPath" Type="Text" ExportId="">
+                    <AttributeInfo Id="DialogIconPath" Type="String" ExportId="">
                         <Data IsEnabled="true" Value=":/Icons/Settings"/>
                     </AttributeInfo>
                     <AttributeInfo Id="DialogTitle" Type="Text" ExportId="">
