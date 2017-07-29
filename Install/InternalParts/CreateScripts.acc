@@ -13,7 +13,7 @@
         <Element Id="Application" PackageId="InstallVoce" ComponentId="ComplexCopyApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ACF-Solutions"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FileCopiers" Type="Reference[]" ExportId="">
@@ -23,7 +23,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                    <AttributeInfo Id="ProductName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ACF-Solutions"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">

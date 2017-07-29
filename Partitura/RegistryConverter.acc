@@ -13,7 +13,7 @@
         <Element Id="ComplexCopyApplication" PackageId="InstallVoce" ComponentId="ComplexCopyApplication">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ImagingTools"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="">
@@ -26,13 +26,13 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="LegalCopyright" Type="String" ExportId="">
+                    <AttributeInfo Id="LegalCopyright" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="(C) 2015 Witold Gantzke &amp; Kirill Lepskiy"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MainVersionId" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ProductName" Type="String" ExportId="">
+                    <AttributeInfo Id="ProductName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ArxToCarxConverter"/>
                     </AttributeInfo>
                     <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="">

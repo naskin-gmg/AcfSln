@@ -13,13 +13,13 @@
         <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="SimpleProductFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationName" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Circle Finder"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="ApplicationSubname">
+                    <AttributeInfo Id="ApplicationSubname" Type="Text" ExportId="ApplicationSubname">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="CompanyName" Type="String" ExportId="">
+                    <AttributeInfo Id="CompanyName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Witold Gantzke &amp; Kirill Lepskiy"/>
                     </AttributeInfo>
                     <AttributeInfo Id="InspectionGuis" Type="Reference[]" ExportId="">

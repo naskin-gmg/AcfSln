@@ -22,7 +22,7 @@
         <Element Id="Framework" PackageId="ImageProcessingTutorialVoce" ComponentId="PreciseBlobTestFramework">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="ApplicationSubname" Type="String" ExportId="">
+                    <AttributeInfo Id="ApplicationSubname" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="File Test"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Camera" Type="Reference" ExportId="">

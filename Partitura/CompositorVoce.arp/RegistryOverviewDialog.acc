@@ -16,7 +16,7 @@
                     <AttributeInfo Id="DialogSize" Type="Real" ExportId="">
                         <Data IsEnabled="true" Value="0.5"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DialogTitle" Type="String" ExportId="">
+                    <AttributeInfo Id="DialogTitle" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Component Topology"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Gui" Type="Reference" ExportId="">

@@ -48,7 +48,7 @@
                     <AttributeInfo Id="DockFeatures" Type="Integer" ExportId="DockFeatures">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                    <AttributeInfo Id="DockTitle" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Audio Sample"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">

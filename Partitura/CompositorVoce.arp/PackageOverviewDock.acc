@@ -34,7 +34,7 @@
         <Element Id="PackageOverviewDock" PackageId="QtGuiPck" ComponentId="DockWidgetGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="DockTitle" Type="String" ExportId="">
+                    <AttributeInfo Id="DockTitle" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Packages"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveGui" Type="Reference" ExportId="">
