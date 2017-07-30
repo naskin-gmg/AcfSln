@@ -212,7 +212,7 @@
                                 <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
                                     <Data IsEnabled="true" Value="3"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="ValueName" Type="String[]" ExportId="">
+                                <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Hue</Value>

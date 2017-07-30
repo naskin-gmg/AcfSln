@@ -112,7 +112,7 @@
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Circle finder compressed parameters</Value>

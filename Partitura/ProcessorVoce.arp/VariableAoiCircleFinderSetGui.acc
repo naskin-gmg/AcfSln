@@ -113,7 +113,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeNames" Type="String[]" ExportId="">
+                    <AttributeInfo Id="TypeNames" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Annulus</Value>

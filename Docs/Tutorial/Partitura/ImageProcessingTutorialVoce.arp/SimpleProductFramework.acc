@@ -43,7 +43,7 @@
                     <AttributeInfo Id="VersionIds" Type="Integer[]" ExportId="AboutVersionIds">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="VersionNames" Type="String[]" ExportId="AboutVersionNames">
+                    <AttributeInfo Id="VersionNames" Type="Text[]" ExportId="AboutVersionNames">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -246,7 +246,7 @@
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="LogDock"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="XmlTypeDescriptions">
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="XmlTypeDescriptions">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Inspection parameters</Value>

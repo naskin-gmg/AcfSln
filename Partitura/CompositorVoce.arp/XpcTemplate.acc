@@ -50,7 +50,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACF Component Package</Value>
@@ -71,7 +71,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>ACF Registry File</Value>
@@ -159,7 +159,7 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                                <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>ACF Workspace Configuration File</Value>
@@ -188,7 +188,7 @@
                                 <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="TypeDescriptions" Type="String[]" ExportId="">
+                                <AttributeInfo Id="TypeDescriptions" Type="Text[]" ExportId="">
                                     <Data IsEnabled="true">
                                         <Values>
                                             <Value>Old ACF Configuration File</Value>

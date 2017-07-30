@@ -44,7 +44,7 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CInspectionTaskGuiCompBase);
-		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
+		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of GUI names", false);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout for tool box design", true, false);
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
 		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 1 - tool box\n* 2 - tab", true, 1);

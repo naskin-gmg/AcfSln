@@ -91,7 +91,7 @@
                     <AttributeInfo Id="UnitType" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ValueDescriptions" Type="String[]" ExportId="">
+                    <AttributeInfo Id="ValueDescriptions" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Length of filter, use smaller values for better accuracy and bigger values to suppress the noise</Value>
@@ -105,7 +105,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="ValueName" Type="String[]" ExportId="">
+                    <AttributeInfo Id="ValueName" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Filter</Value>
