@@ -75,7 +75,7 @@
         <Element Id="FilePathParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PathLabel" Type="String" ExportId="">
+                    <AttributeInfo Id="PathLabel" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="Directory"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

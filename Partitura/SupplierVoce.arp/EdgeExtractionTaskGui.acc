@@ -58,7 +58,7 @@
                     <AttributeInfo Id="DefaultStatusIcon" Type="String" ExportId="DefaultStatusIcon">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultStatusText" Type="String" ExportId="DefaultStatusText">
+                    <AttributeInfo Id="DefaultStatusText" Type="Text" ExportId="DefaultStatusText">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="EdgeLineColorSchema" Type="Reference" ExportId="EdgeLineColorSchema">

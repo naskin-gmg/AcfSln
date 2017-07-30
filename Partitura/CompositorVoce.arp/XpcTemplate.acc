@@ -22,7 +22,7 @@
                     <AttributeInfo Id="DocumentTypeId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="Configuration"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DocumentTypeName" Type="String" ExportId="">
+                    <AttributeInfo Id="DocumentTypeName" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="ACF Configuration"/>
                     </AttributeInfo>
                     <AttributeInfo Id="IsEditSupported" Type="Boolean" ExportId="">
@@ -129,7 +129,7 @@
                     <Element Id="Composed" PackageId="FilePck" ComponentId="ComposedFilePersistence">
                         <Data IsEnabled="true" Flags="0">
                             <AttributeInfoMap>
-                                <AttributeInfo Id="CommonDescription" Type="String" ExportId="">
+                                <AttributeInfo Id="CommonDescription" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="ACF Configuration File"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="SlaveLoaders" Type="Reference[]" ExportId="">

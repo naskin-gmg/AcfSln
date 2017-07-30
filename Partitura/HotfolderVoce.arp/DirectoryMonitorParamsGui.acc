@@ -47,10 +47,10 @@
         <Element Id="DirectoryParamsGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="PathLabel" Type="String" ExportId="">
+                    <AttributeInfo Id="PathLabel" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value=""/>
                     </AttributeInfo>
-                    <AttributeInfo Id="StartHint" Type="String" ExportId="">
+                    <AttributeInfo Id="StartHint" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="&lt;Enter the path of the directory&gt;"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

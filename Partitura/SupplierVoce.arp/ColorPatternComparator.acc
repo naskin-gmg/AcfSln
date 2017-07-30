@@ -206,7 +206,7 @@
                                 <AttributeInfo Id="Precision" Type="Integer" ExportId="">
                                     <Data IsEnabled="true" Value="10"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="UnitName" Type="String" ExportId="">
+                                <AttributeInfo Id="UnitName" Type="Text" ExportId="">
                                     <Data IsEnabled="true" Value="%"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="UnitType" Type="Integer" ExportId="">

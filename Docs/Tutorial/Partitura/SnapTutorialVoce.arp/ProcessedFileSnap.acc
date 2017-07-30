@@ -53,7 +53,7 @@
         <Element Id="FileSnapParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="StartHint" Type="String" ExportId="">
+                    <AttributeInfo Id="StartHint" Type="Text" ExportId="">
                         <Data IsEnabled="true" Value="&lt;Enter image directory&gt;"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
