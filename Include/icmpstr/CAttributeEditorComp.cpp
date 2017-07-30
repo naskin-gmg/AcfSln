@@ -16,6 +16,7 @@
 #include <istd/TOptDelPtr.h>
 #include <istd/CChangeNotifier.h>
 #include <icomp/CInterfaceManipBase.h>
+#include <icomp/TMultiAttributeMember.h>
 #include <icomp/CCompositeComponentStaticInfo.h>
 #include <icomp/CComponentMetaDescriptionEncoder.h>
 #include <ilog/CMessageContainer.h>
@@ -55,7 +56,7 @@ CAttributeEditorComp::CAttributeEditorComp()
 	m_attributeTypesMap[iattr::CRealListAttribute::GetTypeName()] = TypeDescr(tr("List of real numbers"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CBooleanListAttribute::GetTypeName()] = TypeDescr(tr("List of boolean values"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = TypeDescr(tr("List of strings"), AGT_ATTRIBUTE);
-	m_attributeTypesMap[iattr::CStringListAttribute::GetTypeName()] = TypeDescr(tr("List of translatable texts"), AGT_ATTRIBUTE);
+	m_attributeTypesMap[icomp::CMultiTextAttribute::GetTypeName()] = TypeDescr(tr("List of translatable texts"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[iattr::CIdListAttribute::GetTypeName()] = TypeDescr(tr("List of ID's"), AGT_ATTRIBUTE);
 	m_attributeTypesMap[icomp::CReferenceAttribute::GetTypeName()] = TypeDescr(tr("Component reference"), AGT_REFERENCE);
 	m_attributeTypesMap[icomp::CMultiReferenceAttribute::GetTypeName()] = TypeDescr(tr("List of component reference"), AGT_REFERENCE);
