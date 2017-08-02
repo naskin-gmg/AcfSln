@@ -156,7 +156,8 @@ bool TSimpleSpaceResultConsumer<Dimensions, Element>::OnMaximumFound(
 		Element diffLeft = double(value) - double(neghboursPtr[dimensionIndex * 2]);
 		Element diffRight = double(value) - double(neghboursPtr[dimensionIndex * 2 + 1]);
 
-		double correction = diffLeft / (diffLeft + diffRight);
+		double normValue = diffLeft + diffRight;
+		double correction = (normValue > I_BIG_EPSILON)? diffLeft / normValue: 0.5;
 
 		resultPos[dimensionIndex] = position[dimensionIndex] + correction;
 	}

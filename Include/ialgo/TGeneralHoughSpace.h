@@ -455,6 +455,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 {
 	int elementDiff = 1;
 	int blocksCount = 1;
+	int elementsCount = int(m_elements.size());
 
 	for (int i = 0; i < Dimensions; ++i){
 		if (i < dimensionIndex){
@@ -493,7 +494,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 				}
 
 				for (; nextPos < smoothAxisSize; ++nextPos){
-					int nextElementOffset = elementOffset + elementDiff;
+					int nextElementOffset = (elementOffset + elementDiff) % elementsCount;
 
 					Element nextValue = m_elements[nextElementOffset];
 
