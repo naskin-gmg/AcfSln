@@ -43,6 +43,15 @@ public:
 	template <typename Operation>
 	void CombineWithSpace(const TGeneralHoughSpace& space, Operation operation);
 
+	/**
+		Get the distance scaling factors used to calculate how far are elements in this space.
+	*/
+	double GetDistScalingFactor(int dimensionIndex) const;
+	/**
+		Set the distance scaling factors used to calculate how far are elements in this space.
+	*/
+	void SetDistScalingFactor(int dimensionIndex, double factor);
+
 	// reimplemented (ialgo::TIHoughSpace)
 	virtual istd::TIndex<Dimensions> GetSpaceSize() const;
 	virtual bool CreateHoughSpace(const istd::TIndex<Dimensions>& size, const Element& initValue = 0);
@@ -66,6 +75,7 @@ protected:
 
 private:
 	bool m_isWrapped[Dimensions];
+	double m_distScalingFactors[Dimensions];
 };
 
 
@@ -83,15 +93,23 @@ inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance2(const i
 {
 	imath::TVector<Dimensions> diff = position2 - position1;
 
+	double distance2 = 0;
+
 	for (int i = 0; i < Dimensions; ++i){
+		double diff = position2[i] - position1[i];
+
 		if (m_isWrapped[i]){
 			double offset = m_sizes[i] * 0.5;
 
-			diff[i] = std::fmod(diff[i] + offset + m_sizes[i], m_sizes[i]) - offset;
+			diff = std::fmod(diff + offset + m_sizes[i], m_sizes[i]) - offset;
 		}
+
+		diff *= m_distScalingFactors[i];
+
+		distance2 += diff * diff;
 	}
 
-	return diff.GetLength2();
+	return distance2;
 }
 
 
@@ -107,6 +125,26 @@ template <int Dimensions, class Element>
 TGeneralHoughSpace<Dimensions, Element>::TGeneralHoughSpace(const istd::TIndex<Dimensions>& size)
 {
 	TGeneralHoughSpace<Dimensions, Element>::CreateHoughSpace(size);
+}
+
+
+template <int Dimensions, class Element>
+double TGeneralHoughSpace<Dimensions, Element>::GetDistScalingFactor(int dimensionIndex) const
+{
+	Q_ASSERT(dimensionIndex >= 0);
+	Q_ASSERT(dimensionIndex < Dimensions);
+
+	return m_distScalingFactors[dimensionIndex];
+}
+
+
+template <int Dimensions, class Element>
+void TGeneralHoughSpace<Dimensions, Element>::SetDistScalingFactor(int dimensionIndex, double factor)
+{
+	Q_ASSERT(dimensionIndex >= 0);
+	Q_ASSERT(dimensionIndex < Dimensions);
+
+	m_distScalingFactors[dimensionIndex] = factor;
 }
 
 
@@ -126,6 +164,8 @@ bool TGeneralHoughSpace<Dimensions, Element>::CreateHoughSpace(const istd::TInde
 
 	for (int i = 0; i < Dimensions; ++i){
 		m_isWrapped[i] = false;
+		
+		m_distScalingFactors[i] = 1;
 	}
 
 	BaseClass::SetSizes(size);
