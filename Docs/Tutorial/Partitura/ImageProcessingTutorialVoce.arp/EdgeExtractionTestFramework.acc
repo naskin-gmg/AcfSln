@@ -2,14 +2,19 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4553" Description="ACF"/>
+            <Version Id="1" Number="1902" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329472" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Complex framework showing different task</Description>
     <Keywords>Product Framework Task Image Caliper GUI Application</Keywords>
     <ElementsList>
+        <Element Id="Console" PackageId="AcfGuiVoce" ComponentId="Console">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
         <Element Id="EdgeExtractionTask" PackageId="SupplierVoce" ComponentId="EdgeExtractionTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -48,7 +53,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InspectionNames" Type="String[]" ExportId="">
+                    <AttributeInfo Id="InspectionNames" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Image</Value>
@@ -59,8 +64,8 @@
                     <AttributeInfo Id="InspectionPreviews" Type="Reference[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>ImageView</Value>
-                                <Value>ImageView</Value>
+                                <Value>Console</Value>
+                                <Value>Console</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -73,11 +78,6 @@
                         </Data>
                     </AttributeInfo>
                 </AttributeInfoMap>
-            </Data>
-        </Element>
-        <Element Id="ImageView" PackageId="QtViewPck" ComponentId="ImageView">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap/>
             </Data>
         </Element>
         <Element Id="SnapTask" PackageId="SupplierVoce" ComponentId="SnapTask">
