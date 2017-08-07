@@ -217,7 +217,7 @@ void TGeneralHoughSpace<Dimensions, Element>::IncreaseValueAt(const imath::TVect
 		}
 
 		Q_ASSERT(singleIndex >= 0);
-		Q_ASSERT(singleIndex > size);
+		Q_ASSERT(singleIndex < size);
 
 		elementOffset += singleIndex;
 	}
