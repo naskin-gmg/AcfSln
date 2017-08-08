@@ -40,6 +40,12 @@ public:
 				bool isFloatSpace);
 
 	/**
+		Set if this space to be wrapped horizontaly or not.
+		Space is horizonally wrapped if the left pixel is neighbour of the right one.
+	*/
+	void SetDimensionWrapped(int dimensionIndex, bool state);
+
+	/**
 		Apply some operation to each element.
 	*/
 	template <typename Operation>
@@ -55,7 +61,7 @@ public:
 	virtual istd::TIndex<2> GetSpaceSize() const;
 	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0);
 	virtual bool IsDimensionWrapped(int dimensionIndex) const;
-	virtual void SetDimensionWrapped(int dimensionIndex, bool state);
+	virtual ExtensionMode GetExtensionMode(int dimensionIndex) const;
 	virtual void IncreaseValueAt(const imath::TVector<2>& position, double value);
 	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations);
 	virtual bool AnalyseHoughSpace(

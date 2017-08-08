@@ -278,6 +278,15 @@ bool CHoughSpace2d::CreateHoughSpace(const istd::TIndex<2>& size, const double& 
 }
 
 
+void CHoughSpace2d::SetDimensionWrapped(int dimensionIndex, bool state)
+{
+	Q_ASSERT(dimensionIndex >= 0);
+	Q_ASSERT(dimensionIndex < 2);
+
+	m_isWrapped[dimensionIndex] = state;
+}
+
+
 bool CHoughSpace2d::IsDimensionWrapped(int dimensionIndex) const
 {
 	Q_ASSERT(dimensionIndex >= 0);
@@ -287,12 +296,9 @@ bool CHoughSpace2d::IsDimensionWrapped(int dimensionIndex) const
 }
 
 
-void CHoughSpace2d::SetDimensionWrapped(int dimensionIndex, bool state)
+CHoughSpace2d::ExtensionMode CHoughSpace2d::GetExtensionMode(int /*dimensionIndex*/) const
 {
-	Q_ASSERT(dimensionIndex >= 0);
-	Q_ASSERT(dimensionIndex < 2);
-
-	m_isWrapped[dimensionIndex] = state;
+	return EM_UNKNOWN;
 }
 
 

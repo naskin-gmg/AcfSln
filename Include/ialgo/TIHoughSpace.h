@@ -60,6 +60,25 @@ public:
 	};
 
 	/**
+		Describe how the space is extended, it means how the area outside of space should be interpreted.
+	*/
+	enum ExtensionMode
+	{
+		/**
+			Space extension mode is unknown.
+		*/
+		EM_UNKNOWN,
+		/**
+			Space is calculated as it is extended with zeroes.
+		*/
+		EM_ZERO,
+		/**
+			Space is calculated as it is extended with the same values as border value.
+		*/
+		EM_BORDER,
+	};
+
+	/**
 		Get size of this Hough space.
 	*/
 	virtual istd::TIndex<Dimensions> GetSpaceSize() const = 0;
@@ -73,11 +92,11 @@ public:
 		Check if this space is wrapped horizontaly, it means the the left pixel is neighbour of the right one.
 	*/
 	virtual bool IsDimensionWrapped(int dimensionIndex) const = 0;
+
 	/**
-		Set if this space to be wrapped horizontaly or not.
-		Space is horizonally wrapped if the left pixel is neighbour of the right one.
+		Get extension mode for single dimension.
 	*/
-	virtual void SetDimensionWrapped(int dimensionIndex, bool state) = 0;
+	virtual ExtensionMode GetExtensionMode(int dimensionIndex) const = 0;
 
 	/**
 		Increase the value at specified position.
