@@ -40,7 +40,7 @@ bool DoIntegralFilter(
 			}
 		}
 
-		for (int y = commonRect.GetTop(); y < commonRect.GetBottom(); ++y){
+		for (y = commonRect.GetTop(); y < commonRect.GetBottom(); ++y){
 			const istd::CIntRanges* maskRangesPtr = maskPtr->GetPixelRanges(y);
 			if (maskRangesPtr != NULL){
 				OutputPixelType* outputPtr = (OutputPixelType*)outputImage.GetLinePtr(y);
