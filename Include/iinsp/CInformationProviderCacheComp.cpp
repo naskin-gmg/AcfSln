@@ -75,6 +75,19 @@ bool CInformationProviderCacheComp::CopyFrom(const IChangeable& object, Compatib
 }
 
 
+bool CInformationProviderCacheComp::ResetData(CompatibilityMode /*mode*/)
+{
+	m_timeStamp = QDateTime::currentDateTime();
+	m_category = IC_NONE;
+	m_id = 0;
+	m_description.clear();
+	m_source.clear();
+	m_flags = 0;
+
+	return true;
+}
+
+
 } // namespace iinsp
 
 
