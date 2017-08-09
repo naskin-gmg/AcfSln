@@ -4,6 +4,8 @@
 
 // ACF includes
 #include <icomp/CComponentBase.h>
+#include <imod/IModel.h>
+#include <imod/CSingleModelObserverBase.h>
 
 // ACF-Solutions includes
 #include <imath/IUnitInfo.h>
@@ -21,7 +23,8 @@ namespace imeas
 */
 class CNumericParamsComp:
 			public icomp::CComponentBase,
-			public CSimpleNumericValue
+			public CSimpleNumericValue,
+			protected imod::CSingleModelObserverBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -39,8 +42,12 @@ public:
 	virtual const INumericConstraints* GetNumericConstraints() const;
 
 protected:
+	// reimplemented (imeas::INumericValue)
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 	I_MULTIATTR(double, m_defaultValuesAttrPtr);
