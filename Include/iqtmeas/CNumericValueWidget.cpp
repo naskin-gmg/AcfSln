@@ -222,15 +222,17 @@ void CNumericValueWidget::on_ValueSlider_sliderReleased()
 
 void CNumericValueWidget::on_MinButton_clicked()
 {
-	ValueSB->setValue(m_valueRange.GetMinValue());
-	ValueSlider->setValue(m_valueRange.GetMinValue());
+	SetValue(m_valueRange.GetMinValue());
+
+	Q_EMIT ValueChanged();
 }
 
 
 void CNumericValueWidget::on_MaxButton_clicked()
 {
-	ValueSB->setValue(m_valueRange.GetMaxValue());
-	ValueSlider->setValue(m_valueRange.GetMaxValue());
+	SetValue(m_valueRange.GetMaxValue());
+
+	Q_EMIT ValueChanged();
 }
 
 
