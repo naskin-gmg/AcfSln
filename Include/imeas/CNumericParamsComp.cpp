@@ -27,7 +27,7 @@ const INumericConstraints* CNumericParamsComp::GetNumericConstraints() const
 
 // reimplemented (imeas::INumericValue)
 
-void CNumericParamsComp::OnUpdate(const istd::IChangeable::ChangeSet& changeSet)
+void CNumericParamsComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	const INumericConstraints* constraintsPtr = GetNumericConstraints();
 	if (constraintsPtr != NULL){
