@@ -1,12 +1,11 @@
 #include <iqtipr/CSearchBasedFeaturesSupplierGuiComp.h>
 
+
 // Qt includes
 #include <QtCore/QTimer>
 
 // ACF includes
 #include <imath/CVarVector.h>
-
-// ACF-Solutions includes
 #include <iipr/IFeaturesProvider.h>
 #include <iipr/CSearchFeature.h>
 
@@ -112,16 +111,19 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 			int featuresCount = providerPtr->GetFeaturesCount();
 
 			for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
-				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&providerPtr->GetFeature(featureIndex));
+				QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
+
+				const imeas::INumericValue* featurePtr = &providerPtr->GetFeature(featureIndex);
+
+				const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(featurePtr);
 				if (objectFeaturePtr != NULL){
-					QTreeWidgetItem* modelItemPtr = new QTreeWidgetItem;
 					modelItemPtr->setText(CT_ID, objectFeaturePtr->GetObjectId());
 					modelItemPtr->setText(CT_SCORE, QString::number(objectFeaturePtr->GetWeight() * 100, 'f', 2));
 					modelItemPtr->setText(CT_POSITION, QString::number(objectFeaturePtr->GetPosition().GetX(), 'f', 2)+","+QString::number(objectFeaturePtr->GetPosition().GetY(), 'f', 2));
 					modelItemPtr->setText(CT_ANGLE, QString::number(imath::GetDegreeFromRadian(objectFeaturePtr->GetAngle()), 'f', 2));
 					modelItemPtr->setText(CT_SCALE, QString::number(objectFeaturePtr->GetScale().GetX(), 'f', 2) + "," + QString::number(objectFeaturePtr->GetScale().GetY(), 'f', 2));
 
-					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&providerPtr->GetFeature(featureIndex));
+					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(featurePtr);
 					if (searchFeaturePtr != NULL){
 						modelItemPtr->setText(CT_ID, QString("%1 (%2)").arg(QString(objectFeaturePtr->GetObjectId())).arg(searchFeaturePtr->GetIndex()));
 					
@@ -134,9 +136,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 						}
 					}
 
-					ResultsList->addTopLevelItem(modelItemPtr);
-
-					// add shape
+					// Add general model shape:
 					if (*m_showResultShapesAttrPtr){
 						VisualObject* visualObject = new VisualObject(false);
 						visualObject->model->SetPosition(objectFeaturePtr->GetPosition());
@@ -144,6 +144,25 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 						m_visualPositions.PushBack(visualObject);
 					}
 				}
+				else{
+					const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(featurePtr);
+					if (circlePtr != NULL){
+						modelItemPtr->setText(CT_SCORE, QString::number(featurePtr->GetComponentValue(imeas::INumericValue::VTI_WEIGHT)[0] * 100, 'f', 2));
+						modelItemPtr->setText(CT_POSITION, QString::number(circlePtr->GetPosition().GetX(), 'f', 2) + "," + QString::number(circlePtr->GetPosition().GetY(), 'f', 2));
+						modelItemPtr->setText(CT_ANGLE, tr("n/a"));
+						modelItemPtr->setText(CT_SCALE, tr("n/a"));
+
+						if (*m_showResultShapesAttrPtr){
+							VisualObject* visualObject = new VisualObject(false);
+
+							visualObject->model->CopyFrom(*circlePtr);
+
+							m_visualPositions.PushBack(visualObject);
+						}
+					}
+				}
+
+				ResultsList->addTopLevelItem(modelItemPtr);
 			}
 		}
 
@@ -229,10 +248,10 @@ void CSearchBasedFeaturesSupplierGuiComp::ConnectShapes(iview::IShapeView& view)
 {
 	int shapesCount = m_visualPositions.GetCount();
 	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
-		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
-		Q_ASSERT(objectPtr != NULL);
+		iview::IShape* shapePtr = m_visualPositions.GetAt(shapeIndex);
+		Q_ASSERT(shapePtr != NULL);
 
-		view.ConnectShape(objectPtr->shape.GetPtr());
+		view.ConnectShape(shapePtr);
 	}
 }
 
@@ -241,10 +260,10 @@ void CSearchBasedFeaturesSupplierGuiComp::DisconnectShapes(iview::IShapeView& vi
 {
 	int shapesCount = m_visualPositions.GetCount();
 	for (int shapeIndex = 0; shapeIndex < shapesCount; shapeIndex++){
-		VisualObject* objectPtr = m_visualPositions.GetAt(shapeIndex);
-		Q_ASSERT(objectPtr != NULL);
+		iview::IShape* shapePtr = m_visualPositions.GetAt(shapeIndex);
+		Q_ASSERT(shapePtr != NULL);
 
-		view.DisconnectShape(objectPtr->shape.GetPtr());
+		view.DisconnectShape(shapePtr);
 	}
 }
 

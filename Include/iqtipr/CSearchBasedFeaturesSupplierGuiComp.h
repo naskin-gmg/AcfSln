@@ -6,9 +6,12 @@
 #include <imod/IObserver.h>
 #include <imod/TModelWrap.h>
 #include <imod/CSingleModelObserverBase.h>
+#include <i2d/CCircle.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 #include <iview/TVisualObjects.h>
+#include <iview/IShapeFactory.h>
+#include <iview/CCircleShape.h>
 
 // ACF-Solutions includes
 #include <iqtinsp/TSupplierGuiCompBase.h>
@@ -41,6 +44,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated into group 'Intermediate Results'", false, "IntermediateResultsGui");
+		I_ASSIGN(m_shapeFactoryCompPtr, "ShapeFactory", "Shape factory used for creation of the result shapes", false, "ShapeFactory");
 		I_ASSIGN(m_showResultShapesAttrPtr, "ShowResultShapes", "Show result shapes in the image as circles", true, true);
 	I_END_COMPONENT;
 
@@ -77,11 +81,12 @@ private:
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
+	I_REF(iview::IShapeFactory, m_shapeFactoryCompPtr);
 	I_ATTR(bool, m_showResultShapesAttrPtr);
 
 	// result shapes
-	typedef iview::TCircleVisualObject<> VisualObject;
-	typedef istd::TPointerVector<VisualObject> VisualObjects;
+	typedef iview::TVisualObject<i2d::CCircle, iview::CCircleShape> VisualObject;
+	typedef istd::TPointerVector<iview::IShape> VisualObjects;
 	VisualObjects m_visualPositions;
 
 	iview::IShapeView* m_lastViewPtr;
