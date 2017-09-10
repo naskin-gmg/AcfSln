@@ -49,7 +49,8 @@ private:
 	*/
 	i2d::CVector2d m_position;
 
-	/**	Weight value of this point.
+	/**
+		Weight value of this point.
 	*/
 	double m_weight;
 };

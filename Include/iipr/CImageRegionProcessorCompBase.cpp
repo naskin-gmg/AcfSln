@@ -55,7 +55,7 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	}
 	else{
 		if (*m_allowEmptyRegionAttrPtr){
-			aoiPtr.SetPtr(&inputImageArea);			
+			aoiPtr.SetPtr(&inputImageArea);
 		}
 	}
 
