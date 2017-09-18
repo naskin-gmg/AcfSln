@@ -38,11 +38,6 @@ I_EXPORT_COMPONENT(
 			"Sample acquisition GUI",
 			"Sample Sampling Acquisition GUI" IM_AUTHOR("\"Witold Gantzke\""));
 
-I_EXPORT_COMPONENT(
-			ScriptDataProcessor,
-			"Test sample acquisition based on QtScript",
-			"Test Sample Sampling Acquisition Script QtScript" IM_AUTHOR("\"Witold Gantzke\""));
-
 
 } // namespace QtSignalPck
 

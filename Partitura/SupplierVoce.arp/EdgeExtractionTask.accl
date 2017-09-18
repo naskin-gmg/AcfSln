@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4439" Description="ACF"/>
-            <Version Id="1" Number="1778" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4559" Description="ACF"/>
+            <Version Id="1" Number="1913" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
@@ -23,6 +23,15 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
+        <EmbededRegistry Id="ProcessingParams">
+            <PositionMap>
+                <Element ComponentName="EdgeExtractionParams" X="500" Y="450" Note=""/>
+                <Element ComponentName="EdgeReductionParams" X="825" Y="450" Note=""/>
+                <Element ComponentName="ProcessingParams" X="525" Y="200" Note=""/>
+                <Element ComponentName="SmoothParams" X="175" Y="450" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
         <EmbededRegistry Id="EdgeExtractor">
             <PositionMap>
                 <Element ComponentName="EdgesReductor" X="725" Y="325" Note=""/>
@@ -37,15 +46,6 @@
                 <Element ComponentName="BitmapSmooth" X="200" Y="225" Note=""/>
                 <Element ComponentName="RectImageSmoothProcessor" X="550" Y="400" Note=""/>
                 <Element ComponentName="SmoothedImageSupplier" X="550" Y="225" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
-        <EmbededRegistry Id="ProcessingParams">
-            <PositionMap>
-                <Element ComponentName="EdgeExtractionParams" X="500" Y="450" Note=""/>
-                <Element ComponentName="EdgeReductionParams" X="825" Y="450" Note=""/>
-                <Element ComponentName="ProcessingParams" X="525" Y="200" Note=""/>
-                <Element ComponentName="SmoothParams" X="175" Y="450" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
