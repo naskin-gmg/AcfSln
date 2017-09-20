@@ -104,8 +104,6 @@ inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance(const im
 template <int Dimensions, class Element>
 inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance2(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const
 {
-	imath::TVector<Dimensions> diff = position2 - position1;
-
 	double distance2 = 0;
 
 	for (int i = 0; i < Dimensions; ++i){
