@@ -222,7 +222,7 @@ bool CImageNormalizeProcessorComp::DoAdjustFilter(
 	case iimg::IBitmap::PF_GRAY32:
 		switch (outputPixelFormat){
 		case iimg::IBitmap::PF_GRAY32:
-			return DoAdjustTemplate<quint32, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, true>>(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+            return DoAdjustTemplate<quint32, quint32, iipr::CPixelManip::GrayCropAccum32<qint64, 16, true, true> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_FLOAT32:
 			return DoAdjustTemplate<quint32, float, double>(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);

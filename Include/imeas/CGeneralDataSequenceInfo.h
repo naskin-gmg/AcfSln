@@ -23,7 +23,7 @@ public:
 	CGeneralDataSequenceInfo(
 				int defaultChannelsCount,
 				int defaultSamplesCount,
-				WeightMode mode = WeightMode::WM_NONE,
+                IDataSequenceInfo::WeightMode mode = WM_NONE,
 				int sequenceFlags = 0);
 
 	void SetSequenceInfoFlags(int flags);
