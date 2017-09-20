@@ -27,6 +27,7 @@ class TGeneralHoughSpace:
 {
 public:
 	typedef istd::TArray<Element, Dimensions> BaseClass;
+	typedef TIHoughSpace<Dimensions, Element> BaseClass2;
 
 	TGeneralHoughSpace();
 	TGeneralHoughSpace(const istd::TIndex<Dimensions>& size);
@@ -67,12 +68,12 @@ public:
 	virtual istd::TIndex<Dimensions> GetSpaceSize() const;
 	virtual bool CreateHoughSpace(const istd::TIndex<Dimensions>& size, const Element& initValue = 0);
 	virtual bool IsDimensionWrapped(int dimensionIndex) const;
-	virtual ExtensionMode GetExtensionMode(int dimensionIndex) const;
+	virtual typename BaseClass2::ExtensionMode GetExtensionMode(int dimensionIndex) const;
 	virtual void IncreaseValueAt(const imath::TVector<Dimensions>& position, Element value);
 	virtual void SmoothHoughSpace(const istd::TIndex<Dimensions>& iterations);
 	virtual bool AnalyseHoughSpace(
 				const Element& minValue,
-				ResultsConsumer& resultProcessor) const;
+				typename BaseClass2::ResultsConsumer& resultProcessor) const;
 	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
 	virtual bool GetSpacePosition(const imath::TVector<Dimensions>& position, imath::TVector<Dimensions>& result) const;
 	virtual double GetSpaceDistance(const imath::TVector<Dimensions>& position1, const imath::TVector<Dimensions>& position2) const;
@@ -111,9 +112,9 @@ inline double TGeneralHoughSpace<Dimensions, Element>::GetSpaceDistance2(const i
 		double diff = position2[i] - position1[i];
 
 		if (m_isWrapped[i]){
-			double offset = m_sizes[i] * 0.5;
+			double offset = BaseClass::m_sizes[i] * 0.5;
 
-			diff = std::fmod(diff + offset + m_sizes[i], m_sizes[i]) - offset;
+			diff = std::fmod(diff + offset + BaseClass::m_sizes[i], BaseClass::m_sizes[i]) - offset;
 		}
 
 		diff *= m_distScalingFactors[i];
@@ -224,7 +225,7 @@ typename TIHoughSpace<Dimensions, Element>::ExtensionMode TGeneralHoughSpace<Dim
 	Q_ASSERT(dimensionIndex >= 0);
 	Q_ASSERT(dimensionIndex < Dimensions);
 
-	return m_extensionModeBorders[dimensionIndex]? EM_ZERO: EM_BORDER;
+	return m_extensionModeBorders[dimensionIndex]? BaseClass2::EM_ZERO: BaseClass2::EM_BORDER;
 }
 
 
@@ -236,7 +237,7 @@ void TGeneralHoughSpace<Dimensions, Element>::IncreaseValueAt(const imath::TVect
 	int elementOffset = 0;
 	for (int i = Dimensions - 1; i >= 0; --i){
 		int singleIndex = int(position[i]);
-		int size = m_sizes[i];
+		int size = BaseClass::m_sizes[i];
 
 		elementOffset *= size;
 
@@ -255,7 +256,7 @@ void TGeneralHoughSpace<Dimensions, Element>::IncreaseValueAt(const imath::TVect
 		elementOffset += singleIndex;
 	}
 
-	m_elements[elementOffset] += Element(value);
+	BaseClass::m_elements[elementOffset] += Element(value);
 }
 
 
@@ -263,7 +264,7 @@ template <int Dimensions, class Element>
 void TGeneralHoughSpace<Dimensions, Element>::SmoothHoughSpace(const istd::TIndex<Dimensions>& iterations)
 {
 	for (int i = 0; i < Dimensions; ++i){
-		if (m_sizes[i] >= 3){
+		if (BaseClass::m_sizes[i] >= 3){
 			int iterCount = iterations[i];
 			if (iterCount > 0){
 				SmoothSingleDimension(i, iterCount);
@@ -276,7 +277,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothHoughSpace(const istd::TInde
 template <int Dimensions, class Element>
 bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 			const Element& minValue,
-			ResultsConsumer& resultProcessor) const
+			typename BaseClass2::ResultsConsumer& resultProcessor) const
 {
 	QList<int> supportedNeighboursCount = resultProcessor.GetSupportedNeghboursCount();
 	if (!supportedNeighboursCount.contains(Dimensions * 2) && !supportedNeighboursCount.isEmpty()){
@@ -284,7 +285,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 	}
 
 	for (int i = 0; i < Dimensions; ++i){
-		if (m_sizes[i] < 1){
+		if (BaseClass::m_sizes[i] < 1){
 			return false;
 		}
 	}
@@ -295,23 +296,23 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 
 	Element currentMinValue(minValue);
 
-	IndexType index = IndexType::GetZero();
-	if (index.IsInside(m_sizes)){
+	typename BaseClass::IndexType index = BaseClass::IndexType::GetZero();
+	if (index.IsInside(BaseClass::m_sizes)){
 		do{
 			Element value = BaseClass::GetAt(index);
 			if (value >= currentMinValue){
 				for (int i = 0; i < Dimensions; ++i){
-					int size = m_sizes[i];
+					int size = BaseClass::m_sizes[i];
 					if (size >= 1){
 						if (m_isWrapped[i]){
-							IndexType prevIndex = index;
+							typename BaseClass::IndexType prevIndex = index;
 							prevIndex[i] = (index[i] + size - 1) % size;
 							Element prevValue = BaseClass::GetAt(prevIndex);
 							if (prevValue >= value){
 								goto nextElement;
 							}
 
-							IndexType nextIndex = index;
+							typename BaseClass::IndexType nextIndex = index;
 							nextIndex[i] = (index[i] + 1) % size;
 							Element nextValue = BaseClass::GetAt(nextIndex);
 							if (nextValue > value){
@@ -323,7 +324,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 						}
 						else{
 							if (index[i] > 0){
-								IndexType prevIndex = index;
+								typename BaseClass::IndexType prevIndex = index;
 								prevIndex[i] = index[i] - 1;
 								Element prevValue = BaseClass::GetAt(prevIndex);
 								if (prevValue >= value){
@@ -340,7 +341,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 							}
 
 							if (index[i] < size - 1){
-								IndexType nextIndex = index;
+								typename BaseClass::IndexType nextIndex = index;
 								nextIndex[i] = index[i] + 1;
 								Element nextValue = BaseClass::GetAt(nextIndex);
 								if (nextValue > value){
@@ -371,7 +372,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::AnalyseHoughSpace(
 			}
 
 		nextElement:;
-		} while (index.Increase(m_sizes));
+		} while (index.Increase(BaseClass::m_sizes));
 	}
 
 	resultProcessor.OnProcessingEnd(*this);
@@ -387,10 +388,10 @@ bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bit
 
 	for (int i = 0; i < Dimensions; ++i){
 		if (i == 0){
-			bitmapSize[0] = m_sizes[i];
+			bitmapSize[0] = BaseClass::m_sizes[i];
 		}
 		else{
-			bitmapSize[1] *= m_sizes[i];
+			bitmapSize[1] *= BaseClass::m_sizes[i];
 		}
 	}
 
@@ -399,7 +400,9 @@ bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bit
 	}
 
 	Element maxValue = 0;
-	for (Elements::const_iterator iter = m_elements.begin(); iter != m_elements.end(); ++iter){
+	for (		typename BaseClass::Elements::const_iterator iter = BaseClass::m_elements.begin();
+				iter != BaseClass::m_elements.end();
+				++iter){
 		Element value = *iter;
 
 		if (value > maxValue){
@@ -413,7 +416,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::ExtractToBitmap(iimg::IBitmap& bit
 		return true;
 	}
 
-	Elements::const_iterator iter = m_elements.begin();
+	typename BaseClass::Elements::const_iterator iter = BaseClass::m_elements.begin();
 	for (int y = 0; y < bitmapSize.GetY(); ++y){
 		quint8* outputLinePtr = (quint8*)bitmap.GetLinePtr(y);
 
@@ -436,7 +439,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::GetSpacePosition(const imath::TVec
 	bool retVal = true;
 
 	for (int i = 0; i < Dimensions; ++i){
-		int size = m_sizes[i];
+		int size = BaseClass::m_sizes[i];
 
 		if (m_isWrapped[i]){	// correct the position if is wrapped
 			result[i] = fmod(result[i] + size, size);
@@ -455,7 +458,9 @@ template <int Dimensions, class Element>
 template <typename Operation>
 void TGeneralHoughSpace<Dimensions, Element>::ApplyOperation(Operation operation)
 {
-	for (Iterator iter = BaseClass::Begin(); iter != BaseClass::End(); ++iter){
+	for (		typename BaseClass::Iterator iter = BaseClass::Begin();
+				iter != BaseClass::End();
+				++iter){
 		Element& value = *iter;
 
 		value = operation(value);
@@ -469,7 +474,7 @@ void TGeneralHoughSpace<Dimensions, Element>::CombineWithSpace(const TGeneralHou
 {
 	istd::TIndex<Dimensions> commonSize;
 	for (int i = 0; i < Dimensions; ++i){
-		commonSize[i] = qMin(m_sizes[i], space.m_sizes[i]);
+		commonSize[i] = qMin(BaseClass::m_sizes[i], space.m_sizes[i]);
 	}
 
 	istd::TIndex<Dimensions> index = istd::TIndex<Dimensions>::GetZero();
@@ -496,7 +501,7 @@ bool TGeneralHoughSpace<Dimensions, Element>::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
-	IndexType spaceSize = BaseClass::GetSizes();
+	typename BaseClass::IndexType spaceSize = BaseClass::GetSizes();
 	int dimensionsCount = Dimensions;
 
 	retVal = retVal && archive.BeginMultiTag(spaceSizeTag, dimensionSizeTag, dimensionsCount);
@@ -518,7 +523,9 @@ bool TGeneralHoughSpace<Dimensions, Element>::Serialize(iser::IArchive& archive)
 	}
 
 	retVal = retVal && archive.BeginTag(elementsTag);
-	for (BaseClass::Iterator iter = BaseClass::Begin(); iter != BaseClass::End(); ++iter){
+	for (		typename BaseClass::Iterator iter = BaseClass::Begin();
+				iter != BaseClass::End();
+				++iter){
 		retVal = retVal && archive.Process(*iter);
 	}
 	retVal = retVal && archive.EndTag(elementsTag);
@@ -534,18 +541,18 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 {
 	int elementDiff = 1;
 	int blocksCount = 1;
-	int elementsCount = int(m_elements.size());
+	int elementsCount = int(BaseClass::m_elements.size());
 
 	for (int i = 0; i < Dimensions; ++i){
 		if (i < dimensionIndex){
-			elementDiff *= m_sizes[i];
+			elementDiff *= BaseClass::m_sizes[i];
 		}
 		else if (i > dimensionIndex){
-			blocksCount *= m_sizes[i];
+			blocksCount *= BaseClass::m_sizes[i];
 		}
 	}
 
-	int smoothAxisSize = m_sizes[dimensionIndex];
+	int smoothAxisSize = BaseClass::m_sizes[dimensionIndex];
 
 	int outerElementOffset = 0;
 	for (int outerIndex = 0; outerIndex < blocksCount; ++outerIndex){
@@ -560,13 +567,13 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 				Element storedValue;
 
 				if (m_isWrapped[dimensionIndex]){
-					value = m_elements[elementOffset];
+					value = BaseClass::m_elements[elementOffset];
 					nextPos = 0;
-					prevValue = m_elements[axisElementOffset + (smoothAxisSize - 1) * elementDiff];
+					prevValue = BaseClass::m_elements[axisElementOffset + (smoothAxisSize - 1) * elementDiff];
 					storedValue = value;
 				}
 				else{
-					value = m_elements[elementOffset];
+					value = BaseClass::m_elements[elementOffset];
 					nextPos = 1;
 					prevValue = 0;
 					storedValue = 0;
@@ -575,9 +582,9 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 				for (; nextPos < smoothAxisSize; ++nextPos){
 					int nextElementOffset = (elementOffset + elementDiff) % elementsCount;
 
-					Element nextValue = m_elements[nextElementOffset];
+					Element nextValue = BaseClass::m_elements[nextElementOffset];
 
-					m_elements[elementOffset] = (value * 2 + prevValue + nextValue) / 4;
+					BaseClass::m_elements[elementOffset] = (value * 2 + prevValue + nextValue) / 4;
 
 					prevValue = value;
 					value = nextValue;
@@ -585,7 +592,7 @@ void TGeneralHoughSpace<Dimensions, Element>::SmoothSingleDimension(int dimensio
 					elementOffset = nextElementOffset;
 				}
 
-				m_elements[elementOffset] = (value * 2 + prevValue + storedValue) / 4;
+				BaseClass::m_elements[elementOffset] = (value * 2 + prevValue + storedValue) / 4;
 			}
 		}
 
