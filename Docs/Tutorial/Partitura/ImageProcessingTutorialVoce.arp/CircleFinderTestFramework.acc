@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4568" Description="ACF"/>
+            <Version Id="1" Number="1921" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329218" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Test framework for demonstration of the circle finder</Description>
@@ -30,7 +30,7 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
-                    <AttributeInfo Id="InspectionNames" Type="String[]" ExportId="">
+                    <AttributeInfo Id="InspectionNames" Type="Text[]" ExportId="">
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>Image</Value>

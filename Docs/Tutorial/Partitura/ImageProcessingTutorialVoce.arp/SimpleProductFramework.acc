@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4230" Description="ACF"/>
-            <Version Id="1" Number="1610" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4568" Description="ACF"/>
+            <Version Id="1" Number="1921" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329218" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Simple framework allowing to test tasks</Description>
@@ -61,18 +61,6 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="ErrorShapeFactory" PackageId="QtViewPck" ComponentId="SimpleShapeFactory">
-            <Data IsEnabled="true" Flags="0">
-                <AttributeInfoMap>
-                    <AttributeInfo Id="ShapeColorSchema" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ErrorColorSchema"/>
-                    </AttributeInfo>
-                    <AttributeInfo Id="UseInteractiveShapes" Type="Boolean" ExportId="UseInteractiveOverlayShapes">
-                        <Data IsEnabled="true" Value="false"/>
-                    </AttributeInfo>
-                </AttributeInfoMap>
-            </Data>
-        </Element>
         <Element Id="FileDialogLoader" PackageId="FileGuiPck" ComponentId="FileDialogLoader">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -119,8 +107,14 @@
                     <AttributeInfo Id="Editors" Type="Reference[]" ExportId="InspectionGuis">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="ErrorColorSchema" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ErrorColorSchema"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="Names" Type="Text[]" ExportId="InspectionNames">
                         <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OkColorSchema" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="OkColorSchema"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="FileDialogLoader"/>
@@ -129,10 +123,13 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ResultShapeFactory" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="ErrorShapeFactory"/>
+                        <Data IsEnabled="true" Value="ShapeFactory"/>
                     </AttributeInfo>
                     <AttributeInfo Id="TabBarOrientation" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="3"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WarningColorSchema" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="WarningColorSchema"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -145,6 +142,27 @@
                     </AttributeInfo>
                     <AttributeInfo Id="VersionInfo" Type="Reference" ExportId="VersionInfo">
                         <Data IsEnabled="true" Value="VersionInfo"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="OkColorSchema" PackageId="QtViewPck" ComponentId="ColorSchema">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="NormalPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="blue"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectedPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="lightblue"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="ShapeFactory" PackageId="QtViewPck" ComponentId="SimpleShapeFactory">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="UseInteractiveShapes" Type="Boolean" ExportId="UseInteractiveOverlayShapes">
+                        <Data IsEnabled="true" Value="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
@@ -228,6 +246,18 @@
         <Element Id="VersionInfo" PackageId="AcfSlnVoce" ComponentId="VersionInfo">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="WarningColorSchema" PackageId="QtViewPck" ComponentId="ColorSchema">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="NormalPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="yellow"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SelectedPenColor" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="yellow"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
             </Data>
         </Element>
         <Element Id="XmlFileSerializer" PackageId="FilePck" ComponentId="SimpleXmlFileSerializer">
