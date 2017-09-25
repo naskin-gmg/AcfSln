@@ -4,6 +4,7 @@
 // ACF includes
 #include <imath/CVarMatrix.h>
 #include <ilog/CExtMessage.h>
+#include <i2d/CAffine2d.h>
 #include <i2d/CAnnulusSegment.h>
 #include <iprm/CParamsSet.h>
 #include <iprm/TParamsPtr.h>
@@ -239,7 +240,16 @@ bool CCircleFindProcessorComp::AddAoiToRays(
 			caliperFeaturesConsumerPtr = containerPtr;
 		}
 
-		int stepsCount = int((minRadius + maxRadius) * (endAngle - beginAngle) * 0.5 + 1);
+		double middleBowBitmapLength = (minRadius + maxRadius) * (endAngle - beginAngle) * 0.5;
+
+		if (aoiCalibrationPtr != NULL){
+			i2d::CAffine2d affineTransform;
+			if (aoiCalibrationPtr->GetLocalTransform(center, affineTransform)){
+				middleBowBitmapLength *= affineTransform.GetDeformMatrix().GetApproxScale();
+			}
+		}
+
+		int stepsCount = int(middleBowBitmapLength + 1);
 		if (circleFinderParams.GetRaysCount() >= 3){
 			stepsCount = qMin(stepsCount, circleFinderParams.GetRaysCount());
 		}
@@ -364,19 +374,57 @@ bool CCircleFindProcessorComp::CalculateCircle(
 			if (worseIndex >= 0){
 				Ray& ray = rays[worseIndex];
 				Q_ASSERT(ray.usedIndex >= 0);
+				Q_ASSERT(!ray.points[ray.usedIndex].wasChecked);
 
-				Point& rayPoint = ray.points[ray.usedIndex];
+				ray.points[ray.usedIndex].wasChecked = true;
 
-				// remove outlier entry from matrix
-				matrix.SetAt(istd::CIndex2d(0, worseIndex), 0);
-				matrix.SetAt(istd::CIndex2d(1, worseIndex), 0);
-				matrix.SetAt(istd::CIndex2d(2, worseIndex), 0);
-				destVector.SetAt(istd::CIndex2d(0, worseIndex), 0);
+				int bestPointIndex = -1;
 
-				weightSum -= rayPoint.weight;
-				--usedRaysCount;
+				double bestDiff = qInf();
+				int pointsCount = ray.points.size();
+				for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
+					Point& rayPoint = ray.points[pointIndex];
 
-				ray.usedIndex = -1;
+					if (!rayPoint.wasChecked){
+						double currentRadius = rayPoint.position.GetDistance(position);
+
+						double pointDiff = qAbs(currentRadius - radius) / rayPoint.weight;
+						if (pointDiff < bestDiff){
+							bestDiff = pointDiff;
+
+							bestPointIndex = pointIndex;
+						}
+					}
+				}
+
+				Point& usedRayPoint = ray.points[ray.usedIndex];
+				weightSum -= usedRayPoint.weight;
+
+				if (bestPointIndex >= 0){
+					Point& bestRayPoint = ray.points[bestPointIndex];
+
+					weightSum += bestRayPoint.weight;
+
+					// switch to another point in matrix
+					i2d::CVector2d bestPointPosition = bestRayPoint.position - center;
+					double bestPointWeight = bestRayPoint.weight;
+
+					matrix.SetAt(istd::CIndex2d(0, worseIndex), bestPointPosition.GetX() * 2.0 * bestPointWeight);
+					matrix.SetAt(istd::CIndex2d(1, worseIndex), bestPointPosition.GetY() * 2.0 * bestPointWeight);
+					matrix.SetAt(istd::CIndex2d(2, worseIndex), -1 * bestPointWeight);
+					destVector.SetAt(istd::CIndex2d(0, worseIndex), bestPointPosition.GetLength2() * bestPointWeight);
+				}
+				else{
+					// remove outlier entry from matrix
+					matrix.SetAt(istd::CIndex2d(0, worseIndex), 0);
+					matrix.SetAt(istd::CIndex2d(1, worseIndex), 0);
+					matrix.SetAt(istd::CIndex2d(2, worseIndex), 0);
+					destVector.SetAt(istd::CIndex2d(0, worseIndex), 0);
+
+					--usedRaysCount;
+				}
+
+				ray.usedIndex = bestPointIndex;
 
 				doAgain = true;
 			}
@@ -385,7 +433,7 @@ bool CCircleFindProcessorComp::CalculateCircle(
 
 	result.SetPosition(position);
 	result.SetRadius(radius);
-	result.SetWeight(weightSum / usedRaysCount);
+	result.SetWeight(weightSum / raysCount);
 	result.SetCalibration(m_resultCalibrationCompPtr.GetPtr());
 
 	return true;
@@ -495,6 +543,7 @@ void CCircleFindProcessorComp::AddProjectionResultsToRays(
 		if (featurePtr != NULL){
 			Point point;
 			point.weight = featurePtr->GetWeight();
+			point.wasChecked = false;
 			i2d::CVector2d bitmapPosition;
 			m_featuresMapperCompPtr->GetImagePosition(*featurePtr, &params, bitmapPosition);
 

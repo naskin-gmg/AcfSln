@@ -72,6 +72,7 @@ protected:
 	{
 		double weight;
 		i2d::CVector2d position;
+		bool wasChecked;
 	};
 
 	typedef std::vector<Point> Points;
