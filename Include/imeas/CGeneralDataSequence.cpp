@@ -52,6 +52,8 @@ bool CGeneralDataSequence::CreateSequence(int samplesCount, int channelsCount)
 		return false;
 	}
 
+	istd::CChangeNotifier changeNotifier(this);
+
 	m_channelsCount = channelsCount;
 
 	if (m_sequenceInfoPtr.IsValid()){
@@ -98,6 +100,8 @@ bool CGeneralDataSequence::IsEmpty() const
 
 void CGeneralDataSequence::ResetSequence()
 {
+	istd::CChangeNotifier changeNotifier(this);
+
 	m_samples.clear();
 }
 
@@ -113,11 +117,41 @@ int CGeneralDataSequence::GetSamplesCount() const
 }
 
 
+int CGeneralDataSequence::GetChannelsCount() const
+{
+	return m_channelsCount;
+}
+
+
+double CGeneralDataSequence::GetSample(int index, int channel) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+
+	return m_samples[index * m_channelsCount + channel];
+}
+
+
+void CGeneralDataSequence::SetSample(int index, int channel, double value)
+{
+	istd::CChangeNotifier changeNotifier(this);
+
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index * m_channelsCount + channel < int(m_samples.size()));
+	Q_ASSERT(channel >= 0);
+	Q_ASSERT(channel < m_channelsCount);
+
+	m_samples[index * m_channelsCount + channel] = value;
+}
+
+
 // reimplemented (imath::ISampledFunction2d)
 
 bool CGeneralDataSequence::CreateFunction(double* dataPtr, const ArgumentType& sizes)
 {
 	if (!sizes.IsSizeEmpty()){
+		istd::CChangeNotifier changeNotifier(this);
+
 		int elementsCount = sizes.GetProductVolume();
 
 		m_samples.resize(elementsCount);
@@ -284,7 +318,7 @@ bool CGeneralDataSequence::CopyFrom(const istd::IChangeable& object, Compatibili
 
 				int infoCount = valueListInfo.GetOptionsCount();
 
-				imeas::CGeneralDataSequenceInfo sequenceInfo(infoCount, m_samples.size());
+				imeas::CGeneralDataSequenceInfo sequenceInfo(infoCount, int(m_samples.size()));
 
 				for (int i = 0; i < infoCount; ++i){
 					sequenceInfo.InsertValueInfo(
