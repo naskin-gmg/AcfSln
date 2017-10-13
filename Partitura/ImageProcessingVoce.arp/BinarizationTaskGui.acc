@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4542" Description="ACF"/>
-            <Version Id="1" Number="1884" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4557" Description="ACF"/>
+            <Version Id="1" Number="1910" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -25,7 +25,7 @@
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapBitmapSupplierGui"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -75,6 +75,9 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

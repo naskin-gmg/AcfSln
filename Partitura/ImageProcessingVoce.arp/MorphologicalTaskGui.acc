@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4446" Description="ACF"/>
-            <Version Id="1" Number="1794" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -22,6 +22,9 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -94,7 +97,7 @@
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">
+                    <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="FilteredImageSceneExtender"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
@@ -103,6 +106,7 @@
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces>
+        <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="FilteredImageSceneExtender"/>
         <Interface InterfaceId="imod::IModelEditor" ComponentId="MultiObserverBinder"/>
         <Interface InterfaceId="imod::IObserver" ComponentId="MultiObserverBinder"/>
         <Interface InterfaceId="iqt2d::IViewExtender" ComponentId="TaskGui"/>
