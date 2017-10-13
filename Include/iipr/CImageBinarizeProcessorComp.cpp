@@ -30,11 +30,7 @@ int CImageBinarizeProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	iprm::TParamsPtr<imeas::INumericValue> thresholdParamsPtr;
-	if (paramsPtr != NULL && m_binarizationParamsIdAttrPtr.IsValid()){
-		thresholdParamsPtr.Init(paramsPtr, *m_binarizationParamsIdAttrPtr);
-	}
-
+	iprm::TParamsPtr<imeas::INumericValue> thresholdParamsPtr(paramsPtr, m_binarizationParamsIdAttrPtr, m_defaultBinarizationThresholdCompPtr);
 	if (!thresholdParamsPtr.IsValid()){
 		SendErrorMessage(0, "Threshold parameter is not set");
 

@@ -24,6 +24,7 @@ public:
 	
 	I_BEGIN_COMPONENT(CImageBinarizeProcessorComp);
 		I_ASSIGN(m_binarizationParamsIdAttrPtr, "BinarizationParameterId", "ID of binarization parameters in the parameter set", false, "BinarizationParameterId");
+		I_ASSIGN(m_defaultBinarizationThresholdCompPtr, "DefaultThreshold", "Default value of the binarization threshold", false, "DefaultThreshold");
 		I_ASSIGN(m_isInverseModeEnabledAttrPtr, "InverseMode", "If enabled, object color will be set to 0", true, false);
 	I_END_COMPONENT;
 
@@ -42,6 +43,7 @@ private:
 
 private:
 	I_ATTR(QByteArray, m_binarizationParamsIdAttrPtr);
+	I_REF(imeas::INumericValue, m_defaultBinarizationThresholdCompPtr);
 	I_ATTR(bool, m_isInverseModeEnabledAttrPtr);
 };
 
