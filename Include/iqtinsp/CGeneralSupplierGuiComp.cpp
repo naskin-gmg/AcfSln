@@ -10,6 +10,18 @@ CGeneralSupplierGuiComp::CGeneralSupplierGuiComp()
 }
 
 
+// protected methods
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CGeneralSupplierGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	ResultsGroupBox->setVisible(*m_showResultStatusFrameAttrPtr);
+}
+
+
 // protected slots
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()

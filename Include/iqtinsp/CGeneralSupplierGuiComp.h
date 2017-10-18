@@ -158,14 +158,22 @@ public:
 	typedef TGeneralSupplierGuiComp<> BaseClass;
 
 	I_BEGIN_COMPONENT(CGeneralSupplierGuiComp);
+		I_ASSIGN(m_showResultStatusFrameAttrPtr, "ShowResultStatusFrame", "If enabled, show result status group box on the bottom of the view", true, true);
 	I_END_COMPONENT;
 
 	CGeneralSupplierGuiComp();
+
+protected:
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
 
 protected Q_SLOTS:
 	void on_TestButton_clicked();
 	void on_LoadParamsButton_clicked();
 	void on_SaveParamsButton_clicked();
+
+private:
+	I_ATTR(bool, m_showResultStatusFrameAttrPtr);
 };
 
 
