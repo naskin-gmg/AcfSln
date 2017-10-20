@@ -47,7 +47,6 @@ public:
 private:
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_REF(ilog::IMessageContainer, m_messageContainerCompPtr);
-	I_REF(iinsp::ISupplier, m_supplierMessagesCompPtr);
 	I_REF(iqt2d::IViewExtender, m_slaveViewExtenderCompPtr);
 
 	istd::TPointerVector<iview::IShape> m_shapes;
