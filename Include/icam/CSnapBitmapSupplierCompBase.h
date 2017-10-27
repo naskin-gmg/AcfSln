@@ -36,10 +36,11 @@ public:
 	I_BEGIN_BASE_COMPONENT(CSnapBitmapSupplierCompBase);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
-		I_REGISTER_SUBELEMENT(ScaleConstraints);		
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquisition object for image snap", true, "BitmapAcquisition");
 		I_ASSIGN(m_calibrationIdAttrPtr, "CalibrationParamId", "ID of calibration in parameter set", false, "Calibration");
 		I_ASSIGN(m_defaultCalibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
+		I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID of resolution parameter (pixel/mm) in parameter set", false, "Scale");
+		I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
 	I_END_COMPONENT;
 
 	// reimplemented (iimg::IBitmapProvider)
@@ -63,6 +64,8 @@ private:
 	I_REF(IBitmapAcquisition, m_bitmapAcquisitionCompPtr);
 	I_ATTR(QByteArray, m_calibrationIdAttrPtr);
 	I_REF(i2d::ICalibration2d, m_defaultCalibrationCompPtr);
+	I_ATTR(QByteArray, m_scaleParamIdAttrPtr);
+	I_REF(imeas::INumericValue, m_defaultScaleValueCompPtr);
 };
 
 

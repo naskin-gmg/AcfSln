@@ -97,6 +97,14 @@ void CBlobFilterParams::AddFilter(const Filter& filterInfo)
 }
 
 
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ICalibration2d* CBlobFilterParams::GetCalibration() const
+{
+	return NULL;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CBlobFilterParams::Serialize(iser::IArchive& archive)

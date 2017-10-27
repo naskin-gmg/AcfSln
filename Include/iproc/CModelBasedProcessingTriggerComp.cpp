@@ -14,7 +14,8 @@ namespace iproc
 // public methods
 
 CModelBasedProcessingTriggerComp::CModelBasedProcessingTriggerComp()
-:	m_paramsObserver(this)
+:	m_paramsObserver(this),
+	m_isLocked(false)
 {
 }
 
@@ -44,7 +45,9 @@ void CModelBasedProcessingTriggerComp::OnComponentDestroyed()
 
 void CModelBasedProcessingTriggerComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	DoProcessing();
+	if (!m_isLocked){
+		DoProcessing();
+	}
 }
 
 
@@ -64,7 +67,7 @@ void CModelBasedProcessingTriggerComp::DoProcessing()
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(m_outputDataCompPtr.GetPtr());
+	m_isLocked = true;
 
 	istd::IChangeable* inputDataPtr = dynamic_cast<istd::IChangeable*>(GetObservedModel());
 
@@ -77,6 +80,8 @@ void CModelBasedProcessingTriggerComp::DoProcessing()
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing failed");
 	}
+
+	m_isLocked = false;
 }
 
 

@@ -106,7 +106,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 			return TS_OK;
 		}
 		else{
-			SendErrorMessage(0, QObject::tr("Not enought points found"));
+			SendErrorMessage(0, QObject::tr("Not enough points found"));
 		}
 	}
 	else{
@@ -142,7 +142,7 @@ int CCircleFindProcessorComp::DoExtractFeatures(
 			return TS_OK;
 		}
 		else{
-			SendErrorMessage(0, QObject::tr("Not enought points found"));
+			SendErrorMessage(0, QObject::tr("Not enough points found"));
 		}
 	}
 

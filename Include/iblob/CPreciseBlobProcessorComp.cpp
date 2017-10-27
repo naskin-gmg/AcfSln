@@ -286,13 +286,25 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 		int blobsCount = 0;
 		int ignoredBlobsCount = 0;
 
+		double scale = 1.0;
+		const i2d::ICalibration2d* calibrationPtr = filterParamsPtr->GetCalibration();
+		if (calibrationPtr != NULL){
+			i2d::CAffine2d transform;
+			if (calibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), transform)){
+				scale = transform.GetDeformMatrix().GetApproxScale();
+			}
+		}
+
 		for (QVector<ClassDescriptor>::ConstIterator iter = classDescriptors.constBegin(); iter != classDescriptors.constEnd(); ++iter){
 			const ClassDescriptor& descriptor = *iter;
 			if (descriptor.m_area > 0){
 				i2d::CVector2d position(descriptor.m_cummulatedX / descriptor.m_area, descriptor.m_cummulatedY / descriptor.m_area);
 				double area = descriptor.m_area;
 				double perimeter = descriptor.m_perimeter;
-				double circularity = 2 * qSqrt(descriptor.m_area) / perimeter;
+				double circularity = 4 * M_PI * area / (perimeter * perimeter);
+
+				area *= scale;
+				perimeter *= scale;
 
 				bool passedByFilter = true;
 

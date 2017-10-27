@@ -2,19 +2,19 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="VariableAoi" X="250" Y="450" Note=""/>
-        <Element ComponentName="CaliperParamsSet" X="650" Y="125" Note=""/>
+        <Element ComponentName="Annulus" X="75" Y="600" Note=""/>
         <Element ComponentName="AnnulusSegment" X="475" Y="600" Note=""/>
         <Element ComponentName="CaliperParams" X="1000" Y="300" Note=""/>
-        <Element ComponentName="Annulus" X="75" Y="600" Note=""/>
-        <Element ComponentName="FilterLength" X="750" Y="300" Note=""/>
+        <Element ComponentName="CaliperParamsSet" X="650" Y="125" Note=""/>
         <Element ComponentName="CircleFinderParams" X="500" Y="300" Note=""/>
+        <Element ComponentName="FilterLength" X="750" Y="300" Note=""/>
+        <Element ComponentName="VariableAoi" X="250" Y="450" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

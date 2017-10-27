@@ -30,7 +30,10 @@ public:
 	virtual void ResetFilters();
 	virtual void AddFilter(const Filter& filterInfo);
 
-	// reimplemented (iser::ISerializable)
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ICalibration2d* GetCalibration() const;
+
+	// reimplemented (i2d::ICalibrationProvider)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:

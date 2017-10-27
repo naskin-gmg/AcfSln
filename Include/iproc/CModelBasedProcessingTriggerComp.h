@@ -73,6 +73,8 @@ private:
 	I_ATTR(bool, m_triggerOnParamsChangeAttrPtr);
 
 	ParamsObserver m_paramsObserver;
+
+	bool m_isLocked;
 };
 
 

@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4349" Description="ACF"/>
-            <Version Id="1" Number="1683" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>File camera definition</Description>
@@ -72,7 +72,7 @@
                 </AttributeInfoMap>
             </Data>
         </Element>
-        <Element Id="FilePathParamGui" PackageId="QtGuiPck" ComponentId="FileNameParamGui">
+        <Element Id="FilePathParamGui" PackageId="FileGuiPck" ComponentId="SimpleFilePathParamGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="PathLabel" Type="Text" ExportId="">

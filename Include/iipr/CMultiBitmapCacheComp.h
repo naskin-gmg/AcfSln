@@ -57,6 +57,10 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	class CBitmapConstraints: virtual public iprm::IOptionsList
 	{
@@ -71,7 +75,7 @@ private:
 		void Reset()
 		{
 			m_flags = 0;
-			m_count = -1;
+			m_count = 0;
 			m_names.clear();
 			m_descriptions.clear();
 			m_ids.clear();

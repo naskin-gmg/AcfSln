@@ -4,6 +4,7 @@
 // ACF includes
 #include <ilog/CExtMessage.h>
 #include <iview/CShapeBase.h>
+#include <iprm/IOptionsList.h>
 
 
 namespace iqtinsp
@@ -26,39 +27,46 @@ void CMessageBasedViewExtenderComp::AddItemsToScene(iqt2d::IViewProvider* provid
 		return;
 	}
 
-	m_shapeMessages = m_messageContainerCompPtr->GetMessages();
-	for (int i = 0; i < m_shapeMessages.count(); i++){
-		const ilog::IMessageConsumer::MessagePtr& messagePtr = m_shapeMessages.at(i);
+	m_shapeMessages[providerPtr] = m_messageContainerCompPtr->GetMessages();
+
+	ilog::IMessageContainer::Messages& messages = m_shapeMessages[providerPtr];
+
+	for (int i = 0; i < messages.count(); i++){
+		const ilog::IMessageConsumer::MessagePtr& messagePtr = messages.at(i);
+
+		if (!IsMessageAccepted(*messagePtr.GetPtr())){
+			continue;
+		}
 
 		const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
 		if (extMessagePtr != NULL){
 			int objectsCount = extMessagePtr->GetAttachedObjectsCount();
 			for (int i = 0; i < objectsCount; ++i){
 				const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
-				iview::IShape* shapePtr = CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), attachedObjectPtr, extMessagePtr, true);
-				if (shapePtr != NULL){
-					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
+				ShapePtr shapePtr(CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), attachedObjectPtr, extMessagePtr, true));
+				if (shapePtr.IsValid()){
+					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr.GetPtr());
 					if (shapeImplPtr != NULL){
 						shapeImplPtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 					}
-					viewPtr->ConnectShape(shapePtr);
+					viewPtr->ConnectShape(shapePtr.GetPtr());
 
-					m_shapes.PushBack(shapePtr);
+					m_shapes[providerPtr].push_back(shapePtr);
 				}
 			}
 		}
 		else{
 			const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(messagePtr.GetPtr());
 			if (object2dPtr != NULL){
-				iview::IShape* shapePtr = CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), object2dPtr, messagePtr.GetPtr(), true);
-				if (shapePtr != NULL){
-					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
+				ShapePtr  shapePtr(CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), object2dPtr, messagePtr.GetPtr(), true));
+				if (shapePtr.IsValid()){
+					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr.GetPtr());
 					if (shapeImplPtr != NULL){
 						shapeImplPtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 					}
-					viewPtr->ConnectShape(shapePtr);
+					viewPtr->ConnectShape(shapePtr.GetPtr());
 
-					m_shapes.PushBack(shapePtr);
+					m_shapes[providerPtr].push_back(shapePtr);
 				}
 			}
 		}
@@ -75,8 +83,10 @@ void CMessageBasedViewExtenderComp::RemoveItemsFromScene(iqt2d::IViewProvider* p
 	iview::IShapeView* viewPtr = providerPtr->GetView();
 	Q_ASSERT(viewPtr != NULL);
 
-	for (int i = 0; i < m_shapes.GetCount(); i++){
-		iview::IShape* shapePtr = m_shapes.GetAt(i);
+	ShapeList& shapes = m_shapes[providerPtr];
+
+	for (int i = 0; i < shapes.count(); i++){
+		iview::IShape* shapePtr = shapes[i].GetPtr();
 
 		viewPtr->DisconnectShape(shapePtr);
 
@@ -89,8 +99,9 @@ void CMessageBasedViewExtenderComp::RemoveItemsFromScene(iqt2d::IViewProvider* p
 		}
 	}
 
-	m_shapes.Reset();
-	m_shapeMessages.clear();
+	m_shapes.remove(providerPtr);
+
+	m_shapeMessages.remove(providerPtr);
 }
 
 
@@ -109,10 +120,33 @@ void CMessageBasedViewExtenderComp::OnComponentCreated()
 
 void CMessageBasedViewExtenderComp::OnComponentDestroyed()
 {
-	m_shapes.Reset();
+	m_shapes.clear();
 	m_shapeMessages.clear();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// protected methods
+
+bool CMessageBasedViewExtenderComp::IsMessageAccepted(const istd::IInformationProvider& message) const
+{
+	QByteArray messageId = message.GetInformationSource().toUtf8(); // Extended istd::IInformationProvider with GetInformationSourceId method!
+
+	if (!messageId.isEmpty() && m_shapeSelectorCompPtr.IsValid()){
+		const iprm::IOptionsList* optionsListPtr = m_shapeSelectorCompPtr->GetSelectionConstraints();
+		if (optionsListPtr != NULL){
+			int selectedIndex = m_shapeSelectorCompPtr->GetSelectedOptionIndex();
+			if (selectedIndex >= 0){
+				QByteArray optionId = optionsListPtr->GetOptionId(selectedIndex);
+				if (optionId != messageId){
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
 }
 
 

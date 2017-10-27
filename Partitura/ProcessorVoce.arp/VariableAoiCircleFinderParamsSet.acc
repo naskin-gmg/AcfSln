@@ -2,16 +2,16 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Parameter set for circle finder using as AOI annulus segment</Description>
     <Keywords>Circle Finder Parameters</Keywords>
     <ElementsList>
         <Element Id="Annulus" PackageId="BasePck" ComponentId="Annulus">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
                     <AttributeInfo Id="Calibration" Type="Reference" ExportId="AoiCalibration">
                         <Data IsEnabled="false"/>
@@ -32,7 +32,7 @@
             </Data>
         </Element>
         <Element Id="AnnulusSegment" PackageId="BasePck" ComponentId="AnnulusSegment">
-            <Data IsEnabled="true" Flags="0">
+            <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap>
                     <AttributeInfo Id="BeginAngle" Type="Real" ExportId="">
                         <Data IsEnabled="true" Value="90"/>

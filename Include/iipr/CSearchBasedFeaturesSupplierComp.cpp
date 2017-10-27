@@ -237,8 +237,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetFeature(featureIndex));
 					if (objectFeaturePtr == NULL){
 						return WS_FAILED;
-
 					}
+
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(objectFeaturePtr);
 					if (searchFeaturePtr == NULL){
 						return WS_FAILED;

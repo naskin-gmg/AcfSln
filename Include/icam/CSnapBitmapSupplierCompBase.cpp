@@ -87,12 +87,36 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
 				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
 
+				i2d::CVector2d scale(1, 1);
+
+				iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(GetModelParametersSet(), m_scaleParamIdAttrPtr, m_defaultScaleValueCompPtr, false);
+				if (scaleParamPtr.IsValid()){
+					imath::CVarVector scaleValues = scaleParamPtr->GetValues();
+					if (scaleValues.GetElementsCount() >= 2){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[1]);
+					}
+					else if (scaleValues.GetElementsCount() >= 1){
+						scale = i2d::CVector2d(scaleValues[0], scaleValues[0]);
+					}
+				}
+
 				iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(GetModelParametersSet(), m_calibrationIdAttrPtr, m_defaultCalibrationCompPtr, false);
 				if (calibrationPtr.IsValid()){
-					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
+					i2d::CAffineTransformation2d transformation;
+					transformation.Reset(center, 0, scale);
+
+					result.first.SetPtr(calibrationPtr->CreateCombinedCalibration(transformation));
 				}
 				else{
-					result.first.Reset();
+					if (scale != i2d::CVector2d(1, 1)){
+						icalib::CAffineCalibration2d* calibrationPtr = new imod::TModelWrap<icalib::CAffineCalibration2d>();
+						calibrationPtr->Reset(center, 0, scale);
+
+						result.first.SetPtr(calibrationPtr);
+					}
+					else{
+						result.first.Reset();
+					}
 				}
 			}
 			return WS_OK;

@@ -4,6 +4,7 @@
 // ACF includes
 #include <istd/TPointerVector.h>
 #include <icomp/CComponentBase.h>
+#include <iprm/ISelectionParam.h>
 #include <ilog/IMessageContainer.h>
 #include <iview/IShapeView.h>
 #include <iview/IShapeFactory.h>
@@ -34,6 +35,7 @@ public:
 		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display", true, "ResultShapeFactory");
 		I_ASSIGN(m_messageContainerCompPtr, "MessageContainer", "Shape messages provider", true, "MessageContainer");
 		I_ASSIGN(m_slaveViewExtenderCompPtr, "SlaveViewExtender", "Slave view extender", false, "ViewExtender");
+		I_ASSIGN(m_shapeSelectorCompPtr, "ShapeSelector", "Optional selector of the shapes. Only shapes with source-ID corresponding to the given selection will be processed", false, "ShapeSelector");
 	I_END_COMPONENT;
 
 	// reimplemented (iqt2d::IViewExtender)
@@ -44,13 +46,22 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+protected:
+	virtual bool IsMessageAccepted(const istd::IInformationProvider& message) const;
+
 private:
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_REF(ilog::IMessageContainer, m_messageContainerCompPtr);
 	I_REF(iqt2d::IViewExtender, m_slaveViewExtenderCompPtr);
+	I_REF(iprm::ISelectionParam, m_shapeSelectorCompPtr);
 
-	istd::TPointerVector<iview::IShape> m_shapes;
-	ilog::IMessageContainer::Messages m_shapeMessages;
+	typedef istd::TSmartPtr<iview::IShape> ShapePtr;
+	typedef QList<ShapePtr> ShapeList;
+	typedef QMap<iqt2d::IViewProvider*, ShapeList> ShapesMap;
+	typedef QMap<iqt2d::IViewProvider*, ilog::IMessageContainer::Messages> MessagesMap;
+
+	ShapesMap m_shapes;
+	MessagesMap m_shapeMessages;
 };
 
 
