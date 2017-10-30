@@ -24,8 +24,8 @@ CBarcodeSearchFeature::CBarcodeSearchFeature(
 			const i2d::CVector2d& scale)
 	:BaseClass(weight, position, angle, scale),
 	BaseClass2(barcodeType, barcodeData),
-	m_barcodeArea(barcodeArea),
-	m_isCheckSumValid(isChecksumValid)
+	m_isCheckSumValid(isChecksumValid),
+	m_barcodeArea(barcodeArea)
 {
 	m_validSymbolCount = barcodeData.count();
 }
@@ -124,9 +124,10 @@ bool CBarcodeSearchFeature::IsValueTypeSupported(ValueTypeId valueTypeId) const
 	case VTI_WEIGHT:
 	case VTI_POSITION:
 		return true;
-	}
 
-	return false;
+	default:
+		return false;
+	}
 }
 
 
@@ -141,6 +142,9 @@ imath::CVarVector CBarcodeSearchFeature::GetComponentValue(ValueTypeId valueType
 
 	case VTI_POSITION:
 		retVal = GetPosition();
+		break;
+
+	default:
 		break;
 	}
 
