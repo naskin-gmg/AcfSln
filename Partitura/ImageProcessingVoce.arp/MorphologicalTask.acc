@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4505" Description="ACF"/>
-            <Version Id="1" Number="1840" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4562" Description="ACF"/>
+            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -64,10 +64,10 @@
         <Element Id="NumericConstraints" PackageId="MeasPck" ComponentId="NumericConstraints">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
-                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="">
+                    <AttributeInfo Id="MaxValue" Type="Real" ExportId="MaxFilterSize">
                         <Data IsEnabled="true" Value="100"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="MinValue" Type="Real" ExportId="">
+                    <AttributeInfo Id="MinValue" Type="Real" ExportId="MinFilterSize">
                         <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Precision" Type="Integer" ExportId="">
