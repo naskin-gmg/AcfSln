@@ -496,6 +496,11 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInf
 {
 	QFileInfo fileInfo(filePath);
 
+	qint64 currentFileSize = fileInfo.size();
+	if (currentFileSize == 0){
+		return false;
+	}
+
 	QDateTime currentDateTime = QDateTime::currentDateTime();
 	QDateTime lastModifiedAt = GetLastAccessTime(fileInfo);
 	
@@ -503,7 +508,6 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInf
 	if (checkTimeDiff > m_lastModificationMinDifference){
 		int modificationTimeDiff = lastModifiedAt.secsTo(currentDateTime);
 		if ((modificationTimeDiff > m_lastModificationMinDifference) || (modificationTimeDiff < 0)){
-			qint64 currentFileSize = fileInfo.size();
 			if ((lastModifiedAt == lastFileAccessInfo.lastAccessTimeStamp) && (currentFileSize == lastFileAccessInfo.fileSize)){
 				return CheckFileAccess(filePath);
 			}
