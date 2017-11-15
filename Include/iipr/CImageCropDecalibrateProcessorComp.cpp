@@ -1,6 +1,16 @@
 #include <iipr/CImageCropDecalibrateProcessorComp.h>
 
 
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtCore/QtMath>
+#else
+#include <QtCore/qmath.h>
+#include <limits>
+#define qInf std::numeric_limits<double>::infinity
+#endif
+
 // ACF includes
 #include <istd/TArray.h>
 #include <ilog/CMessage.h>

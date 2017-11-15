@@ -2,6 +2,9 @@
 #define ialgo_CHoughSpace2d_included
 
 
+// STL includes
+#include <cmath>
+
 // Qt includes
 #include <QtCore/QMultiMap>
 

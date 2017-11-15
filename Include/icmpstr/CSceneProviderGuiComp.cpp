@@ -2,14 +2,15 @@
 
 
 // Qt includes
-#include <QtCore/QtMath>
 #include <QtCore/QVarLengthArray>
 #include <QtGui/QKeyEvent>
 #if QT_VERSION >= 0x050000
+#include <QtCore/QtMath>
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport//QPrintDialog>
 #include <QtWidgets/QGraphicsItem>
 #else
+#include <QtCore/qmath.h>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QGraphicsItem>

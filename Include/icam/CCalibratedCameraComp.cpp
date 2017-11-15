@@ -4,6 +4,12 @@
 // STD includes
 #include <cmath>
 
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION < 0x050000
+bool qIsNaN(double x){ return x != x; }
+#endif
+
 // ACF includes
 #include <iprm/TParamsPtr.h>
 #include <imeas/INumericValue.h>

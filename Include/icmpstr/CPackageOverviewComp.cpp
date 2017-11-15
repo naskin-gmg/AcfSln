@@ -900,7 +900,11 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 
 	componentLabel.adjustSize();
 
+#if QT_VERSION >= 0x050000
 	QPixmap pixmap = componentLabel.grab();
+#else
+	QPixmap pixmap = QPixmap::grabWidget(&componentLabel, QRect(QPoint(0, 0), componentLabel.size()));
+#endif
 
 	QPalette palette = componentLabel.palette();
 

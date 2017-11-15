@@ -3,7 +3,6 @@
 
 
 // Qt includes
-#include <QtCore/QtMath>
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
 #include <QtCore/QMap>
@@ -11,10 +10,12 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 #if QT_VERSION >= 0x050000
+#include <QtCore/QtMath>
 #include <QtWidgets/QGraphicsItem>
 #include <QtWidgets/QStyle>
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #else
+#include <QtCore/qmath.h>
 #include <QtGui/QGraphicsItem>
 #include <QtGui/QStyle>
 #include <QtGui/QStyleOptionGraphicsItem>

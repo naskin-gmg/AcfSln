@@ -171,10 +171,15 @@ bool TSimpleSpaceResultConsumer<Dimensions, Element>::OnMaximumFound(
 			minValue = propValue;
 
 			// remove elements weeker than new calculated minValue
-			while (!positions.isEmpty() && (-positions.lastKey() < minValue)){
+			while (!positions.isEmpty()){
 				typename PosMap::Iterator lastIter = positions.end() - 1;
 
-				positions.erase(lastIter);
+				if (-lastIter.key() < minValue){
+					positions.erase(lastIter);
+				}
+				else{
+					break;
+				}
 			}
 		}
 	}
