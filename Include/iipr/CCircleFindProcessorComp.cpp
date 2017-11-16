@@ -7,8 +7,6 @@
 #include <QtCore/QtMath>
 #else
 #include <QtCore/qmath.h>
-#include <limits>
-#define qInf std::numeric_limits<double>::infinity
 #endif
 
 // ACF includes
