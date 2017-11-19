@@ -154,6 +154,6 @@
         <Interface InterfaceId="istd::IPolymorphic" ComponentId="Task"/>
     </ExportedInterfaces>
     <ExportedComponents>
-        <Component ExportedId="CurrentGrayImage" ComponentId="Bitmap"/>
+        <Component ExportedId="Params" ComponentId="Params"/>
     </ExportedComponents>
 </Acf>

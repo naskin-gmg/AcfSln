@@ -181,9 +181,9 @@ bool CRegistryTreeViewComp::IsRegistryValid(const icomp::IRegistry& registry) co
 					if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 						const icomp::CCompositeComponentStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(metaInfoPtr);
 						if (compositeMetaInfoPtr != NULL){
-							const icomp::IRegistry& registry = compositeMetaInfoPtr->GetRegistry();
+							const icomp::IRegistry& subRegistry = compositeMetaInfoPtr->GetRegistry();
 
-							retVal = retVal && IsRegistryValid(registry);
+							retVal = retVal && IsRegistryValid(subRegistry);
 						}
 					}
 				}
