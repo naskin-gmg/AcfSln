@@ -55,7 +55,6 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 	}
 
 	iimg::CGeneralBitmap smoothedBitmap;
-
 	CRectImageSmoothProcessorComp::DoRectFilter(3, 3, iimg::IBitmap::PF_GRAY, inputBitmap, smoothedBitmap, iipr::CRectImageSmoothProcessorComp::BM_STRETCH_KERNEL);
 
 	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, smoothedBitmap.GetImageSize())){
@@ -86,8 +85,7 @@ bool CAdaptiveImageBinarizeProcessorComp::ConvertImage(
 		}
 	}
 
-	if (pixelCount > 0)
-	{
+	if (pixelCount > 0){
 		threshold /= double(pixelCount);
 	}
 

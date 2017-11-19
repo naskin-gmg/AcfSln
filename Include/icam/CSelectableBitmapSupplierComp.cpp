@@ -79,7 +79,7 @@ int CSelectableBitmapSupplierComp::ProduceObject(ProductType& result) const
 
 		int bitmapsCount = m_multiBitmapProviderCompPtr->GetBitmapsCount();
 		if (selectedIndex >= bitmapsCount){
-			return WS_FAILED;		
+			return WS_FAILED;
 		}
 
 		const iimg::IBitmap* outputBitmapPtr = m_multiBitmapProviderCompPtr->GetBitmap(selectedIndex);
