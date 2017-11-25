@@ -389,7 +389,7 @@ bool CCircleFindProcessorComp::CalculateCircle(
 				int bestPointIndex = -1;
 
 				double bestDiff = qInf();
-				int pointsCount = ray.points.size();
+				int pointsCount = int(ray.points.size());
 				for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
 					Point& rayPoint = ray.points[pointIndex];
 

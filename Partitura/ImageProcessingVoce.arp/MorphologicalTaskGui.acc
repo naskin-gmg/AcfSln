@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4594" Description="ACF"/>
+            <Version Id="1" Number="1930" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -114,6 +114,7 @@
     </ExportedInterfaces>
     <ExportedComponents>
         <Component ExportedId="MorphlogicalImage" ComponentId="FilteredImageSceneExtender"/>
+        <Component ExportedId="ParamsGui" ComponentId="ParamsGui"/>
         <Component ExportedId="VisualStatus" ComponentId="TaskGui/VisualStatus"/>
     </ExportedComponents>
 </Acf>

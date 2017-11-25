@@ -79,6 +79,11 @@ I_EXPORT_COMPONENT(
 			"Bitmap snap supplier based on set of registered cameras",
 			"Camera Calibration Supplier Image Bitmap Snap");
 
+I_EXPORT_COMPONENT(
+			BitmapSupplierMultiplexer,
+			"Bitmap supplier based on selection of the underlayed bitmap provider",
+			"Calibration Supplier Image Bitmap Multi");
+
 
 } // namespace CameraPck
 
