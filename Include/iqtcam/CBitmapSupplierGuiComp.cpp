@@ -202,6 +202,12 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 		if (providerPtr != NULL){
 			bitmapPtr = providerPtr->GetBitmap();
 		}
+		else{
+			providerPtr = CompCastPtr<iimg::IBitmapProvider>(supplierPtr);
+			if (providerPtr != NULL){
+				bitmapPtr = providerPtr->GetBitmap();
+			}
+		}
 	}
 
 	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT)){

@@ -21,7 +21,7 @@
                     <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="MorphologicalProcessor/FilterForms"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="DefaultProcessingMode">
+                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="DefaultKernelType">
                         <Data IsEnabled="true" Value="0"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
