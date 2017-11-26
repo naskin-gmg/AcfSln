@@ -45,7 +45,7 @@ static iipr::CConvolutionKernel2d GetCircleKernel(int kernelSize)
 
 	for (int y = -halfKernelSize; y <= halfKernelSize; ++y){
 		for (int x = -halfKernelSize; x <= halfKernelSize; ++x){
-			double distance = sqrt(x * x + y * y);
+			double distance = sqrt(double(x * x + y * y));
 			if (distance > radius){
 				istd::CIndex2d kernelIndex(x + halfKernelSize, y + halfKernelSize);
 
