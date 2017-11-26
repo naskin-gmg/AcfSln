@@ -2,19 +2,20 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4594" Description="ACF"/>
-            <Version Id="1" Number="1930" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4606" Description="ACF"/>
+            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
-        <Element ComponentName="Bitmap" X="800" Y="425" Note=""/>
-        <Element ComponentName="FilterSize" X="550" Y="175" Note=""/>
-        <Element ComponentName="MorphologicalProcessor" X="225" Y="425" Note=""/>
-        <Element ComponentName="NumericConstraints" X="550" Y="50" Note=""/>
-        <Element ComponentName="Params" X="550" Y="300" Note=""/>
-        <Element ComponentName="ProcessingMode" X="250" Y="175" Note=""/>
-        <Element ComponentName="Task" X="550" Y="425" Note=""/>
+        <Element ComponentName="Bitmap" X="800" Y="100" Note=""/>
+        <Element ComponentName="FilterFormType" X="550" Y="500" Note=""/>
+        <Element ComponentName="FilterSize" X="775" Y="600" Note=""/>
+        <Element ComponentName="MorphologicalProcessor" X="150" Y="225" Note=""/>
+        <Element ComponentName="NumericConstraints" X="775" Y="700" Note=""/>
+        <Element ComponentName="Params" X="550" Y="250" Note=""/>
+        <Element ComponentName="ProcessingMode" X="375" Y="375" Note=""/>
+        <Element ComponentName="Task" X="550" Y="100" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

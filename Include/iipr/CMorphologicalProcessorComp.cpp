@@ -1,9 +1,6 @@
 #include <iipr/CMorphologicalProcessorComp.h>
 
 
-// STL includes
-#include <cstring>
-
  // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <istd/CIndex2d.h>
@@ -37,38 +34,24 @@ inline void MaxFunctor(PixelComponentType inputValue, PixelComponentType& output
 }
 
 
-static iipr::CConvolutionKernel2d GetCircleKernel(const istd::CIndex2d& kernelSize)
+static iipr::CConvolutionKernel2d GetCircleKernel(int kernelSize)
 {
-	iipr::CConvolutionKernel2d output(kernelSize, 1.0);
+	Q_ASSERT((kernelSize % 2) != 0);
 
-	Q_ASSERT(kernelSize.GetX() == kernelSize.GetY());
-	const istd::CIndex2d lastIndex(kernelSize[0] - 1, kernelSize[0] - 1);
+	iipr::CConvolutionKernel2d output(istd::CIndex2d(kernelSize, kernelSize), 1.0);
 
-	int highestBorderIndex = 0;
-	if (kernelSize[0] % 2 == 0){
-		highestBorderIndex = kernelSize[0] / 2 - 1;
-	}
-	else{
-		highestBorderIndex = (kernelSize[0] - 1) / 2;
-	}
+	int halfKernelSize = kernelSize / 2;
+	double radius = kernelSize / 2.0;
 
-	int borderIndex = highestBorderIndex;
-	for (int y = 0; y < highestBorderIndex; ++y) {
+	for (int y = -halfKernelSize; y <= halfKernelSize; ++y){
+		for (int x = -halfKernelSize; x <= halfKernelSize; ++x){
+			double distance = sqrt(x * x + y * y);
+			if (distance > radius){
+				istd::CIndex2d kernelIndex(x + halfKernelSize, y + halfKernelSize);
 
-		for (int x = 0; x < borderIndex; ++x) {
-			istd::CIndex2d kernelIndex(x, y);
-			output.SetKernelElement(kernelIndex, 0.0);
-
-			kernelIndex = istd::CIndex2d(lastIndex[0] - x, y);
-			output.SetKernelElement(kernelIndex, 0.0);
-
-			kernelIndex = istd::CIndex2d(x, lastIndex[0] - y);
-			output.SetKernelElement(kernelIndex, 0.0);
-
-			kernelIndex = istd::CIndex2d(lastIndex[0] - x, lastIndex[0] - y);
-			output.SetKernelElement(kernelIndex, 0.0);
+				output.SetKernelElement(kernelIndex, 0.0);
+			}
 		}
-		--borderIndex;
 	}
 
 	return output;
@@ -83,28 +66,26 @@ static void DoCircleFilter(
 			const i2d::CRect& region,
 			iimg::IBitmap& outputImage)
 {
-	int circleSize = kernelWidth;
-	if (kernelHeight != kernelWidth && kernelHeight > 0){
-		circleSize = qMax(kernelHeight, circleSize);
+	int circleSize = qMax(kernelHeight, kernelWidth);
+	if ((circleSize % 2) == 0){
+		++circleSize;
 	}
 
 	int linesDifference = inputImage.GetLinesDifference();
 	int pixelsDifference = inputImage.GetPixelsDifference();
 
-	istd::CIndex2d kernelSize(circleSize, circleSize);
-	int halfKernelWidth = kernelSize.GetX() / 2;
-	int halfKernelHeight = kernelSize.GetY() / 2;
+	iipr::CConvolutionKernel2d kernel = GetCircleKernel(circleSize);
 
-	iipr::CConvolutionKernel2d kernel = GetCircleKernel(kernelSize);
+	int halfKernelSize = circleSize / 2.0;
 
 	QVector<int> fastAccessElements;
 	istd::CIndex2d kernelIndex;
-	for (kernelIndex[1] = 0; kernelIndex[1] < kernelSize[1]; ++kernelIndex[1]){
-		for (kernelIndex[0] = 0; kernelIndex[0] < kernelSize[0]; ++kernelIndex[0]){
+	for (kernelIndex[1] = 0; kernelIndex[1] < circleSize; ++kernelIndex[1]){
+		for (kernelIndex[0] = 0; kernelIndex[0] < circleSize; ++kernelIndex[0]){
 			double value = kernel.GetKernelElement(kernelIndex);
 			if (value != 0){
 				int element;
-				element = (kernelIndex[0] - halfKernelWidth) * pixelsDifference + (kernelIndex[1] - halfKernelHeight) * linesDifference;
+				element = (kernelIndex[0] - halfKernelSize) * pixelsDifference + (kernelIndex[1] - halfKernelSize) * linesDifference;
 				fastAccessElements.push_back(element);
 			}
 		}
@@ -112,10 +93,10 @@ static void DoCircleFilter(
 
 	int kernelElementsCount = int(fastAccessElements.size());
 
-	const int regionTop = qMin(region.GetTop() + halfKernelHeight, region.GetBottom() - halfKernelHeight);
-	const int regionBottom = qMax(region.GetTop() + halfKernelHeight, region.GetBottom() - halfKernelHeight);
-	const int regionLeft = qMin(region.GetLeft() + halfKernelWidth, region.GetRight() - halfKernelWidth);
-	const int regionRight = qMax(region.GetLeft() + halfKernelWidth, region.GetRight() - halfKernelWidth);
+	const int regionTop = qMin(region.GetTop() + halfKernelSize, region.GetBottom() - halfKernelSize);
+	const int regionBottom = qMax(region.GetTop() + halfKernelSize, region.GetBottom() - halfKernelSize);
+	const int regionLeft = qMin(region.GetLeft() + halfKernelSize, region.GetRight() - halfKernelSize);
+	const int regionRight = qMax(region.GetLeft() + halfKernelSize, region.GetRight() - halfKernelSize);
 
 	int componentsCount = outputImage.GetComponentsCount();
 
@@ -132,7 +113,9 @@ static void DoCircleFilter(
 
 				for (int i = 0; i < kernelElementsCount; ++i){
 					const int& kernelElement = fastAccessElements[i];
-					const int componentPosition = (x + kernelElement) * componentsCount + componentIndex;
+
+					int componentPosition = (x + kernelElement) * componentsCount + componentIndex;
+
 					CalculateOutputValue(inputLinePtr[componentPosition], outputValue);
 				}
 
@@ -152,7 +135,7 @@ static void DoFilter(
 			const i2d::CRect& region,
 			iimg::IBitmap& outputImage)
 {
-	if (kernelType == CMorphologicalProcessorComp::KT_CIRC){
+	if (kernelType == CMorphologicalProcessorComp::KT_CIRCLE){
 		DoCircleFilter<PixelComponentType, OutputInitValue, CalculateOutputValue>(kernelWidth, kernelHeight, inputImage, region, outputImage);
 	}
 	else {
@@ -518,7 +501,7 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	
 	ProcessingMode processingMode = GetProcessingMode(paramsPtr);
 
-	KernelType kernelType = GetKernelType();
+	KernelType kernelType = GetKernelType(paramsPtr);
 
 	int pixelFormat = inputBitmap.GetPixelFormat();
 	switch (pixelFormat){
@@ -578,6 +561,9 @@ void CMorphologicalProcessorComp::OnComponentCreated()
 	m_processingModes.InsertOption(QObject::tr("White Top-Hat"), "WhiteTopHat");
 	m_processingModes.InsertOption(QObject::tr("Black Top-Hat"), "BlackTopHat");
 	m_processingModes.InsertOption(QObject::tr("Morphological Gradient"), "MorphologicalGradient");
+
+	m_filterForms.InsertOption(QObject::tr("Rectangle"), "Rectangle");
+	m_filterForms.InsertOption(QObject::tr("Circle"), "Circle");
 }
 
 
@@ -587,30 +573,37 @@ CMorphologicalProcessorComp::ProcessingMode  CMorphologicalProcessorComp::GetPro
 {
 	int mode = *m_defaultProcessingModeAttrPtr;
 
-	if ((paramsPtr != NULL) && m_processingModeIdAttrPtr.IsValid()) {
+	if ((paramsPtr != NULL) && m_processingModeIdAttrPtr.IsValid()){
 		iprm::TParamsPtr<iprm::ISelectionParam> processingModeParamPtr(paramsPtr, *m_processingModeIdAttrPtr, false);
-		if (processingModeParamPtr != NULL) {
+		if (processingModeParamPtr.IsValid()){
 			mode = processingModeParamPtr->GetSelectedOptionIndex();
-			if (mode < PM_FIRST || mode > PM_LAST) {
-				mode = PM_EROSION;
-			}
 		}
+	}
+
+	if (mode < PM_FIRST || mode > PM_LAST){
+		mode = PM_EROSION;
 	}
 
 	return ProcessingMode(mode);
 }
 
 
-CMorphologicalProcessorComp::KernelType CMorphologicalProcessorComp::GetKernelType() const
+CMorphologicalProcessorComp::KernelType CMorphologicalProcessorComp::GetKernelType(const iprm::IParamsSet* paramsPtr) const
 {
-	if (m_filterFormTypeAttrPtr.IsValid()){
-		int value = *m_filterFormTypeAttrPtr;
-		if (value >= KT_FIRST && value <= KT_LAST){
-			return KernelType(value);
+	int formType = *m_defaultFilterFormTypeAttrPtr;
+
+	if ((paramsPtr != NULL) && m_filterFormTypeIdAttrPtr.IsValid()){
+		iprm::TParamsPtr<iprm::ISelectionParam> filterFormTypeParamPtr(paramsPtr, *m_filterFormTypeIdAttrPtr, false);
+		if (filterFormTypeParamPtr.IsValid()){
+			formType = filterFormTypeParamPtr->GetSelectedOptionIndex();
 		}
 	}
 
-	return KT_RECT;
+	if (formType < KT_FIRST || formType > KT_LAST){
+		formType  = KT_FIRST;
+	}
+
+	return KernelType(formType);
 }
 
 

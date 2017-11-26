@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4594" Description="ACF"/>
-            <Version Id="1" Number="1930" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4606" Description="ACF"/>
+            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -13,6 +13,18 @@
         <Element Id="Bitmap" PackageId="BitmapPck" ComponentId="Bitmap">
             <Data IsEnabled="true" Flags="2">
                 <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="FilterFormType" PackageId="BasePck" ComponentId="SelectionParam">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="Constraints" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="MorphologicalProcessor/FilterForms"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="DefaultIndex" Type="Integer" ExportId="DefaultProcessingMode">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
             </Data>
         </Element>
         <Element Id="FilterSize" PackageId="MeasPck" ComponentId="NumericParams">
@@ -48,6 +60,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="FilterFormType" Type="Integer" ExportId="FilterFormType">
                         <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="FilterFormTypeParamId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FilterFormType"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FilterSizeParamsId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="FilterSize"/>
@@ -91,6 +106,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -99,6 +115,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>

@@ -2,14 +2,19 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4594" Description="ACF"/>
-            <Version Id="1" Number="1930" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4606" Description="ACF"/>
+            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>UI of the morphological task</Description>
     <Keywords>Morphology Filter Task Tag='GUI &quot;Image Processing&quot;'</Keywords>
     <ElementsList>
+        <Element Id="FilterFormType" PackageId="QtGuiPck" ComponentId="SelectionParamGui">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
         <Element Id="FilterSize" PackageId="QtMeasPck" ComponentId="NumericParamsGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap/>
@@ -55,6 +60,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -63,6 +69,7 @@
                             <Values>
                                 <Value>FilterSize</Value>
                                 <Value>ProcessingMode</Value>
+                                <Value>FilterFormType</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -71,6 +78,7 @@
                             <Values>
                                 <Value>Filter Size</Value>
                                 <Value>Processing Mode</Value>
+                                <Value>FilterFormType</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
