@@ -99,12 +99,6 @@ void CBarcodeSearchFeature::SetValidSymbolCount(int validSymbolCount)
 }
 
 
-imath::CVarVector CBarcodeSearchFeature::GetPosition() const
-{
-	return m_barcodeArea.GetCenter();
-}
-
-
 // reimplemented (IBarcode)
 
 void CBarcodeSearchFeature::SetData(const QByteArray& barcodeData)
