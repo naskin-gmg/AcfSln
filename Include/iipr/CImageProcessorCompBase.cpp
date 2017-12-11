@@ -63,6 +63,14 @@ int CImageProcessorCompBase::DoProcessing(
 		return TS_INVALID;
 	}
 
+	const i2d::ICalibration2d* inputCalibrationPtr = inputBitmapPtr->GetCalibration();
+	if (inputCalibrationPtr != NULL){
+		istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
+		outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+
+		outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopPtr(), true);
+	}
+
 	return TS_OK;
 }
 

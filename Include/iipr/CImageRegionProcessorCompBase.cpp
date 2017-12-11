@@ -59,7 +59,20 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		}
 	}
 
-	return ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr.GetPtr(), outputPtr)? TS_OK: TS_INVALID;
+	bool retVal = ProcessImageRegion(*inputBitmapPtr, paramsPtr, aoiPtr.GetPtr(), outputPtr);
+
+	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
+	if (outputBitmapPtr != NULL){
+		const i2d::ICalibration2d* inputCalibrationPtr = inputBitmapPtr->GetCalibration();
+		if (inputCalibrationPtr != NULL){
+			istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
+			outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+
+			outputBitmapPtr->SetCalibration(outputCalibrationPtr.PopPtr(), true);
+		}
+	}
+
+	return retVal ? TS_OK: TS_INVALID;
 }
 
 

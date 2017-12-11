@@ -84,6 +84,14 @@ bool CImageBinarizeProcessorComp::ConvertImage(
 		}
 	}
 
+	const i2d::ICalibration2d* inputCalibrationPtr = inputBitmap.GetCalibration();
+	if (inputCalibrationPtr != NULL){
+		istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
+		outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
+
+		outputBitmap.SetCalibration(outputCalibrationPtr.PopPtr(), true);
+	}
+
 	return true;
 }
 

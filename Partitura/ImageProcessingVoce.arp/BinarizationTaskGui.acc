@@ -25,6 +25,9 @@
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="ShowResultStatusFrame" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="SnapBitmapSupplierGui"/>
                     </AttributeInfo>
