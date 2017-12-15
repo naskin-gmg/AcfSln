@@ -68,6 +68,9 @@
                             </Values>
                         </Data>
                     </AttributeInfo>
+                    <AttributeInfo Id="UseVerticalSpacer" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
         </Element>
