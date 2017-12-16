@@ -560,6 +560,44 @@ void CInspectionTaskGuiComp::OnGuiHidden()
 }
 
 
+void CInspectionTaskGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	int subtasksCount = m_editorGuisCompPtr.GetCount();
+
+	for (int i = 0; i < subtasksCount; ++i){
+		iqtgui::IGuiObject* guiPtr = m_editorGuisCompPtr[i];
+		if (guiPtr != NULL){
+			QString name;
+			if (i < m_namesAttrPtr.GetCount()){
+				name = m_namesAttrPtr[i];
+
+				switch (*m_designTypeAttrPtr){
+				case 1: // toolbox
+					if (m_toolBoxPtr != NULL){
+						m_toolBoxPtr->setItemText(i, name);
+					}
+					break;
+
+				case 2: // tab
+					if (m_tabWidgetPtr != NULL){
+						m_tabWidgetPtr->setTabText(i, name);
+					}
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+	}
+
+	UpdateVisualElements();
+}
+
+
+
 // reimplemented (imod::CMultiModelDispatcherBase)
 
 void CInspectionTaskGuiComp::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& /*changeSet*/)
