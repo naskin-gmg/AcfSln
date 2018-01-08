@@ -20,6 +20,8 @@ CSupplierCompBase::CSupplierCompBase()
 :	m_inputsObserver(this),
 	m_paramsObserver(this),
 	m_paramsSetPtr(NULL),
+	m_lastWorkState(WS_INVALID),
+	m_isInputValid(false),
 	m_areParametersValid(false)
 {
 }
@@ -41,17 +43,20 @@ imod::IModel* CSupplierCompBase::GetWorkStatusModel() const
 
 void CSupplierCompBase::InvalidateSupplier()
 {
-	if (m_workStatus.GetSupplierState() >= WS_OK){	
-		m_productChangeNotifierPtr.Reset();
+	if (m_isInputValid){
+		m_isInputValid = false;
 
-		m_workStatus.SetSupplierState(WS_INVALID);
+		if (!m_productChangeNotifierPtr.IsValid()){	
+			m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
+		}
 	}
 }
 
 
 void CSupplierCompBase::EnsureWorkInitialized()
 {
-	if (m_workStatus.GetSupplierState() < WS_INIT){
+	int status = m_workStatus.GetSupplierState();
+	if ((status < WS_INIT) || (status > WS_LOCKED)){
 		m_workStatus.SetSupplierState(WS_LOCKED);
 
 		for (int i = 0; i <= MTC_LAST; ++i){
@@ -89,13 +94,29 @@ void CSupplierCompBase::EnsureWorkInitialized()
 }
 
 
+void CSupplierCompBase::EnsureWorkFinished()
+{
+	if ((!m_isInputValid || (m_lastWorkState <= WS_INIT)) && (m_workStatus.GetSupplierState() == WS_INIT)){
+		m_workStatus.SetSupplierState(WS_LOCKED);
+
+		m_lastWorkState = ProcessWorkOutput();
+		Q_ASSERT(m_lastWorkState >= WS_OK);	// No initial states are possible
+	}
+
+	m_isInputValid = true;
+	m_workStatus.SetSupplierState(m_lastWorkState);
+}
+
+
 void CSupplierCompBase::ClearWorkResults()
 {
 	if (m_workStatus.GetSupplierState() == WS_LOCKED){
 		return;
 	}
 
+	m_isInputValid = false;
 	m_workStatus.SetSupplierState(WS_INVALID);
+	m_lastWorkState = WS_INVALID;
 	
 	for (int i = 0; i <= MTC_LAST; ++i){
 		m_messageContainers[i].ClearMessages();
@@ -209,6 +230,7 @@ void CSupplierCompBase::OnComponentCreated()
 	}
 
 	m_workStatus.SetSupplierState(WS_INVALID);
+	m_lastWorkState = WS_INVALID;
 
 	m_productChangeNotifierPtr.Reset();
 }

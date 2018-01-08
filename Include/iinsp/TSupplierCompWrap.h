@@ -24,8 +24,10 @@ public:
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 	I_END_COMPONENT;
 
+	// reimplemented (iinsp::CSupplierCompBase)
+	virtual int ProcessWorkOutput();
+
 	// reimplemented (iinsp::ISupplier)
-	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
 
 protected:
@@ -48,31 +50,24 @@ protected:
 
 // public methods
 
-// reimplemented (iinsp::ISupplier)
-
+// reimplemented (iinsp::CSupplierCompBase)
 template <class Product>
-void TSupplierCompWrap<Product>::EnsureWorkFinished()
+int TSupplierCompWrap<Product>::ProcessWorkOutput()
 {
-	if (m_workStatus.GetSupplierState() == WS_INIT){
-		m_workStatus.SetSupplierState(WS_LOCKED);
-
-		if (!m_productPtr.IsValid()){
-			m_productPtr.SetPtr(new Product());
-		}
-
-		int workState = ProduceObject(*m_productPtr);
-
-		Q_ASSERT(workState >= WS_OK);	// No initial states are possible
-
-		m_workStatus.SetSupplierState(workState);
+	if (!m_productPtr.IsValid()){
+		m_productPtr.SetPtr(new Product());
 	}
+
+	return ProduceObject(*m_productPtr);
 }
 
+
+// reimplemented (iinsp::ISupplier)
 
 template <class Product>
 void TSupplierCompWrap<Product>::ClearWorkResults()
 {
-	if (m_workStatus.GetSupplierState() == WS_LOCKED){
+	if (BaseClass::GetWorkStatus() == WS_LOCKED){
 		return;
 	}
 
@@ -92,7 +87,7 @@ const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
-	if (m_workStatus.GetSupplierState() <= WS_OK){
+	if (BaseClass::GetWorkStatus() <= WS_OK){
 		return m_productPtr.GetPtr();
 	}
 	else{
