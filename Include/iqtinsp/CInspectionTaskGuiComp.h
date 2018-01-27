@@ -38,10 +38,13 @@ namespace iqtinsp
 {
 
 
-class CInspectionTaskGuiCompBase: public iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>
+class CInspectionTaskGuiCompBase:
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask>
 {
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CInspectionTaskGuiComp, iinsp::IInspectionTask> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CInspectionTaskGuiCompBase);
 		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of GUI names", false);
@@ -62,19 +65,25 @@ protected:
 
 
 class CInspectionTaskGuiComp:
-            public iqtgui::TRestorableGuiWrap< TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> >,
+			public iqtgui::TRestorableGuiWrap< TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> >,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
-    typedef  iqtgui::TRestorableGuiWrap< TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> > BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> > BaseClass;
 
 	enum DataRole
 	{
 		DR_TASK_INDEX = Qt::UserRole + 1,
 		DR_SHAPE_INDICES,
 		DR_IS_RESULT
+	};
+
+	enum
+	{
+		MI_SUPPLIER_RESULTS_START_ID = 0,
+		MI_VISUAL_STATUS_START_ID = 1000
 	};
 
 	I_BEGIN_COMPONENT(CInspectionTaskGuiComp);

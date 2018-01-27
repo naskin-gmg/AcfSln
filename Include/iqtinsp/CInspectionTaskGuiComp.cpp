@@ -75,12 +75,12 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 	for (int i = 0; i < subtasksCount; ++i){
 		iinsp::ISupplier* subTaskPtr = inspectionTaskPtr->GetSubtask(i);
 
-		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(subTaskPtr);
-		if (parameterModelPtr == NULL){
-			parameterModelPtr = CompCastPtr<imod::IModel>(subTaskPtr);
+		imod::IModel* supplierModelPtr = dynamic_cast<imod::IModel*>(subTaskPtr);
+		if (supplierModelPtr == NULL){
+			supplierModelPtr = CompCastPtr<imod::IModel>(subTaskPtr);
 		}
 
-		if (parameterModelPtr == NULL){
+		if (supplierModelPtr == NULL){
 			continue;
 		}
 
@@ -88,7 +88,7 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 			imod::IObserver* observerPtr = m_editorObserversCompPtr[i];
 
 			if (observerPtr != NULL){
-				if (parameterModelPtr->AttachObserver(observerPtr)){
+				if (supplierModelPtr->AttachObserver(observerPtr)){
 					if (i < m_editorsCompPtr.GetCount()){
 						imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 						if (editorPtr != NULL){
@@ -103,9 +103,11 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 			imod::IObserver* observerPtr = m_previewObserversCompPtr[i];
 
 			if (observerPtr != NULL){
-				parameterModelPtr->AttachObserver(observerPtr);
+				supplierModelPtr->AttachObserver(observerPtr);
 			}
 		}
+
+		RegisterModel(supplierModelPtr, MI_SUPPLIER_RESULTS_START_ID + i);
 	}
 
 	if (m_generalParamsObserverCompPtr.IsValid()){
@@ -388,7 +390,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 					if (i < m_editorVisualModelsCompPtr.GetCount()){
 						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
 						if (modelPtr != NULL){
-							RegisterModel(modelPtr, i);
+							RegisterModel(modelPtr, MI_VISUAL_STATUS_START_ID + i);
 						}
 					}
 				}
@@ -432,7 +434,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 					if (i < m_editorVisualModelsCompPtr.GetCount()){
 						imod::IModel* modelPtr = m_editorVisualModelsCompPtr[i];
 						if (modelPtr != NULL){
-							RegisterModel(modelPtr, i);
+							RegisterModel(modelPtr, MI_VISUAL_STATUS_START_ID + i);
 						}
 					}
 				}
@@ -597,13 +599,26 @@ void CInspectionTaskGuiComp::OnGuiRetranslate()
 }
 
 
-
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CInspectionTaskGuiComp::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& /*changeSet*/)
+void CInspectionTaskGuiComp::OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet)
 {
-	if (modelId == m_currentGuiIndex && !m_testStarted){
-		UpdateVisualElements();
+	if (!m_testStarted){
+		int visualStatusModelId = modelId - MI_VISUAL_STATUS_START_ID;
+		if (visualStatusModelId == m_currentGuiIndex){
+			UpdateVisualElements();
+		}
+
+		int supplierResultsModelId = modelId - MI_SUPPLIER_RESULTS_START_ID;
+		if (supplierResultsModelId == m_currentGuiIndex){
+			if (changeSet.ContainsExplicit(iinsp::ISupplier::CF_SUPPLIER_RESULTS)){
+				UpdateProcessingState();
+
+				UpdateTaskMessages();
+
+				DoUpdateEditor(m_currentGuiIndex);
+			}
+		}
 	}
 }
 
