@@ -47,15 +47,12 @@ struct ClassDescriptor
 };
 
 
-/**
-	Template filter funtion.
-*/
 template <typename InputPixelType>
-bool DoCalculateBlobsTemplate(
+void DoCalculateRange(
 			const istd::CRange& relValueRange,
 			const iimg::CScanlineMask& imageMask,
 			const iimg::IBitmap& image,
-			QVector<ClassDescriptor>& classDescriptors)
+			istd::TRange<InputPixelType>& result)
 {
 	istd::CIndex2d imageSize = image.GetImageSize();
 	istd::CIntRange lineRange(0, imageSize.GetX());
@@ -93,13 +90,30 @@ bool DoCalculateBlobsTemplate(
 		}
 	}
 
-	istd::TRange<InputPixelType> objectRange(InputPixelType(minValue + relValueRange.GetMinValue() * (maxValue - minValue)), InputPixelType(minValue + relValueRange.GetMaxValue() * (maxValue - minValue)));
+	result.SetMinValue(InputPixelType(minValue + relValueRange.GetMinValue() * (maxValue - minValue)));
+	result.SetMaxValue(InputPixelType(minValue + relValueRange.GetMaxValue() * (maxValue - minValue)));
+}
+
+
+/**
+	Template filter funtion.
+*/
+template <typename InputPixelType>
+bool DoCalculateBlobsTemplate(
+			istd::TRange<InputPixelType>& objectRange,
+			const iimg::CScanlineMask& imageMask,
+			const iimg::IBitmap& image,
+			QVector<ClassDescriptor>& classDescriptors)
+{
 	if (objectRange.IsEmpty()){
 		return true;
 	}
 
+	istd::CIndex2d imageSize = image.GetImageSize();
+
 	QVector<int> classIndexLine(imageSize.GetX(), -1);
 
+	istd::CIntRange lineRange(0, imageSize.GetX());
 	for (int y = 0; y < imageSize.GetY(); ++y){
 		const istd::CIntRanges* outputRangesPtr = imageMask.GetPixelRanges(y);
 		if (outputRangesPtr != NULL){
@@ -217,7 +231,8 @@ CPreciseBlobProcessorComp::CPreciseBlobProcessorComp()
 // static public methods
 
 bool CPreciseBlobProcessorComp::DoCalculateBlobs(
-			const istd::CRange& relValueRange,
+			const istd::CRange& valueRange,
+			bool isRangeRelative,
 			const iblob::IBlobFilterParams* filterParamsPtr,
 			const iimg::CScanlineMask& imageMask,
 			const iimg::IBitmap& image,
@@ -233,23 +248,53 @@ bool CPreciseBlobProcessorComp::DoCalculateBlobs(
 
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		retVal = DoCalculateBlobsTemplate<quint8>(relValueRange, imageMask, image, classDescriptors);
+		{
+			istd::TRange<quint8> objectRange(qMax(quint8(0), quint8(valueRange.GetMinValue() * 255 + 0.5)), qMin(quint8(255), quint8(valueRange.GetMaxValue() * 255 + 0.5)));
+			if (isRangeRelative){
+				DoCalculateRange<quint8>(valueRange, imageMask, image, objectRange);
+			}
+			retVal = DoCalculateBlobsTemplate<quint8>(objectRange, imageMask, image, classDescriptors);
+		}
 		break;
 
 	case iimg::IBitmap::PF_GRAY16:
-		retVal = DoCalculateBlobsTemplate<quint16>(relValueRange, imageMask, image, classDescriptors);
+		{
+			istd::TRange<quint16> objectRange(qMax(quint16(0), quint16(valueRange.GetMinValue() * 0xffff + 0.5)), qMin(quint16(255), quint16(valueRange.GetMaxValue() * 0xffff + 0.5)));
+			if (isRangeRelative){
+				DoCalculateRange<quint16>(valueRange, imageMask, image, objectRange);
+			}
+			retVal = DoCalculateBlobsTemplate<quint16>(objectRange, imageMask, image, classDescriptors);
+		}
 		break;
 
 	case iimg::IBitmap::PF_GRAY32:
-		retVal = DoCalculateBlobsTemplate<quint32>(relValueRange, imageMask, image, classDescriptors);
+		{
+			istd::TRange<quint32> objectRange(qMax(quint32(0), quint32(valueRange.GetMinValue() * 0xffffffff + 0.5)), qMin(quint32(255), quint32(valueRange.GetMaxValue() * 0xffffffff + 0.5)));
+			if (isRangeRelative){
+				DoCalculateRange<quint32>(valueRange, imageMask, image, objectRange);
+			}
+			retVal = DoCalculateBlobsTemplate<quint32>(objectRange, imageMask, image, classDescriptors);
+		}
 		break;
 
 	case iimg::IBitmap::PF_FLOAT32:
-		retVal = DoCalculateBlobsTemplate<float>(relValueRange, imageMask, image, classDescriptors);
+		{
+			istd::TRange<float> objectRange(float(valueRange.GetMinValue()), float(valueRange.GetMaxValue()));
+			if (isRangeRelative){
+				DoCalculateRange<float>(valueRange, imageMask, image, objectRange);
+			}
+			retVal = DoCalculateBlobsTemplate<float>(objectRange, imageMask, image, classDescriptors);
+		}
 		break;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		retVal = DoCalculateBlobsTemplate<double>(relValueRange, imageMask, image, classDescriptors);
+		{
+			istd::TRange<double> objectRange(valueRange.GetMinValue(), valueRange.GetMaxValue());
+			if (isRangeRelative){
+				DoCalculateRange<double>(valueRange, imageMask, image, objectRange);
+			}
+			retVal = DoCalculateBlobsTemplate<double>(objectRange, imageMask, image, classDescriptors);
+		}
 		break;
 
 	default:
@@ -388,18 +433,25 @@ bool CPreciseBlobProcessorComp::CalculateBlobs(
 		imageMask.CreateFilled(clipArea);
 	}
 
-	istd::CRange relValueRange(0, 0.5);
+	istd::CRange valueRange(0, 0.5);
 	iprm::TParamsPtr<imeas::INumericValue> thresholdValuePtr(paramsPtr, m_thresholdParamIdAttrPtr, m_defaultThresholdCompPtr, false);
 	if (thresholdValuePtr.IsValid()){
 		imath::CVarVector values = thresholdValuePtr->GetValues();
 		if (values.GetElementsCount() >= 2){
-			relValueRange = istd::CRange(values[0], values[1]);
-			relValueRange.Validate();
+			valueRange = istd::CRange(values[0], values[1]);
+			valueRange.Validate();
 		}
 	}
 
+	bool isRangeRelative = true;
+	iprm::TParamsPtr<iprm::IEnableableParam> isThresholdRelativePtr(paramsPtr, m_isThresholdRelativeParamIdAttrPtr, m_defaultIsThresholdRelativeCompPtr, false);
+	if (isThresholdRelativePtr.IsValid()){
+		isRangeRelative = isThresholdRelativePtr->IsEnabled();
+	}
+
 	return DoCalculateBlobs(
-				relValueRange,
+				valueRange,
+				isRangeRelative,
 				filterParamsPtr,
 				imageMask,
 				image,

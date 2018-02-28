@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include <iprm/IEnableableParam.h>
 #include <iimg/CScanlineMask.h>
 
 // ACF-Solutions includes
@@ -29,6 +30,8 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(ThresholdContraints, istd::IChangeable, ExtractThresholdContraints);
 		I_ASSIGN(m_thresholdParamIdAttrPtr, "ThresholdParamId", "ID of threshold value in parameter set (imeas::INumericValue)", false, "Threshold");
 		I_ASSIGN(m_defaultThresholdCompPtr, "DefaultThreshold", "Threshold used if not specified in parameters", false, "DefaultThreshold");
+		I_ASSIGN(m_isThresholdRelativeParamIdAttrPtr, "IsThresholdRelativeParamId", "ID of flag (if threshold is relative) in parameter set (iprm::IEnableableParam)", false, "IsRelative");
+		I_ASSIGN(m_defaultIsThresholdRelativeCompPtr, "DefaultIsThresholdRelative", "Flag if the threshold is relative (if not specified in parameters)", false, "DefaultIsThresholdRelative");
 		I_ASSIGN(m_resultConsumerCompPtr, "ResultConsumer", "Consumer of result messages with geometrical layout", false, "ResultConsumer");
 		I_ASSIGN(m_tempConsumerCompPtr, "TempConsumer", "Consumer of temporary result messages with geometrical layout", false, "TempConsumer");
 	I_END_COMPONENT;
@@ -43,6 +46,9 @@ public:
 	// static methods
 	/**
 		Calculate complete convolution with all parameters as static function.
+		\param	valueRange			range of accepüted values, it should be in range [0, 1].
+		\param	isRangeRelative		indicate if the \c valueRange is relative (will be adjusted to minimal and maximal values) or absolute.
+									Absolute value is normalized to range [0, 1], where 0 is black, 1 is white.
 		\param	filterParamsPtr		optional filter of considered blobs. If \c NULL no filter will be used.
 		\param	imageMask			AOI mask where the image pixels should be used.
 		\param	image				input image.
@@ -50,7 +56,8 @@ public:
 		\param	loggerPtr			optional object collecting processing messages.
 	*/
 	static bool DoCalculateBlobs(
-				const istd::CRange& relValueRange,
+				const istd::CRange& valueRange,
+				bool isRangeRelative,
 				const iblob::IBlobFilterParams* filterParamsPtr,
 				const iimg::CScanlineMask& imageMask,
 				const iimg::IBitmap& image,
@@ -70,6 +77,8 @@ protected:
 private:
 	I_ATTR(QByteArray, m_thresholdParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultThresholdCompPtr);
+	I_ATTR(QByteArray, m_isThresholdRelativeParamIdAttrPtr);
+	I_REF(iprm::IEnableableParam, m_defaultIsThresholdRelativeCompPtr);
 	I_REF(ilog::IMessageConsumer, m_resultConsumerCompPtr);
 	I_REF(ilog::IMessageConsumer, m_tempConsumerCompPtr);
 
