@@ -100,9 +100,21 @@ protected:
 				Rays& inRays,
 				Rays& outRays,
 				i2d::CLine2d& projectionLine,
-				i2d::CVector2d& center);
-	bool CalculateCircle(const i2d::CVector2d& center, bool removeOutliers, double minOutliersDistance, Rays& rays, CircleFeature& result);
-	bool CalculateAnnulus(const i2d::CVector2d& center, Rays& inRays, Rays& outRays, AnnulusFeature& result);
+				i2d::CVector2d& center,
+				int& totalRaysCount);
+	bool CalculateCircle(
+				const i2d::CVector2d& center,
+				bool removeOutliers,
+				double minOutliersDistance,
+				Rays& rays,
+				int totalRaysCount,
+				CircleFeature& result);
+	bool CalculateAnnulus(
+				const i2d::CVector2d& center,
+				Rays& inRays,
+				Rays& outRays,
+				int totalRaysCount,
+				AnnulusFeature& result);
 
 	void AddProjectionResultsToRays(
 				const i2d::CLine2d& projectionLine,
