@@ -136,7 +136,7 @@ int CPositionFromImageSupplierComp::ProduceObject(ProductType& result) const
 				return WS_FAILED;
 			}
 
-			resultVector = transformedLine.GetPoint1();
+			resultVector = transformedLine.GetCenter();
 
 			ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 						istd::IInformationProvider::IC_INFO,

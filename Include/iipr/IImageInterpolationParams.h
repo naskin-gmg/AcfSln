@@ -23,7 +23,7 @@ public:
 	*/
 	enum InterpolationMode
 	{
-		IM_NO_INTERPOLATION,
+		IM_NO_INTERPOLATION = 0,
 		IM_BILINEAR,
 		IM_BICUBIC,
 		IM_NEAREST_NEIGHBOUR

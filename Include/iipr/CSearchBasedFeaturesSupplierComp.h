@@ -40,6 +40,7 @@ public:
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN(m_searchProcessorCompPtr, "Processor", "Calculate model positions in the image", true, "Processor");
 		I_ASSIGN(m_slaveInformationProviderCompPtr, "SlaveInformationProvider", "Used to provide the status if set", false, "SlaveInformationProvider");
+		I_ASSIGN(m_globalCalibrationPtr, "GlobalCalibration", "Setup the supplier global calibration", false, "GlobalCalibration");
 		I_ASSIGN(m_searchParamsManagerParamIdAttrPtr, "SearchParamsManagerParameterId", "ID of the parameter manager used for multi search", false, "SearchParamsManagerParamId");
 		I_ASSIGN(m_searchParamsIdAttrPtr, "SearchParamsId", "ID of standard search parameters", true, "SearchParamsId");
 	I_END_COMPONENT;
@@ -99,6 +100,7 @@ private:
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
 	I_REF(iproc::IProcessor, m_searchProcessorCompPtr);
 	I_REF(istd::IInformationProvider, m_slaveInformationProviderCompPtr);
+	I_REF(i2d::ICalibration2d, m_globalCalibrationPtr);
 	I_ATTR(QByteArray, m_searchParamsManagerParamIdAttrPtr);
 	I_ATTR(QByteArray, m_searchParamsIdAttrPtr);
 	

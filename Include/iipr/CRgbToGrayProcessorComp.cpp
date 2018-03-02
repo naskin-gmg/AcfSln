@@ -57,7 +57,7 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 	if (inputFormat == iimg::IBitmap::PF_GRAY){
 		return outputBitmap.CopyFrom(inputBitmap);
 	}
-	else if (inputFormat != iimg::IBitmap::PF_RGB && inputFormat != iimg::IBitmap::PF_RGBA){
+	else if (inputFormat != iimg::IBitmap::PF_RGB && inputFormat != iimg::IBitmap::PF_RGBA && inputFormat != iimg::IBitmap::PF_RGB24){
 		SendErrorMessage(0, QObject::tr("Image format must be RGB(A)"), "RgbToGrayProcessor");
 
 		return false;

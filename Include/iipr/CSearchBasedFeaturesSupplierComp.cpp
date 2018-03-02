@@ -344,7 +344,22 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 			const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&result.GetFeature(featureIndex));
 			if (objectFeaturePtr != NULL){
-				calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+
+				i2d::CAffine2d globalAffine;
+				if (
+					m_globalCalibrationPtr.IsValid() && 
+					m_globalCalibrationPtr->GetLocalTransform(objectFeaturePtr->GetPosition(), globalAffine)
+				){
+					const i2d::CMatrix2d& globalMatrix = globalAffine.GetDeformMatrix();
+					const double angle = globalMatrix.GetApproxAngle() - objectFeaturePtr->GetAngle();
+					const i2d::CVector2d& foundScale = objectFeaturePtr->GetScale();
+					const i2d::CVector2d scale(globalMatrix.GetScaleX() * foundScale.GetX(), globalMatrix.GetScaleY() * foundScale.GetY());
+					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition() + globalAffine.GetTranslation(), angle, scale);
+				}
+				else{
+					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
+				}
+
 				calibrationInfo.calibrationId = objectFeaturePtr->GetObjectId();
 
 				m_calibrations.push_back(calibrationInfo);
