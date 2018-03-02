@@ -353,7 +353,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 					const i2d::CMatrix2d& globalMatrix = globalAffine.GetDeformMatrix();
 					const double angle = globalMatrix.GetApproxAngle() - objectFeaturePtr->GetAngle();
 					const i2d::CVector2d& foundScale = objectFeaturePtr->GetScale();
-					const i2d::CVector2d scale(globalMatrix.GetScaleX() * foundScale.GetX(), globalMatrix.GetScaleY() * foundScale.GetY());
+					const i2d::CVector2d scale(globalMatrix.GetApproxScale() * foundScale.GetX(), globalMatrix.GetApproxScale() * foundScale.GetY());
 					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition() + globalAffine.GetTranslation(), angle, scale);
 				}
 				else{
