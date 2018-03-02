@@ -12,11 +12,11 @@ namespace iproc
 
 
 /**
-	Interface for all synchrone and assynchrone processors with <em>"push data"</em> model.
+	Interface for all synchrone and asynchrone processors with <em>"push data"</em> model.
 	Synchrone processors are blocking and can process single task. Thats why is not necessary to use task ID.
 	Synchrone processing is provide by method DoProcessing.
-	Assynchrone processors can process many tasks parallel. Each task is identified using its ID.
-	New assynchrone processing task can be started using method \c BeginTask and finish using \c WaitTaskFinished or \c CancelTask.
+	Asynchrone processors can process many tasks parallel. Each task is identified using its ID.
+	New asynchrone processing task can be started using method \c BeginTask and finish using \c WaitTaskFinished or \c CancelTask.
 	Each task has its input object, output object and parameter set.
 	\param	Input	type of input object.
 	\param	Output	type of output object.

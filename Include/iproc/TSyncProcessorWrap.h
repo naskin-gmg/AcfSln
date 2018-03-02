@@ -16,7 +16,7 @@ namespace iproc
 
 /**
 	Wrapper of \c iproc::IProcessor for simple synchrone processor implementations.
-	Assynchrone processing with \c BeginTask and \c WaitTaskFinished is redirected to simple synchrone processing by method \c DoProcessing.
+	Asynchrone processing with \c BeginTask and \c WaitTaskFinished is redirected to simple synchrone processing by method \c DoProcessing.
 	All you have to implement from whole interface \c iproc::IProcessor is method \c DoProcessing.
 */
 template <class Base>
