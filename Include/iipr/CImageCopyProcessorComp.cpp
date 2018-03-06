@@ -270,7 +270,7 @@ bool CImageCopyProcessorComp::DoImageCopy(
 bool CImageCopyProcessorComp::ProcessImage(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputImage) const
 {
 	istd::CIndex2d imageSize = inputImage.GetImageSize();
 
@@ -295,7 +295,7 @@ bool CImageCopyProcessorComp::ProcessImage(
 				inputImage,
 				resultMask,
 				outputImage,
-				this);
+				const_cast<CImageCopyProcessorComp*>(this));
 }
 
 

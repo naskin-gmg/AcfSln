@@ -4,9 +4,7 @@
 
 // ACF includes
 #include <iimg/IBitmap.h>
-
-// ACF-Solutions includes
-#include <iproc/TSyncProcessorCompBase.h>
+#include <iipr/CImageProcessorCompBase.h>
 
 
 namespace iipr
@@ -16,23 +14,24 @@ namespace iipr
 /**
 	Implementation of a processor for the RGB to Grayscale image conversion.
 */
-class CRgbToGrayProcessorComp: public iproc::CSyncProcessorCompBase
+class CRgbToGrayProcessorComp: public iipr::CImageProcessorCompBase
 {
 public:
-	typedef iproc::CSyncProcessorCompBase BaseClass;
+	typedef iipr::CImageProcessorCompBase BaseClass;
 	
 	I_BEGIN_COMPONENT(CRgbToGrayProcessorComp);
+		I_ASSIGN(m_channelWeightsParamsIdAttrPtr, "ChannelWeightsParamId", "ID of the color channel weight parameter in the parameter set", true, "ChannelWeights");
 	I_END_COMPONENT;
 
-	// reimplemented (iproc::IProcessor)
-	virtual int DoProcessing(
-				const iprm::IParamsSet* paramsPtr,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+protected:
+	// reimplemented (iipr::CImageProcessorCompBase)
+	virtual bool ProcessImage(
+				const iprm::IParamsSet* paramsPtr, 
+				const iimg::IBitmap& inputImage,
+				iimg::IBitmap& outputImage) const override;
 
 private:
-	bool ConvertImage(const iimg::IBitmap& inputBitmap, iimg::IBitmap& outputBitmap) const;
+	I_ATTR(QByteArray, m_channelWeightsParamsIdAttrPtr);
 };
 
 

@@ -325,7 +325,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 			QString sourceName = GetDiagnosticName();
 			if (sourceName.isEmpty()){
-				sourceName = "SearchResult";
+				sourceName = "Search Result";
 			}
 
 			ilog::CMessage* message = new ilog::CMessage(
@@ -383,7 +383,6 @@ void CSearchBasedFeaturesSupplierComp::OnComponentCreated()
 		RegisterSupplierInput(m_bitmapProviderModelCompPtr.GetPtr(), m_bitmapSupplierCompPtr.GetPtr());
 	}
 
-	// Force initialization to avoid crash in multithreading
 	m_searchProcessorCompPtr.EnsureInitialized();
 }
 

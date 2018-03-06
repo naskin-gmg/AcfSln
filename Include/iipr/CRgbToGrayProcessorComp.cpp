@@ -1,61 +1,33 @@
 #include <iipr/CRgbToGrayProcessorComp.h>
 
 
-// Qt includes
-#include <QtCore/QObject>
-
  // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <ibase/CSize.h>
+#include <iprm/TParamsPtr.h>
+#include <imeas/INumericValue.h>
 
 
 namespace iipr
 {
 
 
-// reimplemented (iproc::IProcessor)
+// protected methods
 
-int CRgbToGrayProcessorComp::DoProcessing(
-				const iprm::IParamsSet* /*paramsPtr*/,
-				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* /*progressManagerPtr*/)
+// reimplemented (iipr::CImageProcessorCompBase)
+
+bool iipr::CRgbToGrayProcessorComp::ProcessImage(
+			const iprm::IParamsSet* paramsPtr, 
+			const iimg::IBitmap& inputImage,
+			iimg::IBitmap& outputImage) const
 {
-	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
-	iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
-	if (outputBitmapPtr == NULL){
-		return TS_INVALID;
-	}
-
-	return ConvertImage(*inputBitmapPtr, *outputBitmapPtr) ? TS_OK : TS_INVALID;
-}
-
-
-// private methods
-
-bool CRgbToGrayProcessorComp::ConvertImage(
-			const iimg::IBitmap& inputBitmap,
-			iimg::IBitmap& outputBitmap) const
-{
-	if (inputBitmap.IsEmpty()){
+	if (inputImage.IsEmpty()){
 		return true;
 	}
 
-	const i2d::ICalibration2d* inputCalibrationPtr = inputBitmap.GetCalibration();
-	if (inputCalibrationPtr != NULL){
-		istd::TDelPtr<i2d::ICalibration2d> outputCalibrationPtr;
-		outputCalibrationPtr.SetCastedOrRemove(inputCalibrationPtr->CloneMe());
-
-		outputBitmap.SetCalibration(outputCalibrationPtr.PopPtr(), true);
-	}
-
-	int inputFormat = inputBitmap.GetPixelFormat();
+	int inputFormat = inputImage.GetPixelFormat();
 	if (inputFormat == iimg::IBitmap::PF_GRAY){
-		return outputBitmap.CopyFrom(inputBitmap);
+		return outputImage.CopyFrom(inputImage);
 	}
 	else if (inputFormat != iimg::IBitmap::PF_RGB && inputFormat != iimg::IBitmap::PF_RGBA && inputFormat != iimg::IBitmap::PF_RGB24){
 		SendErrorMessage(0, QObject::tr("Image format must be RGB(A)"), "RgbToGrayProcessor");
@@ -63,39 +35,60 @@ bool CRgbToGrayProcessorComp::ConvertImage(
 		return false;
 	}
 
-	ibase::CSize imageSize = inputBitmap.GetImageSize();
+	ibase::CSize imageSize = inputImage.GetImageSize();
 
-	istd::CChangeNotifier resultNotifier(&outputBitmap);
+	istd::CChangeNotifier resultNotifier(&outputImage);
 	Q_UNUSED(resultNotifier);
 
-	if (!outputBitmap.CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
+	if (!outputImage.CreateBitmap(iimg::IBitmap::PF_GRAY, imageSize)){
 		return false;
 	}
 
-	int inputPixelComponentCount = inputBitmap.GetComponentsCount();
+	int redWeight = 77;
+	int greenWeight = 151;
+	int blueWeight = 28;
+
+	iprm::TParamsPtr<imeas::INumericValue> channelAmplifierParamsPtr(paramsPtr, *m_channelWeightsParamsIdAttrPtr);
+	if (channelAmplifierParamsPtr.IsValid()){
+		imath::CVarVector values = channelAmplifierParamsPtr->GetValues();
+
+		if (values.GetElementsCount() > 0){
+			redWeight = values[0] * 255;
+		}
+
+		if (values.GetElementsCount() > 1){
+			greenWeight = values[1] * 255;
+		}
+
+		if (values.GetElementsCount() > 2){
+			blueWeight = values[2] * 255;
+		}
+	}
+
+	int inputPixelComponentCount = inputImage.GetComponentsCount();
 
 	// the loops are optimized for efficient SIMD vectorization
 	if (inputFormat == iimg::IBitmap::PF_RGBA){
 		for (int y = 0; y < imageSize.GetY(); ++y){
-			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
-			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+			quint8* inputImageLinePtr = (quint8*)inputImage.GetLinePtr(y);
+			quint8* outputImageLinePtr = (quint8*)outputImage.GetLinePtr(y);
 
 			for (int x = 0; x < imageSize.GetX(); ++x){
 				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-				outputImageLinePtr[x] = pixelPtr[3] * (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 16;
+				outputImageLinePtr[x] = pixelPtr[3] * (redWeight * pixelPtr[0] + greenWeight * pixelPtr[1] + blueWeight * pixelPtr[2]) >> 16;
 			}
 		}
 	}
 	else{
 		for (int y = 0; y < imageSize.GetY(); ++y){
-			quint8* inputImageLinePtr = (quint8*)inputBitmap.GetLinePtr(y);
-			quint8* outputImageLinePtr = (quint8*)outputBitmap.GetLinePtr(y);
+			quint8* inputImageLinePtr = (quint8*)inputImage.GetLinePtr(y);
+			quint8* outputImageLinePtr = (quint8*)outputImage.GetLinePtr(y);
 
 			for (int x = 0; x < imageSize.GetX(); ++x){
 				quint8* pixelPtr = inputImageLinePtr + x * inputPixelComponentCount;
 
-				outputImageLinePtr[x] = (77 * pixelPtr[0] + 151 * pixelPtr[1] + 28 * pixelPtr[2]) >> 8;
+				outputImageLinePtr[x] = (redWeight * pixelPtr[0] + greenWeight * pixelPtr[1] + blueWeight * pixelPtr[2]) >> 8;
 			}
 		}
 	}

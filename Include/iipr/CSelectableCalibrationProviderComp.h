@@ -28,6 +28,7 @@ public:
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_multiCalibrationProviderCompPtr, "MultiCalibrationProvider", "Provider of the calibration list", true, "MultiCalibrationProvider");
 		I_ASSIGN(m_calibrationSelectionCompPtr, "CalibrationSelection", "Index of the calibration in the list", true, "CalibrationSelection");
+		I_ASSIGN(m_defaultCalibrationProviderCompPtr, "DefaultCalibrationProvider", "Provider of default calibration. E.g. in case of non-selected or non-available calibration", false, "DefaultCalibrationProvider");
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -36,6 +37,7 @@ public:
 private:
 	I_REF(i2d::IMultiCalibrationProvider, m_multiCalibrationProviderCompPtr);
 	I_REF(iprm::ISelectionParam, m_calibrationSelectionCompPtr);
+	I_REF(i2d::ICalibrationProvider, m_defaultCalibrationProviderCompPtr);
 };
 
 

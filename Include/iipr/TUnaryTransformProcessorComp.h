@@ -26,7 +26,7 @@ public:
 		m_maxValue = std::numeric_limits<ArgumentType>::max();
 	}
 
-	inline ArgumentType operator()(const ArgumentType& value)
+	inline ArgumentType operator()(const ArgumentType& value) const
 	{
 		return (m_maxValue - value);
 	}
@@ -48,12 +48,12 @@ public:
 	I_BEGIN_COMPONENT(TUnaryTransformProcessorComp);
 	I_END_COMPONENT;
 
-protected:		
+protected:
 	// reimplemented (iipr::CImageProcessorCompBase)
 	virtual bool ProcessImage(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap& inputImage,
-				iimg::IBitmap& outputImage);
+				iimg::IBitmap& outputImage) const;
 
 private:
 	Predicate m_predicate;
@@ -66,7 +66,7 @@ template <typename PixelType, class Predicate>
 bool TUnaryTransformProcessorComp<PixelType, Predicate>::ProcessImage(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputImage) const
 {
 	if (!outputImage.CreateBitmap(inputImage.GetPixelFormat(), inputImage.GetImageSize())){
 		SendErrorMessage(0, "Output bitmap could not be created");

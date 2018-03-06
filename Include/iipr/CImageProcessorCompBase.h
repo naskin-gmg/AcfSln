@@ -89,7 +89,7 @@ protected:
 	virtual bool ProcessImage(
 				const iprm::IParamsSet* paramsPtr, 
 				const iimg::IBitmap& inputImage,
-				iimg::IBitmap& outputImage) = 0;
+				iimg::IBitmap& outputImage) const = 0;
 
 	I_REF(i2d::IObject2d, m_defaultAoiCompPtr);
 	I_ATTR(QByteArray, m_aoiParamIdAttrPtr);

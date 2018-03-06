@@ -292,7 +292,7 @@ bool CImageNormalizeProcessorComp::DoAdjustFilter(
 bool CImageNormalizeProcessorComp::ProcessImage(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputImage) const
 {
 	double contrast = 1;
 	double brightness = 0;
@@ -400,7 +400,7 @@ bool CImageNormalizeProcessorComp::ProcessImage(
 				inputImage,
 				resultMask,
 				outputImage,
-				this);
+				const_cast<CImageNormalizeProcessorComp*>(this));
 }
 
 

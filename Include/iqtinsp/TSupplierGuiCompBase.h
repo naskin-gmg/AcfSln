@@ -97,6 +97,11 @@ protected:
 	virtual void UpdateVisualStatus();
 
 	/**
+		Extract calibration provider from the observed object.
+	*/
+	virtual const i2d::ICalibrationProvider* ExtractCalibrationProvider() const;
+
+	/**
 		Method will be called every time if the parameter set of the supplier has been changed.
 		Default implementation does nothing.
 	*/
@@ -213,7 +218,8 @@ void TSupplierGuiCompBase<UI>::AddItemsToScene(iqt2d::IViewProvider* providerPtr
 {
 	if (*m_viewCalibrationModeAttrPtr > VCM_NONE){
 		if ((*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS) || ((flags & iqt2d::IViewExtender::SF_DIRECT) == 0)){
-			const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObservedObject());
+			const i2d::ICalibrationProvider* calibrationProviderPtr = ExtractCalibrationProvider();
+
 			iview::CCalibratedViewBase* viewPtr = dynamic_cast<iview::CCalibratedViewBase*>(providerPtr->GetView());
 
 			if ((calibrationProviderPtr != NULL) && (viewPtr != NULL)){
@@ -439,6 +445,17 @@ void TSupplierGuiCompBase<UI>::UpdateVisualStatus()
 	BaseClass::SetStatusText(statusText);
 }
 
+template <class UI>
+const i2d::ICalibrationProvider* TSupplierGuiCompBase<UI>::ExtractCalibrationProvider() const
+{
+	const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObservedObject());
+	if (calibrationProviderPtr == NULL){
+		calibrationProviderPtr = CompCastPtr<const i2d::ICalibrationProvider>(GetObservedObject());
+	}
+
+	return calibrationProviderPtr;
+}
+
 
 template <class UI>
 void TSupplierGuiCompBase<UI>::OnSupplierParamsChanged()
@@ -544,7 +561,7 @@ void TSupplierGuiCompBase<UI>::AfterUpdate(imod::IModel* modelPtr, const istd::I
 	UpdateVisualStatus();
 
 	if (*m_viewCalibrationModeAttrPtr >= VCM_ALWAYS){
-		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetObservedObject());
+		const i2d::ICalibrationProvider* calibrationProviderPtr = ExtractCalibrationProvider();
 
 		for (		ProviderToCalibrationMap::Iterator viewIter = m_providerToCalibrationMap.begin();
 					viewIter != m_providerToCalibrationMap.end();

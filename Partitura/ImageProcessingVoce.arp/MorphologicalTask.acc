@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4606" Description="ACF"/>
-            <Version Id="1" Number="1937" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4640" Description="ACF"/>
+            <Version Id="1" Number="1949" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -155,6 +155,9 @@
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="InputBitmapCalibrationProvider" Type="Reference" ExportId="InputBitmapCalibrationProvider">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
@@ -167,6 +170,7 @@
     </ElementsList>
     <EmbeddedRegistriesList/>
     <ExportedInterfaces>
+        <Interface InterfaceId="i2d::ICalibrationProvider" ComponentId="Task"/>
         <Interface InterfaceId="iimg::IBitmapProvider" ComponentId="Task"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="Task"/>
         <Interface InterfaceId="imod::IModel" ComponentId="Task"/>

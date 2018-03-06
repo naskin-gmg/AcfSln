@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="4650" Description="ACF"/>
+            <Version Id="1" Number="1955" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <PositionMap>
+        <Element ComponentName="ChannelWeights" X="475" Y="350" Note=""/>
+        <Element ComponentName="ParamsGui" X="475" Y="175" Note=""/>
+    </PositionMap>
+    <EmbeddedRegistries/>
+</Acf>

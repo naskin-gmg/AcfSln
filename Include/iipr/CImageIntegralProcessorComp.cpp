@@ -436,7 +436,7 @@ bool CImageIntegralProcessorComp::CalculateIntegralReference(
 bool CImageIntegralProcessorComp::ProcessImage(
 			const iprm::IParamsSet* paramsPtr, 
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputImage) const
 {
 	iprm::TParamsPtr<i2d::IObject2d> aoiObjectPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiObjectPtr.IsValid()){

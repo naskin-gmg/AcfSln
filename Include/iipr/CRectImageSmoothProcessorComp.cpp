@@ -478,9 +478,9 @@ bool CRectImageSmoothProcessorComp::DoRectFilterVertical(
 // reimplemented (iipr::CImageProcessorCompBase)
 
 bool CRectImageSmoothProcessorComp::ProcessImage(
-			const iprm::IParamsSet* paramsPtr, 
+			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap& inputImage,
-			iimg::IBitmap& outputImage)
+			iimg::IBitmap& outputImage) const
 {
 	iprm::TParamsPtr<imeas::INumericValue> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);	
 	if (!filterParamsPtr.IsValid()){
