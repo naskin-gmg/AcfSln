@@ -53,15 +53,25 @@ bool iipr::CRgbToGrayProcessorComp::ProcessImage(
 		imath::CVarVector values = channelAmplifierParamsPtr->GetValues();
 
 		if (values.GetElementsCount() > 0){
+			double weightSum = values[0];
+
 			redWeight = values[0] * 255;
-		}
 
-		if (values.GetElementsCount() > 1){
-			greenWeight = values[1] * 255;
-		}
+			if (values.GetElementsCount() > 1){
+				greenWeight = values[1] * 255;
 
-		if (values.GetElementsCount() > 2){
-			blueWeight = values[2] * 255;
+				weightSum += values[1];
+			}
+
+			if (values.GetElementsCount() > 2){
+				blueWeight = values[2] * 255;
+
+				weightSum += values[2];
+			}
+
+			redWeight /= weightSum;
+			greenWeight /= weightSum;
+			blueWeight /= weightSum;
 		}
 	}
 
