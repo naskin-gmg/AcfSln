@@ -31,9 +31,9 @@ public:
 		{
 		}
 
-		quint8 m_r;
-		quint8 m_g;
 		quint8 m_b;
+		quint8 m_g;
+		quint8 m_r;
 		quint8 m_a;
 	};
 
