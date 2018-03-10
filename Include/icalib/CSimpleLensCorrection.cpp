@@ -336,7 +336,7 @@ bool CSimpleLensCorrection::Serialize(iser::IArchive& archive)
 
 int CSimpleLensCorrection::GetSupportedOperations() const
 {
-	return SO_COPY | SO_CLONE | SO_COMPARE;
+	return SO_COPY | SO_CLONE | SO_COMPARE | SO_RESET;
 }
 
 

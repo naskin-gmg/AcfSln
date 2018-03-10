@@ -125,6 +125,12 @@ const i2d::ICalibration2d* CAffineCalibration2d::CreateCombinedCalibration(const
 
 // reimplemented (istd::IChangeable)
 
+int CAffineCalibration2d::GetSupportedOperations() const
+{
+	return SO_COPY | SO_CLONE | SO_RESET;
+}
+
+
 bool CAffineCalibration2d::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
 	const CAffineCalibration2d* calibrationPtr = dynamic_cast<const CAffineCalibration2d*>(&object);
@@ -199,6 +205,15 @@ bool CAffineCalibration2d::CopyFrom(const istd::IChangeable& object, Compatibili
 istd::IChangeable* CAffineCalibration2d::CloneMe(CompatibilityMode /*mode*/) const
 {
 	return new CAffineCalibration2d(GetTransformation());
+}
+
+
+
+bool CAffineCalibration2d::ResetData(CompatibilityMode /*mode*/)
+{
+	Reset();
+
+	return true;
 }
 
 

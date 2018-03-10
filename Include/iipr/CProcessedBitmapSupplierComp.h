@@ -18,21 +18,32 @@ namespace iipr
 
 /**
 	Image supplier providing processed image from some other input image supplier.
+	This implementation delegates the provided input calibration and has the role of the calibration provider.
+	If the connected processor creates a new calibration, then she should be pushed into the 'OutputBitmapCalibration'. In this case it will be the provided calibration
 */
 class CProcessedBitmapSupplierBase:
 			public iinsp::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> >,
-			virtual public iimg::IBitmapProvider
+			virtual public iimg::IBitmapProvider,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iinsp::TSupplierCompWrap<istd::TDelPtr<iimg::IBitmap> > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CProcessedBitmapSupplierBase);
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_bitmapProviderCompPtr, "BitmapProvider", "Provide input image", true, "BitmapProvider");
 		I_ASSIGN_TO(m_bitmapSupplierCompPtr, m_bitmapProviderCompPtr, false);
 		I_ASSIGN_TO(m_bitmapProviderModelCompPtr, m_bitmapProviderCompPtr, false);
+		I_ASSIGN(m_inputBitmapCalibrationProviderCompPtr, "InputBitmapCalibrationProvider", "Provide the the calibration of the input image", false, "InputBitmapCalibrationProvider");
+		I_ASSIGN_TO(m_inputBitmapCalibrationSupplierCompPtr, m_inputBitmapCalibrationProviderCompPtr, false);
+		I_ASSIGN_TO(m_inputBitmapCalibrationProviderModelCompPtr, m_inputBitmapCalibrationProviderCompPtr, false);
 		I_ASSIGN(m_imageProcessorCompPtr, "BitmapProcessor", "Bitmap conversion processor (takes bitmap as input and output)", true, "BitmapProcessor");
+		I_ASSIGN(m_outputBitmapCalibrationCompPtr, "OutputBitmapCalibration", "Resulting calibration of the processor output", false, "OutputBitmapCalibration");
 	I_END_COMPONENT;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (iimg::IBitmapProvider)
 	virtual const iimg::IBitmap* GetBitmap() const;
@@ -50,6 +61,7 @@ protected:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 	// abstract methods
 	virtual iimg::IBitmap* CreateBitmap() const = 0;
@@ -58,6 +70,13 @@ private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);
 	I_REF(iinsp::ISupplier, m_bitmapSupplierCompPtr);
 	I_REF(imod::IModel, m_bitmapProviderModelCompPtr);
+
+	I_REF(i2d::ICalibrationProvider, m_inputBitmapCalibrationProviderCompPtr);
+	I_REF(iinsp::ISupplier, m_inputBitmapCalibrationSupplierCompPtr);
+	I_REF(imod::IModel, m_inputBitmapCalibrationProviderModelCompPtr);
+
+	I_REF(i2d::ICalibration2d, m_outputBitmapCalibrationCompPtr);
+
 	I_REF(iproc::IProcessor, m_imageProcessorCompPtr);
 };
 

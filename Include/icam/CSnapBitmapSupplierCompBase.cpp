@@ -105,7 +105,12 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 					i2d::CAffineTransformation2d transformation;
 					transformation.Reset(center, 0, scale);
 
-					result.first.SetPtr(calibrationPtr->CreateCombinedCalibration(transformation));
+					if (calibrationPtr->GetTransformationFlags() & i2d::ICalibration2d::TF_AFFINE){
+						result.first.SetPtr(calibrationPtr->CreateCombinedCalibration(transformation));
+					}
+					else{
+						result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
+					}
 				}
 				else{
 					if (scale != i2d::CVector2d(1, 1)){

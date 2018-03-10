@@ -39,8 +39,10 @@ public:
 	virtual const i2d::ICalibration2d* CreateCombinedCalibration(const i2d::ITransformation2d& transformation) const;
 
 	// reimplemented (istd::IChangeable)
+	virtual int GetSupportedOperations() const;
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	const i2d::CRectangle* m_argumentAreaPtr;

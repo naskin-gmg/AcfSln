@@ -160,7 +160,16 @@ void CSupplierCompBase::RegisterSupplierInput(imod::IModel* modelPtr, ISupplier*
 {
 	Q_ASSERT(modelPtr != NULL);
 
-	modelPtr->AttachObserver(&m_inputsObserver);
+	if (!modelPtr->IsAttached(&m_inputsObserver)){
+		if (!modelPtr->AttachObserver(&m_inputsObserver)){
+			qDebug("Supplier input cannot be observed");
+
+			return;
+		}
+	}
+	else{
+		qDebug("Supplier input already under observation");
+	}
 
 	if (supplierPtr != NULL){
 		m_inputSuppliersMap[modelPtr] = supplierPtr;
