@@ -246,7 +246,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 			return WS_FAILED;
 		}
 
-		imath::CVarVector values(9);
+		imath::CVarVector values(12);
 		values[0] = workingHsvColor.GetHue();
 		values[1] = workingHsvColor.GetSaturation() * 255;
 		values[2] = workingHsvColor.GetValue() * 255;
@@ -261,6 +261,10 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		double hueDifference = workingHue.DistInDegree(taughtHue) / 360.0;
 		double saturationDifference = fabs(taughtHsvColor.GetSaturation() - workingHsvColor.GetSaturation());
 		double valueDifference = fabs(taughtHsvColor.GetValue() - workingHsvColor.GetValue());
+
+		values[9] = hueDifference;
+		values[10] = saturationDifference;
+		values[11] = valueDifference;
 
 		double maxHueDifference = thresholdValues[0];
 		double maxSaturationDifference = thresholdValues[1];
@@ -290,10 +294,11 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 
 		m_isColorPatternMatched = (medianDifference <= thresholdValues[0]);
 
-		imath::CVarVector values(3);
+		imath::CVarVector values(4);
 		values[0] = workingMedian;
 		values[1] = taughtMedian;		
 		values[2] = m_isColorPatternMatched ? -1 : thresholdValues[0];
+		values[3] = medianDifference;
 
 		result.SetValues(values);
 	}

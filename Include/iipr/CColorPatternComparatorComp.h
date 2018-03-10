@@ -39,6 +39,8 @@ public:
 		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");
 		I_ASSIGN(m_patternCompareThresholdParamIdAttrPtr, "PatternCompareThresholdParamId", "ID of the threshold parameter for pattern comparison", true, "PatternCompareThresholdParamId");
 		I_ASSIGN(m_workingPatternProviderCompPtr, "WorkingPatternProvider", "Provider of the working pattern to be compared with the taught one", true, "WorkingPatternProvider");
+		I_ASSIGN_TO(m_workingPatternProviderModelCompPtr, m_workingPatternProviderCompPtr, true);
+		I_ASSIGN_TO(m_workingPatternSupplierCompPtr, m_workingPatternProviderCompPtr, true);
 		I_ASSIGN(m_taughtPatternProviderCompPtr, "TaughtPatternProvider", "Provider of the learned pattern", true, "TaughtPatternProvider");
 		I_ASSIGN_TO(m_taughtPatternProviderModelCompPtr, m_taughtPatternProviderCompPtr, false);
 		I_ASSIGN_TO(m_taughtPatternSupplierCompPtr, m_taughtPatternProviderCompPtr, false);

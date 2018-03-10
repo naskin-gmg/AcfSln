@@ -121,20 +121,8 @@ typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixel
 template <typename PixelComponentType>
 typename TImagePixelInterpolator<PixelComponentType>::PixelComponent TImagePixelInterpolator<PixelComponentType>::GetBitmapPixelValue(int x, int y, int componentIndex) const
 {
-	if (x < 0){
-		x = 0;
-	}
-
-	if (x >= m_imageWidth){
-		x = m_imageWidth - 1;
-	}
-
-	if (y < 0){
-		y = 0;
-	}
-
-	if (y >= m_imageHeight){
-		y = m_imageHeight - 1;
+	if (x < 0 || x >= m_imageWidth || y < 0 || y >= m_imageHeight){
+		return 0;
 	}
 
 	return *(m_imageBufferPtr + x * m_pixelBytesCount + componentIndex + m_imageLineDifference * y);
