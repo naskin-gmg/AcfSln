@@ -23,6 +23,7 @@ public:
 	{
 	public:
 		Rgba()
+		: m_b(0), m_g(0), m_r(0), m_a(255)
 		{
 		}
 
@@ -35,6 +36,24 @@ public:
 		quint8 m_g;
 		quint8 m_r;
 		quint8 m_a;
+	};
+
+	class Rgb
+	{
+	public:
+		Rgb()
+		:	m_r(0), m_g(0), m_b(0)
+		{
+		}
+
+		Rgb(quint8 r, quint8 g, quint8 b)
+		:	m_r(r), m_g(g), m_b(b)
+		{
+		}
+
+		quint8 m_r;
+		quint8 m_g;
+		quint8 m_b;
 	};
 
 	template <typename IntType, int Shift, bool DoCropMin = true, bool DoCropMax = true>
@@ -288,6 +307,11 @@ public:
 		}
 
 		RgbCropAccum32(const Rgba& value)
+		:	m_r(IntType(value.m_r) << Shift), m_g(IntType(value.m_g) << Shift), m_b(IntType(value.m_b) << Shift)
+		{
+		}
+
+		RgbCropAccum32(const Rgb& value)
 		:	m_r(IntType(value.m_r) << Shift), m_g(IntType(value.m_g) << Shift), m_b(IntType(value.m_b) << Shift)
 		{
 		}
@@ -570,6 +594,35 @@ public:
 			}
 
 			return Rgba(quint8(red >> Shift), quint8(green >> Shift), quint8(blue >> Shift));
+		}
+
+		operator Rgb()
+		{
+			IntType red = m_r;
+			if (DoCropMin && (red < 0)){
+				red = 0;
+			}
+			else if (DoCropMin && (red > (0xff << Shift))){
+				red = 0xff;
+			}
+
+			IntType green = m_g;
+			if (DoCropMin && (green < 0)){
+				green = 0;
+			}
+			else if (DoCropMin && (green > (0xff << Shift))){
+				green = 0xff;
+			}
+
+			IntType blue = m_b;
+			if (DoCropMin && (blue < 0)){
+				blue = 0;
+			}
+			else if (DoCropMin && (blue > (0xff << Shift))){
+				blue = 0xff;
+			}
+
+			return Rgb(quint8(red >> Shift), quint8(green >> Shift), quint8(blue >> Shift));
 		}
 
 	protected:
