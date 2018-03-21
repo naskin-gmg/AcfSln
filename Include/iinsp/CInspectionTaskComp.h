@@ -28,7 +28,7 @@ namespace iinsp
 	Serializing of this object serialize all inspection parameters.
 
 	\note This implementation contains several aspects of the data model:
-	1. The component itself represents the data model of the information status of the whole inspection. If the document mode (see 'IsDocumentModeEnabled' attribute ) is enabled, the parameter model will be part of the inspection task model.
+	1. The component itself represents the data model of the information status of the whole inspection.
 	2. The sub-component \c Parameters represents the parameter of all sub-tasks.
 	3. Working status of the whole inspection provided by the method GetWorkStatus.
 */
@@ -71,7 +71,6 @@ public:
 		I_ASSIGN_TO(m_generalParamsModelCompPtr, m_generalParamsCompPtr, true);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_supportTempMessagesAttrPtr, "SupportTempMessages", "If enabled cumulation of temporary messages will be supported", true, false);
-		I_ASSIGN(m_isDocumentModeEnabledAttrPtr, "IsDocumentModeEnabled", "If enabled, the parameter model will be part of the inspection task model", true, false);
 	I_END_COMPONENT;
 
 	CInspectionTaskComp();
@@ -196,7 +195,6 @@ protected:
 	I_REF(imod::IModel, m_generalParamsModelCompPtr);
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_ATTR(bool, m_supportTempMessagesAttrPtr);
-	I_ATTR(bool, m_isDocumentModeEnabledAttrPtr);
 
 	typedef QVector<iinsp::ISupplier*> Suppliers;
 	Suppliers m_subtasks;

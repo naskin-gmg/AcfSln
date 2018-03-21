@@ -368,23 +368,6 @@ void CInspectionTaskComp::OnComponentCreated()
 	m_generalParamsCompPtr.EnsureInitialized();
 	m_generalParamsModelCompPtr.EnsureInitialized();
 
-	if (*m_isDocumentModeEnabledAttrPtr){
-		if (m_generalParamsModelCompPtr.IsValid()){
-			m_generalParamsModelCompPtr->AttachObserver(this);
-		}
-
-		int subtasksCount = m_subtasksCompPtr.GetCount();
-		for (int i = 0; i < subtasksCount; ++i){
-			const iinsp::ISupplier* subtaskPtr = m_subtasksCompPtr[i];
-			if (subtaskPtr != NULL){
-				imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(subtaskPtr->GetModelParametersSet());
-				if (modelPtr != NULL && !modelPtr->IsAttached(this)){
-					modelPtr->AttachObserver(this);
-				}
-			}
-		}
-	}
-
 	int modelsCount = m_subtaskModelsCompPtr.GetCount();
 	for (int i = 0; i < modelsCount; ++i){
 		imod::IModel* modelPtr = m_subtaskModelsCompPtr[i];
