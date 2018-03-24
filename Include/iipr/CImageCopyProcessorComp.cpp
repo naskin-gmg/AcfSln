@@ -119,7 +119,7 @@ bool CImageCopyProcessorComp::DoImageCopy(
 				outputPixelFormat,
 				imageSize)){
 		if (loggerPtr != NULL){
-			loggerPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("Could not create output image"), QObject::tr("ImageNormalizeProcessor"));
+			loggerPtr->SendLogMessage(istd::IInformationProvider::IC_ERROR, 0, QObject::tr("Could not create output image"), QObject::tr("ImageCopyProcessor"));
 		}
 
 		return false;
@@ -245,7 +245,7 @@ bool CImageCopyProcessorComp::DoImageCopy(
 						istd::IInformationProvider::IC_ERROR,
 						0,
 						QObject::tr("Input image format '%1' not supported").arg(iimg::CPixelFormatList::GetInstance().GetOptionName(inputPixelFormat)),
-						QObject::tr("ImageNormalizeProcessor"));
+						QObject::tr("ImageCopyProcessor"));
 		}
 		return false;
 	}
@@ -256,7 +256,7 @@ bool CImageCopyProcessorComp::DoImageCopy(
 					istd::IInformationProvider::IC_ERROR,
 					0,
 					QObject::tr("Cannot produce output image in format '%1' from input format '%2'").arg(formatList.GetOptionName(outputPixelFormat)).arg(formatList.GetOptionName(inputPixelFormat)),
-					QObject::tr("ImageNormalizeProcessor"));
+					QObject::tr("ImageCopyProcessor"));
 	}
 
 	return false;
