@@ -139,6 +139,12 @@ protected Q_SLOTS:
 	void on_RegistryTree_itemDoubleClicked(QTreeWidgetItem* itemPtr, int column);
 	void on_FilterEdit_textChanged(const QString& filterText);
 	void on_ShowOnlyErrorsCheck_stateChanged(int state);
+	void on_ShowStatisticsButton_clicked();
+
+private:
+	typedef QMap<QString, int> Histogram;
+
+	void FillStatistics(const Histogram& dataHistogram, QTreeWidget& list) const;
 
 private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
@@ -188,6 +194,10 @@ private:
 	EnvironmentObserver m_environmentObserver;
 
 	imod::TModelWrap<SelectionInfoImpl> m_selectionInfo;
+
+	Histogram m_componentHistogram;
+	Histogram m_packageHistogram;
+	Histogram m_projectHistogram;
 };
 
 

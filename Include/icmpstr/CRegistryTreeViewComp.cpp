@@ -5,18 +5,54 @@
 #include <QtCore/QDir>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QDialog>
 #else
 #include <QtGui/QHeaderView>
+#include <QtGui/QListWidget>
+#include <QtGui/QDialog>
 #endif
 
 // ACF includes
 #include <icomp/CCompositeComponentStaticInfo.h>
+#include <icomp/CCompositePackageStaticInfo.h>
+#include <icomp/CComponentMetaDescriptionEncoder.h>
 #include <ilog/CMessageContainer.h>
 #include <iwidgets/CItemDelegate.h>
+#include <GeneratedFiles/icmpstr/ui_CComponentStatisticsView.h>
 
 
 namespace icmpstr
 {
+
+
+class StatisticsDialog: public QDialog, public Ui::CComponentStatisticsView
+{
+public:
+	StatisticsDialog()
+	{
+		setupUi(this);
+	}
+};
+
+
+class ComparableItem: public QTreeWidgetItem
+{
+public:
+	bool operator<(const QTreeWidgetItem& item) const
+	{
+		int sortColumnIndex = item.treeWidget()->sortColumn();
+
+		if (sortColumnIndex > 0){
+			double value = item.text(sortColumnIndex).toDouble();
+			double myValue = text(sortColumnIndex).toDouble();
+
+			return myValue < value;
+		}
+		
+		return QTreeWidgetItem::operator<(item);
+	}
+};
 
 
 CRegistryTreeViewComp::CRegistryTreeViewComp()
@@ -82,13 +118,42 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 	if (registryElementPtr != NULL){
 		QTreeWidgetItem* elementItemPtr = new QTreeWidgetItem();
 
+		QByteArray componentId = elementPtr->address.GetComponentId();
+		if (!elementPtr->address.GetPackageId().isEmpty()){
+			const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementPtr->address);
+
+			if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_REAL)){
+				Q_ASSERT(!componentId.isEmpty());
+				m_componentHistogram[componentId]++;
+
+				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
+
+				QStringList projectInfoList = encoder.GetValues("Project");
+				for (int i = 0; i < projectInfoList.count(); ++i){
+					m_projectHistogram[projectInfoList[i]]++;
+				}
+			}
+		}
+
+		QByteArray packageId =  elementPtr->address.GetPackageId();
+		if (!elementPtr->address.GetPackageId().isEmpty()){
+			const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetPackageMetaInfo(packageId);
+			if (metaInfoPtr != NULL){
+				const icomp::CCompositePackageStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositePackageStaticInfo*>(metaInfoPtr);
+
+				if (compositeMetaInfoPtr == NULL){
+					m_packageHistogram[packageId]++;
+				}
+			}
+		}
+
 		elementItemPtr->setText(CT_NAME, elementId);
 		elementItemPtr->setData(CT_NAME, DR_ELEMENT_NAME, elementId);
-		elementItemPtr->setData(CT_NAME, DR_ELEMENT_ID, elementPtr->address.GetComponentId());
-		elementItemPtr->setData(CT_NAME, DR_ELEMENT_PACKAGE_ID, elementPtr->address.GetPackageId());
+		elementItemPtr->setData(CT_NAME, DR_ELEMENT_ID, componentId);
+		elementItemPtr->setData(CT_NAME, DR_ELEMENT_PACKAGE_ID, packageId);
 		elementItemPtr->setData(CT_NAME, DR_REGISTRY, quintptr(&registry));
-		elementItemPtr->setText(CT_ID, elementPtr->address.GetComponentId());
-		elementItemPtr->setText(CT_PACKAGE, elementPtr->address.GetPackageId());
+		elementItemPtr->setText(CT_ID, componentId);
+		elementItemPtr->setText(CT_PACKAGE, packageId);
 
 		static QIcon okIcon(":/Icons/Ok");
 		elementItemPtr->setIcon(CT_NAME, okIcon);
@@ -220,10 +285,15 @@ void CRegistryTreeViewComp::UpdateTreeItemsVisibility()
 		QTreeWidgetItem* itemPtr = *treeIter;
 
 		bool showItem = true;
-			
-		QString itemName = itemPtr->text(CT_NAME);
 
-		if (filterText.isEmpty() || itemName.contains(filterText, Qt::CaseInsensitive)){
+		QString itemName = itemPtr->text(CT_NAME);
+		QString itemId = itemPtr->text(CT_ID);
+		QString packageId = itemPtr->text(CT_PACKAGE);
+
+		if (		filterText.isEmpty() || 
+					itemName.contains(filterText, Qt::CaseInsensitive) || 
+					itemId.contains(filterText, Qt::CaseInsensitive) || 
+					packageId.contains(filterText, Qt::CaseInsensitive)){
 			showItem = true;
 		}
 		else{
@@ -259,6 +329,11 @@ void CRegistryTreeViewComp::UpdateTreeItemsVisibility()
 void CRegistryTreeViewComp::UpdateGui(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
 	RegistryTree->clear();
+
+	// Clear statistics:
+	m_componentHistogram.clear();
+	m_packageHistogram.clear();
+	m_projectHistogram.clear();
 
 	QTreeWidgetItem* rootItem = new QTreeWidgetItem();
 	rootItem->setText(0, "Root");
@@ -421,6 +496,56 @@ void CRegistryTreeViewComp::on_ShowOnlyErrorsCheck_stateChanged(int /*state*/)
 	UpdateTreeItemsVisibility();
 }
 
+
+void CRegistryTreeViewComp::on_ShowStatisticsButton_clicked()
+{
+	StatisticsDialog dialog;
+
+#if QT_VERSION < 0x050000
+	dialog.ProjectsList->header()->setResizeMode(QHeaderView::ResizeToContents);
+	dialog.PackageList->header()->setResizeMode(QHeaderView::ResizeToContents);
+	dialog.ComponentList->header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+	dialog.ProjectsList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	dialog.PackageList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	dialog.ComponentList->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#endif
+
+	dialog.ProjectsGroup->setTitle(QString(tr("Projects (%1)")).arg(m_projectHistogram.keys().count()));
+	FillStatistics(m_projectHistogram, *dialog.ProjectsList);
+
+	dialog.PackagesGroup->setTitle(QString(tr("Packages (%1)")).arg(m_packageHistogram.keys().count()));
+	FillStatistics(m_packageHistogram, *dialog.PackageList);
+
+	dialog.ComponentsGroup->setTitle(QString(tr("Components (%1)")).arg(m_componentHistogram.keys().count()));
+	FillStatistics(m_componentHistogram, *dialog.ComponentList);
+
+	dialog.exec();
+}
+
+
+// private methods
+
+void CRegistryTreeViewComp::FillStatistics(const Histogram& dataHistogram, QTreeWidget& list) const
+{
+	int overallCount = 0;
+	for (		Histogram::ConstIterator iter = dataHistogram.constBegin();
+				iter != dataHistogram.constEnd();
+				++iter){
+		overallCount += iter.value();
+	}
+
+	for (		Histogram::ConstIterator iter = dataHistogram.constBegin();
+				iter != dataHistogram.constEnd();
+				++iter){
+		ComparableItem* item = new ComparableItem;
+		item->setText(0, iter.key());
+		item->setText(1, QString::number(iter.value()));
+		item->setText(2, QString::number(iter.value() / double(overallCount) * 100, 'f', 1));
+
+		list.addTopLevelItem(item);
+	}
+}
 
 // public methods of embedded class EnvironmentObserver
 
