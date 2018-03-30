@@ -179,14 +179,16 @@ bool CSimpleLensCorrection::GetPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	double distance = origPosition.GetLength();
+	i2d::CVector2d normalizedPos = origPosition - m_opticalCenter;
+
+	double distance = normalizedPos.GetLength();
 	if (distance * 2 * m_distortionFactor * m_scaleFactor < -m_scaleFactor){
 		return false;
 	}
 
 	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
 
-	result = m_opticalCenter + origPosition * scaleFactor;
+	result = m_opticalCenter + normalizedPos * scaleFactor;
 
 	return true;
 }
@@ -197,16 +199,16 @@ bool CSimpleLensCorrection::GetInvPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
+	i2d::CVector2d normalizedPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
 
-	double distance = normPos.GetLength();
+	double distance = normalizedPos.GetLength();
 
 	if (qFabs(m_distortionFactor) > I_BIG_EPSILON){
 		double delta = 1 + 4 * distance * m_distortionFactor;
 		if (delta >= 0){
 			double shouldDistance = (-1 + qSqrt(delta)) / (2 * m_distortionFactor);
 
-			result = normPos.GetNormalized(shouldDistance);
+			result = m_opticalCenter + normalizedPos.GetNormalized(shouldDistance);
 
 			return true;
 		}
@@ -214,7 +216,7 @@ bool CSimpleLensCorrection::GetInvPositionAt(
 		return false;
 	}
 	else{
-		result = normPos;
+		result = m_opticalCenter + normalizedPos;
 
 		return true;
 	}
@@ -226,14 +228,16 @@ bool CSimpleLensCorrection::GetLocalTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	double distance = origPosition.GetLength();
+	i2d::CVector2d normalizedPos = origPosition - m_opticalCenter;
+
+	double distance = normalizedPos.GetLength();
 	if (distance * 2 * m_distortionFactor * m_scaleFactor < -m_scaleFactor){
 		return false;
 	}
 
 	double scaleFactor = (1 + m_distortionFactor * distance) * m_scaleFactor;
 
-	result.SetTranslation(m_opticalCenter + origPosition * (scaleFactor - 1));
+	result.SetTranslation(m_opticalCenter + normalizedPos * (scaleFactor - 1));
 	result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity() * scaleFactor);	// TODO: implement it correctly, it is simple approximation only
 
 	return true;
@@ -245,20 +249,20 @@ bool CSimpleLensCorrection::GetLocalInvTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
+	i2d::CVector2d normalizedPos = (transfPosition - m_opticalCenter) / m_scaleFactor;
 
-	double distance = normPos.GetLength();
+	double distance = normalizedPos.GetLength();
 
 	double delta = 1 + 4 * distance * m_distortionFactor;
 	if (delta >= 0){
 		double shouldDistance = (-1 + qSqrt(delta)) * 0.5;
 
 		if (shouldDistance >= I_BIG_EPSILON){
-			result.SetTranslation(normPos.GetNormalized(shouldDistance) - transfPosition / m_scaleFactor);
+			result.SetTranslation(m_opticalCenter + normalizedPos.GetNormalized(shouldDistance));
 			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());	// TODO: implement it correctly
 		}
 		else{
-			result.SetTranslation(-m_opticalCenter / m_scaleFactor);
+			result.SetTranslation(m_opticalCenter + normalizedPos);
 			result.SetDeformMatrix(i2d::CMatrix2d::GetIdentity());
 		}
 
