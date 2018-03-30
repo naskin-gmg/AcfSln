@@ -11,6 +11,8 @@
 #include <iipr/IFeaturesProvider.h>
 #include <imeas/CSimpleNumericValue.h>
 #include <imeas/CGeneralDataSequence.h>
+#include <imod/CMultiModelDispatcherBase.h>
+#include <imeas/CDataSequenceStatistics.h>
 
 
 namespace iipr
@@ -27,7 +29,8 @@ namespace iipr
 class CColorPatternComparatorComp:
 			public iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue>,
 			virtual public iipr::IFeaturesProvider,
-			virtual public istd::IInformationProvider
+			virtual public istd::IInformationProvider,
+			protected imod::CMultiModelDispatcherBase
 {
 public:
 	typedef iinsp::TSupplierCompWrap<imeas::CSimpleNumericValue> BaseClass;
@@ -36,7 +39,6 @@ public:
 		I_REGISTER_INTERFACE(iipr::IFeaturesProvider);
 		I_REGISTER_INTERFACE(istd::IInformationProvider);
 		I_REGISTER_INTERFACE(imeas::IDataSequenceProvider);
-		I_ASSIGN(m_taskEnabledIdAttrPtr, "TaskEnabledId", "ID of the task enabled attribute", true, "CheckEnabled");
 		I_ASSIGN(m_patternCompareThresholdParamIdAttrPtr, "PatternCompareThresholdParamId", "ID of the threshold parameter for pattern comparison", true, "PatternCompareThresholdParamId");
 		I_ASSIGN(m_workingPatternProviderCompPtr, "WorkingPatternProvider", "Provider of the working pattern to be compared with the taught one", true, "WorkingPatternProvider");
 		I_ASSIGN_TO(m_workingPatternProviderModelCompPtr, m_workingPatternProviderCompPtr, true);
@@ -63,6 +65,8 @@ public:
 	virtual int GetInformationFlags() const;
 
 protected:
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual int ProduceObject(ProductType& result) const;
 
@@ -74,8 +78,6 @@ private:
 	bool GetHsvColorValue(const imeas::IDataSequenceStatistics& statistics, icmm::CHsv& hsv) const;
 
 private:
-	I_ATTR(QByteArray, m_taskEnabledIdAttrPtr);
-
 	I_ATTR(QByteArray, m_patternCompareThresholdParamIdAttrPtr);
 	I_REF(imeas::IDataSequenceProvider, m_workingPatternProviderCompPtr);
 	I_REF(imod::IModel, m_workingPatternProviderModelCompPtr);
@@ -92,6 +94,8 @@ private:
 	mutable QDateTime m_resultTimeStamp;
 
 	mutable bool m_isColorPatternMatched;
+
+	mutable imeas::CDataSequenceStatistics m_taughtStatisticsCached;
 };
 
 

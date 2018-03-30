@@ -11,8 +11,7 @@
 #include <icmm/CRgb.h>
 
 // ACF-Solutions includes
-#include <imeas/CDataSequenceStatistics.h>
-
+#include <iipr/CColorPatternComparatorComp.h>
 #include <iipr/IPatternController.h>
 
 
@@ -136,6 +135,13 @@ int CColorPatternComparatorComp::GetInformationFlags() const
 
 // protected methods
 
+void CColorPatternComparatorComp::OnModelChanged(int /*modelId*/, const istd::IChangeable::ChangeSet& /*changeSet*/)
+{
+	// drop the cache if input changed
+	m_taughtStatisticsCached.ResetStatistics();
+}
+
+
 // reimplemented (iinsp::TSupplierCompWrap)
 
 int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
@@ -143,25 +149,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	result.SetValues(imath::CVarVector());
 
 	m_resultTimeStamp = QDateTime::currentDateTime();
-
-	// if the task is disabled: no check in this case
-	iprm::TParamsPtr<iprm::IEnableableParam> checkEnabledPtr(GetModelParametersSet(), *m_taskEnabledIdAttrPtr); 
-	if (checkEnabledPtr.IsValid()){
-		if (!checkEnabledPtr->IsEnabled()){
-			m_isColorPatternMatched = true;
-
-			ilog::CMessage* message = new ilog::CMessage(
-				IC_INFO,
-				MI_SUPPLIER_RESULTS_STATUS,
-				GetInformationDescription(),
-				GetDiagnosticName());
-
-			AddMessage(message);	
-
-			return WS_OK;
-		}
-	}
-
+	
 	if (!m_workingPatternProviderCompPtr.IsValid() || !m_taughtPatternProviderCompPtr.IsValid()){
 		SendCriticalMessage(0, "Bad component architecture, 'WorkingPatternProvider' or 'TaughtPatternProvider' component references are not set");
 
@@ -211,11 +199,12 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		return WS_FAILED;
 	}
 
-	imeas::CDataSequenceStatistics taughtStatistics;
-	if (m_dataStatisticsProcessorCompPtr->CalculateDataStatistics(*taughtHistogramPtr, taughtStatistics) != iproc::IProcessor::TS_OK){
-		SendErrorMessage(0, "Calculation of the histogram statistics data failed");
+	if (m_taughtStatisticsCached.GetChannelsCount() == 0){
+		if (m_dataStatisticsProcessorCompPtr->CalculateDataStatistics(*taughtHistogramPtr, m_taughtStatisticsCached) != iproc::IProcessor::TS_OK){
+			SendErrorMessage(0, "Calculation of the histogram statistics data failed");
 
-		return WS_FAILED;
+			return WS_FAILED;
+		}
 	}
 
 	iprm::TParamsPtr<imeas::INumericValue> comparsionThresholdPtr(GetModelParametersSet(), *m_patternCompareThresholdParamIdAttrPtr);
@@ -225,7 +214,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		return WS_FAILED;
 	}
 
-	Q_ASSERT(taughtStatistics.GetChannelsCount() == workingStatistics.GetChannelsCount());
+	Q_ASSERT(m_taughtStatisticsCached.GetChannelsCount() == workingStatistics.GetChannelsCount());
 
 	imath::CVarVector thresholdValues = comparsionThresholdPtr->GetValues();
 	if (thresholdValues.GetElementsCount() != channelsCount){
@@ -237,7 +226,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 	// Input image is RGB. Differences between taught and working images are done in HSV color space:
 	if (channelsCount == 3){
 		icmm::CHsv taughtHsvColor;
-		if (!GetHsvColorValue(taughtStatistics, taughtHsvColor)){
+		if (!GetHsvColorValue(m_taughtStatisticsCached, taughtHsvColor)){
 			return WS_FAILED;
 		}
 
@@ -282,7 +271,7 @@ int CColorPatternComparatorComp::ProduceObject(ProductType& result) const
 		result.SetValues(values);
 	}
 	else if(channelsCount == 1){
-		const imeas::IDataStatistics* taughtStatisticsPtr = taughtStatistics.GetChannelStatistics(0);
+		const imeas::IDataStatistics* taughtStatisticsPtr = m_taughtStatisticsCached.GetChannelStatistics(0);
 		Q_ASSERT(taughtStatisticsPtr != NULL);
 		double taughtMedian = taughtStatisticsPtr->GetMedian();
 
@@ -331,6 +320,8 @@ void CColorPatternComparatorComp::OnComponentCreated()
 
 	if (m_taughtPatternProviderModelCompPtr.IsValid()){
 		RegisterSupplierInput(m_taughtPatternProviderModelCompPtr.GetPtr(), m_taughtPatternSupplierCompPtr.GetPtr());
+
+		RegisterModel(m_taughtPatternProviderModelCompPtr.GetPtr());
 	}
 
 	// Force components initialization
@@ -348,6 +339,8 @@ void CColorPatternComparatorComp::OnComponentDestroyed()
 
 	if (m_taughtPatternProviderModelCompPtr.IsValid()){
 		UnregisterSupplierInput(m_taughtPatternProviderModelCompPtr.GetPtr());
+
+		UnregisterAllModels();
 	}
 
 	BaseClass::OnComponentDestroyed();
