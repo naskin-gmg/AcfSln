@@ -68,7 +68,7 @@ void CColorPatternComparatorGuiComp::UpdateGui(const istd::IChangeable::ChangeSe
 
 				ColorTable->verticalHeaderItem(0)->setText(tr("Grayvalue"));
 			}
-			else if(colorValuesCount == 9){
+			else if(colorValuesCount >= 9){
 				ColorTable->setRowCount(3);
 
 			#if QT_VERSION < 0x050000
