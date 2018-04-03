@@ -2,6 +2,10 @@
 #define imeas_CSamplesInfo_included
 
 
+// Qt includes
+#include <QtCore/QDateTime>
+
+// ACF includes
 #include <imeas/IDataSequenceInfo.h>
 
 
@@ -17,7 +21,7 @@ class CSamplesInfo:
 			protected iprm::IOptionsList
 {
 public:
-	CSamplesInfo(const istd::CRange& logicalSamplesRange = istd::CRange::GetInvalid());
+	CSamplesInfo(const istd::CRange& logicalSamplesRange = istd::CRange::GetInvalid(), const QDateTime& samplingStartTime = QDateTime());
 
 	/**
 		Get logical position range (time axis) of this data sequence.
@@ -30,6 +34,17 @@ public:
 		\sa GetLogicalRange
 	*/
 	void SetLogicalSamplesRange(const istd::CRange& range);
+
+	/**
+		Get the absolute start time of the sampling.
+		If the time object is invalid the
+	*/
+	QDateTime GetSamplingStartTime() const;
+
+	/**
+		Set absolute time of sample acquisition.
+	*/
+	void SetSamplingStartTime(const QDateTime& samplingStartTime);
 
 	// reimplemented (imeas::IDataSequenceInfo)
 	virtual int GetSequenceInfoFlags() const;
@@ -55,6 +70,7 @@ protected:
 
 private:
 	istd::CRange m_logicalSamplesRange;
+	QDateTime m_samplingStartTime;
 };
 
 

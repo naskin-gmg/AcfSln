@@ -23,6 +23,11 @@ I_EXPORT_COMPONENT(
 			"Diagram Polyline Samples Sequence Measurement GUI" IM_TAG("2D GUI"));
 
 I_EXPORT_COMPONENT(
+			ChartBaseDataSequenceView,
+			"Display sample sequence in a chart view",
+			"Chart Diagram Polyline Samples Sequence Measurement GUI" IM_TAG("2D GUI"));
+
+I_EXPORT_COMPONENT(
 			DataStatisticsGui,
 			"Data statistics GUI",
 			"Statistics Histogram Data" IM_TAG("GUI"));

@@ -6,18 +6,22 @@
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
-
 #include <iser/IArchive.h>
 #include <iser/CArchiveTag.h>
+#include <iser/CPrimitiveTypesSerializer.h>
 
 
 namespace imeas
 {
 
 
-CSamplesInfo::CSamplesInfo(const istd::CRange& logicalSamplesRange)
-:	m_logicalSamplesRange(logicalSamplesRange)
+CSamplesInfo::CSamplesInfo(const istd::CRange& logicalSamplesRange, const QDateTime& samplingStartTime)
+:	m_logicalSamplesRange(logicalSamplesRange),
+	m_samplingStartTime(samplingStartTime)
 {
+	QString time = m_samplingStartTime.toString();
+
+	qDebug(qPrintable(time));
 }
 
 
@@ -29,7 +33,27 @@ const istd::CRange& CSamplesInfo::GetLogicalSamplesRange() const
 
 void CSamplesInfo::SetLogicalSamplesRange(const istd::CRange& range)
 {
-	m_logicalSamplesRange = range;
+	if (m_logicalSamplesRange != range){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_logicalSamplesRange = range;
+	}
+}
+
+
+QDateTime CSamplesInfo::GetSamplingStartTime() const
+{
+	return m_samplingStartTime;
+}
+
+
+void CSamplesInfo::SetSamplingStartTime(const QDateTime& samplingStartTime)
+{
+	if (m_samplingStartTime != samplingStartTime){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_samplingStartTime = samplingStartTime;
+	}
 }
 
 
@@ -77,10 +101,12 @@ const imath::IUnitInfo* CSamplesInfo::GetNumericValueUnitInfo(int /*index*/) con
 
 bool CSamplesInfo::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag logicalRangeTag("LogicalSamplesRange", "Logical range of samples axis, e.g. sampled time span", iser::CArchiveTag::TT_GROUP);
-
 	bool retVal = true;
 
+	istd::CChangeNotifier notifier(!archive.IsStoring() ? this : NULL);
+	Q_UNUSED(notifier);
+
+	static iser::CArchiveTag logicalRangeTag("LogicalSamplesRange", "Logical range of samples axis, e.g. sampled time span", iser::CArchiveTag::TT_GROUP);
 	retVal = retVal && archive.BeginTag(logicalRangeTag);
 	if (archive.IsStoring()){
 		double minValue = m_logicalSamplesRange.GetMinValue();
@@ -89,9 +115,6 @@ bool CSamplesInfo::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(maxValue);
 	}
 	else{
-		istd::CChangeNotifier notifier(this);
-		Q_UNUSED(notifier);
-
 		double minValue = 0;
 		double maxValue = 0;
 		retVal = retVal && archive.Process(minValue);
@@ -104,6 +127,11 @@ bool CSamplesInfo::Serialize(iser::IArchive& archive)
 		m_logicalSamplesRange.SetMaxValue(maxValue);
 	}
 	retVal = retVal && archive.EndTag(logicalRangeTag);
+
+	static iser::CArchiveTag samplingStartTimeTag("SamplingStartTime", "Start time of the sample acquisition", iser::CArchiveTag::TT_GROUP);
+	retVal = retVal && archive.BeginTag(samplingStartTimeTag);
+	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, m_samplingStartTime);
+	retVal = retVal && archive.EndTag(samplingStartTimeTag);
 
 	return retVal;
 }

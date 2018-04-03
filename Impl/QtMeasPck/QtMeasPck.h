@@ -9,6 +9,7 @@
 
 // ACF-Solutions includes
 #include <iqtmeas/CDataSequenceViewComp.h>
+#include <iqtmeas/CChartBaseDataSequenceViewComp.h>
 #include <iqtmeas/CDataStatisticsGuiComp.h>
 #include <iqtmeas/CNumericParamsGuiComp.h>
 #include <iqtmeas/CDataSequenceSupplierResultsViewComp.h>
@@ -22,6 +23,7 @@ namespace QtMeasPck
 
 
 typedef iqtmeas::CDataSequenceViewComp DataSequenceView;
+typedef iqtmeas::CChartBaseDataSequenceViewComp ChartBaseDataSequenceView;
 typedef iqtmeas::CDataStatisticsGuiComp DataStatisticsGui;
 typedef ibase::TModelObserverCompWrap<iqtmeas::CNumericParamsGuiComp> NumericParamsGui;
 typedef iqtmeas::CDataSequenceSupplierResultsViewComp DataSequenceSupplierResultsView;
