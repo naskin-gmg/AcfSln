@@ -76,14 +76,14 @@ void CChartBaseDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSe
 				if (infoPtr != NULL){
 					QtCharts::QDateTimeAxis* axisImplPtr = new QtCharts::QDateTimeAxis;
 					axisImplPtr->setTickCount(10);
-					axisXPtr->setTitleText(tr("Time"));
+					axisImplPtr->setTitleText(tr("Time"));
 
 					axisXPtr = axisImplPtr;
 				}
 				else{
 					QtCharts::QValueAxis* axisImplPtr = new QtCharts::QValueAxis;
 					axisImplPtr->setTickCount(10);
-					axisXPtr->setTitleText(tr("Index"));
+					axisImplPtr->setTitleText(tr("Index"));
 
 					axisXPtr = axisImplPtr;
 				}
