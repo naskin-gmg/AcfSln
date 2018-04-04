@@ -247,7 +247,6 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_folderDepth);
 	retVal = retVal && archive.EndTag(folderDepthTag);
 
-
 	retVal = retVal && archive.BeginTag(fileTimeStampModeTag);
 	retVal = retVal && I_SERIALIZE_FLAG(FileTimeStampMode, archive, m_fileTimeStampMode);
 	retVal = retVal && archive.EndTag(fileTimeStampModeTag);

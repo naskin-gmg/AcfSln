@@ -8,6 +8,9 @@
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <istd/CGeneralTimeStamp.h>
+#include <istd/CSystem.h>
+#include <iprm/IEnableableParam.h>
+#include <iprm/TParamsPtr.h>
 #include <ifile/CFileListProviderComp.h>
 
 
@@ -26,7 +29,9 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_timestampMode(ihotf::IDirectoryMonitorParams::FTM_MODIFIED),
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
-	m_lockChanges(false)
+	m_lockChanges(false),
+	m_processingFlags(0),
+	m_isTraceEnabled(false)
 {
 	qRegisterMetaType<istd::IChangeable::ChangeSet>("istd::IChangeable::ChangeSet");
 
@@ -44,6 +49,14 @@ bool CDirectoryMonitorComp::IsRunning() const
 
 bool CDirectoryMonitorComp::StartObserving(const iprm::IParamsSet* paramsSetPtr)
 {
+	iprm::TParamsPtr<iprm::IEnableableParam> traceEnabledParamPtr(paramsSetPtr, *m_enableTraceParamIdAttrPtr);
+	if (traceEnabledParamPtr.IsValid()){
+		EnableTracing(traceEnabledParamPtr->IsEnabled());
+	}
+	else{
+		EnableTracing(false);
+	}
+
 	bool wasRunning = BaseClass2::isRunning();
 	if (wasRunning){
 		StopObserverThread();
@@ -107,6 +120,8 @@ void CDirectoryMonitorComp::OnComponentDestroyed()
 
 	Q_ASSERT(m_finishThread);
 
+	EnableTracing(false);
+
 	BaseClass::OnComponentDestroyed();
 }
 
@@ -127,8 +142,14 @@ void CDirectoryMonitorComp::run()
 			continue;
 		}
 
-		QFileInfo currentDirectoryInfo(m_currentDirectory.absolutePath());
+		QString currentFolderPath = m_currentDirectory.absolutePath();
+
+		WriteTraceMessage(QString ("Running folder content check for '%1'").arg(currentFolderPath));
+
+		QFileInfo currentDirectoryInfo(currentFolderPath);
 		if (!currentDirectoryInfo.exists()){
+			WriteTraceMessage(QString ("Folder '%1' doesn't exist").arg(currentFolderPath));
+
 			msleep(100);
 
 			continue;
@@ -136,12 +157,20 @@ void CDirectoryMonitorComp::run()
 
 		QMutexLocker locker(&m_mutex);
 
-		// set parameters and do file search:
+		// Set parameters and do file search:
 		int observingChanges = m_observingChanges;
 		QStringList acceptPatterns = m_fileFilterExpressions;
 		int observingItemTypes = m_observingItemTypes;
 		int pendingChangesCounter = m_directoryPendingChangesCounter;
 		m_directoryPendingChangesCounter = 0;
+
+		// Override the counter in case of manual folder observation:
+		pendingChangesCounter = qMax(m_processingFlags & PF_MANUAL_FOLDER_OBSERVATION, pendingChangesCounter);
+
+		if (m_processingFlags & PF_MANUAL_FOLDER_OBSERVATION){
+			WriteTraceMessage(QString ("Manual folder structure observation for '%1' is active").arg(currentFolderPath));
+		}
+
 		m_lockChanges = true;
 
 		locker.unlock();
@@ -162,7 +191,12 @@ void CDirectoryMonitorComp::run()
 						removedFiles.push_back(filePath);
 						fileIter = m_directoryFiles.erase(fileIter);
 
-						I_IF_DEBUG(SendVerboseMessage(QObject::tr("File %1 was removed").arg(filePath)));
+						QString message = QObject::tr("File %1 was removed").arg(filePath);
+
+						I_IF_DEBUG(SendVerboseMessage(message));
+
+						WriteTraceMessage(message);
+
 					}
 					else{
 						++fileIter;
@@ -397,7 +431,15 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 	m_currentDirectory = QDir(folderPath);
 
 	m_directoryWatcher.removePaths(m_directoryWatcher.directories());
-	m_directoryWatcher.addPath(folderPath);
+	
+	if (m_directoryWatcher.addPath(folderPath)){
+		m_processingFlags = 0;
+	}
+	else{
+		SendWarningMessage(0, QString ("Folder '%1' cound not be added to the monitor. Manual observation activated").arg(folderPath));
+
+		m_processingFlags = PF_MANUAL_FOLDER_OBSERVATION;
+	}
 
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
 		ihotf::IMonitoringSession* sessionPtr = m_monitoringSessionManagerCompPtr->GetSession(m_currentDirectory.absolutePath());
@@ -498,6 +540,8 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInf
 
 	qint64 currentFileSize = fileInfo.size();
 	if (currentFileSize == 0){
+		WriteTraceMessage(QString ("HasFileAccess failure: '%1': '%2'").arg(filePath).arg("Access rejected (file is empty)"));
+	
 		return false;
 	}
 
@@ -512,6 +556,17 @@ bool CDirectoryMonitorComp::HasFileAccess(const QString& filePath, FileAccessInf
 				return CheckFileAccess(filePath);
 			}
 			else{
+
+				if (m_isTraceEnabled){
+					QString data = QString("Last time stamp: %1, Current time stamp: %2, Last file size: %3, Current file size: %4")
+						.arg(lastFileAccessInfo.lastAccessTimeStamp.toString("yyyy.MM.dd hh mm:ss:zzz"))
+						.arg(lastModifiedAt.toString("yyyy.MM.dd hh mm:ss:zzz"))
+						.arg(lastFileAccessInfo.fileSize)
+						.arg(currentFileSize);
+
+					WriteTraceMessage(QString ("HasFileAccess failure: '%1': '%2'. %3").arg(filePath).arg("Access rejected due file content changing").arg(data));
+				}
+
 				lastFileAccessInfo.lastAccessTimeStamp = lastModifiedAt;
 				lastFileAccessInfo.fileSize = currentFileSize;
 				lastFileAccessInfo.checkTimeStamp = QDateTime::currentDateTime();
@@ -536,6 +591,8 @@ bool CDirectoryMonitorComp::CheckFileAccess(const QString& filePath) const
 	// Close file and restore original permissions:
 	file.close();
 
+	WriteTraceMessage(QString ("CheckFileAccess: '%1': '%2'").arg(filePath).arg(retVal ? "Granted" : "Rejected"));
+
 	return retVal;
 }
 
@@ -551,6 +608,8 @@ QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) co
 	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_CREATED){
 		lastAccessTime = qMax(fileInfo.created(), lastAccessTime);
 	}
+
+	WriteTraceMessage(QString ("GetLastAccessTime: Last access time for '%1': '%2'").arg(fileInfo.absoluteFilePath()).arg(lastAccessTime.toString("yyyy.MM.dd hh mm:ss:zzz")));
 
 	return lastAccessTime;
 }
@@ -574,6 +633,64 @@ void CDirectoryMonitorComp::UpdateNonAccessedFiles(FileAccessMap& accessMap, QSt
 			nonAccessedFilesIter.remove();
 		}
 	}
+}
+
+
+void CDirectoryMonitorComp::EnableTracing(bool isEnabled)
+{
+	QMutexLocker lock(&m_traceFileMutex);
+
+	m_isTraceEnabled = isEnabled;
+
+	if (m_traceFilePtr.IsValid()){
+		m_traceStream.flush();
+		m_traceFilePtr->close();
+
+		m_traceStream.reset();
+		m_traceFilePtr.Reset();
+	}
+
+	if (m_isTraceEnabled){
+		QString traceFileFolder;
+		if (m_traceFileFolderCompPtr.IsValid()){
+			traceFileFolder = m_traceFileFolderCompPtr->GetPath();
+		}
+
+		QString traceFileName = QDateTime::currentDateTime().toString("yyyy_MM_dd_hh_mm_ss_zzz") + ".log";
+		QString traceFilePath = traceFileFolder + "/" + traceFileName;
+
+		if (istd::CSystem::EnsurePathExists(traceFileFolder)){
+			m_traceFilePtr.SetPtr(new QFile(traceFilePath));
+		
+			if (m_traceFilePtr->open(QIODevice::Text | QIODevice::WriteOnly)){
+				m_traceStream.setDevice(m_traceFilePtr.GetPtr());
+			}
+			else{
+				SendErrorMessage(0, QString("Tracing could not be activated for the file: '%1'").arg(traceFilePath));
+
+				m_isTraceEnabled = false;
+
+				m_traceFilePtr.Reset();
+			}
+		}
+		else{
+			SendErrorMessage(0, QString("Trace folder '%1'could not be created. Tracing could not be activated for the file: '%2'").arg(traceFileFolder).arg(traceFilePath));
+
+			m_isTraceEnabled = false;
+		}
+	}
+}
+
+
+void CDirectoryMonitorComp::WriteTraceMessage(const QString& traceMessage) const
+{
+	QMutexLocker lock(&m_traceFileMutex);
+
+	if (!m_isTraceEnabled){
+		return;
+	}
+
+	m_traceStream << QDateTime::currentDateTime().toString() << ": " << traceMessage << "\n";
 }
 
 

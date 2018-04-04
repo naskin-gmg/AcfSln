@@ -7,6 +7,7 @@
 #include <QtCore/QThread>
 #include <QtCore/QDir>
 #include <QtCore/QSet>
+#include <QtCore/QTextStream>
 #include <QtCore/QMutex>
 
 // ACF includes
@@ -41,14 +42,24 @@ public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
 
+	enum ProcessingFlags
+	{
+		/**
+			For the case that, the number of file descriptors was running out the manual folder observation will be activated.
+		*/
+		PF_MANUAL_FOLDER_OBSERVATION = 1
+	};
+
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ihotf::IDirectoryMonitor);
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Default parameter set for the directory monitoring", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 		I_ASSIGN(m_monitoringSessionManagerCompPtr, "SessionManager", "Provider of previous monitoring sessions", false, "SessionManager");
 		I_ASSIGN(m_fileSystemChangeStorageCompPtr, "FileSystemChangeStorage", "File storage", true, "FileSystemChangeStorage");
+		I_ASSIGN(m_traceFileFolderCompPtr, "TraceFileFolder", "Location for the trace file", false, "TraceFileFolder");
 		I_ASSIGN(m_directoryPathIdAttrPtr, "DirParamId", "Parameter ID of the path to be observed in the parameter set", true, "DirParamId");
 		I_ASSIGN(m_directoryMonitorParamsIdAttrPtr, "DirectoryMonitorParamsId", "ID of the directory observing parameters in the parameter set", true, "DirectoryMonitorParamsId");
+		I_ASSIGN(m_enableTraceParamIdAttrPtr, "EnableTraceParamId", "ID of the trace enable parameter in the parameter set", true, "EnableTrace");
 		I_ASSIGN(m_autoStartAttrPtr, "AutoStart", "If enabled, start the directory monitoring after initialization", false, false);
 	I_END_COMPONENT;
 
@@ -111,6 +122,8 @@ private:
 	bool CheckFileAccess(const QString& filePath) const;
 	QDateTime GetLastAccessTime(const QFileInfo& fileInfo) const;
 	void UpdateNonAccessedFiles(FileAccessMap& accessMap, QStringList& fileList);
+	void EnableTracing(bool tracingEnabled);
+	void WriteTraceMessage(const QString& traceMessage) const;
 
 private:
 	struct FileSystemChanges
@@ -186,13 +199,22 @@ private:
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(ihotf::IMonitoringSessionManager, m_monitoringSessionManagerCompPtr);
 	I_REF(ihotf::IFileSystemChangeStorage, m_fileSystemChangeStorageCompPtr);
+	I_REF(ifile::IFileNameParam, m_traceFileFolderCompPtr);
 	I_ATTR(QByteArray, m_directoryPathIdAttrPtr);
 	I_ATTR(QByteArray, m_directoryMonitorParamsIdAttrPtr);
 	I_ATTR(bool, m_autoStartAttrPtr);
+	I_ATTR(QByteArray, m_enableTraceParamIdAttrPtr);
 
 	bool m_lockChanges;
 
+	int m_processingFlags;
+
 	mutable QMutex m_mutex;
+
+	bool m_isTraceEnabled;
+	mutable QMutex m_traceFileMutex;
+	istd::TDelPtr<QFile> m_traceFilePtr;
+	mutable QTextStream m_traceStream;
 };
 
 
