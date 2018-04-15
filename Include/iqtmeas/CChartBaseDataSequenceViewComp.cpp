@@ -6,6 +6,7 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QDateTimeAxis>
 #include <QtCharts/QValueAxis>
+#include <QtCharts/QLegendMarker>
 #endif
 
 // ACF includes
@@ -52,6 +53,8 @@ void CChartBaseDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSe
 		int channelsCount = objectPtr->GetChannelsCount();
 		for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
 			QtCharts::QLineSeries* series = new QtCharts::QLineSeries();
+			series->setName(infoPtr->GetValueListInfo().GetOptionName(channelIndex));
+
 			quint64 timeOffset = 0;
 			// Prepare conversion of the sample index to the absolute time:
 			if (timeRange.IsValid() && timeInterval > 0){
@@ -64,9 +67,12 @@ void CChartBaseDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSe
 			}
 
 			for (int sampleIndex = 0; sampleIndex < samplesCount; ++sampleIndex){
-				quint64 xValue = (timeInterval > 0) ? timeOffset + timeInterval * sampleIndex * 1000 : sampleIndex;
+				quint64 timeValue = (timeInterval > 0) ? timeOffset + timeInterval * sampleIndex * 1000 : sampleIndex;
 
-				series->append(xValue, objectPtr->GetSample(sampleIndex, channelIndex));
+				double sampleValue = objectPtr->GetSample(sampleIndex, channelIndex);
+				if (sampleValue != 1E308){
+					series->append(timeValue, objectPtr->GetSample(sampleIndex, channelIndex));
+				}
 			}
 
 			m_chart.addSeries(series);
@@ -95,6 +101,11 @@ void CChartBaseDataSequenceViewComp::UpdateGui(const istd::IChangeable::ChangeSe
 				axisYPtr->setTitleText(tr("Value"));
 				m_chart.setAxisY(axisYPtr, series);
 			}
+
+			//QList<QtCharts::QLegendMarker*> markers = m_chart.legend()->markers(series);
+			//for (QtCharts::QLegendMarker* marker : markers){
+			//	marker->setVisible(false);
+			//}
 		}
 	}
 
