@@ -138,7 +138,7 @@ bool CImageNormalizeProcessorComp::DoAdjustFilter(
 		case iimg::IBitmap::PF_GRAY:
 			if ((brightness < 0) || (255 * contrast + brightness < 0)){
 				if ((brightness > 255) || (255 * contrast + brightness > 255)){
-					return DoAdjustTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, true, false> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+					return DoAdjustTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 16, true, true> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
 				}
 				else{
 					return DoAdjustTemplate<quint8, quint8, iipr::CPixelManip::GrayCropAccum32<qint32, 23, true, false> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
@@ -156,6 +156,10 @@ bool CImageNormalizeProcessorComp::DoAdjustFilter(
 		case iimg::IBitmap::PF_RGB:
 		case iimg::IBitmap::PF_RGBA:
 			return DoAdjustTemplate<quint8, iipr::CPixelManip::Rgba, iipr::CPixelManip::RgbCropAccum32<qint32, 16, true, true> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
+
+			
+		case iimg::IBitmap::PF_RGB24:
+			return DoAdjustTemplate<uchar, iipr::CPixelManip::Rgb, iipr::CPixelManip::RgbCropAccum32<uchar, 0, true, true> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);
 
 		case iimg::IBitmap::PF_GRAY16:
 			return DoAdjustTemplate<quint8, quint16, iipr::CPixelManip::GrayCropAccum32<qint32, 8, true, false> >(contrast, brightness, backgroundMode, inputImage, resultMask, outputImage);

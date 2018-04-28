@@ -11,7 +11,9 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QMenu>
+#include <QtWidgets/QButtonGroup>
 #else
+#include <QtGui/QButtonGroup>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QSpacerItem>
