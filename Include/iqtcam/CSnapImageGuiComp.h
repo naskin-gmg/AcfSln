@@ -51,7 +51,7 @@ public:
 		I_ASSIGN(m_bitmapAcquisitionCompPtr, "BitmapAcquisition", "Bitmap acquision obje for image snap", false, "BitmapAcquisition");
 		I_ASSIGN(m_lookupTableCompPtr, "LookupTable", "Lookup table for pseudo colors in the image view", false, "LookupTable");
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves or loads bitmap to/from file", false, "BitmapLoader");
-		I_ASSIGN(m_allowBitmapLoadAttrPtr, "AllowBitmapLoad", "If true loading of images is allowed", true, false);
+		I_ASSIGN(m_allowBitmapLoadAttrPtr, "AllowBitmapLoad", "If true then loading of images is allowed", true, false);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -59,6 +59,7 @@ public:
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
+		I_ASSIGN(m_allowSnapOnChangeAttrPtr, "AllowSnapOnChange", "If true then shows action for snap on parameters changed", false, false);
 	I_END_COMPONENT;
 
 	CSnapImageGuiComp();
@@ -88,7 +89,6 @@ protected:
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiRetranslate();
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnGuiHidden();
@@ -123,14 +123,11 @@ private:
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
 	I_ATTR(double, m_liveIntervalAttrPtr);
+	I_ATTR(bool, m_allowSnapOnChangeAttrPtr);
 
 	QTimer m_timer;
 
 	ParamsObserver m_paramsObserver;
-
-	QAction m_intervalSnapAction;
-	QAction m_snapOnChangesAction;
-	QMenu m_snapButtonMenu;
 };
 
 
