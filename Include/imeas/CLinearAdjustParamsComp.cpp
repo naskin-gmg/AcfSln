@@ -103,6 +103,8 @@ imath::CVarVector CLinearAdjustParamsComp::GetValues() const
 
 bool CLinearAdjustParamsComp::SetValues(const imath::CVarVector& values)
 {
+	istd::CChangeNotifier notifier(this);
+
 	if (values.GetElementsCount() >= 1){
 		m_offset = values[0];
 	}
