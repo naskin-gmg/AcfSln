@@ -2,7 +2,7 @@
 
 
 // ACF-Solutions includes
-#include <icam/CSnapBitmapSupplierCompBase.h>
+#include <icam/CCameraSnapSupplierCompBase.h>
 
 
 namespace icam
@@ -14,12 +14,11 @@ namespace icam
 	Bitmap instance will be factorized using template argument
 */
 template<typename Bitmap>
-class TSnapBitmapSupplierComp: public CSnapBitmapSupplierCompBase
+class TSnapBitmapSupplierComp: public CCameraSnapSupplierCompBase
 {
 public:
 	typedef Bitmap BitmapType;
-
-	typedef CSnapBitmapSupplierCompBase BaseClass;
+	typedef CCameraSnapSupplierCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(TSnapBitmapSupplierComp);
 	I_END_COMPONENT;

@@ -2,15 +2,12 @@
 #define icam_CMultiSourceSnapBitmapSupplierComp_included
 
 
-// Qt includes
-#include <QtCore/QPair>
-
 // ACF includes
-#include <istd/TDelPtr.h>
-#include <iimg/IBitmapProvider.h>
 #include <iprm/IOptionsList.h>
-#include <iinsp/TSupplierCompWrap.h>
+
+// ACF-Solutions includes
 #include <icam/IBitmapAcquisition.h>
+#include <icam/CSnapBitmapSupplierCompBase.h>
 
 
 namespace icam
@@ -22,17 +19,12 @@ namespace icam
 	Multiple independent camera implementations can be registered and switched at runtime.
 	Each camera can store its parameters in the Parameter Manager accessed from the supplier's parameter set via 'CameraManagerParamId' attribute.
 */
-class CMultiSourceSnapBitmapSupplierComp:
-			public iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > >,
-			virtual public iimg::IBitmapProvider,
-			virtual public i2d::ICalibrationProvider
+class CMultiSourceSnapBitmapSupplierComp: public CSnapBitmapSupplierCompBase
 {
 public:
-	typedef iinsp::TSupplierCompWrap< QPair<istd::TDelPtr<const i2d::ICalibration2d>, istd::TDelPtr<iimg::IBitmap> > > BaseClass;
+	typedef CSnapBitmapSupplierCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CMultiSourceSnapBitmapSupplierComp);
-		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
-		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_REGISTER_SUBELEMENT(CameraList);
 		I_REGISTER_SUBELEMENT_INTERFACE(CameraList, iprm::IOptionsList, ExtractCameraList);
 		I_REGISTER_SUBELEMENT_INTERFACE(CameraList, istd::IChangeable, ExtractCameraList);
@@ -47,16 +39,13 @@ public:
 
 	CMultiSourceSnapBitmapSupplierComp();
 
-	// reimplemented (iimg::IBitmapProvider)
-	virtual const iimg::IBitmap* GetBitmap() const;
-
-	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
-
 protected:
+	// reimplemented (CSnapBitmapSupplierCompBase)
+	virtual iimg::IBitmap* CreateBitmap() const;
+	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const;
+
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
-	virtual int ProduceObject(ProductType& result) const;
 
 private:
 	class CameraList: virtual public iprm::IOptionsList

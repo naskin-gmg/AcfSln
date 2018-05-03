@@ -19,33 +19,39 @@ CMultiSourceSnapBitmapSupplierComp::CMultiSourceSnapBitmapSupplierComp()
 }
 
 
-// reimplemented (iimg::IBitmapProvider)
-
-const iimg::IBitmap* CMultiSourceSnapBitmapSupplierComp::GetBitmap() const
-{
-	const ProductType* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		return productPtr->second.GetPtr();
-	}
-
-	return NULL;
-}
-
-
-// reimplemented (i2d::ICalibrationProvider)
-
-const i2d::ICalibration2d* CMultiSourceSnapBitmapSupplierComp::GetCalibration() const
-{
-	const ProductType* productPtr = GetWorkProduct();
-	if (productPtr != NULL){
-		return productPtr->first.GetPtr();
-	}
-
-	return NULL;
-}
-
-
 // protected methods
+
+// reimplemented (CSnapBitmapSupplierCompBase)
+
+iimg::IBitmap* CMultiSourceSnapBitmapSupplierComp::CreateBitmap() const
+{
+	return m_bitmapCompFact.CreateInstance();
+}
+
+
+int CMultiSourceSnapBitmapSupplierComp::DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const
+{
+	int selectedCameraIndex = -1;
+	IBitmapAcquisition* cameraPtr = GetSelectedCamera(&selectedCameraIndex);
+	if (cameraPtr == NULL){
+		SendErrorMessage(0, "No camera was selected");
+
+		return iproc::IProcessor::TS_INVALID;
+	}
+
+	iprm::TParamsPtr<iprm::IParamsManager> cameraParamsManagerPtr(snapParamsPtr, *m_cameraManagerParamIdAttrPtr);
+	if (cameraParamsManagerPtr.IsValid()){
+		const iprm::IParamsSet* cameraParamsPtr = NULL;
+		if ((selectedCameraIndex >= 0) && (selectedCameraIndex < cameraParamsManagerPtr->GetParamsSetsCount())){
+			cameraParamsPtr = cameraParamsManagerPtr->GetParamsSet(selectedCameraIndex);
+		}
+
+		return cameraPtr->DoProcessing(cameraParamsPtr, NULL, &snapBitmap);
+	}
+
+	return iproc::IProcessor::TS_INVALID;
+}
+
 
 // reimplemented (iinsp::TSupplierCompWrap)
 
@@ -59,61 +65,6 @@ bool CMultiSourceSnapBitmapSupplierComp::InitializeWork()
 	}
 
 	return false;
-}
-
-
-int CMultiSourceSnapBitmapSupplierComp::ProduceObject(ProductType& result) const
-{
-	result.first.Reset();
-
-	if (!m_bitmapCompFact.IsValid()){
-		SendCriticalMessage(0, "Bad component architecture, 'BitmapFactory' component reference is not set");
-
-		return WS_FAILED;
-	}
-
-	int selectedCameraIndex = -1;
-	IBitmapAcquisition* cameraPtr = GetSelectedCamera(&selectedCameraIndex);
-	if (cameraPtr == NULL){
-		SendErrorMessage(0, "No camera was selected");
-
-		return WS_FAILED;
-	}
-
-	if (!result.second.IsValid()){
-		result.second.SetPtr(m_bitmapCompFact.CreateInstance());
-		if (!result.second.IsValid()){
-			SendErrorMessage(0, "Bitmap instance could not be created");
-
-			return WS_FAILED;
-		}
-	}
-
-	if (result.second.IsValid()){
-		Timer performanceTimer(this, "Image acquisition");
-
-		iprm::TParamsPtr<iprm::IParamsManager> cameraParamsManagerPtr(GetModelParametersSet(), *m_cameraManagerParamIdAttrPtr);
-		if (cameraParamsManagerPtr.IsValid()){
-			const iprm::IParamsSet* cameraParamsPtr = NULL;
-			if ((selectedCameraIndex >= 0) && (selectedCameraIndex < cameraParamsManagerPtr->GetParamsSetsCount())){
-				cameraParamsPtr = cameraParamsManagerPtr->GetParamsSet(selectedCameraIndex);
-			}
-
-			int status = cameraPtr->DoProcessing(cameraParamsPtr, NULL, result.second.GetPtr());
-			switch (status){
-				case iproc::IProcessor::TS_OK:
-					return WS_OK;
-
-				case iproc::IProcessor::TS_CANCELED:
-					return WS_CANCELED;
-
-				default:
-					return WS_FAILED;
-			}
-		}
-	}
-
-	return WS_FAILED;
 }
 
 
