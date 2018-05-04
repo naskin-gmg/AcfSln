@@ -17,7 +17,7 @@ const i2d::ICalibration2d* CProcessedBitmapSupplierBase::GetCalibration() const
 {
 	const ProductType* productPtr = GetWorkProduct();
 	if (productPtr != NULL){
-		// If exists, provide the calibration filled by underlaying processor:s
+		// If exists, provide the calibration filled by underlaying processor:
 		if (m_outputBitmapCalibrationCompPtr.IsValid()){
 			return m_outputBitmapCalibrationCompPtr.GetPtr();
 		}
