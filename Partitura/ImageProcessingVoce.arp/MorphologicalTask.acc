@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4640" Description="ACF"/>
-            <Version Id="1" Number="1949" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4685" Description="ACF"/>
+            <Version Id="1" Number="1977" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="329986" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>General morphological task</Description>
@@ -36,7 +36,7 @@
                     <AttributeInfo Id="Values" Type="Real[]" ExportId="DefaultFilterValues">
                         <Data IsEnabled="true">
                             <Values>
-                                <Value>3</Value>
+                                <Value>1</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -80,10 +80,10 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="MaxValue" Type="Real" ExportId="MaxFilterSize">
-                        <Data IsEnabled="true" Value="100"/>
+                        <Data IsEnabled="true" Value="150"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MinValue" Type="Real" ExportId="MinFilterSize">
-                        <Data IsEnabled="true" Value="3"/>
+                        <Data IsEnabled="true" Value="1"/>
                     </AttributeInfo>
                     <AttributeInfo Id="Precision" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="0"/>
