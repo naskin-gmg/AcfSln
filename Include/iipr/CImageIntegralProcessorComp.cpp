@@ -133,11 +133,12 @@ bool DoIntegralInPlace(iimg::IBitmap& outputImage)
 	}
 
 	PixelType* prevLinePtr = (PixelType*)outputImage.GetLinePtr(0);
-	PixelType lineSum = 0;
-	for (int x = 0; x < imageSize.GetX(); ++x){
-		lineSum += prevLinePtr[x];
 
-		prevLinePtr[x] = lineSum;
+	PixelType firstLineSum = 0;
+	for (int x = 0; x < imageSize.GetX(); ++x){
+		firstLineSum += prevLinePtr[x];
+
+		prevLinePtr[x] = firstLineSum;
 	}
 
 	for (int y = 1; y < imageSize.GetY(); ++y){

@@ -124,8 +124,6 @@ void CEdgeLine::CopyFromPolyline(const i2d::CPolyline& polyline, double weight, 
 
 	m_isClosed = polyline.IsClosed();
 
-	i2d::CVector2d position;
-
 	// copy, transform and remove the consequent duplicates
 	if (transformPtr != NULL){
 		i2d::CVector2d prevPosition = transformPtr->GetApply(polyline.GetNodePos(size - 1));

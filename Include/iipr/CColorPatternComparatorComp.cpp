@@ -11,7 +11,6 @@
 #include <icmm/CRgb.h>
 
 // ACF-Solutions includes
-#include <iipr/CColorPatternComparatorComp.h>
 #include <iipr/IPatternController.h>
 
 

@@ -42,8 +42,8 @@ bool ProjectionFunction(
 	i2d::CVector2d beginPoint = clippedLine.GetPoint1();
 	Q_ASSERT(delta.GetX() >= 0);
 
-	int axis1Begin = int(beginPoint.GetX() + I_BIG_EPSILON);
-	int axis1End = int(beginPoint.GetX() + delta.GetX() - I_BIG_EPSILON) + 1;
+	int axis1Begin = int(beginPoint.GetX());
+	int axis1End = int(beginPoint.GetX() + delta.GetX());
 	Q_ASSERT(axis1Begin <= axis1End);
 	Q_ASSERT(axis1Begin >= 0);
 	Q_ASSERT(axis1End <= axisSizes[0]);
@@ -72,7 +72,7 @@ bool ProjectionFunction(
 		}
 
 		double axis2Delta = delta.GetX() ? delta.GetY() / delta.GetX() : 0;
-		double axis2Position = axis2Delta * (axis1Begin - beginPoint.GetX() + 0.5) + beginPoint.GetY() + 0.5;
+		double axis2Position = axis2Delta * (axis1Begin - beginPoint.GetX()) + beginPoint.GetY();
 
 		int sampleIndex = 0;
 		for (int axis1Index = axis1Begin; axis1Index < axis1End; ++axis1Index, axis2Position += axis2Delta, ++sampleIndex){
@@ -86,7 +86,7 @@ bool ProjectionFunction(
 			}
 			else{
 				if (axis2Index >= axisSizes[1]){
-					int axis2Offset = (axisSizes[1] - 1) * addressDiffs[1];
+					int axis2Offset = (axisSizes[1]) * addressDiffs[1];
 					value = conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(firstLinePixelAddress + axis2Offset));
 				}
 				else{
@@ -96,9 +96,16 @@ bool ProjectionFunction(
 
 					int axis2Offset = axis2Index * addressDiffs[1];
 					const quint8* pixelPtr = (firstLinePixelAddress + axis2Offset);
-					value =	typename PixelConversion::CalcPixelType(
-								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr)) * alpha +
-								conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr - addressDiffs[1])) * (1 - alpha));
+					if (alpha < 0.5){
+						value =	typename PixelConversion::CalcPixelType(
+									conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr)) * alpha +
+									conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr - addressDiffs[1])) * (1.0 - alpha));
+					}
+					else{
+						value =	typename PixelConversion::CalcPixelType(
+									conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr + addressDiffs[1])) * alpha +
+									conversion.GetCalc(*(const typename PixelConversion::SourcePixelType*)(pixelPtr)) * (1.0 - alpha));
+					}
 				}
 			}
 
