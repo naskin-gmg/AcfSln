@@ -30,6 +30,7 @@ public:
 		I_ASSIGN(m_defaultDistortionFactorAttrPtr, "DefaultDistortionFactor", "Default value of lens distortion factor", true, 0);
 		I_ASSIGN(m_defaultOpticalCenterXAttrPtr, "DefaultOpticalCenterX", "Default value of lens optical center X", true, 0);
 		I_ASSIGN(m_defaultOpticalCenterYAttrPtr, "DefaultOpticalCenterY", "Default value of lens optical center Y", true, 0);
+		I_ASSIGN(m_doDistortionOnlyAttrPtr, "DoDistortionOnly", "If this is true the optical center moved in order to its value, else the optical center has (0, 0) coord and result vector translates to optical center", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -40,6 +41,7 @@ private:
 	I_ATTR(double, m_defaultDistortionFactorAttrPtr);
 	I_ATTR(double, m_defaultOpticalCenterXAttrPtr);
 	I_ATTR(double, m_defaultOpticalCenterYAttrPtr);
+	I_ATTR(bool, m_doDistortionOnlyAttrPtr);
 };
 
 
