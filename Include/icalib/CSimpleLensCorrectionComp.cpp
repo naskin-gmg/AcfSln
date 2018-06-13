@@ -15,7 +15,6 @@ void CSimpleLensCorrectionComp::OnComponentCreated()
 
 	SetDistortionFactor(*m_defaultDistortionFactorAttrPtr);
 	SetOpticalCenter(i2d::CVector2d(*m_defaultOpticalCenterXAttrPtr, *m_defaultOpticalCenterYAttrPtr));
-	SetDoDistortionOnly(*m_doDistortionOnlyAttrPtr);
 }
 
 

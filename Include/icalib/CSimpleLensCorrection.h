@@ -18,12 +18,12 @@ class CSimpleLensCorrection: virtual public i2d::ICalibration2d
 {
 public:
 	CSimpleLensCorrection();
-	explicit CSimpleLensCorrection(const i2d::CVector2d& opticalCenter, double distortionFactor = 0, double scaleFactor = 1, bool movableOpticalCenter = false);
+	explicit CSimpleLensCorrection(const i2d::CVector2d& opticalCenter, double distortionFactor = 0, double scaleFactor = 1);
 
 	/**
 		Reset this calibration, set to be identity transform.
 	*/
-	void Reset(const i2d::CVector2d& opticalCenter = i2d::CVector2d::GetZero(), double distortionFactor = 0, double scaleFactor = 1, bool movableOpticalCenter = false);
+	void Reset(const i2d::CVector2d& opticalCenter = i2d::CVector2d::GetZero(), double distortionFactor = 0, double scaleFactor = 1);
 
 	const i2d::CVector2d& GetOpticalCenter() const;
 	virtual void SetOpticalCenter(const i2d::CVector2d& center);
@@ -33,9 +33,6 @@ public:
 
 	double GetScaleFactor() const;
 	virtual void SetScaleFactor(double factor);
-
-	bool GetDoDistortionOnly() const;
-	virtual void SetDoDistortionOnly(bool value);
 
 	bool operator==(const CSimpleLensCorrection& calib) const;
 	bool operator!=(const CSimpleLensCorrection& calib) const;
@@ -94,10 +91,6 @@ private:
 
 	double m_distortionFactor;
 	double m_scaleFactor;
-	
-	// if this is true the optical center moved in order to its value
-	// if false then the optical center has (0, 0) coord and result vector translates to m_opticalCenter.
-	bool m_doDistortionOnly;  
 };
 
 
