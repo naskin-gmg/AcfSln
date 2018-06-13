@@ -4,6 +4,7 @@
 // ACF includes
 #include <istd/CChangeNotifier.h>
 #include <i2d/CAffine2d.h>
+#include <iipr/iipr.h>
 
 
 namespace icalib
@@ -355,7 +356,7 @@ bool CSimpleLensCorrection::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(s_opticalCenterTag);
 
 	quint32 versionNumber = 0;
-	bool isOldFormat = archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber) && (versionNumber < 1986);
+	bool isOldFormat = archive.GetVersionInfo().GetVersionNumber(iipr::AcfSlnVersionId, versionNumber) && (versionNumber < 1986);
 
 	if (!isOldFormat){
 		retVal = retVal && archive.BeginTag(s_movableOpticalCenterTag);
