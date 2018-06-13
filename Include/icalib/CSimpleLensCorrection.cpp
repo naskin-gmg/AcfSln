@@ -200,9 +200,7 @@ bool CSimpleLensCorrection::GetPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d vec = m_doDistortionOnly ? 
-		origPosition - m_opticalCenter
-		: origPosition;
+	i2d::CVector2d vec = m_doDistortionOnly? origPosition - m_opticalCenter: origPosition;
 
 	double distance = vec.GetLength();
 	if (distance * 2 * m_distortionFactor * m_scaleFactor < -m_scaleFactor){
@@ -222,9 +220,7 @@ bool CSimpleLensCorrection::GetInvPositionAt(
 			i2d::CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = m_doDistortionOnly ? 
-		(transfPosition - m_opticalCenter) / m_scaleFactor 
-		: transfPosition / m_scaleFactor;
+	i2d::CVector2d normPos = m_doDistortionOnly? (transfPosition - m_opticalCenter) / m_scaleFactor: transfPosition / m_scaleFactor;
 
 	double distance = normPos.GetLength();
 
@@ -253,8 +249,7 @@ bool CSimpleLensCorrection::GetLocalTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d vec = m_doDistortionOnly ? 
-		origPosition - m_opticalCenter
+	i2d::CVector2d vec = m_doDistortionOnly? origPosition - m_opticalCenter
 		: origPosition;
 
 	double distance = vec.GetLength();
@@ -276,9 +271,7 @@ bool CSimpleLensCorrection::GetLocalInvTransform(
 			i2d::CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	i2d::CVector2d normPos = m_doDistortionOnly ? 
-		(transfPosition - m_opticalCenter) / m_scaleFactor 
-		: transfPosition / m_scaleFactor;
+	i2d::CVector2d normPos = m_doDistortionOnly? (transfPosition - m_opticalCenter) / m_scaleFactor: transfPosition / m_scaleFactor;
 
 	double distance = normPos.GetLength();
 
@@ -361,9 +354,17 @@ bool CSimpleLensCorrection::Serialize(iser::IArchive& archive)
 	retVal = retVal && m_opticalCenter.Serialize(archive);
 	retVal = retVal && archive.EndTag(s_opticalCenterTag);
 
-	retVal = retVal && archive.BeginTag(s_movableOpticalCenterTag);
-	retVal = retVal && archive.Process(m_doDistortionOnly);
-	retVal = retVal && archive.EndTag(s_movableOpticalCenterTag);
+	quint32 versionNumber = 0;
+	bool isOldFormat = archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber) && (versionNumber < 1986);
+
+	if (!isOldFormat){
+		retVal = retVal && archive.BeginTag(s_movableOpticalCenterTag);
+		retVal = retVal && archive.Process(m_doDistortionOnly);
+		retVal = retVal && archive.EndTag(s_movableOpticalCenterTag);
+	}
+	else if (!isStoring){
+		m_doDistortionOnly = false;
+	}
 
 	return retVal;
 }
