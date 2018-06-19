@@ -20,11 +20,29 @@ namespace iipr
 class CPerspCalibFinder: public istd::IPolymorphic
 {
 public:
+	/**
+		It allows to find perspective calibration factors.
+	*/
 	virtual bool FindPerspCalib(
 				const i2d::CVector2d* nominalPositionsPtr,
 				const i2d::CVector2d* foundPositionsPtr,
 				int positionsCount,
-				icalib::CPerspectiveCalibration2d& results,
+				icalib::CPerspectiveCalibration2d& result,
+				bool allowPerspective = true,
+				bool allowRotation = true,
+				bool allowScale = true,
+				bool allowAnisotropic = true,
+				bool allowTranslation = true) const;
+	/**
+		It allows to find perspective calibration factors with lens correction factor.
+	*/
+	virtual bool FindPerspCalibWithCorrection(
+				const i2d::CVector2d* nominalPositionsPtr,
+				const i2d::CVector2d* foundPositionsPtr,
+				int positionsCount,
+				const i2d::CVector2d& opticalCenter,
+				icalib::CPerspectiveCalibration2d& result,
+				double& lensCorrFactor,
 				bool allowPerspective = true,
 				bool allowRotation = true,
 				bool allowScale = true,

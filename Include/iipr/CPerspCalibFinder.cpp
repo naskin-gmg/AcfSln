@@ -281,6 +281,281 @@ bool CPerspCalibFinder::FindPerspCalib(
 }
 
 
+bool CPerspCalibFinder::FindPerspCalibWithCorrection(
+			const i2d::CVector2d* nominalPositionsPtr,
+			const i2d::CVector2d* foundPositionsPtr,
+			int positionsCount,
+			const i2d::CVector2d& opticalCenter,
+			icalib::CPerspectiveCalibration2d& result,
+			double& lensCorrFactor,
+			bool allowPerspective,
+			bool allowRotation,
+			bool allowScale,
+			bool allowAnisotropic,
+			bool allowTranslation) const
+{
+	lensCorrFactor = 0;
+
+	if (allowPerspective && allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 5)){	// try perspective transformation
+		imath::CVarMatrix A(istd::CIndex2d(9, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(5, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(6, i * 2 + 0), -nomPos.GetX() * foundPos.GetX());
+			A.SetAt(istd::CIndex2d(7, i * 2 + 0), -nomPos.GetY() * foundPos.GetX());
+			A.SetAt(istd::CIndex2d(8, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 1), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(4, i * 2 + 1), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(5, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(6, i * 2 + 1), -nomPos.GetX() * foundPos.GetY());
+			A.SetAt(istd::CIndex2d(7, i * 2 + 1), -nomPos.GetY() * foundPos.GetY());
+			A.SetAt(istd::CIndex2d(8, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 9));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CMatrix2d rotationMatrix(
+						res.GetAt(istd::CIndex2d(0, 0)), res.GetAt(istd::CIndex2d(0, 3)),
+						res.GetAt(istd::CIndex2d(0, 1)), res.GetAt(istd::CIndex2d(0, 4)));
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 5)));
+			i2d::CVector2d perspective(res.GetAt(istd::CIndex2d(0, 6)), res.GetAt(istd::CIndex2d(0, 7)));
+
+			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
+			result.SetPerspAxis(perspective);
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 8));
+
+			return true;
+		}
+	}
+
+	if (allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 4)){	// try affine transformation
+		imath::CVarMatrix A(istd::CIndex2d(7, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(5, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(6, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 1), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(4, i * 2 + 1), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(5, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(6, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 7));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CMatrix2d rotationMatrix(
+						res.GetAt(istd::CIndex2d(0, 0)), res.GetAt(istd::CIndex2d(0, 3)),
+						res.GetAt(istd::CIndex2d(0, 1)), res.GetAt(istd::CIndex2d(0, 4)));
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 5)));
+
+			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
+			result.SetPerspAxis(i2d::CVector2d::GetZero());
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 6));
+
+			return true;
+		}
+	}
+
+	if (allowRotation && allowScale && allowTranslation && (positionsCount >= 3)){	// try affine transformation
+		imath::CVarMatrix A(istd::CIndex2d(5, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), -nomPos.GetY());
+			A.SetAt(istd::CIndex2d(3, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(3, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 5));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CMatrix2d rotationMatrix(
+						res.GetAt(istd::CIndex2d(0, 0)), -res.GetAt(istd::CIndex2d(0, 2)),
+						res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 0)));
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 1)), res.GetAt(istd::CIndex2d(0, 3)));
+
+			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
+			result.SetPerspAxis(i2d::CVector2d::GetZero());
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 4));
+
+			return true;
+		}
+	}
+
+	if (allowScale && allowTranslation && allowAnisotropic && (positionsCount >= 3)){	// try anisotropic scaling transformation
+		imath::CVarMatrix A(istd::CIndex2d(5, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(4, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 5));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CMatrix2d rotationMatrix(
+						res.GetAt(istd::CIndex2d(0, 0)), 0,
+						0, res.GetAt(istd::CIndex2d(0, 1)));
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 3)));
+
+			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
+			result.SetPerspAxis(i2d::CVector2d::GetZero());
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 4));
+
+			return true;
+		}
+	}
+
+	if (allowScale && allowTranslation && (positionsCount >= 3)){	// try isotropic scaling transformation
+		imath::CVarMatrix A(istd::CIndex2d(4, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), nomPos.GetX());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), nomPos.GetY());
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(3, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 4));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CMatrix2d rotationMatrix(
+						res.GetAt(istd::CIndex2d(0, 0)), 0,
+						0, res.GetAt(istd::CIndex2d(0, 0)));
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 1)), res.GetAt(istd::CIndex2d(0, 2)));
+
+			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
+			result.SetPerspAxis(i2d::CVector2d::GetZero());
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 3));
+
+			return true;
+		}
+	}
+
+	if (allowTranslation && (positionsCount >= 2)){	// try translation function
+		imath::CVarMatrix A(istd::CIndex2d(3, positionsCount * 2));
+		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
+
+		for (int i = 0; i < positionsCount; ++i){
+			const i2d::CVector2d& nomPos = nominalPositionsPtr[i];
+			const i2d::CVector2d& foundPos = foundPositionsPtr[i];
+
+			i2d::CVector2d foundDiffVector = foundPos - opticalCenter;
+			double foundDist = foundDiffVector.GetLength();
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 0), 1);
+			A.SetAt(istd::CIndex2d(1, i * 2 + 0), 0);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 0), foundDiffVector.GetX() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 0), foundPos.GetX());
+
+			A.SetAt(istd::CIndex2d(0, i * 2 + 1), 0);
+			A.SetAt(istd::CIndex2d(1, i * 2 + 1), 1);
+			A.SetAt(istd::CIndex2d(2, i * 2 + 1), foundDiffVector.GetY() * foundDist);
+			x.SetAt(istd::CIndex2d(0, i * 2 + 1), foundPos.GetY());
+		}
+
+		imath::CVarMatrix res(istd::CIndex2d(1, 3));
+		if (A.GetSolvedLSP(x, res)){
+			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 0)), res.GetAt(istd::CIndex2d(0, 1)));
+
+			result.SetAffinePart(i2d::CAffine2d(i2d::CMatrix2d::GetIdentity(), translation));
+			result.SetPerspAxis(i2d::CVector2d::GetZero());
+
+			lensCorrFactor = res.GetAt(istd::CIndex2d(0, 2));
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 } // namespace iipr
 
 
