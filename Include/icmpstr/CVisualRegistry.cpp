@@ -80,9 +80,6 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 		}
 	}
 	else{
-		istd::CChangeNotifier notifier(this);
-		Q_UNUSED(notifier);
-
 		for (int i = 0; i < positionsCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 			
