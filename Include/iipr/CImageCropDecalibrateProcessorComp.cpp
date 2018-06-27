@@ -227,6 +227,7 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 			int cellSize,
 			const iimg::IBitmap& inputBitmap,
 			iimg::IBitmap& outputBitmap,
+			istd::CIndex2d* outputImageSizePtr,
 			int interpolationMode,
 			int orientationMode,
 			ilog::IMessageConsumer* resultConsumerPtr)
@@ -236,8 +237,13 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 	}
 
 	istd::CIndex2d outputImageSize;
-	if (!CalcOutputImageSize(sourceAoi, outputImageSize)){
-		return false;
+	if (outputImageSizePtr != NULL){
+		outputImageSize = *outputImageSizePtr;
+	}
+	else{
+		if (!CalcOutputImageSize(sourceAoi, outputImageSize)){
+			return false;
+		}
 	}
 
 	iimg::IBitmap::PixelFormat pixelFormat = inputBitmap.GetPixelFormat();
@@ -351,11 +357,17 @@ bool CImageCropDecalibrateProcessorComp::CropImage(
 bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 			const i2d::CRectangle& sourceAoi,
 			icalib::CAffineCalibration2d& outputCalib,
+			istd::CIndex2d* outputImageSizePtr,
 			int orientationMode)
 {
 	istd::CIndex2d outputImageSize;
-	if (!CalcOutputImageSize(sourceAoi, outputImageSize)){
-		return false;
+	if (outputImageSizePtr != NULL){
+		outputImageSize = *outputImageSizePtr;
+	}
+	else{
+		if (!CalcOutputImageSize(sourceAoi, outputImageSize)){
+			return false;
+		}
 	}
 
 	double scaleX = outputImageSize.GetX() / sourceAoi.GetWidth();
@@ -433,7 +445,7 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 	if (outputBitmapPtr == NULL){
 		icalib::CAffineCalibration2d* outputCalibPtr = dynamic_cast<icalib::CAffineCalibration2d*>(outputPtr);
 		if (outputCalibPtr != NULL){
-			return CalcCalibration(*aoiParamPtr, *outputCalibPtr, orientationMode)? TS_OK: TS_INVALID;
+			return CalcCalibration(*aoiParamPtr, *outputCalibPtr, NULL, orientationMode)? TS_OK: TS_INVALID;
 		}
 
 		return TS_INVALID;
@@ -455,6 +467,7 @@ int CImageCropDecalibrateProcessorComp::DoProcessing(
 				*m_cellSizeAttrPtr,
 				*inputBitmapPtr,
 				*outputBitmapPtr,
+				NULL,
 				interpolationMode,
 				orientationMode,
 				GetLogPtr())? TS_OK: TS_INVALID;
