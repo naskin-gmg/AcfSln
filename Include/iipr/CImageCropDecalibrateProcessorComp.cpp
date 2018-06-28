@@ -71,22 +71,27 @@ bool DoCropImageTemplate(
 				continue;
 			}
 
+			int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+			int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
+
 			if (		inputPosRectangle.Contains(posLeftTop) &&
 						inputPosRectangle.Contains(posRightTop) &&
 						inputPosRectangle.Contains(posLeftBottom) &&
 						inputPosRectangle.Contains(posRightBottom)){
-				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
-
 				if (useLinearInterpolation){
 					for (int y = 0; y < maxY; ++y){
 						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
-						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+						double bottomFactor = y + 0.5;
+						double topFactor = cellSize - bottomFactor;
 
-						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						i2d::CVector2d normPosLeft = (posLeftTop * topFactor + posLeftBottom * bottomFactor) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * topFactor + posRightBottom * bottomFactor) / (cellSize * cellSize);
+
 						for (int x = 0; x < maxX; ++x){
-							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+							double rightFactor = x + 0.5;
+							double leftFactor = cellSize - rightFactor;
+							i2d::CVector2d sourcePos = normPosLeft * leftFactor + normPosRight * rightFactor;
 
 							int sourceX = int(sourcePos.GetX());
 							double alphaX = sourcePos.GetX() - sourceX;
@@ -119,12 +124,16 @@ bool DoCropImageTemplate(
 					for (int y = 0; y < maxY; ++y){
 						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
-						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+						double bottomFactor = y + 0.5;
+						double topFactor = cellSize - bottomFactor;
 
-						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						i2d::CVector2d normPosLeft = (posLeftTop * topFactor + posLeftBottom * bottomFactor) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * topFactor + posRightBottom * bottomFactor) / (cellSize * cellSize);
+
 						for (int x = 0; x < maxX; ++x){
-							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+							double rightFactor = x + 0.5;
+							double leftFactor = cellSize - rightFactor;
+							i2d::CVector2d sourcePos = normPosLeft * leftFactor + normPosRight * rightFactor;
 
 							int sourceX = int(sourcePos.GetX() + 0.5);
 							int sourceY = int(sourcePos.GetY() + 0.5);
@@ -135,18 +144,20 @@ bool DoCropImageTemplate(
 				}
 			}
 			else{
-				int maxY = qMin(cellSize, outputImageSize.GetY() - gridIndex[1] * cellSize);
-
 				if (useLinearInterpolation){
 					for (int y = 0; y < maxY; ++y){
 						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
-						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+						double bottomFactor = y + 0.5;
+						double topFactor = cellSize - bottomFactor;
 
-						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						i2d::CVector2d normPosLeft = (posLeftTop * topFactor + posLeftBottom * bottomFactor) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * topFactor + posRightBottom * bottomFactor) / (cellSize * cellSize);
+
 						for (int x = 0; x < maxX; ++x){
-							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+							double rightFactor = x + 0.5;
+							double leftFactor = cellSize - rightFactor;
+							i2d::CVector2d sourcePos = normPosLeft * leftFactor + normPosRight * rightFactor;
 
 							if (inputPosRectangle.Contains(sourcePos)){
 								int sourceX = int(sourcePos.GetX());
@@ -184,12 +195,16 @@ bool DoCropImageTemplate(
 					for (int y = 0; y < maxY; ++y){
 						PixelType* destLinePtr = (PixelType*)((quint8*)(destBufferPtr + gridIndex[0] * cellSize) + (gridIndex[1] * cellSize + y) * destLineDiff);
 
-						i2d::CVector2d normPosLeft = (posLeftTop * (cellSize - y) + posLeftBottom * y) / (cellSize * cellSize);
-						i2d::CVector2d normPosRight = (posRightTop * (cellSize - y) + posRightBottom * y) / (cellSize * cellSize);
+						double bottomFactor = y + 0.5;
+						double topFactor = cellSize - bottomFactor;
 
-						int maxX = qMin(cellSize, outputImageSize.GetX() - gridIndex[0] * cellSize);
+						i2d::CVector2d normPosLeft = (posLeftTop * topFactor + posLeftBottom * bottomFactor) / (cellSize * cellSize);
+						i2d::CVector2d normPosRight = (posRightTop * topFactor + posRightBottom * bottomFactor) / (cellSize * cellSize);
+
 						for (int x = 0; x < maxX; ++x){
-							i2d::CVector2d sourcePos = normPosLeft * (cellSize - x) + normPosRight * x;
+							double rightFactor = x + 0.5;
+							double leftFactor = cellSize - rightFactor;
+							i2d::CVector2d sourcePos = normPosLeft * leftFactor + normPosRight * rightFactor;
 
 							if (inputPosRectangle.Contains(sourcePos)){
 								int sourceX = int(sourcePos.GetX() + 0.5);
