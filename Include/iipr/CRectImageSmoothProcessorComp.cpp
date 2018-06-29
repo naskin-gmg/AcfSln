@@ -255,7 +255,7 @@ bool CRectImageSmoothProcessorComp::DoRectFilterHorizontal(
 			return DoSimpleFilterHor<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
 
 		case iimg::IBitmap::PF_RGB:
-			return DoSimpleFilterHor<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+			return DoSimpleFilterHor<CPixelManip::Rgba, CPixelManip::Rgba, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
 
 		case iimg::IBitmap::PF_GRAY16:
 			return DoSimpleFilterHor<CPixelManip::Rgba, quint16, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterWidth, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
@@ -385,7 +385,7 @@ bool CRectImageSmoothProcessorComp::DoRectFilterVertical(
 			return DoSimpleFilterVer<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
 
 		case iimg::IBitmap::PF_RGB:
-			return DoSimpleFilterVer<CPixelManip::Rgba, quint8, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
+			return DoSimpleFilterVer<CPixelManip::Rgba, CPixelManip::Rgba, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
 
 		case iimg::IBitmap::PF_GRAY16:
 			return DoSimpleFilterVer<CPixelManip::Rgba, quint16, CPixelManip::RgbCropAccum32<quint32, 0, false, true>, qint32>(qMax(filterHeight, 1), outputPixelFormat, inputBitmap, outputBitmap, borderMode);
