@@ -220,22 +220,18 @@ public:
 			return *this;
 		}
 
-		GrayCropAccum32 operator/(int value)
+		GrayCropAccum32& operator/=(int value)
 		{
-			GrayCropAccum32 retVal;
+			m_gray = m_gray / value;
 
-			retVal.m_gray = m_gray / value;
-
-			return retVal;
+			return *this;
 		}
 
-		GrayCropAccum32 operator/(double value)
+		GrayCropAccum32& operator/=(double value)
 		{
-			GrayCropAccum32 retVal;
+			m_gray = IntType(m_gray / value);
 
-			retVal.m_gray = IntType(m_gray / value);
-
-			return retVal;
+			return *this;
 		}
 
 		operator quint8()
@@ -496,26 +492,22 @@ public:
 			return *this;
 		}
 
-		RgbCropAccum32 operator/(int value)
+		RgbCropAccum32& operator/=(int value)
 		{
-			RgbCropAccum32 retVal;
+			m_r = m_r / value;
+			m_g = m_g / value;
+			m_b = m_b / value;
 
-			retVal.m_r = m_r / value;
-			retVal.m_g = m_g / value;
-			retVal.m_b = m_b / value;
-
-			return retVal;
+			return *this;
 		}
 
-		RgbCropAccum32 operator/(double value)
+		RgbCropAccum32& operator/=(double value)
 		{
-			RgbCropAccum32 retVal;
+			m_r = IntType(m_r / value);
+			m_g = IntType(m_g / value);
+			m_b = IntType(m_b / value);
 
-			retVal.m_r = IntType(m_r / value);
-			retVal.m_g = IntType(m_g / value);
-			retVal.m_b = IntType(m_b / value);
-
-			return retVal;
+			return *this;
 		}
 
 		operator quint8()
@@ -813,14 +805,14 @@ public:
 			return *this;
 		}
 
-		RgbaCropAccum32 operator/(int value)
+		RgbaCropAccum32& operator/=(int value)
 		{
 			BaseClass::operator/=(value);
 
 			return *this;
 		}
 
-		RgbaCropAccum32 operator/(double value)
+		RgbaCropAccum32& operator/=(double value)
 		{
 			BaseClass::operator/=(value);
 
