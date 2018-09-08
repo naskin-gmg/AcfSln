@@ -22,6 +22,7 @@
 #include <iinsp/ISupplier.h>
 #include <iqtgui/IGuiObject.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
+#include <iview/CCalibratedViewBase.h>
 #include <iqt2d/TViewExtenderCompBase.h>
 
 // ACF-Solutions includes

@@ -98,10 +98,10 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 				}
 				else{
 					if (scale != i2d::CVector2d(1, 1)){
-						icalib::CAffineCalibration2d* calibrationPtr = new imod::TModelWrap<icalib::CAffineCalibration2d>();
-						calibrationPtr->Reset(center, 0, scale);
+						icalib::CAffineCalibration2d* affineCalibrationPtr = new imod::TModelWrap<icalib::CAffineCalibration2d>();
+						affineCalibrationPtr->Reset(center, 0, scale);
 
-						result.first.SetPtr(calibrationPtr);
+						result.first.SetPtr(affineCalibrationPtr);
 					}
 					else{
 						result.first.Reset();

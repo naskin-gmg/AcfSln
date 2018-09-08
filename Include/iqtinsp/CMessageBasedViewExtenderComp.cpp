@@ -41,8 +41,8 @@ void CMessageBasedViewExtenderComp::AddItemsToScene(iqt2d::IViewProvider* provid
 		const ilog::CExtMessage* extMessagePtr = dynamic_cast<const ilog::CExtMessage*>(messagePtr.GetPtr());
 		if (extMessagePtr != NULL){
 			int objectsCount = extMessagePtr->GetAttachedObjectsCount();
-			for (int i = 0; i < objectsCount; ++i){
-				const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(i);
+			for (int objectIndex = 0; objectIndex < objectsCount; ++objectIndex){
+				const iser::IObject* attachedObjectPtr = extMessagePtr->GetAttachedObject(objectIndex);
 				ShapePtr shapePtr(CreateResultShape(m_resultShapeFactoryCompPtr.GetPtr(), attachedObjectPtr, extMessagePtr, true));
 				if (shapePtr.IsValid()){
 					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr.GetPtr());

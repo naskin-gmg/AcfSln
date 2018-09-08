@@ -13,6 +13,7 @@
 #endif
 
 // ACF includes
+#include <iview/CViewBase.h>
 #include <iview/CImageShape.h>
 
 
