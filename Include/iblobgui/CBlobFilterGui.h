@@ -2,7 +2,7 @@
 #define iblobgui_CBlobFilterGui_included
 
 
-// QSF includes
+
 #include <iblob/IBlobFilterParams.h>
 
 #include <GeneratedFiles/iblobgui/ui_CBlobFilterGui.h>

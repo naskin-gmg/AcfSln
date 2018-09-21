@@ -15,6 +15,9 @@ iauth.file = ../../Include/iauth/QMake/iauth.pro
 SUBDIRS += ibarcode
 ibarcode.file = ../../Include/ibarcode/QMake/ibarcode.pro
 
+SUBDIRS += icomm
+icomm.file = ../../Include/icomm/QMake/icomm.pro
+
 SUBDIRS += ihotf
 ihotf.file = ../../Include/ihotf/QMake/ihotf.pro
 
@@ -139,6 +142,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	SUBDIRS += CalibrationPck
 	CalibrationPck.file = ../../Impl/CalibrationPck/QMake/CalibrationPck.pro
 	CalibrationPck.depends = icalib
+
+	SUBDIRS += CommunicationPck
+	CommunicationPck.file = ../../Impl/CommunicationPck/QMake/CommunicationPck.pro
+	CommunicationPck.depends = icomm
 
 	SUBDIRS += EdgePck
 	EdgePck.file = ../../Impl/EdgePck/QMake/EdgePck.pro
