@@ -68,6 +68,9 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+	// reimplemented (QThread)
+	virtual void run();
+
 private Q_SLOTS:
 	void OnStateChanged(QAbstractSocket::SocketState);
 	void OnSocketError(QAbstractSocket::SocketError);
@@ -80,18 +83,16 @@ private:
 	void Connect(const QString &address, quint16 port = 0);
 	void Disconnect();
 
-	// QThread
-	virtual void run();
-
-	QTcpSocket *m_socket = NULL;
-	QTimer *m_connectionTimer = NULL;
+	istd::TDelPtr<QTcpSocket> m_socketPtr;
+	QTimer m_connectionTimer;
 	QString m_host;
 	quint16 m_port;
 	QByteArray m_dataReceived;
 	QByteArray m_dataToSent;
 	QMutex m_lock;
 
-	QSet<icomm::IHostConnection::Handler*> m_handlers;
+	typedef QSet<icomm::IHostConnection::Handler*> ConnectionHandlers;
+	ConnectionHandlers m_handlers;
 
 	I_ATTR(unsigned, m_autoReconnectTimeAttr);
 	I_ATTR(unsigned, m_connectionTimeoutAttr);

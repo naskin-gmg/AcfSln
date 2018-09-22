@@ -13,15 +13,15 @@ namespace icomm
 {
 
 
-// public
+// public methods
 
-CTcpStreamComp::CTcpStreamComp() : m_lock(QMutex::Recursive)
+CTcpStreamComp::CTcpStreamComp()
+	:m_lock(QMutex::Recursive)
 {
 	qRegisterMetaType<QAbstractSocket::SocketState>();
 	qRegisterMetaType<QAbstractSocket::SocketError>();
 
-	m_connectionTimer = new QTimer(this);
-	connect(m_connectionTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
+	connect(&m_connectionTimer, SIGNAL(timeout()), this, SLOT(OnTimeout()));
 }
 
 
@@ -29,20 +29,20 @@ CTcpStreamComp::CTcpStreamComp() : m_lock(QMutex::Recursive)
 
 bool CTcpStreamComp::SendData(const void* data, int size, void* /*userContextPtr*/)
 {
-	if (data == NULL || size <= 0)
+	if (data == NULL || size <= 0){
 		return false;
+	}
 
 	QMutexLocker lock(&m_lock);
 
 	m_dataToSent.append((const char*)data, size);
 
-	if (m_socket)
-	{
-		m_socket->write(m_dataToSent);
+	if (m_socketPtr.IsValid()){
+		m_socketPtr->write(m_dataToSent);
 
-		if (m_socket->waitForBytesWritten(1000))
-		{
+		if (m_socketPtr->waitForBytesWritten(1000)){
 			m_dataToSent.clear();
+
 			return true;
 		}
 	}
@@ -53,14 +53,15 @@ bool CTcpStreamComp::SendData(const void* data, int size, void* /*userContextPtr
 
 bool CTcpStreamComp::ReadData(void* data, int& size)
 {
-	if (data == NULL || !m_socket)
+	if ((data == NULL) || (!m_socketPtr.IsValid())){
 		return false;
+	}
 
 	QMutexLocker lock(&m_lock);
 
-	if (m_dataReceived.isEmpty())
-	{
+	if (m_dataReceived.isEmpty()){
 		size = 0;
+
 		return false;
 	}
 
@@ -89,12 +90,13 @@ bool CTcpStreamComp::UnregisterEventHandler(icomm::IBinaryStream::Handler* /*han
 bool CTcpStreamComp::ConnectToHost(const iprm::IParamsSet* /*paramsPtr*/)
 {
 	// reconnect if needed
-	if (m_socket)
+	if (m_socketPtr.IsValid()){
 		Disconnect();
-	else
+	}
+	else{
 		return false;
+	}
 
-	// run thread
 	start();
 
 	return isRunning();
@@ -109,26 +111,31 @@ void CTcpStreamComp::DisconnectFromHost()
 
 bool CTcpStreamComp::IsHostConnected() const
 {
-	if (m_socket)
-		return m_socket->isOpen();
-	else
+	if (m_socketPtr.IsValid()){
+		return m_socketPtr->isOpen();
+	}
+	else{
 		return false;
+	}
 }
 
 
 bool CTcpStreamComp::WaitHostConnected(double maxTime, bool /*disconnectOnTimeout = true*/)
 {
-	if (m_socket)
-		return m_socket->waitForConnected(maxTime * 1000);
-	else
+	if (m_socketPtr.IsValid()){
+		return m_socketPtr->waitForConnected(maxTime * 1000);
+	}
+	else{
 		return false;
+	}
 }
 
 
 bool CTcpStreamComp::RegisterEventHandler(icomm::IHostConnection::Handler* handlerPtr, bool /*allowOtherThread = false*/)
 {
-	if (handlerPtr){
+	if (handlerPtr != NULL){
 		m_handlers << handlerPtr;
+
 		return true;
 	}
 
@@ -148,6 +155,29 @@ bool CTcpStreamComp::UnregisterEventHandler(icomm::IHostConnection::Handler* han
 
 // protected methods
 
+// reimplemented (ibase::TRuntimeStatusHanderCompWrap)
+
+void CTcpStreamComp::OnSystemStarted()
+{
+	Connect(m_host, m_port);
+
+	// run timer
+	if (m_autoReconnectTimeAttr.IsValid()){
+		m_connectionTimer.setInterval(*m_autoReconnectTimeAttr);
+		m_connectionTimer.start();
+	}
+}
+
+
+void CTcpStreamComp::OnSystemShutdown()
+{
+	m_connectionTimer.stop();
+	m_connectionTimer.disconnect();
+
+	Disconnect();
+}
+
+
 // reimplemented (imod::TSingleModelObserverBase)
 
 void CTcpStreamComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
@@ -155,16 +185,16 @@ void CTcpStreamComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 	const iprm::IParamsSet* paramsPtr = GetObservedObject();
 	Q_ASSERT(paramsPtr);
 
-	iprm::TParamsPtr<iprm::INameParam> hostParam(paramsPtr, "Host");
-	if (!hostParam.IsValid()){
+	iprm::TParamsPtr<iprm::INameParam> hostParamPtr(paramsPtr, "Host");
+	if (!hostParamPtr.IsValid()){
 		SendErrorMessage(0, tr("Host & port parameters not defined"));
 		return;
 	}
 
-	QString hostAndPort = hostParam->GetName();
+	QString hostAndPort = hostParamPtr->GetName();
 	int portIndex = hostAndPort.indexOf(":");
 	QString host = hostAndPort.left(portIndex);
-	QString port = hostAndPort.mid(portIndex+1);
+	QString port = hostAndPort.mid(portIndex + 1);
 
 	bool isPortOk = false;
 	quint16 portValue = 0;
@@ -183,115 +213,46 @@ void CTcpStreamComp::OnUpdate(const istd::IChangeable::ChangeSet& /*changeSet*/)
 }
 
 
-void CTcpStreamComp::OnSystemStarted()
-{
-	Connect(m_host, m_port);
-
-	// run timer
-	if (m_autoReconnectTimeAttr.IsValid()){
-		m_connectionTimer->setInterval(*m_autoReconnectTimeAttr);
-		m_connectionTimer->start();
-	}
-}
-
-
-void CTcpStreamComp::OnSystemShutdown()
-{
-	m_connectionTimer->stop();
-	m_connectionTimer->disconnect();
-
-	Disconnect();
-}
-
-
-// QThread
-
-void CTcpStreamComp::run()
-{
-	// create it here in the main thread
-	if (m_socket == NULL)
-	{
-		m_socket = new QTcpSocket(this);
-		m_socket->moveToThread(this);
-		m_socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
-
-		// connect slots
-		connect(m_socket, SIGNAL(connected()), this, SLOT(OnConnected()));
-		connect(m_socket, SIGNAL(disconnected()), this, SLOT(OnDisconnected()));
-		connect(m_socket, SIGNAL(readyRead()), this, SLOT(OnReadyRead()));
-		connect(m_socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(OnStateChanged(QAbstractSocket::SocketState)));
-		connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(OnSocketError(QAbstractSocket::SocketError)));
-	}
-
-	// try to connect
-	{
-		QMutexLocker lock(&m_lock);
-
-		m_socket->connectToHost(m_host, m_port, QIODevice::ReadWrite);
-
-		if (!m_socket->waitForConnected(*m_connectionTimeoutAttr))
-		{
-			SendErrorMessage(0, tr("Connection to %1:%2 failed").arg(m_host).arg(m_port));
-			return;
-		}
-	}
-
-	// run the loop
-	exec();
-
-	// leave the loop
-	m_socket->disconnectFromHost();
-}
-
-
-void CTcpStreamComp::OnReadyRead()
-{
-	if (!m_socket)
-		return; 
-
-	QMutexLocker lock(&m_lock);
-
-	m_dataReceived.append(m_socket->readAll());
-}
-
+// private slots
 
 void CTcpStreamComp::OnStateChanged(QAbstractSocket::SocketState state)
 {
-	for (auto handler : m_handlers){
-		handler->OnStateChanged(*this, state);
+	for (ConnectionHandlers::Iterator iter = m_handlers.begin(); iter != m_handlers.end(); ++iter){
+		(*iter)->OnStateChanged(*this, state);
 	}
 
-	if (!m_socket)
+	if (!m_socketPtr.IsValid()){
 		return;
+	}
 
 	switch (state)
 	{
 	case QAbstractSocket::UnconnectedState:
-		SendInfoMessage(0, tr("No more connected to %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("No more connected to %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	case QAbstractSocket::HostLookupState:
-		SendInfoMessage(0, tr("Looking up host %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Looking up host %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	case QAbstractSocket::ConnectingState:
-		SendInfoMessage(0, tr("Connecting to %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Connecting to %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	case QAbstractSocket::ConnectedState:
-		SendInfoMessage(0, tr("Connection established to %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Connection established to %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	case QAbstractSocket::BoundState:
-		SendInfoMessage(0, tr("Bound to %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Bound to %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	case QAbstractSocket::ClosingState:
-		SendInfoMessage(0, tr("Closing socked at %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Closing socked at %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 
 	default:
-		SendInfoMessage(0, tr("Listening host %1:%2 (state %3)").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+		SendInfoMessage(0, tr("Listening host %1:%2 (state %3)").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 		return;
 	}
 }
@@ -299,40 +260,76 @@ void CTcpStreamComp::OnStateChanged(QAbstractSocket::SocketState state)
 
 void CTcpStreamComp::OnSocketError(QAbstractSocket::SocketError /*socketError*/)
 {
-	if (!m_socket)
-		return;
+	if (!m_socketPtr.IsValid()){
+		return; 
+	}
 
-	SendErrorMessage(0, tr("Socket error %1").arg(m_socket->errorString()));
+	SendErrorMessage(0, tr("Socket error %1").arg(m_socketPtr->errorString()));
 
-	for (auto handler : m_handlers){
-		handler->OnError(*this, m_socket->errorString());
+	for (ConnectionHandlers::Iterator iter = m_handlers.begin(); iter != m_handlers.end(); ++iter){
+		(*iter)->OnError(*this, m_socketPtr->errorString());
 	}
 }
 
 
 void CTcpStreamComp::OnConnected()
 {
-	if (!m_socket)
+	if (!m_socketPtr.IsValid()){
 		return;
+	}
 
-	SendInfoMessage(0, tr("Connected to %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
+	SendInfoMessage(0, tr("Connected to %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
 
-	for (auto handler : m_handlers){
-		handler->OnAttached(*this);
+	for (ConnectionHandlers::Iterator iter = m_handlers.begin(); iter != m_handlers.end(); ++iter){
+		(*iter)->OnAttached(*this);
 	}
 }
 
 
 void CTcpStreamComp::OnDisconnected()
 {
-	if (!m_socket)
-		return;
-
-	SendWarningMessage(0, tr("Disconnected from %1:%2").arg(m_socket->peerName()).arg(m_socket->peerPort()));
-
-	for (auto handler : m_handlers){
-		handler->OnDetached(*this);
+	if (!m_socketPtr.IsValid()){
+		return; 
 	}
+
+	SendWarningMessage(0, tr("Disconnected from %1:%2").arg(m_socketPtr->peerName()).arg(m_socketPtr->peerPort()));
+
+	for (ConnectionHandlers::Iterator iter = m_handlers.begin(); iter != m_handlers.end(); ++iter){
+		(*iter)->OnDetached(*this);
+	}
+}
+
+
+void CTcpStreamComp::OnTimeout()
+{
+	if (!m_socketPtr.IsValid()){
+		Connect(m_host, m_port);
+
+		return;
+	}
+
+	int state = m_socketPtr->state();
+	if (state == QAbstractSocket::UnconnectedState){
+		SendErrorMessage(0, tr("Can not connect to %1:%2, trying again...").arg(m_host).arg(m_port));
+
+		for (ConnectionHandlers::Iterator iter = m_handlers.begin(); iter != m_handlers.end(); ++iter){
+			(*iter)->OnError(*this, tr("Timeout"));
+		}
+
+		Connect(m_host, m_port);
+	}
+}
+
+
+void CTcpStreamComp::OnReadyRead()
+{
+	if (!m_socketPtr.IsValid()){
+		return; 
+	}
+
+	QMutexLocker lock(&m_lock);
+
+	m_dataReceived.append(m_socketPtr->readAll());
 }
 
 
@@ -348,20 +345,60 @@ void CTcpStreamComp::OnComponentDestroyed()
 {
 	Disconnect();
 
-	m_socket->disconnect(this);
+	m_socketPtr->disconnect(this);
 
-	delete m_socket;
-	m_socket = NULL;
+	m_socketPtr.Reset();
 	
 	BaseClass::OnComponentDestroyed();
 }
 
 
+// reimplemented (QThread)
+
+void CTcpStreamComp::run()
+{
+	// create it here in the main thread
+	if (!m_socketPtr.IsValid()){
+		m_socketPtr.SetPtr(new QTcpSocket(this));
+		m_socketPtr->moveToThread(this);
+		m_socketPtr->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
+
+		// connect slots
+		connect(m_socketPtr.GetPtr(), SIGNAL(connected()), this, SLOT(OnConnected()));
+		connect(m_socketPtr.GetPtr(), SIGNAL(disconnected()), this, SLOT(OnDisconnected()));
+		connect(m_socketPtr.GetPtr(), SIGNAL(readyRead()), this, SLOT(OnReadyRead()));
+		connect(m_socketPtr.GetPtr(), SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(OnStateChanged(QAbstractSocket::SocketState)));
+		connect(m_socketPtr.GetPtr(), SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(OnSocketError(QAbstractSocket::SocketError)));
+	}
+
+	// try to connect
+	{
+		QMutexLocker lock(&m_lock);
+
+		m_socketPtr->connectToHost(m_host, m_port, QIODevice::ReadWrite);
+
+		if (!m_socketPtr->waitForConnected(*m_connectionTimeoutAttr)){
+			SendErrorMessage(0, tr("Connection to %1:%2 failed").arg(m_host).arg(m_port));
+			return;
+		}
+	}
+
+	// run the loop
+	exec();
+
+	// leave the loop
+	m_socketPtr->disconnectFromHost();
+}
+
+
+// private methods
+
 void CTcpStreamComp::Connect(const QString &address, quint16 port)
 {
 	// reconnect if needed
-	if (m_socket)
+	if (m_socketPtr.IsValid()){
 		Disconnect();
+	}
 
 	m_host = address;
 	m_port = port;
@@ -373,33 +410,12 @@ void CTcpStreamComp::Connect(const QString &address, quint16 port)
 
 void CTcpStreamComp::Disconnect()
 {
-	if (!m_socket)
+	if (!m_socketPtr.IsValid()){
 		return;
+	}
 
 	quit();
 	wait();
-}
-
-
-void CTcpStreamComp::OnTimeout()
-{
-	if (!m_socket)
-	{
-		Connect(m_host, m_port);
-		return;
-	}
-
-	int state = m_socket->state();
-	if (state == QAbstractSocket::UnconnectedState)
-	{
-		SendErrorMessage(0, tr("Can not connect to %1:%2, trying again...").arg(m_host).arg(m_port));
-
-		for (auto handler : m_handlers){
-			handler->OnError(*this, tr("Timeout"));
-		}
-
-		Connect(m_host, m_port);
-	}
 }
 
 
