@@ -170,8 +170,12 @@ void CMessageBasedViewExtenderComp::OnModelChanged(int /*modelId*/, const istd::
 {
 	int selectedIndex = m_messageSelectorCompPtr->GetSelectedOptionIndex();
 
-	for (const ShapeList& shapes : m_shapes){
-		for (const Shape& shape : shapes){
+	for (ShapesMap::ConstIterator iter = m_shapes.constBegin(); iter != m_shapes.constEnd(); ++iter){
+		const ShapeList& shapeList = *iter;
+
+		for (ShapeList::ConstIterator shapeIter = shapeList.constBegin(); shapeIter != shapeList.constEnd(); ++shapeIter){
+			const Shape& shape = *shapeIter;
+
 			ShapePtr shapePtr = shape.shapePtr;
 			iview::IInteractiveShape* interactiveShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr.GetPtr());
 			if (interactiveShapePtr != NULL){
