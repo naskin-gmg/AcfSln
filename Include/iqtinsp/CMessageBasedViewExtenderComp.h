@@ -4,6 +4,7 @@
 // ACF includes
 #include <istd/TPointerVector.h>
 #include <icomp/CComponentBase.h>
+#include <imod/CMultiModelDispatcherBase.h>
 #include <iprm/ISelectionParam.h>
 #include <ilog/IMessageContainer.h>
 #include <iview/IShapeView.h>
@@ -25,17 +26,21 @@ namespace iqtinsp
 */
 class CMessageBasedViewExtenderComp:
 			public iqtinsp::TResultShapeCreatorWrap<icomp::CComponentBase>,
-			virtual public iqt2d::IViewExtender
+			virtual public iqt2d::IViewExtender,
+			private imod::CMultiModelDispatcherBase
 {
 public:
 	typedef iqtinsp::TResultShapeCreatorWrap<icomp::CComponentBase> BaseClass;
+	typedef imod::CMultiModelDispatcherBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CMessageBasedViewExtenderComp);
 		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_ASSIGN(m_resultShapeFactoryCompPtr, "ResultShapeFactory", "Creates shapes to display", true, "ResultShapeFactory");
 		I_ASSIGN(m_messageContainerCompPtr, "MessageContainer", "Shape messages provider", true, "MessageContainer");
 		I_ASSIGN(m_slaveViewExtenderCompPtr, "SlaveViewExtender", "Slave view extender", false, "ViewExtender");
-		I_ASSIGN(m_shapeSelectorCompPtr, "ShapeSelector", "Optional selector of the shapes. Only shapes with source-ID corresponding to the given selection will be processed", false, "ShapeSelector");
+		I_ASSIGN(m_messageFilterCompPtr, "MessageFilter", "Optional filter for the messages used for shape genertion. Only messages with source-ID corresponding to the given selection will be processed", false, "MessageFilter");
+		I_ASSIGN(m_messageSelectorCompPtr, "MessageSelector", "", false, "MessageSelector");
+		I_ASSIGN_TO(m_messageSelectorModelCompPtr, m_messageSelectorCompPtr, false);
 	I_END_COMPONENT;
 
 	// reimplemented (iqt2d::IViewExtender)
@@ -49,14 +54,26 @@ public:
 protected:
 	virtual bool IsMessageAccepted(const istd::IInformationProvider& message) const;
 
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+
 private:
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_REF(ilog::IMessageContainer, m_messageContainerCompPtr);
 	I_REF(iqt2d::IViewExtender, m_slaveViewExtenderCompPtr);
-	I_REF(iprm::ISelectionParam, m_shapeSelectorCompPtr);
+	I_REF(iprm::ISelectionParam, m_messageFilterCompPtr);
+	I_REF(iprm::ISelectionParam, m_messageSelectorCompPtr);
+	I_REF(imod::IModel, m_messageSelectorModelCompPtr);
 
 	typedef istd::TSmartPtr<iview::IShape> ShapePtr;
-	typedef QList<ShapePtr> ShapeList;
+
+	struct Shape
+	{
+		ShapePtr shapePtr;
+		int messageIndex;
+	};
+
+	typedef QList<Shape> ShapeList;
 	typedef QMap<iqt2d::IViewProvider*, ShapeList> ShapesMap;
 	typedef QMap<iqt2d::IViewProvider*, ilog::IMessageContainer::Messages> MessagesMap;
 
