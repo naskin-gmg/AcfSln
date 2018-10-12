@@ -18,21 +18,41 @@ namespace icam
 
 // public static methods
 
-bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, double& resolution)
+static const int s_resolutionPattern = 0xff00ff00;
+static const int s_resolutionPatternXY = 0x00ff00ff;
+
+
+bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, double& resolutionX, double& resolutionY)
 {
 	iimg::IBitmap::PixelFormat pixelFormat = bitmap.GetPixelFormat();
 
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
-		if (imageSize.GetX() >= int(sizeof(double) + sizeof(RESOLUTION_PATTERN))){
+		// read new pattern
+		if (imageSize.GetX() >= int(2 * sizeof(double) + sizeof(s_resolutionPatternXY))){
+			const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
+			Q_ASSERT(rawData != NULL);
+			quint32& bitmapPattern = (quint32&)rawData[0];
+			double& value1 = (double&)rawData[sizeof(s_resolutionPatternXY)];
+			double& value2 = (double&)rawData[sizeof(s_resolutionPatternXY) + sizeof(double)];
+			if (bitmapPattern == s_resolutionPatternXY && !qIsNaN(value1) && (value1 > 0) && !qIsNaN(value2) && (value2 > 0))
+			{
+				resolutionX = value1;
+				resolutionY = value2;
+				return true;
+			}
+		}
+
+		// else fall back to the older (wrong) solution
+		if (imageSize.GetX() >= int(sizeof(double) + sizeof(s_resolutionPattern))){
 			if (pixelFormat != iimg::IBitmap::PF_RGB){
 				const qint8* rawData = (qint8*)bitmap.GetLinePtr(0);
 				Q_ASSERT(rawData != NULL);
 				quint32& bitmapPattern = (quint32&)rawData[0];
-				double& value = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
+				double& value = (double&)rawData[sizeof(s_resolutionPattern)];
 
-				if (bitmapPattern == RESOLUTION_PATTERN && !qIsNaN(value) && (value > 0)){
-					resolution = value;
+				if (bitmapPattern == s_resolutionPattern && !qIsNaN(value) && (value > 0)){
+					resolutionX = resolutionY = value;
 
 					return true;
 				}
@@ -44,7 +64,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 				bitmapPattern |= (rawData[5] & 0xff) << 8; 
 				bitmapPattern |= rawData[6] & 0xff;
 
-				if (bitmapPattern == RESOLUTION_PATTERN){
+				if (bitmapPattern == s_resolutionPattern){
 					union{
 						quint8 data[8];
 						double value;
@@ -61,7 +81,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 					res.data[7]= rawData[22];
 
 					if (!qIsNaN(res.value) && (res.value > 0)){
-						resolution = res.value;
+						resolutionX = resolutionY = res.value;
 
 						return true;
 					}
@@ -74,44 +94,25 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 }
 
 
-bool CCalibratedCameraComp::WriteImageResolution(iimg::IBitmap& bitmap, double resolution)
+bool CCalibratedCameraComp::WriteImageResolution(iimg::IBitmap& bitmap, double resolutionX, double resolutionY)
 {
-	iimg::IBitmap::PixelFormat pixelFormat = bitmap.GetPixelFormat();
-
 	istd::CIndex2d imageSize = bitmap.GetImageSize();
 	if (!imageSize.IsSizeEmpty()){
-		if (imageSize.GetX() >= int(sizeof(double) + sizeof(RESOLUTION_PATTERN))){
+		// write new pattern
+		if (imageSize.GetX() >= int(2 * sizeof(double) + sizeof(s_resolutionPatternXY)))
+		{
 			quint8* rawData = (quint8*)bitmap.GetLinePtr(0);
 			Q_ASSERT(rawData != NULL);
 
-			if (pixelFormat != iimg::IBitmap::PF_RGB){
-				qint32& bitmapPattern = (qint32&)rawData[0];
-				double& bitmapCalib = (double&)rawData[sizeof(RESOLUTION_PATTERN)];
+			qint32& bitmapPattern = (qint32&)rawData[0];
+			double& value1 = (double&)rawData[sizeof(s_resolutionPatternXY)];
+			double& value2 = (double&)rawData[sizeof(s_resolutionPatternXY) + sizeof(double)];
 
-				bitmapPattern = qint32(RESOLUTION_PATTERN);
-				bitmapCalib = resolution;
+			bitmapPattern = qint32(s_resolutionPatternXY);
+			value1 = resolutionX;
+			value2 = resolutionY;
 
-				return true;
-			}
-			else{
-				rawData[1] = 0xff; 
-				rawData[2] = 0x00; 
-				rawData[5] = 0xff; 
-				rawData[6] = 0x00;
-
-				quint8* resolutionData = (quint8*)&resolution;
-
-				rawData[9] = resolutionData[0];
-				rawData[10] = resolutionData[1];
-				rawData[13] = resolutionData[2];
-				rawData[14] = resolutionData[3];
-				rawData[17] = resolutionData[4];
-				rawData[18] = resolutionData[5];
-				rawData[21] = resolutionData[6];
-				rawData[22] = resolutionData[7];
-
-				return true;
-			}
+			return true;
 		}
 	}
 
@@ -130,20 +131,22 @@ int CCalibratedCameraComp::DoProcessing(
 			ibase::IProgressManager* progressManagerPtr)
 {
 	int retVal = BaseClass::DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);
-	if (retVal == TS_OK){
-
+	if (retVal == TS_OK)
+	{
 		iprm::TParamsPtr<imeas::INumericValue> scaleParamPtr(paramsPtr, *m_scaleParamIdAttrPtr);
 		if (scaleParamPtr.IsValid()){
 			iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(outputPtr);
 			if (bitmapPtr != NULL){
-				double targetResolution = 1.0;
-				if (!ReadImageResolution(*bitmapPtr, targetResolution)){
+				double targetResolutionX = 1.0;
+				double targetResolutionY = 1.0;
+				if (!ReadImageResolution(*bitmapPtr, targetResolutionX, targetResolutionY)){
 					imath::CVarVector scaleValues = scaleParamPtr->GetValues();
-					if (scaleValues.GetElementsCount() >= 1){
-						targetResolution = scaleValues[0];
+					if (scaleValues.GetElementsCount() >= 2){
+						targetResolutionX = scaleValues[0];
+						targetResolutionY = scaleValues[1];
 					}
 
-					WriteImageResolution(*bitmapPtr, targetResolution);
+					WriteImageResolution(*bitmapPtr, targetResolutionX, targetResolutionY);
 				}
 			}
 		}

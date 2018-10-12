@@ -16,18 +16,14 @@ namespace icam
 class CCalibratedCameraComp: public icam::CCameraDelegatorComp
 {
 public:
-	enum{
-		RESOLUTION_PATTERN = 0xff00ff00
-	};
-
 	typedef icam::CCameraDelegatorComp BaseClass;
 
 	I_BEGIN_COMPONENT(CCalibratedCameraComp);
 		I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID of the scale parameter in the parameter set", true, "Scale");
 	I_END_COMPONENT;
 
-	static bool ReadImageResolution(const iimg::IBitmap& bitmap, double& resolution);
-	static bool WriteImageResolution(iimg::IBitmap& bitmap, double resolution);
+	static bool ReadImageResolution(const iimg::IBitmap& bitmap, double& resolutionX, double& resolutionY);
+	static bool WriteImageResolution(iimg::IBitmap& bitmap, double resolutionX, double resolutionY);
 
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
