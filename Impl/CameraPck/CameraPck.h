@@ -22,6 +22,7 @@
 #include <icam/CCalibratedCameraComp.h>
 #include <icam/CMultiSourceSnapBitmapSupplierComp.h>
 #include <icam/CBitmapSupplierMultiplexerComp.h>
+#include <icam/CCameraMultiplexerComp.h>
 
 
 /**
@@ -47,6 +48,7 @@ typedef icomp::TModelCompWrap<
 typedef icam::CCalibratedCameraComp CalibratedCamera;
 typedef icomp::TModelCompWrap<icam::CMultiSourceSnapBitmapSupplierComp> MultiSourceSnapBitmapSupplier;
 typedef icomp::TModelCompWrap<icam::CBitmapSupplierMultiplexerComp> BitmapSupplierMultiplexer;
+typedef icam::CCameraMultiplexerComp CameraMultiplexer;
 
 
 } // namespace CameraPck

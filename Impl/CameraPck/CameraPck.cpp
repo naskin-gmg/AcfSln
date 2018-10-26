@@ -84,6 +84,10 @@ I_EXPORT_COMPONENT(
 			"Bitmap supplier based on selection of the underlayed bitmap provider",
 			"Calibration Supplier Image Bitmap Multi");
 
+I_EXPORT_COMPONENT(
+			CameraMultiplexer,
+			"Camera mutiplexer",
+			"Camera Acquisition Multiplexer");
 
 } // namespace CameraPck
 
