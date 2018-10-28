@@ -195,7 +195,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 	quint32 frameworkVersion = 0;
-	if (!versionInfo.GetVersionNumber(1, frameworkVersion) || (frameworkVersion >= 1506)){
+	if (!versionInfo.GetVersionNumber(1, frameworkVersion) || (frameworkVersion >= 2006)){
 		retVal = retVal && archive.BeginTag(workingModeTag);
 		retVal = retVal && I_SERIALIZE_ENUM(WorkingMode, archive, m_workingMode);
 		retVal = retVal && archive.EndTag(workingModeTag);
