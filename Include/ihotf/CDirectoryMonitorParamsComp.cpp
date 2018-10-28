@@ -13,8 +13,8 @@ void CDirectoryMonitorParamsComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_poolingIntervallAttrPtr.IsValid()){
-		SetPoolingIntervall(*m_poolingIntervallAttrPtr);
+	if (m_pollingIntervalAttrPtr.IsValid()){
+		SetPollingInterval(*m_pollingIntervalAttrPtr);
 	}
 
 	if (m_observedItemTypesAttrPtr.IsValid()){

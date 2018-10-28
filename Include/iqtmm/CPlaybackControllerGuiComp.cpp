@@ -116,10 +116,10 @@ void CPlaybackControllerGuiComp::on_PlayButton_toggled(bool isToggled)
 		// if the controller doesn't support the auto playing of the content,
 		// we will create a timer and simulate playing manually:
 		if ((objectPtr->GetSupportedFeatures() & imm::IVideoController::SF_AUTO_PLAY) == 0){
-			int timerIntervall = objectPtr->GetFrameIntervall() * 1000;
+			int timerInterval = objectPtr->GetFrameInterval() * 1000;
 
 			if (isToggled){
-				m_playTimer.start(timerIntervall);
+				m_playTimer.start(timerInterval);
 			}
 			else{
 				m_playTimer.stop();

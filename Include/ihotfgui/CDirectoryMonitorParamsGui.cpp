@@ -27,7 +27,7 @@ void CDirectoryMonitorParamsGui::UpdateModel() const
 	ihotf::IDirectoryMonitorParams* objectPtr = GetObservedObject();
 	Q_ASSERT(objectPtr != NULL);
 
-	objectPtr->SetPoolingIntervall(PoolingIntervallSpin->value());
+	objectPtr->SetPollingInterval(PollingIntervalSpin->value());
 
 	int observedItems = 0;
 	if (FilesCheck->isChecked()){
@@ -95,7 +95,7 @@ void CDirectoryMonitorParamsGui::UpdateGui(const istd::IChangeable::ChangeSet& /
 	if (objectPtr != NULL){
 		ResetEditor();
 
-		PoolingIntervallSpin->setValue(objectPtr->GetPoolingIntervall());
+		PollingIntervalSpin->setValue(objectPtr->GetPollingInterval());
 
 		int observedItems = objectPtr->GetObservedItemTypes();
 		FilesCheck->setChecked((observedItems & ihotf::IDirectoryMonitorParams::OI_FILES) != 0);
@@ -185,7 +185,7 @@ void CDirectoryMonitorParamsGui::on_AttributesCheck_toggled(bool/* isChecked*/)
 }
 
 
-void CDirectoryMonitorParamsGui::on_PoolingIntervallSpin_valueChanged(double/* isChecked*/)
+void CDirectoryMonitorParamsGui::on_PollingIntervalSpin_valueChanged(double/* isChecked*/)
 {
 	OnModelUpdate();
 }

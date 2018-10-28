@@ -42,14 +42,6 @@ public:
 	typedef ilog::CLoggerComponentBase BaseClass;
 	typedef QThread BaseClass2;
 
-	enum ProcessingFlags
-	{
-		/**
-			For the case that, the number of file descriptors was running out the manual folder observation will be activated.
-		*/
-		PF_MANUAL_FOLDER_OBSERVATION = 1
-	};
-
 	I_BEGIN_COMPONENT(CDirectoryMonitorComp);
 		I_REGISTER_INTERFACE(ihotf::IDirectoryMonitor);
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Default parameter set for the directory monitoring", false, "ParamsSet");
@@ -183,7 +175,7 @@ private:
 	QFileSystemWatcher m_directoryWatcher;
 
 	// Model shadows:
-	double m_poolingFrequency;
+	double m_pollingFrequency;
 	QStringList m_fileFilterExpressions;
 	int m_observingItemTypes;
 	int m_observingChanges;
@@ -207,7 +199,7 @@ private:
 
 	bool m_lockChanges;
 
-	int m_processingFlags;
+	ihotf::IDirectoryMonitorParams::WorkingMode m_workingMode;
 
 	mutable QMutex m_mutex;
 

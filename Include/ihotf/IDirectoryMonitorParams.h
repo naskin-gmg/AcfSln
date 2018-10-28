@@ -50,14 +50,44 @@ public:
 	I_DECLARE_FLAGS(FileTimeStampMode, FTM_MODIFIED, FTM_CREATED);
 
 	/**
-		Get pooling intervall for directory changes in seconds.	
+		Working mode for the folder observation
 	*/
-	virtual double GetPoolingIntervall() const = 0;
+	enum WorkingMode
+	{
+		/**
+			The observertion of the folder contents is based on the operation system notifiers.
+			This is the default working mode.
+		*/
+		WM_AUTO,
+
+		/**
+			The observation of the folder contents will be done manually in the given time interval.
+			\sa SetPollingInterval
+		*/
+		WM_MANUAL_POLLING
+	};
+
+	I_DECLARE_ENUM(WorkingMode, WM_AUTO, WM_MANUAL_POLLING);
 
 	/**
-		Set pooling intervall for directory changes in seconds.
+		Get working mode for the folder observeration.
 	*/
-	virtual void SetPoolingIntervall(double poolingIntervall) = 0;
+	virtual WorkingMode GetWorkingMode() const = 0;
+
+	/**
+		Set working mode for the folder observeration.
+	*/
+	virtual void SetWorkingMode(WorkingMode workginMode) = 0;
+
+	/**
+		Get polling intervall for directory changes in seconds.	
+	*/
+	virtual double GetPollingInterval() const = 0;
+
+	/**
+		Set polling intervall for directory changes in seconds.
+	*/
+	virtual void SetPollingInterval(double pollingInterval) = 0;
 
 	/**
 		Get the minimal time to wait since last modification of the file before operating with this (e.g. to add the file to the list of observed files).

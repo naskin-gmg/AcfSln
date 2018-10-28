@@ -48,7 +48,7 @@
                     <AttributeInfo Id="ObservedItems" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="2"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="PoolingIntervall" Type="Real" ExportId="">
+                    <AttributeInfo Id="PollingInterval" Type="Real" ExportId="">
                         <Data IsEnabled="true" Value="5"/>
                     </AttributeInfo>
                 </AttributeInfoMap>

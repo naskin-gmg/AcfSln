@@ -21,7 +21,7 @@ namespace ihotfgui
 CDirectoryMonitorComp::CDirectoryMonitorComp()
 :	m_finishThread(false),
 	m_directoryPendingChangesCounter(1),
-	m_poolingFrequency(5.0),
+	m_pollingFrequency(5.0),
 	m_observingItemTypes(ihotf::IDirectoryMonitorParams::OI_ALL),
 	m_observingChanges(ihotf::IDirectoryMonitorParams::OC_ALL),
 	m_lastModificationMinDifference(30),
@@ -30,7 +30,7 @@ CDirectoryMonitorComp::CDirectoryMonitorComp()
 	m_monitoringParamsObserver(*this),
 	m_directoryParamsObserver(*this),
 	m_lockChanges(false),
-	m_processingFlags(0),
+	m_workingMode(ihotf::IDirectoryMonitorParams::WM_AUTO),
 	m_isTraceEnabled(false)
 {
 	qRegisterMetaType<istd::IChangeable::ChangeSet>("istd::IChangeable::ChangeSet");
@@ -135,7 +135,7 @@ void CDirectoryMonitorComp::run()
 	m_lockChanges = false;
 
 	while (!m_finishThread){
-		bool needStateUpdate = updateTimer.GetElapsed() > m_poolingFrequency;
+		bool needStateUpdate = updateTimer.GetElapsed() > m_pollingFrequency;
 		if (!needStateUpdate || m_lockChanges){
 			msleep(100);
 
@@ -165,9 +165,9 @@ void CDirectoryMonitorComp::run()
 		m_directoryPendingChangesCounter = 0;
 
 		// Override the counter in case of manual folder observation:
-		pendingChangesCounter = qMax(m_processingFlags & PF_MANUAL_FOLDER_OBSERVATION, pendingChangesCounter);
+		pendingChangesCounter = qMax(int(m_workingMode == ihotf::IDirectoryMonitorParams::WM_MANUAL_POLLING), pendingChangesCounter);
 
-		if (m_processingFlags & PF_MANUAL_FOLDER_OBSERVATION){
+		if (m_workingMode == ihotf::IDirectoryMonitorParams::WM_MANUAL_POLLING){
 			WriteTraceMessage(QString ("Manual folder structure observation for '%1' is active").arg(currentFolderPath));
 		}
 
@@ -431,13 +431,10 @@ void CDirectoryMonitorComp::SetFolderPath(const QString& folderPath)
 
 	m_directoryWatcher.removePaths(m_directoryWatcher.directories());
 	
-	if (m_directoryWatcher.addPath(folderPath)){
-		m_processingFlags = 0;
-	}
-	else{
-		SendWarningMessage(0, QString ("Folder '%1' cound not be added to the monitor. Manual observation activated").arg(folderPath));
+	if (!m_directoryWatcher.addPath(folderPath)){
+		SendWarningMessage(0, QString ("Folder '%1' cound not be added to the monitor. Manual folder observation activated").arg(folderPath));
 
-		m_processingFlags = PF_MANUAL_FOLDER_OBSERVATION;
+		m_workingMode = ihotf::IDirectoryMonitorParams::WM_MANUAL_POLLING;
 	}
 
 	if (m_monitoringSessionManagerCompPtr.IsValid()){
@@ -712,7 +709,15 @@ void CDirectoryMonitorComp::MonitoringParamsObserver::AfterUpdate(imod::IModel* 
 		const ihotf::IDirectoryMonitorParams* directoryMonitorParamsPtr = dynamic_cast<const ihotf::IDirectoryMonitorParams*>(modelPtr);
 		Q_ASSERT(directoryMonitorParamsPtr != NULL);
 		if (directoryMonitorParamsPtr != NULL){
-			m_parent.m_poolingFrequency = directoryMonitorParamsPtr->GetPoolingIntervall();
+			m_parent.m_workingMode = directoryMonitorParamsPtr->GetWorkingMode();
+			if (m_parent.m_workingMode == ihotf::IDirectoryMonitorParams::WM_MANUAL_POLLING){
+				m_parent.SendInfoMessage(0, QString ("Manual folder structure observation for '%1' is active").arg(m_parent.m_currentDirectory.absolutePath()));
+			}
+			else if (m_parent.m_workingMode == ihotf::IDirectoryMonitorParams::WM_AUTO){
+				m_parent.SendInfoMessage(0, QString ("Automatic folder structure observation for '%1' is active").arg(m_parent.m_currentDirectory.absolutePath()));
+			}
+
+			m_parent.m_pollingFrequency = directoryMonitorParamsPtr->GetPollingInterval();
 			m_parent.m_observingItemTypes = directoryMonitorParamsPtr->GetObservedItemTypes();
 			m_parent.m_observingChanges = directoryMonitorParamsPtr->GetObservedChanges();
 			m_parent.m_fileFilterExpressions = directoryMonitorParamsPtr->GetAcceptPatterns();

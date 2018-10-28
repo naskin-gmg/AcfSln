@@ -24,7 +24,7 @@ public:
 		Return time difference between frames.
 		If unknown, negative value will be returned.
 	*/
-	virtual double GetFrameIntervall() const = 0;
+	virtual double GetFrameInterval() const = 0;
 
 	/**
 		Return size in pixels of single frame.

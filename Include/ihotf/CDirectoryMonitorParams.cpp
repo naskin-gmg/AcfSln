@@ -15,7 +15,8 @@ namespace ihotf
 // public methods
 
 CDirectoryMonitorParams::CDirectoryMonitorParams()
-	:m_poolingIntervall(5),
+	:m_workingMode(WM_AUTO),
+	m_pollingInterval(5),
 	m_observedItemTypes(OI_ALL),
 	m_observedChanges(OC_ALL),
 	m_minLastModificationTimeDifference(30),
@@ -27,18 +28,34 @@ CDirectoryMonitorParams::CDirectoryMonitorParams()
 
 // reimplemented (ihotf::IDirectoryMonitorParams)
 
-double CDirectoryMonitorParams::GetPoolingIntervall() const
+IDirectoryMonitorParams::WorkingMode CDirectoryMonitorParams::GetWorkingMode() const
 {
-	return m_poolingIntervall;
+	return m_workingMode;
 }
 
 
-void CDirectoryMonitorParams::SetPoolingIntervall(double poolingIntervall)
+void CDirectoryMonitorParams::SetWorkingMode(WorkingMode workginMode)
 {
-	if (m_poolingIntervall != poolingIntervall){
+	if (m_workingMode != workginMode){
 		istd::CChangeNotifier changeNotifier(this);
 
-		m_poolingIntervall = poolingIntervall;
+		m_workingMode = workginMode;
+	}
+}
+
+
+double CDirectoryMonitorParams::GetPollingInterval() const
+{
+	return m_pollingInterval;
+}
+
+
+void CDirectoryMonitorParams::SetPollingInterval(double pollingInterval)
+{
+	if (m_pollingInterval != pollingInterval){
+		istd::CChangeNotifier changeNotifier(this);
+
+		m_pollingInterval = pollingInterval;
 	}
 }
 
@@ -160,7 +177,8 @@ void CDirectoryMonitorParams::SetFileTimeStampMode(int fileTimestampMode)
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag poolingIntervallTag("PoolingIntervall", "Intervall for state update by pooling of file system infos", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag workingModeTag("PollingInterval", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag pollingIntervalTag("PollingInterval", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns", iser::CArchiveTag::TT_MULTIPLE);
@@ -175,9 +193,17 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	retVal = retVal && archive.BeginTag(poolingIntervallTag);
-	retVal = retVal && archive.Process(m_poolingIntervall);
-	retVal = retVal && archive.EndTag(poolingIntervallTag);
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	quint32 frameworkVersion = 0;
+	if (!versionInfo.GetVersionNumber(1, frameworkVersion) || (frameworkVersion >= 1506)){
+		retVal = retVal && archive.BeginTag(workingModeTag);
+		retVal = retVal && I_SERIALIZE_ENUM(WorkingMode, archive, m_workingMode);
+		retVal = retVal && archive.EndTag(workingModeTag);
+	}
+
+	retVal = retVal && archive.BeginTag(pollingIntervalTag);
+	retVal = retVal && archive.Process(m_pollingInterval);
+	retVal = retVal && archive.EndTag(pollingIntervalTag);
 
 	retVal = retVal && archive.BeginTag(observedItemTypesTag);
 	retVal = retVal && archive.Process(m_observedItemTypes);

@@ -37,7 +37,7 @@ protected Q_SLOTS:
 	void on_AddedCheck_toggled(bool isChecked);
 	void on_RemovedCheck_toggled(bool isChecked);
 	void on_AttributesCheck_toggled(bool isChecked);
-	void on_PoolingIntervallSpin_valueChanged(double value);
+	void on_PollingIntervalSpin_valueChanged(double value);
 	void on_AddAcceptPatternButton_clicked();
 	void on_RemoveAcceptPatternButton_clicked();
 	void on_AcceptPatternsList_itemSelectionChanged();

@@ -41,7 +41,7 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QDoubleSpinBox" name="PoolingIntervallSpin">
+         <widget class="QDoubleSpinBox" name="PollingIntervalSpin">
           <property name="suffix">
            <string> sec</string>
           </property>

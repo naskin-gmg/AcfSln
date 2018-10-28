@@ -168,7 +168,7 @@ int CFrameSeqVideoControllerComp::GetFramesCount() const
 }
 
 
-double CFrameSeqVideoControllerComp::GetFrameIntervall() const
+double CFrameSeqVideoControllerComp::GetFrameInterval() const
 {
 	return 1.0 / *m_framesPerSecondAttrPtr;
 }

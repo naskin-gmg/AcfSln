@@ -71,7 +71,7 @@ public:
 
 	// reimplemented (imm::IVideoInfo)
 	virtual int GetFramesCount() const;
-	virtual double GetFrameIntervall() const;
+	virtual double GetFrameInterval() const;
 	virtual istd::CIndex2d GetFrameSize() const;
 	virtual double GetPixelAspectRatio() const;
 
