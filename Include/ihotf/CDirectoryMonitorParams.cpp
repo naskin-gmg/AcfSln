@@ -177,7 +177,7 @@ void CDirectoryMonitorParams::SetFileTimeStampMode(int fileTimestampMode)
 
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag workingModeTag("PollingInterval", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag workingModeTag("WorkingMode", "Working mode for the folder changes recognition", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag pollingIntervalTag("PoolingIntervall", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed", iser::CArchiveTag::TT_LEAF);
