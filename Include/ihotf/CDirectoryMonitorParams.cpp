@@ -178,7 +178,7 @@ void CDirectoryMonitorParams::SetFileTimeStampMode(int fileTimestampMode)
 bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag workingModeTag("PollingInterval", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
-	static iser::CArchiveTag pollingIntervalTag("PollingInterval", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag pollingIntervalTag("PoolingIntervall", "Interval for state update by polling of file system infos", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedItemTypesTag("ObservedItemTypes", "Item types to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag observedChangesTag("ObservedChanges", "Changes in file system to be observed", iser::CArchiveTag::TT_LEAF);
 	static iser::CArchiveTag acceptPatternsTag("AcceptPatterns", "List of accepted file name patterns", iser::CArchiveTag::TT_MULTIPLE);
@@ -249,7 +249,7 @@ bool CDirectoryMonitorParams::Serialize(iser::IArchive& archive)
 		for (int ignorePatternIndex = 0; ignorePatternIndex < ignorePatternsCount; ignorePatternIndex++){
 			retVal = retVal && archive.BeginTag(ignorePatternTag);
 			retVal = retVal && archive.Process(m_ignorePatterns[ignorePatternIndex]);
-			retVal = retVal && archive.EndTag(ignorePatternTag);		
+			retVal = retVal && archive.EndTag(ignorePatternTag);
 		}
 	}
 	else{
