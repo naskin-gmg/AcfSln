@@ -523,8 +523,6 @@ bool CEdgeLine::Serialize(iser::IArchive& archive)
 }
 
 
-// protected methods
-
 // protected members
 
 void CEdgeLine::CalcVolatile() const
