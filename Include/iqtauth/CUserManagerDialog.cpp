@@ -4,6 +4,7 @@
 // Qt includes
 #include<QtCore/QtGlobal>
 #if QT_VERSION >= 0x050000
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QComboBox>
@@ -184,6 +185,7 @@ QWidget* CUserManagerDialog::CUserManagerItemDelegate::createEditor(
 	case LC_GROUP:
 		{
 			QComboBox* comboBoxPtr = new QComboBox(parent);
+			comboBoxPtr->setView(new QListView()); // Qt bug workaround to set up the style from css
 
 			for (int i = 0; i < m_loggedUserLevel; ++i){
 				comboBoxPtr->addItem(m_parent.m_manager.GetUserGroupName(i));
@@ -228,6 +230,7 @@ void CUserManagerDialog::CUserManagerItemDelegate::setModelData(
 		{
 			QComboBox* comboBoxPtr = dynamic_cast<QComboBox*>(editor);
 			Q_ASSERT(comboBoxPtr != NULL);	// was created by createEditor(...)
+			comboBoxPtr->setView(new QListView()); // Qt bug workaround to set up the style from css
 
 			int groupIndex = comboBoxPtr->currentIndex();
 			QString groupName = m_parent.m_manager.GetUserGroupName(groupIndex);
