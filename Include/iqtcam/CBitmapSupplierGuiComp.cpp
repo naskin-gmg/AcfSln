@@ -134,6 +134,26 @@ void CBitmapSupplierGuiComp::OnGuiHidden()
 	BaseClass::OnGuiHidden();
 }
 
+void CBitmapSupplierGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	if (m_snapButtonTextAttrPtr.IsValid()){
+		const QString text = QObject::tr(*m_snapButtonTextAttrPtr);
+		if (!text.isEmpty()){
+			SnapImageButton->setText(text);
+		}
+	}
+
+	if (m_snapButtonTooltipAttrPtr.IsValid()){
+		const QString tooltip = QObject::tr(*m_snapButtonTooltipAttrPtr);
+		if (!tooltip.isEmpty()){
+			SnapImageButton->setToolTip(tooltip);
+		}
+	}
+}
+
+
 
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
 

@@ -41,6 +41,8 @@ public:
 		I_REGISTER_INTERFACE(iimg::IBitmapProvider);
 		I_ASSIGN(m_bitmapLoaderCompPtr, "BitmapLoader", "Saves bitmap to file", false, "BitmapLoader");
 		I_ASSIGN(m_snapIntervalAttrPtr, "SnapInterval", "Snap interval in ms", true, 40);
+		I_ASSIGN(m_snapButtonTextAttrPtr, "SnapButtonText", "Snap button text", false, "Snap");
+		I_ASSIGN(m_snapButtonTooltipAttrPtr, "SnapButtonTooltip", "Snap button tooltip", false, "Snap next image");
 	I_END_COMPONENT;
 
 	CBitmapSupplierGuiComp();
@@ -72,6 +74,7 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiRetranslate();
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
@@ -79,6 +82,8 @@ protected:
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
 	I_ATTR(int, m_snapIntervalAttrPtr);
+	I_ATTR(QByteArray, m_snapButtonTextAttrPtr);
+	I_ATTR(QByteArray, m_snapButtonTooltipAttrPtr);
 
 	imod::TModelWrap<iimg::CBitmap> m_bitmap;
 
