@@ -217,9 +217,10 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				}
 
 				m_defaultInformationCategory = (featuresCount < nominalModelsCount) ? istd::IInformationProvider::IC_ERROR : istd::IInformationProvider::IC_INFO;
-				QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO) ? 
-					"Search model was found" : 
-					"Search model was not found"; 
+				QString searchResultText =
+					(featuresCount == 0) ? QObject::tr("No search model(s) found)"):
+					(featuresCount == nominalModelsCount) ? QObject::tr("Search model(s) found") :
+					QObject::tr("Not every search model(s) found)");
 
 				ilog::CMessage* message = new ilog::CMessage(
 							m_defaultInformationCategory,
@@ -305,23 +306,31 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
 			}
 
-			if (nominalModelsCount > 0 && modelsCount < nominalModelsCount){
+			// default result is OK
+			QString searchResultText = QObject::tr("Search model(s) found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
+			m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
+
+			// we need models but nothing found
+			if (nominalModelsCount > 0 && modelsCount == 0){
 				m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
-			}
-			else{
-				m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
+				searchResultText = QObject::tr("Search model(s) not found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
 			}
 
+			// we need models but less than needed found
+			if (nominalModelsCount > 0 && modelsCount < nominalModelsCount){
+				m_defaultInformationCategory = istd::IInformationProvider::IC_WARNING;
+				searchResultText = QObject::tr("Not all models found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
+			}
+
+			// check if negative models have been found
 			for (int featureIndex = 0; featureIndex < modelsCount; featureIndex++){
 				const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(&result.GetFeature(featureIndex));
 				if ((searchFeaturePtr != NULL) && (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && searchFeaturePtr->IsNegativeModelEnabled())){
 					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+					searchResultText = QObject::tr("Some not allowed model(s) found");
+					break;
 				}
 			}
-
-			QString searchResultText = (m_defaultInformationCategory == istd::IInformationProvider::IC_INFO)? 
-						QObject::tr("Search model was found"): 
-						QObject::tr("Search model was not found"); 
 
 			QString sourceName = GetDiagnosticName();
 			if (sourceName.isEmpty()){
@@ -352,9 +361,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				){
 					const i2d::CMatrix2d& globalMatrix = globalAffine.GetDeformMatrix();
 					const double angle = globalMatrix.GetApproxAngle() - objectFeaturePtr->GetAngle();
-					const i2d::CVector2d& foundScale = objectFeaturePtr->GetScale();
-					const i2d::CVector2d scale(globalMatrix.GetApproxScale() * foundScale.GetX(), globalMatrix.GetApproxScale() * foundScale.GetY());
-					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition() + globalAffine.GetTranslation(), angle, scale);
+					const i2d::CVector2d scale = globalMatrix.GetApproxScale() * objectFeaturePtr->GetScale();
+					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), angle, scale);
 				}
 				else{
 					calibrationInfo.calibration.Reset(objectFeaturePtr->GetPosition(), -objectFeaturePtr->GetAngle(), objectFeaturePtr->GetScale());
