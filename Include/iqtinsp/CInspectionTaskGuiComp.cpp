@@ -119,6 +119,15 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 		}
 	}
 
+
+	if (m_toolBoxPtr != NULL){
+		m_toolBoxPtr->setCurrentIndex(0);
+	}
+
+	if (m_tabWidgetPtr != NULL){
+		m_tabWidgetPtr->setCurrentIndex(0);
+	}
+
 	return true;
 }
 
