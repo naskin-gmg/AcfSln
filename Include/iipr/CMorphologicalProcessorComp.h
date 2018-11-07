@@ -1,3 +1,25 @@
+/********************************************************************************
+**
+**	Copyright (C) 2007-2017 Witold Gantzke & Kirill Lepskiy
+**
+**	This file is part of the ACF-Solutions Toolkit.
+**
+**	This file may be used under the terms of the GNU Lesser
+**	General Public License version 2.1 as published by the Free Software
+**	Foundation and appearing in the file LicenseLGPL.txt included in the
+**	packaging of this file.  Please review the following information to
+**	ensure the GNU Lesser General Public License version 2.1 requirements
+**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+**	If you are unsure which license is appropriate for your use, please
+**	contact us at info@imagingtools.de.
+**
+** 	See http://www.ilena.org or write info@imagingtools.de for further
+** 	information about the ACF.
+**
+********************************************************************************/
+
+
 #ifndef iipr_CMorphologicalProcessorComp_included
 #define iipr_CMorphologicalProcessorComp_included
 
@@ -14,14 +36,41 @@
 namespace iipr
 {
 
+class CMorphologicalProcessorAttr: public CImageRegionProcessorCompBase
+{
+public:
+	typedef CImageRegionProcessorCompBase BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CMorphologicalProcessorAttr);
+		I_ASSIGN(m_erosionEnableAttrPtr, "ErosionEnable", "If this attribute is true then erosion filter is available", false, true);
+		I_ASSIGN(m_dilatationEnableAttrPtr, "DilatationEnable", "If this attribute is true then dilatation filter is available", false, true);
+		I_ASSIGN(m_openingEnableAttrPtr, "OpeningEnable", "If this attribute is true then opening filter is available", false, true);
+		I_ASSIGN(m_closingEnableAttrPtr, "ClosingEnable", "If this attribute is true then closing filter is available", false, true);
+		I_ASSIGN(m_whiteTopEnableAttrPtr, "WhiteTopEnable", "If this attribute is true then white-top filter is available", false, true);
+		I_ASSIGN(m_blackTopEnableAttrPtr, "BlackTopEnable", "If this attribute is true then black-top filter is available", false, true);
+		I_ASSIGN(m_morthoGradientEnableAttrPtr, "MorthoGradientEnable", "If this attribute is true then morthological-gradient filter is available", false, true);
+		I_ASSIGN(m_rectangleFormEnableAttrPtr, "RectangleFormEnable", "If this attribute is true then rectangle filter form is available", false, true);
+		I_ASSIGN(m_circleFormEnableAttrPtr, "CircleFormEnable", "If this attribute is true then circle filter form is available", false, true);
+	I_END_COMPONENT;
+protected:
+	I_ATTR(bool, m_erosionEnableAttrPtr);
+	I_ATTR(bool, m_dilatationEnableAttrPtr);
+	I_ATTR(bool, m_openingEnableAttrPtr);
+	I_ATTR(bool, m_closingEnableAttrPtr);
+	I_ATTR(bool, m_whiteTopEnableAttrPtr);
+	I_ATTR(bool, m_blackTopEnableAttrPtr);
+	I_ATTR(bool, m_morthoGradientEnableAttrPtr);
+	I_ATTR(bool, m_rectangleFormEnableAttrPtr);
+	I_ATTR(bool, m_circleFormEnableAttrPtr);
+};
 
 /**	
 	Processor for image cropping.
 */
-class CMorphologicalProcessorComp: public CImageRegionProcessorCompBase
+class CMorphologicalProcessorComp: public CMorphologicalProcessorAttr
 {
 public:
-	typedef CImageRegionProcessorCompBase BaseClass;
+	typedef CMorphologicalProcessorAttr BaseClass;
 
 	enum ProcessingMode
 	{
@@ -95,6 +144,9 @@ private:
 
 	imod::TModelWrap<iprm::COptionsManager> m_processingModes;
 	imod::TModelWrap<iprm::COptionsManager> m_filterForms;
+
+	QMap<int, ProcessingMode> m_processingModeIndexMap;
+	QMap<int, KernelType> m_filterFormIndexMap;
 };
 
 

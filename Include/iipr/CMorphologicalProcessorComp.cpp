@@ -554,16 +554,52 @@ void CMorphologicalProcessorComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	m_processingModes.InsertOption(QObject::tr("Erosion"), "Erosion");
-	m_processingModes.InsertOption(QObject::tr("Dilation"), "Dilation");
-	m_processingModes.InsertOption(QObject::tr("Opening"), "Opening");
-	m_processingModes.InsertOption(QObject::tr("Closing"), "Closing");
-	m_processingModes.InsertOption(QObject::tr("White Top-Hat"), "WhiteTopHat");
-	m_processingModes.InsertOption(QObject::tr("Black Top-Hat"), "BlackTopHat");
-	m_processingModes.InsertOption(QObject::tr("Morphological Gradient"), "MorphologicalGradient");
+	int modeIndex = 0;
+	if (!m_erosionEnableAttrPtr.IsValid() || *m_erosionEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Erosion"), "Erosion");
+		m_processingModeIndexMap[modeIndex++] = PM_EROSION;
+	}
 
-	m_filterForms.InsertOption(QObject::tr("Rectangle"), "Rectangle");
-	m_filterForms.InsertOption(QObject::tr("Circle"), "Circle");
+	if (!m_dilatationEnableAttrPtr.IsValid() || *m_dilatationEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Dilation"), "Dilation");
+		m_processingModeIndexMap[modeIndex++] = PM_DILATATION;
+	}
+
+	if (!m_openingEnableAttrPtr.IsValid() || *m_openingEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Opening"), "Opening");
+		m_processingModeIndexMap[modeIndex++] = PM_OPENING;
+	}
+
+	if (!m_closingEnableAttrPtr.IsValid() || *m_closingEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Closing"), "Closing");
+		m_processingModeIndexMap[modeIndex++] = PM_CLOSING;
+	}
+
+	if (!m_whiteTopEnableAttrPtr.IsValid() || *m_whiteTopEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("White Top-Hat"), "WhiteTopHat");
+		m_processingModeIndexMap[modeIndex++] = PM_WHITE_TOP_HAT;
+	}
+
+	if (!m_blackTopEnableAttrPtr.IsValid() || *m_blackTopEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Black Top-Hat"), "BlackTopHat");
+		m_processingModeIndexMap[modeIndex++] = PM_BLACK_TOP_HAT;
+	}
+
+	if (!m_morthoGradientEnableAttrPtr.IsValid() || *m_morthoGradientEnableAttrPtr){
+		m_processingModes.InsertOption(QObject::tr("Morphological Gradient"), "MorphologicalGradient");
+		m_processingModeIndexMap[modeIndex] = PM_MORPHO_GRADIENT;
+	}
+
+	int formIndex = 0;
+	if (!m_rectangleFormEnableAttrPtr.IsValid() || *m_rectangleFormEnableAttrPtr){
+		m_filterForms.InsertOption(QObject::tr("Rectangle"), "Rectangle");
+		m_filterFormIndexMap[formIndex++] = KT_RECT;
+	}
+
+	if (!m_circleFormEnableAttrPtr.IsValid() || *m_circleFormEnableAttrPtr){
+		m_filterForms.InsertOption(QObject::tr("Circle"), "Circle");
+		m_filterFormIndexMap[formIndex] = KT_CIRCLE;
+	}
 }
 
 
@@ -576,7 +612,9 @@ CMorphologicalProcessorComp::ProcessingMode  CMorphologicalProcessorComp::GetPro
 	if ((paramsPtr != NULL) && m_processingModeIdAttrPtr.IsValid()){
 		iprm::TParamsPtr<iprm::ISelectionParam> processingModeParamPtr(paramsPtr, *m_processingModeIdAttrPtr, false);
 		if (processingModeParamPtr.IsValid()){
-			mode = processingModeParamPtr->GetSelectedOptionIndex();
+			int index = processingModeParamPtr->GetSelectedOptionIndex();
+			mode = m_processingModeIndexMap.contains(index) ? 
+				m_processingModeIndexMap[index] : PM_FIRST;
 		}
 	}
 
@@ -595,7 +633,8 @@ CMorphologicalProcessorComp::KernelType CMorphologicalProcessorComp::GetKernelTy
 	if ((paramsPtr != NULL) && m_filterFormTypeIdAttrPtr.IsValid()){
 		iprm::TParamsPtr<iprm::ISelectionParam> filterFormTypeParamPtr(paramsPtr, *m_filterFormTypeIdAttrPtr, false);
 		if (filterFormTypeParamPtr.IsValid()){
-			formType = filterFormTypeParamPtr->GetSelectedOptionIndex();
+			int index = filterFormTypeParamPtr->GetSelectedOptionIndex();
+			formType = m_filterFormIndexMap.contains(index) ? m_filterFormIndexMap[index] : KT_FIRST;
 		}
 	}
 
