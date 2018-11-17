@@ -54,9 +54,28 @@ CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 	m_copyCurrentTaskActionPtr(NULL),
 	m_pasteCurrentTaskActionPtr(NULL),
 	m_loadAllActionPtr(NULL),
-	m_saveAllActionPtr(NULL)
+	m_saveAllActionPtr(NULL),
+	m_rootCommands("", 100, ibase::ICommand::CF_GLOBAL_MENU),
+	m_commands("Inspection", 100, ibase::ICommand::CF_GLOBAL_MENU),
+	m_executeTaskCommand("Execute", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR, CG_TASK),
+	m_continuousExecuteCommand("Continuous", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR | ibase::ICommand::CF_ONOFF, CG_TASK)
 {
+	connect(&m_executeTaskCommand, SIGNAL(triggered()), this, SLOT(OnAutoTest()));
+
+	m_commands.InsertChild(&m_executeTaskCommand);
+	m_commands.InsertChild(&m_continuousExecuteCommand);
+
+	m_rootCommands.InsertChild(&m_commands);
+
 	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
+}
+
+
+// reimplemented (ibase::ICommandsProvider)
+
+const ibase::IHierarchicalCommand* CInspectionTaskGuiComp::GetCommands() const
+{
+	return &m_rootCommands;
 }
 
 
@@ -362,6 +381,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 
 	layoutPtr->setMargin(0);
 
+	ControlFrame->setVisible(*m_showControlPanelAttrPtr);
+
 	ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 
 	bool useSpacer = *m_useVerticalSpacerAttrPtr;
@@ -510,6 +531,8 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	UpdateVisualElements();
 
 	BaseClass::OnGuiCreated();
+
+	connect(&m_continuousExecuteCommand, SIGNAL(toggled(bool)), AutoTestButton, SLOT(setChecked(bool)));
 }
 
 
@@ -576,6 +599,9 @@ void CInspectionTaskGuiComp::OnGuiHidden()
 void CInspectionTaskGuiComp::OnGuiRetranslate()
 {
 	BaseClass::OnGuiRetranslate();
+
+	m_executeTaskCommand.SetVisuals(tr("Execute"), tr("Execute"), tr("Execute supplier chain"), QIcon(":/Icons/Play"));
+	m_continuousExecuteCommand.SetVisuals(tr("Continuous"), tr("Continuous"), tr("Enable continuous execution of the supplier chain"), QIcon(":/Icons/AutoUpdate"));
 
 	int subtasksCount = m_editorGuisCompPtr.GetCount();
 

@@ -99,9 +99,9 @@ QToolButton#LiveImageButton:hover:enabled:on
       </layout>
      </widget>
      <widget class="QWidget" name="layoutWidget">
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="ControlLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="ControlFrame">
          <property name="title">
           <string>Inspection</string>
          </property>
@@ -235,7 +235,7 @@ QToolButton#LiveImageButton:hover:enabled:on
         </widget>
        </item>
        <item>
-        <widget class="QSplitter" name="splitter">
+        <widget class="QSplitter" name="ParameterSplitter">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

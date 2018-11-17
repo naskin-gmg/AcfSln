@@ -19,12 +19,14 @@
 #include <istd/TPointerVector.h>
 #include <imod/CMultiModelObserverBase.h>
 #include <imod/CMultiModelDispatcherBase.h>
+#include <ibase/ICommandsProvider.h>
 #include <ifile/IFilePersistence.h>
 #include <ilog/CMessageContainer.h>
 #include <iview/IShape.h>
 #include <iview/IShapeFactory.h>
 #include <iqtgui/TDesignerGuiObserverCompBase.h>
 #include <iqtgui/TRestorableGuiWrap.h>
+#include <iqtgui/CHierarchicalCommand.h>
 #include <iqt2d/IViewExtender.h>
 #include <iqt2d/IViewProvider.h>
 
@@ -52,6 +54,7 @@ public:
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
 		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 1 - tool box\n* 2 - tab", true, 1);
 		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, true);
+		I_ASSIGN(m_showControlPanelAttrPtr, "ShowControlPanel", "If enabled, the control button panel is shown", true, true);
 	I_END_COMPONENT;
 
 protected:
@@ -61,12 +64,14 @@ protected:
 	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 	I_ATTR(int, m_inspectionTaskIndexAttrPtr);
+	I_ATTR(bool, m_showControlPanelAttrPtr);
 };
 
 
 class CInspectionTaskGuiComp:
 			public iqtgui::TRestorableGuiWrap< TResultShapeCreatorWrap<CInspectionTaskGuiCompBase> >,
-			protected imod::CMultiModelDispatcherBase
+			protected imod::CMultiModelDispatcherBase,
+			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -86,7 +91,14 @@ public:
 		MI_VISUAL_STATUS_START_ID = 1000
 	};
 
+	enum CommandGroups
+	{
+		CG_TASK = 4800,
+		CG_EDIT
+	};
+
 	I_BEGIN_COMPONENT(CInspectionTaskGuiComp);
+		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for subtask parameters edition", true);
 		I_ASSIGN_TO(m_editorGuisCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_editorObserversCompPtr, m_editorsCompPtr, true);
@@ -105,6 +117,9 @@ public:
 	I_END_COMPONENT;
 
 	CInspectionTaskGuiComp();
+
+	// reimplemented (ibase::ICommandsProvider)
+	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
@@ -215,6 +230,13 @@ private:
 	QAction* m_pasteCurrentTaskActionPtr;
 	QAction* m_loadAllActionPtr;
 	QAction* m_saveAllActionPtr;
+
+	// commands
+	iqtgui::CHierarchicalCommand m_rootCommands;
+	iqtgui::CHierarchicalCommand m_commands;
+
+	iqtgui::CHierarchicalCommand m_executeTaskCommand;
+	iqtgui::CHierarchicalCommand m_continuousExecuteCommand;
 };
 
 
