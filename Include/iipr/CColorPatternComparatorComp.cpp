@@ -10,9 +10,6 @@
 #include <icmm/CRgbToHsvTranformation.h>
 #include <icmm/CRgb.h>
 
-// ACF-Solutions includes
-#include <iipr/IPatternController.h>
-
 
 namespace iipr
 {
