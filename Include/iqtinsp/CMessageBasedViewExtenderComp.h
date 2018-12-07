@@ -57,7 +57,7 @@ protected:
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
 
-private:
+protected:
 	I_REF(iview::IShapeFactory, m_resultShapeFactoryCompPtr);
 	I_REF(ilog::IMessageContainer, m_messageContainerCompPtr);
 	I_REF(iqt2d::IViewExtender, m_slaveViewExtenderCompPtr);
