@@ -25,6 +25,7 @@ template <	typename FirstPixelType,
 			typename WorkingType>
 void CalculateDifferenceBitmap(
 			WorkingType offset,
+			WorkingType maxValue,
 			const iimg::IBitmap& firstInputBitmap,
 			const iimg::IBitmap& secondInputBitmap,
 			iimg::IBitmap& result)
@@ -39,13 +40,25 @@ void CalculateDifferenceBitmap(
 			const SecondPixelType* secondLinePtr = (const SecondPixelType*)secondInputBitmap.GetLinePtr(y);
 			OutputPixelType* outputLinePtr = (OutputPixelType*)result.GetLinePtr(y);
 
-			for (int x = 0; x < outputImageSize.GetX(); ++x){
-				int pixelComponentIndex = x * componentsCount + componentIndex;
+			if (offset > 0){
+				for (int x = 0; x < outputImageSize.GetX(); ++x){
+					int pixelComponentIndex = x * componentsCount + componentIndex;
 
-				WorkingType firstValue = firstLinePtr[pixelComponentIndex];
-				WorkingType secondValue = secondLinePtr[pixelComponentIndex];
+					WorkingType firstValue = firstLinePtr[pixelComponentIndex];
+					WorkingType secondValue = secondLinePtr[pixelComponentIndex];
 
-				outputLinePtr[pixelComponentIndex] = qAbs(offset + firstValue - secondValue);
+					outputLinePtr[pixelComponentIndex] = qMin(qAbs(offset + firstValue - secondValue), maxValue);
+				}
+			}
+			else{
+				for (int x = 0; x < outputImageSize.GetX(); ++x){
+					int pixelComponentIndex = x * componentsCount + componentIndex;
+
+					WorkingType firstValue = firstLinePtr[pixelComponentIndex];
+					WorkingType secondValue = secondLinePtr[pixelComponentIndex];
+
+					outputLinePtr[pixelComponentIndex] = qAbs(offset + firstValue - secondValue);
+				}
 			}
 		}
 	}
@@ -387,23 +400,23 @@ bool CBitmapOperations::CaclulateBitmapDifference(
 
 	switch (pixelFormat){
 	case iimg::IBitmap::PF_GRAY:
-		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), 255, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
 
 	case iimg::IBitmap::PF_GRAY16:
-		CalculateDifferenceBitmap<quint16, quint16, quint16, int>(quint16(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		CalculateDifferenceBitmap<quint16, quint16, quint16, int>(quint16(offset * 0xffff), 0xffff, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
 
 	case iimg::IBitmap::PF_GRAY32:
-		CalculateDifferenceBitmap<quint32, quint32, quint32, int>(quint16(offset * 255), inputBitmap1, inputBitmap2, outputBitmap);
+		CalculateDifferenceBitmap<quint32, quint32, quint32, int>(quint16(offset * 0xffffffff), 0xffffffff, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
 
 	case iimg::IBitmap::PF_FLOAT32:
-		CalculateDifferenceBitmap<float, float, float, float>(float(offset), inputBitmap1, inputBitmap2, outputBitmap);
+		CalculateDifferenceBitmap<float, float, float, float>(float(offset), 1.0f, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
 
 	case iimg::IBitmap::PF_FLOAT64:
-		CalculateDifferenceBitmap<double, double, double, double>(offset, inputBitmap1, inputBitmap2, outputBitmap);
+		CalculateDifferenceBitmap<double, double, double, double>(offset, 1.0, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
 
 	default:
