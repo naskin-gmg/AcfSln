@@ -295,25 +295,22 @@ void CRegistryPropEditorComp::UpdateConsistencyStatus(
 		isExportInvalid = true;
 	}
 	else if (!subId.isEmpty()){
-		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(baseId);
-		if (elementInfoPtr != NULL){
-			if (m_envManagerCompPtr.IsValid()){
-				const icomp::IElementStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+		if (m_envManagerCompPtr.IsValid()){
+			const icomp::IElementStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
 
-				if ((metaInfoPtr != NULL) && !subId.isEmpty()){
-					metaInfoPtr = metaInfoPtr->GetSubelementInfo(subId);
-				}
-				if (metaInfoPtr != NULL){
-					if (itemType == IT_EXPORTED_INTERFACE){
-						icomp::IElementStaticInfo::Ids interfaceIds = metaInfoPtr->GetMetaIds(icomp::IElementStaticInfo::MGI_INTERFACES);
-						if (!interfaceIds.contains(exportId)){
-							isExportInvalid = true;
-						}
+			if ((metaInfoPtr != NULL) && !subId.isEmpty()){
+				metaInfoPtr = metaInfoPtr->GetSubelementInfo(subId);
+			}
+			if (metaInfoPtr != NULL){
+				if (itemType == IT_EXPORTED_INTERFACE){
+					icomp::IElementStaticInfo::Ids interfaceIds = metaInfoPtr->GetMetaIds(icomp::IElementStaticInfo::MGI_INTERFACES);
+					if (!interfaceIds.contains(exportId)){
+						isExportInvalid = true;
 					}
 				}
-				else{
-					isExportInvalid = true;
-				}
+			}
+			else{
+				isExportInvalid = true;
 			}
 		}
 	}
