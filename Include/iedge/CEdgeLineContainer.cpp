@@ -170,7 +170,7 @@ bool CEdgeLineContainer::CopyFrom(const istd::IChangeable& object, Compatibility
 
 // reimplemented (ibase::TSerializableContainer)
 
-bool CEdgeLineContainer::SerializeItem(CEdgeLine& item, iser::IArchive& archive)
+bool CEdgeLineContainer::SerializeItem(CEdgeLine& item, iser::IArchive& archive, iser::CArchiveTag* /*parentTagPtr*/)
 {
 	return item.Serialize(archive);
 }

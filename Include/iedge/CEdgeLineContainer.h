@@ -57,21 +57,23 @@ public:
 
 protected:
 	// reimplemented (ibase::TSerializableContainer)
-	virtual bool SerializeItem(CEdgeLine& item, iser::IArchive& archive);
+	virtual bool SerializeItem(CEdgeLine& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL);
 };
 
 
 inline void CEdgeLineContainer::Reserve(int count)
 {
-	if (count >= 0)
+	if (count >= 0){
 		m_items.reserve(count);
+	}
 }
 
 
 inline void CEdgeLineContainer::Resize(int count)
 {
-	if (count >= 0)
+	if (count >= 0){
 		m_items.resize(count);
+	}
 }
 
 
