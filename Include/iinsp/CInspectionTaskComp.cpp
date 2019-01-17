@@ -698,6 +698,34 @@ bool CInspectionTaskComp::Parameters::ResetData(CompatibilityMode mode)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CInspectionTaskComp::Parameters::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode)
+{
+	Ids parameterIds = GetParamIds();
+
+	const CInspectionTaskComp::Parameters* objectPtr = dynamic_cast<const CInspectionTaskComp::Parameters*>(&object);
+	
+	bool retVal = false;
+
+	if (objectPtr != NULL){
+
+		retVal = true;
+
+		for (Ids::Iterator iter = parameterIds.begin(); iter != parameterIds.end(); ++iter){
+			iser::ISerializable* paramPtr = GetEditableParameter(*iter);
+			const iser::ISerializable* objectParamPtr = objectPtr->GetParameter(*iter);
+
+			Q_ASSERT(paramPtr != NULL);
+			Q_ASSERT(objectParamPtr != NULL);
+
+			retVal = paramPtr->CopyFrom(*objectParamPtr, mode) && retVal;
+		}
+	}
+	return retVal;
+}
+
+
 // public methods of embedded class TaskStatusObserver
 
 CInspectionTaskComp::TaskStatusObserver::TaskStatusObserver(CInspectionTaskComp* parentPtr)

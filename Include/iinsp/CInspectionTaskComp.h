@@ -151,6 +151,9 @@ protected:
 
 		// reimplemented (istd::IChangeable)
 		virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+		
+		// reimplemented (istd::IChangeable)
+		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
 
 	private:
 		CInspectionTaskComp* m_parentPtr;
