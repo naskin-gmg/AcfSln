@@ -32,7 +32,7 @@ CBitmapSupplierGuiComp::CBitmapSupplierGuiComp()
 
 const iimg::IBitmap* CBitmapSupplierGuiComp::GetBitmap() const
 {
-	return &m_bitmap;
+	return m_bitmapPtr.GetPtr();
 }
 
 
@@ -62,8 +62,10 @@ void CBitmapSupplierGuiComp::on_LiveImageButton_toggled(bool checked)
 
 void CBitmapSupplierGuiComp::on_SaveImageButton_clicked()
 {
+	Q_ASSERT(m_bitmapPtr.IsValid());
+
 	if (		m_bitmapLoaderCompPtr.IsValid() &&
-				m_bitmapLoaderCompPtr->SaveToFile(m_bitmap, "") == ifile::IFilePersistence::OS_FAILED){
+				m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapPtr, "") == ifile::IFilePersistence::OS_FAILED){
 		QMessageBox::warning(
 					GetQtWidget(),
 					QObject::tr("Error"),
@@ -123,7 +125,7 @@ void CBitmapSupplierGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	SaveImageButton->setVisible(m_bitmapLoaderCompPtr.IsValid());
+	SaveImageButton->setVisible(m_bitmapLoaderCompPtr.IsValid() && m_bitmapPtr.IsValid());
 }
 
 
@@ -169,13 +171,15 @@ QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const
 
 void CBitmapSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
+	imod::IModel* bitmapModelPtr = dynamic_cast<imod::IModel*>(m_bitmapPtr.GetPtr());
 	iview::CImageShape* shapePtr = new iview::CImageShape;
-	if (shapePtr != NULL){
+
+	if ((bitmapModelPtr != NULL) && (shapePtr != NULL)){
 		shapePtr->AssignToLayer(iview::IViewLayer::LT_BACKGROUND);
 
 		result.PushBack(shapePtr);
 
-		m_bitmap.AttachObserver(shapePtr);
+		bitmapModelPtr->AttachObserver(shapePtr);
 	}
 }
 
@@ -201,10 +205,12 @@ void CBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& chang
 
 	bool isLive = LiveImageButton->isChecked();
 
-	istd::CIndex2d bitmapSize = m_bitmap.GetImageSize();
+	if (m_bitmapPtr.IsValid()){
+		istd::CIndex2d bitmapSize = m_bitmapPtr->GetImageSize();
 
-	SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
-	SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty() && !isLive);
+		SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
+		SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty() && !isLive);
+	}
 
 	UpdateAllViews();
 }
@@ -230,28 +236,45 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 		}
 	}
 
-	if ((bitmapPtr == NULL) || !m_bitmap.CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT)){
-		m_bitmap.ResetImage();
-	}
+	if (m_bitmapPtr.IsValid()){
+		if ((bitmapPtr == NULL) || !m_bitmapPtr->CopyFrom(*bitmapPtr, istd::IChangeable::CM_CONVERT)){
+			m_bitmapPtr->ResetImage();
+		}
 
-	istd::CIndex2d imageSize = m_bitmap.GetImageSize();
-	i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
+		istd::CIndex2d imageSize = m_bitmapPtr->GetImageSize();
+		i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
 
-	const ShapesMap& shapesMap = GetShapesMap();
-	QSet<iqt2d::IViewProvider*> views = shapesMap.keys().toSet();
-	for (		QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
-				viewIter != views.end();
-				++viewIter){
-		iqt2d::IViewProvider* viewProviderPtr = *viewIter;
-		Q_ASSERT(viewProviderPtr != NULL);
+		const ShapesMap& shapesMap = GetShapesMap();
+		QSet<iqt2d::IViewProvider*> views = shapesMap.keys().toSet();
+		for (		QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
+					viewIter != views.end();
+					++viewIter){
+			iqt2d::IViewProvider* viewProviderPtr = *viewIter;
+			Q_ASSERT(viewProviderPtr != NULL);
 
-		iview::CViewBase* viewPtr = dynamic_cast<iview::CViewBase*>(viewProviderPtr->GetView());
-		if (viewPtr != NULL){
-			viewPtr->SetFitArea(imageBox);
+			iview::CViewBase* viewPtr = dynamic_cast<iview::CViewBase*>(viewProviderPtr->GetView());
+			if (viewPtr != NULL){
+				viewPtr->SetFitArea(imageBox);
+			}
 		}
 	}
 
 	BaseClass::AfterUpdate(modelPtr, changeSet);
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CBitmapSupplierGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_bitmapFactPtr.IsValid()){
+		m_bitmapPtr.SetPtr(m_bitmapFactPtr.CreateInstance());
+	}
+	else{
+		m_bitmapPtr.SetPtr(new BitmapImpl);
+	}
 }
 
 

@@ -43,6 +43,7 @@ public:
 		I_ASSIGN(m_snapIntervalAttrPtr, "SnapInterval", "Snap interval in ms", true, 40);
 		I_ASSIGN(m_snapButtonTextAttrPtr, "SnapButtonText", "Snap button text", false, "Snap");
 		I_ASSIGN(m_snapButtonTooltipAttrPtr, "SnapButtonTooltip", "Snap button tooltip", false, "Snap next image");
+		I_ASSIGN(m_bitmapFactPtr, "BitmapFactory", "Factory used for bitmap instantiation", false, "BitmapFactory");
 	I_END_COMPONENT;
 
 	CBitmapSupplierGuiComp();
@@ -79,13 +80,19 @@ protected:
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);
+	I_FACT(iimg::IBitmap, m_bitmapFactPtr);
 	I_ATTR(int, m_snapIntervalAttrPtr);
 	I_ATTR(QByteArray, m_snapButtonTextAttrPtr);
 	I_ATTR(QByteArray, m_snapButtonTooltipAttrPtr);
 
-	imod::TModelWrap<iimg::CBitmap> m_bitmap;
+	typedef imod::TModelWrap<iimg::CBitmap> BitmapImpl;
+
+	istd::TDelPtr<iimg::IBitmap> m_bitmapPtr;
 
 	QTimer m_timer;
 };
