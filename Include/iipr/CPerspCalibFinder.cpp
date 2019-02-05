@@ -160,8 +160,8 @@ bool CPerspCalibFinder::FindPerspCalib(
 		imath::CVarMatrix res(istd::CIndex2d(1, 4));
 		if (A.GetSolvedLSP(x, res)){
 			i2d::CMatrix2d rotationMatrix(
-						res.GetAt(istd::CIndex2d(0, 0)), -res.GetAt(istd::CIndex2d(0, 2)),
-						res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 0)));
+						res.GetAt(istd::CIndex2d(0, 0)), res.GetAt(istd::CIndex2d(0, 2)),
+						-res.GetAt(istd::CIndex2d(0, 2)), res.GetAt(istd::CIndex2d(0, 0)));
 			i2d::CVector2d translation(res.GetAt(istd::CIndex2d(0, 1)), res.GetAt(istd::CIndex2d(0, 3)));
 
 			result.SetAffinePart(i2d::CAffine2d(rotationMatrix, translation));
