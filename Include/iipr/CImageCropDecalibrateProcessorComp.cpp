@@ -54,13 +54,15 @@ bool DoCropImageTemplate(
 
 	istd::CIndex2d gridSize = cornerArray.GetSizes();
 
+	static i2d::CVector2d sourcePixelCenterPos(0.5, 0.5);
+
 	istd::CIndex2d gridIndex;
 	for (gridIndex[1] = 0; gridIndex[1] < gridSize[1] - 1; ++gridIndex[1]){
 		for (gridIndex[0] = 0; gridIndex[0] < gridSize[0] - 1; ++gridIndex[0]){
-			const i2d::CVector2d& posLeftTop = cornerArray.GetAt(gridIndex);
-			const i2d::CVector2d& posRightTop = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY()));
-			const i2d::CVector2d& posLeftBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX(), gridIndex.GetY() + 1));
-			const i2d::CVector2d& posRightBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY() + 1));
+			i2d::CVector2d posLeftTop = cornerArray.GetAt(gridIndex) - sourcePixelCenterPos;
+			i2d::CVector2d posRightTop = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY())) - sourcePixelCenterPos;
+			i2d::CVector2d posLeftBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX(), gridIndex.GetY() + 1)) - sourcePixelCenterPos;
+			i2d::CVector2d posRightBottom = cornerArray.GetAt(istd::CIndex2d(gridIndex.GetX() + 1, gridIndex.GetY() + 1)) - sourcePixelCenterPos;
 
 			if ((posRightTop.GetX() == qInf()) || (posRightBottom.GetX() == qInf())){
 				++gridIndex[0];
