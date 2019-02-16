@@ -18,7 +18,7 @@ const iprm::IOptionsList* CMultiCameraBitmapSupplierComp::GetBitmapListInfo() co
 int CMultiCameraBitmapSupplierComp::GetBitmapsCount() const
 {
 	if (m_cameraParamsManagerCompPtr.IsValid()){
-		return m_cameraParamsManagerCompPtr->GetParamsSetsCount();	
+		return m_cameraParamsManagerCompPtr->GetParamsSetsCount();
 	}
 
 	return 0;

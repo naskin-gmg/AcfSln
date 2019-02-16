@@ -25,7 +25,7 @@ namespace iqtcam
 
 CMultiBitmapSupplierGuiComp::CMultiBitmapSupplierGuiComp()
 {
-	m_timer.setInterval(40);
+	m_timer.setInterval(20);
 
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
 }

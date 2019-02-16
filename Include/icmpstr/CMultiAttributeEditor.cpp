@@ -404,9 +404,9 @@ void CMultiAttributeEditor::ValueItemDelegate::setModelData(QWidget* editor, QAb
 {
 	QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
 	if (comboEditor != NULL){
-		QMap<int,QVariant> data;
-		data.insert(Qt::DisplayRole, comboEditor->lineEdit()->text());
-		model->setItemData(index, data);
+		QMap<int,QVariant> dataMap;
+		dataMap.insert(Qt::DisplayRole, comboEditor->lineEdit()->text());
+		model->setItemData(index, dataMap);
 
 		return;
 	}
