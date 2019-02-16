@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4403" Description="ACF"/>
-            <Version Id="1" Number="1717" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
@@ -30,16 +30,6 @@
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>
-        <EmbededRegistry Id="BlobSupplierEditor">
-            <PositionMap>
-                <Element ComponentName="BlobFilterParamsGui" X="850" Y="600" Note=""/>
-                <Element ComponentName="GeneralSupplierGui" X="575" Y="275" Note=""/>
-                <Element ComponentName="ParamsSetGui" X="575" Y="425" Note=""/>
-                <Element ComponentName="SearchAoiEditor" X="300" Y="600" Note=""/>
-                <Element ComponentName="ThresholdEditor" X="575" Y="550" Note=""/>
-            </PositionMap>
-            <EmbeddedRegistries/>
-        </EmbededRegistry>
         <EmbededRegistry Id="SmoothSupplier">
             <PositionMap>
                 <Element ComponentName="ComposedParamsSet" X="450" Y="350" Note=""/>
@@ -54,6 +44,16 @@
                 <Element ComponentName="ComposedParamsSetGui" X="550" Y="375" Note=""/>
                 <Element ComponentName="ImageTaskGui" X="550" Y="225" Note=""/>
                 <Element ComponentName="NumericParamsGui" X="560" Y="536" Note=""/>
+            </PositionMap>
+            <EmbeddedRegistries/>
+        </EmbededRegistry>
+        <EmbededRegistry Id="BlobSupplierEditor">
+            <PositionMap>
+                <Element ComponentName="BlobFilterParamsGui" X="850" Y="600" Note=""/>
+                <Element ComponentName="GeneralSupplierGui" X="575" Y="275" Note=""/>
+                <Element ComponentName="ParamsSetGui" X="575" Y="425" Note=""/>
+                <Element ComponentName="SearchAoiEditor" X="300" Y="600" Note=""/>
+                <Element ComponentName="ThresholdEditor" X="575" Y="550" Note=""/>
             </PositionMap>
             <EmbeddedRegistries/>
         </EmbededRegistry>

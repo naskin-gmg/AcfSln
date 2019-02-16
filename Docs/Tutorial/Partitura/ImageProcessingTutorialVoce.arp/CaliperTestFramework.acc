@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Complex framework showing different task</Description>
@@ -109,6 +109,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="Log" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Framework/LogDock"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="CameraParamsSetGui">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

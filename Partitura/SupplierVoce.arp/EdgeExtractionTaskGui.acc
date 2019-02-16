@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4202" Description="ACF"/>
-            <Version Id="1" Number="1588" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>GUI for edge extraction task</Description>
@@ -63,6 +63,9 @@
                     </AttributeInfo>
                     <AttributeInfo Id="EdgeLineColorSchema" Type="Reference" ExportId="EdgeLineColorSchema">
                         <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="EdgeExtractorParamsGui"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="EdgeExtractorParamsGui"/>

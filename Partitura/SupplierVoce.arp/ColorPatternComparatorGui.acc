@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4104" Description="ACF"/>
-            <Version Id="1" Number="1540" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328450" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>GUI for the color matching supplier</Description>
@@ -13,6 +13,9 @@
         <Element Id="ColorPatternComparatorGui" PackageId="QtIprPck" ComponentId="ColorPatternComparatorGui">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ParamsSetGui"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ParamsSetGui"/>
                     </AttributeInfo>

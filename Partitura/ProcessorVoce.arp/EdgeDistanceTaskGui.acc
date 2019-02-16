@@ -82,7 +82,10 @@
                     <AttributeInfo Id="ParamsLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="FileDialogLoader"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                  <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
+                    <Data IsEnabled="true" Value="CaliperParamsSetGui"/>
+                  </AttributeInfo>
+                  <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="CaliperParamsSetGui"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="SlaveSceneExtender">

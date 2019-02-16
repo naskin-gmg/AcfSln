@@ -2,18 +2,18 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
+        <Element ComponentName="Framework" X="550" Y="350" Note=""/>
         <Element ComponentName="ImageView" X="150" Y="350" Note=""/>
         <Element ComponentName="LineCaliperTask" X="925" Y="225" Note=""/>
         <Element ComponentName="LineCaliperTaskGui" X="925" Y="475" Note=""/>
         <Element ComponentName="SnapTask" X="250" Y="225" Note=""/>
         <Element ComponentName="SnapTaskGui" X="250" Y="475" Note=""/>
-        <Element ComponentName="Framework" X="550" Y="350" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

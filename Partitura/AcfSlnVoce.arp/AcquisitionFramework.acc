@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4754" Description="ACF"/>
+            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="330752" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Framework for basic image acquisition</Description>
@@ -14,7 +14,7 @@
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
                     <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
-                        <Data IsEnabled="true" Value="Info"/>
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="MainGui" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="Tabs"/>
@@ -69,7 +69,7 @@
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="OutputData" Type="Reference" ExportId="">
-                        <Data IsEnabled="true" Value="BitmapView"/>
+                        <Data IsEnabled="true" Value="BitmapView/Bitmap"/>
                     </AttributeInfo>
                     <AttributeInfo Id="OutputDataLoader" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ImageDialogLoader"/>
