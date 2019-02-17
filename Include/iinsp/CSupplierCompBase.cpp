@@ -46,7 +46,7 @@ void CSupplierCompBase::InvalidateSupplier()
 	if (m_isInputValid){
 		m_isInputValid = false;
 
-		if (!m_productChangeNotifierPtr.IsValid()){	
+		if (!m_productChangeNotifierPtr.IsValid()){
 			m_productChangeNotifierPtr.SetPtr(new istd::CChangeNotifier(this, &s_supplierResultsSet));
 		}
 	}

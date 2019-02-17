@@ -496,8 +496,12 @@ bool CMorphologicalProcessorComp::ProcessImageRegion(
 	int kernelMaxWidth = qMax(1, qMin(int(filterLengths[0]), imageWidth));
 	int kernelMaxHeight = qMax(1, qMin((filterDimensionsCount < 2)? kernelMaxWidth: int(filterLengths[1]), imageHeight));
 
-	Q_ASSERT(kernelMaxWidth >= 1);
-	Q_ASSERT(kernelMaxHeight >= 1);
+	if (kernelMaxWidth == 1 && kernelMaxHeight == 1){
+		return true; // do nothing
+	}
+
+	Q_ASSERT(kernelMaxWidth > 1);
+	Q_ASSERT(kernelMaxHeight > 1);
 	
 	ProcessingMode processingMode = GetProcessingMode(paramsPtr);
 

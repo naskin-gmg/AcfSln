@@ -21,7 +21,6 @@ CObjectFeature::CObjectFeature()
 	BaseClass2::SetPosition(i2d::CVector2d(0.0, 0.0));
 
 	imath::CVarVector values(6, 0.0);
-
 	values[0] = 0;
 	values[1] = 0.0;
 	values[2] = 0.0;

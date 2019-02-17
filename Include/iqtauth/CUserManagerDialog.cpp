@@ -103,12 +103,20 @@ void CUserManagerDialog::on_RemoveUserButton_clicked()
 {
 	QTreeWidgetItem* curItemPtr = TreeUserList->currentItem();
 	if (curItemPtr != NULL){
-		if (m_manager.DeleteUser(curItemPtr->data(0, Qt::DisplayRole).toString())){
+		QString userName = curItemPtr->data(0, Qt::DisplayRole).toString();
+		QString currentUserName = m_login.GetLoggedUser()->GetUserName();
+
+		if (currentUserName == userName){
+			QMessageBox::warning(this, tr("Error"), tr("You cannot remove yourself"));
+			return;
+		}
+
+		if (m_manager.DeleteUser(userName)){
 			//update user list
 			UpdateUserList();
 		}
 		else{
-			QMessageBox::warning(this, tr("Error"), tr("The user could not be removed."));
+			QMessageBox::warning(this, tr("Error"), tr("The user could not be removed"));
 		}
 	}
 }
