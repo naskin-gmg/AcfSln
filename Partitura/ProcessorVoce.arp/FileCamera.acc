@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4562" Description="ACF"/>
-            <Version Id="1" Number="1916" Description="ACF-Solutions"/>
+            <Version Id="0" Number="4662" Description="ACF"/>
+            <Version Id="1" Number="1960" Description="ACF-Solutions"/>
             <Version Id="1023" Number="329217" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -35,6 +35,9 @@
                                 <Value>FileBitmapAcquisition</Value>
                             </Values>
                         </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="TypeId" Type="Id" ExportId="">
+                        <Data IsEnabled="true" Value="FileCamera"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
