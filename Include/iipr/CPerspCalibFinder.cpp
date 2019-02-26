@@ -20,7 +20,9 @@ bool CPerspCalibFinder::FindPerspCalib(
 			bool allowAnisotropic,
 			bool allowTranslation) const
 {
-	if (allowPerspective && allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 4)){	// try perspective transformation
+	int degsOfFreedom = positionsCount * 2;
+
+	if (allowPerspective && allowRotation && allowScale && allowAnisotropic && allowTranslation && (degsOfFreedom >= 8)){	// try perspective transformation
 		// |   u_i     v_i      1       0       0       0   -u_i*x_i  -v_i*x_i  | |r_0_0  r_0_1  r_0_2  r_1_0  r_1_1  r_1_2  r_2_0  r_2_1|^T = |x_i|
 		// |    0       0       0      u_i     v_i      1   -u_i*y_i  -v_i*y_i  | |r_0_0  r_0_1  r_0_2  r_1_0  r_1_1  r_1_2  r_2_0  r_2_1|^T = |y_i|
 		//
@@ -75,7 +77,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 		}
 	}
 
-	if (allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 3)){	// try affine transformation
+	if (allowRotation && allowScale && allowAnisotropic && allowTranslation && (degsOfFreedom >= 6)){	// try affine transformation
 		// |   u_i     v_i      1       0       0       0   | |r_0_0  r_0_1  r_0_2  r_1_0  r_1_1  r_1_2|^T = |x_i|
 		// |    0       0       0      u_i     v_i      1   | |r_0_0  r_0_1  r_0_2  r_1_0  r_1_1  r_1_2|^T = |y_i|
 		//
@@ -125,7 +127,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 		}
 	}
 
-	if (allowRotation && allowScale && allowTranslation && (positionsCount >= 2)){	// try affine transformation
+	if (allowRotation && allowScale && allowTranslation && (degsOfFreedom >= 4)){	// try affine transformation
 		// |   u_i      1     -v_i      0   | | d_x   r_0_2   d_y    r_1_2|^T = |x_i|
 		// |   v_i      0      u_i      1   | | d_x   r_0_2   d_y    r_1_2|^T = |y_i|
 		//
@@ -171,7 +173,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 		}
 	}
 
-	if (allowScale && allowTranslation && allowAnisotropic && (positionsCount >= 2)){	// try anisotropic scaling transformation
+	if (allowScale && allowTranslation && allowAnisotropic && (degsOfFreedom >= 4)){	// try anisotropic scaling transformation
 		// |   u_i     0      1      0   | |s_x  s_y  r_0_2  r_1_2|^T = |x_i|
 		// |    0     v_i     0      1   | |s_x  s_y  r_0_2  r_1_2|^T = |y_i|
 		//
@@ -217,7 +219,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 		}
 	}
 
-	if (allowScale && allowTranslation && (positionsCount >= 2)){	// try isotropic scaling transformation
+	if (allowScale && allowTranslation && (degsOfFreedom >= 3)){	// try isotropic scaling transformation
 		// |   u_i     1      0   | |s  r_0_2  r_1_2|^T = |x_i|
 		// |   v_i     0      1   | |s  r_0_2  r_1_2|^T = |y_i|
 		//
@@ -261,7 +263,7 @@ bool CPerspCalibFinder::FindPerspCalib(
 		}
 	}
 
-	if (allowTranslation && (positionsCount >= 1)){	// try translation function
+	if (allowTranslation && (degsOfFreedom >= 2)){	// try translation function
 		i2d::CVector2d cummTranslation(0, 0);
 
 		for (int i = 0; i < positionsCount; ++i){
@@ -294,9 +296,11 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 			bool allowAnisotropic,
 			bool allowTranslation) const
 {
+	int degsOfFreedom = positionsCount * 2;
+
 	lensCorrFactor = 0;
 
-	if (allowPerspective && allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 5)){	// try perspective transformation
+	if (allowPerspective && allowRotation && allowScale && allowAnisotropic && allowTranslation && (degsOfFreedom >= 9)){	// try perspective transformation
 		imath::CVarMatrix A(istd::CIndex2d(9, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
@@ -347,7 +351,7 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 		}
 	}
 
-	if (allowRotation && allowScale && allowAnisotropic && allowTranslation && (positionsCount >= 4)){	// try affine transformation
+	if (allowRotation && allowScale && allowAnisotropic && allowTranslation && (degsOfFreedom >= 7)){	// try affine transformation
 		imath::CVarMatrix A(istd::CIndex2d(7, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
@@ -393,7 +397,7 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 		}
 	}
 
-	if (allowRotation && allowScale && allowTranslation && (positionsCount >= 3)){	// try affine transformation
+	if (allowRotation && allowScale && allowTranslation && (degsOfFreedom >= 5)){	// try affine transformation
 		imath::CVarMatrix A(istd::CIndex2d(5, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
@@ -435,7 +439,7 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 		}
 	}
 
-	if (allowScale && allowTranslation && allowAnisotropic && (positionsCount >= 3)){	// try anisotropic scaling transformation
+	if (allowScale && allowTranslation && allowAnisotropic && (degsOfFreedom >= 5)){	// try anisotropic scaling transformation
 		imath::CVarMatrix A(istd::CIndex2d(5, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
@@ -477,7 +481,7 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 		}
 	}
 
-	if (allowScale && allowTranslation && (positionsCount >= 3)){	// try isotropic scaling transformation
+	if (allowScale && allowTranslation && (degsOfFreedom >= 4)){	// try isotropic scaling transformation
 		imath::CVarMatrix A(istd::CIndex2d(4, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
@@ -517,7 +521,7 @@ bool CPerspCalibFinder::FindPerspCalibWithCorrection(
 		}
 	}
 
-	if (allowTranslation && (positionsCount >= 2)){	// try translation function
+	if (allowTranslation && (degsOfFreedom >= 3)){	// try translation function
 		imath::CVarMatrix A(istd::CIndex2d(3, positionsCount * 2));
 		imath::CVarMatrix x(istd::CIndex2d(1, positionsCount * 2));
 
