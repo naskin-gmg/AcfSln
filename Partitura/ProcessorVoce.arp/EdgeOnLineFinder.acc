@@ -7,7 +7,7 @@
             <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
-    <Description>Search for ege on the line position using 1 pixel wide projection</Description>
+    <Description>Search for edge on the line position using 1 pixel wide projection</Description>
     <Keywords>Edge Finder Processor Caliper Tool</Keywords>
     <ElementsList>
         <Element Id="Caliper" PackageId="IprPck" ComponentId="ExtremumCaliperProcessor">
