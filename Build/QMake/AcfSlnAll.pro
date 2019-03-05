@@ -72,6 +72,9 @@ iqtsig.file = ../../Include/iqtsig/QMake/iqtsig.pro
 SUBDIRS += ifileproc
 ifileproc.file = ../../Include/ifileproc/QMake/ifileproc.pro
 
+SUBDIRS += iprod
+iprod.file = ../../Include/iprod/QMake/iprod.pro
+
 SUBDIRS += iproc
 iproc.file = ../../Include/iproc/QMake/iproc.pro
 
@@ -230,6 +233,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	SUBDIRS += DocumentProcessingPck
 	DocumentProcessingPck.file = ../../Impl/DocumentProcessingPck/QMake/DocumentProcessingPck.pro
 	DocumentProcessingPck.depends = iproc idocproc
+
+	SUBDIRS += ProductionPck
+	ProductionPck.file = ../../Impl/ProductionPck/QMake/ProductionPck.pro
+	ProductionPck.depends = iprod
 }
 
 # Tools
@@ -240,3 +247,5 @@ XpcEditor.depends = AuthorizationPck BlobPck ProcessingPck FileProcessingPck Cam
 SUBDIRS += Compositor
 Compositor.file = ../../Impl/CompositorExe/QMake/Compositor.pro
 Compositor.depends = AuthorizationPck BlobPck ProcessingPck FileProcessingPck CameraPck EdgePck HotfolderPck InspectionPck IprPck MeasPck SignalPck WizardPck QtAuthorizationPck QtCameraPck QtExPck QtInspectionPck QtIprPck QtMeasPck QtMmPck QtSignalPck WizardGuiPck HotfolderGuiPck ProcessingGuiPck CompositorPck DocumentProcessingPck XpcEditor
+
+
