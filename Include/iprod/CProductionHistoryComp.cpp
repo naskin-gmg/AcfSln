@@ -40,7 +40,9 @@ const iprm::IOptionsList& CProductionHistoryComp::GetResultInfoList(const QByteA
 {
 	static iprm::COptionsManager empty;
 
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
 			return item;
 		}
@@ -54,7 +56,9 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 {
 	PartInfo retVal;
 
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
 			retVal.name = item.name;
 			retVal.serialNumber = item.serialNumber;
@@ -69,11 +73,15 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 
 IProductionHistory::ObjectInfoList CProductionHistoryComp::GetInputObjectInfoList(const QByteArray& productionPartId, const QByteArray& resultId) const
 {
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (const ResultInfo& result : item.resultInfoList){
-				if (result.uuid == resultId){
-					return result.inputObjects;
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
+				if (resultInfo.uuid == resultId){
+					return resultInfo.inputObjects;
 				}
 			}
 		}
@@ -85,11 +93,15 @@ IProductionHistory::ObjectInfoList CProductionHistoryComp::GetInputObjectInfoLis
 
 IProductionHistory::ObjectInfoList CProductionHistoryComp::GetResultObjectInfoList(const QByteArray & productionPartId, const QByteArray & resultId) const
 {
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (const ResultInfo& result : item.resultInfoList){
-				if (result.uuid == resultId){
-					return result.outputObjects;
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
+				if (resultInfo.uuid == resultId){
+					return resultInfo.outputObjects;
 				}
 			}
 		}
@@ -103,7 +115,9 @@ IProductionHistory::ProcessingInfo CProductionHistoryComp::GetPartProcessingInfo
 {
 	ProcessingInfo retVal;
 
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
 			retVal.status = item.status;
 			retVal.time = item.timestamp;
@@ -119,11 +133,15 @@ IProductionHistory::ProcessingInfo CProductionHistoryComp::GetResultInfo(const Q
 {
 	ProcessingInfo retVal;
 
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (const ResultInfo& result : item.resultInfoList){
-				if (result.uuid == resultId){
-					retVal.status = result.status;
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
+				if (resultInfo.uuid == resultId){
+					retVal.status = resultInfo.status;
 					retVal.time = item.timestamp;
 
 					return retVal;
@@ -141,12 +159,17 @@ QString CProductionHistoryComp::GetInspectionResultsFilePath(
 			const QByteArray& resultId,
 			const QByteArray& outputObjectId) const
 {
-	for (const HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		const HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (const ResultInfo& resultInfo : item.resultInfoList){
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
 				if (resultInfo.uuid == resultId){
 					if (!outputObjectId.isEmpty()){
-						for (const ObjectInfo& outputObject : resultInfo.outputObjects){
+						for (int outputIndex = 0; outputIndex < resultInfo.outputObjects.count(); ++outputIndex){
+							const ObjectInfo& outputObject = resultInfo.outputObjects[outputIndex];
 							if (outputObject.uuid == outputObjectId){
 								return outputObject.filePath;
 							}
@@ -190,7 +213,9 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			const QString & inspectionName,
 			istd::IInformationProvider::InformationCategory status)
 {
-	for (HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
 			istd::CChangeNotifier changeNotifier(this);
 
@@ -216,9 +241,12 @@ QByteArray CProductionHistoryComp::InsertInspectionResultPath(
 			const QByteArray& resultId,
 			const QByteArray& objectTypeId)
 {
-	for (HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (ResultInfo& resultInfo : item.resultInfoList){
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				ResultInfo& resultInfo = item.resultInfoList[resultIndex];
 				if (resultInfo.uuid == resultId){
 					if (resultInfo.outputObjects.isEmpty()){
 						ObjectInfo resultObject;
@@ -246,9 +274,13 @@ QByteArray CProductionHistoryComp::InsertInputObjectPath(
 			const QByteArray& resultId,
 			const QByteArray& objectTypeId)
 {
-	for (HistoryItem& item : m_historyItems){
+	for (int i = 0; i < m_historyItems.count(); ++i){
+		HistoryItem& item = m_historyItems[i];
+
 		if (item.uuid == productionPartId){
-			for (ResultInfo& resultInfo : item.resultInfoList){
+			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+				ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
 				if (resultInfo.uuid == resultId){
 					ObjectInfo inputObject;
 					inputObject.filePath = filePath;
