@@ -105,11 +105,14 @@
                     <AttributeInfo Id="ParamsSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="">
+                    <AttributeInfo Id="ParamsSetGui" Type="Reference" ExportId="ParamsSetGui">
                         <Data IsEnabled="true" Value="ParamsGui"/>
                     </AttributeInfo>
                     <AttributeInfo Id="SlaveSceneExtender" Type="Reference" ExportId="">
                         <Data IsEnabled="true" Value="FilteredImageSceneExtender"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ViewCalibrationMode" Type="Integer" ExportId="ViewCalibrationMode">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

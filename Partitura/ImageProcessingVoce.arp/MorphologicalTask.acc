@@ -52,10 +52,25 @@
                     <AttributeInfo Id="AoiParamId" Type="Id" ExportId="AoiParamId">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="BlackTopEnable" Type="Boolean" ExportId="BlackTopEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="CircleFormEnable" Type="Boolean" ExportId="CircleFormEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ClosingEnable" Type="Boolean" ExportId="ClosingEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="DefaultAoi" Type="Reference" ExportId="DefaultAoi">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="DilatationEnable" Type="Boolean" ExportId="DilatationEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ErosionEnable" Type="Boolean" ExportId="ErosionEnable">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
                     <AttributeInfo Id="FilterFormType" Type="Integer" ExportId="FilterFormType">
@@ -70,8 +85,17 @@
                     <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
+                    <AttributeInfo Id="MorthoGradientEnable" Type="Boolean" ExportId="MorthoGradientEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="ProcessingModeId" Type="Id" ExportId="">
                         <Data IsEnabled="true" Value="ProcessingMode"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RectangleFormEnable" Type="Boolean" ExportId="RectangleFormEnable">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WhiteTopEnable" Type="Boolean" ExportId="WhiteTopEnable">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
