@@ -58,13 +58,15 @@ public:
 
 	// reimplemented (istd::IInformationProvider)
 	virtual QDateTime GetInformationTimeStamp() const;
-	virtual InformationCategory GetInformationCategory() const;
+	virtual istd::IInformationProvider::InformationCategory GetInformationCategory() const;
 	virtual int GetInformationId() const;
 	virtual QString GetInformationDescription() const;
 	virtual QString GetInformationSource() const;
 	virtual int GetInformationFlags() const;
 
 protected:
+	virtual istd::IInformationProvider::InformationCategory EvaluateResults(int featuresCount, int nominalModelsCount, QString& searchResultText) const;
+
 	// reimplemented (iinsp::TSupplierCompWrap)
 	virtual bool InitializeWork();
 	virtual int ProduceObject(CFeaturesContainer& result) const;

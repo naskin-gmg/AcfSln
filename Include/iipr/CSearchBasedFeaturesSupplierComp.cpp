@@ -133,6 +133,50 @@ int CSearchBasedFeaturesSupplierComp::GetInformationFlags() const
 
 // protected methods
 
+istd::IInformationProvider::InformationCategory CSearchBasedFeaturesSupplierComp::EvaluateResults(int featuresCount, int nominalModelsCount, QString& searchResultText) const
+{
+	istd::IInformationProvider::InformationCategory informationCategory = istd::IInformationProvider::IC_INFO;
+
+	if (nominalModelsCount < 0) {	// all models enabled
+		if (featuresCount == 0) {
+			searchResultText = QObject::tr("No search model(s) found)");
+			informationCategory = istd::IInformationProvider::IC_ERROR;
+		}
+		else {
+			searchResultText = QObject::tr("%1 search model(s) found").arg(featuresCount);
+			informationCategory = istd::IInformationProvider::IC_INFO;
+		}
+	}
+	else
+		if (nominalModelsCount == 0) {	// no models allowed
+			if (featuresCount == 0) {
+				searchResultText = QObject::tr("No search model(s) found)");	// not found and it must be so
+				informationCategory = istd::IInformationProvider::IC_INFO;
+			}
+			else {
+				searchResultText = QObject::tr("%1 extra model(s) found").arg(featuresCount);
+				informationCategory = istd::IInformationProvider::IC_ERROR;
+			}
+		}
+		else {	// the number of models
+			if (featuresCount == 0) {
+				searchResultText = QObject::tr("No search model(s) found)");
+				informationCategory = istd::IInformationProvider::IC_ERROR;
+			}
+			else if (featuresCount == nominalModelsCount) {
+				searchResultText = QObject::tr("%1 search model(s) found").arg(featuresCount);
+				informationCategory = istd::IInformationProvider::IC_INFO;
+			}
+			else {
+				searchResultText = QObject::tr("Not every search model(s) found (%1 of %2)").arg(featuresCount).arg(nominalModelsCount);
+				informationCategory = istd::IInformationProvider::IC_WARNING;
+			}
+		}
+
+	return informationCategory;
+}
+
+
 // reimplemented (iinsp::TSupplierCompWrap)
 
 bool CSearchBasedFeaturesSupplierComp::InitializeWork()
@@ -184,6 +228,7 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		if (multiSearchParamsManagerPtr != NULL){
 			int searchCount = multiSearchParamsManagerPtr->GetParamsSetsCount();
 			m_defaultInformationCategory = istd::IInformationProvider::IC_NONE;
+
 			for (int searchIndex = 0; searchIndex < searchCount; searchIndex++){
 				const iprm::IParamsSet* paramsPtr = multiSearchParamsManagerPtr->GetParamsSet(searchIndex);
 
@@ -211,28 +256,22 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 				// logical backup status set to error if no models found
 				const iipr::ISearchParams* searchParamsPtr = dynamic_cast<const iipr::ISearchParams*>(paramsPtr->GetParameter(*m_searchParamsIdAttrPtr));
-				int nominalModelsCount = 0;
+				int nominalModelsCount = -1;
 				if (searchParamsPtr != NULL){
 					nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
 				}
 
-				m_defaultInformationCategory = (featuresCount < nominalModelsCount) ? istd::IInformationProvider::IC_ERROR : istd::IInformationProvider::IC_INFO;
-				QString searchResultText =
-					(featuresCount == 0) ? QObject::tr("No search model(s) found)"):
-					(featuresCount == nominalModelsCount) ? QObject::tr("Search model(s) found") :
-					QObject::tr("Not every search model(s) found)");
+				QString searchResultText;
+				istd::IInformationProvider::InformationCategory informationCategory = EvaluateResults(featuresCount, nominalModelsCount, searchResultText);
 
 				ilog::CMessage* message = new ilog::CMessage(
-							m_defaultInformationCategory,
-							MI_SUPPLIER_RESULTS_STATUS,
-							searchResultText,
-							multiSearchParamsManagerPtr->GetParamsSetName(searchIndex));
+					informationCategory,
+					MI_SUPPLIER_RESULTS_STATUS,
+					searchResultText,
+					multiSearchParamsManagerPtr->GetParamsSetName(searchIndex)
+				);
 
 				AddMessage(message);
-
-				if (m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && featuresCount < nominalModelsCount){
-					m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
-				}
 
 				for (int featureIndex = 0; featureIndex < featuresCount; featureIndex++){
 					const iipr::CObjectFeature* objectFeaturePtr = dynamic_cast<const iipr::CObjectFeature*>(&searchResults.GetFeature(featureIndex));
@@ -245,9 +284,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 						return WS_FAILED;
 					}
 
-					if (		m_defaultInformationCategory != istd::IInformationProvider::IC_ERROR && 
-								((searchFeaturePtr != NULL) && searchFeaturePtr->IsNegativeModelEnabled())){
-						m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
+					if (searchFeaturePtr->IsNegativeModelEnabled()){
+						informationCategory = istd::IInformationProvider::IC_ERROR;
 					}
 
 					QByteArray featureId = objectFeaturePtr->GetObjectId();
@@ -277,6 +315,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 
 					result.AddFeature(valuePtr);
 				}
+
+				m_defaultInformationCategory = qMax(m_defaultInformationCategory, informationCategory);
 			}
 		}
 		else{ // Single search
@@ -306,21 +346,8 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 				nominalModelsCount = searchParamsPtr->GetNominalModelsCount();
 			}
 
-			// default result is OK
-			QString searchResultText = QObject::tr("Search model(s) found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
-			m_defaultInformationCategory = istd::IInformationProvider::IC_INFO;
-
-			// we need models but nothing found
-			if (nominalModelsCount > 0 && modelsCount == 0){
-				m_defaultInformationCategory = istd::IInformationProvider::IC_ERROR;
-				searchResultText = QObject::tr("Search model(s) not found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
-			}
-
-			// we need models but less than needed found
-			if (nominalModelsCount > 0 && modelsCount < nominalModelsCount){
-				m_defaultInformationCategory = istd::IInformationProvider::IC_WARNING;
-				searchResultText = QObject::tr("Not all models found (%1 of %2)").arg(modelsCount).arg(nominalModelsCount);
-			}
+			QString searchResultText;
+			m_defaultInformationCategory = EvaluateResults(modelsCount, nominalModelsCount, searchResultText);
 
 			// check if negative models have been found
 			for (int featureIndex = 0; featureIndex < modelsCount; featureIndex++){
