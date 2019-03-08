@@ -32,15 +32,7 @@ public:
 	virtual const iprm::IOptionsList& GetPartsInfoList() const;
 	virtual PartInfo GetPartInfo(const QByteArray& productionPartId) const;
 	virtual const iprm::IOptionsList& GetResultInfoList(const QByteArray& productionPartId) const;
-	virtual ObjectInfoList GetInputObjectInfoList(const QByteArray& productionPartId, const QByteArray& resultId) const;
-	virtual ObjectInfoList GetResultObjectInfoList(const QByteArray& productionPartId, const QByteArray& resultId) const;
-	virtual ProcessingInfo GetPartProcessingInfo(const QByteArray& productionPartId) const;
-	virtual ProcessingInfo GetResultInfo(const QByteArray& productionPartId, const QByteArray& resultId) const;
-	virtual QString GetInspectionResultsFilePath(
-				const QByteArray& productionPartId,
-				const QByteArray& resultId,
-				const QByteArray& inputObjectId = QByteArray()) const;
-
+	virtual ResultInfo GetResultInfo(const QByteArray& productionPartId, const QByteArray& resultId) const;
 
 	// reimplemented (IProductionHistoryController)
 	virtual QByteArray InsertNewProductionPart(
@@ -75,22 +67,6 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	struct ResultInfo
-	{
-		ResultInfo()
-			:status(istd::IInformationProvider::IC_NONE)
-		{
-			uuid = QUuid::createUuid().toByteArray();
-		}
-
-		QByteArray uuid;
-		QString name;
-		QByteArray inspectionId;
-		ObjectInfoList inputObjects;
-		ObjectInfoList outputObjects;
-		istd::IInformationProvider::InformationCategory status;
-	};
-
 	typedef QList<ResultInfo> ResultInfoList;
 
 	struct HistoryItem: virtual public iprm::IOptionsList
