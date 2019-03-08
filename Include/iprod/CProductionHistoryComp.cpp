@@ -64,6 +64,8 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 			retVal.serialNumber = item.serialNumber;
 			retVal.productName = item.productName;
 			retVal.productId = item.productId;
+			retVal.processingInfo.status = item.status;
+			retVal.processingInfo.time = item.timestamp;
 
 			break;
 		}
