@@ -14,7 +14,7 @@ namespace iprod
 static const iser::CArchiveTag s_partsTag("Items", "List of history items", iser::CArchiveTag::TT_MULTIPLE);
 static const iser::CArchiveTag s_partTag("Item", "Single item", iser::CArchiveTag::TT_GROUP);
 static const iser::CArchiveTag s_partUuidTag("Uuid", "UUID of the part", iser::CArchiveTag::TT_LEAF);
-static const iser::CArchiveTag s_partSerialTag("SerialNuber", "Serial number of the part", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_partSerialTag("SerialNumber", "Serial number of the part", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_productNameTag("ProductName", "Product name of the part", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_productIdTag("ProductId", "Product id of the part", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_partTimeStampTag("Time", "Time of the part production", iser::CArchiveTag::TT_LEAF);
