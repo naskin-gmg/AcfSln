@@ -20,7 +20,8 @@ public:
 		Insert a new part into the history.
 	*/
 	virtual QByteArray InsertNewProductionPart(
-				const QString& partName,
+				const QString& productName,
+				const QByteArray& productId,
 				const QString& serialNumber = QString(),
 				istd::IInformationProvider::InformationCategory = istd::IInformationProvider::IC_NONE,
 				const QDateTime& productionTime = QDateTime()) = 0;

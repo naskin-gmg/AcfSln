@@ -40,8 +40,12 @@ public:
 				const QByteArray& productionPartId,
 				const QByteArray& resultId,
 				const QByteArray& inputObjectId = QByteArray()) const;
+
+
+	// reimplemented (IProductionHistoryController)
 	virtual QByteArray InsertNewProductionPart(
-				const QString& partName,
+				const QString& productName,
+				const QByteArray& productId,
 				const QString& serialNumber = QString(),
 				istd::IInformationProvider::InformationCategory = istd::IInformationProvider::IC_NONE,
 				const QDateTime& productionTime = QDateTime());
@@ -101,8 +105,9 @@ private:
 		virtual QByteArray GetOptionId(int index) const;
 		virtual bool IsOptionEnabled(int index) const;
 
-		QString name;
+		QString productName;
 		QString serialNumber;
+		QByteArray productId;
 		QByteArray uuid;
 		QDateTime timestamp;
 		istd::IInformationProvider::InformationCategory status;

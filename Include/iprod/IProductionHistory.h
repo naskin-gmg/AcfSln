@@ -33,7 +33,8 @@ public:
 	struct PartInfo
 	{
 		QString serialNumber;
-		QString name;
+		QString productName;
+		QByteArray productId;
 	};
 
 	/**

@@ -15,7 +15,8 @@ static const iser::CArchiveTag s_partsTag("Items", "List of history items", iser
 static const iser::CArchiveTag s_partTag("Item", "Single item", iser::CArchiveTag::TT_GROUP);
 static const iser::CArchiveTag s_partUuidTag("Uuid", "UUID of the part", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_partSerialTag("SerialNuber", "Serial number of the part", iser::CArchiveTag::TT_LEAF);
-static const iser::CArchiveTag s_partNameTag("Name", "Name of the part", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_productNameTag("ProductName", "Product name of the part", iser::CArchiveTag::TT_LEAF);
+static const iser::CArchiveTag s_productIdTag("ProductId", "Product id of the part", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_partTimeStampTag("Time", "Time of the part production", iser::CArchiveTag::TT_LEAF);
 static const iser::CArchiveTag s_partStatusTag("Status", "Status of the part production", iser::CArchiveTag::TT_LEAF);
 
@@ -60,8 +61,9 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 		const HistoryItem& item = m_historyItems[i];
 
 		if (item.uuid == productionPartId){
-			retVal.name = item.name;
 			retVal.serialNumber = item.serialNumber;
+			retVal.productName = item.productName;
+			retVal.productId = item.productId;
 
 			break;
 		}
@@ -188,7 +190,8 @@ QString CProductionHistoryComp::GetInspectionResultsFilePath(
 
 
 QByteArray CProductionHistoryComp::InsertNewProductionPart(
-			const QString& partName,
+			const QString& productName,
+			const QByteArray& productId,
 			const QString& serialNumber,
 			istd::IInformationProvider::InformationCategory status,
 			const QDateTime& productionTime)
@@ -196,7 +199,8 @@ QByteArray CProductionHistoryComp::InsertNewProductionPart(
 	istd::CChangeNotifier changeNotifier(this);
 	
 	HistoryItem newItem;
-	newItem.name = partName;
+	newItem.productName = productName;
+	newItem.productId = productId;
 	newItem.serialNumber = serialNumber;
 	newItem.timestamp = productionTime.isValid() ? productionTime : QDateTime::currentDateTime();
 	newItem.status = status;
@@ -348,9 +352,13 @@ bool CProductionHistoryComp::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(part.uuid);
 		retVal = retVal && archive.EndTag(s_partUuidTag);
 
-		retVal = retVal && archive.BeginTag(s_partNameTag);
-		retVal = retVal && archive.Process(part.name);
-		retVal = retVal && archive.EndTag(s_partNameTag);
+		retVal = retVal && archive.BeginTag(s_productNameTag);
+		retVal = retVal && archive.Process(part.productName);
+		retVal = retVal && archive.EndTag(s_productNameTag);
+
+		retVal = retVal && archive.BeginTag(s_productIdTag);
+		retVal = retVal && archive.Process(part.productId);
+		retVal = retVal && archive.EndTag(s_productIdTag);
 
 		retVal = retVal && archive.BeginTag(s_partSerialTag);
 		retVal = retVal && archive.Process(part.serialNumber);
@@ -581,7 +589,7 @@ int CProductionHistoryComp::PartList::GetOptionsCount() const
 
 QString CProductionHistoryComp::PartList::GetOptionName(int index) const
 {
-	return m_parentPtr->m_historyItems[index].name;
+	return m_parentPtr->m_historyItems[index].productName;
 }
 
 
