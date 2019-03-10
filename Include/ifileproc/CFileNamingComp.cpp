@@ -10,6 +10,61 @@ namespace ifileproc
 {
 
 
+// public static methods
+
+QString CFileNamingComp::CalculateNewFileName(
+			const QString& inputFilePath,
+			const QString& outputDirectoryPath,
+			const QString& prefix,
+			const QString& suffix,
+			const QString& fileExtension,
+			IFileNamingParams::OverwriteStrategy overwriteStrategy)
+{
+	QFileInfo inputFileInfo(inputFilePath);
+	QString baseFileName = inputFileInfo.completeBaseName();
+	QString outputExtension = inputFileInfo.suffix();
+
+	if (!fileExtension.isEmpty()){
+		outputExtension = fileExtension;
+	}
+
+	// Calculate the base file name:
+	baseFileName = prefix + baseFileName;
+	baseFileName += suffix;
+
+	QString newFileName = baseFileName;
+	
+	if (!outputExtension.isEmpty()){
+		newFileName += QString(".") + outputExtension;
+	}
+
+	if (!outputDirectoryPath.isEmpty()){
+		QDir outputDirectory(outputDirectoryPath);
+
+		if (overwriteStrategy == ifileproc::IFileNamingParams::RM_NUMBERING){
+			QString outputFilePath = outputDirectory.absoluteFilePath(newFileName);
+
+			int counter = 0;
+			while (true){
+				QFileInfo outputFileInfo(outputFilePath);
+				if (outputFileInfo.exists()){
+					newFileName = QString("%1_%2").arg(baseFileName).arg(++counter, 3, 10, QChar('0')) + "." + outputExtension;
+
+					outputFilePath = outputDirectory.absoluteFilePath(newFileName);
+				}
+				else{
+					break;
+				}
+			}
+		}
+
+		return outputDirectory.absoluteFilePath(newFileName);
+	}
+
+	return QString();
+}
+
+
 // public methods
 
 // reimplemented (ifileproc::IFileNaming)
@@ -37,13 +92,16 @@ QString CFileNamingComp::CalculateFileName(
 		fileNamingParamsPtr = m_fileNamingParamsCompPtr.GetPtr();
 	}
 
-	// Remove patterns to be ingnored:
+	QString prefix;
+	QString suffix;
+	ifileproc::IFileNamingParams::OverwriteStrategy overwriteStrategy = ifileproc::IFileNamingParams::RM_OVERWRITE;
 
-	// Calculate the base file name:
 	if (fileNamingParamsPtr != NULL){
-		baseFileName = fileNamingParamsPtr->GetPrefix() + baseFileName;
-		baseFileName += fileNamingParamsPtr->GetSuffix();
+		prefix = fileNamingParamsPtr->GetPrefix();
+		suffix = fileNamingParamsPtr->GetSuffix();
+		overwriteStrategy = fileNamingParamsPtr->GetOverwriteStrategy();
 	}
+
 
 	// Calculate the new extension:
 	if (m_fileTypeInfoCompPtr.IsValid()){
@@ -61,41 +119,7 @@ QString CFileNamingComp::CalculateFileName(
 		}
 	}
 
-	QString newFileName = baseFileName;
-	
-	if (!outputExtension.isEmpty()){
-		newFileName += QString(".") + outputExtension;
-	}
-
-	if (!targetDirectoryPath.isEmpty()){
-		QDir outputDirectory(targetDirectoryPath);
-
-		QString outputFilePath = outputDirectory.absoluteFilePath(newFileName);
-
-		if (fileNamingParamsPtr != NULL){
-			if (fileNamingParamsPtr->GetOverwriteStrategy() == ifileproc::IFileNamingParams::RM_OVERWRITE){
-				return outputFilePath;
-			}
-			else{
-				int counter = 0;
-				while (true){
-					QFileInfo outputFileInfo(outputFilePath);
-					if (outputFileInfo.exists()){
-						newFileName = QString("%1_%2").arg(baseFileName).arg(++counter, 3, 10, QChar('0')) + "." + outputExtension;
-						
-						outputFilePath = outputDirectory.absoluteFilePath(newFileName);
-					}
-					else{
-						break;
-					}
-				}
-			}
-		}
-
-		return outputDirectory.absoluteFilePath(newFileName);
-	}
-
-	return QString();
+	return CalculateNewFileName(inputFilePath, targetDirectoryPath, prefix, suffix, outputExtension, overwriteStrategy);
 }
 
 

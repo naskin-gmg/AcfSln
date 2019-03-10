@@ -34,6 +34,14 @@ public:
 		I_ASSIGN(m_fileNamingParamsCompPtr, "FileNamingParams", "Rules for the file naming", false, "FileNamingParams"); 
 	I_END_COMPONENT;
 
+	static QString CalculateNewFileName(
+				const QString& inputFilePath,
+				const QString& outputDirectoryPath,
+				const QString& prefix,
+				const QString& suffix,
+				const QString& fileExtension,
+				IFileNamingParams::OverwriteStrategy overwriteStrategy);
+
 	// reimplemented (ifileproc::IFileNaming)
 	virtual QString CalculateFileName(
 				const QString& inputFileName,
