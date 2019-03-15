@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4559" Description="ACF"/>
-            <Version Id="1" Number="1913" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4738" Description="ACF"/>
+            <Version Id="1" Number="2021" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="328961" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Extracts edges from image</Description>
@@ -55,6 +55,9 @@
         <Element Id="InspectionTask" PackageId="InspectionPck" ComponentId="InspectionTask">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
+                    <AttributeInfo Id="DiagnosticName" Type="String" ExportId="DiagnosticName">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
                     <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
