@@ -387,9 +387,6 @@ bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 		}
 	}
 
-	double scaleX = outputImageSize.GetX() / sourceAoi.GetWidth();
-	double scaleY = outputImageSize.GetY() / sourceAoi.GetHeight();
-
 	bool flipHorizontal = false;
 	bool flipVertical = false;
 	if ((orientationMode == OM_NO_REFLEXION) || (orientationMode == OM_VISUAL)){
@@ -410,6 +407,9 @@ bool CImageCropDecalibrateProcessorComp::CalcCalibration(
 			}
 		}
 	}
+
+	double scaleX = outputImageSize.GetX() / sourceAoi.GetWidth();
+	double scaleY = outputImageSize.GetY() / sourceAoi.GetHeight();
 
 	i2d::CMatrix2d scaleMatrix(flipHorizontal? -scaleX: scaleX, 0, 0, flipVertical? -scaleY: scaleY);
 
