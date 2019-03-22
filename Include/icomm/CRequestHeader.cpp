@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QtCore/QUuid.h>
+#include <QtCore/QUuid>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
