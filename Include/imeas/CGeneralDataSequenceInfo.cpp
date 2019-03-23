@@ -153,7 +153,7 @@ bool CGeneralDataSequenceInfo::Serialize(iser::IArchive& archive)
 		BaseClass::Reset();
 	}
 
-	for (int index = 0; index < channelsCount; ++index) {
+	for (int index = 0; index < channelsCount; ++index){
 		retVal = retVal && archive.BeginTag(s_channelTag);
 
 		QString channelName;

@@ -64,10 +64,10 @@ bool CCrossCorrelationProcessorComp::CalculateCorrelation(
 
 		// Calculate the correlation sequence
 		int maxDelay = -outputSamplesPerChannelsCount / 2;
-		for (int offset = -maxDelay; offset < maxDelay; offset++) {
+		for (int offset = -maxDelay; offset < maxDelay; offset++){
 			double integral = 0.0;
 
-			for (int i = 0;i < outputSamplesPerChannelsCount; i++) {
+			for (int i = 0;i < outputSamplesPerChannelsCount; i++){
 				int j = i + offset;
 				if (j < 0 || j >= outputSamplesPerChannelsCount){
 					continue;

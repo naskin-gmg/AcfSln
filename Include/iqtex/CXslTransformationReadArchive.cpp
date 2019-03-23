@@ -78,7 +78,7 @@ bool CXslTransformationReadArchive::OpenFile(const QString& filePath, const QStr
 
 
 	if (xslFilePath.isEmpty()){
-		if (!m_document.setContent(&xmlFile)) {
+		if (!m_document.setContent(&xmlFile)){
 			xmlFile.close();
 
 			return false;
@@ -99,7 +99,7 @@ bool CXslTransformationReadArchive::OpenFile(const QString& filePath, const QStr
 		query.setQuery(&xslfile);
 		query.evaluateTo(&content); 
 
-		if (!m_document.setContent(content)) {
+		if (!m_document.setContent(content)){
 			xmlFile.close();
 			xslfile.close();
 

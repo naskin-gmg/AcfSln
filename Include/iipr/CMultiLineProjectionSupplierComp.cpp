@@ -137,21 +137,21 @@ const imeas::IDataSequence* CMultiLineProjectionSupplierComp::GetDataSequence() 
 
 		int sequenceCount = resultPtr->count();
 		int endChannelsCount = 0;
-		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex) {
+		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex){
 			const imeas::CGeneralDataSequence singleSequence = resultPtr->at(sequenceIndex);
 			int channelsCount = singleSequence.GetChannelsCount();
-			if (endChannelsCount < channelsCount) {
+			if (endChannelsCount < channelsCount){
 				endChannelsCount = channelsCount;
 			}
 		}
 		averageDataSequence->CreateSequence(sequenceCount, endChannelsCount);
-		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex) {
+		for (int sequenceIndex = 0; sequenceIndex < sequenceCount; ++sequenceIndex){
 			const imeas::CGeneralDataSequence singleSequence = resultPtr->at(sequenceIndex);
 			int channelsCount = singleSequence.GetChannelsCount();
 			int samplesCount = singleSequence.GetSamplesCount();
-			for (int channelsIndex = 0; channelsIndex < channelsCount; ++channelsIndex) {
+			for (int channelsIndex = 0; channelsIndex < channelsCount; ++channelsIndex){
 				double samplesSum = 0;
-				for (int samplesIndex = 0; samplesIndex < samplesCount; ++samplesIndex) {
+				for (int samplesIndex = 0; samplesIndex < samplesCount; ++samplesIndex){
 					samplesSum += singleSequence.GetSample(samplesIndex, channelsIndex);
 				}
 				double average = samplesSum / samplesCount;

@@ -137,8 +137,8 @@ istd::IInformationProvider::InformationCategory CSearchBasedFeaturesSupplierComp
 {
 	istd::IInformationProvider::InformationCategory informationCategory = istd::IInformationProvider::IC_INFO;
 
-	if (nominalModelsCount < 0) {	// all models enabled
-		if (featuresCount == 0) {
+	if (nominalModelsCount < 0){	// all models enabled
+		if (featuresCount == 0){
 			searchResultText = QObject::tr("No search model(s) found)");
 			informationCategory = istd::IInformationProvider::IC_ERROR;
 		}
@@ -148,8 +148,8 @@ istd::IInformationProvider::InformationCategory CSearchBasedFeaturesSupplierComp
 		}
 	}
 	else
-		if (nominalModelsCount == 0) {	// no models allowed
-			if (featuresCount == 0) {
+		if (nominalModelsCount == 0){	// no models allowed
+			if (featuresCount == 0){
 				searchResultText = QObject::tr("No search model(s) found)");	// not found and it must be so
 				informationCategory = istd::IInformationProvider::IC_INFO;
 			}
@@ -159,11 +159,11 @@ istd::IInformationProvider::InformationCategory CSearchBasedFeaturesSupplierComp
 			}
 		}
 		else {	// the number of models
-			if (featuresCount == 0) {
+			if (featuresCount == 0){
 				searchResultText = QObject::tr("No search model(s) found)");
 				informationCategory = istd::IInformationProvider::IC_ERROR;
 			}
-			else if (featuresCount == nominalModelsCount) {
+			else if (featuresCount == nominalModelsCount){
 				searchResultText = QObject::tr("%1 search model(s) found").arg(featuresCount);
 				informationCategory = istd::IInformationProvider::IC_INFO;
 			}

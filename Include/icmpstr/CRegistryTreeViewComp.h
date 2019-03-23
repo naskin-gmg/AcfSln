@@ -150,7 +150,10 @@ private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
 	{
 	public:
-		SelectionInfoImpl(): m_parentPtr(NULL) {}
+		SelectionInfoImpl()
+			:m_parentPtr(NULL)
+		{
+		}
 		
 		void SetParent(CRegistryTreeViewComp* parentPtr);
 

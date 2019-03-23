@@ -104,7 +104,7 @@ void CMultiLineProjectionSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 			ProjectionSlider->setMaximum(count - 1);
 			ProjectionSpin->setMaximum(count - 1);
 		}
-		else if (count == 0) {
+		else if (count == 0){
 			ProjectionSlider->setMaximum(0);
 			ProjectionSpin->setMaximum(0);
 		}
