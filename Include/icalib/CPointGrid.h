@@ -17,7 +17,7 @@ class CPointGrid:
 {
 public:
 	typedef istd::TArray<i2d::CVector2d, 2> BaseClass;
-	typedef typename BaseClass::Elements Elements;
+	typedef BaseClass::Elements Elements;
 
 	const Elements& GetElements() const;
 
