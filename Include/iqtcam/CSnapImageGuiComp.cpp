@@ -21,7 +21,7 @@ namespace iqtcam
 CSnapImageGuiComp::CSnapImageGuiComp()
 :	m_paramsObserver(this)
 {
-	m_timer.setInterval(40);
+	m_timer.setSingleShot(true);
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
 }
 
@@ -185,7 +185,6 @@ void CSnapImageGuiComp::OnGuiHidden()
 
 void CSnapImageGuiComp::OnComponentCreated()
 {
-	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
 }
 
 
@@ -300,6 +299,7 @@ void CSnapImageGuiComp::OnSnapOnChanges(bool checked)
 void CSnapImageGuiComp::OnTimerReady()
 {
 	SnapImage();
+	m_timer.start();
 }
 
 

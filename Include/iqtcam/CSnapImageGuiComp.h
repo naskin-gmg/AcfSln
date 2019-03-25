@@ -58,7 +58,6 @@ public:
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN_TO(m_paramsSetObserverCompPtr, m_paramsSetGuiCompPtr, false);
 		I_ASSIGN_TO(m_paramsSetExtenderCompPtr, m_paramsSetGuiCompPtr, false);
-		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
 		I_ASSIGN(m_allowSnapOnChangeAttrPtr, "AllowSnapOnChange", "If true then shows action for snap on parameters changed", false, false);
 	I_END_COMPONENT;
 
@@ -122,7 +121,6 @@ private:
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 	I_REF(iqt2d::IViewExtender, m_paramsSetExtenderCompPtr);
 
-	I_ATTR(double, m_liveIntervalAttrPtr);
 	I_ATTR(bool, m_allowSnapOnChangeAttrPtr);
 
 	QTimer m_timer;
