@@ -23,7 +23,7 @@ namespace iipr
 
 
 /**
-	Supplier of bitmap built on difference of two images.
+	\deprecated Please use CPerspectiveCalibrationSupplierComp in combination with CCheckerboardPointGridExtractorComp!
 */
 class CCheckboardCalibSupplierComp:
 			public iinsp::TSupplierCompWrap< icalib::CPerspectiveCalibration2d >,

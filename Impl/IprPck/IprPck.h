@@ -67,6 +67,8 @@
 #include <iipr/CMultiPointPosCorrSupplierComp.h>
 #include <iipr/CLensCorrFindSupplierComp.h>
 #include <iipr/CImageIntegralProcessorComp.h>
+#include <iipr/CCheckerboardPointGridExtractorComp.h>
+#include <iipr/CPerspectiveCalibrationSupplierComp.h>
 
 
 /**
@@ -145,6 +147,8 @@ typedef icomp::TModelCompWrap<iipr::CCheckboardCalibSupplierComp> CheckboardCali
 typedef icomp::TModelCompWrap<iipr::CMultiPointPosCorrSupplierComp> MultiPointPosCorrSupplier;
 typedef icomp::TModelCompWrap<iipr::CLensCorrFindSupplierComp> LensCorrFindSupplier;
 typedef iipr::CImageIntegralProcessorComp ImageIntegralProcessor;
+typedef iipr::CCheckerboardPointGridExtractorComp CheckerboardPointGridExtractor;
+typedef icomp::TModelCompWrap<iipr::CPerspectiveCalibrationSupplierComp> PerspectiveCalibrationSupplier;
 
 
 } // namespace IprPck

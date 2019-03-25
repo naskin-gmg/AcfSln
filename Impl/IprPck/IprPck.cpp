@@ -288,6 +288,16 @@ I_EXPORT_COMPONENT(
 			"Processor calculation integral image of some input image",
 			"Integral Derivative Image Processor" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processor") IM_AUTHOR("\"Witold Gantzke\""));
 
+I_EXPORT_COMPONENT(
+			CheckerboardPointGridExtractor,
+			"Extractor of grid points in a checkerboard image",
+			"Calibration Checkerboard Grid Processor" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processor"));
+
+I_EXPORT_COMPONENT(
+			PerspectiveCalibrationSupplier,
+			"Supplier of the perspective calibration based on some point grid",
+			"Calibration Perspective Supplier Provider" IM_CATEGORY(I_DATA_PROCESSING));
+
 
 } // namespace IprPck
 
