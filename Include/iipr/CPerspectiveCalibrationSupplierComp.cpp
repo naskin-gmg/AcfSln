@@ -119,8 +119,8 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 
 	iipr::CPerspCalibFinder calibFinder;
 	return calibFinder.FindPerspCalib(
-				nominalPositions.GetElements().data(),
-				imagePoints.m_points.GetElements().data(),
+				&nominalPositions.GetElements()[0],
+				&imagePoints.m_points.GetElements()[0],
 				int(imagePoints.m_points.GetElements().size()),
 				result);
 }
@@ -136,17 +136,16 @@ int CPerspectiveCalibrationSupplierComp::ProduceObject(ProductType& result) cons
 
 	const iimg::IBitmap* bitmapPtr = m_bitmapProviderCompPtr->GetBitmap();
 	if (bitmapPtr == NULL){
-		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Input image could not be provided"), "CheckboardCalibSupplier"));
+		AddMessage(new ilog::CMessage(ilog::CMessage::IC_ERROR, 0, QObject::tr("Input image could not be provided"), "PerspectiveCalibrationSupplier"));
 
 		return WS_FAILED;
 	}
 
-	Timer performanceTimer(this, "Checkboard calibration");
+	Timer performanceTimer(this, "Perspective calibration");
 
 	if (!CalculateCalibration(*bitmapPtr, result)) {
 		return WS_FAILED;
 	}
-
 
 	return WS_OK;
 }

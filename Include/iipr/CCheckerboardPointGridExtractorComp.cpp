@@ -64,10 +64,10 @@ struct LinesConsumer : virtual public iipr::IFeaturesConsumer
 // reimplemented (iipr::IImageToFeatureProcessor)
 
 int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
-	const iprm::IParamsSet* paramsPtr,
-	const iimg::IBitmap& image,
-	IFeaturesConsumer& results,
-	ibase::IProgressManager* /*progressManagerPtr*/)
+			const iprm::IParamsSet* paramsPtr,
+			const iimg::IBitmap& image,
+			IFeaturesConsumer& results,
+			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	LinesConsumer processedLines;
 	if (m_lineFinderCompPtr->DoExtractFeatures(paramsPtr, image, processedLines) != iproc::IProcessor::TS_OK) {
@@ -91,10 +91,10 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 				line1.GetExtendedDistance(line1.GetPoint2());
 
 			if (distance < 8) {
-				const auto a1 = (line1.GetPoint1() - line2.GetPoint1()).GetLength2();
-				const auto a2 = (line1.GetPoint1() - line2.GetPoint2()).GetLength2();
-				const auto a3 = (line1.GetPoint2() - line2.GetPoint1()).GetLength2();
-				const auto a4 = (line1.GetPoint2() - line2.GetPoint2()).GetLength2();
+				const double a1 = (line1.GetPoint1() - line2.GetPoint1()).GetLength2();
+				const double a2 = (line1.GetPoint1() - line2.GetPoint2()).GetLength2();
+				const double a3 = (line1.GetPoint2() - line2.GetPoint1()).GetLength2();
+				const double a4 = (line1.GetPoint2() - line2.GetPoint2()).GetLength2();
 
 				if (a1 >= a2 && a1 >= a3 && a1 >= a4) {
 					line1.SetPoint1(line1.GetPoint1());
@@ -316,10 +316,10 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	crossPositions->SetSize(0, int(vanLines[0].size()));
 	crossPositions->SetSize(1, int(vanLines[1].size()));
 
-	for (int axisYLineIndex = 0; axisYLineIndex < vanLines[1].size(); ++axisYLineIndex) {
+	for (int axisYLineIndex = 0; axisYLineIndex < int(vanLines[1].size()); ++axisYLineIndex) {
 		const i2d::CLine2d& axisYLine = vanLines[1][axisYLineIndex];
 
-		for (int axisXLineIndex = 0; axisXLineIndex < vanLines[0].size(); ++axisXLineIndex) {
+		for (int axisXLineIndex = 0; axisXLineIndex < int(vanLines[0].size()); ++axisXLineIndex) {
 			const i2d::CLine2d& axisXLine = vanLines[0][axisXLineIndex];
 
 			i2d::CVector2d crossPoint;
@@ -338,7 +338,9 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 			0, QObject::tr("Found %1 point(s)").arg(crossPositions->GetElements().size()), "Chessboard Point Grid Extractor"
 		);
 
-		for (const i2d::CVector2d& p : crossPositions->GetElements()) {
+		for (iipr::CPointGridFeature::Iterator iter = crossPositions->Begin(); iter != crossPositions->End(); ++iter){
+			const i2d::CVector2d& p = *iter;
+
 			i2d::CPosition2d* messagePointPtr = new i2d::CPosition2d(p);
 			messagePtr->InsertAttachedObject(messagePointPtr);
 		}
