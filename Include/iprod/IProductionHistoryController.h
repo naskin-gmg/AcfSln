@@ -22,9 +22,9 @@ public:
 	virtual QByteArray InsertNewProductionPart(
 				const QString& productName,
 				const QByteArray& productId,
-				const QString& serialNumber = QString(),
-				istd::IInformationProvider::InformationCategory = istd::IInformationProvider::IC_NONE,
-				const QDateTime& productionTime = QDateTime()) = 0;
+				const QString& serialNumber,
+				istd::IInformationProvider::InformationCategory partStatus,
+				const QDateTime& productionTime) = 0;
 
 	/**
 		Insert a new inspection result.
@@ -33,7 +33,8 @@ public:
 				const QByteArray& productionPartId,
 				const QByteArray& inspectionId,
 				const QString& inspectionName,
-				istd::IInformationProvider::InformationCategory status = istd::IInformationProvider::IC_NONE) = 0;
+				istd::IInformationProvider::InformationCategory status,
+				const QDateTime& resultTime) = 0;
 
 	/**
 		Set path to the inspection results file.

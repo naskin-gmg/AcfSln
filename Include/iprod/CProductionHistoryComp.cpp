@@ -123,7 +123,8 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			const QByteArray& productionPartId,
 			const QByteArray& inspectionId,
 			const QString & inspectionName,
-			istd::IInformationProvider::InformationCategory status)
+			istd::IInformationProvider::InformationCategory status,
+			const QDateTime& resultTime)
 {
 	for (int i = 0; i < m_historyItems.count(); ++i){
 		HistoryItem& item = m_historyItems[i];
@@ -136,7 +137,7 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			newResult.inspectionId = inspectionId;
 			newResult.name = inspectionName;
 			newResult.processingInfo.status = status;
-			newResult.processingInfo.time = QDateTime::currentDateTime();
+			newResult.processingInfo.time = !resultTime.isValid() ? QDateTime::currentDateTime() : resultTime;
 
 			item.resultInfoList.push_back(newResult);
 

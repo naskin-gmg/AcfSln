@@ -38,14 +38,15 @@ public:
 	virtual QByteArray InsertNewProductionPart(
 				const QString& productName,
 				const QByteArray& productId,
-				const QString& serialNumber = QString(),
-				istd::IInformationProvider::InformationCategory = istd::IInformationProvider::IC_NONE,
-				const QDateTime& productionTime = QDateTime());
+				const QString& serialNumber,
+				istd::IInformationProvider::InformationCategory,
+				const QDateTime& productionTime);
 	virtual QByteArray InsertNewInspectionResult(
 				const QByteArray& productionPartId,
 				const QByteArray& resultId,
 				const QString& inspectionName,
-				istd::IInformationProvider::InformationCategory status = istd::IInformationProvider::IC_NONE);
+				istd::IInformationProvider::InformationCategory status,
+				const QDateTime& resultTime);
 	virtual QByteArray InsertInspectionResultPath(
 				const QString& filePath,
 				const QByteArray& productionPartId,
