@@ -19,9 +19,6 @@ CSamplesInfo::CSamplesInfo(const istd::CRange& logicalSamplesRange, const QDateT
 :	m_logicalSamplesRange(logicalSamplesRange),
 	m_samplingStartTime(samplingStartTime)
 {
-	QString time = m_samplingStartTime.toString();
-
-	qDebug(qPrintable(time));
 }
 
 
