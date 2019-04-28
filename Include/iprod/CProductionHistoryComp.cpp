@@ -1,9 +1,16 @@
 #include <iprod/CProductionHistoryComp.h>
 
 
+// Qt includes
+#include <QtCore/QDir>
+
 // ACF includes
 #include <istd/CChangeNotifier.h>
+#include <istd/CSystem.h>
 #include <iser/CPrimitiveTypesSerializer.h>
+#include <ifile/CCompactXmlFileReadArchive.h>
+#include <ifile/CCompactXmlFileWriteArchive.h>
+#include <ifile/CFileListProviderComp.h>
 #include <iprm/COptionsManager.h>
 
 
@@ -114,6 +121,8 @@ QByteArray CProductionHistoryComp::InsertNewProductionPart(
 	newItem.status = status;
 
 	m_historyItems.push_back(newItem);
+
+	SaveRepositoryItem(newItem);
 	
 	return newItem.uuid;
 }
@@ -140,6 +149,8 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			newResult.processingInfo.time = !resultTime.isValid() ? QDateTime::currentDateTime() : resultTime;
 
 			item.resultInfoList.push_back(newResult);
+
+			SaveRepositoryItem(item);
 
 			return newResult.uuid;
 		}
@@ -170,6 +181,8 @@ QByteArray CProductionHistoryComp::InsertInspectionResultPath(
 						istd::CChangeNotifier changeNotifier(this);
 
 						resultInfo.outputObjects.push_back(resultObject);
+
+						SaveRepositoryItem(item);
 
 						return resultObject.uuid;
 					}
@@ -204,6 +217,8 @@ QByteArray CProductionHistoryComp::InsertInputObjectPath(
 
 					resultInfo.inputObjects.push_back(inputObject);
 
+					SaveRepositoryItem(item);
+
 					return inputObject.uuid;
 				}
 			}
@@ -223,6 +238,10 @@ void CProductionHistoryComp::RemoveProductionPart(const QByteArray& productionPa
 		if (item.uuid == productionPartId){
 			istd::CChangeNotifier changeNotifier(this);
 
+			QString itemPath = GetItemPath(item);
+
+			QFile::remove(itemPath);
+
 			iterator.remove();
 
 			break;
@@ -233,73 +252,6 @@ void CProductionHistoryComp::RemoveProductionPart(const QByteArray& productionPa
 }
 
 
-// reimplemented (iser::ISerializable)
-
-bool CProductionHistoryComp::Serialize(iser::IArchive& archive)
-{
-	bool retVal = true;
-
-	istd::CChangeNotifier changeNotifier(archive.IsStoring() ? NULL : this);
-
-	if (!archive.IsStoring()){
-		m_historyItems.clear();
-	}
-
-	int partsCount = m_historyItems.count();
-
-	retVal = retVal && archive.BeginMultiTag(s_partsTag, s_partTag, partsCount);
-
-	for (int i = 0; i < partsCount; ++i){
-		if(!archive.IsStoring()){
-			m_historyItems.push_back(HistoryItem());
-		}
-
-		retVal = retVal && archive.BeginTag(s_partTag);
-
-		HistoryItem& part = m_historyItems[i];
-
-		retVal = retVal && archive.BeginTag(s_partUuidTag);
-		retVal = retVal && archive.Process(part.uuid);
-		retVal = retVal && archive.EndTag(s_partUuidTag);
-
-		retVal = retVal && archive.BeginTag(s_productNameTag);
-		retVal = retVal && archive.Process(part.productName);
-		retVal = retVal && archive.EndTag(s_productNameTag);
-
-		retVal = retVal && archive.BeginTag(s_productIdTag);
-		retVal = retVal && archive.Process(part.productId);
-		retVal = retVal && archive.EndTag(s_productIdTag);
-
-		retVal = retVal && archive.BeginTag(s_partSerialTag);
-		retVal = retVal && archive.Process(part.serialNumber);
-		retVal = retVal && archive.EndTag(s_partSerialTag);
-
-		retVal = retVal && archive.BeginTag(s_partTimeStampTag);
-		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, part.timestamp);
-		retVal = retVal && archive.EndTag(s_partTimeStampTag);
-
-		retVal = retVal && archive.BeginTag(s_partStatusTag);
-		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeEnum<
-					istd::IInformationProvider::InformationCategory,
-					istd::IInformationProvider::ToString,
-					istd::IInformationProvider::FromString>(archive, part.status);
-		retVal = retVal && archive.EndTag(s_partStatusTag);
-
-		retVal = retVal && SerializeResultInfoList(archive, part.resultInfoList);
-
-		retVal = retVal && archive.EndTag(s_partTag);
-
-		if (!retVal){
-			return false;
-		}
-	}
-
-	retVal = retVal && archive.EndTag(s_partsTag);
-
-	return retVal;
-}
-
-
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
@@ -307,6 +259,15 @@ bool CProductionHistoryComp::Serialize(iser::IArchive& archive)
 void CProductionHistoryComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
+
+	if (m_productionHistoryFolderCompPtr.IsValid()){
+		QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
+		if (!repositoryPath.isEmpty()){
+			istd::CSystem::EnsurePathExists(repositoryPath);
+		}
+	}
+
+	ReadHistoryItems();
 }
 
 
@@ -430,6 +391,100 @@ bool CProductionHistoryComp::SerializeObjectList(iser::IArchive& archive, Object
 	return retVal;
 }
 
+
+bool CProductionHistoryComp::SerializeHistoryItem(iser::IArchive& archive, HistoryItem& historyItem) const
+{
+	bool retVal = true;
+
+	retVal = retVal && archive.BeginTag(s_partUuidTag);
+	retVal = retVal && archive.Process(historyItem.uuid);
+	retVal = retVal && archive.EndTag(s_partUuidTag);
+
+	retVal = retVal && archive.BeginTag(s_productNameTag);
+	retVal = retVal && archive.Process(historyItem.productName);
+	retVal = retVal && archive.EndTag(s_productNameTag);
+
+	retVal = retVal && archive.BeginTag(s_productIdTag);
+	retVal = retVal && archive.Process(historyItem.productId);
+	retVal = retVal && archive.EndTag(s_productIdTag);
+
+	retVal = retVal && archive.BeginTag(s_partSerialTag);
+	retVal = retVal && archive.Process(historyItem.serialNumber);
+	retVal = retVal && archive.EndTag(s_partSerialTag);
+
+	retVal = retVal && archive.BeginTag(s_partTimeStampTag);
+	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, historyItem.timestamp);
+	retVal = retVal && archive.EndTag(s_partTimeStampTag);
+
+	retVal = retVal && archive.BeginTag(s_partStatusTag);
+	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeEnum<
+				istd::IInformationProvider::InformationCategory,
+				istd::IInformationProvider::ToString,
+				istd::IInformationProvider::FromString>(archive, historyItem.status);
+	retVal = retVal && archive.EndTag(s_partStatusTag);
+
+	retVal = retVal && SerializeResultInfoList(archive, historyItem.resultInfoList);
+
+	return retVal;
+}
+
+
+void CProductionHistoryComp::ReadHistoryItems()
+{
+	if (!m_productionHistoryFolderCompPtr.IsValid()){
+		return;
+	}
+
+	istd::CChangeNotifier changeNotifier(this);
+
+	m_historyItems.clear();
+
+	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
+	QDir repositoryRootDir(repositoryPath);
+
+	QFileInfoList repositoryFiles;
+	ifile::CFileListProviderComp::CreateFileList(repositoryRootDir, 0, 1, QStringList() << "*.xml", QDir::Name, repositoryFiles);
+
+	for (int fileIndex = 0; fileIndex < repositoryFiles.count(); ++fileIndex){
+		QString itemFilePath = repositoryFiles[fileIndex].absoluteFilePath();
+
+		ifile::CCompactXmlFileReadArchive archive(itemFilePath, m_versionInfoCompPtr.GetPtr());
+		HistoryItem historyItem;
+
+		if (!SerializeHistoryItem(archive, historyItem)){
+			SendErrorMessage(0, QString("Repository item could not be loaded from '%1'").arg(itemFilePath));
+
+			continue;
+		}
+
+		m_historyItems.push_back(historyItem);
+	}
+}
+
+
+void CProductionHistoryComp::SaveRepositoryItem(const HistoryItem& historyItem) const
+{
+	QString itemFilePath = GetItemPath(historyItem);
+	if (!itemFilePath.isEmpty()){
+		ifile::CCompactXmlFileWriteArchive archive(itemFilePath, m_versionInfoCompPtr.GetPtr());
+
+		if (!SerializeHistoryItem(archive, const_cast<HistoryItem&>(historyItem))){
+			SendErrorMessage(0, QString("Repository item could not be saved into '%1'").arg(itemFilePath));
+		}
+	}
+}
+
+
+QString CProductionHistoryComp::GetItemPath(const HistoryItem & historyItem) const
+{
+	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
+
+	QString fileName = historyItem.productName  + "_" + historyItem.timestamp.toString("yyyyMMdd_hhmmsszzz") + ".xml";
+
+	QString itemFilePath = repositoryPath + "/" + fileName;
+
+	return itemFilePath;
+}
 
 
 // public methods of the embedded class HistoryItem

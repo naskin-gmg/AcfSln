@@ -4,7 +4,8 @@
 
 // ACF includes
 #include <imod/TModelWrap.h>
-#include <icomp/CComponentBase.h>
+#include <ilog/TLoggerCompWrap.h>
+#include <ifile/IFileNameParam.h>
 #include <iprod/IProductionHistoryController.h>
 
 
@@ -13,17 +14,17 @@ namespace iprod
 
 
 class CProductionHistoryComp:
-			public icomp::CComponentBase,
-			virtual public IProductionHistoryController,
-			virtual public iser::ISerializable
+			public ilog::CLoggerComponentBase,
+			virtual public IProductionHistoryController
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CProductionHistoryComp);
 		I_REGISTER_INTERFACE(IProductionHistory);
 		I_REGISTER_INTERFACE(IProductionHistoryController);
-		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_ASSIGN(m_productionHistoryFolderCompPtr, "RepositoryFolder", "Folder containing production history items", false, "RepositoryFolder");
+		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Version info", false, "VersionInfo");
 	I_END_COMPONENT;
 
 	CProductionHistoryComp();
@@ -58,9 +59,6 @@ public:
 				const QByteArray& resultId,
 				const QByteArray& objectTypeId);
 	virtual void RemoveProductionPart(const QByteArray& productionPartId);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -117,12 +115,18 @@ private:
 private:
 	bool SerializeResultInfoList(iser::IArchive& archive, ResultInfoList& resultInfoList) const;
 	bool SerializeObjectList(iser::IArchive& archive, ObjectInfoList& objectInfoList) const;
-
+	bool SerializeHistoryItem(iser::IArchive& archive, HistoryItem& historyItem) const;
+	void ReadHistoryItems();
+	void SaveRepositoryItem(const HistoryItem& historyItem) const;
+	QString GetItemPath(const HistoryItem& historyItem) const;
 private:
 	typedef imod::TModelWrap<PartList> PartListModel;
 	PartListModel m_partList;
 
 	HistoryItems m_historyItems;
+
+	I_REF(ifile::IFileNameParam, m_productionHistoryFolderCompPtr);
+	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };
 
 
