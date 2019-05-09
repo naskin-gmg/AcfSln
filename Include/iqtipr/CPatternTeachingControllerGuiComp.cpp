@@ -4,8 +4,10 @@
 // Qt includes
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QStyle>
 #else
 #include <QtGui/QMessageBox>
+#include <QtGui/QStyle>
 #endif
 
 // ACF includes
