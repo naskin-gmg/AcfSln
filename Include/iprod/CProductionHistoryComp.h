@@ -72,6 +72,8 @@ private:
 	{
 		HistoryItem();
 
+		bool operator < (const HistoryItem& other) const;
+
 		// reimplemented (iprm::IOptionsList)
 		virtual int GetOptionsFlags() const;
 		virtual int GetOptionsCount() const;
