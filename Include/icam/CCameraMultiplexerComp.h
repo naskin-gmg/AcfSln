@@ -96,7 +96,7 @@ private:
 	}
 
 	int GetSelectedIndex() const;
-	const iprm::IParamsSet* GetWorkingParamsSet(const iprm::IParamsSet* inputParamsPtr) const;
+	const iprm::IParamsSet* GetWorkingParamsSet(const iprm::IParamsSet* paramsPtr) const;
 	IBitmapAcquisition* GetSelectedCamera() const;
 
 private:

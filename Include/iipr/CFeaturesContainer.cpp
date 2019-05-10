@@ -72,6 +72,16 @@ const imeas::INumericValue& CFeaturesContainer::GetFeature(int index) const
 }
 
 
+//reimplemented (istd::IChangeable)
+
+bool CFeaturesContainer::ResetData(CompatibilityMode /*mode*/)
+{
+	ResetFeatures();
+
+	return true;
+}
+
+
 } // namespace iipr
 
 

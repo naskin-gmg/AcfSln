@@ -64,7 +64,7 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 	}
 
 	PointGridConsumer imagePoints;
-	if (!m_pointGridExtractorCompPtr->DoExtractFeatures(paramsPtr, image, imagePoints)) {
+	if (m_pointGridExtractorCompPtr->DoExtractFeatures(paramsPtr, image, imagePoints) != iproc::IProcessor::TS_OK) {
 		SendErrorMessage(0, "Can not extract of points grid");
 		return false;
 	}
@@ -87,8 +87,10 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 
 	const int sizeX = nominalPositions.GetSize(0);
 	const int sizeY = nominalPositions.GetSize(1);
-	const double gridTop = -(sizeY - 1) * 0.5 * cellSize;
-	const double gridLeft = -(sizeX - 1) * 0.5 * cellSize;
+	const double stepX = m_invertXAttrPtr.IsValid() && *m_invertXAttrPtr ? -cellSize : cellSize;
+	const double stepY = m_invertYAttrPtr.IsValid() && *m_invertYAttrPtr ? -cellSize : cellSize;
+	const double gridTop = -(sizeY - 1) * 0.5 * stepY;
+	const double gridLeft = -(sizeX - 1) * 0.5 * stepX;
 
 	double nomY = gridTop;
 	for (int y = 0; y < sizeY; ++y){
@@ -112,9 +114,9 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 				nominalPositions.SetAt(ind, normalPos);
 			}
 
-			nomX += cellSize;
+			nomX += stepX;
 		}
-		nomY += cellSize;
+		nomY += stepY;
 	}
 
 	iipr::CPerspCalibFinder calibFinder;
