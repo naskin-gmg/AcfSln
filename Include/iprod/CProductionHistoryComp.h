@@ -121,11 +121,14 @@ private:
 	void ReadHistoryItems();
 	void SaveRepositoryItem(const HistoryItem& historyItem) const;
 	QString GetItemPath(const HistoryItem& historyItem) const;
+
 private:
 	typedef imod::TModelWrap<PartList> PartListModel;
 	PartListModel m_partList;
 
 	HistoryItems m_historyItems;
+
+	const istd::IChangeable::ChangeSet m_newObjectChangeSet;
 
 	I_REF(ifile::IFileNameParam, m_productionHistoryFolderCompPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);

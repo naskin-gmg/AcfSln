@@ -31,6 +31,7 @@ static const iser::CArchiveTag s_partStatusTag("Status", "Status of the part pro
 // public methods
 
 CProductionHistoryComp::CProductionHistoryComp()
+	: m_newObjectChangeSet(iprod::IProductionHistory::CF_NEW_OBJECT)
 {
 	m_partList.SetParent(this);
 }
@@ -178,7 +179,7 @@ QByteArray CProductionHistoryComp::InsertInspectionResultPath(
 						resultObject.filePath = filePath;
 						resultObject.typeId = objectTypeId;
 
-						istd::CChangeNotifier changeNotifier(this);
+						istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
 
 						resultInfo.outputObjects.push_back(resultObject);
 
@@ -213,7 +214,7 @@ QByteArray CProductionHistoryComp::InsertInputObjectPath(
 					inputObject.filePath = filePath;
 					inputObject.typeId = objectTypeId;
 
-					istd::CChangeNotifier changeNotifier(this);
+					istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
 
 					resultInfo.inputObjects.push_back(inputObject);
 
