@@ -81,6 +81,9 @@ iproc.file = ../../Include/iproc/QMake/iproc.pro
 SUBDIRS += iprocgui
 iprocgui.file = ../../Include/iprocgui/QMake/iprocgui.pro
 
+SUBDIRS += iweb
+iweb.file = ../../Include/iweb/QMake/iweb.pro
+
 SUBDIRS += iwiz
 iwiz.file = ../../Include/iwiz/QMake/iwiz.pro
 

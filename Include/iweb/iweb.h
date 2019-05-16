@@ -2,18 +2,18 @@
 #define iweb_included
 
 
-#include <iprm/irpm.h>
+#include <iprm/iprm.h>
 
 
 /**
 	Contains interfaces and implementations for web-based application components.
 */
-namespace iwiz
+namespace iweb
 {
 
 
-} // namespace iwiz
+} // namespace iweb
 
 
-#endif // !iwiz_included
+#endif // !iweb_included
 
