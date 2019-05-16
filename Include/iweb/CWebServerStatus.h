@@ -2,9 +2,6 @@
 #define iweb_CWebServerStatus_included
 
 
-// ACF includes
-#include <icomp/CComponentBase.h>
-
 // ACF-Solutions includes
 #include <iweb/IWebServerStatus.h>
 
@@ -13,17 +10,9 @@ namespace iweb
 {
 
 
-class CWebServerStatus:
-			public icomp::CComponentBase,
-			virtual public IWebServerStatus
+class CWebServerStatus: virtual public IWebServerStatus
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-
-	I_BEGIN_COMPONENT(CWebServerStatus);
-		I_REGISTER_INTERFACE(IWebServerStatus);
-	I_END_COMPONENT;
-
 	CWebServerStatus();
 
 	// reimplemented (iweb::IWebServerStatus)

@@ -177,6 +177,10 @@ AcfSlnLoc.file = ../../Impl/AcfSlnLoc/QMake/AcfSlnLoc.pro
 	SignalPck.file = ../../Impl/SignalPck/QMake/SignalPck.pro
 	SignalPck.depends = isig
 
+	SUBDIRS += WebPck
+	WebPck.file = ../../Impl/WebPck/QMake/WebPck.pro
+	WebPck.depends = iwiz iproc
+
 	SUBDIRS += WizardPck
 	WizardPck.file = ../../Impl/WizardPck/QMake/WizardPck.pro
 	WizardPck.depends = iwiz iproc
