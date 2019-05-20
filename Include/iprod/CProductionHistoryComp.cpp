@@ -449,7 +449,7 @@ void CProductionHistoryComp::ReadHistoryItems()
 	for (int fileIndex = 0; fileIndex < repositoryFiles.count(); ++fileIndex){
 		QString itemFilePath = repositoryFiles[fileIndex].absoluteFilePath();
 
-		ifile::CCompactXmlFileReadArchive archive(itemFilePath, m_versionInfoCompPtr.GetPtr());
+		ifile::CCompactXmlFileReadArchive archive(itemFilePath/*, m_versionInfoCompPtr.GetPtr()*/);
 		HistoryItem historyItem;
 
 		if (!SerializeHistoryItem(archive, historyItem)){
