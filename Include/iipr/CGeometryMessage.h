@@ -27,6 +27,11 @@ public:
 				int flags = 0,
 				const QDateTime* timeStampPtr = NULL);
 
+	// reimplemented (iser::IObject)
+	virtual QByteArray GetFactoryId() const override;
+
+	static QByteArray GetTypeName();
+
 private:
 	static i2d::CObject2dFactory s_factory;
 };

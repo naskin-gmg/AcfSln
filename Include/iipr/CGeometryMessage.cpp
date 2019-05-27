@@ -1,6 +1,10 @@
 #include <iipr/CGeometryMessage.h>
 
 
+// ACF includes
+#include <ilog/CMessageContainer.h>
+
+
 namespace iipr
 {
 
@@ -25,9 +29,24 @@ CGeometryMessage::CGeometryMessage(
 }
 
 
+QByteArray CGeometryMessage::GetFactoryId() const
+{
+	return GetTypeName();
+}
+
+
+QByteArray CGeometryMessage::GetTypeName()
+{
+	return istd::CClassInfo::GetName<CGeometryMessage>();
+}
+
+
 // private static members
 
 i2d::CObject2dFactory CGeometryMessage::s_factory;
+
+
+I_REGISTER_MESSAGE_TYPE(CGeometryMessage, CGeometryMessage::GetTypeName());
 
 
 } // namespace iipr
