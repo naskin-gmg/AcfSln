@@ -23,12 +23,10 @@ public:
 				double weight,
 				const i2d::CVector2d& position,
 				double angle,
-				const i2d::CVector2d& scale,
+				const i2d::CVector2d& scale = i2d::CVector2d(1.0, 1.0),
 				bool negativeModel = false,
-				int index = -1,
 				const QByteArray& objectId = QByteArray());
 
-	int GetIndex() const;
 	bool IsNegativeModelEnabled() const;
 	void SetNegativeModelEnabled(bool enable);
 
@@ -40,7 +38,6 @@ public:
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
-	int m_index;
 	bool m_isNegativeModelEnabled;
 };
 

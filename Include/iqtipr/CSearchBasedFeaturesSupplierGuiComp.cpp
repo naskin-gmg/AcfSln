@@ -125,7 +125,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 
 					const iipr::CSearchFeature* searchFeaturePtr = dynamic_cast<const iipr::CSearchFeature*>(featurePtr);
 					if (searchFeaturePtr != NULL){
-						modelItemPtr->setText(CT_ID, QString("%1 (%2)").arg(QString(objectFeaturePtr->GetObjectId())).arg(searchFeaturePtr->GetIndex()));
+						modelItemPtr->setText(CT_ID, QString("%1").arg(QString(objectFeaturePtr->GetObjectId())));
 					
 						if (searchFeaturePtr->IsNegativeModelEnabled()){
 							modelItemPtr->setBackground(CT_ID, QBrush(Qt::red));

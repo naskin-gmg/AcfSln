@@ -211,7 +211,6 @@ int CSearchBasedFeaturesSupplierComp::ProduceObject(CFeaturesContainer& result) 
 		iprm::IParamsSet* paramsSetPtr = GetModelParametersSet();
 
 		const iprm::IParamsManager* multiSearchParamsManagerPtr = NULL;
-			
 		if (m_searchParamsManagerParamIdAttrPtr.IsValid()){
 			iprm::TParamsPtr<iprm::IParamsManager> paramsManagerPtr(paramsSetPtr, *m_searchParamsManagerParamIdAttrPtr);
 			if (!paramsManagerPtr.IsValid()){
