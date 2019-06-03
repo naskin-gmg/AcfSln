@@ -47,16 +47,13 @@ const iprm::IOptionsList& CProductionHistoryComp::GetPartsInfoList() const
 
 const iprm::IOptionsList& CProductionHistoryComp::GetResultInfoList(const QByteArray& productionPartId) const
 {
-	static iprm::COptionsManager empty;
+	HistoryItemsById::ConstIterator it = m_historyItemsById.constFind(productionPartId);
 
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		const HistoryItem& item = m_historyItems[i];
-
-		if (item.uuid == productionPartId){
-			return item;
-		}
+	if (it != m_historyItemsById.constEnd()){
+		return m_historyItems[*it];
 	}
 
+	static iprm::COptionsManager empty;
 	return empty;
 }
 
@@ -65,18 +62,15 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 {
 	PartInfo retVal;
 
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		const HistoryItem& item = m_historyItems[i];
+	HistoryItemsById::ConstIterator it = m_historyItemsById.find(productionPartId);
+	if (it != m_historyItemsById.constEnd()){
+		const HistoryItem& item = m_historyItems[*it];
 
-		if (item.uuid == productionPartId){
-			retVal.serialNumber = item.serialNumber;
-			retVal.productName = item.productName;
-			retVal.productId = item.productId;
-			retVal.processingInfo.status = item.status;
-			retVal.processingInfo.time = item.timestamp;
-
-			break;
-		}
+		retVal.serialNumber = item.serialNumber;
+		retVal.productName = item.productName;
+		retVal.productId = item.productId;
+		retVal.processingInfo.status = item.status;
+		retVal.processingInfo.time = item.timestamp;
 	}
 
 	return retVal;
@@ -85,16 +79,18 @@ IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArra
 
 IProductionHistory::ResultInfo CProductionHistoryComp::GetResultInfo(const QByteArray& productionPartId, const QByteArray& resultId) const
 {
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		const HistoryItem& item = m_historyItems[i];
+	HistoryItemsById::ConstIterator it = m_historyItemsById.find(productionPartId);
 
-		if (item.uuid == productionPartId){
-			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
-				const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+	if (it != m_historyItemsById.constEnd()){
+		const HistoryItem& item = m_historyItems[*it];
 
-				if (resultInfo.uuid == resultId){
-					return resultInfo;
-				}
+		int resultsCount = item.resultInfoList.count();
+
+		for (int resultIndex = 0; resultIndex < resultsCount; ++resultIndex){
+			const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+
+			if (resultInfo.uuid == resultId){
+				return resultInfo;
 			}
 		}
 	}
@@ -113,15 +109,19 @@ QByteArray CProductionHistoryComp::InsertNewProductionPart(
 			const QDateTime& productionTime)
 {
 	istd::CChangeNotifier changeNotifier(this);
-	
+
 	HistoryItem newItem;
 	newItem.productName = productName;
 	newItem.productId = productId;
 	newItem.serialNumber = serialNumber;
-	newItem.timestamp = productionTime.isValid() ? productionTime : QDateTime::currentDateTime();
+
+	QDateTime timestamp = productionTime.isValid() ? productionTime : QDateTime::currentDateTime();
+	newItem.timestamp = timestamp.toMSecsSinceEpoch() * 1000;
+
 	newItem.status = status;
 
 	m_historyItems.push_back(newItem);
+	m_historyItemsById.insert(newItem.uuid, m_historyItems.size() - 1);
 
 	SaveRepositoryItem(newItem);
 	
@@ -136,25 +136,27 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			istd::IInformationProvider::InformationCategory status,
 			const QDateTime& resultTime)
 {
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		HistoryItem& item = m_historyItems[i];
+	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
 
-		if (item.uuid == productionPartId){
-			istd::CChangeNotifier changeNotifier(this);
+	if (it != m_historyItemsById.end()){
+		HistoryItem& item = m_historyItems[*it];
 
-			ResultInfo newResult;
+		istd::CChangeNotifier changeNotifier(this);
 
-			newResult.inspectionId = inspectionId;
-			newResult.name = inspectionName;
-			newResult.processingInfo.status = status;
-			newResult.processingInfo.time = !resultTime.isValid() ? QDateTime::currentDateTime() : resultTime;
+		ResultInfo newResult;
 
-			item.resultInfoList.push_back(newResult);
+		newResult.inspectionId = inspectionId;
+		newResult.name = inspectionName;
+		newResult.processingInfo.status = status;
 
-			SaveRepositoryItem(item);
+		QDateTime processingInfoTime = resultTime.isValid() ? resultTime : QDateTime::currentDateTime();
+		newResult.processingInfo.time = processingInfoTime.toMSecsSinceEpoch() * 1000;
 
-			return newResult.uuid;
-		}
+		item.resultInfoList.push_back(newResult);
+
+		SaveRepositoryItem(item);
+
+		return newResult.uuid;
 	}
 
 	return QByteArray();
@@ -167,26 +169,27 @@ QByteArray CProductionHistoryComp::InsertInspectionResultPath(
 			const QByteArray& resultId,
 			const QByteArray& objectTypeId)
 {
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		HistoryItem& item = m_historyItems[i];
+	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
 
-		if (item.uuid == productionPartId){
-			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
-				ResultInfo& resultInfo = item.resultInfoList[resultIndex];
-				if (resultInfo.uuid == resultId){
-					if (resultInfo.outputObjects.isEmpty()){
-						ObjectInfo resultObject;
-						resultObject.filePath = filePath;
-						resultObject.typeId = objectTypeId;
+	if (it != m_historyItemsById.end()){
+		HistoryItem& item = m_historyItems[*it];
 
-						istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
+		for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+			ResultInfo& resultInfo = item.resultInfoList[resultIndex];
 
-						resultInfo.outputObjects.push_back(resultObject);
+			if (resultInfo.uuid == resultId){
+				if (resultInfo.outputObjects.isEmpty()){
+					ObjectInfo resultObject;
+					resultObject.filePath = filePath;
+					resultObject.typeId = objectTypeId;
 
-						SaveRepositoryItem(item);
+					istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
 
-						return resultObject.uuid;
-					}
+					resultInfo.outputObjects.push_back(resultObject);
+
+					SaveRepositoryItem(item);
+
+					return resultObject.uuid;
 				}
 			}
 		}
@@ -202,26 +205,26 @@ QByteArray CProductionHistoryComp::InsertInputObjectPath(
 			const QByteArray& resultId,
 			const QByteArray& objectTypeId)
 {
-	for (int i = 0; i < m_historyItems.count(); ++i){
-		HistoryItem& item = m_historyItems[i];
+	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
 
-		if (item.uuid == productionPartId){
-			for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
-				ResultInfo& resultInfo = item.resultInfoList[resultIndex];
+	if (it != m_historyItemsById.end()){
+		HistoryItem& item = m_historyItems[*it];
 
-				if (resultInfo.uuid == resultId){
-					ObjectInfo inputObject;
-					inputObject.filePath = filePath;
-					inputObject.typeId = objectTypeId;
+		for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
+			ResultInfo& resultInfo = item.resultInfoList[resultIndex];
 
-					istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
+			if (resultInfo.uuid == resultId){
+				ObjectInfo inputObject;
+				inputObject.filePath = filePath;
+				inputObject.typeId = objectTypeId;
 
-					resultInfo.inputObjects.push_back(inputObject);
+				istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
 
-					SaveRepositoryItem(item);
+				resultInfo.inputObjects.push_back(inputObject);
 
-					return inputObject.uuid;
-				}
+				SaveRepositoryItem(item);
+
+				return inputObject.uuid;
 			}
 		}
 	}
@@ -232,23 +235,17 @@ QByteArray CProductionHistoryComp::InsertInputObjectPath(
 
 void CProductionHistoryComp::RemoveProductionPart(const QByteArray& productionPartId)
 {
-	QMutableListIterator<HistoryItem> iterator(m_historyItems);
+	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
 
-	while (iterator.hasNext()){
-		HistoryItem& item = iterator.next();
-		if (item.uuid == productionPartId){
-			istd::CChangeNotifier changeNotifier(this);
+	if (it != m_historyItemsById.end()){
+		HistoryItem& item = m_historyItems[*it];
+		QString itemPath = GetItemPath(item);
 
-			QString itemPath = GetItemPath(item);
+		istd::CChangeNotifier changeNotifier(this);
+		QFile::remove(itemPath);
 
-			QFile::remove(itemPath);
-
-			iterator.remove();
-
-			break;
-		}
-
-		iterator.next();
+		m_historyItems.removeAt(*it);
+		m_historyItemsById.erase(it);
 	}
 }
 
@@ -327,7 +324,21 @@ bool CProductionHistoryComp::SerializeResultInfoList(iser::IArchive& archive, Re
 
 		static const iser::CArchiveTag s_inspectionTimeTag("Time", "Processing time of the inspection", iser::CArchiveTag::TT_LEAF, &s_processingInfoTag);
 		retVal = retVal && archive.BeginTag(s_inspectionTimeTag);
-		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, resultInfo.processingInfo.time);
+
+		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+		quint32 frameworkVersion = 0;
+		if (!versionInfo.GetVersionNumber(1, frameworkVersion) || frameworkVersion >= 2516){
+			retVal = retVal && archive.Process(resultInfo.processingInfo.time);
+		}
+		else{
+			QDateTime timestamp;
+			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, timestamp);
+
+			if (retVal){
+				resultInfo.processingInfo.time = timestamp.toMSecsSinceEpoch() / 1000;
+			}
+		}
+
 		retVal = retVal && archive.EndTag(s_inspectionTimeTag);
 
 		retVal = retVal && archive.EndTag(s_processingInfoTag);
@@ -414,7 +425,21 @@ bool CProductionHistoryComp::SerializeHistoryItem(iser::IArchive& archive, Histo
 	retVal = retVal && archive.EndTag(s_partSerialTag);
 
 	retVal = retVal && archive.BeginTag(s_partTimeStampTag);
-	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, historyItem.timestamp);
+
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	quint32 frameworkVersion = 0;
+	if (!versionInfo.GetVersionNumber(1, frameworkVersion) || frameworkVersion >= 2516){
+		retVal = retVal && archive.Process(historyItem.timestamp);
+	}
+	else{
+		QDateTime timestamp;
+		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, timestamp);
+
+		if (retVal){
+			historyItem.timestamp = timestamp.toMSecsSinceEpoch() / 1000;
+		}
+	}
+
 	retVal = retVal && archive.EndTag(s_partTimeStampTag);
 
 	retVal = retVal && archive.BeginTag(s_partStatusTag);
@@ -439,6 +464,7 @@ void CProductionHistoryComp::ReadHistoryItems()
 	istd::CChangeNotifier changeNotifier(this);
 
 	m_historyItems.clear();
+	m_historyItemsById.clear();
 
 	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
 	QDir repositoryRootDir(repositoryPath);
@@ -449,7 +475,7 @@ void CProductionHistoryComp::ReadHistoryItems()
 	for (int fileIndex = 0; fileIndex < repositoryFiles.count(); ++fileIndex){
 		QString itemFilePath = repositoryFiles[fileIndex].absoluteFilePath();
 
-		ifile::CCompactXmlFileReadArchive archive(itemFilePath/*, m_versionInfoCompPtr.GetPtr()*/);
+		ifile::CCompactXmlFileReadArchive archive(itemFilePath);
 		HistoryItem historyItem;
 
 		if (!SerializeHistoryItem(archive, historyItem)){
@@ -459,9 +485,8 @@ void CProductionHistoryComp::ReadHistoryItems()
 		}
 
 		m_historyItems.push_back(historyItem);
+		m_historyItemsById.insert(historyItem.uuid, m_historyItems.size() - 1);
 	}
-
-	std::sort(m_historyItems.begin(), m_historyItems.end());
 }
 
 
@@ -478,11 +503,12 @@ void CProductionHistoryComp::SaveRepositoryItem(const HistoryItem& historyItem) 
 }
 
 
-QString CProductionHistoryComp::GetItemPath(const HistoryItem & historyItem) const
+QString CProductionHistoryComp::GetItemPath(const HistoryItem& historyItem) const
 {
 	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
 
-	QString fileName = historyItem.productName  + "_" + historyItem.timestamp.toString("yyyyMMdd_hhmmsszzz") + ".xml";
+	QDateTime timestamp = QDateTime::fromMSecsSinceEpoch(historyItem.timestamp * 1000);
+	QString fileName = historyItem.productName  + "_" + timestamp.toString("yyyyMMdd_hhmmsszzz") + ".xml";
 
 	QString itemFilePath = repositoryPath + "/" + fileName;
 
@@ -493,15 +519,10 @@ QString CProductionHistoryComp::GetItemPath(const HistoryItem & historyItem) con
 // public methods of the embedded class HistoryItem
 
 CProductionHistoryComp::HistoryItem::HistoryItem()
-	:status(istd::IInformationProvider::IC_NONE)
+	:timestamp(0),
+	status(istd::IInformationProvider::IC_NONE)
 {
 	uuid = QUuid::createUuid().toByteArray();
-}
-
-
-bool CProductionHistoryComp::HistoryItem::operator < (const HistoryItem& other) const
-{
-	return timestamp < other.timestamp;
 }
 
 

@@ -72,8 +72,6 @@ private:
 	{
 		HistoryItem();
 
-		bool operator < (const HistoryItem& other) const;
-
 		// reimplemented (iprm::IOptionsList)
 		virtual int GetOptionsFlags() const;
 		virtual int GetOptionsCount() const;
@@ -86,12 +84,13 @@ private:
 		QString serialNumber;
 		QByteArray productId;
 		QByteArray uuid;
-		QDateTime timestamp;
+		qint64 timestamp; // seconds since epoch
 		istd::IInformationProvider::InformationCategory status;
 		ResultInfoList resultInfoList;
 	};
 
 	typedef QList<HistoryItem> HistoryItems;
+	typedef QMap<QByteArray, int> HistoryItemsById;
 
 	/**
 		List of produced parts.
@@ -127,6 +126,7 @@ private:
 	PartListModel m_partList;
 
 	HistoryItems m_historyItems;
+	HistoryItemsById m_historyItemsById;
 
 	const istd::IChangeable::ChangeSet m_newObjectChangeSet;
 
