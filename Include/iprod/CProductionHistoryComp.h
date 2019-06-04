@@ -31,6 +31,7 @@ public:
 		I_REGISTER_INTERFACE(IProductionHistoryController);
 		I_ASSIGN(m_productionHistoryFolderCompPtr, "RepositoryFolder", "Folder containing production history items", false, "RepositoryFolder");
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Version info", false, "VersionInfo");
+		I_ASSIGN(m_DoNotLoadHistoryAttrPtr, "DoNotLoadHistory", "Do not load history from disk", false, false);
 	I_END_COMPONENT;
 
 	CProductionHistoryComp();
@@ -100,6 +101,7 @@ private:
 
 	I_REF(ifile::IFileNameParam, m_productionHistoryFolderCompPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
+	I_ATTR(bool, m_DoNotLoadHistoryAttrPtr);
 };
 
 

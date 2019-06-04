@@ -197,10 +197,12 @@ void CProductionHistoryComp::OnComponentCreated()
 		}
 	}
 
-	QObject::connect(&m_historyReaderWatcher, SIGNAL(finished()), this, SLOT(OnHistoryReadFinished()));
+	if (m_DoNotLoadHistoryAttrPtr.IsValid() && (*m_DoNotLoadHistoryAttrPtr) == false){
+		QObject::connect(&m_historyReaderWatcher, SIGNAL(finished()), this, SLOT(OnHistoryReadFinished()));
 
-	QFuture<void> future = QtConcurrent::run(this, &CProductionHistoryComp::ReadHistoryItems);
-	m_historyReaderWatcher.setFuture(future);
+		QFuture<void> future = QtConcurrent::run(this, &CProductionHistoryComp::ReadHistoryItems);
+		m_historyReaderWatcher.setFuture(future);
+	}
 }
 
 
