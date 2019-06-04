@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#include <QtConcurrent/QtConcurrentRun>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
@@ -11,7 +12,6 @@
 #include <ifile/CCompactXmlFileReadArchive.h>
 #include <ifile/CCompactXmlFileWriteArchive.h>
 #include <ifile/CFileListProviderComp.h>
-#include <iprm/COptionsManager.h>
 
 
 namespace iprod
@@ -31,71 +31,50 @@ static const iser::CArchiveTag s_partStatusTag("Status", "Status of the part pro
 // public methods
 
 CProductionHistoryComp::CProductionHistoryComp()
-	: m_newObjectChangeSet(iprod::IProductionHistory::CF_NEW_OBJECT)
+	:m_newObjectChangeSet(iprod::IProductionHistory::CF_NEW_OBJECT)
 {
-	m_partList.SetParent(this);
 }
 
 
 // reimplemented (IProductionHistory)
 
-const iprm::IOptionsList& CProductionHistoryComp::GetPartsInfoList() const
+QByteArrayList CProductionHistoryComp::GetPartInfoIds() const
 {
-	return m_partList;
+	QReadLocker locker(&m_historyItemsLock);
+
+	return m_historyItems.keys();
 }
 
 
-const iprm::IOptionsList& CProductionHistoryComp::GetResultInfoList(const QByteArray& productionPartId) const
+IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArray& partId) const
 {
-	HistoryItemsById::ConstIterator it = m_historyItemsById.constFind(productionPartId);
+	QReadLocker locker(&m_historyItemsLock);
 
-	if (it != m_historyItemsById.constEnd()){
-		return m_historyItems[*it];
+	HistoryItems::ConstIterator it = m_historyItems.constFind(partId);
+
+	if (it != m_historyItems.constEnd()){
+		return *it;
 	}
 
-	static iprm::COptionsManager empty;
-	return empty;
+	return IProductionHistory::PartInfo();
 }
 
 
-IProductionHistory::PartInfo CProductionHistoryComp::GetPartInfo(const QByteArray& productionPartId) const
+IProductionHistory::ResultInfo CProductionHistoryComp::GetResultInfo(const QByteArray& partId, const QByteArray& resultId) const
 {
-	PartInfo retVal;
+	QReadLocker locker(&m_historyItemsLock);
 
-	HistoryItemsById::ConstIterator it = m_historyItemsById.find(productionPartId);
-	if (it != m_historyItemsById.constEnd()){
-		const HistoryItem& item = m_historyItems[*it];
+	HistoryItems::ConstIterator it = m_historyItems.constFind(partId);
 
-		retVal.serialNumber = item.serialNumber;
-		retVal.productName = item.productName;
-		retVal.productId = item.productId;
-		retVal.processingInfo.status = item.status;
-		retVal.processingInfo.time = item.timestamp;
-	}
-
-	return retVal;
-}
-
-
-IProductionHistory::ResultInfo CProductionHistoryComp::GetResultInfo(const QByteArray& productionPartId, const QByteArray& resultId) const
-{
-	HistoryItemsById::ConstIterator it = m_historyItemsById.find(productionPartId);
-
-	if (it != m_historyItemsById.constEnd()){
-		const HistoryItem& item = m_historyItems[*it];
-
-		int resultsCount = item.resultInfoList.count();
-
-		for (int resultIndex = 0; resultIndex < resultsCount; ++resultIndex){
-			const ResultInfo& resultInfo = item.resultInfoList[resultIndex];
-
+	if (it != m_historyItems.constEnd()){
+		for (const ResultInfo resultInfo : it->results){
 			if (resultInfo.uuid == resultId){
 				return resultInfo;
 			}
 		}
 	}
 
-	return ResultInfo();
+	return IProductionHistory::ResultInfo();
 }
 
 
@@ -108,20 +87,20 @@ QByteArray CProductionHistoryComp::InsertNewProductionPart(
 			istd::IInformationProvider::InformationCategory status,
 			const QDateTime& productionTime)
 {
-	istd::CChangeNotifier changeNotifier(this);
-
-	HistoryItem newItem;
+	PartInfo newItem;
 	newItem.productName = productName;
 	newItem.productId = productId;
 	newItem.serialNumber = serialNumber;
 
 	QDateTime timestamp = productionTime.isValid() ? productionTime : QDateTime::currentDateTime();
-	newItem.timestamp = timestamp.toMSecsSinceEpoch() * 1000;
+	newItem.processingInfo.time = timestamp.toMSecsSinceEpoch() / 1000;
+	newItem.processingInfo.status = status;
 
-	newItem.status = status;
+	istd::CChangeNotifier changeNotifier(this);
 
-	m_historyItems.push_back(newItem);
-	m_historyItemsById.insert(newItem.uuid, m_historyItems.size() - 1);
+	QWriteLocker locker(&m_historyItemsLock);
+
+	m_historyItems.insert(newItem.uuid, newItem);
 
 	SaveRepositoryItem(newItem);
 	
@@ -136,25 +115,26 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 			istd::IInformationProvider::InformationCategory status,
 			const QDateTime& resultTime)
 {
-	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
+	QWriteLocker locker(&m_historyItemsLock);
 
-	if (it != m_historyItemsById.end()){
-		HistoryItem& item = m_historyItems[*it];
+	HistoryItems::Iterator it = m_historyItems.find(productionPartId);
 
-		istd::CChangeNotifier changeNotifier(this);
+	if (it != m_historyItems.end()){
+		PartInfo& partInfo = *it;
 
 		ResultInfo newResult;
-
 		newResult.inspectionId = inspectionId;
 		newResult.name = inspectionName;
 		newResult.processingInfo.status = status;
 
 		QDateTime processingInfoTime = resultTime.isValid() ? resultTime : QDateTime::currentDateTime();
-		newResult.processingInfo.time = processingInfoTime.toMSecsSinceEpoch() * 1000;
+		newResult.processingInfo.time = processingInfoTime.toMSecsSinceEpoch() / 1000;
 
-		item.resultInfoList.push_back(newResult);
+		istd::CChangeNotifier changeNotifier(this);
 
-		SaveRepositoryItem(item);
+		partInfo.results.push_back(newResult);
+
+		SaveRepositoryItem(partInfo);
 
 		return newResult.uuid;
 	}
@@ -164,88 +144,40 @@ QByteArray CProductionHistoryComp::InsertNewInspectionResult(
 
 
 QByteArray CProductionHistoryComp::InsertInspectionResultPath(
-			const QString& filePath,
-			const QByteArray& productionPartId,
-			const QByteArray& resultId,
-			const QByteArray& objectTypeId)
+	const QString& filePath,
+	const QByteArray& partId,
+	const QByteArray& resultId,
+	const QByteArray& objectTypeId)
 {
-	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
-
-	if (it != m_historyItemsById.end()){
-		HistoryItem& item = m_historyItems[*it];
-
-		for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
-			ResultInfo& resultInfo = item.resultInfoList[resultIndex];
-
-			if (resultInfo.uuid == resultId){
-				if (resultInfo.outputObjects.isEmpty()){
-					ObjectInfo resultObject;
-					resultObject.filePath = filePath;
-					resultObject.typeId = objectTypeId;
-
-					istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
-
-					resultInfo.outputObjects.push_back(resultObject);
-
-					SaveRepositoryItem(item);
-
-					return resultObject.uuid;
-				}
-			}
-		}
-	}
-
-	return QByteArray();
+	return InsertResultObject(filePath, partId, resultId, objectTypeId, false);
 }
 
 
 QByteArray CProductionHistoryComp::InsertInputObjectPath(
-			const QString& filePath,
-			const QByteArray& productionPartId,
-			const QByteArray& resultId,
-			const QByteArray& objectTypeId)
+	const QString& filePath,
+	const QByteArray& partId,
+	const QByteArray& resultId,
+	const QByteArray& objectTypeId)
 {
-	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
-
-	if (it != m_historyItemsById.end()){
-		HistoryItem& item = m_historyItems[*it];
-
-		for (int resultIndex = 0; resultIndex < item.resultInfoList.count(); ++resultIndex){
-			ResultInfo& resultInfo = item.resultInfoList[resultIndex];
-
-			if (resultInfo.uuid == resultId){
-				ObjectInfo inputObject;
-				inputObject.filePath = filePath;
-				inputObject.typeId = objectTypeId;
-
-				istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
-
-				resultInfo.inputObjects.push_back(inputObject);
-
-				SaveRepositoryItem(item);
-
-				return inputObject.uuid;
-			}
-		}
-	}
-
-	return QByteArray();
+	return InsertResultObject(filePath, partId, resultId, objectTypeId, true);
 }
 
 
 void CProductionHistoryComp::RemoveProductionPart(const QByteArray& productionPartId)
 {
-	HistoryItemsById::Iterator it = m_historyItemsById.find(productionPartId);
+	QWriteLocker locker(&m_historyItemsLock);
 
-	if (it != m_historyItemsById.end()){
-		HistoryItem& item = m_historyItems[*it];
-		QString itemPath = GetItemPath(item);
+	HistoryItems::Iterator it = m_historyItems.find(productionPartId);
+
+	if (it != m_historyItems.end()){
+		PartInfo& partInfo = *it;
+
+		QString itemPath = GetItemPath(partInfo);
 
 		istd::CChangeNotifier changeNotifier(this);
 		QFile::remove(itemPath);
 
-		m_historyItems.removeAt(*it);
-		m_historyItemsById.erase(it);
+		m_historyItems.erase(it);
 	}
 }
 
@@ -265,7 +197,10 @@ void CProductionHistoryComp::OnComponentCreated()
 		}
 	}
 
-	ReadHistoryItems();
+	QObject::connect(&m_historyReaderWatcher, SIGNAL(finished()), this, SLOT(OnHistoryReadFinished()));
+
+	QFuture<void> future = QtConcurrent::run(this, &CProductionHistoryComp::ReadHistoryItems);
+	m_historyReaderWatcher.setFuture(future);
 }
 
 
@@ -275,9 +210,46 @@ void CProductionHistoryComp::OnComponentDestroyed()
 }
 
 
-// private methods
+// CProductionHistoryComp private methods
 
-bool CProductionHistoryComp::SerializeResultInfoList(iser::IArchive& archive, ResultInfoList& resultInfoList) const
+bool CProductionHistoryComp::SerializePartInfo(iser::IArchive& archive, PartInfo& partInfo) const
+{
+	bool retVal = true;
+
+	retVal = retVal && archive.BeginTag(s_partUuidTag);
+	retVal = retVal && archive.Process(partInfo.uuid);
+	retVal = retVal && archive.EndTag(s_partUuidTag);
+
+	retVal = retVal && archive.BeginTag(s_partSerialTag);
+	retVal = retVal && archive.Process(partInfo.serialNumber);
+	retVal = retVal && archive.EndTag(s_partSerialTag);
+
+	retVal = retVal && archive.BeginTag(s_productNameTag);
+	retVal = retVal && archive.Process(partInfo.productName);
+	retVal = retVal && archive.EndTag(s_productNameTag);
+
+	retVal = retVal && archive.BeginTag(s_productIdTag);
+	retVal = retVal && archive.Process(partInfo.productId);
+	retVal = retVal && archive.EndTag(s_productIdTag);
+
+	retVal = retVal && archive.BeginTag(s_partTimeStampTag);
+	retVal = retVal && archive.Process(partInfo.processingInfo.time);
+	retVal = retVal && archive.EndTag(s_partTimeStampTag);
+
+	retVal = retVal && archive.BeginTag(s_partStatusTag);
+	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeEnum<
+		istd::IInformationProvider::InformationCategory,
+		istd::IInformationProvider::ToString,
+		istd::IInformationProvider::FromString>(archive, partInfo.processingInfo.status);
+	retVal = retVal && archive.EndTag(s_partStatusTag);
+
+	retVal = retVal && SerializeResults(archive, partInfo.results);
+
+	return retVal;
+}
+
+
+bool CProductionHistoryComp::SerializeResults(iser::IArchive& archive, ResultInfoList& resultInfoList) const
 {
 	bool retVal = true;
 	int resultInfosCount = resultInfoList.count();
@@ -324,33 +296,19 @@ bool CProductionHistoryComp::SerializeResultInfoList(iser::IArchive& archive, Re
 
 		static const iser::CArchiveTag s_inspectionTimeTag("Time", "Processing time of the inspection", iser::CArchiveTag::TT_LEAF, &s_processingInfoTag);
 		retVal = retVal && archive.BeginTag(s_inspectionTimeTag);
-
-		const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-		quint32 frameworkVersion = 0;
-		if (!versionInfo.GetVersionNumber(1, frameworkVersion) || frameworkVersion >= 2516){
-			retVal = retVal && archive.Process(resultInfo.processingInfo.time);
-		}
-		else{
-			QDateTime timestamp;
-			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, timestamp);
-
-			if (retVal){
-				resultInfo.processingInfo.time = timestamp.toMSecsSinceEpoch() / 1000;
-			}
-		}
-
+		retVal = retVal && archive.Process(resultInfo.processingInfo.time);
 		retVal = retVal && archive.EndTag(s_inspectionTimeTag);
 
 		retVal = retVal && archive.EndTag(s_processingInfoTag);
 
 		static const iser::CArchiveTag inputObjectListTag("InputObjects", "List of input objects", iser::CArchiveTag::TT_GROUP, &s_resultInfoTag);
 		retVal = retVal && archive.BeginTag(inputObjectListTag);
-		retVal = retVal && SerializeObjectList(archive, resultInfo.inputObjects);
+		retVal = retVal && SerializeObjects(archive, resultInfo.inputObjects);
 		retVal = retVal && archive.EndTag(inputObjectListTag);
 
 		static const iser::CArchiveTag outputObjectListTag("OutputObjects", "List of output objects", iser::CArchiveTag::TT_GROUP, &s_resultInfoTag);
 		retVal = retVal && archive.BeginTag(outputObjectListTag);
-		retVal = retVal && SerializeObjectList(archive, resultInfo.outputObjects);
+		retVal = retVal && SerializeObjects(archive, resultInfo.outputObjects);
 		retVal = retVal && archive.EndTag(outputObjectListTag);
 	
 		retVal = retVal && archive.EndTag(s_resultInfoTag);
@@ -362,7 +320,7 @@ bool CProductionHistoryComp::SerializeResultInfoList(iser::IArchive& archive, Re
 }
 
 
-bool CProductionHistoryComp::SerializeObjectList(iser::IArchive& archive, ObjectInfoList& objectInfoList) const
+bool CProductionHistoryComp::SerializeObjects(iser::IArchive& archive, ObjectInfoList& objectInfoList) const
 {
 	bool retVal = true;
 	int objectsCount = objectInfoList.count();
@@ -404,67 +362,14 @@ bool CProductionHistoryComp::SerializeObjectList(iser::IArchive& archive, Object
 }
 
 
-bool CProductionHistoryComp::SerializeHistoryItem(iser::IArchive& archive, HistoryItem& historyItem) const
-{
-	bool retVal = true;
-
-	retVal = retVal && archive.BeginTag(s_partUuidTag);
-	retVal = retVal && archive.Process(historyItem.uuid);
-	retVal = retVal && archive.EndTag(s_partUuidTag);
-
-	retVal = retVal && archive.BeginTag(s_productNameTag);
-	retVal = retVal && archive.Process(historyItem.productName);
-	retVal = retVal && archive.EndTag(s_productNameTag);
-
-	retVal = retVal && archive.BeginTag(s_productIdTag);
-	retVal = retVal && archive.Process(historyItem.productId);
-	retVal = retVal && archive.EndTag(s_productIdTag);
-
-	retVal = retVal && archive.BeginTag(s_partSerialTag);
-	retVal = retVal && archive.Process(historyItem.serialNumber);
-	retVal = retVal && archive.EndTag(s_partSerialTag);
-
-	retVal = retVal && archive.BeginTag(s_partTimeStampTag);
-
-	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	quint32 frameworkVersion = 0;
-	if (!versionInfo.GetVersionNumber(1, frameworkVersion) || frameworkVersion >= 2516){
-		retVal = retVal && archive.Process(historyItem.timestamp);
-	}
-	else{
-		QDateTime timestamp;
-		retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, timestamp);
-
-		if (retVal){
-			historyItem.timestamp = timestamp.toMSecsSinceEpoch() / 1000;
-		}
-	}
-
-	retVal = retVal && archive.EndTag(s_partTimeStampTag);
-
-	retVal = retVal && archive.BeginTag(s_partStatusTag);
-	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeEnum<
-				istd::IInformationProvider::InformationCategory,
-				istd::IInformationProvider::ToString,
-				istd::IInformationProvider::FromString>(archive, historyItem.status);
-	retVal = retVal && archive.EndTag(s_partStatusTag);
-
-	retVal = retVal && SerializeResultInfoList(archive, historyItem.resultInfoList);
-
-	return retVal;
-}
-
-
 void CProductionHistoryComp::ReadHistoryItems()
 {
 	if (!m_productionHistoryFolderCompPtr.IsValid()){
 		return;
 	}
 
-	istd::CChangeNotifier changeNotifier(this);
-
-	m_historyItems.clear();
-	m_historyItemsById.clear();
+	// read history items into the internal buffer
+	m_historyItemsToLoad.clear();
 
 	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
 	QDir repositoryRootDir(repositoryPath);
@@ -476,143 +381,98 @@ void CProductionHistoryComp::ReadHistoryItems()
 		QString itemFilePath = repositoryFiles[fileIndex].absoluteFilePath();
 
 		ifile::CCompactXmlFileReadArchive archive(itemFilePath);
-		HistoryItem historyItem;
 
-		if (!SerializeHistoryItem(archive, historyItem)){
+		PartInfo partInfo;
+
+		if (!SerializePartInfo(archive, partInfo)){
 			SendErrorMessage(0, QString("Repository item could not be loaded from '%1'").arg(itemFilePath));
-
 			continue;
 		}
 
-		m_historyItems.push_back(historyItem);
-		m_historyItemsById.insert(historyItem.uuid, m_historyItems.size() - 1);
+		m_historyItemsToLoad.insert(partInfo.uuid, partInfo);
 	}
 }
 
 
-void CProductionHistoryComp::SaveRepositoryItem(const HistoryItem& historyItem) const
+void CProductionHistoryComp::SaveRepositoryItem(const PartInfo& partInfo) const
 {
-	QString itemFilePath = GetItemPath(historyItem);
+	QString itemFilePath = GetItemPath(partInfo);
+
 	if (!itemFilePath.isEmpty()){
 		ifile::CCompactXmlFileWriteArchive archive(itemFilePath, m_versionInfoCompPtr.GetPtr());
 
-		if (!SerializeHistoryItem(archive, const_cast<HistoryItem&>(historyItem))){
+		if (!SerializePartInfo(archive, const_cast<PartInfo&>(partInfo))){
 			SendErrorMessage(0, QString("Repository item could not be saved into '%1'").arg(itemFilePath));
 		}
 	}
 }
 
 
-QString CProductionHistoryComp::GetItemPath(const HistoryItem& historyItem) const
+QString CProductionHistoryComp::GetItemPath(const PartInfo& partInfo) const
 {
+	Q_ASSERT(m_productionHistoryFolderCompPtr.IsValid());
+
+	QDateTime timestamp = QDateTime::fromMSecsSinceEpoch(partInfo.processingInfo.time * 1000);
+	QString fileName = partInfo.productName  + "_" + timestamp.toString("yyyyMMdd_hhmmsszzz") + ".xml";
+
 	QString repositoryPath = m_productionHistoryFolderCompPtr->GetPath();
-
-	QDateTime timestamp = QDateTime::fromMSecsSinceEpoch(historyItem.timestamp * 1000);
-	QString fileName = historyItem.productName  + "_" + timestamp.toString("yyyyMMdd_hhmmsszzz") + ".xml";
-
 	QString itemFilePath = repositoryPath + "/" + fileName;
 
 	return itemFilePath;
 }
 
 
-// public methods of the embedded class HistoryItem
-
-CProductionHistoryComp::HistoryItem::HistoryItem()
-	:timestamp(0),
-	status(istd::IInformationProvider::IC_NONE)
+QByteArray CProductionHistoryComp::InsertResultObject(
+			const QString& filePath,
+			const QByteArray& partId,
+			const QByteArray& resultId,
+			const QByteArray& objectTypeId,
+			bool input)
 {
-	uuid = QUuid::createUuid().toByteArray();
+	QWriteLocker locker(&m_historyItemsLock);
+
+	HistoryItems::Iterator it = m_historyItems.find(partId);
+
+	if (it != m_historyItems.end()){
+		PartInfo& partInfo = *it;
+
+		for (int resultIndex = 0; resultIndex < partInfo.results.size(); ++resultIndex){
+			ResultInfo& resultInfo = partInfo.results[resultIndex];
+
+			if (resultInfo.uuid == resultId){
+				ObjectInfo resultObject;
+				resultObject.filePath = filePath;
+				resultObject.typeId = objectTypeId;
+
+				istd::CChangeNotifier changeNotifier(this, &m_newObjectChangeSet);
+
+				if (input){
+					resultInfo.inputObjects.push_back(resultObject);
+				}
+				else{
+					resultInfo.outputObjects.push_back(resultObject);
+				}
+
+				SaveRepositoryItem(partInfo);
+
+				return resultObject.uuid;
+			}
+		}
+	}
+
+	return QByteArray();
 }
 
 
-// reimplemented (iprm::IOptionsList)
-
-int CProductionHistoryComp::HistoryItem::GetOptionsFlags() const
+void CProductionHistoryComp::OnHistoryReadFinished()
 {
-	return SCF_SUPPORT_UNIQUE_ID;
-}
+	if (!m_historyItemsToLoad.isEmpty()){
+		istd::CChangeNotifier changeNotifier(this);
 
+		QWriteLocker locker(&m_historyItemsLock);
 
-int CProductionHistoryComp::HistoryItem::GetOptionsCount() const
-{
-	return resultInfoList.count();
-}
-
-
-QString CProductionHistoryComp::HistoryItem::GetOptionName(int index) const
-{
-	return resultInfoList[index].name;
-}
-
-
-QString CProductionHistoryComp::HistoryItem::GetOptionDescription(int /*index*/) const
-{
-	return QString();
-}
-
-
-QByteArray CProductionHistoryComp::HistoryItem::GetOptionId(int index) const
-{
-	return resultInfoList[index].uuid;
-}
-
-
-bool CProductionHistoryComp::HistoryItem::IsOptionEnabled(int /*index*/) const
-{
-	return true;
-}
-
-
-// public methods of the embedded class PartList
-
-CProductionHistoryComp::PartList::PartList()
-	:m_parentPtr(NULL)
-{
-}
-
-
-void CProductionHistoryComp::PartList::SetParent(const CProductionHistoryComp* parentPtr)
-{
-	m_parentPtr = parentPtr;
-}
-
-
-// reimplemented (iprm::IOptionsList)
-
-int CProductionHistoryComp::PartList::GetOptionsFlags() const
-{
-	return SCF_SUPPORT_UNIQUE_ID;
-}
-
-
-int CProductionHistoryComp::PartList::GetOptionsCount() const
-{
-	return m_parentPtr->m_historyItems.count();
-}
-
-
-QString CProductionHistoryComp::PartList::GetOptionName(int index) const
-{
-	return m_parentPtr->m_historyItems[index].productName;
-}
-
-
-QString CProductionHistoryComp::PartList::GetOptionDescription(int /*index*/) const
-{
-	return QString();
-}
-
-
-QByteArray CProductionHistoryComp::PartList::GetOptionId(int index) const
-{
-	return m_parentPtr->m_historyItems[index].uuid;
-}
-
-
-bool CProductionHistoryComp::PartList::IsOptionEnabled(int /*index*/) const
-{
-	return true;
+		m_historyItems.unite(m_historyItemsToLoad);
+	}
 }
 
 

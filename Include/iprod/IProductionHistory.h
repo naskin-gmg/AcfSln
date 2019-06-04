@@ -39,17 +39,6 @@ public:
 	};
 
 	/**
-		Part information
-	*/
-	struct PartInfo
-	{
-		QString serialNumber;
-		QString productName;
-		QByteArray productId;
-		ProcessingInfo processingInfo;
-	};
-
-	/**
 		Description of the data object used as input or as output of the inspection.
 	*/
 	struct ObjectInfo
@@ -95,23 +84,38 @@ public:
 		ProcessingInfo processingInfo;
 	};
 
-	/**
-		Get the list of the produced parts.
-	*/
-	virtual const iprm::IOptionsList& GetPartsInfoList() const = 0;
+	typedef QList<ResultInfo> ResultInfoList;
 
 	/**
-		Get the information about the processed part.
+		Part information.
+	*/
+	struct PartInfo
+	{
+		PartInfo()
+		{
+			uuid = QUuid::createUuid().toByteArray();
+		}
+
+		QByteArray uuid;
+		QString serialNumber;
+		QString productName;
+		QByteArray productId;
+		ProcessingInfo processingInfo;
+		ResultInfoList results;
+	};
+
+	/**
+		Get the produced parts identifiers list.
+	*/
+	virtual QByteArrayList GetPartInfoIds() const = 0;
+
+	/**
+		Get processed part information.
 	*/
 	virtual PartInfo GetPartInfo(const QByteArray& productionPartId) const = 0;
 
 	/**
-		Get the list of the executed inspections for the given part-ID.
-	*/
-	virtual const iprm::IOptionsList& GetResultInfoList(const QByteArray& productionPartId) const = 0;
-
-	/**
-		Get the list of the input objects for the given part-ID and inspection-ID.
+		Get processed result information.
 	*/
 	virtual ResultInfo GetResultInfo(const QByteArray& productionPartId, const QByteArray& resultId) const = 0;
 };
