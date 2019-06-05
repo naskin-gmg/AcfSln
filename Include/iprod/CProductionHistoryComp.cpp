@@ -197,7 +197,7 @@ void CProductionHistoryComp::OnComponentCreated()
 		}
 	}
 
-	if (m_DoNotLoadHistoryAttrPtr.IsValid() && (*m_DoNotLoadHistoryAttrPtr) == false){
+	if (!m_doNotLoadHistoryAttrPtr.IsValid() || *m_doNotLoadHistoryAttrPtr == false){
 		QObject::connect(&m_historyReaderWatcher, SIGNAL(finished()), this, SLOT(OnHistoryReadFinished()));
 
 		QFuture<void> future = QtConcurrent::run(this, &CProductionHistoryComp::ReadHistoryItems);
