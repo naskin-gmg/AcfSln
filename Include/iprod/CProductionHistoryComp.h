@@ -37,9 +37,9 @@ public:
 	CProductionHistoryComp();
 
 	// reimplemented (IProductionHistory)
-	QByteArrayList GetPartInfoIds() const override;
-	PartInfo GetPartInfo(const QByteArray& partId) const override;
-	ResultInfo GetResultInfo(const QByteArray& partId, const QByteArray& resultId) const override;
+	QByteArrayList GetPartInfoIds() const;
+	PartInfo GetPartInfo(const QByteArray& partId) const;
+	ResultInfo GetResultInfo(const QByteArray& partId, const QByteArray& resultId) const;
 
 
 	// reimplemented (IProductionHistoryController)
