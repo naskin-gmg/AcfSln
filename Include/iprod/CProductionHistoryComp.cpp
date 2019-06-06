@@ -67,7 +67,9 @@ IProductionHistory::ResultInfo CProductionHistoryComp::GetResultInfo(const QByte
 	HistoryItems::ConstIterator it = m_historyItems.constFind(partId);
 
 	if (it != m_historyItems.constEnd()){
-		for (const ResultInfo resultInfo : it->results){
+		for (int i = 0; i < it->results.size(); ++i){
+			const ResultInfo resultInfo = it->results[i];
+
 			if (resultInfo.uuid == resultId){
 				return resultInfo;
 			}
