@@ -107,7 +107,7 @@ public:
 	/**
 		Get the produced parts identifiers list.
 	*/
-	virtual QByteArrayList GetPartInfoIds() const = 0;
+	virtual QList<QByteArray> GetPartInfoIds() const = 0;
 
 	/**
 		Get processed part information.

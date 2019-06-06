@@ -38,7 +38,7 @@ CProductionHistoryComp::CProductionHistoryComp()
 
 // reimplemented (IProductionHistory)
 
-QByteArrayList CProductionHistoryComp::GetPartInfoIds() const
+QList<QByteArray> CProductionHistoryComp::GetPartInfoIds() const
 {
 	QReadLocker locker(&m_historyItemsLock);
 
