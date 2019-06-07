@@ -9,11 +9,39 @@
 
 // Qt includes
 #include <QtCore/QReadWriteLock>
-#include <QtCore/QFutureWatcher>
+#include <QtCore/QThread>
 
 
 namespace iprod
 {
+
+
+class CHistoryReader: public QThread
+{
+	Q_OBJECT
+
+public:
+	typedef QVector<iprod::IProductionHistory::PartInfo> History;
+
+	CHistoryReader(QObject* parentPtr);
+
+	void SetHistoryPath(const QString& historyPath);
+	const History& GetHistory() const;
+	const QStringList& GetErrors() const;
+
+signals:
+	void HistoryChunkReady(bool lastChunk);
+
+protected:
+	// reimplemented (QThread)
+	void run();
+
+private:
+	static const int s_historyChunkSize = 500;
+	QVector<iprod::IProductionHistory::PartInfo> m_history;
+	QStringList m_errors;
+	QString m_historyPath;
+};
 
 
 class CProductionHistoryComp:
@@ -35,6 +63,8 @@ public:
 	I_END_COMPONENT;
 
 	CProductionHistoryComp();
+
+	friend class CHistoryReader;
 
 	// reimplemented (IProductionHistory)
 	QList<QByteArray> GetPartInfoIds() const;
@@ -73,29 +103,25 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	typedef QMap<QByteArray, PartInfo> HistoryItems;
+	static bool SerializePartInfo(iser::IArchive& archive, PartInfo& partInfo);
+	static bool SerializeResults(iser::IArchive& archive, ResultInfoList& resultInfoList);
+	static bool SerializeObjects(iser::IArchive& archive, ObjectInfoList& objectInfoList);
 
-private:
-	bool SerializePartInfo(iser::IArchive& archive, PartInfo& partInfo) const;
-	bool SerializeResults(iser::IArchive& archive, ResultInfoList& resultInfoList) const;
-	bool SerializeObjects(iser::IArchive& archive, ObjectInfoList& objectInfoList) const;
-
-	void ReadHistoryItems();
-
+	void ReadHistory();
 	void SaveRepositoryItem(const PartInfo& partInfo) const;
 	QString GetItemPath(const PartInfo& partInfo) const;
 	QByteArray InsertResultObject(const QString& filePath, const QByteArray& partId, const QByteArray& resultId, const QByteArray& objectTypeId, bool input);
 
 private slots:
-	void OnHistoryReadFinished();
+	void OnHistoryChunkReady(bool lastChunk);
 
 private:
+	typedef QMap<QByteArray, PartInfo> HistoryItems;
 	HistoryItems m_historyItems;
-	HistoryItems m_historyItemsToLoad;
 
 	mutable QReadWriteLock m_historyItemsLock;
 
-	QFutureWatcher<void> m_historyReaderWatcher;
+	CHistoryReader* m_historyReaderPtr;
 
 	const istd::IChangeable::ChangeSet m_newObjectChangeSet;
 
