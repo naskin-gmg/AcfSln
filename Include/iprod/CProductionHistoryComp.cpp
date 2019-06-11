@@ -83,7 +83,7 @@ void CHistoryReader::run()
 	QDir repositoryRootDir(m_historyPath);
 
 	QFileInfoList repositoryFiles;
-	ifile::CFileListProviderComp::CreateFileList(repositoryRootDir, 0, 1, QStringList() << "*.xml", QDir::Time | QDir::Reversed, repositoryFiles);
+	ifile::CFileListProviderComp::CreateFileList(repositoryRootDir, 0, 1, QStringList() << "*.xml", QDir::Time, repositoryFiles);
 
 	for (int fileIndex = 0; fileIndex < repositoryFiles.count(); ++fileIndex){
 		if (isInterruptionRequested()){
