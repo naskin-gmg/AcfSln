@@ -29,8 +29,10 @@ static const iser::CArchiveTag s_partStatusTag("Status", "Status of the part pro
 
 // CHistoryReader public methods
 
-CHistoryReader::CHistoryReader(QObject* parentPtr) : QThread(parentPtr)
+CHistoryReader::CHistoryReader()
 {
+	m_history.reserve(s_historyChunkSize);
+	m_historyChunk.reserve(s_historyChunkSize);
 }
 
 
@@ -40,9 +42,23 @@ void CHistoryReader::SetHistoryPath(const QString& historyPath)
 }
 
 
-const CHistoryReader::History& CHistoryReader::GetHistory() const
+const CHistoryReader::HistoryChunk& CHistoryReader::GetHistoryChunk()
 {
-	return m_history;
+	m_historyChunk.clear();
+
+	QMutexLocker lock(&m_historyMutex);
+
+	int chunkSize = qMin(m_history.size(), s_historyChunkSize);
+
+	for (int i = 0; i < chunkSize; ++i){
+		const iprod::IProductionHistory::PartInfo& partInfo = m_history.head();
+
+		m_historyChunk.push_back(partInfo);
+
+		m_history.dequeue();
+	}
+
+	return m_historyChunk;
 }
 
 
@@ -64,18 +80,16 @@ void CHistoryReader::run()
 
 	istd::CSystem::EnsurePathExists(m_historyPath);
 
-	// read history items into the internal buffer
 	QDir repositoryRootDir(m_historyPath);
 
 	QFileInfoList repositoryFiles;
 	ifile::CFileListProviderComp::CreateFileList(repositoryRootDir, 0, 1, QStringList() << "*.xml", QDir::Time | QDir::Reversed, repositoryFiles);
 
-	m_errors.clear();
-
-	m_history.clear();
-	m_history.reserve(s_historyChunkSize);
-
 	for (int fileIndex = 0; fileIndex < repositoryFiles.count(); ++fileIndex){
+		if (isInterruptionRequested()){
+			break;
+		}
+
 		QString itemFilePath = repositoryFiles[fileIndex].absoluteFilePath();
 
 		ifile::CCompactXmlFileReadArchive archive(itemFilePath);
@@ -84,15 +98,16 @@ void CHistoryReader::run()
 
 		if (!CProductionHistoryComp::SerializePartInfo(archive, partInfo)){
 			m_errors.push_back(QString("Repository item could not be loaded from '%1'").arg(itemFilePath));
+
 			continue;
 		}
 
-		m_history.push_back(partInfo);
+		QMutexLocker lock(&m_historyMutex);
 
-		if (m_history.size() == s_historyChunkSize){
-			emit HistoryChunkReady(false); // blocked connection
+		m_history.enqueue(partInfo);
 
-			m_history.clear();
+		if (m_history.size() >= s_historyChunkSize){
+			emit HistoryChunkReady(false);
 		}
 	}
 
@@ -105,9 +120,9 @@ void CHistoryReader::run()
 CProductionHistoryComp::CProductionHistoryComp()
 	:m_newObjectChangeSet(iprod::IProductionHistory::CF_NEW_OBJECT)
 {
-	m_historyReaderPtr = new CHistoryReader(this);
+	m_historyReaderPtr = new CHistoryReader();
 
-	QObject::connect(m_historyReaderPtr, SIGNAL(HistoryChunkReady(bool)), this, SLOT(OnHistoryChunkReady(bool)), Qt::BlockingQueuedConnection);
+	QObject::connect(m_historyReaderPtr.GetPtr(), SIGNAL(HistoryChunkReady(bool)), this, SLOT(OnHistoryChunkReady(bool)), Qt::QueuedConnection);
 }
 
 
@@ -273,6 +288,11 @@ void CProductionHistoryComp::OnComponentCreated()
 
 void CProductionHistoryComp::OnComponentDestroyed()
 {
+	if (m_historyReaderPtr.IsValid()){
+		m_historyReaderPtr->requestInterruption();
+		m_historyReaderPtr->wait();
+	}
+
 	BaseClass::OnComponentDestroyed();
 }
 
@@ -518,10 +538,10 @@ void CProductionHistoryComp::OnHistoryChunkReady(bool lastChunk)
 {
 	istd::CChangeNotifier changeNotifier(this);
 
-	const CHistoryReader::History& history = m_historyReaderPtr->GetHistory();
+	const CHistoryReader::HistoryChunk& historyChunk = m_historyReaderPtr->GetHistoryChunk();
 
-	for (int i = 0; i < history.size(); ++i){
-		const PartInfo& partInfo = history[i];
+	for (int i = 0; i < historyChunk.size(); ++i){
+		const PartInfo& partInfo = historyChunk[i];
 
 		QWriteLocker locker(&m_historyItemsLock);
 
