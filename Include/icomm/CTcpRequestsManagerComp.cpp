@@ -5,6 +5,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QElapsedTimer>
 #include <QtCore/QUrl>
+#include <QtNetwork/QHostAddress>
 
 // ACF include
 #include <iser/CMemoryReadArchive.h>
@@ -120,6 +121,12 @@ bool CTcpRequestsManagerComp::ProcessMessage(const CTcpMessageHeader& header, co
 
 
 // reimplemented (icomm::IHostConnection)
+
+QString CTcpRequestsManagerComp::GetHostUrl() const
+{
+	return m_socket.peerAddress().toString();
+}
+
 
 bool CTcpRequestsManagerComp::ConnectToHost(const iprm::IParamsSet* paramsPtr)
 {

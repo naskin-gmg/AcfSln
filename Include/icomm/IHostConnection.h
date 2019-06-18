@@ -5,7 +5,6 @@
 #include <QtNetwork/QAbstractSocket>
 
 // ACF includes
-#include <istd/IPolymorphic.h>
 #include <iprm/IParamsSet.h>
 
 
@@ -19,7 +18,7 @@ namespace icomm
 	where one of side is waiting passive for connection and the second one initialise it.
 	Objects implementing this interface supports active communication side.
 */
-class IHostConnection: virtual public istd::IPolymorphic
+class IHostConnection: virtual public istd::IChangeable
 {
 public:
 	/** Interface for event handler.
@@ -44,20 +43,25 @@ public:
 		*/
 		virtual void OnStateChanged(icomm::IHostConnection& connection, QAbstractSocket::SocketState newState) = 0;
 	};
+
+	virtual QString GetHostUrl() const = 0;
+
 	/**
 		Try to connect to remote part.
 		\param	paramsPtr	describe connections parameters
 		\return	true, if success.
 	*/
 	virtual bool ConnectToHost(const iprm::IParamsSet* paramsPtr = NULL) = 0;
+
 	/**
 		Disconnect connection to remote part.
 	*/
 	virtual void DisconnectFromHost() = 0;
+
 	/**
 		Checks if connected to host.
 	*/
-    virtual bool IsHostConnected() const = 0;
+	virtual bool IsHostConnected() const = 0;
 
 	/**
 		Waits until host is connected.
@@ -75,6 +79,7 @@ public:
 		\param	allowOtherThread	if true, it allows calls of handler in other than current caller thread.
 	*/
 	virtual bool RegisterEventHandler(Handler* handlerPtr, bool allowOtherThread = false) = 0;
+
 	/**
 		Disconnect handler connected with \c RegisterEventHandler.
 		\param	handlerPtr	Pointer to user events handler.

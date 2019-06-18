@@ -65,6 +65,7 @@ public:
 	virtual bool ProcessMessage(const CTcpMessageHeader& header, const quint8* dataPtr, int length);
 
 	// reimplemented (icomm::IHostConnection)
+	virtual QString GetHostUrl() const;
 	virtual bool ConnectToHost(const iprm::IParamsSet* paramsPtr);
 	virtual void DisconnectFromHost();
 	virtual bool IsHostConnected() const;

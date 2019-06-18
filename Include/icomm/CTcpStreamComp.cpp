@@ -87,6 +87,16 @@ bool CTcpStreamComp::UnregisterEventHandler(icomm::IBinaryStream::Handler* /*han
 
 // reimplemented (icomm::IHostConnection)
 
+QString CTcpStreamComp::GetHostUrl() const
+{
+	if (m_socketPtr.IsValid()){
+		return m_socketPtr->peerAddress().toString();
+	}
+
+	return QString();
+}
+
+
 bool CTcpStreamComp::ConnectToHost(const iprm::IParamsSet* /*paramsPtr*/)
 {
 	// reconnect if needed

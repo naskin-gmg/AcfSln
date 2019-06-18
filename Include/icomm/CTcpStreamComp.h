@@ -49,6 +49,7 @@ public:
 	virtual bool UnregisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr);
 
 	// reimplemented (icomm::IHostConnection)
+	virtual QString GetHostUrl() const;
 	virtual bool ConnectToHost(const iprm::IParamsSet* paramsPtr);
 	virtual void DisconnectFromHost();
 	virtual bool IsHostConnected() const;
