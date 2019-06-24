@@ -67,17 +67,17 @@ int CSelectionParamCameraComp::BeginTask(
 {
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
-	int retVal = BaseClass::BeginTask(
+	int taskId = BaseClass::BeginTask(
 				extParamsPtr.GetPtr(),
 				inputPtr,
 				outputPtr,
 				progressManagerPtr);
 
-	if (retVal >= 0){
-		m_paramsMap[retVal].TakeOver(extParamsPtr);
+	if (taskId >= 0){
+		m_paramsMap[taskId].TakeOver(extParamsPtr);
 	}
 
-	return retVal;
+	return taskId;
 }
 
 
@@ -93,7 +93,7 @@ int CSelectionParamCameraComp::WaitTaskFinished(
 
 	if (retVal != TS_WAIT){
 		if (taskId >= 0){
-			m_paramsMap.remove(retVal);
+			m_paramsMap.remove(taskId);
 		}
 		else{
 			m_paramsMap.clear();
@@ -119,6 +119,8 @@ void CSelectionParamCameraComp::CancelTask(int taskId)
 
 void CSelectionParamCameraComp::InitProcessor(const iprm::IParamsSet* paramsPtr)
 {
+	m_paramsMap.clear();
+
 	ParamSetPtr extParamsPtr(CreateParamsSet(paramsPtr));
 
 	BaseClass::InitProcessor(extParamsPtr.GetPtr());
