@@ -13,6 +13,7 @@
 #include <icalib/CSimpleLensCorrectionComp.h>
 #include <icalib/CStaticCalibrationProviderComp.h>
 #include <icalib/CCalibration2dProxyComp.h>
+#include <icalib/CAffineCalibrationProviderComp.h>
 
 
 /**
@@ -27,6 +28,7 @@ typedef icomp::TModelCompWrap<icalib::CPerspectiveCalibration2dComp> Perspective
 typedef icomp::TModelCompWrap<icalib::CSimpleLensCorrectionComp> SimpleLensCorrection;
 typedef icomp::TModelCompWrap<icalib::CStaticCalibrationProviderComp> StaticCalibrationProvider;
 typedef icomp::TModelCompWrap<icalib::CCalibration2dProxyComp> Calibration2dProxy;
+typedef icomp::TModelCompWrap<icalib::CAffineCalibrationProviderComp> AffineCalibrationProvider;
 
 
 } // namespace CalibrationPck

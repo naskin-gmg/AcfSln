@@ -38,6 +38,11 @@ I_EXPORT_COMPONENT(
 			"Proxy of a 2D calibration using calibration provider",
 			"2D Tranformation Calibration Proxy Provider" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
 
+I_EXPORT_COMPONENT(
+			AffineCalibrationProvider,
+			"Provides of affine transformation based on rotation, translation and scale parameters",
+			"2D Affine Tranformation Calibration" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
+
 
 } // namespace CalibrationPck
 
