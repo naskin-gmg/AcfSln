@@ -141,7 +141,7 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 		documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*inputDocumentPtr);
 	}
 	
-	if (documentTypeId.isEmpty() && m_documentTypeIdAttrPtr.IsValid())
+	if (m_documentTypeIdAttrPtr.IsValid())
 	{
 		documentTypeId = *m_documentTypeIdAttrPtr;
 	}
