@@ -17,6 +17,7 @@ namespace iprod
 {
 
 
+const int CHistoryReader::s_historyChunkSize = 500;
 static const iser::CArchiveTag s_partsTag("Items", "List of history items", iser::CArchiveTag::TT_MULTIPLE);
 static const iser::CArchiveTag s_partTag("Item", "Single item", iser::CArchiveTag::TT_GROUP);
 static const iser::CArchiveTag s_partUuidTag("Uuid", "UUID of the part", iser::CArchiveTag::TT_LEAF);
