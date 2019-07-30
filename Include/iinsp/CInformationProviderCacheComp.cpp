@@ -35,6 +35,10 @@ int CInformationProviderCacheComp::GetInformationId() const
 
 QString CInformationProviderCacheComp::GetInformationDescription() const
 {
+	if (m_description.isEmpty() && m_defaultDescriptionAttrPtr.IsValid()){
+		return *m_defaultDescriptionAttrPtr;
+	}
+
 	return m_description;
 }
 
