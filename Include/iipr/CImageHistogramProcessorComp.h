@@ -25,6 +25,12 @@ public:
 	I_BEGIN_COMPONENT(CImageHistogramProcessorComp);
 	I_END_COMPONENT;
 
+	static bool CalculateHistogram(
+				const iimg::IBitmap& inputBitmap,
+				const i2d::IObject2d* aoiPtr,
+				istd::IChangeable* outputPtr,
+				QString& errorString);
+
 protected:
 	// reimplemented (CImageRegionProcessorCompBase)
 	virtual bool ProcessImageRegion(
