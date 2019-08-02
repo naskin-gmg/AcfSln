@@ -35,6 +35,19 @@ QByteArray CGeometryMessage::GetFactoryId() const
 }
 
 
+// reimplemented (iser::IChangeable)
+
+istd::IChangeable * CGeometryMessage::CloneMe(CompatibilityMode mode) const
+{
+	istd::TDelPtr<CGeometryMessage> clonedPtr(new CGeometryMessage);
+	if (clonedPtr->CopyFrom(*this, mode)){
+		return clonedPtr.PopPtr();
+	}
+
+	return NULL;
+}
+
+
 QByteArray CGeometryMessage::GetTypeName()
 {
 	return istd::CClassInfo::GetName<CGeometryMessage>();
