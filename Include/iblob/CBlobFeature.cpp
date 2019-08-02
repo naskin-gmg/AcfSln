@@ -27,20 +27,9 @@ CBlobFeature::CBlobFeature(
 			double perimeter,
 			const i2d::CVector2d & position,
 			double angle,
-			const i2d::CVector2d& scale) 
-	:CBlobFeature(area, perimeter, position, i2d::CPolygon(), angle, scale)
-{
-}
-
-
-CBlobFeature::CBlobFeature(
-			double area,
-			double perimeter,
-			const i2d::CVector2d& position,
-			const i2d::CPolygon& contour,
-			double angle,
-			const i2d::CVector2d& scale)
-	: BaseClass(area, position, angle, scale),
+			const i2d::CVector2d& scale,
+			const i2d::CPolygon& contour)
+	:BaseClass(area, position, angle, scale),
 	m_area(area),
 	m_perimeter(perimeter),
 	m_contour(contour)

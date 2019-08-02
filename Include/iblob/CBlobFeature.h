@@ -27,15 +27,8 @@ public:
 				double perimeter,
 				const i2d::CVector2d& position,
 				double angle = 0.0,
-				const i2d::CVector2d& scale = i2d::CVector2d(1.0, 1.0));
-
-	CBlobFeature(
-				double area,
-				double perimeter,
-				const i2d::CVector2d& position,
-				const i2d::CPolygon& contour,
-				double angle = 0.0,
-				const i2d::CVector2d& scale = i2d::CVector2d(1.0, 1.0));
+				const i2d::CVector2d& scale = i2d::CVector2d(1.0, 1.0),
+				const i2d::CPolygon& contour = i2d::CPolygon());
 
 	double GetCircularity() const;
 	double GetCompactness() const;
