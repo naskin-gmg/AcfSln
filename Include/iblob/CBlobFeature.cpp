@@ -15,8 +15,20 @@ namespace iblob
 // public methods
 
 CBlobFeature::CBlobFeature()
-	:m_area(0.0),
-	m_perimeter(0.0)
+			:BaseClass(),
+			m_area(0.0),
+			m_perimeter(0.0)
+{
+}
+
+
+CBlobFeature::CBlobFeature(
+			double area,
+			double perimeter,
+			const i2d::CVector2d & position,
+			double angle,
+			const i2d::CVector2d& scale) 
+	:CBlobFeature(area, perimeter, position, i2d::CPolygon(), angle, scale)
 {
 }
 
@@ -25,28 +37,34 @@ CBlobFeature::CBlobFeature(
 			double area,
 			double perimeter,
 			const i2d::CVector2d& position,
-			double angle)
-	:BaseClass(0.0, position, angle),
+			const i2d::CPolygon& contour,
+			double angle,
+			const i2d::CVector2d& scale)
+	: BaseClass(area, position, angle, scale),
 	m_area(area),
-	m_perimeter(perimeter)
+	m_perimeter(perimeter),
+	m_contour(contour)
 {
+	if (!m_contour.IsEmpty()){
+		m_area = m_contour.GetArea();
+
+		m_perimeter = m_contour.GetPerimeter();
+	}
 }
 
 
 double CBlobFeature::GetCircularity() const
 {
-	if (qFuzzyCompare(m_perimeter, 0.0))
-	{
-		return 0.0;
-	}
-
 	return 4 * I_PI * GetCompactness();
 }
 
 
 double CBlobFeature::GetCompactness() const
 {
-	return m_area / (m_perimeter * m_perimeter);
+	if (qFuzzyCompare(m_perimeter, 0.0))
+		return 0.0;
+	else
+		return  m_area / (m_perimeter * m_perimeter);
 }
 
 
@@ -62,11 +80,19 @@ double CBlobFeature::GetArea() const
 }
 
 
+const i2d::CPolygon& CBlobFeature::GetContour() const
+{
+	return m_contour;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CBlobFeature::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
+
+	istd::CChangeNotifier notifier(!archive.IsStoring() ? this : NULL);
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
@@ -79,6 +105,12 @@ bool CBlobFeature::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(perimeterTag);
 	retVal = retVal && archive.Process(m_perimeter);
 	retVal = retVal && archive.EndTag(perimeterTag);
+
+	static iser::CArchiveTag contourTag("Contour", "Blob contour", iser::CArchiveTag::TT_GROUP);
+	retVal = retVal && archive.BeginTag(contourTag);
+	retVal = retVal && m_contour.Serialize(archive);
+	retVal = retVal && archive.EndTag(contourTag);
+
 
 	return retVal;
 }
@@ -94,6 +126,7 @@ bool CBlobFeature::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 
 		m_area = objectPtr->m_area;
 		m_perimeter = objectPtr->m_perimeter;
+		m_contour.CopyFrom(objectPtr->m_contour);
 
 		BaseClass::CopyFrom(object, mode);
 
