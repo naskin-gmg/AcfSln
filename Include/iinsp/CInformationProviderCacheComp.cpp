@@ -35,10 +35,6 @@ int CInformationProviderCacheComp::GetInformationId() const
 
 QString CInformationProviderCacheComp::GetInformationDescription() const
 {
-	if (m_description.isEmpty() && m_defaultDescriptionAttrPtr.IsValid()){
-		return *m_defaultDescriptionAttrPtr;
-	}
-
 	return m_description;
 }
 
@@ -65,8 +61,6 @@ bool CInformationProviderCacheComp::CopyFrom(const IChangeable& object, Compatib
 {
 	const istd::IInformationProvider* providerPtr = dynamic_cast<const IInformationProvider*>(&object);
 	if (providerPtr != NULL){
-		istd::CChangeNotifier notifier(this);
-
 		m_timeStamp = providerPtr->GetInformationTimeStamp();
 		m_category = providerPtr->GetInformationCategory();
 		m_id = providerPtr->GetInformationId();
@@ -83,8 +77,6 @@ bool CInformationProviderCacheComp::CopyFrom(const IChangeable& object, Compatib
 
 bool CInformationProviderCacheComp::ResetData(CompatibilityMode /*mode*/)
 {
-	istd::CChangeNotifier notifier(this);
-
 	m_timeStamp = QDateTime::currentDateTime();
 	m_category = IC_NONE;
 	m_id = 0;
