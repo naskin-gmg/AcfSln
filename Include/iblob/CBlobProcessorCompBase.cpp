@@ -26,8 +26,27 @@ int CBlobProcessorCompBase::DoExtractFeatures(
 		return TS_INVALID;
 	}
 
-	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr);
+
+	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
+	if (aoiPtr.IsValid()){
+		const i2d::ICalibration2d* logToPhysicalTransformPtr = aoiPtr->GetCalibration();
+		if (logToPhysicalTransformPtr != NULL){
+			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
+			if (transformedRegionPtr.IsValid()){
+				const i2d::ICalibration2d* calibrationPtr = transformedRegionPtr->GetCalibration();
+				if (calibrationPtr != NULL){
+					transformedRegionPtr->Transform(*calibrationPtr);
+
+					transformedRegionPtr->SetCalibration(NULL);
+				}
+
+				aoiPtr.SetPtr(transformedRegionPtr.GetPtr());
+			}
+		}
+	}
+
+	iprm::TParamsPtr<iblob::IBlobFilterParams> filterParamsPtr(paramsPtr, m_filterParamsIdAttrPtr, m_defaultFilterParamsCompPtr);
 
 	bool retVal = CalculateBlobs(paramsPtr, filterParamsPtr.GetPtr(), aoiPtr.GetPtr(), image, results);
 

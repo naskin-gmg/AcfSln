@@ -38,7 +38,6 @@ int CImageRegionProcessorCompBase::DoProcessing(
 	iprm::TParamsPtr<i2d::IObject2d> aoiPtr(paramsPtr, m_aoiParamIdAttrPtr, m_defaultAoiCompPtr, false);
 	if (aoiPtr.IsValid()){
 		const i2d::ICalibration2d* logToPhysicalTransformPtr = aoiPtr->GetCalibration();
-
 		if (logToPhysicalTransformPtr != NULL){
 			transformedRegionPtr.SetCastedOrRemove<istd::IChangeable>(aoiPtr->CloneMe());
 			if (transformedRegionPtr.IsValid()){
