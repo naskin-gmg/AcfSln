@@ -298,6 +298,11 @@ I_EXPORT_COMPONENT(
 			"Supplier of the perspective calibration based on some point grid",
 			"Calibration Perspective Supplier Provider" IM_CATEGORY(I_DATA_PROCESSING));
 
+I_EXPORT_COMPONENT(
+			ColorBalanceProcessor,
+			"Bitmap processor performing color balancing using color coefficients",
+			"Color White Balance Image Processor")
+
 
 } // namespace IprPck
 

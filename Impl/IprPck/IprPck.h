@@ -69,7 +69,7 @@
 #include <iipr/CImageIntegralProcessorComp.h>
 #include <iipr/CCheckerboardPointGridExtractorComp.h>
 #include <iipr/CPerspectiveCalibrationSupplierComp.h>
-
+#include <iipr/CColorBalanceProcessorComp.h>
 
 /**
 	System-independent image processing package.
@@ -149,7 +149,7 @@ typedef icomp::TModelCompWrap<iipr::CLensCorrFindSupplierComp> LensCorrFindSuppl
 typedef iipr::CImageIntegralProcessorComp ImageIntegralProcessor;
 typedef iipr::CCheckerboardPointGridExtractorComp CheckerboardPointGridExtractor;
 typedef icomp::TModelCompWrap<iipr::CPerspectiveCalibrationSupplierComp> PerspectiveCalibrationSupplier;
-
+typedef iipr::CColorBalanceProcessorComp ColorBalanceProcessor;
 
 } // namespace IprPck
 
