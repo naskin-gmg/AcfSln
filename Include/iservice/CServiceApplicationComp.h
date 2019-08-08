@@ -91,7 +91,7 @@ protected:
 	private:
 		CServiceApplicationComp& m_parent;
 		ibase::IApplication& m_application;
-		QStringList m_applicationArguments;
+		QByteArrayList m_applicationArguments;
 	};
 
 	istd::TDelPtr<CService> m_servicePtr;

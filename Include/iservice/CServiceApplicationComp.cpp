@@ -22,6 +22,7 @@ namespace iservice
 
 
 static int s_argc = 0;
+static QVector<char*> s_argv = QVector<char*>();
 
 
 // public methods
@@ -233,7 +234,11 @@ CServiceApplicationComp::CService::CService(
 	m_parent(parent),
 	m_application(application)
 {
-	m_applicationArguments = m_parent.GetApplicationArguments(serviceArgc, serviceArgv);
+	 QStringList applicationArguments = m_parent.GetApplicationArguments(serviceArgc, serviceArgv);
+
+	 for (int argIndex = 0; argIndex < applicationArguments.count(); ++argIndex){
+		 m_applicationArguments.push_back(applicationArguments[argIndex].toLocal8Bit());
+	 }
 
 	setServiceFlags(QtServiceBase::CanBeSuspended);
 }
@@ -297,19 +302,19 @@ void CServiceApplicationComp::CService::resume()
 
 void CServiceApplicationComp::CService::createApplication(int&/*argc*/, char** /* argv*/)
 {
-	QVector<char*> argv = GetApplicationArguments();
+	s_argv = GetApplicationArguments();
 
-	s_argc = argv.count();
+	s_argc = s_argv.count();
 
 	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
 	if (guiAppPtr != NULL){
-		new QApplication(s_argc, argv.data());	
+		new QApplication(s_argc, s_argv.data());
 	}
 	else{
-		new QCoreApplication(s_argc, argv.data());
+		new QCoreApplication(s_argc, s_argv.data());
 	}
 
-	m_application.InitializeApplication(argv.count(), argv.data());
+	m_application.InitializeApplication(s_argc, s_argv.data());
 }
 
 
@@ -328,7 +333,7 @@ QVector<char*> CServiceApplicationComp::CService::GetApplicationArguments() cons
 	QVector<char*> argv(m_applicationArguments.count());
 
 	for (int argIndex = 0; argIndex < m_applicationArguments.count(); argIndex++){
-		argv[argIndex] = m_applicationArguments[argIndex].toLocal8Bit().data();
+		argv[argIndex] = const_cast<char*>(m_applicationArguments[argIndex].data());
 	}
 
 	return argv;
