@@ -38,9 +38,19 @@ public:
 	virtual int GetInputBlockSize() const = 0;
 
 	/**
+		Set size of input memory block.
+	*/
+	virtual void SetInputBlockSize(int size) = 0;
+
+	/**
 		Get size of output memory block.
 	*/
 	virtual int GetOutputBlockSize() const = 0;
+
+	/**
+		Set size of output memory block.
+	*/
+	virtual void SetOutputBlockSize(int size) = 0;
 
 	/**
 		Read new incoming data.
