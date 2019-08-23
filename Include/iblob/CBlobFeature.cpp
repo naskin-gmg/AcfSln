@@ -53,7 +53,7 @@ double CBlobFeature::GetCompactness() const
 	if (qFuzzyCompare(m_perimeter, 0.0))
 		return 0.0;
 	else
-		return  m_area / (m_perimeter * m_perimeter);
+		return m_area / (m_perimeter * m_perimeter);
 }
 
 
