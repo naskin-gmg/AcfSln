@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4754" Description="ACF"/>
-            <Version Id="1" Number="2027" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="330752" Description="Qt Framework"/>
+            <Version Id="0" Number="4809" Description="ACF"/>
+            <Version Id="1" Number="2103" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331008" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Image acquisition GUI for image acquisition task</Description>
@@ -35,7 +35,7 @@
                     <AttributeInfo Id="BitmapFactory" Type="Factory" ExportId="BitmapFactory">
                         <Data IsEnabled="false"/>
                     </AttributeInfo>
-                    <AttributeInfo Id="BitmapLoader" Type="Reference" ExportId="">
+                    <AttributeInfo Id="BitmapLoader" Type="Reference" ExportId="BitmapLoader">
                         <Data IsEnabled="true" Value="BitmapDialogLoader"/>
                     </AttributeInfo>
                     <AttributeInfo Id="ConnectParametersToEditor" Type="Boolean" ExportId="ConnectParametersToEditor">
