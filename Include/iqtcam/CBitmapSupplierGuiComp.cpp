@@ -208,7 +208,22 @@ void CBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& chang
 	if (m_bitmapPtr.IsValid()){
 		istd::CIndex2d bitmapSize = m_bitmapPtr->GetImageSize();
 
-		SizeLabel->setText(tr("(%1 x %2)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()));
+		double memorySize = bitmapSize.GetY() * m_bitmapPtr->GetLineBytesCount() / 1024.0;
+		QString suffix = "KBytes";
+
+		if (memorySize > 1000){
+			suffix = "MBytes";
+
+			memorySize /= 1024;
+		}
+
+		if (memorySize > 1000){
+			suffix = "GBytes";
+
+			memorySize /= 1024;
+		}
+
+		SizeLabel->setText(tr("(%1 x %2, %3 %4)").arg(bitmapSize.GetX()).arg(bitmapSize.GetY()).arg(memorySize, 1, 'f', 1).arg(suffix));
 		SaveImageButton->setEnabled(!bitmapSize.IsSizeEmpty() && !isLive);
 	}
 
