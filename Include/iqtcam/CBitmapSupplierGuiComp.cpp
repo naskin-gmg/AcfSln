@@ -156,7 +156,6 @@ void CBitmapSupplierGuiComp::OnGuiRetranslate()
 }
 
 
-
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const
