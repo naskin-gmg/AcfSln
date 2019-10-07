@@ -69,7 +69,7 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 		case iproc::IProcessor::TS_OK:
 			{
 				istd::CIndex2d bitmapSize = result.second->GetImageSize();
-				i2d::CVector2d center(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5);
+				i2d::CVector2d center = *m_moveCalibrationToCenterAttrPtr ? i2d::CVector2d(bitmapSize.GetX() * 0.5, bitmapSize.GetY() * 0.5) : i2d::CVector2d();
 
 				i2d::CVector2d scale(1, 1);
 

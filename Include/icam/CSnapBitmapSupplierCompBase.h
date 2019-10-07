@@ -39,6 +39,7 @@ public:
 		I_ASSIGN(m_defaultCalibrationCompPtr, "Calibration", "Optional calibration object", false, "Calibration");
 		I_ASSIGN(m_scaleParamIdAttrPtr, "ScaleParamId", "ID of resolution parameter (pixel/mm) in parameter set", false, "Scale");
 		I_ASSIGN(m_defaultScaleValueCompPtr, "DefaultScaleParam", "Default resolution in pixel/mm", false, "DefaultScaleParam");
+		I_ASSIGN(m_moveCalibrationToCenterAttrPtr, "MoveCalibrationToCenter", "if true calibration zero is center of the image", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iimg::IBitmapProvider)
@@ -68,6 +69,7 @@ private:
 	I_REF(i2d::ICalibration2d, m_defaultCalibrationCompPtr);
 	I_ATTR(QByteArray, m_scaleParamIdAttrPtr);
 	I_REF(imeas::INumericValue, m_defaultScaleValueCompPtr);
+	I_ATTR(bool, m_moveCalibrationToCenterAttrPtr);
 };
 
 
