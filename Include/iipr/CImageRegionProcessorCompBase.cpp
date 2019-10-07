@@ -31,6 +31,8 @@ int CImageRegionProcessorCompBase::DoProcessing(
 		return TS_INVALID;
 	}
 
+	istd::CChangeNotifier changeNotifier(outputPtr);
+
 	i2d::CRectangle inputImageArea(inputBitmapPtr->GetImageSize());
 
 	istd::TDelPtr<i2d::IObject2d> transformedRegionPtr;
