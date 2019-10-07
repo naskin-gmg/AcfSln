@@ -300,9 +300,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			ColorBalanceProcessor,
-			"Bitmap processor performing color balancing using color coefficients",
+			"Bitmap processor performing color balancing wrt color coefficients in input params",
 			"Color White Balance Image Processor")
 
+I_EXPORT_COMPONENT(
+			SearchConstraints,
+			"Search constraints component, which provides constraints from Base object and possibility to configurate the shrink of corresponding ranges",
+			"Search Constraints Provider" IM_CATEGORY(I_DATA_PROCESSING));
 
 } // namespace IprPck
 
