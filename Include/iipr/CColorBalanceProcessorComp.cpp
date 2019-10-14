@@ -106,8 +106,6 @@ bool CColorBalanceProcessorComp::ProcessImage(
 void CColorBalanceProcessorComp::AssignWeights(imath::CVarVector& params, int& red, int& green, int& blue) const
 {
 	if (params.GetElementsCount() > 0){
-		double weightSum = params[0];
-
 		red = params[0] * 255;
 
 		if (params.GetElementsCount() > 1){
@@ -121,7 +119,7 @@ void CColorBalanceProcessorComp::AssignWeights(imath::CVarVector& params, int& r
 }
 
 
-} // namespace qcam
+} // namespace icam
 
 
  

@@ -89,6 +89,12 @@ I_EXPORT_COMPONENT(
 			"Camera mutiplexer",
 			"Camera Acquisition Multiplexer");
 
+I_EXPORT_COMPONENT(
+			MultiCameraJoiner,
+			"Performs snap from the slave cameras and joins the images together",
+			"Multi Join Camera" IM_TAG("Camera Image"));
+
+
 } // namespace CameraPck
 
 

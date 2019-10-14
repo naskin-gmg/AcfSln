@@ -146,7 +146,7 @@ const QByteArray& CHeartbeatAnswer::GetLoggedIp() const
 }
 
 
-// reimplemented (qstd::INamedObject)
+// reimplemented (iprm:INameParam)
 
 const QString& CHeartbeatAnswer::GetName() const
 {
