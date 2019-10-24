@@ -94,6 +94,11 @@ I_EXPORT_COMPONENT(
 			"Performs snap from the slave cameras and joins the images together",
 			"Multi Join Camera" IM_TAG("Camera Image"));
 
+I_EXPORT_COMPONENT(
+			ProcessedCamera,
+			"Performs pre- and post-processing for the snapped image",
+			"Processor" IM_TAG("Camera Image"));
+
 
 } // namespace CameraPck
 

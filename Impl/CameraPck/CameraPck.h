@@ -24,6 +24,7 @@
 #include <icam/CBitmapSupplierMultiplexerComp.h>
 #include <icam/CCameraMultiplexerComp.h>
 #include <icam/CMultiCameraJoinerComp.h>
+#include <icam/CProcessedCameraComp.h>
 
 
 /**
@@ -51,6 +52,7 @@ typedef icomp::TModelCompWrap<icam::CMultiSourceSnapBitmapSupplierComp> MultiSou
 typedef icomp::TModelCompWrap<icam::CBitmapSupplierMultiplexerComp> BitmapSupplierMultiplexer;
 typedef icam::CCameraMultiplexerComp CameraMultiplexer;
 typedef icam::CMultiCameraJoinerComp MultiCameraJoiner;
+typedef icam::CProcessedCameraComp ProcessedCamera;
 
 
 } // namespace CameraPck
