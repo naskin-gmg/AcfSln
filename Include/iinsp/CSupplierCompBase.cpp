@@ -266,7 +266,7 @@ void CSupplierCompBase::OnComponentDestroyed()
 CSupplierCompBase::Timer::Timer(const CSupplierCompBase* parentPtr, const QString& measuredFeatureName)
 :	m_parentPtr(parentPtr), m_measuredFeatureName(measuredFeatureName)
 {
-    m_timer.Start();
+	m_timer.Start();
 }
 
 
