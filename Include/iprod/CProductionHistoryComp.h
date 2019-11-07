@@ -2,15 +2,16 @@
 #define iprod_CProductionHistoryComp_included
 
 
+// Qt includes
+#include <QtCore/QReadWriteLock>
+#include <QtCore/QMutex>
+#include <QtCore/QQueue>
+#include <QtCore/QThread>
+
 // ACF includes
 #include <ilog/TLoggerCompWrap.h>
 #include <ifile/IFileNameParam.h>
 #include <iprod/IProductionHistoryController.h>
-
-// Qt includes
-#include <QtCore/QReadWriteLock>
-#include <QtCore/QQueue>
-#include <QtCore/QThread>
 
 
 namespace iprod

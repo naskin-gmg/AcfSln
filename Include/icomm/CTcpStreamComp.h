@@ -5,6 +5,7 @@
 #include <QtNetwork/QTcpSocket>
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
+#include <QtCore/QMutex>
 
 // ACF includes
 #include <iprm/IParamsSet.h>
