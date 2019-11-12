@@ -24,7 +24,7 @@ class CHistoryReader: public QThread
 
 public:
 	typedef QQueue<iprod::IProductionHistory::PartInfo> History;
-	typedef QVector<iprod::IProductionHistory::PartInfo> HistoryChunk;
+	typedef std::vector<iprod::IProductionHistory::PartInfo> HistoryChunk;
 
 	CHistoryReader();
 	void SetHistoryPath(const QString& historyPath);

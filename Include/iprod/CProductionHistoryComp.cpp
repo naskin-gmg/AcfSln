@@ -537,16 +537,18 @@ QByteArray CProductionHistoryComp::InsertResultObject(
 
 void CProductionHistoryComp::OnHistoryChunkReady(bool lastChunk)
 {
-	istd::CChangeNotifier changeNotifier(this);
-
 	const CHistoryReader::HistoryChunk& historyChunk = m_historyReaderPtr->GetHistoryChunk();
 
-	for (int i = 0; i < historyChunk.size(); ++i){
-		const PartInfo& partInfo = historyChunk[i];
+	if (!historyChunk.empty()) {
+		istd::CChangeNotifier changeNotifier(this);
 
-		QWriteLocker locker(&m_historyItemsLock);
+		for (int i = 0; i < historyChunk.size(); ++i) {
+			const PartInfo& partInfo = historyChunk[i];
 
-		m_historyItems.insert(partInfo.uuid, partInfo);
+			QWriteLocker locker(&m_historyItemsLock);
+
+			m_historyItems.insert(partInfo.uuid, partInfo);
+		}
 	}
 
 	if (lastChunk){
