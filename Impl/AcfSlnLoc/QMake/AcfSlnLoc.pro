@@ -15,3 +15,4 @@ ARXC_FILES += $$PWD/../*.acc
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
 include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
+

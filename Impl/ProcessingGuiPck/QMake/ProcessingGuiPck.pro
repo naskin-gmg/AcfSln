@@ -1,7 +1,7 @@
+TARGET = ProcessingGuiPck
+
 include($(ACFCONFIGDIR)/QMake/ComponentConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
-
-TARGET = ProcessingGuiPck
 
 QT += xml
 

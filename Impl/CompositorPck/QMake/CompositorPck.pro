@@ -10,3 +10,4 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
 include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+

@@ -7,3 +7,4 @@ LIBS += -L../../../Lib/$$COMPILER_DIR -liqtinsp
 
 include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
 include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+

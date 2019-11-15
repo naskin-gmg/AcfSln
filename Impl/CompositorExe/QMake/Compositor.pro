@@ -73,4 +73,3 @@ macx-ios*{
 	PRE_TARGETDEPS += GenerateCompositorCpp
 }
 
-

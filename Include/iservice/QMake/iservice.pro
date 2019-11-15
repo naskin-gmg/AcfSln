@@ -16,4 +16,3 @@ win32*{
 	SOURCES += $$_PRO_FILE_PWD_/../qtservicestarter.cpp
 }
 
-

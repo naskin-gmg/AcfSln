@@ -69,4 +69,3 @@ macx-ios*{
 	PRE_TARGETDEPS += GenerateXpcEditorCpp
 }
 
-
