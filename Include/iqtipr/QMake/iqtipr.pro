@@ -3,6 +3,5 @@ TARGET = iqtipr
 include($(ACFCONFIGDIR)/QMake/StaticConfig.pri)
 include($(ACFCONFIGDIR)/QMake/QtGuiBaseConfig.pri)
 
-FORMS += $$_PRO_FILE_PWD_/../*.u
+FORMS += $$_PRO_FILE_PWD_/../*.ui
 
-i
