@@ -1,7 +1,6 @@
 #include <iipr/CProcessedAcquisitionComp.h>
-
+#include <istd/TDelPtr.h>
 #include <istd/CChangeNotifier.h>
-
 #include <iimg/CGeneralBitmap.h>
 
 
@@ -29,6 +28,12 @@ int CProcessedAcquisitionComp::DoProcessing(
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
+	if (!m_bitmapFactCompPtr.IsValid()) {
+		SendErrorMessage(0, "Bitmap factory was not set");
+
+		return TS_INVALID;
+	}
+
 	if (outputPtr == NULL){
 		return TS_OK;
 	}
@@ -43,10 +48,16 @@ int CProcessedAcquisitionComp::DoProcessing(
 	int retVal = m_slaveAcquisitionCompPtr->DoProcessing(paramsPtr, inputPtr, outputBitmapPtr);
 	if (retVal == TS_OK){
 		if (m_processorCompPtr.IsValid()){
-			iimg::CGeneralBitmap bufferBitmap;
-			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr, &bufferBitmap);
+			istd::TDelPtr<iimg::IBitmap> tempBitmapPtr(m_bitmapFactCompPtr.CreateInstance());
+			if (!tempBitmapPtr.IsValid()) {
+				SendErrorMessage(0, "Temporary bitmap could not be created");
+
+				return TS_INVALID;
+			}
+
+			retVal = m_processorCompPtr->DoProcessing(paramsPtr, outputBitmapPtr, tempBitmapPtr.GetPtr());
 			if (retVal == TS_OK){
-				if (!outputBitmapPtr->CopyFrom(bufferBitmap)){
+				if (!outputBitmapPtr->CopyFrom(*tempBitmapPtr)){
 					retVal = TS_INVALID;
 				}
 			}

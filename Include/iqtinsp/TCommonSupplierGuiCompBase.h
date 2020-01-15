@@ -289,7 +289,12 @@ template <class UI>
 void TCommonSupplierGuiCompBase<UI>::UpdateVisualStatus()
 {
 	QString statusText = "";
-	QIcon statusIcon = QIcon(":/Icons/StateUnknown");
+	static QIcon unknownIcon(":/Icons/StateUnknown");
+	static QIcon warningIcon(":/Icons/StateWarning");
+	static QIcon invalidIcon(":/Icons/StateInvalid");
+	static QIcon okIcon(":/Icons/StateOk");
+
+	QIcon statusIcon = unknownIcon;
 
 	QString description;
 
@@ -313,17 +318,17 @@ void TCommonSupplierGuiCompBase<UI>::UpdateVisualStatus()
 			switch (category){
 				case istd::IInformationProvider::IC_WARNING:
 					statusText = QObject::tr("Processing completed with warnings");
-					statusIcon = QIcon(":/Icons/StateWarning");
+					statusIcon = warningIcon;
 					break;
 
 				case istd::IInformationProvider::IC_ERROR:
 					statusText = QObject::tr("Processing completed with errors");
-					statusIcon = QIcon(":/Icons/StateInvalid");
+					statusIcon = invalidIcon;
 					break;
 
 				default:
 					statusText = QObject::tr("Processing completed without errors");
-					statusIcon = QIcon(":/Icons/StateOk");
+					statusIcon = okIcon;
 					break;
 				}
 			break;
@@ -334,7 +339,7 @@ void TCommonSupplierGuiCompBase<UI>::UpdateVisualStatus()
 
 		case iinsp::ISupplier::WS_FAILED:
 			statusText = QObject::tr("Processing not possible");
-			statusIcon = QIcon(":/Icons/StateCritical");
+			statusIcon = invalidIcon;
 			break;
 
 		default:

@@ -4,6 +4,7 @@
 
 // ACF includes
 #include <iproc/TSyncProcessorCompBase.h>
+#include <iimg/IBitmap.h>
 
 // ACF-Solutions includes
 #include <icam/IBitmapAcquisition.h>
@@ -21,6 +22,7 @@ public:
 	I_BEGIN_COMPONENT(CProcessedAcquisitionComp);
 		I_ASSIGN(m_slaveAcquisitionCompPtr, "SlaveCamera", "Camera for real image acquisition", true, "SlaveCamera");
 		I_ASSIGN(m_processorCompPtr, "ImageProcessor", "Image processor", false, "ImageProcessor");
+		I_ASSIGN(m_bitmapFactCompPtr, "BitmapFactory", "Factory used for creation of the temporary image", true, "BitmapFactory");
 	I_END_COMPONENT;
 
 	// reimplemented (icam::IBitmapAcquisition)
@@ -36,6 +38,7 @@ public:
 private:
 	I_REF(icam::IBitmapAcquisition, m_slaveAcquisitionCompPtr);
 	I_REF(iproc::IProcessor, m_processorCompPtr);
+	I_FACT(iimg::IBitmap, m_bitmapFactCompPtr);
 };
 
 
