@@ -115,7 +115,7 @@ void CRegistryPreviewComp::OnComponentCreated()
 
 	m_isRunning = false;
 
-	connect(	&m_process, 
+	connect(	&m_process,
 				SIGNAL(stateChanged(QProcess::ProcessState)), 
 				this, 
 				SLOT(OnStateChanged(QProcess::ProcessState)), 
