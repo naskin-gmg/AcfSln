@@ -67,7 +67,9 @@ CInspectionTaskGuiComp::CInspectionTaskGuiComp()
 
 	m_rootCommands.InsertChild(&m_commands);
 
-	connect(this, SIGNAL(DoAutoTest()), SLOT(OnAutoTest()), Qt::QueuedConnection);
+	m_autoTestTimer.setSingleShot(true);
+	m_autoTestTimer.setInterval(0);
+	connect(&m_autoTestTimer, SIGNAL(timeout()), this, SLOT(OnAutoTest()));
 }
 
 
@@ -136,15 +138,6 @@ bool CInspectionTaskGuiComp::OnModelAttached(imod::IModel* modelPtr, istd::IChan
 		if (generalParamsModelPtr != NULL){
 			generalParamsModelPtr->AttachObserver(m_generalParamsObserverCompPtr.GetPtr());
 		}
-	}
-
-
-	if (m_toolBoxPtr != NULL){
-		m_toolBoxPtr->setCurrentIndex(0);
-	}
-
-	if (m_tabWidgetPtr != NULL){
-		m_tabWidgetPtr->setCurrentIndex(0);
 	}
 
 	return true;
@@ -296,6 +289,13 @@ void CInspectionTaskGuiComp::UpdateVisualElements()
 			buttonPtr->setToolTip(toolTip);
 		}
 	}
+
+	if (m_disableAutoTestAttrPtr.IsValid()){
+		bool disable = m_disableAutoTestAttrPtr->GetValue();
+		m_continuousExecuteCommand.SetEnabled(!disable);
+		AutoTestButton->setEnabled(!disable);
+		AutoTestButton->setVisible(!disable);
+	}
 }
 
 
@@ -360,7 +360,7 @@ void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*cha
 	DoUpdateEditor(m_currentGuiIndex);
 
 	if (AutoTestButton->isChecked()){
-		emit DoAutoTest();
+		m_autoTestTimer.start();
 	}
 }
 
@@ -523,6 +523,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 	}
 
 	CreateMenu();
+	MenuButton->hide();
 
 	UpdateTaskMessages();
 
@@ -672,7 +673,7 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 		PreviewStack->setCurrentIndex(stackIndex);
 
 		if (AutoTestButton->isChecked()){
-			emit DoAutoTest();
+			m_autoTestTimer.start();
 		}
 	}
 }
@@ -681,6 +682,10 @@ void CInspectionTaskGuiComp::OnEditorChanged(int index)
 void CInspectionTaskGuiComp::OnAutoTest()
 {
 	if (!IsGuiCreated()){
+		return;
+	}
+
+	if (m_testStarted) {
 		return;
 	}
 
@@ -700,6 +705,10 @@ void CInspectionTaskGuiComp::OnAutoTest()
 	}
 
 	m_testStarted = false;
+
+	if (AutoTestButton->isChecked()) {
+		m_autoTestTimer.start();
+	}
 }
 
 
@@ -1110,6 +1119,7 @@ void CInspectionTaskGuiComp::ActivateTaskShapes(int taskIndex, const ShapeIndice
 
 void CInspectionTaskGuiComp::CreateMenu()
 {
+	/*
 	QMenu* actionsMenuPtr = new QMenu(MenuButton);
 	MenuButton->setMenu(actionsMenuPtr);
 
@@ -1126,11 +1136,13 @@ void CInspectionTaskGuiComp::CreateMenu()
 	}
 
 	UpdateMenu();
+	*/
 }
 
 
 void CInspectionTaskGuiComp::UpdateMenu()
 {
+	/*
 	Q_ASSERT(m_pasteCurrentTaskActionPtr != NULL);
 	Q_ASSERT(m_pasteAllActionPtr != NULL);
 
@@ -1144,6 +1156,7 @@ void CInspectionTaskGuiComp::UpdateMenu()
 		m_pasteCurrentTaskActionPtr->setEnabled(false);
 		m_pasteAllActionPtr->setEnabled(false);
 	}
+	*/
 }
 
 

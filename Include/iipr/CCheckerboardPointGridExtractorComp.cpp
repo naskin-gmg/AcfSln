@@ -134,7 +134,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	//clusterize lines per its angle
 	//make 1D metric space with angle
 	struct LineWithAngle {
-		LineWithAngle() : m_angle(0), m_lineRef(NULL) {}
+		LineWithAngle() :  m_lineRef(NULL),m_angle(0) {}
 		LineWithAngle(const i2d::CLine2d & line) :
 			m_lineRef(&line)
 		{

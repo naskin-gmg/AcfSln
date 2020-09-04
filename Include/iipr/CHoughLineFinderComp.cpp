@@ -1,3 +1,25 @@
+/********************************************************************************
+**
+**	Copyright (C) 2007-2017 Witold Gantzke & Kirill Lepskiy
+**
+**	This file is part of the ACF-Solutions Toolkit.
+**
+**	This file may be used under the terms of the GNU Lesser
+**	General Public License version 2.1 as published by the Free Software
+**	Foundation and appearing in the file LicenseLGPL.txt included in the
+**	packaging of this file.  Please review the following information to
+**	ensure the GNU Lesser General Public License version 2.1 requirements
+**	will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+**	If you are unsure which license is appropriate for your use, please
+**	contact us at info@imagingtools.de.
+**
+** 	See http://www.ilena.org or write info@imagingtools.de for further
+** 	information about the ACF.
+**
+********************************************************************************/
+
+
 #include <iipr/CHoughLineFinderComp.h>
 
 
@@ -22,7 +44,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 {
 	ibase::CSize size = image.GetImageSize();
 	if ((size.GetX() < 3) || (size.GetY() < 3)){
-		SendErrorMessage(0, "Image too small to calculate edges");
+		SendErrorMessage(0, QObject::tr("Image too small to calculate edges"));
 
 		return TS_INVALID;
 	}
@@ -58,7 +80,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 	int progressSessionIndex = -1;
 	if (progressManagerPtr != NULL){
-		progressSessionIndex = progressManagerPtr->BeginProgressSession("LineFinder", "Find lines with Hough", true);
+		progressSessionIndex = progressManagerPtr->BeginProgressSession("LineFinder", QObject::tr("Find lines with Hough"), true);
 	}
 
 	const quint8* prevLinePtr = (const quint8*)image.GetLinePtr(0);
@@ -142,7 +164,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 				ilog::CExtMessage* houghPosMessagePtr = new ilog::CExtMessage(
 							istd::IInformationProvider::IC_INFO,
 							FOUND_LINE,
-							QString("Hough Position (%1, %2) with weight %3").arg(houghPos.GetX()).arg(houghPos.GetY()).arg(weight),
+							QObject::tr("Hough Position (%1, %2) with weight %3").arg(houghPos.GetX()).arg(houghPos.GetY()).arg(weight),
 							"LineFinder");
 				i2d::CPosition2d* houghPosMessageObjectPtr = new imod::TModelWrap<i2d::CPosition2d>();
 				houghPosMessageObjectPtr->SetPosition(houghPos);
@@ -165,7 +187,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 				ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
 							istd::IInformationProvider::IC_INFO,
 							FOUND_LINE,
-							QString("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
+							QObject::tr("Line %1, angle %2").arg(lineIndex + 1).arg(direction.GetAngle() * 360 / I_2PI),
 							"LineFinder");
 				i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
 				pointMessageObjectPtr->SetPoint1(featurePtr->GetPoint1());
@@ -179,7 +201,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 				ilog::CExtMessage* pointMessagePtr = new ilog::CExtMessage(
 							istd::IInformationProvider::IC_INFO,
 							FOUND_LINE,
-							QString("Auxiliary line %1").arg(lineIndex + 1),
+							QObject::tr("Auxiliary line %1").arg(lineIndex + 1),
 							"LineFinder");
 				i2d::CLine2d* pointMessageObjectPtr = new imod::TModelWrap<i2d::CLine2d>();
 				pointMessageObjectPtr->SetPoint1(featurePtr->GetCenter());

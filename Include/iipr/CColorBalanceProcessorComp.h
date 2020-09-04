@@ -1,6 +1,5 @@
 #pragma once
 
-
 // ACF includes
 #include <imeas/INumericValue.h>
 
@@ -11,10 +10,10 @@
 namespace iipr
 {
 
-
 /**
 	Implementation of image processor applying color balancing coefficients to input color image
 */
+
 class CColorBalanceProcessorComp: public iipr::CImageProcessorCompBase
 {
 public:
@@ -25,6 +24,7 @@ public:
 		I_ASSIGN(m_defaultColorCoefsCompPtr, "DefaultColorCoefficients", "Default color coefficients", true, "DefaultColorCoefficients");
 	I_END_COMPONENT;
 
+
 protected:
 	// reimplemented (iipr::CImageProcessorCompBase)
 	virtual bool ProcessImage(
@@ -34,6 +34,8 @@ protected:
 
 private:
 	void AssignWeights(imath::CVarVector& params, int& red, int& green, int& blue) const;
+	double GetReductionFactor(double red, double green, double blue) const;
+	bool ValidateColorCoefficients(const imath::CVarVector& colorCoefficients) const;
 
 private:
 	I_ATTR(QByteArray, m_colorCoefficientsIdAttrPtr);
@@ -42,5 +44,4 @@ private:
 
 
 } // namespace iipr
-
 

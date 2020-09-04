@@ -86,15 +86,7 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 
 				iprm::TParamsPtr<i2d::ICalibration2d> calibrationPtr(GetModelParametersSet(), m_calibrationIdAttrPtr, m_defaultCalibrationCompPtr, false);
 				if (calibrationPtr.IsValid()){
-					i2d::CAffineTransformation2d transformation;
-					transformation.Reset(center, 0, scale);
-
-					if (calibrationPtr->GetTransformationFlags() & i2d::ICalibration2d::TF_AFFINE){
-						result.first.SetPtr(calibrationPtr->CreateCombinedCalibration(transformation));
-					}
-					else{
-						result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
-					}
+					result.first.SetCastedOrRemove(calibrationPtr->CloneMe());
 				}
 				else{
 					if (scale != i2d::CVector2d(1, 1)){
@@ -102,6 +94,9 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 						affineCalibrationPtr->Reset(center, 0, scale);
 
 						result.first.SetPtr(affineCalibrationPtr);
+					}
+					else if (result.second->GetCalibration()) {
+						result.first.SetCastedOrRemove(result.second->GetCalibration()->CloneMe());
 					}
 					else{
 						result.first.Reset();

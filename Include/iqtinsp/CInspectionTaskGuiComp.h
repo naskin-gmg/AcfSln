@@ -7,6 +7,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QSet>
 #include<QtCore/QtGlobal>
+#include<QtCore/QTimer>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QToolBox>
 #include <QtWidgets/QTabWidget>
@@ -55,6 +56,7 @@ public:
 		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 1 - tool box\n* 2 - tab", true, 1);
 		I_ASSIGN(m_useVerticalSpacerAttrPtr, "UseVerticalSpacer", "Insert vertical spacer to shrunk the space at the bottom", true, true);
 		I_ASSIGN(m_showControlPanelAttrPtr, "ShowControlPanel", "If enabled, the control button panel is shown", true, true);
+		I_ASSIGN(m_disableAutoTestAttrPtr, "DisableAutoTest", "Disable auto (continuous) test button on ui", true, false);
 	I_END_COMPONENT;
 
 protected:
@@ -65,6 +67,7 @@ protected:
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 	I_ATTR(int, m_inspectionTaskIndexAttrPtr);
 	I_ATTR(bool, m_showControlPanelAttrPtr);
+	I_ATTR(bool, m_disableAutoTestAttrPtr);
 };
 
 
@@ -160,9 +163,6 @@ protected Q_SLOTS:
 	void on_MessageList_itemSelectionChanged();
 	void on_MessageList_itemDoubleClicked(QTreeWidgetItem* item, int column);
 
-Q_SIGNALS:
-	void DoAutoTest();
-
 private:
 	typedef QSet<int> ShapeIndices;
 
@@ -237,6 +237,8 @@ private:
 
 	iqtgui::CHierarchicalCommand m_executeTaskCommand;
 	iqtgui::CHierarchicalCommand m_continuousExecuteCommand;
+
+	QTimer m_autoTestTimer;
 };
 
 

@@ -89,6 +89,7 @@ bool CImageHistogramProcessorComp::CalculateHistogram(
 			break;
 
 		case iimg::IBitmap::PF_RGB:
+		case iimg::IBitmap::PF_RGB24:
 			usedColorComponents = 3;
 			channelNames << QCoreApplication::tr("Red") << QCoreApplication::tr("Green") << QCoreApplication::tr("Blue");
 			break;

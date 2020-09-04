@@ -23,7 +23,7 @@ public:
 	{
 	public:
 		Rgba()
-		: m_b(0), m_g(0), m_r(0), m_a(255)
+		: m_r(0), m_g(0), m_b(0), m_a(255)
 		{
 		}
 
@@ -32,9 +32,9 @@ public:
 		{
 		}
 
-		quint8 m_b;
-		quint8 m_g;
 		quint8 m_r;
+		quint8 m_g;
+		quint8 m_b;
 		quint8 m_a;
 	};
 
