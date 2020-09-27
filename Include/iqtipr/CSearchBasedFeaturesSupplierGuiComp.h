@@ -44,7 +44,6 @@ public:
 
 	I_BEGIN_COMPONENT(CSearchBasedFeaturesSupplierGuiComp);
 		I_ASSIGN(m_intermediateResultsGuiCompPtr, "IntermediateResultsGui", "GUI integrated into group 'Intermediate Results'", false, "IntermediateResultsGui");
-		I_ASSIGN(m_shapeFactoryCompPtr, "ShapeFactory", "Shape factory used for creation of the result shapes", false, "ShapeFactory");
 		I_ASSIGN(m_showResultShapesAttrPtr, "ShowResultShapes", "Show result shapes in the image as circles", true, true);
 	I_END_COMPONENT;
 
@@ -81,7 +80,6 @@ private:
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);
-	I_REF(iview::IShapeFactory, m_shapeFactoryCompPtr);
 	I_ATTR(bool, m_showResultShapesAttrPtr);
 
 	// result shapes

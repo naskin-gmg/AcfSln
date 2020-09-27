@@ -17,6 +17,7 @@ public:
 	typedef Base BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TResultShapeCreatorWrap);
+		I_ASSIGN(m_noneStatusSchemeCompPtr, "NoneStatusColorSchema", "Color schema used for shapes without any status", false, "NoneStatusColorSchema");
 		I_ASSIGN(m_okColorSchemeCompPtr, "OkColorSchema", "Color schema used for ok shapes", false, "OkColorSchema");
 		I_ASSIGN(m_warningColorSchemeCompPtr, "WarningColorSchema", "Color schema used for warning shapes", false, "WarningColorSchema");
 		I_ASSIGN(m_errorColorSchemeCompPtr, "ErrorColorSchema", "Color schema used for error shapes", false, "ErrorColorSchema");
@@ -31,6 +32,7 @@ public:
 				const istd::IInformationProvider* infoPtr,
 				bool connectToModel = true) const;
 private:
+	I_REF(iview::IColorSchema, m_noneStatusSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_okColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_warningColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_errorColorSchemeCompPtr);
@@ -74,9 +76,14 @@ iview::IShape* TResultShapeCreatorWrap<Base>::CreateResultShape(
 				break;
 
 			case istd::IInformationProvider::IC_INFO:
-			case istd::IInformationProvider::IC_NONE:
 				if ((userColorSchemaPtr == NULL) && m_okColorSchemeCompPtr.IsValid()){
 					shapePtr->SetUserColorSchema(m_okColorSchemeCompPtr.GetPtr());
+				}
+				break;
+
+			case istd::IInformationProvider::IC_NONE:
+				if ((userColorSchemaPtr == NULL) && m_noneStatusSchemeCompPtr.IsValid()){
+					shapePtr->SetUserColorSchema(m_noneStatusSchemeCompPtr.GetPtr());
 				}
 				break;
 
