@@ -196,6 +196,16 @@ void CBitmapSupplierGuiComp::OnGuiModelAttached()
 }
 
 
+void CBitmapSupplierGuiComp::OnGuiModelDetached()
+{
+	if (m_bitmapPtr.IsValid()){
+		m_bitmapPtr->ResetImage();
+	}
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
 void CBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	BaseClass::UpdateGui(changeSet);

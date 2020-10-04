@@ -364,6 +364,35 @@ void CInspectionTaskGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*cha
 	}
 }
 
+void CInspectionTaskGuiComp::OnGuiModelDetached()
+{
+	BaseClass::OnGuiModelDetached();
+
+	int extendersCount = m_editorViewExtendersCompPtr.GetCount();
+	int previewProvidersCount = m_previewSceneProvidersCompPtr.GetCount();
+
+	iview::IShapeView* viewPtr = NULL;
+
+	for (int i = 0; i < qMin(extendersCount, previewProvidersCount); ++i){
+		iqt2d::IViewExtender* extenderPtr = m_editorViewExtendersCompPtr[i];
+		iqt2d::IViewProvider* previewProviderPtr = m_previewSceneProvidersCompPtr[i];
+		if ((extenderPtr != NULL) && (previewProviderPtr != NULL)){
+			extenderPtr->RemoveItemsFromScene(previewProviderPtr);
+
+			viewPtr = previewProviderPtr->GetView();
+			if (viewPtr!= NULL){
+				viewPtr->Update();
+			}
+		}
+	}
+
+	MessageList->clear();
+	m_resultShapesMap.clear();
+	m_tempShapesMap.clear();
+	m_tempMessagesMap.clear();
+	m_resultMessagesMap.clear();
+}
+
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
