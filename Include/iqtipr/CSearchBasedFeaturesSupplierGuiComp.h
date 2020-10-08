@@ -60,6 +60,7 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
 	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (iqtgui::IGuiObject)
@@ -77,6 +78,7 @@ protected Q_SLOTS:
 private:
 	void ConnectShapes(iview::IShapeView& view);
 	void DisconnectShapes(iview::IShapeView& view);
+	void ClearResults();
 
 private:
 	I_REF(iqtgui::IGuiObject, m_intermediateResultsGuiCompPtr);

@@ -84,6 +84,14 @@ void CSearchBasedFeaturesSupplierGuiComp::OnGuiModelAttached()
 }
 
 
+void CSearchBasedFeaturesSupplierGuiComp::OnGuiModelDetached()
+{
+	ClearResults();
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
 void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& changeSet)
 {
 	BaseClass::UpdateGui(changeSet);
@@ -94,13 +102,7 @@ void CSearchBasedFeaturesSupplierGuiComp::UpdateGui(const istd::IChangeable::Cha
 		return;
 	}
 
-	ResultsList->clear();
-
-	if (m_lastViewPtr != NULL){
-		DisconnectShapes(*m_lastViewPtr);
-	}
-
-	m_visualPositions.Reset();
+	ClearResults();
 
 	const double maxScoreRadius = 50;
 
@@ -265,6 +267,18 @@ void CSearchBasedFeaturesSupplierGuiComp::DisconnectShapes(iview::IShapeView& vi
 
 		view.DisconnectShape(shapePtr);
 	}
+}
+
+
+void CSearchBasedFeaturesSupplierGuiComp::ClearResults()
+{
+	ResultsList->clear();
+
+	if (m_lastViewPtr != NULL){
+		DisconnectShapes(*m_lastViewPtr);
+	}
+
+	m_visualPositions.Reset();
 }
 
 
