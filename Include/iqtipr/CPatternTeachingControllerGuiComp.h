@@ -45,6 +45,7 @@ protected:
 	// reimplemented (iqt::CGuiObjectBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiRetranslate();
 
 private:
 	I_REF(iqtgui::IGuiObject, m_patternEditorCompPtr);
