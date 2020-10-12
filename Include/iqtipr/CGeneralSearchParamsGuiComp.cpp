@@ -74,6 +74,10 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 		const iipr::ISearchConstraints* constraintsPtr = objectPtr->GetSearchConstraints();
 		if (constraintsPtr != NULL){
+			const istd::CIntRange& modelCountRange = constraintsPtr->GetResultsCountConstraints();
+			ModelOccurenceSB->setRange(modelCountRange.GetMinValue(), modelCountRange.GetMaxValue());
+			ModelOccurenceSB->setSpecialValueText(modelCountRange.GetMinValue() < 0 ? tr("All") : "");
+
 			int supportedFlags = constraintsPtr->GetSearchSupportedFlags();
 			if ((supportedFlags & iipr::ISearchConstraints::SSF_ROTATION) != 0){
 				const istd::CRange& range = constraintsPtr->GetRotationRangeConstraints();
