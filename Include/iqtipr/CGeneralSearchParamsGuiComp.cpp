@@ -109,6 +109,20 @@ void CGeneralSearchParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 }
 
 
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CGeneralSearchParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blockUpdate(this);
+
+		UpdateGui(istd::IChangeable::GetAnyChange());
+	}
+}
+
+
 // protected slots
 
 void CGeneralSearchParamsGuiComp::OnParamsChanged()
