@@ -29,7 +29,7 @@ public:
 	CHistoryReader();
 	void SetHistoryPath(const QString& historyPath);
 	const HistoryChunk& GetHistoryChunk();
-	const QStringList& GetErrors() const;
+	QStringList GetErrors() const;
 
 signals:
 	void HistoryChunkReady(bool lastChunk);
