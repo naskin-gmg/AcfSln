@@ -1,0 +1,1 @@
+%QTDIR%\bin\lupdate.exe ..\..\..\ -target-language jp_JP -ts AcfSln_jp_JP.ts -recursive -noobsolete -locations relative

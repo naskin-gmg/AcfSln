@@ -1,0 +1,1 @@
+%QTDIR%\bin\lupdate.exe ..\..\..\ -target-language it_IT -ts AcfSln_it_IT.ts -recursive -noobsolete -locations relative
