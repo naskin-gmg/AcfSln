@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4054" Description="ACF"/>
-            <Version Id="1" Number="1505" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328706" Description="Qt Framework"/>
+            <Version Id="0" Number="4929" Description="ACF"/>
+            <Version Id="1" Number="2139" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331010" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description></Description>
@@ -48,6 +48,8 @@
                                 <Value>*.pro</Value>
                                 <Value>*.pri</Value>
                                 <Value>*.qbs</Value>
+                                <Value>*.cmake</Value>
+                                <Value>*.txt</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
