@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4321" Description="ACF"/>
-            <Version Id="1" Number="1668" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4929" Description="ACF"/>
+            <Version Id="1" Number="2139" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331010" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy common files for each distributions</Description>
@@ -65,6 +65,8 @@
                                 <Value>*.js</Value>
                                 <Value>empty</Value>
                                 <Value>config.txt</Value>
+                                <Value>*.cmake</Value>
+                                <Value>CMakeLists.txt</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
