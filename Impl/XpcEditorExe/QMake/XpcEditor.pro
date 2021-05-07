@@ -6,7 +6,7 @@ include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 INCLUDEPATH += ../../../Include
 INCLUDEPATH += ../../../Impl
 
-RESOURCES += $$_PRO_FILE_PWD_/../*.qrc
+RESOURCES += $$files($$_PRO_FILE_PWD_/../*.qrc, true)
 
 LIBS += -L../../../Lib/$$COMPILER_DIR -licmpstr -lAcfSlnLoc
 LIBS += -lAcfLoc
@@ -29,12 +29,12 @@ mac{
 
 # ARX compiler
 ARXC_CONFIG = $$PWD/../../../Config/AcfSlnConfig.awc
-ARXC_FILES += $$PWD/../*.acc
+ARXC_FILES += $$files($$_PRO_FILE_PWD_/../*.acc, true)
 ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 
 win*{
 	# File transformation
-	ACF_CONVERT_FILES = $$PWD/../VC/*.rc.xtracf
+	ACF_CONVERT_FILES = $$files($$PWD/../VC/*.rc.xtracf, true)
 	ACF_CONVERT_OUTDIR = $$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
 	ACF_CONVERT_REGISTRY = $$PWD/../../../Partitura/AcfInfoCopyApp.acc
 	ACF_CONVERT_CONFIG = $$PWD/../../../Config/BaseOnly.awc
