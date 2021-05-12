@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4929" Description="ACF"/>
-            <Version Id="1" Number="2139" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="331010" Description="Qt Framework"/>
+            <Version Id="0" Number="4931" Description="ACF"/>
+            <Version Id="1" Number="2142" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331009" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy all source files (without compiled binaries) for installation during component instantiation</Description>
@@ -317,6 +317,10 @@
                                 <Value>*.alx</Value>
                                 <Value>*.xtracf</Value>
                                 <Value>*.copy</Value>
+                                <Value>*.js</Value>
+                                <Value>*.map</Value>
+                                <Value>*.html</Value>
+                                <Value>*.qml</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
