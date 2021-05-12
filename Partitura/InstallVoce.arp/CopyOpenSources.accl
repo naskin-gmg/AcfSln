@@ -8,6 +8,7 @@
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
+        <Element ComponentName="Copy3rdParty" X="350" Y="250" Note=""/>
         <Element ComponentName="CopyAllFiles" X="150" Y="350" Note=""/>
         <Element ComponentName="CopyBuildProjects" X="975" Y="600" Note=""/>
         <Element ComponentName="CopyCommon" X="150" Y="175" Note=""/>

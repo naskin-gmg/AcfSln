@@ -10,6 +10,40 @@
     <Description>Copy all source files (without compiled binaries) for installation during component instantiation</Description>
     <Keywords>Copy Sources Install</Keywords>
     <ElementsList>
+        <Element Id="Copy3rdParty" PackageId="InstallVoce" ComponentId="CopyInfoProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>*.*</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="3rdParty"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="3rdParty"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="6"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="CopyAllFiles" PackageId="FileProcessingPck" ComponentId="ComposedCopyFiles">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -29,6 +63,7 @@
                                 <Value>CopyImplResources</Value>
                                 <Value>CopyImplOther</Value>
                                 <Value>CopyBuildProjects</Value>
+                                <Value>Copy3rdParty</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -406,6 +441,10 @@
                                 <Value>*.css</Value>
                                 <Value>*.glsl</Value>
                                 <Value>*.qml</Value>
+                                <Value>*.js</Value>
+                                <Value>*.html</Value>
+                                <Value>*.map</Value>
+                                <Value>*.dom</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -440,6 +479,7 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.cpp</Value>
+                                <Value>*.c</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
