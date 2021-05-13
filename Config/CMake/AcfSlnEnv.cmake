@@ -20,3 +20,5 @@ include_directories("${ACFSLNDIR}/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TAR
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${ACFSLNDIR}/Impl")
 
+link_directories(${ACFSLNDIR}/Lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
+
