@@ -73,10 +73,8 @@ public:
 	/**
 		Connect handler for receive event.
 		\param	handlerPtr	Pointer to user events handler.
-		\param	allowOtherThread	if true, it allows calls of handler in other than current caller thread.
-		\note If \c allowOtherThread == false then only when first CommandsBlockSize bytes are changed this event handler will be called. This is an optimization to avoid cross threading calls for each robot position.
 	*/
-	virtual bool RegisterEventHandler(Handler* handlerPtr, bool allowOtherThread = false) = 0;
+	virtual bool RegisterEventHandler(Handler* handlerPtr) = 0;
 
 	/**
 		Disconnect handler connected with \c RegisterEventHandler.
