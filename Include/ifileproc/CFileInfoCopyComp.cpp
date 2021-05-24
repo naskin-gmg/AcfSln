@@ -178,6 +178,9 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 					}
 				}
 			}
+			else{
+				SendWarningMessage(0, "Application information component was not registered. Version information cannot be applied", "File Transformation");
+			}
 		}
 	}
 	else{
