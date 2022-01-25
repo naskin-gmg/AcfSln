@@ -23,8 +23,8 @@ include(${ACFDIR}/Config/CMake/WindeployQt.cmake)
 
 target_link_libraries(${PROJECT_NAME} AcfLoc icmpstr icomp AcfSlnLoc)
 
-find_package("Qt${QT_DEFAULT_MAJOR_VERSION}" COMPONENTS PrintSupport REQUIRED)
-target_link_libraries(${PROJECT_NAME} Qt${QT_DEFAULT_MAJOR_VERSION}::PrintSupport)
+find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS PrintSupport REQUIRED)
+target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::PrintSupport)
 
 if(WIN32)
 	set(listFiles \"${AUX_INCLUDE_DIR}/../../../Bin/${CMAKE_BUILD_TYPE}${TARGETNAME}\")

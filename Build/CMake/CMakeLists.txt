@@ -3,9 +3,6 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(AcfSln)
 
-set(QT_DEFAULT_MAJOR_VERSION 5)
-
-
 if(NOT DEFINED ACFDIR)
 	message("NOT ACFDIR " "${ACFDIR}")
 	if(DEFINED ENV{ACFDIR})
@@ -19,7 +16,7 @@ set(ACFSLNDIR "${CMAKE_CURRENT_LIST_DIR}/../../../AcfSln")
 
 message("ACFDIR " "${ACFDIR}")
 
-include(${ACFDIR}/Config/CMake/Macro.cmake)
+include(${ACFDIR}/Config/CMake/ProjectRoot.cmake)
 
 get_target_name(TARGETNAME)
 
@@ -30,17 +27,17 @@ set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
 #set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
-set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}/GeneratedFiles")
-#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}/GeneratedFiles")
+set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
+#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
 
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 
 #include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
 #include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
 
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
+#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
 
