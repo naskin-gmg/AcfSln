@@ -16,7 +16,7 @@ if(NOT DEFINED CONFIGSLN_DIR)
 endif()
 
 
-include_directories("${ACFSLNDIR}/AuxInclude/Qt${QT_DEFAULT_MAJOR_VERSION}_${TARGETNAME}")
+include_directories("${ACFSLNDIR}/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${ACFSLNDIR}/Impl")
 

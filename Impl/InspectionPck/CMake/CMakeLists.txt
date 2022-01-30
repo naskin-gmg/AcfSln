@@ -1,4 +1,4 @@
-project(IncpetionPck LANGUAGES CXX)
+project(InspectionPck LANGUAGES CXX)
 
 include(${ACFDIR}/Config/CMake/ComponentConfig.cmake)
 include(${ACFDIR}/Config/CMake/AcfQt.cmake)

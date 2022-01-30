@@ -26,18 +26,10 @@ include_directories("${ACFDIR}/Impl")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
-#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
 set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
-#set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
 
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
-
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
-
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
-#include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
 
@@ -87,7 +79,7 @@ add_subdirectory("${INCLUDE_DIR}/iservice/CMake" "${AUX_INCLUDE_DIR}/iservice")
 
 
 # Impl
-
+if (NOT ANDROID)
 add_subdirectory("${IMPL_DIR}/AcfSlnLoc/CMake" "${AUX_INCLUDE_DIR}/AcfSlnLoc")
 add_subdirectory("${IMPL_DIR}/AuthorizationPck/CMake" "${AUX_INCLUDE_DIR}/AuthorizationPck")
 add_subdirectory("${IMPL_DIR}/BlobPck/CMake" "${AUX_INCLUDE_DIR}/BlobPck")
@@ -122,4 +114,8 @@ add_subdirectory("${IMPL_DIR}/DocumentProcessingPck/CMake" "${AUX_INCLUDE_DIR}/D
 add_subdirectory("${IMPL_DIR}/ProductionPck/CMake" "${AUX_INCLUDE_DIR}/ProductionPck")
 
 add_subdirectory("${IMPL_DIR}/XpcEditorExe/CMake" "${AUX_INCLUDE_DIR}/XpcEditor")
+add_dependencies(XpcEditor FileProcessingPck)
 add_subdirectory("${IMPL_DIR}/CompositorExe/CMake" "${AUX_INCLUDE_DIR}/Compositor")
+add_dependencies(Compositor FileProcessingPck)
+
+endif()
