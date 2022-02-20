@@ -4,22 +4,22 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/AcfSlnLoc/CAcfSlnLoc.cpp" line="+33"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/AcfSlnLoc/CAcfSlnLoc.cpp" line="+29"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+38"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+48"/>
         <source>Monitoring Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>&lt;Enter the path of the directory&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Snap</source>
         <translation type="unfinished"></translation>
@@ -46,16 +46,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+14"/>
         <location line="+6"/>
-        <location line="+8"/>
+        <location line="+10"/>
+        <location line="+6"/>
+        <location line="+12"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
         <location line="+10"/>
         <location line="+6"/>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
-        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+14"/>
         <location line="+6"/>
         <location line="+12"/>
         <source>Geometry</source>
@@ -63,43 +63,43 @@
     </message>
     <message>
         <location line="-26"/>
-        <location line="+20"/>
-        <location line="+8"/>
+        <location line="+16"/>
+        <location line="+12"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-26"/>
         <location line="+16"/>
         <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-26"/>
-        <location line="+16"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-30"/>
+        <location line="+20"/>
         <location line="+12"/>
         <source>Edge Detection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-26"/>
-        <location line="+14"/>
+        <location line="+10"/>
         <location line="+6"/>
-        <location line="+8"/>
-        <location line="+70"/>
+        <location line="+12"/>
+        <location line="+66"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-26"/>
         <location line="+10"/>
         <location line="+6"/>
         <location line="+12"/>
         <location line="+66"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-26"/>
-        <location line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-30"/>
+        <location line="+14"/>
         <location line="+6"/>
         <location line="+12"/>
-        <location line="+68"/>
+        <location line="+66"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-94"/>
-        <location line="+98"/>
+        <location line="-102"/>
+        <location line="+106"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-102"/>
         <location line="+106"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-104"/>
-        <location line="+106"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-94"/>
+        <location line="+98"/>
         <source>Circle finder compressed parameters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <location line="+10"/>
-        <location line="+8"/>
+        <location line="+12"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
         <location line="+12"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+10"/>
@@ -128,7 +128,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-10"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-10"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-10"/>
         <source>Annulus</source>
@@ -142,16 +142,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+10"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+14"/>
         <source>Image Binarization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>Threshold</source>
         <translation type="unfinished"></translation>
     </message>
@@ -162,23 +162,23 @@
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <location line="+8"/>
         <location line="+20"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
-        <location line="+4"/>
-        <location line="+22"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+12"/>
+        <location line="+20"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-28"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-22"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-14"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-28"/>
         <source>Grayscale Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
@@ -197,15 +197,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Morphological Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2"/>
-        <location line="+4"/>
+        <location line="+2"/>
+        <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
@@ -237,7 +237,7 @@
     <message>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>Hue</source>
         <translation type="unfinished"></translation>
     </message>
@@ -258,7 +258,7 @@
     <message>
         <location line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Region</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,37 +284,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>GrayImage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>SmoothedImage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>EdgeReductor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>EdgeExtractor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+8"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+8"/>
         <source>Preprocessing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -342,21 +342,21 @@
     <message>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>Length of filter, use smaller values for better accuracy and bigger values to suppress the noise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>Selected component</source>
         <translation type="unfinished"></translation>
     </message>
@@ -375,9 +375,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>� 2015 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
@@ -386,23 +386,23 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-8"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>About Compositor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>Compositor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-136"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-8"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-144"/>
         <location line="+140"/>
         <source>ACF</source>
         <translation type="unfinished"></translation>
@@ -410,50 +410,50 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-142"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-134"/>
         <location line="+140"/>
         <source>ImagingTools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+8"/>
-        <source>List of document windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
-        <source>Windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
-        <source>&amp;Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <source>List of document windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <source>Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>Config %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+8"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+14"/>
         <source>MAC executable file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>Windows executable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,9 +472,9 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+12"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location line="+12"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+10"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-18"/>
         <source>Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -514,30 +514,30 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-24"/>
+        <location line="-16"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+12"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-16"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+14"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>Remember open documents on exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+18"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+22"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>ACF Registry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -550,93 +550,93 @@ See &apos;License.txt&apos; for license information</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+8"/>
         <source>Component Topology</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>Shows component topology of the currently opened registry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>Show Registry Overview...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location line="-4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>&amp;Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+8"/>
         <source>ACF component configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>ACF Component Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
         <source>ACF Registry File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-2"/>
         <source>ACF Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+4"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+6"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+6"/>
         <source>ACF Workspace Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-4"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
+        <location line="-2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
         <source>Old ACF Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="-2"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="+2"/>
+        <location line="+4"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/Compositor/CCompositor.cpp" line="+2"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-4"/>
         <source>ACF Configuration File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-204"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/XpcEditor/CXpcEditor.cpp" line="-198"/>
         <source>ACF Package Configuration Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-6"/>
         <source>About XPC Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="+4"/>
         <source>� 2013 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
@@ -1684,8 +1684,8 @@ See &apos;License.txt&apos; for license information</source>
 <context>
     <name>CGeneralSupplierGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtinsp/CGeneralSupplierGuiComp.ui" line="+28"/>
-        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+200"/>
+        <location filename="../../../Include/iqtinsp/CGeneralSupplierGuiComp.ui" line="+37"/>
+        <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+209"/>
         <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1702,7 +1702,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+48"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Load...</source>
         <translation type="unfinished"></translation>
@@ -1714,7 +1714,7 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+22"/>
         <location filename="../../../AuxInclude/Qt5_VC15_64/GeneratedFiles/iqtinsp/ui_CGeneralSupplierGuiComp.h" line="+1"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
@@ -3170,12 +3170,32 @@ Now you can start the service from the Service Manager.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="+238"/>
+        <location filename="../../../Include/iinsp/CInspectionTaskComp.cpp" line="+91"/>
+        <source>Couldn&apos;t save / load the number of subtasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Actual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source> / expected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source> subtasks&apos; number mismatch. Trying to restore first %1 tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+159"/>
         <source>Processing took %1 ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+90"/>
         <source>Inspection task</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3230,7 +3250,7 @@ Now you can start the service from the Service Manager.</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../Include/iipr/CRgbToGrayProcessorComp.cpp" line="+55"/>
+        <location filename="../../../Include/iipr/CRgbToGrayProcessorComp.cpp" line="+73"/>
         <source>Image format must be RGB(A)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3300,8 +3320,8 @@ Now you can start the service from the Service Manager.</source>
     </message>
     <message>
         <location filename="../../../Include/iedgegui/CEdgeLinesSupplierEditorComp.cpp" line="+163"/>
-        <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+92"/>
-        <location line="+43"/>
+        <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+104"/>
+        <location line="+55"/>
         <location filename="../../../Include/iqtcam/CSnapImageGuiComp.cpp" line="+252"/>
         <location line="+15"/>
         <location line="+13"/>
@@ -3331,7 +3351,7 @@ Now you can start the service from the Service Manager.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-43"/>
+        <location line="-55"/>
         <location filename="../../../Include/iqtcam/CSnapImageGuiComp.cpp" line="-25"/>
         <location filename="../../../Include/iqtcam/CSnapImageParamsEditorComp.cpp" line="-29"/>
         <source>Cannot save image</source>
@@ -3936,7 +3956,7 @@ Now you can start the service from the Service Manager.</source>
         <location filename="../../../Include/iipr/CMultiPointPosCorrSupplierComp.cpp" line="+98"/>
         <location filename="../../../Include/iipr/CPositionFromImageSupplierComp.cpp" line="+94"/>
         <location filename="../../../Include/iipr/CProcessedBitmapSupplierComp.cpp" line="+108"/>
-        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="+228"/>
+        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="+363"/>
         <source>No input image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4172,7 +4192,7 @@ Now you can start the service from the Service Manager.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="-64"/>
+        <location filename="../../../Include/iipr/CSearchBasedFeaturesSupplierComp.cpp" line="-199"/>
         <location line="+11"/>
         <location line="+10"/>
         <source>No search model(s) found)</source>
@@ -4195,13 +4215,12 @@ Now you can start the service from the Service Manager.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+75"/>
-        <location line="+85"/>
+        <location line="+27"/>
         <source>Search not successfull</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+37"/>
         <source>Some not allowed model(s) found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5464,7 +5483,7 @@ Use other password.</source>
 <context>
     <name>iqtcam::CBitmapSupplierGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+163"/>
+        <location filename="../../../Include/iqtcam/CBitmapSupplierGuiComp.cpp" line="+175"/>
         <source>(%1 x %2, %3 %4)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5540,7 +5559,7 @@ Use other password.</source>
 <context>
     <name>iqtcam::CExposureParamsGuiComp</name>
     <message>
-        <location filename="../../../Include/iqtcam/CExposureParamsGuiComp.cpp" line="+157"/>
+        <location filename="../../../Include/iqtcam/CExposureParamsGuiComp.cpp" line="+128"/>
         <source>Shutter time range [%1, %2]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5716,7 +5735,7 @@ Use other password.</source>
 <context>
     <name>iqtmeas::CNumericValueWidget</name>
     <message>
-        <location filename="../../../Include/iqtmeas/CNumericValueWidget.cpp" line="+139"/>
+        <location filename="../../../Include/iqtmeas/CNumericValueWidget.cpp" line="+130"/>
         <source>Range: %1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
