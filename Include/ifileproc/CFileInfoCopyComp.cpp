@@ -170,7 +170,19 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(
 							return true;
 						}
 						else if (paramTag == acfRcVersionTag){
-							result.replace(".", ", ");
+							QStringList acfRcVersionParts = result.split(".");
+
+							for (QString& acfRcVersionPart: acfRcVersionParts){
+								for(int charIndex = 0; charIndex < acfRcVersionPart.length(); ++ charIndex){
+									if(!acfRcVersionPart[charIndex].isDigit()){
+										acfRcVersionPart.resize(charIndex);
+
+										break;
+									}
+								}
+							}
+							acfRcVersionParts.removeAll("");
+							result = acfRcVersionParts.join(", ");
 							result.replace("'", "");
 
 							return true;
