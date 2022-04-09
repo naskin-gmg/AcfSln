@@ -14,11 +14,16 @@ namespace ihotf
 
 // public methods
 
+#if QT_VERSION >= 0x060000
 CFileSystemChangeStorage::CFileSystemChangeStorage()
-	:m_mutex()
 {
 }
-
+#else
+CFileSystemChangeStorage::CFileSystemChangeStorage()
+	:m_mutex(QMutex::Recursive)
+{
+}
+#endif
 
 // reimplemented (ihotf::IFileSystemChangeStorage)
 

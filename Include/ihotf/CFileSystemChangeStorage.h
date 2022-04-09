@@ -49,7 +49,11 @@ private:
 	typedef QList<FileItem> FileItems;
 	FileItems m_storageItems;
 
+#if QT_VERSION >= 0x060000
 	mutable QRecursiveMutex m_mutex;
+#else
+	mutable QMutex m_mutex;
+#endif
 };
 
 
