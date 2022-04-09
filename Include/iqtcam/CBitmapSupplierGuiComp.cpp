@@ -269,7 +269,14 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 
 		const ShapesMap& shapesMap = GetShapesMap();
 		QList<iqt2d::IViewProvider*> keys = shapesMap.keys();
+
+#if QT_VERSION >= 0x600000
 		QSet<iqt2d::IViewProvider*> views(keys.begin(), keys.end());
+
+#else
+		QSet<iqt2d::IViewProvider*> views = keys.toSet();
+#endif
+
 		for (		QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
 					viewIter != views.end();
 					++viewIter){
