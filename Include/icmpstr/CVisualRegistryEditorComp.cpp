@@ -9,7 +9,6 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDesktopWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QPushButton>
 #else
@@ -383,16 +382,27 @@ icomp::IRegistryElement* CVisualRegistryEditorComp::TryCreateComponent(
 	istd::CChangeNotifier registryNotifier(registryPtr, &s_addElementChangeSet);
 	Q_UNUSED(registryNotifier);
 
-	QRegExp regexp("^(\\w*)_(\\d+)$");
 	QString elementIdString = elementId;
 
 	int elementValue = 0;
 	QString elementBase = elementIdString;
+
+#if QT_VERSION < 0x060000
+	QRegExp regexp("^(\\w*)_(\\d+)$");
 	int pos = regexp.indexIn(elementIdString);
 	if (pos >= 0){
 		elementBase = regexp.cap(1);
 		elementValue = regexp.cap(2).toInt();
 	}
+#else
+	QRegularExpression regexp("^(\\w*)_(\\d+)$");
+	QRegularExpressionMatch match;
+	int pos = elementIdString.indexOf(regexp);
+	if (pos >= 0){
+		elementBase = match.captured(1);
+		elementValue = match.captured(2).toInt();
+	}
+#endif
 
 	QByteArray realElementId = elementId;
 	icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
@@ -1339,8 +1349,8 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 	EmbeddedComponentsLayout->removeItem(m_buttonSpacerPtr);
 
 	icomp::IRegistry::Ids embeddedIds = rootRegistryPtr->GetEmbeddedRegistryIds();
-	QList<QByteArray> sortedEmbeddedIds = embeddedIds.toList();
-	qSort(sortedEmbeddedIds);
+	QList<QByteArray> sortedEmbeddedIds(embeddedIds.begin(), embeddedIds.end());
+	std::sort(sortedEmbeddedIds.begin(), sortedEmbeddedIds.end());
 
 	EmbeddedComponentsFrame->setVisible(!embeddedIds.isEmpty());
 	m_removeEmbeddedRegistryCommand.SetEnabled(!embeddedIds.isEmpty() && !m_embeddedRegistryId.isEmpty());

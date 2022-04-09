@@ -108,7 +108,7 @@ QString CFileNamingComp::CalculateFileName(
 		QStringList supportedExtensions;
 		m_fileTypeInfoCompPtr->GetFileExtensions(supportedExtensions, NULL, ifile::IFileTypeInfo::QF_SAVE);
 
-		QStringList::const_iterator inputFoundIter = qFind(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
+		QStringList::const_iterator inputFoundIter = std::find(supportedExtensions.begin(), supportedExtensions.end(), outputExtension);
 		if (inputFoundIter == supportedExtensions.end()){
 			if (supportedExtensions.isEmpty()){
 				outputExtension.clear();

@@ -63,7 +63,8 @@ void CCommonVersionInfo::MergeVersions(const iser::IVersionInfo& versionInfo)
 
 CCommonVersionInfo::VersionIds CCommonVersionInfo::GetVersionIds() const
 {
-	return m_versionIdList.keys().toSet();
+	QList<int> keys = m_versionIdList.keys();
+	return  QSet<int>(keys.begin(), keys.end());
 }
 
 

@@ -6,6 +6,7 @@
 #include <QtCore/QByteArray>
 #include <QtGui/QImageReader>
 #include <QtCore/QStringList>
+#include <QtCore/QRegularExpression>
 
 // ACF includes
 #include <istd/CChangeNotifier.h>
@@ -85,7 +86,7 @@ int CFileAcquisitionComp::DoProcessing(
 				QMutableListIterator<QString> fileListIter(info.files);
 				while (fileListIter.hasNext()){
 					const QString& file = fileListIter.next();
-					if (!file.contains(QRegExp(*m_acceptedFileNamePatternAttrPtr))){
+					if (!file.contains(QRegularExpression(*m_acceptedFileNamePatternAttrPtr))){
 						fileListIter.remove();
 					}
 				}

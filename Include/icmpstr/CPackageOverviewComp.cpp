@@ -443,17 +443,22 @@ void CPackageOverviewComp::UpdateAllMetaInfoLists()
 
 				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
 
-				knownCompanies += encoder.GetValues("Company").toSet();
-				knownProjects += encoder.GetValues("Project").toSet();
-				knownAuthors += encoder.GetValues("Author").toSet();
-				knownCategories += encoder.GetValues("Category").toSet();
-				knownTags += encoder.GetValues("Tag").toSet();
+				QStringList stringList = encoder.GetValues("Company");
+				knownCompanies += QSet<QString>(stringList.begin(), stringList.end());
+				stringList = encoder.GetValues("Project");
+				knownProjects += QSet<QString>(stringList.begin(), stringList.end());
+				stringList = encoder.GetValues("Author");
+				knownAuthors += QSet<QString>(stringList.begin(), stringList.end());
+				stringList = encoder.GetValues("Category");
+				knownCategories += QSet<QString>(stringList.begin(), stringList.end());
+				stringList = encoder.GetValues("Tag");
+				knownTags += QSet<QString>(stringList.begin(), stringList.end());
 			}
 		}
 
-		QList<QByteArray> knownInterfacesList = knownInterfaces.toList();
+		QList<QByteArray> knownInterfacesList(knownInterfaces.begin(), knownInterfaces.end());
 
-		qSort(knownInterfacesList);
+		std::sort(knownInterfacesList.begin(), knownInterfacesList.end());
 
 		InterfaceCB->clear();
 
@@ -486,9 +491,9 @@ void CPackageOverviewComp::UpdateSingleMetaInfoList(const MetaInfoFilter& filter
 {
 	iqt::CSignalBlocker blocker(&result);
 
-	QStringList sortedList = filter.toList();
+	QStringList sortedList(filter.begin(), filter.end());
 
-	qSort(sortedList);
+	std::sort(sortedList.begin(), sortedList.end());
 
 	result.clear();
 
@@ -702,7 +707,7 @@ void CPackageOverviewComp::on_FilterEdit_editingFinished()
 
 	UpdateBlocker blocker(this);
 
-	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), QString::SkipEmptyParts,  Qt::CaseInsensitive);
+	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), Qt::SkipEmptyParts,  Qt::CaseInsensitive);
 
 	if (keywordsFilter != m_keywordsFilter){
 		m_keywordsFilter = keywordsFilter;
@@ -1024,7 +1029,7 @@ bool CPackageOverviewComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 						drag->setMimeData(mimeDataPtr);
 						drag->setPixmap(CreateComponentDragPixmap(address));
 						drag->setHotSpot(QPoint(drag->pixmap().width()/2, drag->pixmap().height()));
-						drag->start(Qt::MoveAction);
+						drag->exec(Qt::MoveAction);
 					}
 				}
 			}

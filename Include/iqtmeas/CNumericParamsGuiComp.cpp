@@ -167,7 +167,7 @@ void CNumericParamsGuiComp::OnGuiCreated()
 		layoutPtr = new QHBoxLayout;
 	}
 
-	layoutPtr->setMargin(0);
+	layoutPtr->setContentsMargins(0,0,0,0);
 	panelPtr->setLayout(layoutPtr);
 
 	BaseClass::OnGuiCreated();

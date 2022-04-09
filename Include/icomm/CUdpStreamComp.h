@@ -71,7 +71,7 @@ private:
 		virtual void run();
 
 	protected:
-		QMutex m_lock;
+		QRecursiveMutex m_lock;
 
 		bool m_stopThread;
 

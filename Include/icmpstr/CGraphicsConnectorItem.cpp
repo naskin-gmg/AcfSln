@@ -29,7 +29,7 @@ CGraphicsConnectorItem::CGraphicsConnectorItem(
 	m_isSourceSelected(false),
 	m_isDestSelected(false)
 {
-	setAcceptedMouseButtons(0);
+	setAcceptedMouseButtons(Qt::MouseButtons(0));
 #if QT_VERSION >= 0x050000
 	setAcceptHoverEvents(true);
 #else

@@ -49,7 +49,7 @@ private:
 	typedef QList<FileItem> FileItems;
 	FileItems m_storageItems;
 
-	mutable QMutex m_mutex;
+	mutable QRecursiveMutex m_mutex;
 };
 
 

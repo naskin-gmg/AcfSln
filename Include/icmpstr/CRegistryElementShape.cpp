@@ -334,7 +334,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 
 	const QByteArray& componentName = element.GetName();
 
-	int titleWidth = nameFontInfo.width(componentName);
+	int titleWidth = nameFontInfo.horizontalAdvance(componentName);
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
 	int attributeIconSize = nameFontInfo.height();
@@ -352,7 +352,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 
-	int width = qMax(titleWidth, detailFontInfo.width(m_addressString)) + SIDE_OFFSET * 2;
+	int width = qMax(titleWidth, detailFontInfo.horizontalAdvance(m_addressString)) + SIDE_OFFSET * 2;
 
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;

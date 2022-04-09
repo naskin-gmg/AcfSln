@@ -254,7 +254,7 @@ void CMultiBitmapSupplierGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& 
 
 	QList<QListWidgetItem*> selectedItems = BitmapPreview->selectedItems();
 	if (!selectedItems.isEmpty()){
-		SelectBitmap(selectedItems.indexOf(0));
+		SelectBitmap(selectedItems.indexOf(nullptr));
 	}
 	else if (bitmapsCount > 0){
 		SelectBitmap(0);
@@ -291,7 +291,8 @@ void CMultiBitmapSupplierGuiComp::SelectBitmap(int bitmapIndex)
 	i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
 
 	const ShapesMap& shapesMap = GetShapesMap();
-	QSet<iqt2d::IViewProvider*> views = shapesMap.keys().toSet();
+	QList<iqt2d::IViewProvider*> keys = shapesMap.keys();
+	QSet<iqt2d::IViewProvider*> views(keys.begin(), keys.end());
 	for (QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
 			viewIter != views.end();
 			++viewIter){

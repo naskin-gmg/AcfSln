@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtCore/QObject>
+#include <QtCore/QRegularExpression>
 
 // ACF includes
 #include <istd/CSystem.h>
@@ -196,12 +197,21 @@ bool CCopyFilesTreeComp::CheckIfExcluded(const QString& fileName, const QStringL
 	for (		QStringList::const_iterator excludeIter = excludeFilters.begin();
 				excludeIter != excludeFilters.end();
 				++excludeIter){
+
+#if QT_VERSION < 0x060000
 		QRegExp rx(*excludeIter);
 		rx.setPatternSyntax(QRegExp::Wildcard);
 		rx.setCaseSensitivity(Qt::CaseInsensitive);
 		if (rx.exactMatch(fileName)){
 			return true;
 		}
+#else
+		QRegularExpression rx = QRegularExpression(QRegularExpression::wildcardToRegularExpression(*excludeIter), QRegularExpression::CaseInsensitiveOption);
+
+		if (rx.match(fileName).hasMatch()){
+			return true;
+		}
+#endif
 	}
 
 	return false;

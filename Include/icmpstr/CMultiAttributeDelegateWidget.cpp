@@ -35,7 +35,7 @@ CMultiAttributeDelegateWidget::CMultiAttributeDelegateWidget(
 	m_elementSelectionInfoManager(elementSelectionInfoManager)
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
-	layout->setMargin(0);
+	layout->setContentsMargins(0,0,0,0);
 	layout->setSpacing(0);
 
 	m_textEditor = new QLineEdit(this);

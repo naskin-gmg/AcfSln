@@ -123,7 +123,7 @@ QString CQuickHelpGuiComp::CalcDoxygenFileName(const istd::CClassInfo& classInfo
 		}
 		else if ((c >= 'A') && (c <= 'Z')){
 			retVal += "_";
-			retVal.push_back(c - 'A' + 'a');
+			retVal.push_back(QChar(c - 'A' + 'a'));
 		}
 		else{
 			retVal.push_back(c);

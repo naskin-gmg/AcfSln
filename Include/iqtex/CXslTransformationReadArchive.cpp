@@ -1,6 +1,8 @@
 #include <iqtex/CXslTransformationReadArchive.h>
 
 
+#if QT_VERSION < 0x060000
+
 // STL includes
 #include <cstring>
 
@@ -219,6 +221,9 @@ bool CXslTransformationReadArchive::ReadTextNode(QByteArray& text)
 
 	return false;
 }
+
+
+#endif // Qt5
 
 
 } // namespace iqtex

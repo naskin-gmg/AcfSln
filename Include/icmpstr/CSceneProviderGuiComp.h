@@ -213,7 +213,7 @@ private:
 	I_ATTR(bool, m_allowSelectAllAttrPtr);
 
 	QWidget* m_savedParentWidgetPtr;
-	QMatrix m_savedViewTransform;
+	QTransform m_savedViewTransform;
 
 	double m_isotropyFactor;
 };

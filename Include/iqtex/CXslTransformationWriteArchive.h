@@ -2,6 +2,9 @@
 #define iqtex_CXslTransformationWriteArchive_included
 
 
+#if QT_VERSION < 0x060000
+
+
 // Qt includes
 #include <QtCore/QFile>
 #include <QtCore/QBuffer>
@@ -88,6 +91,8 @@ private:
 
 } // namespace iqtex
 
+
+#endif // Qt5
 
 #endif // !iqtex_CXslTransformationWriteArchive_included
 

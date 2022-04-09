@@ -98,7 +98,7 @@ void CUdpStreamComp::OnComponentDestroyed()
 // CUdpStreamComp::ReadThread
 
 CUdpStreamComp::ReadThread::ReadThread(CUdpStreamComp* parent)
-:	m_lock(QMutex::Recursive),
+:	m_lock(),
 	m_stopThread(true),
 	m_parent(parent),
 	m_handlerPtr(NULL)

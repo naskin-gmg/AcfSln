@@ -1163,21 +1163,21 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		backgroundColor = QColor(255, 255, 240);
 	}
 
-	attributeItemPtr->setBackgroundColor(AC_NAME, backgroundColor);
+	attributeItemPtr->setBackground(AC_NAME, backgroundColor);
 
 	attributeItemPtr->setFont(AC_NAME, isAttributeEnabled? importantFont: normalFont);
 	attributeItemPtr->setFont(AC_VALUE, isAttributeUsed? importantFont: normalFont);
 
 	if (isAttributeError){
-		attributeItemPtr->setBackgroundColor(AC_VALUE, Qt::red);
+		attributeItemPtr->setBackground(AC_VALUE, Qt::red);
 		hasError = true;
 	}
 	else if (isAttributeWarning){
-		attributeItemPtr->setBackgroundColor(AC_VALUE, Qt::yellow);
+		attributeItemPtr->setBackground(AC_VALUE, Qt::yellow);
 		hasWarning = true;
 	}
 	else{
-		attributeItemPtr->setBackgroundColor(AC_VALUE, backgroundColor);
+		attributeItemPtr->setBackground(AC_VALUE, backgroundColor);
 	}
 
 	QTreeWidgetItem* importItemPtr = NULL;
@@ -1240,11 +1240,11 @@ bool CAttributeEditorComp::SetInterfaceToItem(
 		}
 
 		item.setText(0, interfaceName);
-		item.setBackgroundColor(0, Qt::transparent);
+		item.setBackground(0, Qt::transparent);
 		if (readOnly){
 			if (hasExport){
 				item.setToolTip(0, tr("Export of interfaces from detached objects is not allowed"));
-				item.setBackgroundColor(0, Qt::yellow);
+				item.setBackground(0, Qt::yellow);
 
 				hasWarning = true;
 			}
@@ -1260,7 +1260,7 @@ bool CAttributeEditorComp::SetInterfaceToItem(
 		item.setText(0, elementId + ": " + interfaceName);
 		item.setCheckState(0, Qt::Checked);
 		item.setToolTip(0, tr("Interface doesn't implemented by this element (was removed?)"));
-		item.setBackgroundColor(0, Qt::yellow);
+		item.setBackground(0, Qt::yellow);
 	}
 	item.setIcon(0, QIcon());
 
@@ -1280,7 +1280,7 @@ bool CAttributeEditorComp::ResetItem(QTreeWidgetItem& item)
 	item.setText(0, "");
 	item.setData(0, Qt::CheckStateRole, QVariant());
 	item.setToolTip(0, "");
-	item.setBackgroundColor(0, Qt::transparent);
+	item.setBackground(0, Qt::transparent);
 	item.setIcon(0, QIcon());
 
 	return true;
@@ -1456,7 +1456,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 	}
 	// set multiple reference data
 	else if ((attributeStatMeaning == AM_MULTI_REFERENCE) || (attributeStatMeaning == AM_MULTI_FACTORY)){
-		QStringList references = text.split(';', QString::SkipEmptyParts);
+		QStringList references = text.split(';', Qt::SkipEmptyParts);
 
 		iattr::TMultiAttribute<QByteArray>* multiReferenceAttributePtr = dynamic_cast<iattr::TMultiAttribute<QByteArray>*>(&result);
 
@@ -1626,8 +1626,8 @@ void CAttributeEditorComp::CreateInterfacesTree(
 
 		if (includeSubelement){
 			const icomp::IElementStaticInfo::Ids subcomponentIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
-			QList<QByteArray> sortedSubcomponentIds = subcomponentIds.toList();
-			qSort(sortedSubcomponentIds);
+			QList<QByteArray> sortedSubcomponentIds(subcomponentIds.begin(), subcomponentIds.end());
+			std::sort(sortedSubcomponentIds.begin(), sortedSubcomponentIds.end());
 
 			for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
 						subIter != sortedSubcomponentIds.constEnd();
@@ -1754,8 +1754,8 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 
 	if (elementMetaInfoPtr != NULL){
 		const icomp::IElementStaticInfo::Ids subcomponentIds = elementMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
-		QList<QByteArray> sortedSubcomponentIds = subcomponentIds.toList();
-		qSort(sortedSubcomponentIds);
+		QList<QByteArray> sortedSubcomponentIds(subcomponentIds.begin(), subcomponentIds.end());
+		std::sort(sortedSubcomponentIds.begin(), sortedSubcomponentIds.end());
 
 		for (		QList<QByteArray>::ConstIterator subIter = sortedSubcomponentIds.constBegin();
 					subIter != sortedSubcomponentIds.constEnd();
@@ -1778,13 +1778,13 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			}
 
 			itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-			itemPtr->setBackgroundColor(AC_VALUE, Qt::transparent);
+			itemPtr->setBackground(AC_VALUE, Qt::transparent);
 			if (readOnly){
 				if (subExportedAliases.isEmpty()){
 					itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 				}
 				else{
-					itemPtr->setBackgroundColor(AC_VALUE, Qt::yellow);
+					itemPtr->setBackground(AC_VALUE, Qt::yellow);
 					hasWarning = true;
 				}
 			}
@@ -2194,8 +2194,8 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 							*registryPtr,
 							queryFlags);
 
-				QList< QByteArray> compatIdList = compatIds.toList();
-				qSort(compatIdList);
+				QList< QByteArray> compatIdList(compatIds.begin(), compatIds.end());
+				std::sort(compatIdList.begin(), compatIdList.end());
 
 				for(		QList< QByteArray>::ConstIterator iter = compatIdList.constBegin();
 							iter != compatIdList.constEnd();

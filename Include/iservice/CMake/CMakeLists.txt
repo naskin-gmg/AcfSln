@@ -81,6 +81,6 @@ set_property(
 	TARGET ${PROJECT_NAME}
 	PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-qt5_use_modules(${PROJECT_NAME} Core Widgets Gui Xml Network XmlPatterns Svg Concurrent)
+acf_use_qt_modules()
 
 

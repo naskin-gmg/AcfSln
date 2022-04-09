@@ -316,8 +316,8 @@ void CRegistryPropEditorComp::UpdateConsistencyStatus(
 	}
 
 	if (isExportInvalid){
-		exportedtemPtr->setBackgroundColor(0, Qt::yellow);
-		exportedtemPtr->setBackgroundColor(1, Qt::yellow);
+		exportedtemPtr->setBackground(0, Qt::yellow);
+		exportedtemPtr->setBackground(1, Qt::yellow);
 		exportedtemPtr->setFlags(exportedtemPtr->flags() | Qt::ItemIsUserCheckable);
 		exportedtemPtr->setCheckState(0, Qt::Checked);
 		exportedtemPtr->setData(0, DR_COMPONENT_ID, componentId);
@@ -338,7 +338,7 @@ QString CRegistryPropEditorComp::ConvertToKeyword(const QString& input, const QS
 
 	QString keyword = !key.isEmpty() ? key + "=\'" : key;
 
-	QStringList inputPartList = input.split(",", QString::SkipEmptyParts);
+	QStringList inputPartList = input.split(",", Qt::SkipEmptyParts);
 
 	for (int inputPartIndex = 0; inputPartIndex < inputPartList.count(); inputPartIndex++){
 		QString inputPart = inputPartList[inputPartIndex].simplified();

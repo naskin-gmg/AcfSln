@@ -409,7 +409,7 @@ void CInspectionTaskGuiComp::OnGuiCreated()
 		}
 	}
 
-	layoutPtr->setMargin(0);
+	layoutPtr->setContentsMargins(0,0,0,0);
 
 	ControlFrame->setVisible(*m_showControlPanelAttrPtr);
 

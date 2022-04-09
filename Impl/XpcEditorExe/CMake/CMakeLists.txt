@@ -2,6 +2,7 @@ project(XpcEditor LANGUAGES CXX)
 
 set(ARXC_CONFIG "${ACFSLNDIR}/Config/AcfSlnConfig.awc")
 set(ARXC_FILES "${PROJECT_SOURCE_DIR}/../${PROJECT_NAME}.acc")
+set(ARX_DISABLE_GENERATE_DEPENDENCIES_LIST ON)
 
 if(WIN32)
 	set(CMAKE_WIN32_EXECUTABLE "on")
@@ -20,9 +21,9 @@ include(${ACFDIR}/Config/CMake/ApplicationConfig.cmake)
 include(${ACFDIR}/Config/CMake/AcfQt.cmake)
 include(${ACFDIR}/Config/CMake/AcfStd.cmake)
 
-target_link_libraries(${PROJECT_NAME} AcfLoc icmpstr AcfSlnLoc)
-
 find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS PrintSupport REQUIRED)
-target_link_libraries(${PROJECT_NAME} Qt5::PrintSupport)
+
+target_link_libraries(${PROJECT_NAME} AcfLoc icmpstr AcfSlnLoc)
+target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::PrintSupport)
 
 

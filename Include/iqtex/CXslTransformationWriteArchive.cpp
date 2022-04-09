@@ -1,12 +1,14 @@
 #include <iqtex/CXslTransformationWriteArchive.h>
 
 
+#if QT_VERSION < 0x060000
+
 // Qt includes
 #include <QtCore/QTextStream>
 #include <QtXml/QDomNodeList>
+
 #include <QtXmlPatterns/QXmlQuery>
 #include <QtXmlPatterns/QAbstractMessageHandler>
-
 
 namespace iqtex
 {
@@ -208,4 +210,6 @@ bool CXslTransformationWriteArchive::WriteTextNode(const QByteArray& text)
 
 } // namespace iqtex
 
+
+#endif // Qt5
 

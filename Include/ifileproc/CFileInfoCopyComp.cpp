@@ -6,7 +6,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QtCore/QRegExp>
+#include <QtCore/QRegularExpression>
 
 // ACF includes
 #include <iser/IVersionInfo.h>
@@ -71,15 +71,22 @@ int CFileInfoCopyComp::ConvertFiles(
 
 		while (!licenseStream.atEnd()){
 			QString line = licenseStream.readLine();
-			outputStream << line << endl;
+			outputStream << line << Qt::endl;
 		}
 	}
 
+#if QT_VERSION < 0x060000
 	QRegExp tagsExpression;
 	if (m_substitutionTagExprAttrPtr.IsValid()){
 		tagsExpression = QRegExp(*m_substitutionTagExprAttrPtr);
 		tagsExpression.setMinimal(true);
 	}
+#else
+	QRegularExpression tagsExpression;
+	if (m_substitutionTagExprAttrPtr.IsValid()){
+		tagsExpression = QRegularExpression(*m_substitutionTagExprAttrPtr, QRegularExpression::InvertedGreedinessOption);
+	}
+#endif
 
 	for (int lineCounter = 1; !inputStream.atEnd(); ++lineCounter) {
 		QString line = inputStream.readLine();
@@ -88,12 +95,23 @@ int CFileInfoCopyComp::ConvertFiles(
 			QString outputLine;
 			int pos = 0;
 			int endPos = 0;
+#if QT_VERSION < 0x060000
 			while ((pos = tagsExpression.indexIn(line, endPos)) != -1){
 				outputLine += line.mid(endPos, pos - endPos);
 
 				endPos = pos + tagsExpression.matchedLength();
 
 				QString substitutionTag = tagsExpression.cap(1);
+#else
+			QRegularExpressionMatch match;
+
+			while ((pos = line.indexOf(tagsExpression, pos, &match)) != -1){
+
+				outputLine += line.mid(endPos, pos - endPos);
+				endPos = pos + match.capturedLength();
+
+				QString substitutionTag = match.captured(1);
+#endif
 
 				if (!substitutionTag.isEmpty()){
 					QString substituted;
@@ -118,7 +136,7 @@ int CFileInfoCopyComp::ConvertFiles(
 			line = outputLine;
 		}
 
-		outputStream << line << endl;
+		outputStream << line << Qt::endl;
 	}
 
 	return iproc::IProcessor::TS_OK;

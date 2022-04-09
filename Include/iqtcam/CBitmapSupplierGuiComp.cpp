@@ -268,7 +268,8 @@ void CBitmapSupplierGuiComp::AfterUpdate(imod::IModel* modelPtr, const istd::ICh
 		i2d::CRectangle imageBox(0, 0, imageSize.GetX(), imageSize.GetY());
 
 		const ShapesMap& shapesMap = GetShapesMap();
-		QSet<iqt2d::IViewProvider*> views = shapesMap.keys().toSet();
+		QList<iqt2d::IViewProvider*> keys = shapesMap.keys();
+		QSet<iqt2d::IViewProvider*> views(keys.begin(), keys.end());
 		for (		QSet<iqt2d::IViewProvider*>::ConstIterator viewIter = views.begin();
 					viewIter != views.end();
 					++viewIter){

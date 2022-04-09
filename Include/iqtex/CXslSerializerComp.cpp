@@ -22,6 +22,7 @@ bool CXslSerializerComp::IsOperationSupported(
 			int flags,
 			bool beQuiet) const
 {
+#if QT_VERSION < 0x060000
 	if (((flags & (QF_LOAD | QF_SAVE)) == QF_LOAD) && !m_xslReadFilePath.IsValid()){
 		return false;
 	}
@@ -31,6 +32,9 @@ bool CXslSerializerComp::IsOperationSupported(
 	}
 
 	return BaseClass::IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet);
+#else
+	return false;
+#endif
 }
 
 
@@ -39,6 +43,7 @@ int CXslSerializerComp::LoadFromFile(
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
+#if QT_VERSION < 0x060000
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		CXslTransformationReadArchive archive(filePath, m_xslReadFilePath->GetPath());
 
@@ -54,6 +59,7 @@ int CXslSerializerComp::LoadFromFile(
 			OnReadError(archive, data, filePath);
 		}
 	}
+#endif
 	return OS_FAILED;
 }
 
@@ -63,6 +69,7 @@ int CXslSerializerComp::SaveToFile(
 			const QString& filePath,
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
+#if QT_VERSION < 0x060000
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		CXslTransformationWriteArchive archive(filePath, m_xslWriteFilePath->GetPath(), GetVersionInfo(), true);
 		Q_ASSERT(archive.IsStoring());
@@ -81,7 +88,7 @@ int CXslSerializerComp::SaveToFile(
 			SendInfoMessage(MI_CANNOT_SAVE, QObject::tr("Cannot serialize object to file"));
 		}
 	}
-
+#endif
 	return OS_FAILED;
 }
 

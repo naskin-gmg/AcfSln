@@ -16,7 +16,7 @@ namespace icomm
 // public methods
 
 CTcpStreamComp::CTcpStreamComp()
-	:m_lock(QMutex::Recursive)
+	:m_lock()
 {
 	qRegisterMetaType<QAbstractSocket::SocketState>();
 	qRegisterMetaType<QAbstractSocket::SocketError>();

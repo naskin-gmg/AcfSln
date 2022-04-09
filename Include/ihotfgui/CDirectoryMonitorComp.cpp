@@ -602,7 +602,7 @@ QDateTime CDirectoryMonitorComp::GetLastAccessTime(const QFileInfo& fileInfo) co
 	}
 
 	if (m_timestampMode & ihotf::IDirectoryMonitorParams::FTM_CREATED){
-		lastAccessTime = qMax(fileInfo.created(), lastAccessTime);
+		lastAccessTime = qMax(fileInfo.birthTime(), lastAccessTime);
 	}
 
 	WriteTraceMessage(QString ("GetLastAccessTime: Last access time for '%1': '%2'").arg(fileInfo.absoluteFilePath()).arg(lastAccessTime.toString("yyyy.MM.dd hh mm:ss:zzz")));
