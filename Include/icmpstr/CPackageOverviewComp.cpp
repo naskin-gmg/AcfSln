@@ -444,19 +444,48 @@ void CPackageOverviewComp::UpdateAllMetaInfoLists()
 				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
 
 				QStringList stringList = encoder.GetValues("Company");
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				knownCompanies += QSet<QString>(stringList.begin(), stringList.end());
+#else
+				knownCompanies += stringList.toSet();
+#endif
+
 				stringList = encoder.GetValues("Project");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				knownProjects += QSet<QString>(stringList.begin(), stringList.end());
+#else
+				knownProjects += stringList.toSet();
+#endif
+
 				stringList = encoder.GetValues("Author");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				knownAuthors += QSet<QString>(stringList.begin(), stringList.end());
+#else
+				knownAuthors += stringList.toSet();
+#endif
+
 				stringList = encoder.GetValues("Category");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				knownCategories += QSet<QString>(stringList.begin(), stringList.end());
+#else
+				knownCategories += stringList.toSet();
+#endif
+
 				stringList = encoder.GetValues("Tag");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				knownTags += QSet<QString>(stringList.begin(), stringList.end());
+#else
+				knownTags += stringList.toSet();
+#endif
 			}
 		}
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		QList<QByteArray> knownInterfacesList(knownInterfaces.begin(), knownInterfaces.end());
+#else
+		QList<QByteArray> knownInterfacesList = knownInterfaces.toList();
+#endif
 
 		std::sort(knownInterfacesList.begin(), knownInterfacesList.end());
 
@@ -491,7 +520,11 @@ void CPackageOverviewComp::UpdateSingleMetaInfoList(const MetaInfoFilter& filter
 {
 	iqt::CSignalBlocker blocker(&result);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	QStringList sortedList(filter.begin(), filter.end());
+#else
+	QStringList sortedList = filter.toList();
+#endif
 
 	std::sort(sortedList.begin(), sortedList.end());
 
@@ -707,7 +740,11 @@ void CPackageOverviewComp::on_FilterEdit_editingFinished()
 
 	UpdateBlocker blocker(this);
 
-	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), Qt::SkipEmptyParts,  Qt::CaseInsensitive);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), Qt::SkipEmptyParts, Qt::CaseInsensitive);
+#else
+	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), QString::SkipEmptyParts, Qt::CaseInsensitive);
+#endif
 
 	if (keywordsFilter != m_keywordsFilter){
 		m_keywordsFilter = keywordsFilter;

@@ -54,7 +54,12 @@ bool CVisualRegistry::SerializeComponentsLayout(iser::IArchive& archive)
 	Q_UNUSED(notifier);
 
 	if (isStoring){
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 		QList<QByteArray> sortedIds(ids.begin(), ids.end());
+#else
+		QList<QByteArray> sortedIds = ids.toList();
+#endif
+
 		std::sort(sortedIds.begin(), sortedIds.end());
 
 		for (QList<QByteArray>::const_iterator iter = sortedIds.begin(); iter != sortedIds.end(); ++iter){

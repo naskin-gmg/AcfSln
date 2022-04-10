@@ -1349,7 +1349,13 @@ void CVisualRegistryEditorComp::UpdateEmbeddedRegistryButtons()
 	EmbeddedComponentsLayout->removeItem(m_buttonSpacerPtr);
 
 	icomp::IRegistry::Ids embeddedIds = rootRegistryPtr->GetEmbeddedRegistryIds();
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	QList<QByteArray> sortedEmbeddedIds(embeddedIds.begin(), embeddedIds.end());
+#else
+	QList<QByteArray> sortedEmbeddedIds = embeddedIds.toList();
+#endif
+
 	std::sort(sortedEmbeddedIds.begin(), sortedEmbeddedIds.end());
 
 	EmbeddedComponentsFrame->setVisible(!embeddedIds.isEmpty());

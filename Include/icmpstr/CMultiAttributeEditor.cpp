@@ -380,7 +380,12 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 							*registryPtr,
 							queryFlags);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 				QList< QByteArray> compatIdList(compatIds.begin(), compatIds.end());
+#else
+				QList<QByteArray> compatIdList = compatIds.toList();
+#endif
+
 				std::sort(compatIdList.begin(), compatIdList.end());
 				
 				for(		QList< QByteArray>::const_iterator iter = compatIdList.begin();

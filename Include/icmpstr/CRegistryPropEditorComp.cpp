@@ -338,7 +338,11 @@ QString CRegistryPropEditorComp::ConvertToKeyword(const QString& input, const QS
 
 	QString keyword = !key.isEmpty() ? key + "=\'" : key;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	QStringList inputPartList = input.split(",", Qt::SkipEmptyParts);
+#else
+	QStringList inputPartList = input.split(",", QString::SkipEmptyParts); 
+#endif
 
 	for (int inputPartIndex = 0; inputPartIndex < inputPartList.count(); inputPartIndex++){
 		QString inputPart = inputPartList[inputPartIndex].simplified();
