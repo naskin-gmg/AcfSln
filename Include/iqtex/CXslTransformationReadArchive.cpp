@@ -223,9 +223,9 @@ bool CXslTransformationReadArchive::ReadTextNode(QByteArray& text)
 }
 
 
-#endif // Qt5
-
-
 } // namespace iqtex
+
+
+#endif // Qt5
 
 
