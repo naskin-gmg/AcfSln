@@ -63,7 +63,7 @@ void CCommonVersionInfo::MergeVersions(const iser::IVersionInfo& versionInfo)
 
 CCommonVersionInfo::VersionIds CCommonVersionInfo::GetVersionIds() const
 {
-#if QT_VERSION >= 0x060000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	QList<int> keys = m_versionIdList.keys();
 
 	return QSet<int>(keys.begin(), keys.end());
