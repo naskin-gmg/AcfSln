@@ -1,5 +1,6 @@
 #include <icomm/CUdpStreamComp.h>
 
+
 // ACF includes
 #include <iprm/TParamsPtr.h>
 #include <iprm/INameParam.h>
@@ -9,10 +10,10 @@ namespace icomm
 {
 
 
-// public
+// public methods
 
 CUdpStreamComp::CUdpStreamComp()
-:	m_readThread(this)
+	:m_readThread(this)
 {
 }
 
@@ -97,14 +98,25 @@ void CUdpStreamComp::OnComponentDestroyed()
 
 // CUdpStreamComp::ReadThread
 
+#if QT_VERSION >= 0x060000
+
 CUdpStreamComp::ReadThread::ReadThread(CUdpStreamComp* parent)
-:	m_lock(),
-	m_stopThread(true),
+	:m_stopThread(true),
 	m_parent(parent),
 	m_handlerPtr(NULL)
 {
 	m_socket.moveToThread(this);
 }
+#else
+CUdpStreamComp::ReadThread::ReadThread(CUdpStreamComp* parent)
+	:m_stopThread(true),
+	m_parent(parent),
+	m_handlerPtr(NULL),
+	m_mutex(QMutex::Recursive)
+{
+	m_socket.moveToThread(this);
+}
+#endif
 
 
 bool CUdpStreamComp::ReadThread::Connect(const QHostAddress &address, quint16 port)
@@ -135,7 +147,7 @@ void CUdpStreamComp::ReadThread::Disconnect()
 
 bool CUdpStreamComp::ReadThread::ReadData(void* dataPtr, int& size)
 {
-	QMutexLocker lock(&m_lock);
+	QMutexLocker lock(&m_mutex);
 
 	size = m_lastData.size();
 
@@ -151,7 +163,7 @@ bool CUdpStreamComp::ReadThread::ReadData(void* dataPtr, int& size)
 
 bool CUdpStreamComp::ReadThread::RegisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr, bool /*allowOtherThread = false*/)
 {
-	QMutexLocker lock(&m_lock);
+	QMutexLocker lock(&m_mutex);
 
 	if (handlerPtr){
 		m_handlerPtr = handlerPtr;
@@ -165,7 +177,7 @@ bool CUdpStreamComp::ReadThread::RegisterEventHandler(icomm::IBinaryStream::Hand
 
 bool CUdpStreamComp::ReadThread::UnregisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr)
 {
-	QMutexLocker lock(&m_lock);
+	QMutexLocker lock(&m_mutex);
 
 	if ((m_handlerPtr == handlerPtr) || (handlerPtr == NULL)){
 		m_handlerPtr = NULL;
@@ -182,7 +194,7 @@ bool CUdpStreamComp::ReadThread::UnregisterEventHandler(icomm::IBinaryStream::Ha
 void CUdpStreamComp::ReadThread::run()
 {
 	while (!m_stopThread){
-		m_lock.lock();
+		m_mutex.lock();
 
 		while (m_socket.hasPendingDatagrams()){
 			m_lastDateTime = QDateTime::currentDateTime();
@@ -198,7 +210,7 @@ void CUdpStreamComp::ReadThread::run()
 			}
 		}
 
-		m_lock.unlock();
+		m_mutex.unlock();
 
 		usleep(10);
 	}

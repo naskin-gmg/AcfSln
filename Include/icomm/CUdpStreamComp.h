@@ -3,7 +3,7 @@
 
 // Qt includes
 #include <QtNetwork/QUdpSocket>
-#include <QtCore/QMutexLocker>
+#include <QtCore/QMutex>
 #include <QtCore/QThread>
 
 // ACF includes
@@ -71,7 +71,11 @@ private:
 		virtual void run();
 
 	protected:
-		QRecursiveMutex m_lock;
+#if QT_VERSION >= 0x060000
+		mutable QRecursiveMutex m_mutex;
+#else
+		mutable QMutex m_mutex;
+#endif
 
 		bool m_stopThread;
 
