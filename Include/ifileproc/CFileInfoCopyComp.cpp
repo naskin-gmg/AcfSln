@@ -13,6 +13,13 @@
 #include <istd/CSystem.h>
 
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#define QT_ENDL Qt::endl
+#else
+#define QT_ENDL endl
+#endif
+
+
 namespace ifileproc
 {
 
@@ -71,7 +78,7 @@ int CFileInfoCopyComp::ConvertFiles(
 
 		while (!licenseStream.atEnd()){
 			QString line = licenseStream.readLine();
-			outputStream << line << Qt::endl;
+			outputStream << line << QT_ENDL;
 		}
 	}
 
@@ -136,7 +143,7 @@ int CFileInfoCopyComp::ConvertFiles(
 			line = outputLine;
 		}
 
-		outputStream << line << Qt::endl;
+		outputStream << line << QT_ENDL;
 	}
 
 	return iproc::IProcessor::TS_OK;
