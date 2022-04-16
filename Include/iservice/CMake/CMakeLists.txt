@@ -50,7 +50,7 @@ acf_create_moc(MOC_SOURCES "${HEADER_FILES}")
 
 target_sources(${PROJECT_NAME} PRIVATE ${MOC_SOURCES})
 
-set(outlibdir "${AUX_INCLUDE_DIR}/../../../Lib/${CMAKE_BUILD_TYPE}${TARGETNAME}")
+set(outlibdir "${AUX_INCLUDE_DIR}/../../../Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
 
 set_property(
 	TARGET ${PROJECT_NAME}

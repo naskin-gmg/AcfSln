@@ -16,9 +16,9 @@ if(NOT DEFINED CONFIGSLN_DIR)
 endif()
 
 
-include_directories("${ACFSLNDIR}/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
+include_directories("${ACFSLNDIR}/AuxInclude/${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${ACFSLNDIR}/Impl")
 
-link_directories(${ACFSLNDIR}/Lib/${CMAKE_BUILD_TYPE}${TARGETNAME})
+link_directories(${ACFSLNDIR}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 
