@@ -1,3 +1,3 @@
 project(imm LANGUAGES CXX)
 
-include($ENV{ACFPUBLICDIR}/Build/CMake/StaticConfig.cmake)
+include(${ACFDIR}/Config/CMake/StaticConfig.cmake)
