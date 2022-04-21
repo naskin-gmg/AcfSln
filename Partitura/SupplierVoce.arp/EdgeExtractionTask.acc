@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4738" Description="ACF"/>
-            <Version Id="1" Number="2021" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="328961" Description="Qt Framework"/>
+            <Version Id="0" Number="4985" Description="ACF"/>
+            <Version Id="1" Number="2164" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Extracts edges from image</Description>
@@ -127,8 +127,8 @@
                                 <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
-                                    <Data IsEnabled="false"/>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ReducedEdgesSupplier/TaskLog"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="ToleranceParamsId" Type="Id" ExportId="">
                                     <Data IsEnabled="true" Value="ReductionThreshold"/>
@@ -175,8 +175,8 @@
                                 <AttributeInfo Id="KeepSingletons" Type="Boolean" ExportId="KeepSingletons">
                                     <Data IsEnabled="false"/>
                                 </AttributeInfo>
-                                <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
-                                    <Data IsEnabled="false"/>
+                                <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                                    <Data IsEnabled="true" Value="ReducedEdgesSupplier/TaskLog"/>
                                 </AttributeInfo>
                                 <AttributeInfo Id="MaxNodesCount" Type="Integer" ExportId="MaxNodesCount">
                                     <Data IsEnabled="true" Value="500000"/>
@@ -443,7 +443,6 @@
     </EmbeddedRegistriesList>
     <ExportedInterfaces>
         <Interface InterfaceId="iedge::IEdgeLinesProvider" ComponentId="EdgeExtractor"/>
-        <Interface InterfaceId="iinsp::IInspectionTask" ComponentId="InspectionTask"/>
         <Interface InterfaceId="iinsp::ISupplier" ComponentId="InspectionTask"/>
         <Interface InterfaceId="imod::IModel" ComponentId="EdgeExtractor"/>
         <Interface InterfaceId="iser::ISerializable" ComponentId="InspectionTask"/>
