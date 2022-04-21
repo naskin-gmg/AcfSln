@@ -26,10 +26,10 @@ include_directories("${ACFDIR}/Impl")
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
-set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}/GeneratedFiles")
+set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
 
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/Qt${QT_VERSION_MAJOR}_${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
 
@@ -76,6 +76,7 @@ add_subdirectory("${INCLUDE_DIR}/idocproc/CMake" "${AUX_INCLUDE_DIR}/idocproc")
 add_subdirectory("${INCLUDE_DIR}/iblob/CMake" "${AUX_INCLUDE_DIR}/iblob")
 add_subdirectory("${INCLUDE_DIR}/iblobgui/CMake" "${AUX_INCLUDE_DIR}/iblobgui")
 add_subdirectory("${INCLUDE_DIR}/iservice/CMake" "${AUX_INCLUDE_DIR}/iservice")
+add_subdirectory("${INCLUDE_DIR}/imm/CMake" "${AUX_INCLUDE_DIR}/imm")
 
 
 # Impl
