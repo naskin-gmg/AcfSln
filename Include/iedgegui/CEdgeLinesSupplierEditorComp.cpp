@@ -62,7 +62,7 @@ void CEdgeLinesSupplierEditorComp::CreateShapes(int /*sceneId*/, Shapes& result)
 		m_container.AttachObserver(shapePtr);
 
 		result.PushBack(shapePtr);
-	}	
+	}
 }
 
 

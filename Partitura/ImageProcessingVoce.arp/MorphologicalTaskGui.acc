@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4758" Description="ACF"/>
-            <Version Id="1" Number="2032" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329217" Description="Qt Framework"/>
+            <Version Id="0" Number="4994" Description="ACF"/>
+            <Version Id="1" Number="2172" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>UI of the morphological task</Description>
@@ -78,7 +78,7 @@
                             <Values>
                                 <Value>Filter Size</Value>
                                 <Value>Processing Mode</Value>
-                                <Value>FilterFormType</Value>
+                                <Value>Filter Form</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
