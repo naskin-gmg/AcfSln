@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4493" Description="ACF"/>
-            <Version Id="1" Number="1836" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="329472" Description="Qt Framework"/>
+            <Version Id="0" Number="4994" Description="ACF"/>
+            <Version Id="1" Number="2172" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="331522" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Image acquisition task using camera to retrive image</Description>
@@ -51,5 +51,7 @@
         <Interface InterfaceId="imod::IModel" ComponentId="ImageTask"/>
         <Interface InterfaceId="istd::IChangeable" ComponentId="ImageTask"/>
     </ExportedInterfaces>
-    <ExportedComponents/>
+    <ExportedComponents>
+        <Component ExportedId="TaskLog" ComponentId="ImageTask/TaskLog"/>
+    </ExportedComponents>
 </Acf>

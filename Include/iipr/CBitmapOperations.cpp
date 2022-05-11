@@ -399,6 +399,9 @@ bool CBitmapOperations::CaclulateBitmapDifference(
 	}
 
 	switch (pixelFormat){
+	case iimg::IBitmap::PF_RGB:
+		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), 255, inputBitmap1, inputBitmap2, outputBitmap);
+		return true;
 	case iimg::IBitmap::PF_GRAY:
 		CalculateDifferenceBitmap<quint8, quint8, quint8, int>(quint8(offset * 255), 255, inputBitmap1, inputBitmap2, outputBitmap);
 		return true;
