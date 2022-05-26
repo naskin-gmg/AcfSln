@@ -22,6 +22,8 @@ get_target_name(TARGETNAME)
 
 include_directories("${ACFDIR}/Include")
 include_directories("${ACFDIR}/Impl")
+include_directories("${ACFDIR}/AuxInclude/${TARGETNAME}")
+link_directories(${ACFDIR}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
@@ -32,7 +34,6 @@ include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
-
 
 # Include
 

@@ -6,7 +6,7 @@
         </VersionInfos>
     </AcfHeader>
     <ConfigFiles>
-        <FilePath>../../Acf/Config/AcfConfig.awc</FilePath>
+        <FilePath>$(ACFDIR)/Config/AcfConfig.awc</FilePath> 
     </ConfigFiles>
     <PackageDirs>
         <Dir>../Bin/$(ConfigurationDir)</Dir>
