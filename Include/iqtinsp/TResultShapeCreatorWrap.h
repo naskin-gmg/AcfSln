@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include <istd/IInformationProvider.h>
 #include <iview/IShapeFactory.h>
 #include <iview/IColorSchema.h>
 
