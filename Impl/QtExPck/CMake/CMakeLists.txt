@@ -1,4 +1,4 @@
-project(QtExtPck LANGUAGES CXX)
+project(QtExPck LANGUAGES CXX)
 
 include(${ACFDIR}/Config/CMake/ComponentConfig.cmake)
 include(${ACFDIR}/Config/CMake/AcfQt.cmake)
