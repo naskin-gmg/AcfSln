@@ -1,8 +1,8 @@
 #pragma once
 
 
-// ACF includes
-#include <istd/IPolymorphic.h>
+// Qt includes
+#include <QtCore/QObject>
 
 // ACF-Solutions includes
 #include <iauth/CLogoutEvent.h>
@@ -13,38 +13,92 @@ namespace iauth
 
 
 template<class BaseClass>
-class TLogoutEventHandlerWrap: public BaseClass, virtual public istd::IPolymorphic
+class TLogoutEventHandlerWrap: public BaseClass
 {
 public:
-	virtual bool OnTryToLogout();
+	TLogoutEventHandlerWrap();
 
-	// reimplemented (QObject)
-	virtual bool event(QEvent* e) override;
+	void EnableLogoutHandler(bool enable = true);
+
+protected:
+	// return false if logout should be canceled
+	virtual bool OnTryToLogout() = 0;
+
+private:
+	class EventFilter: public QObject
+	{
+	public:
+		EventFilter(TLogoutEventHandlerWrap& parent);
+
+	protected:
+		// reimplemented (QObject)
+		bool eventFilter(QObject* object, QEvent* event) override;
+
+	private:
+		TLogoutEventHandlerWrap& m_parent;
+	};
+
+private:
+	EventFilter m_eventFilter;
+	bool m_isEnabled;
 };
 
 
+// public methods
+
 template<class BaseClass>
-bool TLogoutEventHandlerWrap<BaseClass>::OnTryToLogout()
+TLogoutEventHandlerWrap<BaseClass>::TLogoutEventHandlerWrap()
+	:m_eventFilter(*this),
+	m_isEnabled(false)
 {
-	return true;
 }
 
+
+template<class BaseClass>
+void TLogoutEventHandlerWrap<BaseClass>::EnableLogoutHandler(bool enable)
+{
+	if (m_isEnabled != enable) {
+		if (enable == true) {
+			QCoreApplication::instance()->installEventFilter(&m_eventFilter);
+		}
+		else {
+			QCoreApplication::instance()->removeEventFilter(&m_eventFilter);
+		}
+
+		m_isEnabled = enable;
+	}
+}
+
+
+// public methods of the embedded class EventFilter
+
+template<class BaseClass>
+TLogoutEventHandlerWrap<BaseClass>::EventFilter::EventFilter(TLogoutEventHandlerWrap& parent)
+	:m_parent(parent)
+{
+}
+
+
+// protected methods of the embedded class EventFilter
 
 // reimplemented (QObject)
 
 template<class BaseClass>
-bool TLogoutEventHandlerWrap<BaseClass>::event(QEvent* e)
+bool TLogoutEventHandlerWrap<BaseClass>::EventFilter::eventFilter(QObject* /*object*/, QEvent* event)
 {
-	CLogoutEvent* logoutEventPtr = dynamic_cast<CLogoutEvent*>(e);
-	if (logoutEventPtr != nullptr) {
-		if (!OnTryToLogout()){
-			logoutEventPtr->ignore();
-		}
+	if (event->type() == CLogoutEvent::type()) {
+		CLogoutEvent* logoutEventPtr = dynamic_cast<CLogoutEvent*>(event);
+		if (logoutEventPtr != nullptr) {
+			if (!m_parent.OnTryToLogout()) {
+				logoutEventPtr->accept();
+				logoutEventPtr->CancelLogout();
 
-		return true;
+				return true;
+			}
+		}
 	}
 
-	return BaseClass::event(e);
+	return false;
 }
 
 
