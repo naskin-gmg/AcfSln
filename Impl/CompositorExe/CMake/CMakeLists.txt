@@ -1,6 +1,7 @@
 project(Compositor LANGUAGES CXX)
 
-set(ARXC_CONFIG "${ACFSLNDIR}/Config/AcfSlnConfig.awc")
+
+set(ARXC_CONFIG "${CMAKE_CURRENT_LIST_DIR}/../../../Config/AcfSlnConfig.awc")
 set(ARXC_FILES "${PROJECT_SOURCE_DIR}/../${PROJECT_NAME}.acc")
 set(ARX_ENABLE_GENERATE_DEPENDENCIES_LIST OFF)
 

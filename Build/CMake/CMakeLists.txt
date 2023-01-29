@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.1.0)
-#cmake_minimum_required(VERSION 3.13.0)
 
 project(AcfSln)
 
@@ -13,8 +12,6 @@ if(NOT DEFINED ACFDIR)
 endif()
 
 set(ACFSLNDIR "${CMAKE_CURRENT_LIST_DIR}/../../../AcfSln")
-
-message("ACFDIR " "${ACFDIR}")
 
 include(${ACFDIR}/Config/CMake/ProjectRoot.cmake)
 
@@ -36,11 +33,9 @@ include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETN
 message("${AUX_INCLUDE_DIR}")
 
 # Include
-
 add_subdirectory("${INCLUDE_DIR}/ialgo/CMake" "${AUX_INCLUDE_DIR}/ialgo")
 add_subdirectory("${INCLUDE_DIR}/iauth/CMake" "${AUX_INCLUDE_DIR}/iauth")
 add_subdirectory("${INCLUDE_DIR}/ibarcode/CMake" "${AUX_INCLUDE_DIR}/ibarcode")
-
 add_subdirectory("${INCLUDE_DIR}/icomm/CMake" "${AUX_INCLUDE_DIR}/icomm")
 add_subdirectory("${INCLUDE_DIR}/ihotf/CMake" "${AUX_INCLUDE_DIR}/ihotf")
 add_subdirectory("${INCLUDE_DIR}/ihotfgui/CMake" "${AUX_INCLUDE_DIR}/ihotfgui")
@@ -49,7 +44,6 @@ add_subdirectory("${INCLUDE_DIR}/iqtmeas/CMake" "${AUX_INCLUDE_DIR}/iqtmeas")
 add_subdirectory("${INCLUDE_DIR}/iqtex/CMake" "${AUX_INCLUDE_DIR}/iqtex")
 add_subdirectory("${INCLUDE_DIR}/iqtmm/CMake" "${AUX_INCLUDE_DIR}/iqtmm")
 add_subdirectory("${INCLUDE_DIR}/icalib/CMake" "${AUX_INCLUDE_DIR}/icalib")
-
 add_subdirectory("${INCLUDE_DIR}/icalibgui/CMake" "${AUX_INCLUDE_DIR}/icalibgui")
 add_subdirectory("${INCLUDE_DIR}/icam/CMake" "${AUX_INCLUDE_DIR}/icam")
 add_subdirectory("${INCLUDE_DIR}/iqtcam/CMake" "${AUX_INCLUDE_DIR}/iqtcam")
@@ -63,14 +57,11 @@ add_subdirectory("${INCLUDE_DIR}/iqtsig/CMake" "${AUX_INCLUDE_DIR}/iqtsig")
 add_subdirectory("${INCLUDE_DIR}/ifileproc/CMake" "${AUX_INCLUDE_DIR}/ifileproc")
 add_subdirectory("${INCLUDE_DIR}/iprod/CMake" "${AUX_INCLUDE_DIR}/iprod")
 add_subdirectory("${INCLUDE_DIR}/iproc/CMake" "${AUX_INCLUDE_DIR}/iproc")
-
-
 add_subdirectory("${INCLUDE_DIR}/iprocgui/CMake" "${AUX_INCLUDE_DIR}/iprocgui")
 add_subdirectory("${INCLUDE_DIR}/iweb/CMake" "${AUX_INCLUDE_DIR}/iweb")
 add_subdirectory("${INCLUDE_DIR}/iwiz/CMake" "${AUX_INCLUDE_DIR}/iwiz")
 add_subdirectory("${INCLUDE_DIR}/iwizgui/CMake" "${AUX_INCLUDE_DIR}/iwizgui")
 add_subdirectory("${INCLUDE_DIR}/iedge/CMake" "${AUX_INCLUDE_DIR}/iedge")
-
 add_subdirectory("${INCLUDE_DIR}/iedgegui/CMake" "${AUX_INCLUDE_DIR}/iedgegui")
 add_subdirectory("${INCLUDE_DIR}/icmpstr/CMake" "${AUX_INCLUDE_DIR}/icmpstr")
 add_subdirectory("${INCLUDE_DIR}/idocproc/CMake" "${AUX_INCLUDE_DIR}/idocproc")
@@ -114,10 +105,8 @@ add_subdirectory("${IMPL_DIR}/ProcessingGuiPck/CMake" "${AUX_INCLUDE_DIR}/Proces
 add_subdirectory("${IMPL_DIR}/CompositorPck/CMake" "${AUX_INCLUDE_DIR}/CompositorPck")
 add_subdirectory("${IMPL_DIR}/DocumentProcessingPck/CMake" "${AUX_INCLUDE_DIR}/DocumentProcessingPck")
 add_subdirectory("${IMPL_DIR}/ProductionPck/CMake" "${AUX_INCLUDE_DIR}/ProductionPck")
-
 add_subdirectory("${IMPL_DIR}/XpcEditorExe/CMake" "${AUX_INCLUDE_DIR}/XpcEditor")
 add_dependencies(XpcEditor FileProcessingPck)
 add_subdirectory("${IMPL_DIR}/CompositorExe/CMake" "${AUX_INCLUDE_DIR}/Compositor")
 add_dependencies(Compositor FileProcessingPck)
-
 endif()

@@ -1,20 +1,14 @@
-#Acf
-
-if(NOT DEFINED ACFCONFIGDIR)
-	set(ACFCONFIGDIR "$ENV{ACFCONFIGDIR}")
+# Acf
+if(NOT DEFINED ACFDIR)
+	set(ACFDIR "$ENV{ACFDIR}")
 endif()
 
-include(${ACFCONFIGDIR}/CMake/AcfEnv.cmake)
+include(${ACFDIR}/Config/CMake/AcfEnv.cmake)
 
-
-#Sln
+# ACF-Solutions
 if(NOT DEFINED ACFSLNDIR)
 	set(ACFSLNDIR "$ENV{ACFSLNDIR}")
 endif()
-if(NOT DEFINED CONFIGSLN_DIR)
-	set(CONFIGSLN_DIR "$ENV{ACFSLNDIR}/Config")
-endif()
-
 
 include_directories("${ACFSLNDIR}/AuxInclude/${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
