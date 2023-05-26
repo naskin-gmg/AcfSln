@@ -89,6 +89,8 @@ bool CSimpleNumericValue::Serialize(iser::IArchive& archive)
 		istd::CChangeNotifier notifier(this);
 		Q_UNUSED(notifier);
 
+		imath::CVarVector currValues = m_values;
+
 		retVal = retVal && archive.BeginTag(valuesTag);
 		retVal = retVal && m_values.Serialize(archive);
 		retVal = retVal && archive.EndTag(valuesTag);
@@ -97,8 +99,20 @@ bool CSimpleNumericValue::Serialize(iser::IArchive& archive)
 		if (constraintsPtr != NULL){
 			const iprm::IOptionsList& valueListInfo = constraintsPtr->GetValueListInfo();
 
-			m_values.SetElementsCount(valueListInfo.GetOptionsCount(), 0);
+			if (
+				valueListInfo.GetOptionsCount() == currValues.GetElementsCount() &&
+				currValues.GetElementsCount() > m_values.GetElementsCount()
+			) {
+				int i = m_values.GetElementsCount();
+				m_values.SetElementsCount(valueListInfo.GetOptionsCount(), 0);
+
+				for (; i < currValues.GetElementsCount(); i++) {
+					m_values[i] = currValues[i];
+				}
+			}
+
 		}
+
 	}
 
 	return retVal;
