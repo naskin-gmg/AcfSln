@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4957" Description="ACF"/>
-            <Version Id="1" Number="2152" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="330758" Description="Qt Framework"/>
+            <Version Id="0" Number="5079" Description="ACF"/>
+            <Version Id="1" Number="2183" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy all source files (without compiled binaries) for installation during component instantiation</Description>
@@ -449,6 +449,8 @@
                                 <Value>*.dom</Value>
                                 <Value>*.ttf</Value>
                                 <Value>*.otf</Value>
+                                <Value>*.gif</Value>
+                                <Value>*.xml</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
