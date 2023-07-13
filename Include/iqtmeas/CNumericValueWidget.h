@@ -30,9 +30,14 @@ public:
 	enum SliderFlags
 	{
 		SF_NONE = 0,
-		SF_SLIDER_ONLY = 1,
+		SF_SLIDER_VISIBLE = 1,
+		/**
+			\deprecated use \c CNumericValueWidget::SF_SLIDER_VISIBLE instead
+		*/
+		SF_SLIDER_ONLY = SF_SLIDER_VISIBLE,
 		SF_SLIDER_BUTTONS = 2,
-		SF_SINGLE_ROW = 8	// can be ORed
+		SF_SINGLE_ROW = 8,	// can be ORed
+		SF_WITHOUT_SPIN_BOX = 16
 	};
 
 	CNumericValueWidget(
@@ -43,6 +48,7 @@ public:
 				bool isPostValidationEnabled = false);
 
 	void SetUnitInfo(const QString& name, const QString& description, const imath::IUnitInfo* unitInfoPtr);
+	void SetSliderTickPositionInterval(QSlider::TickPosition tickPosition, int interval = 0);
 
 	double GetValue() const;
 	void SetValue(double value);

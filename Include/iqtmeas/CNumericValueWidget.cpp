@@ -39,15 +39,26 @@ CNumericValueWidget::CNumericValueWidget(
 
 	ValueSlider->setTracking(false);
 
+	int indexToInsert = ValueLayout->count();
+	if (sliderFlags & SF_WITHOUT_SPIN_BOX){
+		indexToInsert = ValueLayout->indexOf(ValueSB);
+	}
+
 	if (sliderFlags & SF_SINGLE_ROW){
-		ValueLayout->addWidget(MinButton);
-		ValueLayout->addWidget(ValueSlider);
-		ValueLayout->addWidget(MaxButton);
+		ValueLayout->insertWidget(indexToInsert, MinButton);
+		++indexToInsert;
+		ValueLayout->insertWidget(indexToInsert, ValueSlider);
+		++indexToInsert;
+		ValueLayout->insertWidget(indexToInsert, MaxButton);
+		++indexToInsert;
+		ValueLayout->insertWidget(indexToInsert, ValueLabel);
 	}
 
 	ValueSlider->setVisible(sliderFlags != SF_NONE);
 	MinButton->setVisible(sliderFlags & SF_SLIDER_BUTTONS);
 	MaxButton->setVisible(sliderFlags & SF_SLIDER_BUTTONS);
+	ValueLabel->setVisible(sliderFlags & SF_WITHOUT_SPIN_BOX);
+	ValueSB->setVisible(!(sliderFlags & SF_WITHOUT_SPIN_BOX));
 
 	switch (inputPolicy){
 		case 2:
@@ -124,6 +135,13 @@ void CNumericValueWidget::SetUnitInfo(const QString& name, const QString& descri
 }
 
 
+void CNumericValueWidget::SetSliderTickPositionInterval(QSlider::TickPosition tickPosition, int interval)
+{
+	ValueSlider->setTickPosition(tickPosition);
+	ValueSlider->setTickInterval(interval);
+}
+
+
 double CNumericValueWidget::GetValue() const
 {
 	return ValueSB->value() / m_unitMultiplicationFactor;
@@ -133,7 +151,9 @@ double CNumericValueWidget::GetValue() const
 void CNumericValueWidget::SetValue(double value)
 {
 	m_ignoreEvents = true;
-	ValueSB->setValue(value * m_unitMultiplicationFactor);
+	double newValue = value * m_unitMultiplicationFactor;
+	ValueSB->setValue(newValue);
+	ValueLabel->setText(QString::number(newValue, 'f', m_maxEditPrecision));
 	ValueSlider->setValue(value * m_sliderScaleFactor);
 	m_ignoreEvents = false;
 }

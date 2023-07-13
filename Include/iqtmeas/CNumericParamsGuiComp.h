@@ -42,7 +42,10 @@ public:
 
 	I_BEGIN_COMPONENT(CNumericParamsGuiComp);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
-		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control", true, true);
+		I_ASSIGN(m_isSliderOnlyAttrPtr, "SliderOnly", "Enables slider control and disables spin box control", true, false);
+		I_ASSIGN(m_isSliderVisibleAttrPtr, "SliderVisible", "Enables slider control\nNote: if SliderOnly is enabled this attribute will be enabled", true, true);		
+		I_ASSIGN(m_sliderTickPositionAttrPtr, "SliderTickPosition", "Sets slider tick position. See QSlider for detales. \n 0 - NoTicks (default) \n 1 - Above \n 2 - Below \n 3 - Both sides", false, 0);
+		I_ASSIGN(m_sliderTickIntervalAttrPtr, "SliderTickInterval", "Sets slider tick interval. See QSlider for detales", false, 0);
 		I_ASSIGN(m_isButtonsVisibleAttrPtr, "ButtonsVisible", "Enables min/max buttons", true, true);
 		I_ASSIGN(m_isSingleRowAttrPtr, "SingleRow", "Single row layout", true, false);
 		I_ASSIGN(m_inputPolicyAttrPtr, "InputSizePolicy", "0 - minimal width (default)\n1 - expanding input \n2 - label and input have same width", false, 0);
@@ -71,7 +74,10 @@ public Q_SLOTS:
 	void OnValueChanged();
 
 private:
+	I_ATTR(bool, m_isSliderOnlyAttrPtr);
 	I_ATTR(bool, m_isSliderVisibleAttrPtr);
+	I_ATTR(int, m_sliderTickPositionAttrPtr);
+	I_ATTR(int, m_sliderTickIntervalAttrPtr);
 	I_ATTR(bool, m_isButtonsVisibleAttrPtr);
 	I_ATTR(bool, m_isSingleRowAttrPtr);
 	I_ATTR(int, m_inputPolicyAttrPtr);

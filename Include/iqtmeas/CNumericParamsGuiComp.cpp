@@ -101,11 +101,16 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 		m_valueWidgets.SetCount(valuesCount);
 
 		int sliderFlags = 0;
-		if (*m_isSliderVisibleAttrPtr){
-			sliderFlags = CNumericValueWidget::SF_SLIDER_ONLY;
+		if (*m_isSliderVisibleAttrPtr || *m_isSliderOnlyAttrPtr){
+			if (*m_isSliderVisibleAttrPtr){
+				sliderFlags = CNumericValueWidget::SF_SLIDER_VISIBLE;
+			}
+			if (*m_isSliderOnlyAttrPtr){
+				sliderFlags = CNumericValueWidget::SF_SLIDER_VISIBLE | CNumericValueWidget::SF_WITHOUT_SPIN_BOX;
+			}
 
 			if (*m_isButtonsVisibleAttrPtr){
-				sliderFlags = CNumericValueWidget::SF_SLIDER_BUTTONS;
+				sliderFlags |= CNumericValueWidget::SF_SLIDER_BUTTONS;
 			}
 
 			if (*m_isSingleRowAttrPtr){
@@ -120,7 +125,38 @@ void CNumericParamsGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& /*chan
 						m_inputPolicyAttrPtr.IsValid()? *m_inputPolicyAttrPtr: -1,
 						*m_editorPrecisionAttrPtr,
 						*m_postValidationEnabledAttrPtr);
-			
+
+			if(		m_sliderTickPositionAttrPtr.IsValid() ||
+					m_sliderTickIntervalAttrPtr.IsValid()) {
+
+				QSlider::TickPosition sliderTickPosition = QSlider::NoTicks;
+				if (m_sliderTickPositionAttrPtr.IsValid()){
+					switch (*m_sliderTickPositionAttrPtr) {
+					case 0:
+						sliderTickPosition = QSlider::NoTicks;
+						break;
+					case 1:
+					sliderTickPosition = QSlider::TicksAbove;
+						break;
+					case 2:
+					sliderTickPosition = QSlider::TicksBelow;
+						break;
+					case 3:
+						sliderTickPosition = QSlider::TicksBothSides;
+					break;
+					default:
+						break;
+					}
+				}
+
+				int sliderTickInterval = 0;
+				if (m_sliderTickIntervalAttrPtr.IsValid()){
+					sliderTickInterval = *m_sliderTickIntervalAttrPtr;
+				}
+
+				valueWidgetPtr->SetSliderTickPositionInterval(sliderTickPosition, sliderTickInterval);
+			}
+
 			connect(valueWidgetPtr, SIGNAL(ValueChanged()), this, SLOT(OnValueChanged()));
 
 			m_valueWidgets.SetElementAt(i, valueWidgetPtr);
