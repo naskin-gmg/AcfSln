@@ -101,7 +101,7 @@ QToolButton#AutoTestButton:hover:enabled:on
        <item>
         <widget class="QGroupBox" name="ControlFrame">
          <property name="title">
-          <string>Inspection</string>
+          <string>Pipeline</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="topMargin">
@@ -152,7 +152,7 @@ QToolButton#AutoTestButton:hover:enabled:on
                <string>Recalculate all processing steps</string>
               </property>
               <property name="text">
-               <string>Test All</string>
+               <string>Execute All</string>
               </property>
               <property name="icon">
                <iconset resource="../../../Acf/Include/iqtgui/iqtgui.qrc">
