@@ -22,8 +22,8 @@ public:
 		I_ASSIGN(m_okColorSchemeCompPtr, "OkColorSchema", "Color schema used for ok shapes", false, "OkColorSchema");
 		I_ASSIGN(m_warningColorSchemeCompPtr, "WarningColorSchema", "Color schema used for warning shapes", false, "WarningColorSchema");
 		I_ASSIGN(m_errorColorSchemeCompPtr, "ErrorColorSchema", "Color schema used for error shapes", false, "ErrorColorSchema");
-        I_ASSIGN_MULTI_0(m_resultColorShemaListCompPtr, "ResultColorSchemeList", "List of color schema used for related results (according to the list of corresponding IDs)", false);
-        I_ASSIGN_MULTI_0(m_resultIdListAttrPtr, "ResultIdList", "List of result IDs for mapping related result color schema", false);
+		I_ASSIGN_MULTI_0(m_resultColorShemaListCompPtr, "ResultColorSchemeList", "List of color schema used for related results (according to the list of corresponding IDs)", false);
+		I_ASSIGN_MULTI_0(m_resultIdListAttrPtr, "ResultIdList", "List of result IDs for mapping related result color schema", false);
 	I_END_COMPONENT;
 
 	/**
@@ -39,8 +39,8 @@ private:
 	I_REF(iview::IColorSchema, m_okColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_warningColorSchemeCompPtr);
 	I_REF(iview::IColorSchema, m_errorColorSchemeCompPtr);
-    I_MULTIREF(iview::IColorSchema, m_resultColorShemaListCompPtr);
-    I_MULTIATTR(int, m_resultIdListAttrPtr);
+	I_MULTIREF(iview::IColorSchema, m_resultColorShemaListCompPtr);
+	I_MULTIATTR(int, m_resultIdListAttrPtr);
 };
 
 
