@@ -81,6 +81,6 @@ set_property(
 	TARGET ${PROJECT_NAME}
 	PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-acf_use_qt_modules()
+acf_use_qt_base_modules()
 
 
