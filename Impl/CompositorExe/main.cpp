@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_WIN
 	QApplication::setStyle("fusion");
 #endif
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	CCompositor instance(NULL, true);
 

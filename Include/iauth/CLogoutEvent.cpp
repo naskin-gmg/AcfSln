@@ -1,4 +1,4 @@
-#include <iauth/CLogoutEvent.h>"
+#include <iauth/CLogoutEvent.h>
 
 
 namespace iauth
