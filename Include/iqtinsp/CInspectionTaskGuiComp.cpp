@@ -227,34 +227,34 @@ void CInspectionTaskGuiComp::UpdateProcessingState()
 			if (infoProviderPtr != NULL){
 				switch (infoProviderPtr->GetInformationCategory()){
 					case istd::IInformationProvider::IC_NONE:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown"));
+						StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateUnknown")));
 						break;
 
 					case istd::IInformationProvider::IC_WARNING:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateWarning"));
+						StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateWarning")));
 						break;
 
 					case istd::IInformationProvider::IC_ERROR:
 					case istd::IInformationProvider::IC_CRITICAL:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateInvalid"));
+						StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateInvalid")));
 						break;
 
 					default:
-						StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk"));
+						StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateOk")));
 						break;
 				}
 			}
 			else{
-				StateIconLabel->setPixmap(QPixmap(":/Icons/StateOk"));
+				StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateOk")));
 			}
 			break;
 
 		case iinsp::ISupplier::WS_FAILED:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/Error"));
+			StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/Error")));
 			break;
 
 		default:
-			StateIconLabel->setPixmap(QPixmap(":/Icons/StateUnknown"));
+			StateIconLabel->setPixmap(QPixmap(GetIconPath(":/Icons/StateUnknown")));
 			break;
 	}
 }
@@ -631,8 +631,8 @@ void CInspectionTaskGuiComp::OnGuiRetranslate()
 {
 	BaseClass::OnGuiRetranslate();
 
-	m_executeTaskCommand.SetVisuals(tr("Execute"), tr("Execute"), tr("Execute processing pipline"), QIcon(":/Icons/Play"));
-	m_continuousExecuteCommand.SetVisuals(tr("Continuous"), tr("Continuous"), tr("Enable continuous execution of the processing pipeline"), QIcon(":/Icons/AutoUpdate"));
+	m_executeTaskCommand.SetVisuals(tr("Execute"), tr("Execute"), tr("Execute processing pipline"), GetIcon(":/Icons/Play"));
+	m_continuousExecuteCommand.SetVisuals(tr("Continuous"), tr("Continuous"), tr("Enable continuous execution of the processing pipeline"), GetIcon(":/Icons/AutoUpdate"));
 
 	int subtasksCount = m_editorGuisCompPtr.GetCount();
 
@@ -664,6 +664,23 @@ void CInspectionTaskGuiComp::OnGuiRetranslate()
 	}
 
 	UpdateVisualElements();
+}
+
+void CInspectionTaskGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	m_logIcon = GetIcon(":/Icons/Log");
+	m_infoIcon = GetIcon(":/Icons/Info");
+	m_warningIcon = GetIcon(":/Icons/Warning");
+	m_errorIcon = GetIcon(":/Icons/Error");
+
+	m_executeTaskCommand.setIcon(GetIcon(":/Icons/Play"));
+	m_continuousExecuteCommand.setIcon(GetIcon(":/Icons/AutoUpdate"));
+
+	TestAllButton->setIcon(GetIcon(":/Icons/Play"));
+	MenuButton->setIcon(GetIcon(":/Icons/Tools"));
+	AutoTestButton->setIcon(GetIcon(":/Icons/AutoUpdate"));
 }
 
 
@@ -1152,16 +1169,16 @@ void CInspectionTaskGuiComp::CreateMenu()
 	QMenu* actionsMenuPtr = new QMenu(MenuButton);
 	MenuButton->setMenu(actionsMenuPtr);
 
-	m_copyAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy all"), this, SLOT(OnCopyAll()));
-	m_pasteAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste all"), this, SLOT(OnPasteAll()));
+	m_copyAllActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Copy"), tr("Copy all"), this, SLOT(OnCopyAll()));
+	m_pasteAllActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Paste"), tr("Paste all"), this, SLOT(OnPasteAll()));
 	actionsMenuPtr->addSeparator();
-	m_copyCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Copy"), tr("Copy current task"), this, SLOT(OnCopyCurrent()));
-	m_pasteCurrentTaskActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Paste"), tr("Paste current task"), this, SLOT(OnPasteCurrent()));
+	m_copyCurrentTaskActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Copy"), tr("Copy current task"), this, SLOT(OnCopyCurrent()));
+	m_pasteCurrentTaskActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Paste"), tr("Paste current task"), this, SLOT(OnPasteCurrent()));
 
 	if (m_paramsLoaderCompPtr.IsValid()){
 		actionsMenuPtr->addSeparator();
-		m_loadAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Open"), tr("Load..."), this, SLOT(OnLoadParams()));
-		m_saveAllActionPtr = actionsMenuPtr->addAction(QIcon(":/Icons/Save"), tr("Save..."), this, SLOT(OnSaveParams()));
+		m_loadAllActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Open"), tr("Load..."), this, SLOT(OnLoadParams()));
+		m_saveAllActionPtr = actionsMenuPtr->addAction(GetIcon(":/Icons/Save"), tr("Save..."), this, SLOT(OnSaveParams()));
 	}
 
 	UpdateMenu();
@@ -1249,28 +1266,21 @@ QString CInspectionTaskGuiComp::GetSettingsKey() const
 }
 
 
-// private static methods
-
-QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category)
+QIcon CInspectionTaskGuiComp::GetCategoryIcon(istd::IInformationProvider::InformationCategory category) const
 {
-	static QIcon logIcon(":/Icons/Log");
-	static QIcon infoIcon(":/Icons/Info");
-	static QIcon warningIcon(":/Icons/Warning");
-	static QIcon errorIcon(":/Icons/Error");
-
 	switch (category){
 	case istd::IInformationProvider::IC_INFO:
-		return infoIcon;
+		return m_infoIcon;
 
 	case istd::IInformationProvider::IC_WARNING:
-		return warningIcon;
+		return m_warningIcon;
 
 	case istd::IInformationProvider::IC_ERROR:
 	case istd::IInformationProvider::IC_CRITICAL:
-		return errorIcon;
+		return m_errorIcon;
 
 	default:
-		return logIcon;
+		return m_logIcon;
 	}
 }
 

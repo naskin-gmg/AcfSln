@@ -22,6 +22,15 @@ void CGeneralSupplierGuiComp::OnGuiCreated()
 }
 
 
+void CGeneralSupplierGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	AutoTestButton->setIcon(GetIcon(":/Icons/AutoUpdate"));
+	TestButton->setIcon(GetIcon(":/Icons/Play"));
+}
+
+
 // protected slots
 
 void CGeneralSupplierGuiComp::on_TestButton_clicked()

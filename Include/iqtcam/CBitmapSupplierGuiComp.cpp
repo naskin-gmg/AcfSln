@@ -155,6 +155,18 @@ void CBitmapSupplierGuiComp::OnGuiRetranslate()
 }
 
 
+void CBitmapSupplierGuiComp::OnGuiDesignChanged()
+{
+	BaseClass::OnGuiDesignChanged();
+
+	SnapImageButton->setIcon(GetIcon(":/Icons/Camera"));
+	LiveImageButton->setIcon(GetIcon(":/Icons/AutoUpdate"));
+	SaveImageButton->setIcon(GetIcon(":/Icons/Save"));
+	SaveParamsButton->setIcon(GetIcon(":/Icons/Save"));
+	LoadParamsButton->setIcon(GetIcon(":/Icons/Open"));
+}
+
+
 // reimplemented (iqtinsp::TSupplierGuiCompBase)
 
 QWidget* CBitmapSupplierGuiComp::GetParamsWidget() const

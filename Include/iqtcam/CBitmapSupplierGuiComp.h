@@ -49,7 +49,7 @@ public:
 	CBitmapSupplierGuiComp();
 
 	// reimplemented (iimg::IBitmapProvider)
-	virtual const iimg::IBitmap* GetBitmap() const;
+	virtual const iimg::IBitmap* GetBitmap() const override;
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
@@ -63,26 +63,27 @@ protected:
 	void DoSnap(bool noGui = false);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiHidden();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiHidden() override;
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
-	virtual QWidget* GetParamsWidget() const;
+	virtual QWidget* GetParamsWidget() const override;
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
-	virtual void CreateShapes(int sceneId, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result) override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapLoaderCompPtr);

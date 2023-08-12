@@ -124,33 +124,34 @@ public:
 	CInspectionTaskGuiComp();
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
 
 protected:
 	void UpdateProcessingState();
 	void UpdateVisualElements();
 
 	// reimplemented (iqtgui::TRestorableGuiWrap)
-	virtual void OnRestoreSettings(const QSettings& settings);
-	virtual void OnSaveSettings(QSettings& settings) const;
+	virtual void OnRestoreSettings(const QSettings& settings) override;
+	virtual void OnSaveSettings(QSettings& settings) const override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateModel() const;
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiModelDetached();
+	virtual void UpdateModel() const override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnGuiModelDetached() override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiHidden();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiHidden() override;
+	virtual void OnGuiRetranslate() override;
+	virtual void OnGuiDesignChanged() override;
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected Q_SLOTS:
 	void OnEditorChanged(int index);
@@ -183,8 +184,7 @@ private:
 	*/
 	QString GetSettingsKey() const;
 
-	// static methods
-	static QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category);
+	QIcon GetCategoryIcon(istd::IInformationProvider::InformationCategory category) const;
 
 private:
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
@@ -242,6 +242,11 @@ private:
 	iqtgui::CHierarchicalCommand m_continuousExecuteCommand;
 
 	QTimer m_autoTestTimer;
+
+	QIcon m_logIcon;
+	QIcon m_infoIcon;
+	QIcon m_warningIcon;
+	QIcon m_errorIcon;
 };
 
 

@@ -69,8 +69,8 @@ public:
 	CSnapImageGuiComp();
 
 	// reimplemented (iqt2d::IViewExtender)
-	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags) override;
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr) override;
 
 protected:
 	class ParamsObserver: public imod::CSingleModelObserverBase
@@ -80,7 +80,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CSnapImageGuiComp& m_parent;
@@ -90,15 +90,15 @@ protected:
 	void UpdateButtonsState();
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
-	virtual void CreateShapes(int sceneId, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result) override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnGuiHidden();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnGuiHidden() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 protected Q_SLOTS:
 	void on_SnapImageButton_clicked();
