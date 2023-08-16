@@ -20,6 +20,7 @@ include(${ACFDIR}/Config/CMake/CustomBuild.cmake)
 include(${ACFDIR}/Config/CMake/ApplicationConfig.cmake)
 include(${ACFDIR}/Config/CMake/AcfQt.cmake)
 include(${ACFDIR}/Config/CMake/AcfStd.cmake)
+include(${ACFDIR}/Config/CMake/AcfStdGui.cmake)
 
 find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS PrintSupport REQUIRED)
 
