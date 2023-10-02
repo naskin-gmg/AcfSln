@@ -35,11 +35,11 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	m_isotropyFactor(0)
 {
 	m_printCommand.SetGroupId(iqtdoc::CMainWindowGuiComp::GI_DOCUMENT);
-	m_printCommand.setShortcut(Qt::CTRL + Qt::Key_P);
+	m_printCommand.setShortcut(Qt::CTRL | Qt::Key_P);
 	connect(&m_printCommand, SIGNAL(triggered()), this, SLOT(OnPrint()));
 	m_fileMenu.InsertChild(&m_printCommand);
 
-	m_selectAllCommand.setShortcut(Qt::CTRL + Qt::Key_A);
+	m_selectAllCommand.setShortcut(Qt::CTRL | Qt::Key_A);
 	connect(&m_selectAllCommand, SIGNAL(triggered()), this, SLOT(OnSelectAllShapes()));
 	m_editMenu.InsertChild(&m_selectAllCommand);
 
