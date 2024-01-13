@@ -186,6 +186,12 @@ int CGeneralDataSequence::GetGridSize(int dimensionIndex) const
 }
 
 
+double CGeneralDataSequence::GetSampleAt(const SampleIndex& index) const
+{
+	return GetSample(index[0], index[1]);
+}
+
+
 istd::CRange CGeneralDataSequence::GetLogicalRange(int dimensionIndex) const
 {
 	if (dimensionIndex == 0){

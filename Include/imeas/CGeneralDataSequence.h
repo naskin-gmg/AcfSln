@@ -31,37 +31,38 @@ public:
 	int GetSamplesBufferSize() const;
 
 	// reimplemented (imeas::IDataSequence)
-	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) override;
 	virtual bool CreateSequenceWithInfo(
 				const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 				int samplesCount = -1,
-				int channelsCount = -1);
-	virtual const IDataSequenceInfo* GetSequenceInfo() const;
-	virtual bool IsEmpty() const;
-	virtual void ResetSequence();
-	virtual int GetSamplesCount() const;
-	virtual int GetChannelsCount() const;
-	virtual double GetSample(int index, int channel = 0) const;
-	virtual void SetSample(int index, int channel, double value);
+				int channelsCount = -1) override;
+	virtual const IDataSequenceInfo* GetSequenceInfo() const override;
+	virtual bool IsEmpty() const override;
+	virtual void ResetSequence() override;
+	virtual int GetSamplesCount() const override;
+	virtual int GetChannelsCount() const override;
+	virtual double GetSample(int index, int channel = 0) const override;
+	virtual void SetSample(int index, int channel, double value) override;
 
 	// reimplemented (imath::ISampledFunction2d)
-	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes);
-	virtual int GetTotalSamplesCount() const;
-	virtual int GetGridSize(int dimensionIndex) const;
-	virtual istd::CRange GetLogicalRange(int dimensionIndex) const;
-	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const;
+	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes) override;
+	virtual int GetTotalSamplesCount() const override;
+	virtual int GetGridSize(int dimensionIndex) const override;
+	virtual double GetSampleAt(const SampleIndex& index) const override;
+	virtual istd::CRange GetLogicalRange(int dimensionIndex) const override;
+	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const override;
 
 	// reimplemented (imath::TIMathFunction)
-	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const;
-	virtual ResultType GetValueAt(const ArgumentType& argument) const;
+	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const override;
+	virtual ResultType GetValueAt(const ArgumentType& argument) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
 
 private:
 	typedef std::vector<double> Samples;
