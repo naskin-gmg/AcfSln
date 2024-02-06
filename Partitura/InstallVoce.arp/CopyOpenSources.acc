@@ -359,6 +359,7 @@
                                 <Value>*.html</Value>
                                 <Value>*.theme</Value>
                                 <Value>*.sdl</Value>
+                                <Value>qmldir</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
