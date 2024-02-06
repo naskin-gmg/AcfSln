@@ -525,6 +525,7 @@
                             <Values>
                                 <Value>*.qml</Value>
                                 <Value>*.qrc</Value>
+                                <Value>*.js</Value>
                                 <Value>qmldir</Value>
                             </Values>
                         </Data>
