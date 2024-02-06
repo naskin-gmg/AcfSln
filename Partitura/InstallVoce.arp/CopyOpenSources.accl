@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5079" Description="ACF"/>
-            <Version Id="1" Number="2183" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5189" Description="ACF"/>
+            <Version Id="1" Number="2199" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -12,14 +12,16 @@
         <Element ComponentName="CopyAllFiles" X="150" Y="350" Note=""/>
         <Element ComponentName="CopyBuildProjects" X="975" Y="600" Note=""/>
         <Element ComponentName="CopyCommon" X="150" Y="175" Note=""/>
-        <Element ComponentName="CopyImplOther" X="350" Y="775" Note=""/>
+        <Element ComponentName="CopyImplOther" X="350" Y="600" Note=""/>
         <Element ComponentName="CopyImplProjects" X="850" Y="125" Note=""/>
         <Element ComponentName="CopyImplResources" X="650" Y="225" Note=""/>
         <Element ComponentName="CopyImplSources" X="475" Y="125" Note=""/>
-        <Element ComponentName="CopyIncludeOther" X="200" Y="650" Note=""/>
+        <Element ComponentName="CopyIncludeOther" X="150" Y="525" Note=""/>
         <Element ComponentName="CopyIncludeProjects" X="775" Y="475" Note=""/>
         <Element ComponentName="CopyIncludeResources" X="650" Y="600" Note=""/>
         <Element ComponentName="CopyIncludeSources" X="475" Y="475" Note=""/>
+        <Element ComponentName="CopyQml" X="950" Y="250" Note=""/>
+        <Element ComponentName="CopyQmlProjects" X="1075" Y="350" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>

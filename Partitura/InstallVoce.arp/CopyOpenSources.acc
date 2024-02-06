@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5079" Description="ACF"/>
-            <Version Id="1" Number="2183" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5189" Description="ACF"/>
+            <Version Id="1" Number="2199" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -64,6 +64,8 @@
                                 <Value>CopyImplOther</Value>
                                 <Value>CopyBuildProjects</Value>
                                 <Value>Copy3rdParty</Value>
+                                <Value>CopyQml</Value>
+                                <Value>CopyQmlProjects</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -355,9 +357,8 @@
                                 <Value>*.js</Value>
                                 <Value>*.map</Value>
                                 <Value>*.html</Value>
-                                <Value>*.qml</Value>
                                 <Value>*.theme</Value>
-                                <Value>qmldir</Value>
+                                <Value>*.sdl</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -503,6 +504,81 @@
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
                         <Data IsEnabled="true" Value="2"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="CopyQml" PackageId="InstallVoce" ComponentId="CopyInfoProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>*.qml</Value>
+                                <Value>*.qrc</Value>
+                                <Value>qmldir</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Qml"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Qml"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="4"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="CopyQmlProjects" PackageId="InstallVoce" ComponentId="CopyProjectsProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Qml"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Qml"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProjectsSubstitutionTags" Type="String[]" ExportId="ProjectsSubstitutionTags">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ProjectsSubstitutionValues" Type="String[]" ExportId="ProjectsSubstitutionValues">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="-1"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WinProjectsSubstitutionTags" Type="String[]" ExportId="WinProjectsSubstitutionTags">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="WinProjectsSubstitutionValues" Type="String[]" ExportId="WinProjectsSubstitutionValues">
+                        <Data IsEnabled="false"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>
