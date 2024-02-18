@@ -1,10 +1,11 @@
-#ifndef ProcessingGuiPck_included
-#define ProcessingGuiPck_included
+#pragma once
 
 
+// ACF includes
 #include <icomp/TModelCompWrap.h>
 #include <icomp/TMakeComponentWrap.h>
 
+// ACF-Solutions includes
 #include <iprocgui/CProcessorControlGuiComp.h>
 #include <iprocgui/CDocumentProcessingManagerComp.h>
 #include <iprocgui/CDocumentProcessingCommandComp.h>
@@ -19,14 +20,11 @@ namespace ProcessingGuiPck
 
 
 typedef iprocgui::CProcessorControlGuiComp ProcessorControlGui;
-typedef iprocgui::CDocumentProcessingManagerComp DocumentProcessingManager;
-typedef iprocgui::CDocumentProcessingCommandComp DocumentProcessingCommand;
-typedef iprocgui::CProcessorCommandComp ProcessorCommand;
+typedef icomp::TModelCompWrap<iprocgui::CDocumentProcessingManagerComp> DocumentProcessingManager;
+typedef icomp::TModelCompWrap<iprocgui::CDocumentProcessingCommandComp> DocumentProcessingCommand;
+typedef icomp::TModelCompWrap < iprocgui::CProcessorCommandComp> ProcessorCommand;
 
 
 } // namespace ProcessingGuiPck
-
-
-#endif // !ProcessingGuiPck_included
 
 

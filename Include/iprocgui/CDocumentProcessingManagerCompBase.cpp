@@ -66,7 +66,7 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 		QIcon commandIcon;
 
 		if (m_commandIconPathAttrPtr.IsValid()){
-			commandIcon = QIcon(*m_commandIconPathAttrPtr);
+			commandIcon = GetIcon(*m_commandIconPathAttrPtr);
 		}
 		
 		if (*m_commandShowInToolBarAttrPtr){
@@ -74,7 +74,6 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 		}
 
 		m_processingCommand.SetGroupId(*m_commandGroupIdAttrPtr);
-	
 		m_processingCommand.SetVisuals(commandName, commandName, commandName, commandIcon);
 
 		m_rootCommands.SetVisuals(menuName, menuName, tr("Document processing actions"));
@@ -95,6 +94,22 @@ void CDocumentProcessingManagerCompBase::OnComponentDestroyed()
 
 
 // protected methods
+
+// reimplemented (ibase::TDesignSchemaHandlerWrap)
+
+void CDocumentProcessingManagerCompBase::OnDesignSchemaChanged(const QByteArray& themeId)
+{
+	BaseClass2::OnDesignSchemaChanged(themeId);
+
+	QIcon commandIcon;
+
+	if (m_commandIconPathAttrPtr.IsValid()){
+		commandIcon = GetIcon(*m_commandIconPathAttrPtr);
+	}
+
+	m_processingCommand.SetVisuals(m_processingCommand.GetName(), m_processingCommand.GetName(), m_processingCommand.GetName(), commandIcon);
+}
+
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
