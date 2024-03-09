@@ -1,8 +1,13 @@
 <RCC>
 	<qresource prefix="/Translations">
-		<file alias="AcfSln_en_US">Translations/AcfSln_en_US.qm</file>
-		<file alias="AcfSln_de_DE">Translations/AcfSln_de_DE.qm</file>
-		<file alias="AcfSln_ru_RU">Translations/AcfSln_ru_RU.qm</file>
-		<file alias="AcfSln_pl_PL">Translations/AcfSln_pl_PL.qm</file>
-	</qresource>
+    <file alias="AcfSln_de_DE">Translations/AcfSln_de_DE.qm</file>
+    <file alias="AcfSln_en_US">Translations/AcfSln_en_US.qm</file>
+    <file alias="AcfSln_fr_FR">Translations/AcfSln_fr_FR.qm</file>
+    <file alias="AcfSln_it_IT">Translations/AcfSln_it_IT.qm</file>
+    <file alias="AcfSln_jp_JP">Translations/AcfSln_jp_JP.qm</file>
+    <file alias="AcfSln_pl_PL">Translations/AcfSln_pl_PL.qm</file>
+    <file alias="AcfSln_pt_PT">Translations/AcfSln_pt_PT.qm</file>
+    <file alias="AcfSln_ru_RU">Translations/AcfSln_ru_RU.qm</file>
+    <file alias="AcfSln_zh_ZH">Translations/AcfSln_zh_ZH.qm</file>
+  </qresource>
 </RCC>
