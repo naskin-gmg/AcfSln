@@ -36,8 +36,6 @@ include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETN
 
 message("${AUX_INCLUDE_DIR}")
 
-find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core Widgets Core Gui Xml Network Svg Concurrent REQUIRED)
-
 # Include
 add_subdirectory("${INCLUDE_DIR}/ialgo/CMake" "${AUX_INCLUDE_DIR}/ialgo")
 add_subdirectory("${INCLUDE_DIR}/iauth/CMake" "${AUX_INCLUDE_DIR}/iauth")
