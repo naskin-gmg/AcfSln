@@ -13,6 +13,10 @@ endif()
 
 set(ACFSLNDIR "${CMAKE_CURRENT_LIST_DIR}/../../../AcfSln")
 
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
+find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core Widgets Core Gui Xml Network Svg Concurrent REQUIRED)
+
 include(${ACFDIR}/Config/CMake/ProjectRoot.cmake)
 
 get_target_name(TARGETNAME)
@@ -31,6 +35,8 @@ include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
+
+find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core Widgets Core Gui Xml Network Svg Concurrent REQUIRED)
 
 # Include
 add_subdirectory("${INCLUDE_DIR}/ialgo/CMake" "${AUX_INCLUDE_DIR}/ialgo")
