@@ -18,6 +18,9 @@ endif()
 set(BUILD_ARGS "dupbuild=warn")
 
 set(DEPS_CUSTOM_BUILD FileProcessingPck)
+if (TARGET BasePck)
+	list(APPEND DEPS_CUSTOM_BUILD BasePck)
+endif()
 
 include(${ACFDIR}/Config/CMake/CustomBuild.cmake)
 include(${ACFDIR}/Config/CMake/ApplicationConfig.cmake)
