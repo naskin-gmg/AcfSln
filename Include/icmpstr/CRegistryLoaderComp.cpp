@@ -223,6 +223,14 @@ int CRegistryLoaderComp::SaveToFile(
 				QString layoutFilePath = GetLayoutPath(filePath, false);
 				QFile(layoutFilePath).setPermissions(QFile::WriteUser);
 
+#if defined (Q_OS_UNIX)
+				// for *NIX systems it is required set read permission explicitly for correct reading
+				QFileInfo layoutFileInfo(layoutFilePath);
+				QFile::Permissions layoutFilePermissions = layoutFileInfo.permissions();
+				layoutFilePermissions.setFlag(QFile::ReadUser);
+				QFile(layoutFilePath).setPermissions(layoutFilePermissions);
+#endif
+
 				ifile::TFileSerializerComp<ifile::CCompactXmlFileReadArchive, ifile::CCompactXmlFileWriteArchive>::WriteArchiveEx layoutArchive(layoutFilePath, m_versionInfoCompPtr.GetPtr(), this);
 				Q_ASSERT(layoutArchive.IsStoring());
 
