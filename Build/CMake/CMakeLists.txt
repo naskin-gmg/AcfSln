@@ -13,11 +13,15 @@ endif()
 
 set(ACFSLNDIR "${CMAKE_CURRENT_LIST_DIR}/../../../AcfSln")
 
-
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
 find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS Core Widgets Core Gui Xml Network Svg Concurrent REQUIRED)
 
+if(NOT DEFINED BUILDDIR)
+	set(BUILDDIR "${CMAKE_CURRENT_LIST_DIR}/../../../")
+endif()
+
 include(${ACFDIR}/Config/CMake/ProjectRoot.cmake)
+include(${ACFSLNDIR}/Config/CMake/AcfSlnEnv.cmake)
 
 get_target_name(TARGETNAME)
 
@@ -29,10 +33,10 @@ link_directories(${ACFDIR}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 set(INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Include")
 set(IMPL_DIR "${CMAKE_CURRENT_LIST_DIR}/../../Impl")
 
-set(AUX_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}/GeneratedFiles")
+set(AUX_INCLUDE_DIR "${BUILDDIR}/AcfSln/AuxInclude/${TARGETNAME}/GeneratedFiles")
 
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../AuxInclude/${TARGETNAME}")
-include_directories("${CMAKE_CURRENT_LIST_DIR}/../../../Acf/AuxInclude/${TARGETNAME}")
+include_directories("${BUILDDIR}/AcfSln/AuxInclude/${TARGETNAME}")
+include_directories("${BUILDDIR}/Acf/AuxInclude/${TARGETNAME}")
 
 message("${AUX_INCLUDE_DIR}")
 

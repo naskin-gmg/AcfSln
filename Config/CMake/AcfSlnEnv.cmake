@@ -10,9 +10,17 @@ if(NOT DEFINED ACFSLNDIR)
 	set(ACFSLNDIR "$ENV{ACFSLNDIR}")
 endif()
 
-include_directories("${ACFSLNDIR}/AuxInclude/${TARGETNAME}")
+if(DEFINED ENV{ACFSLNDIR_BUILD})
+	set(ACFSLNDIR_BUILD "$ENV{ACFSLNDIR_BUILD}")
+else()
+	set(ACFSLNDIR_BUILD ${BUILDDIR}/AcfSln)
+endif()
+
+include_directories("${ACFSLNDIR_BUILD}/AuxInclude/${TARGETNAME}")
 include_directories("${ACFSLNDIR}/Include")
 include_directories("${ACFSLNDIR}/Impl")
 
-link_directories(${ACFSLNDIR}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
+link_directories(${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
+
+message("AcfSln link_directories ${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
 
