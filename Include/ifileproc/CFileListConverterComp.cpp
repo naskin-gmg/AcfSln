@@ -32,12 +32,8 @@ int CFileListConverterComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	int progressSessionId = 0;
+	auto progressLoggerPtr = StartProgressLogger(progressManagerPtr, true);
 	
-	if (progressManagerPtr != NULL){
-		progressSessionId = progressManagerPtr->BeginProgressSession("ConvertFiles", "Convert files", true);
-	}
-
 	int retVal = TS_OK;
 
 	CFilePathesContainer* convertedFileListPtr = dynamic_cast<CFilePathesContainer*>(outputPtr);
@@ -87,19 +83,17 @@ int CFileListConverterComp::DoProcessing(
 			filesToRemove.push_back(inputFile);
 		}
 
-		if (progressManagerPtr != NULL){
-			progressManagerPtr->OnProgress(progressSessionId, inputFileIndex * progressStep);
+		if (progressLoggerPtr != NULL){
+			progressLoggerPtr->OnProgress(inputFileIndex * progressStep);
 
-			if (progressManagerPtr->IsCanceled(progressSessionId)){
-				progressManagerPtr->EndProgressSession(progressSessionId);
-			
+			if (progressLoggerPtr->IsCanceled()){
 				return iproc::IProcessor::TS_CANCELED;
 			}
 		}
 	}
 
-	if (progressManagerPtr != NULL){
-		progressManagerPtr->OnProgress(progressSessionId, 1.0);
+	if (progressLoggerPtr != NULL){
+		progressLoggerPtr->OnProgress(1.0);
 	}
 
 	int removeFilesCount = filesToRemove.size();
@@ -108,10 +102,6 @@ int CFileListConverterComp::DoProcessing(
 		if (!QFile::remove(fileToRemove)){
 			SendErrorMessage(0, QObject::tr("File %1 could not be removed").arg(fileToRemove));
 		}
-	}
-
-	if (progressManagerPtr != NULL){
-		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return retVal;

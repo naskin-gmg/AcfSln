@@ -52,18 +52,15 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 
 	int foundLinesCount = int(caliperLines.size());
 
-	int progressSessionId = -1;
-	if (progressManagerPtr != NULL){
-		progressManagerPtr->BeginProgressSession("EdgeDistance", "Edge Distance", true);
-	}
+	auto progressLoggerPtr = StartProgressLogger(progressManagerPtr, true);
 
 	for (int lineIndex = 0; lineIndex < foundLinesCount; lineIndex++){
-		if (progressSessionId >= 0){
+		if (progressLoggerPtr != nullptr){
 			Q_ASSERT(progressManagerPtr != NULL);
 
-			progressManagerPtr->OnProgress(progressSessionId, double(lineIndex) / foundLinesCount);
+			progressLoggerPtr->OnProgress(double(lineIndex) / foundLinesCount);
 
-			if (progressManagerPtr->IsCanceled(progressSessionId)){
+			if (progressLoggerPtr->IsCanceled()){
 				return TS_CANCELED;
 			}
 		}
@@ -76,12 +73,6 @@ int CEdgeDistanceProcessorComp::DoExtractFeatures(
 		CCaliperDistanceFeature* caliperDistanceFeature = new CCaliperDistanceFeature(i2d::CLine2d(caliperLine.points[0].position, caliperLine.points[1].position), featureWeight);
 
 		results.AddFeature(caliperDistanceFeature);
-	}
-
-	if (progressSessionId >= 0){
-		Q_ASSERT(progressManagerPtr != NULL);
-
-		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return TS_OK;

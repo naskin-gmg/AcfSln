@@ -32,8 +32,6 @@ int CIterativeProcessorComp::DoProcessing(
 
 	int retVal = TS_INVALID;
 
-	int progressSessionId = -1;
-
 	iprm::TParamsPtr<iprm::ISelectionParam> processorParamsPtr(paramsPtr, *m_paramsIdAttrPtr);
 	if (processorParamsPtr.IsValid() && m_slaveProcessorCompPtr.IsValid()){
 		int iterationsCount = processorParamsPtr->GetSelectedOptionIndex();
@@ -48,9 +46,7 @@ int CIterativeProcessorComp::DoProcessing(
 			return TS_INVALID;
 		}
 
-		if (progressManagerPtr != NULL){
-			progressSessionId = progressManagerPtr->BeginProgressSession("IterativeProcessor", "Iteration");
-		}
+		auto progressLoggerPtr = StartProgressLogger(progressManagerPtr, true);
 
 		for (int iterationIndex = 0; iterationIndex < iterationsCount; iterationIndex++){
 			retVal = ProcessSlave(paramsPtr, inputPtr, outputPtr);
@@ -79,20 +75,14 @@ int CIterativeProcessorComp::DoProcessing(
 				}
 			}
 
-			if (progressSessionId >= 0){
-				Q_ASSERT(progressManagerPtr != NULL);
-				progressManagerPtr->OnProgress(progressSessionId, iterationIndex / double(iterationsCount - 1));
+			if (progressLoggerPtr != nullptr){
+				progressLoggerPtr->OnProgress(iterationIndex / double(iterationsCount - 1));
 
-				if (progressManagerPtr->IsCanceled(progressSessionId)){
+				if (progressLoggerPtr->IsCanceled()){
 					break;
 				}
 			}
 		}
-	}
-
-	if (progressSessionId >= 0){
-		Q_ASSERT(progressManagerPtr != NULL);
-		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return retVal;

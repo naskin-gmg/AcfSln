@@ -47,6 +47,16 @@ public:
 	virtual int GetTaskState(int taskId = -1) const;
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
+protected:
+	// static methods for convinient access progress manager functionality
+	static std::unique_ptr<ibase::IProgressManager> CreateSubtaskManager(
+			ibase::IProgressManager* managerPtr,
+			const QByteArray& taskId,
+			const QString& taskDescription,
+			double weight = 1.0);
+	static std::unique_ptr<ibase::IProgressLogger> StartProgressLogger(ibase::IProgressManager* managerPtr, bool isCancelable = false);
+
+
 private:
 	typedef QMap<int, int> TaskToStateMap;
 
@@ -185,6 +195,34 @@ int TSyncProcessorWrap<Base>::GetTaskState(int taskId) const
 template <class Base>
 void TSyncProcessorWrap<Base>::InitProcessor(const iprm::IParamsSet* /*paramsPtr*/)
 {
+}
+
+
+// static protected methods
+
+template <class Base>
+std::unique_ptr<ibase::IProgressManager> TSyncProcessorWrap<Base>::CreateSubtaskManager(
+		ibase::IProgressManager* managerPtr,
+		const QByteArray& taskId,
+		const QString& taskDescription,
+		double weight)
+{
+	if (managerPtr != nullptr) {
+		return managerPtr->CreateSubtaskManager(taskId, taskDescription, weight);
+	}
+
+	return nullptr;
+}
+
+
+template <class Base>
+std::unique_ptr<ibase::IProgressLogger> TSyncProcessorWrap<Base>::StartProgressLogger(ibase::IProgressManager* managerPtr, bool isCancelable)
+{
+	if (managerPtr != nullptr) {
+		return managerPtr->StartProgressLogger(isCancelable);
+	}
+
+	return nullptr;
 }
 
 

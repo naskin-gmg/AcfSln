@@ -56,10 +56,7 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 	i2d::CVector2d imageCenter = mask.GetCenter();
 
-	int progressSessionIndex = -1;
-	if (progressManagerPtr != NULL){
-		progressSessionIndex = progressManagerPtr->BeginProgressSession("LineFinder", QObject::tr("Find lines with Hough"), true);
-	}
+	auto progressLoggerPtr = StartProgressLogger(progressManagerPtr, true);
 
 	const quint8* prevLinePtr = (const quint8*)image.GetLinePtr(0);
 	const quint8* linePtr = (const quint8*)image.GetLinePtr(1);
@@ -98,12 +95,10 @@ int CHoughLineFinderComp::DoExtractFeatures(
 		prevLinePtr = linePtr;
 		linePtr = nextLinePtr;
 
-		if (progressSessionIndex >= 0){
-			Q_ASSERT(progressManagerPtr != NULL);
+		if (progressLoggerPtr != nullptr){
+			progressLoggerPtr->OnProgress(double(y) / size.GetY());
 
-			progressManagerPtr->OnProgress(progressSessionIndex, double(y) / size.GetY());
-
-			if (progressManagerPtr->IsCanceled(progressSessionIndex)){
+			if (progressLoggerPtr->IsCanceled()){
 				break;
 			}
 		}
@@ -191,12 +186,6 @@ int CHoughLineFinderComp::DoExtractFeatures(
 
 			results.AddFeature(featurePtr);
 		}
-	}
-
-	if (progressSessionIndex >= 0){
-		Q_ASSERT(progressManagerPtr != NULL);
-
-		progressManagerPtr->EndProgressSession(progressSessionIndex);
 	}
 
 	return TS_OK;

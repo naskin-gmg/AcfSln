@@ -52,7 +52,12 @@ int CProcessingResultsReviewComp::ConvertFiles(
 		SendVerboseMessage(QObject::tr("Processing input '%1' to output '%2'").arg(inputPath).arg(outputPath));
 	}
 
-	ProcessSerializer processSerializer(this, inputPath, progressManagerPtr);
+	std::unique_ptr<ibase::IProgressLogger> progressLoggerPtr;
+	if (progressManagerPtr != nullptr) {
+		progressLoggerPtr = progressManagerPtr->StartProgressLogger(true);
+	}
+
+	ProcessSerializer processSerializer(this, inputPath, std::move(progressLoggerPtr));
 
 	if (m_outputFileSerializerCompPtr->SaveToFile(processSerializer, outputPath, progressManagerPtr) == ifile::IFilePersistence::OS_OK){
 		return processSerializer.isCanceled? iproc::IProcessor::TS_CANCELED: iproc::IProcessor::TS_OK;
@@ -107,12 +112,12 @@ bool CProcessingResultsReviewComp::ProcessSingleFile(const QString& filePath, is
 // public methods of embedded class ProcessSerializer
 
 CProcessingResultsReviewComp::ProcessSerializer::ProcessSerializer(
-			const CProcessingResultsReviewComp* parentPtr,
-			const QString& path,
-			ibase::IProgressManager* progressManagerPtr)
+		const CProcessingResultsReviewComp* parentPtr,
+		const QString& path,
+		std::unique_ptr<ibase::IProgressLogger>&& progressLoggerPtr)
 :	m_parent(*parentPtr),
 	m_path(path),
-	m_progressManagerPtr(progressManagerPtr)
+	m_progressLoggerPtr(std::move(progressLoggerPtr))
 {
 	Q_ASSERT(parentPtr != NULL);
 
@@ -185,23 +190,16 @@ bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& 
 
 		int count = fileList.count();
 
-		int progressSessionId = -1;
-		if (m_progressManagerPtr != NULL){
-			progressSessionId = m_progressManagerPtr->BeginProgressSession("FileProcessing", QObject::tr("Processing files"), true);
-		}
-
 		retVal = archive.BeginMultiTag(processedFilesTag, fileTag, count);
 
 		int progressIndex = 0;
 		for(		QStringList::const_iterator iter = fileList.constBegin();
 					iter != fileList.constEnd();
 					++iter){
-			if (progressSessionId >= 0){
-				Q_ASSERT(m_progressManagerPtr != NULL);
+			if (m_progressLoggerPtr != NULL) {
+				m_progressLoggerPtr->OnProgress(progressIndex++ / count + 0.1);
 
-				m_progressManagerPtr->OnProgress(progressSessionId, progressIndex++ / count + 0.1);
-
-				if (m_progressManagerPtr->IsCanceled(progressSessionId)){
+				if (m_progressLoggerPtr->IsCanceled()) {
 					isCanceled = true;
 
 					break;
@@ -218,12 +216,6 @@ bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& 
 		}
 
 		retVal = retVal && archive.EndTag(processedFilesTag);
-
-		if (progressSessionId >= 0){
-			Q_ASSERT(m_progressManagerPtr != NULL);
-
-			m_progressManagerPtr->EndProgressSession(progressSessionId);
-		}
 
 		return retVal;		
 	}

@@ -62,7 +62,7 @@ private:
 		ProcessSerializer(
 					const CProcessingResultsReviewComp* parentPtr,
 					const QString& path,
-					ibase::IProgressManager* progressManagerPtr);
+					std::unique_ptr<ibase::IProgressLogger>&& progressLoggerPtr);
 
 		// reimplemented (iser::ISerializable)
 		virtual bool Serialize(iser::IArchive& archive);
@@ -72,7 +72,7 @@ private:
 	private:
 		const CProcessingResultsReviewComp& m_parent;
 		QString m_path;
-		ibase::IProgressManager* m_progressManagerPtr;
+		std::unique_ptr<ibase::IProgressLogger> m_progressLoggerPtr;
 	};
 
 	I_REF(ifile::IFileNameParam, m_inputPathCompPtr);

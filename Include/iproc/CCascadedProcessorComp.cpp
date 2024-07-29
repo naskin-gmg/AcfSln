@@ -3,7 +3,6 @@
 
 // ACF includes
 #include <istd/TPointerVector.h>
-#include <ibase/CDelegatedProgressManager.h>
 
 
 namespace iproc
@@ -76,20 +75,19 @@ int CCascadedProcessorComp::DoProcessing(
 			ibase::IProgressManager* progressManagerPtr)
 {
 	int processorsCount = m_processorsCompPtr.GetCount();
-	istd::TPointerVector<ibase::CDelegatedProgressManager> progressDelegators;
-	progressDelegators.SetCount(processorsCount);
+	std::vector<std::unique_ptr<ibase::IProgressManager>> progressDelegators(processorsCount);
 
 	if (progressManagerPtr != NULL){
 		int managersCount = qMin(processorsCount, m_progressIdsAttrPtr.GetCount());
 		for (int i = 0; i < managersCount; ++i){
 			const QByteArray& progressId = m_progressIdsAttrPtr[i];
-			if (!progressId.isEmpty()){
+			if (!progressId.isEmpty()) {
 				QString description = progressId;
-				if (i < m_progressDescriptionsAttrPtr.GetCount()){
+				if (i < m_progressDescriptionsAttrPtr.GetCount()) {
 					description = m_progressDescriptionsAttrPtr[i];
 				}
 
-				progressDelegators.SetElementAt(i, new ibase::CDelegatedProgressManager(progressManagerPtr, progressId, description));
+				progressDelegators[i] = progressManagerPtr->CreateSubtaskManager(progressId, description);
 			}
 		}
 	}
@@ -123,7 +121,7 @@ int CCascadedProcessorComp::DoProcessing(
 			return TS_INVALID;
 		}
 
-		int taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr, progressDelegators.GetAt(i));
+		int taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr, progressDelegators[i].get());
 		if (taskState != TS_OK){
 			return taskState;
 		}
