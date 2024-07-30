@@ -13,7 +13,7 @@ endif()
 if(DEFINED ENV{ACFSLNDIR_BUILD})
 	set(ACFSLNDIR_BUILD "$ENV{ACFSLNDIR_BUILD}")
 else()
-	set(ACFSLNDIR_BUILD ${BUILDDIR}/AcfSln)
+	set(ACFSLNDIR_BUILD ${ACFSLNDIR})
 endif()
 
 include_directories("${ACFSLNDIR_BUILD}/AuxInclude/${TARGETNAME}")
