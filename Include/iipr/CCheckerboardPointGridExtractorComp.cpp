@@ -12,7 +12,7 @@
 namespace iipr
 {
 
-struct LinesConsumer : virtual public iipr::IFeaturesConsumer
+struct LinesConsumer: virtual public iipr::IFeaturesConsumer
 {
 	struct LineInfo
 	{

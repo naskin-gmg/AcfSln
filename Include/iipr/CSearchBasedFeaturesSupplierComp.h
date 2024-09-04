@@ -77,7 +77,7 @@ protected:
 
 private:
 
-	class CalibrationList : virtual public iprm::IOptionsList
+	class CalibrationList: virtual public iprm::IOptionsList
 	{
 	public:
 		CalibrationList();
