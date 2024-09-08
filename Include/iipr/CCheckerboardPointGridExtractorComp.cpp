@@ -28,18 +28,18 @@ struct LinesConsumer: virtual public iipr::IFeaturesConsumer
 
 	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* /*isFullPtr*/) override
 	{
-		if (featurePtr != NULL) {
+		if (featurePtr != NULL){
 			const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(featurePtr);
 			LineInfo info;
-			if (linePtr != NULL) {
+			if (linePtr != NULL){
 				info.line = *linePtr;
 				info.weight = 1;
 			}
 			else {
 				imath::CVarVector vector = featurePtr->GetValues();
-				if (vector.GetElementsCount() >= 4) {
+				if (vector.GetElementsCount() >= 4){
 					info.line = i2d::CLine2d(vector[0], vector[1], vector[2], vector[3]);
-					if (vector.GetElementsCount() > 4) {
+					if (vector.GetElementsCount() > 4){
 						info.weight = vector[4];
 					}
 					else {
@@ -48,7 +48,7 @@ struct LinesConsumer: virtual public iipr::IFeaturesConsumer
 				}
 			}
 
-			if (!info.line.IsNull()) {
+			if (!info.line.IsNull()){
 				lines.push_back(info);
 			}
 		}
@@ -70,7 +70,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
 	LinesConsumer processedLines;
-	if (m_lineFinderCompPtr->DoExtractFeatures(paramsPtr, image, processedLines) != iproc::IProcessor::TS_OK) {
+	if (m_lineFinderCompPtr->DoExtractFeatures(paramsPtr, image, processedLines) != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, QObject::tr("LineFinder is undefined"));
 		return TS_INVALID;
 	}
@@ -78,11 +78,11 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	//filter nearest parallel lines
 	QMap<int, i2d::CLine2d> allLines;
 	QSet<int> missedLines;
-	for (int i = 0; i < processedLines.lines.size(); ++i) {
+	for (int i = 0; i < processedLines.lines.size(); ++i){
 		i2d::CLine2d line1 = processedLines.lines[i].line;
 
 		//aggregate nearest lines
-		for (int j = i + 1; j < processedLines.lines.size(); ++j) {
+		for (int j = i + 1; j < processedLines.lines.size(); ++j){
 			const i2d::CLine2d & line2 = processedLines.lines[j].line;
 			double distance =
 				line1.GetExtendedDistance(line2.GetPoint1()) +
@@ -90,21 +90,21 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 				line1.GetExtendedDistance(line1.GetPoint1()) +
 				line1.GetExtendedDistance(line1.GetPoint2());
 
-			if (distance < 8) {
+			if (distance < 8){
 				const double a1 = (line1.GetPoint1() - line2.GetPoint1()).GetLength2();
 				const double a2 = (line1.GetPoint1() - line2.GetPoint2()).GetLength2();
 				const double a3 = (line1.GetPoint2() - line2.GetPoint1()).GetLength2();
 				const double a4 = (line1.GetPoint2() - line2.GetPoint2()).GetLength2();
 
-				if (a1 >= a2 && a1 >= a3 && a1 >= a4) {
+				if (a1 >= a2 && a1 >= a3 && a1 >= a4){
 					line1.SetPoint1(line1.GetPoint1());
 					line1.SetPoint2(line2.GetPoint1());
 				}
-				else if (a2 > a1 && a2 > a3 && a2 >= a4) {
+				else if (a2 > a1 && a2 > a3 && a2 >= a4){
 					line1.SetPoint1(line1.GetPoint1());
 					line1.SetPoint2(line2.GetPoint2());
 				}
-				else if (a3 >= a1 && a3 >= a2 && a3 >= a4) {
+				else if (a3 >= a1 && a3 >= a2 && a3 >= a4){
 					line1.SetPoint1(line1.GetPoint2());
 					line1.SetPoint2(line2.GetPoint1());
 				}
@@ -120,13 +120,13 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	}
 
 	std::vector<i2d::CLine2d> filteredLines;
-	for (QMap<int, i2d::CLine2d>::iterator it = allLines.begin(); it != allLines.end(); ++it) {
-		if (!missedLines.contains(it.key())) {
+	for (QMap<int, i2d::CLine2d>::iterator it = allLines.begin(); it != allLines.end(); ++it){
+		if (!missedLines.contains(it.key())){
 			filteredLines.push_back(it.value());
 		}
 	}
 
-	if (filteredLines.empty()) {
+	if (filteredLines.empty()){
 		SendErrorMessage(0, QObject::tr("No enough lines found"));
 		return TS_INVALID;
 	}
@@ -134,7 +134,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	//clusterize lines per its angle
 	//make 1D metric space with angle
 	struct LineWithAngle {
-		LineWithAngle() :  m_lineRef(NULL),m_angle(0) {}
+		LineWithAngle() :  m_lineRef(NULL),m_angle(0){}
 		LineWithAngle(const i2d::CLine2d & line) :
 			m_lineRef(&line)
 		{
@@ -154,7 +154,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	//calc cluster vertexes
 	std::vector<LineWithAngle> vert;
 	vert.reserve(filteredLines.size());
-	for (std::vector<i2d::CLine2d>::iterator lineIt = filteredLines.begin(); lineIt != filteredLines.end(); ++lineIt) {
+	for (std::vector<i2d::CLine2d>::iterator lineIt = filteredLines.begin(); lineIt != filteredLines.end(); ++lineIt){
 		vert.push_back(LineWithAngle(*lineIt));
 	}
 
@@ -168,10 +168,10 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 
 	struct AngleEdge {
 		AngleEdge() :
-			m_leftLineIndex(0), m_angleDiff(0) {
+			m_leftLineIndex(0), m_angleDiff(0){
 		}
 		AngleEdge(size_t leftLineIndex, double angleDiff) :
-			m_leftLineIndex(leftLineIndex), m_angleDiff(angleDiff) {
+			m_leftLineIndex(leftLineIndex), m_angleDiff(angleDiff){
 		}
 
 		size_t m_leftLineIndex;
@@ -181,7 +181,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	//calc cluster edges like angle for edge length
 	std::vector<AngleEdge> edges;
 	edges.reserve(vert.size() - 1);
-	for (size_t i = 0; i < vert.size() - 1; ++i) {
+	for (size_t i = 0; i < vert.size() - 1; ++i){
 		edges.push_back(AngleEdge(i, std::abs(vert[i + 1].m_angle - vert[i].m_angle)));
 	}
 
@@ -193,7 +193,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	} AngleDiffLess;
 	std::sort(edges.begin(), edges.end(), AngleDiffLess);
 
-	if (edges.size() < 2) {
+	if (edges.size() < 2){
 		SendErrorMessage(0, QObject::tr("No enough lines found"));
 		return TS_INVALID;
 	}
@@ -203,19 +203,19 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	const AngleEdge & clusterEdge2 = firstIsLeft ? edges[1] : edges[0];
 	std::vector<const LineWithAngle*> cluster[3];
 
-	for (size_t i = 0; i < clusterEdge1.m_leftLineIndex + 1; i++) {
+	for (size_t i = 0; i < clusterEdge1.m_leftLineIndex + 1; i++){
 		cluster[0].push_back(&vert[i]);
 	}
-	for (size_t i = clusterEdge1.m_leftLineIndex + 1; i < clusterEdge2.m_leftLineIndex + 1; i++) {
+	for (size_t i = clusterEdge1.m_leftLineIndex + 1; i < clusterEdge2.m_leftLineIndex + 1; i++){
 		cluster[1].push_back(&vert[i]);
 	}
-	for (size_t i = clusterEdge2.m_leftLineIndex + 1; i < vert.size(); i++) {
+	for (size_t i = clusterEdge2.m_leftLineIndex + 1; i < vert.size(); i++){
 		cluster[2].push_back(&vert[i]);
 	}
 
 	double angleCluster[3] = {0, 0, 0};
-	for (int i = 0; i < 3; ++i) {
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[i].begin(); it != cluster[i].end(); ++it) {
+	for (int i = 0; i < 3; ++i){
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[i].begin(); it != cluster[i].end(); ++it){
 			angleCluster[i] += (*it)->m_angle;
 		}
 		angleCluster[i] /= cluster[i].size();
@@ -232,50 +232,50 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 
 	std::vector<i2d::CLine2d> mergeLines[2];
 	//merge 3 clusters to 2 clusters
-	if (a1 < a2 && a1 < a3) {
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it) {
+	if (a1 < a2 && a1 < a3){
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it){
 			mergeLines[0].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it){
 			mergeLines[0].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it){
 			mergeLines[1].push_back(*((*it)->m_lineRef));
 		}
 	}
-	else if (a2 < a1 && a2 < a3) {
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it) {
+	else if (a2 < a1 && a2 < a3){
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it){
 			mergeLines[0].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it){
 			mergeLines[1].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it){
 			mergeLines[1].push_back(*((*it)->m_lineRef));
 		}
 	}
 	else {
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[0].begin(); it != cluster[0].end(); ++it){
 			mergeLines[0].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[2].begin(); it != cluster[2].end(); ++it){
 			mergeLines[0].push_back(*((*it)->m_lineRef));
 		}
-		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it) {
+		for (std::vector<const LineWithAngle*>::iterator it = cluster[1].begin(); it != cluster[1].end(); ++it){
 			mergeLines[1].push_back(*((*it)->m_lineRef));
 		}
 	}
 
 	double vanAngle[2];
-	for (int i = 0; i < 2; ++i) {
-		for (std::vector<i2d::CLine2d>::iterator lineIt = mergeLines[i].begin(); lineIt != mergeLines[i].end(); ++lineIt) {
+	for (int i = 0; i < 2; ++i){
+		for (std::vector<i2d::CLine2d>::iterator lineIt = mergeLines[i].begin(); lineIt != mergeLines[i].end(); ++lineIt){
 			double angle = lineIt->GetDiffVector().GetAngle();
 
-			if (angle < 0) {
+			if (angle < 0){
 				angle += I_2PI;
 			}
 
-			if (angle > I_PI) {
+			if (angle > I_PI){
 				angle -= I_PI;
 			}
 
@@ -285,7 +285,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	}
 
 	std::vector<i2d::CLine2d> vanLines[2];
-	if (sin(vanAngle[0]) > sin(vanAngle[1])) { //0=X 1=Y
+	if (sin(vanAngle[0]) > sin(vanAngle[1])){ //0=X 1=Y
 		vanLines[0] = mergeLines[0];
 		vanLines[1] = mergeLines[1];
 	}
@@ -316,10 +316,10 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 	crossPositions->SetSize(0, int(vanLines[0].size()));
 	crossPositions->SetSize(1, int(vanLines[1].size()));
 
-	for (int axisYLineIndex = 0; axisYLineIndex < int(vanLines[1].size()); ++axisYLineIndex) {
+	for (int axisYLineIndex = 0; axisYLineIndex < int(vanLines[1].size()); ++axisYLineIndex){
 		const i2d::CLine2d& axisYLine = vanLines[1][axisYLineIndex];
 
-		for (int axisXLineIndex = 0; axisXLineIndex < int(vanLines[0].size()); ++axisXLineIndex) {
+		for (int axisXLineIndex = 0; axisXLineIndex < int(vanLines[0].size()); ++axisXLineIndex){
 			const i2d::CLine2d& axisXLine = vanLines[0][axisXLineIndex];
 
 			i2d::CVector2d crossPoint;
@@ -332,7 +332,7 @@ int CCheckerboardPointGridExtractorComp::DoExtractFeatures(
 		}
 	}
 
-	if (m_resultConsumerCompPtr.IsValid()) {
+	if (m_resultConsumerCompPtr.IsValid()){
 		ilog::CExtMessage* messagePtr = new ilog::CExtMessage(
 			istd::IInformationProvider::IC_INFO,
 			0, QObject::tr("Found %1 point(s)").arg(crossPositions->GetElements().size()), "Chessboard Point Grid Extractor"
@@ -363,17 +363,17 @@ int CCheckerboardPointGridExtractorComp::DoProcessing(
 	ibase::IProgressManager* progressManagerPtr)
 {
 	const iimg::IBitmap* inputBitmapPtr = dynamic_cast<const iimg::IBitmap*>(inputPtr);
-	if (inputBitmapPtr == NULL) {
+	if (inputBitmapPtr == NULL){
 		SendCriticalMessage(0, "Input image is not defined");
 		return TS_INVALID;
 	}
 
-	if (outputPtr == NULL) {
+	if (outputPtr == NULL){
 		return TS_OK;
 	}
 
 	iipr::IFeaturesConsumer* outputConsumerPtr = dynamic_cast<iipr::IFeaturesConsumer*>(outputPtr);
-	if (outputConsumerPtr == NULL) {
+	if (outputConsumerPtr == NULL){
 		return TS_INVALID;
 	}
 

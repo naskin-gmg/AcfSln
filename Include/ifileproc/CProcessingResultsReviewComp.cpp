@@ -53,7 +53,7 @@ int CProcessingResultsReviewComp::ConvertFiles(
 	}
 
 	std::unique_ptr<ibase::IProgressLogger> progressLoggerPtr;
-	if (progressManagerPtr != nullptr) {
+	if (progressManagerPtr != nullptr){
 		progressLoggerPtr = progressManagerPtr->StartProgressLogger(true);
 	}
 
@@ -196,10 +196,10 @@ bool CProcessingResultsReviewComp::ProcessSerializer::Serialize(iser::IArchive& 
 		for(		QStringList::const_iterator iter = fileList.constBegin();
 					iter != fileList.constEnd();
 					++iter){
-			if (m_progressLoggerPtr != NULL) {
+			if (m_progressLoggerPtr != NULL){
 				m_progressLoggerPtr->OnProgress(progressIndex++ / count + 0.1);
 
-				if (m_progressLoggerPtr->IsCanceled()) {
+				if (m_progressLoggerPtr->IsCanceled()){
 					isCanceled = true;
 
 					break;

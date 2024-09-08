@@ -26,9 +26,9 @@ struct PointGridConsumer : public iipr::IFeaturesConsumer
 
 	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* /*isFullPtr = NULL*/) override
 	{
-		if (featurePtr != NULL) {
+		if (featurePtr != NULL){
 			const icalib::CPointGrid* pointGridPtr = dynamic_cast<const icalib::CPointGrid*>(featurePtr);
-			if (pointGridPtr != NULL) {
+			if (pointGridPtr != NULL){
 				m_points.CopyFrom(*pointGridPtr);
 			}
 
@@ -58,23 +58,23 @@ bool CPerspectiveCalibrationSupplierComp::CalculateCalibration(const iimg::IBitm
 
 	const iprm::IParamsSet* paramsPtr = GetModelParametersSet();
 
-	if (!m_pointGridExtractorCompPtr.IsValid()) {
+	if (!m_pointGridExtractorCompPtr.IsValid()){
 		SendErrorMessage(0, "Points grid extractor is undefined");
 		return false;
 	}
 
 	PointGridConsumer imagePoints;
-	if (m_pointGridExtractorCompPtr->DoExtractFeatures(paramsPtr, image, imagePoints) != iproc::IProcessor::TS_OK) {
+	if (m_pointGridExtractorCompPtr->DoExtractFeatures(paramsPtr, image, imagePoints) != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Can not extract of points grid");
 		return false;
 	}
 
 	double cellSize = *m_defaultCellSizeAttrPtr;
-	if (m_cellSizeParamId.IsValid()) {
+	if (m_cellSizeParamId.IsValid()){
 		iprm::TParamsPtr<imeas::INumericValue> checkboardParamsPtr(paramsPtr, *m_cellSizeParamId);
-		if (checkboardParamsPtr.IsValid()) {
+		if (checkboardParamsPtr.IsValid()){
 			imath::CVarVector params = checkboardParamsPtr->GetValues();
-			if (params.GetElementsCount() > 0) {
+			if (params.GetElementsCount() > 0){
 				cellSize = params.GetElement(0);
 			}
 		}
@@ -145,7 +145,7 @@ int CPerspectiveCalibrationSupplierComp::ProduceObject(ProductType& result) cons
 
 	Timer performanceTimer(this, "Perspective calibration");
 
-	if (!CalculateCalibration(*bitmapPtr, result)) {
+	if (!CalculateCalibration(*bitmapPtr, result)){
 		return WS_FAILED;
 	}
 

@@ -102,11 +102,11 @@ bool CSimpleNumericValue::Serialize(iser::IArchive& archive)
 			if (
 				valueListInfo.GetOptionsCount() == currValues.GetElementsCount() &&
 				currValues.GetElementsCount() > m_values.GetElementsCount()
-			) {
+			){
 				int i = m_values.GetElementsCount();
 				m_values.SetElementsCount(valueListInfo.GetOptionsCount(), 0);
 
-				for (; i < currValues.GetElementsCount(); i++) {
+				for (; i < currValues.GetElementsCount(); i++){
 					m_values[i] = currValues[i];
 				}
 			}

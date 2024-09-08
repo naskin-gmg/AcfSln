@@ -28,7 +28,7 @@ int CProcessedAcquisitionComp::DoProcessing(
 			istd::IChangeable* outputPtr,
 			ibase::IProgressManager* /*progressManagerPtr*/)
 {
-	if (!m_bitmapFactCompPtr.IsValid()) {
+	if (!m_bitmapFactCompPtr.IsValid()){
 		SendErrorMessage(0, "Bitmap factory was not set");
 
 		return TS_INVALID;
@@ -49,7 +49,7 @@ int CProcessedAcquisitionComp::DoProcessing(
 	if (retVal == TS_OK){
 		if (m_processorCompPtr.IsValid()){
 			istd::TDelPtr<iimg::IBitmap> tempBitmapPtr(m_bitmapFactCompPtr.CreateInstance());
-			if (!tempBitmapPtr.IsValid()) {
+			if (!tempBitmapPtr.IsValid()){
 				SendErrorMessage(0, "Temporary bitmap could not be created");
 
 				return TS_INVALID;

@@ -57,8 +57,8 @@ TLogoutEventHandlerWrap<BaseClass>::TLogoutEventHandlerWrap()
 template<class BaseClass>
 void TLogoutEventHandlerWrap<BaseClass>::EnableLogoutHandler(bool enable)
 {
-	if (m_isEnabled != enable) {
-		if (enable == true) {
+	if (m_isEnabled != enable){
+		if (enable == true){
 			QCoreApplication::instance()->installEventFilter(&m_eventFilter);
 		}
 		else {
@@ -86,10 +86,10 @@ TLogoutEventHandlerWrap<BaseClass>::EventFilter::EventFilter(TLogoutEventHandler
 template<class BaseClass>
 bool TLogoutEventHandlerWrap<BaseClass>::EventFilter::eventFilter(QObject* /*object*/, QEvent* event)
 {
-	if (event->type() == CLogoutEvent::type()) {
+	if (event->type() == CLogoutEvent::type()){
 		CLogoutEvent* logoutEventPtr = dynamic_cast<CLogoutEvent*>(event);
-		if (logoutEventPtr != nullptr) {
-			if (!m_parent.OnTryToLogout()) {
+		if (logoutEventPtr != nullptr){
+			if (!m_parent.OnTryToLogout()){
 				logoutEventPtr->accept();
 				logoutEventPtr->CancelLogout();
 

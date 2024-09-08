@@ -95,7 +95,7 @@ int CSnapBitmapSupplierCompBase::ProduceObject(ProductType& result) const
 
 						result.first.SetPtr(affineCalibrationPtr);
 					}
-					else if (result.second->GetCalibration()) {
+					else if (result.second->GetCalibration()){
 						result.first.SetCastedOrRemove(result.second->GetCalibration()->CloneMe());
 					}
 					else{

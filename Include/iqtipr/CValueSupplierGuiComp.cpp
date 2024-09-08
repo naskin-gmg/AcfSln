@@ -69,7 +69,7 @@ void CValueSupplierGuiComp::OnSupplierParamsChanged()
 void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	iview::CLineShape* lineShapePtr = new iview::CLineShape();
-	if (lineShapePtr != NULL) {
+	if (lineShapePtr != NULL){
 		lineShapePtr->SetVisible(m_isResultVisible);
 		lineShapePtr->SetEditablePosition(false);
 

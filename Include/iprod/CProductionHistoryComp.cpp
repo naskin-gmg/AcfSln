@@ -539,10 +539,10 @@ void CProductionHistoryComp::OnHistoryChunkReady(bool lastChunk)
 {
 	const CHistoryReader::HistoryChunk& historyChunk = m_historyReaderPtr->GetHistoryChunk();
 
-	if (!historyChunk.empty()) {
+	if (!historyChunk.empty()){
 		istd::CChangeNotifier changeNotifier(this);
 
-		for (int i = 0; i < historyChunk.size(); ++i) {
+		for (int i = 0; i < historyChunk.size(); ++i){
 			const PartInfo& partInfo = historyChunk[i];
 
 			QWriteLocker locker(&m_historyItemsLock);

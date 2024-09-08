@@ -31,7 +31,7 @@ bool CPointGrid::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 
 	retVal = retVal && archive.BeginTag(sizeTag);
-	if (archive.IsStoring()) {
+	if (archive.IsStoring()){
 		istd::CIndex2d size = GetSizes();
 
 		retVal = retVal && archive.Process(size[0]);
@@ -43,7 +43,7 @@ bool CPointGrid::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(size[0]);
 		retVal = retVal && archive.Process(size[1]);
 
-		if (!retVal) {
+		if (!retVal){
 			return false;
 		}
 

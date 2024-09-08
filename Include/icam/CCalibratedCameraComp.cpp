@@ -46,7 +46,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 				}
 
 				// new
-				if (bitmapPattern == s_resolutionPatternXY && !qIsNaN(value) && (value > 0) && !qIsNaN(value2) && (value2 > 0)) {
+				if (bitmapPattern == s_resolutionPatternXY && !qIsNaN(value) && (value > 0) && !qIsNaN(value2) && (value2 > 0)){
 					resolutionX = value;
 					resolutionY = value2;
 					return true;
@@ -83,7 +83,7 @@ bool CCalibratedCameraComp::ReadImageResolution(const iimg::IBitmap& bitmap, dou
 					}
 				}
 
-				if (bitmapPattern == s_resolutionPatternXY) {
+				if (bitmapPattern == s_resolutionPatternXY){
 					union {
 						quint8 data[8];
 						double value;

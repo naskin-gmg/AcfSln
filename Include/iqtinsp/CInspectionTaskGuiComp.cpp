@@ -732,7 +732,7 @@ void CInspectionTaskGuiComp::OnAutoTest()
 		return;
 	}
 
-	if (m_testStarted) {
+	if (m_testStarted){
 		return;
 	}
 
@@ -753,7 +753,7 @@ void CInspectionTaskGuiComp::OnAutoTest()
 
 	m_testStarted = false;
 
-	if (AutoTestButton->isChecked()) {
+	if (AutoTestButton->isChecked()){
 		m_autoTestTimer.start();
 	}
 }
