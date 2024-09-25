@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5237" Description="ACF"/>
-            <Version Id="1" Number="2215" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5240" Description="ACF"/>
+            <Version Id="1" Number="2216" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -670,6 +670,8 @@
                         <Data IsEnabled="true">
                             <Values>
                                 <Value>*.sdl</Value>
+                                <Value>*.txt</Value>
+                                <Value>*.pro</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
@@ -683,7 +685,7 @@
                         <Data IsEnabled="true" Value="Sdl"/>
                     </AttributeInfo>
                     <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
-                        <Data IsEnabled="true" Value="2"/>
+                        <Data IsEnabled="true" Value="3"/>
                     </AttributeInfo>
                 </AttributeInfoMap>
             </Data>

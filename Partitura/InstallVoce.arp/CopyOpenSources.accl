@@ -2,8 +2,8 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5237" Description="ACF"/>
-            <Version Id="1" Number="2215" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5240" Description="ACF"/>
+            <Version Id="1" Number="2216" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
@@ -24,7 +24,7 @@
         <Element ComponentName="CopyPartituraUpgradeScript" X="325" Y="600" Note=""/>
         <Element ComponentName="CopyQml" X="975" Y="225" Note=""/>
         <Element ComponentName="CopyQmlProjects" X="1075" Y="350" Note=""/>
-        <Element ComponentName="CopySdl" X="725" Y="750" Note=""/>
+        <Element ComponentName="CopySdl" X="750" Y="725" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
 </Acf>
