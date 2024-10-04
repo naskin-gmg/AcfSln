@@ -2,9 +2,9 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="4929" Description="ACF"/>
-            <Version Id="1" Number="2139" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="331010" Description="Qt Framework"/>
+            <Version Id="0" Number="5249" Description="ACF"/>
+            <Version Id="1" Number="2217" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy common files for each distributions</Description>
@@ -357,6 +357,7 @@
                                 <Value>Tortoise</Value>
                                 <Value>Bin</Value>
                                 <Value>Lib</Value>
+                                <Value>IntegrationTest</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
