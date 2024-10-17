@@ -12,10 +12,6 @@ if(WIN32)
 	set(ACF_CONVERT_CONFIG  "${PROJECT_SOURCE_DIR}/../../../Config/BaseOnly.awc")
 endif()
 
-if(APPLE)
-	set(CMAKE_MACOSX_BUNDLE "on")
-endif()
-
 set(DEPS_CUSTOM_BUILD FileProcessingPck)
 if (TARGET BasePck)
 	list(APPEND DEPS_CUSTOM_BUILD BasePck)
@@ -41,3 +37,8 @@ if(WIN32)
 	unset(listOptions)
 endif()
 
+mac_deploy_qt(
+	REMOVE_DEBUGSYM
+	TARGET ${PROJECT_NAME}
+	TARGET_FILE_NAME ${PROJECT_NAME}
+)
