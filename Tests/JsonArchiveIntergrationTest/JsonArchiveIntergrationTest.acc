@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acf>
+    <AcfHeader>
+        <VersionInfos>
+            <Version Id="0" Number="5283" Description="ACF"/>
+            <Version Id="1" Number="2221" Description="ACF-Solutions"/>
+            <Version Id="1023" Number="394499" Description="Qt Framework"/>
+        </VersionInfos>
+    </AcfHeader>
+    <Description></Description>
+    <Keywords></Keywords>
+    <ElementsList>
+        <Element Id="ConsoleLog" PackageId="BasePck" ComponentId="ConsoleLog">
+            <Data IsEnabled="true" Flags="1">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="JsonFileSerializer" PackageId="FilePck" ComponentId="JsonFileSerializer">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="AutoCreatePath" Type="Boolean" ExportId="">
+                        <Data IsEnabled="true" Value="true"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="">
+                        <Data IsEnabled="true" Value="ConsoleLog"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
+        <Element Id="OriginalReceipt" PackageId="JsonSerializeTestVoce" ComponentId="Receipt">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+        <Element Id="Receipt" PackageId="JsonSerializeTestVoce" ComponentId="Receipt">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap/>
+            </Data>
+        </Element>
+    </ElementsList>
+    <EmbeddedRegistriesList/>
+    <ExportedInterfaces>
+        <Interface InterfaceId="ifile::IFilePersistence" ComponentId="JsonFileSerializer"/>
+        <Interface InterfaceId="ilog::IMessageConsumer" ComponentId="ConsoleLog"/>
+    </ExportedInterfaces>
+    <ExportedComponents>
+        <Component ExportedId="JsonFileSerializer" ComponentId="JsonFileSerializer"/>
+        <Component ExportedId="OriginalReceipt" ComponentId="OriginalReceipt"/>
+        <Component ExportedId="Receipt" ComponentId="Receipt"/>
+    </ExportedComponents>
+</Acf>
