@@ -118,3 +118,10 @@ add_dependencies(XpcEditor FileProcessingPck)
 add_subdirectory("${IMPL_DIR}/CompositorExe/CMake" "${AUX_INCLUDE_DIR}/Compositor")
 add_dependencies(Compositor FileProcessingPck)
 endif()
+
+
+#-------- Tests -----------
+if (BUILD_TESTING)
+	add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../../Tests/CMake" "${AUX_INCLUDE_DIR}/Tests")
+endif()
+
