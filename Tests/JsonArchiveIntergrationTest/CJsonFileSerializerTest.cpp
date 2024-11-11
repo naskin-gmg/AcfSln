@@ -196,8 +196,22 @@ void CJsonFileSerializerTest::JsonArchiveParamsSerializeTest()
 
 	SendInfoMessage(1, QString("Saving to file '%1'...").arg(m_jsonTempFilePtr->fileName()), __func__);
 
-	const bool isSaved = m_jsonFilePersistancePtr->SaveToFile(*paramsPtr, m_jsonTempFilePtr->fileName());
-	QVERIFY2(isSaved, "Unable to save file");
+	const int saveStatus = m_jsonFilePersistancePtr->SaveToFile(*paramsPtr, m_jsonTempFilePtr->fileName());
+	QVERIFY2(saveStatus == ifile::IFilePersistence::OS_OK, "Unable to save file");
+
+	// close file if it is open, to read file from begin
+	if (!m_jsonTempFilePtr->isOpen()){
+		m_jsonTempFilePtr->close();
+	}
+	m_jsonTempFilePtr->open();
+	const QByteArray fileData = m_jsonTempFilePtr->readAll();
+	m_jsonTempFilePtr->close();
+
+	QJsonParseError jsonParseError;
+	QJsonObject savedJsonObject = QJsonDocument::fromJson(fileData, &jsonParseError).object();
+
+	QVERIFY2(jsonParseError.error == QJsonParseError::NoError,
+			 QString("Saved JSON is NOT valid. Error: '%1' at '%2'. \n DATA: \n %3").arg(jsonParseError.errorString(), QString::number(jsonParseError.offset), qPrintable(fileData)).toLocal8Bit());
 }
 
 
@@ -205,8 +219,8 @@ void CJsonFileSerializerTest::JsonArchiveParamsDeserializeTest()
 {
 	SendInfoMessage(2, QString("Loading from file'%1' ...").arg(m_jsonTempFilePtr->fileName()), __func__);
 
-	const bool isLoaded = m_jsonFilePersistancePtr->SaveToFile(*m_serializableObjectPtr, m_jsonTempFilePtr->fileName());
-	QVERIFY2(isLoaded, "Unable to load file");
+	const int loadedStatus = m_jsonFilePersistancePtr->LoadFromFile(*m_serializableObjectPtr, m_jsonTempFilePtr->fileName());
+	QVERIFY2(loadedStatus == ifile::IFilePersistence::OS_OK, "Unable to load file");
 }
 
 
