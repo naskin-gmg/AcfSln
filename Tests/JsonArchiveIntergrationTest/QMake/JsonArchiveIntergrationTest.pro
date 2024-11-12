@@ -1,7 +1,7 @@
 TARGET = JsonArchiveIntergrationTest
 
-include(../../../../Config/QMake/ApplicationConfig.pri)
-include(../../../../Config/QMake/QtBaseConfig.pri)
+include($(ACFCONFIGDIR)/QMake/ApplicationConfig.pri)
+include($(ACFCONFIGDIR)/QMake/QtBaseConfig.pri)
 
 LIBS += -L../../../Lib/$$COMPILER_DIR
 LIBS += -listd -liser -liprm -litest -limeas
@@ -10,7 +10,13 @@ QT += core gui testlib
 
 CONFIG += console
 
-include(../../../..//Config/QMake/AcfQt.pri)
-include(../../../..//Config/QMake/AcfStd.pri)
-include(../../../..//Config/QMake/CustomBuild.pri)
+# Set configuration of custom builds:
+# ARX Compiler:
+ARXC_CONFIG = $$PWD/../../Config/AcfSlnTestConfig.awc
+ARXC_FILES += $$files($$_PRO_FILE_PWD_/../*.acc, false)
+ARXC_OUTDIR = $$OUT_PWD/$$AUXINCLUDEPATH/GeneratedFiles/$$TARGET
+
+include($(ACFCONFIGDIR)/QMake/AcfQt.pri)
+include($(ACFCONFIGDIR)/QMake/AcfStd.pri)
+include($(ACFCONFIGDIR)/QMake/CustomBuild.pri)
 

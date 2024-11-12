@@ -2,15 +2,15 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5283" Description="ACF"/>
+            <Version Id="0" Number="5271" Description="ACF"/>
             <Version Id="1" Number="2221" Description="ACF-Solutions"/>
-            <Version Id="1023" Number="394499" Description="Qt Framework"/>
+            <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <PositionMap>
         <Element ComponentName="ConsoleLog" X="625" Y="550" Note=""/>
         <Element ComponentName="JsonFileSerializer" X="750" Y="375" Note=""/>
-        <Element ComponentName="OriginalReceipt" X="375" Y="375" Note=""/>
+        <Element ComponentName="OriginalReceipt" X="350" Y="375" Note=""/>
         <Element ComponentName="Receipt" X="550" Y="375" Note=""/>
     </PositionMap>
     <EmbeddedRegistries/>
