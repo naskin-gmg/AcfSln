@@ -122,6 +122,7 @@ endif()
 
 #-------- Tests -----------
 if (BUILD_TESTING)
-	add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../../Tests/CMake" "${AUX_INCLUDE_DIR}/Tests")
+	add_subdirectory("../../Tests/JsonArchiveIntergrationTest/CMake" "${AUX_INCLUDE_DIR}/Tests/JsonArchiveIntergrationTest")
+	add_dependencies(JsonArchiveIntergrationTest imeas)
 endif()
 

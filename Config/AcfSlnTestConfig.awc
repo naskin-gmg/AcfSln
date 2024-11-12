@@ -9,7 +9,7 @@
         <FilePath>$(ACFSLNDIR)/Config/AcfSlnConfig.awc</FilePath> 
     </ConfigFiles>
     <PackageDirs>
-        <Dir>../Partitura</Dir>
+        <Dir>../Tests/Partitura</Dir>
     </PackageDirs>
     <PackageFiles/>
     <RegistryFiles/>
