@@ -30,7 +30,7 @@ BEGIN
             VALUE "FileDescription", "ACF configuration files editor"
             VALUE "FileVersion", "$AcfVersion:1$"
             VALUE "InternalName", "XpcEditor"
-            VALUE "LegalCopyright", "Copyright (C) 2012-2014 Witold Gantzke and Kirill Lepskiy"
+            VALUE "LegalCopyright", "Copyright (C) 2012-2024 Witold Gantzke and Kirill Lepskiy"
             VALUE "OriginalFilename", "XpcEditor.exe"
             VALUE "ProductName", "ACF-Solutions"
             VALUE "ProductVersion", "$AcfVersion:1$"

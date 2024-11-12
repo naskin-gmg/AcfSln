@@ -30,7 +30,7 @@ BEGIN
             VALUE "FileDescription", "ACF component topology editor"
             VALUE "FileVersion", "$AcfVersion:1$"
             VALUE "InternalName", "Compositor"
-            VALUE "LegalCopyright", "Copyright (C) 2008-2015 Witold Gantzke and Kirill Lepskiy"
+            VALUE "LegalCopyright", "Copyright (C) 2008-2024 Witold Gantzke and Kirill Lepskiy"
             VALUE "OriginalFilename", "Compositor.exe"
             VALUE "ProductName", "ACF-Solutions"
             VALUE "ProductVersion", "$AcfVersion:1$"
