@@ -22,5 +22,5 @@ include_directories("${ACFSLNDIR}/Impl")
 
 link_directories(${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME})
 
-message("AcfSln link_directories ${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
+message(VERBOSE "AcfSln link_directories ${ACFSLNDIR_BUILD}/Lib/${CMAKE_BUILD_TYPE}_${TARGETNAME}")
 
