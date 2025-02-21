@@ -2,14 +2,48 @@
 <Acf>
     <AcfHeader>
         <VersionInfos>
-            <Version Id="0" Number="5271" Description="ACF"/>
-            <Version Id="1" Number="2218" Description="ACF-Solutions"/>
+            <Version Id="0" Number="5323" Description="ACF"/>
+            <Version Id="1" Number="2227" Description="ACF-Solutions"/>
             <Version Id="1023" Number="393732" Description="Qt Framework"/>
         </VersionInfos>
     </AcfHeader>
     <Description>Copy all source files (without compiled binaries) for installation during component instantiation</Description>
     <Keywords>Copy Sources Install</Keywords>
     <ElementsList>
+        <Element Id="Config" PackageId="InstallVoce" ComponentId="CopyInfoProcessor">
+            <Data IsEnabled="true" Flags="0">
+                <AttributeInfoMap>
+                    <AttributeInfo Id="ApplicationInfo" Type="Reference" ExportId="ApplicationInfo">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="EnableVerbose" Type="Boolean" ExportId="EnableVerbose">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="ExcludeFilters" Type="String[]" ExportId="OtherExcludeFilters">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Filters" Type="String[]" ExportId="">
+                        <Data IsEnabled="true">
+                            <Values>
+                                <Value>*.py</Value>
+                            </Values>
+                        </Data>
+                    </AttributeInfo>
+                    <AttributeInfo Id="InputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Config/Python"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="Log" Type="Reference" ExportId="Log">
+                        <Data IsEnabled="false"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="OutputSubDir" Type="String" ExportId="">
+                        <Data IsEnabled="true" Value="Config/Python"/>
+                    </AttributeInfo>
+                    <AttributeInfo Id="RecursionDepth" Type="Integer" ExportId="">
+                        <Data IsEnabled="true" Value="0"/>
+                    </AttributeInfo>
+                </AttributeInfoMap>
+            </Data>
+        </Element>
         <Element Id="Copy3rdParty" PackageId="InstallVoce" ComponentId="CopyInfoProcessor">
             <Data IsEnabled="true" Flags="0">
                 <AttributeInfoMap>
@@ -69,6 +103,7 @@
                                 <Value>CopyInstallDatabase</Value>
                                 <Value>CopyPartituraUpgradeScript</Value>
                                 <Value>CopySdl</Value>
+                                <Value>Config</Value>
                             </Values>
                         </Data>
                     </AttributeInfo>
