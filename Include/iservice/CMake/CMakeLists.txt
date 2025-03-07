@@ -13,10 +13,10 @@ file(GLOB QRC_FILES "${PROJECT_SOURCE_DIR}/../*.qrc")
 
 
 if (WIN32)
-    add_compile_options(/utf-8)
-    ADD_DEFINITIONS(-DUNICODE)
-    ADD_DEFINITIONS(-D_UNICODE)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /UMBCS /D_UNICODE /DUNICODE")
+	add_compile_options(/utf-8)
+	ADD_DEFINITIONS(-DUNICODE)
+	ADD_DEFINITIONS(-D_UNICODE)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /UMBCS /D_UNICODE /DUNICODE")
 	file(GLOB HEADER_FILES
 		"${PROJECT_SOURCE_DIR}/../CServiceApplicationComp.h"
 		"${PROJECT_SOURCE_DIR}/../qtservice.h"
@@ -33,14 +33,14 @@ else()
 	file(GLOB HEADER_FILES
 		"${PROJECT_SOURCE_DIR}/../CServiceApplicationComp.h"
 	)
-    file(GLOB SOURCES_FILES
+	file(GLOB SOURCES_FILES
 		"${PROJECT_SOURCE_DIR}/../CServiceApplicationComp.cpp"
 	)
 endif()
 
 
 file(GLOB PROJECT_SRC
-	    ${HEADER_FILES}
+		${HEADER_FILES}
 		${SOURCES_FILES}
 )
 
@@ -65,10 +65,10 @@ set_property(
 	PROPERTY COMPILE_PDB_OUTPUT_DIRECTORY "${outlibdir}")
 
 set_property(
-	 TARGET ${PROJECT_NAME}
-	 PROPERTY COMPILE_PDB_NAME "${PROJECT_NAME}")
+	TARGET ${PROJECT_NAME}
+	PROPERTY COMPILE_PDB_NAME "${PROJECT_NAME}")
 
- set_property(
+set_property(
 	TARGET ${PROJECT_NAME}
 	PROPERTY CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${outlibdir})
 set_property(

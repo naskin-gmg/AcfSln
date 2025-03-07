@@ -9,8 +9,8 @@ include(${ACFDIR}/Config/CMake/WindeployQt.cmake)
 acf_use_qt_graphics_modules()
 
 if(QT_VERSION_MAJOR EQUAL 5)
-    find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS XmlPatterns REQUIRED)
-    target_link_libraries(${PROJECT_NAME}  Qt${QT_VERSION_MAJOR}::XmlPatterns)
+	find_package("Qt${QT_VERSION_MAJOR}" COMPONENTS XmlPatterns REQUIRED)
+	target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::XmlPatterns)
 endif()
 target_link_libraries(${PROJECT_NAME} iservice iqtex )
 
