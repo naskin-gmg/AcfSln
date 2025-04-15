@@ -36,7 +36,7 @@ signals:
 
 protected:
 	// reimplemented (QThread)
-	void run();
+	void run() override;
 
 private:
 	mutable QMutex m_historyMutex;

@@ -28,24 +28,24 @@ public:
 	TSyncProcessorWrap();
 
 	// pseudo-reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				const istd::IChangeable* outputPtr) const;
+				const istd::IChangeable* outputPtr) const override;
 	virtual int BeginTask(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
-					bool killOnTimeout = true);
-	virtual void CancelTask(int taskId = -1);
-	virtual int GetReadyTask();
-	virtual int GetTaskState(int taskId = -1) const;
-	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
+					bool killOnTimeout = true) override;
+	virtual void CancelTask(int taskId = -1) override;
+	virtual int GetReadyTask() override;
+	virtual int GetTaskState(int taskId = -1) const override;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 protected:
 	// static methods for convinient access progress manager functionality

@@ -47,26 +47,26 @@ public:
 	void SetSamplingStartTime(const QDateTime& samplingStartTime);
 
 	// reimplemented (imeas::IDataSequenceInfo)
-	virtual int GetSequenceInfoFlags() const;
-	virtual int GetDefaultSamplesCount() const;
-	virtual int GetDefaultChannelsCount() const;
-	virtual int GetWeightMode() const;
+	virtual int GetSequenceInfoFlags() const override;
+	virtual int GetDefaultSamplesCount() const override;
+	virtual int GetDefaultChannelsCount() const override;
+	virtual int GetWeightMode() const override;
 
 	// reimplemented (imeas::INumericConstraints)
-	virtual const iprm::IOptionsList& GetValueListInfo() const;
-	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
+	virtual const iprm::IOptionsList& GetValueListInfo() const override;
+	virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	// reimplemented (iprm::IOptionsList)
-	virtual int GetOptionsFlags() const;
-	virtual int GetOptionsCount() const;
-	virtual QString GetOptionName(int index) const;
-	virtual QString GetOptionDescription(int index) const;
-	virtual QByteArray GetOptionId(int index) const;
-	virtual bool IsOptionEnabled(int index) const;
+	virtual int GetOptionsFlags() const override;
+	virtual int GetOptionsCount() const override;
+	virtual QString GetOptionName(int index) const override;
+	virtual QString GetOptionDescription(int index) const override;
+	virtual QByteArray GetOptionId(int index) const override;
+	virtual bool IsOptionEnabled(int index) const override;
 
 private:
 	istd::CRange m_logicalSamplesRange;

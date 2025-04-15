@@ -74,14 +74,14 @@ public:
 	CSupplierCompBase();
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const;
-	virtual imod::IModel* GetWorkStatusModel() const;
-	virtual void InvalidateSupplier();
-	virtual void EnsureWorkInitialized();
-	virtual void EnsureWorkFinished();
-	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const;
-	virtual iprm::IParamsSet* GetModelParametersSet() const;
+	virtual int GetWorkStatus() const override;
+	virtual imod::IModel* GetWorkStatusModel() const override;
+	virtual void InvalidateSupplier() override;
+	virtual void EnsureWorkInitialized() override;
+	virtual void EnsureWorkFinished() override;
+	virtual void ClearWorkResults() override;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int containerType) const override;
+	virtual iprm::IParamsSet* GetModelParametersSet() const override;
 
 protected:
 	class Timer
@@ -158,8 +158,8 @@ protected:
 	virtual void AddMessage(const istd::IInformationProvider* messagePtr, int containerType = MCT_RESULTS) const;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// abstract methods
 	virtual int ProcessWorkOutput() = 0;
@@ -177,7 +177,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CMultiModelObserverBase)
-		virtual void BeforeUpdate(imod::IModel* modelPtr);
+		virtual void BeforeUpdate(imod::IModel* modelPtr) override;
 
 		CSupplierCompBase& m_parent;
 	};
@@ -191,8 +191,8 @@ private:
 
 	protected:
 		// reimplemented (imod::CMultiModelObserverBase)
-		virtual void BeforeUpdate(imod::IModel* modelPtr);
-		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+		virtual void BeforeUpdate(imod::IModel* modelPtr) override;
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 		CSupplierCompBase& m_parent;
 	};

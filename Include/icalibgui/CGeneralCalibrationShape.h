@@ -19,10 +19,10 @@ public:
 	typedef CNoneCalibrationShape BaseClass;
 
 	// reimplemented (imod::IObserver)
-	virtual void Invalidate();
+	virtual void Invalidate() override;
 
 	// reimplemented (iview::IVisualizable)
-	virtual void Draw(QPainter& drawContext) const;
+	virtual void Draw(QPainter& drawContext) const override;
 };
 
 

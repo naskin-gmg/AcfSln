@@ -24,12 +24,12 @@ public:
 	CFileSystemChangeStorage();
 
 	// reimplemented (ihotf::IFileSystemChangeStorage)
-	virtual int	 GetStorageItemsCount() const;
-	virtual QString GetItemPath(int fileIndex) const;
-	virtual int GetItemState(int fileIndex) const;
-	virtual void UpdateStorageItem(const QString& path, int changeFlag);
-	virtual void RemoveStorageItem(int itemIndex);
-	virtual void ResetStorage();
+	virtual int	 GetStorageItemsCount() const override;
+	virtual QString GetItemPath(int fileIndex) const override;
+	virtual int GetItemState(int fileIndex) const override;
+	virtual void UpdateStorageItem(const QString& path, int changeFlag) override;
+	virtual void RemoveStorageItem(int itemIndex) override;
+	virtual void ResetStorage() override;
 
 private:
 	int GetFileIndexFromPath(const QString& filePath) const;

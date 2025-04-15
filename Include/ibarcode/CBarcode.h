@@ -26,11 +26,11 @@ public:
 	virtual void SetData(const QString& barcodeData);
 
 	// reimplemented (ibarcode::IBarcode)
-	virtual const QString& GetBarcodeData() const;
-	virtual int GetBarcodeType() const;
+	virtual const QString& GetBarcodeData() const override;
+	virtual int GetBarcodeType() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	QString m_barcodeData;

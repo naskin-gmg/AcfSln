@@ -42,18 +42,18 @@ public:
 	TSimpleSpaceResultConsumer(int maxPoints, int maxConsideredPoints, double minDistance, double minMaxRatio);
 
 	// reimplemented (ialgo::TIHoughSpace::ResultsConsumer)
-	virtual QList<int> GetSupportedNeghboursCount() const;
+	virtual QList<int> GetSupportedNeghboursCount() const override;
 	virtual void OnProcessingBegin(
 				const TIHoughSpace<Dimensions, Element>& space,
-				const Element& minValue);
-	virtual void OnProcessingEnd(const TIHoughSpace<Dimensions, Element>& space);
+				const Element& minValue) override;
+	virtual void OnProcessingEnd(const TIHoughSpace<Dimensions, Element>& space) override;
 	virtual bool OnMaximumFound(
 				const TIHoughSpace<Dimensions, Element>& space,
 				const istd::TIndex<Dimensions>& position,
 				const Element& value,
 				const Element* neghboursPtr,
 				int neghboursCount,
-				Element& minValue);
+				Element& minValue) override;
 
 	PosMap positions;
 

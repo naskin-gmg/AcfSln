@@ -59,13 +59,13 @@ private:
 		CUserManagerItemDelegate(CUserManagerDialog& parent);
 
 		// reimplemented (QItemDelegate)
-		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 		// reimplemented (QAbstractItemDelegate)
-		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
+		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
 
 		// reimplemented (QWidget)
-		virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+		virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 	private:
 		CUserManagerDialog& m_parent;

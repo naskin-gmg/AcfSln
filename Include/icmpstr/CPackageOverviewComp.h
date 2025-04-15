@@ -63,10 +63,10 @@ public:
 	CPackageOverviewComp();
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimplemented (icmpstr::IAttributeSelectionObserver)
-	virtual void OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr);
+	virtual void OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr) override;
 
 protected:
 	struct RootInfo
@@ -100,16 +100,16 @@ protected:
 	void SetCommandNames();
 
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnRetranslate();
-	virtual void OnGuiRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
+	virtual void OnRetranslate() override;
+	virtual void OnGuiRetranslate() override;
 
 protected Q_SLOTS:
 	void on_FilterEdit_editingFinished();
@@ -182,7 +182,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CPackageOverviewComp& m_parent;
@@ -198,15 +198,15 @@ private:
 		void UpdateLocalMetaInfoMap();
 
 		// reimplemented (icomp::IComponentListProvider)
-		virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
+		virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const override;
 
 		// reimplemented (icomp::IMetaInfoManager)
-		virtual const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const;
-		virtual const icomp::IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const;
+		virtual const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const override;
+		virtual const icomp::IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const override;
 
 		// reimplemented (icomp::IElementStaticInfo)
-		virtual Ids GetMetaIds(int metaGroupId) const;
-		virtual const icomp::IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
+		virtual Ids GetMetaIds(int metaGroupId) const override;
+		virtual const icomp::IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const override;
 
 		CPackageOverviewComp* parentPtr;
 

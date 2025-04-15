@@ -27,13 +27,13 @@ public:
 	CProjectionShape();
 
 	// reimplemented (iview::IVisualizable)
-	virtual void Draw(QPainter& drawContext) const;
+	virtual void Draw(QPainter& drawContext) const override;
 
 	// reimplemented (iview::CShapeBase)
-	virtual i2d::CRect CalcBoundingBox() const;
+	virtual i2d::CRect CalcBoundingBox() const override;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
 	void UpdateFigure() const;

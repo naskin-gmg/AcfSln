@@ -20,21 +20,21 @@ public:
 	void SetSupportedProperties(const iprm::IOptionsList* featureListPtr);
 
 	// reimplemented (IBlobFilterParams)
-	virtual const iprm::IOptionsList* GetSupportedProperties() const;
-	virtual bool IsFiltersEnabled() const;
-	virtual void SetFiltersEnabled(bool enabled = true);
-	virtual int GetFiltersCount() const;
-	virtual Filter& GetFilterAt(int index);
-	virtual const Filter& GetFilterAt(int index) const;
-	virtual void RemoveFilterAt(int index);
-	virtual void ResetFilters();
-	virtual void AddFilter(const Filter& filterInfo);
+	virtual const iprm::IOptionsList* GetSupportedProperties() const override;
+	virtual bool IsFiltersEnabled() const override;
+	virtual void SetFiltersEnabled(bool enabled = true) override;
+	virtual int GetFiltersCount() const override;
+	virtual Filter& GetFilterAt(int index) override;
+	virtual const Filter& GetFilterAt(int index) const override;
+	virtual void RemoveFilterAt(int index) override;
+	virtual void ResetFilters() override;
+	virtual void AddFilter(const Filter& filterInfo) override;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const override;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	typedef QList<Filter> FilterList;

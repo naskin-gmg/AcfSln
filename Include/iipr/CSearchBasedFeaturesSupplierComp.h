@@ -48,32 +48,32 @@ public:
 	CSearchBasedFeaturesSupplierComp();
 
 	// reimplemented (i2d::IMultiCalibrationProvider)
-	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const;
-	virtual int GetCalibrationsCount() const;
-	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const;
+	virtual const iprm::IOptionsList* GetCalibrationSelectionContraints() const override;
+	virtual int GetCalibrationsCount() const override;
+	virtual const i2d::ICalibration2d* GetCalibration(int calibrationIndex) const override;
 
 	// reimplemented (iipr::IFeaturesProvider)
-	virtual int GetFeaturesCount() const;
-	virtual const imeas::INumericValue& GetFeature(int index) const;
+	virtual int GetFeaturesCount() const override;
+	virtual const imeas::INumericValue& GetFeature(int index) const override;
 
 	// reimplemented (istd::IInformationProvider)
-	virtual QDateTime GetInformationTimeStamp() const;
-	virtual istd::IInformationProvider::InformationCategory GetInformationCategory() const;
-	virtual int GetInformationId() const;
-	virtual QString GetInformationDescription() const;
-	virtual QString GetInformationSource() const;
-	virtual int GetInformationFlags() const;
+	virtual QDateTime GetInformationTimeStamp() const override;
+	virtual istd::IInformationProvider::InformationCategory GetInformationCategory() const override;
+	virtual int GetInformationId() const override;
+	virtual QString GetInformationDescription() const override;
+	virtual QString GetInformationSource() const override;
+	virtual int GetInformationFlags() const override;
 
 protected:
 	virtual istd::IInformationProvider::InformationCategory EvaluateResults(int featuresCount, int nominalModelsCount, QString& searchResultText) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual bool InitializeWork();
-	virtual int ProduceObject(CFeaturesContainer& result) const;
+	virtual bool InitializeWork() override;
+	virtual int ProduceObject(CFeaturesContainer& result) const override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 private:
 
@@ -85,12 +85,12 @@ private:
 		void SetParentPtr(CSearchBasedFeaturesSupplierComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const;
-		virtual int GetOptionsCount() const;
-		virtual QString GetOptionName(int index) const;
-		virtual QString GetOptionDescription(int index) const;
-		virtual QByteArray GetOptionId(int index) const;
-		virtual bool IsOptionEnabled(int index) const;
+		virtual int GetOptionsFlags() const override;
+		virtual int GetOptionsCount() const override;
+		virtual QString GetOptionName(int index) const override;
+		virtual QString GetOptionDescription(int index) const override;
+		virtual QByteArray GetOptionId(int index) const override;
+		virtual bool IsOptionEnabled(int index) const override;
 
 	private:
 		CSearchBasedFeaturesSupplierComp* m_parentPtr;

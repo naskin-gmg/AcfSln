@@ -42,15 +42,15 @@ public:
 	bool operator!=(const CHeartbeatAnswer& question);
 
 	// reimplemented (ibase::IApplicationInfo)
-	virtual QString GetApplicationAttribute(int attributeId, bool allowTranslation = true) const;
-	virtual int GetMainVersionId() const;
-	virtual const iser::IVersionInfo& GetVersionInfo() const;
+	virtual QString GetApplicationAttribute(int attributeId, bool allowTranslation = true) const override;
+	virtual int GetMainVersionId() const override;
+	virtual const iser::IVersionInfo& GetVersionInfo() const override;
 
 	// reimplemented (icomm::IStationState)
-	virtual State GetStationState() const;
-	virtual const QString& GetLoggedUser() const;
-	virtual const QString& GetLoggedComputer() const;
-	virtual const QByteArray& GetLoggedIp() const;
+	virtual State GetStationState() const override;
+	virtual const QString& GetLoggedUser() const override;
+	virtual const QString& GetLoggedComputer() const override;
+	virtual const QByteArray& GetLoggedIp() const override;
 
 	// reimplemented (iprm::INamParam)
 	virtual const QString& GetName() const;
@@ -62,7 +62,7 @@ public:
 	virtual void SetDescription(const QString& description);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	quint32 m_versionNumber;

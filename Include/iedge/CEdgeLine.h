@@ -86,30 +86,30 @@ public:
 	void CopyToPolyline(i2d::CPolyline& polyline, const i2d::CAffine2d* transformPtr = NULL) const;
 
 	// reimplemented (i2d::IObject2d)
-	virtual i2d::CVector2d GetCenter() const;
-	virtual void MoveCenterTo(const i2d::CVector2d& position);
-	virtual i2d::CRectangle GetBoundingBox() const;
+	virtual i2d::CVector2d GetCenter() const override;
+	virtual void MoveCenterTo(const i2d::CVector2d& position) override;
+	virtual i2d::CRectangle GetBoundingBox() const override;
 	virtual bool Transform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool InvTransform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool GetTransformed(
 				const i2d::ITransformation2d& transformation,
 				IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 	virtual bool GetInvTransformed(
 				const i2d::ITransformation2d& transformation,
 				IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	/**
@@ -120,7 +120,7 @@ protected:
 	virtual void CalcVolatile() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual void OnEndChanges(const ChangeSet& changeSet);
+	virtual void OnEndChanges(const ChangeSet& changeSet) override;
 
 private:
 	// std::vector used instead of QList/QVector because it is generally faster

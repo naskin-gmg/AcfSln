@@ -33,12 +33,12 @@ public:
 	bool OnReceived(iser::IArchive& archive);
 
 	// reimplemented (icomm::IRequestsManager)
-	virtual QByteArray AddRequest(IRequest* requestPtr);
+	virtual QByteArray AddRequest(IRequest* requestPtr) override;
 	virtual RequestState WaitRequestFinished(
 				const QByteArray& requestId = QByteArray(),
 				bool killOnTimeout = true,
-				RequestInfo* requestInfoPtr = NULL) const;
-	virtual void Flush();
+				RequestInfo* requestInfoPtr = NULL) const override;
+	virtual void Flush() override;
 
 protected:
 	struct RequestData

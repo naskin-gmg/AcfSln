@@ -127,7 +127,7 @@ public:
 	const QString& GetErrorMessage() const;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	ResponseFlags m_flags;

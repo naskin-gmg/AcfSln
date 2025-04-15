@@ -32,30 +32,30 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				const istd::IChangeable* outputPtr) const;
+				const istd::IChangeable* outputPtr) const override;
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int BeginTask(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
-					bool killOnTimeout = true);
-	virtual void CancelTask(int taskId = -1);
-	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
+					bool killOnTimeout = true) override;
+	virtual void CancelTask(int taskId = -1) override;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 protected:
 	const iprm::IParamsSet* CreateParamsSet(const iprm::IParamsSet* paramsPtr) const;
@@ -66,15 +66,15 @@ protected:
 		JoinParamsSet(const iprm::IParamsSet* origParamsPtr, const iprm::IParamsSet* selectedParamsPtr);
 
 		// reimplemented (iprm::IParamsSet)
-		virtual Ids GetParamIds(bool editableOnly = false) const;
-		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
-		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+		virtual Ids GetParamIds(bool editableOnly = false) const override;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
 
 		// reimplemented (iser::IObject)
-		virtual QByteArray GetFactoryId() const;
+		virtual QByteArray GetFactoryId() const override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 	private:
 		const iprm::IParamsSet* m_origParamsPtr;

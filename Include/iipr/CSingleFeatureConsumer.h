@@ -57,12 +57,12 @@ public:
 	void SetFeaturePolicy(int featurePolicy);
 
 	// reimplemented (iipr::IFeaturesConsumer)
-	virtual void ResetFeatures();
-	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
+	virtual void ResetFeatures() override;
+	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL) override;
 
 	// reimplemented (iipr::IFeaturesProvider)
-	virtual int GetFeaturesCount() const;
-	virtual const imeas::INumericValue& GetFeature(int index) const;
+	virtual int GetFeaturesCount() const override;
+	virtual const imeas::INumericValue& GetFeature(int index) const override;
 
 private:
 	istd::TDelPtr<const imeas::INumericValue> m_featurePtr;

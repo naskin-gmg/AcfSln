@@ -27,8 +27,8 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iipr::IFeaturesProvider)
-	virtual int GetFeaturesCount() const;
-	virtual const imeas::INumericValue& GetFeature(int index) const;
+	virtual int GetFeaturesCount() const override;
+	virtual const imeas::INumericValue& GetFeature(int index) const override;
 
 private:
 	class Line: virtual public imeas::INumericValue
@@ -38,17 +38,17 @@ private:
 		Line(const i2d::CLine2d& line);
 
 		// reimplemented (imeas::INumericValue)
-		virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
-		virtual const imeas::INumericConstraints* GetNumericConstraints() const;
-		virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
-		virtual imath::CVarVector GetValues() const;
-		virtual bool SetValues(const imath::CVarVector& values);
+		virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const override;
+		virtual const imeas::INumericConstraints* GetNumericConstraints() const override;
+		virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const override;
+		virtual imath::CVarVector GetValues() const override;
+		virtual bool SetValues(const imath::CVarVector& values) override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 		// reimplemented (istd::IChangeable)
-		virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+		virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 	protected:
 		imath::CVarVector m_values;

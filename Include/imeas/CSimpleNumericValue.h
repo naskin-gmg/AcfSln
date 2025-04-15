@@ -20,17 +20,17 @@ class CSimpleNumericValue: virtual public INumericValue
 {
 public:
 	// reimplemented (imeas::INumericValue)
-	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
-	virtual const INumericConstraints* GetNumericConstraints() const;
-	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
-	virtual imath::CVarVector GetValues() const;
-	virtual bool SetValues(const imath::CVarVector& values);
+	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const override;
+	virtual const INumericConstraints* GetNumericConstraints() const override;
+	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const override;
+	virtual imath::CVarVector GetValues() const override;
+	virtual bool SetValues(const imath::CVarVector& values) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	imath::CVarVector m_values;

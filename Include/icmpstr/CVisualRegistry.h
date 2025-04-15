@@ -37,18 +37,18 @@ public:
 	virtual bool SerializeUserData(iser::IArchive& archive);
 
 	// reimplemented (icmpstr::IComponentNoteController)
-	virtual QString GetComponentNote(const QByteArray& componentName);
-	virtual void SetComponentNote(const QByteArray& componentName, const QString& componentNote);
+	virtual QString GetComponentNote(const QByteArray& componentName) override;
+	virtual void SetComponentNote(const QByteArray& componentName, const QString& componentNote) override;
 
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
 				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
-				bool ensureElementCreated = true);
-	virtual bool RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId);
+				bool ensureElementCreated = true) override;
+	virtual bool RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 protected:
 	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualRegistryElement> > Element;
@@ -64,8 +64,8 @@ protected:
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(
 				const QByteArray& elementId,
-				const icomp::CComponentAddress& address) const;
-	virtual icomp::IRegistry* InsertEmbeddedRegistry(const QByteArray& registryId);
+				const icomp::CComponentAddress& address) const override;
+	virtual icomp::IRegistry* InsertEmbeddedRegistry(const QByteArray& registryId) override;
 
 private:
 	bool m_serializeUserData;

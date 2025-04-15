@@ -15,18 +15,18 @@ public:
 	CCircleFinderParams();
 
 	// reimplemented (iipr::ICircleFinderParams)
-	virtual int GetCaliperMode() const;
-	virtual void SetCaliperMode(int caliperMode);
-	virtual bool IsOutlierEliminationEnabled() const;
-	virtual void SetOutlierEliminationEnabled(bool isOutlierEliminationEnabled = true);
-	virtual double GetMinOutlierDistance() const;
-	virtual void SetMinOutlierDistance(double minOutlierDistance);
-	virtual const imath::IUnitInfo* GetDistanceUnitInfo() const;
-	virtual int GetRaysCount() const;
-	virtual void SetRaysCount(int raysCount);
+	virtual int GetCaliperMode() const override;
+	virtual void SetCaliperMode(int caliperMode) override;
+	virtual bool IsOutlierEliminationEnabled() const override;
+	virtual void SetOutlierEliminationEnabled(bool isOutlierEliminationEnabled = true) override;
+	virtual double GetMinOutlierDistance() const override;
+	virtual void SetMinOutlierDistance(double minOutlierDistance) override;
+	virtual const imath::IUnitInfo* GetDistanceUnitInfo() const override;
+	virtual int GetRaysCount() const override;
+	virtual void SetRaysCount(int raysCount) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	bool m_isOutlierEliminationEnabled;

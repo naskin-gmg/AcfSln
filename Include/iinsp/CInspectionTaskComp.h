@@ -76,40 +76,40 @@ public:
 	CInspectionTaskComp();
 
 	// reimplemented (iinsp::IInspectionTask)
-	virtual int GetSubtasksCount() const;
-	virtual iinsp::ISupplier* GetSubtask(int subtaskIndex) const;
-	virtual iprm::IParamsSet* GetGeneralParameters() const;
+	virtual int GetSubtasksCount() const override;
+	virtual iinsp::ISupplier* GetSubtask(int subtaskIndex) const override;
+	virtual iprm::IParamsSet* GetGeneralParameters() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (iinsp::ISupplier)
-	virtual int GetWorkStatus() const;
-	virtual imod::IModel* GetWorkStatusModel() const;
-	virtual void InvalidateSupplier();
-	virtual void EnsureWorkInitialized();
-	virtual void EnsureWorkFinished();
-	virtual void ClearWorkResults();
-	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const;
-	virtual iprm::IParamsSet* GetModelParametersSet() const;
+	virtual int GetWorkStatus() const override;
+	virtual imod::IModel* GetWorkStatusModel() const override;
+	virtual void InvalidateSupplier() override;
+	virtual void EnsureWorkInitialized() override;
+	virtual void EnsureWorkFinished() override;
+	virtual void ClearWorkResults() override;
+	virtual const ilog::IMessageContainer* GetWorkMessages(int messageType) const override;
+	virtual iprm::IParamsSet* GetModelParametersSet() const override;
 
 	// reimplemented (istd::IInformationProvider)
-	virtual QDateTime GetInformationTimeStamp() const;
-	virtual InformationCategory GetInformationCategory() const;
-	virtual int GetInformationId() const;
-	virtual QString GetInformationDescription() const;
-	virtual QString GetInformationSource() const;
-	virtual int GetInformationFlags() const;
+	virtual QDateTime GetInformationTimeStamp() const override;
+	virtual InformationCategory GetInformationCategory() const override;
+	virtual int GetInformationId() const override;
+	virtual QString GetInformationDescription() const override;
+	virtual QString GetInformationSource() const override;
+	virtual int GetInformationFlags() const override;
 
 protected:
 	void EnsureStatusKnown();
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
 	class MessageContainer: virtual public ilog::CMessageContainer
@@ -120,12 +120,12 @@ protected:
 		MessageContainer(CInspectionTaskComp* parentPtr, iinsp::ISupplier::MessageContainerType containerType);
 
 		// reimplemented (ilog::IMessageContainer)
-		virtual int GetWorstCategory() const;
-		virtual Messages GetMessages() const;
-		virtual void ClearMessages();
+		virtual int GetWorstCategory() const override;
+		virtual Messages GetMessages() const override;
+		virtual void ClearMessages() override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 	private:
 		CInspectionTaskComp* m_parentPtr;
@@ -142,18 +142,16 @@ protected:
 		void SetParent(CInspectionTaskComp* parentPtr);
 
 		// reimplemented (iprm::IParamsSet)
-		virtual Ids GetParamIds(bool editableOnly = false) const;
-		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
-		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+		virtual Ids GetParamIds(bool editableOnly = false) const override;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const override;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 		// reimplemented (istd::IChangeable)
-		virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
-		
-		// reimplemented (istd::IChangeable)
-		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
+		virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
+		virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 	private:
 		CInspectionTaskComp* m_parentPtr;
@@ -167,7 +165,7 @@ protected:
 		TaskStatusObserver(CInspectionTaskComp* parentPtr);
 
 		// reimplemented (imod::IObserver)
-		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CInspectionTaskComp* m_parentPtr;

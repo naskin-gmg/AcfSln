@@ -55,7 +55,7 @@ public:
 	CCheckboardCalibSupplierComp();
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const override;
 
 protected:
 	struct LineInfo
@@ -70,8 +70,8 @@ protected:
 	{
 	public:
 		// reimplemented (iipr::IFeaturesConsumer)
-		virtual void ResetFeatures();
-		virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
+		virtual void ResetFeatures() override;
+		virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL) override;
 	
 		Lines lines;
 	};
@@ -82,17 +82,17 @@ protected:
 		ChessboardParamsContraints(const CCheckboardCalibSupplierComp* supplierPtr);
 
 		// reimplemented (imeas::INumericConstraints)
-		virtual const iprm::IOptionsList& GetValueListInfo() const;
-		virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const;
+		virtual const iprm::IOptionsList& GetValueListInfo() const override;
+		virtual const imath::IUnitInfo* GetNumericValueUnitInfo(int index) const override;
 
 	protected:
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const;
-		virtual int GetOptionsCount() const;
-		virtual QString GetOptionName(int index) const;
-		virtual QString GetOptionDescription(int index) const;
-		virtual QByteArray GetOptionId(int index) const;
-		virtual bool IsOptionEnabled(int index) const;
+		virtual int GetOptionsFlags() const override;
+		virtual int GetOptionsCount() const override;
+		virtual QString GetOptionName(int index) const override;
+		virtual QString GetOptionDescription(int index) const override;
+		virtual QByteArray GetOptionId(int index) const override;
+		virtual bool IsOptionEnabled(int index) const override;
 
 	private:
 		imath::CGeneralUnitInfo m_cellSizeUnit;
@@ -102,10 +102,10 @@ protected:
 	bool CalculateCalibration(const iimg::IBitmap& image, icalib::CPerspectiveCalibration2d& result) const;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual int ProduceObject(ProductType& result) const;
+	virtual int ProduceObject(ProductType& result) const override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
+	virtual void OnComponentCreated() override;
 
 private:
 	I_REF(iimg::IBitmapProvider, m_bitmapProviderCompPtr);

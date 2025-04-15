@@ -53,22 +53,22 @@ protected:
 	{
 	public:
 		// reimplemented (ilog::IMessageConsumer)
-		virtual bool IsMessageSupported(
+		virtual bool IsMessageSupported (
 					int messageCategory = -1,
 					int messageId = -1,
-					const istd::IInformationProvider* messagePtr = NULL) const;
-		virtual void AddMessage(const MessagePtr& messagePtr);
+					const istd::IInformationProvider* messagePtr = NULL) const override;
+		virtual void AddMessage(const MessagePtr& messagePtr) override;
 	};
 
 	void CreateOverview();
 
 	// reimplemented (imod::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 protected Q_SLOTS:
 	void OnUpdateExportsTree();

@@ -47,21 +47,21 @@ public:
 				const ibase::IApplicationInfo* applicationInfoPtr);
 
 	// reimplemented (icomm::TPopCumulatorBase)
-	virtual int ReadToBuffer(quint8* bufferPtr, int bytes);
-	virtual quint32 CalculateMessageSize(const CTcpMessageHeader& header);
-	virtual bool ProcessMessage(const CTcpMessageHeader& header, const quint8* dataPtr, int length);
+	virtual int ReadToBuffer(quint8* bufferPtr, int bytes) override;
+	virtual quint32 CalculateMessageSize(const CTcpMessageHeader& header) override;
+	virtual bool ProcessMessage(const CTcpMessageHeader& header, const quint8* dataPtr, int length) override;
 
 	// reimplemented (icomm::IClientStatus)
-	virtual const QString& GetClientComputerName() const;
-	virtual const QByteArray& GetClientComputerAddress() const;
-	virtual const iser::IVersionInfo& GetClientVersionInfo() const;
+	virtual const QString& GetClientComputerName() const override;
+	virtual const QByteArray& GetClientComputerAddress() const override;
+	virtual const iser::IVersionInfo& GetClientVersionInfo() const override;
 
 public Q_SLOTS:
 	void OnReadyRead();
 
 protected:
 	// reimplemented (icomm::CResponsesManagerBase)
-	virtual bool SendAndClear(iser::IArchive& answer);
+	virtual bool SendAndClear(iser::IArchive& answer) override;
 
 private:
 	QTcpSocket& m_socket;

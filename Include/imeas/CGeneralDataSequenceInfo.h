@@ -37,16 +37,16 @@ public:
 				const QString& description,
 				const QByteArray& valueId,
 				const imath::CGeneralUnitInfo& unitInfo,
-				int index = -1);
+				int index = -1) override;
 
 	// reimplemented (imeas::IDataSequenceInfo)
-	virtual int GetSequenceInfoFlags() const;
-	virtual int GetDefaultSamplesCount() const;
-	virtual int GetDefaultChannelsCount() const;
-	virtual int GetWeightMode() const;
+	virtual int GetSequenceInfoFlags() const override;
+	virtual int GetDefaultSamplesCount() const override;
+	virtual int GetDefaultChannelsCount() const override;
+	virtual int GetWeightMode() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	WeightMode m_weightMode;

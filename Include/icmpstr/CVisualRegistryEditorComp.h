@@ -149,7 +149,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CVisualRegistryEditorComp& m_parent;
@@ -199,21 +199,21 @@ protected:
 	virtual void UpdateScene();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
-	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
-	virtual bool OnModelDetached(imod::IModel* modelPtr);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
+	virtual bool OnModelDetached(imod::IModel* modelPtr) override;
 
 	// reimplemented (icomp::CGuiComponentBase)
-	virtual void OnRetranslate();
+	virtual void OnRetranslate() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 protected Q_SLOTS:
 	void OnSelectionChanged();
@@ -246,8 +246,8 @@ protected Q_SLOTS:
 	void UpdateEmbeddedRegistryView(const QByteArray& id);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
@@ -256,8 +256,8 @@ private:
 		void SetParent(CVisualRegistryEditorComp* parentPtr);
 
 		// reimplemented (icmpstr::IElementSelectionInfo)
-		virtual icomp::IRegistry* GetSelectedRegistry() const;
-		virtual Elements GetSelectedElements() const;
+		virtual icomp::IRegistry* GetSelectedRegistry() const override;
+		virtual Elements GetSelectedElements() const override;
 
 	private:
 		CVisualRegistryEditorComp* m_parentPtr;

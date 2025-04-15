@@ -22,7 +22,7 @@ public:
 	typedef icalibgui::CNoneCalibrationShape BaseClass;
 
 	// reimplemented (iview::IVisualizable)
-	virtual void Draw(QPainter& drawContext) const;
+	virtual void Draw(QPainter& drawContext) const override;
 };
 
 

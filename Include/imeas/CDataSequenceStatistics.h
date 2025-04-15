@@ -19,13 +19,13 @@ class CDataSequenceStatistics: virtual public imeas::IDataSequenceStatistics
 {
 public:
 	// reimplemented (imeas::IDataSequenceStatistics)
-	virtual bool SetChannelStatistics(const imeas::IDataStatistics& channelStatistics, int channelIndex);
-	virtual void ResetStatistics();
-	virtual int GetChannelsCount() const;
-	virtual const imeas::IDataStatistics* GetChannelStatistics(int channelIndex) const;
+	virtual bool SetChannelStatistics(const imeas::IDataStatistics& channelStatistics, int channelIndex) override;
+	virtual void ResetStatistics() override;
+	virtual int GetChannelsCount() const override;
+	virtual const imeas::IDataStatistics* GetChannelStatistics(int channelIndex) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	typedef imod::TModelWrap<imeas::CSimpleDataStatistics> ChannelStatistics;

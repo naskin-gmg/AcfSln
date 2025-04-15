@@ -66,7 +66,7 @@ public:
 	bool operator!=(const CHeartbeatQuestion& question);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	qint32 m_questionId;

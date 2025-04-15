@@ -183,12 +183,12 @@ protected:
 				bool readOnly) const;
 
 	// reimplemented (iqt::TGuiObserverWrap)
-	virtual void OnGuiModelDetached();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelDetached() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
+	virtual void OnGuiCreated() override;
+	virtual void OnGuiDestroyed() override;
 
 	// static methods
 	static QString DecodeFromEdit(const QString& text);
@@ -206,9 +206,9 @@ private:
 		static QString GetMultiAttributeValueAsString(const AttributeImpl& attribute);
 
 		// reimplemented (QItemDelegate)
-		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-		virtual void setEditorData(QWidget* editor, const QModelIndex& index ) const;
-		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
+		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+		virtual void setEditorData(QWidget* editor, const QModelIndex& index ) const override;
+		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
 
 	protected:
 		bool SetComponentExportEditor(const QByteArray& attributeId, const QString& defaultValue, QWidget& editor) const;
@@ -229,7 +229,7 @@ private:
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CAttributeEditorComp& m_parent;

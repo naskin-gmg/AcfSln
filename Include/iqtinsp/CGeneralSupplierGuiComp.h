@@ -30,13 +30,13 @@ protected:
 
 protected:
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
-	virtual QWidget* GetParamsWidget() const;
-	virtual void OnSupplierParamsChanged();
+	virtual QWidget* GetParamsWidget() const override;
+	virtual void OnSupplierParamsChanged() override;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiHidden();
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnGuiModelAttached() override;
+	virtual void OnGuiHidden() override;
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 };
 
 

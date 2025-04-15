@@ -17,12 +17,12 @@ class CMonitoringSession: virtual public ihotf::IMonitoringSession
 {
 public:
 	// reimplemented (ihotf::IMonitoringSession)
-	virtual const FileItems& GetFileInfoList() const;
-	virtual void SetFileInfoList(const FileItems& fileList);
-	virtual void RemoveFile(const QString& filePath);
+	virtual const FileItems& GetFileInfoList() const override;
+	virtual void SetFileInfoList(const FileItems& fileList) override;
+	virtual void RemoveFile(const QString& filePath) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	FileItems m_sessionFiles;

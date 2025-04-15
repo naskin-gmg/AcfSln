@@ -42,32 +42,32 @@ public:
 	CCameraMultiplexerComp();
 
 	// reimplemented (iipr::IBitmapAcquisition)
-	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const override;
 
 	// reimplemented (iproc::IProcessor)
-	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const;
+	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const override;
 	virtual bool AreParamsAccepted(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				const istd::IChangeable* outputPtr) const;
+				const istd::IChangeable* outputPtr) const override;
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int BeginTask(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				ibase::IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL) override;
 	virtual int WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
 					bool killOnTimeout = true);
-	virtual void CancelTask(int taskId = -1);
-	virtual int GetReadyTask();
-	virtual int GetTaskState(int taskId = -1) const;
-	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
+	virtual void CancelTask(int taskId = -1) override;
+	virtual int GetReadyTask() override;
+	virtual int GetTaskState(int taskId = -1) const override;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) override;
 
 private:
 	class CameraList: virtual public iprm::IOptionsList
@@ -78,12 +78,12 @@ private:
 		void SetParent(CCameraMultiplexerComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const;
-		virtual int GetOptionsCount() const;
-		virtual QString GetOptionName(int index) const;
-		virtual QString GetOptionDescription(int index) const;
-		virtual QByteArray GetOptionId(int index) const;
-		virtual bool IsOptionEnabled(int index) const;
+		virtual int GetOptionsFlags() const override;
+		virtual int GetOptionsCount() const override;
+		virtual QString GetOptionName(int index) const override;
+		virtual QString GetOptionDescription(int index) const override;
+		virtual QByteArray GetOptionId(int index) const override;
+		virtual bool IsOptionEnabled(int index) const override;
 		
 	private:
 		CCameraMultiplexerComp* m_parentPtr;

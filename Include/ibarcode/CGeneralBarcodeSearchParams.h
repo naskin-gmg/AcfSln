@@ -17,11 +17,11 @@ class CGeneralBarcodeSearchParams: virtual public IGeneralBarcodeSearchParams
 {
 public:
 	// reimplemented (IGeneralBarcodeSearchParams)
-	virtual BarcodeTypes GetSearchBarcodeTypes() const;
-	virtual void SetSearchBarcodeTypes(const BarcodeTypes& barcodeTypes);
+	virtual BarcodeTypes GetSearchBarcodeTypes() const override;
+	virtual void SetSearchBarcodeTypes(const BarcodeTypes& barcodeTypes) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	BarcodeTypes m_barcodeTypes;

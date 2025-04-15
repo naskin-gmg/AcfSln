@@ -52,16 +52,16 @@ public:
 	void InitEnds(CRegistryElementShape* sourceShapePtr, CRegistryElementShape* destShapePtr);
 
 	// reimplemented (QGraphicsItem)
-	virtual int type() const;
-	virtual QPainterPath shape() const;
-	virtual bool contains(const QPointF& point) const;
+	virtual int type() const override;
+	virtual QPainterPath shape() const override;
+	virtual bool contains(const QPointF& point) const override;
 
 protected:
 	void Adjust();
 
 	// reimplemented (QGraphicsItem)
-	virtual QRectF boundingRect() const;
-	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+	virtual QRectF boundingRect() const override;
+	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
 protected Q_SLOTS:
 	void OnSourceRectMoved(const QRectF& rect);

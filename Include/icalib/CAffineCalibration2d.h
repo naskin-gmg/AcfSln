@@ -32,17 +32,17 @@ public:
 	void SetResultUnitInfo(const imath::IUnitInfo* unitInfoPtr);
 
 	// reimplemented (i2d::ICalibration2d)
-	virtual const i2d::CRectangle* GetArgumentArea() const;
-	virtual const i2d::CRectangle* GetResultArea() const;
-	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
-	virtual const imath::IUnitInfo* GetResultUnitInfo() const;
-	virtual const i2d::ICalibration2d* CreateCombinedCalibration(const i2d::ITransformation2d& transformation) const;
+	virtual const i2d::CRectangle* GetArgumentArea() const override;
+	virtual const i2d::CRectangle* GetResultArea() const override;
+	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const override;
+	virtual const imath::IUnitInfo* GetResultUnitInfo() const override;
+	virtual const i2d::ICalibration2d* CreateCombinedCalibration(const i2d::ITransformation2d& transformation) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 private:
 	const i2d::CRectangle* m_argumentAreaPtr;

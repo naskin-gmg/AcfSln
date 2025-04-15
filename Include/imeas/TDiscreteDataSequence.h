@@ -41,7 +41,7 @@ public:
 				int sampleDiff,
 				int channelDiff,
 				int sampleDepth,
-				int channelsCount = 1);
+				int channelsCount = 1) override;
 	virtual bool CreateDiscreteSequenceWithInfo(
 				const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 				int samplesCount,
@@ -50,31 +50,31 @@ public:
 				int sampleDiff,
 				int channelDiff,
 				int sampleDepth,
-				int channelsCount = 1);
+				int channelsCount = 1) override;
 
-	virtual int GetSampleDepth() const;
-	virtual quint32 GetDiscreteSample(int position, int channel = 0) const;
-	virtual bool SetDiscreteSample(int position, int channel, quint32 sample);
+	virtual int GetSampleDepth() const override;
+	virtual quint32 GetDiscreteSample(int position, int channel = 0) const override;
+	virtual bool SetDiscreteSample(int position, int channel, quint32 sample) override;
 
 	// reimplemented (imeas::IDataSequence)
-	virtual bool CreateSequence(int samplesCount, int channelsCount = 1);
+	virtual bool CreateSequence(int samplesCount, int channelsCount = 1) override;
 	virtual bool CreateSequenceWithInfo(
 				const istd::TTransPtr<const IDataSequenceInfo>& infoPtr,
 				int samplesCount = -1,
-				int channelsCount = -1);
-	virtual const IDataSequenceInfo* GetSequenceInfo() const;
-	virtual bool IsEmpty() const;
-	virtual void ResetSequence();
-	virtual int GetSamplesCount() const;
-	virtual int GetChannelsCount() const;
-	virtual double GetSample(int index, int channel = 0) const;
-	virtual void SetSample(int index, int channel, double value);
+				int channelsCount = -1) override;
+	virtual const IDataSequenceInfo* GetSequenceInfo() const override;
+	virtual bool IsEmpty() const override;
+	virtual void ResetSequence() override;
+	virtual int GetSamplesCount() const override;
+	virtual int GetChannelsCount() const override;
+	virtual double GetSample(int index, int channel = 0) const override;
+	virtual void SetSample(int index, int channel, double value) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 private:
 	istd::TOptDelPtr<Element, true> m_sampleBuffer;

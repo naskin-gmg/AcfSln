@@ -172,14 +172,14 @@ protected:
     Application *application() const
     { return app; }
 
-    virtual void createApplication(int &argc, char **argv)
+    virtual void createApplication(int &argc, char **argv) override
     {
         app = new Application(argc, argv);
         QCoreApplication *a = app;
         Q_UNUSED(a);
     }
 
-    virtual int executeApplication()
+    virtual int executeApplication() override
     { return Application::exec(); }
 
 private:

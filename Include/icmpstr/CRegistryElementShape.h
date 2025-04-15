@@ -47,13 +47,13 @@ public:
 	void CheckConsistency();
 
 	// reimplemented (QGraphicsItem)
-	virtual QRectF boundingRect() const;
-	virtual void paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* stylePtr, QWidget* widgetPtr);
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr);
-	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr);
+	virtual QRectF boundingRect() const override;
+	virtual void paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* stylePtr, QWidget* widgetPtr) override;
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr) override;
+	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr) override;
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
 
 Q_SIGNALS:
 	void RectChanged(QRectF rect);
@@ -69,10 +69,10 @@ protected:
 	void CalcExportedInteraces(const CVisualRegistryElement& element);
 
 	// reimplemented (icmpstr::TObjectShapeBase)
-	void UpdateGraphicsItem(const CVisualRegistryElement& element);
+	virtual void UpdateGraphicsItem(const CVisualRegistryElement& element) override;
 
 	// reimplemented (TShapeBase)
-	virtual void OnSelectionChanged(bool isSelected);
+	virtual void OnSelectionChanged(bool isSelected) override;
 
 private:
 	CVisualRegistryEditorComp& m_registryView;

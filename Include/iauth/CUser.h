@@ -64,7 +64,7 @@ public:
 	void ResetPassword();
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	QString m_userName;

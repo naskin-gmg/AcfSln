@@ -31,14 +31,14 @@ public:
 				const istd::CRange& dataBoundaries);
 
 	// reimplemented (imeas::IDataStatistics)
-	virtual int GetSupportedStatFeatures() const;
-	virtual istd::CRange GetDataBoundaries() const;
-	virtual double GetStandardDeviation() const;
-	virtual double GetAverage() const;
-	virtual double GetMedian() const;
+	virtual int GetSupportedStatFeatures() const override;
+	virtual istd::CRange GetDataBoundaries() const override;
+	virtual double GetStandardDeviation() const override;
+	virtual double GetAverage() const override;
+	virtual double GetMedian() const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	double m_average;

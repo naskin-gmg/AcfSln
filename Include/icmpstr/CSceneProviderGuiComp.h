@@ -99,22 +99,22 @@ public:
 	void SetIsotropyFactor(double factor);
 
 	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+	virtual const ibase::IHierarchicalCommand* GetCommands() const override;
 
 	// reimplemented (icmpstr::ISceneProvider)
-	virtual int GetSceneId() const;
-	virtual QGraphicsScene* GetScene() const;
-	virtual bool GetSceneAlignment(double& distance) const;
-	virtual int GetSceneFlags() const;
+	virtual int GetSceneId() const override;
+	virtual QGraphicsScene* GetScene() const override;
+	virtual bool GetSceneAlignment(double& distance) const override;
+	virtual int GetSceneFlags() const override;
 
 	// reimplemented (i2d::ISceneController)
-	virtual int GetSceneRestrictionFlags() const;
-	virtual FitMode GetFitMode() const;
-	virtual bool SetFitMode(FitMode fitMode);
-	virtual bool IsFullScreenMode() const;
-	virtual bool SetFullScreenMode(bool isFullScreen);
-	virtual double GetScale() const;
-	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0);
+	virtual int GetSceneRestrictionFlags() const override;
+	virtual FitMode GetFitMode() const override;
+	virtual bool SetFitMode(FitMode fitMode) override;
+	virtual bool IsFullScreenMode() const override;
+	virtual bool SetFullScreenMode(bool isFullScreen) override;
+	virtual double GetScale() const override;
+	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0) override;
 
 protected:
 	/**
@@ -131,10 +131,10 @@ protected:
 		void DrawGrid(QPainter& painter, const QRectF& rect, bool useDot = false);
 
 		// reimplemented (QGraphicsScene)
-		virtual void drawBackground(QPainter* painter, const QRectF & rect);
-		virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * eventPtr);
-		virtual void dropEvent(QGraphicsSceneDragDropEvent * eventPtr);
-		virtual void dragMoveEvent(QGraphicsSceneDragDropEvent * eventPtr);
+		virtual void drawBackground(QPainter* painter, const QRectF & rect) override;
+		virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * eventPtr) override;
+		virtual void dropEvent(QGraphicsSceneDragDropEvent * eventPtr) override;
+		virtual void dragMoveEvent(QGraphicsSceneDragDropEvent * eventPtr) override;
 
 	private:
 		CSceneProviderGuiComp& m_parent;
@@ -155,15 +155,15 @@ protected:
 	void ResetScene();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnRetranslate();
+	virtual void OnGuiCreated() override;
+	virtual void OnRetranslate() override;
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// reimplemented (QObject)
-	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr) override;
 
 Q_SIGNALS:
 	void zoomChanged(double);

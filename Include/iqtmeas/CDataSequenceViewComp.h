@@ -43,7 +43,7 @@ public:
 	CDataSequenceViewComp();
 
 	// reimplemenented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 protected:
 	class DiagramWidget: public QWidget
@@ -53,14 +53,14 @@ protected:
 
 	protected:
 		// reimplemented (QWidget)
-		virtual void paintEvent(QPaintEvent* event);
+		virtual void paintEvent(QPaintEvent* event) override;
 
 	private:
 		CDataSequenceViewComp& m_parent;
 	};
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 protected slots:
 	void on_TimeSpanCB_toggled(bool state);

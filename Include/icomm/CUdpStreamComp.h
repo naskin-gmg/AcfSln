@@ -39,17 +39,17 @@ public:
 	QDateTime GetPacketTime() const { return m_readThread.m_lastDateTime; }
 
 	// reimplemented (icomm::IBinaryStream)
-	virtual bool SendData(const void* data, int size, void* userContextPtr = NULL);
-	virtual bool ReadData(void* data, int& size);
-	virtual bool RegisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr, bool /*allowOtherThread = false*/);
-	virtual bool UnregisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr);
+	virtual bool SendData(const void* data, int size, void* userContextPtr = NULL) override;
+	virtual bool ReadData(void* data, int& size) override;
+	virtual bool RegisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr, bool /*allowOtherThread = false*/) override;
+	virtual bool UnregisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr) override;
 
 protected:
 	// reimplemented (imod::TSingleModelObserverBase)
 	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentDestroyed() override;
 
 private:
 	class ReadThread: public QThread
@@ -68,7 +68,7 @@ private:
 		virtual bool UnregisterEventHandler(icomm::IBinaryStream::Handler* handlerPtr);
 
 		// reimplemented (QThread)
-		virtual void run();
+		virtual void run() override;
 
 	protected:
 #if QT_VERSION >= 0x060000

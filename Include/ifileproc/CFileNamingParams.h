@@ -22,24 +22,24 @@ public:
 	CFileNamingParams();
 
 	// reimplemented (ifileproc::IFileNamingParams)
-	virtual OverwriteStrategy GetOverwriteStrategy() const;
-	virtual void SetOverwriteStrategy(OverwriteStrategy overwriteStrategy);
-	virtual QString GetPrefix() const;
-	virtual void SetPrefix(const QString& prefix);
-	virtual QString GetSuffix() const;
-	virtual void SetSuffix(const QString& suffix);
-	virtual QStringList GetPatternsToRemove() const;
-	virtual void SetPatternsToRemove(const QStringList& patternsToRemove);
+	virtual OverwriteStrategy GetOverwriteStrategy() const override;
+	virtual void SetOverwriteStrategy(OverwriteStrategy overwriteStrategy) override;
+	virtual QString GetPrefix() const override;
+	virtual void SetPrefix(const QString& prefix) override;
+	virtual QString GetSuffix() const override;
+	virtual void SetSuffix(const QString& suffix) override;
+	virtual QStringList GetPatternsToRemove() const override;
+	virtual void SetPatternsToRemove(const QStringList& patternsToRemove) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 	// reimplemented (istd::IChangeable)
-	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS);
-	virtual bool IsEqual(const istd::IChangeable& object) const;
-	virtual istd::IChangeable* CloneMe(istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS) const;
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual int GetSupportedOperations() const override;
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS) override;
+	virtual bool IsEqual(const istd::IChangeable& object) const override;
+	virtual istd::IChangeable* CloneMe(istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS) const override;
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	OverwriteStrategy m_overwriteStrategy;

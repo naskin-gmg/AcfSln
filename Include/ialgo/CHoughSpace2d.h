@@ -61,23 +61,23 @@ public:
 	void CombineWithSpace(const CHoughSpace2d& space, Operation operation);
 
 	// reimplemented (ialgo::TIHoughSpace<2>)
-	virtual istd::TIndex<2> GetSpaceSize() const;
-	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0);
-	virtual bool IsDimensionWrapped(int dimensionIndex) const;
-	virtual ExtensionMode GetExtensionMode(int dimensionIndex) const;
-	virtual void IncreaseValueAt(const imath::TVector<2>& position, double value);
-	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations);
+	virtual istd::TIndex<2> GetSpaceSize() const override;
+	virtual bool CreateHoughSpace(const istd::TIndex<2>& size, const double& initValue = 0) override;
+	virtual bool IsDimensionWrapped(int dimensionIndex) const override;
+	virtual ExtensionMode GetExtensionMode(int dimensionIndex) const override;
+	virtual void IncreaseValueAt(const imath::TVector<2>& position, double value) override;
+	virtual void SmoothHoughSpace(const istd::TIndex<2>& iterations) override;
 	virtual bool AnalyseHoughSpace(
 				const double& minValue,
-				ResultsConsumer& resultProcessor) const;
-	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const;
-	virtual bool GetSpacePosition(const imath::TVector<2>& position, imath::TVector<2>& result) const;
-	virtual double GetSpaceDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
-	virtual double GetSpaceDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const;
+				ResultsConsumer& resultProcessor) const override;
+	virtual bool ExtractToBitmap(iimg::IBitmap& bitmap) const override;
+	virtual bool GetSpacePosition(const imath::TVector<2>& position, imath::TVector<2>& result) const override;
+	virtual double GetSpaceDistance(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const override;
+	virtual double GetSpaceDistance2(const imath::TVector<2>& position1, const imath::TVector<2>& position2) const override;
 
 	// reimplemented (iimg::CGeneralBitmap)
-	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0);
-	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, int pixelBitsCount = 0, int componentsCount = 0) override;
+	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) override;
 
 private:
 	bool m_isWrapped[2];

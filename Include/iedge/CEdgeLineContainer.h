@@ -23,41 +23,41 @@ public:
 	typedef i2d::CObject2dBase BaseClass2;
 
 	// reimplemented (ibase::TContainer)
-	virtual void Reserve(int count);
-	virtual void Resize(int count);
+	virtual void Reserve(int count) override;
+	virtual void Resize(int count) override;
 
 	// reimplemented (i2d::CObject2dBase)
-	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag = false);
+	virtual void SetCalibration(const i2d::ICalibration2d* calibrationPtr, bool releaseFlag = false) override;
 
 	// reimplemented (i2d::IObject2d)
-	virtual i2d::CVector2d GetCenter() const;
-	virtual void MoveCenterTo(const i2d::CVector2d& position);
-	virtual i2d::CRectangle GetBoundingBox() const;
+	virtual i2d::CVector2d GetCenter() const override;
+	virtual void MoveCenterTo(const i2d::CVector2d& position) override;
+	virtual i2d::CRectangle GetBoundingBox() const override;
 	virtual bool Transform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool InvTransform(
 				const i2d::ITransformation2d& transformation,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL);
+				double* errorFactorPtr = NULL) override;
 	virtual bool GetTransformed(
 				const i2d::ITransformation2d& transformation,
 				i2d::IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 	virtual bool GetInvTransformed(
 				const i2d::ITransformation2d& transformation,
 				i2d::IObject2d& result,
 				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
-				double* errorFactorPtr = NULL) const;
+				double* errorFactorPtr = NULL) const override;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 protected:
 	// reimplemented (ibase::TSerializableContainer)
-	virtual bool SerializeItem(CEdgeLine& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL);
+	virtual bool SerializeItem(CEdgeLine& item, iser::IArchive& archive, iser::CArchiveTag* parentTagPtr = NULL) override;
 };
 
 

@@ -33,11 +33,11 @@ public:
 	int GetEdgeMode() const;
 
 	// reimplemented (imeas::INumericValue)
-	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
-	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
+	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const override;
+	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	double m_position;

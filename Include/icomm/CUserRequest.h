@@ -28,12 +28,12 @@ public:
 	CUserRequest(const QByteArray& command, ISerializable* slavePtr, double timeout = 3);
 
 	// reimplemented (icomm::IRequest)
-	virtual double GetTimeOut() const;
-	virtual QByteArray GetCommand() const;
-	virtual QString ExtractMessage(const CResponseHeader& header) const;
+	virtual double GetTimeOut() const override;
+	virtual QByteArray GetCommand() const override;
+	virtual QString ExtractMessage(const CResponseHeader& header) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	QByteArray m_command;

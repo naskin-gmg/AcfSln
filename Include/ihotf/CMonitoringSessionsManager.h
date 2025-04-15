@@ -23,12 +23,12 @@ class CMonitoringSessionsManager:
 {
 public:
 	// reimplemented (ihotf::IMonitoringSessionManager)
-	virtual void ResetSessions();
-	virtual ihotf::IMonitoringSession* GetSession(const QString& directoryPath) const;
-	virtual void RemoveSession(const QString& directoryPath);
+	virtual void ResetSessions() override;
+	virtual ihotf::IMonitoringSession* GetSession(const QString& directoryPath) const override;
+	virtual void RemoveSession(const QString& directoryPath) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	typedef QMap<QString, istd::TDelPtr<ihotf::CMonitoringSession> > MonitoringSessionsMap;

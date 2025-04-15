@@ -32,7 +32,7 @@ public:
 	{
 	}
 
-	virtual Qt::ItemFlags flags(const QModelIndex& index) const
+	virtual Qt::ItemFlags flags(const QModelIndex& index) const override
 	{
 		Qt::ItemFlags flags = QStringListModel::flags(index);
 

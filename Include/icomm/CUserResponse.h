@@ -35,10 +35,10 @@ public:
 	CUserResponse(const QByteArray& command, iser::ISerializable* slavePtr);
 
 	// reimplemented (icomm::IResponse)
-	virtual QByteArray GetCommand() const;
-	virtual bool DoResponse(iser::IArchive& request, iser::IArchive& response);
-	virtual bool OnAttached(IResponsesManager* managerPtr);
-	virtual bool OnDetached(IResponsesManager* managerPtr);
+	virtual QByteArray GetCommand() const override;
+	virtual bool DoResponse(iser::IArchive& request, iser::IArchive& response) override;
+	virtual bool OnAttached(IResponsesManager* managerPtr) override;
+	virtual bool OnDetached(IResponsesManager* managerPtr) override;
 
 private:
 	QByteArray m_command;

@@ -19,11 +19,11 @@ public:
 	CImageInterpolationParams();
 
 	// reimplemented (iipr::IImageInterpolationParams)
-	virtual int GetInterpolationMode() const;
-	virtual void SetInterpolationMode(int interpolationMode);
+	virtual int GetInterpolationMode() const override;
+	virtual void SetInterpolationMode(int interpolationMode) override;
 	
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	int m_interpolationMode;

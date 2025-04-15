@@ -37,17 +37,17 @@ public:
 
 protected:
 	// reimplemented (TShapeBase)
-	virtual void OnSelectionChanged(bool isSelected);
-	virtual void OnPositionChanged(const QPointF& position);
+	virtual void OnSelectionChanged(bool isSelected) override;
+	virtual void OnPositionChanged(const QPointF& position) override;
 
 	// reimplemented (QGraphicsItem) 
-	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* eventPtr);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr);
-	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr);
+	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override;
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* eventPtr) override;
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr) override;
+	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr) override;
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// abstract methods
 	virtual void UpdateGraphicsItem(const ObjectClass& object) = 0;

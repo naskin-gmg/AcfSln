@@ -37,10 +37,10 @@ public:
 	void MergeVersions(const iser::IVersionInfo& versionInfo);
 
 	// reimplemented (iser::IVersionInfo)
-	virtual VersionIds GetVersionIds() const;
-	virtual bool GetVersionNumber(int versionId, quint32& result) const;
-	virtual QString GetVersionIdDescription(int versionId) const;
-	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const;
+	virtual VersionIds GetVersionIds() const override;
+	virtual bool GetVersionNumber(int versionId, quint32& result) const override;
+	virtual QString GetVersionIdDescription(int versionId) const override;
+	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const override;
 
 protected:
 	struct VersionIdElement

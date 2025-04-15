@@ -87,10 +87,10 @@ protected:
 	virtual void OnPositionChanged(const QPointF& position);
 
 	// reimplemented (QGraphicsItem) 
-	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = NULL);
+	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override;
+	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
+	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
+	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = NULL) override;
 
 private:
 	typedef QPair<QPen, QBrush> ColorShemeInfo;

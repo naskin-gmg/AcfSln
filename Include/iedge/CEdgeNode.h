@@ -41,7 +41,7 @@ public:
 	void SetWeight(double weight);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	/**

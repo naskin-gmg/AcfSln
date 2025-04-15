@@ -41,11 +41,11 @@ public:
 
 protected:
 	// reimplemented (CSnapBitmapSupplierCompBase)
-	virtual iimg::IBitmap* CreateBitmap() const;
-	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const;
+	virtual iimg::IBitmap* CreateBitmap() const override;
+	virtual int DoSnap(const iprm::IParamsSet* snapParamsPtr, iimg::IBitmap& snapBitmap) const override;
 
 	// reimplemented (iinsp::TSupplierCompWrap)
-	virtual bool InitializeWork();
+	virtual bool InitializeWork() override;
 
 private:
 	class CameraList: virtual public iprm::IOptionsList
@@ -56,12 +56,12 @@ private:
 		void SetParent(CMultiSourceSnapBitmapSupplierComp* parentPtr);
 
 		// reimplemented (iprm::IOptionsList)
-		virtual int GetOptionsFlags() const;
-		virtual int GetOptionsCount() const;
-		virtual QString GetOptionName(int index) const;
-		virtual QString GetOptionDescription(int index) const;
-		virtual QByteArray GetOptionId(int index) const;
-		virtual bool IsOptionEnabled(int index) const;
+		virtual int GetOptionsFlags() const override;
+		virtual int GetOptionsCount() const override;
+		virtual QString GetOptionName(int index) const override;
+		virtual QString GetOptionDescription(int index) const override;
+		virtual QByteArray GetOptionId(int index) const override;
+		virtual bool IsOptionEnabled(int index) const override;
 		
 	private:
 		CMultiSourceSnapBitmapSupplierComp* m_parentPtr;

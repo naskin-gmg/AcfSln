@@ -32,14 +32,14 @@ public:
 
 	// reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures() override;
-	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL);
+	virtual bool AddFeature(const imeas::INumericValue* featurePtr, bool* isFullPtr = NULL) override;
 
 	// reimplemented (iipr::IFeaturesProvider)
-	virtual int GetFeaturesCount() const;
-	virtual const imeas::INumericValue& GetFeature(int index) const;
+	virtual int GetFeaturesCount() const override;
+	virtual const imeas::INumericValue& GetFeature(int index) const override;
 
 	//reimplemented (istd::IChangeable)
-	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS) override;
 
 private:
 	typedef istd::TPointerVector<imeas::INumericValue> FeaturesList;

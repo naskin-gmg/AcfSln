@@ -36,17 +36,17 @@ protected Q_SLOTS:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (iqtinsp::TSupplierGuiCompBase)
-	virtual void OnSupplierParamsChanged();
-	virtual QWidget* GetParamsWidget() const;
+	virtual void OnSupplierParamsChanged() override;
+	virtual QWidget* GetParamsWidget() const override;
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
-	virtual void CreateShapes(int sceneId, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result) override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiHidden();
+	virtual void OnGuiHidden() override;
 
 protected:
 	class LineSelection: public iprm::ISelectionParam
@@ -55,13 +55,13 @@ protected:
 		LineSelection();
 
 		// reimplemented (iprm::ISelectionParam)
-		virtual const iprm::IOptionsList* GetSelectionConstraints() const;
-		virtual int GetSelectedOptionIndex() const;
-		virtual bool SetSelectedOptionIndex(int index);
-		virtual iprm::ISelectionParam* GetSubselection(int index) const;
+		virtual const iprm::IOptionsList* GetSelectionConstraints() const override;
+		virtual int GetSelectedOptionIndex() const override;
+		virtual bool SetSelectedOptionIndex(int index) override;
+		virtual iprm::ISelectionParam* GetSubselection(int index) const override;
 
 		// reimplemented (iser::ISerializable)
-		virtual bool Serialize(iser::IArchive& archive);
+		virtual bool Serialize(iser::IArchive& archive) override;
 
 	protected:
 		int m_selectedLineIndex;
@@ -79,14 +79,14 @@ protected:
 		virtual ~CShape();
 
 		// reimplemented (iview::IVisualizable)
-		virtual void Draw(QPainter& drawContext) const;
+		virtual void Draw(QPainter& drawContext) const override;
 
 		// reimplemented (imod::CMultiModelDispatcherBase)
-		virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnModelChanged(int modelId, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	protected:
 		// reimplemented (iview::CShapeBase)
-		virtual i2d::CRect CalcBoundingBox() const;
+		virtual i2d::CRect CalcBoundingBox() const override;
 
 	private:
 		iprm::ISelectionParam& m_lineSelection;

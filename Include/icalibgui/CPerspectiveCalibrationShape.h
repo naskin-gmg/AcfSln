@@ -19,10 +19,10 @@ public:
 	typedef CNoneCalibrationShape BaseClass;
 
 	// reimplemented (imod::IObserver)
-	virtual void Invalidate();
+	virtual void Invalidate() override;
 
 	// reimplemented (iview::IVisualizable)
-	virtual void Draw(QPainter& drawContext) const;
+	virtual void Draw(QPainter& drawContext) const override;
 
 protected:
 	bool GetLineScreenPosition(const i2d::ICalibration2d& calib, const i2d::CLine2d& logLine, int gridSize, QPointF& point1, QPointF& point2) const;

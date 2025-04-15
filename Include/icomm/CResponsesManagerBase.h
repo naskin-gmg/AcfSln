@@ -35,8 +35,8 @@ public:
 	virtual bool OnReceived(iser::IArchive& request, iser::IArchive& answer);
 
 	// reimplemented (icomm::IResponsesManager)
-	virtual void ConnectProvider(IResponse* providerPtr);
-	virtual void DisconnectProvider(IResponse* providerPtr);
+	virtual void ConnectProvider(IResponse* providerPtr) override;
+	virtual void DisconnectProvider(IResponse* providerPtr) override;
 
 protected:
 	typedef QMap<QByteArray, IResponse*> ProvidersMap;

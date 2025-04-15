@@ -82,32 +82,32 @@ private:
 			m_enabled.clear();
 		}
 
-		virtual int GetOptionsFlags() const
+		virtual int GetOptionsFlags() const override
 		{
 			return m_flags;
 		}
 
-		virtual int GetOptionsCount() const
+		virtual int GetOptionsCount() const override
 		{
 			return m_count;
 		}
 
-		virtual QString GetOptionName(int index) const
+		virtual QString GetOptionName(int index) const override
 		{
 			return m_names.at(index);
 		}
 
-		virtual QString GetOptionDescription(int index) const
+		virtual QString GetOptionDescription(int index) const override
 		{
 			return m_descriptions.at(index);
 		}
 
-		virtual QByteArray GetOptionId(int index) const
+		virtual QByteArray GetOptionId(int index) const override
 		{
 			return m_ids.at(index);
 		}
 
-		virtual bool IsOptionEnabled(int index) const
+		virtual bool IsOptionEnabled(int index) const override
 		{
 			return m_enabled.at(index);
 		}

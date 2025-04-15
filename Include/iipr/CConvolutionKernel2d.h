@@ -33,18 +33,18 @@ public:
 	double GetKernelDistance(const IConvolutionKernel2d& kernel) const;
 
 	// reimplemented (iipr::IConvolutionKernel2d)
-	virtual istd::CIndex2d GetKernelSize() const;
-	virtual void SetKernelSize(const istd::CIndex2d& kernelSize, double value = 0.0);
-	virtual double GetKernelElement(const istd::CIndex2d& index) const;
-	virtual bool SetKernelElement(const istd::CIndex2d& index, double value);
-	virtual double GetOffsetValue() const;
-	virtual bool SetOffsetValue(double offset);
-	virtual bool GetCombinedKernel(const IConvolutionKernel2d& kernel, IConvolutionKernel2d& result) const;
-	virtual bool TrySeparateKernels(IConvolutionKernel2d& result1, IConvolutionKernel2d& result2, int separationType = ST_AUTO, double tolerance = I_BIG_EPSILON) const;
+	virtual istd::CIndex2d GetKernelSize() const override;
+	virtual void SetKernelSize(const istd::CIndex2d& kernelSize, double value = 0.0) override;
+	virtual double GetKernelElement(const istd::CIndex2d& index) const override;
+	virtual bool SetKernelElement(const istd::CIndex2d& index, double value) override;
+	virtual double GetOffsetValue() const override;
+	virtual bool SetOffsetValue(double offset) override;
+	virtual bool GetCombinedKernel(const IConvolutionKernel2d& kernel, IConvolutionKernel2d& result) const override;
+	virtual bool TrySeparateKernels(IConvolutionKernel2d& result1, IConvolutionKernel2d& result2, int separationType = ST_AUTO, double tolerance = I_BIG_EPSILON) const override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-	virtual quint32 GetMinimalVersion(int versionId) const;
+	virtual bool Serialize(iser::IArchive& archive) override;
+	virtual quint32 GetMinimalVersion(int versionId) const override;
 
 private:
 	double m_valueOffset;

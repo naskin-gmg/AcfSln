@@ -30,10 +30,10 @@ public:
 	void SetDisplayedRange(const istd::CRange& range);
 
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	// reimplemented (QWidget)
-	virtual void paintEvent(QPaintEvent* event);
+	virtual void paintEvent(QPaintEvent* event) override;
 
 private:
 	istd::CRange m_displayedRange;

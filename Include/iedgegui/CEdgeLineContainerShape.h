@@ -17,17 +17,17 @@ public:
 	typedef iview::CShapeBase BaseClass;
 
 	// reimplemented (iview::IShape)
-	virtual void Draw(QPainter& drawContext) const;
+	virtual void Draw(QPainter& drawContext) const override;
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask);
+	virtual bool OnModelAttached(imod::IModel* modelPtr, istd::IChangeable::ChangeSet& changeMask) override;
 
 	// reimplemented (iview::CShapeBase)
-	virtual i2d::CRect CalcBoundingBox() const;
+	virtual i2d::CRect CalcBoundingBox() const override;
 
-	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const override;
 	
-	iview::ITouchable::TouchState IsTouched(istd::CIndex2d /*position*/) const;
+	virtual iview::ITouchable::TouchState IsTouched(istd::CIndex2d /*position*/) const override;
 };
 
 

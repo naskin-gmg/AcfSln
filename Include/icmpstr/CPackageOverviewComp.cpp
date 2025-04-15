@@ -58,7 +58,7 @@ public:
 		m_defaultComponentIcon = QIcon(":/Icons/CompositorIcon").pixmap(QSize(64, 64), QIcon::Disabled);
 	}
 
-	void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+	void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override
 	{
 		CPackageOverviewComp::PackageItemBase* selectedItemPtr = dynamic_cast<CPackageOverviewComp::PackageItemBase*>(reinterpret_cast<QTreeWidgetItem*>(index.internalPointer()));
 		if (selectedItemPtr == NULL){
@@ -148,7 +148,7 @@ public:
 	}
 
 
-	virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+	virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override
 	{
 		CPackageOverviewComp::PackageItemBase* selectedItemPtr = dynamic_cast<CPackageOverviewComp::PackageItemBase*>(reinterpret_cast<QTreeWidgetItem*>(index.internalPointer()));
 		if (selectedItemPtr == NULL){

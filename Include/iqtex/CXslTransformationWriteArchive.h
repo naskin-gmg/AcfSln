@@ -51,25 +51,25 @@ public:
 	bool OpenFile(const QString& filePath, const QString& xslFilePath);
 
 	// reimplemented (iser::IArchive)
-	virtual bool IsTagSkippingSupported() const;
-	virtual bool BeginTag(const iser::CArchiveTag& tag);
-	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count);
-	virtual bool EndTag(const iser::CArchiveTag& tag);
-	virtual bool Process(QString& value);
+	virtual bool IsTagSkippingSupported() const override;
+	virtual bool BeginTag(const iser::CArchiveTag& tag) override;
+	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count) override;
+	virtual bool EndTag(const iser::CArchiveTag& tag) override;
+	virtual bool Process(QString& value) override;
 	using BaseClass::Process;
 
 protected:
 	bool WriteStringNode(const QString& text);
 
 	// reimplemented (iser::CTextWriteArchiveBase)
-	bool WriteTextNode(const QByteArray& text);
+	virtual bool WriteTextNode(const QByteArray& text) override;
 
 	virtual bool SendLogMessage(
 		istd::IInformationProvider::InformationCategory category,
 		int id,
 		const QString& message,
 		const QString& messageSource,
-		int flags = 0) const
+		int flags = 0) const override
 	{
 		return iser::CWriteArchiveBase::SendLogMessage(category, id, message, messageSource, flags);
 	}

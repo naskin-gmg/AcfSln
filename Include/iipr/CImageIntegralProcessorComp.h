@@ -57,7 +57,7 @@ protected:
 	virtual bool ProcessImage(
 				const iprm::IParamsSet* paramsPtr, 
 				const iimg::IBitmap& inputImage,
-				iimg::IBitmap& outputImage) const;
+				iimg::IBitmap& outputImage) const override;
 };
 
 

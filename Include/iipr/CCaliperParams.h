@@ -15,15 +15,15 @@ public:
 	CCaliperParams();
 
 	// reimplemented (iipr::ICaliperParams)
-	virtual double GetWeightThreshold() const;
-	virtual void SetWeightThreshold(double threshold);
-	virtual int GetPolarityMode() const;
-	virtual void SetPolarityMode(int mode);
-	virtual int GetDirectionMode() const;
-	virtual void SetDirectionMode(int mode);
+	virtual double GetWeightThreshold() const override;
+	virtual void SetWeightThreshold(double threshold) override;
+	virtual int GetPolarityMode() const override;
+	virtual void SetPolarityMode(int mode) override;
+	virtual int GetDirectionMode() const override;
+	virtual void SetDirectionMode(int mode) override;
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	double m_weightThreshold;

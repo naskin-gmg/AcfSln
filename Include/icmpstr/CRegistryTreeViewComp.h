@@ -88,7 +88,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CRegistryTreeViewComp& m_parent;
@@ -121,18 +121,18 @@ protected:
 	void UpdateTreeItemsVisibility();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet);
-	virtual void OnGuiModelDetached();
+	virtual void UpdateGui(const istd::IChangeable::ChangeSet& changeSet) override;
+	virtual void OnGuiModelDetached() override;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
+	virtual void OnGuiCreated() override;
 
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 protected Q_SLOTS:
 	void on_RegistryTree_itemSelectionChanged();
@@ -158,8 +158,8 @@ private:
 		void SetParent(CRegistryTreeViewComp* parentPtr);
 
 		// reimplemented (icmpstr::IElementSelectionInfo)
-		virtual icomp::IRegistry* GetSelectedRegistry() const;
-		virtual Elements GetSelectedElements() const;
+		virtual icomp::IRegistry* GetSelectedRegistry() const override;
+		virtual Elements GetSelectedElements() const override;
 
 	private:
 		CRegistryTreeViewComp* m_parentPtr;

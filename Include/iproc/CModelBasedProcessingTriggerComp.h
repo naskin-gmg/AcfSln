@@ -37,12 +37,12 @@ public:
 	CModelBasedProcessingTriggerComp();
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+	virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 private:
 	void DoProcessing();
@@ -58,7 +58,7 @@ private:
 		ParamsObserver(CModelBasedProcessingTriggerComp* parentPtr);
 
 		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet);
+		virtual void OnUpdate(const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CModelBasedProcessingTriggerComp& m_parent;

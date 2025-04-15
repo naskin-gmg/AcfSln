@@ -18,8 +18,8 @@ public:
 	CPointGridFeature();
 
 	// reimplemented (imeas::INumericValue)
-	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const;
-	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const;
+	virtual bool IsValueTypeSupported(ValueTypeId valueTypeId) const override;
+	virtual imath::CVarVector GetComponentValue(ValueTypeId valueTypeId) const override;
 
 	// reimplemented (istd::IChangeable)
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const override;

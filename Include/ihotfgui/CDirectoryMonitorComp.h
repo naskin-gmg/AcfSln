@@ -58,17 +58,17 @@ public:
 	CDirectoryMonitorComp();
 
 	// reimplemented (ihotf::IDirectoryMonitor)
-	virtual bool IsRunning() const;
-	virtual bool StartObserving(const iprm::IParamsSet* paramsSetPtr = NULL);
-	virtual void StopObserving();
+	virtual bool IsRunning() const override;
+	virtual bool StartObserving(const iprm::IParamsSet* paramsSetPtr = NULL) override;
+	virtual void StopObserving() override;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
+	virtual void OnComponentCreated() override;
+	virtual void OnComponentDestroyed() override;
 
 	// reimplemented (QThread)
-	virtual void run();
+	virtual void run() override;
 
 private Q_SLOTS:
 	/**
@@ -137,7 +137,7 @@ private:
 		MonitoringParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CDirectoryMonitorComp& m_parent;
@@ -154,7 +154,7 @@ private:
 		DirectoryParamsObserver(CDirectoryMonitorComp& parent);
 
 		// reimplemented (imod::IObserver)
-		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet);
+		virtual void AfterUpdate(imod::IModel* modelPtr, const istd::IChangeable::ChangeSet& changeSet) override;
 
 	private:
 		CDirectoryMonitorComp& m_parent;

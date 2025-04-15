@@ -49,7 +49,7 @@ public:
 	void SetRequestId(const QByteArray& requestId);
 
 	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive) override;
 
 private:
 	QByteArray m_command;
