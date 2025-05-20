@@ -38,7 +38,7 @@ void CPulseParamsGuiComp::OnGuiModelAttached()
 		relaxingTimeRange = constraintsPtr->GetRelaxingTimeRange();
 	}
 
-	bool hasDelayTime = (supportedFlags && isig::IPulseConstraints::PSF_DELAY_TIME);
+	bool hasDelayTime = (supportedFlags & isig::IPulseConstraints::PSF_DELAY_TIME);
 	DelayTimeLabel->setVisible(hasDelayTime);
 	DelayTimeSB->setVisible(hasDelayTime);
 	DelayTimeUnitLabel->setVisible(hasDelayTime);
@@ -47,7 +47,7 @@ void CPulseParamsGuiComp::OnGuiModelAttached()
 		DelayTimeSB->setMaximum(delayTimeRange.GetMaxValue() * 1000);
 	}
 
-	bool hasPulseTime = (supportedFlags && isig::IPulseConstraints::PSF_PULSE_DURATION);
+	bool hasPulseTime = (supportedFlags & isig::IPulseConstraints::PSF_PULSE_DURATION);
 	PulseTimeLabel->setVisible(hasPulseTime);
 	PulseTimeSB->setVisible(hasPulseTime);
 	PulseTimeUnitLabel->setVisible(hasPulseTime);
@@ -56,7 +56,7 @@ void CPulseParamsGuiComp::OnGuiModelAttached()
 		PulseTimeSB->setMaximum(pulseTimeRange.GetMaxValue() * 1000);
 	}
 
-	bool hasRelaxingTime = (supportedFlags && isig::IPulseConstraints::PSF_RELAXING_TIME);
+	bool hasRelaxingTime = (supportedFlags & isig::IPulseConstraints::PSF_RELAXING_TIME);
 	RelaxingTimeLabel->setVisible(hasRelaxingTime);
 	RelaxingTimeSB->setVisible(hasRelaxingTime);
 	RelaxingTimeUnitLabel->setVisible(hasRelaxingTime);
